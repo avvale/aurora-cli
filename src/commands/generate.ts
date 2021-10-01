@@ -12,17 +12,17 @@ export default class Generate extends Command
 
     static flags =
     {
-        help: flags.help({ char: 'h' }),
+        help  : flags.help({ char: 'h' }),
         module: flags.string({ char: 'm' }),
-        force: flags.boolean({ char: 'f' }),
+        force : flags.boolean({ char: 'f' }),
     };
 
     static args = [
         {
-            name: 'elementType',
-            required: true,
+            name       : 'elementType',
+            required   : true,
             description: 'Type element to create',
-            options: ['bounded-context', 'b', 'module', 'm']
+            options    : ['bounded-context', 'b', 'module', 'm']
         }
     ];
 
@@ -41,7 +41,7 @@ export default class Generate extends Command
             const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant }: any = await Prompter.promptForGenerateModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
             // add id property
-            const properties: Properties = new Properties([new Property({ name: 'id', type: SqlType.ID, primaryKey: true, length: 36, nullable: false})]);
+            const properties: Properties = new Properties([new Property({ name: 'id', type: SqlType.ID, primaryKey: true, length: 36, nullable: false })]);
 
             // add properties defined by user
             while ((await Prompter.promptForGenerateAggregate()).hasValueObject)

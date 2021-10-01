@@ -1,7 +1,7 @@
 import { singleton } from 'tsyringe';
 import { Command } from '@oclif/command';
 import { LiteralObject, LockFile, ModuleDefinitionSchema, SqlRelationship, SqlType } from './../types';
-import { cliterConfig } from './../config/cliter.config';
+import { cliterConfig } from './../config/cliter.config';
 import { Property } from './../utils/property';
 import { v4 as uuidv4 } from 'uuid';
 import * as crypto from 'crypto';

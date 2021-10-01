@@ -28,7 +28,7 @@ export class Operations
         await this.generateFrameworkFiles();
 
         // create references, write imports in ts files
-        this.createReferences()
+        this.createReferences();
 
         // flag to generate e2e tests, this test can overwrite custom tests
         if (Operations.stateService.flags.tests)
@@ -48,14 +48,14 @@ export class Operations
 
     async generateModuleFiles()
     {
-        await TemplateGenerator.createDirectory(path.join('src', '@hades'), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateStaticContents(TemplateElement.MODULE, path.join('src', '@hades'), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateValueObjects(path.join('src', '@hades'), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.createDirectory(path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateStaticContents(TemplateElement.MODULE, path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateValueObjects(path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
     async generateIntermediateTables()
     {
-        await TemplateGenerator.generateIntermediateTables(path.join('src', '@hades'), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateIntermediateTables(path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
     async generateFrameworkFiles()
@@ -67,7 +67,7 @@ export class Operations
     async generateTestingFiles()
     {
         await TemplateGenerator.generateStaticContents(TemplateElement.TEST, path.join('test'), '');
-        await this.createTestingForeignModuleImports()
+        await this.createTestingForeignModuleImports();
     }
 
     async generatePostmanFiles()
@@ -90,14 +90,14 @@ export class Operations
             {
                 if (err)
                 {
-                    Operations.stateService.command.warn(`Attention! we can't generate graphql entities`);
+                    Operations.stateService.command.warn('Attention! we can\'t generate graphql entities');
                     Operations.stateService.command.error(`Error: ${err.message}`);
                     return;
                 }
-                Operations.stateService.command.log(`GraphQL entities generated`);
+                Operations.stateService.command.log('GraphQL entities generated');
 
                 resolve(stdout? stdout : stderr);
-            })
+            });
         });
     }
 
@@ -105,7 +105,7 @@ export class Operations
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
-            path.join('@hades'),
+            path.join(Operations.stateService.cliterConfig.applicationContainer),
             path.join('apps'),
             Operations.stateService.schema.boundedContextName.toLowerCase(),
             Operations.stateService.schema.moduleName.toLowerCase(),
@@ -121,7 +121,7 @@ export class Operations
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
-            path.join('@hades'),
+            path.join(Operations.stateService.cliterConfig.applicationContainer),
             path.join('apps'),
             Operations.stateService.schema.boundedContextName.toLowerCase(),
             Operations.stateService.schema.moduleName.toLowerCase(),
@@ -134,27 +134,27 @@ export class Operations
     createYamlConfigFile()
     {
         // write yaml file
-        let yamlStr = yaml.dump(
+        const yamlStr = yaml.dump(
             {
-                version             : cliterConfig.configYamlVersion,
-                boundedContextName  : Operations.stateService.schema.boundedContextName,
-                moduleName          : Operations.stateService.schema.moduleName,
-                moduleNames         : Operations.stateService.schema.moduleNames,
-                aggregateName       : Operations.stateService.schema.aggregateName,
-                hasOAuth            : Operations.stateService.schema.hasOAuth,
-                hasTenant           : Operations.stateService.schema.hasTenant,
-                aggregateProperties : Operations.stateService.schema.properties.toDto().map(item => _.omit(item, ['id'])), // omit id, internal id when create property by prompt
-                excluded            : Operations.stateService.schema.excluded,
+                version            : cliterConfig.configYamlVersion,
+                boundedContextName : Operations.stateService.schema.boundedContextName,
+                moduleName         : Operations.stateService.schema.moduleName,
+                moduleNames        : Operations.stateService.schema.moduleNames,
+                aggregateName      : Operations.stateService.schema.aggregateName,
+                hasOAuth           : Operations.stateService.schema.hasOAuth,
+                hasTenant          : Operations.stateService.schema.hasTenant,
+                aggregateProperties: Operations.stateService.schema.properties.toDto().map(item => _.omit(item, ['id'])), // omit id, internal id when create property by prompt
+                excluded           : Operations.stateService.schema.excluded,
             },
             {
-                lineWidth: -1,
+                lineWidth  : -1,
                 skipInvalid: true
             }
         );
 
         const yamlPath = path.join(process.cwd(), 'cliter', Operations.stateService.schema.boundedContextName.toKebabCase());
 
-        if (!fs.existsSync(yamlPath)) fs.mkdirSync(yamlPath, {recursive: true});
+        if (!fs.existsSync(yamlPath)) fs.mkdirSync(yamlPath, { recursive: true });
 
         fs.writeFileSync(path.join(yamlPath, `${ Operations.stateService.schema.moduleName }.yml`), yamlStr, 'utf8');
     }
@@ -163,24 +163,24 @@ export class Operations
     {
         const jsonPath = path.join(process.cwd(), 'cliter', Operations.stateService.schema.boundedContextName.toKebabCase());
 
-        if (!fs.existsSync(jsonPath)) fs.mkdirSync(jsonPath, {recursive: true});
+        if (!fs.existsSync(jsonPath)) fs.mkdirSync(jsonPath, { recursive: true });
 
         const jsonLockFile = {
-            version : cliterConfig.lockJsonVersion,
-            files   : Operations.stateService.newLockFiles
+            version: cliterConfig.lockJsonVersion,
+            files  : Operations.stateService.newLockFiles
         };
 
         fs.writeFileSync(path.join(jsonPath, `${ Operations.stateService.schema.moduleName }-lock.json`), JSON.stringify(jsonLockFile, null, 4), 'utf8');
     }
 
-    static parseFlagOfBoundedContextAndModule(command: Command, module: string): { boundedContextName: string, moduleName: string }
+    static parseFlagOfBoundedContextAndModule(command: Command, module: string): { boundedContextName: string; moduleName: string }
     {
         const boundedContextSection = module.split('/');
         if (boundedContextSection.length !== 2) command.error('Must input bounded context and module name, with format: bounded-context/module');
 
         return {
             boundedContextName: boundedContextSection[0],
-            moduleName: boundedContextSection[1],
+            moduleName        : boundedContextSection[1],
         };
     }
 }
