@@ -1,9 +1,26 @@
 import * as faker from 'faker';
 import * as dayjs from 'dayjs';
 
-export const cliterConfig: any =
+export const cliterConfig: {
+    applicationsContainer: string;
+    configYamlVersion: string;
+    lockJsonVersion: string;
+    timestampFields: string[];
+    deletedAtField: string[];
+    sqlTypesEquivalenceJavascriptTypes: { [key: string]: string };
+    sqlTypesEquivalenceApiTypes: { [key: string]: string };
+    sqlTypesEquivalenceQraphqlTypes: { [key: string]: string };
+    sqlTypesEquivalenceSequelizeTypes: { [key: string]: Function };
+    defaultTypeLength: { [key: string]: number };
+    fakerRelation: { [key: string]: Function };
+    quotationTypes: { [key: string]: boolean };
+    fileTags: { [key: string]: string };
+    compareActions: { [key: string]: string };
+    skipDirectories: string[];
+    avoidOverwritingFilesIfExist: string[];
+} =
 {
-    applicationContainer              : 'apps',
+    applicationsContainer             : 'apps',
     configYamlVersion                 : '1.0.0',
     lockJsonVersion                   : '1.0.0',
     timestampFields                   : ['created_at', 'updated_at', 'deleted_at'],
