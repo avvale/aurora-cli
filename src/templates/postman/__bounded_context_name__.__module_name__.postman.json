@@ -1,0 +1,554 @@
+{<% let iterations = 0; %>
+    "info": {
+		"_postman_id"   : "{{ uuid }}",
+		"name"          : "@hades - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{<% for (const property of schema.properties.postmanGraphQLCreateQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{<% iterations = schema.properties.postmanGraphQLCreateVariables.length; for (const property of schema.properties.postmanGraphQLCreateVariables) { %>\n\t\t\"<%= property.name.toCamelCase() %>\": <%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[<% for (let i= 0; i < 20; i++) { %>\n\t\t{<% iterations = schema.properties.postmanGraphQLCreateVariables.length; for (const property of schema.properties.postmanGraphQLCreateVariables) { %>\n\t\t\t\"<%= property.name.toCamelCase() %>\": <%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman(true) %><%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n\t\t}<% if (i < 19) { %>,<% } %><% } %>\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }} (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{<% for (const property of schema.properties.postmanGraphQLGetQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query: $query)\n\t{<% for (const property of schema.properties.postmanGraphQLFindQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{<% for (const property of schema.properties.postmanGraphQLFindByIdQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"variables": "{\n\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{<% for (const property of schema.properties.postmanGraphQLUpdateQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{<% iterations = schema.properties.postmanGraphQLUpdateVariables.length; for (const property of schema.properties.postmanGraphQLUpdateVariables) { %>\n\t\t\"<%= property.name.toCamelCase() %>\": <%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{<% for (const property of schema.properties.postmanGraphQLDeleteQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"variables": "{\n\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{<% for (const property of schema.properties.postmanGraphQLDeleteQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{<% iterations = schema.properties.postmanRestCreate.length; for (const property of schema.properties.postmanRestCreate) { %>\n\t\"<%= property.name.toCamelCase() %>\": <%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleName }}"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}
+				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[<%  for (let i= 0; i < 20; i++) { %>\n\t{<% iterations = schema.properties.postmanRestCreate.length; for (const property of schema.properties.postmanRestCreate) { %>\n\t\t\"<%= property.name.toCamelCase() %>\": <%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman(true) %><%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n\t}<% if (i < 19) { %>, <% } %><% } %>\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleNames }}"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+                        "{{ toKebabCase schema.moduleNames }}",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleNames }}"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleName }}"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/<%= schema.properties.id.fakerPostman() %>",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleName }}",
+						"<%= schema.properties.id.fakerPostman() %>"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{<% iterations = schema.properties.postmanRestUpdate.length; for (const property of schema.properties.postmanRestUpdate) { %>\n\t\"<%= property.name.toCamelCase() %>\": <%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- cliterConfig.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleName }}"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/<%= schema.properties.id.fakerPostman() %>",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleName }}",
+						"<%= schema.properties.id.fakerPostman() %>"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleNames }}"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "{{ uuid }}",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

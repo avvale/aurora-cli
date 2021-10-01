@@ -1,0 +1,50 @@
+import { Injectable} from '@nestjs/common';
+import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
+import { Utils } from '@hades/shared/domain/lib/utils';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '@hades/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
+import {
+    {{#each schema.properties.valueObjects}}
+    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+    {{/each}}
+} from '@hades/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/value-objects';
+import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
+import { {{ toCamelCase schema.moduleNames }} } from './../seeds/{{ toKebabCase schema.moduleName }}.seed';
+
+@Injectable()
+export class Mock{{ toPascalCase schema.moduleName }}Repository extends MockRepository<{{ schema.aggregateName }}> implements I{{ toPascalCase schema.moduleName }}Repository
+{
+    public readonly repository: any;
+    public readonly aggregateName: string = '{{ schema.aggregateName }}';
+    public collectionSource: {{ schema.aggregateName }}[];
+    public deletedAtInstance: {{ toPascalCase schema.moduleName }}DeletedAt = new {{ toPascalCase schema.moduleName }}DeletedAt(null);
+
+    constructor()
+    {
+        super();
+        this.createSourceMockData();
+    }
+
+    public reset()
+    {
+        this.createSourceMockData();
+    }
+
+    private createSourceMockData(): void
+    {
+        this.collectionSource = [];
+        const now = Utils.nowTimestamp();
+
+        for (const itemCollection of <any[]>{{ toCamelCase schema.moduleNames }})
+        {
+            itemCollection['createdAt'] = now;
+            itemCollection['updatedAt'] = now;
+            itemCollection['deletedAt'] = null;
+
+            this.collectionSource.push({{ schema.aggregateName }}.register(
+                    {{#each schema.properties.mock}}
+                    new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}(itemCollection.{{ toCamelCase name }}),
+                    {{/each}}
+                ));
+        }
+    }
+}

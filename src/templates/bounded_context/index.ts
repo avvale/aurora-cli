@@ -1,0 +1,10 @@
+export const {{ toPascalCase schema.boundedContextName }}Handlers = [
+];
+export const {{ toPascalCase schema.boundedContextName }}Services = [
+];
+export const {{ toPascalCase schema.boundedContextName }}Models = [
+];
+export const {{ toPascalCase schema.boundedContextName }}Repositories = [
+];
+export const {{ toPascalCase schema.boundedContextName }}Sagas = [
+];

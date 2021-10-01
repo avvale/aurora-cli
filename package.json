@@ -1,0 +1,99 @@
+{
+  "name": "aurora-ts-cli",
+  "version": "0.0.0",
+  "author": "carlospalacin @carlospalacin",
+  "bin": {
+    "aurora": "./bin/run"
+  },
+  "bugs": "https://github.com/carlospalacin/aurora-ts-cli/issues",
+  "dependencies": {
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/plugin-help": "^3.2.3",
+    "chalk": "^4.1.0",
+    "cli-table3": "^0.6.0",
+    "compare-versions": "^3.6.0",
+    "copyfiles": "^2.4.1",
+    "dayjs": "^1.10.4",
+    "ejs": "^3.1.6",
+    "faker": "^5.5.3",
+    "handlebars": "^4.7.7",
+    "handlebars-helpers": "^0.10.0",
+    "inquirer": "^8.0.0",
+    "js-yaml": "^4.1.0",
+    "jsrsasign": "^10.2.0",
+    "jsrsasign-util": "^1.0.4",
+    "lodash": "^4.17.21",
+    "log-symbols": "^4.1.0",
+    "node-emoji": "^1.10.0",
+    "ora": "^5.4.0",
+    "reflect-metadata": "^0.1.13",
+    "shelljs": "^0.8.4",
+    "ts-morph": "^12.0.0",
+    "tslib": "^2.0.0",
+    "tsyringe": "^4.5.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.26.0",
+    "@oclif/test": "^1.2.8",
+    "@types/chai": "^4.2.22",
+    "@types/chalk": "^2.2.0",
+    "@types/cli-table": "^0.3.0",
+    "@types/ejs": "^3.0.6",
+    "@types/faker": "^5.5.1",
+    "@types/handlebars": "^4.1.0",
+    "@types/handlebars-helpers": "^0.5.2",
+    "@types/inquirer": "^7.3.1",
+    "@types/js-yaml": "^4.0.0",
+    "@types/jsrsasign": "^8.0.10",
+    "@types/lodash": "^4.14.168",
+    "@types/log-symbols": "^3.0.0",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^14.14.39",
+    "@types/node-emoji": "^1.8.1",
+    "@types/ora": "^3.2.0",
+    "@types/shelljs": "^0.8.8",
+    "@types/uuid": "^8.3.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.24.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-oclif-typescript": "^0.2.0",
+    "globby": "^11.0.3",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/carlospalacin/aurora-ts-cli",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "aurora",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "carlospalacin/aurora-ts-cli",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts"
+}
