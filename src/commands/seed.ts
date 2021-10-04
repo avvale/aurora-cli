@@ -1,4 +1,4 @@
-import { Command, flags } from '@oclif/command'
+import { Command, flags } from '@oclif/command';
 import { TemplateElement } from './../@cliter/types';
 import { Operations, Prompter } from './../@cliter/utils';
 import * as fs from 'fs';
@@ -8,24 +8,25 @@ import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
 import * as shell from 'shelljs';
 import * as ora from 'ora';
+import { cliterConfig } from './../@cliter/config/cliter.config';
 
 export default class Seed extends Command
 {
     static description = 'Seed database with bounded context or module selected';
 
     static flags = {
-        help: flags.help({ char: 'h' }),
-        module: flags.string({ char: 'm' }),
+        help          : flags.help({ char: 'h' }),
+        module        : flags.string({ char: 'm' }),
         boundedContext: flags.string({ char: 'b' }),
-        log: flags.boolean({ char: 'l' }),
+        log           : flags.boolean({ char: 'l' }),
     };
 
     static args = [
         {
-            name: 'elementType',
-            required: true,
+            name       : 'elementType',
+            required   : true,
             description: 'Type element to create',
-            options: ['bounded-context', 'b', 'module', 'm']
+            options    : ['bounded-context', 'b', 'module', 'm']
         }
     ];
 
@@ -43,13 +44,14 @@ export default class Seed extends Command
 
             const { boundedContextName, moduleName }: any = await Prompter.promptForSeedModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
-            const seederPath = path.join('src', 'apps', boundedContextName, moduleName, 'seeder', 'seeder.ts');
+            const seederPath = path.join('src', cliterConfig.apiContainer, boundedContextName, moduleName, 'seeder', 'seeder.ts');
 
             // check if seeder class exists in framework tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 const environmentSpinner = ora('Creating environment').start();
-                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, {silent: !flags.log, async: true}, () => {
+                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, { silent: !flags.log, async: true }, () =>
+                {
                     environmentSpinner.succeed('Environment created');
                     this.log(`%s %s Module seed ${moduleName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
                 });
@@ -64,13 +66,14 @@ export default class Seed extends Command
         {
             const { boundedContextName }: any = await Prompter.promptForSeedBoundedContext(flags.boundedContext);
 
-            const seederPath = path.join('src', 'apps', boundedContextName, 'seeder', 'seeder.ts');
+            const seederPath = path.join('src', cliterConfig.apiContainer, boundedContextName, 'seeder', 'seeder.ts');
 
             // check if seeder class exists in framework tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 const environmentSpinner = ora('Creating environment').start();
-                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, {silent: !flags.log, async: true}, () => {
+                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, { silent: !flags.log, async: true }, () =>
+                {
                     environmentSpinner.succeed('Environment created');
                     this.log(`%s %s Bounded Context seed ${boundedContextName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
                 });

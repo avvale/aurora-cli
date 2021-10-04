@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { SharedModule } from 'src/apps/shared/shared.module';
-import { SequelizeConfigModule } from 'src/apps/core/modules/sequelize/sequelize-config.module';
-import { {{ toPascalCase schema.boundedContextName }}Module } from 'src/apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
+import { SharedModule } from 'src/{{ config.apiContainer }}/shared/shared.module';
+import { SequelizeConfigModule } from 'src/{{ config.apiContainer }}/core/modules/sequelize/sequelize-config.module';
+import { {{ toPascalCase schema.boundedContextName }}Module } from 'src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
 
 @Module({
     imports: [

@@ -1,5 +1,5 @@
-import { TimestampValueObject } from '@hades/shared/domain/value-objects/timestamp.value-object';
-import { DataValueObject, ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { TimestampValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/timestamp.value-object';
+import { DataValueObject, ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends TimestampValueObject
 {

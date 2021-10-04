@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { Command, flags } from '@oclif/command';
-import { TemplateElement, SqlType, ModuleDefinitionSchema } from '@cliter/types';
-import { StateService } from '@cliter/services/state.service';
-import { Operations, Property, Properties, Prompter } from '@cliter/utils';
+import { TemplateElement, SqlType, ModuleDefinitionSchema } from './../@cliter/types';
+import { StateService } from './../@cliter/services/state.service';
+import { Operations, Property, Properties, Prompter } from './../@cliter/utils';
 
 export default class Generate extends Command
 {

@@ -1,8 +1,11 @@
 import * as faker from 'faker';
 import * as dayjs from 'dayjs';
 
-export const cliterConfig: {
+export interface CliterConfig
+{
+    frameworkContainer: string;
     applicationsContainer: string;
+    apiContainer: string;
     configYamlVersion: string;
     lockJsonVersion: string;
     timestampFields: string[];
@@ -18,9 +21,13 @@ export const cliterConfig: {
     compareActions: { [key: string]: string };
     skipDirectories: string[];
     avoidOverwritingFilesIfExist: string[];
-} =
+}
+
+export const cliterConfig: CliterConfig =
 {
-    applicationsContainer             : 'apps',
+    frameworkContainer                : '@aurora',
+    applicationsContainer             : '@apps',
+    apiContainer                      : '@api',
     configYamlVersion                 : '1.0.0',
     lockJsonVersion                   : '1.0.0',
     timestampFields                   : ['created_at', 'updated_at', 'deleted_at'],

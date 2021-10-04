@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { SequelizeRepository } from '@hades/shared/infrastructure/persistence/sequelize/sequelize.repository';
-import { ICriteria } from '@hades/shared/domain/persistence/criteria';
+import { SequelizeRepository } from '{{ config.applicationsContainer }}/shared/infrastructure/persistence/sequelize/sequelize.repository';
+import { ICriteria } from '{{ config.applicationsContainer }}/shared/domain/persistence/criteria';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
 import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Mapper } from './../../domain/{{ toKebabCase schema.moduleName }}.mapper';

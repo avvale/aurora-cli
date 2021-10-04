@@ -1,8 +1,8 @@
 
-import { IRepository } from '@hades/shared/domain/persistence/repository';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
-import { Pagination } from '@hades/shared/domain/lib/pagination';
+import { IRepository } from '{{ config.applicationsContainer }}/shared/domain/persistence/repository';
+import { QueryStatement } from '{{ config.applicationsContainer }}/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
+import { Pagination } from '{{ config.applicationsContainer }}/shared/domain/lib/pagination';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Id } from './value-objects';
 

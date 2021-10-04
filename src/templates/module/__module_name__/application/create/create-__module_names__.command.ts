@@ -1,4 +1,4 @@
-import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import { CQMetadata } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
 
 export class Create{{ toPascalCase schema.moduleNames }}Command
 {

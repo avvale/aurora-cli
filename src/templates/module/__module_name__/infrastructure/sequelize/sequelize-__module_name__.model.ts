@@ -1,17 +1,17 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ relationshipAggregate }}Model } from '@hades/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
-import { {{ relationshipAggregate }}Model } from '@hades/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
-import { {{ relationshipAggregate }}Model } from '@hades/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ relationshipAggregate }}Model } from '@hades/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
-import { {{ intermediateModel }} } from '@hades/{{ intermediateModelModuleSection }}/infrastructure/sequelize/sequelize-{{ intermediateModelFile }}.model';
+import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ intermediateModel }} } from '{{ config.applicationsContainer }}/{{ intermediateModelModuleSection }}/infrastructure/sequelize/sequelize-{{ intermediateModelFile }}.model';
 {{/each}}
 
 @Table({ modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}', freezeTableName: true, timestamps: false })

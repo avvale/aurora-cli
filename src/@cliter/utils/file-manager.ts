@@ -51,7 +51,7 @@ export class FileManager
             const stats = fs.statSync(originFilePath);
 
             // skip files that should not be explorer
-            if (FileManager.stateService.cliterConfig.skipDirectories.indexOf(file) > -1) return;
+            if (FileManager.stateService.config.skipDirectories.indexOf(file) > -1) return;
 
             if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql')))
             {
@@ -76,7 +76,7 @@ export class FileManager
         const ejsRendered = ejs.render(content, data, opts);
 
         // add helpers to handlebars template engine
-        handlebarsHelpers({handlebars: handlebars});
+        handlebarsHelpers({ handlebars: handlebars });
         return handlebars.compile(ejsRendered)(data, {
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault: true,
@@ -109,15 +109,15 @@ export class FileManager
         rootTemplatePath: string,
     )
     {
-        const projectDirectory  = process.cwd()
+        const projectDirectory  = process.cwd();
         const templatesPath     = path.join(__dirname, '../..', 'templates');
 
         // read all files/folders (1 level) from template folder
         const filesToCreate = fs.readdirSync(currentPath);
 
         // loop each file/folder
-        filesToCreate.forEach(async file => {
-
+        filesToCreate.forEach(async file =>
+        {
             const originFilePath = path.join(currentPath, file);
 
             // get stats about the current file
@@ -126,7 +126,7 @@ export class FileManager
             if (stats.isFile())
             {
                 // avoid overwriting some files that cannot be overwritten
-                if (FileManager.stateService.flags.force && FileManager.stateService.cliterConfig.avoidOverwritingFilesIfExist.includes(currentPath.replace(templatesPath + '/', '') + '/' + file)) return;
+                if (FileManager.stateService.flags.force && FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(currentPath.replace(templatesPath + '/', '') + '/' + file)) return;
 
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master, when we have not yet created any bounded context or module
@@ -213,10 +213,10 @@ export class FileManager
                 const currentFileHash           = Cypher.sha1(currentFile);
 
                 if (
-                    currentFileHash === FileManager.stateService.cliterConfig.fileTags.ignoredFile ||
-                    currentFileFirstLineHash === FileManager.stateService.cliterConfig.fileTags.ignoredFile ||
-                    currentFileHash === FileManager.stateService.cliterConfig.fileTags.ignoredGraphQLFile ||
-                    currentFileFirstLineHash === FileManager.stateService.cliterConfig.fileTags.ignoredGraphQLFile
+                    currentFileHash === FileManager.stateService.config.fileTags.ignoredFile ||
+                    currentFileFirstLineHash === FileManager.stateService.config.fileTags.ignoredFile ||
+                    currentFileHash === FileManager.stateService.config.fileTags.ignoredGraphQLFile ||
+                    currentFileFirstLineHash === FileManager.stateService.config.fileTags.ignoredGraphQLFile
                 )
                 {
                     FileManager.stateService.command.log(`%s ${mappedFile} ignored`, chalk.cyanBright.bold('[IGNORED FILE]'));

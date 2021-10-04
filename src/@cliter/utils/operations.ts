@@ -48,20 +48,20 @@ export class Operations
 
     async generateModuleFiles()
     {
-        await TemplateGenerator.createDirectory(path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateStaticContents(TemplateElement.MODULE, path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateValueObjects(path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.createDirectory(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateStaticContents(TemplateElement.MODULE, path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateValueObjects(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
     async generateIntermediateTables()
     {
-        await TemplateGenerator.generateIntermediateTables(path.join('src', Operations.stateService.cliterConfig.applicationContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateIntermediateTables(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
     async generateFrameworkFiles()
     {
-        await TemplateGenerator.createDirectory(path.join('src', 'apps'), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateStaticContents(TemplateElement.FRAMEWORK, path.join('src', 'apps'), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.createDirectory(path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateStaticContents(TemplateElement.FRAMEWORK, path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
     async generateTestingFiles()
@@ -105,8 +105,8 @@ export class Operations
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
-            path.join(Operations.stateService.cliterConfig.applicationContainer),
-            path.join('apps'),
+            path.join(cliterConfig.applicationsContainer),
+            cliterConfig.apiContainer,
             Operations.stateService.schema.boundedContextName.toLowerCase(),
             Operations.stateService.schema.moduleName.toLowerCase(),
             Operations.stateService.schema.moduleNames.toLowerCase()
@@ -121,8 +121,8 @@ export class Operations
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
-            path.join(Operations.stateService.cliterConfig.applicationContainer),
-            path.join('apps'),
+            path.join(cliterConfig.applicationsContainer),
+            cliterConfig.apiContainer,
             Operations.stateService.schema.boundedContextName.toLowerCase(),
             Operations.stateService.schema.moduleName.toLowerCase(),
             Operations.stateService.schema.moduleNames.toLowerCase()

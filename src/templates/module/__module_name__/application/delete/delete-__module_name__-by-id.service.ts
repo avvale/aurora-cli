@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@hades/shared/domain/persistence/sql-statement/sql-statement';
-import { CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import { QueryStatement } from '{{ config.applicationsContainer }}/shared/domain/persistence/sql-statement/sql-statement';
+import { CQMetadata } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
 import { {{ toPascalCase schema.moduleName }}Id } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
 

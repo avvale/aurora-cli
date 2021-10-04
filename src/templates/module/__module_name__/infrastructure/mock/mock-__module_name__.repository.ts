@@ -1,12 +1,12 @@
 import { Injectable} from '@nestjs/common';
-import { MockRepository } from '@hades/shared/infrastructure/persistence/mock/mock.repository';
-import { Utils } from '@hades/shared/domain/lib/utils';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '@hades/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
+import { MockRepository } from '{{ config.applicationsContainer }}/shared/infrastructure/persistence/mock/mock.repository';
+import { Utils } from '{{ config.applicationsContainer }}/shared/domain/lib/utils';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 import {
     {{#each schema.properties.valueObjects}}
     {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
     {{/each}}
-} from '@hades/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/value-objects';
+} from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/value-objects';
 import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toCamelCase schema.moduleNames }} } from './../seeds/{{ toKebabCase schema.moduleName }}.seed';
 

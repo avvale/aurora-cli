@@ -1,5 +1,5 @@
-import { IntValueObject } from '@hades/shared/domain/value-objects/int.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { IntValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/int.value-object';
+import { ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends IntValueObject
 {

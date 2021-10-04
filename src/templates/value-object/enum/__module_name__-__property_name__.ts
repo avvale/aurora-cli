@@ -1,5 +1,5 @@
-import { EnumValueObject } from '@hades/shared/domain/value-objects/enum.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { EnumValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/enum.value-object';
+import { ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends EnumValueObject
 {

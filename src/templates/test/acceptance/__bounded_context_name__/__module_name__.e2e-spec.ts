@@ -1,10 +1,10 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '@hades/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
-import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '@hades/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
-import { GraphQLConfigModule } from './../../../src/apps/core/modules/graphql/graphql-config.module';
-import { {{ toPascalCase schema.boundedContextName }}Module } from './../../../src/apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
+import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
+import { GraphQLConfigModule } from './../../../src/{{ config.apiContainer }}/core/modules/graphql/graphql-config.module';
+import { {{ toPascalCase schema.boundedContextName }}Module } from './../../../src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
@@ -12,14 +12,14 @@ import * as _ from 'lodash';
 // has OAuth
 import { JwtModule } from '@nestjs/jwt';
 {{#unlessEq (toPascalCase schema.moduleName) 'Account' }}
-import { IAccountRepository } from '@hades/iam/account/domain/account.repository';
-import { MockAccountRepository } from '@hades/iam/account/infrastructure/mock/mock-account.repository';
+import { IAccountRepository } from '{{ config.applicationsContainer }}/iam/account/domain/account.repository';
+import { MockAccountRepository } from '{{ config.applicationsContainer }}/iam/account/infrastructure/mock/mock-account.repository';
 {{/unlessEq }}
 {{#unlessEq (toPascalCase schema.boundedContextName) 'Iam' }}
-import { IamModule } from './../../../src/apps/iam/iam.module';
+import { IamModule } from './../../../src/{{ config.apiContainer }}/iam/iam.module';
 {{/unlessEq }}
-import { AuthorizationGuard } from '../../../src/apps/shared/modules/auth/guards/authorization.guard';
-import { TestingJwtService } from './../../../src/apps/o-auth/credential/services/testing-jwt.service';
+import { AuthorizationGuard } from '../../../src/{{ config.apiContainer }}/shared/modules/auth/guards/authorization.guard';
+import { TestingJwtService } from './../../../src/{{ config.apiContainer }}/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 {{/if }}
 

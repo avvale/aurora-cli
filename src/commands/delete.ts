@@ -7,6 +7,7 @@ import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
 import { FsExtend } from './../@cliter/utils';
 import { TemplateElement } from './../@cliter/types';
+import { cliterConfig } from './../@cliter/config/cliter.config';
 
 export default class Delete extends Command
 {
@@ -39,11 +40,11 @@ export default class Delete extends Command
 
         if (args.elementType === TemplateElement.MODULE)
         {
-            if (fs.existsSync(path.join(process.cwd(), 'src', '@hades', args.elementName)))
+            if (fs.existsSync(path.join(process.cwd(), 'src', cliterConfig.applicationsContainer, args.elementName)))
             {
                 if ((await this.promptForDelete(args.elementName)).hasDelete)
                 {
-                    FsExtend.rmDir(path.join(process.cwd(), 'src', '@hades', args.elementName));
+                    FsExtend.rmDir(path.join(process.cwd(), 'src', cliterConfig.applicationsContainer, args.elementName));
                     this.log(`%s %s Module ${args.elementName} has been deleted %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
                 }
             }

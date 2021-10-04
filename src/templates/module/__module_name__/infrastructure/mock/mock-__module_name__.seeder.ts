@@ -1,5 +1,5 @@
 import { Injectable} from '@nestjs/common';
-import { MockSeeder } from '@hades/shared/infrastructure/persistence/mock/mock.seeder';
+import { MockSeeder } from '{{ config.applicationsContainer }}/shared/infrastructure/persistence/mock/mock.seeder';
 import {
     {{#each schema.properties.valueObjects}}
     {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},

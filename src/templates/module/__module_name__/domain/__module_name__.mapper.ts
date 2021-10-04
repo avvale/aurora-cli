@@ -1,5 +1,5 @@
-import { IMapper } from '@hades/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral, CQMetadata } from '@hades/shared/domain/lib/hades.types';
+import { IMapper } from '{{ config.applicationsContainer }}/shared/domain/lib/mapper';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase schema.moduleName }}.response';
 import {
@@ -8,16 +8,16 @@ import {
     {{/each}}
 } from './value-objects';
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '@hades/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '@hades/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '@hades/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '@hades/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
 {{/each}}
 
 export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper

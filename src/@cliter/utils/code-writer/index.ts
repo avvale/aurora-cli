@@ -1,5 +1,6 @@
 import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralExpression, CallExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
 import { SyntaxKind, NewLineKind } from 'typescript';
+import { cliterConfig } from './../../../@cliter/config/cliter.config';
 import { Properties } from './../properties';
 import { ImportDriver } from './import.driver';
 import { ArrayDriver } from './array.driver';
@@ -76,7 +77,7 @@ export class CodeWriter
                         [
                             `${foreignBoundedContextName.toPascalCase()}Module`,
                         ],
-                        `./../../../src/apps/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
+                        `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
                     );
 
                     // register import in import array
@@ -136,13 +137,13 @@ export class CodeWriter
         {
             ImportDriver.createImportItems(
                 sourceFile,
-                [<string>intermediateModel.intermediateModel],
+                [intermediateModel.intermediateModel as string],
                 `./${this.moduleName.toKebabCase()}`,
             );
 
             ArrayDriver.createArrayItem(
                 sourceFile,
-                <string>intermediateModel.intermediateModel,
+                intermediateModel.intermediateModel as string,
                 `${this.boundedContextName.toPascalCase()}Models`,
             );
         }
@@ -190,7 +191,7 @@ export class CodeWriter
                 `${this.boundedContextName.toPascalCase()}Repositories`,
                 `${this.boundedContextName.toPascalCase()}Sagas`,
             ],
-            `@hades/${this.boundedContextName.toKebabCase()}`,
+            `${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}`,
         );
 
         // register import for controllers and providers
@@ -241,11 +242,11 @@ export class CodeWriter
 
         if (!modules.includes(`${this.boundedContextName.toPascalCase()}Module`))
         {
-        // import module
+            // import module
             ImportDriver.createImportItems(
                 sourceFile,
                 [`${this.boundedContextName.toPascalCase()}Module`],
-                `./apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+                `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
             );
 
             // register module
@@ -259,7 +260,7 @@ export class CodeWriter
 
     declareAuthModuleInShareModule(): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join('apps', 'shared', 'shared.module.ts')));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join(cliterConfig.frameworkContainer, 'shared.module.ts')));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'SharedModule');
 
         // register import auth module
@@ -268,7 +269,7 @@ export class CodeWriter
             [
                 'AuthModule',
             ],
-            '@hades/iam/shared/domain/modules/auth/auth.module.ts',
+            cliterConfig.applicationsContainer + '/iam/shared/domain/modules/auth/auth.module.ts',
         );
 
         // register auth module

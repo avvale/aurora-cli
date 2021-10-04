@@ -118,7 +118,7 @@ export default class Load extends Command
 
             let deleteOriginFiles = true;
             let fileToCompare: string | undefined = '';
-            let actionResponse: string = '';
+            let actionResponse = '';
 
             if ((await Prompter.promptForCompareOriginFile()).hasCompareOriginFile)
             {
@@ -126,7 +126,7 @@ export default class Load extends Command
                 fileToCompare = <string>(await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare;
                 shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, {silent: true, async: true}, () => {});
 
-                while (actionResponse !== stateService.cliterConfig.compareActions.finish)
+                while (actionResponse !== stateService.config.compareActions.finish)
                 {
                     if (stateService.originFiles.length > 0)
                     {
@@ -134,12 +134,12 @@ export default class Load extends Command
 
                         switch(actionResponse)
                         {
-                            case stateService.cliterConfig.compareActions.deleteOrigin:
+                            case stateService.config.compareActions.deleteOrigin:
                                 fs.unlinkSync(<string>fileToCompare);                           // delete origin file
                                 fileToCompare = _.head(stateService.originFiles.slice());      // get next file
                                 if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, {silent: true, async: true}, () => {});
                             break;
-                            case stateService.cliterConfig.compareActions.selectFile:
+                            case stateService.config.compareActions.selectFile:
                                 console.log('selectFile ', fileToCompare);
                                 fileToCompare = <string>(await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare;
                                 shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, {silent: true, async: true}, () => {});

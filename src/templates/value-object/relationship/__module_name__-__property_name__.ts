@@ -1,5 +1,5 @@
-import { UuidArrayValueObject } from '@hades/shared/domain/value-objects/uuid-array.value-object';
-import { ValidationRules } from '@hades/shared/domain/lib/hades.types';
+import { UuidArrayValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/uuid-array.value-object';
+import { ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends UuidArrayValueObject
 {
