@@ -15,10 +15,10 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name    : 'branch',
-            message : `Choose with which branch do you want to create your application?`,
-            type    : 'list',
-            choices : newCommandConfig.branches
+            name   : 'branch',
+            message: 'Choose with which branch do you want to create your application?',
+            type   : 'list',
+            choices: newCommandConfig.branches
         });
 
         return await inquirer.prompt(questions);
@@ -29,15 +29,15 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name    : 'githubUsername',
-            message : `Type your github username`,
-            type    : 'input'
+            name   : 'githubUsername',
+            message: 'Type your github username',
+            type   : 'input'
         });
 
         questions.push({
-            name    : 'githubPassword',
-            message : `Type your github password`,
-            type    : 'password'
+            name   : 'githubPassword',
+            message: 'Type your github password',
+            type   : 'password'
         });
 
         return await inquirer.prompt(questions);
@@ -48,12 +48,12 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'boundedContextName',
-            message: `Input the name of bonded context where will be created your module`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'boundedContextName',
+            message: 'Input the name of bonded context where will be created your module',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!boundedContextName)
+                if (boundedContextName)
                 {
                     answers.boundedContextName = boundedContextName;
                     return false;
@@ -63,12 +63,12 @@ export class Prompter
         });
 
         questions.push({
-            name: 'moduleName',
-            message: `Input the name of module`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'moduleName',
+            message: 'Input the name of module',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!moduleName)
+                if (moduleName)
                 {
                     answers.moduleName = moduleName;
                     return false;
@@ -80,8 +80,8 @@ export class Prompter
         const response = await inquirer.prompt(questions);
 
         return {
-            boundedContextName  : response.boundedContextName.toKebabCase(),
-            moduleName          : response.moduleName.toKebabCase(),
+            boundedContextName: response.boundedContextName.toKebabCase(),
+            moduleName        : response.moduleName.toKebabCase(),
         };
     }
 
@@ -90,12 +90,12 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'boundedContextName',
-            message: `Input the name of bonded context where will be created your module`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'boundedContextName',
+            message: 'Input the name of bonded context where will be created your module',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!boundedContextName)
+                if (boundedContextName)
                 {
                     answers.boundedContextName = boundedContextName;
                     return false;
@@ -107,7 +107,7 @@ export class Prompter
         const response = await inquirer.prompt(questions);
 
         return {
-            boundedContextName  : response.boundedContextName.toKebabCase()
+            boundedContextName: response.boundedContextName.toKebabCase()
         };
     }
 
@@ -116,12 +116,12 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'boundedContextName',
-            message: `Input the name of bonded context where will be created your module`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'boundedContextName',
+            message: 'Input the name of bonded context where will be created your module',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!boundedContextName)
+                if (boundedContextName)
                 {
                     answers.boundedContextName = boundedContextName;
                     return false;
@@ -131,12 +131,12 @@ export class Prompter
         });
 
         questions.push({
-            name: 'moduleName',
-            message: `Input the name of module`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'moduleName',
+            message: 'Input the name of module',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!moduleName)
+                if (moduleName)
                 {
                     answers.moduleName = moduleName;
                     return false;
@@ -146,25 +146,25 @@ export class Prompter
         });
 
         questions.push({
-            name    : 'moduleNames',
-            message : `Input the plural of the module name in kebab case format`,
-            type    : 'input',
+            name   : 'moduleNames',
+            message: 'Input the plural of the module name in kebab case format',
+            type   : 'input',
         });
 
         questions.push({
-            name    : 'hasOAuth',
-            message : `do you want to protect this module with OAuth?`,
-            type    : 'confirm',
+            name   : 'hasOAuth',
+            message: 'do you want to protect this module with OAuth?',
+            type   : 'confirm',
         });
 
         const response = await inquirer.prompt(questions);
 
         return {
-            boundedContextName  : response.boundedContextName.toKebabCase(),
-            moduleName          : response.moduleName.toKebabCase(),
-            moduleNames         : response.moduleNames.toKebabCase(),
-            hasOAuth            : response.hasOAuth,
-            hasTenant           : response.hasOAuth,
+            boundedContextName: response.boundedContextName.toKebabCase(),
+            moduleName        : response.moduleName.toKebabCase(),
+            moduleNames       : response.moduleNames.toKebabCase(),
+            hasOAuth          : response.hasOAuth,
+            hasTenant         : response.hasOAuth,
         };
     }
 
@@ -173,9 +173,9 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'hasValueObject',
-            message: `Do you want to define a property?`,
-            type: 'confirm'
+            name   : 'hasValueObject',
+            message: 'Do you want to define a property?',
+            type   : 'confirm'
         });
 
         return await inquirer.prompt(questions);
@@ -186,9 +186,9 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'fileToCompare',
-            message: `Select file to compare`,
-            type: 'list',
+            name   : 'fileToCompare',
+            message: 'Select file to compare',
+            type   : 'list',
             choices: files
         });
 
@@ -200,10 +200,10 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name    : 'compareAction',
-            message : `Select an action`,
-            type    : 'list',
-            choices : Object.values(cliterConfig.compareActions)
+            name   : 'compareAction',
+            message: 'Select an action',
+            type   : 'list',
+            choices: Object.values(cliterConfig.compareActions)
         });
 
         return await inquirer.prompt(questions);
@@ -214,9 +214,9 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'hasCompareOriginFile',
-            message: `Do you want compare any origin file?`,
-            type: 'confirm'
+            name   : 'hasCompareOriginFile',
+            message: 'Do you want compare any origin file?',
+            type   : 'confirm'
         });
 
         return await inquirer.prompt(questions);
@@ -227,12 +227,12 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'boundedContextName',
-            message: `Input the name of bonded context where is the module to run seed`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'boundedContextName',
+            message: 'Input the name of bonded context where is the module to run seed',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!boundedContextName)
+                if (boundedContextName)
                 {
                     answers.boundedContextName = boundedContextName;
                     return false;
@@ -242,12 +242,12 @@ export class Prompter
         });
 
         questions.push({
-            name: 'moduleName',
-            message: `Input the name of module`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'moduleName',
+            message: 'Input the name of module',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!moduleName)
+                if (moduleName)
                 {
                     answers.moduleName = moduleName;
                     return false;
@@ -259,8 +259,8 @@ export class Prompter
         const response = await inquirer.prompt(questions);
 
         return {
-            boundedContextName  : response.boundedContextName.toKebabCase(),
-            moduleName          : response.moduleName.toKebabCase(),
+            boundedContextName: response.boundedContextName.toKebabCase(),
+            moduleName        : response.moduleName.toKebabCase(),
         };
     }
 
@@ -269,12 +269,12 @@ export class Prompter
         const questions = [];
 
         questions.push({
-            name: 'boundedContextName',
-            message: `Input the name of bonded context where are the modules for run seeds`,
-            type: 'input',
-            when: (answers: any) =>
+            name   : 'boundedContextName',
+            message: 'Input the name of bonded context where are the modules for run seeds',
+            type   : 'input',
+            when   : (answers: any) =>
             {
-                if (!!boundedContextName)
+                if (boundedContextName)
                 {
                     answers.boundedContextName = boundedContextName;
                     return false;
@@ -286,20 +286,21 @@ export class Prompter
         const response = await inquirer.prompt(questions);
 
         return {
-            boundedContextName  : response.boundedContextName.toKebabCase()
+            boundedContextName: response.boundedContextName.toKebabCase()
         };
     }
 
     static async promptDefineAggregateProperty(command: Command, boundedContextName: string, moduleName: string, moduleNames: string): Promise<Property>
     {
         const questions     = [];
-        let name: string    = '';
+        let name    = '';
 
         questions.push({
             name    : 'name',
-            message : `What's the name of property (type in snake case)`,
+            message : 'What\'s the name of property (type in snake case)',
             type    : 'input',
-            validate:(input: string, answers: any) => {
+            validate: (input: string, answers: any) =>
+            {
                 name = input;
                 return true;
             }
@@ -307,11 +308,11 @@ export class Prompter
 
         // only if filed end with _id
         questions.push({
-            name    : 'relationship',
-            message : `What kind of relationship do you want to create?`,
-            type    : 'list',
-            choices : Object.values(SqlRelationship).filter(item => ['none', 'one-to-one', 'many-to-one'].includes(item)),
-            when    : (answers: any) =>
+            name   : 'relationship',
+            message: 'What kind of relationship do you want to create?',
+            type   : 'list',
+            choices: Object.values(SqlRelationship).filter(item => ['none', 'one-to-one', 'many-to-one'].includes(item)),
+            when   : (answers: any) =>
             {
                 if (answers.name.endsWith('_id'))
                 {
@@ -324,47 +325,47 @@ export class Prompter
         });
 
         questions.push({
-            name    : 'type',
-            message : `What's the type of property?`,
-            type    : 'list',
-            choices : Object.values(SqlType),
-            when    : (answers: any) => !answers.type
+            name   : 'type',
+            message: 'What\'s the type of property?',
+            type   : 'list',
+            choices: Object.values(SqlType),
+            when   : (answers: any) => !answers.type
         });
 
         questions.push({
-            name    : 'enumOptions',
-            message : `Set comma separated enumeration options, example: ONE,TWO,THREE,FOUR`,
-            type    : 'input',
-            when    : (answers: any) => answers.type === SqlType.ENUM
+            name   : 'enumOptions',
+            message: 'Set comma separated enumeration options, example: ONE,TWO,THREE,FOUR',
+            type   : 'input',
+            when   : (answers: any) => answers.type === SqlType.ENUM
         });
 
         questions.push({
-            name    : 'relationship',
-            message : `What kind of relationship do you want to create?`,
-            type    : 'list',
-            choices : Object.values(SqlRelationship).filter(item => !['many-to-one'].includes(item)),
-            when    : (answers: any) => answers.type === SqlType.RELATIONSHIP
+            name   : 'relationship',
+            message: 'What kind of relationship do you want to create?',
+            type   : 'list',
+            choices: Object.values(SqlRelationship).filter(item => !['many-to-one'].includes(item)),
+            when   : (answers: any) => answers.type === SqlType.RELATIONSHIP
         });
 
         questions.push({
-            name    : 'relationshipSingularName',
-            message : `The property name will be plural, type its singular`,
-            type    : 'input',
-            when    : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+            name   : 'relationshipSingularName',
+            message: 'The property name will be plural, type its singular',
+            type   : 'input',
+            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
         });
 
         questions.push({
-            name    : 'relationshipAggregate',
-            message : `What is the aggregate which you want to relate this property? (example: AdminLang)`,
-            type    : 'input',
-            when    : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+            name   : 'relationshipAggregate',
+            message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
+            type   : 'input',
+            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
         });
 
         questions.push({
-            name    : 'relationshipModulePath',
-            message : `Type path to module where to find the aggregate with which you want to relate this property? Type with format: bounded-context/module`,
-            type    : 'input',
-            when    : (answers: any) =>
+            name   : 'relationshipModulePath',
+            message: 'Type path to module where to find the aggregate with which you want to relate this property? Type with format: bounded-context/module',
+            type   : 'input',
+            when   : (answers: any) =>
             {
                 if (answers.relationship === SqlRelationship.ONE_TO_MANY || (answers.relationship === SqlRelationship.ONE_TO_ONE && !answers.name.endsWith('_id'))) answers.type =  answers.relationshipAggregate;
                 if (answers.relationship === SqlRelationship.ONE_TO_ONE && answers.name.endsWith('_id'))
@@ -376,33 +377,33 @@ export class Prompter
                 // by default all many to many relationship will be nullable
                 if (answers.relationship === SqlRelationship.MANY_TO_MANY) answers.nullable =  true;
 
-                return answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+                return answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY;
             }
         });
 
         questions.push({
-            name    : 'hasIntermediateTable',
-            message : () => `You want to create the intermediate table of your many to many relationship with name: ${boundedContextName.toSnakeCase()}_${moduleNames.toSnakeCase()}_${name.toSnakeCase()}?`,
-            type    : 'confirm',
-            when    : (answers: any) =>
+            name   : 'hasIntermediateTable',
+            message: () => `You want to create the intermediate table of your many to many relationship with name: ${boundedContextName.toSnakeCase()}_${moduleNames.toSnakeCase()}_${name.toSnakeCase()}?`,
+            type   : 'confirm',
+            when   : (answers: any) =>
             {
                 return answers.relationship === SqlRelationship.MANY_TO_MANY;
             }
         });
 
         questions.push({
-            name    : 'decimals',
-            message : `Set total digits and decimals comma separated, example: 10,2`,
-            type    : 'input',
-            when    : (answers: any) => answers.type === SqlType.DECIMAL,
-            filter  : (answers: string) => answers.split(',').map(item => parseInt(item.trim()))
+            name   : 'decimals',
+            message: 'Set total digits and decimals comma separated, example: 10,2',
+            type   : 'input',
+            when   : (answers: any) => answers.type === SqlType.DECIMAL,
+            filter : (answers: string) => answers.split(',').map(item => parseInt(item.trim()))
         });
 
         questions.push({
-            name    : 'length',
-            message : `What's the length of property? Push enter to use the default length`,
-            type    : 'number',
-            when    : (answers: any) =>
+            name   : 'length',
+            message: 'What\'s the length of property? Push enter to use the default length',
+            type   : 'number',
+            when   : (answers: any) =>
             {
                 // avoid length for decimal values
                 if (answers.type === SqlType.DECIMAL || answers.type === SqlType.FLOAT) return false;
@@ -431,10 +432,10 @@ export class Prompter
         });
 
         questions.push({
-            name    : 'nullable',
-            message : `This property will be nullable?`,
-            type    : 'confirm',
-            when    : (answers: any) =>
+            name   : 'nullable',
+            message: 'This property will be nullable?',
+            type   : 'confirm',
+            when   : (answers: any) =>
             {
                 if (answers.relationship === SqlRelationship.ONE_TO_MANY)
                 {
@@ -460,27 +461,27 @@ export class Prompter
         if (response.relationship === SqlRelationship.NONE) delete response.relationship;
 
         return new Property({
-            name: response.name,
-            type: response.type,
-            primaryKey: response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
-            enumOptions: response.enumOptions,
-            decimals: response.decimals,
-            length: response.length,
-            minLength: response.minLength,
-            maxLength: response.maxLength,
-            nullable: response.nullable,
-            defaultValue: response.defaultValue,
-            relationship: response.relationship,
-            relationshipSingularName: response.relationshipSingularName,
-            relationshipAggregate: response.relationshipAggregate,
-            relationshipModulePath: response.relationshipModulePath,
-            relationshipKey: response.relationship === SqlRelationship.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
-            relationshipField: response.relationship === SqlRelationship.MANY_TO_ONE || (response.relationship === SqlRelationship.ONE_TO_ONE && response.name.endsWith('_id')) ? response.name.replace(new RegExp('_id$'), '').toCamelCase() : undefined, // set relationship field
-            intermediateTable: response.intermediateTable,
-            intermediateModel: response.intermediateModel,
+            name                          : response.name,
+            type                          : response.type,
+            primaryKey                    : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
+            enumOptions                   : response.enumOptions,
+            decimals                      : response.decimals,
+            length                        : response.length,
+            minLength                     : response.minLength,
+            maxLength                     : response.maxLength,
+            nullable                      : response.nullable,
+            defaultValue                  : response.defaultValue,
+            relationship                  : response.relationship,
+            relationshipSingularName      : response.relationshipSingularName,
+            relationshipAggregate         : response.relationshipAggregate,
+            relationshipModulePath        : response.relationshipModulePath,
+            relationshipKey               : response.relationship === SqlRelationship.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
+            relationshipField             : response.relationship === SqlRelationship.MANY_TO_ONE || (response.relationship === SqlRelationship.ONE_TO_ONE && response.name.endsWith('_id')) ? response.name.replace(new RegExp('_id$'), '').toCamelCase() : undefined, // set relationship field
+            intermediateTable             : response.intermediateTable,
+            intermediateModel             : response.intermediateModel,
             intermediateModelModuleSection: response.intermediateModelModuleSection,
-            intermediateModelFile: response.intermediateModelFile,
-            index: response.index
+            intermediateModelFile         : response.intermediateModelFile,
+            index                         : response.index
         });
     }
 
@@ -488,24 +489,24 @@ export class Prompter
     {
         const headers: string[] = [];
         const excludeHeaders: string[] = ['config', 'id', 'intermediateModel', 'intermediateModelModuleSection', 'intermediateModelFile'];
-        const aliases: {origin: string, alias: string}[] = [
-            {origin: '_name',                       alias: 'Name'},
-            {origin: 'type',                        alias: 'Type'},
-            {origin: 'primaryKey',                  alias: 'PK'},
-            {origin: 'enumOptions',                 alias: 'Enums'},
-            {origin: 'decimals',                    alias: 'Decimals'},
-            {origin: 'length',                      alias: 'Length'},
-            {origin: 'minLength',                   alias: 'MinL.'},
-            {origin: 'maxLength',                   alias: 'MaxL.'},
-            {origin: 'nullable',                    alias: 'Nullable'},
-            {origin: 'relationship',                alias: 'SqlRelationship'},
-            {origin: 'relationshipSingularName',    alias: 'Singular'},
-            {origin: 'relationshipAggregate',       alias: 'R. Aggregate'},
-            {origin: 'relationshipModulePath',      alias: 'R. Module Path'},
-            {origin: 'relationshipKey',             alias: 'R. Key'},
-            {origin: 'relationshipField',           alias: 'R. Field'},
-            {origin: 'intermediateTable',           alias: 'Intermediate Table'},
-            {origin: 'index',                       alias: 'Index'},
+        const aliases: {origin: string; alias: string}[] = [
+            { origin: '_name',                       alias: 'Name' },
+            { origin: 'type',                        alias: 'Type' },
+            { origin: 'primaryKey',                  alias: 'PK' },
+            { origin: 'enumOptions',                 alias: 'Enums' },
+            { origin: 'decimals',                    alias: 'Decimals' },
+            { origin: 'length',                      alias: 'Length' },
+            { origin: 'minLength',                   alias: 'MinL.' },
+            { origin: 'maxLength',                   alias: 'MaxL.' },
+            { origin: 'nullable',                    alias: 'Nullable' },
+            { origin: 'relationship',                alias: 'SqlRelationship' },
+            { origin: 'relationshipSingularName',    alias: 'Singular' },
+            { origin: 'relationshipAggregate',       alias: 'R. Aggregate' },
+            { origin: 'relationshipModulePath',      alias: 'R. Module Path' },
+            { origin: 'relationshipKey',             alias: 'R. Key' },
+            { origin: 'relationshipField',           alias: 'R. Field' },
+            { origin: 'intermediateTable',           alias: 'Intermediate Table' },
+            { origin: 'index',                       alias: 'Index' },
         ];
         const rows: any[] = [];
 
@@ -532,24 +533,24 @@ export class Prompter
 
                 // get value for each header
                 const value =   header === 'Decimals' && Array.isArray(item['decimals']) ?
-                                    item['decimals'].join() :
-                                    item[alias ?
-                                        alias.origin :
-                                        header
-                                    ] ?
-                                        item[
-                                            alias ?
-                                                alias.origin :
-                                                header
-                                        ] : '';
+                    item['decimals'].join() :
+                    item[alias ?
+                        alias.origin :
+                        header
+                    ] ?
+                        item[
+                            alias ?
+                                alias.origin :
+                                header
+                        ] : '';
 
                 row.push(value);
             }
             rows.push(row);
         }
 
-        var table = new Table({
-            head: headers,
+        const table = new Table({
+            head : headers,
             chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗', 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝', 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼', 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
         });
 
