@@ -1,7 +1,7 @@
 import { Controller, Delete, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
+import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
-import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -18,9 +18,8 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { ICommandBus } from '{{ config.applicationsContainer }}/shared/domain/bus/command-bus';
-import { IQueryBus } from '{{ config.applicationsContainer }}/shared/domain/bus/query-bus';
-import { QueryStatement } from '{{ config.applicationsContainer }}/shared/domain/persistence/sql-statement/sql-statement';
+import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
+import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Get{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
 import { Delete{{ toPascalCase schema.moduleNames }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleNames }}.command';
 

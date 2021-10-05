@@ -1,5 +1,5 @@
 import { SmallintValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/smallint.value-object';
-import { ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
+import { ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends SmallintValueObject
 {

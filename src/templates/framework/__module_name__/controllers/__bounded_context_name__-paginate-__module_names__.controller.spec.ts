@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Controller } from './{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.controller';
-import { ICommandBus } from '{{ config.applicationsContainer }}/shared/domain/bus/command-bus';
-import { IQueryBus } from '{{ config.applicationsContainer }}/shared/domain/bus/query-bus';
+import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
+import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
 describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Controller', () =>

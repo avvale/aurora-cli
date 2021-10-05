@@ -1,5 +1,5 @@
 import { BooleanValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/boolean.value-object';
-import { ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
+import { ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends BooleanValueObject
 {

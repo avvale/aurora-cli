@@ -1,7 +1,7 @@
 import { Controller, Get, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
+import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
-import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -18,8 +18,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { IQueryBus } from '{{ config.applicationsContainer }}/shared/domain/bus/query-bus';
-import { QueryStatement } from '{{ config.applicationsContainer }}/shared/domain/persistence/sql-statement/sql-statement';
+import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Find{{ toPascalCase schema.moduleName }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}.query';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')

@@ -260,7 +260,7 @@ export class CodeWriter
 
     declareAuthModuleInShareModule(): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join(cliterConfig.frameworkContainer, 'shared.module.ts')));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join(cliterConfig.auroraLocalPackage, 'shared.module.ts')));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'SharedModule');
 
         // register import auth module

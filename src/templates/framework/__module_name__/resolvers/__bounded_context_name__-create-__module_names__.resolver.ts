@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Timezone } from './../../../shared/decorators/timezone.decorator';
+import { Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -17,8 +17,8 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { ICommandBus } from '{{ config.applicationsContainer }}/shared/domain/bus/command-bus';
-import { IQueryBus } from '{{ config.applicationsContainer }}/shared/domain/bus/query-bus';
+import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
+import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from './../../../../graphql';
 

@@ -15,6 +15,10 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended"
     ],
+    "ignorePatterns": [
+        "src/templates/**/*",
+        "bin"
+    ],
     "rules": {
         "array-bracket-spacing": ["error", "never"],
         "arrow-parens": ["error" ,"as-needed"],

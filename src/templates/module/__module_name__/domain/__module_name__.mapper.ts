@@ -1,5 +1,5 @@
 import { IMapper } from '{{ config.applicationsContainer }}/shared/domain/lib/mapper';
-import { MapperOptions, ObjectLiteral, CQMetadata } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
+import { MapperOptions, ObjectLiteral, CQMetadata } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase schema.moduleName }}.response';
 import {

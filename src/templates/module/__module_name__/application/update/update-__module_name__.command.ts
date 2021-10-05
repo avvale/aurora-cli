@@ -1,5 +1,5 @@
-import { QueryStatement } from '{{ config.applicationsContainer }}/shared/domain/persistence/sql-statement/sql-statement';
-import { CQMetadata } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
+import { QueryStatement } from '{{ config.auroraCorePackage }}';
+import { CQMetadata } from '{{ config.auroraCorePackage }}';
 
 export class Update{{ toPascalCase schema.moduleName }}Command
 {

@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { PaginationResponse } from '{{ config.applicationsContainer }}/shared/domain/lib/pagination.response';
+import { PaginationResponse } from '{{ config.auroraCorePackage }}';
 import { Paginate{{ toPascalCase schema.moduleNames }}Query } from './paginate-{{ toKebabCase schema.moduleNames }}.query';
 import { Paginate{{ toPascalCase schema.moduleNames }}Service } from './paginate-{{ toKebabCase schema.moduleNames }}.service';
 

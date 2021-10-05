@@ -3,9 +3,10 @@ import * as dayjs from 'dayjs';
 
 export interface CliterConfig
 {
-    frameworkContainer: string;
     applicationsContainer: string;
     apiContainer: string;
+    auroraCorePackage: string;
+    auroraLocalPackage: string;
     configYamlVersion: string;
     lockJsonVersion: string;
     timestampFields: string[];
@@ -25,9 +26,10 @@ export interface CliterConfig
 
 export const cliterConfig: CliterConfig =
 {
-    frameworkContainer                : '@aurora',
     applicationsContainer             : '@apps',
     apiContainer                      : '@api',
+    auroraLocalPackage                : '@aurora',
+    auroraCorePackage                 : 'aurora-ts-core',
     configYamlVersion                 : '1.0.0',
     lockJsonVersion                   : '1.0.0',
     timestampFields                   : ['created_at', 'updated_at', 'deleted_at'],

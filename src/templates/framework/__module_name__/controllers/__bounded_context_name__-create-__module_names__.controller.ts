@@ -1,8 +1,8 @@
 import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
+import { Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 import { Create{{ toPascalCase schema.moduleName }}Dto } from './../dto/create-{{ toKebabCase schema.moduleName }}.dto';
-import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -19,7 +19,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { ICommandBus } from '{{ config.applicationsContainer }}/shared/domain/bus/command-bus';
+import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
 import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')

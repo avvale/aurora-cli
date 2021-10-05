@@ -1,8 +1,8 @@
 import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { Timezone } from '{{ config.auroraCorePackage }}';
 import { Create{{ toPascalCase schema.moduleName }}Dto } from './../dto/create-{{ toKebabCase schema.moduleName }}.dto';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
-import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -19,8 +19,8 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { ICommandBus } from '{{ config.applicationsContainer }}/shared/domain/bus/command-bus';
-import { IQueryBus } from '{{ config.applicationsContainer }}/shared/domain/bus/query-bus';
+import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
+import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
 import { Create{{ toPascalCase schema.moduleName }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleName }}.command';
 

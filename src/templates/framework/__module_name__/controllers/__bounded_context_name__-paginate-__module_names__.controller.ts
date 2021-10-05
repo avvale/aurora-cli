@@ -1,7 +1,7 @@
 import { Controller, Get, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
+import { Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
-import { Timezone } from './../../../shared/decorators/timezone.decorator';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -18,10 +18,8 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { IQueryBus } from '{{ config.applicationsContainer }}/shared/domain/bus/query-bus';
+import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Paginate{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/paginate/paginate-{{ toKebabCase schema.moduleNames }}.query';
-import { QueryStatement } from '{{ config.applicationsContainer }}/shared/domain/persistence/sql-statement/sql-statement';
-import { Pagination } from '{{ config.applicationsContainer }}/shared/domain/lib/pagination';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate')

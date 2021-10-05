@@ -1,5 +1,5 @@
 import { UuidValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/uuid.value-object';
-import { DataValueObject, ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
+import { DataValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends UuidValueObject
 {
@@ -8,10 +8,10 @@ export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
-            name: '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
-            nullable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
+            name       : '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
+            nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
-            length: {{ currentProperty.length }},
+            length     : {{ currentProperty.length }},
         }, validationRules), data);
     }
 }

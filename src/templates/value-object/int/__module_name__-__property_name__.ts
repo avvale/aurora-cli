@@ -1,5 +1,5 @@
 import { IntValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/int.value-object';
-import { ValidationRules } from '{{ config.applicationsContainer }}/shared/domain/lib/hades.types';
+import { ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends IntValueObject
 {
