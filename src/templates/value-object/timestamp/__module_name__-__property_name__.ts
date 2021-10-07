@@ -1,5 +1,4 @@
-import { TimestampValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/timestamp.value-object';
-import { DataValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
+import { DataValueObject, TimestampValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends TimestampValueObject
 {

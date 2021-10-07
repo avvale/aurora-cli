@@ -1,5 +1,4 @@
-import { StringValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/string.value-object';
-import { ValidationRules } from '{{ config.auroraCorePackage }}';
+import { StringValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends StringValueObject
 {

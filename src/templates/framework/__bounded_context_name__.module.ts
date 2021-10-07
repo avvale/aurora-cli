@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '{{ config.auroraLocalPackage }}/shared.module';
 
 @Module({
     imports: [

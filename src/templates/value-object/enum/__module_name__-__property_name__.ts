@@ -1,5 +1,4 @@
-import { EnumValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/enum.value-object';
-import { ValidationRules } from '{{ config.auroraCorePackage }}';
+import { EnumValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends EnumValueObject
 {

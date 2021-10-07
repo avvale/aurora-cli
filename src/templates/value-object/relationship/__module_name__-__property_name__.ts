@@ -1,5 +1,4 @@
-import { UuidArrayValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/uuid-array.value-object';
-import { ValidationRules } from '{{ config.auroraCorePackage }}';
+import { UuidArrayValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends UuidArrayValueObject
 {

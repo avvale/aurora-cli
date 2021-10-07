@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { SharedModule } from 'src/{{ config.apiContainer }}/shared/shared.module';
-import { SequelizeConfigModule } from 'src/{{ config.apiContainer }}/core/modules/sequelize/sequelize-config.module';
+import { SharedModule } from '{{ config.auroraLocalPackage }}/shared.module';
+import { SequelizeConfigModule } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}Module } from 'src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
 
 @Module({

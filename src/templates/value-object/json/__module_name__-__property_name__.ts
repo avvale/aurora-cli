@@ -1,5 +1,4 @@
-import { JsonValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/json.value-object';
-import { ValidationRules } from '{{ config.auroraCorePackage }}';
+import { JsonValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends JsonValueObject
 {

@@ -1,5 +1,4 @@
-import { DecimalValueObject } from '{{ config.applicationsContainer }}/shared/domain/value-objects/decimal.value-object';
-import { ValidationRules } from '{{ config.auroraCorePackage }}';
+import { DecimalValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends DecimalValueObject
 {
