@@ -1,0 +1,35 @@
+
+scalar JSON
+scalar Any
+scalar Upload
+scalar GraphQLString
+scalar GraphQLInt
+scalar GraphQLFloat
+scalar GraphQLBoolean
+scalar GraphQLISODateTime
+scalar GraphQLTimestamp
+scalar GraphQLUpload
+
+input QueryStatement
+{
+    where: JSON
+    include: [GraphQLString]
+    order: JSON
+    limit: GraphQLInt
+    offset: GraphQLInt
+}
+
+type Pagination
+{
+    "Total possible objects displayed"
+    total: GraphQLInt!
+    "Number of items filtered according to query"
+    count: GraphQLInt!
+    "Query object data"
+    rows: [JSON]!
+}
+
+type Query
+{
+    hello: String
+}

@@ -13,6 +13,7 @@ export class StateService
 {
     public config: CliterConfig = cliterConfig;
     public appName!: string;
+    public packageName?: string;
     public command!: Command;
     public schema!: ModuleDefinitionSchema;
     public lockFiles: LockFile[] = [];

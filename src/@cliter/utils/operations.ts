@@ -16,6 +16,24 @@ export class Operations
 {
     public static readonly stateService = container.resolve(StateService);
 
+    async generateApplication()
+    {
+        // create directory for application
+        if (!fs.existsSync(Operations.stateService.appName)) fs.mkdirSync(Operations.stateService.appName, { recursive: true });
+
+        await TemplateGenerator.generateStaticContents(TemplateElement.APPLICATION, path.join(Operations.stateService.appName), '.');
+    }
+
+    async generatePackage()
+    {
+        if (!Operations.stateService.packageName) throw new Error('To create package is requires package name');
+
+        // create directory for application
+        if (!fs.existsSync(Operations.stateService.packageName || '')) fs.mkdirSync(Operations.stateService.packageName, { recursive: true });
+
+        await TemplateGenerator.generateStaticContents(TemplateElement.PACKAGE, path.join(Operations.stateService.packageName), '.');
+    }
+
     async generateModule()
     {
         // generate module files

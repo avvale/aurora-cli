@@ -9,73 +9,49 @@ import * as ora from 'ora';
 
 export default class New extends Command
 {
-    static description = 'Create new hades project';
+    static description = 'Create new aurora project';
 
     static flags =
     {
-        help: flags.help({ char: 'h' }),
+        help       : flags.help({ char: 'h' }),
         credentials: flags.boolean({ char: 'c' }),
     };
 
     static args = [
         {
-            name: 'appName',
-            required: true,
+            name       : 'appName',
+            required   : true,
             description: 'Type app name to create'
         }
     ];
 
     async run()
     {
-        const { args, flags } = this.parse(New)
+        const { args, flags } = this.parse(New);
 
-        // declare variables
-        let gitFlags = '';
-        const gitCommand = 'git clone';
-        let  repository = 'https://github.com/techedge-group/hades';
+        const stateService     = container.resolve(StateService);
+        stateService.command   = this;
+        stateService.flags     = flags;
+        stateService.appName   = args.appName;
 
-        // get github credentials
-        if (flags.credentials)
+        const operations = new Operations();
+        operations.generateApplication();
+
+        const dependenciesSpinner = ora('Installing dependencies').start();
+        shell.exec(`npm --prefix ${args.appName} install`, { silent: true, async: true }, () =>
         {
-            const { githubUsername, githubPassword }: any = await Prompter.promptForGithubCredentials();
-            repository = `https://${githubUsername}:${githubPassword}@github.com/techedge-group/hades`;
-        }
+            dependenciesSpinner.succeed('Dependencies installed');
 
-        // get bounded context
-        const { branch }: any = await Prompter.promptForNewApplication();
-        if (branch !== 'none') gitFlags += '--single-branch --branch ' + branch
+            // set stateService
+            const stateService     = container.resolve(StateService);
+            stateService.command   = this;
+            stateService.flags     = flags;
+            stateService.appName   = args.appName;
 
-        // exec shell
-        const installerSpinner = ora('Installing Hades project').start();
-        const githubThread = shell.exec(`${gitCommand} ${gitFlags} ${repository} ${args.appName}`, {silent: true, async: true}, async (code, stdout, stderr) =>
-        {
-            if (code !== 0)
-            {
-                githubThread.kill();
-                installerSpinner.stop();
-                this.log(chalk.red.bold(`[ERROR ${code}]`), stderr);
-            }
-            // install dependencies
-            else
-            {
-                installerSpinner.succeed('Project installed');
+            const operations = new Operations();
 
-                const dependenciesSpinner = ora('Installing dependencies').start();
-                shell.exec(`npm --prefix ${args.appName} install`, {silent: true, async: true}, () => {
-                    dependenciesSpinner.succeed('Dependencies installed');
-
-                    // set stateService
-                    const stateService     = container.resolve(StateService);
-                    stateService.command   = this;
-                    stateService.flags     = flags;
-                    stateService.appName   = args.appName;
-
-                    const operations = new Operations();
-
-                    // generate env file
-                    operations.generateEnvFile();
-                });
-            }
+            // generate env file
+            operations.generateEnvFile();
         });
     }
 }
