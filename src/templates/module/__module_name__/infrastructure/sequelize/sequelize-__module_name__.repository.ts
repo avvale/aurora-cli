@@ -16,7 +16,8 @@ export class Sequelize{{ toPascalCase schema.moduleName }}Repository extends Seq
         @InjectModel({{ schema.aggregateName }}Model)
         public readonly repository: typeof {{ schema.aggregateName }}Model,
         public readonly criteria: ICriteria,
-    ) {
+    )
+    {
         super();
     }
     {{#hasItems schema.properties.withRelationshipManyToMany }}
