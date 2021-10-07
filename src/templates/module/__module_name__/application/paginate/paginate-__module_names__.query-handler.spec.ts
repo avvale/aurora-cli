@@ -22,11 +22,11 @@ describe('Paginate{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
             providers: [
                 Paginate{{ toPascalCase schema.moduleNames }}QueryHandler,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useClass: Mock{{ toPascalCase schema.moduleName }}Repository
                 },
                 {
-                    provide: Paginate{{ toPascalCase schema.moduleNames }}Service,
+                    provide : Paginate{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
                         main: () => {},
                     }

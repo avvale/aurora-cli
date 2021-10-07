@@ -1,6 +1,5 @@
 
-import { IRepository } from '{{ config.applicationsContainer }}/shared/domain/persistence/repository';
-import { QueryStatement } from '{{ config.auroraCorePackage }}';
+import { IRepository, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { Pagination } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';

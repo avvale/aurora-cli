@@ -1,6 +1,5 @@
-import { Injectable} from '@nestjs/common';
-import { MockRepository } from '{{ config.applicationsContainer }}/shared/infrastructure/persistence/mock/mock.repository';
-import { Utils } from '{{ config.applicationsContainer }}/shared/domain/lib/utils';
+import { Injectable } from '@nestjs/common';
+import { MockRepository, Utils } from '{{ config.auroraCorePackage }}';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 import {
     {{#each schema.properties.valueObjects}}

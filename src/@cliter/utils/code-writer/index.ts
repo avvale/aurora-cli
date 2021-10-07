@@ -153,7 +153,7 @@ export class CodeWriter
             sourceFile,
             `
 {
-    provide: I${this.moduleName.toPascalCase()}Repository,
+    provide : I${this.moduleName.toPascalCase()}Repository,
     useClass: Sequelize${this.moduleName.toPascalCase()}Repository
 }`,
             `${this.boundedContextName.toPascalCase()}Repositories`,

@@ -21,11 +21,11 @@ describe('Get{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
             providers: [
                 Get{{ toPascalCase schema.moduleNames }}QueryHandler,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useClass: Mock{{ toPascalCase schema.moduleName }}Repository
                 },
                 {
-                    provide: Get{{ toPascalCase schema.moduleNames }}Service,
+                    provide : Get{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
                         main: () => {},
                     }
