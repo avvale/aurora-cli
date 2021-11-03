@@ -36,29 +36,29 @@ export class Property
 
     constructor(
         payload: {
-            name: string,
-            type: SqlType,
-            primaryKey?: boolean,
-            enumOptions?: string,
-            decimals?: number[],
-            length?: number,
-            minLength?: number,
-            maxLength?: number,
-            nullable?: boolean,
-            defaultValue?: string | number,
-            relationship?: SqlRelationship,
-            relationshipSingularName?: string,
-            relationshipAggregate?: string,
-            relationshipModulePath?: string,
-            relationshipKey?: string,
-            relationshipField?: string,
-            intermediateTable?: string,
-            intermediateModel?: string,
-            intermediateModelModuleSection?: string,
-            intermediateModelFile?: string,
-            index?: SqlIndex,
-            example?: any,
-            faker?: any,
+            name: string;
+            type: SqlType;
+            primaryKey?: boolean;
+            enumOptions?: string;
+            decimals?: number[];
+            length?: number;
+            minLength?: number;
+            maxLength?: number;
+            nullable?: boolean;
+            defaultValue?: string | number;
+            relationship?: SqlRelationship;
+            relationshipSingularName?: string;
+            relationshipAggregate?: string;
+            relationshipModulePath?: string;
+            relationshipKey?: string;
+            relationshipField?: string;
+            intermediateTable?: string;
+            intermediateModel?: string;
+            intermediateModelModuleSection?: string;
+            intermediateModelFile?: string;
+            index?: SqlIndex;
+            example?: any;
+            faker?: any;
         }
     )
     {
@@ -104,7 +104,7 @@ export class Property
         if (this.type === SqlType.DECIMAL)
         {
             // set maxLength to validate in value object
-            this.maxLength = <number>_.head(this.decimals);
+            this.maxLength = _.head(this.decimals) as number;
         }
     }
 
