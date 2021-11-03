@@ -5,9 +5,11 @@ import * as _ from 'lodash';
 
 export class Property
 {
-    [index: string]: any;   // Avoid error: Element implicitly has an 'any' type because expression of type
-                            // 'string' can't be used to index type 'Property'. No index signature with a
-                            // parameter of type 'string' was found on type 'Property'.ts(7053)
+    // Avoid error: Element implicitly has an 'any' type because expression of type
+    // 'string' can't be used to index type 'Property'. No index signature with a
+    // parameter of type 'string' was found on type 'Property'.ts(7053)
+    [index: string]: any;
+
     public config       = cliterConfig;
     public id: string   = faker.datatype.uuid();
     private _name: string;
@@ -147,7 +149,7 @@ export class Property
 
     get getReferenceKey(): any
     {
-        return this.relationshipKey ? this.relationshipKey : 'id'
+        return this.relationshipKey ? this.relationshipKey : 'id';
     }
 
     // property names
@@ -221,7 +223,7 @@ export class Property
 
     get getGraphqlType(): string | undefined
     {
-        if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `[${this.relationshipAggregate}]`;
+        if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `[${this.relationshipAggregate}]`;
         if (this.relationship === SqlRelationship.MANY_TO_ONE)                                                          return `${this.relationshipAggregate}`;
         if (this.relationship === SqlRelationship.ONE_TO_ONE)                                                           return `${this.relationshipAggregate}`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
@@ -246,54 +248,54 @@ export class Property
         return this.config.quotationTypes[this.type];
     }
 
-    fakerPostman(force: boolean = false): any
+    fakerPostman(force = false): any
     {
         if (this.type === SqlType.ID && !force)    return this.id;
         if (this.type === SqlType.RELATIONSHIP)    return '[]';
         if (this.type === SqlType.JSON)            return this.config.fakerRelation[this.type]().replace(/\"/gi, '\\"');
         if (this.type === SqlType.ENUM)            return this.enumOptions ? _.shuffle(this.enumOptions)[0] : null;
 
-        return this.config.fakerRelation[this.type] ? this.config.fakerRelation[this.type](this.maxLength ? this.maxLength : this.length) : ''
+        return this.config.fakerRelation[this.type] ? this.config.fakerRelation[this.type](this.maxLength ? this.maxLength : this.length) : '';
     }
 
-    private parseModuleSection(moduleSectionString: string): { boundedContextName: string, moduleName: string }
+    private parseModuleSection(moduleSectionString: string): { boundedContextName: string; moduleName: string }
     {
         const moduleSection = moduleSectionString.split('/');
         if (moduleSection.length !== 2) throw new Error('Must input bounded context and module name, with format: bounded-context/module');
 
         return {
             boundedContextName: moduleSection[0],
-            moduleName: moduleSection[1]
+            moduleName        : moduleSection[1]
         };
     }
 
     toDto(): any
     {
         return {
-            id: this.id,
-            name: this._name,
-            type: this.type,
-            primaryKey: this.primaryKey,
-            enumOptions: this.enumOptions,
-            decimals: this.decimals,
-            length: this.length,
-            minLength: this.minLength,
-            maxLength: this.maxLength,
-            nullable: this.nullable,
-            defaultValue: this.defaultValue,
-            relationship: this.relationship,
-            relationshipSingularName: this.relationshipSingularName,
-            relationshipAggregate: this.relationshipAggregate,
-            relationshipModulePath: this.relationshipModulePath,
-            relationshipKey: this.relationshipKey,
-            relationshipField: this.relationshipField,
-            intermediateTable: this.intermediateTable,
-            intermediateModel: this.intermediateModel,
+            id                            : this.id,
+            name                          : this._name,
+            type                          : this.type,
+            primaryKey                    : this.primaryKey,
+            enumOptions                   : this.enumOptions,
+            decimals                      : this.decimals,
+            length                        : this.length,
+            minLength                     : this.minLength,
+            maxLength                     : this.maxLength,
+            nullable                      : this.nullable,
+            defaultValue                  : this.defaultValue,
+            relationship                  : this.relationship,
+            relationshipSingularName      : this.relationshipSingularName,
+            relationshipAggregate         : this.relationshipAggregate,
+            relationshipModulePath        : this.relationshipModulePath,
+            relationshipKey               : this.relationshipKey,
+            relationshipField             : this.relationshipField,
+            intermediateTable             : this.intermediateTable,
+            intermediateModel             : this.intermediateModel,
             intermediateModelModuleSection: this.intermediateModelModuleSection,
-            intermediateModelFile: this.intermediateModelFile,
-            index: this.index,
-            example: this.example,
-            faker: this.faker,
-        }
+            intermediateModelFile         : this.intermediateModelFile,
+            index                         : this.index,
+            example                       : this.example,
+            faker                         : this.faker,
+        };
     }
 }
