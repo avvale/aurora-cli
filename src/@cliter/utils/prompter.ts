@@ -306,7 +306,7 @@ export class Prompter
             }
         });
 
-        // only if filed end with _id
+        // only if filed end with Id
         questions.push({
             name   : 'relationship',
             message: 'What kind of relationship do you want to create?',
@@ -314,7 +314,7 @@ export class Prompter
             choices: Object.values(SqlRelationship).filter(item => ['none', 'one-to-one', 'many-to-one'].includes(item)),
             when   : (answers: any) =>
             {
-                if (answers.name.endsWith('_id'))
+                if (answers.name.endsWith('Id'))
                 {
                     answers.type = 'id';
                     answers.length = 36;
@@ -367,8 +367,8 @@ export class Prompter
             type   : 'input',
             when   : (answers: any) =>
             {
-                if (answers.relationship === SqlRelationship.ONE_TO_MANY || (answers.relationship === SqlRelationship.ONE_TO_ONE && !answers.name.endsWith('_id'))) answers.type =  answers.relationshipAggregate;
-                if (answers.relationship === SqlRelationship.ONE_TO_ONE && answers.name.endsWith('_id'))
+                if (answers.relationship === SqlRelationship.ONE_TO_MANY || (answers.relationship === SqlRelationship.ONE_TO_ONE && !answers.name.endsWith('Id'))) answers.type =  answers.relationshipAggregate;
+                if (answers.relationship === SqlRelationship.ONE_TO_ONE && answers.name.endsWith('Id'))
                 {
                     answers.type = 'id';
                     answers.length = 36;
@@ -476,7 +476,7 @@ export class Prompter
             relationshipAggregate         : response.relationshipAggregate,
             relationshipModulePath        : response.relationshipModulePath,
             relationshipKey               : response.relationship === SqlRelationship.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
-            relationshipField             : response.relationship === SqlRelationship.MANY_TO_ONE || (response.relationship === SqlRelationship.ONE_TO_ONE && response.name.endsWith('_id')) ? response.name.replace(new RegExp('_id$'), '').toCamelCase() : undefined, // set relationship field
+            relationshipField             : response.relationship === SqlRelationship.MANY_TO_ONE || (response.relationship === SqlRelationship.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
             intermediateTable             : response.intermediateTable,
             intermediateModel             : response.intermediateModel,
             intermediateModelModuleSection: response.intermediateModelModuleSection,

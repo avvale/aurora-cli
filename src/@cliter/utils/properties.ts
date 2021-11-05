@@ -91,7 +91,7 @@ export class Properties
     {
         return this.properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                     // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     // commands
@@ -100,7 +100,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get updateCommand(): Property[]
@@ -108,7 +108,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     // commands handler
@@ -117,7 +117,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get updateCommandHandler(): Property[]
@@ -125,7 +125,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     // queries handler
@@ -153,7 +153,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get updateService(): Property[]
@@ -161,7 +161,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     // events
@@ -169,21 +169,21 @@ export class Properties
     {
         return this.properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get updatedEvent(): Property[]
     {
         return this.properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get deletedEvent(): Property[]
     {
         return this.properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     // controllers
@@ -192,7 +192,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get updateController(): Property[]
@@ -200,7 +200,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     // resolvers
@@ -209,7 +209,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get updateResolver(): Property[]
@@ -217,7 +217,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     // graphql
@@ -277,7 +277,7 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanGraphQLGetQuery(): Property[]
@@ -287,7 +287,7 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanGraphQLFindQuery(): Property[]
@@ -297,7 +297,7 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanGraphQLFindByIdQuery(): Property[]
@@ -307,7 +307,7 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanGraphQLUpdateQuery(): Property[]
@@ -317,7 +317,7 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanGraphQLCreateVariables(): Property[]
@@ -325,7 +325,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanGraphQLUpdateVariables(): Property[]
@@ -333,7 +333,7 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanGraphQLDeleteQuery(): Property[]
@@ -343,7 +343,7 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get postmanRestCreate(): Property[]
@@ -438,21 +438,21 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get mapper(): Property[]
     {
         return this.properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     get mock(): Property[]
     {
         return this.properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxx_id
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
     getForeignRelationship(boundedContextName: string): Property[]
