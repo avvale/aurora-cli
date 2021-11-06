@@ -55,7 +55,7 @@ export class FileManager
 
             if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql')))
             {
-                fs.unlinkSync(path.join(currentPath, file))
+                fs.unlinkSync(path.join(currentPath, file));
             }
             else if (stats.isDirectory())
             {

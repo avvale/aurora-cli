@@ -49,9 +49,9 @@ export default class Generate extends Command
                 Prompter.printValueObjectsTable(this, properties);
             }
             // add time stamp properties
-            properties.add(new Property({ name: 'created_at', type: SqlType.TIMESTAMP, nullable: true }));
-            properties.add(new Property({ name: 'updated_at', type: SqlType.TIMESTAMP, nullable: true }));
-            properties.add(new Property({ name: 'deleted_at', type: SqlType.TIMESTAMP, nullable: true }));
+            properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true }));
+            properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true }));
+            properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true }));
 
             const schema: ModuleDefinitionSchema = {
                 boundedContextName,

@@ -3,8 +3,8 @@ import { SqlRelationship, SqlType } from './../types';
 
 export class Properties
 {
-    timestampFields : string[] = ['created_at', 'updated_at', 'deleted_at'];
-    deletedAtField  : string[] = ['deleted_at'];
+    timestampFields: string[] = ['createdAt', 'updatedAt', 'deletedAt'];
+    deletedAtField : string[] = ['deletedAt'];
 
     constructor(
         public properties: Property[] = []
