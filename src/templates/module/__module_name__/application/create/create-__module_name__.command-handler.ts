@@ -21,7 +21,7 @@ export class Create{{ toPascalCase schema.moduleName }}CommandHandler implements
             {
                 {{#each schema.properties.createCommandHandler}}
                 {{#if hasTimezone}}
-                {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, {}, {removeTimezone: command.cQMetadata.timezone}),
+                {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, {}, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}
                 {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}),
                 {{/if}}
