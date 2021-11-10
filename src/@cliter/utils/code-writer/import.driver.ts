@@ -22,10 +22,10 @@ export class ImportDriver
                 // check this import not exist yet
                 const importElement = sourceFile.getImportDeclaration(path);
                 const itemsToImportChecked: string[] = [];
-                for (let itemToImport of itemsToImport)
+                for (const itemToImport of itemsToImport)
                 {
                     let existItem = false;
-                    for(let importedElement of importElement?.getNamedImports() ? importElement?.getNamedImports() : [])
+                    for(const importedElement of importElement?.getNamedImports() ? importElement?.getNamedImports() : [])
                     {
                         if (importedElement.getName() === itemToImport) existItem = true;
                     }
@@ -35,11 +35,11 @@ export class ImportDriver
                 // add import after check that is not repeated
                 if (itemsToImportChecked.length > 0) importElement?.addNamedImports(itemsToImportChecked);
             }
-             // create new import
+            // create new import
             else
             {
                 sourceFile.addImportDeclaration({
-                    namedImports: itemsToImport,
+                    namedImports   : itemsToImport,
                     moduleSpecifier: path
                 });
             }
@@ -72,7 +72,7 @@ export class ImportDriver
     private static getImportPaths(sourceFile: SourceFile): string[]
     {
         const imports = sourceFile.getImportDeclarations();
-        let paths: string[] = [];
+        const paths: string[] = [];
         for (const importObj of imports)
         {
             paths.push(importObj.getModuleSpecifier().getLiteralValue());
