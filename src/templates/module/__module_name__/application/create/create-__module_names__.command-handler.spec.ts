@@ -36,12 +36,12 @@ describe('Create{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an {{ toCamelCase schema.moduleName }} created', async () =>
+        test('should return {{ toCamelCase schema.moduleNames }} createds', async () =>
         {
             expect(await commandHandler.execute(
                 new Create{{ toPascalCase schema.moduleNames }}Command(
-                    {{ toCamelCase schema.moduleNames }}
-
+                    {{ toCamelCase schema.moduleNames }},
+                    { timezone: process.env.TZ }
                 )
             )).toBe(undefined);
         });

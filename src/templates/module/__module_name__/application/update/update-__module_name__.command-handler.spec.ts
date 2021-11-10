@@ -17,7 +17,7 @@ describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
             providers: [
                 Update{{ toPascalCase schema.moduleName }}CommandHandler,
                 {
-                    provide: Update{{ toPascalCase schema.moduleName }}Service,
+                    provide : Update{{ toPascalCase schema.moduleName }}Service,
                     useValue: {
                         main: () => {},
                     }
@@ -44,7 +44,9 @@ describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
                         {{#each schema.properties.updateController}}
                         {{ toCamelCase name }}: {{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }},
                         {{/each}}
-                    }
+                    },
+                    {},
+                    { timezone: process.env.TZ }
                 )
             )).toBe(undefined);
         });

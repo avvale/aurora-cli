@@ -44,7 +44,8 @@ describe('Create{{ toPascalCase schema.moduleName }}CommandHandler', () =>
                         {{#each schema.properties.createController}}
                         {{ toCamelCase name }}: {{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }},
                         {{/each}}
-                    }
+                    },
+                    { timezone: process.env.TZ }
                 )
             )).toBe(undefined);
         });
