@@ -38,7 +38,7 @@ export default class Load extends Command
         }
     ];
 
-    async run()
+    async run(): Promise<void>
     {
         const { args, flags }   = this.parse(Load);
         const stateService      = container.resolve(StateService);
@@ -141,12 +141,12 @@ export default class Load extends Command
                             case stateService.config.compareActions.deleteOrigin:
                                 fs.unlinkSync(fileToCompare as string);                     // delete origin file
                                 fileToCompare = _.head(stateService.originFiles.slice());   // get next file
-                                if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => {});
+                                if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => { /**/ });
                                 break;
                             case stateService.config.compareActions.selectFile:
                                 console.log('selectFile ', fileToCompare);
                                 fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;
-                                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => {});
+                                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => { /**/ });
                                 break;
                         }
                     }
