@@ -8,6 +8,6 @@ import { SharedModule } from '{{ config.auroraLocalPackage }}/shared.module';
         SequelizeModule.forFeature([])
     ],
     controllers: [],
-    providers: []
+    providers: [],
 })
 export class {{ toPascalCase schema.boundedContextName }}Module {}

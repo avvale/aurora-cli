@@ -246,11 +246,11 @@ export class CodeWriter
             ImportDriver.createImportItems(
                 sourceFile,
                 [`${this.boundedContextName.toPascalCase()}Module`],
-                `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+                `${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
             );
 
             // register module
-            const importsArgument: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('imports');
+            const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
             const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
             importsArray.addElement(`${this.boundedContextName.toPascalCase()}Module`, { useNewLines: true });
         }
