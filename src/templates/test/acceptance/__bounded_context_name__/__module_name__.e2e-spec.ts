@@ -94,7 +94,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{#each schema.properties.isNotNullable  as |notNullPropety notNullPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} property can not to be null`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -115,7 +115,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.isNotNullable  as |notNullPropety notNullPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} property can not to be undefined`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -138,7 +138,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.hasLength  as |hasLengthPropety hasLengthPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} is not allowed, must be a length of {{ hasLengthPropety.length }}`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} is not allowed, must be a length of {{ hasLengthPropety.length }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -159,7 +159,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.hasMaxLength  as |hasMaxLengthPropety hasMaxLengthPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -180,7 +180,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.hasMinLength  as |hasMaxLengthPropety hasMinLengthPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -200,7 +200,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isInteger  as |isIntegerPropety isIntegerPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a integer value`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a integer value', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -220,7 +220,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isIntegerUnsigned  as |isIntegerUnsignedPropety isIntegerUnsignedPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} must have a positive sign`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} must have a positive sign', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -240,7 +240,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isBoolean  as |isBooleanPropety isBooleanPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a boolean value`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -260,7 +260,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isEnum  as |isEnumPropety isEnumPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a enum option of {{ join enumOptions }}`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a enum option of {{ join enumOptions }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -280,7 +280,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isTimestamp  as |isTimestampPropety isTimestampPropetyId|}}
-    test(`/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a timestamp value`, () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} has to be a timestamp value', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
@@ -300,7 +300,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
 
-    test(`/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 409 Conflict, item already exist in database`, () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
@@ -312,7 +312,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(409);
     });
 
-    test(`/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate`, () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate', () =>
     {
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate')
@@ -335,7 +335,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}`, () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}', () =>
     {
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}')
@@ -347,7 +347,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(seeder.collectionResponse);
     });
 
-    test(`/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 404 Not Found`, () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
@@ -367,7 +367,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test(`/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}`, () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
@@ -383,7 +383,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(201);
     });
 
-    test(`/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}`, () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}', () =>
     {
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
@@ -406,7 +406,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id} - Got 404 Not Found`, () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ uuid }}')
@@ -417,7 +417,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test(`/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}`, () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}', () =>
     {
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ fakerProperty schema.properties.id 'seed' }}')
@@ -431,7 +431,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 404 Not Found`, () =>
+    test('/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
@@ -447,7 +447,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test(`/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}`, () =>
+    test('/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}', () =>
     {
         return request(app.getHttpServer())
             .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
@@ -466,7 +466,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id} - Got 404 Not Found`, () =>
+    test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ uuid }}')
@@ -477,7 +477,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test(`/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}`, () =>
+    test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}', () =>
     {
         return request(app.getHttpServer())
             .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ fakerProperty schema.properties.id 'seed' }}')
@@ -488,7 +488,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200);
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} - Got 409 Conflict, item already exist in database`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -521,7 +521,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -558,7 +558,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -589,7 +589,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -623,7 +623,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} - Got 404 Not Found`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -662,7 +662,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -699,7 +699,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById - Got 404 Not Found`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -731,7 +731,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -761,7 +761,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} - Got 404 Not Found`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -797,7 +797,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -831,7 +831,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById - Got 404 Not Found`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -863,7 +863,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test(`/GraphQL {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById`, () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
