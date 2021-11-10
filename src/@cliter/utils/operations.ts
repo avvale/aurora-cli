@@ -66,14 +66,19 @@ export class Operations
 
     async generateModuleFiles(): Promise<void>
     {
+        // create directory application container, normally src/@apps
         await TemplateGenerator.createDirectory(
             path.join('src', cliterConfig.applicationsContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
         );
+
+        // create module files
         await TemplateGenerator.generateStaticContents(
             TemplateElement.MODULE, path.join('src', cliterConfig.applicationsContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
         );
+
+        // create value objects in module folder
         await TemplateGenerator.generateValueObjects(
             path.join('src', cliterConfig.applicationsContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
