@@ -11,7 +11,7 @@ export default class Key extends Command
 
     static args = [];
 
-    async run()
+    async run(): Promise<void>
     {
         const { args, flags } = this.parse(Key);
 
