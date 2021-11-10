@@ -26,7 +26,10 @@ export class TemplateGenerator
         );
     }
 
-    static generateIntermediateTables(relativeTargetBasePath: string, relativeTargetPath: string)
+    static generateIntermediateTables(
+        relativeTargetBasePath: string,
+        relativeTargetPath: string
+    ): void
     {
         for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipIntermediateTable)
         {
@@ -41,14 +44,20 @@ export class TemplateGenerator
         }
     }
 
-    static createDirectory(relativeTargetBasePath: string, directory: string)
+    static createDirectory(
+        relativeTargetBasePath: string,
+        directory: string
+    ): void
     {
         const modulePath = path.join(TemplateGenerator.projectDirectory, relativeTargetBasePath, directory);
 
         if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
     }
 
-    static generateValueObjects(relativeTargetBasePath: string, relativeTargetPath: string)
+    static generateValueObjects(
+        relativeTargetBasePath: string,
+        relativeTargetPath: string
+    ): void
     {
         for (const property of TemplateGenerator.stateService.schema.properties.valueObjects)
         {
