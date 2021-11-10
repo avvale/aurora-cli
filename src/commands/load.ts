@@ -20,20 +20,21 @@ export default class Load extends Command
 
     static flags =
     {
-        help: flags.help({ char: 'h' }),
-        module: flags.string({ char: 'm' }),
+        help          : flags.help({ char: 'h' }),
+        verbose       : flags.boolean({ char: 'v' }),
+        force         : flags.boolean({ char: 'f' }),
+        module        : flags.string({ char: 'm' }),
         boundedContext: flags.string({ char: 'b' }),
-        force: flags.boolean({ char: 'f' }),
-        verbose: flags.boolean({ char: 'v' }),
-        tests: flags.boolean({ char: 't' }),
+        tests         : flags.boolean({ char: 't' }),
+        noGraphQLTypes: flags.boolean({ char: 'g' }),
     };
 
     static args = [
         {
-            name: 'elementType',
-            required: true,
+            name       : 'elementType',
+            required   : true,
             description: 'Type element to create',
-            options: ['bounded-context', 'b', 'module', 'm']
+            options    : ['bounded-context', 'b', 'module', 'm']
         }
     ];
 
@@ -100,8 +101,11 @@ export default class Load extends Command
 
     private async reviewOverwrites(operations: Operations, stateService: StateService)
     {
-        // generate graphql files
-        await operations.generateGraphqlTypes();
+        if (!stateService.flags.noGraphQLTypes)
+        {
+            // generate graphql files
+            await operations.generateGraphqlTypes();
+        }
 
         if (stateService.originFiles.length > 0)
         {
@@ -109,7 +113,7 @@ export default class Load extends Command
 ********************************************
 ***              ATTENTION!              ***
 ********************************************`);
-            stateService.command.log(`%s %s %s There are files that have not been overwritten because they were modified, the following origin files have been created.`, logSymbols.warning, chalk.yellow.bold('WARNING'), emoji.get('small_red_triangle'));
+            stateService.command.log('%s %s %s There are files that have not been overwritten because they were modified, the following origin files have been created.', logSymbols.warning, chalk.yellow.bold('WARNING'), emoji.get('small_red_triangle'));
 
             for (const originFile of stateService.originFiles)
             {
@@ -123,32 +127,32 @@ export default class Load extends Command
             if ((await Prompter.promptForCompareOriginFile()).hasCompareOriginFile)
             {
                 // list all origin files
-                fileToCompare = <string>(await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare;
-                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, {silent: true, async: true}, () => {});
+                fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;
+                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => { /**/ });
 
                 while (actionResponse !== stateService.config.compareActions.finish)
                 {
                     if (stateService.originFiles.length > 0)
                     {
-                        actionResponse = <string>(await Prompter.promptSelectCompareAction()).compareAction;
+                        actionResponse = (await Prompter.promptSelectCompareAction()).compareAction as string;
 
                         switch(actionResponse)
                         {
                             case stateService.config.compareActions.deleteOrigin:
-                                fs.unlinkSync(<string>fileToCompare);                           // delete origin file
-                                fileToCompare = _.head(stateService.originFiles.slice());      // get next file
-                                if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, {silent: true, async: true}, () => {});
-                            break;
+                                fs.unlinkSync(fileToCompare as string);                     // delete origin file
+                                fileToCompare = _.head(stateService.originFiles.slice());   // get next file
+                                if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => {});
+                                break;
                             case stateService.config.compareActions.selectFile:
                                 console.log('selectFile ', fileToCompare);
-                                fileToCompare = <string>(await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare;
-                                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, {silent: true, async: true}, () => {});
-                            break;
+                                fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;
+                                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => {});
+                                break;
                         }
                     }
                     else
                     {
-                        stateService.command.log(`[INFO] All files have been reviewed`);
+                        stateService.command.log('[INFO] All files have been reviewed');
                         deleteOriginFiles = false;
                         break;
                     }
@@ -169,7 +173,7 @@ export default class Load extends Command
 
         if (!fs.existsSync(jsonPath)) return [];
 
-        return <LockFile[]>(JSON.parse(fs.readFileSync(jsonPath, 'utf8')).files);
+        return (JSON.parse(fs.readFileSync(jsonPath, 'utf8')).files) as LockFile[];
     }
 
     private loadYamlConfigFile(boundedContextName: string, moduleName: string): ModuleDefinitionSchema
@@ -177,7 +181,7 @@ export default class Load extends Command
         const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + '.yml');
 
         // read yaml file
-        const yamlObj = <any>yaml.load(fs.readFileSync(yamlPath, 'utf8'));
+        const yamlObj = yaml.load(fs.readFileSync(yamlPath, 'utf8')) as any;
 
         this.parseModuleDefinitionSchema(yamlObj);
 
@@ -187,52 +191,52 @@ export default class Load extends Command
         {
             properties.add(
                 new Property({
-                    name: property.name,
-                    type: property.type,
-                    primaryKey: property?.primaryKey,
-                    enumOptions: property?.enumOptions?.join(),
-                    decimals: property?.decimals,
-                    length: property?.length,
-                    minLength: property?.minLength,
-                    maxLength: property?.maxLength,
-                    nullable: property?.nullable,
-                    defaultValue: property?.defaultValue,
-                    relationship: property?.relationship,
-                    relationshipSingularName: property?.relationshipSingularName,
-                    relationshipAggregate: property?.relationshipAggregate,
-                    relationshipModulePath: property?.relationshipModulePath,
-                    relationshipKey: property?.relationshipKey,
-                    relationshipField: property?.relationshipField,
-                    intermediateTable: property?.intermediateTable,
-                    intermediateModel: property?.intermediateModel,
+                    name                          : property.name,
+                    type                          : property.type,
+                    primaryKey                    : property?.primaryKey,
+                    enumOptions                   : property?.enumOptions?.join(),
+                    decimals                      : property?.decimals,
+                    length                        : property?.length,
+                    minLength                     : property?.minLength,
+                    maxLength                     : property?.maxLength,
+                    nullable                      : property?.nullable,
+                    defaultValue                  : property?.defaultValue,
+                    relationship                  : property?.relationship,
+                    relationshipSingularName      : property?.relationshipSingularName,
+                    relationshipAggregate         : property?.relationshipAggregate,
+                    relationshipModulePath        : property?.relationshipModulePath,
+                    relationshipKey               : property?.relationshipKey,
+                    relationshipField             : property?.relationshipField,
+                    intermediateTable             : property?.intermediateTable,
+                    intermediateModel             : property?.intermediateModel,
                     intermediateModelModuleSection: property?.intermediateModelModuleSection,
-                    intermediateModelFile: property?.intermediateModelFile,
-                    index: property?.index,
-                    example: property?.example,
-                    faker: property?.faker,
+                    intermediateModelFile         : property?.intermediateModelFile,
+                    index                         : property?.index,
+                    example                       : property?.example,
+                    faker                         : property?.faker,
                 })
             );
         }
 
         return {
-            boundedContextName  : yamlObj.boundedContextName,
-            moduleName          : yamlObj.moduleName,
-            moduleNames         : yamlObj.moduleNames,
-            aggregateName       : yamlObj.aggregateName,
-            hasOAuth            : yamlObj.hasOAuth,
-            hasTenant           : yamlObj.hasTenant,
-            properties          : properties,
-            excluded            : yamlObj.excluded,
-        }
+            boundedContextName: yamlObj.boundedContextName,
+            moduleName        : yamlObj.moduleName,
+            moduleNames       : yamlObj.moduleNames,
+            aggregateName     : yamlObj.aggregateName,
+            hasOAuth          : yamlObj.hasOAuth,
+            hasTenant         : yamlObj.hasTenant,
+            properties,
+            excluded          : yamlObj.excluded,
+        };
     }
 
     private parseModuleDefinitionSchema(yamlObj: any)
     {
-        if (typeof yamlObj.boundedContextName !== 'string')     throw new Error(`Yaml file structure error, boundedContextName field missing`);
-        if (typeof yamlObj.moduleName !== 'string')             throw new Error(`Yaml file structure error, moduleName field missing`);
-        if (typeof yamlObj.moduleNames !== 'string')            throw new Error(`Yaml file structure error, moduleNames field missing`);
-        if (typeof yamlObj.aggregateName !== 'string')          throw new Error(`Yaml file structure error, aggregateName field missing`);
-        if (typeof yamlObj.hasOAuth !== 'boolean')              throw new Error(`Yaml file structure error, hasOAuth field missing`);
-        if (typeof yamlObj.hasTenant !== 'boolean')             throw new Error(`Yaml file structure error, hasTenant field missing`);
+        if (typeof yamlObj.boundedContextName !== 'string')     throw new Error('Yaml file structure error, boundedContextName field missing');
+        if (typeof yamlObj.moduleName !== 'string')             throw new Error('Yaml file structure error, moduleName field missing');
+        if (typeof yamlObj.moduleNames !== 'string')            throw new Error('Yaml file structure error, moduleNames field missing');
+        if (typeof yamlObj.aggregateName !== 'string')          throw new Error('Yaml file structure error, aggregateName field missing');
+        if (typeof yamlObj.hasOAuth !== 'boolean')              throw new Error('Yaml file structure error, hasOAuth field missing');
+        if (typeof yamlObj.hasTenant !== 'boolean')             throw new Error('Yaml file structure error, hasTenant field missing');
     }
 }

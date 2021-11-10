@@ -11,9 +11,12 @@ export default class Generate extends Command
 
     static flags =
     {
-        help  : flags.help({ char: 'h' }),
-        module: flags.string({ char: 'm' }),
-        force : flags.boolean({ char: 'f' }),
+        // can pass either --help or -h
+        help          : flags.help({ char: 'h' }),
+        verbose       : flags.boolean({ char: 'v' }),
+        force         : flags.boolean({ char: 'f' }),
+        module        : flags.string({ char: 'm' }),
+        noGraphQLTypes: flags.boolean({ char: 'g' }),
     };
 
     static args = [
@@ -21,8 +24,16 @@ export default class Generate extends Command
             name       : 'elementType',
             required   : true,
             description: 'Type element to create',
-            options    : ['bounded-context', 'b', 'module', 'm']
+            options    : [
+                'bounded-context', 'b',
+                'module', 'm'
+            ]
         }
+    ];
+
+    static examples = [
+        '$ aurora generate module -m=my-bounded-context/my-module --force --noGraphQLTypes',
+        '$ aurora --help',
     ];
 
     async run()
@@ -75,8 +86,11 @@ export default class Generate extends Command
             // generate module files
             operations.generateModule();
 
-            // generate graphql files
-            operations.generateGraphqlTypes();
+            if (!flags.noGraphQLTypes)
+            {
+                // generate graphql files
+                operations.generateGraphqlTypes();
+            }
         }
     }
 }
