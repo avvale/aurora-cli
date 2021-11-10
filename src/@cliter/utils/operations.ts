@@ -42,8 +42,8 @@ export class Operations
         // generate intermediate tables
         await this.generateIntermediateTables();
 
-        // generate framework files
-        await this.generateFrameworkFiles();
+        // generate @api files
+        await this.generateApiFiles();
 
         // create references, write imports in ts files
         this.createReferences();
@@ -90,10 +90,10 @@ export class Operations
         await TemplateGenerator.generateIntermediateTables(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
-    async generateFrameworkFiles(): Promise<void>
+    async generateApiFiles(): Promise<void>
     {
         await TemplateGenerator.createDirectory(path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateStaticContents(TemplateElement.FRAMEWORK, path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateStaticContents(TemplateElement.API, path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
     async generateTestingFiles(): Promise<void>

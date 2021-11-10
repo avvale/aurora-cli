@@ -3,7 +3,7 @@ export enum TemplateElement
     APPLICATION         = 'application',
     BOUNDED_CONTEXT     = 'bounded_context',
     MODULE              = 'module',
-    FRAMEWORK           = 'framework',
+    API                 = 'api',
     TEST                = 'test',
     PACKAGE             = 'package',
     POSTMAN             = 'postman',

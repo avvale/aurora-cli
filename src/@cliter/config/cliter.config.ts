@@ -160,6 +160,6 @@ export const cliterConfig: CliterConfig =
     skipDirectories             : ['node_modules', 'dist', 'coverage', 'cliter'],
     avoidOverwritingFilesIfExist: [
         'module/index.ts',
-        'framework/__bounded_context_name__.module.ts'
+        'api/__bounded_context_name__.module.ts'
     ]
 };

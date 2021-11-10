@@ -46,7 +46,7 @@ export default class Seed extends Command
 
             const seederPath = path.join('src', cliterConfig.apiContainer, boundedContextName, moduleName, 'seeder', 'seeder.ts');
 
-            // check if seeder class exists in framework tree folders
+            // check if seeder class exists in @api tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 const environmentSpinner = ora('Creating environment').start();
@@ -68,7 +68,7 @@ export default class Seed extends Command
 
             const seederPath = path.join('src', cliterConfig.apiContainer, boundedContextName, 'seeder', 'seeder.ts');
 
-            // check if seeder class exists in framework tree folders
+            // check if seeder class exists in @api tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 const environmentSpinner = ora('Creating environment').start();
