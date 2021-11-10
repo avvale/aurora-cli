@@ -125,8 +125,12 @@ export class FileManager
 
             if (stats.isFile())
             {
-                // avoid overwriting some files that cannot be overwritten
-                if (FileManager.stateService.flags.force && FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(originPath.replace(templatesPath + '/', '') + '/' + file)) return;
+                // avoid overwriting some files that cannot be overwritten, if file exist
+                if (
+                    fs.existsSync(originPath.replace(templatesPath + '/', '') + '/' + file) &&
+                    FileManager.stateService.flags.force &&
+                    FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(originPath.replace(templatesPath + '/', '') + '/' + file)
+                ) return;
 
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master, when we have not yet created any bounded context or module
