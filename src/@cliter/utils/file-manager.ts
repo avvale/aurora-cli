@@ -76,10 +76,10 @@ export class FileManager
         const ejsRendered = ejs.render(content, data, opts);
 
         // add helpers to handlebars template engine
-        handlebarsHelpers({ handlebars: handlebars });
+        handlebarsHelpers({ handlebars });
         return handlebars.compile(ejsRendered)(data, {
             allowProtoPropertiesByDefault: true,
-            allowProtoMethodsByDefault: true,
+            allowProtoMethodsByDefault   : true,
         });
     }
 

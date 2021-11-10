@@ -15,7 +15,7 @@ aurora-ts-cli
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g aurora-ts-cli
+$ npm install -g typescript ts-node aurora-ts-cli
 $ aurora COMMAND
 running command...
 $ aurora (-v|--version|version)
