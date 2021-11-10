@@ -128,7 +128,7 @@ export class FileManager
             {
                 // avoid overwriting some files that cannot be overwritten, if file exist
                 if (
-                    fs.existsSync(originPath.replace(templatesPath + '/', '') + '/' + file) &&
+                    fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))) &&
                     FileManager.stateService.flags.force &&
                     FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(originPath.replace(templatesPath + '/', '') + '/' + file)
                 ) return;

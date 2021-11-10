@@ -38,7 +38,7 @@ export class ArrayDriver
      * @param item          item to add to array
      * @param array         name array or Array literal where will be added the item
      */
-    public static createArrayItem(sourceFile: SourceFile, item: string, array: string | ArrayLiteralExpression): void
+    public static createArrayItem(sourceFile: SourceFile, item: string, array: string | ArrayLiteralExpression): void
     {
         let arrayLiteralExpression;
 
