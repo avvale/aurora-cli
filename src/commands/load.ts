@@ -230,7 +230,7 @@ export default class Load extends Command
         };
     }
 
-    private parseModuleDefinitionSchema(yamlObj: any)
+    private parseModuleDefinitionSchema(yamlObj: any): void
     {
         if (typeof yamlObj.boundedContextName !== 'string')     throw new Error('Yaml file structure error, boundedContextName field missing');
         if (typeof yamlObj.moduleName !== 'string')             throw new Error('Yaml file structure error, moduleName field missing');

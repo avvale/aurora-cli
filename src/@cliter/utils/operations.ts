@@ -16,7 +16,7 @@ export class Operations
 {
     public static readonly stateService = container.resolve(StateService);
 
-    async generateApplication()
+    async generateApplication(): Promise<void>
     {
         // create directory for application
         if (!fs.existsSync(Operations.stateService.appName)) fs.mkdirSync(Operations.stateService.appName, { recursive: true });
@@ -24,7 +24,7 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.APPLICATION, path.join(Operations.stateService.appName), '.');
     }
 
-    async generatePackage()
+    async generatePackage(): Promise<void>
     {
         if (!Operations.stateService.packageName) throw new Error('To create package is requires package name');
 
@@ -34,7 +34,7 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.PACKAGE, path.join(Operations.stateService.packageName), '.');
     }
 
-    async generateModule()
+    async generateModule(): Promise<void>
     {
         // generate module files
         await this.generateModuleFiles();
@@ -85,35 +85,35 @@ export class Operations
         );
     }
 
-    async generateIntermediateTables()
+    async generateIntermediateTables(): Promise<void>
     {
         await TemplateGenerator.generateIntermediateTables(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
-    async generateFrameworkFiles()
+    async generateFrameworkFiles(): Promise<void>
     {
         await TemplateGenerator.createDirectory(path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
         await TemplateGenerator.generateStaticContents(TemplateElement.FRAMEWORK, path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
-    async generateTestingFiles()
+    async generateTestingFiles(): Promise<void>
     {
         await TemplateGenerator.generateStaticContents(TemplateElement.TEST, path.join('test'), '');
         await this.createTestingForeignModuleImports();
     }
 
-    async generatePostmanFiles()
+    async generatePostmanFiles(): Promise<void>
     {
         await TemplateGenerator.createDirectory('', 'postman');
         await TemplateGenerator.generateStaticContents(TemplateElement.POSTMAN, '', 'postman');
     }
 
-    async generateEnvFile()
+    async generateEnvFile(): Promise<void>
     {
         await TemplateGenerator.generateStaticContents(TemplateElement.ENV, '', Operations.stateService.appName);
     }
 
-    async generateGraphqlTypes()
+    async generateGraphqlTypes(): Promise<string>
     {
         // graphql
         return new Promise((resolve, reject) =>
@@ -143,7 +143,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         });
     }
 
-    async createReferences()
+    async createReferences(): Promise<void>
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
@@ -159,7 +159,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         if (Operations.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
     }
 
-    async createTestingForeignModuleImports()
+    async createTestingForeignModuleImports(): Promise<void>
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
@@ -173,7 +173,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.generateTestingForeignReferences(Operations.stateService.schema.properties);
     }
 
-    createYamlConfigFile()
+    createYamlConfigFile(): void
     {
         // write yaml file
         const yamlStr = yaml.dump(
@@ -201,7 +201,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         fs.writeFileSync(path.join(yamlPath, `${ Operations.stateService.schema.moduleName }.yml`), yamlStr, 'utf8');
     }
 
-    createJsonLockFile()
+    createJsonLockFile(): void
     {
         const jsonPath = path.join(process.cwd(), 'cliter', Operations.stateService.schema.boundedContextName.toKebabCase());
 
