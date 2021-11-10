@@ -185,7 +185,7 @@ export class FileManager
         file: string,
         relativeDirectoryPath: string,
         projectDirectory: string = process.cwd()
-    )
+    ): void
     {
         // read file content
         let contents = fs.readFileSync(originFilePath, 'utf8');
@@ -261,8 +261,8 @@ export class FileManager
             {
                 // add file to lockFiles
                 FileManager.stateService.newLockFiles.push({
-                    path        : relativeFilePath,
-                    integrity   : `sha1:${Cypher.sha1(contents)}`
+                    path     : relativeFilePath,
+                    integrity: `sha1:${Cypher.sha1(contents)}`
                 });
             }
         }
