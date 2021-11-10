@@ -13,12 +13,16 @@ export class TemplateGenerator
     public static readonly stateService = container.resolve(StateService);
 
     // generate static files from templates folder, with templateElement know that type of element create, bounded_context, module, etc.
-    static generateStaticContents(templateElement: TemplateElement, relativeTargetBasePath: string, relativeTargetPath: string)
+    static generateStaticContents(
+        templateElement: TemplateElement,
+        relativeTargetBasePath: string,
+        relativeTargetPath: string
+    ): void
     {
         FileManager.generateContents(
             path.join(TemplateGenerator.templatePath, templateElement),
+            relativeTargetBasePath,
             relativeTargetPath,
-            relativeTargetBasePath
         );
     }
 
@@ -29,7 +33,11 @@ export class TemplateGenerator
             // set current property for template
             TemplateGenerator.stateService.currentProperty = property;
 
-            FileManager.generateContents(path.join(TemplateGenerator.templatePath, 'intermediate_table'), relativeTargetPath, relativeTargetBasePath);
+            FileManager.generateContents(
+                path.join(TemplateGenerator.templatePath, 'intermediate_table'),
+                relativeTargetBasePath,
+                relativeTargetPath,
+            );
         }
     }
 
@@ -37,7 +45,7 @@ export class TemplateGenerator
     {
         const modulePath = path.join(TemplateGenerator.projectDirectory, relativeTargetBasePath, directory);
 
-        if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, {recursive: true});
+        if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
     }
 
     static generateValueObjects(relativeTargetBasePath: string, relativeTargetPath: string)

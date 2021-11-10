@@ -101,12 +101,13 @@ export class FileManager
     /**
      * Render all files and folders from template folder
      * @param originPath
-     * @param relativePath
+     * @param relativeTargetPath
+     * @param relativeTargetBasePath
      */
     static generateContents(
         originPath: string,
-        relativePath: string,
-        rootTemplatePath: string,
+        relativeTargetBasePath: string,
+        relativeTargetPath: string,
     ): void
     {
         const projectDirectory  = process.cwd();
@@ -134,9 +135,9 @@ export class FileManager
 
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master, when we have not yet created any bounded context or module
-                if (FileManager.stateService.schema?.excluded?.includes(path.join(rootTemplatePath, relativePath, FileManager.renderFilename(file))))
+                if (FileManager.stateService.schema?.excluded?.includes(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))))
                 {
-                    FileManager.stateService.command.log(`%s ${path.join(rootTemplatePath, relativePath, FileManager.renderFilename(file))} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+                    FileManager.stateService.command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
                     return;
                 }
 
@@ -144,26 +145,30 @@ export class FileManager
                 FileManager.manageFileTemplate(
                     originFilePath,
                     file,
-                    path.join(rootTemplatePath, relativePath)
+                    path.join(relativeTargetBasePath, relativeTargetPath)
                 );
             }
             else if (stats.isDirectory())
             {
                 const mappedDirectory = FileManager.renderFilename(file);
 
-                if (fs.existsSync(path.join(projectDirectory, rootTemplatePath, relativePath, mappedDirectory)))
+                if (fs.existsSync(path.join(projectDirectory, relativeTargetBasePath, relativeTargetPath, mappedDirectory)))
                 {
                     if (FileManager.stateService.flags.verbose) FileManager.stateService.command.log(`${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${mappedDirectory} exist`);
                 }
                 else
                 {
                     // create folder in destination folder
-                    fs.mkdirSync(path.join(projectDirectory, rootTemplatePath, relativePath, mappedDirectory), {recursive: true});
+                    fs.mkdirSync(path.join(projectDirectory, relativeTargetBasePath, relativeTargetPath, mappedDirectory), {recursive: true});
                     FileManager.stateService.command.log(`${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${mappedDirectory} created`);
                 }
 
                 // copy files/folder inside current folder recursively
-                this.generateContents(path.join(originPath, file), path.join(relativePath, mappedDirectory), rootTemplatePath);
+                this.generateContents(
+                    path.join(originPath, file),
+                    relativeTargetBasePath,
+                    path.join(relativeTargetPath, mappedDirectory),
+                );
             }
         });
     }
