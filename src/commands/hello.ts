@@ -15,6 +15,6 @@ export default class Key extends Command
     {
         const { args, flags } = this.parse(Key);
 
-        console.log('Hello!!');
+        console.log('Hello, from Aurora CLI!!');
     }
 }

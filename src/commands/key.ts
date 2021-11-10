@@ -12,14 +12,14 @@ export default class Key extends Command
 
     static args = [];
 
-    async run()
+    async run(): Promise<void>
     {
         const { args, flags } = this.parse(Key);
 
         const { prvKeyObj, pubKeyObj } = rs.KEYUTIL.generateKeypair('RSA', 2048);
 
-        var prvPEM = rs.KEYUTIL.getPEM(prvKeyObj, 'PKCS1PRV');
-        var pubPEM = rs.KEYUTIL.getPEM(pubKeyObj);
+        const prvPEM = rs.KEYUTIL.getPEM(prvKeyObj, 'PKCS1PRV');
+        const pubPEM = rs.KEYUTIL.getPEM(pubKeyObj);
 
         rsu.saveFile('src/oauth-private.key', prvPEM);
         rsu.saveFile('src/oauth-public.key', pubPEM);

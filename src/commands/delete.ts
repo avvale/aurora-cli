@@ -1,4 +1,4 @@
-import { Command, flags } from '@oclif/command'
+import { Command, flags } from '@oclif/command';
 import * as fs from 'fs';
 import * as chalk from 'chalk';
 import * as inquirer from 'inquirer';
@@ -19,19 +19,19 @@ export default class Delete extends Command
 
     static args = [
         {
-            name: 'elementType',
-            required: true,
+            name       : 'elementType',
+            required   : true,
             description: 'Type element to delete',
-            options: ['bounded-context', 'b', 'module', 'm']
+            options    : ['bounded-context', 'b', 'module', 'm']
         },
         {
-            name: 'elementName',
-            required: true,
+            name       : 'elementName',
+            required   : true,
             description: 'Name element to create'
         }
     ];
 
-    async run()
+    async run(): Promise<void>
     {
         const { args, flags } = this.parse(Delete);
 
@@ -60,10 +60,11 @@ export default class Delete extends Command
         const questions = [];
 
         questions.push({
-            name: 'hasDelete',
+            name   : 'hasDelete',
             message: `Do you want delete the module ${elementName}?`,
-            type: 'confirm'
+            type   : 'confirm'
         });
+
         return await inquirer.prompt(questions);
     }
 }
