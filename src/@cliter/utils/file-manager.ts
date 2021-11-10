@@ -100,25 +100,25 @@ export class FileManager
 
     /**
      * Render all files and folders from template folder
-     * @param currentPath
+     * @param originPath
      * @param relativePath
      */
     static generateContents(
-        currentPath: string,
+        originPath: string,
         relativePath: string,
         rootTemplatePath: string,
-    )
+    ): void
     {
         const projectDirectory  = process.cwd();
         const templatesPath     = path.join(__dirname, '../..', 'templates');
 
         // read all files/folders (1 level) from template folder
-        const filesToCreate = fs.readdirSync(currentPath);
+        const filesToCreate = fs.readdirSync(originPath);
 
         // loop each file/folder
         filesToCreate.forEach(async file =>
         {
-            const originFilePath = path.join(currentPath, file);
+            const originFilePath = path.join(originPath, file);
 
             // get stats about the current file
             const stats = fs.statSync(originFilePath);
@@ -126,7 +126,7 @@ export class FileManager
             if (stats.isFile())
             {
                 // avoid overwriting some files that cannot be overwritten
-                if (FileManager.stateService.flags.force && FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(currentPath.replace(templatesPath + '/', '') + '/' + file)) return;
+                if (FileManager.stateService.flags.force && FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(originPath.replace(templatesPath + '/', '') + '/' + file)) return;
 
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master, when we have not yet created any bounded context or module
@@ -159,7 +159,7 @@ export class FileManager
                 }
 
                 // copy files/folder inside current folder recursively
-                this.generateContents(path.join(currentPath, file), path.join(relativePath, mappedDirectory), rootTemplatePath);
+                this.generateContents(path.join(originPath, file), path.join(relativePath, mappedDirectory), rootTemplatePath);
             }
         });
     }

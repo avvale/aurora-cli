@@ -158,5 +158,8 @@ export const cliterConfig: CliterConfig =
         'finish'      : 'Finish comparison',
     },
     skipDirectories             : ['node_modules', 'dist', 'coverage', 'cliter'],
-    avoidOverwritingFilesIfExist: ['module/index.ts', 'framework/__bounded_context_name__.module.ts']
+    avoidOverwritingFilesIfExist: [
+        'module/index.ts',
+        'framework/__bounded_context_name__.module.ts'
+    ]
 };

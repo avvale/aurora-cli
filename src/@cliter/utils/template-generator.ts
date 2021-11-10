@@ -15,7 +15,11 @@ export class TemplateGenerator
     // generate static files from templates folder, with templateElement know that type of element create, bounded_context, module, etc.
     static generateStaticContents(templateElement: TemplateElement, relativeTargetBasePath: string, relativeTargetPath: string)
     {
-        FileManager.generateContents(path.join(TemplateGenerator.templatePath, templateElement), relativeTargetPath, relativeTargetBasePath);
+        FileManager.generateContents(
+            path.join(TemplateGenerator.templatePath, templateElement),
+            relativeTargetPath,
+            relativeTargetBasePath
+        );
     }
 
     static generateIntermediateTables(relativeTargetBasePath: string, relativeTargetPath: string)
