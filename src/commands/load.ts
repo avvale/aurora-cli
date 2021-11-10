@@ -34,7 +34,10 @@ export default class Load extends Command
             name       : 'elementType',
             required   : true,
             description: 'Type element to create',
-            options    : ['bounded-context', 'b', 'module', 'm']
+            options    : [
+                'bounded-context', 'b',
+                'module', 'm'
+            ]
         }
     ];
 

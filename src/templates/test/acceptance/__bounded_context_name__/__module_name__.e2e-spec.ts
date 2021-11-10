@@ -3,8 +3,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
-import { GraphQLConfigModule } from './../../../src/{{ config.apiContainer }}/core/modules/graphql/graphql-config.module';
-import { {{ toPascalCase schema.boundedContextName }}Module } from './../../../src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
+import { GraphQLConfigModule } from '{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
+import { {{ toPascalCase schema.boundedContextName }}Module } from '{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
@@ -37,39 +37,39 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
-                imports: [
-                    ...importForeignModules,
-                    {{ toPascalCase schema.boundedContextName }}Module,
-                    {{#if schema.hasOAuth }}
-                    {{#unlessEq (toPascalCase schema.boundedContextName) 'Iam' }}
-                    IamModule,
-                    {{/unlessEq }}
-                    {{/if }}
-                    GraphQLConfigModule,
-                    SequelizeModule.forRoot({
-                        dialect: 'sqlite',
-                        storage: ':memory:',
-                        logging: false,
-                        autoLoadModels: true,
-                        models: [],
-                    }),
-                    {{#if schema.hasOAuth }}
-                    JwtModule.register({
-                        privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
-                        publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
-                        signOptions: {
-                            algorithm: 'RS256',
-                        }
-                    }),
-                    {{/if }}
-                ],
-                providers: [
-                    Mock{{ toPascalCase schema.moduleName }}Seeder,
-                    {{#if schema.hasOAuth }}
-                    TestingJwtService,
-                    {{/if }}
-                ]
-            })
+            imports: [
+                ...importForeignModules,
+                {{ toPascalCase schema.boundedContextName }}Module,
+                {{#if schema.hasOAuth }}
+                {{#unlessEq (toPascalCase schema.boundedContextName) 'Iam' }}
+                IamModule,
+                {{/unlessEq }}
+                {{/if }}
+                GraphQLConfigModule,
+                SequelizeModule.forRoot({
+                    dialect       : 'sqlite',
+                    storage       : ':memory:',
+                    logging       : false,
+                    autoLoadModels: true,
+                    models        : [],
+                }),
+                {{#if schema.hasOAuth }}
+                JwtModule.register({
+                    privateKey: fs.readFileSync('src/oauth-private.key', 'utf8'),
+                    publicKey: fs.readFileSync('src/oauth-public.key', 'utf8'),
+                    signOptions: {
+                        algorithm: 'RS256',
+                    }
+                }),
+                {{/if }}
+            ],
+            providers: [
+                Mock{{ toPascalCase schema.moduleName }}Seeder,
+                {{#if schema.hasOAuth }}
+                TestingJwtService,
+                {{/if }}
+            ]
+        })
             {{#if schema.hasOAuth }}
             {{#unlessEq (toPascalCase schema.moduleName) 'Account' }}
             .overrideProvider(IAccountRepository)

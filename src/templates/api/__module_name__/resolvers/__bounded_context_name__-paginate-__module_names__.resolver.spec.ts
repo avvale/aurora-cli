@@ -18,15 +18,15 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Resolver,
                 {
-                    provide: IQueryBus,
+                    provide : IQueryBus,
                     useValue: {
-                        ask: () => {},
+                        ask: () => { /**/ },
                     }
                 },
                 {
-                    provide: ICommandBus,
+                    provide : ICommandBus,
                     useValue: {
-                        dispatch: () => {},
+                        dispatch: () => { /**/ },
                     }
                 },
             ]

@@ -20,15 +20,15 @@ describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.
             ],
             providers: [
                 {
-                    provide: IQueryBus,
+                    provide : IQueryBus,
                     useValue: {
-                        ask: () => {},
+                        ask: () => { /**/ },
                     }
                 },
                 {
-                    provide: ICommandBus,
+                    provide : ICommandBus,
                     useValue: {
-                        dispatch: () => {},
+                        dispatch: () => { /**/ },
                     }
                 },
             ]

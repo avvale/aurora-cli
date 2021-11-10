@@ -19,15 +19,15 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver,
                 {
-                    provide: IQueryBus,
+                    provide : IQueryBus,
                     useValue: {
-                        ask: () => {},
+                        ask: () => { /**/ },
                     }
                 },
                 {
-                    provide: ICommandBus,
+                    provide : ICommandBus,
                     useValue: {
-                        dispatch: () => {},
+                        dispatch: () => { /**/ },
                     }
                 },
             ]
