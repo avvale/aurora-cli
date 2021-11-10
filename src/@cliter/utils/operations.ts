@@ -64,11 +64,20 @@ export class Operations
         this.createJsonLockFile();
     }
 
-    async generateModuleFiles()
+    async generateModuleFiles(): Promise<void>
     {
-        await TemplateGenerator.createDirectory(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateStaticContents(TemplateElement.MODULE, path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateValueObjects(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.createDirectory(
+            path.join('src', cliterConfig.applicationsContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.MODULE, path.join('src', cliterConfig.applicationsContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
+        await TemplateGenerator.generateValueObjects(
+            path.join('src', cliterConfig.applicationsContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
     }
 
     async generateIntermediateTables()
