@@ -36,7 +36,7 @@ export default class Generate extends Command
         '$ aurora --help',
     ];
 
-    async run()
+    async run(): Promise<void>
     {
         const { args, flags } = this.parse(Generate);
 
