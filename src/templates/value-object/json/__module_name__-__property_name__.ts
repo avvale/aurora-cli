@@ -7,8 +7,8 @@ export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty
     constructor(value: any, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name: '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
-            nullable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
+            name       : '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
+            nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
         }, validationRules));
     }

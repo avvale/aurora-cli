@@ -7,10 +7,10 @@ export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name: '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
-            nullable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
+            name       : '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
+            nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
-            {{#if currentProperty.length}}length: {{ currentProperty.length }},{{/if}}
+            {{#if currentProperty.length}}length     : {{ currentProperty.length }},{{/if}}
 
         }, validationRules));
     }
