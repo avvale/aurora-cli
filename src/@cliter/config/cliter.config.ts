@@ -30,8 +30,8 @@ export const cliterConfig: CliterConfig =
     apiContainer                      : '@api',
     auroraLocalPackage                : '@aurora',
     auroraCorePackage                 : 'aurora-ts-core',
-    configYamlVersion                 : '1.0.0',
-    lockJsonVersion                   : '1.0.0',
+    configYamlVersion                 : '0.0.1',
+    lockJsonVersion                   : '0.0.1',
     timestampFields                   : ['createdAt', 'updatedAt', 'deletedAt'],
     deletedAtField                    : ['deletedAt'],
     sqlTypesEquivalenceJavascriptTypes: {
