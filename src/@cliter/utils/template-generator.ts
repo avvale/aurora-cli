@@ -5,6 +5,7 @@ import { container } from 'tsyringe';
 import { TemplateElement } from './../types';
 import { StateService } from '../services/state.service';
 import { FileManager } from './file-manager';
+import { Property } from './property';
 
 export class TemplateGenerator
 {
@@ -33,13 +34,11 @@ export class TemplateGenerator
     {
         for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipIntermediateTable)
         {
-            // set current property for template
-            TemplateGenerator.stateService.currentProperty = property;
-
             FileManager.generateContents(
                 path.join(TemplateGenerator.templatePath, 'intermediate_table'),
                 relativeTargetBasePath,
                 relativeTargetPath,
+                { currentProperty: property }
             );
         }
     }
@@ -54,28 +53,68 @@ export class TemplateGenerator
         if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
     }
 
+    /**
+     *
+     * @param relativeTargetBasePath
+     * @param relativeTargetPath
+     */
     static generateValueObjects(
         relativeTargetBasePath: string,
         relativeTargetPath: string
     ): void
     {
+        // generate ValueObjects
         for (const property of TemplateGenerator.stateService.schema.properties.valueObjects)
         {
-            // set property to be used in manageFileTemplate
-            TemplateGenerator.stateService.currentProperty = property;
-
-            // read value object from our data type
-            const originFilePath = path.join(TemplateGenerator.templatePath, 'value-object', property.type, '__module_name__-__property_name__.ts');
-
-            // TODO,throw error when no exist value object
-            // check that exists value object template
-            if (!fs.existsSync(originFilePath)) return;
-
-            FileManager.manageFileTemplate(
-                originFilePath,
-                '__module_name__-__property_name__.ts',
-                path.join(relativeTargetBasePath, relativeTargetPath, TemplateGenerator.stateService.schema.moduleName, 'domain', 'value-objects')
+            TemplateGenerator.generateValueObject(
+                relativeTargetBasePath,
+                relativeTargetPath,
+                property
             );
         }
+
+        // generate i18n ValueObjects
+        for (const property of TemplateGenerator.stateService.schema.propertiesI18n.valueObjects)
+        {
+            TemplateGenerator.generateValueObject(
+                relativeTargetBasePath,
+                relativeTargetPath,
+                property,
+                true
+            );
+        }
+    }
+
+    /**
+     *
+     * @param relativeTargetBasePath
+     * @param relativeTargetPath
+     * @param property
+     * @param isI18N
+     * @returns
+     */
+    static generateValueObject(
+        relativeTargetBasePath: string,
+        relativeTargetPath: string,
+        property: Property,
+        isI18N = false,
+    ): void
+    {
+        // read value object from our data type
+        const originFilePath = path.join(TemplateGenerator.templatePath, 'value-object', property.type, '__module_name__-__property_name__.ts');
+
+        // TODO,throw error when no exist value object
+        // check that exists value object template
+        if (!fs.existsSync(originFilePath)) return;
+
+        FileManager.manageFileTemplate(
+            originFilePath,
+            '__module_name__-__property_name__.ts',
+            path.join(relativeTargetBasePath, relativeTargetPath, TemplateGenerator.stateService.schema.moduleName, 'domain', 'value-objects'),
+            {
+                moduleNameSuffix: isI18N ? '-i18n' : '',
+                currentProperty : property
+            },
+        );
     }
 }

@@ -2,7 +2,6 @@ import { singleton } from 'tsyringe';
 import { Command } from '@oclif/command';
 import { LiteralObject, LockFile, ModuleDefinitionSchema, SqlRelationship, SqlType } from './../types';
 import { CliterConfig, cliterConfig } from './../config/cliter.config';
-import { Property } from './../utils/property';
 import { v4 as uuidv4 } from 'uuid';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
@@ -19,7 +18,6 @@ export class StateService
     public lockFiles: LockFile[] = [];
     public newLockFiles: LockFile[] = [];
     public flags!: LiteralObject;
-    public currentProperty: Property | undefined;       // property container to be used in templates and others scenarios
     public relationship = SqlRelationship;
     public sqlType = SqlType;
     private _originFiles: string[] = [];                // origin files generated

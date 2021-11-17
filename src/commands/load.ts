@@ -221,6 +221,40 @@ export default class Load extends Command
             );
         }
 
+        // create properties from i18n table
+        const propertiesI18n = new Properties();
+
+        for (const property of yamlObj?.aggregateI18nProperties)
+        {
+            propertiesI18n.add(
+                new Property({
+                    name                          : property.name,
+                    type                          : property.type,
+                    primaryKey                    : property?.primaryKey,
+                    enumOptions                   : property?.enumOptions?.join(),
+                    decimals                      : property?.decimals,
+                    length                        : property?.length,
+                    minLength                     : property?.minLength,
+                    maxLength                     : property?.maxLength,
+                    nullable                      : property?.nullable,
+                    defaultValue                  : property?.defaultValue,
+                    relationship                  : property?.relationship,
+                    relationshipSingularName      : property?.relationshipSingularName,
+                    relationshipAggregate         : property?.relationshipAggregate,
+                    relationshipModulePath        : property?.relationshipModulePath,
+                    relationshipKey               : property?.relationshipKey,
+                    relationshipField             : property?.relationshipField,
+                    intermediateTable             : property?.intermediateTable,
+                    intermediateModel             : property?.intermediateModel,
+                    intermediateModelModuleSection: property?.intermediateModelModuleSection,
+                    intermediateModelFile         : property?.intermediateModelFile,
+                    index                         : property?.index,
+                    example                       : property?.example,
+                    faker                         : property?.faker,
+                })
+            );
+        }
+
         return {
             boundedContextName: yamlObj.boundedContextName,
             moduleName        : yamlObj.moduleName,
@@ -229,6 +263,7 @@ export default class Load extends Command
             hasOAuth          : yamlObj.hasOAuth,
             hasTenant         : yamlObj.hasTenant,
             properties,
+            propertiesI18n,
             excluded          : yamlObj.excluded,
         };
     }

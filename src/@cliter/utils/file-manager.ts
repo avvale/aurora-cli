@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Options } from 'ejs';
 import { StateService } from './../services/state.service';
 import { Cypher } from './cypher';
+import { Property } from './property';
 import * as chalk from 'chalk';
 import * as ejs from 'ejs';
 import * as fs from 'fs';
@@ -37,7 +38,7 @@ export class FileManager
      * @param currentPath
      * @param skipDirectories
      */
-    static deleteOriginFiles(currentPath: string)
+    static deleteOriginFiles(currentPath: string): void
     {
         // read all files/folders (1 level) from template folder
         const files = fs.readdirSync(currentPath);
@@ -71,7 +72,7 @@ export class FileManager
      * @param data
      * @param opts
      */
-    static renderContent(content: string, data: any, opts?: Options)
+    static renderContent(content: string, data: any, opts?: Options): string
     {
         const ejsRendered = ejs.render(content, data, opts);
 
@@ -86,14 +87,31 @@ export class FileManager
     /**
      * Render filename and folder name
      * @param name
+     * @param prefix
+     * @param suffix
      */
-    static renderFilename(name: string): string
+    static renderFilename(
+        name: string,
+        {
+            boundedContextPrefix = '',
+            boundedContextSuffix = '',
+            moduleNamePrefix = '',
+            moduleNameSuffix = '',
+            currentProperty = undefined,
+        }: {
+            boundedContextPrefix?: string;
+            boundedContextSuffix?: string;
+            moduleNamePrefix?: string;
+            moduleNameSuffix?: string;
+            currentProperty?: Property;
+        } = {},
+    ): string
     {
-        if (name.includes('__bounded_context_name__'))                                              name = name.replace(/__bounded_context_name__/gi, FileManager.stateService.schema.boundedContextName.toKebabCase());
-        if (name.includes('__module_name__'))                                                       name = name.replace(/__module_name__/gi, FileManager.stateService.schema.moduleName.toKebabCase());
-        if (name.includes('__module_names__'))                                                      name = name.replace(/__module_names__/gi, FileManager.stateService.schema.moduleNames.toKebabCase());
-        if (name.includes('__property_name__') && FileManager.stateService.currentProperty)         name = name.replace(/__property_name__/gi, FileManager.stateService.currentProperty.name.toKebabCase());
-        if (name.includes('__property_native_name__') && FileManager.stateService.currentProperty)  name = name.replace(/__property_native_name__/gi, FileManager.stateService.currentProperty.nativeName.toKebabCase());
+        if (name.includes('__bounded_context_name__'))                      name = name.replace(/__bounded_context_name__/gi, boundedContextPrefix + FileManager.stateService.schema.boundedContextName.toKebabCase() + boundedContextSuffix);
+        if (name.includes('__module_name__'))                               name = name.replace(/__module_name__/gi, moduleNamePrefix + FileManager.stateService.schema.moduleName.toKebabCase() + moduleNameSuffix);
+        if (name.includes('__module_names__'))                              name = name.replace(/__module_names__/gi, FileManager.stateService.schema.moduleNames.toKebabCase());
+        if (name.includes('__property_name__') && currentProperty)          name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
+        if (name.includes('__property_native_name__') && currentProperty)   name = name.replace(/__property_native_name__/gi, currentProperty.nativeName.toKebabCase());
 
         return name;
     }
@@ -108,9 +126,14 @@ export class FileManager
         originPath: string,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
+        {
+            currentProperty = undefined
+        }: {
+            currentProperty?: Property;
+        } = {},
     ): void
     {
-        const projectDirectory  = process.cwd();
+        const targetBasePath    = process.cwd();
         const templatesPath     = path.join(__dirname, '../..', 'templates');
 
         // read all files/folders (1 level) from template folder
@@ -145,21 +168,22 @@ export class FileManager
                 FileManager.manageFileTemplate(
                     originFilePath,
                     file,
-                    path.join(relativeTargetBasePath, relativeTargetPath)
+                    path.join(relativeTargetBasePath, relativeTargetPath),
+                    { currentProperty }
                 );
             }
             else if (stats.isDirectory())
             {
                 const mappedDirectory = FileManager.renderFilename(file);
 
-                if (fs.existsSync(path.join(projectDirectory, relativeTargetBasePath, relativeTargetPath, mappedDirectory)))
+                if (fs.existsSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, mappedDirectory)))
                 {
                     if (FileManager.stateService.flags.verbose) FileManager.stateService.command.log(`${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${mappedDirectory} exist`);
                 }
                 else
                 {
                     // create folder in destination folder
-                    fs.mkdirSync(path.join(projectDirectory, relativeTargetBasePath, relativeTargetPath, mappedDirectory), {recursive: true});
+                    fs.mkdirSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, mappedDirectory), { recursive: true });
                     FileManager.stateService.command.log(`${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${mappedDirectory} created`);
                 }
 
@@ -168,6 +192,7 @@ export class FileManager
                     path.join(originPath, file),
                     relativeTargetBasePath,
                     path.join(relativeTargetPath, mappedDirectory),
+                    { currentProperty }
                 );
             }
         });
@@ -177,30 +202,53 @@ export class FileManager
      * Create and render file template
      * @param originFilePath
      * @param file
-     * @param relativeDirectoryPath
-     * @param projectDirectory
+     * @param relativeTargetPath
+     * @param targetBasePath
      */
     static manageFileTemplate(
         originFilePath: string,
         file: string,
-        relativeDirectoryPath: string,
-        projectDirectory: string = process.cwd()
+        relativeTargetPath: string,
+        {
+            targetBasePath = process.cwd(),
+            boundedContextPrefix = '',
+            boundedContextSuffix = '',
+            moduleNamePrefix = '',
+            moduleNameSuffix = '',
+            currentProperty = undefined
+        }: {
+            targetBasePath?: string;
+            boundedContextPrefix?: string;
+            boundedContextSuffix?: string;
+            moduleNamePrefix?: string;
+            moduleNameSuffix?: string;
+            currentProperty?: Property;
+        } = {},
     ): void
     {
         // read file content
         let contents = fs.readFileSync(originFilePath, 'utf8');
 
         // replace variables with ejs template engine
-        contents = FileManager.renderContent(contents, FileManager.stateService, { filename: originFilePath });
+        contents = FileManager.renderContent(contents, { ...FileManager.stateService, currentProperty }, { filename: originFilePath });
 
         // render name of file
-        const mappedFile = FileManager.renderFilename(file);
+        const mappedFile = FileManager.renderFilename(
+            file,
+            {
+                boundedContextPrefix,
+                boundedContextSuffix,
+                moduleNamePrefix,
+                moduleNameSuffix,
+                currentProperty
+            }
+        );
 
         // relative path to project for create/read file lock.json
-        const relativeFilePath = path.join(relativeDirectoryPath, mappedFile);
+        const relativeFilePath = path.join(relativeTargetPath, mappedFile);
 
         // write file to destination folder
-        const writePath = path.join(projectDirectory, relativeFilePath);
+        const writePath = path.join(targetBasePath, relativeFilePath);
 
         // check if file exists
         const existFile = fs.existsSync(writePath);
@@ -244,7 +292,7 @@ export class FileManager
 
                     const originFileName = mappedFile.replace(/\.(?=[^.]*$)/, '.origin.');
 
-                    FileManager.stateService.originFiles.push(path.join(relativeDirectoryPath, originFileName));
+                    FileManager.stateService.originFiles.push(path.join(relativeTargetPath, originFileName));
 
                     FileManager.stateService.command.log(`%s ${originFileName} created`, chalk.redBright.bold('[ORIGIN FILE CREATED]'));
                 }
