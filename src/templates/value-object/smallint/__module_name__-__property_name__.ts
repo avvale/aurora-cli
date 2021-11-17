@@ -1,13 +1,13 @@
 import { SmallintValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
-export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends SmallintValueObject
+export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }} extends SmallintValueObject
 {
-    public readonly type: '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}';
+    public readonly type: '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}';
 
     constructor(value: number, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
+            name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}',
             nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             maxLength  : {{ currentProperty.maxLength }},

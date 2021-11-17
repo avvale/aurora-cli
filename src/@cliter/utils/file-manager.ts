@@ -102,13 +102,13 @@ export class FileManager
             boundedContextPrefix?: string;
             boundedContextSuffix?: string;
             moduleNamePrefix?: string;
-            moduleNameSuffix?: string;
+            moduleNameSuffix?: string; // use to set i18n items
             currentProperty?: Property;
         } = {},
     ): string
     {
-        if (name.includes('__bounded_context_name__'))                      name = name.replace(/__bounded_context_name__/gi, boundedContextPrefix + FileManager.stateService.schema.boundedContextName.toKebabCase() + boundedContextSuffix);
-        if (name.includes('__module_name__'))                               name = name.replace(/__module_name__/gi, moduleNamePrefix + FileManager.stateService.schema.moduleName.toKebabCase() + moduleNameSuffix);
+        if (name.includes('__bounded_context_name__'))                      name = name.replace(/__bounded_context_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + FileManager.stateService.schema.boundedContextName.toKebabCase() + (boundedContextSuffix ? '-' + boundedContextSuffix : ''));
+        if (name.includes('__module_name__'))                               name = name.replace(/__module_name__/gi, (moduleNamePrefix ? moduleNamePrefix + '-' : '') + FileManager.stateService.schema.moduleName.toKebabCase() + (moduleNameSuffix ? '-' + moduleNameSuffix : ''));
         if (name.includes('__module_names__'))                              name = name.replace(/__module_names__/gi, FileManager.stateService.schema.moduleNames.toKebabCase());
         if (name.includes('__property_name__') && currentProperty)          name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
         if (name.includes('__property_native_name__') && currentProperty)   name = name.replace(/__property_native_name__/gi, currentProperty.nativeName.toKebabCase());
@@ -117,7 +117,7 @@ export class FileManager
     }
 
     /**
-     * Render all files and folders from template folder
+     * Render all files and folders from template folder recursively.
      * @param originPath
      * @param relativeTargetPath
      * @param relativeTargetBasePath
@@ -221,7 +221,7 @@ export class FileManager
             boundedContextPrefix?: string;
             boundedContextSuffix?: string;
             moduleNamePrefix?: string;
-            moduleNameSuffix?: string;
+            moduleNameSuffix?: string; // use to set i18n items
             currentProperty?: Property;
         } = {},
     ): void
@@ -230,7 +230,14 @@ export class FileManager
         let contents = fs.readFileSync(originFilePath, 'utf8');
 
         // replace variables with ejs template engine
-        contents = FileManager.renderContent(contents, { ...FileManager.stateService, currentProperty }, { filename: originFilePath });
+        contents = FileManager.renderContent(contents, {
+            ...FileManager.stateService,
+            currentProperty,
+            boundedContextPrefix,
+            boundedContextSuffix,
+            moduleNamePrefix,
+            moduleNameSuffix,
+        }, { filename: originFilePath });
 
         // render name of file
         const mappedFile = FileManager.renderFilename(

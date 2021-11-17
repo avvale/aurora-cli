@@ -1,13 +1,13 @@
 import { DataValueObject, PasswordValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
-export class {{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }} extends PasswordValueObject
+export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }} extends PasswordValueObject
 {
-    public readonly type: '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}';
+    public readonly type: '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
-            name       : '{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.name }}',
+            name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}',
             nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             maxLength  : {{ currentProperty.maxLength }},
