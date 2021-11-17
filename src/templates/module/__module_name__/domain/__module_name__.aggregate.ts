@@ -8,7 +8,9 @@ import {
     {{#if @first}}
     // i18n
     {{/if}}
+    {{#allowI18nProperty ../schema.moduleName name}}
     {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
+    {{/allowI18nProperty}}
     {{/each}}
 } from './value-objects';
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
@@ -43,7 +45,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {{#if @first}}
     // i18n
     {{/if}}
+    {{#allowI18nProperty ../schema.moduleName name}}
     {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }};
+    {{/allowI18nProperty}}
     {{/each}}
 
     // eager relationship

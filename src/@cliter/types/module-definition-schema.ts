@@ -10,5 +10,5 @@ export interface ModuleDefinitionSchema
     hasTenant: boolean;
     properties: Properties;
     propertiesI18n: Properties;
-    excluded?: string[];
+    excluded?: string[];        // set files to avoid create
 }

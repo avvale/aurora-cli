@@ -4,7 +4,7 @@ handlebars.registerHelper('notInArray', function(this: any, items, ...options)
 {
     let file = '';
     let condition;
-    for (let option of options)
+    for (const option of options)
     {
         if (typeof option === 'string')
         {

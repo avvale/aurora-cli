@@ -18,6 +18,7 @@ import './../prototypes/string-to-camel-case.interface';
 import './../prototypes/string-to-camel-case';
 import './../prototypes/string-to-pascal-case.interface';
 import './../prototypes/string-to-pascal-case';
+import './../handlebars/helpers/allow-i18n-property';
 import './../handlebars/helpers/string-to-camel-case';
 import './../handlebars/helpers/string-to-kebab-case';
 import './../handlebars/helpers/string-to-pascal-case';
@@ -78,6 +79,7 @@ export class FileManager
 
         // add helpers to handlebars template engine
         handlebarsHelpers({ handlebars });
+
         return handlebars.compile(ejsRendered)(data, {
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault   : true,
