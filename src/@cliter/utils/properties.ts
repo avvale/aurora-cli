@@ -4,7 +4,7 @@ import { SqlRelationship, SqlType } from './../types';
 export class Properties
 {
     timestampFields: string[] = ['createdAt', 'updatedAt', 'deletedAt'];
-    deletedAtField : string[] = ['deletedAt'];
+    deletedAtField: string[] = ['deletedAt'];
 
     constructor(
         public properties: Property[] = []
@@ -92,6 +92,15 @@ export class Properties
         return this.properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+    }
+
+    get aggregateI18n(): Property[]
+    {
+        return this.properties
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                     // exclude one to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))   // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !this.timestampFields.includes(property.name))
+            .filter(property => property.name !== 'id' );
     }
 
     // commands

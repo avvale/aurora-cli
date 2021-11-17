@@ -3,6 +3,13 @@ import {
     {{#each schema.properties.valueObjects}}
     {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
     {{/each}}
+
+    {{#each schema.propertiesI18n.valueObjects}}
+    {{#if @first}}
+    // i18n
+    {{/if}}
+    {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
+    {{/each}}
 } from './value-objects';
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
 import { Created{{ toPascalCase schema.moduleName }}Event } from './../application/events/created-{{ toKebabCase schema.moduleName }}.event';
@@ -30,6 +37,13 @@ export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each schema.properties.aggregate}}
     {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
+    {{/each}}
+
+    {{#each schema.propertiesI18n.aggregateI18n}}
+    {{#if @first}}
+    // i18n
+    {{/if}}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }};
     {{/each}}
 
     // eager relationship
