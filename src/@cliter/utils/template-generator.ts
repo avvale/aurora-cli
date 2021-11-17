@@ -97,7 +97,7 @@ export class TemplateGenerator
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         property: Property,
-        isI18N = false,
+        isI18n = false,
     ): void
     {
         // read value object from our data type
@@ -112,7 +112,7 @@ export class TemplateGenerator
             '__module_name__-__property_name__.ts',
             path.join(relativeTargetBasePath, relativeTargetPath, TemplateGenerator.stateService.schema.moduleName, 'domain', 'value-objects'),
             {
-                moduleNameSuffix: isI18N ? 'i18n' : '',
+                moduleNameSuffix: isI18n ? 'i18n' : '',
                 currentProperty : property
             },
         );
