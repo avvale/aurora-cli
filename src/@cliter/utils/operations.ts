@@ -43,7 +43,7 @@ export class Operations
         await this.generateIntermediateTables();
 
         // generate i18n repository if module has i18n table
-        await this.generateI18nRepository();
+        await this.generateI18nFiles();
 
         // generate @api files
         await this.generateApiFiles();
@@ -93,9 +93,9 @@ export class Operations
         await TemplateGenerator.generateIntermediateTables(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
-    async generateI18nRepository(): Promise<void>
+    async generateI18nFiles(): Promise<void>
     {
-        await TemplateGenerator.generateI18nRepository(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateI18nFiles(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
     async generateApiFiles(): Promise<void>
