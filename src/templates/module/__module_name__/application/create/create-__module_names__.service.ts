@@ -4,6 +4,15 @@ import {
     {{#each schema.properties.valueObjects}}
     {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
     {{/each}}
+    {{#each schema.propertiesI18n.valueObjects}}
+    {{#if @first}}
+
+    // i18n
+    {{/if}}
+    {{#allowI18nProperty ../schema.moduleName name}}
+    {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
+    {{/allowI18nProperty}}
+    {{/each}}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
@@ -22,6 +31,15 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
             {{#each schema.properties.createService}}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
             {{/each}}
+            {{#each schema.propertiesI18n.createService}}
+            {{#if @first}}
+
+            // i18n
+            {{/if}}
+            {{#allowI18nProperty ../schema.moduleName name}}
+            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
+            {{/allowI18nProperty}}
+            {{/each}}
         } []
     ): Promise<void>
     {
@@ -30,9 +48,18 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
             {{#each schema.properties.createService}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
             {{/each}}
-            new {{ toPascalCase schema.moduleName }}CreatedAt({currentTimestamp: true}),
-            new {{ toPascalCase schema.moduleName }}UpdatedAt({currentTimestamp: true}),
-            null
+            new {{ toPascalCase schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            null,
+            {{#each schema.propertiesI18n.createService}}
+            {{#if @first}}
+
+            // i18n
+            {{/if}}
+            {{#allowI18nProperty ../schema.moduleName name}}
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
+            {{/allowI18nProperty}}
+            {{/each}}
         ));
 
         // insert
