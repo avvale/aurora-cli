@@ -1,4 +1,6 @@
+/* eslint-disable key-spacing */
 import { AggregateRoot } from '@nestjs/cqrs';
+import { ObjectLiteral, Utils } from 'aurora-ts-core';
 import {
     {{#each schema.properties.valueObjects}}
     {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
@@ -257,7 +259,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     }
     {{/notInArray}}
 
-    toDTO(): Object
+    toDTO(): ObjectLiteral
     {
         return {
             {{#each schema.properties.aggregate}}
@@ -289,11 +291,11 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{#each schema.properties.withRelationshipManyToMany}}
             {{ toCamelCase nativeName }}: this.{{ toCamelCase nativeName }}?.map(item => item.toDTO()),
             {{/each}}
-        }
+        };
     }
 
     {{#if schema.propertiesI18n.aggregateI18n}}
-    toI18nDTO(): Object
+    toI18nDTO(): ObjectLiteral
     {
         return {
             {{#each schema.propertiesI18n.aggregateI18n}}
@@ -307,7 +309,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/isI18nRelationProperty}}
             {{/eq}}
             {{/each}}
-        }
+        };
     }
     {{/if}}
 }
