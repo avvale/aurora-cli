@@ -93,7 +93,7 @@ export class CodeWriter
         }
     }
 
-    generateReferences(properties: Properties): void
+    generateReferences(properties: Properties, propertiesI18n: Properties): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
@@ -165,6 +165,39 @@ export class CodeWriter
             `${this.moduleName.toPascalCase()}Sagas`,
             `${this.boundedContextName.toPascalCase()}Sagas`,
         );
+
+        // add i18n registers
+        if (propertiesI18n.length > 0)
+        {
+            // register import
+            ImportDriver.createImportItems(
+                sourceFile,
+                [
+                    `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18NModel`,
+                    `I${this.moduleName.toPascalCase()}I18NRepository`,
+                    `Sequelize${this.moduleName.toPascalCase()}I18NRepository`,
+                ],
+                `./${this.moduleName.toKebabCase()}`,
+            );
+
+            // models
+            ArrayDriver.createArrayItem(
+                sourceFile,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18NModel`,
+                `${this.boundedContextName.toPascalCase()}Models`,
+            );
+
+            // repositories
+            ArrayDriver.createArrayItem(
+                sourceFile,
+                `
+{
+    provide : I${this.moduleName.toPascalCase()}I18NRepository,
+    useClass: Sequelize${this.moduleName.toPascalCase()}I18NRepository
+}`,
+                `${this.boundedContextName.toPascalCase()}Repositories`,
+            );
+        }
 
         sourceFile?.saveSync();
     }

@@ -161,7 +161,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             Operations.stateService.schema.moduleName.toLowerCase(),
             Operations.stateService.schema.moduleNames.toLowerCase()
         );
-        codeWriter.generateReferences(Operations.stateService.schema.properties);
+        codeWriter.generateReferences(Operations.stateService.schema.properties, Operations.stateService.schema.propertiesI18n);
         codeWriter.declareFramework();
         codeWriter.declareModule();
         if (Operations.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
