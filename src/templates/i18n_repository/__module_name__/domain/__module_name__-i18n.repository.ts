@@ -5,7 +5,7 @@ import { CQMetadata } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Id } from './value-objects';
 
-export abstract class I{{ toPascalCase schema.moduleName }}Repository implements IRepository<{{ schema.aggregateName }}>
+export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implements IRepository<{{ schema.aggregateName }}>
 {
     abstract readonly repository: any;
 

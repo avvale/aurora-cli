@@ -43,6 +43,21 @@ export class TemplateGenerator
         }
     }
 
+    static generateI18nRepository(
+        relativeTargetBasePath: string,
+        relativeTargetPath: string
+    ): void
+    {
+        if (TemplateGenerator.stateService.schema.propertiesI18n?.length > 0)
+        {
+            FileManager.generateContents(
+                path.join(TemplateGenerator.templatePath, 'i18n_repository'),
+                relativeTargetBasePath,
+                relativeTargetPath
+            );
+        }
+    }
+
     static createDirectory(
         relativeTargetBasePath: string,
         directory: string
