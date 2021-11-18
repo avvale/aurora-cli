@@ -1,7 +1,7 @@
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
 
-handlebars.registerHelper('allowI18nProperty', function(this: any, module, ...options)
+handlebars.registerHelper('isI18nRelationProperty', function(this: any, module, ...options)
 {
     let property = '';
     let condition;
@@ -17,12 +17,6 @@ handlebars.registerHelper('allowI18nProperty', function(this: any, module, ...op
         }
     }
 
-    if (
-        property !== 'id'
-        && property !== _.camelCase(module) + 'Id'
-        && property !== 'createdAt'
-        && property !== 'updatedAt'
-        && property !== 'deletedAt'
-    ) return condition.fn(this);
+    if (property === _.camelCase(module) + 'Id') return condition.fn(this);
     return condition.inverse(this);
 });

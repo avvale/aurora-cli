@@ -292,12 +292,22 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         }
     }
 
+    {{#if schema.propertiesI18n.aggregateI18n}}
     toI18nDTO(): Object
     {
         return {
             {{#each schema.propertiesI18n.aggregateI18n}}
+            {{#eq name 'id'}}
+            {{ toCamelCase name }}: Utils.uuid(),
+            {{else}}
+            {{#isI18nRelationProperty ../schema.moduleName name}}
+            {{ toCamelCase name }}: this.id.value,
+            {{else}}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
+            {{/isI18nRelationProperty}}
+            {{/eq}}
             {{/each}}
         }
     }
+    {{/if}}
 }
