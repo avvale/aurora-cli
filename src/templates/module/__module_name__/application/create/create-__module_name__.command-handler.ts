@@ -1,9 +1,19 @@
+/* eslint-disable key-spacing */
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Create{{ toPascalCase schema.moduleName }}Command } from './create-{{ toKebabCase schema.moduleName }}.command';
 import { Create{{ toPascalCase schema.moduleName }}Service } from './create-{{ toKebabCase schema.moduleName }}.service';
 import {
     {{#each schema.properties.valueObjects}}
     {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+    {{/each}}
+    {{#each schema.propertiesI18n.valueObjects}}
+    {{#if @first}}
+
+    // i18n
+    {{/if}}
+    {{#allowI18nProperty ../schema.moduleName name}}
+    {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
+    {{/allowI18nProperty}}
     {{/each}}
 } from './../../domain/value-objects';
 
@@ -25,6 +35,19 @@ export class Create{{ toPascalCase schema.moduleName }}CommandHandler implements
                 {{else}}
                 {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}),
                 {{/if}}
+                {{/each}}
+                {{#each schema.propertiesI18n.createCommandHandler}}
+                {{#if @first}}
+
+                // i18n
+                {{/if}}
+                {{#allowI18nProperty ../schema.moduleName name}}
+                {{#if hasTimezone}}
+                {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, {}, { removeTimezone: command.cQMetadata.timezone }),
+                {{else}}
+                {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}),
+                {{/if}}
+                {{/allowI18nProperty}}
                 {{/each}}
             }
         );
