@@ -29,7 +29,7 @@ import './../handlebars/helpers/loops';
 export class TemplateEngine
 {
     static liquidFiles: string[] = [
-        '__module_name__.sagas.ts'
+        '__module_name__.sagas.ts',
     ];
 
     /**
