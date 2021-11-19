@@ -1,15 +1,10 @@
 import { container } from 'tsyringe';
-import { Options } from 'ejs';
 import { StateService } from './../services/state.service';
 import { Cypher } from './cypher';
 import { Property } from './property';
-import { Liquid } from 'liquidjs';
 import { TemplateEngine } from './template-engine';
 import * as chalk from 'chalk';
 import * as fs from 'fs';
-import * as ejs from 'ejs';
-import * as handlebars from 'handlebars';
-import * as handlebarsHelpers from 'handlebars-helpers';
 import * as path from 'path';
 import * as _ from 'lodash';
 import './../prototypes/string-to-kebab-case.interface';
@@ -223,7 +218,7 @@ export class FileManager
             boundedContextSuffix,
             moduleNamePrefix,
             moduleNameSuffix,
-        }, { filename: originFilePath }, file);
+        }, { filename: originFilePath });
 
         // render name of file
         const mappedFile = FileManager.renderFilename(

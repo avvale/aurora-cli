@@ -3,7 +3,13 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { ObjectLiteral, Utils } from 'aurora-ts-core';
 import {
     {{#each schema.properties.valueObjects}}
-    {{ toPascalCase ../schema.moduleName }}{{#if isI18n}}I18N{{/if}}{{ toPascalCase name }},
+    {{#if isI18n}}
+    {{#allowI18nProperty ../schema.moduleName name}}
+    {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
+    {{/allowI18nProperty}}
+    {{else}}
+    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+    {{/if}}
     {{/each}}
 } from './value-objects';
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
@@ -30,8 +36,14 @@ import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/
 
 export class {{ schema.aggregateName }} extends AggregateRoot
 {
-    {{#each schema.properties.aggregate}}
-    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{#if isI18n}}I18N{{/if}}{{ toPascalCase name }};
+    {{#each schema.properties.valueObjects}}
+    {{#if isI18n}}
+    {{#allowI18nProperty ../schema.moduleName name}}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }};
+    {{/allowI18nProperty}}
+    {{else}}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
+    {{/if}}
     {{/each}}
 
     // eager relationship
@@ -52,17 +64,14 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {{/each}}
 
     constructor(
-        {{#each schema.properties.aggregate}}
-        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-        {{/each}}
-        {{#each schema.propertiesI18n.aggregateI18n}}
-        {{#if @first}}
-
-        // i18n
-        {{/if}}
+        {{#each schema.properties.valueObjects}}
+        {{#if isI18n}}
         {{#allowI18nProperty ../schema.moduleName name}}
         {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
         {{/allowI18nProperty}}
+        {{else}}
+        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+        {{/if}}
         {{/each}}
         {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
         {{ toCamelCase relationshipField }}?: {{ toPascalCase relationshipAggregate }},

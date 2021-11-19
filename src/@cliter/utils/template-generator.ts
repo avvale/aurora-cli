@@ -51,7 +51,7 @@ export class TemplateGenerator
         if (TemplateGenerator.stateService.schema.properties.hasI18n)
         {
             FileManager.generateContents(
-                path.join(TemplateGenerator.templatePath, 'i18n_files'),
+                path.join(TemplateGenerator.templatePath, 'i18n-files'),
                 relativeTargetBasePath,
                 relativeTargetPath
             );
