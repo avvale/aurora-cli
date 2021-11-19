@@ -3,9 +3,11 @@ import { Options } from 'ejs';
 import { StateService } from './../services/state.service';
 import { Cypher } from './cypher';
 import { Property } from './property';
+import { Liquid } from 'liquidjs';
+import { TemplateEngine } from './template-engine';
 import * as chalk from 'chalk';
-import * as ejs from 'ejs';
 import * as fs from 'fs';
+import * as ejs from 'ejs';
 import * as handlebars from 'handlebars';
 import * as handlebarsHelpers from 'handlebars-helpers';
 import * as path from 'path';
@@ -65,25 +67,6 @@ export class FileManager
                 // copy files/folder inside current folder recursively
                 FileManager.deleteOriginFiles(path.join(currentPath, file));
             }
-        });
-    }
-
-    /**
-     * Render templates with handlebars template engine.
-     * @param content
-     * @param data
-     * @param opts
-     */
-    static renderContent(content: string, data: any, opts?: Options): string
-    {
-        const ejsRendered = ejs.render(content, data, opts);
-
-        // add helpers to handlebars template engine
-        handlebarsHelpers({ handlebars });
-
-        return handlebars.compile(ejsRendered)(data, {
-            allowProtoPropertiesByDefault: true,
-            allowProtoMethodsByDefault   : true,
         });
     }
 
@@ -208,7 +191,7 @@ export class FileManager
      * @param relativeTargetPath
      * @param targetBasePath
      */
-    static manageFileTemplate(
+    static async manageFileTemplate(
         originFilePath: string,
         file: string,
         relativeTargetPath: string,
@@ -227,20 +210,20 @@ export class FileManager
             moduleNameSuffix?: string; // use to set i18n items
             currentProperty?: Property;
         } = {},
-    ): void
+    ): Promise<void>
     {
         // read file content
         let contents = fs.readFileSync(originFilePath, 'utf8');
 
         // replace variables with ejs template engine
-        contents = FileManager.renderContent(contents, {
+        contents = await TemplateEngine.render(contents, {
             ...FileManager.stateService,
             currentProperty,
             boundedContextPrefix,
             boundedContextSuffix,
             moduleNamePrefix,
             moduleNameSuffix,
-        }, { filename: originFilePath });
+        }, { filename: originFilePath }, file);
 
         // render name of file
         const mappedFile = FileManager.renderFilename(
