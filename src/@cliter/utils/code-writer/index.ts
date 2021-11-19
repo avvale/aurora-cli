@@ -93,7 +93,7 @@ export class CodeWriter
         }
     }
 
-    generateReferences(properties: Properties, propertiesI18n: Properties): void
+    generateReferences(properties: Properties): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
@@ -167,7 +167,7 @@ export class CodeWriter
         );
 
         // add i18n registers
-        if (propertiesI18n.length > 0)
+        if (properties.hasI18n)
         {
             // register import
             ImportDriver.createImportItems(

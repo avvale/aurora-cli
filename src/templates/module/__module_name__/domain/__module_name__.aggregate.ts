@@ -3,16 +3,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { ObjectLiteral, Utils } from 'aurora-ts-core';
 import {
     {{#each schema.properties.valueObjects}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/each}}
-    {{#each schema.propertiesI18n.valueObjects}}
-    {{#if @first}}
-
-    // i18n
-    {{/if}}
-    {{#allowI18nProperty ../schema.moduleName name}}
-    {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-    {{/allowI18nProperty}}
+    {{ toPascalCase ../schema.moduleName }}{{#if isI18n}}I18N{{/if}}{{ toPascalCase name }},
     {{/each}}
 } from './value-objects';
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
@@ -40,16 +31,7 @@ import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/
 export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each schema.properties.aggregate}}
-    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
-    {{/each}}
-    {{#each schema.propertiesI18n.aggregateI18n}}
-    {{#if @first}}
-
-    // i18n
-    {{/if}}
-    {{#allowI18nProperty ../schema.moduleName name}}
-    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }};
-    {{/allowI18nProperty}}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{#if isI18n}}I18N{{/if}}{{ toPascalCase name }};
     {{/each}}
 
     // eager relationship

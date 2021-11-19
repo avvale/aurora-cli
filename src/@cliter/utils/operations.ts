@@ -161,7 +161,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             Operations.stateService.schema.moduleName.toLowerCase(),
             Operations.stateService.schema.moduleNames.toLowerCase()
         );
-        codeWriter.generateReferences(Operations.stateService.schema.properties, Operations.stateService.schema.propertiesI18n);
+        codeWriter.generateReferences(Operations.stateService.schema.properties);
         codeWriter.declareFramework();
         codeWriter.declareModule();
         if (Operations.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
@@ -186,16 +186,15 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         // write yaml file
         const yamlStr = yaml.dump(
             {
-                version                : cliterConfig.configYamlVersion,
-                boundedContextName     : Operations.stateService.schema.boundedContextName,
-                moduleName             : Operations.stateService.schema.moduleName,
-                moduleNames            : Operations.stateService.schema.moduleNames,
-                aggregateName          : Operations.stateService.schema.aggregateName,
-                hasOAuth               : Operations.stateService.schema.hasOAuth,
-                hasTenant              : Operations.stateService.schema.hasTenant,
-                aggregateProperties    : Operations.stateService.schema.properties.toDto().map(item => _.omit(item, ['id'])), // omit id, internal id when create property by prompt
-                aggregateI18nProperties: Operations.stateService.schema.propertiesI18n.toDto().map(item => _.omit(item, ['id'])), // omit id, internal id when create property by prompt
-                excluded               : Operations.stateService.schema.excluded,
+                version            : cliterConfig.configYamlVersion,
+                boundedContextName : Operations.stateService.schema.boundedContextName,
+                moduleName         : Operations.stateService.schema.moduleName,
+                moduleNames        : Operations.stateService.schema.moduleNames,
+                aggregateName      : Operations.stateService.schema.aggregateName,
+                hasOAuth           : Operations.stateService.schema.hasOAuth,
+                hasTenant          : Operations.stateService.schema.hasTenant,
+                aggregateProperties: Operations.stateService.schema.properties.toDto().map(item => _.omit(item, ['id'])), // omit id, internal id when create property by prompt
+                excluded           : Operations.stateService.schema.excluded,
             },
             {
                 lineWidth  : -1,

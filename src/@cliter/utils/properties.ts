@@ -20,6 +20,11 @@ export class Properties
         return this.properties.length;
     }
 
+    get hasI18n(): boolean
+    {
+        return this.properties.filter(property => property.hasI18n).length > 0;
+    }
+
     get withoutTimestamps(): Property[]
     {
         return this.properties.filter(property => !this.timestampFields.includes(property.name));

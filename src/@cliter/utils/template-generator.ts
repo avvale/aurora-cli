@@ -48,7 +48,7 @@ export class TemplateGenerator
         relativeTargetPath: string
     ): void
     {
-        if (TemplateGenerator.stateService.schema.propertiesI18n?.length > 0)
+        if (TemplateGenerator.stateService.schema.properties.hasI18n)
         {
             FileManager.generateContents(
                 path.join(TemplateGenerator.templatePath, 'i18n_files'),
@@ -87,17 +87,6 @@ export class TemplateGenerator
                 property
             );
         }
-
-        // generate i18n ValueObjects
-        for (const property of TemplateGenerator.stateService.schema.propertiesI18n.valueObjects)
-        {
-            TemplateGenerator.generateValueObject(
-                relativeTargetBasePath,
-                relativeTargetPath,
-                property,
-                true
-            );
-        }
     }
 
     /**
@@ -111,8 +100,7 @@ export class TemplateGenerator
     static generateValueObject(
         relativeTargetBasePath: string,
         relativeTargetPath: string,
-        property: Property,
-        isI18n = false,
+        property: Property
     ): void
     {
         // read value object from our data type
@@ -127,7 +115,7 @@ export class TemplateGenerator
             '__module_name__-__property_name__.ts',
             path.join(relativeTargetBasePath, relativeTargetPath, TemplateGenerator.stateService.schema.moduleName, 'domain', 'value-objects'),
             {
-                moduleNameSuffix: isI18n ? 'i18n' : '',
+                moduleNameSuffix: property.isI18n ? 'i18n' : '',
                 currentProperty : property
             },
         );

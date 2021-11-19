@@ -9,6 +9,5 @@ export interface ModuleDefinitionSchema
     hasOAuth: boolean;
     hasTenant: boolean;
     properties: Properties;
-    propertiesI18n: Properties;
     excluded?: string[];        // set files to avoid create
 }

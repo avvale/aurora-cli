@@ -5,4 +5,4 @@ export { Operations } from './operations';
 export { Prompter } from './prompter';
 export { Properties } from './properties';
 export { Property } from './property';
-export { TemplateGenerator } from './template-generator';
+export { TemplateGenerator } from './template-generator';
