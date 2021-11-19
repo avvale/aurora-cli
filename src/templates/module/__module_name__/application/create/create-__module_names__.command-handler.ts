@@ -29,7 +29,8 @@ export class Create{{ toPascalCase schema.moduleNames }}CommandHandler implement
         // call to use case and implements ValueObjects
         await this.create{{ toPascalCase schema.moduleNames }}Service.main(
             command.payload
-                .map({{ toCamelCase schema.moduleName }} => {
+                .map({{ toCamelCase schema.moduleName }} =>
+                {
                     return {
                         {{#each schema.properties.createCommandHandler}}
                         {{#if hasTimezone}}
@@ -51,7 +52,7 @@ export class Create{{ toPascalCase schema.moduleNames }}CommandHandler implement
                         {{/if}}
                         {{/allowI18nProperty}}
                         {{/each}}
-                    }
+                    };
                 })
         );
     }
