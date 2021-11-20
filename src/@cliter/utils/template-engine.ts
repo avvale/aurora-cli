@@ -12,6 +12,7 @@ import './../prototypes/string-to-camel-case';
 import './../prototypes/string-to-pascal-case.interface';
 import './../prototypes/string-to-pascal-case';
 import './../handlebars/helpers/allow-i18n-property';
+import './../handlebars/helpers/allow-i18n-property2';
 import './../handlebars/helpers/is-i18n-relation-property';
 import './../handlebars/helpers/string-to-camel-case';
 import './../handlebars/helpers/string-to-kebab-case';
@@ -34,14 +35,6 @@ export class TemplateEngine
      */
     static async render(content: string, data: any, opts: Options): Promise<string>
     {
-        /* // liquid engine
-        const liquidEngine = new Liquid({
-            root   : path.resolve(__dirname, '../../templates/liquid/'),
-            extname: '.liquid'
-        });
-        liquidPlugins(liquidEngine);
-        return await liquidEngine.parseAndRender(content, data); */
-
         const ejsRendered = ejs.render(content, data, opts);
 
         // add helpers to handlebars template engine
