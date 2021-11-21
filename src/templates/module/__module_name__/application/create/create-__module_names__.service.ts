@@ -29,15 +29,15 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         const aggregate{{ toPascalCase schema.moduleNames }} = {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
             {{#each schema.properties.valueObjects}}
             {{#unless isI18n}}
-            {{#eq name 'createdAt'}}
+{{#eq name 'createdAt'}}
             new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-            {{else eq name 'updatedAt'}}
+{{else eq name 'updatedAt'}}
             new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-            {{else eq name 'deletedAt'}}
+{{else eq name 'deletedAt'}}
             null,
-            {{else}}
+{{else}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
-            {{/eq}}
+{{/eq}}
             {{/unless}}
             {{#and isI18n (allowProperty ../schema.moduleName this)}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
