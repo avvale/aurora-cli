@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class Create{{ toPascalCase schema.moduleName }}Dto
 {
     {{#each schema.properties.createDto}}
+    {{#if (allowProperty ../schema.moduleName this) }}
 {{#eq relationship ../relationship.MANY_TO_MANY}}
     @ApiProperty({
         type       : [String],
@@ -33,5 +34,6 @@ export class Create{{ toPascalCase schema.moduleName }}Dto
     {{ toCamelCase name }}: {{ getJavascriptType }};
 {{/eq}}
 
+    {{/if}}
     {{/each}}
 }
