@@ -2,9 +2,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Update{{ toPascalCase schema.moduleName }}Command } from './update-{{ toKebabCase schema.moduleName }}.command';
 import { Update{{ toPascalCase schema.moduleName }}Service } from './update-{{ toKebabCase schema.moduleName }}.service';
 import {
-    {{#each schema.properties.valueObjects}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/each}}
+    {{> importValueObjects }}
 } from './../../domain/value-objects';
 
 @CommandHandler(Update{{ toPascalCase schema.moduleName }}Command)

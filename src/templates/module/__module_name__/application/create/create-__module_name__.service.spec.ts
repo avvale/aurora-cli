@@ -5,9 +5,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 import { Create{{ toPascalCase schema.moduleName }}Service } from './create-{{ toKebabCase schema.moduleName }}.service';
 import {
-    {{#each schema.properties.valueObjects}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/each}}
+    {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from './../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';

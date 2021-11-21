@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MockSeeder } from '{{ config.auroraCorePackage }}';
 import {
-    {{#each schema.properties.valueObjects}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/each}}
+    {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toCamelCase schema.moduleNames }} } from './../seeds/{{ toKebabCase schema.moduleName }}.seed';

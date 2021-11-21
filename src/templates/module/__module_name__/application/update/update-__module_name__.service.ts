@@ -3,9 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
 import {
-    {{#each schema.properties.valueObjects}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/each}}
+    {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
 import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';

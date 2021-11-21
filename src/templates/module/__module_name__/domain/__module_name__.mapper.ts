@@ -2,9 +2,7 @@ import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from '{{ config.aur
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase schema.moduleName }}.response';
 import {
-    {{#each schema.properties.valueObjects}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/each}}
+    {{> importValueObjects }}
 } from './value-objects';
 {{#each schema.properties.withRelationshipOneToOne}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
