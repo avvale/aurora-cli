@@ -2,16 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
     {{#each schema.properties.valueObjects}}
+    {{#unless isI18n}}
     {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/each}}
-    {{#each schema.propertiesI18n.valueObjects}}
-    {{#if @first}}
-
-    // i18n
-    {{/if}}
-    {{#allowI18nProperty ../schema.moduleName name}}
+    {{/unless}}
+    {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
     {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-    {{/allowI18nProperty}}
+    {{/and}}
     {{/each}}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
@@ -29,36 +25,33 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
     public async main(
         {{ toCamelCase schema.moduleNames }}: {
             {{#each schema.properties.createService}}
+            {{#unless isI18n}}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-            {{/each}}
-            {{#each schema.propertiesI18n.createService}}
-            {{#if @first}}
-
-            // i18n
-            {{/if}}
-            {{#allowI18nProperty ../schema.moduleName name}}
+            {{/unless}}
+            {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-            {{/allowI18nProperty}}
+            {{/and}}
             {{/each}}
         } []
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const aggregate{{ toPascalCase schema.moduleNames }} = {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
-            {{#each schema.properties.createService}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
-            {{/each}}
-            new {{ toPascalCase schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-            new {{ toPascalCase schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            {{#each schema.properties.valueObjects}}
+            {{#unless isI18n}}
+            {{#eq name 'createdAt'}}
+            new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+            {{else eq name 'updatedAt'}}
+            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            {{else eq name 'deletedAt'}}
             null,
-            {{#each schema.propertiesI18n.createService}}
-            {{#if @first}}
-
-            // i18n
-            {{/if}}
-            {{#allowI18nProperty ../schema.moduleName name}}
+            {{else}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
-            {{/allowI18nProperty}}
+            {{/eq}}
+            {{/unless}}
+            {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
+            {{/and}}
             {{/each}}
         ));
 
