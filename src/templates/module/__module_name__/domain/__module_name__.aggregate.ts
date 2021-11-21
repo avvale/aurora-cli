@@ -30,7 +30,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each schema.properties.aggregate}}
     {{#if (allowProperty ../schema.moduleName this) }}
-    {{ toCamelCase name }}: {{ toPascalCase moduleName }}{{> i18n }}{{ toPascalCase name }};
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
     {{/if}}
     {{/each}}
 
@@ -53,12 +53,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
 
     constructor(
         {{#each schema.properties.aggregate}}
-        {{#unless isI18n}}
-        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-        {{/unless}}
-        {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-        {{/and}}
+        {{#if (allowProperty ../schema.moduleName this) }}
+        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+        {{/if}}
         {{/each}}
 
         {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
@@ -80,12 +77,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         super();
         {{#each schema.properties.aggregate}}
-        {{#unless isI18n}}
+        {{#if (allowProperty ../schema.moduleName this) }}
         this.{{ toCamelCase name }} = {{ toCamelCase name }};
-        {{/unless}}
-        {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-        this.{{ toCamelCase name }} = {{ toCamelCase name }};
-        {{/and}}
+        {{/if}}
         {{/each}}
 
         // eager relationship
@@ -108,12 +102,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
 
     static register (
         {{#each schema.properties.aggregate}}
-        {{#unless isI18n}}
-        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-        {{/unless}}
-        {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-        {{/and}}
+        {{#if (allowProperty ../schema.moduleName this) }}
+        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+        {{/if}}
         {{/each}}
 
         {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
@@ -135,12 +126,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         return new {{ schema.aggregateName }}(
             {{#each schema.properties.aggregate}}
-            {{#unless isI18n}}
+            {{#if (allowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }},
-            {{/unless}}
-            {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-            {{ toCamelCase name }},
-            {{/and}}
+            {{/if}}
             {{/each}}
 
             {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
@@ -167,12 +155,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.apply(
             new Created{{ toPascalCase schema.moduleName }}Event(
                 {{#each schema.properties.aggregate}}
-                {{#unless isI18n}}
+                {{#if (allowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                {{/unless}}
-                {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                {{/and}}
+                {{/if}}
                 {{/each}}
             )
         );
@@ -185,12 +170,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.apply(
             new Updated{{ toPascalCase schema.moduleName }}Event(
                 {{#each schema.properties.aggregate}}
-                {{#unless isI18n}}
+                {{#if (allowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}.value,
-                {{/unless}}
-                {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}.value,
-                {{/and}}
+                {{/if}}
                 {{/each}}
             )
         );
@@ -203,12 +185,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.apply(
             new Deleted{{ toPascalCase schema.moduleName }}Event(
                 {{#each schema.properties.aggregate}}
-                {{#unless isI18n}}
+                {{#if (allowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                {{/unless}}
-                {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                {{/and}}
+                {{/if}}
                 {{/each}}
             )
         );
@@ -219,12 +198,9 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         return {
             {{#each schema.properties.aggregate}}
-            {{#unless isI18n}}
+            {{#if (allowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
-            {{/unless}}
-            {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-            {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
-            {{/and}}
+            {{/if}}
             {{/each}}
 
             // eager relationship

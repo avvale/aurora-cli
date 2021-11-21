@@ -15,7 +15,6 @@ import './../prototypes/string-to-camel-case.interface';
 import './../prototypes/string-to-camel-case';
 import './../prototypes/string-to-pascal-case.interface';
 import './../prototypes/string-to-pascal-case';
-import './../handlebars/helpers/allow-i18n-property';
 import './../handlebars/helpers/is-i18n-relation-property';
 import './../handlebars/helpers/string-to-camel-case';
 import './../handlebars/helpers/string-to-kebab-case';

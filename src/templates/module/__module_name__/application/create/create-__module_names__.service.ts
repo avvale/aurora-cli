@@ -1,14 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
-    {{#each schema.properties.valueObjects}}
-    {{#unless isI18n}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/unless}}
-    {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-    {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-    {{/and}}
-    {{/each}}
+    {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
@@ -25,12 +18,9 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
     public async main(
         {{ toCamelCase schema.moduleNames }}: {
             {{#each schema.properties.createService}}
-            {{#unless isI18n}}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-            {{/unless}}
-            {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-            {{/and}}
+            {{#if (allowProperty ../schema.moduleName this) }}
+            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+            {{/if}}
             {{/each}}
         } []
     ): Promise<void>
@@ -49,7 +39,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
             {{/eq}}
             {{/unless}}
-            {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
+            {{#and isI18n (allowProperty ../schema.moduleName this)}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
             {{/and}}
             {{/each}}

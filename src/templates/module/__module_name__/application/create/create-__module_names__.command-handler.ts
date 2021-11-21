@@ -3,14 +3,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { Create{{ toPascalCase schema.moduleNames }}Command } from './create-{{ toKebabCase schema.moduleNames }}.command';
 import { Create{{ toPascalCase schema.moduleNames }}Service } from './create-{{ toKebabCase schema.moduleNames }}.service';
 import {
-    {{#each schema.properties.valueObjects}}
-    {{#unless isI18n}}
-    {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-    {{/unless}}
-    {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-    {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }},
-    {{/and}}
-    {{/each}}
+    {{> importValueObjects }}
 } from './../../domain/value-objects';
 
 @CommandHandler(Create{{ toPascalCase schema.moduleNames }}Command)
@@ -29,20 +22,13 @@ export class Create{{ toPascalCase schema.moduleNames }}CommandHandler implement
                 {
                     return {
                         {{#each schema.properties.createCommandHandler}}
-                        {{#unless isI18n}}
+                        {{#if (allowProperty ../schema.moduleName this) }}
                         {{#if hasTimezone}}
-                        {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}, {}, { removeTimezone: command.cQMetadata.timezone }),
+                        {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}, {}, { removeTimezone: command.cQMetadata.timezone }),
                         {{else}}
-                        {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
+                        {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
                         {{/if}}
-                        {{/unless}}
-                        {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-                        {{#if hasTimezone}}
-                        {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}, {}, { removeTimezone: command.cQMetadata.timezone }),
-                        {{else}}
-                        {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
                         {{/if}}
-                        {{/and}}
                         {{/each}}
                     };
                 })

@@ -5,12 +5,9 @@ export class Create{{ toPascalCase schema.moduleNames }}Command
     constructor(
         public readonly payload: {
             {{#each schema.properties.createCommand}}
-            {{#unless isI18n}}
+            {{#if (allowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}{{#if nullable}}?{{/if}}: {{ getJavascriptType }},
-            {{/unless}}
-            {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-            {{ toCamelCase name }}{{#if nullable}}?{{/if}}: {{ getJavascriptType }},
-            {{/and}}
+            {{/if}}
             {{/each}}
         } [],
         public readonly cQMetadata?: CQMetadata,

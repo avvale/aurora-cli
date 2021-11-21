@@ -1,8 +1,5 @@
 {{#each schema.properties.valueObjects}}
-{{#unless isI18n}}
-export { {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} } from './{{ toKebabCase ../schema.moduleName }}-{{ toKebabCase name }}';
-{{/unless}}
-{{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-export { {{ toPascalCase ../schema.moduleName }}I18N{{ toPascalCase name }} } from './{{ toKebabCase ../schema.moduleName }}-i18n-{{ toKebabCase name }}';
-{{/and}}
+{{#if (allowProperty ../schema.moduleName this) }}
+export { {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} } from './{{ toKebabCase ../schema.moduleName }}-{{ toKebabCase name }}';
+{{/if}}
 {{/each}}

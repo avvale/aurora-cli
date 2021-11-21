@@ -35,12 +35,9 @@ export class Add{{ toPascalCase schema.moduleNames }}ContextEvent extends Aggreg
                 this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new Created{{ toPascalCase schema.moduleName }}Event(
                         {{#each schema.properties.aggregate}}
-                        {{#unless isI18n}}
+                        {{#if (allowProperty ../schema.moduleName this) }}
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                        {{/unless}}
-                        {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                        {{/and}}
+                        {{/if}}
                         {{/each}}
                     )
                 )
@@ -59,12 +56,9 @@ export class Add{{ toPascalCase schema.moduleNames }}ContextEvent extends Aggreg
                 this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new Deleted{{ toPascalCase schema.moduleName }}Event(
                         {{#each schema.properties.aggregate}}
-                        {{#unless isI18n}}
+                        {{#if (allowProperty ../schema.moduleName this) }}
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                        {{/unless}}
-                        {{#and isI18n (allowI18nProperty2 ../schema.moduleName name)}}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
-                        {{/and}}
+                        {{/if}}
                         {{/each}}
                     )
                 )
