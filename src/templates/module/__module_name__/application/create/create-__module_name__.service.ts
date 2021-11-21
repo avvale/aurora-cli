@@ -18,20 +18,32 @@ export class Create{{ toPascalCase schema.moduleName }}Service
 
     public async main(
         payload: {
-            {{#each schema.properties.seed}}
+            {{#each schema.properties.createService}}
+            {{#if (allowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+            {{/if}}
             {{/each}}
         }
     ): Promise<void>
     {
         // create aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.seed}}
+            {{#each schema.properties.aggregate}}
+            {{#unless isI18n}}
+{{#eq name 'createdAt'}}
+            new {{ toPascalCase ../schema.moduleName }}CreatedAt({currentTimestamp: true}),
+{{else eq name 'updatedAt'}}
+            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({currentTimestamp: true}),
+{{else eq name 'deletedAt'}}
+            null,
+{{else}}
             payload.{{ toCamelCase name }},
+{{/eq}}
+            {{/unless}}
+            {{#and isI18n (allowProperty ../schema.moduleName this)}}
+            payload.{{ toCamelCase name }},
+            {{/and}}
             {{/each}}
-            new {{ toPascalCase schema.moduleName }}CreatedAt({currentTimestamp: true}),
-            new {{ toPascalCase schema.moduleName }}UpdatedAt({currentTimestamp: true}),
-            null
         );
 
         // create

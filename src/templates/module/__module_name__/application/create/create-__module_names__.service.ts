@@ -27,7 +27,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
     {
         // create aggregate with factory pattern
         const aggregate{{ toPascalCase schema.moduleNames }} = {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
-            {{#each schema.properties.valueObjects}}
+            {{#each schema.properties.aggregate}}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
             new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
