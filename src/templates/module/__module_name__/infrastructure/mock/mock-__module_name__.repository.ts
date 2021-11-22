@@ -38,10 +38,12 @@ export class Mock{{ toPascalCase schema.moduleName }}Repository extends MockRepo
             itemCollection['deletedAt'] = null;
 
             this.collectionSource.push({{ schema.aggregateName }}.register(
-                    {{#each schema.properties.mock}}
-                    new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}(itemCollection.{{ toCamelCase name }}),
-                    {{/each}}
-                ));
+                {{#each schema.properties.mock}}
+                {{#if (allowProperty ../schema.moduleName this)}}
+                new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(itemCollection.{{ toCamelCase name }}),
+                {{/if}}
+                {{/each}}
+            ));
         }
     }
 }
