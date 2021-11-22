@@ -77,7 +77,7 @@ import { Delete{{ toPascalCase schema.moduleNames }}Service } from './applicatio
 
 // models
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model';
-{{#if schema.propertiesI18n.aggregateI18n}}
+{{#if schema.properties.hasI18n}}
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18NModel } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
 {{#each schema.properties.withRelationshipIntermediateTable}}
@@ -87,7 +87,7 @@ export { {{ intermediateModel }} } from './infrastructure/sequelize/sequelize-{{
 // repository
 export { I{{ toPascalCase schema.moduleName }}Repository } from './domain/{{ toKebabCase schema.moduleName }}.repository';
 export { Sequelize{{ toPascalCase schema.moduleName }}Repository } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.repository';
-{{#if schema.propertiesI18n.aggregateI18n}}
+{{#if schema.properties.hasI18n}}
 export { I{{ toPascalCase schema.moduleName }}I18NRepository } from './domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
 export { Sequelize{{ toPascalCase schema.moduleName }}I18NRepository } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}

@@ -1,16 +1,16 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-{{#each schema.propertiesI18n.withRelationshipOneToOne}}
+{{#each schema.properties.withRelationshipOneToOne}}
 import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/each}}
-{{#each schema.propertiesI18n.withRelationshipManyToOne}}
+{{#each schema.properties.withRelationshipManyToOne}}
 import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/each}}
-{{#each schema.propertiesI18n.withRelationshipOneToMany}}
+{{#each schema.properties.withRelationshipOneToMany}}
 import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/each}}
-{{#each schema.propertiesI18n.withRelationshipManyToMany}}
+{{#each schema.properties.withRelationshipManyToMany}}
 import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 import { {{ intermediateModel }} } from '{{ config.applicationsContainer }}/{{ intermediateModelModuleSection }}/infrastructure/sequelize/sequelize-{{ intermediateModelFile }}.model';
 {{/each}}
@@ -18,7 +18,8 @@ import { {{ intermediateModel }} } from '{{ config.applicationsContainer }}/{{ i
 @Table({ modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18N', freezeTableName: true, timestamps: false })
 export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggregateName }}I18NModel>
 {
-    {{#each schema.propertiesI18n.modelColumns}}
+    {{#each schema.properties.modelColumns}}
+    {{#if isI18n }}
     {{#if hasColumnDecorator }}
     {{#eq relationship ../relationship.ONE_TO_ONE }}
     @ForeignKey(() => {{ relationshipAggregate }}Model)
@@ -79,5 +80,6 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
     {{/if}}
     {{/if}}
 
+    {{/if}}
     {{/each}}
 }

@@ -19,6 +19,7 @@ import { {{ intermediateModel }} } from '{{ config.applicationsContainer }}/{{ i
 export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateName }}Model>
 {
     {{#each schema.properties.modelColumns}}
+    {{#unless isI18n }}
     {{#if hasColumnDecorator }}
     {{#eq relationship ../relationship.ONE_TO_ONE }}
     @ForeignKey(() => {{ relationshipAggregate }}Model)
@@ -79,5 +80,6 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{/if}}
 
+    {{/unless}}
     {{/each}}
 }

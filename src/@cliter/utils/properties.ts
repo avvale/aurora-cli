@@ -99,13 +99,6 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
-    get aggregateI18n(): Property[]
-    {
-        return this.properties
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                     // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField, is relation one to one without xxxxId
-    }
-
     // commands
     get createCommand(): Property[]
     {
