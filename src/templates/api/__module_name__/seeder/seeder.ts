@@ -8,7 +8,8 @@ export class Seeder
 {
     main()
     {
-        NestFactory.createApplicationContext(SeederModule).then(appContext => {
+        NestFactory.createApplicationContext(SeederModule).then(appContext =>
+        {
             const commandBus = appContext.get(ICommandBus);
             commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command({{ toCamelCase schema.moduleNames }}));
         });
