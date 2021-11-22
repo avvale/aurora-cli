@@ -69,10 +69,12 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
     {
         return {{ schema.aggregateName }}.register(
             {{#each schema.properties.mapper}}
+            {{#if (allowProperty ../schema.moduleName this)}}
             {{#if hasTimezone}}
-            new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}, {}, {addTimezone: cQMetadata?.timezone}),
+            new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}, {}, { addTimezone: cQMetadata?.timezone }),
             {{else}}
-            new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
+            new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
+            {{/if}}
             {{/if}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
@@ -99,7 +101,9 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
 
         return new {{ toPascalCase schema.moduleName }}Response(
             {{#each schema.properties.mapper}}
+            {{#if (allowProperty ../schema.moduleName this)}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}.value,
+            {{/if}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: false }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationshipField }}) : undefined,

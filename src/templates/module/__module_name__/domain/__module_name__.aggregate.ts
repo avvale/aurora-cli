@@ -29,7 +29,7 @@ import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/
 export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each schema.properties.aggregate}}
-    {{#if (allowProperty ../schema.moduleName this) }}
+    {{#if (allowProperty ../schema.moduleName this)}}
     {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
     {{/if}}
     {{/each}}
