@@ -21,16 +21,26 @@ export class Mock{{ toPascalCase schema.moduleName }}Seeder extends MockSeeder<{
     {
         this.collectionSource = [];
 
-        for (let {{ toCamelCase schema.moduleName }} of {{ toCamelCase schema.moduleNames }})
+        for (const {{ toCamelCase schema.moduleName }} of {{ toCamelCase schema.moduleNames }})
         {
             this.collectionSource.push(
                 {{ schema.aggregateName }}.register(
-                    {{#each schema.properties.createService}}
+                    {{#each schema.properties.aggregate}}
+                    {{#unless isI18n}}
+{{#eq name 'createdAt'}}
+                    new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+{{else eq name 'updatedAt'}}
+                    new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq name 'deletedAt'}}
+                    new {{ toPascalCase ../schema.moduleName }}DeletedAt(null),
+{{else}}
                     new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
+{{/eq}}
+                    {{/unless}}
+                    {{#and isI18n (allowProperty ../schema.moduleName this)}}
+                    new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
+                    {{/and}}
                     {{/each}}
-                    new {{ toPascalCase schema.moduleName }}CreatedAt({currentTimestamp: true}),
-                    new {{ toPascalCase schema.moduleName }}UpdatedAt({currentTimestamp: true}),
-                    new {{ toPascalCase schema.moduleName }}DeletedAt(null),
                 )
             );
         }
