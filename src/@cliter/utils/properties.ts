@@ -22,7 +22,7 @@ export class Properties
 
     get hasI18n(): boolean
     {
-        return this.properties.filter(property => property.hasI18n).length > 0;
+        return this.properties.filter(property => property.isI18n).length > 0;
     }
 
     get withoutTimestamps(): Property[]
