@@ -19,7 +19,9 @@ export class Update{{ toPascalCase schema.moduleName }}Service
     public async main(
         payload: {
             {{#each schema.properties.updateService}}
-            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+            {{#if (allowProperty ../schema.moduleName this) }}
+            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+            {{/if}}
             {{/each}}
         },
         constraint?: QueryStatement,
@@ -28,12 +30,22 @@ export class Update{{ toPascalCase schema.moduleName }}Service
     {
         // create aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.updateService}}
-            payload.{{ toCamelCase name }},
-            {{/each}}
+            {{#each schema.properties.aggregate}}
+            {{#unless isI18n}}
+{{#eq name 'createdAt'}}
             null,
-            new {{ toPascalCase schema.moduleName }}UpdatedAt({currentTimestamp: true}),
-            null
+{{else eq name 'updatedAt'}}
+            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq name 'deletedAt'}}
+            null,
+{{else}}
+            payload.{{ toCamelCase name }},
+{{/eq}}
+            {{/unless}}
+            {{#and isI18n (allowProperty ../schema.moduleName this)}}
+            payload.{{ toCamelCase name }},
+            {{/and}}
+            {{/each}}
         );
 
         // update

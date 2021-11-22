@@ -18,7 +18,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         payload: {
             {{#each schema.properties.createService}}
             {{#if (allowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
             {{/if}}
             {{/each}}
         }
@@ -29,9 +29,9 @@ export class Create{{ toPascalCase schema.moduleName }}Service
             {{#each schema.properties.aggregate}}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
-            new {{ toPascalCase ../schema.moduleName }}CreatedAt({currentTimestamp: true}),
+            new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
 {{else eq name 'updatedAt'}}
-            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({currentTimestamp: true}),
+            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq name 'deletedAt'}}
             null,
 {{else}}
