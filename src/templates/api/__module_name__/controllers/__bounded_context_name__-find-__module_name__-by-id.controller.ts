@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
@@ -44,7 +44,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Param('id') id: string,
-        @Body('constraint') constraint?: QueryStatement,
+        @Constraint({{#if schema.properties.hasI18n}}{i18N: '{{ toCamelCase schema.moduleName }}I18N'}{{/if}}) constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {

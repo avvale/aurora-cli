@@ -16,6 +16,9 @@ import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContaine
 import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 import { {{ intermediateModel }} } from '{{ config.applicationsContainer }}/{{ intermediateModelModuleSection }}/infrastructure/sequelize/sequelize-{{ intermediateModelFile }}.model';
 {{/each}}
+{{#if schema.properties.hasI18n}}
+import { {{ schema.aggregateName }}I18NModel } from './sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
+{{/if}}
 
 @Table({ modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}', freezeTableName: true, timestamps: false })
 export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateName }}Model>
@@ -84,4 +87,9 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
 
     {{/unless}}
     {{/each}}
+    {{#if schema.properties.hasI18n}}
+    // i18n relation
+    @HasOne(() => {{ schema.aggregateName }}I18NModel, { as: '{{ schema.moduleName }}I18N' })
+    {{ schema.moduleName }}I18N: {{ schema.aggregateName }}I18NModel;
+    {{/if}}
 }
