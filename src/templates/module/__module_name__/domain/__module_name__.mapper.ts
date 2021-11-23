@@ -8,7 +8,9 @@ import {
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
+{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+{{/unless}}
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
@@ -84,7 +86,9 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: false }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase nativeName }}) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
+            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: false }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationshipField }}) : undefined,
+            {{/unless}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToMany}}
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: false }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase nativeName }}) : undefined,
@@ -112,7 +116,9 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: false }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase nativeName }}) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
+            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: false }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationshipField }}) : undefined,
+            {{/unless}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToMany}}
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: false }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase nativeName }}) : undefined,

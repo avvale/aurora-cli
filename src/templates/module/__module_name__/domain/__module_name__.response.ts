@@ -2,7 +2,9 @@
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
+{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response';
+{{/unless}}
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response';
@@ -26,7 +28,9 @@ export class {{ toPascalCase schema.moduleName }}Response
         public readonly {{ toCamelCase nativeName }}: {{ toPascalCase getRelationshipModule }}Response,
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
+        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase relationshipField }}: {{ toPascalCase getRelationshipModule }}Response,
+        {{/unless}}
         {{/each}}
         {{#each schema.properties.withRelationshipOneToMany}}
         public readonly {{ toCamelCase nativeName }}: {{ toPascalCase getRelationshipModule }}Response[],
