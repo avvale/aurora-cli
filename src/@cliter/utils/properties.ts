@@ -236,7 +236,6 @@ export class Properties
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);                                     // exclude one to many relations
-            //.filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));  // exclude one to many relations
     }
 
     // DTOs

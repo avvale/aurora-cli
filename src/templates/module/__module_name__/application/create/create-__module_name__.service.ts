@@ -4,6 +4,9 @@ import {
     {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+{{#if schema.properties.hasI18n}}
+import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+{{/if}}
 import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 
 @Injectable()
@@ -12,6 +15,9 @@ export class Create{{ toPascalCase schema.moduleName }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
+        {{#if schema.properties.hasI18n}}
+        private readonly repositoryI18n: I{{ toPascalCase schema.moduleName }}I18NRepository,
+        {{/if}}
     ) {}
 
     public async main(
@@ -46,6 +52,9 @@ export class Create{{ toPascalCase schema.moduleName }}Service
 
         // create
         await this.repository.create({{ toCamelCase schema.moduleName }});
+        {{#if schema.properties.hasI18n}}
+        await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO());
+        {{/if}}
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const {{ toCamelCase schema.moduleName }}Register = this.publisher.mergeObjectContext(

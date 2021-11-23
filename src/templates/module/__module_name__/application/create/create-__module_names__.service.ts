@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+{{#if schema.properties.hasI18n}}
+import { ConfigService } from '@nestjs/config';
+{{/if}}
 import {
     {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+{{#if schema.properties.hasI18n}}
+import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+{{/if}}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from './../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
@@ -13,6 +19,10 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
+        {{#if schema.properties.hasI18n}}
+        private readonly repositoryI18n: I{{ toPascalCase schema.moduleName }}I18NRepository,
+        private readonly configService: ConfigService,
+        {{/if}}
     ) {}
 
     public async main(
@@ -46,7 +56,10 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         ));
 
         // insert
-        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }});
+        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}.filter(aggregate => aggregate.langId.value === this.configService.get<string>('APP_LANG_ID')));
+        {{#if schema.properties.hasI18n}}
+        await this.repositoryI18n.insert(aggregate{{ toPascalCase schema.moduleNames }}, {}, aggregate => aggregate.toI18nDTO());
+        {{/if}}
 
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

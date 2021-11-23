@@ -231,11 +231,11 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{#eq name 'id'}}
             {{ toCamelCase name }}: Utils.uuid(),
             {{else}}
-            {{#isI18nRelationProperty ../schema.moduleName name}}
+            {{#if (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase name }}: this.id.value,
             {{else}}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
-            {{/isI18nRelationProperty}}
+            {{/if}}
             {{/eq}}
             {{/if}}
             {{/each}}
