@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ICommandBus, NestCommandBus, IQueryBus, NestQueryBus } from '@aurora/cqrs';
@@ -7,6 +7,7 @@ import { CoreModule as AuroraCoreModule, ICriteria, SequelizeCriteria } from 'au
 @Module({
     imports: [
         AuroraCoreModule,
+        CacheModule.register(),
         ConfigModule.forRoot({ isGlobal: true }),
         CqrsModule
     ],
@@ -25,6 +26,7 @@ import { CoreModule as AuroraCoreModule, ICriteria, SequelizeCriteria } from 'au
         }
     ],
     exports: [
+        CacheModule,
         ConfigModule,
         CqrsModule,
         {

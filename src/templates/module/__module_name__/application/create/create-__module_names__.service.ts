@@ -56,9 +56,12 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         ));
 
         // insert
-        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}.filter(aggregate => aggregate.langId.value === this.configService.get<string>('APP_LANG_ID')));
         {{#if schema.properties.hasI18n}}
+        // delete duplicate elements from multiple languages
+        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => (t.id === country.id))));
         await this.repositoryI18n.insert(aggregate{{ toPascalCase schema.moduleNames }}, {}, aggregate => aggregate.toI18nDTO());
+        {{else}}
+        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }});
         {{/if}}
 
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality
