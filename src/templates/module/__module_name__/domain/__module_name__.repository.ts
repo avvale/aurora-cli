@@ -35,4 +35,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
 
     // delete records
     abstract delete(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
+
+    // count records
+    abstract count(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<number>;
 }
