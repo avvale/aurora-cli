@@ -32,7 +32,11 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
     @Index
     {{/eq}}
     {{#eq index 'unique' }}
+    {{#if indexName}}
+    @Unique('{{ indexName }}')
+    {{else}}
     @Unique
+    {{/if}}
     {{/eq}}
     @Column({
         field: '{{ toCamelCase name }}',

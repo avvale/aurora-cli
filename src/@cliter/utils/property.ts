@@ -33,6 +33,7 @@ export class Property
     public intermediateModelModuleSection?: string;
     public intermediateModelFile?: string;
     public index?: SqlIndex;
+    public indexName?: string;
     public isI18n?: boolean;
     public example?: any;
     public faker?: string;
@@ -60,6 +61,7 @@ export class Property
             intermediateModelModuleSection?: string;
             intermediateModelFile?: string;
             index?: SqlIndex;
+            indexName?: string;
             isI18n?: boolean;
             example?: any;
             faker?: any;
@@ -87,6 +89,7 @@ export class Property
         this.intermediateModelModuleSection = payload.intermediateModelModuleSection;
         this.intermediateModelFile = payload.intermediateModelFile;
         this.index = payload.index;
+        this.indexName = payload.indexName;
         this.isI18n = payload.isI18n;
         this.example = payload.example;
         this.faker = payload.faker;
@@ -297,6 +300,7 @@ export class Property
             intermediateModelModuleSection: this.intermediateModelModuleSection,
             intermediateModelFile         : this.intermediateModelFile,
             index                         : this.index,
+            indexName                     : this.indexName,
             isI18n                        : this.isI18n,
             example                       : this.example,
             faker                         : this.faker,

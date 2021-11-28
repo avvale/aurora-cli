@@ -51,9 +51,11 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         );
 
         // create
-        await this.repository.create({{ toCamelCase schema.moduleName }});
         {{#if schema.properties.hasI18n}}
+        if (await this.repository.count({ where: { id: {{ toCamelCase schema.moduleName }}.id.value }}) === 0) await this.repository.create({{ toCamelCase schema.moduleName }});
         await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO());
+        {{else}}
+        await this.repository.create({{ toCamelCase schema.moduleName }});
         {{/if}}
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events

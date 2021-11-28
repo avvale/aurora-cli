@@ -215,6 +215,7 @@ export default class Load extends Command
                     intermediateModelModuleSection: property?.intermediateModelModuleSection,
                     intermediateModelFile         : property?.intermediateModelFile,
                     index                         : property?.index,
+                    indexName                     : property?.indexName,
                     isI18n                        : property?.isI18n,
                     example                       : property?.example,
                     faker                         : property?.faker,
