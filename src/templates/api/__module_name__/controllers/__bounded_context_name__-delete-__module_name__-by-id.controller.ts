@@ -1,4 +1,4 @@
-import { Controller, Param, Delete, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
+import { Controller, Param, Delete{{#if schema.hasOAuth}}, UseGuards{{/if}}{{#if schema.properties.hasI18n}}, Headers{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
@@ -22,6 +22,9 @@ import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command
 import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command';
+{{#if schema.properties.hasI18n}}
+import { AddI18NConstraintService } from '@apps/common/lang/application/lib/add-i18n-constraint.service';
+{{/if}}
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
@@ -34,6 +37,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        {{#if schema.properties.hasI18n}}
+        private readonly addI18NConstraintService: AddI18NConstraintService,
+        {{/if}}
     ) {}
 
     @Delete(':id')
@@ -43,14 +49,20 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     @TenantConstraint()
     {{/if}}
     async main(
-        {{#if schema.hasTenant}}
-        @CurrentAccount() account: AccountResponse,
-        {{/if}}
         @Param('id') id: string,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
+        {{#if schema.hasTenant}}
+        @CurrentAccount() account: AccountResponse,
+        {{/if}}
+        {{#if schema.properties.hasI18n}}
+        @Headers('Content-Language') contentLanguage?: string,
+        {{/if}}
     )
     {
+        {{#if schema.properties.hasI18n}}
+        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
+        {{/if}}
         const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(id, constraint, { timezone }));
 
         await this.commandBus.dispatch(new Delete{{ toPascalCase schema.moduleName }}ByIdCommand(id, constraint, { timezone }));

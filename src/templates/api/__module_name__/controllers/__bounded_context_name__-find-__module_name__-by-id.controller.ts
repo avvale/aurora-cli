@@ -47,14 +47,14 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     {{/if}}
     async main(
         @Param('id') id: string,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         {{#if schema.properties.hasI18n}}
         @Headers('Content-Language') contentLanguage?: string,
         {{/if}}
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
     )
     {
         {{#if schema.properties.hasI18n}}
