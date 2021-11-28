@@ -28,7 +28,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
     abstract get(query: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<{{ schema.aggregateName }}[]>;
 
     // update record
-    abstract update({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}, constraint?: QueryStatement, cQMetadata?: CQMetadata, dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral): Promise<void>;
+    abstract update({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}, constraint?: QueryStatement, cQMetadata?: CQMetadata, dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral, findArguments?: ObjectLiteral): Promise<void>;
 
     // delete record
     abstract deleteById(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>;
