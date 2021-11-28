@@ -23,7 +23,7 @@ import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command';
 {{#if schema.properties.hasI18n}}
-import { AddI18NConstraintService } from '@apps/common/lang/application/lib/add-i18n-constraint.service';
+import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
 {{/if}}
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')

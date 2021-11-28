@@ -15,6 +15,8 @@ import './../handlebars/helpers/allow-property';
 import './../handlebars/helpers/is-i18n-relation-property';
 import './../handlebars/partials/i18n';
 import './../handlebars/partials/import-value-objects';
+import './../handlebars/partials/declare-i18n-repository';
+import './../handlebars/partials/import-i18n-repository';
 import './../handlebars/helpers/string-to-camel-case';
 import './../handlebars/helpers/string-to-kebab-case';
 import './../handlebars/helpers/string-to-pascal-case';

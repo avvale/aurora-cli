@@ -7,9 +7,7 @@ import {
     {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{#if schema.properties.hasI18n}}
-import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
-{{/if}}
+{{> importI18NRepository}}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from './../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
@@ -19,8 +17,8 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
+        {{> declareI18NRepository}}
         {{#if schema.properties.hasI18n}}
-        private readonly repositoryI18n: I{{ toPascalCase schema.moduleName }}I18NRepository,
         private readonly configService: ConfigService,
         {{/if}}
     ) {}

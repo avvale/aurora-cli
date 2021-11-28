@@ -4,9 +4,7 @@ import {
     {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{#if schema.properties.hasI18n}}
-import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
-{{/if}}
+{{> importI18NRepository}}
 import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 
 @Injectable()
@@ -15,9 +13,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
-        {{#if schema.properties.hasI18n}}
-        private readonly repositoryI18n: I{{ toPascalCase schema.moduleName }}I18NRepository,
-        {{/if}}
+        {{> declareI18NRepository}}
     ) {}
 
     public async main(
