@@ -1,6 +1,6 @@
 import { Controller, Put, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { Update{{ toPascalCase schema.moduleName }}Dto } from './../dto/update-{{ toKebabCase schema.moduleName }}.dto';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
@@ -54,7 +54,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Body() payload: Update{{ toPascalCase schema.moduleName }}Dto,
-        @Body('constraint') constraint?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {

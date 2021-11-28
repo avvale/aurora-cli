@@ -1,6 +1,6 @@
 import { Controller, Delete, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
@@ -49,7 +49,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Body('query') queryStatement?: QueryStatement,
-        @Body('constraint') constraint?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
