@@ -48,15 +48,15 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
     @TenantConstraint()
     {{/if}}
     async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         {{#if schema.properties.hasI18n}}
         @Headers('Content-Language') contentLanguage?: string,
         {{/if}}
-        @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
     )
     {
         {{#if schema.properties.hasI18n}}

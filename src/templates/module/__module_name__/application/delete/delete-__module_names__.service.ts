@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}Operator, {{/if}}QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+{{> importI18NRepository}}
 import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from './../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
 @Injectable()
@@ -11,6 +12,7 @@ export class Delete{{ toPascalCase schema.moduleNames }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
+        {{> declareI18NRepository}}
     ) {}
 
     public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
@@ -18,6 +20,13 @@ export class Delete{{ toPascalCase schema.moduleNames }}Service
         // get object to delete
         const {{ toCamelCase schema.moduleNames }} = await this.repository.get(queryStatement, constraint, cQMetadata);
 
+        {{#if schema.properties.hasI18n}}
+        await this.repositoryI18n.delete({
+            where: {
+                {{ toCamelCase schema.moduleName }}Id: { [Operator.in]: {{ toCamelCase schema.moduleNames }}.map(item => item.id) }
+            }
+        });
+        {{/if}}
         await this.repository.delete(queryStatement, constraint, cQMetadata);
 
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality
