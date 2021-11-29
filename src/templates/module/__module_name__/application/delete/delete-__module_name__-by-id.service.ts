@@ -23,7 +23,7 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdService
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
         {{#if schema.properties.hasI18n}}
-        await this.repositoryI18n.delete({ where: { {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id }});
+        await this.repositoryI18n.delete({ where: { {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value }});
         {{/if}}
         await this.repository.deleteById({{ toCamelCase schema.moduleName }}.id, {}, cQMetadata);
 

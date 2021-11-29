@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable{{#if schema.properties.hasI18n}}, NotFoundException{{/if}} } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
     {{> importValueObjects }}
@@ -6,6 +6,9 @@ import {
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
 {{> importI18NRepository}}
 import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
+{{#if schema.properties.hasI18n}}
+import * as _ from 'lodash';
+{{/if}}
 
 @Injectable()
 export class Create{{ toPascalCase schema.moduleName }}Service
@@ -46,9 +49,25 @@ export class Create{{ toPascalCase schema.moduleName }}Service
             {{/each}}
         );
 
-        // create
         {{#if schema.properties.hasI18n}}
-        if (await this.repository.count({ where: { id: {{ toCamelCase schema.moduleName }}.id.value }}) === 0) await this.repository.create({{ toCamelCase schema.moduleName }});
+        try
+        {
+            // try get object from database
+            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById({{ toCamelCase schema.moduleName }}.id, { include: ['{{ toCamelCase schema.moduleName }}I18N']});
+
+            // add new lang id to data lang field to create or update field
+            {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(_.union({{ toCamelCase schema.moduleName }}InDB.dataLang, [{{ toCamelCase schema.moduleName }}.langId.value]));
+            await this.repository.update({{ toCamelCase schema.moduleName }});
+        }
+        catch (error)
+        {
+            if (error instanceof NotFoundException)
+            {
+                {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang([{{ toCamelCase schema.moduleName }}.langId.value]);
+                await this.repository.create({{ toCamelCase schema.moduleName }});
+            }
+        }
+
         await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO());
         {{else}}
         await this.repository.create({{ toCamelCase schema.moduleName }});
