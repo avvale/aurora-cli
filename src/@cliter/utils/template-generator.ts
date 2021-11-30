@@ -43,21 +43,6 @@ export class TemplateGenerator
         }
     }
 
-    static generateI18nFiles(
-        relativeTargetBasePath: string,
-        relativeTargetPath: string
-    ): void
-    {
-        if (TemplateGenerator.stateService.schema.properties.hasI18n)
-        {
-            FileManager.generateContents(
-                path.join(TemplateGenerator.templatePath, 'i18n-files'),
-                relativeTargetBasePath,
-                relativeTargetPath
-            );
-        }
-    }
-
     static createDirectory(
         relativeTargetBasePath: string,
         directory: string

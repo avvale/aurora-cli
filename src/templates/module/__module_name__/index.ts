@@ -11,6 +11,11 @@ import { Update{{ toPascalCase schema.moduleName }}CommandHandler } from './appl
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.command-handler.ts'}}
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command-handler';
 {{/notInArray}}
+{{#if schema.properties.hasI18n}}
+{{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.command-handler.ts'}}
+import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommandHandler } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command-handler';
+{{/notInArray}}
+{{/if}}
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
 import { Delete{{ toPascalCase schema.moduleNames }}CommandHandler } from './application/delete/delete-{{ toKebabCase schema.moduleNames }}.command-handler';
 {{/notInArray}}
@@ -71,6 +76,11 @@ import { Update{{ toPascalCase schema.moduleName }}Service } from './application
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
 import { Delete{{ toPascalCase schema.moduleName }}ByIdService } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.service';
 {{/notInArray}}
+{{#if schema.properties.hasI18n}}
+{{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.service.ts'}}
+import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NService } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
+{{/notInArray}}
+{{/if}}
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.service.ts'}}
 import { Delete{{ toPascalCase schema.moduleNames }}Service } from './application/delete/delete-{{ toKebabCase schema.moduleNames }}.service';
 {{/notInArray}}
@@ -109,6 +119,11 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.command-handler.ts'}}
     Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler,
     {{/notInArray}}
+    {{#if schema.properties.hasI18n}}
+    {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.command-handler.ts'}}
+    Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommandHandler,
+    {{/notInArray}}
+    {{/if}} 
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
     Delete{{ toPascalCase schema.moduleNames }}CommandHandler,
     {{/notInArray}}
@@ -170,6 +185,11 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
     Delete{{ toPascalCase schema.moduleName }}ByIdService,
     {{/notInArray}}
+    {{#if schema.properties.hasI18n}}
+    {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.service.ts'}}
+    Delete{{ toPascalCase schema.moduleName }}ByIdI18NService,
+    {{/notInArray}}
+    {{/if}}
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.service.ts'}}
     Delete{{ toPascalCase schema.moduleNames }}Service,
     {{/notInArray}}

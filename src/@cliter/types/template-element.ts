@@ -1,12 +1,14 @@
 export enum TemplateElement
 {
+    API                 = 'api',
     APPLICATION         = 'application',
     BOUNDED_CONTEXT     = 'bounded-context',
+    ENV                 = 'env',
+    I18N_API            = 'i18n-api',
+    I18N_MODULE         = 'i18n-module',
+    INTERMEDIATE_TABLE  = 'intermediate-table',
     MODULE              = 'module',
-    API                 = 'api',
-    TEST                = 'test',
     PACKAGE             = 'package',
     POSTMAN             = 'postman',
-    INTERMEDIATE_TABLE  = 'intermediate-table',
-    ENV                 = 'env',
+    TEST                = 'test',
 }

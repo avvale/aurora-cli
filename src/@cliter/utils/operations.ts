@@ -42,11 +42,14 @@ export class Operations
         // generate intermediate tables
         await this.generateIntermediateTables();
 
-        // generate i18n repository if module has i18n table
-        await this.generateI18nFiles();
+        // generate i18n module files
+        await this.generateI18NModuleFiles();
 
         // generate @api files
         await this.generateApiFiles();
+
+        // generate @api i18n files
+        await this.generateI18NApiFiles();
 
         // create references, write imports in ts files
         this.createReferences();
@@ -77,7 +80,8 @@ export class Operations
 
         // create module files
         await TemplateGenerator.generateStaticContents(
-            TemplateElement.MODULE, path.join('src', cliterConfig.applicationsContainer),
+            TemplateElement.MODULE,
+            path.join('src', cliterConfig.applicationsContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
         );
 
@@ -93,15 +97,34 @@ export class Operations
         await TemplateGenerator.generateIntermediateTables(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
     }
 
-    async generateI18nFiles(): Promise<void>
+    async generateI18NModuleFiles(): Promise<void>
     {
-        await TemplateGenerator.generateI18nFiles(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        if (Operations.stateService.schema.properties.hasI18n)
+        {
+            await TemplateGenerator.generateStaticContents(
+                TemplateElement.I18N_MODULE,
+                path.join('src', cliterConfig.applicationsContainer),
+                Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            );
+        }
     }
 
     async generateApiFiles(): Promise<void>
     {
         await TemplateGenerator.createDirectory(path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
         await TemplateGenerator.generateStaticContents(TemplateElement.API, path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+    }
+
+    async generateI18NApiFiles(): Promise<void>
+    {
+        if (Operations.stateService.schema.properties.hasI18n)
+        {
+            await TemplateGenerator.generateStaticContents(
+                TemplateElement.I18N_API,
+                path.join('src', cliterConfig.applicationsContainer),
+                Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            );
+        }
     }
 
     async generateTestingFiles(): Promise<void>
