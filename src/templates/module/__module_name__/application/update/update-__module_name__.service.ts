@@ -50,6 +50,11 @@ export class Update{{ toPascalCase schema.moduleName }}Service
             {{/each}}
         );
 
+        {{#if schema.properties.hasI18n}}
+        // delete dataLang property to avoid overwrite this value in database
+        delete {{ toCamelCase schema.moduleName }}.dataLang;
+        {{/if}}
+
         // update
         await this.repository.update({{ toCamelCase schema.moduleName }}, constraint, cQMetadata);
         {{#if schema.properties.hasI18n}}
