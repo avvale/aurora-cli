@@ -56,7 +56,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
             const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById({{ toCamelCase schema.moduleName }}.id, { include: ['{{ toCamelCase schema.moduleName }}I18N']});
 
             // add new lang id to data lang field to create or update field
-            {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(_.union({{ toCamelCase schema.moduleName }}InDB.dataLang, [{{ toCamelCase schema.moduleName }}.langId.value]));
+            {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(_.union({{ toCamelCase schema.moduleName }}InDB.dataLang.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
             await this.repository.update({{ toCamelCase schema.moduleName }});
         }
         catch (error)
