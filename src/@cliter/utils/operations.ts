@@ -94,7 +94,10 @@ export class Operations
 
     async generateIntermediateTables(): Promise<void>
     {
-        await TemplateGenerator.generateIntermediateTables(path.join('src', cliterConfig.applicationsContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.generateIntermediateTables(
+            path.join('src', cliterConfig.applicationsContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
     }
 
     async generateI18NModuleFiles(): Promise<void>
@@ -111,8 +114,15 @@ export class Operations
 
     async generateApiFiles(): Promise<void>
     {
-        await TemplateGenerator.createDirectory(path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
-        await TemplateGenerator.generateStaticContents(TemplateElement.API, path.join('src', cliterConfig.apiContainer), Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase());
+        await TemplateGenerator.createDirectory(
+            path.join('src', cliterConfig.apiContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.API,
+            path.join('src', cliterConfig.apiContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
     }
 
     async generateI18NApiFiles(): Promise<void>
@@ -121,7 +131,7 @@ export class Operations
         {
             await TemplateGenerator.generateStaticContents(
                 TemplateElement.I18N_API,
-                path.join('src', cliterConfig.applicationsContainer),
+                path.join('src', cliterConfig.apiContainer),
                 Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
             );
         }
