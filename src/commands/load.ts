@@ -188,7 +188,8 @@ export default class Load extends Command
 
         this.parseModuleDefinitionSchema(yamlObj);
 
-        const properties = new Properties();
+        const properties        = new Properties();
+        properties.moduleName   = yamlObj.moduleName;
 
         for (const property of yamlObj.aggregateProperties)
         {

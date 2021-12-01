@@ -50,8 +50,11 @@ export default class Generate extends Command
 
             const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant }: any = await Prompter.promptForGenerateModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
+            const properties: Properties    = new Properties();
+            properties.moduleName           = moduleName;
+
             // add id property
-            const properties: Properties = new Properties([new Property({ name: 'id', type: SqlType.ID, primaryKey: true, length: 36, nullable: false })]);
+            properties.add(new Property({ name: 'id', type: SqlType.ID, primaryKey: true, length: 36, nullable: false }));
 
             // add properties defined by user
             while ((await Prompter.promptForGenerateAggregate()).hasValueObject)

@@ -27,6 +27,11 @@ import './../handlebars/helpers/faker';
 import './../handlebars/helpers/faker-property';
 import './../handlebars/helpers/set-var';
 import './../handlebars/helpers/loops';
+import './../handlebars/helpers/uuid';
+import './../handlebars/helpers/postman-quotes';
+import './../handlebars/helpers/bracket-open';
+import './../handlebars/helpers/bracket-close';
+import './../handlebars/helpers/faker-postman';
 
 export class TemplateEngine
 {

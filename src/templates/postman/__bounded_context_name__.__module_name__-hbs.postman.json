@@ -1,0 +1,41 @@
+{
+    "info": {
+		"_postman_id"   : "{{ uuid }}",
+		"name"          : "{{ config.applicationsContainer }} - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ fakerPostman . }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        }
+    ],
+    "variable": [
+		{
+			"id": "{{ uuid }}",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

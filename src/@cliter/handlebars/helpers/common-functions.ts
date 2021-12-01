@@ -90,7 +90,7 @@ export function getFakerHelperParams(options: any[], property?: Property): any[]
     const parameters = [];
     let hasFirstParameter = false;
 
-    for (let option of options)
+    for (const option of options)
     {
         if (
             !(option instanceof Object && (option.name === 'fakerProperty' || option.name === 'faker')) && // avoid add handlebars property

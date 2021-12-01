@@ -3,12 +3,10 @@ import { SqlRelationship, SqlType } from './../types';
 
 export class Properties
 {
-    timestampFields: string[] = ['createdAt', 'updatedAt', 'deletedAt'];
-    deletedAtField: string[] = ['deletedAt'];
-
-    constructor(
-        public properties: Property[] = []
-    ) {}
+    moduleName                  = '';
+    properties: Property[]      = [];
+    timestampFields: string[]   = ['createdAt', 'updatedAt', 'deletedAt'];
+    deletedAtField: string[]    = ['deletedAt'];
 
     *[Symbol.iterator]()
     {
@@ -277,11 +275,25 @@ export class Properties
     get postmanGraphQLCreateQuery(): Property[]
     {
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
-            .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
+            .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                             // exclude many to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
+    }
+
+    get postmanGraphQLCreateVariables(): Property[]
+    {
+        return this.properties
+            .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
+            .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                             // exclude many to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get postmanGraphQLGetQuery(): Property[]
@@ -321,14 +333,6 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_ONE)                                      // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                     // exclude many to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
-    }
-
-    get postmanGraphQLCreateVariables(): Property[]
-    {
-        return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 

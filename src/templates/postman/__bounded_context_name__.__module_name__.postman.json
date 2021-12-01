@@ -5,30 +5,7 @@
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
-        {
-			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{<% for (const property of schema.properties.postmanGraphQLCreateQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{<% iterations = schema.properties.postmanGraphQLCreateVariables.length; for (const property of schema.properties.postmanGraphQLCreateVariables) { %>\n\t\t\"<%= property.name.toCamelCase() %>\": <%- config.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- config.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "\{{URL}}/graphql",
-					"host": [
-						"\{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
+
         {
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}",
 			"request": {
@@ -53,6 +30,7 @@
 			},
 			"response": []
         },
+
         {
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}",
 			"request": {

@@ -6,13 +6,13 @@ import * as _ from 'lodash';
 
 handlebars.registerHelper('fakerProperty', function(property: Property, ...options)
 {
-    const params = getFakerHelperParams(options, property)
+    const params = getFakerHelperParams(options, property);
 
     // check viability of faker property
-    if (!!property.faker)
+    if (property.faker)
     {
         const mock = fakerHelper(property.faker, params);
-        if (!!mock) return mock;
+        if (mock) return mock;
     }
 
     // check special types

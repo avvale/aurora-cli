@@ -1,7 +1,7 @@
 {{#each schema.properties.isEnum}}
 enum {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} {
     {{#each enumOptions}}
-    {{ this }}
+    {{ . }}
     {{/each}}
 }
 {{/each}}

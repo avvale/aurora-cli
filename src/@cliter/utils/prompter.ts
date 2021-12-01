@@ -3,46 +3,12 @@ import { SqlRelationship, SqlType } from './../types';
 import { Operations } from './operations';
 import { Property } from './property';
 import { cliterConfig } from './../config/cliter.config';
-import { newCommandConfig } from './../config/new-command.config';
 import { Properties } from './properties';
 import * as inquirer from 'inquirer';
 import * as Table from 'cli-table3';
 
 export class Prompter
 {
-    static async promptForNewApplication()
-    {
-        const questions = [];
-
-        questions.push({
-            name   : 'branch',
-            message: 'Choose with which branch do you want to create your application?',
-            type   : 'list',
-            choices: newCommandConfig.branches
-        });
-
-        return await inquirer.prompt(questions);
-    }
-
-    static async promptForGithubCredentials()
-    {
-        const questions = [];
-
-        questions.push({
-            name   : 'githubUsername',
-            message: 'Type your github username',
-            type   : 'input'
-        });
-
-        questions.push({
-            name   : 'githubPassword',
-            message: 'Type your github password',
-            type   : 'password'
-        });
-
-        return await inquirer.prompt(questions);
-    }
-
     static async promptForLoadModule(boundedContextName?: string, moduleName?: string)
     {
         const questions = [];
