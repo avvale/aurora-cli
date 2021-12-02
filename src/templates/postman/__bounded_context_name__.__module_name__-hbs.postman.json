@@ -14,7 +14,79 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ fakerPostman . }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[{{#loops 10}}\n\t\t{{ bracketOpen }}{{#each ../schema.properties.postmanGraphQLCreateVariables}}\n\t\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t\t}{{#unless @last}}, {{/unless}}{{/loops}}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }} (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLGetQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"{{{ uuid }}}\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {

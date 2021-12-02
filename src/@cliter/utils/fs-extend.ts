@@ -3,13 +3,13 @@ import * as fs from 'fs';
 // extend file system class to improve methods
 export class FsExtend
 {
-    static rmDir(path: string)
+    static rmDir(path: string): void
     {
         if (fs.existsSync(path))
         {
             fs.readdirSync(path).forEach(function(file,index)
             {
-                var curPath = path + "/" + file;
+                const curPath = path + '/' + file;
                 if (fs.lstatSync(curPath).isDirectory())
                 {
                     FsExtend.rmDir(curPath);

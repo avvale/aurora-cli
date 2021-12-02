@@ -1,6 +1,7 @@
 export { CodeWriter } from './code-writer';
 export { Cypher } from './cypher';
 export { FsExtend } from './fs-extend';
+export { Mocker } from './mocker';
 export { Operations } from './operations';
 export { Prompter } from './prompter';
 export { Properties } from './properties';

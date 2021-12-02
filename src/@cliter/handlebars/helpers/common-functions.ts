@@ -95,7 +95,8 @@ export function getFakerHelperParams(options: any[], property?: Property): any[]
         if (
             !(option instanceof Object && (option.name === 'fakerProperty' || option.name === 'faker')) && // avoid add handlebars property
             option !== 'seed' // avoid add seed command
-        ){
+        )
+        {
             parameters.push(option);
             hasFirstParameter = true;
         }

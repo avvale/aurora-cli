@@ -32,6 +32,8 @@ import './../handlebars/helpers/postman-quotes';
 import './../handlebars/helpers/bracket-open';
 import './../handlebars/helpers/bracket-close';
 import './../handlebars/helpers/faker-postman';
+import './../handlebars/helpers/mocker';
+import './../handlebars/helpers/object';
 
 export class TemplateEngine
 {
