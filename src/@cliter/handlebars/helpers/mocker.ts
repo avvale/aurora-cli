@@ -16,11 +16,13 @@ handlebars.registerHelper('mocker', function(
         property    = undefined,
         uuidSeed    = 'aurora',
         hasUuidSeed = true,             // boolean to allow for create the same uuid
+        scapeQuotes = true,
     }: {
         type?: MockType;
         property?: Property;
         uuidSeed?: string;
         hasUuidSeed?: boolean;
+        scapeQuotes?: boolean;
     } = {}
 )
 {
@@ -36,22 +38,18 @@ handlebars.registerHelper('mocker', function(
         return uuidv5(uuidSeed, namespace);
     }
 
-    if (type === MockType.SEED)
-    {
-        /**/
-    }
-
-    if (type === MockType.POSTMAN)
+    if (type === MockType.POSTMAN || type === MockType.SEED)
     {
         // return data defined in yaml model definition
         if (property?.type === SqlType.ID && hasUuidSeed)   return uuidv5(uuidSeed, namespace);
         if (property?.type === SqlType.ENUM)                return property.enumOptions ? _.shuffle(property.enumOptions)[0] : null;
+        if (property?.type === SqlType.RELATIONSHIP)        return '[]';
 
         return mocker.mock(
-            property?.type as string,
+            property?.faker ? property.faker : property?.type as string,
             property?.name as string,
             {
-                scapeQuotes          : true,
+                scapeQuotes,
                 checkFieldNameMeaning: true,
                 length               : property?.length,
                 maxLength            : property?.maxLength,

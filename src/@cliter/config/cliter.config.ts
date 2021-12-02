@@ -1,6 +1,3 @@
-import * as faker from 'faker';
-import * as dayjs from 'dayjs';
-
 export interface CliterConfig
 {
     applicationsContainer: string;
@@ -16,7 +13,6 @@ export interface CliterConfig
     sqlTypesEquivalenceQraphqlTypes: { [key: string]: string };
     sqlTypesEquivalenceSequelizeTypes: { [key: string]: Function };
     defaultTypeLength: { [key: string]: number };
-    fakerRelation: { [key: string]: Function };
     quotationTypes: { [key: string]: boolean };
     fileTags: { [key: string]: string };
     compareActions: { [key: string]: string };
@@ -113,23 +109,6 @@ export const cliterConfig: CliterConfig =
         'int.unsigned'     : 10,
         'smallint'         : 6,
         'smallint.unsigned': 6,
-    },
-    fakerRelation: {
-        'varchar'          : (length: number): string => faker.random.alphaNumeric(length),
-        'password'         : (length: number): string => faker.random.alphaNumeric(length),
-        'char'             : (length: number): string => faker.random.alphaNumeric(length),
-        'text'             : (length: number): string => faker.lorem.paragraph(),
-        'enum'             : (length: number): string => faker.lorem.paragraph(),
-        'int'              : (length: number): number => Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))),
-        'int.unsigned'     : (length: number): number => Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))),
-        'smallint'         : (length: number): number => Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))),
-        'smallint.unsigned': (length: number): number => Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))),
-        'float'            : (length: number): number => length ? Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))) : faker.datatype.float(),
-        'decimal'          : (length: number): number => length ? Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))) : faker.datatype.float(),
-        'boolean'          : (length: number): boolean => faker.datatype.boolean(),
-        'json'             : (length: number): string => '{ "foo" : "bar" }',
-        'id'               : (length: number): string => faker.datatype.uuid(),
-        'timestamp'        : (length: number): string => dayjs(faker.date.recent()).format('YYYY-MM-DD HH:mm:ss'),
     },
     quotationTypes: {
         'varchar'          : true,

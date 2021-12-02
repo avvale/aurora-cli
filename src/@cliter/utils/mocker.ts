@@ -3,7 +3,6 @@ import * as dayjs from 'dayjs';
 
 export class Mocker
 {
-    // old fakerHelper
     mock(
         fieldType: string,
         fieldName: string,
