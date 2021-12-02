@@ -254,16 +254,6 @@ export class Property
         return this.config.quotationTypes[this.type];
     }
 
-    fakerPostman(force = false): any
-    {
-        if (this.type === SqlType.ID && !force)    return this.id;
-        if (this.type === SqlType.RELATIONSHIP)    return '[]';
-        if (this.type === SqlType.JSON)            return this.config.fakerRelation[this.type]().replace(/\"/gi, '\\"');
-        if (this.type === SqlType.ENUM)            return this.enumOptions ? _.shuffle(this.enumOptions)[0] : null;
-
-        return this.config.fakerRelation[this.type] ? this.config.fakerRelation[this.type](this.maxLength ? this.maxLength : this.length) : '';
-    }
-
     private parseModuleSection(moduleSectionString: string): { boundedContextName: string; moduleName: string }
     {
         const moduleSection = moduleSectionString.split('/');

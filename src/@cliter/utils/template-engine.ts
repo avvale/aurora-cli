@@ -1,6 +1,4 @@
 
-import { Options } from 'ejs';
-import * as ejs from 'ejs';
 import * as handlebars from 'handlebars';
 import * as handlebarsHelpers from 'handlebars-helpers';
 import './../prototypes/string-to-kebab-case.interface';
@@ -31,7 +29,6 @@ import './../handlebars/helpers/uuid';
 import './../handlebars/helpers/postman-quotes';
 import './../handlebars/helpers/bracket-open';
 import './../handlebars/helpers/bracket-close';
-import './../handlebars/helpers/faker-postman';
 import './../handlebars/helpers/mocker';
 import './../handlebars/helpers/object';
 
@@ -43,14 +40,12 @@ export class TemplateEngine
      * @param data
      * @param opts
      */
-    static async render(content: string, data: any, opts: Options): Promise<string>
+    static async render(content: string, data: any): Promise<string>
     {
-        const ejsRendered = ejs.render(content, data, opts);
-
         // add helpers to handlebars template engine
         handlebarsHelpers({ handlebars });
 
-        return handlebars.compile(ejsRendered)(data, {
+        return handlebars.compile(content)(data, {
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault   : true,
         });

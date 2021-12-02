@@ -190,7 +190,7 @@ export class FileManager
         // read file content
         let contents = fs.readFileSync(originFilePath, 'utf8');
 
-        // replace variables with ejs template engine
+        // replace variables with handlebars template engine
         contents = await TemplateEngine.render(contents, {
             ...FileManager.stateService,
             currentProperty,
@@ -198,7 +198,7 @@ export class FileManager
             boundedContextSuffix,
             moduleNamePrefix,
             moduleNameSuffix,
-        }, { filename: originFilePath });
+        });
 
         // render name of file
         const mappedFile = FileManager.renderFilename(

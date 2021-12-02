@@ -1,10 +1,106 @@
-{<% let iterations = 0; %>
+{
     "info": {
 		"_postman_id"   : "{{ uuid }}",
 		"name"          : "{{ config.applicationsContainer }} - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[{{#loops 10}}\n\t\t{{ bracketOpen }}{{#each ../schema.properties.postmanGraphQLCreateVariables}}\n\t\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t\t}{{#unless @last}}, {{/unless}}{{/loops}}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }} (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLGetQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"{{{ mocker (object type='uuid') }}}\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
         {
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}",
 			"request": {
@@ -13,8 +109,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query: $query)\n\t{<% for (const property of schema.properties.postmanGraphQLFindQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n\t\t}\n\t}\n}"
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLFindQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"{{{ mocker (object type='uuid') }}}\"\n\t\t}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -37,8 +133,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{<% for (const property of schema.properties.postmanGraphQLFindByIdQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
-						"variables": "{\n\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n}"
+						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLFindByIdQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"id\": \"{{{ mocker (object type='uuid') }}}\"\n}"
 					}
 				},
 				"url": {
@@ -61,8 +157,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{<% for (const property of schema.properties.postmanGraphQLUpdateQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{<% iterations = schema.properties.postmanGraphQLUpdateVariables.length; for (const property of schema.properties.postmanGraphQLUpdateVariables) { %>\n\t\t\"<%= property.name.toCamelCase() %>\": <%- config.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- config.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n\t}\n}"
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLUpdateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLUpdateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -85,8 +181,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{<% for (const property of schema.properties.postmanGraphQLDeleteQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
-						"variables": "{\n\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n}"
+						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"id\": \"{{{ mocker (object type='uuid') }}}\"\n}"
 					}
 				},
 				"url": {
@@ -109,7 +205,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{<% for (const property of schema.properties.postmanGraphQLDeleteQuery) { %>\n\t\t<%= property.name.toCamelCase() %><% } %>\n\t}\n}",
+						"query": "mutation ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
 					}
 				},
@@ -139,7 +235,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{<% iterations = schema.properties.postmanRestCreate.length; for (const property of schema.properties.postmanRestCreate) { %>\n\t\"<%= property.name.toCamelCase() %>\": <%- config.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- config.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n}",
+					"raw"   : "{{ bracketOpen }}{{#each schema.properties.postmanRestCreate}}\n\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,6 +255,9 @@
 			},
 			"response": []
         },
+
+
+
         {
 			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
 			"request": {
@@ -173,7 +272,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[<%  for (let i= 0; i < 20; i++) { %>\n\t{<% iterations = schema.properties.postmanRestCreate.length; for (const property of schema.properties.postmanRestCreate) { %>\n\t\t\"<%= property.name.toCamelCase() %>\": <%- config.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman(true) %><%- config.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n\t}<% if (i < 19) { %>, <% } %><% } %>\n]",
+					"raw"   : "[{{#loops 10}}\n\t{{ bracketOpen }}{{#each ../schema.properties.postmanRestCreate}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}{{#unless @last}}, {{/unless}}{{/loops}}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -248,7 +347,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"{{{ mocker (object type='uuid') }}}\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -285,7 +384,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"<%= schema.properties.id.fakerPostman() %>\"\n\t\t}\n\t}\n}",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"{{{ mocker (object type='uuid') }}}\"\n\t\t}\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -330,14 +429,14 @@
 					}
 				},
 				"url": {
-					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/<%= schema.properties.id.fakerPostman() %>",
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{{ mocker (object type='uuid') }}}",
 					"host": [
 						"\{{URL}}"
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
 						"{{ toKebabCase schema.moduleName }}",
-						"<%= schema.properties.id.fakerPostman() %>"
+						"{{{ mocker (object type='uuid') }}}"
 					]
 				}
 			},
@@ -357,7 +456,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{<% iterations = schema.properties.postmanRestUpdate.length; for (const property of schema.properties.postmanRestUpdate) { %>\n\t\"<%= property.name.toCamelCase() %>\": <%- config.quotationTypes[property.type] ? '\\\"' : '' %><%- property.fakerPostman() %><%- config.quotationTypes[property.type] ? '\\\"' : '' %><% if (!!--iterations) { %>, <% } %><% } %>\n}",
+					"raw"   : "{{ bracketOpen }}{{#each schema.properties.postmanRestUpdate}}\n\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -399,14 +498,14 @@
 					}
 				},
 				"url": {
-					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/<%= schema.properties.id.fakerPostman() %>",
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{{ mocker (object type='uuid') }}}",
 					"host": [
 						"\{{URL}}"
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
 						"{{ toKebabCase schema.moduleName }}",
-						"<%= schema.properties.id.fakerPostman() %>"
+						"{{{ mocker (object type='uuid') }}}"
 					]
 				}
 			},

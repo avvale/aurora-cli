@@ -12,15 +12,21 @@ export class Mocker
             maxLength = 0,
             minLength = 0,
             scapeQuotes = false,
+            checkFieldNameMeaning = false,
         }: {
             length?: number;
             maxLength?: number;
             minLength?: number;
             scapeQuotes?: boolean;
+            checkFieldNameMeaning?: boolean;
         } = {}): string | number | boolean | undefined
     {
-        const mockByMeaning = this.mockByMeaning(fieldName);
-        if (mockByMeaning) return mockByMeaning;
+        // according to the meaning of the field use a faker function to obtain the mock
+        if (checkFieldNameMeaning)
+        {
+            const mockByFieldNameMeaning = this.mockByFieldNameMeaning(fieldName);
+            if (mockByFieldNameMeaning) return mockByFieldNameMeaning;
+        }
 
         switch (fieldType)
         {
@@ -90,7 +96,7 @@ export class Mocker
         }
     }
 
-    mockByMeaning(fieldName: string): string | number | boolean | undefined
+    mockByFieldNameMeaning(fieldName: string): string | number | boolean | undefined
     {
         switch (fieldName)
         {
