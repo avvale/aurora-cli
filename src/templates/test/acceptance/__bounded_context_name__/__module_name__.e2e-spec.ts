@@ -150,7 +150,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false log=true length=(add testPropety.length 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -398,13 +398,13 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {
                     where:
                     {
-                        id: '{{ fakerProperty schema.properties.id 'seed' }}'
+                        id: '{{{ mocker (object type='uuid') }}}'
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body).toHaveProperty('id', '{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
 
@@ -422,14 +422,14 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ fakerProperty schema.properties.id 'seed' }}')
+            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{{ mocker (object type='uuid') }}}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .expect(200)
             .then(res => {
-                expect(res.body).toHaveProperty('id', '{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
 
@@ -464,7 +464,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body).toHaveProperty('id', '{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
 
@@ -482,7 +482,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ fakerProperty schema.properties.id 'seed' }}')
+            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{{ mocker (object type='uuid') }}}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -621,7 +621,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}).toHaveProperty('id', '{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
 
@@ -690,14 +690,14 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         where:
                         {
-                            id: '{{ fakerProperty schema.properties.id 'seed' }}'
+                            id: '{{{ mocker (object type='uuid') }}}'
                         }
                     }
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
 
@@ -754,12 +754,12 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{ fakerProperty schema.properties.id 'seed' }}'
+                    id: '{{{ mocker (object type='uuid') }}}'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
 
@@ -829,7 +829,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
 
@@ -886,12 +886,12 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{ fakerProperty schema.properties.id 'seed' }}'
+                    id: '{{{ mocker (object type='uuid') }}}'
                 }
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{ fakerProperty schema.properties.id 'seed' }}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
 

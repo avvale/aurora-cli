@@ -7,9 +7,9 @@ export class Mocker
         fieldType: string,
         fieldName: string,
         {
-            length = 0,
-            maxLength = 0,
-            minLength = 0,
+            length = undefined,
+            maxLength = undefined,
+            minLength = undefined,
             scapeQuotes = false,
             checkFieldNameMeaning = false,
         }: {
@@ -29,11 +29,9 @@ export class Mocker
 
         switch (fieldType)
         {
-            /*  case 'datatype.uuid':
-                if (params.length > 0 && typeof params[0] === 'number' && params[0] !== 36) return faker.random.alphaNumeric(params[0]);
-                return faker.datatype.uuid(); */
-
             case 'id':
+            case 'datatype.uuid':
+                if (length !== 36) return faker.random.alphaNumeric(length);
                 return faker.datatype.uuid();
 
             case 'boolean':
@@ -58,19 +56,19 @@ export class Mocker
 
             case 'int':
             case 'int.unsigned':
-                if (length === 0) length = 10;
-                return Math.floor(+(1 + '0'.repeat(length - 1)) + Math.random() * +(9 + '0'.repeat(length - 1)));
+                if (!maxLength) maxLength = 10;
+                return Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1)));
 
             case 'smallint':
             case 'smallint.unsigned':
-                if (length === 0) length = 5;
-                return Math.floor(+(1 + '0'.repeat(length - 1)) + Math.random() * +(9 + '0'.repeat(length - 1)));
+                if (!maxLength) maxLength = 5;
+                return Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1)));
 
             case 'decimal':
-                return length ? Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))) : faker.datatype.float();
+                return maxLength ? Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1))) : faker.datatype.float();
 
-            case 'random.float.length':
-                return length ? Math.floor(+(1 + '0'.repeat(length-1)) + Math.random() * +(9 + '0'.repeat(length-1))) : faker.datatype.float();
+            case 'random.float':
+                return maxLength ? Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1))) : faker.datatype.float();
 
             case 'timestamp':
             case 'timestamp.recent':
@@ -81,6 +79,7 @@ export class Mocker
                     Command Faker ${fieldType} not recognized, check FakeJs API:
                     https://github.com/marak/Faker.js/
                 `);
+
             /* case 'database.column':
                 if (params.length > 0 && typeof params[0] === 'number') return faker.random.alphaNumeric(params[0]);
                 return faker.database.column();
