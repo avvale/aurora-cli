@@ -339,9 +339,12 @@ export class Properties
     get postmanGraphQLUpdateVariables(): Property[]
     {
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));
     }
 
     get postmanGraphQLDeleteQuery(): Property[]
@@ -374,9 +377,12 @@ export class Properties
     get test(): Property[]
     {
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to many relations
+            .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to many relations
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get isNotNullable(): Property[]
@@ -468,7 +474,7 @@ export class Properties
         return this.withRelationship.filter(item =>
         {
             if (!item.relationshipModulePath) return false;
-            return item.relationshipModulePath.split('/')[0] !== boundedContextName
+            return item.relationshipModulePath.split('/')[0] !== boundedContextName;
         });
     }
 
@@ -477,7 +483,7 @@ export class Properties
         this.properties.push(property);
     }
 
-    filter(fn: ()=>{}): Property[]
+    filter(fn: () => {}): Property[]
     {
         return this.properties.filter(fn);
     }

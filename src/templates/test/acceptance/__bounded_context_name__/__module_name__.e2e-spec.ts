@@ -1,3 +1,5 @@
+/* eslint-disable quotes */
+/* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -104,7 +106,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#eq notNullPropety.name testPropety.name}}null{{else}}{{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }}{{/eq}},
+                {{ toCamelCase name }}: {{#eq notNullPropety.name testPropety.name}}null{{else}}{{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }}{{/eq}},
                 {{/each}}
             })
             .expect(400)
@@ -126,7 +128,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
                 {{#unlessEq notNullPropety.name testPropety.name}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
                 {{/unlessEq}}
                 {{/each}}
             })
@@ -148,7 +150,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasLengthPropety.name testPropety.name}}{{ fakerProperty . (add testPropety.length 1) }}{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -169,7 +171,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasMaxLengthPropety.name testPropety.name}}{{ fakerProperty . (add testPropety.maxLength 1) }}{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasMaxLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -190,7 +192,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasMaxLengthPropety.name testPropety.name}}{{ fakerProperty . (subtract testPropety.minLength 1) }}{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasMaxLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -210,7 +212,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isIntegerPropety.name testPropety.name}}100.10{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isIntegerPropety.name testPropety.name}}100.10{{else}}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -230,7 +232,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isIntegerUnsignedPropety.name testPropety.name}}-9{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isIntegerUnsignedPropety.name testPropety.name}}-9{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -250,7 +252,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isBooleanPropety.name testPropety.name}}'true'{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isBooleanPropety.name testPropety.name}}'true'{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -270,7 +272,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isEnumPropety.name testPropety.name}}XXXX{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isEnumPropety.name testPropety.name}}XXXX{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -290,7 +292,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isTimestampPropety.name testPropety.name}}XXXXXXXX{{else}}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isTimestampPropety.name testPropety.name}}XXXXXXXX{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -377,7 +379,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each schema.properties.test}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(201);
@@ -441,7 +443,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(404);
@@ -457,7 +459,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(200)
@@ -612,7 +614,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 variables: {
                     payload: {
                         {{#each schema.properties.postmanGraphQLCreateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
                         {{/each}}
                     }
                 }
@@ -784,7 +786,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 variables: {
                     payload: {
                         {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
+                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
                         {{/each}}
                     }
                 }
@@ -820,7 +822,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 variables: {
                     payload: {
                         {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=seedProperty type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
                         {{/each}}
                     }
                 }

@@ -12,17 +12,25 @@ enum MockType
 
 handlebars.registerHelper('mocker', function(
     {
-        type        = MockType.SEED,
-        property    = undefined,
-        uuidSeed    = 'aurora',
-        hasUuidSeed = true,             // boolean to allow for create the same uuid
-        scapeQuotes = true,
+        type                    = MockType.SEED,
+        property                = undefined,
+        uuidSeed                = 'aurora',
+        hasUuidSeed             = true,             // boolean to allow for create the same uuid
+        scapeQuotes             = true,
+        checkFieldNameMeaning   = true,
+        length                  = undefined,
+        maxLength               = undefined,
+        minLength               = undefined,
     }: {
         type?: MockType;
         property?: Property;
         uuidSeed?: string;
         hasUuidSeed?: boolean;
         scapeQuotes?: boolean;
+        checkFieldNameMeaning?: boolean;
+        length?: number;
+        maxLength?: number;
+        minLength?: number;
     } = {}
 )
 {
@@ -50,10 +58,10 @@ handlebars.registerHelper('mocker', function(
             property?.name as string,
             {
                 scapeQuotes,
-                checkFieldNameMeaning: true,
-                length               : property?.length,
-                maxLength            : property?.maxLength,
-                minLength            : property?.minLength,
+                checkFieldNameMeaning,
+                length   : length || property?.length,
+                maxLength: maxLength || property?.maxLength,
+                minLength: minLength || property?.minLength,
             }
         );
     }
