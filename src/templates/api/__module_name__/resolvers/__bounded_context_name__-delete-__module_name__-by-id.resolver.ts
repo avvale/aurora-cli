@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -50,6 +50,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
+        {{/if}}
+        {{#if schema.properties.hasI18n}}
+        @ContentLanguage() contentLanguage?: string,
         {{/if}}
     )
     {

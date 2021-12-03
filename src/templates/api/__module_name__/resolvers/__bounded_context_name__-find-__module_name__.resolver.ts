@@ -1,5 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -43,12 +43,15 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     @TenantConstraint()
     {{/if}}
     async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
+        {{#if schema.properties.hasI18n}}
+        @ContentLanguage() contentLanguage?: string,
+        {{/if}}
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {
         {{#if schema.properties.hasI18n}}
