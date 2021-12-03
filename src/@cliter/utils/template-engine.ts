@@ -21,7 +21,6 @@ import './../handlebars/helpers/string-to-pascal-case';
 import './../handlebars/helpers/string-to-snake-case';
 import './../handlebars/helpers/has-items';
 import './../handlebars/helpers/not-in-array';
-import './../handlebars/helpers/faker-property';
 import './../handlebars/helpers/set-var';
 import './../handlebars/helpers/loops';
 import './../handlebars/helpers/uuid';
