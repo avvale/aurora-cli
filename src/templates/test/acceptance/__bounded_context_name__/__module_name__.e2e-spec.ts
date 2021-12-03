@@ -518,8 +518,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
             });
     });
 
@@ -659,8 +659,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.response.message).toContain('not found');
             });
     });
 
@@ -728,8 +728,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.response.message).toContain('not found');
             });
     });
 
@@ -794,8 +794,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.response.message).toContain('not found');
             });
     });
 
@@ -860,8 +860,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.exception.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.exception.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.response.message).toContain('not found');
             });
     });
 
