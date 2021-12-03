@@ -1,5 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -50,8 +50,14 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        {{#if schema.properties.hasI18n}}
+        @ContentLanguage() contentLanguage?: string,
+        {{/if}}
     ): Promise<Pagination>
     {
+        {{#if schema.properties.hasI18n}}
+        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
+        {{/if}}
         return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(queryStatement, constraint, { timezone }));
     }
 }
