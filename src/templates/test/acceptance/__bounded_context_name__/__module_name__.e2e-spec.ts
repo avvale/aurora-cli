@@ -150,7 +150,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false log=true length=(add testPropety.length 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(400)
@@ -314,10 +314,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(409);
     });
 
-    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate', () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
