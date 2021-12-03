@@ -1,4 +1,4 @@
-import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}}{{#if schema.properties.hasI18n}}, Headers{{/if}} } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode{{#if schema.hasOAuth}}, UseGuards{{/if}}{{#if schema.properties.hasI18n}}, Headers{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { Constraint, Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
@@ -40,6 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
     ) {}
 
     @Post()
+    @HttpCode(200)
     @ApiOperation({ summary: 'Paginate {{ toKebabCase schema.moduleNames }}' })
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
     @ApiQuery({ name: 'queryStatement', type: QueryStatement })
