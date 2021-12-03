@@ -50,11 +50,11 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     @TenantPolicy()
     {{/if}}
     async main(
+        @Body() payload: Create{{ toPascalCase schema.moduleName }}Dto,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Body() payload: Create{{ toPascalCase schema.moduleName }}Dto,
-        @Timezone() timezone?: string,
     )
     {
         await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleName }}Command(payload, { timezone }));

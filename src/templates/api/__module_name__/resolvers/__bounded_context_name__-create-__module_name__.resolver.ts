@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -19,9 +19,12 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 // {{ config.applicationsContainer }}
 import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
 import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
-import { Create{{ toPascalCase schema.moduleName }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleName }}.command';
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
+import { Create{{ toPascalCase schema.moduleName }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleName }}.command';
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from './../../../../graphql';
+{{#if schema.properties.hasI18n}}
+import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
+{{/if}}
 
 @Resolver()
 {{#if schema.hasOAuth}}
@@ -33,6 +36,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        {{#if schema.properties.hasI18n}}
+        private readonly addI18NConstraintService: AddI18NConstraintService,
+        {{/if}}
     ) {}
 
     @Mutation('{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}')
@@ -40,15 +46,20 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     @TenantPolicy()
     {{/if}}
     async main(
+        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input,
-        @Timezone() timezone?: string,
     )
     {
         await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleName }}Command(payload, { timezone }));
 
+        {{#if schema.properties.hasI18n}}
+        const constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
+        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, constraint, { timezone }));
+        {{else}}
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, {}, { timezone }));
+        {{/if}}
     }
 }

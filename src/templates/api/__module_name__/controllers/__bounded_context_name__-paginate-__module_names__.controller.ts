@@ -1,6 +1,6 @@
-import { Controller, Post, Body, HttpCode{{#if schema.hasOAuth}}, UseGuards{{/if}}{{#if schema.properties.hasI18n}}, Headers{{/if}} } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
@@ -49,15 +49,15 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
     @TenantConstraint()
     {{/if}}
     async main(
+        @Body('query') queryStatement?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         {{#if schema.properties.hasI18n}}
-        @Headers('Content-Language') contentLanguage?: string,
+        @ContentLanguage() contentLanguage?: string,
         {{/if}}
-        @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
     )
     {
         {{#if schema.properties.hasI18n}}

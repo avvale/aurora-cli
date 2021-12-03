@@ -50,12 +50,12 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     @TenantConstraint()
     {{/if}}
     async main(
-        {{#if schema.hasTenant}}
-        @CurrentAccount() account: AccountResponse,
-        {{/if}}
         @Body() payload: Update{{ toPascalCase schema.moduleName }}Dto,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
+        {{#if schema.hasTenant}}
+        @CurrentAccount() account: AccountResponse,
+        {{/if}}
     )
     {
         await this.commandBus.dispatch(new Update{{ toPascalCase schema.moduleName }}Command(payload, constraint, { timezone }));

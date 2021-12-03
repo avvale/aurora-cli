@@ -1,5 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -20,6 +20,10 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Paginate{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/paginate/paginate-{{ toKebabCase schema.moduleNames }}.query';
 import { Pagination } from './../../../../graphql';
+{{#if schema.properties.hasI18n}}
+import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
+{{/if}}
+
 
 @Resolver()
 {{#if schema.hasOAuth}}
@@ -30,6 +34,9 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
 {
     constructor(
         private readonly queryBus: IQueryBus,
+        {{#if schema.properties.hasI18n}}
+        private readonly addI18NConstraintService: AddI18NConstraintService,
+        {{/if}}
     ) {}
 
     @Query('{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}')
@@ -37,12 +44,12 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
     @TenantConstraint()
     {{/if}}
     async main(
+        @Args('query') queryStatement?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
     ): Promise<Pagination>
     {
         return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(queryStatement, constraint, { timezone }));

@@ -20,6 +20,9 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Find{{ toPascalCase schema.moduleName }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}.query';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../../../graphql';
+{{#if schema.properties.hasI18n}}
+import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
+{{/if}}
 
 @Resolver()
 {{#if schema.hasOAuth}}
@@ -30,6 +33,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
 {
     constructor(
         private readonly queryBus: IQueryBus,
+        {{#if schema.properties.hasI18n}}
+        private readonly addI18NConstraintService: AddI18NConstraintService,
+        {{/if}}
     ) {}
 
     @Query('{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}')
@@ -45,6 +51,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         @Timezone() timezone?: string,
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {
+        {{#if schema.properties.hasI18n}}
+        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
+        {{/if}}
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}Query(queryStatement, constraint, { timezone }));
     }
 }

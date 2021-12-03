@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -21,6 +21,9 @@ import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command
 import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command';
+{{#if schema.properties.hasI18n}}
+import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
+{{/if}}
 
 @Resolver()
 {{#if schema.hasOAuth}}
@@ -32,6 +35,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        {{#if schema.properties.hasI18n}}
+        private readonly addI18NConstraintService: AddI18NConstraintService,
+        {{/if}}
     ) {}
 
     @Mutation('{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById')
@@ -39,14 +45,17 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     @TenantConstraint()
     {{/if}}
     async main(
+        @Args('id') id: string,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
     )
     {
+        {{#if schema.properties.hasI18n}}
+        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
+        {{/if}}
         const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(id, constraint, { timezone }));
 
         await this.commandBus.dispatch(new Delete{{ toPascalCase schema.moduleName }}ByIdCommand(id, constraint, { timezone }));
