@@ -1,9 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { CacheModule } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.resolver';
 import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
 import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
+import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
+import { GetLangsCacheService } from '@apps/common/lang/application/shared/get-langs-cache.service';
+
+// sources
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
 describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver', () =>
@@ -15,8 +22,24 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
+            imports: [
+                CacheModule.register()
+            ],
             providers: [
+                AddI18NConstraintService,
                 {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver,
+                {
+                    provide : ConfigService,
+                    useValue: {
+                        get: (key: string) => key === 'APP_LANG' ? 'es' : ''
+                    }
+                },
+                {
+                    provide : GetLangsCacheService,
+                    useValue: {
+                        main: () => langs,
+                    }
+                },
                 {
                     provide : IQueryBus,
                     useValue: {
