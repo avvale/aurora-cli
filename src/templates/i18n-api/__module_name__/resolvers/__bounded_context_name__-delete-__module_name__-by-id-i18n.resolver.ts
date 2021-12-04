@@ -20,7 +20,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
 import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
-import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command';
+import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command';
 import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
 
 @Resolver()
@@ -28,7 +28,7 @@ import { AddI18NConstraintService } from '@apps/common/lang/application/shared/a
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.delete')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 {{/if}}
-export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdResolver
+export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver
 {
     constructor(
         private readonly commandBus: ICommandBus,
