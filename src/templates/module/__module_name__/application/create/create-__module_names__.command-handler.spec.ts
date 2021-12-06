@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
@@ -17,9 +18,9 @@ describe('Create{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
             providers: [
                 Create{{ toPascalCase schema.moduleNames }}CommandHandler,
                 {
-                    provide: Create{{ toPascalCase schema.moduleNames }}Service,
+                    provide : Create{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
-                        main: () => {},
+                        main: () => { /**/ },
                     }
                 }
             ]

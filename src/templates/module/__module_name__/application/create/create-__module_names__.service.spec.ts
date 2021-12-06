@@ -1,15 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+{{#if schema.properties.hasI18n}}
+import { ConfigService } from '@nestjs/config';
+{{/if}}
 
 // custom items
 import { Create{{ toPascalCase schema.moduleNames }}Service } from './create-{{ toKebabCase schema.moduleNames }}.service';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+{{#if schema.properties.hasI18n}}
+import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+{{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from './../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
 
 describe('Create{{ toPascalCase schema.moduleNames }}Service', () =>
 {
     let service: Create{{ toPascalCase schema.moduleNames }}Service;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
+    {{#if schema.properties.hasI18n}}
+    let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
+    {{/if}}
     let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
@@ -22,11 +32,25 @@ describe('Create{{ toPascalCase schema.moduleNames }}Service', () =>
                 Create{{ toPascalCase schema.moduleNames }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        insert: (items) => {}
+                        insert: (items) => { /**/ },
                     }
-                }
+                },
+                {{#if schema.properties.hasI18n}}
+                {
+                    provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
+                    useValue: {
+                        insert: (items) => { /**/ },
+                    }
+                },
+                {
+                    provide : ConfigService,
+                    useValue: {
+                        get: (key: string) => key === 'APP_LANG' ? 'es' : ''
+                    }
+                },
+                {{/if}}
             ]
         }).compile();
 

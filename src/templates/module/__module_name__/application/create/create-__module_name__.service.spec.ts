@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
@@ -33,11 +34,17 @@ describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
                 Create{{ toPascalCase schema.moduleName }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        create: (item) => {}
+                        create: (item) => { /**/ },
                     }
-                }
+                },
+                {
+                    provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
+                    useValue: {
+                        create: (item) => { /**/ },
+                    }
+                },
             ]
         }).compile();
 

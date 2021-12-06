@@ -29,12 +29,21 @@ describe('Delete{{ toPascalCase schema.moduleNames }}Service', () =>
                 Delete{{ toPascalCase schema.moduleNames }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        get: (queryStatement) => { /**/ },
+                        get   : (queryStatement) => { /**/ },
+                        delete: (queryStatement) => { /**/ },
+                    }
+                },
+                {{#if schema.properties.hasI18n}}
+                {
+                    provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
+                    useValue: {
+                        get   : (queryStatement) => { /**/ },
                         delete: (queryStatement) => { /**/ }
                     }
-                }
+                },
+                {{/if}}
             ]
         }).compile();
 
