@@ -17,7 +17,7 @@ import { Deleted{{ toPascalCase schema.moduleName }}Event } from './../applicati
 import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
-{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#unless (isI18NRelationProperty ../schema.moduleName this)}}
 import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
 {{/unless}}
 {{/each}}
@@ -44,7 +44,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {{ toCamelCase nativeName }}: {{ toPascalCase relationshipAggregate }};
     {{/each}}
     {{#each schema.properties.withRelationshipManyToOne}}
-    {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+    {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
     {{ toCamelCase relationshipField }}: {{ toPascalCase relationshipAggregate }};
     {{/unless}}
     {{/each}}
@@ -69,7 +69,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{ toCamelCase nativeName }}?: {{ toPascalCase relationshipAggregate }},
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
-        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+        {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationshipField }}?: {{ toPascalCase relationshipAggregate }},
         {{/unless}}
         {{/each}}
@@ -96,7 +96,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.{{ toCamelCase nativeName }} = {{ toCamelCase nativeName }};
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
-        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+        {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
         this.{{ toCamelCase relationshipField }} = {{ toCamelCase relationshipField }};
         {{/unless}}
         {{/each}}
@@ -122,7 +122,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{ toCamelCase nativeName }}?: {{ toPascalCase relationshipAggregate }},
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
-        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+        {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationshipField }}?: {{ toPascalCase relationshipAggregate }},
         {{/unless}}
         {{/each}}
@@ -148,7 +148,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase nativeName }},
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
-            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+            {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationshipField }},
             {{/unless}}
             {{/each}}
@@ -223,7 +223,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase nativeName }}: this.{{ toCamelCase nativeName }}?.toDTO(),
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
-            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+            {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationshipField }}: this.{{ toCamelCase relationshipField }}?.toDTO(),
             {{/unless}}
             {{/each}}
@@ -245,7 +245,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{#eq name 'id'}}
             {{ toCamelCase name }}: Utils.uuid(),
             {{else}}
-            {{#if (isI18nRelationProperty ../schema.moduleName this)}}
+            {{#if (isI18NRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase name }}: this.id.value,
             {{else}}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,

@@ -5,7 +5,7 @@ import { DataTypes } from 'sequelize';
 import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
-{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#unless (isI18NRelationProperty ../schema.moduleName this)}}
 import { {{ relationshipAggregate }}Model } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
 {{/unless}}
 {{/each}}

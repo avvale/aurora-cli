@@ -11,6 +11,7 @@ import './../prototypes/string-to-pascal-case.interface';
 import './../prototypes/string-to-pascal-case';
 import './../handlebars/helpers/allow-property';
 import './../handlebars/helpers/is-i18n-relation-property';
+import './../handlebars/helpers/is-i18n-data-lang-property';
 import './../handlebars/partials/i18n';
 import './../handlebars/partials/import-value-objects';
 import './../handlebars/partials/declare-i18n-repository';

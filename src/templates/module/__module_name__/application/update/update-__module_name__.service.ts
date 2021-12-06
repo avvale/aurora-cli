@@ -35,13 +35,17 @@ export class Update{{ toPascalCase schema.moduleName }}Service
             {{#each schema.properties.aggregate}}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
-            null,
+            null, // createdAt
 {{else eq name 'updatedAt'}}
             new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq name 'deletedAt'}}
-            null,
+            null, // deletedAt
+{{else}}
+{{#if (isI18NDataLangProperty . ../schema.properties)}}
+            null, // dataLang
 {{else}}
             payload.{{ toCamelCase name }},
+{{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (allowProperty ../schema.moduleName this)}}

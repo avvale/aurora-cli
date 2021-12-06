@@ -2,7 +2,7 @@
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
-{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#unless (isI18NRelationProperty ../schema.moduleName this)}}
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response';
 {{/unless}}
 {{/each}}
@@ -28,7 +28,7 @@ export class {{ toPascalCase schema.moduleName }}Response
         public readonly {{ toCamelCase nativeName }}: {{ toPascalCase getRelationshipModule }}Response,
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
-        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+        {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase relationshipField }}: {{ toPascalCase getRelationshipModule }}Response,
         {{/unless}}
         {{/each}}

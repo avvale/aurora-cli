@@ -8,12 +8,18 @@ import {
     {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+{{#if schema.properties.hasI18n}}
+import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+{{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from './../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
 
 describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
 {
     let service: Update{{ toPascalCase schema.moduleName }}Service;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
+    {{#if schema.properties.hasI18n}}
+    let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18NRepository;
+    {{/if}}
     let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
@@ -28,14 +34,25 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
                 {
                     provide: I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        update: (item) => {}
+                        update: (item) => { /**/ }
                     }
-                }
+                },
+                {{#if schema.properties.hasI18n}}
+                {
+                    provide: I{{ toPascalCase schema.moduleName }}I18NRepository,
+                    useValue: {
+                        update: (item) => { /**/ }
+                    }
+                },
+                {{/if}}
             ]
         }).compile();
 
         service         = module.get(Update{{ toPascalCase schema.moduleName }}Service);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
+        {{#if schema.properties.hasI18n}}
+        repositoryI18n  = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
+        {{/if}}
         mockRepository  = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 
