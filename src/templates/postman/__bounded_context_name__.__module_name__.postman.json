@@ -149,6 +149,39 @@
 			},
 			"response": []
         },
+        {{#if schema.properties.hasI18n}}
+        {
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdI18N",
+			"request": {
+				"method": "POST",
+				"header": [
+                    {
+						"key": "Content-Language",
+						"name": "Content-Language",
+						"type": "text",
+						"value": "es"
+					}
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLFindByIdQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"id\": \"{{{ mocker (object type='uuid') }}}\"\n}"
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/graphql",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {{/if}}
         {
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}",
 			"request": {
@@ -442,6 +475,52 @@
 			},
 			"response": []
         },
+        {{#if schema.properties.hasI18n}}
+        {
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}-i18n/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+                    {
+						"key": "Content-Language",
+						"name": "Content-Language",
+						"type": "text",
+						"value": "es"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}-i18n/{{{ mocker (object type='uuid') }}}",
+					"host": [
+						"\{{URL}}"
+					],
+					"path": [
+						"{{ toKebabCase schema.boundedContextName }}",
+						"{{ toKebabCase schema.moduleName }}",
+						"{{{ mocker (object type='uuid') }}}"
+					]
+				}
+			},
+			"response": []
+        },
+        {{/if}}
         {
 			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
 			"request": {
