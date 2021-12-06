@@ -4,21 +4,17 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
-import { Delete{{ toPascalCase schema.moduleName }}ByIdService } from './delete-{{ toKebabCase schema.moduleName }}-by-id.service';
+import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NService } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
 import { {{ toPascalCase schema.moduleName }}Id } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{#if schema.properties.hasI18n}}
 import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
-{{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from './../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
 
-describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
+describe('Delete{{ toPascalCase schema.moduleName }}ByIdI18NService', () =>
 {
-    let service: Delete{{ toPascalCase schema.moduleName }}ByIdService;
+    let service: Delete{{ toPascalCase schema.moduleName }}ByIdI18NService;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
-    {{#if schema.properties.hasI18n}}
     let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
-    {{/if}}
     let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
@@ -28,35 +24,33 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                Delete{{ toPascalCase schema.moduleName }}ByIdService,
+                Delete{{ toPascalCase schema.moduleName }}ByIdI18NService,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        deleteById: (id) => { /**/ },
-                        findById  : (id) => { /**/ },
+                        findById: (id) => { /**/ },
+                        update  : (item) => { /**/ },
                     }
                 },
-                {{#if schema.properties.hasI18n}}
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ }
+                        delete: (queryStatement) => { /**/ },
                     }
                 },
-                {{/if}}
             ]
         }).compile();
 
-        service         = module.get(Delete{{ toPascalCase schema.moduleName }}ByIdService);
+        service         = module.get(Delete{{ toPascalCase schema.moduleName }}ByIdI18NService);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
+        repositoryI18N  = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
         mockRepository  = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 
     describe('main', () =>
     {
-        test('Delete{{ toPascalCase schema.moduleName }}ByIdService should be defined', () =>
+        test('Delete{{ toPascalCase schema.moduleName }}ByIdI18NService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
