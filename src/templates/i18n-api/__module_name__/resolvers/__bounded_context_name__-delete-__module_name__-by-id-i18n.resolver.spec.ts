@@ -23,7 +23,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                CacheModule.register()
+                CacheModule.register(),
             ],
             providers: [
                 AddI18NConstraintService,

@@ -23,9 +23,9 @@ export class Update{{ toPascalCase schema.moduleName }}CommandHandler implements
                 {{#if hasTimezone}}
                 {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, { {{~#unless nullable}}{{#unlessEq name 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}
-                {{#isnt name 'dataLang'}}
+                {{#unless (isI18NDataLangProperty . ../schema.properties)}}
                 {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}{{#unless nullable}}{{#unlessEq name 'id'}}, { undefinable: true }{{/unlessEq}}{{/unless}}),
-                {{/isnt}}
+                {{/unless}}
                 {{/if}}
                 {{/if}}
                 {{/each}}
