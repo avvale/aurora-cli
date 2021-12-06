@@ -8,6 +8,9 @@ import {
     {{> importValueObjects }}
 } from './../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+{{#if schema.properties.hasI18n}}
+import { I{{ toPascalCase schema.moduleName }}I18NRepository } from './../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+{{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from './../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
 
 describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
@@ -15,6 +18,9 @@ describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
 {
     let service: Create{{ toPascalCase schema.moduleName }}Service;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
+    {{#if schema.properties.hasI18n}}
+    let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
+    {{/if}}
     let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
@@ -37,6 +43,9 @@ describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
 
         service         = module.get(Create{{ toPascalCase schema.moduleName }}Service);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
+        {{#if schema.properties.hasI18n}}
+        repositoryI18N  = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
+        {{/if}}
         mockRepository  = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 

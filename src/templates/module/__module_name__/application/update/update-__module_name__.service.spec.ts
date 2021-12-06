@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
@@ -18,7 +19,7 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
     let service: Update{{ toPascalCase schema.moduleName }}Service;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
-    let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18NRepository;
+    let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
     {{/if}}
     let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
 
@@ -51,7 +52,7 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
         service         = module.get(Update{{ toPascalCase schema.moduleName }}Service);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
-        repositoryI18n  = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
+        repositoryI18N  = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
         {{/if}}
         mockRepository  = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
     });
