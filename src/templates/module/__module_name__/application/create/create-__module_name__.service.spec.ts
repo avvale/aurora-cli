@@ -39,12 +39,14 @@ describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
                         create: (item) => { /**/ },
                     }
                 },
+                {{#if schema.properties.hasI18n}}
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
                         create: (item) => { /**/ },
                     }
                 },
+                {{/if}}
             ]
         }).compile();
 
