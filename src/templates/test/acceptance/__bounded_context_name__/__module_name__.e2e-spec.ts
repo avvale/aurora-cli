@@ -6,6 +6,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
 import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
 import { GraphQLConfigModule } from '{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
@@ -29,7 +30,7 @@ import * as fs from 'fs';
 {{/if }}
 
 const importForeignModules = [];
-
+{{setVar 'language' '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a'}}
 describe('{{ toKebabCase schema.moduleName }}', () =>
 {
     let app: INestApplication;
@@ -85,6 +86,19 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/unlessEq }}
             .overrideGuard(AuthorizationGuard)
             .useValue({ canActivate: () => true })
+            {{/if }}
+            {{#if schema.properties.hasI18n}}
+            .overrideProvider(AddI18NConstraintService)
+            .useValue({
+                main: () =>
+                    ({
+                        include: [{
+                            association: '{{ toCamelCase schema.moduleName }}I18N',
+                            required   : true,
+                            where      : { langId: '{{ language }}' }
+                        }]
+                    })
+            })
             {{/if }}
             .compile();
 
@@ -344,10 +358,12 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .expect({
-                total   : seeder.collectionResponse.length,
-                count   : seeder.collectionResponse.length,
-                rows    : seeder.collectionResponse.slice(0, 5)
+            .then(res => {
+                expect(res.body).toEqual({
+                    total   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    count   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    rows    : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5)
+                });
             });
     });
 
@@ -393,7 +409,11 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each schema.properties.test}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                {{#eq name 'id'}}
+                {{ toCamelCase name }}: '{{{ mocker (object property=. scapeQuotes=false) }}}',
+                {{else}}
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
+                {{/eq}}
                 {{/each}}
             })
             .expect(201);

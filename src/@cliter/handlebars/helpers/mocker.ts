@@ -51,6 +51,12 @@ handlebars.registerHelper('mocker', function(
         // return data defined in yaml model definition
         if (
             property?.type === SqlType.ID
+            && (length || property?.length) === 36
+            && property.isI18n
+            && property.name === 'langId'
+        )                                               return '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a';
+        if (
+            property?.type === SqlType.ID
             && hasUuidSeed
             && (length || property?.length) === 36
         )                                               return uuidv5(uuidSeed, namespace);
