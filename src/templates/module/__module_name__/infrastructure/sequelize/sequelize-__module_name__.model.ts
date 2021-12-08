@@ -53,6 +53,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{#if defaultValue }}
         defaultValue: {{ getDefaultValue }},
         {{/if}}
+        {{#if false }}
         {{#eq relationship ../relationship.MANY_TO_ONE }}
         references: {
             key: '{{ getReferenceKey }}'
@@ -60,6 +61,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
         {{/eq}}
+        {{/if}}
     })
     {{ toCamelCase name }}: {{{ getJavascriptType }}};
     {{/if}}
@@ -70,7 +72,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if hasBelongsToDecorator }}
 
-    @BelongsTo(() => {{ relationshipAggregate }}Model)
+    @BelongsTo(() => {{ relationshipAggregate }}Model, { constraints: false })
     {{ toCamelCase relationshipField }}: {{ relationshipAggregate }}Model;
     {{/if}}
     {{#if hasHasManyDecorator }}

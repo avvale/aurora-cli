@@ -48,6 +48,7 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
         {{#if defaultValue }}
         defaultValue: {{ getDefaultValue }},
         {{/if}}
+        {{#if false }}
         {{#eq relationship ../relationship.MANY_TO_ONE }}
         references: {
             key: '{{ getReferenceKey }}'
@@ -55,6 +56,7 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
         {{/eq}}
+        {{/if}}
     })
     {{ toCamelCase name }}: {{{ getJavascriptType }}};
     {{/if}}
@@ -65,7 +67,7 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
     {{/if}}
     {{#if hasBelongsToDecorator }}
 
-    @BelongsTo(() => {{ relationshipAggregate }}Model)
+    @BelongsTo(() => {{ relationshipAggregate }}Model, { constraints: false })
     {{ toCamelCase relationshipField }}: {{ relationshipAggregate }}Model;
     {{/if}}
     {{#if hasHasManyDecorator }}

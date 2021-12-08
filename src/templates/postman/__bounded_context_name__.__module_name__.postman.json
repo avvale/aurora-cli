@@ -9,7 +9,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -57,7 +66,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -81,7 +99,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -105,7 +132,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -129,7 +165,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -186,7 +231,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -210,7 +264,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -234,7 +297,16 @@
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+                    {{#if schema.properties.hasI18n}}
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
+                ],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
@@ -264,7 +336,14 @@
 						"name"  : "Content-Type",
 						"type"  : "text",
 						"value" : "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode"  : "raw",
@@ -288,9 +367,6 @@
 			},
 			"response": []
         },
-
-
-
         {
 			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
 			"request": {
@@ -301,7 +377,14 @@
 						"name"  : "Content-Type",
 						"type"  : "text",
 						"value" : "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode"  : "raw",
@@ -338,7 +421,14 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode": "raw",
@@ -376,7 +466,14 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode": "raw",
@@ -413,7 +510,14 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode": "raw",
@@ -450,7 +554,14 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode": "raw",
@@ -531,7 +642,14 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode": "raw",
@@ -565,7 +683,14 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode": "raw",
@@ -600,7 +725,14 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}
+					}{{#if schema.properties.hasI18n}},
+                    {
+                        "key": "Content-Language",
+                        "name": "Content-Language",
+                        "type": "text",
+                        "value": "es"
+                    }
+                    {{/if}}
 				],
 				"body": {
 					"mode": "raw",

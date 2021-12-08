@@ -399,12 +399,18 @@ export class Properties
 
     get isNotNullable(): Property[]
     {
-        return this.properties.filter(property => property.nullable === false);
+        return this.properties.filter(property => property.nullable === false)
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get hasLength(): Property[]
     {
-        return this.properties.filter(property => !!property.length);
+        return this.properties.filter(property => !!property.length)
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get hasMaxLength(): Property[]
