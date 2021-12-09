@@ -19,7 +19,7 @@ $ npm install -g aurora-ts-cli
 $ aurora COMMAND
 running command...
 $ aurora (-v|--version|version)
-aurora-ts-cli/0.0.3 darwin-arm64 node-v16.13.0
+aurora-ts-cli/0.0.4 darwin-arm64 node-v16.13.0
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND
@@ -28,14 +28,17 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`aurora delete ELEMENTTYPE ELEMENTNAME`](#aurora-delete-elementtype-elementname)
-* [`aurora generate ELEMENTTYPE`](#aurora-generate-elementtype)
-* [`aurora hello`](#aurora-hello)
-* [`aurora help [COMMAND]`](#aurora-help-command)
-* [`aurora key`](#aurora-key)
-* [`aurora load ELEMENTTYPE`](#aurora-load-elementtype)
-* [`aurora new APPNAME`](#aurora-new-appname)
-* [`aurora seed ELEMENTTYPE`](#aurora-seed-elementtype)
+- [aurora-ts-cli](#aurora-ts-cli)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`aurora delete ELEMENTTYPE ELEMENTNAME`](#aurora-delete-elementtype-elementname)
+  - [`aurora generate ELEMENTTYPE`](#aurora-generate-elementtype)
+  - [`aurora hello`](#aurora-hello)
+  - [`aurora help [COMMAND]`](#aurora-help-command)
+  - [`aurora key`](#aurora-key)
+  - [`aurora load ELEMENTTYPE`](#aurora-load-elementtype)
+  - [`aurora new APPNAME`](#aurora-new-appname)
+  - [`aurora seed ELEMENTTYPE`](#aurora-seed-elementtype)
 
 ## `aurora delete ELEMENTTYPE ELEMENTNAME`
 
@@ -53,7 +56,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/delete.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.3/src/commands/delete.ts)_
+_See code: [src/commands/delete.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/delete.ts)_
 
 ## `aurora generate ELEMENTTYPE`
 
@@ -78,7 +81,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.3/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/generate.ts)_
 
 ## `aurora hello`
 
@@ -92,7 +95,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.3/src/commands/hello.ts)_
+_See code: [src/commands/hello.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/hello.ts)_
 
 ## `aurora help [COMMAND]`
 
@@ -109,7 +112,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.3/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.14/src/commands/help.ts)_
 
 ## `aurora key`
 
@@ -123,7 +126,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/key.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.3/src/commands/key.ts)_
+_See code: [src/commands/key.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/key.ts)_
 
 ## `aurora load ELEMENTTYPE`
 
@@ -146,7 +149,7 @@ OPTIONS
   -v, --verbose
 ```
 
-_See code: [src/commands/load.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.3/src/commands/load.ts)_
+_See code: [src/commands/load.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/load.ts)_
 
 ## `aurora new APPNAME`
 
@@ -164,7 +167,7 @@ OPTIONS
   -h, --help         show CLI help
 ```
 
-_See code: [src/commands/new.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.3/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/new.ts)_
 
 ## `aurora seed ELEMENTTYPE`
 
@@ -184,5 +187,5 @@ OPTIONS
   -m, --module=module
 ```
 
-_See code: [src/commands/seed.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.3/src/commands/seed.ts)_
+_See code: [src/commands/seed.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/seed.ts)_
 <!-- commandsstop -->
