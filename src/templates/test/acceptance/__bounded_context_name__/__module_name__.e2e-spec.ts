@@ -376,7 +376,11 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .expect(200)
-            .expect(seeder.collectionResponse);
+            .then(res => {
+                expect(res.body).toEqual(
+                    seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'])))
+                );
+            });
     });
 
     test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 404 Not Found', () =>
@@ -588,9 +592,11 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             })
             .expect(200)
             .then(res => {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}.total).toBe(seeder.collectionResponse.length);
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}.count).toBe(seeder.collectionResponse.length);
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}.rows).toStrictEqual(seeder.collectionResponse.slice(0, 5));
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}).toEqual({
+                    total   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    count   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    rows    : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5)
+                });
             });
     });
 
@@ -620,7 +626,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res => {
                 for (const [index, value] of res.body.data.{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(value));
+                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });

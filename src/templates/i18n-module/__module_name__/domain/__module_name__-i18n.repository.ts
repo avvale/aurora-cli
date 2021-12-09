@@ -13,7 +13,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
     abstract paginate(queryStatement: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<{{ schema.aggregateName }}>>;
 
     // create a single record
-    abstract create({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}, dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral): Promise<void>;
+    abstract create({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}, dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral, finderQueryStatement?: (aggregate: {{ schema.aggregateName }}) => QueryStatement): Promise<void>;
 
     // create a single or multiple records
     abstract insert({{ toCamelCase schema.moduleNames }}: {{ schema.aggregateName }}[], options?: ObjectLiteral, dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral): Promise<void>;

@@ -72,7 +72,12 @@ export class Create{{ toPascalCase schema.moduleName }}Service
             }
         }
 
-        await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO());
+        await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(), (aggregate: {{ schema.aggregateName }} ) => ({
+            where: {
+                countryId: aggregate['id']['value'],
+                langId   : aggregate['langId']['value'],
+            }
+        }));
         {{else}}
         await this.repository.create({{ toCamelCase schema.moduleName }});
         {{/if}}
