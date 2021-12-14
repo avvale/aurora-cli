@@ -126,6 +126,11 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/{{ config.apiContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.resolver.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdResolver,
     {{/notInArray}}
+    {{#if schema.properties.hasI18n}}
+    {{#notInArray schema.excluded 'src/{{ config.apiContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id-i18n.resolver.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver,
+    {{/notInArray}}
+    {{/if}}
     {{#notInArray schema.excluded 'src/{{ config.apiContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Resolver,
     {{/notInArray}}
