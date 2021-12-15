@@ -1,9 +1,8 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { Command, flags } from '@oclif/command';
-import { Operations, Prompter } from './../@cliter/utils';
+import { Operations } from './../@cliter/utils';
 import { StateService } from '../@cliter/services/state.service';
-import * as chalk from 'chalk';
 import * as shell from 'shelljs';
 import * as ora from 'ora';
 
