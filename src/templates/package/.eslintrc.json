@@ -1,0 +1,59 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "array-bracket-spacing": ["error", "never"],
+        "arrow-parens": ["error" ,"as-needed"],
+        "brace-style": ["error", "allman", { "allowSingleLine": true }],
+        "comma-dangle": ["error", {
+            "arrays": "only-multiline",
+            "objects": "only-multiline",
+            "imports": "only-multiline",
+            "exports": "only-multiline",
+            "functions": "only-multiline"
+        }],
+        "grouped-accessor-pairs": ["error", "setBeforeGet"],
+        "import/prefer-default-export": "off",
+        "indent": ["error", 4, { "SwitchCase": 1}],
+        "key-spacing": ["error", {
+            "singleLine": {
+                "beforeColon": false,
+                "afterColon": true
+            },
+            "multiLine": {
+                "beforeColon": false,
+                "afterColon": true
+            },
+            "align": {
+                "beforeColon": false,
+                "afterColon": true,
+                "on": "colon"
+            }
+        }],
+        "no-case-declarations": "off",
+        "no-duplicate-case": "error",
+        "no-irregular-whitespace": ["error", { "skipRegExps": true }],
+        "no-trailing-spaces": "error",
+        "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+        "no-var": "error",
+        "object-curly-spacing": ["error", "always", { "objectsInObjects": false, "arraysInObjects": false }],
+        "object-shorthand": ["error", "always", { "avoidQuotes": true }],
+        "prefer-const": "error",
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"]
+    }
+}
