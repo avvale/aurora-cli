@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { QueryBus as NestQueryBusImplementation, ICommand } from '@nestjs/cqrs';
-import { IQueryBus } from './../domain/query-bus';
+import { IQueryBus } from 'aurora-ts-core';
 
 @Injectable()
 export class NestQueryBus implements IQueryBus

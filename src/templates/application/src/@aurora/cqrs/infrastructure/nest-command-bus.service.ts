@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus as NestCommandBusImplementation, ICommand } from '@nestjs/cqrs';
-import { ICommandBus } from './../domain/command-bus';
+import { ICommandBus } from 'aurora-ts-core';
 
 @Injectable()
 export class NestCommandBus implements ICommandBus

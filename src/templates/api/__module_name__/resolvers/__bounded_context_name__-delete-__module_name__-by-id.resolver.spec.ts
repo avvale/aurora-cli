@@ -4,11 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 {{/if}}
+import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdResolver } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.resolver';
-import { ICommandBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/command-bus';
-import { IQueryBus } from '{{ config.auroraLocalPackage }}/cqrs/domain/query-bus';
 {{#if schema.properties.hasI18n}}
 import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
 import { GetLangsCacheService } from '@apps/common/lang/application/shared/get-langs-cache.service';

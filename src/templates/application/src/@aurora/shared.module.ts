@@ -1,8 +1,8 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { ICommandBus, NestCommandBus, IQueryBus, NestQueryBus } from '@aurora/cqrs';
-import { CoreModule as AuroraCoreModule, ICriteria, SequelizeCriteria } from 'aurora-ts-core';
+import { NestCommandBus, NestQueryBus } from '@aurora/cqrs';
+import { CoreModule as AuroraCoreModule, ICommandBus, ICriteria, IQueryBus, SequelizeCriteria } from 'aurora-ts-core';
 
 @Module({
     imports: [
