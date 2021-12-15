@@ -244,14 +244,14 @@ export class FileManager
                     currentFileFirstLineHash === FileManager.stateService.config.fileTags.ignoredGraphQLFile
                 )
                 {
-                    FileManager.stateService.command.log(`%s ${mappedFile} ignored`, chalk.cyanBright.bold('[IGNORED FILE]'));
+                    FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.cyanBright.bold('[IGNORED FILE]'));
                 }
                 else if (!currentLockfile || currentLockfile.integrity === `sha1:${currentFileHash}`)
                 {
                     // the file has not been modified
                     fs.writeFileSync(writePath, contents, 'utf8');
 
-                    if (FileManager.stateService.flags.verbose) FileManager.stateService.command.log(`%s ${mappedFile} overwritten`, chalk.magenta.bold('[FILE OVERWRITE]'));
+                    if (FileManager.stateService.flags.verbose) FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.magenta.bold('[FILE OVERWRITE]'));
                 }
                 else
                 {
@@ -262,14 +262,14 @@ export class FileManager
 
                     FileManager.stateService.originFiles.push(path.join(relativeTargetPath, originFileName));
 
-                    FileManager.stateService.command.log(`%s ${originFileName} created`, chalk.redBright.bold('[ORIGIN FILE CREATED]'));
+                    FileManager.stateService.command.log(`%s ${originFileName}`, chalk.redBright.bold('[ORIGIN FILE CREATED]'));
                 }
             }
             else
             {
                 fs.writeFileSync(writePath, contents, 'utf8');
 
-                FileManager.stateService.command.log(`%s ${mappedFile} created`, chalk.green.bold('[FILE CREATED]'));
+                FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE CREATED]'));
             }
 
             // exclude e2e-spec.ts files from lock files

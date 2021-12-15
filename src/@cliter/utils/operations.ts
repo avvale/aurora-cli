@@ -18,6 +18,8 @@ export class Operations
 
     async generateApplication(): Promise<void>
     {
+        if (!Operations.stateService.appName) throw new Error('To create application is required app name');
+
         // create directory for application
         if (!fs.existsSync(Operations.stateService.appName)) fs.mkdirSync(Operations.stateService.appName, { recursive: true });
 
@@ -26,7 +28,7 @@ export class Operations
 
     async generatePackage(): Promise<void>
     {
-        if (!Operations.stateService.packageName) throw new Error('To create package is requires package name');
+        if (!Operations.stateService.packageName) throw new Error('To create package is required package name');
 
         // create directory for application
         if (!fs.existsSync(Operations.stateService.packageName || '')) fs.mkdirSync(Operations.stateService.packageName, { recursive: true });
@@ -149,9 +151,9 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.POSTMAN, '', 'postman');
     }
 
-    async generateEnvFile(): Promise<void>
+    async generateApplicationEnvFile(applicationName: string): Promise<void>
     {
-        await TemplateGenerator.generateStaticContents(TemplateElement.ENV, '', Operations.stateService.appName);
+        await TemplateGenerator.generateStaticContents(TemplateElement.ENV, '', applicationName);
     }
 
     async generateGraphqlTypes(): Promise<string>

@@ -12,15 +12,15 @@ export default class New extends Command
 
     static flags =
     {
-        help       : flags.help({ char: 'h' }),
-        credentials: flags.boolean({ char: 'c' }),
+        help   : flags.help({ char: 'h' }),
+        package: flags.boolean({ char: 'p' }),
     };
 
     static args = [
         {
-            name       : 'appName',
+            name       : 'name',
             required   : true,
-            description: 'Type app name to create'
+            description: 'Type name of element to create, application or package.'
         }
     ];
 
@@ -31,26 +31,30 @@ export default class New extends Command
         const stateService     = container.resolve(StateService);
         stateService.command   = this;
         stateService.flags     = flags;
-        stateService.appName   = args.appName;
 
         const operations = new Operations();
-        operations.generateApplication();
+
+        if (flags.package)
+        {
+            stateService.packageName = args.name;
+            operations.generatePackage();
+        }
+        else
+        {
+            stateService.appName = args.name;
+            operations.generateApplication();
+        }
 
         const dependenciesSpinner = ora('Installing dependencies').start();
-        shell.exec(`npm --prefix ${args.appName} install`, { silent: true, async: true }, () =>
+        shell.exec(`npm --prefix ${args.name} install`, { silent: true, async: true }, () =>
         {
             dependenciesSpinner.succeed('Dependencies installed');
 
-            // set stateService
-            const stateService     = container.resolve(StateService);
-            stateService.command   = this;
-            stateService.flags     = flags;
-            stateService.appName   = args.appName;
-
-            const operations = new Operations();
-
-            // generate env file
-            operations.generateEnvFile();
+            if (!flags.package)
+            {
+                // generate application env file
+                operations.generateApplicationEnvFile(args.name);
+            }
         });
     }
 }

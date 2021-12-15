@@ -1,6 +1,6 @@
 {
   "name": "{{ toKebabCase packageName }}",
-  "version": "0.0.25",
+  "version": "0.0.1",
   "description": "Aurora npm package starter",
   "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
   "license": "MIT",
