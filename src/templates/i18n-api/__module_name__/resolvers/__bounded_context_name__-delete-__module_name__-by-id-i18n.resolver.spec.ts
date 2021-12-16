@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CacheModule } from '@nestjs/common';
+import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
@@ -30,6 +30,16 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : ''
+                    }
+                },
+                {
+                    provide : CACHE_MANAGER,
+                    useValue: {
+                        get: (key: string) =>
+                        {
+                            console.log(key);
+                            return key === 'common/lang' ? langs : null;
+                        },
                     }
                 },
                 {
