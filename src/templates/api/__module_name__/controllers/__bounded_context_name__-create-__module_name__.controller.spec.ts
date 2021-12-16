@@ -10,7 +10,6 @@ import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.controller';
 {{#if schema.properties.hasI18n}}
 import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
-import { GetLangsCacheService } from '@apps/common/lang/application/shared/get-langs-cache.service';
 {{/if}}
 
 // sources
@@ -43,12 +42,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : ''
-                    }
-                },
-                {
-                    provide : GetLangsCacheService,
-                    useValue: {
-                        main: () => langs,
                     }
                 },
                 {{/if}}

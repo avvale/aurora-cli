@@ -6,7 +6,6 @@ import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.resolver';
 import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
-import { GetLangsCacheService } from '@apps/common/lang/application/shared/get-langs-cache.service';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
@@ -31,12 +30,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : ''
-                    }
-                },
-                {
-                    provide : GetLangsCacheService,
-                    useValue: {
-                        main: () => langs,
                     }
                 },
                 {
