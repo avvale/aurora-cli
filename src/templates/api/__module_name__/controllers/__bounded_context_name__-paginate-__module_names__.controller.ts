@@ -1,6 +1,6 @@
 import { Controller, Post, Body, HttpCode{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}IQueryBus, Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
@@ -19,9 +19,6 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 {{/if}}
 // {{ config.applicationsContainer }}
 import { Paginate{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/paginate/paginate-{{ toKebabCase schema.moduleNames }}.query';
-{{#if schema.properties.hasI18n}}
-import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
-{{/if}}
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate')

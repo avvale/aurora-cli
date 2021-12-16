@@ -4,13 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 {{/if}}
-import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller } from './{{ toKebabCase schema.boundedContextName }}-get-{{ toKebabCase schema.moduleNames }}.controller';
-{{#if schema.properties.hasI18n}}
-import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
-{{/if}}
 
 // sources
 {{#if schema.properties.hasI18n}}

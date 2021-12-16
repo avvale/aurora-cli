@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.resolver';
-import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

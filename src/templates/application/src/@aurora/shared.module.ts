@@ -1,7 +1,7 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { CoreModule, ICommandBus, ICriteria, IQueryBus, NestCommandBus, NestQueryBus, SequelizeCriteria } from 'aurora-ts-core';
+import { AddI18NConstraintService, CoreModule, ICommandBus, ICriteria, IQueryBus, NestCommandBus, NestQueryBus, SequelizeCriteria } from 'aurora-ts-core';
 
 @Module({
     imports: [
@@ -11,6 +11,7 @@ import { CoreModule, ICommandBus, ICriteria, IQueryBus, NestCommandBus, NestQuer
         CqrsModule
     ],
     providers: [
+        AddI18NConstraintService,
         {
             provide : ICommandBus,
             useClass: NestCommandBus
@@ -25,6 +26,7 @@ import { CoreModule, ICommandBus, ICriteria, IQueryBus, NestCommandBus, NestQuer
         }
     ],
     exports: [
+        AddI18NConstraintService,
         CacheModule,
         ConfigModule,
         CqrsModule,

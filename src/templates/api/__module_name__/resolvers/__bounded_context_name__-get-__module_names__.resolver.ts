@@ -1,5 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -19,9 +19,6 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 // {{ config.applicationsContainer }}
 import { Get{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../../../graphql';
-{{#if schema.properties.hasI18n}}
-import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
-{{/if}}
 
 @Resolver()
 {{#if schema.hasOAuth}}

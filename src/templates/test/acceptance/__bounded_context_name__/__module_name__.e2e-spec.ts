@@ -6,7 +6,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
 import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
-import { AddI18NConstraintService } from '@apps/common/lang/application/shared/add-i18n-constraint.service';
+import { AddI18NConstraintService } from '{{ config.auroraCorePackage }}';
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
 import { GraphQLConfigModule } from '{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
