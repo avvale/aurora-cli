@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './delete-{{ toKebabCase schema.moduleName }}-by-id.command-handler';
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { {{ toCamelCase schema.moduleNames }} } from '../../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from './delete-{{ toKebabCase schema.moduleName }}-by-id.command';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdService } from './delete-{{ toKebabCase schema.moduleName }}-by-id.service';
 

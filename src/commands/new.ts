@@ -37,12 +37,12 @@ export default class New extends Command
         if (flags.package)
         {
             stateService.packageName = args.name;
-            operations.generatePackage();
+            await operations.generatePackage();
         }
         else
         {
             stateService.appName = args.name;
-            operations.generateApplication();
+            await operations.generateApplication();
         }
 
         const dependenciesSpinner = ora('Installing dependencies').start();

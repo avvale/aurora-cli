@@ -14,7 +14,7 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#if schema.properties.hasI18n}}
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 {{/if}}
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
 describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver', () =>
 {

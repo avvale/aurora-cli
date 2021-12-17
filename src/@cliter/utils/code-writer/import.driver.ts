@@ -9,40 +9,39 @@ export class ImportDriver
      * @param modules
      * @param path
      */
-    public static createImportItems(sourceFile: SourceFile, items: string[], path: string): void
+    public static createImportItems(sourceFile: SourceFile, path: string, items: string[]): void
     {
         const itemsToImport: string[]   = ImportDriver.getUniqueImportItems(sourceFile, items);
         const importPaths: string[]     = ImportDriver.getImportPaths(sourceFile);
 
-        if (itemsToImport.length > 0)
-        {
-            // if exist path add item to import
-            if (importPaths.includes(path))
-            {
-                // check this import not exist yet
-                const importElement = sourceFile.getImportDeclaration(path);
-                const itemsToImportChecked: string[] = [];
-                for (const itemToImport of itemsToImport)
-                {
-                    let existItem = false;
-                    for(const importedElement of importElement?.getNamedImports() ? importElement?.getNamedImports() : [])
-                    {
-                        if (importedElement.getName() === itemToImport) existItem = true;
-                    }
-                    if (!existItem) itemsToImportChecked.push(itemToImport);
-                }
+        if (itemsToImport.length > 0) return;
 
-                // add import after check that is not repeated
-                if (itemsToImportChecked.length > 0) importElement?.addNamedImports(itemsToImportChecked);
-            }
-            // create new import
-            else
+        // if exist path add item to import
+        if (importPaths.includes(path))
+        {
+            // check this import not exist yet
+            const importElement = sourceFile.getImportDeclaration(path);
+            const itemsToImportChecked: string[] = [];
+            for (const itemToImport of itemsToImport)
             {
-                sourceFile.addImportDeclaration({
-                    namedImports   : itemsToImport,
-                    moduleSpecifier: path
-                });
+                let existItem = false;
+                for(const importedElement of importElement?.getNamedImports() ? importElement?.getNamedImports() : [])
+                {
+                    if (importedElement.getName() === itemToImport) existItem = true;
+                }
+                if (!existItem) itemsToImportChecked.push(itemToImport);
             }
+
+            // add import after check that is not repeated
+            if (itemsToImportChecked.length > 0) importElement?.addNamedImports(itemsToImportChecked);
+        }
+        // create new import
+        else
+        {
+            sourceFile.addImportDeclaration({
+                namedImports   : itemsToImport,
+                moduleSpecifier: path
+            });
         }
     }
 

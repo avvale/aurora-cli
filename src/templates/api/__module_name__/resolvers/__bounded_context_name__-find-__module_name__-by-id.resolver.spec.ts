@@ -13,7 +13,7 @@ import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.
 {{#if schema.properties.hasI18n}}
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 {{/if}}
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
 describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver', () =>
 {

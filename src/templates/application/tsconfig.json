@@ -16,11 +16,6 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "paths": {
-        "@aurora/*": ["src/@aurora/*"],
-        "@apps/*": ["src/@apps/*"],
-        "@api/*": ["src/@api/*"]
-    }
+    "noFallthroughCasesInSwitch": false
   }
 }

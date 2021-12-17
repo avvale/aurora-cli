@@ -3,6 +3,7 @@ import { SyntaxKind, NewLineKind } from 'typescript';
 import { cliterConfig } from './../../../@cliter/config/cliter.config';
 import { Properties } from './../properties';
 import { ImportDriver } from './import.driver';
+import { ExportDriver } from './export.driver';
 import { ArrayDriver } from './array.driver';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -74,10 +75,10 @@ export class CodeWriter
                     // register import in e2e test
                     ImportDriver.createImportItems(
                         sourceFile,
+                        `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
                         [
                             `${foreignBoundedContextName.toPascalCase()}Module`,
                         ],
-                        `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
                     );
 
                     // register import in import array
@@ -97,9 +98,10 @@ export class CodeWriter
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
-        // register import
+        // register import in @apps/boundedContext/index.ts
         ImportDriver.createImportItems(
             sourceFile,
+            `./${this.moduleName.toKebabCase()}`,
             [
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Handlers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
@@ -108,7 +110,6 @@ export class CodeWriter
                 `Sequelize${this.moduleName.toPascalCase()}Repository`,
                 `${this.moduleName.toPascalCase()}Sagas`,
             ],
-            `./${this.moduleName.toKebabCase()}`,
         );
 
         // handlers
@@ -137,8 +138,8 @@ export class CodeWriter
         {
             ImportDriver.createImportItems(
                 sourceFile,
-                [intermediateModel.intermediateModel as string],
                 `./${this.moduleName.toKebabCase()}`,
+                [intermediateModel.intermediateModel as string],
             );
 
             ArrayDriver.createArrayItem(
@@ -172,12 +173,12 @@ export class CodeWriter
             // register import
             ImportDriver.createImportItems(
                 sourceFile,
+                `./${this.moduleName.toKebabCase()}`,
                 [
                     `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18NModel`,
                     `I${this.moduleName.toPascalCase()}I18NRepository`,
                     `Sequelize${this.moduleName.toPascalCase()}I18NRepository`,
                 ],
-                `./${this.moduleName.toKebabCase()}`,
             );
 
             // models
@@ -217,6 +218,7 @@ export class CodeWriter
         // register imports from bounded context
         ImportDriver.createImportItems(
             sourceFile,
+            `../../${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}`,
             [
                 `${this.boundedContextName.toPascalCase()}Models`,
                 `${this.boundedContextName.toPascalCase()}Handlers`,
@@ -224,17 +226,16 @@ export class CodeWriter
                 `${this.boundedContextName.toPascalCase()}Repositories`,
                 `${this.boundedContextName.toPascalCase()}Sagas`,
             ],
-            `${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}`,
         );
 
         // register import for controllers and providers
         ImportDriver.createImportItems(
             sourceFile,
+            `./${this.moduleName.toKebabCase()}`,
             [
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
             ],
-            `./${this.moduleName.toKebabCase()}`,
         );
 
         // add model to ORM array argument
@@ -278,8 +279,8 @@ export class CodeWriter
             // import module
             ImportDriver.createImportItems(
                 sourceFile,
-                [`${this.boundedContextName.toPascalCase()}Module`],
                 `${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+                [`${this.boundedContextName.toPascalCase()}Module`],
             );
 
             // register module
@@ -287,6 +288,19 @@ export class CodeWriter
             const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
             importsArray.addElement(`${this.boundedContextName.toPascalCase()}Module`, { useNewLines: true });
         }
+
+        sourceFile?.saveSync();
+    }
+
+    exportModule(): void
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'index.ts'));
+
+        // import module
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+        );
 
         sourceFile?.saveSync();
     }
@@ -299,10 +313,10 @@ export class CodeWriter
         // register import auth module
         ImportDriver.createImportItems(
             sourceFile,
+            cliterConfig.applicationsContainer + '/iam/shared/domain/modules/auth/auth.module.ts',
             [
                 'AuthModule',
             ],
-            cliterConfig.applicationsContainer + '/iam/shared/domain/modules/auth/auth.module.ts',
         );
 
         // register auth module
@@ -326,11 +340,11 @@ export class CodeWriter
 
     private getModelArrayArgument(moduleDecoratorArguments: ObjectLiteralExpression): ArrayLiteralExpression
     {
-        const importsArgument: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('imports');
+        const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
         const importsArray: ArrayLiteralExpression = importsArgument.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
         const importsElements = importsArray.getElements();
-        const SequelizeModuleElement: CallExpression = <CallExpression>importsElements.find(el => el.getText().indexOf('SequelizeModule.forFeature') === 0);
-        return <ArrayLiteralExpression> SequelizeModuleElement.getArguments()[0];
+        const SequelizeModuleElement: CallExpression = importsElements.find(el => el.getText().indexOf('SequelizeModule.forFeature') === 0) as CallExpression;
+        return SequelizeModuleElement.getArguments()[0] as ArrayLiteralExpression;
     }
 
     private getImportedModules(sourceFile: SourceFile): string[]
@@ -347,7 +361,7 @@ export class CodeWriter
     private getModuleDecoratorArguments(sourceFile: SourceFile, className: string): ObjectLiteralExpression
     {
         const moduleClass = sourceFile.getClass(className);
-        const moduleDecorator: Decorator = <Decorator>moduleClass?.getDecorator('Module');
-        return <ObjectLiteralExpression>moduleDecorator.getArguments()[0];
+        const moduleDecorator: Decorator = moduleClass?.getDecorator('Module') as Decorator;
+        return moduleDecorator.getArguments()[0] as ObjectLiteralExpression;
     }
 }

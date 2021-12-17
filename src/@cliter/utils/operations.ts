@@ -199,6 +199,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.generateReferences(Operations.stateService.schema.properties);
         codeWriter.declareFramework();
         codeWriter.declareModule();
+        codeWriter.exportModule();
         if (Operations.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
     }
 

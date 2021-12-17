@@ -14,18 +14,18 @@ import { Updated{{ toPascalCase schema.moduleName }}Event } from './../applicati
 import { Deleted{{ toPascalCase schema.moduleName }}Event } from './../application/events/deleted-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
+import { {{ relationshipAggregate }} } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
 {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
+import { {{ relationshipAggregate }} } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
-import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
+import { {{ relationshipAggregate }} } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ relationshipAggregate }} } from '{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
+import { {{ relationshipAggregate }} } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate';
 {{/each}}
 
 export class {{ schema.aggregateName }} extends AggregateRoot
