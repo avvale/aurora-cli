@@ -1,5 +1,12 @@
 {
-    "language": "ts",
     "collection": "@nestjs/schematics",
-    "sourceRoot": "src"
-  }
+    "sourceRoot": "src",
+    "compilerOptions": {
+		"assets": [{
+			"include": "**/*.{gql,graphql}",
+            "exclude": "@aurora/graphql/core.graphql",
+			"outDir": "dist/output/graphql",
+            "watchAssets": true
+		}]
+	}
+}
