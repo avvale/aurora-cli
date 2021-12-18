@@ -19,6 +19,7 @@ export class CodeWriter
         public readonly boundedContextName: string,
         public readonly moduleName: string,
         public readonly moduleNames: string,
+        public readonly aggregateName: string,
     )
     {
         this.project = new Project({
@@ -292,14 +293,42 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    exportModule(): void
+    declareExports(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'index.ts'));
 
-        // import module
+        // export module
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+        );
+
+        // export aggregate
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.aggregate`,
+            [`${this.aggregateName}`]
+        );
+
+        // export model
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`]
+        );
+
+        // export response
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.response`,
+            [`${this.moduleName.toPascalCase()}Response`]
+        );
+
+        // export mapper
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.mapper`,
+            [`${this.moduleName.toPascalCase()}Mapper`]
         );
 
         sourceFile?.saveSync();

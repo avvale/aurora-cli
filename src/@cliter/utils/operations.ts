@@ -194,12 +194,13 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             cliterConfig.apiContainer,
             Operations.stateService.schema.boundedContextName.toLowerCase(),
             Operations.stateService.schema.moduleName.toLowerCase(),
-            Operations.stateService.schema.moduleNames.toLowerCase()
+            Operations.stateService.schema.moduleNames.toLowerCase(),
+            Operations.stateService.schema.aggregateName,
         );
         codeWriter.generateReferences(Operations.stateService.schema.properties);
         codeWriter.declareFramework();
         codeWriter.declareModule();
-        codeWriter.exportModule();
+        codeWriter.declareExports();
         if (Operations.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
     }
 
@@ -211,7 +212,8 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             cliterConfig.apiContainer,
             Operations.stateService.schema.boundedContextName.toLowerCase(),
             Operations.stateService.schema.moduleName.toLowerCase(),
-            Operations.stateService.schema.moduleNames.toLowerCase()
+            Operations.stateService.schema.moduleNames.toLowerCase(),
+            Operations.stateService.schema.aggregateName,
         );
 
         codeWriter.generateTestingForeignReferences(Operations.stateService.schema.properties);
