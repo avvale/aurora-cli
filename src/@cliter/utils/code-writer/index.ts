@@ -301,6 +301,7 @@ export class CodeWriter
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+            [`${this.boundedContextName.toPascalCase()}Module`]
         );
 
         // export aggregate
