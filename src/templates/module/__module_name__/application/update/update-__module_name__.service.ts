@@ -62,7 +62,7 @@ export class Update{{ toPascalCase schema.moduleName }}Service
         // update
         await this.repository.update({{ toCamelCase schema.moduleName }}, constraint, cQMetadata);
         {{#if schema.properties.hasI18n}}
-        await this.repositoryI18n.update({{ toCamelCase schema.moduleName }}, constraint, cQMetadata, (aggregate: CommonCountry) => aggregate.toI18nDTO(), { langId: {{ toCamelCase schema.moduleName }}.langId.value, {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value });
+        await this.repositoryI18n.update({{ toCamelCase schema.moduleName }}, constraint, cQMetadata, (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(), { langId: {{ toCamelCase schema.moduleName }}.langId.value, {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value });
         {{/if}}
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
