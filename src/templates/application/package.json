@@ -30,7 +30,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.0",
     "apollo-server-express": "^3.3.0",
-    "aurora-ts-core": "^0.0.28",
+    "aurora-ts-core": "^1.0.0",
     "cache-manager": "^3.6.0",
     "graphql": "^15.6.0",
     "graphql-type-json": "^0.3.2",

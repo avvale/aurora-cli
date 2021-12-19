@@ -20,7 +20,7 @@
   "peerDependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/cqrs": "^8.0.0",
-    "aurora-ts-core": "^0.0.28",
+    "aurora-ts-core": "^1.0.0",
     "graphql-type-json": "^0.3.2"
   },
   "dependencies": {},
