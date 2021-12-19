@@ -5,18 +5,18 @@ import {
     {{> importValueObjects }}
 } from './value-objects';
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
 {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 
 export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper

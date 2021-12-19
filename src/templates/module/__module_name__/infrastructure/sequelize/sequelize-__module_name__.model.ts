@@ -2,18 +2,18 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ relationshipAggregate }}Model } from '../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
 {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-import { {{ relationshipAggregate }}Model } from '../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
-import { {{ relationshipAggregate }}Model } from '../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ relationshipAggregate }}Model } from '../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model';
+import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 import { {{ intermediateModel }} } from '../../../../../{{ config.applicationsContainer }}/{{ intermediateModelModuleSection }}/infrastructure/sequelize/sequelize-{{ intermediateModelFile }}.model';
 {{/each}}
 {{#if schema.properties.hasI18n}}
