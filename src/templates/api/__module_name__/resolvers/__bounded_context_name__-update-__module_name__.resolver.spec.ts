@@ -12,7 +12,7 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 
 // sources
 {{#if schema.properties.hasI18n}}
-import { langs } from '../../../../{{ config.applicationsContainer }}/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '{{#eq schema.boundedContextName 'common'}}../../../../{{ config.applicationsContainer }}/common/lang/infrastructure/seeds/lang.seed{{else}}aurora-ts-common{{/eq}}';
 {{/if}}
 import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 

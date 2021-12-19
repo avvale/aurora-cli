@@ -331,6 +331,13 @@ export class CodeWriter
             [`${this.moduleName.toPascalCase()}Mapper`]
         );
 
+        // export seed
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/seeds/${this.moduleName.toCamelCase()}.seed`,
+            [`${this.moduleNames.toCamelCase()}`]
+        );
+
         sourceFile?.saveSync();
     }
 
