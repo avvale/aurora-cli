@@ -28,6 +28,7 @@ export class Property
     public relationshipModulePath?: string;
     public relationshipKey?: string;
     public relationshipField?: string;
+    public relationshipPackageName?: string;
     public intermediateTable?: string;
     public intermediateModel?: string;
     public intermediateModelModuleSection?: string;
@@ -56,6 +57,7 @@ export class Property
             relationshipModulePath?: string;
             relationshipKey?: string;
             relationshipField?: string;
+            relationshipPackageName?: string;
             intermediateTable?: string;
             intermediateModel?: string;
             intermediateModelModuleSection?: string;
@@ -84,6 +86,7 @@ export class Property
         this.relationshipModulePath = payload.relationshipModulePath;
         this.relationshipKey = payload.relationshipKey;
         this.relationshipField = payload.relationshipField;
+        this.relationshipPackageName = payload.relationshipPackageName;
         this.intermediateTable = payload.intermediateTable;
         this.intermediateModel = payload.intermediateModel;
         this.intermediateModelModuleSection = payload.intermediateModelModuleSection;
@@ -285,6 +288,7 @@ export class Property
             relationshipModulePath        : this.relationshipModulePath,
             relationshipKey               : this.relationshipKey,
             relationshipField             : this.relationshipField,
+            relationshipPackageName       : this.relationshipPackageName,
             intermediateTable             : this.intermediateTable,
             intermediateModel             : this.intermediateModel,
             intermediateModelModuleSection: this.intermediateModelModuleSection,

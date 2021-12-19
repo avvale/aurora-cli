@@ -211,6 +211,7 @@ export default class Load extends Command
                     relationshipModulePath        : property?.relationshipModulePath,
                     relationshipKey               : property?.relationshipKey,
                     relationshipField             : property?.relationshipField,
+                    relationshipPackageName       : property?.relationshipPackageName,
                     intermediateTable             : property?.intermediateTable,
                     intermediateModel             : property?.intermediateModel,
                     intermediateModelModuleSection: property?.intermediateModelModuleSection,

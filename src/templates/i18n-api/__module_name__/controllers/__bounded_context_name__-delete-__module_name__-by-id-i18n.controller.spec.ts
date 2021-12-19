@@ -30,17 +30,13 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 {
                     provide : ConfigService,
                     useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : ''
+                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
                     }
                 },
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
-                        get: (key: string) =>
-                        {
-                            console.log(key);
-                            return key === 'common/lang' ? langs : null;
-                        },
+                        get: (key: string) => key === 'common/lang' ? langs : null,
                     }
                 },
                 {

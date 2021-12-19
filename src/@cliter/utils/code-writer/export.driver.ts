@@ -21,7 +21,8 @@ export class ExportDriver
 
         const itemsToExport: string[]   = ExportDriver.getUniqueExportItems(sourceFile, items);
 
-        if (itemsToExport.length > 0) return;
+        // need at less one item to export
+        if (itemsToExport.length === 0) return;
 
         // if exist path add item to export
         if (exportPaths.includes(path))
