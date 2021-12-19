@@ -35,7 +35,7 @@ handlebars.registerHelper('mocker', function(
 )
 {
     // create mocker object
-    const mocker    = new Mocker();
+    const mocker = new Mocker();
 
     // namespace to generate same uuid, see https://www.npmjs.com/package/uuid
     const namespace = '01a94203-63ba-4c07-bb92-bb61cd2b8e41';

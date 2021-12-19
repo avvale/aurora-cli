@@ -43,6 +43,9 @@ export class Mocker
             case 'json':
                 return scapeQuotes ? '{ "foo" : "bar" }'.replace(/"/gi, '\\"') : '{ "foo" : "bar" }';
 
+            case 'json.array':
+                return scapeQuotes ? '["foo", "bar"]'.replace(/"/gi, '\\"') : '["foo", "bar"]';
+
             case 'text':
                 return faker.lorem.paragraph();
 
