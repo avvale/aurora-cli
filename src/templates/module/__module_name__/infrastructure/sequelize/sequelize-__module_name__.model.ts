@@ -53,7 +53,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{#if defaultValue }}
         defaultValue: {{ getDefaultValue }},
         {{/if}}
-        {{#if false }}
+        {{#unless relationshipAvoidConstraint }}
         {{#eq relationship ../relationship.MANY_TO_ONE }}
         references: {
             key: '{{ getReferenceKey }}'
@@ -61,7 +61,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',
         {{/eq}}
-        {{/if}}
+        {{/unless}}
     })
     {{ toCamelCase name }}: {{{ getJavascriptType }}};
     {{/if}}
@@ -72,12 +72,23 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if hasBelongsToDecorator }}
 
-    @BelongsTo(() => {{ relationshipAggregate }}Model, { constraints: false })
+    @BelongsTo(() => {{ relationshipAggregate }}Model{{#or relationshipAvoidConstraint }}, {
+        {{#if relationshipAvoidConstraint }}
+        constraints: false,
+        {{/if}}
+    }{{/or}})
     {{ toCamelCase relationshipField }}: {{ relationshipAggregate }}Model;
     {{/if}}
     {{#if hasHasManyDecorator }}
 
-    @HasMany(() => {{ relationshipAggregate }}Model{{#if relationshipKey }}, '{{ relationshipKey }}'{{/if}})
+    @HasMany(() => {{ relationshipAggregate }}Model{{#or relationshipKey relationshipAvoidConstraint }}, {
+        {{#if relationshipKey }}
+        foreignKey: '{{ relationshipKey }}',
+        {{/if}}
+        {{#if relationshipAvoidConstraint }}
+        constraints: false,
+        {{/if}}
+    }{{/or}})
     {{ toCamelCase name }}: {{ relationshipAggregate }}Model[];
     {{/if}}
     {{#if hasBelongsToManyDecorator }}

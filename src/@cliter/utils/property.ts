@@ -28,6 +28,7 @@ export class Property
     public relationshipModulePath?: string;
     public relationshipKey?: string;
     public relationshipField?: string;
+    public relationshipAvoidConstraint?: boolean;
     public relationshipPackageName?: string;
     public intermediateTable?: string;
     public intermediateModel?: string;
@@ -57,6 +58,7 @@ export class Property
             relationshipModulePath?: string;
             relationshipKey?: string;
             relationshipField?: string;
+            relationshipAvoidConstraint?: boolean;
             relationshipPackageName?: string;
             intermediateTable?: string;
             intermediateModel?: string;
@@ -86,6 +88,7 @@ export class Property
         this.relationshipModulePath = payload.relationshipModulePath;
         this.relationshipKey = payload.relationshipKey;
         this.relationshipField = payload.relationshipField;
+        this.relationshipAvoidConstraint = payload.relationshipAvoidConstraint;
         this.relationshipPackageName = payload.relationshipPackageName;
         this.intermediateTable = payload.intermediateTable;
         this.intermediateModel = payload.intermediateModel;
@@ -288,6 +291,7 @@ export class Property
             relationshipModulePath        : this.relationshipModulePath,
             relationshipKey               : this.relationshipKey,
             relationshipField             : this.relationshipField,
+            relationshipAvoidConstraint   : this.relationshipAvoidConstraint,
             relationshipPackageName       : this.relationshipPackageName,
             intermediateTable             : this.intermediateTable,
             intermediateModel             : this.intermediateModel,
