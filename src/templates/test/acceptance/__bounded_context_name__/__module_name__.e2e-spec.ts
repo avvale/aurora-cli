@@ -29,6 +29,7 @@ import { TestingJwtService } from './../../../src/{{ config.apiContainer }}/o-au
 import * as fs from 'fs';
 {{/if }}
 
+// disable import foreign modules, can be micro-services
 const importForeignModules = [];
 {{setVar 'language' '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a'}}
 describe('{{ toKebabCase schema.moduleName }}', () =>

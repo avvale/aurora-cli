@@ -82,12 +82,13 @@ export class CodeWriter
                         ],
                     );
 
+                    // disable import foreign modules, can be micro-services
                     // register import in import array
-                    ArrayDriver.createArrayItem(
+                    /* ArrayDriver.createArrayItem(
                         sourceFile,
                         `${foreignBoundedContextName.toPascalCase()}Module`,
                         'importForeignModules',
-                    );
+                    ); */
 
                     sourceFile?.saveSync();
                 }
