@@ -139,7 +139,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} must be defined, can not be null');
             });
     });
@@ -162,7 +163,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} must be defined, can not be undefined');
             });
     });
@@ -183,7 +185,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is not allowed, must be a length of {{ hasLengthPropety.length }}');
             });
     });
@@ -204,7 +207,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}');
             });
     });
@@ -225,7 +229,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}');
             });
     });
@@ -245,7 +250,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a integer value');
             });
     });
@@ -265,7 +271,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('The numerical value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} must have a positive sign, this field does not accept negative values');
             });
     });
@@ -285,7 +292,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a boolean value');
             });
     });
@@ -305,7 +313,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be any of this options: {{ join enumOptions }}');
             });
     });
@@ -325,7 +334,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(400)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a timestamp value');
             });
     });
@@ -359,7 +369,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toEqual({
                     total   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
                     count   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
@@ -377,7 +388,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toEqual(
                     seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'])))
                 );
@@ -442,7 +454,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
@@ -467,7 +480,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
@@ -502,7 +516,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/each}}
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
@@ -555,7 +570,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
                 expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
@@ -592,7 +608,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}).toEqual({
                     total   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
                     count   : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
@@ -624,7 +641,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 variables: {}
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 for (const [index, value] of res.body.data.{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}.entries())
                 {
                     expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
@@ -661,7 +679,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
             });
     });
@@ -698,7 +717,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
                 expect(res.body.errors[0].extensions.response.message).toContain('not found');
@@ -737,7 +757,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
@@ -767,7 +788,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
                 expect(res.body.errors[0].extensions.response.message).toContain('not found');
@@ -799,7 +821,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
@@ -833,7 +856,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
                 expect(res.body.errors[0].extensions.response.message).toContain('not found');
@@ -869,7 +893,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
@@ -899,7 +924,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body).toHaveProperty('errors');
                 expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
                 expect(res.body.errors[0].extensions.response.message).toContain('not found');
@@ -931,7 +957,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }
             })
             .expect(200)
-            .then(res => {
+            .then(res =>
+            {
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
             });
     });
