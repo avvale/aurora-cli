@@ -29,14 +29,15 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdI18NService', () =>
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        findById: (id) => { /**/ },
-                        update  : (item) => { /**/ },
+                        findById  : id => { /**/ },
+                        update    : item => { /**/ },
+                        deleteById: item => { /**/ },
                     }
                 },
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
-                        delete: (queryStatement) => { /**/ },
+                        delete: queryStatement => { /**/ },
                     }
                 },
             ]

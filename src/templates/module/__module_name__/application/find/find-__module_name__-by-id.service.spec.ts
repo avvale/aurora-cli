@@ -26,7 +26,7 @@ describe('Find{{ toPascalCase schema.moduleName }}ByIdService', () =>
                 {
                     provide: I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        findById: (id) => {}
+                        findById: id => { /**/ }
                     }
                 }
             ]

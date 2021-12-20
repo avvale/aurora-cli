@@ -33,16 +33,16 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        deleteById: (id) => { /**/ },
-                        findById  : (id) => { /**/ },
+                        deleteById: id => { /**/ },
+                        findById  : id => { /**/ },
                     }
                 },
                 {{#if schema.properties.hasI18n}}
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ }
+                        get   : queryStatement => { /**/ },
+                        delete: queryStatement => { /**/ }
                     }
                 },
                 {{/if}}
