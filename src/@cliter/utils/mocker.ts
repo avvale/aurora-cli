@@ -46,6 +46,10 @@ export class Mocker
             case 'json.array':
                 return scapeQuotes ? '["foo", "bar"]'.replace(/"/gi, '\\"') : '["foo", "bar"]';
 
+            case 'json.dataLang':
+                // add spanish language
+                return scapeQuotes ? '["4470b5ab-9d57-4c9d-a68f-5bf8e32f543a"]'.replace(/"/gi, '\\"') : '["4470b5ab-9d57-4c9d-a68f-5bf8e32f543a"]';
+
             case 'text':
                 return faker.lorem.paragraph();
 
