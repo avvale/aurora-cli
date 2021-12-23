@@ -210,11 +210,11 @@ export class CodeWriter
         // get decorator arguments
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.frameworkDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`);
-        const providers: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('providers');
+        const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
 
         const providersArray: ArrayLiteralExpression = providers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression) as ArrayLiteralExpression;
 
-        const controllers: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('controllers');
+        const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
         const controllersArray = controllers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
         // register imports from bounded context
