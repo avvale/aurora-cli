@@ -305,6 +305,13 @@ export class CodeWriter
             [`${this.boundedContextName.toPascalCase()}Module`]
         );
 
+        // export DTO
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/dto/${this.moduleName.toKebabCase()}.dto`,
+            [`${this.moduleName.toPascalCase()}Dto`]
+        );
+
         // export aggregate
         ExportDriver.createExportItems(
             sourceFile,

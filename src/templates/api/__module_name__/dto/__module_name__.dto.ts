@@ -1,9 +1,10 @@
+/* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ toPascalCase getRelationshipModule }}Dto } from './../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipModule }}.dto';
+import { {{ toPascalCase getRelationshipModule }}Dto } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipModule }}.dto{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ toPascalCase getRelationshipModule }}Dto } from './../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipModule }}.dto';
+import { {{ toPascalCase getRelationshipModule }}Dto } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipModule }}.dto{{/if}}';
 {{/each}}
 
 export class {{ toPascalCase schema.moduleName }}Dto
