@@ -76,7 +76,9 @@ export class CodeWriter
                     // register import in e2e test
                     ImportDriver.createImportItems(
                         sourceFile,
-                        `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
+                        foreignRelationship.relationshipPackageName
+                            ? foreignRelationship.relationshipPackageName
+                            : `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
                         [
                             `${foreignBoundedContextName.toPascalCase()}Module`,
                         ],
