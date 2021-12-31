@@ -25,7 +25,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
 
     public async main(
         {{ toCamelCase schema.moduleNames }}: {
-            {{#each schema.properties.createService}}
+            {{#each schema.properties.createItemsService}}
             {{#if (allowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
             {{/if}}
@@ -44,11 +44,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
 {{else eq name 'deletedAt'}}
             null, // deleteAt
 {{else}}
-{{#if (isI18NDataLangProperty . ../schema.properties)}}
-            null, // dataLang
-{{else}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
-{{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (allowProperty ../schema.moduleName this)}}
