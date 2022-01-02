@@ -54,6 +54,14 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         );
 
         {{#if schema.properties.hasI18n}}
+        // first try to save new i18n record, so we make sure that the record does not exist in the database.
+        await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(), (aggregate: {{ schema.aggregateName }} ) => ({
+            where: {
+                {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
+                langId: aggregate['langId']['value'],
+            }
+        }));
+
         try
         {
             // try get object from database
@@ -71,13 +79,6 @@ export class Create{{ toPascalCase schema.moduleName }}Service
                 await this.repository.create({{ toCamelCase schema.moduleName }});
             }
         }
-
-        await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(), (aggregate: {{ schema.aggregateName }} ) => ({
-            where: {
-                {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
-                langId: aggregate['langId']['value'],
-            }
-        }));
         {{else}}
         await this.repository.create({{ toCamelCase schema.moduleName }});
         {{/if}}
