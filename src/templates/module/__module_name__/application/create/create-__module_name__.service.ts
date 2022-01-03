@@ -55,17 +55,23 @@ export class Create{{ toPascalCase schema.moduleName }}Service
 
         {{#if schema.properties.hasI18n}}
         // first try to save new i18n record, so we make sure that the record does not exist in the database.
-        await this.repositoryI18n.create({{ toCamelCase schema.moduleName }}, (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(), (aggregate: {{ schema.aggregateName }} ) => ({
-            where: {
-                {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
-                langId: aggregate['langId']['value'],
+        await this.repositoryI18n.create(
+            {{ toCamelCase schema.moduleName }},
+            {
+                dataFactory         : (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(),
+                finderQueryStatement: (aggregate: {{ schema.aggregateName }} ) => ({
+                    where: {
+                        {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
+                        langId: aggregate['langId']['value'],
+                    }
+                })
             }
-        }));
+        );
 
         try
         {
             // try get object from database
-            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById({{ toCamelCase schema.moduleName }}.id, { include: ['{{ toCamelCase schema.moduleName }}I18N']});
+            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById({{ toCamelCase schema.moduleName }}.id, { constraint: { include: ['{{ toCamelCase schema.moduleName }}I18N']}});
 
             // add new lang id to data lang field to create or update field
             {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(_.union({{ toCamelCase schema.moduleName }}InDB.dataLang.value, [{{ toCamelCase schema.moduleName }}.langId.value]));

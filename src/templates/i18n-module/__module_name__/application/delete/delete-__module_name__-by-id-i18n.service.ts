@@ -18,21 +18,25 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdI18NService
     public async main(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
     {
         // get object to delete
-        const {{ toCamelCase schema.moduleName }} = await this.repository.findById(id, constraint, cQMetadata);
+        const {{ toCamelCase schema.moduleName }} = await this.repository.findById(id, { constraint, cQMetadata });
 
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
-        await this.repositoryI18n.delete({ where: {
-            langId: {{ toCamelCase schema.moduleName }}.langId.value,
-            {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
-        }});
+        await this.repositoryI18n.delete({
+            queryStatement: {
+                where: {
+                    langId: {{ toCamelCase schema.moduleName }}.langId.value,
+                    {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
+                }
+            }
+        });
 
         const dataLang = {{ toCamelCase schema.moduleName }}.dataLang.value.removeItem({{ toCamelCase schema.moduleName }}.langId.value);
 
         // if has not any translation in i18n table, delete record
         if (dataLang.length === 0)
         {
-            await this.repository.deleteById({{ toCamelCase schema.moduleName }}.id, {}, cQMetadata);
+            await this.repository.deleteById({{ toCamelCase schema.moduleName }}.id, { cQMetadata });
         }
         else
         {

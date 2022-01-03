@@ -57,7 +57,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         {{#if schema.properties.hasI18n}}
         // delete duplicate elements from multiple languages
         await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)));
-        await this.repositoryI18n.insert(aggregate{{ toPascalCase schema.moduleNames }}, {}, aggregate => aggregate.toI18nDTO());
+        await this.repositoryI18n.insert(aggregate{{ toPascalCase schema.moduleNames }}, { dataFactory: aggregate => aggregate.toI18nDTO() });
         {{else}}
         await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }});
         {{/if}}
