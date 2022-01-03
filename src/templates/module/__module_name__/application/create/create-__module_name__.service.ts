@@ -1,4 +1,4 @@
-import { Injectable{{#if schema.properties.hasI18n}}, NotFoundException{{/if}} } from '@nestjs/common';
+import { ConflictException, Injectable{{#if schema.properties.hasI18n}}, NotFoundException{{/if}} } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import {
     {{> importValueObjects }}
@@ -54,24 +54,12 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         );
 
         {{#if schema.properties.hasI18n}}
-        // first try to save new i18n record, so we make sure that the record does not exist in the database.
-        await this.repositoryI18n.create(
-            {{ toCamelCase schema.moduleName }},
-            {
-                dataFactory         : (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(),
-                finderQueryStatement: (aggregate: {{ schema.aggregateName }} ) => ({
-                    where: {
-                        {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
-                        langId: aggregate['langId']['value'],
-                    }
-                })
-            }
-        );
-
         try
         {
             // try get object from database
             const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById({{ toCamelCase schema.moduleName }}.id, { constraint: { include: ['{{ toCamelCase schema.moduleName }}I18N']}});
+
+            if ({{ toCamelCase schema.moduleName }}InDB.dataLang.value.includes({{ toCamelCase schema.moduleName }}.langId.value)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${{ bracketOpen }}{{ toCamelCase schema.moduleName }}['id']['value']} already exist in database`);
 
             // add new lang id to data lang field to create or update field
             {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(_.union({{ toCamelCase schema.moduleName }}InDB.dataLang.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
@@ -85,6 +73,20 @@ export class Create{{ toPascalCase schema.moduleName }}Service
                 await this.repository.create({{ toCamelCase schema.moduleName }});
             }
         }
+
+        // save new i18n record
+        await this.repositoryI18n.create(
+            {{ toCamelCase schema.moduleName }},
+            {
+                dataFactory         : (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(),
+                finderQueryStatement: (aggregate: {{ schema.aggregateName }} ) => ({
+                    where: {
+                        {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
+                        langId: aggregate['langId']['value'],
+                    }
+                })
+            }
+        );
         {{else}}
         await this.repository.create({{ toCamelCase schema.moduleName }});
         {{/if}}

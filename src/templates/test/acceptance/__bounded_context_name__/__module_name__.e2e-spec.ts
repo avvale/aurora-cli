@@ -116,7 +116,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         // seed mock data in memory database
         {{#if schema.properties.hasI18n}}
         await repository.insert(seeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
-        await repositoryI18N.insert(seeder.collectionSource, {}, aggregate => aggregate.toI18nDTO());
+        await repositoryI18N.insert(seeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
         {{else}}
         await repository.insert(seeder.collectionSource);
         {{/if}}
