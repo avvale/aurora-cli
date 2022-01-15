@@ -35,7 +35,7 @@ export class TemplateGenerator
         for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipIntermediateTable)
         {
             FileManager.generateContents(
-                path.join(TemplateGenerator.templatePath, 'intermediate_table'),
+                path.join(TemplateGenerator.templatePath, 'intermediate-table'),
                 relativeTargetBasePath,
                 relativeTargetPath,
                 { currentProperty: property }
