@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { ICommandBus, IQueryBus, Timezone } from '{{ config.auroraCorePackage }}';
 

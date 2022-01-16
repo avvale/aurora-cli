@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body, HttpCode{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
