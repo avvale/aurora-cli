@@ -1,6 +1,7 @@
 import { Command, flags } from '@oclif/command';
 import { TemplateElement } from './../@cliter/types';
 import { Operations, Prompter } from './../@cliter/utils';
+import { cliterConfig } from './../@cliter/config/cliter.config';
 import * as fs from 'fs';
 import * as chalk from 'chalk';
 import * as path from 'path';
@@ -8,7 +9,6 @@ import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
 import * as shell from 'shelljs';
 import * as ora from 'ora';
-import { cliterConfig } from './../@cliter/config/cliter.config';
 
 export default class Seed extends Command
 {
@@ -62,7 +62,7 @@ export default class Seed extends Command
             }
         }
 
-        if (args.elementType.toSnakeCase() === TemplateElement.BOUNDED_CONTEXT)
+        if (args.elementType.toKebabCase() === TemplateElement.BOUNDED_CONTEXT)
         {
             const { boundedContextName }: any = await Prompter.promptForSeedBoundedContext(flags.boundedContext);
 

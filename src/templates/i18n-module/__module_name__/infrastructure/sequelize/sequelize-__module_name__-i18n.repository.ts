@@ -23,7 +23,7 @@ export class Sequelize{{ toPascalCase schema.moduleName }}I18NRepository extends
     {{#hasItems schema.properties.withRelationshipManyToMany }}
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model)
+    async createdAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model): Promise<void>
     {
         // add many to many relation
         {{#each schema.properties.withRelationshipManyToMany}}
@@ -32,7 +32,7 @@ export class Sequelize{{ toPascalCase schema.moduleName }}I18NRepository extends
     }
 
     // hook called after create aggregate
-    async updatedAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model)
+    async updatedAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model): Promise<void>
     {
         // set many to many relation
         {{#each schema.properties.withRelationshipManyToMany}}

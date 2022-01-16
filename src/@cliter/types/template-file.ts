@@ -1,5 +1,5 @@
 export enum TemplateFile
 {
-    FILE            = 'bounded_context',
+    FILE            = 'bounded-context',
     VALUE_OBJECT    = 'module',
 }
