@@ -35,11 +35,6 @@
         }],
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
-        "@typescript-eslint/type-annotation-spacing": ["error", {
-            "before": false,
-            "after": true,
-            "overrides": true
-        }],
         "array-bracket-spacing": ["error", "never"],
         "arrow-parens": ["error" ,"as-needed"],
         "brace-style": ["error", "allman", { "allowSingleLine": true }],
