@@ -1,4 +1,5 @@
 import * as handlebars from 'handlebars';
+
 handlebars.registerPartial('importValueObjects',
     `{{#each schema.properties.valueObjects}}
 {{#if (allowProperty ../schema.moduleName this) }}

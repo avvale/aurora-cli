@@ -1,6 +1,6 @@
 {
     "env": {
-        "browser": true,
+        "node": true,
         "es2021": true
     },
     "parser": "@typescript-eslint/parser",
@@ -16,17 +16,43 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
+        "@typescript-eslint/explicit-member-accessibility": [
+            "off",
+            {
+                "accessibility": "explicit"
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/member-delimiter-style": ["error", {
+            "multiline": {
+                "delimiter": "semi",
+                "requireLast": true
+            },
+            "singleline": {
+                "delimiter": "semi",
+                "requireLast": true
+            }
+        }],
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+        "@typescript-eslint/type-annotation-spacing": ["error", {
+            "before": false,
+            "after": true,
+            "overrides": true
+        }],
         "array-bracket-spacing": ["error", "never"],
         "arrow-parens": ["error" ,"as-needed"],
         "brace-style": ["error", "allman", { "allowSingleLine": true }],
         "comma-dangle": ["error", {
-            "arrays": "only-multiline",
-            "objects": "only-multiline",
-            "imports": "only-multiline",
-            "exports": "only-multiline",
-            "functions": "only-multiline"
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "always-multiline"
         }],
+        "curly": "off",
         "grouped-accessor-pairs": ["error", "setBeforeGet"],
+        "import/order": "off",
         "import/prefer-default-export": "off",
         "indent": ["error", 4, { "SwitchCase": 1}],
         "key-spacing": ["error", {
@@ -44,15 +70,23 @@
                 "on": "colon"
             }
         }],
+        "max-len": [
+            "error",
+            {
+                "ignorePattern": "^import |^export | implements",
+                "code": 180
+            }
+        ],
         "no-case-declarations": "off",
         "no-duplicate-case": "error",
         "no-irregular-whitespace": ["error", { "skipRegExps": true }],
         "no-trailing-spaces": "error",
-        "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+        "no-underscore-dangle": "off",
         "no-var": "error",
         "object-curly-spacing": ["error", "always", { "objectsInObjects": false, "arraysInObjects": false }],
         "object-shorthand": ["error", "always", { "avoidQuotes": true }],
         "prefer-const": "error",
+        "quote-props": ["error", "as-needed"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"]
     }

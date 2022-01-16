@@ -1,6 +1,5 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from '{{ config.auroraCorePackage }}';
-import { CQMetadata, Pagination } from '{{ config.auroraCorePackage }}';
+import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Id } from './value-objects';
 
