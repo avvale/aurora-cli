@@ -1,7 +1,9 @@
 {
-  "name": "aurora-front",
+  "name": "@fuse/starter",
   "version": "14.1.1",
-  "description": "Aurora Admin Panel",
+  "description": "Fuse - Angular Admin Template and Starter Project",
+  "author": "https://themeforest.net/user/srcn",
+  "license": "https://themeforest.net/licenses/standard",
   "private": true,
   "scripts": {
     "ng": "ng",

@@ -100,13 +100,13 @@
     <div class="fuse-horizontal-navigation-item-title-wrapper">
         <div class="fuse-horizontal-navigation-item-title">
             <span [ngClass]="item.classes?.title">
-                {{item.title}}
+                \{{item.title}}
             </span>
         </div>
         <ng-container *ngIf="item.subtitle">
             <div class="fuse-horizontal-navigation-item-subtitle text-hint">
                 <span [ngClass]="item.classes?.subtitle">
-                    {{item.subtitle}}
+                    \{{item.subtitle}}
                 </span>
             </div>
         </ng-container>
@@ -118,7 +118,7 @@
             <div
                 class="fuse-horizontal-navigation-item-badge-content"
                 [ngClass]="item.badge.classes">
-                {{item.badge.title}}
+                \{{item.badge.title}}
             </div>
         </div>
     </ng-container>

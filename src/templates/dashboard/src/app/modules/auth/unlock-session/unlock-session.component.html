@@ -18,7 +18,7 @@
                 [showIcon]="false"
                 [type]="alert.type"
                 [@shake]="alert.type === 'error'">
-                {{alert.message}}
+                \{{alert.message}}
             </fuse-alert>
 
             <!-- Unlock form -->
@@ -85,7 +85,7 @@
                     <span>I'm not</span>
                     <a
                         class="ml-1 text-primary-500 hover:underline"
-                        [routerLink]="['/sign-out']">{{name}}</a>
+                        [routerLink]="['/sign-out']">\{{name}}</a>
                 </div>
 
             </form>

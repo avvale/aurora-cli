@@ -22,7 +22,7 @@ const slideInTop = trigger('slideInTop',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('{{timings}}'),
+        transition('void => *', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -53,7 +53,7 @@ const slideInBottom = trigger('slideInBottom',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('{{timings}}'),
+        transition('void => *', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -84,7 +84,7 @@ const slideInLeft = trigger('slideInLeft',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('{{timings}}'),
+        transition('void => *', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -115,7 +115,7 @@ const slideInRight = trigger('slideInRight',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('{{timings}}'),
+        transition('void => *', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -146,7 +146,7 @@ const slideOutTop = trigger('slideOutTop',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('{{timings}}'),
+        transition('* => void', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
@@ -177,7 +177,7 @@ const slideOutBottom = trigger('slideOutBottom',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('{{timings}}'),
+        transition('* => void', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
@@ -208,7 +208,7 @@ const slideOutLeft = trigger('slideOutLeft',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('{{timings}}'),
+        transition('* => void', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
@@ -239,7 +239,7 @@ const slideOutRight = trigger('slideOutRight',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('{{timings}}'),
+        transition('* => void', animate('\{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
