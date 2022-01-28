@@ -12,15 +12,16 @@ export default class New extends Command
 
     static flags =
     {
-        help   : flags.help({ char: 'h' }),
-        package: flags.boolean({ char: 'p' }),
+        help     : flags.help({ char: 'h' }),
+        package  : flags.boolean({ char: 'p' }),
+        dashboard: flags.boolean({ char: 'd' }),
     };
 
     static args = [
         {
             name       : 'name',
             required   : true,
-            description: 'Type name of element to create, application or package.'
+            description: 'Type name of element to create, application, package or dashboard.'
         }
     ];
 
@@ -34,15 +35,22 @@ export default class New extends Command
 
         const operations = new Operations();
 
-        if (flags.package)
+        switch (true)
         {
-            stateService.packageName = args.name;
-            await operations.generatePackage();
-        }
-        else
-        {
-            stateService.appName = args.name;
-            await operations.generateApplication();
+            case flags.package:
+                stateService.packageName = args.name;
+                await operations.generatePackage();
+                break;
+
+            case flags.dashboard:
+                stateService.dashboardName = args.name;
+                await operations.generateDashboard();
+                break;
+
+            default:
+                stateService.appName = args.name;
+                await operations.generateApplication();
+                break;
         }
 
         const dependenciesSpinner = ora('Installing dependencies').start();

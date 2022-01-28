@@ -36,6 +36,16 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.PACKAGE, path.join(Operations.stateService.packageName), '.');
     }
 
+    async generateDashboard(): Promise<void>
+    {
+        if (!Operations.stateService.dashboardName) throw new Error('To create dashboard is required dashboard name');
+
+        // create directory for dashboard
+        if (!fs.existsSync(Operations.stateService.dashboardName)) fs.mkdirSync(Operations.stateService.dashboardName, { recursive: true });
+
+        await TemplateGenerator.generateStaticContents(TemplateElement.DASHBOARD, path.join(Operations.stateService.dashboardName), '.');
+    }
+
     async generateModule(): Promise<void>
     {
         // generate module files
