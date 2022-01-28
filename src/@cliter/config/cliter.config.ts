@@ -1,5 +1,6 @@
 export interface CliterConfig
 {
+    dashboardContainer: string;
     applicationsContainer: string;
     apiContainer: string;
     auroraCorePackage: string;
@@ -23,6 +24,10 @@ export interface CliterConfig
 
 export const cliterConfig: CliterConfig =
 {
+    // dashboard
+    dashboardContainer: 'app/modules/admin/apps',
+
+    // application
     applicationsContainer             : '@apps',
     apiContainer                      : '@api',
     auroraLocalPackage                : '@aurora',

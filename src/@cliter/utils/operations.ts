@@ -46,6 +46,28 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.DASHBOARD, path.join(Operations.stateService.dashboardName), '.');
     }
 
+    async generateDashboardModule(): Promise<void>
+    {
+        // generate dashboard module files
+        await this.generateDashboardModuleFiles();
+    }
+
+    async generateDashboardModuleFiles(): Promise<void>
+    {
+        // create directory application container, normally src/app/modules/admin/apps
+        await TemplateGenerator.createDirectory(
+            path.join('src', cliterConfig.dashboardContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
+
+        // create module files
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.DASHBOARD_MODULE,
+            path.join('src', cliterConfig.dashboardContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
+    }
+
     async generateModule(): Promise<void>
     {
         // generate module files

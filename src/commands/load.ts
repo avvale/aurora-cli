@@ -27,6 +27,7 @@ export default class Load extends Command
         boundedContext: flags.string({ char: 'b' }),
         tests         : flags.boolean({ char: 't' }),
         noGraphQLTypes: flags.boolean({ char: 'g' }),
+        dashboard     : flags.boolean({ char: 'd' }),
     };
 
     static args = [
@@ -69,8 +70,14 @@ export default class Load extends Command
             stateService.lockFiles = currentLockFiles;
             stateService.flags     = flags;
 
-            // generate module files
-            await operations.generateModule();
+            if (flags.dashboard)
+            {
+                await operations.generateDashboardModule();
+            }
+            else
+            {
+                await operations.generateModule();
+            }
 
             await this.reviewOverwrites(operations, stateService);
         }

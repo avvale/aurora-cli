@@ -9,6 +9,7 @@ export enum TemplateElement
     I18N_MODULE         = 'i18n-module',
     INTERMEDIATE_TABLE  = 'intermediate-table',
     MODULE              = 'module',
+    DASHBOARD_MODULE    = 'dashboard-module',
     PACKAGE             = 'package',
     POSTMAN             = 'postman',
     TEST                = 'test',
