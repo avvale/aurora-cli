@@ -1,0 +1,24 @@
+<div class="flex justify-center {{ row | checkTranslationObject:langs }}">
+    <button mat-mini-fab [matMenuTriggerFor]="menu" color="primary">
+        <mat-icon svgIcon="mat_solid:translate"></mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <ng-container *ngFor="let lang of langs">
+
+            <button mat-menu-item>Item 1</button>
+
+           <!--  <button mat-menu-item
+                *ngIf="(row | actionTranslationObject:lang) === 'create'"
+                [routerLink]="pathResource|routerLinkParams:'/create':lang.id:row.id:moduleUriParams">
+                <hr-flag-icon [flagCode]="lang.image" [rounded]="true">{{ 'MAIN.TRANSLATE' | translate }}</hr-flag-icon>
+            </button>
+
+            <button mat-menu-item
+                *ngIf="(row | actionTranslationObject:lang) === 'edit'"
+                [routerLink]="pathResource|routerLinkParams:'/edit':lang.id:row[editionIndex]:moduleUriParams">
+                <hr-flag-icon [flagCode]="lang.image" [rounded]="true">{{ 'MAIN.EDIT' | translate }}</hr-flag-icon>
+            </button> -->
+
+        </ng-container>
+    </mat-menu>
+</div>

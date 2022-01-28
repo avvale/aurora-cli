@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    flex: 1;
+    max-width: 100%;
+}
+
+.mat-header-cell, .mat-footer-cell, .mat-cell {
+    min-width: 125px;
+    max-width: 125px;
+    white-space: initial;
+    box-sizing: border-box;
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 10px;
+    line-break: unset;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+::ng-deep {
+    .mat-sort-header-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 80px;
+        display: block !important;
+    }
+}
