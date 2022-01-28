@@ -142,5 +142,5 @@ export const cliterConfig: CliterConfig =
         'module/index.ts',
         'api/__bounded_context_name__.module.ts'
     ],
-    allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt']
+    allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt', '.htm', '.html']
 };

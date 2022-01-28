@@ -212,7 +212,15 @@ export class FileManager
         // avoid render files like images, this image only will be copied
         if (!cliterConfig.allowedRenderExtensions.includes(path.extname(originFilePath)))
         {
-            fs.copyFileSync(originFilePath, writePath);
+            if (existFile && !FileManager.stateService.flags.force)
+            {
+                FileManager.stateService.command.log(`%s ${mappedFile} exist`,  chalk.yellow.bold('[INFO]'));
+            }
+            else
+            {
+                fs.copyFileSync(originFilePath, writePath, fs.constants.COPYFILE_FICLONE);
+                FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE COPIED]'));
+            }
             return;
         }
 

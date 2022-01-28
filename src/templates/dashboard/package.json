@@ -1,10 +1,9 @@
 {
-  "name": "@fuse/starter",
-  "version": "14.1.1",
-  "description": "Fuse - Angular Admin Template and Starter Project",
-  "author": "https://themeforest.net/user/srcn",
-  "license": "https://themeforest.net/licenses/standard",
-  "private": true,
+  "name": "@aurora/front",
+  "version": "1.0.0",
+  "description": "Aurora - Panel",
+  "author": "",
+  "license": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
