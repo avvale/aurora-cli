@@ -1,5 +1,6 @@
 import { container } from 'tsyringe';
 import { StateService } from './../services/state.service';
+import { cliterConfig } from '../config/cliter.config';
 import { Cypher } from './cypher';
 import { Property } from './property';
 import { TemplateEngine } from './template-engine';
@@ -187,19 +188,6 @@ export class FileManager
         } = {},
     ): Promise<void>
     {
-        // read file content
-        let contents = fs.readFileSync(originFilePath, 'utf8');
-
-        // replace variables with handlebars template engine
-        contents = await TemplateEngine.render(contents, {
-            ...FileManager.stateService,
-            currentProperty,
-            boundedContextPrefix,
-            boundedContextSuffix,
-            moduleNamePrefix,
-            moduleNameSuffix,
-        });
-
         // render name of file
         const mappedFile = FileManager.renderFilename(
             file,
@@ -220,6 +208,26 @@ export class FileManager
 
         // check if file exists
         const existFile = fs.existsSync(writePath);
+
+        // avoid render files like images, this image only will be copied
+        if (!cliterConfig.allowedRenderExtensions.includes(path.extname(originFilePath)))
+        {
+            fs.copyFileSync(originFilePath, writePath);
+            return;
+        }
+
+        // read file content
+        let contents = fs.readFileSync(originFilePath, 'utf8');
+
+        // replace variables with handlebars template engine
+        contents = await TemplateEngine.render(contents, {
+            ...FileManager.stateService,
+            currentProperty,
+            boundedContextPrefix,
+            boundedContextSuffix,
+            moduleNamePrefix,
+            moduleNameSuffix,
+        });
 
         if (existFile && !FileManager.stateService.flags.force)
         {

@@ -58,7 +58,7 @@ export default class New extends Command
         {
             dependenciesSpinner.succeed('Dependencies installed');
 
-            if (!flags.package)
+            if (!flags.package && !flags.dashboard)
             {
                 // generate application env file
                 operations.generateApplicationEnvFile(args.name);

@@ -18,6 +18,7 @@ export interface CliterConfig
     compareActions: { [key: string]: string };
     skipDirectories: string[];
     avoidOverwritingFilesIfExist: string[];
+    allowedRenderExtensions: string[];
 }
 
 export const cliterConfig: CliterConfig =
@@ -140,5 +141,6 @@ export const cliterConfig: CliterConfig =
     avoidOverwritingFilesIfExist: [
         'module/index.ts',
         'api/__bounded_context_name__.module.ts'
-    ]
+    ],
+    allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt']
 };
