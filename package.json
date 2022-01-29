@@ -20,17 +20,29 @@
         "@oclif/core": "^1",
         "@oclif/plugin-help": "^5",
         "@oclif/plugin-plugins": "^2.0.1",
+        "cli-table3": "^0.6.1",
+        "copyfiles": "^2.4.1",
+        "dayjs": "^1.10.7",
+        "faker": "^5.5.3",
+        "handlebars": "^4.7.7",
+        "handlebars-helpers": "^0.10.0",
         "inquirer": "^8.2.0",
         "js-yaml": "^4.1.0",
         "jsrsasign": "^10.5.1",
         "jsrsasign-util": "^1.0.5",
         "node-emoji": "^1.11.0",
+        "reflect-metadata": "^0.1.13",
         "shelljs": "^0.8.5",
-        "tsyringe": "^4.6.0"
+        "ts-morph": "^13.0.3",
+        "tsyringe": "^4.6.0",
+        "uuid": "^8.3.2"
     },
     "devDependencies": {
         "@oclif/test": "^2",
         "@types/chai": "^4",
+        "@types/faker": "^5.5.9",
+        "@types/handlebars": "^4.1.0",
+        "@types/handlebars-helpers": "^0.5.3",
         "@types/inquirer": "^8.2.0",
         "@types/js-yaml": "^4.0.5",
         "@types/jsrsasign": "^9.0.3",
@@ -38,6 +50,7 @@
         "@types/node": "^16.9.4",
         "@types/node-emoji": "^1.8.1",
         "@types/shelljs": "^0.8.11",
+        "@types/uuid": "^8.3.4",
         "chai": "^4",
         "eslint": "^7.32.0",
         "eslint-config-oclif": "^4",
@@ -67,12 +80,14 @@
     },
     "scripts": {
         "build": "shx rm -rf dist && tsc -b",
+        "postbuild": "npm run copy-files",
         "lint": "eslint . --ext .ts --config .eslintrc",
         "postpack": "shx rm -f oclif.manifest.json",
         "posttest": "yarn lint",
         "prepack": "yarn build && oclif manifest && oclif readme",
         "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-        "version": "oclif readme && git add README.md"
+        "version": "oclif readme && git add README.md",
+        "copy-files": "copyfiles -u 1 \"src/templates/**/*\" dist"
     },
     "engines": {
         "node": ">=12.0.0"
