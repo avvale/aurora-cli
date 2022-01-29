@@ -81,7 +81,8 @@ export class ExportDriver
         const paths: string[] = [];
         for (const exportObj of exports)
         {
-            paths.push(exportObj.getModuleSpecifier().getLiteralValue());
+            const exportModule = exportObj.getModuleSpecifier();
+            if(exportModule) paths.push(exportModule.getLiteralValue());
         }
         return paths;
     }

@@ -1,4 +1,4 @@
-import { Command } from '@oclif/command';
+import { Command } from '@oclif/core';
 import { SqlRelationship, SqlType } from './../types';
 import { Operations } from './operations';
 import { Property } from './property';

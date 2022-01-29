@@ -1,5 +1,5 @@
+import { Command } from '@oclif/core'
 import { singleton } from 'tsyringe';
-import { Command } from '@oclif/command';
 import { LiteralObject, LockFile, ModuleDefinitionSchema, SqlRelationship, SqlType } from './../types';
 import { CliterConfig, cliterConfig } from './../config/cliter.config';
 import { v4 as uuidv4 } from 'uuid';

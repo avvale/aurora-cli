@@ -1,6 +1,6 @@
 import 'reflect-metadata';
+import { Command } from '@oclif/core';
 import { container } from 'tsyringe';
-import { Command } from '@oclif/command';
 import { StateService } from './../services/state.service';
 import { TemplateElement } from './../types';
 import { TemplateGenerator } from './../utils/template-generator';

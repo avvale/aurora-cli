@@ -1,4 +1,4 @@
-import { Property } from '@cliter/utils';
+import { Property } from '../../../@cliter';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
 
