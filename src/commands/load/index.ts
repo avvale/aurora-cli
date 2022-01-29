@@ -1,10 +1,6 @@
 import 'reflect-metadata';
+import { Command, Flags } from '@oclif/core'
 import { container } from 'tsyringe';
-import { Command, flags } from '@oclif/command';
-import { TemplateElement, ModuleDefinitionSchema, LockFile } from './../@cliter/types';
-import { Operations, Property, Properties, Prompter } from './../@cliter/utils';
-import { StateService } from './../@cliter/services/state.service';
-import { FileManager } from './../@cliter/utils/file-manager';
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
@@ -13,6 +9,7 @@ import * as fs from 'fs';
 import * as yaml from 'js-yaml';
 import * as shell from 'shelljs';
 import * as _ from 'lodash';
+import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, Properties, Property, FileManager } from '../../@cliter';
 
 export default class Load extends Command
 {
@@ -20,31 +17,31 @@ export default class Load extends Command
 
     static flags =
     {
-        help          : flags.help({ char: 'h' }),
-        verbose       : flags.boolean({ char: 'v' }),
-        force         : flags.boolean({ char: 'f' }),
-        module        : flags.string({ char: 'm' }),
-        boundedContext: flags.string({ char: 'b' }),
-        tests         : flags.boolean({ char: 't' }),
-        noGraphQLTypes: flags.boolean({ char: 'g' }),
-        dashboard     : flags.boolean({ char: 'd' }),
+        help          : Flags.help({ char: 'h' }),
+        verbose       : Flags.boolean({ char: 'v' }),
+        force         : Flags.boolean({ char: 'f' }),
+        module        : Flags.string({ char: 'm' }),
+        boundedContext: Flags.string({ char: 'b' }),
+        tests         : Flags.boolean({ char: 't' }),
+        noGraphQLTypes: Flags.boolean({ char: 'g' }),
+        dashboard     : Flags.boolean({ char: 'd' }),
     };
 
     static args = [
         {
             name       : 'elementType',
-            required   : true,
             description: 'Type element to create',
             options    : [
                 'bounded-context', 'b',
                 'module', 'm'
-            ]
+            ],
+            required   : true,
         }
     ];
 
     async run(): Promise<void>
     {
-        const { args, flags }   = this.parse(Load);
+        const { args, flags }   = await this.parse(Load);
         const stateService      = container.resolve(StateService);
 
         if (args.elementType === 'b') args.elementType = 'bounded-context';

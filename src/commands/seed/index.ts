@@ -1,7 +1,4 @@
-import { Command, flags } from '@oclif/command';
-import { TemplateElement } from './../@cliter/types';
-import { Operations, Prompter } from './../@cliter/utils';
-import { cliterConfig } from './../@cliter/config/cliter.config';
+import { Command, Flags } from '@oclif/core'
 import * as fs from 'fs';
 import * as chalk from 'chalk';
 import * as path from 'path';
@@ -9,16 +6,17 @@ import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
 import * as shell from 'shelljs';
 import * as ora from 'ora';
+import { TemplateElement, Operations, Prompter, cliterConfig } from '../../@cliter';
 
 export default class Seed extends Command
 {
     static description = 'Seed database with bounded context or module selected';
 
     static flags = {
-        help          : flags.help({ char: 'h' }),
-        module        : flags.string({ char: 'm' }),
-        boundedContext: flags.string({ char: 'b' }),
-        log           : flags.boolean({ char: 'l' }),
+        help          : Flags.help({ char: 'h' }),
+        module        : Flags.string({ char: 'm' }),
+        boundedContext: Flags.string({ char: 'b' }),
+        log           : Flags.boolean({ char: 'l' }),
     };
 
     static args = [
@@ -32,7 +30,7 @@ export default class Seed extends Command
 
     async run()
     {
-        const { args, flags } = this.parse(Seed);
+        const { args, flags } = await this.parse(Seed);
 
         if (args.elementType === 'b') args.elementType = 'bounded-context';
         if (args.elementType === 'm') args.elementType = 'module';

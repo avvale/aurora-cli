@@ -1,98 +1,85 @@
 {
-  "name": "aurora-ts-cli",
-  "version": "0.0.5",
-  "description": "Aurora CLI",
-  "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
-  "bin": {
-    "aurora": "./bin/run"
-  },
-  "bugs": "https://github.com/techedge-group/aurora-cli/issues",
-  "dependencies": {
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
-    "@oclif/plugin-help": "^3.2.3",
-    "chalk": "^4.1.0",
-    "cli-table3": "^0.6.0",
-    "compare-versions": "^3.6.0",
-    "copyfiles": "^2.4.1",
-    "dayjs": "^1.10.4",
-    "faker": "^5.5.3",
-    "handlebars": "^4.7.7",
-    "handlebars-helpers": "^0.10.0",
-    "inquirer": "^8.0.0",
-    "js-yaml": "^4.1.0",
-    "jsrsasign": "^10.2.0",
-    "jsrsasign-util": "^1.0.4",
-    "lodash": "^4.17.21",
-    "log-symbols": "^4.1.0",
-    "node-emoji": "^1.10.0",
-    "ora": "^5.4.0",
-    "reflect-metadata": "^0.1.13",
-    "shelljs": "^0.8.4",
-    "ts-morph": "^12.0.0",
-    "tslib": "^2.0.0",
-    "tsyringe": "^4.5.0",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "@oclif/dev-cli": "^1.26.0",
-    "@oclif/test": "^1.2.8",
-    "@types/chai": "^4.2.22",
-    "@types/chalk": "^2.2.0",
-    "@types/cli-table": "^0.3.0",
-    "@types/faker": "^5.5.1",
-    "@types/handlebars": "^4.1.0",
-    "@types/handlebars-helpers": "^0.5.2",
-    "@types/inquirer": "^7.3.1",
-    "@types/js-yaml": "^4.0.0",
-    "@types/jsrsasign": "^8.0.10",
-    "@types/lodash": "^4.14.168",
-    "@types/log-symbols": "^3.0.0",
-    "@types/mocha": "^8.2.2",
-    "@types/node": "^14.14.39",
-    "@types/node-emoji": "^1.8.1",
-    "@types/ora": "^3.2.0",
-    "@types/shelljs": "^0.8.8",
-    "@types/uuid": "^8.3.0",
-    "chai": "^4.3.4",
-    "eslint": "^7.24.0",
-    "eslint-config-oclif": "^3.1.0",
-    "eslint-config-oclif-typescript": "^0.2.0",
-    "globby": "^11.0.3",
-    "mocha": "^8.3.2",
-    "nyc": "^15.1.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4"
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "files": [
-    "/bin",
-    "/lib",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
-  ],
-  "homepage": "https://github.com/carlospalacin/aurora-ts-cli",
-  "keywords": [
-    "oclif"
-  ],
-  "license": "MIT",
-  "main": "lib/index.js",
-  "oclif": {
-    "commands": "./lib/commands",
-    "bin": "aurora",
-    "plugins": [
-      "@oclif/plugin-help"
-    ]
-  },
-  "repository": "carlospalacin/aurora-ts-cli",
-  "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
-  },
-  "types": "lib/index.d.ts"
+    "name": "aurora-ts-cli",
+    "version": "0.0.5",
+    "description": "Aurora CLI",
+    "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
+    "bin": {
+        "aurora": "./bin/run"
+    },
+    "homepage": "https://github.com/techedge-group/aurora-cli",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "repository": "https://github.com/techedge-group/aurora-cli",
+    "files": [
+        "/bin",
+        "/dist",
+        "/npm-shrinkwrap.json",
+        "/oclif.manifest.json"
+    ],
+    "dependencies": {
+        "@oclif/core": "^1",
+        "@oclif/plugin-help": "^5",
+        "@oclif/plugin-plugins": "^2.0.1",
+        "inquirer": "^8.2.0",
+        "js-yaml": "^4.1.0",
+        "jsrsasign": "^10.5.1",
+        "jsrsasign-util": "^1.0.5",
+        "node-emoji": "^1.11.0",
+        "shelljs": "^0.8.5",
+        "tsyringe": "^4.6.0"
+    },
+    "devDependencies": {
+        "@oclif/test": "^2",
+        "@types/chai": "^4",
+        "@types/inquirer": "^8.2.0",
+        "@types/js-yaml": "^4.0.5",
+        "@types/jsrsasign": "^9.0.3",
+        "@types/mocha": "^9.0.0",
+        "@types/node": "^16.9.4",
+        "@types/node-emoji": "^1.8.1",
+        "@types/shelljs": "^0.8.11",
+        "chai": "^4",
+        "eslint": "^7.32.0",
+        "eslint-config-oclif": "^4",
+        "eslint-config-oclif-typescript": "^1.0.2",
+        "globby": "^11",
+        "mocha": "^9",
+        "oclif": "^2",
+        "shx": "^0.3.3",
+        "ts-node": "^10.2.1",
+        "tslib": "^2.3.1",
+        "typescript": "^4.4.3"
+    },
+    "oclif": {
+        "bin": "aurora",
+        "dirname": "aurora",
+        "commands": "./dist/commands",
+        "plugins": [
+            "@oclif/plugin-help",
+            "@oclif/plugin-plugins"
+        ],
+        "topicSeparator": " ",
+        "topics": {
+            "hello": {
+                "description": "Say hello to the world and others"
+            }
+        }
+    },
+    "scripts": {
+        "build": "shx rm -rf dist && tsc -b",
+        "lint": "eslint . --ext .ts --config .eslintrc",
+        "postpack": "shx rm -f oclif.manifest.json",
+        "posttest": "yarn lint",
+        "prepack": "yarn build && oclif manifest && oclif readme",
+        "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+        "version": "oclif readme && git add README.md"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "bugs": "https://github.com/\"https://github.com/techedge-group/aurora-cli/\"https://github.com/techedge-group/aurora-cli/issues",
+    "keywords": [
+        "oclif"
+    ],
+    "types": "dist/index.d.ts"
 }

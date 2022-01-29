@@ -1,10 +1,9 @@
 import 'reflect-metadata';
+import { Command, Flags } from '@oclif/core'
 import { container } from 'tsyringe';
-import { Command, flags } from '@oclif/command';
-import { Operations } from './../@cliter/utils';
-import { StateService } from '../@cliter/services/state.service';
 import * as shell from 'shelljs';
 import * as ora from 'ora';
+import { Operations, StateService } from '../../@cliter';
 
 export default class New extends Command
 {
@@ -12,9 +11,9 @@ export default class New extends Command
 
     static flags =
     {
-        help     : flags.help({ char: 'h' }),
-        package  : flags.boolean({ char: 'p' }),
-        dashboard: flags.boolean({ char: 'd' }),
+        help     : Flags.help({ char: 'h' }),
+        package  : Flags.boolean({ char: 'p' }),
+        dashboard: Flags.boolean({ char: 'd' }),
     };
 
     static args = [
@@ -27,7 +26,7 @@ export default class New extends Command
 
     async run()
     {
-        const { args, flags } = this.parse(New);
+        const { args, flags } = await this.parse(New);
 
         const stateService     = container.resolve(StateService);
         stateService.command   = this;

@@ -2,17 +2,11 @@
     "compilerOptions": {
         "declaration": true,
         "importHelpers": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
         "module": "commonjs",
-        "outDir": "lib",
+        "outDir": "dist",
         "rootDir": "src",
         "strict": true,
-        "target": "es2019",
-        "baseUrl": "./",
-        "paths": {
-            "@cliter/*": ["src/@cliter/*"]
-        }
+        "target": "es2019"
     },
     "include": [
         "src/**/*"

@@ -1,39 +1,37 @@
-import { Command, flags } from '@oclif/command';
+import { Command, Flags } from '@oclif/core'
 import * as fs from 'fs';
 import * as chalk from 'chalk';
 import * as inquirer from 'inquirer';
 import * as path from 'path';
 import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
-import { FsExtend } from './../@cliter/utils';
-import { TemplateElement } from './../@cliter/types';
-import { cliterConfig } from './../@cliter/config/cliter.config';
+import { cliterConfig, FsExtend, TemplateElement } from '../../@cliter';
 
 export default class Delete extends Command
 {
     static description = 'Delete elements';
 
     static flags = {
-        help: flags.help({ char: 'h' })
+        help: Flags.help({ char: 'h' })
     };
 
     static args = [
         {
             name       : 'elementType',
-            required   : true,
             description: 'Type element to delete',
-            options    : ['bounded-context', 'b', 'module', 'm']
+            options    : ['bounded-context', 'b', 'module', 'm'],
+            required   : true,
         },
         {
             name       : 'elementName',
+            description: 'Name element to create',
             required   : true,
-            description: 'Name element to create'
         }
     ];
 
     async run(): Promise<void>
     {
-        const { args, flags } = this.parse(Delete);
+        const { args, flags } = await this.parse(Delete);
 
         if (args.elementType === 'b') args.elementType = 'bounded-context';
         if (args.elementType === 'm') args.elementType = 'module';

@@ -1,9 +1,7 @@
 import 'reflect-metadata';
+import { Command, Flags } from '@oclif/core'
 import { container } from 'tsyringe';
-import { Command, flags } from '@oclif/command';
-import { TemplateElement, SqlType, ModuleDefinitionSchema } from './../@cliter/types';
-import { StateService } from './../@cliter/services/state.service';
-import { Operations, Property, Properties, Prompter } from './../@cliter/utils';
+import { ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
 
 export default class Generate extends Command
 {
@@ -12,22 +10,22 @@ export default class Generate extends Command
     static flags =
     {
         // can pass either --help or -h
-        help          : flags.help({ char: 'h' }),
-        verbose       : flags.boolean({ char: 'v' }),
-        force         : flags.boolean({ char: 'f' }),
-        module        : flags.string({ char: 'm' }),
-        noGraphQLTypes: flags.boolean({ char: 'g' }),
+        help          : Flags.help({ char: 'h' }),
+        verbose       : Flags.boolean({ char: 'v' }),
+        force         : Flags.boolean({ char: 'f' }),
+        module        : Flags.string({ char: 'm' }),
+        noGraphQLTypes: Flags.boolean({ char: 'g' }),
     };
 
     static args = [
         {
             name       : 'elementType',
-            required   : true,
             description: 'Type element to create',
             options    : [
                 'bounded-context', 'b',
                 'module', 'm'
-            ]
+            ],
+            required   : true,
         }
     ];
 
@@ -38,7 +36,7 @@ export default class Generate extends Command
 
     async run(): Promise<void>
     {
-        const { args, flags } = this.parse(Generate);
+        const { args, flags } = await this.parse(Generate);
 
         if (args.elementType === 'b') args.elementType = 'bounded-context';
         if (args.elementType === 'm') args.elementType = 'module';
