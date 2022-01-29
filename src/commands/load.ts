@@ -73,6 +73,9 @@ export default class Load extends Command
             if (flags.dashboard)
             {
                 await operations.generateDashboardModule();
+
+                // TODO reorganizar los flows para evitar esta ñapa
+                stateService.flags.noGraphQLTypes = true;
             }
             else
             {

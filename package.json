@@ -6,7 +6,7 @@
   "bin": {
     "aurora": "./bin/run"
   },
-  "bugs": "https://github.com/carlospalacin/aurora-ts-cli/issues",
+  "bugs": "https://github.com/techedge-group/aurora-cli/issues",
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
