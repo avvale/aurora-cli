@@ -1,10 +1,11 @@
 import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralExpression, CallExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
-import { SyntaxKind, NewLineKind } from 'typescript';
+import { SyntaxKind, NewLineKind, Expression } from 'typescript';
 import { cliterConfig } from './../../../@cliter/config/cliter.config';
 import { Properties } from './../properties';
 import { ImportDriver } from './import.driver';
 import { ExportDriver } from './export.driver';
 import { ArrayDriver } from './array.driver';
+import { InterfaceDriver } from './interface.driver';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -203,6 +204,38 @@ export class CodeWriter
                 `${this.boundedContextName.toPascalCase()}Repositories`,
             );
         }
+
+        sourceFile?.saveSync();
+    }
+
+    generateDashboardInterface(properties: Properties): void
+    {
+        // TODO poner en variable la base de las apps "app/modules/admin/apps"
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app/modules/admin/apps', this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.types.ts`));
+
+        // create type
+        InterfaceDriver.addInterface(
+            sourceFile,
+            `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}`,
+            properties.withoutTimestamps.map(property => ({ name: property.name, type: property.getJavascriptType }))
+        );
+
+        sourceFile?.saveSync();
+    }
+
+    generateRoutes()
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app/modules/admin/apps', this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
+
+        const variableDeclaration = sourceFile.getVariableDeclarationOrThrow('commonRoutes');
+        const arrayLiteralExpression = variableDeclaration.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+
+        const objectLiteralExpression = arrayLiteralExpression.getElements()[0] as ObjectLiteralExpression;
+        const children = objectLiteralExpression.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
+        const childrenArray = children?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+
+        childrenArray?.addElement("{ path: 'lang',                 component: LangListComponent,       resolve: { data: LangPaginationResolver },  data: { permission: 'common.lang.get' }},");
+        // console.log(children.getFullText());
 
         sourceFile?.saveSync();
     }

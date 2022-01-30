@@ -2,9 +2,9 @@ import gql from 'graphql-tag';
 import { GraphQLStatements } from '@aurora';
 
 const fields = `
-    {{#each schema.properties.valueObjects}}
+    {{#each schema.properties.withoutDeletedAt}}
     {{#if (allowProperty ../schema.moduleName this) }}
-    {{ toCamelCase name }},
+    {{ toCamelCase name }}
     {{/if}}
     {{/each}}
 `;

@@ -69,16 +69,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     createForm(): void
     {
         this.fg = this.fb.group({
-            id        : '',
-            name      : ['', Validators.required],
-            image     : '',
-            iso6392   : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
-            iso6393   : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-            ietf      : ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            customCode: '',
-            dir       : ['', Validators.required],
-            sort      : null,
-            isActive  : false,
+            {{#each schema.properties.withoutTimestamps}}
+            {{#if (allowProperty ../schema.moduleName this) }}
+            {{ toCamelCase name }}: '',
+            {{/if}}
+            {{/each}}
         });
     }
 

@@ -50,6 +50,9 @@ export class Operations
     {
         // generate dashboard module files
         await this.generateDashboardModuleFiles();
+
+        // create references, write imports in ts files
+        this.createDashboardReferences();
     }
 
     async generateDashboardModuleFiles(): Promise<void>
@@ -218,7 +221,23 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         });
     }
 
-    async createReferences(): Promise<void>
+    createDashboardReferences(): void
+    {
+        const codeWriter = new CodeWriter(
+            path.join('src'),
+            path.join(cliterConfig.applicationsContainer),
+            cliterConfig.apiContainer,
+            Operations.stateService.schema.boundedContextName.toLowerCase(),
+            Operations.stateService.schema.moduleName.toLowerCase(),
+            Operations.stateService.schema.moduleNames.toLowerCase(),
+            Operations.stateService.schema.aggregateName,
+        );
+
+        codeWriter.generateDashboardInterface(Operations.stateService.schema.properties);
+        codeWriter.generateRoutes();
+    }
+
+    createReferences(): void
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
