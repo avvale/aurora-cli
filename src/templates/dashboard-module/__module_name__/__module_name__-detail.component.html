@@ -52,7 +52,7 @@
                     {{#eq type 'varchar'}}
                     <mat-form-field appearance="outline" class="col-6">
                         <mat-label>\{{ t('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name}}') }}</mat-label>
-                        <input matInput formControlName="{{ name }}" {{#if maxlength}}maxlength="{{ maxlength }}"{{/if}}>
+                        <input matInput formControlName="{{ name }}" {{#if maxLength}}maxlength="{{ maxLength }}"{{/if}}>
                         <mat-error>\{{ formErrors?.name | async }}</mat-error>
                     </mat-form-field>
 
