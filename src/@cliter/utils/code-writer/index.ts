@@ -309,10 +309,19 @@ export class CodeWriter
 
         const appRoutes = sourceFile.getVariableDeclarationOrThrow('appRoutes');
         const appRoutesArray = appRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-
         const objectRoute = appRoutesArray.getElements()[index] as ObjectLiteralExpression;
         const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
         const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const childrenRoutesElements = childrenRoutesArray.getElements() as ObjectLiteralExpression[];
+
+        // avoid duplicated declaration
+        for (const element of childrenRoutesElements)
+        {
+            const pathProperty = element.getPropertyOrThrow('path') as InitializerExpressionGetableNode;
+            const pathString = pathProperty.getInitializerIfKindOrThrow(SyntaxKind.StringLiteral);
+
+            if (pathString.getText() === `'${this.boundedContextName.toKebabCase()}'`) return;
+        }
 
         // set routes
         childrenRoutesArray?.addElement(
