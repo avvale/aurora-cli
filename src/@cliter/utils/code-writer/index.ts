@@ -210,8 +210,7 @@ export class CodeWriter
 
     generateDashboardInterface(properties: Properties): void
     {
-        // TODO poner en variable la base de las apps "app/modules/admin/apps"
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app/modules/admin/apps', this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.types.ts`));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.types.ts`));
 
         // create type
         InterfaceDriver.addInterface(
@@ -225,7 +224,7 @@ export class CodeWriter
 
     generateRoutes()
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app/modules/admin/apps', this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
 
         const variableDeclaration = sourceFile.getVariableDeclarationOrThrow('commonRoutes');
         const arrayLiteralExpression = variableDeclaration.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
@@ -234,8 +233,37 @@ export class CodeWriter
         const children = objectLiteralExpression.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
         const childrenArray = children?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
-        childrenArray?.addElement("{ path: 'lang',                 component: LangListComponent,       resolve: { data: LangPaginationResolver },  data: { permission: 'common.lang.get' }},");
-        // console.log(children.getFullText());
+        // export list component
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-list.component`,
+            [`${this.moduleName.toPascalCase()}ListComponent`]
+        );
+
+        // export detail component
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-detail.component`,
+            [`${this.moduleName.toPascalCase()}DetailComponent`]
+        );
+
+        // export resolvers
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}.resolvers`,
+            [
+                `${this.moduleName.toPascalCase()}EditResolver`,
+                `${this.moduleName.toPascalCase()}NewResolver`,
+                `${this.moduleName.toPascalCase()}PaginationResolver`,
+            ]
+        );
+
+        // set routes
+        childrenArray?.addElements([
+            `{ path: '${this.moduleName.toKebabCase()}', component: ${this.moduleName.toPascalCase()}ListComponent, resolve: { data: ${this.moduleName.toPascalCase()}PaginationResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
+            `{ path: '${this.moduleName.toKebabCase()}/new', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
+            `{ path: '${this.moduleName.toKebabCase()}/edit/:id', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
+        ], { useNewLines: true });
 
         sourceFile?.saveSync();
     }
