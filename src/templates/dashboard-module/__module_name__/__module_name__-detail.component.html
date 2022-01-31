@@ -48,35 +48,24 @@
 
                 <div class="layout__container">
 
+                    {{#each schema.properties.withoutTimestamps}}
+                    {{#eq type 'varchar'}}
                     <mat-form-field appearance="outline" class="col-6">
-                        <mat-label>\{{ t('Name') }}</mat-label>
-                        <input matInput formControlName="name" maxlength="255">
+                        <mat-label>\{{ t('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name}}') }}</mat-label>
+                        <input matInput formControlName="{{ name }}" {{#if maxlength}}maxlength="{{ maxlength }}"{{/if}}>
                         <mat-error>\{{ formErrors?.name | async }}</mat-error>
                     </mat-form-field>
 
+                    {{/eq}}
+                    {{#eq type 'char'}}
                     <mat-form-field appearance="outline" class="col-6">
-                        <mat-label>\{{ t('Image') }}</mat-label>
-                        <input matInput formControlName="image" maxlength="255">
-                        <mat-error>\{{ formErrors?.image | async }}</mat-error>
+                        <mat-label>\{{ t('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name}}') }}</mat-label>
+                        <input matInput formControlName="{{ name }}" {{#if ./length}}maxlength="{{ ./length }}"{{/if}}>
+                        <mat-error>\{{ formErrors?.name | async }}</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="col-start-1 col-2">
-                        <mat-label>\{{ t('common.iso6392') }}</mat-label>
-                        <input matInput formControlName="iso6392" maxlength="2">
-                        <mat-error>\{{ formErrors?.iso6392 | async }}</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col-2">
-                        <mat-label>\{{ t('common.iso6393') }}</mat-label>
-                        <input matInput formControlName="iso6393" maxlength="3">
-                        <mat-error>\{{ formErrors?.iso6393 | async }}</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col-2">
-                        <mat-label>\{{ t('common.ietf') }}</mat-label>
-                        <input matInput formControlName="ietf" maxlength="5">
-                        <mat-error>\{{ formErrors?.ietf | async }}</mat-error>
-                    </mat-form-field>
+                    {{/eq}}
+                    {{/each}}
 
                     <mat-form-field appearance="outline" class="col-2">
                         <mat-label>\{{ t('Custom-code') }}</mat-label>
