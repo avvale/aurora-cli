@@ -87,7 +87,7 @@ export class CodeWriter
 
                     // disable import foreign modules, can be micro-services
                     // register import in import array
-                    /* ArrayDriver.createArrayItem(
+                    /* ArrayDriver.addArrayItem(
                         sourceFile,
                         `${foreignBoundedContextName.toPascalCase()}Module`,
                         'importForeignModules',
@@ -118,21 +118,21 @@ export class CodeWriter
         );
 
         // handlers
-        ArrayDriver.createArrayItem(
+        ArrayDriver.addArrayItem(
             sourceFile,
             `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Handlers`,
             `${this.boundedContextName.toPascalCase()}Handlers`,
         );
 
         // services
-        ArrayDriver.createArrayItem(
+        ArrayDriver.addArrayItem(
             sourceFile,
             `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
             `${this.boundedContextName.toPascalCase()}Services`,
         );
 
         // models
-        ArrayDriver.createArrayItem(
+        ArrayDriver.addArrayItem(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`,
             `${this.boundedContextName.toPascalCase()}Models`,
@@ -147,7 +147,7 @@ export class CodeWriter
                 [intermediateModel.intermediateModel as string],
             );
 
-            ArrayDriver.createArrayItem(
+            ArrayDriver.addArrayItem(
                 sourceFile,
                 intermediateModel.intermediateModel as string,
                 `${this.boundedContextName.toPascalCase()}Models`,
@@ -155,7 +155,7 @@ export class CodeWriter
         }
 
         // repositories
-        ArrayDriver.createArrayItem(
+        ArrayDriver.addArrayItem(
             sourceFile,
             `
 {
@@ -166,7 +166,7 @@ export class CodeWriter
         );
 
         // sagas
-        ArrayDriver.createArrayItem(
+        ArrayDriver.addArrayItem(
             sourceFile,
             `${this.moduleName.toPascalCase()}Sagas`,
             `${this.boundedContextName.toPascalCase()}Sagas`,
@@ -187,14 +187,14 @@ export class CodeWriter
             );
 
             // models
-            ArrayDriver.createArrayItem(
+            ArrayDriver.addArrayItem(
                 sourceFile,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18NModel`,
                 `${this.boundedContextName.toPascalCase()}Models`,
             );
 
             // repositories
-            ArrayDriver.createArrayItem(
+            ArrayDriver.addArrayItem(
                 sourceFile,
                 `
 {
@@ -222,7 +222,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateRoutes()
+    generateDashboardRoutes(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
 
@@ -268,15 +268,52 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
+    declareDashboardComponents(): void
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
+        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'NgModule');
+
+        // declarations
+        const declarations: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('declarations') as InitializerExpressionGetableNode;
+        const declarationsArray: ArrayLiteralExpression = declarations?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression) as ArrayLiteralExpression;
+
+        // export list component
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-list.component`,
+            [`${this.moduleName.toPascalCase()}ListComponent`]
+        );
+
+        // export detail component
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-detail.component`,
+            [`${this.moduleName.toPascalCase()}DetailComponent`]
+        );
+
+        ArrayDriver.addArrayItems(
+            sourceFile,
+            [
+                `${this.moduleName.toPascalCase()}DetailComponent`,
+                `${this.moduleName.toPascalCase()}ListComponent`,
+            ],
+            declarationsArray,
+        );
+
+        sourceFile?.saveSync();
+    }
+
     declareFramework(): void
     {
         // get decorator arguments
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.frameworkDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`);
-        const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
+        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'Module');
 
+        // providers
+        const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
         const providersArray: ArrayLiteralExpression = providers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression) as ArrayLiteralExpression;
 
+        // controllers
         const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
         const controllersArray = controllers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
@@ -305,14 +342,14 @@ export class CodeWriter
 
         // add model to ORM array argument
         const modelArrayArgument = this.getModelArrayArgument(moduleDecoratorArguments);
-        ArrayDriver.createArrayItem(
+        ArrayDriver.addArrayItem(
             sourceFile,
             `...${this.boundedContextName.toPascalCase()}Models`,
             modelArrayArgument,
         );
 
         // add handlers to providers
-        ArrayDriver.createArrayItems(
+        ArrayDriver.addArrayItems(
             sourceFile,
             [
                 `...${this.boundedContextName.toPascalCase()}Handlers`,
@@ -325,7 +362,7 @@ export class CodeWriter
         );
 
         // add controller to controllers array
-        ArrayDriver.createArrayItem(
+        ArrayDriver.addArrayItem(
             sourceFile,
             `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`, controllersArray,
         );
@@ -336,7 +373,7 @@ export class CodeWriter
     declareModule(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app.module.ts'));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'AppModule');
+        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
         const modules: string[] = this.getImportedModules(sourceFile);
 
         if (!modules.includes(`${this.boundedContextName.toPascalCase()}Module`))
@@ -416,7 +453,7 @@ export class CodeWriter
     declareAuthModuleInShareModule(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join(cliterConfig.auroraLocalPackage, 'shared.module.ts')));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'SharedModule');
+        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'SharedModule', 'Module');
 
         // register import auth module
         ImportDriver.createImportItems(
@@ -466,10 +503,10 @@ export class CodeWriter
         return modules;
     }
 
-    private getModuleDecoratorArguments(sourceFile: SourceFile, className: string): ObjectLiteralExpression
+    private getModuleDecoratorArguments(sourceFile: SourceFile, className: string, decorator: string): ObjectLiteralExpression
     {
         const moduleClass = sourceFile.getClass(className);
-        const moduleDecorator: Decorator = moduleClass?.getDecorator('Module') as Decorator;
+        const moduleDecorator: Decorator = moduleClass?.getDecorator(decorator) as Decorator;
         return moduleDecorator.getArguments()[0] as ObjectLiteralExpression;
     }
 }

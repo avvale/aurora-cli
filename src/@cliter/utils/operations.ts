@@ -234,7 +234,8 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         );
 
         codeWriter.generateDashboardInterface(Operations.stateService.schema.properties);
-        codeWriter.generateRoutes();
+        codeWriter.generateDashboardRoutes();
+        codeWriter.declareDashboardComponents();
     }
 
     createReferences(): void

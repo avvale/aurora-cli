@@ -3,13 +3,13 @@ import { SourceFile, SyntaxKind, ArrayLiteralExpression } from 'ts-morph';
 export class ArrayDriver
 {
     /**
-     * Create items in array
+     * Add items in array
      *
      * @param sourceFile
      * @param item          item to add to array
      * @param array         name array or Array literal where will be added the item
      */
-    public static createArrayItems(sourceFile: SourceFile, items: string[], array: string | ArrayLiteralExpression): void
+    public static addArrayItems(sourceFile: SourceFile, items: string[], array: string | ArrayLiteralExpression): void
     {
         let arrayLiteralExpression;
 
@@ -32,13 +32,13 @@ export class ArrayDriver
     }
 
     /**
-     * Create item in array
+     * Add item in array
      *
      * @param sourceFile
      * @param item          item to add to array
      * @param array         name array or Array literal where will be added the item
      */
-    public static createArrayItem(sourceFile: SourceFile, item: string, array: string | ArrayLiteralExpression): void
+    public static addArrayItem(sourceFile: SourceFile, item: string, array: string | ArrayLiteralExpression): void
     {
         let arrayLiteralExpression;
 
