@@ -222,16 +222,16 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateDashboardRoutes(): void
+    generateDashboardRoutes(index: number = 0): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
 
-        const variableDeclaration = sourceFile.getVariableDeclarationOrThrow('commonRoutes');
-        const arrayLiteralExpression = variableDeclaration.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const commonRoutes = sourceFile.getVariableDeclarationOrThrow('commonRoutes');
+        const commonRoutesArray = commonRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
-        const objectLiteralExpression = arrayLiteralExpression.getElements()[0] as ObjectLiteralExpression;
-        const children = objectLiteralExpression.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
-        const childrenArray = children?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const objectRoute = commonRoutesArray.getElements()[index] as ObjectLiteralExpression;
+        const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
+        const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
         // export list component
         ImportDriver.createImportItems(
@@ -259,7 +259,7 @@ export class CodeWriter
         );
 
         // set routes
-        childrenArray?.addElements([
+        childrenRoutesArray?.addElements([
             `{ path: '${this.moduleName.toKebabCase()}', component: ${this.moduleName.toPascalCase()}ListComponent, resolve: { data: ${this.moduleName.toPascalCase()}PaginationResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
             `{ path: '${this.moduleName.toKebabCase()}/new', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
             `{ path: '${this.moduleName.toKebabCase()}/edit/:id', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
@@ -299,6 +299,25 @@ export class CodeWriter
             ],
             declarationsArray,
         );
+
+        sourceFile?.saveSync();
+    }
+
+    declareDashboardBoundedContext(index: number = 5): void
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app', 'app.routing.ts'));
+
+        const appRoutes = sourceFile.getVariableDeclarationOrThrow('appRoutes');
+        const appRoutesArray = appRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+
+        const objectRoute = appRoutesArray.getElements()[index] as ObjectLiteralExpression;
+        const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
+        const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+
+        // set routes
+        childrenRoutesArray?.addElement(
+            `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module').then(m => m.${this.boundedContextName.toPascalCase()}Module) },`
+        , { useNewLines: true });
 
         sourceFile?.saveSync();
     }
