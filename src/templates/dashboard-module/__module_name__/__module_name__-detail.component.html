@@ -50,48 +50,26 @@
 
                     {{#each schema.properties.withoutTimestamps}}
                     {{#eq type 'varchar'}}
-                    <mat-form-field appearance="outline" class="col-6">
-                        <mat-label>\{{ t('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name}}') }}</mat-label>
-                        <input matInput formControlName="{{ name }}" {{#if maxLength}}maxlength="{{ maxLength }}"{{/if}}>
-                        <mat-error>\{{ formErrors?.name | async }}</mat-error>
-                    </mat-form-field>
+                    {{> varcharInput schema=../schema property=.}}
 
                     {{/eq}}
                     {{#eq type 'char'}}
-                    <mat-form-field appearance="outline" class="col-6">
-                        <mat-label>\{{ t('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name}}') }}</mat-label>
-                        <input matInput formControlName="{{ name }}" {{#if ./length}}maxlength="{{ ./length }}"{{/if}}>
-                        <mat-error>\{{ formErrors?.name | async }}</mat-error>
-                    </mat-form-field>
+                    {{> charInput schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq type 'smallint.unsigned'}}
+                    {{> intInput schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq type 'enum'}}
+                    {{> enumInput schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq type 'boolean'}}
+                    {{> booleanInput schema=../schema property=.}}
 
                     {{/eq}}
                     {{/each}}
-
-                    <mat-form-field appearance="outline" class="col-2">
-                        <mat-label>\{{ t('Custom-code') }}</mat-label>
-                        <input matInput formControlName="customCode" maxlength="10">
-                        <mat-error>\{{ formErrors?.customCode | async }}</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col-2">
-                        <mat-label>\{{ t('Sort') }}</mat-label>
-                        <input matInput formControlName="sort" type="number">
-                        <mat-error>\{{ formErrors?.sort | async }}</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col-start-1 col-4">
-                        <mat-label>\{{ t('common.Dir') }}</mat-label>
-                        <mat-select formControlName="dir">
-                            <mat-option value="LTR">LTR</mat-option>
-                            <mat-option value="RTL">RTL</mat-option>
-                        </mat-select>
-                        <mat-error>\{{ formErrors?.dir | async }}</mat-error>
-                    </mat-form-field>
-
-                    <div class="col-2">
-                        <mat-checkbox formControlName="isActive">\{{ t('Active') }}</mat-checkbox>
-                    </div>
-
                 </div>
 
             </form>
