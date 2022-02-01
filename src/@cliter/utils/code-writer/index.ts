@@ -226,10 +226,10 @@ export class CodeWriter
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
 
-        const commonRoutes = sourceFile.getVariableDeclarationOrThrow('commonRoutes');
-        const commonRoutesArray = commonRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const routes = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Routes');
+        const routesArray = routes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
-        const objectRoute = commonRoutesArray.getElements()[index] as ObjectLiteralExpression;
+        const objectRoute = routesArray.getElements()[index] as ObjectLiteralExpression;
         const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
         const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
@@ -326,6 +326,36 @@ export class CodeWriter
         // set routes
         childrenRoutesArray?.addElement(
             `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module').then(m => m.${this.boundedContextName.toPascalCase()}Module) },`
+        , { useNewLines: true });
+
+        sourceFile?.saveSync();
+    }
+
+    generateDashboardMenu(): void
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.menu.ts`));
+        const menu = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Menu');
+        const menuArray = menu.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const menuElements = menuArray.getElements() as ObjectLiteralExpression[];
+
+        // avoid duplicated declaration
+        for (const element of menuElements)
+        {
+            const pathProperty = element.getPropertyOrThrow('id') as InitializerExpressionGetableNode;
+            const pathString = pathProperty.getInitializerIfKindOrThrow(SyntaxKind.StringLiteral);
+
+            if (pathString.getText() === `'${this.moduleName.toCamelCase()}'`) return;
+        }
+
+        // set routes
+        menuArray?.addElement(
+`{
+    id   : '${this.moduleName.toCamelCase()}',
+    title: '${this.moduleName.toCamelCase()}.${this.moduleName.toPascalCase()}',
+    type : 'basic',
+    icon : 'heroicons_outline:tag',
+    link : '/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}',
+},`
         , { useNewLines: true });
 
         sourceFile?.saveSync();

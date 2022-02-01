@@ -237,6 +237,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.generateDashboardRoutes();
         codeWriter.declareDashboardComponents();
         codeWriter.declareDashboardBoundedContext();
+        codeWriter.generateDashboardMenu();
     }
 
     createReferences(): void
