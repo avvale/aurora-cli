@@ -3,6 +3,7 @@ export * from './cypher';
 export * from './file-manager';
 export * from './fs-extend';
 export * from './mocker';
+export * from './object-tools';
 export * from './operations';
 export * from './prompter';
 export * from './properties';

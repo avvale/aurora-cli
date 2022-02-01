@@ -238,6 +238,8 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.declareDashboardComponents();
         codeWriter.declareDashboardBoundedContext();
         codeWriter.generateDashboardMenu();
+        codeWriter.generateDashboardTranslations(Operations.stateService.schema.properties, 'en');
+        codeWriter.generateDashboardTranslations(Operations.stateService.schema.properties, 'es');
     }
 
     createReferences(): void

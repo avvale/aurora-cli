@@ -1,5 +1,5 @@
 import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralExpression, CallExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
-import { SyntaxKind, NewLineKind, Expression } from 'typescript';
+import { SyntaxKind, NewLineKind } from 'typescript';
 import { cliterConfig } from './../../../@cliter/config/cliter.config';
 import { Properties } from './../properties';
 import { ImportDriver } from './import.driver';
@@ -8,6 +8,7 @@ import { ArrayDriver } from './array.driver';
 import { InterfaceDriver } from './interface.driver';
 import * as path from 'path';
 import * as fs from 'fs';
+import { ObjectTools } from '../object-tools';
 
 export class CodeWriter
 {
@@ -359,6 +360,31 @@ export class CodeWriter
         , { useNewLines: true });
 
         sourceFile?.saveSync();
+    }
+
+    generateDashboardTranslations(properties: Properties, langCode: string): void
+    {
+        const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), 'i18n', langCode + '.json'));
+
+        // get names to translate
+        const names = properties.withoutTimestamps.filter(property => property.name !== 'id').map(property => property.name);
+
+        // add module name to translate
+        names.push(this.moduleName);
+
+        for (const name of names)
+        {
+            // avoid overwriting existing properties
+            if (translationObject[name.toPascalCase()] === undefined)
+            {
+                translationObject[name.toPascalCase()] = name.toPascalCase();
+            }
+        }
+
+        // sort object by keys
+        const newTranslationObject = ObjectTools.sortByKeys(translationObject);
+
+        fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), 'i18n', langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
     declareFramework(): void
