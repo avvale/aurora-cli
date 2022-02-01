@@ -352,7 +352,7 @@ export class CodeWriter
         menuArray?.addElement(
 `{
     id   : '${this.moduleName.toCamelCase()}',
-    title: '${this.moduleName.toCamelCase()}.${this.moduleName.toPascalCase()}',
+    title: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toPascalCase()}',
     type : 'basic',
     icon : 'heroicons_outline:tag',
     link : '/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}',
@@ -369,8 +369,9 @@ export class CodeWriter
         // get names to translate
         const names = properties.withoutTimestamps.filter(property => property.name !== 'id').map(property => property.name);
 
-        // add module name to translate
+        // add module name/s to translate
         names.push(this.moduleName);
+        names.push(this.moduleNames);
 
         for (const name of names)
         {
