@@ -112,6 +112,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
         const navigation = navComponent.navigation;
 
         // Get all translations from navigation translations files
+        // this files are stored in src/assets/i18n/navigation
         this.translocoService
             .selectTranslation('navigation')
             .pipe(take(1))
