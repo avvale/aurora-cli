@@ -364,7 +364,7 @@ export class CodeWriter
 
     generateDashboardTranslations(properties: Properties, langCode: string): void
     {
-        const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), 'i18n', langCode + '.json'));
+        const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'));
 
         // get names to translate
         const names = properties.withoutTimestamps.filter(property => property.name !== 'id').map(property => property.name);
@@ -385,7 +385,7 @@ export class CodeWriter
         // sort object by keys
         const newTranslationObject = ObjectTools.sortByKeys(translationObject);
 
-        fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), 'i18n', langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
+        fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
     declareFramework(): void

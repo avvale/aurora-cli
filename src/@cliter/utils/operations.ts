@@ -48,11 +48,30 @@ export class Operations
 
     async generateDashboardModule(): Promise<void>
     {
+        // generate dashboard module translations empty
+        await this.generateDashboardModuleTranslations();
+
         // generate dashboard module files
         await this.generateDashboardModuleFiles();
 
         // create references, write imports in ts files
         this.createDashboardReferences();
+    }
+
+    async generateDashboardModuleTranslations(): Promise<void>
+    {
+        // create directory application container, normally src/assets/i18n/module_name
+        await TemplateGenerator.createDirectory(
+            path.join('src', cliterConfig.dashboardTranslations),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
+
+        // create module translations
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.DASHBOARD_MODULE_TRANSLATIONS,
+            path.join('src', cliterConfig.dashboardTranslations),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+        );
     }
 
     async generateDashboardModuleFiles(): Promise<void>

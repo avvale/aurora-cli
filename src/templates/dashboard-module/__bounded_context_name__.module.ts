@@ -19,12 +19,6 @@ import { {{ toCamelCase schema.boundedContextName }}Routes } from './{{ toKebabC
 import { {{ toCamelCase schema.boundedContextName }}Menu } from './{{ toKebabCase schema.boundedContextName }}.menu';
 import { {{ toPascalCase schema.boundedContextName }}Component } from './{{ toKebabCase schema.boundedContextName }}.component';
 
-export const loader = ['en', 'es'].reduce((acc, lang) =>
-{
-    acc[lang] = () => import(`./i18n/${lang}.json`);
-    return acc;
-}, {});
-
 @NgModule({
     imports: [
         RouterModule.forChild({{ toCamelCase schema.boundedContextName }}Routes),
@@ -49,11 +43,8 @@ export const loader = ['en', 'es'].reduce((acc, lang) =>
     providers: [
         {
             provide : TRANSLOCO_SCOPE,
-            useValue: {
-                scope: '{{ toCamelCase schema.boundedContextName }}',
-                loader,
-            },
-            multi: true,
+            useValue: '{{ toCamelCase schema.boundedContextName }}',
+            multi   : true,
         },
     ],
 })
