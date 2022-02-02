@@ -36,8 +36,6 @@
     "graphql": "^15.8.0",
     "graphql-type-json": "^0.3.2",
     "graphql-upload": "^13.0.0",
-    "pg": "^8.7.1",
-    "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
