@@ -91,10 +91,10 @@ export default class Load extends Command
 
             const yamlFiles = fs.readdirSync(path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase()));
 
-            for (const yamlFile of yamlFiles.filter(files => files.endsWith('.yml')))
+            for (const yamlFile of yamlFiles.filter(files => files.endsWith('.yaml')))
             {
                 // create yaml file
-                const schema: ModuleDefinitionSchema    = this.loadYamlConfigFile(boundedContextName, yamlFile.replace('.yml', ''));
+                const schema: ModuleDefinitionSchema    = this.loadYamlConfigFile(boundedContextName, yamlFile.replace('.yaml', ''));
                 const currentLockFiles: LockFile[]      = this.loadJsonLockFile(boundedContextName, schema.moduleName);
 
                 // set stateService
@@ -191,7 +191,7 @@ export default class Load extends Command
 
     private loadYamlConfigFile(boundedContextName: string, moduleName: string): ModuleDefinitionSchema
     {
-        const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + '.yml');
+        const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + '.yaml');
 
         // read yaml file
         const yamlObj = yaml.load(fs.readFileSync(yamlPath, 'utf8')) as any;

@@ -65,7 +65,7 @@ export class CodeWriter
             for (const yamlFile of yamlFiles)
             {
                 // get filename of e2e test
-                const e2eTestFile = yamlFile.replace('.yml', '').concat('.e2e-spec.ts');
+                const e2eTestFile = yamlFile.replace('.yaml', '').concat('.e2e-spec.ts');
 
                 const e2eTestPath = path.join(process.cwd(), 'test', 'acceptance', this.boundedContextName.toKebabCase(), e2eTestFile);
 

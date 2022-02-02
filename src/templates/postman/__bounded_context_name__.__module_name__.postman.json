@@ -485,7 +485,7 @@
 					}
 				},
 				"url": {
-					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/find",
 					"host": [
 						"\{{URL}}"
 					],
@@ -529,7 +529,7 @@
 					}
 				},
 				"url": {
-					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find",
 					"host": [
 						"\{{URL}}"
 					],

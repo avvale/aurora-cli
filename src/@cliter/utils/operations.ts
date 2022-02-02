@@ -324,7 +324,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
 
         if (!fs.existsSync(yamlPath)) fs.mkdirSync(yamlPath, { recursive: true });
 
-        fs.writeFileSync(path.join(yamlPath, `${ Operations.stateService.schema.moduleName }.yml`), yamlStr, 'utf8');
+        fs.writeFileSync(path.join(yamlPath, `${ Operations.stateService.schema.moduleName }.yaml`), yamlStr, 'utf8');
     }
 
     createJsonLockFile(): void
