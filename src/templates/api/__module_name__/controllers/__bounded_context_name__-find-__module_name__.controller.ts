@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Get, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
+import { Controller, Body, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
@@ -22,7 +22,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 import { Find{{ toPascalCase schema.moduleName }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}.query';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
-@Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
+@Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find')
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
@@ -36,7 +36,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         {{/if}}
     ) {}
 
-    @Get()
+    @Post()
     @ApiOperation({ summary: 'Find {{ toKebabCase schema.moduleName }} according to query' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: {{ toPascalCase schema.moduleName }}Dto })
     @ApiBody({ type: QueryStatement })

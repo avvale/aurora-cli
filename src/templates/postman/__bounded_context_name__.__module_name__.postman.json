@@ -454,12 +454,12 @@
 			"response": []
         },
         {
-			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}",
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/find",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -498,12 +498,12 @@
 			"response": []
         },
         {
-			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",

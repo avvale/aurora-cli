@@ -379,10 +379,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}', () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/find', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -396,10 +396,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 404 Not Found', () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -436,10 +436,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(201);
     });
 
-    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}', () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
