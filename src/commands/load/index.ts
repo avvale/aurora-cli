@@ -1,6 +1,9 @@
+// container
 import 'reflect-metadata';
-import { Command, Flags } from '@oclif/core'
 import { container } from 'tsyringe';
+
+// imports
+import { Command, Flags } from '@oclif/core'
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';

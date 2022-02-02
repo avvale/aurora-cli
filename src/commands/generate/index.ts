@@ -1,6 +1,9 @@
+// container
 import 'reflect-metadata';
-import { Command, Flags } from '@oclif/core'
 import { container } from 'tsyringe';
+
+// imports
+import { Command, Flags } from '@oclif/core'
 import { ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
 
 export default class Generate extends Command

@@ -1,6 +1,9 @@
+// container
 import 'reflect-metadata';
-import { Command, Flags } from '@oclif/core'
 import { container } from 'tsyringe';
+
+// imports
+import { Command, Flags } from '@oclif/core'
 import * as shell from 'shelljs';
 import * as ora from 'ora';
 import { Operations, StateService } from '../../@cliter';

@@ -1,7 +1,10 @@
+// container
 import 'reflect-metadata';
+import { container } from 'tsyringe';
+
+// imports
 import * as fs from 'fs';
 import * as path from 'path';
-import { container } from 'tsyringe';
 import { TemplateElement } from './../types';
 import { StateService } from '../services/state.service';
 import { FileManager } from './file-manager';

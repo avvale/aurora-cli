@@ -1,5 +1,9 @@
-import { Command } from '@oclif/core'
+// container
+import 'reflect-metadata';
 import { singleton } from 'tsyringe';
+
+// imports
+import { Command } from '@oclif/core'
 import { LiteralObject, LockFile, ModuleDefinitionSchema, SqlRelationship, SqlType } from './../types';
 import { CliterConfig, cliterConfig } from './../config/cliter.config';
 import { v4 as uuidv4 } from 'uuid';
