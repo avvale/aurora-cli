@@ -351,8 +351,8 @@ export class CodeWriter
         // set routes
         menuArray?.addElement(
 `{
-    id   : '${this.moduleName.toCamelCase()}',
-    title: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toPascalCase()}',
+    id   : '${this.moduleNames.toCamelCase()}',
+    title: '${this.moduleName.toPascalCase()}',
     type : 'basic',
     icon : 'heroicons_outline:tag',
     link : '/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}',
@@ -386,6 +386,22 @@ export class CodeWriter
         const newTranslationObject = ObjectTools.sortByKeys(translationObject);
 
         fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
+    }
+
+    generateDashboardMenuTranslation(langCode: string): void
+    {
+        const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'));
+
+        // avoid overwriting existing properties
+        if (translationObject[this.moduleNames.toCamelCase()] === undefined)
+        {
+            translationObject[this.moduleNames.toCamelCase()] = this.moduleNames.toPascalCase();
+        }
+
+        // sort object by keys
+        const newTranslationObject = ObjectTools.sortByKeys(translationObject);
+
+        fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
     declareFramework(): void

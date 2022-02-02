@@ -259,6 +259,8 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.generateDashboardMenu();
         codeWriter.generateDashboardTranslations(Operations.stateService.schema.properties, 'en');
         codeWriter.generateDashboardTranslations(Operations.stateService.schema.properties, 'es');
+        codeWriter.generateDashboardMenuTranslation('en');
+        codeWriter.generateDashboardMenuTranslation('es');
     }
 
     createReferences(): void
