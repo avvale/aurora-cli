@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Body, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
@@ -37,6 +37,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ) {}
 
     @Post()
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find {{ toKebabCase schema.moduleName }} according to query' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: {{ toPascalCase schema.moduleName }}Dto })
     @ApiBody({ type: QueryStatement })

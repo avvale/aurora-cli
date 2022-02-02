@@ -491,7 +491,8 @@
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
-						"{{ toKebabCase schema.moduleNames }}"
+						"{{ toKebabCase schema.moduleNames }}",
+                        "find"
 					]
 				}
 			},
@@ -535,7 +536,8 @@
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
-						"{{ toKebabCase schema.moduleName }}"
+						"{{ toKebabCase schema.moduleName }}",
+                        "find"
 					]
 				}
 			},
