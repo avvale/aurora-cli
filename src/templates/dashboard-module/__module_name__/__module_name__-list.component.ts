@@ -40,16 +40,15 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 ];
             },
         },
+        {{#each schema.properties.gridFields}}
+        {{#if (allowProperty ../schema.moduleName this) }}
         {
             type : ColumnDataType.STRING,
-            field: 'name',
-            sort : 'name',
+            field: '{{ name }}',
+            sort : '{{ name }}',
         },
-        {
-            type : ColumnDataType.STRING,
-            field: 'ietf',
-            sort : 'ietf',
-        },
+        {{/if}}
+        {{/each}}
     ];
 
     constructor(
@@ -76,7 +75,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 break;
 
             case 'edit':
-                this.router.navigate(['common/{{ toKebabCase schema.moduleName }}/edit', action.data.event.row.id]);
+                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit', action.data.event.row.id]);
                 break;
 
             case 'delete':

@@ -2,6 +2,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./src",
         "outDir": "./dist/out-tsc",

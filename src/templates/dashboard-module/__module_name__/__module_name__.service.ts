@@ -36,7 +36,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             constraint = {},
             offset = 0,
             limit = 10,
-            sort = ['name'],
+            sort = ['id'],
             order = 'desc',
         }: {
             query?: QueryStatement;

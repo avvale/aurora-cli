@@ -48,7 +48,8 @@
 
                 <div class="layout__container">
 
-                    {{#each schema.properties.withoutTimestamps}}
+                    {{#each schema.properties.detailFields}}
+                    {{#if (allowProperty ../schema.moduleName this) }}
                     {{#eq type 'varchar'}}
                     {{> varcharInput schema=../schema property=.}}
 
@@ -69,6 +70,16 @@
                     {{> booleanInput schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq type 'timestamp'}}
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    {{/eq}}
+                    {{/if}}
                     {{/each}}
                 </div>
 

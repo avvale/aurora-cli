@@ -33,7 +33,7 @@ body fuse-splash-screen .spinner {
 body fuse-splash-screen .spinner > div {
     width: 12px;
     height: 12px;
-    background-color: #41B977;
+    background-color: #378E98;
     border-radius: 100%;
     display: inline-block;
     -webkit-animation: fuse-bouncedelay 1s infinite ease-in-out both;

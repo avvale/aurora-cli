@@ -20,6 +20,7 @@ import '../handlebars/partials/inputs/boolean-input'
 import '../handlebars/partials/inputs/char-input';
 import '../handlebars/partials/inputs/enum-input';
 import '../handlebars/partials/inputs/int-input';
+import '../handlebars/partials/inputs/timestamp-input';
 import '../handlebars/partials/inputs/varchar-input';
 import '../handlebars/partials/many-to-many-array-items';
 import '../handlebars/helpers/string-to-camel-case';

@@ -88,6 +88,21 @@ export class Properties
         return this.properties.find(property => property.type === SqlType.ID);
     }
 
+    // data for dashboard
+    get gridFields(): Property[]
+    {
+        return this.properties
+            .filter(property => !this.timestampFields.includes(property.name))
+            .filter(property => property.name !== 'id');
+    }
+
+    get detailFields(): Property[]
+    {
+        return this.properties
+            .filter(property => !this.timestampFields.includes(property.name))
+            .filter(property => property.name !== 'id');
+    }
+
     // data for component
     // aggregate
     get aggregate(): Property[]
