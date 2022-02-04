@@ -11,6 +11,8 @@ import '../prototypes/string-to-pascal-case.interface';
 import '../prototypes/string-to-pascal-case';
 import '../handlebars/helpers/allow-property';
 import '../handlebars/helpers/calculate-form-group-col';
+import '../handlebars/helpers/has-comma-in-validation-form-control';
+import '../handlebars/helpers/has-validation-form-control';
 import '../handlebars/helpers/initial-form-group-data';
 import '../handlebars/helpers/is-i18n-relation-property';
 import '../handlebars/helpers/is-i18n-data-lang-property';
