@@ -1,6 +1,5 @@
 import { Property, SqlType } from '../..';
 import * as handlebars from 'handlebars';
-import * as _ from 'lodash';
 
 handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
 {
