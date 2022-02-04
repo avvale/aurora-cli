@@ -1,7 +1,7 @@
 import * as handlebars from 'handlebars';
 
 handlebars.registerPartial('enumInput',
-    `<mat-form-field appearance="outline" class="col-start-1 col-4">
+    `<mat-form-field appearance="outline" class="{{ calculateFormGroupCol property }}">
     <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}') }}</mat-label>
     <mat-select formControlName="{{ property.name }}">
         {{#each property.enumOptions}}

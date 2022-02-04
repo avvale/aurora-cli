@@ -336,8 +336,10 @@ export class CodeWriter
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.menu.ts`));
         const menu = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Menu');
-        const menuArray = menu.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-        const menuElements = menuArray.getElements() as ObjectLiteralExpression[];
+        const objectMenu = menu.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+        const childrenProperty = objectMenu.getPropertyOrThrow('children') as InitializerExpressionGetableNode
+        const childrenArrayMenu = childrenProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const menuElements = childrenArrayMenu.getElements() as ObjectLiteralExpression[];
 
         // avoid duplicated declaration
         for (const element of menuElements)
@@ -349,7 +351,7 @@ export class CodeWriter
         }
 
         // set routes
-        menuArray?.addElement(
+        childrenArrayMenu?.addElement(
 `{
     id   : '${this.moduleNames.toCamelCase()}',
     title: '${this.moduleName.toPascalCase()}',

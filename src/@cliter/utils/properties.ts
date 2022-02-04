@@ -96,11 +96,17 @@ export class Properties
             .filter(property => property.name !== 'id');
     }
 
-    get detailFields(): Property[]
+    get formDetailFields(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => property.name !== 'id');
+    }
+
+    get formGroupFields(): Property[]
+    {
+        return this.properties
+            .filter(property => !this.timestampFields.includes(property.name));
     }
 
     // data for component

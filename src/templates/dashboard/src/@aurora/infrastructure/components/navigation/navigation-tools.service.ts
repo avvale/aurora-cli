@@ -4,7 +4,7 @@ import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types
 @Injectable({
     providedIn: 'root',
 })
-export class NavigationService
+export class NavigationToolsService
 {
     /**
      * Constructor

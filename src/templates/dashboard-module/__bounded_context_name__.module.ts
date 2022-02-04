@@ -4,7 +4,10 @@ import { TranslocoModule, TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { FuseConfirmationModule } from '@fuse/services/confirmation';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 import { ValidationMessagesModule } from '@aurora';
+import { NavigationService } from 'app/core/navigation/navigation.service';
+import { Navigation } from 'app/core/navigation/navigation.types';
 import { SharedModule } from 'app/shared/shared.module';
+import { first } from 'rxjs';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -52,14 +55,27 @@ export class {{ toPascalCase schema.boundedContextName }}Module
 {
     constructor(
         fuseNavigationService: FuseNavigationService,
+        navigationService: NavigationService,
     )
     {
         const navComponent = fuseNavigationService.getComponent<FuseVerticalNavigationComponent>('mainNavigation');
-        const adminMenu = fuseNavigationService.getItem('admin', navComponent.navigation);
 
-        // set bounded context menu
-        adminMenu.children = {{ toCamelCase schema.boundedContextName }}Menu;
-
-        navComponent.refresh();
+        if (navComponent)
+        {
+            const applicationsMenu = fuseNavigationService.getItem('applications', navComponent.navigation);
+            applicationsMenu.children.push(commonMenu);
+            navComponent.refresh();
+        }
+        else
+        {
+            navigationService
+                .navigation$
+                .pipe(first())
+                .subscribe((navigation: Navigation) =>
+                {
+                    const applicationsMenu = fuseNavigationService.getItem('applications', navigation.default);
+                    applicationsMenu.children.push({{ toCamelCase schema.boundedContextName }}Menu);
+                });
+        }
     }
 }

@@ -48,10 +48,14 @@
 
                 <div class="layout__container">
 
-                    {{#each schema.properties.detailFields}}
+                    {{#each schema.properties.formDetailFields}}
                     {{#if (allowProperty ../schema.moduleName this) }}
                     {{#eq type 'varchar'}}
                     {{> varcharInput schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq type 'text'}}
+                    {{> textInput schema=../schema property=.}}
 
                     {{/eq}}
                     {{#eq type 'char'}}
@@ -68,6 +72,10 @@
                     {{/eq}}
                     {{#eq type 'boolean'}}
                     {{> booleanInput schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq type 'int.unsigned'}}
+                    {{> intInput schema=../schema property=.}}
 
                     {{/eq}}
                     {{#eq type 'timestamp'}}

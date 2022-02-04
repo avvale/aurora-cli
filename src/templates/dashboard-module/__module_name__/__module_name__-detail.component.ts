@@ -69,9 +69,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     createForm(): void
     {
         this.fg = this.fb.group({
-            {{#each schema.properties.withoutTimestamps}}
+            {{#each schema.properties.formGroupFields}}
             {{#if (allowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: '',
+            {{ toCamelCase name }}: [{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required, {{/unless}}{{#if this.length}}Validators.minLength({{this.length }}), Validators.maxLength({{this.length}}), {{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}), {{/if}}]],
             {{/if}}
             {{/each}}
         });

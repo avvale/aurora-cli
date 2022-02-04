@@ -10,6 +10,8 @@ import '../prototypes/string-to-camel-case';
 import '../prototypes/string-to-pascal-case.interface';
 import '../prototypes/string-to-pascal-case';
 import '../handlebars/helpers/allow-property';
+import '../handlebars/helpers/calculate-form-group-col';
+import '../handlebars/helpers/initial-form-group-data';
 import '../handlebars/helpers/is-i18n-relation-property';
 import '../handlebars/helpers/is-i18n-data-lang-property';
 import '../handlebars/partials/i18n';
@@ -20,6 +22,7 @@ import '../handlebars/partials/inputs/boolean-input'
 import '../handlebars/partials/inputs/char-input';
 import '../handlebars/partials/inputs/enum-input';
 import '../handlebars/partials/inputs/int-input';
+import '../handlebars/partials/inputs/text-input';
 import '../handlebars/partials/inputs/timestamp-input';
 import '../handlebars/partials/inputs/varchar-input';
 import '../handlebars/partials/many-to-many-array-items';

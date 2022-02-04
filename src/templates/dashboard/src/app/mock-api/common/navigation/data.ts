@@ -7,23 +7,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         title   : 'Applications',
         subtitle: 'Applications installed',
         type    : 'group',
-        children: [
-            {
-                id      : 'admin',
-                title   : 'Admin',
-                type    : 'collapsable',
-                icon    : 'heroicons_outline:cog',
-                children: [
-                    {
-                        id   : 'example',
-                        title: 'Example',
-                        type : 'basic',
-                        icon : 'heroicons_outline:chart-pie',
-                        link : '/example',
-                    },
-                ],
-            },
-        ],
+        children: [],
     },
 ];
 export const compactNavigation: FuseNavigationItem[] = [

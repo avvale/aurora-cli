@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { take } from 'rxjs';
 import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
-import { NavigationService } from '@aurora';
+import { NavigationToolsService } from '@aurora';
 
 @Component({
     selector       : 'languages',
@@ -23,7 +23,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
     constructor(
         private changeDetectorRef: ChangeDetectorRef,
         private fuseNavigationService: FuseNavigationService,
-        private navigationService: NavigationService,
+        private navigationToolsService: NavigationToolsService,
         private translocoService: TranslocoService,
     )
     {
@@ -118,7 +118,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
             .pipe(take(1))
             .subscribe(navigationTranslations =>
             {
-                const flatNavigation = this.navigationService.getAllFlatNavigation(navigation);
+                const flatNavigation = this.navigationToolsService.getAllFlatNavigation(navigation);
 
                 for (const flatNavigationItem of flatNavigation)
                 {
