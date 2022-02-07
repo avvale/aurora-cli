@@ -20,11 +20,16 @@ export class TemplateGenerator
     static generateStaticContents(
         templateElement: TemplateElement,
         relativeTargetBasePath: string,
-        relativeTargetPath: string
+        relativeTargetPath: string,
+        {
+            templateElementPath = undefined
+        }: {
+            templateElementPath?: string;
+        } = {}
     ): void
     {
         FileManager.generateContents(
-            path.join(TemplateGenerator.templatePath, templateElement),
+            path.join(TemplateGenerator.templatePath, templateElement, templateElementPath || ''),
             relativeTargetBasePath,
             relativeTargetPath,
         );

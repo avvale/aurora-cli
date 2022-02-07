@@ -8,7 +8,7 @@ import { ModuleDefinitionSchema, Operations, Prompter, Properties, Property, Sql
 
 export default class Generate extends Command
 {
-    static description = 'Generate hades elements [boundedContext, module]';
+    static description = 'Generate aurora bounded context/module [boundedContext, module]';
 
     static flags =
     {

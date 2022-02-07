@@ -3,7 +3,6 @@ export enum SqlType
     'BOOLEAN'           = 'boolean',
     'CHAR'              = 'char',
     'DATE'              = 'date',
-    'DATETIME'          = 'datetime',
     'DECIMAL'           = 'decimal',
     'ENUM'              = 'enum',
     'FLOAT'             = 'float',

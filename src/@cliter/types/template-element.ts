@@ -3,6 +3,7 @@ export enum TemplateElement
     API                           = 'api',
     APPLICATION                   = 'application',
     BOUNDED_CONTEXT               = 'bounded-context',
+    CI_CD                         = 'ci-cd',
     DASHBOARD                     = 'dashboard',
     ENV                           = 'env',
     I18N_API                      = 'i18n-api',

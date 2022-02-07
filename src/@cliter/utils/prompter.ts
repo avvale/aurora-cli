@@ -451,6 +451,34 @@ export class Prompter
         });
     }
 
+    static async promptAddPipeline(isFront: boolean): Promise<{ from: string; to: string; service: string;}>
+    {
+        const questions = [];
+
+        questions.push({
+            name   : 'from',
+            message: 'From which platform will you deploy?',
+            type   : 'list',
+            choices: cliterConfig.platformFromDeploy
+        });
+
+        questions.push({
+            name   : 'to',
+            message: 'to which platform will it be deployed?',
+            type   : 'list',
+            choices: cliterConfig.platformToDeploy
+        });
+
+        questions.push({
+            name   : 'service',
+            message: 'on what service will you deploy?',
+            type   : 'list',
+            choices: isFront ? cliterConfig.serviceToDeploy.front : cliterConfig.serviceToDeploy.back
+        });
+
+        return await inquirer.prompt(questions);
+    }
+
     static printValueObjectsTable(command: Command, items: Properties)
     {
         const headers: string[] = [];

@@ -63,7 +63,7 @@ export class {{ toPascalCase schema.boundedContextName }}Module
         if (navComponent)
         {
             const applicationsMenu = fuseNavigationService.getItem('applications', navComponent.navigation);
-            applicationsMenu.children.push(commonMenu);
+            applicationsMenu.children.push({{ toCamelCase schema.boundedContextName }}Menu);
             navComponent.refresh();
         }
         else

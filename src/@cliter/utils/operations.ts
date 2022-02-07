@@ -93,6 +93,19 @@ export class Operations
         );
     }
 
+    async generatePipeline(app: string, from: string, to: string, service: string): Promise<void>
+    {
+        // create pipeline files
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.CI_CD,
+            '',
+            '',
+            {
+                templateElementPath: path.join(app, from.toKebabCase(), to.toKebabCase(), service.toKebabCase()),
+            }
+        );
+    }
+
     async generateModule(): Promise<void>
     {
         // generate module files

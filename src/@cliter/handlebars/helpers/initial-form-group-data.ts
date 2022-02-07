@@ -5,13 +5,13 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
 {
     switch (property.type)
     {
-        case SqlType.VARCHAR:
         case SqlType.CHAR:
-        case SqlType.TEXT:
-        case SqlType.TIMESTAMP:
-        case SqlType.TIMESTAMP:
+        case SqlType.DATE:
         case SqlType.ENUM:
         case SqlType.ID:
+        case SqlType.TEXT:
+        case SqlType.TIMESTAMP:
+        case SqlType.VARCHAR:
             return `''`;
 
         case SqlType.INT:

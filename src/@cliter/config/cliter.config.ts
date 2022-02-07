@@ -21,6 +21,9 @@ export interface CliterConfig
     skipDirectories: string[];
     avoidOverwritingFilesIfExist: string[];
     allowedRenderExtensions: string[];
+    platformFromDeploy: string[];
+    platformToDeploy: string[];
+    serviceToDeploy: { front: string[]; back: string[]; };
 }
 
 export const cliterConfig: CliterConfig =
@@ -149,5 +152,11 @@ export const cliterConfig: CliterConfig =
         'module/index.ts',
         'api/__bounded_context_name__.module.ts'
     ],
-    allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt', '.htm', '.html']
+    allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt', '.htm', '.html'],
+    platformFromDeploy: ['GitHub'],
+    platformToDeploy: ['Google Cloud'],
+    serviceToDeploy: {
+        back: ['App Engine'],
+        front: ['App Engine']
+    }
 };

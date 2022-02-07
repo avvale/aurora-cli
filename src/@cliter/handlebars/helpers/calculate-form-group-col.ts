@@ -18,7 +18,6 @@ handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
             return 'col-4';
 
         case SqlType.DATE:
-        case SqlType.DATETIME:
         case SqlType.TIMESTAMP:
             return 'col-3';
 

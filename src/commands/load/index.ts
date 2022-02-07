@@ -16,7 +16,7 @@ import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSc
 
 export default class Load extends Command
 {
-    static description = 'Load hades elements [bounded-context, module] from yaml file, located in the cliter folder';
+    static description = 'Reload aurora [bounded-context, module] from yaml file, located in the cliter folder';
 
     static flags =
     {
