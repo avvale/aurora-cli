@@ -18,8 +18,8 @@ aurora-ts-cli
 $ npm install -g aurora-ts-cli
 $ aurora COMMAND
 running command...
-$ aurora (-v|--version|version)
-aurora-ts-cli/0.0.4 darwin-arm64 node-v16.13.0
+$ aurora (--version)
+aurora-ts-cli/1.0.1 darwin-arm64 node-v16.13.0
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND
@@ -28,17 +28,22 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-- [aurora-ts-cli](#aurora-ts-cli)
-- [Usage](#usage)
-- [Commands](#commands)
-  - [`aurora delete ELEMENTTYPE ELEMENTNAME`](#aurora-delete-elementtype-elementname)
-  - [`aurora generate ELEMENTTYPE`](#aurora-generate-elementtype)
-  - [`aurora hello`](#aurora-hello)
-  - [`aurora help [COMMAND]`](#aurora-help-command)
-  - [`aurora key`](#aurora-key)
-  - [`aurora load ELEMENTTYPE`](#aurora-load-elementtype)
-  - [`aurora new APPNAME`](#aurora-new-appname)
-  - [`aurora seed ELEMENTTYPE`](#aurora-seed-elementtype)
+* [`aurora delete ELEMENTTYPE ELEMENTNAME`](#aurora-delete-elementtype-elementname)
+* [`aurora generate ELEMENTTYPE`](#aurora-generate-elementtype)
+* [`aurora hello PERSON`](#aurora-hello-person)
+* [`aurora hello world`](#aurora-hello-world)
+* [`aurora help [COMMAND]`](#aurora-help-command)
+* [`aurora keys`](#aurora-keys)
+* [`aurora load ELEMENTTYPE`](#aurora-load-elementtype)
+* [`aurora new NAME`](#aurora-new-name)
+* [`aurora pipeline`](#aurora-pipeline)
+* [`aurora plugins`](#aurora-plugins)
+* [`aurora plugins:inspect PLUGIN...`](#aurora-pluginsinspect-plugin)
+* [`aurora plugins:install PLUGIN...`](#aurora-pluginsinstall-plugin)
+* [`aurora plugins:link PLUGIN`](#aurora-pluginslink-plugin)
+* [`aurora plugins:uninstall PLUGIN...`](#aurora-pluginsuninstall-plugin)
+* [`aurora plugins update`](#aurora-plugins-update)
+* [`aurora seed ELEMENTTYPE`](#aurora-seed-elementtype)
 
 ## `aurora delete ELEMENTTYPE ELEMENTNAME`
 
@@ -46,128 +51,345 @@ Delete elements
 
 ```
 USAGE
-  $ aurora delete ELEMENTTYPE ELEMENTNAME
+  $ aurora delete [ELEMENTTYPE] [ELEMENTNAME] [-h]
 
 ARGUMENTS
   ELEMENTTYPE  (bounded-context|b|module|m) Type element to delete
   ELEMENTNAME  Name element to create
 
-OPTIONS
-  -h, --help  show CLI help
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  Delete elements
 ```
 
-_See code: [src/commands/delete.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/delete.ts)_
+_See code: [dist/commands/delete/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/delete/index.ts)_
 
 ## `aurora generate ELEMENTTYPE`
 
-Generate hades elements [boundedContext, module]
+Generate aurora bounded context/module [boundedContext, module]
 
 ```
 USAGE
-  $ aurora generate ELEMENTTYPE
+  $ aurora generate [ELEMENTTYPE] [-h] [-v] [-f] [-m <value>] [-g]
 
 ARGUMENTS
   ELEMENTTYPE  (bounded-context|b|module|m) Type element to create
 
-OPTIONS
+FLAGS
   -f, --force
   -g, --noGraphQLTypes
-  -h, --help            show CLI help
-  -m, --module=module
+  -h, --help            Show CLI help.
+  -m, --module=<value>
   -v, --verbose
+
+DESCRIPTION
+  Generate aurora bounded context/module [boundedContext, module]
 
 EXAMPLES
   $ aurora generate module -m=my-bounded-context/my-module --force --noGraphQLTypes
+
   $ aurora --help
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/generate.ts)_
+_See code: [dist/commands/generate/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/generate/index.ts)_
 
-## `aurora hello`
+## `aurora hello PERSON`
 
-Test command
+Say hello
 
 ```
 USAGE
-  $ aurora hello
+  $ aurora hello [PERSON] -f <value>
 
-OPTIONS
-  -h, --help  show CLI help
+ARGUMENTS
+  PERSON  Person to say hello to
+
+FLAGS
+  -f, --from=<value>  (required) Whom is saying hello
+
+DESCRIPTION
+  Say hello
+
+EXAMPLES
+  $ oex hello friend --from oclif
+  hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/hello.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/hello/index.ts)_
+
+## `aurora hello world`
+
+Say hello world
+
+```
+USAGE
+  $ aurora hello world
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ oex hello world
+  hello world! (./src/commands/hello/world.ts)
+```
 
 ## `aurora help [COMMAND]`
 
-display help for aurora
+Display help for aurora.
 
 ```
 USAGE
-  $ aurora help [COMMAND]
+  $ aurora help [COMMAND] [-n]
 
 ARGUMENTS
-  COMMAND  command to show help for
+  COMMAND  Command to show help for.
 
-OPTIONS
-  --all  see all commands in CLI
+FLAGS
+  -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for aurora.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.14/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
 
-## `aurora key`
+## `aurora keys`
 
 Generate private key and public key
 
 ```
 USAGE
-  $ aurora key
+  $ aurora keys [-h]
 
-OPTIONS
-  -h, --help  show CLI help
+FLAGS
+  -h, --help  Show CLI help.
+
+DESCRIPTION
+  Generate private key and public key
 ```
 
-_See code: [src/commands/key.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/key.ts)_
+_See code: [dist/commands/keys/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/keys/index.ts)_
 
 ## `aurora load ELEMENTTYPE`
 
-Load hades elements [bounded-context, module] from yaml file, located in the cliter folder
+Reload aurora [bounded-context, module] from yaml file, located in the cliter folder
 
 ```
 USAGE
-  $ aurora load ELEMENTTYPE
+  $ aurora load [ELEMENTTYPE] [-h] [-v] [-f] [-m <value>] [-b <value>] [-t] [-g] [-d]
 
 ARGUMENTS
   ELEMENTTYPE  (bounded-context|b|module|m) Type element to create
 
-OPTIONS
-  -b, --boundedContext=boundedContext
+FLAGS
+  -b, --boundedContext=<value>
+  -d, --dashboard
   -f, --force
   -g, --noGraphQLTypes
-  -h, --help                           show CLI help
-  -m, --module=module
+  -h, --help                    Show CLI help.
+  -m, --module=<value>
   -t, --tests
   -v, --verbose
+
+DESCRIPTION
+  Reload aurora [bounded-context, module] from yaml file, located in the cliter folder
 ```
 
-_See code: [src/commands/load.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/load.ts)_
+_See code: [dist/commands/load/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/load/index.ts)_
 
-## `aurora new APPNAME`
+## `aurora new NAME`
 
 Create new aurora project
 
 ```
 USAGE
-  $ aurora new APPNAME
+  $ aurora new [NAME] [-h] [-p] [-d]
 
 ARGUMENTS
-  APPNAME  Type app name to create
+  NAME  Type name of element to create, application, package or dashboard.
 
-OPTIONS
-  -c, --credentials
-  -h, --help         show CLI help
+FLAGS
+  -d, --dashboard
+  -h, --help       Show CLI help.
+  -p, --package
+
+DESCRIPTION
+  Create new aurora project
 ```
 
-_See code: [src/commands/new.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/new.ts)_
+_See code: [dist/commands/new/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/new/index.ts)_
+
+## `aurora pipeline`
+
+Generate pipeline to deploy application in cloud
+
+```
+USAGE
+  $ aurora pipeline [-h] [-f] [-d]
+
+FLAGS
+  -d, --dashboard
+  -f, --force
+  -h, --help       Show CLI help.
+
+DESCRIPTION
+  Generate pipeline to deploy application in cloud
+
+EXAMPLES
+  $ aurora pipeline
+
+  $ aurora --help
+```
+
+_See code: [dist/commands/pipeline/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/pipeline/index.ts)_
+
+## `aurora plugins`
+
+List installed plugins.
+
+```
+USAGE
+  $ aurora plugins [--core]
+
+FLAGS
+  --core  Show core plugins.
+
+DESCRIPTION
+  List installed plugins.
+
+EXAMPLES
+  $ aurora plugins
+```
+
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
+
+## `aurora plugins:inspect PLUGIN...`
+
+Displays installation properties of a plugin.
+
+```
+USAGE
+  $ aurora plugins:inspect PLUGIN...
+
+ARGUMENTS
+  PLUGIN  [default: .] Plugin to inspect.
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Displays installation properties of a plugin.
+
+EXAMPLES
+  $ aurora plugins:inspect myplugin
+```
+
+## `aurora plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
+```
+USAGE
+  $ aurora plugins:install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+ALIASES
+  $ aurora plugins add
+
+EXAMPLES
+  $ aurora plugins:install myplugin 
+
+  $ aurora plugins:install https://github.com/someuser/someplugin
+
+  $ aurora plugins:install someuser/someplugin
+```
+
+## `aurora plugins:link PLUGIN`
+
+Links a plugin into the CLI for development.
+
+```
+USAGE
+  $ aurora plugins:link PLUGIN
+
+ARGUMENTS
+  PATH  [default: .] path to plugin
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Links a plugin into the CLI for development.
+
+  Installation of a linked plugin will override a user-installed or core plugin.
+
+  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
+  command will override the user-installed or core plugin implementation. This is useful for development work.
+
+EXAMPLES
+  $ aurora plugins:link myplugin
+```
+
+## `aurora plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ aurora plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ aurora plugins unlink
+  $ aurora plugins remove
+```
+
+## `aurora plugins update`
+
+Update installed plugins.
+
+```
+USAGE
+  $ aurora plugins update [-h] [-v]
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Update installed plugins.
+```
 
 ## `aurora seed ELEMENTTYPE`
 
@@ -175,17 +397,20 @@ Seed database with bounded context or module selected
 
 ```
 USAGE
-  $ aurora seed ELEMENTTYPE
+  $ aurora seed [ELEMENTTYPE] [-h] [-m <value>] [-b <value>] [-l]
 
 ARGUMENTS
   ELEMENTTYPE  (bounded-context|b|module|m) Type element to create
 
-OPTIONS
-  -b, --boundedContext=boundedContext
-  -h, --help                           show CLI help
+FLAGS
+  -b, --boundedContext=<value>
+  -h, --help                    Show CLI help.
   -l, --log
-  -m, --module=module
+  -m, --module=<value>
+
+DESCRIPTION
+  Seed database with bounded context or module selected
 ```
 
-_See code: [src/commands/seed.ts](https://github.com/carlospalacin/aurora-ts-cli/blob/v0.0.4/src/commands/seed.ts)_
+_See code: [dist/commands/seed/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.1/dist/commands/seed/index.ts)_
 <!-- commandsstop -->

@@ -1,6 +1,6 @@
 {
     "name": "aurora-ts-cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Aurora CLI",
     "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
     "bin": {
@@ -34,7 +34,9 @@
         "reflect-metadata": "^0.1.13",
         "shelljs": "^0.8.5",
         "ts-morph": "^13.0.3",
+        "ts-node": "^10.2.1",
         "tsyringe": "^4.6.0",
+        "typescript": "^4.4.3",
         "uuid": "^8.3.2"
     },
     "devDependencies": {
