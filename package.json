@@ -19,7 +19,7 @@
     "dependencies": {
         "@oclif/core": "^1",
         "@oclif/plugin-help": "^5",
-        "@oclif/plugin-plugins": "^2.0.1",
+        "@oclif/plugin-plugins": "^2.1.0",
         "cli-table3": "^0.6.1",
         "copyfiles": "^2.4.1",
         "dayjs": "^1.10.7",
