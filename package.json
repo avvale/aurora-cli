@@ -1,6 +1,6 @@
 {
     "name": "aurora-ts-cli",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Aurora CLI",
     "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
     "bin": {
@@ -30,6 +30,7 @@
         "js-yaml": "^4.1.0",
         "jsrsasign": "^10.5.1",
         "jsrsasign-util": "^1.0.5",
+        "nanoid": "^3.2.0",
         "node-emoji": "^1.11.0",
         "reflect-metadata": "^0.1.13",
         "shelljs": "^0.8.5",

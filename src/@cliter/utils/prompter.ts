@@ -263,7 +263,7 @@ export class Prompter
 
         questions.push({
             name    : 'name',
-            message : 'What\'s the name of property (type in snake case)',
+            message : 'What\'s the name of property (type in camel case, example: dateAt)',
             type    : 'input',
             validate: (input: string, answers: any) =>
             {

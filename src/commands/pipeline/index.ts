@@ -32,9 +32,9 @@ export default class Pipeline extends Command
         const { from, to, service }: any = await Prompter.promptAddPipeline(flags.dashboard);
 
          // set stateService
-         const stateService          = container.resolve(StateService);
-         stateService.command        = this;
-         stateService.flags          = flags;
+         const stateService     = container.resolve(StateService);
+         stateService.command   = this;
+         stateService.flags     = flags;
 
         const operations = new Operations();
 
