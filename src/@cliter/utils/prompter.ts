@@ -25,7 +25,7 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         questions.push({
@@ -40,7 +40,7 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         const response = await inquirer.prompt(questions);
@@ -67,13 +67,13 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         const response = await inquirer.prompt(questions);
 
         return {
-            boundedContextName: response.boundedContextName.toKebabCase()
+            boundedContextName: response.boundedContextName.toKebabCase(),
         };
     }
 
@@ -93,7 +93,7 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         questions.push({
@@ -108,7 +108,7 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         questions.push({
@@ -141,7 +141,7 @@ export class Prompter
         questions.push({
             name   : 'hasValueObject',
             message: 'Do you want to define a property?',
-            type   : 'confirm'
+            type   : 'confirm',
         });
 
         return await inquirer.prompt(questions);
@@ -155,7 +155,7 @@ export class Prompter
             name   : 'fileToCompare',
             message: 'Select file to compare',
             type   : 'list',
-            choices: files
+            choices: files,
         });
 
         return await inquirer.prompt(questions);
@@ -169,7 +169,7 @@ export class Prompter
             name   : 'compareAction',
             message: 'Select an action',
             type   : 'list',
-            choices: Object.values(cliterConfig.compareActions)
+            choices: Object.values(cliterConfig.compareActions),
         });
 
         return await inquirer.prompt(questions);
@@ -182,7 +182,7 @@ export class Prompter
         questions.push({
             name   : 'hasCompareOriginFile',
             message: 'Do you want compare any origin file?',
-            type   : 'confirm'
+            type   : 'confirm',
         });
 
         return await inquirer.prompt(questions);
@@ -204,7 +204,7 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         questions.push({
@@ -219,7 +219,7 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         const response = await inquirer.prompt(questions);
@@ -246,13 +246,13 @@ export class Prompter
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         const response = await inquirer.prompt(questions);
 
         return {
-            boundedContextName: response.boundedContextName.toKebabCase()
+            boundedContextName: response.boundedContextName.toKebabCase(),
         };
     }
 
@@ -269,7 +269,7 @@ export class Prompter
             {
                 name = input;
                 return true;
-            }
+            },
         });
 
         // only if filed end with Id
@@ -287,7 +287,7 @@ export class Prompter
                     return true;
                 }
                 return false;
-            }
+            },
         });
 
         questions.push({
@@ -295,14 +295,14 @@ export class Prompter
             message: 'What\'s the type of property?',
             type   : 'list',
             choices: Object.values(SqlType),
-            when   : (answers: any) => !answers.type
+            when   : (answers: any) => !answers.type,
         });
 
         questions.push({
             name   : 'enumOptions',
             message: 'Set comma separated enumeration options, example: ONE,TWO,THREE,FOUR',
             type   : 'input',
-            when   : (answers: any) => answers.type === SqlType.ENUM
+            when   : (answers: any) => answers.type === SqlType.ENUM,
         });
 
         questions.push({
@@ -310,21 +310,21 @@ export class Prompter
             message: 'What kind of relationship do you want to create?',
             type   : 'list',
             choices: Object.values(SqlRelationship).filter(item => !['many-to-one'].includes(item)),
-            when   : (answers: any) => answers.type === SqlType.RELATIONSHIP
+            when   : (answers: any) => answers.type === SqlType.RELATIONSHIP,
         });
 
         questions.push({
             name   : 'relationshipSingularName',
             message: 'The property name will be plural, type its singular',
             type   : 'input',
-            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY,
         });
 
         questions.push({
             name   : 'relationshipAggregate',
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
-            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY,
         });
 
         questions.push({
@@ -344,7 +344,7 @@ export class Prompter
                 if (answers.relationship === SqlRelationship.MANY_TO_MANY) answers.nullable =  true;
 
                 return answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY;
-            }
+            },
         });
 
         questions.push({
@@ -354,7 +354,7 @@ export class Prompter
             when   : (answers: any) =>
             {
                 return answers.relationship === SqlRelationship.MANY_TO_MANY;
-            }
+            },
         });
 
         questions.push({
@@ -362,7 +362,7 @@ export class Prompter
             message: 'Set total digits and decimals comma separated, example: 10,2',
             type   : 'input',
             when   : (answers: any) => answers.type === SqlType.DECIMAL,
-            filter : (answers: string) => answers.split(',').map(item => parseInt(item.trim()))
+            filter : (answers: string) => answers.split(',').map(item => parseInt(item.trim())),
         });
 
         questions.push({
@@ -384,6 +384,7 @@ export class Prompter
                     answers.intermediateModelModuleSection  = `${boundedContextName}/${moduleName}`;
                     answers.intermediateModelFile           = `${moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
+
                 if (!answers.hasIntermediateTable && answers.relationship === SqlRelationship.MANY_TO_MANY)
                 {
                     const relationshipModulePath            = Operations.parseFlagOfBoundedContextAndModule(command, answers.relationshipModulePath);
@@ -394,7 +395,7 @@ export class Prompter
 
                 if (answers.relationship || answers.relationship) return false;
                 return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && !answers.length;
-            }
+            },
         });
 
         questions.push({
@@ -409,13 +410,14 @@ export class Prompter
                     answers.nullable = true;
                     return false;
                 }
+
                 if (answers.relationship === SqlRelationship.MANY_TO_MANY)
                 {
                     // answers.nullable = true;
                     return false;
                 }
                 return true;
-            }
+            },
         });
 
         const response = await inquirer.prompt(questions);
@@ -447,36 +449,43 @@ export class Prompter
             intermediateModel             : response.intermediateModel,
             intermediateModelModuleSection: response.intermediateModelModuleSection,
             intermediateModelFile         : response.intermediateModelFile,
-            index                         : response.index
+            index                         : response.index,
         });
     }
 
     static async promptAddPipeline(isFront: boolean): Promise<{ from: string; to: string; service: string;}>
     {
         const questions = [];
+        let platform = '';
 
         questions.push({
             name   : 'from',
             message: 'From which platform will you deploy?',
             type   : 'list',
-            choices: cliterConfig.platformFromDeploy
+            choices: cliterConfig.platformFromDeploy,
         });
 
         questions.push({
-            name   : 'to',
-            message: 'to which platform will it be deployed?',
-            type   : 'list',
-            choices: cliterConfig.platformToDeploy
+            name    : 'to',
+            message : 'to which platform will it be deployed?',
+            type    : 'list',
+            choices : cliterConfig.platformToDeploy,
+            validate: (input: string) =>
+            {
+                platform = input;
+                console.log('XX ' + platform);
+                return true;
+            },
         });
 
         questions.push({
             name   : 'service',
             message: 'on what service will you deploy?',
             type   : 'list',
-            choices: isFront ? cliterConfig.serviceToDeploy.front : cliterConfig.serviceToDeploy.back
+            choices: (answers: any) => isFront ? cliterConfig.serviceToDeploy.front[answers.to.toCamelCase()] : cliterConfig.serviceToDeploy.back[answers.to.toCamelCase()],
         });
 
-        return await inquirer.prompt(questions);
+        return inquirer.prompt(questions);
     }
 
     static printValueObjectsTable(command: Command, items: Properties)
@@ -526,8 +535,8 @@ export class Prompter
                 const alias =   aliases.find(alias => alias.alias === header);
 
                 // get value for each header
-                const value =   header === 'Decimals' && Array.isArray(item['decimals']) ?
-                    item['decimals'].join() :
+                const value =   header === 'Decimals' && Array.isArray(item.decimals) ?
+                    item.decimals.join() :
                     item[alias ?
                         alias.origin :
                         header
@@ -545,7 +554,7 @@ export class Prompter
 
         const table = new Table({
             head : headers,
-            chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗', 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝', 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼', 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+            chars: { top: '═', 'top-mid': '╤', 'top-left': '╔', 'top-right': '╗', bottom: '═', 'bottom-mid': '╧', 'bottom-left': '╚', 'bottom-right': '╝', left: '║', 'left-mid': '╟', mid: '─', 'mid-mid': '┼', right: '║', 'right-mid': '╢', middle: '│' },
         });
 
         table.push(...rows);
