@@ -7,13 +7,11 @@ handlebars.registerHelper('allowProperty', function(moduleName, property: Proper
     if (property.isI18n)
     {
         return property.name !== 'id'
-                && property.name !== _.camelCase(moduleName) + 'Id'
-                && property.name !== 'createdAt'
-                && property.name !== 'updatedAt'
-                && property.name !== 'deletedAt';
+            && property.name !== _.camelCase(moduleName) + 'Id'
+            && property.name !== 'createdAt'
+            && property.name !== 'updatedAt'
+            && property.name !== 'deletedAt';
     }
-    else
-    {
-        return true;
-    }
+
+    return true;
 });
