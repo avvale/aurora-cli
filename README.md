@@ -19,7 +19,7 @@ $ npm install -g aurora-ts-cli
 $ aurora COMMAND
 running command...
 $ aurora (--version)
-aurora-ts-cli/1.0.2 darwin-arm64 node-v16.13.0
+aurora-ts-cli/1.0.4 darwin-arm64 node-v16.14.0
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND
@@ -64,7 +64,7 @@ DESCRIPTION
   Delete elements
 ```
 
-_See code: [dist/commands/delete/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/delete/index.ts)_
+_See code: [dist/commands/delete/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/delete/index.ts)_
 
 ## `aurora generate ELEMENTTYPE`
 
@@ -93,7 +93,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/generate/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/generate/index.ts)_
+_See code: [dist/commands/generate/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/generate/index.ts)_
 
 ## `aurora hello PERSON`
 
@@ -117,7 +117,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/hello/index.ts)_
 
 ## `aurora hello world`
 
@@ -170,7 +170,7 @@ DESCRIPTION
   Generate private key and public key
 ```
 
-_See code: [dist/commands/keys/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/keys/index.ts)_
+_See code: [dist/commands/keys/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/keys/index.ts)_
 
 ## `aurora load ELEMENTTYPE`
 
@@ -197,7 +197,7 @@ DESCRIPTION
   Reload aurora [bounded-context, module] from yaml file, located in the cliter folder
 ```
 
-_See code: [dist/commands/load/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/load/index.ts)_
+_See code: [dist/commands/load/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/load/index.ts)_
 
 ## `aurora new NAME`
 
@@ -219,7 +219,7 @@ DESCRIPTION
   Create new aurora project
 ```
 
-_See code: [dist/commands/new/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/new/index.ts)_
+_See code: [dist/commands/new/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/new/index.ts)_
 
 ## `aurora pipeline`
 
@@ -243,7 +243,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/pipeline/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/pipeline/index.ts)_
+_See code: [dist/commands/pipeline/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/pipeline/index.ts)_
 
 ## `aurora plugins`
 
@@ -412,5 +412,5 @@ DESCRIPTION
   Seed database with bounded context or module selected
 ```
 
-_See code: [dist/commands/seed/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.2/dist/commands/seed/index.ts)_
+_See code: [dist/commands/seed/index.ts](https://github.com/techedge-group/aurora-cli/blob/v1.0.4/dist/commands/seed/index.ts)_
 <!-- commandsstop -->
