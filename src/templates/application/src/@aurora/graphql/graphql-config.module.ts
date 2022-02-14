@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import GraphQLJSON from 'graphql-type-json';
 import { AnyScalar, JsonScalar, UploadScalar } from 'aurora-ts-core';
@@ -7,7 +8,8 @@ import { Hello } from './hello.resolver';
 
 @Module({
     imports: [
-        GraphQLModule.forRoot({
+        GraphQLModule.forRoot<ApolloDriverConfig>({
+            driver    : ApolloDriver,
             context   : ({ req }) => ({ req }),
             debug     : true,
             playground: true,

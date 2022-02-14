@@ -22,25 +22,25 @@
     "graphql:types": "ts-node generate-typings"
   },
   "dependencies": {
+    "@nestjs/apollo": "^10.0.2",
     "@nestjs/common": "^8.0.0",
-    "@nestjs/config": "^1.1.5",
+    "@nestjs/config": "^1.2.0",
     "@nestjs/core": "^8.0.0",
-    "@nestjs/cqrs": "^8.0.1",
-    "@nestjs/graphql": "^9.1.2",
+    "@nestjs/cqrs": "^8.0.2",
+    "@nestjs/graphql": "^10.0.2",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.5",
-    "apollo-server-core": "^3.5.0",
-    "apollo-server-express": "^3.5.0",
+    "apollo-server-express": "^3.6.3",
     "aurora-ts-core": "^1.0.0",
     "cache-manager": "^3.6.0",
-    "graphql": "^15.8.0",
+    "graphql": "^16.3.0",
     "graphql-type-json": "^0.3.2",
     "graphql-upload": "^13.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.1.6",
-    "ts-morph": "^12.0.0"
+    "ts-morph": "^13.0.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
