@@ -17,6 +17,7 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
         case SqlType.INT:
         case SqlType['INT.UNSIGNED']:
         case SqlType.SMALLINT:
+        case SqlType.JSON:
         case SqlType['SMALLINT.UNSIGNED']:
             return `null`;
 
