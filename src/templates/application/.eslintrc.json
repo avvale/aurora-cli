@@ -74,6 +74,7 @@
                 "code": 180
             }
         ],
+        "no-await-in-loop": "error",
         "no-case-declarations": "off",
         "no-duplicate-case": "error",
         "no-irregular-whitespace": ["error", { "skipRegExps": true }],

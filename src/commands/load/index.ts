@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 
 // imports
-import { Command, Flags } from '@oclif/core'
+import { Command, Flags } from '@oclif/core';
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
@@ -91,6 +91,7 @@ export default class Load extends Command
 
             const yamlFiles = fs.readdirSync(path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase()));
 
+            const batchOperations = [];
             for (const yamlFile of yamlFiles.filter(files => files.endsWith('.yaml')))
             {
                 // create yaml file
@@ -104,8 +105,10 @@ export default class Load extends Command
                 stateService.flags     = flags;
 
                 // generate module files
-                await operations.generateModule();
+                batchOperations.push(operations.generateModule());
             }
+
+            await Promise.all(batchOperations);
 
             // generate graphql files
             await this.reviewOverwrites(operations, stateService);
@@ -232,7 +235,7 @@ export default class Load extends Command
                     isI18n                        : property?.isI18n,
                     example                       : property?.example,
                     faker                         : property?.faker,
-                })
+                }),
             );
         }
 
