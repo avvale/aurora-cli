@@ -74,7 +74,7 @@ export default class Load extends Command
             {
                 await operations.generateDashboardModule();
 
-                // TODO reorganizar los flows para evitar esta ñapa
+                // TODO reorganizar los flows para evitar esta ñapa, para evitar generar graphql types en el dashboard
                 stateService.flags.noGraphQLTypes = true;
             }
             else
@@ -159,6 +159,7 @@ export default class Load extends Command
                                 fileToCompare = _.head(stateService.originFiles.slice());   // get next file
                                 if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => { /**/ });
                                 break;
+
                             case stateService.config.compareActions.selectFile:
                                 console.log('selectFile ', fileToCompare);
                                 fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;

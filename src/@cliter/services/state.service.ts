@@ -38,13 +38,14 @@ export class StateService
     }
 
     // originFiles
-    set originFiles(originFiles: string[])
-    {
-        this._originFiles = originFiles;
-    }
     get originFiles(): string[]
     {
         this._originFiles = this._originFiles.filter(file => fs.existsSync(path.join(process.cwd(), file)));
         return this._originFiles;
+    }
+
+    set originFiles(originFiles: string[])
+    {
+        this._originFiles = originFiles;
     }
 }
