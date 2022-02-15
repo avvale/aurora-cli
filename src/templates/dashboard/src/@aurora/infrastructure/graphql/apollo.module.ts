@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ApolloService } from './apollo.service';
-import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloModule as OriginApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 
 @NgModule({
-    imports  : [],
+    imports: [
+        OriginApolloModule,
+    ],
     providers: [
         ApolloService,
         {
