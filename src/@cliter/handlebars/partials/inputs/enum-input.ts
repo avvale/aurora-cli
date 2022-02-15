@@ -8,5 +8,5 @@ handlebars.registerPartial('enumInput',
         <mat-option value="{{ . }}">{{ . }}</mat-option>
         {{/each}}
     </mat-select>
-    <mat-error>\\{{ formErrors?.{{ property.name }} | async }}</mat-error>
+    <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
 </mat-form-field>`);

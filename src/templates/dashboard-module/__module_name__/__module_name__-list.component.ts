@@ -44,8 +44,8 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         {{#if (allowProperty ../schema.moduleName this) }}
         {
             type : ColumnDataType.STRING,
-            field: '{{ name }}',
-            sort : '{{ name }}',
+            field: '{{ toCamelCase name }}',
+            sort : '{{ toCamelCase name }}',
         },
         {{/if}}
         {{/each}}

@@ -6,5 +6,5 @@ handlebars.registerPartial('timestampInput',
     <input matInput formControlName="{{ toCamelCase property.name }}" [matDatepicker]="picker">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-    <mat-error>\\{{ formErrors?.{{ property.name }} | async }}</mat-error>
+    <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
 </mat-form-field>`);
