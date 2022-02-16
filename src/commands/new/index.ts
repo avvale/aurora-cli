@@ -70,9 +70,9 @@ export default class New extends Command
         });
         */
 
-        this.log(`npm --prefix ${args.name} install`);
+        this.log(`npm --prefix ./${args.name} install`);
 
-        exec(`npm --prefix ${args.name} install`, (error, stdout, stderr) =>
+        exec(`npm --prefix ./${args.name} install`, (error, stdout, stderr) =>
         {
             if (error)
             {
