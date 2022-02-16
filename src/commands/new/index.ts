@@ -3,7 +3,8 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 
 // imports
-import { Command, Flags } from '@oclif/core'
+import { Command, Flags } from '@oclif/core';
+import { exec } from 'child_process';
 import * as shell from 'shelljs';
 import * as ora from 'ora';
 import { Operations, StateService } from '../../@cliter';
@@ -23,8 +24,8 @@ export default class New extends Command
         {
             name       : 'name',
             required   : true,
-            description: 'Type name of element to create, application, package or dashboard.'
-        }
+            description: 'Type name of element to create, application, package or dashboard.',
+        },
     ];
 
     async run()
@@ -56,6 +57,7 @@ export default class New extends Command
         }
 
         const dependenciesSpinner = ora('Installing dependencies').start();
+        /*
         shell.exec(`npm --prefix ${args.name} install`, { silent: true, async: true }, () =>
         {
             dependenciesSpinner.succeed('Dependencies installed');
@@ -65,6 +67,20 @@ export default class New extends Command
                 // generate application env file
                 operations.generateApplicationEnvFile(args.name);
             }
+        });
+        */
+
+        exec(`npm --prefix ${args.name} install`, (error, stdout, stderr) =>
+        {
+            if (error)
+            {
+                this.error(`exec error: ${error}`);
+                return;
+            }
+
+            // this.log(`stdout: ${stdout}`);
+            // this.error(`stderr: ${stderr}`);
+            dependenciesSpinner.succeed('Dependencies installed');
         });
     }
 }
