@@ -4,13 +4,13 @@ import { container } from 'tsyringe';
 
 // imports
 import { Command, Flags } from '@oclif/core';
+import * as shell from 'child_process';
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as yaml from 'js-yaml';
-import * as shell from 'shelljs';
 import * as _ from 'lodash';
 import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, Properties, Property, FileManager } from '../../@cliter';
 
@@ -39,7 +39,7 @@ export default class Load extends Command
                 'module', 'm'
             ],
             required   : true,
-        }
+        },
     ];
 
     async run(): Promise<void>
@@ -144,7 +144,8 @@ export default class Load extends Command
             {
                 // list all origin files
                 fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;
-                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => { /**/ });
+
+                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
 
                 while (actionResponse !== stateService.config.compareActions.finish)
                 {
@@ -157,13 +158,13 @@ export default class Load extends Command
                             case stateService.config.compareActions.deleteOrigin:
                                 fs.unlinkSync(fileToCompare as string);                     // delete origin file
                                 fileToCompare = _.head(stateService.originFiles.slice());   // get next file
-                                if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => { /**/ });
+                                if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
 
                             case stateService.config.compareActions.selectFile:
                                 console.log('selectFile ', fileToCompare);
                                 fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;
-                                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, { silent: true, async: true }, () => { /**/ });
+                                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
                         }
                     }

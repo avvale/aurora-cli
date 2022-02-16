@@ -1,12 +1,13 @@
-import { Command, Flags } from '@oclif/core'
+import { Command, Flags } from '@oclif/core';
+import * as shell from 'child_process';
 import * as fs from 'fs';
 import * as chalk from 'chalk';
 import * as path from 'path';
 import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
-import * as shell from 'shelljs';
 import * as ora from 'ora';
 import { TemplateElement, Operations, Prompter, cliterConfig } from '../../@cliter';
+
 
 export default class Seed extends Command
 {
@@ -48,7 +49,8 @@ export default class Seed extends Command
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 const environmentSpinner = ora('Creating environment').start();
-                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, { silent: !flags.log, async: true }, () =>
+
+                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, (error, stdout, stderr) =>
                 {
                     environmentSpinner.succeed('Environment created');
                     this.log(`%s %s Module seed ${moduleName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
@@ -70,7 +72,8 @@ export default class Seed extends Command
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 const environmentSpinner = ora('Creating environment').start();
-                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, { silent: !flags.log, async: true }, () =>
+
+                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, (error, stdout, stderr) =>
                 {
                     environmentSpinner.succeed('Environment created');
                     this.log(`%s %s Bounded Context seed ${boundedContextName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);

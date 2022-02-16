@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 
 // imports
 import { Command, Flags } from '@oclif/core';
-import { exec } from 'child_process';
+import * as shell from 'child_process';
 import * as ora from 'ora';
 import { Operations, StateService } from '../../@cliter';
 
@@ -58,7 +58,7 @@ export default class New extends Command
 
         const dependenciesSpinner = ora('Installing dependencies').start();
 
-        exec(`cd ${args.name} && npm install`, (error, stdout, stderr) =>
+        shell.exec(`cd ${args.name} && npm install`, (error, stdout, stderr) =>
         {
             if (error)
             {
