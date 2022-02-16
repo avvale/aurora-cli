@@ -5,7 +5,6 @@ import { container } from 'tsyringe';
 // imports
 import { Command, Flags } from '@oclif/core';
 import { exec } from 'child_process';
-import * as shell from 'shelljs';
 import * as ora from 'ora';
 import { Operations, StateService } from '../../@cliter';
 
@@ -15,9 +14,10 @@ export default class New extends Command
 
     static flags =
     {
+        dashboard: Flags.boolean({ char: 'd' }),
         help     : Flags.help({ char: 'h' }),
         package  : Flags.boolean({ char: 'p' }),
-        dashboard: Flags.boolean({ char: 'd' }),
+        verbose  : Flags.boolean({ char: 'v' }),
     };
 
     static args = [
@@ -57,22 +57,8 @@ export default class New extends Command
         }
 
         const dependenciesSpinner = ora('Installing dependencies').start();
-        /*
-        shell.exec(`npm --prefix ${args.name} install`, { silent: true, async: true }, () =>
-        {
-            dependenciesSpinner.succeed('Dependencies installed');
 
-            if (!flags.package && !flags.dashboard)
-            {
-                // generate application env file
-                operations.generateApplicationEnvFile(args.name);
-            }
-        });
-        */
-
-        this.log(`npm install ./${args.name}`);
-
-        exec(`npm install ./${args.name}`, (error, stdout, stderr) =>
+        exec(`cd ${args.name} && npm install`, (error, stdout, stderr) =>
         {
             if (error)
             {
@@ -80,9 +66,18 @@ export default class New extends Command
                 return;
             }
 
-            // this.log(`stdout: ${stdout}`);
-            // this.error(`stderr: ${stderr}`);
+            if (flags.verbose)
+            {
+                this.log(`${stdout}`);
+            }
+
             dependenciesSpinner.succeed('Dependencies installed');
+
+            if (!flags.package && !flags.dashboard)
+            {
+                // generate application env file
+                operations.generateApplicationEnvFile(args.name);
+            }
         });
     }
 }
