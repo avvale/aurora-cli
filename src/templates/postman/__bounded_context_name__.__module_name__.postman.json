@@ -361,7 +361,8 @@
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
-						"{{ toKebabCase schema.moduleName }}"
+						"{{ toKebabCase schema.moduleName }}",
+                        "create"
 					]
 				}
 			},
@@ -402,7 +403,8 @@
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
-						"{{ toKebabCase schema.moduleNames }}"
+						"{{ toKebabCase schema.moduleNames }}",
+                        "create"
 					]
 				}
 			},
@@ -492,7 +494,7 @@
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
 						"{{ toKebabCase schema.moduleNames }}",
-                        "find"
+                        "get"
 					]
 				}
 			},
@@ -544,7 +546,7 @@
 			"response": []
         },
         {
-			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}",
+			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{id}",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -575,13 +577,14 @@
 					}
 				},
 				"url": {
-					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{{ mocker (object type='uuid') }}}",
+					"raw": "\{{URL}}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{{ mocker (object type='uuid') }}}",
 					"host": [
 						"\{{URL}}"
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
 						"{{ toKebabCase schema.moduleName }}",
+                        "find",
 						"{{{ mocker (object type='uuid') }}}"
 					]
 				}
@@ -627,6 +630,7 @@
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
 						"{{ toKebabCase schema.moduleName }}",
+                        "find",
 						"{{{ mocker (object type='uuid') }}}"
 					]
 				}
@@ -669,7 +673,8 @@
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
-						"{{ toKebabCase schema.moduleName }}"
+						"{{ toKebabCase schema.moduleName }}",
+                        "update"
 					]
 				}
 			},
@@ -711,6 +716,7 @@
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
 						"{{ toKebabCase schema.moduleName }}",
+                        "delete",
 						"{{{ mocker (object type='uuid') }}}"
 					]
 				}
@@ -752,7 +758,8 @@
 					],
 					"path": [
 						"{{ toKebabCase schema.boundedContextName }}",
-						"{{ toKebabCase schema.moduleNames }}"
+						"{{ toKebabCase schema.moduleNames }}",
+                        "delete"
 					]
 				}
 			},
