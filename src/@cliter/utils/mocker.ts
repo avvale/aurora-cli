@@ -1,5 +1,6 @@
 import * as faker from 'faker';
 import * as dayjs from 'dayjs';
+import randomNumber from './random-number';
 
 export class Mocker
 {
@@ -61,21 +62,26 @@ export class Mocker
             case 'random.alphaNumeric':
                 return faker.random.alphaNumeric(maxLength);
 
+            case 'tinyint':
+            case 'tinyint.unsigned':
+                if (!maxLength) maxLength = 2;
+                return randomNumber(maxLength);
+
             case 'int':
             case 'int.unsigned':
                 if (!maxLength) maxLength = 10;
-                return Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1)));
+                return randomNumber(maxLength);
 
             case 'smallint':
             case 'smallint.unsigned':
                 if (!maxLength) maxLength = 5;
-                return Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1)));
+                return randomNumber(maxLength);
 
             case 'decimal':
-                return maxLength ? Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1))) : faker.datatype.float();
+                return maxLength ? randomNumber(maxLength) : faker.datatype.float();
 
             case 'random.float':
-                return maxLength ? Math.floor(+(1 + '0'.repeat(maxLength - 1)) + Math.random() * +(9 + '0'.repeat(maxLength - 1))) : faker.datatype.float();
+                return maxLength ? randomNumber(maxLength) : faker.datatype.float();
 
             case 'timestamp':
             case 'timestamp.recent':

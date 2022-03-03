@@ -1,4 +1,5 @@
 .env
+*.key
 
 # compiled output
 /dist

@@ -93,7 +93,7 @@ export class TemplateGenerator
     static generateValueObject(
         relativeTargetBasePath: string,
         relativeTargetPath: string,
-        property: Property
+        property: Property,
     ): void
     {
         // read value object from our data type

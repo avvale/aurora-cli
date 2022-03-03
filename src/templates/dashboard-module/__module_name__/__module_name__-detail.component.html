@@ -62,6 +62,10 @@
                     {{> charInput schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq type 'tinyint.unsigned'}}
+                    {{> intInput schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq type 'smallint.unsigned'}}
                     {{> intInput schema=../schema property=.}}
 

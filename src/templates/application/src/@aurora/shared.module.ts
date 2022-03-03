@@ -8,21 +8,21 @@ import { AddI18NConstraintService, CoreModule, ICommandBus, ICriteria, IQueryBus
         CoreModule,
         CacheModule.register(),
         ConfigModule.forRoot({ isGlobal: true }),
-        CqrsModule
+        CqrsModule,
     ],
     providers: [
         AddI18NConstraintService,
         {
             provide : ICommandBus,
-            useClass: NestCommandBus
+            useClass: NestCommandBus,
         },
         {
             provide : IQueryBus,
-            useClass: NestQueryBus
+            useClass: NestQueryBus,
         },
         {
             provide : ICriteria,
-            useClass: SequelizeCriteria
+            useClass: SequelizeCriteria,
         }
     ],
     exports: [
@@ -32,15 +32,15 @@ import { AddI18NConstraintService, CoreModule, ICommandBus, ICriteria, IQueryBus
         CqrsModule,
         {
             provide : ICommandBus,
-            useClass: NestCommandBus
+            useClass: NestCommandBus,
         },
         {
             provide : IQueryBus,
-            useClass: NestQueryBus
+            useClass: NestQueryBus,
         },
         {
             provide : ICriteria,
-            useClass: SequelizeCriteria
+            useClass: SequelizeCriteria,
         }
     ]
 })

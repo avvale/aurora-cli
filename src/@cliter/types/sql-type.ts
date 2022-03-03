@@ -16,5 +16,7 @@ export enum SqlType
     'SMALLINT'          = 'smallint',
     'TEXT'              = 'text',
     'TIMESTAMP'         = 'timestamp',
+    'TINYINT.UNSIGNED'  = 'tinyint.unsigned',
+    'TINYINT'           = 'tinyint',
     'VARCHAR'           = 'varchar',
 }
