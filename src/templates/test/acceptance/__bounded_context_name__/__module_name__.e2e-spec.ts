@@ -125,10 +125,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{#each schema.properties.isNotNullable  as |notNullPropety notNullPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} property can not to be null', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -147,10 +147,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.isNotNullable  as |notNullPropety notNullPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} property can not to be undefined', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -171,10 +171,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.hasLength  as |hasLengthPropety hasLengthPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is not allowed, must be a length of {{ hasLengthPropety.length }}', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is not allowed, must be a length of {{ hasLengthPropety.length }}', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -193,10 +193,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.hasMaxLength  as |hasMaxLengthPropety hasMaxLengthPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -215,10 +215,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     {{/each}}
     {{#each schema.properties.hasMinLength  as |hasMaxLengthPropety hasMinLengthPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -236,10 +236,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isInteger  as |isIntegerPropety isIntegerPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a integer value', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a integer value', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -257,10 +257,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isIntegerUnsigned  as |isIntegerUnsignedPropety isIntegerUnsignedPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} must have a positive sign', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} must have a positive sign', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -278,10 +278,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isBoolean  as |isBooleanPropety isBooleanPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a boolean value', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -299,10 +299,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isEnum  as |isEnumPropety isEnumPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a enum option of {{ join enumOptions }}', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a enum option of {{ join enumOptions }}', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -320,10 +320,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each schema.properties.isTimestamp  as |isTimestampPropety isTimestampPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }} - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a timestamp value', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a timestamp value', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}')
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if ../schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -341,10 +341,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
 
-    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 409 Conflict, item already exist in database', () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/create - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -379,10 +379,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/find', () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/get', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/find')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/get')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -416,10 +416,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}', () =>
+    test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/create', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/create')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -460,10 +460,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id} - Got 404 Not Found', () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ uuid }}')
+            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{ uuid }}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -471,10 +471,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}', () =>
+    test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{{ mocker (object type='uuid') }}}')
+            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{{ mocker (object type='uuid') }}}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -486,10 +486,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }} - Got 404 Not Found', () =>
+    test('/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
+            .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -502,10 +502,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test('/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}', () =>
+    test('/REST:PUT {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update', () =>
     {
         return request(app.getHttpServer())
-            .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}')
+            .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -522,10 +522,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id} - Got 404 Not Found', () =>
+    test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{ uuid }}')
+            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{ uuid }}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -533,10 +533,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(404);
     });
 
-    test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{id}', () =>
+    test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/{{{ mocker (object type='uuid') }}}')
+            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{{ mocker (object type='uuid') }}}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)

@@ -22,7 +22,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 import { Get{{ toPascalCase schema.moduleNames }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
-@Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/find')
+@Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/get')
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
@@ -38,7 +38,7 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
 
     @Post()
     @HttpCode(200)
-    @ApiOperation({ summary: 'Find {{ toKebabCase schema.moduleNames }} according to query' })
+    @ApiOperation({ summary: 'Get {{ toKebabCase schema.moduleNames }} according to query' })
     @ApiOkResponse({ description: 'The records has been found successfully.', type: [{{ toPascalCase schema.moduleName }}Dto] })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
