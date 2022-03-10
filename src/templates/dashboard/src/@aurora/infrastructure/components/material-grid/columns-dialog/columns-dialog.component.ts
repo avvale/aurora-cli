@@ -32,12 +32,13 @@ import { Subject } from 'rxjs';
                         [cdkDragDisabled]="columnConfig.sticky"
                     >
                         <mat-icon class="mr-32">
-                            {{ columnConfig.sticky ? 'block' : 'reorder' }}
+                            \{{ columnConfig.sticky ? 'block' : 'reorder' }}
                         </mat-icon>
 
                         <mat-checkbox
                             class="mr-32"
                             [(ngModel)]="!columnConfig.hidden"
+                            [disabled]="columnConfig.sticky"
                             (change)="handleChangeActiveColumn($event, columnConfig)"
                         >
                         </mat-checkbox>
