@@ -5,6 +5,7 @@
     ],
     "rules": {
         "brace-style": ["error", "allman", { "allowSingleLine": true }],
+        "camelcase": "error",
         "comma-dangle": ["error", {
             "arrays": "always-multiline",
             "objects": "always-multiline",

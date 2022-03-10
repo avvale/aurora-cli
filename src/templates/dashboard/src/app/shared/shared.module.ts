@@ -25,6 +25,4 @@ import { BreadcrumbModule, MaterialGridModule, TitleModule } from '@aurora';
         TitleModule,
     ],
 })
-export class SharedModule
-{
-}
+export class SharedModule {}
