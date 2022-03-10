@@ -25,3 +25,16 @@
         display: block !important;
     }
 }
+
+.grid-header {
+    @apply flex flex-row justify-end w-full bg-white rounded-tl-md rounded-tr-md py-4 px-2 border-b-2 border-gray-200;
+}
+
+.grid-header__button {
+    @apply
+    flex flex-row items-center ml-3 px-3 py-2 shadow-none rounded-md border border-gray-200 bg-gray-600 bg-opacity-5
+    hover:shadow-sm hover:bg-opacity-10
+    active:shadow-none
+    transition-all
+    ;
+}

@@ -1,7 +1,7 @@
 
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, PageChangeEvent, ViewBaseComponent } from '@aurora';
-import { Observable } from 'rxjs';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, ViewBaseComponent } from '@aurora';
+import { combineLatest, map, Observable } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
@@ -18,6 +18,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         { translation: '{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleNames }}' },
     ];
     gridData$: Observable<GridData<{{ schema.aggregateName }}>>;
+    gridTranslations$: Observable<any>;
     columnsConfig: ColumnConfig[] = [
         {
             type       : ColumnDataType.ACTIONS,
@@ -28,14 +29,14 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             {
                 return [
                     {
-                        id   : 'edit',
-                        icon : 'mode_edit',
-                        title: 'Edit',
+                        id         : 'edit',
+                        icon       : 'mode_edit',
+                        translation: 'Edit',
                     },
                     {
-                        id   : 'delete',
-                        icon : 'delete',
-                        title: 'Delete',
+                        id         : 'delete',
+                        icon       : 'delete',
+                        translation: 'Delete',
                     },
                 ];
             },
@@ -62,6 +63,19 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     ngOnInit(): void
     {
         this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
+        this.gridTranslations$ = combineLatest(
+            {
+                a: this.translocoService.selectTranslation(),
+                b: this.translocoService.selectTranslation('{{ toKebabCase schema.boundedContextName }}'),
+            })
+            .pipe(
+                map(res => ({ ...res.a, ...res.b })),
+            );
+    }
+
+    handleColumnsConfigChanged($event): void
+    {
+        //
     }
 
     onRunAction(action: Action): void

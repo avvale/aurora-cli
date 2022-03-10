@@ -35,8 +35,11 @@
         <au-material-grid
             [columnsConfig]="columnsConfig"
             [data]="gridData$ | async"
+            [translations]="gridTranslations$ | async"
             (action)="onRunAction({ id: $event.action.id, data: { event: $event }})"
-            (pageChange)="onRunAction({ id: 'pagination', data: { event: $event }})">
+            (pageChange)="onRunAction({ id: 'pagination', data: { event: $event }})"
+            (columnsConfigChanged)="handleColumnsConfigChanged($event)"
+        >
         </au-material-grid>
         <!-- / Grid -->
 

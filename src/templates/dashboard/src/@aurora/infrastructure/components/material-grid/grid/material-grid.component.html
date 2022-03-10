@@ -1,14 +1,22 @@
-<div class="flex flex-col flex-1 overflow-hidden" *transloco="let t">
+<div class="flex flex-col flex-1 overflow-hidden">
+    <div class="grid-header">
+        <button
+            mat-icon-button
+            (click)="handleColumnsDialog()"
+            class="mr-2"
+        >
+            <mat-icon class="icon-size-6">more_vert</mat-icon>
+        </button>
+    </div>
     <div class="rounded-t-md overflow-auto">
         <table mat-table [dataSource]="data?.rows" matSort class="w-full flex-1">
-
             <ng-container *ngFor="let columnConfig of columnsConfig">
 
                 <ng-container   [matColumnDef]="columnConfig.field"
                                 [sticky]="columnConfig.sticky">
 
                     <!-- ngSwitch for grid cell -->
-                    <ng-container [ngSwitch]="columnConfig.type">
+                    <ng-container [ngSwitch]="columnConfig.type" *ngIf="!columnConfig.hidden">
 
                         <!-- STRING -->
                         <ng-container *ngSwitchCase="columnConfigType.STRING">
@@ -17,7 +25,11 @@
                                 [disabled]="!columnConfig.sort"
                                 [ngClass]="columnConfig.headerClass"
                                 [mat-sort-header]="columnConfig.sort">
-                                \{{ t(columnConfig.field) }}
+                                \{{
+                                    columnConfig.translation ?
+                                    translations[columnConfig.translation.toPascalCase()] :
+                                    translations[columnConfig.field.toPascalCase()]
+                                }}
                             </th>
                             <td mat-cell *matCellDef="let element">
                                 \{{ element | get:columnConfig.field }}
@@ -31,7 +43,11 @@
                                 [disabled]="!columnConfig.sort"
                                 [ngClass]="columnConfig.headerClass"
                                 [mat-sort-header]="columnConfig.sort">
-                                \{{ t(columnConfig.field) }}
+                                \{{
+                                    columnConfig.translation ?
+                                    translations[columnConfig.translation.toPascalCase()] :
+                                    translations[columnConfig.field.toPascalCase()]
+                                }}
                             </th>
                             <td mat-cell *matCellDef="let element">
                                 <au-translations-menu   [langs]="langs"
@@ -48,7 +64,11 @@
                                 [disabled]="!columnConfig.sort"
                                 [ngClass]="columnConfig.headerClass"
                                 [mat-sort-header]="columnConfig.sort">
-                                \{{ t(columnConfig.field) }}
+                                \{{
+                                    columnConfig.translation ?
+                                    translations[columnConfig.translation.toPascalCase()] :
+                                    translations[columnConfig.field.toPascalCase()]
+                                }}
                             </th>
                             <td mat-cell *matCellDef="let element">
                                 <button mat-icon-button [matMenuTriggerFor]="menu" class="ml-7">
@@ -56,9 +76,9 @@
                                 </button>
                                 <mat-menu #menu="matMenu">
                                     <ng-container *ngFor="let action of columnConfig.actions | getActions:element">
-                                        <button mat-menu-item (click)="onClickAction(action, element, $event)">
-                                            <mat-icon>\{{ action.icon }}</mat-icon>
-                                            <span>\{{ t(action.title) }}</span>
+                                        <button mat-menu-item (click)="handleClickAction(action, element, $event)">
+                                            <mat-icon>{{ action.icon }}</mat-icon>
+                                            <span>\{{ translations[action.translation] }}</span>
                                         </button>
                                     </ng-container>
                                 </mat-menu>
@@ -71,6 +91,7 @@
                 </ng-container>
 
             </ng-container>
+
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

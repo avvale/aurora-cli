@@ -13,6 +13,11 @@ export interface Action
     };
 }
 
+export interface ColumnsDialogTranslations
+{
+    Columns: string;
+}
+
 export interface GridData<T = any>
 {
     /**
@@ -31,10 +36,17 @@ export interface GridData<T = any>
     rows: T[];
 }
 
+export interface GridTranslations
+{
+    Columns?: string;
+    [key: string]: string;
+}
+
 export interface ColumnConfig
 {
     type: ColumnDataType;
     field?: string;
+    translation?: string;
     hidden?: boolean;
     sort?: string | string[];
     headerClass?: string | string[];
@@ -46,7 +58,7 @@ export interface ColumnConfigAction
 {
     id: string;
     icon: string;
-    title: string;
+    translation: string;
 }
 
 export enum ColumnDataType
