@@ -34,7 +34,7 @@
     "apollo-angular": "^3.0.0",
     "crypto-js": "3.3.0",
     "dayjs": "^1.10.8",
-    "graphql": "^15.8.0",
+    "graphql": "^16.3.0",
     "highlight.js": "11.4.0",
     "lodash-es": "4.17.21",
     "moment": "2.29.1",
