@@ -54,6 +54,8 @@ export default class Seed extends Command
                 {
                     environmentSpinner.succeed('Environment created');
                     this.log(`%s %s Module seed ${moduleName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
+
+                    if (flags.log && error) console.error(error);
                 });
             }
             else
