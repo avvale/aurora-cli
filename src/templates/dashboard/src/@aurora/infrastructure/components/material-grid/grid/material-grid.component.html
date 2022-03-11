@@ -77,7 +77,7 @@
                                 <mat-menu #menu="matMenu">
                                     <ng-container *ngFor="let action of columnConfig.actions | getActions:element">
                                         <button mat-menu-item (click)="handleClickAction(action, element, $event)">
-                                            <mat-icon>{{ action.icon }}</mat-icon>
+                                            <mat-icon>\{{ action.icon }}</mat-icon>
                                             <span>\{{ translations[action.translation] }}</span>
                                         </button>
                                     </ng-container>
