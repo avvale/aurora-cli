@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from 
 import { Validators } from '@angular/forms';
 import { Action, Crumb, log, mapActions, Utils } from '@aurora';
 import { ViewDetailComponent } from '@aurora/infrastructure/super/view-detail.component';
-import { first, Observable, takeUntil } from 'rxjs';
+import { first, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
@@ -16,7 +16,6 @@ import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase sc
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent
 {
     // custom data
-    {{ toCamelCase schema.moduleName }}$: Observable<{{ schema.aggregateName }}>;
     currentActionId: string;
 
     // breadcrumb component definition

@@ -217,7 +217,7 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}`,
-            properties.withoutTimestamps.map(property => ({ name: property.name.toCamelCase(), type: property.getJavascriptType }))
+            properties.withoutTimestamps.map(property => ({ name: property.name.toCamelCase(), type: property.getJavascriptType })),
         );
 
         sourceFile?.saveSync();
