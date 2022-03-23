@@ -12,6 +12,7 @@ export class {{ toPascalCase schema.moduleName }}Service
 {
     private _pagination: BehaviorSubject<GridData<{{ schema.aggregateName }}> | null> = new BehaviorSubject(null);
     private _{{ toCamelCase schema.moduleName }}: BehaviorSubject<{{ schema.aggregateName }} | null> = new BehaviorSubject(null);
+    private _{{ toCamelCase schema.moduleNames }}: BehaviorSubject<{{ schema.aggregateName }}[] | null> = new BehaviorSubject(null);
 
     constructor(
         private graphqlService: GraphQLService,
@@ -28,6 +29,11 @@ export class {{ toPascalCase schema.moduleName }}Service
     get {{ toCamelCase schema.moduleName }}$(): Observable<{{ schema.aggregateName }}>
     {
         return this._{{ toCamelCase schema.moduleName }}.asObservable();
+    }
+
+    get {{ toCamelCase schema.moduleNames }}$(): Observable<{{ schema.aggregateName }}[]>
+    {
+        return this._{{ toCamelCase schema.moduleNames }}.asObservable();
     }
 
     pagination(
@@ -96,6 +102,33 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 
+    get(
+        {
+            query = {},
+            constraint = {},
+        }: {
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{{ schema.aggregateName }}[]>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{ objects: {{ schema.aggregateName }}[]; }>({
+                query    : graphQL.queryObjects,
+                variables: {
+                    query,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map<{ data: { objects: {{ schema.aggregateName }}[]; };}, {{ schema.aggregateName }}[]>(result => result.data.objects),
+                tap((objects: {{ schema.aggregateName }}[]) => this._{{ toCamelCase schema.moduleNames }}.next(objects)),
+            );
+    }
+
     create<T>(
         {
             object = null,
@@ -122,9 +155,6 @@ export class {{ toPascalCase schema.moduleName }}Service
         } = {},
     ): Observable<FetchResult<T>>
     {
-        /* this.graphqlService
-            .client().client.readQuery */
-
         return this.graphqlService
             .client()
             .mutate({
