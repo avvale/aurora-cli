@@ -36,7 +36,7 @@ export default class Load extends Command
             description: 'Type element to create',
             options    : [
                 'bounded-context', 'b',
-                'module', 'm'
+                'module', 'm',
             ],
             required   : true,
         },
@@ -169,7 +169,7 @@ export default class Load extends Command
                             case stateService.config.compareActions.ignore:
                                 if (!fileToManage) break;
                                     const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
-                                    fs.writeFileSync(fileToManage.replace('.origin', ''), '// ignored file\r\n' + customFile, 'utf8');
+                                    fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : '// ignored file\r\n') + customFile, 'utf8');
                                     fs.unlinkSync(fileToManage as string); // delete origin file and reference in array, view state.service.ts file
                                     fileToManage = _.head(stateService.originFiles.slice());   // get next file
                                     if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
