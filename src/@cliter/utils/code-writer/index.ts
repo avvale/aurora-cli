@@ -392,15 +392,26 @@ export class CodeWriter
         }
 
         // set routes
-        childrenArrayMenu?.addElement(
+        ArrayDriver.addArrayItem(
+            sourceFile,
             `{
     id   : '${this.moduleNames.toCamelCase()}',
     title: '${this.moduleName.toPascalCase()}',
     type : 'basic',
     icon : 'heroicons_outline:tag',
     link : '/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}',
-},`
-            , { useNewLines: true });
+},`,
+            childrenArrayMenu,
+            (item: string, array: ArrayLiteralExpression | undefined) =>
+            {
+                const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
+                {
+                    return `'${this.moduleNames.toCamelCase()}'` === (item.getPropertyOrThrow('id') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                });
+
+                return !!foundItem;
+            },
+        );
 
         sourceFile?.saveSync();
     }
