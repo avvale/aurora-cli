@@ -9,8 +9,8 @@ import { Cypher } from './cypher';
 import { Property } from './property';
 import { TemplateEngine } from './template-engine';
 import * as chalk from 'chalk';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import * as _ from 'lodash';
 
 export class FileManager
@@ -36,7 +36,7 @@ export class FileManager
             const stats = fs.statSync(originFilePath);
 
             // skip files that should not be explorer
-            if (FileManager.stateService.config.skipDirectories.indexOf(file) > -1) return;
+            if (FileManager.stateService.config.skipDirectories.includes(file)) return;
 
             if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql')))
             {
@@ -63,7 +63,7 @@ export class FileManager
             boundedContextSuffix = '',
             moduleNamePrefix = '',
             moduleNameSuffix = '',
-            currentProperty = undefined,
+            currentProperty,
         }: {
             boundedContextPrefix?: string;
             boundedContextSuffix?: string;
@@ -93,7 +93,7 @@ export class FileManager
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         {
-            currentProperty = undefined
+            currentProperty,
         }: {
             currentProperty?: Property;
         } = {},
@@ -135,7 +135,7 @@ export class FileManager
                     originFilePath,
                     file,
                     path.join(relativeTargetBasePath, relativeTargetPath),
-                    { currentProperty }
+                    { currentProperty },
                 );
             }
             else if (stats.isDirectory())
@@ -158,7 +158,7 @@ export class FileManager
                     path.join(originPath, file),
                     relativeTargetBasePath,
                     path.join(relativeTargetPath, mappedDirectory),
-                    { currentProperty }
+                    { currentProperty },
                 );
             }
         });
@@ -166,10 +166,11 @@ export class FileManager
 
     /**
      * Create and render file template
-     * @param originFilePath
-     * @param file
-     * @param relativeTargetPath
-     * @param targetBasePath
+     * @param originFilePath absolute path to template file
+     * @param file file name of template without get target name
+     * @param relativeTargetPath relative path to folder where save file
+     * @param targetBasePath absolute path to project
+     * @returns void
      */
     static async manageFileTemplate(
         originFilePath: string,
@@ -181,7 +182,7 @@ export class FileManager
             boundedContextSuffix = '',
             moduleNamePrefix = '',
             moduleNameSuffix = '',
-            currentProperty = undefined
+            currentProperty,
         }: {
             targetBasePath?: string;
             boundedContextPrefix?: string;
@@ -192,7 +193,7 @@ export class FileManager
         } = {},
     ): Promise<void>
     {
-        // render name of file
+        // render filename according to bounded context name and module name
         const mappedFile = FileManager.renderFilename(
             file,
             {
@@ -200,14 +201,14 @@ export class FileManager
                 boundedContextSuffix,
                 moduleNamePrefix,
                 moduleNameSuffix,
-                currentProperty
-            }
+                currentProperty,
+            },
         );
 
-        // relative path to project for create/read file lock.json
+        // relative path with file to create, example: src/@apps/common/lang/application/create/create-lang.command.ts
         const relativeFilePath = path.join(relativeTargetPath, mappedFile);
 
-        // write file to destination folder
+        // absolute path with file to create, example /Projects/aurora/src/@apps/common/lang/application/create/create-lang.command.ts
         const writePath = path.join(targetBasePath, relativeFilePath);
 
         // check if file exists
@@ -225,10 +226,11 @@ export class FileManager
                 fs.copyFileSync(originFilePath, writePath, fs.constants.COPYFILE_FICLONE);
                 FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE COPIED]'));
             }
+
             return;
         }
 
-        // read file content
+        // read file content from file template
         let contents = fs.readFileSync(originFilePath, 'utf8');
 
         // replace variables with handlebars template engine
@@ -241,9 +243,10 @@ export class FileManager
             moduleNameSuffix,
         });
 
+        // if exist file is has not force flag, avoid overwrite file
         if (existFile && !FileManager.stateService.flags.force)
         {
-            FileManager.stateService.command.log(`%s ${mappedFile} exist`,  chalk.yellow.bold('[INFO]'));
+            FileManager.stateService.command.log(`%s ${mappedFile} exist`, chalk.yellow.bold('[INFO]'));
         }
         else
         {
@@ -268,7 +271,7 @@ export class FileManager
                 }
                 else if (!currentLockfile || currentLockfile.integrity === `sha1:${currentFileHash}`)
                 {
-                    // the file has not been modified
+                    // the file has been modified
                     fs.writeFileSync(writePath, contents, 'utf8');
 
                     if (FileManager.stateService.flags.verbose) FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.magenta.bold('[FILE OVERWRITE]'));
@@ -298,7 +301,7 @@ export class FileManager
                 // add file to lockFiles
                 FileManager.stateService.newLockFiles.push({
                     path     : relativeFilePath,
-                    integrity: `sha1:${Cypher.sha1(contents)}`
+                    integrity: `sha1:${Cypher.sha1(contents)}`,
                 });
             }
         }

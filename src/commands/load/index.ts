@@ -137,34 +137,42 @@ export default class Load extends Command
             }
 
             let deleteOriginFiles = true;
-            let fileToCompare: string | undefined = '';
+            let fileToManage: string | undefined = '';
             let actionResponse = '';
 
-            if ((await Prompter.promptForCompareOriginFile()).hasCompareOriginFile)
+            // request if you want compare files
+            if ((await Prompter.promptManageOriginFiles()).hasCompareOriginFile)
             {
-                // list all origin files
-                fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;
-
-                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+                // list all origin files, and select file to manage
+                fileToManage = (await Prompter.promptSelectOriginFileToManage(stateService.originFiles)).fileToManage as string;
+                shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
 
                 while (actionResponse !== stateService.config.compareActions.finish)
                 {
                     if (stateService.originFiles.length > 0)
                     {
-                        actionResponse = (await Prompter.promptSelectCompareAction()).compareAction as string;
+                        actionResponse = (await Prompter.promptSelectManagementAction()).compareAction as string;
 
-                        switch(actionResponse)
+                        switch (actionResponse)
                         {
                             case stateService.config.compareActions.deleteOrigin:
-                                fs.unlinkSync(fileToCompare as string);                     // delete origin file
-                                fileToCompare = _.head(stateService.originFiles.slice());   // get next file
-                                if (fileToCompare) shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+                                fs.unlinkSync(fileToManage as string);                     // delete origin file and reference in array, view state.service.ts file
+                                fileToManage = _.head(stateService.originFiles.slice());   // get next file
+                                if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
 
-                            case stateService.config.compareActions.selectFile:
-                                console.log('selectFile ', fileToCompare);
-                                fileToCompare = (await Prompter.promptSelectOriginToCompare(stateService.originFiles)).fileToCompare as string;
-                                shell.exec(`code --diff ${fileToCompare} ${fileToCompare.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+                            case stateService.config.compareActions.return:
+                                fileToManage = (await Prompter.promptSelectOriginFileToManage(stateService.originFiles)).fileToManage as string;
+                                shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+                                break;
+
+                            case stateService.config.compareActions.ignore:
+                                if (!fileToManage) break;
+                                    const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
+                                    fs.writeFileSync(fileToManage.replace('.origin', ''), '// ignored file\r\n' + customFile, 'utf8');
+                                    fs.unlinkSync(fileToManage as string); // delete origin file and reference in array, view state.service.ts file
+                                    fileToManage = _.head(stateService.originFiles.slice());   // get next file
+                                    if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
                         }
                     }

@@ -107,6 +107,7 @@ export class Prompter
                     answers.moduleName = moduleName;
                     return false;
                 }
+
                 return true;
             },
         });
@@ -144,24 +145,24 @@ export class Prompter
             type   : 'confirm',
         });
 
-        return await inquirer.prompt(questions);
+        return inquirer.prompt(questions);
     }
 
-    static async promptSelectOriginToCompare(files: string[])
+    static async promptSelectOriginFileToManage(files: string[])
     {
         const questions = [];
 
         questions.push({
-            name   : 'fileToCompare',
-            message: 'Select file to compare',
+            name   : 'fileToManage',
+            message: 'Select file to manage',
             type   : 'list',
             choices: files,
         });
 
-        return await inquirer.prompt(questions);
+        return inquirer.prompt(questions);
     }
 
-    static async promptSelectCompareAction()
+    static async promptSelectManagementAction()
     {
         const questions = [];
 
@@ -172,20 +173,20 @@ export class Prompter
             choices: Object.values(cliterConfig.compareActions),
         });
 
-        return await inquirer.prompt(questions);
+        return inquirer.prompt(questions);
     }
 
-    static async promptForCompareOriginFile()
+    static async promptManageOriginFiles()
     {
         const questions = [];
 
         questions.push({
             name   : 'hasCompareOriginFile',
-            message: 'Do you want compare any origin file?',
+            message: 'Do you want to manage origin files?',
             type   : 'confirm',
         });
 
-        return await inquirer.prompt(questions);
+        return inquirer.prompt(questions);
     }
 
     static async promptForSeedModule(boundedContextName?: string, moduleName?: string)
@@ -203,6 +204,7 @@ export class Prompter
                     answers.boundedContextName = boundedContextName;
                     return false;
                 }
+
                 return true;
             },
         });
@@ -218,6 +220,7 @@ export class Prompter
                     answers.moduleName = moduleName;
                     return false;
                 }
+
                 return true;
             },
         });
@@ -473,7 +476,6 @@ export class Prompter
             validate: (input: string) =>
             {
                 platform = input;
-                console.log('XX ' + platform);
                 return true;
             },
         });

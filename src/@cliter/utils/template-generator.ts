@@ -22,10 +22,10 @@ export class TemplateGenerator
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         {
-            templateElementPath = undefined
+            templateElementPath,
         }: {
             templateElementPath?: string;
-        } = {}
+        } = {},
     ): void
     {
         FileManager.generateContents(
@@ -37,7 +37,7 @@ export class TemplateGenerator
 
     static generateIntermediateTables(
         relativeTargetBasePath: string,
-        relativeTargetPath: string
+        relativeTargetPath: string,
     ): void
     {
         for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipIntermediateTable)
@@ -46,14 +46,14 @@ export class TemplateGenerator
                 path.join(TemplateGenerator.templatePath, 'intermediate-table'),
                 relativeTargetBasePath,
                 relativeTargetPath,
-                { currentProperty: property }
+                { currentProperty: property },
             );
         }
     }
 
     static createDirectory(
         relativeTargetBasePath: string,
-        directory: string
+        directory: string,
     ): void
     {
         const modulePath = path.join(TemplateGenerator.projectDirectory, relativeTargetBasePath, directory);
@@ -68,7 +68,7 @@ export class TemplateGenerator
      */
     static generateValueObjects(
         relativeTargetBasePath: string,
-        relativeTargetPath: string
+        relativeTargetPath: string,
     ): void
     {
         // generate ValueObjects
@@ -77,7 +77,7 @@ export class TemplateGenerator
             TemplateGenerator.generateValueObject(
                 relativeTargetBasePath,
                 relativeTargetPath,
-                property
+                property,
             );
         }
     }
@@ -109,7 +109,7 @@ export class TemplateGenerator
             path.join(relativeTargetBasePath, relativeTargetPath, TemplateGenerator.stateService.schema.moduleName, 'domain', 'value-objects'),
             {
                 moduleNameSuffix: property.isI18n ? 'i18n' : '',
-                currentProperty : property
+                currentProperty : property,
             },
         );
     }

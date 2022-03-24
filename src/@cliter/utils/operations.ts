@@ -59,6 +59,8 @@ export class Operations
 
         // create references, write imports in ts files
         this.createDashboardReferences();
+
+        this.createJsonLockFile();
     }
 
     async generateDashboardModuleTranslations(): Promise<void>
@@ -66,14 +68,14 @@ export class Operations
         // create directory application container, normally src/assets/i18n/module_name
         await TemplateGenerator.createDirectory(
             path.join('src', cliterConfig.dashboardTranslations),
-            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
 
         // create module translations
         await TemplateGenerator.generateStaticContents(
             TemplateElement.DASHBOARD_MODULE_TRANSLATIONS,
             path.join('src', cliterConfig.dashboardTranslations),
-            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
     }
 
@@ -82,7 +84,7 @@ export class Operations
         // create directory application container, normally src/app/modules/admin/apps
         await TemplateGenerator.createDirectory(
             path.join('src', cliterConfig.dashboardContainer),
-            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
 
         // create module files
@@ -329,8 +331,8 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             },
             {
                 lineWidth  : -1,
-                skipInvalid: true
-            }
+                skipInvalid: true,
+            },
         );
 
         const yamlPath = path.join(process.cwd(), 'cliter', Operations.stateService.schema.boundedContextName.toKebabCase());
@@ -348,10 +350,10 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
 
         const jsonLockFile = {
             version: cliterConfig.lockJsonVersion,
-            files  : Operations.stateService.newLockFiles
+            files  : Operations.stateService.newLockFiles,
         };
 
-        fs.writeFileSync(path.join(jsonPath, `${ Operations.stateService.schema.moduleName }-lock.json`), JSON.stringify(jsonLockFile, null, 4), 'utf8');
+        fs.writeFileSync(path.join(jsonPath, `${Operations.stateService.schema.moduleName}-lock.json`), JSON.stringify(jsonLockFile, null, 4), 'utf8');
     }
 
     static parseFlagOfBoundedContextAndModule(command: Command, module: string): { boundedContextName: string; moduleName: string }

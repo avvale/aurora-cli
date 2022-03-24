@@ -6,8 +6,8 @@ import { ImportDriver } from './import.driver';
 import { ExportDriver } from './export.driver';
 import { ArrayDriver } from './array.driver';
 import { InterfaceDriver } from './interface.driver';
-import * as path from 'path';
-import * as fs from 'fs';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
 import { ObjectTools } from '../object-tools';
 
 export class CodeWriter
@@ -65,7 +65,7 @@ export class CodeWriter
             for (const yamlFile of yamlFiles)
             {
                 // get filename of e2e test
-                const e2eTestFile = yamlFile.replace('.yaml', '').concat('.e2e-spec.ts');
+                const e2eTestFile = yamlFile.replace('.yaml', '.e2e-spec.ts');
 
                 const e2eTestPath = path.join(process.cwd(), 'test', 'acceptance', this.boundedContextName.toKebabCase(), e2eTestFile);
 
@@ -78,9 +78,9 @@ export class CodeWriter
                     // register import in e2e test
                     ImportDriver.createImportItems(
                         sourceFile,
-                        foreignRelationship.relationshipPackageName
-                            ? foreignRelationship.relationshipPackageName
-                            : `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
+                        foreignRelationship.relationshipPackageName ?
+                            foreignRelationship.relationshipPackageName :
+                            `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
                         [
                             `${foreignBoundedContextName.toPascalCase()}Module`,
                         ],
@@ -223,7 +223,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateDashboardRoutes(index: number = 0): void
+    generateDashboardRoutes(index = 0): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
 
@@ -238,14 +238,14 @@ export class CodeWriter
         ImportDriver.createImportItems(
             sourceFile,
             `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-list.component`,
-            [`${this.moduleName.toPascalCase()}ListComponent`]
+            [`${this.moduleName.toPascalCase()}ListComponent`],
         );
 
         // export detail component
         ImportDriver.createImportItems(
             sourceFile,
             `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-detail.component`,
-            [`${this.moduleName.toPascalCase()}DetailComponent`]
+            [`${this.moduleName.toPascalCase()}DetailComponent`],
         );
 
         // export resolvers
@@ -256,7 +256,7 @@ export class CodeWriter
                 `${this.moduleName.toPascalCase()}EditResolver`,
                 `${this.moduleName.toPascalCase()}NewResolver`,
                 `${this.moduleName.toPascalCase()}PaginationResolver`,
-            ]
+            ],
         );
 
         // set routes
@@ -282,14 +282,14 @@ export class CodeWriter
         ImportDriver.createImportItems(
             sourceFile,
             `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-list.component`,
-            [`${this.moduleName.toPascalCase()}ListComponent`]
+            [`${this.moduleName.toPascalCase()}ListComponent`],
         );
 
         // export detail component
         ImportDriver.createImportItems(
             sourceFile,
             `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}-detail.component`,
-            [`${this.moduleName.toPascalCase()}DetailComponent`]
+            [`${this.moduleName.toPascalCase()}DetailComponent`],
         );
 
         ArrayDriver.addArrayItems(
@@ -304,7 +304,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    declareDashboardBoundedContext(index: number = 5): void
+    declareDashboardBoundedContext(index = 5): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app', 'app.routing.ts'));
 
@@ -327,7 +327,7 @@ export class CodeWriter
         // set routes
         childrenRoutesArray?.addElement(
             `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module').then(m => m.${this.boundedContextName.toPascalCase()}Module) },`
-        , { useNewLines: true });
+            , { useNewLines: true });
 
         sourceFile?.saveSync();
     }
@@ -337,7 +337,7 @@ export class CodeWriter
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.menu.ts`));
         const menu = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Menu');
         const objectMenu = menu.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
-        const childrenProperty = objectMenu.getPropertyOrThrow('children') as InitializerExpressionGetableNode
+        const childrenProperty = objectMenu.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
         const childrenArrayMenu = childrenProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
         const menuElements = childrenArrayMenu.getElements() as ObjectLiteralExpression[];
 
@@ -352,14 +352,14 @@ export class CodeWriter
 
         // set routes
         childrenArrayMenu?.addElement(
-`{
+            `{
     id   : '${this.moduleNames.toCamelCase()}',
     title: '${this.moduleName.toPascalCase()}',
     type : 'basic',
     icon : 'heroicons_outline:tag',
     link : '/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}',
 },`
-        , { useNewLines: true });
+            , { useNewLines: true });
 
         sourceFile?.saveSync();
     }
@@ -372,8 +372,7 @@ export class CodeWriter
         const names = properties.withoutTimestamps.filter(property => property.name !== 'id').map(property => property.name);
 
         // add module name/s to translate
-        names.push(this.moduleName);
-        names.push(this.moduleNames);
+        names.push(this.moduleName, this.moduleNames);
 
         for (const name of names)
         {
@@ -467,7 +466,8 @@ export class CodeWriter
         // add controller to controllers array
         ArrayDriver.addArrayItem(
             sourceFile,
-            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`, controllersArray,
+            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
+            controllersArray,
         );
 
         sourceFile?.saveSync();
@@ -505,49 +505,49 @@ export class CodeWriter
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
-            [`${this.boundedContextName.toPascalCase()}Module`]
+            [`${this.boundedContextName.toPascalCase()}Module`],
         );
 
         // export DTO
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/dto/${this.moduleName.toKebabCase()}.dto`,
-            [`${this.moduleName.toPascalCase()}Dto`]
+            [`${this.moduleName.toPascalCase()}Dto`],
         );
 
         // export aggregate
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.aggregate`,
-            [`${this.aggregateName}`]
+            [`${this.aggregateName}`],
         );
 
         // export model
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`]
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`],
         );
 
         // export response
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.response`,
-            [`${this.moduleName.toPascalCase()}Response`]
+            [`${this.moduleName.toPascalCase()}Response`],
         );
 
         // export mapper
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.mapper`,
-            [`${this.moduleName.toPascalCase()}Mapper`]
+            [`${this.moduleName.toPascalCase()}Mapper`],
         );
 
         // export seed
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/seeds/${this.moduleName.toKebabCase()}.seed`,
-            [`${this.moduleNames.toCamelCase()}`]
+            [`${this.moduleNames.toCamelCase()}`],
         );
 
         sourceFile?.saveSync();
@@ -603,6 +603,7 @@ export class CodeWriter
         {
             modules = modules.concat(importObj.getNamedImports().map(i => i.getName()));
         }
+
         return modules;
     }
 
