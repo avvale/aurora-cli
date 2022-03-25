@@ -253,7 +253,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
                 }
                 Operations.stateService.command.log('GraphQL entities generated');
 
-                resolve(stdout? stdout : stderr);
+                resolve(stdout ? stdout : stderr);
             });
         });
     }
@@ -270,7 +270,10 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             Operations.stateService.schema.aggregateName,
         );
 
-        codeWriter.generateDashboardInterface(Operations.stateService.schema.properties);
+        codeWriter.generateDashboardInterface(
+            Operations.stateService.schema.properties,
+            { overwrite: Operations.stateService.flags.overwriteInterface },
+        );
         codeWriter.generateDashboardRoutes();
         codeWriter.declareDashboardComponents();
         codeWriter.declareDashboardBoundedContext();

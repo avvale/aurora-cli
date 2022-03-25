@@ -209,7 +209,14 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateDashboardInterface(properties: Properties): void
+    generateDashboardInterface(
+        properties: Properties,
+        {
+            overwrite = false,
+        }: {
+            overwrite?: boolean;
+        } = {},
+    ): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.types.ts`));
 
@@ -218,6 +225,7 @@ export class CodeWriter
             sourceFile,
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}`,
             properties.withoutTimestamps.map(property => ({ name: property.name.toCamelCase(), type: property.getJavascriptType })),
+            { overwrite },
         );
 
         sourceFile?.saveSync();

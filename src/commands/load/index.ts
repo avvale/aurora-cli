@@ -20,14 +20,15 @@ export default class Load extends Command
 
     static flags =
     {
-        help          : Flags.help({ char: 'h' }),
-        verbose       : Flags.boolean({ char: 'v' }),
-        force         : Flags.boolean({ char: 'f' }),
-        module        : Flags.string({ char: 'm' }),
-        boundedContext: Flags.string({ char: 'b' }),
-        tests         : Flags.boolean({ char: 't' }),
-        noGraphQLTypes: Flags.boolean({ char: 'g' }),
-        dashboard     : Flags.boolean({ char: 'd' }),
+        help              : Flags.help({ char: 'h' }),
+        verbose           : Flags.boolean({ char: 'v' }),
+        force             : Flags.boolean({ char: 'f' }),
+        module            : Flags.string({ char: 'm' }),
+        boundedContext    : Flags.string({ char: 'b' }),
+        tests             : Flags.boolean({ char: 't' }),
+        noGraphQLTypes    : Flags.boolean({ char: 'g' }),
+        dashboard         : Flags.boolean({ char: 'd' }),
+        overwriteInterface: Flags.boolean({ char: 'w' }),
     };
 
     static args = [
@@ -38,7 +39,7 @@ export default class Load extends Command
                 'bounded-context', 'b',
                 'module', 'm',
             ],
-            required   : true,
+            required: true,
         },
     ];
 

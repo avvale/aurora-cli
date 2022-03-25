@@ -7,10 +7,30 @@ export class InterfaceDriver
         return sourceFile.getInterface(interfaceName);
     }
 
-    public static addInterface(sourceFile: SourceFile, interfaceName: string, properties: { name: string; type: string}[]): InterfaceDeclaration | undefined
+    public static addInterface(
+        sourceFile: SourceFile,
+        interfaceName: string,
+        properties: { name: string; type: string}[],
+        {
+            overwrite = false,
+        }: {
+            overwrite?: boolean;
+        } = {},
+    ): InterfaceDeclaration | undefined
     {
         // avoid duplicate interfaces in same file
-        if (sourceFile.getInterface(interfaceName)) return;
+        const interfaceInstance = sourceFile.getInterface(interfaceName);
+        if (interfaceInstance)
+        {
+            if (overwrite)
+            {
+                interfaceInstance.remove();
+            }
+            else
+            {
+                return;
+            }
+        }
 
         const interfaceDeclaration = sourceFile.addInterface({
             name: interfaceName,
