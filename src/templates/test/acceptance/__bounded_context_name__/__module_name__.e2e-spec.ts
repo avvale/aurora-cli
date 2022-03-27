@@ -2,6 +2,7 @@
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
@@ -56,12 +57,25 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {{/unlessEq }}
                 {{/if }}
                 GraphQLConfigModule,
-                SequelizeModule.forRoot({
-                    dialect       : 'sqlite',
-                    storage       : ':memory:',
-                    logging       : false,
-                    autoLoadModels: true,
-                    models        : [],
+                SequelizeModule.forRootAsync({
+                    imports   : [ConfigModule],
+                    inject    : [ConfigService],
+                    useFactory: (configService: ConfigService) =>
+                    {
+                        return {
+                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
+                            storage       : configService.get('TEST_DATABASE_STORAGE'),
+                            host          : configService.get('TEST_DATABASE_HOST'),
+                            port          : +configService.get('TEST_DATABASE_PORT'),
+                            username      : configService.get('TEST_DATABASE_USER'),
+                            password      : configService.get('TEST_DATABASE_PASSWORD'),
+                            database      : configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
+                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            autoLoadModels: true,
+                            models        : [],
+                        };
+                    },
                 }),
                 {{#if schema.hasOAuth }}
                 JwtModule.register({
@@ -340,6 +354,48 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
+    {{#each schema.properties.isDecimal  as |isDecimalPropety isDecimalPropetyId|}}
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too large, has a maximum decimal integers length of {{ subtract (first isDecimalPropety.decimals) (last isDecimalPropety.decimals) }}', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
+            .set('Accept', 'application/json')
+            {{#if ../schema.hasOAuth }}
+            .set('Authorization', `Bearer ${testJwt}`)
+            {{/if }}
+            .send({
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isDecimalPropety.name testPropety.name}}{{ randomDecimalDigits (add (first isDecimalPropety.decimals) 1) (last testPropety.decimals) }}{{else}}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{/each}}
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too large, has a maximum length of {{ subtract (first isDecimalPropety.decimals) (last isDecimalPropety.decimals) }} integers in');
+            });
+    });
+    {{/each}}
+    {{#each schema.properties.isDecimal  as |isDecimalPropety isDecimalPropetyId|}}
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too large, has a maximum decimals length of {{ last isDecimalPropety.decimals }}', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
+            .set('Accept', 'application/json')
+            {{#if ../schema.hasOAuth }}
+            .set('Authorization', `Bearer ${testJwt}`)
+            {{/if }}
+            .send({
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isDecimalPropety.name testPropety.name}}{{ randomDecimalDigits (first isDecimalPropety.decimals) (add (last testPropety.decimals) 1) }}{{else}}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
+                {{/each}}
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too large, has a maximum length of {{ last isDecimalPropety.decimals }} decimals in');
+            });
+    });
+    {{/each}}
 
     test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/create - Got 409 Conflict, item already exist in database', () =>
     {
@@ -365,7 +421,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 query:
                 {
                     offset: 0,
-                    limit: 5
+                    limit: 5,
                 },
             })
             .expect(200)
@@ -374,7 +430,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 expect(res.body).toEqual({
                     total: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
                     count: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
-                    rows : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5)
+                    rows : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5),
                 });
             });
     });
@@ -391,7 +447,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}])))
+                    seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))),
                 );
             });
     });
@@ -409,7 +465,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {
                     where:
                     {
-                        id: '{{ uuid }}'
+                        id: '{{ uuid }}',
                     },
                 },
             })
@@ -449,7 +505,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {
                     where:
                     {
-                        id: '{{{ mocker (object type='uuid') }}}'
+                        id: '{{{ mocker (object type='uuid') }}}',
                     },
                 },
             })
@@ -566,7 +622,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt'])
+                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -604,8 +660,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         offset: 0,
                         limit: 5,
-                    }
-                }
+                    },
+                },
             })
             .expect(200)
             .then(res =>
@@ -613,7 +669,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}).toEqual({
                     total: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
                     count: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
-                    rows : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5)
+                    rows : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5),
                 });
             });
     });
@@ -711,7 +767,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         where:
                         {
-                            id: '{{ uuid }}'
+                            id: '{{ uuid }}',
                         },
                     },
                 },
@@ -751,7 +807,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         where:
                         {
-                            id: '{{{ mocker (object type='uuid') }}}'
+                            id: '{{{ mocker (object type='uuid') }}}',
                         },
                     },
                 },
@@ -784,7 +840,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{ uuid }}'
+                    id: '{{ uuid }}',
                 },
             })
             .expect(200)
@@ -817,7 +873,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{{ mocker (object type='uuid') }}}'
+                    id: '{{{ mocker (object type='uuid') }}}',
                 },
             })
             .expect(200)

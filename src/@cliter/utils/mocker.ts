@@ -1,6 +1,7 @@
 import * as faker from 'faker';
 import * as dayjs from 'dayjs';
 import randomNumber from './random-number';
+import randomDigitsDecimal from './random-decimal-digits';
 
 export class Mocker
 {
@@ -13,12 +14,16 @@ export class Mocker
             minLength = undefined,
             scapeQuotes = false,
             checkFieldNameMeaning = false,
+            totalDigits = undefined,
+            decimalDigits = undefined,
         }: {
             length?: number;
             maxLength?: number;
             minLength?: number;
             scapeQuotes?: boolean;
             checkFieldNameMeaning?: boolean;
+            totalDigits?: number;
+            decimalDigits?: number;
         } = {}): string | number | boolean | undefined
     {
         // according to the meaning of the field use a faker function to obtain the mock
@@ -78,7 +83,7 @@ export class Mocker
                 return randomNumber(maxLength);
 
             case 'decimal':
-                return maxLength ? randomNumber(maxLength) : faker.datatype.float();
+                return totalDigits && decimalDigits ? randomDigitsDecimal(totalDigits, decimalDigits) : randomDigitsDecimal(5, 2);
 
             case 'random.float':
                 return maxLength ? randomNumber(maxLength) : faker.datatype.float();

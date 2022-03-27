@@ -1,6 +1,6 @@
 import { Directive, Injector, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { ActionService, SessionService } from '@aurora';
@@ -12,6 +12,7 @@ export class ViewBaseComponent implements OnDestroy
     actionService: ActionService;                           // service to control application flow
     sessionService: SessionService;
     router: Router;                                         // instance current router object
+    activatedRoute: ActivatedRoute;                         // instance current activated router object
     unsubscribeAll$: Subject<void> = new Subject();         // subject to destroy all subscriptions in ngOnDestroy life cycle
 
     // UI
@@ -27,6 +28,7 @@ export class ViewBaseComponent implements OnDestroy
         this.actionService          = this.injector.get(ActionService);
         this.sessionService         = this.injector.get(SessionService);
         this.router                 = this.injector.get(Router);
+        this.activatedRoute         = this.injector.get(ActivatedRoute);
 
         // UI
         this.snackBar               = this.injector.get(MatSnackBar);

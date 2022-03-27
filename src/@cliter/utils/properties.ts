@@ -454,6 +454,11 @@ export class Properties
         return this.properties.filter(property => !!property.minLength);
     }
 
+    get isDecimal(): Property[]
+    {
+        return this.properties.filter(property => property.type === SqlType.DECIMAL);
+    }
+
     get isInteger(): Property[]
     {
         return this.properties.filter(property => property.type === SqlType.INT);

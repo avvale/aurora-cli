@@ -4,12 +4,12 @@ import { container } from 'tsyringe';
 
 // imports
 import { Command, Flags } from '@oclif/core';
-import * as shell from 'child_process';
+import * as shell from 'node:child_process';
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
-import * as path from 'path';
-import * as fs from 'fs';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
 import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, Properties, Property, FileManager } from '../../@cliter';
@@ -170,7 +170,7 @@ export default class Load extends Command
                             case stateService.config.compareActions.ignore:
                                 if (!fileToManage) break;
                                     const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
-                                    fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : '// ignored file\r\n') + customFile, 'utf8');
+                                    fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : fileToManage.endsWith('.origin.html') ? '<!-- ignored file -->\r\n' : '// ignored file\r\n') + customFile, 'utf8');
                                     fs.unlinkSync(fileToManage as string); // delete origin file and reference in array, view state.service.ts file
                                     fileToManage = _.head(stateService.originFiles.slice());   // get next file
                                     if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });

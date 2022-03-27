@@ -38,7 +38,7 @@ export class FileManager
             // skip files that should not be explorer
             if (FileManager.stateService.config.skipDirectories.includes(file)) return;
 
-            if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql')))
+            if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql') || file.endsWith('.origin.html')))
             {
                 fs.unlinkSync(path.join(currentPath, file));
             }
@@ -264,7 +264,9 @@ export class FileManager
                     currentFileHash === FileManager.stateService.config.fileTags.ignoredFile ||
                     currentFileFirstLineHash === FileManager.stateService.config.fileTags.ignoredFile ||
                     currentFileHash === FileManager.stateService.config.fileTags.ignoredGraphQLFile ||
-                    currentFileFirstLineHash === FileManager.stateService.config.fileTags.ignoredGraphQLFile
+                    currentFileFirstLineHash === FileManager.stateService.config.fileTags.ignoredGraphQLFile ||
+                    currentFileHash === FileManager.stateService.config.fileTags.ignoredHtmlFile ||
+                    currentFileFirstLineHash === FileManager.stateService.config.fileTags.ignoredHtmlFile
                 )
                 {
                     FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.cyanBright.bold('[IGNORED FILE]'));

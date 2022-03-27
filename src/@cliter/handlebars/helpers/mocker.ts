@@ -21,6 +21,8 @@ handlebars.registerHelper('mocker', function(
         length                  = undefined,
         maxLength               = undefined,
         minLength               = undefined,
+        totalDigits             = undefined,
+        decimalDigits           = undefined,
     }: {
         type?: MockType;
         property?: Property;
@@ -31,6 +33,8 @@ handlebars.registerHelper('mocker', function(
         length?: number;
         maxLength?: number;
         minLength?: number;
+        totalDigits?: number;
+        decimalDigits?: number;
     } = {}
 )
 {
@@ -63,6 +67,15 @@ handlebars.registerHelper('mocker', function(
         if (property?.type === SqlType.ENUM)            return property.enumOptions ? _.shuffle(property.enumOptions)[0] : null;
         if (property?.type === SqlType.RELATIONSHIP)    return '[]';
 
+        let propertyTotalDigits = 5;
+        let propertyDecimalDigits = 3;
+
+        if (property && Array.isArray(property.decimals))
+        {
+            propertyTotalDigits = property.decimals[0];
+            propertyDecimalDigits = property.decimals[1];
+        }
+
         return mocker.mock(
             property?.faker ? property.faker : property?.type as string,
             property?.name as string,
@@ -72,7 +85,9 @@ handlebars.registerHelper('mocker', function(
                 length   : length || property?.length,
                 maxLength: maxLength || property?.maxLength,
                 minLength: minLength || property?.minLength,
-            }
+                totalDigits: totalDigits || propertyTotalDigits,
+                decimalDigits: decimalDigits || propertyDecimalDigits,
+            },
         );
     }
 });
