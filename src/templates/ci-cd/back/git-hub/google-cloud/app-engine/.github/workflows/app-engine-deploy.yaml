@@ -17,6 +17,13 @@ jobs:
         node-version: '16'
     - name: Install dependencies
       run: npm install
+    - name: Create .env file
+      run: |
+        touch .env
+        echo "$DOT_ENV" > .env
+      shell: bash
+      env:
+        DOT_ENV: ${{secrets.DOT_ENV}}
     - name: Unit testing
       run: npm run test
     - name: Acceptance testing
