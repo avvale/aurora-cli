@@ -153,6 +153,7 @@ export const cliterConfig: CliterConfig =
     fileTags: {
         ignoredFile       : '8ca93fe73cc6e48cde17e74342122d3b86210ff5',       // // ignored file
         ignoredGraphQLFile: '03b1aa4e5de61b13327591869a4c96d5f82de70c',       // # ignored file (for GraphQL)
+        ignoredHtmlFile   : '4e6c548816bc0b2087633182f1e7e0f75ecba428',       // <!-- ignored file --> (for HTML)
     },
     compareActions: {
         deleteOrigin: 'Delete origin file and load next',

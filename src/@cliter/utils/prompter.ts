@@ -375,7 +375,7 @@ export class Prompter
             when   : (answers: any) =>
             {
                 // avoid length for decimal values
-                if (answers.type === SqlType.DECIMAL || answers.type === SqlType.FLOAT) return false;
+                if (answers.type === SqlType.DECIMAL || answers.type === SqlType.FLOAT) return false;
 
                 // set intermediateTable value
                 if (answers.hasIntermediateTable) answers.intermediateTable = `${boundedContextName.toSnakeCase()}_${moduleNames.toSnakeCase()}_${name.toSnakeCase()}`;

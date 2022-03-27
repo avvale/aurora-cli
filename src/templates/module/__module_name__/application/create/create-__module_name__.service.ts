@@ -23,10 +23,10 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         payload: {
             {{#each schema.properties.createService}}
             {{#if (allowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
-        }
+        },
     ): Promise<void>
     {
         // create aggregate with factory pattern

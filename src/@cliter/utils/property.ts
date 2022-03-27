@@ -108,18 +108,24 @@ export class Property
                 this.type === SqlType.SMALLINT ||
                 this.type === SqlType['SMALLINT.UNSIGNED']
             ) &&
-            typeof this.length == 'number' && typeof this.maxLength !== 'number'
+            typeof this.length === 'number' && typeof this.maxLength !== 'number'
         )
         {
             this.maxLength  = this.length;
             this.length     = undefined;
         }
 
-        if (this.type === SqlType.DECIMAL)
-        {
-            // set maxLength to validate in value object
-            this.maxLength = _.head(this.decimals) as number;
-        }
+        /*********************************************************************************
+         * avoid set maxLength in decimal value object, this argument is already defined
+         * example:
+         *  - name: myColumn
+         *   type: decimal
+         *   decimals:
+         *   - 11
+         *   - 2
+         *   nullable: false
+         *********************************************************************************/
+        if (this.type === SqlType.DECIMAL) this.maxLength = undefined;
     }
 
     // handlebars functions
