@@ -1,6 +1,6 @@
 {
     "name": "aurora-ts-cli",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "Aurora CLI",
     "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
     "bin": {
