@@ -83,7 +83,7 @@ handlebars.registerHelper('mocker', function(
                 scapeQuotes,
                 checkFieldNameMeaning,
                 length   : length || property?.length,
-                maxLength: maxLength || property?.maxLength,
+                maxLength: maxLength || (property?.maxLength && property.maxLength > 1 ? property.maxLength - 1 : property && property.maxLength),
                 minLength: minLength || property?.minLength,
                 totalDigits: totalDigits || propertyTotalDigits,
                 decimalDigits: decimalDigits || propertyDecimalDigits,

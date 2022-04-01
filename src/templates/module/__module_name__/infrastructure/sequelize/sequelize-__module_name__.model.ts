@@ -67,7 +67,11 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if hasHasOneDecorator }}
 
-    @HasOne(() => {{ relationshipAggregate }}Model)
+    @HasOne(() => {{ relationshipAggregate }}Model{{#or relationshipAvoidConstraint }}, {
+        {{#if relationshipAvoidConstraint }}
+        constraints: false,
+        {{/if}}
+    }{{/or}})
     {{ toCamelCase name }}: {{ relationshipAggregate }}Model;
     {{/if}}
     {{#if hasBelongsToDecorator }}
