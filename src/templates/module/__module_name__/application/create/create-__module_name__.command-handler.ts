@@ -29,7 +29,7 @@ export class Create{{ toPascalCase schema.moduleName }}CommandHandler implements
                 {{/if}}
                 {{/if}}
                 {{/each}}
-            }
+            },
         );
     }
 }

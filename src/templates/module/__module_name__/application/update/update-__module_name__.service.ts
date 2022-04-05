@@ -18,7 +18,7 @@ export class Update{{ toPascalCase schema.moduleName }}Service
         {{> declareI18NRepository}}
     ) {}
 
-    public async main(
+    async main(
         payload: {
             {{#each schema.properties.updateService}}
             {{#if (allowProperty ../schema.moduleName this) }}

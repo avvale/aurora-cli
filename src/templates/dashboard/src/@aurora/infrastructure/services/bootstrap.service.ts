@@ -16,7 +16,7 @@ export class BootstrapService
         private auroraLangService: AuroraLangService,
     ) {}
 
-    public async init(): Promise<void>
+    async init(): Promise<void>
     {
         this.checkEnvironmentSchema(environment);
 

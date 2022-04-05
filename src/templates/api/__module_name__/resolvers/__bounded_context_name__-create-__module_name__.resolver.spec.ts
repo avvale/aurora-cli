@@ -38,20 +38,20 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                    },
                 },
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
                         get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
+                    },
                 },
                 {{/if}}
                 {
                     provide : IQueryBus,
                     useValue: {
                         ask: () => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : ICommandBus,
@@ -59,7 +59,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
                         dispatch: () => { /**/ },
                     }
                 },
-            ]
+            ],
         }).compile();
 
         resolver    = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver);

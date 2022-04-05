@@ -23,7 +23,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         {{/if}}
     ) {}
 
-    public async main(
+    async main(
         {{ toCamelCase schema.moduleNames }}: {
             {{#each schema.properties.createItemsService}}
             {{#if (allowProperty ../schema.moduleName this) }}

@@ -19,7 +19,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         {{> declareI18NRepository}}
     ) {}
 
-    public async main(
+    async main(
         payload: {
             {{#each schema.properties.createService}}
             {{#if (allowProperty ../schema.moduleName this) }}

@@ -15,7 +15,7 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdService
         {{> declareI18NRepository}}
     ) {}
 
-    public async main(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
+    async main(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
     {
         // get object to delete
         const {{ toCamelCase schema.moduleName }} = await this.repository.findById(id, { constraint, cQMetadata });

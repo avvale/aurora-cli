@@ -11,7 +11,7 @@ export class Find{{ toPascalCase schema.moduleName }}Service
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
     ) {}
 
-    public async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<{{ schema.aggregateName }}>
+    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<{{ schema.aggregateName }}>
     {
         return await this.repository.find({ queryStatement, constraint, cQMetadata });
     }
