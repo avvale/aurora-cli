@@ -119,7 +119,9 @@ export class FileManager
                 if (
                     fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))) &&
                     FileManager.stateService.flags.force &&
-                    FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(originPath.replace(templatesPath + '/', '') + '/' + file)
+                    FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(
+                        path.normalize(originPath.replace(templatesPath + '/', '') + '/' + file),
+                    )
                 ) return;
 
                 // check if file to create is excluded in schema.
