@@ -19,7 +19,7 @@ $ npm install -g aurora-ts-cli
 $ aurora COMMAND
 running command...
 $ aurora (--version)
-aurora-ts-cli/1.1.6 darwin-arm64 node-v16.14.2
+aurora-ts-cli/1.1.7 darwin-arm64 node-v16.14.2
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND
@@ -38,10 +38,13 @@ USAGE
 * [`aurora new NAME`](#aurora-new-name)
 * [`aurora pipeline`](#aurora-pipeline)
 * [`aurora plugins`](#aurora-plugins)
-* [`aurora plugins:inspect PLUGIN...`](#aurora-pluginsinspect-plugin)
 * [`aurora plugins:install PLUGIN...`](#aurora-pluginsinstall-plugin)
+* [`aurora plugins:inspect PLUGIN...`](#aurora-pluginsinspect-plugin)
+* [`aurora plugins:install PLUGIN...`](#aurora-pluginsinstall-plugin-1)
 * [`aurora plugins:link PLUGIN`](#aurora-pluginslink-plugin)
 * [`aurora plugins:uninstall PLUGIN...`](#aurora-pluginsuninstall-plugin)
+* [`aurora plugins:uninstall PLUGIN...`](#aurora-pluginsuninstall-plugin-1)
+* [`aurora plugins:uninstall PLUGIN...`](#aurora-pluginsuninstall-plugin-2)
 * [`aurora plugins update`](#aurora-plugins-update)
 * [`aurora seed ELEMENTTYPE`](#aurora-seed-elementtype)
 
@@ -64,7 +67,7 @@ DESCRIPTION
   Delete elements
 ```
 
-_See code: [dist/commands/delete/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/delete/index.js)_
+_See code: [dist/commands/delete/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/delete/index.js)_
 
 ## `aurora generate ELEMENTTYPE`
 
@@ -93,7 +96,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/generate/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/generate/index.js)_
+_See code: [dist/commands/generate/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/generate/index.js)_
 
 ## `aurora hello PERSON`
 
@@ -117,7 +120,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/hello/index.js)_
+_See code: [dist/commands/hello/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/hello/index.js)_
 
 ## `aurora hello world`
 
@@ -153,7 +156,7 @@ DESCRIPTION
   Display help for aurora.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
 ## `aurora keys`
 
@@ -170,7 +173,7 @@ DESCRIPTION
   Generate private key and public key
 ```
 
-_See code: [dist/commands/keys/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/keys/index.js)_
+_See code: [dist/commands/keys/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/keys/index.js)_
 
 ## `aurora load ELEMENTTYPE`
 
@@ -198,7 +201,7 @@ DESCRIPTION
   Reload aurora [bounded-context, module] from yaml file, located in the cliter folder
 ```
 
-_See code: [dist/commands/load/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/load/index.js)_
+_See code: [dist/commands/load/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/load/index.js)_
 
 ## `aurora new NAME`
 
@@ -221,7 +224,7 @@ DESCRIPTION
   Create new aurora project
 ```
 
-_See code: [dist/commands/new/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/new/index.js)_
+_See code: [dist/commands/new/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/new/index.js)_
 
 ## `aurora pipeline`
 
@@ -245,7 +248,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/pipeline/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/pipeline/index.js)_
+_See code: [dist/commands/pipeline/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/pipeline/index.js)_
 
 ## `aurora plugins`
 
@@ -266,6 +269,44 @@ EXAMPLES
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.0/src/commands/plugins/index.ts)_
+
+## `aurora plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
+```
+USAGE
+  $ aurora plugins:install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+ALIASES
+  $ aurora plugins add
+
+EXAMPLES
+  $ aurora plugins:install myplugin 
+
+  $ aurora plugins:install https://github.com/someuser/someplugin
+
+  $ aurora plugins:install someuser/someplugin
+```
 
 ## `aurora plugins:inspect PLUGIN...`
 
@@ -377,6 +418,52 @@ ALIASES
   $ aurora plugins remove
 ```
 
+## `aurora plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ aurora plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ aurora plugins unlink
+  $ aurora plugins remove
+```
+
+## `aurora plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ aurora plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ aurora plugins unlink
+  $ aurora plugins remove
+```
+
 ## `aurora plugins update`
 
 Update installed plugins.
@@ -414,5 +501,5 @@ DESCRIPTION
   Seed database with bounded context or module selected
 ```
 
-_See code: [dist/commands/seed/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.6/dist/commands/seed/index.js)_
+_See code: [dist/commands/seed/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.1.7/dist/commands/seed/index.js)_
 <!-- commandsstop -->
