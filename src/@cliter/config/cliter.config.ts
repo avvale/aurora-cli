@@ -1,3 +1,5 @@
+import * as path from 'node:path';
+
 export interface CliterConfig
 {
     dashboardContainer: string;
@@ -163,14 +165,14 @@ export const cliterConfig: CliterConfig =
     },
     skipDirectories             : ['node_modules', 'dist', 'coverage', 'cliter'],
     avoidOverwritingFilesIfExist: [
-        'module/index.ts',
-        'api/__bounded_context_name__.module.ts',
-        'dashboard-module/__bounded_context_name__.menu.ts',
-        'dashboard-module/__bounded_context_name__.module.ts',
-        'dashboard-module/__bounded_context_name__.routing.ts',
-        'dashboard-module/__bounded_context_name__.types.ts',
-        'dashboard-module-translations/en.json',
-        'dashboard-module-translations/es.json',
+        path.normalize('module/index.ts'),
+        path.normalize('api/__bounded_context_name__.module.ts'),
+        path.normalize('dashboard-module/__bounded_context_name__.menu.ts'),
+        path.normalize('dashboard-module/__bounded_context_name__.module.ts'),
+        path.normalize('dashboard-module/__bounded_context_name__.routing.ts'),
+        path.normalize('dashboard-module/__bounded_context_name__.types.ts'),
+        path.normalize('dashboard-module-translations/en.json'),
+        path.normalize('dashboard-module-translations/es.json'),
     ],
     allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt', '.htm', '.html', '.yaml'],
     platformFromDeploy     : ['GitHub'],

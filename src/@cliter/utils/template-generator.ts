@@ -3,8 +3,8 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 
 // imports
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { TemplateElement } from './../types';
 import { StateService } from '../services/state.service';
 import { FileManager } from './file-manager';
