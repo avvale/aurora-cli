@@ -10,6 +10,7 @@ import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '../../../sr
 import { AddI18NConstraintService } from '{{ config.auroraCorePackage }}';
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
+import { {{ toCamelCase schema.moduleNames }} } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 import { GraphQLConfigModule } from '../../../src/{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
 import { {{ toPascalCase schema.boundedContextName }}Module } from '../../../src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
 import * as request from 'supertest';
@@ -30,6 +31,7 @@ import { TestingJwtService } from './../../../src/{{ config.apiContainer }}/o-au
 import * as fs from 'fs';
 {{/if }}
 
+
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 {{setVar 'language' '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a'}}
@@ -41,6 +43,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
     {{/if }}
     let seeder: Mock{{ toPascalCase schema.moduleName }}Seeder;
+    let mockData: any = {{ toCamelCase schema.moduleNames }};
     {{#if schema.hasOAuth }}
     let testJwt: string;
     {{/if }}
@@ -148,9 +151,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#eq notNullPropety.name testPropety.name}}null{{else}}{{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }}{{/eq}},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}...{ {{ toCamelCase name }}: null },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -170,11 +172,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{#unlessEq notNullPropety.name testPropety.name}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
-                {{/unlessEq}}
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}...{ {{ toCamelCase name }}: undefined },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -194,9 +193,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}' }{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -216,9 +214,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasMaxLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}' }{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
