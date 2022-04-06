@@ -54,6 +54,6 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         {{#if schema.properties.hasI18n}}
         constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
         {{/if}}
-        return this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(id, constraint, { timezone }));
     }
 }

@@ -80,7 +80,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract update(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
-            updateOptions = undefined,
+            updateOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;

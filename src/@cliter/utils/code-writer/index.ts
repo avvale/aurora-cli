@@ -465,7 +465,13 @@ export class CodeWriter
         fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
-    declareFramework(): void
+    /****************************************************************
+     * Add import and declare application items in bounded context
+     * module.
+     *
+     * @return void
+     ****************************************************************/
+    declareApplicationItemsInModule(): void
     {
         // get decorator arguments
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.frameworkDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
@@ -499,6 +505,7 @@ export class CodeWriter
             [
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
             ],
         );
 
@@ -510,7 +517,7 @@ export class CodeWriter
             modelArrayArgument,
         );
 
-        // add handlers to providers
+        // add services to providers
         ArrayDriver.addArrayItems(
             sourceFile,
             [
@@ -519,6 +526,7 @@ export class CodeWriter
                 `...${this.boundedContextName.toPascalCase()}Repositories`,
                 `...${this.boundedContextName.toPascalCase()}Sagas`,
                 `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
             ],
             providersArray,
         );
@@ -533,7 +541,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    declareModule(): void
+    declareBoundedContextModuleInApplicationModule(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app.module.ts'));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
@@ -557,7 +565,13 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    declareExports(): void
+    /****************************************************************
+     * Add exports of principal application elements to src/index.ts
+     * this is to have access to all elements from index.ts
+     *
+     * @return void
+     ****************************************************************/
+    declareApplicationItemsExports(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'index.ts'));
 

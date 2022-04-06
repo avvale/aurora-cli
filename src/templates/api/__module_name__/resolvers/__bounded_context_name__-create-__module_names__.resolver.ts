@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { ICommandBus, IQueryBus, Timezone } from '{{ config.auroraCorePackage }}';
+import { Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -18,7 +18,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Create{{ toPascalCase schema.moduleNames }}Command } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.handler';
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from './../../../../graphql';
 
 @Resolver()
@@ -29,8 +29,7 @@ import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schem
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Resolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler,
     ) {}
 
     @Mutation('{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}')
@@ -38,14 +37,16 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     @TenantPolicy()
     {{/if}}
     async main(
+        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[],
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[],
-        @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command(payload, { timezone }));
-        return true;
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

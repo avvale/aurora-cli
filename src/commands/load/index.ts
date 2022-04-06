@@ -2,14 +2,16 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 
+// node
+import * as path from 'node:path';
+import * as fs from 'node:fs';
+import * as shell from 'node:child_process';
+
 // imports
 import { Command, Flags } from '@oclif/core';
-import * as shell from 'node:child_process';
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
 import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, Properties, Property, FileManager } from '../../@cliter';

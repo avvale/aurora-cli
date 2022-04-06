@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, Timezone } from '{{ config.auroraCorePackage }}';
+import { Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 import { Create{{ toPascalCase schema.moduleName }}Dto } from './../dto/create-{{ toKebabCase schema.moduleName }}.dto';
 
@@ -20,7 +20,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Create{{ toPascalCase schema.moduleNames }}Command } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.handler';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/create')
@@ -31,24 +31,27 @@ import { Create{{ toPascalCase schema.moduleNames }}Command } from '../../../../
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Controller
 {
     constructor(
-        private readonly commandBus: ICommandBus,
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create {{ toKebabCase schema.moduleNames }} in batch' })
-    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [{{ toPascalCase schema.moduleName }}Dto] })
-    @ApiBody({ type: [Create{{ toPascalCase schema.moduleName }}Dto] })
+    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [{{ toPascalCase schema.moduleName }}Dto]})
+    @ApiBody({ type: [Create{{ toPascalCase schema.moduleName }}Dto]})
     {{#if schema.hasTenant}}
     @TenantPolicy()
     {{/if}}
     async main(
+        @Body() payload: Create{{ toPascalCase schema.moduleName }}Dto[],
+        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Body() payload: Create{{ toPascalCase schema.moduleName }}Dto[],
-        @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command(payload, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

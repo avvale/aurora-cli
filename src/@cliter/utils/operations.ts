@@ -296,9 +296,9 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             Operations.stateService.schema.aggregateName,
         );
         codeWriter.generateReferences(Operations.stateService.schema.properties);
-        codeWriter.declareFramework();
-        codeWriter.declareModule();
-        codeWriter.declareExports();
+        codeWriter.declareApplicationItemsInModule();
+        codeWriter.declareBoundedContextModuleInApplicationModule();
+        codeWriter.declareApplicationItemsExports();
         if (Operations.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
     }
 
