@@ -12,7 +12,7 @@ export class Create{{ toPascalCase schema.moduleName }}Dto
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase name }}: string[];
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string[];
     {{else eq type ../sqlType.ENUM}}
     @ApiProperty({
         type       : {{ getApiType }},
@@ -22,7 +22,7 @@ export class Create{{ toPascalCase schema.moduleName }}Dto
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}: {{ getJavascriptType }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getJavascriptType }};
     {{else}}
     @ApiProperty({
         type       : {{ getApiType }},
@@ -31,7 +31,7 @@ export class Create{{ toPascalCase schema.moduleName }}Dto
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}: {{ getJavascriptType }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getJavascriptType }};
 {{/eq}}
 
     {{/if}}

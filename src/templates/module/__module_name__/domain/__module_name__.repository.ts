@@ -60,6 +60,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract create(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
+            createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
             finderQueryStatement: (aggregate: {{ schema.aggregateName }}) => QueryStatement;
@@ -79,6 +80,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract update(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
+            updateOptions = undefined,
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
@@ -91,6 +93,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract deleteById(
         id: {{ toPascalCase schema.moduleName }}Id,
         options?: {
+            deleteOptions?: ObjectLiteral;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -99,6 +102,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: ObjectLiteral;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

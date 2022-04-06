@@ -19,10 +19,10 @@ describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
                 {
                     provide : Update{{ toPascalCase schema.moduleName }}Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<Update{{ toPascalCase schema.moduleName }}CommandHandler>(Update{{ toPascalCase schema.moduleName }}CommandHandler);
@@ -46,8 +46,8 @@ describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
                         {{/each}}
                     },
                     {},
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

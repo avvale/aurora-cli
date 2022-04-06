@@ -4,11 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 {{/if}}
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.resolver';
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from './../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -16,10 +15,11 @@ import { langs } from '{{#eq schema.boundedContextName 'common'}}../../../../{{ 
 {{/if}}
 import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
-describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver', () =>
+describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler', () =>
 {
-    let resolver: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver;
     let handler: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler;
+    let queryBus: IQueryBus;
+    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -30,51 +30,53 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
                 {{/if}}
             ],
             providers: [
-                {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver,
+                {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler,
                 {{#if schema.properties.hasI18n}}
                 AddI18NConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    },
+                    }
                 },
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
                         get: (key: string) => key === 'common/lang' ? langs : null,
-                    },
+                    }
                 },
                 {{/if}}
                 {
-                    provide : {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler,
+                    provide : IQueryBus,
                     useValue: {
-                        main: () => { /**/ },
+                        ask: () => { /**/ },
+                    },
+                },
+                {
+                    provide : ICommandBus,
+                    useValue: {
+                        dispatch: () => { /**/ },
                     },
                 },
             ],
         }).compile();
 
-        resolver    = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver);
         handler     = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler);
-    });
-
-    test('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver should be defined', () =>
-    {
-        expect(resolver).toBeDefined();
+        queryBus    = module.get<IQueryBus>(IQueryBus);
+        commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller should be defined', () =>
         {
-            expect(resolver).toBeDefined();
+            expect(handler).toBeDefined();
         });
 
         test('should return an {{ toCamelCase schema.moduleName }} created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
-            expect(await resolver.main(<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input>{{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
+            expect(await handler.main({{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });
 });

@@ -21,9 +21,9 @@ describe('Create{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
                     provide : Create{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<Create{{ toPascalCase schema.moduleNames }}CommandHandler>(Create{{ toPascalCase schema.moduleNames }}CommandHandler);
@@ -42,8 +42,8 @@ describe('Create{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
             expect(await commandHandler.execute(
                 new Create{{ toPascalCase schema.moduleNames }}Command(
                     {{ toCamelCase schema.moduleNames }},
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

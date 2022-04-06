@@ -37,17 +37,17 @@ describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
                 {{#if schema.properties.hasI18n}}
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
                         create: (item) => { /**/ },
-                    }
+                    },
                 },
                 {{/if}}
-            ]
+            ],
         }).compile();
 
         service         = module.get(Create{{ toPascalCase schema.moduleName }}Service);
@@ -72,7 +72,7 @@ describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
                     {{#each schema.properties.createService}}
                     {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }}),
                     {{/each}}
-                }
+                },
             )).toBe(undefined);
         });
     });

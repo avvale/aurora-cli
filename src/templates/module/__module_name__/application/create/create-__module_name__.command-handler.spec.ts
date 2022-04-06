@@ -17,12 +17,12 @@ describe('Create{{ toPascalCase schema.moduleName }}CommandHandler', () =>
             providers: [
                 Create{{ toPascalCase schema.moduleName }}CommandHandler,
                 {
-                    provide: Create{{ toPascalCase schema.moduleName }}Service,
+                    provide : Create{{ toPascalCase schema.moduleName }}Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<Create{{ toPascalCase schema.moduleName }}CommandHandler>(Create{{ toPascalCase schema.moduleName }}CommandHandler);
@@ -45,8 +45,8 @@ describe('Create{{ toPascalCase schema.moduleName }}CommandHandler', () =>
                         {{ toCamelCase name }}: {{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }},
                         {{/each}}
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });
