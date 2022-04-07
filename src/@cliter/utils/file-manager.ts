@@ -120,7 +120,7 @@ export class FileManager
                     fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))) &&
                     FileManager.stateService.flags.force &&
                     FileManager.stateService.config.avoidOverwritingFilesIfExist.includes(
-                        path.normalize(originPath.replace(templatesPath + '/', '') + '/' + file),
+                        path.join(...(originPath.replace(templatesPath + '/', '') + '/' + file).split('/')),
                     )
                 ) return;
 
