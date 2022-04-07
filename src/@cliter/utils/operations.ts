@@ -73,7 +73,7 @@ export class Operations
 
         // create module translations
         await TemplateGenerator.generateStaticContents(
-            TemplateElement.DASHBOARD_MODULE_TRANSLATIONS,
+            TemplateElement.FRONT_MODULE_TRANSLATIONS,
             path.join('src', cliterConfig.dashboardTranslations),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
