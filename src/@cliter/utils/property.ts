@@ -273,7 +273,7 @@ export class Property
 
         return {
             boundedContextName: moduleSection[0],
-            moduleName        : moduleSection[1]
+            moduleName        : moduleSection[1],
         };
     }
 

@@ -1,7 +1,7 @@
 import { Directive, Injector, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ViewBaseComponent } from './view-base.component';
-import { FormMessageErrors, ValidationMessagesService } from '../../infrastructure';
+import { FormMessageErrors, ValidationMessagesService } from '..';
 
 @Directive()
 export class ViewFormComponent extends ViewBaseComponent implements OnDestroy

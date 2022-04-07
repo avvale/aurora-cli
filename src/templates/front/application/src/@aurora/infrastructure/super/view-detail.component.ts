@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { ViewFormComponent } from '../../infrastructure';
+import { ViewFormComponent } from '..';
 
 /**
  * section to add mixins to super component, for example

@@ -43,7 +43,7 @@ export class TemplateGenerator
         for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipIntermediateTable)
         {
             FileManager.generateContents(
-                path.join(TemplateGenerator.templatePath, 'intermediate-table'),
+                path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_INTERMEDIATE_TABLE.split('/')),
                 relativeTargetBasePath,
                 relativeTargetPath,
                 { currentProperty: property },
@@ -82,13 +82,12 @@ export class TemplateGenerator
         }
     }
 
-    /**
+    /*********************************
      *
-     * @param relativeTargetBasePath
-     * @param relativeTargetPath
-     * @param property
-     * @param isI18N
-     * @returns
+     * @param {string} relativeTargetBasePath Relative target base path
+     * @param {string} relativeTargetPath Relative target path
+     * @param {Property} property Property
+     * @return void
      */
     static generateValueObject(
         relativeTargetBasePath: string,
@@ -97,7 +96,7 @@ export class TemplateGenerator
     ): void
     {
         // read value object from our data type
-        const originFilePath = path.join(TemplateGenerator.templatePath, 'value-object', property.type, '__module_name__-__property_name__.ts');
+        const originFilePath = path.join(TemplateGenerator.templatePath, ...TemplateElement.BACK_VALUE_OBJECT.split('/'), property.type, '__module_name__-__property_name__.ts');
 
         // TODO,throw error when no exist value object
         // check that exists value object template

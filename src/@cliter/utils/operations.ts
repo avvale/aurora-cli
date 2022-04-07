@@ -46,7 +46,7 @@ export class Operations
         // create directory for dashboard
         if (!fs.existsSync(Operations.stateService.dashboardName)) fs.mkdirSync(Operations.stateService.dashboardName, { recursive: true });
 
-        await TemplateGenerator.generateStaticContents(TemplateElement.DASHBOARD, path.join(Operations.stateService.dashboardName), '.');
+        await TemplateGenerator.generateStaticContents(TemplateElement.FRONT_APPLICATION, path.join(Operations.stateService.dashboardName), '.');
     }
 
     async generateDashboardModule(): Promise<void>
@@ -89,7 +89,7 @@ export class Operations
 
         // create module files
         await TemplateGenerator.generateStaticContents(
-            TemplateElement.DASHBOARD_MODULE,
+            TemplateElement.FRONT_MODULE,
             path.join('src', cliterConfig.dashboardContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
         );
@@ -179,7 +179,7 @@ export class Operations
         if (Operations.stateService.schema.properties.hasI18n)
         {
             await TemplateGenerator.generateStaticContents(
-                TemplateElement.I18N_MODULE,
+                TemplateElement.BACK_I18N_MODULE,
                 path.join('src', cliterConfig.applicationsContainer),
                 Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
             );
@@ -204,7 +204,7 @@ export class Operations
         if (Operations.stateService.schema.properties.hasI18n)
         {
             await TemplateGenerator.generateStaticContents(
-                TemplateElement.I18N_API,
+                TemplateElement.BACK_I18N_API,
                 path.join('src', cliterConfig.apiContainer),
                 Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
             );
@@ -213,14 +213,14 @@ export class Operations
 
     async generateTestingFiles(): Promise<void>
     {
-        await TemplateGenerator.generateStaticContents(TemplateElement.TEST, path.join('test'), '');
+        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_TEST, path.join('test'), '');
         await this.createTestingForeignModuleImports();
     }
 
     async generatePostmanFiles(): Promise<void>
     {
         await TemplateGenerator.createDirectory('', 'postman');
-        await TemplateGenerator.generateStaticContents(TemplateElement.POSTMAN, '', 'postman');
+        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_POSTMAN, '', 'postman');
     }
 
     async generateApplicationEnvFile(applicationName: string): Promise<void>

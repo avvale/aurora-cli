@@ -1,4 +1,4 @@
-import { CommonLang } from '../../domain';
+import { CommonLang } from '..';
 import { Observable } from 'rxjs';
 
 export abstract class AuroraLangService

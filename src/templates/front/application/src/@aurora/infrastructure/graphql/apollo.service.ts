@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 //import { HttpHeaders } from '@angular/common/http';
-import { log } from '../../infrastructure';
+import { log } from '..';
 import { HttpLink } from 'apollo-angular/http';
 import { v4 as uuidv4 } from 'uuid';
 

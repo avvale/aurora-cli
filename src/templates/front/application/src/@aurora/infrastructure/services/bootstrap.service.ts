@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { AuroraLangService, Environment } from '../../domain';
-import { EnvironmentService, log, SessionService } from '../../infrastructure';
+import { EnvironmentService, log, SessionService } from '..';
 import { environment } from 'environments/environment';
 import { first } from 'rxjs';
 
