@@ -168,7 +168,7 @@ export const cliterConfig: CliterConfig =
         path.join('back', 'module', 'index.ts'),
         path.join('back', 'api', '__bounded_context_name__.module.ts'),
         path.join('front', 'module', '__bounded_context_name__.menu.ts'),
-        path.join('front', 'module', '_bounded_context_name__.module.ts'),
+        path.join('front', 'module', '__bounded_context_name__.module.ts'),
         path.join('front', 'module', '__bounded_context_name__.routing.ts'),
         path.join('front', 'module', '__bounded_context_name__.types.ts'),
         path.join('front', 'module-translations', 'en.json'),

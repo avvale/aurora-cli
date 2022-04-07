@@ -52,18 +52,18 @@ export class Operations
     async generateFrontModule(): Promise<void>
     {
         // generate dashboard module translations empty
-        await this.generateDashboardModuleTranslations();
+        await this.generateFrontTranslationsModule();
 
         // generate dashboard module files
-        await this.generateDashboardModuleFiles();
+        await this.generateFrontModuleFiles();
 
         // create references, write imports in ts files
-        this.createDashboardReferences();
+        this.createFrontReferences();
 
         this.createJsonLockFile();
     }
 
-    async generateDashboardModuleTranslations(): Promise<void>
+    async generateFrontTranslationsModule(): Promise<void>
     {
         // create directory application container, normally src/assets/i18n/module_name
         await TemplateGenerator.createDirectory(
@@ -79,7 +79,7 @@ export class Operations
         );
     }
 
-    async generateDashboardModuleFiles(): Promise<void>
+    async generateFrontModuleFiles(): Promise<void>
     {
         // create directory application container, normally src/app/modules/admin/apps
         await TemplateGenerator.createDirectory(
@@ -258,7 +258,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         });
     }
 
-    createDashboardReferences(): void
+    createFrontReferences(): void
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
@@ -274,7 +274,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             Operations.stateService.schema.properties,
             { overwrite: Operations.stateService.flags.overwriteInterface },
         );
-        codeWriter.generateDashboardRoutes();
+        codeWriter.generateFrontRoutes();
         codeWriter.declareDashboardComponents();
         codeWriter.declareDashboardBoundedContext();
         codeWriter.generateDashboardMenu();

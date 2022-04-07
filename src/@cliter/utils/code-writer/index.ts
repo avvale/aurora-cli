@@ -231,7 +231,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateDashboardRoutes(index = 0): void
+    generateFrontRoutes(index = 0): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
 
