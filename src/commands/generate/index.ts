@@ -88,7 +88,7 @@ export default class Generate extends Command
             const operations = new Operations();
 
             // generate module files
-            operations.generateModule();
+            operations.generateBackModule();
 
             if (!flags.noGraphQLTypes)
             {

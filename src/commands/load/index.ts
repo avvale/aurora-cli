@@ -75,14 +75,14 @@ export default class Load extends Command
 
             if (flags.dashboard)
             {
-                await operations.generateDashboardModule();
+                await operations.generateFrontModule();
 
                 // TODO reorganizar los flows para evitar esta ñapa, para evitar generar graphql types en el dashboard
                 stateService.flags.noGraphQLTypes = true;
             }
             else
             {
-                await operations.generateModule();
+                await operations.generateBackModule();
             }
 
             await this.reviewOverwrites(operations, stateService);
@@ -108,7 +108,7 @@ export default class Load extends Command
                 stateService.flags     = flags;
 
                 // generate module files
-                batchOperations.push(operations.generateModule());
+                batchOperations.push(operations.generateBackModule());
             }
 
             await Promise.all(batchOperations);

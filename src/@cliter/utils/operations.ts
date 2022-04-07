@@ -49,7 +49,7 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.FRONT_APPLICATION, path.join(Operations.stateService.dashboardName), '.');
     }
 
-    async generateDashboardModule(): Promise<void>
+    async generateFrontModule(): Promise<void>
     {
         // generate dashboard module translations empty
         await this.generateDashboardModuleTranslations();
@@ -108,7 +108,7 @@ export class Operations
         );
     }
 
-    async generateModule(): Promise<void>
+    async generateBackModule(): Promise<void>
     {
         // generate module files
         await this.generateModuleFiles();
