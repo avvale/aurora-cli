@@ -496,14 +496,14 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {
                     where:
                     {
-                        id: '{{{ mocker (object type='uuid') }}}',
+                        id: '{{{ mocker (object type='fixedUuid') }}}',
                     },
                 },
             })
             .expect(200)
             .then(res =>
             {
-                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
+                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
@@ -521,7 +521,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     test('/REST:GET {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{{ mocker (object type='uuid') }}}')
+            .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{{ mocker (object type='fixedUuid') }}}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -529,7 +529,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
+                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
@@ -565,7 +565,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
+                expect(res.body).toHaveProperty('id', '{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
@@ -583,7 +583,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{{ mocker (object type='uuid') }}}')
+            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{{ mocker (object type='fixedUuid') }}}')
             .set('Accept', 'application/json')
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
@@ -728,7 +728,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}).toHaveProperty('id', '{{{ mocker (object type='uuid') }}}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}).toHaveProperty('id', '{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
@@ -798,7 +798,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         where:
                         {
-                            id: '{{{ mocker (object type='uuid') }}}',
+                            id: '{{{ mocker (object type='fixedUuid') }}}',
                         },
                     },
                 },
@@ -806,7 +806,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
@@ -864,13 +864,13 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{{ mocker (object type='uuid') }}}',
+                    id: '{{{ mocker (object type='fixedUuid') }}}',
                 },
             })
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
@@ -942,7 +942,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
@@ -1000,13 +1000,13 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{{ mocker (object type='uuid') }}}',
+                    id: '{{{ mocker (object type='fixedUuid') }}}',
                 },
             })
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='uuid') }}}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 

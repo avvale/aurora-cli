@@ -5,9 +5,9 @@ import * as _ from 'lodash';
 
 enum MockType
 {
-    SEED    = 'seed',
-    POSTMAN = 'postman',
-    UUID    = 'uuid',
+    SEED        = 'seed',
+    POSTMAN     = 'postman',
+    FIXED_UUID  = 'fixedUuid',
 }
 
 handlebars.registerHelper('mocker', function(
@@ -38,17 +38,14 @@ handlebars.registerHelper('mocker', function(
     } = {}
 )
 {
-    // create mocker object
-    const mocker = new Mocker();
-
     // namespace to generate same uuid, see https://www.npmjs.com/package/uuid
     const namespace = '01a94203-63ba-4c07-bb92-bb61cd2b8e41';
 
-    if (type === MockType.UUID)
-    {
-        // take uuid seed or use aurora word to generate uuid
-        return uuidv5(uuidSeed, namespace);
-    }
+    // take uuid seed or use aurora word to generate uuid
+    if (type === MockType.FIXED_UUID) return uuidv5(uuidSeed, namespace);
+
+    // create mocker object
+    const mocker = new Mocker();
 
     if (type === MockType.POSTMAN || type === MockType.SEED)
     {
@@ -82,10 +79,10 @@ handlebars.registerHelper('mocker', function(
             {
                 scapeQuotes,
                 checkFieldNameMeaning,
-                length   : length || property?.length,
-                maxLength: maxLength || (property?.maxLength && property.maxLength > 1 ? property.maxLength - 1 : property && property.maxLength),
-                minLength: minLength || property?.minLength,
-                totalDigits: totalDigits || propertyTotalDigits,
+                length       : length || property?.length,
+                maxLength    : maxLength || (property?.maxLength && property.maxLength > 1 ? property.maxLength - 1 : property && property.maxLength),
+                minLength    : minLength || property?.minLength,
+                totalDigits  : totalDigits || propertyTotalDigits,
                 decimalDigits: decimalDigits || propertyDecimalDigits,
             },
         );
