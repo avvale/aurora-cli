@@ -31,8 +31,8 @@ export interface CliterConfig
 export const cliterConfig: CliterConfig =
 {
     // dashboard
-    dashboardContainer   : 'app/modules/admin/apps',
-    dashboardTranslations: 'assets/i18n',
+    dashboardContainer   : path.join('app', 'modules', 'admin', 'apps'),
+    dashboardTranslations: path.join('assets', 'i18n'),
 
     // application
     applicationsContainer             : '@apps',
@@ -165,14 +165,14 @@ export const cliterConfig: CliterConfig =
     },
     skipDirectories             : ['node_modules', 'dist', 'coverage', 'cliter'],
     avoidOverwritingFilesIfExist: [
-        path.normalize('module/index.ts'),
-        path.normalize('api/__bounded_context_name__.module.ts'),
-        path.normalize('dashboard-module/__bounded_context_name__.menu.ts'),
-        path.normalize('dashboard-module/__bounded_context_name__.module.ts'),
-        path.normalize('dashboard-module/__bounded_context_name__.routing.ts'),
-        path.normalize('dashboard-module/__bounded_context_name__.types.ts'),
-        path.normalize('dashboard-module-translations/en.json'),
-        path.normalize('dashboard-module-translations/es.json'),
+        path.join('module', 'index.ts'),
+        path.join('api', '__bounded_context_name__.module.ts'),
+        path.join('dashboard-module', '__bounded_context_name__.menu.ts'),
+        path.join('dashboard-module', '_bounded_context_name__.module.ts'),
+        path.join('dashboard-module', '__bounded_context_name__.routing.ts'),
+        path.join('dashboard-module', '__bounded_context_name__.types.ts'),
+        path.join('dashboard-module-translations', 'en.json'),
+        path.join('dashboard-module-translations', 'es.json'),
     ],
     allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt', '.htm', '.html', '.yaml'],
     platformFromDeploy     : ['GitHub'],

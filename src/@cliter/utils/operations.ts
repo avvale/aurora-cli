@@ -26,7 +26,7 @@ export class Operations
         // create directory for application
         if (!fs.existsSync(Operations.stateService.appName)) fs.mkdirSync(Operations.stateService.appName, { recursive: true });
 
-        await TemplateGenerator.generateStaticContents(TemplateElement.APPLICATION, path.join(Operations.stateService.appName), '.');
+        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(Operations.stateService.appName), '.');
     }
 
     async generatePackage(): Promise<void>
@@ -154,7 +154,7 @@ export class Operations
 
         // create module files
         await TemplateGenerator.generateStaticContents(
-            TemplateElement.MODULE,
+            TemplateElement.BACK_MODULE,
             path.join('src', cliterConfig.applicationsContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
@@ -193,7 +193,7 @@ export class Operations
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
         );
         await TemplateGenerator.generateStaticContents(
-            TemplateElement.API,
+            TemplateElement.BACK_API,
             path.join('src', cliterConfig.apiContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
         );
@@ -225,7 +225,7 @@ export class Operations
 
     async generateApplicationEnvFile(applicationName: string): Promise<void>
     {
-        await TemplateGenerator.generateStaticContents(TemplateElement.ENV, '', applicationName);
+        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_ENV, '', applicationName);
     }
 
     async generateGraphqlTypes(): Promise<string>

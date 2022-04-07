@@ -1,4 +1,4 @@
-import { Command, Flags } from '@oclif/core'
+import { Command, Flags } from '@oclif/core';
 import * as rs from 'jsrsasign';
 const rsu = require('jsrsasign-util');
 

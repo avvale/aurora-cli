@@ -33,10 +33,10 @@ export default class Delete extends Command
     {
         const { args, flags } = await this.parse(Delete);
 
-        if (args.elementType === 'b') args.elementType = 'bounded-context';
-        if (args.elementType === 'm') args.elementType = 'module';
+        if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
+        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
 
-        if (args.elementType === TemplateElement.MODULE)
+        if (args.elementType === TemplateElement.BACK_MODULE)
         {
             if (fs.existsSync(path.join(process.cwd(), 'src', cliterConfig.applicationsContainer, args.elementName)))
             {

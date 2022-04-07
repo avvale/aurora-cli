@@ -41,10 +41,10 @@ export default class Generate extends Command
     {
         const { args, flags } = await this.parse(Generate);
 
-        if (args.elementType === 'b') args.elementType = 'bounded-context';
-        if (args.elementType === 'm') args.elementType = 'module';
+        if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
+        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
 
-        if (args.elementType === TemplateElement.MODULE)
+        if (args.elementType === TemplateElement.BACK_MODULE)
         {
             let moduleFlag: any = {};
             if (flags.module) moduleFlag = Operations.parseFlagOfBoundedContextAndModule(this, flags.module);

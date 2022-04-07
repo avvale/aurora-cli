@@ -50,13 +50,13 @@ export default class Load extends Command
         const { args, flags }   = await this.parse(Load);
         const stateService      = container.resolve(StateService);
 
-        if (args.elementType === 'b') args.elementType = 'bounded-context';
-        if (args.elementType === 'm') args.elementType = 'module';
+        if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
+        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
 
         // ser operations object
         const operations = new Operations();
 
-        if (args.elementType === TemplateElement.MODULE)
+        if (args.elementType === TemplateElement.BACK_MODULE)
         {
             let moduleFlag: any = {};
             if (flags.module) moduleFlag = Operations.parseFlagOfBoundedContextAndModule(this, flags.module);
@@ -88,7 +88,7 @@ export default class Load extends Command
             await this.reviewOverwrites(operations, stateService);
         }
 
-        if (args.elementType.toSnakeCase() === TemplateElement.BOUNDED_CONTEXT)
+        if (args.elementType === TemplateElement.BACK_BOUNDED_CONTEXT)
         {
             const { boundedContextName }: any = await Prompter.promptForLoadBoundedContext(flags.boundedContext);
 

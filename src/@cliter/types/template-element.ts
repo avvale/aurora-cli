@@ -1,15 +1,16 @@
 export enum TemplateElement
 {
-    API                           = 'api',
-    APPLICATION                   = 'application',
-    BOUNDED_CONTEXT               = 'bounded-context',
+    BACK_API                      = 'back/api',
+    BACK_APPLICATION              = 'back/application',
+    BACK_BOUNDED_CONTEXT          = 'back/bounded-context',
+    BACK_ENV                      = 'back/env',
+    BACK_MODULE                   = 'back/module',
+
     CI_CD                         = 'ci-cd',
     DASHBOARD                     = 'dashboard',
-    ENV                           = 'env',
     I18N_API                      = 'i18n-api',
     I18N_MODULE                   = 'i18n-module',
     INTERMEDIATE_TABLE            = 'intermediate-table',
-    MODULE                        = 'module',
     DASHBOARD_MODULE              = 'dashboard-module',
     DASHBOARD_MODULE_TRANSLATIONS = 'dashboard-module-translations',
     PACKAGE                       = 'package',

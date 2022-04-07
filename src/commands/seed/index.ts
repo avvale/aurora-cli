@@ -33,10 +33,10 @@ export default class Seed extends Command
     {
         const { args, flags } = await this.parse(Seed);
 
-        if (args.elementType === 'b') args.elementType = 'bounded-context';
-        if (args.elementType === 'm') args.elementType = 'module';
+        if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
+        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
 
-        if (args.elementType === TemplateElement.MODULE)
+        if (args.elementType === TemplateElement.BACK_MODULE)
         {
             let moduleFlag: any = {};
             if (flags.module) moduleFlag = Operations.parseFlagOfBoundedContextAndModule(this, flags.module);
@@ -64,7 +64,7 @@ export default class Seed extends Command
             }
         }
 
-        if (args.elementType.toKebabCase() === TemplateElement.BOUNDED_CONTEXT)
+        if (args.elementType === TemplateElement.BACK_BOUNDED_CONTEXT)
         {
             const { boundedContextName }: any = await Prompter.promptForSeedBoundedContext(flags.boundedContext);
 

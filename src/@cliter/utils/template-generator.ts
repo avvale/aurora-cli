@@ -29,7 +29,7 @@ export class TemplateGenerator
     ): void
     {
         FileManager.generateContents(
-            path.join(TemplateGenerator.templatePath, templateElement, templateElementPath || ''),
+            path.join(TemplateGenerator.templatePath, ...templateElement.split('/'), templateElementPath || ''),
             relativeTargetBasePath,
             relativeTargetPath,
         );
