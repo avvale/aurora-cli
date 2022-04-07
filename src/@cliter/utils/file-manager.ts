@@ -100,7 +100,7 @@ export class FileManager
     ): void
     {
         const targetBasePath    = process.cwd();
-        const templatesPath     = path.join(__dirname, '../..', 'templates');
+        const templatesPath     = path.join(__dirname, '..', '..', 'templates');
 
         // read all files/folders (1 level) from template folder
         const filesToCreate = fs.readdirSync(originPath);

@@ -12,7 +12,7 @@ import { Property } from './property';
 
 export class TemplateGenerator
 {
-    public static readonly templatePath: string = path.join(__dirname, '../..', 'templates');
+    public static readonly templatePath: string = path.join(__dirname, '..', '..', 'templates');
     public static readonly projectDirectory: string = process.cwd();
     public static readonly stateService = container.resolve(StateService);
 
