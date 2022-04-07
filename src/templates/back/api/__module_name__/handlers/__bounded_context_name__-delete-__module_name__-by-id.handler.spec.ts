@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 {{/if}}
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.controller';
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.handler';
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -17,8 +17,9 @@ import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.appl
 
 describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController', () =>
 {
-    let controller: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController;
     let handler: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler;
+    let queryBus: IQueryBus;
+    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -28,49 +29,54 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 CacheModule.register(),
                 {{/if}}
             ],
-            controllers: [
-                {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController,
-            ],
             providers: [
+                {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler,
                 {{#if schema.properties.hasI18n}}
                 AddI18NConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    },
+                    }
                 },
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
                         get: (key: string) => key === 'common/lang' ? langs : null,
-                    },
+                    }
                 },
                 {{/if}}
                 {
-                    provide : {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler,
+                    provide : IQueryBus,
                     useValue: {
-                        main: () => { /**/ },
+                        ask: () => { /**/ },
+                    },
+                },
+                {
+                    provide : ICommandBus,
+                    useValue: {
+                        dispatch: () => { /**/ },
                     },
                 },
             ],
         }).compile();
 
-        controller  = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController);
         handler     = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler);
+        queryBus    = module.get<IQueryBus>(IQueryBus);
+        commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
     {
         test('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController should be defined', () =>
         {
-            expect(controller).toBeDefined();
+            expect(handler).toBeDefined();
         });
 
         test('should return an {{ toCamelCase schema.moduleName }} deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
-            expect(await controller.main({{ toCamelCase schema.moduleNames }}[0].id)).toBe({{ toCamelCase schema.moduleNames }}[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
+            expect(await handler.main({{ toCamelCase schema.moduleNames }}[0].id)).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });
 });

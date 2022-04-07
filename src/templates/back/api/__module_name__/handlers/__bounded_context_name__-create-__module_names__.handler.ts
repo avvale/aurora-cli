@@ -19,6 +19,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
     async main(
         payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[] | Create{{ toPascalCase schema.moduleName }}Dto[],
+        {{#if schema.hasTenant}}
+        account: AccountResponse,
+        {{/if}}
         timezone?: string,
     )
     {

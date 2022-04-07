@@ -27,10 +27,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
     async main(
         payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input | Create{{ toPascalCase schema.moduleName }}Dto,
-        timezone?: string,
         {{#if schema.hasTenant}}
         account: AccountResponse,
         {{/if}}
+        timezone?: string,
     )
     {
         await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleName }}Command(payload, { timezone }));

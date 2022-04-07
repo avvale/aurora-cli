@@ -92,12 +92,12 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler } from './handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.handler';
 {{/notInArray}}
 {{#if schema.properties.hasI18n}}
-{{#notInArray schema.excluded 'src/{{ config.apiContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id-i18n.handrler.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NHandler } from './handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.handrler';
+{{#notInArray schema.excluded 'src/{{ config.apiContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id-i18n.handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NHandler } from './handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.handler';
 {{/notInArray}}
 {{/if}}
-{{#notInArray schema.excluded 'src/{{ config.apiContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.handrler.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.handrler';
+{{#notInArray schema.excluded 'src/{{ config.apiContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.handler';
 {{/notInArray}}
 
 export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Controllers = [

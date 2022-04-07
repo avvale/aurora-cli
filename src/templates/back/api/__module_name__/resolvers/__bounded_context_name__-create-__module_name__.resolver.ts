@@ -38,18 +38,18 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     {{/if}}
     async main(
         @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input,
-        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Timezone() timezone?: string,
     )
     {
         return await this.handler.main(
             payload,
-            timezone,
             {{#if schema.hasTenant}}
             account,
             {{/if}}
+            timezone,
         );
     }
 }
