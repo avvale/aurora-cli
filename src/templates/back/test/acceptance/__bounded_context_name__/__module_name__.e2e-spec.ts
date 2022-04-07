@@ -43,10 +43,12 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
     {{/if }}
     let seeder: Mock{{ toPascalCase schema.moduleName }}Seeder;
-    let mockData: any = {{ toCamelCase schema.moduleNames }};
     {{#if schema.hasOAuth }}
     let testJwt: string;
     {{/if }}
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mockData: any = {{ toCamelCase schema.moduleNames }};
 
     beforeAll(async () =>
     {
@@ -194,7 +196,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}' }{{/if }},{{/eq}}{{/each}}
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -215,7 +217,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}' }{{/if }},{{/eq}}{{/each}}
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -225,7 +227,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each schema.properties.hasMinLength  as |hasMaxLengthPropety hasMinLengthPropetyId|}}
+    {{#each schema.properties.hasMinLength  as |hasMinLengthPropety hasMinLengthPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}', () =>
     {
         return request(app.getHttpServer())
@@ -235,9 +237,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq hasMaxLengthPropety.name testPropety.name}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMinLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -256,9 +257,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isIntegerPropety.name testPropety.name}}100.10{{else}}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isIntegerPropety.name testPropety.name}}...{ {{ toCamelCase name }}: 100.10 },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -277,9 +277,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isIntegerUnsignedPropety.name testPropety.name}}-9{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isIntegerUnsignedPropety.name testPropety.name}}...{ {{ toCamelCase name }}: -1 },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -298,9 +297,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isBooleanPropety.name testPropety.name}}'true'{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isBooleanPropety.name testPropety.name}}...{ {{ toCamelCase name }}: 'true' },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -319,9 +317,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isEnumPropety.name testPropety.name}}XXXX{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isEnumPropety.name testPropety.name}}...{ {{ toCamelCase name }}: 'XXXX' },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -340,9 +337,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isTimestampPropety.name testPropety.name}}XXXXXXXX{{else}}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isTimestampPropety.name testPropety.name}}...{ {{ toCamelCase name }}: 'XXXX' },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -361,9 +357,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isDecimalPropety.name testPropety.name}}{{ randomDecimalDigits (add (first isDecimalPropety.decimals) 1) (last testPropety.decimals) }}{{else}}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isDecimalPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{ randomDecimalDigits (add (first isDecimalPropety.decimals) 1) (last testPropety.decimals) }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -382,9 +377,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{#eq isDecimalPropety.name testPropety.name}}{{ randomDecimalDigits (first isDecimalPropety.decimals) (add (last testPropety.decimals) 1) }}{{else}}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{/eq}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isDecimalPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{ randomDecimalDigits (first isDecimalPropety.decimals) (add (last testPropety.decimals) 1) }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
