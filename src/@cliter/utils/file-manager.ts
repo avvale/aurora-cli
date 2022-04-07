@@ -115,8 +115,6 @@ export class FileManager
 
             if (stats.isFile())
             {
-                console.log(path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file).split(path.sep)));
-                console.log(FileManager.stateService.config.avoidOverwritingFilesIfExist);
                 // avoid overwriting some files that cannot be overwritten, if file exist
                 if (
                     fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))) &&
