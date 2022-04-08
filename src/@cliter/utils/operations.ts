@@ -2,18 +2,20 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
 
+// node
+import * as child from 'node:child_process';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
 // imports
 import { Command } from '@oclif/core';
+import * as yaml from 'js-yaml';
+import * as _ from 'lodash';
 import { StateService } from './../services/state.service';
 import { TemplateElement } from './../types';
 import { TemplateGenerator } from './../utils/template-generator';
 import { CodeWriter } from './code-writer';
 import { cliterConfig } from './../config/cliter.config';
-import * as child from 'child_process';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as yaml from 'js-yaml';
-import * as _ from 'lodash';
 
 export class Operations
 {

@@ -37,11 +37,11 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     {{/if}}
     async main(
         @Args('id') id: string,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.properties.hasI18n}}
         @ContentLanguage() contentLanguage?: string,
         {{/if}}
@@ -55,7 +55,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
             constraint,
             timezone,
             {{#if schema.properties.hasI18n}}
-            contentLanguage?: string,
+            contentLanguage,
             {{/if}}
         );
     }
