@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
@@ -19,7 +19,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Find{{ toPascalCase schema.moduleName }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}.query';
+import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}.handler';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find')
@@ -30,10 +30,7 @@ import { Find{{ toPascalCase schema.moduleName }}Query } from '../../../../{{ co
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller
 {
     constructor(
-        private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
-        {{/if}}
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler,
     ) {}
 
     @Post()
@@ -46,20 +43,27 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     @TenantConstraint()
     {{/if}}
     async main(
-        @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Body('query') queryStatement?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.properties.hasI18n}}
         @ContentLanguage() contentLanguage?: string,
         {{/if}}
     )
     {
-        {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
-        {{/if}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}Query(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            {{#if schema.hasTenant}}
+            account,
+            {{/if}}
+            queryStatement,
+            constraint,
+            timezone,
+            {{#if schema.properties.hasI18n}}
+            contentLanguage?: string,
+            {{/if}}
+        );
     }
 }

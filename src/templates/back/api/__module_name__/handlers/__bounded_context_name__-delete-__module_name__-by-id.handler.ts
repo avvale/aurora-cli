@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@nestjs/common';
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCode, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasTenant}}
 // tenant
 import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
 
 {{/if}}
 // {{ config.applicationsContainer }}
@@ -26,7 +25,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     async main(
         id: string,
         {{#if schema.hasTenant}}
-        @CurrentAccount() account: AccountResponse,
+        account: AccountResponse,
         {{/if}}
         constraint?: QueryStatement,
         timezone?: string,

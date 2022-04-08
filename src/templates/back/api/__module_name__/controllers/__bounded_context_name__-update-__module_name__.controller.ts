@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCode, {{/if}}ICommandBus, IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { Update{{ toPascalCase schema.moduleName }}Dto } from './../dto/update-{{ toKebabCase schema.moduleName }}.dto';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
@@ -20,8 +20,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Update{{ toPascalCase schema.moduleName }}Command } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/update/update-{{ toKebabCase schema.moduleName }}.command';
-import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.handler';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update')
@@ -32,11 +31,7 @@ import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '../../../../{
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
-        {{/if}}
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler,
     ) {}
 
     @Put()
@@ -47,18 +42,20 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     {{/if}}
     async main(
         @Body() payload: Update{{ toPascalCase schema.moduleName }}Dto,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new Update{{ toPascalCase schema.moduleName }}Command(payload, constraint, { timezone }));
-
-        {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
-        {{/if}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            {{#if schema.hasTenant}}
+            account,
+            {{/if}}
+            constraint,
+            timezone,
+        );
     }
 }

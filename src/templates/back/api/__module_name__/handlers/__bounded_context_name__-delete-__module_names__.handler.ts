@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@nestjs/common';
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasTenant}}
 // tenant
 import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
 
 {{/if}}
 // {{ config.applicationsContainer }}

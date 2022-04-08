@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@nestjs/common';
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCode, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
 
 // {{ config.applicationsContainer }}
 import { Create{{ toPascalCase schema.moduleNames }}Command } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';

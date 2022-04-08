@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -18,7 +18,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Find{{ toPascalCase schema.moduleName }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}.query';
+import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}.handler';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../../../graphql';
 
 @Resolver()
@@ -29,10 +29,7 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Resolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
-        {{/if}}
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler,
     ) {}
 
     @Query('{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}')
@@ -40,20 +37,27 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     @TenantConstraint()
     {{/if}}
     async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Args('query') queryStatement?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.properties.hasI18n}}
         @ContentLanguage() contentLanguage?: string,
         {{/if}}
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {
-        {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
-        {{/if}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}Query(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            {{#if schema.hasTenant}}
+            account,
+            {{/if}}
+            queryStatement,
+            constraint,
+            timezone,
+            {{#if schema.properties.hasI18n}}
+            contentLanguage,
+            {{/if}}
+        );
     }
 }

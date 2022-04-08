@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCode, {{/if}}ICommandBus, IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -18,8 +18,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
-import { Update{{ toPascalCase schema.moduleName }}Command } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/update/update-{{ toKebabCase schema.moduleName }}.command';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.handler';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input } from './../../../../graphql';
 
 @Resolver()
@@ -30,11 +29,7 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
-        {{/if}}
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler,
     ) {}
 
     @Mutation('{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}')
@@ -43,18 +38,20 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     {{/if}}
     async main(
         @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new Update{{ toPascalCase schema.moduleName }}Command(payload, constraint, { timezone }));
-
-        {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
-        {{/if}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            {{#if schema.hasTenant}}
+            account,
+            {{/if}}
+            constraint,
+            timezone,
+        );
     }
 }

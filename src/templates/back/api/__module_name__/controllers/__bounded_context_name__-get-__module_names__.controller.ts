@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, {{#if schema.properties.hasI18n}}AddI18NConstraintService, ContentLanguage, {{/if}}IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
@@ -19,7 +19,7 @@ import { CurrentAccount } from './../../../shared/decorators/current-account.dec
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Get{{ toPascalCase schema.moduleNames }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
+import { {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-get-{{ toKebabCase schema.moduleNames }}.handler';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/get')
@@ -30,36 +30,40 @@ import { Get{{ toPascalCase schema.moduleNames }}Query } from '../../../../{{ co
 export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller
 {
     constructor(
-        private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
-        {{/if}}
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler,
     ) {}
 
     @Post()
     @HttpCode(200)
     @ApiOperation({ summary: 'Get {{ toKebabCase schema.moduleNames }} according to query' })
-    @ApiOkResponse({ description: 'The records has been found successfully.', type: [{{ toPascalCase schema.moduleName }}Dto] })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [{{ toPascalCase schema.moduleName }}Dto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     {{#if schema.hasTenant}}
     @TenantConstraint()
     {{/if}}
     async main(
-        @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
-        @Timezone() timezone?: string,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Body('query') queryStatement?: QueryStatement,
+        @Constraint() constraint?: QueryStatement,
+        @Timezone() timezone?: string,
         {{#if schema.properties.hasI18n}}
         @ContentLanguage() contentLanguage?: string,
         {{/if}}
     )
     {
-        {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage, { defineDefaultLanguage: false });
-        {{/if}}
-        return await this.queryBus.ask(new Get{{ toPascalCase schema.moduleNames }}Query(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            {{#if schema.hasTenant}}
+            account,
+            {{/if}}
+            queryStatement,
+            constraint,
+            timezone,
+            {{#if schema.properties.hasI18n}}
+            contentLanguage?: string,
+            {{/if}}
+        );
     }
 }

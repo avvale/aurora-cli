@@ -8,11 +8,11 @@ import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../../../graphql';
+import { Paginate{{ toPascalCase schema.moduleNames }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/paginate/paginate-{{ toKebabCase schema.moduleNames }}.query';
+import { Pagination } from './../../../../graphql';
 
 @Injectable()
-export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler
+export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler
 {
     constructor(
         private readonly queryBus: IQueryBus,
@@ -22,20 +22,20 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ) {}
 
     async main(
-        id: string,
         {{#if schema.hasTenant}}
         account: AccountResponse,
         {{/if}}
+        queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         {{#if schema.properties.hasI18n}}
         contentLanguage?: string,
         {{/if}}
-    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
+    ): Promise<Pagination>
     {
         {{#if schema.properties.hasI18n}}
         constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
         {{/if}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(queryStatement, constraint, { timezone }));
     }
 }
