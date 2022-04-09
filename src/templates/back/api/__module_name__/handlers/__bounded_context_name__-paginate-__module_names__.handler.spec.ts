@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.handler';
+import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler } from './{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -15,9 +15,9 @@ import { langs } from '{{#eq schema.boundedContextName 'common'}}../../../../{{ 
 {{/if}}
 import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
-describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController', () =>
+describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler', () =>
 {
-    let handler: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler;
+    let handler: {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -30,7 +30,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 {{/if}}
             ],
             providers: [
-                {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler,
+                {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler,
                 {{#if schema.properties.hasI18n}}
                 AddI18NConstraintService,
                 {
@@ -61,22 +61,27 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
             ],
         }).compile();
 
-        handler = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
         commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
+    test('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
+    {
+        expect(handler).toBeDefined();
+    });
+
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
         {
             expect(handler).toBeDefined();
         });
 
-        test('should return an {{ toCamelCase schema.moduleName }} deleted', async () =>
+        test('should return a {{ toCamelCase schema.moduleNames }}', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
-            expect(await handler.main({{ toCamelCase schema.moduleNames }}[0].id)).toBe({{ toCamelCase schema.moduleNames }}[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }})));
+            expect(await handler.main()).toBe({{ toCamelCase schema.moduleNames }});
         });
     });
 });

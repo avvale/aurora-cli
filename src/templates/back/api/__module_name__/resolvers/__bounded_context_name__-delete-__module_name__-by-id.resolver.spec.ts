@@ -30,21 +30,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
             ],
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdResolver,
-                {{#if schema.properties.hasI18n}}
-                AddI18NConstraintService,
-                {
-                    provide : ConfigService,
-                    useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
-                },
-                {
-                    provide : CACHE_MANAGER,
-                    useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
-                },
-                {{/if}}
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler,
                     useValue: {
