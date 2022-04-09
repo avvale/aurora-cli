@@ -31,21 +31,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
             ],
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver,
-                {{#if schema.properties.hasI18n}}
-                AddI18NConstraintService,
-                {
-                    provide : ConfigService,
-                    useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    },
-                },
-                {
-                    provide : CACHE_MANAGER,
-                    useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
-                    },
-                },
-                {{/if}}
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler,
                     useValue: {
@@ -55,8 +40,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
             ],
         }).compile();
 
-        resolver    = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver);
-        handler     = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler);
+        resolver = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler);
     });
 
     test('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver should be defined', () =>
