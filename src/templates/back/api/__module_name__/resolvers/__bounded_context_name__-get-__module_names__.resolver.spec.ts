@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 {{/if}}
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver } from './{{ toKebabCase schema.boundedContextName }}-get-{{ toKebabCase schema.moduleNames }}.resolver';
+import { {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-get-{{ toKebabCase schema.moduleNames }}.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -18,8 +18,7 @@ import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.appl
 describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver', () =>
 {
     let resolver:   {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler;
 
     beforeAll(async () =>
     {
@@ -31,39 +30,17 @@ describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.
             ],
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver,
-                {{#if schema.properties.hasI18n}}
-                AddI18NConstraintService,
                 {
-                    provide : ConfigService,
+                    provide : {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler,
                     useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
-                },
-                {
-                    provide : CACHE_MANAGER,
-                    useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
-                },
-                {{/if}}
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
 
-        resolver    = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler);
     });
 
     test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
@@ -80,7 +57,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.
 
         test('should return a {{ toCamelCase schema.moduleNames }}', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }})));
+            jest.spyOn(resolver, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }})));
             expect(await resolver.main()).toBe({{ toCamelCase schema.moduleNames }});
         });
     });
