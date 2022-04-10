@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 {{/if}}
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller } from './{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}.controller';
+import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -18,8 +18,7 @@ import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.appl
 describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller', () =>
 {
     let controller: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler;
 
     beforeAll(async () =>
     {
@@ -33,39 +32,17 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
                 {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller
             ],
             providers: [
-                {{#if schema.properties.hasI18n}}
-                AddI18NConstraintService,
                 {
-                    provide : ConfigService,
+                    provide : {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler,
                     useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : CACHE_MANAGER,
-                    useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
-                },
-                {{/if}}
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        controller  = module.get<{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller>({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller>({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler);
     });
 
     describe('main', () =>
@@ -77,7 +54,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
 
         test('should return a {{ toCamelCase schema.moduleName }}', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
+            jest.spyOn(controller, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
             expect(await controller.main()).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });
