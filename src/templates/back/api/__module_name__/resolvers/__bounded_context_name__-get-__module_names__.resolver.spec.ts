@@ -17,7 +17,7 @@ import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.appl
 
 describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver', () =>
 {
-    let resolver:   {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver;
+    let resolver: {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver;
     let handler: {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler;
 
     beforeAll(async () =>
@@ -36,7 +36,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.
                         main: () => { /**/ },
                     },
                 },
-            ]
+            ],
         }).compile();
 
         resolver = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver);
