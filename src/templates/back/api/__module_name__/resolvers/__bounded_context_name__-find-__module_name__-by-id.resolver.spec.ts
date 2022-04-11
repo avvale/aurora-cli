@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 {{/if}}
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver } from './{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}-by-id.resolver';
+import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}-by-id.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -18,8 +18,7 @@ import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.appl
 describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver', () =>
 {
     let resolver: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler;
 
     beforeAll(async () =>
     {
@@ -31,39 +30,17 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
             ],
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver,
-                {{#if schema.properties.hasI18n}}
-                AddI18NConstraintService,
                 {
-                    provide : ConfigService,
+                    provide : {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler,
                     useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : CACHE_MANAGER,
-                    useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
-                },
-                {{/if}}
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
+            ],
         }).compile();
 
-        resolver    = module.get<{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver>({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver>({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler>({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler);
     });
 
     test('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdResolver should be defined', () =>
@@ -80,7 +57,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
 
         test('should return an {{ toCamelCase schema.moduleName }} by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
+            jest.spyOn(resolver, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
             expect(await resolver.main({{ toCamelCase schema.moduleNames }}[0].id)).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });
