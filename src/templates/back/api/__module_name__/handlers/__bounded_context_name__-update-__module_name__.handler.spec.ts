@@ -69,14 +69,14 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
 
     test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver should be defined', () =>
     {
-        expect(resolver).toBeDefined();
+        expect(handler).toBeDefined();
     });
 
     describe('main', () =>
     {
         test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver should be defined', () =>
         {
-            expect(resolver).toBeDefined();
+            expect(handler).toBeDefined();
         });
 
         test('should return a {{ toCamelCase schema.moduleName }} created', async () =>
