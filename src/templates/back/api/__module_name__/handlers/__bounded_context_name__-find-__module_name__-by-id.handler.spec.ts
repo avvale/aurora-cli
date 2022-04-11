@@ -50,13 +50,13 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
                     provide : IQueryBus,
                     useValue: {
                         ask: () => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : ICommandBus,
                     useValue: {
                         dispatch: () => { /**/ },
-                    }
+                    },
                 },
             ],
         }).compile();
