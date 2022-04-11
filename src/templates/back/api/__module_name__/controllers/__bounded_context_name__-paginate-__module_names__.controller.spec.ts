@@ -54,7 +54,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
 
         test('should return a {{ toCamelCase schema.moduleNames }}', async () =>
         {
-            jest.spyOn(controller, 'main').mockImplementation(() => new Promise(resolve => resolve({
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
                 rows : {{ toCamelCase schema.moduleNames }},

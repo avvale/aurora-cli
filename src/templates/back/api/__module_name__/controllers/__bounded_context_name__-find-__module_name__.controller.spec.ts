@@ -54,7 +54,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
 
         test('should return a {{ toCamelCase schema.moduleName }}', async () =>
         {
-            jest.spyOn(controller, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
             expect(await controller.main()).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });

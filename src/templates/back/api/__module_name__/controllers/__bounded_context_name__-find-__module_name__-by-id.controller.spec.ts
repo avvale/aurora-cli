@@ -29,7 +29,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
                 {{/if}}
             ],
             controllers: [
-                {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdController
+                {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdController,
             ],
             providers: [
                 {
@@ -54,7 +54,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
 
         test('should return an {{ toCamelCase schema.moduleName }} by id', async () =>
         {
-            jest.spyOn(controller, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
             expect(await controller.main({{ toCamelCase schema.moduleNames }}[0].id)).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });

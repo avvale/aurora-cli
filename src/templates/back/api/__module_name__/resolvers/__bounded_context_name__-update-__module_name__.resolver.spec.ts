@@ -58,7 +58,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
 
         test('should return a {{ toCamelCase schema.moduleName }} created', async () =>
         {
-            jest.spyOn(resolver, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
             expect(await resolver.main(<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input>{{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });
