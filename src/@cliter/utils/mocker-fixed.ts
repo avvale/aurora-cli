@@ -1,7 +1,6 @@
 import * as faker from 'faker';
 import * as dayjs from 'dayjs';
 import randomNumber from './random-number';
-import randomDigitsDecimal from './random-decimal-digits';
 
 export class MockerFixed
 {
@@ -86,7 +85,7 @@ export class MockerFixed
                 return Number.parseInt('1'.repeat(maxLength));
 
             case 'decimal':
-                return totalDigits && decimalDigits ? randomDigitsDecimal(totalDigits, decimalDigits) : randomDigitsDecimal(5, 2);
+                return totalDigits && decimalDigits ? Number.parseFloat('1'.repeat(totalDigits) + '.' + '1'.repeat(decimalDigits)) : Number.parseFloat('1'.repeat(5) + '.' + '1'.repeat(2));
 
             case 'random.float':
                 return maxLength ? randomNumber(maxLength) : faker.datatype.float();
