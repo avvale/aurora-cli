@@ -196,7 +196,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -217,7 +217,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -238,7 +238,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMinLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='seed' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMinLengthPropety.name testPropety.name}}...{ {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }} },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -318,7 +318,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isEnumPropety.name testPropety.name}}...{ {{ toCamelCase name }}: 'XXXX' },{{/eq}}{{/each}}
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isEnumPropety.name testPropety.name}}...{ {{ toCamelCase name }}: '****' },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -338,7 +338,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isTimestampPropety.name testPropety.name}}...{ {{ toCamelCase name }}: 'XXXX' },{{/eq}}{{/each}}
+                {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isTimestampPropety.name testPropety.name}}...{ {{ toCamelCase name }}: '****' },{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
