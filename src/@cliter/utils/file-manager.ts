@@ -299,15 +299,11 @@ export class FileManager
                 FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE CREATED]'));
             }
 
-            // exclude e2e-spec.ts files from lock files
-            if (!relativeFilePath.endsWith('.e2e-spec.ts'))
-            {
-                // add file to lockFiles
-                FileManager.stateService.newLockFiles.push({
-                    path     : relativeFilePath,
-                    integrity: `sha1:${Cypher.sha1(contents)}`,
-                });
-            }
+            // add file to lockFiles
+            FileManager.stateService.newLockFiles.push({
+                path     : relativeFilePath,
+                integrity: `sha1:${Cypher.sha1(contents)}`,
+            });
         }
     }
 }
