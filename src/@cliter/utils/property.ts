@@ -69,7 +69,7 @@ export class Property
             isI18n?: boolean;
             example?: any;
             faker?: any;
-        }
+        },
     )
     {
         this._name = payload.name;
@@ -168,6 +168,11 @@ export class Property
     get getReferenceKey(): any
     {
         return this.relationshipKey ? this.relationshipKey : 'id';
+    }
+
+    get isRelationship(): boolean
+    {
+        return Boolean(this.relationship);
     }
 
     // property names
