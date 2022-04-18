@@ -21,7 +21,7 @@ export class Mock{{ toPascalCase schema.moduleName }}Repository extends MockRepo
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }
