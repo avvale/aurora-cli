@@ -4,7 +4,7 @@ import { Update{{ toPascalCase schema.moduleName }}Command } from './update-{{ t
 import { Update{{ toPascalCase schema.moduleName }}Service } from './update-{{ toKebabCase schema.moduleName }}.service';
 import {
     {{> importValueObjects }}
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(Update{{ toPascalCase schema.moduleName }}Command)
 export class Update{{ toPascalCase schema.moduleName }}CommandHandler implements ICommandHandler<Update{{ toPascalCase schema.moduleName }}Command>

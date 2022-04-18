@@ -9,7 +9,7 @@ import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/
 {{/if}}
 // {{ config.applicationsContainer }}
 import { Find{{ toPascalCase schema.moduleName }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}.query';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler

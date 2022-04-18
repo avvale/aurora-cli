@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { MockSeeder } from '{{ config.auroraCorePackage }}';
 import {
     {{> importValueObjects }}
-} from './../../domain/value-objects';
-import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toCamelCase schema.moduleNames }} } from './../seeds/{{ toKebabCase schema.moduleName }}.seed';
+} from '../../domain/value-objects';
+import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
+import { {{ toCamelCase schema.moduleNames }} } from '../seeds/{{ toKebabCase schema.moduleName }}.seed';
 
 @Injectable()
 export class Mock{{ toPascalCase schema.moduleName }}Seeder extends MockSeeder<{{ schema.aggregateName }}>

@@ -14,12 +14,12 @@ import { AuthorizationGuard } from '../../../../{{ config.applicationsContainer 
 // tenant
 import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
 import { TenantConstraint } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
 
 {{/if}}
 // {{ config.applicationsContainer }}
 import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.handler';
-import { Pagination } from './../../../../graphql';
+import { Pagination } from '../../../../graphql';
 
 @Resolver()
 {{#if schema.hasOAuth}}

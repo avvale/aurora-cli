@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
-import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toPascalCase schema.moduleName }}Id } from './../../domain/value-objects';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
+import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
+import { {{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
 
 @Injectable()
 export class Find{{ toPascalCase schema.moduleName }}ByIdService

@@ -4,7 +4,7 @@ import { Create{{ toPascalCase schema.moduleName }}Command } from './create-{{ t
 import { Create{{ toPascalCase schema.moduleName }}Service } from './create-{{ toKebabCase schema.moduleName }}.service';
 import {
     {{> importValueObjects }}
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(Create{{ toPascalCase schema.moduleName }}Command)
 export class Create{{ toPascalCase schema.moduleName }}CommandHandler implements ICommandHandler<Create{{ toPascalCase schema.moduleName }}Command>

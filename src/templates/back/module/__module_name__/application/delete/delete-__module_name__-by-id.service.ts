@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.moduleName }}Id } from './../../domain/value-objects';
-import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+import { {{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
 {{> importI18NRepository}}
 
 @Injectable()

@@ -1,8 +1,8 @@
 import { Command } from '@oclif/core';
-import { SqlRelationship, SqlType } from './../types';
+import { SqlRelationship, SqlType } from '../types';
 import { Operations } from './operations';
 import { Property } from './property';
-import { cliterConfig } from './../config/cliter.config';
+import { cliterConfig } from '../config/cliter.config';
 import { Properties } from './properties';
 import * as inquirer from 'inquirer';
 import * as Table from 'cli-table3';

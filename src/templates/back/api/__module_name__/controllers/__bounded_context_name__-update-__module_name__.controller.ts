@@ -2,8 +2,8 @@
 import { Controller, Put, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { Constraint, {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-import { Update{{ toPascalCase schema.moduleName }}Dto } from './../dto/update-{{ toKebabCase schema.moduleName }}.dto';
-import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
+import { Update{{ toPascalCase schema.moduleName }}Dto } from '../dto/update-{{ toKebabCase schema.moduleName }}.dto';
+import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -16,7 +16,7 @@ import { AuthorizationGuard } from '../../../../{{ config.applicationsContainer 
 // tenant
 import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
 import { TenantConstraint } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
 
 {{/if}}
 // {{ config.applicationsContainer }}

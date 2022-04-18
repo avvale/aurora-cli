@@ -1,4 +1,4 @@
-import { Properties } from './../utils/properties';
+import { Properties } from '../utils/properties';
 
 export interface ModuleDefinitionSchema
 {

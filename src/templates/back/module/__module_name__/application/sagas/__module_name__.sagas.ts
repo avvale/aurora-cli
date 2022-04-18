@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { Created{{ toPascalCase schema.moduleName }}Event } from './../events/created-{{ toKebabCase schema.moduleName }}.event';
+import { Created{{ toPascalCase schema.moduleName }}Event } from '../events/created-{{ toKebabCase schema.moduleName }}.event';
 
 @Injectable()
 export class {{ toPascalCase schema.moduleName }}Sagas

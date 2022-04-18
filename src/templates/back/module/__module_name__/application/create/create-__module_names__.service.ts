@@ -5,11 +5,11 @@ import { ConfigService } from '@nestjs/config';
 {{/if}}
 import {
     {{> importValueObjects }}
-} from './../../domain/value-objects';
-import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+} from '../../domain/value-objects';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
 {{> importI18NRepository}}
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from './../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
+import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from '../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
 @Injectable()
 export class Create{{ toPascalCase schema.moduleNames }}Service

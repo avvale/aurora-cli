@@ -3,7 +3,7 @@ import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand } from './del
 import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NService } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
 import {
     {{ toPascalCase schema.moduleName }}Id
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand)
 export class Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommandHandler implements ICommandHandler<Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand>

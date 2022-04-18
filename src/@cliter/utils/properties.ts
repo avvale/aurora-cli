@@ -1,5 +1,5 @@
 import { Property } from './property';
-import { SqlRelationship, SqlType } from './../types';
+import { SqlRelationship, SqlType } from '../types';
 
 export class Properties
 {

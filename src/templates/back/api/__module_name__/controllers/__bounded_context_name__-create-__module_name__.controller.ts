@@ -2,8 +2,8 @@
 import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { Timezone } from '{{ config.auroraCorePackage }}';
-import { Create{{ toPascalCase schema.moduleName }}Dto } from './../dto/create-{{ toKebabCase schema.moduleName }}.dto';
-import { {{ toPascalCase schema.moduleName }}Dto } from './../dto/{{ toKebabCase schema.moduleName }}.dto';
+import { Create{{ toPascalCase schema.moduleName }}Dto } from '../dto/create-{{ toKebabCase schema.moduleName }}.dto';
+import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -16,7 +16,7 @@ import { AuthorizationGuard } from '../../../../{{ config.applicationsContainer 
 // tenant
 import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
 import { TenantPolicy } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-policy.decorator';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
 
 {{/if}}
 // {{ config.applicationsContainer }}

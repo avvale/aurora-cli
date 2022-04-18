@@ -1,7 +1,7 @@
 import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralExpression, CallExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
 import { SyntaxKind, NewLineKind } from 'typescript';
-import { cliterConfig } from './../../../@cliter/config/cliter.config';
-import { Properties } from './../properties';
+import { cliterConfig } from '../../../@cliter/config/cliter.config';
+import { Properties } from '../properties';
 import { ImportDriver } from './import.driver';
 import { ExportDriver } from './export.driver';
 import { ArrayDriver } from './array.driver';

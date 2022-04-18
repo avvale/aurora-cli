@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { {{ toPascalCase schema.moduleName }}Response } from './../../domain/{{ toKebabCase schema.moduleName }}.response';
-import { {{ toPascalCase schema.moduleName }}Mapper } from './../../domain/{{ toKebabCase schema.moduleName }}.mapper';
+import { {{ toPascalCase schema.moduleName }}Response } from '../../domain/{{ toKebabCase schema.moduleName }}.response';
+import { {{ toPascalCase schema.moduleName }}Mapper } from '../../domain/{{ toKebabCase schema.moduleName }}.mapper';
 import { Get{{ toPascalCase schema.moduleNames }}Query } from './get-{{ toKebabCase schema.moduleNames }}.query';
 import { Get{{ toPascalCase schema.moduleNames }}Service } from './get-{{ toKebabCase schema.moduleNames }}.service';
 

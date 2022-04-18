@@ -5,13 +5,13 @@ import {
     {{> importValueObjects }}
 } from './value-objects';
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
-import { Created{{ toPascalCase schema.moduleName }}Event } from './../application/events/created-{{ toKebabCase schema.moduleName }}.event';
+import { Created{{ toPascalCase schema.moduleName }}Event } from '../application/events/created-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/updated-' (toKebabCase schema.moduleName) '.event.ts'}}
-import { Updated{{ toPascalCase schema.moduleName }}Event } from './../application/events/updated-{{ toKebabCase schema.moduleName }}.event';
+import { Updated{{ toPascalCase schema.moduleName }}Event } from '../application/events/updated-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
-import { Deleted{{ toPascalCase schema.moduleName }}Event } from './../application/events/deleted-{{ toKebabCase schema.moduleName }}.event';
+import { Deleted{{ toPascalCase schema.moduleName }}Event } from '../application/events/deleted-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 {{#each schema.properties.withRelationshipOneToOne}}
 import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';

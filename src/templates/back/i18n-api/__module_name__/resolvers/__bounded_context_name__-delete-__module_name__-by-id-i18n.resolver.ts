@@ -13,7 +13,7 @@ import { AuthorizationGuard } from '../../../../{{ config.applicationsContainer 
 // tenant
 import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
 import { TenantConstraint } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-import { CurrentAccount } from './../../../shared/decorators/current-account.decorator';
+import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
 
 {{/if}}
 // {{ config.applicationsContainer }}

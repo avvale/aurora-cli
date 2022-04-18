@@ -2,10 +2,10 @@ import { ConflictException, Injectable{{#if schema.properties.hasI18n}}, NotFoun
 import { EventPublisher } from '@nestjs/cqrs';
 import {
     {{> importValueObjects }}
-} from './../../domain/value-objects';
-import { I{{ toPascalCase schema.moduleName }}Repository } from './../../domain/{{ toKebabCase schema.moduleName }}.repository';
+} from '../../domain/value-objects';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
 {{> importI18NRepository}}
-import { {{ schema.aggregateName }} } from './../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
+import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 {{#if schema.properties.hasI18n}}
 import * as _ from 'lodash';
 {{/if}}

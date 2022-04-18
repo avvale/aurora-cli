@@ -1,5 +1,5 @@
-import { SqlRelationship, SqlType, SqlIndex } from './../types';
-import { cliterConfig } from './../config/cliter.config';
+import { SqlRelationship, SqlType, SqlIndex } from '../types';
+import { cliterConfig } from '../config/cliter.config';
 import * as faker from 'faker';
 import * as _ from 'lodash';
 

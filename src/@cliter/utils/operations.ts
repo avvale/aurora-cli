@@ -11,11 +11,11 @@ import * as path from 'node:path';
 import { Command } from '@oclif/core';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
-import { StateService } from './../services/state.service';
-import { TemplateElement } from './../types';
-import { TemplateGenerator } from './../utils/template-generator';
+import { StateService } from '../services/state.service';
+import { TemplateElement } from '../types';
+import { TemplateGenerator } from '../utils/template-generator';
 import { CodeWriter } from './code-writer';
-import { cliterConfig } from './../config/cliter.config';
+import { cliterConfig } from '../config/cliter.config';
 
 export class Operations
 {

@@ -24,10 +24,10 @@ import { IAccountRepository } from '../../../src/{{ config.applicationsContainer
 import { MockAccountRepository } from '../../../src/{{ config.applicationsContainer }}/iam/account/infrastructure/mock/mock-account.repository';
 {{/unlessEq }}
 {{#unlessEq (toPascalCase schema.boundedContextName) 'Iam' }}
-import { IamModule } from './../../../src/{{ config.apiContainer }}/iam/iam.module';
+import { IamModule } from '../../../src/{{ config.apiContainer }}/iam/iam.module';
 {{/unlessEq }}
 import { AuthorizationGuard } from '../../../src/{{ config.apiContainer }}/shared/modules/auth/guards/authorization.guard';
-import { TestingJwtService } from './../../../src/{{ config.apiContainer }}/o-auth/credential/services/testing-jwt.service';
+import { TestingJwtService } from '../../../src/{{ config.apiContainer }}/o-auth/credential/services/testing-jwt.service';
 import * as fs from 'fs';
 {{/if }}
 

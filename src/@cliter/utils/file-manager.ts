@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 
 // imports
-import { StateService } from './../services/state.service';
+import { StateService } from '../services/state.service';
 import { cliterConfig } from '../config/cliter.config';
 import { Cypher } from './cypher';
 import { Property } from './property';
