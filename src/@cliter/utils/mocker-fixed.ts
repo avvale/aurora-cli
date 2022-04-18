@@ -92,7 +92,10 @@ export class MockerFixed
 
             case 'timestamp':
             case 'timestamp.recent':
-                return dayjs(faker.date.recent()).format('YYYY-MM-DD HH:mm:ss');
+                return '2022-01-01 00:00:00';
+
+            case 'date':
+                return '2022-01-01';
 
             default:
                 throw new Error(`

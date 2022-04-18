@@ -92,6 +92,9 @@ export class Mocker
             case 'timestamp.recent':
                 return dayjs(faker.date.recent()).format('YYYY-MM-DD HH:mm:ss');
 
+            case 'date':
+                return dayjs(faker.date.recent()).format('YYYY-MM-DD');
+
             default:
                 throw new Error(`
                     Command Faker ${fieldType} not recognized, check FakeJs API:
