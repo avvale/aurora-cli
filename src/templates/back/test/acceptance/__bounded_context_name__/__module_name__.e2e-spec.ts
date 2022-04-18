@@ -396,7 +396,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{#if schema.hasOAuth }}
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
-            .send(seeder.collectionResponse[0])
+            .send(mockData[0])
             .expect(409);
     });
 
@@ -472,13 +472,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each schema.properties.test}}
-                {{#eq name 'id'}}
-                {{ toCamelCase name }}: '{{{ mocker (object property=. scapeQuotes=false) }}}',
-                {{else}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
-                {{/eq}}
-                {{/each}}
+                ...mockData[0],
+                ...{ id: '{{{ mocker (object type='fixedUuid') }}}' }
             })
             .expect(201);
     });
@@ -542,9 +537,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                ...{ id: '{{ uuid }}' }
             })
             .expect(404);
     });
@@ -613,7 +607,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(seeder.collectionResponse[0], ['createdAt','updatedAt','deletedAt']),
+                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -896,9 +890,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 `,
                 variables: {
                     payload: {
-                        {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if }},
-                        {{/each}}
+                        ...mockData[0],
+                        ...{ id: '{{ uuid }}' },
                     },
                 },
             })
