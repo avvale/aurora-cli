@@ -29,7 +29,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                 {{/if}}
             ],
             controllers: [
-                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller
+                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller,
             ],
             providers: [
                 {
@@ -38,7 +38,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                         main: () => { /**/ },
                     },
                 },
-            ]
+            ],
         }).compile();
 
         controller = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller);

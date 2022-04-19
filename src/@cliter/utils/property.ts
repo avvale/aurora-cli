@@ -190,7 +190,7 @@ export class Property
 
     get enumOptionsArrayItems(): string | undefined
     {
-        return this.enumOptions?.map(item => '\'' + item + '\'').join();
+        return this.enumOptions?.map(item => '\'' + item + '\'').join(',');
     }
 
     get enumOptions(): string[] | undefined
@@ -220,14 +220,14 @@ export class Property
 
     get getApiType(): string
     {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY) return this.config.sqlTypesEquivalenceApiTypes['manyToMany'];
+        if (this.relationship === SqlRelationship.MANY_TO_MANY) return this.config.sqlTypesEquivalenceApiTypes.manyToMany;
 
         return this.config.sqlTypesEquivalenceApiTypes[this.type];
     }
 
     get getJavascriptType(): string
     {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes['manyToMany'];
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
         if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationshipAggregate}[]`;
 
         return this.config.sqlTypesEquivalenceJavascriptTypes[this.type];
@@ -254,14 +254,14 @@ export class Property
 
     get getGraphqlCreateType(): string
     {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY)                                                    return this.config.sqlTypesEquivalenceQraphqlTypes['manyToMany'];
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)                                                    return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
         if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)                           return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Input`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlUpdateType(): string
     {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY)                                                    return this.config.sqlTypesEquivalenceQraphqlTypes['manyToMany'];
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)                                                    return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
         if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)                           return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Input`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
