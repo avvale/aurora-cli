@@ -19,14 +19,14 @@ export class {{ toPascalCase schema.moduleName }}Dto
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase nativeName }}: {{ toPascalCase getRelationshipModule }}Dto[];
+    {{ toCamelCase nativeName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipModule }}Dto[];
     {{else eq relationship ../relationship.ONE_TO_ONE}}
     @ApiProperty({
         type       : {{ toPascalCase getRelationshipModule }}Dto,
         description: '{{ toCamelCase name }} [input here api field description]',
         example    : '',
     })
-    {{ toCamelCase name }}: {{ toPascalCase getRelationshipModule }}Dto;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipModule }}Dto;
     {{else eq type ../sqlType.ENUM}}
     @ApiProperty({
         type       : {{ getApiType }},
@@ -36,7 +36,7 @@ export class {{ toPascalCase schema.moduleName }}Dto
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}: {{ getJavascriptType }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getJavascriptType }};
     {{else}}
     @ApiProperty({
         type       : {{ getApiType }},
@@ -45,7 +45,7 @@ export class {{ toPascalCase schema.moduleName }}Dto
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}: {{ getJavascriptType }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getJavascriptType }};
 {{/eq}}
 
     {{/if}}

@@ -8,10 +8,10 @@ import { AppService } from './app.service';
         CoreModule,
     ],
     controllers: [
-        AppController
+        AppController,
     ],
     providers: [
-        AppService
+        AppService,
     ],
 })
 export class AppModule {}

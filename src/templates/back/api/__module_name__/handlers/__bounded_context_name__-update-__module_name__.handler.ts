@@ -11,6 +11,7 @@ import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
 import { Update{{ toPascalCase schema.moduleName }}Command } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/update/update-{{ toKebabCase schema.moduleName }}.command';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input } from '../../../../graphql';
+import { Update{{ toPascalCase schema.moduleName }}Dto } from '../dto/update-{{ toKebabCase schema.moduleName }}.dto';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler
@@ -24,7 +25,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     ) {}
 
     async main(
-        payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input,
+        payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input | Update{{ toPascalCase schema.moduleName }}Dto,
         {{#if schema.hasTenant}}
         account: AccountResponse,
         {{/if}}

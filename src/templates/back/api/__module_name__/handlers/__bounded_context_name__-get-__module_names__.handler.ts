@@ -10,6 +10,7 @@ import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/
 // {{ config.applicationsContainer }}
 import { Get{{ toPascalCase schema.moduleNames }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';
+import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler
@@ -31,7 +32,7 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
         {{#if schema.properties.hasI18n}}
         contentLanguage?: string,
         {{/if}}
-    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[]>
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[] | {{ toPascalCase schema.moduleName }}Dto[]>
     {
         {{#if schema.properties.hasI18n}}
         constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage, { defineDefaultLanguage: false });

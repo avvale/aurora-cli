@@ -29,7 +29,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
                 {{/if}}
             ],
             controllers: [
-                {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller
+                {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller,
             ],
             providers: [
                 {

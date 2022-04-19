@@ -58,6 +58,6 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
             {{#if schema.properties.hasI18n}}
             contentLanguage,
             {{/if}}
-        );
+        ) as {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[];
     }
 }
