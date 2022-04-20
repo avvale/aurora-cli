@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Timezone } from '{{ config.auroraCorePackage }}';
 
@@ -42,7 +41,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Timezone() timezone?: string,
-    )
+    ): Promise<boolean>
     {
         return await this.handler.main(
             payload,

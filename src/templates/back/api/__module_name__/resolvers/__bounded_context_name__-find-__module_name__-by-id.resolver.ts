@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Query } from '@nestjs/graphql';
 import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
@@ -58,6 +57,6 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
             {{#if schema.properties.hasI18n}}
             contentLanguage,
             {{/if}}
-        ) as {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }};
+        );
     }
 }

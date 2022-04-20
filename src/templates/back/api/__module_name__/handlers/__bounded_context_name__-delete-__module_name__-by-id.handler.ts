@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@nestjs/common';
 import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
 
@@ -10,6 +9,8 @@ import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/
 // {{ config.applicationsContainer }}
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';
+import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler
@@ -32,7 +33,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         {{#if schema.properties.hasI18n}}
         contentLanguage?: string,
         {{/if}}
-    )
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.moduleName }}Dto>
     {
         {{#if schema.properties.hasI18n}}
         constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);

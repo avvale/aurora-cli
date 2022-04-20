@@ -48,7 +48,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     {{/if }}
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mockData: any = {{ toCamelCase schema.moduleNames }};
+    let mockData: any;
 
     beforeAll(async () =>
     {
@@ -122,6 +122,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .compile();
 
+        mockData        = {{ toCamelCase schema.moduleNames }};
         app             = module.createNestApplication();
         repository      = module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}

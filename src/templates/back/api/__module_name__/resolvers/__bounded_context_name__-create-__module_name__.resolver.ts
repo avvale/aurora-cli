@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Timezone } from '{{ config.auroraCorePackage }}';
 
@@ -19,7 +18,7 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 {{/if}}
 // {{ config.applicationsContainer }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from '../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from '../../../../graphql';
 
 @Resolver()
 {{#if schema.hasOAuth}}
@@ -42,7 +41,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Timezone() timezone?: string,
-    )
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {
         return await this.handler.main(
             payload,
