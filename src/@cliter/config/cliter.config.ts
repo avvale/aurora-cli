@@ -145,7 +145,7 @@ export const cliterConfig: CliterConfig =
         char               : true,
         date               : true,
         decimal            : false,
-        enum               : false,
+        enum               : false,  // only for MockType.SEED in src/@cliter/handlebars/helpers/mocker.ts without quotes, rest add quotes in /mocker.ts
         float              : false,
         id                 : true,
         int                : false,
