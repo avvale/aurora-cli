@@ -1,6 +1,7 @@
+/* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class Update{{ toPascalCase schema.moduleName }}Dto
+export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto
 {
     {{#each schema.properties.createDto}}
     {{#if (allowProperty ../schema.moduleName this) }}
@@ -12,7 +13,7 @@ export class Update{{ toPascalCase schema.moduleName }}Dto
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase name }}: string[];
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string[];
     {{else eq type ../sqlType.ENUM}}
     @ApiProperty({
         type       : {{ getApiType }},
@@ -22,7 +23,7 @@ export class Update{{ toPascalCase schema.moduleName }}Dto
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}: {{ getJavascriptType }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getJavascriptType }};
     {{else}}
     @ApiProperty({
         type       : {{ getApiType }},
@@ -31,7 +32,7 @@ export class Update{{ toPascalCase schema.moduleName }}Dto
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}: {{ getJavascriptType }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getJavascriptType }};
 {{/eq}}
 
     {{/if}}

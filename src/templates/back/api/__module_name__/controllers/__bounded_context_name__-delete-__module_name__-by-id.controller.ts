@@ -2,7 +2,7 @@
 import { Controller, Param, Delete{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -35,7 +35,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete {{ toKebabCase schema.moduleName }} by id' })
-    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: {{ toPascalCase schema.moduleName }}Dto })
+    @ApiOkResponse({ description: 'The record has been deleted successfully.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
     @TenantConstraint()
     {{/if}}

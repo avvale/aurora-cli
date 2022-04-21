@@ -585,8 +585,8 @@ export class CodeWriter
         // export DTO
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/dto/${this.moduleName.toKebabCase()}.dto`,
-            [`${this.moduleName.toPascalCase()}Dto`],
+            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/dto/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.dto`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Dto`],
         );
 
         // export aggregate

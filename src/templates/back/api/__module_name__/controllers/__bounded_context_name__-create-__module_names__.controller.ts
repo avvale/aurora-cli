@@ -2,8 +2,7 @@
 import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
 import { Timezone } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
-import { Create{{ toPascalCase schema.moduleName }}Dto } from '../dto/create-{{ toKebabCase schema.moduleName }}.dto';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -36,13 +35,13 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
     @Post()
     @ApiOperation({ summary: 'Create {{ toKebabCase schema.moduleNames }} in batch' })
-    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [{{ toPascalCase schema.moduleName }}Dto]})
-    @ApiBody({ type: [Create{{ toPascalCase schema.moduleName }}Dto]})
+    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto]})
+    @ApiBody({ type: [{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto]})
     {{#if schema.hasTenant}}
     @TenantPolicy()
     {{/if}}
     async main(
-        @Body() payload: Create{{ toPascalCase schema.moduleName }}Dto[],
+        @Body() payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto[],
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}

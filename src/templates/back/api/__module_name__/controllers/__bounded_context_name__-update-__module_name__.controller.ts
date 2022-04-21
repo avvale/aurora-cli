@@ -2,8 +2,7 @@
 import { Controller, Put, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { Constraint, {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-import { Update{{ toPascalCase schema.moduleName }}Dto } from '../dto/update-{{ toKebabCase schema.moduleName }}.dto';
-import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -36,12 +35,12 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
     @Put()
     @ApiOperation({ summary: 'Update {{ toKebabCase schema.moduleName }}' })
-    @ApiOkResponse({ description: 'The record has been successfully updated.', type: {{ toPascalCase schema.moduleName }}Dto})
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto})
     {{#if schema.hasTenant}}
     @TenantConstraint()
     {{/if}}
     async main(
-        @Body() payload: Update{{ toPascalCase schema.moduleName }}Dto,
+        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Dto,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
