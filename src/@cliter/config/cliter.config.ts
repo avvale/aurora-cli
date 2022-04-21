@@ -145,7 +145,7 @@ export const cliterConfig: CliterConfig =
         char               : true,
         date               : true,
         decimal            : false,
-        enum               : true,
+        enum               : false,
         float              : false,
         id                 : true,
         int                : false,

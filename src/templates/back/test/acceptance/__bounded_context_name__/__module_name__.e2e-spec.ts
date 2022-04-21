@@ -13,6 +13,9 @@ import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '../../../src/{{ 
 import { {{ toCamelCase schema.moduleNames }} } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 import { GraphQLConfigModule } from '../../../src/{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
 import { {{ toPascalCase schema.boundedContextName }}Module } from '../../../src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
+{{#if schema.properties.hasEnum}}
+import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{/each}} } from '../../../src/graphql';
+{{/if}}
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
@@ -554,7 +557,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../schema property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
                 {{/each}}
             })
             .expect(200)
@@ -715,7 +718,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 variables: {
                     payload: {
                         {{#each schema.properties.postmanGraphQLCreateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../schema property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
                         {{/each}}
                     },
                 },
@@ -928,7 +931,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 variables: {
                     payload: {
                         {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
+                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../schema property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
                         {{/each}}
                     },
                 },

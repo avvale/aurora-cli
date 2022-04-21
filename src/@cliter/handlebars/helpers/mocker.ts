@@ -1,4 +1,4 @@
-import { Mocker, MockerFixed, Property, SqlType } from '../../../@cliter';
+import { Mocker, MockerFixed, ModuleDefinitionSchema, Property, SqlType } from '../../../@cliter';
 import { v5 as uuidv5 } from 'uuid';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
@@ -24,6 +24,7 @@ handlebars.registerHelper('mocker', function(
         minLength               = undefined,
         totalDigits             = undefined,
         decimalDigits           = undefined,
+        schema                  = undefined,
     }: {
         type?: MockType;
         property?: Property;
@@ -36,6 +37,7 @@ handlebars.registerHelper('mocker', function(
         minLength?: number;
         totalDigits?: number;
         decimalDigits?: number;
+        schema?: ModuleDefinitionSchema;
     } = {}
 )
 {
@@ -59,7 +61,8 @@ handlebars.registerHelper('mocker', function(
         && (length || property?.length) === 36
     ) return uuidv5(uuidSeed, namespace);
 
-    if (property?.type === SqlType.ENUM) return property.enumOptions ? _.shuffle(property.enumOptions)[0] : null;
+    if (property?.type === SqlType.ENUM && type === MockType.SEED) return property.enumOptions ? `${schema?.boundedContextName.toPascalCase()}${schema?.moduleName.toPascalCase()}${property.name.toPascalCase()}.${_.shuffle(property.enumOptions)[0]}` : null;
+    if (property?.type === SqlType.ENUM) return property.enumOptions ? `'${_.shuffle(property.enumOptions)[0]}'` : null;
     if (property?.type === SqlType.RELATIONSHIP) return '[]';
 
     let propertyTotalDigits = 5;

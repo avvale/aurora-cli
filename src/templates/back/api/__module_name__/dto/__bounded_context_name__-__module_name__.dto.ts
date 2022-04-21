@@ -37,14 +37,23 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{ toCamelCase nativeName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto[];
     {{else eq relationship ../relationship.ONE_TO_ONE}}
     @ApiProperty({
-        type       : {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto,
+        type       : {{ getApiType }},
         description: '{{ toCamelCase name }} [input here api field description]',
+        {{#if example }}
+        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        {{/if }}
+    })
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getJavascriptType }};
+
+    @ApiProperty({
+        type       : {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto,
+        description: '{{ toCamelCase relationshipField }} [input here api field description]',
         example    : '',
     })
-    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto;
+    {{ toCamelCase relationshipField }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto;
     {{else eq type ../sqlType.ENUM}}
     @ApiProperty({
-        type       : {{ getApiType }},
+        type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
         enum       : [{{{ enumOptionsArrayItems }}}],
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
