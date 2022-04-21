@@ -7,7 +7,7 @@ export class Update{{ toPascalCase schema.moduleName }}Command
         public readonly payload: {
             {{#each schema.properties.updateCommand}}
             {{#if (allowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ getJavascriptType }},
+            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ getJavascriptType }};
             {{/if}}
             {{/each}}
         },

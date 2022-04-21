@@ -5,6 +5,7 @@ import {
 } from '../../domain/value-objects';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toCamelCase schema.moduleNames }} } from '../seeds/{{ toKebabCase schema.moduleName }}.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class Mock{{ toPascalCase schema.moduleName }}Seeder extends MockSeeder<{{ schema.aggregateName }}>
@@ -21,7 +22,7 @@ export class Mock{{ toPascalCase schema.moduleName }}Seeder extends MockSeeder<{
     {
         this.collectionSource = [];
 
-        for (const {{ toCamelCase schema.moduleName }} of {{ toCamelCase schema.moduleNames }})
+        for (const {{ toCamelCase schema.moduleName }} of _.orderBy({{ toCamelCase schema.moduleNames }}, ['id']))
         {
             this.collectionSource.push(
                 {{ schema.aggregateName }}.register(
@@ -41,7 +42,7 @@ export class Mock{{ toPascalCase schema.moduleName }}Seeder extends MockSeeder<{
                     new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
                     {{/and}}
                     {{/each}}
-                )
+                ),
             );
         }
     }

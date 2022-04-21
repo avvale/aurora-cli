@@ -23,7 +23,7 @@ import { AddI18NConstraintService, CoreModule, ICommandBus, ICriteria, IQueryBus
         {
             provide : ICriteria,
             useClass: SequelizeCriteria,
-        }
+        },
     ],
     exports: [
         AddI18NConstraintService,
@@ -41,7 +41,7 @@ import { AddI18NConstraintService, CoreModule, ICommandBus, ICriteria, IQueryBus
         {
             provide : ICriteria,
             useClass: SequelizeCriteria,
-        }
-    ]
+        },
+    ],
 })
 export class SharedModule {}

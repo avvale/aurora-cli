@@ -20,7 +20,12 @@ export class Properties
 
     get hasI18n(): boolean
     {
-        return this.properties.filter(property => property.isI18n).length > 0;
+        return this.properties.some(property => property.isI18n);
+    }
+
+    get hasEnum(): boolean
+    {
+        return this.properties.some(property => property.type === SqlType.ENUM);
     }
 
     get withoutTimestamps(): Property[]
@@ -45,7 +50,7 @@ export class Properties
 
     get withRelationshipOneToOneWithRelationshipField(): Property[]
     {
-        return this.withRelationshipOneToOne.filter(property => !!property.relationshipField);
+        return this.withRelationshipOneToOne.filter(property => Boolean(property.relationshipField));
     }
 
     get withRelationshipOneToOneWithoutRelationshipField(): Property[]
@@ -70,7 +75,7 @@ export class Properties
 
     get withRelationshipIntermediateTable(): Property[]
     {
-        return this.properties.filter(property => !!property.intermediateTable);
+        return this.properties.filter(property => Boolean(property.intermediateTable));
     }
 
     get withRelationshipType(): Property[]
@@ -283,7 +288,6 @@ export class Properties
     get dto(): Property[]
     {
         return this.properties
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField to avoid circular dependency
     }
 

@@ -474,7 +474,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                ...{ id: '{{{ mocker (object type='fixedUuid') }}}' }
+                ...{ id: '{{{ mocker (object type='fixedUuid') }}}' },
             })
             .expect(201);
     });
@@ -539,7 +539,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .send({
                 ...mockData[0],
-                ...{ id: '{{ uuid }}' }
+                ...{ id: '{{ uuid }}' },
             })
             .expect(404);
     });
@@ -1006,6 +1006,11 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     afterAll(async () =>
     {
+        await repository.delete({
+            queryStatement: {
+                where: {},
+            },
+        });
         await app.close();
     });
 });

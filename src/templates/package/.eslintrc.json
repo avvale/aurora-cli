@@ -79,7 +79,7 @@
         "no-case-declarations": "off",
         "no-duplicate-case": "error",
         "no-irregular-whitespace": ["error", { "skipRegExps": true }],
-        "no-return-await": "error",
+        "no-return-await": "off",
         "no-trailing-spaces": "error",
         "no-underscore-dangle": "off",
         "no-var": "error",

@@ -10,7 +10,7 @@ export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleNam
             name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}',
             nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
-            enumOptions:  [{{{ currentProperty.enumOptionsArrayItems }}}],
+            enumOptions: [{{{ currentProperty.enumOptionsArrayItems }}}],
         }, validationRules));
     }
 }
