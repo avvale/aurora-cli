@@ -41,7 +41,7 @@ export class MessagesService
         return this._httpClient.get<Message[]>('api/common/messages').pipe(
             tap((messages) => {
                 this._messages.next(messages);
-            })
+            }),
         );
     }
 

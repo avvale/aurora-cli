@@ -50,7 +50,7 @@ export class QuickChatService
         return this._httpClient.get<Chat[]>('api/apps/chat/chats').pipe(
             tap((response: Chat[]) => {
                 this._chats.next(response);
-            })
+            }),
         );
     }
 
@@ -78,7 +78,7 @@ export class QuickChatService
                 }
 
                 return of(chat);
-            })
+            }),
         );
     }
 }

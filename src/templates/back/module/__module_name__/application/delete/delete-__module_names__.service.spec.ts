@@ -41,10 +41,10 @@ describe('Delete{{ toPascalCase schema.moduleNames }}Service', () =>
                     useValue: {
                         get   : (queryStatement) => { /**/ },
                         delete: (queryStatement) => { /**/ }
-                    }
+                    },
                 },
                 {{/if}}
-            ]
+            ],
         }).compile();
 
         service         = module.get(Delete{{ toPascalCase schema.moduleNames }}Service);

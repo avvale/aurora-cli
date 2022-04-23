@@ -31,7 +31,8 @@ export class Create{{ toPascalCase schema.moduleNames }}CommandHandler implement
                         {{/if}}
                         {{/each}}
                     };
-                })
+                }),
+            command.cQMetadata,
         );
     }
 }

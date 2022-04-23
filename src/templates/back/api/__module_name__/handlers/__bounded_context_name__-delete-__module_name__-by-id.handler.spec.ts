@@ -68,7 +68,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });

@@ -41,7 +41,7 @@ export class NotificationsService
         return this._httpClient.get<Notification[]>('api/common/notifications').pipe(
             tap((notifications) => {
                 this._notifications.next(notifications);
-            })
+            }),
         );
     }
 

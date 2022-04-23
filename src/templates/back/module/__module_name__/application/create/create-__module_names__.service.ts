@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 {{#if schema.properties.hasI18n}}
 import { ConfigService } from '@nestjs/config';
 {{/if}}
+import { CQMetadata } from 'aurora-ts-core';
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
@@ -31,6 +32,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
             {{/if}}
             {{/each}}
         } [],
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -56,10 +58,10 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         // insert
         {{#if schema.properties.hasI18n}}
         // delete duplicate elements from multiple languages
-        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)));
-        await this.repositoryI18n.insert(aggregate{{ toPascalCase schema.moduleNames }}, { dataFactory: aggregate => aggregate.toI18nDTO() });
+        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)), cQMetadata?.repositoryOptions, { insertOptions: cQMetadata?.repositoryOptions });
+        await this.repositoryI18n.insert(aggregate{{ toPascalCase schema.moduleNames }}, { dataFactory: aggregate => aggregate.toI18nDTO(), insertOptions: cQMetadata?.repositoryOptions });
         {{else}}
-        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }});
+        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}, { insertOptions: cQMetadata?.repositoryOptions });
         {{/if}}
 
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality

@@ -41,7 +41,7 @@ export class ShortcutsService
         return this._httpClient.get<Shortcut[]>('api/common/shortcuts').pipe(
             tap((shortcuts) => {
                 this._shortcuts.next(shortcuts);
-            })
+            }),
         );
     }
 

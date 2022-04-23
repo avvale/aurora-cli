@@ -12,6 +12,6 @@ import { GraphQLConfigModule } from './graphql/graphql-config.module';
     controllers: [
         CorePreparationRequestController,
     ],
-    exports: []
+    exports: [],
 })
 export class CoreModule {}

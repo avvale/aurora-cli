@@ -1,5 +1,6 @@
 import { ConflictException, Injectable{{#if schema.properties.hasI18n}}, NotFoundException{{/if}} } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
@@ -27,6 +28,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
             {{/if}}
             {{/each}}
         },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -63,14 +65,14 @@ export class Create{{ toPascalCase schema.moduleName }}Service
 
             // add new lang id to data lang field to create or update field
             {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(_.union({{ toCamelCase schema.moduleName }}InDB.dataLang.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
-            await this.repository.update({{ toCamelCase schema.moduleName }}, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'dataLang') });
+            await this.repository.update({{ toCamelCase schema.moduleName }}, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'dataLang'), updateOptions: cQMetadata?.repositoryOptions });
         }
         catch (error)
         {
             if (error instanceof NotFoundException)
             {
                 {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang([{{ toCamelCase schema.moduleName }}.langId.value]);
-                await this.repository.create({{ toCamelCase schema.moduleName }});
+                await this.repository.create({{ toCamelCase schema.moduleName }}, { createOptions: cQMetadata?.repositoryOptions });
             }
         }
 
@@ -84,16 +86,19 @@ export class Create{{ toPascalCase schema.moduleName }}Service
                         {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
                         langId: aggregate['langId']['value'],
                     }
-                })
+                }),
+                {
+                    createOptions: cQMetadata?.repositoryOptions
+                },
             }
         );
         {{else}}
-        await this.repository.create({{ toCamelCase schema.moduleName }});
+        await this.repository.create({{ toCamelCase schema.moduleName }}, { createOptions: cQMetadata?.repositoryOptions });
         {{/if}}
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const {{ toCamelCase schema.moduleName }}Register = this.publisher.mergeObjectContext(
-            {{ toCamelCase schema.moduleName }}
+            {{ toCamelCase schema.moduleName }},
         );
 
         {{ toCamelCase schema.moduleName }}Register.created({{ toCamelCase schema.moduleName }}); // apply event to model events

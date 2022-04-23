@@ -66,14 +66,14 @@ describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.
         commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
+    test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
     {
         expect(handler).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });

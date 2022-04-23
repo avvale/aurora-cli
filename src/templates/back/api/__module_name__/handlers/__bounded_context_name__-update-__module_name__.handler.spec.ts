@@ -67,19 +67,19 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver should be defined', () =>
+    test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler should be defined', () =>
     {
         expect(handler).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });
 
-        test('should return a {{ toCamelCase schema.moduleName }} created', async () =>
+        test('should return a {{ toCamelCase schema.moduleName }} updated', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
             expect(await handler.main(<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input>{{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);

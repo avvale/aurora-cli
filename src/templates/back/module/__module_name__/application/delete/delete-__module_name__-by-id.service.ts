@@ -15,7 +15,11 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdService
         {{> declareI18NRepository}}
     ) {}
 
-    async main(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
+    async main(
+        id: {{ toPascalCase schema.moduleName }}Id,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<void>
     {
         // get object to delete
         const {{ toCamelCase schema.moduleName }} = await this.repository.findById(id, { constraint, cQMetadata });
@@ -25,11 +29,20 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdService
         {{#if schema.properties.hasI18n}}
         await this.repositoryI18n.delete({ 
             queryStatement: { 
-                where: { {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value }
-            }
+                where: {
+                    {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value
+                },
+            },
+            deleteOptions: cQMetadata?.repositoryOptions,
         });
         {{/if}}
-        await this.repository.deleteById({{ toCamelCase schema.moduleName }}.id, { cQMetadata });
+        await this.repository.deleteById(
+            {{ toCamelCase schema.moduleName }}.id,
+            {
+                deleteOptions: cQMetadata?.repositoryOptions,
+                cQMetadata,
+            },
+        );
 
         // insert EventBus in object, to be able to apply and commit events
         const {{ toCamelCase schema.moduleName }}Register = this.publisher.mergeObjectContext({{ toCamelCase schema.moduleName }});

@@ -63,7 +63,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
             createOptions?: ObjectLiteral;
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: {{ schema.aggregateName }}) => QueryStatement;
+            finderQueryStatement?: (aggregate: {{ schema.aggregateName }}) => QueryStatement;
         }
     ): Promise<void>;
 

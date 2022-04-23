@@ -38,7 +38,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Controller should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });

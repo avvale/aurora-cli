@@ -62,7 +62,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
-            finderQueryStatement: (aggregate: {{ schema.aggregateName }}) => QueryStatement;
+            finderQueryStatement?: (aggregate: {{ schema.aggregateName }}) => QueryStatement;
         }
     ): Promise<void>;
 
