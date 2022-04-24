@@ -14,7 +14,7 @@ import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName 
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
-import { {{ intermediateModel }} } from '../../../../../{{ config.applicationsContainer }}/{{ intermediateModelModuleSection }}/infrastructure/sequelize/sequelize-{{ intermediateModelFile }}.model';
+import { {{ pivotAggregateName }}Model } from '../../../../../{{ config.applicationsContainer }}/{{ pivotPath }}/infrastructure/sequelize/sequelize-{{ pivotFileName }}.model';
 {{/each}}
 {{#if schema.properties.hasI18n}}
 import { {{ schema.aggregateName }}I18NModel } from './sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
@@ -97,11 +97,11 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if hasBelongsToManyDecorator }}
 
-    {{#if intermediateTable }}
-    @BelongsToMany(() => {{ relationshipAggregate }}Model, { through: () => {{ intermediateModel }}, uniqueKey: 'Uq01{{ toPascalCase intermediateTable }}' })
+    {{#if pivotAggregateName }}
+    @BelongsToMany(() => {{ relationshipAggregate }}Model, { through: () => {{ pivotAggregateName }}Model, uniqueKey: 'Uq01{{ toPascalCase pivotAggregateName }}' })
     {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
     {{else}}
-    @BelongsToMany(() => {{ relationshipAggregate }}Model, () => {{ intermediateModel }})
+    @BelongsToMany(() => {{ relationshipAggregate }}Model, () => {{ pivotAggregateName }}Model)
     {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
     {{/if}}
     {{/if}}

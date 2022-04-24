@@ -35,19 +35,23 @@ export class TemplateGenerator
         );
     }
 
-    static generateIntermediateTables(
+    static generatePivotTables(
         relativeTargetBasePath: string,
         relativeTargetPath: string,
     ): void
     {
-        for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipIntermediateTable)
+        for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipManyToMany)
         {
-            FileManager.generateContents(
-                path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_INTERMEDIATE_TABLE.split('/')),
-                relativeTargetBasePath,
-                relativeTargetPath,
-                { currentProperty: property },
-            );
+            // only create table if has in pivotPath
+            if (property.pivotPath === `${TemplateGenerator.stateService.schema.boundedContextName}/${TemplateGenerator.stateService.schema.moduleName}`)
+            {
+                FileManager.generateContents(
+                    path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_PIVOT.split('/')),
+                    relativeTargetBasePath,
+                    relativeTargetPath,
+                    { currentProperty: property },
+                );
+            }
         }
     }
 

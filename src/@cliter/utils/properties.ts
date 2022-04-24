@@ -73,11 +73,6 @@ export class Properties
         return this.properties.filter(property => property.relationship === SqlRelationship.MANY_TO_MANY);
     }
 
-    get withRelationshipIntermediateTable(): Property[]
-    {
-        return this.properties.filter(property => Boolean(property.intermediateTable));
-    }
-
     get withRelationshipType(): Property[]
     {
         return this.properties.filter(property => property.type === SqlType.RELATIONSHIP);

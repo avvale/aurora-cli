@@ -115,8 +115,8 @@ export class Operations
         // generate module files
         await this.generateModuleFiles();
 
-        // generate intermediate tables
-        await this.generateIntermediateTables();
+        // generate pivot tables
+        await this.generatePivotTables();
 
         // generate i18n module files
         await this.generateI18NModuleFiles();
@@ -168,9 +168,9 @@ export class Operations
         );
     }
 
-    async generateIntermediateTables(): Promise<void>
+    async generatePivotTables(): Promise<void>
     {
-        await TemplateGenerator.generateIntermediateTables(
+        await TemplateGenerator.generatePivotTables(
             path.join('src', cliterConfig.applicationsContainer),
             Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
@@ -297,7 +297,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             Operations.stateService.schema.moduleNames.toLowerCase(),
             Operations.stateService.schema.aggregateName,
         );
-        codeWriter.generateReferences(Operations.stateService.schema.properties);
+        codeWriter.generateBoundedContextBackReferences(Operations.stateService.schema.properties);
         codeWriter.declareApplicationItemsInModule();
         codeWriter.declareBoundedContextModuleInApplicationModule();
         codeWriter.declareApplicationItemsExports();

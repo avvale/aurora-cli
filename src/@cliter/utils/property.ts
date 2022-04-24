@@ -30,10 +30,9 @@ export class Property
     public relationshipField?: string;
     public relationshipAvoidConstraint?: boolean;
     public relationshipPackageName?: string;
-    public intermediateTable?: string;
-    public intermediateModel?: string;
-    public intermediateModelModuleSection?: string;
-    public intermediateModelFile?: string;
+    public pivotAggregateName?: string;
+    public pivotPath?: string;
+    public pivotFileName?: string;
     public index?: SqlIndex;
     public indexName?: string;
     public isI18n?: boolean;
@@ -60,10 +59,9 @@ export class Property
             relationshipField?: string;
             relationshipAvoidConstraint?: boolean;
             relationshipPackageName?: string;
-            intermediateTable?: string;
-            intermediateModel?: string;
-            intermediateModelModuleSection?: string;
-            intermediateModelFile?: string;
+            pivotAggregateName?: string;
+            pivotPath?: string;
+            pivotFileName?: string;
             index?: SqlIndex;
             indexName?: string;
             isI18n?: boolean;
@@ -90,10 +88,9 @@ export class Property
         this.relationshipField = payload.relationshipField;
         this.relationshipAvoidConstraint = payload.relationshipAvoidConstraint;
         this.relationshipPackageName = payload.relationshipPackageName;
-        this.intermediateTable = payload.intermediateTable;
-        this.intermediateModel = payload.intermediateModel;
-        this.intermediateModelModuleSection = payload.intermediateModelModuleSection;
-        this.intermediateModelFile = payload.intermediateModelFile;
+        this.pivotAggregateName = payload.pivotAggregateName;
+        this.pivotPath = payload.pivotPath;
+        this.pivotFileName = payload.pivotFileName;
         this.index = payload.index;
         this.indexName = payload.indexName;
         this.isI18n = payload.isI18n;
@@ -146,8 +143,8 @@ export class Property
 
     get hasBelongsToDecorator(): boolean
     {
-        return  (this.relationship === SqlRelationship.MANY_TO_ONE && !!this.relationshipField) ||
-                (this.relationship === SqlRelationship.ONE_TO_ONE && !!this.relationshipField);
+        return  (this.relationship === SqlRelationship.MANY_TO_ONE && Boolean(this.relationshipField)) ||
+                (this.relationship === SqlRelationship.ONE_TO_ONE && Boolean(this.relationshipField));
     }
 
     get hasHasManyDecorator(): boolean
@@ -285,34 +282,33 @@ export class Property
     toDto(): any
     {
         return {
-            id                            : this.id,
-            name                          : this._name,
-            type                          : this.type,
-            primaryKey                    : this.primaryKey,
-            enumOptions                   : this.enumOptions,
-            decimals                      : this.decimals,
-            length                        : this.length,
-            minLength                     : this.minLength,
-            maxLength                     : this.maxLength,
-            nullable                      : this.nullable,
-            defaultValue                  : this.defaultValue,
-            relationship                  : this.relationship,
-            relationshipSingularName      : this.relationshipSingularName,
-            relationshipAggregate         : this.relationshipAggregate,
-            relationshipModulePath        : this.relationshipModulePath,
-            relationshipKey               : this.relationshipKey,
-            relationshipField             : this.relationshipField,
-            relationshipAvoidConstraint   : this.relationshipAvoidConstraint,
-            relationshipPackageName       : this.relationshipPackageName,
-            intermediateTable             : this.intermediateTable,
-            intermediateModel             : this.intermediateModel,
-            intermediateModelModuleSection: this.intermediateModelModuleSection,
-            intermediateModelFile         : this.intermediateModelFile,
-            index                         : this.index,
-            indexName                     : this.indexName,
-            isI18n                        : this.isI18n,
-            example                       : this.example,
-            faker                         : this.faker,
+            id                         : this.id,
+            name                       : this._name,
+            type                       : this.type,
+            primaryKey                 : this.primaryKey,
+            enumOptions                : this.enumOptions,
+            decimals                   : this.decimals,
+            length                     : this.length,
+            minLength                  : this.minLength,
+            maxLength                  : this.maxLength,
+            nullable                   : this.nullable,
+            defaultValue               : this.defaultValue,
+            relationship               : this.relationship,
+            relationshipSingularName   : this.relationshipSingularName,
+            relationshipAggregate      : this.relationshipAggregate,
+            relationshipModulePath     : this.relationshipModulePath,
+            relationshipKey            : this.relationshipKey,
+            relationshipField          : this.relationshipField,
+            relationshipAvoidConstraint: this.relationshipAvoidConstraint,
+            relationshipPackageName    : this.relationshipPackageName,
+            pivotAggregateName         : this.pivotAggregateName,
+            pivotPath                  : this.pivotPath,
+            pivotFileName              : this.pivotFileName,
+            index                      : this.index,
+            indexName                  : this.indexName,
+            isI18n                     : this.isI18n,
+            example                    : this.example,
+            faker                      : this.faker,
         };
     }
 }

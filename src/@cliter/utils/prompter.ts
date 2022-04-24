@@ -351,8 +351,8 @@ export class Prompter
         });
 
         questions.push({
-            name   : 'hasIntermediateTable',
-            message: () => `You want to create the intermediate table of your many to many relationship with name: ${boundedContextName.toSnakeCase()}_${moduleNames.toSnakeCase()}_${name.toSnakeCase()}?`,
+            name   : 'hasPivotTable',
+            message: () => `You want to create the pivot table of your many to many relationship with name: ${boundedContextName.toPascalCase()}${moduleNames.toPascalCase()}${name.toPascalCase()}?`,
             type   : 'confirm',
             when   : (answers: any) =>
             {
@@ -365,7 +365,7 @@ export class Prompter
             message: 'Set total digits and decimals comma separated, example: 10,2',
             type   : 'input',
             when   : (answers: any) => answers.type === SqlType.DECIMAL,
-            filter : (answers: string) => answers.split(',').map(item => parseInt(item.trim())),
+            filter : (answers: string) => answers.split(',').map(item => Number.parseInt(item.trim(), 10)),
         });
 
         questions.push({
@@ -377,23 +377,20 @@ export class Prompter
                 // avoid length for decimal values
                 if (answers.type === SqlType.DECIMAL || answers.type === SqlType.FLOAT) return false;
 
-                // set intermediateTable value
-                if (answers.hasIntermediateTable) answers.intermediateTable = `${boundedContextName.toSnakeCase()}_${moduleNames.toSnakeCase()}_${name.toSnakeCase()}`;
-
-                // set intermediateModel value
-                if (answers.hasIntermediateTable)
+                // set pivotAggregateName value
+                if (answers.hasPivotTable)
                 {
-                    answers.intermediateModel               = `${boundedContextName.toPascalCase()}${moduleNames.toPascalCase()}${name.toPascalCase()}Model`;
-                    answers.intermediateModelModuleSection  = `${boundedContextName}/${moduleName}`;
-                    answers.intermediateModelFile           = `${moduleNames.toKebabCase()}-${name.toKebabCase()}`;
+                    answers.pivotAggregateName  = `${boundedContextName.toPascalCase()}${moduleNames.toPascalCase()}${name.toPascalCase()}`;
+                    answers.pivotPath           = `${boundedContextName}/${moduleName}`;
+                    answers.pivotFileName       = `${moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
-                if (!answers.hasIntermediateTable && answers.relationship === SqlRelationship.MANY_TO_MANY)
+                if (!answers.hasPivotTable && answers.relationship === SqlRelationship.MANY_TO_MANY)
                 {
-                    const relationshipModulePath            = Operations.parseFlagOfBoundedContextAndModule(command, answers.relationshipModulePath);
-                    answers.intermediateModel               = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${moduleNames.toPascalCase()}Model`;
-                    answers.intermediateModelModuleSection  = answers.relationshipModulePath;
-                    answers.intermediateModelFile           = `${name.toKebabCase()}-${moduleNames.toKebabCase()}`;
+                    const relationshipModulePath = Operations.parseFlagOfBoundedContextAndModule(command, answers.relationshipModulePath);
+                    answers.pivotAggregateName   = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${moduleNames.toPascalCase()}`;
+                    answers.pivotPath            = answers.relationshipModulePath;
+                    answers.pivotFileName        = `${name.toKebabCase()}-${moduleNames.toKebabCase()}`;
                 }
 
                 if (answers.relationship || answers.relationship) return false;
@@ -432,27 +429,26 @@ export class Prompter
         if (response.relationship === SqlRelationship.NONE) delete response.relationship;
 
         return new Property({
-            name                          : response.name,
-            type                          : response.type,
-            primaryKey                    : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
-            enumOptions                   : response.enumOptions,
-            decimals                      : response.decimals,
-            length                        : response.length,
-            minLength                     : response.minLength,
-            maxLength                     : response.maxLength,
-            nullable                      : response.nullable,
-            defaultValue                  : response.defaultValue,
-            relationship                  : response.relationship,
-            relationshipSingularName      : response.relationshipSingularName,
-            relationshipAggregate         : response.relationshipAggregate,
-            relationshipModulePath        : response.relationshipModulePath,
-            relationshipKey               : response.relationship === SqlRelationship.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
-            relationshipField             : response.relationship === SqlRelationship.MANY_TO_ONE || (response.relationship === SqlRelationship.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
-            intermediateTable             : response.intermediateTable,
-            intermediateModel             : response.intermediateModel,
-            intermediateModelModuleSection: response.intermediateModelModuleSection,
-            intermediateModelFile         : response.intermediateModelFile,
-            index                         : response.index,
+            name                    : response.name,
+            type                    : response.type,
+            primaryKey              : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
+            enumOptions             : response.enumOptions,
+            decimals                : response.decimals,
+            length                  : response.length,
+            minLength               : response.minLength,
+            maxLength               : response.maxLength,
+            nullable                : response.nullable,
+            defaultValue            : response.defaultValue,
+            relationship            : response.relationship,
+            relationshipSingularName: response.relationshipSingularName,
+            relationshipAggregate   : response.relationshipAggregate,
+            relationshipModulePath  : response.relationshipModulePath,
+            relationshipKey         : response.relationship === SqlRelationship.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
+            relationshipField       : response.relationship === SqlRelationship.MANY_TO_ONE || (response.relationship === SqlRelationship.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
+            pivotAggregateName      : response.pivotAggregateName,
+            pivotPath               : response.pivotPath,
+            pivotFileName           : response.pivotFileName,
+            index                   : response.index,
         });
     }
 
@@ -493,7 +489,7 @@ export class Prompter
     static printValueObjectsTable(command: Command, items: Properties)
     {
         const headers: string[] = [];
-        const excludeHeaders: string[] = ['config', 'id', 'intermediateModel', 'intermediateModelModuleSection', 'intermediateModelFile'];
+        const excludeHeaders: string[] = ['config', 'id', 'pivotAggregateName', 'pivotPath', 'pivotFileName'];
         const aliases: {origin: string; alias: string}[] = [
             { origin: '_name',                       alias: 'Name' },
             { origin: 'type',                        alias: 'Type' },
@@ -510,7 +506,7 @@ export class Prompter
             { origin: 'relationshipModulePath',      alias: 'R. Module Path' },
             { origin: 'relationshipKey',             alias: 'R. Key' },
             { origin: 'relationshipField',           alias: 'R. Field' },
-            { origin: 'intermediateTable',           alias: 'Intermediate Table' },
+            { origin: 'pivotAggregateName',          alias: 'Pivot' },
             { origin: 'index',                       alias: 'Index' },
         ];
         const rows: any[] = [];

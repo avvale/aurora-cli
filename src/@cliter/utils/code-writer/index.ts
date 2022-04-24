@@ -100,7 +100,7 @@ export class CodeWriter
         }
     }
 
-    generateReferences(properties: Properties): void
+    generateBoundedContextBackReferences(properties: Properties): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
@@ -139,18 +139,18 @@ export class CodeWriter
             `${this.boundedContextName.toPascalCase()}Models`,
         );
 
-        // intermediate table model
-        for (const intermediateModel of properties.withRelationshipIntermediateTable)
+        // pivot table model
+        for (const pivot of properties.withRelationshipManyToMany)
         {
             ImportDriver.createImportItems(
                 sourceFile,
                 `./${this.moduleName.toKebabCase()}`,
-                [intermediateModel.intermediateModel as string],
+                [`${pivot.pivotAggregateName}Model`],
             );
 
             ArrayDriver.addArrayItem(
                 sourceFile,
-                intermediateModel.intermediateModel as string,
+                `${pivot.pivotAggregateName}Model`,
                 `${this.boundedContextName.toPascalCase()}Models`,
             );
         }

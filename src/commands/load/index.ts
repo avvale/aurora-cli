@@ -38,8 +38,10 @@ export default class Load extends Command
             name       : 'elementType',
             description: 'Type element to create',
             options    : [
-                'bounded-context', 'b',
-                'module', 'm',
+                'bounded-context',
+                'b',
+                'module',
+                'm',
             ],
             required: true,
         },
@@ -160,7 +162,7 @@ export default class Load extends Command
                         {
                             case stateService.config.compareActions.deleteOrigin:
                                 fs.unlinkSync(fileToManage as string);                     // delete origin file and reference in array, view state.service.ts file
-                                fileToManage = _.head(stateService.originFiles.slice());   // get next file
+                                fileToManage = _.head([...stateService.originFiles]);   // get next file
                                 if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
 
@@ -171,11 +173,11 @@ export default class Load extends Command
 
                             case stateService.config.compareActions.ignore:
                                 if (!fileToManage) break;
-                                    const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
-                                    fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : fileToManage.endsWith('.origin.html') ? '<!-- ignored file -->\r\n' : '// ignored file\r\n') + customFile, 'utf8');
-                                    fs.unlinkSync(fileToManage as string); // delete origin file and reference in array, view state.service.ts file
-                                    fileToManage = _.head(stateService.originFiles.slice());   // get next file
-                                    if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+                                const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
+                                fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : (fileToManage.endsWith('.origin.html') ? '<!-- ignored file -->\r\n' : '// ignored file\r\n')) + customFile, 'utf8');
+                                fs.unlinkSync(fileToManage as string); // delete origin file and reference in array, view state.service.ts file
+                                fileToManage = _.head([...stateService.originFiles]);   // get next file
+                                if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
                         }
                     }
@@ -221,33 +223,32 @@ export default class Load extends Command
         {
             properties.add(
                 new Property({
-                    name                          : property.name,
-                    type                          : property.type,
-                    primaryKey                    : property?.primaryKey,
-                    enumOptions                   : property?.enumOptions?.join(),
-                    decimals                      : property?.decimals,
-                    length                        : property?.length,
-                    minLength                     : property?.minLength,
-                    maxLength                     : property?.maxLength,
-                    nullable                      : property?.nullable,
-                    defaultValue                  : property?.defaultValue,
-                    relationship                  : property?.relationship,
-                    relationshipSingularName      : property?.relationshipSingularName,
-                    relationshipAggregate         : property?.relationshipAggregate,
-                    relationshipModulePath        : property?.relationshipModulePath,
-                    relationshipKey               : property?.relationshipKey,
-                    relationshipField             : property?.relationshipField,
-                    relationshipAvoidConstraint   : property?.relationshipAvoidConstraint,
-                    relationshipPackageName       : property?.relationshipPackageName,
-                    intermediateTable             : property?.intermediateTable,
-                    intermediateModel             : property?.intermediateModel,
-                    intermediateModelModuleSection: property?.intermediateModelModuleSection,
-                    intermediateModelFile         : property?.intermediateModelFile,
-                    index                         : property?.index,
-                    indexName                     : property?.indexName,
-                    isI18n                        : property?.isI18n,
-                    example                       : property?.example,
-                    faker                         : property?.faker,
+                    name                       : property.name,
+                    type                       : property.type,
+                    primaryKey                 : property?.primaryKey,
+                    enumOptions                : property?.enumOptions?.join(),
+                    decimals                   : property?.decimals,
+                    length                     : property?.length,
+                    minLength                  : property?.minLength,
+                    maxLength                  : property?.maxLength,
+                    nullable                   : property?.nullable,
+                    defaultValue               : property?.defaultValue,
+                    relationship               : property?.relationship,
+                    relationshipSingularName   : property?.relationshipSingularName,
+                    relationshipAggregate      : property?.relationshipAggregate,
+                    relationshipModulePath     : property?.relationshipModulePath,
+                    relationshipKey            : property?.relationshipKey,
+                    relationshipField          : property?.relationshipField,
+                    relationshipAvoidConstraint: property?.relationshipAvoidConstraint,
+                    relationshipPackageName    : property?.relationshipPackageName,
+                    pivotAggregateName         : property?.pivotAggregateName,
+                    pivotPath                  : property?.pivotPath,
+                    pivotFileName              : property?.pivotFileName,
+                    index                      : property?.index,
+                    indexName                  : property?.indexName,
+                    isI18n                     : property?.isI18n,
+                    example                    : property?.example,
+                    faker                      : property?.faker,
                 }),
             );
         }

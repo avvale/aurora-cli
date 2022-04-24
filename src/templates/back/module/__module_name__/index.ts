@@ -90,8 +90,10 @@ export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 {{#if schema.properties.hasI18n}}
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18NModel } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
-{{#each schema.properties.withRelationshipIntermediateTable}}
-export { {{ intermediateModel }} } from './infrastructure/sequelize/sequelize-{{ intermediateModelFile }}.model';
+{{#each schema.properties.withRelationshipManyToMany}}
+{{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
+export { {{ pivotAggregateName }}Model } from './infrastructure/sequelize/sequelize-{{ pivotFileName }}.model';
+{{/if}}
 {{/each}}
 
 // repository
