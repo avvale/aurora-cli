@@ -98,10 +98,21 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{#if hasBelongsToManyDecorator }}
 
     {{#if pivotAggregateName }}
-    @BelongsToMany(() => {{ relationshipAggregate }}Model, { through: () => {{ pivotAggregateName }}Model, uniqueKey: 'Uq01{{ toPascalCase pivotAggregateName }}' })
+    @BelongsToMany(() => {{ relationshipAggregate }}Model, {
+        through: () => {{ pivotAggregateName }}Model,
+        uniqueKey: 'Uq01{{ toPascalCase pivotAggregateName }}',
+        {{#if relationshipAvoidConstraint }}
+        constraints: false,
+        {{/if}}
+    })
     {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
     {{else}}
-    @BelongsToMany(() => {{ relationshipAggregate }}Model, () => {{ pivotAggregateName }}Model)
+    @BelongsToMany(() => {{ relationshipAggregate }}Model, {
+        through: () => {{ pivotAggregateName }}Model,
+        {{#if relationshipAvoidConstraint }}
+        constraints: false,
+        {{/if}}
+    })
     {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
     {{/if}}
     {{/if}}
