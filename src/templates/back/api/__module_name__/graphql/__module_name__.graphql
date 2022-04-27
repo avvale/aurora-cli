@@ -8,7 +8,7 @@ enum {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.mo
 
 type {{ schema.aggregateName }}
 {
-    {{#each schema.properties.graphqlType}}
+    {{#each schema.properties.graphqlProperties}}
     {{#if (allowProperty ../schema.moduleName this)}}
     {{#eq relationship ../relationship.MANY_TO_ONE}}
     {{ toCamelCase nativeName }}: ID{{#unless nullable }}!{{/unless}}

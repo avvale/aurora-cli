@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from '{{ config.auroraCorePackage }}';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase schema.moduleName }}.response';
 import {
@@ -29,7 +30,7 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
      * Map object to aggregate
      * @param {{ toCamelCase schema.moduleName }}
      */
-    mapModelToAggregate({{ toCamelCase schema.moduleName }}: ObjectLiteral, cQMetadata?: CQMetadata): {{ schema.aggregateName }}
+    mapModelToAggregate({{ toCamelCase schema.moduleName }}: LiteralObject, cQMetadata?: CQMetadata): {{ schema.aggregateName }}
     {
         if (!{{ toCamelCase schema.moduleName }}) return;
 
@@ -40,7 +41,7 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
      * Map array of objects to array aggregates
      * @param {{ toCamelCase schema.moduleNames }}
      */
-    mapModelsToAggregates({{ toCamelCase schema.moduleNames }}: ObjectLiteral[], cQMetadata?: CQMetadata): {{ schema.aggregateName }}[]
+    mapModelsToAggregates({{ toCamelCase schema.moduleNames }}: LiteralObject[], cQMetadata?: CQMetadata): {{ schema.aggregateName }}[]
     {
         if (!Array.isArray({{ toCamelCase schema.moduleNames }})) return;
 
@@ -67,7 +68,7 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
         return {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => this.makeResponse({{ toCamelCase schema.moduleName }}));
     }
 
-    private makeAggregate({{ toCamelCase schema.moduleName }}: ObjectLiteral, cQMetadata?: CQMetadata): {{ schema.aggregateName }}
+    private makeAggregate({{ toCamelCase schema.moduleName }}: LiteralObject, cQMetadata?: CQMetadata): {{ schema.aggregateName }}
     {
         return {{ schema.aggregateName }}.register(
             {{#each schema.properties.mapper}}

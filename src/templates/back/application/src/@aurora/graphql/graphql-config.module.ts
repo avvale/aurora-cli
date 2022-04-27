@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import GraphQLJSON from 'graphql-type-json';
 import { AnyScalar, JsonScalar, UploadScalar } from 'aurora-ts-core';
 import { Hello } from './hello.resolver';
+import GraphQLJSON from 'graphql-type-json';
 
 @Module({
     imports: [
@@ -18,22 +18,22 @@ import { Hello } from './hello.resolver';
                 JSON: GraphQLJSON // define JSON Scalar type
             },
             definitions: {
-                path: join(process.cwd(), 'src/graphql.ts')
+                path: join(process.cwd(), 'src/graphql.ts'),
             },
             /* uploads: {
                 maxFileSize: 100000000, // 100 MB
                 maxFiles   : 5,
             } */
-        })
+        }),
     ],
     providers: [
         AnyScalar,
         UploadScalar,
         JsonScalar,
-        Hello
+        Hello,
     ],
     exports: [
-        GraphQLModule
-    ]
+        GraphQLModule,
+    ],
 })
 export class GraphQLConfigModule {}

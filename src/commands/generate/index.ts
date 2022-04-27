@@ -26,7 +26,7 @@ export default class Generate extends Command
             description: 'Type element to create',
             options    : [
                 'bounded-context', 'b',
-                'module', 'm'
+                'module', 'm',
             ],
             required   : true,
         }

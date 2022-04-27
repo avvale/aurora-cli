@@ -1,6 +1,7 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     {{> importValueObjects }}
 } from './value-objects';
@@ -206,7 +207,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     }
     {{/notInArray}}
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             {{#each schema.properties.aggregate}}
@@ -237,7 +238,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
             {{#each schema.properties.aggregate}}

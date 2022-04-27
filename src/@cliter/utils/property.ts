@@ -195,14 +195,6 @@ export class Property
         return typeof this._enumOptions === 'string' ? this._enumOptions.split(',').map(item => item.trim().toUpperCase()) : undefined;
     }
 
-    // morph properties
-    get nameGraphqlType(): string
-    {
-        if (this.relationship === SqlRelationship.MANY_TO_ONE && this.relationshipField) return this.relationshipField;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE && this.relationshipField) return this.relationshipField;
-        return this._name;
-    }
-
     get getRelationshipBoundedContext(): string | null
     {
         if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).boundedContextName;
@@ -213,13 +205,6 @@ export class Property
     {
         if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleName;
         return null;
-    }
-
-    get getApiType(): string
-    {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY) return this.config.sqlTypesEquivalenceApiTypes.manyToMany;
-
-        return this.config.sqlTypesEquivalenceApiTypes[this.type];
     }
 
     get getJavascriptType(): string
@@ -241,6 +226,56 @@ export class Property
         return cliterConfig.sqlTypesEquivalenceSequelizeTypes[this.type](parameter);
     }
 
+    /********
+     * REST *
+     ********/
+    get nameDtoType(): string
+    {
+        if (this.relationship === SqlRelationship.MANY_TO_ONE && this.relationshipField) return this.relationshipField;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE && this.relationshipField) return this.relationshipField;
+        return this._name;
+    }
+
+    get getSwaggerType(): string
+    {
+        if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `[${this.relationshipAggregate}Dto]`;
+        if (this.relationship === SqlRelationship.MANY_TO_ONE)                                                          return `${this.relationshipAggregate}Dto`;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE)                                                           return `${this.relationshipAggregate}Dto`;
+        return this.config.sqlTypesEquivalenceSwaggerTypes[this.type];
+    }
+
+    get getDtoType(): string
+    {
+        if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `${this.relationshipAggregate}Dto[]`;
+        if (this.relationship === SqlRelationship.MANY_TO_ONE)                                                          return `${this.relationshipAggregate}Dto`;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE)                                                           return `${this.relationshipAggregate}Dto`;
+        return this.config.sqlTypesEquivalenceJavascriptTypes[this.type];
+    }
+
+    get getDtoCreateType(): string
+    {
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceDtoTypes.manyToMany;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Dto`;
+        return this.config.sqlTypesEquivalenceDtoTypes[this.type];
+    }
+
+    get getDtoUpdateType(): string
+    {
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceDtoTypes.manyToMany;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Dto`;
+        return this.config.sqlTypesEquivalenceDtoTypes[this.type];
+    }
+
+    /***********
+     * GraphQL *
+     ***********/
+    get nameGraphqlType(): string
+    {
+        if (this.relationship === SqlRelationship.MANY_TO_ONE && this.relationshipField) return this.relationshipField;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE && this.relationshipField) return this.relationshipField;
+        return this._name;
+    }
+
     get getGraphqlType(): string | undefined
     {
         if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `[${this.relationshipAggregate}]`;
@@ -251,18 +286,21 @@ export class Property
 
     get getGraphqlCreateType(): string
     {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY)                                                    return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)                           return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Input`;
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Input`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlUpdateType(): string
     {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY)                                                    return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)                           return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Input`;
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
+        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Input`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
 
+    /*****************
+     * Miscellaneous *
+     *****************/
     get hasQuotation(): boolean
     {
         return this.config.quotationTypes[this.type];

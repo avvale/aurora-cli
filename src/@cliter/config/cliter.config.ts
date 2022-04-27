@@ -13,7 +13,8 @@ export interface CliterConfig
     timestampFields: string[];
     deletedAtField: string[];
     sqlTypesEquivalenceJavascriptTypes: { [key: string]: string };
-    sqlTypesEquivalenceApiTypes: { [key: string]: string };
+    sqlTypesEquivalenceSwaggerTypes: { [key: string]: string };
+    sqlTypesEquivalenceDtoTypes: { [key: string]: string };
     sqlTypesEquivalenceQraphqlTypes: { [key: string]: string };
     sqlTypesEquivalenceSequelizeTypes: { [key: string]: Function };
     defaultTypeLength: { [key: string]: number };
@@ -64,7 +65,7 @@ export const cliterConfig: CliterConfig =
         tinyint            : 'number',
         varchar            : 'string',
     },
-    sqlTypesEquivalenceApiTypes: {
+    sqlTypesEquivalenceSwaggerTypes: {
         'int.unsigned'     : 'Number',
         'smallint.unsigned': 'Number',
         'tinyint.unsigned' : 'Number',
@@ -84,6 +85,27 @@ export const cliterConfig: CliterConfig =
         timestamp          : 'String',
         tinyint            : 'Number',
         varchar            : 'String',
+    },
+    sqlTypesEquivalenceDtoTypes: {
+        'int.unsigned'     : 'number',
+        'smallint.unsigned': 'number',
+        'tinyint.unsigned' : 'number',
+        boolean            : 'boolean',
+        char               : 'string',
+        date               : 'string',
+        decimal            : 'number',
+        enum               : 'string',
+        float              : 'number',
+        id                 : 'string',
+        int                : 'number',
+        json               : 'any',
+        manyToMany         : 'string[]',
+        password           : 'string',
+        smallint           : 'number',
+        text               : 'string',
+        timestamp          : 'string',
+        tinyint            : 'number',
+        varchar            : 'string',
     },
     sqlTypesEquivalenceQraphqlTypes: {
         'int.unsigned'     : 'GraphQLInt',

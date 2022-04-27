@@ -1,5 +1,6 @@
 
-import { CQMetadata, IRepository, ObjectLiteral, Pagination, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Id } from './value-objects';
 
@@ -60,8 +61,8 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract create(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
-            createOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: {{ schema.aggregateName }}) => QueryStatement;
         }
@@ -71,8 +72,8 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract insert(
         {{ toCamelCase schema.moduleNames }}: {{ schema.aggregateName }}[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -80,12 +81,12 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract update(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
-            updateOptions?: ObjectLiteral;
+            updateOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
@@ -93,7 +94,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     abstract deleteById(
         id: {{ toPascalCase schema.moduleName }}Id,
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -102,7 +103,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
     // delete records
     abstract delete(
         options?: {
-            deleteOptions?: ObjectLiteral;
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

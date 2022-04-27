@@ -22,7 +22,7 @@ export class Update{{ toPascalCase schema.moduleName }}Service
         payload: {
             {{#each schema.properties.updateService}}
             {{#if (allowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
         },

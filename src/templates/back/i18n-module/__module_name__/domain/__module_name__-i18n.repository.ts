@@ -1,5 +1,6 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { LiteralObject } from '@nestjs/common';
+import { IRepository, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata, Pagination } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Id } from './value-objects';
@@ -61,7 +62,7 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
     abstract create(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
-            dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
             finderQueryStatement?: (aggregate: {{ schema.aggregateName }}) => QueryStatement;
         }
     ): Promise<void>;
@@ -70,8 +71,8 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
     abstract insert(
         {{ toCamelCase schema.moduleNames }}: {{ schema.aggregateName }}[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -81,8 +82,8 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: {{ schema.aggregateName }}) => ObjectLiteral;
-            findArguments?: ObjectLiteral;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

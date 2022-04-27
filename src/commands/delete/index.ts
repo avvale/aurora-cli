@@ -60,7 +60,7 @@ export default class Delete extends Command
         questions.push({
             name   : 'hasDelete',
             message: `Do you want delete the module ${elementName}?`,
-            type   : 'confirm'
+            type   : 'confirm',
         });
 
         return await inquirer.prompt(questions);

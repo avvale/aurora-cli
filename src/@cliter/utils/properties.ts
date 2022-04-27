@@ -267,9 +267,9 @@ export class Properties
     }
 
     // graphql
-    get graphqlType(): Property[]
+    get graphqlProperties(): Property[]
     {
-        return this.properties;    // exclude one to many relations
+        return this.properties;
     }
 
     get graphqlInput(): Property[]
@@ -280,26 +280,23 @@ export class Properties
     }
 
     // DTOs
-    get dto(): Property[]
+    get dtoProperties(): Property[]
     {
-        return this.properties
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField to avoid circular dependency
+        return this.properties;
     }
 
     get createDto(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to many relations
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);                                     // exclude one to many relations
     }
 
     get updateDto(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to many relations
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);                                     // exclude one to many relations
     }
 
     // models
