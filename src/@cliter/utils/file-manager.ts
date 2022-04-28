@@ -77,7 +77,7 @@ export class FileManager
         if (name.includes('__module_name__'))                               name = name.replace(/__module_name__/gi, (moduleNamePrefix ? moduleNamePrefix + '-' : '') + FileManager.stateService.schema.moduleName.toKebabCase() + (moduleNameSuffix ? '-' + moduleNameSuffix : ''));
         if (name.includes('__module_names__'))                              name = name.replace(/__module_names__/gi, FileManager.stateService.schema.moduleNames.toKebabCase());
         if (name.includes('__property_name__') && currentProperty)          name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
-        if (name.includes('__property_native_name__') && currentProperty)   name = name.replace(/__property_native_name__/gi, currentProperty.nativeName.toKebabCase());
+        if (name.includes('__property_native_name__') && currentProperty)   name = name.replace(/__property_native_name__/gi, currentProperty.originName.toKebabCase());
 
         return name;
     }

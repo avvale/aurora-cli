@@ -287,11 +287,10 @@ export class Properties
         return this.properties;
     }
 
-    get graphqlInput(): Property[]
+    get graphqlInputProperties(): Property[]
     {
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);                                     // exclude one to many relations
+            .filter(property => !this.timestampFields.includes(property.name)); // exclude timestamps
     }
 
     /********
@@ -302,13 +301,7 @@ export class Properties
         return this.properties;
     }
 
-    get createDtoProperties(): Property[]
-    {
-        return this.properties
-            .filter(property => !this.timestampFields.includes(property.name)); // exclude timestamps
-    }
-
-    get updateDtoProperties(): Property[]
+    get dtoInputProperties(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name)); // exclude timestamps

@@ -173,13 +173,15 @@ export class Property
     }
 
     // property names
-    get nativeName(): string
+    get originName(): string
     {
         return this._name;
     }
 
     get name(): string
     {
+        // properties that represent many to many relationships, are arrays of ids
+        if (this.relationship === SqlRelationship.MANY_TO_MANY) return `${this.relationshipSingularName}Ids`;
         return this._name;
     }
 
@@ -240,13 +242,6 @@ export class Property
     /***********
      * GraphQL *
      ***********/
-    get nameGraphqlType(): string
-    {
-        if (this.relationship === SqlRelationship.MANY_TO_ONE && this.relationshipField) return this.relationshipField;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE && this.relationshipField) return this.relationshipField;
-        return this._name;
-    }
-
     get getGraphqlType(): string | undefined
     {
         if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `[${this.relationshipAggregate}]`;

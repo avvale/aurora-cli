@@ -27,7 +27,7 @@ export class Sequelize{{ toPascalCase schema.moduleName }}Repository extends Seq
     {
         // add many to many relation
         {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.length > 0) await model.$add('{{ toCamelCase nativeName }}', aggregate.{{ toCamelCase name }}.value);
+        if (aggregate.{{ toCamelCase name }}.length > 0) await model.$add('{{ toCamelCase originName }}', aggregate.{{ toCamelCase name }}.value);
         {{/each}}
     }
 
@@ -36,7 +36,7 @@ export class Sequelize{{ toPascalCase schema.moduleName }}Repository extends Seq
     {
         // set many to many relation
         {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.isArray()) await model.$set('{{ toCamelCase nativeName }}', aggregate.{{ toCamelCase name }}.value);
+        if (aggregate.{{ toCamelCase name }}.isArray()) await model.$set('{{ toCamelCase originName }}', aggregate.{{ toCamelCase name }}.value);
         {{/each}}
     }
     {{/hasItems}}

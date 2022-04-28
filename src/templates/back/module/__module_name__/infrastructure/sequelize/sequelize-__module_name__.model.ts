@@ -105,7 +105,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         constraints: false,
         {{/if}}
     })
-    {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
+    {{ toCamelCase originName }}: {{ relationshipAggregate }}Model[];
     {{else}}
     @BelongsToMany(() => {{ relationshipAggregate }}Model, {
         through: () => {{ pivotAggregateName }}Model,
@@ -113,7 +113,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         constraints: false,
         {{/if}}
     })
-    {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
+    {{ toCamelCase originName }}: {{ relationshipAggregate }}Model[];
     {{/if}}
     {{/if}}
 

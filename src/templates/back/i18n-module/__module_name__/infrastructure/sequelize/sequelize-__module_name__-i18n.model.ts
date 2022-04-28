@@ -79,10 +79,10 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
 
     {{#if pivotAggregateName }}
     @BelongsToMany(() => {{ relationshipAggregate }}Model, { through: () => {{ pivotAggregateName }}Model, uniqueKey: 'Uq01{{ toPascalCase pivotAggregateName }}' })
-    {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
+    {{ toCamelCase originName }}: {{ relationshipAggregate }}Model[];
     {{else}}
     @BelongsToMany(() => {{ relationshipAggregate }}Model, () => {{ pivotAggregateName }}Model)
-    {{ toCamelCase nativeName }}: {{ relationshipAggregate }}Model[];
+    {{ toCamelCase originName }}: {{ relationshipAggregate }}Model[];
     {{/if}}
     {{/if}}
 

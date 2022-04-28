@@ -4,7 +4,7 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 import { {{ currentProperty.relationshipAggregate }}Model } from '../../../../../{{ config.applicationsContainer }}/{{ currentProperty.relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase currentProperty.getRelationshipModule }}.model';
 
 @Table({ modelName: '{{ toPascalCase currentProperty.pivotAggregateName }}', freezeTableName: true, timestamps: false })
-export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.nativeName }}Model extends Model<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.nativeName }}Model>
+export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}Model extends Model<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}Model>
 {
     @ForeignKey(() => {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model)
     @Column({
