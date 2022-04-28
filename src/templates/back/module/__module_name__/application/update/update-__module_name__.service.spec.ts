@@ -33,20 +33,20 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
                 Update{{ toPascalCase schema.moduleName }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        update: (item) => { /**/ }
-                    }
+                        update: () => { /**/ },
+                    },
                 },
                 {{#if schema.properties.hasI18n}}
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}I18NRepository,
+                    provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
-                        update: (item) => { /**/ }
-                    }
+                        update: () => { /**/ },
+                    },
                 },
                 {{/if}}
-            ]
+            ],
         }).compile();
 
         service         = module.get(Update{{ toPascalCase schema.moduleName }}Service);

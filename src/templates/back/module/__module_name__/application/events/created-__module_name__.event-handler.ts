@@ -4,7 +4,7 @@ import { Created{{ toPascalCase schema.moduleName }}Event } from './created-{{ t
 @EventsHandler(Created{{ toPascalCase schema.moduleName }}Event)
 export class Created{{ toPascalCase schema.moduleName }}EventHandler implements IEventHandler<Created{{ toPascalCase schema.moduleName }}Event>
 {
-    handle(event: Created{{ toPascalCase schema.moduleName }}Event)
+    handle(event: Created{{ toPascalCase schema.moduleName }}Event): void
     {
         // console.log('Created{{ toPascalCase schema.moduleName }}Event: ', event);
     }

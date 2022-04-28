@@ -556,9 +556,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Authorization', `Bearer ${testJwt}`)
             {{/if }}
             .send({
-                {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../schema property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
-                {{/each}}
+                ...mockData[0],
+                ...{ id: '{{{ mocker (object type='fixedUuid') }}}' },
             })
             .expect(200)
             .then(res =>
@@ -717,9 +716,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 `,
                 variables: {
                     payload: {
-                        {{#each schema.properties.postmanGraphQLCreateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../schema property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
-                        {{/each}}
+                        ...mockData[0],
+                        ...{ id: '{{{ mocker (object type='fixedUuid') }}}' },
                     },
                 },
             })
@@ -930,9 +928,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 `,
                 variables: {
                     payload: {
-                        {{#each schema.properties.postmanGraphQLUpdateVariables}}
-                        {{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../schema property=. type='seed' scapeQuotes=false) }}}{{#if hasQuotation }}'{{/if }},
-                        {{/each}}
+                        ...mockData[0],
+                        ...{ id: '{{{ mocker (object type='fixedUuid') }}}' },
                     },
                 },
             })

@@ -22,12 +22,12 @@ describe('Get{{ toPascalCase schema.moduleNames }}Service', () =>
                 Get{{ toPascalCase schema.moduleNames }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        get: (queryStatement) => {}
-                    }
-                }
-            ]
+                        get: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         service         = module.get(Get{{ toPascalCase schema.moduleNames }}Service);

@@ -23,17 +23,17 @@ describe('Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler', () =>
                 Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler,
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
-                    useClass: Mock{{ toPascalCase schema.moduleName }}Repository
+                    useClass: Mock{{ toPascalCase schema.moduleName }}Repository,
                 },
                 {
                     provide : Find{{ toPascalCase schema.moduleName }}ByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler>(Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler);
         service         = module.get<Find{{ toPascalCase schema.moduleName }}ByIdService>(Find{{ toPascalCase schema.moduleName }}ByIdService);
@@ -55,7 +55,7 @@ describe('Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler', () =>
                 new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
                     {{ toCamelCase schema.moduleNames }}[0].id,
 
-                )
+                ),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

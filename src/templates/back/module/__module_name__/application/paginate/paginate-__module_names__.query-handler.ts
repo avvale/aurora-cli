@@ -17,7 +17,7 @@ export class Paginate{{ toPascalCase schema.moduleNames }}QueryHandler implement
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO())
+            rows.map(item => item.toDTO()),
         );
     }
 }

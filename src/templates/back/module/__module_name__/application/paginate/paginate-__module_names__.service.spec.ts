@@ -22,12 +22,12 @@ describe('Paginate{{ toPascalCase schema.moduleNames }}Service', () =>
                 Paginate{{ toPascalCase schema.moduleNames }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        paginate: (queryStatement, constraints) => {}
-                    }
-                }
-            ]
+                        paginate: (queryStatement, constraints) => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         service         = module.get(Paginate{{ toPascalCase schema.moduleNames }}Service);
@@ -47,15 +47,15 @@ describe('Paginate{{ toPascalCase schema.moduleNames }}Service', () =>
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,
                 count: mockRepository.collectionSource.slice(0,10).length,
-                rows: mockRepository.collectionSource.slice(0,10)
+                rows : mockRepository.collectionSource.slice(0,10),
             })));
             expect(await service.main({
                 offset: 0,
-                limit: 10
+                limit : 10
             })).toStrictEqual({
                 total: mockRepository.collectionSource.slice(0,10).length,
                 count: mockRepository.collectionSource.slice(0,10).length,
-                rows: mockRepository.collectionSource.slice(0,10)
+                rows : mockRepository.collectionSource.slice(0,10),
             });
         });
     });

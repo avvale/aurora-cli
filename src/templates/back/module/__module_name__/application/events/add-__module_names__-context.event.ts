@@ -17,7 +17,8 @@ export class Add{{ toPascalCase schema.moduleNames }}ContextEvent extends Aggreg
 {
     constructor(
         public readonly aggregateRoots: {{ schema.aggregateName }}[] = [],
-    ) {
+    )
+    {
         super();
     }
 
@@ -28,7 +29,7 @@ export class Add{{ toPascalCase schema.moduleNames }}ContextEvent extends Aggreg
 
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleNames) '.event.ts'}}
-    created()
+    created(): void
     {
         this.apply(
             new Created{{ toPascalCase schema.moduleNames }}Event(
@@ -39,9 +40,9 @@ export class Add{{ toPascalCase schema.moduleNames }}ContextEvent extends Aggreg
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}
                         {{/each}}
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
     {{/notInArray}}
@@ -49,7 +50,7 @@ export class Add{{ toPascalCase schema.moduleNames }}ContextEvent extends Aggreg
 
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
     {{#notInArray schema.excluded 'src/{{ config.applicationsContainer }}/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/deleted-' (toKebabCase schema.moduleNames) '.event.ts'}}
-    deleted()
+    deleted(): void
     {
         this.apply(
             new Deleted{{ toPascalCase schema.moduleNames }}Event(
@@ -60,9 +61,9 @@ export class Add{{ toPascalCase schema.moduleNames }}ContextEvent extends Aggreg
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}
                         {{/each}}
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
     {{/notInArray}}

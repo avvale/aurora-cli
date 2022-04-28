@@ -24,13 +24,14 @@ describe('Find{{ toPascalCase schema.moduleName }}ByIdService', () =>
                 Find{{ toPascalCase schema.moduleName }}ByIdService,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        findById: id => { /**/ }
-                    }
-                }
-            ]
-        }).compile();
+                        findById: id => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(Find{{ toPascalCase schema.moduleName }}ByIdService);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
@@ -48,7 +49,7 @@ describe('Find{{ toPascalCase schema.moduleName }}ByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new {{ toPascalCase schema.moduleName }}Id({{ toCamelCase schema.moduleNames }}[0].id)
+                new {{ toPascalCase schema.moduleName }}Id({{ toCamelCase schema.moduleNames }}[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

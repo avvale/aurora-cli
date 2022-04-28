@@ -22,17 +22,17 @@ describe('Get{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
                 Get{{ toPascalCase schema.moduleNames }}QueryHandler,
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
-                    useClass: Mock{{ toPascalCase schema.moduleName }}Repository
+                    useClass: Mock{{ toPascalCase schema.moduleName }}Repository,
                 },
                 {
                     provide : Get{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<Get{{ toPascalCase schema.moduleNames }}QueryHandler>(Get{{ toPascalCase schema.moduleNames }}QueryHandler);
         service         = module.get<Get{{ toPascalCase schema.moduleNames }}Service>(Get{{ toPascalCase schema.moduleNames }}Service);
@@ -51,7 +51,7 @@ describe('Get{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new Get{{ toPascalCase schema.moduleNames }}Query()
+                new Get{{ toPascalCase schema.moduleNames }}Query(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

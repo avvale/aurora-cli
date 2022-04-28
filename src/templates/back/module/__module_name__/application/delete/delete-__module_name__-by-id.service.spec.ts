@@ -35,18 +35,18 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
                     useValue: {
                         deleteById: id => { /**/ },
                         findById  : id => { /**/ },
-                    }
+                    },
                 },
                 {{#if schema.properties.hasI18n}}
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
                         get   : queryStatement => { /**/ },
-                        delete: queryStatement => { /**/ }
-                    }
+                        delete: queryStatement => { /**/ },
+                    },
                 },
                 {{/if}}
-            ]
+            ],
         }).compile();
 
         service         = module.get(Delete{{ toPascalCase schema.moduleName }}ByIdService);
@@ -65,7 +65,7 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new {{ toPascalCase schema.moduleName }}Id({{ toCamelCase schema.moduleNames }}[0].id)
+                new {{ toPascalCase schema.moduleName }}Id({{ toCamelCase schema.moduleNames }}[0].id),
             )).toBe(undefined);
         });
     });

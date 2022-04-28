@@ -23,17 +23,17 @@ describe('Paginate{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
                 Paginate{{ toPascalCase schema.moduleNames }}QueryHandler,
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
-                    useClass: Mock{{ toPascalCase schema.moduleName }}Repository
+                    useClass: Mock{{ toPascalCase schema.moduleName }}Repository,
                 },
                 {
                     provide : Paginate{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<Paginate{{ toPascalCase schema.moduleNames }}QueryHandler>(Paginate{{ toPascalCase schema.moduleNames }}QueryHandler);
         service         = module.get<Paginate{{ toPascalCase schema.moduleNames }}Service>(Paginate{{ toPascalCase schema.moduleNames }}Service);
@@ -54,22 +54,22 @@ describe('Paginate{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
                 {
                     count: 10,
                     total: 100,
-                    rows: repository.collectionSource.slice(0,10)
-                }
+                    rows : repository.collectionSource.slice(0,10),
+                },
             )));
             expect(await queryHandler.execute(
                 new Paginate{{ toPascalCase schema.moduleNames }}Query(
                     {
                         offset: 0,
-                        limit: 10
-                    }
-                )
+                        limit : 10,
+                    },
+                ),
             )).toStrictEqual(
                 new PaginationResponse(
                     100,
                     10,
-                    repository.collectionSource.slice(0,10).map(item => item.toDTO())
-                )
+                    repository.collectionSource.slice(0,10).map(item => item.toDTO()),
+                ),
             );
         });
     });

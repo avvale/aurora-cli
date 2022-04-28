@@ -34,21 +34,21 @@ describe('Create{{ toPascalCase schema.moduleNames }}Service', () =>
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
                 {{#if schema.properties.hasI18n}}
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
                 {
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : ''
-                    }
+                    },
                 },
                 {{/if}}
             ]
@@ -69,7 +69,7 @@ describe('Create{{ toPascalCase schema.moduleNames }}Service', () =>
         test('should create {{ toCamelCase schema.moduleNames }} and emit event', async () =>
         {
             expect(await service.main(
-                mockRepository.collectionSource
+                mockRepository.collectionSource,
             )).toBe(undefined);
         });
     });

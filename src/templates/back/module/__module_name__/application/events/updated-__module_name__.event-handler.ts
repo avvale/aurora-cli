@@ -4,7 +4,7 @@ import { Updated{{ toPascalCase schema.moduleName }}Event } from './updated-{{ t
 @EventsHandler(Updated{{ toPascalCase schema.moduleName }}Event)
 export class Updated{{ toPascalCase schema.moduleName }}EventHandler implements IEventHandler<Updated{{ toPascalCase schema.moduleName }}Event>
 {
-    handle(event: Updated{{ toPascalCase schema.moduleName }}Event)
+    handle(event: Updated{{ toPascalCase schema.moduleName }}Event): void
     {
         // console.log('Updated{{ toPascalCase schema.moduleName }}Event: ', event);
     }

@@ -18,7 +18,7 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler implem
         await this.delete{{ toPascalCase schema.moduleName }}ByIdService.main(
             new {{ toPascalCase schema.moduleName }}Id(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

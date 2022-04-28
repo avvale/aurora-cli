@@ -4,7 +4,7 @@ import { Deleted{{ toPascalCase schema.moduleNames }}Event } from './deleted-{{ 
 @EventsHandler(Deleted{{ toPascalCase schema.moduleNames }}Event)
 export class Deleted{{ toPascalCase schema.moduleNames }}EventHandler implements IEventHandler<Deleted{{ toPascalCase schema.moduleNames }}Event>
 {
-    handle(event: Deleted{{ toPascalCase schema.moduleNames }}Event)
+    handle(event: Deleted{{ toPascalCase schema.moduleNames }}Event): void
     {
         // console.log('Deleted{{ toPascalCase schema.moduleNames }}Event: ', event);
     }

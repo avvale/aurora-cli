@@ -16,12 +16,12 @@ describe('Delete{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
             providers: [
                 Delete{{ toPascalCase schema.moduleNames }}CommandHandler,
                 {
-                    provide: Delete{{ toPascalCase schema.moduleNames }}Service,
+                    provide : Delete{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<Delete{{ toPascalCase schema.moduleNames }}CommandHandler>(Delete{{ toPascalCase schema.moduleNames }}CommandHandler);
@@ -38,7 +38,7 @@ describe('Delete{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new Delete{{ toPascalCase schema.moduleNames }}Command()
+                new Delete{{ toPascalCase schema.moduleNames }}Command(),
             )).toBe(undefined);
         });
     });

@@ -17,10 +17,10 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler', () =>
             providers: [
                 Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler,
                 {
-                    provide: Delete{{ toPascalCase schema.moduleName }}ByIdService,
+                    provide : Delete{{ toPascalCase schema.moduleName }}ByIdService,
                     useValue: {
-                        main: () => {},
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ],
         }).compile();
@@ -41,7 +41,7 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new Delete{{ toPascalCase schema.moduleName }}ByIdCommand(
                     {{ toCamelCase schema.moduleNames }}[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

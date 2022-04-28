@@ -22,13 +22,14 @@ describe('Find{{ toPascalCase schema.moduleName }}Service', () =>
                 Find{{ toPascalCase schema.moduleName }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
-                    provide: I{{ toPascalCase schema.moduleName }}Repository,
+                    provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
-                        find: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        find: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(Find{{ toPascalCase schema.moduleName }}Service);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
