@@ -11,16 +11,21 @@ import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toP
 
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto
 {
-    {{#each schema.properties.createDto}}
-    {{#if (allowProperty ../schema.moduleName this) }}
+{{#each schema.properties.createDtoProperties}}
+{{setVar 'isCommonProperty' true ~}}
+{{#if (allowProperty ../schema.moduleName this) }}
 {{#eq relationship ../relationship.MANY_TO_ONE}}
+    {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : String,
         description: '{{ toCamelCase name }} [input here api field description]',
         example    : '{{ uuid }}',
     })
-    {{ toCamelCase nativeName }}{{#if nullable }}?{{/if}}: string;
-    {{else eq relationship ../relationship.MANY_TO_MANY}}
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
+
+{{/eq}}
+{{#eq relationship ../relationship.MANY_TO_MANY}}
+    {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : [String],
         description: '{{ toCamelCase name }} [input here api field description]',
@@ -28,15 +33,34 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string[];
-    {{else eq relationship ../relationship.ONE_TO_ONE}}
+    {{ toCamelCase relationshipSingularName }}Ids{{#if nullable }}?{{/if}}: string[];
+
+{{/eq}}
+{{#eq relationship ../relationship.ONE_TO_MANY}}{{setVar 'isCommonProperty' false ~}}{{/eq ~}}
+{{#eq relationship ../relationship.ONE_TO_ONE}}
+    {{setVar 'isCommonProperty' false ~}}
+{{#eq type ../sqlType.ID ~}}
     @ApiProperty({
-        type       : {{ getDtoCreateType }},
+        type       : String,
         description: '{{ toCamelCase name }} [input here api field description]',
-        example    : '',
+        example    : '{{ uuid }}',
     })
-    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{#eq type ../sqlType.ID }}string{{else}}{{ getDtoCreateType }}{{/eq}};
-    {{else eq type ../sqlType.ENUM}}
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
+
+{{else ~}}
+    @ApiProperty({
+        type       : {{ toPascalCase getRelationshipBoundedContext }}Create{{ toPascalCase getRelationshipModule }}Dto,
+        description: '{{ toCamelCase name }} [input here api field description]',
+        {{#if example }}
+        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        {{/if }}
+    })
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContext }}Create{{ toPascalCase getRelationshipModule }}Dto;
+
+{{/eq}}
+{{/eq}}
+{{#eq type ../sqlType.ENUM}}
+    {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
         enum       : [{{{ enumOptionsArrayItems }}}],
@@ -46,7 +70,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
-    {{else}}
+
+{{/eq}}
+{{#if ../isCommonProperty}}
     @ApiProperty({
         type       : {{ getSwaggerType }},
         description: '{{ toCamelCase name }} [input here api field description]',
@@ -55,8 +81,8 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getDtoType }};
-{{/eq}}
 
-    {{/if}}
-    {{/each}}
+{{/if}}
+{{/if}}
+{{/each}}
 }

@@ -180,8 +180,6 @@ export class Property
 
     get name(): string
     {
-        // properties that represent many to many relationships, are arrays of ids
-        if (this.relationship === SqlRelationship.MANY_TO_MANY) return `${this.relationshipSingularName}Ids`;
         return this._name;
     }
 
@@ -229,40 +227,13 @@ export class Property
     /********
      * REST *
      ********/
-    get nameDtoType(): string
-    {
-        if (this.relationship === SqlRelationship.MANY_TO_ONE && this.relationshipField) return this.relationshipField;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE && this.relationshipField) return this.relationshipField;
-        return this._name;
-    }
-
     get getSwaggerType(): string
     {
-        if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `[${this.relationshipAggregate}Dto]`;
-        if (this.relationship === SqlRelationship.MANY_TO_ONE)                                                          return `${this.relationshipAggregate}Dto`;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE)                                                           return `${this.relationshipAggregate}Dto`;
         return this.config.sqlTypesEquivalenceSwaggerTypes[this.type];
     }
 
     get getDtoType(): string
     {
-        if (this.relationship === SqlRelationship.ONE_TO_MANY || this.relationship === SqlRelationship.MANY_TO_MANY)    return `${this.relationshipAggregate}Dto[]`;
-        if (this.relationship === SqlRelationship.MANY_TO_ONE)                                                          return `${this.relationshipAggregate}Dto`;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE)                                                           return `${this.relationshipAggregate}Dto`;
-        return this.config.sqlTypesEquivalenceJavascriptTypes[this.type];
-    }
-
-    get getDtoCreateType(): string
-    {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceDtoTypes.manyToMany;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Dto`;
-        return this.config.sqlTypesEquivalenceDtoTypes[this.type];
-    }
-
-    get getDtoUpdateType(): string
-    {
-        if (this.relationship === SqlRelationship.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceDtoTypes.manyToMany;
-        if (this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Dto`;
         return this.config.sqlTypesEquivalenceDtoTypes[this.type];
     }
 

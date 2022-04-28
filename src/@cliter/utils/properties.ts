@@ -88,7 +88,9 @@ export class Properties
         return this.properties.find(property => property.type === SqlType.ID);
     }
 
-    // data for dashboard
+    /*************
+     * DASHBOARD *
+     *************/
     get gridFields(): Property[]
     {
         return this.properties
@@ -109,8 +111,9 @@ export class Properties
             .filter(property => !this.timestampFields.includes(property.name));
     }
 
-    // data for component
-    // aggregate
+    /*************
+     * AGGREGATE *
+     *************/
     get aggregate(): Property[]
     {
         return this.properties
@@ -118,7 +121,9 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));   // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
-    // commands
+    /************
+     * COMMANDS *
+     ************/
     get createCommand(): Property[]
     {
         return this.properties
@@ -135,7 +140,9 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
-    // commands handler
+    /********************
+     * COMMAND HANDLERS *
+     ********************/
     get createCommandHandler(): Property[]
     {
         return this.properties
@@ -152,7 +159,9 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
-    // queries handler
+    /********************
+     * QUERY HANDLERS *
+     ********************/
     get findQueryHandler(): Property[]
     {
         return this.properties
@@ -171,7 +180,9 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);    // exclude one to many relations
     }
 
-    // services
+    /************
+     * SERVICES *
+     ************/
     get createService(): Property[]
     {
         return this.properties
@@ -226,7 +237,9 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
-    // controllers
+    /***************
+     * CONTROLLERS *
+     ***************/
     get createController(): Property[]
     {
         return this.properties
@@ -266,7 +279,9 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
-    // graphql
+    /***********
+     * GRAPHQL *
+     ***********/
     get graphqlProperties(): Property[]
     {
         return this.properties;
@@ -279,27 +294,29 @@ export class Properties
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);                                     // exclude one to many relations
     }
 
-    // DTOs
+    /********
+     * REST *
+     ********/
     get dtoProperties(): Property[]
     {
         return this.properties;
     }
 
-    get createDto(): Property[]
+    get createDtoProperties(): Property[]
     {
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);                                     // exclude one to many relations
+            .filter(property => !this.timestampFields.includes(property.name)); // exclude timestamps
     }
 
-    get updateDto(): Property[]
+    get updateDtoProperties(): Property[]
     {
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY);                                     // exclude one to many relations
+            .filter(property => !this.timestampFields.includes(property.name)); // exclude timestamps
     }
 
-    // models
+    /**********
+     * MODELS *
+     **********/
     get modelColumns(): Property[]
     {
         return this.properties; // exclude one to many relations
@@ -310,7 +327,9 @@ export class Properties
         return this.properties.filter(property => property.relationship);               // only relationship
     }
 
-    // postman
+    /***********
+     * POSTMAN *
+     ***********/
     get postmanGraphQLCreateQuery(): Property[]
     {
         return this.properties
@@ -412,7 +431,9 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to many relations
     }
 
-    // data for testing
+    /***********
+     * TESTING *
+     ***********/
     get test(): Property[]
     {
         return this.properties
@@ -482,7 +503,9 @@ export class Properties
             .filter(property => property.type === SqlType.TIMESTAMP);
     }
 
-    // others
+    /**********
+     * OTHERS *
+     **********/
     get valueObjects(): Property[]
     {
         return this.properties

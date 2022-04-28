@@ -5,6 +5,10 @@
 /dist
 /node_modules
 
+# Aurora files
+/src/oauth-private.key
+/src/oauth-public.key
+
 # Logs
 logs
 *.log
