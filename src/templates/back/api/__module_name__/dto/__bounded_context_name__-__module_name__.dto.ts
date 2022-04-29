@@ -31,7 +31,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: string;
 
     @ApiProperty({
-        type       : {{ relationshipAggregate }}Dto,
+        type       : () => {{ relationshipAggregate }}Dto,
         description: '{{ relationshipAggregate }} [input here api field description]',
     })
     {{ toCamelCase relationshipField }}?: {{ relationshipAggregate }}Dto;
@@ -40,7 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#eq relationship ../relationship.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : [{{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto],
+        type       : () => [{{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto],
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : '{{ example }}',
@@ -52,7 +52,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#eq relationship ../relationship.ONE_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : [{{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto],
+        type       : () => [{{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto],
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : '{{ example }}',
@@ -72,7 +72,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: string;
 
     @ApiProperty({
-        type       : {{ relationshipAggregate }}Dto,
+        type       : () => {{ relationshipAggregate }}Dto,
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
@@ -82,7 +82,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
 {{else ~}}
     @ApiProperty({
-        type       : {{ relationshipAggregate }}Dto,
+        type       : () => {{ relationshipAggregate }}Dto,
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
