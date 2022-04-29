@@ -6,6 +6,9 @@ import { OAuthClient } from '../../domain/client.aggregate';
 import { ClientMapper } from '../../domain/client.mapper';
 import { OAuthClientModel } from './sequelize-client.model';
 
+// ---- customizations ----
+import { OAuthApplicationsClientsModel } from '../../../application/infrastructure/sequelize/sequelize-applications-clients.model';
+
 @Injectable()
 export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, OAuthClientModel> implements IClientRepository
 {
@@ -16,6 +19,8 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
         @InjectModel(OAuthClientModel)
         public readonly repository: typeof OAuthClientModel,
         public readonly criteria: ICriteria,
+        @InjectModel(OAuthApplicationsClientsModel)
+        public readonly repositoryIntermediate: typeof OAuthApplicationsClientsModel,
     )
     {
         super();
@@ -33,5 +38,23 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
     {
         // set many to many relation
         if (aggregate.applicationIds.isArray()) await model.$set('applications', aggregate.applicationIds.value);
+    }
+
+    // hook called after insert aggregates, to add relations between bulk inserted
+    async insertedAggregateHook(aggregates: OAuthClient[]): Promise<void>
+    {
+        const intermediateDate: { clientId: string; applicationId: string; }[] = [];
+        for (const aggregate of aggregates)
+        {
+            for (const applicationId of aggregate.applicationIds.value)
+            {
+                intermediateDate.push({
+                    clientId: aggregate.id.value,
+                    applicationId,
+                });
+            }
+        }
+
+        await this.repositoryIntermediate.bulkCreate(<OAuthApplicationsClientsModel[]>intermediateDate);
     }
 }
