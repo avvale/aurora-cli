@@ -9,7 +9,8 @@ export class AddApplicationsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: OAuthApplication[] = [],
-    ) {
+    )
+    {
         super();
     }
 
@@ -18,7 +19,7 @@ export class AddApplicationsContextEvent extends AggregateRoot
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created()
+    created(): void
     {
         this.apply(
             new CreatedApplicationsEvent(
@@ -33,13 +34,13 @@ export class AddApplicationsContextEvent extends AggregateRoot
                         application.createdAt?.value,
                         application.updatedAt?.value,
                         application.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 
-    deleted()
+    deleted(): void
     {
         this.apply(
             new DeletedApplicationsEvent(
@@ -54,9 +55,9 @@ export class AddApplicationsContextEvent extends AggregateRoot
                         application.createdAt?.value,
                         application.updatedAt?.value,
                         application.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 }

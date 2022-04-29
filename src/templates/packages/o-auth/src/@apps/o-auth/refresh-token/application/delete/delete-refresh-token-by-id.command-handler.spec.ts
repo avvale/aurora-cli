@@ -17,9 +17,9 @@ describe('DeleteRefreshTokenByIdCommandHandler', () =>
             providers: [
                 DeleteRefreshTokenByIdCommandHandler,
                 {
-                    provide: DeleteRefreshTokenByIdService,
+                    provide : DeleteRefreshTokenByIdService,
                     useValue: {
-                        main: () => {},
+                        main: () => { /**/ },
                     },
                 },
             ],
@@ -41,7 +41,7 @@ describe('DeleteRefreshTokenByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteRefreshTokenByIdCommand(
                     refreshTokens[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

@@ -51,7 +51,7 @@ describe('GetApplicationsQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new GetApplicationsQuery()
+                new GetApplicationsQuery(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

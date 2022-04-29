@@ -25,7 +25,7 @@ describe('CreateClientsService', () =>
                 {
                     provide : IClientRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
+                        insert: () => { /**/ },
                     },
                 },
             ]

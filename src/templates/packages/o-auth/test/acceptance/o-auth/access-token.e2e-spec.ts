@@ -350,7 +350,7 @@ describe('access-token', () =>
                 {
                     where:
                     {
-                        id: '5438b28a-3b86-4288-b191-d881ce972952',
+                        id: '6282fc20-1f44-4f79-871a-38c4ceca1ba4',
                     },
                 },
             })
@@ -393,7 +393,7 @@ describe('access-token', () =>
     test('/REST:GET o-auth/access-token/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/access-token/find/fc2e4ab8-e031-4cba-94e6-72f01467aba4')
+            .get('/o-auth/access-token/find/753a1eb6-41da-4455-a1d7-c2fd083572b1')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -417,7 +417,7 @@ describe('access-token', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '743eb329-a645-4900-9078-3edadb2e0bca' },
+                ...{ id: 'f5e01fb7-94df-4d35-b227-3e20f1c7962d' },
             })
             .expect(404);
     });
@@ -441,7 +441,7 @@ describe('access-token', () =>
     test('/REST:DELETE o-auth/access-token/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/access-token/delete/cd6e9034-fb34-4db7-9280-5fa08affd904')
+            .delete('/o-auth/access-token/delete/33bf0f72-e3de-4948-880c-b02d3815987f')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -623,7 +623,7 @@ describe('access-token', () =>
                     {
                         where:
                         {
-                            id: '9e521182-7fe2-4512-84f2-ff54ed910bf6',
+                            id: '14a8bdbe-9295-4c95-b3d4-dc84e319a512',
                         },
                     },
                 },
@@ -700,7 +700,7 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: '6812508d-753a-436e-ad7a-794560b28f76',
+                    id: '55fa3020-fa08-44c7-8b4b-dda8f67b8cd7',
                 },
             })
             .expect(200)
@@ -770,7 +770,7 @@ describe('access-token', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: '01c86aab-0223-459c-b63a-9f86e469acd8' },
+                        ...{ id: '53b9fe39-fdd8-4601-a037-ce70ea8e0abf' },
                     },
                 },
             })
@@ -842,7 +842,7 @@ describe('access-token', () =>
                     }
                 `,
                 variables: {
-                    id: '908bfd3c-880a-4f19-af42-b9befaf271cc',
+                    id: '5eff2ece-b4f6-4ec2-8c64-c4aa05bf3cf1',
                 },
             })
             .expect(200)

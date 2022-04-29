@@ -24,7 +24,8 @@ describe('CreateApplicationsCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<CreateApplicationsCommandHandler>(CreateApplicationsCommandHandler);
         service         = module.get<CreateApplicationsService>(CreateApplicationsService);

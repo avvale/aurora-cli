@@ -38,7 +38,7 @@ describe('CreateApplicationService', () =>
                 {
                     provide : IApplicationRepository,
                     useValue: {
-                        create: (item) => { /**/ },
+                        create: () => { /**/ },
                     },
                 },
             ],

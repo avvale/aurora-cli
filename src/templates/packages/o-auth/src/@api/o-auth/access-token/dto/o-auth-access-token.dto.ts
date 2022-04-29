@@ -14,12 +14,12 @@ export class OAuthAccessTokenDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : '7ac7ab12-bcd1-4162-b4ce-04fee6deb0f6',
+        example    : '1e8c092b-ae86-4b86-94c2-b9e787bc956e',
     })
     clientId: string;
 
     @ApiProperty({
-        type       : OAuthClientDto,
+        type       : () => OAuthClientDto,
         description: 'OAuthClient [input here api field description]',
     })
     client?: OAuthClientDto;
@@ -55,7 +55,7 @@ export class OAuthAccessTokenDto
     expiresAt?: string;
 
     @ApiProperty({
-        type       : OAuthRefreshTokenDto,
+        type       : () => OAuthRefreshTokenDto,
         description: 'refreshToken [input here api field description]',
     })
     refreshToken?: OAuthRefreshTokenDto;

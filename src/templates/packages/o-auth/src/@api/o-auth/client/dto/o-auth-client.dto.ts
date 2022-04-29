@@ -68,13 +68,13 @@ export class OAuthClientDto
     isMaster: boolean;
 
     @ApiProperty({
-        type       : [OAuthApplicationDto],
+        type       : () => [OAuthApplicationDto],
         description: 'applications [input here api field description]',
     })
     applications?: OAuthApplicationDto[];
 
     @ApiProperty({
-        type       : [OAuthAccessTokenDto],
+        type       : () => [OAuthAccessTokenDto],
         description: 'accessTokens [input here api field description]',
     })
     accessTokens?: OAuthAccessTokenDto[];

@@ -35,7 +35,7 @@ export class OAuthApplicationDto
     isMaster: boolean;
 
     @ApiProperty({
-        type       : [OAuthClientDto],
+        type       : () => [OAuthClientDto],
         description: 'clients [input here api field description]',
     })
     clients?: OAuthClientDto[];

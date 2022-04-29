@@ -23,7 +23,8 @@ describe('CreateRefreshTokenCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<CreateRefreshTokenCommandHandler>(CreateRefreshTokenCommandHandler);
         service         = module.get<CreateRefreshTokenService>(CreateRefreshTokenService);

@@ -25,7 +25,7 @@ describe('CreateApplicationsService', () =>
                 {
                     provide : IApplicationRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
+                        insert: () => { /**/ },
                     },
                 },
             ]

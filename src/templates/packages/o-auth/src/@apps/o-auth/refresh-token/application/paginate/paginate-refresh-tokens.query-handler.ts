@@ -17,7 +17,7 @@ export class PaginateRefreshTokensQueryHandler implements IQueryHandler<Paginate
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO())
+            rows.map(item => item.toDTO()),
         );
     }
 }

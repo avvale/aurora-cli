@@ -43,7 +43,7 @@ describe('CreateClientService', () =>
                 {
                     provide : IClientRepository,
                     useValue: {
-                        create: (item) => { /**/ },
+                        create: () => { /**/ },
                     },
                 },
             ],

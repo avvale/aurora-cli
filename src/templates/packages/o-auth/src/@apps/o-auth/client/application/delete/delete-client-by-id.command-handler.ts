@@ -18,7 +18,7 @@ export class DeleteClientByIdCommandHandler implements ICommandHandler<DeleteCli
         await this.deleteClientByIdService.main(
             new ClientId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

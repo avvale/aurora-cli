@@ -508,7 +508,7 @@ describe('client', () =>
                 {
                     where:
                     {
-                        id: '7a8fb463-70e7-4bc5-a19f-b236d5dab7fd',
+                        id: '56c6feb2-67df-4b9c-bed4-f4891e652abc',
                     },
                 },
             })
@@ -551,7 +551,7 @@ describe('client', () =>
     test('/REST:GET o-auth/client/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/client/find/0f6c796b-2d5b-4d0d-871a-6917500103e1')
+            .get('/o-auth/client/find/bf74129a-3a38-45b6-a672-4507e5e9e9e3')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -575,7 +575,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: 'c1cb739c-96ec-418f-995f-0f562b25a706' },
+                ...{ id: 'b27d81a5-c8a3-4b2a-8cf3-fe0d164ca1bd' },
             })
             .expect(404);
     });
@@ -599,7 +599,7 @@ describe('client', () =>
     test('/REST:DELETE o-auth/client/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/client/delete/b34bd278-dc37-4e09-b6c1-85f95854cea7')
+            .delete('/o-auth/client/delete/00ece5da-e41f-4131-be7f-e0ef2e072803')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -795,7 +795,7 @@ describe('client', () =>
                     {
                         where:
                         {
-                            id: 'c16e68fb-e992-4df0-b288-6b52c2035c36',
+                            id: '05b53fa4-9aaa-4714-b549-88e008dd9bac',
                         },
                     },
                 },
@@ -880,7 +880,7 @@ describe('client', () =>
                     }
                 `,
                 variables: {
-                    id: '06a4856c-b351-4635-be9f-70390e17a663',
+                    id: '5551df0f-be74-46ad-9479-c7ffde1c4c12',
                 },
             })
             .expect(200)
@@ -958,7 +958,7 @@ describe('client', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: 'cbd0634a-a99a-422d-8ea5-56295f5bad35' },
+                        ...{ id: '11390578-6994-491b-952a-59ab477a644c' },
                     },
                 },
             })
@@ -1038,7 +1038,7 @@ describe('client', () =>
                     }
                 `,
                 variables: {
-                    id: '4f1ba642-87ba-4b43-bcba-569f0f5f67f0',
+                    id: 'be896f2b-513d-4a7a-9190-90ed514f1ab8',
                 },
             })
             .expect(200)

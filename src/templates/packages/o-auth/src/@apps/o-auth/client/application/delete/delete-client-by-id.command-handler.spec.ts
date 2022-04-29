@@ -17,9 +17,9 @@ describe('DeleteClientByIdCommandHandler', () =>
             providers: [
                 DeleteClientByIdCommandHandler,
                 {
-                    provide: DeleteClientByIdService,
+                    provide : DeleteClientByIdService,
                     useValue: {
-                        main: () => {},
+                        main: () => { /**/ },
                     },
                 },
             ],
@@ -41,7 +41,7 @@ describe('DeleteClientByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteClientByIdCommand(
                     clients[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

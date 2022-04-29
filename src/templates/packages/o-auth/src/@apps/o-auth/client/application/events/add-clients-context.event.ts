@@ -9,7 +9,8 @@ export class AddClientsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: OAuthClient[] = [],
-    ) {
+    )
+    {
         super();
     }
 
@@ -18,7 +19,7 @@ export class AddClientsContextEvent extends AggregateRoot
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created()
+    created(): void
     {
         this.apply(
             new CreatedClientsEvent(
@@ -38,13 +39,13 @@ export class AddClientsContextEvent extends AggregateRoot
                         client.createdAt?.value,
                         client.updatedAt?.value,
                         client.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 
-    deleted()
+    deleted(): void
     {
         this.apply(
             new DeletedClientsEvent(
@@ -64,9 +65,9 @@ export class AddClientsContextEvent extends AggregateRoot
                         client.createdAt?.value,
                         client.updatedAt?.value,
                         client.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 }

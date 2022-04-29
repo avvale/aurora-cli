@@ -23,7 +23,8 @@ describe('CreateClientCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<CreateClientCommandHandler>(CreateClientCommandHandler);
         service         = module.get<CreateClientService>(CreateClientService);

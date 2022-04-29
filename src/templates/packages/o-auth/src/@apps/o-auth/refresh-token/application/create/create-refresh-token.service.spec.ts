@@ -37,7 +37,7 @@ describe('CreateRefreshTokenService', () =>
                 {
                     provide : IRefreshTokenRepository,
                     useValue: {
-                        create: (item) => { /**/ },
+                        create: () => { /**/ },
                     },
                 },
             ],

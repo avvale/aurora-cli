@@ -18,7 +18,7 @@ export class DeleteRefreshTokenByIdCommandHandler implements ICommandHandler<Del
         await this.deleteRefreshTokenByIdService.main(
             new RefreshTokenId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

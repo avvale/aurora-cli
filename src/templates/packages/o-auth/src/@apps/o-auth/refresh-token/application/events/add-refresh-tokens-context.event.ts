@@ -9,7 +9,8 @@ export class AddRefreshTokensContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: OAuthRefreshToken[] = [],
-    ) {
+    )
+    {
         super();
     }
 
@@ -18,7 +19,7 @@ export class AddRefreshTokensContextEvent extends AggregateRoot
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created()
+    created(): void
     {
         this.apply(
             new CreatedRefreshTokensEvent(
@@ -32,13 +33,13 @@ export class AddRefreshTokensContextEvent extends AggregateRoot
                         refreshToken.createdAt?.value,
                         refreshToken.updatedAt?.value,
                         refreshToken.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 
-    deleted()
+    deleted(): void
     {
         this.apply(
             new DeletedRefreshTokensEvent(
@@ -52,9 +53,9 @@ export class AddRefreshTokensContextEvent extends AggregateRoot
                         refreshToken.createdAt?.value,
                         refreshToken.updatedAt?.value,
                         refreshToken.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 }

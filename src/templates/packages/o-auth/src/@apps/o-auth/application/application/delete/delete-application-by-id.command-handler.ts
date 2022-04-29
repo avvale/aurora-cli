@@ -18,7 +18,7 @@ export class DeleteApplicationByIdCommandHandler implements ICommandHandler<Dele
         await this.deleteApplicationByIdService.main(
             new ApplicationId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

@@ -51,7 +51,7 @@ describe('GetRefreshTokensQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new GetRefreshTokensQuery()
+                new GetRefreshTokensQuery(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });
