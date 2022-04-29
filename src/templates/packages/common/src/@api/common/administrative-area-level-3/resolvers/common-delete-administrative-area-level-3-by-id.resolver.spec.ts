@@ -1,0 +1,62 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
+import { ICommandBus, IQueryBus } from 'aurora-ts-core';
+
+// custom items
+import { CommonDeleteAdministrativeAreaLevel3ByIdResolver } from './common-delete-administrative-area-level-3-by-id.resolver';
+
+// sources
+import { administrativeAreasLevel3 } from '../../../../@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+
+describe('CommonDeleteAdministrativeAreaLevel3ByIdResolver', () =>
+{
+    let resolver: CommonDeleteAdministrativeAreaLevel3ByIdResolver;
+    let queryBus: IQueryBus;
+    let commandBus: ICommandBus;
+
+    beforeAll(async () =>
+    {
+        const module: TestingModule = await Test.createTestingModule({
+            imports: [
+            ],
+            providers: [
+                CommonDeleteAdministrativeAreaLevel3ByIdResolver,
+                {
+                    provide : IQueryBus,
+                    useValue: {
+                        ask: () => { /**/ },
+                    }
+                },
+                {
+                    provide : ICommandBus,
+                    useValue: {
+                        dispatch: () => { /**/ },
+                    }
+                },
+            ]
+        }).compile();
+
+        resolver    = module.get<CommonDeleteAdministrativeAreaLevel3ByIdResolver>(CommonDeleteAdministrativeAreaLevel3ByIdResolver);
+        queryBus    = module.get<IQueryBus>(IQueryBus);
+        commandBus  = module.get<ICommandBus>(ICommandBus);
+    });
+
+    test('CommonDeleteAdministrativeAreaLevel3ByIdResolver should be defined', () =>
+    {
+        expect(resolver).toBeDefined();
+    });
+
+    describe('main', () =>
+    {
+        test('CommonDeleteAdministrativeAreaLevel3ByIdResolver should be defined', () =>
+        {
+            expect(resolver).toBeDefined();
+        });
+
+        test('should return an administrativeAreaLevel3 deleted', async () =>
+        {
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel3[0])));
+            expect(await resolver.main(administrativeAreasLevel3[0].id)).toBe(administrativeAreasLevel3[0]);
+        });
+    });
+});

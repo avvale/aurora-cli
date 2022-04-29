@@ -1,0 +1,57 @@
+
+type OAuthAccessToken
+{
+    id: ID!
+    clientId: ID!
+    client: OAuthClient
+    accountId: ID
+    token: GraphQLString!
+    name: GraphQLString
+    isRevoked: GraphQLBoolean!
+    expiresAt: GraphQLTimestamp
+    refreshToken: OAuthRefreshToken
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input OAuthCreateAccessTokenInput
+{
+    id: ID!
+    clientId: ID!
+    accountId: ID
+    token: GraphQLString!
+    name: GraphQLString
+    isRevoked: GraphQLBoolean!
+    expiresAt: GraphQLTimestamp
+    refreshToken: OAuthCreateRefreshTokenInput
+}
+
+input OAuthUpdateAccessTokenInput
+{
+    id: ID!
+    clientId: ID
+    accountId: ID
+    token: GraphQLString
+    name: GraphQLString
+    isRevoked: GraphQLBoolean
+    expiresAt: GraphQLTimestamp
+    refreshToken: OAuthUpdateRefreshTokenInput
+}
+
+type Query
+{
+    oAuthFindAccessToken(query: QueryStatement constraint: QueryStatement): OAuthAccessToken
+    oAuthFindAccessTokenById(id: ID constraint: QueryStatement): OAuthAccessToken
+    oAuthGetAccessTokens(query: QueryStatement constraint: QueryStatement): [OAuthAccessToken]!
+    oAuthPaginateAccessTokens(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    oAuthCreateAccessToken(payload: OAuthCreateAccessTokenInput!): OAuthAccessToken
+    oAuthCreateAccessTokens(payload: [OAuthCreateAccessTokenInput]!): Boolean!
+    oAuthUpdateAccessToken(payload: OAuthUpdateAccessTokenInput! constraint: QueryStatement): OAuthAccessToken
+    oAuthDeleteAccessTokenById(id: ID! constraint: QueryStatement): OAuthAccessToken
+    oAuthDeleteAccessTokens(query: QueryStatement constraint: QueryStatement): [OAuthAccessToken]!
+}

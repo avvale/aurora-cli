@@ -38,7 +38,7 @@ export class Operations
         // create directory for application
         if (!fs.existsSync(Operations.stateService.packageName || '')) fs.mkdirSync(Operations.stateService.packageName, { recursive: true });
 
-        await TemplateGenerator.generateStaticContents(TemplateElement.PACKAGE, path.join(Operations.stateService.packageName), '.');
+        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_PACKAGE, path.join(Operations.stateService.packageName), '.');
     }
 
     async generateDashboard(): Promise<void>
@@ -102,11 +102,24 @@ export class Operations
         // create pipeline files
         await TemplateGenerator.generateStaticContents(
             TemplateElement.CI_CD,
-            '',
-            '',
+            '.',
+            '.',
             {
                 templateElementPath: path.join(app, from.toKebabCase(), to.toKebabCase(), service.toKebabCase()),
-            }
+            },
+        );
+    }
+
+    async installPackage(packageName: string)
+    {
+        // create pipeline files
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.PACKAGES,
+            '.',
+            '.',
+            {
+                templateElementPath: path.join(packageName.toKebabCase()),
+            },
         );
     }
 

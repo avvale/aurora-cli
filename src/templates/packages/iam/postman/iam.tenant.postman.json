@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "df86e84c-58ed-4c08-b9d2-7281ec664cf7",
+		"name"          : "@apps - iam/tenant",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreateTenant",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreateTenantInput!)\n{\n\tiamCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Intelligent Steel Gloves\", \n\t\t\"code\": \"iofjd14vwj7nbx3vkt3ke2856j5he9pw9t60kns7otz9ndicd\", \n\t\t\"logo\": \"5emcrlfmue63u1jb7e8kn8a83yvnpeak806cz2vb35meu96tpbn75ac6zi5v2n8xxjam70l6j069yzpot5awnewrft4h3m7jeb3qn0fsvg1cqmao0qxoxl1zdpx5oaw55apdd99d19f2da5wpbxegwct7afpm9zx0bhi1no20i189dmfyqju6rkww1sh14uwqnidhbugj557pjn03dn9vz8nylgi1crmrdfqj6ocwbo9icv1vr7dt37noxum5h\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreateTenants",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreateTenantInput]!)\n{\n\tiamCreateTenants (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"2321229d-5f4d-4e4a-ba56-e92fa7c17817\", \n\t\t\t\"name\": \"Sleek Steel Computer\", \n\t\t\t\"code\": \"tdtfwdusodjfmmwwjylt9zgchrotsnj9bnwkjpur8r68jqczf\", \n\t\t\t\"logo\": \"jxg0zhcnuwtvoofuz9hmsuwvwqjkplqz1totkdrm51hzp0a1epe8ldg226bwinia5g2qzrqf72rd826fdi2lv871fc893hrh3eou8lbcqb098ozzhnr96oo1ezqnwgg5kmalyfxkdekiub3jqg7awltevr3vkih1nrzk8fxgs07k9hmfjq7yzo12o426am663x2wudv2t5bpiyqqjyvmnpjglj1xy785eub5z06rh6joblftbtd0zkf395yxdv\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e5f485a9-3d91-4b6d-aa2d-4443691c172b\", \n\t\t\t\"name\": \"Small Granite Fish\", \n\t\t\t\"code\": \"qinejgtzgsrm4mnxs2miwihqpj9u1rnjhtapfhlnoz1q940vg\", \n\t\t\t\"logo\": \"r42vaexglrokaimfh4b2obg824iixqsfou6ezn1og2n2jvb56lecv7emu943d6h6wzp1e19dhjr8gxf36fw62r6fyjw8uud4o7po03wovr4qkdo2zf9j3npu2y37e6qw4p9fkwzuckn47s2oooownhocgnrm09za8ty9tmxzg3g4eei2bwnaemi6pv91bjn28cahhalixkko1wh3i469pf9wad2sjl7cpptg5axefnnyyrelnxp0tze4swf8zy\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b1f3b30c-fa2d-4158-8038-010a5400f69d\", \n\t\t\t\"name\": \"Refined Rubber Towels\", \n\t\t\t\"code\": \"2up4vac2mew60ay3vi2ehd5gqpq42hzt86z2n5i6yfg9mn72q\", \n\t\t\t\"logo\": \"lx3axtgwsegmt7w4hgm3tn4wxk4ykkq94u077yyrauto7hjrjgp2i14fx1tut3aboqm2ny8m3d4vmrlcv6j8u5qxxtotfl220o8192om1m2vdc3y33fyiylobr2ftd9ofooqjun8jwi0mvjtoi7f9peuuhnn79uqy0swde1vctoku5z7yq21bxubh9faegi7xms9eqqrpobbmearzoqvxk0hsx68dh72u6jswq78n3gibx0mlt7fp7t4l8jols\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ac836615-931a-40dc-912f-da6cce1acba3\", \n\t\t\t\"name\": \"Practical Metal Pants\", \n\t\t\t\"code\": \"6xm8wdhtbq9otstzcx8no1bk4ffb9ldzxky9nx8olf57iws37\", \n\t\t\t\"logo\": \"y0aqrrgbp61wrv9gaxpcckmg12ugcbjzuonn6to7b16rc66b30xdjav7aetgxji5dde7rkgsu637znck60qw5581yik5vonsl0fskwcwqgc7nnarg9ala62nmadwdalfh9g9n0ckjzagdgxiiwvufnkf8g2nkmzjdyb8lw5oik8qwvljhxnf4qf8ldlah5q5te6y97bqfqibz0e2stxtunbr5gtcfbbmel69q7vz1mx91x7fklglutpcomno1g\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"dd559e9b-b5b0-48d6-b73c-ec4b82597cdd\", \n\t\t\t\"name\": \"Incredible Soft Fish\", \n\t\t\t\"code\": \"o1flviwz7mgvog6566stpgygj9cxifgu2sdk2fa4ivbdy3v3n\", \n\t\t\t\"logo\": \"ox2y885yqom5a33wpfpg8js8moow94axw7v0fany28jn6i8sd2v5c9mx55z6qm3svofc10m3w1rfqll2r7zh4pwakj96za73banzc5sp49jfg6ojwluohz8ywz9orhl2otj7rura64dfxlxhw51nlglcewxzpvb7i4lfk6oxz1cggpqcukc5fcqdxrmfdlqeetvlk32oioi5uaiemq4scg5e24ghg1wbipp01vgmutglf3nqihx0dpz5k89kgo\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ff5d42d6-2382-4b47-9719-db8851a0699c\", \n\t\t\t\"name\": \"Practical Wooden Bike\", \n\t\t\t\"code\": \"bxosznot4571ojdz4j3i0d3f7pqw5kz3ac6s3t7x8jlm5acmb\", \n\t\t\t\"logo\": \"t3ubt0hiiu1gtue74dc1dq5jkvmc83twsgk67venys1036gv8lfsm1pqi77mriofto7qnp6i07hbs51k1bugsxm4pfk8ctxzmahhqrbqkzshf67l3ngl24bitfyfyq5wstwoa2nnt2zmhdgper90iinwczv69rfncrnuerhfxhkefoa57l72msqw93uugyv3wgmnvso1bwdmcgbyjqefxujxc37hfwxd9el2td7mkddqt7rn5nyb29xkci7h6y\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a16b7462-c1ed-4fa1-b008-e4c1a40584b6\", \n\t\t\t\"name\": \"Sleek Concrete Fish\", \n\t\t\t\"code\": \"rvxssmir69qb2bthz22ukicionakxq1bn6eholwhod21fk32y\", \n\t\t\t\"logo\": \"wxun4sdc6mpj93z3jbej5q359z2xj35jkpb2fzxszc1m17zfk5jedsmkalybq6u1lmtxwxut9olrqcqkdorkju3691rmyi45prw614ezxri8exlmr6frcgb42hjqq026sfolmbierp6gvf1avsp9egaesj5nald4gljyixlfxw4adazerrfi9gkhjfhq1euc93uqqi82ib3iny64hz79agmwu79bx6amtq63wftrfxgsmjofjozy96f7kvv64m\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"165e535c-ab7d-4cce-bac8-fb175987fb41\", \n\t\t\t\"name\": \"Ergonomic Wooden Pants\", \n\t\t\t\"code\": \"bbqy6gexvqcf68s48f9q5tn460zk1rprwho1wakx34p884r2u\", \n\t\t\t\"logo\": \"5rg826nikfwjf9ypeg52n3rcurg6ebe0t3f92o2z9rehfrfh20nk7dqh0rmztc8w0dghdk5xo6ipyfaftr4ypf5j3k4cxp3b2omfy7ymtj4su7dz5x5ddunepadrpg6remvvfd9x60uzyu60lbemynprlgnn8jfira9mgs6r1ac2npycfblo28zrcgmo5f3tpuh5wb3jp92wcw35x9ew1ds2vzo9rv4wgkvwq5wf7o8264eyxsmk3724mzntkv\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"92412b55-9f56-481d-8ae2-cdf7f414d13c\", \n\t\t\t\"name\": \"Small Steel Bike\", \n\t\t\t\"code\": \"vg0s0hkcyvyrx50fusa8rvbkomv5bhski5tgvkz3pbaob931e\", \n\t\t\t\"logo\": \"05cjtmnzi0gkeozkavr8yj29q2unlxdue5618u37ixc90sur2gm0o8f9gy8fzqvgz9y473oickp6vzl2zgy3mh9hkai46k6ahid49r17ucjhimsl7astdw88rg0y2bvj8zs34c0cap45z71grlvvyoxxh8fk8hj6121kr33u19y2wqkv31snws994i7r9nu3jt3s2zhvucq1qoemjyohhdo7ra0jwx8xclo3tdasg6y2nv5mujx139gxuvyawm\", \n\t\t\t\"isActive\": false, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2b2e260f-0f6a-46c6-b75e-c19e11fd5432\", \n\t\t\t\"name\": \"Practical Fresh Chair\", \n\t\t\t\"code\": \"6736pb4zwhlwfnc63b29v0o2efiz0fbkfz37s1ftnf5leyux1\", \n\t\t\t\"logo\": \"uquzjy2mecf4v9xr1agjypzu5c4c13ap6vo3av4qymycu3qas3lkzly5jad6r7w9j45mjqbwzuixw84926z719ea3popiuuo3947odz7wwrzjutx0iu4ziz9lbgxujqjn4t0if02guxi31yqnojw1dv3o8bgl174on3s2i3cponq0apjwoqtuj6se7myo61xjpko0q1jmmh94mk4k83200cn3jz4a4et0bar78ww5rvqdrpwo5clo2gznvlliq\", \n\t\t\t\"isActive\": true, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginateTenants",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateTenants (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetTenants",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindTenant",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindTenant (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindTenantById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdateTenant",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdateTenantInput!)\n{\n\tiamUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Handcrafted Fresh Tuna\", \n\t\t\"code\": \"mdnd0hflleh463d4gw6ha3bu8dfhlciptfmjfds1q99l31mie\", \n\t\t\"logo\": \"56uc2mq507iqzfotqs54xyhnp2cnmmav4tj62nitq5zt7013zpnzkgg136ysqjz5592s1vanwdpy5nxnxxx24rfmfgvxm10ur5um103hk5efpz6tx3x3w9txhh2r80uexy50qbarlkph4ba80msigw0qgm1yuf5943t7mjhtgme7vcnvnt9ns1b8vtcmhtb6vrdxcv3hkrgu9i5nyornt4cvzgs6c66izh9ogpa2y3bjv48esjt0pwmycq7ioo\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteTenantById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteTenants",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Tasty Granite Chips\", \n\t\"code\": \"nq0xiyyzdi7wqe7sd2qhb0iazoiozqd073u2ud2sqqme66i9n\", \n\t\"logo\": \"p0chj5u3c4q6xyigb1z4kfdp128blxfvhbmmrmipqc47jr8gj0cvv5wsjqhchnauerft53cp8z3lxgwt8bq5ht7ain17bbdxmm4ifpxlq45ser7hako0iqyl271ixixj07liol96l1mayzm0aj1or1e68w9sei0fssk1ggbjn0xj5l54n617bdjay6oliddjtnjk6fs7hlhx0gpgx35tjqc7kg78qct64excrn7erm2r5k9lg1w7g0mtkip1qx\", \n\t\"isActive\": true, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"0f2dd3c5-d3b9-42da-90a2-1e4acebf0c74\", \n\t\t\"name\": \"Sleek Granite Towels\", \n\t\t\"code\": \"t6v202se4l425udm7o2so0w6uzdhu96xvih027m4ce9hjspnw\", \n\t\t\"logo\": \"p8bly326pjzd7qlvrx443it4wm7igpxctdet4r7uepujghn39jihgllcgi37e7dvrnpypb20c2wotxtkc712ee4n3y9zfzcpcivk814a3me42ootaqk50pdmfz2osb2txygy518qgxzeoj3w07119fshdy47nr2fexee8b04abfqatg6wn5mh6pp0lwh1y8hin4bmeyserlubdfthazd1fh1cu8k7x3icukhub27a4i72bxoas12h5mlmylfu0\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"5838667c-59bc-47f1-95e7-34f9c6c63c26\", \n\t\t\"name\": \"Fantastic Plastic Mouse\", \n\t\t\"code\": \"vshe77vrlvggim37g4zql4ya8ogvzzgyv336g7l246lekbwxi\", \n\t\t\"logo\": \"ffaboi86cyoqquk2nun3iqid1um5dlccde5vu1t697wi6jxdackyb2xu0qbss8mvt2478nq828jn29zkyd0qrmys2cj5mynbu0xe70kvxkn21irxen2czwsivy1ce81eyyvrhoj4cjx27ivuxe23hk9onh2pg9kp2dqrdj8xcrcessd6lkbdtq9ou99l7u207okeepefz7k6yjunhty79f9uahizi7nnn47datjvktqxvzmbz3pq5h6mosjlsa\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"0f0329e2-1d78-4c90-8ee6-dd50bd8e4096\", \n\t\t\"name\": \"Licensed Rubber Chicken\", \n\t\t\"code\": \"3aw74nz4g4q62bcobig23dltejl4h1j3atrt309j1mry36qaj\", \n\t\t\"logo\": \"75y0wl3dqe14ec01xyci6ly8oz0i1e5amq0lf5a4350pqzf32ogt0mqvtbyj4iv83c302fwplfz1g9kfjdg6wp1flb8ilpf2o9akiw2f7vhtva1yyr3v2ydlearoh5qc33oia7eaefby8i8isl6n91smte1nx40xjj5zglbq4echp5li7czcy6kxnal9ea5h7haugwxqukvblwzi6z31wrstjltfmchhwtjt1p23uf64xrc0kvghgyr0rsh8jp\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"cfba2315-ecf1-43f5-8b09-f6a0dc2f71e6\", \n\t\t\"name\": \"Rustic Plastic Keyboard\", \n\t\t\"code\": \"zfu3hca92mzaste93p93k1sfdpwfjcspq8mef5b2twhsljkq6\", \n\t\t\"logo\": \"7txwlt03kt4uf40awfn0yuugb026zfu2dzcrb4edq77ejdv4sgz31es86nje9oqxc16zzmlvgwacnd5l06mhc6hmd38o9i1ygpmteztz7qey5blvgpecnv4g0cj1hbwcc5c9jpwr7zkoecwvgaej99rh2yy9stffoi9la3obsr841mrdf5cga7etg2uhlgu61dq0xcy9hmk86mz5vfida9kfztfwy4ytsp3sdxyyt2b9s0uvaxooc85tmcnceq\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"4722a9db-fb29-4348-a0d8-94ffdbf421e8\", \n\t\t\"name\": \"Gorgeous Granite Sausages\", \n\t\t\"code\": \"sea2h5c3ip5cej6hy4u2pur1v5yk9kl8622666xztthq90z5f\", \n\t\t\"logo\": \"k9d6a0p8sxylavike74z45t53fp9yt38qkys3zmhawsjq0hk8p4exuaie7ibs5yhpptv2nvcndsuparga1w3b29f3pu7xgq1ezdn2or1v65ytuynfrsutwxgaa74n96dwj2z77895errvf9us5bjflvzi2sjj0wnwllorjlobctgvhlwe3f18icqncc16n4yy3uy5im3hk9g1x5dhyf3skjx658wxdagteu6qtqpdhxvq4gs8rbcx0j39zod4b\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"38681fae-769c-4fb4-a2ff-cd0f50bd4bfe\", \n\t\t\"name\": \"Ergonomic Wooden Chair\", \n\t\t\"code\": \"jmf2xnp3xw7s10vt2gnql97dngdixy1woh1oc63yz0njbbbnf\", \n\t\t\"logo\": \"mb2y50qo2yw94t6akbxwvkcb5ws84cgja87i5gh6pfxj4829utsw29tiwj25s9myiwvaojd6qbca9tl2vl9s63d0ozc6ic5k7qhzz78yoik2mdomruxb4gx31wek2rr6xkvq69tbs9wdtiov8qr6o2khf2qq5sj6pg7siofwuqyox5bysj10z4frf6ipp21gw7gabij2361q783cre5w9jrhckxgmok4rihny96i3fzr96se8xh5784n33kcu8\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"85f426a4-a555-48e5-8c38-cfc3649fdf6e\", \n\t\t\"name\": \"Sleek Metal Pants\", \n\t\t\"code\": \"upn8xur28qqyw8df0f5phd6uj5gg3gfufkem8o3amvsvwtbwn\", \n\t\t\"logo\": \"hjsyknedxr0uv28xsyyu3fxco5nhabvwsm7gcqu60ddxsscj3obk8y7ng6ermk90ijymt808xslqezpfkeqrhxg0lrow29ovb8qzpbkezjiz92eskab0fkfxj78hc7z81ju1psr9zidgk3wji8d6ssj4qj7zb4f979adycysivd6y5vo4tzvld8qhj8qvm28fr3hcsiezp4sx853hj4ziqduggjz59zeiv109wd95uhv7cvj9mji18lm55w1gx\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"87c57eec-8086-42c9-b910-cd51d72c0609\", \n\t\t\"name\": \"Unbranded Plastic Towels\", \n\t\t\"code\": \"kb957j1z57orrghmamscfp5acmurj028dpjfhti739djpep8u\", \n\t\t\"logo\": \"99uctulu0g2tb7uwsxo2ei6ko2d0i6xy6xlejcqfotheqhn7qbqxpve97ws272ihx5uqdu9im51dua4ud74mkqvlpqen2flyprqcvbaajqwaf2pt2noc9vhewqcf71q752mclgl2sw0qcd0awa1sw93pgk8zlyp2g00lyxrldlzz3srnhqoo1m1ltahrs7pdzvklfh0d1vphwjihs28p458i4dz848f5vlabfhgmhtzdwa3ll3xsw0kxk77mbu\", \n\t\t\"isActive\": true, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"618592fc-2fea-4116-9a22-3c45ede1d01a\", \n\t\t\"name\": \"Handmade Granite Pants\", \n\t\t\"code\": \"n66hqk3ydue70rq7kquhhv4voouxxlggmgzvge9rgezqqk337\", \n\t\t\"logo\": \"3smh8zg6bmv38jtpszs5qflc1iry9ivqf5sg3rv0ziot04pg7i8nwa3amylxmpkh7jpodtn4unqls2aidk6hy13wviv0wro4fvanqhrw4weukkymfg2cmpohv28b2fk2mopq626kmcz7ul74fvp84vrdr3lijgth8k4d778sy4m5c9dp50sgmgwtcccx1v41ltfh8c3gglptdrm5bezv49nwh5qnuqdardz3cc1xqy3pq0iuj3yahbpe3olhh4\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"29bd279a-0cf8-497c-a53b-0a99e1c368fd\", \n\t\t\"name\": \"Practical Rubber Computer\", \n\t\t\"code\": \"spxmkre5iwk00cbt1gl2p2s3t4lcmpfihhnsaejye2jhejqdc\", \n\t\t\"logo\": \"8j5pzbfja5nii2h9arwczr8n8c0318baqz3srosg9tle3tn6k264e9vchm5u4dytb2uyv9k5unb9w3c6yhdj4hf2357eytz1iqxe66aop8jmu6e9tze718d4lplckf7vv5610e7er30fn0ofvpw04ksfc43m4i28sw0h8j7qyhi5amjsfax9evaggkktlg5qqho3agj74facgli3a32wnb1gjholsj1r7tlyhcvku92l5b0ko4zqtwn4ca8kyd\", \n\t\t\"isActive\": false, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+                        "tenants",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenants/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Sleek Rubber Towels\", \n\t\"code\": \"hernua7yde96rd6htbwnt6x9719ghyi3zqqm3rqcphnnk11qj\", \n\t\"logo\": \"zcqvmmha2wtiw9hnew82x1pbevm84tapkbt0rod343bb0sikgzcouor0zxyloy9j7tyxhmq3ulvzz9gmal9x0eo0l6zkuv3gykvn1tt3jifra8r0l49gtnad55gdhpuu3yk210gkz6zqbpmlj0lcswllxgbz1uyxj0uf9m8e0ehrjs9l8tpph5q0ppsfyet5nq653yxzi623wnckhkasx2v1qbjpb0lt8bhvw99njc2abtuip6m277jev0qgnb\", \n\t\"isActive\": true, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/tenant/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenant/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenant",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/tenants/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/tenants/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"tenants",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "64260ccd-5df0-4a20-ad61-739be0c0010f",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

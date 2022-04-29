@@ -1,0 +1,66 @@
+
+type IamUser
+{
+    id: ID!
+    accountId: ID!
+    account: IamAccount
+    name: GraphQLString!
+    surname: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString!
+    password: GraphQLString!
+    rememberToken: GraphQLString
+    data: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreateUserInput
+{
+    id: ID!
+    accountId: ID!
+    name: GraphQLString!
+    surname: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString!
+    password: GraphQLString!
+    rememberToken: GraphQLString
+    data: JSON
+}
+
+input IamUpdateUserInput
+{
+    id: ID!
+    accountId: ID
+    name: GraphQLString
+    surname: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString
+    password: GraphQLString
+    rememberToken: GraphQLString
+    data: JSON
+}
+
+type Query
+{
+    iamFindUser(query: QueryStatement constraint: QueryStatement): IamUser
+    iamFindUserById(id: ID constraint: QueryStatement): IamUser
+    iamGetUsers(query: QueryStatement constraint: QueryStatement): [IamUser]!
+    iamPaginateUsers(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    iamCreateUser(payload: IamCreateUserInput!): IamUser
+    iamCreateUsers(payload: [IamCreateUserInput]!): Boolean!
+    iamUpdateUser(payload: IamUpdateUserInput! constraint: QueryStatement): IamUser
+    iamDeleteUserById(id: ID! constraint: QueryStatement): IamUser
+    iamDeleteUsers(query: QueryStatement constraint: QueryStatement): [IamUser]!
+}

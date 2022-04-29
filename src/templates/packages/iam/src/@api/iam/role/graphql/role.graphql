@@ -1,0 +1,47 @@
+
+type IamRole
+{
+    id: ID!
+    name: GraphQLString!
+    isMaster: GraphQLBoolean!
+    permissions: [IamPermission]
+    accounts: [IamAccount]
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreateRoleInput
+{
+    id: ID!
+    name: GraphQLString!
+    isMaster: GraphQLBoolean!
+    permissionIds: [ID]
+    accountIds: [ID]
+}
+
+input IamUpdateRoleInput
+{
+    id: ID!
+    name: GraphQLString
+    isMaster: GraphQLBoolean
+    permissionIds: [ID]
+    accountIds: [ID]
+}
+
+type Query
+{
+    iamFindRole(query: QueryStatement constraint: QueryStatement): IamRole
+    iamFindRoleById(id: ID constraint: QueryStatement): IamRole
+    iamGetRoles(query: QueryStatement constraint: QueryStatement): [IamRole]!
+    iamPaginateRoles(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    iamCreateRole(payload: IamCreateRoleInput!): IamRole
+    iamCreateRoles(payload: [IamCreateRoleInput]!): Boolean!
+    iamUpdateRole(payload: IamUpdateRoleInput! constraint: QueryStatement): IamRole
+    iamDeleteRoleById(id: ID! constraint: QueryStatement): IamRole
+    iamDeleteRoles(query: QueryStatement constraint: QueryStatement): [IamRole]!
+}

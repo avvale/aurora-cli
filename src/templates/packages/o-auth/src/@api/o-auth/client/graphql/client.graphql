@@ -1,0 +1,71 @@
+enum OAuthClientGrantType {
+    AUTHORIZATION_CODE
+    CLIENT_CREDENTIALS
+    PASSWORD
+}
+
+type OAuthClient
+{
+    id: ID!
+    grantType: OAuthClientGrantType!
+    name: GraphQLString!
+    secret: GraphQLString!
+    authUrl: GraphQLString
+    redirect: GraphQLString
+    expiredAccessToken: GraphQLInt
+    expiredRefreshToken: GraphQLInt
+    isActive: GraphQLBoolean!
+    isMaster: GraphQLBoolean!
+    applications: [OAuthApplication]
+    accessTokens: [OAuthAccessToken]
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input OAuthCreateClientInput
+{
+    id: ID!
+    grantType: OAuthClientGrantType!
+    name: GraphQLString!
+    secret: GraphQLString!
+    authUrl: GraphQLString
+    redirect: GraphQLString
+    expiredAccessToken: GraphQLInt
+    expiredRefreshToken: GraphQLInt
+    isActive: GraphQLBoolean!
+    isMaster: GraphQLBoolean!
+    applicationIds: [ID]
+}
+
+input OAuthUpdateClientInput
+{
+    id: ID!
+    grantType: OAuthClientGrantType
+    name: GraphQLString
+    secret: GraphQLString
+    authUrl: GraphQLString
+    redirect: GraphQLString
+    expiredAccessToken: GraphQLInt
+    expiredRefreshToken: GraphQLInt
+    isActive: GraphQLBoolean
+    isMaster: GraphQLBoolean
+    applicationIds: [ID]
+}
+
+type Query
+{
+    oAuthFindClient(query: QueryStatement constraint: QueryStatement): OAuthClient
+    oAuthFindClientById(id: ID constraint: QueryStatement): OAuthClient
+    oAuthGetClients(query: QueryStatement constraint: QueryStatement): [OAuthClient]!
+    oAuthPaginateClients(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    oAuthCreateClient(payload: OAuthCreateClientInput!): OAuthClient
+    oAuthCreateClients(payload: [OAuthCreateClientInput]!): Boolean!
+    oAuthUpdateClient(payload: OAuthUpdateClientInput! constraint: QueryStatement): OAuthClient
+    oAuthDeleteClientById(id: ID! constraint: QueryStatement): OAuthClient
+    oAuthDeleteClients(query: QueryStatement constraint: QueryStatement): [OAuthClient]!
+}

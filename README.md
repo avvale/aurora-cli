@@ -19,7 +19,7 @@ $ npm install -g aurora-ts-cli
 $ aurora COMMAND
 running command...
 $ aurora (--version)
-aurora-ts-cli/1.4.1 darwin-arm64 node-v16.14.2
+aurora-ts-cli/1.5.0 darwin-arm64 node-v16.14.2
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND
@@ -33,6 +33,7 @@ USAGE
 * [`aurora hello PERSON`](#aurora-hello-person)
 * [`aurora hello world`](#aurora-hello-world)
 * [`aurora help [COMMAND]`](#aurora-help-command)
+* [`aurora install`](#aurora-install)
 * [`aurora keys`](#aurora-keys)
 * [`aurora load ELEMENTTYPE`](#aurora-load-elementtype)
 * [`aurora new NAME`](#aurora-new-name)
@@ -67,7 +68,7 @@ DESCRIPTION
   Delete elements
 ```
 
-_See code: [dist/commands/delete/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/delete/index.js)_
+_See code: [dist/commands/delete/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/delete/index.js)_
 
 ## `aurora generate ELEMENTTYPE`
 
@@ -96,7 +97,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/generate/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/generate/index.js)_
+_See code: [dist/commands/generate/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/generate/index.js)_
 
 ## `aurora hello PERSON`
 
@@ -120,7 +121,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/hello/index.js)_
+_See code: [dist/commands/hello/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/hello/index.js)_
 
 ## `aurora hello world`
 
@@ -158,6 +159,29 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.12/src/commands/help.ts)_
 
+## `aurora install`
+
+Generate pipeline to deploy application in cloud
+
+```
+USAGE
+  $ aurora install [-h] [-f]
+
+FLAGS
+  -f, --force
+  -h, --help   Show CLI help.
+
+DESCRIPTION
+  Generate pipeline to deploy application in cloud
+
+EXAMPLES
+  $ aurora install
+
+  $ aurora --help
+```
+
+_See code: [dist/commands/install/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/install/index.js)_
+
 ## `aurora keys`
 
 Generate private key and public key
@@ -173,7 +197,7 @@ DESCRIPTION
   Generate private key and public key
 ```
 
-_See code: [dist/commands/keys/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/keys/index.js)_
+_See code: [dist/commands/keys/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/keys/index.js)_
 
 ## `aurora load ELEMENTTYPE`
 
@@ -201,7 +225,7 @@ DESCRIPTION
   Reload aurora [bounded-context, module] from yaml file, located in the cliter folder
 ```
 
-_See code: [dist/commands/load/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/load/index.js)_
+_See code: [dist/commands/load/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/load/index.js)_
 
 ## `aurora new NAME`
 
@@ -224,7 +248,7 @@ DESCRIPTION
   Create new aurora project
 ```
 
-_See code: [dist/commands/new/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/new/index.js)_
+_See code: [dist/commands/new/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/new/index.js)_
 
 ## `aurora pipeline`
 
@@ -248,7 +272,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/pipeline/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/pipeline/index.js)_
+_See code: [dist/commands/pipeline/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/pipeline/index.js)_
 
 ## `aurora plugins`
 
@@ -501,5 +525,5 @@ DESCRIPTION
   Seed database with bounded context or module selected
 ```
 
-_See code: [dist/commands/seed/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.4.1/dist/commands/seed/index.js)_
+_See code: [dist/commands/seed/index.js](https://github.com/techedge-group/aurora-cli/blob/v1.5.0/dist/commands/seed/index.js)_
 <!-- commandsstop -->

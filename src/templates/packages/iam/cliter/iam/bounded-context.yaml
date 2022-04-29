@@ -1,0 +1,45 @@
+version: 0.0.1
+boundedContextName: iam
+moduleName: bounded-context
+moduleNames: bounded-contexts
+aggregateName: IamBoundedContext
+hasOAuth: false
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: root
+    type: varchar
+    maxLength: 30
+    nullable: false
+  - name: sort
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: true
+  - name: isActive
+    type: boolean
+    nullable: false
+  - name: permissions
+    type: IamPermission
+    nullable: true
+    relationship: one-to-many
+    relationshipSingularName: permission
+    relationshipAggregate: IamPermission
+    relationshipModulePath: iam/permission
+    relationshipAvoidConstraint: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

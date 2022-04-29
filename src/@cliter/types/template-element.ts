@@ -8,6 +8,7 @@ export enum TemplateElement
     BACK_I18N_MODULE          = 'back/i18n-module',
     BACK_PIVOT                = 'back/pivot',
     BACK_MODULE               = 'back/module',
+    BACK_PACKAGE              = 'back/package',
     BACK_TEST                 = 'back/test',
     BACK_POSTMAN              = 'back/postman',
     BACK_VALUE_OBJECT         = 'back/value-object',
@@ -15,5 +16,5 @@ export enum TemplateElement
     FRONT_APPLICATION         = 'front/application',
     FRONT_MODULE              = 'front/module',
     FRONT_MODULE_TRANSLATIONS = 'front/module-translations',
-    PACKAGE                   = 'package',
+    PACKAGES                  = 'packages',
 }

@@ -1,0 +1,45 @@
+
+type IamPermission
+{
+    id: ID!
+    name: GraphQLString!
+    boundedContextId: ID!
+    boundedContext: IamBoundedContext
+    roles: [IamRole]
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreatePermissionInput
+{
+    id: ID!
+    name: GraphQLString!
+    boundedContextId: ID!
+    roleIds: [ID]
+}
+
+input IamUpdatePermissionInput
+{
+    id: ID!
+    name: GraphQLString
+    boundedContextId: ID
+    roleIds: [ID]
+}
+
+type Query
+{
+    iamFindPermission(query: QueryStatement constraint: QueryStatement): IamPermission
+    iamFindPermissionById(id: ID constraint: QueryStatement): IamPermission
+    iamGetPermissions(query: QueryStatement constraint: QueryStatement): [IamPermission]!
+    iamPaginatePermissions(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    iamCreatePermission(payload: IamCreatePermissionInput!): IamPermission
+    iamCreatePermissions(payload: [IamCreatePermissionInput]!): Boolean!
+    iamUpdatePermission(payload: IamUpdatePermissionInput! constraint: QueryStatement): IamPermission
+    iamDeletePermissionById(id: ID! constraint: QueryStatement): IamPermission
+    iamDeletePermissions(query: QueryStatement constraint: QueryStatement): [IamPermission]!
+}

@@ -1,0 +1,66 @@
+enum CommonLangDir {
+    LTR
+    RTL
+}
+
+type CommonLang
+{
+    id: ID!
+    name: GraphQLString!
+    image: GraphQLString
+    iso6392: GraphQLString!
+    iso6393: GraphQLString!
+    ietf: GraphQLString!
+    customCode: GraphQLString
+    dir: CommonLangDir!
+    sort: GraphQLInt
+    isActive: GraphQLBoolean!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input CommonCreateLangInput
+{
+    id: ID!
+    name: GraphQLString!
+    image: GraphQLString
+    iso6392: GraphQLString!
+    iso6393: GraphQLString!
+    ietf: GraphQLString!
+    customCode: GraphQLString
+    dir: CommonLangDir!
+    sort: GraphQLInt
+    isActive: GraphQLBoolean!
+}
+
+input CommonUpdateLangInput
+{
+    id: ID!
+    name: GraphQLString
+    image: GraphQLString
+    iso6392: GraphQLString
+    iso6393: GraphQLString
+    ietf: GraphQLString
+    customCode: GraphQLString
+    dir: CommonLangDir
+    sort: GraphQLInt
+    isActive: GraphQLBoolean
+}
+
+type Query
+{
+    commonFindLang(query: QueryStatement constraint: QueryStatement): CommonLang
+    commonFindLangById(id: ID constraint: QueryStatement): CommonLang
+    commonGetLangs(query: QueryStatement constraint: QueryStatement): [CommonLang]!
+    commonPaginateLangs(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    commonCreateLang(payload: CommonCreateLangInput!): CommonLang
+    commonCreateLangs(payload: [CommonCreateLangInput]!): Boolean!
+    commonUpdateLang(payload: CommonUpdateLangInput! constraint: QueryStatement): CommonLang
+    commonDeleteLangById(id: ID! constraint: QueryStatement): CommonLang
+    commonDeleteLangs(query: QueryStatement constraint: QueryStatement): [CommonLang]!
+}

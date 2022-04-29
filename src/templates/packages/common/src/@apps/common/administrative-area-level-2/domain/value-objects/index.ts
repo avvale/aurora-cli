@@ -1,0 +1,13 @@
+export { AdministrativeAreaLevel2Id } from './administrative-area-level-2-id';
+export { AdministrativeAreaLevel2CountryId } from './administrative-area-level-2-country-id';
+export { AdministrativeAreaLevel2AdministrativeAreaLevel1Id } from './administrative-area-level-2-administrative-area-level-1-id';
+export { AdministrativeAreaLevel2Code } from './administrative-area-level-2-code';
+export { AdministrativeAreaLevel2CustomCode } from './administrative-area-level-2-custom-code';
+export { AdministrativeAreaLevel2Name } from './administrative-area-level-2-name';
+export { AdministrativeAreaLevel2Slug } from './administrative-area-level-2-slug';
+export { AdministrativeAreaLevel2Latitude } from './administrative-area-level-2-latitude';
+export { AdministrativeAreaLevel2Longitude } from './administrative-area-level-2-longitude';
+export { AdministrativeAreaLevel2Zoom } from './administrative-area-level-2-zoom';
+export { AdministrativeAreaLevel2CreatedAt } from './administrative-area-level-2-created-at';
+export { AdministrativeAreaLevel2UpdatedAt } from './administrative-area-level-2-updated-at';
+export { AdministrativeAreaLevel2DeletedAt } from './administrative-area-level-2-deleted-at';

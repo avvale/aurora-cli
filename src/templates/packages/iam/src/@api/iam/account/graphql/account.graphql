@@ -1,0 +1,72 @@
+enum IamAccountType {
+    USER
+    SERVICE
+}
+
+type IamAccount
+{
+    id: ID!
+    type: IamAccountType!
+    email: GraphQLString!
+    isActive: GraphQLBoolean!
+    clientId: ID!
+    dApplicationCodes: JSON!
+    dPermissions: JSON!
+    dTenants: JSON!
+    data: JSON
+    roles: [IamRole]
+    tenants: [IamTenant]
+    user: IamUser
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreateAccountInput
+{
+    id: ID!
+    type: IamAccountType!
+    email: GraphQLString!
+    isActive: GraphQLBoolean!
+    clientId: ID!
+    dApplicationCodes: JSON!
+    dPermissions: JSON!
+    dTenants: JSON!
+    data: JSON
+    roleIds: [ID]
+    tenantIds: [ID]
+    user: IamCreateUserInput
+}
+
+input IamUpdateAccountInput
+{
+    id: ID!
+    type: IamAccountType
+    email: GraphQLString
+    isActive: GraphQLBoolean
+    clientId: ID
+    dApplicationCodes: JSON
+    dPermissions: JSON
+    dTenants: JSON
+    data: JSON
+    roleIds: [ID]
+    tenantIds: [ID]
+    user: IamUpdateUserInput
+}
+
+type Query
+{
+    iamFindAccount(query: QueryStatement constraint: QueryStatement): IamAccount
+    iamFindAccountById(id: ID constraint: QueryStatement): IamAccount
+    iamGetAccounts(query: QueryStatement constraint: QueryStatement): [IamAccount]!
+    iamPaginateAccounts(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    iamCreateAccount(payload: IamCreateAccountInput!): IamAccount
+    iamCreateAccounts(payload: [IamCreateAccountInput]!): Boolean!
+    iamUpdateAccount(payload: IamUpdateAccountInput! constraint: QueryStatement): IamAccount
+    iamDeleteAccountById(id: ID! constraint: QueryStatement): IamAccount
+    iamDeleteAccounts(query: QueryStatement constraint: QueryStatement): [IamAccount]!
+}

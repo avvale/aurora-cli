@@ -1,0 +1,67 @@
+version: 0.0.1
+boundedContextName: iam
+moduleName: user
+moduleNames: users
+aggregateName: IamUser
+hasOAuth: false
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: accountId
+    type: id
+    length: 36
+    nullable: false
+    relationship: one-to-one
+    relationshipAggregate: IamAccount
+    relationshipModulePath: iam/account
+    relationshipField: account
+    index: index
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: surname
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: avatar
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: mobile
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: langId
+    type: id
+    length: 36
+    nullable: true
+  - name: username
+    type: varchar
+    maxLength: 120
+    nullable: false
+    index: unique
+  - name: password
+    type: password
+    maxLength: 255
+    nullable: false
+  - name: rememberToken
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: data
+    type: json
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

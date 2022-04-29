@@ -1,0 +1,48 @@
+
+type IamBoundedContext
+{
+    id: ID!
+    name: GraphQLString!
+    root: GraphQLString!
+    sort: GraphQLInt
+    isActive: GraphQLBoolean!
+    permissions: [IamPermission]
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreateBoundedContextInput
+{
+    id: ID!
+    name: GraphQLString!
+    root: GraphQLString!
+    sort: GraphQLInt
+    isActive: GraphQLBoolean!
+}
+
+input IamUpdateBoundedContextInput
+{
+    id: ID!
+    name: GraphQLString
+    root: GraphQLString
+    sort: GraphQLInt
+    isActive: GraphQLBoolean
+}
+
+type Query
+{
+    iamFindBoundedContext(query: QueryStatement constraint: QueryStatement): IamBoundedContext
+    iamFindBoundedContextById(id: ID constraint: QueryStatement): IamBoundedContext
+    iamGetBoundedContexts(query: QueryStatement constraint: QueryStatement): [IamBoundedContext]!
+    iamPaginateBoundedContexts(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    iamCreateBoundedContext(payload: IamCreateBoundedContextInput!): IamBoundedContext
+    iamCreateBoundedContexts(payload: [IamCreateBoundedContextInput]!): Boolean!
+    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput! constraint: QueryStatement): IamBoundedContext
+    iamDeleteBoundedContextById(id: ID! constraint: QueryStatement): IamBoundedContext
+    iamDeleteBoundedContexts(query: QueryStatement constraint: QueryStatement): [IamBoundedContext]!
+}

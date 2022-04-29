@@ -27,6 +27,7 @@ export interface CliterConfig
     platformFromDeploy: string[];
     platformToDeploy: string[];
     serviceToDeploy: { front: { [key: string]: string[]; }, back: { [key: string]: string[]; } };
+    packages: string[];
 }
 
 export const cliterConfig: CliterConfig =
@@ -213,4 +214,9 @@ export const cliterConfig: CliterConfig =
             googleCloud: ['App Engine'],
         },
     },
+    packages: [
+        'iam',
+        'oAuth',
+        'common',
+    ],
 };

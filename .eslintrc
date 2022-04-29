@@ -36,6 +36,9 @@
             }
         }],
         "no-return-await": "error",
+        "node/no-extraneous-import": ["error", {
+            "allowModules": ["chalk", "lodash", "log-symbols"]
+        }],
         "object-curly-spacing": ["error", "always", { "objectsInObjects": false, "arraysInObjects": false }],
         "quote-props": ["error", "as-needed"],
         "semi": ["error", "always"]

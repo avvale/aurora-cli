@@ -1,0 +1,70 @@
+version: 0.0.1
+boundedContextName: o-auth
+moduleName: refresh-token
+moduleNames: refresh-tokens
+aggregateName: OAuthRefreshToken
+hasOAuth: false
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: accessTokenId
+    type: id
+    length: 36
+    nullable: false
+    relationship: one-to-one
+    relationshipAggregate: OAuthAccessToken
+    relationshipModulePath: o-auth/access-token
+    relationshipField: accessToken
+    relationshipAvoidConstraint: true
+    index: index
+  - name: token
+    type: text
+    nullable: false
+  - name: isRevoked
+    type: boolean
+    nullable: false
+  - name: expiresAt
+    type: timestamp
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+excluded:
+  - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.ts
+  - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.spec.ts
+  - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.command.ts
+  - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.service.spec.ts
+  - src/@hades/o-auth/refresh-token/application/create/create-refresh-tokens.service.ts
+  - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command.ts
+  - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command-handler.ts
+  - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.command-handler.spec.ts
+  - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.service.spec.ts
+  - src/@hades/o-auth/refresh-token/application/update/update-refresh-token.service.ts
+  - src/@hades/o-auth/refresh-token/application/events/created-refresh-tokens.event-handler.ts
+  - src/@hades/o-auth/refresh-token/application/events/created-refresh-tokens.event.ts
+  - src/@hades/o-auth/refresh-token/application/events/updated-refresh-token.event-handler.ts
+  - src/@hades/o-auth/refresh-token/application/events/updated-refresh-token.event.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.spec.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-create-refresh-tokens.controller.spec.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-create-refresh-tokens.controller.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-update-refresh-token.controller.spec.ts
+  - src/apps/o-auth/refresh-token/controllers/o-auth-update-refresh-token.controller.ts
+  - src/apps/o-auth/refresh-token/resolvers/o-auth-create-refresh-token.resolver.ts
+  - src/apps/o-auth/refresh-token/resolvers/o-auth-create-refresh-token.resolver.spec.ts
+  - src/apps/o-auth/refresh-token/resolvers/o-auth-create-refresh-tokens.resolver.spec.ts
+  - src/apps/o-auth/refresh-token/resolvers/o-auth-create-refresh-tokens.resolver.ts
+  - src/apps/o-auth/refresh-token/resolvers/o-auth-update-refresh-token.resolver.spec.ts
+  - src/apps/o-auth/refresh-token/resolvers/o-auth-update-refresh-token.resolver.ts
+  - src/apps/o-auth/refresh-token/seeder/seeder.ts
+  - src/apps/o-auth/refresh-token/seeder/seeder.module.ts

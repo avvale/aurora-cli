@@ -7,9 +7,9 @@ import { Properties } from './properties';
 import * as inquirer from 'inquirer';
 import * as Table from 'cli-table3';
 
-export class Prompter
+export const Prompter =
 {
-    static async promptForLoadModule(boundedContextName?: string, moduleName?: string)
+    async promptForLoadModule(boundedContextName?: string, moduleName?: string)
     {
         const questions = [];
 
@@ -24,11 +24,10 @@ export class Prompter
                     answers.boundedContextName = boundedContextName;
                     return false;
                 }
+
                 return true;
             },
-        });
-
-        questions.push({
+        }, {
             name   : 'moduleName',
             message: 'Input the name of module',
             type   : 'input',
@@ -39,6 +38,7 @@ export class Prompter
                     answers.moduleName = moduleName;
                     return false;
                 }
+
                 return true;
             },
         });
@@ -49,9 +49,9 @@ export class Prompter
             boundedContextName: response.boundedContextName.toKebabCase(),
             moduleName        : response.moduleName.toKebabCase(),
         };
-    }
+    },
 
-    static async promptForLoadBoundedContext(boundedContextName?: string)
+    async promptForLoadBoundedContext(boundedContextName?: string)
     {
         const questions = [];
 
@@ -66,6 +66,7 @@ export class Prompter
                     answers.boundedContextName = boundedContextName;
                     return false;
                 }
+
                 return true;
             },
         });
@@ -75,9 +76,9 @@ export class Prompter
         return {
             boundedContextName: response.boundedContextName.toKebabCase(),
         };
-    }
+    },
 
-    static async promptForGenerateModule(boundedContextName?: string, moduleName?: string)
+    async promptForGenerateModule(boundedContextName?: string, moduleName?: string)
     {
         const questions = [];
 
@@ -92,11 +93,10 @@ export class Prompter
                     answers.boundedContextName = boundedContextName;
                     return false;
                 }
+
                 return true;
             },
-        });
-
-        questions.push({
+        }, {
             name   : 'moduleName',
             message: 'Input the name of module',
             type   : 'input',
@@ -110,15 +110,11 @@ export class Prompter
 
                 return true;
             },
-        });
-
-        questions.push({
+        }, {
             name   : 'moduleNames',
             message: 'Input the plural of the module name in kebab case format',
             type   : 'input',
-        });
-
-        questions.push({
+        }, {
             name   : 'hasOAuth',
             message: 'do you want to protect this module with OAuth?',
             type   : 'confirm',
@@ -133,9 +129,9 @@ export class Prompter
             hasOAuth          : response.hasOAuth,
             hasTenant         : response.hasOAuth,
         };
-    }
+    },
 
-    static async promptForGenerateAggregate()
+    async promptForGenerateAggregate()
     {
         const questions = [];
 
@@ -146,9 +142,9 @@ export class Prompter
         });
 
         return inquirer.prompt(questions);
-    }
+    },
 
-    static async promptSelectOriginFileToManage(files: string[])
+    async promptSelectOriginFileToManage(files: string[])
     {
         const questions = [];
 
@@ -160,9 +156,9 @@ export class Prompter
         });
 
         return inquirer.prompt(questions);
-    }
+    },
 
-    static async promptSelectManagementAction()
+    async promptSelectManagementAction()
     {
         const questions = [];
 
@@ -174,9 +170,9 @@ export class Prompter
         });
 
         return inquirer.prompt(questions);
-    }
+    },
 
-    static async promptManageOriginFiles()
+    async promptManageOriginFiles()
     {
         const questions = [];
 
@@ -187,9 +183,9 @@ export class Prompter
         });
 
         return inquirer.prompt(questions);
-    }
+    },
 
-    static async promptForSeedModule(boundedContextName?: string, moduleName?: string)
+    async promptForSeedModule(boundedContextName?: string, moduleName?: string)
     {
         const questions = [];
 
@@ -207,9 +203,7 @@ export class Prompter
 
                 return true;
             },
-        });
-
-        questions.push({
+        }, {
             name   : 'moduleName',
             message: 'Input the name of module',
             type   : 'input',
@@ -231,9 +225,9 @@ export class Prompter
             boundedContextName: response.boundedContextName.toKebabCase(),
             moduleName        : response.moduleName.toKebabCase(),
         };
-    }
+    },
 
-    static async promptForSeedBoundedContext(boundedContextName?: string)
+    async promptForSeedBoundedContext(boundedContextName?: string)
     {
         const questions = [];
 
@@ -248,6 +242,7 @@ export class Prompter
                     answers.boundedContextName = boundedContextName;
                     return false;
                 }
+
                 return true;
             },
         });
@@ -257,9 +252,9 @@ export class Prompter
         return {
             boundedContextName: response.boundedContextName.toKebabCase(),
         };
-    }
+    },
 
-    static async promptDefineAggregateProperty(command: Command, boundedContextName: string, moduleName: string, moduleNames: string): Promise<Property>
+    async promptDefineAggregateProperty(command: Command, boundedContextName: string, moduleName: string, moduleNames: string): Promise<Property>
     {
         const questions     = [];
         let name    = '';
@@ -289,6 +284,7 @@ export class Prompter
                     answers.length = 36;
                     return true;
                 }
+
                 return false;
             },
         });
@@ -299,9 +295,7 @@ export class Prompter
             type   : 'list',
             choices: Object.values(SqlType),
             when   : (answers: any) => !answers.type,
-        });
-
-        questions.push({
+        }, {
             name   : 'enumOptions',
             message: 'Set comma separated enumeration options, example: ONE,TWO,THREE,FOUR',
             type   : 'input',
@@ -314,23 +308,17 @@ export class Prompter
             type   : 'list',
             choices: Object.values(SqlRelationship).filter(item => !['many-to-one'].includes(item)),
             when   : (answers: any) => answers.type === SqlType.RELATIONSHIP,
-        });
-
-        questions.push({
+        }, {
             name   : 'relationshipSingularName',
             message: 'The property name will be plural, type its singular',
             type   : 'input',
             when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY,
-        });
-
-        questions.push({
+        }, {
             name   : 'relationshipAggregate',
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
             when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY,
-        });
-
-        questions.push({
+        }, {
             name   : 'relationshipModulePath',
             message: 'Type path to module where to find the aggregate with which you want to relate this property? Type with format: bounded-context/module',
             type   : 'input',
@@ -348,9 +336,7 @@ export class Prompter
 
                 return answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY;
             },
-        });
-
-        questions.push({
+        }, {
             name   : 'hasPivotTable',
             message: () => `You want to create the pivot table of your many to many relationship with name: ${boundedContextName.toPascalCase()}${moduleNames.toPascalCase()}${name.toPascalCase()}?`,
             type   : 'confirm',
@@ -358,17 +344,13 @@ export class Prompter
             {
                 return answers.relationship === SqlRelationship.MANY_TO_MANY;
             },
-        });
-
-        questions.push({
+        }, {
             name   : 'decimals',
             message: 'Set total digits and decimals comma separated, example: 10,2',
             type   : 'input',
             when   : (answers: any) => answers.type === SqlType.DECIMAL,
             filter : (answers: string) => answers.split(',').map(item => Number.parseInt(item.trim(), 10)),
-        });
-
-        questions.push({
+        }, {
             name   : 'length',
             message: 'What\'s the length of property? Push enter to use the default length',
             type   : 'number',
@@ -394,11 +376,9 @@ export class Prompter
                 }
 
                 if (answers.relationship || answers.relationship) return false;
-                return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && !answers.length;
+                return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && answers.length === 0;
             },
-        });
-
-        questions.push({
+        }, {
             name   : 'nullable',
             message: 'This property will be nullable?',
             type   : 'confirm',
@@ -416,6 +396,7 @@ export class Prompter
                     // answers.nullable = true;
                     return false;
                 }
+
                 return true;
             },
         });
@@ -423,7 +404,7 @@ export class Prompter
         const response = await inquirer.prompt(questions);
 
         // add default length
-        if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && !response.length) response.length = cliterConfig.defaultTypeLength[response.type];
+        if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && response.length === 0) response.length = cliterConfig.defaultTypeLength[response.type];
 
         // delete relationship none value
         if (response.relationship === SqlRelationship.NONE) delete response.relationship;
@@ -450,43 +431,60 @@ export class Prompter
             pivotFileName           : response.pivotFileName,
             index                   : response.index,
         });
-    }
+    },
 
-    static async promptAddPipeline(isFront: boolean): Promise<{ from: string; to: string; service: string;}>
+    async promptAddPipeline(isFront: boolean): Promise<{ from: string; to: string; service: string;}>
     {
         const questions = [];
         let platform = '';
 
-        questions.push({
-            name   : 'from',
-            message: 'From which platform will you deploy?',
-            type   : 'list',
-            choices: cliterConfig.platformFromDeploy,
-        });
-
-        questions.push({
-            name    : 'to',
-            message : 'to which platform will it be deployed?',
-            type    : 'list',
-            choices : cliterConfig.platformToDeploy,
-            validate: (input: string) =>
+        questions.push(
             {
-                platform = input;
-                return true;
+                name   : 'from',
+                message: 'From which platform will you deploy?',
+                type   : 'list',
+                choices: cliterConfig.platformFromDeploy,
             },
-        });
-
-        questions.push({
-            name   : 'service',
-            message: 'on what service will you deploy?',
-            type   : 'list',
-            choices: (answers: any) => isFront ? cliterConfig.serviceToDeploy.front[answers.to.toCamelCase()] : cliterConfig.serviceToDeploy.back[answers.to.toCamelCase()],
-        });
+            {
+                name    : 'to',
+                message : 'to which platform will it be deployed?',
+                type    : 'list',
+                choices : cliterConfig.platformToDeploy,
+                validate: (input: string) =>
+                {
+                    platform = input;
+                    return true;
+                },
+            },
+            {
+                name   : 'service',
+                message: 'on what service will you deploy?',
+                type   : 'list',
+                choices: (answers: any) => isFront ? cliterConfig.serviceToDeploy.front[answers.to.toCamelCase()] : cliterConfig.serviceToDeploy.back[answers.to.toCamelCase()],
+            },
+        );
 
         return inquirer.prompt(questions);
-    }
+    },
 
-    static printValueObjectsTable(command: Command, items: Properties)
+    async promptInstallPackage(): Promise<{ from: string; to: string; service: string;}>
+    {
+        const questions = [];
+        questions.push(
+            {
+                name    : 'packageName',
+                message : 'Select the package to install',
+                type    : 'list',
+                choices : cliterConfig.packages,
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                validate: (packageName: string) => true,
+            },
+        );
+
+        return inquirer.prompt(questions);
+    },
+
+    printValueObjectsTable(command: Command, items: Properties)
     {
         const headers: string[] = [];
         const excludeHeaders: string[] = ['config', 'id', 'pivotAggregateName', 'pivotPath', 'pivotFileName'];
@@ -534,8 +532,8 @@ export class Prompter
 
                 // get value for each header
                 const value =   header === 'Decimals' && Array.isArray(item.decimals) ?
-                    item.decimals.join() :
-                    item[alias ?
+                    item.decimals.join(',') :
+                    (item[alias ?
                         alias.origin :
                         header
                     ] ?
@@ -543,10 +541,11 @@ export class Prompter
                             alias ?
                                 alias.origin :
                                 header
-                        ] : '';
+                        ] : '');
 
                 row.push(value);
             }
+
             rows.push(row);
         }
 
@@ -557,5 +556,5 @@ export class Prompter
 
         table.push(...rows);
         command.log(table.toString());
-    }
-}
+    },
+};

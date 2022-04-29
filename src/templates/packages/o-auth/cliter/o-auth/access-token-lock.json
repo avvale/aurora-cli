@@ -1,0 +1,573 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-token.command-handler.spec.ts",
+            "integrity": "sha1:d9b947281725797fc2e9e01da7f30b238f97ad53"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-token.command-handler.ts",
+            "integrity": "sha1:b2aa65ab1aa54417dd6fc52ec84cb9cb14557e08"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-token.command.ts",
+            "integrity": "sha1:5ae32d46cded206dac26f9ef42668da7b7951862"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-token.service.spec.ts",
+            "integrity": "sha1:1ec03229e9f772fcad7420ea47f3f0b84d1f344b"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-token.service.ts",
+            "integrity": "sha1:83eb29acb6582156e1675ce2e48e50e7c6f657b6"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-tokens.command-handler.spec.ts",
+            "integrity": "sha1:c47c3f4e85eb938a3ff8a453df724160dbe7fc94"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-tokens.command-handler.ts",
+            "integrity": "sha1:9e9524ed36b27ba1a8ec10e5989ed2b3dcbf4b65"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-tokens.command.ts",
+            "integrity": "sha1:9ff1901bde4edf3cd61df4fc9acde8184674214b"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-tokens.service.spec.ts",
+            "integrity": "sha1:bfb9626f8cbb64ff805f7b25b81d5dff903f6c3d"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/create/create-access-tokens.service.ts",
+            "integrity": "sha1:5ab75d1407c8a7427c0cdff7832b54b68b5d5e76"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-token-by-id.command-handler.spec.ts",
+            "integrity": "sha1:549771c9409de2683bf8da62c402506995f4a78d"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-token-by-id.command-handler.ts",
+            "integrity": "sha1:71653de9a7700b19ed401ade2a426b82783a984b"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-token-by-id.command.ts",
+            "integrity": "sha1:e3770f207d27e250d4a82d95af1b339c8f1d066c"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-token-by-id.service.spec.ts",
+            "integrity": "sha1:5ba356d1a6d518b306cac70d27a02b5067aa1087"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-token-by-id.service.ts",
+            "integrity": "sha1:41c78d44f5fdd4aa49c6fa86bb8d4ed9b6a894b7"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-tokens.command-handler.spec.ts",
+            "integrity": "sha1:7271d1b4051b03ef92db7452f01c95a04dd33abb"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-tokens.command-handler.ts",
+            "integrity": "sha1:172af815c3417c61f605105a62858c5c3ceb5c2d"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-tokens.command.ts",
+            "integrity": "sha1:c640d38cdf906281ca7ddccc28a0095122771f7c"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-tokens.service.spec.ts",
+            "integrity": "sha1:0256a934506a03b3c1ccc225569ae719059dec52"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/delete/delete-access-tokens.service.ts",
+            "integrity": "sha1:2f159746c74f4a595ad4db329c05f013f0aefbe9"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/add-access-tokens-context.event.ts",
+            "integrity": "sha1:3990898ff424ca02c26a0cd99f0bbeb059c0772c"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/created-access-token.event-handler.ts",
+            "integrity": "sha1:acb96ff394ef80536a4b2952c7ee0c23f5b2b300"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/created-access-token.event.ts",
+            "integrity": "sha1:44e6642788e506aa29677dc6ded7922b4c17b508"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/created-access-tokens.event-handler.ts",
+            "integrity": "sha1:4849bbaad5b417b81a134c7c24256aecade8305d"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/created-access-tokens.event.ts",
+            "integrity": "sha1:b5ca1bb19bdd64d9e8aaaa66a9d8d7880f724553"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/deleted-access-token.event-handler.ts",
+            "integrity": "sha1:a73a65781f2663f15eab8906384e2056d77fc620"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/deleted-access-token.event.ts",
+            "integrity": "sha1:66ac2d2e11863e7af762243bf0c9154b658063d0"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/deleted-access-tokens.event-handler.ts",
+            "integrity": "sha1:bb27e192e508916147023adc41639ca342ff7c55"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/deleted-access-tokens.event.ts",
+            "integrity": "sha1:93ef14411f0db5962c5145b29477b548dc379c77"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/updated-access-token.event-handler.ts",
+            "integrity": "sha1:61de5291fad9026516dc4f71770be4e1ed26503f"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/events/updated-access-token.event.ts",
+            "integrity": "sha1:216c7eedac9d3e9d9a94835a8c8546275050e36f"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token-by-id.query-handler.spec.ts",
+            "integrity": "sha1:8319712fa7209457a9300daf7d1a59b44f04f845"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token-by-id.query-handler.ts",
+            "integrity": "sha1:6ba691dfc68e98b446106bca0eb3549e5d0c5b6f"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token-by-id.query.ts",
+            "integrity": "sha1:a3728ef17e38c72baabca8a4c3e16c8de58c1680"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token-by-id.service.spec.ts",
+            "integrity": "sha1:5211d987eedf419755121f76ea518144af0c345c"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token-by-id.service.ts",
+            "integrity": "sha1:17cb0c42038fa3860ae6745a41a40e48c73323b9"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token.query-handler.spec.ts",
+            "integrity": "sha1:1db5c8aec1cec1c6a085eb1166193efbfb12eed0"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token.query-handler.ts",
+            "integrity": "sha1:04649c1d72668c3b4a1326cf1ac5c7369f0b9d6b"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token.query.ts",
+            "integrity": "sha1:e5e81f6ac21591db35b057f175f52ba13319fe44"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token.service.spec.ts",
+            "integrity": "sha1:4b8029f3c53105a5dfcea95e04ef25b9ce0b18bf"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/find/find-access-token.service.ts",
+            "integrity": "sha1:e3e38211ba051d188a977d826378763d4b143975"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/get/get-access-tokens.query-handler.spec.ts",
+            "integrity": "sha1:c066c5925af9df86f3582fbfe686fcbc9b149e0e"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/get/get-access-tokens.query-handler.ts",
+            "integrity": "sha1:95baa297d9a4cd06198e7aa15da752974257f4f7"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/get/get-access-tokens.query.ts",
+            "integrity": "sha1:6f6a9f3742077f078e889628d7d7533056679885"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/get/get-access-tokens.service.spec.ts",
+            "integrity": "sha1:29c86b8598486e0ceb52213965aaecedffceccb8"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/get/get-access-tokens.service.ts",
+            "integrity": "sha1:c99d631bba71d2dd5dafdf305b4466a598b2661f"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/paginate/paginate-access-tokens.query-handler.spec.ts",
+            "integrity": "sha1:a772b8263d5e46624949d95bc6ded71e616b2a4c"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/paginate/paginate-access-tokens.query-handler.ts",
+            "integrity": "sha1:2bdc8cb88e7947d4d4bafbbd81ce7d66eafb3a2d"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/paginate/paginate-access-tokens.query.ts",
+            "integrity": "sha1:34fbc6c71ee74d63f829c93cb60abb18967cf86b"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/paginate/paginate-access-tokens.service.spec.ts",
+            "integrity": "sha1:141df434cb9844fd77ffbfbbd4c6521242725ed9"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/paginate/paginate-access-tokens.service.ts",
+            "integrity": "sha1:0985aadcf456db8523918ae1081daa360c6337cc"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/sagas/access-token.sagas.ts",
+            "integrity": "sha1:169762fd01898c716b492a7b21504cfc205e50e4"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/update/update-access-token.command-handler.spec.ts",
+            "integrity": "sha1:0ddcf3333a06abbdabd869613d64fa562cd0ef5d"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/update/update-access-token.command-handler.ts",
+            "integrity": "sha1:9cc03bee05379591c3147d0da9303af8effc4b6b"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/update/update-access-token.command.ts",
+            "integrity": "sha1:6caaaa46413a9e42d49f24c7a927907f1ada4771"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/update/update-access-token.service.spec.ts",
+            "integrity": "sha1:100a5861acdefd595be341566ec1f356466914cc"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/application/update/update-access-token.service.ts",
+            "integrity": "sha1:85f7af4008bf349b24af814845dc99c1f4ddff58"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/access-token.aggregate.ts",
+            "integrity": "sha1:2f0b90d46cd087dee6da2163afd7cdb208c171dd"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/access-token.mapper.ts",
+            "integrity": "sha1:ee7a51f2940d27de1741d710fd938c0ae92743cc"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/access-token.repository.ts",
+            "integrity": "sha1:1f98c45702aef2b1ef9819b4f1bc80911067f068"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/access-token.response.ts",
+            "integrity": "sha1:5991e13294f8ac1ebe7524e4930457b0e5c327ea"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/index.ts",
+            "integrity": "sha1:88ebd116e1c42273de3e59cba48512f48fb59e77"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/index.ts",
+            "integrity": "sha1:3f5618ee540259bbbe5f93d1a62bff8394aeb12d"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/infrastructure/mock/mock-access-token.repository.ts",
+            "integrity": "sha1:8c955658c8a700d00eed03e9e7cb24352352dead"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/infrastructure/mock/mock-access-token.seeder.ts",
+            "integrity": "sha1:7d93f8f553a03766c7d1f4af16b0c330ab379ba2"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/infrastructure/seeds/access-token.seed.ts",
+            "integrity": "sha1:2a3874502c0c4f3b822dd4a042d98b25da1bc64e"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model.ts",
+            "integrity": "sha1:388a679c01df4dd497ce36e172e8b4a1bd807994"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.repository.ts",
+            "integrity": "sha1:e4e72121cb80d2ae95f3d9e53287a60682328f89"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-id.ts",
+            "integrity": "sha1:bd154f175fb2e1b6bd351997ab49275c9546176e"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-client-id.ts",
+            "integrity": "sha1:7d7c68c2423b5e67c4871414b4f74398964ad927"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-account-id.ts",
+            "integrity": "sha1:bfbf159147bba39789ba67ea77c0f9fe64c161f8"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-token.ts",
+            "integrity": "sha1:f2f35d9e9ae302679cc3505a710b92f8a5e662a9"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-name.ts",
+            "integrity": "sha1:872e5aab7edf367f0c07de94b6a9034fe9191505"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-is-revoked.ts",
+            "integrity": "sha1:79a0d91abc0a14ffe092077f82e04eaa41db3233"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-expires-at.ts",
+            "integrity": "sha1:f89c95d781520a7361f4dd651db457fd81c35572"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-created-at.ts",
+            "integrity": "sha1:f5e18a7bd31a2866b78ef456c83f3442ee7aff9b"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-updated-at.ts",
+            "integrity": "sha1:40e3354ce2570741588abdf428ed836d2a34b544"
+        },
+        {
+            "path": "src/@apps/o-auth/access-token/domain/value-objects/access-token-deleted-at.ts",
+            "integrity": "sha1:0a2d649703ad068d07701b24462eab9e0dcbc4a9"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-create-access-token.controller.spec.ts",
+            "integrity": "sha1:efdc7e3481b09681eb8dd4b029e5b427194657cc"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts",
+            "integrity": "sha1:20b0c2c9251c753b1d162514b59f52798428af3a"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.spec.ts",
+            "integrity": "sha1:4f6cfc346f41a9ee2f6d68d0fb05f70ac2e5a564"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.ts",
+            "integrity": "sha1:bae00412874be15921380d88a8ee7d37d3983430"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-delete-access-token-by-id.controller.spec.ts",
+            "integrity": "sha1:eb6f44cd0990a88b48932ecd4854cee6b0f956db"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-delete-access-token-by-id.controller.ts",
+            "integrity": "sha1:fa5da762eac97bdc1574fe0f79817a0a82478bc8"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-delete-access-tokens.controller.spec.ts",
+            "integrity": "sha1:7341f2c9a381ceda881f8d7a32655e9458d9acb7"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-delete-access-tokens.controller.ts",
+            "integrity": "sha1:5b1f6f0388ba99022b72dd52222ea7862c7270b2"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-find-access-token-by-id.controller.spec.ts",
+            "integrity": "sha1:4392653e236ae16cffcece5130199d69606513ac"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-find-access-token-by-id.controller.ts",
+            "integrity": "sha1:f05c3fe0272c14a4ee2072db189ba4916c45ae8c"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-find-access-token.controller.spec.ts",
+            "integrity": "sha1:446e19f3f122839d94061b18bf915281071b2b77"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-find-access-token.controller.ts",
+            "integrity": "sha1:1d3351cf549e7f003fb4855ebafeffa3c061bce4"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-get-access-tokens.controller.spec.ts",
+            "integrity": "sha1:4be8bdd897aa40236adf21cf493b010157b36349"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-get-access-tokens.controller.ts",
+            "integrity": "sha1:6ba1ce6bf5e4408a80b9410a1b8ec916004b05d8"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-paginate-access-tokens.controller.spec.ts",
+            "integrity": "sha1:543f0d6dd6cfda623683d1436fff9d599a4f3441"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-paginate-access-tokens.controller.ts",
+            "integrity": "sha1:c62f44904412c1115723202f56eebfaf47b27689"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-update-access-token.controller.spec.ts",
+            "integrity": "sha1:e5c243a971b087fc598c474986c6ec35c6763403"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/controllers/o-auth-update-access-token.controller.ts",
+            "integrity": "sha1:672ca13fc38b40f640fde26dff5935b362546066"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/dto/o-auth-access-token.dto.ts",
+            "integrity": "sha1:806836531524cbfe344587c647c08114abbeb343"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/dto/o-auth-create-access-token.dto.ts",
+            "integrity": "sha1:1334070b35a0d27571966baa5c1efa73241d2570"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/dto/o-auth-update-access-token.dto.ts",
+            "integrity": "sha1:8a127168b8aba2a7b66069ea9b456b113712941f"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/dto/index.ts",
+            "integrity": "sha1:efa5441745a12cd7b4ee1d82aca36101cd937d2e"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/graphql/access-token.graphql",
+            "integrity": "sha1:b5eb641198bf8fe86ac716ef2e7fcfc7e4b6f5ed"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-create-access-token.handler.spec.ts",
+            "integrity": "sha1:41e2e93c6e31748f716350c2e8e9733d1cbf1982"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-create-access-token.handler.ts",
+            "integrity": "sha1:1f870bd411c197d94e9241fb07beaea51db51d75"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-create-access-tokens.handler.spec.ts",
+            "integrity": "sha1:0b200ed9c49ec29775d9a937e28491975233f384"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-create-access-tokens.handler.ts",
+            "integrity": "sha1:1693603a2bde2e2638343cbc362c090894a84b0f"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-delete-access-token-by-id.handler.spec.ts",
+            "integrity": "sha1:93f752c0ba62a28f95f111468a9fec1a5913e2d8"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-delete-access-token-by-id.handler.ts",
+            "integrity": "sha1:9ceef03b24fd9299850fd602525e36062e7bc6c0"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-delete-access-tokens.handler.spec.ts",
+            "integrity": "sha1:da27265787758388b7560356c1cab6390a13f500"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-delete-access-tokens.handler.ts",
+            "integrity": "sha1:86084912b4ac49e2f4ffd54a5a1dab11479c304a"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-find-access-token-by-id.handler.spec.ts",
+            "integrity": "sha1:24a841c55d7b6f15d82d2304903b676ae06b3fb3"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-find-access-token-by-id.handler.ts",
+            "integrity": "sha1:e6889b9b04b9cd65bb91bbc4199cbaeb8d098de0"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-find-access-token.handler.spec.ts",
+            "integrity": "sha1:ad2450e323693eec8eff6a471ac124e59ebbeb4b"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-find-access-token.handler.ts",
+            "integrity": "sha1:27c23d6e957d76344d2983faff4374ca3915960e"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-get-access-tokens.handler.spec.ts",
+            "integrity": "sha1:05e7dd35557ecb9d471410b0fe9b3b57db9d0cca"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-get-access-tokens.handler.ts",
+            "integrity": "sha1:8f7dca8b2942d41380974dec857890caade206a8"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-paginate-access-tokens.handler.spec.ts",
+            "integrity": "sha1:a6201074238ee54253ff8bf48d18d23b529c82c8"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-paginate-access-tokens.handler.ts",
+            "integrity": "sha1:0b8d62914d44a627f906bd4af9a8538805658c44"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-update-access-token.handler.spec.ts",
+            "integrity": "sha1:3e10cdc9ac51aa14dc9b2f4106b474080f6f8359"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/handlers/o-auth-update-access-token.handler.ts",
+            "integrity": "sha1:f99c20ed6cd55142f1dc3381f18e94c9a9a06506"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/index.ts",
+            "integrity": "sha1:724bbd883dd1f61c6e58998c30bd649512c48a11"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-create-access-token.resolver.spec.ts",
+            "integrity": "sha1:93a736ffd07fdcfb996edef8d750912a942ca57d"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-create-access-token.resolver.ts",
+            "integrity": "sha1:5fc0625ec4337eaf24eee91c8d0ba8bf2a028cf4"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-create-access-tokens.resolver.spec.ts",
+            "integrity": "sha1:62344b195d6b20074ac04bef324a7bf14cb5da77"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-create-access-tokens.resolver.ts",
+            "integrity": "sha1:11d7204cddf6b814c086f833f400bc2a8dfce7bf"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-delete-access-token-by-id.resolver.spec.ts",
+            "integrity": "sha1:a1dde6a801246a2619f63fe02d2482c40de406fc"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-delete-access-token-by-id.resolver.ts",
+            "integrity": "sha1:8fb979defed67270daff45de7afb66a215666297"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-delete-access-tokens.resolver.spec.ts",
+            "integrity": "sha1:f2ac8bcae362e830a7ea907693af71727026be53"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-delete-access-tokens.resolver.ts",
+            "integrity": "sha1:891b13561a701fa2d79fb7f4df438493cf75a3c9"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-find-access-token-by-id.resolver.spec.ts",
+            "integrity": "sha1:3b267dcc67670904e93a4e219b9396f9f569cda2"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-find-access-token-by-id.resolver.ts",
+            "integrity": "sha1:45f661aa4c80943529ff1f21e91857ea08b17f52"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-find-access-token.resolver.spec.ts",
+            "integrity": "sha1:d9bf977c2713ba304ed979e4b6dfc7b6a0420019"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-find-access-token.resolver.ts",
+            "integrity": "sha1:2fdce171c8ef1dff45794b6574180b9f493424cf"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-get-access-tokens.resolver.spec.ts",
+            "integrity": "sha1:32b9a90747484f4cb84fdbe713719f48912fb177"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-get-access-tokens.resolver.ts",
+            "integrity": "sha1:6c17203a0e33640bd0cfd4f7377983a79c6567ed"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-paginate-access-tokens.resolver.spec.ts",
+            "integrity": "sha1:efef6b6fcf64af6e135a39e483fd371a3d35635e"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-paginate-access-tokens.resolver.ts",
+            "integrity": "sha1:26f80200d8618f94fee150c27eb96cbe4ad7bcb0"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-update-access-token.resolver.spec.ts",
+            "integrity": "sha1:7c2c51e24c4e1b1c9267c3d23262f10d3b3974e4"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/resolvers/o-auth-update-access-token.resolver.ts",
+            "integrity": "sha1:77466efb1289ea5c1cb7b4d44c655f44f8769c97"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/seeder/seeder.module.ts",
+            "integrity": "sha1:f70a859d23b940cac30bd06d3d8dab82b987eb56"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/seeder/seeder.ts",
+            "integrity": "sha1:e1a0cb171f2c25bc8633e9c73e4c1e2985e200e9"
+        },
+        {
+            "path": "test/acceptance/o-auth/access-token.e2e-spec.ts",
+            "integrity": "sha1:12d8aff2938b1e3c930c5df1bd3c3d8ac03739f3"
+        },
+        {
+            "path": "postman/o-auth.access-token.postman.json",
+            "integrity": "sha1:67e5e43d94728582a865df0b1cffb821e6ef22b4"
+        }
+    ]
+}
