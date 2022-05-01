@@ -22,7 +22,7 @@
         "@oclif/plugin-plugins": "^2.1.0",
         "cli-table3": "^0.6.1",
         "copyfiles": "^2.4.1",
-        "dayjs": "^1.11.0",
+        "dayjs": "^1.11.1",
         "faker": "^5.5.3",
         "handlebars": "^4.7.7",
         "handlebars-helpers": "^0.10.0",
