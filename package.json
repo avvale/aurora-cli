@@ -20,7 +20,7 @@
         "@oclif/core": "^1",
         "@oclif/plugin-help": "^5",
         "@oclif/plugin-plugins": "^2.1.0",
-        "cli-table3": "^0.6.1",
+        "cli-table3": "^0.6.2",
         "copyfiles": "^2.4.1",
         "dayjs": "^1.11.0",
         "faker": "^5.5.3",
