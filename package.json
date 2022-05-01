@@ -26,7 +26,7 @@
         "faker": "^5.5.3",
         "handlebars": "^4.7.7",
         "handlebars-helpers": "^0.10.0",
-        "inquirer": "^8.2.0",
+        "inquirer": "^8.2.4",
         "js-yaml": "^4.1.0",
         "jsrsasign": "^10.5.14",
         "jsrsasign-util": "^1.0.5",
