@@ -467,7 +467,7 @@ export const Prompter =
         return inquirer.prompt(questions);
     },
 
-    async promptInstallPackage(): Promise<{ from: string; to: string; service: string;}>
+    async promptAddPackage(): Promise<{ from: string; to: string; service: string;}>
     {
         const questions = [];
         questions.push(

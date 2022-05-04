@@ -28,7 +28,7 @@ export default class Install extends Command
     {
         const { args, flags } = await this.parse(Install);
 
-        const { packageName }: any = await Prompter.promptInstallPackage();
+        const { packageName }: any = await Prompter.promptAddPackage();
 
         // set stateService
         const stateService     = container.resolve(StateService);
