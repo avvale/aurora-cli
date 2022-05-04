@@ -6,9 +6,7 @@ export class CreateRefreshTokenCommand
         public readonly payload: {
             id: string;
             accessTokenId: string;
-            token: string;
-            isRevoked: boolean;
-            expiresAt?: string;
+            expiredRefreshToken: number;
         },
         public readonly cQMetadata?: CQMetadata,
     ) {}

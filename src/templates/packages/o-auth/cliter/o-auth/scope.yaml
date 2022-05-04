@@ -1,0 +1,32 @@
+version: 0.0.1
+boundedContextName: o-auth
+moduleName: scope
+moduleNames: scopes
+aggregateName: OAuthScope
+hasOAuth: false
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: code
+    type: varchar
+    maxLength: 20
+    nullable: false
+    index: unique
+    example: EDIT
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

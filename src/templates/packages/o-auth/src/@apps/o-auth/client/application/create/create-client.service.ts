@@ -8,6 +8,7 @@ import {
     ClientSecret,
     ClientAuthUrl,
     ClientRedirect,
+    ClientScopes,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
     ClientIsActive,
@@ -36,6 +37,7 @@ export class CreateClientService
             secret: ClientSecret;
             authUrl: ClientAuthUrl;
             redirect: ClientRedirect;
+            scopes: ClientScopes;
             expiredAccessToken: ClientExpiredAccessToken;
             expiredRefreshToken: ClientExpiredRefreshToken;
             isActive: ClientIsActive;
@@ -53,6 +55,7 @@ export class CreateClientService
             payload.secret,
             payload.authUrl,
             payload.redirect,
+            payload.scopes,
             payload.expiredAccessToken,
             payload.expiredRefreshToken,
             payload.isActive,

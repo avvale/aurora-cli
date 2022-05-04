@@ -52,6 +52,13 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     redirect: string;
 
     @Column({
+        field: 'scopes',
+        allowNull: true,
+        type: DataTypes.JSON,
+    })
+    scopes: any;
+
+    @Column({
         field: 'expiredAccessToken',
         allowNull: true,
         type: DataTypes.INTEGER.UNSIGNED,

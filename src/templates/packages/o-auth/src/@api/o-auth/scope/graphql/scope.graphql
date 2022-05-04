@@ -1,0 +1,41 @@
+
+type OAuthScope
+{
+    id: ID!
+    code: GraphQLString!
+    name: GraphQLString!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input OAuthCreateScopeInput
+{
+    id: ID!
+    code: GraphQLString!
+    name: GraphQLString!
+}
+
+input OAuthUpdateScopeInput
+{
+    id: ID!
+    code: GraphQLString
+    name: GraphQLString
+}
+
+type Query
+{
+    oAuthFindScope(query: QueryStatement constraint: QueryStatement): OAuthScope
+    oAuthFindScopeById(id: ID constraint: QueryStatement): OAuthScope
+    oAuthGetScopes(query: QueryStatement constraint: QueryStatement): [OAuthScope]!
+    oAuthPaginateScopes(query: QueryStatement constraint: QueryStatement): Pagination!
+}
+
+type Mutation
+{
+    oAuthCreateScope(payload: OAuthCreateScopeInput!): OAuthScope
+    oAuthCreateScopes(payload: [OAuthCreateScopeInput]!): Boolean!
+    oAuthUpdateScope(payload: OAuthUpdateScopeInput! constraint: QueryStatement): OAuthScope
+    oAuthDeleteScopeById(id: ID! constraint: QueryStatement): OAuthScope
+    oAuthDeleteScopes(query: QueryStatement constraint: QueryStatement): [OAuthScope]!
+}

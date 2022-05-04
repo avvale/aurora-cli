@@ -7,3 +7,4 @@ export { ApplicationClientIds } from './application-client-ids';
 export { ApplicationCreatedAt } from './application-created-at';
 export { ApplicationUpdatedAt } from './application-updated-at';
 export { ApplicationDeletedAt } from './application-deleted-at';
+export { ApplicationAuthorizationHeader } from './application-authorization-header';

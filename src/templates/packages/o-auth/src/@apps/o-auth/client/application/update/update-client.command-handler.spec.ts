@@ -47,6 +47,7 @@ describe('UpdateClientCommandHandler', () =>
                         secret: clients[0].secret,
                         authUrl: clients[0].authUrl,
                         redirect: clients[0].redirect,
+                        scopes: clients[0].scopes,
                         expiredAccessToken: clients[0].expiredAccessToken,
                         expiredRefreshToken: clients[0].expiredRefreshToken,
                         isActive: clients[0].isActive,

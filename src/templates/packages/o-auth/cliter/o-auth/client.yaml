@@ -34,6 +34,9 @@ aggregateProperties:
     type: varchar
     maxLength: 2048
     nullable: true
+  - name: scopes
+    type: json
+    nullable: true
   - name: expiredAccessToken
     type: int.unsigned
     maxLength: 10

@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "47d88bb1-7118-4a0a-bb5a-e11639e04450",
+		"name"          : "@apps - iam/account",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreateAccount",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreateAccountInput!)\n{\n\tiamCreateAccount (payload:$payload)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tclientId\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdScopes\n\t\tdata\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"type\": 'USER', \n\t\t\"email\": \"arajtv07q2s688a3if45m2f8oc1bnpgvv46pesgw15rkmjaa6y0twpwcz09w7i53ksv1m7xro54yxu61xrywpuco2xu2dz564wkws5pt3334jrz3om51v1k\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreateAccounts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreateAccountInput]!)\n{\n\tiamCreateAccounts (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"18739979-b7a4-4470-81cc-56ab6bc8e544\", \n\t\t\t\"type\": 'USER', \n\t\t\t\"email\": \"s6xfcp5zf8h8psvygl3wqs3p52fai2bf4fxzai30vflf9uo8mq5y52im8x7vp8wgx5hqxckopnlaiud1b3cor5cyltn6v3ndmh228dwpuibmrl5u8mbpg3b\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"8e216347-5f34-4326-addf-fae60b74d587\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6b55e025-4cc9-472e-8424-27bae3b8b0f9\", \n\t\t\t\"type\": 'USER', \n\t\t\t\"email\": \"34lkx67tii3v1rt5d2q2879qsjvrv1fhfntzozyatge6j90tc5cbvdc70b0re6pei4i6l5eixf2604ngohvk2oejt4oppt6mmdfozu6haprqwntjd7j1vfb\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"445be7db-3068-4ce7-ac86-a0859c4af1ec\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f5fc94c3-0549-4108-91b1-868d1b7660c6\", \n\t\t\t\"type\": 'USER', \n\t\t\t\"email\": \"20u8kcq5g6cwclolbxqnukcz26ewfcoojustjsxzscekya3nt3jduoowf0m8ig06ewyl3mxhamlw55vz3eertsz3wkyp3hm4m47juxqqwuq7e4xyb0x0bxq\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"4b4992ac-dce3-4ff8-bbef-180f0b5d297b\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ffc509b1-ba44-4418-93d0-a0e46919bdf4\", \n\t\t\t\"type\": 'USER', \n\t\t\t\"email\": \"5db48fx12qsmhf22ew8e6ka8pch0nulyl2f2ufqm4ijrjcjrz1hs4ip574kxdyxfnfilyd54ina6ifsuhdc79x5eh3uq2j9jzgbh6n26kz8mzkb5v7jps9d\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"98f84966-4c10-417c-b536-4898eb00193c\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"687e6561-f59d-4f0d-bf4f-379f2900a9a0\", \n\t\t\t\"type\": 'SERVICE', \n\t\t\t\"email\": \"o19aypijz396hgrwvmgg6cx0ypbo1iw8d9aj8u1cnw6q4kudp2860k3kan5se6u5i9b4iidv36cxo8fs48cp6e8dv52gq7h5bzmthv14hyxanmdkpf3powi\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"ef850592-9c36-4fb6-84f6-159c8654eb87\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a09c5026-3637-47e8-b28e-d906ecf2c245\", \n\t\t\t\"type\": 'SERVICE', \n\t\t\t\"email\": \"6s0w6smepjvgp8ofvs8um2cflbovusbrlm92mhmme174dxet5isy5x8n93xfywnpmbdggm9rw3mowsyadk2eoju3mlo2as6vr4qfr03rcncdnni3jp9rded\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"64ac6816-6af6-4f5c-b9cf-d0ea90d65a67\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"907e63f9-0fac-4898-ad56-29ea0bfc4ad2\", \n\t\t\t\"type\": 'SERVICE', \n\t\t\t\"email\": \"txkq3uocoj7frhoz6o0kiowumengcik8w9lo7dc9523dg05mfb13jd8jn4z8bg3tu4qjf1evg00tgrfrgq4fyfk01jg013jj4hmvfnoekg5y4gjstriac6y\", \n\t\t\t\"isActive\": true, \n\t\t\t\"clientId\": \"61062d49-dee5-44ae-a103-3c2ff833359b\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fcb8e6f8-6a7b-4a82-8908-976a6feecb81\", \n\t\t\t\"type\": 'SERVICE', \n\t\t\t\"email\": \"z7r1a251mbust6xjyhv8wmwomdu1x3shwz5r7ajxdo13i3wlzd729o0thrd85zvd9inay0ryutb8ltgvbwsobo9g2teep5tprw22pbbp2kpa6hessx75arc\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"758279d5-4fa5-44ec-8880-c48a1d05ff15\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"52c01b2a-a09e-4f6d-8b32-d5dad85069fe\", \n\t\t\t\"type\": 'USER', \n\t\t\t\"email\": \"f7shu76whjvk0wffq9q78gn7df3f7zpxokt4qmwoo0y2khoud07r834z1qrxlvzeffxq819gpmg34pibp726s8a5sfnnjji0tkg879a3kaejy4pinmh4h04\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"70b5a750-aa3d-45da-8266-6957671892b4\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8fd90453-c270-43a6-a6b9-9ac0a50f6138\", \n\t\t\t\"type\": 'USER', \n\t\t\t\"email\": \"57nd1i6sb0pez38nzjafdfwkxpbpheu6buz1f5sujakt3lv8k7wbx4a9tk0ck6cnx3m23049igvylwjyzyj52ir5p9dmm1hj4lhb8a2x1xtq9ji86ape4sa\", \n\t\t\t\"isActive\": false, \n\t\t\t\"clientId\": \"ba886026-c3fb-4cfd-9e68-d7e2c33435fd\", \n\t\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginateAccounts",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateAccounts (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetAccounts",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetAccounts (query: $query)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdScopes\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindAccount",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindAccount (query: $query)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdScopes\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindAccountById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindAccountById (id:$id)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdScopes\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdateAccount",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdateAccountInput!)\n{\n\tiamUpdateAccount (payload:$payload)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdScopes\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"type\": 'SERVICE', \n\t\t\"email\": \"tj893p9akpv0eb44e2npobvxemya74tzyl8941qaj74ui7d5o7hfuxkgabmsx6ybo43fn8rzzzbw4w6q9pqq55c3y9jbtu06eo01ffhqsislg1xoiadx5kx\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteAccountById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteAccountById (id:$id)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdScopes\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteAccounts",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteAccounts (query: $query)\n\t{\n\t\tid\n\t\ttype\n\t\temail\n\t\tisActive\n\t\tdApplicationCodes\n\t\tdPermissions\n\t\tdTenants\n\t\tdScopes\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"type\": 'SERVICE', \n\t\"email\": \"8crqgxhldfjy64wwy6f0botz0k0bohlm3sm8ckxqcl5jgdxvab7agdywpqsxx015a6ydx1ns2vh966r4c5xklbt5mv4ua26zccnnxr4o646sbxdgy5rws4d\", \n\t\"isActive\": false, \n\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"roleIds\": [], \n\t\"tenantIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/account/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"account",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/accounts/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"c627b518-967e-40c5-9eab-0d44a927d27e\", \n\t\t\"type\": 'USER', \n\t\t\"email\": \"ppu3octlyc3ec2rurvkrpr3vj8876db3vce7630il8ggyza18erq6b5r9ecj4ykun0g612ihyo3n1br1nb20wjodbkdq4yqy1n138evsumy0ztweqw1e26h\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"c6d9d0ae-f1c2-4d2d-a6fc-6f1de5d1e1fc\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"4beb2d47-4e6c-40a8-8c91-5809a5ab297f\", \n\t\t\"type\": 'USER', \n\t\t\"email\": \"x51j06rtn5tftuvfwss1nega8n7riwxoffdwodyi23hozittp0nl6rfwkqerjxmz5en0dprmhxybiwjvobfwdltxjjqta9c9qn5zkjxqinv3fdkt9tm2ln8\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"b4fe6872-1581-40b3-b626-2780dfbec60b\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"9e5d6640-77a4-4652-820d-ffc1cf3724bc\", \n\t\t\"type\": 'USER', \n\t\t\"email\": \"7htpf52m4qu039yyw96ejb22oks12xxybp2ee4snxeec1rqirxtn0iqr0xb5ml2ex7ix6hzzaxt2tjnoh9t7ybft0dsbwadf9q8t6p6z32vy97gnzq4ovw0\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"60f0015c-abca-4d40-977b-e4c54e68ee4b\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"52eaa2d4-2608-4831-b312-2d462a9c0e37\", \n\t\t\"type\": 'USER', \n\t\t\"email\": \"2wzszvlarjppnizvamkbotaq9jp50zj78mr5dihc8za2gutk3rcpqenhryt1myf256d1n5qgb16b5rbbvju5y580ra06l980hffssar45ycrz1uu59pnsa0\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"d3cc55b1-0768-43eb-9051-53ef8738d4a9\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"5c8ab382-4fb5-4e21-bd27-a6ef70dc162d\", \n\t\t\"type\": 'SERVICE', \n\t\t\"email\": \"qlu00iilyfpwlrhl7nm104ocxaq7q8xs4a84i6hsiev7ywc38zoe9sjqjl4lyx6ni31xb97g06euxvx0quir54o43a8f1wtywj6h395lg3x2svdo3dxo738\", \n\t\t\"isActive\": false, \n\t\t\"clientId\": \"e926c90e-13f8-47ee-91a1-ac07b2d15d3a\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"5aa019cb-2fc0-4253-bb5f-286d773f2f66\", \n\t\t\"type\": 'USER', \n\t\t\"email\": \"1bqaqucld9rib361of1u1uvzg9h7cge2dkav29ct916fygh0vxfo4upddxxu50zptj5czk7e2b0xcmrzt6kfq36avgzqzqezoigc0wrfo3h0m4f7lt4g2y8\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"8c6795de-df12-4cc9-98e1-a09f91a0407f\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"17bfa8e3-fc54-499e-927d-c1af9c4bbe7e\", \n\t\t\"type\": 'USER', \n\t\t\"email\": \"dfz4o59lgcka8k379lf12kl812e7uqgcamyp9o7cgjd2h0mto7i2w4zbejvvnqcbd836fj7cvnsftbnsdf1xil30bmjn1spozrzj9zclzehgissdkcavowk\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"fb06a2ec-dabd-4df7-9138-15308469815a\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"cee3982f-9914-4de8-be45-543e562c953c\", \n\t\t\"type\": 'SERVICE', \n\t\t\"email\": \"zghkeobmrt0a8ir3siv3zurj7i41837o12k5kdtv5xyqlxloc3lconzhczbhnbowfo64mgyifgicvt85sc83ahmq88b4al7vp2b8cyo71qjqebmgmmiyqfo\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"2979ed21-2846-4dbb-8a37-dcfa1b0a13c7\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"531285ef-681a-4d3e-b5b8-152223151f62\", \n\t\t\"type\": 'SERVICE', \n\t\t\"email\": \"fqgzdmabi0u3oh33qilyewqocgywjqfi0db0oojjk97twlrkossh91qdhtsw1wocrbvyte1jfy09kqnq7ef4krpe7eb01dbu6ddf2qx01bmi9qoz6q8c6yn\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"cd5f3555-3a88-4aa3-a10a-6a117d7811d0\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8d13c720-d566-4504-9d06-8c2fc9238414\", \n\t\t\"type\": 'SERVICE', \n\t\t\"email\": \"9375t3k72q0mnnslp3qk9tf0s7pewjo1lz5q1xmp9fc6l3kkhtica0rtm7zdycrtw8r5pw39xzkwawvpwt3hj6ffotyqnv8tjiunlneedpwew6zurgnjdkr\", \n\t\t\"isActive\": true, \n\t\t\"clientId\": \"c06f9310-f30d-4624-a916-0fe3610d0b70\", \n\t\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\t\"data\": { \"foo\" : \"bar\" }, \n\t\t\"roleIds\": [], \n\t\t\"tenantIds\": []\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/accounts/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"accounts",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/accounts/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/accounts/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+                        "accounts",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/accounts/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/accounts/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"accounts",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/account/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"account",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/account/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"account",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"type\": 'SERVICE', \n\t\"email\": \"xlqoj0x6ekvwqjr22c0c0lgm78mcshz432ngjwneyxh6n5qtj901ru1uccorterxd39z32r21spomgw461cv60rf1mkatnb78jecijseazv2jdccnhlhk6z\", \n\t\"isActive\": true, \n\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"dApplicationCodes\": { \"foo\" : \"bar\" }, \n\t\"dPermissions\": { \"foo\" : \"bar\" }, \n\t\"dTenants\": { \"foo\" : \"bar\" }, \n\t\"dScopes\": { \"foo\" : \"bar\" }, \n\t\"data\": { \"foo\" : \"bar\" }, \n\t\"roleIds\": [], \n\t\"tenantIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/account/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"account",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/account/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/account/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"account",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/accounts/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/accounts/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"accounts",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "9bfb0605-3590-4fe0-ac94-6678f1d44fb8",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

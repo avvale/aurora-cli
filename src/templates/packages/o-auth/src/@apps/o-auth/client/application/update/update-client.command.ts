@@ -11,6 +11,7 @@ export class UpdateClientCommand
             secret?: string;
             authUrl?: string;
             redirect?: string;
+            scopes?: any;
             expiredAccessToken?: number;
             expiredRefreshToken?: number;
             isActive?: boolean;

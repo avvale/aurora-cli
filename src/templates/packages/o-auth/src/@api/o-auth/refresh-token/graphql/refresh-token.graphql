@@ -40,9 +40,6 @@ type Query
 
 type Mutation
 {
-    oAuthCreateRefreshToken(payload: OAuthCreateRefreshTokenInput!): OAuthRefreshToken
-    oAuthCreateRefreshTokens(payload: [OAuthCreateRefreshTokenInput]!): Boolean!
-    oAuthUpdateRefreshToken(payload: OAuthUpdateRefreshTokenInput! constraint: QueryStatement): OAuthRefreshToken
     oAuthDeleteRefreshTokenById(id: ID! constraint: QueryStatement): OAuthRefreshToken
     oAuthDeleteRefreshTokens(query: QueryStatement constraint: QueryStatement): [OAuthRefreshToken]!
 }

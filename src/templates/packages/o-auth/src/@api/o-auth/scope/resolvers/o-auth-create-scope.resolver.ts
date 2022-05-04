@@ -1,0 +1,26 @@
+import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Timezone } from 'aurora-ts-core';
+
+// @apps
+import { OAuthCreateScopeHandler } from '../handlers/o-auth-create-scope.handler';
+import { OAuthScope, OAuthCreateScopeInput } from '../../../../graphql';
+
+@Resolver()
+export class OAuthCreateScopeResolver
+{
+    constructor(
+        private readonly handler: OAuthCreateScopeHandler,
+    ) {}
+
+    @Mutation('oAuthCreateScope')
+    async main(
+        @Args('payload') payload: OAuthCreateScopeInput,
+        @Timezone() timezone?: string,
+    ): Promise<OAuthScope>
+    {
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
+    }
+}

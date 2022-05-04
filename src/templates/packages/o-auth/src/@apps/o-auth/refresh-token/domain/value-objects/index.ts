@@ -6,3 +6,4 @@ export { RefreshTokenExpiresAt } from './refresh-token-expires-at';
 export { RefreshTokenCreatedAt } from './refresh-token-created-at';
 export { RefreshTokenUpdatedAt } from './refresh-token-updated-at';
 export { RefreshTokenDeletedAt } from './refresh-token-deleted-at';
+export { RefreshTokenExpiredRefreshToken } from './refresh-token-expired-refresh-token';

@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "cc1038fd-71b2-4d8a-9ed9-34f130ae262e",
+		"name"          : "@apps - iam/user",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreateUserInput!)\n{\n\tiamCreateUser (payload:$payload)\n\t{\n\t\tid\n\t\taccountId\n\t\tname\n\t\tsurname\n\t\tcode\n\t\tavatar\n\t\tmobile\n\t\tlangId\n\t\tusername\n\t\tpassword\n\t\trememberToken\n\t\tdata\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Handmade Fresh Bacon\", \n\t\t\"surname\": \"5q9o6yxy6rs8meqn8e60axyenxisy1ne4snhsm8iysw6vggwopn3jhe9jvb3z1s30qb1l4lvvcyedm253k53pgcpp00701iokl2gfeq5m3icpbtsu4hbh2042h2ouqhukd2t9vlm1f1idnunp0nlgif7hb2p6o2ypwkj0f7357z1g05vcofj074qm8jbhws9hbk2ckfchvptewurwljt608p2i8besqubu0rbu5lnif9rbkfex0xs8ngcjsa8j\", \n\t\t\"code\": \"j4q2m9g5qtvx9i6gmskjyacoswqtlcch0h5q31qvtyzhc9jr8\", \n\t\t\"avatar\": \"wks1y5b43bbdltgct9c85b1hijmlu7t6xmg4kuddb2nxllp9gzu0e8hqqjfms23k04fyv8f78fw4thnkokrqkhsyxcj9xb8kv0nxha5mo4kgj3yjxoogf8o6ecmmb2mmmbakoxhs9ugsm9rwk1cm0p53ia6lwcgx1mygu9e2u3zaeihuwbd09mhyp8sql02gt88i0z2cq40ifgmhdjl9p9u6bktq6g2a2oyqsg3rzuzulv9iw0bntbf5pumrf5\", \n\t\t\"mobile\": \"8m7tpq4s6ppq4phl4lxj5ictgv2scjsj1dqzr1iv04uas3h8c7i8fe5cvfm\", \n\t\t\"langId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"username\": \"dyyuejumiqkngvbabhp24rmjkd7i0mxa1ifhbypa14ytxqy2g4xsbqddvcpabxs3gccw874dl9azljw4jyvs3b902ppw8dbup5j80bh9cpxlrfpfrw1g680\", \n\t\t\"password\": \"ilu9n4qa6fwm0yd1tqo9kz948f4agzxzhbzqazpba2bewqls2ts8cgtnebukpq19rx7jgnr3j1di7qu09am2md3p64dwi7r2cum2nifyzioxxgd7aju406phho2zu1j8h0b00tspveqkkrzkru0upjk3cr0uckykju4bkkpk8wmv9d85q4ymp1z8896diei4pk08h8wj9iwts136ji0jdqojvrm38n4sri8t9ubat8fgkhxmvx5ppp83lnslqd\", \n\t\t\"rememberToken\": \"j3awd3ntts05jw5eopkumxyf1y7x98q2nv9j480unp0tzlyomgs171d7wkiv6uzslwrack9eq2eoi2yazwdpoplvv93w926rsh8me6tz1lqkj12pbab3oebbijoncnkxr0k84wnjlky1gahydiun3h693p5o4rjp04qcb6t3hy0qxepfcvwd7wumxv0aol2qxwr4lw66jtqonau6371mirvs2mjus6me5ji1p9vqyjios1t7tzmag8vuvapvlk\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreateUsers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreateUserInput]!)\n{\n\tiamCreateUsers (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"85b32736-a859-4082-8336-01b7de9a1ed1\", \n\t\t\t\"accountId\": \"908bd83a-f8c7-4e47-9b55-9c1937810ffd\", \n\t\t\t\"name\": \"Rustic Wooden Pants\", \n\t\t\t\"surname\": \"jk1fndlezg36vi4m1r8a5yx73erewax1ov0ztgdyj6d4xk0k713o9m22at8017220mrr6d0mbvjmuve35z8g6394l3g522obzlt9lkpylunne8hlcvc4xvo78tz1hlf5rbnbibkjq0r6yxihnaz66kf8rgf862aoytpddvkus78wjfotapcg87ztjnn99z39a15vhspe2ftg4bs961ge4qwosibcj37cis4kimx1op57dygnszddc7ky9134dh\", \n\t\t\t\"code\": \"xy60zlsc596b6l1hksoq0y3rs64dvorupd0agyuuaeazsvprk\", \n\t\t\t\"avatar\": \"gxpt9kgrxfjpzapfy4y9wzevzx5cz9r178axek98ycrb1y0k89vxmdwjytwbehophb66sdrqvpma4fa9j11dmpqp0a1fmgd1wxr6upnwff51opazw80cmk5fsmmtedmbvxtq4umdatmut0u127jwk08wkqkppah74oeve8v5spolnsvb7ukpl03b3ho0kwl6h2s0fkc0xbsnfxz0zsseqc7jfzui2rzzqwyv9uj2xrktxxfehso9ryzj4fape9\", \n\t\t\t\"mobile\": \"fajikftd18iz3hc0d3f09cz3nrpmsqelswnl9do0843yc4ri6c9wkj2qumy\", \n\t\t\t\"langId\": \"f3252462-773c-4448-9e90-41c5f7e19bb9\", \n\t\t\t\"username\": \"hldxnmtjb06a79txock84ns8mb8kjsnee84hd8culsjfz3mo6xer2ommapygsdyazd8f4hyncj6tib7rpgvjyy3o2c1oajl4bhoc55pka71121lt8o54bab\", \n\t\t\t\"password\": \"e2347guziafprdynxdjisssnyxcx1tee0t8pzixzr0s1jx4xwi71yw88vdtwdszf0dt2wzvp7ymg3lllc7t230wt476bnl4libdlluyey7j4vd68qi7nnmrtaa97mmued26q4fazykc8k2qubrc5nhzpcf9ziy04h6nzmal0x763gn3hg9nb56iwdig2kwmmari4qdt3uiksxsbrmj1erk629w5wb2l44b8fs2xrppsclnq87d4gtkpv0r3exl\", \n\t\t\t\"rememberToken\": \"nmiya3o420qh09nz41o1rr3t256i08w9s3bzq5khx7dloixkubuimlrx82iji8f8wjygxc3m9jwukvidv5egiewr4idb44z2x4i5kxzqg66pxm9trbzo2orp6r2seyns2jneinoj2vdjc9wa0na546wmo7g7rbfzit61x1c7c6806ohqd63vh0mwlp1ucqccqmaoqznf483tuxorpjsysmtaeqy1ol1ucxxys0dh65awwzb6kjwtjh67849kr5\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b0daf1a3-0ddf-45df-95b0-64adb742aca6\", \n\t\t\t\"accountId\": \"89c75482-14ae-4232-8371-d5c6f8beb82f\", \n\t\t\t\"name\": \"Practical Steel Car\", \n\t\t\t\"surname\": \"m0dgtahglga3tbl0qcdwesniaoo3trf0ohdfzvq71cgocjgib09c23koij2q1nyxdms6vh74eksb8iyzxjrn41frqwqpyzbcu4pvscd473bunb7ceejo0ctf3we5irrit8i5ezi66mbgh9m6zkx6r5nnq3t6owu3ab0ufzrzo9mlt3cqmukuwc2ad49snlsps31pgiq96c7f45ehdpkfvff2j5xzua4072l788n3w8unavtf7eihkocqfoma3k\", \n\t\t\t\"code\": \"59zj5n5ae7jm870y6k6j049vgn6qwj3hjdatvebdzm8a0eekl\", \n\t\t\t\"avatar\": \"9696pso3oevctvjhvphbxeabvb137m5mivroz92w4vaupel26rdpnatnx16au51ijrfagxvy1ugby27ur84ia4njyxqni81xe2lzx5vy3317mloy5p16dtex6s67ij52c0fvbbvmk9q61a39fwpwad98g8yk464f650434scsjjwxif127tumu3ftuwjqatpa954niozxowc4a0x7fh37dx6b854ivqbacck2k0uw1h7ad4b794dmqusktak8z\", \n\t\t\t\"mobile\": \"ltk772mq4h5ocasza5hm3xbn3edin57uju8wdtshc7bbgdvozcrlhmpn1if\", \n\t\t\t\"langId\": \"4669e03a-a43d-470f-b587-0e6738eab865\", \n\t\t\t\"username\": \"fjcadjyp2yeedmtfafoipuutiiz4jq55pojvdlwob6iafltm4p6kvbvznsxfaj0rsvsfohaq9bskja99vwfv4oq7suorvp5d038156116kwxzxunwhpp7yk\", \n\t\t\t\"password\": \"85i2hd5wokdmfsjw8hkxqawfg4urodxhi0l2jeevelbkec7l2l1p3jy79dobwbez31qenklb2gqv1v8ssk3b9w6t6irv2p70z8hm9xojv3ddbl0zs1njjgfqv7vwxpk2hcizmbq89psixzb7bwydt5fg1m3yf2cw7924znb36t39tydserl9hfj4eiz2q0o5mtafym5fsldtgzbfwy3ocgy05djdq7en1p3czy6okr6oc52vq8g7bnw4dmmpc4\", \n\t\t\t\"rememberToken\": \"45w3tjqpf9velxaq3tf7nhi6mumk766w7w7aephx62sct7pnekyr44d30oqbt4apg6vb5aom2x0dwxxf0gpbm60joz4ii7om8abr87rhlhacm33ty8kppvf0qq8bqw5uccczeo2ynabbdb1nfxgqkcl13ahktrb0sb8e3al3lfpg5k0exb4f1lhi7h0w908t1fktbf9xfocc7qh8jj5wtmzacgym6p4tmiuptrcatxpx2hhhnvo30lyy436phl\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"09535586-db73-45a3-a816-f3ab1eca304c\", \n\t\t\t\"accountId\": \"a23c77b6-c25e-487c-a58a-16beb802621b\", \n\t\t\t\"name\": \"Incredible Frozen Fish\", \n\t\t\t\"surname\": \"xn5avrz8mll9c7zw4marl7gekjlwfnmuf3wklpk2ka2yi2903jhhy13euzgcdvpmg5bnt0uck13ppfvb9detwvkbg4hpr9tywltxh5k6inpl24roh2yhc47gnu9tk0mr4rtvzw190r8cretzlfzx4fx2ruqfo7bwcalwear4wl2fz6o5o9copqjj3uvr0cdsgpxxwk49qaghhmk56nxca0k1s0s2i4630w6ovo15m0j4pqzruy8o1g4pnl7oe8\", \n\t\t\t\"code\": \"viey0k8356whjhp3w0d958zachkovha7x4vadqd12d2qebr1t\", \n\t\t\t\"avatar\": \"ukplcswf4bsis9xuuo29oicc8cky2d00cnru9cq6hz5g361l7ea8ewxwctawmevrt5hz8czyb1v7391p30z29xlr4289g1iglvbm5v52rhgnvlu6m9mw8ufeaslqg8fv5r6blp10qhgkhnu7ii792qd4n7nmlq1ikasctau5l79de9gybbnjile289bzp499nhb1g2iwukpyyxz3ccbucxs5yf2kqzybvp4sm4769mhd7l3e0wydzlbtm23tfr\", \n\t\t\t\"mobile\": \"20i2qr49j2ncrr1pqgkwtmq2jiahzcvldx5x7ifx22399pu4izk3jxic5kf\", \n\t\t\t\"langId\": \"b0128c44-79b9-4120-a168-78cd0083a730\", \n\t\t\t\"username\": \"xgu2ahinjrixx2kblvedleixds8y7ysjoa5v1j3wq26vwqv74ihwhcbv4fnoarp2518qywjo2eiddayj3mppc2kkfautmxgjz6z5vl5fgnmr1c8d9xp8qax\", \n\t\t\t\"password\": \"x7levldf4wjjooftntd06eeqvupwxxw022fsdi0e6wpsw3p3yzhq6zqbdt69hvlgqq5bzgx2wzu49f5u4fztdlj1b1g466ggb9uv4v6rzul0dhaq2b2tjq3thua52z8z9ygw6zpna1qxen69x6vbsfme46p7l9e4xhorw6ne7bg7bgtvtf8ec0yi2wpx3yoo8281tod1mqjc8lxi2dv1uyill2fw7h5v5jgvvtfuce8hgo3enmbzw8n37ma6c9\", \n\t\t\t\"rememberToken\": \"kt644lre1z5mxuxk2cgthpnm5ks3ty2oli4btwpwj341wq3t7sj1i6qvvmi25jta4k9ka5pj5oiei37w3v305rxln45go3d5n59hc5k851ut9gdocmz7buxnx14guvztploio7kn7qkgl6sw3f33xok94is7md48s19rd0g9tjp1h0x86hyiza4yaf1vogy5pnxn50ouqvjhd4wk7grjorqnv2b1m6oi5x4vgucoq7t78dsazb1e27s85zo113\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"974cbe82-068f-4504-96c9-f961c90e55b2\", \n\t\t\t\"accountId\": \"688a5152-8b10-45a5-819d-bdd98d0219d2\", \n\t\t\t\"name\": \"Generic Wooden Hat\", \n\t\t\t\"surname\": \"ljmc2q7mdnko0xse30l54jz9avsupygl5c98yk4ezdvz3v9j0963wta687tmnj9805q3net918xlxdm4p2lvdgo4insh4qhzds1ofq11lrpaznkot6y1muyonkss88861rva0mxbwn4z7z2ezjjj1eurrzwuz85365t5ly8qerltewuat4a9lw1c5z6iwget8jk8ydblmtchral02w01rbl4cpcoww3vlx76qvbvt7994dnerqoqoiq6x2ujsn\", \n\t\t\t\"code\": \"50snqmaszg9pq6o7t6zwtmp5dtxohfwdcwxs786v6lfu1sgkj\", \n\t\t\t\"avatar\": \"qsvjmxj33bttcp4rvvkjboj1hdgsga71vq2j62faf26ygx9xezz4xihf8nnvkwkynlqw6zla222dlepbq0dy65pr7g1lqmgxc1q4va1vrptsq2qja6atoouwg2ksw0xfox7pps784vj29vbsrbllmplbufqtumk6mfwhe42ozm8bprxs4lnsp2i5dwdvkfdi9g30jho7s62dw9ipum4tqf86glbi9m5wxxzg0aw4ygypwvqt7vry1kkdw8eftb\", \n\t\t\t\"mobile\": \"e87idnd79jzwcvb72cyijsi9ey1wkdgr9ic3qvsrgtvpsh1brmvdr0h81uj\", \n\t\t\t\"langId\": \"72088cdb-1869-4ade-853c-0084e209b8f7\", \n\t\t\t\"username\": \"grr5v9u134hc0uazo68k5b5onqxm617tgkjtnwmub7nzk8cy8fvdvz5im7lug7ouxj7ms5m22vbbdnm8yty3twgvkrg7tpbuqhld1mkueogqqhb5c9m8ikg\", \n\t\t\t\"password\": \"q6a9ljhb4y8x71wr6hvst6106drw44dpskcqc6dfdr3jdw4np0xumu1ak1nsh9ut6xr9r4o0w4khe7dyv0ld45hkldkxzjpxcnmkulusvdenhy8372gda57riv539z810wyazsiw3p8z84ttr5j0riyo4nn6qzc0hg2xtf1cnjtxkkzlguxuplv7ysf2atqygm5dguriyt8j20re7fhur1x0g3057xzlnokmv341ai5u9jnen9qxhqhx4imoww\", \n\t\t\t\"rememberToken\": \"px1zhqw9p933zebsp9d743krwhr3zdblutt0obcngbwhh05034nvo4wbozuj9j677f7gmflnuiokhngvuucexgdg7zu85q0o1njcy8a6kdn81ecoygqglqhjrtrnfrkd2eldbexvg0xro4o5mbq1alk5poggtz7ntoo9o1zzrkrmyl4u51h0gwvxxpdvszv1wr87wqm3g7kxv62q8s9q60pfjsxoq9wco3slzbbxb166icialqx1r12xelue25\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f4b48ca5-e84a-44bd-b2c5-2aefde726117\", \n\t\t\t\"accountId\": \"a7945da0-9b74-48c1-a9ce-d1953ee64548\", \n\t\t\t\"name\": \"Fantastic Fresh Computer\", \n\t\t\t\"surname\": \"v0n0xveq04ukw9nyibxkvqece57mof6f2gmudo6o32t3kuz4ihfenrjhyvyqoq1qrqwvlj8m6x1buzjcpuuif1hf6zkt7jqfj7t1hob0gooatx72hx2tv1z07zdnel97ksce9oopy32pbd2go9wkhk49ab1m57frea5yu5evv41lh0yalt4ouv1dbvei03tqq7d6q3bkqmjsaueoxbtmozm29oseva6ktqv19xftq5t4dszzairsmya7j853w8\", \n\t\t\t\"code\": \"lr40jikro2n2h03y8hhqf58711vwxao1zt15vrn1xuh37y55h\", \n\t\t\t\"avatar\": \"n0hccye82n4ev1gg8txxsxki5l16mbr3loo5kst9qvabpuguzaa1j1aqt3q7jg3v3n38gpm6gqbhn8y0uy8vo8yks03eqbte1fxnuxzq1zckchzc3t1bwys5hj6e0t04rratwl1olp4vfprrcrupifrz50i0nt6lhmtxjcgqoilkgbu9igtqs2n4g4txwksg7sdrcoecnvaqpchs6dkogh7za5o18p4j5f4gqfy2p9sv0f823w0bxfkwvtrkk3\", \n\t\t\t\"mobile\": \"65o0fldd6w2rv6q6vw2qwii8yb2rp59tauz96hixydzard70ii8r0yoimrn\", \n\t\t\t\"langId\": \"6c741934-e719-4749-97ec-06b9070c293d\", \n\t\t\t\"username\": \"sbsc8fo4pquzqqy5d8z8t20vobgcezjj48dvtu7hfw0mpnsbkrqwcql2tfc2u74p6advjhuv9ij2906sa4k9ebk9is5wo24u79klarz6z6f3onirajn9ke7\", \n\t\t\t\"password\": \"ebfqirfdqr7ucjaj5qbttv3qf8yy7p90zne5l64s5y3ymilr4ws968xipgryesixbe7ioykzpn0vu51m5c782zgcqm9lapdj1f6mest40s0j6qtxs0r6hppjxoo6zazl8r82lcan8s8qwe3u1gkrn3e4w48a8prvityra1je32dk9wwacrvluci5f995cgllop23fie1gh8nsscoml9l4ehsnwjq6rwoz9zzq11qse52imspjk5rb21ta9awcv\", \n\t\t\t\"rememberToken\": \"xvio9oqnidmn5qy1vmmr7u90uveeq1eowbzkg6wjlw2l0u5wcwqi9se4k3jw0aqblq0r89ggne0oaq8mapj1q2ln7p2g4wdn9lznrw0iuupyma1nsc8dz0ilv6u4k7d1mjjycm8oq8v90i9isyxd8j1amwkb7ylr5wkw7iunie9n0xawjjv4xf1tvstiqwb1v4fy8htpqne8h4m6wmhf9ovqfkg8p2kz02jytky9ow7ejcige7p00qbzssht51\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"decab0e6-3957-4347-b4ff-25f94e25af23\", \n\t\t\t\"accountId\": \"6d86caca-a0a4-421e-af3b-281b6fcc21f7\", \n\t\t\t\"name\": \"Licensed Frozen Shirt\", \n\t\t\t\"surname\": \"ppuygcqnfqniicp2s1u3hhllr06wgai7pz8if2d9mzjb5n746zv12r66ciik92hn8z4vd48fyx01xhqkwdn4gpxvk8sn10a7guwdnapwz6to76vbum7s8iw4bz0qomehvi2ouu559lzwmftlmrnmv0g76bn4l4ls8tqfc12eksf7vg81znaoarrv1tqidd495gmyvro1m8p12ji7crej736pbhcmhd1xyq4lsuh5ouflxvynfhcwxp0x0heinw\", \n\t\t\t\"code\": \"jrh3ewbhy8o77qacsm6i80gaz8jec6anjfs5odzhg2wnl6z3t\", \n\t\t\t\"avatar\": \"rswyj59zocl1qne03iox69ihqb323dl1dv9ib4cedeyg8gwp59mrnhvkfxb855dn6a104qxrde49cyoj7oxuw1ieq4tee8bb7r1e18wljtzrvw7jrt3aid3tgwozh03lxzr1bkpa0ti2ux4w0npddppkeb11p2fx7rlcfwdjp71fuav24pofv8mxj1xd095og7g9p3h9sj0oh77r8f21fx2zpnsvo85041trfkx10x2pqybwcehq8zgtejmiv4\", \n\t\t\t\"mobile\": \"92key3273hw9vqvah17g7egz5wrrrssp9c1qg2d40x3qnvlhwbveqv6vh14\", \n\t\t\t\"langId\": \"6172ff90-a29d-49f8-9d99-e22f8e85791d\", \n\t\t\t\"username\": \"h64gcdbwvp7xezjoajurcqljluq2bhdgbi4cuxckyi1exksxf1nv1lhqsxjukq8o1q4b7fvw2in8ud9w8brnv9zqjsxs63g85lyst6an4x1yk6o25x5tiz2\", \n\t\t\t\"password\": \"efch3inde17sa9rm3ipuhq7akw54pc89ha89ead2npzr1lj017kuv9ue8rymjo4mn1ro9g4xexvzl6yprasoybb2gz6ty7e5uw861hjtmefp0eqs7h4gj8786whwv6ngja752tlk5wi7uq2dmm7kydyje1onx7hqpjeaqef3m1661myf1x3a2eol0xcwu4ne5vcaf3s89u828u62mn93kvfp8mc28dxogqnbgjxkylgpbrb4fkedwaowbb4zwk\", \n\t\t\t\"rememberToken\": \"dhk4022xxxjq2h9epalfhxfrny052jsjuw8396jf6bost2c3eftfe095e4tyryo6060w2yzwg9a7y3b6vxb1rfbaaq1our8psxtb6ujnesmnalh0qeipdt7eyjenesreiaa2sb1fqg8s1rimua3u230ibf9u748zx779e8znkfvdsyhfq1ylyp8a08d1k4pc816vc3aqwa1pshl50shq212sh9oy2tcayld5fr549mvr97gsh9ofc7rvirqr7x\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9d68fa9b-7448-421d-8d08-2f1522b9a2ee\", \n\t\t\t\"accountId\": \"c96f606c-57d5-4bfb-a816-dbfe592ce98b\", \n\t\t\t\"name\": \"Ergonomic Rubber Mouse\", \n\t\t\t\"surname\": \"dyxdg6vywcx7dacs34bzypxlts335lkgbypkurw31xetbdoe82ra9d535ae78kauhmw4nn9on8eam6k0xjf6rvlih5gvrmbfu4cyfogto34x6jqs6gexgifw32u935d9hs5v1udpekf49wttep0qks5vko80pfti1km85hs1pe5t8vigqt7401un0shomg9mque06rn17i9nrdm18d9juv8tai0foc7ypinif1v10vs04dpzsvz2qjnnohn007\", \n\t\t\t\"code\": \"z834w8q2uy7bk0kgab3xg3cugyd7f57w8bfgzccaal3dm840z\", \n\t\t\t\"avatar\": \"i1d28lszyraoz3zy9raekb6jxc2da5gzx9e9k283mb2xo6afv93onhn2c26sgycy7y6qg6xo32bka11bc7hd3e4c2jwcurl524xqqbdmwa5ea6vy0veq95945l9m92lbh9sxhenvnx64qtdcjaet759lafb8g6bqhtxhda7lbkk7qt41dxah6b2nffz3pxtdx3pvz3p4d2bmt4gr5ua1qbytk9ieyb8x6xenzpapg4z9xypufs5ok9r52e73at\", \n\t\t\t\"mobile\": \"6izpgsz1r9g5qlvvceiagwvkwyxr871pdge3pc4gjgsi6vzx9riis57rh1f\", \n\t\t\t\"langId\": \"2d6b3836-db8e-46a1-ab92-ddb897ef126a\", \n\t\t\t\"username\": \"12yo8o2m7iwkwvrmqkkm0x7w44wmt0cj55kthgsquj69uqhh3k7sml31nmr6ej2epv50n33pllrmcjlev4mt6c3g97cj3ya7g983snjzgsxyrdoy1na2on5\", \n\t\t\t\"password\": \"8cf2hrbysz8xi78ky8rc74zh0iwpbsqg6vgdd9olvrbxladn5nyhnqf8gbwgjwtnqhcdwl62iy2ak2bfbbkxlqm2bmgn0w41180r1uccqjtpgrvsmofhd7xn4rgbpt02jpenc20xiz8zym8eszr0y3wiy6zk4cmsksyemal1ohz892vjsl7xwbuki3dglbq0i94kdw074vcqheq0vgmq34l8hy17o40qxsyvyz8f68ckclukzjha2j7v8sr0e6\", \n\t\t\t\"rememberToken\": \"9fgwunaimr4xw3lntkti7iy766c6802m82o1gmfzlejtiox3milqbkasmk1gzc9608nirz6bqyktjoe14sxzo429909hfzsgkcrzf4psolryivrzfcpsc6medsxf0dy6badnwlj7c68nja68c68wpt5bybyhp3qhvlwyjadk6237qkui6tchvo355qy6apm3w7a5gnutfle5jf1cnebwulb697satoqru96byvggy51qw92k1viymcdbhlnudv\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f8fbae66-55ec-4892-a186-9d6dca5ea7dd\", \n\t\t\t\"accountId\": \"33252248-ae98-491e-b1b3-e0faae85418f\", \n\t\t\t\"name\": \"Intelligent Soft Shoes\", \n\t\t\t\"surname\": \"m985nyfuw4vvocbadoymms8ivore6ywhyahv2im817phto91qrt2sdb1x3iueln2i9h52h3etbmxaqj1odhahj5g34wuixv3g8q8ycou0s3865kwl7hu4nmwau64k5yjfzd5i87166rfjuj8xmdtaxdckrnsmbvip2hba2uzrd7xsy2bvs1zc21gfqcm5rlb5nbfh3rwq9jig46y1twnrjo1b3zw7m5fonwzyxv2vbrrmpjucnh8q2a6ipj1qv\", \n\t\t\t\"code\": \"naodevvrrh2cxdvqgnwctq6hv2wglz7c7i1br27n8eat45pbl\", \n\t\t\t\"avatar\": \"3myc9mxeauicv67eyvmgg0w3st8sfbsshfxlwu2t1mjy3iqgeozutjm2t4nf8d7wc8x49vdle32szgt5um7nz1un7bajnnib6erqmrcbi40d34ealygfjx3omm5ymvkh38uqkmvlpfye8w3atguzi3vfvpek4l9dou8kl10siobi1k5d29zlcqb1wnoullp3h5ezgexwgfgkdjzjzvuu8l0d7traqy8qrlfb1rzznpacwjaah9p84qxe9fu18x\", \n\t\t\t\"mobile\": \"ccsr94vvxlfhsgvyd2kd7xlzhxzyfqpx6vqiipy59ye0es9gc1n3j2t16le\", \n\t\t\t\"langId\": \"c6076c65-7ee3-4eff-885e-529bbd96adaf\", \n\t\t\t\"username\": \"tat1ov0e3ny5p2a8xiqy5za12ch3kn4ce38p9uxhdu6rzv7t69na5mc6jttmfd7avopi3o839lldiyyp7yz89heapn185w0q87yyjwx2goj5iw2w80qtkjo\", \n\t\t\t\"password\": \"64xrt7j05heytaw5u4b7vhqi8zufs691arbsm5qtwyaznnvvtroiqo61b9v94u57p4ftzzmhr7zwi1u2f0ou6ci7h1l61rsoiy5n9gdcimaqxr6zwhyqyg3q0f9mz2hpoehqndajpl5vlwwio8qhfpyk9ca955coxek3o1fkd2v18639j54t390zsf9uq5r0frt36lp8chueg2t5g6cowl1zta8xfz7uweclgvoui2pw0zd5t1b3fvtqdrmg1b\", \n\t\t\t\"rememberToken\": \"g8ykyptilw4uvale9qtcyi7nd3crmyjo3rwkzhvvo2d11vy3i67h8h358dmf85r3cypedorvjt6mdj9aqi1m2xfuhtnb0ckhbo58hm9axq1551ovrin5d79v38ebfrgaf5pox2ep7ickfx5ups06pbnzad4hn3a7n69gfzwzd2sihvaez1x0m4k3xq29do5kbcr8r3tm3a486axu7ynony9nf49phl67mjuglbt0p931r0c7fzka2s3zg3ixti\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ef7c2dff-7af5-446e-8b03-871b3e9f4558\", \n\t\t\t\"accountId\": \"3de13098-f76f-4f01-b52f-3c8e454e83a8\", \n\t\t\t\"name\": \"Rustic Metal Chicken\", \n\t\t\t\"surname\": \"mfnkdq41eny24t5fyd3pgqz8dvboi4ovxok81ni7mcg9mhu2uoazs1z96s9j9sbwfklz51y975g8v6q4li9hp4w3ubbkaa3zeb3t0memh2h31l1yzmqnfh25sixpnsf9vrosddrr4t20ddti482kgmnaxlp0g80erjwlj9fwj1ycoq2bwamhece9shdnjk2jgxj3opzws9jrpzxq7xr8ev8jpjunwpb36wzj735logp4r2pczlwb0mjs1sxk8c\", \n\t\t\t\"code\": \"rc3ha23nuam0zvtgnjjpunfhx8l5lwkm08qzjbmcxyypd1w9g\", \n\t\t\t\"avatar\": \"iliq1jkpcbooaxp736akiwhpvuzspxyvdvzu34ag8mzpiqafb6fagemc7qeclqm7v023qkq2qd3zx17njkf6a6slq0txvxb5p1h3u9fopf1jp114aq5rix68tntn33xb6aivo92773rakcsyb1d1o3j4srb6u2kp0tv1tq48fo15oz02o97rv33wajfzccrzsg34h7pmadb0f2thqmb56qduk3iqz3p00qc5gxw10gr0yx0f6bxgmohfzl8yio\", \n\t\t\t\"mobile\": \"4o6wlkp3vyr7htvoq7gwuca61b824hyect3m5mhp19om34dsrb88se5ustk\", \n\t\t\t\"langId\": \"6bd5f309-a782-4624-8ee7-868b92d959bc\", \n\t\t\t\"username\": \"t5w6kp564xd9jilrfufi4ps4tzag9m22r6pd943m84gaefldxiewvvclhdlq5mxe6lvvz8laz5owtboe3yq2k8pm5ffvd98sg2eigai01spyu6hmim1hsmn\", \n\t\t\t\"password\": \"3se4n5rrll5wjo9s0rlzy4rwpc6m4by6nxk7y8stt6cb3btqic55vuzkxdu96zveic4h6x6a0irl3h2gx2smxosy99g8lxke9q67t25ds1lg82ggam9xzfza6ye6m0luj2335rjpp1uvy7tmwveru0dp94i0tv1o7ayrvlwhdsk582ruf8a5eojwlmpl7ai8yiqonsq4bo1utqyfjctiqsrvthxmcxhuabp2waz2v28rvhk3fjf1t1e9i70zjh\", \n\t\t\t\"rememberToken\": \"lyjqzyyomt8anbza615xw0qdrc9gkq59ddmqvlish06ef5q07jfz1dtbfzwdl54a8xygxiyvbkwzuekdp9q31b4vp20ew849w0vdse7jzxa3j7wvp6jb9dhlzneifsvk54zwvwqr0laep9cpsot9tcyho8s31uuiw7zgwallz68xoe5f39zpzjc2e95tpcp28myjki2jetar6xh1j0harkpnoybmicfjhumk986i1lii4jiz7qolnykk14mtiz\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"53de4d41-4e3b-4b10-bc6a-dc2e03fa0a6d\", \n\t\t\t\"accountId\": \"a8ae5b65-a282-4e64-af5d-39c5cf2aad15\", \n\t\t\t\"name\": \"Unbranded Rubber Sausages\", \n\t\t\t\"surname\": \"2l4wbakd2epug79k5fvycaygt6z0svd6h4x33r4o19z0mb7cr430ahdyfuf6cku5x9kqunina3vclkp2gyh74t5qgq9furuk3sgoexrr00b2obqkvyd8ol1qgjn0sd5zyeilz3j8l5ioonmhezcxxcvwuhv3oj0yk1yxpdej6lcr96wme0l006o36zy49c29zamxfz6ity7jv8nrzr8x3m3wnjuhebv4f27wch5jcc80479dj8ugbixib2qb3b\", \n\t\t\t\"code\": \"x0k0g5jzjxxlhp3mko0oylkl4aqon6ympm3b7g178isl4htt7\", \n\t\t\t\"avatar\": \"6fdx310891bgi86tb3ehomonj24ltv9pbbh0q3cfeuklecio8cqxkcuq4y3yp7irk9p32g6t3xm7fsy3rmbjzmzyhrxyx2omsgwywjq6yxkwx2uat6oxkbdm1dw5qufy8nb5jjvcg15t65mc494owo6wu3sw6v3anx7myfj0jm9hh7wl33iawkpt5i49ga56dq9leueq2emps53s76c5xlngwr4eqhu33wt8klb618v8vhjqbf88iymzszfpm7\", \n\t\t\t\"mobile\": \"dz7qjrg8alli6rho97guqwhy5istypot7i4mbo97neifhu94umtndwm0awo\", \n\t\t\t\"langId\": \"494d9cf3-4b49-4384-acee-a728f6e76e05\", \n\t\t\t\"username\": \"t55y5vz6uf34nraua4i0y6b4xg73ttugwftm7j33nsk8nf83f765h5h8tne4r8wjt5sh8h55yy1hqji9rqwdplgmum5xo69ys3zas2a177wy3g7xipr8adz\", \n\t\t\t\"password\": \"kja0w02kzslku74ly54t3p3jzgsuu9yoepvkpo9sl7crp4ski8kl5jelxdnplsnervqd2lfhb59m4h1afk90b532faj1474mod9xcb0hmfd3qenouht0da9s63cojnb32qtjv6k7rtpcqym56hmt23ea2ikje7kyq204r6sxcie2qyi4w5yzzs03mbprbtlzukwt0emuz42ectaslq3yumzra33cje2j20bbegn4vn8reepkklu5pn09oa0gps\", \n\t\t\t\"rememberToken\": \"wpcgcs0ccafn6f3pceb7ha0dpocxu6ott3nx7zxn9bhnojxp2vcs381eb05oxytcefy8pjlyuto3r4vx40fsjwbrhb8aij9daf3kiju3qhkihjks6saacmppitmabqhku6zpcrv0iai98gb56lxwsh3no2blbecuv9x55denh4cdwdfe6848wey7i3935w75kavhpbdx4u5t96jzrxihzxbc3xmf85vxff8zgcdjism5ns3tzdk3h3lfr18m1q\", \n\t\t\t\"data\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginateUsers",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateUsers (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetUsers",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetUsers (query: $query)\n\t{\n\t\tid\n\t\taccountId\n\t\tname\n\t\tsurname\n\t\tcode\n\t\tavatar\n\t\tmobile\n\t\tlangId\n\t\tusername\n\t\tpassword\n\t\trememberToken\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindUser",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindUser (query: $query)\n\t{\n\t\tid\n\t\taccountId\n\t\tname\n\t\tsurname\n\t\tcode\n\t\tavatar\n\t\tmobile\n\t\tlangId\n\t\tusername\n\t\tpassword\n\t\trememberToken\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindUserById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindUserById (id:$id)\n\t{\n\t\tid\n\t\taccountId\n\t\tname\n\t\tsurname\n\t\tcode\n\t\tavatar\n\t\tmobile\n\t\tlangId\n\t\tusername\n\t\tpassword\n\t\trememberToken\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdateUserInput!)\n{\n\tiamUpdateUser (payload:$payload)\n\t{\n\t\tid\n\t\taccountId\n\t\tname\n\t\tsurname\n\t\tcode\n\t\tavatar\n\t\tmobile\n\t\tlangId\n\t\tusername\n\t\tpassword\n\t\trememberToken\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Tasty Granite Pizza\", \n\t\t\"surname\": \"nzmggobsqahm33h1kychb87t6jco04pim90hwaer9mmwzzcqyasy2b02gayu8po5o50ppe8o91ozkgl2g6e22e4gnavjkbyc9dehaoxt50pduujnda54zo1zt0tj35gxo1t142xet1p9s0glti2a2w9zxaeu4xw46rb5f1dm0w61tdc1htzd6nn4ypc3l13xs1tj1uhzafsut1rj5o2m343w1xlqc5hyus0yew7apm6udaynpwplfj1b5id5zu\", \n\t\t\"code\": \"8sbka5enh70jyuxht627n02ub05h0mx6wqvzycglffyki6hmd\", \n\t\t\"avatar\": \"1ygj8idbt7dqva0l78wb4pfvc4u2aoafyt3jkt6qc9a8fshzr2lfls3skwew2zxe5mqf37yolzd3mr66tar4vngopckqj0tul31ysj939zirboqhdsa6t574zt5mrnfx5tox1eikwjmtpkp1qubynbd0knkermf7p04djyxl8m878f14b89u6as6lr9rym9bjjwbjr9rqq5i4vpn1xgz4xqhfpt293w2hbqarblfe9gljedsotde62mhjt69zx\", \n\t\t\"mobile\": \"quru3gnb0ow0kk7z2b98th9x372um9ayu61g71vktc32x8pr4r0x5qn9sdy\", \n\t\t\"langId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"username\": \"fp3b8qm1ovjjh4tjdex66pdc5vkwr92meg4q0yq1e7ivm4ehwl8i7dqsilzavc92i8tu3b2qev5e58b06s5ogea8xtci69kffp2igzps5k1k67llsyktbya\", \n\t\t\"password\": \"7dh7qjgclhtb1j1o05yat7c3oyikif91ddtr5todc9fktgw27qgigab5f3nm38als6d8ylnx83ao0x8ok6dr0epmmwsohifhawy13dcyayzp20f296hdt6qvcbq2rkc5azpbfx9o2r7ap53rbdosxeg9ndqy9jnms50hsn3041dd9udi9bthcz47vq9tm5svgimiq4u6uon7jf6ff9ehxhkfjigqp26cvltbjaq4177p7b7c9caioiwo7rhg74\", \n\t\t\"rememberToken\": \"4hna785ngali34vvzgy9zld6wt23gwlihxdybrwoe1sl4dluswynyfmyss1e50xjfk7hiw5u43wr8vg445604orh5xrxit4hxmy7igb7ekm3abvi8vqnblxcpi33w2ic9wgvdxshc9jm90cpkztcamc1j19m8lpnluwmkti29p0u988phtviqmdj959svm5n5024brrdcmub5s9s0ozk6jki79vqmzorwvkk76t6n1urze64cc8f2jhkjcvfd9\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteUserById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteUserById (id:$id)\n\t{\n\t\tid\n\t\taccountId\n\t\tname\n\t\tsurname\n\t\tcode\n\t\tavatar\n\t\tmobile\n\t\tlangId\n\t\tusername\n\t\tpassword\n\t\trememberToken\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteUsers",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteUsers (query: $query)\n\t{\n\t\tid\n\t\taccountId\n\t\tname\n\t\tsurname\n\t\tcode\n\t\tavatar\n\t\tmobile\n\t\tlangId\n\t\tusername\n\t\tpassword\n\t\trememberToken\n\t\tdata\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/user/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handmade Steel Keyboard\", \n\t\"surname\": \"aqbzenf9uw63h60guqe9neosqeoakdxlvjdsu9n542m7hy322c2jleshhwxttbz2kmafec66behf7drg6hwoh7ei1odoswpnvlecj7go2uhd09ski7sqtjl0caj5k4pcdv68n494u6m8fkyyp90b813nxnsgdex0g6x8orfka3noxu2kpd5v5sjxbhjxkbfsvu4v40r77nhvt468pglul1z6icz4owqkmmol8kl9v120upklc5pltiyf65ukug\", \n\t\"code\": \"ql5f3otbrxvd2etosgiav9hts2pzns2o82uzk9amxc0x333ko\", \n\t\"avatar\": \"79gnmzopbrgbtkydw27s2flv8b9hl2ubfyxnx30y7kbt062pwnl9vs6tywc3acumuj8u2vf1pqzb931oktredvsqv555thejg13npuflyzfedpnelfix7kehlw7tnmfh3xc5a5u2pshdzyr8g9bky5bqew3q9m603o89cxpdc65yaf82nbb4sk6mrhv0r31151i2yvy28tckver49mjxarlofec77tr6jg0s59dfvsisc1ewgzhre1s9dnxit8\", \n\t\"mobile\": \"jdn3a2a4wznuuhsccsmngx9zgwpqht4usbiskvb4f36gv4f7giq782zvk0x\", \n\t\"langId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"username\": \"a1n9ys1txctsw4pv0pm438t5mpieb38skq8cx61iz0qqh5qf4ykstx5fm40y3m21oi0grn7ta8uld4lml9eb2r8xiia7ppvqmirzm6bwt4sz9qtuekjcc8a\", \n\t\"password\": \"0kbj8hgys2tgphp4iuitx2il3wya2z850hqux07u71562p4q98opci2nyienmd1mdd3j5b4vc4dwhwcsg8bdjmg9oycn4sbh2iye849mwgjob5p65m9v6vv7a5d18bm50n9pfioyyx8o1an45bz6d1lcoy5uymybyckidk2qi6s2xzzl5athvw7ichbf0a7vilus001dgtvqybab6cod7lheyh0x17058h2eqw9knmivj0kak3e47g70odvbxk\", \n\t\"rememberToken\": \"iwwdvj5y92kkjvbpudwzz8k5r4e9fp8hss7mj8f0l5j35hakuuykv5gzkswx4p63vqasehti69o213qg3r5du4zkxd360iw4g5fywzc5fdsic0e2nyd60tfl7l8z39cs43g57fsp9a5r0gwxsjsy9gctn2eb2arrodscnb4oq2vicrv456ws3ntg9d54z0x2hhqkrowc8378npeq482qqyzgwrhi03iefxnqch8la7sqj1gv7tlc61pjqeebdp\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/user/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"user",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/users/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"6b15da4c-fdee-45bb-90da-b20669f44831\", \n\t\t\"accountId\": \"2aeba82b-f764-44b8-83cf-6bdee2b8a11f\", \n\t\t\"name\": \"Sleek Metal Sausages\", \n\t\t\"surname\": \"sxui2kl04y30u0y8t84yyg6tbsw21n966cb7uo8x9e3l6ks3cz02e3cze4zl9f2wywrobque5ied6smgpcsp69jicfs9xtwzlet0yp84it75x5gjbq9kj9391z75a6ciyq6t91lkzlkc5hmnunjt6cyf85p70qtx75k7kc033c8cf27ve0tamjj65xnalw02ru6oe11za8i3zx6z6pkic44wtgwm6gqs628nxq7ief253oh60lteuoggmidsxm\", \n\t\t\"code\": \"9a5t8mo140az7wczhdi2aos0ssf679g731u1puz2ms8tnhhgs\", \n\t\t\"avatar\": \"yn7wc0c0nwbqm50dx1y5qrb98d8zg8h1myss19oroizekq17jr56iznmhr8x97xu3ck2kmca4r62whttpo3d2dgidveoir2fs8xcbbn9v6qrmrh0yl43mdev2mprd572joisohhegy23sz0ac00rzg2vu2snkz5rsjmyx648fk7lyebthqczywa3slcfvms4g2ksjlatmyfxv5lz5hl0bg9i17ececusxmldblthgwtfcns53j6628zk4j6uwq\", \n\t\t\"mobile\": \"djcn3nn1ku7yjuxfu6ycocvbkhw7vgen238dyabcai391mu11415lfkuvpi\", \n\t\t\"langId\": \"8efa8780-5a83-4125-b46d-c65341d0af11\", \n\t\t\"username\": \"5ngj5xgu514m1ml8ehuxhx2hjxljhqss8mj1vy5llf8m28vsqcot4ez60r3is5mjtqbugxauwa4h5ayrk6rvuk95q4zftbfc4wagp60le55j0j4u0izcs83\", \n\t\t\"password\": \"zbnrjd7hgppywuad2ys7irt37kzr5j1nuf9ggo6ewxcegympwea2qqneqxykucsvr8wqr24onqek13cu1bf78b0ku0ae7dszbn9gvr4ylyujxi5zpg1404fubkgkmjymri64b8w68wrz3z114ipoiwr5y3b4bvmf07n13pt9z2j06ggenaa1vdc10ka7qwgb472bbzbj2mf5f0fqz8k6u44ejaa2aw5vqar76xwsmw4ch80738m6bdvi2fbuje\", \n\t\t\"rememberToken\": \"8h586102uiz1x8emo2lbv9i5lip893dkyri5zt3g5gerigwvkwpcqqkh1jkpqjajgioihkfun869ye6wqla07b44kl1nbi8v0fbfatbr4bp690nlx0qzxnbdivfea9vlwdt9qeka8thj7w79y6um0w83fi3ts2sx4rv2v8yldlmz5370akg3r7lpw70zqozpj1455t4kc1csx52jeduubd1rulphtzmrxadx94p07lyyzihe5y4b9wu36rzcpw\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b5861155-ae80-4730-84b7-0921a51db12d\", \n\t\t\"accountId\": \"2c7bc43d-a8f6-4b17-b70a-88b51244d753\", \n\t\t\"name\": \"Practical Wooden Keyboard\", \n\t\t\"surname\": \"sx83iciu4w7ibgpm6f3jka6mwv42m92qphgw1o9svi98y319vfxgfflg8qqsetadr1bqf2mjboq6g55e7xtu0h1dgnlwm6668nxt0vczki47rfysvyz61baatz88weme8ohqkvkadmdvnds4jsn1c2kdkrguwj62e4gaarz0ejgdtgndghsosvxbdoptu6z8h3xbd993f618f0aigqibwl0az0v9anwa1sdglvbh8w4ka0ctz2i10fy8s7ablc\", \n\t\t\"code\": \"jpvy6jtlq9go6tsiilhonrliog2td2d0if87h3rbt6t1gkbet\", \n\t\t\"avatar\": \"combt8yl8f3ebflcl92bp9po3azry0clxeekph9dlurml22s9ss3fg3i5txx63s2tmxq2ra5i26lmbaksyse9cbly96moykp5pq21udjwm2woccnaer2mp05ihipu8a0dms78v1ppyh6n7z1aexn6bvl6g15br5k8u5a90o2i0emtg2lf3eur47runndg23l9tc0oqcb0xuedp8ez39yfy8bess8ne3dx90gp9hejyalp39wi7ojlvnx8fi077\", \n\t\t\"mobile\": \"zios8qkmwxkc273yi60heg7zjwiz5at28c6olkzzokjwfbpbk012om5kf4x\", \n\t\t\"langId\": \"36df9168-8ba1-4374-9787-146b3f483482\", \n\t\t\"username\": \"se1638454trc1eluusu2qxsovg5zrxbpzi7ahwa3sxmd2m7w6xoeoks0wfnu9ggpbjh3jplsuoqgraxcx22cyj1lh7zsno08q9t1hfeuacsnfmehrw7gclf\", \n\t\t\"password\": \"qygj89nb3semerkclzbyjr0pgqh391jptwdqgfm0m1rr56ya6da2bg55qpt5egu17xexqys4s5z4vsivgbpcl28yqw051kwnrrvrvuatsp0a2lk05c338etd1jh4drtvxf05z2xilco28um7l5w8ugftddupre23pgmgshkau8lah37bhli096hhhczl3lprbxd4x04mjhmulllx7umk7vouupg6jvs03po3fujqwxg07dky0geh70m6d9uqvs\", \n\t\t\"rememberToken\": \"moo248mdl1hbk5twes1je27ghfbrzzn0siqi6b0v0w9eu9tozz5fjmljo4qm0x6dwdkv5q2b2edom4kg9ns9czf9p3cbgf62455j0kp3njydvtq4pduho4985xr3sl7bxalrolxovh4kwn1qj7b7kfsixdbv1abn8e8usnmwmtlvarzplpyxl6rxgfoeg58giw74rjn5wzhmkz4ebf7ogtkovyd9y3839zvlkbr8q0kvvzs3biwsx9k6pug2j4\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b231f1bc-4adc-4d36-97e4-6330006e7032\", \n\t\t\"accountId\": \"93cc4dea-dd03-455e-8eca-dcdf7e10bbdb\", \n\t\t\"name\": \"Incredible Cotton Bacon\", \n\t\t\"surname\": \"xyih6euebx4yqq1ui70w8fiu9ttml5ca4js3v13sk0c7qouvg2i3lmhg7cciuglflyhdjic623se1dvbfzj46v8jdxn9dwni9lbfpuomma0bu27nbe7jxhfbnc8sj6252bv77jqel193pic2yj4d6v1hrsjtljz3wr6eqymwfwauy6luo1nod2jhibnlr6k3kug0n4hh7wmboa1ln3iocx1oyyw7dma1eb2ii7fy41yl1heatzf6rhkyxw1ukx\", \n\t\t\"code\": \"m5tec74qmewqvsqojiv1i0w07yqthuhmxexwgw0fko5i348s9\", \n\t\t\"avatar\": \"mw6it87hwotbr36pmmcu5dip9wz01ca23wxu0qyvmruo4g7fg2d3xrpunq2z064p97k1j8lxym60b37rxl3wxz5sictgjmpnkgx6oh3xrrwxq3w4u5fybnipb0k26i9m0s5zta2a4xyn6syu0acngqq064b8m1fqvhc12sfn452df7iks61hcemczxzocpoi3cp2ztmch54ao9lz90bqgr8kldeuze5p3h0twkijzn26g27iurv5iirjdr8h9o\", \n\t\t\"mobile\": \"tlij2h3dbxmf9xtc06p6067m5qxtoznxo0tzbskadnhw6fzuvthbigg2arb\", \n\t\t\"langId\": \"5d8a1d8f-b318-4bef-bb88-26ac2a8ff88c\", \n\t\t\"username\": \"6gl8aahp21mxo374z7odno6d5qpj97jw5z5faeggmy5q03nwmg364svim3v2we4510g4a8yosp2qrk4pzzg9ajyfscbfiz1puft6co31w50npn09w1vd5bx\", \n\t\t\"password\": \"yrm3ltbnmvsfu29nbjeb2bfmvtbtaaark03vugk9auz4hk7yp56i34knibxxglnqg33xk8gwhbqmhpmtu6m8l38bpur8hi1fkoi6pqwrvhril7v8wgzug4ke5olkcrqrm0rqo7nic5221luoo8uq6mqbt4j1s259m0spcom2xn1dpepei4cajorcczrdmzrt18v5b1e3i1l2r6cg5llf11xeck02hnqqkstn7djdfoobaje40x5wt4un53igkr\", \n\t\t\"rememberToken\": \"oy6bmrwnxy86t500myzcekko9vmzxcr6fh1n9f7kxvx5a2vplerylej4fpf5yt9an604orlqbjgcb7zatkb4hx9ct2u5mwkdj3q77w79hpuac6mg0lg6ewjktjzbtpuix8g06fg4jr6ts2khy8h3hri0mhiksv070iqevcud6wxf6jpgewzkgplu763caehbwr1f53vzgchq3sucnm409bfn5u0ojea88wuwcq790eewizitjtd773qzjanj0w\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"940889d5-bd4f-4719-a90b-feb51373f961\", \n\t\t\"accountId\": \"7ddd30d2-46e6-44f8-92b0-8c66594174eb\", \n\t\t\"name\": \"Fantastic Wooden Cheese\", \n\t\t\"surname\": \"s9415akjeyw60yc8ahqionbhqshyctw848av4823ga4a3c6sgzur43e6meg1cuack13edxow3k5ywnkddsg8eojzipc9mdcwmdrs1iywbrio6ull5ynqd5ta5yf9vnakej18yonqumsz1ige0zsyedp7vke4i2cu84kg2saefyklycy934tz7fygvt4bx0m4kkan6jvg411u4606nhwq1xaxg3jelxwlatxkmztvgwiy1zniy2x24j4640b1zz\", \n\t\t\"code\": \"og4au4dge8vaqivhm5tr38wn4wysf09bp11s6qkf9dzpwz9f4\", \n\t\t\"avatar\": \"2a78f7au3z4mtugyzpl5eefkq3l1kst1mbfy8orjiin3a3r8odjpvt83ah4qe8rekghfg121pswwhjsc87wt0l6n6dkuklyotdckb5sv5okyzg01bb734sn3um5j9ik20f2u0bkchibjsoftj84tnsuznw8e95hpqlm9x61t72ln1y41gpm3lbhz9li3y3s1jk87kkjoqhk50vu1u8euvx3e7g42fj3uih8du7ggiaas44lvf6lr0e8r94enks\", \n\t\t\"mobile\": \"92qjhzb22wi0jv51vmlrauwretfe89drtfq8pwlqrs5usd5hrpqcpo6k4f6\", \n\t\t\"langId\": \"2a195746-39d2-4fd2-b684-c279f01404e5\", \n\t\t\"username\": \"jl1rtfncvexi1osz4zyirmvugxvzwc9qafnuvuvbjy2bn6b071x89cg2hdz2pe7e1oj5rhwztyi5yuguhpcmsmqin11thijpleop961yu8c528v72im9398\", \n\t\t\"password\": \"unw8ejjqs31rwyn9azjpf5nkrj2g70mec9vh8ut7y0fqddxl3gnoe8v27cl52gh7ce3qt13wremlmn0ft775s3aq64340batfyqcim9fl950cayxxk7oszliplh9g4ga61kfjlxbbx76pgn6cvfbm38kj9m6tjziqeqqe932onwyz3vp1z86afu35jr46uyd89b7jr4auqte0cxp4so4fyx1i0fqbmw9ibil3qeemnbpkbwkxa5wbizipmwfrc\", \n\t\t\"rememberToken\": \"m76o0lbs9crxyqheaskf3d5crrxw2dx3nxbj4g9puf3qsw2rs94gm3jl5f1xwzuyqotiadrj8pxh6jzds6rzyhwfu2rozrwsul9xr7annpaz45etougoutw3zk6sep50m72pp30iilx8svk48yu7zt164tc49lkizxtaqh7mqnhisg96r8uxjhlymnw0zbszaflrg1lmin8j6s7a4plsaij9sjgsquobcxu8geg10cjxwzu1stcwjf8b4x0mn6\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"6bfb4e04-9954-4759-87b1-d92f06892b80\", \n\t\t\"accountId\": \"bf5195c9-6461-4157-9c3c-7f0a2f01e704\", \n\t\t\"name\": \"Unbranded Granite Cheese\", \n\t\t\"surname\": \"1lsp359imefi1ulk7zocupfpcq4bub5kdza81xy1795rcz5y3nwsakkl7h6a9j8zzbvixmbvv1l8kvto8xwa27cb7plsbvg5kaztr1pv0r3jc1cqyud33p9be01ams3kchvb8m1kilyrv16dple8q4su1d7dis7y6sbt3ss7goomc9gx99yz1roa73dx6rn8i8zl9s5ns3joh2s0a0qg8tnnpoltabq7adzxmh4c3fk0k4dqur5mivf4buxx3z\", \n\t\t\"code\": \"67ys8jedjnfmaz1cgux4n763qw8pk6a7u7epz0lc88gvvxvst\", \n\t\t\"avatar\": \"ill76p41ik5swq1esvub152ld1xpzbarz02llsxnxdtdrvp7fxzmp3z8f3fc5io0349wodmgrhfhhdrk7sf3ium6qghvhhc6rdxpwdjmg2tjyz3vqt773fzu7gpfiuh2da3t8eipj41tug6jbr3bib9podbe7hkefaqikdunzvl0c1e77poeghsl91c2qt9uth3hpz739qvhc0g5j8iejowzoxemps324ry7ivyhbxpiq27ngdt0dxq6kemww5\", \n\t\t\"mobile\": \"u6oqhxbefrmhlgr8amkxeuamxi3yxll2zn0ms00a368oddszojqvg4bymf8\", \n\t\t\"langId\": \"f30afec8-1bb3-4259-9249-0dcedf3a7830\", \n\t\t\"username\": \"4m32sbi9g2gj2mw0ofwag6ioftaq7nja08i3dbpjw7cqn2aocfjx0usqqlbc4y6ykq9nkuguwm56b4ni8dr7vlvtn7kgmfbji96pghbxi5y1c18dxe1i5zn\", \n\t\t\"password\": \"xvd2wyw50mu2roavy65bfmcm0e6tuzoye6x4hphlat6cxld0aaox3kydlg4qf36z8gqb96qapjtaoup8drwjmyp9dgriprrro3roriuxt9mm9ao14qigr66wuetbuk8v0l2hn41v7t6yud2aoq69kl0jbde9z7lr3ih0lwnc809pd2qzbp2b01knhcjtosqcj53h6a3tkfz32nbp91m8s94hxhwkt1m8kf2g8zdm83uw1m9bmmvdx9p1fvg8dc\", \n\t\t\"rememberToken\": \"exncrtksnv42ys75jxq57b9z18r5gw5sx17e2hhex5lyw87rd38b1yfnk794tuyd27rv0ljslynlzedbg99m8vi08cylxk4t9cx0at6rnbesptlcx55nzstcaasr0ivwe38rcutd26jrdoorzfsu4e46cwubku7t9qhh0i2mn8sq703v1gwkjovjdf54xmi34dc9q76h8pymxytt9hq4za9i3xbwe29xnjx0peh4o0kiypjtslthhc4poakt2x\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5e808d88-8c33-442a-8702-a39fa3beb50b\", \n\t\t\"accountId\": \"e936ca68-77ea-42db-a0f0-7acef9f8cbdb\", \n\t\t\"name\": \"Practical Plastic Soap\", \n\t\t\"surname\": \"n1oyvpao1e15v097tne0gtehsf5gexbl01bt5ntjv56lnwxokl34n30n3uecgzfranjqa1af8kqakak7waqvt5ujnurga00hkjia2lppbqno6s3bghnrcyyyhq3mtrgu5p3n3un28kc3x1sf2u2u3f6cu11owylcs2w74xx0fwrfky8znhf2sskjwhnorpqfep8dtvn34w80srrmfv7ftb9azhounjj7i2pwp4t91hxzk55pa0ligk9p176u27\", \n\t\t\"code\": \"h64ka4z7ne0pekdj7w8mnn38scv5agpf797kzkbn91wfg06i3\", \n\t\t\"avatar\": \"nv6b7y260eh3nj26w02r2g9pm1vz0faa4s0uw5oe6vd396008m79eidfx8ap3w8aej5v07opzpcpszlf8cnw4543xh986vbjcs4sdxqp0asconhsjtte8j4bbhnv36m46eod07duxqk6xmcm3wuzjb0o0fcd7ziafgtq0tjua7cthr4ssiy9dmrrkogscc5klncqxluo3ntvo930lguvpzf2i0r7see7om22naq9qqnthj13u58hib5jru5jqz\", \n\t\t\"mobile\": \"1w48i2iwik1qhuy50xbt9clwivar27uuqsa2b41jtn6mxfqup0bxahfbkjw\", \n\t\t\"langId\": \"5db17003-76de-4611-b376-50ef3176bc8b\", \n\t\t\"username\": \"4o75tcfvwcpwjgz3horo31rvhcedbhfgn4v516s9db6aymf5z2f976l5flzgygobinlw4mdtwkg1o1kmvckcplg5mnc6llul2komhgnkgcophpsc7mjcjib\", \n\t\t\"password\": \"mn64hu199y5d0heoza08ba28wuv7taaug89tbua9u8pasmyvawyq70bqgy0hbc7dm9p5me1ym8yy2emgj7nzhpvgn953po9wwd7oylhrxl5q4jp1ld7ss3yveg96j0nhxm40867hd9elio40aj674x5d80xp0wkdp6al0kdbguu2msklk6siwkzi407eouij1seqnw2the6x7644d6u4vwv502jx74zs0ylpjfyv69o4smvs1508k1nifbtbay\", \n\t\t\"rememberToken\": \"zlfypn7s4ahtp4pw25ydxd9q3nab6mgzvypvyr2lbl01loqswne2pz1pr20hbumzts9cbpvnh5bfb8ywmtrs0hlavfkk8rnbrcigxw0v4jx34f6xadzxmw97xsqsf5nvvfyf68qo2ol2v67ujp5jcvtf0c2caxjyp62tv81jmphi7r25mg3t8fajnbb40ea0m6th9hikmfssmdbx41952l27k1nmdowz4j9tb58vco9enzdrz20rofif0lgvq6\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"0c363d41-83a6-4e10-8d2a-f6e818089b2a\", \n\t\t\"accountId\": \"50333020-bccb-4689-b46c-ee8aa8f78320\", \n\t\t\"name\": \"Refined Plastic Pants\", \n\t\t\"surname\": \"izqmzq77647zjk2hf4avjakqhi0x937thipa1jiisbhni2p71z6egr5tyy4jpm2hmqfqp9hso7tawyo97a8jvx0guuyun269ovioy5u75g4897hruaeu6b69p0y1cpb4xpg9pkaub6atidjq365u3w39rghlp26ra2y4cpwuttsm6b3gtc2qtntb6dosumsav989wspbhdkigwrol9vo4jhwshjmb9w2muw47h418gnuzz8x0gza98k7v43d68\", \n\t\t\"code\": \"r4y462c5rsobbpmgo7blnztgxrc4pqrelg4iqlm17dp9w1a7g\", \n\t\t\"avatar\": \"zg9a0v3n8l1l46v121v6zb4cmhggpt4qzygt4mlpknnwtc8m6jlr4sw2oaai4vn2oplzeutr43iss8xsfg6v5wv1w1evb4s2ao8iznhpjxtwy01ufkou4fbm3uqedj75yereeeleprq49a5u7fs8j0lt74p71x6sdyhb8i4z2xnsy08n8n4guhmnsx9osd40u7p4mhei365uued17d1yquepjbv4gef73er81spy2ikcm5lp2tpjfdnp52ilay\", \n\t\t\"mobile\": \"r3jde7lik113yvn901mlo2wnr4eludtoe1fe11b5k5lbpu7osokakygcl10\", \n\t\t\"langId\": \"82cb384f-0bde-4596-8028-2058983aa54a\", \n\t\t\"username\": \"4l9j3r46cgebphwq94chojl7rtn8bkjf0l3u4fe51b5tkdd9uuzksr7a9klj8wco8a0u5194mhj0lkyydkvbgp13l1bdiglt63ni9ou70khp14d38j3w636\", \n\t\t\"password\": \"dcsadja9qpp31qy6vls41qr887vybyiti0d8el96vaped9ism3adohvx40cxlm2ykllmkozw31amhevw0vqt6ruz0yg3mz0b9u1csloxxq5jjekqkdkb1qssjwv60f5khwz2f8ot8virp8825s9vvkt3znpyryluizsqe9hbjvb70jiwadwu3jxtvmr9x9835qmwtq2q1l7ba9kg3cxgnsligrv7j9b3018ka1rdltu6ily4nhpi28yz9n30mj\", \n\t\t\"rememberToken\": \"fyydhw8dx7qp3tgqdkev8h50tc4sb1o1otha9v2s7pzaev7tw7i76yahi76j9sart7i8iixkmg9ko4of4tw0ykupjrs73uojr5npyvl10sybutykxtzgwigsdddkvrnf6z8q8jfe57t8u0ssgcuyv9jy4b8og6o8rzu9jlu3b4j856qei6frcunrvmslgvgw3cvki2y5404n9lp7az67s2jg4c1wyzeobwcc8qkvfkfl8tt1hxb6duru0olf79\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"f9d1b01b-ca88-4aaf-95d0-0e4568486fb8\", \n\t\t\"accountId\": \"ece0ec8f-2923-4caa-9299-4f39be70fcc1\", \n\t\t\"name\": \"Handcrafted Steel Bacon\", \n\t\t\"surname\": \"h8gwfx9e6cqkxbnuwiky94n18k4tcuuhcqrltzqjinenji0q1dqpzl31tffanupyg01s8bulqfj6jaxdqkq8qpxrm04v04fp8n71w9ednqyyglswc2ayeklh493zxmq4c7lo3feto1dzsl7ciggf192hhh1alk7hl5kfjw7uyl828i1diw9y8v6l7gixzh4ilzr6fs3t9uj3fxcomokr89x6vtcgh7l8q689if7qb5cid9r6udvouitiway58a\", \n\t\t\"code\": \"45i5ywg9s6mrjv7mrnsex7vr8193rfyck1972xoqcw3x0sjtk\", \n\t\t\"avatar\": \"j5azq9j1zl75lea0ofk8q9y5c6sdv2qau71qob1bvgfrqbl52lxa21ib6m8esa95dev5rih2vwog5zg9plioallge13ke3p6pwg5fr2dl5z8nipd716zlje6qfwmx7zuro2z71y3jaah37yjnpt96bx72cng0vghtbqbgi80ot14ot1tw5t075sehonnvw17bv2tsseek6xfzeppr5e57sgix569lm8luubcrh18m709f4rb8j8pov6wyop3ia\", \n\t\t\"mobile\": \"mclflltl9xybmyhmotfeuy61yq06mbu7263tqi29tbduwzc99t1e7ql4x34\", \n\t\t\"langId\": \"d59cce49-831e-47ac-8e89-b17f3231295f\", \n\t\t\"username\": \"yt68s6ah3in8ttssq8r8mbgzkeqcply2ih2mwzp8pq7ljm78w62tugymq08dghfdgq470yfgk2ttjsrbdfbudl4v3uqkedq0zukl9tjv0553vq0bwglem30\", \n\t\t\"password\": \"dz8prlnauw8alu7ltjh0ecwyzjedhhvfqb6f2ljgcjqq6pw4j0u34b2mzdqerlfiu3i3hy3jo5j8j1dxqoku2qskt8mb4b0uqkadlyu6wwfl4k3544wft6zus7lt9uosut23moql65hvv7lfg80pd3i1q9o6shu3b9x98nvm9wrkunsje8jrpysp9tgfaclhhxgkdqgml5fbxpjc2scepy8i1oayylor7n3u9bhh60yqo25f0aatg944xe8yvh\", \n\t\t\"rememberToken\": \"6716x5rwmcwqb1fp8lpjrt7nr0cvkr3ajsaqr94iof6o1zp3qrn4bzxrnhvdxqv3rioqiz33elpgraddzf8c6wg5w3h0omt2eujbxakl49wff0bw6uj7ijtd83443nfv9fysl529any616ji57t6jamnzqx0atwccc2gv3j9ww73veosn8kqd8kzhav70lu8biyao96oksnn8ophvzy286v6sappit2cf3m9dc0km91guc0wfdhyifk5inmwjg\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"dcb1ea40-8e73-4faa-9aec-5539867159e6\", \n\t\t\"accountId\": \"8cc1402b-2f93-48a3-9ace-4f02e4af262a\", \n\t\t\"name\": \"Generic Cotton Pants\", \n\t\t\"surname\": \"jwlsoiueg8q7rts8vn5kjdkcyhgp22urrisg0ih3buqk9zdzpkym2l6vazqz664vtaitk1o6hva0k8wnn7kfdp9mt3ekbgy06azud6cshlocg4l6p44vpt5442o3gdxlqyxd541eys0nr4mttckbt6dsp1wotabgz8fzlyl2ne56nd5vnuk3ykq8yjdqe3zsgoe1s5qcoy3janwqqncxcp6jy25i9nf6hrzdwtce5zj8ojbec4vxz58rcms2g5\", \n\t\t\"code\": \"m13blwpz4zoxl4t0s1u0fgd8e3c3wfgw6jtnmgqfwa2vrhika\", \n\t\t\"avatar\": \"1kbz35nts5eap3jftnzm3ufaq3a4xt8bcfsdi85z2ihl5h6vre7sf04qjl6lw894ih8wdcu41pl0cwvjbtjgzc90sfih4pvarc8ecuo40aop7ykv9jvchqwfdoin4v6dfgsqek4ytamascrx92faunpdoi0k159ez1fs2u02nk56tmvf202jdpsxi9wkk6iryxwcnr5rz4h3rvywc2bwe78rlnsvpxzx6ipeoc582ve0yy0cjo5hzty4os4irr\", \n\t\t\"mobile\": \"orkwygwmuitgxu1q7oslmdyeobnh5jmd2prc6z4hpus4n4u51pr57c2i7u6\", \n\t\t\"langId\": \"32b4df5e-7db6-4b85-b52a-ed5d17ff271b\", \n\t\t\"username\": \"e3gblydyfgo7wly88pmo0bfebsp3fq4dou3drjjitku3xiera4fwye3anhvo8dhqx9dg9cfg9r0h1sqj4tt5befu3d8qtj8gx66l99pe4ag17glqj3a23dd\", \n\t\t\"password\": \"g4fyr4qhri24imd0z3aobhv3lvqa0nbc8vxun0e7j6u993tq1vcgavp3tm0fwjkm3hl6ams8qcm5ojf8z2tpf5rwnyclzvwgay7ksj3zuj35gj67vu9mxriq4ct6mhqfbbctr3xgcgx9eikak8m7n9uw1ima83ymrbpn7mq2gdpnk2sd44oagltnb6ta5qgu6iqkk2cc6f1onea31ld04r0so6hot0p0zrzkb0uigmfiy820zk5pb9l3stg8xj\", \n\t\t\"rememberToken\": \"yb3ahaktppxpeqjttohmwx9vekvh29mfu8046gcy30wlb6jvai7dh7zr22s6hfykctoo9b4xmy6zh4bjin6prguholl1nqfx8jj6zme8a1kh02w6lspyval6xrnky6222493lcsss7fqvrx70jzwnepuhomnlwa422z2bpwzhvdww2r3dbn384i55yrwjo0p3mtp6hq0yune8l100hw0o1or35x0pmm6yvn827g6sk4y3zko6yd9m762rgiyzb\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"387ad0b8-fd37-41c6-b0c5-40570c92aca8\", \n\t\t\"accountId\": \"66a454a0-4cb8-47a2-a4aa-cc7f4e198887\", \n\t\t\"name\": \"Licensed Rubber Chips\", \n\t\t\"surname\": \"kn4agit30tp1fy2yqeud9f8oe2q6p42kxb45fn1s3tclzncyk8omo9k27groggesgvhc4jz8v6ydcpse95oh7ifotupiv2fqaqcriock1jjgk7fd5w2zub1qclywculvlsh4fqsihu77ltt1y9j6ecp1eqlv31b3j2ghl5gwhaf3j0oijra74g4o50prgejq404t5p589ho2nujspfxz66i15g9vt2zsj2f31v899kbhye5gf3tpknapr9ht40\", \n\t\t\"code\": \"1bx333bmu7k3g4yxmkekcrvrx25l1fwldr3cu26bcaw6krfm4\", \n\t\t\"avatar\": \"djiy2rvpb9a9vlag28yli6dep2ytqxzwmbhj3xplf4d0b696nib6n8bl7723ktywtzfdlsi5a8l10icnurv8rhkbjgt5mkdqeb3p5js0wcq0porx5j19c1oldw1or1wa2n2m4fwgbvehx8v4fyjd4sqiqcd2v0pz8h0nhpdee629x8bxlo8sbb8jyminr2zn9x6hxbom9tb30pexqz7pd2v39c15sc7iyaoxkym0hv8jwecxaywk1dbz71rwt1\", \n\t\t\"mobile\": \"7tpiqzcqpqnmjpxf8ddj0hs5qgougqrmxnfnjroznkazr05uprs75ovft79\", \n\t\t\"langId\": \"7311e461-cb76-4302-b881-1ce61f353236\", \n\t\t\"username\": \"khxh3imuycexst4kfnup3pxzqevlwg7h61wopxhdko3v3nxrht9fnb2xe3an03xz2g94q4d8hg75gmqsv8bpr7ifbh3df48xosrlk3odwgp7bs1zz324463\", \n\t\t\"password\": \"88hpe2twwy0x708asdtsz05jsr2nuzmnj4s7ybapwnlov70gfxz0a66dvky8c011fvrir46pr33kr0tcoceayah4qgt4pr6jluo2uvqthapreeflymdh4vyk53c1b5br0pqgyv4wsc2uybrx3ets35mbs8yceuorcx7vby5ctd3be0xb4ke9pq0lwj7s3buqkau75dl57i13n5kahs8jbnzfq497qve9fq1zofh3vipgvws5r1j9ffb7wvsv9p\", \n\t\t\"rememberToken\": \"k3ko8k94a3dxnelmxg5uklp307c6ncuoxazw42ywboq39mp7fu93wcddohwstu2if32yr4uasug6q73q4o1gbnch4u90k7qc6efp9oj8ajv6sk6973uylw1o0ajyqeaucimb9l6or7dvn2i4avziejrbqwsh7q1rtjr2juubsz8r43ir05sjl1ecmn4vlldazbaef40i1i98zgg1o22kdcjuzeqtq6gsan8jd1jkwbglh2e3zwa2r7jw6fqi5o\", \n\t\t\"data\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/users/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"users",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/users/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/users/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+                        "users",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/users/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/users/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"users",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/user/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/user/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"user",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/user/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/user/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"user",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/user/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Licensed Metal Table\", \n\t\"surname\": \"u2czs135173cu5vkktnv3e1u494a49pvsfqdata2hlp1yx7cco4tbcyww8wx6qcnarl9obhis5jt2ph5jxbfo5n70yv1l7yrbfx4b860jc2bnt7bphe1n76kwiyn41jitskimp0ce81ra2ttb8e8n2f3l81u4vpnkpz8h6qxaz8umpnlg7urtnscm2xxjf0lmp8bxaba1o4a41cz4bmsq1he5fb3ekvm68j9fh5h4mrabegs7snufouqvss418\", \n\t\"code\": \"q91zi0copqdmk4krnkgp8kipugewkxauq7zyovfl37g9nc59m\", \n\t\"avatar\": \"5ieckv7pkyj1c8bmjrpa41j42r8gqqzzpbvq0tcvzdp8pyhhez8mpm4zulkenoam0napg9zwfo2szye42dv08zts62g9edx6gcneu9r7fd0tynbd7nwk751fei4kmam50dtdce87pf8cosgq77rw7brixg9lngkehoz2ku4adegxvzi8gb5r1b6ogab9njq8g9ec6bxc74vgsdk1scooe5lwrugj49qy504upw69zubv73yq0lwbtygrdvax1t\", \n\t\"mobile\": \"809ra6p45fyendung4zmi00rc977o7yxivn4kqrvmoq37zgbhe1mdtd58ef\", \n\t\"langId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"username\": \"o3u660tj8t8en64ttqwuygl3k67ldmuyklcm9c65acjx9hvhyr9ikwfeaekzrpcdxgv19hnihv47v0i1z9gpgqgjj26y5bwnycisyy73b9s5018tvkfaffk\", \n\t\"password\": \"tjeb1du2o8uv27suf7mttaqxqnmmgp88hpgotnla35fdhzfe6g29d0cnc85xjhtk5lasl8cbg58lnad8wjc575t8oqhb5fnynvf2s09a7b8lwlswm6csnn2kjp3wjv6z6obcjex2m4slktsl8to53fg32032ow5rgdi88al7jmhqwsydm6eqegb3acbkd4tyjg1dg2cpgl1jox9fc70ew66lxmsbfo7o2kmzwcs6qxdfy166rzrli2c8r8gams\", \n\t\"rememberToken\": \"2urrn4vfyqqmxqbl6l0e8tigw4uxighoyhr0k2yv0nw1yufgvq888yjntg7lchnummt9fdl64cekvv224lkox991sjxv7tq7mygsdtcfqo1qa612c6qua1rkw1uvv8h8ayds7co50wtcjhc5bkx2lqb1gl3yk46snftk2enbq0yml427fp9gzw7cn6tyjmmlytlr3i0cwhc0o8eqiqf3r3s6tpsj1dpyy4aab8u5j3uahn1v33ug5q5sb0fnya\", \n\t\"data\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/user/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"user",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/user/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/user/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"user",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/users/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/users/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"users",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "7e936434-df7d-41f5-9612-2a96e81c1f75",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

@@ -1,7 +1,5 @@
 // commands
 import { CreateRefreshTokenCommandHandler } from './application/create/create-refresh-token.command-handler';
-import { CreateRefreshTokensCommandHandler } from './application/create/create-refresh-tokens.command-handler';
-import { UpdateRefreshTokenCommandHandler } from './application/update/update-refresh-token.command-handler';
 import { DeleteRefreshTokenByIdCommandHandler } from './application/delete/delete-refresh-token-by-id.command-handler';
 import { DeleteRefreshTokensCommandHandler } from './application/delete/delete-refresh-tokens.command-handler';
 
@@ -13,19 +11,15 @@ import { FindRefreshTokenByIdQueryHandler } from './application/find/find-refres
 
 // events
 import { CreatedRefreshTokenEventHandler } from './application/events/created-refresh-token.event-handler';
-import { CreatedRefreshTokensEventHandler } from './application/events/created-refresh-tokens.event-handler';
-import { UpdatedRefreshTokenEventHandler } from './application/events/updated-refresh-token.event-handler';
 import { DeletedRefreshTokenEventHandler } from './application/events/deleted-refresh-token.event-handler';
 import { DeletedRefreshTokensEventHandler } from './application/events/deleted-refresh-tokens.event-handler';
 
 // services
 import { CreateRefreshTokenService } from './application/create/create-refresh-token.service';
-import { CreateRefreshTokensService } from './application/create/create-refresh-tokens.service';
 import { PaginateRefreshTokensService } from './application/paginate/paginate-refresh-tokens.service';
 import { GetRefreshTokensService } from './application/get/get-refresh-tokens.service';
 import { FindRefreshTokenService } from './application/find/find-refresh-token.service';
 import { FindRefreshTokenByIdService } from './application/find/find-refresh-token-by-id.service';
-import { UpdateRefreshTokenService } from './application/update/update-refresh-token.service';
 import { DeleteRefreshTokenByIdService } from './application/delete/delete-refresh-token-by-id.service';
 import { DeleteRefreshTokensService } from './application/delete/delete-refresh-tokens.service';
 
@@ -42,8 +36,6 @@ export { RefreshTokenSagas } from './application/sagas/refresh-token.sagas';
 export const OAuthRefreshTokenHandlers = [
     // commands
     CreateRefreshTokenCommandHandler,
-    CreateRefreshTokensCommandHandler,
-    UpdateRefreshTokenCommandHandler,
     DeleteRefreshTokenByIdCommandHandler,
     DeleteRefreshTokensCommandHandler,
 
@@ -55,20 +47,16 @@ export const OAuthRefreshTokenHandlers = [
 
     // events
     CreatedRefreshTokenEventHandler,
-    CreatedRefreshTokensEventHandler,
-    UpdatedRefreshTokenEventHandler,
     DeletedRefreshTokenEventHandler,
     DeletedRefreshTokensEventHandler,
 ];
 
 export const OAuthRefreshTokenServices = [
     CreateRefreshTokenService,
-    CreateRefreshTokensService,
     PaginateRefreshTokensService,
     GetRefreshTokensService,
     FindRefreshTokenService,
     FindRefreshTokenByIdService,
-    UpdateRefreshTokenService,
     DeleteRefreshTokenByIdService,
     DeleteRefreshTokensService,
 ];

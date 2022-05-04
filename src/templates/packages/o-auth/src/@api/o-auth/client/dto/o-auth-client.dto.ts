@@ -44,6 +44,12 @@ export class OAuthClientDto
     redirect?: string;
 
     @ApiProperty({
+        type       : Object,
+        description: 'scopes [input here api field description]',
+    })
+    scopes?: any;
+
+    @ApiProperty({
         type       : Number,
         description: 'expiredAccessToken [input here api field description]',
     })

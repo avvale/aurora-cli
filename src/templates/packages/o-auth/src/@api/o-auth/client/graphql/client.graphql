@@ -12,6 +12,7 @@ type OAuthClient
     secret: GraphQLString!
     authUrl: GraphQLString
     redirect: GraphQLString
+    scopes: JSON
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
     isActive: GraphQLBoolean!
@@ -31,6 +32,7 @@ input OAuthCreateClientInput
     secret: GraphQLString!
     authUrl: GraphQLString
     redirect: GraphQLString
+    scopes: JSON
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
     isActive: GraphQLBoolean!
@@ -46,6 +48,7 @@ input OAuthUpdateClientInput
     secret: GraphQLString
     authUrl: GraphQLString
     redirect: GraphQLString
+    scopes: JSON
     expiredAccessToken: GraphQLInt
     expiredRefreshToken: GraphQLInt
     isActive: GraphQLBoolean

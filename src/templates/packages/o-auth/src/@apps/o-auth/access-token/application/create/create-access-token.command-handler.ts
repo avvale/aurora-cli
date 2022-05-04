@@ -5,14 +5,10 @@ import { CreateAccessTokenService } from './create-access-token.service';
 import {
     AccessTokenId,
     AccessTokenClientId,
+    AccessTokenScopes,
     AccessTokenAccountId,
-    AccessTokenToken,
     AccessTokenName,
-    AccessTokenIsRevoked,
-    AccessTokenExpiresAt,
-    AccessTokenCreatedAt,
-    AccessTokenUpdatedAt,
-    AccessTokenDeletedAt,
+    AccessTokenExpiredAccessToken,
 } from '../../domain/value-objects';
 
 @CommandHandler(CreateAccessTokenCommand)
@@ -29,11 +25,10 @@ export class CreateAccessTokenCommandHandler implements ICommandHandler<CreateAc
             {
                 id: new AccessTokenId(command.payload.id),
                 clientId: new AccessTokenClientId(command.payload.clientId),
+                scopes: new AccessTokenScopes(command.payload.scopes),
                 accountId: new AccessTokenAccountId(command.payload.accountId),
-                token: new AccessTokenToken(command.payload.token),
                 name: new AccessTokenName(command.payload.name),
-                isRevoked: new AccessTokenIsRevoked(command.payload.isRevoked),
-                expiresAt: new AccessTokenExpiresAt(command.payload.expiresAt, {}, { removeTimezone: command.cQMetadata.timezone }),
+                expiredAccessToken: new AccessTokenExpiredAccessToken(command.payload.expiredAccessToken),
             },
             command.cQMetadata,
         );

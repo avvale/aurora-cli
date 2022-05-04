@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { accessTokens } from '../../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokensToCreate as accessTokens } from '../../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 import { CreateAccessTokenCommandHandler } from './create-access-token.command-handler';
 import { CreateAccessTokenCommand } from './create-access-token.command';
 import { CreateAccessTokenService } from './create-access-token.service';
@@ -42,13 +42,12 @@ describe('CreateAccessTokenCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateAccessTokenCommand(
                     {
-                        id: accessTokens[0].id,
-                        clientId: accessTokens[0].clientId,
-                        accountId: accessTokens[0].accountId,
-                        token: accessTokens[0].token,
-                        name: accessTokens[0].name,
-                        isRevoked: accessTokens[0].isRevoked,
-                        expiresAt: accessTokens[0].expiresAt,
+                        id                : accessTokens[0].id,
+                        clientId          : accessTokens[0].clientId,
+                        scopes            : accessTokens[0].scopes,
+                        accountId         : accessTokens[0].accountId,
+                        name              : accessTokens[0].name,
+                        expiredAccessToken: accessTokens[0].expiredAccessToken,
                     },
                     { timezone: process.env.TZ },
                 ),

@@ -7,6 +7,7 @@ export class DeletedClientEvent
         public readonly secret: string,
         public readonly authUrl: string,
         public readonly redirect: string,
+        public readonly scopes: any,
         public readonly expiredAccessToken: number,
         public readonly expiredRefreshToken: number,
         public readonly isActive: boolean,

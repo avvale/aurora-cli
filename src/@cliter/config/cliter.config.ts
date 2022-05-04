@@ -215,7 +215,6 @@ export const cliterConfig: CliterConfig =
         },
     },
     packages: [
-        'iam',
         'oAuth',
         'common',
     ],

@@ -4,6 +4,7 @@ export { ClientName } from './client-name';
 export { ClientSecret } from './client-secret';
 export { ClientAuthUrl } from './client-auth-url';
 export { ClientRedirect } from './client-redirect';
+export { ClientScopes } from './client-scopes';
 export { ClientExpiredAccessToken } from './client-expired-access-token';
 export { ClientExpiredRefreshToken } from './client-expired-refresh-token';
 export { ClientIsActive } from './client-is-active';

@@ -9,6 +9,7 @@ import {
     ClientSecret,
     ClientAuthUrl,
     ClientRedirect,
+    ClientScopes,
     ClientExpiredAccessToken,
     ClientExpiredRefreshToken,
     ClientIsActive,
@@ -32,6 +33,7 @@ export class OAuthClient extends AggregateRoot
     secret: ClientSecret;
     authUrl: ClientAuthUrl;
     redirect: ClientRedirect;
+    scopes: ClientScopes;
     expiredAccessToken: ClientExpiredAccessToken;
     expiredRefreshToken: ClientExpiredRefreshToken;
     isActive: ClientIsActive;
@@ -52,6 +54,7 @@ export class OAuthClient extends AggregateRoot
         secret: ClientSecret,
         authUrl: ClientAuthUrl,
         redirect: ClientRedirect,
+        scopes: ClientScopes,
         expiredAccessToken: ClientExpiredAccessToken,
         expiredRefreshToken: ClientExpiredRefreshToken,
         isActive: ClientIsActive,
@@ -72,6 +75,7 @@ export class OAuthClient extends AggregateRoot
         this.secret = secret;
         this.authUrl = authUrl;
         this.redirect = redirect;
+        this.scopes = scopes;
         this.expiredAccessToken = expiredAccessToken;
         this.expiredRefreshToken = expiredRefreshToken;
         this.isActive = isActive;
@@ -93,6 +97,7 @@ export class OAuthClient extends AggregateRoot
         secret: ClientSecret,
         authUrl: ClientAuthUrl,
         redirect: ClientRedirect,
+        scopes: ClientScopes,
         expiredAccessToken: ClientExpiredAccessToken,
         expiredRefreshToken: ClientExpiredRefreshToken,
         isActive: ClientIsActive,
@@ -113,6 +118,7 @@ export class OAuthClient extends AggregateRoot
             secret,
             authUrl,
             redirect,
+            scopes,
             expiredAccessToken,
             expiredRefreshToken,
             isActive,
@@ -137,6 +143,7 @@ export class OAuthClient extends AggregateRoot
                 client.secret.value,
                 client.authUrl?.value,
                 client.redirect?.value,
+                client.scopes?.value,
                 client.expiredAccessToken?.value,
                 client.expiredRefreshToken?.value,
                 client.isActive.value,
@@ -159,6 +166,7 @@ export class OAuthClient extends AggregateRoot
                 client.secret?.value,
                 client.authUrl?.value,
                 client.redirect?.value,
+                client.scopes?.value,
                 client.expiredAccessToken?.value,
                 client.expiredRefreshToken?.value,
                 client.isActive?.value,
@@ -181,6 +189,7 @@ export class OAuthClient extends AggregateRoot
                 client.secret.value,
                 client.authUrl?.value,
                 client.redirect?.value,
+                client.scopes?.value,
                 client.expiredAccessToken?.value,
                 client.expiredRefreshToken?.value,
                 client.isActive.value,
@@ -202,6 +211,7 @@ export class OAuthClient extends AggregateRoot
             secret: this.secret.value,
             authUrl: this.authUrl?.value,
             redirect: this.redirect?.value,
+            scopes: this.scopes?.value,
             expiredAccessToken: this.expiredAccessToken?.value,
             expiredRefreshToken: this.expiredRefreshToken?.value,
             isActive: this.isActive.value,

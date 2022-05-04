@@ -10,6 +10,7 @@ import { PaginateApplicationsQueryHandler } from './application/paginate/paginat
 import { GetApplicationsQueryHandler } from './application/get/get-applications.query-handler';
 import { FindApplicationQueryHandler } from './application/find/find-application.query-handler';
 import { FindApplicationByIdQueryHandler } from './application/find/find-application-by-id.query-handler';
+import { FindApplicationByAuthorizationHeaderQueryHandler } from './application/find/find-application-by-authorization-header.query-handler';
 
 // events
 import { CreatedApplicationEventHandler } from './application/events/created-application.event-handler';
@@ -28,6 +29,7 @@ import { FindApplicationByIdService } from './application/find/find-application-
 import { UpdateApplicationService } from './application/update/update-application.service';
 import { DeleteApplicationByIdService } from './application/delete/delete-application-by-id.service';
 import { DeleteApplicationsService } from './application/delete/delete-applications.service';
+import { FindApplicationByAuthorizationHeaderService } from './application/find/find-application-by-authorization-header.service';
 
 // models
 export { OAuthApplicationModel } from './infrastructure/sequelize/sequelize-application.model';
@@ -53,6 +55,7 @@ export const OAuthApplicationHandlers = [
     GetApplicationsQueryHandler,
     FindApplicationQueryHandler,
     FindApplicationByIdQueryHandler,
+    FindApplicationByAuthorizationHeaderQueryHandler,
 
     // events
     CreatedApplicationEventHandler,
@@ -72,4 +75,5 @@ export const OAuthApplicationServices = [
     UpdateApplicationService,
     DeleteApplicationByIdService,
     DeleteApplicationsService,
+    FindApplicationByAuthorizationHeaderService,
 ];
