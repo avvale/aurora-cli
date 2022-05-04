@@ -635,9 +635,18 @@ export class CodeWriter
         // register import auth module
         ImportDriver.createImportItems(
             sourceFile,
-            cliterConfig.applicationsContainer + '/iam/shared/domain/modules/auth/auth.module.ts',
+            `../${cliterConfig.applicationsContainer}/o-auth/shared/modules/auth.module`,
             [
                 'AuthModule',
+            ],
+        );
+
+        // add JWT configuration
+        ImportDriver.createImportItems(
+            sourceFile,
+            `../${cliterConfig.applicationsContainer}/o-auth/shared/jwt-config`,
+            [
+                'jwtConfig',
             ],
         );
 
@@ -647,7 +656,7 @@ export class CodeWriter
         const importsElements = importsArray.getElements();
 
         // check if AuthModule is imported
-        if (!importsElements.find(el => el.getText() === 'AuthModule')) importsArray.addElement('AuthModule', { useNewLines: true });
+        if (!importsElements.find(el => el.getText() === 'AuthModule.forRoot(jwtConfig)')) importsArray.addElement('AuthModule.forRoot(jwtConfig)', { useNewLines: true });
 
         // register auth module
         const exportsArgument: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('exports');

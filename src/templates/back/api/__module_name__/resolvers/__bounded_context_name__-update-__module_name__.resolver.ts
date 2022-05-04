@@ -1,12 +1,14 @@
+{{#if schema.hasOAuth}}
+import { UseGuards } from '@nestjs/common';
+{{/if}}
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
-import { UseGuards } from '@nestjs/common';
-import { Permissions } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/modules/auth/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/modules/auth/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/modules/auth/guards/authorization.guard';
+import { Permissions } from '../../../../{{ config.apiContainer }}/iam/shared/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from '../../../../{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../../{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
 
 {{/if}}
 {{#if schema.hasTenant}}

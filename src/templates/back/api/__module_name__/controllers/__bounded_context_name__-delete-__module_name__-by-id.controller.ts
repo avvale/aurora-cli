@@ -6,9 +6,9 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 
 {{#if schema.hasOAuth}}
 // authorization
-import { Permissions } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/modules/auth/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/modules/auth/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../../{{ config.applicationsContainer }}/iam/shared/domain/modules/auth/guards/authorization.guard';
+import { Permissions } from '../../../../{{ config.apiContainer }}/iam/shared/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from '../../../../{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../../{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
 
 {{/if}}
 {{#if schema.hasTenant}}

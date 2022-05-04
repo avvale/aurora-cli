@@ -172,7 +172,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                 {{/if}}
                 {{/each}}
-            )
+            ),
         );
     }
     {{/notInArray}}
@@ -187,7 +187,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}.value,
                 {{/if}}
                 {{/each}}
-            )
+            ),
         );
     }
     {{/notInArray}}
@@ -202,7 +202,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                 {{/if}}
                 {{/each}}
-            )
+            ),
         );
     }
     {{/notInArray}}
