@@ -27,7 +27,7 @@ jobs:
         echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
       shell: bash
       env:
-        OAUTH_PRIVATE_KEY: ${{secrets.OAUTH_PRIVATE_KEY}}
+        OAUTH_PRIVATE_KEY: $\{{secrets.OAUTH_PRIVATE_KEY}}
 
     - name: Create OAuth public Key
       run: |
@@ -35,7 +35,7 @@ jobs:
         echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
       shell: bash
       env:
-        OAUTH_PUBLIC_KEY: ${{secrets.OAUTH_PUBLIC_KEY}}
+        OAUTH_PUBLIC_KEY: $\{{secrets.OAUTH_PUBLIC_KEY}}
 
     - name: Create .env file
       run: |
@@ -43,7 +43,7 @@ jobs:
         echo "$DOT_ENV" > .env
       shell: bash
       env:
-        DOT_ENV: ${{secrets.DOT_ENV}}
+        DOT_ENV: $\{{secrets.DOT_ENV}}
 
     - name: Unit testing
       run: npm run test
@@ -53,6 +53,12 @@ jobs:
 
     - name: Build project
       run: npm run build
+
+    - name: Copy graphQL files
+      run: |
+        mkdir ./dist/src/graphql \;
+        find ./src -name '*.graphql' -exec cp "{}" ./dist/src/graphql \;
+      shell: bash
 
     - name: Zip artifact for deployment
       run: zip release.zip ./dist/* ./package.json ./package-lock.json -r
@@ -94,7 +100,7 @@ jobs:
           echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
         shell: bash
         env:
-          OAUTH_PRIVATE_KEY: ${{secrets.OAUTH_PRIVATE_KEY}}
+          OAUTH_PRIVATE_KEY: $\{{secrets.OAUTH_PRIVATE_KEY}}
 
       - name: Create OAuth public Key
         run: |
@@ -102,7 +108,7 @@ jobs:
           echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
         shell: bash
         env:
-          OAUTH_PUBLIC_KEY: ${{secrets.OAUTH_PUBLIC_KEY}}
+          OAUTH_PUBLIC_KEY: $\{{secrets.OAUTH_PUBLIC_KEY}}
 
       - name: Create .env file
         run: |
@@ -110,7 +116,7 @@ jobs:
           echo "$DOT_ENV" > .env
         shell: bash
         env:
-          DOT_ENV: ${{secrets.DOT_ENV}}
+          DOT_ENV: $\{{secrets.DOT_ENV}}
 
       - name: Create file to restart application
         run: |
@@ -122,13 +128,13 @@ jobs:
         uses: AEnterprise/rsync-deploy@v1.0
         env:
           # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          ARGS: '-avzh --exclude=".*"'
+          DEPLOY_KEY: $\{{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: '-avzh --include=".env" --exclude=".*"'
           # default port rsync 22
-          SERVER_PORT: ${{ secrets.PORT }}
+          SERVER_PORT: $\{{ secrets.PORT }}
           FOLDER: "./"
-          SERVER_IP: ${{ secrets.HOST }}
+          SERVER_IP: $\{{ secrets.HOST }}
           # SFTP username
-          USERNAME: ${{ secrets.USERNAME }}
+          USERNAME: $\{{ secrets.USERNAME }}
           # example /var/www/vhosts/contoso.com/httpdocs
-          SERVER_DESTINATION: ${{ secrets.DESTINATION_PATH }}
+          SERVER_DESTINATION: $\{{ secrets.DESTINATION_PATH }}
