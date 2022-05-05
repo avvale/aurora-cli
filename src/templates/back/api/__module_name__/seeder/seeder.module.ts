@@ -7,7 +7,7 @@ import { {{ toPascalCase schema.boundedContextName }}Module } from '../../../../
     imports: [
         SharedModule,
         SequelizeConfigModule,
-        {{ toPascalCase schema.boundedContextName }}Module
-    ]
+        {{ toPascalCase schema.boundedContextName }}Module,
+    ],
 })
 export class SeederModule {}

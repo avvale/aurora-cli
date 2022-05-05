@@ -18,7 +18,7 @@ import GraphQLJSON from 'graphql-type-json';
                 JSON: GraphQLJSON // define JSON Scalar type
             },
             definitions: {
-                path: join(process.cwd(), 'src/graphql.ts'),
+                path: join(process.cwd(), 'graphql.ts'),
             },
             /* uploads: {
                 maxFileSize: 100000000, // 100 MB
