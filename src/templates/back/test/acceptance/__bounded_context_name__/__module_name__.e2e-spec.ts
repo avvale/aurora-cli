@@ -21,17 +21,8 @@ import * as _ from 'lodash';
 
 {{#if schema.hasOAuth }}
 // has OAuth
-import { JwtModule } from '@nestjs/jwt';
-{{#unlessEq (toPascalCase schema.moduleName) 'Account' }}
-import { IAccountRepository } from '../../../src/{{ config.applicationsContainer }}/iam/account/domain/account.repository';
-import { MockAccountRepository } from '../../../src/{{ config.applicationsContainer }}/iam/account/infrastructure/mock/mock-account.repository';
-{{/unlessEq }}
-{{#unlessEq (toPascalCase schema.boundedContextName) 'Iam' }}
-import { IamModule } from '../../../src/{{ config.apiContainer }}/iam/iam.module';
-{{/unlessEq }}
-import { AuthorizationGuard } from '../../../src/{{ config.apiContainer }}/shared/modules/auth/guards/authorization.guard';
-import { TestingJwtService } from '../../../src/{{ config.apiContainer }}/o-auth/credential/services/testing-jwt.service';
-import * as fs from 'fs';
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 {{/if }}
 
 
@@ -46,9 +37,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
     {{/if }}
     let seeder: Mock{{ toPascalCase schema.moduleName }}Seeder;
-    {{#if schema.hasOAuth }}
-    let testJwt: string;
-    {{/if }}
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -62,11 +50,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             imports: [
                 ...importForeignModules,
                 {{ toPascalCase schema.boundedContextName }}Module,
-                {{#if schema.hasOAuth }}
-                {{#unlessEq (toPascalCase schema.boundedContextName) 'Iam' }}
-                IamModule,
-                {{/unlessEq }}
-                {{/if }}
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -88,28 +71,14 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         };
                     },
                 }),
-                {{#if schema.hasOAuth }}
-                JwtModule.register({
-                    privateKey: fs.readFileSync('oauth-private.key', 'utf8'),
-                    publicKey: fs.readFileSync('oauth-public.key', 'utf8'),
-                    signOptions: {
-                        algorithm: 'RS256',
-                    }
-                }),
-                {{/if }}
             ],
             providers: [
-                Mock{{ toPascalCase schema.moduleName }}Seeder,
-                {{#if schema.hasOAuth }}
-                TestingJwtService,
-                {{/if }}
+                Mock{{ toPascalCase schema.moduleName }}Seeder, 
             ],
         })
             {{#if schema.hasOAuth }}
-            {{#unlessEq (toPascalCase schema.moduleName) 'Account' }}
-            .overrideProvider(IAccountRepository)
-            .useClass(MockAccountRepository)
-            {{/unlessEq }}
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
             .overrideGuard(AuthorizationGuard)
             .useValue({ canActivate: () => true })
             {{/if }}
@@ -135,9 +104,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         repositoryI18N  = module.get<I{{ toPascalCase schema.moduleName }}I18NRepository>(I{{ toPascalCase schema.moduleName }}I18NRepository);
         {{/if}}
         seeder          = module.get<Mock{{ toPascalCase schema.moduleName }}Seeder>(Mock{{ toPascalCase schema.moduleName }}Seeder);
-        {{#if schema.hasOAuth }}
-        testJwt         = module.get(TestingJwtService).getJwt();
-        {{/if }}
 
         // seed mock data in memory database
         {{#if schema.properties.hasI18n}}
@@ -156,9 +122,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}{{ toCamelCase name }}: null,{{/eq}}{{/each}}
@@ -177,9 +140,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}{{ toCamelCase name }}: undefined,{{/eq}}{{/each}}
@@ -198,9 +158,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}{{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
@@ -219,9 +176,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}{{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
@@ -240,9 +194,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq hasMinLengthPropety.name testPropety.name}}{{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
@@ -260,9 +211,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isIntegerPropety.name testPropety.name}}{{ toCamelCase name }}: 100.10,{{/eq}}{{/each}}
@@ -280,9 +228,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isIntegerUnsignedPropety.name testPropety.name}}{{ toCamelCase name }}: -1,{{/eq}}{{/each}}
@@ -300,9 +245,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isBooleanPropety.name testPropety.name}}{{ toCamelCase name }}: 'true',{{/eq}}{{/each}}
@@ -320,9 +262,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isEnumPropety.name testPropety.name}}{{ toCamelCase name }}: '****',{{/eq}}{{/each}}
@@ -340,9 +279,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isTimestampPropety.name testPropety.name}}{{ toCamelCase name }}: '****',{{/eq}}{{/each}}
@@ -360,9 +296,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isDecimalPropety.name testPropety.name}}{{ toCamelCase name }}: {{ randomDecimalDigits (add (first isDecimalPropety.decimals) 1) (last testPropety.decimals) }},{{/eq}}{{/each}}
@@ -380,9 +313,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if ../schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 {{#each ../schema.properties.test as |testPropety testPropetyId|}}{{#eq isDecimalPropety.name testPropety.name}}{{ toCamelCase name }}: {{ randomDecimalDigits (first isDecimalPropety.decimals) (add (last testPropety.decimals) 1) }},{{/eq}}{{/each}}
@@ -400,9 +330,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send(mockData[0])
             .expect(409);
     });
@@ -412,9 +339,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query:
                 {
@@ -438,9 +362,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/get')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .expect(200)
             .then(res =>
             {
@@ -455,9 +376,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query:
                 {
@@ -475,9 +393,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/create')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 id: '{{{ mocker (object type='fixedUuid') }}}',
@@ -490,9 +405,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query:
                 {
@@ -514,9 +426,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{ uuid }}')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .expect(404);
     });
 
@@ -525,9 +434,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .get('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{{ mocker (object type='fixedUuid') }}}')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .expect(200)
             .then(res =>
             {
@@ -540,9 +446,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 id: '{{ uuid }}',
@@ -555,9 +458,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .put('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 ...mockData[0],
                 id: '{{{ mocker (object type='fixedUuid') }}}',
@@ -574,9 +474,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{ uuid }}')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .expect(404);
     });
 
@@ -585,9 +482,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{{ mocker (object type='fixedUuid') }}}')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .expect(200);
     });
 
@@ -596,9 +490,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)
@@ -630,9 +521,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
@@ -670,9 +558,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     query ($query:QueryStatement)
@@ -702,9 +587,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)
@@ -736,9 +618,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     query ($query:QueryStatement)
@@ -776,9 +655,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     query ($query:QueryStatement)
@@ -814,9 +690,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     query ($id:ID!)
@@ -847,9 +720,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     query ($id:ID!)
@@ -878,9 +748,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)
@@ -914,9 +781,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)
@@ -948,9 +812,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     mutation ($id:ID!)
@@ -981,9 +842,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            {{#if schema.hasOAuth }}
-            .set('Authorization', `Bearer ${credential.accessToken}`)
-            {{/if }}
             .send({
                 query: `
                     mutation ($id:ID!)
