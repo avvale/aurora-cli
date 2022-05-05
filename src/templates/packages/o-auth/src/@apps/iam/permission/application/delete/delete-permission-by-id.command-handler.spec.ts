@@ -17,10 +17,10 @@ describe('DeletePermissionByIdCommandHandler', () =>
             providers: [
                 DeletePermissionByIdCommandHandler,
                 {
-                    provide: DeletePermissionByIdService,
+                    provide : DeletePermissionByIdService,
                     useValue: {
-                        main: () => {},
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ],
         }).compile();
@@ -41,7 +41,7 @@ describe('DeletePermissionByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeletePermissionByIdCommand(
                     permissions[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

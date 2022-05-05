@@ -23,17 +23,17 @@ describe('FindPermissionByIdQueryHandler', () =>
                 FindPermissionByIdQueryHandler,
                 {
                     provide : IPermissionRepository,
-                    useClass: MockPermissionRepository
+                    useClass: MockPermissionRepository,
                 },
                 {
                     provide : FindPermissionByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<FindPermissionByIdQueryHandler>(FindPermissionByIdQueryHandler);
         service         = module.get<FindPermissionByIdService>(FindPermissionByIdService);
@@ -55,7 +55,7 @@ describe('FindPermissionByIdQueryHandler', () =>
                 new FindPermissionByIdQuery(
                     permissions[0].id,
 
-                )
+                ),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

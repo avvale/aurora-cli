@@ -22,13 +22,14 @@ describe('FindPermissionService', () =>
                 FindPermissionService,
                 MockPermissionRepository,
                 {
-                    provide: IPermissionRepository,
+                    provide : IPermissionRepository,
                     useValue: {
-                        find: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        find: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindPermissionService);
         repository      = module.get(IPermissionRepository);

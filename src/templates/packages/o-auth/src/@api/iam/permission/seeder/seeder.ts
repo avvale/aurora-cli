@@ -6,7 +6,7 @@ import { permissions } from '../../../../@apps/iam/permission/infrastructure/see
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

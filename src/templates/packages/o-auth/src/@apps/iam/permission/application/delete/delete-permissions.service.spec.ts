@@ -25,9 +25,9 @@ describe('DeletePermissionsService', () =>
                 {
                     provide : IPermissionRepository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ },
-                    }
+                        get   : () => { /**/ },
+                        delete: () => { /**/ },
+                    },
                 },
             ],
         }).compile();

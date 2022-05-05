@@ -36,7 +36,7 @@ describe('CreatePermissionService', () =>
                 {
                     provide : IPermissionRepository,
                     useValue: {
-                        create: (item) => { /**/ },
+                        create: () => { /**/ },
                     },
                 },
             ],

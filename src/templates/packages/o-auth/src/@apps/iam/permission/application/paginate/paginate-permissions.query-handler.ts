@@ -17,7 +17,7 @@ export class PaginatePermissionsQueryHandler implements IQueryHandler<PaginatePe
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO())
+            rows.map(item => item.toDTO()),
         );
     }
 }

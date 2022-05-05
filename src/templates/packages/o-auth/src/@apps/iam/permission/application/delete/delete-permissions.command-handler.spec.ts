@@ -16,12 +16,12 @@ describe('DeletePermissionsCommandHandler', () =>
             providers: [
                 DeletePermissionsCommandHandler,
                 {
-                    provide: DeletePermissionsService,
+                    provide : DeletePermissionsService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<DeletePermissionsCommandHandler>(DeletePermissionsCommandHandler);
@@ -38,7 +38,7 @@ describe('DeletePermissionsCommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new DeletePermissionsCommand()
+                new DeletePermissionsCommand(),
             )).toBe(undefined);
         });
     });

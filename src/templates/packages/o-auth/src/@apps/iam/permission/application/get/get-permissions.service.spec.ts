@@ -22,12 +22,12 @@ describe('GetPermissionsService', () =>
                 GetPermissionsService,
                 MockPermissionRepository,
                 {
-                    provide: IPermissionRepository,
+                    provide : IPermissionRepository,
                     useValue: {
-                        get: (queryStatement) => {}
-                    }
-                }
-            ]
+                        get: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         service         = module.get(GetPermissionsService);

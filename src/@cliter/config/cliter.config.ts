@@ -204,11 +204,12 @@ export const cliterConfig: CliterConfig =
     ],
     allowedRenderExtensions: ['.ts', '.js', '.json', '.graphql', '.env', '.md', '.txt', '.htm', '.html', '.yaml'],
     platformFromDeploy     : ['GitHub'],
-    platformToDeploy       : ['Azure', 'Google Cloud'],
+    platformToDeploy       : ['Azure', 'Google Cloud', 'On Premise'],
     serviceToDeploy        : {
         back: {
             azure      : ['App Service'],
             googleCloud: ['App Engine'],
+            onPremise  : ['Plesk'],
         },
         front: {
             googleCloud: ['App Engine'],

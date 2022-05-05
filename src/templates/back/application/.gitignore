@@ -6,8 +6,8 @@
 /node_modules
 
 # Aurora files
-/src/oauth-private.key
-/src/oauth-public.key
+/oauth-private.key
+/oauth-public.key
 
 # Logs
 logs

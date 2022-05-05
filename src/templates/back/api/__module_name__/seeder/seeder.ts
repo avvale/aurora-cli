@@ -6,7 +6,7 @@ import { {{ toCamelCase schema.moduleNames }} } from '../../../../{{ config.appl
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

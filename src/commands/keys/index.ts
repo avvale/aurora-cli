@@ -21,7 +21,7 @@ export default class Key extends Command
         const prvPEM = rs.KEYUTIL.getPEM(prvKeyObj, 'PKCS1PRV');
         const pubPEM = rs.KEYUTIL.getPEM(pubKeyObj);
 
-        rsu.saveFile('src/oauth-private.key', prvPEM);
-        rsu.saveFile('src/oauth-public.key', pubPEM);
+        rsu.saveFile('oauth-private.key', prvPEM);
+        rsu.saveFile('oauth-public.key', pubPEM);
     }
 }

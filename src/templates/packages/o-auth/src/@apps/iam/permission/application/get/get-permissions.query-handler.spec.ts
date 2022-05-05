@@ -22,17 +22,17 @@ describe('GetPermissionsQueryHandler', () =>
                 GetPermissionsQueryHandler,
                 {
                     provide : IPermissionRepository,
-                    useClass: MockPermissionRepository
+                    useClass: MockPermissionRepository,
                 },
                 {
                     provide : GetPermissionsService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<GetPermissionsQueryHandler>(GetPermissionsQueryHandler);
         service         = module.get<GetPermissionsService>(GetPermissionsService);
@@ -51,7 +51,7 @@ describe('GetPermissionsQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new GetPermissionsQuery()
+                new GetPermissionsQuery(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

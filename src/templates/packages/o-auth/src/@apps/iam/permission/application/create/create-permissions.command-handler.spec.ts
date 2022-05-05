@@ -24,7 +24,8 @@ describe('CreatePermissionsCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<CreatePermissionsCommandHandler>(CreatePermissionsCommandHandler);
         service         = module.get<CreatePermissionsService>(CreatePermissionsService);

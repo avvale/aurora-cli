@@ -29,9 +29,9 @@ describe('DeletePermissionByIdService', () =>
                     useValue: {
                         deleteById: id => { /**/ },
                         findById  : id => { /**/ },
-                    }
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(DeletePermissionByIdService);
@@ -50,7 +50,7 @@ describe('DeletePermissionByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new PermissionId(permissions[0].id)
+                new PermissionId(permissions[0].id),
             )).toBe(undefined);
         });
     });

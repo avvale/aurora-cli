@@ -1,0 +1,134 @@
+name: Testing, Build and Deploy Back on Plesk
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  tests:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Create OAuth private Key
+      run: |
+        touch oauth-private.key
+        echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
+      shell: bash
+      env:
+        OAUTH_PRIVATE_KEY: ${{secrets.OAUTH_PRIVATE_KEY}}
+
+    - name: Create OAuth public Key
+      run: |
+        touch oauth-public.key
+        echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
+      shell: bash
+      env:
+        OAUTH_PUBLIC_KEY: ${{secrets.OAUTH_PUBLIC_KEY}}
+
+    - name: Create .env file
+      run: |
+        touch .env
+        echo "$DOT_ENV" > .env
+      shell: bash
+      env:
+        DOT_ENV: ${{secrets.DOT_ENV}}
+
+    - name: Unit testing
+      run: npm run test
+
+    - name: Acceptance testing
+      run: npm run test:e2e
+
+    - name: Build project
+      run: npm run build
+
+    - name: Zip artifact for deployment
+      run: zip release.zip ./dist/* ./package.json ./package-lock.json -r
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: tested-artifact
+        path: |
+          release.zip
+
+  deploy:
+    name: Rsync Plesk deploy
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tested-artifact
+
+      - name: Unzip artifact for deployment
+        run: unzip -o release.zip
+
+      - name: Delete zip artifact
+        run: rm release.zip
+
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create OAuth private Key
+        run: |
+          touch oauth-private.key
+          echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
+        shell: bash
+        env:
+          OAUTH_PRIVATE_KEY: ${{secrets.OAUTH_PRIVATE_KEY}}
+
+      - name: Create OAuth public Key
+        run: |
+          touch oauth-public.key
+          echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
+        shell: bash
+        env:
+          OAUTH_PUBLIC_KEY: ${{secrets.OAUTH_PUBLIC_KEY}}
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo "$DOT_ENV" > .env
+        shell: bash
+        env:
+          DOT_ENV: ${{secrets.DOT_ENV}}
+
+      - name: Create file to restart application
+        run: |
+          mkdir tmp
+          touch tmp/restart.txt
+        shell: bash
+
+      - name: Deploy Plesk with rsync
+        uses: AEnterprise/rsync-deploy@v1.0
+        env:
+          # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
+          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: '-avzh --exclude=".*"'
+          # default port rsync 22
+          SERVER_PORT: ${{ secrets.PORT }}
+          FOLDER: "./"
+          SERVER_IP: ${{ secrets.HOST }}
+          # SFTP username
+          USERNAME: ${{ secrets.USERNAME }}
+          # example /var/www/vhosts/contoso.com/httpdocs
+          SERVER_DESTINATION: ${{ secrets.DESTINATION_PATH }}

@@ -22,17 +22,17 @@ describe('FindPermissionQueryHandler', () =>
                 FindPermissionQueryHandler,
                 {
                     provide : IPermissionRepository,
-                    useClass: MockPermissionRepository
+                    useClass: MockPermissionRepository,
                 },
                 {
                     provide : FindPermissionService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<FindPermissionQueryHandler>(FindPermissionQueryHandler);
         service         = module.get<FindPermissionService>(FindPermissionService);
@@ -51,7 +51,7 @@ describe('FindPermissionQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
-                new FindPermissionQuery()
+                new FindPermissionQuery(),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

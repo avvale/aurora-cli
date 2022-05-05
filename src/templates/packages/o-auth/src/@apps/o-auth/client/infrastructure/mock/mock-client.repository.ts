@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { OAuthApplication } from 'src/@apps/o-auth/application/domain/application.aggregate';
-import { ApplicationClientIds, ApplicationCode, ApplicationCreatedAt, ApplicationDeletedAt, ApplicationId, ApplicationIsMaster, ApplicationName, ApplicationSecret, ApplicationUpdatedAt } from 'src/@apps/o-auth/application/domain/value-objects';
-import { applications } from 'src/@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { OAuthApplication } from '../../../../../@apps/o-auth/application/domain/application.aggregate';
+import { ApplicationClientIds, ApplicationCode, ApplicationCreatedAt, ApplicationDeletedAt, ApplicationId, ApplicationIsMaster, ApplicationName, ApplicationSecret, ApplicationUpdatedAt } from '../../../../../@apps/o-auth/application/domain/value-objects';
+import { applications } from '../../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
 import { IClientRepository } from '../../../../../@apps/o-auth/client/domain/client.repository';
 import {
     ClientId,

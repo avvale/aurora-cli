@@ -6,7 +6,7 @@ import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastru
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

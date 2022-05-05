@@ -9,7 +9,8 @@ export class AddPermissionsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamPermission[] = [],
-    ) {
+    )
+    {
         super();
     }
 
@@ -18,7 +19,7 @@ export class AddPermissionsContextEvent extends AggregateRoot
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created()
+    created(): void
     {
         this.apply(
             new CreatedPermissionsEvent(
@@ -31,13 +32,13 @@ export class AddPermissionsContextEvent extends AggregateRoot
                         permission.createdAt?.value,
                         permission.updatedAt?.value,
                         permission.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 
-    deleted()
+    deleted(): void
     {
         this.apply(
             new DeletedPermissionsEvent(
@@ -50,9 +51,9 @@ export class AddPermissionsContextEvent extends AggregateRoot
                         permission.createdAt?.value,
                         permission.updatedAt?.value,
                         permission.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 }

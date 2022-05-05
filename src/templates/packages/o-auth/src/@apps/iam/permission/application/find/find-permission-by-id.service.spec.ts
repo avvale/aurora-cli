@@ -24,13 +24,14 @@ describe('FindPermissionByIdService', () =>
                 FindPermissionByIdService,
                 MockPermissionRepository,
                 {
-                    provide: IPermissionRepository,
+                    provide : IPermissionRepository,
                     useValue: {
-                        findById: id => { /**/ }
-                    }
-                }
-            ]
-        }).compile();
+                        findById: id => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindPermissionByIdService);
         repository      = module.get(IPermissionRepository);
@@ -48,7 +49,7 @@ describe('FindPermissionByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new PermissionId(permissions[0].id)
+                new PermissionId(permissions[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

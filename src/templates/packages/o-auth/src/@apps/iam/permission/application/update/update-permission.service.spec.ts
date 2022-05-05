@@ -33,12 +33,12 @@ describe('UpdatePermissionService', () =>
                 UpdatePermissionService,
                 MockPermissionRepository,
                 {
-                    provide: IPermissionRepository,
+                    provide : IPermissionRepository,
                     useValue: {
-                        update: (item) => { /**/ }
-                    }
+                        update: () => { /**/ },
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(UpdatePermissionService);

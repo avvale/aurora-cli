@@ -18,7 +18,7 @@ export class DeletePermissionByIdCommandHandler implements ICommandHandler<Delet
         await this.deletePermissionByIdService.main(
             new PermissionId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

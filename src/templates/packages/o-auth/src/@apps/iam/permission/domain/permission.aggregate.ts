@@ -96,7 +96,7 @@ export class IamPermission extends AggregateRoot
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -111,7 +111,7 @@ export class IamPermission extends AggregateRoot
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -126,7 +126,7 @@ export class IamPermission extends AggregateRoot
                 permission.createdAt?.value,
                 permission.updatedAt?.value,
                 permission.deletedAt?.value,
-            )
+            ),
         );
     }
 

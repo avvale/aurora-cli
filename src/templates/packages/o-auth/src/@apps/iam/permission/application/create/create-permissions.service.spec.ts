@@ -25,8 +25,8 @@ describe('CreatePermissionsService', () =>
                 {
                     provide : IPermissionRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
@@ -46,7 +46,7 @@ describe('CreatePermissionsService', () =>
         test('should create permissions and emit event', async () =>
         {
             expect(await service.main(
-                mockRepository.collectionSource
+                mockRepository.collectionSource,
             )).toBe(undefined);
         });
     });
