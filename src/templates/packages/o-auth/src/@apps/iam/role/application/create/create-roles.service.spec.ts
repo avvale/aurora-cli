@@ -25,8 +25,8 @@ describe('CreateRolesService', () =>
                 {
                     provide : IRoleRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
             ]
         }).compile();
@@ -46,7 +46,7 @@ describe('CreateRolesService', () =>
         test('should create roles and emit event', async () =>
         {
             expect(await service.main(
-                mockRepository.collectionSource
+                mockRepository.collectionSource,
             )).toBe(undefined);
         });
     });

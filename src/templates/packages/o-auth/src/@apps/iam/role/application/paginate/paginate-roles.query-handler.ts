@@ -17,7 +17,7 @@ export class PaginateRolesQueryHandler implements IQueryHandler<PaginateRolesQue
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO())
+            rows.map(item => item.toDTO()),
         );
     }
 }

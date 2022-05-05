@@ -22,17 +22,17 @@ describe('GetRolesQueryHandler', () =>
                 GetRolesQueryHandler,
                 {
                     provide : IRoleRepository,
-                    useClass: MockRoleRepository
+                    useClass: MockRoleRepository,
                 },
                 {
                     provide : GetRolesService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<GetRolesQueryHandler>(GetRolesQueryHandler);
         service         = module.get<GetRolesService>(GetRolesService);
@@ -51,7 +51,7 @@ describe('GetRolesQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new GetRolesQuery()
+                new GetRolesQuery(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

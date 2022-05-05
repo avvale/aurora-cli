@@ -37,7 +37,7 @@ describe('CreateRoleService', () =>
                 {
                     provide : IRoleRepository,
                     useValue: {
-                        create: (item) => { /**/ },
+                        create: () => { /**/ },
                     },
                 },
             ],

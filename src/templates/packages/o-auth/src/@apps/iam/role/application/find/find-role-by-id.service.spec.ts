@@ -24,13 +24,14 @@ describe('FindRoleByIdService', () =>
                 FindRoleByIdService,
                 MockRoleRepository,
                 {
-                    provide: IRoleRepository,
+                    provide : IRoleRepository,
                     useValue: {
-                        findById: id => { /**/ }
-                    }
-                }
-            ]
-        }).compile();
+                        findById: id => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindRoleByIdService);
         repository      = module.get(IRoleRepository);
@@ -48,7 +49,7 @@ describe('FindRoleByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new RoleId(roles[0].id)
+                new RoleId(roles[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

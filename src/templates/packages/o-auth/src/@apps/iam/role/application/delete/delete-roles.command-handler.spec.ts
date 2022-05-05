@@ -16,12 +16,12 @@ describe('DeleteRolesCommandHandler', () =>
             providers: [
                 DeleteRolesCommandHandler,
                 {
-                    provide: DeleteRolesService,
+                    provide : DeleteRolesService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         commandHandler  = module.get<DeleteRolesCommandHandler>(DeleteRolesCommandHandler);
@@ -38,7 +38,7 @@ describe('DeleteRolesCommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new DeleteRolesCommand()
+                new DeleteRolesCommand(),
             )).toBe(undefined);
         });
     });

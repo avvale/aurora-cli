@@ -18,7 +18,7 @@ export class DeleteRoleByIdCommandHandler implements ICommandHandler<DeleteRoleB
         await this.deleteRoleByIdService.main(
             new RoleId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

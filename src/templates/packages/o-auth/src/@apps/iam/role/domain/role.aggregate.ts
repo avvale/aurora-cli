@@ -103,7 +103,7 @@ export class IamRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -119,7 +119,7 @@ export class IamRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -135,7 +135,7 @@ export class IamRole extends AggregateRoot
                 role.createdAt?.value,
                 role.updatedAt?.value,
                 role.deletedAt?.value,
-            )
+            ),
         );
     }
 

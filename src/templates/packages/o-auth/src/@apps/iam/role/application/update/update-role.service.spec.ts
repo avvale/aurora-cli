@@ -34,12 +34,12 @@ describe('UpdateRoleService', () =>
                 UpdateRoleService,
                 MockRoleRepository,
                 {
-                    provide: IRoleRepository,
+                    provide : IRoleRepository,
                     useValue: {
-                        update: (item) => { /**/ }
-                    }
+                        update: () => { /**/ },
+                    },
                 },
-            ]
+            ],
         }).compile();
 
         service         = module.get(UpdateRoleService);
@@ -63,7 +63,7 @@ describe('UpdateRoleService', () =>
                     isMaster: new RoleIsMaster(roles[0].isMaster),
                     permissionIds: new RolePermissionIds(roles[0].permissionIds),
                     accountIds: new RoleAccountIds(roles[0].accountIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

@@ -4,7 +4,7 @@ import { DeletedRoleEvent } from './deleted-role.event';
 @EventsHandler(DeletedRoleEvent)
 export class DeletedRoleEventHandler implements IEventHandler<DeletedRoleEvent>
 {
-    handle(event: DeletedRoleEvent)
+    handle(event: DeletedRoleEvent): void
     {
         // console.log('DeletedRoleEvent: ', event);
     }

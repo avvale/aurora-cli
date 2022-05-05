@@ -23,7 +23,8 @@ describe('CreateRoleCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<CreateRoleCommandHandler>(CreateRoleCommandHandler);
         service         = module.get<CreateRoleService>(CreateRoleService);

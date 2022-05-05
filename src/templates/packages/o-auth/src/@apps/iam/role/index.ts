@@ -67,7 +67,7 @@ export const IamRoleHandlers = [
     DeletedRoleEventHandler,
     DeletedRolesEventHandler,
 
-    // custom
+    // ---- customizations ----
     CreateRolesAccountsCommandHandler,
     CreateRolesAccountsService,
 ];

@@ -4,7 +4,7 @@ import { CreatedRolesEvent } from './created-roles.event';
 @EventsHandler(CreatedRolesEvent)
 export class CreatedRolesEventHandler implements IEventHandler<CreatedRolesEvent>
 {
-    handle(event: CreatedRolesEvent)
+    handle(event: CreatedRolesEvent): void
     {
         // console.log('CreatedRolesEvent: ', event);
     }

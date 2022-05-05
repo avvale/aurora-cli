@@ -23,17 +23,17 @@ describe('FindRoleByIdQueryHandler', () =>
                 FindRoleByIdQueryHandler,
                 {
                     provide : IRoleRepository,
-                    useClass: MockRoleRepository
+                    useClass: MockRoleRepository,
                 },
                 {
                     provide : FindRoleByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<FindRoleByIdQueryHandler>(FindRoleByIdQueryHandler);
         service         = module.get<FindRoleByIdService>(FindRoleByIdService);
@@ -55,7 +55,7 @@ describe('FindRoleByIdQueryHandler', () =>
                 new FindRoleByIdQuery(
                     roles[0].id,
 
-                )
+                ),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

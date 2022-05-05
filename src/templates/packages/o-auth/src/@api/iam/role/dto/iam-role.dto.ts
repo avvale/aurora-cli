@@ -24,13 +24,13 @@ export class IamRoleDto
     isMaster: boolean;
 
     @ApiProperty({
-        type       : [IamPermissionDto],
+        type       : () => [IamPermissionDto],
         description: 'permissions [input here api field description]',
     })
     permissions?: IamPermissionDto[];
 
     @ApiProperty({
-        type       : [IamAccountDto],
+        type       : () => [IamAccountDto],
         description: 'accounts [input here api field description]',
     })
     accounts?: IamAccountDto[];

@@ -17,10 +17,10 @@ describe('DeleteRoleByIdCommandHandler', () =>
             providers: [
                 DeleteRoleByIdCommandHandler,
                 {
-                    provide: DeleteRoleByIdService,
+                    provide : DeleteRoleByIdService,
                     useValue: {
-                        main: () => {},
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ],
         }).compile();
@@ -41,7 +41,7 @@ describe('DeleteRoleByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteRoleByIdCommand(
                     roles[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

@@ -6,7 +6,7 @@ import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

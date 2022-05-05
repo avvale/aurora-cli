@@ -9,7 +9,8 @@ export class AddRolesContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamRole[] = [],
-    ) {
+    )
+    {
         super();
     }
 
@@ -18,7 +19,7 @@ export class AddRolesContextEvent extends AggregateRoot
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created()
+    created(): void
     {
         this.apply(
             new CreatedRolesEvent(
@@ -32,13 +33,13 @@ export class AddRolesContextEvent extends AggregateRoot
                         role.createdAt?.value,
                         role.updatedAt?.value,
                         role.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 
-    deleted()
+    deleted(): void
     {
         this.apply(
             new DeletedRolesEvent(
@@ -52,9 +53,9 @@ export class AddRolesContextEvent extends AggregateRoot
                         role.createdAt?.value,
                         role.updatedAt?.value,
                         role.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 }

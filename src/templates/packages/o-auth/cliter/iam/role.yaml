@@ -3,7 +3,7 @@ boundedContextName: iam
 moduleName: role
 moduleNames: roles
 aggregateName: IamRole
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
 aggregateProperties:
   - name: id

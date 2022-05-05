@@ -22,12 +22,12 @@ describe('GetRolesService', () =>
                 GetRolesService,
                 MockRoleRepository,
                 {
-                    provide: IRoleRepository,
+                    provide : IRoleRepository,
                     useValue: {
-                        get: (queryStatement) => {}
-                    }
-                }
-            ]
+                        get: () => { /**/ },
+                    },
+                },
+            ],
         }).compile();
 
         service         = module.get(GetRolesService);

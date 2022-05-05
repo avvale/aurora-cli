@@ -22,13 +22,14 @@ describe('FindRoleService', () =>
                 FindRoleService,
                 MockRoleRepository,
                 {
-                    provide: IRoleRepository,
+                    provide : IRoleRepository,
                     useValue: {
-                        find: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        find: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindRoleService);
         repository      = module.get(IRoleRepository);
