@@ -25,7 +25,6 @@ import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentica
 import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 {{/if }}
 
-
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 {{setVar 'language' '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a'}}
@@ -73,7 +72,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }),
             ],
             providers: [
-                Mock{{ toPascalCase schema.moduleName }}Seeder, 
+                Mock{{ toPascalCase schema.moduleName }}Seeder,
             ],
         })
             {{#if schema.hasOAuth }}
