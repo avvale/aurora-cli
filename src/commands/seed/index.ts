@@ -8,7 +8,6 @@ import * as logSymbols from 'log-symbols';
 import * as ora from 'ora';
 import { TemplateElement, Operations, Prompter, cliterConfig } from '../../@cliter';
 
-
 export default class Seed extends Command
 {
     static description = 'Seed database with bounded context or module selected';
@@ -26,7 +25,7 @@ export default class Seed extends Command
             required   : true,
             description: 'Type element to create',
             options    : ['bounded-context', 'b', 'module', 'm'],
-        }
+        },
     ];
 
     async run()
