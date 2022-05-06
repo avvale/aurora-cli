@@ -3,7 +3,7 @@ import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreateRolesCommand } from '../../../../@apps/iam/role/application/create/create-roles.command';
-import { IamCreateRoleInput } from '../../../../../graphql';
+import { IamCreateRoleInput } from '../../../../graphql';
 import { IamCreateRoleDto } from '../dto';
 
 @Injectable()

@@ -4,7 +4,7 @@ import { IamRoleDto } from '../../../iam/role/dto/iam-role.dto';
 import { IamTenantDto } from '../../../iam/tenant/dto/iam-tenant.dto';
 import { OAuthClientDto } from '../../../o-auth/client/dto/o-auth-client.dto';
 import { IamUserDto } from '../../../iam/user/dto/iam-user.dto';
-import { IamAccountType } from '../../../../../graphql';
+import { IamAccountType } from '../../../../graphql';
 
 export class IamAccountDto
 {
@@ -39,7 +39,7 @@ export class IamAccountDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : '7a87fefc-a431-4a91-bedd-fde94f664159',
+        example    : 'b1da5465-1182-49cf-97c0-8c3ad95dc93e',
     })
     clientId: string;
 

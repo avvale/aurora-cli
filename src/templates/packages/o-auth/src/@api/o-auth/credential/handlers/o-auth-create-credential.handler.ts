@@ -10,7 +10,7 @@ import { FindAccountQuery } from '../../../../@apps/iam/account/application/find
 import { OAuthRefreshTokenModel } from '../../../../@apps/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model';
 import { FindUserByUsernamePasswordQuery } from '../../../../@apps/iam/user/application/find/find-user-by-username-password.query';
 import { FindApplicationByAuthorizationHeaderQuery } from '../../../../@apps/o-auth/application/application/find/find-application-by-authorization-header.query';
-import { OAuthClientGrantType, OAuthCredential, OAuthCreateCredentialInput, IamAccountType } from '../../../../../graphql';
+import { OAuthClientGrantType, OAuthCredential, OAuthCreateCredentialInput, IamAccountType } from '../../../../../src/graphql';
 import { OAuthCreateCredentialDto, OAuthCredentialDto } from '../dto';
 
 @Injectable()

@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { IamPaginatePermissionsHandler } from '../handlers/iam-paginate-permissions.handler';
-import { Pagination } from '../../../../../graphql';
+import { Pagination } from '../../../../graphql';
 
 @Resolver()
 @Permissions('iam.permission.get')

@@ -1,7 +1,7 @@
 // ignored file
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
-import { IamAccountType } from '../../../../../../graphql';
+import { IamAccountType } from '../../../../../graphql';
 import { users } from '../../../user/infrastructure/seeds/user.seed';
 
 export const accounts = [

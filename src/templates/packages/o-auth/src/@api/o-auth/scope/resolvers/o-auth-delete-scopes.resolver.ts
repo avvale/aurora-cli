@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { OAuthDeleteScopesHandler } from '../handlers/o-auth-delete-scopes.handler';
-import { OAuthScope } from '../../../../../graphql';
+import { OAuthScope } from '../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.scope.delete')

@@ -1,4 +1,4 @@
-import { OAuthClientGrantType } from '../../../../../../graphql';
+import { OAuthClientGrantType } from '../../../../../graphql';
 import { applications } from '../../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
 
 export const clients = [

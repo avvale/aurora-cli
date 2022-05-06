@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { OAuthCreateScopeHandler } from '../handlers/o-auth-create-scope.handler';
-import { OAuthScope, OAuthCreateScopeInput } from '../../../../../graphql';
+import { OAuthScope, OAuthCreateScopeInput } from '../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.scope.create')

@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { OAuthFindRefreshTokenByIdHandler } from '../handlers/o-auth-find-refresh-token-by-id.handler';
-import { OAuthRefreshToken } from '../../../../../graphql';
+import { OAuthRefreshToken } from '../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.refreshToken.get')

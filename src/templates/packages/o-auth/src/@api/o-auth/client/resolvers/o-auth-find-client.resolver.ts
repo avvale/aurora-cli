@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { OAuthFindClientHandler } from '../handlers/o-auth-find-client.handler';
-import { OAuthClient } from '../../../../../graphql';
+import { OAuthClient } from '../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.client.get')

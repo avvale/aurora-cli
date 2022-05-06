@@ -8,13 +8,14 @@ import { IApplicationRepository } from '../../../src/@apps/o-auth/application/do
 import { MockApplicationSeeder } from '../../../src/@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
 import { applications } from '../../../src/@apps/o-auth/application/infrastructure/seeds/application.seed';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
-import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
+
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // has OAuth
 import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -376,7 +377,7 @@ describe('application', () =>
                 {
                     where:
                     {
-                        id: '8df3701c-3aff-4a09-b3c8-0bfb2ae5afaa',
+                        id: '4d2c7c50-ded8-4d1d-b693-787b85d613fb',
                     },
                 },
             })
@@ -419,7 +420,7 @@ describe('application', () =>
     test('/REST:GET o-auth/application/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/find/b7be8e19-618a-4949-bd7a-705bac7adfab')
+            .get('/o-auth/application/find/07dd3284-021b-4078-969d-237831d4f2eb')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -443,7 +444,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                id: 'd32d3895-5c36-45b5-a0e3-6f1f35081c1b',
+                id: '2d70aa89-422f-44c0-b7b0-2ac0eb7c43eb',
             })
             .expect(404);
     });
@@ -467,7 +468,7 @@ describe('application', () =>
     test('/REST:DELETE o-auth/application/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/delete/ba3d1ef1-aebd-4910-9acd-d34e378367f1')
+            .delete('/o-auth/application/delete/41d63361-7d87-4316-9ce9-4d0d0546530b')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -643,7 +644,7 @@ describe('application', () =>
                     {
                         where:
                         {
-                            id: 'a7aad787-6216-42d0-89a2-6adcbdb788b9',
+                            id: 'd2c561fb-508e-4408-b705-f7b37b45b6e7',
                         },
                     },
                 },
@@ -718,7 +719,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '66ee075a-5aa8-4e9b-8dda-e1aaa08b7678',
+                    id: '7790aa9e-aa06-46f4-9b27-7ce6b71c577b',
                 },
             })
             .expect(200)
@@ -786,7 +787,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        id: 'ac90426e-98b3-4d1a-848e-a2e1a8a960dd',
+                        id: 'b3090f7d-6f04-441e-8ea0-51ac0b0ec192',
                     },
                 },
             })
@@ -856,7 +857,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'fc1119ef-8fa8-419e-a8cd-c7e338083141',
+                    id: '2532d4ba-40a7-40f2-bf38-4cc057622a41',
                 },
             })
             .expect(200)

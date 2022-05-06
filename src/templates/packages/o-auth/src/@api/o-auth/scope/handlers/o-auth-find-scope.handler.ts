@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { FindScopeQuery } from '../../../../@apps/o-auth/scope/application/find/find-scope.query';
-import { OAuthScope } from '../../../../../graphql';
+import { OAuthScope } from '../../../../graphql';
 import { OAuthScopeDto } from '../dto';
 
 @Injectable()

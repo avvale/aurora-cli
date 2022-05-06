@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 import { IamUpdateUserDto } from '../../../iam/user/dto/iam-update-user.dto';
-import { IamAccountType } from '../../../../../graphql';
+import { IamAccountType } from '../../../../graphql';
 
 export class IamUpdateAccountDto
 {
@@ -36,7 +36,7 @@ export class IamUpdateAccountDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : '275e5317-1b79-4275-a28f-b37c0d865b68',
+        example    : '1d97f0d8-b643-44ab-af55-870d93b9cc51',
     })
     clientId?: string;
 

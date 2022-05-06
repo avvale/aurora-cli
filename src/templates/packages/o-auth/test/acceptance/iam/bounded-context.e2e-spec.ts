@@ -17,7 +17,7 @@ import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentica
 import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 
 // ---- customizations ----
-import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
+import { OAuthModule } from '@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { OAuthUpdateClientHandler } from './o-auth-update-client.handler';
-import { OAuthUpdateClientInput } from '../../../../../graphql';
+import { OAuthUpdateClientInput } from '../../../../graphql';
 
 // sources
 import { clients } from '../../../../@apps/o-auth/client/infrastructure/seeds/client.seed';

@@ -12,7 +12,7 @@ export class IamCreateUserDto
     @ApiProperty({
         type       : String,
         description: 'accountId [input here api field description]',
-        example    : 'b77d24d1-3b68-48a1-976f-add55a736369',
+        example    : '1a5fafec-0170-49fa-8888-b59eb30c67cc',
     })
     accountId: string;
 

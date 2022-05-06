@@ -263,7 +263,7 @@
         },
         {
             "path": "src/@apps/iam/tenant/infrastructure/seeds/tenant.seed.ts",
-            "integrity": "sha1:e0c81ca10e5da8254ef25d6632674916e5edf8f8"
+            "integrity": "sha1:dbe908fd76fcb69c09fd7a35d8659a3ac4b43d2e"
         },
         {
             "path": "src/@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model.ts",
@@ -415,7 +415,7 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-create-tenant.handler.ts",
-            "integrity": "sha1:f05a81d1af623b979989a80b9bb788c1474c34eb"
+            "integrity": "sha1:ec45553b328bc7cfa6518af2da2b1a96a41b0f93"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-create-tenants.handler.spec.ts",
@@ -423,7 +423,7 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-create-tenants.handler.ts",
-            "integrity": "sha1:b2f94d842388b810c6471117518c8919d6deaeec"
+            "integrity": "sha1:2a65815620a9edfbfcdf53a9029dcea3ddf7fe44"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-delete-tenant-by-id.handler.spec.ts",
@@ -431,7 +431,7 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-delete-tenant-by-id.handler.ts",
-            "integrity": "sha1:5bebc1907f66d54159d490f9f37259ea12a244d5"
+            "integrity": "sha1:6802fa013fc3ef49588ba56f0f90c49e46bebc8b"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-delete-tenants.handler.spec.ts",
@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-delete-tenants.handler.ts",
-            "integrity": "sha1:820ef82f2db656630b47b5b34d95fdd9945982cd"
+            "integrity": "sha1:905dfe4dad226cde2ab086eaf09df88b5faf100a"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-find-tenant-by-id.handler.spec.ts",
@@ -447,7 +447,7 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-find-tenant-by-id.handler.ts",
-            "integrity": "sha1:e8d81244a14234a91c464065f447466dd749dbfa"
+            "integrity": "sha1:f24cb67b5ad6c61582722f87f171d2e8249c96c1"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-find-tenant.handler.spec.ts",
@@ -455,7 +455,7 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-find-tenant.handler.ts",
-            "integrity": "sha1:1aceded215d1ddf25ed938b914d1bb1491c1c83d"
+            "integrity": "sha1:3e7350601ec66975311808af7bb3e989b96fa52f"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-get-tenants.handler.spec.ts",
@@ -463,7 +463,7 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-get-tenants.handler.ts",
-            "integrity": "sha1:2b54d4637847ad30c1b9dfc903b9413740bb540d"
+            "integrity": "sha1:d685d0c648ae5167573a92036a02cc16b4c60466"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-paginate-tenants.handler.spec.ts",
@@ -471,15 +471,15 @@
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-paginate-tenants.handler.ts",
-            "integrity": "sha1:3ac6b7ae3275e1d9a19fe6b9af70e057a14a71ea"
+            "integrity": "sha1:e294ef3c6e8acf58bcc443c256ef8a91bb0ab315"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-update-tenant.handler.spec.ts",
-            "integrity": "sha1:999f8cd4aba6d027f6c5ac27a2b52c53fb11efc7"
+            "integrity": "sha1:4b3f69a4bbc78c07f103fea40b41b91df89ff306"
         },
         {
             "path": "src/@api/iam/tenant/handlers/iam-update-tenant.handler.ts",
-            "integrity": "sha1:d283715bb0f21ddcf6c1c6c8afcdbea7927596bc"
+            "integrity": "sha1:3569c3f841125800b4475977fcf9b364af1d963f"
         },
         {
             "path": "src/@api/iam/tenant/index.ts",
@@ -487,19 +487,19 @@
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-create-tenant.resolver.spec.ts",
-            "integrity": "sha1:1baaea1bd16e30256cefb8a5a90f007e0f5a8cca"
+            "integrity": "sha1:51f9ea2c1e97d211585c5a76d9efe3783a117617"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-create-tenant.resolver.ts",
-            "integrity": "sha1:8fc47f4b54371599229cbd28b0d5f4cc699191fb"
+            "integrity": "sha1:6ceb479c2f0fcbe11bb2b92d9b03887958cf1bc1"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-create-tenants.resolver.spec.ts",
-            "integrity": "sha1:e5a7b468ebf683d8756091a42e58d3dd42bdb792"
+            "integrity": "sha1:db922baf0bb2fb154458711de32a104a98028943"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-create-tenants.resolver.ts",
-            "integrity": "sha1:8efa3cc7653a7e99a3cdc7c17c418c843f0524be"
+            "integrity": "sha1:a81932fe0ecada087ec26a5f4464e6834a09b826"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-delete-tenant-by-id.resolver.spec.ts",
@@ -507,7 +507,7 @@
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-delete-tenant-by-id.resolver.ts",
-            "integrity": "sha1:fe4d270a8b17a20a5bec4d094234ab22f7a9c9a6"
+            "integrity": "sha1:ec5e1500e98bd13522ae35c9f2dbd60f2d0c5462"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-delete-tenants.resolver.spec.ts",
@@ -515,7 +515,7 @@
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-delete-tenants.resolver.ts",
-            "integrity": "sha1:c306cde8c76ffd11384599fed882dae3e18c3dc0"
+            "integrity": "sha1:c88228e50cfaf09b57865318e6184e9307122d17"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-find-tenant-by-id.resolver.spec.ts",
@@ -523,7 +523,7 @@
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-find-tenant-by-id.resolver.ts",
-            "integrity": "sha1:54a750320506f8c8d54f1d5ab6977eb0b6e3a94c"
+            "integrity": "sha1:8a98cf4a9f3eb6aab55351a15c3418074b8ec8d3"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-find-tenant.resolver.spec.ts",
@@ -531,7 +531,7 @@
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-find-tenant.resolver.ts",
-            "integrity": "sha1:750ed6ea9026af23de5ddaff6fafab884c7fd3eb"
+            "integrity": "sha1:b8a09f85bbd493af19169d600412f6ddb2344660"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-get-tenants.resolver.spec.ts",
@@ -539,7 +539,7 @@
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-get-tenants.resolver.ts",
-            "integrity": "sha1:86a5e9b509210195e24e311eedba1ef4ea68bc84"
+            "integrity": "sha1:d8e0457bcf3483b4d3e5ae444ec4ef442ffec464"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-paginate-tenants.resolver.spec.ts",
@@ -547,15 +547,15 @@
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-paginate-tenants.resolver.ts",
-            "integrity": "sha1:09c047ba8cbaa8195911bc1bf7835dbdfb553d78"
+            "integrity": "sha1:e94cb2c7886b1fd43aa7adc5ab3dea73c8bbc20e"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-update-tenant.resolver.spec.ts",
-            "integrity": "sha1:fa442067bf6e71c7a1307db2df2165bad0bcb4e8"
+            "integrity": "sha1:ad80e4e03f09d4a46dd89f0a5320aba964c4af72"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-update-tenant.resolver.ts",
-            "integrity": "sha1:c0d2ea68f7ba083dcdf5eadd5e917eed6a9756a4"
+            "integrity": "sha1:aa4e74973ef05b115f90746c6110faad82164a15"
         },
         {
             "path": "src/@api/iam/tenant/seeder/seeder.module.ts",
@@ -567,11 +567,11 @@
         },
         {
             "path": "test/acceptance/iam/tenant.e2e-spec.ts",
-            "integrity": "sha1:43832dac559746afe1cddc3ca19fa8ee2f27c6a9"
+            "integrity": "sha1:7bb378150f140f52a3d9e68eaa5e4b4dc8f4d4d0"
         },
         {
             "path": "postman/iam.tenant.postman.json",
-            "integrity": "sha1:91f35c65a6ad8efaaf54090f8d2093fd0327ba8d"
+            "integrity": "sha1:e1d55970b2248d4aef30b1cc668a82c0181ae345"
         }
     ]
 }

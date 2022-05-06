@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { OAuthCreateClientsResolver } from './o-auth-create-clients.resolver';
 import { OAuthCreateClientsHandler } from '../handlers/o-auth-create-clients.handler';
-import { OAuthCreateClientInput } from '../../../../../graphql';
+import { OAuthCreateClientInput } from '../../../../graphql';
 
 // sources
 import { clients } from '../../../../@apps/o-auth/client/infrastructure/seeds/client.seed';
