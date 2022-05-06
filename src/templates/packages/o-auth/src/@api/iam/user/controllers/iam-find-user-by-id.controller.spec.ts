@@ -6,7 +6,7 @@ import { IamFindUserByIdController } from './iam-find-user-by-id.controller';
 import { IamFindUserByIdHandler } from '../handlers/iam-find-user-by-id.handler';
 
 // sources
-import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamFindUserByIdController', () =>
 {

@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from 'aurora-ts-core';
-import { CreateRolesCommand } from '../../../../@apps/iam/role/application/create/create-roles.command';
+import { CreateRolesCommand } from '@apps/iam/role/application/create/create-roles.command';
 import { SeederModule } from './seeder.module';
-import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
 
 export class Seeder
 {

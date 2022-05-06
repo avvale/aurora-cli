@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { accessTokens } from '../../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 import { DeleteAccessTokenByIdService } from './delete-access-token-by-id.service';
 import { AccessTokenId } from '../../domain/value-objects';
 import { IAccessTokenRepository } from '../../domain/access-token.repository';

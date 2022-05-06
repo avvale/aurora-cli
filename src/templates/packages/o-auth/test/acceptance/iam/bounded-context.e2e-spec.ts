@@ -4,17 +4,17 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IBoundedContextRepository } from '../../../src/@apps/iam/bounded-context/domain/bounded-context.repository';
-import { MockBoundedContextSeeder } from '../../../src/@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
-import { boundedContexts } from '../../../src/@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
-import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
-import { IamModule } from '../../../src/@api/iam/iam.module';
+import { IBoundedContextRepository } from '@apps/iam/bounded-context/domain/bounded-context.repository';
+import { MockBoundedContextSeeder } from '@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
+import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { IamModule } from '@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // has OAuth
-import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // ---- customizations ----
 import { OAuthModule } from '@api/o-auth/o-auth.module';

@@ -6,7 +6,7 @@ import { IamFindRoleByIdController } from './iam-find-role-by-id.controller';
 import { IamFindRoleByIdHandler } from '../handlers/iam-find-role-by-id.handler';
 
 // sources
-import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
 
 describe('IamFindRoleByIdController', () =>
 {

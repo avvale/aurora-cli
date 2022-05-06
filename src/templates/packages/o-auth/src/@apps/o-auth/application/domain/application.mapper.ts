@@ -13,7 +13,7 @@ import {
     ApplicationUpdatedAt,
     ApplicationDeletedAt,
 } from './value-objects';
-import { ClientMapper } from '../../../../@apps/o-auth/client/domain/client.mapper';
+import { ClientMapper } from '@apps/o-auth/client/domain/client.mapper';
 
 export class ApplicationMapper implements IMapper
 {

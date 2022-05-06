@@ -3,24 +3,24 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
-import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { OAuthModule } from '@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // ---- customizations ----
-import { AuthModule } from '../../../src/@apps/o-auth/shared/modules/auth.module';
-import { IamModule } from '../../../src/@api/iam/iam.module';
-import { MockJwtService } from '../../../src/@apps/o-auth/access-token/infrastructure/mock/mock-jwt.service';
+import { AuthModule } from '@apps/o-auth/shared/modules/auth.module';
+import { IamModule } from '@api/iam/iam.module';
+import { MockJwtService } from '@apps/o-auth/access-token/infrastructure/mock/mock-jwt.service';
 import { OAuthClientGrantType } from '../../../src/graphql';
-import { IApplicationRepository } from '../../../src/@apps/o-auth/application';
-import { MockApplicationSeeder } from '../../../src/@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
-import { IClientRepository } from '../../../src/@apps/o-auth/client';
-import { MockClientSeeder } from '../../../src/@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
-import { IAccountRepository } from '../../../src/@apps/iam/account';
-import { MockAccountSeeder } from '../../../src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
-import { IUserRepository } from '../../../src/@apps/iam/user';
-import { MockUserSeeder } from '../../../src/@apps/iam/user/infrastructure/mock/mock-user.seeder';
+import { IApplicationRepository } from '@apps/o-auth/application';
+import { MockApplicationSeeder } from '@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
+import { IClientRepository } from '@apps/o-auth/client';
+import { MockClientSeeder } from '@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
+import { IAccountRepository } from '@apps/iam/account';
+import { MockAccountSeeder } from '@apps/iam/account/infrastructure/mock/mock-account.seeder';
+import { IUserRepository } from '@apps/iam/user';
+import { MockUserSeeder } from '@apps/iam/user/infrastructure/mock/mock-user.seeder';
 
 const importForeignModules = [];
 

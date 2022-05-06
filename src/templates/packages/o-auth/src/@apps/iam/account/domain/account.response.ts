@@ -1,7 +1,7 @@
-import { UserResponse } from '../../../../@apps/iam/user/domain/user.response';
-import { ClientResponse } from '../../../../@apps/o-auth/client/domain/client.response';
-import { RoleResponse } from '../../../../@apps/iam/role/domain/role.response';
-import { TenantResponse } from '../../../../@apps/iam/tenant/domain/tenant.response';
+import { UserResponse } from '@apps/iam/user/domain/user.response';
+import { ClientResponse } from '@apps/o-auth/client/domain/client.response';
+import { RoleResponse } from '@apps/iam/role/domain/role.response';
+import { TenantResponse } from '@apps/iam/tenant/domain/tenant.response';
 
 export class AccountResponse
 {

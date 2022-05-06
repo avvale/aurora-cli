@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateRolesQueryHandler } from './paginate-roles.query-handler';
-import { MockRoleRepository } from '../../../../../@apps/iam/role/infrastructure/mock/mock-role.repository';
-import { IRoleRepository } from '../../../../../@apps/iam/role/domain/role.repository';
-import { RoleMapper } from '../../../../../@apps/iam/role/domain/role.mapper';
+import { MockRoleRepository } from '@apps/iam/role/infrastructure/mock/mock-role.repository';
+import { IRoleRepository } from '@apps/iam/role/domain/role.repository';
+import { RoleMapper } from '@apps/iam/role/domain/role.mapper';
 import { PaginateRolesQuery } from './paginate-roles.query';
 import { PaginateRolesService } from './paginate-roles.service';
 

@@ -12,7 +12,7 @@ import {
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
 } from './value-objects';
-import { PermissionMapper } from '../../../../@apps/iam/permission/domain/permission.mapper';
+import { PermissionMapper } from '@apps/iam/permission/domain/permission.mapper';
 
 export class BoundedContextMapper implements IMapper
 {

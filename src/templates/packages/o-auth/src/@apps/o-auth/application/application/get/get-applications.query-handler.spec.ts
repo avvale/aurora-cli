@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetApplicationsQueryHandler } from './get-applications.query-handler';
-import { MockApplicationRepository } from '../../../../../@apps/o-auth/application/infrastructure/mock/mock-application.repository';
-import { IApplicationRepository } from '../../../../../@apps/o-auth/application/domain/application.repository';
-import { ApplicationMapper } from '../../../../../@apps/o-auth/application/domain/application.mapper';
+import { MockApplicationRepository } from '@apps/o-auth/application/infrastructure/mock/mock-application.repository';
+import { IApplicationRepository } from '@apps/o-auth/application/domain/application.repository';
+import { ApplicationMapper } from '@apps/o-auth/application/domain/application.mapper';
 import { GetApplicationsQuery } from './get-applications.query';
 import { GetApplicationsService } from './get-applications.service';
 

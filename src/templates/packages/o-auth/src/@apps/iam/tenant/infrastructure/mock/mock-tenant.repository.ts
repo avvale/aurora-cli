@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { ITenantRepository } from '../../../../../@apps/iam/tenant/domain/tenant.repository';
+import { ITenantRepository } from '@apps/iam/tenant/domain/tenant.repository';
 import {
     TenantId,
     TenantName,
@@ -12,7 +12,7 @@ import {
     TenantCreatedAt,
     TenantUpdatedAt,
     TenantDeletedAt,
-} from '../../../../../@apps/iam/tenant/domain/value-objects';
+} from '@apps/iam/tenant/domain/value-objects';
 import { IamTenant } from '../../domain/tenant.aggregate';
 import { tenants } from '../seeds/tenant.seed';
 

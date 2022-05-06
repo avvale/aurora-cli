@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateRolesHandler } from './iam-create-roles.handler';
-import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
 
 describe('IamCreateRolesHandler', () =>
 {

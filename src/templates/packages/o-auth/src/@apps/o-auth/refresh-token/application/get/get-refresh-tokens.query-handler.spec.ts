@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetRefreshTokensQueryHandler } from './get-refresh-tokens.query-handler';
-import { MockRefreshTokenRepository } from '../../../../../@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
-import { IRefreshTokenRepository } from '../../../../../@apps/o-auth/refresh-token/domain/refresh-token.repository';
-import { RefreshTokenMapper } from '../../../../../@apps/o-auth/refresh-token/domain/refresh-token.mapper';
+import { MockRefreshTokenRepository } from '@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
+import { IRefreshTokenRepository } from '@apps/o-auth/refresh-token/domain/refresh-token.repository';
+import { RefreshTokenMapper } from '@apps/o-auth/refresh-token/domain/refresh-token.mapper';
 import { GetRefreshTokensQuery } from './get-refresh-tokens.query';
 import { GetRefreshTokensService } from './get-refresh-tokens.service';
 

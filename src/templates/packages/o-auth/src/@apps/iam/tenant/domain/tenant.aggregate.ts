@@ -17,7 +17,7 @@ import {
 import { CreatedTenantEvent } from '../application/events/created-tenant.event';
 import { UpdatedTenantEvent } from '../application/events/updated-tenant.event';
 import { DeletedTenantEvent } from '../application/events/deleted-tenant.event';
-import { IamAccount } from '../../../../@apps/iam/account/domain/account.aggregate';
+import { IamAccount } from '@apps/iam/account/domain/account.aggregate';
 
 export class IamTenant extends AggregateRoot
 {

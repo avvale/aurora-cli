@@ -1,4 +1,4 @@
-import { AccountResponse } from '../../../../@apps/iam/account/domain/account.response';
+import { AccountResponse } from '@apps/iam/account/domain/account.response';
 
 export class TenantResponse
 {

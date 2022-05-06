@@ -6,7 +6,7 @@ import { IamGetTenantsController } from './iam-get-tenants.controller';
 import { IamGetTenantsHandler } from '../handlers/iam-get-tenants.handler';
 
 // sources
-import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamGetTenantsController', () =>
 {

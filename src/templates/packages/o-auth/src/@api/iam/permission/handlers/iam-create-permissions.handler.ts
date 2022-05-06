@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
-import { CreatePermissionsCommand } from '../../../../@apps/iam/permission/application/create/create-permissions.command';
+import { CreatePermissionsCommand } from '@apps/iam/permission/application/create/create-permissions.command';
 import { IamCreatePermissionInput } from '../../../../graphql';
 import { IamCreatePermissionDto } from '../dto';
 

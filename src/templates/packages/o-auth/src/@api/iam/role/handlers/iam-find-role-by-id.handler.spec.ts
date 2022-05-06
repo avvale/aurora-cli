@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { IamFindRoleByIdHandler } from './iam-find-role-by-id.handler';
 
 // sources
-import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
 
 describe('IamFindRoleByIdHandler', () =>
 {

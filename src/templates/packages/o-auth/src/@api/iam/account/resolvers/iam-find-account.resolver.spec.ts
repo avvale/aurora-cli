@@ -6,7 +6,7 @@ import { IamFindAccountResolver } from './iam-find-account.resolver';
 import { IamFindAccountHandler } from '../handlers/iam-find-account.handler';
 
 // sources
-import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamFindAccountResolver', () =>
 {

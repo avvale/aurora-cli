@@ -14,7 +14,7 @@ import {
     TenantUpdatedAt,
     TenantDeletedAt,
 } from './value-objects';
-import { AccountMapper } from '../../../../@apps/iam/account/domain/account.mapper';
+import { AccountMapper } from '@apps/iam/account/domain/account.mapper';
 
 export class TenantMapper implements IMapper
 {

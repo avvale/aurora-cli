@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { boundedContexts } from '../../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 import { CreateBoundedContextService } from './create-bounded-context.service';
 import {
     BoundedContextId,

@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateAccountsQueryHandler } from './paginate-accounts.query-handler';
-import { MockAccountRepository } from '../../../../../@apps/iam/account/infrastructure/mock/mock-account.repository';
-import { IAccountRepository } from '../../../../../@apps/iam/account/domain/account.repository';
-import { AccountMapper } from '../../../../../@apps/iam/account/domain/account.mapper';
+import { MockAccountRepository } from '@apps/iam/account/infrastructure/mock/mock-account.repository';
+import { IAccountRepository } from '@apps/iam/account/domain/account.repository';
+import { AccountMapper } from '@apps/iam/account/domain/account.mapper';
 import { PaginateAccountsQuery } from './paginate-accounts.query';
 import { PaginateAccountsService } from './paginate-accounts.service';
 

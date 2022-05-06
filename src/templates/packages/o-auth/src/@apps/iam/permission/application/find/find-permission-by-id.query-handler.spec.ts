@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindPermissionByIdQueryHandler } from './find-permission-by-id.query-handler';
-import { MockPermissionRepository } from '../../../../../@apps/iam/permission/infrastructure/mock/mock-permission.repository';
-import { permissions } from '../../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
-import { IPermissionRepository } from '../../../../../@apps/iam/permission/domain/permission.repository';
-import { PermissionMapper } from '../../../../../@apps/iam/permission/domain/permission.mapper';
+import { MockPermissionRepository } from '@apps/iam/permission/infrastructure/mock/mock-permission.repository';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { IPermissionRepository } from '@apps/iam/permission/domain/permission.repository';
+import { PermissionMapper } from '@apps/iam/permission/domain/permission.mapper';
 import { FindPermissionByIdQuery } from './find-permission-by-id.query';
 import { FindPermissionByIdService } from './find-permission-by-id.service';
 

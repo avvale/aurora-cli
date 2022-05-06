@@ -5,9 +5,9 @@ import { Timezone } from 'aurora-ts-core';
 import { IamAccountDto, IamCreateAccountDto } from '../dto';
 
 // authorization
-import { Permissions } from '../../../../@api/iam/shared/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '../../../../@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authorization.guard';
+import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamCreateAccountHandler } from '../handlers/iam-create-account.handler';

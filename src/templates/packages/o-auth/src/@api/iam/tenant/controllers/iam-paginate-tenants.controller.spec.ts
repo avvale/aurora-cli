@@ -6,7 +6,7 @@ import { IamPaginateTenantsController } from './iam-paginate-tenants.controller'
 import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.handler';
 
 // sources
-import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamPaginateTenantsController', () =>
 {

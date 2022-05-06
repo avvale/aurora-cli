@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { scopes } from '../../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 import { UpdateScopeCommandHandler } from './update-scope.command-handler';
 import { UpdateScopeCommand } from './update-scope.command';
 import { UpdateScopeService } from './update-scope.service';

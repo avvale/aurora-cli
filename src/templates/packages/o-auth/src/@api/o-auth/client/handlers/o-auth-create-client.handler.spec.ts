@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { OAuthCreateClientHandler } from './o-auth-create-client.handler';
 
 // sources
-import { clients } from '../../../../@apps/o-auth/client/infrastructure/seeds/client.seed';
+import { clients } from '@apps/o-auth/client/infrastructure/seeds/client.seed';
 
 describe('OAuthCreateClientHandler', () =>
 {

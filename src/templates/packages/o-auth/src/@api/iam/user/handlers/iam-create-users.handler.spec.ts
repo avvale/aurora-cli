@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamCreateUsersHandler } from './iam-create-users.handler';
-import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamCreateUsersHandler', () =>
 {

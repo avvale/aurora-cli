@@ -1,8 +1,8 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { OAuthClientModel } from '../../../../../@apps/o-auth/client/infrastructure/sequelize/sequelize-client.model';
-import { OAuthApplicationsClientsModel } from '../../../../../@apps/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
+import { OAuthClientModel } from '@apps/o-auth/client/infrastructure/sequelize/sequelize-client.model';
+import { OAuthApplicationsClientsModel } from '@apps/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
 
 @Table({ modelName: 'OAuthApplication', freezeTableName: true, timestamps: false })
 export class OAuthApplicationModel extends Model<OAuthApplicationModel>

@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { OAuthPaginateRefreshTokensHandler } from './o-auth-paginate-refresh-tokens.handler';
 
 // sources
-import { refreshTokens } from '../../../../@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
 describe('OAuthPaginateRefreshTokensHandler', () =>
 {

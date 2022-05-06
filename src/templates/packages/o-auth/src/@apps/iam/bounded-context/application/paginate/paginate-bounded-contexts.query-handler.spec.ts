@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateBoundedContextsQueryHandler } from './paginate-bounded-contexts.query-handler';
-import { MockBoundedContextRepository } from '../../../../../@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.repository';
-import { IBoundedContextRepository } from '../../../../../@apps/iam/bounded-context/domain/bounded-context.repository';
-import { BoundedContextMapper } from '../../../../../@apps/iam/bounded-context/domain/bounded-context.mapper';
+import { MockBoundedContextRepository } from '@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.repository';
+import { IBoundedContextRepository } from '@apps/iam/bounded-context/domain/bounded-context.repository';
+import { BoundedContextMapper } from '@apps/iam/bounded-context/domain/bounded-context.mapper';
 import { PaginateBoundedContextsQuery } from './paginate-bounded-contexts.query';
 import { PaginateBoundedContextsService } from './paginate-bounded-contexts.service';
 

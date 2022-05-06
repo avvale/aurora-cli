@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { OAuthApplication } from '../../../../../@apps/o-auth/application/domain/application.aggregate';
-import { ApplicationClientIds, ApplicationCode, ApplicationCreatedAt, ApplicationDeletedAt, ApplicationId, ApplicationIsMaster, ApplicationName, ApplicationSecret, ApplicationUpdatedAt } from '../../../../../@apps/o-auth/application/domain/value-objects';
-import { applications } from '../../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
-import { IClientRepository } from '../../../../../@apps/o-auth/client/domain/client.repository';
+import { OAuthApplication } from '@apps/o-auth/application/domain/application.aggregate';
+import { ApplicationClientIds, ApplicationCode, ApplicationCreatedAt, ApplicationDeletedAt, ApplicationId, ApplicationIsMaster, ApplicationName, ApplicationSecret, ApplicationUpdatedAt } from '@apps/o-auth/application/domain/value-objects';
+import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { IClientRepository } from '@apps/o-auth/client/domain/client.repository';
 import {
     ClientId,
     ClientGrantType,
@@ -20,7 +20,7 @@ import {
     ClientCreatedAt,
     ClientUpdatedAt,
     ClientDeletedAt,
-} from '../../../../../@apps/o-auth/client/domain/value-objects';
+} from '@apps/o-auth/client/domain/value-objects';
 import { OAuthClient } from '../../domain/client.aggregate';
 import { clients } from '../seeds/client.seed';
 import * as _ from 'lodash';

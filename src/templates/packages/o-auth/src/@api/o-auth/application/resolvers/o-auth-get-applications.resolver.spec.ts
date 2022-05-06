@@ -6,7 +6,7 @@ import { OAuthGetApplicationsResolver } from './o-auth-get-applications.resolver
 import { OAuthGetApplicationsHandler } from '../handlers/o-auth-get-applications.handler';
 
 // sources
-import { applications } from '../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthGetApplicationsResolver', () =>
 {

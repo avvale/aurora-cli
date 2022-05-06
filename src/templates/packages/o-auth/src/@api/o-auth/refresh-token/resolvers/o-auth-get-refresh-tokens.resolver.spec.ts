@@ -6,7 +6,7 @@ import { OAuthGetRefreshTokensResolver } from './o-auth-get-refresh-tokens.resol
 import { OAuthGetRefreshTokensHandler } from '../handlers/o-auth-get-refresh-tokens.handler';
 
 // sources
-import { refreshTokens } from '../../../../@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
 describe('OAuthGetRefreshTokensResolver', () =>
 {

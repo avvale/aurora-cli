@@ -1,7 +1,7 @@
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { IamPermissionModel } from '../../../../../@apps/iam/permission/infrastructure/sequelize/sequelize-permission.model';
-import { IamRoleModel } from '../../../../../@apps/iam/role/infrastructure/sequelize/sequelize-role.model';
+import { IamPermissionModel } from '@apps/iam/permission/infrastructure/sequelize/sequelize-permission.model';
+import { IamRoleModel } from '@apps/iam/role/infrastructure/sequelize/sequelize-role.model';
 
 @Table({ modelName: 'IamPermissionsRoles', freezeTableName: true, timestamps: false })
 export class IamPermissionsRolesModel extends Model<IamPermissionsRolesModel>

@@ -6,7 +6,7 @@ import { OAuthDeleteApplicationsResolver } from './o-auth-delete-applications.re
 import { OAuthDeleteApplicationsHandler } from '../handlers/o-auth-delete-applications.handler';
 
 // sources
-import { applications } from '../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthDeleteApplicationsResolver', () =>
 {

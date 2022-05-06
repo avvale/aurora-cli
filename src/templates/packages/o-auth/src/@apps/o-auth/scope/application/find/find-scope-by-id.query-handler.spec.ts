@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindScopeByIdQueryHandler } from './find-scope-by-id.query-handler';
-import { MockScopeRepository } from '../../../../../@apps/o-auth/scope/infrastructure/mock/mock-scope.repository';
-import { scopes } from '../../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
-import { IScopeRepository } from '../../../../../@apps/o-auth/scope/domain/scope.repository';
-import { ScopeMapper } from '../../../../../@apps/o-auth/scope/domain/scope.mapper';
+import { MockScopeRepository } from '@apps/o-auth/scope/infrastructure/mock/mock-scope.repository';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { IScopeRepository } from '@apps/o-auth/scope/domain/scope.repository';
+import { ScopeMapper } from '@apps/o-auth/scope/domain/scope.mapper';
 import { FindScopeByIdQuery } from './find-scope-by-id.query';
 import { FindScopeByIdService } from './find-scope-by-id.service';
 

@@ -1,4 +1,4 @@
-import { ClientResponse } from '../../../../@apps/o-auth/client/domain/client.response';
+import { ClientResponse } from '@apps/o-auth/client/domain/client.response';
 
 export class ApplicationResponse
 {

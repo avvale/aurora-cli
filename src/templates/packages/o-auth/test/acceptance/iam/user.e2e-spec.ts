@@ -4,22 +4,22 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IUserRepository } from '../../../src/@apps/iam/user/domain/user.repository';
-import { MockUserSeeder } from '../../../src/@apps/iam/user/infrastructure/mock/mock-user.seeder';
-import { users } from '../../../src/@apps/iam/user/infrastructure/seeds/user.seed';
-import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
-import { IamModule } from '../../../src/@api/iam/iam.module';
+import { IUserRepository } from '@apps/iam/user/domain/user.repository';
+import { MockUserSeeder } from '@apps/iam/user/infrastructure/mock/mock-user.seeder';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { IamModule } from '@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // has OAuth
-import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // ---- customizations ----
-import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
-import { IAccountRepository } from '../../../src/@apps/iam/account/domain/account.repository';
-import { MockAccountSeeder } from 'src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
+import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { IAccountRepository } from '@apps/iam/account/domain/account.repository';
+import { MockAccountSeeder } from '@apps/iam/account/infrastructure/mock/mock-account.seeder';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

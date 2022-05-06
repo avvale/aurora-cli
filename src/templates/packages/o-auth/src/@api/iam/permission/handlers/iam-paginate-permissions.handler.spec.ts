@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { IamPaginatePermissionsHandler } from './iam-paginate-permissions.handler';
 
 // sources
-import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamPaginatePermissionsHandler', () =>
 {

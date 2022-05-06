@@ -6,7 +6,7 @@ import { IamCreateAccountController } from './iam-create-account.controller';
 import { IamCreateAccountHandler } from '../handlers/iam-create-account.handler';
 
 // sources
-import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamCreateAccountController', () =>
 {

@@ -6,7 +6,7 @@ import { IamPaginateBoundedContextsResolver } from './iam-paginate-bounded-conte
 import { IamPaginateBoundedContextsHandler } from '../handlers/iam-paginate-bounded-contexts.handler';
 
 // sources
-import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('IamPaginateBoundedContextsResolver', () =>
 {

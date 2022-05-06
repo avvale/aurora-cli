@@ -6,7 +6,7 @@ import { IamCreatePermissionController } from './iam-create-permission.controlle
 import { IamCreatePermissionHandler } from '../handlers/iam-create-permission.handler';
 
 // sources
-import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamCreatePermissionController', () =>
 {

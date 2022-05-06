@@ -6,7 +6,7 @@ import { OAuthCreateScopesHandler } from '../handlers/o-auth-create-scopes.handl
 import { OAuthCreateScopeInput } from '../../../../graphql';
 
 // sources
-import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthCreateScopesResolver', () =>
 {

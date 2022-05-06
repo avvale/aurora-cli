@@ -6,7 +6,7 @@ import { OAuthCreateApplicationsHandler } from '../handlers/o-auth-create-applic
 import { OAuthCreateApplicationInput } from '../../../../graphql';
 
 // sources
-import { applications } from '../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthCreateApplicationsResolver', () =>
 {

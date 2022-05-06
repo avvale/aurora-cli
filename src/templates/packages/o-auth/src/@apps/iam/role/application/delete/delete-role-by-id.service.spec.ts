@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { roles } from '../../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
 import { DeleteRoleByIdService } from './delete-role-by-id.service';
 import { RoleId } from '../../domain/value-objects';
 import { IRoleRepository } from '../../domain/role.repository';

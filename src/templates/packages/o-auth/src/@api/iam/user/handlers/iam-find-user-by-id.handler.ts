@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
-import { FindUserByIdQuery } from '../../../../@apps/iam/user/application/find/find-user-by-id.query';
+import { FindUserByIdQuery } from '@apps/iam/user/application/find/find-user-by-id.query';
 import { IamUser } from '../../../../graphql';
 import { IamUserDto } from '../dto';
 

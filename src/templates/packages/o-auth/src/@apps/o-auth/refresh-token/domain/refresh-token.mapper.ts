@@ -12,7 +12,7 @@ import {
     RefreshTokenUpdatedAt,
     RefreshTokenDeletedAt,
 } from './value-objects';
-import { AccessTokenMapper } from '../../../../@apps/o-auth/access-token/domain/access-token.mapper';
+import { AccessTokenMapper } from '@apps/o-auth/access-token/domain/access-token.mapper';
 
 export class RefreshTokenMapper implements IMapper
 {

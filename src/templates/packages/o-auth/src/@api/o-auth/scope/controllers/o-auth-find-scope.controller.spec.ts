@@ -6,7 +6,7 @@ import { OAuthFindScopeController } from './o-auth-find-scope.controller';
 import { OAuthFindScopeHandler } from '../handlers/o-auth-find-scope.handler';
 
 // sources
-import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthFindScopeController', () =>
 {

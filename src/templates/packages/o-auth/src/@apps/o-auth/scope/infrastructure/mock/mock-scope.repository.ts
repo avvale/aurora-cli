@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IScopeRepository } from '../../../../../@apps/o-auth/scope/domain/scope.repository';
+import { IScopeRepository } from '@apps/o-auth/scope/domain/scope.repository';
 import {
     ScopeId,
     ScopeCode,
@@ -8,7 +8,7 @@ import {
     ScopeCreatedAt,
     ScopeUpdatedAt,
     ScopeDeletedAt,
-} from '../../../../../@apps/o-auth/scope/domain/value-objects';
+} from '@apps/o-auth/scope/domain/value-objects';
 import { OAuthScope } from '../../domain/scope.aggregate';
 import { scopes } from '../seeds/scope.seed';
 

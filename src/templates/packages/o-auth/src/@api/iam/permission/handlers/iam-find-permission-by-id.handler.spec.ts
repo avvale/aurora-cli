@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { IamFindPermissionByIdHandler } from './iam-find-permission-by-id.handler';
 
 // sources
-import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamFindPermissionByIdHandler', () =>
 {

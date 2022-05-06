@@ -7,7 +7,7 @@ import { IamUpdateBoundedContextHandler } from './iam-update-bounded-context.han
 import { IamUpdateBoundedContextInput } from '../../../../graphql';
 
 // sources
-import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('IamUpdateBoundedContextHandler', () =>
 {

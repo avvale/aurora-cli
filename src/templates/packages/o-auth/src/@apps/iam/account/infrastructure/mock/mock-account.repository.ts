@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IAccountRepository } from '../../../../../@apps/iam/account/domain/account.repository';
+import { IAccountRepository } from '@apps/iam/account/domain/account.repository';
 import {
     AccountId,
     AccountType,
@@ -17,7 +17,7 @@ import {
     AccountCreatedAt,
     AccountUpdatedAt,
     AccountDeletedAt,
-} from '../../../../../@apps/iam/account/domain/value-objects';
+} from '@apps/iam/account/domain/value-objects';
 import { IamAccount } from '../../domain/account.aggregate';
 import { accounts } from '../seeds/account.seed';
 

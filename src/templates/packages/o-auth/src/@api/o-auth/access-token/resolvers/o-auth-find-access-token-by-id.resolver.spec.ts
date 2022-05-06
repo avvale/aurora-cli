@@ -6,7 +6,7 @@ import { OAuthFindAccessTokenByIdResolver } from './o-auth-find-access-token-by-
 import { OAuthFindAccessTokenByIdHandler } from '../handlers/o-auth-find-access-token-by-id.handler';
 
 // sources
-import { accessTokens } from '../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
 describe('OAuthFindAccessTokenByIdResolver', () =>
 {

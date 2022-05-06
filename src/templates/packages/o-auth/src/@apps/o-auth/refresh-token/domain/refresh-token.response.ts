@@ -1,4 +1,4 @@
-import { AccessTokenResponse } from '../../../../@apps/o-auth/access-token/domain/access-token.response';
+import { AccessTokenResponse } from '@apps/o-auth/access-token/domain/access-token.response';
 
 export class RefreshTokenResponse
 {

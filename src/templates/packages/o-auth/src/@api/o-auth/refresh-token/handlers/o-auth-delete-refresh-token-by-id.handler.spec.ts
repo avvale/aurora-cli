@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { OAuthDeleteRefreshTokenByIdHandler } from './o-auth-delete-refresh-token-by-id.handler';
 
 // sources
-import { refreshTokens } from '../../../../@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
 describe('OAuthDeleteRefreshTokenByIdController', () =>
 {

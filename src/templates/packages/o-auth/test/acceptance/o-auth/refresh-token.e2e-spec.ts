@@ -4,17 +4,17 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IRefreshTokenRepository } from '../../../src/@apps/o-auth/refresh-token/domain/refresh-token.repository';
-import { MockRefreshTokenSeeder } from '../../../src/@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.seeder';
-import { refreshTokens } from '../../../src/@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
-import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
-import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
+import { IRefreshTokenRepository } from '@apps/o-auth/refresh-token/domain/refresh-token.repository';
+import { MockRefreshTokenSeeder } from '@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.seeder';
+import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { OAuthModule } from '@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // has OAuth
-import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

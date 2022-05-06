@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { permissions } from '../../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 import { DeletePermissionByIdService } from './delete-permission-by-id.service';
 import { PermissionId } from '../../domain/value-objects';
 import { IPermissionRepository } from '../../domain/permission.repository';

@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateClientsQueryHandler } from './paginate-clients.query-handler';
-import { MockClientRepository } from '../../../../../@apps/o-auth/client/infrastructure/mock/mock-client.repository';
-import { IClientRepository } from '../../../../../@apps/o-auth/client/domain/client.repository';
-import { ClientMapper } from '../../../../../@apps/o-auth/client/domain/client.mapper';
+import { MockClientRepository } from '@apps/o-auth/client/infrastructure/mock/mock-client.repository';
+import { IClientRepository } from '@apps/o-auth/client/domain/client.repository';
+import { ClientMapper } from '@apps/o-auth/client/domain/client.mapper';
 import { PaginateClientsQuery } from './paginate-clients.query';
 import { PaginateClientsService } from './paginate-clients.service';
 

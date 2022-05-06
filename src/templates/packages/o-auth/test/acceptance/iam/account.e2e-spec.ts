@@ -4,29 +4,29 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IAccountRepository } from '../../../src/@apps/iam/account/domain/account.repository';
-import { MockAccountSeeder } from '../../../src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
-import { accounts } from '../../../src/@apps/iam/account/infrastructure/seeds/account.seed';
-import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
-import { IamModule } from '../../../src/@api/iam/iam.module';
+import { IAccountRepository } from '@apps/iam/account/domain/account.repository';
+import { MockAccountSeeder } from '@apps/iam/account/infrastructure/mock/mock-account.seeder';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { IamModule } from '@api/iam/iam.module';
 import { IamAccountType, OAuthClientGrantType, OAuthCredential } from '../../../src/graphql';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // ---- customizations ----
-import { jwtConfig } from '../../../src/@apps/o-auth/shared/jwt-config';
-import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
-import { AuthModule } from '../../../src/@apps/o-auth/shared/modules/auth.module';
-import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
-import { MockApplicationSeeder } from '../../../src/@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
-import { OAuthCreateCredentialHandler } from '../../../src/@api/o-auth/credential/handlers/o-auth-create-credential.handler';
-import { IApplicationRepository } from '../../../src/@apps/o-auth/application/domain/application.repository';
-import { MockAccessTokenSeeder } from '../../../src/@apps/o-auth/access-token/infrastructure/mock/mock-access-token.seeder';
-import { IAccessTokenRepository } from '../../../src/@apps/o-auth/access-token';
-import { MockClientSeeder } from '../../../src/@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
-import { IClientRepository } from '../../../src/@apps/o-auth/client';
-import { MockUserSeeder } from '../../../src/@apps/iam/user/infrastructure/mock/mock-user.seeder';
-import { IUserRepository } from '../../../src/@apps/iam/user/domain/user.repository';
+import { jwtConfig } from '@apps/o-auth/shared/jwt-config';
+import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
+import { AuthModule } from '@apps/o-auth/shared/modules/auth.module';
+import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { MockApplicationSeeder } from '@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
+import { OAuthCreateCredentialHandler } from '@api/o-auth/credential/handlers/o-auth-create-credential.handler';
+import { IApplicationRepository } from '@apps/o-auth/application/domain/application.repository';
+import { MockAccessTokenSeeder } from '@apps/o-auth/access-token/infrastructure/mock/mock-access-token.seeder';
+import { IAccessTokenRepository } from '@apps/o-auth/access-token';
+import { MockClientSeeder } from '@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
+import { IClientRepository } from '@apps/o-auth/client';
+import { MockUserSeeder } from '@apps/iam/user/infrastructure/mock/mock-user.seeder';
+import { IUserRepository } from '@apps/iam/user/domain/user.repository';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

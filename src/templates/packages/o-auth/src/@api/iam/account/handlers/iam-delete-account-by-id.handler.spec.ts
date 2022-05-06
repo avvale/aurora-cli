@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { IamDeleteAccountByIdHandler } from './iam-delete-account-by-id.handler';
 
 // sources
-import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamDeleteAccountByIdController', () =>
 {

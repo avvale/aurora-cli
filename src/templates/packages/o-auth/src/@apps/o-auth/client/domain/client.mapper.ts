@@ -19,8 +19,8 @@ import {
     ClientUpdatedAt,
     ClientDeletedAt,
 } from './value-objects';
-import { AccessTokenMapper } from '../../../../@apps/o-auth/access-token/domain/access-token.mapper';
-import { ApplicationMapper } from '../../../../@apps/o-auth/application/domain/application.mapper';
+import { AccessTokenMapper } from '@apps/o-auth/access-token/domain/access-token.mapper';
+import { ApplicationMapper } from '@apps/o-auth/application/domain/application.mapper';
 
 export class ClientMapper implements IMapper
 {

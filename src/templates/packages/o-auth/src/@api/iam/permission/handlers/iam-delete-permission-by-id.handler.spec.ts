@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { IamDeletePermissionByIdHandler } from './iam-delete-permission-by-id.handler';
 
 // sources
-import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamDeletePermissionByIdController', () =>
 {

@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { refreshTokens } from '../../../../../@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 import { DeleteRefreshTokenByIdService } from './delete-refresh-token-by-id.service';
 import { RefreshTokenId } from '../../domain/value-objects';
 import { IRefreshTokenRepository } from '../../domain/refresh-token.repository';

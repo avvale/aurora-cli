@@ -7,7 +7,7 @@ import { OAuthUpdateScopeHandler } from '../handlers/o-auth-update-scope.handler
 import { OAuthUpdateScopeInput } from '../../../../graphql';
 
 // sources
-import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthUpdateScopeResolver', () =>
 {

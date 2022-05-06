@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindClientQueryHandler } from './find-client.query-handler';
-import { MockClientRepository } from '../../../../../@apps/o-auth/client/infrastructure/mock/mock-client.repository';
-import { IClientRepository } from '../../../../../@apps/o-auth/client/domain/client.repository';
-import { ClientMapper } from '../../../../../@apps/o-auth/client/domain/client.mapper';
+import { MockClientRepository } from '@apps/o-auth/client/infrastructure/mock/mock-client.repository';
+import { IClientRepository } from '@apps/o-auth/client/domain/client.repository';
+import { ClientMapper } from '@apps/o-auth/client/domain/client.mapper';
 import { FindClientQuery } from './find-client.query';
 import { FindClientService } from './find-client.service';
 

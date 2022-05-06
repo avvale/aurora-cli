@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { OAuthPaginateScopesHandler } from './o-auth-paginate-scopes.handler';
 
 // sources
-import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthPaginateScopesHandler', () =>
 {

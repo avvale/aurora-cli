@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateUsersQueryHandler } from './paginate-users.query-handler';
-import { MockUserRepository } from '../../../../../@apps/iam/user/infrastructure/mock/mock-user.repository';
-import { IUserRepository } from '../../../../../@apps/iam/user/domain/user.repository';
-import { UserMapper } from '../../../../../@apps/iam/user/domain/user.mapper';
+import { MockUserRepository } from '@apps/iam/user/infrastructure/mock/mock-user.repository';
+import { IUserRepository } from '@apps/iam/user/domain/user.repository';
+import { UserMapper } from '@apps/iam/user/domain/user.mapper';
 import { PaginateUsersQuery } from './paginate-users.query';
 import { PaginateUsersService } from './paginate-users.service';
 

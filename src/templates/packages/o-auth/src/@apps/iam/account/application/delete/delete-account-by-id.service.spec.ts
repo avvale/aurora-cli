@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { accounts } from '../../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 import { DeleteAccountByIdService } from './delete-account-by-id.service';
 import { AccountId } from '../../domain/value-objects';
 import { IAccountRepository } from '../../domain/account.repository';

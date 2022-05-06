@@ -6,7 +6,7 @@ import { OAuthDeleteScopeByIdController } from './o-auth-delete-scope-by-id.cont
 import { OAuthDeleteScopeByIdHandler } from '../handlers/o-auth-delete-scope-by-id.handler';
 
 // sources
-import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthDeleteScopeByIdController', () =>
 {

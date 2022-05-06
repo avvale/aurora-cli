@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateScopesQueryHandler } from './paginate-scopes.query-handler';
-import { MockScopeRepository } from '../../../../../@apps/o-auth/scope/infrastructure/mock/mock-scope.repository';
-import { IScopeRepository } from '../../../../../@apps/o-auth/scope/domain/scope.repository';
-import { ScopeMapper } from '../../../../../@apps/o-auth/scope/domain/scope.mapper';
+import { MockScopeRepository } from '@apps/o-auth/scope/infrastructure/mock/mock-scope.repository';
+import { IScopeRepository } from '@apps/o-auth/scope/domain/scope.repository';
+import { ScopeMapper } from '@apps/o-auth/scope/domain/scope.mapper';
 import { PaginateScopesQuery } from './paginate-scopes.query';
 import { PaginateScopesService } from './paginate-scopes.service';
 

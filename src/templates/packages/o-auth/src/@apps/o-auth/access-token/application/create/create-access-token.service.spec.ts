@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 import { JwtModule } from '@nestjs/jwt';
 
 // custom items
-import { accessTokensToCreate as accessTokens } from '../../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokensToCreate as accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 import { CreateAccessTokenService } from './create-access-token.service';
 import {
     AccessTokenId,

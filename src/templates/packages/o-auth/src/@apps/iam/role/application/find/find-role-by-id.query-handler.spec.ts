@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindRoleByIdQueryHandler } from './find-role-by-id.query-handler';
-import { MockRoleRepository } from '../../../../../@apps/iam/role/infrastructure/mock/mock-role.repository';
-import { roles } from '../../../../../@apps/iam/role/infrastructure/seeds/role.seed';
-import { IRoleRepository } from '../../../../../@apps/iam/role/domain/role.repository';
-import { RoleMapper } from '../../../../../@apps/iam/role/domain/role.mapper';
+import { MockRoleRepository } from '@apps/iam/role/infrastructure/mock/mock-role.repository';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
+import { IRoleRepository } from '@apps/iam/role/domain/role.repository';
+import { RoleMapper } from '@apps/iam/role/domain/role.mapper';
 import { FindRoleByIdQuery } from './find-role-by-id.query';
 import { FindRoleByIdService } from './find-role-by-id.service';
 

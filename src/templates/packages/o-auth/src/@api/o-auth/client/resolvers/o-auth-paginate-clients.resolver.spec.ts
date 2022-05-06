@@ -6,7 +6,7 @@ import { OAuthPaginateClientsResolver } from './o-auth-paginate-clients.resolver
 import { OAuthPaginateClientsHandler } from '../handlers/o-auth-paginate-clients.handler';
 
 // sources
-import { clients } from '../../../../@apps/o-auth/client/infrastructure/seeds/client.seed';
+import { clients } from '@apps/o-auth/client/infrastructure/seeds/client.seed';
 
 describe('OAuthPaginateClientsResolver', () =>
 {

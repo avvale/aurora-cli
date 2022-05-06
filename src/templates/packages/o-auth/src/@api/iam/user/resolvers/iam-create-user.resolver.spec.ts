@@ -7,7 +7,7 @@ import { IamCreateUserHandler } from '../handlers/iam-create-user.handler';
 import { IamCreateUserInput } from '../../../../graphql';
 
 // sources
-import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamCreateUserResolver', () =>
 {

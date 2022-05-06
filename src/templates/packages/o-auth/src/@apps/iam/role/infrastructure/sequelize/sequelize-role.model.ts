@@ -1,10 +1,10 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { IamPermissionModel } from '../../../../../@apps/iam/permission/infrastructure/sequelize/sequelize-permission.model';
-import { IamPermissionsRolesModel } from '../../../../../@apps/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model';
-import { IamAccountModel } from '../../../../../@apps/iam/account/infrastructure/sequelize/sequelize-account.model';
-import { IamRolesAccountsModel } from '../../../../../@apps/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
+import { IamPermissionModel } from '@apps/iam/permission/infrastructure/sequelize/sequelize-permission.model';
+import { IamPermissionsRolesModel } from '@apps/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model';
+import { IamAccountModel } from '@apps/iam/account/infrastructure/sequelize/sequelize-account.model';
+import { IamRolesAccountsModel } from '@apps/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
 
 @Table({ modelName: 'IamRole', freezeTableName: true, timestamps: false })
 export class IamRoleModel extends Model<IamRoleModel>

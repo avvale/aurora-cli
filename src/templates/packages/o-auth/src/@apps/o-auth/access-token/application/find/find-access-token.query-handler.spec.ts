@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindAccessTokenQueryHandler } from './find-access-token.query-handler';
-import { MockAccessTokenRepository } from '../../../../../@apps/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
-import { IAccessTokenRepository } from '../../../../../@apps/o-auth/access-token/domain/access-token.repository';
-import { AccessTokenMapper } from '../../../../../@apps/o-auth/access-token/domain/access-token.mapper';
+import { MockAccessTokenRepository } from '@apps/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
+import { IAccessTokenRepository } from '@apps/o-auth/access-token/domain/access-token.repository';
+import { AccessTokenMapper } from '@apps/o-auth/access-token/domain/access-token.mapper';
 import { FindAccessTokenQuery } from './find-access-token.query';
 import { FindAccessTokenService } from './find-access-token.service';
 

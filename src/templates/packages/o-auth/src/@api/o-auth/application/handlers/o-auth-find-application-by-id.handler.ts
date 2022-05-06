@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
-import { FindApplicationByIdQuery } from '../../../../@apps/o-auth/application/application/find/find-application-by-id.query';
+import { FindApplicationByIdQuery } from '@apps/o-auth/application/application/find/find-application-by-id.query';
 import { OAuthApplication } from '../../../../graphql';
 import { OAuthApplicationDto } from '../dto';
 

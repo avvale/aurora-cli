@@ -6,7 +6,7 @@ import { IamDeleteUsersController } from './iam-delete-users.controller';
 import { IamDeleteUsersHandler } from '../handlers/iam-delete-users.handler';
 
 // sources
-import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamDeleteUsersController', () =>
 {

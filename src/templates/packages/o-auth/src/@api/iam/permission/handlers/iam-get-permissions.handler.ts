@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
-import { GetPermissionsQuery } from '../../../../@apps/iam/permission/application/get/get-permissions.query';
+import { GetPermissionsQuery } from '@apps/iam/permission/application/get/get-permissions.query';
 import { IamPermission } from '../../../../graphql';
 import { IamPermissionDto } from '../dto';
 

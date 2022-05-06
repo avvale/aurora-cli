@@ -6,7 +6,7 @@ import { IamPaginateAccountsResolver } from './iam-paginate-accounts.resolver';
 import { IamPaginateAccountsHandler } from '../handlers/iam-paginate-accounts.handler';
 
 // sources
-import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamPaginateAccountsResolver', () =>
 {

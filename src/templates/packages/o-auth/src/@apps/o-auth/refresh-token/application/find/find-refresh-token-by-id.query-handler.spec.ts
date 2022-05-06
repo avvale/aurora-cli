@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindRefreshTokenByIdQueryHandler } from './find-refresh-token-by-id.query-handler';
-import { MockRefreshTokenRepository } from '../../../../../@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
-import { refreshTokens } from '../../../../../@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
-import { IRefreshTokenRepository } from '../../../../../@apps/o-auth/refresh-token/domain/refresh-token.repository';
-import { RefreshTokenMapper } from '../../../../../@apps/o-auth/refresh-token/domain/refresh-token.mapper';
+import { MockRefreshTokenRepository } from '@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
+import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { IRefreshTokenRepository } from '@apps/o-auth/refresh-token/domain/refresh-token.repository';
+import { RefreshTokenMapper } from '@apps/o-auth/refresh-token/domain/refresh-token.mapper';
 import { FindRefreshTokenByIdQuery } from './find-refresh-token-by-id.query';
 import { FindRefreshTokenByIdService } from './find-refresh-token-by-id.service';
 

@@ -5,9 +5,9 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 import { IamUserDto } from '../dto';
 
 // authorization
-import { Permissions } from '../../../../@api/iam/shared/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '../../../../@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authorization.guard';
+import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamFindUserByIdHandler } from '../handlers/iam-find-user-by-id.handler';

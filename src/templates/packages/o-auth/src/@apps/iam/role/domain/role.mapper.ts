@@ -12,8 +12,8 @@ import {
     RoleUpdatedAt,
     RoleDeletedAt,
 } from './value-objects';
-import { PermissionMapper } from '../../../../@apps/iam/permission/domain/permission.mapper';
-import { AccountMapper } from '../../../../@apps/iam/account/domain/account.mapper';
+import { PermissionMapper } from '@apps/iam/permission/domain/permission.mapper';
+import { AccountMapper } from '@apps/iam/account/domain/account.mapper';
 
 export class RoleMapper implements IMapper
 {

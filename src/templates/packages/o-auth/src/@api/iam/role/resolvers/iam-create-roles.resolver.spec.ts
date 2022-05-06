@@ -6,7 +6,7 @@ import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
 import { IamCreateRoleInput } from '../../../../graphql';
 
 // sources
-import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
 
 describe('IamCreateRolesResolver', () =>
 {

@@ -22,8 +22,8 @@ import {
 import { CreatedClientEvent } from '../application/events/created-client.event';
 import { UpdatedClientEvent } from '../application/events/updated-client.event';
 import { DeletedClientEvent } from '../application/events/deleted-client.event';
-import { OAuthAccessToken } from '../../../../@apps/o-auth/access-token/domain/access-token.aggregate';
-import { OAuthApplication } from '../../../../@apps/o-auth/application/domain/application.aggregate';
+import { OAuthAccessToken } from '@apps/o-auth/access-token/domain/access-token.aggregate';
+import { OAuthApplication } from '@apps/o-auth/application/domain/application.aggregate';
 
 export class OAuthClient extends AggregateRoot
 {

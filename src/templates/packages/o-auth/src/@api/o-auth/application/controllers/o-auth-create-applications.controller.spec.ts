@@ -5,7 +5,7 @@ import { OAuthCreateApplicationsController } from './o-auth-create-applications.
 import { OAuthCreateApplicationsHandler } from '../handlers/o-auth-create-applications.handler';
 
 // sources
-import { applications } from '../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthCreateApplicationsController', () =>
 {

@@ -6,7 +6,7 @@ import { IamPaginateUsersResolver } from './iam-paginate-users.resolver';
 import { IamPaginateUsersHandler } from '../handlers/iam-paginate-users.handler';
 
 // sources
-import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamPaginateUsersResolver', () =>
 {

@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { OAuthGetAccessTokensHandler } from './o-auth-get-access-tokens.handler';
 
 // sources
-import { accessTokens } from '../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
 describe('OAuthGetAccessTokensHandler', () =>
 {

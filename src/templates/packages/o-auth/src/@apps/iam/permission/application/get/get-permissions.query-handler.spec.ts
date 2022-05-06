@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetPermissionsQueryHandler } from './get-permissions.query-handler';
-import { MockPermissionRepository } from '../../../../../@apps/iam/permission/infrastructure/mock/mock-permission.repository';
-import { IPermissionRepository } from '../../../../../@apps/iam/permission/domain/permission.repository';
-import { PermissionMapper } from '../../../../../@apps/iam/permission/domain/permission.mapper';
+import { MockPermissionRepository } from '@apps/iam/permission/infrastructure/mock/mock-permission.repository';
+import { IPermissionRepository } from '@apps/iam/permission/domain/permission.repository';
+import { PermissionMapper } from '@apps/iam/permission/domain/permission.mapper';
 import { GetPermissionsQuery } from './get-permissions.query';
 import { GetPermissionsService } from './get-permissions.service';
 

@@ -5,7 +5,7 @@ import { IamCreateBoundedContextsController } from './iam-create-bounded-context
 import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-contexts.handler';
 
 // sources
-import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('IamCreateBoundedContextsController', () =>
 {

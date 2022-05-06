@@ -6,7 +6,7 @@ import { IamGetTenantsResolver } from './iam-get-tenants.resolver';
 import { IamGetTenantsHandler } from '../handlers/iam-get-tenants.handler';
 
 // sources
-import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamGetTenantsResolver', () =>
 {

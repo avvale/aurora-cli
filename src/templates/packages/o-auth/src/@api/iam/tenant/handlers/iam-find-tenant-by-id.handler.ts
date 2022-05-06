@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
-import { FindTenantByIdQuery } from '../../../../@apps/iam/tenant/application/find/find-tenant-by-id.query';
+import { FindTenantByIdQuery } from '@apps/iam/tenant/application/find/find-tenant-by-id.query';
 import { IamTenant } from '../../../../graphql';
 import { IamTenantDto } from '../dto';
 

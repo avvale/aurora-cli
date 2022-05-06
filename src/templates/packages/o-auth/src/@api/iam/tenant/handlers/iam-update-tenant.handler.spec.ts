@@ -7,7 +7,7 @@ import { IamUpdateTenantHandler } from './iam-update-tenant.handler';
 import { IamUpdateTenantInput } from '../../../../graphql';
 
 // sources
-import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamUpdateTenantHandler', () =>
 {

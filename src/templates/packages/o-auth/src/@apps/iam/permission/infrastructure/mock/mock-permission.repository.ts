@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IPermissionRepository } from '../../../../../@apps/iam/permission/domain/permission.repository';
+import { IPermissionRepository } from '@apps/iam/permission/domain/permission.repository';
 import {
     PermissionId,
     PermissionName,
@@ -9,7 +9,7 @@ import {
     PermissionCreatedAt,
     PermissionUpdatedAt,
     PermissionDeletedAt,
-} from '../../../../../@apps/iam/permission/domain/value-objects';
+} from '@apps/iam/permission/domain/value-objects';
 import { IamPermission } from '../../domain/permission.aggregate';
 import { permissions } from '../seeds/permission.seed';
 

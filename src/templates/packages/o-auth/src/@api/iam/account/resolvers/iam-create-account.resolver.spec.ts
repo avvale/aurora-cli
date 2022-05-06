@@ -7,7 +7,7 @@ import { IamCreateAccountHandler } from '../handlers/iam-create-account.handler'
 import { IamCreateAccountInput } from '../../../../graphql';
 
 // sources
-import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamCreateAccountResolver', () =>
 {

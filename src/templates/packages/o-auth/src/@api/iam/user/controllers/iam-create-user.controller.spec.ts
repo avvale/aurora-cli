@@ -6,7 +6,7 @@ import { IamCreateUserController } from './iam-create-user.controller';
 import { IamCreateUserHandler } from '../handlers/iam-create-user.handler';
 
 // sources
-import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamCreateUserController', () =>
 {

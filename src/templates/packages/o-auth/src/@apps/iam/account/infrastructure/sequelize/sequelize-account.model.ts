@@ -1,12 +1,12 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { IamUserModel } from '../../../../../@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
-import { OAuthClientModel } from '../../../../../@apps/o-auth/client/infrastructure/sequelize/sequelize-client.model';
-import { IamRoleModel } from '../../../../../@apps/iam/role/infrastructure/sequelize/sequelize-role.model';
-import { IamRolesAccountsModel } from '../../../../../@apps/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
-import { IamTenantModel } from '../../../../../@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
-import { IamTenantsAccountsModel } from '../../../../../@apps/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
+import { IamUserModel } from '@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
+import { OAuthClientModel } from '@apps/o-auth/client/infrastructure/sequelize/sequelize-client.model';
+import { IamRoleModel } from '@apps/iam/role/infrastructure/sequelize/sequelize-role.model';
+import { IamRolesAccountsModel } from '@apps/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
+import { IamTenantModel } from '@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
+import { IamTenantsAccountsModel } from '@apps/iam/tenant/infrastructure/sequelize/sequelize-tenants-accounts.model';
 
 @Table({ modelName: 'IamAccount', freezeTableName: true, timestamps: false })
 export class IamAccountModel extends Model<IamAccountModel>

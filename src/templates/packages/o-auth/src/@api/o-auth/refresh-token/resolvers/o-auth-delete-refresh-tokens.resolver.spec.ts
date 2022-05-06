@@ -6,7 +6,7 @@ import { OAuthDeleteRefreshTokensResolver } from './o-auth-delete-refresh-tokens
 import { OAuthDeleteRefreshTokensHandler } from '../handlers/o-auth-delete-refresh-tokens.handler';
 
 // sources
-import { refreshTokens } from '../../../../@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
 describe('OAuthDeleteRefreshTokensResolver', () =>
 {

@@ -7,7 +7,7 @@ import { IamUpdatePermissionHandler } from '../handlers/iam-update-permission.ha
 import { IamUpdatePermissionInput } from '../../../../graphql';
 
 // sources
-import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamUpdatePermissionResolver', () =>
 {

@@ -1,5 +1,5 @@
-import { AccessTokenResponse } from '../../../../@apps/o-auth/access-token/domain/access-token.response';
-import { ApplicationResponse } from '../../../../@apps/o-auth/application/domain/application.response';
+import { AccessTokenResponse } from '@apps/o-auth/access-token/domain/access-token.response';
+import { ApplicationResponse } from '@apps/o-auth/application/domain/application.response';
 
 export class ClientResponse
 {

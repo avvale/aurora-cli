@@ -6,7 +6,7 @@ import { IamCreatePermissionsHandler } from '../handlers/iam-create-permissions.
 import { IamCreatePermissionInput } from '../../../../graphql';
 
 // sources
-import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamCreatePermissionsResolver', () =>
 {

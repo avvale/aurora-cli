@@ -16,7 +16,7 @@ import {
 import { CreatedApplicationEvent } from '../application/events/created-application.event';
 import { UpdatedApplicationEvent } from '../application/events/updated-application.event';
 import { DeletedApplicationEvent } from '../application/events/deleted-application.event';
-import { OAuthClient } from '../../../../@apps/o-auth/client/domain/client.aggregate';
+import { OAuthClient } from '@apps/o-auth/client/domain/client.aggregate';
 
 export class OAuthApplication extends AggregateRoot
 {

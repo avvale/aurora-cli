@@ -16,8 +16,8 @@ import {
 } from './value-objects';
 import { CreatedAccessTokenEvent } from '../application/events/created-access-token.event';
 import { DeletedAccessTokenEvent } from '../application/events/deleted-access-token.event';
-import { OAuthRefreshToken } from '../../../../@apps/o-auth/refresh-token/domain/refresh-token.aggregate';
-import { OAuthClient } from '../../../../@apps/o-auth/client/domain/client.aggregate';
+import { OAuthRefreshToken } from '@apps/o-auth/refresh-token/domain/refresh-token.aggregate';
+import { OAuthClient } from '@apps/o-auth/client/domain/client.aggregate';
 
 export class OAuthAccessToken extends AggregateRoot
 {

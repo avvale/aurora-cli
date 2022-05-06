@@ -6,7 +6,7 @@ import { OAuthPaginateScopesResolver } from './o-auth-paginate-scopes.resolver';
 import { OAuthPaginateScopesHandler } from '../handlers/o-auth-paginate-scopes.handler';
 
 // sources
-import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthPaginateScopesResolver', () =>
 {

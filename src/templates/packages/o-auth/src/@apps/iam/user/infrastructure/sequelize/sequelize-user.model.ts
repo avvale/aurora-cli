@@ -1,7 +1,7 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { IamAccountModel } from '../../../../../@apps/iam/account/infrastructure/sequelize/sequelize-account.model';
+import { IamAccountModel } from '@apps/iam/account/infrastructure/sequelize/sequelize-account.model';
 
 @Table({ modelName: 'IamUser', freezeTableName: true, timestamps: false })
 export class IamUserModel extends Model<IamUserModel>

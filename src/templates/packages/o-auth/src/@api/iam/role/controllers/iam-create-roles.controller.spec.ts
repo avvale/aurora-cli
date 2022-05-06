@@ -5,7 +5,7 @@ import { IamCreateRolesController } from './iam-create-roles.controller';
 import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
 
 // sources
-import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
 
 describe('IamCreateRolesController', () =>
 {

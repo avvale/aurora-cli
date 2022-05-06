@@ -6,7 +6,7 @@ import { OAuthUpdateScopeController } from './o-auth-update-scope.controller';
 import { OAuthUpdateScopeHandler } from '../handlers/o-auth-update-scope.handler';
 
 // sources
-import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthUpdateScopeController', () =>
 {

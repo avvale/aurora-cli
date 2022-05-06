@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IBoundedContextRepository } from '../../../../../@apps/iam/bounded-context/domain/bounded-context.repository';
+import { IBoundedContextRepository } from '@apps/iam/bounded-context/domain/bounded-context.repository';
 import {
     BoundedContextId,
     BoundedContextName,
@@ -10,7 +10,7 @@ import {
     BoundedContextCreatedAt,
     BoundedContextUpdatedAt,
     BoundedContextDeletedAt,
-} from '../../../../../@apps/iam/bounded-context/domain/value-objects';
+} from '@apps/iam/bounded-context/domain/value-objects';
 import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 import { boundedContexts } from '../seeds/bounded-context.seed';
 

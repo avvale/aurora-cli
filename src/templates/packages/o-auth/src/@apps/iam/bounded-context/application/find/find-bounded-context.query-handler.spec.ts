@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindBoundedContextQueryHandler } from './find-bounded-context.query-handler';
-import { MockBoundedContextRepository } from '../../../../../@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.repository';
-import { IBoundedContextRepository } from '../../../../../@apps/iam/bounded-context/domain/bounded-context.repository';
-import { BoundedContextMapper } from '../../../../../@apps/iam/bounded-context/domain/bounded-context.mapper';
+import { MockBoundedContextRepository } from '@apps/iam/bounded-context/infrastructure/mock/mock-bounded-context.repository';
+import { IBoundedContextRepository } from '@apps/iam/bounded-context/domain/bounded-context.repository';
+import { BoundedContextMapper } from '@apps/iam/bounded-context/domain/bounded-context.mapper';
 import { FindBoundedContextQuery } from './find-bounded-context.query';
 import { FindBoundedContextService } from './find-bounded-context.service';
 

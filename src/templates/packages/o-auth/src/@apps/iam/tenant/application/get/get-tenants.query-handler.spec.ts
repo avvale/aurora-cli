@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetTenantsQueryHandler } from './get-tenants.query-handler';
-import { MockTenantRepository } from '../../../../../@apps/iam/tenant/infrastructure/mock/mock-tenant.repository';
-import { ITenantRepository } from '../../../../../@apps/iam/tenant/domain/tenant.repository';
-import { TenantMapper } from '../../../../../@apps/iam/tenant/domain/tenant.mapper';
+import { MockTenantRepository } from '@apps/iam/tenant/infrastructure/mock/mock-tenant.repository';
+import { ITenantRepository } from '@apps/iam/tenant/domain/tenant.repository';
+import { TenantMapper } from '@apps/iam/tenant/domain/tenant.mapper';
 import { GetTenantsQuery } from './get-tenants.query';
 import { GetTenantsService } from './get-tenants.service';
 

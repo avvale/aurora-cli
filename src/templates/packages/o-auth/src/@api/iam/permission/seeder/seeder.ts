@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from 'aurora-ts-core';
-import { CreatePermissionsCommand } from '../../../../@apps/iam/permission/application/create/create-permissions.command';
+import { CreatePermissionsCommand } from '@apps/iam/permission/application/create/create-permissions.command';
 import { SeederModule } from './seeder.module';
-import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 
 export class Seeder
 {

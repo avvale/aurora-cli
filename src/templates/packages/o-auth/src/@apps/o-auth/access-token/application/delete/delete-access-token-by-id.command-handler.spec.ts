@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteAccessTokenByIdCommandHandler } from './delete-access-token-by-id.command-handler';
-import { accessTokens } from '../../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 import { DeleteAccessTokenByIdCommand } from './delete-access-token-by-id.command';
 import { DeleteAccessTokenByIdService } from './delete-access-token-by-id.service';
 

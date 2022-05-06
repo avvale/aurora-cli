@@ -1,4 +1,4 @@
-import { PermissionResponse } from '../../../../@apps/iam/permission/domain/permission.response';
+import { PermissionResponse } from '@apps/iam/permission/domain/permission.response';
 
 export class BoundedContextResponse
 {

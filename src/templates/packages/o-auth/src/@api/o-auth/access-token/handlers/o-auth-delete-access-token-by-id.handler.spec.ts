@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { OAuthDeleteAccessTokenByIdHandler } from './o-auth-delete-access-token-by-id.handler';
 
 // sources
-import { accessTokens } from '../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
 describe('OAuthDeleteAccessTokenByIdController', () =>
 {

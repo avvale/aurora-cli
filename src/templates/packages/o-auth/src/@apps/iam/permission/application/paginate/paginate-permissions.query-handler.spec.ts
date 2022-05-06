@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginatePermissionsQueryHandler } from './paginate-permissions.query-handler';
-import { MockPermissionRepository } from '../../../../../@apps/iam/permission/infrastructure/mock/mock-permission.repository';
-import { IPermissionRepository } from '../../../../../@apps/iam/permission/domain/permission.repository';
-import { PermissionMapper } from '../../../../../@apps/iam/permission/domain/permission.mapper';
+import { MockPermissionRepository } from '@apps/iam/permission/infrastructure/mock/mock-permission.repository';
+import { IPermissionRepository } from '@apps/iam/permission/domain/permission.repository';
+import { PermissionMapper } from '@apps/iam/permission/domain/permission.mapper';
 import { PaginatePermissionsQuery } from './paginate-permissions.query';
 import { PaginatePermissionsService } from './paginate-permissions.service';
 

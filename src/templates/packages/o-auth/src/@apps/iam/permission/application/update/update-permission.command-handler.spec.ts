@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { permissions } from '../../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
 import { UpdatePermissionCommandHandler } from './update-permission.command-handler';
 import { UpdatePermissionCommand } from './update-permission.command';
 import { UpdatePermissionService } from './update-permission.service';

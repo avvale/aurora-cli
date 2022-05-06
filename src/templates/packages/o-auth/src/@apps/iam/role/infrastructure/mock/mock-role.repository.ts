@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IRoleRepository } from '../../../../../@apps/iam/role/domain/role.repository';
+import { IRoleRepository } from '@apps/iam/role/domain/role.repository';
 import {
     RoleId,
     RoleName,
@@ -10,7 +10,7 @@ import {
     RoleCreatedAt,
     RoleUpdatedAt,
     RoleDeletedAt,
-} from '../../../../../@apps/iam/role/domain/value-objects';
+} from '@apps/iam/role/domain/value-objects';
 import { IamRole } from '../../domain/role.aggregate';
 import { roles } from '../seeds/role.seed';
 

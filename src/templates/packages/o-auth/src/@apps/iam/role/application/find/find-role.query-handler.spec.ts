@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindRoleQueryHandler } from './find-role.query-handler';
-import { MockRoleRepository } from '../../../../../@apps/iam/role/infrastructure/mock/mock-role.repository';
-import { IRoleRepository } from '../../../../../@apps/iam/role/domain/role.repository';
-import { RoleMapper } from '../../../../../@apps/iam/role/domain/role.mapper';
+import { MockRoleRepository } from '@apps/iam/role/infrastructure/mock/mock-role.repository';
+import { IRoleRepository } from '@apps/iam/role/domain/role.repository';
+import { RoleMapper } from '@apps/iam/role/domain/role.mapper';
 import { FindRoleQuery } from './find-role.query';
 import { FindRoleService } from './find-role.service';
 

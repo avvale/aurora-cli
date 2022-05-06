@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetAccountsQueryHandler } from './get-accounts.query-handler';
-import { MockAccountRepository } from '../../../../../@apps/iam/account/infrastructure/mock/mock-account.repository';
-import { IAccountRepository } from '../../../../../@apps/iam/account/domain/account.repository';
-import { AccountMapper } from '../../../../../@apps/iam/account/domain/account.mapper';
+import { MockAccountRepository } from '@apps/iam/account/infrastructure/mock/mock-account.repository';
+import { IAccountRepository } from '@apps/iam/account/domain/account.repository';
+import { AccountMapper } from '@apps/iam/account/domain/account.mapper';
 import { GetAccountsQuery } from './get-accounts.query';
 import { GetAccountsService } from './get-accounts.service';
 

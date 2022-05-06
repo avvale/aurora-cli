@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateRefreshTokensQueryHandler } from './paginate-refresh-tokens.query-handler';
-import { MockRefreshTokenRepository } from '../../../../../@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
-import { IRefreshTokenRepository } from '../../../../../@apps/o-auth/refresh-token/domain/refresh-token.repository';
-import { RefreshTokenMapper } from '../../../../../@apps/o-auth/refresh-token/domain/refresh-token.mapper';
+import { MockRefreshTokenRepository } from '@apps/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
+import { IRefreshTokenRepository } from '@apps/o-auth/refresh-token/domain/refresh-token.repository';
+import { RefreshTokenMapper } from '@apps/o-auth/refresh-token/domain/refresh-token.mapper';
 import { PaginateRefreshTokensQuery } from './paginate-refresh-tokens.query';
 import { PaginateRefreshTokensService } from './paginate-refresh-tokens.service';
 

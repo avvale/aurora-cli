@@ -19,10 +19,10 @@ import {
     AccountUpdatedAt,
     AccountDeletedAt,
 } from './value-objects';
-import { UserMapper } from '../../../../@apps/iam/user/domain/user.mapper';
-import { ClientMapper } from '../../../../@apps/o-auth/client/domain/client.mapper';
-import { RoleMapper } from '../../../../@apps/iam/role/domain/role.mapper';
-import { TenantMapper } from '../../../../@apps/iam/tenant/domain/tenant.mapper';
+import { UserMapper } from '@apps/iam/user/domain/user.mapper';
+import { ClientMapper } from '@apps/o-auth/client/domain/client.mapper';
+import { RoleMapper } from '@apps/iam/role/domain/role.mapper';
+import { TenantMapper } from '@apps/iam/tenant/domain/tenant.mapper';
 
 export class AccountMapper implements IMapper
 {

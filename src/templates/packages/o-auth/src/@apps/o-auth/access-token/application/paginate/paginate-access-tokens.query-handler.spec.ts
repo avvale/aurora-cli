@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateAccessTokensQueryHandler } from './paginate-access-tokens.query-handler';
-import { MockAccessTokenRepository } from '../../../../../@apps/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
-import { IAccessTokenRepository } from '../../../../../@apps/o-auth/access-token/domain/access-token.repository';
-import { AccessTokenMapper } from '../../../../../@apps/o-auth/access-token/domain/access-token.mapper';
+import { MockAccessTokenRepository } from '@apps/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
+import { IAccessTokenRepository } from '@apps/o-auth/access-token/domain/access-token.repository';
+import { AccessTokenMapper } from '@apps/o-auth/access-token/domain/access-token.mapper';
 import { PaginateAccessTokensQuery } from './paginate-access-tokens.query';
 import { PaginateAccessTokensService } from './paginate-access-tokens.service';
 

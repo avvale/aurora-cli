@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { accounts } from '../../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 import { CreateAccountCommandHandler } from './create-account.command-handler';
 import { CreateAccountCommand } from './create-account.command';
 import { CreateAccountService } from './create-account.service';

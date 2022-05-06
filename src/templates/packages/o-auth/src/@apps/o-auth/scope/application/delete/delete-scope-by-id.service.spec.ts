@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { scopes } from '../../../../../@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
 import { DeleteScopeByIdService } from './delete-scope-by-id.service';
 import { ScopeId } from '../../domain/value-objects';
 import { IScopeRepository } from '../../domain/scope.repository';

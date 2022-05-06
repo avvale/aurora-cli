@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from 'aurora-ts-core';
-import { CreateAccountsCommand } from '../../../../@apps/iam/account/application/create/create-accounts.command';
+import { CreateAccountsCommand } from '@apps/iam/account/application/create/create-accounts.command';
 import { SeederModule } from './seeder.module';
-import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
 
 export class Seeder
 {

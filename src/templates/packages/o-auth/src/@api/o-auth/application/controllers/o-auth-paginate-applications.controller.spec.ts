@@ -6,7 +6,7 @@ import { OAuthPaginateApplicationsController } from './o-auth-paginate-applicati
 import { OAuthPaginateApplicationsHandler } from '../handlers/o-auth-paginate-applications.handler';
 
 // sources
-import { applications } from '../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthPaginateApplicationsController', () =>
 {

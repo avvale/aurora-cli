@@ -14,8 +14,8 @@ import {
     AccessTokenUpdatedAt,
     AccessTokenDeletedAt,
 } from './value-objects';
-import { RefreshTokenMapper } from '../../../../@apps/o-auth/refresh-token/domain/refresh-token.mapper';
-import { ClientMapper } from '../../../../@apps/o-auth/client/domain/client.mapper';
+import { RefreshTokenMapper } from '@apps/o-auth/refresh-token/domain/refresh-token.mapper';
+import { ClientMapper } from '@apps/o-auth/client/domain/client.mapper';
 
 export class AccessTokenMapper implements IMapper
 {

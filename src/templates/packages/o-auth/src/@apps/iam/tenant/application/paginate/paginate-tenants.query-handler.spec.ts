@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateTenantsQueryHandler } from './paginate-tenants.query-handler';
-import { MockTenantRepository } from '../../../../../@apps/iam/tenant/infrastructure/mock/mock-tenant.repository';
-import { ITenantRepository } from '../../../../../@apps/iam/tenant/domain/tenant.repository';
-import { TenantMapper } from '../../../../../@apps/iam/tenant/domain/tenant.mapper';
+import { MockTenantRepository } from '@apps/iam/tenant/infrastructure/mock/mock-tenant.repository';
+import { ITenantRepository } from '@apps/iam/tenant/domain/tenant.repository';
+import { TenantMapper } from '@apps/iam/tenant/domain/tenant.mapper';
 import { PaginateTenantsQuery } from './paginate-tenants.query';
 import { PaginateTenantsService } from './paginate-tenants.service';
 

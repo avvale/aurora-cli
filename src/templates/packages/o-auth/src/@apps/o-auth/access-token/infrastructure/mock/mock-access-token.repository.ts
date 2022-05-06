@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IAccessTokenRepository } from '../../../../../@apps/o-auth/access-token/domain/access-token.repository';
+import { IAccessTokenRepository } from '@apps/o-auth/access-token/domain/access-token.repository';
 import {
     AccessTokenId,
     AccessTokenClientId,
@@ -12,7 +12,7 @@ import {
     AccessTokenCreatedAt,
     AccessTokenUpdatedAt,
     AccessTokenDeletedAt,
-} from '../../../../../@apps/o-auth/access-token/domain/value-objects';
+} from '@apps/o-auth/access-token/domain/value-objects';
 import { OAuthAccessToken } from '../../domain/access-token.aggregate';
 import { accessTokens } from '../seeds/access-token.seed';
 

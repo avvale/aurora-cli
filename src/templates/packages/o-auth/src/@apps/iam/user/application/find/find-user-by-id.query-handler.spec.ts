@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindUserByIdQueryHandler } from './find-user-by-id.query-handler';
-import { MockUserRepository } from '../../../../../@apps/iam/user/infrastructure/mock/mock-user.repository';
-import { users } from '../../../../../@apps/iam/user/infrastructure/seeds/user.seed';
-import { IUserRepository } from '../../../../../@apps/iam/user/domain/user.repository';
-import { UserMapper } from '../../../../../@apps/iam/user/domain/user.mapper';
+import { MockUserRepository } from '@apps/iam/user/infrastructure/mock/mock-user.repository';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
+import { IUserRepository } from '@apps/iam/user/domain/user.repository';
+import { UserMapper } from '@apps/iam/user/domain/user.mapper';
 import { FindUserByIdQuery } from './find-user-by-id.query';
 import { FindUserByIdService } from './find-user-by-id.service';
 

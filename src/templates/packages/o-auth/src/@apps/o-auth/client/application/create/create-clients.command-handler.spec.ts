@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { clients } from '../../../../../@apps/o-auth/client/infrastructure/seeds/client.seed';
+import { clients } from '@apps/o-auth/client/infrastructure/seeds/client.seed';
 import { CreateClientsCommandHandler } from './create-clients.command-handler';
 import { CreateClientsCommand } from './create-clients.command';
 import { CreateClientsService } from './create-clients.service';

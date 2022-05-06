@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateApplicationsQueryHandler } from './paginate-applications.query-handler';
-import { MockApplicationRepository } from '../../../../../@apps/o-auth/application/infrastructure/mock/mock-application.repository';
-import { IApplicationRepository } from '../../../../../@apps/o-auth/application/domain/application.repository';
-import { ApplicationMapper } from '../../../../../@apps/o-auth/application/domain/application.mapper';
+import { MockApplicationRepository } from '@apps/o-auth/application/infrastructure/mock/mock-application.repository';
+import { IApplicationRepository } from '@apps/o-auth/application/domain/application.repository';
+import { ApplicationMapper } from '@apps/o-auth/application/domain/application.mapper';
 import { PaginateApplicationsQuery } from './paginate-applications.query';
 import { PaginateApplicationsService } from './paginate-applications.service';
 

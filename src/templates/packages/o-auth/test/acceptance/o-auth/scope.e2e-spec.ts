@@ -4,17 +4,17 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IScopeRepository } from '../../../src/@apps/o-auth/scope/domain/scope.repository';
-import { MockScopeSeeder } from '../../../src/@apps/o-auth/scope/infrastructure/mock/mock-scope.seeder';
-import { scopes } from '../../../src/@apps/o-auth/scope/infrastructure/seeds/scope.seed';
-import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
-import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
+import { IScopeRepository } from '@apps/o-auth/scope/domain/scope.repository';
+import { MockScopeSeeder } from '@apps/o-auth/scope/infrastructure/mock/mock-scope.seeder';
+import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { OAuthModule } from '@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // has OAuth
-import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

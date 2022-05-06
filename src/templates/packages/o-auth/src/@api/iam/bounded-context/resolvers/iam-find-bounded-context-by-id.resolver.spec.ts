@@ -6,7 +6,7 @@ import { IamFindBoundedContextByIdResolver } from './iam-find-bounded-context-by
 import { IamFindBoundedContextByIdHandler } from '../handlers/iam-find-bounded-context-by-id.handler';
 
 // sources
-import { boundedContexts } from '../../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('IamFindBoundedContextByIdResolver', () =>
 {

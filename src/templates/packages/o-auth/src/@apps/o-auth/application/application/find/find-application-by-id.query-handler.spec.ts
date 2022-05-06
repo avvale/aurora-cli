@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindApplicationByIdQueryHandler } from './find-application-by-id.query-handler';
-import { MockApplicationRepository } from '../../../../../@apps/o-auth/application/infrastructure/mock/mock-application.repository';
-import { applications } from '../../../../../@apps/o-auth/application/infrastructure/seeds/application.seed';
-import { IApplicationRepository } from '../../../../../@apps/o-auth/application/domain/application.repository';
-import { ApplicationMapper } from '../../../../../@apps/o-auth/application/domain/application.mapper';
+import { MockApplicationRepository } from '@apps/o-auth/application/infrastructure/mock/mock-application.repository';
+import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { IApplicationRepository } from '@apps/o-auth/application/domain/application.repository';
+import { ApplicationMapper } from '@apps/o-auth/application/domain/application.mapper';
 import { FindApplicationByIdQuery } from './find-application-by-id.query';
 import { FindApplicationByIdService } from './find-application-by-id.service';
 

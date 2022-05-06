@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IRefreshTokenRepository } from '../../../../../@apps/o-auth/refresh-token/domain/refresh-token.repository';
+import { IRefreshTokenRepository } from '@apps/o-auth/refresh-token/domain/refresh-token.repository';
 import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,
@@ -10,7 +10,7 @@ import {
     RefreshTokenCreatedAt,
     RefreshTokenUpdatedAt,
     RefreshTokenDeletedAt,
-} from '../../../../../@apps/o-auth/refresh-token/domain/value-objects';
+} from '@apps/o-auth/refresh-token/domain/value-objects';
 import { OAuthRefreshToken } from '../../domain/refresh-token.aggregate';
 import { refreshTokens } from '../seeds/refresh-token.seed';
 

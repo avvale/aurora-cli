@@ -1,7 +1,7 @@
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { OAuthApplicationModel } from '../../../../../@apps/o-auth/application/infrastructure/sequelize/sequelize-application.model';
-import { OAuthClientModel } from '../../../../../@apps/o-auth/client/infrastructure/sequelize/sequelize-client.model';
+import { OAuthApplicationModel } from '@apps/o-auth/application/infrastructure/sequelize/sequelize-application.model';
+import { OAuthClientModel } from '@apps/o-auth/client/infrastructure/sequelize/sequelize-client.model';
 
 @Table({ modelName: 'OAuthApplicationsClients', freezeTableName: true, timestamps: false })
 export class OAuthApplicationsClientsModel extends Model<OAuthApplicationsClientsModel>

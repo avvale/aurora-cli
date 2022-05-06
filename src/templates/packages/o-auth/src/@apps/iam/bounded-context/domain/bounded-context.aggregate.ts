@@ -15,7 +15,7 @@ import {
 import { CreatedBoundedContextEvent } from '../application/events/created-bounded-context.event';
 import { UpdatedBoundedContextEvent } from '../application/events/updated-bounded-context.event';
 import { DeletedBoundedContextEvent } from '../application/events/deleted-bounded-context.event';
-import { IamPermission } from '../../../../@apps/iam/permission/domain/permission.aggregate';
+import { IamPermission } from '@apps/iam/permission/domain/permission.aggregate';
 
 export class IamBoundedContext extends AggregateRoot
 {

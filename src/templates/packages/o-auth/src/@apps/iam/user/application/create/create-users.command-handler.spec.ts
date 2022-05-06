@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { users } from '../../../../../@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
 import { CreateUsersCommandHandler } from './create-users.command-handler';
 import { CreateUsersCommand } from './create-users.command';
 import { CreateUsersService } from './create-users.service';
