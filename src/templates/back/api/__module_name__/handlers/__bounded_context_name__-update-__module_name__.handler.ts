@@ -3,12 +3,12 @@ import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCo
 
 {{#if schema.hasTenant}}
 // tenant
-import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
+import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
-import { Update{{ toPascalCase schema.moduleName }}Command } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/update/update-{{ toKebabCase schema.moduleName }}.command';
+import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
+import { Update{{ toPascalCase schema.moduleName }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/update/update-{{ toKebabCase schema.moduleName }}.command';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input } from '../../../../graphql';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 

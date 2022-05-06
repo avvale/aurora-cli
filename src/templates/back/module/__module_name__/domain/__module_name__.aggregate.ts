@@ -15,18 +15,18 @@ import { Updated{{ toPascalCase schema.moduleName }}Event } from '../application
 import { Deleted{{ toPascalCase schema.moduleName }}Event } from '../application/events/deleted-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
+import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToOne}}
 {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
+import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
-import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
+import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../../{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
+import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/each}}
 
 export class {{ schema.aggregateName }} extends AggregateRoot

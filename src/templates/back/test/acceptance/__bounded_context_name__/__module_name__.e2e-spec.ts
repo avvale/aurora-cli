@@ -4,22 +4,22 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
-import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
 import { AddI18NConstraintService } from '{{ config.auroraCorePackage }}';
 {{/if}}
-import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
-import { {{ toCamelCase schema.moduleNames }} } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
-import { GraphQLConfigModule } from '../../../src/{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
-import { {{ toPascalCase schema.boundedContextName }}Module } from '../../../src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
+import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
+import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { GraphQLConfigModule } from '{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
+import { {{ toPascalCase schema.boundedContextName }}Module } from '{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
 {{#if schema.hasOAuth }}
 // has OAuth
-import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+import { AuthenticationJwtGuard } from '{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
 {{/if }}
 
 // disable import foreign modules, can be micro-services

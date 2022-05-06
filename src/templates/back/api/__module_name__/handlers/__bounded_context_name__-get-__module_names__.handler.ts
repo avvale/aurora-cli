@@ -3,11 +3,11 @@ import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}IQuer
 
 {{#if schema.hasTenant}}
 // tenant
-import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/iam/account/domain/account.response';
+import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { Get{{ toPascalCase schema.moduleNames }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
+import { Get{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 

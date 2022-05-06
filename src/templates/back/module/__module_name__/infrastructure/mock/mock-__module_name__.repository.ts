@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from '{{ config.auroraCorePackage }}';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '../../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 import {
     {{> importValueObjects }}
-} from '../../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/value-objects';
+} from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/value-objects';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toCamelCase schema.moduleNames }} } from '../seeds/{{ toKebabCase schema.moduleName }}.seed';
 

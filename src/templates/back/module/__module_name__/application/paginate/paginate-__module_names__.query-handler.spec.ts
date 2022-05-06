@@ -3,9 +3,9 @@ import { PaginationResponse } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { Paginate{{ toPascalCase schema.moduleNames }}QueryHandler } from './paginate-{{ toKebabCase schema.moduleNames }}.query-handler';
-import { Mock{{ toPascalCase schema.moduleName }}Repository } from '../../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '../../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
-import { {{ toPascalCase schema.moduleName }}Mapper } from '../../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.mapper';
+import { Mock{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
+import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
+import { {{ toPascalCase schema.moduleName }}Mapper } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.mapper';
 import { Paginate{{ toPascalCase schema.moduleNames }}Query } from './paginate-{{ toKebabCase schema.moduleNames }}.query';
 import { Paginate{{ toPascalCase schema.moduleNames }}Service } from './paginate-{{ toKebabCase schema.moduleNames }}.service';
 
