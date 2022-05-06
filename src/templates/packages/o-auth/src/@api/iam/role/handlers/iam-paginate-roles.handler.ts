@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateRolesQuery } from '../../../../@apps/iam/role/application/paginate/paginate-roles.query';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from '../../../../../graphql';
 
 @Injectable()
 export class IamPaginateRolesHandler

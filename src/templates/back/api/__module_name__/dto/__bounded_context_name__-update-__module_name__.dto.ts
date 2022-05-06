@@ -6,7 +6,7 @@ import { {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase g
 {{/unlessEq}}
 {{/each}}
 {{#if schema.properties.hasEnum}}
-import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{/each}} } from '../../../../graphql';
+import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{/each}} } from '../../../../../graphql';
 {{/if}}
 
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Dto

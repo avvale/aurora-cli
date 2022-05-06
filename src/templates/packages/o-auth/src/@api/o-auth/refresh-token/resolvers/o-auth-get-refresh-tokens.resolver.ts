@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { OAuthGetRefreshTokensHandler } from '../handlers/o-auth-get-refresh-tokens.handler';
-import { OAuthRefreshToken } from '../../../../graphql';
+import { OAuthRefreshToken } from '../../../../../graphql';
 
 @Resolver()
 export class OAuthGetRefreshTokensResolver

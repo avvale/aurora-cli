@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { OAuthCreateClientResolver } from './o-auth-create-client.resolver';
 import { OAuthCreateClientHandler } from '../handlers/o-auth-create-client.handler';
-import { OAuthCreateClientInput } from '../../../../graphql';
+import { OAuthCreateClientInput } from '../../../../../graphql';
 
 // sources
 import { clients } from '../../../../@apps/o-auth/client/infrastructure/seeds/client.seed';

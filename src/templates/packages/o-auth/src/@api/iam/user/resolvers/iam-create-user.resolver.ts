@@ -3,7 +3,7 @@ import { Timezone } from 'aurora-ts-core';
 
 // @apps
 import { IamCreateUserHandler } from '../handlers/iam-create-user.handler';
-import { IamUser, IamCreateUserInput } from '../../../../graphql';
+import { IamUser, IamCreateUserInput } from '../../../../../graphql';
 
 @Resolver()
 export class IamCreateUserResolver

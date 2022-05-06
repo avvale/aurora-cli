@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { IamGetUsersHandler } from '../handlers/iam-get-users.handler';
-import { IamUser } from '../../../../graphql';
+import { IamUser } from '../../../../../graphql';
 
 @Resolver()
 export class IamGetUsersResolver

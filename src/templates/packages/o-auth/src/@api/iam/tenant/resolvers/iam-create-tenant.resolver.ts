@@ -3,7 +3,7 @@ import { Timezone } from 'aurora-ts-core';
 
 // @apps
 import { IamCreateTenantHandler } from '../handlers/iam-create-tenant.handler';
-import { IamTenant, IamCreateTenantInput } from '../../../../graphql';
+import { IamTenant, IamCreateTenantInput } from '../../../../../graphql';
 
 @Resolver()
 export class IamCreateTenantResolver

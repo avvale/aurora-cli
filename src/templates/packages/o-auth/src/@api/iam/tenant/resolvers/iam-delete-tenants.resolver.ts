@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { IamDeleteTenantsHandler } from '../handlers/iam-delete-tenants.handler';
-import { IamTenant } from '../../../../graphql';
+import { IamTenant } from '../../../../../graphql';
 
 @Resolver()
 export class IamDeleteTenantsResolver

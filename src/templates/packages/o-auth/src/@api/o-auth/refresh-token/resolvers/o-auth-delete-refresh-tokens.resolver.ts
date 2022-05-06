@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { OAuthDeleteRefreshTokensHandler } from '../handlers/o-auth-delete-refresh-tokens.handler';
-import { OAuthRefreshToken } from '../../../../graphql';
+import { OAuthRefreshToken } from '../../../../../graphql';
 
 @Resolver()
 export class OAuthDeleteRefreshTokensResolver

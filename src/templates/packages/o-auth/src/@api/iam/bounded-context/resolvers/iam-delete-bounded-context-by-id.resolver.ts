@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { IamDeleteBoundedContextByIdHandler } from '../handlers/iam-delete-bounded-context-by-id.handler';
-import { IamBoundedContext } from '../../../../graphql';
+import { IamBoundedContext } from '../../../../../graphql';
 
 @Resolver()
 @Permissions('iam.boundedContext.delete')

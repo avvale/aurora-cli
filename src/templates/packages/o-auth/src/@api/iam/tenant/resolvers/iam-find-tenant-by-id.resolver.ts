@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { IamFindTenantByIdHandler } from '../handlers/iam-find-tenant-by-id.handler';
-import { IamTenant } from '../../../../graphql';
+import { IamTenant } from '../../../../../graphql';
 
 @Resolver()
 export class IamFindTenantByIdResolver

@@ -3,7 +3,7 @@ import { Timezone } from 'aurora-ts-core';
 
 // @apps
 import { OAuthCreateApplicationsHandler } from '../handlers/o-auth-create-applications.handler';
-import { OAuthCreateApplicationInput } from '../../../../graphql';
+import { OAuthCreateApplicationInput } from '../../../../../graphql';
 
 @Resolver()
 export class OAuthCreateApplicationsResolver

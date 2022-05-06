@@ -6,7 +6,7 @@ import { IQueryBus, Jwt } from 'aurora-ts-core';
 import { IamUserModel } from '../../../../@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
 import { IamAccountDto } from '../../../../@api/iam/account/dto';
 import { FindAccountQuery } from '../../../../@apps/iam/account/application/find/find-account.query';
-import { IamAccount } from '../../../../graphql';
+import { IamAccount } from '../../../../../graphql';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy)

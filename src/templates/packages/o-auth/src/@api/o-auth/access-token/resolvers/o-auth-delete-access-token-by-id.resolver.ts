@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { OAuthDeleteAccessTokenByIdHandler } from '../handlers/o-auth-delete-access-token-by-id.handler';
-import { OAuthAccessToken } from '../../../../graphql';
+import { OAuthAccessToken } from '../../../../../graphql';
 
 @Resolver()
 export class OAuthDeleteAccessTokenByIdResolver

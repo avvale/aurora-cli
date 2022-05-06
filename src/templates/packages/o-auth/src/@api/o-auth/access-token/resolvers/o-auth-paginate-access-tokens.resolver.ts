@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { OAuthPaginateAccessTokensHandler } from '../handlers/o-auth-paginate-access-tokens.handler';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from '../../../../../graphql';
 
 @Resolver()
 export class OAuthPaginateAccessTokensResolver

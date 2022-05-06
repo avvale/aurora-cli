@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpdatePermissionResolver } from './iam-update-permission.resolver';
 import { IamUpdatePermissionHandler } from '../handlers/iam-update-permission.handler';
-import { IamUpdatePermissionInput } from '../../../../graphql';
+import { IamUpdatePermissionInput } from '../../../../../graphql';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';

@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.handler';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from '../../../../../graphql';
 
 @Resolver()
 export class IamPaginateTenantsResolver

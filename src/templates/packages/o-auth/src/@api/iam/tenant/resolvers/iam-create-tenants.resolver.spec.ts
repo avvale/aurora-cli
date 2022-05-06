@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamCreateTenantsResolver } from './iam-create-tenants.resolver';
 import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
-import { IamCreateTenantInput } from '../../../../graphql';
+import { IamCreateTenantInput } from '../../../../../graphql';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';

@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { OAuthDeleteScopesHandler } from '../handlers/o-auth-delete-scopes.handler';
-import { OAuthScope } from '../../../../graphql';
+import { OAuthScope } from '../../../../../graphql';
 
 @Resolver()
 export class OAuthDeleteScopesResolver

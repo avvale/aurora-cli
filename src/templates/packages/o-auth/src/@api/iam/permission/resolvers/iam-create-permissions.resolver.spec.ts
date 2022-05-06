@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamCreatePermissionsResolver } from './iam-create-permissions.resolver';
 import { IamCreatePermissionsHandler } from '../handlers/iam-create-permissions.handler';
-import { IamCreatePermissionInput } from '../../../../graphql';
+import { IamCreatePermissionInput } from '../../../../../graphql';
 
 // sources
 import { permissions } from '../../../../@apps/iam/permission/infrastructure/seeds/permission.seed';

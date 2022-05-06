@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { GetRolesQuery } from '../../../../@apps/iam/role/application/get/get-roles.query';
-import { IamRole } from '../../../../graphql';
+import { IamRole } from '../../../../../graphql';
 import { IamRoleDto } from '../dto';
 
 @Injectable()

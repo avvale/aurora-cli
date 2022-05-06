@@ -3,7 +3,7 @@ import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { OAuthUpdateClientHandler } from '../handlers/o-auth-update-client.handler';
-import { OAuthClient, OAuthUpdateClientInput } from '../../../../graphql';
+import { OAuthClient, OAuthUpdateClientInput } from '../../../../../graphql';
 
 @Resolver()
 export class OAuthUpdateClientResolver

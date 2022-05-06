@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { FindBoundedContextQuery } from '../../../../@apps/iam/bounded-context/application/find/find-bounded-context.query';
-import { IamBoundedContext } from '../../../../graphql';
+import { IamBoundedContext } from '../../../../../graphql';
 import { IamBoundedContextDto } from '../dto';
 
 @Injectable()
