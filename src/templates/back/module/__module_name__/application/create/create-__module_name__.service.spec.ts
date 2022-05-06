@@ -48,7 +48,8 @@ describe('Create{{ toPascalCase schema.moduleName }}Service', () =>
                 },
                 {{/if}}
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(Create{{ toPascalCase schema.moduleName }}Service);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);

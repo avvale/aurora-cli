@@ -23,7 +23,8 @@ describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<Update{{ toPascalCase schema.moduleName }}CommandHandler>(Update{{ toPascalCase schema.moduleName }}CommandHandler);
         service         = module.get<Update{{ toPascalCase schema.moduleName }}Service>(Update{{ toPascalCase schema.moduleName }}Service);

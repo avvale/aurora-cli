@@ -22,7 +22,8 @@ describe('DeleteRefreshTokensCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteRefreshTokensCommandHandler>(DeleteRefreshTokensCommandHandler);
         service         = module.get<DeleteRefreshTokensService>(DeleteRefreshTokensService);

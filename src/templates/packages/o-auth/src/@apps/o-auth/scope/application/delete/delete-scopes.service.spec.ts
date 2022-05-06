@@ -30,7 +30,8 @@ describe('DeleteScopesService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteScopesService);
         repository      = module.get(IScopeRepository);

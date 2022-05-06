@@ -28,7 +28,8 @@ describe('GetUsersService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetUsersService);
         repository      = module.get(IUserRepository);

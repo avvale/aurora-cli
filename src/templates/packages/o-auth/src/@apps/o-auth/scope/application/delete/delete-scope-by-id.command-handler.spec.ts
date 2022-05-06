@@ -23,7 +23,8 @@ describe('DeleteScopeByIdCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteScopeByIdCommandHandler>(DeleteScopeByIdCommandHandler);
         service         = module.get<DeleteScopeByIdService>(DeleteScopeByIdService);

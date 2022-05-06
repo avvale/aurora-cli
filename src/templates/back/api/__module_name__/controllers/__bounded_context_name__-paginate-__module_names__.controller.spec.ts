@@ -38,7 +38,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
                         main: () => { /**/ },
                     },
                 },
-            ]
+            ],
         })
             .compile();
 

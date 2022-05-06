@@ -22,7 +22,8 @@ describe('DeleteScopesCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteScopesCommandHandler>(DeleteScopesCommandHandler);
         service         = module.get<DeleteScopesService>(DeleteScopesService);

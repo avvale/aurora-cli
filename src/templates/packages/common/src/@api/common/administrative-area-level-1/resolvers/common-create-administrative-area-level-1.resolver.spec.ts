@@ -26,16 +26,17 @@ describe('CommonCreateAdministrativeAreaLevel1Resolver', () =>
                     provide : IQueryBus,
                     useValue: {
                         ask: () => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : ICommandBus,
                     useValue: {
                         dispatch: () => { /**/ },
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         resolver    = module.get<CommonCreateAdministrativeAreaLevel1Resolver>(CommonCreateAdministrativeAreaLevel1Resolver);
         queryBus    = module.get<IQueryBus>(IQueryBus);

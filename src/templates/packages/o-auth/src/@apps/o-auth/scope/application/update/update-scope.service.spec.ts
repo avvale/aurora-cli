@@ -38,7 +38,8 @@ describe('UpdateScopeService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(UpdateScopeService);
         repository      = module.get(IScopeRepository);

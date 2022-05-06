@@ -27,16 +27,17 @@ describe('CommonDeleteAdministrativeAreasLevel1Controller', () =>
                     provide : IQueryBus,
                     useValue: {
                         ask: () => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : ICommandBus,
                     useValue: {
                         dispatch: () => { /**/ },
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller  = module.get<CommonDeleteAdministrativeAreasLevel1Controller>(CommonDeleteAdministrativeAreasLevel1Controller);
         queryBus    = module.get<IQueryBus>(IQueryBus);

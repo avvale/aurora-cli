@@ -23,7 +23,8 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler>(Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler);
         service         = module.get<Delete{{ toPascalCase schema.moduleName }}ByIdService>(Delete{{ toPascalCase schema.moduleName }}ByIdService);

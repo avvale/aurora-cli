@@ -28,7 +28,8 @@ describe('GetRefreshTokensService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetRefreshTokensService);
         repository      = module.get(IRefreshTokenRepository);

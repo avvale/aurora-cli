@@ -28,7 +28,8 @@ describe('PaginateScopesService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateScopesService);
         repository      = module.get(IScopeRepository);

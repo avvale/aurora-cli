@@ -30,7 +30,8 @@ describe('DeleteClientsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteClientsService);
         repository      = module.get(IClientRepository);

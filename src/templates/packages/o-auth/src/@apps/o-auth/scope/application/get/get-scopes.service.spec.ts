@@ -28,7 +28,8 @@ describe('GetScopesService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetScopesService);
         repository      = module.get(IScopeRepository);

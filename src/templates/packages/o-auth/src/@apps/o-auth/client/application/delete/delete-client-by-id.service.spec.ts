@@ -32,7 +32,8 @@ describe('DeleteClientByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteClientByIdService);
         repository      = module.get(IClientRepository);

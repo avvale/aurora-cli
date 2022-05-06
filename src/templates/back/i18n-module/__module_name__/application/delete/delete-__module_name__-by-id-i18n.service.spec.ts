@@ -32,16 +32,17 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdI18NService', () =>
                         findById  : id => { /**/ },
                         update    : item => { /**/ },
                         deleteById: item => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
                     useValue: {
                         delete: queryStatement => { /**/ },
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(Delete{{ toPascalCase schema.moduleName }}ByIdI18NService);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);

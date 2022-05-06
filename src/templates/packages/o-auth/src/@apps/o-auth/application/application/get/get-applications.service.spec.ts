@@ -28,7 +28,8 @@ describe('GetApplicationsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetApplicationsService);
         repository      = module.get(IApplicationRepository);

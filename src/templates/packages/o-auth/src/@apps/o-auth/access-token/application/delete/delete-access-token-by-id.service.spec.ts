@@ -32,7 +32,8 @@ describe('DeleteAccessTokenByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteAccessTokenByIdService);
         repository      = module.get(IAccessTokenRepository);

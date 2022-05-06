@@ -28,7 +28,8 @@ describe('PaginateAccessTokensService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateAccessTokensService);
         repository      = module.get(IAccessTokenRepository);

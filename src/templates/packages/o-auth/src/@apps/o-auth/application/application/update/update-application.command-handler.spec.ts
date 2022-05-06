@@ -23,7 +23,8 @@ describe('UpdateApplicationCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<UpdateApplicationCommandHandler>(UpdateApplicationCommandHandler);
         service         = module.get<UpdateApplicationService>(UpdateApplicationService);

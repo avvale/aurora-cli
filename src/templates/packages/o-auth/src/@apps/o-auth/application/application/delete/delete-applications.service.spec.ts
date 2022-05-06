@@ -30,7 +30,8 @@ describe('DeleteApplicationsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteApplicationsService);
         repository      = module.get(IApplicationRepository);

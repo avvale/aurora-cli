@@ -32,7 +32,8 @@ describe('DeleteApplicationByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteApplicationByIdService);
         repository      = module.get(IApplicationRepository);

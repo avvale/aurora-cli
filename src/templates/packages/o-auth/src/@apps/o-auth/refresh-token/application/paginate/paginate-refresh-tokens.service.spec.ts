@@ -28,7 +28,8 @@ describe('PaginateRefreshTokensService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateRefreshTokensService);
         repository      = module.get(IRefreshTokenRepository);

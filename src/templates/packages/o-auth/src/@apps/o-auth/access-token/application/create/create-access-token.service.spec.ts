@@ -45,7 +45,8 @@ describe('CreateAccessTokenService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateAccessTokenService);
         repository      = module.get(IAccessTokenRepository);

@@ -47,7 +47,8 @@ describe('UpdateUserService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(UpdateUserService);
         repository      = module.get(IUserRepository);

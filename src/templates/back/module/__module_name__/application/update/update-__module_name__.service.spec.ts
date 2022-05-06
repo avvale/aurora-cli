@@ -47,7 +47,8 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
                 },
                 {{/if}}
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(Update{{ toPascalCase schema.moduleName }}Service);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);

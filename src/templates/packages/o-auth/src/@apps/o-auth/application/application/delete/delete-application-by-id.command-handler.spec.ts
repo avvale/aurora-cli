@@ -23,7 +23,8 @@ describe('DeleteApplicationByIdCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteApplicationByIdCommandHandler>(DeleteApplicationByIdCommandHandler);
         service         = module.get<DeleteApplicationByIdService>(DeleteApplicationByIdService);

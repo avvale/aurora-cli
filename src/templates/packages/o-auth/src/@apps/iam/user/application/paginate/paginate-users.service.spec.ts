@@ -28,7 +28,8 @@ describe('PaginateUsersService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateUsersService);
         repository      = module.get(IUserRepository);

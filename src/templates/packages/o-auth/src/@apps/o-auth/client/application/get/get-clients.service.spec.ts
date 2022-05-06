@@ -28,7 +28,8 @@ describe('GetClientsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetClientsService);
         repository      = module.get(IClientRepository);

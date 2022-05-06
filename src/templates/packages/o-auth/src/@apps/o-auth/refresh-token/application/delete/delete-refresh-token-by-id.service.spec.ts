@@ -32,7 +32,8 @@ describe('DeleteRefreshTokenByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteRefreshTokenByIdService);
         repository      = module.get(IRefreshTokenRepository);

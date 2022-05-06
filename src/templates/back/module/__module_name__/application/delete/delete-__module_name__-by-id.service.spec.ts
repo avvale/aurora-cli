@@ -47,7 +47,8 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
                 },
                 {{/if}}
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(Delete{{ toPascalCase schema.moduleName }}ByIdService);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);

@@ -28,8 +28,9 @@ describe('CreateClientsService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateClientsService);
         repository      = module.get(IClientRepository);

@@ -30,7 +30,8 @@ describe('DeleteAccessTokensService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteAccessTokensService);
         repository      = module.get(IAccessTokenRepository);

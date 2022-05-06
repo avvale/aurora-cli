@@ -28,7 +28,8 @@ describe('PaginateApplicationsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateApplicationsService);
         repository      = module.get(IApplicationRepository);

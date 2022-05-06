@@ -41,7 +41,8 @@ describe('UpdateApplicationService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(UpdateApplicationService);
         repository      = module.get(IApplicationRepository);

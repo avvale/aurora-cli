@@ -23,7 +23,8 @@ describe('UpdateScopeCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<UpdateScopeCommandHandler>(UpdateScopeCommandHandler);
         service         = module.get<UpdateScopeService>(UpdateScopeService);

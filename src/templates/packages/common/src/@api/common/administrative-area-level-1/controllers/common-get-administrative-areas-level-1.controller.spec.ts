@@ -27,16 +27,17 @@ describe('CommonGetAdministrativeAreasLevel1Controller', () =>
                     provide : IQueryBus,
                     useValue: {
                         ask: () => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : ICommandBus,
                     useValue: {
                         dispatch: () => { /**/ },
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller  = module.get<CommonGetAdministrativeAreasLevel1Controller>(CommonGetAdministrativeAreasLevel1Controller);
         queryBus    = module.get<IQueryBus>(IQueryBus);

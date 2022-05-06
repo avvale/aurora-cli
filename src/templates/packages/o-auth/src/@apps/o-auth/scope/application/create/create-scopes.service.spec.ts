@@ -28,8 +28,9 @@ describe('CreateScopesService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateScopesService);
         repository      = module.get(IScopeRepository);

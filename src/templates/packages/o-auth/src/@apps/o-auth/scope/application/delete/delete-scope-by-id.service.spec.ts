@@ -32,7 +32,8 @@ describe('DeleteScopeByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteScopeByIdService);
         repository      = module.get(IScopeRepository);

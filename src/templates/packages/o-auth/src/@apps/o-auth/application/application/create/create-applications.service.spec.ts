@@ -28,8 +28,9 @@ describe('CreateApplicationsService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateApplicationsService);
         repository      = module.get(IApplicationRepository);

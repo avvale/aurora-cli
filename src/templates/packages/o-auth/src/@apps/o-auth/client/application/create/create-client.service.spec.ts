@@ -48,7 +48,8 @@ describe('CreateClientService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateClientService);
         repository      = module.get(IClientRepository);

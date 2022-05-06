@@ -28,7 +28,8 @@ describe('PaginateClientsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateClientsService);
         repository      = module.get(IClientRepository);

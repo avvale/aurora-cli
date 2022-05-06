@@ -22,7 +22,8 @@ describe('DeleteAccessTokensCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteAccessTokensCommandHandler>(DeleteAccessTokensCommandHandler);
         service         = module.get<DeleteAccessTokensService>(DeleteAccessTokensService);

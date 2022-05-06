@@ -48,7 +48,8 @@ describe('CreateRefreshTokenService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateRefreshTokenService);
         repository      = module.get(IRefreshTokenRepository);

@@ -47,7 +47,8 @@ describe('UpdateClientService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(UpdateClientService);
         repository      = module.get(IClientRepository);

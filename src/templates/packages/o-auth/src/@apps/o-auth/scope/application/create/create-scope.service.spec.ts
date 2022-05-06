@@ -39,7 +39,8 @@ describe('CreateScopeService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateScopeService);
         repository      = module.get(IScopeRepository);
