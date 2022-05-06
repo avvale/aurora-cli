@@ -110,11 +110,24 @@ export class Operations
         );
     }
 
-    async installPackage(packageName: string)
+    async installBackPackage(packageName: string): Promise<void>
     {
         // create pipeline files
         await TemplateGenerator.generateStaticContents(
-            TemplateElement.PACKAGES,
+            TemplateElement.BACK_PACKAGES,
+            '.',
+            '.',
+            {
+                templateElementPath: path.join(packageName.toKebabCase()),
+            },
+        );
+    }
+
+    async installFrontPackage(packageName: string): Promise<void>
+    {
+        // create pipeline files
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.FRONT_PACKAGES,
             '.',
             '.',
             {

@@ -13,8 +13,9 @@ export default class Install extends Command
     static flags =
     {
         // can pass either --help or -h
-        help : Flags.help({ char: 'h' }),
-        force: Flags.boolean({ char: 'f' }),
+        help     : Flags.help({ char: 'h' }),
+        force    : Flags.boolean({ char: 'f' }),
+        dashboard: Flags.boolean({ char: 'd' }),
     };
 
     static args = [];
@@ -37,6 +38,13 @@ export default class Install extends Command
 
         const operations = new Operations();
 
-        operations.installPackage(packageName);
+        if (flags.dashboard)
+        {
+            operations.installFrontPackage(packageName);
+        }
+        else
+        {
+            operations.installBackPackage(packageName);
+        }
     }
 }

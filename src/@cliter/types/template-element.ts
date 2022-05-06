@@ -10,11 +10,12 @@ export enum TemplateElement
     BACK_MODULE               = 'back/module',
     BACK_PACKAGE              = 'back/package',
     BACK_TEST                 = 'back/test',
+    BACK_PACKAGES             = 'packages/back',
     BACK_POSTMAN              = 'back/postman',
     BACK_VALUE_OBJECT         = 'back/value-object',
     CI_CD                     = 'ci-cd',
     FRONT_APPLICATION         = 'front/application',
     FRONT_MODULE              = 'front/module',
     FRONT_MODULE_TRANSLATIONS = 'front/module-translations',
-    PACKAGES                  = 'packages',
+    FRONT_PACKAGES            = 'packages/front',
 }

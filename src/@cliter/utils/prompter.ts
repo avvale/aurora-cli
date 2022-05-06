@@ -375,8 +375,10 @@ export const Prompter =
                     answers.pivotFileName        = `${name.toKebabCase()}-${moduleNames.toKebabCase()}`;
                 }
 
-                if (answers.relationship || answers.relationship) return false;
-                return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && answers.length === 0;
+                if (answers.relationship) return false;
+
+                // eslint-disable-next-line unicorn/explicit-length-check
+                return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && !answers.length;
             },
         }, {
             name   : 'nullable',
