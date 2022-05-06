@@ -31,7 +31,7 @@ const importForeignModules = [];
 describe('{{ toKebabCase schema.moduleName }}', () =>
 {
     let app: INestApplication;
-    let repository: I{{ toPascalCase schema.moduleName }}Repository;
+    let {{ toCamelCase schema.moduleName }}Repository: I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
     let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
     {{/if }}
@@ -96,9 +96,9 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .compile();
 
-        mockData        = {{ toCamelCase schema.moduleNames }};
-        app             = module.createNestApplication();
-        repository      = module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
+        mockData = {{ toCamelCase schema.moduleNames }};
+        app = module.createNestApplication();
+        {{ toCamelCase schema.moduleName }}Repository = module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
         repositoryI18N  = module.get<I{{ toPascalCase schema.moduleName }}I18NRepository>(I{{ toPascalCase schema.moduleName }}I18NRepository);
         {{/if}}
@@ -106,10 +106,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
         // seed mock data in memory database
         {{#if schema.properties.hasI18n}}
-        await repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
+        await {{ toCamelCase schema.moduleName }}Repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
         await repositoryI18N.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
         {{else}}
-        await repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource);
+        await {{ toCamelCase schema.moduleName }}Repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource);
         {{/if}}
 
         await app.init();
@@ -866,7 +866,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await {{ toCamelCase schema.moduleName }}Repository.delete({
             queryStatement: {
                 where: {},
             },
