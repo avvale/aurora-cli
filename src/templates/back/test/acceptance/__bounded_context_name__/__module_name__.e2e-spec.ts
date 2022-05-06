@@ -35,7 +35,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     {{#if schema.properties.hasI18n}}
     let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
     {{/if }}
-    let seeder: Mock{{ toPascalCase schema.moduleName }}Seeder;
+    let {{ toCamelCase schema.moduleName }}Seeder: Mock{{ toPascalCase schema.moduleName }}Seeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -102,14 +102,14 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         {{#if schema.properties.hasI18n}}
         repositoryI18N  = module.get<I{{ toPascalCase schema.moduleName }}I18NRepository>(I{{ toPascalCase schema.moduleName }}I18NRepository);
         {{/if}}
-        seeder          = module.get<Mock{{ toPascalCase schema.moduleName }}Seeder>(Mock{{ toPascalCase schema.moduleName }}Seeder);
+        {{ toCamelCase schema.moduleName }}Seeder = module.get<Mock{{ toPascalCase schema.moduleName }}Seeder>(Mock{{ toPascalCase schema.moduleName }}Seeder);
 
         // seed mock data in memory database
         {{#if schema.properties.hasI18n}}
-        await repository.insert(seeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
-        await repositoryI18N.insert(seeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
+        await repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
+        await repositoryI18N.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
         {{else}}
-        await repository.insert(seeder.collectionSource);
+        await repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource);
         {{/if}}
 
         await app.init();
@@ -349,9 +349,9 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
-                    count: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
-                    rows : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5),
+                    total: {{ toCamelCase schema.moduleName }}Seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    count: {{ toCamelCase schema.moduleName }}Seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    rows : {{ toCamelCase schema.moduleName }}Seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5),
                 });
             });
     });
@@ -365,7 +365,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))),
+                    {{ toCamelCase schema.moduleName }}Seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))),
                 );
             });
     });
@@ -545,9 +545,9 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}).toEqual({
-                    total: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
-                    count: seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
-                    rows : seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5),
+                    total: {{ toCamelCase schema.moduleName }}Seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    count: {{ toCamelCase schema.moduleName }}Seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.length,
+                    rows : {{ toCamelCase schema.moduleName }}Seeder.collectionResponse{{#if schema.properties.hasI18n}}.filter(item => item.langId === '{{ language }}'){{/if}}.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt'{{> manyToManyArrayItems }}]))).slice(0, 5),
                 });
             });
     });
@@ -576,7 +576,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {
                 for (const [index, value] of res.body.data.{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect({{ toCamelCase schema.moduleName }}Seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });

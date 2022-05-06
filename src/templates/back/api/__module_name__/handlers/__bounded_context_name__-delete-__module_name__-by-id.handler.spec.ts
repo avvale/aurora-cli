@@ -59,7 +59,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

@@ -37,7 +37,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver);
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler);

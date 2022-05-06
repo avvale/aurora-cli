@@ -54,7 +54,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController);
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler);

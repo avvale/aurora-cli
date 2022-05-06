@@ -59,7 +59,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);

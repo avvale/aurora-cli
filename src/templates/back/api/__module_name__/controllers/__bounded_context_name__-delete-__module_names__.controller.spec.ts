@@ -39,7 +39,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Controller>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Controller);
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler);

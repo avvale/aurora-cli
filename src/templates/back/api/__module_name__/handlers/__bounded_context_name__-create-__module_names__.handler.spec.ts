@@ -29,7 +29,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler     = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

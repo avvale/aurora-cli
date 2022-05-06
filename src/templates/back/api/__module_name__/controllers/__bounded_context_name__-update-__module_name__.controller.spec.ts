@@ -39,7 +39,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller);
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler);

@@ -8,7 +8,7 @@ import { AccountResponse } from '../../../../{{ config.applicationsContainer }}/
 {{/if}}
 // {{ config.applicationsContainer }}
 import { Paginate{{ toPascalCase schema.moduleNames }}Query } from '../../../../{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/paginate/paginate-{{ toKebabCase schema.moduleNames }}.query';
-import { Pagination } from '../../../../../graphql';
+import { Pagination } from '../../../../graphql';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler

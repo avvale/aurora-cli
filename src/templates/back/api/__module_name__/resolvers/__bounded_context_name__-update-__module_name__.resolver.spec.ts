@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.resolver';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input } from '../../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input } from '../../../../graphql';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -38,7 +38,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver);
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler);

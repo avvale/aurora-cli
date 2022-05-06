@@ -39,7 +39,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller);
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler);

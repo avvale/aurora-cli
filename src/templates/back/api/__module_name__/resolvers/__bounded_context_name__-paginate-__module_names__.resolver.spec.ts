@@ -37,7 +37,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver    = module.get<{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Resolver>({{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Resolver);
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler);
