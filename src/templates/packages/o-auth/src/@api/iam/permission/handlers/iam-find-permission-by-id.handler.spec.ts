@@ -34,7 +34,8 @@ describe('IamFindPermissionByIdHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamFindPermissionByIdHandler>(IamFindPermissionByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

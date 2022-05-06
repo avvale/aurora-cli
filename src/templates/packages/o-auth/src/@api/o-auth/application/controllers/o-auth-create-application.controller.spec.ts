@@ -29,7 +29,8 @@ describe('OAuthCreateApplicationController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthCreateApplicationController>(OAuthCreateApplicationController);
         handler = module.get<OAuthCreateApplicationHandler>(OAuthCreateApplicationHandler);

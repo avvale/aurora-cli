@@ -28,8 +28,9 @@ describe('IamPaginateRolesController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<IamPaginateRolesController>(IamPaginateRolesController);
         handler = module.get<IamPaginateRolesHandler>(IamPaginateRolesHandler);

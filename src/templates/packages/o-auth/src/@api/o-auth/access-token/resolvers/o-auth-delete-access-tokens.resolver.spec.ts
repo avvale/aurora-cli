@@ -27,7 +27,8 @@ describe('OAuthDeleteAccessTokensResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthDeleteAccessTokensResolver>(OAuthDeleteAccessTokensResolver);
         handler = module.get<OAuthDeleteAccessTokensHandler>(OAuthDeleteAccessTokensHandler);

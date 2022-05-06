@@ -3,7 +3,7 @@ boundedContextName: o-auth
 moduleName: refresh-token
 moduleNames: refresh-tokens
 aggregateName: OAuthRefreshToken
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
 aggregateProperties:
   - name: id

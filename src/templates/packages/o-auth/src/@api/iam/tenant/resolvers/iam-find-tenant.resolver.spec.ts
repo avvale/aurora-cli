@@ -27,7 +27,8 @@ describe('IamFindTenantResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamFindTenantResolver>(IamFindTenantResolver);
         handler = module.get<IamFindTenantHandler>(IamFindTenantHandler);

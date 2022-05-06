@@ -111,7 +111,7 @@ export class IamTenant extends AggregateRoot
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -129,7 +129,7 @@ export class IamTenant extends AggregateRoot
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -147,7 +147,7 @@ export class IamTenant extends AggregateRoot
                 tenant.createdAt?.value,
                 tenant.updatedAt?.value,
                 tenant.deletedAt?.value,
-            )
+            ),
         );
     }
 

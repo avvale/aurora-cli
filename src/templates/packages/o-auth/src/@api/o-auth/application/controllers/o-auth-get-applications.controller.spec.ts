@@ -29,7 +29,8 @@ describe('OAuthGetApplicationsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthGetApplicationsController>(OAuthGetApplicationsController);
         handler = module.get<OAuthGetApplicationsHandler>(OAuthGetApplicationsHandler);

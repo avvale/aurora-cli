@@ -6,7 +6,7 @@ import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

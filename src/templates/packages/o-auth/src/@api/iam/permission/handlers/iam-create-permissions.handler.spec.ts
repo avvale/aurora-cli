@@ -29,7 +29,8 @@ describe('IamCreatePermissionsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler     = module.get<IamCreatePermissionsHandler>(IamCreatePermissionsHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

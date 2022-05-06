@@ -152,7 +152,7 @@ export class OAuthClient extends AggregateRoot
                 client.createdAt?.value,
                 client.updatedAt?.value,
                 client.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -175,7 +175,7 @@ export class OAuthClient extends AggregateRoot
                 client.createdAt?.value,
                 client.updatedAt?.value,
                 client.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -198,7 +198,7 @@ export class OAuthClient extends AggregateRoot
                 client.createdAt?.value,
                 client.updatedAt?.value,
                 client.deletedAt?.value,
-            )
+            ),
         );
     }
 

@@ -34,7 +34,8 @@ describe('OAuthCreateClientHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler     = module.get<OAuthCreateClientHandler>(OAuthCreateClientHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

@@ -29,7 +29,8 @@ describe('OAuthFindRefreshTokenByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthFindRefreshTokenByIdController>(OAuthFindRefreshTokenByIdController);
         handler = module.get<OAuthFindRefreshTokenByIdHandler>(OAuthFindRefreshTokenByIdHandler);

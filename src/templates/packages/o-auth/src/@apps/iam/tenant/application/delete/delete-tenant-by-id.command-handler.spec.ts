@@ -17,13 +17,14 @@ describe('DeleteTenantByIdCommandHandler', () =>
             providers: [
                 DeleteTenantByIdCommandHandler,
                 {
-                    provide: DeleteTenantByIdService,
+                    provide : DeleteTenantByIdService,
                     useValue: {
-                        main: () => {},
-                    }
+                        main: () => { /**/ },
+                    },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteTenantByIdCommandHandler>(DeleteTenantByIdCommandHandler);
         service         = module.get<DeleteTenantByIdService>(DeleteTenantByIdService);
@@ -41,7 +42,7 @@ describe('DeleteTenantByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteTenantByIdCommand(
                     tenants[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

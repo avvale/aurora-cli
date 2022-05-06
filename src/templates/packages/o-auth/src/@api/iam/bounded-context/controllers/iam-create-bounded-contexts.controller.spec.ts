@@ -26,7 +26,8 @@ describe('IamCreateBoundedContextsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamCreateBoundedContextsController>(IamCreateBoundedContextsController);
         handler = module.get<IamCreateBoundedContextsHandler>(IamCreateBoundedContextsHandler);

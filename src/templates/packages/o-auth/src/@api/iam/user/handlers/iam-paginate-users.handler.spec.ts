@@ -34,7 +34,8 @@ describe('IamPaginateUsersHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamPaginateUsersHandler>(IamPaginateUsersHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

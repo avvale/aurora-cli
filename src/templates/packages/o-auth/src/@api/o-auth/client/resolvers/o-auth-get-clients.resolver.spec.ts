@@ -27,7 +27,8 @@ describe('OAuthGetClientsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthGetClientsResolver>(OAuthGetClientsResolver);
         handler = module.get<OAuthGetClientsHandler>(OAuthGetClientsHandler);

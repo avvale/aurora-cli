@@ -34,7 +34,8 @@ describe('OAuthDeleteAccessTokenByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<OAuthDeleteAccessTokenByIdHandler>(OAuthDeleteAccessTokenByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

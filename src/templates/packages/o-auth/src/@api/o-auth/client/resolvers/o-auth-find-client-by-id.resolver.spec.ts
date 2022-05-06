@@ -27,7 +27,8 @@ describe('OAuthFindClientByIdResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthFindClientByIdResolver>(OAuthFindClientByIdResolver);
         handler = module.get<OAuthFindClientByIdHandler>(OAuthFindClientByIdHandler);

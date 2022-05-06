@@ -29,7 +29,8 @@ describe('IamUpdatePermissionController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamUpdatePermissionController>(IamUpdatePermissionController);
         handler = module.get<IamUpdatePermissionHandler>(IamUpdatePermissionHandler);

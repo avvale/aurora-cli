@@ -29,7 +29,8 @@ describe('OAuthFindAccessTokenByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthFindAccessTokenByIdController>(OAuthFindAccessTokenByIdController);
         handler = module.get<OAuthFindAccessTokenByIdHandler>(OAuthFindAccessTokenByIdHandler);

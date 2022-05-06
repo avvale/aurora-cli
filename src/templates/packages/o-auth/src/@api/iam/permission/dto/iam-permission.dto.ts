@@ -20,7 +20,7 @@ export class IamPermissionDto
     @ApiProperty({
         type       : String,
         description: 'boundedContextId [input here api field description]',
-        example    : 'e44a7ba0-63d6-439b-964a-5ee62908ac71',
+        example    : '6f96551c-3c67-480f-9d95-24248a5bba7c',
     })
     boundedContextId: string;
 

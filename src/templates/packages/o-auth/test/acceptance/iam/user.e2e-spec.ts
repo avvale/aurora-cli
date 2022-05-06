@@ -4,20 +4,22 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { JwtModuleOptions } from '@nestjs/jwt';
 import { IUserRepository } from '../../../src/@apps/iam/user/domain/user.repository';
-import { IAccountRepository } from '../../../src/@apps/iam/account/domain/account.repository';
 import { MockUserSeeder } from '../../../src/@apps/iam/user/infrastructure/mock/mock-user.seeder';
-import { MockAccountSeeder } from 'src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
 import { users } from '../../../src/@apps/iam/user/infrastructure/seeds/user.seed';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+
 // ---- customizations ----
-import { AuthModule } from '../../../src/@apps/o-auth/shared/modules/auth.module';
 import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
+import { IAccountRepository } from '../../../src/@apps/iam/account/domain/account.repository';
+import { MockAccountSeeder } from 'src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -25,16 +27,16 @@ const importForeignModules = [];
 describe('user', () =>
 {
     let app: INestApplication;
-    let repository: IUserRepository;
+    let userRepository: IUserRepository;
+    let userSeeder: MockUserSeeder;
     let accountRepository: IAccountRepository;
-    let seeder: MockUserSeeder;
     let accountSeeder: MockAccountSeeder;
-    const jwtOptions: JwtModuleOptions = {
-        secret: '1234567890',
-    };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
+
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
 
     beforeAll(async () =>
     {
@@ -43,7 +45,6 @@ describe('user', () =>
                 ...importForeignModules,
                 IamModule,
                 OAuthModule,
-                AuthModule.forRoot(jwtOptions),
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -71,18 +72,22 @@ describe('user', () =>
                 MockUserSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData          = users;
-        app               = module.createNestApplication();
-        repository        = module.get<IUserRepository>(IUserRepository);
+        mockData = users;
+        app = module.createNestApplication();
         accountRepository = module.get<IAccountRepository>(IAccountRepository);
-        seeder            = module.get<MockUserSeeder>(MockUserSeeder);
-        accountSeeder     = module.get<MockAccountSeeder>(MockAccountSeeder);
+        accountSeeder = module.get<MockAccountSeeder>(MockAccountSeeder);
+        userRepository = module.get<IUserRepository>(IUserRepository);
+        userSeeder = module.get<MockUserSeeder>(MockUserSeeder);
 
         // seed mock data in memory database
         await accountRepository.insert(accountSeeder.collectionSource);
-        await repository.insert(seeder.collectionSource);
+        await userRepository.insert(userSeeder.collectionSource);
 
         await app.init();
     });
@@ -94,7 +99,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: null },
+                id: null,
             })
             .expect(400)
             .then(res =>
@@ -110,7 +115,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ accountId: null },
+                accountId: null,
             })
             .expect(400)
             .then(res =>
@@ -126,7 +131,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: null },
+                name: null,
             })
             .expect(400)
             .then(res =>
@@ -142,7 +147,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ username: null },
+                username: null,
             })
             .expect(400)
             .then(res =>
@@ -158,7 +163,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ password: null },
+                password: null,
             })
             .expect(400)
             .then(res =>
@@ -174,7 +179,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: undefined },
+                id: undefined,
             })
             .expect(400)
             .then(res =>
@@ -190,7 +195,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ accountId: undefined },
+                accountId: undefined,
             })
             .expect(400)
             .then(res =>
@@ -206,7 +211,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: undefined },
+                name: undefined,
             })
             .expect(400)
             .then(res =>
@@ -222,7 +227,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ username: undefined },
+                username: undefined,
             })
             .expect(400)
             .then(res =>
@@ -238,7 +243,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ password: undefined },
+                password: undefined,
             })
             .expect(400)
             .then(res =>
@@ -254,7 +259,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '*************************************' },
+                id: '*************************************',
             })
             .expect(400)
             .then(res =>
@@ -270,7 +275,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ accountId: '*************************************' },
+                accountId: '*************************************',
             })
             .expect(400)
             .then(res =>
@@ -286,7 +291,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ langId: '*************************************' },
+                langId: '*************************************',
             })
             .expect(400)
             .then(res =>
@@ -302,7 +307,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: '****************************************************************************************************************************************************************************************************************************************************************' },
+                name: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -318,7 +323,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ surname: '****************************************************************************************************************************************************************************************************************************************************************' },
+                surname: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -334,7 +339,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ avatar: '****************************************************************************************************************************************************************************************************************************************************************' },
+                avatar: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -350,7 +355,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ mobile: '*************************************************************' },
+                mobile: '*************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -366,7 +371,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ username: '*************************************************************************************************************************' },
+                username: '*************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -382,7 +387,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ password: '****************************************************************************************************************************************************************************************************************************************************************' },
+                password: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -398,7 +403,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ rememberToken: '****************************************************************************************************************************************************************************************************************************************************************' },
+                rememberToken: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -433,9 +438,9 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: userSeeder.collectionResponse.length,
+                    count: userSeeder.collectionResponse.length,
+                    rows : userSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -449,7 +454,7 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    userSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
                 );
             });
     });
@@ -478,7 +483,8 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8', username: 'john.***@gmail.com' },
+                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                username: 'john.***@gmail.com',
             })
             .expect(201);
     });
@@ -531,7 +537,7 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: 'ae8f945d-3dc9-48ea-99ee-9586bd007023' },
+                id: 'ae8f945d-3dc9-48ea-99ee-9586bd007023',
             })
             .expect(404);
     });
@@ -543,7 +549,8 @@ describe('user', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8', username: 'john.***@gmail.com' },
+                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                username: 'john.***@gmail.com',
             })
             .expect(200)
             .then(res =>
@@ -638,9 +645,9 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body.data.iamPaginateUsers).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: userSeeder.collectionResponse.length,
+                    count: userSeeder.collectionResponse.length,
+                    rows : userSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -680,7 +687,7 @@ describe('user', () =>
             {
                 for (const [index, value] of res.body.data.iamGetUsers.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(userSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
@@ -714,7 +721,8 @@ describe('user', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8', username: 'john.***@gmail.com' },
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        username: 'john.***@gmail.com',
                     },
                 },
             })
@@ -930,7 +938,7 @@ describe('user', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: 'ce1bc5ca-3807-4d07-af33-2dd7c4e7e5eb' },
+                        id: 'ce1bc5ca-3807-4d07-af33-2dd7c4e7e5eb',
                     },
                 },
             })
@@ -974,7 +982,8 @@ describe('user', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8', username: 'john.***@gmail.com' },
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        username: 'john.***@gmail.com',
                     },
                 },
             })
@@ -1067,7 +1076,7 @@ describe('user', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await userRepository.delete({
             queryStatement: {
                 where: {},
             },

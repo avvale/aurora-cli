@@ -34,7 +34,8 @@ describe('IamFindUserByIdHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamFindUserByIdHandler>(IamFindUserByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

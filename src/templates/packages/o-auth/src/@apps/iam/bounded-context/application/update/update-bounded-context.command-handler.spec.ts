@@ -23,7 +23,8 @@ describe('UpdateBoundedContextCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<UpdateBoundedContextCommandHandler>(UpdateBoundedContextCommandHandler);
         service         = module.get<UpdateBoundedContextService>(UpdateBoundedContextService);

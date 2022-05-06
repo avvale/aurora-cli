@@ -29,7 +29,8 @@ describe('IamFindRoleController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamFindRoleController>(IamFindRoleController);
         handler = module.get<IamFindRoleHandler>(IamFindRoleHandler);

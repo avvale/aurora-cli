@@ -27,7 +27,8 @@ describe('OAuthFindScopeByIdResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthFindScopeByIdResolver>(OAuthFindScopeByIdResolver);
         handler = module.get<OAuthFindScopeByIdHandler>(OAuthFindScopeByIdHandler);

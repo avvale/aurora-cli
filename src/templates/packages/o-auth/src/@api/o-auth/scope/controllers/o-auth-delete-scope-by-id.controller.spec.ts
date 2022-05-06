@@ -29,7 +29,8 @@ describe('OAuthDeleteScopeByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthDeleteScopeByIdController>(OAuthDeleteScopeByIdController);
         handler = module.get<OAuthDeleteScopeByIdHandler>(OAuthDeleteScopeByIdHandler);

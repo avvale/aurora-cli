@@ -66,7 +66,7 @@ describe('UpdateApplicationService', () =>
                     secret: new ApplicationSecret(applications[0].secret),
                     isMaster: new ApplicationIsMaster(applications[0].isMaster),
                     clientIds: new ApplicationClientIds(applications[0].clientIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

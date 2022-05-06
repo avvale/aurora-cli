@@ -23,7 +23,8 @@ describe('DeletePermissionByIdCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeletePermissionByIdCommandHandler>(DeletePermissionByIdCommandHandler);
         service         = module.get<DeletePermissionByIdService>(DeletePermissionByIdService);

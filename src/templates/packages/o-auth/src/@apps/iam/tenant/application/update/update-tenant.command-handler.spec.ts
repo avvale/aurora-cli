@@ -23,7 +23,8 @@ describe('UpdateTenantCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<UpdateTenantCommandHandler>(UpdateTenantCommandHandler);
         service         = module.get<UpdateTenantService>(UpdateTenantService);

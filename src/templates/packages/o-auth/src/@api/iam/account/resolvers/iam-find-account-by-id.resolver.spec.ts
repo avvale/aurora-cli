@@ -27,7 +27,8 @@ describe('IamFindAccountByIdResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamFindAccountByIdResolver>(IamFindAccountByIdResolver);
         handler = module.get<IamFindAccountByIdHandler>(IamFindAccountByIdHandler);

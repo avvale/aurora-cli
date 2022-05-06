@@ -34,7 +34,8 @@ describe('IamPaginatePermissionsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamPaginatePermissionsHandler>(IamPaginatePermissionsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

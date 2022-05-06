@@ -23,17 +23,17 @@ describe('FindTenantByIdQueryHandler', () =>
                 FindTenantByIdQueryHandler,
                 {
                     provide : ITenantRepository,
-                    useClass: MockTenantRepository
+                    useClass: MockTenantRepository,
                 },
                 {
                     provide : FindTenantByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<FindTenantByIdQueryHandler>(FindTenantByIdQueryHandler);
         service         = module.get<FindTenantByIdService>(FindTenantByIdService);
@@ -55,7 +55,7 @@ describe('FindTenantByIdQueryHandler', () =>
                 new FindTenantByIdQuery(
                     tenants[0].id,
 
-                )
+                ),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

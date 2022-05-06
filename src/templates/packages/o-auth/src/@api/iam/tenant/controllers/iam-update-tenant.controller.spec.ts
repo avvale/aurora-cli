@@ -29,7 +29,8 @@ describe('IamUpdateTenantController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamUpdateTenantController>(IamUpdateTenantController);
         handler = module.get<IamUpdateTenantHandler>(IamUpdateTenantHandler);

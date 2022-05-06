@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateBoundedContextsQuery } from '../../../../@apps/iam/bounded-context/application/paginate/paginate-bounded-contexts.query';
-import { Pagination } from '../../../../../graphql';
+import { Pagination } from '../../../../graphql';
 
 @Injectable()
 export class IamPaginateBoundedContextsHandler

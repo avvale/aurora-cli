@@ -39,11 +39,12 @@ describe('CreateTenantService', () =>
                 {
                     provide : ITenantRepository,
                     useValue: {
-                        create: (item) => { /**/ },
+                        create: () => { /**/ },
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateTenantService);
         repository      = module.get(ITenantRepository);

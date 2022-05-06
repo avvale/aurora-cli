@@ -4,7 +4,7 @@ import { CreatedTenantEvent } from './created-tenant.event';
 @EventsHandler(CreatedTenantEvent)
 export class CreatedTenantEventHandler implements IEventHandler<CreatedTenantEvent>
 {
-    handle(event: CreatedTenantEvent)
+    handle(event: CreatedTenantEvent): void
     {
         // console.log('CreatedTenantEvent: ', event);
     }

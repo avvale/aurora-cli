@@ -27,7 +27,8 @@ describe('OAuthDeleteApplicationsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthDeleteApplicationsResolver>(OAuthDeleteApplicationsResolver);
         handler = module.get<OAuthDeleteApplicationsHandler>(OAuthDeleteApplicationsHandler);

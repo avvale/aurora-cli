@@ -29,7 +29,8 @@ describe('OAuthFindApplicationByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthFindApplicationByIdController>(OAuthFindApplicationByIdController);
         handler = module.get<OAuthFindApplicationByIdHandler>(OAuthFindApplicationByIdHandler);

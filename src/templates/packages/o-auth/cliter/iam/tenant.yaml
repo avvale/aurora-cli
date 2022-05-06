@@ -3,7 +3,7 @@ boundedContextName: iam
 moduleName: tenant
 moduleNames: tenants
 aggregateName: IamTenant
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
 aggregateProperties:
   - name: id

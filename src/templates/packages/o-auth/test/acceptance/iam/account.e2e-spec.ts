@@ -50,6 +50,9 @@ describe('account', () =>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
 
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
+
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
@@ -133,7 +136,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ id: null },
+                id: null,
             })
             .expect(400)
             .then(res =>
@@ -150,7 +153,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ type: null },
+                type: null,
             })
             .expect(400)
             .then(res =>
@@ -167,7 +170,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ email: null },
+                email: null,
             })
             .expect(400)
             .then(res =>
@@ -184,7 +187,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ isActive: null },
+                isActive: null,
             })
             .expect(400)
             .then(res =>
@@ -201,7 +204,8 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ clientId: null, type: IamAccountType.SERVICE },
+                clientId: null,
+                type: IamAccountType.SERVICE,
             })
             .expect(400)
             .then(res =>
@@ -219,7 +223,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ id: undefined },
+                id: undefined,
             })
             .expect(400)
             .then(res =>
@@ -236,7 +240,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ type: undefined },
+                type: undefined,
             })
             .expect(400)
             .then(res =>
@@ -253,7 +257,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ email: undefined },
+                email: undefined,
             })
             .expect(400)
             .then(res =>
@@ -270,7 +274,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ isActive: undefined },
+                isActive: undefined,
             })
             .expect(400)
             .then(res =>
@@ -304,7 +308,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ id: '*************************************' },
+                id: '*************************************',
             })
             .expect(400)
             .then(res =>
@@ -321,7 +325,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ clientId: '*************************************', type: IamAccountType.SERVICE },
+                clientId: '*************************************', type: IamAccountType.SERVICE,
             })
             .expect(400)
             .then(res =>
@@ -338,7 +342,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ email: '*************************************************************************************************************************' },
+                email: '*************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -355,7 +359,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ isActive: 'true' },
+                isActive: 'true',
             })
             .expect(400)
             .then(res =>
@@ -371,7 +375,7 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
-                ...{ type: '****' },
+                type: '****',
             })
             .expect(400)
             .then(res =>
@@ -537,17 +541,9 @@ describe('account', () =>
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
+                ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                type: IamAccountType.USER,
-                email: 'a558ost6kja5lerwc4f8trkolsrrzmu512b30nyuu572sm0q1x8ld93uxw4cgov6f9uk0mb1fkbr3tlgb72itgmermf2ti4it7us1gk1l6z3edfj45ohhrr',
-                isActive: false,
-                clientId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                dApplicationCodes: { "foo" : "bar" },
-                dPermissions: { "foo" : "bar" },
-                dTenants: { "foo" : "bar" },
-                data: { "foo" : "bar" },
-                roleIds: [],
-                tenantIds: [],
+                email: 'other1@gmail.com',
             })
             .expect(200)
             .then(res =>
@@ -607,6 +603,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                         }
                     }
@@ -683,6 +680,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -721,6 +719,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                         }
                     }
@@ -759,6 +758,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -805,6 +805,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -849,6 +850,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -888,6 +890,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -925,6 +928,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -934,7 +938,7 @@ describe('account', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: 'a8dd71f7-e8fd-4ba8-a032-71662226ff4a' },
+                        id: 'a8dd71f7-e8fd-4ba8-a032-71662226ff4a',
                     },
                 },
             })
@@ -967,6 +971,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -975,17 +980,10 @@ describe('account', () =>
                 `,
                 variables: {
                     payload: {
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         type: IamAccountType.SERVICE,
-                        email: '0i0i70qbl79wglg43ze2dvb81j4xq6n4vbb64tlw5zlu9pez6y90dykpdaqcx60pzhit5rhv5z0jr8ss9kx0mumsrdpl507re3v5itc96iiftsni4l13e52',
-                        isActive: false,
-                        clientId: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        dApplicationCodes: { "foo" : "bar" },
-                        dPermissions: { "foo" : "bar" },
-                        dTenants: { "foo" : "bar" },
-                        data: { "foo" : "bar" },
-                        roleIds: [],
-                        tenantIds: [],
+                        email: 'other@gmail.com',
                     },
                 },
             })
@@ -1016,6 +1014,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -1055,6 +1054,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt
@@ -1092,6 +1092,7 @@ describe('account', () =>
                             dApplicationCodes
                             dPermissions
                             dTenants
+                            dScopes
                             data
                             createdAt
                             updatedAt

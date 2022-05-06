@@ -29,7 +29,8 @@ describe('IamUpdateUserController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamUpdateUserController>(IamUpdateUserController);
         handler = module.get<IamUpdateUserHandler>(IamUpdateUserHandler);

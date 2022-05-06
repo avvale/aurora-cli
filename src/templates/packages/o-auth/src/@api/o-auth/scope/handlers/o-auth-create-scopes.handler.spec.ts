@@ -29,7 +29,8 @@ describe('OAuthCreateScopesHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler     = module.get<OAuthCreateScopesHandler>(OAuthCreateScopesHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

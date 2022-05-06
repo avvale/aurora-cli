@@ -29,7 +29,8 @@ describe('IamFindUserByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamFindUserByIdController>(IamFindUserByIdController);
         handler = module.get<IamFindUserByIdHandler>(IamFindUserByIdHandler);

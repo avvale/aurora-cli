@@ -7,7 +7,7 @@ import { OAuthModule } from '../../../../@api/o-auth/o-auth.module';
     imports: [
         SharedModule,
         SequelizeConfigModule,
-        OAuthModule
-    ]
+        OAuthModule,
+    ],
 })
 export class SeederModule {}

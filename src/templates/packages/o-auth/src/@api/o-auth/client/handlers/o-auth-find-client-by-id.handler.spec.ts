@@ -34,7 +34,8 @@ describe('OAuthFindClientByIdHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<OAuthFindClientByIdHandler>(OAuthFindClientByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

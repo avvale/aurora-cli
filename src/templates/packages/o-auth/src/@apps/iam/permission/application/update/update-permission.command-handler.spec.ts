@@ -23,7 +23,8 @@ describe('UpdatePermissionCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<UpdatePermissionCommandHandler>(UpdatePermissionCommandHandler);
         service         = module.get<UpdatePermissionService>(UpdatePermissionService);

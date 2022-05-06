@@ -27,7 +27,8 @@ describe('OAuthPaginateRefreshTokensResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver    = module.get<OAuthPaginateRefreshTokensResolver>(OAuthPaginateRefreshTokensResolver);
         handler = module.get<OAuthPaginateRefreshTokensHandler>(OAuthPaginateRefreshTokensHandler);

@@ -18,7 +18,7 @@ export class DeleteTenantByIdCommandHandler implements ICommandHandler<DeleteTen
         await this.deleteTenantByIdService.main(
             new TenantId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

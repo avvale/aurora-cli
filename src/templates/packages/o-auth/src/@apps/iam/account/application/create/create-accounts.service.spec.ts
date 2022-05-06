@@ -28,8 +28,9 @@ describe('CreateAccountsService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateAccountsService);
         repository      = module.get(IAccountRepository);

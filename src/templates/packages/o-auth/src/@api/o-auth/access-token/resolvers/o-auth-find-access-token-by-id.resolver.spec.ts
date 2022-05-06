@@ -27,7 +27,8 @@ describe('OAuthFindAccessTokenByIdResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthFindAccessTokenByIdResolver>(OAuthFindAccessTokenByIdResolver);
         handler = module.get<OAuthFindAccessTokenByIdHandler>(OAuthFindAccessTokenByIdHandler);

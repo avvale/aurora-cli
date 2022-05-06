@@ -39,7 +39,8 @@ describe('UpdatePermissionService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(UpdatePermissionService);
         repository      = module.get(IPermissionRepository);
@@ -61,7 +62,7 @@ describe('UpdatePermissionService', () =>
                     name: new PermissionName(permissions[0].name),
                     boundedContextId: new PermissionBoundedContextId(permissions[0].boundedContextId),
                     roleIds: new PermissionRoleIds(permissions[0].roleIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

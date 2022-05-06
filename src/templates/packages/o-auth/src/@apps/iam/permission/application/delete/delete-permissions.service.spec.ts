@@ -30,7 +30,8 @@ describe('DeletePermissionsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeletePermissionsService);
         repository      = module.get(IPermissionRepository);

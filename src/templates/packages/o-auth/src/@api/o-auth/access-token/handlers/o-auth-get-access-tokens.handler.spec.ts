@@ -34,7 +34,8 @@ describe('OAuthGetAccessTokensHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<OAuthGetAccessTokensHandler>(OAuthGetAccessTokensHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

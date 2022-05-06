@@ -27,7 +27,8 @@ describe('IamGetAccountsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamGetAccountsResolver>(IamGetAccountsResolver);
         handler = module.get<IamGetAccountsHandler>(IamGetAccountsHandler);

@@ -23,7 +23,8 @@ describe('UpdateAccountCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<UpdateAccountCommandHandler>(UpdateAccountCommandHandler);
         service         = module.get<UpdateAccountService>(UpdateAccountService);

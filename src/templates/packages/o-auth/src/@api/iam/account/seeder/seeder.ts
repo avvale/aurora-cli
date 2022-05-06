@@ -6,7 +6,7 @@ import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/acc
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

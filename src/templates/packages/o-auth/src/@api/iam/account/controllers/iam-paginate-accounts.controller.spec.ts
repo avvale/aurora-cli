@@ -28,8 +28,9 @@ describe('IamPaginateAccountsController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<IamPaginateAccountsController>(IamPaginateAccountsController);
         handler = module.get<IamPaginateAccountsHandler>(IamPaginateAccountsHandler);

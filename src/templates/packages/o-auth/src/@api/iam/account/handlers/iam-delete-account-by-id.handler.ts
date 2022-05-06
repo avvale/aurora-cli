@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
 import { DeleteAccountByIdCommand } from '../../../../@apps/iam/account/application/delete/delete-account-by-id.command';
-import { IamAccount } from '../../../../../graphql';
+import { IamAccount } from '../../../../graphql';
 import { IamAccountDto } from '../dto';
 
 @Injectable()

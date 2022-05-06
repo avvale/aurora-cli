@@ -29,7 +29,8 @@ describe('IamFindAccountController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamFindAccountController>(IamFindAccountController);
         handler = module.get<IamFindAccountHandler>(IamFindAccountHandler);

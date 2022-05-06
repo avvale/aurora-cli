@@ -29,10 +29,11 @@ describe('DeleteTenantByIdService', () =>
                     useValue: {
                         deleteById: id => { /**/ },
                         findById  : id => { /**/ },
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(DeleteTenantByIdService);
         repository      = module.get(ITenantRepository);
@@ -50,7 +51,7 @@ describe('DeleteTenantByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new TenantId(tenants[0].id)
+                new TenantId(tenants[0].id),
             )).toBe(undefined);
         });
     });

@@ -29,7 +29,8 @@ describe('OAuthUpdateApplicationController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthUpdateApplicationController>(OAuthUpdateApplicationController);
         handler = module.get<OAuthUpdateApplicationHandler>(OAuthUpdateApplicationHandler);

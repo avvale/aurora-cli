@@ -29,7 +29,8 @@ describe('IamDeleteAccountsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamDeleteAccountsController>(IamDeleteAccountsController);
         handler = module.get<IamDeleteAccountsHandler>(IamDeleteAccountsHandler);

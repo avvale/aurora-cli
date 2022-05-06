@@ -22,7 +22,8 @@ describe('DeletePermissionsCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeletePermissionsCommandHandler>(DeletePermissionsCommandHandler);
         service         = module.get<DeletePermissionsService>(DeletePermissionsService);

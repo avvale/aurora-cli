@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { IamFindPermissionByIdHandler } from '../handlers/iam-find-permission-by-id.handler';
-import { IamPermission } from '../../../../../graphql';
+import { IamPermission } from '../../../../graphql';
 
 @Resolver()
 @Permissions('iam.permission.get')

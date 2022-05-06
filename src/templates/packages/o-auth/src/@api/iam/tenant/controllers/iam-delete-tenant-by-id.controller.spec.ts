@@ -29,7 +29,8 @@ describe('IamDeleteTenantByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamDeleteTenantByIdController>(IamDeleteTenantByIdController);
         handler = module.get<IamDeleteTenantByIdHandler>(IamDeleteTenantByIdHandler);

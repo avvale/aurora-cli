@@ -6,7 +6,7 @@ import { clients } from '../../../../@apps/o-auth/client/infrastructure/seeds/cl
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

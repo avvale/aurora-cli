@@ -29,7 +29,8 @@ describe('IamUpdateBoundedContextController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamUpdateBoundedContextController>(IamUpdateBoundedContextController);
         handler = module.get<IamUpdateBoundedContextHandler>(IamUpdateBoundedContextHandler);

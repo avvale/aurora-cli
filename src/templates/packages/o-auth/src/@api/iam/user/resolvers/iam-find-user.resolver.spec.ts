@@ -27,7 +27,8 @@ describe('IamFindUserResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamFindUserResolver>(IamFindUserResolver);
         handler = module.get<IamFindUserHandler>(IamFindUserHandler);

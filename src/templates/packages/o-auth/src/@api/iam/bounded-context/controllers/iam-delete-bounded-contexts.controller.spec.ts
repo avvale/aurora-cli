@@ -29,7 +29,8 @@ describe('IamDeleteBoundedContextsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamDeleteBoundedContextsController>(IamDeleteBoundedContextsController);
         handler = module.get<IamDeleteBoundedContextsHandler>(IamDeleteBoundedContextsHandler);

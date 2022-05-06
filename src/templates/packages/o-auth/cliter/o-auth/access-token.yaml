@@ -3,7 +3,7 @@ boundedContextName: o-auth
 moduleName: access-token
 moduleNames: access-tokens
 aggregateName: OAuthAccessToken
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
 aggregateProperties:
   - name: id

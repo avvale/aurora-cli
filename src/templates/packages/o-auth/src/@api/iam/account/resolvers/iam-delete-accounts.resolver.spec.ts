@@ -27,7 +27,8 @@ describe('IamDeleteAccountsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamDeleteAccountsResolver>(IamDeleteAccountsResolver);
         handler = module.get<IamDeleteAccountsHandler>(IamDeleteAccountsHandler);

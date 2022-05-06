@@ -28,7 +28,8 @@ describe('GetAccountsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetAccountsService);
         repository      = module.get(IAccountRepository);

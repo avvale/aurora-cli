@@ -47,7 +47,8 @@ describe('UpdateAccountService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(UpdateAccountService);
         repository      = module.get(IAccountRepository);
@@ -77,7 +78,7 @@ describe('UpdateAccountService', () =>
                     data: new AccountData(accounts[0].data),
                     roleIds: new AccountRoleIds(accounts[0].roleIds),
                     tenantIds: new AccountTenantIds(accounts[0].tenantIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 // @apps
 import { FindRoleByIdQuery } from '../../../../@apps/iam/role/application/find/find-role-by-id.query';
 import { CreateRoleCommand } from '../../../../@apps/iam/role/application/create/create-role.command';
-import { IamRole, IamCreateRoleInput } from '../../../../../graphql';
+import { IamRole, IamCreateRoleInput } from '../../../../graphql';
 import { IamRoleDto, IamCreateRoleDto } from '../dto';
 
 @Injectable()

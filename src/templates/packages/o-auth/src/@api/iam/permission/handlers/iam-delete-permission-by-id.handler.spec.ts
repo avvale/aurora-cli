@@ -34,7 +34,8 @@ describe('IamDeletePermissionByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamDeletePermissionByIdHandler>(IamDeletePermissionByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

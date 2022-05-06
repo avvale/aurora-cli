@@ -1,11 +1,9 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
-import * as fs from 'fs';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { JwtModuleOptions } from '@nestjs/jwt';
 import { ITenantRepository } from '../../../src/@apps/iam/tenant/domain/tenant.repository';
 import { MockTenantSeeder } from '../../../src/@apps/iam/tenant/infrastructure/mock/mock-tenant.seeder';
 import { tenants } from '../../../src/@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -14,8 +12,11 @@ import { IamModule } from '../../../src/@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
+
 // ---- customizations ----
-import { AuthModule } from '../../../src/@apps/o-auth/shared/modules/auth.module';
 import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
@@ -24,14 +25,14 @@ const importForeignModules = [];
 describe('tenant', () =>
 {
     let app: INestApplication;
-    let repository: ITenantRepository;
-    let seeder: MockTenantSeeder;
-    const jwtOptions: JwtModuleOptions = {
-        secret: '1234567890',
-    };
+    let tenantRepository: ITenantRepository;
+    let tenantSeeder: MockTenantSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
+
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
 
     beforeAll(async () =>
     {
@@ -40,7 +41,6 @@ describe('tenant', () =>
                 ...importForeignModules,
                 IamModule,
                 OAuthModule,
-                AuthModule.forRoot(jwtOptions),
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -67,15 +67,19 @@ describe('tenant', () =>
                 MockTenantSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData        = tenants;
-        app             = module.createNestApplication();
-        repository      = module.get<ITenantRepository>(ITenantRepository);
-        seeder          = module.get<MockTenantSeeder>(MockTenantSeeder);
+        mockData = tenants;
+        app = module.createNestApplication();
+        tenantRepository = module.get<ITenantRepository>(ITenantRepository);
+        tenantSeeder = module.get<MockTenantSeeder>(MockTenantSeeder);
 
         // seed mock data in memory database
-        await repository.insert(seeder.collectionSource);
+        await tenantRepository.insert(tenantSeeder.collectionSource);
 
         await app.init();
     });
@@ -87,7 +91,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: null },
+                id: null,
             })
             .expect(400)
             .then(res =>
@@ -103,7 +107,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: null },
+                name: null,
             })
             .expect(400)
             .then(res =>
@@ -119,7 +123,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isActive: null },
+                isActive: null,
             })
             .expect(400)
             .then(res =>
@@ -135,7 +139,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: undefined },
+                id: undefined,
             })
             .expect(400)
             .then(res =>
@@ -151,7 +155,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: undefined },
+                name: undefined,
             })
             .expect(400)
             .then(res =>
@@ -167,7 +171,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isActive: undefined },
+                isActive: undefined,
             })
             .expect(400)
             .then(res =>
@@ -183,7 +187,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '*************************************' },
+                id: '*************************************',
             })
             .expect(400)
             .then(res =>
@@ -199,7 +203,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: '****************************************************************************************************************************************************************************************************************************************************************' },
+                name: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -215,7 +219,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ code: '***************************************************' },
+                code: '***************************************************',
             })
             .expect(400)
             .then(res =>
@@ -231,7 +235,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ logo: '****************************************************************************************************************************************************************************************************************************************************************' },
+                logo: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -247,7 +251,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isActive: 'true' },
+                isActive: 'true',
             })
             .expect(400)
             .then(res =>
@@ -281,9 +285,9 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
+                    total: tenantSeeder.collectionResponse.length,
+                    count: tenantSeeder.collectionResponse.length,
+                    rows : tenantSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
                 });
             });
     });
@@ -297,7 +301,7 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))),
+                    tenantSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))),
                 );
             });
     });
@@ -326,7 +330,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(201);
     });
@@ -379,7 +383,7 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: 'e8371640-b0b6-421f-8f3c-87660cfce4ea' },
+                id: 'e8371640-b0b6-421f-8f3c-87660cfce4ea',
             })
             .expect(404);
     });
@@ -390,13 +394,8 @@ describe('tenant', () =>
             .put('/iam/tenant/update')
             .set('Accept', 'application/json')
             .send({
+                ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                name: 'Refined Rubber Tuna',
-                code: 'q1ym4k74auym2p9txlq38ta451pv5o5fg8mngspxxjhpexvbz',
-                logo: 'mq7wzlpbzu84fdfmjd59o4fehi1daie38i8stjostmrc85747fl1s4swo13fulza0wi5oc0hl0dsw7ysot07uqzf982uvwp0edfh4haz7ke040p63lbyjcea502wntvkurdhpj87lesps415p9euk2kqskgarkfx3suj7pzin82rf5dkc8i9rmkdr6xefmgdhghej3k2c22ph34gzq3wiryw356bio7xvsa2dh2tednvxpayghoukrmb65msjq',
-                isActive: true,
-                data: { "foo" : "bar" },
-                accountIds: [],
             })
             .expect(200)
             .then(res =>
@@ -485,9 +484,9 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body.data.iamPaginateTenants).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
+                    total: tenantSeeder.collectionResponse.length,
+                    count: tenantSeeder.collectionResponse.length,
+                    rows : tenantSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'accountIds']))).slice(0, 5),
                 });
             });
     });
@@ -521,7 +520,7 @@ describe('tenant', () =>
             {
                 for (const [index, value] of res.body.data.iamGetTenants.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(tenantSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
@@ -548,12 +547,8 @@ describe('tenant', () =>
                 `,
                 variables: {
                     payload: {
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Generic Wooden Soap',
-                        code: 'so9v2inhfe0d3xvdnvge2fksafqj8yfuqdf6s8vz0scf90em6',
-                        logo: 'm7s3mds0kf5r4axwxz6z8fffkaplxpi7kpqgw7vmr2d9b8bbdl0bjy7qsmuo7hixwb1mziej6p08t92j761dnqcr80ni58taibme6vzv5pevmk6a7f3vbtbbqlwr02wazelldqstprzzs7pgyn5hcv2auzd3lw1bmxpb1vn0lns1g34lhwqb34jt03l4e0osyaq9s0swl8itv5tmwugl7ovjuncud1wc9c7bmhx8ekgiqvvlnoft9qyeryip9x',
-                        isActive: true,
-                        data: { "foo" : "bar" },
                     },
                 },
             })
@@ -776,13 +771,8 @@ describe('tenant', () =>
                 `,
                 variables: {
                     payload: {
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        name: 'Ergonomic Wooden Table',
-                        code: 'fsq0l78k7xaumqr6mw2ix3c97456n3tngqlh55aqqia064ojb',
-                        logo: '1nxut13bvu4arbc9zl425ozxlvtz2mgogl84vnb13fsl0bb16b5hoyxmq39ewd4gjb4r5o73qbd2tj1cil88os0zvczpvu0mj6gdfq5w8yloarmhi79p67f4eaff6xbzt3onfkyqx3obhuzjnk6e91q0m576fwm811g6dt6x8dmh2ggvklri8vvso9w77k3trdlqmtknwsizdbz7dpex40lcq6scco8cj4wjrfmebuq9i2r8jq46jzqq6cw8o7',
-                        isActive: false,
-                        data: { "foo" : "bar" },
-                        accountIds: [],
                     },
                 },
             })
@@ -863,7 +853,7 @@ describe('tenant', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await tenantRepository.delete({
             queryStatement: {
                 where: {},
             },

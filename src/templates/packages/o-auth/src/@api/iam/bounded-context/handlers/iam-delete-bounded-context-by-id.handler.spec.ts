@@ -34,7 +34,8 @@ describe('IamDeleteBoundedContextByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamDeleteBoundedContextByIdHandler>(IamDeleteBoundedContextByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

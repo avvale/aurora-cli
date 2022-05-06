@@ -3,7 +3,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtModuleOptions } from '@nestjs/jwt';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IAccessTokenRepository } from '../../../src/@apps/o-auth/access-token/domain/access-token.repository';
 import { MockAccessTokenSeeder } from '../../../src/@apps/o-auth/access-token/infrastructure/mock/mock-access-token.seeder';
@@ -13,10 +12,9 @@ import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-// ---- customizations ----
-import { IClientRepository } from '../../../src/@apps/o-auth/client';
-import { MockClientSeeder } from '../../../src/@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
-import { AuthModule } from '../../../src/@apps/o-auth/shared/modules/auth.module';
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -24,16 +22,14 @@ const importForeignModules = [];
 describe('access-token', () =>
 {
     let app: INestApplication;
-    let repository: IAccessTokenRepository;
-    let seeder: MockAccessTokenSeeder;
-    let clientRepository: IClientRepository;
-    let clientSeeder: MockClientSeeder;
-    const jwtOptions: JwtModuleOptions = {
-        secret: '1234567890',
-    };
+    let accessTokenRepository: IAccessTokenRepository;
+    let accessTokenSeeder: MockAccessTokenSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
+
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
 
     beforeAll(async () =>
     {
@@ -41,7 +37,6 @@ describe('access-token', () =>
             imports: [
                 ...importForeignModules,
                 OAuthModule,
-                AuthModule.forRoot(jwtOptions),
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -66,21 +61,21 @@ describe('access-token', () =>
             ],
             providers: [
                 MockAccessTokenSeeder,
-                MockClientSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData            = accessTokens;
-        app                 = module.createNestApplication();
-        repository          = module.get<IAccessTokenRepository>(IAccessTokenRepository);
-        seeder              = module.get<MockAccessTokenSeeder>(MockAccessTokenSeeder);
-        clientRepository    = module.get<IClientRepository>(IClientRepository);
-        clientSeeder        = module.get<MockClientSeeder>(MockClientSeeder);
+        mockData = accessTokens;
+        app = module.createNestApplication();
+        accessTokenRepository = module.get<IAccessTokenRepository>(IAccessTokenRepository);
+        accessTokenSeeder = module.get<MockAccessTokenSeeder>(MockAccessTokenSeeder);
 
         // seed mock data in memory database
-        await repository.insert(seeder.collectionSource);
-        await clientRepository.insert(clientSeeder.collectionSource);
+        await accessTokenRepository.insert(accessTokenSeeder.collectionSource);
 
         await app.init();
     });
@@ -101,9 +96,9 @@ describe('access-token', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: accessTokenSeeder.collectionResponse.length,
+                    count: accessTokenSeeder.collectionResponse.length,
+                    rows : accessTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -138,9 +133,9 @@ describe('access-token', () =>
             .then(res =>
             {
                 expect(res.body.data.oAuthPaginateAccessTokens).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: accessTokenSeeder.collectionResponse.length,
+                    count: accessTokenSeeder.collectionResponse.length,
+                    rows : accessTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -154,7 +149,7 @@ describe('access-token', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    accessTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
                 );
             });
     });
@@ -188,7 +183,7 @@ describe('access-token', () =>
             {
                 for (const [index, value] of res.body.data.oAuthGetAccessTokens.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(accessTokenSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
@@ -487,7 +482,7 @@ describe('access-token', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await accessTokenRepository.delete({
             queryStatement: {
                 where: {},
             },

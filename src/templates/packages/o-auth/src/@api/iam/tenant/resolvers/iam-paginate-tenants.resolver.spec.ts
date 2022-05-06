@@ -27,7 +27,8 @@ describe('IamPaginateTenantsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver    = module.get<IamPaginateTenantsResolver>(IamPaginateTenantsResolver);
         handler = module.get<IamPaginateTenantsHandler>(IamPaginateTenantsHandler);

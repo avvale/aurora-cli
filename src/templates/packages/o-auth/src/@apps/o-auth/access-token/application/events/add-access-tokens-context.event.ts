@@ -1,6 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { OAuthAccessToken } from '../../domain/access-token.aggregate';
-import { CreatedAccessTokenEvent } from './created-access-token.event';
 import { DeletedAccessTokenEvent } from './deleted-access-token.event';
 import { DeletedAccessTokensEvent } from './deleted-access-tokens.event';
 

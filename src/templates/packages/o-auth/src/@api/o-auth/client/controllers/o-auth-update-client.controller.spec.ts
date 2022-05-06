@@ -29,7 +29,8 @@ describe('OAuthUpdateClientController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthUpdateClientController>(OAuthUpdateClientController);
         handler = module.get<OAuthUpdateClientHandler>(OAuthUpdateClientHandler);

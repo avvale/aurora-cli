@@ -30,7 +30,8 @@ describe('DeleteRolesService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteRolesService);
         repository      = module.get(IRoleRepository);

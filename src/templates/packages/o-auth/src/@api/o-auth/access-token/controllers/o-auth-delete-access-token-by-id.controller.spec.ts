@@ -29,7 +29,8 @@ describe('OAuthDeleteAccessTokenByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthDeleteAccessTokenByIdController>(OAuthDeleteAccessTokenByIdController);
         handler = module.get<OAuthDeleteAccessTokenByIdHandler>(OAuthDeleteAccessTokenByIdHandler);

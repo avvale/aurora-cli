@@ -29,7 +29,8 @@ describe('IamDeleteRolesController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamDeleteRolesController>(IamDeleteRolesController);
         handler = module.get<IamDeleteRolesHandler>(IamDeleteRolesHandler);

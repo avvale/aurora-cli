@@ -28,8 +28,9 @@ describe('CreateRolesService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateRolesService);
         repository      = module.get(IRoleRepository);

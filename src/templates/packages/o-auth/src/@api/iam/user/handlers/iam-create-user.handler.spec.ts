@@ -34,7 +34,8 @@ describe('IamCreateUserHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler     = module.get<IamCreateUserHandler>(IamCreateUserHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

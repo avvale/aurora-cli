@@ -29,7 +29,8 @@ describe('OAuthDeleteClientsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthDeleteClientsController>(OAuthDeleteClientsController);
         handler = module.get<OAuthDeleteClientsHandler>(OAuthDeleteClientsHandler);

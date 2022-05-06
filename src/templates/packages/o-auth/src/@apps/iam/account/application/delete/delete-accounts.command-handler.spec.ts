@@ -22,7 +22,8 @@ describe('DeleteAccountsCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteAccountsCommandHandler>(DeleteAccountsCommandHandler);
         service         = module.get<DeleteAccountsService>(DeleteAccountsService);

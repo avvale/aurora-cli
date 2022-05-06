@@ -28,8 +28,9 @@ describe('IamPaginateTenantsController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<IamPaginateTenantsController>(IamPaginateTenantsController);
         handler = module.get<IamPaginateTenantsHandler>(IamPaginateTenantsHandler);

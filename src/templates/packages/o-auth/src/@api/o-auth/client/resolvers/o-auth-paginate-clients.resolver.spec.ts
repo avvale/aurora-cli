@@ -27,7 +27,8 @@ describe('OAuthPaginateClientsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver    = module.get<OAuthPaginateClientsResolver>(OAuthPaginateClientsResolver);
         handler = module.get<OAuthPaginateClientsHandler>(OAuthPaginateClientsHandler);

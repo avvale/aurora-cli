@@ -27,7 +27,8 @@ describe('OAuthFindApplicationResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthFindApplicationResolver>(OAuthFindApplicationResolver);
         handler = module.get<OAuthFindApplicationHandler>(OAuthFindApplicationHandler);

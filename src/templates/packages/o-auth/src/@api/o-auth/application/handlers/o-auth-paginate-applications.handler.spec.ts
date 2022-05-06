@@ -34,7 +34,8 @@ describe('OAuthPaginateApplicationsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<OAuthPaginateApplicationsHandler>(OAuthPaginateApplicationsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

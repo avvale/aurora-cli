@@ -27,7 +27,8 @@ describe('OAuthGetAccessTokensResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthGetAccessTokensResolver>(OAuthGetAccessTokensResolver);
         handler = module.get<OAuthGetAccessTokensHandler>(OAuthGetAccessTokensHandler);

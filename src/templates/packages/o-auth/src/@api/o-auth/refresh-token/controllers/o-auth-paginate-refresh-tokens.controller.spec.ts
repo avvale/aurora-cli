@@ -28,8 +28,9 @@ describe('OAuthPaginateRefreshTokensController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<OAuthPaginateRefreshTokensController>(OAuthPaginateRefreshTokensController);
         handler = module.get<OAuthPaginateRefreshTokensHandler>(OAuthPaginateRefreshTokensHandler);

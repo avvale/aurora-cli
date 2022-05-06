@@ -29,7 +29,8 @@ describe('OAuthFindClientByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthFindClientByIdController>(OAuthFindClientByIdController);
         handler = module.get<OAuthFindClientByIdHandler>(OAuthFindClientByIdHandler);

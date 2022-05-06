@@ -12,7 +12,9 @@ import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,11 +22,14 @@ const importForeignModules = [];
 describe('application', () =>
 {
     let app: INestApplication;
-    let repository: IApplicationRepository;
-    let seeder: MockApplicationSeeder;
+    let applicationRepository: IApplicationRepository;
+    let applicationSeeder: MockApplicationSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
+
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
 
     beforeAll(async () =>
     {
@@ -58,15 +63,19 @@ describe('application', () =>
                 MockApplicationSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData        = applications;
-        app             = module.createNestApplication();
-        repository      = module.get<IApplicationRepository>(IApplicationRepository);
-        seeder          = module.get<MockApplicationSeeder>(MockApplicationSeeder);
+        mockData = applications;
+        app = module.createNestApplication();
+        applicationRepository = module.get<IApplicationRepository>(IApplicationRepository);
+        applicationSeeder = module.get<MockApplicationSeeder>(MockApplicationSeeder);
 
         // seed mock data in memory database
-        await repository.insert(seeder.collectionSource);
+        await applicationRepository.insert(applicationSeeder.collectionSource);
 
         await app.init();
     });
@@ -78,7 +87,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: null },
+                id: null,
             })
             .expect(400)
             .then(res =>
@@ -94,7 +103,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: null },
+                name: null,
             })
             .expect(400)
             .then(res =>
@@ -110,7 +119,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ code: null },
+                code: null,
             })
             .expect(400)
             .then(res =>
@@ -126,7 +135,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ secret: null },
+                secret: null,
             })
             .expect(400)
             .then(res =>
@@ -142,7 +151,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isMaster: null },
+                isMaster: null,
             })
             .expect(400)
             .then(res =>
@@ -158,7 +167,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: undefined },
+                id: undefined,
             })
             .expect(400)
             .then(res =>
@@ -174,7 +183,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: undefined },
+                name: undefined,
             })
             .expect(400)
             .then(res =>
@@ -190,7 +199,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ code: undefined },
+                code: undefined,
             })
             .expect(400)
             .then(res =>
@@ -206,7 +215,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ secret: undefined },
+                secret: undefined,
             })
             .expect(400)
             .then(res =>
@@ -222,7 +231,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isMaster: undefined },
+                isMaster: undefined,
             })
             .expect(400)
             .then(res =>
@@ -238,7 +247,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '*************************************' },
+                id: '*************************************',
             })
             .expect(400)
             .then(res =>
@@ -254,7 +263,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: '****************************************************************************************************************************************************************************************************************************************************************' },
+                name: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -270,7 +279,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ code: '***************************************************' },
+                code: '***************************************************',
             })
             .expect(400)
             .then(res =>
@@ -286,7 +295,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ secret: '*******************************************************************************************' },
+                secret: '*******************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -302,7 +311,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isMaster: 'true' },
+                isMaster: 'true',
             })
             .expect(400)
             .then(res =>
@@ -336,9 +345,9 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'clientIds']))).slice(0, 5),
+                    total: applicationSeeder.collectionResponse.length,
+                    count: applicationSeeder.collectionResponse.length,
+                    rows : applicationSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'clientIds']))).slice(0, 5),
                 });
             });
     });
@@ -352,7 +361,7 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'clientIds']))),
+                    applicationSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'clientIds']))),
                 );
             });
     });
@@ -367,7 +376,7 @@ describe('application', () =>
                 {
                     where:
                     {
-                        id: 'c5eb563d-7eb7-4fff-88e6-4094a155c397',
+                        id: '779c50e0-4232-49d9-ab71-ca404fc8b89d',
                     },
                 },
             })
@@ -381,7 +390,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(201);
     });
@@ -410,7 +419,7 @@ describe('application', () =>
     test('/REST:GET o-auth/application/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/find/9513f25b-c069-440e-b1d7-83b5ec5a3934')
+            .get('/o-auth/application/find/ead6763c-b617-4047-ba1a-b88fa0278615')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -434,7 +443,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: 'fec4cfe1-2b51-4921-b2d3-e5dacd4a9b58' },
+                id: '19f76dc2-307b-463d-9bb2-ae7a91296134',
             })
             .expect(404);
     });
@@ -446,7 +455,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
             .then(res =>
@@ -458,7 +467,7 @@ describe('application', () =>
     test('/REST:DELETE o-auth/application/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/delete/f375cbee-ceb9-412b-9465-b7d2579f3d83')
+            .delete('/o-auth/application/delete/45150b0d-ee28-47cd-8676-8de30b791b9f')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -534,9 +543,9 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body.data.oAuthPaginateApplications).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'clientIds']))).slice(0, 5),
+                    total: applicationSeeder.collectionResponse.length,
+                    count: applicationSeeder.collectionResponse.length,
+                    rows : applicationSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'clientIds']))).slice(0, 5),
                 });
             });
     });
@@ -569,7 +578,7 @@ describe('application', () =>
             {
                 for (const [index, value] of res.body.data.oAuthGetApplications.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(applicationSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
@@ -596,7 +605,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
@@ -634,7 +643,7 @@ describe('application', () =>
                     {
                         where:
                         {
-                            id: '30ead55f-8dae-4dd7-895e-4d1a4b02ec53',
+                            id: '38277967-d12e-4490-9612-763e652b8097',
                         },
                     },
                 },
@@ -709,7 +718,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '3dc0d4ca-f518-4995-b22f-9f980f058078',
+                    id: 'c43605b1-6e25-455f-8123-c1d7bdc31328',
                 },
             })
             .expect(200)
@@ -777,7 +786,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: '4b3a5839-b11d-4529-8575-165af19be842' },
+                        id: '674d1da4-cfd2-499a-baa9-6d8546987908',
                     },
                 },
             })
@@ -814,7 +823,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
@@ -847,7 +856,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'fb642d5f-062e-4ffc-a9d7-a1359a5ff88e',
+                    id: '0d826ab2-9e33-455c-90c1-5a05fd05a828',
                 },
             })
             .expect(200)
@@ -893,7 +902,7 @@ describe('application', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await applicationRepository.delete({
             queryStatement: {
                 where: {},
             },

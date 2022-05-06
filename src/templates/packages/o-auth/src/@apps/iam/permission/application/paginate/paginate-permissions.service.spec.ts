@@ -28,7 +28,8 @@ describe('PaginatePermissionsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginatePermissionsService);
         repository      = module.get(IPermissionRepository);

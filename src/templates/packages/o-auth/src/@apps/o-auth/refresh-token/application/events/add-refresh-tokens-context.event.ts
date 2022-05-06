@@ -1,6 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { OAuthRefreshToken } from '../../domain/refresh-token.aggregate';
-import { CreatedRefreshTokenEvent } from './created-refresh-token.event';
 import { DeletedRefreshTokenEvent } from './deleted-refresh-token.event';
 import { DeletedRefreshTokensEvent } from './deleted-refresh-tokens.event';
 

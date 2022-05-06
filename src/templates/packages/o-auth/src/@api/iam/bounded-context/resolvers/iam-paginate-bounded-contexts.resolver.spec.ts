@@ -27,7 +27,8 @@ describe('IamPaginateBoundedContextsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver    = module.get<IamPaginateBoundedContextsResolver>(IamPaginateBoundedContextsResolver);
         handler = module.get<IamPaginateBoundedContextsHandler>(IamPaginateBoundedContextsHandler);

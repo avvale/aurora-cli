@@ -34,7 +34,8 @@ describe('IamGetAccountsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamGetAccountsHandler>(IamGetAccountsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

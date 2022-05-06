@@ -26,7 +26,8 @@ describe('OAuthCreateClientsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthCreateClientsController>(OAuthCreateClientsController);
         handler = module.get<OAuthCreateClientsHandler>(OAuthCreateClientsHandler);

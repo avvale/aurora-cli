@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateAccountsQuery } from '../../../../@apps/iam/account/application/paginate/paginate-accounts.query';
-import { Pagination } from '../../../../../graphql';
+import { Pagination } from '../../../../graphql';
 
 @Injectable()
 export class IamPaginateAccountsHandler

@@ -23,7 +23,8 @@ describe('DeleteBoundedContextByIdCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteBoundedContextByIdCommandHandler>(DeleteBoundedContextByIdCommandHandler);
         service         = module.get<DeleteBoundedContextByIdService>(DeleteBoundedContextByIdService);

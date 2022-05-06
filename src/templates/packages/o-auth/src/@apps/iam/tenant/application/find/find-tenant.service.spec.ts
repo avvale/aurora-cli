@@ -22,13 +22,14 @@ describe('FindTenantService', () =>
                 FindTenantService,
                 MockTenantRepository,
                 {
-                    provide: ITenantRepository,
+                    provide : ITenantRepository,
                     useValue: {
-                        find: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        find: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindTenantService);
         repository      = module.get(ITenantRepository);

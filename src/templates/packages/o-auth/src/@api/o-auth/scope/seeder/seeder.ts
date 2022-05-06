@@ -6,7 +6,7 @@ import { scopes } from '../../../../@apps/o-auth/scope/infrastructure/seeds/scop
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

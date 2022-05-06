@@ -29,7 +29,8 @@ describe('IamFindTenantByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamFindTenantByIdController>(IamFindTenantByIdController);
         handler = module.get<IamFindTenantByIdHandler>(IamFindTenantByIdHandler);

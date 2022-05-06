@@ -27,7 +27,8 @@ describe('OAuthGetScopesResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthGetScopesResolver>(OAuthGetScopesResolver);
         handler = module.get<OAuthGetScopesHandler>(OAuthGetScopesHandler);

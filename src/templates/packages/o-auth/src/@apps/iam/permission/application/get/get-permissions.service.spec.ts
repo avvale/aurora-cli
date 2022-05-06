@@ -28,7 +28,8 @@ describe('GetPermissionsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetPermissionsService);
         repository      = module.get(IPermissionRepository);

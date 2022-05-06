@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from 'aurora-ts-core';
-import { CQMetadata } from 'aurora-ts-core';
+import { CQMetadata, QueryStatement } from 'aurora-ts-core';
 import { IRefreshTokenRepository } from '../../domain/refresh-token.repository';
 import { OAuthRefreshToken } from '../../domain/refresh-token.aggregate';
 import { RefreshTokenId } from '../../domain/value-objects';

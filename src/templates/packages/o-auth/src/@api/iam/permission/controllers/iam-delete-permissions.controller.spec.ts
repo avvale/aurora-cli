@@ -29,7 +29,8 @@ describe('IamDeletePermissionsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamDeletePermissionsController>(IamDeletePermissionsController);
         handler = module.get<IamDeletePermissionsHandler>(IamDeletePermissionsHandler);

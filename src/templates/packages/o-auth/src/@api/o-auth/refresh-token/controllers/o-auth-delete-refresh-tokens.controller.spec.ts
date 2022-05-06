@@ -29,7 +29,8 @@ describe('OAuthDeleteRefreshTokensController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthDeleteRefreshTokensController>(OAuthDeleteRefreshTokensController);
         handler = module.get<OAuthDeleteRefreshTokensHandler>(OAuthDeleteRefreshTokensHandler);

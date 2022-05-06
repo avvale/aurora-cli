@@ -27,7 +27,8 @@ describe('OAuthDeleteScopesResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthDeleteScopesResolver>(OAuthDeleteScopesResolver);
         handler = module.get<OAuthDeleteScopesHandler>(OAuthDeleteScopesHandler);

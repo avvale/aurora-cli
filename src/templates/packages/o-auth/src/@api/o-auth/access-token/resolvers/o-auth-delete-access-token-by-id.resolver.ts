@@ -1,11 +1,19 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
 
+// authorization
+import { Permissions } from '../../../../@api/iam/shared/decorators/permissions.decorator';
+import { AuthenticationJwtGuard } from '../../../../@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authorization.guard';
+
 // @apps
 import { OAuthDeleteAccessTokenByIdHandler } from '../handlers/o-auth-delete-access-token-by-id.handler';
-import { OAuthAccessToken } from '../../../../../graphql';
+import { OAuthAccessToken } from '../../../../graphql';
 
 @Resolver()
+@Permissions('oAuth.accessToken.delete')
+@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 export class OAuthDeleteAccessTokenByIdResolver
 {
     constructor(

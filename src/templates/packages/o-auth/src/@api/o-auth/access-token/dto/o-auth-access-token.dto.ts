@@ -14,7 +14,7 @@ export class OAuthAccessTokenDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : '1e8c092b-ae86-4b86-94c2-b9e787bc956e',
+        example    : '1e7f1f3d-c8bc-4e13-ac6c-cbf85ce64310',
     })
     clientId: string;
 

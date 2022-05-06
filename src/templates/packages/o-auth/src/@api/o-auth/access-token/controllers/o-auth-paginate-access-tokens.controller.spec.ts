@@ -28,8 +28,9 @@ describe('OAuthPaginateAccessTokensController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<OAuthPaginateAccessTokensController>(OAuthPaginateAccessTokensController);
         handler = module.get<OAuthPaginateAccessTokensHandler>(OAuthPaginateAccessTokensHandler);

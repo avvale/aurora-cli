@@ -27,7 +27,8 @@ describe('IamPaginateAccountsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver    = module.get<IamPaginateAccountsResolver>(IamPaginateAccountsResolver);
         handler = module.get<IamPaginateAccountsHandler>(IamPaginateAccountsHandler);

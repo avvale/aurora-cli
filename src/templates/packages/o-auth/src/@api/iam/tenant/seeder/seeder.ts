@@ -6,7 +6,7 @@ import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenan
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {

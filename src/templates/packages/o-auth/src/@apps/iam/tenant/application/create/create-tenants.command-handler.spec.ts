@@ -24,7 +24,8 @@ describe('CreateTenantsCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<CreateTenantsCommandHandler>(CreateTenantsCommandHandler);
         service         = module.get<CreateTenantsService>(CreateTenantsService);

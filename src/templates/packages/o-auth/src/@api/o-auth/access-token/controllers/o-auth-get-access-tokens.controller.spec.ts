@@ -29,7 +29,8 @@ describe('OAuthGetAccessTokensController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthGetAccessTokensController>(OAuthGetAccessTokensController);
         handler = module.get<OAuthGetAccessTokensHandler>(OAuthGetAccessTokensHandler);

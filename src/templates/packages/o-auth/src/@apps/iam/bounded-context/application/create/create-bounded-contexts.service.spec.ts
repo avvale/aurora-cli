@@ -28,8 +28,9 @@ describe('CreateBoundedContextsService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateBoundedContextsService);
         repository      = module.get(IBoundedContextRepository);

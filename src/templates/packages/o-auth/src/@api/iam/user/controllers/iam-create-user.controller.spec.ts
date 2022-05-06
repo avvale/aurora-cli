@@ -29,7 +29,8 @@ describe('IamCreateUserController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamCreateUserController>(IamCreateUserController);
         handler = module.get<IamCreateUserHandler>(IamCreateUserHandler);

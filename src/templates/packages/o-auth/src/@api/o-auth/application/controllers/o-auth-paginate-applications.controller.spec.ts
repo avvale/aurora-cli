@@ -28,8 +28,9 @@ describe('OAuthPaginateApplicationsController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<OAuthPaginateApplicationsController>(OAuthPaginateApplicationsController);
         handler = module.get<OAuthPaginateApplicationsHandler>(OAuthPaginateApplicationsHandler);

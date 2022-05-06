@@ -27,7 +27,8 @@ describe('OAuthPaginateAccessTokensResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver    = module.get<OAuthPaginateAccessTokensResolver>(OAuthPaginateAccessTokensResolver);
         handler = module.get<OAuthPaginateAccessTokensHandler>(OAuthPaginateAccessTokensHandler);

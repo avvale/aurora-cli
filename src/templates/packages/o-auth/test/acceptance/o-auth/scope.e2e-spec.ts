@@ -12,7 +12,9 @@ import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,11 +22,14 @@ const importForeignModules = [];
 describe('scope', () =>
 {
     let app: INestApplication;
-    let repository: IScopeRepository;
-    let seeder: MockScopeSeeder;
+    let scopeRepository: IScopeRepository;
+    let scopeSeeder: MockScopeSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
+
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
 
     beforeAll(async () =>
     {
@@ -58,15 +63,19 @@ describe('scope', () =>
                 MockScopeSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData        = scopes;
-        app             = module.createNestApplication();
-        repository      = module.get<IScopeRepository>(IScopeRepository);
-        seeder          = module.get<MockScopeSeeder>(MockScopeSeeder);
+        mockData = scopes;
+        app = module.createNestApplication();
+        scopeRepository = module.get<IScopeRepository>(IScopeRepository);
+        scopeSeeder = module.get<MockScopeSeeder>(MockScopeSeeder);
 
         // seed mock data in memory database
-        await repository.insert(seeder.collectionSource);
+        await scopeRepository.insert(scopeSeeder.collectionSource);
 
         await app.init();
     });
@@ -241,9 +250,9 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: scopeSeeder.collectionResponse.length,
+                    count: scopeSeeder.collectionResponse.length,
+                    rows : scopeSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -257,7 +266,7 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    scopeSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
                 );
             });
     });
@@ -439,9 +448,9 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body.data.oAuthPaginateScopes).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: scopeSeeder.collectionResponse.length,
+                    count: scopeSeeder.collectionResponse.length,
+                    rows : scopeSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -472,7 +481,7 @@ describe('scope', () =>
             {
                 for (const [index, value] of res.body.data.oAuthGetScopes.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(scopeSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
@@ -780,7 +789,7 @@ describe('scope', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await scopeRepository.delete({
             queryStatement: {
                 where: {},
             },

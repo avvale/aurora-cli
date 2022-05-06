@@ -29,7 +29,8 @@ describe('IamFindBoundedContextController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamFindBoundedContextController>(IamFindBoundedContextController);
         handler = module.get<IamFindBoundedContextHandler>(IamFindBoundedContextHandler);

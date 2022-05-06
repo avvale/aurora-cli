@@ -29,7 +29,8 @@ describe('OAuthFindScopeByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthFindScopeByIdController>(OAuthFindScopeByIdController);
         handler = module.get<OAuthFindScopeByIdHandler>(OAuthFindScopeByIdHandler);

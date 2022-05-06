@@ -32,7 +32,8 @@ describe('DeleteUserByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteUserByIdService);
         repository      = module.get(IUserRepository);

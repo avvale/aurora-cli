@@ -34,7 +34,8 @@ describe('IamFindTenantByIdHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamFindTenantByIdHandler>(IamFindTenantByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

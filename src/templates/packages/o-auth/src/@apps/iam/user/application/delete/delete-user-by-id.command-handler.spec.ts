@@ -23,7 +23,8 @@ describe('DeleteUserByIdCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteUserByIdCommandHandler>(DeleteUserByIdCommandHandler);
         service         = module.get<DeleteUserByIdService>(DeleteUserByIdService);

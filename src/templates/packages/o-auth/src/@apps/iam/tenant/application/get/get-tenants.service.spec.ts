@@ -22,13 +22,14 @@ describe('GetTenantsService', () =>
                 GetTenantsService,
                 MockTenantRepository,
                 {
-                    provide: ITenantRepository,
+                    provide : ITenantRepository,
                     useValue: {
-                        get: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        get: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(GetTenantsService);
         repository      = module.get(ITenantRepository);

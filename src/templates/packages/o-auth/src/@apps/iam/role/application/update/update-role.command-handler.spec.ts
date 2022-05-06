@@ -23,7 +23,8 @@ describe('UpdateRoleCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<UpdateRoleCommandHandler>(UpdateRoleCommandHandler);
         service         = module.get<UpdateRoleService>(UpdateRoleService);

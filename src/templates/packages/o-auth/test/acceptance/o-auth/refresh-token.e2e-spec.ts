@@ -12,7 +12,9 @@ import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,11 +22,14 @@ const importForeignModules = [];
 describe('refresh-token', () =>
 {
     let app: INestApplication;
-    let repository: IRefreshTokenRepository;
-    let seeder: MockRefreshTokenSeeder;
+    let refreshTokenRepository: IRefreshTokenRepository;
+    let refreshTokenSeeder: MockRefreshTokenSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
+
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
 
     beforeAll(async () =>
     {
@@ -58,15 +63,19 @@ describe('refresh-token', () =>
                 MockRefreshTokenSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData        = refreshTokens;
-        app             = module.createNestApplication();
-        repository      = module.get<IRefreshTokenRepository>(IRefreshTokenRepository);
-        seeder          = module.get<MockRefreshTokenSeeder>(MockRefreshTokenSeeder);
+        mockData = refreshTokens;
+        app = module.createNestApplication();
+        refreshTokenRepository = module.get<IRefreshTokenRepository>(IRefreshTokenRepository);
+        refreshTokenSeeder = module.get<MockRefreshTokenSeeder>(MockRefreshTokenSeeder);
 
         // seed mock data in memory database
-        await repository.insert(seeder.collectionSource);
+        await refreshTokenRepository.insert(refreshTokenSeeder.collectionSource);
 
         await app.init();
     });
@@ -87,9 +96,9 @@ describe('refresh-token', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: refreshTokenSeeder.collectionResponse.length,
+                    count: refreshTokenSeeder.collectionResponse.length,
+                    rows : refreshTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -124,9 +133,9 @@ describe('refresh-token', () =>
             .then(res =>
             {
                 expect(res.body.data.oAuthPaginateRefreshTokens).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: refreshTokenSeeder.collectionResponse.length,
+                    count: refreshTokenSeeder.collectionResponse.length,
+                    rows : refreshTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
@@ -140,7 +149,7 @@ describe('refresh-token', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    refreshTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
                 );
             });
     });
@@ -247,7 +256,7 @@ describe('refresh-token', () =>
             {
                 for (const [index, value] of res.body.data.oAuthGetRefreshTokens.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(refreshTokenSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
@@ -466,7 +475,7 @@ describe('refresh-token', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await refreshTokenRepository.delete({
             queryStatement: {
                 where: {},
             },

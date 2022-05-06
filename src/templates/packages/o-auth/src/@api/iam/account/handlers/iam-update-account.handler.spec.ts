@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdateAccountHandler } from './iam-update-account.handler';
-import { IamUpdateAccountInput } from '../../../../../graphql';
+import { IamUpdateAccountInput } from '../../../../graphql';
 
 // sources
 import { accounts } from '../../../../@apps/iam/account/infrastructure/seeds/account.seed';
@@ -35,7 +35,8 @@ describe('IamUpdateAccountHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler     = module.get<IamUpdateAccountHandler>(IamUpdateAccountHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

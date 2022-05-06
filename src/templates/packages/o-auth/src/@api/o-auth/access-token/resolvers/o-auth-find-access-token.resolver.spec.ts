@@ -27,7 +27,8 @@ describe('OAuthFindAccessTokenResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthFindAccessTokenResolver>(OAuthFindAccessTokenResolver);
         handler = module.get<OAuthFindAccessTokenHandler>(OAuthFindAccessTokenHandler);

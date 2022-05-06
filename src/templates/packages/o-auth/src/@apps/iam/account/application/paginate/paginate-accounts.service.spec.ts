@@ -28,7 +28,8 @@ describe('PaginateAccountsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateAccountsService);
         repository      = module.get(IAccountRepository);

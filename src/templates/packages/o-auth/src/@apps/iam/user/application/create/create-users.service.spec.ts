@@ -28,8 +28,9 @@ describe('CreateUsersService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateUsersService);
         repository      = module.get(IUserRepository);

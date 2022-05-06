@@ -28,7 +28,8 @@ describe('PaginateRolesService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateRolesService);
         repository      = module.get(IRoleRepository);

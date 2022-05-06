@@ -40,7 +40,8 @@ describe('UpdateRoleService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(UpdateRoleService);
         repository      = module.get(IRoleRepository);

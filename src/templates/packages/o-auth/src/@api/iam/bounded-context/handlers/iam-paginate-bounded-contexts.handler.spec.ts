@@ -34,7 +34,8 @@ describe('IamPaginateBoundedContextsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamPaginateBoundedContextsHandler>(IamPaginateBoundedContextsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

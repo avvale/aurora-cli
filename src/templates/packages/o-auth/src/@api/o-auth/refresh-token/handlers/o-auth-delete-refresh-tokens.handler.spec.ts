@@ -34,7 +34,8 @@ describe('OAuthDeleteRefreshTokensHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<OAuthDeleteRefreshTokensHandler>(OAuthDeleteRefreshTokensHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

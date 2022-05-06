@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpdateUserResolver } from './iam-update-user.resolver';
 import { IamUpdateUserHandler } from '../handlers/iam-update-user.handler';
-import { IamUpdateUserInput } from '../../../../../graphql';
+import { IamUpdateUserInput } from '../../../../graphql';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
@@ -28,7 +28,8 @@ describe('IamUpdateUserResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamUpdateUserResolver>(IamUpdateUserResolver);
         handler = module.get<IamUpdateUserHandler>(IamUpdateUserHandler);

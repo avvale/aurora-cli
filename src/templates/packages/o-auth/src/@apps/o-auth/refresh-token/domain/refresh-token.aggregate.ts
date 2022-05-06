@@ -96,7 +96,7 @@ export class OAuthRefreshToken extends AggregateRoot
                 refreshToken.createdAt?.value,
                 refreshToken.updatedAt?.value,
                 refreshToken.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -112,7 +112,7 @@ export class OAuthRefreshToken extends AggregateRoot
                 refreshToken.createdAt?.value,
                 refreshToken.updatedAt?.value,
                 refreshToken.deletedAt?.value,
-            )
+            ),
         );
     }
 

@@ -34,7 +34,8 @@ describe('IamFindBoundedContextHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<IamFindBoundedContextHandler>(IamFindBoundedContextHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

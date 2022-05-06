@@ -48,7 +48,8 @@ describe('CreateUserService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateUserService);
         repository      = module.get(IUserRepository);

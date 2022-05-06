@@ -27,7 +27,8 @@ describe('OAuthGetRefreshTokensResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthGetRefreshTokensResolver>(OAuthGetRefreshTokensResolver);
         handler = module.get<OAuthGetRefreshTokensHandler>(OAuthGetRefreshTokensHandler);

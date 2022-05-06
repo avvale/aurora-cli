@@ -23,7 +23,8 @@ describe('DeleteRoleByIdCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteRoleByIdCommandHandler>(DeleteRoleByIdCommandHandler);
         service         = module.get<DeleteRoleByIdService>(DeleteRoleByIdService);

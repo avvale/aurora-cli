@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamCreateUsersResolver } from './iam-create-users.resolver';
 import { IamCreateUsersHandler } from '../handlers/iam-create-users.handler';
-import { IamCreateUserInput } from '../../../../../graphql';
+import { IamCreateUserInput } from '../../../../graphql';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';
@@ -25,7 +25,8 @@ describe('IamCreateUsersResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamCreateUsersResolver>(IamCreateUsersResolver);
         handler = module.get<IamCreateUsersHandler>(IamCreateUsersHandler);

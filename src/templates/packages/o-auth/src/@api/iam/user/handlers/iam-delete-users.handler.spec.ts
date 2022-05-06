@@ -34,7 +34,8 @@ describe('IamDeleteUsersHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<IamDeleteUsersHandler>(IamDeleteUsersHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

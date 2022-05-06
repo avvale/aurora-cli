@@ -134,7 +134,7 @@ export class OAuthAccessToken extends AggregateRoot
                 accessToken.createdAt?.value,
                 accessToken.updatedAt?.value,
                 accessToken.deletedAt?.value,
-            )
+            ),
         );
     }
 

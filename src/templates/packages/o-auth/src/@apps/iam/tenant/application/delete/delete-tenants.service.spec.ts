@@ -25,12 +25,13 @@ describe('DeleteTenantsService', () =>
                 {
                     provide : ITenantRepository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ },
-                    }
+                        get   : () => { /**/ },
+                        delete: () => { /**/ },
+                    },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteTenantsService);
         repository      = module.get(ITenantRepository);

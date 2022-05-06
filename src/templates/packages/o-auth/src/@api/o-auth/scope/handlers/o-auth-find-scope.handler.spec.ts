@@ -34,7 +34,8 @@ describe('OAuthFindScopeHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<OAuthFindScopeHandler>(OAuthFindScopeHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

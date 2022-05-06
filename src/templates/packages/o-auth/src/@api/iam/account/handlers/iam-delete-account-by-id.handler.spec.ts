@@ -34,7 +34,8 @@ describe('IamDeleteAccountByIdController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamDeleteAccountByIdHandler>(IamDeleteAccountByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

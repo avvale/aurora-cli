@@ -29,7 +29,8 @@ describe('OAuthUpdateScopeController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthUpdateScopeController>(OAuthUpdateScopeController);
         handler = module.get<OAuthUpdateScopeHandler>(OAuthUpdateScopeHandler);

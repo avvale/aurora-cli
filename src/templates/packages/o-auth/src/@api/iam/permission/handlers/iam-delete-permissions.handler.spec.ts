@@ -34,7 +34,8 @@ describe('IamDeletePermissionsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<IamDeletePermissionsHandler>(IamDeletePermissionsHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

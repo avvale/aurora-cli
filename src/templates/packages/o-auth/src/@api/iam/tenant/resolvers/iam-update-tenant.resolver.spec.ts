@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpdateTenantResolver } from './iam-update-tenant.resolver';
 import { IamUpdateTenantHandler } from '../handlers/iam-update-tenant.handler';
-import { IamUpdateTenantInput } from '../../../../../graphql';
+import { IamUpdateTenantInput } from '../../../../graphql';
 
 // sources
 import { tenants } from '../../../../@apps/iam/tenant/infrastructure/seeds/tenant.seed';
@@ -28,7 +28,8 @@ describe('IamUpdateTenantResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamUpdateTenantResolver>(IamUpdateTenantResolver);
         handler = module.get<IamUpdateTenantHandler>(IamUpdateTenantHandler);

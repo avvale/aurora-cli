@@ -29,7 +29,8 @@ describe('IamCreatePermissionController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamCreatePermissionController>(IamCreatePermissionController);
         handler = module.get<IamCreatePermissionHandler>(IamCreatePermissionHandler);

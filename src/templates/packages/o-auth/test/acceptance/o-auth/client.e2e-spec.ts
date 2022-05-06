@@ -12,7 +12,9 @@ import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
+import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,11 +22,14 @@ const importForeignModules = [];
 describe('client', () =>
 {
     let app: INestApplication;
-    let repository: IClientRepository;
-    let seeder: MockClientSeeder;
+    let clientRepository: IClientRepository;
+    let clientSeeder: MockClientSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
+
+    // set timeout to 15s by default are 5s
+    jest.setTimeout(15000);
 
     beforeAll(async () =>
     {
@@ -58,15 +63,19 @@ describe('client', () =>
                 MockClientSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationGuard)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData        = clients;
-        app             = module.createNestApplication();
-        repository      = module.get<IClientRepository>(IClientRepository);
-        seeder          = module.get<MockClientSeeder>(MockClientSeeder);
+        mockData = clients;
+        app = module.createNestApplication();
+        clientRepository = module.get<IClientRepository>(IClientRepository);
+        clientSeeder = module.get<MockClientSeeder>(MockClientSeeder);
 
         // seed mock data in memory database
-        await repository.insert(seeder.collectionSource);
+        await clientRepository.insert(clientSeeder.collectionSource);
 
         await app.init();
     });
@@ -78,7 +87,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: null },
+                id: null,
             })
             .expect(400)
             .then(res =>
@@ -94,7 +103,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ grantType: null },
+                grantType: null,
             })
             .expect(400)
             .then(res =>
@@ -110,7 +119,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: null },
+                name: null,
             })
             .expect(400)
             .then(res =>
@@ -126,7 +135,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ secret: null },
+                secret: null,
             })
             .expect(400)
             .then(res =>
@@ -142,7 +151,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isActive: null },
+                isActive: null,
             })
             .expect(400)
             .then(res =>
@@ -158,7 +167,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isMaster: null },
+                isMaster: null,
             })
             .expect(400)
             .then(res =>
@@ -174,7 +183,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: undefined },
+                id: undefined,
             })
             .expect(400)
             .then(res =>
@@ -190,7 +199,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ grantType: undefined },
+                grantType: undefined,
             })
             .expect(400)
             .then(res =>
@@ -206,7 +215,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: undefined },
+                name: undefined,
             })
             .expect(400)
             .then(res =>
@@ -222,7 +231,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ secret: undefined },
+                secret: undefined,
             })
             .expect(400)
             .then(res =>
@@ -238,7 +247,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isActive: undefined },
+                isActive: undefined,
             })
             .expect(400)
             .then(res =>
@@ -254,7 +263,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isMaster: undefined },
+                isMaster: undefined,
             })
             .expect(400)
             .then(res =>
@@ -270,7 +279,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '*************************************' },
+                id: '*************************************',
             })
             .expect(400)
             .then(res =>
@@ -286,7 +295,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ name: '****************************************************************************************************************************************************************************************************************************************************************' },
+                name: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -302,7 +311,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ secret: '*******************************************************************************************' },
+                secret: '*******************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -318,7 +327,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ authUrl: '*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************' },
+                authUrl: '*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -334,7 +343,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ redirect: '*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************' },
+                redirect: '*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
@@ -350,7 +359,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ expiredAccessToken: 11111111111 },
+                expiredAccessToken: 11111111111,
             })
             .expect(400)
             .then(res =>
@@ -366,7 +375,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ expiredRefreshToken: 11111111111 },
+                expiredRefreshToken: 11111111111,
             })
             .expect(400)
             .then(res =>
@@ -382,7 +391,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ expiredAccessToken: -1 },
+                expiredAccessToken: -1,
             })
             .expect(400)
             .then(res =>
@@ -397,7 +406,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ expiredRefreshToken: -1 },
+                expiredRefreshToken: -1,
             })
             .expect(400)
             .then(res =>
@@ -412,7 +421,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isActive: 'true' },
+                isActive: 'true',
             })
             .expect(400)
             .then(res =>
@@ -427,7 +436,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ isMaster: 'true' },
+                isMaster: 'true',
             })
             .expect(400)
             .then(res =>
@@ -442,7 +451,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ grantType: '****' },
+                grantType: '****',
             })
             .expect(400)
             .then(res =>
@@ -476,9 +485,9 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))).slice(0, 5),
+                    total: clientSeeder.collectionResponse.length,
+                    count: clientSeeder.collectionResponse.length,
+                    rows : clientSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))).slice(0, 5),
                 });
             });
     });
@@ -492,7 +501,7 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))),
+                    clientSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))),
                 );
             });
     });
@@ -521,7 +530,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(201);
     });
@@ -574,7 +583,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: 'b27d81a5-c8a3-4b2a-8cf3-fe0d164ca1bd' },
+                id: 'b27d81a5-c8a3-4b2a-8cf3-fe0d164ca1bd',
             })
             .expect(404);
     });
@@ -586,7 +595,7 @@ describe('client', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
             .then(res =>
@@ -680,9 +689,9 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body.data.oAuthPaginateClients).toEqual({
-                    total: seeder.collectionResponse.length,
-                    count: seeder.collectionResponse.length,
-                    rows : seeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))).slice(0, 5),
+                    total: clientSeeder.collectionResponse.length,
+                    count: clientSeeder.collectionResponse.length,
+                    rows : clientSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))).slice(0, 5),
                 });
             });
     });
@@ -721,7 +730,7 @@ describe('client', () =>
             {
                 for (const [index, value] of res.body.data.oAuthGetClients.entries())
                 {
-                    expect(seeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(clientSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
@@ -754,7 +763,7 @@ describe('client', () =>
                 variables: {
                     payload: {
                         ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
-                        ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
@@ -965,7 +974,7 @@ describe('client', () =>
                 variables: {
                     payload: {
                         ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
-                        ...{ id: '11390578-6994-491b-952a-59ab477a644c' },
+                        id: '11390578-6994-491b-952a-59ab477a644c',
                     },
                 },
             })
@@ -1008,7 +1017,7 @@ describe('client', () =>
                 variables: {
                     payload: {
                         ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
-                        ...{ id: '5b19d6ac-4081-573b-96b3-56964d5326a8' },
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
@@ -1099,7 +1108,7 @@ describe('client', () =>
 
     afterAll(async () =>
     {
-        await repository.delete({
+        await clientRepository.delete({
             queryStatement: {
                 where: {},
             },

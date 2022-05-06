@@ -9,7 +9,8 @@ export class AddTenantsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamTenant[] = [],
-    ) {
+    )
+    {
         super();
     }
 
@@ -18,7 +19,7 @@ export class AddTenantsContextEvent extends AggregateRoot
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created()
+    created(): void
     {
         this.apply(
             new CreatedTenantsEvent(
@@ -34,13 +35,13 @@ export class AddTenantsContextEvent extends AggregateRoot
                         tenant.createdAt?.value,
                         tenant.updatedAt?.value,
                         tenant.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 
-    deleted()
+    deleted(): void
     {
         this.apply(
             new DeletedTenantsEvent(
@@ -56,9 +57,9 @@ export class AddTenantsContextEvent extends AggregateRoot
                         tenant.createdAt?.value,
                         tenant.updatedAt?.value,
                         tenant.deletedAt?.value,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 }

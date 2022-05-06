@@ -34,7 +34,8 @@ describe('OAuthFindAccessTokenByIdHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<OAuthFindAccessTokenByIdHandler>(OAuthFindAccessTokenByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

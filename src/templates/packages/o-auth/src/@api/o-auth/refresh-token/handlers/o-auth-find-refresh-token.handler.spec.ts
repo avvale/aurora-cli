@@ -34,7 +34,8 @@ describe('OAuthFindRefreshTokenHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<OAuthFindRefreshTokenHandler>(OAuthFindRefreshTokenHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

@@ -28,7 +28,8 @@ describe('GetBoundedContextsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetBoundedContextsService);
         repository      = module.get(IBoundedContextRepository);

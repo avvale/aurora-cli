@@ -32,7 +32,8 @@ describe('DeleteBoundedContextByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteBoundedContextByIdService);
         repository      = module.get(IBoundedContextRepository);

@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpdateRoleResolver } from './iam-update-role.resolver';
 import { IamUpdateRoleHandler } from '../handlers/iam-update-role.handler';
-import { IamUpdateRoleInput } from '../../../../../graphql';
+import { IamUpdateRoleInput } from '../../../../graphql';
 
 // sources
 import { roles } from '../../../../@apps/iam/role/infrastructure/seeds/role.seed';
@@ -28,7 +28,8 @@ describe('IamUpdateRoleResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamUpdateRoleResolver>(IamUpdateRoleResolver);
         handler = module.get<IamUpdateRoleHandler>(IamUpdateRoleHandler);

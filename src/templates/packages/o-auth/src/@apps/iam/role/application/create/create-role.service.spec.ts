@@ -41,7 +41,8 @@ describe('CreateRoleService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateRoleService);
         repository      = module.get(IRoleRepository);

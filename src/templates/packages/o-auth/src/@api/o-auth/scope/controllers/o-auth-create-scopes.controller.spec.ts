@@ -26,7 +26,8 @@ describe('OAuthCreateScopesController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthCreateScopesController>(OAuthCreateScopesController);
         handler = module.get<OAuthCreateScopesHandler>(OAuthCreateScopesHandler);

@@ -28,8 +28,9 @@ describe('CreatePermissionsService', () =>
                         insert: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreatePermissionsService);
         repository      = module.get(IPermissionRepository);

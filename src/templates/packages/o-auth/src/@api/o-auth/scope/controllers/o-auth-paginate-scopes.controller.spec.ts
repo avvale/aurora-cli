@@ -28,8 +28,9 @@ describe('OAuthPaginateScopesController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<OAuthPaginateScopesController>(OAuthPaginateScopesController);
         handler = module.get<OAuthPaginateScopesHandler>(OAuthPaginateScopesHandler);

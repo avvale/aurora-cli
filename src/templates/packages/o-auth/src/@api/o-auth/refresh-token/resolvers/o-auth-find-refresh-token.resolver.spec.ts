@@ -27,7 +27,8 @@ describe('OAuthFindRefreshTokenResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthFindRefreshTokenResolver>(OAuthFindRefreshTokenResolver);
         handler = module.get<OAuthFindRefreshTokenHandler>(OAuthFindRefreshTokenHandler);

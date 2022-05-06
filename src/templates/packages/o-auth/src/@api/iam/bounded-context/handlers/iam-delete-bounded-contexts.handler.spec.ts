@@ -34,7 +34,8 @@ describe('IamDeleteBoundedContextsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<IamDeleteBoundedContextsHandler>(IamDeleteBoundedContextsHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

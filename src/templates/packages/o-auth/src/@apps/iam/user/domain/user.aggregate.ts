@@ -146,7 +146,7 @@ export class IamUser extends AggregateRoot
                 user.createdAt?.value,
                 user.updatedAt?.value,
                 user.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -169,7 +169,7 @@ export class IamUser extends AggregateRoot
                 user.createdAt?.value,
                 user.updatedAt?.value,
                 user.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -192,7 +192,7 @@ export class IamUser extends AggregateRoot
                 user.createdAt?.value,
                 user.updatedAt?.value,
                 user.deletedAt?.value,
-            )
+            ),
         );
     }
 

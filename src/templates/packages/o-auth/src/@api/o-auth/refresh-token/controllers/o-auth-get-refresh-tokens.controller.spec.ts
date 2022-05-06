@@ -29,7 +29,8 @@ describe('OAuthGetRefreshTokensController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthGetRefreshTokensController>(OAuthGetRefreshTokensController);
         handler = module.get<OAuthGetRefreshTokensHandler>(OAuthGetRefreshTokensHandler);

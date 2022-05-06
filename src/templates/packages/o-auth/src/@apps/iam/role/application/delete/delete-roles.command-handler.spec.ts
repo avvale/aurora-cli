@@ -22,7 +22,8 @@ describe('DeleteRolesCommandHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteRolesCommandHandler>(DeleteRolesCommandHandler);
         service         = module.get<DeleteRolesService>(DeleteRolesService);

@@ -104,7 +104,7 @@ export class OAuthApplication extends AggregateRoot
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -121,7 +121,7 @@ export class OAuthApplication extends AggregateRoot
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -138,7 +138,7 @@ export class OAuthApplication extends AggregateRoot
                 application.createdAt?.value,
                 application.updatedAt?.value,
                 application.deletedAt?.value,
-            )
+            ),
         );
     }
 

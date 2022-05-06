@@ -29,7 +29,8 @@ describe('OAuthCreateApplicationsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler     = module.get<OAuthCreateApplicationsHandler>(OAuthCreateApplicationsHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

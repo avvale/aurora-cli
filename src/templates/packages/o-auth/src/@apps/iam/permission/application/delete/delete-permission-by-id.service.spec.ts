@@ -32,7 +32,8 @@ describe('DeletePermissionByIdService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeletePermissionByIdService);
         repository      = module.get(IPermissionRepository);

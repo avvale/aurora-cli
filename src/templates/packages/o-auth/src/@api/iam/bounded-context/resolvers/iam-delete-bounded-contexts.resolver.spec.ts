@@ -27,7 +27,8 @@ describe('IamDeleteBoundedContextsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamDeleteBoundedContextsResolver>(IamDeleteBoundedContextsResolver);
         handler = module.get<IamDeleteBoundedContextsHandler>(IamDeleteBoundedContextsHandler);

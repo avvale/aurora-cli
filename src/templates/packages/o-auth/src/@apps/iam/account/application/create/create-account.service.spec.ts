@@ -48,7 +48,8 @@ describe('CreateAccountService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(CreateAccountService);
         repository      = module.get(IAccountRepository);

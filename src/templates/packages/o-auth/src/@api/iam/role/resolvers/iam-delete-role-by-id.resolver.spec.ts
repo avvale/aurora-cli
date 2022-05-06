@@ -27,7 +27,8 @@ describe('IamDeleteRoleByIdResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamDeleteRoleByIdResolver>(IamDeleteRoleByIdResolver);
         handler = module.get<IamDeleteRoleByIdHandler>(IamDeleteRoleByIdHandler);

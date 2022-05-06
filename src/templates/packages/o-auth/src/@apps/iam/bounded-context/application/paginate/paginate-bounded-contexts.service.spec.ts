@@ -28,7 +28,8 @@ describe('PaginateBoundedContextsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(PaginateBoundedContextsService);
         repository      = module.get(IBoundedContextRepository);

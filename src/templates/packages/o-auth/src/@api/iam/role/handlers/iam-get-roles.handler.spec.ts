@@ -34,7 +34,8 @@ describe('IamGetRolesHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamGetRolesHandler>(IamGetRolesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

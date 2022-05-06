@@ -27,7 +27,8 @@ describe('IamDeletePermissionByIdResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamDeletePermissionByIdResolver>(IamDeletePermissionByIdResolver);
         handler = module.get<IamDeletePermissionByIdHandler>(IamDeletePermissionByIdHandler);

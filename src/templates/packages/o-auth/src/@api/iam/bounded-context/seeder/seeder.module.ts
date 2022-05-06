@@ -7,7 +7,7 @@ import { IamModule } from '../../../../@api/iam/iam.module';
     imports: [
         SharedModule,
         SequelizeConfigModule,
-        IamModule
-    ]
+        IamModule,
+    ],
 })
 export class SeederModule {}

@@ -34,7 +34,8 @@ describe('OAuthDeleteApplicationsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<OAuthDeleteApplicationsHandler>(OAuthDeleteApplicationsHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

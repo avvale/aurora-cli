@@ -25,11 +25,12 @@ describe('CreateTenantsService', () =>
                 {
                     provide : ITenantRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateTenantsService);
         repository      = module.get(ITenantRepository);
@@ -46,7 +47,7 @@ describe('CreateTenantsService', () =>
         test('should create tenants and emit event', async () =>
         {
             expect(await service.main(
-                mockRepository.collectionSource
+                mockRepository.collectionSource,
             )).toBe(undefined);
         });
     });

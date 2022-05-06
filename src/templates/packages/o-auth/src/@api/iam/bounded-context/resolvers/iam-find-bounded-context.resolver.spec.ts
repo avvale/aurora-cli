@@ -27,7 +27,8 @@ describe('IamFindBoundedContextResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<IamFindBoundedContextResolver>(IamFindBoundedContextResolver);
         handler = module.get<IamFindBoundedContextHandler>(IamFindBoundedContextHandler);

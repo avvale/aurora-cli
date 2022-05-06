@@ -30,7 +30,8 @@ describe('DeleteAccountsService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(DeleteAccountsService);
         repository      = module.get(IAccountRepository);

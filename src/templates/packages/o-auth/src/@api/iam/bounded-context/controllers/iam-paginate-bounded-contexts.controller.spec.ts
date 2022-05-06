@@ -28,8 +28,9 @@ describe('IamPaginateBoundedContextsController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<IamPaginateBoundedContextsController>(IamPaginateBoundedContextsController);
         handler = module.get<IamPaginateBoundedContextsHandler>(IamPaginateBoundedContextsHandler);

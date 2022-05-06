@@ -34,7 +34,8 @@ describe('IamDeleteTenantsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler    = module.get<IamDeleteTenantsHandler>(IamDeleteTenantsHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);

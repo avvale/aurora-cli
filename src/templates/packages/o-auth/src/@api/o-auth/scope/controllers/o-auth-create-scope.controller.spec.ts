@@ -29,7 +29,8 @@ describe('OAuthCreateScopeController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthCreateScopeController>(OAuthCreateScopeController);
         handler = module.get<OAuthCreateScopeHandler>(OAuthCreateScopeHandler);

@@ -12,7 +12,7 @@ export class IamUpdateUserDto
     @ApiProperty({
         type       : String,
         description: 'accountId [input here api field description]',
-        example    : 'ec0aa639-30b9-4262-8896-cad7b0c0da67',
+        example    : '1bf33789-b78b-4af1-8edd-864a6f25705c',
     })
     accountId?: string;
 

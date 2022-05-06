@@ -29,7 +29,8 @@ describe('IamGetRolesController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamGetRolesController>(IamGetRolesController);
         handler = module.get<IamGetRolesHandler>(IamGetRolesHandler);

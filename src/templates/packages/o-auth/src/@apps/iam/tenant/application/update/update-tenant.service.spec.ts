@@ -36,13 +36,14 @@ describe('UpdateTenantService', () =>
                 UpdateTenantService,
                 MockTenantRepository,
                 {
-                    provide: ITenantRepository,
+                    provide : ITenantRepository,
                     useValue: {
-                        update: (item) => { /**/ }
-                    }
+                        update: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(UpdateTenantService);
         repository      = module.get(ITenantRepository);
@@ -67,7 +68,7 @@ describe('UpdateTenantService', () =>
                     isActive: new TenantIsActive(tenants[0].isActive),
                     data: new TenantData(tenants[0].data),
                     accountIds: new TenantAccountIds(tenants[0].accountIds),
-                }
+                },
             )).toBe(undefined);
         });
     });

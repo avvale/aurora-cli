@@ -28,8 +28,9 @@ describe('OAuthPaginateClientsController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<OAuthPaginateClientsController>(OAuthPaginateClientsController);
         handler = module.get<OAuthPaginateClientsHandler>(OAuthPaginateClientsHandler);

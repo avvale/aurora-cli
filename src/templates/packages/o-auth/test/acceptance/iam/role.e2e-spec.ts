@@ -9,26 +9,15 @@ import { MockRoleSeeder } from '../../../src/@apps/iam/role/infrastructure/mock/
 import { roles } from '../../../src/@apps/iam/role/infrastructure/seeds/role.seed';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
-import { OAuthClientGrantType, OAuthCredential } from '../../../src/graphql';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-// ---- customizations ----
-import { jwtConfig } from '../../../src/@apps/o-auth/shared/jwt-config';
+// has OAuth
+import { AuthenticationJwtGuard } from 'src/@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '../../../src/@api/iam/shared/guards/authorization.guard';
-import { AuthModule } from '../../../src/@apps/o-auth/shared/modules/auth.module';
+
+// ---- customizations ----
 import { OAuthModule } from '../../../src/@api/o-auth/o-auth.module';
-import { MockApplicationSeeder } from '../../../src/@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
-import { OAuthCreateCredentialHandler } from '../../../src/@api/o-auth/credential/handlers/o-auth-create-credential.handler';
-import { IApplicationRepository } from '../../../src/@apps/o-auth/application/domain/application.repository';
-import { MockAccessTokenSeeder } from '../../../src/@apps/o-auth/access-token/infrastructure/mock/mock-access-token.seeder';
-import { IAccessTokenRepository } from '../../../src/@apps/o-auth/access-token';
-import { MockClientSeeder } from '../../../src/@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
-import { IClientRepository } from '../../../src/@apps/o-auth/client';
-import { MockAccountSeeder } from '../../../src/@apps/iam/account/infrastructure/mock/mock-account.seeder';
-import { IAccountRepository } from '../../../src/@apps/iam/account/domain/account.repository';
-import { MockUserSeeder } from '../../../src/@apps/iam/user/infrastructure/mock/mock-user.seeder';
-import { IUserRepository } from '../../../src/@apps/iam/user/domain/user.repository';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -36,20 +25,8 @@ const importForeignModules = [];
 describe('role', () =>
 {
     let app: INestApplication;
-    let credential: OAuthCredential;
     let roleRepository: IRoleRepository;
     let roleSeeder: MockRoleSeeder;
-    let oAuthCreateCredentialHandler: OAuthCreateCredentialHandler;
-    let applicationRepository: IApplicationRepository;
-    let applicationSeeder: MockApplicationSeeder;
-    let accessTokenRepository: IAccessTokenRepository;
-    let accessTokenSeeder: MockAccessTokenSeeder;
-    let clientRepository: IClientRepository;
-    let clientSeeder: MockClientSeeder;
-    let accountRepository: IAccountRepository;
-    let accountSeeder: MockAccountSeeder;
-    let userRepository: IUserRepository;
-    let userSeeder: MockUserSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -64,7 +41,6 @@ describe('role', () =>
                 ...importForeignModules,
                 IamModule,
                 OAuthModule,
-                AuthModule.forRoot(jwtConfig),
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -89,51 +65,23 @@ describe('role', () =>
             ],
             providers: [
                 MockRoleSeeder,
-                MockApplicationSeeder,
-                MockAccessTokenSeeder,
-                MockAccountSeeder,
-                MockClientSeeder,
-                MockUserSeeder,
             ],
         })
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
             .overrideGuard(AuthorizationGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData                        = roles;
-        app                             = module.createNestApplication();
-        roleRepository                  = module.get<IRoleRepository>(IRoleRepository);
-        roleSeeder                      = module.get<MockRoleSeeder>(MockRoleSeeder);
-        oAuthCreateCredentialHandler    = module.get<OAuthCreateCredentialHandler>(OAuthCreateCredentialHandler);
-        accountRepository               = module.get<IAccountRepository>(IAccountRepository);
-        accountSeeder                   = module.get<MockAccountSeeder>(MockAccountSeeder);
-        applicationRepository           = module.get<IApplicationRepository>(IApplicationRepository);
-        applicationSeeder               = module.get<MockApplicationSeeder>(MockApplicationSeeder);
-        clientRepository                = module.get<IClientRepository>(IClientRepository);
-        clientSeeder                    = module.get<MockClientSeeder>(MockClientSeeder);
-        accessTokenRepository           = module.get<IAccessTokenRepository>(IAccessTokenRepository);
-        accessTokenSeeder               = module.get<MockAccessTokenSeeder>(MockAccessTokenSeeder);
-        userRepository                  = module.get<IUserRepository>(IUserRepository);
-        userSeeder                      = module.get<MockUserSeeder>(MockUserSeeder);
+        mockData = roles;
+        app = module.createNestApplication();
+        roleRepository = module.get<IRoleRepository>(IRoleRepository);
+        roleSeeder = module.get<MockRoleSeeder>(MockRoleSeeder);
 
         // seed mock data in memory database
         await roleRepository.insert(roleSeeder.collectionSource);
-        await applicationRepository.insert(applicationSeeder.collectionSource);
-        await clientRepository.insert(clientSeeder.collectionSource);
-        await accountRepository.insert(accountSeeder.collectionSource);
-        await accessTokenRepository.insert(accessTokenSeeder.collectionSource);
-        await userRepository.insert(userSeeder.collectionSource);
 
         await app.init();
-
-        credential = await oAuthCreateCredentialHandler.main(
-            {
-                username: 'john.doe@gmail.com',
-                password: '1111',
-                grantType: OAuthClientGrantType.PASSWORD,
-            },
-            'Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==',
-        );
     });
 
     test('/REST:POST iam/role/create - Got 400 Conflict, RoleId property can not to be null', () =>
@@ -141,7 +89,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 id: null,
@@ -158,7 +105,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 name: null,
@@ -175,7 +121,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 isMaster: null,
@@ -192,7 +137,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 id: undefined,
@@ -209,7 +153,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 name: undefined,
@@ -226,7 +169,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 isMaster: undefined,
@@ -243,7 +185,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 id: '*************************************',
@@ -260,7 +201,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 name: '****************************************************************************************************************************************************************************************************************************************************************',
@@ -277,7 +217,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 isMaster: 'true',
@@ -294,7 +233,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send(mockData[0])
             .expect(409);
     });
@@ -304,7 +242,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/roles/paginate')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query:
                 {
@@ -328,7 +265,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/roles/get')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .expect(200)
             .then(res =>
             {
@@ -343,7 +279,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/find')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query:
                 {
@@ -361,7 +296,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
@@ -374,7 +308,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/iam/role/find')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query:
                 {
@@ -396,7 +329,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .get('/iam/role/find/1357a06c-e7b6-49e4-a8cb-6a6433c35ba3')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .expect(404);
     });
 
@@ -405,7 +337,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .get('/iam/role/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .expect(200)
             .then(res =>
             {
@@ -418,7 +349,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .put('/iam/role/update')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 id: '16529b20-f6df-49e9-82e9-a9dc65be8c9e',
@@ -431,7 +361,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .put('/iam/role/update')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
@@ -448,7 +377,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .delete('/iam/role/delete/7755a7d8-127a-4b06-abd5-ab60fa4b889f')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .expect(404);
     });
 
@@ -457,7 +385,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .delete('/iam/role/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .expect(200);
     });
 
@@ -466,7 +393,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     mutation ($payload:IamCreateRoleInput!)
@@ -498,7 +424,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
@@ -536,7 +461,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     query ($query:QueryStatement)
@@ -568,7 +492,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     mutation ($payload:IamCreateRoleInput!)
@@ -600,7 +523,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     query ($query:QueryStatement)
@@ -640,7 +562,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     query ($query:QueryStatement)
@@ -678,7 +599,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     query ($id:ID!)
@@ -711,7 +631,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     query ($id:ID!)
@@ -742,7 +661,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     mutation ($payload:IamUpdateRoleInput!)
@@ -778,7 +696,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     mutation ($payload:IamUpdateRoleInput!)
@@ -812,7 +729,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     mutation ($id:ID!)
@@ -845,7 +761,6 @@ describe('role', () =>
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
-            .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
                     mutation ($id:ID!)

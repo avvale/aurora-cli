@@ -34,7 +34,8 @@ describe('OAuthPaginateAccessTokensHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<OAuthPaginateAccessTokensHandler>(OAuthPaginateAccessTokensHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);

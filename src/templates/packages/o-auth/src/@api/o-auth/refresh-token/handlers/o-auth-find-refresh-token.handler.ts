@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { FindRefreshTokenQuery } from '../../../../@apps/o-auth/refresh-token/application/find/find-refresh-token.query';
-import { OAuthRefreshToken } from '../../../../../graphql';
+import { OAuthRefreshToken } from '../../../../graphql';
 import { OAuthRefreshTokenDto } from '../dto';
 
 @Injectable()

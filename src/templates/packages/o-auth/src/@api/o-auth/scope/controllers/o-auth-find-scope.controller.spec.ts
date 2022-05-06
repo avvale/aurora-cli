@@ -29,7 +29,8 @@ describe('OAuthFindScopeController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthFindScopeController>(OAuthFindScopeController);
         handler = module.get<OAuthFindScopeHandler>(OAuthFindScopeHandler);

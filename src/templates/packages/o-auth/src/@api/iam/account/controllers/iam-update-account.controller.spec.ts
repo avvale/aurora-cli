@@ -29,7 +29,8 @@ describe('IamUpdateAccountController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<IamUpdateAccountController>(IamUpdateAccountController);
         handler = module.get<IamUpdateAccountHandler>(IamUpdateAccountHandler);

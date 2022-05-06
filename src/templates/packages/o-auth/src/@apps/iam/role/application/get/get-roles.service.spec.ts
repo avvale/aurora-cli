@@ -28,7 +28,8 @@ describe('GetRolesService', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         service         = module.get(GetRolesService);
         repository      = module.get(IRoleRepository);

@@ -27,7 +27,8 @@ describe('OAuthGetApplicationsResolver', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         resolver = module.get<OAuthGetApplicationsResolver>(OAuthGetApplicationsResolver);
         handler = module.get<OAuthGetApplicationsHandler>(OAuthGetApplicationsHandler);

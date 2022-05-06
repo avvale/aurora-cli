@@ -29,7 +29,8 @@ describe('OAuthGetClientsController', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         controller = module.get<OAuthGetClientsController>(OAuthGetClientsController);
         handler = module.get<OAuthGetClientsHandler>(OAuthGetClientsHandler);

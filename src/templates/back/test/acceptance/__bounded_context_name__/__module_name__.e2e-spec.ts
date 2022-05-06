@@ -13,9 +13,6 @@ import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '../../../src/{{ 
 import { {{ toCamelCase schema.moduleNames }} } from '../../../src/{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 import { GraphQLConfigModule } from '../../../src/{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
 import { {{ toPascalCase schema.boundedContextName }}Module } from '../../../src/{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
-{{#if schema.properties.hasEnum}}
-import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{/each}} } from '../../../src/graphql';
-{{/if}}
 import * as request from 'supertest';
 import * as _ from 'lodash';
 

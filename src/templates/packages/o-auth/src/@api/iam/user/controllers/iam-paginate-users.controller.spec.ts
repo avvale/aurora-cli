@@ -28,8 +28,9 @@ describe('IamPaginateUsersController', () =>
                         main: () => { /**/ },
                     },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller = module.get<IamPaginateUsersController>(IamPaginateUsersController);
         handler = module.get<IamPaginateUsersHandler>(IamPaginateUsersHandler);

@@ -34,7 +34,8 @@ describe('IamPaginateAccountsHandler', () =>
                     },
                 },
             ],
-        }).compile();
+        })
+            .compile();
 
         handler = module.get<IamPaginateAccountsHandler>(IamPaginateAccountsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
