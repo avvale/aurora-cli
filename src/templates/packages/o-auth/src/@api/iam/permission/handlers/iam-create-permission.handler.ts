@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 // @apps
 import { FindPermissionByIdQuery } from '../../../../@apps/iam/permission/application/find/find-permission-by-id.query';
 import { CreatePermissionCommand } from '../../../../@apps/iam/permission/application/create/create-permission.command';
-import { IamPermission, IamCreatePermissionInput } from '../../../../graphql';
+import { IamPermission, IamCreatePermissionInput } from '../../../../../graphql';
 import { IamPermissionDto, IamCreatePermissionDto } from '../dto';
 
 @Injectable()

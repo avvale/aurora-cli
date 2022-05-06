@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { OAuthDeleteClientByIdHandler } from '../handlers/o-auth-delete-client-by-id.handler';
-import { OAuthClient } from '../../../../graphql';
+import { OAuthClient } from '../../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.client.delete')

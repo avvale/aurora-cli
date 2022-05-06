@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { OAuthPaginateScopesHandler } from '../handlers/o-auth-paginate-scopes.handler';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from '../../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.scope.get')

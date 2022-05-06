@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { OAuthUpdateApplicationHandler } from '../handlers/o-auth-update-application.handler';
-import { OAuthApplication, OAuthUpdateApplicationInput } from '../../../../graphql';
+import { OAuthApplication, OAuthUpdateApplicationInput } from '../../../../../graphql';
 
 @Resolver()
 @Permissions('oAuth.application.update')

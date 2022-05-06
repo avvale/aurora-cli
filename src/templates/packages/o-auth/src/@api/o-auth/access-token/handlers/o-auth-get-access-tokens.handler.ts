@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { GetAccessTokensQuery } from '../../../../@apps/o-auth/access-token/application/get/get-access-tokens.query';
-import { OAuthAccessToken } from '../../../../graphql';
+import { OAuthAccessToken } from '../../../../../graphql';
 import { OAuthAccessTokenDto } from '../dto';
 
 @Injectable()

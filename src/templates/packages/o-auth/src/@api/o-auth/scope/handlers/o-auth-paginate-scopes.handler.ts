@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateScopesQuery } from '../../../../@apps/o-auth/scope/application/paginate/paginate-scopes.query';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from '../../../../../graphql';
 
 @Injectable()
 export class OAuthPaginateScopesHandler

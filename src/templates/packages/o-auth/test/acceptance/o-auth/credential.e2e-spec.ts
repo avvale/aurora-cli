@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 import { AuthModule } from '../../../src/@apps/o-auth/shared/modules/auth.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
 import { MockJwtService } from '../../../src/@apps/o-auth/access-token/infrastructure/mock/mock-jwt.service';
-import { OAuthClientGrantType } from '../../../src/graphql';
+import { OAuthClientGrantType } from '../../../graphql';
 import { IApplicationRepository } from '../../../src/@apps/o-auth/application';
 import { MockApplicationSeeder } from '../../../src/@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
 import { IClientRepository } from '../../../src/@apps/o-auth/client';

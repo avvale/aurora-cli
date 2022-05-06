@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { FindClientByIdQuery } from '../../../../@apps/o-auth/client/application/find/find-client-by-id.query';
 import { UpdateClientCommand } from '../../../../@apps/o-auth/client/application/update/update-client.command';
-import { OAuthClient, OAuthUpdateClientInput } from '../../../../graphql';
+import { OAuthClient, OAuthUpdateClientInput } from '../../../../../graphql';
 import { OAuthClientDto, OAuthUpdateClientDto } from '../dto';
 
 @Injectable()

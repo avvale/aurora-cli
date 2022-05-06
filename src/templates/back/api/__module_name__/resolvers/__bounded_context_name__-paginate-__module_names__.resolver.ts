@@ -20,7 +20,7 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 {{/if}}
 // {{ config.applicationsContainer }}
 import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.handler';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from '../../../../../graphql';
 
 @Resolver()
 {{#if schema.hasOAuth}}

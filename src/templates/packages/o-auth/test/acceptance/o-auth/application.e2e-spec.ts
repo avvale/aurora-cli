@@ -376,7 +376,7 @@ describe('application', () =>
                 {
                     where:
                     {
-                        id: '779c50e0-4232-49d9-ab71-ca404fc8b89d',
+                        id: '8df3701c-3aff-4a09-b3c8-0bfb2ae5afaa',
                     },
                 },
             })
@@ -419,7 +419,7 @@ describe('application', () =>
     test('/REST:GET o-auth/application/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/find/ead6763c-b617-4047-ba1a-b88fa0278615')
+            .get('/o-auth/application/find/b7be8e19-618a-4949-bd7a-705bac7adfab')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -443,7 +443,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                id: '19f76dc2-307b-463d-9bb2-ae7a91296134',
+                id: 'd32d3895-5c36-45b5-a0e3-6f1f35081c1b',
             })
             .expect(404);
     });
@@ -467,7 +467,7 @@ describe('application', () =>
     test('/REST:DELETE o-auth/application/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/o-auth/application/delete/45150b0d-ee28-47cd-8676-8de30b791b9f')
+            .delete('/o-auth/application/delete/ba3d1ef1-aebd-4910-9acd-d34e378367f1')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -643,7 +643,7 @@ describe('application', () =>
                     {
                         where:
                         {
-                            id: '38277967-d12e-4490-9612-763e652b8097',
+                            id: 'a7aad787-6216-42d0-89a2-6adcbdb788b9',
                         },
                     },
                 },
@@ -718,7 +718,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: 'c43605b1-6e25-455f-8123-c1d7bdc31328',
+                    id: '66ee075a-5aa8-4e9b-8dda-e1aaa08b7678',
                 },
             })
             .expect(200)
@@ -786,7 +786,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        id: '674d1da4-cfd2-499a-baa9-6d8546987908',
+                        id: 'ac90426e-98b3-4d1a-848e-a2e1a8a960dd',
                     },
                 },
             })
@@ -856,7 +856,7 @@ describe('application', () =>
                     }
                 `,
                 variables: {
-                    id: '0d826ab2-9e33-455c-90c1-5a05fd05a828',
+                    id: 'fc1119ef-8fa8-419e-a8cd-c7e338083141',
                 },
             })
             .expect(200)

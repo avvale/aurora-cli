@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '../../../../@api/iam/shared/guards/authoriza
 
 // @apps
 import { IamDeleteAccountByIdHandler } from '../handlers/iam-delete-account-by-id.handler';
-import { IamAccount } from '../../../../graphql';
+import { IamAccount } from '../../../../../graphql';
 
 @Resolver()
 @Permissions('iam.account.delete')

@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { GetUsersQuery } from '../../../../@apps/iam/user/application/get/get-users.query';
 import { DeleteUsersCommand } from '../../../../@apps/iam/user/application/delete/delete-users.command';
-import { IamUser } from '../../../../graphql';
+import { IamUser } from '../../../../../graphql';
 import { IamUserDto } from '../dto';
 
 @Injectable()

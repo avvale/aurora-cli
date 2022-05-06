@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamCreateUserResolver } from './iam-create-user.resolver';
 import { IamCreateUserHandler } from '../handlers/iam-create-user.handler';
-import { IamCreateUserInput } from '../../../../graphql';
+import { IamCreateUserInput } from '../../../../../graphql';
 
 // sources
 import { users } from '../../../../@apps/iam/user/infrastructure/seeds/user.seed';

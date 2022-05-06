@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
-import { OAuthClientGrantType } from '../../../../../src/graphql';
+import { OAuthClientGrantType } from '../../../../../graphql';
 
 export class OAuthCreateCredentialDto
 {

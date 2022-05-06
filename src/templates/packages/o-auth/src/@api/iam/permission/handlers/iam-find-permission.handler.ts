@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { FindPermissionQuery } from '../../../../@apps/iam/permission/application/find/find-permission.query';
-import { IamPermission } from '../../../../graphql';
+import { IamPermission } from '../../../../../graphql';
 import { IamPermissionDto } from '../dto';
 
 @Injectable()

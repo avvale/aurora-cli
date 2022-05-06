@@ -9,7 +9,7 @@ import { MockAccountSeeder } from '../../../src/@apps/iam/account/infrastructure
 import { accounts } from '../../../src/@apps/iam/account/infrastructure/seeds/account.seed';
 import { GraphQLConfigModule } from '../../../src/@aurora/graphql/graphql-config.module';
 import { IamModule } from '../../../src/@api/iam/iam.module';
-import { IamAccountType, OAuthClientGrantType, OAuthCredential } from '../../../src/graphql';
+import { IamAccountType, OAuthClientGrantType, OAuthCredential } from '../../../graphql';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 

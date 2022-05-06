@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateRefreshTokensQuery } from '../../../../@apps/o-auth/refresh-token/application/paginate/paginate-refresh-tokens.query';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from '../../../../../graphql';
 
 @Injectable()
 export class OAuthPaginateRefreshTokensHandler

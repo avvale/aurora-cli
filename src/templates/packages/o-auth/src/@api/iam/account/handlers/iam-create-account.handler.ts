@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, Jwt, Utils } from 'aurora-ts-core';
 // @apps
 import { FindAccountByIdQuery } from '../../../../@apps/iam/account/application/find/find-account-by-id.query';
 import { CreateAccountCommand } from '../../../../@apps/iam/account/application/create/create-account.command';
-import { IamAccount, IamAccountType, IamCreateAccountInput } from '../../../../graphql';
+import { IamAccount, IamAccountType, IamCreateAccountInput } from '../../../../../graphql';
 import { IamAccountDto, IamCreateAccountDto } from '../dto';
 
 // ---- customizations ----

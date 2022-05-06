@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "a3946341-59f0-4c06-90ba-efa8b8f76060",
+		"name"          : "@apps - o-auth/access-token",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - oAuthCreateAccessToken",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OAuthCreateAccessTokenInput!)\n{\n\toAuthCreateAccessToken (payload:$payload)\n\t{\n\t\tid\n\t\tclientId\n\t\taccountId\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"token\": \"Inventore impedit voluptas ex fuga. Voluptas ipsum aperiam dolorem repellat id. Omnis expedita autem facilis id quasi repudiandae. Et eum fuga non soluta rerum numquam. Ut quos corrupti aut sapiente non dolores quae. Enim laudantium quas alias dicta aut officia culpa voluptas.\", \n\t\t\"name\": \"Fantastic Plastic Computer\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-05 13:57:17\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthCreateAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[OAuthCreateAccessTokenInput]!)\n{\n\toAuthCreateAccessTokens (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"643d002e-7d8b-4fc9-8d91-4c4a00188652\", \n\t\t\t\"clientId\": \"826b0b8f-a9f7-448d-87c2-597e273f4b05\", \n\t\t\t\"accountId\": \"904acfa1-50f7-4691-ac5d-f478b6c1da9b\", \n\t\t\t\"token\": \"Suscipit quo minima nihil aperiam ut et facilis facere possimus. Quasi est quasi doloremque. Alias et aut quaerat sint tempore vero quod ab dolores. Fugiat sequi eius minus unde.\", \n\t\t\t\"name\": \"Refined Rubber Salad\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-06 01:00:34\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6dbaf556-734a-4925-91ef-5a29bc621deb\", \n\t\t\t\"clientId\": \"da3e37a9-97ef-4080-864d-8cb3672bd2cd\", \n\t\t\t\"accountId\": \"42beaf91-591c-4b72-8bd8-ba25ea8a0b62\", \n\t\t\t\"token\": \"Possimus maiores consectetur dolorem. Quia alias laboriosam in magni recusandae voluptate necessitatibus. Sed dolorum non ut commodi deleniti et minima. Quis aspernatur maiores consectetur provident doloremque architecto. Sint vero voluptates aliquid qui qui voluptatem id consequatur.\", \n\t\t\t\"name\": \"Tasty Granite Bike\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-05 15:44:43\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8d7eedc0-fa55-4490-9277-aa39df0bd156\", \n\t\t\t\"clientId\": \"b263d1c7-b664-492c-b878-84558ea0eab9\", \n\t\t\t\"accountId\": \"dca7f035-72f4-4607-85d8-4358c1d52aca\", \n\t\t\t\"token\": \"Expedita corrupti eligendi nihil id. Dignissimos magni voluptatem vitae et sint nostrum sed. Sequi officia laborum est eos molestiae est eveniet. Quo molestias quisquam dolorum nemo eaque est.\", \n\t\t\t\"name\": \"Awesome Frozen Ball\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2022-05-06 03:17:21\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c1379991-1072-4d1c-880d-a43b14a8dfd7\", \n\t\t\t\"clientId\": \"a37cf3d0-e3ce-439e-b2b8-ed3652ad49e2\", \n\t\t\t\"accountId\": \"ba805232-fe54-4168-affe-8b5e0545306b\", \n\t\t\t\"token\": \"Suscipit cum odio explicabo qui temporibus nam. Rerum architecto deserunt sed et doloremque qui dolor rerum. Repellendus totam consequuntur sed quidem et inventore adipisci reprehenderit. Quod reprehenderit laboriosam id itaque ea dolores quis.\", \n\t\t\t\"name\": \"Unbranded Wooden Tuna\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-06 11:33:24\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5393a054-7b39-4c4b-9492-a8809b05d639\", \n\t\t\t\"clientId\": \"15f78c06-9172-47ec-a25f-ebc3cdb81bb2\", \n\t\t\t\"accountId\": \"3ec25c31-e6bd-46c4-8014-69a4504d476a\", \n\t\t\t\"token\": \"Facere accusamus deserunt asperiores quis accusantium consequatur. Quam nisi nihil sit rem tenetur. Exercitationem qui quia. Placeat iste at iure qui quod mollitia.\", \n\t\t\t\"name\": \"Intelligent Fresh Sausages\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-06 06:28:33\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6388040d-7f69-438a-b6e9-e07802c7bb66\", \n\t\t\t\"clientId\": \"3a3f6dd6-03b5-4afb-995f-bf781a015e9a\", \n\t\t\t\"accountId\": \"a489edad-a198-4ba1-91e3-ad57c7e073ae\", \n\t\t\t\"token\": \"Tempora soluta qui possimus odio dolorum. Soluta est aliquid voluptas ex. Eum enim nulla cumque vel ut. Odio et quo consequatur id et et. Impedit minima modi soluta.\", \n\t\t\t\"name\": \"Handcrafted Metal Gloves\", \n\t\t\t\"isRevoked\": true, \n\t\t\t\"expiresAt\": \"2022-05-05 19:06:50\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"81e8271d-e45e-4a47-a11c-3c3f9415f21c\", \n\t\t\t\"clientId\": \"9ed06988-ba29-4be3-a73a-210295d6837a\", \n\t\t\t\"accountId\": \"3cb72e20-734f-4480-98d0-3b405430cd1e\", \n\t\t\t\"token\": \"Omnis voluptatem delectus nesciunt id veritatis libero. Quisquam voluptatem id ea quia perspiciatis. Non debitis maxime iste at. Et doloremque vel et nesciunt earum maxime corporis et totam.\", \n\t\t\t\"name\": \"Unbranded Metal Bacon\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-06 06:20:49\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fc3dc7f0-926a-4be0-88c7-895a038d9165\", \n\t\t\t\"clientId\": \"9bf4bb77-4a35-436f-85fe-20801cccc40d\", \n\t\t\t\"accountId\": \"f2bb5502-e091-4d2f-ac92-72358b3dcd07\", \n\t\t\t\"token\": \"Quis nam iure est praesentium dolorem libero. Tenetur qui vero et ut ut sequi culpa in. Ut et sit soluta qui omnis ut harum neque dignissimos. Non illo aut. Voluptatem minima omnis nihil earum aut qui est tenetur earum. Necessitatibus vitae non natus.\", \n\t\t\t\"name\": \"Gorgeous Frozen Chicken\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-05 15:24:24\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"49b8f625-353e-48e2-8858-ad80e5f821b5\", \n\t\t\t\"clientId\": \"62023f40-ef79-419a-af34-e8f55756ebfa\", \n\t\t\t\"accountId\": \"35ce29b4-67c6-42b2-8345-6f82a1fcfe25\", \n\t\t\t\"token\": \"Quia odio inventore ut temporibus dolor laudantium. Voluptate laboriosam nemo facere amet minus adipisci minus qui ipsam. Ratione est labore eos consequuntur non perspiciatis voluptas ratione. Doloremque dolorem aut.\", \n\t\t\t\"name\": \"Awesome Rubber Fish\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-05 23:34:32\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5f5adfc6-74a2-4900-b0ec-b6a852eaca50\", \n\t\t\t\"clientId\": \"d64e1427-610d-4ed5-b141-80626e195248\", \n\t\t\t\"accountId\": \"ad0bc204-1ee9-4436-821d-03149d918b98\", \n\t\t\t\"token\": \"Tenetur quae ut animi voluptatum. Odio velit sunt odio. Totam aliquid at dignissimos voluptatem.\", \n\t\t\t\"name\": \"Refined Concrete Chips\", \n\t\t\t\"isRevoked\": false, \n\t\t\t\"expiresAt\": \"2022-05-05 19:28:30\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthPaginateAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\toAuthPaginateAccessTokens (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthGetAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\toAuthGetAccessTokens (query: $query)\n\t{\n\t\tid\n\t\taccountId\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthFindAccessToken",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\toAuthFindAccessToken (query: $query)\n\t{\n\t\tid\n\t\taccountId\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthFindAccessTokenById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\toAuthFindAccessTokenById (id:$id)\n\t{\n\t\tid\n\t\taccountId\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthUpdateAccessToken",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:OAuthUpdateAccessTokenInput!)\n{\n\toAuthUpdateAccessToken (payload:$payload)\n\t{\n\t\tid\n\t\taccountId\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"token\": \"Beatae quia nulla officia. Amet ut eos perspiciatis nobis. Voluptas odio in non a totam.\", \n\t\t\"name\": \"Handmade Steel Shirt\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2022-05-06 08:41:25\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthDeleteAccessTokenById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\toAuthDeleteAccessTokenById (id:$id)\n\t{\n\t\tid\n\t\taccountId\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - oAuthDeleteAccessTokens",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\toAuthDeleteAccessTokens (query: $query)\n\t{\n\t\tid\n\t\taccountId\n\t\ttoken\n\t\tname\n\t\tisRevoked\n\t\texpiresAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"token\": \"Error doloremque est unde officia commodi molestiae. Quae fugiat et veniam. Blanditiis veniam ab. Neque dolore tempora molestiae voluptatum aspernatur expedita et. Laboriosam omnis numquam consequuntur dolorem cupiditate non qui. Et modi similique dolores modi perspiciatis sunt reprehenderit.\", \n\t\"name\": \"Intelligent Rubber Towels\", \n\t\"isRevoked\": true, \n\t\"expiresAt\": \"2022-05-06 11:29:02\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-tokens/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"2050d856-abcd-4a9b-bd9e-14d8cda2e169\", \n\t\t\"clientId\": \"65a0ed9e-af51-401f-a1f7-6d488880b6f1\", \n\t\t\"accountId\": \"293237b2-cb11-40c6-983f-b15235b65e27\", \n\t\t\"token\": \"Quidem et praesentium. Sint similique rem voluptate consectetur non qui expedita. In ex modi amet sunt occaecati et. Id eos est voluptates aut sed qui. Sed numquam qui adipisci quis.\", \n\t\t\"name\": \"Practical Plastic Gloves\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-06 12:43:52\"\n\t}, \n\t{\n\t\t\"id\": \"b83050fc-6d3f-4382-ab7d-3d333da36ba0\", \n\t\t\"clientId\": \"bc86f9c7-676a-4f43-a31f-5f890c153caa\", \n\t\t\"accountId\": \"e939da00-e958-4b45-8da6-a3102579d3f2\", \n\t\t\"token\": \"Sit non enim sit recusandae. Provident asperiores omnis consequatur nisi. Quo eum error eligendi iste vitae.\", \n\t\t\"name\": \"Tasty Soft Salad\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2022-05-06 08:27:36\"\n\t}, \n\t{\n\t\t\"id\": \"1d62d1ec-bd96-4a94-93ae-894b94228a86\", \n\t\t\"clientId\": \"8e3655e3-73ad-4abe-ac61-a53037ca8f9c\", \n\t\t\"accountId\": \"81b2626b-6df5-4eac-816d-6a887bade804\", \n\t\t\"token\": \"Et dolore vel dolores odit iure quo. Hic dolores reprehenderit voluptatem. Doloribus fugit enim expedita. Dolores fuga in nisi ducimus aspernatur et. Nobis ea impedit corporis quo perspiciatis deserunt vel quos.\", \n\t\t\"name\": \"Refined Soft Bacon\", \n\t\t\"isRevoked\": true, \n\t\t\"expiresAt\": \"2022-05-06 01:12:04\"\n\t}, \n\t{\n\t\t\"id\": \"8b6b5165-fc15-40d1-89e6-a14081755481\", \n\t\t\"clientId\": \"7d43af7f-e0ec-4501-9099-e08f4f36cb16\", \n\t\t\"accountId\": \"e62561fd-26d2-45bc-af14-502b1a32ee34\", \n\t\t\"token\": \"Voluptatem ratione ex quia. Hic voluptates laudantium eligendi sunt animi repudiandae ut itaque. Aut amet aut itaque aspernatur omnis nobis aliquid. Ratione alias voluptatem et provident quod esse. Nemo culpa velit debitis. Similique ut eum provident unde repudiandae est sint.\", \n\t\t\"name\": \"Fantastic Cotton Salad\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-05 20:53:37\"\n\t}, \n\t{\n\t\t\"id\": \"a762e4c7-7696-4bc2-bbd1-269057287d77\", \n\t\t\"clientId\": \"aafd5920-b0f3-4db0-8441-36a363a326d2\", \n\t\t\"accountId\": \"69a3ff85-cea4-46ed-8210-1dc1f4821a94\", \n\t\t\"token\": \"Libero molestias dolore et. Et enim cum vel voluptatem hic. Id animi sequi tempore illum eligendi sed ducimus qui. Quia voluptas labore sed dolor natus facere nulla in autem.\", \n\t\t\"name\": \"Small Soft Salad\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-06 02:02:46\"\n\t}, \n\t{\n\t\t\"id\": \"99bdc274-5ecb-42c1-b426-111fb19bf4e9\", \n\t\t\"clientId\": \"322208e9-f9d0-4029-941f-4e8dda604049\", \n\t\t\"accountId\": \"bd6b1322-2419-44f2-acfb-00c7dc0d8fa3\", \n\t\t\"token\": \"Modi sint mollitia aperiam molestiae ea incidunt et. Aut consequuntur rem illo ut. Repellat hic ipsa quas officiis velit doloremque autem. Qui voluptas explicabo nulla accusantium aliquam temporibus expedita. Est recusandae ducimus minima voluptas.\", \n\t\t\"name\": \"Sleek Cotton Bike\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-06 10:15:57\"\n\t}, \n\t{\n\t\t\"id\": \"558b6488-7e39-4cda-aaf7-21b162a40696\", \n\t\t\"clientId\": \"9c83402d-2531-4b1f-9c4c-5150eb957153\", \n\t\t\"accountId\": \"e9c455c0-73a6-4f9b-8a40-ecc5a1c6ef9b\", \n\t\t\"token\": \"Et temporibus enim aut non aliquam ea repudiandae. Dolore voluptatem maxime adipisci nam cumque. Aut quae sapiente. Rerum rerum magnam soluta consequatur hic distinctio. Unde quae ut dolores dignissimos qui. Facere sed quis sed inventore et voluptate qui.\", \n\t\t\"name\": \"Practical Concrete Chicken\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-06 13:05:59\"\n\t}, \n\t{\n\t\t\"id\": \"30a66bb8-5d00-479c-a27d-6ab7686b6f22\", \n\t\t\"clientId\": \"f4dc18c6-2061-479b-ac93-f1fb88aa13fa\", \n\t\t\"accountId\": \"626ec1cd-de73-4275-ba21-0b530274a1b0\", \n\t\t\"token\": \"Eos sed sed eligendi. Et ea architecto est doloribus consequatur magni quia. Atque incidunt quibusdam amet ex sequi aut sint nobis fugiat.\", \n\t\t\"name\": \"Sleek Granite Cheese\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-05 15:42:47\"\n\t}, \n\t{\n\t\t\"id\": \"183854d5-6fcb-4a37-bf7a-6f4cbc70bb7c\", \n\t\t\"clientId\": \"79241945-633d-4756-86fe-7466f032cbae\", \n\t\t\"accountId\": \"d651a1a9-a5fc-4a96-91ae-befa18f2da14\", \n\t\t\"token\": \"Ipsam et aspernatur molestiae illum facilis. Ducimus consectetur vitae et consectetur. Eveniet culpa at.\", \n\t\t\"name\": \"Generic Wooden Shirt\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-05 20:41:25\"\n\t}, \n\t{\n\t\t\"id\": \"8ec97087-b985-437c-b1aa-090d521ded11\", \n\t\t\"clientId\": \"81afec92-1fe0-459b-9fda-6ac7d0153d92\", \n\t\t\"accountId\": \"73529da8-ffad-4723-93c4-cb97a331b2ab\", \n\t\t\"token\": \"Ut ut dolores et et omnis iste rerum qui. Ab itaque et quam deleniti distinctio. Animi dolor quia commodi molestiae non sunt consequuntur. Earum suscipit dolorum ea odio deleniti. Facere quos rerum. Ipsum necessitatibus occaecati.\", \n\t\t\"name\": \"Handcrafted Concrete Chips\", \n\t\t\"isRevoked\": false, \n\t\t\"expiresAt\": \"2022-05-06 04:44:59\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-tokens",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-tokens/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+                        "access-tokens",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-tokens/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-tokens",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"clientId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"token\": \"Doloremque ex expedita dicta. In quia ut libero iure veniam. Non sit velit voluptatem totam. Eos possimus ipsa voluptas molestiae. Consequuntur eum sint impedit ipsa dolorum. Architecto provident facere eaque sunt itaque impedit molestiae.\", \n\t\"name\": \"Practical Fresh Car\", \n\t\"isRevoked\": true, \n\t\"expiresAt\": \"2022-05-06 05:44:39\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - o-auth/access-token/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-token/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-token",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - o-auth/access-tokens/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/o-auth/access-tokens/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"o-auth",
+						"access-tokens",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "96b3411a-9f4f-49e0-9ee2-70068fefec97",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
