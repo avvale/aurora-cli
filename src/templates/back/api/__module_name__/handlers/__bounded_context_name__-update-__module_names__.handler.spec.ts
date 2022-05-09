@@ -7,8 +7,8 @@ import { ConfigService } from '@nestjs/config';
 import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input } from '../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.handler';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input } from '../../../../graphql';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -16,9 +16,9 @@ import { langs } from '{{#eq schema.boundedContextName 'common'}}{{ config.appli
 {{/if}}
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
-describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler', () =>
+describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler', () =>
 {
-    let handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler;
+    let handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -31,7 +31,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                 {{/if}}
             ],
             providers: [
-                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler,
+                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler,
                 {{#if schema.properties.hasI18n}}
                 AddI18NConstraintService,
                 {
@@ -63,27 +63,27 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
         })
             .compile();
 
-        handler     = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler);
+        handler     = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler should be defined', () =>
+    test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
     {
         expect(handler).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });
 
-        test('should return a {{ toCamelCase schema.moduleName }} updated', async () =>
+        test('should return a {{ toCamelCase schema.moduleNames }} updated', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
-            expect(await handler.main(<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input>{{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);
+            expect(await handler.main(<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input>{{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });
 });

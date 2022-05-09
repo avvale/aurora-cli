@@ -8,9 +8,10 @@ import {
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
 {{> importI18NRepository}}
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
+import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from '../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
 @Injectable()
-export class Update{{ toPascalCase schema.moduleName }}Service
+export class Update{{ toPascalCase schema.moduleNames }}Service
 {
     constructor(
         private readonly publisher: EventPublisher,
@@ -22,10 +23,11 @@ export class Update{{ toPascalCase schema.moduleName }}Service
         payload: {
             {{#each schema.properties.updateService}}
             {{#if (allowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase name }}?: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
         },
+        queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -60,17 +62,31 @@ export class Update{{ toPascalCase schema.moduleName }}Service
         {{/if}}
 
         // update
-        await this.repository.update({{ toCamelCase schema.moduleName }}, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions });
+        await this.repository.update({{ toCamelCase schema.moduleName }}, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
         {{#if schema.properties.hasI18n}}
-        await this.repositoryI18n.update({{ toCamelCase schema.moduleName }}, { constraint, cQMetadata, updateOptions: cQMetadata?.repositoryOptions, dataFactory: (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(), findArguments: { langId: {{ toCamelCase schema.moduleName }}.langId.value, {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value }});
+        await this.repositoryI18n.update({{ toCamelCase schema.moduleName }}, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+            dataFactory: (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(),
+        });
         {{/if}}
 
+        // get objects to delete
+        const {{ toCamelCase schema.moduleNames }} = await this.repository.get({ queryStatement, constraint, cQMetadata });
+
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const {{ toCamelCase schema.moduleName }}Register = this.publisher.mergeObjectContext(
-            {{ toCamelCase schema.moduleName }},
+        const {{ toCamelCase schema.moduleNames }}Register = this.publisher.mergeObjectContext(
+            new Add{{ toPascalCase schema.moduleNames }}ContextEvent({{ toCamelCase schema.moduleNames }}),
         );
 
-        {{ toCamelCase schema.moduleName }}Register.updated({{ toCamelCase schema.moduleName }}); // apply event to model events
-        {{ toCamelCase schema.moduleName }}Register.commit(); // commit all events of model
+        {{ toCamelCase schema.moduleNames }}Register.updated(); // apply event to model events
+        {{ toCamelCase schema.moduleNames }}Register.commit(); // commit all events of model
     }
 }

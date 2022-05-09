@@ -2,7 +2,7 @@
 import { Controller, Put, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { Constraint, {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Dto } from '../dto';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Dto } from '../dto';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -19,31 +19,32 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.handler';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.handler';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
-@Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update')
+@Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/update')
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 {{/if}}
-export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller
+export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Controller
 {
     constructor(
-        private readonly handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler,
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler,
     ) {}
 
     @Put()
-    @ApiOperation({ summary: 'Update {{ toKebabCase schema.moduleName }}' })
-    @ApiOkResponse({ description: 'The record has been successfully updated.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto})
+    @ApiOperation({ summary: 'Update {{ toKebabCase schema.moduleNames }}' })
+    @ApiOkResponse({ description: 'The record has been successfully updated.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
     @TenantConstraint()
     {{/if}}
     async main(
-        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Dto,
+        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Dto,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
+        @Body('query') queryStatement?: QueryStatement,
         @Constraint() constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
@@ -53,6 +54,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
             {{#if schema.hasTenant}}
             account,
             {{/if}}
+            queryStatement,
             constraint,
             timezone,
         );

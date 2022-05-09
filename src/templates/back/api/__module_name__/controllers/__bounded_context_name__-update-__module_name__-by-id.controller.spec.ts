@@ -6,8 +6,8 @@ import { ConfigService } from '@nestjs/config';
 {{/if}}
 
 // custom items
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.controller';
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.handler';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdController } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}-by-id.controller';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}-by-id.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -15,10 +15,10 @@ import { langs } from '{{#eq schema.boundedContextName 'common'}}{{ config.appli
 {{/if}}
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
-describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller', () =>
+describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdController', () =>
 {
-    let controller: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller;
-    let handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler;
+    let controller: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdController;
+    let handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler;
 
     beforeAll(async () =>
     {
@@ -29,11 +29,11 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                 {{/if}}
             ],
             controllers: [
-                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller,
+                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdController,
             ],
             providers: [
                 {
-                    provide : {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler,
+                    provide : {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -42,13 +42,13 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
         })
             .compile();
 
-        controller = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller);
-        handler = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler);
+        controller = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdController>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdController);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler);
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Controller should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });

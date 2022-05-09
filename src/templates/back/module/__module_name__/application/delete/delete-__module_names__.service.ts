@@ -21,7 +21,7 @@ export class Delete{{ toPascalCase schema.moduleNames }}Service
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        // get object to delete
+        // get objects to delete
         const {{ toCamelCase schema.moduleNames }} = await this.repository.get({ queryStatement, constraint, cQMetadata });
 
         {{#if schema.properties.hasI18n}}
@@ -43,7 +43,9 @@ export class Delete{{ toPascalCase schema.moduleNames }}Service
 
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const {{ toCamelCase schema.moduleNames }}Registered = this.publisher.mergeObjectContext(new Add{{ toPascalCase schema.moduleNames }}ContextEvent({{ toCamelCase schema.moduleNames }}));
+        const {{ toCamelCase schema.moduleNames }}Registered = this.publisher.mergeObjectContext(
+            new Add{{ toPascalCase schema.moduleNames }}ContextEvent({{ toCamelCase schema.moduleNames }}),
+        );
 
         {{ toCamelCase schema.moduleNames }}Registered.deleted(); // apply event to model events
         {{ toCamelCase schema.moduleNames }}Registered.commit(); // commit all events of model

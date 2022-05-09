@@ -184,7 +184,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             new Updated{{ toPascalCase schema.moduleName }}Event(
                 {{#each schema.properties.aggregate}}
                 {{#if (allowProperty ../schema.moduleName this) }}
-                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}.value,
+                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}?.value,
                 {{/if}}
                 {{/each}}
             ),

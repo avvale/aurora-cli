@@ -77,16 +77,28 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
         }
     ): Promise<void>;
 
-    // update record
-    abstract update(
+    // update record by id
+    abstract updateById(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
-            updateOptions?: LiteralObject;
+            updateByIdOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
+    abstract update(
+        {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
+        options?: {
+            updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
         }
     ): Promise<void>;
 

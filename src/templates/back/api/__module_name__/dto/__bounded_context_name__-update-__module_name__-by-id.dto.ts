@@ -9,7 +9,7 @@ import { {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase g
 import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{/each}} } from '../../../../graphql';
 {{/if}}
 
-export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Dto
+export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto
 {
 {{#each schema.properties.dtoInputProperties}}
 {{#if (allowProperty ../schema.moduleName this) }}

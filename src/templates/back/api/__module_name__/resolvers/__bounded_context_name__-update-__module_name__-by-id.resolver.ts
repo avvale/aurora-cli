@@ -19,26 +19,26 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 
 {{/if}}
 // {{ config.applicationsContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input } from '../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}-by-id.handler';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from '../../../../graphql';
 
 @Resolver()
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 {{/if}}
-export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Resolver
+export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdResolver
 {
     constructor(
-        private readonly handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Handler,
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler,
     ) {}
 
-    @Mutation('{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}')
+    @Mutation('{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById')
     {{#if schema.hasTenant}}
     @TenantConstraint()
     {{/if}}
     async main(
-        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input,
+        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}

@@ -1,22 +1,22 @@
 /* eslint-disable key-spacing */
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { Update{{ toPascalCase schema.moduleName }}Command } from './update-{{ toKebabCase schema.moduleName }}.command';
-import { Update{{ toPascalCase schema.moduleName }}Service } from './update-{{ toKebabCase schema.moduleName }}.service';
+import { Update{{ toPascalCase schema.moduleName }}ByIdCommand } from './update-{{ toKebabCase schema.moduleName }}-by-id.command';
+import { Update{{ toPascalCase schema.moduleName }}ByIdService } from './update-{{ toKebabCase schema.moduleName }}-by-id.service';
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
 
-@CommandHandler(Update{{ toPascalCase schema.moduleName }}Command)
-export class Update{{ toPascalCase schema.moduleName }}CommandHandler implements ICommandHandler<Update{{ toPascalCase schema.moduleName }}Command>
+@CommandHandler(Update{{ toPascalCase schema.moduleName }}ByIdCommand)
+export class Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler implements ICommandHandler<Update{{ toPascalCase schema.moduleName }}ByIdCommand>
 {
     constructor(
-        private readonly update{{ toPascalCase schema.moduleName }}Service: Update{{ toPascalCase schema.moduleName }}Service,
+        private readonly update{{ toPascalCase schema.moduleName }}ByIdService: Update{{ toPascalCase schema.moduleName }}ByIdService,
     ) {}
 
-    async execute(command: Update{{ toPascalCase schema.moduleName }}Command): Promise<void>
+    async execute(command: Update{{ toPascalCase schema.moduleName }}ByIdCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.update{{ toPascalCase schema.moduleName }}Service.main(
+        await this.update{{ toPascalCase schema.moduleName }}ByIdService.main(
             {
                 {{#each schema.properties.updateCommandHandler}}
                 {{#if (allowProperty ../schema.moduleName this) }}

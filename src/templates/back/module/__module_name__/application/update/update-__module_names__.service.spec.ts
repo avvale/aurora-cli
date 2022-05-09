@@ -4,7 +4,7 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
-import { Update{{ toPascalCase schema.moduleName }}Service } from './update-{{ toKebabCase schema.moduleName }}.service';
+import { Update{{ toPascalCase schema.moduleNames }}Service } from './update-{{ toKebabCase schema.moduleNames }}.service';
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
@@ -14,9 +14,9 @@ import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '../../domai
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
 
-describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
+describe('Update{{ toPascalCase schema.moduleNames }}Service', () =>
 {
-    let service: Update{{ toPascalCase schema.moduleName }}Service;
+    let service: Update{{ toPascalCase schema.moduleNames }}Service;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
     let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
@@ -30,12 +30,13 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                Update{{ toPascalCase schema.moduleName }}Service,
+                Update{{ toPascalCase schema.moduleNames }}Service,
                 Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
                     provide : I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
                         update: () => { /**/ },
+                        get   : () => { /**/ },
                     },
                 },
                 {{#if schema.properties.hasI18n}}
@@ -50,7 +51,7 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
         })
             .compile();
 
-        service         = module.get(Update{{ toPascalCase schema.moduleName }}Service);
+        service         = module.get(Update{{ toPascalCase schema.moduleNames }}Service);
         repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
         repositoryI18N  = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
@@ -60,12 +61,12 @@ describe('Update{{ toPascalCase schema.moduleName }}Service', () =>
 
     describe('main', () =>
     {
-        test('Update{{ toPascalCase schema.moduleName }}Service should be defined', () =>
+        test('Update{{ toPascalCase schema.moduleNames }}Service should be defined', () =>
         {
             expect(service).toBeDefined();
         });
 
-        test('should update a {{ toCamelCase schema.moduleName }} and emit event', async () =>
+        test('should update a {{ toCamelCase schema.moduleNames }} and emit event', async () =>
         {
             expect(await service.main(
                 {

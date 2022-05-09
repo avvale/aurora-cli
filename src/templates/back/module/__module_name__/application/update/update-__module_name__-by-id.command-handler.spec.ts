@@ -2,22 +2,22 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
-import { Update{{ toPascalCase schema.moduleName }}CommandHandler } from './update-{{ toKebabCase schema.moduleName }}.command-handler';
-import { Update{{ toPascalCase schema.moduleName }}Command } from './update-{{ toKebabCase schema.moduleName }}.command';
-import { Update{{ toPascalCase schema.moduleName }}Service } from './update-{{ toKebabCase schema.moduleName }}.service';
+import { Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './update-{{ toKebabCase schema.moduleName }}-by-id.command-handler';
+import { Update{{ toPascalCase schema.moduleName }}ByIdCommand } from './update-{{ toKebabCase schema.moduleName }}-by-id.command';
+import { Update{{ toPascalCase schema.moduleName }}ByIdService } from './update-{{ toKebabCase schema.moduleName }}-by-id.service';
 
-describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
+describe('Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler', () =>
 {
-    let commandHandler: Update{{ toPascalCase schema.moduleName }}CommandHandler;
-    let service: Update{{ toPascalCase schema.moduleName }}Service;
+    let commandHandler: Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler;
+    let service: Update{{ toPascalCase schema.moduleName }}ByIdService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                Update{{ toPascalCase schema.moduleName }}CommandHandler,
+                Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler,
                 {
-                    provide : Update{{ toPascalCase schema.moduleName }}Service,
+                    provide : Update{{ toPascalCase schema.moduleName }}ByIdService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,13 +26,13 @@ describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<Update{{ toPascalCase schema.moduleName }}CommandHandler>(Update{{ toPascalCase schema.moduleName }}CommandHandler);
-        service         = module.get<Update{{ toPascalCase schema.moduleName }}Service>(Update{{ toPascalCase schema.moduleName }}Service);
+        commandHandler  = module.get<Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler>(Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler);
+        service         = module.get<Update{{ toPascalCase schema.moduleName }}ByIdService>(Update{{ toPascalCase schema.moduleName }}ByIdService);
     });
 
     describe('main', () =>
     {
-        test('Update{{ toPascalCase schema.moduleName }}CommandHandler should be defined', () =>
+        test('Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
@@ -40,7 +40,7 @@ describe('Update{{ toPascalCase schema.moduleName }}CommandHandler', () =>
         test('should return an {{ toCamelCase schema.moduleName }} created', async () =>
         {
             expect(await commandHandler.execute(
-                new Update{{ toPascalCase schema.moduleName }}Command(
+                new Update{{ toPascalCase schema.moduleName }}ByIdCommand(
                     {
                         {{#each schema.properties.updateController}}
                         {{ toCamelCase name }}: {{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }},

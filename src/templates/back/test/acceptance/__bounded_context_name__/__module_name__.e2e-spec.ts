@@ -739,16 +739,16 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} - Got 404 Not Found', () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)
+                    mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput!)
                     {
-                        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)
+                        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (payload:$payload)
                         {
                             {{#each schema.properties.postmanGraphQLUpdateQuery}}
                             {{ toCamelCase name }}
@@ -772,16 +772,16 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
 
-    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}', () =>
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)
+                    mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput!)
                     {
-                        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)
+                        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (payload:$payload)
                         {
                             {{#each schema.properties.postmanGraphQLUpdateQuery}}
                             {{ toCamelCase name }}
@@ -799,7 +799,43 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}.id).toStrictEqual('{{{ mocker (object type='fixedUuid') }}}');
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById.id).toStrictEqual('{{{ mocker (object type='fixedUuid') }}}');
+            });
+    });
+
+    test('/GraphQL {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input! $query: QueryStatement)
+                    {
+                        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} (payload:$payload query:$query)
+                        {
+                            {{#each schema.properties.postmanGraphQLUpdateQuery}}
+                            {{ toCamelCase name }}
+                            {{/each}}
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '{{{ mocker (object type='fixedUuid') }}}',
+                    },
+                    query: {
+                        where: {
+                            id: '{{{ mocker (object type='fixedUuid') }}}',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}[0].id).toStrictEqual('{{{ mocker (object type='fixedUuid') }}}');
             });
     });
 
