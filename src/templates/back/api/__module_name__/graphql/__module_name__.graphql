@@ -96,7 +96,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{#eq type ../sqlType.ID ~}}
     {{ toCamelCase originName }}: ID
 {{else ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}Input
+    {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}ByIdInput
 {{/eq}}
 {{/eq}}
 {{#eq type ../sqlType.ENUM}}
@@ -129,7 +129,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{#eq type ../sqlType.ID ~}}
     {{ toCamelCase originName }}: ID
 {{else ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}Input
+    {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModules }}Input
 {{/eq}}
 {{/eq}}
 {{#eq type ../sqlType.ENUM}}

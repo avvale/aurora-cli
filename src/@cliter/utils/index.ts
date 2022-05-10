@@ -10,3 +10,4 @@ export * from './prompter';
 export * from './properties';
 export * from './property';
 export * from './template-generator';
+export * from './yaml-manager';

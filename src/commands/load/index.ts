@@ -14,6 +14,7 @@ import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
+import { YamlManager } from '../../@cliter/utils';
 import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, Properties, Property, FileManager } from '../../@cliter';
 
 export default class Load extends Command
@@ -66,7 +67,7 @@ export default class Load extends Command
             const { boundedContextName, moduleName }: any = await Prompter.promptForLoadModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
             // create yaml file
-            const schema: ModuleDefinitionSchema    = this.loadYamlConfigFile(boundedContextName, moduleName);
+            const schema: ModuleDefinitionSchema    = YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
             const currentLockFiles: LockFile[]      = this.loadJsonLockFile(boundedContextName, moduleName);
 
             // set stateService
@@ -100,7 +101,7 @@ export default class Load extends Command
             for (const yamlFile of yamlFiles.filter(files => files.endsWith('.yaml')))
             {
                 // create yaml file
-                const schema: ModuleDefinitionSchema    = this.loadYamlConfigFile(boundedContextName, yamlFile.replace('.yaml', ''));
+                const schema: ModuleDefinitionSchema    = YamlManager.loadYamlConfigFile(boundedContextName, yamlFile.replace('.yaml', ''));
                 const currentLockFiles: LockFile[]      = this.loadJsonLockFile(boundedContextName, schema.moduleName);
 
                 // set stateService
@@ -205,73 +206,5 @@ export default class Load extends Command
         if (!fs.existsSync(jsonPath)) return [];
 
         return (JSON.parse(fs.readFileSync(jsonPath, 'utf8')).files) as LockFile[];
-    }
-
-    private loadYamlConfigFile(boundedContextName: string, moduleName: string): ModuleDefinitionSchema
-    {
-        const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + '.yaml');
-
-        // read yaml file
-        const yamlObj = yaml.load(fs.readFileSync(yamlPath, 'utf8')) as any;
-
-        this.parseModuleDefinitionSchema(yamlObj);
-
-        const properties        = new Properties();
-        properties.moduleName   = yamlObj.moduleName;
-
-        for (const property of yamlObj.aggregateProperties)
-        {
-            properties.add(
-                new Property({
-                    name                       : property.name,
-                    type                       : property.type,
-                    primaryKey                 : property?.primaryKey,
-                    enumOptions                : property?.enumOptions?.join(),
-                    decimals                   : property?.decimals,
-                    length                     : property?.length,
-                    minLength                  : property?.minLength,
-                    maxLength                  : property?.maxLength,
-                    nullable                   : property?.nullable,
-                    defaultValue               : property?.defaultValue,
-                    relationship               : property?.relationship,
-                    relationshipSingularName   : property?.relationshipSingularName,
-                    relationshipAggregate      : property?.relationshipAggregate,
-                    relationshipModulePath     : property?.relationshipModulePath,
-                    relationshipKey            : property?.relationshipKey,
-                    relationshipField          : property?.relationshipField,
-                    relationshipAvoidConstraint: property?.relationshipAvoidConstraint,
-                    relationshipPackageName    : property?.relationshipPackageName,
-                    pivotAggregateName         : property?.pivotAggregateName,
-                    pivotPath                  : property?.pivotPath,
-                    pivotFileName              : property?.pivotFileName,
-                    index                      : property?.index,
-                    indexName                  : property?.indexName,
-                    isI18n                     : property?.isI18n,
-                    example                    : property?.example,
-                    faker                      : property?.faker,
-                }),
-            );
-        }
-
-        return {
-            boundedContextName: yamlObj.boundedContextName,
-            moduleName        : yamlObj.moduleName,
-            moduleNames       : yamlObj.moduleNames,
-            aggregateName     : yamlObj.aggregateName,
-            hasOAuth          : yamlObj.hasOAuth,
-            hasTenant         : yamlObj.hasTenant,
-            properties,
-            excluded          : yamlObj.excluded,
-        };
-    }
-
-    private parseModuleDefinitionSchema(yamlObj: any): void
-    {
-        if (typeof yamlObj.boundedContextName !== 'string')     throw new Error('Yaml file structure error, boundedContextName field missing');
-        if (typeof yamlObj.moduleName !== 'string')             throw new Error('Yaml file structure error, moduleName field missing');
-        if (typeof yamlObj.moduleNames !== 'string')            throw new Error('Yaml file structure error, moduleNames field missing');
-        if (typeof yamlObj.aggregateName !== 'string')          throw new Error('Yaml file structure error, aggregateName field missing');
-        if (typeof yamlObj.hasOAuth !== 'boolean')              throw new Error('Yaml file structure error, hasOAuth field missing');
-        if (typeof yamlObj.hasTenant !== 'boolean')             throw new Error('Yaml file structure error, hasTenant field missing');
     }
 }

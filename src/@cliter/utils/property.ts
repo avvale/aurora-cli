@@ -1,7 +1,8 @@
-import { SqlRelationship, SqlType, SqlIndex } from '../types';
+import { SqlRelationship, SqlType, SqlIndex, ModuleDefinitionSchema } from '../types';
 import { cliterConfig } from '../config/cliter.config';
 import * as faker from 'faker';
 import * as _ from 'lodash';
+import { YamlManager } from './yaml-manager';
 
 export class Property
 {
@@ -207,6 +208,12 @@ export class Property
         return null;
     }
 
+    get getRelationshipModules(): string | null
+    {
+        if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleNames;
+        return null;
+    }
+
     get getJavascriptType(): string
     {
         if (this.relationship === SqlRelationship.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
@@ -272,15 +279,12 @@ export class Property
         return this.config.quotationTypes[this.type];
     }
 
-    private parseModuleSection(moduleSectionString: string): { boundedContextName: string; moduleName: string }
+    private parseModuleSection(moduleSectionString: string): ModuleDefinitionSchema
     {
-        const moduleSection = moduleSectionString.split('/');
-        if (moduleSection.length !== 2) throw new Error('Must input bounded context and module name, with format: bounded-context/module');
+        const [boundedContextName, moduleName] = moduleSectionString.split('/');
+        if (!boundedContextName || !moduleName) throw new Error('Must input bounded context and module name, with format: bounded-context/module');
 
-        return {
-            boundedContextName: moduleSection[0],
-            moduleName        : moduleSection[1],
-        };
+        return YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
     }
 
     toDto(): any

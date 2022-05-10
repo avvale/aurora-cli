@@ -2,7 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 {{#each schema.properties.withRelationshipOneToOne}}
 {{#unlessEq type ../sqlType.ID }}
-import { {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}Dto } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-update-{{ toKebabCase getRelationshipModule }}.dto{{/if}}';
+import { {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}ByIdDto } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-update-{{ toKebabCase getRelationshipModule }}-by-id.dto{{/if}}';
 {{/unlessEq}}
 {{/each}}
 {{#if schema.properties.hasEnum}}
@@ -49,13 +49,13 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
 {{else ~}}
     @ApiProperty({
-        type       : {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}Dto,
+        type       : {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}ByIdDto,
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}?: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}Dto;
+    {{ toCamelCase originName }}?: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}ByIdDto;
 
 {{/eq}}
 {{/eq}}
