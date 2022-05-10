@@ -16,7 +16,7 @@
                     mat-flat-button
                     [disabled]="fg.pristine"
                     [color]="'accent'"
-                    *ngIf="currentActionId ==='edit'">
+                    *ngIf="currentActionId === 'edit'">
                 <mat-icon class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
                 \{{ t('Update') }}
             </button>
@@ -26,7 +26,7 @@
                     mat-flat-button
                     [disabled]="fg.pristine"
                     [color]="'accent'"
-                    *ngIf="currentActionId ==='new'">
+                    *ngIf="currentActionId === 'new'">
                 <mat-icon class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:save'"></mat-icon>
                 \{{ t('Create') }}
             </button>

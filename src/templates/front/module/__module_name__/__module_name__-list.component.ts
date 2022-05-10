@@ -121,7 +121,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                         if (result === 'confirmed')
                         {
                             this.{{ toCamelCase schema.moduleName }}Service
-                                .delete<{{ schema.aggregateName }}>(action.data.event.row.id)
+                                .deleteById<{{ schema.aggregateName }}>(action.data.event.row.id)
                                 .subscribe(item => this.{{ toCamelCase schema.moduleName }}Service.pagination().subscribe());
                         }
                     });

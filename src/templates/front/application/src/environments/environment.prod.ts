@@ -10,4 +10,8 @@ export const environment = {
         fallback: 'es',
         langs   : ['es','en'],
     },
+    oAuth: {
+        applicationCode  : '',
+        applicationSecret: '',
+    },
 };

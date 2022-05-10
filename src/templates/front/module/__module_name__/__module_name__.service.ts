@@ -3,7 +3,7 @@ import { FetchResult } from '@apollo/client/core';
 import { Criteria, GraphQLService, GridData, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
-import { graphQL } from './{{ toKebabCase schema.moduleName }}.graphql';
+import { paginationQuery, getQuery, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './{{ toKebabCase schema.moduleName }}.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -61,7 +61,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .watchQuery<{ pagination: GridData<{{ schema.aggregateName }}>; }>({
-                query    : graphQL.queryPagination,
+                query    : paginationQuery,
                 variables: {
                     query,
                     constraint,
@@ -78,21 +78,42 @@ export class {{ toPascalCase schema.moduleName }}Service
     findById(
         {
             id = '',
+            constraint = {},
         }: {
             id?: string;
+            constraint?: QueryStatement;
         } = {},
     ): Observable<{{ schema.aggregateName }}>
     {
-        // adapt arguments to aurora SqlStatement
-        const args = Criteria.getFindByIdArguments({ id });
-
         return this.graphqlService
             .client()
             .watchQuery<{ object: {{ schema.aggregateName }}; }>({
-                query    : graphQL.queryObject,
-                variables: {
-                    query: args,
-                },
+                query    : findByIdQuery,
+                variables: { id, constraint },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map<{ data: { object: {{ schema.aggregateName }}; };}, {{ schema.aggregateName }}>(result => result.data.object),
+                tap((object: {{ schema.aggregateName }}) => this._{{ toCamelCase schema.moduleName }}.next(object)),
+            );
+    }
+
+    find(
+        {
+            query = {},
+            constraint = {},
+        }: {
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{{ schema.aggregateName }}>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{ object: {{ schema.aggregateName }}; }>({
+                query    : findQuery,
+                variables: { query, constraint },
             })
             .valueChanges
             .pipe(
@@ -115,7 +136,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .watchQuery<{ objects: {{ schema.aggregateName }}[]; }>({
-                query    : graphQL.queryObjects,
+                query    : getQuery,
                 variables: {
                     query,
                     constraint,
@@ -140,14 +161,14 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .mutate({
-                mutation : graphQL.mutationCreateObject,
+                mutation : createMutation,
                 variables: {
                     payload: object,
                 },
             });
     }
 
-    update<T>(
+    updateById<T>(
         {
             object = null,
         }: {
@@ -158,20 +179,62 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .mutate({
-                mutation : graphQL.mutationUpdateObject,
+                mutation : updateByIdMutation,
                 variables: {
                     payload: object,
                 },
             });
     }
 
-    delete<T>(id: string): Observable<FetchResult<T>>
+    update<T>(
+        {
+            object = null,
+            query = {},
+            constraint = {},
+        }: {
+            object?: {{ schema.aggregateName }};
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
-                mutation : graphQL.mutationDeleteObjectById,
+                mutation : updateMutation,
+                variables: {
+                    payload: object,
+                    query,
+                    constraint,
+                },
+            });
+    }
+
+    deleteById<T>(id: string): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : deleteByIdMutation,
                 variables: { id },
+            });
+    }
+
+    delete<T>(
+        {
+            query = {},
+            constraint = {},
+        }: {
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : deleteMutation,
+                variables: { query, constraint },
             });
     }
 }

@@ -102,7 +102,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
             case 'update':
                 this.{{ toCamelCase schema.moduleName }}Service
-                    .update<{{ schema.aggregateName }}>({ object: this.fg.value })
+                    .updateById<{{ schema.aggregateName }}>({ object: this.fg.value })
                     .subscribe();
                 this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
                 break;
