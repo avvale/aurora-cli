@@ -145,18 +145,38 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 
 type Query
 {
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-find-' (toKebabCase schema.moduleName) '.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}(query: QueryStatement constraint: QueryStatement): {{ schema.aggregateName }}
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-find-' (toKebabCase schema.moduleName) '-by-id.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById(id: ID constraint: QueryStatement): {{ schema.aggregateName }}
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-get-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}(query: QueryStatement constraint: QueryStatement): [{{ schema.aggregateName }}]!
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-paginate-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}(query: QueryStatement constraint: QueryStatement): Pagination!
+    {{/notInArray}}
 }
 
 type Mutation
 {
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}(payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!): {{ schema.aggregateName }}
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}(payload: [{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!): Boolean!
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleName) '-by-id.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById(payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput! constraint: QueryStatement): {{ schema.aggregateName }}
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}(payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input! query: QueryStatement constraint: QueryStatement): [{{ schema.aggregateName }}]!
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById(id: ID! constraint: QueryStatement): {{ schema.aggregateName }}
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
     {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}(query: QueryStatement constraint: QueryStatement): [{{ schema.aggregateName }}]!
+    {{/notInArray}}
 }

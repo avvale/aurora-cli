@@ -1,10 +1,14 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
+{{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleNames) '.event.ts'}}
 import { Created{{ toPascalCase schema.moduleName }}Event } from './created-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event.ts'}}
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleNames) '.event.ts'}}
 import { Created{{ toPascalCase schema.moduleNames }}Event } from './created-{{ toKebabCase schema.moduleNames }}.event';
+{{/notInArray}}
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/updated-' (toKebabCase schema.moduleName) '.event.ts'}}
 import { Updated{{ toPascalCase schema.moduleName }}Event } from './updated-{{ toKebabCase schema.moduleName }}.event';
