@@ -105,7 +105,7 @@ export class IamBoundedContext extends AggregateRoot
     {
         this.apply(
             new UpdatedBoundedContextEvent(
-                boundedContext.id.value,
+                boundedContext.id?.value,
                 boundedContext.name?.value,
                 boundedContext.root?.value,
                 boundedContext.sort?.value,

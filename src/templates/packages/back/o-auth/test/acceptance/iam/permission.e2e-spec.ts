@@ -652,16 +652,16 @@ describe('permission', () =>
             });
     });
 
-    test('/GraphQL iamUpdatePermission - Got 404 Not Found', () =>
+    test('/GraphQL iamUpdatePermissionById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdatePermissionInput!)
+                    mutation ($payload:IamUpdatePermissionByIdInput!)
                     {
-                        iamUpdatePermission (payload:$payload)
+                        iamUpdatePermissionById (payload:$payload)
                         {
                             id
                             name
@@ -686,16 +686,16 @@ describe('permission', () =>
             });
     });
 
-    test('/GraphQL iamUpdatePermission', () =>
+    test('/GraphQL iamUpdatePermissionById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdatePermissionInput!)
+                    mutation ($payload:IamUpdatePermissionByIdInput!)
                     {
-                        iamUpdatePermission (payload:$payload)
+                        iamUpdatePermissionById (payload:$payload)
                         {
                             id
                             name
@@ -714,7 +714,44 @@ describe('permission', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamUpdatePermission.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamUpdatePermissionById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL iamUpdatePermissions', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:IamUpdatePermissionsInput! $query: QueryStatement)
+                    {
+                        iamUpdatePermissions (payload:$payload query:$query)
+                        {
+                            id
+                            name
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.iamUpdatePermissions[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

@@ -5,7 +5,8 @@ import { OAuthPaginateScopesController } from './controllers/o-auth-paginate-sco
 import { OAuthGetScopesController } from './controllers/o-auth-get-scopes.controller';
 import { OAuthFindScopeByIdController } from './controllers/o-auth-find-scope-by-id.controller';
 import { OAuthFindScopeController } from './controllers/o-auth-find-scope.controller';
-import { OAuthUpdateScopeController } from './controllers/o-auth-update-scope.controller';
+import { OAuthUpdateScopeByIdController } from './controllers/o-auth-update-scope-by-id.controller';
+import { OAuthUpdateScopesController } from './controllers/o-auth-update-scopes.controller';
 import { OAuthDeleteScopeByIdController } from './controllers/o-auth-delete-scope-by-id.controller';
 import { OAuthDeleteScopesController } from './controllers/o-auth-delete-scopes.controller';
 
@@ -16,7 +17,8 @@ import { OAuthPaginateScopesResolver } from './resolvers/o-auth-paginate-scopes.
 import { OAuthGetScopesResolver } from './resolvers/o-auth-get-scopes.resolver';
 import { OAuthFindScopeByIdResolver } from './resolvers/o-auth-find-scope-by-id.resolver';
 import { OAuthFindScopeResolver } from './resolvers/o-auth-find-scope.resolver';
-import { OAuthUpdateScopeResolver } from './resolvers/o-auth-update-scope.resolver';
+import { OAuthUpdateScopeByIdResolver } from './resolvers/o-auth-update-scope-by-id.resolver';
+import { OAuthUpdateScopesResolver } from './resolvers/o-auth-update-scopes.resolver';
 import { OAuthDeleteScopeByIdResolver } from './resolvers/o-auth-delete-scope-by-id.resolver';
 import { OAuthDeleteScopesResolver } from './resolvers/o-auth-delete-scopes.resolver';
 
@@ -27,7 +29,8 @@ import { OAuthPaginateScopesHandler } from './handlers/o-auth-paginate-scopes.ha
 import { OAuthGetScopesHandler } from './handlers/o-auth-get-scopes.handler';
 import { OAuthFindScopeByIdHandler } from './handlers/o-auth-find-scope-by-id.handler';
 import { OAuthFindScopeHandler } from './handlers/o-auth-find-scope.handler';
-import { OAuthUpdateScopeHandler } from './handlers/o-auth-update-scope.handler';
+import { OAuthUpdateScopeByIdHandler } from './handlers/o-auth-update-scope-by-id.handler';
+import { OAuthUpdateScopesHandler } from './handlers/o-auth-update-scopes.handler';
 import { OAuthDeleteScopeByIdHandler } from './handlers/o-auth-delete-scope-by-id.handler';
 import { OAuthDeleteScopesHandler } from './handlers/o-auth-delete-scopes.handler';
 
@@ -38,7 +41,8 @@ export const OAuthScopeControllers = [
     OAuthGetScopesController,
     OAuthFindScopeByIdController,
     OAuthFindScopeController,
-    OAuthUpdateScopeController,
+    OAuthUpdateScopeByIdController,
+    OAuthUpdateScopesController,
     OAuthDeleteScopeByIdController,
     OAuthDeleteScopesController,
 ];
@@ -50,7 +54,8 @@ export const OAuthScopeResolvers = [
     OAuthGetScopesResolver,
     OAuthFindScopeByIdResolver,
     OAuthFindScopeResolver,
-    OAuthUpdateScopeResolver,
+    OAuthUpdateScopeByIdResolver,
+    OAuthUpdateScopesResolver,
     OAuthDeleteScopeByIdResolver,
     OAuthDeleteScopesResolver,
 ];
@@ -62,7 +67,8 @@ export const OAuthScopeApiHandlers = [
     OAuthGetScopesHandler,
     OAuthFindScopeByIdHandler,
     OAuthFindScopeHandler,
-    OAuthUpdateScopeHandler,
+    OAuthUpdateScopeByIdHandler,
+    OAuthUpdateScopesHandler,
     OAuthDeleteScopeByIdHandler,
     OAuthDeleteScopesHandler,
 ];

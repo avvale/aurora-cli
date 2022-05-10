@@ -35,9 +35,25 @@ input IamCreateUserInput
     data: JSON
 }
 
-input IamUpdateUserInput
+input IamUpdateUserByIdInput
 {
     id: ID!
+    accountId: ID
+    name: GraphQLString
+    surname: GraphQLString
+    code: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString
+    password: GraphQLString
+    rememberToken: GraphQLString
+    data: JSON
+}
+
+input IamUpdateUsersInput
+{
+    id: ID
     accountId: ID
     name: GraphQLString
     surname: GraphQLString
@@ -63,7 +79,8 @@ type Mutation
 {
     iamCreateUser(payload: IamCreateUserInput!): IamUser
     iamCreateUsers(payload: [IamCreateUserInput]!): Boolean!
-    iamUpdateUser(payload: IamUpdateUserInput! constraint: QueryStatement): IamUser
+    iamUpdateUserById(payload: IamUpdateUserByIdInput! constraint: QueryStatement): IamUser
+    iamUpdateUsers(payload: IamUpdateUsersInput! query: QueryStatement constraint: QueryStatement): [IamUser]!
     iamDeleteUserById(id: ID! constraint: QueryStatement): IamUser
     iamDeleteUsers(query: QueryStatement constraint: QueryStatement): [IamUser]!
 }

@@ -1,7 +1,8 @@
 // commands
 import { CreateApplicationCommandHandler } from './application/create/create-application.command-handler';
 import { CreateApplicationsCommandHandler } from './application/create/create-applications.command-handler';
-import { UpdateApplicationCommandHandler } from './application/update/update-application.command-handler';
+import { UpdateApplicationByIdCommandHandler } from './application/update/update-application-by-id.command-handler';
+import { UpdateApplicationsCommandHandler } from './application/update/update-applications.command-handler';
 import { DeleteApplicationByIdCommandHandler } from './application/delete/delete-application-by-id.command-handler';
 import { DeleteApplicationsCommandHandler } from './application/delete/delete-applications.command-handler';
 
@@ -16,6 +17,7 @@ import { FindApplicationByAuthorizationHeaderQueryHandler } from './application/
 import { CreatedApplicationEventHandler } from './application/events/created-application.event-handler';
 import { CreatedApplicationsEventHandler } from './application/events/created-applications.event-handler';
 import { UpdatedApplicationEventHandler } from './application/events/updated-application.event-handler';
+import { UpdatedApplicationsEventHandler } from './application/events/updated-applications.event-handler';
 import { DeletedApplicationEventHandler } from './application/events/deleted-application.event-handler';
 import { DeletedApplicationsEventHandler } from './application/events/deleted-applications.event-handler';
 
@@ -26,7 +28,8 @@ import { PaginateApplicationsService } from './application/paginate/paginate-app
 import { GetApplicationsService } from './application/get/get-applications.service';
 import { FindApplicationService } from './application/find/find-application.service';
 import { FindApplicationByIdService } from './application/find/find-application-by-id.service';
-import { UpdateApplicationService } from './application/update/update-application.service';
+import { UpdateApplicationByIdService } from './application/update/update-application-by-id.service';
+import { UpdateApplicationsService } from './application/update/update-applications.service';
 import { DeleteApplicationByIdService } from './application/delete/delete-application-by-id.service';
 import { DeleteApplicationsService } from './application/delete/delete-applications.service';
 import { FindApplicationByAuthorizationHeaderService } from './application/find/find-application-by-authorization-header.service';
@@ -46,7 +49,8 @@ export const OAuthApplicationHandlers = [
     // commands
     CreateApplicationCommandHandler,
     CreateApplicationsCommandHandler,
-    UpdateApplicationCommandHandler,
+    UpdateApplicationByIdCommandHandler,
+    UpdateApplicationsCommandHandler,
     DeleteApplicationByIdCommandHandler,
     DeleteApplicationsCommandHandler,
 
@@ -61,6 +65,7 @@ export const OAuthApplicationHandlers = [
     CreatedApplicationEventHandler,
     CreatedApplicationsEventHandler,
     UpdatedApplicationEventHandler,
+    UpdatedApplicationsEventHandler,
     DeletedApplicationEventHandler,
     DeletedApplicationsEventHandler,
 ];
@@ -72,7 +77,8 @@ export const OAuthApplicationServices = [
     GetApplicationsService,
     FindApplicationService,
     FindApplicationByIdService,
-    UpdateApplicationService,
+    UpdateApplicationByIdService,
+    UpdateApplicationsService,
     DeleteApplicationByIdService,
     DeleteApplicationsService,
     FindApplicationByAuthorizationHeaderService,

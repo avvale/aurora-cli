@@ -1,7 +1,8 @@
 // commands
 import { CreateUserCommandHandler } from './application/create/create-user.command-handler';
 import { CreateUsersCommandHandler } from './application/create/create-users.command-handler';
-import { UpdateUserCommandHandler } from './application/update/update-user.command-handler';
+import { UpdateUserByIdCommandHandler } from './application/update/update-user-by-id.command-handler';
+import { UpdateUsersCommandHandler } from './application/update/update-users.command-handler';
 import { DeleteUserByIdCommandHandler } from './application/delete/delete-user-by-id.command-handler';
 import { DeleteUsersCommandHandler } from './application/delete/delete-users.command-handler';
 
@@ -16,6 +17,7 @@ import { FindUserByUsernamePasswordQueryHandler } from './application/find/find-
 import { CreatedUserEventHandler } from './application/events/created-user.event-handler';
 import { CreatedUsersEventHandler } from './application/events/created-users.event-handler';
 import { UpdatedUserEventHandler } from './application/events/updated-user.event-handler';
+import { UpdatedUsersEventHandler } from './application/events/updated-users.event-handler';
 import { DeletedUserEventHandler } from './application/events/deleted-user.event-handler';
 import { DeletedUsersEventHandler } from './application/events/deleted-users.event-handler';
 
@@ -26,7 +28,8 @@ import { PaginateUsersService } from './application/paginate/paginate-users.serv
 import { GetUsersService } from './application/get/get-users.service';
 import { FindUserService } from './application/find/find-user.service';
 import { FindUserByIdService } from './application/find/find-user-by-id.service';
-import { UpdateUserService } from './application/update/update-user.service';
+import { UpdateUserByIdService } from './application/update/update-user-by-id.service';
+import { UpdateUsersService } from './application/update/update-users.service';
 import { DeleteUserByIdService } from './application/delete/delete-user-by-id.service';
 import { DeleteUsersService } from './application/delete/delete-users.service';
 import { FindUserByUsernamePasswordService } from './application/find/find-user-by-username-password.service';
@@ -45,7 +48,8 @@ export const IamUserHandlers = [
     // commands
     CreateUserCommandHandler,
     CreateUsersCommandHandler,
-    UpdateUserCommandHandler,
+    UpdateUserByIdCommandHandler,
+    UpdateUsersCommandHandler,
     DeleteUserByIdCommandHandler,
     DeleteUsersCommandHandler,
 
@@ -60,6 +64,7 @@ export const IamUserHandlers = [
     CreatedUserEventHandler,
     CreatedUsersEventHandler,
     UpdatedUserEventHandler,
+    UpdatedUsersEventHandler,
     DeletedUserEventHandler,
     DeletedUsersEventHandler,
 ];
@@ -71,7 +76,8 @@ export const IamUserServices = [
     GetUsersService,
     FindUserService,
     FindUserByIdService,
-    UpdateUserService,
+    UpdateUserByIdService,
+    UpdateUsersService,
     DeleteUserByIdService,
     DeleteUsersService,
     FindUserByUsernamePasswordService,

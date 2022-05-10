@@ -944,16 +944,16 @@ describe('client', () =>
             });
     });
 
-    test('/GraphQL oAuthUpdateClient - Got 404 Not Found', () =>
+    test('/GraphQL oAuthUpdateClientById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:OAuthUpdateClientInput!)
+                    mutation ($payload:OAuthUpdateClientByIdInput!)
                     {
-                        oAuthUpdateClient (payload:$payload)
+                        oAuthUpdateClientById (payload:$payload)
                         {
                             id
                             grantType
@@ -987,16 +987,16 @@ describe('client', () =>
             });
     });
 
-    test('/GraphQL oAuthUpdateClient', () =>
+    test('/GraphQL oAuthUpdateClientById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:OAuthUpdateClientInput!)
+                    mutation ($payload:OAuthUpdateClientByIdInput!)
                     {
-                        oAuthUpdateClient (payload:$payload)
+                        oAuthUpdateClientById (payload:$payload)
                         {
                             id
                             grantType
@@ -1024,7 +1024,53 @@ describe('client', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.oAuthUpdateClient.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.oAuthUpdateClientById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL oAuthUpdateClients', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:OAuthUpdateClientsInput! $query: QueryStatement)
+                    {
+                        oAuthUpdateClients (payload:$payload query:$query)
+                        {
+                            id
+                            grantType
+                            name
+                            secret
+                            authUrl
+                            redirect
+                            scopes
+                            expiredAccessToken
+                            expiredRefreshToken
+                            isActive
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.oAuthUpdateClients[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

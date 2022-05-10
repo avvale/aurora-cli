@@ -2,6 +2,8 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { OAuthApplication } from '../../domain/application.aggregate';
 import { CreatedApplicationEvent } from './created-application.event';
 import { CreatedApplicationsEvent } from './created-applications.event';
+import { UpdatedApplicationEvent } from './updated-application.event';
+import { UpdatedApplicationsEvent } from './updated-applications.event';
 import { DeletedApplicationEvent } from './deleted-application.event';
 import { DeletedApplicationsEvent } from './deleted-applications.event';
 
@@ -25,6 +27,27 @@ export class AddApplicationsContextEvent extends AggregateRoot
             new CreatedApplicationsEvent(
                 this.aggregateRoots.map(application =>
                     new CreatedApplicationEvent(
+                        application.id.value,
+                        application.name.value,
+                        application.code.value,
+                        application.secret.value,
+                        application.isMaster.value,
+                        application.clientIds?.value,
+                        application.createdAt?.value,
+                        application.updatedAt?.value,
+                        application.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updated(): void
+    {
+        this.apply(
+            new UpdatedApplicationsEvent(
+                this.aggregateRoots.map(application =>
+                    new UpdatedApplicationEvent(
                         application.id.value,
                         application.name.value,
                         application.code.value,

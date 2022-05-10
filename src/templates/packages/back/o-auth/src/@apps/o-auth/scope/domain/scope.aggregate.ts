@@ -85,7 +85,7 @@ export class OAuthScope extends AggregateRoot
     {
         this.apply(
             new UpdatedScopeEvent(
-                scope.id.value,
+                scope.id?.value,
                 scope.code?.value,
                 scope.name?.value,
                 scope.createdAt?.value,

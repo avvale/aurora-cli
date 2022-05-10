@@ -734,16 +734,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/GraphQL iamUpdateBoundedContext - Got 404 Not Found', () =>
+    test('/GraphQL iamUpdateBoundedContextById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateBoundedContextInput!)
+                    mutation ($payload:IamUpdateBoundedContextByIdInput!)
                     {
-                        iamUpdateBoundedContext (payload:$payload)
+                        iamUpdateBoundedContextById (payload:$payload)
                         {
                             id
                             name
@@ -771,16 +771,16 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/GraphQL iamUpdateBoundedContext', () =>
+    test('/GraphQL iamUpdateBoundedContextById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateBoundedContextInput!)
+                    mutation ($payload:IamUpdateBoundedContextByIdInput!)
                     {
-                        iamUpdateBoundedContext (payload:$payload)
+                        iamUpdateBoundedContextById (payload:$payload)
                         {
                             id
                             name
@@ -802,7 +802,47 @@ describe('bounded-context', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamUpdateBoundedContext.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamUpdateBoundedContextById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL iamUpdateBoundedContexts', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:IamUpdateBoundedContextsInput! $query: QueryStatement)
+                    {
+                        iamUpdateBoundedContexts (payload:$payload query:$query)
+                        {
+                            id
+                            name
+                            root
+                            sort
+                            isActive
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.iamUpdateBoundedContexts[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

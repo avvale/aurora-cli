@@ -77,16 +77,28 @@ export abstract class IRoleRepository implements IRepository<IamRole>
         }
     ): Promise<void>;
 
-    // update record
-    abstract update(
+    // update record by id
+    abstract updateById(
         role: IamRole,
         options?: {
-            updateOptions?: LiteralObject;
+            updateByIdOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamRole) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
+    abstract update(
+        role: IamRole,
+        options?: {
+            updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamRole) => LiteralObject;
         }
     ): Promise<void>;
 

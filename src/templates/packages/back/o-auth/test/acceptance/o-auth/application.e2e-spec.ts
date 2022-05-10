@@ -762,16 +762,16 @@ describe('application', () =>
             });
     });
 
-    test('/GraphQL oAuthUpdateApplication - Got 404 Not Found', () =>
+    test('/GraphQL oAuthUpdateApplicationById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:OAuthUpdateApplicationInput!)
+                    mutation ($payload:OAuthUpdateApplicationByIdInput!)
                     {
-                        oAuthUpdateApplication (payload:$payload)
+                        oAuthUpdateApplicationById (payload:$payload)
                         {
                             id
                             name
@@ -799,16 +799,16 @@ describe('application', () =>
             });
     });
 
-    test('/GraphQL oAuthUpdateApplication', () =>
+    test('/GraphQL oAuthUpdateApplicationById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:OAuthUpdateApplicationInput!)
+                    mutation ($payload:OAuthUpdateApplicationByIdInput!)
                     {
-                        oAuthUpdateApplication (payload:$payload)
+                        oAuthUpdateApplicationById (payload:$payload)
                         {
                             id
                             name
@@ -830,7 +830,47 @@ describe('application', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.oAuthUpdateApplication.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.oAuthUpdateApplicationById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL oAuthUpdateApplications', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:OAuthUpdateApplicationsInput! $query: QueryStatement)
+                    {
+                        oAuthUpdateApplications (payload:$payload query:$query)
+                        {
+                            id
+                            name
+                            code
+                            secret
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.oAuthUpdateApplications[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

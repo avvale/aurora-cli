@@ -19,9 +19,17 @@ input IamCreatePermissionInput
     roleIds: [ID]
 }
 
-input IamUpdatePermissionInput
+input IamUpdatePermissionByIdInput
 {
     id: ID!
+    name: GraphQLString
+    boundedContextId: ID
+    roleIds: [ID]
+}
+
+input IamUpdatePermissionsInput
+{
+    id: ID
     name: GraphQLString
     boundedContextId: ID
     roleIds: [ID]
@@ -39,7 +47,8 @@ type Mutation
 {
     iamCreatePermission(payload: IamCreatePermissionInput!): IamPermission
     iamCreatePermissions(payload: [IamCreatePermissionInput]!): Boolean!
-    iamUpdatePermission(payload: IamUpdatePermissionInput! constraint: QueryStatement): IamPermission
+    iamUpdatePermissionById(payload: IamUpdatePermissionByIdInput! constraint: QueryStatement): IamPermission
+    iamUpdatePermissions(payload: IamUpdatePermissionsInput! query: QueryStatement constraint: QueryStatement): [IamPermission]!
     iamDeletePermissionById(id: ID! constraint: QueryStatement): IamPermission
     iamDeletePermissions(query: QueryStatement constraint: QueryStatement): [IamPermission]!
 }

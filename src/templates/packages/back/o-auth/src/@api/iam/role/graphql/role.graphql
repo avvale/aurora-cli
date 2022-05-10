@@ -20,9 +20,18 @@ input IamCreateRoleInput
     accountIds: [ID]
 }
 
-input IamUpdateRoleInput
+input IamUpdateRoleByIdInput
 {
     id: ID!
+    name: GraphQLString
+    isMaster: GraphQLBoolean
+    permissionIds: [ID]
+    accountIds: [ID]
+}
+
+input IamUpdateRolesInput
+{
+    id: ID
     name: GraphQLString
     isMaster: GraphQLBoolean
     permissionIds: [ID]
@@ -41,7 +50,8 @@ type Mutation
 {
     iamCreateRole(payload: IamCreateRoleInput!): IamRole
     iamCreateRoles(payload: [IamCreateRoleInput]!): Boolean!
-    iamUpdateRole(payload: IamUpdateRoleInput! constraint: QueryStatement): IamRole
+    iamUpdateRoleById(payload: IamUpdateRoleByIdInput! constraint: QueryStatement): IamRole
+    iamUpdateRoles(payload: IamUpdateRolesInput! query: QueryStatement constraint: QueryStatement): [IamRole]!
     iamDeleteRoleById(id: ID! constraint: QueryStatement): IamRole
     iamDeleteRoles(query: QueryStatement constraint: QueryStatement): [IamRole]!
 }

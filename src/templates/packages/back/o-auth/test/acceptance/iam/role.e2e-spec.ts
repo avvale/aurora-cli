@@ -656,16 +656,16 @@ describe('role', () =>
             });
     });
 
-    test('/GraphQL iamUpdateRole - Got 404 Not Found', () =>
+    test('/GraphQL iamUpdateRoleById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateRoleInput!)
+                    mutation ($payload:IamUpdateRoleByIdInput!)
                     {
-                        iamUpdateRole (payload:$payload)
+                        iamUpdateRoleById (payload:$payload)
                         {
                             id
                             name
@@ -691,16 +691,16 @@ describe('role', () =>
             });
     });
 
-    test('/GraphQL iamUpdateRole', () =>
+    test('/GraphQL iamUpdateRoleById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateRoleInput!)
+                    mutation ($payload:IamUpdateRoleByIdInput!)
                     {
-                        iamUpdateRole (payload:$payload)
+                        iamUpdateRoleById (payload:$payload)
                         {
                             id
                             name
@@ -720,7 +720,45 @@ describe('role', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamUpdateRole.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamUpdateRoleById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL iamUpdateRoles', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:IamUpdateRolesInput! $query: QueryStatement)
+                    {
+                        iamUpdateRoles (payload:$payload query:$query)
+                        {
+                            id
+                            name
+                            isMaster
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ..._.omit(mockData[0], ['permissions']),
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.iamUpdateRoles[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

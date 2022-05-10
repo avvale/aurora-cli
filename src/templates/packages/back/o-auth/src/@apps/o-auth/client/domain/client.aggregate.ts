@@ -160,7 +160,7 @@ export class OAuthClient extends AggregateRoot
     {
         this.apply(
             new UpdatedClientEvent(
-                client.id.value,
+                client.id?.value,
                 client.grantType?.value,
                 client.name?.value,
                 client.secret?.value,

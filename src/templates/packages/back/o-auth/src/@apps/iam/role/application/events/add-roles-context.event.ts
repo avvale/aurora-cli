@@ -2,6 +2,8 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { IamRole } from '../../domain/role.aggregate';
 import { CreatedRoleEvent } from './created-role.event';
 import { CreatedRolesEvent } from './created-roles.event';
+import { UpdatedRoleEvent } from './updated-role.event';
+import { UpdatedRolesEvent } from './updated-roles.event';
 import { DeletedRoleEvent } from './deleted-role.event';
 import { DeletedRolesEvent } from './deleted-roles.event';
 
@@ -25,6 +27,26 @@ export class AddRolesContextEvent extends AggregateRoot
             new CreatedRolesEvent(
                 this.aggregateRoots.map(role =>
                     new CreatedRoleEvent(
+                        role.id.value,
+                        role.name.value,
+                        role.isMaster.value,
+                        role.permissionIds?.value,
+                        role.accountIds?.value,
+                        role.createdAt?.value,
+                        role.updatedAt?.value,
+                        role.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updated(): void
+    {
+        this.apply(
+            new UpdatedRolesEvent(
+                this.aggregateRoots.map(role =>
+                    new UpdatedRoleEvent(
                         role.id.value,
                         role.name.value,
                         role.isMaster.value,

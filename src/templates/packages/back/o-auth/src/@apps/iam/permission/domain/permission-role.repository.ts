@@ -77,7 +77,20 @@ export abstract class IPermissionRoleRepository implements IRepository<IamPermis
         }
     ): Promise<void>;
 
-    // update record
+    // update record by id
+    abstract updateById(
+        permission: IamPermissionRole,
+        options?: {
+            updateByIdOptions?: LiteralObject;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
+            // arguments to find object to update, with i18n we use langId and id relationship with parent entity
+            findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
     abstract update(
         permissionRole: IamPermissionRole,
         options?: {

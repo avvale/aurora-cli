@@ -77,16 +77,28 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
         }
     ): Promise<void>;
 
-    // update record
-    abstract update(
+    // update record by id
+    abstract updateById(
         tenant: IamTenant,
         options?: {
-            updateOptions?: LiteralObject;
+            updateByIdOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamTenant) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
+    abstract update(
+        tenant: IamTenant,
+        options?: {
+            updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamTenant) => LiteralObject;
         }
     ): Promise<void>;
 

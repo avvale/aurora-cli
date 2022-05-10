@@ -1,7 +1,8 @@
 // commands
 import { CreateClientCommandHandler } from './application/create/create-client.command-handler';
 import { CreateClientsCommandHandler } from './application/create/create-clients.command-handler';
-import { UpdateClientCommandHandler } from './application/update/update-client.command-handler';
+import { UpdateClientByIdCommandHandler } from './application/update/update-client-by-id.command-handler';
+import { UpdateClientsCommandHandler } from './application/update/update-clients.command-handler';
 import { DeleteClientByIdCommandHandler } from './application/delete/delete-client-by-id.command-handler';
 import { DeleteClientsCommandHandler } from './application/delete/delete-clients.command-handler';
 
@@ -15,6 +16,7 @@ import { FindClientByIdQueryHandler } from './application/find/find-client-by-id
 import { CreatedClientEventHandler } from './application/events/created-client.event-handler';
 import { CreatedClientsEventHandler } from './application/events/created-clients.event-handler';
 import { UpdatedClientEventHandler } from './application/events/updated-client.event-handler';
+import { UpdatedClientsEventHandler } from './application/events/updated-clients.event-handler';
 import { DeletedClientEventHandler } from './application/events/deleted-client.event-handler';
 import { DeletedClientsEventHandler } from './application/events/deleted-clients.event-handler';
 
@@ -25,7 +27,8 @@ import { PaginateClientsService } from './application/paginate/paginate-clients.
 import { GetClientsService } from './application/get/get-clients.service';
 import { FindClientService } from './application/find/find-client.service';
 import { FindClientByIdService } from './application/find/find-client-by-id.service';
-import { UpdateClientService } from './application/update/update-client.service';
+import { UpdateClientByIdService } from './application/update/update-client-by-id.service';
+import { UpdateClientsService } from './application/update/update-clients.service';
 import { DeleteClientByIdService } from './application/delete/delete-client-by-id.service';
 import { DeleteClientsService } from './application/delete/delete-clients.service';
 
@@ -43,7 +46,8 @@ export const OAuthClientHandlers = [
     // commands
     CreateClientCommandHandler,
     CreateClientsCommandHandler,
-    UpdateClientCommandHandler,
+    UpdateClientByIdCommandHandler,
+    UpdateClientsCommandHandler,
     DeleteClientByIdCommandHandler,
     DeleteClientsCommandHandler,
 
@@ -57,6 +61,7 @@ export const OAuthClientHandlers = [
     CreatedClientEventHandler,
     CreatedClientsEventHandler,
     UpdatedClientEventHandler,
+    UpdatedClientsEventHandler,
     DeletedClientEventHandler,
     DeletedClientsEventHandler,
 ];
@@ -68,7 +73,8 @@ export const OAuthClientServices = [
     GetClientsService,
     FindClientService,
     FindClientByIdService,
-    UpdateClientService,
+    UpdateClientByIdService,
+    UpdateClientsService,
     DeleteClientByIdService,
     DeleteClientsService,
 ];

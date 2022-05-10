@@ -21,9 +21,18 @@ input OAuthCreateRefreshTokenInput
     expiresAt: GraphQLTimestamp
 }
 
-input OAuthUpdateRefreshTokenInput
+input OAuthUpdateRefreshTokenByIdInput
 {
     id: ID!
+    accessTokenId: ID
+    token: GraphQLString
+    isRevoked: GraphQLBoolean
+    expiresAt: GraphQLTimestamp
+}
+
+input OAuthUpdateRefreshTokensInput
+{
+    id: ID
     accessTokenId: ID
     token: GraphQLString
     isRevoked: GraphQLBoolean

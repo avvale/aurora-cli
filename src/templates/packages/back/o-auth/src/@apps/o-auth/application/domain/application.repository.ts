@@ -77,16 +77,28 @@ export abstract class IApplicationRepository implements IRepository<OAuthApplica
         }
     ): Promise<void>;
 
-    // update record
-    abstract update(
+    // update record by id
+    abstract updateById(
         application: OAuthApplication,
         options?: {
-            updateOptions?: LiteralObject;
+            updateByIdOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: OAuthApplication) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
+    abstract update(
+        application: OAuthApplication,
+        options?: {
+            updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthApplication) => LiteralObject;
         }
     ): Promise<void>;
 

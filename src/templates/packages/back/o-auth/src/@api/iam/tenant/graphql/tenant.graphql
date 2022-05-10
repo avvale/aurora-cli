@@ -24,9 +24,20 @@ input IamCreateTenantInput
     accountIds: [ID]
 }
 
-input IamUpdateTenantInput
+input IamUpdateTenantByIdInput
 {
     id: ID!
+    name: GraphQLString
+    code: GraphQLString
+    logo: GraphQLString
+    isActive: GraphQLBoolean
+    data: JSON
+    accountIds: [ID]
+}
+
+input IamUpdateTenantsInput
+{
+    id: ID
     name: GraphQLString
     code: GraphQLString
     logo: GraphQLString
@@ -47,7 +58,8 @@ type Mutation
 {
     iamCreateTenant(payload: IamCreateTenantInput!): IamTenant
     iamCreateTenants(payload: [IamCreateTenantInput]!): Boolean!
-    iamUpdateTenant(payload: IamUpdateTenantInput! constraint: QueryStatement): IamTenant
+    iamUpdateTenantById(payload: IamUpdateTenantByIdInput! constraint: QueryStatement): IamTenant
+    iamUpdateTenants(payload: IamUpdateTenantsInput! query: QueryStatement constraint: QueryStatement): [IamTenant]!
     iamDeleteTenantById(id: ID! constraint: QueryStatement): IamTenant
     iamDeleteTenants(query: QueryStatement constraint: QueryStatement): [IamTenant]!
 }

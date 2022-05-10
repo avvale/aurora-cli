@@ -40,9 +40,25 @@ input OAuthCreateClientInput
     applicationIds: [ID]
 }
 
-input OAuthUpdateClientInput
+input OAuthUpdateClientByIdInput
 {
     id: ID!
+    grantType: OAuthClientGrantType
+    name: GraphQLString
+    secret: GraphQLString
+    authUrl: GraphQLString
+    redirect: GraphQLString
+    scopes: JSON
+    expiredAccessToken: GraphQLInt
+    expiredRefreshToken: GraphQLInt
+    isActive: GraphQLBoolean
+    isMaster: GraphQLBoolean
+    applicationIds: [ID]
+}
+
+input OAuthUpdateClientsInput
+{
+    id: ID
     grantType: OAuthClientGrantType
     name: GraphQLString
     secret: GraphQLString
@@ -68,7 +84,8 @@ type Mutation
 {
     oAuthCreateClient(payload: OAuthCreateClientInput!): OAuthClient
     oAuthCreateClients(payload: [OAuthCreateClientInput]!): Boolean!
-    oAuthUpdateClient(payload: OAuthUpdateClientInput! constraint: QueryStatement): OAuthClient
+    oAuthUpdateClientById(payload: OAuthUpdateClientByIdInput! constraint: QueryStatement): OAuthClient
+    oAuthUpdateClients(payload: OAuthUpdateClientsInput! query: QueryStatement constraint: QueryStatement): [OAuthClient]!
     oAuthDeleteClientById(id: ID! constraint: QueryStatement): OAuthClient
     oAuthDeleteClients(query: QueryStatement constraint: QueryStatement): [OAuthClient]!
 }

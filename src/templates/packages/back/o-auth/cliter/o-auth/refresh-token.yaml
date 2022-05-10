@@ -40,37 +40,50 @@ aggregateProperties:
     type: timestamp
     nullable: true
 excluded:
-  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.ts
-  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.spec.ts
-  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.command.ts
-  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.service.ts
-  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.service.spec.ts
-  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token.command.ts
-  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token.command-handler.ts
-  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token.command-handler.spec.ts
-  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token.service.ts
-  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token.service.spec.ts
-  - src/@apps/o-auth/refresh-token/application/events/created-refresh-tokens.event-handler.ts
-  - src/@apps/o-auth/refresh-token/application/events/created-refresh-tokens.event.ts
-  - src/@apps/o-auth/refresh-token/application/events/updated-refresh-token.event-handler.ts
-  - src/@apps/o-auth/refresh-token/application/events/updated-refresh-token.event.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.spec.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-tokens.controller.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-tokens.controller.spec.ts
-  - src/@api/o-auth/refresh-token/controllers/o-auth-update-refresh-token.controller.spec.ts
-  - src/@api/o-auth/refresh-token/controllers/o-auth-update-refresh-token.controller.ts
-  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-token.resolver.ts
-  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-token.resolver.spec.ts
-  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-tokens.resolver.ts
-  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-tokens.resolver.spec.ts
-  - src/@api/o-auth/refresh-token/resolvers/o-auth-update-refresh-token.resolver.spec.ts
-  - src/@api/o-auth/refresh-token/resolvers/o-auth-update-refresh-token.resolver.ts
+  - src/@api/o-auth/refresh-token/controllers/o-auth-update-refresh-token-by-id.controller.spec.ts
+  - src/@api/o-auth/refresh-token/controllers/o-auth-update-refresh-token-by-id.controller.ts
+  - src/@api/o-auth/refresh-token/controllers/o-auth-update-refresh-tokens.controller.spec.ts
+  - src/@api/o-auth/refresh-token/controllers/o-auth-update-refresh-tokens.controller.ts
   - src/@api/o-auth/refresh-token/handlers/o-auth-create-refresh-token.handler.ts
   - src/@api/o-auth/refresh-token/handlers/o-auth-create-refresh-token.handler.spec.ts
   - src/@api/o-auth/refresh-token/handlers/o-auth-create-refresh-tokens.handler.ts
   - src/@api/o-auth/refresh-token/handlers/o-auth-create-refresh-tokens.handler.spec.ts
-  - src/@api/o-auth/refresh-token/handlers/o-auth-update-refresh-token.handler.ts
-  - src/@api/o-auth/refresh-token/handlers/o-auth-update-refresh-token.handler.spec.ts
+  - src/@api/o-auth/refresh-token/handlers/o-auth-update-refresh-token-by-id.handler.spec.ts
+  - src/@api/o-auth/refresh-token/handlers/o-auth-update-refresh-token-by-id.handler.ts
+  - src/@api/o-auth/refresh-token/handlers/o-auth-update-refresh-tokens.handler.spec.ts
+  - src/@api/o-auth/refresh-token/handlers/o-auth-update-refresh-tokens.handler.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-token.resolver.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-token.resolver.spec.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-tokens.resolver.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-create-refresh-tokens.resolver.spec.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-update-refresh-token-by-id.resolver.spec.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-update-refresh-token-by-id.resolver.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-update-refresh-tokens.resolver.spec.ts
+  - src/@api/o-auth/refresh-token/resolvers/o-auth-update-refresh-tokens.resolver.ts
+  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.spec.ts
+  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.command-handler.ts
+  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.command.ts
+  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.service.spec.ts
+  - src/@apps/o-auth/refresh-token/application/create/create-refresh-tokens.service.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token-by-id.command-handler.spec.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token-by-id.command-handler.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token-by-id.command.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token-by-id.service.spec.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-token-by-id.service.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-tokens.command-handler.spec.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-tokens.command-handler.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-tokens.command.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-tokens.service.spec.ts
+  - src/@apps/o-auth/refresh-token/application/update/update-refresh-tokens.service.ts
+  - src/@apps/o-auth/refresh-token/application/events/created-refresh-tokens.event-handler.ts
+  - src/@apps/o-auth/refresh-token/application/events/created-refresh-tokens.event.ts
+  - src/@apps/o-auth/refresh-token/application/events/updated-refresh-token.event-handler.ts
+  - src/@apps/o-auth/refresh-token/application/events/updated-refresh-token.event.ts
+  - src/@apps/o-auth/refresh-token/application/events/updated-refresh-tokens.event-handler.ts
+  - src/@apps/o-auth/refresh-token/application/events/updated-refresh-tokens.event.ts
   - src/@api/o-auth/refresh-token/seeder/seeder.ts
   - src/@api/o-auth/refresh-token/seeder/seeder.module.ts

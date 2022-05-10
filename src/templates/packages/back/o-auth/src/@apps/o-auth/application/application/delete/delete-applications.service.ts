@@ -19,7 +19,7 @@ export class DeleteApplicationsService
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        // get object to delete
+        // get objects to delete
         const applications = await this.repository.get({ queryStatement, constraint, cQMetadata });
 
         await this.repository.delete({
@@ -31,7 +31,9 @@ export class DeleteApplicationsService
 
         // create AddApplicationsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const applicationsRegistered = this.publisher.mergeObjectContext(new AddApplicationsContextEvent(applications));
+        const applicationsRegistered = this.publisher.mergeObjectContext(
+            new AddApplicationsContextEvent(applications),
+        );
 
         applicationsRegistered.deleted(); // apply event to model events
         applicationsRegistered.commit(); // commit all events of model

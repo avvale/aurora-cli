@@ -22,9 +22,19 @@ input OAuthCreateApplicationInput
     clientIds: [ID]
 }
 
-input OAuthUpdateApplicationInput
+input OAuthUpdateApplicationByIdInput
 {
     id: ID!
+    name: GraphQLString
+    code: GraphQLString
+    secret: GraphQLString
+    isMaster: GraphQLBoolean
+    clientIds: [ID]
+}
+
+input OAuthUpdateApplicationsInput
+{
+    id: ID
     name: GraphQLString
     code: GraphQLString
     secret: GraphQLString
@@ -44,7 +54,8 @@ type Mutation
 {
     oAuthCreateApplication(payload: OAuthCreateApplicationInput!): OAuthApplication
     oAuthCreateApplications(payload: [OAuthCreateApplicationInput]!): Boolean!
-    oAuthUpdateApplication(payload: OAuthUpdateApplicationInput! constraint: QueryStatement): OAuthApplication
+    oAuthUpdateApplicationById(payload: OAuthUpdateApplicationByIdInput! constraint: QueryStatement): OAuthApplication
+    oAuthUpdateApplications(payload: OAuthUpdateApplicationsInput! query: QueryStatement constraint: QueryStatement): [OAuthApplication]!
     oAuthDeleteApplicationById(id: ID! constraint: QueryStatement): OAuthApplication
     oAuthDeleteApplications(query: QueryStatement constraint: QueryStatement): [OAuthApplication]!
 }

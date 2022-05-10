@@ -907,16 +907,16 @@ describe('user', () =>
             });
     });
 
-    test('/GraphQL iamUpdateUser - Got 404 Not Found', () =>
+    test('/GraphQL iamUpdateUserById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateUserInput!)
+                    mutation ($payload:IamUpdateUserByIdInput!)
                     {
-                        iamUpdateUser (payload:$payload)
+                        iamUpdateUserById (payload:$payload)
                         {
                             id
                             accountId
@@ -951,16 +951,16 @@ describe('user', () =>
             });
     });
 
-    test('/GraphQL iamUpdateUser', () =>
+    test('/GraphQL iamUpdateUserById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateUserInput!)
+                    mutation ($payload:IamUpdateUserByIdInput!)
                     {
-                        iamUpdateUser (payload:$payload)
+                        iamUpdateUserById (payload:$payload)
                         {
                             id
                             accountId
@@ -990,7 +990,55 @@ describe('user', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamUpdateUser.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamUpdateUserById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL iamUpdateUsers', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:IamUpdateUsersInput! $query: QueryStatement)
+                    {
+                        iamUpdateUsers (payload:$payload query:$query)
+                        {
+                            id
+                            accountId
+                            name
+                            surname
+                            code
+                            avatar
+                            mobile
+                            langId
+                            username
+                            password
+                            rememberToken
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        username: 'john.***@gmail.com',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.iamUpdateUsers[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

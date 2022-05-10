@@ -27,7 +27,7 @@ input OAuthCreateAccessTokenInput
     refreshToken: OAuthCreateRefreshTokenInput
 }
 
-input OAuthUpdateAccessTokenInput
+input OAuthUpdateAccessTokenByIdInput
 {
     id: ID!
     clientId: ID
@@ -36,7 +36,19 @@ input OAuthUpdateAccessTokenInput
     name: GraphQLString
     isRevoked: GraphQLBoolean
     expiresAt: GraphQLTimestamp
-    refreshToken: OAuthUpdateRefreshTokenInput
+    refreshToken: OAuthUpdateRefreshTokenByIdInput
+}
+
+input OAuthUpdateAccessTokensInput
+{
+    id: ID
+    clientId: ID
+    accountId: ID
+    token: GraphQLString
+    name: GraphQLString
+    isRevoked: GraphQLBoolean
+    expiresAt: GraphQLTimestamp
+    refreshToken: OAuthUpdateRefreshTokensInput
 }
 
 type Query

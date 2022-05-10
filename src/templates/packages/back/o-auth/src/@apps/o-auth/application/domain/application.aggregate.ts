@@ -112,7 +112,7 @@ export class OAuthApplication extends AggregateRoot
     {
         this.apply(
             new UpdatedApplicationEvent(
-                application.id.value,
+                application.id?.value,
                 application.name?.value,
                 application.code?.value,
                 application.secret?.value,

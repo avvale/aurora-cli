@@ -5,7 +5,8 @@ import { IamPaginateRolesController } from './controllers/iam-paginate-roles.con
 import { IamGetRolesController } from './controllers/iam-get-roles.controller';
 import { IamFindRoleByIdController } from './controllers/iam-find-role-by-id.controller';
 import { IamFindRoleController } from './controllers/iam-find-role.controller';
-import { IamUpdateRoleController } from './controllers/iam-update-role.controller';
+import { IamUpdateRoleByIdController } from './controllers/iam-update-role-by-id.controller';
+import { IamUpdateRolesController } from './controllers/iam-update-roles.controller';
 import { IamDeleteRoleByIdController } from './controllers/iam-delete-role-by-id.controller';
 import { IamDeleteRolesController } from './controllers/iam-delete-roles.controller';
 
@@ -16,7 +17,8 @@ import { IamPaginateRolesResolver } from './resolvers/iam-paginate-roles.resolve
 import { IamGetRolesResolver } from './resolvers/iam-get-roles.resolver';
 import { IamFindRoleByIdResolver } from './resolvers/iam-find-role-by-id.resolver';
 import { IamFindRoleResolver } from './resolvers/iam-find-role.resolver';
-import { IamUpdateRoleResolver } from './resolvers/iam-update-role.resolver';
+import { IamUpdateRoleByIdResolver } from './resolvers/iam-update-role-by-id.resolver';
+import { IamUpdateRolesResolver } from './resolvers/iam-update-roles.resolver';
 import { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
 import { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
 
@@ -27,7 +29,8 @@ import { IamPaginateRolesHandler } from './handlers/iam-paginate-roles.handler';
 import { IamGetRolesHandler } from './handlers/iam-get-roles.handler';
 import { IamFindRoleByIdHandler } from './handlers/iam-find-role-by-id.handler';
 import { IamFindRoleHandler } from './handlers/iam-find-role.handler';
-import { IamUpdateRoleHandler } from './handlers/iam-update-role.handler';
+import { IamUpdateRoleByIdHandler } from './handlers/iam-update-role-by-id.handler';
+import { IamUpdateRolesHandler } from './handlers/iam-update-roles.handler';
 import { IamDeleteRoleByIdHandler } from './handlers/iam-delete-role-by-id.handler';
 import { IamDeleteRolesHandler } from './handlers/iam-delete-roles.handler';
 
@@ -38,7 +41,8 @@ export const IamRoleControllers = [
     IamGetRolesController,
     IamFindRoleByIdController,
     IamFindRoleController,
-    IamUpdateRoleController,
+    IamUpdateRoleByIdController,
+    IamUpdateRolesController,
     IamDeleteRoleByIdController,
     IamDeleteRolesController,
 ];
@@ -50,7 +54,8 @@ export const IamRoleResolvers = [
     IamGetRolesResolver,
     IamFindRoleByIdResolver,
     IamFindRoleResolver,
-    IamUpdateRoleResolver,
+    IamUpdateRoleByIdResolver,
+    IamUpdateRolesResolver,
     IamDeleteRoleByIdResolver,
     IamDeleteRolesResolver,
 ];
@@ -62,7 +67,8 @@ export const IamRoleApiHandlers = [
     IamGetRolesHandler,
     IamFindRoleByIdHandler,
     IamFindRoleHandler,
-    IamUpdateRoleHandler,
+    IamUpdateRoleByIdHandler,
+    IamUpdateRolesHandler,
     IamDeleteRoleByIdHandler,
     IamDeleteRolesHandler,
 ];

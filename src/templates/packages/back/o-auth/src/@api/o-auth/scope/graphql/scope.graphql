@@ -16,9 +16,16 @@ input OAuthCreateScopeInput
     name: GraphQLString!
 }
 
-input OAuthUpdateScopeInput
+input OAuthUpdateScopeByIdInput
 {
     id: ID!
+    code: GraphQLString
+    name: GraphQLString
+}
+
+input OAuthUpdateScopesInput
+{
+    id: ID
     code: GraphQLString
     name: GraphQLString
 }
@@ -35,7 +42,8 @@ type Mutation
 {
     oAuthCreateScope(payload: OAuthCreateScopeInput!): OAuthScope
     oAuthCreateScopes(payload: [OAuthCreateScopeInput]!): Boolean!
-    oAuthUpdateScope(payload: OAuthUpdateScopeInput! constraint: QueryStatement): OAuthScope
+    oAuthUpdateScopeById(payload: OAuthUpdateScopeByIdInput! constraint: QueryStatement): OAuthScope
+    oAuthUpdateScopes(payload: OAuthUpdateScopesInput! query: QueryStatement constraint: QueryStatement): [OAuthScope]!
     oAuthDeleteScopeById(id: ID! constraint: QueryStatement): OAuthScope
     oAuthDeleteScopes(query: QueryStatement constraint: QueryStatement): [OAuthScope]!
 }

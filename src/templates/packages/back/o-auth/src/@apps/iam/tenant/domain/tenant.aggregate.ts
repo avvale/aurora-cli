@@ -119,7 +119,7 @@ export class IamTenant extends AggregateRoot
     {
         this.apply(
             new UpdatedTenantEvent(
-                tenant.id.value,
+                tenant.id?.value,
                 tenant.name?.value,
                 tenant.code?.value,
                 tenant.logo?.value,

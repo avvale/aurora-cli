@@ -111,7 +111,7 @@ export class IamRole extends AggregateRoot
     {
         this.apply(
             new UpdatedRoleEvent(
-                role.id.value,
+                role.id?.value,
                 role.name?.value,
                 role.isMaster?.value,
                 role.permissionIds?.value,

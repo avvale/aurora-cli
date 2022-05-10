@@ -100,6 +100,7 @@ export class OAuthRefreshToken extends AggregateRoot
         );
     }
 
+
     deleted(refreshToken: OAuthRefreshToken): void
     {
         this.apply(

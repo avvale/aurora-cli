@@ -709,16 +709,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/GraphQL iamUpdateTenant - Got 404 Not Found', () =>
+    test('/GraphQL iamUpdateTenantById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateTenantInput!)
+                    mutation ($payload:IamUpdateTenantByIdInput!)
                     {
-                        iamUpdateTenant (payload:$payload)
+                        iamUpdateTenantById (payload:$payload)
                         {
                             id
                             name
@@ -747,16 +747,16 @@ describe('tenant', () =>
             });
     });
 
-    test('/GraphQL iamUpdateTenant', () =>
+    test('/GraphQL iamUpdateTenantById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:IamUpdateTenantInput!)
+                    mutation ($payload:IamUpdateTenantByIdInput!)
                     {
-                        iamUpdateTenant (payload:$payload)
+                        iamUpdateTenantById (payload:$payload)
                         {
                             id
                             name
@@ -779,7 +779,48 @@ describe('tenant', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamUpdateTenant.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamUpdateTenantById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL iamUpdateTenants', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:IamUpdateTenantsInput! $query: QueryStatement)
+                    {
+                        iamUpdateTenants (payload:$payload query:$query)
+                        {
+                            id
+                            name
+                            code
+                            logo
+                            isActive
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.iamUpdateTenants[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

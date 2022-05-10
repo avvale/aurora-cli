@@ -21,9 +21,18 @@ input IamCreateBoundedContextInput
     isActive: GraphQLBoolean!
 }
 
-input IamUpdateBoundedContextInput
+input IamUpdateBoundedContextByIdInput
 {
     id: ID!
+    name: GraphQLString
+    root: GraphQLString
+    sort: GraphQLInt
+    isActive: GraphQLBoolean
+}
+
+input IamUpdateBoundedContextsInput
+{
+    id: ID
     name: GraphQLString
     root: GraphQLString
     sort: GraphQLInt
@@ -42,7 +51,8 @@ type Mutation
 {
     iamCreateBoundedContext(payload: IamCreateBoundedContextInput!): IamBoundedContext
     iamCreateBoundedContexts(payload: [IamCreateBoundedContextInput]!): Boolean!
-    iamUpdateBoundedContext(payload: IamUpdateBoundedContextInput! constraint: QueryStatement): IamBoundedContext
+    iamUpdateBoundedContextById(payload: IamUpdateBoundedContextByIdInput! constraint: QueryStatement): IamBoundedContext
+    iamUpdateBoundedContexts(payload: IamUpdateBoundedContextsInput! query: QueryStatement constraint: QueryStatement): [IamBoundedContext]!
     iamDeleteBoundedContextById(id: ID! constraint: QueryStatement): IamBoundedContext
     iamDeleteBoundedContexts(query: QueryStatement constraint: QueryStatement): [IamBoundedContext]!
 }

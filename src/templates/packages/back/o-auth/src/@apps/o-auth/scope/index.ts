@@ -1,7 +1,8 @@
 // commands
 import { CreateScopeCommandHandler } from './application/create/create-scope.command-handler';
 import { CreateScopesCommandHandler } from './application/create/create-scopes.command-handler';
-import { UpdateScopeCommandHandler } from './application/update/update-scope.command-handler';
+import { UpdateScopeByIdCommandHandler } from './application/update/update-scope-by-id.command-handler';
+import { UpdateScopesCommandHandler } from './application/update/update-scopes.command-handler';
 import { DeleteScopeByIdCommandHandler } from './application/delete/delete-scope-by-id.command-handler';
 import { DeleteScopesCommandHandler } from './application/delete/delete-scopes.command-handler';
 
@@ -15,6 +16,7 @@ import { FindScopeByIdQueryHandler } from './application/find/find-scope-by-id.q
 import { CreatedScopeEventHandler } from './application/events/created-scope.event-handler';
 import { CreatedScopesEventHandler } from './application/events/created-scopes.event-handler';
 import { UpdatedScopeEventHandler } from './application/events/updated-scope.event-handler';
+import { UpdatedScopesEventHandler } from './application/events/updated-scopes.event-handler';
 import { DeletedScopeEventHandler } from './application/events/deleted-scope.event-handler';
 import { DeletedScopesEventHandler } from './application/events/deleted-scopes.event-handler';
 
@@ -25,7 +27,8 @@ import { PaginateScopesService } from './application/paginate/paginate-scopes.se
 import { GetScopesService } from './application/get/get-scopes.service';
 import { FindScopeService } from './application/find/find-scope.service';
 import { FindScopeByIdService } from './application/find/find-scope-by-id.service';
-import { UpdateScopeService } from './application/update/update-scope.service';
+import { UpdateScopeByIdService } from './application/update/update-scope-by-id.service';
+import { UpdateScopesService } from './application/update/update-scopes.service';
 import { DeleteScopeByIdService } from './application/delete/delete-scope-by-id.service';
 import { DeleteScopesService } from './application/delete/delete-scopes.service';
 
@@ -43,7 +46,8 @@ export const OAuthScopeHandlers = [
     // commands
     CreateScopeCommandHandler,
     CreateScopesCommandHandler,
-    UpdateScopeCommandHandler,
+    UpdateScopeByIdCommandHandler,
+    UpdateScopesCommandHandler,
     DeleteScopeByIdCommandHandler,
     DeleteScopesCommandHandler,
 
@@ -57,6 +61,7 @@ export const OAuthScopeHandlers = [
     CreatedScopeEventHandler,
     CreatedScopesEventHandler,
     UpdatedScopeEventHandler,
+    UpdatedScopesEventHandler,
     DeletedScopeEventHandler,
     DeletedScopesEventHandler,
 ];
@@ -68,7 +73,8 @@ export const OAuthScopeServices = [
     GetScopesService,
     FindScopeService,
     FindScopeByIdService,
-    UpdateScopeService,
+    UpdateScopeByIdService,
+    UpdateScopesService,
     DeleteScopeByIdService,
     DeleteScopesService,
 ];

@@ -41,7 +41,7 @@ input IamCreateAccountInput
     user: IamCreateUserInput
 }
 
-input IamUpdateAccountInput
+input IamUpdateAccountByIdInput
 {
     id: ID!
     type: IamAccountType
@@ -55,7 +55,24 @@ input IamUpdateAccountInput
     data: JSON
     roleIds: [ID]
     tenantIds: [ID]
-    user: IamUpdateUserInput
+    user: IamUpdateUserByIdInput
+}
+
+input IamUpdateAccountsInput
+{
+    id: ID
+    type: IamAccountType
+    email: GraphQLString
+    isActive: GraphQLBoolean
+    clientId: ID
+    dApplicationCodes: JSON
+    dPermissions: JSON
+    dTenants: JSON
+    dScopes: JSON
+    data: JSON
+    roleIds: [ID]
+    tenantIds: [ID]
+    user: IamUpdateUsersInput
 }
 
 type Query
@@ -71,7 +88,8 @@ type Mutation
 {
     iamCreateAccount(payload: IamCreateAccountInput!): IamAccount
     iamCreateAccounts(payload: [IamCreateAccountInput]!): Boolean!
-    iamUpdateAccount(payload: IamUpdateAccountInput! constraint: QueryStatement): IamAccount
+    iamUpdateAccountById(payload: IamUpdateAccountByIdInput! constraint: QueryStatement): IamAccount
+    iamUpdateAccounts(payload: IamUpdateAccountsInput! query: QueryStatement constraint: QueryStatement): [IamAccount]!
     iamDeleteAccountById(id: ID! constraint: QueryStatement): IamAccount
     iamDeleteAccounts(query: QueryStatement constraint: QueryStatement): [IamAccount]!
 }

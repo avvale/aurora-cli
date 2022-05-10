@@ -19,7 +19,7 @@ export class DeleteBoundedContextsService
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        // get object to delete
+        // get objects to delete
         const boundedContexts = await this.repository.get({ queryStatement, constraint, cQMetadata });
 
         await this.repository.delete({
@@ -31,7 +31,9 @@ export class DeleteBoundedContextsService
 
         // create AddBoundedContextsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const boundedContextsRegistered = this.publisher.mergeObjectContext(new AddBoundedContextsContextEvent(boundedContexts));
+        const boundedContextsRegistered = this.publisher.mergeObjectContext(
+            new AddBoundedContextsContextEvent(boundedContexts),
+        );
 
         boundedContextsRegistered.deleted(); // apply event to model events
         boundedContextsRegistered.commit(); // commit all events of model

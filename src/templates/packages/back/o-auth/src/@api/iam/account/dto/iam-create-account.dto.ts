@@ -36,7 +36,7 @@ export class IamCreateAccountDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : '3418b31f-2022-4d7f-ac97-7550de213d20',
+        example    : 'ac984c1e-6750-43ca-8180-d60a1bac7841',
     })
     clientId: string;
 

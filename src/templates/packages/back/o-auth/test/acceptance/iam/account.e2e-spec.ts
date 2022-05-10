@@ -908,7 +908,7 @@ describe('account', () =>
             });
     });
 
-    test('/GraphQL iamUpdateAccount - Got 404 Not Found', () =>
+    test('/GraphQL iamUpdateAccountById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -916,9 +916,9 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
-                    mutation ($payload:IamUpdateAccountInput!)
+                    mutation ($payload:IamUpdateAccountByIdInput!)
                     {
-                        iamUpdateAccount (payload:$payload)
+                        iamUpdateAccountById (payload:$payload)
                         {
                             id
                             type
@@ -951,7 +951,7 @@ describe('account', () =>
             });
     });
 
-    test('/GraphQL iamUpdateAccount', () =>
+    test('/GraphQL iamUpdateAccountById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -959,9 +959,9 @@ describe('account', () =>
             .set('Authorization', `Bearer ${credential.accessToken}`)
             .send({
                 query: `
-                    mutation ($payload:IamUpdateAccountInput!)
+                    mutation ($payload:IamUpdateAccountByIdInput!)
                     {
-                        iamUpdateAccount (payload:$payload)
+                        iamUpdateAccountById (payload:$payload)
                         {
                             id
                             type
@@ -990,7 +990,55 @@ describe('account', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.iamUpdateAccount.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.iamUpdateAccountById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL iamUpdateAccounts', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${credential.accessToken}`)
+            .send({
+                query: `
+                    mutation ($payload:IamUpdateAccountsInput! $query: QueryStatement)
+                    {
+                        iamUpdateAccounts (payload:$payload query:$query)
+                        {
+                            id
+                            type
+                            email
+                            isActive
+                            clientId
+                            dApplicationCodes
+                            dPermissions
+                            dTenants
+                            dScopes
+                            data
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        type: IamAccountType.SERVICE,
+                        email: 'other@gmail.com',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.iamUpdateAccounts[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

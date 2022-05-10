@@ -1,7 +1,8 @@
 // commands
 import { CreateBoundedContextCommandHandler } from './application/create/create-bounded-context.command-handler';
 import { CreateBoundedContextsCommandHandler } from './application/create/create-bounded-contexts.command-handler';
-import { UpdateBoundedContextCommandHandler } from './application/update/update-bounded-context.command-handler';
+import { UpdateBoundedContextByIdCommandHandler } from './application/update/update-bounded-context-by-id.command-handler';
+import { UpdateBoundedContextsCommandHandler } from './application/update/update-bounded-contexts.command-handler';
 import { DeleteBoundedContextByIdCommandHandler } from './application/delete/delete-bounded-context-by-id.command-handler';
 import { DeleteBoundedContextsCommandHandler } from './application/delete/delete-bounded-contexts.command-handler';
 
@@ -15,6 +16,7 @@ import { FindBoundedContextByIdQueryHandler } from './application/find/find-boun
 import { CreatedBoundedContextEventHandler } from './application/events/created-bounded-context.event-handler';
 import { CreatedBoundedContextsEventHandler } from './application/events/created-bounded-contexts.event-handler';
 import { UpdatedBoundedContextEventHandler } from './application/events/updated-bounded-context.event-handler';
+import { UpdatedBoundedContextsEventHandler } from './application/events/updated-bounded-contexts.event-handler';
 import { DeletedBoundedContextEventHandler } from './application/events/deleted-bounded-context.event-handler';
 import { DeletedBoundedContextsEventHandler } from './application/events/deleted-bounded-contexts.event-handler';
 
@@ -25,7 +27,8 @@ import { PaginateBoundedContextsService } from './application/paginate/paginate-
 import { GetBoundedContextsService } from './application/get/get-bounded-contexts.service';
 import { FindBoundedContextService } from './application/find/find-bounded-context.service';
 import { FindBoundedContextByIdService } from './application/find/find-bounded-context-by-id.service';
-import { UpdateBoundedContextService } from './application/update/update-bounded-context.service';
+import { UpdateBoundedContextByIdService } from './application/update/update-bounded-context-by-id.service';
+import { UpdateBoundedContextsService } from './application/update/update-bounded-contexts.service';
 import { DeleteBoundedContextByIdService } from './application/delete/delete-bounded-context-by-id.service';
 import { DeleteBoundedContextsService } from './application/delete/delete-bounded-contexts.service';
 
@@ -43,7 +46,8 @@ export const IamBoundedContextHandlers = [
     // commands
     CreateBoundedContextCommandHandler,
     CreateBoundedContextsCommandHandler,
-    UpdateBoundedContextCommandHandler,
+    UpdateBoundedContextByIdCommandHandler,
+    UpdateBoundedContextsCommandHandler,
     DeleteBoundedContextByIdCommandHandler,
     DeleteBoundedContextsCommandHandler,
 
@@ -57,6 +61,7 @@ export const IamBoundedContextHandlers = [
     CreatedBoundedContextEventHandler,
     CreatedBoundedContextsEventHandler,
     UpdatedBoundedContextEventHandler,
+    UpdatedBoundedContextsEventHandler,
     DeletedBoundedContextEventHandler,
     DeletedBoundedContextsEventHandler,
 ];
@@ -68,7 +73,8 @@ export const IamBoundedContextServices = [
     GetBoundedContextsService,
     FindBoundedContextService,
     FindBoundedContextByIdService,
-    UpdateBoundedContextService,
+    UpdateBoundedContextByIdService,
+    UpdateBoundedContextsService,
     DeleteBoundedContextByIdService,
     DeleteBoundedContextsService,
 ];

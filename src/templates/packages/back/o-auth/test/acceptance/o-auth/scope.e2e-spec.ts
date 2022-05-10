@@ -656,16 +656,16 @@ describe('scope', () =>
             });
     });
 
-    test('/GraphQL oAuthUpdateScope - Got 404 Not Found', () =>
+    test('/GraphQL oAuthUpdateScopeById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:OAuthUpdateScopeInput!)
+                    mutation ($payload:OAuthUpdateScopeByIdInput!)
                     {
-                        oAuthUpdateScope (payload:$payload)
+                        oAuthUpdateScopeById (payload:$payload)
                         {
                             id
                             code
@@ -691,16 +691,16 @@ describe('scope', () =>
             });
     });
 
-    test('/GraphQL oAuthUpdateScope', () =>
+    test('/GraphQL oAuthUpdateScopeById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:OAuthUpdateScopeInput!)
+                    mutation ($payload:OAuthUpdateScopeByIdInput!)
                     {
-                        oAuthUpdateScope (payload:$payload)
+                        oAuthUpdateScopeById (payload:$payload)
                         {
                             id
                             code
@@ -721,7 +721,46 @@ describe('scope', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.oAuthUpdateScope.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.oAuthUpdateScopeById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            });
+    });
+
+    test('/GraphQL oAuthUpdateScopes', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/graphql')
+            .set('Accept', 'application/json')
+            .send({
+                query: `
+                    mutation ($payload:OAuthUpdateScopesInput! $query: QueryStatement)
+                    {
+                        oAuthUpdateScopes (payload:$payload query:$query)
+                        {
+                            id
+                            code
+                            name
+                            createdAt
+                            updatedAt
+                        }
+                    }
+                `,
+                variables: {
+                    payload: {
+                        ...mockData[0],
+                        id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        code: 'TEST:E2E',
+                    },
+                    query: {
+                        where: {
+                            id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                        },
+                    },
+                },
+            })
+            .expect(200)
+            .then(res =>
+            {
+                expect(res.body.data.oAuthUpdateScopes[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 

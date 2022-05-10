@@ -104,7 +104,7 @@ export class IamPermission extends AggregateRoot
     {
         this.apply(
             new UpdatedPermissionEvent(
-                permission.id.value,
+                permission.id?.value,
                 permission.name?.value,
                 permission.boundedContextId?.value,
                 permission.roleIds?.value,

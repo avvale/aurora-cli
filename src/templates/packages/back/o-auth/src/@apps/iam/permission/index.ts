@@ -1,7 +1,8 @@
 // commands
 import { CreatePermissionCommandHandler } from './application/create/create-permission.command-handler';
 import { CreatePermissionsCommandHandler } from './application/create/create-permissions.command-handler';
-import { UpdatePermissionCommandHandler } from './application/update/update-permission.command-handler';
+import { UpdatePermissionByIdCommandHandler } from './application/update/update-permission-by-id.command-handler';
+import { UpdatePermissionsCommandHandler } from './application/update/update-permissions.command-handler';
 import { DeletePermissionByIdCommandHandler } from './application/delete/delete-permission-by-id.command-handler';
 import { DeletePermissionsCommandHandler } from './application/delete/delete-permissions.command-handler';
 
@@ -15,6 +16,7 @@ import { FindPermissionByIdQueryHandler } from './application/find/find-permissi
 import { CreatedPermissionEventHandler } from './application/events/created-permission.event-handler';
 import { CreatedPermissionsEventHandler } from './application/events/created-permissions.event-handler';
 import { UpdatedPermissionEventHandler } from './application/events/updated-permission.event-handler';
+import { UpdatedPermissionsEventHandler } from './application/events/updated-permissions.event-handler';
 import { DeletedPermissionEventHandler } from './application/events/deleted-permission.event-handler';
 import { DeletedPermissionsEventHandler } from './application/events/deleted-permissions.event-handler';
 
@@ -25,7 +27,8 @@ import { PaginatePermissionsService } from './application/paginate/paginate-perm
 import { GetPermissionsService } from './application/get/get-permissions.service';
 import { FindPermissionService } from './application/find/find-permission.service';
 import { FindPermissionByIdService } from './application/find/find-permission-by-id.service';
-import { UpdatePermissionService } from './application/update/update-permission.service';
+import { UpdatePermissionByIdService } from './application/update/update-permission-by-id.service';
+import { UpdatePermissionsService } from './application/update/update-permissions.service';
 import { DeletePermissionByIdService } from './application/delete/delete-permission-by-id.service';
 import { DeletePermissionsService } from './application/delete/delete-permissions.service';
 
@@ -50,7 +53,8 @@ export const IamPermissionHandlers = [
     // commands
     CreatePermissionCommandHandler,
     CreatePermissionsCommandHandler,
-    UpdatePermissionCommandHandler,
+    UpdatePermissionByIdCommandHandler,
+    UpdatePermissionsCommandHandler,
     DeletePermissionByIdCommandHandler,
     DeletePermissionsCommandHandler,
 
@@ -64,6 +68,7 @@ export const IamPermissionHandlers = [
     CreatedPermissionEventHandler,
     CreatedPermissionsEventHandler,
     UpdatedPermissionEventHandler,
+    UpdatedPermissionsEventHandler,
     DeletedPermissionEventHandler,
     DeletedPermissionsEventHandler,
 
@@ -78,7 +83,8 @@ export const IamPermissionServices = [
     GetPermissionsService,
     FindPermissionService,
     FindPermissionByIdService,
-    UpdatePermissionService,
+    UpdatePermissionByIdService,
+    UpdatePermissionsService,
     DeletePermissionByIdService,
     DeletePermissionsService,
 

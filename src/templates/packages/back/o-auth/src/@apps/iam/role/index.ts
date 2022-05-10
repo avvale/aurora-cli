@@ -1,7 +1,8 @@
 // commands
 import { CreateRoleCommandHandler } from './application/create/create-role.command-handler';
 import { CreateRolesCommandHandler } from './application/create/create-roles.command-handler';
-import { UpdateRoleCommandHandler } from './application/update/update-role.command-handler';
+import { UpdateRoleByIdCommandHandler } from './application/update/update-role-by-id.command-handler';
+import { UpdateRolesCommandHandler } from './application/update/update-roles.command-handler';
 import { DeleteRoleByIdCommandHandler } from './application/delete/delete-role-by-id.command-handler';
 import { DeleteRolesCommandHandler } from './application/delete/delete-roles.command-handler';
 
@@ -15,6 +16,7 @@ import { FindRoleByIdQueryHandler } from './application/find/find-role-by-id.que
 import { CreatedRoleEventHandler } from './application/events/created-role.event-handler';
 import { CreatedRolesEventHandler } from './application/events/created-roles.event-handler';
 import { UpdatedRoleEventHandler } from './application/events/updated-role.event-handler';
+import { UpdatedRolesEventHandler } from './application/events/updated-roles.event-handler';
 import { DeletedRoleEventHandler } from './application/events/deleted-role.event-handler';
 import { DeletedRolesEventHandler } from './application/events/deleted-roles.event-handler';
 
@@ -25,7 +27,8 @@ import { PaginateRolesService } from './application/paginate/paginate-roles.serv
 import { GetRolesService } from './application/get/get-roles.service';
 import { FindRoleService } from './application/find/find-role.service';
 import { FindRoleByIdService } from './application/find/find-role-by-id.service';
-import { UpdateRoleService } from './application/update/update-role.service';
+import { UpdateRoleByIdService } from './application/update/update-role-by-id.service';
+import { UpdateRolesService } from './application/update/update-roles.service';
 import { DeleteRoleByIdService } from './application/delete/delete-role-by-id.service';
 import { DeleteRolesService } from './application/delete/delete-roles.service';
 
@@ -50,7 +53,8 @@ export const IamRoleHandlers = [
     // commands
     CreateRoleCommandHandler,
     CreateRolesCommandHandler,
-    UpdateRoleCommandHandler,
+    UpdateRoleByIdCommandHandler,
+    UpdateRolesCommandHandler,
     DeleteRoleByIdCommandHandler,
     DeleteRolesCommandHandler,
 
@@ -64,6 +68,7 @@ export const IamRoleHandlers = [
     CreatedRoleEventHandler,
     CreatedRolesEventHandler,
     UpdatedRoleEventHandler,
+    UpdatedRolesEventHandler,
     DeletedRoleEventHandler,
     DeletedRolesEventHandler,
 
@@ -79,7 +84,8 @@ export const IamRoleServices = [
     GetRolesService,
     FindRoleService,
     FindRoleByIdService,
-    UpdateRoleService,
+    UpdateRoleByIdService,
+    UpdateRolesService,
     DeleteRoleByIdService,
     DeleteRolesService,
 ];

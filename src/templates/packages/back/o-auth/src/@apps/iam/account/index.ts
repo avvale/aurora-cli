@@ -1,7 +1,8 @@
 // commands
 import { CreateAccountCommandHandler } from './application/create/create-account.command-handler';
 import { CreateAccountsCommandHandler } from './application/create/create-accounts.command-handler';
-import { UpdateAccountCommandHandler } from './application/update/update-account.command-handler';
+import { UpdateAccountByIdCommandHandler } from './application/update/update-account-by-id.command-handler';
+import { UpdateAccountsCommandHandler } from './application/update/update-accounts.command-handler';
 import { DeleteAccountByIdCommandHandler } from './application/delete/delete-account-by-id.command-handler';
 import { DeleteAccountsCommandHandler } from './application/delete/delete-accounts.command-handler';
 
@@ -15,6 +16,7 @@ import { FindAccountByIdQueryHandler } from './application/find/find-account-by-
 import { CreatedAccountEventHandler } from './application/events/created-account.event-handler';
 import { CreatedAccountsEventHandler } from './application/events/created-accounts.event-handler';
 import { UpdatedAccountEventHandler } from './application/events/updated-account.event-handler';
+import { UpdatedAccountsEventHandler } from './application/events/updated-accounts.event-handler';
 import { DeletedAccountEventHandler } from './application/events/deleted-account.event-handler';
 import { DeletedAccountsEventHandler } from './application/events/deleted-accounts.event-handler';
 
@@ -25,7 +27,8 @@ import { PaginateAccountsService } from './application/paginate/paginate-account
 import { GetAccountsService } from './application/get/get-accounts.service';
 import { FindAccountService } from './application/find/find-account.service';
 import { FindAccountByIdService } from './application/find/find-account-by-id.service';
-import { UpdateAccountService } from './application/update/update-account.service';
+import { UpdateAccountByIdService } from './application/update/update-account-by-id.service';
+import { UpdateAccountsService } from './application/update/update-accounts.service';
 import { DeleteAccountByIdService } from './application/delete/delete-account-by-id.service';
 import { DeleteAccountsService } from './application/delete/delete-accounts.service';
 
@@ -43,7 +46,8 @@ export const IamAccountHandlers = [
     // commands
     CreateAccountCommandHandler,
     CreateAccountsCommandHandler,
-    UpdateAccountCommandHandler,
+    UpdateAccountByIdCommandHandler,
+    UpdateAccountsCommandHandler,
     DeleteAccountByIdCommandHandler,
     DeleteAccountsCommandHandler,
 
@@ -57,6 +61,7 @@ export const IamAccountHandlers = [
     CreatedAccountEventHandler,
     CreatedAccountsEventHandler,
     UpdatedAccountEventHandler,
+    UpdatedAccountsEventHandler,
     DeletedAccountEventHandler,
     DeletedAccountsEventHandler,
 ];
@@ -68,7 +73,8 @@ export const IamAccountServices = [
     GetAccountsService,
     FindAccountService,
     FindAccountByIdService,
-    UpdateAccountService,
+    UpdateAccountByIdService,
+    UpdateAccountsService,
     DeleteAccountByIdService,
     DeleteAccountsService,
 ];

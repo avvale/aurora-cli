@@ -19,7 +19,7 @@ export class DeletePermissionsService
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        // get object to delete
+        // get objects to delete
         const permissions = await this.repository.get({ queryStatement, constraint, cQMetadata });
 
         await this.repository.delete({
@@ -31,7 +31,9 @@ export class DeletePermissionsService
 
         // create AddPermissionsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const permissionsRegistered = this.publisher.mergeObjectContext(new AddPermissionsContextEvent(permissions));
+        const permissionsRegistered = this.publisher.mergeObjectContext(
+            new AddPermissionsContextEvent(permissions),
+        );
 
         permissionsRegistered.deleted(); // apply event to model events
         permissionsRegistered.commit(); // commit all events of model

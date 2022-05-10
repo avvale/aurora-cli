@@ -1,7 +1,8 @@
 // commands
 import { CreateTenantCommandHandler } from './application/create/create-tenant.command-handler';
 import { CreateTenantsCommandHandler } from './application/create/create-tenants.command-handler';
-import { UpdateTenantCommandHandler } from './application/update/update-tenant.command-handler';
+import { UpdateTenantByIdCommandHandler } from './application/update/update-tenant-by-id.command-handler';
+import { UpdateTenantsCommandHandler } from './application/update/update-tenants.command-handler';
 import { DeleteTenantByIdCommandHandler } from './application/delete/delete-tenant-by-id.command-handler';
 import { DeleteTenantsCommandHandler } from './application/delete/delete-tenants.command-handler';
 
@@ -15,6 +16,7 @@ import { FindTenantByIdQueryHandler } from './application/find/find-tenant-by-id
 import { CreatedTenantEventHandler } from './application/events/created-tenant.event-handler';
 import { CreatedTenantsEventHandler } from './application/events/created-tenants.event-handler';
 import { UpdatedTenantEventHandler } from './application/events/updated-tenant.event-handler';
+import { UpdatedTenantsEventHandler } from './application/events/updated-tenants.event-handler';
 import { DeletedTenantEventHandler } from './application/events/deleted-tenant.event-handler';
 import { DeletedTenantsEventHandler } from './application/events/deleted-tenants.event-handler';
 
@@ -25,7 +27,8 @@ import { PaginateTenantsService } from './application/paginate/paginate-tenants.
 import { GetTenantsService } from './application/get/get-tenants.service';
 import { FindTenantService } from './application/find/find-tenant.service';
 import { FindTenantByIdService } from './application/find/find-tenant-by-id.service';
-import { UpdateTenantService } from './application/update/update-tenant.service';
+import { UpdateTenantByIdService } from './application/update/update-tenant-by-id.service';
+import { UpdateTenantsService } from './application/update/update-tenants.service';
 import { DeleteTenantByIdService } from './application/delete/delete-tenant-by-id.service';
 import { DeleteTenantsService } from './application/delete/delete-tenants.service';
 
@@ -44,7 +47,8 @@ export const IamTenantHandlers = [
     // commands
     CreateTenantCommandHandler,
     CreateTenantsCommandHandler,
-    UpdateTenantCommandHandler,
+    UpdateTenantByIdCommandHandler,
+    UpdateTenantsCommandHandler,
     DeleteTenantByIdCommandHandler,
     DeleteTenantsCommandHandler,
 
@@ -58,6 +62,7 @@ export const IamTenantHandlers = [
     CreatedTenantEventHandler,
     CreatedTenantsEventHandler,
     UpdatedTenantEventHandler,
+    UpdatedTenantsEventHandler,
     DeletedTenantEventHandler,
     DeletedTenantsEventHandler,
 ];
@@ -69,7 +74,8 @@ export const IamTenantServices = [
     GetTenantsService,
     FindTenantService,
     FindTenantByIdService,
-    UpdateTenantService,
+    UpdateTenantByIdService,
+    UpdateTenantsService,
     DeleteTenantByIdService,
     DeleteTenantsService,
 ];

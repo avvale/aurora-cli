@@ -154,7 +154,7 @@ export class IamUser extends AggregateRoot
     {
         this.apply(
             new UpdatedUserEvent(
-                user.id.value,
+                user.id?.value,
                 user.accountId?.value,
                 user.name?.value,
                 user.surname?.value,

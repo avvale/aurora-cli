@@ -17,6 +17,8 @@ export class AddAccessTokensContextEvent extends AggregateRoot
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
+
+
     deleted(): void
     {
         this.apply(

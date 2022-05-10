@@ -172,7 +172,7 @@ export class IamAccount extends AggregateRoot
     {
         this.apply(
             new UpdatedAccountEvent(
-                account.id.value,
+                account.id?.value,
                 account.type?.value,
                 account.email?.value,
                 account.isActive?.value,
