@@ -2,7 +2,7 @@ import { CQMetadata, ICommandBus, QueryStatement } from 'aurora-ts-core';
 import { AccountPermissions } from '../../iam.types';
 import { AccountResponse } from './account.response';
 import { RoleResponse } from '../../role/domain/role.response';
-import { UpdateAccountCommand } from '../application/update/update-account.command';
+import { UpdateAccountByIdCommand } from '../application/update/update-account-by-id.command';
 
 export class AccountHelper
 {
@@ -46,8 +46,9 @@ export class AccountHelper
             {
                 const currentTenants = account.dTenants;
 
+                // TODO revisar esto, hacer la operación en solo un update
                 // delete tenant and update account
-                await commandBus.dispatch(new UpdateAccountCommand({
+                await commandBus.dispatch(new UpdateAccountByIdCommand({
                     id               : account.id,
                     type             : undefined,
                     email            : undefined,

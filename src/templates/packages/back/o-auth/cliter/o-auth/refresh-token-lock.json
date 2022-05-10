@@ -207,7 +207,7 @@
         },
         {
             "path": "src/@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed.ts",
-            "integrity": "sha1:abf78da5f2a076c0565e2ca11fa0897e35bbb574"
+            "integrity": "sha1:65c27a8e22e516e0a26e17a757eb56edcc636c5f"
         },
         {
             "path": "src/@apps/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model.ts",
@@ -299,19 +299,19 @@
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/o-auth-refresh-token.dto.ts",
-            "integrity": "sha1:5c0424dfe6ba766796f8f2e09ff82b56f9c2de6b"
+            "integrity": "sha1:214494be287a619a653b86d7753709cb9a0c409a"
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/o-auth-create-refresh-token.dto.ts",
-            "integrity": "sha1:c4f2ca47e7e3b719f738f2840dd2bef4cbd68901"
+            "integrity": "sha1:75f328f80e65fbd76ed72577f385e3d23c9707bb"
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/o-auth-update-refresh-token-by-id.dto.ts",
-            "integrity": "sha1:712a3b27c560912ec4f53299e2145a752174492d"
+            "integrity": "sha1:5a174162a186c242e209488253c188206769a20c"
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/o-auth-update-refresh-tokens.dto.ts",
-            "integrity": "sha1:f1d6eb27ca9aadf3fd2acbe995dd79a549635630"
+            "integrity": "sha1:d5a37b58512c4840e1f96d85164616b2e09fe45f"
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/index.ts",
@@ -423,11 +423,11 @@
         },
         {
             "path": "test/acceptance/o-auth/refresh-token.e2e-spec.ts",
-            "integrity": "sha1:615a6ba998b620770c84895980a0d148faa0a6ac"
+            "integrity": "sha1:2c3bc07d5e3c3a1c25620938118f52ba72b14ce5"
         },
         {
             "path": "postman/o-auth.refresh-token.postman.json",
-            "integrity": "sha1:d11f3adddb1a5582c81e1ea8edff27dbaeb08503"
+            "integrity": "sha1:2043bb5adddd8c759e3fadc2167c8f9411f004f3"
         }
     ]
 }

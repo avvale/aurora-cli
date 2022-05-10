@@ -31,8 +31,8 @@ describe('permission', () =>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
 
-    // set timeout to 15s by default are 5s
-    jest.setTimeout(15000);
+    // set timeout to 60s by default are 5s
+    jest.setTimeout(60000);
 
     beforeAll(async () =>
     {

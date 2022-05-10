@@ -3,7 +3,7 @@ import { CreatePermissionsCommand } from '../application/create/create-permissio
 import { CreatePermissionsRolesCommand } from '../application/create/create-permissions-roles.command';
 import { FindAccountByIdQuery } from '../../account/application/find/find-account-by-id.query';
 import { AccountResponse } from '../../account/domain/account.response';
-import { UpdateAccountCommand } from '../../account/application/update/update-account.command';
+import { UpdateAccountByIdCommand } from '../../account/application/update/update-account-by-id.command';
 import { AccountPermissions } from '../../iam.types';
 
 export class PermissionHelper
@@ -47,7 +47,7 @@ export class PermissionHelper
         );
 
         // set all permissions denormalized to administration account
-        await commandBus.dispatch(new UpdateAccountCommand({
+        await commandBus.dispatch(new UpdateAccountByIdCommand({
             id               : PermissionHelper.administratorAccountId,
             type             : undefined,
             email            : undefined,
