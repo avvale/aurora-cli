@@ -60,7 +60,16 @@ export class Properties
 
     get withRelationshipManyToOne(): Property[]
     {
-        return this.properties.filter(property => property.relationship === SqlRelationship.MANY_TO_ONE);
+        return this.properties
+            .filter(property => property.relationship === SqlRelationship.MANY_TO_ONE);
+    }
+
+    get withImportRelationshipManyToOne(): Property[]
+    {
+        return this.properties
+            // avoid duplicate self relations
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationshipModulePath === value.relationshipModulePath && t.relationshipAggregate === value.relationshipAggregate)))
+            .filter(property => property.relationship === SqlRelationship.MANY_TO_ONE);
     }
 
     get withRelationshipOneToMany(): Property[]
