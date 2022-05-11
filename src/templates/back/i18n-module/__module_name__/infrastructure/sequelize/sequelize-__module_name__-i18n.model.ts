@@ -4,7 +4,7 @@ import { DataTypes } from 'sequelize';
 {{#each schema.properties.withRelationshipOneToOne}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipManyToOne}}
+{{#each schema.properties.withImportRelationshipManyToOne}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}

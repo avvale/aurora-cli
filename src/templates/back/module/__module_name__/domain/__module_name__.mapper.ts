@@ -8,7 +8,7 @@ import {
 {{#each schema.properties.withRelationshipOneToOne}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipManyToOne}}
+{{#each schema.properties.withImportRelationshipManyToOne}}
 {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/unless}}

@@ -18,6 +18,8 @@ import * as _ from 'lodash';
 
 {{#if schema.hasOAuth }}
 // has OAuth
+import { IamModule } from '@api/iam/iam.module';
+import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { AuthenticationJwtGuard } from '{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
 {{/if }}
@@ -45,6 +47,10 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
+                {{#if schema.hasOAuth }}
+                OAuthModule,
+                IamModule,
+                {{/if }}
                 {{ toPascalCase schema.boundedContextName }}Module,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
