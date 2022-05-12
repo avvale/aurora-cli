@@ -56,7 +56,7 @@ export default class Load extends Command
         if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
         if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
 
-        // ser operations object
+        // set operations object
         const operations = new Operations();
 
         if (args.elementType === TemplateElement.BACK_MODULE)
