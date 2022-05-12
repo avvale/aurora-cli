@@ -279,6 +279,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
 
                     return;
                 }
+
                 Operations.stateService.command.log('GraphQL entities generated');
 
                 resolve(stdout ? stdout : stderr);
