@@ -295,7 +295,9 @@ export const Prompter =
             type   : 'list',
             choices: Object.values(SqlType),
             when   : (answers: any) => !answers.type,
-        }, {
+        });
+
+        questions.push({
             name   : 'enumOptions',
             message: 'Set comma separated enumeration options, example: ONE,TWO,THREE,FOUR',
             type   : 'input',
@@ -308,17 +310,23 @@ export const Prompter =
             type   : 'list',
             choices: Object.values(SqlRelationship).filter(item => !['many-to-one'].includes(item)),
             when   : (answers: any) => answers.type === SqlType.RELATIONSHIP,
-        }, {
+        });
+
+        questions.push({
             name   : 'relationshipSingularName',
-            message: 'The property name will be plural, type its singular',
+            message: 'The property name will be plural, type its singular (example: for cars type car)',
             type   : 'input',
-            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY,
-        }, {
+            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+        });
+
+        questions.push({
             name   : 'relationshipAggregate',
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
-            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY,
-        }, {
+            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+        });
+
+        questions.push({
             name   : 'relationshipModulePath',
             message: 'Type path to module where to find the aggregate with which you want to relate this property? Type with format: bounded-context/module',
             type   : 'input',
@@ -336,7 +344,9 @@ export const Prompter =
 
                 return answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY;
             },
-        }, {
+        });
+
+        questions.push({
             name   : 'hasPivotTable',
             message: () => `You want to create the pivot table of your many to many relationship with name: ${boundedContextName.toPascalCase()}${moduleNames.toPascalCase()}${name.toPascalCase()}?`,
             type   : 'confirm',
@@ -344,13 +354,17 @@ export const Prompter =
             {
                 return answers.relationship === SqlRelationship.MANY_TO_MANY;
             },
-        }, {
+        });
+
+        questions.push({
             name   : 'decimals',
             message: 'Set total digits and decimals comma separated, example: 10,2',
             type   : 'input',
             when   : (answers: any) => answers.type === SqlType.DECIMAL,
             filter : (answers: string) => answers.split(',').map(item => Number.parseInt(item.trim(), 10)),
-        }, {
+        });
+
+        questions.push({
             name   : 'length',
             message: 'What\'s the length of property? Push enter to use the default length',
             type   : 'number',
@@ -380,7 +394,9 @@ export const Prompter =
                 // eslint-disable-next-line unicorn/explicit-length-check
                 return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && !answers.length;
             },
-        }, {
+        });
+
+        questions.push({
             name   : 'nullable',
             message: 'This property will be nullable?',
             type   : 'confirm',
@@ -406,7 +422,8 @@ export const Prompter =
         const response = await inquirer.prompt(questions);
 
         // add default length
-        if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && response.length === 0) response.length = cliterConfig.defaultTypeLength[response.type];
+        // eslint-disable-next-line unicorn/explicit-length-check
+        if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && !response.length) response.length = cliterConfig.defaultTypeLength[response.type];
 
         // delete relationship none value
         if (response.relationship === SqlRelationship.NONE) delete response.relationship;
@@ -440,31 +457,31 @@ export const Prompter =
         const questions = [];
         let platform = '';
 
-        questions.push(
+        questions.push({
+            name   : 'from',
+            message: 'From which platform will you deploy?',
+            type   : 'list',
+            choices: cliterConfig.platformFromDeploy,
+        });
+
+        questions.push({
+            name    : 'to',
+            message : 'to which platform will it be deployed?',
+            type    : 'list',
+            choices : cliterConfig.platformToDeploy,
+            validate: (input: string) =>
             {
-                name   : 'from',
-                message: 'From which platform will you deploy?',
-                type   : 'list',
-                choices: cliterConfig.platformFromDeploy,
+                platform = input;
+                return true;
             },
-            {
-                name    : 'to',
-                message : 'to which platform will it be deployed?',
-                type    : 'list',
-                choices : cliterConfig.platformToDeploy,
-                validate: (input: string) =>
-                {
-                    platform = input;
-                    return true;
-                },
-            },
-            {
-                name   : 'service',
-                message: 'on what service will you deploy?',
-                type   : 'list',
-                choices: (answers: any) => isFront ? cliterConfig.serviceToDeploy.front[answers.to.toCamelCase()] : cliterConfig.serviceToDeploy.back[answers.to.toCamelCase()],
-            },
-        );
+        });
+
+        questions.push({
+            name   : 'service',
+            message: 'on what service will you deploy?',
+            type   : 'list',
+            choices: (answers: any) => isFront ? cliterConfig.serviceToDeploy.front[answers.to.toCamelCase()] : cliterConfig.serviceToDeploy.back[answers.to.toCamelCase()],
+        });
 
         return inquirer.prompt(questions);
     },

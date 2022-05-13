@@ -101,6 +101,8 @@ export class Property
         if (
             (
                 this.type === SqlType.VARCHAR ||
+                this.type === SqlType.TINYINT ||
+                this.type === SqlType['TINYINT.UNSIGNED'] ||
                 this.type === SqlType.INT ||
                 this.type === SqlType['INT.UNSIGNED'] ||
                 this.type === SqlType.SMALLINT ||

@@ -81,8 +81,16 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
 
         test('should return a {{ toCamelCase schema.moduleNames }}', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }})));
-            expect(await handler.main()).toBe({{ toCamelCase schema.moduleNames }});
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: {{ toCamelCase schema.moduleNames }}.length,
+                count: {{ toCamelCase schema.moduleNames }}.length,
+                rows : {{ toCamelCase schema.moduleNames }},
+            })));
+            expect(await handler.main()).toEqual({
+                total: {{ toCamelCase schema.moduleNames }}.length,
+                count: {{ toCamelCase schema.moduleNames }}.length,
+                rows : {{ toCamelCase schema.moduleNames }},
+            });
         });
     });
 });

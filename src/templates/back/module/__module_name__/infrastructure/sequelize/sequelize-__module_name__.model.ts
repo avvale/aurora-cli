@@ -51,9 +51,9 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{/if}}
         allowNull: {{ nullable }},
         type: {{{ getSequelizeType }}},
-        {{#if defaultValue }}
+        {{#unless (isUndefined defaultValue) }}
         defaultValue: {{ getDefaultValue }},
-        {{/if}}
+        {{/unless}}
         {{#unless relationshipAvoidConstraint }}
         {{#eq relationship ../relationship.MANY_TO_ONE }}
         references: {

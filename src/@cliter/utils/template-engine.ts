@@ -12,6 +12,7 @@ import '../handlebars/helpers/initial-form-group-data';
 import '../handlebars/helpers/is-i18n-data-lang-property';
 import '../handlebars/helpers/is-i18n-relation-property';
 import '../handlebars/helpers/is-pivot-path';
+import '../handlebars/helpers/is-undefined';
 import '../handlebars/helpers/loops';
 import '../handlebars/helpers/mocker';
 import '../handlebars/helpers/nanoid';
