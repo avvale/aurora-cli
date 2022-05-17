@@ -94,8 +94,8 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
             case 'delete':
                 const dialogRef = this.confirmationService.open({
-                    title  : 'Remove contact',
-                    message: 'Are you sure you want to remove this contact permanently? <span class=\'font-medium\'>This action cannot be undone!</span>',
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')}`,
+                    message: this.translocoService.translate('Deletion-Warning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation',

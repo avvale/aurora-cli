@@ -56,7 +56,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         this.actionService.action({ id: mapActions(this.currentActionId, { new: 'create', edit: 'update' }) });
 
         this.snackBar.open(
-            this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') + ' ' + this.translocoService.translate('Saved.M'),
+            `${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')} ${this.translocoService.translate('Saved.M')}`,
             undefined,
             {
                 verticalPosition: 'top',
