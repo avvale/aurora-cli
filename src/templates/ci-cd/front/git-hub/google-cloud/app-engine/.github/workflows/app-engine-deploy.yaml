@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: '16'
     - name: Install dependencies
-      run: npm install
+      run: npm ci
     - name: Unit testing
       run: npm run test
 
@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build project
         run: npm run build
       - name: Deploy Google App Engine
