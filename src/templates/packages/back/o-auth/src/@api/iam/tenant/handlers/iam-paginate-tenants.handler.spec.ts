@@ -56,8 +56,16 @@ describe('IamPaginateTenantsHandler', () =>
 
         test('should return a tenants', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
-            expect(await handler.main()).toBe(tenants);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: tenants.length,
+                count: tenants.length,
+                rows : tenants,
+            })));
+            expect(await handler.main()).toEqual({
+                total: tenants.length,
+                count: tenants.length,
+                rows : tenants,
+            });
         });
     });
 });

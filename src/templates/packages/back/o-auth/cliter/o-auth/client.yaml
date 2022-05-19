@@ -48,9 +48,13 @@ aggregateProperties:
   - name: isActive
     type: boolean
     nullable: false
+    defaultValue: false
+    example: true
   - name: isMaster
     type: boolean
     nullable: false
+    defaultValue: false
+    example: false
   - name: applications
     type: relationship
     nullable: true

@@ -56,8 +56,16 @@ describe('IamPaginateAccountsHandler', () =>
 
         test('should return a accounts', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts)));
-            expect(await handler.main()).toBe(accounts);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: accounts.length,
+                count: accounts.length,
+                rows : accounts,
+            })));
+            expect(await handler.main()).toEqual({
+                total: accounts.length,
+                count: accounts.length,
+                rows : accounts,
+            });
         });
     });
 });

@@ -27,6 +27,8 @@ aggregateProperties:
   - name: isActive
     type: boolean
     nullable: false
+    defaultValue: false
+    example: true
   - name: data
     type: json
     nullable: true

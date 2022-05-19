@@ -56,8 +56,16 @@ describe('IamPaginateRolesHandler', () =>
 
         test('should return a roles', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles)));
-            expect(await handler.main()).toBe(roles);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: roles.length,
+                count: roles.length,
+                rows : roles,
+            })));
+            expect(await handler.main()).toEqual({
+                total: roles.length,
+                count: roles.length,
+                rows : roles,
+            });
         });
     });
 });

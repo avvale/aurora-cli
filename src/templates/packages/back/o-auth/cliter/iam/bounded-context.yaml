@@ -26,6 +26,8 @@ aggregateProperties:
   - name: isActive
     type: boolean
     nullable: false
+    defaultValue: false
+    example: true
   - name: permissions
     type: IamPermission
     nullable: true

@@ -56,8 +56,16 @@ describe('OAuthPaginateAccessTokensHandler', () =>
 
         test('should return a accessTokens', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
-            expect(await handler.main()).toBe(accessTokens);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: accessTokens.length,
+                count: accessTokens.length,
+                rows : accessTokens,
+            })));
+            expect(await handler.main()).toEqual({
+                total: accessTokens.length,
+                count: accessTokens.length,
+                rows : accessTokens,
+            });
         });
     });
 });

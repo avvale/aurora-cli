@@ -62,6 +62,7 @@ export class OAuthUpdateClientByIdDto
     @ApiProperty({
         type       : Boolean,
         description: 'isActive [input here api field description]',
+        example    : true,
     })
     isActive?: boolean;
 

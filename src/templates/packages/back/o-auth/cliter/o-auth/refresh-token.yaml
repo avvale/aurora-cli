@@ -27,6 +27,8 @@ aggregateProperties:
   - name: isRevoked
     type: boolean
     nullable: false
+    defaultValue: false
+    example: true
   - name: expiresAt
     type: timestamp
     nullable: true

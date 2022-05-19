@@ -12,7 +12,7 @@ export class OAuthCreateRefreshTokenDto
     @ApiProperty({
         type       : String,
         description: 'accessTokenId [input here api field description]',
-        example    : '367f38bb-58f5-4f55-8291-30705952e016',
+        example    : 'b51d79ed-7454-4a87-9d14-664bd5360187',
     })
     accessTokenId: string;
 
@@ -25,6 +25,7 @@ export class OAuthCreateRefreshTokenDto
     @ApiProperty({
         type       : Boolean,
         description: 'isRevoked [input here api field description]',
+        example    : true,
     })
     isRevoked: boolean;
 

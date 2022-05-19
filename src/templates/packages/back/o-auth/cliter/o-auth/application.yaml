@@ -26,6 +26,8 @@ aggregateProperties:
   - name: isMaster
     type: boolean
     nullable: false
+    defaultValue: false
+    example: false
   - name: clients
     type: relationship
     nullable: true

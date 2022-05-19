@@ -56,8 +56,16 @@ describe('OAuthPaginateClientsHandler', () =>
 
         test('should return a clients', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients)));
-            expect(await handler.main()).toBe(clients);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: clients.length,
+                count: clients.length,
+                rows : clients,
+            })));
+            expect(await handler.main()).toEqual({
+                total: clients.length,
+                count: clients.length,
+                rows : clients,
+            });
         });
     });
 });

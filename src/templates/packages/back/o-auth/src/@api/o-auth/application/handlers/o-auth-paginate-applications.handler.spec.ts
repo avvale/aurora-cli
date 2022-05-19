@@ -56,8 +56,16 @@ describe('OAuthPaginateApplicationsHandler', () =>
 
         test('should return a applications', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
-            expect(await handler.main()).toBe(applications);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: applications.length,
+                count: applications.length,
+                rows : applications,
+            })));
+            expect(await handler.main()).toEqual({
+                total: applications.length,
+                count: applications.length,
+                rows : applications,
+            });
         });
     });
 });

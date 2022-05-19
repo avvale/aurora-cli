@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
@@ -38,6 +39,7 @@ export class IamAccountModel extends Model<IamAccountModel>
         field: 'isActive',
         allowNull: false,
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
     })
     isActive: boolean;
 

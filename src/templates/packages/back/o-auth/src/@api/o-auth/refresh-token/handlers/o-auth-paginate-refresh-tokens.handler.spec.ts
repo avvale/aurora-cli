@@ -56,8 +56,16 @@ describe('OAuthPaginateRefreshTokensHandler', () =>
 
         test('should return a refreshTokens', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await handler.main()).toBe(refreshTokens);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: refreshTokens.length,
+                count: refreshTokens.length,
+                rows : refreshTokens,
+            })));
+            expect(await handler.main()).toEqual({
+                total: refreshTokens.length,
+                count: refreshTokens.length,
+                rows : refreshTokens,
+            });
         });
     });
 });

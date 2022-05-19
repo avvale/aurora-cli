@@ -291,11 +291,11 @@
         },
         {
             "path": "src/@apps/o-auth/application/infrastructure/seeds/application.seed.ts",
-            "integrity": "sha1:04c28acbef15187093070e780614425d166bc0b2"
+            "integrity": "sha1:5f37ed6f1b683e7f663494835b5d60ad55b51471"
         },
         {
             "path": "src/@apps/o-auth/application/infrastructure/sequelize/sequelize-application.model.ts",
-            "integrity": "sha1:17d47c8ab0f1ccc5624fe14572bd7437e5f45e00"
+            "integrity": "sha1:a52e747c9a4b40a9bd4d85dd989137fb0c827a40"
         },
         {
             "path": "src/@apps/o-auth/application/infrastructure/sequelize/sequelize-application.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@apps/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model.ts",
-            "integrity": "sha1:6b5f5074729f4602c5ef37fe50eb32f38315a8b3"
+            "integrity": "sha1:e03e23901a89dc293ed9330c2bf56cf3baff8e77"
         },
         {
             "path": "src/@api/o-auth/application/controllers/o-auth-create-application.controller.spec.ts",
@@ -503,7 +503,7 @@
         },
         {
             "path": "src/@api/o-auth/application/handlers/o-auth-paginate-applications.handler.spec.ts",
-            "integrity": "sha1:d444df62ab9c14d2c2b7ecf9fd539faa846cd1e0"
+            "integrity": "sha1:99468f9f65c542ad29decf1b718fa4733ebf0e60"
         },
         {
             "path": "src/@api/o-auth/application/handlers/o-auth-paginate-applications.handler.ts",
@@ -619,11 +619,11 @@
         },
         {
             "path": "test/acceptance/o-auth/application.e2e-spec.ts",
-            "integrity": "sha1:966b7234ab041d7f851d91fd04d773e051811677"
+            "integrity": "sha1:e226d3902a721be6758f66b713eee054541a98e8"
         },
         {
             "path": "postman/o-auth.application.postman.json",
-            "integrity": "sha1:ee3e51ff6b808df40c25e2b9e6d765177ac86b9b"
+            "integrity": "sha1:eb4b41322ec98819bc5e9ad1f5c0edb1f8f7de4d"
         }
     ]
 }

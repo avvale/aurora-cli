@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamTenantModel } from '@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';

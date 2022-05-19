@@ -291,11 +291,11 @@
         },
         {
             "path": "src/@apps/iam/role/infrastructure/seeds/role.seed.ts",
-            "integrity": "sha1:690854fe2f75f5a189cdd6ecf02d892b82b6c483"
+            "integrity": "sha1:aacb2b42a8a83af2084d226ed4142c99e9ab34a7"
         },
         {
             "path": "src/@apps/iam/role/infrastructure/sequelize/sequelize-role.model.ts",
-            "integrity": "sha1:f0846b326796b3d56ee9d4121b9666fe2f85ab11"
+            "integrity": "sha1:30fb652de5592b23b81818b441d1422a34ed706d"
         },
         {
             "path": "src/@apps/iam/role/infrastructure/sequelize/sequelize-role.repository.ts",
@@ -335,7 +335,7 @@
         },
         {
             "path": "src/@apps/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model.ts",
-            "integrity": "sha1:cbb9ccc40fdbb365a3e3e208952a33604e47f0d0"
+            "integrity": "sha1:b0151e6d3ceeebf7d36a4068f592e2498680139a"
         },
         {
             "path": "src/@api/iam/role/controllers/iam-create-role.controller.spec.ts",
@@ -499,7 +499,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-paginate-roles.handler.spec.ts",
-            "integrity": "sha1:578ff779c6dd0eeb1892c0afdaf4601e6f52d815"
+            "integrity": "sha1:3dee74d790e0642375201420ff218d63f16ba1b2"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-paginate-roles.handler.ts",
@@ -615,11 +615,11 @@
         },
         {
             "path": "test/acceptance/iam/role.e2e-spec.ts",
-            "integrity": "sha1:d70e5fb85593206c672618ddcb0eef2aeb745422"
+            "integrity": "sha1:ac8ccf1d318970aae8e78e7a7f494d95eff31902"
         },
         {
             "path": "postman/iam.role.postman.json",
-            "integrity": "sha1:aa5e62acb3290e5b662dccfbdb8aa3cb3b6e04d8"
+            "integrity": "sha1:4e061b3ef3ad45db3767b1afc3ed5a9c03496424"
         }
     ]
 }

@@ -56,8 +56,16 @@ describe('IamPaginateBoundedContextsHandler', () =>
 
         test('should return a boundedContexts', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
-            expect(await handler.main()).toBe(boundedContexts);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: boundedContexts.length,
+                count: boundedContexts.length,
+                rows : boundedContexts,
+            })));
+            expect(await handler.main()).toEqual({
+                total: boundedContexts.length,
+                count: boundedContexts.length,
+                rows : boundedContexts,
+            });
         });
     });
 });

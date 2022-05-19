@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
@@ -39,6 +40,7 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         field: 'isRevoked',
         allowNull: false,
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
     })
     isRevoked: boolean;
 
