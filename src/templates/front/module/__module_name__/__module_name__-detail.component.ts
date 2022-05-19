@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from 
 import { Validators } from '@angular/forms';
 import { Action, Crumb, log, mapActions, Utils } from '@aurora';
 import { ViewDetailComponent } from '@aurora/infrastructure/super/view-detail.component';
-import { first, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
@@ -89,7 +89,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             case 'edit':
                 this.{{ toCamelCase schema.moduleName }}Service
                     .{{ toCamelCase schema.moduleName }}$
-                    .pipe(first())
+                    .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item => this.fg.patchValue(item));
                 break;
 

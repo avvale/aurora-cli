@@ -14,7 +14,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(advancedFormat);
 
-async function bootstrap()
+async function bootstrap(): Promise<void>
 {
     const app           = await NestFactory.create(AppModule);
     const configService = app.get(ConfigService);
