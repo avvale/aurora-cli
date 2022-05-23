@@ -38,6 +38,44 @@ export class Properties
         return this.properties.filter(property => !this.deletedAtField.includes(property.name));
     }
 
+    /***************************************************
+     * get relationship for import to avoid duplicates *
+     ***************************************************/
+    get withImportRelationshipOneToOne(): Property[]
+    {
+        return this.properties
+            // avoid duplicate self relations
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationshipModulePath === value.relationshipModulePath && t.relationshipAggregate === value.relationshipAggregate)))
+            .filter(property => property.relationship === SqlRelationship.ONE_TO_ONE);
+    }
+
+    get withImportRelationshipManyToOne(): Property[]
+    {
+        return this.properties
+            // avoid duplicate self relations
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationshipModulePath === value.relationshipModulePath && t.relationshipAggregate === value.relationshipAggregate)))
+            .filter(property => property.relationship === SqlRelationship.MANY_TO_ONE);
+    }
+
+    get withImportRelationshipOneToMany(): Property[]
+    {
+        return this.properties
+            // avoid duplicate self relations
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationshipModulePath === value.relationshipModulePath && t.relationshipAggregate === value.relationshipAggregate)))
+            .filter(property => property.relationship === SqlRelationship.ONE_TO_MANY);
+    }
+
+    get withImportRelationshipManyToMany(): Property[]
+    {
+        return this.properties
+            // avoid duplicate self relations
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationshipModulePath === value.relationshipModulePath && t.relationshipAggregate === value.relationshipAggregate)))
+            .filter(property => property.relationship === SqlRelationship.MANY_TO_MANY);
+    }
+
+    /****************
+     * RELATIONSHIP *
+     ****************/
     get withRelationship(): Property[]
     {
         return this.properties.filter(property => property.relationship);
@@ -61,14 +99,6 @@ export class Properties
     get withRelationshipManyToOne(): Property[]
     {
         return this.properties
-            .filter(property => property.relationship === SqlRelationship.MANY_TO_ONE);
-    }
-
-    get withImportRelationshipManyToOne(): Property[]
-    {
-        return this.properties
-            // avoid duplicate self relations
-            .filter((value, index, self) => index === self.findIndex(t => (t.relationshipModulePath === value.relationshipModulePath && t.relationshipAggregate === value.relationshipAggregate)))
             .filter(property => property.relationship === SqlRelationship.MANY_TO_ONE);
     }
 

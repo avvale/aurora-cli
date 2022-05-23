@@ -1,4 +1,4 @@
-{{#each schema.properties.withRelationshipOneToOne}}
+{{#each schema.properties.withImportRelationshipOneToOne}}
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
@@ -6,10 +6,10 @@ import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relation
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withRelationshipOneToMany}}
+{{#each schema.properties.withImportRelationshipOneToMany}}
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipManyToMany}}
+{{#each schema.properties.withImportRelationshipManyToMany}}
 import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/each}}
 

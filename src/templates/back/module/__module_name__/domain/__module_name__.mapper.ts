@@ -5,7 +5,7 @@ import { {{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase s
 import {
     {{> importValueObjects }}
 } from './value-objects';
-{{#each schema.properties.withRelationshipOneToOne}}
+{{#each schema.properties.withImportRelationshipOneToOne}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
@@ -13,10 +13,10 @@ import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationsh
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withRelationshipOneToMany}}
+{{#each schema.properties.withImportRelationshipOneToMany}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipManyToMany}}
+{{#each schema.properties.withImportRelationshipManyToMany}}
 import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 

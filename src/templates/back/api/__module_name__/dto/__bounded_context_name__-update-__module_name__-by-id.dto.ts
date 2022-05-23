@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
-{{#each schema.properties.withRelationshipOneToOne}}
+{{#each schema.properties.withImportRelationshipOneToOne}}
 {{#unlessEq type ../sqlType.ID }}
 import { {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}ByIdDto } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-update-{{ toKebabCase getRelationshipModule }}-by-id.dto{{/if}}';
 {{/unlessEq}}

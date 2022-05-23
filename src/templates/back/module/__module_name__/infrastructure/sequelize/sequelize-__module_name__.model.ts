@@ -2,7 +2,7 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-{{#each schema.properties.withRelationshipOneToOne}}
+{{#each schema.properties.withImportRelationshipOneToOne}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
@@ -10,10 +10,10 @@ import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName 
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withRelationshipOneToMany}}
+{{#each schema.properties.withImportRelationshipOneToMany}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipManyToMany}}
+{{#each schema.properties.withImportRelationshipManyToMany}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 import { {{ pivotAggregateName }}Model } from '{{ config.applicationsContainer }}/{{ pivotPath }}/infrastructure/sequelize/sequelize-{{ pivotFileName }}.model';
 {{/each}}

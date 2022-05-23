@@ -14,7 +14,7 @@ import { Updated{{ toPascalCase schema.moduleName }}Event } from '../application
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
 import { Deleted{{ toPascalCase schema.moduleName }}Event } from '../application/events/deleted-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
-{{#each schema.properties.withRelationshipOneToOne}}
+{{#each schema.properties.withImportRelationshipOneToOne}}
 import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
@@ -22,10 +22,10 @@ import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ 
 import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withRelationshipOneToMany}}
+{{#each schema.properties.withImportRelationshipOneToMany}}
 import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipManyToMany}}
+{{#each schema.properties.withImportRelationshipManyToMany}}
 import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.aggregate{{/if}}';
 {{/each}}
 
