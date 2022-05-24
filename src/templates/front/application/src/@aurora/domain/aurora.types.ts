@@ -19,6 +19,8 @@ export interface AccountPermissions
     all: string[];
 }
 
+export type Appearance = 'legacy' | 'standard' | 'fill' | 'outline';
+
 // options to set global and local api environment
 export type ApiEnvironment = 'sandbox' | 'live';
 

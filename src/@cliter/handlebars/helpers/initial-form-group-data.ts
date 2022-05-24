@@ -6,7 +6,6 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
     switch (property.type)
     {
         case SqlType.CHAR:
-        case SqlType.DATE:
         case SqlType.ENUM:
         case SqlType.ID:
         case SqlType.TEXT:
@@ -18,6 +17,7 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
         case SqlType['INT.UNSIGNED']:
         case SqlType.SMALLINT:
         case SqlType.JSON:
+        case SqlType.DATE:
         case SqlType.DECIMAL:
         case SqlType['SMALLINT.UNSIGNED']:
             return `null`;

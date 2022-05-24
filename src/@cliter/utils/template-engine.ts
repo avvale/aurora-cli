@@ -33,6 +33,7 @@ import '../handlebars/partials/import-i18n-repository';
 import '../handlebars/partials/import-value-objects';
 import '../handlebars/partials/inputs/boolean-input';
 import '../handlebars/partials/inputs/char-input';
+import '../handlebars/partials/inputs/date-input';
 import '../handlebars/partials/inputs/enum-input';
 import '../handlebars/partials/inputs/int-input';
 import '../handlebars/partials/inputs/text-input';

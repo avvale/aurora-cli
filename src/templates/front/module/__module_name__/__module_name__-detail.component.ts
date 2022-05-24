@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from 
 import { Validators } from '@angular/forms';
 import { Action, Crumb, log, mapActions, Utils } from '@aurora';
 import { ViewDetailComponent } from '@aurora/infrastructure/super/view-detail.component';
-import { takeUntil } from 'rxjs';
+import { lastValueFrom, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
@@ -76,7 +76,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         });
     }
 
-    onRunAction(action: Action): void
+    async onRunAction(action: Action): Promise<void>
     {
         this.currentActionId = action.id;
 
@@ -94,16 +94,18 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 break;
 
             case 'create':
-                this.{{ toCamelCase schema.moduleName }}Service
-                    .create<{{ schema.aggregateName }}>({ object: this.fg.value })
-                    .subscribe();
+                await lastValueFrom(
+                    this.{{ toCamelCase schema.moduleName }}Service
+                        .create<{{ schema.aggregateName }}>({ object: this.fg.value }),
+                );
                 this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
                 break;
 
             case 'update':
-                this.{{ toCamelCase schema.moduleName }}Service
-                    .updateById<{{ schema.aggregateName }}>({ object: this.fg.value })
-                    .subscribe();
+                await lastValueFrom(
+                    this.{{ toCamelCase schema.moduleName }}Service
+                        .updateById<{{ schema.aggregateName }}>({ object: this.fg.value }),
+                );
                 this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
                 break;
         }

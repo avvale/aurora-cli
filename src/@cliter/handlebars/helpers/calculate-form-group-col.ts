@@ -19,8 +19,6 @@ handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
 
         case SqlType.DATE:
         case SqlType.TIMESTAMP:
-            return 'col-3';
-
         case SqlType.ENUM:
             return 'col-4';
 
