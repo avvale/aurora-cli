@@ -1,7 +1,7 @@
 
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, ViewBaseComponent } from '@aurora';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, lastValueFrom, map, Observable } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
@@ -78,14 +78,14 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         //
     }
 
-    onRunAction(action: Action): void
+    async onRunAction(action: Action): Promise<void>
     {
         this.currentActionId = action.id;
 
         switch (this.currentActionId)
         {
             case 'pagination':
-                this.{{ toCamelCase schema.moduleName }}Service.pagination(action.data.event).subscribe();
+                await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination(action.data.event));
                 break;
 
             case 'edit':
@@ -116,13 +116,15 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 });
 
                 dialogRef.afterClosed()
-                    .subscribe(result =>
+                    .subscribe(async result =>
                     {
                         if (result === 'confirmed')
                         {
-                            this.{{ toCamelCase schema.moduleName }}Service
-                                .deleteById<{{ schema.aggregateName }}>(action.data.event.row.id)
-                                .subscribe(item => this.{{ toCamelCase schema.moduleName }}Service.pagination().subscribe());
+                            await lastValueFrom(
+                                this.{{ toCamelCase schema.moduleName }}Service
+                                    .deleteById<{{ schema.aggregateName }}>(action.data.event.row.id),
+                            );
+                            await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination());
                         }
                     });
                 break;
