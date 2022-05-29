@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class OAuthCredentialDto
+export class OAuthCredentialsDto
 {
     @ApiProperty({
         type       : String,

@@ -2,7 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { OAuthClientGrantType } from '../../../../graphql';
 
-export class OAuthCreateCredentialDto
+export class OAuthCreateCredentialsDto
 {
     @ApiProperty({
         type       : String,
@@ -36,7 +36,28 @@ export class OAuthCreateCredentialDto
     @ApiProperty({
         type       : String,
         description: 'clientSecret [input here api field description]',
-        example    : 'ktjfde3ibcxglzz7glw6ehoibcn4olk8yitqaqtlvpaot7n0514wdzayzmss7cd15abiohcfwzjh4i3a7q48ss8vfk',
+        example    : 'ktjfde3ibcxglzz7glw6ehoibcn4olk8yitqaqtlvp',
     })
     clientSecret?: string;
+
+    @ApiProperty({
+        type       : String,
+        description: 'accessTokenId [input here api field description]',
+        example    : '1b9b5609-21b4-4efd-90d5-5ff1869a4fc3',
+    })
+    accessTokenId?: string;
+
+    @ApiProperty({
+        type       : String,
+        description: 'refreshToken [input here api field description]',
+        example    : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+    })
+    refreshToken?: string;
+
+    @ApiProperty({
+        type       : String,
+        description: 'redirect [input here api field description]',
+        example    : 'https://contoso.com/',
+    })
+    redirect?: string;
 }

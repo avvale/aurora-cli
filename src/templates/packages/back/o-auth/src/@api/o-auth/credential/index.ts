@@ -1,20 +1,20 @@
 // controllers
-import { OAuthCreateCredentialController } from './controllers/o-auth-create-credential.controller';
+import { OAuthCreateCredentialsController } from './controllers/o-auth-create-credentials.controller';
 
 // resolvers
-import { OAuthCreateCredentialResolver } from './resolvers/o-auth-create-credential.resolver';
+import { OAuthCreateCredentialsResolver } from './resolvers/o-auth-create-credentials.resolver';
 
 // handlers
-import { OAuthCreateCredentialHandler } from './handlers/o-auth-create-credential.handler';
+import { OAuthCreateCredentialsHandler } from './handlers/o-auth-create-credentials.handler';
 
 export const OAuthCredentialControllers = [
-    OAuthCreateCredentialController,
+    OAuthCreateCredentialsController,
 ];
 
 export const OAuthCredentialResolvers = [
-    OAuthCreateCredentialResolver,
+    OAuthCreateCredentialsResolver,
 ];
 
 export const OAuthCredentialApiHandlers = [
-    OAuthCreateCredentialHandler,
+    OAuthCreateCredentialsHandler,
 ];

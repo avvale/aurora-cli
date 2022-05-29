@@ -2,6 +2,7 @@ enum OAuthClientGrantType {
     AUTHORIZATION_CODE
     CLIENT_CREDENTIALS
     PASSWORD
+    REFRESH_TOKEN
 }
 
 type OAuthClient

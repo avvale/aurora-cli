@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body, Headers } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { OAuthCreateCredentialDto } from '../dto';
+import { OAuthCreateCredentialsDto } from '../dto';
 
 // @apps
-import { OAuthCreateCredentialHandler } from '../handlers/o-auth-create-credential.handler';
+import { OAuthCreateCredentialsHandler } from '../handlers/o-auth-create-credentials.handler';
 
 @ApiTags('[o-auth] credential')
-@Controller('o-auth/credential')
-export class OAuthCreateCredentialController
+@Controller('o-auth/credentials')
+export class OAuthCreateCredentialsController
 {
     constructor(
-        private readonly handler: OAuthCreateCredentialHandler,
+        private readonly handler: OAuthCreateCredentialsHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create credential' })
-    @ApiCreatedResponse({ description: 'The credential obtained after login.', type: OAuthCreateCredentialDto })
+    @ApiCreatedResponse({ description: 'The credential obtained after login.', type: OAuthCreateCredentialsDto })
     async main(
-        @Body() payload: OAuthCreateCredentialDto,
+        @Body() payload: OAuthCreateCredentialsDto,
         @Headers('Authorization') authorization: string,
     )
     {

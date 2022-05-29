@@ -1,2 +1,2 @@
-export { OAuthCreateCredentialDto } from './o-auth-create-credential.dto';
-export { OAuthCredentialDto } from './o-auth-credential.dto';
+export { OAuthCreateCredentialsDto } from './o-auth-create-credentials.dto';
+export { OAuthCredentialsDto } from './o-auth-credentials.dto';
