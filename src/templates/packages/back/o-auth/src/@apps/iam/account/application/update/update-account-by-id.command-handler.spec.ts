@@ -44,6 +44,7 @@ describe('UpdateAccountByIdCommandHandler', () =>
                     {
                         id: accounts[0].id,
                         type: accounts[0].type,
+                        code: accounts[0].code,
                         email: accounts[0].email,
                         isActive: accounts[0].isActive,
                         clientId: accounts[0].clientId,

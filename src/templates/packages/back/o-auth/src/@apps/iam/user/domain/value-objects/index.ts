@@ -2,7 +2,6 @@ export { UserId } from './user-id';
 export { UserAccountId } from './user-account-id';
 export { UserName } from './user-name';
 export { UserSurname } from './user-surname';
-export { UserCode } from './user-code';
 export { UserAvatar } from './user-avatar';
 export { UserMobile } from './user-mobile';
 export { UserLangId } from './user-lang-id';

@@ -8,6 +8,7 @@ import { UpdateAccountByIdService } from './update-account-by-id.service';
 import {
     AccountId,
     AccountType,
+    AccountCode,
     AccountEmail,
     AccountIsActive,
     AccountClientId,
@@ -68,6 +69,7 @@ describe('UpdateAccountByIdService', () =>
                 {
                     id: new AccountId(accounts[0].id),
                     type: new AccountType(accounts[0].type),
+                    code: new AccountCode(accounts[0].code),
                     email: new AccountEmail(accounts[0].email),
                     isActive: new AccountIsActive(accounts[0].isActive),
                     clientId: new AccountClientId(accounts[0].clientId),

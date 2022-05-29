@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
@@ -39,14 +40,6 @@ export class IamUserModel extends Model<IamUserModel>
         type: DataTypes.STRING(255),
     })
     surname: string;
-
-    @Index
-    @Column({
-        field: 'code',
-        allowNull: true,
-        type: DataTypes.STRING(50),
-    })
-    code: string;
 
     @Column({
         field: 'avatar',

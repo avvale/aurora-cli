@@ -4,6 +4,7 @@ import { CQMetadata } from 'aurora-ts-core';
 import {
     AccountId,
     AccountType,
+    AccountCode,
     AccountEmail,
     AccountIsActive,
     AccountClientId,
@@ -34,6 +35,7 @@ export class CreateAccountsService
         accounts: {
             id: AccountId;
             type: AccountType;
+            code: AccountCode;
             email: AccountEmail;
             isActive: AccountIsActive;
             clientId: AccountClientId;
@@ -52,6 +54,7 @@ export class CreateAccountsService
         const aggregateAccounts = accounts.map(account => IamAccount.register(
             account.id,
             account.type,
+            account.code,
             account.email,
             account.isActive,
             account.clientId,

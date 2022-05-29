@@ -4,6 +4,7 @@ import { IAccountRepository } from '@apps/iam/account/domain/account.repository'
 import {
     AccountId,
     AccountType,
+    AccountCode,
     AccountEmail,
     AccountIsActive,
     AccountClientId,
@@ -54,6 +55,7 @@ export class MockAccountRepository extends MockRepository<IamAccount> implements
             this.collectionSource.push(IamAccount.register(
                 new AccountId(itemCollection.id),
                 new AccountType(itemCollection.type),
+                new AccountCode(itemCollection.code),
                 new AccountEmail(itemCollection.email),
                 new AccountIsActive(itemCollection.isActive),
                 new AccountClientId(itemCollection.clientId),

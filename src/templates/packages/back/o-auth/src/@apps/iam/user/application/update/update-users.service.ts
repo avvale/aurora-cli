@@ -7,7 +7,6 @@ import {
     UserAccountId,
     UserName,
     UserSurname,
-    UserCode,
     UserAvatar,
     UserMobile,
     UserLangId,
@@ -37,7 +36,6 @@ export class UpdateUsersService
             accountId?: UserAccountId;
             name?: UserName;
             surname?: UserSurname;
-            code?: UserCode;
             avatar?: UserAvatar;
             mobile?: UserMobile;
             langId?: UserLangId;
@@ -57,7 +55,6 @@ export class UpdateUsersService
             payload.accountId,
             payload.name,
             payload.surname,
-            payload.code,
             payload.avatar,
             payload.mobile,
             payload.langId,

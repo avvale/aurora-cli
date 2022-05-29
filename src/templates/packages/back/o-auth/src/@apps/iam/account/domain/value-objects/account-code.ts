@@ -1,13 +1,13 @@
 import { StringValueObject, ValidationRules } from 'aurora-ts-core';
 
-export class UserCode extends StringValueObject
+export class AccountCode extends StringValueObject
 {
-    public readonly type: 'UserCode';
+    public readonly type: 'AccountCode';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'UserCode',
+            name       : 'AccountCode',
             nullable   : true,
             undefinable: true,
             maxLength  : 50,

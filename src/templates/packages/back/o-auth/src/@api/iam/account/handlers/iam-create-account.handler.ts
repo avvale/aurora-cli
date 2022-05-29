@@ -67,6 +67,7 @@ export class IamCreateAccountHandler
             {
                 id               : payload.id,
                 type             : payload.type,
+                code             : payload.code,
                 email            : payload.email,
                 isActive         : payload.isActive,
                 clientId         : client?.id,

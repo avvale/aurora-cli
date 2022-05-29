@@ -21,6 +21,12 @@ export class IamCreateAccountDto
 
     @ApiProperty({
         type       : String,
+        description: 'code [input here api field description]',
+    })
+    code?: string;
+
+    @ApiProperty({
+        type       : String,
         description: 'email [input here api field description]',
         example    : 'john@gmial.com',
     })
@@ -36,7 +42,7 @@ export class IamCreateAccountDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : '6a2ec439-622d-4dc7-940e-091b5be635f3',
+        example    : '6660c341-d940-4493-bd64-da246f6ff2da',
     })
     clientId: string;
 

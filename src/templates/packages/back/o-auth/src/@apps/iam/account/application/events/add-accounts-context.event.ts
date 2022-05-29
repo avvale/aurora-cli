@@ -29,6 +29,7 @@ export class AddAccountsContextEvent extends AggregateRoot
                     new CreatedAccountEvent(
                         account.id.value,
                         account.type.value,
+                        account.code?.value,
                         account.email.value,
                         account.isActive.value,
                         account.clientId.value,
@@ -56,6 +57,7 @@ export class AddAccountsContextEvent extends AggregateRoot
                     new UpdatedAccountEvent(
                         account.id.value,
                         account.type.value,
+                        account.code?.value,
                         account.email.value,
                         account.isActive.value,
                         account.clientId.value,
@@ -83,6 +85,7 @@ export class AddAccountsContextEvent extends AggregateRoot
                     new DeletedAccountEvent(
                         account.id.value,
                         account.type.value,
+                        account.code?.value,
                         account.email.value,
                         account.isActive.value,
                         account.clientId.value,

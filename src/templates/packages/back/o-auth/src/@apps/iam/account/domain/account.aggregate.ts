@@ -5,6 +5,7 @@ import { Utils } from 'aurora-ts-core';
 import {
     AccountId,
     AccountType,
+    AccountCode,
     AccountEmail,
     AccountIsActive,
     AccountClientId,
@@ -31,6 +32,7 @@ export class IamAccount extends AggregateRoot
 {
     id: AccountId;
     type: AccountType;
+    code: AccountCode;
     email: AccountEmail;
     isActive: AccountIsActive;
     clientId: AccountClientId;
@@ -54,6 +56,7 @@ export class IamAccount extends AggregateRoot
     constructor(
         id: AccountId,
         type: AccountType,
+        code: AccountCode,
         email: AccountEmail,
         isActive: AccountIsActive,
         clientId: AccountClientId,
@@ -77,6 +80,7 @@ export class IamAccount extends AggregateRoot
         super();
         this.id = id;
         this.type = type;
+        this.code = code;
         this.email = email;
         this.isActive = isActive;
         this.clientId = clientId;
@@ -101,6 +105,7 @@ export class IamAccount extends AggregateRoot
     static register (
         id: AccountId,
         type: AccountType,
+        code: AccountCode,
         email: AccountEmail,
         isActive: AccountIsActive,
         clientId: AccountClientId,
@@ -124,6 +129,7 @@ export class IamAccount extends AggregateRoot
         return new IamAccount(
             id,
             type,
+            code,
             email,
             isActive,
             clientId,
@@ -151,6 +157,7 @@ export class IamAccount extends AggregateRoot
             new CreatedAccountEvent(
                 account.id.value,
                 account.type.value,
+                account.code?.value,
                 account.email.value,
                 account.isActive.value,
                 account.clientId.value,
@@ -174,6 +181,7 @@ export class IamAccount extends AggregateRoot
             new UpdatedAccountEvent(
                 account.id?.value,
                 account.type?.value,
+                account.code?.value,
                 account.email?.value,
                 account.isActive?.value,
                 account.clientId?.value,
@@ -197,6 +205,7 @@ export class IamAccount extends AggregateRoot
             new DeletedAccountEvent(
                 account.id.value,
                 account.type.value,
+                account.code?.value,
                 account.email.value,
                 account.isActive.value,
                 account.clientId.value,
@@ -219,6 +228,7 @@ export class IamAccount extends AggregateRoot
         return {
             id: this.id.value,
             type: this.type.value,
+            code: this.code?.value,
             email: this.email.value,
             isActive: this.isActive.value,
             clientId: this.clientId.value,

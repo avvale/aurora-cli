@@ -7,7 +7,6 @@ export class UserResponse
         public readonly accountId: string,
         public readonly name: string,
         public readonly surname: string,
-        public readonly code: string,
         public readonly avatar: string,
         public readonly mobile: string,
         public readonly langId: string,

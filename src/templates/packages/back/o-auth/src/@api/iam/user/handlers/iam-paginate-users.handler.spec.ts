@@ -56,8 +56,16 @@ describe('IamPaginateUsersHandler', () =>
 
         test('should return a users', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users)));
-            expect(await handler.main()).toBe(users);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: users.length,
+                count: users.length,
+                rows : users,
+            })));
+            expect(await handler.main()).toEqual({
+                total: users.length,
+                count: users.length,
+                rows : users,
+            });
         });
     });
 });

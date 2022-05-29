@@ -8,6 +8,7 @@ export class AccountResponse
     constructor(
         public readonly id: string,
         public readonly type: string,
+        public readonly code: string,
         public readonly email: string,
         public readonly isActive: boolean,
         public readonly clientId: string,

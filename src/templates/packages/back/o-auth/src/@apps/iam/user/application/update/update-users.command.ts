@@ -9,7 +9,6 @@ export class UpdateUsersCommand
             accountId?: string;
             name?: string;
             surname?: string;
-            code?: string;
             avatar?: string;
             mobile?: string;
             langId?: string;

@@ -6,7 +6,6 @@ import {
     UserAccountId,
     UserName,
     UserSurname,
-    UserCode,
     UserAvatar,
     UserMobile,
     UserLangId,
@@ -36,7 +35,6 @@ export class CreateUsersService
             accountId: UserAccountId;
             name: UserName;
             surname: UserSurname;
-            code: UserCode;
             avatar: UserAvatar;
             mobile: UserMobile;
             langId: UserLangId;
@@ -54,7 +52,6 @@ export class CreateUsersService
             user.accountId,
             user.name,
             user.surname,
-            user.code,
             user.avatar,
             user.mobile,
             user.langId,

@@ -3,6 +3,7 @@ import { MockSeeder } from 'aurora-ts-core';
 import {
     AccountId,
     AccountType,
+    AccountCode,
     AccountEmail,
     AccountIsActive,
     AccountClientId,
@@ -42,6 +43,7 @@ export class MockAccountSeeder extends MockSeeder<IamAccount>
                 IamAccount.register(
                     new AccountId(account.id),
                     new AccountType(account.type),
+                    new AccountCode(account.code),
                     new AccountEmail(account.email),
                     new AccountIsActive(account.isActive),
                     new AccountClientId(account.clientId),

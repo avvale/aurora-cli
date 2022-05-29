@@ -6,6 +6,7 @@ export class CreateAccountCommand
         public readonly payload: {
             id: string;
             type: string;
+            code?: string;
             email: string;
             isActive: boolean;
             clientId: string;

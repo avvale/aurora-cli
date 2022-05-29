@@ -27,6 +27,14 @@ export class IamAccountModel extends Model<IamAccountModel>
     })
     type: string;
 
+    @Index
+    @Column({
+        field: 'code',
+        allowNull: true,
+        type: DataTypes.STRING(50),
+    })
+    code: string;
+
     @Unique
     @Column({
         field: 'email',

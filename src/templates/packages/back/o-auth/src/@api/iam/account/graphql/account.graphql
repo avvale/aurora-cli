@@ -7,6 +7,7 @@ type IamAccount
 {
     id: ID!
     type: IamAccountType!
+    code: GraphQLString
     email: GraphQLString!
     isActive: GraphQLBoolean!
     clientId: ID!
@@ -28,6 +29,7 @@ input IamCreateAccountInput
 {
     id: ID!
     type: IamAccountType!
+    code: GraphQLString
     email: GraphQLString!
     isActive: GraphQLBoolean!
     clientId: ID!
@@ -45,6 +47,7 @@ input IamUpdateAccountByIdInput
 {
     id: ID!
     type: IamAccountType
+    code: GraphQLString
     email: GraphQLString
     isActive: GraphQLBoolean
     clientId: ID
@@ -62,6 +65,7 @@ input IamUpdateAccountsInput
 {
     id: ID
     type: IamAccountType
+    code: GraphQLString
     email: GraphQLString
     isActive: GraphQLBoolean
     clientId: ID

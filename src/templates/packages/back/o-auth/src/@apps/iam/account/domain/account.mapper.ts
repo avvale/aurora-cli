@@ -5,6 +5,7 @@ import { AccountResponse } from './account.response';
 import {
     AccountId,
     AccountType,
+    AccountCode,
     AccountEmail,
     AccountIsActive,
     AccountClientId,
@@ -77,6 +78,7 @@ export class AccountMapper implements IMapper
         return IamAccount.register(
             new AccountId(account.id, { undefinable: true }),
             new AccountType(account.type, { undefinable: true }),
+            new AccountCode(account.code, { undefinable: true }),
             new AccountEmail(account.email, { undefinable: true }),
             new AccountIsActive(account.isActive, { undefinable: true }),
             new AccountClientId(account.clientId, { undefinable: true }),
@@ -104,6 +106,7 @@ export class AccountMapper implements IMapper
         return new AccountResponse(
             account.id.value,
             account.type.value,
+            account.code.value,
             account.email.value,
             account.isActive.value,
             account.clientId.value,

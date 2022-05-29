@@ -597,6 +597,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -674,6 +675,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -713,6 +715,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -752,6 +755,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -799,6 +803,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -844,6 +849,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -884,6 +890,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -922,6 +929,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -965,6 +973,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -1008,6 +1017,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -1056,6 +1066,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -1096,6 +1107,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId
@@ -1134,6 +1146,7 @@ describe('account', () =>
                         {
                             id
                             type
+                            code
                             email
                             isActive
                             clientId

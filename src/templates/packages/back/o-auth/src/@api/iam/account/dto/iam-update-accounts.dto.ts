@@ -21,6 +21,12 @@ export class IamUpdateAccountsDto
 
     @ApiProperty({
         type       : String,
+        description: 'code [input here api field description]',
+    })
+    code?: string;
+
+    @ApiProperty({
+        type       : String,
         description: 'email [input here api field description]',
         example    : 'john@gmial.com',
     })
@@ -36,7 +42,7 @@ export class IamUpdateAccountsDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : 'e781efd1-113f-457d-9dfb-814b81bb823e',
+        example    : '7bf937f9-02af-4075-8135-4a0407304e2e',
     })
     clientId?: string;
 

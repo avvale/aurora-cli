@@ -5,6 +5,7 @@ import { CQMetadata } from 'aurora-ts-core';
 import {
     AccountId,
     AccountType,
+    AccountCode,
     AccountEmail,
     AccountIsActive,
     AccountClientId,
@@ -34,6 +35,7 @@ export class UpdateAccountByIdService
         payload: {
             id: AccountId;
             type?: AccountType;
+            code?: AccountCode;
             email?: AccountEmail;
             isActive?: AccountIsActive;
             clientId?: AccountClientId;
@@ -53,6 +55,7 @@ export class UpdateAccountByIdService
         const account = IamAccount.register(
             payload.id,
             payload.type,
+            payload.code,
             payload.email,
             payload.isActive,
             payload.clientId,

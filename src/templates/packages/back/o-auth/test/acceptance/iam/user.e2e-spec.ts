@@ -590,7 +590,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -667,7 +666,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -707,7 +705,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -748,7 +745,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -796,7 +792,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -842,7 +837,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -883,7 +877,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -922,7 +915,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -966,7 +958,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -1009,7 +1000,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -1057,7 +1047,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
@@ -1098,7 +1087,6 @@ describe('user', () =>
                             accountId
                             name
                             surname
-                            code
                             avatar
                             mobile
                             langId
