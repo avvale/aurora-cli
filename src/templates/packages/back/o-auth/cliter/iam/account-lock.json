@@ -291,11 +291,11 @@
         },
         {
             "path": "src/@apps/iam/account/infrastructure/seeds/account.seed.ts",
-            "integrity": "sha1:553a58b60c3a526d9af922af3f02b8fd532353b7"
+            "integrity": "sha1:c6596649b28fc3ac777be7f17dd9a1f80417882a"
         },
         {
             "path": "src/@apps/iam/account/infrastructure/sequelize/sequelize-account.model.ts",
-            "integrity": "sha1:2de69dcfb1fb4fd53fa10e1f912123d1bf1cd101"
+            "integrity": "sha1:eee46ab5c96a4406bcd54cfb5ceb539092cc071a"
         },
         {
             "path": "src/@apps/iam/account/infrastructure/sequelize/sequelize-account.repository.ts",
@@ -439,19 +439,19 @@
         },
         {
             "path": "src/@api/iam/account/dto/iam-account.dto.ts",
-            "integrity": "sha1:e38ba017edacd53fb110e274d36e467ae4b197f4"
+            "integrity": "sha1:cf477a515cad63528526708d3895ce04e37e273c"
         },
         {
             "path": "src/@api/iam/account/dto/iam-create-account.dto.ts",
-            "integrity": "sha1:e583f00f8c2b01fa42be987dbe51b2233fe01f38"
+            "integrity": "sha1:90f65f9df66d4c2a2cd3260a80d2aa5359b01eeb"
         },
         {
             "path": "src/@api/iam/account/dto/iam-update-account-by-id.dto.ts",
-            "integrity": "sha1:2820d478737242c3a80f84997ee345e64b89bdd6"
+            "integrity": "sha1:10e4d7cc6219e476e672424f7228dca2d4b6f7f3"
         },
         {
             "path": "src/@api/iam/account/dto/iam-update-accounts.dto.ts",
-            "integrity": "sha1:638d5daca345f49ba3c8412c5f85bacf0c648efb"
+            "integrity": "sha1:2ec60ceeceecf2c2c5559c4cc857daae12e762ad"
         },
         {
             "path": "src/@api/iam/account/dto/index.ts",
@@ -619,11 +619,11 @@
         },
         {
             "path": "test/acceptance/iam/account.e2e-spec.ts",
-            "integrity": "sha1:62eb224c9840c18e783697d84db38f34d15ebf54"
+            "integrity": "sha1:097c8ae2926ebecccbebad90d53468fb5200b762"
         },
         {
             "path": "postman/iam.account.postman.json",
-            "integrity": "sha1:04daecbc88b299892db5b816cce64ed758d7c86c"
+            "integrity": "sha1:4e34575559cc045c59bfea35ce096ec65202d117"
         }
     ]
 }

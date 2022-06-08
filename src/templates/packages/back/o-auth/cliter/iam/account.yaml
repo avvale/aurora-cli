@@ -22,7 +22,7 @@ aggregateProperties:
     type: varchar
     maxLength: 50
     nullable: true
-    index: index
+    index: unique
   - name: email
     type: varchar
     maxLength: 120

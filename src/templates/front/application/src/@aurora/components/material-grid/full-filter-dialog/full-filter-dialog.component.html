@@ -1,0 +1,129 @@
+<div class="flex flex-col h-full" *transloco="let t">
+	<div mat-dialog-title class="dialog-header">
+		<div class="title">
+			<mat-icon>filter_list</mat-icon>
+			<span>{{ t('Filter') }}</span>
+		</div>
+
+		<button mat-icon-button [disableRipple]="true" mat-dialog-close>
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
+	<mat-form-field
+		appearance="outline"
+		class="w-full cursor-pointer my-4"
+		data-input-type="filter-field-control"
+	>
+		<mat-label>{{ t('Field') }}</mat-label>
+		<input
+			type="text"
+			aria-label="String"
+			matInput
+			class="cursor-pointer disabled:cursor-not-allowed"
+			[placeholder]="t('PleaseSelectField')"
+			[formControl]="filterFieldNameControl"
+			[matAutocomplete]="auto"
+		/>
+		<mat-autocomplete
+			autoActiveFirstOption
+			#auto="matAutocomplete"
+			(optionSelected)="onFieldSelectionChange($event)"
+		>
+			<mat-option
+				*ngFor="let item of filteredColumnItems | async"
+				[value]="item"
+			>
+				{{ t( item.translation) }}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+
+	<div mat-dialog-content class="flex flex-col my-4 h-full">
+		<!-- column picker -->
+		<div class="flex-grow">
+			<form
+				[formGroup]="generatedForm"
+				class="w-full grid grid-cols-12 gap-2 items-center"
+			>
+				<!-- generated input fields -->
+				<ng-container *ngFor="let field of fieldFilterList">
+					<ng-container
+						[ngSwitch]="field.type"
+						[formGroupName]="field.field"
+					>
+						<span class="text-sm col-span-12">{{
+							t(field.translation)
+						}}</span>
+
+						<!-- criteria picker -->
+						<mat-form-field
+							appearance="outline"
+							class="col-span-4"
+							tiny
+						>
+							<mat-label>{{ t('Operator') }}</mat-label>
+							<mat-select formControlName="operator">
+								<mat-option
+									*ngFor="let type of stringCriteriaTypes"
+									[value]="type.value"
+								>
+									{{ t("Operators." + type.translation) }}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+
+						<!-- field value input -->
+						<mat-form-field
+							*ngSwitchCase="columnConfigType.STRING"
+							appearance="outline"
+							class="col-span-7 xx"
+							tiny
+						>
+							<mat-label>{{ t('Value') }}</mat-label>
+							<input
+								autocomplete="off"
+								formControlName="value"
+								matInput
+							/>
+
+							<div *ngIf="shouldRenderOutbox(field)" class="outbox">
+								<span>{{field.type !== columnConfigType.STRING ? 'AND' : 'OR'}}</span>
+							</div>
+						</mat-form-field>
+
+						<button
+						class="col-span-1"
+							mat-icon-button
+							(click)="deleteFilterField(field)"
+						>
+							<mat-icon>highlight_off</mat-icon>
+						</button>
+					</ng-container>
+				</ng-container>
+			</form>
+		</div>
+	</div>
+
+	<!-- confirmation buttons -->
+	<div class="w-full flex col-span-2">
+		<button
+			[mat-dialog-close]="'removeFilters'"
+			class="w-full mr-2"
+			mat-flat-button
+		>
+			{{ t('ClearFilters') }}
+		</button>
+		<button
+			[mat-dialog-close]="{
+				formValue: generatedForm.value,
+				filters: fieldFilterList
+			}"
+			class="w-full"
+			mat-flat-button
+			color="primary"
+			[disabled]="!generatedForm.valid"
+		>
+			{{ t('Filter') }}
+		</button>
+	</div>
+</div>

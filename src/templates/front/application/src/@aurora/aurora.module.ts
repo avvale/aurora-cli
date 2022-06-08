@@ -1,7 +1,9 @@
 import { APP_INITIALIZER, NgModule, Optional, SkipSelf } from '@angular/core';
-import { ApolloModule, BootstrapService, PipesModule } from './infrastructure';
-import './infrastructure/prototypes/string-to-pascal-case.interface';
-import './infrastructure/prototypes/string-to-pascal-case';
+import { ApolloModule } from './modules';
+import { BootstrapService } from './services/bootstrap.service';
+import { PipesModule } from './pipes';
+import './prototypes/string-to-pascal-case.interface';
+import './prototypes/string-to-pascal-case';
 
 @NgModule({
     imports: [

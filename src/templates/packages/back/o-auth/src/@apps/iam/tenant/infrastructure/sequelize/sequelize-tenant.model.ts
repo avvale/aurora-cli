@@ -23,7 +23,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     })
     name: string;
 
-    @Index
+    @Unique
     @Column({
         field: 'code',
         allowNull: true,

@@ -291,11 +291,11 @@
         },
         {
             "path": "src/@apps/o-auth/application/infrastructure/seeds/application.seed.ts",
-            "integrity": "sha1:5f37ed6f1b683e7f663494835b5d60ad55b51471"
+            "integrity": "sha1:f0c3796367135c1625234bdf8a41289b736fc701"
         },
         {
             "path": "src/@apps/o-auth/application/infrastructure/sequelize/sequelize-application.model.ts",
-            "integrity": "sha1:a52e747c9a4b40a9bd4d85dd989137fb0c827a40"
+            "integrity": "sha1:358cba43b96300bb0520e8bafff93ebe8a521554"
         },
         {
             "path": "src/@apps/o-auth/application/infrastructure/sequelize/sequelize-application.repository.ts",
@@ -619,11 +619,11 @@
         },
         {
             "path": "test/acceptance/o-auth/application.e2e-spec.ts",
-            "integrity": "sha1:e226d3902a721be6758f66b713eee054541a98e8"
+            "integrity": "sha1:b6d17eebd27ffccb2252b3e02b27af2c6aba55fa"
         },
         {
             "path": "postman/o-auth.application.postman.json",
-            "integrity": "sha1:eb4b41322ec98819bc5e9ad1f5c0edb1f8f7de4d"
+            "integrity": "sha1:473f53b158a311aa049e725726b74fa02715cb2b"
         }
     ]
 }

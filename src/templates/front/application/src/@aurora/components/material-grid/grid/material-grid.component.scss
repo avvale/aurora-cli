@@ -1,0 +1,41 @@
+:host {
+    display: flex;
+    flex: 1;
+    max-width: 100%;
+}
+
+.mat-header-cell, .mat-footer-cell, .mat-cell {
+    min-width: 200px;
+    max-width: 200px;
+    white-space: initial;
+    box-sizing: border-box;
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 10px;
+    line-break: unset;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+::ng-deep {
+    .mat-sort-header-content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-align: left !important;
+        display: block !important;
+    }
+}
+
+.grid-header {
+    @apply flex flex-row justify-end w-full bg-white rounded-tl-md rounded-tr-md py-2 border-b-2 border-gray-200;
+}
+
+.grid-header__button {
+    @apply
+    flex flex-row items-center ml-3 px-3 py-2 shadow-none rounded-md border border-gray-200 bg-gray-600 bg-opacity-5
+    hover:shadow-sm hover:bg-opacity-10
+    active:shadow-none
+    transition-all
+    ;
+}

@@ -1,8 +1,7 @@
 
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils } from '@aurora';
-import { ViewDetailComponent } from '@aurora/infrastructure/super/view-detail.component';
+import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';

@@ -27,7 +27,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     })
     type: string;
 
-    @Index
+    @Unique
     @Column({
         field: 'code',
         allowNull: true,

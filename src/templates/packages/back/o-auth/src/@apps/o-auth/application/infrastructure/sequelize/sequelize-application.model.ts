@@ -23,6 +23,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     name: string;
 
+    @Unique
     @Column({
         field: 'code',
         allowNull: false,

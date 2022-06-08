@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model';
