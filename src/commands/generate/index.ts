@@ -28,8 +28,8 @@ export default class Generate extends Command
                 'bounded-context', 'b',
                 'module', 'm',
             ],
-            required   : true,
-        }
+            required: true,
+        },
     ];
 
     static examples = [
