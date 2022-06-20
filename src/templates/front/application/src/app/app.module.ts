@@ -6,7 +6,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FuseModule } from '@fuse';
 import { FuseConfigModule } from '@fuse/services/config';
 import { FuseMockApiModule } from '@fuse/lib/mock-api';
-import { AuroraModule, AuroraLangService, JsonLangService, RouteReuseStrategyService } from '@aurora';
+import { AuroraModule, LangService, JsonLangService, RouteReuseStrategyService } from '@aurora';
 import { CoreModule } from 'app/core/core.module';
 import { appConfig } from 'app/core/config/app.config';
 import { mockApiServices } from 'app/mock-api';
@@ -47,7 +47,7 @@ const routerConfig: ExtraOptions = {
     ],
     providers: [
         {
-            provide    : AuroraLangService,
+            provide    : LangService,
             useExisting: JsonLangService,
         },
         {
