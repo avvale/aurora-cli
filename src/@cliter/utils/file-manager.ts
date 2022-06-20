@@ -165,7 +165,10 @@ export class FileManager
                     path.join(originPath, file),
                     relativeTargetBasePath,
                     path.join(relativeTargetPath, mappedDirectory),
-                    { currentProperty },
+                    {
+                        currentProperty,
+                        useTemplateEngine,
+                    },
                 );
             }
         });
