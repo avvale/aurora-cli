@@ -12,7 +12,7 @@ const shake = trigger('shake',
         // Transition
         transition('void => *, * => true',
             [
-                animate('\{{timings}}',
+                animate('{{timings}}',
                     keyframes([
                         style({
                             transform: 'translate3d(0, 0, 0)',

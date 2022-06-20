@@ -22,7 +22,7 @@ const fadeIn = trigger('fadeIn',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('\{{timings}}'),
+        transition('void => *', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -55,7 +55,7 @@ const fadeInTop = trigger('fadeInTop',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('\{{timings}}'),
+        transition('void => *', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -88,7 +88,7 @@ const fadeInBottom = trigger('fadeInBottom',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('\{{timings}}'),
+        transition('void => *', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -121,7 +121,7 @@ const fadeInLeft = trigger('fadeInLeft',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('\{{timings}}'),
+        transition('void => *', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -154,7 +154,7 @@ const fadeInRight = trigger('fadeInRight',
         transition('void => false', []),
 
         // Transition
-        transition('void => *', animate('\{{timings}}'),
+        transition('void => *', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
@@ -185,7 +185,7 @@ const fadeOut = trigger('fadeOut',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('\{{timings}}'),
+        transition('* => void', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
@@ -218,7 +218,7 @@ const fadeOutTop = trigger('fadeOutTop',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('\{{timings}}'),
+        transition('* => void', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
@@ -251,7 +251,7 @@ const fadeOutBottom = trigger('fadeOutBottom',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('\{{timings}}'),
+        transition('* => void', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
@@ -284,7 +284,7 @@ const fadeOutLeft = trigger('fadeOutLeft',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('\{{timings}}'),
+        transition('* => void', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
@@ -317,7 +317,7 @@ const fadeOutRight = trigger('fadeOutRight',
         transition('false => void', []),
 
         // Transition
-        transition('* => void', animate('\{{timings}}'),
+        transition('* => void', animate('{{timings}}'),
             {
                 params: {
                     timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`

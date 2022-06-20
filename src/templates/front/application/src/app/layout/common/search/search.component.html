@@ -32,7 +32,7 @@
             </mat-option>
             <ng-container *ngFor="let resultSet of resultSets; trackBy: trackByFn">
                 <mat-optgroup class="flex items-center mt-2 px-2">
-                    <span class="text-sm font-semibold tracking-wider text-secondary">\{{resultSet.label.toUpperCase()}}</span>
+                    <span class="text-sm font-semibold tracking-wider text-secondary">{{resultSet.label.toUpperCase()}}</span>
                 </mat-optgroup>
                 <ng-container *ngFor="let result of resultSet.results; trackBy: trackByFn">
                     <mat-option
@@ -88,7 +88,7 @@
             </mat-option>
             <ng-container *ngFor="let resultSet of resultSets; trackBy: trackByFn">
                 <mat-optgroup class="flex items-center mt-2 px-2">
-                    <span class="text-sm font-semibold tracking-wider text-secondary">\{{resultSet.label.toUpperCase()}}</span>
+                    <span class="text-sm font-semibold tracking-wider text-secondary">{{resultSet.label.toUpperCase()}}</span>
                 </mat-optgroup>
                 <ng-container *ngFor="let result of resultSet.results; trackBy: trackByFn">
                     <mat-option
@@ -142,7 +142,7 @@
             class="truncate leading-normal"
             [innerHTML]="result.title"></div>
         <div class="truncate leading-normal text-sm text-secondary">
-            \{{result.link}}
+            {{result.link}}
         </div>
     </div>
 </ng-template>

@@ -327,11 +327,11 @@ export const demoCourseContent = `
     Adipisci alias animi <code>debitis</code> eos et impedit maiores, modi nam nobis officia optio perspiciatis, rerum.
     Accusantium esse nostrum odit quis quo:
 </p>
-<pre><code>h1 a \{{'{'}}
+<pre><code>h1 a {{'{'}}
     display: block;
     width: 300px;
     height: 80px;
-\{{'}'}}</code></pre>
+{{'}'}}</code></pre>
 <p>
     Accusantium aut autem, lab deleniti eaque fugiat fugit id ipsa iste molestiae,
     <a>necessitatibus nemo quasi</a>
@@ -455,14 +455,14 @@ export const demoCourseContent = `
 <p>
     Adipisci autem consequuntur <code>labque cupiditate</code> dolor ducimus fuga neque nesciunt:
 </p>
-<pre><code>module.exports = \{{'{'}}
+<pre><code>module.exports = {{'{'}}
     purge: [],
-    theme: \{{'{'}}
-        extend: \{{'{}'}},
+    theme: {{'{'}}
+        extend: {{'{}'}},
     },
-    variants: \{{'{}'}},
+    variants: {{'{}'}},
     plugins: [],
-\{{'}'}}</code></pre>
+{{'}'}}</code></pre>
 <p>
     Aliquid aspernatur eius fugit hic iusto.
 </p>

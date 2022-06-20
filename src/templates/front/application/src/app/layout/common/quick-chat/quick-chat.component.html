@@ -37,11 +37,11 @@
                         </ng-container>
                         <ng-container *ngIf="!chat.contact.avatar">
                             <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                \{{chat.contact.name.charAt(0)}}
+                                {{chat.contact.name.charAt(0)}}
                             </div>
                         </ng-container>
                     </div>
-                    <div class="ml-4 text-lg font-medium leading-5 truncate">\{{chat.contact.name}}</div>
+                    <div class="ml-4 text-lg font-medium leading-5 truncate">{{chat.contact.name}}</div>
                     <button
                         class="ml-auto mr-4"
                         mat-icon-button>
@@ -80,7 +80,7 @@
                                 </ng-container>
                                 <ng-container *ngIf="!chat.contact.avatar">
                                     <div class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                                        \{{chat.contact.name.charAt(0)}}
+                                        {{chat.contact.name.charAt(0)}}
                                     </div>
                                 </ng-container>
                             </div>
@@ -100,7 +100,7 @@
                                     <div class="flex items-center justify-center my-3 -mx-6">
                                         <div class="flex-auto border-b"></div>
                                         <div class="flex-0 mx-4 text-sm font-medium leading-5 text-secondary">
-                                            \{{message.createdAt | date: 'longDate'}}
+                                            {{message.createdAt | date: 'longDate'}}
                                         </div>
                                         <div class="flex-auto border-b"></div>
                                     </div>
@@ -141,7 +141,7 @@
                                             class="my-0.5 text-sm font-medium text-secondary"
                                             [ngClass]="{'mr-3': message.isMine,
                                                         'ml-3': !message.isMine}">
-                                            \{{message.createdAt | date:'HH:mm'}}
+                                            {{message.createdAt | date:'HH:mm'}}
                                         </div>
                                     </ng-container>
                                 </div>

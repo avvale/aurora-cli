@@ -9,7 +9,7 @@
         >
             <mat-icon [matBadge]="activeFilters.length" [matBadgeHidden]="activeFilters.length == 0" matBadgeColor="warn">filter_list</mat-icon>
             <span class="cdk-visually-hidden">
-                Filter icon showing active filters with a value of \{{ activeFilters.length }}
+                Filter icon showing active filters with a value of {{ activeFilters.length }}
               </span>
         </button>
 
@@ -39,14 +39,14 @@
                                 [disabled]="!columnConfig.sort"
                                 [ngClass]="columnConfig.headerClass"
                                 [mat-sort-header]="columnConfig.sort">
-                                \{{
+                                {{
                                     columnConfig.translation ?
                                     translations[columnConfig.translation.toPascalCase()] :
                                     translations[columnConfig.field.toPascalCase()]
                                 }}
                             </th>
                             <td mat-cell *matCellDef="let element">
-                                \{{ element | get:columnConfig.field }}
+                                {{ element | get:columnConfig.field }}
                             </td>
                         </ng-container>
 
@@ -57,7 +57,7 @@
                                 [disabled]="!columnConfig.sort"
                                 [ngClass]="columnConfig.headerClass"
                                 [mat-sort-header]="columnConfig.sort">
-                                \{{
+                                {{
                                     columnConfig.translation ?
                                     translations[columnConfig.translation.toPascalCase()] :
                                     translations[columnConfig.field.toPascalCase()]
@@ -78,7 +78,7 @@
                                 [disabled]="!columnConfig.sort"
                                 [ngClass]="columnConfig.headerClass"
                                 [mat-sort-header]="columnConfig.sort">
-                                \{{
+                                {{
                                     columnConfig.translation ?
                                     translations[columnConfig.translation.toPascalCase()] :
                                     translations[columnConfig.field.toPascalCase()]
@@ -91,8 +91,8 @@
                                 <mat-menu #menu="matMenu">
                                     <ng-container *ngFor="let action of columnConfig.actions | getActions:element">
                                         <button mat-menu-item (click)="handleClickAction(action, element, $event)">
-                                            <mat-icon>\{{ action.icon }}</mat-icon>
-                                            <span>\{{ translations[action.translation] }}</span>
+                                            <mat-icon>{{ action.icon }}</mat-icon>
+                                            <span>{{ translations[action.translation] }}</span>
                                         </button>
                                     </ng-container>
                                 </mat-menu>

@@ -6,7 +6,7 @@
     <ng-container *ngIf="unreadCount > 0">
         <span class="absolute top-0 right-0 left-0 flex items-center justify-center h-3">
             <span class="flex items-center justify-center shrink-0 min-w-4 h-4 px-1 ml-4 mt-2.5 rounded-full bg-teal-600 text-indigo-50 text-xs font-medium">
-                \{{unreadCount}}
+                {{unreadCount}}
             </span>
         </span>
     </ng-container>
@@ -136,7 +136,7 @@
                                 [innerHTML]="notification.description"></div>
                         </ng-container>
                         <div class="mt-2 text-sm leading-none text-secondary">
-                            \{{notification.time | date:'MMM dd, h:mm a'}}
+                            {{notification.time | date:'MMM dd, h:mm a'}}
                         </div>
                     </div>
                 </ng-template>

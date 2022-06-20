@@ -15,7 +15,7 @@
             (click)="setActiveLang(lang.id)">
             <span class="flex items-center">
                 <ng-container *ngTemplateOutlet="flagImage; context: {$implicit: lang.id}"></ng-container>
-                <span class="ml-3">\{{lang.label}}</span>
+                <span class="ml-3">{{lang.label}}</span>
             </span>
         </button>
     </ng-container>

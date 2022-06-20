@@ -21,13 +21,13 @@
         <div class="fuse-vertical-navigation-item-title-wrapper">
             <div class="fuse-vertical-navigation-item-title">
                 <span [ngClass]="item.classes?.title">
-                    \{{item.title}}
+                    {{item.title}}
                 </span>
             </div>
             <ng-container *ngIf="item.subtitle">
                 <div class="fuse-vertical-navigation-item-subtitle">
                     <span [ngClass]="item.classes?.subtitle">
-                        \{{item.subtitle}}
+                        {{item.subtitle}}
                     </span>
                 </div>
             </ng-container>
@@ -39,7 +39,7 @@
                 <div
                     class="fuse-vertical-navigation-item-badge-content"
                     [ngClass]="item.badge.classes">
-                    \{{item.badge.title}}
+                    {{item.badge.title}}
                 </div>
             </div>
         </ng-container>
