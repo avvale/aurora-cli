@@ -23,8 +23,10 @@ export class TemplateGenerator
         relativeTargetPath: string,
         {
             templateElementPath,
+            useTemplateEngine = true,
         }: {
             templateElementPath?: string;
+            useTemplateEngine?: boolean;
         } = {},
     ): void
     {
@@ -32,6 +34,7 @@ export class TemplateGenerator
             path.join(TemplateGenerator.templatePath, ...templateElement.split('/'), templateElementPath || ''),
             relativeTargetBasePath,
             relativeTargetPath,
+            { useTemplateEngine },
         );
     }
 

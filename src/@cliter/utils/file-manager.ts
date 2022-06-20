@@ -94,8 +94,10 @@ export class FileManager
         relativeTargetPath: string,
         {
             currentProperty,
+            useTemplateEngine = true,
         }: {
             currentProperty?: Property;
+            useTemplateEngine?: boolean;
         } = {},
     ): void
     {
@@ -137,7 +139,10 @@ export class FileManager
                     originFilePath,
                     file,
                     path.join(relativeTargetBasePath, relativeTargetPath),
-                    { currentProperty },
+                    {
+                        currentProperty,
+                        useTemplateEngine,
+                    },
                 );
             }
             else if (stats.isDirectory())
@@ -185,6 +190,7 @@ export class FileManager
             moduleNamePrefix = '',
             moduleNameSuffix = '',
             currentProperty,
+            useTemplateEngine = true,
         }: {
             targetBasePath?: string;
             boundedContextPrefix?: string;
@@ -192,6 +198,7 @@ export class FileManager
             moduleNamePrefix?: string;
             moduleNameSuffix?: string; // use to set i18n items
             currentProperty?: Property;
+            useTemplateEngine?: boolean;
         } = {},
     ): Promise<void>
     {
@@ -235,15 +242,18 @@ export class FileManager
         // read file content from file template
         let contents = fs.readFileSync(originFilePath, 'utf8');
 
-        // replace variables with handlebars template engine
-        contents = await TemplateEngine.render(contents, {
-            ...FileManager.stateService,
-            currentProperty,
-            boundedContextPrefix,
-            boundedContextSuffix,
-            moduleNamePrefix,
-            moduleNameSuffix,
-        });
+        if (useTemplateEngine)
+        {
+            // replace variables with handlebars template engine
+            contents = await TemplateEngine.render(contents, {
+                ...FileManager.stateService,
+                currentProperty,
+                boundedContextPrefix,
+                boundedContextSuffix,
+                moduleNamePrefix,
+                moduleNameSuffix,
+            });
+        }
 
         // if exist file is has not force flag, avoid overwrite file
         if (existFile && !FileManager.stateService.flags.force)

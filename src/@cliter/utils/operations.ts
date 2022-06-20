@@ -48,7 +48,12 @@ export class Operations
         // create directory for dashboard
         if (!fs.existsSync(Operations.stateService.dashboardName)) fs.mkdirSync(Operations.stateService.dashboardName, { recursive: true });
 
-        await TemplateGenerator.generateStaticContents(TemplateElement.FRONT_APPLICATION, path.join(Operations.stateService.dashboardName), '.');
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.FRONT_APPLICATION,
+            path.join(Operations.stateService.dashboardName),
+            '.',
+            { useTemplateEngine: false },
+        );
     }
 
     async generateFrontModule(): Promise<void>
