@@ -11,7 +11,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "publish:package": "rm -rf ./node_modules && rm -rf ./.angular && rm -rf ../aurora-cli/src/templates/front/application && mkdir ../aurora-cli/src/templates/front/application && cp -r . ../aurora-cli/src/templates/front/application/ && cd ../aurora-cli && npm run build"
   },
   "dependencies": {
     "@angular/animations": "13.2.3",
