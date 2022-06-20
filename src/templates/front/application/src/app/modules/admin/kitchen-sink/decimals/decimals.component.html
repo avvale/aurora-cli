@@ -1,0 +1,74 @@
+<div class="flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title><mat-icon svgIcon="heroicons_solid:tag" class="icon-size-10 mr-2"></mat-icon> {{ t('kitchenSink.Decimals') }}</au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button class="ml-3"
+                    type="submit"
+                    form="formDetail"
+                    mat-flat-button
+                    [disabled]="fg.pristine"
+                    [color]="'accent'"
+                >
+                <mat-icon class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:save'"></mat-icon>
+                {{ t('Submit') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form   id="formDetail"
+                    novalidate
+                    [formGroup]="fg"
+                    (ngSubmit)="onSubmit()">
+
+                <div class="layout__container">
+
+                    <mat-form-field appearance="outline" class="col-4">
+                        <mat-label>{{ t('kitchenSink.example1') }}</mat-label>
+                        <input
+                            matInput
+                            auDecimal
+                            integerNumberAmount="3"
+                            decimalNumberAmount="3"
+                            formControlName="example1"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.example1 | async }}</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" class="col-4">
+                        <mat-label>{{ t('kitchenSink.example2') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="example2"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.example2 | async }}</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>
