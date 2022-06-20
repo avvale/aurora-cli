@@ -8,7 +8,7 @@ import * as dayjs from 'dayjs';
     selector: 'au-datepicker',
     template: `
         <mat-form-field [appearance]="appearance">
-            <mat-label>{{ label }}</mat-label>
+            <mat-label>\{{ label }}</mat-label>
             <input
                 autocomplete="off"
                 matInput
@@ -23,7 +23,7 @@ import * as dayjs from 'dayjs';
                 [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error>{{ error }}</mat-error>
+            <mat-error>\{{ error }}</mat-error>
         </mat-form-field>`,
     styleUrls: [
         './datepicker.component.scss',
