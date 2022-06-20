@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
         <div mat-dialog-title class="dialog-header">
             <div class="title">
                 <mat-icon>table_chart</mat-icon>
-                <span>{{ translations?.Columns }}</span>
+                <span>\{{ translations?.Columns }}</span>
             </div>
 
             <button mat-icon-button [disableRipple]="true" mat-dialog-close>
@@ -24,7 +24,7 @@ import { Subject } from 'rxjs';
                 class="columns-list"
                 (cdkDropListDropped)="drop($event)"
             >
-                <span class="helper">{{t('ClickAndDragInfo')}}</span>
+                <span class="helper">\{{ t('ClickAndDragInfo') }}</span>
                 <hr>
                 <ng-container *ngFor="let columnConfig of columnsConfig">
                     <div
@@ -42,7 +42,7 @@ import { Subject } from 'rxjs';
                             </mat-checkbox>
 
                             <span>
-                            {{
+                            \{{
                                 columnConfig.translation ?
                                 translations[columnConfig.translation.toPascalCase()] :
                                 translations[columnConfig.field.toPascalCase()]
