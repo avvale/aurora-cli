@@ -4,7 +4,7 @@ import { DeletedAdministrativeAreaLevel2Event } from './deleted-administrative-a
 @EventsHandler(DeletedAdministrativeAreaLevel2Event)
 export class DeletedAdministrativeAreaLevel2EventHandler implements IEventHandler<DeletedAdministrativeAreaLevel2Event>
 {
-    handle(event: DeletedAdministrativeAreaLevel2Event)
+    handle(event: DeletedAdministrativeAreaLevel2Event): void
     {
         // console.log('DeletedAdministrativeAreaLevel2Event: ', event);
     }

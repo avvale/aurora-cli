@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteLangByIdCommandHandler } from './delete-lang-by-id.command-handler';
-import { langs } from '../../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 import { DeleteLangByIdCommand } from './delete-lang-by-id.command';
 import { DeleteLangByIdService } from './delete-lang-by-id.service';
 
@@ -17,13 +17,14 @@ describe('DeleteLangByIdCommandHandler', () =>
             providers: [
                 DeleteLangByIdCommandHandler,
                 {
-                    provide: DeleteLangByIdService,
+                    provide : DeleteLangByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteLangByIdCommandHandler>(DeleteLangByIdCommandHandler);
         service         = module.get<DeleteLangByIdService>(DeleteLangByIdService);
@@ -41,7 +42,7 @@ describe('DeleteLangByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteLangByIdCommand(
                     langs[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     AdministrativeAreaLevel2Id,
     AdministrativeAreaLevel2CountryId,
@@ -14,10 +15,10 @@ import {
     AdministrativeAreaLevel2CreatedAt,
     AdministrativeAreaLevel2UpdatedAt,
     AdministrativeAreaLevel2DeletedAt,
-} from './../../domain/value-objects';
-import { IAdministrativeAreaLevel2Repository } from './../../domain/administrative-area-level-2.repository';
-import { CommonAdministrativeAreaLevel2 } from './../../domain/administrative-area-level-2.aggregate';
-import { AddAdministrativeAreasLevel2ContextEvent } from './../events/add-administrative-areas-level-2-context.event';
+} from '../../domain/value-objects';
+import { IAdministrativeAreaLevel2Repository } from '../../domain/administrative-area-level-2.repository';
+import { CommonAdministrativeAreaLevel2 } from '../../domain/administrative-area-level-2.aggregate';
+import { AddAdministrativeAreasLevel2ContextEvent } from '../events/add-administrative-areas-level-2-context.event';
 
 @Injectable()
 export class CreateAdministrativeAreasLevel2Service
@@ -27,19 +28,20 @@ export class CreateAdministrativeAreasLevel2Service
         private readonly repository: IAdministrativeAreaLevel2Repository,
     ) {}
 
-    public async main(
+    async main(
         administrativeAreasLevel2: {
-            id: AdministrativeAreaLevel2Id,
-            countryId: AdministrativeAreaLevel2CountryId,
-            administrativeAreaLevel1Id: AdministrativeAreaLevel2AdministrativeAreaLevel1Id,
-            code: AdministrativeAreaLevel2Code,
-            customCode: AdministrativeAreaLevel2CustomCode,
-            name: AdministrativeAreaLevel2Name,
-            slug: AdministrativeAreaLevel2Slug,
-            latitude: AdministrativeAreaLevel2Latitude,
-            longitude: AdministrativeAreaLevel2Longitude,
-            zoom: AdministrativeAreaLevel2Zoom,
-        } []
+            id: AdministrativeAreaLevel2Id;
+            countryId: AdministrativeAreaLevel2CountryId;
+            administrativeAreaLevel1Id: AdministrativeAreaLevel2AdministrativeAreaLevel1Id;
+            code: AdministrativeAreaLevel2Code;
+            customCode: AdministrativeAreaLevel2CustomCode;
+            name: AdministrativeAreaLevel2Name;
+            slug: AdministrativeAreaLevel2Slug;
+            latitude: AdministrativeAreaLevel2Latitude;
+            longitude: AdministrativeAreaLevel2Longitude;
+            zoom: AdministrativeAreaLevel2Zoom;
+        } [],
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -60,7 +62,7 @@ export class CreateAdministrativeAreasLevel2Service
         ));
 
         // insert
-        await this.repository.insert(aggregateAdministrativeAreasLevel2);
+        await this.repository.insert(aggregateAdministrativeAreasLevel2, { insertOptions: cQMetadata?.repositoryOptions });
 
         // create AddAdministrativeAreasLevel2ContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

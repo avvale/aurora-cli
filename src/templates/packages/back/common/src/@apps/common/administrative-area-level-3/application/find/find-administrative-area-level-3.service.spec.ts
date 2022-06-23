@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { FindAdministrativeAreaLevel3Service } from './find-administrative-area-level-3.service';
-import { IAdministrativeAreaLevel3Repository } from './../../domain/administrative-area-level-3.repository';
-import { MockAdministrativeAreaLevel3Repository } from './../../infrastructure/mock/mock-administrative-area-level-3.repository';
+import { IAdministrativeAreaLevel3Repository } from '../../domain/administrative-area-level-3.repository';
+import { MockAdministrativeAreaLevel3Repository } from '../../infrastructure/mock/mock-administrative-area-level-3.repository';
 
 describe('FindAdministrativeAreaLevel3Service', () =>
 {
@@ -22,13 +22,14 @@ describe('FindAdministrativeAreaLevel3Service', () =>
                 FindAdministrativeAreaLevel3Service,
                 MockAdministrativeAreaLevel3Repository,
                 {
-                    provide: IAdministrativeAreaLevel3Repository,
+                    provide : IAdministrativeAreaLevel3Repository,
                     useValue: {
-                        find: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        find: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindAdministrativeAreaLevel3Service);
         repository      = module.get(IAdministrativeAreaLevel3Repository);

@@ -3,11 +3,11 @@ type CommonAdministrativeAreaLevel3
 {
     id: ID!
     countryId: ID!
-    country: CommonCountry!
+    country: CommonCountry
     administrativeAreaLevel1Id: ID!
-    administrativeAreaLevel1: CommonAdministrativeAreaLevel1!
+    administrativeAreaLevel1: CommonAdministrativeAreaLevel1
     administrativeAreaLevel2Id: ID!
-    administrativeAreaLevel2: CommonAdministrativeAreaLevel2!
+    administrativeAreaLevel2: CommonAdministrativeAreaLevel2
     code: GraphQLString!
     customCode: GraphQLString
     name: GraphQLString!
@@ -35,9 +35,24 @@ input CommonCreateAdministrativeAreaLevel3Input
     zoom: GraphQLInt
 }
 
-input CommonUpdateAdministrativeAreaLevel3Input
+input CommonUpdateAdministrativeAreaLevel3ByIdInput
 {
     id: ID!
+    countryId: ID
+    administrativeAreaLevel1Id: ID
+    administrativeAreaLevel2Id: ID
+    code: GraphQLString
+    customCode: GraphQLString
+    name: GraphQLString
+    slug: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+}
+
+input CommonUpdateAdministrativeAreasLevel3Input
+{
+    id: ID
     countryId: ID
     administrativeAreaLevel1Id: ID
     administrativeAreaLevel2Id: ID
@@ -62,7 +77,8 @@ type Mutation
 {
     commonCreateAdministrativeAreaLevel3(payload: CommonCreateAdministrativeAreaLevel3Input!): CommonAdministrativeAreaLevel3
     commonCreateAdministrativeAreasLevel3(payload: [CommonCreateAdministrativeAreaLevel3Input]!): Boolean!
-    commonUpdateAdministrativeAreaLevel3(payload: CommonUpdateAdministrativeAreaLevel3Input! constraint: QueryStatement): CommonAdministrativeAreaLevel3
+    commonUpdateAdministrativeAreaLevel3ById(payload: CommonUpdateAdministrativeAreaLevel3ByIdInput! constraint: QueryStatement): CommonAdministrativeAreaLevel3
+    commonUpdateAdministrativeAreasLevel3(payload: CommonUpdateAdministrativeAreasLevel3Input! query: QueryStatement constraint: QueryStatement): [CommonAdministrativeAreaLevel3]!
     commonDeleteAdministrativeAreaLevel3ById(id: ID! constraint: QueryStatement): CommonAdministrativeAreaLevel3
     commonDeleteAdministrativeAreasLevel3(query: QueryStatement constraint: QueryStatement): [CommonAdministrativeAreaLevel3]!
 }

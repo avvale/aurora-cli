@@ -390,6 +390,7 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
+                code: 'aurora2', // code is a unique key
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(201);
@@ -416,18 +417,18 @@ describe('application', () =>
             });
     });
 
-    test('/REST:GET o-auth/application/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST o-auth/application/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/find/07dd3284-021b-4078-969d-237831d4f2eb')
+            .post('/o-auth/application/find/07dd3284-021b-4078-969d-237831d4f2eb')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET o-auth/application/find/{id}', () =>
+    test('/REST:POST o-auth/application/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/application/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/o-auth/application/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
@@ -455,11 +456,13 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
+                code: 'aurora2', // code is a unique key
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
-            .expect(200)
+            //.expect(200)
             .then(res =>
             {
+                console.log(res.body)
                 expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
@@ -605,6 +608,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
+                        code: 'aurora2', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -823,6 +827,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
+                        code: 'aurora2', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -858,6 +863,7 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
+                        code: 'aurora2', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                     query: {

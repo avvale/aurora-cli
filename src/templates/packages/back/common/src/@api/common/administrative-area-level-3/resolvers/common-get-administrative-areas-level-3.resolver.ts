@@ -1,24 +1,28 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { GetAdministrativeAreasLevel3Query } from '../../../../@apps/common/administrative-area-level-3/application/get/get-administrative-areas-level-3.query';
-import { CommonAdministrativeAreaLevel3 } from './../../../../graphql';
+import { CommonGetAdministrativeAreasLevel3Handler } from '../handlers/common-get-administrative-areas-level-3.handler';
+import { CommonAdministrativeAreaLevel3 } from '../../../../graphql';
 
 @Resolver()
 export class CommonGetAdministrativeAreasLevel3Resolver
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonGetAdministrativeAreasLevel3Handler,
     ) {}
 
     @Query('commonGetAdministrativeAreasLevel3')
     async main(
         @Args('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     ): Promise<CommonAdministrativeAreaLevel3[]>
     {
-        return await this.queryBus.ask(new GetAdministrativeAreasLevel3Query(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

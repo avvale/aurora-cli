@@ -101,10 +101,10 @@ describe('credential', () =>
         await app.init();
     });
 
-    test('/REST:POST o-auth/credential - Got 201, accessToken and refreshToken obtained', () =>
+    test('/REST:POST o-auth/credentials - Got 201, accessToken and refreshToken obtained', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
@@ -120,10 +120,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 401, Unauthorized to access by wrong password', () =>
+    test('/REST:POST o-auth/credentials - Got 401, Unauthorized to access by wrong password', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
@@ -135,10 +135,10 @@ describe('credential', () =>
             .expect(401);
     });
 
-    test('/REST:POST o-auth/credential - Got 401 user not found', () =>
+    test('/REST:POST o-auth/credentials - Got 401 user not found', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
@@ -154,10 +154,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 404, wrong application code', () =>
+    test('/REST:POST o-auth/credentials - Got 404, wrong application code', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhMjokMnkkMTAkRU9BL1NLRXdLUmdIUHc2NGtPNExaLjZveTViOGtsNkp6Vy9tQ1JPTWZTcTZTMzgvSWl5d0c=`)
             .send({
@@ -172,10 +172,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 404, wrong application secret', () =>
+    test('/REST:POST o-auth/credentials - Got 404, wrong application secret', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3`)
             .send({
@@ -190,10 +190,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 400, wrong Authorization header', () =>
+    test('/REST:POST o-auth/credentials - Got 400, wrong Authorization header', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic ***************`)
             .send({
@@ -208,10 +208,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 400, ApplicationAuthorizationHeader not defined', () =>
+    test('/REST:POST o-auth/credentials - Got 400, ApplicationAuthorizationHeader not defined', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .send({
                 grantType: OAuthClientGrantType.PASSWORD,
@@ -225,10 +225,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 400, grantType property not defined', () =>
+    test('/REST:POST o-auth/credentials - Got 400, grantType property not defined', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
@@ -242,10 +242,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 400, username property not defined', () =>
+    test('/REST:POST o-auth/credentials - Got 400, username property not defined', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
@@ -259,10 +259,10 @@ describe('credential', () =>
             });
     });
 
-    test('/REST:POST o-auth/credential - Got 400, password property not defined', () =>
+    test('/REST:POST o-auth/credentials - Got 400, password property not defined', () =>
     {
         return request(app.getHttpServer())
-            .post('/o-auth/credential')
+            .post('/o-auth/credentials')
             .set('Accept', 'application/json')
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
@@ -277,7 +277,7 @@ describe('credential', () =>
     });
 
 
-    test('/GraphQL oAuthCreateCredential - Got 201, accessToken and refreshToken obtained', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 201, accessToken and refreshToken obtained', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -285,9 +285,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -306,12 +306,12 @@ describe('credential', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.oAuthCreateCredential).toHaveProperty('accessToken');
-                expect(res.body.data.oAuthCreateCredential).toHaveProperty('refreshToken');
+                expect(res.body.data.oAuthCreateCredentials).toHaveProperty('accessToken');
+                expect(res.body.data.oAuthCreateCredentials).toHaveProperty('refreshToken');
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 401, Unauthorized to access by wrong password', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 401, Unauthorized to access by wrong password', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -319,9 +319,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -345,7 +345,7 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 401, Unauthorized to access by wrong password', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 401, Unauthorized to access by wrong password', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -353,9 +353,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -379,7 +379,7 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 404, wrong application code', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 404, wrong application code', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -387,9 +387,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhMjokMnkkMTAkRU9BL1NLRXdLUmdIUHc2NGtPNExaLjZveTViOGtsNkp6Vy9tQ1JPTWZTcTZTMzgvSWl5d0c=`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -413,7 +413,7 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 404, wrong application secret', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 404, wrong application secret', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -421,9 +421,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -447,7 +447,7 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 400, wrong Authorization header', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 400, wrong Authorization header', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -455,9 +455,9 @@ describe('credential', () =>
             .set('Authorization', `Basic ***************`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -481,16 +481,16 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 400, ApplicationAuthorizationHeader not defined', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 400, ApplicationAuthorizationHeader not defined', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -514,7 +514,7 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 400, grantType property not defined', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 400, grantType property not defined', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -522,9 +522,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -546,7 +546,7 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 400, username property not defined', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 400, username property not defined', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -554,9 +554,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken
@@ -579,7 +579,7 @@ describe('credential', () =>
             });
     });
 
-    test('/GraphQL oAuthCreateCredential - Got 400, password property not defined', () =>
+    test('/GraphQL oAuthCreateCredentials - Got 400, password property not defined', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -587,9 +587,9 @@ describe('credential', () =>
             .set('Authorization', `Basic YXVyb3JhOiQyeSQxMCRFT0EvU0tFd0tSZ0hQdzY0a080TFouNm95NWI4a2w2SnpXL21DUk9NZlNxNlMzOC9JaXl3Rw==`)
             .send({
                 query: `
-                    mutation ($payload:OAuthCreateCredentialInput!)
+                    mutation ($payload:OAuthCreateCredentialsInput!)
                     {
-                        oAuthCreateCredential (payload:$payload)
+                        oAuthCreateCredentials (payload:$payload)
                         {
                             accessToken
                             refreshToken

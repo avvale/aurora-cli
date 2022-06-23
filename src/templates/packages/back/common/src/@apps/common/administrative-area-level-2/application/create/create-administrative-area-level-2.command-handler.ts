@@ -16,7 +16,7 @@ import {
     AdministrativeAreaLevel2CreatedAt,
     AdministrativeAreaLevel2UpdatedAt,
     AdministrativeAreaLevel2DeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateAdministrativeAreaLevel2Command)
 export class CreateAdministrativeAreaLevel2CommandHandler implements ICommandHandler<CreateAdministrativeAreaLevel2Command>
@@ -40,7 +40,8 @@ export class CreateAdministrativeAreaLevel2CommandHandler implements ICommandHan
                 latitude: new AdministrativeAreaLevel2Latitude(command.payload.latitude),
                 longitude: new AdministrativeAreaLevel2Longitude(command.payload.longitude),
                 zoom: new AdministrativeAreaLevel2Zoom(command.payload.zoom),
-            }
+            },
+            command.cQMetadata,
         );
     }
 }

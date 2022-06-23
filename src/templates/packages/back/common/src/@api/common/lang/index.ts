@@ -5,7 +5,8 @@ import { CommonPaginateLangsController } from './controllers/common-paginate-lan
 import { CommonGetLangsController } from './controllers/common-get-langs.controller';
 import { CommonFindLangByIdController } from './controllers/common-find-lang-by-id.controller';
 import { CommonFindLangController } from './controllers/common-find-lang.controller';
-import { CommonUpdateLangController } from './controllers/common-update-lang.controller';
+import { CommonUpdateLangByIdController } from './controllers/common-update-lang-by-id.controller';
+import { CommonUpdateLangsController } from './controllers/common-update-langs.controller';
 import { CommonDeleteLangByIdController } from './controllers/common-delete-lang-by-id.controller';
 import { CommonDeleteLangsController } from './controllers/common-delete-langs.controller';
 
@@ -16,9 +17,22 @@ import { CommonPaginateLangsResolver } from './resolvers/common-paginate-langs.r
 import { CommonGetLangsResolver } from './resolvers/common-get-langs.resolver';
 import { CommonFindLangByIdResolver } from './resolvers/common-find-lang-by-id.resolver';
 import { CommonFindLangResolver } from './resolvers/common-find-lang.resolver';
-import { CommonUpdateLangResolver } from './resolvers/common-update-lang.resolver';
+import { CommonUpdateLangByIdResolver } from './resolvers/common-update-lang-by-id.resolver';
+import { CommonUpdateLangsResolver } from './resolvers/common-update-langs.resolver';
 import { CommonDeleteLangByIdResolver } from './resolvers/common-delete-lang-by-id.resolver';
 import { CommonDeleteLangsResolver } from './resolvers/common-delete-langs.resolver';
+
+// handlers
+import { CommonCreateLangHandler } from './handlers/common-create-lang.handler';
+import { CommonCreateLangsHandler } from './handlers/common-create-langs.handler';
+import { CommonPaginateLangsHandler } from './handlers/common-paginate-langs.handler';
+import { CommonGetLangsHandler } from './handlers/common-get-langs.handler';
+import { CommonFindLangByIdHandler } from './handlers/common-find-lang-by-id.handler';
+import { CommonFindLangHandler } from './handlers/common-find-lang.handler';
+import { CommonUpdateLangByIdHandler } from './handlers/common-update-lang-by-id.handler';
+import { CommonUpdateLangsHandler } from './handlers/common-update-langs.handler';
+import { CommonDeleteLangByIdHandler } from './handlers/common-delete-lang-by-id.handler';
+import { CommonDeleteLangsHandler } from './handlers/common-delete-langs.handler';
 
 export const CommonLangControllers = [
     CommonCreateLangController,
@@ -27,7 +41,8 @@ export const CommonLangControllers = [
     CommonGetLangsController,
     CommonFindLangByIdController,
     CommonFindLangController,
-    CommonUpdateLangController,
+    CommonUpdateLangByIdController,
+    CommonUpdateLangsController,
     CommonDeleteLangByIdController,
     CommonDeleteLangsController,
 ];
@@ -39,7 +54,21 @@ export const CommonLangResolvers = [
     CommonGetLangsResolver,
     CommonFindLangByIdResolver,
     CommonFindLangResolver,
-    CommonUpdateLangResolver,
+    CommonUpdateLangByIdResolver,
+    CommonUpdateLangsResolver,
     CommonDeleteLangByIdResolver,
     CommonDeleteLangsResolver,
+];
+
+export const CommonLangApiHandlers = [
+    CommonCreateLangHandler,
+    CommonCreateLangsHandler,
+    CommonPaginateLangsHandler,
+    CommonGetLangsHandler,
+    CommonFindLangByIdHandler,
+    CommonFindLangHandler,
+    CommonUpdateLangByIdHandler,
+    CommonUpdateLangsHandler,
+    CommonDeleteLangByIdHandler,
+    CommonDeleteLangsHandler,
 ];

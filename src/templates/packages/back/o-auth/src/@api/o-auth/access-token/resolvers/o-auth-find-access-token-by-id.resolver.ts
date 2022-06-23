@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // authorization
 import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
@@ -23,7 +23,7 @@ export class OAuthFindAccessTokenByIdResolver
     @Query('oAuthFindAccessTokenById')
     async main(
         @Args('id') id: string,
-        @Constraint() constraint?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     ): Promise<OAuthAccessToken>
     {

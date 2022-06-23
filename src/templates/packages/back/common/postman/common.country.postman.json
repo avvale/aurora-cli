@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "c93ffc3d-ad8d-47be-86d7-c2d115f5ea19",
+		"_postman_id"   : "50ee7f2f-1669-4e5f-81c9-340b557ff861",
 		"name"          : "@apps - common/country",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -21,7 +21,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:CommonCreateCountryInput!)\n{\n\tcommonCreateCountry (payload:$payload)\n\t{\n\t\tid\n\t\tiso3166Alpha2\n\t\tiso3166Alpha3\n\t\tiso3166Numeric\n\t\tcustomCode\n\t\tprefix\n\t\timage\n\t\tsort\n\t\tadministrativeAreas\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tlangId\n\t\tname\n\t\tslug\n\t\tadministrativeAreaLevel1\n\t\tadministrativeAreaLevel2\n\t\tadministrativeAreaLevel3\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"iso3166Alpha2\": \"8p\", \n\t\t\"iso3166Alpha3\": \"x39\", \n\t\t\"iso3166Numeric\": \"17x\", \n\t\t\"customCode\": \"xjc103k0ts\", \n\t\t\"prefix\": \"pdn4d\", \n\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\"sort\": 231437, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 76009546398449120, \n\t\t\"longitude\": 74514638717552350, \n\t\t\"zoom\": 39, \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Handcrafted Cotton Mouse\", \n\t\t\"slug\": \"et-praesentium-qui\", \n\t\t\"administrativeAreaLevel1\": \"ixddgvsr05zbkbacvlaywak2grna0ctkfzggdlxv415xth25p4\", \n\t\t\"administrativeAreaLevel2\": \"7tvnoxmqsgiqt1ga3uelxg9f2pxi8x7zbnw1tm1v6d9ctqf31w\", \n\t\t\"administrativeAreaLevel3\": \"lb4nge9e81vl9dqyfzbf9lfiy1cqvmkzin8ydu5dyc0o52i6e8\"\n\t}\n}"
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"iso3166Alpha2\": \"u2\", \n\t\t\"iso3166Alpha3\": \"v24\", \n\t\t\"iso3166Numeric\": \"944\", \n\t\t\"customCode\": \"0jn1butxu\", \n\t\t\"prefix\": \"2075\", \n\t\t\"image\": \"http://placeimg.com/640/480/sports\", \n\t\t\"sort\": 51823, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 4270167339361.2974, \n\t\t\"longitude\": 3893998616772.7026, \n\t\t\"zoom\": 7, \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Small Soft Chair\", \n\t\t\"slug\": \"enim-voluptas-consectetur\", \n\t\t\"administrativeAreaLevel1\": \"8l6jykrb0ccx7tebm6k032zq14e8xm454c5l4l4xi6ryjl6rg\", \n\t\t\"administrativeAreaLevel2\": \"792biojuob2ktwn2wk8l2o7fayr42xhb0qeartpbczyrolq51\", \n\t\t\"administrativeAreaLevel3\": \"tkjgqex88kl3wczd6ep9n8frfoy3ztjl7xa4kw7gsiq7ndt9s\"\n\t}\n}"
 					}
 				},
 				"url": {
@@ -45,7 +45,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[CommonCreateCountryInput]!)\n{\n\tcommonCreateCountries (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"f6536158-eedc-46e8-98d1-e31b86e44491\", \n\t\t\t\"iso3166Alpha2\": \"tf\", \n\t\t\t\"iso3166Alpha3\": \"3ap\", \n\t\t\t\"iso3166Numeric\": \"bnd\", \n\t\t\t\"customCode\": \"k7leeqfdou\", \n\t\t\t\"prefix\": \"bcxlq\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\t\"sort\": 771839, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 96927509285161490, \n\t\t\t\"longitude\": 85468291744966290, \n\t\t\t\"zoom\": 20, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Small Concrete Shoes\", \n\t\t\t\"slug\": \"qui-omnis-et\", \n\t\t\t\"administrativeAreaLevel1\": \"wskr9xl0pvsofd7iwbijhn0r0ngeakarpzpz3hz84a5y7aytg1\", \n\t\t\t\"administrativeAreaLevel2\": \"mkn6b9kwo02wf74ez3z0y0dqvvltcivpnmen6dn86s7d0lp9xt\", \n\t\t\t\"administrativeAreaLevel3\": \"dort4y9fnpskix1yr2msk45xj66ixydfdkjb7rsukj701h4f9j\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f3f8b044-f1c9-4a9b-b189-893dd59a7b87\", \n\t\t\t\"iso3166Alpha2\": \"c9\", \n\t\t\t\"iso3166Alpha3\": \"t3k\", \n\t\t\t\"iso3166Numeric\": \"298\", \n\t\t\t\"customCode\": \"gtmvw6dq7w\", \n\t\t\t\"prefix\": \"j8j49\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\t\"sort\": 696867, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 68969417305207240, \n\t\t\t\"longitude\": 91344317430501380, \n\t\t\t\"zoom\": 45, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Generic Frozen Mouse\", \n\t\t\t\"slug\": \"incidunt-dolorem-autem\", \n\t\t\t\"administrativeAreaLevel1\": \"dyua7rpyj60z2r1l224eq4ir5g498pvrcfnsbdsyesgffb7pc3\", \n\t\t\t\"administrativeAreaLevel2\": \"f546wxv3a3r5p4442pg5wecl6py7dur7vkpovjdxbzh2xn2fc7\", \n\t\t\t\"administrativeAreaLevel3\": \"nexf5ewoxfxt2wplwi4y6na72c6zcee74vkeedx0o61ditk1nf\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"89ec8888-0e44-4689-8bcf-97f89d9ea8c1\", \n\t\t\t\"iso3166Alpha2\": \"3u\", \n\t\t\t\"iso3166Alpha3\": \"7xg\", \n\t\t\t\"iso3166Numeric\": \"ky8\", \n\t\t\t\"customCode\": \"c5ctj6w3am\", \n\t\t\t\"prefix\": \"clm35\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\t\"sort\": 904714, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 39589473590215020, \n\t\t\t\"longitude\": 22723558232906096, \n\t\t\t\"zoom\": 28, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Unbranded Wooden Chicken\", \n\t\t\t\"slug\": \"doloremque-praesentium-delectus\", \n\t\t\t\"administrativeAreaLevel1\": \"slfy4i4ampvlrkhi03ia31hsn8ortkjgybxc1mbfeubg4vrxg9\", \n\t\t\t\"administrativeAreaLevel2\": \"wed7drj4j7r6w5ue0gaiawgo5dvbldcy9by4b6r1fkrmetsggl\", \n\t\t\t\"administrativeAreaLevel3\": \"rehnzn30z7ki8opq491546ct02hw4dlmwaa6r4wecfosdoi3pl\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"54df1406-f327-4f0d-805a-f6f9b0c965f8\", \n\t\t\t\"iso3166Alpha2\": \"98\", \n\t\t\t\"iso3166Alpha3\": \"p4v\", \n\t\t\t\"iso3166Numeric\": \"xnz\", \n\t\t\t\"customCode\": \"qrrxnpnrlu\", \n\t\t\t\"prefix\": \"a4rtq\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\t\"sort\": 927475, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 57634222630866790, \n\t\t\t\"longitude\": 85494932604631380, \n\t\t\t\"zoom\": 45, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Generic Rubber Shoes\", \n\t\t\t\"slug\": \"voluptatibus-facere-pariatur\", \n\t\t\t\"administrativeAreaLevel1\": \"gdx6hi901pxcy4h1lvfm14czez1wieup1t3lb4x2k6ogvpia26\", \n\t\t\t\"administrativeAreaLevel2\": \"wyxypvll7zaqor2xv5jfei6bop7bqw3unb8lsr1e7bi0yb8omz\", \n\t\t\t\"administrativeAreaLevel3\": \"6ghuvveeu1n9ms05chy94tc51ubv6l1h3e0b31znnhc5m5xcl0\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5bc9b6e1-b3ce-4308-954d-c127fdab94fd\", \n\t\t\t\"iso3166Alpha2\": \"1s\", \n\t\t\t\"iso3166Alpha3\": \"km0\", \n\t\t\t\"iso3166Numeric\": \"ayj\", \n\t\t\t\"customCode\": \"lmt4bj10ab\", \n\t\t\t\"prefix\": \"yp1ri\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\t\"sort\": 879142, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 22323008218157630, \n\t\t\t\"longitude\": 49766308125180616, \n\t\t\t\"zoom\": 48, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Small Steel Chicken\", \n\t\t\t\"slug\": \"non-libero-et\", \n\t\t\t\"administrativeAreaLevel1\": \"veopuu89l9ut3635zmkey7brosene4ijvpy9inlpi4ylcxhyxf\", \n\t\t\t\"administrativeAreaLevel2\": \"zzsm9e1umhdcqxrijjnu00mb2nkjoobk9cu0rwhx7dlggw9gxm\", \n\t\t\t\"administrativeAreaLevel3\": \"tx7q1wgo1po209d6aihocyjf3n9ujuihnf1z0il1tx923oruop\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2f47f6ef-676e-4a09-8b5d-7d67d35fc64d\", \n\t\t\t\"iso3166Alpha2\": \"rf\", \n\t\t\t\"iso3166Alpha3\": \"wpv\", \n\t\t\t\"iso3166Numeric\": \"46b\", \n\t\t\t\"customCode\": \"hq3qscg1ow\", \n\t\t\t\"prefix\": \"kyxtt\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/fashion\", \n\t\t\t\"sort\": 897836, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 69047754684415380, \n\t\t\t\"longitude\": 93518974693734800, \n\t\t\t\"zoom\": 87, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Ergonomic Concrete Computer\", \n\t\t\t\"slug\": \"labore-nostrum-vitae\", \n\t\t\t\"administrativeAreaLevel1\": \"hvb5w2mx1j4zsneb36vi4v8dr7e32jnrc1qroc2clqsrkcq3vf\", \n\t\t\t\"administrativeAreaLevel2\": \"ryqqy24lo94qm7wizeo74lygzz0duaks0r6j4mp9lm0fx75wx0\", \n\t\t\t\"administrativeAreaLevel3\": \"4yb79lbo6cd2w4wiqjxw48eghjsu79vbdx9tor33u2bjm6v0pq\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9501ac07-6a07-4d7d-9227-83a5cd2408e3\", \n\t\t\t\"iso3166Alpha2\": \"qj\", \n\t\t\t\"iso3166Alpha3\": \"6y8\", \n\t\t\t\"iso3166Numeric\": \"mar\", \n\t\t\t\"customCode\": \"vuxwsybxnv\", \n\t\t\t\"prefix\": \"gprkl\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/abstract\", \n\t\t\t\"sort\": 759302, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 61288288466808890, \n\t\t\t\"longitude\": 91488404546997650, \n\t\t\t\"zoom\": 11, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Awesome Frozen Car\", \n\t\t\t\"slug\": \"iste-nulla-quam\", \n\t\t\t\"administrativeAreaLevel1\": \"p1c6ciogvd32l76bk26ixi7pdwa7o88683amc92b17gj6kf9ko\", \n\t\t\t\"administrativeAreaLevel2\": \"gui35gxs0k2pfa9031ijp4qztux6gunxib0mp2unkqnc0u2b92\", \n\t\t\t\"administrativeAreaLevel3\": \"vtp07lbxf05bzinh4hwxl47z20i9wabdr28z9ddg0e1td5zx9k\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"022d5a42-9d0c-40b2-a6fb-21d5c0790e7a\", \n\t\t\t\"iso3166Alpha2\": \"18\", \n\t\t\t\"iso3166Alpha3\": \"8z9\", \n\t\t\t\"iso3166Numeric\": \"7h2\", \n\t\t\t\"customCode\": \"fbhl6bev3b\", \n\t\t\t\"prefix\": \"c30ia\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\t\"sort\": 464524, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 12057065505842138, \n\t\t\t\"longitude\": 90754184452533870, \n\t\t\t\"zoom\": 17, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Awesome Metal Mouse\", \n\t\t\t\"slug\": \"sit-natus-blanditiis\", \n\t\t\t\"administrativeAreaLevel1\": \"ajw4u7qoxam0lncf31o2xvfdzawae016jwlvxb0ubrhuix5iqt\", \n\t\t\t\"administrativeAreaLevel2\": \"f0urivr4x40by6at8tpc8bo3b3sj7d4wlsv1p4oog1g884stfv\", \n\t\t\t\"administrativeAreaLevel3\": \"3dkucd25qi1w09ok69ydbpsjxp1fe55cqhymbq9ljdsphx8qi0\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a915fd34-e699-492d-861c-6ba31e7fc19c\", \n\t\t\t\"iso3166Alpha2\": \"c6\", \n\t\t\t\"iso3166Alpha3\": \"81p\", \n\t\t\t\"iso3166Numeric\": \"ipp\", \n\t\t\t\"customCode\": \"y5yzgijd8b\", \n\t\t\t\"prefix\": \"irl2x\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/transport\", \n\t\t\t\"sort\": 492016, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 61307782131380270, \n\t\t\t\"longitude\": 56627666137073690, \n\t\t\t\"zoom\": 60, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Fantastic Concrete Bike\", \n\t\t\t\"slug\": \"quia-itaque-at\", \n\t\t\t\"administrativeAreaLevel1\": \"yhhbepvcpc2h4zn3tva9npca1rz04vhi3ufa2hk4ldp4eug5tg\", \n\t\t\t\"administrativeAreaLevel2\": \"lqz2stgkczt0mtwhgje3zje9hpyxlx90zsmdkvs42q1l7jwt0e\", \n\t\t\t\"administrativeAreaLevel3\": \"qo87m4gmougve1345wcj09e5cj7lzbeqwifr2xo6jnt7ln5uot\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"58e58e42-9ea7-4402-9bd3-241c97a32836\", \n\t\t\t\"iso3166Alpha2\": \"6i\", \n\t\t\t\"iso3166Alpha3\": \"vks\", \n\t\t\t\"iso3166Numeric\": \"jcq\", \n\t\t\t\"customCode\": \"61flslmr8t\", \n\t\t\t\"prefix\": \"tv0sr\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/food\", \n\t\t\t\"sort\": 542293, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 19193978509580376, \n\t\t\t\"longitude\": 75164116417526180, \n\t\t\t\"zoom\": 22, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Unbranded Steel Ball\", \n\t\t\t\"slug\": \"sapiente-magnam-magni\", \n\t\t\t\"administrativeAreaLevel1\": \"c0i03v2b4mnrreknh5gg5n82lyuh92x0ywdnef4jxsqsn405jv\", \n\t\t\t\"administrativeAreaLevel2\": \"wvrt3gv949r5ja1a98gi7ad2pyj32r3u06r53ien624a9e4fdl\", \n\t\t\t\"administrativeAreaLevel3\": \"9xr913xy3h2ljd8b7o55tgnemgzm6hhdkh27mx9omx2xxxhcvd\"\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"cfbc0685-cdc5-46c3-b4a6-a142c2e7756f\", \n\t\t\t\"iso3166Alpha2\": \"1w\", \n\t\t\t\"iso3166Alpha3\": \"lbn\", \n\t\t\t\"iso3166Numeric\": \"swe\", \n\t\t\t\"customCode\": \"ljpkdj7cy\", \n\t\t\t\"prefix\": \"afd0\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/animals\", \n\t\t\t\"sort\": 85288, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 5483782395310.297, \n\t\t\t\"longitude\": 7448966022358.998, \n\t\t\t\"zoom\": 5, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Rustic Granite Pizza\", \n\t\t\t\"slug\": \"omnis-quo-laborum\", \n\t\t\t\"administrativeAreaLevel1\": \"0pcx3ukxui8uvz6vp1498iidze1tbjsakkm9cz5lkolgs5h3q\", \n\t\t\t\"administrativeAreaLevel2\": \"70mxg5j62z57q6tmbdqrirq9o7zdeh2pfy61j1ps5wi9oqeue\", \n\t\t\t\"administrativeAreaLevel3\": \"o3tbw1qv0qgkbmoyuhaa0nswm677qfjgohb23tde2i4mdd4zu\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f01a35ec-26e9-4963-8afd-f5415dd2b7d8\", \n\t\t\t\"iso3166Alpha2\": \"zt\", \n\t\t\t\"iso3166Alpha3\": \"7wl\", \n\t\t\t\"iso3166Numeric\": \"c6k\", \n\t\t\t\"customCode\": \"6b31j9laf\", \n\t\t\t\"prefix\": \"zhwi\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/food\", \n\t\t\t\"sort\": 59611, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 4370092984236.796, \n\t\t\t\"longitude\": 7925170103621.516, \n\t\t\t\"zoom\": 4, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Awesome Wooden Towels\", \n\t\t\t\"slug\": \"maxime-repellat-et\", \n\t\t\t\"administrativeAreaLevel1\": \"y2zpq819e8pv72896y07j3d3v1fo13bdor1r5cw4gxntdunzi\", \n\t\t\t\"administrativeAreaLevel2\": \"0rsraypcab79i8rvwxraotqh5v9hd1gdjbymmas85dlyv0kfq\", \n\t\t\t\"administrativeAreaLevel3\": \"fyrt7448zegbe3n2tlmget6og1nkvtat8ifijf2jp9km1dnck\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7e735705-d2f3-419c-8a95-2373a95bf7c1\", \n\t\t\t\"iso3166Alpha2\": \"xq\", \n\t\t\t\"iso3166Alpha3\": \"2ff\", \n\t\t\t\"iso3166Numeric\": \"dke\", \n\t\t\t\"customCode\": \"o9cmo3xta\", \n\t\t\t\"prefix\": \"clpb\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/business\", \n\t\t\t\"sort\": 57244, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 7917858144894.239, \n\t\t\t\"longitude\": 4593875252070.614, \n\t\t\t\"zoom\": 3, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Fantastic Cotton Ball\", \n\t\t\t\"slug\": \"nihil-ex-quis\", \n\t\t\t\"administrativeAreaLevel1\": \"0f0u935u29f1tl0bq1zllesiz361h8kv68gunxaf8azbtyadq\", \n\t\t\t\"administrativeAreaLevel2\": \"bdzclq337scc491phaik779rp327wxcbcnvt3wmiupkd255b7\", \n\t\t\t\"administrativeAreaLevel3\": \"dki5zh8evaiyhcesiy31vjz0h9nxl840uas9s752x5ubvyk03\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e3d3aaf4-eb8e-4226-adb7-ab647b5b517a\", \n\t\t\t\"iso3166Alpha2\": \"ri\", \n\t\t\t\"iso3166Alpha3\": \"hvm\", \n\t\t\t\"iso3166Numeric\": \"3yg\", \n\t\t\t\"customCode\": \"sfd2igrau\", \n\t\t\t\"prefix\": \"54bi\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\t\t\"sort\": 78208, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 4020122093709.191, \n\t\t\t\"longitude\": 9454766704828.215, \n\t\t\t\"zoom\": 1, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Refined Rubber Computer\", \n\t\t\t\"slug\": \"quis-aut-tenetur\", \n\t\t\t\"administrativeAreaLevel1\": \"fk24r9i9rsg4yo1lixpz4s3t23lezk64oy65gx7253te1zz1w\", \n\t\t\t\"administrativeAreaLevel2\": \"fqkx8ufmwvl81bikyclhih2ni7aizqeflm6eykhjbg4oh9499\", \n\t\t\t\"administrativeAreaLevel3\": \"of2btjgyc7hhnhuz8gh5wzdn7yfonh6u31j94xiogzyy9c4pm\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"535b7fef-cce4-4af9-873b-838c7e616742\", \n\t\t\t\"iso3166Alpha2\": \"9t\", \n\t\t\t\"iso3166Alpha3\": \"96k\", \n\t\t\t\"iso3166Numeric\": \"uqh\", \n\t\t\t\"customCode\": \"2128xnw1e\", \n\t\t\t\"prefix\": \"l4fy\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/transport\", \n\t\t\t\"sort\": 93576, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 4527941271786.474, \n\t\t\t\"longitude\": 5003506479910.258, \n\t\t\t\"zoom\": 4, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Fantastic Concrete Bacon\", \n\t\t\t\"slug\": \"beatae-unde-non\", \n\t\t\t\"administrativeAreaLevel1\": \"yqejzn2vsh08uhr6799k9dp4gkqd2sps38tpk7jul9lxsbnc9\", \n\t\t\t\"administrativeAreaLevel2\": \"ru13y8gl5wjxl4blf9st3jlf14lawkcarpqq0k211kex2d23f\", \n\t\t\t\"administrativeAreaLevel3\": \"a4knzo547tkiibhhs4bqpwmts18esoyrimxhg7mlahtbrnsci\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f6c2895b-7bcb-41e6-9d6c-13a1c29f2d37\", \n\t\t\t\"iso3166Alpha2\": \"da\", \n\t\t\t\"iso3166Alpha3\": \"9cz\", \n\t\t\t\"iso3166Numeric\": \"6r0\", \n\t\t\t\"customCode\": \"whgvxgj5m\", \n\t\t\t\"prefix\": \"ongb\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\t\t\"sort\": 75372, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 1030331411250.4722, \n\t\t\t\"longitude\": 4794040453394.211, \n\t\t\t\"zoom\": 9, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Handcrafted Metal Shirt\", \n\t\t\t\"slug\": \"corporis-iusto-molestiae\", \n\t\t\t\"administrativeAreaLevel1\": \"z1m332hqgiihhjqm8y3npqhvgn9i6qcusn2vrs3939n9m8zfe\", \n\t\t\t\"administrativeAreaLevel2\": \"9dutqwb842wk8vnjxerj9m45xwokripj246p1qeenek8v1cm3\", \n\t\t\t\"administrativeAreaLevel3\": \"y0uj0udv7lwa82oiss34s3j70uy2x99tycvpzhha8zydr0teo\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8dc73474-27c6-45e0-aa6d-7bc7c5487922\", \n\t\t\t\"iso3166Alpha2\": \"hr\", \n\t\t\t\"iso3166Alpha3\": \"joj\", \n\t\t\t\"iso3166Numeric\": \"012\", \n\t\t\t\"customCode\": \"mb9slhgj4\", \n\t\t\t\"prefix\": \"9yfc\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\t\"sort\": 76136, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 4744619348321.861, \n\t\t\t\"longitude\": 9921089745468.379, \n\t\t\t\"zoom\": 9, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Generic Plastic Pants\", \n\t\t\t\"slug\": \"debitis-ipsa-dignissimos\", \n\t\t\t\"administrativeAreaLevel1\": \"wi7lzz3y6aujx81qnqzk3cegwlfxw8so77psqh6jjs5et4aam\", \n\t\t\t\"administrativeAreaLevel2\": \"qi5y4mrs7uikztp8oj877qzmb8viwigu6skrwjphjb69b697w\", \n\t\t\t\"administrativeAreaLevel3\": \"avoxhdve6gadr37tm67rnyaxqn3y2g6jrdocfcw8ofvud0b2e\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fdc8a8a9-bfdf-4a26-83ab-689b73dadf16\", \n\t\t\t\"iso3166Alpha2\": \"tg\", \n\t\t\t\"iso3166Alpha3\": \"woz\", \n\t\t\t\"iso3166Numeric\": \"u2h\", \n\t\t\t\"customCode\": \"r8mu04aaq\", \n\t\t\t\"prefix\": \"lvv7\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\t\"sort\": 41955, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 9592306672456.982, \n\t\t\t\"longitude\": 2204003047664.6025, \n\t\t\t\"zoom\": 6, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Licensed Soft Shirt\", \n\t\t\t\"slug\": \"excepturi-ad-vitae\", \n\t\t\t\"administrativeAreaLevel1\": \"05u8jv2obavcb1pv0574mwesro5negtm2vw69ip18yg9ngjtk\", \n\t\t\t\"administrativeAreaLevel2\": \"6ltkcbpjuyd4j7j1trpfr38rwj7t7da5vtpr0kg81ya68y14a\", \n\t\t\t\"administrativeAreaLevel3\": \"0w2dbkrtuoeke7ca3yvcne56cu1fsn9rvr7o6qu49edoeengw\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d822db83-d560-4de4-9919-76ff14e99b01\", \n\t\t\t\"iso3166Alpha2\": \"y8\", \n\t\t\t\"iso3166Alpha3\": \"h8s\", \n\t\t\t\"iso3166Numeric\": \"901\", \n\t\t\t\"customCode\": \"iuqzp18cu\", \n\t\t\t\"prefix\": \"nnti\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/fashion\", \n\t\t\t\"sort\": 77415, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 5405152228217.245, \n\t\t\t\"longitude\": 3046815619445.891, \n\t\t\t\"zoom\": 9, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Licensed Wooden Shoes\", \n\t\t\t\"slug\": \"quo-voluptates-excepturi\", \n\t\t\t\"administrativeAreaLevel1\": \"jgee7bpgevhensccnp32toxgj9bqllnufdr8873wjp448maoi\", \n\t\t\t\"administrativeAreaLevel2\": \"nykhn3njh0zwd67fql0in58zg6c4d9zgzegzka174ju9mdmor\", \n\t\t\t\"administrativeAreaLevel3\": \"tr2ddmp7t92yyq8rp5wwezcpzi41yjn7dbzno761cz4x221e7\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b780cee8-8e59-47e9-9e61-1a784acd2ad5\", \n\t\t\t\"iso3166Alpha2\": \"lf\", \n\t\t\t\"iso3166Alpha3\": \"dbp\", \n\t\t\t\"iso3166Numeric\": \"l9g\", \n\t\t\t\"customCode\": \"fiys1vdi4\", \n\t\t\t\"prefix\": \"9sab\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\t\"sort\": 87607, \n\t\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\t\"latitude\": 4907095880626.872, \n\t\t\t\"longitude\": 5055281996379.325, \n\t\t\t\"zoom\": 9, \n\t\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\t\"name\": \"Practical Steel Computer\", \n\t\t\t\"slug\": \"sit-ab-laudantium\", \n\t\t\t\"administrativeAreaLevel1\": \"kas7rly8zw66n8cxn92b0385nn62bjdk1afy0r6gh3kq8nhq8\", \n\t\t\t\"administrativeAreaLevel2\": \"lop0yd1om2ynn97uwzatmtp6vy4gbsa2gyrqxso174ronix7d\", \n\t\t\t\"administrativeAreaLevel3\": \"jkp6hw4707h57ln898lp2jrun0wsoyz4qhhc96nvljax7dvfy\"\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -231,7 +231,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:CommonUpdateCountryInput!)\n{\n\tcommonUpdateCountry (payload:$payload)\n\t{\n\t\tid\n\t\tiso3166Alpha2\n\t\tiso3166Alpha3\n\t\tiso3166Numeric\n\t\tcustomCode\n\t\tprefix\n\t\timage\n\t\tsort\n\t\tadministrativeAreas\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tdataLang\n\t\tcreatedAt\n\t\tupdatedAt\n\t\tid\n\t\tname\n\t\tslug\n\t\tadministrativeAreaLevel1\n\t\tadministrativeAreaLevel2\n\t\tadministrativeAreaLevel3\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"iso3166Alpha2\": \"q4\", \n\t\t\"iso3166Alpha3\": \"alh\", \n\t\t\"iso3166Numeric\": \"pui\", \n\t\t\"customCode\": \"jaxi0jte8c\", \n\t\t\"prefix\": \"j0tvx\", \n\t\t\"image\": \"http://placeimg.com/640/480/transport\", \n\t\t\"sort\": 544106, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 36463104232273460, \n\t\t\"longitude\": 67661824345915640, \n\t\t\"zoom\": 67, \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Handcrafted Steel Salad\", \n\t\t\"slug\": \"excepturi-sed-numquam\", \n\t\t\"administrativeAreaLevel1\": \"wislnqievcjw64tnv742d7v98r89dndgd51603frx5cflua5fq\", \n\t\t\"administrativeAreaLevel2\": \"njst5gz7qa9g2a4a3grm6nwd5a4cnf4v63xf3lvsim76a5th04\", \n\t\t\"administrativeAreaLevel3\": \"u7ycu9947bh36j4bdlhlk2hnbfoblejc99aufgtv1dgunjx2h3\"\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"iso3166Alpha2\": \"28\", \n\t\t\"iso3166Alpha3\": \"4gh\", \n\t\t\"iso3166Numeric\": \"i0p\", \n\t\t\"customCode\": \"3ujz2nvrt\", \n\t\t\"prefix\": \"96gz\", \n\t\t\"image\": \"http://placeimg.com/640/480/fashion\", \n\t\t\"sort\": 69356, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 6256939512015.596, \n\t\t\"longitude\": 5576647452997.42, \n\t\t\"zoom\": 5, \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Unbranded Steel Gloves\", \n\t\t\"slug\": \"sit-nam-qui\", \n\t\t\"administrativeAreaLevel1\": \"1ioummmlpi17y5958euw690hv319uuwx0ckf12709cm5bzvvv\", \n\t\t\"administrativeAreaLevel2\": \"eqfaz7gi9oe8o4u1nueeds3kwu4tx7whiyhobzh4iu08t43z9\", \n\t\t\"administrativeAreaLevel3\": \"6qqhqa73xo37cafdt2ahd7popxlacwdktbgir519vm6a6sw3u\"\n\t}\n}"
 					}
 				},
 				"url": {
@@ -309,7 +309,7 @@
 			"response": []
         },
         {
-			"name": "REST - common/country",
+			"name": "REST - common/country/create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -328,7 +328,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"iso3166Alpha2\": \"h4\", \n\t\"iso3166Alpha3\": \"0ls\", \n\t\"iso3166Numeric\": \"m66\", \n\t\"customCode\": \"x9onxvvcej\", \n\t\"prefix\": \"zs3vf\", \n\t\"image\": \"http://placeimg.com/640/480/nightlife\", \n\t\"sort\": 909931, \n\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\"latitude\": 95956470039686400, \n\t\"longitude\": 37533898645977540, \n\t\"zoom\": 94, \n\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\"name\": \"Tasty Concrete Tuna\", \n\t\"slug\": \"id-porro-rerum\", \n\t\"administrativeAreaLevel1\": \"u1kdxedhb9cz0widxs4nufpveg0egoy4jj3v1k7skmbi2qpva8\", \n\t\"administrativeAreaLevel2\": \"fka0hu0qwu48213qavm90ip89xnbpzwsjgrntragrmhoqqg2rp\", \n\t\"administrativeAreaLevel3\": \"5w4pfl9vcsa1e7h1zjlo9p73g803blbc5t2sohjojlh952wwa6\"\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"iso3166Alpha2\": \"w2\", \n\t\"iso3166Alpha3\": \"r86\", \n\t\"iso3166Numeric\": \"b5b\", \n\t\"customCode\": \"xwhhuuu6d\", \n\t\"prefix\": \"pllf\", \n\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\"sort\": 31397, \n\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\"latitude\": 6590853504142.986, \n\t\"longitude\": 7667193630065.207, \n\t\"zoom\": 1, \n\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\"name\": \"Practical Plastic Gloves\", \n\t\"slug\": \"fugiat-omnis-temporibus\", \n\t\"administrativeAreaLevel1\": \"xaxvn7dxltfdme9rrzi6mr1qpvnx73nm14fjbwmuhbfrfhbkh\", \n\t\"administrativeAreaLevel2\": \"wq3svfvh1jg7hqa430iwsh24a1l0luja08j260gkra18stzeb\", \n\t\"administrativeAreaLevel3\": \"8v9nhlpk4cio25n79ngek7fbjqvwfh688u12qk7ddv8zqq44o\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -336,20 +336,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/country",
+					"raw": "{{URL}}/common/country/create",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"country"
+						"country",
+                        "create"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/countries",
+			"name": "REST - common/countries/create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -368,7 +369,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"2e0fb63a-a778-404d-95e6-674aa3f0ee56\", \n\t\t\"iso3166Alpha2\": \"2r\", \n\t\t\"iso3166Alpha3\": \"t5r\", \n\t\t\"iso3166Numeric\": \"606\", \n\t\t\"customCode\": \"nwvtehauwj\", \n\t\t\"prefix\": \"iixn8\", \n\t\t\"image\": \"http://placeimg.com/640/480/fashion\", \n\t\t\"sort\": 601366, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 56765612195998410, \n\t\t\"longitude\": 15657273493745160, \n\t\t\"zoom\": 55, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"cb639fca-6f00-4fa7-b87d-0b7cc014c336\", \n\t\t\"countryId\": \"cba66f08-b430-4942-aa8d-f0afde5190da\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Unbranded Fresh Fish\", \n\t\t\"slug\": \"illo-sapiente-vitae\", \n\t\t\"administrativeAreaLevel1\": \"jx1jvnu1isj9vnq9rvcxwacm8icps6xt2ospjvcxnzbhb8t7bp\", \n\t\t\"administrativeAreaLevel2\": \"9v463t9q5kszu57f6piqtm8w1ew0bzwxeaexzqroqsfgao71xg\", \n\t\t\"administrativeAreaLevel3\": \"ermj0o1zil4psgy9bt2n0y8gnysu4ctd4xpwj3ve7alkuujekl\"\n\t}, \n\t{\n\t\t\"id\": \"d76c33a6-8f39-402b-83b9-0b9fedc8b4f2\", \n\t\t\"iso3166Alpha2\": \"8y\", \n\t\t\"iso3166Alpha3\": \"w06\", \n\t\t\"iso3166Numeric\": \"igx\", \n\t\t\"customCode\": \"luwosnr6m0\", \n\t\t\"prefix\": \"f5vie\", \n\t\t\"image\": \"http://placeimg.com/640/480/transport\", \n\t\t\"sort\": 717691, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 81198421872913540, \n\t\t\"longitude\": 81530112178522980, \n\t\t\"zoom\": 72, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"d8590e32-142e-44e7-8abb-f85425f8c7a0\", \n\t\t\"countryId\": \"5850bf7d-4b3d-4a7f-b742-7716cdf236aa\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Sleek Wooden Bacon\", \n\t\t\"slug\": \"consequatur-sit-enim\", \n\t\t\"administrativeAreaLevel1\": \"6dnxg59blr5cgpljfs1bra1o48b2fryc1l65cpwbjhvv52ayzl\", \n\t\t\"administrativeAreaLevel2\": \"tmdqhwa1yxr9rnb7oa2ragiuwh1rg1xdwyxinka5nqg7vtqvqq\", \n\t\t\"administrativeAreaLevel3\": \"sjuu740xmx2fof3a26g2ss7iunu8ebsrloblp5p5hqjlu7oht6\"\n\t}, \n\t{\n\t\t\"id\": \"6c178d12-a284-4293-a795-6d098635c014\", \n\t\t\"iso3166Alpha2\": \"qr\", \n\t\t\"iso3166Alpha3\": \"wu9\", \n\t\t\"iso3166Numeric\": \"u0x\", \n\t\t\"customCode\": \"cyu0z9ectd\", \n\t\t\"prefix\": \"39q1q\", \n\t\t\"image\": \"http://placeimg.com/640/480/business\", \n\t\t\"sort\": 231891, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 55597983321030856, \n\t\t\"longitude\": 24951744099192810, \n\t\t\"zoom\": 49, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"b1d97d2f-8009-44ac-8931-d2e67f5f5e4f\", \n\t\t\"countryId\": \"0e587158-a027-4bc7-9ea9-5ce3c8ad32f9\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Incredible Rubber Fish\", \n\t\t\"slug\": \"numquam-maiores-in\", \n\t\t\"administrativeAreaLevel1\": \"nj6bpy74xt5de2wtbaa47gzoba43n9s0x2t16wj07xnndxel6a\", \n\t\t\"administrativeAreaLevel2\": \"kn9q64250fd32kzy7kd69he5f4tvyi00bs4qi0kydp8z1vtbie\", \n\t\t\"administrativeAreaLevel3\": \"9d4nhk27ouf35g4g4ej9ux08ls5zzy0c9z1rdg6ecq0uhmoix0\"\n\t}, \n\t{\n\t\t\"id\": \"85e1a14b-f123-43c9-9086-ea4b7175ec79\", \n\t\t\"iso3166Alpha2\": \"wh\", \n\t\t\"iso3166Alpha3\": \"6do\", \n\t\t\"iso3166Numeric\": \"l1v\", \n\t\t\"customCode\": \"syx1f25vz6\", \n\t\t\"prefix\": \"gsux7\", \n\t\t\"image\": \"http://placeimg.com/640/480/technics\", \n\t\t\"sort\": 349549, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 90437096845812100, \n\t\t\"longitude\": 44391957386479310, \n\t\t\"zoom\": 30, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"62ec07db-ee1d-4175-8a7d-7a1141808062\", \n\t\t\"countryId\": \"b2fcab1d-b139-43a4-bdd4-34bb0a55d528\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Generic Fresh Chips\", \n\t\t\"slug\": \"necessitatibus-veniam-dignissimos\", \n\t\t\"administrativeAreaLevel1\": \"bje0q78c7b30o31fy38unwdban4p9hea54dehk8lty7ca8s7po\", \n\t\t\"administrativeAreaLevel2\": \"wr5v7t40q4sfqdgkef29q9r220zyvrfsiqgpegpciliq7a10wt\", \n\t\t\"administrativeAreaLevel3\": \"ycun9h6ld7gnm2rnc7cohwvyq20sj275v8kkdgk6omt8o97eeu\"\n\t}, \n\t{\n\t\t\"id\": \"4106f5c2-01f9-4e49-8392-c5d03cdb4450\", \n\t\t\"iso3166Alpha2\": \"c5\", \n\t\t\"iso3166Alpha3\": \"81j\", \n\t\t\"iso3166Numeric\": \"ifm\", \n\t\t\"customCode\": \"as9f6bxyhb\", \n\t\t\"prefix\": \"zp5ga\", \n\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\"sort\": 189690, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 51825158646149180, \n\t\t\"longitude\": 58832907762776630, \n\t\t\"zoom\": 28, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"0a7223b5-a6b8-4f8e-95b7-4ea3e7400857\", \n\t\t\"countryId\": \"d7544fc5-1311-472e-bc74-d929a295cc36\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Handmade Rubber Chair\", \n\t\t\"slug\": \"quo-nam-saepe\", \n\t\t\"administrativeAreaLevel1\": \"mh21kb3f4nd1fyhuk8myns5vjyyg6amztxxvf2o292vbxzk0x9\", \n\t\t\"administrativeAreaLevel2\": \"ffs0dqguluq22uxoollsvrz6dwrfjb53muuviz1wk06wgu1lee\", \n\t\t\"administrativeAreaLevel3\": \"vuo0y8sxb35m4i02tmvm11855782535hbhuvv7yk1t6tkwme2d\"\n\t}, \n\t{\n\t\t\"id\": \"054b6747-8fc7-4231-93f8-75c4ef612e31\", \n\t\t\"iso3166Alpha2\": \"if\", \n\t\t\"iso3166Alpha3\": \"ywa\", \n\t\t\"iso3166Numeric\": \"39n\", \n\t\t\"customCode\": \"ppreac2u8x\", \n\t\t\"prefix\": \"u12b0\", \n\t\t\"image\": \"http://placeimg.com/640/480/business\", \n\t\t\"sort\": 233101, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 13033010823784594, \n\t\t\"longitude\": 99706006520444880, \n\t\t\"zoom\": 94, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"71ee13e6-493e-4026-832d-aa21f6b0363c\", \n\t\t\"countryId\": \"d0cf3192-8dd2-49b4-8a96-31097da24636\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Small Cotton Fish\", \n\t\t\"slug\": \"distinctio-ducimus-in\", \n\t\t\"administrativeAreaLevel1\": \"509nq7fmd2udr2eqm1wt50tv92o1k2bluw5jif0vn3cfj05rru\", \n\t\t\"administrativeAreaLevel2\": \"vijahsclmlsnw6t6g9pmk0335qzhfgtgv4a3vpcqfd84pcfd7y\", \n\t\t\"administrativeAreaLevel3\": \"e1xmgxqcm8xko9am4ca8mhjptl69a37wztv92xv7ki1o4uwh9z\"\n\t}, \n\t{\n\t\t\"id\": \"56f0898c-9a62-4930-ab0e-dad2bd662db3\", \n\t\t\"iso3166Alpha2\": \"ew\", \n\t\t\"iso3166Alpha3\": \"73k\", \n\t\t\"iso3166Numeric\": \"nn4\", \n\t\t\"customCode\": \"ai8p6xio1y\", \n\t\t\"prefix\": \"mm47u\", \n\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\"sort\": 107513, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 95242320439227120, \n\t\t\"longitude\": 93084804993197120, \n\t\t\"zoom\": 47, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"be236337-4245-41fc-adc8-9a7161166e0f\", \n\t\t\"countryId\": \"3ac67ec3-1ce1-4ccc-9c0c-f5ba24d60b55\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Ergonomic Concrete Pants\", \n\t\t\"slug\": \"et-sunt-enim\", \n\t\t\"administrativeAreaLevel1\": \"5dnkyfozw8nn4ap5r37nqqfmswh8pqlx1um2yqi8icsusrkg36\", \n\t\t\"administrativeAreaLevel2\": \"muttfdn9jlf05osavfj23rdlo7exowbfv3ahq040wbaztprpyl\", \n\t\t\"administrativeAreaLevel3\": \"uem5vx0qkaeq0qtnjrfijldm24h86fgryhi6zjtqznty63q2nw\"\n\t}, \n\t{\n\t\t\"id\": \"1f00b7d7-9a86-4505-aa2a-280af1cfa8f7\", \n\t\t\"iso3166Alpha2\": \"fc\", \n\t\t\"iso3166Alpha3\": \"t0z\", \n\t\t\"iso3166Numeric\": \"vp5\", \n\t\t\"customCode\": \"iz9r5jn13b\", \n\t\t\"prefix\": \"lyo3j\", \n\t\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\t\"sort\": 936230, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 42563002975845370, \n\t\t\"longitude\": 53229664756809580, \n\t\t\"zoom\": 81, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"6c1f68a1-41ab-4332-a187-94584d74f2f5\", \n\t\t\"countryId\": \"b0ad09b9-014a-48a2-8f6a-a9ef0425283c\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Ergonomic Fresh Car\", \n\t\t\"slug\": \"ab-optio-quia\", \n\t\t\"administrativeAreaLevel1\": \"k6ti0gqih7e941qcjfdug11advkkpvixt8g849eomt4l3n4taa\", \n\t\t\"administrativeAreaLevel2\": \"f3h0d8dmllvhr298y10seuds4efvlesjlyp46i54dbk5x5fqd5\", \n\t\t\"administrativeAreaLevel3\": \"q2s2cnkxkbpijnp1i6jm3okk4ic6swymn8btabhlh2rixjymex\"\n\t}, \n\t{\n\t\t\"id\": \"8cd7bd42-0325-48af-90ce-2384cd67b2e0\", \n\t\t\"iso3166Alpha2\": \"0k\", \n\t\t\"iso3166Alpha3\": \"b9e\", \n\t\t\"iso3166Numeric\": \"7n9\", \n\t\t\"customCode\": \"i6imflxtzm\", \n\t\t\"prefix\": \"y5n3p\", \n\t\t\"image\": \"http://placeimg.com/640/480/fashion\", \n\t\t\"sort\": 380019, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 12732221632344190, \n\t\t\"longitude\": 88625358743567150, \n\t\t\"zoom\": 57, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"5601ebd8-68d1-4e92-9bf4-d0ea3f716b77\", \n\t\t\"countryId\": \"5696be70-61f7-455c-a850-3bf6156adfe9\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Licensed Metal Chicken\", \n\t\t\"slug\": \"libero-laborum-doloribus\", \n\t\t\"administrativeAreaLevel1\": \"y1q5c8ti92v02tx5ub5mzyzcnjbnmnuti0j0b749xgdak8eddw\", \n\t\t\"administrativeAreaLevel2\": \"m9zhhz21pema4ulwcv3bq4u6edp16pr85losfm1mskev5g38vg\", \n\t\t\"administrativeAreaLevel3\": \"hje03zc4rjxrkv0t4gco4s0dt75fiabxdznklt94yr3hqt9kk2\"\n\t}, \n\t{\n\t\t\"id\": \"077c98f1-1051-430d-818a-7a0bee0d756d\", \n\t\t\"iso3166Alpha2\": \"m5\", \n\t\t\"iso3166Alpha3\": \"csj\", \n\t\t\"iso3166Numeric\": \"9jt\", \n\t\t\"customCode\": \"3p4jaow5ei\", \n\t\t\"prefix\": \"jznc0\", \n\t\t\"image\": \"http://placeimg.com/640/480/abstract\", \n\t\t\"sort\": 548346, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 99116730506461390, \n\t\t\"longitude\": 34804712422756196, \n\t\t\"zoom\": 23, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"c0ffedaf-64bd-4011-8faf-4207583d6533\", \n\t\t\"countryId\": \"6bd160ec-965a-4e15-86ae-661c5d264ffc\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Small Granite Soap\", \n\t\t\"slug\": \"possimus-atque-nihil\", \n\t\t\"administrativeAreaLevel1\": \"wmn6hf5u1oqb7wghlqm1swonu3l947t6xkz9pgt4x58oojn1af\", \n\t\t\"administrativeAreaLevel2\": \"6bjbjut6f8uz096vodf7zctf1wbuqv284cfetl6iqkrmowczjd\", \n\t\t\"administrativeAreaLevel3\": \"115g433vgxun1y9a5cykk08xebg11diepk592xgs2noti40j95\"\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"f48e7958-8de7-47dd-a1f1-41d63d6a150d\", \n\t\t\"iso3166Alpha2\": \"y2\", \n\t\t\"iso3166Alpha3\": \"mrr\", \n\t\t\"iso3166Numeric\": \"5z0\", \n\t\t\"customCode\": \"z3u23pchq\", \n\t\t\"prefix\": \"joul\", \n\t\t\"image\": \"http://placeimg.com/640/480/abstract\", \n\t\t\"sort\": 17310, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 9943456778142.605, \n\t\t\"longitude\": 5412366950398.191, \n\t\t\"zoom\": 5, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"00139e1e-64e1-4013-a29a-27e6627459c1\", \n\t\t\"countryId\": \"760142ee-af29-4cae-96e7-c4fcc4f8032e\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Handmade Concrete Sausages\", \n\t\t\"slug\": \"corrupti-repudiandae-quaerat\", \n\t\t\"administrativeAreaLevel1\": \"g280232krnd0mo2hfqge29gyf1b7fpbhb00hhyu0614ccuo7c\", \n\t\t\"administrativeAreaLevel2\": \"0du4gz1axtjg8m8ehv81kqdd55cxpdnv4xvdliphc5dgwyhnb\", \n\t\t\"administrativeAreaLevel3\": \"t9kdw2wcz6y1ua89fklvpcek26yvrf32rjo5nh8m87x1m98zv\"\n\t}, \n\t{\n\t\t\"id\": \"b1c70102-430b-4b4b-9528-b76bffd43704\", \n\t\t\"iso3166Alpha2\": \"om\", \n\t\t\"iso3166Alpha3\": \"9n2\", \n\t\t\"iso3166Numeric\": \"52i\", \n\t\t\"customCode\": \"eqqz6f0m8\", \n\t\t\"prefix\": \"b2zp\", \n\t\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\t\"sort\": 13639, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 5371043731930.426, \n\t\t\"longitude\": 4156741649746.681, \n\t\t\"zoom\": 3, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"0b5d8935-1096-46c1-8b8f-fe48afc720ec\", \n\t\t\"countryId\": \"f0ae74e2-c046-4a41-b56d-bcc6690237b3\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Fantastic Wooden Chicken\", \n\t\t\"slug\": \"libero-repellendus-soluta\", \n\t\t\"administrativeAreaLevel1\": \"jz6uq5ftjgz75gp72vbtmf9b67rzscwzveyuy91h2qhabnk4q\", \n\t\t\"administrativeAreaLevel2\": \"43zs9u2jhgwnu6eqmk2gt4a3r77lu57dzsxc0kqoaysl9myxb\", \n\t\t\"administrativeAreaLevel3\": \"l2tlxkkpqn9xyl60l8bg39j5lbr11si0kwoziymw8kj4r7kqf\"\n\t}, \n\t{\n\t\t\"id\": \"7f423912-4a11-48ca-9428-4a00e2eca1d1\", \n\t\t\"iso3166Alpha2\": \"jq\", \n\t\t\"iso3166Alpha3\": \"8ti\", \n\t\t\"iso3166Numeric\": \"3yx\", \n\t\t\"customCode\": \"clwsx33dz\", \n\t\t\"prefix\": \"zowz\", \n\t\t\"image\": \"http://placeimg.com/640/480/cats\", \n\t\t\"sort\": 62310, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 4398091371633.437, \n\t\t\"longitude\": 9559201262889.39, \n\t\t\"zoom\": 6, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"f4a37131-fbe0-4757-9929-6e30b5660080\", \n\t\t\"countryId\": \"dcd944c6-9664-409b-8088-4cd86294d949\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Incredible Fresh Cheese\", \n\t\t\"slug\": \"omnis-molestiae-atque\", \n\t\t\"administrativeAreaLevel1\": \"zy538ra0lykqlj4gonhyn5nthoyaevuz18jpmavev8nl72ddp\", \n\t\t\"administrativeAreaLevel2\": \"jlska5iun4rj9hrhi83z5c9syqge6m52rujvqj21z54yzmgjv\", \n\t\t\"administrativeAreaLevel3\": \"ejscsi52d2he70hiuwrb1r734t25hhwc4dd4u1l87mhumrb7h\"\n\t}, \n\t{\n\t\t\"id\": \"829846ff-e0cc-4b9f-8bad-11f85029d2f9\", \n\t\t\"iso3166Alpha2\": \"2v\", \n\t\t\"iso3166Alpha3\": \"x81\", \n\t\t\"iso3166Numeric\": \"y58\", \n\t\t\"customCode\": \"wop5y48pe\", \n\t\t\"prefix\": \"ra6u\", \n\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\"sort\": 59409, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 6912354404015.553, \n\t\t\"longitude\": 3908976352336.435, \n\t\t\"zoom\": 4, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"bdfb95ca-142e-4026-9443-33c44a14b87f\", \n\t\t\"countryId\": \"497ebd96-4fbe-4812-89a9-4b90980ea962\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Intelligent Concrete Shoes\", \n\t\t\"slug\": \"voluptas-at-unde\", \n\t\t\"administrativeAreaLevel1\": \"5fycet8pro609qvh48diwrsfhzt6zz5wtuwwf99krwzx7ag7n\", \n\t\t\"administrativeAreaLevel2\": \"8bgoucu5iewelcp3348wv37s00kfvv2hg7yhdb3swvtp6hm3t\", \n\t\t\"administrativeAreaLevel3\": \"fwyi3b70yyhzdlu8q5gtw8b08m908v6359cqbh9bsmjwohj6w\"\n\t}, \n\t{\n\t\t\"id\": \"0f6f7aaa-38d8-4a11-bae3-af59736a1d8e\", \n\t\t\"iso3166Alpha2\": \"fh\", \n\t\t\"iso3166Alpha3\": \"qqe\", \n\t\t\"iso3166Numeric\": \"pch\", \n\t\t\"customCode\": \"kdghaqr9m\", \n\t\t\"prefix\": \"hn48\", \n\t\t\"image\": \"http://placeimg.com/640/480/food\", \n\t\t\"sort\": 26854, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 8610699011411.687, \n\t\t\"longitude\": 9233029392154.701, \n\t\t\"zoom\": 1, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"7bac7a0c-2071-4a00-a085-5102be4f6582\", \n\t\t\"countryId\": \"10c88e53-f027-4277-aecf-9ec437a2bb0e\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Incredible Soft Chicken\", \n\t\t\"slug\": \"iste-blanditiis-et\", \n\t\t\"administrativeAreaLevel1\": \"20ld0j2r4meqt7l63f3h2flhg9iw207avb6z3bhk6s9rt3y65\", \n\t\t\"administrativeAreaLevel2\": \"twptsl4gpwoxm8rwzk49gsn4qo7efq72jet4s0p819fi0n71n\", \n\t\t\"administrativeAreaLevel3\": \"uqhyrppmevfqsph0of2kxhl59kpj9xnmmbm58qssi8gvqob64\"\n\t}, \n\t{\n\t\t\"id\": \"23716a92-3985-47f8-a256-882fbe4f90b0\", \n\t\t\"iso3166Alpha2\": \"i6\", \n\t\t\"iso3166Alpha3\": \"6n1\", \n\t\t\"iso3166Numeric\": \"fs1\", \n\t\t\"customCode\": \"eg08grxw2\", \n\t\t\"prefix\": \"1skj\", \n\t\t\"image\": \"http://placeimg.com/640/480/sports\", \n\t\t\"sort\": 82390, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 6320417264709.121, \n\t\t\"longitude\": 5864091739129.2705, \n\t\t\"zoom\": 7, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"eeae120b-ba9c-48cd-b052-04417d2ad3d4\", \n\t\t\"countryId\": \"740869b5-3f10-4bed-849d-3312e6703cae\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Unbranded Fresh Computer\", \n\t\t\"slug\": \"excepturi-voluptatem-totam\", \n\t\t\"administrativeAreaLevel1\": \"r6r9zaefpjtdiaup5485438xfvolfx0tv1xlyti7aq5iezxv7\", \n\t\t\"administrativeAreaLevel2\": \"6ybe4jauo43wyprfz4je7l04gdt1v92tcpp9hr1msdq9erdvj\", \n\t\t\"administrativeAreaLevel3\": \"opv9sr4gqins0y1mul2y0c0vw4b7ujb1cv25j0ve72rrjuong\"\n\t}, \n\t{\n\t\t\"id\": \"9f9e0519-2c4e-42ec-80e6-feb11bf0d6b1\", \n\t\t\"iso3166Alpha2\": \"rt\", \n\t\t\"iso3166Alpha3\": \"k7g\", \n\t\t\"iso3166Numeric\": \"act\", \n\t\t\"customCode\": \"fd9v32z20\", \n\t\t\"prefix\": \"xomk\", \n\t\t\"image\": \"http://placeimg.com/640/480/sports\", \n\t\t\"sort\": 68725, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 5360824955611.412, \n\t\t\"longitude\": 8377735870619.801, \n\t\t\"zoom\": 5, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"47232126-47a5-43a4-8534-9bbb17dd66b5\", \n\t\t\"countryId\": \"88e39fba-7a43-4a7c-a4bf-84a0f9d32e1f\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Awesome Granite Bike\", \n\t\t\"slug\": \"nesciunt-dolorum-est\", \n\t\t\"administrativeAreaLevel1\": \"ha4fjcmncj49e9rfxavidpkjs5hlabdewst8kj5n4cl54wfj1\", \n\t\t\"administrativeAreaLevel2\": \"creniful2cx1a2x7gnuhycmnbirircn45f9h2chkx2tlszqv8\", \n\t\t\"administrativeAreaLevel3\": \"dw7tn3lilt7nh1ra659k4nszemu4she7sawntmstebgoeqyhi\"\n\t}, \n\t{\n\t\t\"id\": \"c3e3ff6d-48d8-40d4-bbb3-ad6d405479ca\", \n\t\t\"iso3166Alpha2\": \"9z\", \n\t\t\"iso3166Alpha3\": \"nrp\", \n\t\t\"iso3166Numeric\": \"8pc\", \n\t\t\"customCode\": \"qqoefyr3c\", \n\t\t\"prefix\": \"ca93\", \n\t\t\"image\": \"http://placeimg.com/640/480/transport\", \n\t\t\"sort\": 11417, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 6593599806676.328, \n\t\t\"longitude\": 6479691075310.115, \n\t\t\"zoom\": 3, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"7a3e6bda-b9c6-41ba-b410-14d76c2f2f97\", \n\t\t\"countryId\": \"d5864657-4577-49c4-bd01-734e7c020aee\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Handcrafted Granite Chicken\", \n\t\t\"slug\": \"ab-magnam-officia\", \n\t\t\"administrativeAreaLevel1\": \"1p8bm11pds3i75s5uuxu58ksvptupgqmi7xvwd7jl4sce3xk4\", \n\t\t\"administrativeAreaLevel2\": \"jci9tsyscwhv7330334efok9sndtqooiq2iwrzc40kqvjak5a\", \n\t\t\"administrativeAreaLevel3\": \"6faclbwpmg2uostnem3bnsf70mgeguuh8a24a5c8ycw72fv5r\"\n\t}, \n\t{\n\t\t\"id\": \"2c06d84d-84ae-4412-bcd8-fac186113d65\", \n\t\t\"iso3166Alpha2\": \"o8\", \n\t\t\"iso3166Alpha3\": \"nwo\", \n\t\t\"iso3166Numeric\": \"601\", \n\t\t\"customCode\": \"oyqtdpiab\", \n\t\t\"prefix\": \"1tuc\", \n\t\t\"image\": \"http://placeimg.com/640/480/abstract\", \n\t\t\"sort\": 39458, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 3377058730074.8706, \n\t\t\"longitude\": 8725092692117.34, \n\t\t\"zoom\": 8, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"210631a3-31d9-423c-91af-7295da080e15\", \n\t\t\"countryId\": \"1d2031e2-d706-4bd6-b10a-df0c93779107\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Tasty Wooden Salad\", \n\t\t\"slug\": \"commodi-odit-veniam\", \n\t\t\"administrativeAreaLevel1\": \"66c4kc4d0pwe1uq4o8c2ifmnrl8hyajtczu916dlgx1zvs396\", \n\t\t\"administrativeAreaLevel2\": \"2c2kg4owtxwpp9q4kjxb8j4bqv7ykjsi8nc1rq76ubr7kt5h4\", \n\t\t\"administrativeAreaLevel3\": \"3dpy6n8rbpkhalx7fwg5xcpbx62fm0j6mhgj8j0tonv95sdv9\"\n\t}, \n\t{\n\t\t\"id\": \"7c441f45-06d6-4d4d-b927-43b213fda62d\", \n\t\t\"iso3166Alpha2\": \"kw\", \n\t\t\"iso3166Alpha3\": \"bqo\", \n\t\t\"iso3166Numeric\": \"o7p\", \n\t\t\"customCode\": \"b6g62hq1d\", \n\t\t\"prefix\": \"9vlg\", \n\t\t\"image\": \"http://placeimg.com/640/480/sports\", \n\t\t\"sort\": 39231, \n\t\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\t\"latitude\": 1002714932859.9669, \n\t\t\"longitude\": 5114586427578.517, \n\t\t\"zoom\": 7, \n\t\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\t\"id\": \"87f9007c-e73e-4f4a-90c3-bf592814b0e0\", \n\t\t\"countryId\": \"280754ac-90f3-4b36-bfe5-a5963ea6f5b5\", \n\t\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\t\"name\": \"Tasty Soft Salad\", \n\t\t\"slug\": \"dolore-a-autem\", \n\t\t\"administrativeAreaLevel1\": \"o27417vuh9ltcml7i8pni09qx6fp639hnzj57gyiqdpb0d7k1\", \n\t\t\"administrativeAreaLevel2\": \"xytvhwwvxkfqgp9tjy3h8i1d9fkukkva1a3gab7p3vphnpy7r\", \n\t\t\"administrativeAreaLevel3\": \"ltjjtvw2ung1tnkajoylxude5d51bd26qikmlw8ia2ew3wd6c\"\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -376,13 +377,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/countries",
+					"raw": "{{URL}}/common/countries/create",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"countries"
+						"countries",
+                        "create"
 					]
 				}
 			},
@@ -433,12 +435,12 @@
 			"response": []
         },
         {
-			"name": "REST - common/countries",
+			"name": "REST - common/countries/get",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -463,25 +465,26 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/countries",
+					"raw": "{{URL}}/common/countries/get",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"countries"
+						"countries",
+                        "get"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/country",
+			"name": "REST - common/country/find",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -506,25 +509,26 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/country",
+					"raw": "{{URL}}/common/country/find",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"country"
+						"country",
+                        "find"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/country/{id}",
+			"name": "REST - common/country/find/{id}",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -549,13 +553,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/country/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"raw": "{{URL}}/common/country/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
 						"country",
+                        "find",
 						"5b19d6ac-4081-573b-96b3-56964d5326a8"
 					]
 				}
@@ -563,12 +568,12 @@
 			"response": []
         },
         {
-			"name": "REST - common/country-i18n/{id}",
+			"name": "REST - common/country-i18n/find/{id}",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -593,13 +598,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/country-i18n/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"raw": "{{URL}}/common/country-i18n/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
 						"country",
+                        "find",
 						"5b19d6ac-4081-573b-96b3-56964d5326a8"
 					]
 				}
@@ -607,7 +613,7 @@
 			"response": []
         },
         {
-			"name": "REST - common/country",
+			"name": "REST - common/country/update",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -626,7 +632,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"iso3166Alpha2\": \"ug\", \n\t\"iso3166Alpha3\": \"buf\", \n\t\"iso3166Numeric\": \"rjl\", \n\t\"customCode\": \"8dluyv2cu6\", \n\t\"prefix\": \"ilro5\", \n\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\"sort\": 456673, \n\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\"latitude\": 73359334054293040, \n\t\"longitude\": 86067566059718050, \n\t\"zoom\": 78, \n\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\"name\": \"Practical Granite Chair\", \n\t\"slug\": \"ea-ut-illo\", \n\t\"administrativeAreaLevel1\": \"ljc6fyv5uovdql4003thtb1at5wapge9z0jwj82wa0pt832zrn\", \n\t\"administrativeAreaLevel2\": \"apvx2finaka90yd8xx826asklwu3tess1otkak8re34f8i0vi2\", \n\t\"administrativeAreaLevel3\": \"meb3t6seh62pjj4w1i5rkl2t4fgdpmxvqfpkzhis5ymwaha0lj\"\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"iso3166Alpha2\": \"30\", \n\t\"iso3166Alpha3\": \"3no\", \n\t\"iso3166Numeric\": \"yp8\", \n\t\"customCode\": \"qirr4nbqq\", \n\t\"prefix\": \"c1m0\", \n\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\"sort\": 14258, \n\t\"administrativeAreas\": { \"foo\" : \"bar\" }, \n\t\"latitude\": 8730603894243.547, \n\t\"longitude\": 4734596046468.417, \n\t\"zoom\": 3, \n\t\"dataLang\": { \"foo\" : \"bar\" }, \n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"langId\": \"4470b5ab-9d57-4c9d-a68f-5bf8e32f543a\", \n\t\"name\": \"Generic Concrete Cheese\", \n\t\"slug\": \"adipisci-occaecati-et\", \n\t\"administrativeAreaLevel1\": \"blheb9xsqs3gsxw2aqzl9yl8uip395uxzy3syobv6g8wqs0fq\", \n\t\"administrativeAreaLevel2\": \"q2yaqmtfu2vrt46xgishcn2bhtg81lckvihxztyn7q237lhev\", \n\t\"administrativeAreaLevel3\": \"82ipx7m9v0tn9lo4f8twez0t138rfdbacq4gbks598vwjah9n\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -634,20 +640,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/country",
+					"raw": "{{URL}}/common/country/update",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"country"
+						"country",
+                        "update"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/country/{id}",
+			"name": "REST - common/country/delete/{id}",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -674,13 +681,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/country/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"raw": "{{URL}}/common/country/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
 						"country",
+                        "delete",
 						"5b19d6ac-4081-573b-96b3-56964d5326a8"
 					]
 				}
@@ -688,7 +696,7 @@
 			"response": []
 		},
         {
-			"name": "REST - common/countries",
+			"name": "REST - common/countries/delete",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -715,13 +723,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/countries",
+					"raw": "{{URL}}/common/countries/delete",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"countries"
+						"countries",
+                        "delete"
 					]
 				}
 			},
@@ -730,7 +739,7 @@
     ],
     "variable": [
 		{
-			"id": "21b0b986-5def-4bdf-8f37-14bc008b262a",
+			"id": "c2b6f738-d990-426b-b6d3-450445dacd74",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

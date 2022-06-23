@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateAdministrativeAreaLevel3Resolver } from './common-create-administrative-area-level-3.resolver';
-import { CommonCreateAdministrativeAreaLevel3Input } from './../../../../graphql';
+import { CommonCreateAdministrativeAreaLevel3Handler } from '../handlers/common-create-administrative-area-level-3.handler';
+import { CommonCreateAdministrativeAreaLevel3Input } from '../../../../graphql';
 
 // sources
-import { administrativeAreasLevel3 } from '../../../../@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 describe('CommonCreateAdministrativeAreaLevel3Resolver', () =>
 {
     let resolver: CommonCreateAdministrativeAreaLevel3Resolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateAdministrativeAreaLevel3Handler;
 
     beforeAll(async () =>
     {
@@ -23,23 +22,17 @@ describe('CommonCreateAdministrativeAreaLevel3Resolver', () =>
             providers: [
                 CommonCreateAdministrativeAreaLevel3Resolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateAdministrativeAreaLevel3Handler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        resolver    = module.get<CommonCreateAdministrativeAreaLevel3Resolver>(CommonCreateAdministrativeAreaLevel3Resolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonCreateAdministrativeAreaLevel3Resolver>(CommonCreateAdministrativeAreaLevel3Resolver);
+        handler = module.get<CommonCreateAdministrativeAreaLevel3Handler>(CommonCreateAdministrativeAreaLevel3Handler);
     });
 
     test('CommonCreateAdministrativeAreaLevel3Resolver should be defined', () =>
@@ -56,7 +49,7 @@ describe('CommonCreateAdministrativeAreaLevel3Resolver', () =>
 
         test('should return an administrativeAreaLevel3 created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel3[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel3[0])));
             expect(await resolver.main(<CommonCreateAdministrativeAreaLevel3Input>administrativeAreasLevel3[0])).toBe(administrativeAreasLevel3[0]);
         });
     });

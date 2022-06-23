@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindCountryByIdQueryHandler } from './find-country-by-id.query-handler';
-import { MockCountryRepository } from '../../../../../@apps/common/country/infrastructure/mock/mock-country.repository';
-import { countries } from '../../../../../@apps/common/country/infrastructure/seeds/country.seed';
-import { ICountryRepository } from '../../../../../@apps/common/country/domain/country.repository';
-import { CountryMapper } from '../../../../../@apps/common/country/domain/country.mapper';
+import { MockCountryRepository } from '@apps/common/country/infrastructure/mock/mock-country.repository';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { ICountryRepository } from '@apps/common/country/domain/country.repository';
+import { CountryMapper } from '@apps/common/country/domain/country.mapper';
 import { FindCountryByIdQuery } from './find-country-by-id.query';
 import { FindCountryByIdService } from './find-country-by-id.service';
 
@@ -23,17 +23,17 @@ describe('FindCountryByIdQueryHandler', () =>
                 FindCountryByIdQueryHandler,
                 {
                     provide : ICountryRepository,
-                    useClass: MockCountryRepository
+                    useClass: MockCountryRepository,
                 },
                 {
                     provide : FindCountryByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<FindCountryByIdQueryHandler>(FindCountryByIdQueryHandler);
         service         = module.get<FindCountryByIdService>(FindCountryByIdService);
@@ -55,7 +55,7 @@ describe('FindCountryByIdQueryHandler', () =>
                 new FindCountryByIdQuery(
                     countries[0].id,
 
-                )
+                ),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

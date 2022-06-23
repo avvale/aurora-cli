@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { langs } from '../../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 import { CreateLangsCommandHandler } from './create-langs.command-handler';
 import { CreateLangsCommand } from './create-langs.command';
 import { CreateLangsService } from './create-langs.service';
@@ -21,10 +21,11 @@ describe('CreateLangsCommandHandler', () =>
                     provide : CreateLangsService,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
-        }).compile();
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<CreateLangsCommandHandler>(CreateLangsCommandHandler);
         service         = module.get<CreateLangsService>(CreateLangsService);
@@ -42,8 +43,8 @@ describe('CreateLangsCommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateLangsCommand(
                     langs,
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

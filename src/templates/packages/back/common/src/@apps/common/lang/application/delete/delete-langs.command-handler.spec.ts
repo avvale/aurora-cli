@@ -16,13 +16,14 @@ describe('DeleteLangsCommandHandler', () =>
             providers: [
                 DeleteLangsCommandHandler,
                 {
-                    provide: DeleteLangsService,
+                    provide : DeleteLangsService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteLangsCommandHandler>(DeleteLangsCommandHandler);
         service         = module.get<DeleteLangsService>(DeleteLangsService);
@@ -38,7 +39,7 @@ describe('DeleteLangsCommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new DeleteLangsCommand()
+                new DeleteLangsCommand(),
             )).toBe(undefined);
         });
     });

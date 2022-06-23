@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '../../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 import { FindCountryByIdService } from './find-country-by-id.service';
-import { CountryId } from './../../domain/value-objects';
-import { ICountryRepository } from './../../domain/country.repository';
-import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
+import { CountryId } from '../../domain/value-objects';
+import { ICountryRepository } from '../../domain/country.repository';
+import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('FindCountryByIdService', () =>
 {
@@ -24,13 +24,14 @@ describe('FindCountryByIdService', () =>
                 FindCountryByIdService,
                 MockCountryRepository,
                 {
-                    provide: ICountryRepository,
+                    provide : ICountryRepository,
                     useValue: {
-                        findById: id => { /**/ }
-                    }
-                }
-            ]
-        }).compile();
+                        findById: id => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindCountryByIdService);
         repository      = module.get(ICountryRepository);
@@ -48,7 +49,7 @@ describe('FindCountryByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new CountryId(countries[0].id)
+                new CountryId(countries[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

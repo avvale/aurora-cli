@@ -2,20 +2,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AddI18NConstraintService, ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateCountryController } from './common-create-country.controller';
+import { CommonCreateCountryHandler } from '../handlers/common-create-country.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
-import { countries } from '../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonCreateCountryController', () =>
 {
     let controller: CommonCreateCountryController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateCountryHandler;
 
     beforeAll(async () =>
     {
@@ -24,40 +23,21 @@ describe('CommonCreateCountryController', () =>
                 CacheModule.register(),
             ],
             controllers: [
-                CommonCreateCountryController
+                CommonCreateCountryController,
             ],
             providers: [
-                AddI18NConstraintService,
                 {
-                    provide : ConfigService,
+                    provide : CommonCreateCountryHandler,
                     useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : CACHE_MANAGER,
-                    useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
-                },
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonCreateCountryController>(CommonCreateCountryController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonCreateCountryController>(CommonCreateCountryController);
+        handler = module.get<CommonCreateCountryHandler>(CommonCreateCountryHandler);
     });
 
     describe('main', () =>
@@ -69,7 +49,7 @@ describe('CommonCreateCountryController', () =>
 
         test('should return an country created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
             expect(await controller.main(countries[0])).toBe(countries[0]);
         });
     });

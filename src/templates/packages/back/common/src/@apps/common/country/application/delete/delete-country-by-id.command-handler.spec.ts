@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteCountryByIdCommandHandler } from './delete-country-by-id.command-handler';
-import { countries } from '../../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 import { DeleteCountryByIdCommand } from './delete-country-by-id.command';
 import { DeleteCountryByIdService } from './delete-country-by-id.service';
 
@@ -17,13 +17,14 @@ describe('DeleteCountryByIdCommandHandler', () =>
             providers: [
                 DeleteCountryByIdCommandHandler,
                 {
-                    provide: DeleteCountryByIdService,
+                    provide : DeleteCountryByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteCountryByIdCommandHandler>(DeleteCountryByIdCommandHandler);
         service         = module.get<DeleteCountryByIdService>(DeleteCountryByIdService);
@@ -41,7 +42,7 @@ describe('DeleteCountryByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteCountryByIdCommand(
                     countries[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

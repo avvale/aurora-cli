@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
 import { IamUserDto } from '../dto';
 
 // authorization
@@ -22,12 +22,13 @@ export class IamFindUserByIdController
         private readonly handler: IamFindUserByIdHandler,
     ) {}
 
-    @Get(':id')
+    @Post(':id')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find user by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: IamUserDto })
     async main(
         @Param('id') id: string,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {

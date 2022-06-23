@@ -3,7 +3,7 @@ import { DeleteLangByIdCommand } from './delete-lang-by-id.command';
 import { DeleteLangByIdService } from './delete-lang-by-id.service';
 import {
     LangId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteLangByIdCommand)
 export class DeleteLangByIdCommandHandler implements ICommandHandler<DeleteLangByIdCommand>
@@ -18,7 +18,7 @@ export class DeleteLangByIdCommandHandler implements ICommandHandler<DeleteLangB
         await this.deleteLangByIdService.main(
             new LangId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

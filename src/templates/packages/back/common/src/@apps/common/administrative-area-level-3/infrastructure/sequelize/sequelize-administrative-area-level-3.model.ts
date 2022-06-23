@@ -1,9 +1,10 @@
+/* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { CommonCountryModel } from '../../../../../@apps/common/country/infrastructure/sequelize/sequelize-country.model';
-import { CommonAdministrativeAreaLevel1Model } from '../../../../../@apps/common/administrative-area-level-1/infrastructure/sequelize/sequelize-administrative-area-level-1.model';
-import { CommonAdministrativeAreaLevel2Model } from '../../../../../@apps/common/administrative-area-level-2/infrastructure/sequelize/sequelize-administrative-area-level-2.model';
+import { CommonCountryModel } from '@apps/common/country/infrastructure/sequelize/sequelize-country.model';
+import { CommonAdministrativeAreaLevel1Model } from '@apps/common/administrative-area-level-1/infrastructure/sequelize/sequelize-administrative-area-level-1.model';
+import { CommonAdministrativeAreaLevel2Model } from '@apps/common/administrative-area-level-2/infrastructure/sequelize/sequelize-administrative-area-level-2.model';
 
 @Table({ modelName: 'CommonAdministrativeAreaLevel3', freezeTableName: true, timestamps: false })
 export class CommonAdministrativeAreaLevel3Model extends Model<CommonAdministrativeAreaLevel3Model>

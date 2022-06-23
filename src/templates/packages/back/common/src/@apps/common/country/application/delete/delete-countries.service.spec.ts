@@ -4,9 +4,9 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeleteCountriesService } from './delete-countries.service';
-import { ICountryRepository } from './../../domain/country.repository';
-import { ICountryI18NRepository } from './../../domain/country-i18n.repository';
-import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
+import { ICountryRepository } from '../../domain/country.repository';
+import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('DeleteCountriesService', () =>
 {
@@ -27,19 +27,20 @@ describe('DeleteCountriesService', () =>
                 {
                     provide : ICountryRepository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ },
-                    }
+                        get   : () => { /**/ },
+                        delete: () => { /**/ },
+                    },
                 },
                 {
                     provide : ICountryI18NRepository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ }
-                    }
+                        get   : () => { /**/ },
+                        delete: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(DeleteCountriesService);
         repository      = module.get(ICountryRepository);

@@ -1,41 +1,36 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateCountriesController } from './common-create-countries.controller';
-import { countries } from '../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
+
+// sources
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonCreateCountriesController', () =>
 {
     let controller: CommonCreateCountriesController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateCountriesHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                CommonCreateCountriesController
+                CommonCreateCountriesController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateCountriesHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonCreateCountriesController>(CommonCreateCountriesController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonCreateCountriesController>(CommonCreateCountriesController);
+        handler = module.get<CommonCreateCountriesHandler>(CommonCreateCountriesHandler);
     });
 
     describe('main', () =>

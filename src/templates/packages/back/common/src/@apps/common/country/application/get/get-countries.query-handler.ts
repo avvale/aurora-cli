@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CountryResponse } from './../../domain/country.response';
-import { CountryMapper } from './../../domain/country.mapper';
+import { CountryResponse } from '../../domain/country.response';
+import { CountryMapper } from '../../domain/country.mapper';
 import { GetCountriesQuery } from './get-countries.query';
 import { GetCountriesService } from './get-countries.service';
 

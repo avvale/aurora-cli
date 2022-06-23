@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateCountriesResolver } from './common-create-countries.resolver';
-import { countries } from '../../../../@apps/common/country/infrastructure/seeds/country.seed';
-import { CommonCreateCountryInput } from './../../../../graphql';
+import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
+import { CommonCreateCountryInput } from '../../../../graphql';
+
+// sources
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonCreateCountriesResolver', () =>
 {
     let resolver: CommonCreateCountriesResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateCountriesHandler;
 
     beforeAll(async () =>
     {
@@ -18,23 +19,17 @@ describe('CommonCreateCountriesResolver', () =>
             providers: [
                 CommonCreateCountriesResolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateCountriesHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        resolver    = module.get<CommonCreateCountriesResolver>(CommonCreateCountriesResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonCreateCountriesResolver>(CommonCreateCountriesResolver);
+        handler = module.get<CommonCreateCountriesHandler>(CommonCreateCountriesHandler);
     });
 
     test('CommonCreateCountriesResolver should be defined', () =>
@@ -51,7 +46,7 @@ describe('CommonCreateCountriesResolver', () =>
 
         test('should return an countries created', async () =>
         {
-            expect(await resolver.main(<CommonCreateCountryInput[]>countries)).toBe(true);
+            expect(await resolver.main(<CommonCreateCountryInput[]>countries)).toBe(undefined);
         });
     });
 });

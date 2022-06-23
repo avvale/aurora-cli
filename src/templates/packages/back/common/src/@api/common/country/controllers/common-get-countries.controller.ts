@@ -1,33 +1,38 @@
-import { Controller, Get, Body } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, AddI18NConstraintService, ContentLanguage, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { CountryDto } from './../dto/country.dto';
+import { ContentLanguage, QueryStatement, Timezone } from 'aurora-ts-core';
+import { CommonCountryDto } from '../dto';
 
 // @apps
-import { GetCountriesQuery } from '../../../../@apps/common/country/application/get/get-countries.query';
+import { CommonGetCountriesHandler } from '../handlers/common-get-countries.handler';
 
 @ApiTags('[common] country')
-@Controller('common/countries')
+@Controller('common/countries/get')
 export class CommonGetCountriesController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly handler: CommonGetCountriesHandler,
     ) {}
 
-    @Get()
-    @ApiOperation({ summary: 'Find countries according to query' })
-    @ApiOkResponse({ description: 'The records has been found successfully.', type: [CountryDto] })
+    @Post()
+    @HttpCode(200)
+    @ApiOperation({ summary: 'Get countries according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [CommonCountryDto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @ContentLanguage() contentLanguage?: string,
     )
     {
-        constraint = await this.addI18NConstraintService.main(constraint, 'countryI18N', contentLanguage, { defineDefaultLanguage: false });
-        return await this.queryBus.ask(new GetCountriesQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+            contentLanguage?: string,
+        );
     }
 }

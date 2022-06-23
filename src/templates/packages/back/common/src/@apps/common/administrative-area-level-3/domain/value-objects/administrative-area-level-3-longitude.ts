@@ -10,7 +10,6 @@ export class AdministrativeAreaLevel3Longitude extends DecimalValueObject
             name       : 'AdministrativeAreaLevel3Longitude',
             nullable   : true,
             undefinable: true,
-            maxLength  : 17,
             decimals   : [17, 4],
             unsigned   : false,
         }, validationRules));

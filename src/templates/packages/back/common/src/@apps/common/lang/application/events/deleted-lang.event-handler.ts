@@ -4,7 +4,7 @@ import { DeletedLangEvent } from './deleted-lang.event';
 @EventsHandler(DeletedLangEvent)
 export class DeletedLangEventHandler implements IEventHandler<DeletedLangEvent>
 {
-    handle(event: DeletedLangEvent)
+    handle(event: DeletedLangEvent): void
     {
         // console.log('DeletedLangEvent: ', event);
     }

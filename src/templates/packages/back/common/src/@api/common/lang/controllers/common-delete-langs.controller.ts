@@ -1,36 +1,35 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { LangDto } from './../dto/lang.dto';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
+import { CommonLangDto } from '../dto';
 
 // @apps
-import { GetLangsQuery } from '../../../../@apps/common/lang/application/get/get-langs.query';
-import { DeleteLangsCommand } from '../../../../@apps/common/lang/application/delete/delete-langs.command';
+import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 @ApiTags('[common] lang')
-@Controller('common/langs')
+@Controller('common/langs/delete')
 export class CommonDeleteLangsController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonDeleteLangsHandler,
     ) {}
 
     @Delete()
     @ApiOperation({ summary: 'Delete langs in batch according to query' })
-    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [LangDto]})
+    @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [CommonLangDto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        const langs = await this.queryBus.ask(new GetLangsQuery(queryStatement, constraint, { timezone }));
-
-        await this.commandBus.dispatch(new DeleteLangsCommand(queryStatement, constraint, { timezone }));
-
-        return langs;
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

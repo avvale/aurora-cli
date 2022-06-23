@@ -1,28 +1,34 @@
-import { Controller, Get, Param } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { LangDto } from './../dto/lang.dto';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
+import { CommonLangDto } from '../dto';
 
 // @apps
-import { FindLangByIdQuery } from '../../../../@apps/common/lang/application/find/find-lang-by-id.query';
+import { CommonFindLangByIdHandler } from '../handlers/common-find-lang-by-id.handler';
 
 @ApiTags('[common] lang')
-@Controller('common/lang')
+@Controller('common/lang/find')
 export class CommonFindLangByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonFindLangByIdHandler,
     ) {}
 
-    @Get(':id')
+    @Post(':id')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find lang by id' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: LangDto })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: CommonLangDto })
     async main(
         @Param('id') id: string,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindLangByIdQuery(id, constraint, { timezone }));
+        return await this.handler.main(
+            id,
+            constraint,
+            timezone,
+        );
     }
 }

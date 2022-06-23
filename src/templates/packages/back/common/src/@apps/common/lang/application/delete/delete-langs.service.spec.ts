@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeleteLangsService } from './delete-langs.service';
-import { ILangRepository } from './../../domain/lang.repository';
-import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
+import { ILangRepository } from '../../domain/lang.repository';
+import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
 
 describe('DeleteLangsService', () =>
 {
@@ -25,12 +25,13 @@ describe('DeleteLangsService', () =>
                 {
                     provide : ILangRepository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ },
-                    }
+                        get   : () => { /**/ },
+                        delete: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(DeleteLangsService);
         repository      = module.get(ILangRepository);

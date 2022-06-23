@@ -18,7 +18,7 @@ type CommonCountry
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
     langId: ID!
-    lang: CommonLang!
+    lang: CommonLang
     name: GraphQLString!
     slug: GraphQLString!
     administrativeAreaLevel1: GraphQLString
@@ -49,9 +49,32 @@ input CommonCreateCountryInput
     administrativeAreaLevel3: GraphQLString
 }
 
-input CommonUpdateCountryInput
+input CommonUpdateCountryByIdInput
 {
     id: ID!
+    iso3166Alpha2: GraphQLString
+    iso3166Alpha3: GraphQLString
+    iso3166Numeric: GraphQLString
+    customCode: GraphQLString
+    prefix: GraphQLString
+    image: GraphQLString
+    sort: GraphQLInt
+    administrativeAreas: JSON
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+    dataLang: JSON
+    langId: ID
+    name: GraphQLString
+    slug: GraphQLString
+    administrativeAreaLevel1: GraphQLString
+    administrativeAreaLevel2: GraphQLString
+    administrativeAreaLevel3: GraphQLString
+}
+
+input CommonUpdateCountriesInput
+{
+    id: ID
     iso3166Alpha2: GraphQLString
     iso3166Alpha3: GraphQLString
     iso3166Numeric: GraphQLString
@@ -84,7 +107,8 @@ type Mutation
 {
     commonCreateCountry(payload: CommonCreateCountryInput!): CommonCountry
     commonCreateCountries(payload: [CommonCreateCountryInput]!): Boolean!
-    commonUpdateCountry(payload: CommonUpdateCountryInput! constraint: QueryStatement): CommonCountry
+    commonUpdateCountryById(payload: CommonUpdateCountryByIdInput! constraint: QueryStatement): CommonCountry
+    commonUpdateCountries(payload: CommonUpdateCountriesInput! query: QueryStatement constraint: QueryStatement): [CommonCountry]!
     commonDeleteCountryById(id: ID! constraint: QueryStatement): CommonCountry
     commonDeleteCountries(query: QueryStatement constraint: QueryStatement): [CommonCountry]!
 }

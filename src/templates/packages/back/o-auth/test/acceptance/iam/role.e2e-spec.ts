@@ -324,18 +324,18 @@ describe('role', () =>
             });
     });
 
-    test('/REST:GET iam/role/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST iam/role/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/find/1357a06c-e7b6-49e4-a8cb-6a6433c35ba3')
+            .post('/iam/role/find/1357a06c-e7b6-49e4-a8cb-6a6433c35ba3')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/role/find/{id}', () =>
+    test('/REST:POST iam/role/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/role/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/iam/role/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

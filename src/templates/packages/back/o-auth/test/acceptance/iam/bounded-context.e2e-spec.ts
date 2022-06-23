@@ -388,18 +388,18 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:GET iam/bounded-context/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST iam/bounded-context/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context/find/9d23b184-ab1f-4249-a97c-682565256b5b')
+            .post('/iam/bounded-context/find/9d23b184-ab1f-4249-a97c-682565256b5b')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/bounded-context/find/{id}', () =>
+    test('/REST:POST iam/bounded-context/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/bounded-context/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/iam/bounded-context/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

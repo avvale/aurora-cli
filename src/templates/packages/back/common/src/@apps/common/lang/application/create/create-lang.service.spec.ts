@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '../../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 import { CreateLangService } from './create-lang.service';
 import {
     LangId,
@@ -19,9 +19,9 @@ import {
     LangCreatedAt,
     LangUpdatedAt,
     LangDeletedAt,
-} from './../../domain/value-objects';
-import { ILangRepository } from './../../domain/lang.repository';
-import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
+} from '../../domain/value-objects';
+import { ILangRepository } from '../../domain/lang.repository';
+import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
 
 describe('CreateLangService', () =>
 
@@ -42,11 +42,12 @@ describe('CreateLangService', () =>
                 {
                     provide : ILangRepository,
                     useValue: {
-                        create: (item) => { /**/ },
-                    }
+                        create: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateLangService);
         repository      = module.get(ILangRepository);
@@ -74,7 +75,7 @@ describe('CreateLangService', () =>
                     dir: new LangDir(langs[0].dir),
                     sort: new LangSort(langs[0].sort),
                     isActive: new LangIsActive(langs[0].isActive),
-                }
+                },
             )).toBe(undefined);
         });
     });

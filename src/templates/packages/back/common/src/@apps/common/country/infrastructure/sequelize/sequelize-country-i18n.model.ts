@@ -1,8 +1,8 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { CommonCountryModel } from '../../../../../@apps/common/country/infrastructure/sequelize/sequelize-country.model';
-import { CommonLangModel } from '../../../../../@apps/common/lang/infrastructure/sequelize/sequelize-lang.model';
+import { CommonCountryModel } from '@apps/common/country/infrastructure/sequelize/sequelize-country.model';
+import { CommonLangModel } from '@apps/common/lang/infrastructure/sequelize/sequelize-lang.model';
 
 @Table({ modelName: 'CommonCountryI18N', freezeTableName: true, timestamps: false })
 export class CommonCountryI18NModel extends Model<CommonCountryI18NModel>

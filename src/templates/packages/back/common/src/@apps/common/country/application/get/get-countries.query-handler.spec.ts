@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetCountriesQueryHandler } from './get-countries.query-handler';
-import { MockCountryRepository } from '../../../../../@apps/common/country/infrastructure/mock/mock-country.repository';
-import { ICountryRepository } from '../../../../../@apps/common/country/domain/country.repository';
-import { CountryMapper } from '../../../../../@apps/common/country/domain/country.mapper';
+import { MockCountryRepository } from '@apps/common/country/infrastructure/mock/mock-country.repository';
+import { ICountryRepository } from '@apps/common/country/domain/country.repository';
+import { CountryMapper } from '@apps/common/country/domain/country.mapper';
 import { GetCountriesQuery } from './get-countries.query';
 import { GetCountriesService } from './get-countries.service';
 
@@ -22,17 +22,17 @@ describe('GetCountriesQueryHandler', () =>
                 GetCountriesQueryHandler,
                 {
                     provide : ICountryRepository,
-                    useClass: MockCountryRepository
+                    useClass: MockCountryRepository,
                 },
                 {
                     provide : GetCountriesService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<GetCountriesQueryHandler>(GetCountriesQueryHandler);
         service         = module.get<GetCountriesService>(GetCountriesService);
@@ -51,7 +51,7 @@ describe('GetCountriesQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new GetCountriesQuery()
+                new GetCountriesQuery(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

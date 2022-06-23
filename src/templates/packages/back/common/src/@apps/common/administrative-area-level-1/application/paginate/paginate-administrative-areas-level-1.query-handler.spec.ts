@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateAdministrativeAreasLevel1QueryHandler } from './paginate-administrative-areas-level-1.query-handler';
-import { MockAdministrativeAreaLevel1Repository } from '../../../../../@apps/common/administrative-area-level-1/infrastructure/mock/mock-administrative-area-level-1.repository';
-import { IAdministrativeAreaLevel1Repository } from '../../../../../@apps/common/administrative-area-level-1/domain/administrative-area-level-1.repository';
-import { AdministrativeAreaLevel1Mapper } from '../../../../../@apps/common/administrative-area-level-1/domain/administrative-area-level-1.mapper';
+import { MockAdministrativeAreaLevel1Repository } from '@apps/common/administrative-area-level-1/infrastructure/mock/mock-administrative-area-level-1.repository';
+import { IAdministrativeAreaLevel1Repository } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.repository';
+import { AdministrativeAreaLevel1Mapper } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.mapper';
 import { PaginateAdministrativeAreasLevel1Query } from './paginate-administrative-areas-level-1.query';
 import { PaginateAdministrativeAreasLevel1Service } from './paginate-administrative-areas-level-1.service';
 
@@ -23,17 +23,17 @@ describe('PaginateAdministrativeAreasLevel1QueryHandler', () =>
                 PaginateAdministrativeAreasLevel1QueryHandler,
                 {
                     provide : IAdministrativeAreaLevel1Repository,
-                    useClass: MockAdministrativeAreaLevel1Repository
+                    useClass: MockAdministrativeAreaLevel1Repository,
                 },
                 {
                     provide : PaginateAdministrativeAreasLevel1Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<PaginateAdministrativeAreasLevel1QueryHandler>(PaginateAdministrativeAreasLevel1QueryHandler);
         service         = module.get<PaginateAdministrativeAreasLevel1Service>(PaginateAdministrativeAreasLevel1Service);
@@ -54,22 +54,22 @@ describe('PaginateAdministrativeAreasLevel1QueryHandler', () =>
                 {
                     count: 10,
                     total: 100,
-                    rows: repository.collectionSource.slice(0,10)
-                }
+                    rows : repository.collectionSource.slice(0,10),
+                },
             )));
             expect(await queryHandler.execute(
                 new PaginateAdministrativeAreasLevel1Query(
                     {
                         offset: 0,
-                        limit: 10
-                    }
-                )
+                        limit : 10,
+                    },
+                ),
             )).toStrictEqual(
                 new PaginationResponse(
                     100,
                     10,
-                    repository.collectionSource.slice(0,10).map(item => item.toDTO())
-                )
+                    repository.collectionSource.slice(0,10).map(item => item.toDTO()),
+                ),
             );
         });
     });

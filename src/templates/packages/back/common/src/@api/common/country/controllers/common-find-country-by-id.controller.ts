@@ -1,31 +1,36 @@
-import { Controller, Get, Param } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, AddI18NConstraintService, ContentLanguage, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { CountryDto } from './../dto/country.dto';
+import { ContentLanguage, QueryStatement, Timezone } from 'aurora-ts-core';
+import { CommonCountryDto } from '../dto';
 
 // @apps
-import { FindCountryByIdQuery } from '../../../../@apps/common/country/application/find/find-country-by-id.query';
+import { CommonFindCountryByIdHandler } from '../handlers/common-find-country-by-id.handler';
 
 @ApiTags('[common] country')
-@Controller('common/country')
+@Controller('common/country/find')
 export class CommonFindCountryByIdController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly handler: CommonFindCountryByIdHandler,
     ) {}
 
-    @Get(':id')
+    @Post(':id')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find country by id' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: CountryDto })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: CommonCountryDto })
     async main(
         @Param('id') id: string,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @ContentLanguage() contentLanguage?: string,
     )
     {
-        constraint = await this.addI18NConstraintService.main(constraint, 'countryI18N', contentLanguage);
-        return await this.queryBus.ask(new FindCountryByIdQuery(id, constraint, { timezone }));
+        return await this.handler.main(
+            id,
+            constraint,
+            timezone,
+            contentLanguage?: string,
+        );
     }
 }

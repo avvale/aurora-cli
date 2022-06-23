@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetAdministrativeAreasLevel2QueryHandler } from './get-administrative-areas-level-2.query-handler';
-import { MockAdministrativeAreaLevel2Repository } from '../../../../../@apps/common/administrative-area-level-2/infrastructure/mock/mock-administrative-area-level-2.repository';
-import { IAdministrativeAreaLevel2Repository } from '../../../../../@apps/common/administrative-area-level-2/domain/administrative-area-level-2.repository';
-import { AdministrativeAreaLevel2Mapper } from '../../../../../@apps/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
+import { MockAdministrativeAreaLevel2Repository } from '@apps/common/administrative-area-level-2/infrastructure/mock/mock-administrative-area-level-2.repository';
+import { IAdministrativeAreaLevel2Repository } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.repository';
+import { AdministrativeAreaLevel2Mapper } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
 import { GetAdministrativeAreasLevel2Query } from './get-administrative-areas-level-2.query';
 import { GetAdministrativeAreasLevel2Service } from './get-administrative-areas-level-2.service';
 
@@ -22,17 +22,17 @@ describe('GetAdministrativeAreasLevel2QueryHandler', () =>
                 GetAdministrativeAreasLevel2QueryHandler,
                 {
                     provide : IAdministrativeAreaLevel2Repository,
-                    useClass: MockAdministrativeAreaLevel2Repository
+                    useClass: MockAdministrativeAreaLevel2Repository,
                 },
                 {
                     provide : GetAdministrativeAreasLevel2Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<GetAdministrativeAreasLevel2QueryHandler>(GetAdministrativeAreasLevel2QueryHandler);
         service         = module.get<GetAdministrativeAreasLevel2Service>(GetAdministrativeAreasLevel2Service);
@@ -51,7 +51,7 @@ describe('GetAdministrativeAreasLevel2QueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new GetAdministrativeAreasLevel2Query()
+                new GetAdministrativeAreasLevel2Query(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

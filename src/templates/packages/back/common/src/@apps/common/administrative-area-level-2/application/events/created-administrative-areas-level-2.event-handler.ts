@@ -4,7 +4,7 @@ import { CreatedAdministrativeAreasLevel2Event } from './created-administrative-
 @EventsHandler(CreatedAdministrativeAreasLevel2Event)
 export class CreatedAdministrativeAreasLevel2EventHandler implements IEventHandler<CreatedAdministrativeAreasLevel2Event>
 {
-    handle(event: CreatedAdministrativeAreasLevel2Event)
+    handle(event: CreatedAdministrativeAreasLevel2Event): void
     {
         // console.log('CreatedAdministrativeAreasLevel2Event: ', event);
     }

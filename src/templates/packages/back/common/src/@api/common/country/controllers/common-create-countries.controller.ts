@@ -1,29 +1,32 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, Timezone } from 'aurora-ts-core';
-import { CountryDto } from './../dto/country.dto';
-import { CreateCountryDto } from './../dto/create-country.dto';
+import { Timezone } from 'aurora-ts-core';
+import { CommonCountryDto, CommonCreateCountryDto } from '../dto';
 
 // @apps
-import { CreateCountriesCommand } from '../../../../@apps/common/country/application/create/create-countries.command';
+import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
 
 @ApiTags('[common] country')
-@Controller('common/countries')
+@Controller('common/countries/create')
 export class CommonCreateCountriesController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
+        private readonly handler: CommonCreateCountriesHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create countries in batch' })
-    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [CountryDto] })
-    @ApiBody({ type: [CreateCountryDto] })
+    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [CommonCountryDto]})
+    @ApiBody({ type: [CommonCreateCountryDto]})
     async main(
-        @Body() payload: CreateCountryDto[],
+        @Body() payload: CommonCreateCountryDto[],
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateCountriesCommand(payload, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

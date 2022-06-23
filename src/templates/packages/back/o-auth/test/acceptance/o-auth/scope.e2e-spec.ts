@@ -322,18 +322,18 @@ describe('scope', () =>
             });
     });
 
-    test('/REST:GET o-auth/scope/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST o-auth/scope/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/scope/find/acdbef90-0fdb-4a56-b892-e1fbce10d2cf')
+            .post('/o-auth/scope/find/acdbef90-0fdb-4a56-b892-e1fbce10d2cf')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET o-auth/scope/find/{id}', () =>
+    test('/REST:POST o-auth/scope/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/scope/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/o-auth/scope/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

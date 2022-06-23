@@ -16,7 +16,7 @@ import {
     LangCreatedAt,
     LangUpdatedAt,
     LangDeletedAt,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateLangsCommand)
 export class CreateLangsCommandHandler implements ICommandHandler<CreateLangsCommand>
@@ -44,7 +44,8 @@ export class CreateLangsCommandHandler implements ICommandHandler<CreateLangsCom
                         sort: new LangSort(lang.sort),
                         isActive: new LangIsActive(lang.isActive),
                     };
-                })
+                }),
+            command.cQMetadata,
         );
     }
 }

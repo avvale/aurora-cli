@@ -1,6 +1,6 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from 'aurora-ts-core';
-import { CQMetadata, Pagination } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { CommonLang } from './lang.aggregate';
 import { LangId } from './value-objects';
 
@@ -61,9 +61,10 @@ export abstract class ILangRepository implements IRepository<CommonLang>
     abstract create(
         lang: CommonLang,
         options?: {
-            dataFactory?: (aggregate: CommonLang) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: CommonLang) => LiteralObject;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: CommonLang) => QueryStatement;
+            finderQueryStatement?: (aggregate: CommonLang) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -71,20 +72,33 @@ export abstract class ILangRepository implements IRepository<CommonLang>
     abstract insert(
         langs: CommonLang[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: CommonLang) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: CommonLang) => LiteralObject;
         }
     ): Promise<void>;
 
-    // update record
+    // update record by id
+    abstract updateById(
+        lang: CommonLang,
+        options?: {
+            updateByIdOptions?: LiteralObject;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonLang) => LiteralObject;
+            // arguments to find object to update, with i18n we use langId and id relationship with parent entity
+            findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
     abstract update(
         lang: CommonLang,
         options?: {
+            updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: CommonLang) => ObjectLiteral;
-            // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            dataFactory?: (aggregate: CommonLang) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -92,6 +106,7 @@ export abstract class ILangRepository implements IRepository<CommonLang>
     abstract deleteById(
         id: LangId,
         options?: {
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -100,6 +115,7 @@ export abstract class ILangRepository implements IRepository<CommonLang>
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

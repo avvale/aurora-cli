@@ -1,41 +1,36 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateAdministrativeAreasLevel2Controller } from './common-create-administrative-areas-level-2.controller';
-import { administrativeAreasLevel2 } from '../../../../@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { CommonCreateAdministrativeAreasLevel2Handler } from '../handlers/common-create-administrative-areas-level-2.handler';
+
+// sources
+import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonCreateAdministrativeAreasLevel2Controller', () =>
 {
     let controller: CommonCreateAdministrativeAreasLevel2Controller;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateAdministrativeAreasLevel2Handler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                CommonCreateAdministrativeAreasLevel2Controller
+                CommonCreateAdministrativeAreasLevel2Controller,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateAdministrativeAreasLevel2Handler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonCreateAdministrativeAreasLevel2Controller>(CommonCreateAdministrativeAreasLevel2Controller);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonCreateAdministrativeAreasLevel2Controller>(CommonCreateAdministrativeAreasLevel2Controller);
+        handler = module.get<CommonCreateAdministrativeAreasLevel2Handler>(CommonCreateAdministrativeAreasLevel2Handler);
     });
 
     describe('main', () =>

@@ -1,17 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { ICommandBus } from 'aurora-ts-core';
-import { CreateAdministrativeAreasLevel3Command } from '../../../../@apps/common/administrative-area-level-3/application/create/create-administrative-areas-level-3.command';
+import { CreateAdministrativeAreasLevel3Command } from '@apps/common/administrative-area-level-3/application/create/create-administrative-areas-level-3.command';
 import { SeederModule } from './seeder.module';
-import { administrativeAreasLevel3 } from '../../../../@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 export class Seeder
 {
-    main()
+    main(): void
     {
         NestFactory.createApplicationContext(SeederModule).then(appContext =>
         {
             const commandBus = appContext.get(ICommandBus);
-            commandBus.dispatch(new CreateAdministrativeAreasLevel3Command(administrativeAreasLevel3));
+            commandBus.dispatch(new CreateAdministrativeAreasLevel3Command(administrativeAreasLevel3, { timezone: process.env.TZ }));
         });
     }
 }

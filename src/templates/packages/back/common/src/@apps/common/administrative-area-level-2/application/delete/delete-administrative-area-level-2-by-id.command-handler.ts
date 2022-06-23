@@ -3,7 +3,7 @@ import { DeleteAdministrativeAreaLevel2ByIdCommand } from './delete-administrati
 import { DeleteAdministrativeAreaLevel2ByIdService } from './delete-administrative-area-level-2-by-id.service';
 import {
     AdministrativeAreaLevel2Id
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteAdministrativeAreaLevel2ByIdCommand)
 export class DeleteAdministrativeAreaLevel2ByIdCommandHandler implements ICommandHandler<DeleteAdministrativeAreaLevel2ByIdCommand>
@@ -18,7 +18,7 @@ export class DeleteAdministrativeAreaLevel2ByIdCommandHandler implements IComman
         await this.deleteAdministrativeAreaLevel2ByIdService.main(
             new AdministrativeAreaLevel2Id(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

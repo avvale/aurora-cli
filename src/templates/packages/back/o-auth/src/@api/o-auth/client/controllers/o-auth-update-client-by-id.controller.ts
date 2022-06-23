@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, QueryStatement, Timezone } from 'aurora-ts-core';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
 import { OAuthClientDto, OAuthUpdateClientByIdDto } from '../dto';
 
 // authorization
@@ -27,7 +27,7 @@ export class OAuthUpdateClientByIdController
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: OAuthClientDto })
     async main(
         @Body() payload: OAuthUpdateClientByIdDto,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {

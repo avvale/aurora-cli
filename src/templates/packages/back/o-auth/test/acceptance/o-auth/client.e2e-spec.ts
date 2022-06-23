@@ -556,18 +556,18 @@ describe('client', () =>
             });
     });
 
-    test('/REST:GET o-auth/client/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST o-auth/client/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/client/find/bf74129a-3a38-45b6-a672-4507e5e9e9e3')
+            .post('/o-auth/client/find/bf74129a-3a38-45b6-a672-4507e5e9e9e3')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET o-auth/client/find/{id}', () =>
+    test('/REST:POST o-auth/client/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/client/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/o-auth/client/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { GetLangsService } from './get-langs.service';
-import { ILangRepository } from './../../domain/lang.repository';
-import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
+import { ILangRepository } from '../../domain/lang.repository';
+import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
 
 describe('GetLangsService', () =>
 {
@@ -22,13 +22,14 @@ describe('GetLangsService', () =>
                 GetLangsService,
                 MockLangRepository,
                 {
-                    provide: ILangRepository,
+                    provide : ILangRepository,
                     useValue: {
-                        get: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        get: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(GetLangsService);
         repository      = module.get(ILangRepository);

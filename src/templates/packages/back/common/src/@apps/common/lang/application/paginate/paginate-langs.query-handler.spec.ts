@@ -3,9 +3,9 @@ import { PaginationResponse } from 'aurora-ts-core';
 
 // custom items
 import { PaginateLangsQueryHandler } from './paginate-langs.query-handler';
-import { MockLangRepository } from '../../../../../@apps/common/lang/infrastructure/mock/mock-lang.repository';
-import { ILangRepository } from '../../../../../@apps/common/lang/domain/lang.repository';
-import { LangMapper } from '../../../../../@apps/common/lang/domain/lang.mapper';
+import { MockLangRepository } from '@apps/common/lang/infrastructure/mock/mock-lang.repository';
+import { ILangRepository } from '@apps/common/lang/domain/lang.repository';
+import { LangMapper } from '@apps/common/lang/domain/lang.mapper';
 import { PaginateLangsQuery } from './paginate-langs.query';
 import { PaginateLangsService } from './paginate-langs.service';
 
@@ -23,17 +23,17 @@ describe('PaginateLangsQueryHandler', () =>
                 PaginateLangsQueryHandler,
                 {
                     provide : ILangRepository,
-                    useClass: MockLangRepository
+                    useClass: MockLangRepository,
                 },
                 {
                     provide : PaginateLangsService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<PaginateLangsQueryHandler>(PaginateLangsQueryHandler);
         service         = module.get<PaginateLangsService>(PaginateLangsService);
@@ -54,22 +54,22 @@ describe('PaginateLangsQueryHandler', () =>
                 {
                     count: 10,
                     total: 100,
-                    rows: repository.collectionSource.slice(0,10)
-                }
+                    rows : repository.collectionSource.slice(0,10),
+                },
             )));
             expect(await queryHandler.execute(
                 new PaginateLangsQuery(
                     {
                         offset: 0,
-                        limit: 10
-                    }
-                )
+                        limit : 10,
+                    },
+                ),
             )).toStrictEqual(
                 new PaginationResponse(
                     100,
                     10,
-                    repository.collectionSource.slice(0,10).map(item => item.toDTO())
-                )
+                    repository.collectionSource.slice(0,10).map(item => item.toDTO()),
+                ),
             );
         });
     });

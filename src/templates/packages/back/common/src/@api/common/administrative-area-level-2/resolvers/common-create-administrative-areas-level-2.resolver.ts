@@ -1,25 +1,26 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
+import { Timezone } from 'aurora-ts-core';
 
 // @apps
-import { CreateAdministrativeAreasLevel2Command } from '../../../../@apps/common/administrative-area-level-2/application/create/create-administrative-areas-level-2.command';
-import { CommonCreateAdministrativeAreaLevel2Input } from './../../../../graphql';
+import { CommonCreateAdministrativeAreasLevel2Handler } from '../handlers/common-create-administrative-areas-level-2.handler';
+import { CommonCreateAdministrativeAreaLevel2Input } from '../../../../graphql';
 
 @Resolver()
 export class CommonCreateAdministrativeAreasLevel2Resolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonCreateAdministrativeAreasLevel2Handler,
     ) {}
 
     @Mutation('commonCreateAdministrativeAreasLevel2')
     async main(
         @Args('payload') payload: CommonCreateAdministrativeAreaLevel2Input[],
         @Timezone() timezone?: string,
-    )
+    ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateAdministrativeAreasLevel2Command(payload, { timezone }));
-        return true;
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

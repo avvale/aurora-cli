@@ -2,20 +2,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AddI18NConstraintService, ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonPaginateCountriesResolver } from './common-paginate-countries.resolver';
+import { CommonPaginateCountriesHandler } from '../handlers/common-paginate-countries.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
-import { countries } from '../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonPaginateCountriesResolver', () =>
 {
     let resolver: CommonPaginateCountriesResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonPaginateCountriesHandler;
 
     beforeAll(async () =>
     {
@@ -25,37 +24,18 @@ describe('CommonPaginateCountriesResolver', () =>
             ],
             providers: [
                 CommonPaginateCountriesResolver,
-                AddI18NConstraintService,
                 {
-                    provide : ConfigService,
+                    provide : CommonPaginateCountriesHandler,
                     useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : CACHE_MANAGER,
-                    useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
-                },
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    }
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         resolver    = module.get<CommonPaginateCountriesResolver>(CommonPaginateCountriesResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<CommonPaginateCountriesHandler>(CommonPaginateCountriesHandler);
     });
 
     test('CommonPaginateCountriesResolver should be defined', () =>
@@ -72,8 +52,16 @@ describe('CommonPaginateCountriesResolver', () =>
 
         test('should return a countries', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries)));
-            expect(await resolver.main()).toBe(countries);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : countries,
+            })));
+            expect(await resolver.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : countries,
+            });
         });
     });
 });

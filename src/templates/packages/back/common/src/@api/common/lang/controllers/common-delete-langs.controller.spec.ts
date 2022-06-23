@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonDeleteLangsController } from './common-delete-langs.controller';
+import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonDeleteLangsController', () =>
 {
     let controller: CommonDeleteLangsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonDeleteLangsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,21 @@ describe('CommonDeleteLangsController', () =>
             imports: [
             ],
             controllers: [
-                CommonDeleteLangsController
+                CommonDeleteLangsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonDeleteLangsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonDeleteLangsController>(CommonDeleteLangsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonDeleteLangsController>(CommonDeleteLangsController);
+        handler = module.get<CommonDeleteLangsHandler>(CommonDeleteLangsHandler);
     });
 
     describe('main', () =>
@@ -52,7 +45,7 @@ describe('CommonDeleteLangsController', () =>
 
         test('should return an langs deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await controller.main()).toBe(langs);
         });
     });

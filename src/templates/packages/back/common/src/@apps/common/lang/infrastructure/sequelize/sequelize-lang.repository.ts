@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ICriteria, SequelizeRepository } from 'aurora-ts-core';
-import { ILangRepository } from './../../domain/lang.repository';
-import { CommonLang } from './../../domain/lang.aggregate';
-import { LangMapper } from './../../domain/lang.mapper';
+import { ILangRepository } from '../../domain/lang.repository';
+import { CommonLang } from '../../domain/lang.aggregate';
+import { LangMapper } from '../../domain/lang.mapper';
 import { CommonLangModel } from './sequelize-lang.model';
 
 @Injectable()

@@ -500,19 +500,19 @@ describe('account', () =>
             });
     });
 
-    test('/REST:GET iam/account/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST iam/account/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/account/find/e259e743-d7b2-462d-81b8-9738ec4cf8e3')
+            .post('/iam/account/find/e259e743-d7b2-462d-81b8-9738ec4cf8e3')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${credentials.accessToken}`)
             .expect(404);
     });
 
-    test('/REST:GET iam/account/find/{id}', () =>
+    test('/REST:POST iam/account/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/account/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/iam/account/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${credentials.accessToken}`)
             .expect(200)

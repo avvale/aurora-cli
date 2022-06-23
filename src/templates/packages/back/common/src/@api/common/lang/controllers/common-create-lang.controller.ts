@@ -1,32 +1,31 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
-import { CreateLangDto } from './../dto/create-lang.dto';
-import { LangDto } from './../dto/lang.dto';
+import { Timezone } from 'aurora-ts-core';
+import { CommonLangDto, CommonCreateLangDto } from '../dto';
 
 // @apps
-import { FindLangByIdQuery } from '../../../../@apps/common/lang/application/find/find-lang-by-id.query';
-import { CreateLangCommand } from '../../../../@apps/common/lang/application/create/create-lang.command';
+import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler';
 
 @ApiTags('[common] lang')
-@Controller('common/lang')
+@Controller('common/lang/create')
 export class CommonCreateLangController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonCreateLangHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create lang' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: LangDto })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CommonLangDto })
     async main(
-        @Body() payload: CreateLangDto,
+        @Body() payload: CommonCreateLangDto,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateLangCommand(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindLangByIdQuery(payload.id, {}, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

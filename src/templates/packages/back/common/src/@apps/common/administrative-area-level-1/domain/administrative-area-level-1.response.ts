@@ -1,4 +1,4 @@
-import { CountryResponse } from '../../../../@apps/common/country/domain/country.response';
+import { CountryResponse } from '@apps/common/country/domain/country.response';
 
 export class AdministrativeAreaLevel1Response
 {

@@ -23,9 +23,10 @@ import {
     CountryI18NAdministrativeAreaLevel1,
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
-} from './../../domain/value-objects';
-import { CommonCountry } from './../../domain/country.aggregate';
-import { countries } from './../seeds/country.seed';
+} from '../../domain/value-objects';
+import { CommonCountry } from '../../domain/country.aggregate';
+import { countries } from '../seeds/country.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockCountrySeeder extends MockSeeder<CommonCountry>
@@ -42,7 +43,7 @@ export class MockCountrySeeder extends MockSeeder<CommonCountry>
     {
         this.collectionSource = [];
 
-        for (const country of countries)
+        for (const country of _.orderBy(countries, ['id']))
         {
             this.collectionSource.push(
                 CommonCountry.register(
@@ -68,7 +69,7 @@ export class MockCountrySeeder extends MockSeeder<CommonCountry>
                     new CountryI18NAdministrativeAreaLevel1(country.administrativeAreaLevel1),
                     new CountryI18NAdministrativeAreaLevel2(country.administrativeAreaLevel2),
                     new CountryI18NAdministrativeAreaLevel3(country.administrativeAreaLevel3),
-                )
+                ),
             );
         }
     }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
+import { Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // authorization
 import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
@@ -29,7 +29,7 @@ export class IamPaginateAccountsController
     @ApiQuery({ name: 'constraint', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {

@@ -1,34 +1,31 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { AddI18NConstraintService, FormatLangCode, ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
-import { CreateCountryDto } from './../dto/create-country.dto';
-import { CountryDto } from './../dto/country.dto';
+import { Timezone } from 'aurora-ts-core';
+import { CommonCountryDto, CommonCreateCountryDto } from '../dto';
 
 // @apps
-import { FindCountryByIdQuery } from '../../../../@apps/common/country/application/find/find-country-by-id.query';
-import { CreateCountryCommand } from '../../../../@apps/common/country/application/create/create-country.command';
+import { CommonCreateCountryHandler } from '../handlers/common-create-country.handler';
 
 @ApiTags('[common] country')
-@Controller('common/country')
+@Controller('common/country/create')
 export class CommonCreateCountryController
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly handler: CommonCreateCountryHandler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create country' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CountryDto })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CommonCountryDto })
     async main(
-        @Body() payload: CreateCountryDto,
+        @Body() payload: CommonCreateCountryDto,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateCountryCommand(payload, { timezone }));
-
-        const constraint = await this.addI18NConstraintService.main({}, 'countryI18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
-        return await this.queryBus.ask(new FindCountryByIdQuery(payload.id, constraint, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

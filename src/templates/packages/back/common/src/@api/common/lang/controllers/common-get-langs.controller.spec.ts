@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonGetLangsController } from './common-get-langs.controller';
+import { CommonGetLangsHandler } from '../handlers/common-get-langs.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonGetLangsController', () =>
 {
     let controller: CommonGetLangsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonGetLangsHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,21 @@ describe('CommonGetLangsController', () =>
             imports: [
             ],
             controllers: [
-                CommonGetLangsController
+                CommonGetLangsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonGetLangsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonGetLangsController>(CommonGetLangsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonGetLangsController>(CommonGetLangsController);
+        handler = module.get<CommonGetLangsHandler>(CommonGetLangsHandler);
     });
 
     describe('main', () =>
@@ -52,7 +45,7 @@ describe('CommonGetLangsController', () =>
 
         test('should return a langs', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await controller.main()).toBe(langs);
         });
     });

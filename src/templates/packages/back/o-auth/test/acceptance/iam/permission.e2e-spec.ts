@@ -325,18 +325,18 @@ describe('permission', () =>
             });
     });
 
-    test('/REST:GET iam/permission/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST iam/permission/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/find/27f7625d-7e8c-4055-9010-99cc4dc0d242')
+            .post('/iam/permission/find/27f7625d-7e8c-4055-9010-99cc4dc0d242')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/permission/find/{id}', () =>
+    test('/REST:POST iam/permission/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/permission/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/iam/permission/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

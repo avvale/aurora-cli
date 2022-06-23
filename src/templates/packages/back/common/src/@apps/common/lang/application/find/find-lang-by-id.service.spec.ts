@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '../../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 import { FindLangByIdService } from './find-lang-by-id.service';
-import { LangId } from './../../domain/value-objects';
-import { ILangRepository } from './../../domain/lang.repository';
-import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
+import { LangId } from '../../domain/value-objects';
+import { ILangRepository } from '../../domain/lang.repository';
+import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
 
 describe('FindLangByIdService', () =>
 {
@@ -24,13 +24,14 @@ describe('FindLangByIdService', () =>
                 FindLangByIdService,
                 MockLangRepository,
                 {
-                    provide: ILangRepository,
+                    provide : ILangRepository,
                     useValue: {
-                        findById: id => { /**/ }
-                    }
-                }
-            ]
-        }).compile();
+                        findById: id => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindLangByIdService);
         repository      = module.get(ILangRepository);
@@ -48,7 +49,7 @@ describe('FindLangByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new LangId(langs[0].id)
+                new LangId(langs[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

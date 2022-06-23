@@ -10,7 +10,6 @@ export class AdministrativeAreaLevel3Latitude extends DecimalValueObject
             name       : 'AdministrativeAreaLevel3Latitude',
             nullable   : true,
             undefinable: true,
-            maxLength  : 17,
             decimals   : [17, 4],
             unsigned   : false,
         }, validationRules));

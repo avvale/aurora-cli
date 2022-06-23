@@ -1,29 +1,28 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, ICommandBus, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { FindAdministrativeAreaLevel1ByIdQuery } from '../../../../@apps/common/administrative-area-level-1/application/find/find-administrative-area-level-1-by-id.query';
-import { DeleteAdministrativeAreaLevel1ByIdCommand } from '../../../../@apps/common/administrative-area-level-1/application/delete/delete-administrative-area-level-1-by-id.command';
+import { CommonDeleteAdministrativeAreaLevel1ByIdHandler } from '../handlers/common-delete-administrative-area-level-1-by-id.handler';
+import { CommonAdministrativeAreaLevel1 } from '../../../../graphql';
 
 @Resolver()
 export class CommonDeleteAdministrativeAreaLevel1ByIdResolver
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonDeleteAdministrativeAreaLevel1ByIdHandler,
     ) {}
 
     @Mutation('commonDeleteAdministrativeAreaLevel1ById')
     async main(
         @Args('id') id: string,
-        @Constraint() constraint?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
+    ): Promise<CommonAdministrativeAreaLevel1>
     {
-        const administrativeAreaLevel1 = await this.queryBus.ask(new FindAdministrativeAreaLevel1ByIdQuery(id, constraint, { timezone }));
-
-        await this.commandBus.dispatch(new DeleteAdministrativeAreaLevel1ByIdCommand(id, constraint, { timezone }));
-
-        return administrativeAreaLevel1;
+        return await this.handler.main(
+            id,
+            constraint,
+            timezone,
+        );
     }
 }

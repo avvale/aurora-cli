@@ -17,7 +17,7 @@ export class PaginateAdministrativeAreasLevel2QueryHandler implements IQueryHand
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO())
+            rows.map(item => item.toDTO()),
         );
     }
 }

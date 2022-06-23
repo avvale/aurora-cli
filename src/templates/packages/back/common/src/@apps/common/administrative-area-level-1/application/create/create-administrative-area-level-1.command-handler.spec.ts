@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { administrativeAreasLevel1 } from '../../../../../@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 import { CreateAdministrativeAreaLevel1CommandHandler } from './create-administrative-area-level-1.command-handler';
 import { CreateAdministrativeAreaLevel1Command } from './create-administrative-area-level-1.command';
 import { CreateAdministrativeAreaLevel1Service } from './create-administrative-area-level-1.service';
@@ -17,13 +17,14 @@ describe('CreateAdministrativeAreaLevel1CommandHandler', () =>
             providers: [
                 CreateAdministrativeAreaLevel1CommandHandler,
                 {
-                    provide: CreateAdministrativeAreaLevel1Service,
+                    provide : CreateAdministrativeAreaLevel1Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<CreateAdministrativeAreaLevel1CommandHandler>(CreateAdministrativeAreaLevel1CommandHandler);
         service         = module.get<CreateAdministrativeAreaLevel1Service>(CreateAdministrativeAreaLevel1Service);
@@ -51,8 +52,8 @@ describe('CreateAdministrativeAreaLevel1CommandHandler', () =>
                         longitude: administrativeAreasLevel1[0].longitude,
                         zoom: administrativeAreasLevel1[0].zoom,
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

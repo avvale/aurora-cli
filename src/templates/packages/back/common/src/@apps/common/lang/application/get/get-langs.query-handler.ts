@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { LangResponse } from './../../domain/lang.response';
-import { LangMapper } from './../../domain/lang.mapper';
+import { LangResponse } from '../../domain/lang.response';
+import { LangMapper } from '../../domain/lang.mapper';
 import { GetLangsQuery } from './get-langs.query';
 import { GetLangsService } from './get-langs.service';
 

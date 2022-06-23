@@ -25,7 +25,7 @@ import {
     CountryI18NAdministrativeAreaLevel1,
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(CreateCountriesCommand)
 export class CreateCountriesCommandHandler implements ICommandHandler<CreateCountriesCommand>
@@ -62,7 +62,8 @@ export class CreateCountriesCommandHandler implements ICommandHandler<CreateCoun
                         administrativeAreaLevel2: new CountryI18NAdministrativeAreaLevel2(country.administrativeAreaLevel2),
                         administrativeAreaLevel3: new CountryI18NAdministrativeAreaLevel3(country.administrativeAreaLevel3),
                     };
-                })
+                }),
+            command.cQMetadata,
         );
     }
 }

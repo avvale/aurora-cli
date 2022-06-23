@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     LangId,
     LangName,
@@ -14,9 +15,9 @@ import {
     LangCreatedAt,
     LangUpdatedAt,
     LangDeletedAt,
-} from './../../domain/value-objects';
-import { ILangRepository } from './../../domain/lang.repository';
-import { CommonLang } from './../../domain/lang.aggregate';
+} from '../../domain/value-objects';
+import { ILangRepository } from '../../domain/lang.repository';
+import { CommonLang } from '../../domain/lang.aggregate';
 
 @Injectable()
 export class CreateLangService
@@ -26,19 +27,20 @@ export class CreateLangService
         private readonly repository: ILangRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
-            id: LangId,
-            name: LangName,
-            image: LangImage,
-            iso6392: LangIso6392,
-            iso6393: LangIso6393,
-            ietf: LangIetf,
-            customCode: LangCustomCode,
-            dir: LangDir,
-            sort: LangSort,
-            isActive: LangIsActive,
-        }
+            id: LangId;
+            name: LangName;
+            image: LangImage;
+            iso6392: LangIso6392;
+            iso6393: LangIso6393;
+            ietf: LangIetf;
+            customCode: LangCustomCode;
+            dir: LangDir;
+            sort: LangSort;
+            isActive: LangIsActive;
+        },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -58,11 +60,11 @@ export class CreateLangService
             null, // deletedAt
         );
 
-        await this.repository.create(lang);
+        await this.repository.create(lang, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const langRegister = this.publisher.mergeObjectContext(
-            lang
+            lang,
         );
 
         langRegister.created(lang); // apply event to model events

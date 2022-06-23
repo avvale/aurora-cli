@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonPaginateLangsResolver } from './common-paginate-langs.resolver';
+import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonPaginateLangsResolver', () =>
 {
     let resolver: CommonPaginateLangsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonPaginateLangsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,17 @@ describe('CommonPaginateLangsResolver', () =>
             providers: [
                 CommonPaginateLangsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonPaginateLangsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         resolver    = module.get<CommonPaginateLangsResolver>(CommonPaginateLangsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<CommonPaginateLangsHandler>(CommonPaginateLangsHandler);
     });
 
     test('CommonPaginateLangsResolver should be defined', () =>
@@ -55,8 +48,16 @@ describe('CommonPaginateLangsResolver', () =>
 
         test('should return a langs', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
-            expect(await resolver.main()).toBe(langs);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : langs,
+            })));
+            expect(await resolver.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : langs,
+            });
         });
     });
 });

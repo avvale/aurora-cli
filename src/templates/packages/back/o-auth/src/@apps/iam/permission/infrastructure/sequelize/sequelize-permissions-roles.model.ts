@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamPermissionModel } from '@apps/iam/permission/infrastructure/sequelize/sequelize-permission.model';

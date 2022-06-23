@@ -1,6 +1,7 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     CountryId,
     CountryIso3166Alpha2,
@@ -25,10 +26,10 @@ import {
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
 } from './value-objects';
-import { CreatedCountryEvent } from './../application/events/created-country.event';
-import { UpdatedCountryEvent } from './../application/events/updated-country.event';
-import { DeletedCountryEvent } from './../application/events/deleted-country.event';
-import { CommonLang } from '../../../../@apps/common/lang/domain/lang.aggregate';
+import { CreatedCountryEvent } from '../application/events/created-country.event';
+import { UpdatedCountryEvent } from '../application/events/updated-country.event';
+import { DeletedCountryEvent } from '../application/events/deleted-country.event';
+import { CommonLang } from '@apps/common/lang/domain/lang.aggregate';
 
 export class CommonCountry extends AggregateRoot
 {
@@ -194,7 +195,7 @@ export class CommonCountry extends AggregateRoot
                 country.administrativeAreaLevel1?.value,
                 country.administrativeAreaLevel2?.value,
                 country.administrativeAreaLevel3?.value,
-            )
+            ),
         );
     }
 
@@ -202,7 +203,7 @@ export class CommonCountry extends AggregateRoot
     {
         this.apply(
             new UpdatedCountryEvent(
-                country.id.value,
+                country.id?.value,
                 country.iso3166Alpha2?.value,
                 country.iso3166Alpha3?.value,
                 country.iso3166Numeric?.value,
@@ -224,7 +225,7 @@ export class CommonCountry extends AggregateRoot
                 country.administrativeAreaLevel1?.value,
                 country.administrativeAreaLevel2?.value,
                 country.administrativeAreaLevel3?.value,
-            )
+            ),
         );
     }
 
@@ -254,11 +255,11 @@ export class CommonCountry extends AggregateRoot
                 country.administrativeAreaLevel1?.value,
                 country.administrativeAreaLevel2?.value,
                 country.administrativeAreaLevel3?.value,
-            )
+            ),
         );
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             id: this.id.value,
@@ -290,7 +291,7 @@ export class CommonCountry extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
             id: Utils.uuid(),

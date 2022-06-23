@@ -20,7 +20,7 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     @Column({
         field: 'grantType',
         allowNull: false,
-        type: DataTypes.ENUM('AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD'),
+        type: DataTypes.ENUM('AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD','REFRESH_TOKEN'),
     })
     grantType: string;
 

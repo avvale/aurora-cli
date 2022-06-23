@@ -1,17 +1,17 @@
-import { Controller, Post, Body, HttpCode } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
-import { LangDto } from './../dto/lang.dto';
+import { Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { PaginateLangsQuery } from '../../../../@apps/common/lang/application/paginate/paginate-langs.query';
+import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
 
 @ApiTags('[common] lang')
 @Controller('common/langs/paginate')
 export class CommonPaginateLangsController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonPaginateLangsHandler,
     ) {}
 
     @Post()
@@ -22,10 +22,14 @@ export class CommonPaginateLangsController
     @ApiQuery({ name: 'constraint', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new PaginateLangsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

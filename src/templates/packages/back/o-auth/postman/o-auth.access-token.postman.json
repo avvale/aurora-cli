@@ -301,12 +301,12 @@
 			"response": []
         },
         {
-			"name": "REST - o-auth/access-token/find/{id}",
+			"name": "POST - o-auth/access-token/find/{id}",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",

@@ -1,30 +1,36 @@
-import { Controller, Get, Body } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { AdministrativeAreaLevel1Dto } from './../dto/administrative-area-level-1.dto';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
+import { CommonAdministrativeAreaLevel1Dto } from '../dto';
 
 // @apps
-import { FindAdministrativeAreaLevel1Query } from '../../../../@apps/common/administrative-area-level-1/application/find/find-administrative-area-level-1.query';
+import { CommonFindAdministrativeAreaLevel1Handler } from '../handlers/common-find-administrative-area-level-1.handler';
 
 @ApiTags('[common] administrative-area-level-1')
-@Controller('common/administrative-area-level-1')
+@Controller('common/administrative-area-level-1/find')
 export class CommonFindAdministrativeAreaLevel1Controller
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonFindAdministrativeAreaLevel1Handler,
     ) {}
 
-    @Get()
+    @Post()
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find administrative-area-level-1 according to query' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: AdministrativeAreaLevel1Dto })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: CommonAdministrativeAreaLevel1Dto })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindAdministrativeAreaLevel1Query(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

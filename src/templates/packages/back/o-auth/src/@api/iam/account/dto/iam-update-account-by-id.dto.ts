@@ -42,7 +42,7 @@ export class IamUpdateAccountByIdDto
     @ApiProperty({
         type       : String,
         description: 'clientId [input here api field description]',
-        example    : '2bf92bcd-b0d4-4e79-abe6-bc2cf335946a',
+        example    : '722066c1-b000-4e40-8140-b65a776a1d9f',
     })
     clientId?: string;
 

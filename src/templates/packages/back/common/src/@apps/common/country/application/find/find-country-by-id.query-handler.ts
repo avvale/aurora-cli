@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CountryResponse } from './../../domain/country.response';
-import { CountryMapper } from './../../domain/country.mapper';
-import { CountryId } from './../../domain/value-objects';
+import { CountryResponse } from '../../domain/country.response';
+import { CountryMapper } from '../../domain/country.mapper';
+import { CountryId } from '../../domain/value-objects';
 import { FindCountryByIdQuery } from './find-country-by-id.query';
 import { FindCountryByIdService } from './find-country-by-id.service';
 

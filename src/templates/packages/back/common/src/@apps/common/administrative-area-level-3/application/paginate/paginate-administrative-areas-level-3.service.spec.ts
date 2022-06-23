@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { PaginateAdministrativeAreasLevel3Service } from './paginate-administrative-areas-level-3.service';
-import { IAdministrativeAreaLevel3Repository } from './../../domain/administrative-area-level-3.repository';
-import { MockAdministrativeAreaLevel3Repository } from './../../infrastructure/mock/mock-administrative-area-level-3.repository';
+import { IAdministrativeAreaLevel3Repository } from '../../domain/administrative-area-level-3.repository';
+import { MockAdministrativeAreaLevel3Repository } from '../../infrastructure/mock/mock-administrative-area-level-3.repository';
 
 describe('PaginateAdministrativeAreasLevel3Service', () =>
 {
@@ -22,13 +22,14 @@ describe('PaginateAdministrativeAreasLevel3Service', () =>
                 PaginateAdministrativeAreasLevel3Service,
                 MockAdministrativeAreaLevel3Repository,
                 {
-                    provide: IAdministrativeAreaLevel3Repository,
+                    provide : IAdministrativeAreaLevel3Repository,
                     useValue: {
-                        paginate: (queryStatement, constraints) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        paginate: (queryStatement, constraints) => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(PaginateAdministrativeAreasLevel3Service);
         repository      = module.get(IAdministrativeAreaLevel3Repository);
@@ -47,15 +48,15 @@ describe('PaginateAdministrativeAreasLevel3Service', () =>
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,
                 count: mockRepository.collectionSource.slice(0,10).length,
-                rows: mockRepository.collectionSource.slice(0,10)
+                rows : mockRepository.collectionSource.slice(0,10),
             })));
             expect(await service.main({
                 offset: 0,
-                limit: 10
+                limit : 10
             })).toStrictEqual({
                 total: mockRepository.collectionSource.slice(0,10).length,
                 count: mockRepository.collectionSource.slice(0,10).length,
-                rows: mockRepository.collectionSource.slice(0,10)
+                rows : mockRepository.collectionSource.slice(0,10),
             });
         });
     });

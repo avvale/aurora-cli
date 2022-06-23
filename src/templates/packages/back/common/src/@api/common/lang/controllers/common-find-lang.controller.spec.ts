@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonFindLangController } from './common-find-lang.controller';
+import { CommonFindLangHandler } from '../handlers/common-find-lang.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonFindLangController', () =>
 {
     let controller: CommonFindLangController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonFindLangHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,21 @@ describe('CommonFindLangController', () =>
             imports: [
             ],
             controllers: [
-                CommonFindLangController
+                CommonFindLangController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonFindLangHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonFindLangController>(CommonFindLangController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonFindLangController>(CommonFindLangController);
+        handler = module.get<CommonFindLangHandler>(CommonFindLangHandler);
     });
 
     describe('main', () =>
@@ -52,7 +45,7 @@ describe('CommonFindLangController', () =>
 
         test('should return a lang', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await controller.main()).toBe(langs[0]);
         });
     });

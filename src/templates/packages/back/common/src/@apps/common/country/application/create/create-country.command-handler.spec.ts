@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { countries } from '../../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 import { CreateCountryCommandHandler } from './create-country.command-handler';
 import { CreateCountryCommand } from './create-country.command';
 import { CreateCountryService } from './create-country.service';
@@ -17,13 +17,14 @@ describe('CreateCountryCommandHandler', () =>
             providers: [
                 CreateCountryCommandHandler,
                 {
-                    provide: CreateCountryService,
+                    provide : CreateCountryService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<CreateCountryCommandHandler>(CreateCountryCommandHandler);
         service         = module.get<CreateCountryService>(CreateCountryService);
@@ -60,8 +61,8 @@ describe('CreateCountryCommandHandler', () =>
                         administrativeAreaLevel2: countries[0].administrativeAreaLevel2,
                         administrativeAreaLevel3: countries[0].administrativeAreaLevel3,
                     },
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { ICountryRepository } from '../../../../../@apps/common/country/domain/country.repository';
+import { ICountryRepository } from '@apps/common/country/domain/country.repository';
 import {
     CountryId,
     CountryIso3166Alpha2,
@@ -24,9 +24,9 @@ import {
     CountryI18NAdministrativeAreaLevel1,
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
-} from '../../../../../@apps/common/country/domain/value-objects';
-import { CommonCountry } from './../../domain/country.aggregate';
-import { countries } from './../seeds/country.seed';
+} from '@apps/common/country/domain/value-objects';
+import { CommonCountry } from '../../domain/country.aggregate';
+import { countries } from '../seeds/country.seed';
 
 @Injectable()
 export class MockCountryRepository extends MockRepository<CommonCountry> implements ICountryRepository
@@ -42,7 +42,7 @@ export class MockCountryRepository extends MockRepository<CommonCountry> impleme
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

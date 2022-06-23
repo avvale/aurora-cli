@@ -226,18 +226,18 @@ describe('access-token', () =>
             });
     });
 
-    test('/REST:GET o-auth/access-token/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST o-auth/access-token/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/access-token/find/753a1eb6-41da-4455-a1d7-c2fd083572b1')
+            .post('/o-auth/access-token/find/753a1eb6-41da-4455-a1d7-c2fd083572b1')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET o-auth/access-token/find/{id}', () =>
+    test('/REST:POST o-auth/access-token/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/access-token/find/c2bdb79b-033e-4751-a740-a989e8e580fc')
+            .post('/o-auth/access-token/find/c2bdb79b-033e-4751-a740-a989e8e580fc')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

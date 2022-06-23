@@ -1,6 +1,7 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     LangId,
     LangName,
@@ -16,9 +17,9 @@ import {
     LangUpdatedAt,
     LangDeletedAt,
 } from './value-objects';
-import { CreatedLangEvent } from './../application/events/created-lang.event';
-import { UpdatedLangEvent } from './../application/events/updated-lang.event';
-import { DeletedLangEvent } from './../application/events/deleted-lang.event';
+import { CreatedLangEvent } from '../application/events/created-lang.event';
+import { UpdatedLangEvent } from '../application/events/updated-lang.event';
+import { DeletedLangEvent } from '../application/events/deleted-lang.event';
 
 export class CommonLang extends AggregateRoot
 {
@@ -125,7 +126,7 @@ export class CommonLang extends AggregateRoot
                 lang.createdAt?.value,
                 lang.updatedAt?.value,
                 lang.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -133,7 +134,7 @@ export class CommonLang extends AggregateRoot
     {
         this.apply(
             new UpdatedLangEvent(
-                lang.id.value,
+                lang.id?.value,
                 lang.name?.value,
                 lang.image?.value,
                 lang.iso6392?.value,
@@ -146,7 +147,7 @@ export class CommonLang extends AggregateRoot
                 lang.createdAt?.value,
                 lang.updatedAt?.value,
                 lang.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -167,11 +168,11 @@ export class CommonLang extends AggregateRoot
                 lang.createdAt?.value,
                 lang.updatedAt?.value,
                 lang.deletedAt?.value,
-            )
+            ),
         );
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             id: this.id.value,
@@ -193,7 +194,7 @@ export class CommonLang extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
         };

@@ -16,13 +16,14 @@ describe('DeleteCountriesCommandHandler', () =>
             providers: [
                 DeleteCountriesCommandHandler,
                 {
-                    provide: DeleteCountriesService,
+                    provide : DeleteCountriesService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteCountriesCommandHandler>(DeleteCountriesCommandHandler);
         service         = module.get<DeleteCountriesService>(DeleteCountriesService);
@@ -38,7 +39,7 @@ describe('DeleteCountriesCommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new DeleteCountriesCommand()
+                new DeleteCountriesCommand(),
             )).toBe(undefined);
         });
     });

@@ -5,9 +5,9 @@ import { ConfigService } from '@nestjs/config';
 
 // custom items
 import { CreateCountriesService } from './create-countries.service';
-import { ICountryRepository } from './../../domain/country.repository';
-import { ICountryI18NRepository } from './../../domain/country-i18n.repository';
-import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
+import { ICountryRepository } from '../../domain/country.repository';
+import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('CreateCountriesService', () =>
 {
@@ -28,23 +28,24 @@ describe('CreateCountriesService', () =>
                 {
                     provide : ICountryRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
                 {
                     provide : ICountryI18NRepository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
                 {
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : ''
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateCountriesService);
         repository      = module.get(ICountryRepository);
@@ -61,7 +62,7 @@ describe('CreateCountriesService', () =>
         test('should create countries and emit event', async () =>
         {
             expect(await service.main(
-                mockRepository.collectionSource
+                mockRepository.collectionSource,
             )).toBe(undefined);
         });
     });

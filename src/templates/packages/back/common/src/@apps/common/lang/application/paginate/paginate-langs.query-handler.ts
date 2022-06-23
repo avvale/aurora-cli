@@ -17,7 +17,7 @@ export class PaginateLangsQueryHandler implements IQueryHandler<PaginateLangsQue
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO())
+            rows.map(item => item.toDTO()),
         );
     }
 }

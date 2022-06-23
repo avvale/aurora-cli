@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { administrativeAreasLevel3 } from '../../../../../@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 import { CreateAdministrativeAreaLevel3Service } from './create-administrative-area-level-3.service';
 import {
     AdministrativeAreaLevel3Id,
@@ -20,9 +20,9 @@ import {
     AdministrativeAreaLevel3CreatedAt,
     AdministrativeAreaLevel3UpdatedAt,
     AdministrativeAreaLevel3DeletedAt,
-} from './../../domain/value-objects';
-import { IAdministrativeAreaLevel3Repository } from './../../domain/administrative-area-level-3.repository';
-import { MockAdministrativeAreaLevel3Repository } from './../../infrastructure/mock/mock-administrative-area-level-3.repository';
+} from '../../domain/value-objects';
+import { IAdministrativeAreaLevel3Repository } from '../../domain/administrative-area-level-3.repository';
+import { MockAdministrativeAreaLevel3Repository } from '../../infrastructure/mock/mock-administrative-area-level-3.repository';
 
 describe('CreateAdministrativeAreaLevel3Service', () =>
 
@@ -43,11 +43,12 @@ describe('CreateAdministrativeAreaLevel3Service', () =>
                 {
                     provide : IAdministrativeAreaLevel3Repository,
                     useValue: {
-                        create: (item) => { /**/ },
-                    }
+                        create: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateAdministrativeAreaLevel3Service);
         repository      = module.get(IAdministrativeAreaLevel3Repository);
@@ -76,7 +77,7 @@ describe('CreateAdministrativeAreaLevel3Service', () =>
                     latitude: new AdministrativeAreaLevel3Latitude(administrativeAreasLevel3[0].latitude),
                     longitude: new AdministrativeAreaLevel3Longitude(administrativeAreasLevel3[0].longitude),
                     zoom: new AdministrativeAreaLevel3Zoom(administrativeAreasLevel3[0].zoom),
-                }
+                },
             )).toBe(undefined);
         });
     });

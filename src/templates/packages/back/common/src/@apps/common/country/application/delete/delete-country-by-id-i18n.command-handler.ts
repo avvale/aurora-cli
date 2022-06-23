@@ -3,7 +3,7 @@ import { DeleteCountryByIdI18NCommand } from './delete-country-by-id-i18n.comman
 import { DeleteCountryByIdI18NService } from './delete-country-by-id-i18n.service';
 import {
     CountryId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteCountryByIdI18NCommand)
 export class DeleteCountryByIdI18NCommandHandler implements ICommandHandler<DeleteCountryByIdI18NCommand>

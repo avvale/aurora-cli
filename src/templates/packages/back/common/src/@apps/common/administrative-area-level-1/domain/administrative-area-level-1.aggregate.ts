@@ -1,6 +1,7 @@
 /* eslint-disable key-spacing */
+import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectLiteral, Utils } from 'aurora-ts-core';
+import { Utils } from 'aurora-ts-core';
 import {
     AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel1CountryId,
@@ -15,10 +16,10 @@ import {
     AdministrativeAreaLevel1UpdatedAt,
     AdministrativeAreaLevel1DeletedAt,
 } from './value-objects';
-import { CreatedAdministrativeAreaLevel1Event } from './../application/events/created-administrative-area-level-1.event';
-import { UpdatedAdministrativeAreaLevel1Event } from './../application/events/updated-administrative-area-level-1.event';
-import { DeletedAdministrativeAreaLevel1Event } from './../application/events/deleted-administrative-area-level-1.event';
-import { CommonCountry } from '../../../../@apps/common/country/domain/country.aggregate';
+import { CreatedAdministrativeAreaLevel1Event } from '../application/events/created-administrative-area-level-1.event';
+import { UpdatedAdministrativeAreaLevel1Event } from '../application/events/updated-administrative-area-level-1.event';
+import { DeletedAdministrativeAreaLevel1Event } from '../application/events/deleted-administrative-area-level-1.event';
+import { CommonCountry } from '@apps/common/country/domain/country.aggregate';
 
 export class CommonAdministrativeAreaLevel1 extends AggregateRoot
 {
@@ -124,7 +125,7 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
                 administrativeAreaLevel1.createdAt?.value,
                 administrativeAreaLevel1.updatedAt?.value,
                 administrativeAreaLevel1.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -132,7 +133,7 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
     {
         this.apply(
             new UpdatedAdministrativeAreaLevel1Event(
-                administrativeAreaLevel1.id.value,
+                administrativeAreaLevel1.id?.value,
                 administrativeAreaLevel1.countryId?.value,
                 administrativeAreaLevel1.code?.value,
                 administrativeAreaLevel1.customCode?.value,
@@ -144,7 +145,7 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
                 administrativeAreaLevel1.createdAt?.value,
                 administrativeAreaLevel1.updatedAt?.value,
                 administrativeAreaLevel1.deletedAt?.value,
-            )
+            ),
         );
     }
 
@@ -164,11 +165,11 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
                 administrativeAreaLevel1.createdAt?.value,
                 administrativeAreaLevel1.updatedAt?.value,
                 administrativeAreaLevel1.deletedAt?.value,
-            )
+            ),
         );
     }
 
-    toDTO(): ObjectLiteral
+    toDTO(): LiteralObject
     {
         return {
             id: this.id.value,
@@ -190,7 +191,7 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
     }
 
 
-    toI18nDTO(): ObjectLiteral
+    toI18nDTO(): LiteralObject
     {
         return {
         };

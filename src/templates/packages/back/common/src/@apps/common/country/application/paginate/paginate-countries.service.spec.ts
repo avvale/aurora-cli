@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { PaginateCountriesService } from './paginate-countries.service';
-import { ICountryRepository } from './../../domain/country.repository';
-import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
+import { ICountryRepository } from '../../domain/country.repository';
+import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('PaginateCountriesService', () =>
 {
@@ -22,13 +22,14 @@ describe('PaginateCountriesService', () =>
                 PaginateCountriesService,
                 MockCountryRepository,
                 {
-                    provide: ICountryRepository,
+                    provide : ICountryRepository,
                     useValue: {
-                        paginate: (queryStatement, constraints) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        paginate: (queryStatement, constraints) => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(PaginateCountriesService);
         repository      = module.get(ICountryRepository);
@@ -47,15 +48,15 @@ describe('PaginateCountriesService', () =>
             jest.spyOn(repository, 'paginate').mockImplementation(() => new Promise(resolve => resolve({
                 total: mockRepository.collectionSource.slice(0,10).length,
                 count: mockRepository.collectionSource.slice(0,10).length,
-                rows: mockRepository.collectionSource.slice(0,10)
+                rows : mockRepository.collectionSource.slice(0,10),
             })));
             expect(await service.main({
                 offset: 0,
-                limit: 10
+                limit : 10
             })).toStrictEqual({
                 total: mockRepository.collectionSource.slice(0,10).length,
                 count: mockRepository.collectionSource.slice(0,10).length,
-                rows: mockRepository.collectionSource.slice(0,10)
+                rows : mockRepository.collectionSource.slice(0,10),
             });
         });
     });

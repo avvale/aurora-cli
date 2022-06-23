@@ -1,6 +1,6 @@
-import { CountryResponse } from '../../../../@apps/common/country/domain/country.response';
-import { AdministrativeAreaLevel1Response } from '../../../../@apps/common/administrative-area-level-1/domain/administrative-area-level-1.response';
-import { AdministrativeAreaLevel2Response } from '../../../../@apps/common/administrative-area-level-2/domain/administrative-area-level-2.response';
+import { CountryResponse } from '@apps/common/country/domain/country.response';
+import { AdministrativeAreaLevel1Response } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.response';
+import { AdministrativeAreaLevel2Response } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.response';
 
 export class AdministrativeAreaLevel3Response
 {

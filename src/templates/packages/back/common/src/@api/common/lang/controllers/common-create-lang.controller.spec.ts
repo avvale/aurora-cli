@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateLangController } from './common-create-lang.controller';
+import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonCreateLangController', () =>
 {
     let controller: CommonCreateLangController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateLangHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,21 @@ describe('CommonCreateLangController', () =>
             imports: [
             ],
             controllers: [
-                CommonCreateLangController
+                CommonCreateLangController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateLangHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonCreateLangController>(CommonCreateLangController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonCreateLangController>(CommonCreateLangController);
+        handler = module.get<CommonCreateLangHandler>(CommonCreateLangHandler);
     });
 
     describe('main', () =>
@@ -52,7 +45,7 @@ describe('CommonCreateLangController', () =>
 
         test('should return an lang created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await controller.main(langs[0])).toBe(langs[0]);
         });
     });

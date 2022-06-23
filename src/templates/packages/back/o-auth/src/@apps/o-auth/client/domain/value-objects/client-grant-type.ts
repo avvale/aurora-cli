@@ -10,7 +10,7 @@ export class ClientGrantType extends EnumValueObject
             name       : 'ClientGrantType',
             nullable   : false,
             undefinable: false,
-            enumOptions: ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD'],
+            enumOptions: ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD','REFRESH_TOKEN'],
         }, validationRules));
     }
 }

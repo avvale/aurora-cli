@@ -3,11 +3,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '../../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 import { DeleteLangByIdService } from './delete-lang-by-id.service';
-import { LangId } from './../../domain/value-objects';
-import { ILangRepository } from './../../domain/lang.repository';
-import { MockLangRepository } from './../../infrastructure/mock/mock-lang.repository';
+import { LangId } from '../../domain/value-objects';
+import { ILangRepository } from '../../domain/lang.repository';
+import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
 
 describe('DeleteLangByIdService', () =>
 {
@@ -29,10 +29,11 @@ describe('DeleteLangByIdService', () =>
                     useValue: {
                         deleteById: id => { /**/ },
                         findById  : id => { /**/ },
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(DeleteLangByIdService);
         repository      = module.get(ILangRepository);
@@ -50,7 +51,7 @@ describe('DeleteLangByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new LangId(langs[0].id)
+                new LangId(langs[0].id),
             )).toBe(undefined);
         });
     });

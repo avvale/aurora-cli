@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindAdministrativeAreaLevel3ByIdQueryHandler } from './find-administrative-area-level-3-by-id.query-handler';
-import { MockAdministrativeAreaLevel3Repository } from '../../../../../@apps/common/administrative-area-level-3/infrastructure/mock/mock-administrative-area-level-3.repository';
-import { administrativeAreasLevel3 } from '../../../../../@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
-import { IAdministrativeAreaLevel3Repository } from '../../../../../@apps/common/administrative-area-level-3/domain/administrative-area-level-3.repository';
-import { AdministrativeAreaLevel3Mapper } from '../../../../../@apps/common/administrative-area-level-3/domain/administrative-area-level-3.mapper';
+import { MockAdministrativeAreaLevel3Repository } from '@apps/common/administrative-area-level-3/infrastructure/mock/mock-administrative-area-level-3.repository';
+import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { IAdministrativeAreaLevel3Repository } from '@apps/common/administrative-area-level-3/domain/administrative-area-level-3.repository';
+import { AdministrativeAreaLevel3Mapper } from '@apps/common/administrative-area-level-3/domain/administrative-area-level-3.mapper';
 import { FindAdministrativeAreaLevel3ByIdQuery } from './find-administrative-area-level-3-by-id.query';
 import { FindAdministrativeAreaLevel3ByIdService } from './find-administrative-area-level-3-by-id.service';
 
@@ -23,17 +23,17 @@ describe('FindAdministrativeAreaLevel3ByIdQueryHandler', () =>
                 FindAdministrativeAreaLevel3ByIdQueryHandler,
                 {
                     provide : IAdministrativeAreaLevel3Repository,
-                    useClass: MockAdministrativeAreaLevel3Repository
+                    useClass: MockAdministrativeAreaLevel3Repository,
                 },
                 {
                     provide : FindAdministrativeAreaLevel3ByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<FindAdministrativeAreaLevel3ByIdQueryHandler>(FindAdministrativeAreaLevel3ByIdQueryHandler);
         service         = module.get<FindAdministrativeAreaLevel3ByIdService>(FindAdministrativeAreaLevel3ByIdService);
@@ -55,7 +55,7 @@ describe('FindAdministrativeAreaLevel3ByIdQueryHandler', () =>
                 new FindAdministrativeAreaLevel3ByIdQuery(
                     administrativeAreasLevel3[0].id,
 
-                )
+                ),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

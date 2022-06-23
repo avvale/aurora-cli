@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonDeleteAdministrativeAreaLevel2ByIdResolver } from './common-delete-administrative-area-level-2-by-id.resolver';
+import { CommonDeleteAdministrativeAreaLevel2ByIdHandler } from '../handlers/common-delete-administrative-area-level-2-by-id.handler';
 
 // sources
-import { administrativeAreasLevel2 } from '../../../../@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonDeleteAdministrativeAreaLevel2ByIdResolver', () =>
 {
     let resolver: CommonDeleteAdministrativeAreaLevel2ByIdResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonDeleteAdministrativeAreaLevel2ByIdHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,17 @@ describe('CommonDeleteAdministrativeAreaLevel2ByIdResolver', () =>
             providers: [
                 CommonDeleteAdministrativeAreaLevel2ByIdResolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonDeleteAdministrativeAreaLevel2ByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        resolver    = module.get<CommonDeleteAdministrativeAreaLevel2ByIdResolver>(CommonDeleteAdministrativeAreaLevel2ByIdResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonDeleteAdministrativeAreaLevel2ByIdResolver>(CommonDeleteAdministrativeAreaLevel2ByIdResolver);
+        handler = module.get<CommonDeleteAdministrativeAreaLevel2ByIdHandler>(CommonDeleteAdministrativeAreaLevel2ByIdHandler);
     });
 
     test('CommonDeleteAdministrativeAreaLevel2ByIdResolver should be defined', () =>
@@ -55,7 +48,7 @@ describe('CommonDeleteAdministrativeAreaLevel2ByIdResolver', () =>
 
         test('should return an administrativeAreaLevel2 deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel2[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel2[0])));
             expect(await resolver.main(administrativeAreasLevel2[0].id)).toBe(administrativeAreasLevel2[0]);
         });
     });

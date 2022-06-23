@@ -510,18 +510,18 @@ describe('user', () =>
             });
     });
 
-    test('/REST:GET iam/user/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST iam/user/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/user/find/82a740a5-ff2a-4172-8683-73e45c0bec85')
+            .post('/iam/user/find/82a740a5-ff2a-4172-8683-73e45c0bec85')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET iam/user/find/{id}', () =>
+    test('/REST:POST iam/user/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/iam/user/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/iam/user/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

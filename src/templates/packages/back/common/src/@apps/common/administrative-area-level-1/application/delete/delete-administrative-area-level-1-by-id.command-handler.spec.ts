@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteAdministrativeAreaLevel1ByIdCommandHandler } from './delete-administrative-area-level-1-by-id.command-handler';
-import { administrativeAreasLevel1 } from '../../../../../@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 import { DeleteAdministrativeAreaLevel1ByIdCommand } from './delete-administrative-area-level-1-by-id.command';
 import { DeleteAdministrativeAreaLevel1ByIdService } from './delete-administrative-area-level-1-by-id.service';
 
@@ -17,13 +17,14 @@ describe('DeleteAdministrativeAreaLevel1ByIdCommandHandler', () =>
             providers: [
                 DeleteAdministrativeAreaLevel1ByIdCommandHandler,
                 {
-                    provide: DeleteAdministrativeAreaLevel1ByIdService,
+                    provide : DeleteAdministrativeAreaLevel1ByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteAdministrativeAreaLevel1ByIdCommandHandler>(DeleteAdministrativeAreaLevel1ByIdCommandHandler);
         service         = module.get<DeleteAdministrativeAreaLevel1ByIdService>(DeleteAdministrativeAreaLevel1ByIdService);
@@ -41,7 +42,7 @@ describe('DeleteAdministrativeAreaLevel1ByIdCommandHandler', () =>
             expect(await commandHandler.execute(
                 new DeleteAdministrativeAreaLevel1ByIdCommand(
                     administrativeAreasLevel1[0].id,
-                )
+                ),
             )).toBe(undefined);
         });
     });

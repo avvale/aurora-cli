@@ -1,6 +1,6 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from 'aurora-ts-core';
-import { CQMetadata, Pagination } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
 import { CommonAdministrativeAreaLevel1 } from './administrative-area-level-1.aggregate';
 import { AdministrativeAreaLevel1Id } from './value-objects';
 
@@ -61,9 +61,10 @@ export abstract class IAdministrativeAreaLevel1Repository implements IRepository
     abstract create(
         administrativeAreaLevel1: CommonAdministrativeAreaLevel1,
         options?: {
-            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => ObjectLiteral;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => LiteralObject;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement: (aggregate: CommonAdministrativeAreaLevel1) => QueryStatement;
+            finderQueryStatement?: (aggregate: CommonAdministrativeAreaLevel1) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -71,20 +72,33 @@ export abstract class IAdministrativeAreaLevel1Repository implements IRepository
     abstract insert(
         administrativeAreasLevel1: CommonAdministrativeAreaLevel1[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => LiteralObject;
         }
     ): Promise<void>;
 
-    // update record
+    // update record by id
+    abstract updateById(
+        administrativeAreaLevel1: CommonAdministrativeAreaLevel1,
+        options?: {
+            updateByIdOptions?: LiteralObject;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => LiteralObject;
+            // arguments to find object to update, with i18n we use langId and id relationship with parent entity
+            findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
     abstract update(
         administrativeAreaLevel1: CommonAdministrativeAreaLevel1,
         options?: {
+            updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => ObjectLiteral;
-            // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: ObjectLiteral;
+            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -92,6 +106,7 @@ export abstract class IAdministrativeAreaLevel1Repository implements IRepository
     abstract deleteById(
         id: AdministrativeAreaLevel1Id,
         options?: {
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -100,6 +115,7 @@ export abstract class IAdministrativeAreaLevel1Repository implements IRepository
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

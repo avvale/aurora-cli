@@ -192,18 +192,18 @@ describe('refresh-token', () =>
             });
     });
 
-    test('/REST:GET o-auth/refresh-token/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST o-auth/refresh-token/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/refresh-token/find/8dac8857-8dc5-4c00-9d98-e1fce0ccf090')
+            .post('/o-auth/refresh-token/find/8dac8857-8dc5-4c00-9d98-e1fce0ccf090')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:GET o-auth/refresh-token/find/{id}', () =>
+    test('/REST:POST o-auth/refresh-token/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .get('/o-auth/refresh-token/find/f710edae-c011-4b7d-acfa-65cead5771cd')
+            .post('/o-auth/refresh-token/find/f710edae-c011-4b7d-acfa-65cead5771cd')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>

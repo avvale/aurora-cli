@@ -14,9 +14,10 @@ import {
     AdministrativeAreaLevel2CreatedAt,
     AdministrativeAreaLevel2UpdatedAt,
     AdministrativeAreaLevel2DeletedAt,
-} from './../../domain/value-objects';
-import { CommonAdministrativeAreaLevel2 } from './../../domain/administrative-area-level-2.aggregate';
-import { administrativeAreasLevel2 } from './../seeds/administrative-area-level-2.seed';
+} from '../../domain/value-objects';
+import { CommonAdministrativeAreaLevel2 } from '../../domain/administrative-area-level-2.aggregate';
+import { administrativeAreasLevel2 } from '../seeds/administrative-area-level-2.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockAdministrativeAreaLevel2Seeder extends MockSeeder<CommonAdministrativeAreaLevel2>
@@ -33,7 +34,7 @@ export class MockAdministrativeAreaLevel2Seeder extends MockSeeder<CommonAdminis
     {
         this.collectionSource = [];
 
-        for (const administrativeAreaLevel2 of administrativeAreasLevel2)
+        for (const administrativeAreaLevel2 of _.orderBy(administrativeAreasLevel2, ['id']))
         {
             this.collectionSource.push(
                 CommonAdministrativeAreaLevel2.register(
@@ -50,7 +51,7 @@ export class MockAdministrativeAreaLevel2Seeder extends MockSeeder<CommonAdminis
                     new AdministrativeAreaLevel2CreatedAt({ currentTimestamp: true }),
                     new AdministrativeAreaLevel2UpdatedAt({ currentTimestamp: true }),
                     new AdministrativeAreaLevel2DeletedAt(null),
-                )
+                ),
             );
         }
     }

@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel1CountryId,
@@ -13,9 +14,9 @@ import {
     AdministrativeAreaLevel1CreatedAt,
     AdministrativeAreaLevel1UpdatedAt,
     AdministrativeAreaLevel1DeletedAt,
-} from './../../domain/value-objects';
-import { IAdministrativeAreaLevel1Repository } from './../../domain/administrative-area-level-1.repository';
-import { CommonAdministrativeAreaLevel1 } from './../../domain/administrative-area-level-1.aggregate';
+} from '../../domain/value-objects';
+import { IAdministrativeAreaLevel1Repository } from '../../domain/administrative-area-level-1.repository';
+import { CommonAdministrativeAreaLevel1 } from '../../domain/administrative-area-level-1.aggregate';
 
 @Injectable()
 export class CreateAdministrativeAreaLevel1Service
@@ -25,18 +26,19 @@ export class CreateAdministrativeAreaLevel1Service
         private readonly repository: IAdministrativeAreaLevel1Repository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
-            id: AdministrativeAreaLevel1Id,
-            countryId: AdministrativeAreaLevel1CountryId,
-            code: AdministrativeAreaLevel1Code,
-            customCode: AdministrativeAreaLevel1CustomCode,
-            name: AdministrativeAreaLevel1Name,
-            slug: AdministrativeAreaLevel1Slug,
-            latitude: AdministrativeAreaLevel1Latitude,
-            longitude: AdministrativeAreaLevel1Longitude,
-            zoom: AdministrativeAreaLevel1Zoom,
-        }
+            id: AdministrativeAreaLevel1Id;
+            countryId: AdministrativeAreaLevel1CountryId;
+            code: AdministrativeAreaLevel1Code;
+            customCode: AdministrativeAreaLevel1CustomCode;
+            name: AdministrativeAreaLevel1Name;
+            slug: AdministrativeAreaLevel1Slug;
+            latitude: AdministrativeAreaLevel1Latitude;
+            longitude: AdministrativeAreaLevel1Longitude;
+            zoom: AdministrativeAreaLevel1Zoom;
+        },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -55,11 +57,11 @@ export class CreateAdministrativeAreaLevel1Service
             null, // deletedAt
         );
 
-        await this.repository.create(administrativeAreaLevel1);
+        await this.repository.create(administrativeAreaLevel1, { createOptions: cQMetadata?.repositoryOptions });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const administrativeAreaLevel1Register = this.publisher.mergeObjectContext(
-            administrativeAreaLevel1
+            administrativeAreaLevel1,
         );
 
         administrativeAreaLevel1Register.created(administrativeAreaLevel1); // apply event to model events

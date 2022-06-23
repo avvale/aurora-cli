@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { administrativeAreasLevel1 } from '../../../../../@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 import { CreateAdministrativeAreasLevel1CommandHandler } from './create-administrative-areas-level-1.command-handler';
 import { CreateAdministrativeAreasLevel1Command } from './create-administrative-areas-level-1.command';
 import { CreateAdministrativeAreasLevel1Service } from './create-administrative-areas-level-1.service';
@@ -21,10 +21,11 @@ describe('CreateAdministrativeAreasLevel1CommandHandler', () =>
                     provide : CreateAdministrativeAreasLevel1Service,
                     useValue: {
                         main: () => { /**/ },
-                    }
-                }
-            ]
-        }).compile();
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<CreateAdministrativeAreasLevel1CommandHandler>(CreateAdministrativeAreasLevel1CommandHandler);
         service         = module.get<CreateAdministrativeAreasLevel1Service>(CreateAdministrativeAreasLevel1Service);
@@ -42,8 +43,8 @@ describe('CreateAdministrativeAreasLevel1CommandHandler', () =>
             expect(await commandHandler.execute(
                 new CreateAdministrativeAreasLevel1Command(
                     administrativeAreasLevel1,
-                    { timezone: process.env.TZ }
-                )
+                    { timezone: process.env.TZ },
+                ),
             )).toBe(undefined);
         });
     });

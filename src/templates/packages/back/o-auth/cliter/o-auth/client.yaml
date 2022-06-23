@@ -17,6 +17,7 @@ aggregateProperties:
       - AUTHORIZATION_CODE
       - CLIENT_CREDENTIALS
       - PASSWORD
+      - REFRESH_TOKEN
     nullable: false
   - name: name
     type: varchar

@@ -12,7 +12,7 @@ export class OAuthUpdateClientByIdDto
 
     @ApiProperty({
         type       : OAuthClientGrantType,
-        enum       : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD'],
+        enum       : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD','REFRESH_TOKEN'],
         description: 'grantType [input here api field description]',
     })
     grantType?: OAuthClientGrantType;

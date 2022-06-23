@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonPaginateAdministrativeAreasLevel2Resolver } from './common-paginate-administrative-areas-level-2.resolver';
+import { CommonPaginateAdministrativeAreasLevel2Handler } from '../handlers/common-paginate-administrative-areas-level-2.handler';
 
 // sources
-import { administrativeAreasLevel2 } from '../../../../@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonPaginateAdministrativeAreasLevel2Resolver', () =>
 {
     let resolver: CommonPaginateAdministrativeAreasLevel2Resolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonPaginateAdministrativeAreasLevel2Handler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,17 @@ describe('CommonPaginateAdministrativeAreasLevel2Resolver', () =>
             providers: [
                 CommonPaginateAdministrativeAreasLevel2Resolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonPaginateAdministrativeAreasLevel2Handler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         resolver    = module.get<CommonPaginateAdministrativeAreasLevel2Resolver>(CommonPaginateAdministrativeAreasLevel2Resolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<CommonPaginateAdministrativeAreasLevel2Handler>(CommonPaginateAdministrativeAreasLevel2Handler);
     });
 
     test('CommonPaginateAdministrativeAreasLevel2Resolver should be defined', () =>
@@ -55,8 +48,16 @@ describe('CommonPaginateAdministrativeAreasLevel2Resolver', () =>
 
         test('should return a administrativeAreasLevel2', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel2)));
-            expect(await resolver.main()).toBe(administrativeAreasLevel2);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
+                total: 5,
+                count: 5,
+                rows : administrativeAreasLevel2,
+            })));
+            expect(await resolver.main()).toStrictEqual({
+                total: 5,
+                count: 5,
+                rows : administrativeAreasLevel2,
+            });
         });
     });
 });

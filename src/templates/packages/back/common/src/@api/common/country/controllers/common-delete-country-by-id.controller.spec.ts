@@ -2,20 +2,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AddI18NConstraintService, ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonDeleteCountryByIdController } from './common-delete-country-by-id.controller';
+import { CommonDeleteCountryByIdHandler } from '../handlers/common-delete-country-by-id.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
-import { countries } from '../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonDeleteCountryByIdController', () =>
 {
     let controller: CommonDeleteCountryByIdController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonDeleteCountryByIdHandler;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,7 @@ describe('CommonDeleteCountryByIdController', () =>
                 CacheModule.register(),
             ],
             controllers: [
-                CommonDeleteCountryByIdController
+                CommonDeleteCountryByIdController,
             ],
             providers: [
                 AddI18NConstraintService,
@@ -32,32 +31,26 @@ describe('CommonDeleteCountryByIdController', () =>
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                    },
                 },
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
                         get: (key: string) => key === 'common/lang' ? langs : null,
-                    }
+                    },
                 },
                 {
-                    provide : IQueryBus,
+                    provide : CommonDeleteCountryByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonDeleteCountryByIdController>(CommonDeleteCountryByIdController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonDeleteCountryByIdController>(CommonDeleteCountryByIdController);
+        handler = module.get<CommonDeleteCountryByIdHandler>(CommonDeleteCountryByIdHandler);
     });
 
     describe('main', () =>
@@ -69,7 +62,7 @@ describe('CommonDeleteCountryByIdController', () =>
 
         test('should return an country deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
             expect(await controller.main(countries[0].id)).toBe(countries[0]);
         });
     });

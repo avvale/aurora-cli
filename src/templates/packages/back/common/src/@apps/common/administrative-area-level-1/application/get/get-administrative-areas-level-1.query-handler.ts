@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AdministrativeAreaLevel1Response } from './../../domain/administrative-area-level-1.response';
-import { AdministrativeAreaLevel1Mapper } from './../../domain/administrative-area-level-1.mapper';
+import { AdministrativeAreaLevel1Response } from '../../domain/administrative-area-level-1.response';
+import { AdministrativeAreaLevel1Mapper } from '../../domain/administrative-area-level-1.mapper';
 import { GetAdministrativeAreasLevel1Query } from './get-administrative-areas-level-1.query';
 import { GetAdministrativeAreasLevel1Service } from './get-administrative-areas-level-1.service';
 

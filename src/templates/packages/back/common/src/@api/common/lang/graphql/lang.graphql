@@ -34,9 +34,23 @@ input CommonCreateLangInput
     isActive: GraphQLBoolean!
 }
 
-input CommonUpdateLangInput
+input CommonUpdateLangByIdInput
 {
     id: ID!
+    name: GraphQLString
+    image: GraphQLString
+    iso6392: GraphQLString
+    iso6393: GraphQLString
+    ietf: GraphQLString
+    customCode: GraphQLString
+    dir: CommonLangDir
+    sort: GraphQLInt
+    isActive: GraphQLBoolean
+}
+
+input CommonUpdateLangsInput
+{
+    id: ID
     name: GraphQLString
     image: GraphQLString
     iso6392: GraphQLString
@@ -60,7 +74,8 @@ type Mutation
 {
     commonCreateLang(payload: CommonCreateLangInput!): CommonLang
     commonCreateLangs(payload: [CommonCreateLangInput]!): Boolean!
-    commonUpdateLang(payload: CommonUpdateLangInput! constraint: QueryStatement): CommonLang
+    commonUpdateLangById(payload: CommonUpdateLangByIdInput! constraint: QueryStatement): CommonLang
+    commonUpdateLangs(payload: CommonUpdateLangsInput! query: QueryStatement constraint: QueryStatement): [CommonLang]!
     commonDeleteLangById(id: ID! constraint: QueryStatement): CommonLang
     commonDeleteLangs(query: QueryStatement constraint: QueryStatement): [CommonLang]!
 }

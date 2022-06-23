@@ -1,7 +1,8 @@
 // commands
 import { CreateCountryCommandHandler } from './application/create/create-country.command-handler';
 import { CreateCountriesCommandHandler } from './application/create/create-countries.command-handler';
-import { UpdateCountryCommandHandler } from './application/update/update-country.command-handler';
+import { UpdateCountryByIdCommandHandler } from './application/update/update-country-by-id.command-handler';
+import { UpdateCountriesCommandHandler } from './application/update/update-countries.command-handler';
 import { DeleteCountryByIdCommandHandler } from './application/delete/delete-country-by-id.command-handler';
 import { DeleteCountryByIdI18NCommandHandler } from './application/delete/delete-country-by-id-i18n.command-handler';
 import { DeleteCountriesCommandHandler } from './application/delete/delete-countries.command-handler';
@@ -16,6 +17,7 @@ import { FindCountryByIdQueryHandler } from './application/find/find-country-by-
 import { CreatedCountryEventHandler } from './application/events/created-country.event-handler';
 import { CreatedCountriesEventHandler } from './application/events/created-countries.event-handler';
 import { UpdatedCountryEventHandler } from './application/events/updated-country.event-handler';
+import { UpdatedCountriesEventHandler } from './application/events/updated-countries.event-handler';
 import { DeletedCountryEventHandler } from './application/events/deleted-country.event-handler';
 import { DeletedCountriesEventHandler } from './application/events/deleted-countries.event-handler';
 
@@ -26,7 +28,8 @@ import { PaginateCountriesService } from './application/paginate/paginate-countr
 import { GetCountriesService } from './application/get/get-countries.service';
 import { FindCountryService } from './application/find/find-country.service';
 import { FindCountryByIdService } from './application/find/find-country-by-id.service';
-import { UpdateCountryService } from './application/update/update-country.service';
+import { UpdateCountryByIdService } from './application/update/update-country-by-id.service';
+import { UpdateCountriesService } from './application/update/update-countries.service';
 import { DeleteCountryByIdService } from './application/delete/delete-country-by-id.service';
 import { DeleteCountryByIdI18NService } from './application/delete/delete-country-by-id-i18n.service';
 import { DeleteCountriesService } from './application/delete/delete-countries.service';
@@ -48,7 +51,8 @@ export const CommonCountryHandlers = [
     // commands
     CreateCountryCommandHandler,
     CreateCountriesCommandHandler,
-    UpdateCountryCommandHandler,
+    UpdateCountryByIdCommandHandler,
+    UpdateCountriesCommandHandler,
     DeleteCountryByIdCommandHandler,
     DeleteCountryByIdI18NCommandHandler,
     DeleteCountriesCommandHandler,
@@ -63,6 +67,7 @@ export const CommonCountryHandlers = [
     CreatedCountryEventHandler,
     CreatedCountriesEventHandler,
     UpdatedCountryEventHandler,
+    UpdatedCountriesEventHandler,
     DeletedCountryEventHandler,
     DeletedCountriesEventHandler,
 ];
@@ -74,7 +79,8 @@ export const CommonCountryServices = [
     GetCountriesService,
     FindCountryService,
     FindCountryByIdService,
-    UpdateCountryService,
+    UpdateCountryByIdService,
+    UpdateCountriesService,
     DeleteCountryByIdService,
     DeleteCountryByIdI18NService,
     DeleteCountriesService,

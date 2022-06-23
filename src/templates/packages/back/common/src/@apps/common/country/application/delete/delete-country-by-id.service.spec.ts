@@ -3,12 +3,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '../../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 import { DeleteCountryByIdService } from './delete-country-by-id.service';
-import { CountryId } from './../../domain/value-objects';
-import { ICountryRepository } from './../../domain/country.repository';
-import { ICountryI18NRepository } from './../../domain/country-i18n.repository';
-import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
+import { CountryId } from '../../domain/value-objects';
+import { ICountryRepository } from '../../domain/country.repository';
+import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('DeleteCountryByIdService', () =>
 {
@@ -31,17 +31,18 @@ describe('DeleteCountryByIdService', () =>
                     useValue: {
                         deleteById: id => { /**/ },
                         findById  : id => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : ICountryI18NRepository,
                     useValue: {
                         get   : queryStatement => { /**/ },
-                        delete: queryStatement => { /**/ }
-                    }
+                        delete: queryStatement => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(DeleteCountryByIdService);
         repository      = module.get(ICountryRepository);
@@ -59,7 +60,7 @@ describe('DeleteCountryByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new CountryId(countries[0].id)
+                new CountryId(countries[0].id),
             )).toBe(undefined);
         });
     });

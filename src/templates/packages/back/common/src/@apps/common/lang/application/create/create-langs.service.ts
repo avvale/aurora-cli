@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     LangId,
     LangName,
@@ -14,10 +15,10 @@ import {
     LangCreatedAt,
     LangUpdatedAt,
     LangDeletedAt,
-} from './../../domain/value-objects';
-import { ILangRepository } from './../../domain/lang.repository';
-import { CommonLang } from './../../domain/lang.aggregate';
-import { AddLangsContextEvent } from './../events/add-langs-context.event';
+} from '../../domain/value-objects';
+import { ILangRepository } from '../../domain/lang.repository';
+import { CommonLang } from '../../domain/lang.aggregate';
+import { AddLangsContextEvent } from '../events/add-langs-context.event';
 
 @Injectable()
 export class CreateLangsService
@@ -27,19 +28,20 @@ export class CreateLangsService
         private readonly repository: ILangRepository,
     ) {}
 
-    public async main(
+    async main(
         langs: {
-            id: LangId,
-            name: LangName,
-            image: LangImage,
-            iso6392: LangIso6392,
-            iso6393: LangIso6393,
-            ietf: LangIetf,
-            customCode: LangCustomCode,
-            dir: LangDir,
-            sort: LangSort,
-            isActive: LangIsActive,
-        } []
+            id: LangId;
+            name: LangName;
+            image: LangImage;
+            iso6392: LangIso6392;
+            iso6393: LangIso6393;
+            ietf: LangIetf;
+            customCode: LangCustomCode;
+            dir: LangDir;
+            sort: LangSort;
+            isActive: LangIsActive;
+        } [],
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -60,7 +62,7 @@ export class CreateLangsService
         ));
 
         // insert
-        await this.repository.insert(aggregateLangs);
+        await this.repository.insert(aggregateLangs, { insertOptions: cQMetadata?.repositoryOptions });
 
         // create AddLangsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

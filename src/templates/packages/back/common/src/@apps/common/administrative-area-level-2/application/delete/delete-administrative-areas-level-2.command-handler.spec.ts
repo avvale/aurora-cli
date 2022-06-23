@@ -16,13 +16,14 @@ describe('DeleteAdministrativeAreasLevel2CommandHandler', () =>
             providers: [
                 DeleteAdministrativeAreasLevel2CommandHandler,
                 {
-                    provide: DeleteAdministrativeAreasLevel2Service,
+                    provide : DeleteAdministrativeAreasLevel2Service,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                        main: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteAdministrativeAreasLevel2CommandHandler>(DeleteAdministrativeAreasLevel2CommandHandler);
         service         = module.get<DeleteAdministrativeAreasLevel2Service>(DeleteAdministrativeAreasLevel2Service);
@@ -38,7 +39,7 @@ describe('DeleteAdministrativeAreasLevel2CommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new DeleteAdministrativeAreasLevel2Command()
+                new DeleteAdministrativeAreasLevel2Command(),
             )).toBe(undefined);
         });
     });

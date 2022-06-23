@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { GetLangsQueryHandler } from './get-langs.query-handler';
-import { MockLangRepository } from '../../../../../@apps/common/lang/infrastructure/mock/mock-lang.repository';
-import { ILangRepository } from '../../../../../@apps/common/lang/domain/lang.repository';
-import { LangMapper } from '../../../../../@apps/common/lang/domain/lang.mapper';
+import { MockLangRepository } from '@apps/common/lang/infrastructure/mock/mock-lang.repository';
+import { ILangRepository } from '@apps/common/lang/domain/lang.repository';
+import { LangMapper } from '@apps/common/lang/domain/lang.mapper';
 import { GetLangsQuery } from './get-langs.query';
 import { GetLangsService } from './get-langs.service';
 
@@ -22,17 +22,17 @@ describe('GetLangsQueryHandler', () =>
                 GetLangsQueryHandler,
                 {
                     provide : ILangRepository,
-                    useClass: MockLangRepository
+                    useClass: MockLangRepository,
                 },
                 {
                     provide : GetLangsService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<GetLangsQueryHandler>(GetLangsQueryHandler);
         service         = module.get<GetLangsService>(GetLangsService);
@@ -51,7 +51,7 @@ describe('GetLangsQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new GetLangsQuery()
+                new GetLangsQuery(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

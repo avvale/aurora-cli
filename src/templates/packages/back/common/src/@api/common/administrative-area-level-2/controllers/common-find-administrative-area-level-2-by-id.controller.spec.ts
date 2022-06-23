@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonFindAdministrativeAreaLevel2ByIdController } from './common-find-administrative-area-level-2-by-id.controller';
+import { CommonFindAdministrativeAreaLevel2ByIdHandler } from '../handlers/common-find-administrative-area-level-2-by-id.handler';
 
 // sources
-import { administrativeAreasLevel2 } from '../../../../@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonFindAdministrativeAreaLevel2ByIdController', () =>
 {
     let controller: CommonFindAdministrativeAreaLevel2ByIdController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonFindAdministrativeAreaLevel2ByIdHandler;
 
     beforeAll(async () =>
     {
@@ -20,27 +19,21 @@ describe('CommonFindAdministrativeAreaLevel2ByIdController', () =>
             imports: [
             ],
             controllers: [
-                CommonFindAdministrativeAreaLevel2ByIdController
+                CommonFindAdministrativeAreaLevel2ByIdController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonFindAdministrativeAreaLevel2ByIdHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonFindAdministrativeAreaLevel2ByIdController>(CommonFindAdministrativeAreaLevel2ByIdController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonFindAdministrativeAreaLevel2ByIdController>(CommonFindAdministrativeAreaLevel2ByIdController);
+        handler = module.get<CommonFindAdministrativeAreaLevel2ByIdHandler>(CommonFindAdministrativeAreaLevel2ByIdHandler);
     });
 
     describe('main', () =>
@@ -52,7 +45,7 @@ describe('CommonFindAdministrativeAreaLevel2ByIdController', () =>
 
         test('should return an administrativeAreaLevel2 by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel2[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(administrativeAreasLevel2[0])));
             expect(await controller.main(administrativeAreasLevel2[0].id)).toBe(administrativeAreasLevel2[0]);
         });
     });

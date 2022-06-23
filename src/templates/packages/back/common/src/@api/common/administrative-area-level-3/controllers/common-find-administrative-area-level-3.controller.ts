@@ -1,30 +1,36 @@
-import { Controller, Get, Body } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { AdministrativeAreaLevel3Dto } from './../dto/administrative-area-level-3.dto';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
+import { CommonAdministrativeAreaLevel3Dto } from '../dto';
 
 // @apps
-import { FindAdministrativeAreaLevel3Query } from '../../../../@apps/common/administrative-area-level-3/application/find/find-administrative-area-level-3.query';
+import { CommonFindAdministrativeAreaLevel3Handler } from '../handlers/common-find-administrative-area-level-3.handler';
 
 @ApiTags('[common] administrative-area-level-3')
-@Controller('common/administrative-area-level-3')
+@Controller('common/administrative-area-level-3/find')
 export class CommonFindAdministrativeAreaLevel3Controller
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonFindAdministrativeAreaLevel3Handler,
     ) {}
 
-    @Get()
+    @Post()
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find administrative-area-level-3 according to query' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: AdministrativeAreaLevel3Dto })
+    @ApiOkResponse({ description: 'The record has been successfully created.', type: CommonAdministrativeAreaLevel3Dto })
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new FindAdministrativeAreaLevel3Query(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

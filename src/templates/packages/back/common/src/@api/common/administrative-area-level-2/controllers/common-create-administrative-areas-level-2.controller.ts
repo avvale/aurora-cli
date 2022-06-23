@@ -1,29 +1,32 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, Timezone } from 'aurora-ts-core';
-import { AdministrativeAreaLevel2Dto } from './../dto/administrative-area-level-2.dto';
-import { CreateAdministrativeAreaLevel2Dto } from './../dto/create-administrative-area-level-2.dto';
+import { Timezone } from 'aurora-ts-core';
+import { CommonAdministrativeAreaLevel2Dto, CommonCreateAdministrativeAreaLevel2Dto } from '../dto';
 
 // @apps
-import { CreateAdministrativeAreasLevel2Command } from '../../../../@apps/common/administrative-area-level-2/application/create/create-administrative-areas-level-2.command';
+import { CommonCreateAdministrativeAreasLevel2Handler } from '../handlers/common-create-administrative-areas-level-2.handler';
 
 @ApiTags('[common] administrative-area-level-2')
-@Controller('common/administrative-areas-level-2')
+@Controller('common/administrative-areas-level-2/create')
 export class CommonCreateAdministrativeAreasLevel2Controller
 {
     constructor(
-        private readonly commandBus: ICommandBus,
+        private readonly handler: CommonCreateAdministrativeAreasLevel2Handler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create administrative-areas-level-2 in batch' })
-    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [AdministrativeAreaLevel2Dto] })
-    @ApiBody({ type: [CreateAdministrativeAreaLevel2Dto] })
+    @ApiCreatedResponse({ description: 'The records has been created successfully.' , type: [CommonAdministrativeAreaLevel2Dto]})
+    @ApiBody({ type: [CommonCreateAdministrativeAreaLevel2Dto]})
     async main(
-        @Body() payload: CreateAdministrativeAreaLevel2Dto[],
+        @Body() payload: CommonCreateAdministrativeAreaLevel2Dto[],
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateAdministrativeAreasLevel2Command(payload, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

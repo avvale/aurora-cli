@@ -3,7 +3,7 @@ import { DeleteCountryByIdCommand } from './delete-country-by-id.command';
 import { DeleteCountryByIdService } from './delete-country-by-id.service';
 import {
     CountryId
-} from './../../domain/value-objects';
+} from '../../domain/value-objects';
 
 @CommandHandler(DeleteCountryByIdCommand)
 export class DeleteCountryByIdCommandHandler implements ICommandHandler<DeleteCountryByIdCommand>
@@ -18,7 +18,7 @@ export class DeleteCountryByIdCommandHandler implements ICommandHandler<DeleteCo
         await this.deleteCountryByIdService.main(
             new CountryId(command.id),
             command.constraint,
-            command.cQMetadata
+            command.cQMetadata,
         );
     }
 }

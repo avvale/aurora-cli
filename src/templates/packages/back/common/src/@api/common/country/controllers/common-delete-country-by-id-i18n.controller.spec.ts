@@ -7,8 +7,8 @@ import { AddI18NConstraintService, ICommandBus, IQueryBus } from 'aurora-ts-core
 import { CommonDeleteCountryByIdI18NController } from './common-delete-country-by-id-i18n.controller';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
-import { countries } from '../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonDeleteCountryByIdI18NController', () =>
 {
@@ -43,16 +43,17 @@ describe('CommonDeleteCountryByIdI18NController', () =>
                     provide : IQueryBus,
                     useValue: {
                         ask: () => { /**/ },
-                    }
+                    },
                 },
                 {
                     provide : ICommandBus,
                     useValue: {
                         dispatch: () => { /**/ },
-                    }
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         controller  = module.get<CommonDeleteCountryByIdI18NController>(CommonDeleteCountryByIdI18NController);
         queryBus    = module.get<IQueryBus>(IQueryBus);

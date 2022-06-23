@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateLangResolver } from './common-create-lang.resolver';
-import { CommonCreateLangInput } from './../../../../graphql';
+import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler';
+import { CommonCreateLangInput } from '../../../../graphql';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonCreateLangResolver', () =>
 {
     let resolver: CommonCreateLangResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateLangHandler;
 
     beforeAll(async () =>
     {
@@ -23,23 +22,17 @@ describe('CommonCreateLangResolver', () =>
             providers: [
                 CommonCreateLangResolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateLangHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        resolver    = module.get<CommonCreateLangResolver>(CommonCreateLangResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonCreateLangResolver>(CommonCreateLangResolver);
+        handler = module.get<CommonCreateLangHandler>(CommonCreateLangHandler);
     });
 
     test('CommonCreateLangResolver should be defined', () =>
@@ -56,7 +49,7 @@ describe('CommonCreateLangResolver', () =>
 
         test('should return an lang created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await resolver.main(<CommonCreateLangInput>langs[0])).toBe(langs[0]);
         });
     });

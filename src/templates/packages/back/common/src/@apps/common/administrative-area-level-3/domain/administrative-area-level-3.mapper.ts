@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { CommonAdministrativeAreaLevel3 } from './administrative-area-level-3.aggregate';
 import { AdministrativeAreaLevel3Response } from './administrative-area-level-3.response';
 import {
@@ -17,9 +18,9 @@ import {
     AdministrativeAreaLevel3UpdatedAt,
     AdministrativeAreaLevel3DeletedAt,
 } from './value-objects';
-import { CountryMapper } from '../../../../@apps/common/country/domain/country.mapper';
-import { AdministrativeAreaLevel1Mapper } from '../../../../@apps/common/administrative-area-level-1/domain/administrative-area-level-1.mapper';
-import { AdministrativeAreaLevel2Mapper } from '../../../../@apps/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
+import { CountryMapper } from '@apps/common/country/domain/country.mapper';
+import { AdministrativeAreaLevel1Mapper } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.mapper';
+import { AdministrativeAreaLevel2Mapper } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
 
 export class AdministrativeAreaLevel3Mapper implements IMapper
 {
@@ -31,7 +32,7 @@ export class AdministrativeAreaLevel3Mapper implements IMapper
      * Map object to aggregate
      * @param administrativeAreaLevel3
      */
-    mapModelToAggregate(administrativeAreaLevel3: ObjectLiteral, cQMetadata?: CQMetadata): CommonAdministrativeAreaLevel3
+    mapModelToAggregate(administrativeAreaLevel3: LiteralObject, cQMetadata?: CQMetadata): CommonAdministrativeAreaLevel3
     {
         if (!administrativeAreaLevel3) return;
 
@@ -42,7 +43,7 @@ export class AdministrativeAreaLevel3Mapper implements IMapper
      * Map array of objects to array aggregates
      * @param administrativeAreasLevel3
      */
-    mapModelsToAggregates(administrativeAreasLevel3: ObjectLiteral[], cQMetadata?: CQMetadata): CommonAdministrativeAreaLevel3[]
+    mapModelsToAggregates(administrativeAreasLevel3: LiteralObject[], cQMetadata?: CQMetadata): CommonAdministrativeAreaLevel3[]
     {
         if (!Array.isArray(administrativeAreasLevel3)) return;
 
@@ -69,26 +70,26 @@ export class AdministrativeAreaLevel3Mapper implements IMapper
         return administrativeAreasLevel3.map(administrativeAreaLevel3 => this.makeResponse(administrativeAreaLevel3));
     }
 
-    private makeAggregate(administrativeAreaLevel3: ObjectLiteral, cQMetadata?: CQMetadata): CommonAdministrativeAreaLevel3
+    private makeAggregate(administrativeAreaLevel3: LiteralObject, cQMetadata?: CQMetadata): CommonAdministrativeAreaLevel3
     {
         return CommonAdministrativeAreaLevel3.register(
-            new AdministrativeAreaLevel3Id(administrativeAreaLevel3.id),
-            new AdministrativeAreaLevel3CountryId(administrativeAreaLevel3.countryId),
-            new AdministrativeAreaLevel3AdministrativeAreaLevel1Id(administrativeAreaLevel3.administrativeAreaLevel1Id),
-            new AdministrativeAreaLevel3AdministrativeAreaLevel2Id(administrativeAreaLevel3.administrativeAreaLevel2Id),
-            new AdministrativeAreaLevel3Code(administrativeAreaLevel3.code),
-            new AdministrativeAreaLevel3CustomCode(administrativeAreaLevel3.customCode),
-            new AdministrativeAreaLevel3Name(administrativeAreaLevel3.name),
-            new AdministrativeAreaLevel3Slug(administrativeAreaLevel3.slug),
-            new AdministrativeAreaLevel3Latitude(administrativeAreaLevel3.latitude),
-            new AdministrativeAreaLevel3Longitude(administrativeAreaLevel3.longitude),
-            new AdministrativeAreaLevel3Zoom(administrativeAreaLevel3.zoom),
-            new AdministrativeAreaLevel3CreatedAt(administrativeAreaLevel3.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new AdministrativeAreaLevel3UpdatedAt(administrativeAreaLevel3.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new AdministrativeAreaLevel3DeletedAt(administrativeAreaLevel3.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new CountryMapper({ eagerLoading: false }).mapModelToAggregate(administrativeAreaLevel3.country) : undefined,
-            this.options.eagerLoading ? new AdministrativeAreaLevel1Mapper({ eagerLoading: false }).mapModelToAggregate(administrativeAreaLevel3.administrativeAreaLevel1) : undefined,
-            this.options.eagerLoading ? new AdministrativeAreaLevel2Mapper({ eagerLoading: false }).mapModelToAggregate(administrativeAreaLevel3.administrativeAreaLevel2) : undefined,
+            new AdministrativeAreaLevel3Id(administrativeAreaLevel3.id, { undefinable: true }),
+            new AdministrativeAreaLevel3CountryId(administrativeAreaLevel3.countryId, { undefinable: true }),
+            new AdministrativeAreaLevel3AdministrativeAreaLevel1Id(administrativeAreaLevel3.administrativeAreaLevel1Id, { undefinable: true }),
+            new AdministrativeAreaLevel3AdministrativeAreaLevel2Id(administrativeAreaLevel3.administrativeAreaLevel2Id, { undefinable: true }),
+            new AdministrativeAreaLevel3Code(administrativeAreaLevel3.code, { undefinable: true }),
+            new AdministrativeAreaLevel3CustomCode(administrativeAreaLevel3.customCode, { undefinable: true }),
+            new AdministrativeAreaLevel3Name(administrativeAreaLevel3.name, { undefinable: true }),
+            new AdministrativeAreaLevel3Slug(administrativeAreaLevel3.slug, { undefinable: true }),
+            new AdministrativeAreaLevel3Latitude(administrativeAreaLevel3.latitude, { undefinable: true }),
+            new AdministrativeAreaLevel3Longitude(administrativeAreaLevel3.longitude, { undefinable: true }),
+            new AdministrativeAreaLevel3Zoom(administrativeAreaLevel3.zoom, { undefinable: true }),
+            new AdministrativeAreaLevel3CreatedAt(administrativeAreaLevel3.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new AdministrativeAreaLevel3UpdatedAt(administrativeAreaLevel3.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new AdministrativeAreaLevel3DeletedAt(administrativeAreaLevel3.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new CountryMapper({ eagerLoading: true }).mapModelToAggregate(administrativeAreaLevel3.country) : undefined,
+            this.options.eagerLoading ? new AdministrativeAreaLevel1Mapper({ eagerLoading: true }).mapModelToAggregate(administrativeAreaLevel3.administrativeAreaLevel1) : undefined,
+            this.options.eagerLoading ? new AdministrativeAreaLevel2Mapper({ eagerLoading: true }).mapModelToAggregate(administrativeAreaLevel3.administrativeAreaLevel2) : undefined,
         );
     }
 
@@ -111,9 +112,9 @@ export class AdministrativeAreaLevel3Mapper implements IMapper
             administrativeAreaLevel3.createdAt.value,
             administrativeAreaLevel3.updatedAt.value,
             administrativeAreaLevel3.deletedAt.value,
-            this.options.eagerLoading ? new CountryMapper({ eagerLoading: false }).mapAggregateToResponse(administrativeAreaLevel3.country) : undefined,
-            this.options.eagerLoading ? new AdministrativeAreaLevel1Mapper({ eagerLoading: false }).mapAggregateToResponse(administrativeAreaLevel3.administrativeAreaLevel1) : undefined,
-            this.options.eagerLoading ? new AdministrativeAreaLevel2Mapper({ eagerLoading: false }).mapAggregateToResponse(administrativeAreaLevel3.administrativeAreaLevel2) : undefined,
+            this.options.eagerLoading ? new CountryMapper({ eagerLoading: true }).mapAggregateToResponse(administrativeAreaLevel3.country) : undefined,
+            this.options.eagerLoading ? new AdministrativeAreaLevel1Mapper({ eagerLoading: true }).mapAggregateToResponse(administrativeAreaLevel3.administrativeAreaLevel1) : undefined,
+            this.options.eagerLoading ? new AdministrativeAreaLevel2Mapper({ eagerLoading: true }).mapAggregateToResponse(administrativeAreaLevel3.administrativeAreaLevel2) : undefined,
         );
     }
 }

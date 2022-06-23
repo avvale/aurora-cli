@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { CommonCountry } from './country.aggregate';
 import { CountryResponse } from './country.response';
 import {
@@ -25,7 +26,7 @@ import {
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
 } from './value-objects';
-import { LangMapper } from '../../../../@apps/common/lang/domain/lang.mapper';
+import { LangMapper } from '@apps/common/lang/domain/lang.mapper';
 
 export class CountryMapper implements IMapper
 {
@@ -37,7 +38,7 @@ export class CountryMapper implements IMapper
      * Map object to aggregate
      * @param country
      */
-    mapModelToAggregate(country: ObjectLiteral, cQMetadata?: CQMetadata): CommonCountry
+    mapModelToAggregate(country: LiteralObject, cQMetadata?: CQMetadata): CommonCountry
     {
         if (!country) return;
 
@@ -48,7 +49,7 @@ export class CountryMapper implements IMapper
      * Map array of objects to array aggregates
      * @param countries
      */
-    mapModelsToAggregates(countries: ObjectLiteral[], cQMetadata?: CQMetadata): CommonCountry[]
+    mapModelsToAggregates(countries: LiteralObject[], cQMetadata?: CQMetadata): CommonCountry[]
     {
         if (!Array.isArray(countries)) return;
 
@@ -75,32 +76,32 @@ export class CountryMapper implements IMapper
         return countries.map(country => this.makeResponse(country));
     }
 
-    private makeAggregate(country: ObjectLiteral, cQMetadata?: CQMetadata): CommonCountry
+    private makeAggregate(country: LiteralObject, cQMetadata?: CQMetadata): CommonCountry
     {
         return CommonCountry.register(
-            new CountryId(country.id),
-            new CountryIso3166Alpha2(country.iso3166Alpha2),
-            new CountryIso3166Alpha3(country.iso3166Alpha3),
-            new CountryIso3166Numeric(country.iso3166Numeric),
-            new CountryCustomCode(country.customCode),
-            new CountryPrefix(country.prefix),
-            new CountryImage(country.image),
-            new CountrySort(country.sort),
-            new CountryAdministrativeAreas(country.administrativeAreas),
-            new CountryLatitude(country.latitude),
-            new CountryLongitude(country.longitude),
-            new CountryZoom(country.zoom),
-            new CountryDataLang(country.dataLang),
-            new CountryCreatedAt(country.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new CountryUpdatedAt(country.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new CountryDeletedAt(country.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new CountryI18NLangId(country.countryI18N.langId),
-            new CountryI18NName(country.countryI18N.name),
-            new CountryI18NSlug(country.countryI18N.slug),
-            new CountryI18NAdministrativeAreaLevel1(country.countryI18N.administrativeAreaLevel1),
-            new CountryI18NAdministrativeAreaLevel2(country.countryI18N.administrativeAreaLevel2),
-            new CountryI18NAdministrativeAreaLevel3(country.countryI18N.administrativeAreaLevel3),
-            this.options.eagerLoading ? new LangMapper({ eagerLoading: false }).mapModelToAggregate(country.countryI18N.lang) : undefined,
+            new CountryId(country.id, { undefinable: true }),
+            new CountryIso3166Alpha2(country.iso3166Alpha2, { undefinable: true }),
+            new CountryIso3166Alpha3(country.iso3166Alpha3, { undefinable: true }),
+            new CountryIso3166Numeric(country.iso3166Numeric, { undefinable: true }),
+            new CountryCustomCode(country.customCode, { undefinable: true }),
+            new CountryPrefix(country.prefix, { undefinable: true }),
+            new CountryImage(country.image, { undefinable: true }),
+            new CountrySort(country.sort, { undefinable: true }),
+            new CountryAdministrativeAreas(country.administrativeAreas, { undefinable: true }),
+            new CountryLatitude(country.latitude, { undefinable: true }),
+            new CountryLongitude(country.longitude, { undefinable: true }),
+            new CountryZoom(country.zoom, { undefinable: true }),
+            new CountryDataLang(country.dataLang, { undefinable: true }),
+            new CountryCreatedAt(country.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new CountryUpdatedAt(country.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new CountryDeletedAt(country.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new CountryI18NLangId(country.countryI18N.langId, { undefinable: true }),
+            new CountryI18NName(country.countryI18N.name, { undefinable: true }),
+            new CountryI18NSlug(country.countryI18N.slug, { undefinable: true }),
+            new CountryI18NAdministrativeAreaLevel1(country.countryI18N.administrativeAreaLevel1, { undefinable: true }),
+            new CountryI18NAdministrativeAreaLevel2(country.countryI18N.administrativeAreaLevel2, { undefinable: true }),
+            new CountryI18NAdministrativeAreaLevel3(country.countryI18N.administrativeAreaLevel3, { undefinable: true }),
+            this.options.eagerLoading ? new LangMapper({ eagerLoading: true }).mapModelToAggregate(country.countryI18N.lang) : undefined,
         );
     }
 
@@ -131,7 +132,7 @@ export class CountryMapper implements IMapper
             country.administrativeAreaLevel1.value,
             country.administrativeAreaLevel2.value,
             country.administrativeAreaLevel3.value,
-            this.options.eagerLoading ? new LangMapper({ eagerLoading: false }).mapAggregateToResponse(country.lang) : undefined,
+            this.options.eagerLoading ? new LangMapper({ eagerLoading: true }).mapAggregateToResponse(country.lang) : undefined,
         );
     }
 }

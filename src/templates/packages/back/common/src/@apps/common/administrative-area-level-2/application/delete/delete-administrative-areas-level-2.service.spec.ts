@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { DeleteAdministrativeAreasLevel2Service } from './delete-administrative-areas-level-2.service';
-import { IAdministrativeAreaLevel2Repository } from './../../domain/administrative-area-level-2.repository';
-import { MockAdministrativeAreaLevel2Repository } from './../../infrastructure/mock/mock-administrative-area-level-2.repository';
+import { IAdministrativeAreaLevel2Repository } from '../../domain/administrative-area-level-2.repository';
+import { MockAdministrativeAreaLevel2Repository } from '../../infrastructure/mock/mock-administrative-area-level-2.repository';
 
 describe('DeleteAdministrativeAreasLevel2Service', () =>
 {
@@ -25,12 +25,13 @@ describe('DeleteAdministrativeAreasLevel2Service', () =>
                 {
                     provide : IAdministrativeAreaLevel2Repository,
                     useValue: {
-                        get   : (queryStatement) => { /**/ },
-                        delete: (queryStatement) => { /**/ },
-                    }
+                        get   : () => { /**/ },
+                        delete: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(DeleteAdministrativeAreasLevel2Service);
         repository      = module.get(IAdministrativeAreaLevel2Repository);

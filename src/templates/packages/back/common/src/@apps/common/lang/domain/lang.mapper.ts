@@ -1,4 +1,5 @@
-import { IMapper, MapperOptions, ObjectLiteral, CQMetadata } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
 import { CommonLang } from './lang.aggregate';
 import { LangResponse } from './lang.response';
 import {
@@ -27,7 +28,7 @@ export class LangMapper implements IMapper
      * Map object to aggregate
      * @param lang
      */
-    mapModelToAggregate(lang: ObjectLiteral, cQMetadata?: CQMetadata): CommonLang
+    mapModelToAggregate(lang: LiteralObject, cQMetadata?: CQMetadata): CommonLang
     {
         if (!lang) return;
 
@@ -38,7 +39,7 @@ export class LangMapper implements IMapper
      * Map array of objects to array aggregates
      * @param langs
      */
-    mapModelsToAggregates(langs: ObjectLiteral[], cQMetadata?: CQMetadata): CommonLang[]
+    mapModelsToAggregates(langs: LiteralObject[], cQMetadata?: CQMetadata): CommonLang[]
     {
         if (!Array.isArray(langs)) return;
 
@@ -65,22 +66,22 @@ export class LangMapper implements IMapper
         return langs.map(lang => this.makeResponse(lang));
     }
 
-    private makeAggregate(lang: ObjectLiteral, cQMetadata?: CQMetadata): CommonLang
+    private makeAggregate(lang: LiteralObject, cQMetadata?: CQMetadata): CommonLang
     {
         return CommonLang.register(
-            new LangId(lang.id),
-            new LangName(lang.name),
-            new LangImage(lang.image),
-            new LangIso6392(lang.iso6392),
-            new LangIso6393(lang.iso6393),
-            new LangIetf(lang.ietf),
-            new LangCustomCode(lang.customCode),
-            new LangDir(lang.dir),
-            new LangSort(lang.sort),
-            new LangIsActive(lang.isActive),
-            new LangCreatedAt(lang.createdAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new LangUpdatedAt(lang.updatedAt, {}, { addTimezone: cQMetadata?.timezone }),
-            new LangDeletedAt(lang.deletedAt, {}, { addTimezone: cQMetadata?.timezone }),
+            new LangId(lang.id, { undefinable: true }),
+            new LangName(lang.name, { undefinable: true }),
+            new LangImage(lang.image, { undefinable: true }),
+            new LangIso6392(lang.iso6392, { undefinable: true }),
+            new LangIso6393(lang.iso6393, { undefinable: true }),
+            new LangIetf(lang.ietf, { undefinable: true }),
+            new LangCustomCode(lang.customCode, { undefinable: true }),
+            new LangDir(lang.dir, { undefinable: true }),
+            new LangSort(lang.sort, { undefinable: true }),
+            new LangIsActive(lang.isActive, { undefinable: true }),
+            new LangCreatedAt(lang.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new LangUpdatedAt(lang.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new LangDeletedAt(lang.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
         );
     }
 

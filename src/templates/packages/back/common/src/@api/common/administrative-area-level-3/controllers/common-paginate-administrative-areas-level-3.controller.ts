@@ -1,17 +1,17 @@
-import { Controller, Post, Body, HttpCode } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
-import { AdministrativeAreaLevel3Dto } from './../dto/administrative-area-level-3.dto';
+import { Pagination, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
-import { PaginateAdministrativeAreasLevel3Query } from '../../../../@apps/common/administrative-area-level-3/application/paginate/paginate-administrative-areas-level-3.query';
+import { CommonPaginateAdministrativeAreasLevel3Handler } from '../handlers/common-paginate-administrative-areas-level-3.handler';
 
 @ApiTags('[common] administrative-area-level-3')
 @Controller('common/administrative-areas-level-3/paginate')
 export class CommonPaginateAdministrativeAreasLevel3Controller
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonPaginateAdministrativeAreasLevel3Handler,
     ) {}
 
     @Post()
@@ -22,10 +22,14 @@ export class CommonPaginateAdministrativeAreasLevel3Controller
     @ApiQuery({ name: 'constraint', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new PaginateAdministrativeAreasLevel3Query(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

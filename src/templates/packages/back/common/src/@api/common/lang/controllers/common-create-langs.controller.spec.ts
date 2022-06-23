@@ -1,41 +1,36 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateLangsController } from './common-create-langs.controller';
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { CommonCreateLangsHandler } from '../handlers/common-create-langs.handler';
+
+// sources
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonCreateLangsController', () =>
 {
     let controller: CommonCreateLangsController;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateLangsHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             controllers: [
-                CommonCreateLangsController
+                CommonCreateLangsController,
             ],
             providers: [
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateLangsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        controller  = module.get<CommonCreateLangsController>(CommonCreateLangsController);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        controller = module.get<CommonCreateLangsController>(CommonCreateLangsController);
+        handler = module.get<CommonCreateLangsHandler>(CommonCreateLangsHandler);
     });
 
     describe('main', () =>

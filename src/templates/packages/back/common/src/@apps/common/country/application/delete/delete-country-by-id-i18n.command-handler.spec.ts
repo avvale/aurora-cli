@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteCountryByIdI18NCommandHandler } from './delete-country-by-id-i18n.command-handler';
-import { countries } from '../../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 import { DeleteCountryByIdI18NCommand } from './delete-country-by-id-i18n.command';
 import { DeleteCountryByIdI18NService } from './delete-country-by-id-i18n.service';
 
@@ -20,10 +20,11 @@ describe('DeleteCountryByIdI18NCommandHandler', () =>
                     provide: DeleteCountryByIdI18NService,
                     useValue: {
                         main: () => {},
-                    }
-                }
-            ]
-        }).compile();
+                    },
+                },
+            ],
+        })
+            .compile();
 
         commandHandler  = module.get<DeleteCountryByIdI18NCommandHandler>(DeleteCountryByIdI18NCommandHandler);
         service         = module.get<DeleteCountryByIdI18NService>(DeleteCountryByIdI18NService);

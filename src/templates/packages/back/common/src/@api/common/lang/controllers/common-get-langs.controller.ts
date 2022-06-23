@@ -1,30 +1,36 @@
-import { Controller, Get, Body } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Constraint, IQueryBus, QueryStatement, Timezone } from 'aurora-ts-core';
-import { LangDto } from './../dto/lang.dto';
+import { QueryStatement, Timezone } from 'aurora-ts-core';
+import { CommonLangDto } from '../dto';
 
 // @apps
-import { GetLangsQuery } from '../../../../@apps/common/lang/application/get/get-langs.query';
+import { CommonGetLangsHandler } from '../handlers/common-get-langs.handler';
 
 @ApiTags('[common] lang')
-@Controller('common/langs')
+@Controller('common/langs/get')
 export class CommonGetLangsController
 {
     constructor(
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonGetLangsHandler,
     ) {}
 
-    @Get()
-    @ApiOperation({ summary: 'Find langs according to query' })
-    @ApiOkResponse({ description: 'The records has been found successfully.', type: [LangDto] })
+    @Post()
+    @HttpCode(200)
+    @ApiOperation({ summary: 'Get langs according to query' })
+    @ApiOkResponse({ description: 'The records has been found successfully.', type: [CommonLangDto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
         @Body('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     )
     {
-        return await this.queryBus.ask(new GetLangsQuery(queryStatement, constraint, { timezone }));
+        return await this.handler.main(
+            queryStatement,
+            constraint,
+            timezone,
+        );
     }
 }

@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonGetLangsResolver } from './common-get-langs.resolver';
+import { CommonGetLangsHandler } from '../handlers/common-get-langs.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonGetLangsResolver', () =>
 {
-    let resolver:   CommonGetLangsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let resolver: CommonGetLangsResolver;
+    let handler: CommonGetLangsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,17 @@ describe('CommonGetLangsResolver', () =>
             providers: [
                 CommonGetLangsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonGetLangsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        resolver    = module.get<CommonGetLangsResolver>(CommonGetLangsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonGetLangsResolver>(CommonGetLangsResolver);
+        handler = module.get<CommonGetLangsHandler>(CommonGetLangsHandler);
     });
 
     test('CommonGetLangsResolver should be defined', () =>
@@ -55,7 +48,7 @@ describe('CommonGetLangsResolver', () =>
 
         test('should return a langs', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await resolver.main()).toBe(langs);
         });
     });

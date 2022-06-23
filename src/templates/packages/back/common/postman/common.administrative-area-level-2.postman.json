@@ -1,6 +1,6 @@
 {
     "info": {
-		"_postman_id"   : "b750f347-d3ee-45d2-b30b-f4875c60cfec",
+		"_postman_id"   : "9ddf293d-1ecf-4202-964a-36b4ad164882",
 		"name"          : "@apps - common/administrative-area-level-2",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -15,7 +15,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:CommonCreateAdministrativeAreaLevel2Input!)\n{\n\tcommonCreateAdministrativeAreaLevel2 (payload:$payload)\n\t{\n\t\tid\n\t\tcountryId\n\t\tadministrativeAreaLevel1Id\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"code\": \"d7kky4gg\", \n\t\t\"customCode\": \"6ccwz975em\", \n\t\t\"name\": \"Awesome Soft Chicken\", \n\t\t\"slug\": \"illo-voluptatibus-consequatur\", \n\t\t\"latitude\": 89285313527480430, \n\t\t\"longitude\": 22655554940094270, \n\t\t\"zoom\": 50\n\t}\n}"
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"code\": \"u9tuwje\", \n\t\t\"customCode\": \"vq3xovkrh\", \n\t\t\"name\": \"Licensed Wooden Shirt\", \n\t\t\"slug\": \"est-fugit-velit\", \n\t\t\"latitude\": 2860876296353.521, \n\t\t\"longitude\": 4589324749827.411, \n\t\t\"zoom\": 3\n\t}\n}"
 					}
 				},
 				"url": {
@@ -39,7 +39,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[CommonCreateAdministrativeAreaLevel2Input]!)\n{\n\tcommonCreateAdministrativeAreasLevel2 (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"593e1ab5-052f-482d-a406-16813a54cef2\", \n\t\t\t\"countryId\": \"25608208-7be3-4d16-99ba-7d6190eb21c0\", \n\t\t\t\"administrativeAreaLevel1Id\": \"d156b42d-7f7f-4134-b055-ec810c9b25e8\", \n\t\t\t\"code\": \"awaiamcu\", \n\t\t\t\"customCode\": \"sa9yqnbbfs\", \n\t\t\t\"name\": \"Licensed Concrete Towels\", \n\t\t\t\"slug\": \"pariatur-nesciunt-est\", \n\t\t\t\"latitude\": 72327144058456620, \n\t\t\t\"longitude\": 46105136601505624, \n\t\t\t\"zoom\": 82\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0b4cf7a2-7248-433a-81d9-db44d1875aa9\", \n\t\t\t\"countryId\": \"e2b0d115-5d34-433a-b0ab-012cf3879a10\", \n\t\t\t\"administrativeAreaLevel1Id\": \"edfe5882-a6b7-4e35-b1fa-e200f99e89ae\", \n\t\t\t\"code\": \"rh70zld6\", \n\t\t\t\"customCode\": \"4t1jq0d9r1\", \n\t\t\t\"name\": \"Refined Frozen Pizza\", \n\t\t\t\"slug\": \"aliquam-dolor-voluptatem\", \n\t\t\t\"latitude\": 34269742198912428, \n\t\t\t\"longitude\": 85662030269138300, \n\t\t\t\"zoom\": 19\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5256e339-499a-4914-bdc3-340579270ee8\", \n\t\t\t\"countryId\": \"a30f4c8e-6e10-4d04-8942-c764714c756b\", \n\t\t\t\"administrativeAreaLevel1Id\": \"36627426-12ed-40b3-9f82-60ad9fe2f76e\", \n\t\t\t\"code\": \"fj32o60i\", \n\t\t\t\"customCode\": \"3aakub0wt0\", \n\t\t\t\"name\": \"Practical Cotton Chair\", \n\t\t\t\"slug\": \"est-et-dolor\", \n\t\t\t\"latitude\": 24328552546813604, \n\t\t\t\"longitude\": 48228820946655656, \n\t\t\t\"zoom\": 40\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c29ffe01-558a-4f6e-b904-875d482a4d87\", \n\t\t\t\"countryId\": \"c70d0847-d216-4aa6-9010-56642a231790\", \n\t\t\t\"administrativeAreaLevel1Id\": \"92b383a4-40e3-482d-9561-6f03d1604068\", \n\t\t\t\"code\": \"2qrtqxp2\", \n\t\t\t\"customCode\": \"kkr8sw0bmg\", \n\t\t\t\"name\": \"Handcrafted Rubber Bike\", \n\t\t\t\"slug\": \"nihil-sed-dolorum\", \n\t\t\t\"latitude\": 94711883250878060, \n\t\t\t\"longitude\": 50994558848238400, \n\t\t\t\"zoom\": 49\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"cc03cf4a-3bb8-45d0-8042-a1398cf080e4\", \n\t\t\t\"countryId\": \"7c7c771d-34de-4aa3-bfe8-f66715f9557c\", \n\t\t\t\"administrativeAreaLevel1Id\": \"865a19cc-c641-43af-8592-5da7b318e1ed\", \n\t\t\t\"code\": \"ulw3bzwi\", \n\t\t\t\"customCode\": \"stdcz0agu0\", \n\t\t\t\"name\": \"Awesome Concrete Keyboard\", \n\t\t\t\"slug\": \"aut-quam-adipisci\", \n\t\t\t\"latitude\": 83195636815944530, \n\t\t\t\"longitude\": 13395039971825068, \n\t\t\t\"zoom\": 21\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fa2c9e3c-a7be-47fd-b6ca-67ce0aecc16d\", \n\t\t\t\"countryId\": \"981c6156-1666-4e77-9e8f-732ed8a9fc49\", \n\t\t\t\"administrativeAreaLevel1Id\": \"3ab2cac1-517c-4bed-af59-b38909db5989\", \n\t\t\t\"code\": \"ljy9xejp\", \n\t\t\t\"customCode\": \"5zyazyz7sk\", \n\t\t\t\"name\": \"Small Granite Bike\", \n\t\t\t\"slug\": \"adipisci-tempora-molestias\", \n\t\t\t\"latitude\": 94195643637228180, \n\t\t\t\"longitude\": 62638924335558230, \n\t\t\t\"zoom\": 24\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"84183993-8d92-416f-b489-6eb80fb13c9c\", \n\t\t\t\"countryId\": \"d0727de3-0267-4fd4-8a88-2c3e827436cf\", \n\t\t\t\"administrativeAreaLevel1Id\": \"aea1c5e7-3aea-44ea-8a82-ab7a4126675b\", \n\t\t\t\"code\": \"80sqnwpj\", \n\t\t\t\"customCode\": \"1ei1z5zbfa\", \n\t\t\t\"name\": \"Intelligent Rubber Chicken\", \n\t\t\t\"slug\": \"inventore-illum-voluptatem\", \n\t\t\t\"latitude\": 29456052552591440, \n\t\t\t\"longitude\": 43185129592736430, \n\t\t\t\"zoom\": 74\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"55cf9f80-3516-468d-bc38-fdcb30799fb4\", \n\t\t\t\"countryId\": \"665d93a0-b110-4c3e-859b-5df1fd95c292\", \n\t\t\t\"administrativeAreaLevel1Id\": \"b11b6dff-6706-482b-b640-45aaf6de0638\", \n\t\t\t\"code\": \"y4z71s4m\", \n\t\t\t\"customCode\": \"vbezg1vmok\", \n\t\t\t\"name\": \"Gorgeous Granite Chicken\", \n\t\t\t\"slug\": \"nisi-nisi-sit\", \n\t\t\t\"latitude\": 11319259755437608, \n\t\t\t\"longitude\": 50782180791714530, \n\t\t\t\"zoom\": 76\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"50a3ca86-9338-41e8-918c-d3bb2c40add9\", \n\t\t\t\"countryId\": \"7d5f1566-e3ec-4981-80fd-808cb4cd8694\", \n\t\t\t\"administrativeAreaLevel1Id\": \"ed619366-63f7-43bf-8692-92da96f6bbd7\", \n\t\t\t\"code\": \"w8ytjwzz\", \n\t\t\t\"customCode\": \"b2t6g54hix\", \n\t\t\t\"name\": \"Tasty Concrete Bacon\", \n\t\t\t\"slug\": \"voluptatibus-quo-expedita\", \n\t\t\t\"latitude\": 82153997633979060, \n\t\t\t\"longitude\": 10853108239600556, \n\t\t\t\"zoom\": 44\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a3edb045-a193-4215-98a1-66b857d0e34d\", \n\t\t\t\"countryId\": \"de04b249-ed55-4fbf-ad9a-97edb088f8c1\", \n\t\t\t\"administrativeAreaLevel1Id\": \"6a2d40e4-fd23-4ddf-ab39-88cfe331a744\", \n\t\t\t\"code\": \"h4auzkg4\", \n\t\t\t\"customCode\": \"r8dt1ao3o7\", \n\t\t\t\"name\": \"Generic Cotton Chicken\", \n\t\t\t\"slug\": \"dolore-cumque-tenetur\", \n\t\t\t\"latitude\": 60760719132943360, \n\t\t\t\"longitude\": 43254474472629860, \n\t\t\t\"zoom\": 32\n\t\t}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"dc55f342-5b9a-4cde-b9fd-46913247ccd3\", \n\t\t\t\"countryId\": \"dc882f99-73e8-4a51-b9aa-11760ec0ab44\", \n\t\t\t\"administrativeAreaLevel1Id\": \"830758bd-2eb0-4949-b873-7e9cd18a829f\", \n\t\t\t\"code\": \"9oiorap\", \n\t\t\t\"customCode\": \"lhifkklu3\", \n\t\t\t\"name\": \"Licensed Soft Shirt\", \n\t\t\t\"slug\": \"est-fugit-molestiae\", \n\t\t\t\"latitude\": 6937821518488.164, \n\t\t\t\"longitude\": 3946275614791.83, \n\t\t\t\"zoom\": 4\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fc611b33-b2b2-402b-a333-586807a477ce\", \n\t\t\t\"countryId\": \"11f278f1-5356-400a-bc90-4463b94e80be\", \n\t\t\t\"administrativeAreaLevel1Id\": \"360d9de9-cde5-425f-b711-27c98134339f\", \n\t\t\t\"code\": \"jljxfbb\", \n\t\t\t\"customCode\": \"qbj55gd0t\", \n\t\t\t\"name\": \"Awesome Plastic Shoes\", \n\t\t\t\"slug\": \"ex-consequatur-voluptates\", \n\t\t\t\"latitude\": 4576265194292.679, \n\t\t\t\"longitude\": 5161782794859.367, \n\t\t\t\"zoom\": 8\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"97e5b99e-1185-4efa-ba8c-6d8b7fb8d2ac\", \n\t\t\t\"countryId\": \"ad42e508-0e16-449e-9d05-2487366205cf\", \n\t\t\t\"administrativeAreaLevel1Id\": \"a721cb04-a440-476f-a8d4-52afc9300ba3\", \n\t\t\t\"code\": \"ygky1pr\", \n\t\t\t\"customCode\": \"tcm2txv96\", \n\t\t\t\"name\": \"Small Fresh Chicken\", \n\t\t\t\"slug\": \"dicta-vel-odio\", \n\t\t\t\"latitude\": 2516690204261.843, \n\t\t\t\"longitude\": 5363089877997.69, \n\t\t\t\"zoom\": 5\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"22254832-0275-4997-a8df-60163a383d1d\", \n\t\t\t\"countryId\": \"e9fe6644-150a-49b8-a42e-9a9c6efabe86\", \n\t\t\t\"administrativeAreaLevel1Id\": \"f3a2886a-ac2e-4a24-9b9c-875dc2bc5a97\", \n\t\t\t\"code\": \"r7k9l2n\", \n\t\t\t\"customCode\": \"hzn3bqb73\", \n\t\t\t\"name\": \"Sleek Granite Ball\", \n\t\t\t\"slug\": \"mollitia-et-doloribus\", \n\t\t\t\"latitude\": 1200944514510.61, \n\t\t\t\"longitude\": 2308531432519.1416, \n\t\t\t\"zoom\": 6\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"12d7e507-5c6d-48ac-a935-f6a272bb63b3\", \n\t\t\t\"countryId\": \"d61d02d0-e41e-448a-a16a-c06499b30903\", \n\t\t\t\"administrativeAreaLevel1Id\": \"7dc63e5d-a1f6-4652-9c16-4673e9eac9ce\", \n\t\t\t\"code\": \"fzi8tnw\", \n\t\t\t\"customCode\": \"kohfdbdk6\", \n\t\t\t\"name\": \"Incredible Wooden Ball\", \n\t\t\t\"slug\": \"fuga-nobis-libero\", \n\t\t\t\"latitude\": 5348501251641.211, \n\t\t\t\"longitude\": 4433439992697.449, \n\t\t\t\"zoom\": 8\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c9840f21-897a-4239-ab00-f26e8dfadcda\", \n\t\t\t\"countryId\": \"6641ec84-9ad9-4cf1-a47d-33a4746d270d\", \n\t\t\t\"administrativeAreaLevel1Id\": \"ebe56716-80ec-45e4-ad09-dc9ec21b159f\", \n\t\t\t\"code\": \"4sgok1j\", \n\t\t\t\"customCode\": \"287ilq8kg\", \n\t\t\t\"name\": \"Incredible Plastic Bike\", \n\t\t\t\"slug\": \"autem-enim-illum\", \n\t\t\t\"latitude\": 7780796490603.285, \n\t\t\t\"longitude\": 5661426539906.956, \n\t\t\t\"zoom\": 8\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"79c47fe8-8dbc-422e-a9f1-cd23ba348c17\", \n\t\t\t\"countryId\": \"a065e02e-4e32-4f6d-949e-8bb9427f497f\", \n\t\t\t\"administrativeAreaLevel1Id\": \"3d98fd05-f52d-4228-b319-b6a59d56e683\", \n\t\t\t\"code\": \"a1nzpu7\", \n\t\t\t\"customCode\": \"iccgn3o8p\", \n\t\t\t\"name\": \"Unbranded Steel Tuna\", \n\t\t\t\"slug\": \"placeat-reprehenderit-suscipit\", \n\t\t\t\"latitude\": 8971457378833.822, \n\t\t\t\"longitude\": 4698764380079.597, \n\t\t\t\"zoom\": 7\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6484a4a1-14ec-4ef0-9df9-2c9bb7dd7ed7\", \n\t\t\t\"countryId\": \"5f127c39-dc6f-4bd2-8d75-929716703d69\", \n\t\t\t\"administrativeAreaLevel1Id\": \"d842f6a8-872e-4026-91dc-7e3f30be469f\", \n\t\t\t\"code\": \"ddc7amh\", \n\t\t\t\"customCode\": \"5pgh7fbsx\", \n\t\t\t\"name\": \"Refined Rubber Chips\", \n\t\t\t\"slug\": \"id-consectetur-fuga\", \n\t\t\t\"latitude\": 7915560942088.901, \n\t\t\t\"longitude\": 6190040870089.127, \n\t\t\t\"zoom\": 6\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6324bb65-c5f6-4cb3-9711-a6ce6ac37170\", \n\t\t\t\"countryId\": \"c7264595-d63e-4cd8-9182-92311b646464\", \n\t\t\t\"administrativeAreaLevel1Id\": \"6a3c3788-4b4b-4892-bf20-e9145d865822\", \n\t\t\t\"code\": \"8qmc687\", \n\t\t\t\"customCode\": \"x5xud2yu4\", \n\t\t\t\"name\": \"Awesome Metal Tuna\", \n\t\t\t\"slug\": \"et-dolores-officia\", \n\t\t\t\"latitude\": 8361336860529.434, \n\t\t\t\"longitude\": 1230807505582.6863, \n\t\t\t\"zoom\": 2\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fa4edd35-6bf6-477e-afe6-14abb56dd849\", \n\t\t\t\"countryId\": \"ca3e3bb9-826e-4adc-b958-fe26689eb95e\", \n\t\t\t\"administrativeAreaLevel1Id\": \"4c7dbec6-b864-4708-9b0a-e158687fce26\", \n\t\t\t\"code\": \"i8h9j1g\", \n\t\t\t\"customCode\": \"uxkvshcj4\", \n\t\t\t\"name\": \"Unbranded Concrete Table\", \n\t\t\t\"slug\": \"omnis-amet-ullam\", \n\t\t\t\"latitude\": 6755081932411.991, \n\t\t\t\"longitude\": 9845433571723.56, \n\t\t\t\"zoom\": 2\n\t\t}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -164,7 +164,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:CommonUpdateAdministrativeAreaLevel2Input!)\n{\n\tcommonUpdateAdministrativeAreaLevel2 (payload:$payload)\n\t{\n\t\tid\n\t\tcode\n\t\tcustomCode\n\t\tname\n\t\tslug\n\t\tlatitude\n\t\tlongitude\n\t\tzoom\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"code\": \"xrh45iho\", \n\t\t\"customCode\": \"cqps6cz0ol\", \n\t\t\"name\": \"Awesome Rubber Bike\", \n\t\t\"slug\": \"magnam-non-facere\", \n\t\t\"latitude\": 84264282270862370, \n\t\t\"longitude\": 28326049907213296, \n\t\t\"zoom\": 15\n\t}\n}"
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"code\": \"i9yiswm\", \n\t\t\"customCode\": \"6ce4j5cqa\", \n\t\t\"name\": \"Generic Frozen Keyboard\", \n\t\t\"slug\": \"a-aliquid-cupiditate\", \n\t\t\"latitude\": 2129347901576.9275, \n\t\t\"longitude\": 7662343762277.146, \n\t\t\"zoom\": 7\n\t}\n}"
 					}
 				},
 				"url": {
@@ -230,7 +230,7 @@
 			"response": []
         },
         {
-			"name": "REST - common/administrative-area-level-2",
+			"name": "REST - common/administrative-area-level-2/create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -242,7 +242,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"code\": \"6htf5fvv\", \n\t\"customCode\": \"n8uoxtvo2r\", \n\t\"name\": \"Fantastic Steel Cheese\", \n\t\"slug\": \"accusantium-fuga-laudantium\", \n\t\"latitude\": 89946284313306380, \n\t\"longitude\": 45419595611813710, \n\t\"zoom\": 47\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"code\": \"wr0xbsp\", \n\t\"customCode\": \"vk9sbtg91\", \n\t\"name\": \"Awesome Metal Car\", \n\t\"slug\": \"maiores-quo-nulla\", \n\t\"latitude\": 2743042685119.3306, \n\t\"longitude\": 8812498822826.498, \n\t\"zoom\": 8\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -250,20 +250,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-area-level-2",
+					"raw": "{{URL}}/common/administrative-area-level-2/create",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"administrative-area-level-2"
+						"administrative-area-level-2",
+                        "create"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/administrative-areas-level-2",
+			"name": "REST - common/administrative-areas-level-2/create",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -275,7 +276,7 @@
 					}				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"8633e552-7443-49b5-9c83-d9f6586a0477\", \n\t\t\"countryId\": \"5d67a37d-8b51-49de-b856-58508be39353\", \n\t\t\"administrativeAreaLevel1Id\": \"cb1aff20-f66a-4c5f-9f09-f192357e0f2c\", \n\t\t\"code\": \"y417aber\", \n\t\t\"customCode\": \"tmgjhmsjm4\", \n\t\t\"name\": \"Gorgeous Fresh Fish\", \n\t\t\"slug\": \"consequatur-est-iure\", \n\t\t\"latitude\": 24289416533661330, \n\t\t\"longitude\": 42358192346843740, \n\t\t\"zoom\": 79\n\t}, \n\t{\n\t\t\"id\": \"1db82558-8b40-4201-902b-dcddc27164a7\", \n\t\t\"countryId\": \"68c3cfe3-0844-4fc5-8115-b8f12379742c\", \n\t\t\"administrativeAreaLevel1Id\": \"510c0044-50c7-4335-93d2-f622c686525a\", \n\t\t\"code\": \"g3dcjw9c\", \n\t\t\"customCode\": \"rsqvrzabzo\", \n\t\t\"name\": \"Incredible Rubber Shoes\", \n\t\t\"slug\": \"ducimus-sed-voluptatem\", \n\t\t\"latitude\": 90355742631342420, \n\t\t\"longitude\": 82197845499389420, \n\t\t\"zoom\": 84\n\t}, \n\t{\n\t\t\"id\": \"d28138a0-8cfa-407c-a442-bbd7bd7be62a\", \n\t\t\"countryId\": \"e56d2bd2-bf2d-41d2-84d8-850b2fc7de3d\", \n\t\t\"administrativeAreaLevel1Id\": \"3d3f5f3d-ae0f-421b-a4db-3d70a8cf4ea2\", \n\t\t\"code\": \"tyn3ud04\", \n\t\t\"customCode\": \"56o6w9jmp9\", \n\t\t\"name\": \"Sleek Plastic Soap\", \n\t\t\"slug\": \"saepe-et-rerum\", \n\t\t\"latitude\": 43731463260167580, \n\t\t\"longitude\": 79169324152926750, \n\t\t\"zoom\": 79\n\t}, \n\t{\n\t\t\"id\": \"e148a916-5a26-4e1b-a211-8c2b0bd09b88\", \n\t\t\"countryId\": \"81e29fbc-7114-40d8-94da-c0de33266557\", \n\t\t\"administrativeAreaLevel1Id\": \"e2c9cd9f-f647-4f14-af94-cb3cb533c613\", \n\t\t\"code\": \"h52c78d5\", \n\t\t\"customCode\": \"h850d9xpvd\", \n\t\t\"name\": \"Licensed Metal Table\", \n\t\t\"slug\": \"cupiditate-impedit-consequuntur\", \n\t\t\"latitude\": 72785896396228320, \n\t\t\"longitude\": 40553559246755784, \n\t\t\"zoom\": 65\n\t}, \n\t{\n\t\t\"id\": \"bf0f5ffe-66cb-4fa9-bd64-ea5a8b778378\", \n\t\t\"countryId\": \"47eb86c6-de44-44b0-9912-e8603dd1a9cf\", \n\t\t\"administrativeAreaLevel1Id\": \"4b5de781-f6e5-448d-b848-d4be460d637d\", \n\t\t\"code\": \"wab1vodd\", \n\t\t\"customCode\": \"ad76er6l3q\", \n\t\t\"name\": \"Rustic Metal Chicken\", \n\t\t\"slug\": \"et-inventore-molestias\", \n\t\t\"latitude\": 38331064536207170, \n\t\t\"longitude\": 47154931747579970, \n\t\t\"zoom\": 18\n\t}, \n\t{\n\t\t\"id\": \"9d505e04-4c9d-408c-83d6-1aad2e10ca89\", \n\t\t\"countryId\": \"44b123cf-b322-4832-89ac-acb8df5cea39\", \n\t\t\"administrativeAreaLevel1Id\": \"d3d40b38-8fa7-40c1-b1fa-2619b44cf7e3\", \n\t\t\"code\": \"fq9r7iid\", \n\t\t\"customCode\": \"liycx7yrdj\", \n\t\t\"name\": \"Handmade Concrete Shoes\", \n\t\t\"slug\": \"et-facilis-nemo\", \n\t\t\"latitude\": 84401834864584750, \n\t\t\"longitude\": 41112868997711710, \n\t\t\"zoom\": 59\n\t}, \n\t{\n\t\t\"id\": \"1edfe805-a1b3-4fd5-8c4e-3867dc28eb09\", \n\t\t\"countryId\": \"58b9c8b8-60e0-45d2-967b-677466871eee\", \n\t\t\"administrativeAreaLevel1Id\": \"8973d78f-955b-4fd7-8d48-a485ab6cd2f0\", \n\t\t\"code\": \"yfbarvkd\", \n\t\t\"customCode\": \"pv1f2tihzr\", \n\t\t\"name\": \"Ergonomic Rubber Fish\", \n\t\t\"slug\": \"quaerat-voluptate-enim\", \n\t\t\"latitude\": 19527858806491250, \n\t\t\"longitude\": 99739486833924640, \n\t\t\"zoom\": 32\n\t}, \n\t{\n\t\t\"id\": \"0c14822c-d05c-4f4b-b416-e25da3b7d779\", \n\t\t\"countryId\": \"994a8e40-993b-4060-b3ac-983e1f27a2de\", \n\t\t\"administrativeAreaLevel1Id\": \"2cf5e7c6-16f1-4b3f-a28c-49c5b3ca3f8b\", \n\t\t\"code\": \"78le2pgy\", \n\t\t\"customCode\": \"5t4ay0d6wg\", \n\t\t\"name\": \"Generic Frozen Soap\", \n\t\t\"slug\": \"omnis-animi-accusantium\", \n\t\t\"latitude\": 20737321150563340, \n\t\t\"longitude\": 68948898003457880, \n\t\t\"zoom\": 24\n\t}, \n\t{\n\t\t\"id\": \"029a344a-3256-4344-981a-1bb02cb4a08e\", \n\t\t\"countryId\": \"36b06b46-6251-4f0f-8673-bbeeace67f26\", \n\t\t\"administrativeAreaLevel1Id\": \"ac0b54e0-3041-4886-b129-bb7b9d9c257a\", \n\t\t\"code\": \"042en9pr\", \n\t\t\"customCode\": \"g4x4bu7koc\", \n\t\t\"name\": \"Tasty Fresh Ball\", \n\t\t\"slug\": \"quis-sunt-dolore\", \n\t\t\"latitude\": 72348519793048960, \n\t\t\"longitude\": 67253395414543580, \n\t\t\"zoom\": 98\n\t}, \n\t{\n\t\t\"id\": \"eaefbab0-2dbf-4f0e-a867-e3f094866f39\", \n\t\t\"countryId\": \"88618d0f-56bb-4bd4-866b-80b7b644d385\", \n\t\t\"administrativeAreaLevel1Id\": \"8fc8a755-213d-4180-a8be-17a1d9ff9873\", \n\t\t\"code\": \"h4a44uar\", \n\t\t\"customCode\": \"ga1sii2pmo\", \n\t\t\"name\": \"Awesome Concrete Car\", \n\t\t\"slug\": \"ullam-iure-possimus\", \n\t\t\"latitude\": 94353689471264060, \n\t\t\"longitude\": 15897834506364414, \n\t\t\"zoom\": 43\n\t}\n]",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"e6f17aef-1932-406a-8c14-a74ad41deb29\", \n\t\t\"countryId\": \"901655a4-134e-4823-a171-c33e75d6dfb6\", \n\t\t\"administrativeAreaLevel1Id\": \"338ac396-ae39-4d1a-a008-30bb129f8f27\", \n\t\t\"code\": \"lxdc6ca\", \n\t\t\"customCode\": \"398vtham2\", \n\t\t\"name\": \"Licensed Steel Chips\", \n\t\t\"slug\": \"consequuntur-sapiente-eveniet\", \n\t\t\"latitude\": 8224337355770.946, \n\t\t\"longitude\": 4425479562461.962, \n\t\t\"zoom\": 2\n\t}, \n\t{\n\t\t\"id\": \"95e106f4-1c44-478c-bf39-7a13f8b66bb7\", \n\t\t\"countryId\": \"f4c62b20-62e6-46e5-917e-414bbe1ebbb2\", \n\t\t\"administrativeAreaLevel1Id\": \"46a28bb6-a81c-4be6-a3c7-5615b2a86003\", \n\t\t\"code\": \"zrv7dis\", \n\t\t\"customCode\": \"0hhk350o2\", \n\t\t\"name\": \"Unbranded Granite Bike\", \n\t\t\"slug\": \"sit-numquam-explicabo\", \n\t\t\"latitude\": 9527599854347.219, \n\t\t\"longitude\": 8058702155351.446, \n\t\t\"zoom\": 5\n\t}, \n\t{\n\t\t\"id\": \"7397e545-fea8-49d7-b965-112c76b03652\", \n\t\t\"countryId\": \"6d29aebc-782c-41d6-aae2-8461f33e5401\", \n\t\t\"administrativeAreaLevel1Id\": \"c7357eb1-9171-4d63-9d00-6a62375ab0d1\", \n\t\t\"code\": \"ulghczm\", \n\t\t\"customCode\": \"2ra8zjb6y\", \n\t\t\"name\": \"Refined Concrete Pizza\", \n\t\t\"slug\": \"voluptas-non-ullam\", \n\t\t\"latitude\": 1341481815102.2083, \n\t\t\"longitude\": 6586002330499.485, \n\t\t\"zoom\": 2\n\t}, \n\t{\n\t\t\"id\": \"41756b83-b1af-415f-9114-e97b0b9115f2\", \n\t\t\"countryId\": \"d7634b6d-3121-43b8-890c-236638941091\", \n\t\t\"administrativeAreaLevel1Id\": \"c88b8308-ce47-4df2-bfdb-9bc32bbb3c7d\", \n\t\t\"code\": \"nl63ys2\", \n\t\t\"customCode\": \"qphf75m6u\", \n\t\t\"name\": \"Gorgeous Wooden Towels\", \n\t\t\"slug\": \"consequatur-ab-dolore\", \n\t\t\"latitude\": 7943252643209.142, \n\t\t\"longitude\": 9403649590742.766, \n\t\t\"zoom\": 8\n\t}, \n\t{\n\t\t\"id\": \"00efce42-200e-469e-a582-a374877f3373\", \n\t\t\"countryId\": \"278b523f-4c09-4989-9235-27624c3f604d\", \n\t\t\"administrativeAreaLevel1Id\": \"6c8f853e-8f71-4f18-8c4f-e0145117a55d\", \n\t\t\"code\": \"7ud88l9\", \n\t\t\"customCode\": \"bvrzbuae9\", \n\t\t\"name\": \"Fantastic Rubber Bike\", \n\t\t\"slug\": \"ipsa-earum-omnis\", \n\t\t\"latitude\": 2727630482442.8, \n\t\t\"longitude\": 6092870487557.363, \n\t\t\"zoom\": 9\n\t}, \n\t{\n\t\t\"id\": \"2c870e36-6295-4b18-bfcb-8d208e1b80d6\", \n\t\t\"countryId\": \"3aedbc23-a7c0-4fb3-aa22-1b630bd61c10\", \n\t\t\"administrativeAreaLevel1Id\": \"a9b01c27-1a70-46a1-801d-e415af9b3ff4\", \n\t\t\"code\": \"3xb0u4e\", \n\t\t\"customCode\": \"eolyr816q\", \n\t\t\"name\": \"Generic Rubber Pizza\", \n\t\t\"slug\": \"ipsam-aliquam-inventore\", \n\t\t\"latitude\": 8753184176615.956, \n\t\t\"longitude\": 9395189498794.334, \n\t\t\"zoom\": 6\n\t}, \n\t{\n\t\t\"id\": \"d1e245fd-cd2e-4830-b02c-6f62855347b0\", \n\t\t\"countryId\": \"19f05dcd-4dc1-4f7d-89ec-6c62e83a3260\", \n\t\t\"administrativeAreaLevel1Id\": \"79b9361a-cdde-453f-b0fa-7135b5d86011\", \n\t\t\"code\": \"7xj3lrp\", \n\t\t\"customCode\": \"pth0jus2s\", \n\t\t\"name\": \"Licensed Plastic Towels\", \n\t\t\"slug\": \"saepe-porro-at\", \n\t\t\"latitude\": 3144506447970.1113, \n\t\t\"longitude\": 6804020933847.542, \n\t\t\"zoom\": 4\n\t}, \n\t{\n\t\t\"id\": \"2545f388-806f-484e-afc1-bce09285239c\", \n\t\t\"countryId\": \"84987bbb-95ed-4281-9d6f-76617394855a\", \n\t\t\"administrativeAreaLevel1Id\": \"2bab090a-6399-4db3-b8c5-70b46dc43f98\", \n\t\t\"code\": \"b3l1cwm\", \n\t\t\"customCode\": \"qxdjwjami\", \n\t\t\"name\": \"Ergonomic Cotton Hat\", \n\t\t\"slug\": \"impedit-nulla-quisquam\", \n\t\t\"latitude\": 3033860244021.273, \n\t\t\"longitude\": 2731497052883.2817, \n\t\t\"zoom\": 7\n\t}, \n\t{\n\t\t\"id\": \"773c1127-92ef-4775-9d9d-41720aa567c0\", \n\t\t\"countryId\": \"a2351f56-cb3a-4a89-8889-ecd3fb9fecc6\", \n\t\t\"administrativeAreaLevel1Id\": \"8afd2cae-a04b-4676-941a-8ff000a23775\", \n\t\t\"code\": \"m7zp4ew\", \n\t\t\"customCode\": \"t9m3hucg2\", \n\t\t\"name\": \"Refined Wooden Chair\", \n\t\t\"slug\": \"hic-eos-ratione\", \n\t\t\"latitude\": 4077042678799.338, \n\t\t\"longitude\": 6992010675964.877, \n\t\t\"zoom\": 5\n\t}, \n\t{\n\t\t\"id\": \"5699f550-42cc-4893-9e31-fdbd68e71824\", \n\t\t\"countryId\": \"3c1613fd-2ffb-4cdd-a2b6-052eed93c7b7\", \n\t\t\"administrativeAreaLevel1Id\": \"664d83cb-6278-4e19-be4d-a1d4698239da\", \n\t\t\"code\": \"7cos1se\", \n\t\t\"customCode\": \"m7j947rfo\", \n\t\t\"name\": \"Awesome Soft Hat\", \n\t\t\"slug\": \"magni-ut-sint\", \n\t\t\"latitude\": 6489127016151.943, \n\t\t\"longitude\": 7194341526387.778, \n\t\t\"zoom\": 3\n\t}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -283,13 +284,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-areas-level-2",
+					"raw": "{{URL}}/common/administrative-areas-level-2/create",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"administrative-areas-level-2"
+						"administrative-areas-level-2",
+                        "create"
 					]
 				}
 			},
@@ -333,12 +335,12 @@
 			"response": []
         },
         {
-			"name": "REST - common/administrative-areas-level-2",
+			"name": "REST - common/administrative-areas-level-2/get",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -356,25 +358,26 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-areas-level-2",
+					"raw": "{{URL}}/common/administrative-areas-level-2/get",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"administrative-areas-level-2"
+						"administrative-areas-level-2",
+                        "get"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/administrative-area-level-2",
+			"name": "REST - common/administrative-area-level-2/find",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -392,25 +395,26 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-area-level-2",
+					"raw": "{{URL}}/common/administrative-area-level-2/find",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"administrative-area-level-2"
+						"administrative-area-level-2",
+                        "find"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/administrative-area-level-2/{id}",
+			"name": "REST - common/administrative-area-level-2/find/{id}",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -428,13 +432,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-area-level-2/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"raw": "{{URL}}/common/administrative-area-level-2/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
 						"administrative-area-level-2",
+                        "find",
 						"5b19d6ac-4081-573b-96b3-56964d5326a8"
 					]
 				}
@@ -442,7 +447,7 @@
 			"response": []
         },
         {
-			"name": "REST - common/administrative-area-level-2",
+			"name": "REST - common/administrative-area-level-2/update",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -454,7 +459,7 @@
 					}				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"code\": \"3dio4br7\", \n\t\"customCode\": \"g7vq5pnlqh\", \n\t\"name\": \"Handmade Wooden Soap\", \n\t\"slug\": \"ab-tempora-facilis\", \n\t\"latitude\": 95228905250431410, \n\t\"longitude\": 53587783083662790, \n\t\"zoom\": 93\n}",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"countryId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"administrativeAreaLevel1Id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"code\": \"sm3en6m\", \n\t\"customCode\": \"arjqvc8iw\", \n\t\"name\": \"Handcrafted Fresh Hat\", \n\t\"slug\": \"dolorem-harum-aliquam\", \n\t\"latitude\": 7133812176553.226, \n\t\"longitude\": 6179438003814.5205, \n\t\"zoom\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -462,20 +467,21 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-area-level-2",
+					"raw": "{{URL}}/common/administrative-area-level-2/update",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"administrative-area-level-2"
+						"administrative-area-level-2",
+                        "update"
 					]
 				}
 			},
 			"response": []
         },
         {
-			"name": "REST - common/administrative-area-level-2/{id}",
+			"name": "REST - common/administrative-area-level-2/delete/{id}",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -495,13 +501,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-area-level-2/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"raw": "{{URL}}/common/administrative-area-level-2/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
 						"administrative-area-level-2",
+                        "delete",
 						"5b19d6ac-4081-573b-96b3-56964d5326a8"
 					]
 				}
@@ -509,7 +516,7 @@
 			"response": []
 		},
         {
-			"name": "REST - common/administrative-areas-level-2",
+			"name": "REST - common/administrative-areas-level-2/delete",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -529,13 +536,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/common/administrative-areas-level-2",
+					"raw": "{{URL}}/common/administrative-areas-level-2/delete",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"common",
-						"administrative-areas-level-2"
+						"administrative-areas-level-2",
+                        "delete"
 					]
 				}
 			},
@@ -544,7 +552,7 @@
     ],
     "variable": [
 		{
-			"id": "6eb3419a-f49f-4d72-8359-74aa156e2692",
+			"id": "25fa18cd-617e-41eb-a084-e11b5fc8b236",
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"

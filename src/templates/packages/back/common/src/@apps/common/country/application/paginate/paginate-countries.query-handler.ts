@@ -17,7 +17,7 @@ export class PaginateCountriesQueryHandler implements IQueryHandler<PaginateCoun
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO())
+            rows.map(item => item.toDTO()),
         );
     }
 }

@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '../../../../../@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 import { CreateCountryService } from './create-country.service';
 import {
     CountryId,
@@ -28,10 +28,10 @@ import {
     CountryI18NAdministrativeAreaLevel1,
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
-} from './../../domain/value-objects';
-import { ICountryRepository } from './../../domain/country.repository';
-import { ICountryI18NRepository } from './../../domain/country-i18n.repository';
-import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
+} from '../../domain/value-objects';
+import { ICountryRepository } from '../../domain/country.repository';
+import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('CreateCountryService', () =>
 
@@ -53,17 +53,18 @@ describe('CreateCountryService', () =>
                 {
                     provide : ICountryRepository,
                     useValue: {
-                        create: (item) => { /**/ },
-                    }
+                        create: () => { /**/ },
+                    },
                 },
                 {
                     provide : ICountryI18NRepository,
                     useValue: {
-                        create: (item) => { /**/ },
-                    }
+                        create: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateCountryService);
         repository      = module.get(ICountryRepository);
@@ -100,7 +101,7 @@ describe('CreateCountryService', () =>
                     administrativeAreaLevel1: new CountryI18NAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
                     administrativeAreaLevel2: new CountryI18NAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
                     administrativeAreaLevel3: new CountryI18NAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
-                }
+                },
             )).toBe(undefined);
         });
     });

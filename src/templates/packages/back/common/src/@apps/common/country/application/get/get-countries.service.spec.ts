@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { GetCountriesService } from './get-countries.service';
-import { ICountryRepository } from './../../domain/country.repository';
-import { MockCountryRepository } from './../../infrastructure/mock/mock-country.repository';
+import { ICountryRepository } from '../../domain/country.repository';
+import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('GetCountriesService', () =>
 {
@@ -22,13 +22,14 @@ describe('GetCountriesService', () =>
                 GetCountriesService,
                 MockCountryRepository,
                 {
-                    provide: ICountryRepository,
+                    provide : ICountryRepository,
                     useValue: {
-                        get: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        get: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(GetCountriesService);
         repository      = module.get(ICountryRepository);

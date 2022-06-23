@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from 'aurora-ts-core';
-import { IAdministrativeAreaLevel3Repository } from '../../../../../@apps/common/administrative-area-level-3/domain/administrative-area-level-3.repository';
+import { IAdministrativeAreaLevel3Repository } from '@apps/common/administrative-area-level-3/domain/administrative-area-level-3.repository';
 import {
     AdministrativeAreaLevel3Id,
     AdministrativeAreaLevel3CountryId,
@@ -16,9 +16,9 @@ import {
     AdministrativeAreaLevel3CreatedAt,
     AdministrativeAreaLevel3UpdatedAt,
     AdministrativeAreaLevel3DeletedAt,
-} from '../../../../../@apps/common/administrative-area-level-3/domain/value-objects';
-import { CommonAdministrativeAreaLevel3 } from './../../domain/administrative-area-level-3.aggregate';
-import { administrativeAreasLevel3 } from './../seeds/administrative-area-level-3.seed';
+} from '@apps/common/administrative-area-level-3/domain/value-objects';
+import { CommonAdministrativeAreaLevel3 } from '../../domain/administrative-area-level-3.aggregate';
+import { administrativeAreasLevel3 } from '../seeds/administrative-area-level-3.seed';
 
 @Injectable()
 export class MockAdministrativeAreaLevel3Repository extends MockRepository<CommonAdministrativeAreaLevel3> implements IAdministrativeAreaLevel3Repository
@@ -34,7 +34,7 @@ export class MockAdministrativeAreaLevel3Repository extends MockRepository<Commo
         this.createSourceMockData();
     }
 
-    public reset()
+    public reset(): void
     {
         this.createSourceMockData();
     }

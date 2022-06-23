@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindLangByIdQueryHandler } from './find-lang-by-id.query-handler';
-import { MockLangRepository } from '../../../../../@apps/common/lang/infrastructure/mock/mock-lang.repository';
-import { langs } from '../../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
-import { ILangRepository } from '../../../../../@apps/common/lang/domain/lang.repository';
-import { LangMapper } from '../../../../../@apps/common/lang/domain/lang.mapper';
+import { MockLangRepository } from '@apps/common/lang/infrastructure/mock/mock-lang.repository';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { ILangRepository } from '@apps/common/lang/domain/lang.repository';
+import { LangMapper } from '@apps/common/lang/domain/lang.mapper';
 import { FindLangByIdQuery } from './find-lang-by-id.query';
 import { FindLangByIdService } from './find-lang-by-id.service';
 
@@ -23,17 +23,17 @@ describe('FindLangByIdQueryHandler', () =>
                 FindLangByIdQueryHandler,
                 {
                     provide : ILangRepository,
-                    useClass: MockLangRepository
+                    useClass: MockLangRepository,
                 },
                 {
                     provide : FindLangByIdService,
                     useValue: {
-                        main: () => {},
-                    }
-                }
-            ]
+                        main: () => { /**/ },
+                    },
+                },
+            ],
         })
-        .compile();
+            .compile();
 
         queryHandler    = module.get<FindLangByIdQueryHandler>(FindLangByIdQueryHandler);
         service         = module.get<FindLangByIdService>(FindLangByIdService);
@@ -55,7 +55,7 @@ describe('FindLangByIdQueryHandler', () =>
                 new FindLangByIdQuery(
                     langs[0].id,
 
-                )
+                ),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

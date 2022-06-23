@@ -1,5 +1,6 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
+import { CQMetadata } from 'aurora-ts-core';
 import {
     CountryId,
     CountryIso3166Alpha2,
@@ -23,10 +24,10 @@ import {
     CountryI18NAdministrativeAreaLevel1,
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
-} from './../../domain/value-objects';
-import { ICountryRepository } from './../../domain/country.repository';
-import { ICountryI18NRepository } from './../../domain/country-i18n.repository';
-import { CommonCountry } from './../../domain/country.aggregate';
+} from '../../domain/value-objects';
+import { ICountryRepository } from '../../domain/country.repository';
+import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { CommonCountry } from '../../domain/country.aggregate';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -38,27 +39,28 @@ export class CreateCountryService
         private readonly repositoryI18n: ICountryI18NRepository,
     ) {}
 
-    public async main(
+    async main(
         payload: {
-            id: CountryId,
-            iso3166Alpha2: CountryIso3166Alpha2,
-            iso3166Alpha3: CountryIso3166Alpha3,
-            iso3166Numeric: CountryIso3166Numeric,
-            customCode: CountryCustomCode,
-            prefix: CountryPrefix,
-            image: CountryImage,
-            sort: CountrySort,
-            administrativeAreas: CountryAdministrativeAreas,
-            latitude: CountryLatitude,
-            longitude: CountryLongitude,
-            zoom: CountryZoom,
-            langId: CountryI18NLangId,
-            name: CountryI18NName,
-            slug: CountryI18NSlug,
-            administrativeAreaLevel1: CountryI18NAdministrativeAreaLevel1,
-            administrativeAreaLevel2: CountryI18NAdministrativeAreaLevel2,
-            administrativeAreaLevel3: CountryI18NAdministrativeAreaLevel3,
-        }
+            id: CountryId;
+            iso3166Alpha2: CountryIso3166Alpha2;
+            iso3166Alpha3: CountryIso3166Alpha3;
+            iso3166Numeric: CountryIso3166Numeric;
+            customCode: CountryCustomCode;
+            prefix: CountryPrefix;
+            image: CountryImage;
+            sort: CountrySort;
+            administrativeAreas: CountryAdministrativeAreas;
+            latitude: CountryLatitude;
+            longitude: CountryLongitude;
+            zoom: CountryZoom;
+            langId: CountryI18NLangId;
+            name: CountryI18NName;
+            slug: CountryI18NSlug;
+            administrativeAreaLevel1: CountryI18NAdministrativeAreaLevel1;
+            administrativeAreaLevel2: CountryI18NAdministrativeAreaLevel2;
+            administrativeAreaLevel3: CountryI18NAdministrativeAreaLevel3;
+        },
+        cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // create aggregate with factory pattern
@@ -96,14 +98,14 @@ export class CreateCountryService
 
             // add new lang id to data lang field to create or update field
             country.dataLang = new CountryDataLang(_.union(countryInDB.dataLang.value, [country.langId.value]));
-            await this.repository.update(country, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'dataLang') });
+            await this.repository.update(country, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'dataLang'), updateOptions: cQMetadata?.repositoryOptions });
         }
         catch (error)
         {
             if (error instanceof NotFoundException)
             {
                 country.dataLang = new CountryDataLang([country.langId.value]);
-                await this.repository.create(country);
+                await this.repository.create(country, { createOptions: cQMetadata?.repositoryOptions });
             }
         }
 
@@ -117,13 +119,16 @@ export class CreateCountryService
                         countryId: aggregate['id']['value'],
                         langId: aggregate['langId']['value'],
                     }
-                })
+                }),
+                {
+                    createOptions: cQMetadata?.repositoryOptions
+                },
             }
         );
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const countryRegister = this.publisher.mergeObjectContext(
-            country
+            country,
         );
 
         countryRegister.created(country); // apply event to model events

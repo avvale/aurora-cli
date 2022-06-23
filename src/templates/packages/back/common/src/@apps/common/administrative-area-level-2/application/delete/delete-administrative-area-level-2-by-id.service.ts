@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from 'aurora-ts-core';
 import { CQMetadata } from 'aurora-ts-core';
-import { AdministrativeAreaLevel2Id } from './../../domain/value-objects';
-import { IAdministrativeAreaLevel2Repository } from './../../domain/administrative-area-level-2.repository';
+import { AdministrativeAreaLevel2Id } from '../../domain/value-objects';
+import { IAdministrativeAreaLevel2Repository } from '../../domain/administrative-area-level-2.repository';
 
 @Injectable()
 export class DeleteAdministrativeAreaLevel2ByIdService
@@ -13,14 +13,24 @@ export class DeleteAdministrativeAreaLevel2ByIdService
         private readonly repository: IAdministrativeAreaLevel2Repository,
     ) {}
 
-    public async main(id: AdministrativeAreaLevel2Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
+    async main(
+        id: AdministrativeAreaLevel2Id,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<void>
     {
         // get object to delete
         const administrativeAreaLevel2 = await this.repository.findById(id, { constraint, cQMetadata });
 
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
-        await this.repository.deleteById(administrativeAreaLevel2.id, { cQMetadata });
+        await this.repository.deleteById(
+            administrativeAreaLevel2.id,
+            {
+                deleteOptions: cQMetadata?.repositoryOptions,
+                cQMetadata,
+            },
+        );
 
         // insert EventBus in object, to be able to apply and commit events
         const administrativeAreaLevel2Register = this.publisher.mergeObjectContext(administrativeAreaLevel2);

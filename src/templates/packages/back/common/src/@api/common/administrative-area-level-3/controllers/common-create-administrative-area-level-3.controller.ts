@@ -1,32 +1,31 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { ICommandBus, IQueryBus, Timezone } from 'aurora-ts-core';
-import { CreateAdministrativeAreaLevel3Dto } from './../dto/create-administrative-area-level-3.dto';
-import { AdministrativeAreaLevel3Dto } from './../dto/administrative-area-level-3.dto';
+import { Timezone } from 'aurora-ts-core';
+import { CommonAdministrativeAreaLevel3Dto, CommonCreateAdministrativeAreaLevel3Dto } from '../dto';
 
 // @apps
-import { FindAdministrativeAreaLevel3ByIdQuery } from '../../../../@apps/common/administrative-area-level-3/application/find/find-administrative-area-level-3-by-id.query';
-import { CreateAdministrativeAreaLevel3Command } from '../../../../@apps/common/administrative-area-level-3/application/create/create-administrative-area-level-3.command';
+import { CommonCreateAdministrativeAreaLevel3Handler } from '../handlers/common-create-administrative-area-level-3.handler';
 
 @ApiTags('[common] administrative-area-level-3')
-@Controller('common/administrative-area-level-3')
+@Controller('common/administrative-area-level-3/create')
 export class CommonCreateAdministrativeAreaLevel3Controller
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
+        private readonly handler: CommonCreateAdministrativeAreaLevel3Handler,
     ) {}
 
     @Post()
     @ApiOperation({ summary: 'Create administrative-area-level-3' })
-    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: AdministrativeAreaLevel3Dto })
+    @ApiCreatedResponse({ description: 'The record has been successfully created.', type: CommonAdministrativeAreaLevel3Dto })
     async main(
-        @Body() payload: CreateAdministrativeAreaLevel3Dto,
+        @Body() payload: CommonCreateAdministrativeAreaLevel3Dto,
         @Timezone() timezone?: string,
     )
     {
-        await this.commandBus.dispatch(new CreateAdministrativeAreaLevel3Command(payload, { timezone }));
-
-        return await this.queryBus.ask(new FindAdministrativeAreaLevel3ByIdQuery(payload.id, {}, { timezone }));
+        return await this.handler.main(
+            payload,
+            timezone,
+        );
     }
 }

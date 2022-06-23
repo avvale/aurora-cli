@@ -56,8 +56,16 @@ describe('IamPaginatePermissionsHandler', () =>
 
         test('should return a permissions', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions)));
-            expect(await handler.main()).toBe(permissions);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: permissions.length,
+                count: permissions.length,
+                rows : permissions,
+            })));
+            expect(await handler.main()).toEqual({
+                total: permissions.length,
+                count: permissions.length,
+                rows : permissions,
+            });
         });
     });
 });

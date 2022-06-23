@@ -4,8 +4,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { CreateAdministrativeAreasLevel2Service } from './create-administrative-areas-level-2.service';
-import { IAdministrativeAreaLevel2Repository } from './../../domain/administrative-area-level-2.repository';
-import { MockAdministrativeAreaLevel2Repository } from './../../infrastructure/mock/mock-administrative-area-level-2.repository';
+import { IAdministrativeAreaLevel2Repository } from '../../domain/administrative-area-level-2.repository';
+import { MockAdministrativeAreaLevel2Repository } from '../../infrastructure/mock/mock-administrative-area-level-2.repository';
 
 describe('CreateAdministrativeAreasLevel2Service', () =>
 {
@@ -25,11 +25,12 @@ describe('CreateAdministrativeAreasLevel2Service', () =>
                 {
                     provide : IAdministrativeAreaLevel2Repository,
                     useValue: {
-                        insert: (items) => { /**/ },
-                    }
+                        insert: () => { /**/ },
+                    },
                 },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
         service         = module.get(CreateAdministrativeAreasLevel2Service);
         repository      = module.get(IAdministrativeAreaLevel2Repository);
@@ -46,7 +47,7 @@ describe('CreateAdministrativeAreasLevel2Service', () =>
         test('should create administrativeAreasLevel2 and emit event', async () =>
         {
             expect(await service.main(
-                mockRepository.collectionSource
+                mockRepository.collectionSource,
             )).toBe(undefined);
         });
     });

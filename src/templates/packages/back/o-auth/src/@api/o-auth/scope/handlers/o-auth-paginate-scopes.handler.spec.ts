@@ -56,8 +56,16 @@ describe('OAuthPaginateScopesHandler', () =>
 
         test('should return a scopes', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(scopes)));
-            expect(await handler.main()).toBe(scopes);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+                total: scopes.length,
+                count: scopes.length,
+                rows : scopes,
+            })));
+            expect(await handler.main()).toEqual({
+                total: scopes.length,
+                count: scopes.length,
+                rows : scopes,
+            });
         });
     });
 });

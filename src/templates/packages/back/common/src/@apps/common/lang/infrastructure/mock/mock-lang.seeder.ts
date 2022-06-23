@@ -14,9 +14,10 @@ import {
     LangCreatedAt,
     LangUpdatedAt,
     LangDeletedAt,
-} from './../../domain/value-objects';
-import { CommonLang } from './../../domain/lang.aggregate';
-import { langs } from './../seeds/lang.seed';
+} from '../../domain/value-objects';
+import { CommonLang } from '../../domain/lang.aggregate';
+import { langs } from '../seeds/lang.seed';
+import * as _ from 'lodash';
 
 @Injectable()
 export class MockLangSeeder extends MockSeeder<CommonLang>
@@ -33,7 +34,7 @@ export class MockLangSeeder extends MockSeeder<CommonLang>
     {
         this.collectionSource = [];
 
-        for (const lang of langs)
+        for (const lang of _.orderBy(langs, ['id']))
         {
             this.collectionSource.push(
                 CommonLang.register(
@@ -50,7 +51,7 @@ export class MockLangSeeder extends MockSeeder<CommonLang>
                     new LangCreatedAt({ currentTimestamp: true }),
                     new LangUpdatedAt({ currentTimestamp: true }),
                     new LangDeletedAt(null),
-                )
+                ),
             );
         }
     }

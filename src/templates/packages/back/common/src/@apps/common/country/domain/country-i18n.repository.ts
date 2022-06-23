@@ -1,5 +1,6 @@
 
-import { IRepository, ObjectLiteral, QueryStatement } from 'aurora-ts-core';
+import { LiteralObject } from '@nestjs/common';
+import { IRepository, QueryStatement } from 'aurora-ts-core';
 import { CQMetadata, Pagination } from 'aurora-ts-core';
 import { CommonCountry } from './country.aggregate';
 import { CountryId } from './value-objects';
@@ -61,8 +62,10 @@ export abstract class ICountryI18NRepository implements IRepository<CommonCountr
     abstract create(
         country: CommonCountry,
         options?: {
-            dataFactory?: (aggregate: CommonCountry) => ObjectLiteral;
-            finderQueryStatement: (aggregate: CommonCountry) => QueryStatement;
+            createOptions?: LiteralObject;
+            dataFactory?: (aggregate: CommonCountry) => LiteralObject;
+            // arguments to find object and check if object is duplicated
+            finderQueryStatement?: (aggregate: CommonCountry) => QueryStatement;
         }
     ): Promise<void>;
 
@@ -70,19 +73,33 @@ export abstract class ICountryI18NRepository implements IRepository<CommonCountr
     abstract insert(
         countries: CommonCountry[],
         options?: {
-            insertOptions?: ObjectLiteral;
-            dataFactory?: (aggregate: CommonCountry) => ObjectLiteral;
+            insertOptions?: LiteralObject;
+            dataFactory?: (aggregate: CommonCountry) => LiteralObject;
         }
     ): Promise<void>;
 
-    // update record
+    // update record by id
+    abstract updateById(
+        country: CommonCountry,
+        options?: {
+            updateByIdOptions?: LiteralObject;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonCountry) => LiteralObject;
+            // arguments to find object to update, with i18n we use langId and id relationship with parent entity
+            findArguments?: LiteralObject;
+        }
+    ): Promise<void>;
+
+    // update records
     abstract update(
         country: CommonCountry,
         options?: {
+            updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: CommonCountry) => ObjectLiteral;
-            findArguments?: ObjectLiteral;
+            dataFactory?: (aggregate: CommonCountry) => LiteralObject;
         }
     ): Promise<void>;
 
@@ -90,6 +107,7 @@ export abstract class ICountryI18NRepository implements IRepository<CommonCountr
     abstract deleteById(
         id: CountryId,
         options?: {
+            deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
         }
@@ -98,6 +116,7 @@ export abstract class ICountryI18NRepository implements IRepository<CommonCountr
     // delete records
     abstract delete(
         options?: {
+            deleteOptions?: LiteralObject;
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;

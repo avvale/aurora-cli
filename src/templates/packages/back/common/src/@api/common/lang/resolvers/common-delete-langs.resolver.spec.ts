@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonDeleteLangsResolver } from './common-delete-langs.resolver';
+import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 // sources
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonDeleteLangsResolver', () =>
 {
     let resolver: CommonDeleteLangsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonDeleteLangsHandler;
 
     beforeAll(async () =>
     {
@@ -22,23 +21,17 @@ describe('CommonDeleteLangsResolver', () =>
             providers: [
                 CommonDeleteLangsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonDeleteLangsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        resolver    = module.get<CommonDeleteLangsResolver>(CommonDeleteLangsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonDeleteLangsResolver>(CommonDeleteLangsResolver);
+        handler = module.get<CommonDeleteLangsHandler>(CommonDeleteLangsHandler);
     });
 
     test('CommonDeleteLangsResolver should be defined', () =>
@@ -55,7 +48,7 @@ describe('CommonDeleteLangsResolver', () =>
 
         test('should return an langs deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs)));
             expect(await resolver.main()).toBe(langs);
         });
     });

@@ -10,7 +10,7 @@ export class LangDir extends EnumValueObject
             name       : 'LangDir',
             nullable   : false,
             undefinable: false,
-            enumOptions:  ['LTR','RTL'],
+            enumOptions: ['LTR','RTL'],
         }, validationRules));
     }
 }

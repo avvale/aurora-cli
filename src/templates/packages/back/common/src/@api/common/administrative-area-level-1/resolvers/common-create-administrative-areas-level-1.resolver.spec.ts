@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateAdministrativeAreasLevel1Resolver } from './common-create-administrative-areas-level-1.resolver';
-import { administrativeAreasLevel1 } from '../../../../@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
-import { CommonCreateAdministrativeAreaLevel1Input } from './../../../../graphql';
+import { CommonCreateAdministrativeAreasLevel1Handler } from '../handlers/common-create-administrative-areas-level-1.handler';
+import { CommonCreateAdministrativeAreaLevel1Input } from '../../../../graphql';
+
+// sources
+import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
 describe('CommonCreateAdministrativeAreasLevel1Resolver', () =>
 {
     let resolver: CommonCreateAdministrativeAreasLevel1Resolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateAdministrativeAreasLevel1Handler;
 
     beforeAll(async () =>
     {
@@ -18,24 +19,17 @@ describe('CommonCreateAdministrativeAreasLevel1Resolver', () =>
             providers: [
                 CommonCreateAdministrativeAreasLevel1Resolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateAdministrativeAreasLevel1Handler,
                     useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
+                        main: () => { /**/ },
                     },
                 },
             ],
         })
             .compile();
 
-        resolver    = module.get<CommonCreateAdministrativeAreasLevel1Resolver>(CommonCreateAdministrativeAreasLevel1Resolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonCreateAdministrativeAreasLevel1Resolver>(CommonCreateAdministrativeAreasLevel1Resolver);
+        handler = module.get<CommonCreateAdministrativeAreasLevel1Handler>(CommonCreateAdministrativeAreasLevel1Handler);
     });
 
     test('CommonCreateAdministrativeAreasLevel1Resolver should be defined', () =>
@@ -52,7 +46,7 @@ describe('CommonCreateAdministrativeAreasLevel1Resolver', () =>
 
         test('should return an administrativeAreasLevel1 created', async () =>
         {
-            expect(await resolver.main(<CommonCreateAdministrativeAreaLevel1Input[]>administrativeAreasLevel1)).toBe(true);
+            expect(await resolver.main(<CommonCreateAdministrativeAreaLevel1Input[]>administrativeAreasLevel1)).toBe(undefined);
         });
     });
 });

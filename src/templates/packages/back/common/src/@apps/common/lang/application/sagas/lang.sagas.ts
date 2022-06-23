@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { CreatedLangEvent } from './../events/created-lang.event';
+import { CreatedLangEvent } from '../events/created-lang.event';
 
 @Injectable()
 export class LangSagas

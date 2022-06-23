@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { administrativeAreasLevel1 } from '../../../../../@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 import { FindAdministrativeAreaLevel1ByIdService } from './find-administrative-area-level-1-by-id.service';
-import { AdministrativeAreaLevel1Id } from './../../domain/value-objects';
-import { IAdministrativeAreaLevel1Repository } from './../../domain/administrative-area-level-1.repository';
-import { MockAdministrativeAreaLevel1Repository } from './../../infrastructure/mock/mock-administrative-area-level-1.repository';
+import { AdministrativeAreaLevel1Id } from '../../domain/value-objects';
+import { IAdministrativeAreaLevel1Repository } from '../../domain/administrative-area-level-1.repository';
+import { MockAdministrativeAreaLevel1Repository } from '../../infrastructure/mock/mock-administrative-area-level-1.repository';
 
 describe('FindAdministrativeAreaLevel1ByIdService', () =>
 {
@@ -24,13 +24,14 @@ describe('FindAdministrativeAreaLevel1ByIdService', () =>
                 FindAdministrativeAreaLevel1ByIdService,
                 MockAdministrativeAreaLevel1Repository,
                 {
-                    provide: IAdministrativeAreaLevel1Repository,
+                    provide : IAdministrativeAreaLevel1Repository,
                     useValue: {
-                        findById: id => { /**/ }
-                    }
-                }
-            ]
-        }).compile();
+                        findById: id => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(FindAdministrativeAreaLevel1ByIdService);
         repository      = module.get(IAdministrativeAreaLevel1Repository);
@@ -48,7 +49,7 @@ describe('FindAdministrativeAreaLevel1ByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new AdministrativeAreaLevel1Id(administrativeAreasLevel1[0].id)
+                new AdministrativeAreaLevel1Id(administrativeAreasLevel1[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

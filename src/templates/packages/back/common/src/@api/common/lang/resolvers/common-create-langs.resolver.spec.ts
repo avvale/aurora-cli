@@ -1,16 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonCreateLangsResolver } from './common-create-langs.resolver';
-import { langs } from '../../../../@apps/common/lang/infrastructure/seeds/lang.seed';
-import { CommonCreateLangInput } from './../../../../graphql';
+import { CommonCreateLangsHandler } from '../handlers/common-create-langs.handler';
+import { CommonCreateLangInput } from '../../../../graphql';
+
+// sources
+import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonCreateLangsResolver', () =>
 {
     let resolver: CommonCreateLangsResolver;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+    let handler: CommonCreateLangsHandler;
 
     beforeAll(async () =>
     {
@@ -18,23 +19,17 @@ describe('CommonCreateLangsResolver', () =>
             providers: [
                 CommonCreateLangsResolver,
                 {
-                    provide : IQueryBus,
+                    provide : CommonCreateLangsHandler,
                     useValue: {
-                        ask: () => { /**/ },
-                    }
+                        main: () => { /**/ },
+                    },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    }
-                },
-            ]
-        }).compile();
+            ],
+        })
+            .compile();
 
-        resolver    = module.get<CommonCreateLangsResolver>(CommonCreateLangsResolver);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        resolver = module.get<CommonCreateLangsResolver>(CommonCreateLangsResolver);
+        handler = module.get<CommonCreateLangsHandler>(CommonCreateLangsHandler);
     });
 
     test('CommonCreateLangsResolver should be defined', () =>
@@ -51,7 +46,7 @@ describe('CommonCreateLangsResolver', () =>
 
         test('should return an langs created', async () =>
         {
-            expect(await resolver.main(<CommonCreateLangInput[]>langs)).toBe(true);
+            expect(await resolver.main(<CommonCreateLangInput[]>langs)).toBe(undefined);
         });
     });
 });

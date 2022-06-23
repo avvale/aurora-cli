@@ -3,8 +3,8 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { GetAdministrativeAreasLevel2Service } from './get-administrative-areas-level-2.service';
-import { IAdministrativeAreaLevel2Repository } from './../../domain/administrative-area-level-2.repository';
-import { MockAdministrativeAreaLevel2Repository } from './../../infrastructure/mock/mock-administrative-area-level-2.repository';
+import { IAdministrativeAreaLevel2Repository } from '../../domain/administrative-area-level-2.repository';
+import { MockAdministrativeAreaLevel2Repository } from '../../infrastructure/mock/mock-administrative-area-level-2.repository';
 
 describe('GetAdministrativeAreasLevel2Service', () =>
 {
@@ -22,13 +22,14 @@ describe('GetAdministrativeAreasLevel2Service', () =>
                 GetAdministrativeAreasLevel2Service,
                 MockAdministrativeAreaLevel2Repository,
                 {
-                    provide: IAdministrativeAreaLevel2Repository,
+                    provide : IAdministrativeAreaLevel2Repository,
                     useValue: {
-                        get: (queryStatement) => {}
-                    }
-                }
-            ]
-        }).compile();
+                        get: () => { /**/ },
+                    },
+                },
+            ],
+        })
+            .compile();
 
         service         = module.get(GetAdministrativeAreasLevel2Service);
         repository      = module.get(IAdministrativeAreaLevel2Repository);
