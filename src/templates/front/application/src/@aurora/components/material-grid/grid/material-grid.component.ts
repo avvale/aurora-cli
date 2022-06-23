@@ -1,13 +1,19 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ActionEvent, ColumnConfig, ColumnConfigAction, ColumnDataType, GridData, GridTranslations, PageChangeEvent, FilterEvent } from '../grid.types';
+// angular
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
+import { CommonLang } from '@aurora/modules';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
-import { merge, Subject, tap } from 'rxjs';
-import cloneDeep from 'lodash-es/cloneDeep';
+
+// aurora
+import { ActionEvent, ColumnConfig, ColumnConfigAction, ColumnDataType, GridData, GridTranslations, PageChangeEvent, FilterEvent } from '../grid.types';
+import { CellValueTemplateDirective } from '../directives/cell-value-template.directive';
 import { ColumnsDialogComponent } from '../columns-dialog/columns-dialog.component';
 import { FullFilterDialogComponent } from '../full-filter-dialog/full-filter-dialog.component';
-import { CommonLang } from '@aurora/modules';
+
+// third party libraries
+import { merge, Subject, tap } from 'rxjs';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 @Component({
     selector       : 'au-material-grid',
@@ -31,6 +37,9 @@ export class MaterialGridComponent implements OnInit, AfterViewInit
     // view children
     @ViewChild(MatPaginator) private paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
+
+    // directive to ser custom values in cells
+    @ContentChildren(CellValueTemplateDirective) cellValuesTemplate?: QueryList<CellValueTemplateDirective>;
 
     // outputs
     @Output() pageChange = new EventEmitter<PageChangeEvent>();

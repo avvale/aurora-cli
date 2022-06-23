@@ -35,6 +35,13 @@
             (filtersChange)="onRunAction({ id: 'pagination', data: { event: $event }})"
             (columnsConfigChanged)="handleColumnsConfigChanged($event)"
         >
+            <ng-template
+                auCellValueTemplate
+                let-value
+                let-columnConfig="columnConfig"
+                field="customCode">
+                {{ value }} (data transformed with template)
+            </ng-template>
         </au-material-grid>
         <!-- / Grid -->
 

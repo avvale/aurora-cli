@@ -30,7 +30,10 @@
                                 [sticky]="columnConfig.sticky">
 
                     <!-- ngSwitch for grid cell -->
-                    <ng-container [ngSwitch]="columnConfig.type" *ngIf="!columnConfig.hidden">
+                    <ng-container
+                        [ngSwitch]="columnConfig.type"
+                        *ngIf="!columnConfig.hidden"
+                    >
 
                         <!-- STRING -->
                         <ng-container *ngSwitchCase="columnConfigType.STRING">
@@ -46,7 +49,23 @@
                                 }}
                             </th>
                             <td mat-cell *matCellDef="let element">
-                                {{ element | get:columnConfig.field }}
+                                <!-- set value by template -->
+                                <div *ngFor="let cellValueTemplate of cellValuesTemplate">
+                                    <div *ngIf="(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
+                                        <ng-container
+                                            *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: element | get:columnConfig.field, columnConfig }"
+                                        ></ng-container>
+                                    </div>
+                                    <div *ngIf="!(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
+                                        <ng-container
+                                            *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: element | get:columnConfig.field, columnConfig }"
+                                        ></ng-container>
+                                    </div>
+                                </div>
+                                <!-- set value by columns config transform -->
+                                <div *ngIf="!(cellValuesTemplate | hasCellValueTemplate:columnConfig)">
+                                    {{ element | get:columnConfig.field | transformDataCell:columnConfig.transform }}
+                                </div>
                             </td>
                         </ng-container>
 

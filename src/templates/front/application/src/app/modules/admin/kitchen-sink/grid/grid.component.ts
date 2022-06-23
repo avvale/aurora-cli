@@ -45,7 +45,8 @@ export class GridComponent extends ViewBaseComponent
             type       : ColumnDataType.STRING,
             field      : 'code',
             sort       : 'code',
-            translation: '',
+            translation: 'Code',
+            transform  : data => data + ' (data transformed with colum config)',
         },
         {
             type       : ColumnDataType.STRING,

@@ -56,6 +56,7 @@ export interface ColumnConfig
     headerClass?: string | string[];
     sticky?: boolean;
     actions?: (item: any) => ColumnConfigAction[];
+    transform?: (item: any) => any;
 }
 
 export interface FilterEvent
