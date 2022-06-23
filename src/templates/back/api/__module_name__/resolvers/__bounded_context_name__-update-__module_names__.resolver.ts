@@ -2,7 +2,7 @@
 import { UseGuards } from '@nestjs/common';
 {{/if}}
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Constraint, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -43,7 +43,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Args('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {

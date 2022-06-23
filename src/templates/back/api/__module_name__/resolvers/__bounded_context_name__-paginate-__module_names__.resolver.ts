@@ -2,7 +2,7 @@
 import { UseGuards } from '@nestjs/common';
 {{/if}}
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -42,7 +42,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Args('query') queryStatement?: QueryStatement,
-        @Constraint() constraint?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         {{#if schema.properties.hasI18n}}
         @ContentLanguage() contentLanguage?: string,

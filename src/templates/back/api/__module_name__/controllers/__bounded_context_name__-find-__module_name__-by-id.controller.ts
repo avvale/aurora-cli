@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Get, Param{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
+import { Body, Controller, HttpCode, Param, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Constraint, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 
 {{#if schema.hasOAuth}}
@@ -33,7 +33,8 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         private readonly handler: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler,
     ) {}
 
-    @Get(':id')
+    @Post(':id')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Find {{ toKebabCase schema.moduleName }} by id' })
     @ApiOkResponse({ description: 'The record has been successfully created.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
@@ -44,7 +45,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Constraint() constraint?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         {{#if schema.properties.hasI18n}}
         @ContentLanguage() contentLanguage?: string,
