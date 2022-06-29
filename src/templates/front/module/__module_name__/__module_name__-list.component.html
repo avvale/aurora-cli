@@ -79,7 +79,7 @@
                     *ngFor="let columnConfig of columnsConfig"
                     [field]="columnConfig.field"
                 >
-                    {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                    \{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
                 </au-grid-column-translation>
             </au-grid-translations>
         </au-grid>

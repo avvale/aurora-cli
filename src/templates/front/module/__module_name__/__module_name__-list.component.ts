@@ -21,25 +21,28 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     gridTranslations$: Observable<any>;
     columnsConfig: ColumnConfig[] = [
         {
-            type       : ColumnDataType.ACTIONS,
-            field      : 'Actions',
-            headerClass: 'w-32',
-            sticky     : true,
-            actions    : () =>
+            type   : ColumnDataType.ACTIONS,
+            field  : 'Actions',
+            sticky : true,
+            actions: () =>
             {
                 return [
                     {
-                        id         : 'edit',
-                        icon       : 'mode_edit',
-                        translation: 'Edit',
+                        id  : 'edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id         : 'delete',
-                        icon       : 'delete',
-                        translation: 'Delete',
+                        id  : 'delete',
+                        icon: 'delete',
                     },
                 ];
             },
+        },
+        {
+            type       : ColumnDataType.CHECKBOX,
+            field      : 'select',
+            translation: 'Selects',
+            sticky     : true,
         },
         {{#each schema.properties.gridFields}}
         {{#if (allowProperty ../schema.moduleName this) }}
