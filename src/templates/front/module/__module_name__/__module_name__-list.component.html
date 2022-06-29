@@ -32,15 +32,57 @@
         cdkScrollable>
 
         <!-- Grid -->
-        <au-material-grid
+        <au-grid
             [columnsConfig]="columnsConfig"
             [data]="gridData$ | async"
-            [translations]="gridTranslations$ | async"
             (action)="onRunAction({ id: $event.action.id, data: { event: $event }})"
-            (pageChange)="onRunAction({ id: 'pagination', data: { event: $event }})"
-            (columnsConfigChanged)="handleColumnsConfigChanged($event)"
+            (stateChange)="handleStateChange($event)"
         >
-        </au-material-grid>
+            <au-grid-translations
+                [actions]="t('Actions')"
+                [AND]="t('AND')"
+                [clearFilters]="t('ClearFilters')"
+                [clickAndDragInfo]="t('ClickAndDragInfo')"
+                [columns]="t('Columns')"
+                [field]="t('Field')"
+                [filter]="t('Filter')"
+                [operator]="t('Operator')"
+                [OR]="t('OR')"
+                [pleaseSelectField]="t('PleaseSelectField')"
+                [translations]="t('Translations')"
+                [value]="t('Value')"
+                [paginator]="{
+                    firstPageLabel: t('Paginator.FirstPageLabel'),
+                    itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
+                    lastPageLabel: t('Paginator.LastPageLabel'),
+                    nextPageLabel: t('Paginator.NextPageLabel'),
+                    ofLabel: t('Paginator.OfLabel'),
+                    previousPageLabel: t('Paginator.PreviousPageLabel')
+                }"
+                [operators]="{
+                    contains: t('Operators.Contains'),
+                    endsWith: t('Operators.EndsWith'),
+                    equals: t('Operators.Equals'),
+                    greaterThan: t('Operators.GreaterThan'),
+                    greaterThanEqual: t('Operators.GreaterThanEqual'),
+                    lessThan: t('Operators.LessThan'),
+                    lessThanEqual: t('Operators.LessThanEqual'),
+                    notEquals: t('Operators.NotEquals'),
+                    startsWith: t('Operators.StartsWith')
+                }"
+                [actionsMenu]="{
+                    edit: t('Edit'),
+                    delete: t('Delete')
+                }"
+            >
+                <au-grid-column-translation
+                    *ngFor="let columnConfig of columnsConfig"
+                    [field]="columnConfig.field"
+                >
+                    {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                </au-grid-column-translation>
+            </au-grid-translations>
+        </au-grid>
         <!-- / Grid -->
 
     </div>

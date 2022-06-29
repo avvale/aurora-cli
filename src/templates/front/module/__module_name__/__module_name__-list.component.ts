@@ -1,6 +1,6 @@
 
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, setQueryFilters, ViewBaseComponent } from '@aurora';
 import { combineLatest, lastValueFrom, map, Observable } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
@@ -73,9 +73,9 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             );
     }
 
-    handleColumnsConfigChanged($event): void
+    handleStateChange($event): void
     {
-        //
+        this.onRunAction({ id: 'pagination', data: { event: setQueryFilters($event) }});
     }
 
     async onRunAction(action: Action): Promise<void>
