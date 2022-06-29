@@ -3,9 +3,8 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 
 // imports
-import { Command, Flags } from '@oclif/core';
-import * as shell from 'child_process';
-import * as ora from 'ora';
+import { Command, Flags, CliUx } from '@oclif/core';
+import * as shell from 'node:child_process';
 import { Operations, StateService } from '../../@cliter';
 
 export default class New extends Command
@@ -56,7 +55,7 @@ export default class New extends Command
                 break;
         }
 
-        const dependenciesSpinner = ora('Installing dependencies').start();
+        CliUx.ux.action.start('Installing dependencies');
 
         shell.exec(`cd ${args.name} && npm install`, (error, stdout, stderr) =>
         {
@@ -71,7 +70,7 @@ export default class New extends Command
                 this.log(`${stdout}`);
             }
 
-            dependenciesSpinner.succeed('Dependencies installed');
+            CliUx.ux.action.stop('Dependencies installed');
 
             if (!flags.package && !flags.dashboard)
             {

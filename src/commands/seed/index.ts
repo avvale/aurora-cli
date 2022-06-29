@@ -1,11 +1,10 @@
-import { Command, Flags } from '@oclif/core';
-import * as shell from 'child_process';
-import * as fs from 'fs';
+import { Command, CliUx, Flags } from '@oclif/core';
+import * as shell from 'node:child_process';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import * as chalk from 'chalk';
-import * as path from 'path';
 import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
-import * as ora from 'ora';
 import { TemplateElement, Operations, Prompter, cliterConfig } from '../../@cliter';
 
 export default class Seed extends Command
@@ -47,11 +46,11 @@ export default class Seed extends Command
             // check if seeder class exists in @api tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
-                const environmentSpinner = ora('Creating environment').start();
+                CliUx.ux.action.start('Creating environment');
 
                 shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, (error, stdout, stderr) =>
                 {
-                    environmentSpinner.succeed('Environment created');
+                    CliUx.ux.action.stop('Environment created');
                     this.log(`%s %s Module seed ${moduleName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
 
                     if (flags.log && error) console.error(error);
@@ -72,11 +71,11 @@ export default class Seed extends Command
             // check if seeder class exists in @api tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
-                const environmentSpinner = ora('Creating environment').start();
+                CliUx.ux.action.start('Creating environment');
 
                 shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, (error, stdout, stderr) =>
                 {
-                    environmentSpinner.succeed('Environment created');
+                    CliUx.ux.action.stop('Environment created');
                     this.log(`%s %s Bounded Context seed ${boundedContextName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
                 });
             }

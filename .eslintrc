@@ -37,10 +37,11 @@
         }],
         "no-return-await": "error",
         "node/no-extraneous-import": ["error", {
-            "allowModules": ["chalk", "lodash", "log-symbols"]
+            "allowModules": ["chalk", "lodash", "log-symbols", "ora"]
         }],
         "object-curly-spacing": ["error", "always", { "objectsInObjects": false, "arraysInObjects": false }],
         "quote-props": ["error", "as-needed"],
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "space-before-function-paren": "off"
     }
 }
