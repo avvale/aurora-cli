@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';

@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, setQueryFilters, ViewBaseComponent } from '@aurora';
 import { combineLatest, lastValueFrom, map, Observable } from 'rxjs';
