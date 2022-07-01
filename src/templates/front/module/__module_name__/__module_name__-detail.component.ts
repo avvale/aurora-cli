@@ -38,7 +38,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         this.actionService
             .action$
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe(action => this.onRunAction(action));
+            .subscribe(action => this.handleAction(action));
     }
 
     onSubmit(): void
@@ -74,7 +74,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         });
     }
 
-    async onRunAction(action: Action, properties: { pure: boolean; } = { pure: false }): Promise<void>
+    async handleAction(action: Action, properties: { pure: boolean; } = { pure: false }): Promise<void>
     {
         if (!properties.pure) this.currentActionId = action.id;
 

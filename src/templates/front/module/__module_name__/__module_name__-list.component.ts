@@ -77,10 +77,10 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     handleStateChange($event): void
     {
-        this.onRunAction({ id: 'pagination', data: { event: setQueryFilters($event) }});
+        this.handleAction({ id: 'pagination', data: { event: setQueryFilters($event) }});
     }
 
-    async onRunAction(action: Action, properties: { pure: boolean; } = { pure: false }): Promise<void>
+    async handleAction(action: Action, properties: { pure: boolean; } = { pure: false }): Promise<void>
     {
         if (!properties.pure) this.currentActionId = action.id;
 

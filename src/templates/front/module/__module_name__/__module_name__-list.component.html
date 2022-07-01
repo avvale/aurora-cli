@@ -35,7 +35,7 @@
         <au-grid
             [columnsConfig]="columnsConfig"
             [data]="gridData$ | async"
-            (action)="onRunAction({ id: $event.action.id, data: { event: $event }})"
+            (action)="handleAction({ id: $event.action.id, data: { event: $event }})"
             (stateChange)="handleStateChange($event)"
         >
             <au-grid-translations
