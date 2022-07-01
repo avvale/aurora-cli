@@ -23,7 +23,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             type   : ColumnDataType.ACTIONS,
             field  : 'Actions',
             sticky : true,
-            actions: () =>
+            actions: row =>
             {
                 return [
                     {
@@ -80,11 +80,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         this.onRunAction({ id: 'pagination', data: { event: setQueryFilters($event) }});
     }
 
-    async onRunAction(action: Action): Promise<void>
+    async onRunAction(action: Action, properties: { pure: boolean; } = { pure: false }): Promise<void>
     {
-        this.currentActionId = action.id;
+        if (!properties.pure) this.currentActionId = action.id;
 
-        switch (this.currentActionId)
+        switch (action.id)
         {
             case 'pagination':
                 await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination(action.data.event));

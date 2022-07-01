@@ -74,11 +74,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         });
     }
 
-    async onRunAction(action: Action): Promise<void>
+    async onRunAction(action: Action, properties: { pure: boolean; } = { pure: false }): Promise<void>
     {
-        this.currentActionId = action.id;
+        if (!properties.pure) this.currentActionId = action.id;
 
-        switch (this.currentActionId)
+        switch (action.id)
         {
             case 'new':
                 if (this.fg.get('id')) this.fg.get('id').setValue(Utils.uuid());
