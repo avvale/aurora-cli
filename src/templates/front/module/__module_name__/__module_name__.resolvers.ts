@@ -45,7 +45,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Action
     {
-        return this.actionService.action({ id: 'new' });
+        return this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new' });
     }
 }
 
@@ -69,7 +69,7 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{{ schema.aggregateName }}>
     {
-        this.actionService.action({ id: 'edit' });
+        this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit' });
         return this.{{ toCamelCase schema.moduleName }}Service.findById({ id: route.paramMap.get('id') });
     }
 }
