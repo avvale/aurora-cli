@@ -10,9 +10,9 @@ import { paginationQuery, getQuery, findByIdQuery, findQuery, createMutation, up
 })
 export class {{ toPascalCase schema.moduleName }}Service
 {
-    private _pagination: BehaviorSubject<GridData<{{ schema.aggregateName }}> | null> = new BehaviorSubject(null);
-    private _{{ toCamelCase schema.moduleName }}: BehaviorSubject<{{ schema.aggregateName }} | null> = new BehaviorSubject(null);
-    private _{{ toCamelCase schema.moduleNames }}: BehaviorSubject<{{ schema.aggregateName }}[] | null> = new BehaviorSubject(null);
+    paginationSubject$: BehaviorSubject<GridData<{{ schema.aggregateName }}> | null> = new BehaviorSubject(null);
+    {{ toCamelCase schema.moduleName }}Subject$: BehaviorSubject<{{ schema.aggregateName }} | null> = new BehaviorSubject(null);
+    {{ toCamelCase schema.moduleNames }}Subject$: BehaviorSubject<{{ schema.aggregateName }}[] | null> = new BehaviorSubject(null);
 
     constructor(
         private graphqlService: GraphQLService,
@@ -23,17 +23,17 @@ export class {{ toPascalCase schema.moduleName }}Service
     */
     get pagination$(): Observable<GridData<{{ schema.aggregateName }}>>
     {
-        return this._pagination.asObservable();
+        return this.paginationSubject$.asObservable();
     }
 
     get {{ toCamelCase schema.moduleName }}$(): Observable<{{ schema.aggregateName }}>
     {
-        return this._{{ toCamelCase schema.moduleName }}.asObservable();
+        return this.{{ toCamelCase schema.moduleName }}Subject$.asObservable();
     }
 
     get {{ toCamelCase schema.moduleNames }}$(): Observable<{{ schema.aggregateName }}[]>
     {
-        return this._{{ toCamelCase schema.moduleNames }}.asObservable();
+        return this.{{ toCamelCase schema.moduleNames }}Subject$.asObservable();
     }
 
     pagination(
@@ -71,7 +71,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map<{ data: { pagination: GridData<{{ schema.aggregateName }}>; };}, GridData<{{ schema.aggregateName }}>>(result => result.data.pagination),
-                tap((pagination: GridData<{{ schema.aggregateName }}>) => this._pagination.next(pagination)),
+                tap((pagination: GridData<{{ schema.aggregateName }}>) => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -95,7 +95,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map<{ data: { object: {{ schema.aggregateName }}; };}, {{ schema.aggregateName }}>(result => result.data.object),
-                tap((object: {{ schema.aggregateName }}) => this._{{ toCamelCase schema.moduleName }}.next(object)),
+                tap((object: {{ schema.aggregateName }}) => this.{{ toCamelCase schema.moduleName }}Subject$.next(object)),
             );
     }
 
@@ -119,7 +119,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map<{ data: { object: {{ schema.aggregateName }}; };}, {{ schema.aggregateName }}>(result => result.data.object),
-                tap((object: {{ schema.aggregateName }}) => this._{{ toCamelCase schema.moduleName }}.next(object)),
+                tap((object: {{ schema.aggregateName }}) => this.{{ toCamelCase schema.moduleName }}Subject$.next(object)),
             );
     }
 
@@ -146,7 +146,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map<{ data: { objects: {{ schema.aggregateName }}[]; };}, {{ schema.aggregateName }}[]>(result => result.data.objects),
-                tap((objects: {{ schema.aggregateName }}[]) => this._{{ toCamelCase schema.moduleNames }}.next(objects)),
+                tap((objects: {{ schema.aggregateName }}[]) => this.{{ toCamelCase schema.moduleNames }}Subject$.next(objects)),
             );
     }
 

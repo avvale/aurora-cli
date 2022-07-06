@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
@@ -14,8 +13,8 @@ import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase sc
 })
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent
 {
-    // custom data
-    currentActionId: string;
+    // ---- customizations ----
+    // ..
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
@@ -39,11 +38,20 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         this.actionService
             .action$
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe(action => this.onRunAction(action));
+            .subscribe(action => this.handleAction(action));
     }
 
-    onSubmit(): void
+    onSubmit($event): void
     {
+        // we have two nested forms, we check that the submit comes from the button
+        // that corresponds to the main form to the main form
+        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
+        {
+            $event.preventDefault();
+            $event.stopPropagation();
+            return;
+        }
+
         // manage validations before execute actions
         if (this.fg.invalid)
         {
@@ -52,7 +60,12 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             return;
         }
 
-        this.actionService.action({ id: mapActions(this.currentActionId, { new: 'create', edit: 'update' }) });
+        this.actionService.action({
+            id: mapActions(
+                this.currentViewAction.id,
+                { '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new': '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create', '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit': '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' }
+            ),
+        });
 
         this.snackBar.open(
             `${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')} ${this.translocoService.translate('Saved.M')}`,
@@ -75,24 +88,23 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         });
     }
 
-    async onRunAction(action: Action): Promise<void>
+    private async handleAction(action: Action): Promise<void>
     {
-        this.currentActionId = action.id;
-
-        switch (this.currentActionId)
+        // add optional chaining (?.) to avoid first call where behaviour subject is undefined
+        switch (action?.id)
         {
-            case 'new':
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new':
                 if (this.fg.get('id')) this.fg.get('id').setValue(Utils.uuid());
                 break;
 
-            case 'edit':
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit':
                 this.{{ toCamelCase schema.moduleName }}Service
                     .{{ toCamelCase schema.moduleName }}$
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item => this.fg.patchValue(item));
                 break;
 
-            case 'create':
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create':
                 await lastValueFrom(
                     this.{{ toCamelCase schema.moduleName }}Service
                         .create<{{ schema.aggregateName }}>({ object: this.fg.value }),
@@ -100,7 +112,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
                 break;
 
-            case 'update':
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update':
                 await lastValueFrom(
                     this.{{ toCamelCase schema.moduleName }}Service
                         .updateById<{{ schema.aggregateName }}>({ object: this.fg.value }),

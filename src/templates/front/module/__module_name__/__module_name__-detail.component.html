@@ -10,23 +10,27 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-            <button class="ml-3"
-                    type="submit"
-                    form="formDetail"
-                    mat-flat-button
-                    [disabled]="fg.pristine"
-                    [color]="'accent'"
-                    *ngIf="currentActionId === 'edit'">
+            <button
+                class="ml-3"
+                type="submit"
+                form="formDetail"
+                mat-flat-button
+                [disabled]="fg.pristine"
+                [color]="'accent'"
+                *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
+            >
                 <mat-icon class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
                 \{{ t('Update') }}
             </button>
-            <button class="ml-3"
-                    type="submit"
-                    form="formDetail"
-                    mat-flat-button
-                    [disabled]="fg.pristine"
-                    [color]="'accent'"
-                    *ngIf="currentActionId === 'new'">
+            <button
+                class="ml-3"
+                type="submit"
+                form="formDetail"
+                mat-flat-button
+                [disabled]="fg.pristine"
+                [color]="'accent'"
+                *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new'"
+            >
                 <mat-icon class="icon-size-5 mr-2" [svgIcon]="'heroicons_solid:save'"></mat-icon>
                 \{{ t('Create') }}
             </button>
@@ -44,7 +48,8 @@
             <form   id="formDetail"
                     novalidate
                     [formGroup]="fg"
-                    (ngSubmit)="onSubmit()">
+                    (ngSubmit)="onSubmit($event)"
+            >
 
                 <div class="layout__container">
 

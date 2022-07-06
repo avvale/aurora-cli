@@ -1,7 +1,6 @@
-
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, setQueryFilters, ViewBaseComponent } from '@aurora';
-import { combineLatest, lastValueFrom, map, Observable } from 'rxjs';
+import { combineLatest, lastValueFrom, map, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
@@ -13,6 +12,9 @@ import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase sc
 })
 export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseComponent
 {
+    // ---- customizations ----
+    // ..
+
     breadcrumb: Crumb[] = [
         { translation: 'App', routerLink: ['/']},
         { translation: '{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleNames }}' },
@@ -21,25 +23,30 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     gridTranslations$: Observable<any>;
     columnsConfig: ColumnConfig[] = [
         {
-            type       : ColumnDataType.ACTIONS,
-            field      : 'Actions',
-            headerClass: 'w-32',
-            sticky     : true,
-            actions    : () =>
+            type   : ColumnDataType.ACTIONS,
+            field  : 'Actions',
+            sticky : true,
+            actions: row =>
             {
                 return [
                     {
-                        id         : 'edit',
+                        id         : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit',
+                        translation: 'edit',
                         icon       : 'mode_edit',
-                        translation: 'Edit',
                     },
                     {
-                        id         : 'delete',
+                        id         : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete',
+                        translation: 'delete',
                         icon       : 'delete',
-                        translation: 'Delete',
                     },
                 ];
             },
+        },
+        {
+            type       : ColumnDataType.CHECKBOX,
+            field      : 'select',
+            translation: 'Selects',
+            sticky     : true,
         },
         {{#each schema.properties.gridFields}}
         {{#if (allowProperty ../schema.moduleName this) }}
@@ -62,6 +69,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     ngOnInit(): void
     {
+        this.actionService
+            .action$
+            .pipe(takeUntil(this.unsubscribeAll$))
+            .subscribe(action => this.handleAction(action));
+
         this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
         this.gridTranslations$ = combineLatest(
             {
@@ -75,27 +87,31 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     handleStateChange($event): void
     {
-        this.onRunAction({ id: 'pagination', data: { event: setQueryFilters($event) }});
+        this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination', isViewAction: false, data: { event: setQueryFilters($event) }});
     }
 
-    async onRunAction(action: Action): Promise<void>
+    handleGridAction(action: Action): void
     {
-        this.currentActionId = action.id;
+        this.actionService.action(action);
+    }
 
-        switch (this.currentActionId)
+    private async handleAction(action: Action): Promise<void>
+    {
+        // add optional chaining (?.) to avoid first call where behaviour subject is undefined
+        switch (action?.id)
         {
-            case 'pagination':
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination':
                 await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination(action.data.event));
                 break;
 
-            case 'edit':
-                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit', action.data.event.row.id]);
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit':
+                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit', action.data.row.id]);
                 break;
 
-            case 'delete':
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete':
                 const dialogRef = this.confirmationService.open({
                     title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')}`,
-                    message: this.translocoService.translate('Deletion-Warning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation',
@@ -104,12 +120,12 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     actions: {
                         confirm: {
                             show : true,
-                            label: 'Remove',
+                            label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
                             show : true,
-                            label: 'Cancel',
+                            label: this.translocoService.translate('Cancel'),
                         },
                     },
                     dismissible: true,
@@ -122,9 +138,9 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                         {
                             await lastValueFrom(
                                 this.{{ toCamelCase schema.moduleName }}Service
-                                    .deleteById<{{ schema.aggregateName }}>(action.data.event.row.id),
+                                    .deleteById<{{ schema.aggregateName }}>(action.data.row.id),
                             );
-                            await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination());
+                            this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination' });
                         }
                     });
                 break;

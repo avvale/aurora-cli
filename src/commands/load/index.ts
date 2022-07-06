@@ -12,7 +12,6 @@ import { Command, Flags } from '@oclif/core';
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
-import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
 import { YamlManager } from '../../@cliter/utils';
 import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, Properties, Property, FileManager } from '../../@cliter';
