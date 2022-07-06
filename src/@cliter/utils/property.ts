@@ -34,6 +34,7 @@ export class Property
     public pivotAggregateName?: string;
     public pivotPath?: string;
     public pivotFileName?: string;
+    public isDenormalized?: boolean;
     public index?: SqlIndex;
     public indexName?: string;
     public isI18n?: boolean;
@@ -63,6 +64,7 @@ export class Property
             pivotAggregateName?: string;
             pivotPath?: string;
             pivotFileName?: string;
+            isDenormalized?: boolean;
             index?: SqlIndex;
             indexName?: string;
             isI18n?: boolean;
@@ -92,6 +94,7 @@ export class Property
         this.pivotAggregateName = payload.pivotAggregateName;
         this.pivotPath = payload.pivotPath;
         this.pivotFileName = payload.pivotFileName;
+        this.isDenormalized = payload.isDenormalized;
         this.index = payload.index;
         this.indexName = payload.indexName;
         this.isI18n = payload.isI18n;
@@ -314,6 +317,7 @@ export class Property
             pivotAggregateName         : this.pivotAggregateName,
             pivotPath                  : this.pivotPath,
             pivotFileName              : this.pivotFileName,
+            isDenormalized             : this.isDenormalized,
             index                      : this.index,
             indexName                  : this.indexName,
             isI18n                     : this.isI18n,

@@ -107,6 +107,18 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{/if}}
     })
     {{ toCamelCase originName }}: {{ relationshipAggregate }}Model[];
+    {{#if isDenormalized }}
+
+    @Column({
+        field: '{{ toCamelCase relationshipSingularName }}Ids',
+        allowNull: {{ nullable }},
+        type: DataTypes.JSON,
+        {{#unless (isUndefined defaultValue) }}
+        defaultValue: {{ getDefaultValue }},
+        {{/unless}}
+    })
+    {{ toCamelCase name }}: any;
+    {{/if}}
     {{else}}
     @BelongsToMany(() => {{ relationshipAggregate }}Model, {
         through: () => {{ pivotAggregateName }}Model,

@@ -48,6 +48,17 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     })
     {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto[];
 
+{{#if isDenormalized}}
+    @ApiProperty({
+        type       : Object,
+        description: '{{ toCamelCase relationshipSingularName }}Ids [input here api field description]',
+        {{#if example }}
+        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        {{/if }}
+    })
+    {{ toCamelCase relationshipSingularName }}Ids{{#if nullable }}?{{/if}}: any;
+
+{{/if}}
 {{/eq}}
 {{#eq relationship ../relationship.ONE_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
