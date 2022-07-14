@@ -25,7 +25,7 @@ jobs:
     #   run: npm run test
 
     - name: Build project
-      run: npm run build --configuration=quality
+      run: npm run build -- --configuration=quality
 
     - name: Zip artifact for deployment
       # set correct path to dist files
