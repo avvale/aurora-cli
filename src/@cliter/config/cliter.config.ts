@@ -213,6 +213,7 @@ export const cliterConfig: CliterConfig =
         },
         front: {
             googleCloud: ['App Engine'],
+            onPremise  : ['Plesk'],
         },
     },
     packages: [
