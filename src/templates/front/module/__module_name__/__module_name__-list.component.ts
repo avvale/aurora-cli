@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, setQueryFilters, ViewBaseComponent } from '@aurora';
-import { combineLatest, lastValueFrom, map, Observable, takeUntil } from 'rxjs';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
