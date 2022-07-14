@@ -1,0 +1,77 @@
+name: Testing, Build and Deploy Back on Plesk
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  tests:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm ci
+
+    # - name: Testing
+    #   run: npm run test
+
+    - name: Build project
+      run: npm run build --configuration=quality
+
+    - name: Zip artifact for deployment
+      # set correct path to dist files
+      run: cd dist/fuse && zip release.zip ./* -r
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: tested-artifact
+        # set correct path to zip file
+        path: |
+          dist/fuse/release.zip
+
+  deploy:
+    name: Rsync Plesk deploy
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tested-artifact
+
+      - name: Unzip artifact for deployment
+        run: unzip -o release.zip
+
+      - name: Delete zip artifact
+        run: rm release.zip
+
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Deploy Plesk with rsync
+        uses: AEnterprise/rsync-deploy@v1.0
+        env:
+          # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
+          # don't forget set like bin/bash ftp user
+          DEPLOY_KEY: $\{{ secrets.PLESK_SSH_PRIVATE_KEY }}
+          ARGS: '-avzh --exclude=".*"'
+          # default port rsync 22
+          SERVER_PORT: $\{{ secrets.PLESK_PORT }}
+          FOLDER: "./"
+          SERVER_IP: $\{{ secrets.PLESK_HOST }}
+          # SFTP username
+          USERNAME: $\{{ secrets.PLESK_USERNAME }}
+          # example /var/www/vhosts/contoso.com/httpdocs
+          SERVER_DESTINATION: $\{{ secrets.PLESK_DESTINATION_PATH }}

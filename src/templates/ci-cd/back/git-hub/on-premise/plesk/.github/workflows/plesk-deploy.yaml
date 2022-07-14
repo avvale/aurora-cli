@@ -128,6 +128,7 @@ jobs:
         uses: AEnterprise/rsync-deploy@v1.0
         env:
           # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
+          # don't forget set like bin/bash ftp user
           DEPLOY_KEY: $\{{ secrets.SSH_PRIVATE_KEY }}
           ARGS: '-avzh --include=".env" --exclude=".*"'
           # default port rsync 22
