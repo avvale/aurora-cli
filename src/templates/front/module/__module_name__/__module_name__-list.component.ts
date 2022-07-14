@@ -20,7 +20,6 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         { translation: '{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleNames }}' },
     ];
     gridData$: Observable<GridData<{{ schema.aggregateName }}>>;
-    gridTranslations$: Observable<any>;
     columnsConfig: ColumnConfig[] = [
         {
             type   : ColumnDataType.ACTIONS,
@@ -75,14 +74,6 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             .subscribe(action => this.handleAction(action));
 
         this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
-        this.gridTranslations$ = combineLatest(
-            {
-                a: this.translocoService.selectTranslation(),
-                b: this.translocoService.selectTranslation('{{ toKebabCase schema.boundedContextName }}'),
-            })
-            .pipe(
-                map(res => ({ ...res.a, ...res.b })),
-            );
     }
 
     handleStateChange($event): void

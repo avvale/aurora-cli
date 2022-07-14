@@ -178,8 +178,15 @@ export class {{ toPascalCase schema.moduleName }}Service
     {
         return this.graphqlService
             .client()
-            .mutate({
-                mutation : updateByIdMutation,
+
+            confirm?: {
+                show?: boolean;
+                label?: string;
+                color?:
+                    | 'primary'
+                    | 'accent'
+                    | 'warn';
+            };            mutation : updateByIdMutation,
                 variables: {
                     payload: object,
                 },
