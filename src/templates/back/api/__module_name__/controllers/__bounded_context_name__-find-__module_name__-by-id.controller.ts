@@ -36,7 +36,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     @Post(':id')
     @HttpCode(200)
     @ApiOperation({ summary: 'Find {{ toKebabCase schema.moduleName }} by id' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
+    @ApiOkResponse({ description: 'The record has been successfully requested.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
     @TenantConstraint()
     {{/if}}

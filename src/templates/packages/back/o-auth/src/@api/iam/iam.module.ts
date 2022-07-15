@@ -8,6 +8,7 @@ import { IamTenantControllers, IamTenantResolvers, IamTenantApiHandlers } from '
 import { IamRoleControllers, IamRoleResolvers, IamRoleApiHandlers } from './role';
 import { IamAccountControllers, IamAccountResolvers, IamAccountApiHandlers } from './account';
 import { IamUserControllers, IamUserResolvers, IamUserApiHandlers } from './user';
+import { IamUserDataControllers, IamUserDataResolvers, IamUserDataApiHandlers } from './user-data';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { IamUserControllers, IamUserResolvers, IamUserApiHandlers } from './user
         ...IamRoleControllers,
         ...IamAccountControllers,
         ...IamUserControllers,
+        ...IamUserDataControllers,
     ],
     providers: [
         ...IamHandlers,
@@ -35,12 +37,14 @@ import { IamUserControllers, IamUserResolvers, IamUserApiHandlers } from './user
         ...IamRoleResolvers,
         ...IamAccountResolvers,
         ...IamUserResolvers,
+        ...IamUserDataResolvers,
         ...IamAccountApiHandlers,
         ...IamUserApiHandlers,
         ...IamRoleApiHandlers,
         ...IamPermissionApiHandlers,
         ...IamBoundedContextApiHandlers,
         ...IamTenantApiHandlers,
+        ...IamUserDataApiHandlers,
     ],
 })
 export class IamModule {}
