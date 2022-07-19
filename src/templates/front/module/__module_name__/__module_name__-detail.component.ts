@@ -34,12 +34,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    {
-        this.actionService
-            .action$
-            .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe(action => this.handleAction(action));
-    }
+    { /**/ }
 
     onSubmit($event): void
     {
@@ -67,15 +62,6 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             ),
             isViewAction: false,
         });
-
-        this.snackBar.open(
-            `${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')} ${this.translocoService.translate('Saved.M')}`,
-            undefined,
-            {
-                verticalPosition: 'top',
-                duration        : 3000,
-            },
-        );
     }
 
     createForm(): void
@@ -106,19 +92,53 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create':
-                await lastValueFrom(
-                    this.{{ toCamelCase schema.moduleName }}Service
-                        .create<{{ schema.aggregateName }}>({ object: this.fg.value }),
-                );
-                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
+                try
+                {
+                    await lastValueFrom(
+                        this.{{ toCamelCase schema.moduleName }}Service
+                            .create<{{ schema.aggregateName }}>({ object: this.fg.value }),
+                    );
+
+                    this.snackBar.open(
+                        `${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')} ${this.translocoService.translate('Created.M')}`,
+                        undefined,
+                        {
+                            verticalPosition: 'top',
+                            duration        : 3000,
+                        },
+                    );
+
+                    this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
+                }
+                catch(error)
+                {
+                    log(`[DEBUG] Catch error in {{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create action: ${error}`);
+                }
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update':
-                await lastValueFrom(
-                    this.{{ toCamelCase schema.moduleName }}Service
-                        .updateById<{{ schema.aggregateName }}>({ object: this.fg.value }),
-                );
-                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
+                try
+                {
+                    await lastValueFrom(
+                        this.{{ toCamelCase schema.moduleName }}Service
+                            .updateById<{{ schema.aggregateName }}>({ object: this.fg.value }),
+                    );
+
+                    this.snackBar.open(
+                        `${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')} ${this.translocoService.translate('Saved.M')}`,
+                        undefined,
+                        {
+                            verticalPosition: 'top',
+                            duration        : 3000,
+                        },
+                    );
+
+                    this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
+                }
+                catch(error)
+                {
+                    log(`[DEBUG] Catch error in {{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update action: ${error}`);
+                }
                 break;
         }
     }

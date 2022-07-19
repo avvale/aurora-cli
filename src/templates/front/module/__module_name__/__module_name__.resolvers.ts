@@ -52,7 +52,9 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
 @Injectable({
     providedIn: 'root',
 })
-export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve<{{ schema.aggregateName }}>
+export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve<{
+    object: {{ schema.aggregateName }};
+}>
 {
     constructor(
         private actionService: ActionService,
@@ -67,7 +69,9 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
      * @param route
      * @param state
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{{ schema.aggregateName }}>
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{
+        object: {{ schema.aggregateName }};
+    }>
     {
         this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit' });
         return this.{{ toCamelCase schema.moduleName }}Service.findById({ id: route.paramMap.get('id') });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FetchResult } from '@apollo/client/core';
+import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { Criteria, GraphQLService, GridData, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
@@ -38,6 +38,7 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     pagination(
         {
+            graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
             offset = 0,
@@ -45,6 +46,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             sort = ['id'],
             order = 'desc',
         }: {
+            graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             offset?: number;
@@ -61,7 +63,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .watchQuery<{ pagination: GridData<{{ schema.aggregateName }}>; }>({
-                query    : paginationQuery,
+                query    : graphqlStatement,
                 variables: {
                     query,
                     constraint,
@@ -77,66 +79,69 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     findById(
         {
+            graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
         }: {
+            graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
         } = {},
-    ): Observable<{{ schema.aggregateName }}>
+    ): Observable<{
+        object: {{ schema.aggregateName }};
+    }>
     {
         return this.graphqlService
             .client()
-            .watchQuery<{ object: {{ schema.aggregateName }}; }>({
-                query    : findByIdQuery,
-                variables: { id, constraint },
+            .watchQuery<{
+                object: {{ schema.aggregateName }};
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    id,
+                    constraint,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { object: {{ schema.aggregateName }}; };}, {{ schema.aggregateName }}>(result => result.data.object),
-                tap((object: {{ schema.aggregateName }}) => this.{{ toCamelCase schema.moduleName }}Subject$.next(object)),
+                map<{
+                    data: {
+                        object: {{ schema.aggregateName }};
+                    };
+                },
+                {
+                    object: {{ schema.aggregateName }};
+                }>(result => result.data),
+                tap((data: {
+                    object: {{ schema.aggregateName }};
+                }) =>
+                {
+                    this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
+                }),
             );
     }
 
     find(
         {
+            graphqlStatement = findQuery,
             query = {},
             constraint = {},
         }: {
+            graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
         } = {},
-    ): Observable<{{ schema.aggregateName }}>
+    ): Observable<{
+        object: {{ schema.aggregateName }};
+    }>
     {
         return this.graphqlService
             .client()
-            .watchQuery<{ object: {{ schema.aggregateName }}; }>({
-                query    : findQuery,
-                variables: { query, constraint },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map<{ data: { object: {{ schema.aggregateName }}; };}, {{ schema.aggregateName }}>(result => result.data.object),
-                tap((object: {{ schema.aggregateName }}) => this.{{ toCamelCase schema.moduleName }}Subject$.next(object)),
-            );
-    }
-
-    get(
-        {
-            query = {},
-            constraint = {},
-        }: {
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-        } = {},
-    ): Observable<{{ schema.aggregateName }}[]>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{ objects: {{ schema.aggregateName }}[]; }>({
-                query    : getQuery,
+            .watchQuery<{
+                object: {{ schema.aggregateName }};
+            }>({
+                query    : graphqlStatement,
                 variables: {
                     query,
                     constraint,
@@ -145,15 +150,74 @@ export class {{ toPascalCase schema.moduleName }}Service
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { objects: {{ schema.aggregateName }}[]; };}, {{ schema.aggregateName }}[]>(result => result.data.objects),
-                tap((objects: {{ schema.aggregateName }}[]) => this.{{ toCamelCase schema.moduleNames }}Subject$.next(objects)),
+                map<{
+                    data: {
+                        object: {{ schema.aggregateName }};
+                    };
+                },
+                {
+                    object: {{ schema.aggregateName }};
+                }>(result => result.data),
+                tap((data: {
+                    object: {{ schema.aggregateName }};
+                }) =>
+                {
+                    this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
+                }),
+            );
+    }
+
+    get(
+        {
+            graphqlStatement = getQuery,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{
+        objects: {{ schema.aggregateName }}[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                objects: {{ schema.aggregateName }}[];
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map<{
+                    data: {
+                        objects: {{ schema.aggregateName }}[];
+                    };
+                },
+                {
+                    objects: {{ schema.aggregateName }}[];
+                }>(result => result.data),
+                tap((data: {
+                    objects: {{ schema.aggregateName }}[];
+                }) =>
+                {
+                    this.{{ toCamelCase schema.moduleNames }}Subject$.next(data.objects);
+                }),
             );
     }
 
     create<T>(
         {
+            graphqlStatement = createMutation,
             object = null,
         }: {
+            graphqlStatement?: DocumentNode;
             object?: {{ schema.aggregateName }};
         } = {},
     ): Observable<FetchResult<T>>
@@ -161,7 +225,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .mutate({
-                mutation : createMutation,
+                mutation : graphqlStatement,
                 variables: {
                     payload: object,
                 },
@@ -170,23 +234,18 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     updateById<T>(
         {
+            graphqlStatement = updateByIdMutation,
             object = null,
         }: {
+            graphqlStatement?: DocumentNode;
             object?: {{ schema.aggregateName }};
         } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
-
-            confirm?: {
-                show?: boolean;
-                label?: string;
-                color?:
-                    | 'primary'
-                    | 'accent'
-                    | 'warn';
-            };            mutation : updateByIdMutation,
+            .mutate({
+                mutation : graphqlStatement,
                 variables: {
                     payload: object,
                 },
@@ -195,10 +254,12 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     update<T>(
         {
+            graphqlStatement = updateMutation,
             object = null,
             query = {},
             constraint = {},
         }: {
+            graphqlStatement?: DocumentNode;
             object?: {{ schema.aggregateName }};
             query?: QueryStatement;
             constraint?: QueryStatement;
@@ -208,7 +269,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .mutate({
-                mutation : updateMutation,
+                mutation : graphqlStatement,
                 variables: {
                     payload: object,
                     query,
@@ -217,21 +278,23 @@ export class {{ toPascalCase schema.moduleName }}Service
             });
     }
 
-    deleteById<T>(id: string): Observable<FetchResult<T>>
+    deleteById<T>(id: string, graphqlStatement = deleteByIdMutation): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
-                mutation : deleteByIdMutation,
+                mutation : graphqlStatement,
                 variables: { id },
             });
     }
 
     delete<T>(
         {
+            graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
         }: {
+            graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
         } = {},
@@ -240,7 +303,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .mutate({
-                mutation : deleteMutation,
+                mutation : graphqlStatement,
                 variables: { query, constraint },
             });
     }

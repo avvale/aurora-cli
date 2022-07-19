@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, setQueryFilters, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, log, setQueryFilters, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
@@ -20,7 +20,8 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         { translation: '{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleNames }}' },
     ];
     gridData$: Observable<GridData<{{ schema.aggregateName }}>>;
-    columnsConfig: ColumnConfig[] = [
+    columnsConfig$: Observable<ColumnConfig[]>;
+    originColumnsConfig: ColumnConfig[] = [
         {
             type   : ColumnDataType.ACTIONS,
             field  : 'Actions',
@@ -60,18 +61,20 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     constructor(
         protected injector: Injector,
+        private gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     )
     {
         super(injector);
     }
 
-    ngOnInit(): void
+    // this method will be called after the ngOnInit of
+    // the parent class you can use instead of ngOnInit
+    init(): void
     {
-        this.actionService
-            .action$
-            .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe(action => this.handleAction(action));
+        this.columnsConfig$ = this.gridColumnsConfigStorageService
+            .getColumnsConfig('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList', this.originColumnsConfig)
+            .pipe(takeUntil(this.unsubscribeAll$));
 
         this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
     }
@@ -86,7 +89,12 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         this.actionService.action(action);
     }
 
-    private async handleAction(action: Action): Promise<void>
+    handleColumnsConfigChange($event: ColumnConfig[]): void
+    {
+        this.gridColumnsConfigStorageService.setColumnsConfig('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList', $event, this.originColumnsConfig);
+    }
+
+    async handleAction(action: Action): Promise<void>
     {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
@@ -127,11 +135,18 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     {
                         if (result === 'confirmed')
                         {
-                            await lastValueFrom(
-                                this.{{ toCamelCase schema.moduleName }}Service
-                                    .deleteById<{{ schema.aggregateName }}>(action.data.row.id),
-                            );
-                            this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination' });
+                            try
+                            {
+                                await lastValueFrom(
+                                    this.{{ toCamelCase schema.moduleName }}Service
+                                        .deleteById<{{ schema.aggregateName }}>(action.data.row.id),
+                                );
+                                this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination' });
+                            }
+                            catch(error)
+                            {
+                                log(`[DEBUG] Catch error in {{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete action: ${error}`);
+                            }
                         }
                     });
                 break;

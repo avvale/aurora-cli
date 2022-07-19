@@ -33,10 +33,12 @@
 
         <!-- Grid -->
         <au-grid
-            [columnsConfig]="columnsConfig"
+            [columnsConfig]="columnsConfig$ | async"
+            [originColumnsConfig]="originColumnsConfig"
             [data]="gridData$ | async"
             (action)="handleGridAction($event)"
             (stateChange)="handleStateChange($event)"
+            (columnsConfigChange)="handleColumnsConfigChange($event)"
         >
             <au-grid-translations
                 [actions]="t('Actions')"
@@ -49,6 +51,7 @@
                 [operator]="t('Operator')"
                 [OR]="t('OR')"
                 [pleaseSelectField]="t('PleaseSelectField')"
+                [resetColumnsConfig]="t('ResetColumnsConfig')"
                 [translations]="t('Translations')"
                 [value]="t('Value')"
                 [paginator]="{
