@@ -11,6 +11,7 @@ import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase sc
 export class {{ toPascalCase schema.moduleName }}PaginationResolver implements Resolve<GridData<{{ schema.aggregateName }}>>
 {
     constructor(
+        private actionService: ActionService,
         private {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     ) {}
 
@@ -22,6 +23,7 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<GridData<{{ schema.aggregateName }}>>
     {
+        this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view' });
         return this.{{ toCamelCase schema.moduleName }}Service.pagination();
     }
 }
