@@ -8,6 +8,9 @@ import { NavigationService } from 'app/core/navigation/navigation.service';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
 
+// ---- customizations ----
+import { EnvironmentsInformationService, EnvironmentsInformation } from '@aurora';
+
 @Component({
     selector     : 'classy-layout',
     templateUrl  : './classy.component.html',
@@ -18,6 +21,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
     isScreenSmall: boolean;
     navigation: Navigation;
     user: User;
+    environmentsInformation: EnvironmentsInformation;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -29,7 +33,8 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
         private _navigationService: NavigationService,
         private _userService: UserService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
+        private environmentsInformationService: EnvironmentsInformationService,
     )
     {
     }
@@ -77,6 +82,10 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
                 // Check if the screen is small
                 this.isScreenSmall = !matchingAliases.includes('md');
             });
+
+        this.environmentsInformationService
+            .environmentsInformation$
+            .subscribe(environmentsInformation => this.environmentsInformation = environmentsInformation);
     }
 
     /**
