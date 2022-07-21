@@ -36,8 +36,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     constructor(
         private actionService: ActionService,
     )
-    {
-    }
+    {}
 
     /**
      * Resolver
@@ -62,8 +61,7 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
         private actionService: ActionService,
         private {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     )
-    {
-    }
+    {}
 
     /**
      * Resolver

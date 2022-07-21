@@ -53,6 +53,11 @@
                 class="max-w-36"
                 src="assets/images/logo/logo-text-on-dark.svg">
         </div>
+
+        <div class="absolute bottom-0 left-0 text-xs p-2 opacity-60 right-0 pointer-events-none">
+            [{{ environmentsInformation.app.version }}] {{ environmentsInformation.app.name }}<br>
+            [{{ environmentsInformation.server.version }}] {{ environmentsInformation.server.name }}
+        </div>
     </ng-container>
 </fuse-vertical-navigation>
 

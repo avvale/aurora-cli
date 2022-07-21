@@ -51,7 +51,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         {{#each schema.properties.gridFields}}
         {{#if (allowProperty ../schema.moduleName this) }}
         {
-            type : ColumnDataType.STRING,
+            type : ColumnDataType.{{ getColumnDataType }},
             field: '{{ toCamelCase name }}',
             sort : '{{ toCamelCase name }}',
         },

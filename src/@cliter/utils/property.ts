@@ -276,6 +276,14 @@ export class Property
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
 
+    /*************
+     * DASHBOARD *
+     *************/
+    get getColumnDataType(): string
+    {
+        return this.config.sqlTypesEquivalenceDashboardColumnDataTypes[this.type];
+    }
+
     /*****************
      * Miscellaneous *
      *****************/

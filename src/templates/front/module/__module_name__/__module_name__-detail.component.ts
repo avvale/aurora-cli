@@ -75,7 +75,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         });
     }
 
-    private async handleAction(action: Action): Promise<void>
+    async handleAction(action: Action): Promise<void>
     {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)

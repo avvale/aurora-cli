@@ -12,6 +12,7 @@ export interface CliterConfig
     lockJsonVersion: string;
     timestampFields: string[];
     deletedAtField: string[];
+    sqlTypesEquivalenceDashboardColumnDataTypes: { [key: string]: string };
     sqlTypesEquivalenceJavascriptTypes: { [key: string]: string };
     sqlTypesEquivalenceSwaggerTypes: { [key: string]: string };
     sqlTypesEquivalenceDtoTypes: { [key: string]: string };
@@ -37,14 +38,35 @@ export const cliterConfig: CliterConfig =
     dashboardTranslations: path.join('assets', 'i18n'),
 
     // application
-    applicationsContainer             : '@apps',
-    apiContainer                      : '@api',
-    auroraLocalPackage                : '@aurora',
-    auroraCorePackage                 : 'aurora-ts-core',
-    configYamlVersion                 : '0.0.1',
-    lockJsonVersion                   : '0.0.1',
-    timestampFields                   : ['createdAt', 'updatedAt', 'deletedAt'],
-    deletedAtField                    : ['deletedAt'],
+    applicationsContainer                      : '@apps',
+    apiContainer                               : '@api',
+    auroraLocalPackage                         : '@aurora',
+    auroraCorePackage                          : 'aurora-ts-core',
+    configYamlVersion                          : '0.0.1',
+    lockJsonVersion                            : '0.0.1',
+    timestampFields                            : ['createdAt', 'updatedAt', 'deletedAt'],
+    deletedAtField                             : ['deletedAt'],
+    sqlTypesEquivalenceDashboardColumnDataTypes: {
+        'int.unsigned'     : 'NUMBER',
+        'smallint.unsigned': 'NUMBER',
+        'tinyint.unsigned' : 'NUMBER',
+        boolean            : 'BOOLEAN',
+        char               : 'STRING',
+        date               : 'STRING',
+        decimal            : 'NUMBER',
+        enum               : 'STRING',
+        float              : 'NUMBER',
+        id                 : 'STRING',
+        int                : 'NUMBER',
+        json               : '',
+        manyToMany         : '',
+        password           : 'STRING',
+        smallint           : 'NUMBER',
+        text               : 'STRING',
+        timestamp          : 'STRING',
+        tinyint            : 'NUMBER',
+        varchar            : 'STRING',
+    },
     sqlTypesEquivalenceJavascriptTypes: {
         'int.unsigned'     : 'number',
         'smallint.unsigned': 'number',

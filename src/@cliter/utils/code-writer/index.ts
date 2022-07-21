@@ -220,11 +220,35 @@ export class CodeWriter
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.types.ts`));
 
-        // create type
+        // add object type
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}`,
-            properties.withoutTimestamps.map(property => ({ name: property.name.toCamelCase(), type: property.getJavascriptType })),
+            properties.graphqlProperties.map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+            { overwrite },
+        );
+
+        // add create object type
+        InterfaceDriver.addInterface(
+            sourceFile,
+            `${this.boundedContextName.toPascalCase()}Create${this.moduleName.toPascalCase()}`,
+            properties.graphqlInputProperties.map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+            { overwrite },
+        );
+
+        // add update object by id type
+        InterfaceDriver.addInterface(
+            sourceFile,
+            `${this.boundedContextName.toPascalCase()}Update${this.moduleName.toPascalCase()}ById`,
+            properties.graphqlInputProperties.map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: property.getJavascriptType })),
+            { overwrite },
+        );
+
+        // add update objects type
+        InterfaceDriver.addInterface(
+            sourceFile,
+            `${this.boundedContextName.toPascalCase()}Update${this.moduleNames.toPascalCase()}`,
+            properties.graphqlInputProperties.map(property => ({ name: property.name.toCamelCase() + '?', type: property.getJavascriptType })),
             { overwrite },
         );
 
