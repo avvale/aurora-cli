@@ -13,7 +13,7 @@
             <button
                 class="ml-3"
                 type="submit"
-                form="formDetail"
+                form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                 mat-flat-button
                 [disabled]="fg.pristine"
                 [color]="'accent'"
@@ -25,7 +25,7 @@
             <button
                 class="ml-3"
                 type="submit"
-                form="formDetail"
+                form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                 mat-flat-button
                 [disabled]="fg.pristine"
                 [color]="'accent'"
@@ -45,7 +45,7 @@
 
         <div class="form-card">
 
-            <form   id="formDetail"
+            <form   id="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                     novalidate
                     [formGroup]="fg"
                     (ngSubmit)="onSubmit($event)"

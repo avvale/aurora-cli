@@ -16,6 +16,12 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // ---- customizations ----
     // ..
 
+    // Object retrieved from the database request,
+    // it should only be used to obtain uninitialized
+    // data in the form, such as relations, etc.
+    // It should not be used habitually, since the source of truth is the form.
+    managedObject:  {{ schema.aggregateName }};
+
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
@@ -81,14 +87,18 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         switch (action?.id)
         {
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new':
-                if (this.fg.get('id')) this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(Utils.uuid());
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit':
                 this.{{ toCamelCase schema.moduleName }}Service
                     .{{ toCamelCase schema.moduleName }}$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item => this.fg.patchValue(item));
+                    .subscribe(item =>
+                    {
+                        this.managedObject = item;
+                        this.fg.patchValue(item);
+                    });
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create':

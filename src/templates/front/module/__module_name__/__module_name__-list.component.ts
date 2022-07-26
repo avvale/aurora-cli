@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, log, setQueryFilters, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, log, setQueryFilters, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
@@ -19,7 +19,9 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         { translation: 'App', routerLink: ['/']},
         { translation: '{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleNames }}' },
     ];
+    gridId: string = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
     gridData$: Observable<GridData<{{ schema.aggregateName }}>>;
+    gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
@@ -60,9 +62,10 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     ];
 
     constructor(
-        protected injector: Injector,
-        private gridColumnsConfigStorageService: GridColumnsConfigStorageService,
-        private {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        protected readonly injector: Injector,
+        private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     )
     {
         super(injector);
@@ -73,8 +76,10 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     init(): void
     {
         this.columnsConfig$ = this.gridColumnsConfigStorageService
-            .getColumnsConfig('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList', this.originColumnsConfig)
+            .getColumnsConfig(this.gridId, this.originColumnsConfig)
             .pipe(takeUntil(this.unsubscribeAll$));
+
+        this.gridState = this.gridFiltersStorageService.getColumnFilterState(this.gridId);
 
         this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
     }
@@ -84,6 +89,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination', isViewAction: false, data: { event: setQueryFilters($event) }});
     }
 
+    handleFiltersChange($event): void
+    {
+        this.gridFiltersStorageService.setColumnFilterState(this.gridId, $event);
+    }
+
     handleGridAction(action: Action): void
     {
         this.actionService.action(action);
@@ -91,7 +101,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     handleColumnsConfigChange($event: ColumnConfig[]): void
     {
-        this.gridColumnsConfigStorageService.setColumnsConfig('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList', $event, this.originColumnsConfig);
+        this.gridColumnsConfigStorageService.setColumnsConfig(this.gridId, $event, this.originColumnsConfig);
     }
 
     async handleAction(action: Action): Promise<void>

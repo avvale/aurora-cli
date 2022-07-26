@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData } from '@aurora';
+import { Action, ActionService, GridData, GridFiltersStorageService, setQueryFilters } from '@aurora';
 import { Observable } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
@@ -11,8 +11,9 @@ import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase sc
 export class {{ toPascalCase schema.moduleName }}PaginationResolver implements Resolve<GridData<{{ schema.aggregateName }}>>
 {
     constructor(
-        private actionService: ActionService,
-        private {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        private readonly actionService: ActionService,
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     ) {}
 
     /**
@@ -24,7 +25,11 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<GridData<{{ schema.aggregateName }}>>
     {
         this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view' });
-        return this.{{ toCamelCase schema.moduleName }}Service.pagination();
+        return this.{{ toCamelCase schema.moduleName }}Service.pagination(
+            setQueryFilters(
+                this.gridFiltersStorageService.getColumnFilterState('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList'),
+            ),
+        );
     }
 }
 
@@ -34,7 +39,7 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
 export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<Action>
 {
     constructor(
-        private actionService: ActionService,
+        private readonly actionService: ActionService,
     )
     {}
 
@@ -58,8 +63,8 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
 }>
 {
     constructor(
-        private actionService: ActionService,
-        private {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        private readonly actionService: ActionService,
+        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     )
     {}
 

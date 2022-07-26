@@ -17,7 +17,9 @@
                 [routerLink]="'new'">
                 <mat-icon
                     class="icon-size-5 mr-2"
-                    [svgIcon]="'heroicons_solid:tag'"></mat-icon>
+                    [svgIcon]="'heroicons_solid:tag'"
+                >
+                </mat-icon>
                 \{{ t('New.M') }}
             </button>
         </div>
@@ -34,11 +36,13 @@
         <!-- Grid -->
         <au-grid
             [columnsConfig]="columnsConfig$ | async"
+            [activatedColumnFilters]="gridState?.filters"
             [originColumnsConfig]="originColumnsConfig"
             [data]="gridData$ | async"
             (action)="handleGridAction($event)"
             (stateChange)="handleStateChange($event)"
             (columnsConfigChange)="handleColumnsConfigChange($event)"
+            (columnFiltersChange)="handleFiltersChange($event)"
         >
             <au-grid-translations
                 [actions]="t('Actions')"
