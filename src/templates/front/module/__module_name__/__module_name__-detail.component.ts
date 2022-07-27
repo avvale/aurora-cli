@@ -20,7 +20,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject:  {{ schema.aggregateName }};
+    managedObject: {{ schema.aggregateName }};
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
