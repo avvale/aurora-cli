@@ -8,7 +8,7 @@
             <div *ngIf="!isFirst && !isLast" class="flex items-center ml-1 whitespace-nowrap">
                 <mat-icon
                     class="icon-size-5 text-secondary"
-                    [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    svgIcon="heroicons_solid:chevron-right"></mat-icon>
                 <a  class="ml-1 text-primary-500"
                     [routerLink]="crumb.routerLink">{{ t(crumb.translation) }}</a>
             </div>
@@ -16,7 +16,7 @@
             <div *ngIf="isLast" class="flex items-center ml-1 whitespace-nowrap">
                 <mat-icon
                     class="icon-size-5 text-secondary"
-                    [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    svgIcon="heroicons_solid:chevron-right"></mat-icon>
                 <span class="ml-1 text-secondary">{{ t(crumb.translation) }}</span>
             </div>
 
@@ -29,7 +29,7 @@
             [routerLink]="'..'">
             <mat-icon
                 class="icon-size-5 text-secondary"
-                [svgIcon]="'heroicons_solid:chevron-left'"></mat-icon>
+                svgIcon="heroicons_solid:chevron-left"></mat-icon>
             <span class="ml-1">{{ t('breadcrumb.Back') }}</span>
         </a>
     </div>
