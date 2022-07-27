@@ -52,10 +52,11 @@
 
         <div class="form-card">
 
-            <form   id="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
-                    novalidate
-                    [formGroup]="fg"
-                    (ngSubmit)="onSubmit($event)"
+            <form
+                id="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
             >
 
                 <div class="layout__container">
