@@ -5,7 +5,14 @@
 
         <div class="flex-1 min-w-0">
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
-            <au-title><mat-icon svgIcon="heroicons_solid:tag" class="icon-size-8 mr-2"></mat-icon> \{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }}</au-title>
+            <au-title>
+                <mat-icon
+                    svgIcon="heroicons_solid:tag"
+                    class="icon-size-8 mr-2"
+                >
+                </mat-icon>
+                \{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }}
+            </au-title>
         </div>
 
         <!-- Actions -->

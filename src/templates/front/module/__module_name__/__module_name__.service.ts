@@ -15,7 +15,7 @@ export class {{ toPascalCase schema.moduleName }}Service
     {{ toCamelCase schema.moduleNames }}Subject$: BehaviorSubject<{{ schema.aggregateName }}[] | null> = new BehaviorSubject(null);
 
     constructor(
-        private graphqlService: GraphQLService,
+        private readonly graphqlService: GraphQLService,
     ) {}
 
     /**
@@ -41,23 +41,15 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
-            offset = 0,
-            limit = 10,
-            sort = ['createdAt'],
-            order = 'desc',
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
-            offset?: number;
-            limit?: number;
-            sort?: string | string[];
-            order?: string;
         } = {},
     ): Observable<GridData<{{ schema.aggregateName }}>>
     {
-        // adapt arguments to aurora SqlStatement
-        query = Criteria.getPaginationQueryStatement({ query, offset, limit, sort, order });
+        // set default values for pagination
+        query = Criteria.getPaginationDefaultValuesQueryStatement({ query });
 
         // get result, map ang throw data across observable
         return this.graphqlService

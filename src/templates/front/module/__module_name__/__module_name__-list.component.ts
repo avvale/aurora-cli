@@ -110,7 +110,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         switch (action?.id)
         {
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination':
-                await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination(action.data.event));
+                await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination({ query: action.data.event }));
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit':

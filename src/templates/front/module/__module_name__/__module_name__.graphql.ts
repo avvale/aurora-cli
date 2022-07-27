@@ -83,7 +83,8 @@ export const updateByIdMutation = gql`
 export const updateMutation = gql`
     mutation {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} (
         $payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input!
-        $query: QueryStatement $constraint:QueryStatement
+        $query: QueryStatement
+        $constraint: QueryStatement
     ) {
         {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} (payload:$payload query:$query constraint:$constraint) {
             ${fields}

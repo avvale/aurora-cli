@@ -30,8 +30,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     ];
 
     constructor(
-        protected injector: Injector,
-        private {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        protected readonly injector: Injector,
+        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     )
     {
         super(injector);
