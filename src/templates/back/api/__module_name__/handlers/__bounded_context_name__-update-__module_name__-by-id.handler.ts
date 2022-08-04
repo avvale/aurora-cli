@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCode, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCode, {{/if}}ICommandBus, IQueryBus, QueryStatement, Utils } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasTenant}}
 // tenant
@@ -32,7 +32,18 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         timezone?: string,
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto>
     {
-        await this.commandBus.dispatch(new Update{{ toPascalCase schema.moduleName }}ByIdCommand(payload, constraint, { timezone }));
+        const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, constraint, { timezone }));
+
+        const dataToUpdate = Utils.diff(payload, {{ toCamelCase schema.moduleName }});
+
+        await this.commandBus.dispatch(new Update{{ toPascalCase schema.moduleName }}ByIdCommand(
+            {
+                ...dataToUpdate,
+                id: payload.id,
+            },
+            constraint,
+            { timezone },
+        ));
 
         {{#if schema.properties.hasI18n}}
         constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });

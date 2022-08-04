@@ -26,7 +26,10 @@
                 [color]="'accent'"
                 *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
             >
-                <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_solid:pencil-alt"></mat-icon>
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:pencil-alt">
+                </mat-icon>
                 \{{ t('Update') }}
             </button>
             <button
@@ -38,7 +41,10 @@
                 [color]="'accent'"
                 *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new'"
             >
-                <mat-icon class="icon-size-5 mr-2" svgIcon="heroicons_solid:save"></mat-icon>
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:save">
+                </mat-icon>
                 \{{ t('Create') }}
             </button>
         </div>

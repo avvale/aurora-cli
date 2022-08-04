@@ -81,6 +81,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{#if relationshipAvoidConstraint }}
         constraints: false,
         {{/if}}
+        foreignKey: '{{ toCamelCase name }}',
     }{{/or}})
     {{ toCamelCase relationshipField }}: {{ relationshipAggregate }}Model;
     {{/if}}

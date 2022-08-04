@@ -43,7 +43,7 @@
         <!-- Grid -->
         <au-grid
             [columnsConfig]="columnsConfig$ | async"
-            [activatedColumnFilters]="gridState?.filters"
+            [activatedColumnFilters]="gridState?.columnFilters"
             [originColumnsConfig]="originColumnsConfig"
             [data]="gridData$ | async"
             (action)="handleGridAction($event)"

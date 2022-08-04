@@ -46,7 +46,7 @@ import { {{ toPascalCase schema.boundedContextName }}Component } from './{{ toKe
     providers: [
         {
             provide : TRANSLOCO_SCOPE,
-            useValue: '{{ toCamelCase schema.boundedContextName }}',
+            useValue: '{{ toKebabCase schema.boundedContextName }}',
             multi   : true,
         },
     ],
