@@ -15,7 +15,10 @@ export const paginationQuery = gql`
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }} (query:$query constraint:$constraint) {
+        pagination: {{ toCamelCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }} (
+            query: $query
+            constraint: $constraint
+        ) {
             total
             rows
             count
@@ -28,7 +31,10 @@ export const getQuery = gql`
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query:$query constraint:$constraint) {
+        objects: {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (
+            query: $query
+            constraint: $constraint
+        ) {
             ${fields}
         }
         ${relationsFields}
@@ -40,7 +46,10 @@ export const findByIdQuery = gql`
         $id: ID
         $constraint: QueryStatement
     ) {
-        object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id constraint:$constraint) {
+        object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
+            id: $id
+            constraint: $constraint
+        ) {
             ${fields}
         }
         ${relationsFields}
@@ -52,7 +61,10 @@ export const findQuery = gql`
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query:$query constraint:$constraint) {
+        object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (
+            query: $query
+            constraint: $constraint
+        ) {
             ${fields}
         }
         ${relationsFields}
@@ -63,7 +75,9 @@ export const createMutation = gql`
     mutation {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (
         $payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!
     ) {
-        {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload) {
+        {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (
+            payload: $payload
+        ) {
             ${fields}
         }
     }
@@ -74,7 +88,10 @@ export const updateByIdMutation = gql`
         $payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput!
         $constraint: QueryStatement
     ) {
-        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (payload:$payload constraint:$constraint) {
+        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (
+            payload: $payload
+            constraint: $constraint
+        ) {
             ${fields}
         }
     }
@@ -86,7 +103,11 @@ export const updateMutation = gql`
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} (payload:$payload query:$query constraint:$constraint) {
+        {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} (
+            payload: $payload
+            query: $query
+            constraint: $constraint
+        ) {
             ${fields}
         }
     }
@@ -97,7 +118,10 @@ export const deleteByIdMutation = gql`
         $id: ID!
         $constraint: QueryStatement
     ) {
-        {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id constraint:$constraint) {
+        {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (
+            id: $id
+            constraint: $constraint
+        ) {
             ${fields}
         }
     }
@@ -108,7 +132,10 @@ export const deleteMutation = gql`
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query:$query constraint:$constraint) {
+        {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (
+            query: $query
+            constraint: $constraint
+        ) {
             ${fields}
         }
     }

@@ -19,7 +19,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     @ApiProperty({
         type       : String,
         description: '{{ toCamelCase originName }} [input here api field description]',
-        example    : '{{ uuid }}',
+        example    : '{{ uuid originName }}',
     })
     {{ toCamelCase originName }}?: string;
 
@@ -43,7 +43,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     @ApiProperty({
         type       : String,
         description: '{{ toCamelCase originName }} [input here api field description]',
-        example    : '{{ uuid }}',
+        example    : '{{ uuid originName }}',
     })
     {{ toCamelCase originName }}?: string;
 
