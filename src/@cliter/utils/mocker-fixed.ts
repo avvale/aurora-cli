@@ -79,6 +79,11 @@ export class MockerFixed
                 if (!maxLength) maxLength = 6;
                 return Number.parseInt('1'.repeat(maxLength));
 
+            case 'bigint':
+            case 'bigint.unsigned':
+                if (!maxLength) maxLength = 20;
+                return Number.parseInt('1'.repeat(maxLength));
+
             case 'smallint':
             case 'smallint.unsigned':
                 if (!maxLength) maxLength = 4;
