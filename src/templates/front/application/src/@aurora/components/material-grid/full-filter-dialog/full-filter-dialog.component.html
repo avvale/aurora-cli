@@ -105,20 +105,20 @@
 	<!-- confirmation buttons -->
 	<div class="w-full flex col-span-2">
 		<button
-			[mat-dialog-close]="'removeFilters'"
+            mat-flat-button
 			class="w-full mr-2"
-			mat-flat-button
+			[mat-dialog-close]="'removeFilters'"
 		>
 			{{ t('ClearFilters') }}
 		</button>
 		<button
+            mat-flat-button
+            class="w-full"
+            color="primary"
 			[mat-dialog-close]="{
 				formValue: generatedForm.value,
 				filters: fieldFilterList
 			}"
-			class="w-full"
-			mat-flat-button
-			color="primary"
 			[disabled]="!generatedForm.valid"
 		>
 			{{ t('Filter') }}

@@ -199,18 +199,18 @@
                     <!-- Actions -->
                     <div class="flex items-center justify-end mt-4">
                         <button
-                            class="mr-2"
                             *ngIf="mode === 'edit'"
                             mat-flat-button
+                            class="mr-2"
                             type="button"
                             (click)="delete()">
                             Delete
                         </button>
                         <button
                             mat-flat-button
+                            type="button"
                             [color]="'primary'"
                             [disabled]="!shortcutForm.valid"
-                            type="button"
                             (click)="save()">
                             <ng-container *ngIf="mode === 'add'">Add</ng-container>
                             <ng-container *ngIf="mode === 'edit'">Update</ng-container>

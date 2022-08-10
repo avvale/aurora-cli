@@ -72,14 +72,19 @@ export class Mocker
                 if (!maxLength) maxLength = 2;
                 return randomNumber(maxLength);
 
+            case 'smallint':
+            case 'smallint.unsigned':
+                if (!maxLength) maxLength = 4;
+                return randomNumber(maxLength);
+
             case 'int':
             case 'int.unsigned':
                 if (!maxLength) maxLength = 6;
                 return randomNumber(maxLength);
 
-            case 'smallint':
-            case 'smallint.unsigned':
-                if (!maxLength) maxLength = 4;
+            case 'bigint':
+            case 'bigint.unsigned':
+                if (!maxLength) maxLength = 20;
                 return randomNumber(maxLength);
 
             case 'decimal':

@@ -66,11 +66,12 @@
 
                 <!-- Submit button -->
                 <button
-                    class="fuse-mat-button-large w-full mt-3"
                     mat-flat-button
+                    class="fuse-mat-button-large w-full mt-3"
                     [color]="'primary'"
                     [disabled]="unlockSessionForm.disabled"
-                    (click)="unlock()">
+                    (click)="unlock()"
+                >
                     <span *ngIf="!unlockSessionForm.disabled">
                         Unlock your session
                     </span>

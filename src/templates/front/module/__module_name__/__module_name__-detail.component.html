@@ -18,13 +18,13 @@
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
             <button
-                class="ml-3"
-                type="submit"
-                form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
+                *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
                 mat-flat-button
+                type="submit"
+                class="ml-3"
+                form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                 [disabled]="fg.pristine"
                 [color]="'accent'"
-                *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
             >
                 <mat-icon
                     class="icon-size-5 mr-2"
@@ -34,13 +34,13 @@
                 \{{ t('Update') }}
             </button>
             <button
-                class="ml-3"
+                *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new'"
+                mat-flat-button
                 type="submit"
                 form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
-                mat-flat-button
+                class="ml-3"
                 [disabled]="fg.pristine"
                 [color]="'accent'"
-                *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new'"
             >
                 <mat-icon
                     class="icon-size-5 mr-2"

@@ -1,5 +1,7 @@
 export enum SqlType
 {
+    'BIGINT'            = 'bigint',
+    'BIGINT.UNSIGNED'   = 'bigint.unsigned',
     'BOOLEAN'           = 'boolean',
     'CHAR'              = 'char',
     'DATE'              = 'date',
