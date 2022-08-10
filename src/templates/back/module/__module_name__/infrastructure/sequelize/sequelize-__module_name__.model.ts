@@ -49,6 +49,9 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{#if primaryKey }}
         primaryKey: {{ primaryKey }},
         {{/if}}
+        {{#if autoIncrement }}
+        autoIncrement: {{ autoIncrement }},
+        {{/if}}
         allowNull: {{ nullable }},
         type: {{{ getSequelizeType }}},
         {{#unless (isUndefined defaultValue) }}

@@ -34,6 +34,7 @@ export class YamlManager
                     name                       : property.name,
                     type                       : property.type,
                     primaryKey                 : property?.primaryKey,
+                    autoIncrement              : property?.autoIncrement,
                     enumOptions                : property?.enumOptions?.join(),
                     decimals                   : property?.decimals,
                     length                     : property?.length,

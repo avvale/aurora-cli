@@ -16,6 +16,7 @@ export class Property
     private _name: string;
     public type: SqlType;
     public primaryKey?: boolean;
+    public autoIncrement?: boolean;
     private _enumOptions?: string;
     public decimals?: number[];
     public length?: number;
@@ -46,6 +47,7 @@ export class Property
             name: string;
             type: SqlType;
             primaryKey?: boolean;
+            autoIncrement?: boolean;
             enumOptions?: string;
             decimals?: number[];
             length?: number;
@@ -76,6 +78,7 @@ export class Property
         this._name = payload.name;
         this.type = payload.type;
         this.primaryKey = payload.primaryKey;
+        this.autoIncrement = payload.autoIncrement;
         this._enumOptions = payload.enumOptions;
         this.decimals = payload.decimals;
         this.length = payload.length;
@@ -307,6 +310,7 @@ export class Property
             name                       : this._name,
             type                       : this.type,
             primaryKey                 : this.primaryKey,
+            autoIncrement              : this.autoIncrement,
             enumOptions                : this.enumOptions,
             decimals                   : this.decimals,
             length                     : this.length,

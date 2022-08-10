@@ -43,6 +43,9 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
         {{#if primaryKey }}
         primaryKey: {{ primaryKey }},
         {{/if}}
+        {{#if autoIncrement }}
+        autoIncrement: {{ autoIncrement }},
+        {{/if}}
         allowNull: {{ nullable }},
         type: {{{ getSequelizeType }}},
         {{#if defaultValue }}
