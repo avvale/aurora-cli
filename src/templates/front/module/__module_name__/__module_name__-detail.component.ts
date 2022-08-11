@@ -122,7 +122,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 }
                 catch(error)
                 {
-                    log(`[DEBUG] Catch error in {{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create action: ${error}`);
+                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
@@ -147,7 +147,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 }
                 catch(error)
                 {
-                    log(`[DEBUG] Catch error in {{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update action: ${error}`);
+                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
         }

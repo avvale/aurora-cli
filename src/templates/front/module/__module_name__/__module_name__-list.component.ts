@@ -155,7 +155,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                             }
                             catch(error)
                             {
-                                log(`[DEBUG] Catch error in {{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete action: ${error}`);
+                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                             }
                         }
                     });
