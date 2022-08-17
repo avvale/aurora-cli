@@ -98,7 +98,7 @@ export class Operations
         await TemplateGenerator.generateStaticContents(
             TemplateElement.FRONT_MODULE,
             path.join('src', cliterConfig.dashboardContainer),
-            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
     }
 
@@ -154,6 +154,9 @@ export class Operations
 
         // generate @api files
         await this.generateApiFiles();
+
+        // generate additional api filles
+        await this.generateAdditionalApiFiles();
 
         // generate @api i18n files
         await this.generateI18NApiFiles();
@@ -223,12 +226,20 @@ export class Operations
     {
         await TemplateGenerator.createDirectory(
             path.join('src', cliterConfig.apiContainer),
-            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
         await TemplateGenerator.generateStaticContents(
             TemplateElement.BACK_API,
             path.join('src', cliterConfig.apiContainer),
-            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
+        );
+    }
+
+    async generateAdditionalApiFiles(): Promise<void>
+    {
+        TemplateGenerator.generateAdditionalApiFiles(
+            path.join('src', cliterConfig.apiContainer),
+            Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
         );
     }
 
@@ -239,7 +250,7 @@ export class Operations
             await TemplateGenerator.generateStaticContents(
                 TemplateElement.BACK_I18N_API,
                 path.join('src', cliterConfig.apiContainer),
-                Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase()
+                Operations.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
             );
         }
     }
@@ -364,6 +375,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
                 hasOAuth           : Operations.stateService.schema.hasOAuth,
                 hasTenant          : Operations.stateService.schema.hasTenant,
                 aggregateProperties: Operations.stateService.schema.properties.toDto().map(item => _.omit(item, ['id'])), // omit id, internal id when create property by prompt
+                additionalApis     : Operations.stateService.schema.additionalApis.toDto().map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
                 excluded           : Operations.stateService.schema.excluded,
             },
             {
@@ -376,7 +388,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
 
         if (!fs.existsSync(yamlPath)) fs.mkdirSync(yamlPath, { recursive: true });
 
-        fs.writeFileSync(path.join(yamlPath, `${ Operations.stateService.schema.moduleName }.yaml`), yamlStr, 'utf8');
+        fs.writeFileSync(path.join(yamlPath, `${Operations.stateService.schema.moduleName}.yaml`), yamlStr, 'utf8');
     }
 
     createJsonLockFile(): void

@@ -68,10 +68,30 @@ export class TemplateGenerator
         if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
     }
 
+    static generateAdditionalApiFiles(
+        relativeTargetBasePath: string,
+        relativeTargetPath: string,
+    ): void
+    {
+        for (const additionalApi of TemplateGenerator.stateService.schema.additionalApis)
+        {
+            // set additional api to create, to be available in template
+            TemplateGenerator.stateService.currentAdditionalApi = additionalApi;
+
+            // create module files
+            TemplateGenerator.generateStaticContents(
+                TemplateElement.BACK_ADDITIONAL_API,
+                relativeTargetBasePath,
+                relativeTargetPath,
+            );
+        }
+    }
+
     /**
      *
-     * @param relativeTargetBasePath
-     * @param relativeTargetPath
+     * @param {string} relativeTargetBasePath
+     * @param {string} relativeTargetPath
+     * @returns void
      */
     static generateValueObjects(
         relativeTargetBasePath: string,

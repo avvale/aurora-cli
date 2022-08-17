@@ -6,10 +6,11 @@ import { singleton } from 'tsyringe';
 import { Command } from '@oclif/core';
 import { LiteralObject, LockFile, ModuleDefinitionSchema, SqlRelationship, SqlType } from '../types';
 import { CliterConfig, cliterConfig } from '../config/cliter.config';
+import { AdditionalApi } from '../utils/additional-api';
 import { v4 as uuidv4 } from 'uuid';
 import * as crypto from 'crypto';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 @singleton()
 export class StateService
@@ -19,6 +20,7 @@ export class StateService
     public packageName?: string;
     public dashboardName?: string;
     public command!: Command;
+    public currentAdditionalApi?: AdditionalApi;
     public schema!: ModuleDefinitionSchema;
     public lockFiles: LockFile[] = [];
     public newLockFiles: LockFile[] = [];

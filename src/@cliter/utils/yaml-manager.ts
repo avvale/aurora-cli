@@ -10,6 +10,8 @@ import { StateService } from '../services/state.service';
 import { Property } from './property';
 import { ModuleDefinitionSchema } from '../types';
 import { Properties } from './properties';
+import { AdditionalApi } from './additional-api';
+import { AdditionalApis } from './additional-apis';
 
 export class YamlManager
 {
@@ -63,6 +65,18 @@ export class YamlManager
             );
         }
 
+        const additionalApis = new AdditionalApis();
+        for (const additionalApi of yamlObj.additionalApis)
+        {
+            additionalApis.add(
+                new AdditionalApi({
+                    path        : additionalApi.path,
+                    resolverType: additionalApi.resolverType,
+                    httpMethod  : additionalApi.httpMethod,
+                }),
+            );
+        }
+
         return {
             boundedContextName: yamlObj.boundedContextName,
             moduleName        : yamlObj.moduleName,
@@ -71,6 +85,7 @@ export class YamlManager
             hasOAuth          : yamlObj.hasOAuth,
             hasTenant         : yamlObj.hasTenant,
             properties,
+            additionalApis,
             excluded          : yamlObj.excluded,
         };
     }

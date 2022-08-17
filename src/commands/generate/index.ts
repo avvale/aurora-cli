@@ -5,6 +5,7 @@ import { container } from 'tsyringe';
 // imports
 import { Command, Flags } from '@oclif/core'
 import { ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
+import { AdditionalApis } from '../../@cliter/utils/additional-apis';
 
 export default class Generate extends Command
 {
@@ -27,6 +28,7 @@ export default class Generate extends Command
             options    : [
                 'bounded-context', 'b',
                 'module', 'm',
+                'api', 'a',
             ],
             required: true,
         },
@@ -72,10 +74,11 @@ export default class Generate extends Command
                 boundedContextName,
                 moduleName,
                 moduleNames,
-                aggregateName: boundedContextName.toPascalCase() + moduleName.toPascalCase(),
+                aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
                 hasOAuth,
                 hasTenant,
                 properties,
+                additionalApis: new AdditionalApis(),
             };
 
             // set stateService

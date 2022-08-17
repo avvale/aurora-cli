@@ -22,15 +22,15 @@ export default class Load extends Command
 
     static flags =
     {
-        help              : Flags.help({ char: 'h' }),
-        verbose           : Flags.boolean({ char: 'v' }),
-        force             : Flags.boolean({ char: 'f' }),
-        module            : Flags.string({ char: 'm' }),
         boundedContext    : Flags.string({ char: 'b' }),
-        tests             : Flags.boolean({ char: 't' }),
-        noGraphQLTypes    : Flags.boolean({ char: 'g' }),
         dashboard         : Flags.boolean({ char: 'd' }),
+        force             : Flags.boolean({ char: 'f' }),
+        help              : Flags.help({ char: 'h' }),
+        module            : Flags.string({ char: 'm' }),
+        noGraphQLTypes    : Flags.boolean({ char: 'g' }),
         overwriteInterface: Flags.boolean({ char: 'w' }),
+        tests             : Flags.boolean({ char: 't' }),
+        verbose           : Flags.boolean({ char: 'v' }),
     };
 
     static args = [

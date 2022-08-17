@@ -55,6 +55,7 @@ export class FileManager
      * @param name
      * @param prefix
      * @param suffix
+     * @return {string}
      */
     static renderFilename(
         name: string,
@@ -78,6 +79,7 @@ export class FileManager
         if (name.includes('__module_names__'))                              name = name.replace(/__module_names__/gi, FileManager.stateService.schema.moduleNames.toKebabCase());
         if (name.includes('__property_name__') && currentProperty)          name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
         if (name.includes('__property_native_name__') && currentProperty)   name = name.replace(/__property_native_name__/gi, currentProperty.originName.toKebabCase());
+        if (name.includes('__additional_api_name__'))                       name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (FileManager.stateService.currentAdditionalApi ? FileManager.stateService.currentAdditionalApi.getApiFileName : ''));
 
         return name;
     }

@@ -1,5 +1,6 @@
 export enum TemplateElement
 {
+    BACK_ADDITIONAL_API       = 'back/additional-api',
     BACK_API                  = 'back/api',
     BACK_APPLICATION          = 'back/application',
     BACK_BOUNDED_CONTEXT      = 'back/bounded-context',
