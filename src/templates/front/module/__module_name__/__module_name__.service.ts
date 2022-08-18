@@ -3,7 +3,7 @@ import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { Criteria, GraphQLService, GridData, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { {{ schema.aggregateName }}, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
-import { paginationQuery, getQuery, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './{{ toKebabCase schema.moduleName }}.graphql';
+import { paginationQuery, getQuery, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation{{#each schema.additionalApis}}, {{getVariableName}}{{ toPascalCase resolverType }}{{/each}} } from './{{ toKebabCase schema.moduleName }}.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -272,7 +272,7 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     deleteById<T>(
         id: string,
-        graphqlStatement = deleteByIdMutation
+        graphqlStatement = deleteByIdMutation,
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService

@@ -383,7 +383,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 {
                     where:
                     {
-                        id: '{{ uuid }}',
+                        id: '{{ uuid schema.boundedContextName schema.moduleName "REST:POST/find - Got 404 Not Found" }}',
                     },
                 },
             })
@@ -426,7 +426,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     test('/REST:POST {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{ uuid }}')
+            .post('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find/{{ uuid schema.boundedContextName schema.moduleName "REST:POST/find/{id} - Got 404 Not Found" }}')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -450,7 +450,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                id: '{{ uuid }}',
+                id: '{{ uuid schema.boundedContextName schema.moduleName "REST:PUT/update - Got 404 Not Found" }}',
             })
             .expect(404);
     });
@@ -474,7 +474,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     test('/REST:DELETE {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{ uuid }}')
+            .delete('/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/delete/{{ uuid schema.boundedContextName schema.moduleName "REST:DELETE/delete/{id} - Got 404 Not Found" }}')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -638,7 +638,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         where:
                         {
-                            id: '{{ uuid }}',
+                            id: '{{ uuid schema.boundedContextName schema.moduleName "GraphQL/Find - Got 404 Not Found" }}',
                         },
                     },
                 },
@@ -705,7 +705,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{ uuid }}',
+                    id: '{{ uuid schema.boundedContextName schema.moduleName "GraphQL/FindById - Got 404 Not Found" }}',
                 },
             })
             .expect(200)
@@ -765,7 +765,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        id: '{{ uuid }}',
+                        id: '{{ uuid schema.boundedContextName schema.moduleName "GraphQL/UpdateById - Got 404 Not Found" }}',
                     },
                 },
             })
@@ -863,7 +863,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     }
                 `,
                 variables: {
-                    id: '{{ uuid }}',
+                    id: '{{ uuid schema.boundedContextName schema.moduleName "GraphQL/DeleteById - Got 404 Not Found" }}',
                 },
             })
             .expect(200)
