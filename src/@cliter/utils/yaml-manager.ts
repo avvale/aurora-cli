@@ -66,15 +66,19 @@ export class YamlManager
         }
 
         const additionalApis = new AdditionalApis();
-        for (const additionalApi of yamlObj.additionalApis)
+
+        if (Array.isArray(yamlObj.additionalApis))
         {
-            additionalApis.add(
-                new AdditionalApi({
-                    path        : additionalApi.path,
-                    resolverType: additionalApi.resolverType,
-                    httpMethod  : additionalApi.httpMethod,
-                }),
-            );
+            for (const additionalApi of yamlObj.additionalApis)
+            {
+                additionalApis.add(
+                    new AdditionalApi({
+                        path        : additionalApi.path,
+                        resolverType: additionalApi.resolverType,
+                        httpMethod  : additionalApi.httpMethod,
+                    }),
+                );
+            }
         }
 
         return {

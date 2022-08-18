@@ -165,7 +165,7 @@ export const {{ getVariableName }}Query = gql`
 {{#each schema.additionalApis.mutations}}
 export const {{ getVariableName }}Mutation = gql`
     mutation {{ getClassName }} (
-        $payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput!
+        $payload: {{ toPascalCase ../schema.boundedContextName }}Update{{ toPascalCase ../schema.moduleName }}ByIdInput!
         $constraint: QueryStatement
     ) {
         {{ getResolverName }} (
