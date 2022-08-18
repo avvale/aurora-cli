@@ -1,0 +1,35 @@
+<div class="flex flex-shrink-0 items-center">
+    <button
+        mat-flat-button
+        class="ml-3 rounded-r-none pr-0"
+        [color]="color"
+        [disabled]="disabled"
+        [type]="typeMainButton"
+        [attr.form]="formMainButton"
+        [routerLink]="routerLinkMainButton"
+    >
+        <ng-container *ngTemplateOutlet="splitMainButtonContentTemplate.templateRef; context: { }">
+        </ng-container>
+    </button>
+    <button
+        mat-flat-button
+        class="rounded-l-none p-0 min-w-12"
+        [ngClass]="{ 'disabled-main-button': disabled }"
+        [color]="color"
+        [matMenuTriggerFor]="menu"
+    >
+        <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+        >
+            expand_more
+        </mat-icon>
+    </button>
+    <mat-menu
+        #menu="matMenu"
+        xPosition="before"
+    >
+        <ng-container *ngTemplateOutlet="splitMenuButtonsTemplate.templateRef; context: { }">
+        </ng-container>
+    </mat-menu>
+</div>

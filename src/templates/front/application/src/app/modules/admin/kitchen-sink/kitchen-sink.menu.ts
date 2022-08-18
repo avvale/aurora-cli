@@ -20,5 +20,19 @@ export const kitchenSink: FuseNavigationItem = {
             icon : 'heroicons_outline:view-list',
             link : '/kitchen-sink/grid',
         },
+        {
+            id   : 'dates',
+            title: 'Dates',
+            type : 'basic',
+            icon : 'mat_solid:access_time',
+            link : '/kitchen-sink/dates',
+        },
+        {
+            id   : 'selects',
+            title: 'Seletcs',
+            type : 'basic',
+            icon : 'heroicons_outline:selector',
+            link : '/kitchen-sink/selects',
+        },
     ],
 };

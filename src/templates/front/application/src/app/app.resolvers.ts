@@ -6,10 +6,12 @@ import { NavigationService } from 'app/core/navigation/navigation.service';
 import { NotificationsService } from 'app/layout/common/notifications/notifications.service';
 import { QuickChatService } from 'app/layout/common/quick-chat/quick-chat.service';
 import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service';
-import { UserService } from 'app/core/user/user.service';
+
+// ---- customizations ----
+import { IamService } from '@aurora/modules/iam/iam.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class InitialDataResolver implements Resolve<any>
 {
@@ -22,7 +24,7 @@ export class InitialDataResolver implements Resolve<any>
         private _notificationsService: NotificationsService,
         private _quickChatService: QuickChatService,
         private _shortcutsService: ShortcutsService,
-        private _userService: UserService
+        private iamService: IamService,
     )
     {
     }
@@ -40,13 +42,13 @@ export class InitialDataResolver implements Resolve<any>
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
     {
         // Fork join multiple API endpoint calls to wait all of them to finish
-        return forkJoin([
-            this._navigationService.get(),
-            this._messagesService.getAll(),
-            this._notificationsService.getAll(),
-            this._quickChatService.getChats(),
-            this._shortcutsService.getAll(),
-            this._userService.get()
-        ]);
+        return forkJoin({
+            navigationService   : this._navigationService.get(),
+            messagesService     : this._messagesService.getAll(),
+            notificationsService: this._notificationsService.getAll(),
+            quickChatService    : this._quickChatService.getChats(),
+            shortcutsService    : this._shortcutsService.getAll(),
+            iamService          : this.iamService.get(),
+        });
     }
 }

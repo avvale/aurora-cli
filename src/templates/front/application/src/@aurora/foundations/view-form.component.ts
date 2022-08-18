@@ -1,10 +1,10 @@
-import { Directive, Injector, OnDestroy } from '@angular/core';
+import { Directive, Injector, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormMessageErrors, ValidationMessagesService } from '@aurora/components';
 import { ViewBaseComponent } from './view-base.component';
 
 @Directive()
-export class ViewFormComponent extends ViewBaseComponent implements OnDestroy
+export class ViewFormComponent extends ViewBaseComponent implements OnInit, OnDestroy
 {
     fg: FormGroup;
     fb: FormBuilder;
@@ -26,10 +26,11 @@ export class ViewFormComponent extends ViewBaseComponent implements OnDestroy
 
     ngOnInit(): void
     {
+        super.ngOnInit();
+
         this.validationMessagesService.subscribeForm(this.fg, this.formErrors);
 
-        // evaluates the actions to be taken
-        // into method defined in the nested class
+        // init logic of component after set input
         this.init();
     }
 

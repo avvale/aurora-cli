@@ -1,0 +1,59 @@
+<div mat-dialog-title class="dialog-header relative">
+    <p class="title">
+        <mat-icon class="inline">table_chart</mat-icon>
+        <span>{{ 'columns' | gridTranslate | async }}</span>
+    </p>
+
+    <div class="helper text-base opacity-50">{{ 'clickAndDragInfo' | gridTranslate | async }}</div>
+    <hr class="mt-2 mb-4">
+
+    <button mat-icon-button [disableRipple]="true" mat-dialog-close class="absolute top-0 right-0">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content class="max-h-[80vh] overflow-y-scroll">
+    <div
+        cdkDropList
+        class="columns-list"
+        (cdkDropListDropped)="drop($event)"
+    >
+        <ng-container *ngFor="let columnConfig of columnsConfigToList">
+            <div
+                class="column"
+                cdkDrag
+                [ngClass]="{ 'cursor-move': !columnConfig.sticky }"
+                [cdkDragDisabled]="columnConfig.sticky"
+            >
+                <div class="flex">
+                    <mat-checkbox
+                        [(ngModel)]="!columnConfig.hidden"
+                        [disabled]="columnConfig.sticky"
+                        (change)="handleChangeVisibilityColumn($event, columnConfig)"
+                    >
+                    </mat-checkbox>
+
+                    <span>
+                    {{ columnConfig.field | gridTranslate:'column' | async }}
+                    </span>
+                </div>
+
+                <mat-icon>drag_indicator</mat-icon>
+            </div>
+
+            <hr>
+        </ng-container>
+    </div>
+</div>
+
+<mat-dialog-actions>
+    <button
+			[mat-dialog-close]
+            (click)="resetColumnsConfig($event)"
+			class="w-full mr-2"
+			mat-flat-button
+		>
+             <mat-icon class="icon-size-5 mr-2">restart_alt</mat-icon>
+			{{ 'resetColumnsConfig' | gridTranslate | async }}
+		</button>
+</mat-dialog-actions>

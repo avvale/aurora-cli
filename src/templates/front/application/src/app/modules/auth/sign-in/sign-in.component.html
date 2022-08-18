@@ -91,12 +91,11 @@
 
                 <!-- Submit button -->
                 <button
-                    mat-flat-button
                     class="fuse-mat-button-large w-full mt-6"
+                    mat-flat-button
                     [color]="'primary'"
                     [disabled]="signInForm.disabled"
-                    (click)="signIn()"
-                >
+                    (click)="signIn()">
                     <span *ngIf="!signInForm.disabled">
                         Sign in
                     </span>

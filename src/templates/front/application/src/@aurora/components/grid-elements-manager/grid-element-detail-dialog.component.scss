@@ -1,0 +1,14 @@
+.dialog-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0;
+	.title {
+		display: flex;
+		align-items: center;
+
+		mat-icon {
+			margin-right: 1rem;
+		}
+	}
+}

@@ -1,0 +1,52 @@
+<div class="relative">
+    <p class="absolute top-0 -left-1 bg-white px-2 pt-1 origin-center -translate-y-1/2 scale-75 text-base z-999 pointer-events-none">
+        <span class="opacity-60">{{ label }}</span>
+    </p>
+
+    <div class="rounded-md border hover:border-2 focus-within:border-2 p-0.5 hover:p-px focus-within:p-px transition-all">
+        <!-- main -->
+        <div
+            class="flex flex-auto pt-0 px-2 overflow-y-auto"
+            cdkScrollable
+        >
+            <!-- grid -->
+            <au-grid
+                [columnsConfig]="columnsConfig"
+                [activatedColumnFilters]="activatedColumnFilters"
+                [originColumnsConfig]="originColumnsConfig"
+                [data]="data"
+                (action)="action.emit($event)"
+                (stateChange)="stateChange.emit($event)"
+                (columnsConfigChange)="columnsConfigChange.emit($event)"
+                (columnFiltersChange)="columnFiltersChange.emit($event)"
+            >
+                <ng-template
+                    auGridCustomHeaderTemplate
+                    position="left"
+                >
+                    <!-- we can defined buttons from component parent across template directive -->
+                    <ng-container *ngIf="gridCustomButtonsHeaderDialogTemplate">
+                        <ng-container *ngTemplateOutlet="gridCustomButtonsHeaderDialogTemplate.templateRef; context: {}">
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- we can use default button -->
+                    <ng-container *ngIf="!gridCustomButtonsHeaderDialogTemplate">
+                        <button
+                            mat-icon-button
+                            class="mr-2"
+                            (click)="handleElementDetailDialog(newActionId)"
+                        >
+                            <mat-icon>add</mat-icon>
+                            <span class="cdk-visually-hidden">
+                                Add new item
+                            </span>
+                        </button>
+                    </ng-container>
+                </ng-template>
+            </au-grid>
+            <!-- / grid -->
+        </div>
+        <!-- / main -->
+    </div>
+</div>

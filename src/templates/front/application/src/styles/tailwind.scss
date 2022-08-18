@@ -2,3 +2,6 @@
 /*  @ Main Tailwind file for injecting utilities.
 /* ----------------------------------------------------------------------------------------------------- */
 @tailwind utilities;
+
+// import custom tailwind styles
+@import 'custom/tailwind.scss'

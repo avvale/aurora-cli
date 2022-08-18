@@ -23,6 +23,30 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class DecimalDirective implements OnChanges, OnInit
 {
+    // inputs
+    @Input() integerNumberAmount: number = null;
+    @Input() decimalNumberAmount: number = null;
+    @Input() decimal = true;
+    @Input() decimalSeparator = '.';
+    @Input() allowNegatives = false;
+    @Input() allowPaste = true;
+    @Input() negativeSign = '-';
+    @Input() min = -Infinity;
+    @Input() max = Infinity;
+    @Input() pattern?: string | RegExp;
+    @Input('value')
+    set value(val)
+    {
+        this._value = val;
+    }
+
+    get value(): string | null
+    {
+        return this._value;
+    }
+    private _value: string | null;
+
+    // variables
     private hasDecimalPoint = false;
     private hasNegativeSign = false;
     private navigationKeys = [
@@ -39,54 +63,15 @@ export class DecimalDirective implements OnChanges, OnInit
         'Copy',
         'Paste',
     ];
-
-    @Input() integerNumberAmount: number = null;
-    @Input() decimalNumberAmount: number = null;
-
-    @Input() decimal = true;
-    @Input() decimalSeparator = '.';
-    @Input() allowNegatives = false;
-    @Input() allowPaste = true;
-    @Input() negativeSign = '-';
-    @Input() min = -Infinity;
-    @Input() max = Infinity;
-    @Input() pattern?: string | RegExp;
     private regex: RegExp | null = null;
     inputElement: HTMLInputElement;
 
-    private _value: string | null;
-
-    constructor(public el: ElementRef)
+    constructor(
+        public el: ElementRef,
+    )
     {
         this.inputElement = el.nativeElement;
     }
-
-    @Input('value')
-    set value(val)
-    {
-        this._value = val;
-    }
-
-    get value(): string | null
-    {
-        return this._value;
-    }
-
-    _onChange(value: any): void
-    {/**/}
-
-    writeValue(value: any): void
-    {
-        this._value = value;
-    }
-
-    registerOnChange(fn: (value: any) => void): void
-    {
-        this._onChange = fn;
-    }
-
-    registerOnTouched(): void
-    {/**/}
 
     ngOnInit(): void
     {
@@ -136,6 +121,22 @@ export class DecimalDirective implements OnChanges, OnInit
             this.max = isNaN(maybeMax) ? Infinity : maybeMax;
         }
     }
+
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    propagateChange = (_: any) => { /**/ };
+
+    writeValue(value: any): void
+    {
+        this._value = value;
+    }
+
+    registerOnChange(fn: (value: any) => void): void
+    {
+        this.propagateChange = fn;
+    }
+
+    registerOnTouched(): void
+    {/**/}
 
     @HostListener('beforeinput', ['$event'])
     onBeforeInput(e: InputEvent): any
@@ -247,11 +248,11 @@ export class DecimalDirective implements OnChanges, OnInit
                 e.preventDefault();
             }
 
-            this._onChange(newNumber);
+            this.propagateChange(newNumber);
         }
         else
         {
-            this._onChange('');
+            this.propagateChange('');
         }
 
     }

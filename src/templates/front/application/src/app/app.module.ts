@@ -6,13 +6,15 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FuseModule } from '@fuse';
 import { FuseConfigModule } from '@fuse/services/config';
 import { FuseMockApiModule } from '@fuse/lib/mock-api';
-import { AuroraModule, LangService, JsonLangService, RouteReuseStrategyService } from '@aurora';
+import { AuroraModule, LangService, JsonLangService, RouteReuseStrategyService, SessionLocalStorageService, SessionService, UserDataStorageService, IamService } from '@aurora';
 import { CoreModule } from 'app/core/core.module';
 import { appConfig } from 'app/core/config/app.config';
 import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
+import { UserDataStorageLocalStorageService } from '@aurora/components/user-data-storage/user-data-storage-local-storage-adapter.service';
+import { IamMockAdapterService } from '@aurora/modules/iam/iam-mock-adapter.service';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -53,6 +55,18 @@ const routerConfig: ExtraOptions = {
         {
             provide : RouteReuseStrategy,
             useClass: RouteReuseStrategyService,
+        },
+        {
+            provide : UserDataStorageService,
+            useClass: UserDataStorageLocalStorageService,
+        },
+        {
+            provide : SessionService,
+            useClass: SessionLocalStorageService,
+        },
+        {
+            provide : IamService,
+            useClass: IamMockAdapterService,
         },
     ],
     bootstrap: [

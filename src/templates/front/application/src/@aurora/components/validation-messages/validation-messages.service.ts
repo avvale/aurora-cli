@@ -121,7 +121,7 @@ export class ValidationMessagesService
     addControl(fieldName: string, abstractControl: AbstractControl, formErrors: FormMessageErrors): void
     {
         merge(
-            this.validate$,     // observable to force validation
+            this.validate$,                 // observable to force validation
             abstractControl.valueChanges,
             abstractControl.statusChanges,
         )
@@ -134,16 +134,16 @@ export class ValidationMessagesService
      * @param formControl
      * @param data
      */
-    onChange(ac: AbstractControl, options: ValidateOptions): Observable<string>
+    onChange(abstractControl: AbstractControl, options: ValidateOptions): Observable<string>
     {
-        if (! ac) { return; }
+        if (! abstractControl) { return; }
 
         let formError;
-        if ((ac && ac.dirty && ac.invalid) || options?.force)
+        if ((abstractControl && abstractControl.dirty && abstractControl.invalid) || options?.force)
         {
-            for (const error in ac.errors)
+            for (const error in abstractControl.errors)
             {
-                if (ac.errors[error]) formError = this.getMessage(error, ac);
+                if (abstractControl.errors[error]) formError = this.getMessage(error, abstractControl);
             }
         }
         return formError;

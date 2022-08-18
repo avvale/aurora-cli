@@ -24,6 +24,7 @@ export const iamMeAccount =  gql`
             user {
                 id
                 name
+                data
             }
             createdAt
             updatedAt

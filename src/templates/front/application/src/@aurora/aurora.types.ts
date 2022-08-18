@@ -1,7 +1,20 @@
-export type Appearance = 'legacy' | 'standard' | 'fill' | 'outline';
+import { ColumnConfig, ColumnFilterStorage } from '@aurora';
+
+export interface Action
+{
+    id: string;
+    isViewAction?: boolean;
+    beforeRunAction?: (action: Action) => void;
+    afterRunAction?: (action: Action) => void;
+    data?: {
+        [key: string]: any;
+    };
+}
 
 // options to set global and local api environment
 export type ApiEnvironment = 'sandbox' | 'live';
+
+export type Appearance = 'legacy' | 'standard' | 'fill' | 'outline';
 
 export interface BoundedContext
 {
@@ -64,8 +77,23 @@ export interface RouteData
     [key:string]: any;
 }
 
+export interface Session
+{
+    columnFilters?: { [key:string]: ColumnFilterStorage; };
+    [key: string]: any;
+}
 
+export interface ColumnConfigStorage
+{
+    id: string; // id of grid where apply filter
+    hash: string;
+    columnsConfig: ColumnConfig[];
+}
 
+export interface UserDataStorage {
+    columnsConfigStorage?: { [key:string]: ColumnConfigStorage; };
+    [key: string]: any;
+}
 
 
 
@@ -73,7 +101,6 @@ export interface RouteData
 
 
 // TODO, tipos por revisar
-
 export enum FieldAppearance
 {
     FILL     = 'fill',

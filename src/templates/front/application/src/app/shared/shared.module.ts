@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BreadcrumbModule, MaterialGridModule, TitleModule } from '@aurora';
+import { AssociatedElementsManagerModule, BreadcrumbModule, DatepickerSqlFormatModule, DatetimepickerSqlFormatModule, GridDialogModule, GridModule, SelectElementGridModule, TitleModule } from '@aurora';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
 @NgModule({
     imports: [
@@ -9,9 +10,17 @@ import { BreadcrumbModule, MaterialGridModule, TitleModule } from '@aurora';
         FormsModule,
         ReactiveFormsModule,
 
+        // ng-matero
+        MtxDatetimepickerModule,
+
         // @aurora
+        AssociatedElementsManagerModule,
         BreadcrumbModule,
-        MaterialGridModule,
+        DatepickerSqlFormatModule,
+        DatetimepickerSqlFormatModule,
+        GridDialogModule,
+        GridModule,
+        SelectElementGridModule,
         TitleModule,
     ],
     exports: [
@@ -19,9 +28,16 @@ import { BreadcrumbModule, MaterialGridModule, TitleModule } from '@aurora';
         FormsModule,
         ReactiveFormsModule,
 
+        // ng-matero
+        MtxDatetimepickerModule,
+
         // @aurora
+        AssociatedElementsManagerModule,
         BreadcrumbModule,
-        MaterialGridModule,
+        DatepickerSqlFormatModule,
+        DatetimepickerSqlFormatModule,
+        GridModule,
+        SelectElementGridModule,
         TitleModule,
     ],
 })

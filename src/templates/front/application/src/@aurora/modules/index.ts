@@ -5,3 +5,4 @@ export * from './iam';
 export * from './lang';
 export * from './orm';
 export * from './routing';
+export * from './session';

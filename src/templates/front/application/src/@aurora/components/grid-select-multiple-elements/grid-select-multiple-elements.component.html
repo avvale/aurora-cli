@@ -1,0 +1,72 @@
+<div class="relative">
+    <p class="absolute top-0 -left-1 bg-white px-2 pt-1 origin-center -translate-y-1/2 scale-75 text-base z-999">
+        <span class="opacity-60">{{ label }}</span>
+    </p>
+
+    <div class="rounded-md border hover:border-2 focus-within:border-2 p-0.5 hover:p-px focus-within:p-px transition-all">
+        <!-- main -->
+        <div
+            class="flex flex-auto pt-0 px-2 overflow-y-auto"
+            cdkScrollable
+        >
+            <!-- grid -->
+            <au-grid
+                [columnsConfig]="columnsConfig"
+                [data]="data"
+                [hasDragAndDrop]="hasDragAndDrop"
+                [hasFilterButton]="hasFilterButton"
+                [hasPagination]="hasPagination"
+                [id]="gridId"
+                [originColumnsConfig]="originColumnsConfig"
+                (action)="action.emit($event)"
+                (stateChange)="stateChange.emit($event)"
+                (columnsConfigChange)="columnsConfigChange.next($event)"
+                (rowDrop)="rowDrop.emit($event)"
+            >
+                <ng-template
+                    auGridCustomHeaderTemplate
+                    position="left"
+                >
+                    <!-- we can defined buttons from component parent across template directive -->
+                    <ng-container *ngIf="gridSelectMultipleCustomHeadersTemplate">
+                        <ng-container
+                            *ngTemplateOutlet="gridSelectMultipleCustomHeadersTemplate.templateRef; context: { }"
+                        >
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- we can use default button -->
+                    <ng-container *ngIf="!gridSelectMultipleCustomHeadersTemplate">
+                        <button
+                            mat-icon-button
+                            class="mr-2"
+                            (click)="handleElementsDialog(newActionId)"
+                        >
+                            <mat-icon>add</mat-icon>
+                            <span class="cdk-visually-hidden">
+                                Add new item
+                            </span>
+                        </button>
+                    </ng-container>
+                </ng-template>
+
+                <!-- proxy to pass GridCellValueTemplateDirective -->
+                <ng-container *ngFor="let gridSelectMultipleCellValue of gridSelectMultipleCellValuesTemplate">
+                    <ng-template
+                        auGridCellValueTemplate
+                        let-value
+                        let-columnConfig="columnConfig"
+                        let-row="row"
+                        [field]="gridSelectMultipleCellValue.field"
+                    >
+                        <ng-container *ngTemplateOutlet="gridSelectMultipleCellValue.templateRef; context: { $implicit: value, columnConfig, row }">
+                        </ng-container>
+                    </ng-template>
+                </ng-container>
+
+            </au-grid>
+            <!-- / grid -->
+        </div>
+        <!-- / main -->
+    </div>
+</div>

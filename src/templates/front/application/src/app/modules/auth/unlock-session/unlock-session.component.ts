@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { AuthService } from 'app/core/auth/auth.service';
@@ -22,7 +22,7 @@ export class AuthUnlockSessionComponent implements OnInit
     };
     name: string;
     showAlert: boolean = false;
-    unlockSessionForm: FormGroup;
+    unlockSessionForm: UntypedFormGroup;
     private _email: string;
 
     /**
@@ -31,7 +31,7 @@ export class AuthUnlockSessionComponent implements OnInit
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _authService: AuthService,
-        private _formBuilder: FormBuilder,
+        private _formBuilder: UntypedFormBuilder,
         private _router: Router,
         private _userService: UserService
     )

@@ -54,6 +54,7 @@ export class DecimalsComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             example1: ['', [Validators.required]],
             example2: ['', [Validators.required]],
+            example3: ['', [Validators.required]],
         });
     }
 }

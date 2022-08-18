@@ -5,36 +5,35 @@ export class Criteria
 {
     /**
      * get arguments for pagination query
-     *
-     * @param args
-     * @param offset
-     * @param limit
-     * @param sort
-     * @param order
      */
-    static getPaginationQueryStatement(
+    static getPaginationDefaultValuesQueryStatement(
         {
             query = {},
-            offset = 0,
-            limit = 10,
-            sort = 'name',
-            order = 'desc',
+            defaultWhere = {},
+            defaultOffset = 0,
+            defaultLimit = 10,
+            defaultOrderField = 'createdAt',
+            defaultOrderDirection = Order.DESC,
         }: {
             query?: QueryStatement;
-            offset?: number;
-            limit?: number;
-            sort?: string | string[];
-            order?: string;
+            defaultWhere?: any;
+            defaultOffset?: number;
+            defaultLimit?: number;
+            defaultOrderField?: string;
+            defaultOrderDirection?: any;
         } = {},
     ): QueryStatement
     {
-        order = order === 'asc' ? Order.ASC : Order.DESC;
-
-        return merge({
-            limit,
-            offset,
-            order: Array.isArray(sort) ? [[...sort, order]] : [[sort, order]],
-        }, query);
+        return {
+            where : defaultWhere,
+            offset: defaultOffset,
+            limit : defaultLimit,
+            ...query,
+            order : [[
+                (Array.isArray(query.order) && Array.isArray(query.order[0]) && query.order[0][0] ? query.order[0][0] : defaultOrderField),
+                (Array.isArray(query.order) && Array.isArray(query.order[0]) && query.order[0][1] ? query.order[0][1] : defaultOrderDirection),
+            ]],
+        };
     }
 
     static getFindByIdArguments(

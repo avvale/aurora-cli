@@ -1,4 +1,6 @@
 @use '@angular/material' as mat;
+/* Set colors styles for @ng-matero/extensions package */
+@use '@ng-matero/extensions' as mtx;
 @use "sass:map";
 
 /* Include the core Angular Material styles */
@@ -110,6 +112,10 @@ body .light {
 
     /* Use all-component-colors to only generate the colors */
     @include mat.all-component-colors($light-theme);
+
+    /* Set colors styles for @ng-matero/extensions package */
+    @include mtx.all-component-themes($light-theme);
+    @include mtx.all-experimental-component-themes($light-theme);
 }
 
 body.dark,
@@ -164,4 +170,8 @@ body .dark {
 
     /* Use all-component-colors to only generate the colors */
     @include mat.all-component-colors($dark-theme);
+
+    /* Set colors styles for @ng-matero/extensions package */
+    @include mtx.all-component-themes($dark-theme);
+    @include mtx.all-experimental-component-themes($dark-theme);
 }

@@ -1,34 +1,46 @@
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { log } from '@aurora/functions/log';
 import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache, NormalizedCacheObject } from '@apollo/client/core';
+import { Utils } from '@aurora';
+import { TranslocoService } from '@ngneat/transloco';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { log } from '@aurora/functions/log';
 import { HttpLink } from 'apollo-angular/http/http-link';
 import { environment } from 'environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { lastValueFrom } from 'rxjs';
+import { extractGraphqlMessageErrors, extractGraphqlStatusCodeErrors } from './graphql.functions';
 
-export const apolloFactory = (httpLink: HttpLink, authService: AuthService): ApolloClientOptions<NormalizedCacheObject> =>
+export const apolloFactory = (
+    httpLink: HttpLink,
+    authService: AuthService,
+    confirmationService: FuseConfirmationService,
+    translocoService: TranslocoService,
+): ApolloClientOptions<NormalizedCacheObject> =>
 {
+    const headers = new Headers();
+
     const auth = setContext(async(operation, context) =>
     {
+        // set user timezone
+        headers.set('X-Timezone', Utils.timezone());
+
         // return basic authentication form login
         if (operation.operationName === 'oAuthCreateCredentials')
         {
-            return {
-                headers: {
-                    Authorization: `Basic ${btoa(environment.oAuth.applicationCode + ':' + environment.oAuth.applicationSecret)}`,
-                },
-            };
+            headers.set('Authorization', `Basic ${btoa(environment.oAuth.applicationCode + ':' + environment.oAuth.applicationSecret)}`);
+        }
+        else
+        {
+            // check access token, if is expired create other one with refresh token
+            await lastValueFrom(authService.check());
+
+            // set bearer token
+            headers.set('Authorization', `Bearer ${authService.accessToken}`);
         }
 
-        // check access token, if is expired create other one with refresh token
-        await lastValueFrom(authService.check());
-
-        // return bearer token
         return {
-            headers: {
-                Authorization: `Bearer ${authService.accessToken}`,
-            },
+            headers: Object.fromEntries(headers.entries()),
         };
     });
 
@@ -38,20 +50,36 @@ export const apolloFactory = (httpLink: HttpLink, authService: AuthService): Apo
         // graphql error
         if (graphQLErrors)
         {
-            log('[DEBUG] GraphQL error', graphQLErrors);
+            log(`[DEBUG] GraphQL Error: ${extractGraphqlMessageErrors(graphQLErrors)}`);
 
-            // ver src/@horus/components/apollo/apollo.service.ts de horus cci
-            graphQLErrors.map(({ message, extensions }) =>
+            const unauthorizedError = graphQLErrors.find(({ message, extensions }: { message: string; extensions: any; }) => extensions.response?.statusCode === 401);
+
+            if (unauthorizedError)
             {
-                log(`[DEBUG] Message: ${message}, Extensions: ${extensions}`);
+                authService.signOut();
+                location.reload();
+                return;
+            }
 
-                switch (extensions.response['statusCode'])
-                {
-                    case 401:
-                        authService.signOut();
-                        location.reload();
-                        break;
-                }
+            const errorMessage = translocoService.translate('error.' + extractGraphqlStatusCodeErrors(graphQLErrors));
+            confirmationService.open({
+                title  : 'Error',
+                message: errorMessage === 'error.' + extractGraphqlStatusCodeErrors(graphQLErrors) ? extractGraphqlMessageErrors(graphQLErrors) : errorMessage,
+                icon   : {
+                    show : true,
+                    name : 'error',
+                    color: 'error',
+                },
+                actions: {
+                    confirm: {
+                        show : true,
+                        label: 'Ok',
+                        color: 'warn',
+                    },
+                    cancel: {
+                        show: false,
+                    },
+                },
             });
         }
 

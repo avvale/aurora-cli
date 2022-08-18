@@ -1,0 +1,181 @@
+<div class="flex flex-col h-full">
+	<div mat-dialog-title class="dialog-header">
+		<div class="title">
+			<mat-icon>filter_list</mat-icon>
+			<span>{{ 'filter' | gridTranslate | async }}</span>
+		</div>
+
+		<button
+            mat-icon-button
+            [disableRipple]="true"
+            [mat-dialog-close]="undefined"
+        >
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
+	<mat-form-field
+		appearance="outline"
+		class="w-full cursor-pointer my-4"
+		data-input-type="filter-field-control"
+	>
+		<mat-label>{{ 'field' | gridTranslate | async }}</mat-label>
+		<input
+			type="text"
+			aria-label="String"
+			matInput
+			class="cursor-pointer disabled:cursor-not-allowed"
+			[placeholder]="'pleaseSelectField' | gridTranslate | async"
+			[formControl]="searchFieldNameControl"
+			[matAutocomplete]="auto"
+		/>
+		<mat-autocomplete
+			autoActiveFirstOption
+			#auto="matAutocomplete"
+			(optionSelected)="handleFieldSelectionChange($event)"
+		>
+			<mat-option
+				*ngFor="let item of filteredColumnsConfig | async"
+				[value]="item"
+			>
+                {{ item.field | gridTranslate:'column' | async }}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+
+	<div mat-dialog-content class="flex flex-col my-4 h-full">
+		<!-- column picker -->
+		<div class="flex-grow">
+			<form
+                id="filterGridDialog"
+				class="w-full grid grid-cols-12 gap-2 items-center"
+				[formGroup]="containerForm"
+			>
+				<!-- generated input fields -->
+                <ng-container formArrayName="formColumnFilter">
+                    <ng-container *ngFor="let formFilter of formColumnFilter.controls; let i=index">
+                        <ng-container
+                            [ngSwitch]="formFilter.get('type').value"
+                            [formGroup]="formFilter"
+                        >
+                            <span class="text-sm col-span-12">{{ formFilter.get('field').value | gridTranslate:'column' | async }}</span>
+
+                            <!-- criteria picker -->
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-span-4"
+                                tiny
+                            >
+                                <mat-label>{{ 'operator' | gridTranslate | async }}</mat-label>
+                                <mat-select formControlName="operator">
+                                    <mat-option
+                                        *ngFor="let filterOperator of filterOperators | filterOperators:formFilter.get('type').value"
+                                        [value]="filterOperator.operator"
+                                    >
+                                        {{ operatorsMessages | async | get:filterOperator.translation }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <!-- STRING -->
+                            <mat-form-field
+                                *ngSwitchCase="columnDataType.STRING"
+                                appearance="outline"
+                                class="col-span-7 xx"
+                                tiny
+                            >
+                                <mat-label>{{ 'value' | gridTranslate | async }}</mat-label>
+                                <input
+                                    autocomplete="off"
+                                    formControlName="value"
+                                    matInput
+                                />
+
+                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate | async }}</span>
+                                </div>
+                            </mat-form-field>
+
+                            <!-- NUMBER -->
+                            <mat-form-field
+                                *ngSwitchCase="columnDataType.NUMBER"
+                                appearance="outline"
+                                class="col-span-7 xx"
+                                tiny
+                            >
+                                <mat-label>{{ 'value' | gridTranslate | async }}</mat-label>
+                                <input
+                                    type="number"
+                                    autocomplete="off"
+                                    formControlName="value"
+                                    matInput
+                                />
+
+                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate | async }}</span>
+                                </div>
+                            </mat-form-field>
+
+                            <!-- DATE -->
+                            <mat-form-field
+                                *ngSwitchCase="columnDataType.DATE"
+                                appearance="outline"
+                                class="col-span-7 xx"
+                                tiny
+                            >
+                                <mat-label>{{ 'value' | gridTranslate | async }}</mat-label>
+                                <input
+                                    autocomplete="off"
+                                    formControlName="value"
+                                    matInput
+                                    [auDatepickerSqlFormat]
+                                    [matDatepicker]="picker"
+                                />
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="picker"
+                                ></mat-datepicker-toggle>
+
+                                <mat-datepicker #picker></mat-datepicker>
+
+                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox--datepicker">
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate | async }}</span>
+                                </div>
+                            </mat-form-field>
+
+                            <button
+                                mat-icon-button
+                                class="col-span-1"
+                                type="button"
+                                (click)="handleDeleteFilter(i)"
+                            >
+                                <mat-icon>highlight_off</mat-icon>
+                            </button>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+			</form>
+		</div>
+	</div>
+
+	<!-- confirmation buttons -->
+	<div class="w-full flex col-span-2">
+		<button
+			[mat-dialog-close]="handleRemoveFilters()"
+			class="w-full mr-2"
+			mat-flat-button
+		>
+			{{ 'clearFilters' | gridTranslate | async }}
+		</button>
+		<button
+            mat-flat-button
+            type="submit"
+			class="w-full"
+			color="primary"
+            form="filterGridDialog"
+			[mat-dialog-close]="handleCloseDialog()"
+			[disabled]="!containerForm.valid"
+		>
+        {{ 'filter' | gridTranslate | async }}
+		</button>
+	</div>
+</div>

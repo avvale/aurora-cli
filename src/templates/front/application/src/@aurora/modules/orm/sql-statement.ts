@@ -1,3 +1,5 @@
+export type ContactOperator = Operator.and | Operator.or;
+
 export interface IndexHint
 {
     type: IndexHints;

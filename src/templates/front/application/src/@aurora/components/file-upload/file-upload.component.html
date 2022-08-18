@@ -1,0 +1,52 @@
+<div class="block">
+    <p class="text-base opacity-60" *ngIf="label != ''">{{ label }}</p>
+    <ngx-file-drop
+        [dropZoneLabel]="dropLabel" 
+        dropZoneClassName="border-2 border-dashed rounded text-base"
+        [browseBtnLabel]="browseLabel"
+        browseBtnClassName="ml-1 cursor-pointer text-base underline underline-offset-2"
+        contentClassName="px-4 py-16 flex justify-center"
+        [showBrowseBtn]="hasBrowse"
+        [directory]="false"
+        [accept]="acceptType"
+        [disabled]="isDisabled"
+        [multiple]="isMultiple"
+        (onFileDrop)="fileAdd($event)"
+        (onFileOver)="fileEnter($event)"
+        (onFileLeave)="fileLeave($event)">
+        <!-- <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+            Optional custom content that replaces the the entire default content.
+            <button type="button" (click)="openFileSelector()">Browse Files</button>
+        </ng-template> -->
+    </ngx-file-drop>
+    <div class="block pt-4">
+        <ng-container *ngFor="let file of addedFiles">
+            <div class="flex justify-between items-center p-4 mb-2 border rounded">
+                <p class="text-base flex items-center">
+                    <mat-icon
+                        class="icon-size-5 mr-2"
+                        [svgIcon]="'heroicons_solid:document'"
+                    >
+                    </mat-icon>
+                    {{ file.name }}
+                </p>
+                <p class="text-base opacity-60">
+                    {{ file.type }}
+                </p>
+                <p class="text-base opacity-60">
+                    {{ calculateSize(file.size).size }}{{ calculateSize(file.size).unit }}
+                </p>
+                <button
+                    class="ml-3"
+                    mat-icon-button
+                    (click)="fileRemove(file)">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:trash'"
+                    >
+                    </mat-icon>
+                </button>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,9 +1,9 @@
 /* 1. Components */
-@import 'components/example-viewer';
-@import 'components/input';
+@use 'components/example-viewer';
+@use 'components/input';
 
 /* 2. Overrides */
-@import 'overrides/angular-material';
-@import 'overrides/highlightjs';
-@import 'overrides/perfect-scrollbar';
-@import 'overrides/quill';
+@use 'overrides/angular-material';
+@use 'overrides/highlightjs';
+@use 'overrides/perfect-scrollbar';
+@use 'overrides/quill';

@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { camelCase, flow, mixin, upperFirst } from 'lodash-es';
 
 /**
  * Convert a string to Pascal Case (removing non alphabetic characters).
@@ -12,6 +12,7 @@ import * as _ from 'lodash';
  */
 String.prototype.toPascalCase = function (this: string): string
 {
-    _.mixin({ pascalCase: _.flow(_.camelCase, _.upperFirst) });
-    return _.pascalCase(this);
+    const target: { pascalCase: (value: string) => string; } = { pascalCase: () => '' };
+    mixin(target, { pascalCase: flow(camelCase, upperFirst) });
+    return target.pascalCase(this);
 };

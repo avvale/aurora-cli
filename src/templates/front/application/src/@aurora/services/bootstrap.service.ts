@@ -1,11 +1,9 @@
 /* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { SessionService } from '@aurora/modules/session/session.service';
-import { log } from '@aurora/functions/log';
-import { LangService } from '@aurora/modules/lang/lang.service';
+import { Environment, log, SessionService } from '@aurora';
+// import { LangService } from '@aurora/modules/lang/lang.service';
 import { first } from 'rxjs';
-import { Environment } from '@aurora';
 
 @Injectable({
     providedIn: 'root',
@@ -14,24 +12,27 @@ export class BootstrapService
 {
     constructor(
         private sessionService: SessionService,
-        private auroraLangService: LangService,
+        //private auroraLangService: LangService,
     ) {}
 
     async init(): Promise<void>
     {
         this.checkEnvironmentSchema(environment);
 
+        // get session from local storage and set in session observable
+        this.sessionService.initSession();
+
         // it may be that we do not have languages in the session, possibly because we do not use the module oAuth
         // in this case we get the languages from the database or from a json hosted in assets folder
-        if (!this.sessionService.hasLangs)
+        // TODO, revisar los idiomas
+        /* if (!this.sessionService.hasLangs)
         {
             // init subscribe to launch languages to subscribers
             this.auroraLangService
                 .get()
                 .pipe(first())
                 .subscribe(langs => this.sessionService.session = { langs });
-        }
-
+        } */
 
         log('[DEBUG] BootstrapService Initialized');
     }

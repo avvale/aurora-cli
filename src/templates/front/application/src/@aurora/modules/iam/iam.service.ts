@@ -1,80 +1,15 @@
-import { Injectable } from '@angular/core';
-import { first, map, Observable, of, ReplaySubject, tap } from 'rxjs';
-import { GraphQLService } from '@aurora/modules/graphql/graphql.service';
-import { iamMeAccount } from './iam.graphql';
+import { Observable } from 'rxjs';
 import { Account } from './iam.types';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class IamService
+export abstract class IamService<T = Account>
 {
-    private _account: ReplaySubject<Account> = new ReplaySubject<Account>(1);
+    abstract set account(value: T);
 
-    /**
-     * Constructor
-     */
-    constructor(
-        private graphqlService: GraphQLService,
-    )
-    {
-    }
+    abstract get account$(): Observable<T>;
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
+    abstract get me(): T;
 
-    /**
-     * Setter & getter for account
-     *
-     * @param value
-     */
-    set account(value: Account)
-    {
-        // Store the value
-        this._account.next(value);
-    }
+    abstract get(): Observable<{ me: T; }>;
 
-    get account$(): Observable<Account>
-    {
-        return this._account.asObservable();
-    }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Get the current logged in account data
-     */
-    get(): Observable<{ me: Account; }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{ account: Account; }>({
-                query: iamMeAccount,
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map<{ data: { iamMeAccount: Account; };}, { me: Account; }>(result => ({ me: result.data.iamMeAccount })),
-                tap(data => this._account.next(data.me)),
-            );
-    }
-
-    /**
-     * Update the user
-     *
-     * @param account
-     */
-    update(account: Account): Observable<any>
-    {
-        /* return this._httpClient.patch<User>('api/common/user', { user }).pipe(
-            map(response =>
-            {
-                this._user.next(response);
-            }),
-        ); */
-        return of(false);
-    }
+    abstract update(account: T): Observable<any>
 }

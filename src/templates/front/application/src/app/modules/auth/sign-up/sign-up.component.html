@@ -30,7 +30,8 @@
             <!-- Sign Up form -->
             <form
                 class="mt-8"
-                [formGroup]="signUpForm">
+                [formGroup]="signUpForm"
+                #signUpNgForm="ngForm">
 
                 <!-- Name field -->
                 <mat-form-field class="w-full">
@@ -116,12 +117,11 @@
 
                 <!-- Submit button -->
                 <button
-                    mat-flat-button
                     class="fuse-mat-button-large w-full mt-6"
+                    mat-flat-button
                     [color]="'primary'"
                     [disabled]="signUpForm.disabled"
-                    (click)="signUp()"
-                >
+                    (click)="signUp()">
                     <span *ngIf="!signUpForm.disabled">
                         Create your free account
                     </span>

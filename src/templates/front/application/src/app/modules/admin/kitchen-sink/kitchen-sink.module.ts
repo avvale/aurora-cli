@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 import { TranslocoModule, TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { FuseConfirmationModule } from '@fuse/services/confirmation';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
-import { DatePickerDayjsAdapter, DatePickerDayjsFormats, DatepickerModule, ValidationMessagesModule, DecimalModule } from '@aurora';
+import { DatePickerDayjsAdapter, DatePickerDayjsFormats, DatepickerModule, ValidationMessagesModule, DecimalModule, DatepickerSqlFormatModule, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats } from '@aurora';
+import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { SharedModule } from 'app/shared/shared.module';
@@ -31,7 +32,8 @@ import { KitchenSinkComponent } from './kitchen-sink.component';
 import { DecimalsComponent } from './decimals/decimals.component';
 import { GridComponent } from './grid/grid.component';
 import { kitchenSink } from './kitchen-sink.menu';
-
+import { DatesComponent } from './dates/dates.component';
+import { SelectsComponent } from './selects/selects.component';
 
 @NgModule({
     imports: [
@@ -59,12 +61,15 @@ import { kitchenSink } from './kitchen-sink.menu';
 
         // @Aurora
         DatepickerModule,
+        DatepickerSqlFormatModule,
         DecimalModule,
     ],
     declarations: [
-        KitchenSinkComponent,
+        DatesComponent,
         DecimalsComponent,
         GridComponent,
+        KitchenSinkComponent,
+        SelectsComponent,
     ],
     providers: [
         {
@@ -84,6 +89,14 @@ import { kitchenSink } from './kitchen-sink.menu';
         {
             provide : MAT_DATE_FORMATS,
             useValue: DatePickerDayjsFormats,
+        },
+        {
+            provide : DatetimeAdapter,
+            useClass: DateTimePickerDayjsAdapter,
+        },
+        {
+            provide : MTX_DATETIME_FORMATS,
+            useValue: DatetimePickerDayjsFormats,
         },
     ],
 })

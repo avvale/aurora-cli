@@ -7,7 +7,11 @@ import * as dayjs from 'dayjs';
 @Component({
     selector: 'au-datepicker',
     template: `
-        <mat-form-field [appearance]="appearance">
+        <mat-form-field
+            [appearance]="appearance"
+            [attr.tiny]="tiny"
+            [attr.small]="small"
+        >
             <mat-label>{{ label }}</mat-label>
             <input
                 autocomplete="off"
@@ -45,6 +49,8 @@ export class DatepickerComponent implements ControlValueAccessor
     @Input() debug = false;
     @Input() error: string;
     @Input() _dateValue: string; // notice the '_'
+    @Input() tiny: boolean;
+    @Input() small: boolean;
 
     control: NgControl;
 
@@ -93,5 +99,6 @@ export class DatepickerComponent implements ControlValueAccessor
         this.propagateChange = fn;
     }
 
-    registerOnTouched(): void { /**/ }
+    registerOnTouched(): void
+    { /**/ }
 }

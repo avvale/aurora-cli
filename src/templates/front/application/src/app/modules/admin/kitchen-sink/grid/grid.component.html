@@ -5,7 +5,7 @@
 
         <div class="flex-1 min-w-0">
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
-            <au-title><mat-icon svgIcon="heroicons_solid:tag" class="icon-size-10 mr-2"></mat-icon> {{ t('kitchenSink.Grid') }}</au-title>
+            <au-title><mat-icon svgIcon="heroicons_outline:view-list" class="icon-size-10 mr-2"></mat-icon> {{ t('kitchenSink.Grid') }}</au-title>
         </div>
 
         <!-- Actions -->
@@ -17,7 +17,7 @@
     <!-- / Header -->
 
     <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
-        {{ dataEvent | json}}
+        {{ dataEvent | json}}
     </div>
 
     <!-- Main -->
@@ -26,23 +26,55 @@
         cdkScrollable>
 
         <!-- Grid -->
-        <au-material-grid
+        <au-grid
             [columnsConfig]="columnsConfig"
             [data]="gridData$ | async"
-            [translations]="gridTranslations$ | async"
-            (action)="onRunAction({ id: $event.action.id, data: { event: $event }})"
-            (pageChange)="onRunAction({ id: 'pagination', data: { event: $event }})"
-            (filtersChange)="onRunAction({ id: 'pagination', data: { event: $event }})"
-            (columnsConfigChanged)="handleColumnsConfigChanged($event)"
+            [selectedRows]="[{ id: '8a9251b2-4a49-4bd2-88e2-462445247e3c'}]"
+            [activatedColumnFilters]="defaultFilters"
+            [hasFilterButton]="true"
+            [hasColumnsConfigPropertiesButton]="true"
+            (action)="onRunAction($event)"
+            (columnsConfigChange)="handleColumnsConfigChange($event)"
+            (rowsSelectionChange)="handleRowsSelectionChange($event)"
+            (stateChange)="handleStateChange($event)"
+            (pageChange)="handlePageChange($event)"
+            (filtersChange)="handleFiltersChange($event)"
         >
             <ng-template
                 auCellValueTemplate
                 let-value
                 let-columnConfig="columnConfig"
-                field="customCode">
+                field="customCode"
+            >
                 {{ value }} (data transformed with template)
             </ng-template>
-        </au-material-grid>
+
+            <ng-template
+                auGridCustomHeaderTemplate
+                field="left"
+            >
+                <button
+                    mat-icon-button
+                    class="mr-2"
+                >
+                    <mat-icon>
+                        close
+                    </mat-icon>
+                </button>
+            </ng-template>
+
+            <!--
+            // without field property filter apply to all columns
+            <ng-template
+                auCellValueTemplate
+                field="code"
+                let-value
+                let-columnConfig="columnConfig"
+            >
+                {{ value }} (data transformed with template all fields)
+            </ng-template>
+            -->
+        </au-grid>
         <!-- / Grid -->
 
     </div>
