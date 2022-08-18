@@ -1,3 +1,4 @@
+import { ResolverType } from '../types';
 export class AdditionalApi
 {
     public path: string;
@@ -20,6 +21,11 @@ export class AdditionalApi
     get getResolverName(): string
     {
         return this.pathBoundedContext.toCamelCase() + this.pathAction.toPascalCase() + this.pathSegments.map(segment => segment.toPascalCase()).join('');
+    }
+
+    get getVariableName(): string
+    {
+        return this.pathAction.toCamelCase() + this.pathSegments.map(segment => segment.toPascalCase()).join('');
     }
 
     constructor(
@@ -51,12 +57,6 @@ export class AdditionalApi
             httpMethod  : this.httpMethod,
         };
     }
-}
-
-export enum ResolverType
-{
-    QUERY = 'query',
-    MUTATION = 'mutation',
 }
 
 export enum HttpMethodType

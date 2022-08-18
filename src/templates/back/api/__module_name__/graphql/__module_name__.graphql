@@ -165,7 +165,7 @@ type Query
 
     # additionalApis
     {{#each schema.additionalApis.queries}}
-    {{ getResolverName }}(payload: Any): Boolean!
+    {{ getResolverName }}(query: QueryStatement constraint: QueryStatement): [{{ ../schema.aggregateName }}]!
     {{/each}}
     {{/unlessEq}}
 }
@@ -194,7 +194,7 @@ type Mutation
 
     # additionalApis
     {{#each schema.additionalApis.mutations}}
-    {{ getResolverName }}(payload: Any): Boolean!
+    {{ getResolverName }}(payload: {{ toPascalCase ../schema.boundedContextName }}Update{{ toPascalCase ../schema.moduleName }}ByIdInput! constraint: QueryStatement): Boolean!
     {{/each}}
     {{/unlessEq}}
 }

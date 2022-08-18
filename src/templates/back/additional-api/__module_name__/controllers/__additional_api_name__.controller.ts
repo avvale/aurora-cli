@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Timezone } from '{{ config.auroraCorePackage }}';
+import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
+{{else}}
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto } from '../dto';
+{{/eq }}
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -23,7 +28,11 @@ import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ c
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ currentAdditionalApi.path }}')
 {{#if schema.hasOAuth}}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.*****') // defines the permission
+{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
+{{else}}
+@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
+{{/eq }}
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 {{/if}}
 export class {{ currentAdditionalApi.getClassName }}Controller
@@ -34,12 +43,18 @@ export class {{ currentAdditionalApi.getClassName }}Controller
 
     @{{ toPascalCase currentAdditionalApi.httpMethod }}()
     @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({ description: 'Defines the action performed', type: Object })
+    @ApiCreatedResponse({ description: 'Defines the action performed', type: {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}[{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto]{{else}}Boolean {{/eq~}} })
     {{#if schema.hasTenant}}
     @TenantPolicy()
     {{/if}}
     async main(
-        @Body() payload: any,
+        {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+        @Body('query') queryStatement?: QueryStatement,
+        @Body('constraint') constraint?: QueryStatement,
+        {{else}}
+        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
+        @Body('constraint') constraint?: QueryStatement,
+        {{/eq }}
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
@@ -47,7 +62,13 @@ export class {{ currentAdditionalApi.getClassName }}Controller
     )
     {
         return await this.handler.main(
+            {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+            queryStatement,
+            constraint,
+            {{else}}
             payload,
+            constraint,
+            {{/eq }}
             {{#if schema.hasTenant}}
             account,
             {{/if}}

@@ -1,5 +1,6 @@
 import { Property } from './property';
-import { AdditionalApi, ResolverType } from './additional-api';
+import { AdditionalApi } from './additional-api';
+import { ResolverType } from '../types';
 
 export class AdditionalApis
 {

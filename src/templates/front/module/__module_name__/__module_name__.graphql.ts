@@ -140,3 +140,39 @@ export const deleteMutation = gql`
         }
     }
 `;
+
+{{#unlessEq schema.additionalApis.lengthQueries 0 }}
+
+// Queries additionalApis
+{{#each schema.additionalApis.queries}}
+export const {{ getVariableName }}Query = gql`
+    query {{ getClassName }} (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        {{ getResolverName }} (
+            query: $query
+            constraint: $constraint
+        ){
+            ${fields}
+        }
+    }
+`;
+{{/each}}
+{{/unlessEq}}
+
+// Mutation additionalApis
+{{#each schema.additionalApis.mutations}}
+export const {{ getVariableName }}Mutation = gql`
+    mutation {{ getClassName }} (
+        $payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput!
+        $constraint: QueryStatement
+    ) {
+        {{ getResolverName }} (
+            payload: $payload
+            constraint: $constraint
+        )
+    }
+`;
+{{/each}}
+{{/unlessEq}}

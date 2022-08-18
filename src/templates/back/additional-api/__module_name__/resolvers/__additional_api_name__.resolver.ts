@@ -1,8 +1,8 @@
 {{#if schema.hasOAuth}}
 import { UseGuards } from '@nestjs/common';
 {{/if}}
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Timezone } from '{{ config.auroraCorePackage }}';
+import { Resolver, Args{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}, Query{{else}}, Mutation{{/eq }} } from '@nestjs/graphql';
+import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
 {{#if schema.hasOAuth}}
 // authorization
@@ -20,10 +20,19 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 {{/if}}
 // {{ config.applicationsContainer }}
 import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
+{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';
+{{else}}
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from '../../../../graphql';
+{{/eq }}
 
 @Resolver()
 {{#if schema.hasOAuth}}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.*****') // defines the permission
+{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
+{{else}}
+@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
+{{/eq }}
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 {{/if}}
 export class {{ currentAdditionalApi.getClassName }}Resolver
@@ -37,15 +46,27 @@ export class {{ currentAdditionalApi.getClassName }}Resolver
     @TenantPolicy()
     {{/if}}
     async main(
-        @Args('payload') payload: any,
+        {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+        @Args('query') queryStatement?: QueryStatement,
+        @Args('constraint') constraint?: QueryStatement,
+        {{else}}
+        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput,
+        @Args('constraint') constraint?: QueryStatement,
+        {{/eq }}
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Timezone() timezone?: string,
-    ): Promise<boolean>
+    ): Promise<{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[]{{else}}boolean{{/eq }}>
     {
         return await this.handler.main(
+            {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
+            queryStatement,
+            constraint,
+            {{else}}
             payload,
+            constraint,
+            {{/eq }}
             {{#if schema.hasTenant}}
             account,
             {{/if}}

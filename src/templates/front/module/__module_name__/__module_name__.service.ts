@@ -270,7 +270,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             });
     }
 
-    deleteById<T>(id: string, graphqlStatement = deleteByIdMutation): Observable<FetchResult<T>>
+    deleteById<T>(
+        id: string,
+        graphqlStatement = deleteByIdMutation
+    ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
@@ -299,4 +302,79 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: { query, constraint },
             });
     }
+{{#unlessEq schema.additionalApis.lengthQueries 0 }}
+
+    // Queries additionalApis
+{{#each schema.additionalApis.queries}}
+    {{ getVariableName }}(
+        {
+            graphqlStatement = {{ getVariableName }}Query,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{
+        objects: {{ ../schema.aggregateName }}[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                objects: {{ ../schema.aggregateName }};
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map<{
+                    data: {
+                        objects: {{ ../schema.aggregateName }}[];
+                    };
+                },
+                {
+                    objects: {{ ../schema.aggregateName }}[];
+                }>(result => result.data),
+                tap((data: {
+                    objects: {{ ../schema.aggregateName }}[];
+                }) =>
+                {
+                    this.{{ toCamelCase ../schema.moduleNames }}Subject$.next(data.objects);
+                }),
+            );
+    }
+{{/each}}
+{{/unlessEq}}
+{{#unlessEq schema.additionalApis.lengthMutations 0 }}
+
+    // Mutation additionalApis
+{{#each schema.additionalApis.mutations}}
+    {{ getVariableName }}<T>(
+        {
+            graphqlStatement = {{ getVariableName }}Mutation,
+            object = null,
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: any;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
+                },
+            });
+    }
+{{/each}}
+{{/unlessEq}}
 }
