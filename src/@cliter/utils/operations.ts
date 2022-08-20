@@ -162,7 +162,7 @@ export class Operations
         await this.generateI18NApiFiles();
 
         // create references, write imports in ts files
-        this.createReferences();
+        this.createBackReferences();
 
         // flag to generate e2e tests, this test can overwrite custom tests
         if (Operations.stateService.flags.tests)
@@ -322,14 +322,15 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.generateFrontRoutes();
         codeWriter.declareDashboardComponents();
         codeWriter.declareDashboardBoundedContext();
-        codeWriter.generateDashboardMenu();
+        codeWriter.generateFrontNavigation();
+        codeWriter.registerFrontNavigation();
         codeWriter.generateDashboardTranslations(Operations.stateService.schema.properties, 'en');
         codeWriter.generateDashboardTranslations(Operations.stateService.schema.properties, 'es');
-        codeWriter.generateDashboardMenuTranslation('en');
-        codeWriter.generateDashboardMenuTranslation('es');
+        codeWriter.generateDashboardNavigationTranslation('en');
+        codeWriter.generateDashboardNavigationTranslation('es');
     }
 
-    createReferences(): void
+    createBackReferences(): void
     {
         const codeWriter = new CodeWriter(
             path.join('src'),

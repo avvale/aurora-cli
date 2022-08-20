@@ -4,6 +4,7 @@ export interface CliterConfig
 {
     dashboardContainer: string;
     dashboardTranslations: string;
+    adminContainer: string;
     applicationsContainer: string;
     apiContainer: string;
     auroraCorePackage: string;
@@ -35,6 +36,7 @@ export const cliterConfig: CliterConfig =
 {
     // dashboard
     dashboardContainer   : path.join('app', 'modules', 'admin', 'apps'),
+    adminContainer       : path.join('app', 'modules', 'admin'),
     dashboardTranslations: path.join('assets', 'i18n'),
 
     // application
@@ -233,7 +235,7 @@ export const cliterConfig: CliterConfig =
     avoidOverwritingFilesIfExist: [
         path.join('back', 'module', 'index.ts'),
         path.join('back', 'api', '__bounded_context_name__.module.ts'),
-        path.join('front', 'module', '__bounded_context_name__.menu.ts'),
+        path.join('front', 'module', '__bounded_context_name__.navigation.ts'),
         path.join('front', 'module', '__bounded_context_name__.module.ts'),
         path.join('front', 'module', '__bounded_context_name__.routing.ts'),
         path.join('front', 'module', '__bounded_context_name__.types.ts'),

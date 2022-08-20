@@ -1,6 +1,6 @@
 import { FuseNavigationItem } from '@fuse/components/navigation';
 
-export const {{ toCamelCase schema.boundedContextName }}Menu: FuseNavigationItem = {
+export const {{ toCamelCase schema.boundedContextName }}Navigation: FuseNavigationItem = {
     id      : '{{ toCamelCase schema.boundedContextName }}',
     title   : '{{ toPascalCase schema.boundedContextName }}',
     type    : 'collapsable',

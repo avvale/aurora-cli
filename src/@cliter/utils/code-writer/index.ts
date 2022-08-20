@@ -342,6 +342,27 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
+    registerFrontNavigation(): void
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.adminContainer, 'admin.navigation.ts'));
+
+        // import bounded context navigation
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.navigation`,
+            [`${this.boundedContextName.toCamelCase()}Navigation`],
+        );
+
+        // add to adminNavigation navigation array the bounded context navigation
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `${this.boundedContextName.toCamelCase()}Navigation`,
+            'adminNavigation',
+        );
+
+        sourceFile?.saveSync();
+    }
+
     declareDashboardComponents(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
@@ -405,17 +426,17 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateDashboardMenu(): void
+    generateFrontNavigation(): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.menu.ts`));
-        const menu = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Menu');
-        const objectMenu = menu.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
-        const childrenProperty = objectMenu.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
-        const childrenArrayMenu = childrenProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-        const menuElements = childrenArrayMenu.getElements() as ObjectLiteralExpression[];
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.navigation.ts`));
+        const navigation = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Navigation');
+        const navigationObject = navigation.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+        const childrenProperty = navigationObject.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
+        const childrenArrayNavigation = childrenProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const navigationElements = childrenArrayNavigation.getElements() as ObjectLiteralExpression[];
 
         // avoid duplicated declaration
-        for (const element of menuElements)
+        for (const element of navigationElements)
         {
             const pathProperty = element.getPropertyOrThrow('id') as InitializerExpressionGetableNode;
             const pathString = pathProperty.getInitializerIfKindOrThrow(SyntaxKind.StringLiteral);
@@ -433,7 +454,7 @@ export class CodeWriter
     icon : 'heroicons_outline:tag',
     link : '/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}',
 },`,
-            childrenArrayMenu,
+            childrenArrayNavigation,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
                 const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
@@ -473,7 +494,7 @@ export class CodeWriter
         fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
-    generateDashboardMenuTranslation(langCode: string): void
+    generateDashboardNavigationTranslation(langCode: string): void
     {
         const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'));
 
