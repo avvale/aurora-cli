@@ -41,19 +41,26 @@ export default class Seed extends Command
 
             const { boundedContextName, moduleName }: any = await Prompter.promptForSeedModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
-            const seederPath = path.join('src', cliterConfig.apiContainer, boundedContextName, moduleName, 'seeder', 'seeder.ts');
+            const seederPath = path.join('dist', 'src', cliterConfig.apiContainer, boundedContextName, moduleName, 'seeder', 'seeder.js');
 
             // check if seeder class exists in @api tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 CliUx.ux.action.start('Creating environment');
 
-                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, (error, stdout, stderr) =>
+                const execution = shell.spawn(
+                    'node',
+                    [seederPath],
+                );
+
+                execution.stderr.on('data', (data) => {
+                    if (flags.log) console.error(data);
+                });
+
+                execution.on('close', code =>
                 {
                     CliUx.ux.action.stop('Environment created');
                     this.log(`%s %s Module seed ${moduleName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
-
-                    if (flags.log && error) console.error(error);
                 });
             }
             else
@@ -73,11 +80,17 @@ export default class Seed extends Command
             {
                 CliUx.ux.action.start('Creating environment');
 
-                shell.exec(`ts-node -r tsconfig-paths/register ${seederPath}`, (error, stdout, stderr) =>
-                {
-                    CliUx.ux.action.stop('Environment created');
-                    this.log(`%s %s Bounded Context seed ${boundedContextName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
-                });
+                shell.exec(
+                    `ts-node -r tsconfig-paths/register ${seederPath}`,
+                    {
+                        timeout: 120,
+                    },
+                    (error, stdout, stderr) =>
+                    {
+                        CliUx.ux.action.stop('Environment created');
+                        this.log(`%s %s Bounded Context seed ${boundedContextName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
+                    },
+                );
             }
             else
             {

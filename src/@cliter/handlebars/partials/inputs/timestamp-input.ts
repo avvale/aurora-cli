@@ -9,13 +9,24 @@ handlebars.registerPartial('timestampInput',
     <input
         matInput
         formControlName="{{ toCamelCase property.name }}"
-        [matDatepicker]="{{ toCamelCase property.name }}Picker"
+        [auDatetimepickerSqlFormat]
+        [mtxDatetimepicker]="{{ toCamelCase property.name }}Picker"
     >
-    <mat-datepicker-toggle
-        matSuffix
+    <mtx-datetimepicker-toggle
         [for]="{{ toCamelCase property.name }}Picker"
+        matSuffix
     >
-    </mat-datepicker-toggle>
-    <mat-datepicker #{{ toCamelCase property.name }}Picker></mat-datepicker>
+    </mtx-datetimepicker-toggle>
+    <mtx-datetimepicker
+        #{{ toCamelCase property.name }}Picker
+        type="datetime"
+        mode="landscape"
+        [multiYearSelector]="false"
+        startView="clock"
+        [twelvehour]="false"
+        [timeInterval]="1"
+        [touchUi]="false"
+    >
+    </mtx-datetimepicker>
     <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
 </mat-form-field>`);

@@ -1,14 +1,22 @@
 import * as handlebars from 'handlebars';
 
 handlebars.registerPartial('dateInput',
-    `<au-datepicker
+    `<mat-form-field
     appearance="outline"
-    formControlName="{{ toCamelCase property.name }}"
     class="{{ calculateFormGroupCol property }}"
-    [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}')"
-    [error]="formErrors?.{{ toCamelCase property.name }} | async"
-    {{#unless property.nullable }}
-    required
-    {{/unless}}
 >
-</au-datepicker>`);
+    <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}') }}</mat-label>
+    <input
+        matInput
+        formControlName="{{ toCamelCase property.name }}"
+        [auDatepickerSqlFormat]
+        [matDatepicker]="{{ toCamelCase property.name }}Picker"
+    >
+    <mat-datepicker-toggle
+        matSuffix
+        [for]="{{ toCamelCase property.name }}Picker"
+    >
+    </mat-datepicker-toggle>
+    <mat-datepicker #{{ toCamelCase property.name }}Picker></mat-datepicker>
+    <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
+</mat-form-field>`);

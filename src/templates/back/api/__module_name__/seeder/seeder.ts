@@ -12,6 +12,7 @@ export class Seeder
         {
             const commandBus = appContext.get(ICommandBus);
             commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command({{ toCamelCase schema.moduleNames }}, { timezone: process.env.TZ }));
+            appContext.close();
         });
     }
 }

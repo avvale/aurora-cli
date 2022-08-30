@@ -10,7 +10,10 @@ handlebars.registerPartial('varcharInput',
         matInput
         formControlName="{{ toCamelCase property.name }}"{{#if property.maxLength}}
         maxlength="{{ property.maxLength }}"
-        {{/if}}{{#unless property.nullable }} required{{/unless}}
+        {{/if}}
+        {{#unless property.nullable }}
+        required
+        {{/unless}}
     >
     <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
 </mat-form-field>`);

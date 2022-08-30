@@ -286,7 +286,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
 
                     if (Operations.stateService.flags.verbose)
                     {
-                        Operations.stateService.command.error(`Error: ${err.message}`);
+                        Operations.stateService.command.error(`Error to generate-typings: ${err.message}`);
                     }
                     else
                     {
