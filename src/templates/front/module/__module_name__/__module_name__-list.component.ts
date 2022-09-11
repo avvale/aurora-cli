@@ -4,6 +4,18 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
+export const {{ toCamelCase schema.moduleName }}Fields: ColumnConfig[] = [
+    {{#each schema.properties.gridFields}}
+    {{#if (allowProperty ../schema.moduleName this) }}
+    {
+        type : ColumnDataType.{{ getColumnDataType }},
+        field: '{{ toCamelCase name }}',
+        sort : '{{ toCamelCase name }}',
+    },
+    {{/if}}
+    {{/each}}
+];
+
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-list',
     templateUrl    : './{{ toKebabCase schema.moduleName }}-list.component.html',
@@ -50,15 +62,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             translation: 'Selects',
             sticky     : true,
         },
-        {{#each schema.properties.gridFields}}
-        {{#if (allowProperty ../schema.moduleName this) }}
-        {
-            type : ColumnDataType.{{ getColumnDataType }},
-            field: '{{ toCamelCase name }}',
-            sort : '{{ toCamelCase name }}',
-        },
-        {{/if}}
-        {{/each}}
+        ...{{ toCamelCase schema.moduleName }}Fields,
     ];
 
     constructor(
@@ -86,22 +90,26 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     handleStateChange($event): void
     {
-        this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination', isViewAction: false, data: { event: setQueryFilters($event) }});
+        this.actionService.action({
+            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
+            isViewAction: false,
+            data        : { event: setQueryFilters($event) },
+        });
     }
 
-    handleFiltersChange($event): void
+    handleColumnsFiltersChange($event): void
     {
         this.gridFiltersStorageService.setColumnFilterState(this.gridId, $event);
-    }
-
-    handleGridAction(action: Action): void
-    {
-        this.actionService.action(action);
     }
 
     handleColumnsConfigChange($event: ColumnConfig[]): void
     {
         this.gridColumnsConfigStorageService.setColumnsConfig(this.gridId, $event, this.originColumnsConfig);
+    }
+
+    handleGridAction(action: Action): void
+    {
+        this.actionService.action(action);
     }
 
     async handleAction(action: Action): Promise<void>

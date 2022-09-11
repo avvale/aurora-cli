@@ -50,7 +50,8 @@
             (action)="handleGridAction($event)"
             (stateChange)="handleStateChange($event)"
             (columnsConfigChange)="handleColumnsConfigChange($event)"
-            (columnFiltersChange)="handleFiltersChange($event)"
+            (columnFiltersChange)="handleColumnsFiltersChange($event)"
+            (search)="handleStateChange($event)"
         >
             <au-grid-translations
                 [actions]="t('Actions')"
