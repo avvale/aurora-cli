@@ -53,7 +53,8 @@ export default class Seed extends Command
                     [seederPath],
                 );
 
-                execution.stderr.on('data', (data) => {
+                execution.stderr.on('data', data =>
+                {
                     if (flags.log) console.error(data);
                 });
 
