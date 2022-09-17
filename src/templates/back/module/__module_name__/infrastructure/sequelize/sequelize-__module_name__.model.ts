@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
+import { {{#if schema.hasAuditing}}AfterCreate, AfterDestroy, AfterUpdate, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withImportRelationshipOneToOne}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
@@ -20,10 +20,54 @@ import { {{ pivotAggregateName }}Model } from '{{ config.applicationsContainer }
 {{#if schema.properties.hasI18n}}
 import { {{ schema.aggregateName }}I18NModel } from './sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
+{{#if schema.hasAuditing}}
+
+// auditing
+import { SequelizeAuditingAgent } from '@apps/auditing/side-effect/infrastructure/sequelize/sequelize-auditing-agent';
+import { AuditingSideEffectEvent } from 'src/graphql';
+{{/if}}
 
 @Table({ modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}', freezeTableName: true, timestamps: false })
 export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateName }}Model>
 {
+    {{#if schema.hasAuditing}}
+    @AfterCreate
+    static auditingCreate(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.CREATED,
+            '../../../../../@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterUpdate
+    static auditingUpdate(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.UPDATED,
+            '../../../../../@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterDestroy
+    static auditingDestroy(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.DELETED,
+            '../../../../../@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    {{/if}}
     {{#each schema.properties.modelColumns}}
     {{#unless isI18n }}
     {{#if hasColumnDecorator }}

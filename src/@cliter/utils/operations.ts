@@ -375,6 +375,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
                 aggregateName      : Operations.stateService.schema.aggregateName,
                 hasOAuth           : Operations.stateService.schema.hasOAuth,
                 hasTenant          : Operations.stateService.schema.hasTenant,
+                hasAuditing        : Operations.stateService.schema.hasAuditing,
                 aggregateProperties: Operations.stateService.schema.properties.toDto().map(item => _.omit(item, ['id'])), // omit id, internal id when create property by prompt
                 additionalApis     : Operations.stateService.schema.additionalApis.toDto().map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
                 excluded           : Operations.stateService.schema.excluded,

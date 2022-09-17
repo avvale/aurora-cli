@@ -77,6 +77,7 @@ export default class Generate extends Command
                 aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
                 hasOAuth,
                 hasTenant,
+                hasAuditing   : false,
                 properties,
                 additionalApis: new AdditionalApis(),
             };

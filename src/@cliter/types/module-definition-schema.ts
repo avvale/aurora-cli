@@ -9,6 +9,7 @@ export interface ModuleDefinitionSchema
     aggregateName: string;
     hasOAuth: boolean;
     hasTenant: boolean;
+    hasAuditing: boolean;
     properties: Properties;
     additionalApis: AdditionalApis;
     excluded?: string[];        // set files to avoid create

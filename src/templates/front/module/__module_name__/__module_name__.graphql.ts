@@ -10,6 +10,7 @@ export const fields = `
 
 export const relationsFields = '';
 
+// default methods
 export const paginationQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }} (
         $query: QueryStatement
