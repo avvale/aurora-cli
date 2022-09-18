@@ -362,7 +362,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             object = null,
         }: {
             graphqlStatement?: DocumentNode;
-            object?: any;
+            object?: {{ toPascalCase ../schema.boundedContextName }}Update{{ toPascalCase ../schema.moduleName }}ById;
         } = {},
     ): Observable<FetchResult<T>>
     {

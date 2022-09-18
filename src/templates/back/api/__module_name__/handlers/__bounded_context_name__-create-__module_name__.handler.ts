@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, FormatLangCode, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
+{{#if schema.hasAuditing}}
+
+// auditing
+import { AuditingMeta } from '@api/auditing/auditing.types';
+{{/if}}
 {{#if schema.hasTenant}}
 
 // tenant
 import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
-
 {{/if}}
 
 // {{ config.applicationsContainer }}
@@ -30,9 +34,22 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         account: AccountResponse,
         {{/if}}
         timezone?: string,
+        {{#if schema.hasAuditing}}
+        auditing?: AuditingMeta,
+        {{/if}}
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto>
     {
-        await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleName }}Command(payload, { timezone }));
+        await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleName }}Command(
+            payload,
+            {
+                timezone,
+                {{#if schema.hasAuditing}}
+                repositoryOptions: {
+                    auditing,
+                },
+                {{/if}}
+            },
+        ));
 
         {{#if schema.properties.hasI18n}}
         const constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });

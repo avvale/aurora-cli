@@ -3,21 +3,27 @@ import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from 
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto } from '../dto';
+{{#if schema.hasAuditing}}
 
+// auditing
+import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
+import { AuditingMeta } from '@api/auditing/auditing.types';
+{{/if}}
 {{#if schema.hasOAuth}}
+
 // authorization
 import { Permissions } from '{{ config.apiContainer }}/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
-
 {{/if}}
 {{#if schema.hasTenant}}
+
 // tenant
 import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
 import { TenantPolicy } from '{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-policy.decorator';
 import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
-
 {{/if}}
+
 // {{ config.applicationsContainer }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.handler';
 
@@ -45,6 +51,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Timezone() timezone?: string,
+        {{#if schema.hasAuditing}}
+        @Auditing() auditing?: AuditingMeta,
+        {{/if}}
     )
     {
         return await this.handler.main(
@@ -53,6 +62,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             account,
             {{/if}}
             timezone,
+            {{#if schema.hasAuditing}}
+            auditing,
+            {{/if}}
         );
     }
 }

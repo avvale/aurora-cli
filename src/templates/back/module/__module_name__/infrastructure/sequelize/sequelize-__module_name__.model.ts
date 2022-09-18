@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { {{#if schema.hasAuditing}}AfterCreate, AfterDestroy, AfterUpdate, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
+import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withImportRelationshipOneToOne}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
@@ -38,7 +38,19 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
             instance,
             options,
             AuditingSideEffectEvent.CREATED,
-            '../../../../../@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterBulkCreate
+    static auditingBulkCreate(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.BULK_CREATED,
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
             '{{ schema.aggregateName }}Model',
         );
     }
@@ -50,7 +62,19 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
             instance,
             options,
             AuditingSideEffectEvent.UPDATED,
-            '../../../../../@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterBulkUpdate
+    static auditingBulkUpdate(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.BULK_UPDATED,
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
             '{{ schema.aggregateName }}Model',
         );
     }
@@ -62,7 +86,55 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
             instance,
             options,
             AuditingSideEffectEvent.DELETED,
-            '../../../../../@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterBulkDestroy
+    static auditingBulkDestroy(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.BULK_DELETED,
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterRestore
+    static auditingRestore(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.RESTORED,
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterBulkRestore
+    static auditingBulkRestore(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.BULK_RESTORED,
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
+            '{{ schema.aggregateName }}Model',
+        );
+    }
+
+    @AfterUpsert
+    static auditingUpsert(instance: {{ schema.aggregateName }}Model, options): void
+    {
+        SequelizeAuditingAgent.registerSideEffect(
+            instance,
+            options,
+            AuditingSideEffectEvent.UPSERTED,
+            '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
             '{{ schema.aggregateName }}Model',
         );
     }

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
-
 {{#if schema.hasTenant}}
+
 // tenant
 import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
-
 {{/if}}
+
 // {{ config.applicationsContainer }}
 import { Get{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';

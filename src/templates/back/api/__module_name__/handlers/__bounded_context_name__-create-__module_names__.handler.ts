@@ -1,5 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
+{{#if schema.hasAuditing}}
+
+// auditing
+import { AuditingMeta } from '@api/auditing/auditing.types';
+{{/if}}
 
 // {{ config.applicationsContainer }}
 import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
@@ -22,9 +27,22 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         account: AccountResponse,
         {{/if}}
         timezone?: string,
+        {{#if schema.hasAuditing}}
+        auditing?: AuditingMeta,
+        {{/if}}
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command(payload, { timezone }));
+        await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command(
+            payload,
+            {
+                timezone,
+                {{#if schema.hasAuditing}}
+                repositoryOptions: {
+                    auditing,
+                },
+                {{/if}}
+            },
+        ));
         return true;
     }
 }
