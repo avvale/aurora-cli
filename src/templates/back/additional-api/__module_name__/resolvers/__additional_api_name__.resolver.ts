@@ -27,9 +27,9 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 // {{ config.applicationsContainer }}
 import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from 'src/graphql';
 {{else}}
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from '../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from 'src/graphql';
 {{/eq }}
 
 @Resolver()

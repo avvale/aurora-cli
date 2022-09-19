@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
+import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withImportRelationshipOneToOne}}
 import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.applicationsContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
@@ -27,7 +27,29 @@ import { SequelizeAuditingAgent } from '@apps/auditing/side-effect/infrastructur
 import { AuditingSideEffectEvent } from 'src/graphql';
 {{/if}}
 
-@Table({ modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}', freezeTableName: true, timestamps: false })
+@Table({
+    modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}',
+    freezeTableName: true,
+    timestamps: false,
+    {{#if schema.properties.hasIndex}}
+    indexes: [
+        {{#each schema.properties.columnsWithIndex}}
+        {
+            fields: ['{{ toCamelCase name }}'],
+            {{#eq index 'index' }}
+            unique: false,
+            {{/eq}}
+            {{#eq index 'unique' }}
+            unique: true,
+            {{/eq}}
+            {{#if indexName}}
+            name: '{{ indexName }}',
+            {{/if}}
+        },
+        {{/each}}
+    ],
+    {{/if}}
+})
 export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateName }}Model>
 {
     {{#if schema.hasAuditing}}
@@ -148,17 +170,6 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/eq}}
     {{#eq relationship ../relationship.MANY_TO_ONE }}
     @ForeignKey(() => {{ relationshipAggregate }}Model)
-    {{/eq}}
-    {{#eq index 'index' }}
-    {{! @Index :: https://github.com/RobinBuschmann/sequelize-typescript/issues/725 }}
-    @Index
-    {{/eq}}
-    {{#eq index 'unique' }}
-    {{#if indexName}}
-    @Unique('{{ indexName }}')
-    {{else}}
-    @Unique
-    {{/if}}
     {{/eq}}
     @Column({
         field: '{{ toCamelCase name }}',

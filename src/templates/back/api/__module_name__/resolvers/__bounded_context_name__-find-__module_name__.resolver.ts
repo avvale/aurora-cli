@@ -20,7 +20,7 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 
 // {{ config.applicationsContainer }}
 import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../../../graphql';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from 'src/graphql';
 
 @Resolver()
 {{#if schema.hasOAuth}}

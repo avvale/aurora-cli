@@ -1,5 +1,5 @@
 import { Property } from './property';
-import { SqlRelationship, SqlType } from '../types';
+import { SqlIndex, SqlRelationship, SqlType } from '../types';
 
 export class Properties
 {
@@ -26,6 +26,11 @@ export class Properties
     get hasEnum(): boolean
     {
         return this.properties.some(property => property.type === SqlType.ENUM);
+    }
+
+    get hasIndex(): boolean
+    {
+        return this.properties.some(property => property.index === SqlIndex.INDEX || property.index === SqlIndex.UNIQUE);
     }
 
     get withoutTimestamps(): Property[]
@@ -356,7 +361,12 @@ export class Properties
 
     get schemaRelations(): Property[]
     {
-        return this.properties.filter(property => property.relationship);               // only relationship
+        return this.properties.filter(property => property.relationship); // only relationship
+    }
+
+    get columnsWithIndex(): Property[]
+    {
+        return this.properties.filter(property => property.index); // only properties with index defined
     }
 
     /***********
