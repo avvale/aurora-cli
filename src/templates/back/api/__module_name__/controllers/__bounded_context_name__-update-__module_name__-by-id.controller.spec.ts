@@ -53,7 +53,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
             expect(controller).toBeDefined();
         });
 
-        test('should return a {{ toCamelCase schema.moduleName }} created', async () =>
+        test('should return a {{ toCamelCase schema.moduleName }} updated', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
             expect(await controller.main({{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);

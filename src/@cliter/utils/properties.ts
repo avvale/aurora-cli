@@ -184,6 +184,14 @@ export class Properties
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
     }
 
+    get upsertCommand(): Property[]
+    {
+        return this.properties
+            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+    }
+
     /********************
      * COMMAND HANDLERS *
      ********************/
@@ -196,6 +204,14 @@ export class Properties
     }
 
     get updateCommandHandler(): Property[]
+    {
+        return this.properties
+            .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                      // exclude one to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField));    // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+    }
+
+    get upsertCommandHandler(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                              // exclude timestamps
@@ -257,6 +273,16 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
+    }
+
+    get upsertItemsService(): Property[]
+    {
+        return this.properties
+            .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'));   // exclude relationship id of i18n table
     }
 
     // events

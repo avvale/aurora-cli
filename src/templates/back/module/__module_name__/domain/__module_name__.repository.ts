@@ -102,6 +102,15 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
         }
     ): Promise<void>;
 
+    // insert or update key identification elements already existing in the table
+    abstract upsert(
+        {{ toCamelCase schema.moduleNames }}: {{ schema.aggregateName }}[],
+        options?: {
+            upsertOptions?: LiteralObject;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // delete record
     abstract deleteById(
         id: {{ toPascalCase schema.moduleName }}Id,

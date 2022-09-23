@@ -46,18 +46,18 @@ export class {{ currentAdditionalApi.getClassName }}Handler
     ): Promise<{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[] | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto[]{{else}}boolean{{/eq }}>
     {
         // coding here
-        // await this.commandBus.dispatch(new YourCommand(
-        //    payload,
-        //    {
-        //         timezone,
-        //         {{#if schema.hasAuditing}}
-        //         repositoryOptions: {
-        //             auditing,
-        //         },
-        //         {{/if}}
-        //     },
-        // ));
-        // await this.queryBus.ask(new YourQuery(queryStatement, constraint, { timezone }));
+        /* await this.commandBus.dispatch(new YourCommand(
+            payload,
+            {
+                timezone,
+        {{#if schema.hasAuditing}}
+                repositoryOptions: {
+                    auditing,
+                },
+        {{/if}}
+            },
+        ));
+        await this.queryBus.ask(new YourQuery(queryStatement, constraint, { timezone })); */
 
         {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
         return [];

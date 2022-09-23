@@ -90,10 +90,10 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(instance: {{ schema.aggregateName }}Model, options): void
+    static auditingBulkUpdate(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_UPDATED,
             '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
@@ -114,10 +114,10 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(instance: {{ schema.aggregateName }}Model, options): void
+    static auditingBulkDestroy(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_DELETED,
             '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
@@ -138,10 +138,10 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(instance: {{ schema.aggregateName }}Model, options): void
+    static auditingBulkRestore(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_RESTORED,
             '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model',
