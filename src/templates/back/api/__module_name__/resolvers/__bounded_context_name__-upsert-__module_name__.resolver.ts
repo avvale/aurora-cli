@@ -2,7 +2,7 @@
 import { UseGuards } from '@nestjs/common';
 {{/if}}
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Timezone } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasAuditing}}
 
 // auditing
@@ -20,12 +20,12 @@ import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/
 
 // tenant
 import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
+import { TenantPolicy } from '{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-policy.decorator';
 import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
 {{/if}}
 
 // {{ config.applicationsContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleNames }}.handler';
+import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.handler';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from 'src/graphql';
 
 @Resolver()
@@ -33,34 +33,32 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.upsert')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 {{/if}}
-export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Resolver
+export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Resolver
 {
     constructor(
-        private readonly handler: {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler,
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler,
     ) {}
 
-    @Mutation('{{ toCamelCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}')
+    @Mutation('{{ toCamelCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}')
     {{#if schema.hasTenant}}
-    @TenantConstraint()
+    @TenantPolicy()
     {{/if}}
     async main(
-        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput[],
+        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         {{#if schema.hasAuditing}}
         @Auditing() auditing?: AuditingMeta,
         {{/if}}
-    ): Promise<boolean>
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {
         return await this.handler.main(
             payload,
             {{#if schema.hasTenant}}
             account,
             {{/if}}
-            constraint,
             timezone,
             {{#if schema.hasAuditing}}
             auditing,

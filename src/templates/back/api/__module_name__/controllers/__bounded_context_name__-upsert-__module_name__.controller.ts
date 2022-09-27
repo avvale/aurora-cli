@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Controller, Post, Body{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
+import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto } from '../dto';
 {{#if schema.hasAuditing}}
 
@@ -20,12 +20,12 @@ import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/
 
 // tenant
 import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
+import { TenantPolicy } from '{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-policy.decorator';
 import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
 {{/if}}
 
 // {{ config.applicationsContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleNames }}.handler';
+import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.handler';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/upsert')
@@ -33,24 +33,23 @@ import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schem
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.upsert')
 @UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
 {{/if}}
-export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Controller
+export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Controller
 {
     constructor(
-        private readonly handler: {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler,
+        private readonly handler: {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler,
     ) {}
 
-    @Put()
-    @ApiOperation({ summary: 'Upsert {{ toKebabCase schema.moduleName }} by id' })
-    @ApiOkResponse({ description: 'The record has been successfully upserted.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
+    @Post()
+    @ApiOperation({ summary: 'Upsert {{ toKebabCase schema.moduleName }}' })
+    @ApiCreatedResponse({ description: 'The record has been successfully upserted.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
-    @TenantConstraint()
+    @TenantPolicy()
     {{/if}}
     async main(
-        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto[],
+        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
-        @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         {{#if schema.hasAuditing}}
         @Auditing() auditing?: AuditingMeta,
@@ -62,7 +61,6 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             {{#if schema.hasTenant}}
             account,
             {{/if}}
-            constraint,
             timezone,
             {{#if schema.hasAuditing}}
             auditing,

@@ -102,9 +102,9 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
         }
     ): Promise<void>;
 
-    // insert or update key identification elements already existing in the table
+    // insert or update key identification element already existing in the table
     abstract upsert(
-        {{ toCamelCase schema.moduleNames }}: {{ schema.aggregateName }}[],
+        {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
         options?: {
             upsertOptions?: LiteralObject;
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;

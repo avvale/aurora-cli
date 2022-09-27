@@ -275,7 +275,7 @@ export class Properties
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
-    get upsertItemsService(): Property[]
+    get upsertService(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps

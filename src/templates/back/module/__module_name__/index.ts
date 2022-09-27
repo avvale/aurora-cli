@@ -11,8 +11,8 @@ import { Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/update-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
 import { Update{{ toPascalCase schema.moduleNames }}CommandHandler } from './application/update/update-{{ toKebabCase schema.moduleNames }}.command-handler';
 {{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
-import { Upsert{{ toPascalCase schema.moduleNames }}CommandHandler } from './application/upsert/upsert-{{ toKebabCase schema.moduleNames }}.command-handler';
+{{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
+import { Upsert{{ toPascalCase schema.moduleName }}CommandHandler } from './application/upsert/upsert-{{ toKebabCase schema.moduleName }}.command-handler';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.command-handler.ts'}}
 import { Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command-handler';
@@ -85,8 +85,8 @@ import { Update{{ toPascalCase schema.moduleName }}ByIdService } from './applica
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/update-' (toKebabCase schema.moduleNames) '.service.ts'}}
 import { Update{{ toPascalCase schema.moduleNames }}Service } from './application/update/update-{{ toKebabCase schema.moduleNames }}.service';
 {{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleNames) '.service.ts'}}
-import { Upsert{{ toPascalCase schema.moduleNames }}Service } from './application/upsert/upsert-{{ toKebabCase schema.moduleNames }}.service';
+{{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleName) '.service.ts'}}
+import { Upsert{{ toPascalCase schema.moduleName }}Service } from './application/upsert/upsert-{{ toKebabCase schema.moduleName }}.service';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
 import { Delete{{ toPascalCase schema.moduleName }}ByIdService } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.service';
@@ -136,8 +136,8 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/update-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
     Update{{ toPascalCase schema.moduleNames }}CommandHandler,
     {{/notInArray}}
-    {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
-    Upsert{{ toPascalCase schema.moduleNames }}CommandHandler,
+    {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
+    Upsert{{ toPascalCase schema.moduleName }}CommandHandler,
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.command-handler.ts'}}
     Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler,
@@ -211,8 +211,8 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/update-' (toKebabCase schema.moduleNames) '.service.ts'}}
     Update{{ toPascalCase schema.moduleNames }}Service,
     {{/notInArray}}
-    {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleNames) '.service.ts'}}
-    Upsert{{ toPascalCase schema.moduleNames }}Service,
+    {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/upsert-' (toKebabCase schema.moduleName) '.service.ts'}}
+    Upsert{{ toPascalCase schema.moduleName }}Service,
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.applicationsContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
     Delete{{ toPascalCase schema.moduleName }}ByIdService,

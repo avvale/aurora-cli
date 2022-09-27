@@ -7,8 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
-import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler } from './{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleNames }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from 'src/graphql';
+import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler } from './{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.handler';
 
 // sources
 {{#if schema.properties.hasI18n}}
@@ -18,7 +17,7 @@ import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsCont
 
 describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler', () =>
 {
-    let handler: {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler;
+    let handler: {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -31,7 +30,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
                 {{/if}}
             ],
             providers: [
-                {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler,
+                {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler,
                 {{#if schema.properties.hasI18n}}
                 AddI18NConstraintService,
                 {
@@ -68,22 +67,17 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
-    test('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}ByIdHandler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });
 
-        test('should return a {{ toCamelCase schema.moduleName }} updated', async () =>
+        test('should return an {{ toCamelCase schema.moduleName }} upserted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
-            expect(await handler.main(<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput>{{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);
+            expect(await handler.main({{ toCamelCase schema.moduleNames }}[0])).toBe({{ toCamelCase schema.moduleNames }}[0]);
         });
     });
 });

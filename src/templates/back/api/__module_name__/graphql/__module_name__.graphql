@@ -220,8 +220,8 @@ type Mutation
 
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
-    {{ toCamelCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleNames }}(
-        payload: [{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput]!
+    {{ toCamelCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}(
+        payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput!
     ): {{ schema.aggregateName }}
 
     {{/notInArray}}
