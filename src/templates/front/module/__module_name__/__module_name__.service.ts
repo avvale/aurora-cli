@@ -355,6 +355,7 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     // Mutation additionalApis
 {{#each schema.additionalApis.mutations}}
+
     {{ getVariableName }}<T>(
         {
             graphqlStatement = {{ getVariableName }}Mutation,
