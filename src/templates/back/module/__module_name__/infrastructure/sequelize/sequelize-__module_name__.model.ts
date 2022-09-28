@@ -182,7 +182,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         allowNull: {{ nullable }},
         type: {{{ getSequelizeType }}},
         {{#unless (isUndefined defaultValue) }}
-        defaultValue: {{ getDefaultValue }},
+        defaultValue: {{{ getDefaultValue }}},
         {{/unless}}
         {{#unless relationshipAvoidConstraint }}
         {{#eq relationship ../relationship.MANY_TO_ONE }}
@@ -245,7 +245,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         allowNull: {{ nullable }},
         type: DataTypes.JSON,
         {{#unless (isUndefined defaultValue) }}
-        defaultValue: {{ getDefaultValue }},
+        defaultValue: {{{ getDefaultValue }}},
         {{/unless}}
     })
     {{ toCamelCase name }}: any;
