@@ -3,7 +3,9 @@ import gql from 'graphql-tag';
 export const fields = `
     {{#each schema.properties.withoutDeletedAt}}
     {{#if (allowProperty ../schema.moduleName this) }}
+    {{#unlessEq name 'id'}}
     {{ toCamelCase name }}
+    {{/unlessEq}}
     {{/if}}
     {{/each}}
 `;
@@ -36,9 +38,9 @@ export const getQuery = gql`
             query: $query
             constraint: $constraint
         ) {
-            ${fields}
+            id
+            #FIELDS
         }
-        ${relationsFields}
     }
 `;
 
@@ -51,7 +53,8 @@ export const findByIdQuery = gql`
             id: $id
             constraint: $constraint
         ) {
-            ${fields}
+            id
+            #FIELDS
         }
         ${relationsFields}
     }
@@ -66,9 +69,9 @@ export const findQuery = gql`
             query: $query
             constraint: $constraint
         ) {
-            ${fields}
+            id
+            #FIELDS
         }
-        ${relationsFields}
     }
 `;
 

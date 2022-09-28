@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, log, setQueryFilters, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, ExportGridState, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
-export const {{ toCamelCase schema.moduleName }}Fields: ColumnConfig[] = [
+export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = [
     {{#each schema.properties.gridFields}}
     {{#if (allowProperty ../schema.moduleName this) }}
     {
@@ -62,7 +62,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             translation: 'Selects',
             sticky     : true,
         },
-        ...{{ toCamelCase schema.moduleName }}Fields,
+        ...{{ toCamelCase schema.moduleName }}ColumnsConfig,
     ];
 
     constructor(
@@ -93,11 +93,15 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         this.actionService.action({
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
             isViewAction: false,
-            data        : { event: setQueryFilters($event) },
+            data        : {
+                event: QueryStatementHandler
+                    .fromGridStateBuilder($event)
+                    .getQueryStatement(),
+            },
         });
     }
 
-    handleColumnsFiltersChange($event): void
+    handleColumnFiltersChange($event): void
     {
         this.gridFiltersStorageService.setColumnFilterState(this.gridId, $event);
     }
@@ -110,6 +114,29 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     handleGridAction(action: Action): void
     {
         this.actionService.action(action);
+    }
+
+    async handleExportData($event: ExportGridState): Promise<void>
+    {
+        const rows = await lastValueFrom(
+            this.{{ toCamelCase schema.moduleName }}Service.get({
+                query: QueryStatementHandler
+                    .fromGridStateBuilder($event.gridState)
+                    .setDefaultOrder()
+                    .getQueryStatement(),
+            }),
+        );
+
+        const columns: string[] = {{ toCamelCase schema.moduleName }}ColumnsConfig.map({{ toCamelCase schema.moduleName }}ColumnConfig => {{ toCamelCase schema.moduleName }}ColumnConfig.field);
+        const headers = columns.map(column => this.translocoService.translate('{{ toKebabCase schema.boundedContextName }}.' + column.toPascalCase()));
+
+        exportRows(
+            rows.objects,
+            '{{ toCamelCase schema.moduleNames }}.' + $event.format,
+            columns,
+            headers,
+            $event.format,
+        );
     }
 
     async handleAction(action: Action): Promise<void>

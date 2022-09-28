@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, setQueryFilters } from '@aurora';
+import { Action, ActionService, GridData, GridFiltersStorageService, QueryStatementHandler } from '@aurora';
 import { Observable } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
@@ -26,9 +26,11 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
     {
         this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view' });
         return this.{{ toCamelCase schema.moduleName }}Service.pagination({
-            query: setQueryFilters(
-                this.gridFiltersStorageService.getColumnFilterState('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList'),
-            ),
+            query: QueryStatementHandler
+                .fromGridStateBuilder(this.gridFiltersStorageService.getColumnFilterState('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList'))
+                .setDefaultOrder()
+                .setDefaultSlot()
+                .getQueryStatement(),
         });
     }
 }
