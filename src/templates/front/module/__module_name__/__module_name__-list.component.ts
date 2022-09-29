@@ -96,6 +96,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             data        : {
                 event: QueryStatementHandler
                     .fromGridStateBuilder($event)
+                    .setDefaultOrder()
                     .getQueryStatement(),
             },
         });
