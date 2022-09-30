@@ -80,7 +80,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     init(): void
     { /**/ }
 
-    handleStateChange($event): void
+    handleStateChange($event: GridState): void
     {
         this.actionService.action({
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
@@ -96,7 +96,10 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     handleColumnFiltersChange($event): void
     {
-        this.gridFiltersStorageService.setColumnFilterState(this.gridId, $event);
+        this.gridFiltersStorageService.setColumnFilterState(
+            this.gridId,
+            $event,
+        );
     }
 
     handleColumnsConfigChange($event: ColumnConfig[]): void
