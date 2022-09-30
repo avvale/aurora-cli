@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, Order, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { {{ schema.aggregateName }}, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation{{#each schema.additionalApis}}, {{getVariableName}}{{ toPascalCase resolverType }}{{/each}} } from './{{ toKebabCase schema.moduleName }}.graphql';
@@ -13,8 +13,6 @@ export class {{ toPascalCase schema.moduleName }}Service
     paginationSubject$: BehaviorSubject<GridData<{{ schema.aggregateName }}> | null> = new BehaviorSubject(null);
     {{ toCamelCase schema.moduleName }}Subject$: BehaviorSubject<{{ schema.aggregateName }} | null> = new BehaviorSubject(null);
     {{ toCamelCase schema.moduleNames }}Subject$: BehaviorSubject<{{ schema.aggregateName }}[] | null> = new BehaviorSubject(null);
-    {{ toCamelCase schema.moduleName }}DefaultOrderField: string = 'createdAt';
-    {{ toCamelCase schema.moduleName }}DefaultOrderDirection: Order = Order.DESC;
 
     constructor(
         private readonly graphqlService: GraphQLService,

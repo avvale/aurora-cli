@@ -78,15 +78,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    {
-        this.columnsConfig$ = this.gridColumnsConfigStorageService
-            .getColumnsConfig(this.gridId, this.originColumnsConfig)
-            .pipe(takeUntil(this.unsubscribeAll$));
-
-        this.gridState = this.gridFiltersStorageService.getColumnFilterState(this.gridId);
-
-        this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
-    }
+    { /**/ }
 
     handleStateChange($event): void
     {
@@ -96,7 +88,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             data        : {
                 event: QueryStatementHandler
                     .fromGridStateBuilder($event)
-                    .setDefaultOrder()
+                    .setDefaultSort()
                     .getQueryStatement(),
             },
         });
@@ -109,7 +101,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     handleColumnsConfigChange($event: ColumnConfig[]): void
     {
-        this.gridColumnsConfigStorageService.setColumnsConfig(this.gridId, $event, this.originColumnsConfig);
+        this.gridColumnsConfigStorageService.setColumnsConfig(
+            this.gridId,
+            $event,
+            this.originColumnsConfig,
+        );
     }
 
     handleGridAction(action: Action): void
@@ -123,7 +119,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             this.{{ toCamelCase schema.moduleName }}Service.get({
                 query: QueryStatementHandler
                     .fromGridStateBuilder($event.gridState)
-                    .setDefaultOrder()
+                    .setDefaultSort()
                     .getQueryStatement(),
             }),
         );
@@ -145,8 +141,21 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view':
+                this.columnsConfig$ = this.gridColumnsConfigStorageService
+                    .getColumnsConfig(this.gridId, this.originColumnsConfig)
+                    .pipe(takeUntil(this.unsubscribeAll$));
+
+                this.gridState = this.gridFiltersStorageService
+                    .getColumnFilterState(this.gridId);
+
+                this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
+                break;
+
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination':
-                await lastValueFrom(this.{{ toCamelCase schema.moduleName }}Service.pagination({ query: action.data.event }));
+                await lastValueFrom(
+                    this.{{ toCamelCase schema.moduleName }}Service.pagination({ query: action.data.event }),
+                );
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit':
@@ -154,7 +163,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete':
-                const dialogRef = this.confirmationService.open({
+                const deleteDialogRef = this.confirmationService.open({
                     title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}')}`,
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
                     icon   : {
@@ -176,7 +185,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     dismissible: true,
                 });
 
-                dialogRef.afterClosed()
+                deleteDialogRef.afterClosed()
                     .subscribe(async result =>
                     {
                         if (result === 'confirmed')

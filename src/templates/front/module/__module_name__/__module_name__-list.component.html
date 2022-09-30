@@ -44,15 +44,15 @@
         <!-- Grid -->
         <au-grid
             [columnsConfig]="columnsConfig$ | async"
-            [activatedColumnFilters]="gridState?.columnFilters"
-            [originColumnsConfig]="originColumnsConfig"
             [data]="gridData$ | async"
+            [gridState]="gridState"
+            [originColumnsConfig]="originColumnsConfig"
             (action)="handleGridAction($event)"
-            (stateChange)="handleStateChange($event)"
-            (columnsConfigChange)="handleColumnsConfigChange($event)"
             (columnFiltersChange)="handleColumnFiltersChange($event)"
-            (search)="handleStateChange($event)"
+            (columnsConfigChange)="handleColumnsConfigChange($event)"
             (exportData)="handleExportData($event)"
+            (search)="handleStateChange($event)"
+            (stateChange)="handleStateChange($event)"
         >
             <au-grid-translations
                 [actions]="t('Actions')"

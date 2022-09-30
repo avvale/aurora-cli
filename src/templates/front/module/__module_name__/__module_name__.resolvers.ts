@@ -28,7 +28,7 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
         return this.{{ toCamelCase schema.moduleName }}Service.pagination({
             query: QueryStatementHandler
                 .fromGridStateBuilder(this.gridFiltersStorageService.getColumnFilterState('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList'))
-                .setDefaultOrder()
+                .setDefaultSort()
                 .setDefaultSlot()
                 .getQueryStatement(),
         });
