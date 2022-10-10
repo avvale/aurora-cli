@@ -14,7 +14,7 @@ import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as _ from 'lodash';
 import { YamlManager } from '../../@cliter/utils';
-import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, Properties, Property, FileManager } from '../../@cliter';
+import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager } from '../../@cliter';
 
 export default class Load extends Command
 {
@@ -204,6 +204,16 @@ export default class Load extends Command
 
         if (!fs.existsSync(jsonPath)) return [];
 
-        return (JSON.parse(fs.readFileSync(jsonPath, 'utf8')).files) as LockFile[];
+        const lockFiles = (JSON.parse(fs.readFileSync(jsonPath, 'utf8')).files) as LockFile[];
+
+        if (path.sep === '\\')
+        {
+            for (const lockFile of lockFiles)
+            {
+                lockFile.path = lockFile.path.replace(/\//g, '\\');
+            }
+        }
+
+        return lockFiles;
     }
 }

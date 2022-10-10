@@ -314,11 +314,15 @@ export class FileManager
                 FileManager.stateService.command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE CREATED]'));
             }
 
+            // adapt separator from current OS
+            const posixRelativeFilePath = path.sep === '\\' ? relativeFilePath.replace(/\\/g, '/') : relativeFilePath;
+
             // add file to lockFiles
-            FileManager.stateService.newLockFiles.push({
-                path     : relativeFilePath,
-                integrity: `sha1:${Cypher.sha1(contents)}`,
-            });
+            FileManager.stateService.newLockFiles
+                .push({
+                    path     : posixRelativeFilePath,
+                    integrity: `sha1:${Cypher.sha1(contents)}`,
+                });
         }
     }
 }
