@@ -13,8 +13,7 @@ import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as _ from 'lodash';
-import { YamlManager } from '../../@cliter/utils';
-import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager } from '../../@cliter';
+import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager, YamlManager } from '../../@cliter/index';
 
 export default class Load extends Command
 {
