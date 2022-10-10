@@ -36,8 +36,6 @@ export default class Pipeline extends Command
         stateService.command   = this;
         stateService.flags     = flags;
 
-        const operations = new Operations();
-
-        operations.generatePipeline(flags.dashboard ? 'front' : 'back', from, to, service);
+        Operations.generatePipeline(flags.dashboard ? 'front' : 'back', from, to, service);
     }
 }

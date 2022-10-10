@@ -89,15 +89,13 @@ export default class Generate extends Command
             stateService.flags          = flags;
             stateService.flags.tests    = true; // enable by default create test e2e files
 
-            const operations = new Operations();
-
             // generate module files
-            operations.generateBackModule();
+            Operations.generateBackModule();
 
             if (!flags.noGraphQLTypes)
             {
                 // generate graphql files
-                operations.generateGraphqlTypes();
+                Operations.generateGraphqlTypes();
             }
         }
     }

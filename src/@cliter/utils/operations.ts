@@ -21,7 +21,7 @@ export class Operations
 {
     public static readonly stateService = container.resolve(StateService);
 
-    async generateApplication(): Promise<void>
+    static async generateApplication(): Promise<void>
     {
         if (!Operations.stateService.appName) throw new Error('To create application is required app name');
 
@@ -31,7 +31,7 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(Operations.stateService.appName), '.');
     }
 
-    async generatePackage(): Promise<void>
+    static async generatePackage(): Promise<void>
     {
         if (!Operations.stateService.packageName) throw new Error('To create package is required package name');
 
@@ -41,7 +41,7 @@ export class Operations
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_PACKAGE, path.join(Operations.stateService.packageName), '.');
     }
 
-    async generateDashboard(): Promise<void>
+    static async generateDashboard(): Promise<void>
     {
         if (!Operations.stateService.dashboardName) throw new Error('To create dashboard is required dashboard name');
 
@@ -56,21 +56,21 @@ export class Operations
         );
     }
 
-    async generateFrontModule(): Promise<void>
+    static async generateFrontModule(): Promise<void>
     {
         // generate dashboard module translations empty
-        await this.generateFrontTranslationsModule();
+        await Operations.generateFrontTranslationsModule();
 
         // generate dashboard module files
-        await this.generateFrontModuleFiles();
+        await Operations.generateFrontModuleFiles();
 
         // create references, write imports in ts files
-        this.createFrontReferences();
+        Operations.createFrontReferences();
 
-        this.createJsonLockFile();
+        Operations.createJsonLockFile();
     }
 
-    async generateFrontTranslationsModule(): Promise<void>
+    static async generateFrontTranslationsModule(): Promise<void>
     {
         // create directory application container, normally src/assets/i18n/module_name
         await TemplateGenerator.createDirectory(
@@ -86,7 +86,7 @@ export class Operations
         );
     }
 
-    async generateFrontModuleFiles(): Promise<void>
+    static async generateFrontModuleFiles(): Promise<void>
     {
         // create directory application container, normally src/app/modules/admin/apps
         await TemplateGenerator.createDirectory(
@@ -102,7 +102,7 @@ export class Operations
         );
     }
 
-    async generatePipeline(app: string, from: string, to: string, service: string): Promise<void>
+    static async generatePipeline(app: string, from: string, to: string, service: string): Promise<void>
     {
         // create pipeline files
         await TemplateGenerator.generateStaticContents(
@@ -115,7 +115,7 @@ export class Operations
         );
     }
 
-    async installBackPackage(packageName: string): Promise<void>
+    static async installBackPackage(packageName: string): Promise<void>
     {
         // create pipeline files
         await TemplateGenerator.generateStaticContents(
@@ -128,7 +128,7 @@ export class Operations
         );
     }
 
-    async installFrontPackage(packageName: string): Promise<void>
+    static async installFrontPackage(packageName: string): Promise<void>
     {
         // create pipeline files
         await TemplateGenerator.generateStaticContents(
@@ -141,46 +141,46 @@ export class Operations
         );
     }
 
-    async generateBackModule(): Promise<void>
+    static async generateBackModule(): Promise<void>
     {
         // generate module files
-        await this.generateModuleFiles();
+        await Operations.generateModuleFiles();
 
         // generate pivot tables
-        await this.generatePivotTables();
+        await Operations.generatePivotTables();
 
         // generate i18n module files
-        await this.generateI18NModuleFiles();
+        await Operations.generateI18NModuleFiles();
 
         // generate @api files
-        await this.generateApiFiles();
+        await Operations.generateApiFiles();
 
         // generate additional api filles
-        await this.generateAdditionalApiFiles();
+        await Operations.generateAdditionalApiFiles();
 
         // generate @api i18n files
-        await this.generateI18NApiFiles();
+        await Operations.generateI18NApiFiles();
 
         // create references, write imports in ts files
-        this.createBackReferences();
+        Operations.createBackReferences();
 
         // flag to generate e2e tests, this test can overwrite custom tests
         if (Operations.stateService.flags.tests)
         {
             // generate testing files
-            await this.generateTestingFiles();
+            await Operations.generateTestingFiles();
         }
 
         // generate postman files
-        await this.generatePostmanFiles();
+        await Operations.generatePostmanFiles();
 
         // create yaml file
-        this.createYamlConfigFile();
+        Operations.createYamlConfigFile();
 
-        this.createJsonLockFile();
+        Operations.createJsonLockFile();
     }
 
-    async generateModuleFiles(): Promise<void>
+    static async generateModuleFiles(): Promise<void>
     {
         // create directory application container, normally src/@apps
         await TemplateGenerator.createDirectory(
@@ -202,7 +202,7 @@ export class Operations
         );
     }
 
-    async generatePivotTables(): Promise<void>
+    static async generatePivotTables(): Promise<void>
     {
         await TemplateGenerator.generatePivotTables(
             path.join('src', cliterConfig.applicationsContainer),
@@ -210,7 +210,7 @@ export class Operations
         );
     }
 
-    async generateI18NModuleFiles(): Promise<void>
+    static async generateI18NModuleFiles(): Promise<void>
     {
         if (Operations.stateService.schema.properties.hasI18n)
         {
@@ -222,7 +222,7 @@ export class Operations
         }
     }
 
-    async generateApiFiles(): Promise<void>
+    static async generateApiFiles(): Promise<void>
     {
         await TemplateGenerator.createDirectory(
             path.join('src', cliterConfig.apiContainer),
@@ -235,7 +235,7 @@ export class Operations
         );
     }
 
-    async generateAdditionalApiFiles(): Promise<void>
+    static async generateAdditionalApiFiles(): Promise<void>
     {
         TemplateGenerator.generateAdditionalApiFiles(
             path.join('src', cliterConfig.apiContainer),
@@ -243,7 +243,7 @@ export class Operations
         );
     }
 
-    async generateI18NApiFiles(): Promise<void>
+    static async generateI18NApiFiles(): Promise<void>
     {
         if (Operations.stateService.schema.properties.hasI18n)
         {
@@ -255,24 +255,24 @@ export class Operations
         }
     }
 
-    async generateTestingFiles(): Promise<void>
+    static async generateTestingFiles(): Promise<void>
     {
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_TEST, path.join('test'), '');
-        await this.createTestingForeignModuleImports();
+        await Operations.createTestingForeignModuleImports();
     }
 
-    async generatePostmanFiles(): Promise<void>
+    static async generatePostmanFiles(): Promise<void>
     {
         await TemplateGenerator.createDirectory('', 'postman');
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_POSTMAN, '', 'postman');
     }
 
-    async generateApplicationEnvFile(applicationName: string): Promise<void>
+    static async generateApplicationEnvFile(applicationName: string): Promise<void>
     {
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_ENV, '', applicationName);
     }
 
-    async generateGraphqlTypes(): Promise<string>
+    static async generateGraphqlTypes(): Promise<string>
     {
         // graphql
         return new Promise((resolve, reject) =>
@@ -303,7 +303,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         });
     }
 
-    createFrontReferences(): void
+    static createFrontReferences(): void
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
@@ -330,7 +330,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.generateDashboardNavigationTranslation('es');
     }
 
-    createBackReferences(): void
+    static createBackReferences(): void
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
@@ -348,7 +348,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         if (Operations.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
     }
 
-    async createTestingForeignModuleImports(): Promise<void>
+    static async createTestingForeignModuleImports(): Promise<void>
     {
         const codeWriter = new CodeWriter(
             path.join('src'),
@@ -363,7 +363,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         codeWriter.generateTestingForeignReferences(Operations.stateService.schema.properties);
     }
 
-    createYamlConfigFile(): void
+    static createYamlConfigFile(): void
     {
         // write yaml file
         const yamlStr = yaml.dump(
@@ -393,7 +393,7 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
         fs.writeFileSync(path.join(yamlPath, `${Operations.stateService.schema.moduleName}.yaml`), yamlStr, 'utf8');
     }
 
-    createJsonLockFile(): void
+    static createJsonLockFile(): void
     {
         const jsonPath = path.join(process.cwd(), 'cliter', Operations.stateService.schema.boundedContextName.toKebabCase());
 

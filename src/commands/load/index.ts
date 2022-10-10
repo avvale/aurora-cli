@@ -55,9 +55,6 @@ export default class Load extends Command
         if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
         if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
 
-        // set operations object
-        const operations = new Operations();
-
         if (args.elementType === TemplateElement.BACK_MODULE)
         {
             let moduleFlag: any = {};
@@ -77,17 +74,17 @@ export default class Load extends Command
 
             if (flags.dashboard)
             {
-                await operations.generateFrontModule();
+                await Operations.generateFrontModule();
 
                 // TODO reorganizar los flows para evitar esta ñapa, para evitar generar graphql types en el dashboard
                 stateService.flags.noGraphQLTypes = true;
             }
             else
             {
-                await operations.generateBackModule();
+                await Operations.generateBackModule();
             }
 
-            await this.reviewOverwrites(operations, stateService);
+            await this.reviewOverwrites(stateService);
         }
 
         if (args.elementType === TemplateElement.BACK_BOUNDED_CONTEXT)
@@ -110,22 +107,22 @@ export default class Load extends Command
                 stateService.flags     = flags;
 
                 // generate module files
-                batchOperations.push(operations.generateBackModule());
+                batchOperations.push(Operations.generateBackModule());
             }
 
             await Promise.all(batchOperations);
 
             // generate graphql files
-            await this.reviewOverwrites(operations, stateService);
+            await this.reviewOverwrites(stateService);
         }
     }
 
-    private async reviewOverwrites(operations: Operations, stateService: StateService)
+    private async reviewOverwrites(stateService: StateService)
     {
         if (!stateService.flags.noGraphQLTypes)
         {
             // generate graphql files
-            await operations.generateGraphqlTypes();
+            await Operations.generateGraphqlTypes();
         }
 
         if (stateService.originFiles.length > 0)

@@ -35,23 +35,21 @@ export default class New extends Command
         stateService.command   = this;
         stateService.flags     = flags;
 
-        const operations = new Operations();
-
         switch (true)
         {
             case flags.package:
                 stateService.packageName = args.name;
-                await operations.generatePackage();
+                await Operations.generatePackage();
                 break;
 
             case flags.dashboard:
                 stateService.dashboardName = args.name;
-                await operations.generateDashboard();
+                await Operations.generateDashboard();
                 break;
 
             default:
                 stateService.appName = args.name;
-                await operations.generateApplication();
+                await Operations.generateApplication();
                 break;
         }
 
@@ -75,7 +73,7 @@ export default class New extends Command
             if (!flags.package && !flags.dashboard)
             {
                 // generate application env file
-                operations.generateApplicationEnvFile(args.name);
+                Operations.generateApplicationEnvFile(args.name);
             }
         });
     }

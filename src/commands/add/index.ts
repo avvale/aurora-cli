@@ -36,15 +36,13 @@ export default class Install extends Command
         stateService.command   = this;
         stateService.flags     = flags;
 
-        const operations = new Operations();
-
         if (flags.dashboard)
         {
-            operations.installFrontPackage(packageName);
+            Operations.installFrontPackage(packageName);
         }
         else
         {
-            operations.installBackPackage(packageName);
+            Operations.installBackPackage(packageName);
         }
     }
 }
