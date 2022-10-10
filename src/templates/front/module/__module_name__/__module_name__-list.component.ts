@@ -33,7 +33,10 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     ];
     gridId: string = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
     gridData$: Observable<GridData<{{ schema.aggregateName }}>>;
+    // initial grid state to config the grid, on init view
     gridState: GridState = {};
+    // grid state returned by the grid, on every grid state change
+    currentGridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
@@ -82,15 +85,12 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
     handleStateChange($event: GridState): void
     {
+        // set current grid state
+        this.currentGridState = $event;
+
         this.actionService.action({
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
             isViewAction: false,
-            data        : {
-                event: QueryStatementHandler
-                    .fromGridStateBuilder($event)
-                    .setDefaultSort()
-                    .getQueryStatement(),
-            },
         });
     }
 
@@ -152,12 +152,22 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 this.gridState = this.gridFiltersStorageService
                     .getColumnFilterState(this.gridId);
 
+                // clone gird state to set current grid state to init list view
+                this.currentGridState = { ...this.gridState };
+
                 this.gridData$ = this.{{ toCamelCase schema.moduleName }}Service.pagination$;
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination':
                 await lastValueFrom(
-                    this.{{ toCamelCase schema.moduleName }}Service.pagination({ query: action.data.event }),
+                    this.{{ toCamelCase schema.moduleName }}Service
+                        .pagination({
+                            query: QueryStatementHandler
+                                .fromGridStateBuilder(this.currentGridState)
+                                .setDefaultSort()
+                                .setDefaultSlot()
+                                .getQueryStatement(),
+                        }),
                 );
                 break;
 
@@ -199,7 +209,10 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                                     this.{{ toCamelCase schema.moduleName }}Service
                                         .deleteById<{{ schema.aggregateName }}>(action.data.row.id),
                                 );
-                                this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination' });
+                                this.actionService.action({
+                                    id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
+                                    isViewAction: false,
+                                });
                             }
                             catch(error)
                             {
