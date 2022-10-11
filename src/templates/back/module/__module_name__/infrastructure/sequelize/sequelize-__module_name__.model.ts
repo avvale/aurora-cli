@@ -194,7 +194,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{/eq}}
         {{/unless}}
     })
-    {{ toCamelCase name }}: {{{ getJavascriptType }}};
+    {{ toCamelCase name }}: {{{ getJavascriptModelType }}};
     {{/if}}
     {{#if hasHasOneDecorator }}
 

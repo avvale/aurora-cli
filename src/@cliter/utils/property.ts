@@ -181,6 +181,11 @@ export class Property
         return Boolean(this.relationship);
     }
 
+    get isBinary(): boolean
+    {
+        return this.type === SqlType.BLOB || this.type === SqlType.MEDIUMBLOB || this.type === SqlType.LONGBLOB;
+    }
+
     // property names
     get originName(): string
     {
@@ -228,6 +233,14 @@ export class Property
         if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationshipAggregate}[]`;
 
         return this.config.sqlTypesEquivalenceJavascriptTypes[this.type];
+    }
+
+    get getJavascriptModelType(): string
+    {
+        if (this.relationship === SqlRelationship.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
+        if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationshipAggregate}[]`;
+
+        return this.config.sqlTypesEquivalenceJavascriptModelTypes[this.type];
     }
 
     get getSequelizeType(): string

@@ -1,10 +1,10 @@
-import { StringValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
+import { BlobValueObject, DataValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
-export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }} extends StringValueObject
+export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }} extends BlobValueObject
 {
     public readonly type: '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}';
 
-    constructor(value: string, validationRules: ValidationRules = {})
+    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
             name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}',
@@ -13,6 +13,6 @@ export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleNam
             {{#if currentProperty.maxLength}}
             maxLength  : {{ currentProperty.maxLength }},
             {{/if}}
-        }, validationRules));
+        }, validationRules), data);
     }
 }

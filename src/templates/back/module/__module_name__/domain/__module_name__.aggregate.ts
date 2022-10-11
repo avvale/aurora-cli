@@ -236,7 +236,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/each}}
         };
     }
-
+    {{#if hasI18n}}
 
     toI18nDTO(): LiteralObject
     {
@@ -253,6 +253,42 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/if}}
             {{/eq}}
             {{/if}}
+            {{/each}}
+        };
+    }
+    {{/if}}
+
+    // function called to get data for repository side effet methods
+    toRepository(): LiteralObject
+    {
+        return {
+            {{#each schema.properties.aggregate}}
+            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if isBinary }}
+            {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.buffer,
+            {{else}}
+            {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
+            {{/if}}
+            {{/if}}
+            {{/each}}
+
+            // eager relationship
+            {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+            {{ toCamelCase relationshipField }}: this.{{ toCamelCase relationshipField }}?.toDTO(),
+            {{/each}}
+            {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+            {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.toDTO(),
+            {{/each}}
+            {{#each schema.properties.withRelationshipManyToOne}}
+            {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+            {{ toCamelCase relationshipField }}: this.{{ toCamelCase relationshipField }}?.toDTO(),
+            {{/unless}}
+            {{/each}}
+            {{#each schema.properties.withRelationshipOneToMany}}
+            {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.map(item => item.toDTO()),
+            {{/each}}
+            {{#each schema.properties.withRelationshipManyToMany}}
+            {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.map(item => item.toDTO()),
             {{/each}}
         };
     }
