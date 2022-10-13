@@ -258,7 +258,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     }
     {{/if}}
 
-    // function called to get data for repository side effet methods
+    // function called to get data for repository side effect methods
     toRepository(): LiteralObject
     {
         return {

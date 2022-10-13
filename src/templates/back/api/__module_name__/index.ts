@@ -117,7 +117,7 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.handler';
 {{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleNames) '.handler.ts'}}
+{{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.handler';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.handler.ts'}}
