@@ -15,7 +15,7 @@
                 class="fuse-vertical-navigation-item-icon"
                 [fontSet]="item.iconFontSet"
                 [ngClass]="item.classes?.icon"
-                [svgIcon]="item.icon">{{ item.icon }}</mat-icon>
+                [svgIcon]="!item.iconFontSet && item.icon">{{ item.iconFontSet && item.icon }}</mat-icon>
         </ng-container>
 
         <!-- Title & Subtitle -->
