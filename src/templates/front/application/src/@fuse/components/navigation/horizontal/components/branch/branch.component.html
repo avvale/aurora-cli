@@ -85,8 +85,9 @@
             <ng-container *ngIf="item.icon">
                 <mat-icon
                     class="fuse-horizontal-navigation-item-icon"
+                    [fontSet]="item.iconFontSet"
                     [ngClass]="item.classes?.icon"
-                    [svgIcon]="item.icon"></mat-icon>
+                    [svgIcon]="item.icon">{{ item.icon }}</mat-icon>
             </ng-container>
 
             <!-- Title & Subtitle -->

@@ -63,6 +63,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
                 this.navigation = navigation;
             });
 
+        
         // Subscribe to the account service
         this.iamService.account$
             .pipe((takeUntil(this._unsubscribeAll)))
