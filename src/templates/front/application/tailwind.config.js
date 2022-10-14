@@ -35,8 +35,8 @@ const themes = {
             500: colors.red['50']
         }
     },
-    // Rest of the themes will use the 'default' as the base theme
-    // and extend them with their given configuration
+    // Rest of the themes will use the 'default' as the base
+    // theme and extend it with their given configuration
     'brand' : {
         primary: customPalettes.brand
     },
@@ -288,7 +288,6 @@ const config = {
 
         // Other third party and/or custom plugins
         require('@tailwindcss/typography')({modifiers: ['sm', 'lg']}),
-        require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/line-clamp')
     ]
 };
