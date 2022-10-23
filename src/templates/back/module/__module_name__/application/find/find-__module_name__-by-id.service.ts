@@ -11,7 +11,11 @@ export class Find{{ toPascalCase schema.moduleName }}ByIdService
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
     ) {}
 
-    async main(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<{{ schema.aggregateName }}>
+    async main(
+        id: {{ toPascalCase schema.moduleName }}Id,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<{{ schema.aggregateName }}>
     {
         return await this.repository.findById(id, { constraint, cQMetadata });
     }

@@ -12,7 +12,11 @@ export class Paginate{{ toPascalCase schema.moduleNames }}QueryHandler implement
 
     async execute(query: Paginate{{ toPascalCase schema.moduleNames }}Query): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginate{{ toPascalCase schema.moduleNames }}Service.main(query.queryStatement, query.constraint, query.cQMetadata);
+        const { total, count, rows } = await this.paginate{{ toPascalCase schema.moduleNames }}Service.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return new PaginationResponse(
             total,

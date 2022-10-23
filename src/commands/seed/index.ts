@@ -74,24 +74,28 @@ export default class Seed extends Command
         {
             const { boundedContextName }: any = await Prompter.promptForSeedBoundedContext(flags.boundedContext);
 
-            const seederPath = path.join('src', cliterConfig.apiContainer, boundedContextName, 'seeder', 'seeder.ts');
+            const seederPath = path.join('dist', 'src', cliterConfig.apiContainer, boundedContextName, 'seeder', 'seeder.js');
 
             // check if seeder class exists in @api tree folders
             if (fs.existsSync(path.join(process.cwd(), seederPath)))
             {
                 CliUx.ux.action.start('Creating environment');
 
-                shell.exec(
-                    `ts-node -r tsconfig-paths/register ${seederPath}`,
-                    {
-                        timeout: 120,
-                    },
-                    (error, stdout, stderr) =>
-                    {
-                        CliUx.ux.action.stop('Environment created');
-                        this.log(`%s %s Bounded Context seed ${boundedContextName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
-                    },
+                const execution = shell.spawn(
+                    'node',
+                    [seederPath],
                 );
+
+                execution.stderr.on('data', data =>
+                {
+                    if (flags.log) console.error(data);
+                });
+
+                execution.on('close', code =>
+                {
+                    CliUx.ux.action.stop('Environment created');
+                    this.log(`%s %s Bounded Context seed ${boundedContextName} has been loaded %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
+                });
             }
             else
             {

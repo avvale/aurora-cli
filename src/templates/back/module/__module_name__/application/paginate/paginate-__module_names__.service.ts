@@ -12,8 +12,16 @@ export class Paginate{{ toPascalCase schema.moduleNames }}Service
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<{{ schema.aggregateName }}>>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata
+    ): Promise<Pagination<{{ schema.aggregateName }}>>
     {
-        return await this.repository.paginate({ queryStatement, constraint, cQMetadata });
+        return await this.repository.paginate({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

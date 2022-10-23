@@ -44,7 +44,7 @@
         <!-- Grid -->
         <au-grid
             [columnsConfig]="columnsConfig$ | async"
-            [data]="gridData$ | async"
+            [gridData]="gridData$ | async"
             [gridState]="gridState"
             [originColumnsConfig]="originColumnsConfig"
             (action)="handleGridAction($event)"

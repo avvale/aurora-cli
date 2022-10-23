@@ -32,7 +32,7 @@ export class Sequelize{{ toPascalCase schema.moduleName }}Repository extends Seq
     }
 
     // hook called after create aggregate
-    async updatedAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model): Promise<void>
+    async updatedByIdAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model): Promise<void>
     {
         // set many to many relation
         {{#each schema.properties.withRelationshipManyToMany}}

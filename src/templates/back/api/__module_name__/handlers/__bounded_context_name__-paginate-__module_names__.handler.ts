@@ -35,6 +35,10 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         {{#if schema.properties.hasI18n}}
         constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
         {{/if}}
-        return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

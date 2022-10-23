@@ -94,7 +94,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         });
     }
 
-    handleColumnFiltersChange($event): void
+    handleColumnFiltersChange($event: GridState): void
     {
         this.gridFiltersStorageService.setColumnFilterState(
             this.gridId,
