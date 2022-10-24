@@ -4,7 +4,7 @@ import { IamRoleDto } from '../../../iam/role/dto/iam-role.dto';
 import { IamTenantDto } from '../../../iam/tenant/dto/iam-tenant.dto';
 import { OAuthClientDto } from '../../../o-auth/client/dto/o-auth-client.dto';
 import { IamUserDto } from '../../../iam/user/dto/iam-user.dto';
-import { IamAccountType } from '../../../../graphql';
+import { IamAccountType } from 'src/graphql';
 
 export class IamAccountDto
 {

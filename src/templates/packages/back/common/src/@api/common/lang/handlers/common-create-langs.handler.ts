@@ -3,7 +3,7 @@ import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreateLangsCommand } from '@apps/common/lang/application/create/create-langs.command';
-import { CommonCreateLangInput } from '../../../../graphql';
+import { CommonCreateLangInput } from 'src/graphql';
 import { CommonCreateLangDto } from '../dto';
 
 @Injectable()

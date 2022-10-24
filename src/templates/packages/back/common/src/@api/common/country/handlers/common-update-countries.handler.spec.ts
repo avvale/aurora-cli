@@ -6,7 +6,7 @@ import { AddI18NConstraintService, ICommandBus, IQueryBus } from 'aurora-ts-core
 
 // custom items
 import { CommonUpdateCountriesHandler } from './common-update-countries.handler';
-import { CommonUpdateCountriesInput } from '../../../../graphql';
+import { CommonUpdateCountriesInput } from 'src/graphql';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

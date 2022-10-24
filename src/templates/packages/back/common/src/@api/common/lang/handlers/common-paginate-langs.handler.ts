@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateLangsQuery } from '@apps/common/lang/application/paginate/paginate-langs.query';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from 'src/graphql';
 
 @Injectable()
 export class CommonPaginateLangsHandler

@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpdateTenantsResolver } from './iam-update-tenants.resolver';
 import { IamUpdateTenantsHandler } from '../handlers/iam-update-tenants.handler';
-import { IamUpdateTenantsInput } from '../../../../graphql';
+import { IamUpdateTenantsInput } from 'src/graphql';
 
 // sources
 import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';

@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdateRolesHandler } from './iam-update-roles.handler';
-import { IamUpdateRolesInput } from '../../../../graphql';
+import { IamUpdateRolesInput } from 'src/graphql';
 
 // sources
 import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';

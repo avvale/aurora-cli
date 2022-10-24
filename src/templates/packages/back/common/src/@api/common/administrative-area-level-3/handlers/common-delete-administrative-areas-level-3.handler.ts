@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { GetAdministrativeAreasLevel3Query } from '@apps/common/administrative-area-level-3/application/get/get-administrative-areas-level-3.query';
 import { DeleteAdministrativeAreasLevel3Command } from '@apps/common/administrative-area-level-3/application/delete/delete-administrative-areas-level-3.command';
-import { CommonAdministrativeAreaLevel3 } from '../../../../graphql';
+import { CommonAdministrativeAreaLevel3 } from 'src/graphql';
 import { CommonAdministrativeAreaLevel3Dto } from '../dto';
 
 @Injectable()

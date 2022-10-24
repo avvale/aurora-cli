@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdateUsersHandler } from './iam-update-users.handler';
-import { IamUpdateUsersInput } from '../../../../graphql';
+import { IamUpdateUsersInput } from 'src/graphql';
 
 // sources
 import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';

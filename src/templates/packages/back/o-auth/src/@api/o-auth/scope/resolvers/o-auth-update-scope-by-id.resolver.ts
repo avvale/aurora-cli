@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { OAuthUpdateScopeByIdHandler } from '../handlers/o-auth-update-scope-by-id.handler';
-import { OAuthScope, OAuthUpdateScopeByIdInput } from '../../../../graphql';
+import { OAuthScope, OAuthUpdateScopeByIdInput } from 'src/graphql';
 
 @Resolver()
 @Permissions('oAuth.scope.update')

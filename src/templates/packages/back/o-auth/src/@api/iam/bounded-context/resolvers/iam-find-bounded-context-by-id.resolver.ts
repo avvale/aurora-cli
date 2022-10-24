@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamFindBoundedContextByIdHandler } from '../handlers/iam-find-bounded-context-by-id.handler';
-import { IamBoundedContext } from '../../../../graphql';
+import { IamBoundedContext } from 'src/graphql';
 
 @Resolver()
 @Permissions('iam.boundedContext.get')

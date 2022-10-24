@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { OAuthDeleteAccessTokensHandler } from '../handlers/o-auth-delete-access-tokens.handler';
-import { OAuthAccessToken } from '../../../../graphql';
+import { OAuthAccessToken } from 'src/graphql';
 
 @Resolver()
 @Permissions('oAuth.accessToken.delete')

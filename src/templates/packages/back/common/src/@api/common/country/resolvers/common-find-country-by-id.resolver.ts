@@ -3,7 +3,7 @@ import { ContentLanguage, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonFindCountryByIdHandler } from '../handlers/common-find-country-by-id.handler';
-import { CommonCountry } from '../../../../graphql';
+import { CommonCountry } from 'src/graphql';
 
 @Resolver()
 export class CommonFindCountryByIdResolver

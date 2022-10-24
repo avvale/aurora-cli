@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { CommonUpdateLangsResolver } from './common-update-langs.resolver';
 import { CommonUpdateLangsHandler } from '../handlers/common-update-langs.handler';
-import { CommonUpdateLangsInput } from '../../../../graphql';
+import { CommonUpdateLangsInput } from 'src/graphql';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

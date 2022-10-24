@@ -3,7 +3,7 @@ import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from 'src/graphql';
 
 @Resolver()
 export class CommonPaginateLangsResolver

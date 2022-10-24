@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamCreatePermissionHandler } from '../handlers/iam-create-permission.handler';
-import { IamPermission, IamCreatePermissionInput } from '../../../../graphql';
+import { IamPermission, IamCreatePermissionInput } from 'src/graphql';
 
 @Resolver()
 @Permissions('iam.permission.create')

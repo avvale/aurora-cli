@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonUpdateAdministrativeAreaLevel3ByIdHandler } from './common-update-administrative-area-level-3-by-id.handler';
-import { CommonUpdateAdministrativeAreaLevel3ByIdInput } from '../../../../graphql';
+import { CommonUpdateAdministrativeAreaLevel3ByIdInput } from 'src/graphql';
 
 // sources
 import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';

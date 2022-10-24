@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamUpdateTenantsHandler } from '../handlers/iam-update-tenants.handler';
-import { IamTenant, IamUpdateTenantsInput } from '../../../../graphql';
+import { IamTenant, IamUpdateTenantsInput } from 'src/graphql';
 
 @Resolver()
 @Permissions('iam.tenant.update')

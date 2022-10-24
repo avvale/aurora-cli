@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { FindRoleByIdQuery } from '@apps/iam/role/application/find/find-role-by-id.query';
 import { UpdateRoleByIdCommand } from '@apps/iam/role/application/update/update-role-by-id.command';
-import { IamRole, IamUpdateRoleByIdInput } from '../../../../graphql';
+import { IamRole, IamUpdateRoleByIdInput } from 'src/graphql';
 import { IamRoleDto, IamUpdateRoleByIdDto } from '../dto';
 
 @Injectable()

@@ -3,7 +3,7 @@ import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonDeleteLangByIdHandler } from '../handlers/common-delete-lang-by-id.handler';
-import { CommonLang } from '../../../../graphql';
+import { CommonLang } from 'src/graphql';
 
 @Resolver()
 export class CommonDeleteLangByIdResolver

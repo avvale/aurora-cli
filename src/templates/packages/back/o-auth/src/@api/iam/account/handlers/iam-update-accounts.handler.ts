@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { GetAccountsQuery } from '@apps/iam/account/application/get/get-accounts.query';
 import { UpdateAccountsCommand } from '@apps/iam/account/application/update/update-accounts.command';
-import { IamAccount, IamUpdateAccountsInput } from '../../../../graphql';
+import { IamAccount, IamUpdateAccountsInput } from 'src/graphql';
 import { IamAccountDto, IamUpdateAccountsDto } from '../dto';
 
 @Injectable()

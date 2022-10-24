@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 // custom items
 import { CommonUpdateCountryByIdResolver } from './common-update-country-by-id.resolver';
 import { CommonUpdateCountryByIdHandler } from '../handlers/common-update-country-by-id.handler';
-import { CommonUpdateCountryByIdInput } from '../../../../graphql';
+import { CommonUpdateCountryByIdInput } from 'src/graphql';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

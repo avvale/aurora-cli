@@ -3,7 +3,7 @@ import { AddI18NConstraintService, IQueryBus, QueryStatement } from 'aurora-ts-c
 
 // @apps
 import { PaginateCountriesQuery } from '@apps/common/country/application/paginate/paginate-countries.query';
-import { Pagination } from '../../../../graphql';
+import { Pagination } from 'src/graphql';
 
 @Injectable()
 export class CommonPaginateCountriesHandler

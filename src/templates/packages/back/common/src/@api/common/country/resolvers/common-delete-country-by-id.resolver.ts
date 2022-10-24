@@ -3,7 +3,7 @@ import { ContentLanguage, QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonDeleteCountryByIdHandler } from '../handlers/common-delete-country-by-id.handler';
-import { CommonCountry } from '../../../../graphql';
+import { CommonCountry } from 'src/graphql';
 
 @Resolver()
 export class CommonDeleteCountryByIdResolver

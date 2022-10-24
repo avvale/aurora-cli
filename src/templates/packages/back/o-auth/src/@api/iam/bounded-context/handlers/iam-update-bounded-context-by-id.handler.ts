@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { FindBoundedContextByIdQuery } from '@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query';
 import { UpdateBoundedContextByIdCommand } from '@apps/iam/bounded-context/application/update/update-bounded-context-by-id.command';
-import { IamBoundedContext, IamUpdateBoundedContextByIdInput } from '../../../../graphql';
+import { IamBoundedContext, IamUpdateBoundedContextByIdInput } from 'src/graphql';
 import { IamBoundedContextDto, IamUpdateBoundedContextByIdDto } from '../dto';
 
 @Injectable()

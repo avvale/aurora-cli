@@ -3,7 +3,7 @@ import { AddI18NConstraintService, IQueryBus, QueryStatement } from 'aurora-ts-c
 
 // @apps
 import { GetCountriesQuery } from '@apps/common/country/application/get/get-countries.query';
-import { CommonCountry } from '../../../../graphql';
+import { CommonCountry } from 'src/graphql';
 import { CommonCountryDto } from '../dto';
 
 @Injectable()

@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 // custom items
 import { CommonUpdateCountriesResolver } from './common-update-countries.resolver';
 import { CommonUpdateCountriesHandler } from '../handlers/common-update-countries.handler';
-import { CommonUpdateCountriesInput } from '../../../../graphql';
+import { CommonUpdateCountriesInput } from 'src/graphql';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

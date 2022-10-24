@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
-import { IamCreateTenantInput } from '../../../../graphql';
+import { IamCreateTenantInput } from 'src/graphql';
 
 @Resolver()
 @Permissions('iam.tenant.create')

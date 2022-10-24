@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { CommonCreateCountriesResolver } from './common-create-countries.resolver';
 import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
-import { CommonCreateCountryInput } from '../../../../graphql';
+import { CommonCreateCountryInput } from 'src/graphql';
 
 // sources
 import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';

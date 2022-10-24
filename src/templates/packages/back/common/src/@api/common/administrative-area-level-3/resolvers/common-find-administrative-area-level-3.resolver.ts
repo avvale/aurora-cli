@@ -3,7 +3,7 @@ import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonFindAdministrativeAreaLevel3Handler } from '../handlers/common-find-administrative-area-level-3.handler';
-import { CommonAdministrativeAreaLevel3 } from '../../../../graphql';
+import { CommonAdministrativeAreaLevel3 } from 'src/graphql';
 
 @Resolver()
 export class CommonFindAdministrativeAreaLevel3Resolver

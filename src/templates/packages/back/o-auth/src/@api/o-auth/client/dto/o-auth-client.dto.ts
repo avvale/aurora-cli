@@ -2,7 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { OAuthApplicationDto } from '../../../o-auth/application/dto/o-auth-application.dto';
 import { OAuthAccessTokenDto } from '../../../o-auth/access-token/dto/o-auth-access-token.dto';
-import { OAuthClientGrantType } from '../../../../graphql';
+import { OAuthClientGrantType } from 'src/graphql';
 
 export class OAuthClientDto
 {

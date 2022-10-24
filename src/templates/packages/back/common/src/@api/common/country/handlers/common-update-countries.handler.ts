@@ -4,7 +4,7 @@ import { AddI18NConstraintService, FormatLangCode, ICommandBus, IQueryBus, Query
 // @apps
 import { GetCountriesQuery } from '@apps/common/country/application/get/get-countries.query';
 import { UpdateCountriesCommand } from '@apps/common/country/application/update/update-countries.command';
-import { CommonCountry, CommonUpdateCountriesInput } from '../../../../graphql';
+import { CommonCountry, CommonUpdateCountriesInput } from 'src/graphql';
 import { CommonCountryDto, CommonUpdateCountriesDto } from '../dto';
 
 @Injectable()

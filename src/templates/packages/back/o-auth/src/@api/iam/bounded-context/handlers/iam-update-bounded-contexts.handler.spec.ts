@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdateBoundedContextsHandler } from './iam-update-bounded-contexts.handler';
-import { IamUpdateBoundedContextsInput } from '../../../../graphql';
+import { IamUpdateBoundedContextsInput } from 'src/graphql';
 
 // sources
 import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';

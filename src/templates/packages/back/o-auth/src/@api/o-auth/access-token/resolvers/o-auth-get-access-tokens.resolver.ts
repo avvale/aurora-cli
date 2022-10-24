@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { OAuthGetAccessTokensHandler } from '../handlers/o-auth-get-access-tokens.handler';
-import { OAuthAccessToken } from '../../../../graphql';
+import { OAuthAccessToken } from 'src/graphql';
 
 @Resolver()
 @Permissions('oAuth.accessToken.get')

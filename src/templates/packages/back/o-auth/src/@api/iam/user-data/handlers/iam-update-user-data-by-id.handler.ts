@@ -5,7 +5,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 import { FindUserByIdQuery } from '@apps/iam/user/application/find/find-user-by-id.query';
 import { UpdateUserByIdCommand } from '@apps/iam/user/application/update/update-user-by-id.command';
 import { AccountResponse } from '@apps/iam/account/domain/account.response';
-import { IamUserData, IamUpdateUserDataByIdInput } from '../../../../graphql';
+import { IamUserData, IamUpdateUserDataByIdInput } from 'src/graphql';
 import { IamUserDataDto, IamUpdateUserDataByIdDto } from '../dto';
 
 @Injectable()

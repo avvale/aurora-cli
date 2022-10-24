@@ -3,10 +3,11 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IQueryBus, Jwt } from 'aurora-ts-core';
-import { IamUserModel } from '../../../../@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
-import { IamAccountDto } from '../../../../@api/iam/account/dto';
-import { FindAccountQuery } from '../../../../@apps/iam/account/application/find/find-account.query';
-import { IamAccount } from '../../../../graphql';
+import { IamUserModel } from '@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
+// todo, mover a @api para evitar coger un recurso de @api, desde el dominio?? no queda claro, donde se ubica la carpeta shared
+import { IamAccountDto } from '@api/iam/account/dto';
+import { FindAccountQuery } from '@apps/iam/account/application/find/find-account.query';
+import { IamAccount } from 'src/graphql';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy)

@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamDeleteTenantByIdHandler } from '../handlers/iam-delete-tenant-by-id.handler';
-import { IamTenant } from '../../../../graphql';
+import { IamTenant } from 'src/graphql';
 
 @Resolver()
 @Permissions('iam.tenant.delete')

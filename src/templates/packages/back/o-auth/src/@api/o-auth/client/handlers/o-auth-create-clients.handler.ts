@@ -3,7 +3,7 @@ import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreateClientsCommand } from '@apps/o-auth/client/application/create/create-clients.command';
-import { OAuthCreateClientInput } from '../../../../graphql';
+import { OAuthCreateClientInput } from 'src/graphql';
 import { OAuthCreateClientDto } from '../dto';
 
 @Injectable()

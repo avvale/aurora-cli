@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamFindTenantByIdHandler } from '../handlers/iam-find-tenant-by-id.handler';
-import { IamTenant } from '../../../../graphql';
+import { IamTenant } from 'src/graphql';
 
 @Resolver()
 @Permissions('iam.tenant.get')

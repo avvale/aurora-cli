@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { OAuthUpdateApplicationByIdResolver } from './o-auth-update-application-by-id.resolver';
 import { OAuthUpdateApplicationByIdHandler } from '../handlers/o-auth-update-application-by-id.handler';
-import { OAuthUpdateApplicationByIdInput } from '../../../../graphql';
+import { OAuthUpdateApplicationByIdInput } from 'src/graphql';
 
 // sources
 import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
