@@ -29,7 +29,7 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
             query: QueryStatementHandler
                 .fromGridStateBuilder(this.gridFiltersStorageService.getColumnFilterState('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList'))
                 .setDefaultSort()
-                .setDefaultSlot()
+                .setDefaultPage()
                 .getQueryStatement(),
         });
     }

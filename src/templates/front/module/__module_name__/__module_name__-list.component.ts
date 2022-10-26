@@ -165,7 +165,6 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                             query: QueryStatementHandler
                                 .fromGridStateBuilder(this.currentGridState)
                                 .setDefaultSort()
-                                .setDefaultSlot()
                                 .getQueryStatement(),
                         }),
                 );
