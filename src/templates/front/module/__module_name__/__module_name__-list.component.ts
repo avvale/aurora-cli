@@ -3,18 +3,7 @@ import { Action, ColumnConfig, ColumnDataType, Crumb, ExportGridState, exportRow
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
-
-export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = [
-    {{#each schema.properties.gridFields}}
-    {{#if (allowProperty ../schema.moduleName this) }}
-    {
-        type : ColumnDataType.{{ getColumnDataType }},
-        field: '{{ toCamelCase name }}',
-        sort : '{{ toCamelCase name }}',
-    },
-    {{/if}}
-    {{/each}}
-];
+import { {{ toCamelCase schema.moduleName }}ColumnsConfig } from './{{ toKebabCase schema.moduleName }}.columns-config';
 
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-list',
