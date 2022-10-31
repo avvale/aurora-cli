@@ -66,7 +66,7 @@ jobs:
           # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
           # don't forget set like bin/bash ftp user
           DEPLOY_KEY: $\{{ secrets.PLESK_SSH_PRIVATE_KEY }}
-          ARGS: '-avzh --exclude=".*"'
+          ARGS: '-avzh --delete --exclude=".*"'
           # default port rsync 22
           SERVER_PORT: $\{{ secrets.PLESK_PORT }}
           FOLDER: "./"
