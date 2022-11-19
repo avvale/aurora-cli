@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { FindAdministrativeAreaLevel2ByIdQuery } from '@apps/common/administrative-area-level-2/application/find/find-administrative-area-level-2-by-id.query';
 import { UpdateAdministrativeAreaLevel2ByIdCommand } from '@apps/common/administrative-area-level-2/application/update/update-administrative-area-level-2-by-id.command';
-import { CommonAdministrativeAreaLevel2, CommonUpdateAdministrativeAreaLevel2ByIdInput } from 'src/graphql';
+import { CommonAdministrativeAreaLevel2, CommonUpdateAdministrativeAreaLevel2ByIdInput } from '@api/graphql';
 import { CommonAdministrativeAreaLevel2Dto, CommonUpdateAdministrativeAreaLevel2ByIdDto } from '../dto';
 
 @Injectable()

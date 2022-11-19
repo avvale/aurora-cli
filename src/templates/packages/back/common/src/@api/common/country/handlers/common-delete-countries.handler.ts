@@ -4,7 +4,7 @@ import { AddI18NConstraintService, ICommandBus, IQueryBus, QueryStatement } from
 // @apps
 import { GetCountriesQuery } from '@apps/common/country/application/get/get-countries.query';
 import { DeleteCountriesCommand } from '@apps/common/country/application/delete/delete-countries.command';
-import { CommonCountry } from 'src/graphql';
+import { CommonCountry } from '@api/graphql';
 import { CommonCountryDto } from '../dto';
 
 @Injectable()

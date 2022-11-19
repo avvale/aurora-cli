@@ -3,7 +3,7 @@ import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonUpdateLangByIdHandler } from '../handlers/common-update-lang-by-id.handler';
-import { CommonLang, CommonUpdateLangByIdInput } from 'src/graphql';
+import { CommonLang, CommonUpdateLangByIdInput } from '@api/graphql';
 
 @Resolver()
 export class CommonUpdateLangByIdResolver

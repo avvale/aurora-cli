@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { GetApplicationsQuery } from '@apps/o-auth/application/application/get/get-applications.query';
 import { UpdateApplicationsCommand } from '@apps/o-auth/application/application/update/update-applications.command';
-import { OAuthApplication, OAuthUpdateApplicationsInput } from 'src/graphql';
+import { OAuthApplication, OAuthUpdateApplicationsInput } from '@api/graphql';
 import { OAuthApplicationDto, OAuthUpdateApplicationsDto } from '../dto';
 
 @Injectable()

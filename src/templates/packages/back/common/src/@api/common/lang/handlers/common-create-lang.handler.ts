@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 // @apps
 import { FindLangByIdQuery } from '@apps/common/lang/application/find/find-lang-by-id.query';
 import { CreateLangCommand } from '@apps/common/lang/application/create/create-lang.command';
-import { CommonLang, CommonCreateLangInput } from 'src/graphql';
+import { CommonLang, CommonCreateLangInput } from '@api/graphql';
 import { CommonLangDto, CommonCreateLangDto } from '../dto';
 
 @Injectable()

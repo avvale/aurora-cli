@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateTenantsQuery } from '@apps/iam/tenant/application/paginate/paginate-tenants.query';
-import { Pagination } from 'src/graphql';
+import { Pagination } from '@api/graphql';
 
 @Injectable()
 export class IamPaginateTenantsHandler

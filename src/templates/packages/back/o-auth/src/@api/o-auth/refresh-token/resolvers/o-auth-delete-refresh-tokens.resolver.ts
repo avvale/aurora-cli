@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { OAuthDeleteRefreshTokensHandler } from '../handlers/o-auth-delete-refresh-tokens.handler';
-import { OAuthRefreshToken } from 'src/graphql';
+import { OAuthRefreshToken } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.refreshToken.delete')

@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { OAuthPaginateAccessTokensHandler } from '../handlers/o-auth-paginate-access-tokens.handler';
-import { Pagination } from 'src/graphql';
+import { Pagination } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.accessToken.get')

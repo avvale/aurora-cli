@@ -3,7 +3,7 @@ import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreateApplicationsCommand } from '@apps/o-auth/application/application/create/create-applications.command';
-import { OAuthCreateApplicationInput } from 'src/graphql';
+import { OAuthCreateApplicationInput } from '@api/graphql';
 import { OAuthCreateApplicationDto } from '../dto';
 
 @Injectable()

@@ -3,7 +3,7 @@ import { Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonCreateCountryHandler } from '../handlers/common-create-country.handler';
-import { CommonCountry, CommonCreateCountryInput } from 'src/graphql';
+import { CommonCountry, CommonCreateCountryInput } from '@api/graphql';
 
 @Resolver()
 export class CommonCreateCountryResolver

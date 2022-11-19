@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { FindAdministrativeAreaLevel1Query } from '@apps/common/administrative-area-level-1/application/find/find-administrative-area-level-1.query';
-import { CommonAdministrativeAreaLevel1 } from 'src/graphql';
+import { CommonAdministrativeAreaLevel1 } from '@api/graphql';
 import { CommonAdministrativeAreaLevel1Dto } from '../dto';
 
 @Injectable()

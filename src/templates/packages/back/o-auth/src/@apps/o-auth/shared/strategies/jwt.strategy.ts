@@ -7,7 +7,7 @@ import { IamUserModel } from '@apps/iam/user/infrastructure/sequelize/sequelize-
 // todo, mover a @api para evitar coger un recurso de @api, desde el dominio?? no queda claro, donde se ubica la carpeta shared
 import { IamAccountDto } from '@api/iam/account/dto';
 import { FindAccountQuery } from '@apps/iam/account/application/find/find-account.query';
-import { IamAccount } from 'src/graphql';
+import { IamAccount } from '@api/graphql';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy)

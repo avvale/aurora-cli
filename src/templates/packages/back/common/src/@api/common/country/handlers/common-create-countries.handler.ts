@@ -3,7 +3,7 @@ import { AddI18NConstraintService, ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreateCountriesCommand } from '@apps/common/country/application/create/create-countries.command';
-import { CommonCreateCountryInput } from 'src/graphql';
+import { CommonCreateCountryInput } from '@api/graphql';
 import { CommonCreateCountryDto } from '../dto';
 
 @Injectable()

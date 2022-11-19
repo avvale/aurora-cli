@@ -24,7 +24,7 @@ import { {{ schema.aggregateName }}I18NModel } from './sequelize-{{ toKebabCase 
 
 // auditing
 import { SequelizeAuditingAgent } from '@apps/auditing/side-effect/infrastructure/sequelize/sequelize-auditing-agent';
-import { AuditingSideEffectEvent } from 'src/graphql';
+import { AuditingSideEffectEvent } from '@api/graphql';
 {{/if}}
 
 @Table({

@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { GetPermissionsQuery } from '@apps/iam/permission/application/get/get-permissions.query';
 import { DeletePermissionsCommand } from '@apps/iam/permission/application/delete/delete-permissions.command';
-import { IamPermission } from 'src/graphql';
+import { IamPermission } from '@api/graphql';
 import { IamPermissionDto } from '../dto';
 
 @Injectable()

@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { CommonCreateAdministrativeAreasLevel3Resolver } from './common-create-administrative-areas-level-3.resolver';
 import { CommonCreateAdministrativeAreasLevel3Handler } from '../handlers/common-create-administrative-areas-level-3.handler';
-import { CommonCreateAdministrativeAreaLevel3Input } from 'src/graphql';
+import { CommonCreateAdministrativeAreaLevel3Input } from '@api/graphql';
 
 // sources
 import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';

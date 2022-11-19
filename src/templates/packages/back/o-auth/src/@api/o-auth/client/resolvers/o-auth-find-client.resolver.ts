@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { OAuthFindClientHandler } from '../handlers/o-auth-find-client.handler';
-import { OAuthClient } from 'src/graphql';
+import { OAuthClient } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.client.get')

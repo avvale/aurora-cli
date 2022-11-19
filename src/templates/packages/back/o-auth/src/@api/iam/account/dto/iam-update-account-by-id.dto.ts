@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 import { IamUpdateUserByIdDto } from '../../../iam/user/dto/iam-update-user-by-id.dto';
-import { IamAccountType } from 'src/graphql';
+import { IamAccountType } from '@api/graphql';
 
 export class IamUpdateAccountByIdDto
 {

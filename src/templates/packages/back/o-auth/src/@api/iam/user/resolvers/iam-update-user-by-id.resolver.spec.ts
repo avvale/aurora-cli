@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpdateUserByIdResolver } from './iam-update-user-by-id.resolver';
 import { IamUpdateUserByIdHandler } from '../handlers/iam-update-user-by-id.handler';
-import { IamUpdateUserByIdInput } from 'src/graphql';
+import { IamUpdateUserByIdInput } from '@api/graphql';
 
 // sources
 import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';

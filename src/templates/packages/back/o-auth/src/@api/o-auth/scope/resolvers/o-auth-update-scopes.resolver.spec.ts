@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { OAuthUpdateScopesResolver } from './o-auth-update-scopes.resolver';
 import { OAuthUpdateScopesHandler } from '../handlers/o-auth-update-scopes.handler';
-import { OAuthUpdateScopesInput } from 'src/graphql';
+import { OAuthUpdateScopesInput } from '@api/graphql';
 
 // sources
 import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';

@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { CommonUpdateAdministrativeAreaLevel1ByIdResolver } from './common-update-administrative-area-level-1-by-id.resolver';
 import { CommonUpdateAdministrativeAreaLevel1ByIdHandler } from '../handlers/common-update-administrative-area-level-1-by-id.handler';
-import { CommonUpdateAdministrativeAreaLevel1ByIdInput } from 'src/graphql';
+import { CommonUpdateAdministrativeAreaLevel1ByIdInput } from '@api/graphql';
 
 // sources
 import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';

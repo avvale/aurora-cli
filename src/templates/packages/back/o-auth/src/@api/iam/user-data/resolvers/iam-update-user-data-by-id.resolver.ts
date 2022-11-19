@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamUpdateUserDataByIdHandler } from '../handlers/iam-update-user-data-by-id.handler';
-import { IamUserData, IamUpdateUserByIdInput } from 'src/graphql';
+import { IamUserData, IamUpdateUserByIdInput } from '@api/graphql';
 import { AccountResponse } from '@apps/iam/account/domain/account.response';
 
 @Resolver()

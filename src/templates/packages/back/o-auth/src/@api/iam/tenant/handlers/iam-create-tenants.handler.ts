@@ -3,7 +3,7 @@ import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreateTenantsCommand } from '@apps/iam/tenant/application/create/create-tenants.command';
-import { IamCreateTenantInput } from 'src/graphql';
+import { IamCreateTenantInput } from '@api/graphql';
 import { IamCreateTenantDto } from '../dto';
 
 @Injectable()

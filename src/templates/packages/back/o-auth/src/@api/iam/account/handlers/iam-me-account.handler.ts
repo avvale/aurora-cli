@@ -7,7 +7,7 @@ import { FindAccessTokenByIdQuery } from '../../../../@apps/o-auth/access-token/
 import { FindAccountQuery } from '../../../../@apps/iam/account/application/find/find-account.query';
 import { IamUserModel } from '../../../../@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
 import { IamTenantModel } from '../../../../@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
-import { IamAccount } from '../../../../../src/graphql';
+import { IamAccount } from '../../../../../@api/graphql';
 import { IamAccountDto } from '../dto';
 
 @Injectable()

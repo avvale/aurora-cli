@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { CommonCreateLangResolver } from './common-create-lang.resolver';
 import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler';
-import { CommonCreateLangInput } from 'src/graphql';
+import { CommonCreateLangInput } from '@api/graphql';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

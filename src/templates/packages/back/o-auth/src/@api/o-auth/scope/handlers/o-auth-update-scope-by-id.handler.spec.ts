@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { OAuthUpdateScopeByIdHandler } from './o-auth-update-scope-by-id.handler';
-import { OAuthUpdateScopeByIdInput } from 'src/graphql';
+import { OAuthUpdateScopeByIdInput } from '@api/graphql';
 
 // sources
 import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';

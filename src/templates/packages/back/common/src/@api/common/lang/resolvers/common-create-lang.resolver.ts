@@ -3,7 +3,7 @@ import { Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler';
-import { CommonLang, CommonCreateLangInput } from 'src/graphql';
+import { CommonLang, CommonCreateLangInput } from '@api/graphql';
 
 @Resolver()
 export class CommonCreateLangResolver

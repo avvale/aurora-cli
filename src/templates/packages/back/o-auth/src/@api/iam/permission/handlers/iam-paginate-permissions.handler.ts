@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginatePermissionsQuery } from '@apps/iam/permission/application/paginate/paginate-permissions.query';
-import { Pagination } from 'src/graphql';
+import { Pagination } from '@api/graphql';
 
 @Injectable()
 export class IamPaginatePermissionsHandler

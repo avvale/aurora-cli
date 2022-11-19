@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { PaginateAdministrativeAreasLevel1Query } from '@apps/common/administrative-area-level-1/application/paginate/paginate-administrative-areas-level-1.query';
-import { Pagination } from 'src/graphql';
+import { Pagination } from '@api/graphql';
 
 @Injectable()
 export class CommonPaginateAdministrativeAreasLevel1Handler

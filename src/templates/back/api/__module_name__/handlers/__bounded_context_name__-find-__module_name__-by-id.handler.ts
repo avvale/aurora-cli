@@ -8,7 +8,7 @@ import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/
 
 // {{ config.applicationsContainer }}
 import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from 'src/graphql';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '@api/graphql';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 
 @Injectable()

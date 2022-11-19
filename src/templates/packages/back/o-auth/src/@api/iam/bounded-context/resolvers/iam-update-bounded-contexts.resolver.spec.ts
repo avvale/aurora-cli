@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpdateBoundedContextsResolver } from './iam-update-bounded-contexts.resolver';
 import { IamUpdateBoundedContextsHandler } from '../handlers/iam-update-bounded-contexts.handler';
-import { IamUpdateBoundedContextsInput } from 'src/graphql';
+import { IamUpdateBoundedContextsInput } from '@api/graphql';
 
 // sources
 import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';

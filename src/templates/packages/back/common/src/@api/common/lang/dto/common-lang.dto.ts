@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
-import { CommonLangDir } from 'src/graphql';
+import { CommonLangDir } from '@api/graphql';
 
 export class CommonLangDto
 {

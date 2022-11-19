@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdatePermissionByIdHandler } from './iam-update-permission-by-id.handler';
-import { IamUpdatePermissionByIdInput } from 'src/graphql';
+import { IamUpdatePermissionByIdInput } from '@api/graphql';
 
 // sources
 import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';

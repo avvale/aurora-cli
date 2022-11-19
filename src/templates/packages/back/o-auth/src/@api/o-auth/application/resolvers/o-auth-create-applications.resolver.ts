@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { OAuthCreateApplicationsHandler } from '../handlers/o-auth-create-applications.handler';
-import { OAuthCreateApplicationInput } from 'src/graphql';
+import { OAuthCreateApplicationInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.application.create')

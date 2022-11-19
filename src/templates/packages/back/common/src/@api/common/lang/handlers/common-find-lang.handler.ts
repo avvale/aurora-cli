@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { FindLangQuery } from '@apps/common/lang/application/find/find-lang.query';
-import { CommonLang } from 'src/graphql';
+import { CommonLang } from '@api/graphql';
 import { CommonLangDto } from '../dto';
 
 @Injectable()

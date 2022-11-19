@@ -3,7 +3,7 @@ import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreatePermissionsCommand } from '@apps/iam/permission/application/create/create-permissions.command';
-import { IamCreatePermissionInput } from 'src/graphql';
+import { IamCreatePermissionInput } from '@api/graphql';
 import { IamCreatePermissionDto } from '../dto';
 
 @Injectable()

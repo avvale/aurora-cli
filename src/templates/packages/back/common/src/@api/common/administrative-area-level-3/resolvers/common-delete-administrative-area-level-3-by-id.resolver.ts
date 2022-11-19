@@ -3,7 +3,7 @@ import { QueryStatement, Timezone } from 'aurora-ts-core';
 
 // @apps
 import { CommonDeleteAdministrativeAreaLevel3ByIdHandler } from '../handlers/common-delete-administrative-area-level-3-by-id.handler';
-import { CommonAdministrativeAreaLevel3 } from 'src/graphql';
+import { CommonAdministrativeAreaLevel3 } from '@api/graphql';
 
 @Resolver()
 export class CommonDeleteAdministrativeAreaLevel3ByIdResolver

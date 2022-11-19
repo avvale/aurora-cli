@@ -8,7 +8,7 @@ import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}IComm
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input } from 'src/graphql';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input } from '@api/graphql';
 
 // sources
 {{#if schema.properties.hasI18n}}

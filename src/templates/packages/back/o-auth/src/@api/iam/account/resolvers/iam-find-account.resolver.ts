@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamFindAccountHandler } from '../handlers/iam-find-account.handler';
-import { IamAccount } from 'src/graphql';
+import { IamAccount } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.account.get')

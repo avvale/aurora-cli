@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamUpdateAccountsHandler } from '../handlers/iam-update-accounts.handler';
-import { IamAccount, IamUpdateAccountsInput } from 'src/graphql';
+import { IamAccount, IamUpdateAccountsInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.account.update')

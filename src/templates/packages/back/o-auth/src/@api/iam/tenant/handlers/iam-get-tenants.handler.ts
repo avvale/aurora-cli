@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { GetTenantsQuery } from '@apps/iam/tenant/application/get/get-tenants.query';
-import { IamTenant } from 'src/graphql';
+import { IamTenant } from '@api/graphql';
 import { IamTenantDto } from '../dto';
 
 @Injectable()

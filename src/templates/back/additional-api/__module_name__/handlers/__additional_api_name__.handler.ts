@@ -13,10 +13,10 @@ import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/
 
 // {{ config.applicationsContainer }}
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from 'src/graphql';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '@api/graphql';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 {{else}}
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from 'src/graphql';
+import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from '@api/graphql';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto } from '../dto';
 {{/eq }}
 

@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamDeleteUsersHandler } from '../handlers/iam-delete-users.handler';
-import { IamUser } from 'src/graphql';
+import { IamUser } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.user.delete')

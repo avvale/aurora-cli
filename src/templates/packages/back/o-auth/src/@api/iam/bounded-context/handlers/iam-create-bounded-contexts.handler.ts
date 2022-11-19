@@ -3,7 +3,7 @@ import { ICommandBus } from 'aurora-ts-core';
 
 // @apps
 import { CreateBoundedContextsCommand } from '@apps/iam/bounded-context/application/create/create-bounded-contexts.command';
-import { IamCreateBoundedContextInput } from 'src/graphql';
+import { IamCreateBoundedContextInput } from '@api/graphql';
 import { IamCreateBoundedContextDto } from '../dto';
 
 @Injectable()

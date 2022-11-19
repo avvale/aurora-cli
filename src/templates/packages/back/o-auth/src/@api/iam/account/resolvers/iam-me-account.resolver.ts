@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Context } from '@nestjs/graphql';
-import { IamAccount } from '../../../../../src/graphql';
+import { IamAccount } from '../../../../../@api/graphql';
 
 // authorization
 import { AuthenticationJwtGuard } from '../../../o-auth/shared/guards/authentication-jwt.guard';

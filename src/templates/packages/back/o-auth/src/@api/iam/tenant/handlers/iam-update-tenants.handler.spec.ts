@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { IamUpdateTenantsHandler } from './iam-update-tenants.handler';
-import { IamUpdateTenantsInput } from 'src/graphql';
+import { IamUpdateTenantsInput } from '@api/graphql';
 
 // sources
 import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';

@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 {{#if schema.properties.hasEnum}}
-import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{/each}} } from 'src/graphql';
+import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{/each}} } from '@api/graphql';
 {{/if}}
 
 export const {{ toCamelCase schema.moduleNames }} = [

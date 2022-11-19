@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 // custom items
 import { CommonCreateCountryResolver } from './common-create-country.resolver';
 import { CommonCreateCountryHandler } from '../handlers/common-create-country.handler';
-import { CommonCreateCountryInput } from 'src/graphql';
+import { CommonCreateCountryInput } from '@api/graphql';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

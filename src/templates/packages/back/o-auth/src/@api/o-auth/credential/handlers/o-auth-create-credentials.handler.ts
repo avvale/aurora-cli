@@ -15,7 +15,7 @@ import { FindRefreshTokenByIdQuery } from '@apps/o-auth/refresh-token/applicatio
 import { DeleteAccessTokenByIdCommand } from '@apps/o-auth/access-token/application/delete/delete-access-token-by-id.command';
 import { OAuthAccessTokenModel } from '@apps/o-auth/access-token';
 import { OAuthClientModel } from '@apps/o-auth/client';
-import { OAuthClientGrantType, OAuthCredentials, OAuthCreateCredentialsInput, IamAccountType, OAuthClient } from 'src/graphql';
+import { OAuthClientGrantType, OAuthCredentials, OAuthCreateCredentialsInput, IamAccountType, OAuthClient } from '@api/graphql';
 import { OAuthCreateCredentialsDto, OAuthCredentialsDto } from '../dto';
 
 @Injectable()

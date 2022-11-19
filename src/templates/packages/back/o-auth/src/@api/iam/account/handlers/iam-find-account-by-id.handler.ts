@@ -3,7 +3,7 @@ import { IQueryBus, QueryStatement } from 'aurora-ts-core';
 
 // @apps
 import { FindAccountByIdQuery } from '@apps/iam/account/application/find/find-account-by-id.query';
-import { IamAccount } from 'src/graphql';
+import { IamAccount } from '@api/graphql';
 import { IamAccountDto } from '../dto';
 
 @Injectable()

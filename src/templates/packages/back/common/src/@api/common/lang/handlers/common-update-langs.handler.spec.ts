@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus } from 'aurora-ts-core';
 
 // custom items
 import { CommonUpdateLangsHandler } from './common-update-langs.handler';
-import { CommonUpdateLangsInput } from 'src/graphql';
+import { CommonUpdateLangsInput } from '@api/graphql';
 
 // sources
 import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';

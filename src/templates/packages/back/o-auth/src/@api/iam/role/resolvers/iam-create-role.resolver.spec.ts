@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamCreateRoleResolver } from './iam-create-role.resolver';
 import { IamCreateRoleHandler } from '../handlers/iam-create-role.handler';
-import { IamCreateRoleInput } from 'src/graphql';
+import { IamCreateRoleInput } from '@api/graphql';
 
 // sources
 import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';

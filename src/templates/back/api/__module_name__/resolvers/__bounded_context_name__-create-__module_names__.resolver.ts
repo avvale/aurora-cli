@@ -26,7 +26,7 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 
 // {{ config.applicationsContainer }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from 'src/graphql';
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from '@api/graphql';
 
 @Resolver()
 {{#if schema.hasOAuth}}

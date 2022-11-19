@@ -56,8 +56,8 @@ jobs:
 
     - name: Copy graphQL files
       run: |
-        mkdir ./dist/src/graphql \;
-        find ./src -name '*.graphql' -exec cp "{}" ./dist/src/graphql \;
+        mkdir ./dist/@api/graphql \;
+        find ./src -name '*.graphql' -exec cp "{}" ./dist/@api/graphql \;
       shell: bash
 
     - name: Zip artifact for deployment

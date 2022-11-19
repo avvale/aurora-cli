@@ -4,7 +4,7 @@ import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
 // @apps
 import { FindTenantByIdQuery } from '@apps/iam/tenant/application/find/find-tenant-by-id.query';
 import { DeleteTenantByIdCommand } from '@apps/iam/tenant/application/delete/delete-tenant-by-id.command';
-import { IamTenant } from 'src/graphql';
+import { IamTenant } from '@api/graphql';
 import { IamTenantDto } from '../dto';
 
 @Injectable()

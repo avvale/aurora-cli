@@ -9,7 +9,7 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // @apps
 import { IamDeleteRoleByIdHandler } from '../handlers/iam-delete-role-by-id.handler';
-import { IamRole } from 'src/graphql';
+import { IamRole } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.role.delete')

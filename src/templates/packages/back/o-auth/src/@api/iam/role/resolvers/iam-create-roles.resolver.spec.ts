@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamCreateRolesResolver } from './iam-create-roles.resolver';
 import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
-import { IamCreateRoleInput } from 'src/graphql';
+import { IamCreateRoleInput } from '@api/graphql';
 
 // sources
 import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
