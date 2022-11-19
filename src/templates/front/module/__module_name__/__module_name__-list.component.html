@@ -46,13 +46,8 @@
             [columnsConfig]="columnsConfig$ | async"
             [gridData]="gridData$ | async"
             [gridState]="gridState"
+            [id]="gridId"
             [originColumnsConfig]="originColumnsConfig"
-            (action)="handleGridAction($event)"
-            (columnFiltersChange)="handleColumnFiltersChange($event)"
-            (columnsConfigChange)="handleColumnsConfigChange($event)"
-            (exportData)="handleExportData($event)"
-            (search)="handleStateChange($event)"
-            (stateChange)="handleStateChange($event)"
         >
             <au-grid-translations
                 [actions]="t('Actions')"
@@ -62,6 +57,7 @@
                 [columns]="t('Columns')"
                 [field]="t('Field')"
                 [filter]="t('Filter')"
+                [for]="gridId"
                 [operator]="t('Operator')"
                 [OR]="t('OR')"
                 [pleaseSelectField]="t('PleaseSelectField')"

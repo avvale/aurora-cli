@@ -530,7 +530,7 @@ export class CodeWriter
         const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
         const controllersArray = controllers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
-        // register imports from bounded context
+        // register imports from bounded context from @apps
         ImportDriver.createImportItems(
             sourceFile,
             `../../${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}`,
@@ -543,7 +543,7 @@ export class CodeWriter
             ],
         );
 
-        // register import for controllers and providers
+        // register import for controllers and providers from @api
         ImportDriver.createImportItems(
             sourceFile,
             `./${this.moduleName.toKebabCase()}`,
@@ -551,6 +551,7 @@ export class CodeWriter
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
             ],
         );
 
@@ -566,12 +567,15 @@ export class CodeWriter
         ArrayDriver.addArrayItems(
             sourceFile,
             [
+                // from @apps
                 `...${this.boundedContextName.toPascalCase()}Handlers`,
                 `...${this.boundedContextName.toPascalCase()}Services`,
                 `...${this.boundedContextName.toPascalCase()}Repositories`,
                 `...${this.boundedContextName.toPascalCase()}Sagas`,
+                // from @api
                 `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
                 `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
             ],
             providersArray,
         );

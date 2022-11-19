@@ -131,6 +131,11 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.handler';
 {{/notInArray}}
+
+// seeder
+{{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-seeder-' (toKebabCase schema.moduleName) '.service.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Seeder{{ toPascalCase schema.moduleName }}Service } from './seeder/{{ toKebabCase schema.boundedContextName }}-seeder-{{ toKebabCase schema.moduleName }}.service';
+{{/notInArray}}
 {{#unlessEq schema.additionalApis.length 0 }}
 
 // additionalApis
@@ -281,4 +286,10 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{ getClassName }}Handler,
     {{/each}}
     {{/unlessEq}}
+];
+
+export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Services = [
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-seeder-' (toKebabCase schema.moduleName) '.service.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Seeder{{ toPascalCase schema.moduleName }}Service,
+    {{/notInArray}}
 ];

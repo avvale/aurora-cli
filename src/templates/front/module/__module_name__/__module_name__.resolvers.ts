@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, QueryStatementHandler } from '@aurora';
+import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 import { Observable } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
+import { {{ toCamelCase schema.moduleName }}ColumnsConfig } from './{{ toKebabCase schema.moduleName }}.columns-config';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
     constructor(
         private readonly actionService: ActionService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly gridStateService: GridStateService,
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     ) {}
 
@@ -22,14 +24,25 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
      * @param route
      * @param state
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<GridData<{{ schema.aggregateName }}>>
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot,
+    ): Observable<GridData<{{ schema.aggregateName }}>>
     {
-        this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view' });
+        this.actionService.action({
+            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view',
+            isViewAction: true,
+        });
+        const gridId = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
+        this.gridStateService.setPaginationActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination');
+        this.gridStateService.setExportActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.export');
         return this.{{ toCamelCase schema.moduleName }}Service.pagination({
             query: QueryStatementHandler
-                .fromGridStateBuilder(this.gridFiltersStorageService.getColumnFilterState('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList'))
-                .setDefaultSort()
-                .setDefaultPage()
+                .init({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
+                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(gridId))
+                .setSort(this.gridStateService.getSort(gridId))
+                .setPage(this.gridStateService.getPage(gridId))
+                .setSearch(this.gridStateService.getSearchState(gridId))
                 .getQueryStatement(),
         });
     }
@@ -51,9 +64,15 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
      * @param route
      * @param state
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Action
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot,
+    ): Action
     {
-        return this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new' });
+        return this.actionService.action({
+            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
+            isViewAction: true,
+        });
     }
 }
 
@@ -76,11 +95,19 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
      * @param route
      * @param state
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot,
+    ): Observable<{
         object: {{ schema.aggregateName }};
     }>
     {
-        this.actionService.action({ id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit' });
-        return this.{{ toCamelCase schema.moduleName }}Service.findById({ id: route.paramMap.get('id') });
+        this.actionService.action({
+            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit',
+            isViewAction: true,
+        });
+        return this.{{ toCamelCase schema.moduleName }}Service.findById({
+            id: route.paramMap.get('id'),
+        });
     }
 }

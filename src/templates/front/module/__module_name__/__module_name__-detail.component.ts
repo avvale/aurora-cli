@@ -109,7 +109,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 {
                     await lastValueFrom(
                         this.{{ toCamelCase schema.moduleName }}Service
-                            .create<{{ schema.aggregateName }}>({ object: this.fg.value }),
+                            .create<{{ schema.aggregateName }}>({
+                                object: this.fg.value,
+                            }),
                     );
 
                     this.snackBar.open(
@@ -134,7 +136,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 {
                     await lastValueFrom(
                         this.{{ toCamelCase schema.moduleName }}Service
-                            .updateById<{{ schema.aggregateName }}>({ object: this.fg.value }),
+                            .updateById<{{ schema.aggregateName }}>({
+                                object: this.fg.value,
+                            }),
                     );
 
                     this.snackBar.open(

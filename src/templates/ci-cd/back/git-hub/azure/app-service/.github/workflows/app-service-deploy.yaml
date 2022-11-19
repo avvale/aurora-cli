@@ -6,7 +6,9 @@ on:
       - 'master'
 
 env:
-  AZURE_WEBAPP_NAME: back-aurora-{{ nanoid }}
+  APP_NAME: APP-{{ nanoid }}
+  DOT_ENV: ${{secrets.AZURE_DOT_ENV}}
+  PUBLISH_PROFILE: ${{ secrets.AZURE_PUBLISH_PROFILE }}
 
 jobs:
   tests:
@@ -15,12 +17,15 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
     - name: Install node
       uses: actions/setup-node@v3
       with:
         node-version: '16'
+
     - name: Install dependencies
       run: npm ci
+
     - name: Create .env file
       run: |
         touch .env
@@ -28,8 +33,10 @@ jobs:
       shell: bash
       env:
         DOT_ENV: ${{secrets.DOT_ENV}}
+
     - name: Unit testing
       run: npm run test
+
     - name: Acceptance testing
       run: npm run test:e2e
 
@@ -40,23 +47,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Install node
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Install dependencies
-        run: npm ci
+
       - name: Create .env file
         run: |
           touch .env
           echo "$DOT_ENV" > .env
         shell: bash
-        env:
-          DOT_ENV: ${{secrets.DOT_ENV}}
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build project
         run: npm run build
+
       - name: Run Azure webapp deploy action using publish profile credential
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
+          app-name: ${{ env.APP_NAME }}
+          publish-profile: ${{ env.PUBLISH_PROFILE }}
