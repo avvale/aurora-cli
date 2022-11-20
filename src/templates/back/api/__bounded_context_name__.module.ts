@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '{{ config.auroraLocalPackage }}/shared.module';
+import { {{ toPascalCase schema.boundedContextName }}Seeder } from './{{ toKebabCase schema.boundedContextName }}.seeder';
 
 @Module({
     imports: [
@@ -8,6 +9,8 @@ import { SharedModule } from '{{ config.auroraLocalPackage }}/shared.module';
         SequelizeModule.forFeature([])
     ],
     controllers: [],
-    providers: [],
+    providers: [
+        {{ toPascalCase schema.boundedContextName }}Seeder,
+    ],
 })
 export class {{ toPascalCase schema.boundedContextName }}Module {}

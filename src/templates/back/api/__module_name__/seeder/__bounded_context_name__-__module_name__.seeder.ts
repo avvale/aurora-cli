@@ -6,7 +6,7 @@ import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.ap
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
 
 @Injectable()
-export class {{ toPascalCase schema.boundedContextName }}Seeder{{ toPascalCase schema.moduleName }}Service
+export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Seeder
 {
     constructor(
         private readonly commandBus: ICommandBus,

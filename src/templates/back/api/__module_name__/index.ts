@@ -133,8 +133,8 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{/notInArray}}
 
 // seeder
-{{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-seeder-' (toKebabCase schema.moduleName) '.service.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Seeder{{ toPascalCase schema.moduleName }}Service } from './seeder/{{ toKebabCase schema.boundedContextName }}-seeder-{{ toKebabCase schema.moduleName }}.service';
+{{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.seeder.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Seeder{{ toPascalCase schema.moduleName }}Service } from './seeder/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.seeder';
 {{/notInArray}}
 {{#unlessEq schema.additionalApis.length 0 }}
 
@@ -289,7 +289,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 ];
 
 export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Services = [
-    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-seeder-' (toKebabCase schema.moduleName) '.service.ts'}}
-    {{ toPascalCase schema.boundedContextName }}Seeder{{ toPascalCase schema.moduleName }}Service,
+    {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.seeder.ts'}}
+    {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Seeder,
     {{/notInArray}}
 ];
