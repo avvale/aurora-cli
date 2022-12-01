@@ -61,8 +61,8 @@ export class {{ toPascalCase schema.moduleName }}Service
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<{{ schema.aggregateName }}>; };}, GridData<{{ schema.aggregateName }}>>(result => result.data.pagination),
-                tap((pagination: GridData<{{ schema.aggregateName }}>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -94,17 +94,8 @@ export class {{ toPascalCase schema.moduleName }}Service
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: {{ schema.aggregateName }};
-                    };
-                },
-                {
-                    object: {{ schema.aggregateName }};
-                }>(result => result.data),
-                tap((data: {
-                    object: {{ schema.aggregateName }};
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
                 }),
@@ -139,17 +130,8 @@ export class {{ toPascalCase schema.moduleName }}Service
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: {{ schema.aggregateName }};
-                    };
-                },
-                {
-                    object: {{ schema.aggregateName }};
-                }>(result => result.data),
-                tap((data: {
-                    object: {{ schema.aggregateName }};
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
                 }),
@@ -184,17 +166,8 @@ export class {{ toPascalCase schema.moduleName }}Service
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: {{ schema.aggregateName }}[];
-                    };
-                },
-                {
-                    objects: {{ schema.aggregateName }}[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: {{ schema.aggregateName }}[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.{{ toCamelCase schema.moduleNames }}Subject$.next(data.objects);
                 }),
@@ -331,17 +304,8 @@ export class {{ toPascalCase schema.moduleName }}Service
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: {{ ../schema.aggregateName }}[];
-                    };
-                },
-                {
-                    objects: {{ ../schema.aggregateName }}[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: {{ ../schema.aggregateName }}[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.{{ toCamelCase ../schema.moduleNames }}Subject$.next(data.objects);
                 }),

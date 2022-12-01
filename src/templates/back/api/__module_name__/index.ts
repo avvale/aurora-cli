@@ -134,7 +134,7 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // seeder
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.seeder.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Seeder{{ toPascalCase schema.moduleName }}Service } from './seeder/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.seeder';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Seeder } from './seeder/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.seeder';
 {{/notInArray}}
 {{#unlessEq schema.additionalApis.length 0 }}
 

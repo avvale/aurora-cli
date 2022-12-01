@@ -33,9 +33,11 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view',
             isViewAction: true,
         });
+
         const gridId = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
         this.gridStateService.setPaginationActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination');
         this.gridStateService.setExportActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.export');
+
         return this.{{ toCamelCase schema.moduleName }}Service.pagination({
             query: QueryStatementHandler
                 .init({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
@@ -106,6 +108,7 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit',
             isViewAction: true,
         });
+
         return this.{{ toCamelCase schema.moduleName }}Service.findById({
             id: route.paramMap.get('id'),
         });

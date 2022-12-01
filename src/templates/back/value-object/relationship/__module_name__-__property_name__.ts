@@ -4,7 +4,7 @@ export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleNam
 {
     public readonly type: string = '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}';
 
-    constructor(value: string[], validationRules: ValidationRules = {})
+    constructor(value: string | string[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}',

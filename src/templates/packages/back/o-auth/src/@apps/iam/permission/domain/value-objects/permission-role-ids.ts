@@ -4,7 +4,7 @@ export class PermissionRoleIds extends UuidArrayValueObject
 {
     public readonly type: 'PermissionRoleIds';
 
-    constructor(value: string[], validationRules: ValidationRules = {})
+    constructor(value: string | string[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'PermissionRoleIds',

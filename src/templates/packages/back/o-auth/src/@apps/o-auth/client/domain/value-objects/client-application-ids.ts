@@ -4,7 +4,7 @@ export class ClientApplicationIds extends UuidArrayValueObject
 {
     public readonly type: 'ClientApplicationIds';
 
-    constructor(value: string[], validationRules: ValidationRules = {})
+    constructor(value: string | string[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'ClientApplicationIds',

@@ -4,7 +4,7 @@ export class AccountRoleIds extends UuidArrayValueObject
 {
     public readonly type: 'AccountRoleIds';
 
-    constructor(value: string[], validationRules: ValidationRules = {})
+    constructor(value: string | string[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'AccountRoleIds',
