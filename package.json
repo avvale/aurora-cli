@@ -1,5 +1,5 @@
 {
-    "name": "aurora-ts-cli",
+    "name": "@aurora-ts/cli",
     "version": "1.7.11",
     "description": "Aurora CLI",
     "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
@@ -17,18 +17,18 @@
         "/oclif.manifest.json"
     ],
     "dependencies": {
-        "@oclif/core": "^1.16.5",
+        "@oclif/core": "^1.21.0",
         "@oclif/plugin-help": "^5",
-        "@oclif/plugin-plugins": "^2.1.1",
+        "@oclif/plugin-plugins": "^2.1.8",
         "cli-table3": "^0.6.3",
         "copyfiles": "^2.4.1",
-        "dayjs": "^1.11.3",
+        "dayjs": "^1.11.6",
         "faker": "^5.5.3",
         "handlebars": "^4.7.7",
         "handlebars-helpers": "^0.10.0",
-        "inquirer": "^8.2.3",
+        "inquirer": "^8.2.5",
         "js-yaml": "^4.1.0",
-        "jsrsasign": "^10.5.27",
+        "jsrsasign": "^10.6.1",
         "jsrsasign-util": "^1.0.5",
         "nanoid": "^3.3.4",
         "node-emoji": "^1.11.0",
@@ -38,7 +38,7 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@oclif/test": "^2.2.2",
+        "@oclif/test": "^2.2.15",
         "@types/chai": "^4",
         "@types/faker": "^5.5.9",
         "@types/handlebars": "^4.1.0",
@@ -47,7 +47,7 @@
         "@types/js-yaml": "^4.0.5",
         "@types/jsrsasign": "^10.5.3",
         "@types/mocha": "^9.0.0",
-        "@types/node": "^16.11.64",
+        "@types/node": "^16.18.4",
         "@types/node-emoji": "^1.8.2",
         "@types/uuid": "^8.3.4",
         "chai": "^4",
@@ -60,7 +60,7 @@
         "shx": "^0.3.3",
         "ts-node": "^10.9.1",
         "tslib": "^2.4.0",
-        "typescript": "^4.8.4"
+        "typescript": "^4.9.3"
     },
     "oclif": {
         "bin": "aurora",
@@ -95,5 +95,8 @@
     "keywords": [
         "oclif"
     ],
-    "types": "dist/index.d.ts"
+    "types": "dist/index.d.ts",
+    "publishConfig": {
+        "access": "public"
+    }
 }
