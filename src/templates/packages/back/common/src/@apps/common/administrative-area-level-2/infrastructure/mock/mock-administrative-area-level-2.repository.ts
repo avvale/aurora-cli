@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from 'aurora-ts-core';
+import { MockRepository, Utils } from '@aurora-ts/core';
 import { IAdministrativeAreaLevel2Repository } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.repository';
 import {
     AdministrativeAreaLevel2Id,

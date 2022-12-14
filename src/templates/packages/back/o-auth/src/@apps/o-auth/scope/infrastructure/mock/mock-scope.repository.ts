@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from 'aurora-ts-core';
+import { MockRepository, Utils } from '@aurora-ts/core';
 import { IScopeRepository } from '@apps/o-auth/scope/domain/scope.repository';
 import {
     ScopeId,

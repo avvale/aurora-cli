@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus } from 'aurora-ts-core';
+import { ICommandBus } from '@aurora-ts/core';
 
 // @apps
 import { CreateScopesCommand } from '@apps/o-auth/scope/application/create/create-scopes.command';

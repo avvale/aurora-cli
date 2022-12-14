@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ICountryRepository } from '@apps/common/country/domain/country.repository';
 import { ICountryI18NRepository } from '@apps/common/country/domain/country-i18n.repository';
-import { AddI18NConstraintService } from 'aurora-ts-core';
+import { AddI18NConstraintService } from '@aurora-ts/core';
 import { MockCountrySeeder } from '@apps/common/country/infrastructure/mock/mock-country.seeder';
 import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';

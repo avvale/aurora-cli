@@ -1,7 +1,7 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsConfigModule } from './cqrs-config.module';
-import { AddI18NConstraintService, CoreModule } from 'aurora-ts-core';
+import { AddI18NConstraintService, CoreModule } from '@aurora-ts/core';
 
 @Module({
     imports: [

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from 'aurora-ts-core';
+import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { ICountryRepository } from '../../domain/country.repository';
 import { CommonCountry } from '../../domain/country.aggregate';
 import { CountryMapper } from '../../domain/country.mapper';

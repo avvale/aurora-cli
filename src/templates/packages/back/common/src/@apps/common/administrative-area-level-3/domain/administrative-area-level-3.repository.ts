@@ -1,6 +1,6 @@
 
 import { LiteralObject } from '@nestjs/common';
-import { CQMetadata, IRepository, Pagination, QueryStatement } from 'aurora-ts-core';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from '@aurora-ts/core';
 import { CommonAdministrativeAreaLevel3 } from './administrative-area-level-3.aggregate';
 import { AdministrativeAreaLevel3Id } from './value-objects';
 

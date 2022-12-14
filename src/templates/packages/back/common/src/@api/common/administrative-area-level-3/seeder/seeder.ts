@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ICommandBus } from 'aurora-ts-core';
+import { ICommandBus } from '@aurora-ts/core';
 import { CreateAdministrativeAreasLevel3Command } from '@apps/common/administrative-area-level-3/application/create/create-administrative-areas-level-3.command';
 import { SeederModule } from './seeder.module';
 import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';

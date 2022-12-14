@@ -1,4 +1,4 @@
-import { StringValueObject, ValidationRules } from 'aurora-ts-core';
+import { StringValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class CountryI18NAdministrativeAreaLevel1 extends StringValueObject
 {

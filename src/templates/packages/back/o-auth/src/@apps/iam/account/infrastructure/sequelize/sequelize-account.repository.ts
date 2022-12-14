@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from 'aurora-ts-core';
+import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IAccountRepository } from '../../domain/account.repository';
 import { IamAccount } from '../../domain/account.aggregate';
 import { AccountMapper } from '../../domain/account.mapper';

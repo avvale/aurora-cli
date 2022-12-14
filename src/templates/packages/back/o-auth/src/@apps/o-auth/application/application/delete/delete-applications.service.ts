@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from 'aurora-ts-core';
-import { CQMetadata } from 'aurora-ts-core';
+import { QueryStatement } from '@aurora-ts/core';
+import { CQMetadata } from '@aurora-ts/core';
 import { IApplicationRepository } from '../../domain/application.repository';
 import { AddApplicationsContextEvent } from '../events/add-applications-context.event';
 

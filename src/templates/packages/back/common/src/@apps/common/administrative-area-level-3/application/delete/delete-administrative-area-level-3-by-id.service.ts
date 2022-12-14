@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from 'aurora-ts-core';
-import { CQMetadata } from 'aurora-ts-core';
+import { QueryStatement } from '@aurora-ts/core';
+import { CQMetadata } from '@aurora-ts/core';
 import { AdministrativeAreaLevel3Id } from '../../domain/value-objects';
 import { IAdministrativeAreaLevel3Repository } from '../../domain/administrative-area-level-3.repository';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus } from 'aurora-ts-core';
+import { ICommandBus } from '@aurora-ts/core';
 
 // @apps
 import { CreateRolesCommand } from '@apps/iam/role/application/create/create-roles.command';

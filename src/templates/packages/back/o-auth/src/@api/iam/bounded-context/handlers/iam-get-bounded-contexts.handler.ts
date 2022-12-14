@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from 'aurora-ts-core';
+import { IQueryBus, QueryStatement } from '@aurora-ts/core';
 
 // @apps
 import { GetBoundedContextsQuery } from '@apps/iam/bounded-context/application/get/get-bounded-contexts.query';

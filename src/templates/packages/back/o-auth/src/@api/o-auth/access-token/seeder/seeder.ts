@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ICommandBus } from 'aurora-ts-core';
+import { ICommandBus } from '@aurora-ts/core';
 import { SeederModule } from './seeder.module';
 import { accessTokens } from '../../../../@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
 

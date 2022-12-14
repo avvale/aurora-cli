@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from 'aurora-ts-core';
+import { MockRepository, Utils } from '@aurora-ts/core';
 import { IRefreshTokenRepository } from '@apps/o-auth/refresh-token/domain/refresh-token.repository';
 import {
     RefreshTokenId,

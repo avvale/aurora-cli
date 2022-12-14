@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from 'aurora-ts-core';
-import { Pagination } from 'aurora-ts-core';
-import { CQMetadata } from 'aurora-ts-core';
+import { QueryStatement } from '@aurora-ts/core';
+import { Pagination } from '@aurora-ts/core';
+import { CQMetadata } from '@aurora-ts/core';
 import { IScopeRepository } from '../../domain/scope.repository';
 import { OAuthScope } from '../../domain/scope.aggregate';
 

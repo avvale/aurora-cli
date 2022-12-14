@@ -1,5 +1,5 @@
 import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from 'aurora-ts-core';
+import { IMapper, MapperOptions, CQMetadata } from '@aurora-ts/core';
 import { CommonAdministrativeAreaLevel3 } from './administrative-area-level-3.aggregate';
 import { AdministrativeAreaLevel3Response } from './administrative-area-level-3.response';
 import {

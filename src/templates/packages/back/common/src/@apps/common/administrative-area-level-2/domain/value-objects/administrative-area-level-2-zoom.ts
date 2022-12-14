@@ -1,4 +1,4 @@
-import { IntValueObject, ValidationRules } from 'aurora-ts-core';
+import { IntValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class AdministrativeAreaLevel2Zoom extends IntValueObject
 {

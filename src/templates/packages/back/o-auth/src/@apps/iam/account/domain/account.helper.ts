@@ -1,4 +1,4 @@
-import { CQMetadata, ICommandBus, QueryStatement } from 'aurora-ts-core';
+import { CQMetadata, ICommandBus, QueryStatement } from '@aurora-ts/core';
 import { AccountPermissions } from '../../iam.types';
 import { AccountResponse } from './account.response';
 import { RoleResponse } from '../../role/domain/role.response';

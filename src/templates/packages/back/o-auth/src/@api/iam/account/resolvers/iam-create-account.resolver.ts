@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
-import { Timezone } from 'aurora-ts-core';
+import { Timezone } from '@aurora-ts/core';
 
 // authorization
 import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';

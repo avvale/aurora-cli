@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { AnyScalar, JsonScalar, UploadScalar } from 'aurora-ts-core';
+import { AnyScalar, JsonScalar, UploadScalar } from '@aurora-ts/core';
 import { Hello } from './hello.resolver';
 import GraphQLJSON from 'graphql-type-json';
 

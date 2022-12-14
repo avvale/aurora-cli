@@ -1,4 +1,4 @@
-import { BooleanValueObject, ValidationRules } from 'aurora-ts-core';
+import { BooleanValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class AccessTokenIsRevoked extends BooleanValueObject
 {

@@ -1,4 +1,4 @@
-import { DataValueObject, UuidValueObject, ValidationRules } from 'aurora-ts-core';
+import { DataValueObject, UuidValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class AdministrativeAreaLevel3AdministrativeAreaLevel2Id extends UuidValueObject
 {

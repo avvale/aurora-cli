@@ -44,7 +44,7 @@ export const cliterConfig: CliterConfig =
     applicationsContainer                      : '@apps',
     apiContainer                               : '@api',
     auroraLocalPackage                         : '@aurora',
-    auroraCorePackage                          : 'aurora-ts-core',
+    auroraCorePackage                          : '@aurora-ts/core',
     configYamlVersion                          : '0.0.1',
     lockJsonVersion                            : '0.0.1',
     timestampFields                            : ['createdAt', 'updatedAt', 'deletedAt'],

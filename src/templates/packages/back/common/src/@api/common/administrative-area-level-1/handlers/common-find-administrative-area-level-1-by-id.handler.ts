@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from 'aurora-ts-core';
+import { IQueryBus, QueryStatement } from '@aurora-ts/core';
 
 // @apps
 import { FindAdministrativeAreaLevel1ByIdQuery } from '@apps/common/administrative-area-level-1/application/find/find-administrative-area-level-1-by-id.query';

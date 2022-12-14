@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ICommandBus } from 'aurora-ts-core';
+import { ICommandBus } from '@aurora-ts/core';
 import { CreateCountriesCommand } from '@apps/common/country/application/create/create-countries.command';
 import { SeederModule } from './seeder.module';
 import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';

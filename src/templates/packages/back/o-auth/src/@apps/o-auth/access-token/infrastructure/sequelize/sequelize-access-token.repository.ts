@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from 'aurora-ts-core';
+import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IAccessTokenRepository } from '../../domain/access-token.repository';
 import { OAuthAccessToken } from '../../domain/access-token.aggregate';
 import { AccessTokenMapper } from '../../domain/access-token.mapper';

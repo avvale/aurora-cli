@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata, QueryStatement } from 'aurora-ts-core';
+import { CQMetadata, QueryStatement } from '@aurora-ts/core';
 import { IAdministrativeAreaLevel3Repository } from '../../domain/administrative-area-level-3.repository';
 import { CommonAdministrativeAreaLevel3 } from '../../domain/administrative-area-level-3.aggregate';
 import { AdministrativeAreaLevel3Id } from '../../domain/value-objects';

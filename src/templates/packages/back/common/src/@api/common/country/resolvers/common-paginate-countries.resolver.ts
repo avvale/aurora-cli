@@ -1,5 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { ContentLanguage, QueryStatement, Timezone } from 'aurora-ts-core';
+import { ContentLanguage, QueryStatement, Timezone } from '@aurora-ts/core';
 
 // @apps
 import { CommonPaginateCountriesHandler } from '../handlers/common-paginate-countries.handler';

@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PaginationResponse } from 'aurora-ts-core';
+import { PaginationResponse } from '@aurora-ts/core';
 
 // custom items
 import { PaginateAdministrativeAreasLevel2QueryHandler } from './paginate-administrative-areas-level-2.query-handler';

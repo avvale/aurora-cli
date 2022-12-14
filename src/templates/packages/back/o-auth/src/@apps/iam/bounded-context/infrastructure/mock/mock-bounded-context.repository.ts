@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from 'aurora-ts-core';
+import { MockRepository, Utils } from '@aurora-ts/core';
 import { IBoundedContextRepository } from '@apps/iam/bounded-context/domain/bounded-context.repository';
 import {
     BoundedContextId,

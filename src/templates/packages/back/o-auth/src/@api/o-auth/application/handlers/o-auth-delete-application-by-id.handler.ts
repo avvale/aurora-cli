@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
 // @apps
 import { FindApplicationByIdQuery } from '@apps/o-auth/application/application/find/find-application-by-id.query';

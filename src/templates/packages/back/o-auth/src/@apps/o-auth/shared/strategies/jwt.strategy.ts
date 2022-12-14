@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { IQueryBus, Jwt } from 'aurora-ts-core';
+import { IQueryBus, Jwt } from '@aurora-ts/core';
 import { IamUserModel } from '@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
 // todo, mover a @api para evitar coger un recurso de @api, desde el dominio?? no queda claro, donde se ubica la carpeta shared
 import { IamAccountDto } from '@api/iam/account/dto';

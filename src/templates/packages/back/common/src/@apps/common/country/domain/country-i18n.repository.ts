@@ -1,7 +1,7 @@
 
 import { LiteralObject } from '@nestjs/common';
-import { IRepository, QueryStatement } from 'aurora-ts-core';
-import { CQMetadata, Pagination } from 'aurora-ts-core';
+import { IRepository, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, Pagination } from '@aurora-ts/core';
 import { CommonCountry } from './country.aggregate';
 import { CountryId } from './value-objects';
 

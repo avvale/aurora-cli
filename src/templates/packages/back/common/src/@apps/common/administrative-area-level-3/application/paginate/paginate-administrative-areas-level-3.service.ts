@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from 'aurora-ts-core';
-import { Pagination } from 'aurora-ts-core';
-import { CQMetadata } from 'aurora-ts-core';
+import { QueryStatement } from '@aurora-ts/core';
+import { Pagination } from '@aurora-ts/core';
+import { CQMetadata } from '@aurora-ts/core';
 import { IAdministrativeAreaLevel3Repository } from '../../domain/administrative-area-level-3.repository';
 import { CommonAdministrativeAreaLevel3 } from '../../domain/administrative-area-level-3.aggregate';
 

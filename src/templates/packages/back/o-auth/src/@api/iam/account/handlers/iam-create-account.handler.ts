@@ -1,5 +1,5 @@
 import { Injectable, LiteralObject } from '@nestjs/common';
-import { ICommandBus, IQueryBus, Jwt, Utils } from 'aurora-ts-core';
+import { ICommandBus, IQueryBus, Jwt, Utils } from '@aurora-ts/core';
 
 // @apps
 import { FindAccountByIdQuery } from '@apps/iam/account/application/find/find-account-by-id.query';

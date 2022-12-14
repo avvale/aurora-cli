@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ICommandBus } from 'aurora-ts-core';
+import { ICommandBus } from '@aurora-ts/core';
 import { CreateUsersCommand } from '@apps/iam/user/application/create/create-users.command';
 import { SeederModule } from './seeder.module';
 import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';

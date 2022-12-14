@@ -1,4 +1,4 @@
-import { CQMetadata, QueryStatement } from 'aurora-ts-core';
+import { CQMetadata, QueryStatement } from '@aurora-ts/core';
 
 export class FindUserByUsernamePasswordQuery
 {

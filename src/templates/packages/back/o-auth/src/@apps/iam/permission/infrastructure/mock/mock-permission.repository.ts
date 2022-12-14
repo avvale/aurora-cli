@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from 'aurora-ts-core';
+import { MockRepository, Utils } from '@aurora-ts/core';
 import { IPermissionRepository } from '@apps/iam/permission/domain/permission.repository';
 import {
     PermissionId,

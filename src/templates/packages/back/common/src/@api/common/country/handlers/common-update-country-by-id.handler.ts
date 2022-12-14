@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AddI18NConstraintService, FormatLangCode, ICommandBus, IQueryBus, QueryStatement } from 'aurora-ts-core';
+import { AddI18NConstraintService, FormatLangCode, ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
 // @apps
 import { FindCountryByIdQuery } from '@apps/common/country/application/find/find-country-by-id.query';

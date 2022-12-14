@@ -1,4 +1,4 @@
-import { DecimalValueObject, ValidationRules } from 'aurora-ts-core';
+import { DecimalValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class AdministrativeAreaLevel2Longitude extends DecimalValueObject
 {

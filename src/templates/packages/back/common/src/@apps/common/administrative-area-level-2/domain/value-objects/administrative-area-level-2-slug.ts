@@ -1,4 +1,4 @@
-import { StringValueObject, ValidationRules } from 'aurora-ts-core';
+import { StringValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class AdministrativeAreaLevel2Slug extends StringValueObject
 {

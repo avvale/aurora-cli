@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus } from 'aurora-ts-core';
+import { ICommandBus } from '@aurora-ts/core';
 
 // @apps
 import { CreateBoundedContextsCommand } from '@apps/iam/bounded-context/application/create/create-bounded-contexts.command';

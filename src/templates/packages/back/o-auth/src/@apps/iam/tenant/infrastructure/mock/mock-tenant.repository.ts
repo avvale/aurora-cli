@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from 'aurora-ts-core';
+import { MockRepository, Utils } from '@aurora-ts/core';
 import { ITenantRepository } from '@apps/iam/tenant/domain/tenant.repository';
 import {
     TenantId,

@@ -1,4 +1,4 @@
-import { JsonValueObject, ValidationRules } from 'aurora-ts-core';
+import { JsonValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class AccountDApplicationCodes extends JsonValueObject
 {

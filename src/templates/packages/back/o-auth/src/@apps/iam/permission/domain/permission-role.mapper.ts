@@ -1,7 +1,7 @@
 
 
 import { LiteralObject } from '@nestjs/common';
-import { CQMetadata, IMapper, MapperOptions } from 'aurora-ts-core';
+import { CQMetadata, IMapper, MapperOptions } from '@aurora-ts/core';
 import { IamPermissionRole } from './permission-role.aggregate';
 import {
     PermissionPermissionId,

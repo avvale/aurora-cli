@@ -1,4 +1,4 @@
-import { UuidArrayValueObject, ValidationRules } from 'aurora-ts-core';
+import { UuidArrayValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class ApplicationClientIds extends UuidArrayValueObject
 {

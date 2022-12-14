@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus } from 'aurora-ts-core';
+import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // @apps
 import { FindRoleByIdQuery } from '@apps/iam/role/application/find/find-role-by-id.query';
