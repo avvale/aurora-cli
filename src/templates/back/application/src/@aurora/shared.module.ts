@@ -1,14 +1,18 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CqrsConfigModule } from './cqrs-config.module';
+import { HttpModule } from '@nestjs/axios';
+import { CqrsModule } from '@nestjs/cqrs';
 import { AddI18NConstraintService, CoreModule } from '@aurora-ts/core';
+import { CqrsConfigModule } from './cqrs-config.module';
 
 @Module({
     imports: [
-        CoreModule,
         CacheModule.register(),
         ConfigModule.forRoot({ isGlobal: true }),
+        CoreModule,
         CqrsConfigModule,
+        CqrsModule,
+        HttpModule,
     ],
     providers: [
         AddI18NConstraintService,
@@ -18,6 +22,7 @@ import { AddI18NConstraintService, CoreModule } from '@aurora-ts/core';
         CacheModule,
         ConfigModule,
         CqrsConfigModule,
+        HttpModule,
     ],
 })
 export class SharedModule {}

@@ -7,26 +7,33 @@ import { urlencoded, json } from 'express';
 import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import * as weekOfYear from 'dayjs/plugin/weekOfYear';
+import * as isoWeek from 'dayjs/plugin/isoWeek';
 import * as dayjs from 'dayjs';
 
 // dayjs configuration
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(advancedFormat);
+dayjs.extend(weekOfYear);
+dayjs.extend(isoWeek);
 
 async function bootstrap(): Promise<void>
 {
     const app           = await NestFactory.create(AppModule);
     const configService = app.get(ConfigService);
 
-    // set swagger config
-    const options = new DocumentBuilder()
-        .setTitle('Hades API')
-        .setDescription('API to consume Hades services')
-        .setVersion('1.0')
-        .build();
-    const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('api', app, document);
+    if (configService.get<string>('SWAGGER') === 'true')
+    {
+        const options = new DocumentBuilder()
+            .setTitle('Aurora API')
+            .setDescription('Aurora API description')
+            .setVersion('1.0')
+            .addBearerAuth()
+            .build();
+        const document = SwaggerModule.createDocument(app, options);
+        SwaggerModule.setup('api', app, document);
+    }
 
     // set limit of request allowed
     app.use(json({ limit: configService.get<string>('APP_LIMIT_REQUEST_SIZE') }));
@@ -35,6 +42,7 @@ async function bootstrap(): Promise<void>
     // set timezone application from .env APP_TIMEZONE on dayjs
     setTimeZoneApplication(configService, dayjs);
 
+    app.enableCors();
     await app.listen(configService.get<number>('APP_PORT'));
 }
 
