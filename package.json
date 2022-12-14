@@ -1,5 +1,5 @@
 {
-    "name": "aurora-ts-cli",
+    "name": "@aurora-ts/cli",
     "version": "1.7.11",
     "description": "Aurora CLI",
     "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
@@ -95,5 +95,8 @@
     "keywords": [
         "oclif"
     ],
-    "types": "dist/index.d.ts"
+    "types": "dist/index.d.ts",
+    "publishConfig": {
+        "access": "public"
+    }
 }
