@@ -55,7 +55,7 @@ export default class New extends Command
 
         CliUx.ux.action.start('Installing dependencies');
 
-        shell.exec(`cd ${args.name} && npm install`, (error, stdout, stderr) =>
+        shell.exec(`cd ${args.name} && npm i`, (error, stdout, stderr) =>
         {
             if (error)
             {

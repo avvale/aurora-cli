@@ -22,7 +22,11 @@ export class Delete{{ toPascalCase schema.moduleNames }}Service
     ): Promise<void>
     {
         // get objects to delete
-        const {{ toCamelCase schema.moduleNames }} = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const {{ toCamelCase schema.moduleNames }} = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         {{#if schema.properties.hasI18n}}
         await this.repositoryI18n.delete({

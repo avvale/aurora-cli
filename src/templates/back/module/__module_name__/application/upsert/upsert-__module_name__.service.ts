@@ -95,7 +95,7 @@ export class Upsert{{ toPascalCase schema.moduleName }}Service
         {{else}}
         await this.repository
             .upsert({{ toCamelCase schema.moduleName }}, {
-                upsertOptions: cQMetadata?.repositoryOptions
+                upsertOptions: cQMetadata?.repositoryOptions,
             });
         {{/if}}
 

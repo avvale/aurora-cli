@@ -79,7 +79,11 @@ export class Update{{ toPascalCase schema.moduleNames }}Service
         {{/if}}
 
         // get objects to delete
-        const {{ toCamelCase schema.moduleNames }} = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const {{ toCamelCase schema.moduleNames }} = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const {{ toCamelCase schema.moduleNames }}Register = this.publisher.mergeObjectContext(

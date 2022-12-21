@@ -15,7 +15,7 @@ export class Paginate{{ toPascalCase schema.moduleNames }}Service
     async main(
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
-        cQMetadata?: CQMetadata
+        cQMetadata?: CQMetadata,
     ): Promise<Pagination<{{ schema.aggregateName }}>>
     {
         return await this.repository.paginate({
