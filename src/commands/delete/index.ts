@@ -12,7 +12,7 @@ export default class Delete extends Command
     static description = 'Delete elements';
 
     static flags = {
-        help: Flags.help({ char: 'h' })
+        help: Flags.help({ char: 'h' }),
     };
 
     static args = [

@@ -37,7 +37,12 @@
         }],
         "no-return-await": "error",
         "node/no-extraneous-import": ["error", {
-            "allowModules": ["chalk", "lodash", "log-symbols", "ora"]
+            "allowModules": [
+                "chalk",
+                "lodash",
+                "log-symbols",
+                "ora"
+            ]
         }],
         "object-curly-spacing": ["error", "always", { "objectsInObjects": false, "arraysInObjects": false }],
         "quote-props": ["error", "as-needed"],

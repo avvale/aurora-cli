@@ -3,8 +3,8 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 
 // imports
-import { Command, Flags, CliUx } from '@oclif/core';
 import * as shell from 'node:child_process';
+import { Command, Flags, CliUx } from '@oclif/core';
 import { Operations, StateService } from '../../@cliter';
 
 export default class New extends Command
@@ -54,20 +54,20 @@ export default class New extends Command
         }
 
         CliUx.ux.action.start('Installing dependencies');
+        const install = shell.spawn('npm', ['install'], { cwd: args.name });
 
-        shell.exec(`cd ${args.name} && npm i`, { timeout: 120000 }, (error, stdout, stderr) =>
+        install.stdout.on('data', data =>
         {
-            if (error)
-            {
-                this.error(`exec error: ${error}`);
-                return;
-            }
+            console.log(`${data}`);
+        });
 
-            if (flags.verbose)
-            {
-                this.log(`${stdout}`);
-            }
+        install.stderr.on('data', data =>
+        {
+            console.error(`${data}`);
+        });
 
+        install.on('close', code =>
+        {
             CliUx.ux.action.stop('Dependencies installed');
 
             if (!flags.package && !flags.dashboard)

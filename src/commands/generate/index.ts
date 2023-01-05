@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 
 // imports
-import { Command, Flags } from '@oclif/core'
+import { Command, Flags } from '@oclif/core';
 import { ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
 import { AdditionalApis } from '../../@cliter/utils/additional-apis';
 
