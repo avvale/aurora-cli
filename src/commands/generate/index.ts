@@ -65,6 +65,7 @@ export default class Generate extends Command
                 properties.add(await Prompter.promptDefineAggregateProperty(this, boundedContextName, moduleName, moduleNames));
                 Prompter.printValueObjectsTable(this, properties);
             }
+
             // add time stamp properties
             properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true }));
             properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true }));

@@ -277,7 +277,8 @@ export class Operations
         // graphql
         return new Promise((resolve, reject) =>
         {
-            child.exec('ts-node generate-typings', (err, stdout, stderr) =>
+            // TODO pass to spawn
+            child.exec('npm run graphql:types', (err, stdout, stderr) =>
             {
                 if (err)
                 {

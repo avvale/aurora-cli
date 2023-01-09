@@ -15,7 +15,7 @@ export default class Seed extends Command
         help          : Flags.help({ char: 'h' }),
         module        : Flags.string({ char: 'm' }),
         boundedContext: Flags.string({ char: 'b' }),
-        log           : Flags.boolean({ char: 'l' }),
+        verbose       : Flags.boolean({ char: 'v' }),
     };
 
     static args = [
@@ -88,7 +88,7 @@ export default class Seed extends Command
 
                 execution.stderr.on('data', data =>
                 {
-                    if (flags.log) console.error(data);
+                    if (flags.verbose) console.error(data);
                 });
 
                 execution.on('close', code =>

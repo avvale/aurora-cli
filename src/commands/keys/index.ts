@@ -7,7 +7,7 @@ export default class Key extends Command
     static description = 'Generate private key and public key';
 
     static flags = {
-        help: Flags.help({ char: 'h' })
+        help: Flags.help({ char: 'h' }),
     };
 
     static args = [];

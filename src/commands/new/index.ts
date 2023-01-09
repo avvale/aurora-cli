@@ -16,6 +16,7 @@ export default class New extends Command
         dashboard: Flags.boolean({ char: 'd' }),
         help     : Flags.help({ char: 'h' }),
         package  : Flags.boolean({ char: 'p' }),
+        install  : Flags.boolean({ char: 'i' }),
         verbose  : Flags.boolean({ char: 'v' }),
     };
 
@@ -53,28 +54,32 @@ export default class New extends Command
                 break;
         }
 
-        CliUx.ux.action.start('Installing dependencies');
-        const install = shell.spawn('npm', ['install'], { cwd: args.name });
-
-        install.stdout.on('data', data =>
+        if (!flags.package && !flags.dashboard)
         {
-            console.log(`${data}`);
-        });
+            // generate application .env file
+            Operations.generateApplicationEnvFile(args.name);
+        }
 
-        install.stderr.on('data', data =>
+        if (flags.install)
         {
-            console.error(`${data}`);
-        });
+            CliUx.ux.action.start('Installing dependencies');
 
-        install.on('close', code =>
-        {
-            CliUx.ux.action.stop('Dependencies installed');
+            const install = shell.spawn('npm', ['install'], { cwd: args.name, timeout: 300 * 100 });
 
-            if (!flags.package && !flags.dashboard)
+            install.stdout.on('data', data =>
             {
-                // generate application env file
-                Operations.generateApplicationEnvFile(args.name);
-            }
-        });
+                console.log(`${data}`);
+            });
+
+            install.stderr.on('data', data =>
+            {
+                console.error(`${data}`);
+            });
+
+            install.on('error', err =>
+            {
+                console.error(`${err}`);
+            });
+        }
     }
 }
