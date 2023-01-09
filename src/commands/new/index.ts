@@ -5,7 +5,7 @@ import { container } from 'tsyringe';
 // imports
 import * as shell from 'node:child_process';
 import { Command, Flags, CliUx } from '@oclif/core';
-import { Operations, StateService } from '../../@cliter';
+import { BackHandler, Operations, StateService } from '../../@cliter';
 
 export default class New extends Command
 {
@@ -50,14 +50,14 @@ export default class New extends Command
 
             default:
                 stateService.appName = args.name;
-                await Operations.generateApplication();
+                await BackHandler.generateApplication();
                 break;
         }
 
         if (!flags.package && !flags.dashboard)
         {
             // generate application .env file
-            Operations.generateApplicationEnvFile(args.name);
+            BackHandler.generateApplicationEnvFile(args.name);
         }
 
         if (flags.install)

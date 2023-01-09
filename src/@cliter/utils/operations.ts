@@ -21,16 +21,6 @@ export class Operations
 {
     public static readonly stateService = container.resolve(StateService);
 
-    static async generateApplication(): Promise<void>
-    {
-        if (!Operations.stateService.appName) throw new Error('To create application is required app name');
-
-        // create directory for application
-        if (!fs.existsSync(Operations.stateService.appName)) fs.mkdirSync(Operations.stateService.appName, { recursive: true });
-
-        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(Operations.stateService.appName), '.');
-    }
-
     static async generatePackage(): Promise<void>
     {
         if (!Operations.stateService.packageName) throw new Error('To create package is required package name');
@@ -265,11 +255,6 @@ export class Operations
     {
         await TemplateGenerator.createDirectory('', 'postman');
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_POSTMAN, '', 'postman');
-    }
-
-    static async generateApplicationEnvFile(applicationName: string): Promise<void>
-    {
-        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_ENV, '', applicationName);
     }
 
     static async generateGraphqlTypes(): Promise<string>
