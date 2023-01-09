@@ -18,6 +18,7 @@ export default class Generate extends Command
         verbose       : Flags.boolean({ char: 'v' }),
         force         : Flags.boolean({ char: 'f' }),
         module        : Flags.string({ char: 'm' }),
+        boundedContext: Flags.string({ char: 'b' }),
         noGraphQLTypes: Flags.boolean({ char: 'g' }),
     };
 
@@ -26,9 +27,12 @@ export default class Generate extends Command
             name       : 'elementType',
             description: 'Type element to create',
             options    : [
-                'bounded-context', 'b',
-                'module', 'm',
-                'api', 'a',
+                'bounded-context',
+                'b',
+                'module',
+                'm',
+                'api',
+                'a',
             ],
             required: true,
         },
@@ -36,6 +40,7 @@ export default class Generate extends Command
 
     static examples = [
         '$ aurora generate module -m=my-bounded-context/my-module --force --noGraphQLTypes',
+        '$ aurora generate m -m=my-bounded-context/my-module --force --noGraphQLTypes',
         '$ aurora --help',
     ];
 
@@ -48,16 +53,22 @@ export default class Generate extends Command
 
         if (args.elementType === TemplateElement.BACK_MODULE)
         {
-            let moduleFlag: any = {};
+            let moduleFlag: { boundedContextName?: string; moduleName?: string; } = {};
             if (flags.module) moduleFlag = Operations.parseFlagOfBoundedContextAndModule(this, flags.module);
 
             const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant }: any = await Prompter.promptForGenerateModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
-            const properties: Properties    = new Properties();
-            properties.moduleName           = moduleName;
+            const properties: Properties = new Properties();
+            properties.moduleName        = moduleName;
 
-            // add id property
-            properties.add(new Property({ name: 'id', type: SqlType.ID, primaryKey: true, length: 36, nullable: false }));
+            // add id property for model
+            properties.add(new Property({
+                name      : 'id',
+                type      : SqlType.ID,
+                primaryKey: true,
+                length    : 36,
+                nullable  : false,
+            }));
 
             // add properties defined by user
             while ((await Prompter.promptForGenerateAggregate()).hasValueObject)
@@ -66,7 +77,7 @@ export default class Generate extends Command
                 Prompter.printValueObjectsTable(this, properties);
             }
 
-            // add time stamp properties
+            // add time stamp properties for model
             properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true }));
             properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true }));
             properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true }));

@@ -1,9 +1,9 @@
-export { TemplateElement } from './template-element';
-export { ModuleDefinitionSchema } from './module-definition-schema';
 export { LiteralObject } from './literal-object';
 export { LockFile } from './lock-file';
+export { ModuleDefinitionSchema } from './module-definition-schema';
 export { ResolverType } from './resolver-type';
-export { SqlRelationship } from './sql-relationship';
 export { SqlIndex } from './sql-index';
+export { SqlRelationship } from './sql-relationship';
 export { SqlType } from './sql-type';
+export { TemplateElement } from './template-element';
 export { TemplateFile } from './template-file';

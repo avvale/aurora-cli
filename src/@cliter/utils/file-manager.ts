@@ -19,8 +19,8 @@ export class FileManager
 
     /**
      * Delete all origin files from directory recursively.
-     * @param currentPath
-     * @param skipDirectories
+     * @param {string} currentPath - current path to explore
+     * @return {void}
      */
     static deleteOriginFiles(currentPath: string): void
     {
