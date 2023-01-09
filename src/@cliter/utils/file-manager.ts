@@ -8,6 +8,7 @@ import { cliterConfig } from '../config/cliter.config';
 import { Cypher } from './cypher';
 import { Property } from './property';
 import { TemplateEngine } from './template-engine';
+import { AdditionalApi } from './additional-api';
 import * as chalk from 'chalk';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -15,6 +16,73 @@ import * as _ from 'lodash';
 
 export class FileManager
 {
+    // TODO método no usado, prueba para nuevo aproach sin usar state métodos de utilidades
+    /**
+     * Render filename and folder name
+     * @param {string} name - name that include key to replace
+     * @return {string} - replaced name
+     */
+    replaceFilename(
+        name: string,
+        {
+            boundedContextName = '',
+            moduleName = '',
+            moduleNames = '',
+            boundedContextPrefix = '',
+            boundedContextSuffix = '',
+            moduleNamePrefix = '',
+            moduleNameSuffix = '',
+            currentAdditionalApi,
+            currentProperty,
+        }: {
+            boundedContextName?: string;
+            moduleName?: string;
+            moduleNames?: string;
+            boundedContextPrefix?: string;
+            boundedContextSuffix?: string;
+            moduleNamePrefix?: string;
+            moduleNameSuffix?: string; // use to set i18n items
+            currentAdditionalApi?: AdditionalApi;
+            currentProperty?: Property;
+        } = {},
+    ): string
+    {
+        if (name.includes('__bounded_context_name__'))
+        {
+            if (boundedContextName === '') throw new Error('Variable boundedContextName is required to replace __bounded_context_name__ in filename');
+            name = name.replace(/__bounded_context_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + boundedContextName.toKebabCase() + (boundedContextSuffix ? '-' + boundedContextSuffix : ''));
+        }
+
+        if (name.includes('__module_name__'))
+        {
+            if (moduleName === '') throw new Error('Variable moduleName is required to replace __module_name__ in filename');
+            name = name.replace(/__module_name__/gi, (moduleNamePrefix ? moduleNamePrefix + '-' : '') + moduleName.toKebabCase() + (moduleNameSuffix ? '-' + moduleNameSuffix : ''));
+        }
+
+        if (name.includes('__module_names__'))
+        {
+            if (moduleNames === '') throw new Error('Variable moduleNames is required to replace __module_names__ in filename');
+            name = name.replace(/__module_names__/gi, moduleNames.toKebabCase());
+        }
+
+        if (name.includes('__additional_api_name__'))
+        {
+            name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (currentAdditionalApi ? currentAdditionalApi.getApiFileName : ''));
+        }
+
+        if (name.includes('__property_name__') && currentProperty)
+        {
+            name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
+        }
+
+        if (name.includes('__property_native_name__') && currentProperty)
+        {
+            name = name.replace(/__property_native_name__/gi, currentProperty.originName.toKebabCase());
+        }
+
+        return name;
+    }
+
     public static readonly stateService = container.resolve(StateService);
 
     /**

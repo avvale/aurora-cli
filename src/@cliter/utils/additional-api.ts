@@ -1,4 +1,5 @@
 import { ResolverType } from '../types';
+
 export class AdditionalApi
 {
     public path: string;
