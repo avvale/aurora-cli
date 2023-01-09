@@ -22,7 +22,7 @@ export class FileManager
      * @param {string} name - name that include key to replace
      * @return {string} - replaced name
      */
-    replaceFilename(
+    static replaceFilename(
         name: string,
         {
             boundedContextName = '',
