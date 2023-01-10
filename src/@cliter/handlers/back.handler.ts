@@ -13,7 +13,7 @@ import { TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { CodeWriter } from '../utils/code-writer';
 import { cliterConfig } from '../config/cliter.config';
-import { generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateModuleFiles, generatePivotTables } from '../functions/back';
+import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateModuleFiles, generatePivotTables } from '../functions/back';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
 
@@ -33,11 +33,6 @@ export class BackHandler
         if (!fs.existsSync(BackHandler.stateService.appName)) fs.mkdirSync(BackHandler.stateService.appName, { recursive: true });
 
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(BackHandler.stateService.appName), '.');
-    }
-
-    static async generateApplicationEnvFile(applicationName: string): Promise<void>
-    {
-        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_ENV, '', applicationName);
     }
 
     static async generateModule(): Promise<void>
@@ -61,7 +56,7 @@ export class BackHandler
         await generateI18NApiFiles();
 
         // create references, write imports in ts files
-        BackHandler.createBackReferences();
+        addReferences();
 
         // flag to generate e2e tests, this test can overwrite custom tests
         if (BackHandler.stateService.flags.tests)
@@ -109,46 +104,6 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
                 resolve(stdout ? stdout : stderr);
             });
         });
-    }
-
-    static async generateModuleFiles(): Promise<void>
-    {
-        // create directory application container, normally src/@apps
-        await TemplateGenerator.createDirectory(
-            path.join('src', cliterConfig.applicationsContainer),
-            BackHandler.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
-        );
-
-        // create module files
-        await TemplateGenerator.generateStaticContents(
-            TemplateElement.BACK_MODULE,
-            path.join('src', cliterConfig.applicationsContainer),
-            BackHandler.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
-        );
-
-        // create value objects in module folder
-        await TemplateGenerator.generateValueObjects(
-            path.join('src', cliterConfig.applicationsContainer),
-            BackHandler.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
-        );
-    }
-
-    static createBackReferences(): void
-    {
-        const codeWriter = new CodeWriter(
-            path.join('src'),
-            path.join(cliterConfig.applicationsContainer),
-            cliterConfig.apiContainer,
-            BackHandler.stateService.schema.boundedContextName.toLowerCase(),
-            BackHandler.stateService.schema.moduleName.toLowerCase(),
-            BackHandler.stateService.schema.moduleNames.toLowerCase(),
-            BackHandler.stateService.schema.aggregateName,
-        );
-        codeWriter.generateBoundedContextBackReferences(BackHandler.stateService.schema.properties);
-        codeWriter.declareApplicationItemsInModule();
-        codeWriter.declareBoundedContextModuleInApplicationModule();
-        codeWriter.declareApplicationItemsExports();
-        if (BackHandler.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
     }
 
     static async generateTestingFiles(): Promise<void>
