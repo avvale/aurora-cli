@@ -1,3 +1,4 @@
+export * from './additional-apis';
 export * from './code-writer';
 export * from './cypher';
 export * from './file-manager';

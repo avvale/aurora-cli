@@ -6,7 +6,7 @@ import { container } from 'tsyringe';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as yaml from 'js-yaml';
-import { StateService } from '../services/state.service';
+import { StateService } from '../functions/state.service';
 import { Property } from './property';
 import { ModuleDefinitionSchema } from '../types';
 import { Properties } from './properties';

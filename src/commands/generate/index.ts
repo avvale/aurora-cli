@@ -4,8 +4,7 @@ import { container } from 'tsyringe';
 
 // imports
 import { Command, Flags } from '@oclif/core';
-import { ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
-import { AdditionalApis } from '../../@cliter/utils/additional-apis';
+import { AdditionalApis, BackHandler, ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
 
 export default class Generate extends Command
 {
@@ -102,12 +101,12 @@ export default class Generate extends Command
             stateService.flags.tests    = true; // enable by default create test e2e files
 
             // generate module files
-            Operations.generateBackModule();
+            BackHandler.generateModule();
 
             if (!flags.noGraphQLTypes)
             {
                 // generate graphql files
-                Operations.generateGraphqlTypes();
+                BackHandler.generateGraphqlTypes();
             }
         }
     }

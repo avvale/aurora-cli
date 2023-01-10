@@ -6,7 +6,7 @@ import { container } from 'tsyringe';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { TemplateElement } from '../types';
-import { StateService } from '../services/state.service';
+import { StateService } from '../functions/state.service';
 import { FileManager } from './file-manager';
 import { Property } from './property';
 

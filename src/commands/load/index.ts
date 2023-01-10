@@ -13,7 +13,7 @@ import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as _ from 'lodash';
-import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager, YamlManager } from '../../@cliter/index';
+import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager, YamlManager, BackHandler } from '../../@cliter/index';
 
 export default class Load extends Command
 {
@@ -80,7 +80,7 @@ export default class Load extends Command
             }
             else
             {
-                await Operations.generateBackModule();
+                await BackHandler.generateModule();
             }
 
             await this.reviewOverwrites(stateService);
@@ -106,7 +106,7 @@ export default class Load extends Command
                 stateService.flags     = flags;
 
                 // generate module files
-                batchOperations.push(Operations.generateBackModule());
+                batchOperations.push(BackHandler.generateModule());
             }
 
             await Promise.all(batchOperations);
@@ -121,7 +121,7 @@ export default class Load extends Command
         if (!stateService.flags.noGraphQLTypes)
         {
             // generate graphql files
-            await Operations.generateGraphqlTypes();
+            await BackHandler.generateGraphqlTypes();
         }
 
         if (stateService.originFiles.length > 0)
