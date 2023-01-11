@@ -14,6 +14,7 @@ import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as _ from 'lodash';
 import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager, YamlManager, BackHandler } from '../../@cliter/index';
+import { generateGraphqlTypes } from '../../@cliter/functions/back';
 
 export default class Load extends Command
 {
@@ -121,7 +122,7 @@ export default class Load extends Command
         if (!stateService.flags.noGraphQLTypes)
         {
             // generate graphql files
-            await BackHandler.generateGraphqlTypes();
+            await generateGraphqlTypes();
         }
 
         if (stateService.originFiles.length > 0)

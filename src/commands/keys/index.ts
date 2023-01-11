@@ -1,6 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import * as rs from 'jsrsasign';
 const rsu = require('jsrsasign-util');
+// TODO implementar https://www.npmjs.com/package/node-forge#rsa
 
 export default class Key extends Command
 {

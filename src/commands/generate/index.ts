@@ -5,6 +5,7 @@ import { container } from 'tsyringe';
 // imports
 import { Command, Flags } from '@oclif/core';
 import { AdditionalApis, BackHandler, ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
+import { generateGraphqlTypes } from '../../@cliter/functions/back';
 
 export default class Generate extends Command
 {
@@ -106,7 +107,7 @@ export default class Generate extends Command
             if (!flags.noGraphQLTypes)
             {
                 // generate graphql files
-                BackHandler.generateGraphqlTypes();
+                await generateGraphqlTypes();
             }
         }
     }
