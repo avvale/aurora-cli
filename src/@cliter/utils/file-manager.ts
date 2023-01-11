@@ -104,7 +104,7 @@ export class FileManager
             const stats = fs.statSync(originFilePath);
 
             // skip files that should not be explorer
-            if (FileManager.stateService.config.skipDirectories.includes(file)) return;
+            if (cliterConfig.skipDirectories.includes(file)) return;
 
             if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql') || file.endsWith('.origin.html')))
             {

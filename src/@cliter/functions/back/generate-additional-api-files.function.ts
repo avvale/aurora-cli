@@ -1,15 +1,20 @@
-// node
 import * as path from 'node:path';
-
-// imports
-import { BackHandler } from '../../handlers';
 import { cliterConfig } from '../../config';
 import { TemplateGenerator } from '../../utils';
+import { GenerateCommandState, TemplateElement } from '../../types';
 
-export const generateAdditionalApiFiles = async (): Promise<void> =>
+export const generateAdditionalApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    TemplateGenerator.generateAdditionalApiFiles(
-        path.join('src', cliterConfig.apiContainer),
-        BackHandler.stateService.schema.boundedContextName.toLowerCase().toKebabCase(),
-    );
+    for (const additionalApi of TemplateGenerator.stateService.schema.additionalApis)
+    {
+        // set additional api to create, to be available in template
+        TemplateGenerator.stateService.currentAdditionalApi = additionalApi;
+
+        // create module files
+        TemplateGenerator.generateStaticContents(
+            TemplateElement.BACK_ADDITIONAL_API,
+            path.join('src', cliterConfig.apiContainer), // relativeTargetBasePath,
+            generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(), // relativeTargetPath,
+        );
+    }
 };

@@ -13,8 +13,9 @@ import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as _ from 'lodash';
-import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager, YamlManager, BackHandler } from '../../@cliter/index';
+import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager, YamlManager, BackHandler, GenerateCommandState, cliterConfig } from '../../@cliter/index';
 import { generateGraphqlTypes } from '../../@cliter/functions/back';
+import { FrontHandler } from '../../@cliter/handlers/front.handler';
 
 export default class Load extends Command
 {
@@ -72,27 +73,38 @@ export default class Load extends Command
             stateService.lockFiles = currentLockFiles;
             stateService.flags     = flags;
 
+            let generateCommandState;
+
+            // eslint-disable-next-line unicorn/prefer-ternary
             if (flags.dashboard)
             {
-                await Operations.generateFrontModule();
-
-                // TODO reorganizar los flows para evitar esta ñapa, para evitar generar graphql types en el dashboard
-                stateService.flags.noGraphQLTypes = true;
+                generateCommandState = {
+                    command: this,
+                    flags  : {
+                        ...flags,
+                        // avoid generate graphql types in front, it is not necessary
+                        noGraphQLTypes: true,
+                    },
+                    lockFiles: currentLockFiles,
+                    schema,
+                };
+                await FrontHandler.generateModule(generateCommandState);
             }
             else
             {
-                await BackHandler.generateModule({
+                generateCommandState = {
                     command  : this,
                     flags,
                     lockFiles: currentLockFiles,
                     schema,
-                });
+                };
+                await BackHandler.generateModule(generateCommandState);
             }
 
-            await this.reviewOverwrites(stateService);
+            await this.reviewOverwrites(generateCommandState);
         }
 
-        if (args.elementType === TemplateElement.BACK_BOUNDED_CONTEXT)
+        /* if (args.elementType === TemplateElement.BACK_BOUNDED_CONTEXT)
         {
             const { boundedContextName }: any = await Prompter.promptForLoadBoundedContext(flags.boundedContext);
 
@@ -119,28 +131,28 @@ export default class Load extends Command
 
             // generate graphql files
             await this.reviewOverwrites(stateService);
-        }
+        } */
     }
 
-    private async reviewOverwrites(stateService: StateService)
+    private async reviewOverwrites(generateCommandState: GenerateCommandState)
     {
-        if (!stateService.flags.noGraphQLTypes)
+        if (!generateCommandState.flags.noGraphQLTypes)
         {
             // generate graphql files
-            await generateGraphqlTypes();
+            await generateGraphqlTypes(generateCommandState);
         }
 
         if (stateService.originFiles.length > 0)
         {
-            stateService.command.log(`
+            generateCommandState.command.log(`
 ********************************************
 ***              ATTENTION!              ***
 ********************************************`);
-            stateService.command.log('%s %s %s There are files that have not been overwritten because they were modified, the following origin files have been created.', logSymbols.warning, chalk.yellow.bold('WARNING'), emoji.get('small_red_triangle'));
+            generateCommandState.command.log('%s %s %s There are files that have not been overwritten because they were modified, the following origin files have been created.', logSymbols.warning, chalk.yellow.bold('WARNING'), emoji.get('small_red_triangle'));
 
             for (const originFile of stateService.originFiles)
             {
-                stateService.command.log(`%s ${originFile}`, emoji.get('question'));
+                generateCommandState.command.log(`%s ${originFile}`, emoji.get('question'));
             }
 
             let deleteOriginFiles = true;
@@ -154,7 +166,7 @@ export default class Load extends Command
                 fileToManage = (await Prompter.promptSelectOriginFileToManage(stateService.originFiles)).fileToManage as string;
                 shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
 
-                while (actionResponse !== stateService.config.compareActions.finish)
+                while (actionResponse !== cliterConfig.compareActions.finish)
                 {
                     if (stateService.originFiles.length > 0)
                     {
@@ -162,18 +174,18 @@ export default class Load extends Command
 
                         switch (actionResponse)
                         {
-                            case stateService.config.compareActions.deleteOrigin:
+                            case cliterConfig.compareActions.deleteOrigin:
                                 fs.unlinkSync(fileToManage as string);                     // delete origin file and reference in array, view state.service.ts file
                                 fileToManage = _.head([...stateService.originFiles]);   // get next file
                                 if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
 
-                            case stateService.config.compareActions.return:
+                            case cliterConfig.compareActions.return:
                                 fileToManage = (await Prompter.promptSelectOriginFileToManage(stateService.originFiles)).fileToManage as string;
                                 shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                                 break;
 
-                            case stateService.config.compareActions.ignore:
+                            case cliterConfig.compareActions.ignore:
                                 if (!fileToManage) break;
                                 const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
                                 fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : (fileToManage.endsWith('.origin.html') ? '<!-- ignored file -->\r\n' : '// ignored file\r\n')) + customFile, 'utf8');
@@ -185,7 +197,7 @@ export default class Load extends Command
                     }
                     else
                     {
-                        stateService.command.log('[INFO] All files have been reviewed');
+                        generateCommandState.command.log('[INFO] All files have been reviewed');
                         deleteOriginFiles = false;
                         break;
                     }
@@ -195,7 +207,7 @@ export default class Load extends Command
             if (deleteOriginFiles)
             {
                 FileManager.deleteOriginFiles(process.cwd());
-                stateService.command.log(chalk.redBright.bold('[INFO] Origin files deleted!'));
+                generateCommandState.command.log(chalk.redBright.bold('[INFO] Origin files deleted!'));
             }
         }
     }

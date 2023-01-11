@@ -1,1 +1,1 @@
-export * from './cliter.config';
+export { CliterConfig, cliterConfig } from './cliter.config';

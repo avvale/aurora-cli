@@ -25,5 +25,7 @@ export const generateModuleFiles = async (generateCommandState: GenerateCommandS
     await TemplateGenerator.generateValueObjects(
         path.join('src', cliterConfig.applicationsContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+        generateCommandState.schema.properties.valueObjects,
+        generateCommandState.schema.moduleName,
     );
 };

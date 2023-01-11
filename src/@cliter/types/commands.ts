@@ -14,3 +14,8 @@ export interface GenerateCommandState extends CommandState
     lockFiles: LockFile[];
     schema: ModuleDefinitionSchema;
 }
+
+export interface NewApplicationCommandState extends CommandState
+{
+    appName: string;
+}

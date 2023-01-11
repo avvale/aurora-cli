@@ -1,10 +1,6 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// imports
 import { Command, Flags } from '@oclif/core';
-import { Operations, Prompter, StateService } from '../../@cliter';
+import { Prompter } from '../../@cliter';
+import { CiCdHandler } from '../../@cliter/handlers';
 
 export default class Pipeline extends Command
 {
@@ -31,11 +27,6 @@ export default class Pipeline extends Command
 
         const { from, to, service }: any = await Prompter.promptAddPipeline(flags.dashboard);
 
-        // set stateService
-        const stateService     = container.resolve(StateService);
-        stateService.command   = this;
-        stateService.flags     = flags;
-
-        Operations.generatePipeline(flags.dashboard ? 'front' : 'back', from, to, service);
+        CiCdHandler.generatePipeline(flags.dashboard ? 'front' : 'back', from, to, service);
     }
 }

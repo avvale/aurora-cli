@@ -50,8 +50,11 @@ export default class New extends Command
                 break;
 
             default:
-                stateService.appName = args.name;
-                await BackHandler.generateApplication();
+                await BackHandler.newApplication({
+                    appName: args.name,
+                    command: this,
+                    flags,
+                });
                 break;
         }
 

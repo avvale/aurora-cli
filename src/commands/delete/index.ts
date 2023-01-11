@@ -1,10 +1,10 @@
-import { Command, Flags } from '@oclif/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import * as chalk from 'chalk';
 import * as inquirer from 'inquirer';
 import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
+import { Command, Flags } from '@oclif/core';
 import { cliterConfig, FsExtend, TemplateElement } from '../../@cliter';
 
 export default class Delete extends Command

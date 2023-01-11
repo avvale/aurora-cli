@@ -1,12 +1,6 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// imports
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { TemplateElement } from '../types';
-import { StateService } from '../functions/state.service';
 import { FileManager } from './file-manager';
 import { Property } from './property';
 
@@ -14,7 +8,6 @@ export class TemplateGenerator
 {
     public static readonly templatePath: string = path.join(__dirname, '..', '..', 'templates');
     public static readonly projectDirectory: string = process.cwd();
-    public static readonly stateService = container.resolve(StateService);
 
     // generate static files from templates folder, with templateElement know that type of element create, bounded_context, module, etc.
     static generateStaticContents(
@@ -38,26 +31,6 @@ export class TemplateGenerator
         );
     }
 
-    static generatePivotTables(
-        relativeTargetBasePath: string,
-        relativeTargetPath: string,
-    ): void
-    {
-        for (const property of TemplateGenerator.stateService.schema.properties.withRelationshipManyToMany)
-        {
-            // only create table if has in pivotPath
-            if (property.pivotPath === `${TemplateGenerator.stateService.schema.boundedContextName}/${TemplateGenerator.stateService.schema.moduleName}`)
-            {
-                FileManager.generateContents(
-                    path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_PIVOT.split('/')),
-                    relativeTargetBasePath,
-                    relativeTargetPath,
-                    { currentProperty: property },
-                );
-            }
-        }
-    }
-
     static createDirectory(
         relativeTargetBasePath: string,
         directory: string,
@@ -68,71 +41,58 @@ export class TemplateGenerator
         if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
     }
 
-    static generateAdditionalApiFiles(
+    /**
+     * @param {string} relativeTargetBasePath Relative target base path
+     * @param {string} relativeTargetPath Relative target path
+     * @param {Property[]} valueObjects Value objects
+     * @param {string} moduleName Module name
+     * @returns void
+     */
+    static generateValueObjects(
         relativeTargetBasePath: string,
         relativeTargetPath: string,
+        valueObjects: Property[],
+        moduleName: string,
     ): void
     {
-        for (const additionalApi of TemplateGenerator.stateService.schema.additionalApis)
+        // iterate properties to generate ValueObjects
+        for (const property of valueObjects)
         {
-            // set additional api to create, to be available in template
-            TemplateGenerator.stateService.currentAdditionalApi = additionalApi;
-
-            // create module files
-            TemplateGenerator.generateStaticContents(
-                TemplateElement.BACK_ADDITIONAL_API,
+            TemplateGenerator.generateValueObject(
                 relativeTargetBasePath,
                 relativeTargetPath,
+                property,
+                moduleName,
             );
         }
     }
 
     /**
      *
-     * @param {string} relativeTargetBasePath
-     * @param {string} relativeTargetPath
-     * @returns void
-     */
-    static generateValueObjects(
-        relativeTargetBasePath: string,
-        relativeTargetPath: string,
-    ): void
-    {
-        // generate ValueObjects
-        for (const property of TemplateGenerator.stateService.schema.properties.valueObjects)
-        {
-            TemplateGenerator.generateValueObject(
-                relativeTargetBasePath,
-                relativeTargetPath,
-                property,
-            );
-        }
-    }
-
-    /*********************************
-     *
      * @param {string} relativeTargetBasePath Relative target base path
      * @param {string} relativeTargetPath Relative target path
      * @param {Property} property Property
+     * @param {string} moduleName Module name
      * @return void
      */
     static generateValueObject(
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         property: Property,
+        moduleName: string,
     ): void
     {
         // read value object from our data type
         const originFilePath = path.join(TemplateGenerator.templatePath, ...TemplateElement.BACK_VALUE_OBJECT.split('/'), property.type, '__module_name__-__property_name__.ts');
 
-        // TODO,throw error when no exist value object
+        // TODO, throw error when no exist value object
         // check that exists value object template
         if (!fs.existsSync(originFilePath)) return;
 
         FileManager.manageFileTemplate(
             originFilePath,
             '__module_name__-__property_name__.ts',
-            path.join(relativeTargetBasePath, relativeTargetPath, TemplateGenerator.stateService.schema.moduleName, 'domain', 'value-objects'),
+            path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),
             {
                 moduleNameSuffix: property.isI18n ? 'i18n' : '',
                 currentProperty : property,

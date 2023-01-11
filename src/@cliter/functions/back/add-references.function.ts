@@ -2,24 +2,24 @@
 import * as path from 'node:path';
 
 // imports
-import { BackHandler } from '../../handlers/back.handler';
+import { GenerateCommandState } from '../../types';
 import { cliterConfig } from '../../config';
 import { CodeWriter } from '../../utils';
 
-export const addReferences = (): void =>
+export const addReferences = (generateCommandState: GenerateCommandState): void =>
 {
     const codeWriter = new CodeWriter(
         path.join('src'),
         path.join(cliterConfig.applicationsContainer),
         cliterConfig.apiContainer,
-        BackHandler.stateService.schema.boundedContextName.toLowerCase(),
-        BackHandler.stateService.schema.moduleName.toLowerCase(),
-        BackHandler.stateService.schema.moduleNames.toLowerCase(),
-        BackHandler.stateService.schema.aggregateName,
+        generateCommandState.schema.boundedContextName.toLowerCase(),
+        generateCommandState.schema.moduleName.toLowerCase(),
+        generateCommandState.schema.moduleNames.toLowerCase(),
+        generateCommandState.schema.aggregateName,
     );
-    codeWriter.generateBoundedContextBackReferences(BackHandler.stateService.schema.properties);
+    codeWriter.generateBoundedContextBackReferences(generateCommandState.schema.properties);
     codeWriter.declareApplicationItemsInModule();
     codeWriter.declareBoundedContextModuleInApplicationModule();
     codeWriter.declareApplicationItemsExports();
-    if (BackHandler.stateService.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
+    if (generateCommandState.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
 };

@@ -1,10 +1,5 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// imports
 import { Command, Flags } from '@oclif/core';
-import { AdditionalApis, BackHandler, ModuleDefinitionSchema, Operations, Prompter, Properties, Property, SqlType, StateService, TemplateElement } from '../../@cliter';
+import { AdditionalApis, BackHandler, Operations, Prompter, Properties, Property, SqlType, TemplateElement } from '../../@cliter';
 import { generateGraphqlTypes } from '../../@cliter/functions/back';
 
 export default class Generate extends Command
@@ -82,33 +77,15 @@ export default class Generate extends Command
             properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true }));
             properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true }));
 
-            const schema: ModuleDefinitionSchema = {
-                boundedContextName,
-                moduleName,
-                moduleNames,
-                aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
-                hasOAuth,
-                hasTenant,
-                hasAuditing   : false,
-                properties,
-                additionalApis: new AdditionalApis(),
-            };
-
-            // set stateService
-            const stateService          = container.resolve(StateService);
-            stateService.command        = this;
-            stateService.schema         = schema;
-            stateService.flags          = flags;
-            stateService.flags.tests    = true; // enable by default create test e2e files
-
             // generate module files
             BackHandler.generateModule({
                 command: this,
                 flags  : {
                     ...flags,
-                    tests: true,
+                    tests: true, // enable by default create test e2e files
                 },
-                schema: {
+                lockFiles: [],
+                schema   : {
                     boundedContextName,
                     moduleName,
                     moduleNames,
@@ -124,7 +101,22 @@ export default class Generate extends Command
             if (!flags.noGraphQLTypes)
             {
                 // generate graphql files
-                await generateGraphqlTypes();
+                await generateGraphqlTypes({
+                    command  : this,
+                    flags,
+                    lockFiles: [],
+                    schema   : {
+                        boundedContextName,
+                        moduleName,
+                        moduleNames,
+                        aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
+                        hasOAuth,
+                        hasTenant,
+                        hasAuditing   : false,
+                        properties,
+                        additionalApis: new AdditionalApis(),
+                    },
+                });
             }
         }
     }

@@ -1,13 +1,12 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-
-// imports
 import { BackHandler } from '../../handlers';
 import { cliterConfig } from '../../config';
+import { GenerateCommandState } from '../../types';
 
-export const generateJsonLockFile = async (): Promise<void> =>
+export const generateJsonLockFile = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    const jsonPath = path.join(process.cwd(), 'cliter', BackHandler.stateService.schema.boundedContextName.toKebabCase());
+    const jsonPath = path.join(process.cwd(), 'cliter', generateCommandState.schema.boundedContextName.toKebabCase());
 
     if (!fs.existsSync(jsonPath)) fs.mkdirSync(jsonPath, { recursive: true });
 
@@ -16,5 +15,5 @@ export const generateJsonLockFile = async (): Promise<void> =>
         files  : BackHandler.stateService.newLockFiles,
     };
 
-    fs.writeFileSync(path.join(jsonPath, `${BackHandler.stateService.schema.moduleName}-lock.json`), JSON.stringify(jsonLockFile, null, 4), 'utf8');
+    fs.writeFileSync(path.join(jsonPath, `${generateCommandState.schema.moduleName}-lock.json`), JSON.stringify(jsonLockFile, null, 4), 'utf8');
 };

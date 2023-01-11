@@ -1,35 +1,22 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// node
+/* eslint-disable unicorn/no-static-only-class */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-
-// imports
-import { StateService } from '../functions/state.service';
 import { TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { generateJsonLockFile } from '../functions/common';
 import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateModuleFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
-import { GenerateCommandState } from '../types/commands';
+import { GenerateCommandState, NewApplicationCommandState } from '../types/commands';
 
 export class BackHandler
 {
-    public static readonly stateService = container.resolve(StateService);
-
-    /**
-     * Generate server application
-     * @return {Promise<void>} void
-     */
-    static async generateApplication(): Promise<void>
+    static async newApplication(newApplicationCommandState: NewApplicationCommandState): Promise<void>
     {
-        if (!BackHandler.stateService.appName) throw new Error('To create application is required app name');
+        if (!newApplicationCommandState.appName) throw new Error('To create application is required app name');
 
         // create directory for application
-        if (!fs.existsSync(BackHandler.stateService.appName)) fs.mkdirSync(BackHandler.stateService.appName, { recursive: true });
+        if (!fs.existsSync(newApplicationCommandState.appName)) fs.mkdirSync(newApplicationCommandState.appName, { recursive: true });
 
-        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(BackHandler.stateService.appName), '.');
+        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(newApplicationCommandState.appName), '.');
     }
 
     static async generateModule(generateCommandState: GenerateCommandState): Promise<void>
@@ -47,27 +34,23 @@ export class BackHandler
         await generateApiFiles(generateCommandState);
 
         // generate additional api filles
-        await generateAdditionalApiFiles();
+        await generateAdditionalApiFiles(generateCommandState);
 
         // generate @api i18n files
-        await generateI18NApiFiles();
+        await generateI18NApiFiles(generateCommandState);
 
         // create references, write imports in ts files
-        addReferences();
+        addReferences(generateCommandState);
 
         // flag to generate e2e tests, this test can overwrite custom tests
-        if (BackHandler.stateService.flags.tests)
-        {
-            // generate testing files
-            await generateTestingFiles();
-        }
+        if (generateCommandState.flags.tests) await generateTestingFiles(generateCommandState);
 
         // generate postman files
         await generatePostmanFiles();
 
         // create yaml file
-        generateYamlConfigFile();
+        generateYamlConfigFile(generateCommandState);
 
-        generateJsonLockFile();
+        generateJsonLockFile(generateCommandState);
     }
 }

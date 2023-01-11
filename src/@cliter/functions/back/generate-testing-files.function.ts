@@ -1,13 +1,9 @@
-// node
 import * as path from 'node:path';
-
-// imports
-import { BackHandler } from '../../handlers';
 import { cliterConfig } from '../../config';
 import { CodeWriter, TemplateGenerator } from '../../utils';
-import { TemplateElement } from '../../types';
+import { GenerateCommandState, TemplateElement } from '../../types';
 
-export const generateTestingFiles = async (): Promise<void> =>
+export const generateTestingFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     await TemplateGenerator.generateStaticContents(TemplateElement.BACK_TEST, path.join('test'), '');
 
@@ -15,11 +11,11 @@ export const generateTestingFiles = async (): Promise<void> =>
         path.join('src'),
         path.join(cliterConfig.applicationsContainer),
         cliterConfig.apiContainer,
-        BackHandler.stateService.schema.boundedContextName.toLowerCase(),
-        BackHandler.stateService.schema.moduleName.toLowerCase(),
-        BackHandler.stateService.schema.moduleNames.toLowerCase(),
-        BackHandler.stateService.schema.aggregateName,
+        generateCommandState.schema.boundedContextName.toLowerCase(),
+        generateCommandState.schema.moduleName.toLowerCase(),
+        generateCommandState.schema.moduleNames.toLowerCase(),
+        generateCommandState.schema.aggregateName,
     );
 
-    codeWriter.generateTestingForeignReferences(BackHandler.stateService.schema.properties);
+    codeWriter.generateTestingForeignReferences(generateCommandState.schema.properties);
 };
