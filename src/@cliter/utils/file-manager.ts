@@ -7,7 +7,7 @@ import { StateService } from '../functions/state.service';
 import { cliterConfig } from '../config/cliter.config';
 import { Cypher } from './cypher';
 import { Property } from './property';
-import { TemplateEngine } from './template-engine';
+import templateEngine from './template-engine';
 import { AdditionalApi } from './additional-api';
 import * as chalk from 'chalk';
 import * as fs from 'node:fs';
@@ -318,7 +318,7 @@ export class FileManager
         if (useTemplateEngine)
         {
             // replace variables with handlebars template engine
-            contents = await TemplateEngine.render(contents, {
+            contents = await templateEngine.render(contents, {
                 ...FileManager.stateService,
                 currentProperty,
                 boundedContextPrefix,

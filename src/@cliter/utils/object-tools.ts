@@ -4,7 +4,7 @@ export class ObjectTools
 {
     static sortByKeys(object: LiteralObject): LiteralObject
     {
-       return Object
+        return Object
             .keys(object)
             .sort()
             .reduce((newObject: LiteralObject, key) =>

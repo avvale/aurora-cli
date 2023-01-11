@@ -49,15 +49,15 @@ import '../prototypes/string-to-pascal-case';
 import '../prototypes/string-to-snake-case.interface';
 import '../prototypes/string-to-snake-case';
 
-export class TemplateEngine
+const templateEngine =
 {
     /**
      * Render templates with handlebars template engine.
-     * @param content
-     * @param data
-     * @param opts
+     * @param {string} content - Template content
+     * @param {any} data - Data helper to render templates
+     * @return {Promise<string>} Rendered template
      */
-    static async render(content: string, data: any): Promise<string>
+    async render(content: string, data: any): Promise<string>
     {
         // add helpers to handlebars template engine
         handlebarsHelpers({ handlebars });
@@ -66,5 +66,7 @@ export class TemplateEngine
             allowProtoPropertiesByDefault: true,
             allowProtoMethodsByDefault   : true,
         });
-    }
-}
+    },
+};
+
+export default templateEngine;

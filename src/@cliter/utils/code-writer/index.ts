@@ -6,9 +6,9 @@ import { ImportDriver } from './import.driver';
 import { ExportDriver } from './export.driver';
 import { ArrayDriver } from './array.driver';
 import { InterfaceDriver } from './interface.driver';
+import { ObjectTools } from '../object-tools';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
-import { ObjectTools } from '../object-tools';
 
 export class CodeWriter
 {
