@@ -24,7 +24,11 @@ export class Operations
         // create directory for application
         if (!fs.existsSync(Operations.stateService.packageName || '')) fs.mkdirSync(Operations.stateService.packageName, { recursive: true });
 
-        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_PACKAGE, path.join(Operations.stateService.packageName), '.');
+        await TemplateGenerator.generateStaticContents(
+            TemplateElement.BACK_PACKAGE,
+            path.join(Operations.stateService.packageName),
+            '.',
+        );
     }
 
     static async generateDashboard(): Promise<void>
@@ -41,20 +45,6 @@ export class Operations
             { useTemplateEngine: false },
         );
     }
-
-    /* static async generateFrontModule(): Promise<void>
-    {
-        // generate dashboard module translations empty
-        await Operations.generateFrontTranslationsModule();
-
-        // generate dashboard module files
-        await Operations.generateFrontModuleFiles();
-
-        // create references, write imports in ts files
-        Operations.createFrontReferences();
-
-        Operations.createJsonLockFile();
-    } */
 
     static async installBackPackage(packageName: string): Promise<void>
     {

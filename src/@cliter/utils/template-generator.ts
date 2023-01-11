@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { TemplateElement } from '../types';
+import { GenerateCommandState, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
 import { Property } from './property';
 
@@ -11,6 +11,7 @@ export class TemplateGenerator
 
     // generate static files from templates folder, with templateElement know that type of element create, bounded_context, module, etc.
     static generateStaticContents(
+        generateCommandState: GenerateCommandState,
         templateElement: TemplateElement,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
@@ -24,6 +25,7 @@ export class TemplateGenerator
     ): void
     {
         FileManager.generateContents(
+            generateCommandState,
             path.join(TemplateGenerator.templatePath, ...templateElement.split('/'), templateElementPath || ''),
             relativeTargetBasePath,
             relativeTargetPath,
@@ -42,6 +44,7 @@ export class TemplateGenerator
     }
 
     /**
+     * @param {GenerateCommandState} generateCommandState Generate command state
      * @param {string} relativeTargetBasePath Relative target base path
      * @param {string} relativeTargetPath Relative target path
      * @param {Property[]} valueObjects Value objects
@@ -49,6 +52,7 @@ export class TemplateGenerator
      * @returns void
      */
     static generateValueObjects(
+        generateCommandState: GenerateCommandState,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         valueObjects: Property[],
@@ -59,6 +63,7 @@ export class TemplateGenerator
         for (const property of valueObjects)
         {
             TemplateGenerator.generateValueObject(
+                generateCommandState,
                 relativeTargetBasePath,
                 relativeTargetPath,
                 property,
@@ -68,7 +73,7 @@ export class TemplateGenerator
     }
 
     /**
-     *
+     * @param {GenerateCommandState} generateCommandState Generate command state
      * @param {string} relativeTargetBasePath Relative target base path
      * @param {string} relativeTargetPath Relative target path
      * @param {Property} property Property
@@ -76,6 +81,7 @@ export class TemplateGenerator
      * @return void
      */
     static generateValueObject(
+        generateCommandState: GenerateCommandState,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         property: Property,
@@ -90,6 +96,7 @@ export class TemplateGenerator
         if (!fs.existsSync(originFilePath)) return;
 
         FileManager.manageFileTemplate(
+            generateCommandState,
             originFilePath,
             '__module_name__-__property_name__.ts',
             path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),

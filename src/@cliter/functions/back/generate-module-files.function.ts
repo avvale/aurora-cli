@@ -16,6 +16,7 @@ export const generateModuleFiles = async (generateCommandState: GenerateCommandS
 
     // create module files
     await TemplateGenerator.generateStaticContents(
+        generateCommandState,
         TemplateElement.BACK_MODULE,
         path.join('src', cliterConfig.applicationsContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
@@ -23,6 +24,7 @@ export const generateModuleFiles = async (generateCommandState: GenerateCommandS
 
     // create value objects in module folder
     await TemplateGenerator.generateValueObjects(
+        generateCommandState,
         path.join('src', cliterConfig.applicationsContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         generateCommandState.schema.properties.valueObjects,

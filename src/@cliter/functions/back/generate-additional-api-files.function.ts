@@ -12,6 +12,7 @@ export const generateAdditionalApiFiles = async (generateCommandState: GenerateC
 
         // create module files
         TemplateGenerator.generateStaticContents(
+            generateCommandState,
             TemplateElement.BACK_ADDITIONAL_API,
             path.join('src', cliterConfig.apiContainer), // relativeTargetBasePath,
             generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(), // relativeTargetPath,

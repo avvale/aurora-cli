@@ -5,7 +5,11 @@ import { GenerateCommandState, TemplateElement } from '../../types';
 
 export const generateTestingFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    await TemplateGenerator.generateStaticContents(TemplateElement.BACK_TEST, path.join('test'), '');
+    await TemplateGenerator.generateStaticContents(
+        TemplateElement.BACK_TEST,
+        path.join('test'),
+        '',
+    );
 
     const codeWriter = new CodeWriter(
         path.join('src'),
