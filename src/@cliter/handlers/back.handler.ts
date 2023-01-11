@@ -12,6 +12,7 @@ import { TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { generateJsonLockFile } from '../functions/common';
 import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateModuleFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
+import { GenerateCommandState } from '../types/commands';
 
 export class BackHandler
 {
@@ -31,19 +32,19 @@ export class BackHandler
         await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(BackHandler.stateService.appName), '.');
     }
 
-    static async generateModule(): Promise<void>
+    static async generateModule(generateCommandState: GenerateCommandState): Promise<void>
     {
         // generate module files
-        await generateModuleFiles();
+        await generateModuleFiles(generateCommandState);
 
         // generate pivot tables
-        await generatePivotTables();
+        await generatePivotTables(generateCommandState);
 
         // generate i18n module files
-        await generateI18nModuleFiles();
+        await generateI18nModuleFiles(generateCommandState);
 
         // generate @api files
-        await generateApiFiles();
+        await generateApiFiles(generateCommandState);
 
         // generate additional api filles
         await generateAdditionalApiFiles();

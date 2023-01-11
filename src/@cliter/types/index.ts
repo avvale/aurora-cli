@@ -1,3 +1,4 @@
+export * from './commands';
 export { LiteralObject } from './literal-object';
 export { LockFile } from './lock-file';
 export { ModuleDefinitionSchema } from './module-definition-schema';

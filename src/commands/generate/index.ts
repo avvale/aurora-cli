@@ -102,7 +102,24 @@ export default class Generate extends Command
             stateService.flags.tests    = true; // enable by default create test e2e files
 
             // generate module files
-            BackHandler.generateModule();
+            BackHandler.generateModule({
+                command: this,
+                flags  : {
+                    ...flags,
+                    tests: true,
+                },
+                schema: {
+                    boundedContextName,
+                    moduleName,
+                    moduleNames,
+                    aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
+                    hasOAuth,
+                    hasTenant,
+                    hasAuditing   : false,
+                    properties,
+                    additionalApis: new AdditionalApis(),
+                },
+            });
 
             if (!flags.noGraphQLTypes)
             {

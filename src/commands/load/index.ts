@@ -63,8 +63,8 @@ export default class Load extends Command
             const { boundedContextName, moduleName }: any = await Prompter.promptForLoadModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
             // create yaml file
-            const schema: ModuleDefinitionSchema    = YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
-            const currentLockFiles: LockFile[]      = this.loadJsonLockFile(boundedContextName, moduleName);
+            const schema: ModuleDefinitionSchema = YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
+            const currentLockFiles: LockFile[]   = this.loadJsonLockFile(boundedContextName, moduleName);
 
             // set stateService
             stateService.command   = this;
@@ -81,7 +81,12 @@ export default class Load extends Command
             }
             else
             {
-                await BackHandler.generateModule();
+                await BackHandler.generateModule({
+                    command  : this,
+                    flags,
+                    lockFiles: currentLockFiles,
+                    schema,
+                });
             }
 
             await this.reviewOverwrites(stateService);
