@@ -41,12 +41,14 @@ export default class New extends Command
         {
             case flags.package:
                 stateService.packageName = args.name;
-                await Operations.generatePackage();
+                // TODO: generate package
+                // await Operations.generatePackage();
                 break;
 
             case flags.dashboard:
                 stateService.dashboardName = args.name;
-                await Operations.generateDashboard();
+                // TODO: generate dashboard
+                // await Operations.generateDashboard();
                 break;
 
             default:

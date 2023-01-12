@@ -8,7 +8,8 @@ import { Operations, TemplateElement, Prompter, ModuleDefinitionSchema, FileMana
 import { Command, Flags } from '@oclif/core';
 import { generateGraphqlTypes } from '../../@cliter/functions/back';
 import { FrontHandler } from '../../@cliter/handlers/front.handler';
-import { loadJsonLockFile } from '../../@cliter/functions/common';
+import { loadJsonLockFile, reviewOverwrites } from '../../@cliter/functions/common';
+import { GlobalState } from '../../@cliter/store';
 
 export default class Load extends Command
 {
@@ -87,7 +88,7 @@ export default class Load extends Command
                 await BackHandler.generateModule(generateCommandState);
             }
 
-            await this.reviewOverwrites(generateCommandState);
+            await reviewOverwrites(generateCommandState);
         }
 
         /* if (args.elementType === TemplateElement.BACK_BOUNDED_CONTEXT)
@@ -118,83 +119,5 @@ export default class Load extends Command
             // generate graphql files
             await this.reviewOverwrites(stateService);
         } */
-    }
-
-    private async reviewOverwrites(generateCommandState: GenerateCommandState)
-    {
-        if (!generateCommandState.flags.noGraphQLTypes)
-        {
-            // generate graphql files
-            await generateGraphqlTypes(generateCommandState);
-        }
-
-        if (stateService.originFiles.length > 0)
-        {
-            generateCommandState.command.log(`
-********************************************
-***              ATTENTION!              ***
-********************************************`);
-            generateCommandState.command.log('%s %s %s There are files that have not been overwritten because they were modified, the following origin files have been created.', logSymbols.warning, chalk.yellow.bold('WARNING'), emoji.get('small_red_triangle'));
-
-            for (const originFile of stateService.originFiles)
-            {
-                generateCommandState.command.log(`%s ${originFile}`, emoji.get('question'));
-            }
-
-            let deleteOriginFiles = true;
-            let fileToManage: string | undefined = '';
-            let actionResponse = '';
-
-            // request if you want compare files
-            if ((await Prompter.promptManageOriginFiles()).hasCompareOriginFile)
-            {
-                // list all origin files, and select file to manage
-                fileToManage = (await Prompter.promptSelectOriginFileToManage(stateService.originFiles)).fileToManage as string;
-                shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
-
-                while (actionResponse !== cliterConfig.compareActions.finish)
-                {
-                    if (stateService.originFiles.length > 0)
-                    {
-                        actionResponse = (await Prompter.promptSelectManagementAction()).compareAction as string;
-
-                        switch (actionResponse)
-                        {
-                            case cliterConfig.compareActions.deleteOrigin:
-                                fs.unlinkSync(fileToManage as string);                     // delete origin file and reference in array, view state.service.ts file
-                                fileToManage = _.head([...stateService.originFiles]);   // get next file
-                                if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
-                                break;
-
-                            case cliterConfig.compareActions.return:
-                                fileToManage = (await Prompter.promptSelectOriginFileToManage(stateService.originFiles)).fileToManage as string;
-                                shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
-                                break;
-
-                            case cliterConfig.compareActions.ignore:
-                                if (!fileToManage) break;
-                                const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
-                                fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : (fileToManage.endsWith('.origin.html') ? '<!-- ignored file -->\r\n' : '// ignored file\r\n')) + customFile, 'utf8');
-                                fs.unlinkSync(fileToManage as string); // delete origin file and reference in array, view state.service.ts file
-                                fileToManage = _.head([...stateService.originFiles]);   // get next file
-                                if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        generateCommandState.command.log('[INFO] All files have been reviewed');
-                        deleteOriginFiles = false;
-                        break;
-                    }
-                }
-            }
-
-            if (deleteOriginFiles)
-            {
-                FileManager.deleteOriginFiles(process.cwd());
-                generateCommandState.command.log(chalk.redBright.bold('[INFO] Origin files deleted!'));
-            }
-        }
     }
 }
