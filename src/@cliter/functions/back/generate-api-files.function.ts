@@ -19,10 +19,13 @@ export const generateApiFiles = async (generateCommandState: GenerateCommandStat
         path.join('src', cliterConfig.apiContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         {
-            force       : generateCommandState.flags.force,
-            verbose     : generateCommandState.flags.verbose,
-            excludeFiles: generateCommandState.schema.excluded,
-            templateData: { ...generateCommandState },
+            boundedContextName: generateCommandState.schema.boundedContextName,
+            moduleName        : generateCommandState.schema.moduleName,
+            moduleNames       : generateCommandState.schema.moduleNames,
+            force             : generateCommandState.flags.force,
+            verbose           : generateCommandState.flags.verbose,
+            excludeFiles      : generateCommandState.schema.excluded,
+            templateData      : { ...generateCommandState },
         },
     );
 };

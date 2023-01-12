@@ -14,10 +14,13 @@ export const generateAdditionalApiFiles = async (generateCommandState: GenerateC
             path.join('src', cliterConfig.apiContainer), // relativeTargetBasePath,
             generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(), // relativeTargetPath,
             {
-                force       : generateCommandState.flags.force,
-                verbose     : generateCommandState.flags.verbose,
-                excludeFiles: generateCommandState.schema.excluded,
-                templateData: {
+                boundedContextName: generateCommandState.schema.boundedContextName,
+                moduleName        : generateCommandState.schema.moduleName,
+                moduleNames       : generateCommandState.schema.moduleNames,
+                force             : generateCommandState.flags.force,
+                verbose           : generateCommandState.flags.verbose,
+                excludeFiles      : generateCommandState.schema.excluded,
+                templateData      : {
                     ...generateCommandState,
                     currentAdditionalApi: additionalApi,
                 },

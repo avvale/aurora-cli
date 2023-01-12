@@ -17,6 +17,9 @@ export class TemplateGenerator
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         {
+            boundedContextName = '',
+            moduleName = '',
+            moduleNames = '',
             force = false,
             verbose = false,
             excludeFiles = [],
@@ -24,6 +27,9 @@ export class TemplateGenerator
             useTemplateEngine = true,
             templateElementPath,
         }: {
+            boundedContextName?: string;
+            moduleName?: string;
+            moduleNames?: string;
             force?: boolean;
             verbose?: boolean;
             excludeFiles?: string[];
@@ -39,6 +45,9 @@ export class TemplateGenerator
             relativeTargetBasePath,
             relativeTargetPath,
             {
+                boundedContextName,
+                moduleName,
+                moduleNames,
                 force,
                 verbose,
                 excludeFiles,
@@ -116,11 +125,14 @@ export class TemplateGenerator
             '__module_name__-__property_name__.ts',
             path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),
             {
-                force           : generateCommandState.flags.force,
-                verbose         : generateCommandState.flags.verbose,
-                templateData    : { ...generateCommandState },
-                moduleNameSuffix: property.isI18n ? 'i18n' : '',
-                currentProperty : property,
+                force             : generateCommandState.flags.force,
+                verbose           : generateCommandState.flags.verbose,
+                templateData      : { ...generateCommandState },
+                moduleNameSuffix  : property.isI18n ? 'i18n' : '',
+                currentProperty   : property,
+                boundedContextName: generateCommandState.schema.boundedContextName,
+                moduleName        : generateCommandState.schema.moduleName,
+                moduleNames       : generateCommandState.schema.moduleNames,
             },
         );
     }

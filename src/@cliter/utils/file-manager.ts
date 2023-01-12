@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // container
 import 'reflect-metadata';
 import { container } from 'tsyringe';
@@ -166,6 +167,9 @@ export class FileManager
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         {
+            boundedContextName = '',
+            moduleName = '',
+            moduleNames = '',
             force = false,
             verbose = false,
             excludeFiles = [],
@@ -173,6 +177,9 @@ export class FileManager
             currentProperty, // property to render value object
             useTemplateEngine = true,
         }: {
+            boundedContextName?: string;
+            moduleName?: string;
+            moduleNames?: string;
             force?: boolean;
             verbose?: boolean;
             excludeFiles?: string[];
@@ -200,7 +207,7 @@ export class FileManager
             {
                 // avoid overwriting some files that cannot be overwritten, if file exist
                 if (
-                    fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))) &&
+                    fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.replaceFilename(file))) &&
                     force &&
                     cliterConfig.avoidOverwritingFilesIfExist.includes(
                         path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file).split(path.sep)),
@@ -210,9 +217,9 @@ export class FileManager
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master,
                 // when we have not yet created any bounded context or module
-                if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))))
+                if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.replaceFilename(file))))
                 {
-                    command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+                    command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, FileManager.replaceFilename(file))} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
                     return;
                 }
 
@@ -223,6 +230,9 @@ export class FileManager
                     file,
                     path.join(relativeTargetBasePath, relativeTargetPath),
                     {
+                        boundedContextName,
+                        moduleName,
+                        moduleNames,
                         currentProperty,
                         useTemplateEngine,
                     },
@@ -230,7 +240,7 @@ export class FileManager
             }
             else if (stats.isDirectory())
             {
-                const mappedDirectory = FileManager.renderFilename(file);
+                const mappedDirectory = FileManager.replaceFilename(file);
 
                 if (fs.existsSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, mappedDirectory)))
                 {
@@ -281,6 +291,9 @@ export class FileManager
             verbose = false,
             templateData = {},
             targetBasePath = process.cwd(),
+            boundedContextName = '',
+            moduleName = '',
+            moduleNames = '',
             boundedContextPrefix = '',
             boundedContextSuffix = '',
             moduleNamePrefix = '',
@@ -292,6 +305,9 @@ export class FileManager
             verbose?: boolean;
             templateData?: any;
             targetBasePath?: string;
+            boundedContextName?: string;
+            moduleName?: string;
+            moduleNames?: string;
             boundedContextPrefix?: string;
             boundedContextSuffix?: string;
             moduleNamePrefix?: string;
@@ -302,9 +318,12 @@ export class FileManager
     ): Promise<void>
     {
         // render filename according to bounded context name and module name
-        const mappedFile = FileManager.renderFilename(
+        const mappedFile = FileManager.replaceFilename(
             file,
             {
+                boundedContextName,
+                moduleName,
+                moduleNames,
                 boundedContextPrefix,
                 boundedContextSuffix,
                 moduleNamePrefix,
@@ -392,11 +411,34 @@ export class FileManager
                 else
                 {
                     // the file has been modified and we create under .origin the file that would be created
-                    fs.writeFileSync(writePath.replace(/\.(?=[^.]*$)/, '.origin.'), contents, 'utf8');
+                    fs.writeFileSync(
+                        writePath.replace(/\.(?=[^.]*$)/, '.origin.'),
+                        contents,
+                        'utf8',
+                    );
 
                     const originFileName = mappedFile.replace(/\.(?=[^.]*$)/, '.origin.');
 
-                    FileManager.stateService.originFiles.push(path.join(relativeTargetPath, originFileName));
+                    // save origin files in global state to be checked after in reviewOverwrites method
+                    if (GlobalState.hasValue('originFiles'))
+                    {
+                        GlobalState.getValue('originFiles')
+                            .push(
+                                path.join(
+                                    relativeTargetPath,
+                                    originFileName,
+                                ),
+                            );
+                    }
+                    else
+                    {
+                        GlobalState.setValue('originFiles', [
+                            path.join(
+                                relativeTargetPath,
+                                originFileName,
+                            ),
+                        ]);
+                    }
 
                     command.log(`%s ${originFileName}`, chalk.redBright.bold('[ORIGIN FILE CREATED]'));
                 }
