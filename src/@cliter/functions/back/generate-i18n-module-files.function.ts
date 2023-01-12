@@ -11,9 +11,16 @@ export const generateI18nModuleFiles = async (generateCommandState: GenerateComm
     if (generateCommandState.schema.properties.hasI18n)
     {
         await TemplateGenerator.generateStaticContents(
+            generateCommandState.command,
             TemplateElement.BACK_I18N_MODULE,
             path.join('src', cliterConfig.applicationsContainer),
             generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+            {
+                force       : generateCommandState.flags.force,
+                verbose     : generateCommandState.flags.verbose,
+                excludeFiles: generateCommandState.schema.excluded,
+                templateData: { ...generateCommandState },
+            },
         );
     }
 };

@@ -11,10 +11,17 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
         if (property.pivotPath === `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`)
         {
             FileManager.generateContents(
+                generateCommandState.command,
                 path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_PIVOT.split('/')),
                 path.join('src', cliterConfig.applicationsContainer), // relativeTargetBasePath
                 generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(), // relativeTargetPath,
-                { currentProperty: property },
+                {
+                    force          : generateCommandState.flags.force,
+                    verbose        : generateCommandState.flags.verbose,
+                    excludeFiles   : generateCommandState.schema.excluded,
+                    templateData   : { ...generateCommandState },
+                    currentProperty: property,
+                },
             );
         }
     }

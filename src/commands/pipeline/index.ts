@@ -27,6 +27,12 @@ export default class Pipeline extends Command
 
         const { from, to, service }: any = await Prompter.promptAddPipeline(flags.dashboard);
 
-        CiCdHandler.generatePipeline(flags.dashboard ? 'front' : 'back', from, to, service);
+        CiCdHandler.generatePipeline({
+            command: this,
+            flags,
+            from,
+            to,
+            service,
+        });
     }
 }

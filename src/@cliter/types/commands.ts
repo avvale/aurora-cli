@@ -19,3 +19,10 @@ export interface NewApplicationCommandState extends CommandState
 {
     appName: string;
 }
+
+export interface GeneratePipelineCommandState extends CommandState
+{
+    from: string;
+    to: string;
+    service: string;
+}

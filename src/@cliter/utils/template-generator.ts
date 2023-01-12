@@ -1,8 +1,9 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import { Command } from '@oclif/core';
 import { GenerateCommandState, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
 import { Property } from './property';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 export class TemplateGenerator
 {
@@ -11,25 +12,39 @@ export class TemplateGenerator
 
     // generate static files from templates folder, with templateElement know that type of element create, bounded_context, module, etc.
     static generateStaticContents(
-        generateCommandState: GenerateCommandState,
+        command: Command,
         templateElement: TemplateElement,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         {
-            templateElementPath,
+            force = false,
+            verbose = false,
+            excludeFiles = [],
+            templateData = {},
             useTemplateEngine = true,
+            templateElementPath,
         }: {
-            templateElementPath?: string;
+            force?: boolean;
+            verbose?: boolean;
+            excludeFiles?: string[];
+            templateData?: any;
             useTemplateEngine?: boolean;
+            templateElementPath?: string;
         } = {},
     ): void
     {
         FileManager.generateContents(
-            generateCommandState,
+            command,
             path.join(TemplateGenerator.templatePath, ...templateElement.split('/'), templateElementPath || ''),
             relativeTargetBasePath,
             relativeTargetPath,
-            { useTemplateEngine },
+            {
+                force,
+                verbose,
+                excludeFiles,
+                templateData,
+                useTemplateEngine,
+            },
         );
     }
 
@@ -96,11 +111,14 @@ export class TemplateGenerator
         if (!fs.existsSync(originFilePath)) return;
 
         FileManager.manageFileTemplate(
-            generateCommandState,
+            generateCommandState.command,
             originFilePath,
             '__module_name__-__property_name__.ts',
             path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),
             {
+                force           : generateCommandState.flags.force,
+                verbose         : generateCommandState.flags.verbose,
+                templateData    : { ...generateCommandState },
                 moduleNameSuffix: property.isI18n ? 'i18n' : '',
                 currentProperty : property,
             },

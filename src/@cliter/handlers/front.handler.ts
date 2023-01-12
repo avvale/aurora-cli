@@ -1,9 +1,8 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import { GenerateCommandState, TemplateElement } from '../types';
-import { TemplateGenerator } from '../utils/template-generator';
-import { generateJsonLockFile } from '../functions/common';
+/* eslint-disable unicorn/no-static-only-class */
 import { addReferences, generateModuleFiles, generateTranslationFiles } from '../functions/front';
+import { GenerateCommandState } from '../types';
+import { generateJsonLockFile } from '../functions/common';
+import { GlobalState } from '../store';
 
 export class FrontHandler
 {
@@ -18,6 +17,9 @@ export class FrontHandler
         // create references, write imports in ts files
         addReferences(generateCommandState);
 
-        // Operations.createJsonLockFile();
+        generateJsonLockFile(
+            generateCommandState,
+            GlobalState.hasValue('lockFiles') ? GlobalState.getValue('lockFiles') : [],
+        );
     }
 }

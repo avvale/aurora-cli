@@ -61,7 +61,10 @@ export default class New extends Command
         if (!flags.package && !flags.dashboard)
         {
             // generate application .env file
-            await generateApplicationEnvFile(args.name);
+            await generateApplicationEnvFile(
+                this,
+                args.name,
+            );
         }
 
         if (flags.install)

@@ -38,11 +38,11 @@ export default class Install extends Command
 
         if (flags.dashboard)
         {
-            Operations.installFrontPackage(packageName);
+           // Operations.installFrontPackage(packageName);
         }
         else
         {
-            Operations.installBackPackage(packageName);
+           // Operations.installBackPackage(packageName);
         }
     }
 }

@@ -1,5 +1,6 @@
+/* eslint-disable unicorn/no-array-push-push */
 import { Command } from '@oclif/core';
-import { SqlRelationship, SqlType } from '../types';
+import { GenerateCommandState, SqlRelationship, SqlType } from '../types';
 import { Operations } from './operations';
 import { Property } from './property';
 import { cliterConfig } from '../config/cliter.config';
@@ -131,7 +132,7 @@ export const Prompter =
         };
     },
 
-    async promptForGenerateAggregate()
+    async promptForGenerateAggregate(): Promise<{ hasValueObject: boolean }>
     {
         const questions = [];
 
@@ -254,10 +255,10 @@ export const Prompter =
         };
     },
 
-    async promptDefineAggregateProperty(command: Command, boundedContextName: string, moduleName: string, moduleNames: string): Promise<Property>
+    async promptDefineAggregateProperty(generateCommandState: GenerateCommandState): Promise<Property>
     {
-        const questions     = [];
-        let name    = '';
+        const questions = [];
+        let name        = '';
 
         questions.push({
             name    : 'name',
@@ -348,7 +349,7 @@ export const Prompter =
 
         questions.push({
             name   : 'hasPivotTable',
-            message: () => `You want to create the pivot table of your many to many relationship with name: ${boundedContextName.toPascalCase()}${moduleNames.toPascalCase()}${name.toPascalCase()}?`,
+            message: () => `You want to create the pivot table of your many to many relationship with name: ${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}${name.toPascalCase()}?`,
             type   : 'confirm',
             when   : (answers: any) =>
             {
@@ -376,17 +377,17 @@ export const Prompter =
                 // set pivotAggregateName value
                 if (answers.hasPivotTable)
                 {
-                    answers.pivotAggregateName  = `${boundedContextName.toPascalCase()}${moduleNames.toPascalCase()}${name.toPascalCase()}`;
-                    answers.pivotPath           = `${boundedContextName}/${moduleName}`;
-                    answers.pivotFileName       = `${moduleNames.toKebabCase()}-${name.toKebabCase()}`;
+                    answers.pivotAggregateName  = `${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}${name.toPascalCase()}`;
+                    answers.pivotPath           = `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`;
+                    answers.pivotFileName       = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
                 if (!answers.hasPivotTable && answers.relationship === SqlRelationship.MANY_TO_MANY)
                 {
-                    const relationshipModulePath = Operations.parseFlagOfBoundedContextAndModule(command, answers.relationshipModulePath);
-                    answers.pivotAggregateName   = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${moduleNames.toPascalCase()}`;
+                    const relationshipModulePath = Operations.parseFlagOfBoundedContextAndModule(generateCommandState.command, answers.relationshipModulePath);
+                    answers.pivotAggregateName   = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
                     answers.pivotPath            = answers.relationshipModulePath;
-                    answers.pivotFileName        = `${name.toKebabCase()}-${moduleNames.toKebabCase()}`;
+                    answers.pivotFileName        = `${name.toKebabCase()}-${generateCommandState.schema.moduleNames.toKebabCase()}`;
                 }
 
                 if (answers.relationship) return false;

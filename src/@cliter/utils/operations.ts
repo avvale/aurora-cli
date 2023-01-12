@@ -17,7 +17,7 @@ export class Operations
 {
     public static readonly stateService = container.resolve(StateService);
 
-    static async generatePackage(): Promise<void>
+    /*    static async generatePackage(): Promise<void>
     {
         if (!Operations.stateService.packageName) throw new Error('To create package is required package name');
 
@@ -29,8 +29,9 @@ export class Operations
             path.join(Operations.stateService.packageName),
             '.',
         );
-    }
+    }*/
 
+    /*
     static async generateDashboard(): Promise<void>
     {
         if (!Operations.stateService.dashboardName) throw new Error('To create dashboard is required dashboard name');
@@ -44,8 +45,9 @@ export class Operations
             '.',
             { useTemplateEngine: false },
         );
-    }
+    }*/
 
+    /*
     static async installBackPackage(packageName: string): Promise<void>
     {
         // create pipeline files
@@ -57,8 +59,9 @@ export class Operations
                 templateElementPath: path.join(packageName.toKebabCase()),
             },
         );
-    }
+    }*/
 
+    /*
     static async installFrontPackage(packageName: string): Promise<void>
     {
         // create pipeline files
@@ -70,7 +73,7 @@ export class Operations
                 templateElementPath: path.join(packageName.toKebabCase()),
             },
         );
-    }
+    }*/
 
     static parseFlagOfBoundedContextAndModule(command: Command, module: string): { boundedContextName: string; moduleName: string }
     {
@@ -81,20 +84,5 @@ export class Operations
             boundedContextName: boundedContextSection[0],
             moduleName        : boundedContextSection[1],
         };
-    }
-
-    // TODO, función duplicada en el back handler
-    static createJsonLockFile(): void
-    {
-        const jsonPath = path.join(process.cwd(), 'cliter', Operations.stateService.schema.boundedContextName.toKebabCase());
-
-        if (!fs.existsSync(jsonPath)) fs.mkdirSync(jsonPath, { recursive: true });
-
-        const jsonLockFile = {
-            version: cliterConfig.lockJsonVersion,
-            files  : Operations.stateService.newLockFiles,
-        };
-
-        fs.writeFileSync(path.join(jsonPath, `${Operations.stateService.schema.moduleName}-lock.json`), JSON.stringify(jsonLockFile, null, 4), 'utf8');
     }
 }

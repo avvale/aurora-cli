@@ -5,17 +5,23 @@ import { GenerateCommandState, TemplateElement } from '../../types';
 
 export const generateAdditionalApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    for (const additionalApi of TemplateGenerator.stateService.schema.additionalApis)
+    for (const additionalApi of generateCommandState.schema.additionalApis)
     {
-        // set additional api to create, to be available in template
-        TemplateGenerator.stateService.currentAdditionalApi = additionalApi;
-
         // create module files
         TemplateGenerator.generateStaticContents(
-            generateCommandState,
+            generateCommandState.command,
             TemplateElement.BACK_ADDITIONAL_API,
             path.join('src', cliterConfig.apiContainer), // relativeTargetBasePath,
             generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(), // relativeTargetPath,
+            {
+                force       : generateCommandState.flags.force,
+                verbose     : generateCommandState.flags.verbose,
+                excludeFiles: generateCommandState.schema.excluded,
+                templateData: {
+                    ...generateCommandState,
+                    currentAdditionalApi: additionalApi,
+                },
+            },
         );
     }
 };

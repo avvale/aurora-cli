@@ -65,25 +65,10 @@ export default class Generate extends Command
                 nullable  : false,
             }));
 
-            // add properties defined by user
-            while ((await Prompter.promptForGenerateAggregate()).hasValueObject)
-            {
-                properties.add(await Prompter.promptDefineAggregateProperty(this, boundedContextName, moduleName, moduleNames));
-                Prompter.printValueObjectsTable(this, properties);
-            }
-
-            // add time stamp properties for model
-            properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true }));
-            properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true }));
-            properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true }));
-
-            // generate module files
-            BackHandler.generateModule({
-                command: this,
-                flags  : {
-                    ...flags,
-                    tests: true, // enable by default create test e2e files
-                },
+            // define state for generate command
+            const generateCommandState = {
+                command  : this,
+                flags,
                 lockFiles: [],
                 schema   : {
                     boundedContextName,
@@ -96,27 +81,32 @@ export default class Generate extends Command
                     properties,
                     additionalApis: new AdditionalApis(),
                 },
-            });
+            };
+
+            // add properties defined by user
+            // eslint-disable-next-line no-await-in-loop
+            while ((await Prompter.promptForGenerateAggregate()).hasValueObject)
+            {
+                // eslint-disable-next-line no-await-in-loop
+                properties.add(await Prompter.promptDefineAggregateProperty(generateCommandState));
+                Prompter.printValueObjectsTable(this, properties);
+            }
+
+            // add time stamp properties for model
+            properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true }));
+            properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true }));
+            properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true }));
+
+            // generate module files
+            BackHandler.generateModule(
+                generateCommandState,
+                { hasGenerateTestingFiles: true },
+            );
 
             if (!flags.noGraphQLTypes)
             {
                 // generate graphql files
-                await generateGraphqlTypes({
-                    command  : this,
-                    flags,
-                    lockFiles: [],
-                    schema   : {
-                        boundedContextName,
-                        moduleName,
-                        moduleNames,
-                        aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
-                        hasOAuth,
-                        hasTenant,
-                        hasAuditing   : false,
-                        properties,
-                        additionalApis: new AdditionalApis(),
-                    },
-                });
+                await generateGraphqlTypes(generateCommandState);
             }
         }
     }

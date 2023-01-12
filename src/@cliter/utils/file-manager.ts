@@ -13,7 +13,8 @@ import * as chalk from 'chalk';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as _ from 'lodash';
-import { GenerateCommandState } from '../types';
+import { GlobalState } from '../store';
+import { Command } from '@oclif/core';
 
 export class FileManager
 {
@@ -97,7 +98,7 @@ export class FileManager
         const files = fs.readdirSync(currentPath);
 
         // loop each file/folder
-        files.forEach(async file =>
+        for (const file of files)
         {
             const originFilePath = path.join(currentPath, file);
 
@@ -116,15 +117,13 @@ export class FileManager
                 // copy files/folder inside current folder recursively
                 FileManager.deleteOriginFiles(path.join(currentPath, file));
             }
-        });
+        }
     }
 
     /**
      * Render filename and folder name
-     * @param name
-     * @param prefix
-     * @param suffix
-     * @return {string}
+     * @param name name of file or folder
+     * @return {string} string with replaced keys
      */
     static renderFilename(
         name: string,
@@ -155,21 +154,29 @@ export class FileManager
 
     /**
      * Render all files and folders from template folder recursively.
-     * @param {GenerateCommandState} generateCommandState - state of generate command
+     * @param {Command} command - command
      * @param {string} originPath - path to template folder
      * @param {string} relativeTargetBasePath - relative path to target folder
      * @param {string} relativeTargetPath - relative path to target folder
      * @return {void}
      */
     static generateContents(
-        generateCommandState: GenerateCommandState,
+        command: Command,
         originPath: string,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         {
-            currentProperty,
+            force = false,
+            verbose = false,
+            excludeFiles = [],
+            templateData = {},
+            currentProperty, // property to render value object
             useTemplateEngine = true,
         }: {
+            force?: boolean;
+            verbose?: boolean;
+            excludeFiles?: string[];
+            templateData?: any;
             currentProperty?: Property;
             useTemplateEngine?: boolean;
         } = {},
@@ -182,7 +189,7 @@ export class FileManager
         const filesToCreate = fs.readdirSync(originPath);
 
         // loop each file/folder
-        filesToCreate.forEach(async file =>
+        for (const file of filesToCreate)
         {
             const originFilePath = path.join(originPath, file);
 
@@ -194,23 +201,24 @@ export class FileManager
                 // avoid overwriting some files that cannot be overwritten, if file exist
                 if (
                     fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))) &&
-                    generateCommandState.flags.force &&
+                    force &&
                     cliterConfig.avoidOverwritingFilesIfExist.includes(
                         path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file).split(path.sep)),
                     )
                 ) return;
 
                 // check if file to create is excluded in schema.
-                // schema may not exist if is a new project from master, when we have not yet created any bounded context or module
-                if (generateCommandState.schema?.excluded?.includes(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))))
+                // schema may not exist if is a new project from master,
+                // when we have not yet created any bounded context or module
+                if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))))
                 {
-                    generateCommandState.command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+                    command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, FileManager.renderFilename(file))} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
                     return;
                 }
 
                 // generate file template
                 FileManager.manageFileTemplate(
-                    generateCommandState,
+                    command,
                     originFilePath,
                     file,
                     path.join(relativeTargetBasePath, relativeTargetPath),
@@ -226,45 +234,52 @@ export class FileManager
 
                 if (fs.existsSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, mappedDirectory)))
                 {
-                    if (generateCommandState.flags.verbose) generateCommandState.command.log(`${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${mappedDirectory} exist`);
+                    if (verbose) command.log(`${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${mappedDirectory} exist`);
                 }
                 else
                 {
                     // create folder in destination folder
                     fs.mkdirSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, mappedDirectory), { recursive: true });
-                    generateCommandState.command.log(`${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${mappedDirectory} created`);
+                    command.log(`${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${mappedDirectory} created`);
                 }
 
                 // copy files/folder inside current folder recursively
-                this.generateContents(
-                    generateCommandState,
+                FileManager.generateContents(
+                    command,
                     path.join(originPath, file),
                     relativeTargetBasePath,
                     path.join(relativeTargetPath, mappedDirectory),
                     {
+                        force,
+                        verbose,
+                        excludeFiles,
+                        templateData,
                         currentProperty,
                         useTemplateEngine,
                     },
                 );
             }
-        });
+        }
     }
 
     /**
      * Create and render file template
-     * @param {GenerateCommandState} generateCommandState - state of generate command
-     * @param originFilePath absolute path to template file
-     * @param file file name of template without get target name
-     * @param relativeTargetPath relative path to folder where save file
-     * @param targetBasePath absolute path to project
+     * @param {Command} command Command
+     * @param originFilePath Absolute path to template file
+     * @param file File name of template without get target name
+     * @param relativeTargetPath Relative path to folder where save file
+     * @param targetBasePath Absolute path to project
      * @returns void
      */
     static async manageFileTemplate(
-        generateCommandState: GenerateCommandState,
+        command: Command,
         originFilePath: string,
         file: string,
         relativeTargetPath: string,
         {
+            force = false,
+            verbose = false,
+            templateData = {},
             targetBasePath = process.cwd(),
             boundedContextPrefix = '',
             boundedContextSuffix = '',
@@ -273,6 +288,9 @@ export class FileManager
             currentProperty,
             useTemplateEngine = true,
         }: {
+            force?: boolean;
+            verbose?: boolean;
+            templateData?: any;
             targetBasePath?: string;
             boundedContextPrefix?: string;
             boundedContextSuffix?: string;
@@ -307,14 +325,14 @@ export class FileManager
         // avoid render files like images, this image only will be copied
         if (!cliterConfig.allowedRenderExtensions.includes(path.extname(originFilePath)))
         {
-            if (existFile && !generateCommandState.flags.force)
+            if (existFile && !force)
             {
-                generateCommandState.command.log(`%s ${mappedFile} exist`,  chalk.yellow.bold('[INFO]'));
+                command.log(`%s ${mappedFile} exist`,  chalk.yellow.bold('[INFO]'));
             }
             else
             {
                 fs.copyFileSync(originFilePath, writePath, fs.constants.COPYFILE_FICLONE);
-                generateCommandState.command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE COPIED]'));
+                command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE COPIED]'));
             }
 
             return;
@@ -327,7 +345,7 @@ export class FileManager
         {
             // replace variables with handlebars template engine
             contents = await templateEngine.render(contents, {
-                ...generateCommandState,
+                ...templateData,
                 currentProperty,
                 boundedContextPrefix,
                 boundedContextSuffix,
@@ -337,9 +355,9 @@ export class FileManager
         }
 
         // if exist file is has not force flag, avoid overwrite file
-        if (existFile && !generateCommandState.flags.force)
+        if (existFile && !force)
         {
-            generateCommandState.command.log(`%s ${mappedFile} exist`, chalk.yellow.bold('[INFO]'));
+            command.log(`%s ${mappedFile} exist`, chalk.yellow.bold('[INFO]'));
         }
         else
         {
@@ -362,14 +380,14 @@ export class FileManager
                     currentFileFirstLineHash === cliterConfig.fileTags.ignoredHtmlFile
                 )
                 {
-                    generateCommandState.command.log(`%s ${mappedFile}`, chalk.cyanBright.bold('[IGNORED FILE]'));
+                    command.log(`%s ${mappedFile}`, chalk.cyanBright.bold('[IGNORED FILE]'));
                 }
                 else if (!currentLockfile || currentLockfile.integrity === `sha1:${currentFileHash}`)
                 {
                     // the file has been modified
                     fs.writeFileSync(writePath, contents, 'utf8');
 
-                    if (generateCommandState.flags.verbose) generateCommandState.command.log(`%s ${mappedFile}`, chalk.magenta.bold('[FILE OVERWRITE]'));
+                    if (verbose) command.log(`%s ${mappedFile}`, chalk.magenta.bold('[FILE OVERWRITE]'));
                 }
                 else
                 {
@@ -380,25 +398,35 @@ export class FileManager
 
                     FileManager.stateService.originFiles.push(path.join(relativeTargetPath, originFileName));
 
-                    generateCommandState.command.log(`%s ${originFileName}`, chalk.redBright.bold('[ORIGIN FILE CREATED]'));
+                    command.log(`%s ${originFileName}`, chalk.redBright.bold('[ORIGIN FILE CREATED]'));
                 }
             }
             else
             {
                 fs.writeFileSync(writePath, contents, 'utf8');
 
-                generateCommandState.command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE CREATED]'));
+                command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE CREATED]'));
             }
 
             // adapt separator from current OS
             const posixRelativeFilePath = path.sep === '\\' ? relativeFilePath.replace(/\\/g, '/') : relativeFilePath;
 
-            // add file to lockFiles
-            FileManager.stateService.newLockFiles
-                .push({
+            // save lock files in global state to be stored in a file
+            if (GlobalState.hasValue('lockFiles'))
+            {
+                GlobalState.getValue('lockFiles')
+                    .push({
+                        path     : posixRelativeFilePath,
+                        integrity: `sha1:${Cypher.sha1(contents)}`,
+                    });
+            }
+            else
+            {
+                GlobalState.setValue('lockFiles', [{
                     path     : posixRelativeFilePath,
                     integrity: `sha1:${Cypher.sha1(contents)}`,
-                });
+                }]);
+            }
         }
     }
 }

@@ -16,8 +16,15 @@ export const generateTranslationFiles = async (generateCommandState: GenerateCom
 
     // create module translations
     await TemplateGenerator.generateStaticContents(
+        generateCommandState.command,
         TemplateElement.FRONT_MODULE_TRANSLATIONS,
         path.join('src', cliterConfig.dashboardTranslations),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+        {
+            force       : generateCommandState.flags.force,
+            verbose     : generateCommandState.flags.verbose,
+            excludeFiles: generateCommandState.schema.excluded,
+            templateData: { ...generateCommandState },
+        },
     );
 };

@@ -6,6 +6,7 @@ import { TemplateGenerator } from '../utils/template-generator';
 import { generateJsonLockFile } from '../functions/common';
 import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateModuleFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
 import { GenerateCommandState, NewApplicationCommandState } from '../types/commands';
+import { GlobalState } from '../store';
 
 export class BackHandler
 {
@@ -16,10 +17,26 @@ export class BackHandler
         // create directory for application
         if (!fs.existsSync(newApplicationCommandState.appName)) fs.mkdirSync(newApplicationCommandState.appName, { recursive: true });
 
-        await TemplateGenerator.generateStaticContents(TemplateElement.BACK_APPLICATION, path.join(newApplicationCommandState.appName), '.');
+        await TemplateGenerator.generateStaticContents(
+            newApplicationCommandState.command,
+            TemplateElement.BACK_APPLICATION,
+            path.join(newApplicationCommandState.appName),
+            '.',
+            {
+                verbose: newApplicationCommandState.flags.verbose,
+            },
+        );
     }
 
-    static async generateModule(generateCommandState: GenerateCommandState): Promise<void>
+    static async generateModule(
+        generateCommandState: GenerateCommandState,
+        {
+            hasGenerateTestingFiles = false,
+        }:
+        {
+            hasGenerateTestingFiles?: boolean;
+        } = {},
+    ): Promise<void>
     {
         // generate module files
         await generateModuleFiles(generateCommandState);
@@ -43,14 +60,17 @@ export class BackHandler
         addReferences(generateCommandState);
 
         // flag to generate e2e tests, this test can overwrite custom tests
-        if (generateCommandState.flags.tests) await generateTestingFiles(generateCommandState);
+        if (hasGenerateTestingFiles) await generateTestingFiles(generateCommandState);
 
         // generate postman files
-        await generatePostmanFiles();
+        await generatePostmanFiles(generateCommandState);
 
         // create yaml file
         generateYamlConfigFile(generateCommandState);
 
-        generateJsonLockFile(generateCommandState);
+        generateJsonLockFile(
+            generateCommandState,
+            GlobalState.hasValue('lockFiles') ? GlobalState.getValue('lockFiles') : [],
+        );
     }
 }

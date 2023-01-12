@@ -1,10 +1,12 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { BackHandler } from '../../handlers';
 import { cliterConfig } from '../../config';
-import { GenerateCommandState } from '../../types';
+import { GenerateCommandState, LockFile } from '../../types';
 
-export const generateJsonLockFile = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateJsonLockFile = (
+    generateCommandState: GenerateCommandState,
+    lockFiles: LockFile[] = [],
+): void =>
 {
     const jsonPath = path.join(process.cwd(), 'cliter', generateCommandState.schema.boundedContextName.toKebabCase());
 
@@ -12,7 +14,7 @@ export const generateJsonLockFile = async (generateCommandState: GenerateCommand
 
     const jsonLockFile = {
         version: cliterConfig.lockJsonVersion,
-        files  : BackHandler.stateService.newLockFiles,
+        files  : lockFiles,
     };
 
     fs.writeFileSync(path.join(jsonPath, `${generateCommandState.schema.moduleName}-lock.json`), JSON.stringify(jsonLockFile, null, 4), 'utf8');

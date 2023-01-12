@@ -1,8 +1,13 @@
-// imports
+import { Command } from '@oclif/core';
 import { TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 
-export const generateApplicationEnvFile = async (applicationName: string): Promise<void> =>
+export const generateApplicationEnvFile = async (command: Command, applicationName: string): Promise<void> =>
 {
-    await TemplateGenerator.generateStaticContents(TemplateElement.BACK_ENV, '', applicationName);
+    await TemplateGenerator.generateStaticContents(
+        command,
+        TemplateElement.BACK_ENV,
+        '',
+        applicationName,
+    );
 };

@@ -1,12 +1,6 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// imports
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as yaml from 'js-yaml';
-import { StateService } from '../functions/state.service';
 import { Property } from './property';
 import { ModuleDefinitionSchema } from '../types';
 import { Properties } from './properties';
@@ -15,8 +9,6 @@ import { AdditionalApis } from './additional-apis';
 
 export class YamlManager
 {
-    public static readonly stateService = container.resolve(StateService);
-
     public static loadYamlConfigFile(boundedContextName: string, moduleName: string): ModuleDefinitionSchema
     {
         const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + '.yaml');

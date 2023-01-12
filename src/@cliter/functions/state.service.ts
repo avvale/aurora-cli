@@ -23,7 +23,6 @@ export class StateService
     public currentAdditionalApi?: AdditionalApi;
     public schema!: ModuleDefinitionSchema;
     public lockFiles: LockFile[] = [];
-    public newLockFiles: LockFile[] = [];
     public flags!: LiteralObject;
     public relationship = SqlRelationship;
     public resolverType = ResolverType;

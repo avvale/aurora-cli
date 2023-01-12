@@ -1,21 +1,14 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// node
-import * as path from 'node:path';
 import * as fs from 'node:fs';
 import * as shell from 'node:child_process';
-
-// imports
-import { Command, Flags } from '@oclif/core';
 import * as logSymbols from 'log-symbols';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as _ from 'lodash';
-import { StateService, Operations, TemplateElement, Prompter, ModuleDefinitionSchema, LockFile, FileManager, YamlManager, BackHandler, GenerateCommandState, cliterConfig } from '../../@cliter/index';
+import { Operations, TemplateElement, Prompter, ModuleDefinitionSchema, FileManager, YamlManager, BackHandler, GenerateCommandState, cliterConfig } from '../../@cliter/index';
+import { Command, Flags } from '@oclif/core';
 import { generateGraphqlTypes } from '../../@cliter/functions/back';
 import { FrontHandler } from '../../@cliter/handlers/front.handler';
+import { loadJsonLockFile } from '../../@cliter/functions/common';
 
 export default class Load extends Command
 {
@@ -51,7 +44,6 @@ export default class Load extends Command
     async run(): Promise<void>
     {
         const { args, flags }   = await this.parse(Load);
-        const stateService      = container.resolve(StateService);
 
         if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
         if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
@@ -65,14 +57,8 @@ export default class Load extends Command
 
             // create yaml file
             const schema: ModuleDefinitionSchema = YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
-            const currentLockFiles: LockFile[]   = this.loadJsonLockFile(boundedContextName, moduleName);
 
-            // set stateService
-            stateService.command   = this;
-            stateService.schema    = schema;
-            stateService.lockFiles = currentLockFiles;
-            stateService.flags     = flags;
-
+            // define state like a generate command
             let generateCommandState;
 
             // eslint-disable-next-line unicorn/prefer-ternary
@@ -85,7 +71,7 @@ export default class Load extends Command
                         // avoid generate graphql types in front, it is not necessary
                         noGraphQLTypes: true,
                     },
-                    lockFiles: currentLockFiles,
+                    lockFiles: loadJsonLockFile(boundedContextName, moduleName),
                     schema,
                 };
                 await FrontHandler.generateModule(generateCommandState);
@@ -95,7 +81,7 @@ export default class Load extends Command
                 generateCommandState = {
                     command  : this,
                     flags,
-                    lockFiles: currentLockFiles,
+                    lockFiles: loadJsonLockFile(boundedContextName, moduleName),
                     schema,
                 };
                 await BackHandler.generateModule(generateCommandState);
@@ -210,24 +196,5 @@ export default class Load extends Command
                 generateCommandState.command.log(chalk.redBright.bold('[INFO] Origin files deleted!'));
             }
         }
-    }
-
-    private loadJsonLockFile(boundedContextName: string, moduleName: string): LockFile[]
-    {
-        const jsonPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + '-lock.json');
-
-        if (!fs.existsSync(jsonPath)) return [];
-
-        const lockFiles = (JSON.parse(fs.readFileSync(jsonPath, 'utf8')).files) as LockFile[];
-
-        if (path.sep === '\\')
-        {
-            for (const lockFile of lockFiles)
-            {
-                lockFile.path = lockFile.path.replace(/\//g, '\\');
-            }
-        }
-
-        return lockFiles;
     }
 }

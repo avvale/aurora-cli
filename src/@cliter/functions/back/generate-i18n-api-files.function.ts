@@ -8,9 +8,16 @@ export const generateI18NApiFiles = async (generateCommandState: GenerateCommand
     if (generateCommandState.schema.properties.hasI18n)
     {
         await TemplateGenerator.generateStaticContents(
+            generateCommandState.command,
             TemplateElement.BACK_I18N_API,
             path.join('src', cliterConfig.apiContainer),
             generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+            {
+                force       : generateCommandState.flags.force,
+                verbose     : generateCommandState.flags.verbose,
+                excludeFiles: generateCommandState.schema.excluded,
+                templateData: { ...generateCommandState },
+            },
         );
     }
 };

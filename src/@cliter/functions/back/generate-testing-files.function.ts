@@ -6,9 +6,16 @@ import { GenerateCommandState, TemplateElement } from '../../types';
 export const generateTestingFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     await TemplateGenerator.generateStaticContents(
+        generateCommandState.command,
         TemplateElement.BACK_TEST,
         path.join('test'),
         '',
+        {
+            force       : generateCommandState.flags.force,
+            verbose     : generateCommandState.flags.verbose,
+            excludeFiles: generateCommandState.schema.excluded,
+            templateData: { ...generateCommandState },
+        },
     );
 
     const codeWriter = new CodeWriter(

@@ -14,8 +14,15 @@ export const generateApiFiles = async (generateCommandState: GenerateCommandStat
     );
 
     await TemplateGenerator.generateStaticContents(
+        generateCommandState.command,
         TemplateElement.BACK_API,
         path.join('src', cliterConfig.apiContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+        {
+            force       : generateCommandState.flags.force,
+            verbose     : generateCommandState.flags.verbose,
+            excludeFiles: generateCommandState.schema.excluded,
+            templateData: { ...generateCommandState },
+        },
     );
 };

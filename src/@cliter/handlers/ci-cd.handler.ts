@@ -1,19 +1,25 @@
 /* eslint-disable unicorn/no-static-only-class */
-import * as path from 'node:path';
-import { TemplateElement } from '../types';
+import { GeneratePipelineCommandState, TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
+import * as path from 'node:path';
 
 export class CiCdHandler
 {
-    static async generatePipeline(app: 'front' | 'back', from: string, to: string, service: string): Promise<void>
+    static async generatePipeline(generatePipelineCommandState: GeneratePipelineCommandState): Promise<void>
     {
         // create pipeline files
         await TemplateGenerator.generateStaticContents(
+            generatePipelineCommandState.command,
             TemplateElement.CI_CD,
             '.',
             '.',
             {
-                templateElementPath: path.join(app, from.toKebabCase(), to.toKebabCase(), service.toKebabCase()),
+                templateElementPath: path.join(
+                    generatePipelineCommandState.flags.dashboard ? 'front' : 'back',
+                    generatePipelineCommandState.from.toKebabCase(),
+                    generatePipelineCommandState.to.toKebabCase(),
+                    generatePipelineCommandState.service.toKebabCase(),
+                ),
             },
         );
     }

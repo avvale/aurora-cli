@@ -1,1 +1,1 @@
-//  export * from './bounded-context.state';
+export { GlobalState } from './global-state';
