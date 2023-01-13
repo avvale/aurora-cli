@@ -115,14 +115,14 @@ export enum SqlType
 export enum TemplateElement
 {
     BACK_ADDITIONAL_API       = 'back/additional-api',
-    BACK_API                  = 'back/api',
+    BACK_API                  = 'back/@api',
+    BACK_APPS                 = 'back/@apps',
     BACK_APPLICATION          = 'back/application',
     BACK_BOUNDED_CONTEXT      = 'back/bounded-context',
     BACK_ENV                  = 'back/env',
     BACK_I18N_API             = 'back/i18n-api',
     BACK_I18N_MODULE          = 'back/i18n-module',
     BACK_PIVOT                = 'back/pivot',
-    BACK_MODULE               = 'back/module',
     BACK_PACKAGE              = 'back/package',
     BACK_TEST                 = 'back/test',
     BACK_PACKAGES             = 'packages/back',

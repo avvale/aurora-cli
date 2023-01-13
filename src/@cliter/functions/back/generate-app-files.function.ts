@@ -14,7 +14,7 @@ export const generateAppFiles = async (generateCommandState: GenerateCommandStat
     // create module files
     await TemplateGenerator.generateStaticContents(
         generateCommandState.command,
-        TemplateElement.BACK_MODULE,
+        TemplateElement.BACK_APPS,
         path.join('src', cliterConfig.applicationsContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         {
