@@ -142,18 +142,30 @@ export class Property
 
     get hasColumnDecorator(): boolean
     {
-        return this.relationship !== SqlRelationship.ONE_TO_MANY && this.relationship !== SqlRelationship.MANY_TO_MANY && !(this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField);
+        return this.relationship !== SqlRelationship.ONE_TO_MANY &&
+            this.relationship !== SqlRelationship.MANY_TO_MANY &&
+            !(
+                this.relationship === SqlRelationship.ONE_TO_ONE &&
+                !this.relationshipField
+            );
     }
 
     get hasHasOneDecorator(): boolean
     {
-        return this.relationship === SqlRelationship.ONE_TO_ONE && !this.relationshipField;
+        return this.relationship === SqlRelationship.ONE_TO_ONE &&
+            !this.relationshipField;
     }
 
     get hasBelongsToDecorator(): boolean
     {
-        return  (this.relationship === SqlRelationship.MANY_TO_ONE && Boolean(this.relationshipField)) ||
-                (this.relationship === SqlRelationship.ONE_TO_ONE && Boolean(this.relationshipField));
+        return  (
+            this.relationship === SqlRelationship.MANY_TO_ONE &&
+            Boolean(this.relationshipField)
+        ) ||
+        (
+            this.relationship === SqlRelationship.ONE_TO_ONE &&
+            Boolean(this.relationshipField)
+        );
     }
 
     get hasHasManyDecorator(): boolean
