@@ -5,7 +5,7 @@ export const generateGraphqlTypes = (generateCommandState: GenerateCommandState)
 {
     const graphqlTypes = shell.spawn('npm', ['run', 'graphql:types']);
 
-    graphqlTypes.stdout.on('data', data => generateCommandState.command.log('GraphQL entities generated'););
+    graphqlTypes.stdout.on('data', data => generateCommandState.command.log('GraphQL entities generated'));
 
     graphqlTypes.stderr.on('data', data => console.error(`${data}`));
 
