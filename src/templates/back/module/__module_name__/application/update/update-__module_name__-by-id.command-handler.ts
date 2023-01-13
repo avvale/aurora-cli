@@ -19,7 +19,7 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler implem
         await this.update{{ toPascalCase schema.moduleName }}ByIdService.main(
             {
                 {{#each schema.properties.updateCommandHandler}}
-                {{#if (allowProperty ../schema.moduleName this) }}
+                {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#if hasTimezone}}
                 {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, { {{~#unless nullable}}{{#unlessEq name 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}

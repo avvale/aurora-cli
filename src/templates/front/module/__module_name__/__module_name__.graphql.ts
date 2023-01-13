@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const fields = `
     {{#each schema.properties.withoutDeletedAt}}
-    {{#if (allowProperty ../schema.moduleName this) }}
+    {{#if (isAllowProperty ../schema.moduleName this) }}
     {{#unlessEq name 'id'}}
     {{ toCamelCase name }}
     {{/unlessEq}}

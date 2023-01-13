@@ -17,7 +17,7 @@ export class {{ toPascalCase schema.moduleName }}Response
 {
     constructor(
         {{#each schema.properties.response}}
-        {{#if (allowProperty ../schema.moduleName this)}}
+        {{#if (isAllowProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase name }}: {{ getJavascriptType }},
         {{/if}}
         {{/each}}

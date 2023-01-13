@@ -12,7 +12,7 @@ import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toP
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto
 {
 {{#each schema.properties.dtoInputProperties}}
-{{#if (allowProperty ../schema.moduleName this) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship ../relationship.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}

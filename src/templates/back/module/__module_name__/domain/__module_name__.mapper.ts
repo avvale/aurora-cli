@@ -72,7 +72,7 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
     {
         return {{ schema.aggregateName }}.register(
             {{#each schema.properties.mapper}}
-            {{#if (allowProperty ../schema.moduleName this)}}
+            {{#if (isAllowProperty ../schema.moduleName this)}}
             {{#if hasTimezone}}
             new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase name }}, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             {{else}}
@@ -106,7 +106,7 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
 
         return new {{ toPascalCase schema.moduleName }}Response(
             {{#each schema.properties.mapper}}
-            {{#if (allowProperty ../schema.moduleName this)}}
+            {{#if (isAllowProperty ../schema.moduleName this)}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}.value,
             {{/if}}
             {{/each}}

@@ -5,7 +5,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Command
     constructor(
         public readonly payload: {
             {{#each schema.properties.createCommand}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}{{#if nullable}}?{{/if}}: {{ getJavascriptType }};
             {{/if}}
             {{/each}}

@@ -27,7 +27,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
     async main(
         {{ toCamelCase schema.moduleNames }}: {
             {{#each schema.properties.createItemsService}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
@@ -49,7 +49,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
 {{/eq}}
             {{/unless}}
-            {{#and isI18n (allowProperty ../schema.moduleName this)}}
+            {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
             {{/and}}
             {{/each}}

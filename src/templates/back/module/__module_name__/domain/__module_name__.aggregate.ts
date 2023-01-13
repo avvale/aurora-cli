@@ -32,7 +32,7 @@ import { {{ relationshipAggregate }} } from '{{#if relationshipPackageName }}{{ 
 export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each schema.properties.aggregate}}
-    {{#if (allowProperty ../schema.moduleName this)}}
+    {{#if (isAllowProperty ../schema.moduleName this)}}
     {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
     {{/if}}
     {{/each}}
@@ -58,7 +58,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
 
     constructor(
         {{#each schema.properties.aggregate}}
-        {{#if (allowProperty ../schema.moduleName this) }}
+        {{#if (isAllowProperty ../schema.moduleName this) }}
         {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
         {{/if}}
         {{/each}}
@@ -84,7 +84,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         super();
         {{#each schema.properties.aggregate}}
-        {{#if (allowProperty ../schema.moduleName this) }}
+        {{#if (isAllowProperty ../schema.moduleName this) }}
         this.{{ toCamelCase name }} = {{ toCamelCase name }};
         {{/if}}
         {{/each}}
@@ -111,7 +111,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
 
     static register (
         {{#each schema.properties.aggregate}}
-        {{#if (allowProperty ../schema.moduleName this) }}
+        {{#if (isAllowProperty ../schema.moduleName this) }}
         {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
         {{/if}}
         {{/each}}
@@ -137,7 +137,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         return new {{ schema.aggregateName }}(
             {{#each schema.properties.aggregate}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }},
             {{/if}}
             {{/each}}
@@ -168,7 +168,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.apply(
             new Created{{ toPascalCase schema.moduleName }}Event(
                 {{#each schema.properties.aggregate}}
-                {{#if (allowProperty ../schema.moduleName this) }}
+                {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                 {{/if}}
                 {{/each}}
@@ -183,7 +183,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.apply(
             new Updated{{ toPascalCase schema.moduleName }}Event(
                 {{#each schema.properties.aggregate}}
-                {{#if (allowProperty ../schema.moduleName this) }}
+                {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}?.value,
                 {{/if}}
                 {{/each}}
@@ -198,7 +198,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.apply(
             new Deleted{{ toPascalCase schema.moduleName }}Event(
                 {{#each schema.properties.aggregate}}
-                {{#if (allowProperty ../schema.moduleName this) }}
+                {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                 {{/if}}
                 {{/each}}
@@ -211,7 +211,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         return {
             {{#each schema.properties.aggregate}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
             {{/if}}
             {{/each}}
@@ -263,7 +263,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         return {
             {{#each schema.properties.aggregate}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{#if isBinary }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.buffer,
             {{else}}

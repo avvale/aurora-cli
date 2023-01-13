@@ -1,7 +1,7 @@
 
 import * as handlebars from 'handlebars';
 import * as handlebarsHelpers from 'handlebars-helpers';
-import '../handlebars/helpers/allow-property';
+import '../handlebars/helpers/is-allow-property';
 import '../handlebars/helpers/bracket-close';
 import '../handlebars/helpers/bracket-open';
 import '../handlebars/helpers/calculate-form-group-col';

@@ -21,7 +21,7 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdService
     async main(
         payload: {
             {{#each schema.properties.updateService}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
@@ -48,7 +48,7 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdService
 {{/if}}
 {{/eq}}
             {{/unless}}
-            {{#and isI18n (allowProperty ../schema.moduleName this)}}
+            {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
             payload.{{ toCamelCase name }},
             {{/and}}
             {{/each}}

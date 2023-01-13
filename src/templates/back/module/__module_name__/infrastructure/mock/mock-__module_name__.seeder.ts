@@ -38,7 +38,7 @@ export class Mock{{ toPascalCase schema.moduleName }}Seeder extends MockSeeder<{
                     new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
 {{/eq}}
                     {{/unless}}
-                    {{#and isI18n (allowProperty ../schema.moduleName this)}}
+                    {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
                     new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
                     {{/and}}
                     {{/each}}

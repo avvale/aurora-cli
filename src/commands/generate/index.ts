@@ -20,6 +20,15 @@ export default class Generate extends Command
 
     static args = [
         {
+            name       : 'type',
+            required   : true,
+            description: 'Type of element to create, application, package or dashboard.',
+            options    : [
+                'back',
+                'front',
+            ],
+        },
+        {
             name       : 'elementType',
             description: 'Type element to create',
             options    : [

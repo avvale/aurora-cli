@@ -10,7 +10,7 @@ import * as path from 'node:path';
 
 export class BackHandler
 {
-    static async newApplication(newApplicationCommandState: NewApplicationCommandState): Promise<void>
+    static async newBack(newApplicationCommandState: NewApplicationCommandState): Promise<void>
     {
         if (!newApplicationCommandState.appName) throw new Error('To create application is required app name');
 

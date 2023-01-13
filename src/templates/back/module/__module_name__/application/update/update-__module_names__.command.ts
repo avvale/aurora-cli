@@ -6,7 +6,7 @@ export class Update{{ toPascalCase schema.moduleNames }}Command
     constructor(
         public readonly payload: {
             {{#each schema.properties.updateCommand}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}?: {{ getJavascriptType }};
             {{/if}}
             {{/each}}

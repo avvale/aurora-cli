@@ -70,7 +70,7 @@
                 <div class="layout__container">
 
                     {{#each schema.properties.formDetailFields}}
-                    {{#if (allowProperty ../schema.moduleName this) }}
+                    {{#if (isAllowProperty ../schema.moduleName this) }}
                     {{#eq type 'varchar'}}
                     {{> varcharInput schema=../schema property=.}}
 

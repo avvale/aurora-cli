@@ -19,7 +19,7 @@ export class Create{{ toPascalCase schema.moduleName }}CommandHandler implements
         await this.create{{ toPascalCase schema.moduleName }}Service.main(
             {
                 {{#each schema.properties.createCommandHandler}}
-                {{#if (allowProperty ../schema.moduleName this) }}
+                {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#if hasTimezone}}
                 {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, {}, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}

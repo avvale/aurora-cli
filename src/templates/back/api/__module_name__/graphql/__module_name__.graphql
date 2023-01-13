@@ -10,7 +10,7 @@ enum {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.mo
 type {{ schema.aggregateName }}
 {
 {{#each schema.properties.graphqlProperties}}
-{{#if (allowProperty ../schema.moduleName this) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship ../relationship.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
@@ -30,7 +30,7 @@ type {{ schema.aggregateName }}
 {{/eq}}
 {{#eq relationship ../relationship.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type ../sqlType.ID ~}}
+{{#eq type .ID ~}}
     {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
     {{ toCamelCase relationshipField }}: {{ relationshipAggregate }}
 {{else ~}}
@@ -51,7 +51,7 @@ type {{ schema.aggregateName }}
 input {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input
 {
 {{#each schema.properties.graphqlInputProperties}}
-{{#if (allowProperty ../schema.moduleName this)}}
+{{#if (isAllowProperty ../schema.moduleName this)}}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship ../relationship.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
@@ -84,7 +84,7 @@ input {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.m
 input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput
 {
 {{#each schema.properties.graphqlInputProperties}}
-{{#if (allowProperty ../schema.moduleName this)}}
+{{#if (isAllowProperty ../schema.moduleName this)}}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship ../relationship.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
@@ -117,7 +117,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input
 {
 {{#each schema.properties.graphqlInputProperties}}
-{{#if (allowProperty ../schema.moduleName this)}}
+{{#if (isAllowProperty ../schema.moduleName this)}}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship ../relationship.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}

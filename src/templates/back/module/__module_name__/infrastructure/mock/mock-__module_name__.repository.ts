@@ -39,7 +39,7 @@ export class Mock{{ toPascalCase schema.moduleName }}Repository extends MockRepo
 
             this.collectionSource.push({{ schema.aggregateName }}.register(
                 {{#each schema.properties.mock}}
-                {{#if (allowProperty ../schema.moduleName this)}}
+                {{#if (isAllowProperty ../schema.moduleName this)}}
                 new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(itemCollection.{{ toCamelCase name }}),
                 {{/if}}
                 {{/each}}

@@ -6,7 +6,7 @@ export class Upsert{{ toPascalCase schema.moduleName }}Command
     constructor(
         public readonly payload: {
             {{#each schema.properties.upsertCommand}}
-            {{#if (allowProperty ../schema.moduleName this) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ getJavascriptType }};
             {{/if}}
             {{/each}}
