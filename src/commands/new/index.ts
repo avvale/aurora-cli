@@ -14,18 +14,26 @@ export default class New extends Command
 
     static flags =
     {
-        dashboard: Flags.boolean({ char: 'd' }),
-        help     : Flags.help({ char: 'h' }),
-        package  : Flags.boolean({ char: 'p' }),
-        install  : Flags.boolean({ char: 'i' }),
-        verbose  : Flags.boolean({ char: 'v' }),
+        help   : Flags.help({ char: 'h' }),
+        install: Flags.boolean({ char: 'i' }),
+        verbose: Flags.boolean({ char: 'v' }),
     };
 
     static args = [
         {
+            name       : 'type',
+            required   : true,
+            description: 'Type of element to create, application, package or dashboard.',
+            options    : [
+                'application',
+                'dashboard',
+                'package',
+            ],
+        },
+        {
             name       : 'name',
             required   : true,
-            description: 'Type name of element to create, application, package or dashboard.',
+            description: 'name of item to create',
         },
     ];
 
@@ -37,26 +45,26 @@ export default class New extends Command
         stateService.command   = this;
         stateService.flags     = flags;
 
-        switch (true)
+        switch (args.type)
         {
-            case flags.package:
-                stateService.packageName = args.name;
-                // TODO: generate package
-                // await Operations.generatePackage();
-                break;
-
-            case flags.dashboard:
-                stateService.dashboardName = args.name;
-                // TODO: generate dashboard
-                // await Operations.generateDashboard();
-                break;
-
-            default:
+            case 'application':
                 await BackHandler.newApplication({
                     appName: args.name,
                     command: this,
                     flags,
                 });
+                break;
+
+            case 'dashboard':
+                stateService.dashboardName = args.name;
+                // TODO: generate dashboard
+                // await Operations.generateDashboard();
+                break;
+
+            case 'package':
+                stateService.packageName = args.name;
+                // TODO: generate package
+                // await Operations.generatePackage();
                 break;
         }
 

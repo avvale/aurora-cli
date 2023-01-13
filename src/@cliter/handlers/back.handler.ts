@@ -1,12 +1,12 @@
 /* eslint-disable unicorn/no-static-only-class */
-import * as fs from 'node:fs';
-import * as path from 'node:path';
 import { TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { generateJsonLockFile } from '../functions/common';
 import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateModuleFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
 import { GenerateCommandState, NewApplicationCommandState } from '../types/commands';
 import { GlobalState } from '../store';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 export class BackHandler
 {

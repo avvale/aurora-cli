@@ -1,10 +1,7 @@
-// node
-import * as path from 'node:path';
-
-// imports
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
+import * as path from 'node:path';
 
 export const generateTranslationFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {

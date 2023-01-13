@@ -1,6 +1,6 @@
 export class GlobalState
 {
-    private static store: any;
+    private static store: any = {};
 
     static setValue(key: string, value: any): void
     {
