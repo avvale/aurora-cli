@@ -9,12 +9,24 @@ export default class Generate extends Command
 
     static flags =
     {
-        help          : Flags.help({ char: 'h' }),
-        verbose       : Flags.boolean({ char: 'v' }),
-        force         : Flags.boolean({ char: 'f' }),
-        module        : Flags.string({ char: 'm' }),
-        boundedContext: Flags.string({ char: 'b' }),
-        noGraphQLTypes: Flags.boolean({ char: 'g' }),
+        help : Flags.help({ char: 'h' }),
+        force: Flags.boolean({
+            char       : 'f',
+            description: 'Overwrite existing files.',
+        }),
+        name: Flags.string({
+            char       : 'n',
+            required   : true,
+            description: 'Name of element to generate.',
+        }),
+        noGraphQLTypes: Flags.boolean({
+            char       : 'g',
+            description: 'Avoid generating graphql types.',
+        }),
+        verbose: Flags.boolean({
+            char       : 'v',
+            description: 'Reports on screen all the steps followed by the command.',
+        }),
     };
 
     static args = [
@@ -40,8 +52,7 @@ export default class Generate extends Command
     ];
 
     static examples = [
-        '$ aurora generate module -m=my-bounded-context/my-module --force --noGraphQLTypes',
-        '$ aurora generate m -m=my-bounded-context/my-module --force --noGraphQLTypes',
+        '$ aurora generate back module -n=my-bounded-context/my-module',
         '$ aurora --help',
     ];
 
@@ -54,10 +65,8 @@ export default class Generate extends Command
             args.element === ScopeElement.MODULE
         )
         {
-            if (!flags.module) this.error('Module flag is required for generate module command.');
-
-            const moduleFlag: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.module);
-            const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant } = await Prompter.promptForGenerateModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
+            const flagName: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.name);
+            const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant } = await Prompter.promptForGenerateModule(flagName.boundedContextName, flagName.moduleName);
 
             const properties: Properties = new Properties();
             properties.moduleName        = moduleName;

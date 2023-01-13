@@ -9,8 +9,14 @@ export default class New extends Command
     static flags =
     {
         help   : Flags.help({ char: 'h' }),
-        install: Flags.boolean({ char: 'i' }),
-        verbose: Flags.boolean({ char: 'v' }),
+        install: Flags.boolean({
+            char       : 'i',
+            description: 'Install dependencies after create item.',
+        }),
+        verbose: Flags.boolean({
+            char       : 'v',
+            description: 'Reports on screen all the steps followed by the command.',
+        }),
     };
 
     static args = [
@@ -30,6 +36,11 @@ export default class New extends Command
             description: 'Name of item to create',
         },
     ];
+
+    static examples = [
+        '$ aurora new back my-app',
+        '$ aurora --help',
+    ]
 
     public async run(): Promise<void>
     {

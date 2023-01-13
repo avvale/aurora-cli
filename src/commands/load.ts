@@ -10,15 +10,32 @@ export default class Load extends Command
 
     static flags =
     {
-        help              : Flags.help({ char: 'h' }),
-        boundedContext    : Flags.string({ char: 'b' }),
-        dashboard         : Flags.boolean({ char: 'd' }),
-        force             : Flags.boolean({ char: 'f' }),
-        module            : Flags.string({ char: 'm' }),
-        noGraphQLTypes    : Flags.boolean({ char: 'g' }),
-        overwriteInterface: Flags.boolean({ char: 'w' }),
-        tests             : Flags.boolean({ char: 't' }),
-        verbose           : Flags.boolean({ char: 'v' }),
+        help : Flags.help({ char: 'h' }),
+        force: Flags.boolean({
+            char       : 'f',
+            description: 'Overwrite existing files.',
+        }),
+        name: Flags.string({
+            char       : 'n',
+            required   : true,
+            description: 'Name of element to load.',
+        }),
+        noGraphQLTypes: Flags.boolean({
+            char       : 'g',
+            description: 'Avoid generating graphql types.',
+        }),
+        overwriteInterface: Flags.boolean({
+            char       : 'w',
+            description: 'Overwrite front interfaces.',
+        }),
+        tests: Flags.boolean({
+            char       : 't',
+            description: 'Create test e2e files.',
+        }),
+        verbose: Flags.boolean({
+            char       : 'v',
+            description: 'Reports on screen all the steps followed by the command.',
+        }),
     };
 
     static args = [
@@ -43,6 +60,11 @@ export default class Load extends Command
         },
     ];
 
+    static examples = [
+        '$ aurora load back module -n=my-bounded-context/my-module',
+        '$ aurora --help',
+    ];
+
     public async run(): Promise<void>
     {
         const { args, flags }   = await this.parse(Load);
@@ -52,10 +74,8 @@ export default class Load extends Command
             args.element === ScopeElement.MODULE
         )
         {
-            if (!flags.module) this.error('Module flag is required for generate module command.');
-
-            const moduleFlag: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.module);
-            const { boundedContextName, moduleName } = await Prompter.promptForLoadModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
+            const flagName: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.name);
+            const { boundedContextName, moduleName } = await Prompter.promptForLoadModule(flagName.boundedContextName, flagName.moduleName);
 
             // create yaml file
             const schema: ModuleDefinitionSchema = YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
