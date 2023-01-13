@@ -1,15 +1,14 @@
 import { Command, Flags } from '@oclif/core';
-import { AdditionalApis, BackHandler, Prompter, Properties, Property, SqlType, TemplateElement } from '../../@cliter';
-import { generateGraphqlTypes } from '../../@cliter/functions/back';
-import { getBoundedContextModuleFromFlag } from '../../@cliter/functions/common';
+import { AdditionalApis, BackHandler, Prompter, Properties, Property, Scope, ScopeElement, SqlType, TemplateElement } from '../@cliter';
+import { generateGraphqlTypes } from '../@cliter/functions/back';
+import { getBoundedContextModuleFromFlag } from '../@cliter/functions/common';
 
 export default class Generate extends Command
 {
-    static description = 'Generate aurora bounded context/module [boundedContext, module]';
+    static description = 'Generate aurora item';
 
     static flags =
     {
-        // can pass either --help or -h
         help          : Flags.help({ char: 'h' }),
         verbose       : Flags.boolean({ char: 'v' }),
         force         : Flags.boolean({ char: 'f' }),
@@ -20,7 +19,7 @@ export default class Generate extends Command
 
     static args = [
         {
-            name       : 'type',
+            name       : 'scope',
             required   : true,
             description: 'Type of element to create, application, package or dashboard.',
             options    : [
@@ -29,15 +28,12 @@ export default class Generate extends Command
             ],
         },
         {
-            name       : 'elementType',
-            description: 'Type element to create',
+            name       : 'element',
+            description: 'Element to create',
             options    : [
-                'bounded-context',
-                'b',
                 'module',
-                'm',
+                'bounded-context',
                 'api',
-                'a',
             ],
             required: true,
         },
@@ -49,19 +45,19 @@ export default class Generate extends Command
         '$ aurora --help',
     ];
 
-    async run(): Promise<void>
+    public async run(): Promise<void>
     {
         const { args, flags } = await this.parse(Generate);
 
-        if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
-        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
-
-        if (args.elementType === TemplateElement.BACK_MODULE)
+        if (
+            args.scope === Scope.BACK &&
+            args.element === ScopeElement.MODULE
+        )
         {
-            let moduleFlag: { boundedContextName?: string; moduleName?: string; } = {};
-            if (flags.module) moduleFlag = getBoundedContextModuleFromFlag(this, flags.module);
+            if (!flags.module) this.error('Module flag is required for generate module command.');
 
-            const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant }: any = await Prompter.promptForGenerateModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
+            const moduleFlag: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.module);
+            const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant } = await Prompter.promptForGenerateModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
             const properties: Properties = new Properties();
             properties.moduleName        = moduleName;

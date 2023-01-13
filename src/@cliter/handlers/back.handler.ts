@@ -3,27 +3,27 @@ import { TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { generateJsonLockFile } from '../functions/common';
 import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateModuleFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
-import { GenerateCommandState, NewApplicationCommandState } from '../types/commands';
+import { GenerateCommandState, NewBackCommandState } from '../types';
 import { GlobalState } from '../store';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 export class BackHandler
 {
-    static async newBack(newApplicationCommandState: NewApplicationCommandState): Promise<void>
+    static async new(newBackCommandState: NewBackCommandState): Promise<void>
     {
-        if (!newApplicationCommandState.appName) throw new Error('To create application is required app name');
+        if (!newBackCommandState.appName) throw new Error('To create application is required app name');
 
         // create directory for application
-        if (!fs.existsSync(newApplicationCommandState.appName)) fs.mkdirSync(newApplicationCommandState.appName, { recursive: true });
+        if (!fs.existsSync(newBackCommandState.appName)) fs.mkdirSync(newBackCommandState.appName, { recursive: true });
 
         await TemplateGenerator.generateStaticContents(
-            newApplicationCommandState.command,
+            newBackCommandState.command,
             TemplateElement.BACK_APPLICATION,
-            path.join(newApplicationCommandState.appName),
+            path.join(newBackCommandState.appName),
             '.',
             {
-                verbose: newApplicationCommandState.flags.verbose,
+                verbose: newBackCommandState.flags.verbose,
             },
         );
     }

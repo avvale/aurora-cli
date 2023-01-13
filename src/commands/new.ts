@@ -1,6 +1,6 @@
 import { Command, Flags } from '@oclif/core';
-import { BackHandler } from '../@cliter';
-import { generateApplicationEnvFile, installDependencies } from '../@cliter/functions/back';
+import { BackHandler, Scope } from '../@cliter';
+import { generateEnvFile, installDependencies } from '../@cliter/functions/back';
 
 export default class New extends Command
 {
@@ -15,7 +15,7 @@ export default class New extends Command
 
     static args = [
         {
-            name       : 'type',
+            name       : 'scope',
             required   : true,
             description: 'Type of element to create, application, package or dashboard.',
             options    : [
@@ -35,16 +35,16 @@ export default class New extends Command
     {
         const { args, flags } = await this.parse(New);
 
-        switch (args.type)
+        switch (args.scope)
         {
-            case 'back':
-                await BackHandler.newBack({
+            case Scope.BACK:
+                await BackHandler.new({
                     appName: args.name,
                     command: this,
                     flags,
                 });
 
-                await generateApplicationEnvFile(
+                await generateEnvFile(
                     this,
                     args.name,
                 );
@@ -52,7 +52,7 @@ export default class New extends Command
                 if (flags.install) installDependencies(args.name);
                 break;
 
-            case 'front':
+            case Scope.FRONT:
                 // stateService.dashboardName = args.name;
                 // TODO: generate dashboard
                 // await Operations.generateDashboard();
