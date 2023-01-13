@@ -201,6 +201,8 @@ export class FileManager
                     file,
                     path.join(relativeTargetBasePath, relativeTargetPath),
                     {
+                        force,
+                        verbose,
                         lockFiles,
                         templateData,
                         boundedContextName,

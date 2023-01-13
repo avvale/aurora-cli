@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { Prompter, ModuleDefinitionSchema, YamlManager, Scope, ScopeElement } from '../@cliter';
+import { Prompter, ModuleDefinitionSchema, YamlManager, Scope, ScopeElement, BackHandler } from '../@cliter';
 import { FrontHandler } from '../@cliter/handlers/front.handler';
 import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../@cliter/functions/common';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
@@ -85,11 +85,16 @@ export default class Load extends Command
                 schema,
             };
 
-            await FrontHandler.generateModule(generateCommandState);
-
-            if (args.scope === Scope.BACK && !flags.noGraphQLTypes)
+            if (args.scope === Scope.BACK)
             {
-                generateGraphqlTypes(generateCommandState);
+                await BackHandler.generateModule(generateCommandState);
+
+                if (!flags.noGraphQLTypes) generateGraphqlTypes(generateCommandState);
+            }
+
+            if (args.scope === Scope.FRONT)
+            {
+                await FrontHandler.generateModule(generateCommandState);
             }
 
             await reviewOverwrites(generateCommandState);
