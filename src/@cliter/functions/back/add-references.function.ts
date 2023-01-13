@@ -1,10 +1,7 @@
-// node
-import * as path from 'node:path';
-
-// imports
 import { GenerateCommandState } from '../../types';
 import { cliterConfig } from '../../config';
 import { CodeWriter } from '../../utils';
+import * as path from 'node:path';
 
 export const addReferences = (generateCommandState: GenerateCommandState): void =>
 {

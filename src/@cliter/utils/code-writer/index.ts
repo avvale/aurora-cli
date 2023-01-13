@@ -17,7 +17,7 @@ export class CodeWriter
     constructor(
         public readonly srcDirectory: string,
         public readonly appDirectory: string,
-        public readonly frameworkDirectory: string,
+        public readonly apiDirectory: string,
         public readonly boundedContextName: string,
         public readonly moduleName: string,
         public readonly moduleNames: string,
@@ -519,7 +519,7 @@ export class CodeWriter
     declareApplicationItemsInModule(): void
     {
         // get decorator arguments
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.frameworkDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.apiDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'Module');
 
         // providers
