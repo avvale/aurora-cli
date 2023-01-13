@@ -1,6 +1,6 @@
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
 
-// @apps
+// @app
 import { OAuthCreateCredentialsHandler } from '../handlers/o-auth-create-credentials.handler';
 import { OAuthCredentials, OAuthCreateCredentialsInput } from '@api/graphql';
 

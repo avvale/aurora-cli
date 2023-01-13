@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteAdministrativeAreaLevel3ByIdCommandHandler } from './delete-administrative-area-level-3-by-id.command-handler';
-import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 import { DeleteAdministrativeAreaLevel3ByIdCommand } from './delete-administrative-area-level-3-by-id.command';
 import { DeleteAdministrativeAreaLevel3ByIdService } from './delete-administrative-area-level-3-by-id.service';
 

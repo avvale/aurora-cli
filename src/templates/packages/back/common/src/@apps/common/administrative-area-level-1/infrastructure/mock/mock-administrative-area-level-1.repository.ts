@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from '@aurora-ts/core';
-import { IAdministrativeAreaLevel1Repository } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.repository';
+import { IAdministrativeAreaLevel1Repository } from '@app/common/administrative-area-level-1/domain/administrative-area-level-1.repository';
 import {
     AdministrativeAreaLevel1Id,
     AdministrativeAreaLevel1CountryId,
@@ -14,7 +14,7 @@ import {
     AdministrativeAreaLevel1CreatedAt,
     AdministrativeAreaLevel1UpdatedAt,
     AdministrativeAreaLevel1DeletedAt,
-} from '@apps/common/administrative-area-level-1/domain/value-objects';
+} from '@app/common/administrative-area-level-1/domain/value-objects';
 import { CommonAdministrativeAreaLevel1 } from '../../domain/administrative-area-level-1.aggregate';
 import { administrativeAreasLevel1 } from '../seeds/administrative-area-level-1.seed';
 

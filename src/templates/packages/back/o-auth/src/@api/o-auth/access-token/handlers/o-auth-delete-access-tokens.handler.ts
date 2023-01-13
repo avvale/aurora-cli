@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetAccessTokensQuery } from '@apps/o-auth/access-token/application/get/get-access-tokens.query';
-import { DeleteAccessTokensCommand } from '@apps/o-auth/access-token/application/delete/delete-access-tokens.command';
+// @app
+import { GetAccessTokensQuery } from '@app/o-auth/access-token/application/get/get-access-tokens.query';
+import { DeleteAccessTokensCommand } from '@app/o-auth/access-token/application/delete/delete-access-tokens.command';
 import { OAuthAccessToken } from '@api/graphql';
 import { OAuthAccessTokenDto } from '../dto';
 

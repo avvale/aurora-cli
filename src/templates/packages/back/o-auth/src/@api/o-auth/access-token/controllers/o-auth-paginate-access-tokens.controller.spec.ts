@@ -6,7 +6,7 @@ import { OAuthPaginateAccessTokensController } from './o-auth-paginate-access-to
 import { OAuthPaginateAccessTokensHandler } from '../handlers/o-auth-paginate-access-tokens.handler';
 
 // sources
-import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@app/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
 describe('OAuthPaginateAccessTokensController', () =>
 {

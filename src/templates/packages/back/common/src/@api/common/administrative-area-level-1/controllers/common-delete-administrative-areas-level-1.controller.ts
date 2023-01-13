@@ -4,7 +4,7 @@ import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs
 import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { CommonAdministrativeAreaLevel1Dto } from '../dto';
 
-// @apps
+// @app
 import { CommonDeleteAdministrativeAreasLevel1Handler } from '../handlers/common-delete-administrative-areas-level-1.handler';
 
 @ApiTags('[common] administrative-area-level-1')

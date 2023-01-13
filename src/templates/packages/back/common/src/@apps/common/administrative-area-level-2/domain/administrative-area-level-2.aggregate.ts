@@ -20,8 +20,8 @@ import {
 import { CreatedAdministrativeAreaLevel2Event } from '../application/events/created-administrative-area-level-2.event';
 import { UpdatedAdministrativeAreaLevel2Event } from '../application/events/updated-administrative-area-level-2.event';
 import { DeletedAdministrativeAreaLevel2Event } from '../application/events/deleted-administrative-area-level-2.event';
-import { CommonCountry } from '@apps/common/country/domain/country.aggregate';
-import { CommonAdministrativeAreaLevel1 } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.aggregate';
+import { CommonCountry } from '@app/common/country/domain/country.aggregate';
+import { CommonAdministrativeAreaLevel1 } from '@app/common/administrative-area-level-1/domain/administrative-area-level-1.aggregate';
 
 export class CommonAdministrativeAreaLevel2 extends AggregateRoot
 {

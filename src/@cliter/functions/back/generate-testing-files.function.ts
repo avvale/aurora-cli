@@ -24,7 +24,7 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
 
     const codeWriter = new CodeWriter(
         path.join('src'),
-        path.join(cliterConfig.applicationsContainer),
+        path.join(cliterConfig.appContainer),
         cliterConfig.apiContainer,
         generateCommandState.schema.boundedContextName.toLowerCase(),
         generateCommandState.schema.moduleName.toLowerCase(),

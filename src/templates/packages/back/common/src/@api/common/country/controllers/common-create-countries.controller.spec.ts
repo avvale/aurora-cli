@@ -5,7 +5,7 @@ import { CommonCreateCountriesController } from './common-create-countries.contr
 import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
 
 // sources
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonCreateCountriesController', () =>
 {

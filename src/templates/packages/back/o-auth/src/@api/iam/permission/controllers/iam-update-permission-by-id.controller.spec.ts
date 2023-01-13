@@ -6,7 +6,7 @@ import { IamUpdatePermissionByIdController } from './iam-update-permission-by-id
 import { IamUpdatePermissionByIdHandler } from '../handlers/iam-update-permission-by-id.handler';
 
 // sources
-import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@app/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamUpdatePermissionByIdController', () =>
 {

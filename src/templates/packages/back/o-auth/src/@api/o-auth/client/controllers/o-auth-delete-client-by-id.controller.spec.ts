@@ -6,7 +6,7 @@ import { OAuthDeleteClientByIdController } from './o-auth-delete-client-by-id.co
 import { OAuthDeleteClientByIdHandler } from '../handlers/o-auth-delete-client-by-id.handler';
 
 // sources
-import { clients } from '@apps/o-auth/client/infrastructure/seeds/client.seed';
+import { clients } from '@app/o-auth/client/infrastructure/seeds/client.seed';
 
 describe('OAuthDeleteClientByIdController', () =>
 {

@@ -4,7 +4,7 @@ import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs
 import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { CommonLangDto } from '../dto';
 
-// @apps
+// @app
 import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 @ApiTags('[common] lang')

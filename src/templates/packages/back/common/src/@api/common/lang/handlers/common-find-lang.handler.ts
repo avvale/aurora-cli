@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { FindLangQuery } from '@apps/common/lang/application/find/find-lang.query';
+// @app
+import { FindLangQuery } from '@app/common/lang/application/find/find-lang.query';
 import { CommonLang } from '@api/graphql';
 import { CommonLangDto } from '../dto';
 

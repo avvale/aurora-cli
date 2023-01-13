@@ -7,7 +7,7 @@ import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
-// @apps
+// @app
 import { OAuthDeleteRefreshTokenByIdHandler } from '../handlers/o-auth-delete-refresh-token-by-id.handler';
 import { OAuthRefreshToken } from '@api/graphql';
 

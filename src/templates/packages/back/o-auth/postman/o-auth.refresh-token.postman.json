@@ -1,7 +1,7 @@
 {
     "info": {
 		"_postman_id"   : "a787fba4-0cc4-443f-ba95-29fb386b57f1",
-		"name"          : "@apps - o-auth/refresh-token",
+		"name"          : "@app - o-auth/refresh-token",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [

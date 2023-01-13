@@ -9,7 +9,7 @@ import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
-// @apps
+// @app
 import { IamUpdateTenantByIdHandler } from '../handlers/iam-update-tenant-by-id.handler';
 
 @ApiTags('[iam] tenant')

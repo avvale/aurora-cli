@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
-// @apps
-import { FindUserByIdQuery } from '@apps/iam/user/application/find/find-user-by-id.query';
-import { CreateUserCommand } from '@apps/iam/user/application/create/create-user.command';
+// @app
+import { FindUserByIdQuery } from '@app/iam/user/application/find/find-user-by-id.query';
+import { CreateUserCommand } from '@app/iam/user/application/create/create-user.command';
 import { IamUser, IamCreateUserInput } from '@api/graphql';
 import { IamUserDto, IamCreateUserDto } from '../dto';
 

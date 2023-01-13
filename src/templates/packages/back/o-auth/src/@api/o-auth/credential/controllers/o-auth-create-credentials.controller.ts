@@ -3,7 +3,7 @@ import { Controller, Post, Body, Headers } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { OAuthCreateCredentialsDto } from '../dto';
 
-// @apps
+// @app
 import { OAuthCreateCredentialsHandler } from '../handlers/o-auth-create-credentials.handler';
 
 @ApiTags('[o-auth] credential')

@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { CommonDeleteLangByIdHandler } from './common-delete-lang-by-id.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonDeleteLangByIdController', () =>
 {

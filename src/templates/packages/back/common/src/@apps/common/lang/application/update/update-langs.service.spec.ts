@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 import { UpdateLangsService } from './update-langs.service';
 import {
     LangId,

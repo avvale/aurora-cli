@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetBoundedContextsQuery } from '@apps/iam/bounded-context/application/get/get-bounded-contexts.query';
-import { UpdateBoundedContextsCommand } from '@apps/iam/bounded-context/application/update/update-bounded-contexts.command';
+// @app
+import { GetBoundedContextsQuery } from '@app/iam/bounded-context/application/get/get-bounded-contexts.query';
+import { UpdateBoundedContextsCommand } from '@app/iam/bounded-context/application/update/update-bounded-contexts.command';
 import { IamBoundedContext, IamUpdateBoundedContextsInput } from '@api/graphql';
 import { IamBoundedContextDto, IamUpdateBoundedContextsDto } from '../dto';
 

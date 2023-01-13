@@ -6,7 +6,7 @@ import { CommonFindAdministrativeAreaLevel1Controller } from './common-find-admi
 import { CommonFindAdministrativeAreaLevel1Handler } from '../handlers/common-find-administrative-area-level-1.handler';
 
 // sources
-import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@app/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
 describe('CommonFindAdministrativeAreaLevel1Controller', () =>
 {

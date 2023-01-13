@@ -12,7 +12,7 @@
     },
     "moduleNameMapper": {
         "@aurora/(.*)": "<rootDir>/../src/@aurora/$1",
-        "@apps/(.*)": "<rootDir>/../src/@apps/$1",
+        "@app/(.*)": "<rootDir>/../src/@app/$1",
         "@api/(.*)": "<rootDir>/../src/@api/$1"
     }
 }

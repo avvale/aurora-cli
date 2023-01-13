@@ -19,12 +19,12 @@ import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/
 {{#if schema.hasTenant}}
 
 // tenant
-import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '{{ config.applicationsContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
+import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
+import { TenantConstraint } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
 import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
 {{/if}}
 
-// {{ config.applicationsContainer }}
+// {{ config.appContainer }}
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}-by-id.handler';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from '@api/graphql';
 

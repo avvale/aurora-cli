@@ -1,7 +1,7 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
 import { QueryStatement, Timezone } from '@aurora-ts/core';
 
-// @apps
+// @app
 import { CommonFindLangByIdHandler } from '../handlers/common-find-lang-by-id.handler';
 import { CommonLang } from '@api/graphql';
 

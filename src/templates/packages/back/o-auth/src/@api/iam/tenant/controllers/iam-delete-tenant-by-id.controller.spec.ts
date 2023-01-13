@@ -6,7 +6,7 @@ import { IamDeleteTenantByIdController } from './iam-delete-tenant-by-id.control
 import { IamDeleteTenantByIdHandler } from '../handlers/iam-delete-tenant-by-id.handler';
 
 // sources
-import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamDeleteTenantByIdController', () =>
 {

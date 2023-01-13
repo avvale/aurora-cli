@@ -6,7 +6,7 @@ import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-
 import { IamCreateBoundedContextInput } from '@api/graphql';
 
 // sources
-import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@app/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('IamCreateBoundedContextsResolver', () =>
 {

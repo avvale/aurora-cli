@@ -11,8 +11,8 @@ import {
     PermissionUpdatedAt,
     PermissionDeletedAt,
 } from './value-objects';
-import { BoundedContextMapper } from '@apps/iam/bounded-context/domain/bounded-context.mapper';
-import { RoleMapper } from '@apps/iam/role/domain/role.mapper';
+import { BoundedContextMapper } from '@app/iam/bounded-context/domain/bounded-context.mapper';
+import { RoleMapper } from '@app/iam/role/domain/role.mapper';
 
 export class PermissionMapper implements IMapper
 {

@@ -1,7 +1,7 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
 import { QueryStatement, Timezone } from '@aurora-ts/core';
 
-// @apps
+// @app
 import { CommonPaginateAdministrativeAreasLevel1Handler } from '../handlers/common-paginate-administrative-areas-level-1.handler';
 import { Pagination } from '@api/graphql';
 

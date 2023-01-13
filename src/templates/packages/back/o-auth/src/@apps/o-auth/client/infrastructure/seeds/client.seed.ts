@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { OAuthClientGrantType } from '../../../../../graphql';
-import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@app/o-auth/application/infrastructure/seeds/application.seed';
 
 export const clients = [
     {

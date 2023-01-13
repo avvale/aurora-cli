@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 import { CreateCountryCommandHandler } from './create-country.command-handler';
 import { CreateCountryCommand } from './create-country.command';
 import { CreateCountryService } from './create-country.service';

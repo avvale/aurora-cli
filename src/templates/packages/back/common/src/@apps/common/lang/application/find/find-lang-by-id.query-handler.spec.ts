@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindLangByIdQueryHandler } from './find-lang-by-id.query-handler';
-import { MockLangRepository } from '@apps/common/lang/infrastructure/mock/mock-lang.repository';
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
-import { ILangRepository } from '@apps/common/lang/domain/lang.repository';
-import { LangMapper } from '@apps/common/lang/domain/lang.mapper';
+import { MockLangRepository } from '@app/common/lang/infrastructure/mock/mock-lang.repository';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { ILangRepository } from '@app/common/lang/domain/lang.repository';
+import { LangMapper } from '@app/common/lang/domain/lang.mapper';
 import { FindLangByIdQuery } from './find-lang-by-id.query';
 import { FindLangByIdService } from './find-lang-by-id.service';
 

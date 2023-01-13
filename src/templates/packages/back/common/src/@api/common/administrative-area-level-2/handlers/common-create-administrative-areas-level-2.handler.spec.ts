@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // custom items
 import { CommonCreateAdministrativeAreasLevel2Handler } from './common-create-administrative-areas-level-2.handler';
-import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@app/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonCreateAdministrativeAreasLevel2Handler', () =>
 {

@@ -6,7 +6,7 @@ import { OAuthDeleteAccessTokensResolver } from './o-auth-delete-access-tokens.r
 import { OAuthDeleteAccessTokensHandler } from '../handlers/o-auth-delete-access-tokens.handler';
 
 // sources
-import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@app/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
 describe('OAuthDeleteAccessTokensResolver', () =>
 {

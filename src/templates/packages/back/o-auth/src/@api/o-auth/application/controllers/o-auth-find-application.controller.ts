@@ -9,7 +9,7 @@ import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
-// @apps
+// @app
 import { OAuthFindApplicationHandler } from '../handlers/o-auth-find-application.handler';
 
 @ApiTags('[o-auth] application')

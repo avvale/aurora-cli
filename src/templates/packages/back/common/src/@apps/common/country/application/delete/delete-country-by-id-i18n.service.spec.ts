@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 import { DeleteCountryByIdI18NService } from './delete-country-by-id-i18n.service';
 import { CountryId } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';

@@ -1,7 +1,7 @@
 {
     "info": {
 		"_postman_id"   : "{{ uuid }}",
-		"name"          : "{{ config.applicationsContainer }} - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
+		"name"          : "{{ config.appContainer }} - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [

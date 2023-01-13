@@ -29,7 +29,7 @@ import {
 import { CreatedCountryEvent } from '../application/events/created-country.event';
 import { UpdatedCountryEvent } from '../application/events/updated-country.event';
 import { DeletedCountryEvent } from '../application/events/deleted-country.event';
-import { CommonLang } from '@apps/common/lang/domain/lang.aggregate';
+import { CommonLang } from '@app/common/lang/domain/lang.aggregate';
 
 export class CommonCountry extends AggregateRoot
 {

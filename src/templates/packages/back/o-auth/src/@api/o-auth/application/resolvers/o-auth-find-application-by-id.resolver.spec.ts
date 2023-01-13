@@ -6,7 +6,7 @@ import { OAuthFindApplicationByIdResolver } from './o-auth-find-application-by-i
 import { OAuthFindApplicationByIdHandler } from '../handlers/o-auth-find-application-by-id.handler';
 
 // sources
-import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@app/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthFindApplicationByIdResolver', () =>
 {

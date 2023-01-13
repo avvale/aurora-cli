@@ -1,7 +1,7 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Timezone } from '@aurora-ts/core';
 
-// @apps
+// @app
 import { CommonCreateCountryHandler } from '../handlers/common-create-country.handler';
 import { CommonCountry, CommonCreateCountryInput } from '@api/graphql';
 

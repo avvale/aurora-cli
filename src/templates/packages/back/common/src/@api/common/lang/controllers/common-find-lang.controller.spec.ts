@@ -6,7 +6,7 @@ import { CommonFindLangController } from './common-find-lang.controller';
 import { CommonFindLangHandler } from '../handlers/common-find-lang.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonFindLangController', () =>
 {

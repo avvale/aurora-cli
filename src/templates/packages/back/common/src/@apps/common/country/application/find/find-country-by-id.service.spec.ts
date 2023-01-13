@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 import { FindCountryByIdService } from './find-country-by-id.service';
 import { CountryId } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';

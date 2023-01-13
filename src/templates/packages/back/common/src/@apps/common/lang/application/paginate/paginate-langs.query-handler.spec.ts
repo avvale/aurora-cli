@@ -3,9 +3,9 @@ import { PaginationResponse } from '@aurora-ts/core';
 
 // custom items
 import { PaginateLangsQueryHandler } from './paginate-langs.query-handler';
-import { MockLangRepository } from '@apps/common/lang/infrastructure/mock/mock-lang.repository';
-import { ILangRepository } from '@apps/common/lang/domain/lang.repository';
-import { LangMapper } from '@apps/common/lang/domain/lang.mapper';
+import { MockLangRepository } from '@app/common/lang/infrastructure/mock/mock-lang.repository';
+import { ILangRepository } from '@app/common/lang/domain/lang.repository';
+import { LangMapper } from '@app/common/lang/domain/lang.mapper';
 import { PaginateLangsQuery } from './paginate-langs.query';
 import { PaginateLangsService } from './paginate-langs.service';
 

@@ -33,9 +33,9 @@ export default class Seed extends Command
         const { args, flags } = await this.parse(Seed);
 
         if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
-        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_APPS;
+        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_APP;
 
-        if (args.elementType === TemplateElement.BACK_APPS)
+        if (args.elementType === TemplateElement.BACK_APP)
         {
             let moduleFlag: any = {};
             if (flags.module) moduleFlag = getBoundedContextModuleFromFlag(this, flags.module);

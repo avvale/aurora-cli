@@ -6,7 +6,7 @@ import { CommonCreateAdministrativeAreasLevel3Handler } from '../handlers/common
 import { CommonCreateAdministrativeAreaLevel3Input } from '@api/graphql';
 
 // sources
-import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 describe('CommonCreateAdministrativeAreasLevel3Resolver', () =>
 {

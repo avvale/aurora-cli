@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from '@aurora-ts/core';
-import { ILangRepository } from '@apps/common/lang/domain/lang.repository';
+import { ILangRepository } from '@app/common/lang/domain/lang.repository';
 import {
     LangId,
     LangName,
@@ -15,7 +15,7 @@ import {
     LangCreatedAt,
     LangUpdatedAt,
     LangDeletedAt,
-} from '@apps/common/lang/domain/value-objects';
+} from '@app/common/lang/domain/value-objects';
 import { CommonLang } from '../../domain/lang.aggregate';
 import { langs } from '../seeds/lang.seed';
 

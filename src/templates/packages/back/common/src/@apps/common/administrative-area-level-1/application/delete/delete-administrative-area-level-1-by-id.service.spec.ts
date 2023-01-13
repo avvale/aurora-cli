@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@app/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 import { DeleteAdministrativeAreaLevel1ByIdService } from './delete-administrative-area-level-1-by-id.service';
 import { AdministrativeAreaLevel1Id } from '../../domain/value-objects';
 import { IAdministrativeAreaLevel1Repository } from '../../domain/administrative-area-level-1.repository';

@@ -9,8 +9,8 @@ import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
-// @apps
-import { AccountResponse } from '@apps/iam/account/domain/account.response';
+// @app
+import { AccountResponse } from '@app/iam/account/domain/account.response';
 import { IamUpdateUserDataByIdHandler } from '../handlers/iam-update-user-data-by-id.handler';
 
 @ApiTags('[iam] user')

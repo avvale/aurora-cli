@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@app/o-auth/application/infrastructure/seeds/application.seed';
 import { UpdateApplicationByIdService } from './update-application-by-id.service';
 import {
     ApplicationId,

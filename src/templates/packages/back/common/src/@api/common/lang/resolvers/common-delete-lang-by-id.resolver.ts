@@ -1,7 +1,7 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { QueryStatement, Timezone } from '@aurora-ts/core';
 
-// @apps
+// @app
 import { CommonDeleteLangByIdHandler } from '../handlers/common-delete-lang-by-id.handler';
 import { CommonLang } from '@api/graphql';
 

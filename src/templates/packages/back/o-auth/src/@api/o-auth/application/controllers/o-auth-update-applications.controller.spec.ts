@@ -6,7 +6,7 @@ import { OAuthUpdateApplicationsController } from './o-auth-update-applications.
 import { OAuthUpdateApplicationsHandler } from '../handlers/o-auth-update-applications.handler';
 
 // sources
-import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@app/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthUpdateApplicationsController', () =>
 {

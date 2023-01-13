@@ -6,7 +6,7 @@ import { CommonFindAdministrativeAreaLevel2ByIdResolver } from './common-find-ad
 import { CommonFindAdministrativeAreaLevel2ByIdHandler } from '../handlers/common-find-administrative-area-level-2-by-id.handler';
 
 // sources
-import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@app/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonFindAdministrativeAreaLevel2ByIdResolver', () =>
 {

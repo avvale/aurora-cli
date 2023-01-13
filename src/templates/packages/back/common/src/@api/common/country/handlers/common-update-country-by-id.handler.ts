@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { AddI18NConstraintService, FormatLangCode, ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { FindCountryByIdQuery } from '@apps/common/country/application/find/find-country-by-id.query';
-import { UpdateCountryByIdCommand } from '@apps/common/country/application/update/update-country-by-id.command';
+// @app
+import { FindCountryByIdQuery } from '@app/common/country/application/find/find-country-by-id.query';
+import { UpdateCountryByIdCommand } from '@app/common/country/application/update/update-country-by-id.command';
 import { CommonCountry, CommonUpdateCountryByIdInput } from '@api/graphql';
 import { CommonCountryDto, CommonUpdateCountryByIdDto } from '../dto';
 

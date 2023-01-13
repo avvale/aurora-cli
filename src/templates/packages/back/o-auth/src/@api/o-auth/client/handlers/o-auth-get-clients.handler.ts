@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetClientsQuery } from '@apps/o-auth/client/application/get/get-clients.query';
+// @app
+import { GetClientsQuery } from '@app/o-auth/client/application/get/get-clients.query';
 import { OAuthClient } from '@api/graphql';
 import { OAuthClientDto } from '../dto';
 

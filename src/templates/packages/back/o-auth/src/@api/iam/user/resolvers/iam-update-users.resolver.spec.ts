@@ -7,7 +7,7 @@ import { IamUpdateUsersHandler } from '../handlers/iam-update-users.handler';
 import { IamUpdateUsersInput } from '@api/graphql';
 
 // sources
-import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@app/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamUpdateUsersResolver', () =>
 {

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { AddI18NConstraintService, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetCountriesQuery } from '@apps/common/country/application/get/get-countries.query';
+// @app
+import { GetCountriesQuery } from '@app/common/country/application/get/get-countries.query';
 import { CommonCountry } from '@api/graphql';
 import { CommonCountryDto } from '../dto';
 

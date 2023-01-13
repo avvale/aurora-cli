@@ -1,13 +1,13 @@
 import { CACHE_MANAGER, Inject, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '../../@aurora/shared.module';
-import { CommonModels, CommonHandlers, CommonServices, CommonRepositories, CommonSagas } from '../../@apps/common';
+import { CommonModels, CommonHandlers, CommonServices, CommonRepositories, CommonSagas } from '../../@app/common';
 import { CommonLangControllers, CommonLangResolvers, CommonLangApiHandlers } from './lang';
 import { CommonCountryControllers, CommonCountryResolvers, CommonCountryApiHandlers } from './country';
 
 // custom
 import { IQueryBus } from '@aurora-ts/core';
-import { GetLangsQuery } from '../../@apps/common/lang/application/get/get-langs.query';
+import { GetLangsQuery } from '../../@app/common/lang/application/get/get-langs.query';
 import { Cache } from 'cache-manager';
 import { CommonAdministrativeAreaLevel1Controllers, CommonAdministrativeAreaLevel1Resolvers, CommonAdministrativeAreaLevel1ApiHandlers } from './administrative-area-level-1';
 import { CommonAdministrativeAreaLevel2Controllers, CommonAdministrativeAreaLevel2Resolvers, CommonAdministrativeAreaLevel2ApiHandlers } from './administrative-area-level-2';

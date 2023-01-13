@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { IQueryBus, Jwt } from '@aurora-ts/core';
 
-// @apps
-import { FindAccessTokenByIdQuery } from '../../../../@apps/o-auth/access-token/application/find/find-access-token-by-id.query';
-import { FindAccountQuery } from '../../../../@apps/iam/account/application/find/find-account.query';
-import { IamUserModel } from '../../../../@apps/iam/user/infrastructure/sequelize/sequelize-user.model';
-import { IamTenantModel } from '../../../../@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
+// @app
+import { FindAccessTokenByIdQuery } from '../../../../@app/o-auth/access-token/application/find/find-access-token-by-id.query';
+import { FindAccountQuery } from '../../../../@app/iam/account/application/find/find-account.query';
+import { IamUserModel } from '../../../../@app/iam/user/infrastructure/sequelize/sequelize-user.model';
+import { IamTenantModel } from '../../../../@app/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
 import { IamAccount } from '../../../../../@api/graphql';
 import { IamAccountDto } from '../dto';
 

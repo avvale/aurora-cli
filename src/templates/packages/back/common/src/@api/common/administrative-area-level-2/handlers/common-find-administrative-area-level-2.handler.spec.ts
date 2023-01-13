@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { CommonFindAdministrativeAreaLevel2Handler } from './common-find-administrative-area-level-2.handler';
 
 // sources
-import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@app/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonFindAdministrativeAreaLevel2Handler', () =>
 {

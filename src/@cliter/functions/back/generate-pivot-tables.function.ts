@@ -13,7 +13,7 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
             FileManager.generateContents(
                 generateCommandState.command,
                 path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_PIVOT.split('/')),
-                path.join('src', cliterConfig.applicationsContainer), // relativeTargetBasePath
+                path.join('src', cliterConfig.appContainer), // relativeTargetBasePath
                 generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(), // relativeTargetPath,
                 {
                     boundedContextName: generateCommandState.schema.boundedContextName,

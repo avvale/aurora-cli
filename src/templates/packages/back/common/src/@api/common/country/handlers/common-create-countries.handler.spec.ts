@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // custom items
 import { CommonCreateCountriesHandler } from './common-create-countries.handler';
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonCreateCountriesHandler', () =>
 {

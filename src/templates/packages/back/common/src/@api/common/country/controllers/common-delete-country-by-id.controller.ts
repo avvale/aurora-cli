@@ -4,7 +4,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { ContentLanguage, QueryStatement, Timezone } from '@aurora-ts/core';
 import { CommonCountryDto } from '../dto';
 
-// @apps
+// @app
 import { CommonDeleteCountryByIdHandler } from '../handlers/common-delete-country-by-id.handler';
 
 @ApiTags('[common] country')

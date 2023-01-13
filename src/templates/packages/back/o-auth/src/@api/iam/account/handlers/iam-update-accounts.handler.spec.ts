@@ -7,7 +7,7 @@ import { IamUpdateAccountsHandler } from './iam-update-accounts.handler';
 import { IamUpdateAccountsInput } from '@api/graphql';
 
 // sources
-import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@app/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamUpdateAccountsHandler', () =>
 {

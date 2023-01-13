@@ -5,17 +5,17 @@ import * as path from 'node:path';
 
 export const generateAppFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    // create directory application container, normally src/@apps
+    // create directory application container, normally src/@app
     await TemplateGenerator.createDirectory(
-        path.join('src', cliterConfig.applicationsContainer),
+        path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
     );
 
     // create module files
     await TemplateGenerator.generateStaticContents(
         generateCommandState.command,
-        TemplateElement.BACK_APPS,
-        path.join('src', cliterConfig.applicationsContainer),
+        TemplateElement.BACK_APP,
+        path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         {
             boundedContextName: generateCommandState.schema.boundedContextName,
@@ -35,7 +35,7 @@ export const generateAppFiles = async (generateCommandState: GenerateCommandStat
     // create value objects in module folder
     await TemplateGenerator.generateValueObjects(
         generateCommandState,
-        path.join('src', cliterConfig.applicationsContainer),
+        path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         generateCommandState.schema.properties.valueObjects,
         generateCommandState.schema.moduleName,

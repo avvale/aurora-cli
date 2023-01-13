@@ -18,7 +18,7 @@ import {
     UserUpdatedAt,
     UserDeletedAt,
 } from './value-objects';
-import { AccountMapper } from '@apps/iam/account/domain/account.mapper';
+import { AccountMapper } from '@app/iam/account/domain/account.mapper';
 
 export class UserMapper implements IMapper
 {

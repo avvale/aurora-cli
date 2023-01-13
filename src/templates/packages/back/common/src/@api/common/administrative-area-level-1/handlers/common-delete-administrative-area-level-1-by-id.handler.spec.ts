@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { CommonDeleteAdministrativeAreaLevel1ByIdHandler } from './common-delete-administrative-area-level-1-by-id.handler';
 
 // sources
-import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@app/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
 describe('CommonDeleteAdministrativeAreaLevel1ByIdController', () =>
 {

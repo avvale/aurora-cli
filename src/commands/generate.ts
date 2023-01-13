@@ -120,7 +120,7 @@ export default class Generate extends Command
 
             if (args.scope === Scope.BACK && !flags.noGraphQLTypes)
             {
-                generateGraphqlTypes(generateCommandState);
+                await generateGraphqlTypes(generateCommandState);
             }
         }
     }

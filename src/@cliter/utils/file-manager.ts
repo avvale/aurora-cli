@@ -311,10 +311,10 @@ export class FileManager
             },
         );
 
-        // relative path with file to create, example: src/@apps/common/lang/application/create/create-lang.command.ts
+        // relative path with file to create, example: src/@app/common/lang/application/create/create-lang.command.ts
         const relativeFilePath = path.join(relativeTargetPath, mappedFile);
 
-        // absolute path with file to create, example /Projects/aurora/src/@apps/common/lang/application/create/create-lang.command.ts
+        // absolute path with file to create, example /Projects/aurora/src/@app/common/lang/application/create/create-lang.command.ts
         const writePath = path.join(targetBasePath, relativeFilePath);
 
         // check if file exists
@@ -344,6 +344,7 @@ export class FileManager
             // replace variables with handlebars template engine
             contents = await templateEngine.render(contents, {
                 ...templateData,
+                config: cliterConfig,
                 currentProperty,
                 boundedContextPrefix,
                 boundedContextSuffix,

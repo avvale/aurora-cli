@@ -6,7 +6,7 @@ import { CommonCreateAdministrativeAreaLevel3Controller } from './common-create-
 import { CommonCreateAdministrativeAreaLevel3Handler } from '../handlers/common-create-administrative-area-level-3.handler';
 
 // sources
-import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 describe('CommonCreateAdministrativeAreaLevel3Controller', () =>
 {

@@ -5,9 +5,9 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IAccountRepository } from '@apps/iam/account/domain/account.repository';
-import { MockAccountSeeder } from '@apps/iam/account/infrastructure/mock/mock-account.seeder';
-import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
+import { IAccountRepository } from '@app/iam/account/domain/account.repository';
+import { MockAccountSeeder } from '@app/iam/account/infrastructure/mock/mock-account.seeder';
+import { accounts } from '@app/iam/account/infrastructure/seeds/account.seed';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { IamModule } from '@api/iam/iam.module';
 import { IamAccountType, OAuthClientGrantType, OAuthCredentials } from '../../../@api/graphql';
@@ -15,19 +15,19 @@ import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // ---- customizations ----
-import { jwtConfig } from '@apps/o-auth/shared/jwt-config';
+import { jwtConfig } from '@app/o-auth/shared/jwt-config';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
-import { AuthModule } from '@apps/o-auth/shared/modules/auth.module';
+import { AuthModule } from '@app/o-auth/shared/modules/auth.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
-import { MockApplicationSeeder } from '@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
+import { MockApplicationSeeder } from '@app/o-auth/application/infrastructure/mock/mock-application.seeder';
 import { OAuthCreateCredentialsHandler } from '@api/o-auth/credential/handlers/o-auth-create-credentials.handler';
-import { IApplicationRepository } from '@apps/o-auth/application/domain/application.repository';
-import { MockAccessTokenSeeder } from '@apps/o-auth/access-token/infrastructure/mock/mock-access-token.seeder';
-import { IAccessTokenRepository } from '@apps/o-auth/access-token';
-import { MockClientSeeder } from '@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
-import { IClientRepository } from '@apps/o-auth/client';
-import { MockUserSeeder } from '@apps/iam/user/infrastructure/mock/mock-user.seeder';
-import { IUserRepository } from '@apps/iam/user/domain/user.repository';
+import { IApplicationRepository } from '@app/o-auth/application/domain/application.repository';
+import { MockAccessTokenSeeder } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.seeder';
+import { IAccessTokenRepository } from '@app/o-auth/access-token';
+import { MockClientSeeder } from '@app/o-auth/client/infrastructure/mock/mock-client.seeder';
+import { IClientRepository } from '@app/o-auth/client';
+import { MockUserSeeder } from '@app/iam/user/infrastructure/mock/mock-user.seeder';
+import { IUserRepository } from '@app/iam/user/domain/user.repository';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

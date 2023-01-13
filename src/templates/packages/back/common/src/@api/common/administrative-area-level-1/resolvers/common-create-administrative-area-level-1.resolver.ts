@@ -1,7 +1,7 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Timezone } from '@aurora-ts/core';
 
-// @apps
+// @app
 import { CommonCreateAdministrativeAreaLevel1Handler } from '../handlers/common-create-administrative-area-level-1.handler';
 import { CommonAdministrativeAreaLevel1, CommonCreateAdministrativeAreaLevel1Input } from '@api/graphql';
 

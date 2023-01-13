@@ -4,7 +4,7 @@ import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { CommonLangDto, CommonUpdateLangByIdDto } from '../dto';
 
-// @apps
+// @app
 import { CommonUpdateLangByIdHandler } from '../handlers/common-update-lang-by-id.handler';
 
 @ApiTags('[common] lang')

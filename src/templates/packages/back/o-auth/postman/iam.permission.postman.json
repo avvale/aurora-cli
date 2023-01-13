@@ -1,7 +1,7 @@
 {
     "info": {
 		"_postman_id"   : "8e6f781b-a972-4cd4-82c7-b5d23b5f2bbe",
-		"name"          : "@apps - iam/permission",
+		"name"          : "@app - iam/permission",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [

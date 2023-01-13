@@ -6,7 +6,7 @@ import { CommonDeleteLangsController } from './common-delete-langs.controller';
 import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonDeleteLangsController', () =>
 {

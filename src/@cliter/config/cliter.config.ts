@@ -5,7 +5,7 @@ export interface CliterConfig
     dashboardContainer: string;
     dashboardTranslations: string;
     adminContainer: string;
-    applicationsContainer: string;
+    appContainer: string;
     apiContainer: string;
     auroraCorePackage: string;
     auroraLocalPackage: string;
@@ -41,7 +41,7 @@ export const cliterConfig: CliterConfig =
     dashboardTranslations: path.join('assets', 'i18n'),
 
     // application
-    applicationsContainer                      : '@apps',
+    appContainer                               : '@app',
     apiContainer                               : '@api',
     auroraLocalPackage                         : '@aurora',
     auroraCorePackage                          : '@aurora-ts/core',

@@ -8,12 +8,12 @@ import { AuditingMeta } from '@api/auditing/auditing.types';
 {{#if schema.hasTenant}}
 
 // tenant
-import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
+import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
 {{/if}}
 
-// {{ config.applicationsContainer }}
-import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
-import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command';
+// {{ config.appContainer }}
+import { Find{{ toPascalCase schema.moduleName }}ByIdQuery } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query';
+import { Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id.command';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '@api/graphql';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 

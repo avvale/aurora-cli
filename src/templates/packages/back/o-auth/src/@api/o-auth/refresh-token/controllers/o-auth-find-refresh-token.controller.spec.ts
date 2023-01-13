@@ -6,7 +6,7 @@ import { OAuthFindRefreshTokenController } from './o-auth-find-refresh-token.con
 import { OAuthFindRefreshTokenHandler } from '../handlers/o-auth-find-refresh-token.handler';
 
 // sources
-import { refreshTokens } from '@apps/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
 
 describe('OAuthFindRefreshTokenController', () =>
 {

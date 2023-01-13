@@ -7,7 +7,7 @@ import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
-// @apps
+// @app
 import { IamUpdateBoundedContextsHandler } from '../handlers/iam-update-bounded-contexts.handler';
 import { IamBoundedContext, IamUpdateBoundedContextsInput } from '@api/graphql';
 

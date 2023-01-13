@@ -8,12 +8,12 @@ import { AuditingMeta } from '@api/auditing/auditing.types';
 {{#if schema.hasTenant}}
 
 // tenant
-import { AccountResponse } from '{{ config.applicationsContainer }}/iam/account/domain/account.response';
+import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
 {{/if}}
 
-// {{ config.applicationsContainer }}
-import { Get{{ toPascalCase schema.moduleNames }}Query } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
-import { Update{{ toPascalCase schema.moduleNames }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/update/update-{{ toKebabCase schema.moduleNames }}.command';
+// {{ config.appContainer }}
+import { Get{{ toPascalCase schema.moduleNames }}Query } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
+import { Update{{ toPascalCase schema.moduleNames }}Command } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/update/update-{{ toKebabCase schema.moduleNames }}.command';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input } from '@api/graphql';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Dto } from '../dto';
 

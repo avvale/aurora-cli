@@ -4,9 +4,9 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IUserRepository } from '@apps/iam/user/domain/user.repository';
-import { MockUserSeeder } from '@apps/iam/user/infrastructure/mock/mock-user.seeder';
-import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
+import { IUserRepository } from '@app/iam/user/domain/user.repository';
+import { MockUserSeeder } from '@app/iam/user/infrastructure/mock/mock-user.seeder';
+import { users } from '@app/iam/user/infrastructure/seeds/user.seed';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { IamModule } from '@api/iam/iam.module';
 import * as request from 'supertest';
@@ -18,8 +18,8 @@ import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // ---- customizations ----
 import { OAuthModule } from '@api/o-auth/o-auth.module';
-import { IAccountRepository } from '@apps/iam/account/domain/account.repository';
-import { MockAccountSeeder } from '@apps/iam/account/infrastructure/mock/mock-account.seeder';
+import { IAccountRepository } from '@app/iam/account/domain/account.repository';
+import { MockAccountSeeder } from '@app/iam/account/infrastructure/mock/mock-account.seeder';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

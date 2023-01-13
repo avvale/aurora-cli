@@ -6,7 +6,7 @@ import { CommonDeleteLangsResolver } from './common-delete-langs.resolver';
 import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonDeleteLangsResolver', () =>
 {

@@ -7,7 +7,7 @@ import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
-// @apps
+// @app
 import { IamUpdatePermissionByIdHandler } from '../handlers/iam-update-permission-by-id.handler';
 import { IamPermission, IamUpdatePermissionByIdInput } from '@api/graphql';
 

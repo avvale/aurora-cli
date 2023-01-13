@@ -6,7 +6,7 @@ import { IamFindBoundedContextController } from './iam-find-bounded-context.cont
 import { IamFindBoundedContextHandler } from '../handlers/iam-find-bounded-context.handler';
 
 // sources
-import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@app/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 
 describe('IamFindBoundedContextController', () =>
 {

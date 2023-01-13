@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '../../@aurora/shared.module';
-import { IamModels, IamHandlers, IamServices, IamRepositories, IamSagas } from '../../@apps/iam';
+import { IamModels, IamHandlers, IamServices, IamRepositories, IamSagas } from '../../@app/iam';
 import { IamBoundedContextControllers, IamBoundedContextResolvers, IamBoundedContextApiHandlers } from './bounded-context';
 import { IamPermissionControllers, IamPermissionResolvers, IamPermissionApiHandlers } from './permission';
 import { IamTenantControllers, IamTenantResolvers, IamTenantApiHandlers } from './tenant';

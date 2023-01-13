@@ -5,7 +5,7 @@ import { IamAccount } from '../../../../../@api/graphql';
 // authorization
 import { AuthenticationJwtGuard } from '../../../o-auth/shared/guards/authentication-jwt.guard';
 
-// @apps
+// @app
 import { IamMeAccountHandler } from '../handlers/iam-me-account.handler';
 @Resolver()
 @UseGuards(AuthenticationJwtGuard)

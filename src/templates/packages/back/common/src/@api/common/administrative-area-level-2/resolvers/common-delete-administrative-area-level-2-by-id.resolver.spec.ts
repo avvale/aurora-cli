@@ -6,7 +6,7 @@ import { CommonDeleteAdministrativeAreaLevel2ByIdResolver } from './common-delet
 import { CommonDeleteAdministrativeAreaLevel2ByIdHandler } from '../handlers/common-delete-administrative-area-level-2-by-id.handler';
 
 // sources
-import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@app/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonDeleteAdministrativeAreaLevel2ByIdResolver', () =>
 {

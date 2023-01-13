@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindCountryQueryHandler } from './find-country.query-handler';
-import { MockCountryRepository } from '@apps/common/country/infrastructure/mock/mock-country.repository';
-import { ICountryRepository } from '@apps/common/country/domain/country.repository';
-import { CountryMapper } from '@apps/common/country/domain/country.mapper';
+import { MockCountryRepository } from '@app/common/country/infrastructure/mock/mock-country.repository';
+import { ICountryRepository } from '@app/common/country/domain/country.repository';
+import { CountryMapper } from '@app/common/country/domain/country.mapper';
 import { FindCountryQuery } from './find-country.query';
 import { FindCountryService } from './find-country.service';
 

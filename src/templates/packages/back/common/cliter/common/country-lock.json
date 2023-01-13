@@ -2,443 +2,443 @@
     "version": "0.0.1",
     "files": [
         {
-            "path": "src/@apps/common/country/application/create/create-country.command-handler.spec.ts",
+            "path": "src/@app/common/country/application/create/create-country.command-handler.spec.ts",
             "integrity": "sha1:cff67f0b3f1effaa87bfe61804ac72ca2d86eb0c"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-country.command-handler.ts",
+            "path": "src/@app/common/country/application/create/create-country.command-handler.ts",
             "integrity": "sha1:2d69fd21af510ce8a0106e51adebdb75ed92344a"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-country.command.ts",
+            "path": "src/@app/common/country/application/create/create-country.command.ts",
             "integrity": "sha1:68ed5196821014f02d09dec247f506a63c26af94"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-country.service.spec.ts",
+            "path": "src/@app/common/country/application/create/create-country.service.spec.ts",
             "integrity": "sha1:639aa2c6c1abdf33995a3890f1cab087ade87b6c"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-country.service.ts",
+            "path": "src/@app/common/country/application/create/create-country.service.ts",
             "integrity": "sha1:26b7d2f2431f4baa6fa3dabf0ce7c8b5d782d62f"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-countries.command-handler.spec.ts",
+            "path": "src/@app/common/country/application/create/create-countries.command-handler.spec.ts",
             "integrity": "sha1:bc0aa96a9ce95b3b36434f702c7f1756a6cd7cfb"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-countries.command-handler.ts",
+            "path": "src/@app/common/country/application/create/create-countries.command-handler.ts",
             "integrity": "sha1:5301f27444b44c2d780d45b5881fb891876c818e"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-countries.command.ts",
+            "path": "src/@app/common/country/application/create/create-countries.command.ts",
             "integrity": "sha1:003bc3f001f920b45a4a458492b90f9abb98102e"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-countries.service.spec.ts",
+            "path": "src/@app/common/country/application/create/create-countries.service.spec.ts",
             "integrity": "sha1:7407fd392762f5f0cb611c5cb3634a9411fd4e56"
         },
         {
-            "path": "src/@apps/common/country/application/create/create-countries.service.ts",
+            "path": "src/@app/common/country/application/create/create-countries.service.ts",
             "integrity": "sha1:65107f170d4172dfe642d34faeeae8e2c8cb0668"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id.command-handler.spec.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id.command-handler.spec.ts",
             "integrity": "sha1:4bd58fc47377677dbc9778eaa9e5e948a1e7338c"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id.command-handler.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id.command-handler.ts",
             "integrity": "sha1:b5bc1de5acac10ef17acb58e00cc1e6d49e8d2ff"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id.command.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id.command.ts",
             "integrity": "sha1:5eeb427b4bb405d8b6ae480a5bd519b3ec2873fc"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id.service.spec.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id.service.spec.ts",
             "integrity": "sha1:c8bc782721639e6ad165f317a9e66952edda823e"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id.service.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id.service.ts",
             "integrity": "sha1:4c2a62a5a49039d0e4128fee13b62c31b797c8de"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-countries.command-handler.spec.ts",
+            "path": "src/@app/common/country/application/delete/delete-countries.command-handler.spec.ts",
             "integrity": "sha1:446df79ebd9d76def2e926462de37c5c5fad183d"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-countries.command-handler.ts",
+            "path": "src/@app/common/country/application/delete/delete-countries.command-handler.ts",
             "integrity": "sha1:1a0c09e9895ae6aacbee868cb14f3058e520467b"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-countries.command.ts",
+            "path": "src/@app/common/country/application/delete/delete-countries.command.ts",
             "integrity": "sha1:10af67ea51025d4746435b157cbca4de1d6806eb"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-countries.service.spec.ts",
+            "path": "src/@app/common/country/application/delete/delete-countries.service.spec.ts",
             "integrity": "sha1:74c3cbcf8048206b7f1e1497b5771d0a4e13f36e"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-countries.service.ts",
+            "path": "src/@app/common/country/application/delete/delete-countries.service.ts",
             "integrity": "sha1:7db59a1e21339af31187483cef5c0ed1d969755f"
         },
         {
-            "path": "src/@apps/common/country/application/events/add-countries-context.event.ts",
+            "path": "src/@app/common/country/application/events/add-countries-context.event.ts",
             "integrity": "sha1:314fed519fb7cb71cc7823bc84abfa8d7cdb8419"
         },
         {
-            "path": "src/@apps/common/country/application/events/created-country.event-handler.ts",
+            "path": "src/@app/common/country/application/events/created-country.event-handler.ts",
             "integrity": "sha1:f5fa625527cb6eda510bd55d996ef9eac17535f9"
         },
         {
-            "path": "src/@apps/common/country/application/events/created-country.event.ts",
+            "path": "src/@app/common/country/application/events/created-country.event.ts",
             "integrity": "sha1:e974e62b11d30b9535670b258dd50dfb6e93449f"
         },
         {
-            "path": "src/@apps/common/country/application/events/created-countries.event-handler.ts",
+            "path": "src/@app/common/country/application/events/created-countries.event-handler.ts",
             "integrity": "sha1:507f8dde60675a2ab2752acb6d5d1fa6ef43c895"
         },
         {
-            "path": "src/@apps/common/country/application/events/created-countries.event.ts",
+            "path": "src/@app/common/country/application/events/created-countries.event.ts",
             "integrity": "sha1:ec35d8a156659aa86171b98e73b945a26edd0b81"
         },
         {
-            "path": "src/@apps/common/country/application/events/deleted-country.event-handler.ts",
+            "path": "src/@app/common/country/application/events/deleted-country.event-handler.ts",
             "integrity": "sha1:76763aed4b1bba3607cb0343512a784bd6c0897d"
         },
         {
-            "path": "src/@apps/common/country/application/events/deleted-country.event.ts",
+            "path": "src/@app/common/country/application/events/deleted-country.event.ts",
             "integrity": "sha1:a751e7946afdc9f0a8db1f6530ec1ad7780c280a"
         },
         {
-            "path": "src/@apps/common/country/application/events/deleted-countries.event-handler.ts",
+            "path": "src/@app/common/country/application/events/deleted-countries.event-handler.ts",
             "integrity": "sha1:ad1157e5d764006a54dee5cc6a2a77355201bf38"
         },
         {
-            "path": "src/@apps/common/country/application/events/deleted-countries.event.ts",
+            "path": "src/@app/common/country/application/events/deleted-countries.event.ts",
             "integrity": "sha1:17cf6a791822ef80aa48979b50036eb4b0ff4957"
         },
         {
-            "path": "src/@apps/common/country/application/events/updated-country.event-handler.ts",
+            "path": "src/@app/common/country/application/events/updated-country.event-handler.ts",
             "integrity": "sha1:b4cb996b7f6073f972f733f09db98759cff36fa0"
         },
         {
-            "path": "src/@apps/common/country/application/events/updated-country.event.ts",
+            "path": "src/@app/common/country/application/events/updated-country.event.ts",
             "integrity": "sha1:260b66c5a6ec06705548f942cac2006b9afb3ec4"
         },
         {
-            "path": "src/@apps/common/country/application/events/updated-countries.event-handler.ts",
+            "path": "src/@app/common/country/application/events/updated-countries.event-handler.ts",
             "integrity": "sha1:270612946bc8709563b71ac1645dec42cba3c5bc"
         },
         {
-            "path": "src/@apps/common/country/application/events/updated-countries.event.ts",
+            "path": "src/@app/common/country/application/events/updated-countries.event.ts",
             "integrity": "sha1:ed1d53a35ce3a69a6926b24bd303622b31bcfcea"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country-by-id.query-handler.spec.ts",
+            "path": "src/@app/common/country/application/find/find-country-by-id.query-handler.spec.ts",
             "integrity": "sha1:0f592becaa18453b0539f98598509e67a55896c1"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country-by-id.query-handler.ts",
+            "path": "src/@app/common/country/application/find/find-country-by-id.query-handler.ts",
             "integrity": "sha1:a64b776e8d59a25112f5ceb1a1fae9779cb62f38"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country-by-id.query.ts",
+            "path": "src/@app/common/country/application/find/find-country-by-id.query.ts",
             "integrity": "sha1:9b3fbcc571b87f8d2ee6bbb6274a2547e374c5a1"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country-by-id.service.spec.ts",
+            "path": "src/@app/common/country/application/find/find-country-by-id.service.spec.ts",
             "integrity": "sha1:425923d0b0eae88217df39aeb6430755ca4cd54f"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country-by-id.service.ts",
+            "path": "src/@app/common/country/application/find/find-country-by-id.service.ts",
             "integrity": "sha1:8f93e326cb92fd272fd952cde798e0f06dfba8c3"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country.query-handler.spec.ts",
+            "path": "src/@app/common/country/application/find/find-country.query-handler.spec.ts",
             "integrity": "sha1:c77bb216bd2c7e2a08497132eb068291392e754d"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country.query-handler.ts",
+            "path": "src/@app/common/country/application/find/find-country.query-handler.ts",
             "integrity": "sha1:026c6c92c3fd30ee6a2d83aa23945ccf10160d7f"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country.query.ts",
+            "path": "src/@app/common/country/application/find/find-country.query.ts",
             "integrity": "sha1:fed3ab7bb420d7d4c83681b729f7ca1fc79c9643"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country.service.spec.ts",
+            "path": "src/@app/common/country/application/find/find-country.service.spec.ts",
             "integrity": "sha1:40fdaf3b501de710105830da73dc7c1f77e99f02"
         },
         {
-            "path": "src/@apps/common/country/application/find/find-country.service.ts",
+            "path": "src/@app/common/country/application/find/find-country.service.ts",
             "integrity": "sha1:c51a4a80bc896356c6c768decca70a582bd48565"
         },
         {
-            "path": "src/@apps/common/country/application/get/get-countries.query-handler.spec.ts",
+            "path": "src/@app/common/country/application/get/get-countries.query-handler.spec.ts",
             "integrity": "sha1:76595b8210b45f367fc586ed55da5ce170cb7f0f"
         },
         {
-            "path": "src/@apps/common/country/application/get/get-countries.query-handler.ts",
+            "path": "src/@app/common/country/application/get/get-countries.query-handler.ts",
             "integrity": "sha1:458837ebafb1a85989d5af5858660eb021470e09"
         },
         {
-            "path": "src/@apps/common/country/application/get/get-countries.query.ts",
+            "path": "src/@app/common/country/application/get/get-countries.query.ts",
             "integrity": "sha1:a821eb8a5efd51b91e55d408f88f20a74826868a"
         },
         {
-            "path": "src/@apps/common/country/application/get/get-countries.service.spec.ts",
+            "path": "src/@app/common/country/application/get/get-countries.service.spec.ts",
             "integrity": "sha1:3a05b830aea7ba3c3be852043a2fe5cf841b74d9"
         },
         {
-            "path": "src/@apps/common/country/application/get/get-countries.service.ts",
+            "path": "src/@app/common/country/application/get/get-countries.service.ts",
             "integrity": "sha1:59013315cd7e839f595758e87ee7c285ae2c658d"
         },
         {
-            "path": "src/@apps/common/country/application/paginate/paginate-countries.query-handler.spec.ts",
+            "path": "src/@app/common/country/application/paginate/paginate-countries.query-handler.spec.ts",
             "integrity": "sha1:a9a7bb55fc14ed5699216cc203d44723fe23efc1"
         },
         {
-            "path": "src/@apps/common/country/application/paginate/paginate-countries.query-handler.ts",
+            "path": "src/@app/common/country/application/paginate/paginate-countries.query-handler.ts",
             "integrity": "sha1:5f92ad900c17c7d2020b00d75a13900961cbd206"
         },
         {
-            "path": "src/@apps/common/country/application/paginate/paginate-countries.query.ts",
+            "path": "src/@app/common/country/application/paginate/paginate-countries.query.ts",
             "integrity": "sha1:b8beb12364c5bac39b2c6928bf3da126ddf6fcb2"
         },
         {
-            "path": "src/@apps/common/country/application/paginate/paginate-countries.service.spec.ts",
+            "path": "src/@app/common/country/application/paginate/paginate-countries.service.spec.ts",
             "integrity": "sha1:0643e287f26b6a0231d42ae9b24c46a045567c33"
         },
         {
-            "path": "src/@apps/common/country/application/paginate/paginate-countries.service.ts",
+            "path": "src/@app/common/country/application/paginate/paginate-countries.service.ts",
             "integrity": "sha1:5e795596febd99a8f21160c108f90894a463abc6"
         },
         {
-            "path": "src/@apps/common/country/application/sagas/country.sagas.ts",
+            "path": "src/@app/common/country/application/sagas/country.sagas.ts",
             "integrity": "sha1:3dd2546aac4545aba238bdaa9c5dc203524a63eb"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-country-by-id.command-handler.spec.ts",
+            "path": "src/@app/common/country/application/update/update-country-by-id.command-handler.spec.ts",
             "integrity": "sha1:13d50d4c445e396a8acfffa1625735230e44789e"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-country-by-id.command-handler.ts",
+            "path": "src/@app/common/country/application/update/update-country-by-id.command-handler.ts",
             "integrity": "sha1:521307f67c76bf0b660f4adb6d0446965eed5693"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-country-by-id.command.ts",
+            "path": "src/@app/common/country/application/update/update-country-by-id.command.ts",
             "integrity": "sha1:32b91752a3238d804f66b5fa1e99b9025f4e562d"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-country-by-id.service.spec.ts",
+            "path": "src/@app/common/country/application/update/update-country-by-id.service.spec.ts",
             "integrity": "sha1:68c8c3316e4e7ba48030c9de1bdf1c0e084738aa"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-country-by-id.service.ts",
+            "path": "src/@app/common/country/application/update/update-country-by-id.service.ts",
             "integrity": "sha1:84e86d891ab39d04755d2fecbc43bc33e4e8c046"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-countries.command-handler.spec.ts",
+            "path": "src/@app/common/country/application/update/update-countries.command-handler.spec.ts",
             "integrity": "sha1:a02ab66f254191e804410bd6b4b9d45cead4272d"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-countries.command-handler.ts",
+            "path": "src/@app/common/country/application/update/update-countries.command-handler.ts",
             "integrity": "sha1:dd3ea9a5822b46f61e8f5409756823ed07a78599"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-countries.command.ts",
+            "path": "src/@app/common/country/application/update/update-countries.command.ts",
             "integrity": "sha1:807e43727e232ce8207710b89430c8935966e1d5"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-countries.service.spec.ts",
+            "path": "src/@app/common/country/application/update/update-countries.service.spec.ts",
             "integrity": "sha1:644aa16b88608047d610cc2330403bd423ce7b39"
         },
         {
-            "path": "src/@apps/common/country/application/update/update-countries.service.ts",
+            "path": "src/@app/common/country/application/update/update-countries.service.ts",
             "integrity": "sha1:110e42f907eb853e9003c89ad8c3db3bcdbf5638"
         },
         {
-            "path": "src/@apps/common/country/domain/country.aggregate.ts",
+            "path": "src/@app/common/country/domain/country.aggregate.ts",
             "integrity": "sha1:9d698855bf5f0d75466530e46600f497e1d49168"
         },
         {
-            "path": "src/@apps/common/country/domain/country.mapper.ts",
+            "path": "src/@app/common/country/domain/country.mapper.ts",
             "integrity": "sha1:c6c29b984ff205c467c01001799743be2fdf0704"
         },
         {
-            "path": "src/@apps/common/country/domain/country.repository.ts",
+            "path": "src/@app/common/country/domain/country.repository.ts",
             "integrity": "sha1:5eb6948536bfe1f364a6ab39273f89a717e574fc"
         },
         {
-            "path": "src/@apps/common/country/domain/country.response.ts",
+            "path": "src/@app/common/country/domain/country.response.ts",
             "integrity": "sha1:38b7883ad4588669efd7f6170564781e447db379"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/index.ts",
+            "path": "src/@app/common/country/domain/value-objects/index.ts",
             "integrity": "sha1:b31a8b688b4404c8167db2a392814bf24712c146"
         },
         {
-            "path": "src/@apps/common/country/index.ts",
+            "path": "src/@app/common/country/index.ts",
             "integrity": "sha1:73a97c801f6a3017982d861e55e8c2b9deb49cdf"
         },
         {
-            "path": "src/@apps/common/country/infrastructure/mock/mock-country.repository.ts",
+            "path": "src/@app/common/country/infrastructure/mock/mock-country.repository.ts",
             "integrity": "sha1:a535d3e83c6746e09b1c5a79a0a3e558fcb74707"
         },
         {
-            "path": "src/@apps/common/country/infrastructure/mock/mock-country.seeder.ts",
+            "path": "src/@app/common/country/infrastructure/mock/mock-country.seeder.ts",
             "integrity": "sha1:3290692569a64d3f99fe52e03aa869f000d5a321"
         },
         {
-            "path": "src/@apps/common/country/infrastructure/seeds/country.seed.ts",
+            "path": "src/@app/common/country/infrastructure/seeds/country.seed.ts",
             "integrity": "sha1:72ba06925d579e667dfa534cbd6ab6e6e9be6de8"
         },
         {
-            "path": "src/@apps/common/country/infrastructure/sequelize/sequelize-country.model.ts",
+            "path": "src/@app/common/country/infrastructure/sequelize/sequelize-country.model.ts",
             "integrity": "sha1:9578eb1256d4ac579955442e5fb2fe93f118e023"
         },
         {
-            "path": "src/@apps/common/country/infrastructure/sequelize/sequelize-country.repository.ts",
+            "path": "src/@app/common/country/infrastructure/sequelize/sequelize-country.repository.ts",
             "integrity": "sha1:72e3546d765fef6a314f09b555997f589c6f0968"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-id.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-id.ts",
             "integrity": "sha1:80bf476ae37d3afca375b3c20c9fa52b1e4b7be0"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-iso-3166-alpha-2.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-iso-3166-alpha-2.ts",
             "integrity": "sha1:1f9be1c5c2417941f08c8d32b7c526c674379043"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-iso-3166-alpha-3.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-iso-3166-alpha-3.ts",
             "integrity": "sha1:8742738a4f6f65e3d6133eebd92f9b90cc468a39"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-iso-3166-numeric.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-iso-3166-numeric.ts",
             "integrity": "sha1:caccbc726945f6a81a4b3005ecca2c3df0ab4003"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-custom-code.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-custom-code.ts",
             "integrity": "sha1:a7c0e8fb42abe5087ebabeb19a3f14dcbf7d647d"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-prefix.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-prefix.ts",
             "integrity": "sha1:bf1aeac53312ba7fe50cd7300bb00799e2f369c9"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-image.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-image.ts",
             "integrity": "sha1:25cb368926f0baca4b5bc80fee73fa58c704fa46"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-sort.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-sort.ts",
             "integrity": "sha1:8dde7d173683babb8d5e20537d8030abbe6822e0"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-administrative-areas.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-administrative-areas.ts",
             "integrity": "sha1:0f42ab7b92ee3ec5656e0b044a70c7e1510b0db3"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-latitude.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-latitude.ts",
             "integrity": "sha1:9593a8a2f66b87d26bdce1149e4ef1e6f8f411f6"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-longitude.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-longitude.ts",
             "integrity": "sha1:0b431b964569fe08358b5f05e7bbe57765f3eca5"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-zoom.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-zoom.ts",
             "integrity": "sha1:792e269aa22315b7cd5fc9457da899f876b381f5"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-data-lang.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-data-lang.ts",
             "integrity": "sha1:fde1c69176bec37dd5752f55d057ddbe469e3fda"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-created-at.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-created-at.ts",
             "integrity": "sha1:3658a09830bd96bb36fce3783c102e3fdb2f29e5"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-updated-at.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-updated-at.ts",
             "integrity": "sha1:9f47d20b365a2705794f2d4c99cefaff82f06293"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-deleted-at.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-deleted-at.ts",
             "integrity": "sha1:f68bf6455907db4c202923d25003a31df3eb6344"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-id.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-id.ts",
             "integrity": "sha1:6ca265034f079e0e48ba9302fd45975511233b05"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-country-id.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-country-id.ts",
             "integrity": "sha1:3cce2d4fe3a54f8fc970bea37107cca2f99f4a9b"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-lang-id.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-lang-id.ts",
             "integrity": "sha1:1b3f705094a99d61afb32d5e9fd11007b9c40373"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-name.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-name.ts",
             "integrity": "sha1:500987de7021ba0444e686c71fb67fec332bdaa2"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-slug.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-slug.ts",
             "integrity": "sha1:65594709c032f8ee12650fcdf58a1f8ca223f5a2"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-administrative-area-level-1.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-administrative-area-level-1.ts",
             "integrity": "sha1:b2e042b2a96d0b31641502908c6eca9144bc7d47"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-administrative-area-level-2.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-administrative-area-level-2.ts",
             "integrity": "sha1:ebb971dcf52f6cea3e1b663d06ed04da3c2dc3d6"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-administrative-area-level-3.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-administrative-area-level-3.ts",
             "integrity": "sha1:d382c33fc2cfac87d2276f241b328f5dab870f66"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-created-at.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-created-at.ts",
             "integrity": "sha1:aa65bb50f2c84055d59ba05f54ee3e27499307a5"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-updated-at.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-updated-at.ts",
             "integrity": "sha1:2e77a156ebe2b8d7bdf85bd45f8428df43cba46d"
         },
         {
-            "path": "src/@apps/common/country/domain/value-objects/country-i18n-deleted-at.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-i18n-deleted-at.ts",
             "integrity": "sha1:e06d4defe677774e94e13f917e4a714749e681df"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id-i18n.command-handler.spec.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id-i18n.command-handler.spec.ts",
             "integrity": "sha1:f4b8bc1e6a1122341d29c6d4267acd58c5926e77"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id-i18n.command-handler.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id-i18n.command-handler.ts",
             "integrity": "sha1:bef4ccbe781461d43639b627f2d624238c1090ed"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id-i18n.command.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id-i18n.command.ts",
             "integrity": "sha1:f5b3a5ff987a81c73099ae58c491ef82a41747ef"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id-i18n.service.spec.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id-i18n.service.spec.ts",
             "integrity": "sha1:420576410f4646292a3df0bc40f2dcb1823cec54"
         },
         {
-            "path": "src/@apps/common/country/application/delete/delete-country-by-id-i18n.service.ts",
+            "path": "src/@app/common/country/application/delete/delete-country-by-id-i18n.service.ts",
             "integrity": "sha1:f41f5165e7a50d289edf668dfd587facf77233cb"
         },
         {
-            "path": "src/@apps/common/country/domain/country-i18n.repository.ts",
+            "path": "src/@app/common/country/domain/country-i18n.repository.ts",
             "integrity": "sha1:ffd0f128879347be1f5cc797d755f7b1d3a44432"
         },
         {
-            "path": "src/@apps/common/country/infrastructure/sequelize/sequelize-country-i18n.model.ts",
+            "path": "src/@app/common/country/infrastructure/sequelize/sequelize-country-i18n.model.ts",
             "integrity": "sha1:681ab4238c446b50416ea9bbf95611ac261abf1c"
         },
         {
-            "path": "src/@apps/common/country/infrastructure/sequelize/sequelize-country-i18n.repository.ts",
+            "path": "src/@app/common/country/infrastructure/sequelize/sequelize-country-i18n.repository.ts",
             "integrity": "sha1:004e0cc163fb6465a56dbc2d7471374376ad2732"
         },
         {

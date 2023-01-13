@@ -3,18 +3,18 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { SeederModule } from './seeder.module';
 
 // sources
-import { boundedContexts } from '../../../@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
-import { permissions } from '../../../@apps/iam/permission/infrastructure/seeds/permission.seed';
-import { BoundedContextHelper } from '../../../@apps/iam/bounded-context/domain/bounded-context-helper';
-import { PermissionHelper } from '../../../@apps/iam/permission/domain/permission-helper';
-import { FindAccountByIdQuery } from '../../../@apps/iam/account/application/find/find-account-by-id.query';
-import { CreateAccountsCommand } from '../../../@apps/iam/account/application/create/create-accounts.command';
-import { accounts } from '../../../@apps/iam/account/infrastructure/seeds/account.seed';
-import { CreateUsersCommand } from '../../../@apps/iam/user/application/create/create-users.command';
-import { users } from '../../../@apps/iam/user/infrastructure/seeds/user.seed';
-import { CreateRolesCommand } from '../../../@apps/iam/role/application/create/create-roles.command';
-import { CreateRolesAccountsCommand } from '../../../@apps/iam/role/application/create/create-roles-accounts.command';
-import { roles } from '../../../@apps/iam/role/infrastructure/seeds/role.seed';
+import { boundedContexts } from '../../../@app/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { permissions } from '../../../@app/iam/permission/infrastructure/seeds/permission.seed';
+import { BoundedContextHelper } from '../../../@app/iam/bounded-context/domain/bounded-context-helper';
+import { PermissionHelper } from '../../../@app/iam/permission/domain/permission-helper';
+import { FindAccountByIdQuery } from '../../../@app/iam/account/application/find/find-account-by-id.query';
+import { CreateAccountsCommand } from '../../../@app/iam/account/application/create/create-accounts.command';
+import { accounts } from '../../../@app/iam/account/infrastructure/seeds/account.seed';
+import { CreateUsersCommand } from '../../../@app/iam/user/application/create/create-users.command';
+import { users } from '../../../@app/iam/user/infrastructure/seeds/user.seed';
+import { CreateRolesCommand } from '../../../@app/iam/role/application/create/create-roles.command';
+import { CreateRolesAccountsCommand } from '../../../@app/iam/role/application/create/create-roles-accounts.command';
+import { roles } from '../../../@app/iam/role/infrastructure/seeds/role.seed';
 
 export class Seeder
 {

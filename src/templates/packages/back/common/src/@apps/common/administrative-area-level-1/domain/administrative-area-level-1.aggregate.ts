@@ -19,7 +19,7 @@ import {
 import { CreatedAdministrativeAreaLevel1Event } from '../application/events/created-administrative-area-level-1.event';
 import { UpdatedAdministrativeAreaLevel1Event } from '../application/events/updated-administrative-area-level-1.event';
 import { DeletedAdministrativeAreaLevel1Event } from '../application/events/deleted-administrative-area-level-1.event';
-import { CommonCountry } from '@apps/common/country/domain/country.aggregate';
+import { CommonCountry } from '@app/common/country/domain/country.aggregate';
 
 export class CommonAdministrativeAreaLevel1 extends AggregateRoot
 {

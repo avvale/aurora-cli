@@ -6,8 +6,8 @@ import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}IComm
 import { AuditingMeta } from '@api/auditing/auditing.types';
 {{/if}}
 
-// {{ config.applicationsContainer }}
-import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.applicationsContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
+// {{ config.appContainer }}
+import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from '@api/graphql';
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 

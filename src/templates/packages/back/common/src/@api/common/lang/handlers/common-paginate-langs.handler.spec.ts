@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { CommonPaginateLangsHandler } from './common-paginate-langs.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonPaginateLangsHandler', () =>
 {

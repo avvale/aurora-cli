@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetRolesQuery } from '@apps/iam/role/application/get/get-roles.query';
-import { DeleteRolesCommand } from '@apps/iam/role/application/delete/delete-roles.command';
+// @app
+import { GetRolesQuery } from '@app/iam/role/application/get/get-roles.query';
+import { DeleteRolesCommand } from '@app/iam/role/application/delete/delete-roles.command';
 import { IamRole } from '@api/graphql';
 import { IamRoleDto } from '../dto';
 

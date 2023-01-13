@@ -6,7 +6,7 @@ import { IamFindUserResolver } from './iam-find-user.resolver';
 import { IamFindUserHandler } from '../handlers/iam-find-user.handler';
 
 // sources
-import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@app/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamFindUserResolver', () =>
 {

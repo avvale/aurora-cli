@@ -6,7 +6,7 @@ import { CommonDeleteAdministrativeAreaLevel3ByIdController } from './common-del
 import { CommonDeleteAdministrativeAreaLevel3ByIdHandler } from '../handlers/common-delete-administrative-area-level-3-by-id.handler';
 
 // sources
-import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 describe('CommonDeleteAdministrativeAreaLevel3ByIdController', () =>
 {

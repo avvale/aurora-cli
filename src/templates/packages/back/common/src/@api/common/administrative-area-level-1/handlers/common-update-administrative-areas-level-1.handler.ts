@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetAdministrativeAreasLevel1Query } from '@apps/common/administrative-area-level-1/application/get/get-administrative-areas-level-1.query';
-import { UpdateAdministrativeAreasLevel1Command } from '@apps/common/administrative-area-level-1/application/update/update-administrative-areas-level-1.command';
+// @app
+import { GetAdministrativeAreasLevel1Query } from '@app/common/administrative-area-level-1/application/get/get-administrative-areas-level-1.query';
+import { UpdateAdministrativeAreasLevel1Command } from '@app/common/administrative-area-level-1/application/update/update-administrative-areas-level-1.command';
 import { CommonAdministrativeAreaLevel1, CommonUpdateAdministrativeAreasLevel1Input } from '@api/graphql';
 import { CommonAdministrativeAreaLevel1Dto, CommonUpdateAdministrativeAreasLevel1Dto } from '../dto';
 

@@ -89,7 +89,7 @@ export default class Load extends Command
             {
                 await BackHandler.generateModule(generateCommandState);
 
-                if (!flags.noGraphQLTypes) generateGraphqlTypes(generateCommandState);
+                if (!flags.noGraphQLTypes) await generateGraphqlTypes(generateCommandState);
             }
 
             if (args.scope === Scope.FRONT)

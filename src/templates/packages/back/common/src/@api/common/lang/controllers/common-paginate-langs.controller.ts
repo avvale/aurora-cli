@@ -3,7 +3,7 @@ import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { Pagination, QueryStatement, Timezone } from '@aurora-ts/core';
 
-// @apps
+// @app
 import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
 
 @ApiTags('[common] lang')

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { clients } from '@apps/o-auth/client/infrastructure/seeds/client.seed';
+import { clients } from '@app/o-auth/client/infrastructure/seeds/client.seed';
 import { UpdateClientByIdCommandHandler } from './update-client-by-id.command-handler';
 import { UpdateClientByIdCommand } from './update-client-by-id.command';
 import { UpdateClientByIdService } from './update-client-by-id.service';

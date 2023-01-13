@@ -6,7 +6,7 @@ import { IamDeleteAccountsController } from './iam-delete-accounts.controller';
 import { IamDeleteAccountsHandler } from '../handlers/iam-delete-accounts.handler';
 
 // sources
-import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@app/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamDeleteAccountsController', () =>
 {

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus } from '@aurora-ts/core';
 
-// @apps
-import { CreateLangsCommand } from '@apps/common/lang/application/create/create-langs.command';
+// @app
+import { CreateLangsCommand } from '@app/common/lang/application/create/create-langs.command';
 import { CommonCreateLangInput } from '@api/graphql';
 import { CommonCreateLangDto } from '../dto';
 

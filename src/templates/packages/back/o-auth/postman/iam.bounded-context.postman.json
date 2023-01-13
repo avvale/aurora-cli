@@ -1,7 +1,7 @@
 {
     "info": {
 		"_postman_id"   : "0690390d-2b3c-41aa-bb77-01804d0f1963",
-		"name"          : "@apps - iam/bounded-context",
+		"name"          : "@app - iam/bounded-context",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [

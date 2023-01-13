@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MockRepository, Utils } from '@aurora-ts/core';
-import { ICountryRepository } from '@apps/common/country/domain/country.repository';
+import { ICountryRepository } from '@app/common/country/domain/country.repository';
 import {
     CountryId,
     CountryIso3166Alpha2,
@@ -24,7 +24,7 @@ import {
     CountryI18NAdministrativeAreaLevel1,
     CountryI18NAdministrativeAreaLevel2,
     CountryI18NAdministrativeAreaLevel3,
-} from '@apps/common/country/domain/value-objects';
+} from '@app/common/country/domain/value-objects';
 import { CommonCountry } from '../../domain/country.aggregate';
 import { countries } from '../seeds/country.seed';
 

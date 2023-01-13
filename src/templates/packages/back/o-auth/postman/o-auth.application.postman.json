@@ -1,7 +1,7 @@
 {
     "info": {
 		"_postman_id"   : "d1b3fa02-e20f-4d7e-b9e9-6fe0c4fca93c",
-		"name"          : "@apps - o-auth/application",
+		"name"          : "@app - o-auth/application",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [

@@ -6,7 +6,7 @@ import { IamDeleteAccountByIdResolver } from './iam-delete-account-by-id.resolve
 import { IamDeleteAccountByIdHandler } from '../handlers/iam-delete-account-by-id.handler';
 
 // sources
-import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@app/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamDeleteAccountByIdResolver', () =>
 {

@@ -21,9 +21,9 @@ import {
 import { CreatedAdministrativeAreaLevel3Event } from '../application/events/created-administrative-area-level-3.event';
 import { UpdatedAdministrativeAreaLevel3Event } from '../application/events/updated-administrative-area-level-3.event';
 import { DeletedAdministrativeAreaLevel3Event } from '../application/events/deleted-administrative-area-level-3.event';
-import { CommonCountry } from '@apps/common/country/domain/country.aggregate';
-import { CommonAdministrativeAreaLevel1 } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.aggregate';
-import { CommonAdministrativeAreaLevel2 } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.aggregate';
+import { CommonCountry } from '@app/common/country/domain/country.aggregate';
+import { CommonAdministrativeAreaLevel1 } from '@app/common/administrative-area-level-1/domain/administrative-area-level-1.aggregate';
+import { CommonAdministrativeAreaLevel2 } from '@app/common/administrative-area-level-2/domain/administrative-area-level-2.aggregate';
 
 export class CommonAdministrativeAreaLevel3 extends AggregateRoot
 {

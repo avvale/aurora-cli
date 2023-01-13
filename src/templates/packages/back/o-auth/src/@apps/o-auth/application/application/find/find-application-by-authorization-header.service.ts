@@ -3,7 +3,7 @@ import { CQMetadata, QueryStatement } from '@aurora-ts/core';
 import { IApplicationRepository } from '../../domain/application.repository';
 import { OAuthApplication } from '../../domain/application.aggregate';
 import { ApplicationAuthorizationHeader } from '../../domain/value-objects/application-authorization-header';
-import { OAuthClientModel } from '../../../../../@apps/o-auth/client/infrastructure/sequelize/sequelize-client.model';
+import { OAuthClientModel } from '../../../../../@app/o-auth/client/infrastructure/sequelize/sequelize-client.model';
 
 @Injectable()
 export class FindApplicationByAuthorizationHeaderService

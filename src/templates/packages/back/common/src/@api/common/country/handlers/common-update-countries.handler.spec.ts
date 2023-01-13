@@ -9,8 +9,8 @@ import { CommonUpdateCountriesHandler } from './common-update-countries.handler'
 import { CommonUpdateCountriesInput } from '@api/graphql';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonUpdateCountriesHandler', () =>
 {

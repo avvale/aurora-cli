@@ -4,7 +4,7 @@ import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs
 import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { CommonAdministrativeAreaLevel2Dto } from '../dto';
 
-// @apps
+// @app
 import { CommonGetAdministrativeAreasLevel2Handler } from '../handlers/common-get-administrative-areas-level-2.handler';
 
 @ApiTags('[common] administrative-area-level-2')

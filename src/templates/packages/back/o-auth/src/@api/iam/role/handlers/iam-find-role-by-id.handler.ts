@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { FindRoleByIdQuery } from '@apps/iam/role/application/find/find-role-by-id.query';
+// @app
+import { FindRoleByIdQuery } from '@app/iam/role/application/find/find-role-by-id.query';
 import { IamRole } from '@api/graphql';
 import { IamRoleDto } from '../dto';
 

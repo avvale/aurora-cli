@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { PaginateAdministrativeAreasLevel2Query } from '@apps/common/administrative-area-level-2/application/paginate/paginate-administrative-areas-level-2.query';
+// @app
+import { PaginateAdministrativeAreasLevel2Query } from '@app/common/administrative-area-level-2/application/paginate/paginate-administrative-areas-level-2.query';
 import { Pagination } from '@api/graphql';
 
 @Injectable()

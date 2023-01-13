@@ -6,7 +6,7 @@ import { IamUpdateAccountByIdController } from './iam-update-account-by-id.contr
 import { IamUpdateAccountByIdHandler } from '../handlers/iam-update-account-by-id.handler';
 
 // sources
-import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@app/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamUpdateAccountByIdController', () =>
 {

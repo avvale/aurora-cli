@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 import { FindLangByIdService } from './find-lang-by-id.service';
 import { LangId } from '../../domain/value-objects';
 import { ILangRepository } from '../../domain/lang.repository';

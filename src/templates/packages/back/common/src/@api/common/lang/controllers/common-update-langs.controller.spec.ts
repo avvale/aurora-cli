@@ -6,7 +6,7 @@ import { CommonUpdateLangsController } from './common-update-langs.controller';
 import { CommonUpdateLangsHandler } from '../handlers/common-update-langs.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonUpdateLangsController', () =>
 {

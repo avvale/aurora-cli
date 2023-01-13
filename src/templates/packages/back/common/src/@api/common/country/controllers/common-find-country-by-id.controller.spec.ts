@@ -8,8 +8,8 @@ import { CommonFindCountryByIdController } from './common-find-country-by-id.con
 import { CommonFindCountryByIdHandler } from '../handlers/common-find-country-by-id.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonFindCountryByIdController', () =>
 {

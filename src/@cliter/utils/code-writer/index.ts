@@ -104,7 +104,7 @@ export class CodeWriter
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
-        // register import in @apps/boundedContext/index.ts
+        // register import in @app/boundedContext/index.ts
         ImportDriver.createImportItems(
             sourceFile,
             `./${this.moduleName.toKebabCase()}`,
@@ -530,10 +530,10 @@ export class CodeWriter
         const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
         const controllersArray = controllers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
 
-        // register imports from bounded context from @apps
+        // register imports from bounded context from @app
         ImportDriver.createImportItems(
             sourceFile,
-            `../../${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}`,
+            `../../${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}`,
             [
                 `${this.boundedContextName.toPascalCase()}Models`,
                 `${this.boundedContextName.toPascalCase()}Handlers`,
@@ -567,7 +567,7 @@ export class CodeWriter
         ArrayDriver.addArrayItems(
             sourceFile,
             [
-                // from @apps
+                // from @app
                 `...${this.boundedContextName.toPascalCase()}Handlers`,
                 `...${this.boundedContextName.toPascalCase()}Services`,
                 `...${this.boundedContextName.toPascalCase()}Repositories`,
@@ -641,35 +641,35 @@ export class CodeWriter
         // export aggregate
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.aggregate`,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.aggregate`,
             [`${this.aggregateName}`],
         );
 
         // export model
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`,
             [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`],
         );
 
         // export response
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.response`,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.response`,
             [`${this.moduleName.toPascalCase()}Response`],
         );
 
         // export mapper
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.mapper`,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.mapper`,
             [`${this.moduleName.toPascalCase()}Mapper`],
         );
 
         // export seed
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.applicationsContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/seeds/${this.moduleName.toKebabCase()}.seed`,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/seeds/${this.moduleName.toKebabCase()}.seed`,
             [`${this.moduleNames.toCamelCase()}`],
         );
 
@@ -684,7 +684,7 @@ export class CodeWriter
         // register import auth module
         ImportDriver.createImportItems(
             sourceFile,
-            `../${cliterConfig.applicationsContainer}/o-auth/shared/modules/auth.module`,
+            `../${cliterConfig.appContainer}/o-auth/shared/modules/auth.module`,
             [
                 'AuthModule',
             ],
@@ -693,7 +693,7 @@ export class CodeWriter
         // add JWT configuration
         ImportDriver.createImportItems(
             sourceFile,
-            `../${cliterConfig.applicationsContainer}/o-auth/shared/jwt-config`,
+            `../${cliterConfig.appContainer}/o-auth/shared/jwt-config`,
             [
                 'jwtConfig',
             ],

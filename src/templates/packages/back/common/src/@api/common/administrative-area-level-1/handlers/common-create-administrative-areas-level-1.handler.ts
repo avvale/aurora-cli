@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus } from '@aurora-ts/core';
 
-// @apps
-import { CreateAdministrativeAreasLevel1Command } from '@apps/common/administrative-area-level-1/application/create/create-administrative-areas-level-1.command';
+// @app
+import { CreateAdministrativeAreasLevel1Command } from '@app/common/administrative-area-level-1/application/create/create-administrative-areas-level-1.command';
 import { CommonCreateAdministrativeAreaLevel1Input } from '@api/graphql';
 import { CommonCreateAdministrativeAreaLevel1Dto } from '../dto';
 

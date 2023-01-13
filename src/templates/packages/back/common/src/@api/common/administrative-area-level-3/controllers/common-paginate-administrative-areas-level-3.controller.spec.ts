@@ -6,7 +6,7 @@ import { CommonPaginateAdministrativeAreasLevel3Controller } from './common-pagi
 import { CommonPaginateAdministrativeAreasLevel3Handler } from '../handlers/common-paginate-administrative-areas-level-3.handler';
 
 // sources
-import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 describe('CommonPaginateAdministrativeAreasLevel3Controller', () =>
 {

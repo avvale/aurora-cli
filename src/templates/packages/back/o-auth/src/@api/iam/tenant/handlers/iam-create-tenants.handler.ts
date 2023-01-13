@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus } from '@aurora-ts/core';
 
-// @apps
-import { CreateTenantsCommand } from '@apps/iam/tenant/application/create/create-tenants.command';
+// @app
+import { CreateTenantsCommand } from '@app/iam/tenant/application/create/create-tenants.command';
 import { IamCreateTenantInput } from '@api/graphql';
 import { IamCreateTenantDto } from '../dto';
 

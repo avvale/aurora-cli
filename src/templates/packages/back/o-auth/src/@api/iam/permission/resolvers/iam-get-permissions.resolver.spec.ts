@@ -6,7 +6,7 @@ import { IamGetPermissionsResolver } from './iam-get-permissions.resolver';
 import { IamGetPermissionsHandler } from '../handlers/iam-get-permissions.handler';
 
 // sources
-import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@app/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamGetPermissionsResolver', () =>
 {

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetLangsQuery } from '@apps/common/lang/application/get/get-langs.query';
-import { UpdateLangsCommand } from '@apps/common/lang/application/update/update-langs.command';
+// @app
+import { GetLangsQuery } from '@app/common/lang/application/get/get-langs.query';
+import { UpdateLangsCommand } from '@app/common/lang/application/update/update-langs.command';
 import { CommonLang, CommonUpdateLangsInput } from '@api/graphql';
 import { CommonLangDto, CommonUpdateLangsDto } from '../dto';
 

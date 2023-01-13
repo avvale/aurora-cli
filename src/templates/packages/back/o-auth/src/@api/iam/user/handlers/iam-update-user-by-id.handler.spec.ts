@@ -7,7 +7,7 @@ import { IamUpdateUserByIdHandler } from './iam-update-user-by-id.handler';
 import { IamUpdateUserByIdInput } from '@api/graphql';
 
 // sources
-import { users } from '@apps/iam/user/infrastructure/seeds/user.seed';
+import { users } from '@app/iam/user/infrastructure/seeds/user.seed';
 
 describe('IamUpdateUserByIdHandler', () =>
 {

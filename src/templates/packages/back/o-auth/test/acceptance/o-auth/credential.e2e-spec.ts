@@ -9,18 +9,18 @@ import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // ---- customizations ----
-import { AuthModule } from '@apps/o-auth/shared/modules/auth.module';
+import { AuthModule } from '@app/o-auth/shared/modules/auth.module';
 import { IamModule } from '@api/iam/iam.module';
-import { MockJwtService } from '@apps/o-auth/access-token/infrastructure/mock/mock-jwt.service';
+import { MockJwtService } from '@app/o-auth/access-token/infrastructure/mock/mock-jwt.service';
 import { OAuthClientGrantType } from '../../../@api/graphql';
-import { IApplicationRepository } from '@apps/o-auth/application';
-import { MockApplicationSeeder } from '@apps/o-auth/application/infrastructure/mock/mock-application.seeder';
-import { IClientRepository } from '@apps/o-auth/client';
-import { MockClientSeeder } from '@apps/o-auth/client/infrastructure/mock/mock-client.seeder';
-import { IAccountRepository } from '@apps/iam/account';
-import { MockAccountSeeder } from '@apps/iam/account/infrastructure/mock/mock-account.seeder';
-import { IUserRepository } from '@apps/iam/user';
-import { MockUserSeeder } from '@apps/iam/user/infrastructure/mock/mock-user.seeder';
+import { IApplicationRepository } from '@app/o-auth/application';
+import { MockApplicationSeeder } from '@app/o-auth/application/infrastructure/mock/mock-application.seeder';
+import { IClientRepository } from '@app/o-auth/client';
+import { MockClientSeeder } from '@app/o-auth/client/infrastructure/mock/mock-client.seeder';
+import { IAccountRepository } from '@app/iam/account';
+import { MockAccountSeeder } from '@app/iam/account/infrastructure/mock/mock-account.seeder';
+import { IUserRepository } from '@app/iam/user';
+import { MockUserSeeder } from '@app/iam/user/infrastructure/mock/mock-user.seeder';
 
 const importForeignModules = [];
 

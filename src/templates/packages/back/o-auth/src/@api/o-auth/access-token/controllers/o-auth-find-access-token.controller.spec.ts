@@ -6,7 +6,7 @@ import { OAuthFindAccessTokenController } from './o-auth-find-access-token.contr
 import { OAuthFindAccessTokenHandler } from '../handlers/o-auth-find-access-token.handler';
 
 // sources
-import { accessTokens } from '@apps/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@app/o-auth/access-token/infrastructure/seeds/access-token.seed';
 
 describe('OAuthFindAccessTokenController', () =>
 {

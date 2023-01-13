@@ -4,7 +4,7 @@ import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swag
 import { Timezone } from '@aurora-ts/core';
 import { CommonAdministrativeAreaLevel2Dto, CommonCreateAdministrativeAreaLevel2Dto } from '../dto';
 
-// @apps
+// @app
 import { CommonCreateAdministrativeAreasLevel2Handler } from '../handlers/common-create-administrative-areas-level-2.handler';
 
 @ApiTags('[common] administrative-area-level-2')

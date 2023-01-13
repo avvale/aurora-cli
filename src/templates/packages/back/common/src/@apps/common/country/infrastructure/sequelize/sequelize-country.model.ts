@@ -2,7 +2,7 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { CommonLangModel } from '@apps/common/lang/infrastructure/sequelize/sequelize-lang.model';
+import { CommonLangModel } from '@app/common/lang/infrastructure/sequelize/sequelize-lang.model';
 import { CommonCountryI18NModel } from './sequelize-country-i18n.model';
 
 @Table({ modelName: 'CommonCountry', freezeTableName: true, timestamps: false })

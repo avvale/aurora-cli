@@ -1,7 +1,7 @@
 {
     "info": {
 		"_postman_id"   : "820b6018-8314-4bce-90dd-60094cbd4819",
-		"name"          : "@apps - o-auth/access-token",
+		"name"          : "@app - o-auth/access-token",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [

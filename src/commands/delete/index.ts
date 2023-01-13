@@ -34,15 +34,15 @@ export default class Delete extends Command
         const { args, flags } = await this.parse(Delete);
 
         if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
-        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_APPS;
+        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_APP;
 
-        if (args.elementType === TemplateElement.BACK_APPS)
+        if (args.elementType === TemplateElement.BACK_APP)
         {
-            if (fs.existsSync(path.join(process.cwd(), 'src', cliterConfig.applicationsContainer, args.elementName)))
+            if (fs.existsSync(path.join(process.cwd(), 'src', cliterConfig.appContainer, args.elementName)))
             {
                 if ((await this.promptForDelete(args.elementName)).hasDelete)
                 {
-                    FsExtend.rmDir(path.join(process.cwd(), 'src', cliterConfig.applicationsContainer, args.elementName));
+                    FsExtend.rmDir(path.join(process.cwd(), 'src', cliterConfig.appContainer, args.elementName));
                     this.log(`%s %s Module ${args.elementName} has been deleted %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
                 }
             }

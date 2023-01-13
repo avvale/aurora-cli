@@ -1,6 +1,6 @@
 import { BadRequestException } from '@nestjs/common';
 import { Operator } from '@aurora-ts/core';
-import { AccountResponse } from '../../../../@apps/iam/account/domain/account.response';
+import { AccountResponse } from '../../../../@app/iam/account/domain/account.response';
 import * as _ from 'lodash';
 
 export const TenantConstraint = (customProperties?: {

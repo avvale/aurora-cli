@@ -2,7 +2,7 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { CommonCountryModel } from '@apps/common/country/infrastructure/sequelize/sequelize-country.model';
+import { CommonCountryModel } from '@app/common/country/infrastructure/sequelize/sequelize-country.model';
 
 @Table({ modelName: 'CommonAdministrativeAreaLevel1', freezeTableName: true, timestamps: false })
 export class CommonAdministrativeAreaLevel1Model extends Model<CommonAdministrativeAreaLevel1Model>

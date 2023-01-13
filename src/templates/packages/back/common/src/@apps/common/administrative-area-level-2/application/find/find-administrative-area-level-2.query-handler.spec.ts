@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { FindAdministrativeAreaLevel2QueryHandler } from './find-administrative-area-level-2.query-handler';
-import { MockAdministrativeAreaLevel2Repository } from '@apps/common/administrative-area-level-2/infrastructure/mock/mock-administrative-area-level-2.repository';
-import { IAdministrativeAreaLevel2Repository } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.repository';
-import { AdministrativeAreaLevel2Mapper } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
+import { MockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/infrastructure/mock/mock-administrative-area-level-2.repository';
+import { IAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/domain/administrative-area-level-2.repository';
+import { AdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
 import { FindAdministrativeAreaLevel2Query } from './find-administrative-area-level-2.query';
 import { FindAdministrativeAreaLevel2Service } from './find-administrative-area-level-2.service';
 

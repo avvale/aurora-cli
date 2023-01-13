@@ -3,9 +3,9 @@ import { PaginationResponse } from '@aurora-ts/core';
 
 // custom items
 import { PaginateAdministrativeAreasLevel2QueryHandler } from './paginate-administrative-areas-level-2.query-handler';
-import { MockAdministrativeAreaLevel2Repository } from '@apps/common/administrative-area-level-2/infrastructure/mock/mock-administrative-area-level-2.repository';
-import { IAdministrativeAreaLevel2Repository } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.repository';
-import { AdministrativeAreaLevel2Mapper } from '@apps/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
+import { MockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/infrastructure/mock/mock-administrative-area-level-2.repository';
+import { IAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/domain/administrative-area-level-2.repository';
+import { AdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2/domain/administrative-area-level-2.mapper';
 import { PaginateAdministrativeAreasLevel2Query } from './paginate-administrative-areas-level-2.query';
 import { PaginateAdministrativeAreasLevel2Service } from './paginate-administrative-areas-level-2.service';
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { GetUsersQuery } from '@apps/iam/user/application/get/get-users.query';
-import { DeleteUsersCommand } from '@apps/iam/user/application/delete/delete-users.command';
+// @app
+import { GetUsersQuery } from '@app/iam/user/application/get/get-users.query';
+import { DeleteUsersCommand } from '@app/iam/user/application/delete/delete-users.command';
 import { IamUser } from '@api/graphql';
 import { IamUserDto } from '../dto';
 

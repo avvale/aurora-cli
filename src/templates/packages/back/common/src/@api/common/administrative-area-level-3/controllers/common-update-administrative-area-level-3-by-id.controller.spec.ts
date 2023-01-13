@@ -6,7 +6,7 @@ import { CommonUpdateAdministrativeAreaLevel3ByIdController } from './common-upd
 import { CommonUpdateAdministrativeAreaLevel3ByIdHandler } from '../handlers/common-update-administrative-area-level-3-by-id.handler';
 
 // sources
-import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 describe('CommonUpdateAdministrativeAreaLevel3ByIdController', () =>
 {

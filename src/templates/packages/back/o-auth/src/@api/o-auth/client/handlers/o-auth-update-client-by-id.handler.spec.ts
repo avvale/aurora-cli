@@ -7,7 +7,7 @@ import { OAuthUpdateClientByIdHandler } from './o-auth-update-client-by-id.handl
 import { OAuthUpdateClientByIdInput } from '@api/graphql';
 
 // sources
-import { clients } from '@apps/o-auth/client/infrastructure/seeds/client.seed';
+import { clients } from '@app/o-auth/client/infrastructure/seeds/client.seed';
 
 describe('OAuthUpdateClientByIdHandler', () =>
 {

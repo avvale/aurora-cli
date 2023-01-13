@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@app/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 import { FindAdministrativeAreaLevel2ByIdService } from './find-administrative-area-level-2-by-id.service';
 import { AdministrativeAreaLevel2Id } from '../../domain/value-objects';
 import { IAdministrativeAreaLevel2Repository } from '../../domain/administrative-area-level-2.repository';

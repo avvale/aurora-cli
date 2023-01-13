@@ -2,19 +2,19 @@ import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/
 import { JwtService } from '@nestjs/jwt';
 import { ICommandBus, IQueryBus, Jwt, Utils } from '@aurora-ts/core';
 
-// @apps
-import { FindClientQuery } from '@apps/o-auth/client/application/find/find-client.query';
-import { CreateAccessTokenCommand } from '@apps/o-auth/access-token/application/create/create-access-token.command';
-import { CreateRefreshTokenCommand } from '@apps/o-auth/refresh-token/application/create/create-refresh-token.command';
-import { FindAccessTokenQuery } from '@apps/o-auth/access-token/application/find/find-access-token.query';
-import { FindAccountQuery } from '@apps/iam/account/application/find/find-account.query';
-import { OAuthRefreshTokenModel } from '@apps/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model';
-import { FindUserByUsernamePasswordQuery } from '@apps/iam/user/application/find/find-user-by-username-password.query';
-import { FindApplicationByAuthorizationHeaderQuery } from '@apps/o-auth/application/application/find/find-application-by-authorization-header.query';
-import { FindRefreshTokenByIdQuery } from '@apps/o-auth/refresh-token/application/find/find-refresh-token-by-id.query';
-import { DeleteAccessTokenByIdCommand } from '@apps/o-auth/access-token/application/delete/delete-access-token-by-id.command';
-import { OAuthAccessTokenModel } from '@apps/o-auth/access-token';
-import { OAuthClientModel } from '@apps/o-auth/client';
+// @app
+import { FindClientQuery } from '@app/o-auth/client/application/find/find-client.query';
+import { CreateAccessTokenCommand } from '@app/o-auth/access-token/application/create/create-access-token.command';
+import { CreateRefreshTokenCommand } from '@app/o-auth/refresh-token/application/create/create-refresh-token.command';
+import { FindAccessTokenQuery } from '@app/o-auth/access-token/application/find/find-access-token.query';
+import { FindAccountQuery } from '@app/iam/account/application/find/find-account.query';
+import { OAuthRefreshTokenModel } from '@app/o-auth/refresh-token/infrastructure/sequelize/sequelize-refresh-token.model';
+import { FindUserByUsernamePasswordQuery } from '@app/iam/user/application/find/find-user-by-username-password.query';
+import { FindApplicationByAuthorizationHeaderQuery } from '@app/o-auth/application/application/find/find-application-by-authorization-header.query';
+import { FindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token/application/find/find-refresh-token-by-id.query';
+import { DeleteAccessTokenByIdCommand } from '@app/o-auth/access-token/application/delete/delete-access-token-by-id.command';
+import { OAuthAccessTokenModel } from '@app/o-auth/access-token';
+import { OAuthClientModel } from '@app/o-auth/client';
 import { OAuthClientGrantType, OAuthCredentials, OAuthCreateCredentialsInput, IamAccountType, OAuthClient } from '@api/graphql';
 import { OAuthCreateCredentialsDto, OAuthCredentialsDto } from '../dto';
 

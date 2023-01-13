@@ -7,7 +7,7 @@ import { OAuthUpdateApplicationsHandler } from './o-auth-update-applications.han
 import { OAuthUpdateApplicationsInput } from '@api/graphql';
 
 // sources
-import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@app/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthUpdateApplicationsHandler', () =>
 {

@@ -2,9 +2,9 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { IamBoundedContextModel } from '@apps/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
-import { IamRoleModel } from '@apps/iam/role/infrastructure/sequelize/sequelize-role.model';
-import { IamPermissionsRolesModel } from '@apps/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model';
+import { IamBoundedContextModel } from '@app/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model';
+import { IamRoleModel } from '@app/iam/role/infrastructure/sequelize/sequelize-role.model';
+import { IamPermissionsRolesModel } from '@app/iam/permission/infrastructure/sequelize/sequelize-permissions-roles.model';
 
 @Table({ modelName: 'IamPermission', freezeTableName: true, timestamps: false })
 export class IamPermissionModel extends Model<IamPermissionModel>

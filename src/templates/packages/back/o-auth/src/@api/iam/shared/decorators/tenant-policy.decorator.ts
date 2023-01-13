@@ -1,5 +1,5 @@
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
-import { AccountResponse } from '../../../../@apps/iam/account/domain/account.response';
+import { AccountResponse } from '../../../../@app/iam/account/domain/account.response';
 
 export const TenantPolicy = (customProperties?: {
     targetProperty: string;

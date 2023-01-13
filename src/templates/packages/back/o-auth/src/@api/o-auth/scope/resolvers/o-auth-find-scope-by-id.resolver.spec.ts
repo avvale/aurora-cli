@@ -6,7 +6,7 @@ import { OAuthFindScopeByIdResolver } from './o-auth-find-scope-by-id.resolver';
 import { OAuthFindScopeByIdHandler } from '../handlers/o-auth-find-scope-by-id.handler';
 
 // sources
-import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthFindScopeByIdResolver', () =>
 {

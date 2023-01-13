@@ -1,4 +1,4 @@
-import { LangResponse } from '@apps/common/lang/domain/lang.response';
+import { LangResponse } from '@app/common/lang/domain/lang.response';
 
 export class CountryResponse
 {

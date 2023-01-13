@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Jwt, Utils } from '@aurora-ts/core';
 import { accessTokens } from '../seeds/access-token.seed';
-import { accounts } from '../../../../../@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '../../../../../@app/iam/account/infrastructure/seeds/account.seed';
 
 @Injectable()
 export class MockJwtService

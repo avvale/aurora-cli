@@ -6,7 +6,7 @@ import { CommonCreateCountriesHandler } from '../handlers/common-create-countrie
 import { CommonCreateCountryInput } from '@api/graphql';
 
 // sources
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 
 describe('CommonCreateCountriesResolver', () =>
 {

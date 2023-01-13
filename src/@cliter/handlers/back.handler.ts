@@ -2,7 +2,7 @@
 import { TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { generateJsonLockFile } from '../functions/common';
-import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nModuleFiles, generateAppFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
+import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nAppFiles, generateAppFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
 import { GenerateCommandState, NewBackCommandState } from '../types';
 import { GlobalState } from '../store';
 import * as fs from 'node:fs';
@@ -45,7 +45,7 @@ export class BackHandler
         await generatePivotTables(generateCommandState);
 
         // generate i18n module files
-        await generateI18nModuleFiles(generateCommandState);
+        await generateI18nAppFiles(generateCommandState);
 
         // generate @api files
         await generateApiFiles(generateCommandState);

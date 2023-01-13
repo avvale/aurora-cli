@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus } from '@aurora-ts/core';
 
-// @apps
-import { CreateScopesCommand } from '@apps/o-auth/scope/application/create/create-scopes.command';
+// @app
+import { CreateScopesCommand } from '@app/o-auth/scope/application/create/create-scopes.command';
 import { OAuthCreateScopeInput } from '@api/graphql';
 import { OAuthCreateScopeDto } from '../dto';
 

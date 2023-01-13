@@ -1,21 +1,21 @@
 import { Injectable, LiteralObject } from '@nestjs/common';
 import { ICommandBus, IQueryBus, Jwt, Utils } from '@aurora-ts/core';
 
-// @apps
-import { FindAccountByIdQuery } from '@apps/iam/account/application/find/find-account-by-id.query';
-import { CreateAccountCommand } from '@apps/iam/account/application/create/create-account.command';
+// @app
+import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';
+import { CreateAccountCommand } from '@app/iam/account/application/create/create-account.command';
 import { IamAccount, IamAccountType, IamCreateAccountInput } from '@api/graphql';
 import { IamAccountDto, IamCreateAccountDto } from '../dto';
 
 // ---- customizations ----
 import { JwtService } from '@nestjs/jwt';
-import { GetRolesQuery } from '@apps/iam/role/application/get/get-roles.query';
-import { FindClientByIdQuery } from '@apps/o-auth/client/application/find/find-client-by-id.query';
-import { FindAccessTokenByIdQuery } from '@apps/o-auth/access-token/application/find/find-access-token-by-id.query';
-import { CreateUserCommand } from '@apps/iam/user/application/create/create-user.command';
-import { AccountHelper } from '@apps/iam/account/domain/account.helper';
-import { OAuthApplicationModel } from '@apps/o-auth/application/infrastructure/sequelize/sequelize-application.model';
-import { IamPermissionModel } from '@apps/iam/permission/infrastructure/sequelize/sequelize-permission.model';
+import { GetRolesQuery } from '@app/iam/role/application/get/get-roles.query';
+import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
+import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';
+import { CreateUserCommand } from '@app/iam/user/application/create/create-user.command';
+import { AccountHelper } from '@app/iam/account/domain/account.helper';
+import { OAuthApplicationModel } from '@app/o-auth/application/infrastructure/sequelize/sequelize-application.model';
+import { IamPermissionModel } from '@app/iam/permission/infrastructure/sequelize/sequelize-permission.model';
 
 @Injectable()
 export class IamCreateAccountHandler

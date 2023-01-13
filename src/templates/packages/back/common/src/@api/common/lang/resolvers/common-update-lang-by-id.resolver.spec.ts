@@ -7,7 +7,7 @@ import { CommonUpdateLangByIdHandler } from '../handlers/common-update-lang-by-i
 import { CommonUpdateLangByIdInput } from '@api/graphql';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonUpdateLangByIdResolver', () =>
 {

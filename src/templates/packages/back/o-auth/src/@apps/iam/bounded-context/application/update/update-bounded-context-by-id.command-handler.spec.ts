@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { boundedContexts } from '@apps/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
+import { boundedContexts } from '@app/iam/bounded-context/infrastructure/seeds/bounded-context.seed';
 import { UpdateBoundedContextByIdCommandHandler } from './update-bounded-context-by-id.command-handler';
 import { UpdateBoundedContextByIdCommand } from './update-bounded-context-by-id.command';
 import { UpdateBoundedContextByIdService } from './update-bounded-context-by-id.service';

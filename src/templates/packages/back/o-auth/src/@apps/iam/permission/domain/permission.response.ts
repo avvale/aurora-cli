@@ -1,5 +1,5 @@
-import { BoundedContextResponse } from '@apps/iam/bounded-context/domain/bounded-context.response';
-import { RoleResponse } from '@apps/iam/role/domain/role.response';
+import { BoundedContextResponse } from '@app/iam/bounded-context/domain/bounded-context.response';
+import { RoleResponse } from '@app/iam/role/domain/role.response';
 
 export class PermissionResponse
 {

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { FindApplicationByIdQuery } from '@apps/o-auth/application/application/find/find-application-by-id.query';
-import { UpdateApplicationByIdCommand } from '@apps/o-auth/application/application/update/update-application-by-id.command';
+// @app
+import { FindApplicationByIdQuery } from '@app/o-auth/application/application/find/find-application-by-id.query';
+import { UpdateApplicationByIdCommand } from '@app/o-auth/application/application/update/update-application-by-id.command';
 import { OAuthApplication, OAuthUpdateApplicationByIdInput } from '@api/graphql';
 import { OAuthApplicationDto, OAuthUpdateApplicationByIdDto } from '../dto';
 

@@ -6,7 +6,7 @@ import { IamPaginateTenantsResolver } from './iam-paginate-tenants.resolver';
 import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.handler';
 
 // sources
-import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
 
 describe('IamPaginateTenantsResolver', () =>
 {

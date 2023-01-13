@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurora-ts/core';
-import { CreatePermissionsCommand } from '@apps/iam/permission/application/create/create-permissions.command';
-import { CreateBoundedContextsCommand } from '@apps/iam/bounded-context/application/create/create-bounded-contexts.command';
-import { boundedContexts, permissions } from '@apps/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.seed';
+import { CreatePermissionsCommand } from '{{ config.appContainer }}/iam/permission/application/create/create-permissions.command';
+import { CreateBoundedContextsCommand } from '{{ config.appContainer }}/iam/bounded-context/application/create/create-bounded-contexts.command';
+import { boundedContexts, permissions } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.seed';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Seeder

@@ -7,7 +7,7 @@ import { OAuthUpdateApplicationsHandler } from '../handlers/o-auth-update-applic
 import { OAuthUpdateApplicationsInput } from '@api/graphql';
 
 // sources
-import { applications } from '@apps/o-auth/application/infrastructure/seeds/application.seed';
+import { applications } from '@app/o-auth/application/infrastructure/seeds/application.seed';
 
 describe('OAuthUpdateApplicationsResolver', () =>
 {

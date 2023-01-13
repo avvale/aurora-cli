@@ -2,7 +2,7 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { OAuthAccessTokenModel } from '@apps/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model';
+import { OAuthAccessTokenModel } from '@app/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model';
 
 @Table({ modelName: 'OAuthRefreshToken', freezeTableName: true, timestamps: false })
 export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>

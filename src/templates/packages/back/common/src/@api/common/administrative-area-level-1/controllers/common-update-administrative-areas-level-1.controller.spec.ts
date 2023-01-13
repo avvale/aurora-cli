@@ -6,7 +6,7 @@ import { CommonUpdateAdministrativeAreasLevel1Controller } from './common-update
 import { CommonUpdateAdministrativeAreasLevel1Handler } from '../handlers/common-update-administrative-areas-level-1.handler';
 
 // sources
-import { administrativeAreasLevel1 } from '@apps/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
+import { administrativeAreasLevel1 } from '@app/common/administrative-area-level-1/infrastructure/seeds/administrative-area-level-1.seed';
 
 describe('CommonUpdateAdministrativeAreasLevel1Controller', () =>
 {

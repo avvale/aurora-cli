@@ -7,7 +7,7 @@ import { CommonUpdateAdministrativeAreaLevel2ByIdHandler } from '../handlers/com
 import { CommonUpdateAdministrativeAreaLevel2ByIdInput } from '@api/graphql';
 
 // sources
-import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@app/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 
 describe('CommonUpdateAdministrativeAreaLevel2ByIdResolver', () =>
 {

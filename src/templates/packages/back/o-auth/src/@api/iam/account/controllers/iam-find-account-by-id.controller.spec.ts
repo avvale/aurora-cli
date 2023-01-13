@@ -6,7 +6,7 @@ import { IamFindAccountByIdController } from './iam-find-account-by-id.controlle
 import { IamFindAccountByIdHandler } from '../handlers/iam-find-account-by-id.handler';
 
 // sources
-import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
+import { accounts } from '@app/iam/account/infrastructure/seeds/account.seed';
 
 describe('IamFindAccountByIdController', () =>
 {

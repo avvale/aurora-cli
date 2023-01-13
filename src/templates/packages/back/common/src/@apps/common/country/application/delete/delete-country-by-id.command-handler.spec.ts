@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteCountryByIdCommandHandler } from './delete-country-by-id.command-handler';
-import { countries } from '@apps/common/country/infrastructure/seeds/country.seed';
+import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 import { DeleteCountryByIdCommand } from './delete-country-by-id.command';
 import { DeleteCountryByIdService } from './delete-country-by-id.service';
 

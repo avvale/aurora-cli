@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { administrativeAreasLevel2 } from '@apps/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
+import { administrativeAreasLevel2 } from '@app/common/administrative-area-level-2/infrastructure/seeds/administrative-area-level-2.seed';
 import { UpdateAdministrativeAreasLevel2CommandHandler } from './update-administrative-areas-level-2.command-handler';
 import { UpdateAdministrativeAreasLevel2Command } from './update-administrative-areas-level-2.command';
 import { UpdateAdministrativeAreasLevel2Service } from './update-administrative-areas-level-2.service';

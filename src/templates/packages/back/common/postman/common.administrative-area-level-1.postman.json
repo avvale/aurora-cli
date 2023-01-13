@@ -1,7 +1,7 @@
 {
     "info": {
 		"_postman_id"   : "01f9df2e-0649-44ca-8715-8d6d2171811d",
-		"name"          : "@apps - common/administrative-area-level-1",
+		"name"          : "@app - common/administrative-area-level-1",
 		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [

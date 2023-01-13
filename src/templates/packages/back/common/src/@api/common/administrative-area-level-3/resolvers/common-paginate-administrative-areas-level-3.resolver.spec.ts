@@ -6,7 +6,7 @@ import { CommonPaginateAdministrativeAreasLevel3Resolver } from './common-pagina
 import { CommonPaginateAdministrativeAreasLevel3Handler } from '../handlers/common-paginate-administrative-areas-level-3.handler';
 
 // sources
-import { administrativeAreasLevel3 } from '@apps/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
+import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
 
 describe('CommonPaginateAdministrativeAreasLevel3Resolver', () =>
 {

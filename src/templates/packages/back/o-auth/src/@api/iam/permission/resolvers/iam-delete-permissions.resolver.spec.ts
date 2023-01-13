@@ -6,7 +6,7 @@ import { IamDeletePermissionsResolver } from './iam-delete-permissions.resolver'
 import { IamDeletePermissionsHandler } from '../handlers/iam-delete-permissions.handler';
 
 // sources
-import { permissions } from '@apps/iam/permission/infrastructure/seeds/permission.seed';
+import { permissions } from '@app/iam/permission/infrastructure/seeds/permission.seed';
 
 describe('IamDeletePermissionsResolver', () =>
 {

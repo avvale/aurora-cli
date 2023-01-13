@@ -17,8 +17,8 @@ import {
     AdministrativeAreaLevel2UpdatedAt,
     AdministrativeAreaLevel2DeletedAt,
 } from './value-objects';
-import { CountryMapper } from '@apps/common/country/domain/country.mapper';
-import { AdministrativeAreaLevel1Mapper } from '@apps/common/administrative-area-level-1/domain/administrative-area-level-1.mapper';
+import { CountryMapper } from '@app/common/country/domain/country.mapper';
+import { AdministrativeAreaLevel1Mapper } from '@app/common/administrative-area-level-1/domain/administrative-area-level-1.mapper';
 
 export class AdministrativeAreaLevel2Mapper implements IMapper
 {

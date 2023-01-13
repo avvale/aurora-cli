@@ -9,7 +9,7 @@ import { Permissions } from '@api/iam/shared/decorators/permissions.decorator';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
-// @apps
+// @app
 import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-contexts.handler';
 
 @ApiTags('[iam] bounded-context')

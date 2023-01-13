@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { AddI18NConstraintService, ICommandBus } from '@aurora-ts/core';
 
-// @apps
-import { CreateCountriesCommand } from '@apps/common/country/application/create/create-countries.command';
+// @app
+import { CreateCountriesCommand } from '@app/common/country/application/create/create-countries.command';
 import { CommonCreateCountryInput } from '@api/graphql';
 import { CommonCreateCountryDto } from '../dto';
 

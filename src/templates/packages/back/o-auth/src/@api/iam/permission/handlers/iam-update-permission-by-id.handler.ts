@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { FindPermissionByIdQuery } from '@apps/iam/permission/application/find/find-permission-by-id.query';
-import { UpdatePermissionByIdCommand } from '@apps/iam/permission/application/update/update-permission-by-id.command';
+// @app
+import { FindPermissionByIdQuery } from '@app/iam/permission/application/find/find-permission-by-id.query';
+import { UpdatePermissionByIdCommand } from '@app/iam/permission/application/update/update-permission-by-id.command';
 import { IamPermission, IamUpdatePermissionByIdInput } from '@api/graphql';
 import { IamPermissionDto, IamUpdatePermissionByIdDto } from '../dto';
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from '@aurora-ts/core';
 
-// @apps
-import { FindBoundedContextByIdQuery } from '@apps/iam/bounded-context/application/find/find-bounded-context-by-id.query';
+// @app
+import { FindBoundedContextByIdQuery } from '@app/iam/bounded-context/application/find/find-bounded-context-by-id.query';
 import { IamBoundedContext } from '@api/graphql';
 import { IamBoundedContextDto } from '../dto';
 

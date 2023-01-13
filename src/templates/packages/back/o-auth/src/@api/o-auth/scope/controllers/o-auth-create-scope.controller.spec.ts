@@ -6,7 +6,7 @@ import { OAuthCreateScopeController } from './o-auth-create-scope.controller';
 import { OAuthCreateScopeHandler } from '../handlers/o-auth-create-scope.handler';
 
 // sources
-import { scopes } from '@apps/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
 
 describe('OAuthCreateScopeController', () =>
 {

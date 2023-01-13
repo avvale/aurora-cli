@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { tenants } from '@apps/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
 import { UpdateTenantsCommandHandler } from './update-tenants.command-handler';
 import { UpdateTenantsCommand } from './update-tenants.command';
 import { UpdateTenantsService } from './update-tenants.service';

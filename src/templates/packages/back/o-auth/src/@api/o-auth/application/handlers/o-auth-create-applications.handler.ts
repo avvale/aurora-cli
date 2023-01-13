@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus } from '@aurora-ts/core';
 
-// @apps
-import { CreateApplicationsCommand } from '@apps/o-auth/application/application/create/create-applications.command';
+// @app
+import { CreateApplicationsCommand } from '@app/o-auth/application/application/create/create-applications.command';
 import { OAuthCreateApplicationInput } from '@api/graphql';
 import { OAuthCreateApplicationDto } from '../dto';
 

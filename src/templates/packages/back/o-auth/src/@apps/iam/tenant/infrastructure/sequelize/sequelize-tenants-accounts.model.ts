@@ -2,8 +2,8 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { IamTenantModel } from '@apps/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
-import { IamAccountModel } from '@apps/iam/account/infrastructure/sequelize/sequelize-account.model';
+import { IamTenantModel } from '@app/iam/tenant/infrastructure/sequelize/sequelize-tenant.model';
+import { IamAccountModel } from '@app/iam/account/infrastructure/sequelize/sequelize-account.model';
 
 @Table({ modelName: 'IamTenantsAccounts', freezeTableName: true, timestamps: false })
 export class IamTenantsAccountsModel extends Model<IamTenantsAccountsModel>

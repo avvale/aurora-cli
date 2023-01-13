@@ -5,14 +5,14 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // ---- customizations ----
 import { IamCreateAccountHandler } from './iam-create-account.handler';
-import { GetRolesQuery } from '@apps/iam/role/application/get/get-roles.query';
-import { FindClientByIdQuery } from '@apps/o-auth/client/application/find/find-client-by-id.query';
-import { FindAccountByIdQuery } from '@apps/iam/account/application/find/find-account-by-id.query';
+import { GetRolesQuery } from '@app/iam/role/application/get/get-roles.query';
+import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
+import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';
 
 // sources
-import { accounts } from '@apps/iam/account/infrastructure/seeds/account.seed';
-import { roles } from '@apps/iam/role/infrastructure/seeds/role.seed';
-import { clients } from '@apps/o-auth/client/infrastructure/seeds/client.seed';
+import { accounts } from '@app/iam/account/infrastructure/seeds/account.seed';
+import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { clients } from '@app/o-auth/client/infrastructure/seeds/client.seed';
 
 describe('IamCreateAccountHandler', () =>
 {

@@ -6,7 +6,7 @@ import { CommonFindLangByIdResolver } from './common-find-lang-by-id.resolver';
 import { CommonFindLangByIdHandler } from '../handlers/common-find-lang-by-id.handler';
 
 // sources
-import { langs } from '@apps/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 
 describe('CommonFindLangByIdResolver', () =>
 {

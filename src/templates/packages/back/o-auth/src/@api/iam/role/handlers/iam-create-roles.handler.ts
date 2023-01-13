@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus } from '@aurora-ts/core';
 
-// @apps
-import { CreateRolesCommand } from '@apps/iam/role/application/create/create-roles.command';
+// @app
+import { CreateRolesCommand } from '@app/iam/role/application/create/create-roles.command';
 import { IamCreateRoleInput } from '@api/graphql';
 import { IamCreateRoleDto } from '../dto';
 
