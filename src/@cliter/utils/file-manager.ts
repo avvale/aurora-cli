@@ -100,7 +100,7 @@ export class FileManager
             const stats = fs.statSync(originFilePath);
 
             // skip files that should not be explorer
-            if (cliterConfig.skipDirectories.includes(file)) return;
+            if (cliterConfig.skipDirectories.includes(file)) continue;
 
             if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql') || file.endsWith('.origin.html')))
             {
@@ -183,7 +183,7 @@ export class FileManager
                     cliterConfig.avoidOverwritingFilesIfExist.includes(
                         path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file).split(path.sep)),
                     )
-                ) return;
+                ) continue;
 
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master,
@@ -191,7 +191,7 @@ export class FileManager
                 if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
                 {
                     command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
-                    return;
+                    continue;
                 }
 
                 // generate file template

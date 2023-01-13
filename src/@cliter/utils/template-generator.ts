@@ -127,7 +127,12 @@ export class TemplateGenerator
     ): void
     {
         // read value object from our data type
-        const originFilePath = path.join(TemplateGenerator.templatePath, ...TemplateElement.BACK_VALUE_OBJECT.split('/'), property.type, '__module_name__-__property_name__.ts');
+        const originFilePath = path.join(
+            TemplateGenerator.templatePath,
+            ...TemplateElement.BACK_VALUE_OBJECT.split('/'),
+            property.type,
+            '__module_name__-__property_name__.ts',
+        );
 
         // TODO, throw error when no exist value object
         // check that exists value object template

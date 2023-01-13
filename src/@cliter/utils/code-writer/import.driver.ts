@@ -9,7 +9,11 @@ export class ImportDriver
      * @param modules
      * @param path
      */
-    public static createImportItems(sourceFile: SourceFile, path: string, items: string[]): void
+    public static createImportItems(
+        sourceFile: SourceFile,
+        path: string,
+        items: string[],
+    ): void
     {
         const itemsToImport: string[]   = ImportDriver.getUniqueImportItems(sourceFile, items);
         const importPaths: string[]     = ImportDriver.getImportPaths(sourceFile);
@@ -25,10 +29,11 @@ export class ImportDriver
             for (const itemToImport of itemsToImport)
             {
                 let existItem = false;
-                for(const importedElement of importElement?.getNamedImports() ? importElement?.getNamedImports() : [])
+                for (const importedElement of importElement?.getNamedImports() ? importElement?.getNamedImports() : [])
                 {
                     if (importedElement.getName() === itemToImport) existItem = true;
                 }
+
                 if (!existItem) itemsToImportChecked.push(itemToImport);
             }
 
@@ -40,7 +45,7 @@ export class ImportDriver
         {
             sourceFile.addImportDeclaration({
                 namedImports   : itemsToImport,
-                moduleSpecifier: path
+                moduleSpecifier: path,
             });
         }
     }

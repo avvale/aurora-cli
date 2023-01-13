@@ -9,7 +9,11 @@ export class ExportDriver
      * @param modules
      * @param path
      */
-    public static createExportItems(sourceFile: SourceFile, path: string, items?: string[]): void
+    public static createExportItems(
+        sourceFile: SourceFile,
+        path: string,
+        items?: string[],
+    ): void
     {
         const exportPaths: string[] = ExportDriver.getExportPaths(sourceFile);
 
