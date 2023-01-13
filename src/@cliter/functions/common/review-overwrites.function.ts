@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 export const reviewOverwrites = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     // get existing origin files
-    const originFiles = GlobalState.getValue('originFiles')
+    const originFiles = GlobalState.getValue('originFiles', [])
         .filter(
             (file: string) =>
                 fs.existsSync(

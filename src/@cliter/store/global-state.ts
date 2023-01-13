@@ -7,8 +7,9 @@ export class GlobalState
         GlobalState.store[key] = value;
     }
 
-    static getValue(key: string): any
+    static getValue(key: string, defaultValue?: any): any
     {
+        if (!GlobalState.hasValue(key) && defaultValue) return defaultValue;
         return GlobalState.store[key];
     }
 
