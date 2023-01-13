@@ -3,7 +3,7 @@ import { GenerateCommandState, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 import * as path from 'node:path';
 
-export const generateModuleFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateAppFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     // create directory application container, normally src/@apps
     await TemplateGenerator.createDirectory(
