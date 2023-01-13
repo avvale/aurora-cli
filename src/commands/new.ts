@@ -17,7 +17,7 @@ export default class New extends Command
         {
             name       : 'scope',
             required   : true,
-            description: 'Type of element to create, application, package or dashboard.',
+            description: 'Scope where our command will act.',
             options    : [
                 'back',
                 'front',
@@ -27,7 +27,7 @@ export default class New extends Command
         {
             name       : 'name',
             required   : true,
-            description: 'name of item to create',
+            description: 'Name of item to create',
         },
     ];
 

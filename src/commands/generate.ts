@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { AdditionalApis, BackHandler, Prompter, Properties, Property, Scope, ScopeElement, SqlType, TemplateElement } from '../@cliter';
+import { AdditionalApis, BackHandler, Prompter, Properties, Property, Scope, ScopeElement, SqlType } from '../@cliter';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
 import { getBoundedContextModuleFromFlag } from '../@cliter/functions/common';
 
@@ -21,7 +21,7 @@ export default class Generate extends Command
         {
             name       : 'scope',
             required   : true,
-            description: 'Type of element to create, application, package or dashboard.',
+            description: 'Scope where our command will act.',
             options    : [
                 'back',
                 'front',
@@ -29,13 +29,13 @@ export default class Generate extends Command
         },
         {
             name       : 'element',
-            description: 'Element to create',
+            required   : true,
+            description: 'Type of element to generate.',
             options    : [
-                'module',
-                'bounded-context',
                 'api',
+                'bounded-context',
+                'module',
             ],
-            required: true,
         },
     ];
 

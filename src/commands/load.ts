@@ -1,8 +1,8 @@
 import { Command, Flags } from '@oclif/core';
-import { TemplateElement, Prompter, ModuleDefinitionSchema, YamlManager, BackHandler } from '../../@cliter/index';
-import { FrontHandler } from '../../@cliter/handlers/front.handler';
-import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../../@cliter/functions/common';
-import { generateGraphqlTypes } from '../../@cliter/functions/back';
+import { Prompter, ModuleDefinitionSchema, YamlManager, BackHandler, Scope, ScopeElement } from '../@cliter';
+import { FrontHandler } from '../@cliter/handlers/front.handler';
+import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../@cliter/functions/common';
+import { generateGraphqlTypes } from '../@cliter/functions/back';
 
 export default class Load extends Command
 {
@@ -10,10 +10,10 @@ export default class Load extends Command
 
     static flags =
     {
+        help              : Flags.help({ char: 'h' }),
         boundedContext    : Flags.string({ char: 'b' }),
         dashboard         : Flags.boolean({ char: 'd' }),
         force             : Flags.boolean({ char: 'f' }),
-        help              : Flags.help({ char: 'h' }),
         module            : Flags.string({ char: 'm' }),
         noGraphQLTypes    : Flags.boolean({ char: 'g' }),
         overwriteInterface: Flags.boolean({ char: 'w' }),
@@ -23,31 +23,39 @@ export default class Load extends Command
 
     static args = [
         {
-            name       : 'elementType',
-            description: 'Type element to create',
+            name       : 'scope',
+            required   : true,
+            description: 'Scope where our command will act.',
+            options    : [
+                'back',
+                'front',
+                'back-package',
+            ],
+        },
+        {
+            name       : 'element',
+            required   : true,
+            description: 'Type element to load.',
             options    : [
                 'bounded-context',
-                'b',
                 'module',
-                'm',
             ],
-            required: true,
         },
     ];
 
-    async run(): Promise<void>
+    public async run(): Promise<void>
     {
         const { args, flags }   = await this.parse(Load);
 
-        if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
-        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_MODULE;
-
-        if (args.elementType === TemplateElement.BACK_MODULE)
+        if (
+            args.scope === Scope.BACK &&
+            args.element === ScopeElement.MODULE
+        )
         {
-            let moduleFlag: any = {};
-            if (flags.module) moduleFlag = getBoundedContextModuleFromFlag(this, flags.module);
+            if (!flags.module) this.error('Module flag is required for generate module command.');
 
-            const { boundedContextName, moduleName }: any = await Prompter.promptForLoadModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
+            const moduleFlag: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.module);
+            const { boundedContextName, moduleName } = await Prompter.promptForLoadModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
             // create yaml file
             const schema: ModuleDefinitionSchema = YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
@@ -89,7 +97,7 @@ export default class Load extends Command
             await reviewOverwrites(generateCommandState);
         }
 
-        /* if (args.elementType === TemplateElement.BACK_BOUNDED_CONTEXT)
+        /* if (args.element === TemplateElement.BACK_BOUNDED_CONTEXT)
         {
             const { boundedContextName }: any = await Prompter.promptForLoadBoundedContext(flags.boundedContext);
 
