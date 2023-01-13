@@ -1,15 +1,7 @@
-import * as fs from 'node:fs';
-import * as shell from 'node:child_process';
-import * as logSymbols from 'log-symbols';
-import * as chalk from 'chalk';
-import * as emoji from 'node-emoji';
-import * as _ from 'lodash';
-import { Operations, TemplateElement, Prompter, ModuleDefinitionSchema, FileManager, YamlManager, BackHandler, GenerateCommandState, cliterConfig } from '../../@cliter/index';
 import { Command, Flags } from '@oclif/core';
-import { generateGraphqlTypes } from '../../@cliter/functions/back';
+import { TemplateElement, Prompter, ModuleDefinitionSchema, YamlManager, BackHandler } from '../../@cliter/index';
 import { FrontHandler } from '../../@cliter/handlers/front.handler';
-import { loadJsonLockFile, reviewOverwrites } from '../../@cliter/functions/common';
-import { GlobalState } from '../../@cliter/store';
+import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../../@cliter/functions/common';
 
 export default class Load extends Command
 {
@@ -52,7 +44,7 @@ export default class Load extends Command
         if (args.elementType === TemplateElement.BACK_MODULE)
         {
             let moduleFlag: any = {};
-            if (flags.module) moduleFlag = Operations.parseFlagOfBoundedContextAndModule(this, flags.module);
+            if (flags.module) moduleFlag = getBoundedContextModuleFromFlag(this, flags.module);
 
             const { boundedContextName, moduleName }: any = await Prompter.promptForLoadModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 

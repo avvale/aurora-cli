@@ -1,6 +1,7 @@
 import { Command, Flags } from '@oclif/core';
-import { AdditionalApis, BackHandler, Operations, Prompter, Properties, Property, SqlType, TemplateElement } from '../../@cliter';
+import { AdditionalApis, BackHandler, Prompter, Properties, Property, SqlType, TemplateElement } from '../../@cliter';
 import { generateGraphqlTypes } from '../../@cliter/functions/back';
+import { getBoundedContextModuleFromFlag } from '../../@cliter/functions/common';
 
 export default class Generate extends Command
 {
@@ -49,7 +50,7 @@ export default class Generate extends Command
         if (args.elementType === TemplateElement.BACK_MODULE)
         {
             let moduleFlag: { boundedContextName?: string; moduleName?: string; } = {};
-            if (flags.module) moduleFlag = Operations.parseFlagOfBoundedContextAndModule(this, flags.module);
+            if (flags.module) moduleFlag = getBoundedContextModuleFromFlag(this, flags.module);
 
             const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant }: any = await Prompter.promptForGenerateModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 

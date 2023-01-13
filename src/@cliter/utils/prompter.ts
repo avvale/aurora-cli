@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/no-array-push-push */
 import { Command } from '@oclif/core';
 import { GenerateCommandState, SqlRelationship, SqlType } from '../types';
-import { Operations } from './operations';
 import { Property } from './property';
 import { cliterConfig } from '../config/cliter.config';
+import { getBoundedContextModuleFromFlag } from '../functions/common';
 import { Properties } from './properties';
 import * as inquirer from 'inquirer';
 import * as Table from 'cli-table3';
@@ -317,14 +317,20 @@ export const Prompter =
             name   : 'relationshipSingularName',
             message: 'The property name will be plural, type its singular (example: for cars type car)',
             type   : 'input',
-            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+            when   : (answers: any) =>
+                answers.relationship === SqlRelationship.ONE_TO_MANY ||
+                answers.relationship === SqlRelationship.MANY_TO_MANY,
         });
 
         questions.push({
             name   : 'relationshipAggregate',
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
-            when   : (answers: any) => answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY
+            when   : (answers: any) =>
+                answers.relationship === SqlRelationship.ONE_TO_ONE ||
+                answers.relationship === SqlRelationship.MANY_TO_ONE ||
+                answers.relationship === SqlRelationship.ONE_TO_MANY ||
+                answers.relationship === SqlRelationship.MANY_TO_MANY,
         });
 
         questions.push({
@@ -384,7 +390,7 @@ export const Prompter =
 
                 if (!answers.hasPivotTable && answers.relationship === SqlRelationship.MANY_TO_MANY)
                 {
-                    const relationshipModulePath = Operations.parseFlagOfBoundedContextAndModule(generateCommandState.command, answers.relationshipModulePath);
+                    const relationshipModulePath = getBoundedContextModuleFromFlag(generateCommandState.command, answers.relationshipModulePath);
                     answers.pivotAggregateName   = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
                     answers.pivotPath            = answers.relationshipModulePath;
                     answers.pivotFileName        = `${name.toKebabCase()}-${generateCommandState.schema.moduleNames.toKebabCase()}`;

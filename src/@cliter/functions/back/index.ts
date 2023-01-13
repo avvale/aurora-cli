@@ -10,3 +10,4 @@ export * from './generate-pivot-tables.function';
 export * from './generate-postman-files.function';
 export * from './generate-testing-files.function';
 export * from './generate-yaml-config-file.function';
+export * from './install-dependencies.function';

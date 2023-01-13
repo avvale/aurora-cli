@@ -1,12 +1,6 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// imports
-import * as shell from 'node:child_process';
-import { Command, Flags, CliUx } from '@oclif/core';
-import { BackHandler, Operations, StateService } from '../../@cliter';
-import { generateApplicationEnvFile } from '../../@cliter/functions/back';
+import { Command, Flags } from '@oclif/core';
+import { BackHandler } from '../../@cliter';
+import { generateApplicationEnvFile, installDependencies } from '../../@cliter/functions/back';
 
 export default class New extends Command
 {
@@ -41,10 +35,6 @@ export default class New extends Command
     {
         const { args, flags } = await this.parse(New);
 
-        const stateService     = container.resolve(StateService);
-        stateService.command   = this;
-        stateService.flags     = flags;
-
         switch (args.type)
         {
             case 'application':
@@ -56,13 +46,13 @@ export default class New extends Command
                 break;
 
             case 'dashboard':
-                stateService.dashboardName = args.name;
+                // stateService.dashboardName = args.name;
                 // TODO: generate dashboard
                 // await Operations.generateDashboard();
                 break;
 
             case 'package':
-                stateService.packageName = args.name;
+                // stateService.packageName = args.name;
                 // TODO: generate package
                 // await Operations.generatePackage();
                 break;
@@ -79,24 +69,7 @@ export default class New extends Command
 
         if (flags.install)
         {
-            CliUx.ux.action.start('Installing dependencies');
-
-            const install = shell.spawn('npm', ['install'], { cwd: args.name, timeout: 300 * 100 });
-
-            install.stdout.on('data', data =>
-            {
-                console.log(`${data}`);
-            });
-
-            install.stderr.on('data', data =>
-            {
-                console.error(`${data}`);
-            });
-
-            install.on('error', err =>
-            {
-                console.error(`${err}`);
-            });
+            installDependencies(args.name);
         }
     }
 }

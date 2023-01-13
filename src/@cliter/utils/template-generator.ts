@@ -41,7 +41,11 @@ export class TemplateGenerator
     {
         FileManager.generateContents(
             command,
-            path.join(TemplateGenerator.templatePath, ...templateElement.split('/'), templateElementPath || ''),
+            path.join(
+                TemplateGenerator.templatePath,
+                ...templateElement.split('/'),
+                templateElementPath || '',
+            ),
             relativeTargetBasePath,
             relativeTargetPath,
             {

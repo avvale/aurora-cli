@@ -126,7 +126,7 @@ export class FileManager
      * @param name name of file or folder
      * @return {string} string with replaced keys
      */
-    static renderFilename(
+    /* static renderFilename(
         name: string,
         {
             boundedContextPrefix = '',
@@ -151,7 +151,7 @@ export class FileManager
         if (name.includes('__additional_api_name__'))                       name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (FileManager.stateService.currentAdditionalApi ? FileManager.stateService.currentAdditionalApi.getApiFileName : ''));
 
         return name;
-    }
+    } */
 
     /**
      * Render all files and folders from template folder recursively.
@@ -199,6 +199,14 @@ export class FileManager
         for (const file of filesToCreate)
         {
             const originFilePath = path.join(originPath, file);
+            const nameReplaced = FileManager.replaceFilename(
+                file,
+                {
+                    boundedContextName,
+                    moduleName,
+                    moduleNames,
+                },
+            );
 
             // get stats about the current file
             const stats = fs.statSync(originFilePath);
@@ -207,7 +215,7 @@ export class FileManager
             {
                 // avoid overwriting some files that cannot be overwritten, if file exist
                 if (
-                    fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.replaceFilename(file))) &&
+                    fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) &&
                     force &&
                     cliterConfig.avoidOverwritingFilesIfExist.includes(
                         path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file).split(path.sep)),
@@ -217,9 +225,9 @@ export class FileManager
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master,
                 // when we have not yet created any bounded context or module
-                if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, FileManager.replaceFilename(file))))
+                if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
                 {
-                    command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, FileManager.replaceFilename(file))} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+                    command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
                     return;
                 }
 
@@ -230,6 +238,7 @@ export class FileManager
                     file,
                     path.join(relativeTargetBasePath, relativeTargetPath),
                     {
+                        templateData,
                         boundedContextName,
                         moduleName,
                         moduleNames,
@@ -240,17 +249,15 @@ export class FileManager
             }
             else if (stats.isDirectory())
             {
-                const mappedDirectory = FileManager.replaceFilename(file);
-
-                if (fs.existsSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, mappedDirectory)))
+                if (fs.existsSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, nameReplaced)))
                 {
-                    if (verbose) command.log(`${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${mappedDirectory} exist`);
+                    if (verbose) command.log(`${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${nameReplaced} exist`);
                 }
                 else
                 {
                     // create folder in destination folder
-                    fs.mkdirSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, mappedDirectory), { recursive: true });
-                    command.log(`${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${mappedDirectory} created`);
+                    fs.mkdirSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, nameReplaced), { recursive: true });
+                    command.log(`${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${nameReplaced} created`);
                 }
 
                 // copy files/folder inside current folder recursively
@@ -258,8 +265,11 @@ export class FileManager
                     command,
                     path.join(originPath, file),
                     relativeTargetBasePath,
-                    path.join(relativeTargetPath, mappedDirectory),
+                    path.join(relativeTargetPath, nameReplaced),
                     {
+                        boundedContextName,
+                        moduleName,
+                        moduleNames,
                         force,
                         verbose,
                         excludeFiles,

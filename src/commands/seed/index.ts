@@ -1,11 +1,12 @@
 import { Command, CliUx, Flags } from '@oclif/core';
+import { TemplateElement, Prompter, cliterConfig } from '../../@cliter';
+import { getBoundedContextModuleFromFlag } from '../../@cliter/functions/common';
 import * as shell from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as chalk from 'chalk';
 import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
-import { TemplateElement, Operations, Prompter, cliterConfig } from '../../@cliter';
 
 export default class Seed extends Command
 {
@@ -37,7 +38,7 @@ export default class Seed extends Command
         if (args.elementType === TemplateElement.BACK_MODULE)
         {
             let moduleFlag: any = {};
-            if (flags.module) moduleFlag = Operations.parseFlagOfBoundedContextAndModule(this, flags.module);
+            if (flags.module) moduleFlag = getBoundedContextModuleFromFlag(this, flags.module);
 
             const { boundedContextName, moduleName }: any = await Prompter.promptForSeedModule(moduleFlag?.boundedContextName, moduleFlag?.moduleName);
 
