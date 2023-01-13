@@ -1,6 +1,5 @@
 import { GenerateCommandState } from '../../types';
 import { FileManager, Prompter } from '../../utils';
-import { generateGraphqlTypes } from '../back';
 import { GlobalState } from '../../store';
 import { cliterConfig } from '../../config';
 import * as fs from 'node:fs';
@@ -13,12 +12,6 @@ import * as _ from 'lodash';
 
 export const reviewOverwrites = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    if (!generateCommandState.flags.noGraphQLTypes)
-    {
-        // generate graphql files
-        await generateGraphqlTypes(generateCommandState);
-    }
-
     // get existing origin files
     const originFiles = GlobalState.getValue('originFiles')
         .filter(

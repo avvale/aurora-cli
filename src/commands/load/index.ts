@@ -2,6 +2,7 @@ import { Command, Flags } from '@oclif/core';
 import { TemplateElement, Prompter, ModuleDefinitionSchema, YamlManager, BackHandler } from '../../@cliter/index';
 import { FrontHandler } from '../../@cliter/handlers/front.handler';
 import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../../@cliter/functions/common';
+import { generateGraphqlTypes } from '../../@cliter/functions/back';
 
 export default class Load extends Command
 {
@@ -78,6 +79,11 @@ export default class Load extends Command
                     schema,
                 };
                 await BackHandler.generateModule(generateCommandState);
+            }
+
+            if (!flags.noGraphQLTypes && !flags.dashboard)
+            {
+                generateGraphqlTypes(generateCommandState);
             }
 
             await reviewOverwrites(generateCommandState);

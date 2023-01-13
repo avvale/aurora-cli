@@ -107,7 +107,7 @@ export default class Generate extends Command
             if (!flags.noGraphQLTypes)
             {
                 // generate graphql files
-                await generateGraphqlTypes(generateCommandState);
+                generateGraphqlTypes(generateCommandState);
             }
         }
     }
