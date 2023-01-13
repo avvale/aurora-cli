@@ -35,12 +35,12 @@ export interface CliterConfig
 
 export const cliterConfig: CliterConfig =
 {
-    // dashboard
+    // front
     dashboardContainer   : path.join('app', 'modules', 'admin', 'apps'),
     adminContainer       : path.join('app', 'modules', 'admin'),
     dashboardTranslations: path.join('assets', 'i18n'),
 
-    // application
+    // back
     appContainer                               : '@app',
     apiContainer                               : '@api',
     auroraLocalPackage                         : '@aurora',
@@ -289,8 +289,8 @@ export const cliterConfig: CliterConfig =
     },
     skipDirectories             : ['node_modules', 'dist', 'coverage', 'cliter'],
     avoidOverwritingFilesIfExist: [
-        path.join('back', 'module', 'index.ts'),
-        path.join('back', 'api', '__bounded_context_name__.module.ts'),
+        path.join('back', '@app', 'index.ts'),
+        path.join('back', '@api', '__bounded_context_name__.module.ts'),
         path.join('front', 'module', '__bounded_context_name__.navigation.ts'),
         path.join('front', 'module', '__bounded_context_name__.module.ts'),
         path.join('front', 'module', '__bounded_context_name__.routing.ts'),
