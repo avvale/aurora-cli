@@ -1,10 +1,3 @@
-import { Command } from '@oclif/core';
-import { TemplateElement } from '../types';
-import { TemplateGenerator } from '../utils/template-generator';
-import { cliterConfig } from '../config/cliter.config';
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-
 export class Operations
 {
     /*    static async generatePackage(): Promise<void>
