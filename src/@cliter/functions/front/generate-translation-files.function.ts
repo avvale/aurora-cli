@@ -24,6 +24,7 @@ export const generateTranslationFiles = async (generateCommandState: GenerateCom
             force             : generateCommandState.flags.force,
             verbose           : generateCommandState.flags.verbose,
             excludeFiles      : generateCommandState.schema.excluded,
+            lockFiles         : generateCommandState.lockFiles,
             templateData      : { ...generateCommandState },
         },
     );

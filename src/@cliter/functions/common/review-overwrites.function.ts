@@ -1,14 +1,15 @@
-import * as fs from 'node:fs';
-import * as shell from 'node:child_process';
-import * as logSymbols from 'log-symbols';
-import * as chalk from 'chalk';
-import * as emoji from 'node-emoji';
-import * as _ from 'lodash';
 import { GenerateCommandState } from '../../types';
 import { FileManager, Prompter } from '../../utils';
 import { generateGraphqlTypes } from '../back';
 import { GlobalState } from '../../store';
 import { cliterConfig } from '../../config';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import * as shell from 'node:child_process';
+import * as logSymbols from 'log-symbols';
+import * as chalk from 'chalk';
+import * as emoji from 'node-emoji';
+import * as _ from 'lodash';
 
 export const reviewOverwrites = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
@@ -18,7 +19,17 @@ export const reviewOverwrites = async (generateCommandState: GenerateCommandStat
         await generateGraphqlTypes(generateCommandState);
     }
 
-    const originFiles = GlobalState.getValue('originFiles');
+    // get existing origin files
+    const originFiles = GlobalState.getValue('originFiles')
+        .filter(
+            (file: string) =>
+                fs.existsSync(
+                    path.join(
+                        process.cwd(),
+                        file,
+                    ),
+                ),
+        );
 
     if (Array.isArray(originFiles) && originFiles.length > 0)
     {

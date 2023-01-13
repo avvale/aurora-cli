@@ -20,6 +20,7 @@ export const generateAdditionalApiFiles = async (generateCommandState: GenerateC
                 force             : generateCommandState.flags.force,
                 verbose           : generateCommandState.flags.verbose,
                 excludeFiles      : generateCommandState.schema.excluded,
+                lockFiles         : generateCommandState.lockFiles,
                 templateData      : {
                     ...generateCommandState,
                     currentAdditionalApi: additionalApi,

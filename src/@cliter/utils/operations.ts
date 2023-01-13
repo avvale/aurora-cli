@@ -1,22 +1,12 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// node
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-
-// imports
 import { Command } from '@oclif/core';
-import { StateService } from '../functions/state.service';
 import { TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { cliterConfig } from '../config/cliter.config';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 export class Operations
 {
-    public static readonly stateService = container.resolve(StateService);
-
     /*    static async generatePackage(): Promise<void>
     {
         if (!Operations.stateService.packageName) throw new Error('To create package is required package name');

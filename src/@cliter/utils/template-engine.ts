@@ -62,10 +62,13 @@ const templateEngine =
         // add helpers to handlebars template engine
         handlebarsHelpers({ handlebars });
 
-        return handlebars.compile(content)(data, {
-            allowProtoPropertiesByDefault: true,
-            allowProtoMethodsByDefault   : true,
-        });
+        return handlebars.compile(content)(
+            data,
+            {
+                allowProtoPropertiesByDefault: true,
+                allowProtoMethodsByDefault   : true,
+            },
+        );
     },
 };
 

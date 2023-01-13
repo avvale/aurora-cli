@@ -1,10 +1,7 @@
-// node
-import * as path from 'node:path';
-
-// imports
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
+import * as path from 'node:path';
 
 export const generateModuleFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
@@ -27,6 +24,7 @@ export const generateModuleFiles = async (generateCommandState: GenerateCommandS
             force             : generateCommandState.flags.force,
             verbose           : generateCommandState.flags.verbose,
             excludeFiles      : generateCommandState.schema.excluded,
+            lockFiles         : generateCommandState.lockFiles,
             templateData      : { ...generateCommandState },
         },
     );

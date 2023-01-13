@@ -17,6 +17,7 @@ export const generatePostmanFiles = async (generateCommandState: GenerateCommand
             force             : generateCommandState.flags.force,
             verbose           : generateCommandState.flags.verbose,
             excludeFiles      : generateCommandState.schema.excluded,
+            lockFiles         : generateCommandState.lockFiles,
             templateData      : { ...generateCommandState },
         },
     );

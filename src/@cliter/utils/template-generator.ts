@@ -1,5 +1,6 @@
+/* eslint-disable max-params */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, TemplateElement } from '../types';
+import { GenerateCommandState, LockFile, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
 import { Property } from './property';
 import * as fs from 'node:fs';
@@ -7,7 +8,13 @@ import * as path from 'node:path';
 
 export class TemplateGenerator
 {
-    public static readonly templatePath: string = path.join(__dirname, '..', '..', 'templates');
+    public static readonly templatePath: string = path.join(
+        __dirname,
+        '..',
+        '..',
+        'templates',
+    );
+
     public static readonly projectDirectory: string = process.cwd();
 
     // generate static files from templates folder, with templateElement know that type of element create, bounded_context, module, etc.
@@ -23,6 +30,7 @@ export class TemplateGenerator
             force = false,
             verbose = false,
             excludeFiles = [],
+            lockFiles = [],
             templateData = {},
             useTemplateEngine = true,
             templateElementPath,
@@ -33,6 +41,7 @@ export class TemplateGenerator
             force?: boolean;
             verbose?: boolean;
             excludeFiles?: string[];
+            lockFiles?: LockFile[];
             templateData?: any;
             useTemplateEngine?: boolean;
             templateElementPath?: string;
@@ -55,6 +64,7 @@ export class TemplateGenerator
                 force,
                 verbose,
                 excludeFiles,
+                lockFiles,
                 templateData,
                 useTemplateEngine,
             },
@@ -137,6 +147,7 @@ export class TemplateGenerator
                 boundedContextName: generateCommandState.schema.boundedContextName,
                 moduleName        : generateCommandState.schema.moduleName,
                 moduleNames       : generateCommandState.schema.moduleNames,
+                lockFiles         : generateCommandState.lockFiles,
             },
         );
     }

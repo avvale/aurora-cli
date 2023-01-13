@@ -1,21 +1,16 @@
 /* eslint-disable complexity */
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// imports
-import { StateService } from '../functions/state.service';
+import { Command } from '@oclif/core';
 import { cliterConfig } from '../config/cliter.config';
 import { Cypher } from './cypher';
 import { Property } from './property';
-import templateEngine from './template-engine';
 import { AdditionalApi } from './additional-api';
+import { GlobalState } from '../store';
+import templateEngine from './template-engine';
 import * as chalk from 'chalk';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as _ from 'lodash';
-import { GlobalState } from '../store';
-import { Command } from '@oclif/core';
+import { LockFile } from '../types';
 
 export class FileManager
 {
@@ -86,8 +81,6 @@ export class FileManager
         return name;
     }
 
-    public static readonly stateService = container.resolve(StateService);
-
     /**
      * Delete all origin files from directory recursively.
      * @param {string} currentPath - current path to explore
@@ -122,38 +115,6 @@ export class FileManager
     }
 
     /**
-     * Render filename and folder name
-     * @param name name of file or folder
-     * @return {string} string with replaced keys
-     */
-    /* static renderFilename(
-        name: string,
-        {
-            boundedContextPrefix = '',
-            boundedContextSuffix = '',
-            moduleNamePrefix = '',
-            moduleNameSuffix = '',
-            currentProperty,
-        }: {
-            boundedContextPrefix?: string;
-            boundedContextSuffix?: string;
-            moduleNamePrefix?: string;
-            moduleNameSuffix?: string; // use to set i18n items
-            currentProperty?: Property;
-        } = {},
-    ): string
-    {
-        if (name.includes('__bounded_context_name__'))                      name = name.replace(/__bounded_context_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + FileManager.stateService.schema.boundedContextName.toKebabCase() + (boundedContextSuffix ? '-' + boundedContextSuffix : ''));
-        if (name.includes('__module_name__'))                               name = name.replace(/__module_name__/gi, (moduleNamePrefix ? moduleNamePrefix + '-' : '') + FileManager.stateService.schema.moduleName.toKebabCase() + (moduleNameSuffix ? '-' + moduleNameSuffix : ''));
-        if (name.includes('__module_names__'))                              name = name.replace(/__module_names__/gi, FileManager.stateService.schema.moduleNames.toKebabCase());
-        if (name.includes('__property_name__') && currentProperty)          name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
-        if (name.includes('__property_native_name__') && currentProperty)   name = name.replace(/__property_native_name__/gi, currentProperty.originName.toKebabCase());
-        if (name.includes('__additional_api_name__'))                       name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (FileManager.stateService.currentAdditionalApi ? FileManager.stateService.currentAdditionalApi.getApiFileName : ''));
-
-        return name;
-    } */
-
-    /**
      * Render all files and folders from template folder recursively.
      * @param {Command} command - command
      * @param {string} originPath - path to template folder
@@ -173,6 +134,7 @@ export class FileManager
             force = false,
             verbose = false,
             excludeFiles = [],
+            lockFiles = [],
             templateData = {},
             currentProperty, // property to render value object
             useTemplateEngine = true,
@@ -183,6 +145,7 @@ export class FileManager
             force?: boolean;
             verbose?: boolean;
             excludeFiles?: string[];
+            lockFiles?: LockFile[];
             templateData?: any;
             currentProperty?: Property;
             useTemplateEngine?: boolean;
@@ -238,6 +201,7 @@ export class FileManager
                     file,
                     path.join(relativeTargetBasePath, relativeTargetPath),
                     {
+                        lockFiles,
                         templateData,
                         boundedContextName,
                         moduleName,
@@ -273,6 +237,7 @@ export class FileManager
                         force,
                         verbose,
                         excludeFiles,
+                        lockFiles,
                         templateData,
                         currentProperty,
                         useTemplateEngine,
@@ -299,6 +264,7 @@ export class FileManager
         {
             force = false,
             verbose = false,
+            lockFiles = [],
             templateData = {},
             targetBasePath = process.cwd(),
             boundedContextName = '',
@@ -313,6 +279,7 @@ export class FileManager
         }: {
             force?: boolean;
             verbose?: boolean;
+            lockFiles?: LockFile[];
             templateData?: any;
             targetBasePath?: string;
             boundedContextName?: string;
@@ -394,7 +361,7 @@ export class FileManager
             if (existFile)
             {
                 // find lockFile by path
-                const currentLockfile           = FileManager.stateService.lockFiles.find(lockFile => lockFile.path === relativeFilePath);
+                const currentLockfile           = lockFiles.find(lockFile => lockFile.path === relativeFilePath);
                 const currentFile               = fs.readFileSync(writePath, 'utf8');
                 const currentFileFirstLine      = _.head(currentFile.split(/\r?\n/));
                 const currentFileFirstLineHash  = currentFileFirstLine ? Cypher.sha1(currentFileFirstLine) : undefined;

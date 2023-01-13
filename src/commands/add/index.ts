@@ -1,10 +1,5 @@
-// container
-import 'reflect-metadata';
-import { container } from 'tsyringe';
-
-// imports
 import { Command, Flags } from '@oclif/core';
-import { Operations, Prompter, StateService } from '../../@cliter';
+import { Prompter } from '../../@cliter';
 
 export default class Install extends Command
 {
@@ -30,11 +25,6 @@ export default class Install extends Command
         const { args, flags } = await this.parse(Install);
 
         const { packageName }: any = await Prompter.promptAddPackage();
-
-        // set stateService
-        const stateService     = container.resolve(StateService);
-        stateService.command   = this;
-        stateService.flags     = flags;
 
         if (flags.dashboard)
         {
