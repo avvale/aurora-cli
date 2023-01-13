@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { Prompter, ModuleDefinitionSchema, YamlManager, BackHandler, Scope, ScopeElement } from '../@cliter';
+import { Prompter, ModuleDefinitionSchema, YamlManager, Scope, ScopeElement } from '../@cliter';
 import { FrontHandler } from '../@cliter/handlers/front.handler';
 import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../@cliter/functions/common';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
@@ -69,10 +69,7 @@ export default class Load extends Command
     {
         const { args, flags }   = await this.parse(Load);
 
-        if (
-            args.scope === Scope.BACK &&
-            args.element === ScopeElement.MODULE
-        )
+        if (args.element === ScopeElement.MODULE)
         {
             const flagName: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.name);
             const { boundedContextName, moduleName } = await Prompter.promptForLoadModule(flagName.boundedContextName, flagName.moduleName);
@@ -81,35 +78,16 @@ export default class Load extends Command
             const schema: ModuleDefinitionSchema = YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
 
             // define state like a generate command
-            let generateCommandState;
+            const generateCommandState = {
+                command  : this,
+                flags,
+                lockFiles: loadJsonLockFile(boundedContextName, moduleName),
+                schema,
+            };
 
-            // eslint-disable-next-line unicorn/prefer-ternary
-            if (flags.dashboard)
-            {
-                generateCommandState = {
-                    command: this,
-                    flags  : {
-                        ...flags,
-                        // avoid generate graphql types in front, it is not necessary
-                        noGraphQLTypes: true,
-                    },
-                    lockFiles: loadJsonLockFile(boundedContextName, moduleName),
-                    schema,
-                };
-                await FrontHandler.generateModule(generateCommandState);
-            }
-            else
-            {
-                generateCommandState = {
-                    command  : this,
-                    flags,
-                    lockFiles: loadJsonLockFile(boundedContextName, moduleName),
-                    schema,
-                };
-                await BackHandler.generateModule(generateCommandState);
-            }
+            await FrontHandler.generateModule(generateCommandState);
 
-            if (!flags.noGraphQLTypes && !flags.dashboard)
+            if (args.scope === Scope.BACK && !flags.noGraphQLTypes)
             {
                 generateGraphqlTypes(generateCommandState);
             }

@@ -118,9 +118,8 @@ export default class Generate extends Command
                 { hasGenerateTestingFiles: true },
             );
 
-            if (!flags.noGraphQLTypes)
+            if (args.scope === Scope.BACK && !flags.noGraphQLTypes)
             {
-                // generate graphql files
                 generateGraphqlTypes(generateCommandState);
             }
         }
