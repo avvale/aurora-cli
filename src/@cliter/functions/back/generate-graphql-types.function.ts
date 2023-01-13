@@ -5,7 +5,7 @@ export const generateGraphqlTypes = (generateCommandState: GenerateCommandState)
 {
     const graphqlTypes = shell.spawn('npm', ['run', 'graphql:types']);
 
-    graphqlTypes.stdout.on('data', data => generateCommandState.command.log('GraphQL entities generated'));
+    graphqlTypes.stdout.on('data', data => { /**/ });
 
     graphqlTypes.stderr.on('data', data => console.error(`${data}`));
 
@@ -23,4 +23,6 @@ It may refer to a relationship that has not yet been created. Use the --noGraphQ
             generateCommandState.command.warn('Use the -v or --verbose parameter for more information.');
         }
     });
+
+    graphqlTypes.on('close', data => generateCommandState.command.log('GraphQL entities generated'));
 };
