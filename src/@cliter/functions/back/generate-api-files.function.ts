@@ -3,7 +3,7 @@ import * as path from 'node:path';
 
 // imports
 import { cliterConfig } from '../../config';
-import { GenerateCommandState, TemplateElement } from '../../types';
+import { GenerateCommandState, SqlRelationship, SqlType, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 
 export const generateApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
@@ -26,7 +26,11 @@ export const generateApiFiles = async (generateCommandState: GenerateCommandStat
             verbose           : generateCommandState.flags.verbose,
             excludeFiles      : generateCommandState.schema.excluded,
             lockFiles         : generateCommandState.lockFiles,
-            templateData      : { ...generateCommandState },
+            templateData      : {
+                ...generateCommandState,
+                sqlType     : SqlType,
+                relationship: SqlRelationship,
+            },
         },
     );
 };

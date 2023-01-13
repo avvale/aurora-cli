@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import { cliterConfig } from '../../config';
 import { TemplateGenerator } from '../../utils';
-import { GenerateCommandState, TemplateElement } from '../../types';
+import { GenerateCommandState, ResolverType, TemplateElement } from '../../types';
 
 export const generateAdditionalApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
@@ -23,6 +23,7 @@ export const generateAdditionalApiFiles = async (generateCommandState: GenerateC
                 lockFiles         : generateCommandState.lockFiles,
                 templateData      : {
                     ...generateCommandState,
+                    resolverType        : ResolverType,
                     currentAdditionalApi: additionalApi,
                 },
             },
