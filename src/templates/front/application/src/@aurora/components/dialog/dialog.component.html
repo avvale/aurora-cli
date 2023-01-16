@@ -1,0 +1,42 @@
+<div
+    mat-dialog-title
+    class="dialog-header p-0 pb-6"
+>
+    <div class="flex justify-between items-center">
+        <h4 class="flex justify-start items-center gap-2 text-xl">
+            <mat-icon
+                [svgIcon]="data.svgIcon"
+            >
+                {{ data.icon }}
+            </mat-icon>
+            <span>
+                {{ data.title }}
+            </span>
+        </h4>
+        <ng-container
+            class="block"
+            *ngTemplateOutlet="data.headerActions"
+        ></ng-container>
+    </div>
+    <button mat-dialog-close mat-icon-button class="absolute -top-2 -right-2">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div
+    mat-dialog-content
+    class="dialog-content p-0"
+>
+    <ng-container
+        class="block"
+        *ngTemplateOutlet="data.content"
+    ></ng-container>
+</div>
+<div
+    mat-dialog-actions
+    class="dialog-actions p-0 pt-6 min-h-0"
+>
+    <ng-container
+        class="block"
+        *ngTemplateOutlet="data.footerActions"
+    ></ng-container>
+</div>

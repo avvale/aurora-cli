@@ -21,6 +21,7 @@ export class GridTranslationsService
         OR                : new BehaviorSubject<string>('OR'),
         pleaseSelectField : new BehaviorSubject<string>('Please select a field'),
         resetColumnsConfig: new BehaviorSubject<string>('Reset columns config'),
+        search            : new BehaviorSubject<string>('Search'),
         translations      : new BehaviorSubject<string>('Translations'),
         value             : new BehaviorSubject<string>('Value'),
     };
@@ -83,7 +84,7 @@ export class GridTranslationsService
         }
         else
         {
-            // set kek like default value
+            // set key like default value
             this.columnMessages[scope][key] = new BehaviorSubject<string>(key);
             return this.columnMessages[scope][key];
         }

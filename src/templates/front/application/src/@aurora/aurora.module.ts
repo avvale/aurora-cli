@@ -2,8 +2,14 @@ import { APP_INITIALIZER, NgModule, Optional, SkipSelf } from '@angular/core';
 import { ApolloModule } from './modules';
 import { BootstrapService } from './services/bootstrap.service';
 import { PipesModule } from './pipes';
+import './prototypes/string-to-camel-case.interface';
+import './prototypes/string-to-camel-case';
+import './prototypes/string-to-kebab-case.interface';
+import './prototypes/string-to-kebab-case';
 import './prototypes/string-to-pascal-case.interface';
 import './prototypes/string-to-pascal-case';
+import './prototypes/string-to-snake-case.interface';
+import './prototypes/string-to-snake-case';
 
 @NgModule({
     imports: [

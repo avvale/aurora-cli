@@ -2,11 +2,11 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
 import { CommonLang } from '@aurora/modules';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 
 // aurora
-import { ColumnConfig, ColumnConfigAction, ColumnDataType, GridData, GridColumnFilter, GridState } from '../grid.types';
+import { ColumnConfig, ColumnConfigAction, ColumnDataType, GridData, GridColumnFilter, GridState, ExportGridState, ExportFormat, GridSearchState, GridSortState } from '../grid.types';
 import { GridCellValueTemplateDirective } from '../directives/grid-cell-value-template.directive';
 import { GridCustomHeaderTemplateDirective } from '../directives/grid-custom-header-template.directive';
 import { GridColumnsConfigPropertiesDialogComponent } from '../grid-columns-config-properties-dialog/grid-columns-config-properties-dialog.component';
@@ -15,7 +15,7 @@ import { SelectionChange, SelectionModel } from '../selection-model/selection-mo
 
 // third party libraries
 import { merge, tap } from 'rxjs';
-import { Action } from '@aurora';
+import { Action, GridManagerService } from '@aurora';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -26,128 +26,233 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 })
 export class GridComponent implements OnInit, AfterViewInit
 {
+    // set columns types for render each web component
+    columnConfigType = ColumnDataType;
+    exportFormat = ExportFormat;
+
     @Input() id: string = 'grid';
+    @Input() gridManagerService: GridManagerService;
     // input data rows
-    @Input() data: GridData;
-    @Input() columnsConfig: ColumnConfig[] = [];
-    @Input() originColumnsConfig: ColumnConfig[] = [];
-    // set rows selection
+    @Input() gridData: GridData;
+    // input columns config, data non-mutable
+    @Input() readonly originColumnsConfig: ColumnConfig[] = [];
+    // set selected rows, will be the selected objects contained in the grid
     @Input() selectedRows: any[] = [];
-    // selection checkbox column
-    @Input() rowsSelection = new SelectionModel<any>(true, [], true, (a: any, b: any) => a.id === b.id);
+    // model to manage the comparison of the selected objects and to set whether the checkbox is selected or not
+    @Input() selectedCheckboxRowModel = new SelectionModel<any>(true, [], true, (a: any, b: any) => a.id === b.id);
     @Input() hasFilterButton: boolean = true;
+    @Input() hasExportButton: boolean = true;
+    @Input() hasSearch: boolean = true;
     @Input() hasColumnsConfigPropertiesButton: boolean = true;
     @Input() hasPagination: boolean = true;
     @Input() hasDragAndDrop: boolean = false;
 
-    // column filters activated
-    private _activatedColumnFilters: GridColumnFilter[];
-    @Input() set activatedColumnFilters(columnFilters: GridColumnFilter[])
+    // manage all grid state, or part of it
+    // set grid state to load grid with specific state with sort and filters
+    private _gridState: GridState = {
+        columnsConfig: [],
+        columnFilters: [],
+        sort         : {
+            active   : 'createdAt',
+            direction: 'asc',
+        },
+    };
+    @Input() set gridState(gridState: GridState)
     {
-        this._activatedColumnFilters = columnFilters;
+        this._gridState = {
+            ...this._gridState,
+            ...gridState,
+        };
     }
-    get activatedColumnFilters(): GridColumnFilter[]
+    get gridState(): GridState
     {
-        // we make sure that it has an empty array as default value, to avoid errors due to undefined value
-        return Array.isArray(this._activatedColumnFilters) ? this._activatedColumnFilters :[];
+        return this._gridState;
+    }
+    @Input() set columnsConfig(columnsConfig: ColumnConfig[])
+    {
+        if (Array.isArray(columnsConfig)) this.gridState.columnsConfig = columnsConfig;
+    }
+    @Input() set columnFilters(columnFilters: GridColumnFilter[])
+    {
+        this.gridState.columnFilters = columnFilters ? columnFilters : [];
     }
 
     // langs to create TranslationMenuComponent form multi language objects
     @Input() langs: CommonLang[] = [];
+
+    // outputs
+    @Output() action = new EventEmitter<Action>();
+    @Output() closeColumnDialog = new EventEmitter<void>();
+    @Output() columnFiltersChange = new EventEmitter<GridColumnFilter[]>();
+    @Output() columnsConfigChange = new EventEmitter<ColumnConfig[]>();
+    @Output() exportData = new EventEmitter<ExportGridState>();
+    @Output() pageChange = new EventEmitter<PageEvent>();
+    @Output() resetColumnsConfig = new EventEmitter<void>();
+    @Output() rowDrop = new EventEmitter<CdkDragDrop<any>>();
+    @Output() selectedCheckboxRowModelChange = new EventEmitter<SelectionChange<any>>();
+    @Output() searchChange = new EventEmitter<GridSearchState>();
+    @Output() sortChange = new EventEmitter<GridSortState>();
+    @Output() stateChange = new EventEmitter<GridState>();
 
     // view children
     @ViewChild(MatPaginator) private paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     // directive to set custom values in cells
-    @ContentChildren(GridCellValueTemplateDirective) cellValuesTemplate?: QueryList<GridCellValueTemplateDirective>;
-
+    @ContentChildren(GridCellValueTemplateDirective) gridCellValuesTemplate?: QueryList<GridCellValueTemplateDirective>;
     // add custom header
     @ContentChildren(GridCustomHeaderTemplateDirective) gridCustomHeadersTemplate?: QueryList<GridCustomHeaderTemplateDirective>;
 
-    // outputs
-    @Output() action = new EventEmitter<Action>();
-    @Output() closeColumnDialog = new EventEmitter<void>();
-    @Output() columnFiltersChange = new EventEmitter<GridState>();
-    @Output() columnsConfigChange = new EventEmitter<ColumnConfig[]>();
-    @Output() pageChange = new EventEmitter<GridState>();
-    @Output() resetColumnsConfig = new EventEmitter<void>();
-    @Output() rowDrop = new EventEmitter<CdkDragDrop<any>>();
-    @Output() rowsSelectionChange = new EventEmitter<SelectionChange<any>>();
-    @Output() stateChange = new EventEmitter<GridState>();
-
-    // set columns types for render each web component
-    columnConfigType = ColumnDataType;
-
     get displayedColumns(): string[]
     {
-        return this.columnsConfig?.filter(item => !item.hidden)
+        return this.gridState
+            .columnsConfig?.filter(item => !item.hidden)
             .map(item => item.field);
     }
 
     constructor(
-        protected dialog: MatDialog,
-        private changeDetection: ChangeDetectorRef,
+        protected readonly dialog: MatDialog,
+        private readonly changeDetection: ChangeDetectorRef,
+        // service built from IoC, probably defined in app.module
+        private readonly gridManagerServiceAdapter: GridManagerService,
     ) { }
 
     ngOnInit(): void
     {
-        this.rowsSelection
+        // if gridManagerService is not defined from @Input property, use the one from IoC
+        if (!this.gridManagerService) this.gridManagerService = this.gridManagerServiceAdapter;
+
+        if (!this.gridManagerService) throw new Error(`
+            GridManagerService is not defined, has to be defined from the @Input property or from the Ioc container.
+            Example from Ioc:
+
+            @NgModule({
+                providers: [
+
+                    {
+                        provide : GridManagerService,
+                        useClass: AuroraGridManagerService,
+                    },
+                ],
+                bootstrap: [
+                    AppComponent,
+                ],
+            })
+            export class AppModule
+            {
+            }
+
+            Example from @Input:
+
+            <au-grid
+                [id]="gridId"
+                [gridManagerService]="gridManagerService"
+            >
+            </au-grid>
+        `);
+
+        this.selectedCheckboxRowModel
             .changed
-            .subscribe(selectionChange => this.rowsSelectionChange.emit(selectionChange));
+            .subscribe(selectionCheckboxModelChanged => this.selectedCheckboxRowModelChange.emit(selectionCheckboxModelChanged));
 
         // if exist selectedRows items, set rows selection
-        if (this.selectedRows.length > 0) this.rowsSelection.select(...this.selectedRows);
+        if (this.selectedRows.length > 0) this.selectedCheckboxRowModel.select(...this.selectedRows);
     }
 
+    // manage paginator and sort events
     ngAfterViewInit(): void
     {
         if (this.paginator && this.sort)
         {
-            // Reset back to the first page after sort
-            this.sort
-                .sortChange
-                .subscribe(
-                    () => (this.paginator.pageIndex = 0),
-                );
-
             // subscribe to sort event and paginator event
-            merge(this.paginator.page, this.sort.sortChange)
+            merge(
+                this.paginator.page,
+                this.sort.sortChange,
+            )
                 .pipe(
-                    tap(() =>
+                    tap((data: Sort | PageEvent) =>
                     {
-                        const gridState = {
-                            columnFilters: this.activatedColumnFilters,
-                            count        : this.paginator.length,
-                            offset       :
-                                this.paginator.pageIndex *
-                                this.paginator.pageSize,
-                            limit: this.paginator.pageSize,
-                            order: [[this.sort.active, this.sort.direction]],
+                        if (
+                            'active' in data &&
+                            'direction' in data
+                        )
+                        {
+                            // is a sort event
+                            // Reset back to the first page after sorting
+                            this.paginator.pageIndex = 0;
+
+                            // set sort from GridSortState
+                            this.gridState.sort = data;
+
+                            // grid handle manager service
+                            this.gridManagerService.handleSortStateChange(
+                                this.id,
+                                data,
+                            );
+
+                            // handle output event
+                            this.sortChange.emit(data);
+                        }
+
+                        // create grid state
+                        this.gridState = {
+                            ...this.gridState,
+                            page: {
+                                length   : this.paginator.length,
+                                pageIndex: this.paginator.pageIndex,
+                                pageSize : this.paginator.pageSize,
+                            },
                         };
 
-                        this.stateChange.emit(gridState);
-                        this.pageChange.emit(gridState);
+                        // grid handle manager service
+                        // this method triggers an Action handled by the parent component
+                        this.gridManagerService.handleStateChange(
+                            this.id,
+                            this.gridState,
+                            this.gridState.columnsConfig,
+                        );
+
+                        // handle output event
+                        this.stateChange.emit(this.gridState);
                     }),
                 )
                 .subscribe();
         }
     }
 
+    // manage grid rows menu actions
     handleClickAction(
         columnConfigAction: ColumnConfigAction,
         row: any,
         event: PointerEvent,
     ): void
     {
-        this.action.emit({
+        const action = {
             ...columnConfigAction,
             data: {
                 ...columnConfigAction.data,
                 row,
                 event,
             },
-        });
+        };
+
+        // grid handle manager service
+        this.gridManagerService.handleGridAction(action);
+
+        // handle output event
+        this.action.emit(action);
+    }
+
+    handlePageStateChange(pageEvent: PageEvent): void
+    {
+        // grid handle manager service
+        this.gridManagerService.handlePageStateChange(
+            this.id,
+            pageEvent,
+        );
+
+        // handle output event
+        this.pageChange.emit(pageEvent);
     }
 
     /**
@@ -157,12 +262,15 @@ export class GridComponent implements OnInit, AfterViewInit
     {
         const columnsConfigPropertiesDialogRef = this.dialog.open(GridColumnsConfigPropertiesDialogComponent,
             {
-                width    : '90vw',
-                maxWidth : '420px',
-                minWidth : '240px',
-                autoFocus: false,
-                data     : {
-                    columnsConfig      : this.columnsConfig,
+                panelClass: 'au-dialog',
+                maxHeight : '100vh',
+                width     : '90vw',
+                maxWidth  : '420px',
+                minWidth  : '240px',
+                autoFocus : false,
+                data      : {
+                    gridId             : this.id,
+                    columnsConfig      : this.gridState.columnsConfig,
                     originColumnsConfig: this.originColumnsConfig,
                 },
             });
@@ -173,8 +281,18 @@ export class GridComponent implements OnInit, AfterViewInit
             .columnsConfigChange
             .subscribe($event =>
             {
-                this.columnsConfig = $event.columnsConfig,
-                this.columnsConfigChange.emit(this.columnsConfig);
+                this.gridState.columnsConfig = $event.columnsConfig,
+
+                // grid handle manager service
+                this.gridManagerService.handleColumnsConfigChange(
+                    this.id,
+                    this.gridState.columnsConfig,
+                    this.originColumnsConfig,
+                );
+
+                // handle output event
+                this.columnsConfigChange.emit(this.gridState.columnsConfig);
+
                 this.changeDetection.markForCheck();
             });
 
@@ -189,61 +307,139 @@ export class GridComponent implements OnInit, AfterViewInit
     {
         const gridFilterDialogRef = this.dialog.open(GridFiltersDialogComponent,
             {
-                width    : '90vw',
-                maxWidth : '600px',
-                minWidth : '240px',
-                height   : '75vh',
-                autoFocus: false,
-                data     : {
-                    activatedColumnFilters: this.activatedColumnFilters,
-                    columnsConfig         : this.columnsConfig,
-                    gridId                : this.id,
+                panelClass: 'au-dialog',
+                maxHeight : '100vh',
+                width     : '90vw',
+                maxWidth  : '600px',
+                minWidth  : '240px',
+                autoFocus : false,
+                data      : {
+                    columnFilters: this.gridState.columnFilters,
+                    columnsConfig: this.gridState.columnsConfig,
+                    gridId       : this.id,
                 },
             });
 
         gridFilterDialogRef
             .afterClosed()
-            .subscribe(res =>
+            .subscribe(data =>
             {
                 // dialog is closed without actions
-                if (res === undefined) return;
+                if (data === undefined) return;
 
-                // this saves filters so they are kept after closing the dialog
-                this.activatedColumnFilters = res.columnFilters;
-
-                const gridState = {
-                    columnFilters: this.activatedColumnFilters,
-                    count        : this.paginator.length,
-                    offset       : 0,
-                    limit        : this.paginator.pageSize,
-                    order        : [[this.sort.active, this.sort.direction]],
+                this.gridState = {
+                    ...this.gridState,
+                    columnFilters: data.columnFilters,
+                    page         : {
+                        // on filter, reset paginate to first page
+                        length   : this.paginator.length,
+                        pageIndex: 0,
+                        pageSize : this.paginator.pageSize,
+                    },
                 };
 
-                // emit event
-                this.stateChange.emit(gridState);
-                this.columnFiltersChange.emit(gridState);
+                // grid handle manager service
+                // this method triggers an Action handled by the parent component
+                this.gridManagerService.handleStateChange(
+                    this.id,
+                    this.gridState,
+                    this.gridState.columnsConfig,
+                );
+
+                // handle output event
+                this.stateChange.emit(this.gridState);
+
+                // grid handle manager service
+                this.gridManagerService.handleColumnFiltersChange(
+                    this.id,
+                    data.columnFilters,
+                );
+
+                // handle output event
+                this.columnFiltersChange.emit(data.columnFilters);
 
                 // refresh view to update number of filters activated
                 this.changeDetection.markForCheck();
             });
     }
 
+    handleSearchStateChange($event: GridSearchState): void
+    {
+        // grid handle manager service
+        this.gridManagerService.handleSearchStateChange(
+            this.id,
+            $event,
+            this.columnsConfig,
+        );
+
+        // handle output event
+        this.searchChange.emit($event);
+    }
+
     /*
     * manage grid search
     */
-    handleSearchOpen(): void
+    handleSearch($event: GridSearchState): void
     {
-        console.log('handleSearchOpen');
+        const page = {
+            // on filter, reset paginate to first page
+            length   : this.paginator.length,
+            pageIndex: 0,
+            pageSize : this.paginator.pageSize,
+        };
+
+        this.gridState = {
+            ...this.gridState,
+            search: $event,
+            page,
+        };
+
+        // set page in page state, to avoid the empty page when
+        // exiting and returning to the list, because it is in a
+        // forward pagination before the search is performed.
+        this.handlePageStateChange(page);
+
+        // grid handle manager service
+        // this method triggers an Action handled by the parent component
+        this.gridManagerService.handleStateChange(
+            this.id,
+            this.gridState,
+            this.gridState.columnsConfig,
+        );
+
+        // handle output event
+        this.stateChange.emit(this.gridState);
     }
 
-    handleSearchClose(): void
+    handleExport(
+        $event: PointerEvent,
+        format: ExportFormat,
+    ): void
     {
-        console.log('handleSearchClose');
-    }
+        const { columnFilters, search, sort } = this.gridState;
 
-    handleSearch($event): void
-    {
-        console.log('handleSearch', $event);
+        const gridState = {
+            columnFilters,
+            sort,
+        };
+
+        // check search is valid value
+        if (search) gridState['search'] = search;
+
+        // grid handle manager service
+        // this method triggers an Action handled by the parent component
+        this.gridManagerService.handleExportData(
+            this.id,
+            this.gridState,
+            this.columnsConfig,
+            format,
+        );
+
+        // handle output event
+        this.exportData.emit({
+            gridState,
+            format,
+        });
     }
 
     /**
@@ -251,27 +447,27 @@ export class GridComponent implements OnInit, AfterViewInit
      */
     isAllSelected(): boolean
     {
-        return this.rowsSelection.isAllSelected(this.data.rows);
+        return this.selectedCheckboxRowModel.isAllSelected(this.gridData.rows);
     }
 
     isSomeSelected(): boolean
     {
-        return this.rowsSelection.isSomeSelected(this.data.rows);
+        return this.selectedCheckboxRowModel.isSomeSelected(this.gridData.rows);
     }
 
     masterToggle(): void
     {
         if (this.isAllSelected())
         {
-            this.rowsSelection.deselect(...this.data.rows);
+            this.selectedCheckboxRowModel.deselect(...this.gridData.rows);
             return;
         }
-        this.rowsSelection.select(...this.data.rows);
+        this.selectedCheckboxRowModel.select(...this.gridData.rows);
     }
 
     checkboxLabel(row?: any): string
     {
         if (!row) return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-        return `${this.rowsSelection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+        return `${this.selectedCheckboxRowModel.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
     }
 }

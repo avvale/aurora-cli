@@ -1,4 +1,6 @@
 {
     "admin": "Admin",
-    "applications": "Applications"
+    "applications": "Applications",
+    "example": "Example",
+    "exampleSection": "Example Section"
 }

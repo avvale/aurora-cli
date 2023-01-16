@@ -1,15 +1,6 @@
 
 .dialog-header {
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0;
     .title {
-        align-items: center;
-
-        mat-icon {
-            margin-right: 1rem;
-        }
-
         .helper {
             margin-top: 1rem;
         }
@@ -33,11 +24,12 @@
         mat-checkbox {
             display: grid;
             place-items: center;
-            margin-right: .25rem;
+            height: 24px;
         }
 
         span {
             font-size: 1rem;
+            line-height: 24px;
         }
     }
 
@@ -45,7 +37,7 @@
         border-top: solid 1px rgba($color: #000000, $alpha: .1);
         border-bottom: none;
         margin-top: 1rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 }
 

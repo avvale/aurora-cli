@@ -28,9 +28,9 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
         private _activatedRoute: ActivatedRoute,
         private _router: Router,
         private _navigationService: NavigationService,
-        private iamService: IamService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
+        private iamService: IamService,
     )
     {
     }
@@ -63,7 +63,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
                 this.navigation = navigation;
             });
 
-        
+        // ---- customizations ----
         // Subscribe to the account service
         this.iamService.account$
             .pipe((takeUntil(this._unsubscribeAll)))

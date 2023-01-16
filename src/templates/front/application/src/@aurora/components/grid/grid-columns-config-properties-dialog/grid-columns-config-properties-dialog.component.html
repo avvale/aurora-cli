@@ -7,12 +7,12 @@
     <div class="helper text-base opacity-50">{{ 'clickAndDragInfo' | gridTranslate | async }}</div>
     <hr class="mt-2 mb-4">
 
-    <button mat-icon-button [disableRipple]="true" mat-dialog-close class="absolute top-0 right-0">
+    <button mat-dialog-close mat-icon-button class="absolute top-2 right-2">
         <mat-icon>close</mat-icon>
     </button>
 </div>
 
-<div mat-dialog-content class="max-h-[80vh] overflow-y-scroll">
+<div mat-dialog-content class="dialog-content">
     <div
         cdkDropList
         class="columns-list"
@@ -32,15 +32,14 @@
                         (change)="handleChangeVisibilityColumn($event, columnConfig)"
                     >
                     </mat-checkbox>
-
                     <span>
-                    {{ columnConfig.field | gridTranslate:'column' | async }}
+                        {{ columnConfig.field | gridTranslate:'column':gridId | async }}
                     </span>
                 </div>
-
-                <mat-icon>drag_indicator</mat-icon>
+                <mat-icon>
+                    drag_indicator
+                </mat-icon>
             </div>
-
             <hr>
         </ng-container>
     </div>
@@ -48,12 +47,16 @@
 
 <mat-dialog-actions>
     <button
-			[mat-dialog-close]
-            (click)="resetColumnsConfig($event)"
-			class="w-full mr-2"
-			mat-flat-button
-		>
-             <mat-icon class="icon-size-5 mr-2">restart_alt</mat-icon>
-			{{ 'resetColumnsConfig' | gridTranslate | async }}
-		</button>
+        [mat-dialog-close]
+        (click)="resetColumnsConfig($event)"
+        class="w-full"
+        mat-flat-button
+    >
+        <mat-icon
+            class="icon-size-5 mr-2"
+        >
+            restart_alt
+        </mat-icon>
+        {{ 'resetColumnsConfig' | gridTranslate | async }}
+    </button>
 </mat-dialog-actions>

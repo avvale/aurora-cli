@@ -1,13 +1,15 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { SelectionChange } from '@angular/cdk/collections';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Action } from '@aurora/aurora.types';
 import { GridDialogComponent } from '../grid-dialog/grid-dialog.component';
-import { ColumnConfig, GridColumnFilter, GridData, GridState } from '../grid/grid.types';
+import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
 import { GridSelectMultipleCellValueDialogTemplateDirective } from './directives/grid-select-multiple-cell-value-dialog-template.directive';
 import { GridSelectMultipleCellValueTemplateDirective } from './directives/grid-select-multiple-cell-value-template.directive';
 import { GridSelectMultipleCustomHeaderDialogTemplateDirective } from './directives/grid-select-multiple-custom-header-dialog-template.directive';
 import { GridSelectMultipleCustomHeaderTemplateDirective } from './directives/grid-select-multiple-custom-header-template.directive';
+import { SelectionModel } from '../grid/selection-model/selection-model';
 
 @Component({
     selector       : 'au-grid-select-multiple-elements',
@@ -26,17 +28,19 @@ export class GridSelectMultipleElementsComponent
     @Input() dialogTitle: string;
     @Input() dialogColumnsConfig: ColumnConfig[];
     @Input() dialogOriginColumnsConfig: ColumnConfig[];
-    @Input() dialogActivatedColumnFilters: GridColumnFilter[];
+    @Input() dialogGridState: GridState;
     @Input() dialogSelectedRows: any[] = [];
+
+    // manage dialog gridData
     private _dialogGridData: GridData;
-    @Input() set dialogGridData(gridData: GridData)
+    @Input() set dialogGridData(dialogGridData: GridData)
     {
-        this._dialogGridData = gridData;
-        if (this.elementsDialogRef)
-        {
-            this.elementsDialogRef.componentInstance.gridData = gridData;
-            this.changeDetection.markForCheck();
-        }
+        // save gridData firs input to be used in the dialog when open dialog
+        this._dialogGridData = dialogGridData;
+
+        // after open dialog, when componentInstance is defined, set gridData
+        // to the dialog
+        this.elementsDialogRef?.componentInstance?.gridDataSubject$.next(dialogGridData);
     }
     get dialogGridData(): GridData
     {
@@ -44,13 +48,16 @@ export class GridSelectMultipleElementsComponent
     }
 
     // grid
-    @Input() data: GridData;
+    @Input() gridState: GridState;
+    @Input() gridData: GridData;
     @Input() gridId: string = 'grid';
     @Input() columnsConfig: ColumnConfig[];
     @Input() originColumnsConfig: ColumnConfig[];
     @Input() hasPagination: boolean = true;
     @Input() hasDragAndDrop: boolean = false;
     @Input() hasFilterButton: boolean = true;
+    @Input() hasSearch: boolean = true;
+    @Input() selectedCheckboxRowModel = new SelectionModel<any>(true, [], true, (a: any, b: any) => a.id === b.id);
 
     // selected items grid inputs
     @Input() selectedItemsColumnsConfig: ColumnConfig[];
@@ -68,7 +75,11 @@ export class GridSelectMultipleElementsComponent
     @Output() action = new EventEmitter<Action>();
     @Output() columnsConfigChange = new EventEmitter<ColumnConfig[]>();
     @Output() rowDrop = new EventEmitter<CdkDragDrop<any>>();
+    @Output() selectedCheckboxRowModelChange = new EventEmitter<SelectionChange<any>>();
     @Output() stateChange = new EventEmitter<GridState>();
+    @Output() search = new EventEmitter<GridState>();
+    @Output() searchOpen = new EventEmitter<void>();
+    @Output() searchClose = new EventEmitter<void>();
 
     // outputs grid dialog
     @Output() dialogAction = new EventEmitter<Action>();
@@ -77,9 +88,12 @@ export class GridSelectMultipleElementsComponent
     @Output() dialogColumnsConfigChange = new EventEmitter<ColumnConfig[]>();
     @Output() dialogOpen = new EventEmitter<void>();
     @Output() dialogStateChange = new EventEmitter<GridState>();
+    @Output() dialogSearch = new EventEmitter<GridState>();
+    @Output() dialogSearchOpen = new EventEmitter<void>();
+    @Output() dialogSearchClose = new EventEmitter<void>();
+    @Output() dialogSelectedCheckboxRowModelChange = new EventEmitter<SelectionChange<any>>();
 
     constructor(
-        private changeDetection: ChangeDetectorRef,
         private dialog: MatDialog,
     ) {}
 
@@ -87,26 +101,31 @@ export class GridSelectMultipleElementsComponent
     {
         this.elementsDialogRef = this.dialog.open(GridDialogComponent,
             {
-                width    : '90vw',
-                maxWidth : '1024px',
-                minWidth : '240px',
-                autoFocus: false,
+                panelClass: 'au-dialog',
+                maxHeight : '100vh',
+                width     : '90vw',
+                maxWidth  : '1024px',
+                minWidth  : '240px',
+                autoFocus : false,
                 ...dialogConfig,
-                ...{
-                    data: {
-                        activatedColumnFilters   : this.dialogActivatedColumnFilters,
-                        columnsConfig            : this.dialogColumnsConfig,
-                        gridData                 : this.dialogGridData,
-                        gridId                   : this.dialogGridId,
-                        originColumnsConfig      : this.dialogOriginColumnsConfig,
-                        selectedRows             : this.dialogSelectedRows,
-                        title                    : this.dialogTitle,
-                        gridCustomHeadersTemplate: this.gridSelectMultipleCustomHeadersDialogTemplate,
-                        gridCellValuesTemplate   : this.gridSelectMultipleCellValuesDialogTemplate,
-                        ...dialogConfig?.data,
-                    },
+                data      : {
+                    gridId                   : this.dialogGridId,
+                    gridState                : this.dialogGridState,
+                    originColumnsConfig      : this.dialogOriginColumnsConfig,
+                    columnsConfig            : this.dialogColumnsConfig,
+                    selectedRows             : this.dialogSelectedRows,
+                    title                    : this.dialogTitle,
+                    gridCustomHeadersTemplate: this.gridSelectMultipleCustomHeadersDialogTemplate,
+                    gridCellValuesTemplate   : this.gridSelectMultipleCellValuesDialogTemplate,
+                    ...dialogConfig?.data,
                 },
+
             });
+
+        // set gridData saved when component is created
+        this.elementsDialogRef
+            .componentInstance
+            .gridDataSubject$.next(this.dialogGridData);
 
         this.elementsDialogRef
             .afterOpened()
@@ -143,7 +162,25 @@ export class GridSelectMultipleElementsComponent
         // pass on selection row event to parent component
         this.elementsDialogRef
             .componentInstance
-            .rowsSelectionChange
-            .subscribe((action: Action) => this.dialogAction.next(action));
+            .selectedCheckboxRowModelChange
+            .subscribe((selectedCheckboxRowsModel: SelectionChange<any>) => this.dialogSelectedCheckboxRowModelChange.next(selectedCheckboxRowsModel));
+
+        // pass search open event to parent component
+        this.elementsDialogRef
+            .componentInstance
+            .searchOpen
+            .subscribe(() => this.dialogSearchOpen.next());
+
+        // pass search close event to parent component
+        this.elementsDialogRef
+            .componentInstance
+            .searchClose
+            .subscribe(() => this.dialogSearchClose.next());
+
+        // pass search event to parent component
+        this.elementsDialogRef
+            .componentInstance
+            .search
+            .subscribe((state: GridState) => this.dialogSearch.next(state));
     }
 }

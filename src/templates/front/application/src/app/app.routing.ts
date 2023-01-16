@@ -10,30 +10,21 @@ import { InitialDataResolver } from 'app/app.resolvers';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/example'
-    {
-        path      : '',
-        pathMatch : 'full',
-        redirectTo: 'example',
-    },
+    { path: '', pathMatch: 'full', redirectTo: 'example' },
 
-    // Redirect signed in user to the '/example'
+    // Redirect signed-in user to the '/dashboards/project'
     //
     // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
-    {
-        path      : 'signed-in-redirect',
-        pathMatch : 'full',
-        redirectTo: 'example',
-    },
+    { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'example' },
 
     // Auth routes for guests
     {
-        path            : '',
-        canActivate     : [NoAuthGuard],
-        canActivateChild: [NoAuthGuard],
-        component       : LayoutComponent,
-        data            : {
+        path     : '',
+        canMatch : [NoAuthGuard],
+        component: LayoutComponent,
+        data     : {
             layout: 'empty',
         },
         children: [
@@ -84,6 +75,26 @@ export const appRoutes: Route[] = [
         children: [
             { path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule) },
             { path: 'kitchen-sink', loadChildren: () => import('app/modules/admin/kitchen-sink/kitchen-sink.module').then(m => m.KitchenSinkModule) },
+
+            // add here your module routes
         ],
+    },
+
+    // Error routes
+    {
+        path        : 'error/404',
+        loadChildren: () => import('app/modules/admin/pages/error/error-404/error-404.module').then(m => m.Error404Module),
+    },
+    {
+        path        : 'error/401',
+        loadChildren: () => import('app/modules/admin/pages/error/error-401/error-401.module').then(m => m.Error401Module),
+    },
+    {
+        path        : 'error/500',
+        loadChildren: () => import('app/modules/admin/pages/error/error-500/error-500.module').then(m => m.Error500Module),
+    },
+    {
+        path      : '**',
+        redirectTo: 'error/404',
     },
 ];

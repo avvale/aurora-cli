@@ -30,7 +30,12 @@ export class ActionService
     action(action: Action): Action
     {
         // set default isViewAction to true
-        action = { id: null, isViewAction: true, data: null, ...action };
+        action = {
+            id          : null,
+            isViewAction: true,
+            data        : null,
+            ...action,
+        };
 
         this.setCache(action.id, action.data);
 

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { cloneDeep } from 'lodash-es';
 import { ColumnConfig, ColumnDataType, ColumnsConfigChange } from '../grid.types';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 @Component({
     selector   : 'au-grid-columns-config-properties-dialog',
@@ -11,6 +11,7 @@ import { ColumnConfig, ColumnDataType, ColumnsConfigChange } from '../grid.types
 })
 export class GridColumnsConfigPropertiesDialogComponent implements OnInit
 {
+    gridId: string;
     columnsConfig: ColumnConfig[];
     originColumnsConfig: ColumnConfig[];
     columnsConfigChange = new EventEmitter<ColumnsConfigChange>();
@@ -48,6 +49,7 @@ export class GridColumnsConfigPropertiesDialogComponent implements OnInit
 
     ngOnInit(): void
     {
+        this.gridId = this.data.gridId;
         this.columnsConfig = cloneDeep(this.data.columnsConfig);
         this.originColumnsConfig = cloneDeep(this.data.originColumnsConfig);
     }

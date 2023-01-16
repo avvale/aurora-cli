@@ -7,7 +7,7 @@ export interface Account
     dApplicationCodes: string[];
     dPermissions: AccountPermissions;
     dTenants: string[];
-    data?: any;
+    meta?: any;
     user: User;
     createdAt: string;
     updatedAt: string;
@@ -30,5 +30,5 @@ export interface User
     username: string;
     password?: string;
     rememberToken?: string;
-    data?: any;
+    meta?: any;
 }

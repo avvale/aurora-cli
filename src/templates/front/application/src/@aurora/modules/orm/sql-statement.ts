@@ -69,13 +69,7 @@ export enum Operator
     any = '[any]',                          // ANY ARRAY[2, 3]::INTEGER (PG only)
 }
 
-export enum Order
-{
-    ASC  = 'ASC',
-    DESC = 'DESC',
-}
-
-export class QueryStatement
+export interface QueryStatement
 {
     /**
      * Attribute has to be matched for rows to be selected for the given action.
@@ -109,8 +103,11 @@ export class QueryStatement
 
     /**
      * GROUP BY in sql
+     * Used in conjunction with `attributes`.
+     *
+     * @see Projectable
      */
-    group?: any;
+     group?: any;
 
     /**
      * Limit the results
@@ -153,4 +150,14 @@ export class QueryStatement
      * MySQL only
      */
     indexHints?: IndexHint[];
+
+    /**
+     * Apply COUNT(DISTINCT(col))
+     */
+     distinct?: boolean;
+
+     /**
+      * The column to aggregate on.
+      */
+     col?: string;
 }

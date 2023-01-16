@@ -5,17 +5,19 @@ import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthSignOutComponent } from 'app/modules/auth/sign-out/sign-out.component';
 import { authSignOutRoutes } from 'app/modules/auth/sign-out/sign-out.routing';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
     declarations: [
-        AuthSignOutComponent
+        AuthSignOutComponent,
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(authSignOutRoutes),
         MatButtonModule,
         FuseCardModule,
-        SharedModule
-    ]
+        SharedModule,
+        TranslocoModule,
+    ],
 })
 export class AuthSignOutModule
 {

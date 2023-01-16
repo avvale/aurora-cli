@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { AuthService } from 'app/core/auth/auth.service';
-import { UserService } from 'app/core/user/user.service';
 import { FuseAlertType } from '@fuse/components/alert';
+
+// ---- customizations ----
+import { AuthenticationService, IamService } from '@aurora';
 
 @Component({
     selector     : 'auth-unlock-session',
@@ -30,10 +31,10 @@ export class AuthUnlockSessionComponent implements OnInit
      */
     constructor(
         private _activatedRoute: ActivatedRoute,
-        private _authService: AuthService,
+        private authenticationService: AuthenticationService,
         private _formBuilder: UntypedFormBuilder,
         private _router: Router,
-        private _userService: UserService
+        private iamService: IamService,
     )
     {
     }
@@ -48,9 +49,10 @@ export class AuthUnlockSessionComponent implements OnInit
     ngOnInit(): void
     {
         // Get the user's name
-        this._userService.user$.subscribe((user) => {
-            this.name = user.name;
-            this._email = user.email;
+        this.iamService.account$.subscribe(account =>
+        {
+            this.name = account.user.name;
+            this._email = account.email;
         });
 
         // Create the form
@@ -86,7 +88,7 @@ export class AuthUnlockSessionComponent implements OnInit
         // Hide the alert
         this.showAlert = false;
 
-        this._authService.unlockSession({
+        this.authenticationService.unlockSession({
             email   : this._email ?? '',
             password: this.unlockSessionForm.get('password').value
         }).subscribe(

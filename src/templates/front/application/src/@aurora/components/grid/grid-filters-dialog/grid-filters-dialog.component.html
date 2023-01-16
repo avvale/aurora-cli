@@ -1,30 +1,27 @@
-<div class="flex flex-col h-full">
-	<div mat-dialog-title class="dialog-header">
-		<div class="title">
-			<mat-icon>filter_list</mat-icon>
-			<span>{{ 'filter' | gridTranslate | async }}</span>
-		</div>
+<div mat-dialog-title class="dialog-header">
+    <p class="title">
+        <mat-icon>filter_list</mat-icon>
+        <span>{{ 'filter' | gridTranslate:'message':gridId | async }}</span>
+    </p>
 
-		<button
-            mat-icon-button
-            [disableRipple]="true"
-            [mat-dialog-close]="undefined"
-        >
-			<mat-icon>close</mat-icon>
-		</button>
-	</div>
+    <button mat-dialog-close mat-icon-button class="absolute top-2 right-2">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content class="dialog-content flex flex-col min-h-[50vh]">
 	<mat-form-field
 		appearance="outline"
 		class="w-full cursor-pointer my-4"
 		data-input-type="filter-field-control"
 	>
-		<mat-label>{{ 'field' | gridTranslate | async }}</mat-label>
+		<mat-label>{{ 'field' | gridTranslate:'message':gridId | async }}</mat-label>
 		<input
 			type="text"
 			aria-label="String"
 			matInput
 			class="cursor-pointer disabled:cursor-not-allowed"
-			[placeholder]="'pleaseSelectField' | gridTranslate | async"
+			[placeholder]="'pleaseSelectField' | gridTranslate:'message':gridId | async"
 			[formControl]="searchFieldNameControl"
 			[matAutocomplete]="auto"
 		/>
@@ -37,12 +34,12 @@
 				*ngFor="let item of filteredColumnsConfig | async"
 				[value]="item"
 			>
-                {{ item.field | gridTranslate:'column' | async }}
+                {{ item.field | gridTranslate:'column':gridId | async }}
 			</mat-option>
 		</mat-autocomplete>
 	</mat-form-field>
 
-	<div mat-dialog-content class="flex flex-col my-4 h-full">
+	<div class="flex flex-col">
 		<!-- column picker -->
 		<div class="flex-grow">
 			<form
@@ -57,7 +54,9 @@
                             [ngSwitch]="formFilter.get('type').value"
                             [formGroup]="formFilter"
                         >
-                            <span class="text-sm col-span-12">{{ formFilter.get('field').value | gridTranslate:'column' | async }}</span>
+                            <span class="text-sm col-span-12">
+                                {{ formFilter.get('field').value | gridTranslate:'column':gridId  | async }}
+                            </span>
 
                             <!-- criteria picker -->
                             <mat-form-field
@@ -65,7 +64,7 @@
                                 class="col-span-4"
                                 tiny
                             >
-                                <mat-label>{{ 'operator' | gridTranslate | async }}</mat-label>
+                                <mat-label>{{ 'operator' | gridTranslate:'message':gridId | async }}</mat-label>
                                 <mat-select formControlName="operator">
                                     <mat-option
                                         *ngFor="let filterOperator of filterOperators | filterOperators:formFilter.get('type').value"
@@ -80,10 +79,10 @@
                             <mat-form-field
                                 *ngSwitchCase="columnDataType.STRING"
                                 appearance="outline"
-                                class="col-span-7 xx"
+                                class="col-span-7 relative"
                                 tiny
                             >
-                                <mat-label>{{ 'value' | gridTranslate | async }}</mat-label>
+                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
                                 <input
                                     autocomplete="off"
                                     formControlName="value"
@@ -91,7 +90,7 @@
                                 />
 
                                 <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate | async }}</span>
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
                                 </div>
                             </mat-form-field>
 
@@ -99,10 +98,10 @@
                             <mat-form-field
                                 *ngSwitchCase="columnDataType.NUMBER"
                                 appearance="outline"
-                                class="col-span-7 xx"
+                                class="col-span-7 relative"
                                 tiny
                             >
-                                <mat-label>{{ 'value' | gridTranslate | async }}</mat-label>
+                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
                                 <input
                                     type="number"
                                     autocomplete="off"
@@ -111,7 +110,7 @@
                                 />
 
                                 <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate | async }}</span>
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
                                 </div>
                             </mat-form-field>
 
@@ -119,32 +118,31 @@
                             <mat-form-field
                                 *ngSwitchCase="columnDataType.DATE"
                                 appearance="outline"
-                                class="col-span-7 xx"
+                                class="au-datepicker col-span-7 relative"
                                 tiny
                             >
-                                <mat-label>{{ 'value' | gridTranslate | async }}</mat-label>
+                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
                                 <input
                                     autocomplete="off"
                                     formControlName="value"
                                     matInput
                                     [auDatepickerSqlFormat]
                                     [matDatepicker]="picker"
-                                />
+                                >
                                 <mat-datepicker-toggle
                                     matSuffix
                                     [for]="picker"
-                                ></mat-datepicker-toggle>
-
+                                >
+                                </mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-
                                 <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox--datepicker">
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate | async }}</span>
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
                                 </div>
                             </mat-form-field>
 
                             <button
                                 mat-icon-button
-                                class="col-span-1"
+                                class="col-span-1 mb-5"
                                 type="button"
                                 (click)="handleDeleteFilter(i)"
                             >
@@ -156,26 +154,26 @@
 			</form>
 		</div>
 	</div>
-
-	<!-- confirmation buttons -->
-	<div class="w-full flex col-span-2">
-		<button
-			[mat-dialog-close]="handleRemoveFilters()"
-			class="w-full mr-2"
-			mat-flat-button
-		>
-			{{ 'clearFilters' | gridTranslate | async }}
-		</button>
-		<button
-            mat-flat-button
-            type="submit"
-			class="w-full"
-			color="primary"
-            form="filterGridDialog"
-			[mat-dialog-close]="handleCloseDialog()"
-			[disabled]="!containerForm.valid"
-		>
-        {{ 'filter' | gridTranslate | async }}
-		</button>
-	</div>
 </div>
+
+<!-- confirmation buttons -->
+<mat-dialog-actions class="grid grid-cols-2 gap-2">
+    <button
+        [mat-dialog-close]="handleRemoveFilters()"
+        class=""
+        mat-flat-button
+    >
+        {{ 'clearFilters' | gridTranslate:'message':gridId | async }}
+    </button>
+    <button
+        mat-flat-button
+        type="submit"
+        class=""
+        color="primary"
+        form="filterGridDialog"
+        [mat-dialog-close]="handleCloseDialog()"
+        [disabled]="!containerForm.valid"
+    >
+    {{ 'filter' | gridTranslate:'message':gridId | async }}
+    </button>
+</mat-dialog-actions>

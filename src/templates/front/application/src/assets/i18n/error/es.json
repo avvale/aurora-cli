@@ -1,0 +1,13 @@
+{
+    "1001": "Para cerrar y enviar un transporte a SAP, todas las etapas deben estar cerradas o canceladas. Al menos una entrega no está cerrada ni cancelada.",
+    "1002": "Para cerrar y enviar un transporte a SAP, todas las etapas deben estar cerradas o canceladas. Al menos una retirada no está cerrada ni cancelada.",
+    "1003": "Para cancelar un transporte no puede haberse realizado entregas.",
+    "1004": "No se puede comunicar a HESA una entrega, sin haber comunicado previamente, una orden de carga del mismo producto que la entrega.",
+    "1005": "Una retirada logística requiere de una orden de carga del mismo producto y una entrega del mismo producto y punto de servicio comunicada a HESA, para ser comunicada a HESA.",
+    "1006": "Debe tener una entrega para el mismo punto de servicio en el transporte donde se encuentra la retirada logística, para comunicarla a HESA.",
+    "1007": "Una retirada logística requier solo una ejecución de retirada logística, para ser comunicada a HESA.",
+    "1008": "Error al realizar la comuncación con HESA.",
+    "1009": "Una retirada de calidad requiere solo una ejecución de retirada de calidad, para ser comunicada a HESA.",
+    "1010": "Para cerrar el transporte deben completarse todas las entregas y recogidas.",
+    "1011": "El Punto de Servicio no tiene crédito disponible."
+}

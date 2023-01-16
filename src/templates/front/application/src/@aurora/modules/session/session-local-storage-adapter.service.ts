@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { log } from '@aurora';
-import { Session } from '@aurora/aurora.types';
+import { Session } from '@aurora';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SessionService } from './session.service';
 

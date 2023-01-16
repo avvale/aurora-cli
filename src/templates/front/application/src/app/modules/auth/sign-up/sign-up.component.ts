@@ -3,21 +3,23 @@ import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angul
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/core/auth/auth.service';
+
+// ---- customizations ----
+import { AuthenticationService } from '@aurora';
 
 @Component({
     selector     : 'auth-sign-up',
     templateUrl  : './sign-up.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations   : fuseAnimations,
 })
 export class AuthSignUpComponent implements OnInit
 {
     @ViewChild('signUpNgForm') signUpNgForm: NgForm;
 
-    alert: { type: FuseAlertType; message: string } = {
+    alert: { type: FuseAlertType; message: string; } = {
         type   : 'success',
-        message: ''
+        message: '',
     };
     signUpForm: UntypedFormGroup;
     showAlert: boolean = false;
@@ -26,9 +28,9 @@ export class AuthSignUpComponent implements OnInit
      * Constructor
      */
     constructor(
-        private _authService: AuthService,
+        private authenticationService: AuthenticationService,
         private _formBuilder: UntypedFormBuilder,
-        private _router: Router
+        private _router: Router,
     )
     {
     }
@@ -43,13 +45,14 @@ export class AuthSignUpComponent implements OnInit
     ngOnInit(): void
     {
         // Create the form
-        this.signUpForm = this._formBuilder.group({
+        this.signUpForm = this._formBuilder.group(
+            {
                 name      : ['', Validators.required],
                 email     : ['', [Validators.required, Validators.email]],
                 password  : ['', Validators.required],
                 company   : [''],
-                agreements: ['', Validators.requiredTrue]
-            }
+                agreements: ['', Validators.requiredTrue],
+            },
         );
     }
 
@@ -75,14 +78,16 @@ export class AuthSignUpComponent implements OnInit
         this.showAlert = false;
 
         // Sign up
-        this._authService.signUp(this.signUpForm.value)
+        this.authenticationService.signUp(this.signUpForm.value)
             .subscribe(
-                (response) => {
+                response =>
+                {
 
                     // Navigate to the confirmation required page
                     this._router.navigateByUrl('/confirmation-required');
                 },
-                (response) => {
+                response =>
+                {
 
                     // Re-enable the form
                     this.signUpForm.enable();
@@ -93,12 +98,12 @@ export class AuthSignUpComponent implements OnInit
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: 'Something went wrong, please try again.'
+                        message: 'Something went wrong, please try again.',
                     };
 
                     // Show the alert
                     this.showAlert = true;
-                }
+                },
             );
     }
 }

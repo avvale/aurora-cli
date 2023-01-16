@@ -1,10 +1,13 @@
 {
-    "DEFAULT"   : "Error not contemplated.",
-    "EMAIL"     : "This field must be a valid email address.",
-    "LOGIN"     : "The user or password is incorrect.",
-    "MAXLENGTH" : "This field may not be greater than {{ maxlength }} characters.",
-    "MINLENGTH" : "This field must be at least {{ minlength }} characters.",
-    "NOT_EQUAL" : "Field {{ fieldname }} is not the same as field {{ matchfieldname }}",
-    "REQUIRED"  : "This field is required.",
-    "PATTERN"   : "The field {{ fieldname }} doesn\"t match the indicated pattern"
+    "Compare"   : "Values do not match, must be the same.",
+    "Default"   : "Error not contemplated.",
+    "Email"     : "This field must be a valid email address.",
+    "Login"     : "The user or password is incorrect.",
+    "Max"       : "This field may not be greater than {{ max }}.",
+    "MaxLength" : "This field may not be greater than {{ maxlength }} characters.",
+    "Min"       : "This field cannot be less than {{ min }}.",
+    "MinLength" : "This field must be at least {{ minlength }} characters.",
+    "NotEqual"  : "Field {{ fieldName }} is not the same as field {{ matchFieldName }}",
+    "Required"  : "This field is required.",
+    "Pattern"   : "The field {{ fieldname }} doesn\"t match the indicated pattern"
 }

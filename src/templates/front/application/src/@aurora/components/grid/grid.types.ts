@@ -1,4 +1,5 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { SortDirection } from '@angular/material/sort';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Action, Operator } from '@aurora';
 import { BehaviorSubject } from 'rxjs';
@@ -10,7 +11,8 @@ export interface ColumnConfig
     translation?: string;
     hidden?: boolean;
     sort?: string | string[];
-    filterable?: boolean;
+    filterable?: boolean;       // field available to filter with columns filters
+    searchable?: boolean;       // field available to search with general search
     headerClass?: string | string[];
     bodyClass?: string | string[];
     sticky?: boolean;
@@ -51,7 +53,20 @@ export enum ColumnDataType
 export interface ColumnFilterStorage
 {
     id: string; // id of grid where apply filter
+    columnFilters: GridColumnFilter[];
+}
+
+export enum ExportFormat
+{
+    EXCEL = 'xlsx',
+    CSV = 'csv',
+    HTML = 'html',
+}
+
+export interface ExportGridState
+{
     gridState: GridState;
+    format: ExportFormat;
 }
 
 export type FilterColumnDataType = ColumnDataType.STRING | ColumnDataType.NUMBER | ColumnDataType.DATE;
@@ -118,6 +133,7 @@ export interface GridMessages
     OR: BehaviorSubject<string>;
     pleaseSelectField: BehaviorSubject<string>;
     resetColumnsConfig: BehaviorSubject<string>;
+    search: BehaviorSubject<string>;
     translations: BehaviorSubject<string>;
     value: BehaviorSubject<string>;
 }
@@ -145,11 +161,30 @@ export interface GridPaginatorMessages
     previousPageLabel: string;
 }
 
+export interface GridPageState
+{
+    length?: number;
+    pageIndex?: number;
+    pageSize?: number;
+}
+
+export interface GridSearchState
+{
+    value?: string;
+    isOpen?: boolean;
+}
+
+export interface GridSortState
+{
+    active?: string;
+    direction?: SortDirection;
+}
+
 export interface GridState
 {
+    columnsConfig?: ColumnConfig[];
     columnFilters?: GridColumnFilter[];
-    count?: number;
-    limit?: number;
-    offset?: number;
-    order?: any;
+    search?: GridSearchState;
+    sort?: GridSortState;
+    page?: GridPageState;
 }

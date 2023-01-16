@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SelectionChange } from '@angular/cdk/collections';
 import { Action } from '@aurora/aurora.types';
-import { ColumnConfig, GridColumnFilter, GridData, GridState } from '../grid';
+import { ColumnConfig, GridData, GridState } from '../grid';
 import { GridDialogComponent } from '../grid-dialog/grid-dialog.component';
+import { GridSelectElementCellValueTemplateDirective } from './directives/grid-select-element-cell-value-template.directive';
+import { GridSelectElementCustomHeaderTemplateDirective } from './directives/grid-select-element-custom-header-template.directive';
 
 @Component({
     selector       : 'au-grid-select-element',
@@ -13,36 +15,46 @@ import { GridDialogComponent } from '../grid-dialog/grid-dialog.component';
 })
 export class GridSelectElementComponent
 {
+    @Input() id: string = 'grid';
     @Input() dialogTitle: string;
-    @Input() activatedColumnFilters: GridColumnFilter[];
+    @Input() gridState: GridState;
     @Input() columnsConfig: ColumnConfig[];
     @Input() originColumnsConfig: ColumnConfig[];
     @Input() selectedRows: any[] = [];
-    private _data: GridData;
-    @Input() set data(gridData: GridData)
+
+    // manage gridData
+    private _gridData: GridData;
+    @Input() set gridData(gridData: GridData)
     {
-        this._data = gridData;
-        if (this.elementDialogRef)
-        {
-            this.elementDialogRef.componentInstance.gridData = gridData;
-            this.changeDetection.markForCheck();
-        }
+        // save gridData firs input to be used in the dialog when open dialog
+        this._gridData = gridData;
+
+        // after open dialog, when componentInstance is defined, set gridData
+        // to the dialog
+        this.elementDialogRef?.componentInstance
+            .gridDataSubject$.next(gridData);
     }
-    get data(): GridData
+    get gridData(): GridData
     {
-        return this._data;
+        return this._gridData;
     }
 
     @Output() action = new EventEmitter<Action>();
     @Output() columnFiltersChange = new EventEmitter<GridState>();
     @Output() columnsConfigChange = new EventEmitter<ColumnConfig[]>();
-    @Output() rowsSelectionChange = new EventEmitter<SelectionChange<any>>();
+    @Output() selectedCheckboxRowModelChange = new EventEmitter<SelectionChange<any>>();
+    @Output() search = new EventEmitter<GridState>();
     @Output() stateChange = new EventEmitter<GridState>();
+
+    // directive to set custom values in cells
+    @ContentChildren(GridSelectElementCellValueTemplateDirective) gridSelectElementCellValuesTemplate?: QueryList<GridSelectElementCellValueTemplateDirective>;
+
+    // add custom header
+    @ContentChildren(GridSelectElementCustomHeaderTemplateDirective) gridSelectElementCustomHeadersTemplate?: QueryList<GridSelectElementCustomHeaderTemplateDirective>;
 
     elementDialogRef: MatDialogRef<GridDialogComponent>;
 
     constructor(
-        private changeDetection: ChangeDetectorRef,
         private dialog: MatDialog,
     ) { }
 
@@ -50,19 +62,27 @@ export class GridSelectElementComponent
     {
         this.elementDialogRef = this.dialog.open(GridDialogComponent,
             {
-                width    : '90vw',
-                maxWidth : '1024px',
-                minWidth : '240px',
-                autoFocus: false,
-                data     : {
-                    activatedColumnFilters: this.activatedColumnFilters,
-                    columnsConfig         : this.columnsConfig,
-                    gridData              : this.data,           // pass data when create dialog, after, will be passed by @Input() set data property
-                    originColumnsConfig   : this.originColumnsConfig,
-                    selectedRows          : this.selectedRows,
-                    title                 : this.dialogTitle,
+                panelClass: 'au-dialog',
+                width     : '90vw',
+                maxWidth  : '1024px',
+                minWidth  : '240px',
+                autoFocus : false,
+                data      : {
+                    gridId                   : this.id,
+                    gridState                : this.gridState,
+                    columnsConfig            : this.columnsConfig,
+                    gridCellValuesTemplate   : this.gridSelectElementCellValuesTemplate,
+                    gridCustomHeadersTemplate: this.gridSelectElementCustomHeadersTemplate,
+                    originColumnsConfig      : this.originColumnsConfig,
+                    selectedRows             : this.selectedRows,
+                    title                    : this.dialogTitle,
                 },
             });
+
+        // set gridData saved when component is created
+        this.elementDialogRef
+            .componentInstance
+            .gridDataSubject$.next(this.gridData);
 
         // pass change state event to parent component
         this.elementDialogRef
@@ -75,6 +95,12 @@ export class GridSelectElementComponent
             .componentInstance
             .columnFiltersChange
             .subscribe((state: GridState) => this.columnFiltersChange.next(state));
+
+        // pass search event to parent component
+        this.elementDialogRef
+            .componentInstance
+            .search
+            .subscribe((state: GridState) => this.search.next(state));
 
         // pass on columns config change event to parent component
         this.elementDialogRef
@@ -91,7 +117,7 @@ export class GridSelectElementComponent
         // pass on selection row event to parent component
         this.elementDialogRef
             .componentInstance
-            .rowsSelectionChange
+            .selectedCheckboxRowModelChange
             .subscribe((action: Action) => this.action.next(action));
     }
 

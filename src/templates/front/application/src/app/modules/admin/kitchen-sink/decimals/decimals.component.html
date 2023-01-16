@@ -1,11 +1,13 @@
-<div class="flex flex-col w-full" *transloco="let t">
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
 
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
 
         <div class="flex-1 min-w-0">
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
-            <au-title><mat-icon svgIcon="heroicons_outline:variable" class="icon-size-10 mr-2"></mat-icon> {{ t('kitchenSink.Decimals') }}</au-title>
+            <au-title>
+                <mat-icon svgIcon="heroicons_solid:tag" class="icon-size-8 mr-2"></mat-icon> {{ t('kitchenSink.Decimals') }}
+            </au-title>
         </div>
 
         <!-- Actions -->
@@ -27,7 +29,7 @@
     <!-- / Header -->
 
     <!-- Main -->
-    <div class="flex flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
 
         <div class="form-card">
 
@@ -38,11 +40,8 @@
 
                 <div class="layout__container">
 
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-4"
-                    >
-                        <mat-label>{{ t('kitchenSink.Example1') }}</mat-label>
+                    <mat-form-field appearance="outline" class="col-4">
+                        <mat-label>{{ t('kitchenSink.example1') }}</mat-label>
                         <input
                             matInput
                             auDecimal
@@ -55,32 +54,14 @@
                     </mat-form-field>
 
 
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-4"
-                        small
-                    >
-                        <mat-label>{{ t('kitchenSink.Example2') }}</mat-label>
+                    <mat-form-field appearance="outline" class="col-4">
+                        <mat-label>{{ t('kitchenSink.example2') }}</mat-label>
                         <input
                             matInput
                             formControlName="example2"
                             required
                         >
                         <mat-error>{{ formErrors?.example2 | async }}</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-4"
-                        tiny
-                    >
-                        <mat-label>{{ t('kitchenSink.Example3') }}</mat-label>
-                        <input
-                            matInput
-                            formControlName="example3"
-                            required
-                        >
-                        <mat-error>{{ formErrors?.example3 | async }}</mat-error>
                     </mat-form-field>
 
                 </div>

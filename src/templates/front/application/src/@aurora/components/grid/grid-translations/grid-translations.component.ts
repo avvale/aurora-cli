@@ -80,6 +80,10 @@ export class GridTranslationsComponent
     {
         this.gridTranslationsService.setMessage(this.scope, 'resetColumnsConfig', message);
     }
+    @Input() set search(message: string)
+    {
+        this.gridTranslationsService.setMessage(this.scope, 'search', message);
+    }
     @Input() set translations(message: string)
     {
         this.gridTranslationsService.setMessage(this.scope, 'translations', message);

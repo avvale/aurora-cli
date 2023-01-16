@@ -1,27 +1,28 @@
-<div class="flex flex-col h-full">
-    <div
-        mat-dialog-title
-        class="dialog-header"
-    >
-		<div class="title">
-			<mat-icon>filter_list</mat-icon>
-			<span>{{ data.title }}</span>
-		</div>
-
-		<button
-            mat-icon-button
-            [disableRipple]="true"
-            [mat-dialog-close]="undefined"
+<div
+    mat-dialog-title
+    class="dialog-header"
+>
+    <p class="title">
+        <mat-icon
+            [svgIcon]="data.svgIcon"
         >
-			<mat-icon>close</mat-icon>
-		</button>
-	</div>
-    <div mat-dialog-content class="flex flex-col my-4 h-full max-h-full">
-        <div *ngIf="data.gridFormElementDetailDialogTemplate">
-            <ng-container
-                *ngTemplateOutlet="data.gridFormElementDetailDialogTemplate?.templateRef; context: { $implicit: dialogRef }"
-            >
-            </ng-container>
-        </div>
+            {{ data.icon }}
+        </mat-icon>
+        <span>{{ data.title }}</span>
+    </p>
+
+    <button mat-dialog-close mat-icon-button class="absolute top-2 right-2">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div 
+    mat-dialog-content 
+    class="dialog-content flex flex-col py-4 h-full max-h-full"
+>
+    <div *ngIf="data.gridFormElementDetailDialogTemplate">
+        <ng-container
+            *ngTemplateOutlet="data.gridFormElementDetailDialogTemplate?.templateRef; context: { $implicit: dialogRef }"
+        >
+        </ng-container>
     </div>
 </div>

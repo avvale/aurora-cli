@@ -3,7 +3,9 @@ import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angul
 import { finalize } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/core/auth/auth.service';
+
+// ---- customizations ----
+import { AuthenticationService } from '@aurora';
 
 @Component({
     selector     : 'auth-forgot-password',
@@ -26,8 +28,8 @@ export class AuthForgotPasswordComponent implements OnInit
      * Constructor
      */
     constructor(
-        private _authService: AuthService,
-        private _formBuilder: UntypedFormBuilder
+        private authenticationService: AuthenticationService,
+        private _formBuilder: UntypedFormBuilder,
     )
     {
     }
@@ -69,10 +71,10 @@ export class AuthForgotPasswordComponent implements OnInit
         this.showAlert = false;
 
         // Forgot password
-        this._authService.forgotPassword(this.forgotPasswordForm.get('email').value)
+        this.authenticationService.forgotPassword(this.forgotPasswordForm.get('email').value)
             .pipe(
-                finalize(() => {
-
+                finalize(() =>
+                {
                     // Re-enable the form
                     this.forgotPasswordForm.enable();
 
@@ -84,12 +86,12 @@ export class AuthForgotPasswordComponent implements OnInit
                 })
             )
             .subscribe(
-                (response) => {
-
+                (response) =>
+                {
                     // Set the alert
                     this.alert = {
                         type   : 'success',
-                        message: 'Password reset sent! You\'ll receive an email if you are registered on our system.'
+                        message: 'Password reset sent! You\'ll receive an email if you are registered on our system.',
                     };
                 },
                 (response) => {
@@ -97,7 +99,7 @@ export class AuthForgotPasswordComponent implements OnInit
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: 'Email does not found! Are you sure you are already a member?'
+                        message: 'Email does not found! Are you sure you are already a member?',
                     };
                 }
             );

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, ReplaySubject, tap } from 'rxjs';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { Navigation } from 'app/core/navigation/navigation.types';
 
+// ---- customizations ----
+import { NavigationService as AuroraNavigationService } from '@aurora/components/navigation/navigation.service';
+
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class NavigationService
 {
@@ -13,7 +15,9 @@ export class NavigationService
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient)
+    constructor(
+        private auroraNavigationService: AuroraNavigationService,
+    )
     {
     }
 
@@ -38,10 +42,9 @@ export class NavigationService
      */
     get(): Observable<Navigation>
     {
-        return this._httpClient.get<Navigation>('api/common/navigation').pipe(
-            tap((navigation) => {
-                this._navigation.next(navigation);
-            }),
-        );
+        const navigation = this.auroraNavigationService.getNavigation();
+        this._navigation.next(navigation);
+
+        return of(navigation);
     }
 }

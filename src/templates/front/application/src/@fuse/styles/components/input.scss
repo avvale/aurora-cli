@@ -20,22 +20,22 @@ textarea {
     }
 
     &:-webkit-autofill {
-        -webkit-transition: 'background-color 9999s ease-out';
-        -webkit-transition-delay: 9999s;
+        transition: background-color 600000s 0s, color 600000s 0s !important;
     }
 
     &:-webkit-autofill:hover {
-        -webkit-transition: 'background-color 9999s ease-out';
-        -webkit-transition-delay: 9999s;
+        transition: background-color 600000s 0s, color 600000s 0s !important;
     }
 
     &:-webkit-autofill:focus {
-        -webkit-transition: 'background-color 9999s ease-out';
-        -webkit-transition-delay: 9999s;
+        transition: background-color 600000s 0s, color 600000s 0s !important;
     }
 
     &:-webkit-autofill:active {
-        -webkit-transition: 'background-color 9999s ease-out';
-        -webkit-transition-delay: 9999s;
+        transition: background-color 600000s 0s, color 600000s 0s !important;
+    }
+
+    [data-autocompleted] {
+        background-color: transparent !important;
     }
 }

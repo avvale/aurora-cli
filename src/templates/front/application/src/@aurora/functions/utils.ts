@@ -6,6 +6,7 @@ import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import * as weekOfYear from 'dayjs/plugin/weekOfYear';
 import * as isoWeek from 'dayjs/plugin/isoWeek';
 import * as dayjs from 'dayjs';
+import generatePassword, { GenerateOptions } from 'generate-password-browser';
 
 // dayjs configuration
 dayjs.extend(utc);
@@ -29,6 +30,11 @@ export class Utils
     public static nowDate(): string
     {
         return dayjs().format('YYYY-MM-DD');
+    }
+
+    public static dateFromFormat(date: string, format: string): dayjs.Dayjs
+    {
+        return dayjs(date, format);
     }
 
     public static timezone(): string
@@ -124,5 +130,59 @@ export class Utils
         const hashHex = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
 
         return hashHex;
+    }
+
+    // TODO, add types for mimeType
+    static downloadFile(content: any, fileName: string, mimeType: string): void
+    {
+        const a = document.createElement('a');
+        mimeType = mimeType || 'application/octet-stream';
+
+        if (URL && 'download' in a)
+        {
+            a.href = URL.createObjectURL(
+                new Blob([content],
+                    {
+                        type: mimeType,
+                    },
+                ),
+            );
+            a.setAttribute('download', fileName);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+        else
+        {
+            location.href = 'data:application/octet-stream,' + encodeURIComponent(content); // only this mime type is supported
+        }
+    }
+
+    static convertBase64ToFile(b64Data, contentType = '', sliceSize = 512): Blob
+    {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize)
+        {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++)
+            {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
+
+    static createPassword(options?: GenerateOptions): string
+    {
+        return generatePassword.generate(options);
     }
 }

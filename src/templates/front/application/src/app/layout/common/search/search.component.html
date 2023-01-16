@@ -68,7 +68,9 @@
 <!-- Basic search -->
 <ng-container *ngIf="appearance === 'basic'">
     <div class="w-full sm:min-w-80">
-        <mat-form-field class="fuse-mat-no-subscript w-full">
+        <mat-form-field
+            class="w-full"
+            [subscriptSizing]="'dynamic'">
             <mat-icon
                 matPrefix
                 [svgIcon]="'heroicons_outline:search'"></mat-icon>

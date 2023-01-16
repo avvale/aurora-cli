@@ -8,11 +8,11 @@ export const iamMeAccount =  gql`
             id
             email
             isActive
+            scopes
             dApplicationCodes
             dPermissions
             dTenants
-            dScopes
-            data
+            meta
             roles {
                 id
                 name
@@ -24,7 +24,7 @@ export const iamMeAccount =  gql`
             user {
                 id
                 name
-                data
+                meta
             }
             createdAt
             updatedAt

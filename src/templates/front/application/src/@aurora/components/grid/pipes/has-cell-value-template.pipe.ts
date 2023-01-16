@@ -10,9 +10,9 @@ import { ColumnConfig } from '../grid.types';
 })
 export class HasCellValueTemplatePipe implements PipeTransform
 {
-    transform(cellValuesTemplate: QueryList<GridCellValueTemplateDirective>, columnConfig: ColumnConfig): boolean
+    transform(gridCellValuesTemplate: QueryList<GridCellValueTemplateDirective>, columnConfig: ColumnConfig): boolean
     {
-        return cellValuesTemplate
+        return gridCellValuesTemplate
             .some(
                 cellValueTemplate => cellValueTemplate.field === undefined
                 || cellValueTemplate.field === columnConfig.field,

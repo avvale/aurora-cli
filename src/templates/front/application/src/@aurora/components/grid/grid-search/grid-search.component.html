@@ -15,7 +15,7 @@
     <input
         class="w-full h-full px-16 sm:px-18"
         [formControl]="searchControl"
-        [placeholder]="'Search...'"
+        [placeholder]="('search' | gridTranslate | async) + '...'"
         #barSearchInput>
     <button
         class="absolute top-1/2 right-5 sm:right-7 shrink-0 w-10 h-10 -mt-5"

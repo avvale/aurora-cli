@@ -1,6 +1,6 @@
 import { Directive, Injector, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormMessageErrors, ValidationMessagesService } from '@aurora/components';
+import { FormMessageErrors, ValidationMessagesService } from '@aurora';
 import { ViewBaseComponent } from './view-base.component';
 
 @Directive()
@@ -29,9 +29,6 @@ export class ViewFormComponent extends ViewBaseComponent implements OnInit, OnDe
         super.ngOnInit();
 
         this.validationMessagesService.subscribeForm(this.fg, this.formErrors);
-
-        // init logic of component after set input
-        this.init();
     }
 
     // method to be overwrite by nested class

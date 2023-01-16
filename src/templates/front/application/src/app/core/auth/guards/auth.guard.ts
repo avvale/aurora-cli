@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
-import { AuthService } from 'app/core/auth/auth.service';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanMatch, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import { lastValueFrom, Observable } from 'rxjs';
+
+// ---- customizations ----
+import { AuthenticationService, AuthorizationService, log } from '@aurora';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
+export class AuthGuard implements CanMatch, CanActivate, CanActivateChild
 {
     /**
      * Constructor
      */
     constructor(
-        private _authService: AuthService,
-        private _router: Router
+        private readonly authenticationService: AuthenticationService,
+        private readonly authorizationService: AuthorizationService,
+        private readonly router: Router,
     )
     {
     }
@@ -30,8 +33,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
      */
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
     {
-        const redirectUrl = state.url === '/sign-out' ? '/' : state.url;
-        return this._check(redirectUrl);
+        // check permissions routes
+        if (!this.checkAuthorization(route.data.permission)) return false;
+
+        return this.checkAuthentication(route.url);
     }
 
     /**
@@ -42,19 +47,21 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
      */
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
     {
-        const redirectUrl = state.url === '/sign-out' ? '/' : state.url;
-        return this._check(redirectUrl);
+        // check permissions routes
+        if (!this.checkAuthorization(childRoute.data.permission)) return false;
+
+        return this.checkAuthentication(childRoute.url);
     }
 
     /**
-     * Can load
+     * Can match
      *
      * @param route
      * @param segments
      */
-    canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean
+    canMatch(route: Route, segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
     {
-        return this._check('/');
+        return this.checkAuthentication(segments);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -64,29 +71,45 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad
     /**
      * Check the authenticated status
      *
-     * @param redirectURL
+     * @param segments
      * @private
      */
-    private _check(redirectURL: string): Observable<boolean>
+    private async checkAuthentication(segments: UrlSegment[]): Promise<boolean>
     {
         // Check the authentication status
-        return this._authService.check()
-                   .pipe(
-                       switchMap((authenticated) => {
+        if (await lastValueFrom(this.authenticationService.check()))
+        {
+            return true;
+        }
+        else
+        {
+            log('[DEBUG] AuthGuard denies access to the route, redirect to sign-in');
 
-                           // If the user is not authenticated...
-                           if ( !authenticated )
-                           {
-                               // Redirect to the sign-in page
-                               this._router.navigate(['sign-in'], {queryParams: {redirectURL}});
+            // Redirect to the sign-in page
+            const redirectURL = `/${segments.join('/')}`;
+            this.router.navigate(['sign-in'], { queryParams: { redirectURL }});
 
-                               // Prevent the access
-                               return of(false);
-                           }
+            // Prevent the access
+            return false;
+        }
+    }
 
-                           // Allow the access
-                           return of(true);
-                       })
-                   );
+    /**
+     * Check the authorization status
+     *
+     * @param permissions
+     * @private
+     */
+    private checkAuthorization(permissions: string | string[]): boolean
+    {
+        // check permissions routes
+        if (!this.authorizationService.can(permissions))
+        {
+            this.router.navigate(['error/401']);
+
+            return false;
+        }
+
+        return true;
     }
 }

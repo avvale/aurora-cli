@@ -90,7 +90,7 @@ export interface ColumnConfigStorage
     columnsConfig: ColumnConfig[];
 }
 
-export interface UserDataStorage {
+export interface UserMetaStorage {
     columnsConfigStorage?: { [key:string]: ColumnConfigStorage; };
     [key: string]: any;
 }

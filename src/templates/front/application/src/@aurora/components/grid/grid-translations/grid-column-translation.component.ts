@@ -15,7 +15,8 @@ export class GridColumnTranslationComponent implements OnInit
 {
     // set field/column translation
     @Input() field: string;
-    @Input() gridId: string = 'grid';
+    // scope will always have a default 'grid' value defined in the parent component GridTranslationsComponent
+    @Input('for') scope: string;
 
     constructor(
         @Optional() @Host() private parent: GridTranslationsComponent,
@@ -45,11 +46,17 @@ export class GridColumnTranslationComponent implements OnInit
         // observer changes on ng-content
         this.contentObserver
             .observe(this.content.nativeElement)
-            .subscribe(res =>
-                res.forEach(change =>
+            .subscribe(contentChanges =>
+            {
+                contentChanges.forEach(contentChange =>
+                {
                     this.gridTranslationsService
-                        .setColumnMessage(this.gridId, this.field, change.target.nodeValue.trim()),
-                ),
-            );
+                        .setColumnMessage(
+                            this.scope ? this.scope : this.parent.scope,
+                            this.field,
+                            contentChange.target.nodeValue.trim(),
+                        );
+                });
+            });
     }
 }

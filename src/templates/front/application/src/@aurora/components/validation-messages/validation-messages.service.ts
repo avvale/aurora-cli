@@ -56,26 +56,36 @@ export class ValidationMessagesService
         switch (error)
         {
             case 'required':
-                return this.translocoService.selectTranslate('validations.REQUIRED');
+                return this.translocoService.selectTranslate('validations.Required');
 
             case 'minlength':
-                return this.translocoService.selectTranslate('VALIDATIONS.MINLENGTH', { minlength: ac.errors[error]['requiredLength'] });
+                return this.translocoService.selectTranslate('validations.MinLength', { minlength: ac.errors[error]['requiredLength'] });
 
             case 'maxlength':
-                return this.translocoService.selectTranslate('VALIDATIONS.MAXLENGTH', { maxlength: ac.errors[error]['requiredLength'] });
+                return this.translocoService.selectTranslate('validations.MaxLength', { maxlength: ac.errors[error]['requiredLength'] });
 
             case 'email':
-                return this.translocoService.selectTranslate('VALIDATIONS.EMAIL');
+                return this.translocoService.selectTranslate('validations.Email');
+
+            case 'max':
+                return this.translocoService.selectTranslate('validations.Max', { max: ac.errors[error]['max'] });
+
+            case 'min':
+                return this.translocoService.selectTranslate('validations.Min', { min: ac.errors[error]['min'] });
 
             case 'notequal':
-                return this.translocoService.selectTranslate('VALIDATIONS.NOT_EQUAL',
-                    { fieldname: ac.errors[error]['fieldName'], matchfieldname: ac.errors[error]['matchFieldName'] });
+                return this.translocoService.selectTranslate('validations.NotEqual',
+                    { fieldName: ac.errors[error]['fieldName'], matchFieldName: ac.errors[error]['matchFieldName'] });
+
+            case 'compare':
+                return this.translocoService.selectTranslate('validations.Compare');
 
             case 'pattern':
-                return this.translocoService.selectTranslate('VALIDATIONS.PATTERN');
+                return this.translocoService.selectTranslate('validations.Pattern');
 
             default:
-                return this.translocoService.selectTranslate('VALIDATIONS.DEFAULT');
+                console.log('error', error);
+                return this.translocoService.selectTranslate('validations.Default');
         }
     }
 

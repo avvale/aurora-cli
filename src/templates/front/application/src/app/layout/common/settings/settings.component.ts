@@ -18,7 +18,6 @@ import { Layout } from 'app/layout/layout.types';
             }
 
             @media (screen and min-width: 1280px) {
-
                 empty-layout + settings .settings-cog {
                     right: 0 !important;
                 }

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { log } from '@aurora';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 
 interface FileEntry
@@ -49,11 +50,12 @@ export class FileUploadComponent
                 const fileName = droppedFile.relativePath;
                 let fileType = '';
                 let fileSize = 0;
-                console.log(droppedFile.relativePath, fileEntry);
+
+                log('[DEBUG] File relative path file uploaded: ', droppedFile.relativePath);
 
                 fileEntry.file((file: File) =>
                 {
-                    console.log('EACH; FILE', file);
+                    log('[DEBUG] Properties file uploaded: ', file);
                     fileType = file.type;
                     fileSize = file.size;
                 });
@@ -70,12 +72,12 @@ export class FileUploadComponent
             {
                 // It was a directory ---> DO NOTHING
                 const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-                console.log(droppedFile.relativePath, fileEntry);
+                log('[DEBUG] Directory relative path file uploaded: ', droppedFile.relativePath);
+                log('[DEBUG] Uploaded a directory: ', fileEntry);
             }
         }
 
         // After adding all, emit files
-        console.log('COMPONENT; FILES', this.addedFiles);
         this.files.emit(this.addedFiles);
     }
 

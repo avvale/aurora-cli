@@ -1,4 +1,5 @@
 export * from './aurora.module';
+export * from './aurora.types';
 export * from './components';
 export * from './directives';
 export * from './foundations';
@@ -8,4 +9,4 @@ export * from './modules';
 export * from './pipes';
 export * from './rxjs';
 export * from './services';
-export * from './aurora.types';
+export * from './validators';

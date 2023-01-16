@@ -22,10 +22,10 @@ import { TranslocoHttpLoader } from 'app/core/transloco/transloco.http-loader';
                         label: 'Spanish'
                     }
                 ],
-                defaultLang         : 'en',
-                fallbackLang        : 'en',
+                defaultLang         : environment.lang.base,
+                fallbackLang        : environment.lang.fallback,
                 reRenderOnLangChange: true,
-                prodMode            : environment.production
+                prodMode            : true
             })
         },
         {

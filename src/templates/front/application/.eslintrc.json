@@ -72,7 +72,7 @@
             "error",
             {
                 "ignorePattern": "^import |^export | implements",
-                "code": 180
+                "code": 250
             }
         ],
         "no-await-in-loop": "error",

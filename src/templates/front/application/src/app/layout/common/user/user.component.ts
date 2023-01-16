@@ -2,24 +2,26 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy
 import { Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
-import { User } from 'app/core/user/user.types';
-import { UserService } from 'app/core/user/user.service';
+
+// ---- customizations ----
+import { Account, IamService } from '@aurora';
 
 @Component({
     selector       : 'user',
     templateUrl    : './user.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'user'
+    exportAs       : 'user',
 })
 export class UserComponent implements OnInit, OnDestroy
 {
     /* eslint-disable @typescript-eslint/naming-convention */
+    // eslint-disable-next-line camelcase
     static ngAcceptInputType_showAvatar: BooleanInput;
     /* eslint-enable @typescript-eslint/naming-convention */
 
     @Input() showAvatar: boolean = true;
-    user: User;
+    account: Account;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -27,9 +29,9 @@ export class UserComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _router: Router,
-        private _userService: UserService
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _router: Router,
+        private readonly iamService: IamService,
     )
     {
     }
@@ -44,10 +46,10 @@ export class UserComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Subscribe to user changes
-        this._userService.user$
+        this.iamService.account$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
-                this.user = user;
+            .subscribe((account: Account) => {
+                this.account = account;
 
                 // Mark for check
                 this._changeDetectorRef.markForCheck();
@@ -76,16 +78,17 @@ export class UserComponent implements OnInit, OnDestroy
     updateUserStatus(status: string): void
     {
         // Return if user is not available
-        if ( !this.user )
+        if ( !this.account )
         {
             return;
         }
 
         // Update the user
-        this._userService.update({
-            ...this.user,
+        // TODO, revisar si registrar status del user
+        /* this.iamService.update({
+            ...this.account,
             status
-        }).subscribe();
+        }).subscribe(); */
     }
 
     /**

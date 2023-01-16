@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Action } from '@aurora/aurora.types';
-import { ColumnConfig, GridColumnFilter, GridData, GridState } from '../grid/grid.types';
+import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
 import { GridElementDetailDialogComponent } from './grid-element-detail-dialog.component';
-import { GridFormElementDetailDialogTemplateDirective } from './grid-form-element-detail-dialog-template.directive';
-import { GridCustomButtonsHeaderDialogTemplateDirective } from './grid-custom-buttons-header-dialog-template.directive';
+import { GridFormElementDetailDialogTemplateDirective } from './directives/grid-form-element-detail-dialog-template.directive';
+import { GridCustomButtonsHeaderDialogTemplateDirective } from './directives/grid-custom-buttons-header-dialog-template.directive';
+import { GridElementsManagerCellValueTemplateDirective } from './directives/grid-elements-manager-cell-value-template.directive';
 
 @Component({
     selector       : 'au-grid-elements-manager',
@@ -13,17 +14,19 @@ import { GridCustomButtonsHeaderDialogTemplateDirective } from './grid-custom-bu
 })
 export class GridElementsManagerComponent
 {
+    @Input() id: string = 'grid';
     // component label
     @Input() label: string;
     // title of dialog
     @Input() dialogTitle: string;
-    // grid columns config
-    @Input() activatedColumnFilters: GridColumnFilter[];
+    // grid state
+    @Input() gridState: GridState;
     @Input() columnsConfig: ColumnConfig[];
     @Input() originColumnsConfig: ColumnConfig[];
     // inputs
-    @Input() data: GridData;
-    @Input() newActionId: string = 'new';
+    @Input() gridData: GridData;
+    @Input('dialogIcon') dialogIcon: string = 'filter_list';
+    @Input('dialogSvgIcon') dialogSvgIcon: string = '';
     @Input('dialogWidth') dialogWidth: string = '90vw';
     @Input('dialogMaxWidth') dialogMaxWidth: string = '2048px';
     @Input('dialogMinWidth') dialogMinWidth: string = '240px';
@@ -36,11 +39,14 @@ export class GridElementsManagerComponent
     @Output() dialogClose = new EventEmitter<void>();
     @Output() dialogOpen = new EventEmitter<void>();
     @Output() stateChange = new EventEmitter<GridState>();
+    @Output() search = new EventEmitter<GridState>();
 
     // add custom buttons header
     @ContentChild(GridCustomButtonsHeaderDialogTemplateDirective) gridCustomButtonsHeaderDialogTemplate?: GridCustomButtonsHeaderDialogTemplateDirective;
     // directive to set form item detail
     @ContentChild(GridFormElementDetailDialogTemplateDirective) gridFormElementDetailDialogTemplate?: GridFormElementDetailDialogTemplateDirective;
+    // directive to set custom values in cells
+    @ContentChildren(GridElementsManagerCellValueTemplateDirective) gridElementsManagerCellValueTemplate?: QueryList<GridElementsManagerCellValueTemplateDirective>;
 
     constructor(
         private dialog: MatDialog,
@@ -50,13 +56,16 @@ export class GridElementsManagerComponent
     {
         const elementDetailDialogRef = this.dialog.open(GridElementDetailDialogComponent,
             {
-                width    : this.dialogWidth,
-                maxWidth : this.dialogMaxWidth,
-                minWidth : this.dialogMinWidth,
-                height   : this.dialogHeight,
-                autoFocus: false,
-                data     : {
+                panelClass: 'au-dialog',
+                width     : this.dialogWidth,
+                maxWidth  : this.dialogMaxWidth,
+                minWidth  : this.dialogMinWidth,
+                height    : this.dialogHeight,
+                autoFocus : false,
+                data      : {
                     title                              : this.dialogTitle,
+                    icon                               : this.dialogIcon,
+                    svgIcon                            : this.dialogSvgIcon,
                     currentActionId                    : actionId,
                     gridFormElementDetailDialogTemplate: this.gridFormElementDetailDialogTemplate,
                 },

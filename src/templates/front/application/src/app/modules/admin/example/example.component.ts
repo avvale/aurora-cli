@@ -1,16 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector     : 'example',
-    templateUrl  : './example.component.html',
-    encapsulation: ViewEncapsulation.None
+    selector       : 'example',
+    templateUrl    : './example.component.html',
+    encapsulation  : ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExampleComponent
 {
-    /**
-     * Constructor
-     */
-    constructor()
-    {
-    }
+    constructor() { /**/ }
 }

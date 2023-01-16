@@ -49,7 +49,7 @@ export class GridFiltersDialogComponent implements OnInit
             formColumnFilter: this.fb.array([]),
         });
 
-        this.gridId = data.gridId || this.gridId;
+        this.gridId = data.gridId || this.gridId;
     }
 
     // string criteria information
@@ -124,7 +124,7 @@ export class GridFiltersDialogComponent implements OnInit
         this.operatorsMessages = this.gridTranslationsService.getOperatorsMessages(this.gridId);
 
         // add active filters
-        if (this.data.activatedColumnFilters.length > 0) this.generatePreviousDataForm(this.data.activatedColumnFilters);
+        this.generatePreviousDataForm(this.data.columnFilters);
 
         // only enabled search autocomplete if all filter columns are valid
         this.containerForm
@@ -191,18 +191,21 @@ export class GridFiltersDialogComponent implements OnInit
 
     generatePreviousDataForm(gridColumnsFilter: GridColumnFilter[]): void
     {
-        gridColumnsFilter.forEach(filter =>
+        if (gridColumnsFilter.length === 0) return;
+
+        for (const gridColumnFilter of gridColumnsFilter)
         {
-            this.formColumnFilter.push(
-                this.fb.group({
-                    id      : this.fb.control(filter.id),
-                    field   : this.fb.control(filter.field),
-                    type    : this.fb.control(filter.type),
-                    operator: this.fb.control(filter.operator, [Validators.required]),
-                    value   : this.fb.control(filter.value, [Validators.required]),
-                }),
-            );
-        });
+            this.formColumnFilter
+                .push(
+                    this.fb.group({
+                        id      : this.fb.control(gridColumnFilter.id),
+                        field   : this.fb.control(gridColumnFilter.field),
+                        type    : this.fb.control(gridColumnFilter.type),
+                        operator: this.fb.control(gridColumnFilter.operator, [Validators.required]),
+                        value   : this.fb.control(gridColumnFilter.value, [Validators.required]),
+                    }),
+                );
+        }
     }
 
     /**

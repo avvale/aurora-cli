@@ -12,16 +12,21 @@
             <!-- grid -->
             <au-grid
                 [columnsConfig]="columnsConfig"
-                [data]="data"
+                [gridData]="gridData"
+                [gridState]="gridState"
                 [hasDragAndDrop]="hasDragAndDrop"
                 [hasFilterButton]="hasFilterButton"
                 [hasPagination]="hasPagination"
+                [hasSearch]="hasSearch"
                 [id]="gridId"
+                [selectedCheckboxRowModel]="selectedCheckboxRowModel"
                 [originColumnsConfig]="originColumnsConfig"
                 (action)="action.emit($event)"
-                (stateChange)="stateChange.emit($event)"
                 (columnsConfigChange)="columnsConfigChange.next($event)"
                 (rowDrop)="rowDrop.emit($event)"
+                (selectedCheckboxRowModelChange)="selectedCheckboxRowModelChange.emit($event)"
+                (search)="search.emit($event)"
+                (stateChange)="stateChange.emit($event)"
             >
                 <ng-template
                     auGridCustomHeaderTemplate

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { MessagesService } from 'app/layout/common/messages/messages.service';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { NotificationsService } from 'app/layout/common/notifications/notifications.service';
@@ -8,7 +8,7 @@ import { QuickChatService } from 'app/layout/common/quick-chat/quick-chat.servic
 import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service';
 
 // ---- customizations ----
-import { IamService } from '@aurora/modules/iam/iam.service';
+import { IamService } from '@aurora';
 
 @Injectable({
     providedIn: 'root',
@@ -39,8 +39,24 @@ export class InitialDataResolver implements Resolve<any>
      * @param route
      * @param state
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot,
+    ): Observable<any>
     {
+        // if refresh page, account iamService will be requested
+        // from bootstrapService, then we don't need to request again
+        if (this.iamService.me)
+        {
+            return forkJoin({
+                navigationService   : this._navigationService.get(),
+                messagesService     : this._messagesService.getAll(),
+                notificationsService: this._notificationsService.getAll(),
+                quickChatService    : this._quickChatService.getChats(),
+                shortcutsService    : this._shortcutsService.getAll(),
+            });
+        }
+
         // Fork join multiple API endpoint calls to wait all of them to finish
         return forkJoin({
             navigationService   : this._navigationService.get(),
@@ -48,7 +64,6 @@ export class InitialDataResolver implements Resolve<any>
             notificationsService: this._notificationsService.getAll(),
             quickChatService    : this._quickChatService.getChats(),
             shortcutsService    : this._shortcutsService.getAll(),
-            iamService          : this.iamService.get(),
         });
     }
 }

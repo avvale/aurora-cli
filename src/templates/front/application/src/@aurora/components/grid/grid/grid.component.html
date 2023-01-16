@@ -1,7 +1,7 @@
 <div class="flex flex-col flex-1 overflow-hidden">
     <div class="grid-header">
 
-        <div>
+        <div class="flex">
             <!-- left position custom header template -->
             <ng-container *ngFor="let gridCustomHeader of gridCustomHeadersTemplate | filterGridCustomHeaderTemplatesPositionPipe:'left'">
                 <ng-container
@@ -10,7 +10,7 @@
             </ng-container>
         </div>
 
-        <div>
+        <div class="flex">
             <!-- beforeGridButtons position custom header template -->
             <ng-container *ngFor="let gridCustomHeader of gridCustomHeadersTemplate | filterGridCustomHeaderTemplatesPositionPipe:'beforeGridButtons'">
                 <ng-container
@@ -20,31 +20,64 @@
 
             <!-- search component -->
             <au-grid-search
-                [debounce]="1000"
-                [minLength]="5"
-                (searchOpen)="handleSearchOpen()"
-                (searchClose)="handleSearchClose()"
+                *ngIf="hasSearch"
+                [searchState]="gridState.search"
+                (searchChange)="handleSearchStateChange($event)"
                 (search)="handleSearch($event)"
                 class="mr-2"
             >
             </au-grid-search>
+
+            <button
+                *ngIf="hasExportButton"
+                mat-icon-button
+                class="mr-2"
+                type="button"
+                [matMenuTriggerFor]="menuExport"
+            >
+                <mat-icon>
+                    file_download
+                </mat-icon>
+                <span class="cdk-visually-hidden">
+                    Export menu to excel and CSV
+                </span>
+            </button>
+            <mat-menu #menuExport="matMenu">
+                <button
+                    mat-menu-item
+                    type="button"
+                    (click)="handleExport($event, exportFormat.EXCEL)"
+                >
+                  <mat-icon>functions</mat-icon>
+                  <span>Excel</span>
+                </button>
+                <button
+                    mat-menu-item
+                    type="button"
+                    (click)="handleExport($event, exportFormat.CSV)"
+                >
+                  <mat-icon>table_view</mat-icon>
+                  <span>CSV</span>
+                </button>
+            </mat-menu>
 
             <!-- filter dialog -->
             <button
                 *ngIf="hasFilterButton"
                 mat-icon-button
                 class="mr-2"
+                type="button"
                 (click)="handleFiltersDialog()"
             >
                 <mat-icon
-                    [matBadge]="activatedColumnFilters.length"
-                    [matBadgeHidden]="activatedColumnFilters.length == 0"
+                    [matBadge]="gridState.columnFilters?.length"
+                    [matBadgeHidden]="gridState.columnFilters?.length == 0"
                     matBadgeColor="warn"
                 >
                     filter_list
                 </mat-icon>
                 <span class="cdk-visually-hidden">
-                    Filter icon showing active filters with a value of {{ activatedColumnFilters.length }}
+                    Filter icon showing active filters with a value of {{ gridState.columnFilters?.length }}
                 </span>
             </button>
 
@@ -53,12 +86,15 @@
                 *ngIf="hasColumnsConfigPropertiesButton"
                 mat-icon-button
                 class="mr-2"
+                type="button"
                 (click)="handleColumnsConfigPropertiesDialog()"
             >
                 <mat-icon
                     [matBadge]="'!'"
-                    [matBadgeHidden]="columnsConfig | isOriginColumnConfig:originColumnsConfig"
-                >table_chart</mat-icon>
+                    [matBadgeHidden]="gridState.columnsConfig | isOriginColumnConfig:originColumnsConfig"
+                >
+                    table_chart
+                </mat-icon>
             </button>
 
             <!-- right position custom header template -->
@@ -71,18 +107,21 @@
         </div>
 
     </div>
-    <div class="overflow-auto">
+
+    <div class="grid-content overflow-auto">
         <table
             mat-table
             matSort
-            class="w-full flex-1"
-            [dataSource]="data?.rows"
             cdkDropList
+            class="w-full flex-1"
+            [dataSource]="gridData?.rows"
+            [matSortActive]="gridState?.sort.active"
+            [matSortDirection]="gridState?.sort.direction"
             [cdkDropListDisabled]="!hasDragAndDrop"
-            [cdkDropListData]="data?.rows"
+            [cdkDropListData]="gridData?.rows"
             (cdkDropListDropped)="rowDrop.emit($event)"
         >
-            <ng-container *ngFor="let columnConfig of columnsConfig">
+            <ng-container *ngFor="let columnConfig of gridState.columnsConfig">
 
                 <ng-container   [matColumnDef]="columnConfig.field"
                                 [sticky]="columnConfig.sticky">
@@ -110,20 +149,23 @@
                                 [ngClass]="columnConfig.bodyClass"
                             >
                                 <!-- set value by template -->
-                                <div *ngFor="let cellValueTemplate of cellValuesTemplate">
-                                    <div *ngIf="(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
+                                <div *ngFor="let cellValueTemplate of gridCellValuesTemplate">
+                                    <div *ngIf="(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
-                                    <div *ngIf="!(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
+                                    <!-- set value by template for all fields -->
+                                    <div *ngIf="!(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
                                 </div>
                                 <!-- set value by columns config transform -->
-                                <div *ngIf="!(cellValuesTemplate | hasCellValueTemplate:columnConfig)">
+                                <div *ngIf="!(gridCellValuesTemplate | hasCellValueTemplate:columnConfig)">
                                     {{ row | get:columnConfig.field | transformDataCell:columnConfig.transform }}
                                 </div>
                             </td>
@@ -146,20 +188,23 @@
                                 [ngClass]="columnConfig.bodyClass"
                             >
                                 <!-- set value by template -->
-                                <div *ngFor="let cellValueTemplate of cellValuesTemplate">
-                                    <div *ngIf="(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
+                                <div *ngFor="let cellValueTemplate of gridCellValuesTemplate">
+                                    <div *ngIf="(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
-                                    <div *ngIf="!(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
+                                    <!-- set value by template for all fields -->
+                                    <div *ngIf="!(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
                                 </div>
                                 <!-- set value by columns config transform -->
-                                <div *ngIf="!(cellValuesTemplate | hasCellValueTemplate:columnConfig)">
+                                <div *ngIf="!(gridCellValuesTemplate | hasCellValueTemplate:columnConfig)">
                                     <mat-icon *ngIf="row | get:columnConfig.field">done</mat-icon>
                                 </div>
                             </td>
@@ -182,20 +227,23 @@
                                 [ngClass]="columnConfig.bodyClass"
                             >
                                 <!-- set value by template -->
-                                <div *ngFor="let cellValueTemplate of cellValuesTemplate">
-                                    <div *ngIf="(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
+                                <div *ngFor="let cellValueTemplate of gridCellValuesTemplate">
+                                    <div *ngIf="(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
-                                    <div *ngIf="!(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
+                                    <!-- set value by template for all fields -->
+                                    <div *ngIf="!(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
                                 </div>
                                 <!-- set value by columns config transform -->
-                                <div *ngIf="!(cellValuesTemplate | hasCellValueTemplate:columnConfig)">
+                                <div *ngIf="!(gridCellValuesTemplate | hasCellValueTemplate:columnConfig)">
                                     {{ row | get:columnConfig.field | transformDataCell:columnConfig.transform }}
                                 </div>
                             </td>
@@ -218,20 +266,23 @@
                                 [ngClass]="columnConfig.bodyClass"
                             >
                                 <!-- set value by template -->
-                                <div *ngFor="let cellValueTemplate of cellValuesTemplate">
-                                    <div *ngIf="(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
+                                <div *ngFor="let cellValueTemplate of gridCellValuesTemplate">
+                                    <div *ngIf="(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
-                                    <div *ngIf="!(cellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
+                                    <!-- set value by template for all fields -->
+                                    <div *ngIf="!(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
                                         <ng-container
                                             *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | get:columnConfig.field, columnConfig, row }"
-                                        ></ng-container>
+                                        >
+                                        </ng-container>
                                     </div>
                                 </div>
                                 <!-- set value by columns config transform -->
-                                <div *ngIf="!(cellValuesTemplate | hasCellValueTemplate:columnConfig)">
+                                <div *ngIf="!(gridCellValuesTemplate | hasCellValueTemplate:columnConfig)">
                                     {{ row | get:columnConfig.field | transformDataCell:columnConfig.transform }}
                                 </div>
                             </td>
@@ -278,18 +329,28 @@
                             >
                                 <!-- print action menu if has more than one action -->
                                 <ng-container *ngIf="(columnConfig.actions | getActions:row).length > 1">
-                                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                                    <button
+                                        mat-icon-button
+                                        type="button"
+                                        [matMenuTriggerFor]="menu"
+                                    >
                                         <mat-icon>more_vert</mat-icon>
                                     </button>
                                     <mat-menu #menu="matMenu">
                                         <ng-container *ngFor="let action of columnConfig.actions | getActions:row">
-                                            <button mat-menu-item (click)="handleClickAction(action, row, $event)">
+                                            <button
+                                                mat-menu-item
+                                                type="button"
+                                                (click)="handleClickAction(action, row, $event)"
+                                            >
                                                 <mat-icon
                                                     [svgIcon]="action.svgIcon"
                                                     [matBadgeHidden]="action.badge?.hidden"
                                                     [matBadgeColor]="action.badge?.color"
                                                     [matBadge]="action.badge?.label"
-                                                >{{ action.icon }}</mat-icon>
+                                                >
+                                                    {{ action.icon }}
+                                                </mat-icon>
                                                 <span>{{ (action.translation ? action.translation : action.id) | gridTranslate:'action':id | async }}</span>
                                             </button>
                                         </ng-container>
@@ -298,7 +359,11 @@
                                 <!-- if only have one action, print action without menu -->
                                 <ng-container *ngIf="(columnConfig.actions | getActions:row).length === 1">
                                     <ng-container *ngFor="let action of columnConfig.actions | getActions:row">
-                                        <button mat-icon-button (click)="handleClickAction(action, row, $event)">
+                                        <button
+                                            mat-icon-button
+                                            type="button"
+                                            (click)="handleClickAction(action, row, $event)"
+                                        >
                                             <mat-icon
                                                 [svgIcon]="action.svgIcon"
                                                 [matBadgeHidden]="action.badge?.hidden"
@@ -322,7 +387,7 @@
                             >
                                 <mat-checkbox
                                     (change)="$event ? masterToggle() : null"
-                                    [checked]="rowsSelection.hasValue() && isAllSelected()"
+                                    [checked]="selectedCheckboxRowModel.hasValue() && isAllSelected()"
                                     [indeterminate]="isSomeSelected() && !isAllSelected()"
                                     [aria-label]="checkboxLabel()"
                                 >
@@ -335,8 +400,8 @@
                             >
                                 <mat-checkbox
                                     (click)="$event.stopPropagation()"
-                                    (change)="$event ? rowsSelection.toggle(row) : null"
-                                    [checked]="rowsSelection.isSelected(row)"
+                                    (change)="$event ? selectedCheckboxRowModel.toggle(row) : null"
+                                    [checked]="selectedCheckboxRowModel.isSelected(row)"
                                     [aria-label]="checkboxLabel(row)"
                                 >
                                 </mat-checkbox>
@@ -357,7 +422,12 @@
                                 *matCellDef="let row"
                                 [ngClass]="columnConfig.bodyClass ? columnConfig.bodyClass : 'w-20 text-center'"
                             >
-                                <mat-icon cdkDragHandle class="cursor-move">reorder</mat-icon>
+                                <mat-icon
+                                    cdkDragHandle
+                                    class="cursor-move"
+                                >
+                                    reorder
+                                </mat-icon>
                             </td>
                         </ng-container>
                     </ng-container>
@@ -367,32 +437,42 @@
 
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns; sticky: true"
+            >
+            </tr>
             <tr
                 mat-row
                 *matRowDef="let row; columns: displayedColumns;"
                 cdkDrag
                 [cdkDragData]="row"
-            ></tr>
+            >
+            </tr>
 
             <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" [attr.colspan]="displayedColumns?.length">
-                    {{ 'noData' | gridTranslate | async }}
+                    <p class="p-2 text-base">{{ 'noData' | gridTranslate | async }}</p>
                 </td>
             </tr>
 
         </table>
     </div>
 
-    <div *ngIf="!hasPagination" class="h-3"></div>
-
-    <mat-paginator
-        *ngIf="hasPagination"
-        showFirstLastButtons
-        class="rounded-b-md"
-        aria-label="Select page of periodic elements"
-        [length]="data.count"
-        [pageSizeOptions]="[10, 20, 50, 100]"
-    >
-    </mat-paginator>
+    <div class="grid-footer">
+        <div *ngIf="!hasPagination" class="h-3"></div>
+    
+        <mat-paginator
+            *ngIf="hasPagination"
+            showFirstLastButtons
+            class="rounded-b-md"
+            aria-label="Select page of periodic elements"
+            (page)="handlePageStateChange($event)"
+            [length]="gridData?.count"
+            [pageIndex]="gridState?.page?.pageIndex"
+            [pageSize]="gridState?.page?.pageSize"
+            [pageSizeOptions]="[10, 20, 50, 100]"
+        >
+        </mat-paginator>
+    </div>
 </div>

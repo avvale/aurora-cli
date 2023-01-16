@@ -1,7 +1,7 @@
 
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnFilter, GridData, Operator, setQueryFilters, ViewBaseComponent } from '@aurora';
-import { Observable, of } from 'rxjs';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridData, ViewBaseComponent } from '@aurora';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { gridData } from './grid-data';
 
 @Component({
@@ -17,12 +17,14 @@ export class GridComponent extends ViewBaseComponent
         { translation: 'kitchenSink.Grid' },
     ];
     gridData$: Observable<GridData<any>>;
+    gridTranslations$: Observable<any>;
     columnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'actions',
-            sticky : true,
-            actions: () =>
+            type       : ColumnDataType.ACTIONS,
+            field      : 'Actions',
+            headerClass: 'w-32',
+            sticky     : true,
+            actions    : () =>
             {
                 return [
                     {
@@ -40,18 +42,10 @@ export class GridComponent extends ViewBaseComponent
             hidden: false,
         },
         {
-            type  : ColumnDataType.CHECKBOX,
-            field : 'select',
-            sticky: true,
-            hidden: false,
-        },
-        {
             type       : ColumnDataType.STRING,
             field      : 'code',
-            headerClass: 'w-32',
             sort       : 'code',
-            translation: 'Code',
-            transform  : data => data + ' (data transformed with colum config)',
+            translation: '',
         },
         {
             type       : ColumnDataType.STRING,
@@ -60,25 +54,19 @@ export class GridComponent extends ViewBaseComponent
             translation: 'CustomCode',
         },
         {
-            type       : ColumnDataType.DATE,
-            field      : 'createdAt',
-            sort       : 'createdAt',
-            translation: 'CreatedAt',
-        },
-        {
-            type       : ColumnDataType.NUMBER,
+            type       : ColumnDataType.STRING,
             field      : 'latitude',
             sort       : 'latitude',
             translation: 'Latitude',
         },
         {
-            type       : ColumnDataType.NUMBER,
+            type       : ColumnDataType.STRING,
             field      : 'longitude',
             sort       : 'longitude',
             translation: 'Longitude',
         },
         {
-            type       : ColumnDataType.NUMBER,
+            type       : ColumnDataType.STRING,
             field      : 'zoom',
             sort       : 'zoom',
             translation: 'Zoom',
@@ -98,15 +86,6 @@ export class GridComponent extends ViewBaseComponent
     ];
 
     dataEvent: any = undefined;
-    defaultFilters: GridColumnFilter[] = [
-        {
-            id      : '1bf1fce9-8d4d-400c-a4ac-a87d5ef1fbbc',
-            field   : 'code',
-            type    : ColumnDataType.STRING,
-            operator: Operator.substring,
-            value   : 'hola mundo',
-        },
-    ];
 
     constructor(
         protected injector: Injector,
@@ -119,41 +98,28 @@ export class GridComponent extends ViewBaseComponent
     {
         /**/
         this.gridData$ = of(gridData);
+        this.gridTranslations$ = combineLatest(
+            {
+                a: this.translocoService.selectTranslation(),
+                b: this.translocoService.selectTranslation('kitchen-sink'),
+            })
+            .pipe(
+                map(res => ({ ...res.a, ...res.b })),
+            );
     }
 
-    handleColumnsConfigChange($event): void
+    handleColumnsConfigChanged($event): void
     {
-        console.log($event);
-    }
-
-    handleRowsSelectionChange($event): void
-    {
-        console.log($event);
-    }
-
-    handleFiltersChange($event): void
-    {
-        console.log($event);
-    }
-
-    handlePageChange($event): void
-    {
-        console.log($event);
-    }
-
-    handleStateChange($event): void
-    {
-        this.onRunAction({ id: 'pagination', data: { event: setQueryFilters($event) }});
+        //
     }
 
     onRunAction(action: Action): void
     {
-        this.currentAction = action;
 
-        switch (action?.id)
+        switch (action.id)
         {
             case 'pagination':
-                this.dataEvent = { ...this.dataEvent, ...action.data.event };
+                this.dataEvent = { ...this.dataEvent, ...action.data.query };
                 break;
 
             case 'edit':

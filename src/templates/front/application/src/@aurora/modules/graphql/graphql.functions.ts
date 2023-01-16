@@ -29,7 +29,6 @@ export const extractGraphqlStatusCodeErrors = (graphqlErrors: GraphQLErrors): st
     {
         const extensions = graphqlError.extensions as any;
 
-        console.log(extensions);
         if (Array.isArray(extensions.exception?.errors))
         {
             return extensions

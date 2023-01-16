@@ -14,7 +14,7 @@ export const account: Account = {
         username: 'hughes.brian@company.com',
         password: '',
         rememberToken: '',
-        data: {},
+        meta: {},
     },
     isActive: true,
     clientId: '',
@@ -23,7 +23,7 @@ export const account: Account = {
         all: [],
     },
     dTenants: [],
-    data: {},
+    meta: {},
     createdAt: '',
     updatedAt: '',
 };

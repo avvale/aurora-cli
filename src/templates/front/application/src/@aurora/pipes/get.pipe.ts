@@ -3,7 +3,7 @@ import get from 'lodash-es/get';
 
 @Pipe({
     name: 'get',
-    pure: true
+    pure: true,
 })
 export class GetPipe implements PipeTransform
 {

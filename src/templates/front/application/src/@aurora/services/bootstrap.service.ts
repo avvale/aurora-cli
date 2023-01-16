@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { Environment, log, SessionService } from '@aurora';
-// import { LangService } from '@aurora/modules/lang/lang.service';
-import { first } from 'rxjs';
+import { AuthenticationService, Environment, IamService, log, SessionService } from '@aurora';
+// import { LangService } from '@aurora';
+import { first, lastValueFrom } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -11,7 +11,9 @@ import { first } from 'rxjs';
 export class BootstrapService
 {
     constructor(
-        private sessionService: SessionService,
+        private readonly sessionService: SessionService,
+        private readonly iamService: IamService,
+        private readonly authenticationService: AuthenticationService,
         //private auroraLangService: LangService,
     ) {}
 
@@ -33,6 +35,14 @@ export class BootstrapService
                 .pipe(first())
                 .subscribe(langs => this.sessionService.session = { langs });
         } */
+
+        // check token to request user
+        if (await lastValueFrom(this.authenticationService.check()))
+        {
+            // get user from iam service
+            await lastValueFrom(this.iamService.get());
+            log('[DEBUG] Get IamService user data from BootstrapService');
+        }
 
         log('[DEBUG] BootstrapService Initialized');
     }

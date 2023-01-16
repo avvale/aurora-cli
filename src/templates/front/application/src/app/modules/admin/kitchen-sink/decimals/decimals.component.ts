@@ -2,8 +2,7 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Crumb, log } from '@aurora';
-import { ViewDetailComponent } from '@aurora/foundations';
-
+import { ViewDetailComponent } from '@aurora';
 
 @Component({
     selector       : 'kitchen-sink-decimals',
@@ -54,7 +53,6 @@ export class DecimalsComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             example1: ['', [Validators.required]],
             example2: ['', [Validators.required]],
-            example3: ['', [Validators.required]],
         });
     }
 }

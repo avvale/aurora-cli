@@ -1,4 +1,4 @@
-<div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0">
+<div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0" *transloco="let t">
     <div class="md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-4 sm:p-12 md:p-16 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none sm:bg-card">
         <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
             <!-- Logo -->
@@ -7,18 +7,18 @@
             </div>
 
             <!-- Title -->
-            <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Sign in</div>
-            <div class="flex items-baseline mt-0.5 font-medium">
-                <div>Don't have an account?</div>
+            <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">{{ t('SignIn') }}</div>
+            <!-- <div class="flex items-baseline mt-0.5 font-medium">
+                <div>{{ t('NotAccount') }}</div>
                 <a
                     class="ml-1 text-primary-500 hover:underline"
-                    [routerLink]="['/sign-up']">Sign up
+                    [routerLink]="['/sign-up']">{{ t('SignUp') }}
                 </a>
-            </div>
+            </div> -->
 
             <!-- Alert -->
             <fuse-alert
-                class="mt-8 -mb-4"
+                class="mt-8"
                 *ngIf="showAlert"
                 [appearance]="'outline'"
                 [showIcon]="false"
@@ -35,22 +35,22 @@
 
                 <!-- Email field -->
                 <mat-form-field class="w-full">
-                    <mat-label>Email address</mat-label>
+                    <mat-label>{{ t('EmailAddress') }}</mat-label>
                     <input
                         id="email"
                         matInput
                         [formControlName]="'email'">
                     <mat-error *ngIf="signInForm.get('email').hasError('required')">
-                        Email address is required
+                        {{ t('SignInErrors.requiredEmail') }}
                     </mat-error>
                     <mat-error *ngIf="signInForm.get('email').hasError('email')">
-                        Please enter a valid email address
+                        {{ t('SignInErrors.invalidEmail') }}
                     </mat-error>
                 </mat-form-field>
 
                 <!-- Password field -->
                 <mat-form-field class="w-full">
-                    <mat-label>Password</mat-label>
+                    <mat-label>{{ t('Password') }}</mat-label>
                     <input
                         id="password"
                         matInput
@@ -72,22 +72,23 @@
                             [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
                     </button>
                     <mat-error>
-                        Password is required
+                        {{ t('SignInErrors.requiredPassword') }}
                     </mat-error>
                 </mat-form-field>
 
                 <!-- Actions -->
-                <div class="inline-flex items-end justify-between w-full mt-1.5">
+                <!-- <div class="inline-flex items-center justify-between w-full mt-1.5">
                     <mat-checkbox
+                        class="-ml-2"
                         [color]="'primary'"
                         [formControlName]="'rememberMe'">
-                        Remember me
+                        {{ t('RememberMe') }}
                     </mat-checkbox>
                     <a
                         class="text-md font-medium text-primary-500 hover:underline"
-                        [routerLink]="['/forgot-password']">Forgot password?
+                        [routerLink]="['/forgot-password']">{{ t('ForgotPassword') }}
                     </a>
-                </div>
+                </div> -->
 
                 <!-- Submit button -->
                 <button
@@ -97,7 +98,7 @@
                     [disabled]="signInForm.disabled"
                     (click)="signIn()">
                     <span *ngIf="!signInForm.disabled">
-                        Sign in
+                        {{ t('SignIn') }}
                     </span>
                     <mat-progress-spinner
                         *ngIf="signInForm.disabled"
@@ -106,14 +107,14 @@
                 </button>
 
                 <!-- Separator -->
-                <div class="flex items-center mt-8">
+                <!-- <div class="flex items-center mt-8">
                     <div class="flex-auto mt-px border-t"></div>
-                    <div class="mx-2 text-secondary">Or continue with</div>
+                    <div class="mx-2 text-secondary">{{ t('ContinueWith') }}</div>
                     <div class="flex-auto mt-px border-t"></div>
-                </div>
+                </div> -->
 
                 <!-- Single sign-on buttons -->
-                <div class="flex items-center mt-8 space-x-4">
+                <!-- <div class="flex items-center mt-8 space-x-4">
                     <button
                         class="flex-auto"
                         type="button"
@@ -138,7 +139,7 @@
                             class="icon-size-5"
                             [svgIcon]="'feather:github'"></mat-icon>
                     </button>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>
@@ -166,15 +167,14 @@
         <!-- Content -->
         <div class="z-10 relative w-full max-w-2xl">
             <div class="text-7xl font-bold leading-none text-gray-100">
-                <div>Welcome to</div>
-                <div>our community</div>
+                <div>Bienvenido a</div>
+                <div>Aurora</div>
             </div>
             <div class="mt-6 text-lg tracking-tight leading-6 text-gray-400">
-                Fuse helps developers to build organized and well coded dashboards full of beautiful and rich modules.
-                Join us and start building your application today.
+                Aurora es un framework de desarrollo de software.
             </div>
             <div class="flex items-center mt-8">
-                <div class="flex flex-0 items-center -space-x-1.5">
+                <!-- <div class="flex flex-0 items-center -space-x-1.5">
                     <img
                         class="flex-0 w-10 h-10 rounded-full ring-4 ring-offset-1 ring-gray-800 ring-offset-gray-800 object-cover"
                         src="assets/images/avatars/female-18.jpg">
@@ -189,7 +189,7 @@
                         src="assets/images/avatars/male-16.jpg">
                 </div>
                 <div class="ml-4 font-medium tracking-tight text-gray-400">More than 17k people joined us, it's your turn</div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

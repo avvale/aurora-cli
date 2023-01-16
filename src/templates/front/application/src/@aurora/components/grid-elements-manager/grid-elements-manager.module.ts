@@ -4,12 +4,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { GridElementsManagerComponent } from './grid-elements-manager.component';
-import { GridFormElementDetailDialogTemplateDirective } from './grid-form-element-detail-dialog-template.directive';
+import { GridFormElementDetailDialogTemplateDirective } from './directives/grid-form-element-detail-dialog-template.directive';
 import { GridElementDetailDialogComponent } from './grid-element-detail-dialog.component';
-import { GridCustomButtonsHeaderDialogTemplateDirective } from './grid-custom-buttons-header-dialog-template.directive';
+import { GridCustomButtonsHeaderDialogTemplateDirective } from './directives/grid-custom-buttons-header-dialog-template.directive';
 
 // @aurora components
 import { GridModule } from '../grid';
+import { GridElementsManagerCellValueTemplateDirective } from './directives/grid-elements-manager-cell-value-template.directive';
 
 @NgModule({
     entryComponents: [
@@ -25,15 +26,17 @@ import { GridModule } from '../grid';
         GridModule,
     ],
     declarations: [
+        GridCustomButtonsHeaderDialogTemplateDirective,
         GridElementDetailDialogComponent,
+        GridElementsManagerCellValueTemplateDirective,
         GridElementsManagerComponent,
         GridFormElementDetailDialogTemplateDirective,
-        GridCustomButtonsHeaderDialogTemplateDirective,
     ],
     exports: [
+        GridCustomButtonsHeaderDialogTemplateDirective,
+        GridElementsManagerCellValueTemplateDirective,
         GridElementsManagerComponent,
         GridFormElementDetailDialogTemplateDirective,
-        GridCustomButtonsHeaderDialogTemplateDirective,
     ],
 })
 

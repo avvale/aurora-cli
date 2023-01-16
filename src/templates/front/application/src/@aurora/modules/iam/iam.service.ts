@@ -12,4 +12,6 @@ export abstract class IamService<T = Account>
     abstract get(): Observable<{ me: T; }>;
 
     abstract update(account: T): Observable<any>
+
+    abstract clear(): void;
 }

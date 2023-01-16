@@ -4,7 +4,7 @@ import { ApolloModule as OriginApolloModule, APOLLO_OPTIONS } from 'apollo-angul
 import { HttpLink } from 'apollo-angular/http';
 import { apolloFactory } from './apollo.factory';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { AuthService } from '../auth/auth.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @NgModule({
     imports: [
@@ -16,7 +16,7 @@ import { AuthService } from '../auth/auth.service';
             useFactory: apolloFactory,
             deps      : [
                 HttpLink,
-                AuthService,
+                AuthenticationService,
                 FuseConfirmationService,
                 TranslocoService,
             ],

@@ -15,7 +15,7 @@ export const environment = {
         langs   : ['es','en'],
     },
     oAuth: {
-        applicationCode  : '',
+        applicationCode  : 'aurora',
         applicationSecret: '',
     },
 };

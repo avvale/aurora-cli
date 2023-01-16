@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { first, map, Observable, of, ReplaySubject, tap } from 'rxjs';
-import { GraphQLService, UserDataStorageService } from '@aurora';
+import { GraphQLService, UserMetaStorageService } from '@aurora';
 import { Account } from './iam.types';
 import { IamService } from './iam.service';
 import { iamMeAccount } from './iam.graphql';
@@ -18,7 +18,7 @@ export class IamAuroraAdapterService extends IamService
      */
     constructor(
         private graphqlService: GraphQLService,
-        private userDataStorageService: UserDataStorageService,
+        private userMetaStorageService: UserMetaStorageService,
     )
     {
         super();
@@ -69,7 +69,7 @@ export class IamAuroraAdapterService extends IamService
                 first(),
                 map<{ data: { iamMeAccount: Account; };}, { me: Account; }>(result => ({ me: result.data.iamMeAccount })),
                 tap(data => this.account = data.me),
-                tap(data => this.userDataStorageService.dataSubject$.next(data.me.user.data)),
+                tap(data => this.userMetaStorageService.metaSubject$.next(data.me.user.meta)),
             );
     }
 
@@ -81,5 +81,10 @@ export class IamAuroraAdapterService extends IamService
     update(account: Account): Observable<any>
     {
         return of(false);
+    }
+
+    clear(): void
+    {
+        this.account = null;
     }
 }

@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { log, ColumnConfigStorage } from '@aurora';
 import { BehaviorSubject, combineLatest, from, lastValueFrom, map, Observable, Subject, takeUntil } from 'rxjs';
 import { ColumnConfig } from '..';
-import { UserDataStorageService } from '../../user-data-storage';
+import { UserMetaStorageService } from '../../user-meta-storage';
 import { Utils } from '../../../functions/utils';
 import cloneDeep from 'lodash-es/cloneDeep';
 
@@ -31,15 +31,15 @@ export class GridColumnsConfigStorageService implements OnDestroy
     unsubscribeAll$: Subject<void> = new Subject();
 
     constructor(
-        private userDataStorageService: UserDataStorageService,
+        private userMetaStorageService: UserMetaStorageService,
     )
     {
-        this.userDataStorageService
-            .data$
+        this.userMetaStorageService
+            .meta$
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe(data =>
+            .subscribe(meta =>
             {
-                if (data) this.columnsConfigStorageSubject$.next(data[this.nameStorage]);
+                if (meta) this.columnsConfigStorageSubject$.next(meta[this.nameStorage]);
             });
     }
 
@@ -66,7 +66,10 @@ export class GridColumnsConfigStorageService implements OnDestroy
         this.columnsConfigChangeSubject$.next(columnConfigStorage);
 
         // save all columns config in user record database
-        await lastValueFrom(this.userDataStorageService.updateUserData(this.nameStorage, columnsConfigStorage));
+        await lastValueFrom(
+            this.userMetaStorageService
+                .updateUserMeta(this.nameStorage, columnsConfigStorage),
+        );
     }
 
     getColumnsConfig(id: string, originColumnsConfig: ColumnConfig[]): Observable<ColumnConfig[]>

@@ -1,0 +1,14 @@
+// color for suffix and prefix icons
+.mat-mdc-form-field.mat-form-field-disabled:not(.mat-form-field-appearance-legacy) .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field.mat-form-field-disabled:not(.mat-form-field-appearance-legacy) .mat-mdc-form-field-suffix {
+    color: rgba(0, 0, 0, 0.38);
+    margin-left: 1rem;
+}
+
+//
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    &.dark-backdrop {
+        background: #000;
+        opacity: 0.85 !important;
+    }
+}

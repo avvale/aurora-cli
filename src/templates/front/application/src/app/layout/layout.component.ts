@@ -1,11 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { IamService } from '@aurora';
 import { combineLatest, filter, map, Subject, takeUntil } from 'rxjs';
 import { FuseConfigService } from '@fuse/services/config';
-import { FusePlatformService } from '@fuse/services/platform';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
+import { FusePlatformService } from '@fuse/services/platform';
 import { FUSE_VERSION } from '@fuse/version';
 import { Layout } from 'app/layout/layout.types';
 import { AppConfig } from 'app/core/config/app.config';
@@ -34,8 +33,7 @@ export class LayoutComponent implements OnInit, OnDestroy
         private _router: Router,
         private _fuseConfigService: FuseConfigService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fusePlatformService: FusePlatformService,
-        private iamService: IamService,
+        private _fusePlatformService: FusePlatformService
     )
     {
     }

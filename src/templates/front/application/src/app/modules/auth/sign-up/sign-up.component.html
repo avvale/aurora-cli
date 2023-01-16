@@ -18,7 +18,7 @@
 
             <!-- Alert -->
             <fuse-alert
-                class="mt-8 -mb-4"
+                class="mt-8"
                 *ngIf="showAlert"
                 [appearance]="'outline'"
                 [showIcon]="false"
@@ -100,12 +100,13 @@
                 <!-- ToS and PP -->
                 <div class="inline-flex items-end w-full mt-1.5">
                     <mat-checkbox
+                        class="-ml-2"
                         [color]="'primary'"
                         [formControlName]="'agreements'">
-                        <span>I agree to the</span>
+                        <span>I agree with</span>
                         <a
                             class="ml-1 text-primary-500 hover:underline"
-                            [routerLink]="['./']">Terms of Service
+                            [routerLink]="['./']">Terms
                         </a>
                         <span>and</span>
                         <a

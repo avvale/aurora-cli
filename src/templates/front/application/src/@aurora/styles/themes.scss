@@ -1,0 +1,77 @@
+.form-card {
+    @apply
+    rounded-t-md
+    bg-white
+    w-full
+    p-8
+}
+
+.au-dialog {
+    .mdc-dialog__surface {
+        @apply p-0 overflow-y-clip;
+
+        .dialog-header {
+            display: block;
+            margin-bottom: 0;
+
+            .title {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                font: 600 1.25rem / 2rem "Inter var", ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+                letter-spacing: normal;
+
+                mat-icon {
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        .mdc-dialog__actions {
+            padding: 16px;
+        }
+    }
+}
+
+.grid-header {
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font: 600 1.25rem / 2rem "Inter var", ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        letter-spacing: normal;
+
+        mat-icon {
+            margin-right: 1rem;
+        }
+    }
+}
+
+.mat-mdc-table {
+    .mdc-data-table__header-row {
+        height: 56px;
+        .mdc-data-table__header-cell {
+            line-height: 1.2em;
+        }
+    }
+    .mdc-data-table__row {
+        height: 48px;
+        .mdc-data-table__cell {
+            line-height: 1.2em;
+        }
+    }
+}
+
+.mat-mdc-form-field.au-datepicker {
+    .mat-mdc-form-field-icon-suffix {
+        @apply mr-2;
+    }
+    .mat-mdc-floating-label.mdc-floating-label {
+        pointer-events: none;
+        // width: calc(100% - 30px);
+
+        // &.mdc-floating-label--float-above {
+        //     width: 100%;
+        // }
+    }
+}

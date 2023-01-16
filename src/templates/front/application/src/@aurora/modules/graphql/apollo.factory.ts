@@ -1,19 +1,19 @@
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache, NormalizedCacheObject } from '@apollo/client/core';
-import { Utils } from '@aurora';
+import { log, Utils } from '@aurora';
 import { TranslocoService } from '@ngneat/transloco';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { log } from '@aurora/functions/log';
-import { HttpLink } from 'apollo-angular/http/http-link';
+// import { HttpLink } from 'apollo-angular/http/http-link';
+import { HttpLink } from 'apollo-angular/build/http/http-link';
 import { environment } from 'environments/environment';
-import { AuthService } from '../auth/auth.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 import { lastValueFrom } from 'rxjs';
 import { extractGraphqlMessageErrors, extractGraphqlStatusCodeErrors } from './graphql.functions';
 
 export const apolloFactory = (
     httpLink: HttpLink,
-    authService: AuthService,
+    authenticationService: AuthenticationService,
     confirmationService: FuseConfirmationService,
     translocoService: TranslocoService,
 ): ApolloClientOptions<NormalizedCacheObject> =>
@@ -33,10 +33,10 @@ export const apolloFactory = (
         else
         {
             // check access token, if is expired create other one with refresh token
-            await lastValueFrom(authService.check());
+            await lastValueFrom(authenticationService.check());
 
             // set bearer token
-            headers.set('Authorization', `Bearer ${authService.accessToken}`);
+            headers.set('Authorization', `Bearer ${authenticationService.accessToken}`);
         }
 
         return {
@@ -56,7 +56,7 @@ export const apolloFactory = (
 
             if (unauthorizedError)
             {
-                authService.signOut();
+                authenticationService.signOut();
                 location.reload();
                 return;
             }

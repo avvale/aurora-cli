@@ -2,13 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslocoModule, TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { FuseConfirmationModule } from '@fuse/services/confirmation';
-import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
-import { DatePickerDayjsAdapter, DatePickerDayjsFormats, DatepickerModule, ValidationMessagesModule, DecimalModule, DatepickerSqlFormatModule, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats } from '@aurora';
-import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
-import { NavigationService } from 'app/core/navigation/navigation.service';
-import { Navigation } from 'app/core/navigation/navigation.types';
+import { DatePickerDayjsAdapter, DatePickerDayjsFormats, DatepickerModule, ValidationMessagesModule, DecimalModule } from '@aurora';
 import { SharedModule } from 'app/shared/shared.module';
-import { first } from 'rxjs';
 
 // Material
 import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -27,13 +22,11 @@ import { MatMenuModule } from '@angular/material/menu';
 // Kitchen sink declarations
 import { kitchenSinkRoutes } from './kitchen-sink.routing';
 import { KitchenSinkComponent } from './kitchen-sink.component';
-
-// Components
 import { DecimalsComponent } from './decimals/decimals.component';
 import { GridComponent } from './grid/grid.component';
-import { kitchenSink } from './kitchen-sink.menu';
-import { DatesComponent } from './dates/dates.component';
-import { SelectsComponent } from './selects/selects.component';
+
+// Components
+
 
 @NgModule({
     imports: [
@@ -61,15 +54,12 @@ import { SelectsComponent } from './selects/selects.component';
 
         // @Aurora
         DatepickerModule,
-        DatepickerSqlFormatModule,
         DecimalModule,
     ],
     declarations: [
-        DatesComponent,
+        KitchenSinkComponent,
         DecimalsComponent,
         GridComponent,
-        KitchenSinkComponent,
-        SelectsComponent,
     ],
     providers: [
         {
@@ -90,41 +80,8 @@ import { SelectsComponent } from './selects/selects.component';
             provide : MAT_DATE_FORMATS,
             useValue: DatePickerDayjsFormats,
         },
-        {
-            provide : DatetimeAdapter,
-            useClass: DateTimePickerDayjsAdapter,
-        },
-        {
-            provide : MTX_DATETIME_FORMATS,
-            useValue: DatetimePickerDayjsFormats,
-        },
     ],
 })
 export class KitchenSinkModule
 {
-    constructor(
-        fuseNavigationService: FuseNavigationService,
-        navigationService: NavigationService,
-    )
-    {
-        const navComponent = fuseNavigationService.getComponent<FuseVerticalNavigationComponent>('mainNavigation');
-
-        if (navComponent)
-        {
-            const applicationsMenu = fuseNavigationService.getItem('applications', navComponent.navigation);
-            applicationsMenu.children.push(kitchenSink);
-            navComponent.refresh();
-        }
-        else
-        {
-            navigationService
-                .navigation$
-                .pipe(first())
-                .subscribe((navigation: Navigation) =>
-                {
-                    const applicationsMenu = fuseNavigationService.getItem('applications', navigation.default);
-                    applicationsMenu.children.push(kitchenSink);
-                });
-        }
-    }
 }

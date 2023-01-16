@@ -101,7 +101,7 @@
     <ng-container *ngIf="item.icon">
         <mat-icon
             class="fuse-vertical-navigation-item-icon"
-            [fontSet]="item.iconFontSet"
+            [fontSet]="item.iconFontSet || 'material-icons'"
             [ngClass]="item.classes?.icon"
             [svgIcon]="!item.iconFontSet && item.icon">{{ item.iconFontSet && item.icon }}</mat-icon>
     </ng-container>

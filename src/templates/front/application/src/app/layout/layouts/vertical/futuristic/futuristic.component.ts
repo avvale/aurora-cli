@@ -5,8 +5,9 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
-import { User } from 'app/core/user/user.types';
-import { UserService } from 'app/core/user/user.service';
+
+// ---- customizations ----
+import { Account, IamService } from '@aurora';
 
 @Component({
     selector     : 'futuristic-layout',
@@ -17,7 +18,7 @@ export class FuturisticLayoutComponent implements OnInit, OnDestroy
 {
     isScreenSmall: boolean;
     navigation: Navigation;
-    user: User;
+    account: Account;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -27,7 +28,7 @@ export class FuturisticLayoutComponent implements OnInit, OnDestroy
         private _activatedRoute: ActivatedRoute,
         private _router: Router,
         private _navigationService: NavigationService,
-        private _userService: UserService,
+        private iamService: IamService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
         private _fuseNavigationService: FuseNavigationService
     )
@@ -63,10 +64,10 @@ export class FuturisticLayoutComponent implements OnInit, OnDestroy
             });
 
         // Subscribe to the user service
-        this._userService.user$
+        this.iamService.account$
             .pipe((takeUntil(this._unsubscribeAll)))
-            .subscribe((user: User) => {
-                this.user = user;
+            .subscribe((account: Account) => {
+                this.account = account;
             });
 
         // Subscribe to media changes

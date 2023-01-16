@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { log, ColumnFilterStorage, SessionService, GridState } from '@aurora';
+import { log, ColumnFilterStorage, SessionService, GridColumnFilter } from '@aurora';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class GridFiltersStorageService implements OnDestroy
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe(data =>
             {
-                if (data) this.columnFiltersStorageSubject$.next(data[this.nameStorage]);
+                if (data && data[this.nameStorage]) this.columnFiltersStorageSubject$.next(data[this.nameStorage]);
             });
     }
 
@@ -45,14 +45,15 @@ export class GridFiltersStorageService implements OnDestroy
         this.unsubscribeAll$.complete();
     }
 
-    setColumnFilterState(id: string, gridState: GridState): void
+    // setColumnFilterState(id: string, columnFilters: GridColumnFilter[]): void
+    setColumnFilterState(id: string, columnFilters: any): void
     {
         // get current column filters config storage
         const columnFiltersStorage = this.columnFiltersStorageSubject$.value ? this.columnFiltersStorageSubject$.value : {};
 
         const columnFilterStorage = {
             id,
-            gridState,
+            columnFilters,
         };
 
         // set QueryStatement with id, to identify which grid the filters belongs to
@@ -66,12 +67,11 @@ export class GridFiltersStorageService implements OnDestroy
         log('[DEBUG] Set column filter: ', columnFilterStorage);
     }
 
-    getColumnFilterState(id: string): GridState
+    getColumnFilterState(id: string): GridColumnFilter[]
     {
         // get current column filters config storage
         const columnFiltersStorage = this.columnFiltersStorageSubject$.value;
 
-        // set QueryStatement with id, to identify which grid the filters belongs to
-        return columnFiltersStorage && columnFiltersStorage[id] ? columnFiltersStorage[id]?.gridState : null;
+        return columnFiltersStorage[id]?.columnFilters ? columnFiltersStorage[id].columnFilters : [];
     }
 }

@@ -87,7 +87,7 @@ export class AuthService
 
                 // Return a new observable with the response
                 return of(response);
-            }),
+            })
         );
     }
 
@@ -127,7 +127,7 @@ export class AuthService
 
                 // Return true
                 return of(true);
-            }),
+            })
         );
     }
 

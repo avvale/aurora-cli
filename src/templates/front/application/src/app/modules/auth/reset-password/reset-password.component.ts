@@ -4,7 +4,9 @@ import { finalize } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseValidators } from '@fuse/validators';
 import { FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/core/auth/auth.service';
+
+// ---- customizations ----
+import { AuthenticationService } from '@aurora';
 
 @Component({
     selector     : 'auth-reset-password',
@@ -27,7 +29,7 @@ export class AuthResetPasswordComponent implements OnInit
      * Constructor
      */
     constructor(
-        private _authService: AuthService,
+        private authenticationService: AuthenticationService,
         private _formBuilder: UntypedFormBuilder
     )
     {
@@ -43,13 +45,14 @@ export class AuthResetPasswordComponent implements OnInit
     ngOnInit(): void
     {
         // Create the form
-        this.resetPasswordForm = this._formBuilder.group({
+        this.resetPasswordForm = this._formBuilder.group(
+            {
                 password       : ['', Validators.required],
-                passwordConfirm: ['', Validators.required]
+                passwordConfirm: ['', Validators.required],
             },
             {
-                validators: FuseValidators.mustMatch('password', 'passwordConfirm')
-            }
+                validators: FuseValidators.mustMatch('password', 'passwordConfirm'),
+            },
         );
     }
 
@@ -75,9 +78,10 @@ export class AuthResetPasswordComponent implements OnInit
         this.showAlert = false;
 
         // Send the request to the server
-        this._authService.resetPassword(this.resetPasswordForm.get('password').value)
+        this.authenticationService.resetPassword(this.resetPasswordForm.get('password').value)
             .pipe(
-                finalize(() => {
+                finalize(() =>
+                {
 
                     // Re-enable the form
                     this.resetPasswordForm.enable();
@@ -90,20 +94,22 @@ export class AuthResetPasswordComponent implements OnInit
                 })
             )
             .subscribe(
-                (response) => {
+                (response) =>
+                {
 
                     // Set the alert
                     this.alert = {
                         type   : 'success',
-                        message: 'Your password has been reset.'
+                        message: 'Your password has been reset.',
                     };
                 },
-                (response) => {
+                (response) =>
+                {
 
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: 'Something went wrong, please try again.'
+                        message: 'Something went wrong, please try again.',
                     };
                 }
             );
