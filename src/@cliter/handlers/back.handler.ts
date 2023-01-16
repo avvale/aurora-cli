@@ -12,7 +12,7 @@ export class BackHandler
 {
     static async new(newBackCommandState: NewBackCommandState): Promise<void>
     {
-        if (!newBackCommandState.appName) throw new Error('To create application is required app name');
+        if (!newBackCommandState.appName) throw new Error('To create back application is required app name');
 
         // create directory for application
         if (!fs.existsSync(newBackCommandState.appName)) fs.mkdirSync(newBackCommandState.appName, { recursive: true });

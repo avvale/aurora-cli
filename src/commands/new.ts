@@ -1,5 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import { BackHandler, Scope } from '../@cliter';
+import { BackHandler, FrontHandler, Scope } from '../@cliter';
 import { generateEnvFile, installDependencies } from '../@cliter/functions/back';
 
 export default class New extends Command
@@ -64,10 +64,13 @@ export default class New extends Command
                 break;
 
             case Scope.FRONT:
-                // stateService.dashboardName = args.name;
-                // TODO: generate dashboard
-                // await Operations.generateDashboard();
-                // if (flags.install) installDependencies(args.name);
+                await FrontHandler.new({
+                    appName: args.name,
+                    command: this,
+                    flags,
+                });
+
+                if (flags.install) installDependencies(args.name);
                 break;
 
             case 'back-package':

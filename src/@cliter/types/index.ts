@@ -50,6 +50,11 @@ export interface NewBackCommandState extends CommandState
     appName: string;
 }
 
+export interface NewFrontCommandState extends CommandState
+{
+    appName: string;
+}
+
 export enum ResolverType
 {
     QUERY = 'query',

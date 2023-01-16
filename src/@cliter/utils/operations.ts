@@ -15,22 +15,6 @@ export class Operations
     }*/
 
     /*
-    static async generateDashboard(): Promise<void>
-    {
-        if (!Operations.stateService.dashboardName) throw new Error('To create dashboard is required dashboard name');
-
-        // create directory for dashboard
-        if (!fs.existsSync(Operations.stateService.dashboardName)) fs.mkdirSync(Operations.stateService.dashboardName, { recursive: true });
-
-        await TemplateGenerator.generateStaticContents(
-            TemplateElement.FRONT_APPLICATION,
-            path.join(Operations.stateService.dashboardName),
-            '.',
-            { useTemplateEngine: false },
-        );
-    }*/
-
-    /*
     static async installBackPackage(packageName: string): Promise<void>
     {
         // create pipeline files
