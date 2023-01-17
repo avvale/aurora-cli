@@ -45,7 +45,7 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
     {
         if (!Array.isArray({{ toCamelCase schema.moduleNames }})) return;
 
-        return {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }}  => this.makeAggregate({{ toCamelCase schema.moduleName }}, cQMetadata));
+        return {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => this.makeAggregate({{ toCamelCase schema.moduleName }}, cQMetadata));
     }
 
     /**
