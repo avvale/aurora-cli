@@ -13,7 +13,12 @@ export default class Key extends Command
 
     static args = [];
 
-    async run(): Promise<void>
+    static examples = [
+        '$ aurora keys',
+        '$ aurora --help',
+    ]
+
+    public async run(): Promise<void>
     {
         const { args, flags } = await this.parse(Key);
 
@@ -24,5 +29,7 @@ export default class Key extends Command
 
         rsu.saveFile('oauth-private.key', prvPEM);
         rsu.saveFile('oauth-public.key', pubPEM);
+
+        this.log('Private key saved in oauth-private.key and public key saved in oauth-public.key');
     }
 }
