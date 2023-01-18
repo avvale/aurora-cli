@@ -6,19 +6,19 @@ on:
       - 'master'
 
 env:
-  OAUTH_PRIVATE_KEY: $\{{secrets.OAUTH_PRIVATE_KEY}}
-  OAUTH_PUBLIC_KEY: $\{{secrets.OAUTH_PUBLIC_KEY}}
-  DOT_ENV: $\{{secrets.DOT_ENV}}
+  OAUTH_PRIVATE_KEY: $\{{ secrets.OAUTH_PRIVATE_KEY }}
+  OAUTH_PUBLIC_KEY: $\{{ secrets.OAUTH_PUBLIC_KEY }}
+  DOT_ENV: $\{{ secrets.DOT_ENV }}
   # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
   # don't forget set like bin/bash ftp user
-  DEPLOY_KEY: $\{{ secrets.SSH_PRIVATE_KEY }}
+  SERVER_SSH_PRIVATE_KEY: $\{{ secrets.SERVER_SSH_PRIVATE_KEY }}
   # default port SFTP 22
-  SERVER_PORT: $\{{ secrets.PORT }}
-  SERVER_IP: $\{{secrets.HOST}}
+  SERVER_PORT: $\{{ secrets.SERVER_PORT }}
+  SERVER_IP: $\{{ secrets.SERVER_IP }}
   # SFTP username
-  USERNAME: $\{{ secrets.USERNAME }}
+  SERVER_SSH_USERNAME: $\{{ secrets.SERVER_SSH_USERNAME }}
   # example /var/www/vhosts/contoso.com/httpdocs
-  SERVER_DESTINATION: $\{{ secrets.DESTINATION_PATH }}
+  SERVER_PATH: $\{{ secrets.SERVER_PATH }}
 
 jobs:
   tests:
@@ -114,10 +114,10 @@ jobs:
       - name: Deploy Plesk with rsync
         uses: AEnterprise/rsync-deploy@v1.0
         env:
-          DEPLOY_KEY: $\{{ env.DEPLOY_KEY }}
+          DEPLOY_KEY: $\{{ env.SERVER_SSH_PRIVATE_KEY }}
           ARGS: '-avzh --delete --include=".env" --exclude=".*"'
           SERVER_PORT: $\{{ env.SERVER_PORT }}
           FOLDER: "./"
           SERVER_IP: $\{{ env.SERVER_IP }}
-          USERNAME: $\{{ env.USERNAME }}
-          SERVER_DESTINATION: $\{{ env.SERVER_DESTINATION }}
+          USERNAME: $\{{ env.SERVER_SSH_USERNAME }}
+          SERVER_DESTINATION: $\{{ env.SERVER_PATH }}
