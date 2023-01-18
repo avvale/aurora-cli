@@ -5,6 +5,21 @@ on:
     branches:
       - 'master'
 
+env:
+  OAUTH_PRIVATE_KEY: $\{{secrets.OAUTH_PRIVATE_KEY}}
+  OAUTH_PUBLIC_KEY: $\{{secrets.OAUTH_PUBLIC_KEY}}
+  DOT_ENV: $\{{secrets.DOT_ENV}}
+  # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
+  # don't forget set like bin/bash ftp user
+  DEPLOY_KEY: $\{{ secrets.SSH_PRIVATE_KEY }}
+  # default port SFTP 22
+  SERVER_PORT: $\{{ secrets.PORT }}
+  SERVER_IP: $\{{secrets.HOST}}
+  # SFTP username
+  USERNAME: $\{{ secrets.USERNAME }}
+  # example /var/www/vhosts/contoso.com/httpdocs
+  SERVER_DESTINATION: $\{{ secrets.DESTINATION_PATH }}
+
 jobs:
   tests:
     name: Build and test
@@ -16,34 +31,20 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '18'
 
     - name: Install dependencies
       run: npm ci
 
-    - name: Create OAuth private Key
+    - name: Create OAuth Keys and dot file
       run: |
         touch oauth-private.key
         echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
-      shell: bash
-      env:
-        OAUTH_PRIVATE_KEY: $\{{secrets.OAUTH_PRIVATE_KEY}}
-
-    - name: Create OAuth public Key
-      run: |
         touch oauth-public.key
         echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
-      shell: bash
-      env:
-        OAUTH_PUBLIC_KEY: $\{{secrets.OAUTH_PUBLIC_KEY}}
-
-    - name: Create .env file
-      run: |
         touch .env
         echo "$DOT_ENV" > .env
       shell: bash
-      env:
-        DOT_ENV: $\{{secrets.DOT_ENV}}
 
     - name: Unit testing
       run: npm run test
@@ -56,8 +57,8 @@ jobs:
 
     - name: Copy graphQL files
       run: |
-        mkdir ./dist/@api/graphql \;
-        find ./src -name '*.graphql' -exec cp "{}" ./dist/@api/graphql \;
+        mkdir ./dist/src/graphql \;
+        find ./src -name '*.graphql' -exec cp "{}" ./dist/src/graphql \;
       shell: bash
 
     - name: Zip artifact for deployment
@@ -89,34 +90,20 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Create OAuth private Key
+      - name: Create OAuth Keys and dot file
         run: |
           touch oauth-private.key
           echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
-        shell: bash
-        env:
-          OAUTH_PRIVATE_KEY: $\{{secrets.OAUTH_PRIVATE_KEY}}
-
-      - name: Create OAuth public Key
-        run: |
           touch oauth-public.key
           echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
-        shell: bash
-        env:
-          OAUTH_PUBLIC_KEY: $\{{secrets.OAUTH_PUBLIC_KEY}}
-
-      - name: Create .env file
-        run: |
           touch .env
           echo "$DOT_ENV" > .env
         shell: bash
-        env:
-          DOT_ENV: $\{{secrets.DOT_ENV}}
 
       - name: Create file to restart application
         run: |
@@ -127,15 +114,10 @@ jobs:
       - name: Deploy Plesk with rsync
         uses: AEnterprise/rsync-deploy@v1.0
         env:
-          # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
-          # don't forget set like bin/bash ftp user
-          DEPLOY_KEY: $\{{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOY_KEY: $\{{ env.DEPLOY_KEY }}
           ARGS: '-avzh --delete --include=".env" --exclude=".*"'
-          # default port rsync 22
-          SERVER_PORT: $\{{ secrets.PORT }}
+          SERVER_PORT: $\{{ env.SERVER_PORT }}
           FOLDER: "./"
-          SERVER_IP: $\{{ secrets.HOST }}
-          # SFTP username
-          USERNAME: $\{{ secrets.USERNAME }}
-          # example /var/www/vhosts/contoso.com/httpdocs
-          SERVER_DESTINATION: $\{{ secrets.DESTINATION_PATH }}
+          SERVER_IP: $\{{ env.SERVER_IP }}
+          USERNAME: $\{{ env.USERNAME }}
+          SERVER_DESTINATION: $\{{ env.SERVER_DESTINATION }}

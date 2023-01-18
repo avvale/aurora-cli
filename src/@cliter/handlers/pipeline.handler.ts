@@ -3,14 +3,14 @@ import { GeneratePipelineCommandState, TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import * as path from 'node:path';
 
-export class CiCdHandler
+export class PipelineHandler
 {
     static async generatePipeline(generatePipelineCommandState: GeneratePipelineCommandState): Promise<void>
     {
         // create pipeline files
         await TemplateGenerator.generateStaticContents(
             generatePipelineCommandState.command,
-            TemplateElement.CI_CD,
+            TemplateElement.PIPELINE,
             '.',
             '.',
             {

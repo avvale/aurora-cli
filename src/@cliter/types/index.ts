@@ -65,7 +65,7 @@ export enum ResolverType
 export enum Scope
 {
     BACK  = 'back',
-    CI_CD = 'ci-cd',
+    PIPELINE = 'pipeline',
     FRONT = 'front',
 }
 
@@ -134,7 +134,7 @@ export enum TemplateElement
     BACK_PACKAGES             = 'packages/back',
     BACK_POSTMAN              = 'back/postman',
     BACK_VALUE_OBJECT         = 'back/value-object',
-    CI_CD                     = 'ci-cd',
+    PIPELINE                  = 'pipeline',
     FRONT_APPLICATION         = 'front/application',
     FRONT_MODULE              = 'front/module',
     FRONT_MODULE_TRANSLATIONS = 'front/module-translations',

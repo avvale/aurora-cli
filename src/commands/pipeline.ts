@@ -1,6 +1,6 @@
 import { Command, Flags } from '@oclif/core';
 import { Prompter } from '../@cliter';
-import { CiCdHandler } from '../@cliter/handlers';
+import { PipelineHandler } from '../@cliter/handlers';
 
 export default class Pipeline extends Command
 {
@@ -39,7 +39,7 @@ export default class Pipeline extends Command
 
         const { from, to, service }: any = await Prompter.promptAddPipeline(args.scope);
 
-        CiCdHandler.generatePipeline({
+        PipelineHandler.generatePipeline({
             command: this,
             scope  : args.scope,
             flags,
