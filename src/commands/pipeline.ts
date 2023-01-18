@@ -33,7 +33,7 @@ export default class Pipeline extends Command
         '$ aurora --help',
     ];
 
-    async run(): Promise<void>
+    public async run(): Promise<void>
     {
         const { args, flags } = await this.parse(Pipeline);
 
