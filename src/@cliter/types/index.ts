@@ -15,6 +15,7 @@ export interface GenerateCommandState extends CommandState
 
 export interface GeneratePipelineCommandState extends CommandState
 {
+    scope: string;
     from: string;
     to: string;
     service: string;

@@ -15,7 +15,7 @@ export class CiCdHandler
             '.',
             {
                 templateElementPath: path.join(
-                    generatePipelineCommandState.flags.dashboard ? 'front' : 'back',
+                    generatePipelineCommandState.scope === 'front' ? 'front' : 'back',
                     generatePipelineCommandState.from.toKebabCase(),
                     generatePipelineCommandState.to.toKebabCase(),
                     generatePipelineCommandState.service.toKebabCase(),

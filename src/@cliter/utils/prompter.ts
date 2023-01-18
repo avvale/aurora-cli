@@ -460,7 +460,7 @@ export const Prompter =
         });
     },
 
-    async promptAddPipeline(isFront: boolean): Promise<{ from: string; to: string; service: string;}>
+    async promptAddPipeline(scope: 'back' | 'front'): Promise<{ from: string; to: string; service: string;}>
     {
         const questions = [];
         let platform = '';
@@ -488,7 +488,9 @@ export const Prompter =
             name   : 'service',
             message: 'on what service will you deploy?',
             type   : 'list',
-            choices: (answers: any) => isFront ? cliterConfig.serviceToDeploy.front[answers.to.toCamelCase()] : cliterConfig.serviceToDeploy.back[answers.to.toCamelCase()],
+            choices: (answers: any) => scope === 'front' ?
+                cliterConfig.serviceToDeploy.front[answers.to.toCamelCase()] :
+                cliterConfig.serviceToDeploy.back[answers.to.toCamelCase()],
         });
 
         return inquirer.prompt(questions);
