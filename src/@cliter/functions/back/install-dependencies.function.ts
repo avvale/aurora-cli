@@ -5,7 +5,7 @@ export const installDependencies = (targetFolder: string): void =>
 {
     CliUx.ux.action.start('Installing dependencies');
 
-    const install = shell.spawn('npm', ['install'], { cwd: targetFolder, timeout: 300 * 100 });
+    const install = shell.spawn('npm', ['install'], { cwd: targetFolder });
 
     install.stdout.on('data', data => console.log(`${data}`));
 

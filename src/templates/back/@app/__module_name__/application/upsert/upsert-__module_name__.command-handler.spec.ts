@@ -42,7 +42,7 @@ describe('Upsert{{ toPascalCase schema.moduleName }}CommandHandler', () =>
             expect(await commandHandler.execute(
                 new Upsert{{ toPascalCase schema.moduleName }}Command(
                     {
-                        {{#each schema.properties.upsertController}}
+                        {{#each schema.properties.updateController}}
                         {{ toCamelCase name }}: {{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }},
                         {{/each}}
                     },
