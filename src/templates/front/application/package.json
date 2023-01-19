@@ -8,6 +8,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start:dev": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --configuration=development",
+    "start:local": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --configuration=localhost",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

@@ -108,6 +108,20 @@
                                     "with": "src/environments/environment.dev.ts"
                                 }
                             ]
+                        },
+                        "localhost": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.local.ts"
+                                }
+                            ]
                         }
                     },
                     "defaultConfiguration": "production"
@@ -120,6 +134,9 @@
                         },
                         "development": {
                             "browserTarget": "fuse:build:development"
+                        },
+                        "localhost": {
+                            "browserTarget": "fuse:build:localhost"
                         }
                     },
                     "defaultConfiguration": "development"
