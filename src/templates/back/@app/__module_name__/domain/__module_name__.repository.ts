@@ -44,6 +44,14 @@ export abstract class I{{ toPascalCase schema.moduleName }}Repository implements
         }
     ): Promise<{{ schema.aggregateName }}[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<{{ schema.aggregateName }}[]>;
+
     // count records
     abstract count(
         options?: {

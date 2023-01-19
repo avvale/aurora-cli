@@ -39,6 +39,9 @@ import { Find{{ toPascalCase schema.moduleName }}QueryHandler } from './applicat
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/find/find-' (toKebabCase schema.moduleName) '-by-id.query-handler.ts'}}
 import { Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler } from './application/find/find-{{ toKebabCase schema.moduleName }}-by-id.query-handler';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/raw-sql-' (toKebabCase schema.moduleNames) '.query-handler.ts'}}
+import { RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler } from './application/raw-sql/raw-sql-{{ toKebabCase schema.moduleNames }}.query-handler';
+{{/notInArray}}
 
 // events
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event-handler.ts'}}
@@ -78,6 +81,9 @@ import { Find{{ toPascalCase schema.moduleName }}Service } from './application/f
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/find/find-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
 import { Find{{ toPascalCase schema.moduleName }}ByIdService } from './application/find/find-{{ toKebabCase schema.moduleName }}-by-id.service';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/raw-sql-' (toKebabCase schema.moduleNames) '.service.ts'}}
+import { RawSQL{{ toPascalCase schema.moduleNames }}Service } from './application/raw-sql/raw-sql-{{ toKebabCase schema.moduleNames }}.service';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/update-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
 import { Update{{ toPascalCase schema.moduleName }}ByIdService } from './application/update/update-{{ toKebabCase schema.moduleName }}-by-id.service';
@@ -164,6 +170,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/find/find-' (toKebabCase schema.moduleName) '-by-id.query-handler.ts'}}
     Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler,
     {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/raw-sql-' (toKebabCase schema.moduleNames) '.query-handler.ts'}}
+    RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler,
+    {{/notInArray}}
 
     // events
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event-handler.ts'}}
@@ -204,6 +213,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/find/find-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
     Find{{ toPascalCase schema.moduleName }}ByIdService,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/raw-sql-' (toKebabCase schema.moduleNames) '.service.ts'}}
+    RawSQL{{ toPascalCase schema.moduleNames }}Service,
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/update-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
     Update{{ toPascalCase schema.moduleName }}ByIdService,
