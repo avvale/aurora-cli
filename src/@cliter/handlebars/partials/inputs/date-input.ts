@@ -3,11 +3,12 @@ import * as handlebars from 'handlebars';
 handlebars.registerPartial('dateInput',
     `<mat-form-field
     appearance="outline"
-    class="{{ calculateFormGroupCol property }}"
+    class="au-datepicker {{ calculateFormGroupCol property }}"
 >
     <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}') }}</mat-label>
     <input
         matInput
+        autocomplete="off"
         formControlName="{{ toCamelCase property.name }}"
         [auDatepickerSqlFormat]
         [matDatepicker]="{{ toCamelCase property.name }}Picker"

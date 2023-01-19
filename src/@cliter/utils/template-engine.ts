@@ -36,6 +36,7 @@ import '../handlebars/partials/inputs/char-input';
 import '../handlebars/partials/inputs/date-input';
 import '../handlebars/partials/inputs/enum-input';
 import '../handlebars/partials/inputs/int-input';
+import '../handlebars/partials/inputs/decimal-input';
 import '../handlebars/partials/inputs/text-input';
 import '../handlebars/partials/inputs/timestamp-input';
 import '../handlebars/partials/inputs/varchar-input';

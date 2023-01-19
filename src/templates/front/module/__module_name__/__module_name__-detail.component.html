@@ -103,6 +103,10 @@
                     {{> intInput schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq type 'decimal'}}
+                    {{> intInput schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq type 'date'}}
                     {{> dateInput schema=../schema property=.}}
 
