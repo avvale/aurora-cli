@@ -5,6 +5,40 @@ on:
     branches:
       - 'master'
 
+env:
+  # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
+  # don't forget set like bin/bash ftp user
+  SERVER_SSH_PRIVATE_KEY: $\{{ secrets.SERVER_SSH_PRIVATE_KEY }}
+  # default port SFTP 22
+  SERVER_PORT: $\{{ secrets.SERVER_PORT }}
+  SERVER_IP: $\{{ secrets.SERVER_IP }}
+  # SFTP username
+  SERVER_SSH_USERNAME: $\{{ secrets.SERVER_SSH_USERNAME }}
+  # example /var/www/vhosts/contoso.com/httpdocs
+  SERVER_PATH: $\{{ secrets.SERVER_PATH }}
+  HTACCESS: |
+    <IfModule mod_rewrite.c>
+      <IfModule mod_negotiation.c>
+        Options -MultiViews
+      </IfModule>
+
+      RewriteEngine On
+
+      # Redirect Trailing Slashes If Not A Folder...
+      RewriteCond %{REQUEST_FILENAME} !-d
+      RewriteCond %{REQUEST_URI} (.+)/$
+      RewriteRule ^ %1 [L,R=301]
+
+      # Handle Front Controller...
+      RewriteCond %{REQUEST_FILENAME} !-d
+      RewriteCond %{REQUEST_FILENAME} !-f
+      RewriteRule ^ index.html [L]
+
+      # Handle Authorization Header
+      RewriteCond %{HTTP:Authorization} .
+      RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    </IfModule>
+
 jobs:
   tests:
     name: Build and test
@@ -16,26 +50,24 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '18'
 
     - name: Install dependencies
       run: npm ci
 
-    # - name: Testing
-    #   run: npm run test
+    - name: Unit testing
+      run: npm run test
 
     - name: Build project
-      run: npm run build -- --configuration=quality
+      run: npm run build -- --configuration=production
 
     - name: Zip artifact for deployment
-      # set correct path to dist files
       run: cd dist/fuse && zip release.zip ./* -r
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: tested-artifact
-        # set correct path to zip file
         path: |
           dist/fuse/release.zip
 
@@ -58,20 +90,22 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
+
+      - name: Create .htaccess file
+        run: |
+          touch .htaccess
+          echo "$HTACCESS" > .htaccess
+          ls . -a
+        shell: bash
 
       - name: Deploy Plesk with rsync
         uses: AEnterprise/rsync-deploy@v1.0
         env:
-          # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
-          # don't forget set like bin/bash ftp user
-          DEPLOY_KEY: $\{{ secrets.PLESK_SSH_PRIVATE_KEY }}
-          ARGS: '-avzh --delete --exclude=".*"'
-          # default port rsync 22
-          SERVER_PORT: $\{{ secrets.PLESK_PORT }}
+          DEPLOY_KEY: $\{{ env.SERVER_SSH_PRIVATE_KEY }}
+          ARGS: '-avzh --delete --include=".htaccess" --exclude=".*"'
+          SERVER_PORT: $\{{ env.SERVER_PORT }}
           FOLDER: "./"
-          SERVER_IP: $\{{ secrets.PLESK_HOST }}
-          # SFTP username
-          USERNAME: $\{{ secrets.PLESK_USERNAME }}
-          # example /var/www/vhosts/contoso.com/httpdocs
-          SERVER_DESTINATION: $\{{ secrets.PLESK_DESTINATION_PATH }}
+          SERVER_IP: $\{{ env.SERVER_IP }}
+          USERNAME: $\{{ env.SERVER_SSH_USERNAME }}
+          SERVER_DESTINATION: $\{{ env.SERVER_PATH }}
