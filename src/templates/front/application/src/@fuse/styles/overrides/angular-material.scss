@@ -1347,3 +1347,17 @@ textarea.mat-mdc-input-element {
         }
     }
 }
+
+/* -------------------------------------------------------------------------- */
+/*  @ Tooltip
+/* -------------------------------------------------------------------------- */
+
+.mat-mdc-tooltip .mdc-tooltip__surface {
+    background-color: var(--fuse-text-default) !important;
+    color: white;
+
+    .dark & {
+        background-color: var(--fuse-text-secondary) !important;
+        color: var(--fuse-bg-default) !important;
+    }
+}

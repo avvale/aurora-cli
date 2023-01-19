@@ -83,14 +83,14 @@ export class GridColumnsConfigStorageService implements OnDestroy
                 takeUntil(this.unsubscribeAll$),
                 map(response =>
                 {
-                    const columnConfigStorage = response.columnsConfigStorage[id];
+                    const columnConfigStorage = Array.isArray(response.columnsConfigStorage) ? response.columnsConfigStorage[id] : undefined;
 
                     // we use spread operator to break the origin config reference to avoid changing changes
                     if (!columnConfigStorage) return cloneDeep(originColumnsConfig);
 
                     if (response.originColumnsConfigHash !== columnConfigStorage.hash)
                     {
-                        log('[DEBUG] columns config changed in :', id, originColumnsConfig);
+                        log('[DEBUG] columns config changed in: ', id, originColumnsConfig);
 
                         // we use spread operator to break the origin config reference to avoid changing changes
                         const newColumnsConfigStorage = this.addChangesToColumnsConfig(columnConfigStorage.columnsConfig, cloneDeep(originColumnsConfig));
