@@ -5,7 +5,7 @@ import { ExtraOptions, PreloadAllModules, RouteReuseStrategy, RouterModule } fro
 import { FuseModule } from '@fuse';
 import { FuseConfigModule } from '@fuse/services/config';
 import { FuseMockApiModule } from '@fuse/lib/mock-api';
-import { AuroraModule, LangService, JsonLangService, RouteReuseStrategyService, UserMetaStorageService, SessionService, SessionLocalStorageService, IamService, GridManagerService, AuroraGridManagerService, IamMockAdapterService, AuthenticationService, AuthenticationMockAdapterService, EnvironmentsInformationService, EnvironmentsInformationMockAdapterService } from '@aurora';
+import { AuroraModule, AuthenticationService, AuthenticationMockAdapterService, EnvironmentsInformationService, EnvironmentsInformationMockAdapterService, AuthenticationDisabledAdapterGuard, LangService, JsonLangService, RouteReuseStrategyService, UserMetaStorageService, SessionService, SessionLocalStorageService, IamService, GridManagerService, AuroraGridManagerService, IamMockAdapterService } from '@aurora';
 import { HORIZONTAL_NAVIGATION, FUTURISTIC_NAVIGATION, DEFAULT_NAVIGATION, COMPACT_NAVIGATION } from '@aurora/components/navigation/navigation.types';
 import { CoreModule } from 'app/core/core.module';
 import { appConfig } from 'app/core/config/app.config';
@@ -15,6 +15,7 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { UserMetaStorageLocalStorageService } from '@aurora/components/user-meta-storage/user-meta-storage-local-storage-adapter.service';
 import { compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation } from './core/navigation/default-navigation';
+import { AuthGuard } from './core/auth/guards/auth.guard';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -92,6 +93,11 @@ const routerConfig: ExtraOptions = {
         {
             provide : HORIZONTAL_NAVIGATION,
             useValue: horizontalNavigation,
+        },
+        // disable authentication Guard
+        {
+            provide : AuthGuard,
+            useClass: AuthenticationDisabledAdapterGuard,
         },
     ],
     bootstrap: [
