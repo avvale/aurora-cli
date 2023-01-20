@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable max-depth */
 import { GenerateCommandState } from '../../types';
 import { FileManager, Prompter } from '../../utils';
 import { GlobalState } from '../../store';
@@ -40,43 +42,64 @@ export const reviewOverwrites = async (generateCommandState: GenerateCommandStat
         let deleteOriginFiles = true;
         let fileToManage: string | undefined = '';
         let actionResponse = '';
+        let indexToCompare = -1;
 
         // request if you want compare files
         if ((await Prompter.promptManageOriginFiles()).hasCompareOriginFile)
         {
-            // list all origin files, and select file to manage
             fileToManage = (await Prompter.promptSelectOriginFileToManage(originFiles)).fileToManage as string;
+            indexToCompare = originFiles.indexOf(fileToManage);
             shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
 
             while (actionResponse !== cliterConfig.compareActions.finish)
             {
                 if (originFiles.length > 0)
                 {
-                    // eslint-disable-next-line no-await-in-loop
+                    // select action
                     actionResponse = (await Prompter.promptSelectManagementAction()).compareAction as string;
 
                     switch (actionResponse)
                     {
-                        case cliterConfig.compareActions.deleteOrigin:
-                            fs.unlinkSync(fileToManage as string);                // delete origin file and reference in array, view state.service.ts file
-                            fileToManage = _.head([...originFiles]); // get next file
-                            if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+                        case cliterConfig.compareActions.selectFile:
+                            fileToManage = (await Prompter.promptSelectOriginFileToManage(originFiles)).fileToManage as string;
                             break;
 
-                        case cliterConfig.compareActions.return:
-                            fileToManage = (await Prompter.promptSelectOriginFileToManage(originFiles)).fileToManage as string;
-                            shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+                        case cliterConfig.compareActions.deleteOriginAndLoadNext:
+                            // delete origin file
+                            fs.unlinkSync(fileToManage as string);
+                            originFiles.splice(indexToCompare, 1);
+                            indexToCompare = indexToCompare + 1 > originFiles.length ? indexToCompare = originFiles.length - 1 : indexToCompare;
+                            if (indexToCompare === -1) break;
+
+                            // get next file
+                            fileToManage = originFiles[indexToCompare];
                             break;
 
                         case cliterConfig.compareActions.ignore:
                             if (!fileToManage) break;
-                            const customFile = fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8');
-                            fs.writeFileSync(fileToManage.replace('.origin', ''), (fileToManage.endsWith('.origin.graphql') ? '# ignored file\r\n' : (fileToManage.endsWith('.origin.html') ? '<!-- ignored file -->\r\n' : '// ignored file\r\n')) + customFile, 'utf8');
-                            fs.unlinkSync(fileToManage as string);                // delete origin file and reference in array, view state.service.ts file
-                            fileToManage = _.head([...originFiles]); // get next file
-                            if (fileToManage) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+
+                            fs.writeFileSync(
+                                fileToManage.replace('.origin', ''),
+                                (fileToManage.endsWith('.origin.graphql') ?
+                                    '# ignored file\r\n' :
+                                    (fileToManage.endsWith('.origin.html') ?
+                                        '<!-- ignored file -->\r\n' :
+                                        '// ignored file\r\n')) + fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8'),
+                                'utf8',
+                            );
+
+                            // delete origin file
+                            fs.unlinkSync(fileToManage as string);
+                            originFiles.splice(indexToCompare, 1);
+                            indexToCompare = indexToCompare + 1 > originFiles.length ? indexToCompare = originFiles.length - 1 : indexToCompare;
+                            if (indexToCompare === -1) break;
+
+                            // get next file
+                            fileToManage = originFiles[indexToCompare];
                             break;
                     }
+
+                    if (fileToManage && originFiles.length > 0) shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
                 }
                 else
                 {

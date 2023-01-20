@@ -282,10 +282,10 @@ export const cliterConfig: CliterConfig =
         ignoredHtmlFile   : '4e6c548816bc0b2087633182f1e7e0f75ecba428',       // <!-- ignored file --> (for HTML)
     },
     compareActions: {
-        deleteOrigin: 'Delete origin file and load next',
-        ignore      : 'Ignore the file to be overwritten in future uploads',
-        return      : 'Go back',
-        finish      : 'Finish comparison and exit',
+        deleteOriginAndLoadNext: 'Delete origin file and load next',
+        ignore                 : 'Ignore the file to be overwritten in future uploads',
+        selectFile             : 'Go to file selection',
+        finish                 : 'Finish comparison and exit',
     },
     skipDirectories             : ['node_modules', 'dist', 'coverage', 'cliter'],
     avoidOverwritingFilesIfExist: [
