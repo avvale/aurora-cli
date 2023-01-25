@@ -8,7 +8,7 @@ import { {{ currentProperty.relationshipAggregate }}Model } from '{{ config.appC
 @Table({
     modelName: '{{ toPascalCase currentProperty.pivotAggregateName }}',
     freezeTableName: true,
-    timestamps: false
+    timestamps: false,
 })
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}Model extends Model<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}Model>
 {

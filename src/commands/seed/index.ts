@@ -28,7 +28,7 @@ export default class Seed extends Command
         },
     ];
 
-    async run()
+    public async run(): Promise<void>
     {
         const { args, flags } = await this.parse(Seed);
 

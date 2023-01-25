@@ -17,6 +17,12 @@ export class Find{{ toPascalCase schema.moduleName }}ByIdService
         cQMetadata?: CQMetadata,
     ): Promise<{{ schema.aggregateName }}>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

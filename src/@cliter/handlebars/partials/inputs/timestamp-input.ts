@@ -3,7 +3,7 @@ import * as handlebars from 'handlebars';
 handlebars.registerPartial('timestampInput',
     `<mat-form-field
     appearance="outline"
-    class="{{ calculateFormGroupCol property }}"
+    class="au-datepicker {{ calculateFormGroupCol property }}"
 >
     <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}') }}</mat-label>
     <input
@@ -19,10 +19,10 @@ handlebars.registerPartial('timestampInput',
     </mtx-datetimepicker-toggle>
     <mtx-datetimepicker
         #{{ toCamelCase property.name }}Picker
-        type="datetime"
+        type="month"
         mode="landscape"
         [multiYearSelector]="false"
-        startView="clock"
+        startView="month"
         [twelvehour]="false"
         [timeInterval]="1"
         [touchUi]="false"

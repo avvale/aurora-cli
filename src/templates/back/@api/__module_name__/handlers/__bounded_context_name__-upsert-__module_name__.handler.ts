@@ -55,7 +55,11 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         const constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, constraint, { timezone }));
         {{else}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+            payload.id,
+            {},
+            { timezone },
+        ));
         {{/if}}
     }
 }

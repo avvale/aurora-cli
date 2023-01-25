@@ -9,6 +9,7 @@ import * as timezone from 'dayjs/plugin/timezone';
 import * as advancedFormat from 'dayjs/plugin/advancedFormat';
 import * as weekOfYear from 'dayjs/plugin/weekOfYear';
 import * as isoWeek from 'dayjs/plugin/isoWeek';
+import * as dayOfYear from 'dayjs/plugin/dayOfYear';
 import * as dayjs from 'dayjs';
 
 // dayjs configuration
@@ -17,6 +18,7 @@ dayjs.extend(timezone);
 dayjs.extend(advancedFormat);
 dayjs.extend(weekOfYear);
 dayjs.extend(isoWeek);
+dayjs.extend(dayOfYear);
 
 async function bootstrap(): Promise<void>
 {
