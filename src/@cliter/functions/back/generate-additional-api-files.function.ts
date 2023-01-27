@@ -21,6 +21,7 @@ export const generateAdditionalApiFiles = async (generateCommandState: GenerateC
                 verbose           : generateCommandState.flags.verbose,
                 excludeFiles      : generateCommandState.schema.excluded,
                 lockFiles         : generateCommandState.lockFiles,
+                additionalApi,
                 templateData      : {
                     ...generateCommandState,
                     resolverType        : ResolverType,

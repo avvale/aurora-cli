@@ -2,6 +2,7 @@
 import { Command } from '@oclif/core';
 import { GenerateCommandState, LockFile, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
+import { AdditionalApi } from './additional-api';
 import { Property } from './property';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -27,6 +28,7 @@ export class TemplateGenerator
             boundedContextName = '',
             moduleName = '',
             moduleNames = '',
+            additionalApi,
             force = false,
             verbose = false,
             excludeFiles = [],
@@ -38,6 +40,7 @@ export class TemplateGenerator
             boundedContextName?: string;
             moduleName?: string;
             moduleNames?: string;
+            additionalApi?: AdditionalApi;
             force?: boolean;
             verbose?: boolean;
             excludeFiles?: string[];
@@ -61,6 +64,7 @@ export class TemplateGenerator
                 boundedContextName,
                 moduleName,
                 moduleNames,
+                additionalApi,
                 force,
                 verbose,
                 excludeFiles,

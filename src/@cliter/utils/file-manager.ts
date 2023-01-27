@@ -5,16 +5,15 @@ import { Cypher } from './cypher';
 import { Property } from './property';
 import { AdditionalApi } from './additional-api';
 import { GlobalState } from '../store';
+import { LockFile } from '../types';
 import templateEngine from './template-engine';
 import * as chalk from 'chalk';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as _ from 'lodash';
-import { LockFile } from '../types';
 
 export class FileManager
 {
-    // TODO método no usado, prueba para nuevo aproach sin usar state métodos de utilidades
     /**
      * Render filename and folder name
      * @param {string} name - name that include key to replace
@@ -26,21 +25,21 @@ export class FileManager
             boundedContextName = '',
             moduleName = '',
             moduleNames = '',
+            additionalApi,
             boundedContextPrefix = '',
             boundedContextSuffix = '',
             moduleNamePrefix = '',
             moduleNameSuffix = '',
-            currentAdditionalApi,
             currentProperty,
         }: {
             boundedContextName?: string;
             moduleName?: string;
             moduleNames?: string;
+            additionalApi?: AdditionalApi;
             boundedContextPrefix?: string;
             boundedContextSuffix?: string;
             moduleNamePrefix?: string;
             moduleNameSuffix?: string; // use to set i18n items
-            currentAdditionalApi?: AdditionalApi;
             currentProperty?: Property;
         } = {},
     ): string
@@ -65,7 +64,7 @@ export class FileManager
 
         if (name.includes('__additional_api_name__'))
         {
-            name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (currentAdditionalApi ? currentAdditionalApi.getApiFileName : ''));
+            name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (additionalApi ? additionalApi.getApiFileName : ''));
         }
 
         if (name.includes('__property_name__') && currentProperty)
@@ -131,6 +130,7 @@ export class FileManager
             boundedContextName = '',
             moduleName = '',
             moduleNames = '',
+            additionalApi,
             force = false,
             verbose = false,
             excludeFiles = [],
@@ -142,6 +142,7 @@ export class FileManager
             boundedContextName?: string;
             moduleName?: string;
             moduleNames?: string;
+            additionalApi?: AdditionalApi;
             force?: boolean;
             verbose?: boolean;
             excludeFiles?: string[];
@@ -168,6 +169,7 @@ export class FileManager
                     boundedContextName,
                     moduleName,
                     moduleNames,
+                    additionalApi,
                 },
             );
 
@@ -208,6 +210,7 @@ export class FileManager
                         boundedContextName,
                         moduleName,
                         moduleNames,
+                        additionalApi,
                         currentProperty,
                         useTemplateEngine,
                     },
@@ -236,6 +239,7 @@ export class FileManager
                         boundedContextName,
                         moduleName,
                         moduleNames,
+                        additionalApi,
                         force,
                         verbose,
                         excludeFiles,
@@ -276,6 +280,7 @@ export class FileManager
             boundedContextSuffix = '',
             moduleNamePrefix = '',
             moduleNameSuffix = '',
+            additionalApi,
             currentProperty,
             useTemplateEngine = true,
         }: {
@@ -291,6 +296,7 @@ export class FileManager
             boundedContextSuffix?: string;
             moduleNamePrefix?: string;
             moduleNameSuffix?: string; // use to set i18n items
+            additionalApi?: AdditionalApi;
             currentProperty?: Property;
             useTemplateEngine?: boolean;
         } = {},
@@ -303,6 +309,7 @@ export class FileManager
                 boundedContextName,
                 moduleName,
                 moduleNames,
+                additionalApi,
                 boundedContextPrefix,
                 boundedContextSuffix,
                 moduleNamePrefix,
