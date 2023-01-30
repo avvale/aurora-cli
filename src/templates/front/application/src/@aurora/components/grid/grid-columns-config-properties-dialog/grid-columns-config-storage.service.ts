@@ -83,7 +83,10 @@ export class GridColumnsConfigStorageService implements OnDestroy
                 takeUntil(this.unsubscribeAll$),
                 map(response =>
                 {
-                    const columnConfigStorage = Array.isArray(response.columnsConfigStorage) ? response.columnsConfigStorage[id] : undefined;
+                    // check if the columnsConfigStorage exists and has columnsConfigStorage key
+                    const columnConfigStorage = response?.columnsConfigStorage ?
+                        response.columnsConfigStorage[id] :
+                        undefined;
 
                     // we use spread operator to break the origin config reference to avoid changing changes
                     if (!columnConfigStorage) return cloneDeep(originColumnsConfig);
