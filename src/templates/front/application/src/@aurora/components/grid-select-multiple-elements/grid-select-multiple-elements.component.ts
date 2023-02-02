@@ -24,7 +24,7 @@ export class GridSelectMultipleElementsComponent
     @Input() label: string;
 
     // grid dialog
-    @Input() dialogGridId: string = 'grid';
+    @Input() dialogGridId: string = 'dialogGrid';
     @Input() dialogTitle: string;
     @Input() dialogColumnsConfig: ColumnConfig[];
     @Input() dialogOriginColumnsConfig: ColumnConfig[];

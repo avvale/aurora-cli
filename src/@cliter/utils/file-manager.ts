@@ -136,7 +136,7 @@ export class FileManager
             excludeFiles = [],
             lockFiles = [],
             templateData = {},
-            currentProperty, // property to render value object
+            currentProperty, // property to render value object or pivot table
             useTemplateEngine = true,
         }: {
             boundedContextName?: string;

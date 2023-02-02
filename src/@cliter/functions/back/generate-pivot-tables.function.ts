@@ -1,6 +1,7 @@
+/* eslint-disable no-await-in-loop */
 import * as path from 'node:path';
 import { cliterConfig } from '../../config';
-import { GenerateCommandState, TemplateElement } from '../../types';
+import { GenerateCommandState, SqlRelationship, TemplateElement } from '../../types';
 import { FileManager, TemplateGenerator } from '../../utils';
 
 export const generatePivotTables = async (generateCommandState: GenerateCommandState): Promise<void> =>
@@ -10,7 +11,29 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
         // only create table if has in pivotPath
         if (property.pivotPath === `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`)
         {
-            FileManager.generateContents(
+            // create module files
+            await TemplateGenerator.generateStaticContents(
+                generateCommandState.command,
+                TemplateElement.BACK_PIVOT,
+                path.join('src', cliterConfig.appContainer),
+                generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+                {
+                    boundedContextName: generateCommandState.schema.boundedContextName,
+                    moduleName        : generateCommandState.schema.moduleName,
+                    moduleNames       : generateCommandState.schema.moduleNames,
+                    force             : generateCommandState.flags.force,
+                    verbose           : generateCommandState.flags.verbose,
+                    excludeFiles      : generateCommandState.schema.excluded,
+                    lockFiles         : generateCommandState.lockFiles,
+                    templateData      : {
+                        ...generateCommandState,
+                        relationship: SqlRelationship,
+                    },
+                    currentProperty: property,
+                },
+            );
+
+            /* FileManager.generateContents(
                 generateCommandState.command,
                 path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_PIVOT.split('/')),
                 path.join('src', cliterConfig.appContainer), // relativeTargetBasePath
@@ -26,7 +49,7 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
                     templateData      : { ...generateCommandState },
                     currentProperty   : property,
                 },
-            );
+            ); */
         }
     }
 };

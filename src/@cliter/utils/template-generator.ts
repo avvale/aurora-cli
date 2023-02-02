@@ -18,7 +18,10 @@ export class TemplateGenerator
 
     public static readonly projectDirectory: string = process.cwd();
 
-    // generate static files from templates folder, with templateElement know that type of element create, bounded_context, module, etc.
+    // generate static files from templates folder,
+    // with templateElement know that type of element create, bounded_context, module, etc.
+    // makes a wrapper of generateContents to centralize the content generation calls
+    // from the template generator
     static generateStaticContents(
         command: Command,
         templateElement: TemplateElement,
@@ -34,6 +37,7 @@ export class TemplateGenerator
             excludeFiles = [],
             lockFiles = [],
             templateData = {},
+            currentProperty, // property to render value object or pivot table
             useTemplateEngine = true,
             templateElementPath,
         }: {
@@ -46,6 +50,7 @@ export class TemplateGenerator
             excludeFiles?: string[];
             lockFiles?: LockFile[];
             templateData?: any;
+            currentProperty?: Property;
             useTemplateEngine?: boolean;
             templateElementPath?: string;
         } = {},
@@ -70,6 +75,7 @@ export class TemplateGenerator
                 excludeFiles,
                 lockFiles,
                 templateData,
+                currentProperty,
                 useTemplateEngine,
             },
         );

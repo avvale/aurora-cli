@@ -8,23 +8,6 @@ export class GridTranslationsService
     // custom messages
     columnMessages: { [key: string]: { [key: string]: BehaviorSubject<string>; }; } = {};
     actionsMenuMessages: { [key: string]: BehaviorSubject<{ [key: string]: string; }>; } = {};
-    defaultMessages: GridMessages = {
-        actions           : new BehaviorSubject<string>('Actions'),
-        AND               : new BehaviorSubject<string>('AND'),
-        clearFilters      : new BehaviorSubject<string>('Clear filters'),
-        clickAndDragInfo  : new BehaviorSubject<string>('Click on a column and drag it to change its position'),
-        columns           : new BehaviorSubject<string>('Columns'),
-        field             : new BehaviorSubject<string>('Field'),
-        filter            : new BehaviorSubject<string>('Filter'),
-        noData            : new BehaviorSubject<string>('No data to show'),
-        operator          : new BehaviorSubject<string>('Operator'),
-        OR                : new BehaviorSubject<string>('OR'),
-        pleaseSelectField : new BehaviorSubject<string>('Please select a field'),
-        resetColumnsConfig: new BehaviorSubject<string>('Reset columns config'),
-        search            : new BehaviorSubject<string>('Search'),
-        translations      : new BehaviorSubject<string>('Translations'),
-        value             : new BehaviorSubject<string>('Value'),
-    };
     messages: { [key: string]: GridMessages; } = {};
     defaultOperatorsMessages: GridOperatorsMessages = {
         contains        : 'Contains',
@@ -57,6 +40,28 @@ export class GridTranslationsService
         {
             this.columnMessages[scope] = {};
         }
+    }
+
+    private createDefaultMessages(): GridMessages
+    {
+        // return new instance to avoid reference
+        return {
+            actions           : new BehaviorSubject<string>('Actions'),
+            AND               : new BehaviorSubject<string>('AND'),
+            clearFilters      : new BehaviorSubject<string>('Clear filters'),
+            clickAndDragInfo  : new BehaviorSubject<string>('Click on a column and drag it to change its position'),
+            columns           : new BehaviorSubject<string>('Columns'),
+            field             : new BehaviorSubject<string>('Field'),
+            filter            : new BehaviorSubject<string>('Filter'),
+            noData            : new BehaviorSubject<string>('No data to show'),
+            operator          : new BehaviorSubject<string>('Operator'),
+            OR                : new BehaviorSubject<string>('OR'),
+            pleaseSelectField : new BehaviorSubject<string>('Please select a field'),
+            resetColumnsConfig: new BehaviorSubject<string>('Reset columns config'),
+            search            : new BehaviorSubject<string>('Search'),
+            translations      : new BehaviorSubject<string>('Translations'),
+            value             : new BehaviorSubject<string>('Value'),
+        };
     }
 
     setColumnMessage(scope: string, key: string, message: string): void
@@ -104,7 +109,7 @@ export class GridTranslationsService
     {
         if (!this.messages[scope])
         {
-            this.messages[scope] = { ...this.defaultMessages };
+            this.messages[scope] = this.createDefaultMessages();
         }
     }
 
