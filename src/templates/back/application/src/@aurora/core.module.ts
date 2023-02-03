@@ -3,12 +3,10 @@ import { CoreEnvironmentInformationController, CorePreparationRequestController,
 import { SharedModule } from './shared.module';
 import { GraphQLConfigModule } from './graphql/graphql-config.module';
 import { BootstrapService } from './services/bootstrap.service';
-import { MailerCLientModule } from './mailer/mailer-client.module';
 
 @Module({
     imports: [
         GraphQLConfigModule,
-        MailerCLientModule,
         SequelizeConfigModule,
         SharedModule,
     ],
