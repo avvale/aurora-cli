@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Post, Body, Headers } from '@nestjs/common';
+import { Body, Controller, Post, Headers } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { OAuthCreateCredentialsDto } from '../dto';
 
