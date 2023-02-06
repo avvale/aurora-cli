@@ -15,7 +15,7 @@ import { IamFindRoleByIdHandler } from '../handlers/iam-find-role-by-id.handler'
 @ApiTags('[iam] role')
 @Controller('iam/role/find')
 @Permissions('iam.role.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamFindRoleByIdController
 {
     constructor(

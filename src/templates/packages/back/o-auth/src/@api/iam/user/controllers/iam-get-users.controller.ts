@@ -15,7 +15,7 @@ import { IamGetUsersHandler } from '../handlers/iam-get-users.handler';
 @ApiTags('[iam] user')
 @Controller('iam/users/get')
 @Permissions('iam.user.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamGetUsersController
 {
     constructor(

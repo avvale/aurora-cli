@@ -13,7 +13,7 @@ import { Pagination } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.account.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamPaginateAccountsResolver
 {
     constructor(

@@ -15,7 +15,7 @@ import { IamUpdateTenantByIdHandler } from '../handlers/iam-update-tenant-by-id.
 @ApiTags('[iam] tenant')
 @Controller('iam/tenant/update')
 @Permissions('iam.tenant.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateTenantByIdController
 {
     constructor(

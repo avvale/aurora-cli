@@ -13,7 +13,7 @@ import { OAuthClient, OAuthUpdateClientByIdInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.client.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthUpdateClientByIdResolver
 {
     constructor(

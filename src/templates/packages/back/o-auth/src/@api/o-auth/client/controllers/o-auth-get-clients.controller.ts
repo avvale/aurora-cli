@@ -15,7 +15,7 @@ import { OAuthGetClientsHandler } from '../handlers/o-auth-get-clients.handler';
 @ApiTags('[o-auth] client')
 @Controller('o-auth/clients/get')
 @Permissions('oAuth.client.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthGetClientsController
 {
     constructor(

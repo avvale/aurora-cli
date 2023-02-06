@@ -13,7 +13,7 @@ import { OAuthScope, OAuthUpdateScopesInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.scope.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthUpdateScopesResolver
 {
     constructor(

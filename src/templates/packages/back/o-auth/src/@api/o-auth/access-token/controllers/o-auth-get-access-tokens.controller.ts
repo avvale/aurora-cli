@@ -15,7 +15,7 @@ import { OAuthGetAccessTokensHandler } from '../handlers/o-auth-get-access-token
 @ApiTags('[o-auth] access-token')
 @Controller('o-auth/access-tokens/get')
 @Permissions('oAuth.accessToken.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthGetAccessTokensController
 {
     constructor(

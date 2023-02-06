@@ -15,7 +15,7 @@ import { OAuthUpdateClientsHandler } from '../handlers/o-auth-update-clients.han
 @ApiTags('[o-auth] client')
 @Controller('o-auth/clients/update')
 @Permissions('oAuth.client.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthUpdateClientsController
 {
     constructor(

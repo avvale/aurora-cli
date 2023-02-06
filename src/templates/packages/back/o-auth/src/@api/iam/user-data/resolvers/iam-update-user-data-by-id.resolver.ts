@@ -14,7 +14,7 @@ import { AccountResponse } from '@app/iam/account/domain/account.response';
 
 @Resolver()
 @Permissions('iam.user-data.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateUserDataByIdResolver
 {
     constructor(

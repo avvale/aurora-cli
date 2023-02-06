@@ -14,7 +14,7 @@ import { OAuthPaginateAccessTokensHandler } from '../handlers/o-auth-paginate-ac
 @ApiTags('[o-auth] access-token')
 @Controller('o-auth/access-tokens/paginate')
 @Permissions('oAuth.accessToken.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthPaginateAccessTokensController
 {
     constructor(

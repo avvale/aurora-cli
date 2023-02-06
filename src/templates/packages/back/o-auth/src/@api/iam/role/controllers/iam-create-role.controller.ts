@@ -15,7 +15,7 @@ import { IamCreateRoleHandler } from '../handlers/iam-create-role.handler';
 @ApiTags('[iam] role')
 @Controller('iam/role/create')
 @Permissions('iam.role.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateRoleController
 {
     constructor(

@@ -15,7 +15,7 @@ import { OAuthDeleteAccessTokenByIdHandler } from '../handlers/o-auth-delete-acc
 @ApiTags('[o-auth] access-token')
 @Controller('o-auth/access-token/delete')
 @Permissions('oAuth.accessToken.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteAccessTokenByIdController
 {
     constructor(

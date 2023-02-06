@@ -13,7 +13,7 @@ import { OAuthClient, OAuthCreateClientInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.client.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthCreateClientResolver
 {
     constructor(

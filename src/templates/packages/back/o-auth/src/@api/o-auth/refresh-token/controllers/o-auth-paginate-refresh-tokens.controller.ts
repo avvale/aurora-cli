@@ -14,7 +14,7 @@ import { OAuthPaginateRefreshTokensHandler } from '../handlers/o-auth-paginate-r
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-tokens/paginate')
 @Permissions('oAuth.refreshToken.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthPaginateRefreshTokensController
 {
     constructor(

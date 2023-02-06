@@ -11,7 +11,7 @@ import { IamMeAccountHandler } from '../handlers/iam-me-account.handler';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/me')
-@UseGuards(AuthenticationJwtGuard)
+@UseGuards(AuthenticationGuard)
 export class IamMeAccountController
 {
     constructor(

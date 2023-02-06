@@ -15,7 +15,7 @@ import { IamCreateTenantHandler } from '../handlers/iam-create-tenant.handler';
 @ApiTags('[iam] tenant')
 @Controller('iam/tenant/create')
 @Permissions('iam.tenant.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateTenantController
 {
     constructor(

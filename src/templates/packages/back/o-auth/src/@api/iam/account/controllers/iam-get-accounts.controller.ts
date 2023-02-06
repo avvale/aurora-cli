@@ -15,7 +15,7 @@ import { IamGetAccountsHandler } from '../handlers/iam-get-accounts.handler';
 @ApiTags('[iam] account')
 @Controller('iam/accounts/get')
 @Permissions('iam.account.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamGetAccountsController
 {
     constructor(

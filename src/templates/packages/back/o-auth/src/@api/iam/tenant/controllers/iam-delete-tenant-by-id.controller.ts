@@ -15,7 +15,7 @@ import { IamDeleteTenantByIdHandler } from '../handlers/iam-delete-tenant-by-id.
 @ApiTags('[iam] tenant')
 @Controller('iam/tenant/delete')
 @Permissions('iam.tenant.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteTenantByIdController
 {
     constructor(

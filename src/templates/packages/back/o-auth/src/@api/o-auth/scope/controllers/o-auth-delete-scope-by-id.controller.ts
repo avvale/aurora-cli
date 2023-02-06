@@ -15,7 +15,7 @@ import { OAuthDeleteScopeByIdHandler } from '../handlers/o-auth-delete-scope-by-
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scope/delete')
 @Permissions('oAuth.scope.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteScopeByIdController
 {
     constructor(

@@ -15,7 +15,7 @@ import { OAuthCreateScopeHandler } from '../handlers/o-auth-create-scope.handler
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scope/create')
 @Permissions('oAuth.scope.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthCreateScopeController
 {
     constructor(

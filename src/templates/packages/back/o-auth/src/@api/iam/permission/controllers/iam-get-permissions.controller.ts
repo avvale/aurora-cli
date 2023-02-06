@@ -15,7 +15,7 @@ import { IamGetPermissionsHandler } from '../handlers/iam-get-permissions.handle
 @ApiTags('[iam] permission')
 @Controller('iam/permissions/get')
 @Permissions('iam.permission.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamGetPermissionsController
 {
     constructor(

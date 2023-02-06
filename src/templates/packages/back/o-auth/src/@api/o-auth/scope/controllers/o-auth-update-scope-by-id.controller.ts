@@ -15,7 +15,7 @@ import { OAuthUpdateScopeByIdHandler } from '../handlers/o-auth-update-scope-by-
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scope/update')
 @Permissions('oAuth.scope.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthUpdateScopeByIdController
 {
     constructor(

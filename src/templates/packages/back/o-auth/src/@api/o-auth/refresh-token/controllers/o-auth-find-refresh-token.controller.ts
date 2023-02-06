@@ -15,7 +15,7 @@ import { OAuthFindRefreshTokenHandler } from '../handlers/o-auth-find-refresh-to
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-token/find')
 @Permissions('oAuth.refreshToken.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthFindRefreshTokenController
 {
     constructor(

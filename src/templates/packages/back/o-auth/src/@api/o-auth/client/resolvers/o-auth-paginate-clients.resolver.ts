@@ -13,7 +13,7 @@ import { Pagination } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.client.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthPaginateClientsResolver
 {
     constructor(

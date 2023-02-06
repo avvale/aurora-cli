@@ -14,7 +14,7 @@ import { IamPaginateBoundedContextsHandler } from '../handlers/iam-paginate-boun
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/paginate')
 @Permissions('iam.boundedContext.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamPaginateBoundedContextsController
 {
     constructor(

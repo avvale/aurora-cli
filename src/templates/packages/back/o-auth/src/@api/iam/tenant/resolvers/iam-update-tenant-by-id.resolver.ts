@@ -13,7 +13,7 @@ import { IamTenant, IamUpdateTenantByIdInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.tenant.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateTenantByIdResolver
 {
     constructor(

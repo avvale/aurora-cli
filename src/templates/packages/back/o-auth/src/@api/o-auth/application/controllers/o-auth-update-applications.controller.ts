@@ -15,7 +15,7 @@ import { OAuthUpdateApplicationsHandler } from '../handlers/o-auth-update-applic
 @ApiTags('[o-auth] application')
 @Controller('o-auth/applications/update')
 @Permissions('oAuth.application.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthUpdateApplicationsController
 {
     constructor(

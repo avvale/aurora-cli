@@ -15,7 +15,7 @@ import { OAuthUpdateClientByIdHandler } from '../handlers/o-auth-update-client-b
 @ApiTags('[o-auth] client')
 @Controller('o-auth/client/update')
 @Permissions('oAuth.client.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthUpdateClientByIdController
 {
     constructor(

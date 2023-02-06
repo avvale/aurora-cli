@@ -14,7 +14,7 @@ import { IamPaginateRolesHandler } from '../handlers/iam-paginate-roles.handler'
 @ApiTags('[iam] role')
 @Controller('iam/roles/paginate')
 @Permissions('iam.role.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamPaginateRolesController
 {
     constructor(

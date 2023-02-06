@@ -13,7 +13,7 @@ import { IamAccount, IamCreateAccountInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.account.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateAccountResolver
 {
     constructor(

@@ -15,7 +15,7 @@ import { IamDeleteBoundedContextsHandler } from '../handlers/iam-delete-bounded-
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/delete')
 @Permissions('iam.boundedContext.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteBoundedContextsController
 {
     constructor(

@@ -15,7 +15,7 @@ import { IamUpdateAccountByIdHandler } from '../handlers/iam-update-account-by-i
 @ApiTags('[iam] account')
 @Controller('iam/account/update')
 @Permissions('iam.account.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateAccountByIdController
 {
     constructor(

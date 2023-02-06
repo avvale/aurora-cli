@@ -13,7 +13,7 @@ import { IamPermission } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.permission.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamFindPermissionByIdResolver
 {
     constructor(

@@ -13,7 +13,7 @@ import { IamUser, IamUpdateUsersInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.user.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateUsersResolver
 {
     constructor(

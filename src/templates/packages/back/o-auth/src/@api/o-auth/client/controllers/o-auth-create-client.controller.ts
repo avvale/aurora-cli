@@ -15,7 +15,7 @@ import { OAuthCreateClientHandler } from '../handlers/o-auth-create-client.handl
 @ApiTags('[o-auth] client')
 @Controller('o-auth/client/create')
 @Permissions('oAuth.client.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthCreateClientController
 {
     constructor(

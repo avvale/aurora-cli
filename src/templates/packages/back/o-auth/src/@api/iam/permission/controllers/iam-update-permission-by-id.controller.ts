@@ -15,7 +15,7 @@ import { IamUpdatePermissionByIdHandler } from '../handlers/iam-update-permissio
 @ApiTags('[iam] permission')
 @Controller('iam/permission/update')
 @Permissions('iam.permission.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdatePermissionByIdController
 {
     constructor(

@@ -15,7 +15,7 @@ import { OAuthCreateApplicationHandler } from '../handlers/o-auth-create-applica
 @ApiTags('[o-auth] application')
 @Controller('o-auth/application/create')
 @Permissions('oAuth.application.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthCreateApplicationController
 {
     constructor(

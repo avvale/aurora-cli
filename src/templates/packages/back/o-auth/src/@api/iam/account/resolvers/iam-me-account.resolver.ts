@@ -8,7 +8,7 @@ import { AuthenticationJwtGuard } from '../../../o-auth/shared/guards/authentica
 // @app
 import { IamMeAccountHandler } from '../handlers/iam-me-account.handler';
 @Resolver()
-@UseGuards(AuthenticationJwtGuard)
+@UseGuards(AuthenticationGuard)
 export class IamMeAccountResolver
 {
     constructor(

@@ -14,7 +14,7 @@ import { OAuthPaginateApplicationsHandler } from '../handlers/o-auth-paginate-ap
 @ApiTags('[o-auth] application')
 @Controller('o-auth/applications/paginate')
 @Permissions('oAuth.application.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthPaginateApplicationsController
 {
     constructor(

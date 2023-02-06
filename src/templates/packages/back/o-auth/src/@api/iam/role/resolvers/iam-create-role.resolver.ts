@@ -13,7 +13,7 @@ import { IamRole, IamCreateRoleInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.role.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateRoleResolver
 {
     constructor(

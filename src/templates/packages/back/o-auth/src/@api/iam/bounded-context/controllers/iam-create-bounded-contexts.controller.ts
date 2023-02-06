@@ -15,7 +15,7 @@ import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/create')
 @Permissions('iam.boundedContext.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateBoundedContextsController
 {
     constructor(

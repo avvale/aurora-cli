@@ -15,7 +15,7 @@ import { OAuthDeleteApplicationsHandler } from '../handlers/o-auth-delete-applic
 @ApiTags('[o-auth] application')
 @Controller('o-auth/applications/delete')
 @Permissions('oAuth.application.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteApplicationsController
 {
     constructor(

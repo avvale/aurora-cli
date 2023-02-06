@@ -13,7 +13,7 @@ import { OAuthCreateScopeInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.scope.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthCreateScopesResolver
 {
     constructor(

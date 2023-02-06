@@ -13,7 +13,7 @@ import { OAuthClient } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.client.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteClientByIdResolver
 {
     constructor(

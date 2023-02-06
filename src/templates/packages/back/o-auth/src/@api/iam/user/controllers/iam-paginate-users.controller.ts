@@ -14,7 +14,7 @@ import { IamPaginateUsersHandler } from '../handlers/iam-paginate-users.handler'
 @ApiTags('[iam] user')
 @Controller('iam/users/paginate')
 @Permissions('iam.user.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamPaginateUsersController
 {
     constructor(

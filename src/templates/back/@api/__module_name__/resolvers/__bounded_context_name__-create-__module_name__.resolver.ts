@@ -2,19 +2,12 @@
 import { UseGuards } from '@nestjs/common';
 {{/if}}
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}Timezone } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasAuditing}}
 
 // auditing
 import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
 import { AuditingMeta } from '@api/auditing/auditing.types';
-{{/if}}
-{{#if schema.hasOAuth}}
-
-// authorization
-import { Permissions } from '{{ config.apiContainer }}/iam/shared/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
 {{/if}}
 {{#if schema.hasTenant}}
 
@@ -31,7 +24,7 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 @Resolver()
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 {{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver
 {

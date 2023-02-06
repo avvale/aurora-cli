@@ -1,15 +1,8 @@
 import { Controller, Param, Delete{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AddI18NConstraintService, ContentLanguage, ICommandBus, IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { AddI18NConstraintService, ContentLanguage, {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}ICommandBus, IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.moduleName }}Dto } from '../dto/{{ toKebabCase schema.moduleName }}.dto';
 
-{{#if schema.hasOAuth}}
-// authorization
-import { Permissions } from '{{ config.appContainer }}/iam/shared/domain/modules/auth/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '{{ config.appContainer }}/iam/shared/domain/modules/auth/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '{{ config.appContainer }}/iam/shared/domain/modules/auth/guards/authorization.guard';
-
-{{/if}}
 {{#if schema.hasTenant}}
 // tenant
 import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
@@ -25,7 +18,7 @@ import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand } from '{{ co
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}-i18n')
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 {{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NController
 {

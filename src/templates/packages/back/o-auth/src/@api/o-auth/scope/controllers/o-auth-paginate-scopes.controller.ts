@@ -14,7 +14,7 @@ import { OAuthPaginateScopesHandler } from '../handlers/o-auth-paginate-scopes.h
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scopes/paginate')
 @Permissions('oAuth.scope.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthPaginateScopesController
 {
     constructor(

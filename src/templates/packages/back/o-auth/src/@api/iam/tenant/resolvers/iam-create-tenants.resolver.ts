@@ -13,7 +13,7 @@ import { IamCreateTenantInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.tenant.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateTenantsResolver
 {
     constructor(

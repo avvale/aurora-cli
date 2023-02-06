@@ -13,7 +13,7 @@ import { IamBoundedContext, IamCreateBoundedContextInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.boundedContext.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateBoundedContextResolver
 {
     constructor(

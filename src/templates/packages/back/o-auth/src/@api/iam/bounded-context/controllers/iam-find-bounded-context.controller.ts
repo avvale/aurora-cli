@@ -15,7 +15,7 @@ import { IamFindBoundedContextHandler } from '../handlers/iam-find-bounded-conte
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-context/find')
 @Permissions('iam.boundedContext.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamFindBoundedContextController
 {
     constructor(

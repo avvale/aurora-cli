@@ -15,7 +15,7 @@ import { OAuthDeleteClientByIdHandler } from '../handlers/o-auth-delete-client-b
 @ApiTags('[o-auth] client')
 @Controller('o-auth/client/delete')
 @Permissions('oAuth.client.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteClientByIdController
 {
     constructor(

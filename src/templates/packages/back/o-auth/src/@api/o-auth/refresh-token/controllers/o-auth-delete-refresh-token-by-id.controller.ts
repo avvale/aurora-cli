@@ -15,7 +15,7 @@ import { OAuthDeleteRefreshTokenByIdHandler } from '../handlers/o-auth-delete-re
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-token/delete')
 @Permissions('oAuth.refreshToken.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteRefreshTokenByIdController
 {
     constructor(

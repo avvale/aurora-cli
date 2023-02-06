@@ -15,7 +15,7 @@ import { OAuthGetScopesHandler } from '../handlers/o-auth-get-scopes.handler';
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scopes/get')
 @Permissions('oAuth.scope.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthGetScopesController
 {
     constructor(

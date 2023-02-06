@@ -13,7 +13,7 @@ import { IamPermission } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.permission.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeletePermissionsResolver
 {
     constructor(

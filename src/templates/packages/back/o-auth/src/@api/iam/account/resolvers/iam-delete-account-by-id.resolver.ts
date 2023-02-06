@@ -13,7 +13,7 @@ import { IamAccount } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.account.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteAccountByIdResolver
 {
     constructor(

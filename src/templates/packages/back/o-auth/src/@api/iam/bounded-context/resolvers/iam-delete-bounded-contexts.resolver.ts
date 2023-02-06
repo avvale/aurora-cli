@@ -13,7 +13,7 @@ import { IamBoundedContext } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.boundedContext.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteBoundedContextsResolver
 {
     constructor(

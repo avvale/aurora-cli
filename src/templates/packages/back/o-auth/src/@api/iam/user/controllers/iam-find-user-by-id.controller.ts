@@ -15,7 +15,7 @@ import { IamFindUserByIdHandler } from '../handlers/iam-find-user-by-id.handler'
 @ApiTags('[iam] user')
 @Controller('iam/user/find')
 @Permissions('iam.user.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamFindUserByIdController
 {
     constructor(

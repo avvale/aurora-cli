@@ -15,7 +15,7 @@ import { IamDeleteUsersHandler } from '../handlers/iam-delete-users.handler';
 @ApiTags('[iam] user')
 @Controller('iam/users/delete')
 @Permissions('iam.user.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteUsersController
 {
     constructor(

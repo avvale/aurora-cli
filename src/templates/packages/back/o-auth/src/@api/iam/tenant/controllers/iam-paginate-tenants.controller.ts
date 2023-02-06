@@ -14,7 +14,7 @@ import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.hand
 @ApiTags('[iam] tenant')
 @Controller('iam/tenants/paginate')
 @Permissions('iam.tenant.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamPaginateTenantsController
 {
     constructor(

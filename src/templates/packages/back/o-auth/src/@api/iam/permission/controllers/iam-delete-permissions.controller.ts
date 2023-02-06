@@ -15,7 +15,7 @@ import { IamDeletePermissionsHandler } from '../handlers/iam-delete-permissions.
 @ApiTags('[iam] permission')
 @Controller('iam/permissions/delete')
 @Permissions('iam.permission.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeletePermissionsController
 {
     constructor(

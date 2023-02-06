@@ -15,7 +15,7 @@ import { OAuthGetApplicationsHandler } from '../handlers/o-auth-get-applications
 @ApiTags('[o-auth] application')
 @Controller('o-auth/applications/get')
 @Permissions('oAuth.application.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthGetApplicationsController
 {
     constructor(

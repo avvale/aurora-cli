@@ -14,7 +14,7 @@ import { OAuthPaginateClientsHandler } from '../handlers/o-auth-paginate-clients
 @ApiTags('[o-auth] client')
 @Controller('o-auth/clients/paginate')
 @Permissions('oAuth.client.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthPaginateClientsController
 {
     constructor(

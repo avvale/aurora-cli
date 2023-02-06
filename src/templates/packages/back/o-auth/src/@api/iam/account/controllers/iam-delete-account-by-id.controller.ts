@@ -15,7 +15,7 @@ import { IamDeleteAccountByIdHandler } from '../handlers/iam-delete-account-by-i
 @ApiTags('[iam] account')
 @Controller('iam/account/delete')
 @Permissions('iam.account.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteAccountByIdController
 {
     constructor(

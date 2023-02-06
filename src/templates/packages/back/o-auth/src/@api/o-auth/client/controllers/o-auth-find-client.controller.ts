@@ -15,7 +15,7 @@ import { OAuthFindClientHandler } from '../handlers/o-auth-find-client.handler';
 @ApiTags('[o-auth] client')
 @Controller('o-auth/client/find')
 @Permissions('oAuth.client.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthFindClientController
 {
     constructor(

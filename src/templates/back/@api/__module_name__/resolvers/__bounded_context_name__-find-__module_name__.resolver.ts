@@ -2,14 +2,7 @@
 import { UseGuards } from '@nestjs/common';
 {{/if}}
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-{{#if schema.hasOAuth}}
-
-// authorization
-import { Permissions } from '{{ config.apiContainer }}/iam/shared/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
-{{/if}}
+import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}{{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasTenant}}
 
 // tenant
@@ -25,7 +18,7 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 @Resolver()
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 {{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Resolver
 {

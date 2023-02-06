@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 {{else}}
@@ -12,13 +12,6 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 // auditing
 import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
 import { AuditingMeta } from '@api/auditing/auditing.types';
-{{/if}}
-{{#if schema.hasOAuth}}
-
-// authorization
-import { Permissions } from '{{ config.apiContainer }}/iam/shared/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
 {{/if}}
 {{#if schema.hasTenant}}
 
@@ -39,7 +32,7 @@ import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ c
 {{else}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
 {{/eq }}
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 {{/if}}
 export class {{ currentAdditionalApi.getClassName }}Controller
 {

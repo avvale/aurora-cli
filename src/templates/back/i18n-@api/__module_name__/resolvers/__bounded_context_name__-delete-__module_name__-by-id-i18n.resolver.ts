@@ -1,14 +1,6 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AddI18NConstraintService, ContentLanguage, ICommandBus, IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { AddI18NConstraintService, ContentLanguage, {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}ICommandBus, IQueryBus, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 
-{{#if schema.hasOAuth}}
-// authorization
-import { UseGuards } from '@nestjs/common';
-import { Permissions } from '{{ config.appContainer }}/iam/shared/domain/modules/auth/decorators/permissions.decorator';
-import { AuthenticationJwtGuard } from '{{ config.appContainer }}/iam/shared/domain/modules/auth/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '{{ config.appContainer }}/iam/shared/domain/modules/auth/guards/authorization.guard';
-
-{{/if}}
 {{#if schema.hasTenant}}
 // tenant
 import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
@@ -23,7 +15,7 @@ import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand } from '{{ co
 @Resolver()
 {{#if schema.hasOAuth}}
 @Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 {{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18NResolver
 {

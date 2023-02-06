@@ -13,7 +13,7 @@ import { IamUserData } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.user-data.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamFindUserDataByIdResolver
 {
     constructor(

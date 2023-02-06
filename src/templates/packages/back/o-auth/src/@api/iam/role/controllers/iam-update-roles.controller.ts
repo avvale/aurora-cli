@@ -15,7 +15,7 @@ import { IamUpdateRolesHandler } from '../handlers/iam-update-roles.handler';
 @ApiTags('[iam] role')
 @Controller('iam/roles/update')
 @Permissions('iam.role.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateRolesController
 {
     constructor(

@@ -13,7 +13,7 @@ import { OAuthScope } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.scope.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteScopesResolver
 {
     constructor(

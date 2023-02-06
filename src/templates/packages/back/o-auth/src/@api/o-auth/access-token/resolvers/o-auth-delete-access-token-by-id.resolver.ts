@@ -13,7 +13,7 @@ import { OAuthAccessToken } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.accessToken.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthDeleteAccessTokenByIdResolver
 {
     constructor(

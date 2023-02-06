@@ -15,7 +15,7 @@ import { OAuthFindApplicationHandler } from '../handlers/o-auth-find-application
 @ApiTags('[o-auth] application')
 @Controller('o-auth/application/find')
 @Permissions('oAuth.application.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthFindApplicationController
 {
     constructor(

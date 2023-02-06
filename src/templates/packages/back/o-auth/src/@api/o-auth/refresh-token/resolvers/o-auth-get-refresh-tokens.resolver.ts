@@ -13,7 +13,7 @@ import { OAuthRefreshToken } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.refreshToken.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthGetRefreshTokensResolver
 {
     constructor(

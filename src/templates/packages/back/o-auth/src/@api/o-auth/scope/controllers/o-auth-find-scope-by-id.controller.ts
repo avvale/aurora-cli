@@ -15,7 +15,7 @@ import { OAuthFindScopeByIdHandler } from '../handlers/o-auth-find-scope-by-id.h
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scope/find')
 @Permissions('oAuth.scope.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthFindScopeByIdController
 {
     constructor(

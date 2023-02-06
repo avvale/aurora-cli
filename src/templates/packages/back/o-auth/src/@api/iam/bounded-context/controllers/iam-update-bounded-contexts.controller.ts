@@ -15,7 +15,7 @@ import { IamUpdateBoundedContextsHandler } from '../handlers/iam-update-bounded-
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/update')
 @Permissions('iam.boundedContext.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateBoundedContextsController
 {
     constructor(

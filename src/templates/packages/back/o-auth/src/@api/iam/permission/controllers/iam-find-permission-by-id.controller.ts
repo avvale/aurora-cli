@@ -15,7 +15,7 @@ import { IamFindPermissionByIdHandler } from '../handlers/iam-find-permission-by
 @ApiTags('[iam] permission')
 @Controller('iam/permission/find')
 @Permissions('iam.permission.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamFindPermissionByIdController
 {
     constructor(

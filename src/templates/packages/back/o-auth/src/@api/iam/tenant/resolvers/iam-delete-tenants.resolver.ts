@@ -13,7 +13,7 @@ import { IamTenant } from '@api/graphql';
 
 @Resolver()
 @Permissions('iam.tenant.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteTenantsResolver
 {
     constructor(

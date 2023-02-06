@@ -15,7 +15,7 @@ import { IamUpdateUsersHandler } from '../handlers/iam-update-users.handler';
 @ApiTags('[iam] user')
 @Controller('iam/users/update')
 @Permissions('iam.user.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateUsersController
 {
     constructor(

@@ -15,7 +15,7 @@ import { IamCreateUsersHandler } from '../handlers/iam-create-users.handler';
 @ApiTags('[iam] user')
 @Controller('iam/users/create')
 @Permissions('iam.user.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamCreateUsersController
 {
     constructor(

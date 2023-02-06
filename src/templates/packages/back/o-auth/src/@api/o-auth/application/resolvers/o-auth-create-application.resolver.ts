@@ -13,7 +13,7 @@ import { OAuthApplication, OAuthCreateApplicationInput } from '@api/graphql';
 
 @Resolver()
 @Permissions('oAuth.application.create')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthCreateApplicationResolver
 {
     constructor(

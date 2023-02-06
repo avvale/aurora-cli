@@ -13,7 +13,7 @@ import { IamBoundedContext, IamUpdateBoundedContextByIdInput } from '@api/graphq
 
 @Resolver()
 @Permissions('iam.boundedContext.update')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamUpdateBoundedContextByIdResolver
 {
     constructor(

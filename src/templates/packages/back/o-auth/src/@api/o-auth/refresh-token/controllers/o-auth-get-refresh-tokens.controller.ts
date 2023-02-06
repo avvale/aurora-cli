@@ -15,7 +15,7 @@ import { OAuthGetRefreshTokensHandler } from '../handlers/o-auth-get-refresh-tok
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-tokens/get')
 @Permissions('oAuth.refreshToken.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class OAuthGetRefreshTokensController
 {
     constructor(

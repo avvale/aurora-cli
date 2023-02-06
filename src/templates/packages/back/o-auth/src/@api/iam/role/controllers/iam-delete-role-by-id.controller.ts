@@ -15,7 +15,7 @@ import { IamDeleteRoleByIdHandler } from '../handlers/iam-delete-role-by-id.hand
 @ApiTags('[iam] role')
 @Controller('iam/role/delete')
 @Permissions('iam.role.delete')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamDeleteRoleByIdController
 {
     constructor(

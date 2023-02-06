@@ -15,7 +15,7 @@ import { IamFindTenantHandler } from '../handlers/iam-find-tenant.handler';
 @ApiTags('[iam] tenant')
 @Controller('iam/tenant/find')
 @Permissions('iam.tenant.get')
-@UseGuards(AuthenticationJwtGuard, AuthorizationGuard)
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
 export class IamFindTenantController
 {
     constructor(
