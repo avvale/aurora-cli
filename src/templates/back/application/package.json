@@ -25,7 +25,6 @@
   "dependencies": {
     "@aurora-ts/core": "^2.0.0",
     "@nestjs/apollo": "^10.1.7",
-    "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
