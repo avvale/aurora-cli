@@ -1,0 +1,127 @@
+enum AuditingHttpCommunicationEvent {
+    REQUEST_FULFILLED
+    REQUEST_REJECTED
+    RESPONSE_FULFILLED
+    RESPONSE_REJECTED
+}
+
+
+type AuditingHttpCommunication
+{
+    id: ID!
+    code: GraphQLString
+    event: AuditingHttpCommunicationEvent!
+    status: GraphQLInt
+    method: GraphQLString!
+    url: GraphQLString!
+    httpRequest: JSON
+    httpRequestRejected: JSON
+    httpResponse: JSON
+    httpResponseRejected: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input AuditingCreateHttpCommunicationInput
+{
+    id: ID!
+    code: GraphQLString
+    event: AuditingHttpCommunicationEvent!
+    status: GraphQLInt
+    method: GraphQLString!
+    url: GraphQLString!
+    httpRequest: JSON
+    httpRequestRejected: JSON
+    httpResponse: JSON
+    httpResponseRejected: JSON
+}
+
+input AuditingUpdateHttpCommunicationByIdInput
+{
+    id: ID!
+    code: GraphQLString
+    event: AuditingHttpCommunicationEvent
+    status: GraphQLInt
+    method: GraphQLString
+    url: GraphQLString
+    httpRequest: JSON
+    httpRequestRejected: JSON
+    httpResponse: JSON
+    httpResponseRejected: JSON
+}
+
+input AuditingUpdateHttpCommunicationsInput
+{
+    id: ID
+    code: GraphQLString
+    event: AuditingHttpCommunicationEvent
+    status: GraphQLInt
+    method: GraphQLString
+    url: GraphQLString
+    httpRequest: JSON
+    httpRequestRejected: JSON
+    httpResponse: JSON
+    httpResponseRejected: JSON
+}
+
+type Query
+{
+    auditingFindHttpCommunication(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): AuditingHttpCommunication
+
+    auditingFindHttpCommunicationById(
+        id: ID
+        constraint: QueryStatement
+    ): AuditingHttpCommunication
+
+    auditingGetHttpCommunications(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [AuditingHttpCommunication]!
+
+    auditingPaginateHttpCommunications(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    auditingCreateHttpCommunication(
+        payload: AuditingCreateHttpCommunicationInput!
+    ): AuditingHttpCommunication
+
+    auditingCreateHttpCommunications(
+        payload: [AuditingCreateHttpCommunicationInput]!
+    ): Boolean!
+
+    auditingUpdateHttpCommunicationById(
+        payload: AuditingUpdateHttpCommunicationByIdInput!
+        constraint: QueryStatement
+    ): AuditingHttpCommunication
+
+    auditingUpdateHttpCommunications(
+        payload: AuditingUpdateHttpCommunicationsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [AuditingHttpCommunication]!
+
+    auditingUpsertHttpCommunication(
+        payload: AuditingUpdateHttpCommunicationByIdInput!
+    ): AuditingHttpCommunication
+
+    auditingDeleteHttpCommunicationById(
+        id: ID!
+        constraint: QueryStatement
+    ): AuditingHttpCommunication
+
+    auditingDeleteHttpCommunications(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [AuditingHttpCommunication]!
+
+}

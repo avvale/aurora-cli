@@ -1,0 +1,785 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/@app/auditing/auditing.seed.ts",
+            "integrity": "sha1:2ac951e6d55f769aca02d80287d143ef05405dd8"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effect.command-handler.spec.ts",
+            "integrity": "sha1:03ed78c9d3a1a33f145552abdf39aebde1a09557"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effect.command-handler.ts",
+            "integrity": "sha1:1e6b7e95bec43263df9165641f2d976ba92ceb87"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effect.command.ts",
+            "integrity": "sha1:53a25fca4c5a80159ee96f1c7fd03a6852584412"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effect.service.spec.ts",
+            "integrity": "sha1:50340975137bf577d37d0f5720dd216ab059181c"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effect.service.ts",
+            "integrity": "sha1:a89823eaf541ee8fa60763082b4c0fe228ba2b6f"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effects.command-handler.spec.ts",
+            "integrity": "sha1:70b986e71d7930c30bba4324cbc0dc639ae0ccc1"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effects.command-handler.ts",
+            "integrity": "sha1:56c1ccfbee2e8c9008a860e2c3c4b65c663a86a8"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effects.command.ts",
+            "integrity": "sha1:0520abc2c14c58863427c04c997cb0b2e3704c85"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effects.service.spec.ts",
+            "integrity": "sha1:fff6e4c2fda43a03cbed2b9786818ddfde786400"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/create/create-side-effects.service.ts",
+            "integrity": "sha1:2c80d65eb4bf16e4e76b68d515f7498a44193323"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effect-by-id.command-handler.spec.ts",
+            "integrity": "sha1:bc5e637b8873b38db53d787c47acdc610e6552f0"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effect-by-id.command-handler.ts",
+            "integrity": "sha1:5f9ff9546c95014aa78cbad2fc0544f977c54066"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effect-by-id.command.ts",
+            "integrity": "sha1:bb74a1553010c42e74e6036f609f95a48aacfbcb"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effect-by-id.service.spec.ts",
+            "integrity": "sha1:d4dfcc69083c322c4341997d9f3ed43329aa817a"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effect-by-id.service.ts",
+            "integrity": "sha1:0a0ad42fbf67d724247bc495434e87a728f1be54"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effects.command-handler.spec.ts",
+            "integrity": "sha1:58555f25da77c75cefc843839f47754c6f816289"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effects.command-handler.ts",
+            "integrity": "sha1:d673d2da1791834659fd1a9c88574fa0281da536"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effects.command.ts",
+            "integrity": "sha1:16a9cfac37879f153cc756f206e890c8bbe84519"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effects.service.spec.ts",
+            "integrity": "sha1:babb705dda2a81ce22736e87d9298b1e7d89686e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/delete/delete-side-effects.service.ts",
+            "integrity": "sha1:476a8ca9a635b244284838f14d8f4c66dc5e9465"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/add-side-effects-context.event.ts",
+            "integrity": "sha1:aa5c36c78b5a435fa823a797187a9bbca5d4a840"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/created-side-effect.event-handler.ts",
+            "integrity": "sha1:072c27b517ef8fc2c51d89bd6691cc31cc6b156e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/created-side-effect.event.ts",
+            "integrity": "sha1:e57da8172bcbb7e80032a11c424ed012d0d203d2"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/created-side-effects.event-handler.ts",
+            "integrity": "sha1:ece112de666b70b62016fb7a5842b968a3b69a82"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/created-side-effects.event.ts",
+            "integrity": "sha1:f76591e78d7a29b47e0453f9a0a70396c3a7d5f9"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/deleted-side-effect.event-handler.ts",
+            "integrity": "sha1:7f48f4123159db02a1921b6b61bd0e542270ab94"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/deleted-side-effect.event.ts",
+            "integrity": "sha1:ebb4236c99456dc8e8543ba820fc510a5c335f5a"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/deleted-side-effects.event-handler.ts",
+            "integrity": "sha1:8d46b83df4ebb341021a3469e53a38749a038f7e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/deleted-side-effects.event.ts",
+            "integrity": "sha1:37cac56ee1997c739849da5b7dd06edfcd83cc8f"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/updated-side-effect.event-handler.ts",
+            "integrity": "sha1:93859b014c4b2d5880a9f7bfc2e41f3719182781"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/updated-side-effect.event.ts",
+            "integrity": "sha1:eb0d3c2e6fd7dc6e6b99c621f94f8c2feff596e8"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/updated-side-effects.event-handler.ts",
+            "integrity": "sha1:bf01205e9c8369c664f5d87d098271d67efa4c7c"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/events/updated-side-effects.event.ts",
+            "integrity": "sha1:341fa23f38d5930ca33a0727c6e9a6e79f899fd1"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect-by-id.query-handler.spec.ts",
+            "integrity": "sha1:d3cd64cd8b09279f8b478ec6aedd363dfdd3e854"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect-by-id.query-handler.ts",
+            "integrity": "sha1:0e103113dce5d58aa43a92bb9916426576be742f"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect-by-id.query.ts",
+            "integrity": "sha1:5edc5ece2824ecd8e018b7da17212e6e0bf03305"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect-by-id.service.spec.ts",
+            "integrity": "sha1:173a56ceeda353b5f20bec7cfd1206552a6ad736"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect-by-id.service.ts",
+            "integrity": "sha1:f95189eb010717d89b69f31ff384a0085a7c0ac7"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect.query-handler.spec.ts",
+            "integrity": "sha1:24fced037587dd5c5dceec74a492b034589526c4"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect.query-handler.ts",
+            "integrity": "sha1:b4417f2f5a3e4dd704a0396101befe35167f2812"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect.query.ts",
+            "integrity": "sha1:da219988eba85eca0058f679bb764ca9c7e91a16"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect.service.spec.ts",
+            "integrity": "sha1:d1198a72c7b319b903807b0b2ae6fd7ed7b4b778"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/find/find-side-effect.service.ts",
+            "integrity": "sha1:96ba2f69cab988b6ba1b2c41781c5f80a82310bf"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/get/get-side-effects.query-handler.spec.ts",
+            "integrity": "sha1:64f7ac7055516ccbb2bab5b87a0282e123cc1963"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/get/get-side-effects.query-handler.ts",
+            "integrity": "sha1:abe248cf5601188a117d00cac81c5a206f7c76f8"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/get/get-side-effects.query.ts",
+            "integrity": "sha1:3a3b844510fdb794f0ad506c13f4e241b6f20d11"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/get/get-side-effects.service.spec.ts",
+            "integrity": "sha1:5c4a7ea652af6e5a18d524ed5b3b502c45b32d3e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/get/get-side-effects.service.ts",
+            "integrity": "sha1:fa3d3e50330e54dc13b952d535d9080cb4212c03"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/paginate/paginate-side-effects.query-handler.spec.ts",
+            "integrity": "sha1:dd2e3bc4c7d77735648e49e4b705c8b802de0c30"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/paginate/paginate-side-effects.query-handler.ts",
+            "integrity": "sha1:8c1ed435d14b9525f3db6431b50dbe7bd33cac32"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/paginate/paginate-side-effects.query.ts",
+            "integrity": "sha1:01e80a9487ea4d0c2645fbe920cf5f9030c300c7"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/paginate/paginate-side-effects.service.spec.ts",
+            "integrity": "sha1:374019c90baf631da25d081901292b53f8f237b9"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/paginate/paginate-side-effects.service.ts",
+            "integrity": "sha1:91dd753e3b3936f8675347dfc53c957c5b235633"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/raw-sql/raw-sql-side-effects.query-handler.spec.ts",
+            "integrity": "sha1:cf2dfc69d0cb6630a8508422614e5ded015ebf57"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/raw-sql/raw-sql-side-effects.query-handler.ts",
+            "integrity": "sha1:591787ee140a4a9cd4dc08d840ae6e57b975c0b6"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/raw-sql/raw-sql-side-effects.query.ts",
+            "integrity": "sha1:a50981b92fb891a6815aacd9d98bbf41628f64fd"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/raw-sql/raw-sql-side-effects.service.spec.ts",
+            "integrity": "sha1:8816f346c2a3506c8cf62c1345b9b9a9665ef46a"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/raw-sql/raw-sql-side-effects.service.ts",
+            "integrity": "sha1:c8321ef6e0ad5b0d93b9c3d224de5e203ab2ba7c"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/sagas/side-effect.sagas.ts",
+            "integrity": "sha1:bf1b646699be219e0c2b12ac36385bab78368757"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effect-by-id.command-handler.spec.ts",
+            "integrity": "sha1:5bcefc9d7786d967c3eea7f7240ea9572eba508f"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effect-by-id.command-handler.ts",
+            "integrity": "sha1:877bbc8eb9a041b278461b066ef5e8326a381a66"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effect-by-id.command.ts",
+            "integrity": "sha1:0001daf48744c80ed853296ce7abd65465042633"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effect-by-id.service.spec.ts",
+            "integrity": "sha1:6af9151e0e52a3cb5eea080521217c4bcb113ce8"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effect-by-id.service.ts",
+            "integrity": "sha1:ce539e5fea0e8252a3f5cbef6ee81a96af3df0c1"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effects.command-handler.spec.ts",
+            "integrity": "sha1:c8c1d5229d3c216c933748c56870a2c461db58d5"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effects.command-handler.ts",
+            "integrity": "sha1:765eecd3a658d3fe95eb451b97c0010cbc33f404"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effects.command.ts",
+            "integrity": "sha1:a25243ba6259630c5d549dfb33e5e0d6e56da42f"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effects.service.spec.ts",
+            "integrity": "sha1:4f86d036aa0b4c714ac3c033a7a01d51682dd66a"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/update/update-side-effects.service.ts",
+            "integrity": "sha1:bb5a023d90480f4edaeaaffa922963461182262a"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/upsert/upsert-side-effect.command-handler.spec.ts",
+            "integrity": "sha1:1afb273dada87afe77b17289d94ace0dda697005"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/upsert/upsert-side-effect.command-handler.ts",
+            "integrity": "sha1:18bfbda8bb653fd6a3406496386098ee6c5c1a6e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/upsert/upsert-side-effect.command.ts",
+            "integrity": "sha1:d2908a8bce350b2ae8442ba95cac5d5fabb1beec"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/upsert/upsert-side-effect.service.spec.ts",
+            "integrity": "sha1:46f839c50f034aa98c3ffdb8db4a13170021025a"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/application/upsert/upsert-side-effect.service.ts",
+            "integrity": "sha1:2cf8c980b2f0a35ae3ecea25b0d6e2531d4078d8"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/side-effect.aggregate.ts",
+            "integrity": "sha1:7dcf81852b6a09641c1f1ab3f06af79fa19af29e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/side-effect.mapper.ts",
+            "integrity": "sha1:2a169889b59c970da03297bcabe99d05566ab52f"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/side-effect.repository.ts",
+            "integrity": "sha1:a84ee107436ad207f36f591c96050fccc8338741"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/side-effect.response.ts",
+            "integrity": "sha1:a155f24b83dbc94c729c45cc627eeabe55e49894"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/index.ts",
+            "integrity": "sha1:3618a59ecb2e166347612b4f9a6d394dd087e5da"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/index.ts",
+            "integrity": "sha1:cbfb014b9b7155aafebb5794a9f1920b64b3830e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/infrastructure/mock/mock-side-effect.repository.ts",
+            "integrity": "sha1:031ec23bb43a4ec437b09814c3625ce28fc14ddb"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/infrastructure/mock/mock-side-effect.seeder.ts",
+            "integrity": "sha1:02af0c89b7f2fbf824ea7e6bd7528270e34bdf20"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/infrastructure/seeds/side-effect.seed.ts",
+            "integrity": "sha1:5caac29f62e65979c2e5c02ceeb8f17b2369b6c7"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/infrastructure/sequelize/sequelize-side-effect.model.ts",
+            "integrity": "sha1:71253483d324e260ff28bcd142b3ed7b3988df2c"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/infrastructure/sequelize/sequelize-side-effect.repository.ts",
+            "integrity": "sha1:5c539fc9607a09e3c59253de5543a3344ad3af80"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-id.ts",
+            "integrity": "sha1:1a475f2ef51094a0bbe0a2cf59fa18c90d7ab642"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-model-path.ts",
+            "integrity": "sha1:0df30b652709c81a1e33e93d23e2c505affe4943"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-model-name.ts",
+            "integrity": "sha1:4ffc7a1bf52eaef0d72f58749e00f2e51fa389ba"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-operation-id.ts",
+            "integrity": "sha1:896949ef149d1481197b02d6eff6bbeab9e9facd"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-operation-sort.ts",
+            "integrity": "sha1:6554ea43067dd5ff0eaa794c1b14c2ab3bcc8df7"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-account-id.ts",
+            "integrity": "sha1:d0674e472081e3831603bcead4233e71ed3074eb"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-email.ts",
+            "integrity": "sha1:d5cb2a75913fadd0ea5bd94bcde2639cc3b965b2"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-event.ts",
+            "integrity": "sha1:aa6a4f59f22e5da97faf5b13ea7058f602603aa1"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-auditable-id.ts",
+            "integrity": "sha1:d35afaae319c6d8d2b17ce29e04bf09eddec2721"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-old-value.ts",
+            "integrity": "sha1:ab8ec21891de62735de0c127c48e9fb6145b24b6"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-new-value.ts",
+            "integrity": "sha1:d45dd90ce60482f15ac51bbfdc8ac149db3797ae"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-ip.ts",
+            "integrity": "sha1:eb3d5fd4f7f89c2921469491f2695209cdfcf396"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-method.ts",
+            "integrity": "sha1:f737f37a7179d0facd621d55774fc7075bf02515"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-base-url.ts",
+            "integrity": "sha1:a60f12a8eb073a8dd328e0cb5b559ba4bc40b57e"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-params.ts",
+            "integrity": "sha1:14c71b970961f067ec38b67f9e10edcc15da8ea6"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-query.ts",
+            "integrity": "sha1:2aaf13b13bd3b0a3459b8aadfbac6d9afa50401a"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-body.ts",
+            "integrity": "sha1:4fb92ed52cf0e3a86be9a4f9e6d34bda202bf0b9"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-user-agent.ts",
+            "integrity": "sha1:04f07f4cbc6327f04bf9caa69ae0dd375242eb23"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-tags.ts",
+            "integrity": "sha1:67426e00b4fa5dcda13d202ad3ecfc1a3f6bf7bf"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-is-rollback.ts",
+            "integrity": "sha1:72816b7343fa3977f43e3b435ab252031755eee9"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-rollback-side-effect-id.ts",
+            "integrity": "sha1:e5794b9e269f90ed8eb1b6a1752971a39638a8d3"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-created-at.ts",
+            "integrity": "sha1:fc0120d02860abe54429f2977dfaa86cb6c1f68b"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-updated-at.ts",
+            "integrity": "sha1:1014ef3873fb4de29d293d3b80d6fafde9332923"
+        },
+        {
+            "path": "src/@app/auditing/side-effect/domain/value-objects/side-effect-deleted-at.ts",
+            "integrity": "sha1:1863c9b2259d4b8c2eef2c3c7193d60a1745667b"
+        },
+        {
+            "path": "src/@api/auditing/auditing.seeder.ts",
+            "integrity": "sha1:4dfede84e1195d7cf507d466c478458e8a4e1094"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-create-side-effect.controller.spec.ts",
+            "integrity": "sha1:968b77e7aa816f9e2f45d07f947da9d3288cade3"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-create-side-effect.controller.ts",
+            "integrity": "sha1:f392c1c8bd38fca8672a8bca5aa377e4afedbdb7"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-create-side-effects.controller.spec.ts",
+            "integrity": "sha1:f513e8afce6336360737799f4988cca7173d81a3"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-create-side-effects.controller.ts",
+            "integrity": "sha1:452d3c71b8ed454bba8a856364d95b0b71162d08"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-delete-side-effect-by-id.controller.spec.ts",
+            "integrity": "sha1:214a40436b0329996efa582725c550c406699afa"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-delete-side-effect-by-id.controller.ts",
+            "integrity": "sha1:4c168ade41f0d64166dcf8cd653d59f77029d36e"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-delete-side-effects.controller.spec.ts",
+            "integrity": "sha1:d4f1d81d4bfb3ed99ede048821bceecd3b58506a"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-delete-side-effects.controller.ts",
+            "integrity": "sha1:efebb99037bd4e50a7da14a289bbb4ea589521df"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-find-side-effect-by-id.controller.spec.ts",
+            "integrity": "sha1:9a84c89ec1b7af199ada3f5ea582e7b47cff6015"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-find-side-effect-by-id.controller.ts",
+            "integrity": "sha1:61d9f5c8e8cc215194b391aeb69a18c195cbef94"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-find-side-effect.controller.spec.ts",
+            "integrity": "sha1:2f55d73519ca4da5d7fbd4decc0e4b5789b7dfe5"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-find-side-effect.controller.ts",
+            "integrity": "sha1:13a12c55ade794c34005246c07bc82290ed9cf95"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-get-side-effects.controller.spec.ts",
+            "integrity": "sha1:6ced0469a6875619e762bce890b8d0015f9e9c50"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-get-side-effects.controller.ts",
+            "integrity": "sha1:97d97a6a19b54c30cd07f2a3181e2771d029284e"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-paginate-side-effects.controller.spec.ts",
+            "integrity": "sha1:681db3a3df750682772987e5a6ab597a587497f1"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-paginate-side-effects.controller.ts",
+            "integrity": "sha1:97bd7e2f179f0be2fa25172ed8db76ec7a116993"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-update-side-effect-by-id.controller.spec.ts",
+            "integrity": "sha1:0451a5933a7570a59e5fd84c52f41f3cdb73e022"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-update-side-effect-by-id.controller.ts",
+            "integrity": "sha1:450e29aeb736da59c8dff92ded38c186a96da17e"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-update-side-effects.controller.spec.ts",
+            "integrity": "sha1:77a0c35d46cc95f17ae4166099f8a9dc32297ad6"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-update-side-effects.controller.ts",
+            "integrity": "sha1:6f8fd5d42657507334eac3cf072984ecb2e421d1"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-upsert-side-effect.controller.spec.ts",
+            "integrity": "sha1:923c0c1eaf18bf162bee9d4646c00d676df03573"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-upsert-side-effect.controller.ts",
+            "integrity": "sha1:9cac85f7a886363b9324a331432fa61ec0ea852d"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/dto/auditing-side-effect.dto.ts",
+            "integrity": "sha1:faa5c07a3862d677e4a6e5adfab5af2f22218d93"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/dto/auditing-create-side-effect.dto.ts",
+            "integrity": "sha1:bb686de16d8c13d6c0739a8dc4111bf260a7b87c"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/dto/auditing-update-side-effect-by-id.dto.ts",
+            "integrity": "sha1:39b491be6724fb7ce1708522fc987cbc93718357"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/dto/auditing-update-side-effects.dto.ts",
+            "integrity": "sha1:d6990055c5341e9ab86e3390669df999838af175"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/dto/index.ts",
+            "integrity": "sha1:e3024b0a3a1dffce2cf87a6beefbf9fcae6b7185"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/graphql/side-effect.graphql",
+            "integrity": "sha1:2ed067d07945aabcd39963c16b23156805b57412"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-create-side-effect.handler.spec.ts",
+            "integrity": "sha1:0202bbbaa1c2b5663b952eba0afa4b22ff64fe5e"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-create-side-effect.handler.ts",
+            "integrity": "sha1:3d94cf2f2df18e8779d4abbe61abfd1eb595ad99"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-create-side-effects.handler.spec.ts",
+            "integrity": "sha1:7f6de561c2298784ee0a66fb03c69cc1ced0c244"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-create-side-effects.handler.ts",
+            "integrity": "sha1:e74a9887e6e677a467d2a6815ff852738234aa35"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-delete-side-effect-by-id.handler.spec.ts",
+            "integrity": "sha1:bd1eb3605d6533b477bb722121f16ac66ea9bb76"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-delete-side-effect-by-id.handler.ts",
+            "integrity": "sha1:ccef6a64d777de3418dea4f6d510aa8ac28abf21"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-delete-side-effects.handler.spec.ts",
+            "integrity": "sha1:b0cbb8341368315eacfbc5f85a4ce6e388930ca3"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-delete-side-effects.handler.ts",
+            "integrity": "sha1:5a4bb5b2141ae731c0b4a2cfd04fbd4339f0e1c8"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-find-side-effect-by-id.handler.spec.ts",
+            "integrity": "sha1:3db2ecbae36a0615d68dbfe028e9b5b42c2236dd"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-find-side-effect-by-id.handler.ts",
+            "integrity": "sha1:6038087e87c7a38b65fcdff919837ad0bd179c4f"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-find-side-effect.handler.spec.ts",
+            "integrity": "sha1:22439615a779c05e81ff485aabb255f7ad2da5a7"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-find-side-effect.handler.ts",
+            "integrity": "sha1:32f21df63bd37314d3a44042c8a00c9a4ba9bbd9"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-get-side-effects.handler.spec.ts",
+            "integrity": "sha1:3b619a0a1d714309eb0c4143075f0fcd5f327505"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-get-side-effects.handler.ts",
+            "integrity": "sha1:833de9f6d3dc31bace287c547487a8cc97225f6c"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-paginate-side-effects.handler.spec.ts",
+            "integrity": "sha1:d3a01888839e96ba2c3addcad8e568fc2fda152e"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-paginate-side-effects.handler.ts",
+            "integrity": "sha1:4b8105f82d4bf15f3c65f4848acd8b2a58716a53"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-update-side-effect-by-id.handler.spec.ts",
+            "integrity": "sha1:79bac10a30b7591d7e4576a9afe888983150fa3e"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-update-side-effect-by-id.handler.ts",
+            "integrity": "sha1:144e6938afcabc3fae867301066e090e10290f47"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-update-side-effects.handler.spec.ts",
+            "integrity": "sha1:581947b5c46c5c4e2d1d2146779ee2d68c5712d0"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-update-side-effects.handler.ts",
+            "integrity": "sha1:d4c055dbfc81d6c1f4c155680d731595e1f25669"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-upsert-side-effect.handler.spec.ts",
+            "integrity": "sha1:a49a6c447332eb9becdb034bc5e34e500ec16806"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-upsert-side-effect.handler.ts",
+            "integrity": "sha1:857bd94fdb2a8c39e6dd3eef4d8bb6eace0fff5a"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/index.ts",
+            "integrity": "sha1:fdb07340c573ef54fd35ef1095cc3431faf1e36a"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-create-side-effect.resolver.spec.ts",
+            "integrity": "sha1:ae9157c6ce1c3a69131913970c4c981abe9689e0"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-create-side-effect.resolver.ts",
+            "integrity": "sha1:1a6827626532cbc3fd8481d34b2caa53d65d7f29"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-create-side-effects.resolver.spec.ts",
+            "integrity": "sha1:7c07bbdc73d66c75f9acd461a20c1db69d39b1f8"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-create-side-effects.resolver.ts",
+            "integrity": "sha1:5135c824a26756104d8c658660ac619422129af7"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-delete-side-effect-by-id.resolver.spec.ts",
+            "integrity": "sha1:8bad31b288d493ab2110764e3c2f0ccaa1deb808"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-delete-side-effect-by-id.resolver.ts",
+            "integrity": "sha1:6dc0bd3057f3f59102c103c8368d664634273e97"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-delete-side-effects.resolver.spec.ts",
+            "integrity": "sha1:c56885b1949382ab6a09b762b2bb3365858e467b"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-delete-side-effects.resolver.ts",
+            "integrity": "sha1:a75d9ee25078cac2926e6714ccde9bf759594b11"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-find-side-effect-by-id.resolver.spec.ts",
+            "integrity": "sha1:67bfd2f8cb7a5149d39a06a1ddeea26dec185523"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-find-side-effect-by-id.resolver.ts",
+            "integrity": "sha1:e1d2a13e2914829335c49e0304ab935588c44f63"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-find-side-effect.resolver.spec.ts",
+            "integrity": "sha1:9848047b517eec6fe0cbf56784d5e169aca55489"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-find-side-effect.resolver.ts",
+            "integrity": "sha1:e38c4a1595baeab48714c9b756735dae684a14ae"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-get-side-effects.resolver.spec.ts",
+            "integrity": "sha1:168707b0ea3934c8cf50a6f62af07f15d08a2e1c"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-get-side-effects.resolver.ts",
+            "integrity": "sha1:6a79fecf559cb868c83f86938058f419c550edcb"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-paginate-side-effects.resolver.spec.ts",
+            "integrity": "sha1:4fa77d66d7284dccad8bf95e6e5c8c0f51917d2c"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-paginate-side-effects.resolver.ts",
+            "integrity": "sha1:8cdf040de12f859a77e15ca311a5e40f4e9caebd"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-update-side-effect-by-id.resolver.spec.ts",
+            "integrity": "sha1:2f4e21a993858f6e4dfd86ca81e69793a79ce48b"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-update-side-effect-by-id.resolver.ts",
+            "integrity": "sha1:4ae1bb0c866a838d2fac7370e992d57a54a34f17"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-update-side-effects.resolver.spec.ts",
+            "integrity": "sha1:b8c645c0b16efb68fc744ea78f93e314fc9a338c"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-update-side-effects.resolver.ts",
+            "integrity": "sha1:3b34c5ad86aa6e86c08cf7d6c5776b1d0f908ce7"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-upsert-side-effect.resolver.spec.ts",
+            "integrity": "sha1:71948be3466ea79683f10e25b6c271c39833a177"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-upsert-side-effect.resolver.ts",
+            "integrity": "sha1:f9d4f8a31bc982b55e01bec6e82d31754cd24005"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/seeder/auditing-side-effect.seeder.ts",
+            "integrity": "sha1:67459945d5c54a6982b1835b206860b965c38c4e"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/seeder/seeder.module.ts",
+            "integrity": "sha1:0c617a343b632596e48db1becbab16336cd1617a"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/seeder/seeder.ts",
+            "integrity": "sha1:c9e43221ff3eb6c938d63c3819bd617f5c291b4d"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-rollback-side-effect.controller.spec.ts",
+            "integrity": "sha1:74a673cdc7a4ef9a6598efcbdbb9170433086486"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/controllers/auditing-rollback-side-effect.controller.ts",
+            "integrity": "sha1:e96ceaaaabc0f0c7c8dee87e52f2244a2c7d9dd9"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-rollback-side-effect.handler.spec.ts",
+            "integrity": "sha1:6a27144247a3845a3b845120022ba555f5971e10"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/handlers/auditing-rollback-side-effect.handler.ts",
+            "integrity": "sha1:fc09bfe3f8bbd0ba7a028a3c9651ca7441b5622a"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-rollback-side-effect.resolver.spec.ts",
+            "integrity": "sha1:17d775a69549a4450898be94462738c545c79016"
+        },
+        {
+            "path": "src/@api/auditing/side-effect/resolvers/auditing-rollback-side-effect.resolver.ts",
+            "integrity": "sha1:e6d964fad526d4bb78945bb45abafe0e7f2fddc6"
+        },
+        {
+            "path": "test/acceptance/auditing/side-effect.e2e-spec.ts",
+            "integrity": "sha1:016458b3f62769e3e42d5918a2da1f1acf48524f"
+        },
+        {
+            "path": "postman/auditing.side-effect.postman.json",
+            "integrity": "sha1:d85fb6bc8a4ac17f09ec2e20a70e37a3e61db1db"
+        }
+    ]
+}

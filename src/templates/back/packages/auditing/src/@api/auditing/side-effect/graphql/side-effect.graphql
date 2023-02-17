@@ -1,0 +1,190 @@
+enum AuditingSideEffectEvent {
+    CREATED
+    BULK_CREATED
+    UPDATED
+    BULK_UPDATED
+    DELETED
+    BULK_DELETED
+    RESTORED
+    BULK_RESTORED
+    UPSERTED
+}
+
+enum AuditingSideEffectMethod {
+    GET
+    POST
+    UPDATE
+    DELETE
+}
+
+
+type AuditingSideEffect
+{
+    id: ID!
+    modelPath: GraphQLString!
+    modelName: GraphQLString!
+    operationId: ID
+    operationSort: GraphQLInt
+    accountId: ID!
+    email: GraphQLString!
+    event: AuditingSideEffectEvent!
+    auditableId: ID
+    oldValue: JSON
+    newValue: JSON
+    ip: GraphQLString
+    method: AuditingSideEffectMethod!
+    baseUrl: GraphQLString
+    params: JSON
+    query: JSON
+    body: JSON
+    userAgent: GraphQLString
+    tags: JSON
+    isRollback: GraphQLBoolean!
+    rollbackSideEffectId: ID
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input AuditingCreateSideEffectInput
+{
+    id: ID!
+    modelPath: GraphQLString!
+    modelName: GraphQLString!
+    operationId: ID
+    operationSort: GraphQLInt
+    accountId: ID!
+    email: GraphQLString!
+    event: AuditingSideEffectEvent!
+    auditableId: ID
+    oldValue: JSON
+    newValue: JSON
+    ip: GraphQLString
+    method: AuditingSideEffectMethod!
+    baseUrl: GraphQLString
+    params: JSON
+    query: JSON
+    body: JSON
+    userAgent: GraphQLString
+    tags: JSON
+    isRollback: GraphQLBoolean!
+    rollbackSideEffectId: ID
+}
+
+input AuditingUpdateSideEffectByIdInput
+{
+    id: ID!
+    modelPath: GraphQLString
+    modelName: GraphQLString
+    operationId: ID
+    operationSort: GraphQLInt
+    accountId: ID
+    email: GraphQLString
+    event: AuditingSideEffectEvent
+    auditableId: ID
+    oldValue: JSON
+    newValue: JSON
+    ip: GraphQLString
+    method: AuditingSideEffectMethod
+    baseUrl: GraphQLString
+    params: JSON
+    query: JSON
+    body: JSON
+    userAgent: GraphQLString
+    tags: JSON
+    isRollback: GraphQLBoolean
+    rollbackSideEffectId: ID
+}
+
+input AuditingUpdateSideEffectsInput
+{
+    id: ID
+    modelPath: GraphQLString
+    modelName: GraphQLString
+    operationId: ID
+    operationSort: GraphQLInt
+    accountId: ID
+    email: GraphQLString
+    event: AuditingSideEffectEvent
+    auditableId: ID
+    oldValue: JSON
+    newValue: JSON
+    ip: GraphQLString
+    method: AuditingSideEffectMethod
+    baseUrl: GraphQLString
+    params: JSON
+    query: JSON
+    body: JSON
+    userAgent: GraphQLString
+    tags: JSON
+    isRollback: GraphQLBoolean
+    rollbackSideEffectId: ID
+}
+
+type Query
+{
+    auditingFindSideEffect(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): AuditingSideEffect
+
+    auditingFindSideEffectById(
+        id: ID
+        constraint: QueryStatement
+    ): AuditingSideEffect
+
+    auditingGetSideEffects(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [AuditingSideEffect]!
+
+    auditingPaginateSideEffects(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    auditingCreateSideEffect(
+        payload: AuditingCreateSideEffectInput!
+    ): AuditingSideEffect
+
+    auditingCreateSideEffects(
+        payload: [AuditingCreateSideEffectInput]!
+    ): Boolean!
+
+    auditingUpdateSideEffectById(
+        payload: AuditingUpdateSideEffectByIdInput!
+        constraint: QueryStatement
+    ): AuditingSideEffect
+
+    auditingUpdateSideEffects(
+        payload: AuditingUpdateSideEffectsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [AuditingSideEffect]!
+
+    auditingUpsertSideEffect(
+        payload: AuditingUpdateSideEffectByIdInput!
+    ): AuditingSideEffect
+
+    auditingDeleteSideEffectById(
+        id: ID!
+        constraint: QueryStatement
+    ): AuditingSideEffect
+
+    auditingDeleteSideEffects(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [AuditingSideEffect]!
+
+
+    # additionalApis
+    auditingRollbackSideEffect(
+        payload: AuditingUpdateSideEffectByIdInput!
+        constraint: QueryStatement
+    ): Boolean!
+
+}

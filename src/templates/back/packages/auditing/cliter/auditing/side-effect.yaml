@@ -1,0 +1,121 @@
+version: 0.0.1
+boundedContextName: auditing
+moduleName: side-effect
+moduleNames: side-effects
+aggregateName: AuditingSideEffect
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: modelPath
+    type: varchar
+    maxLength: 1023
+    nullable: false
+  - name: modelName
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: operationId
+    type: id
+    length: 36
+    nullable: true
+    index: index
+  - name: operationSort
+    type: tinyint.unsigned
+    maxLength: 2
+    nullable: true
+  - name: accountId
+    type: id
+    length: 36
+    nullable: false
+    index: index
+  - name: email
+    type: varchar
+    maxLength: 120
+    nullable: false
+    example: john@gmail.com
+  - name: event
+    type: enum
+    enumOptions:
+      - CREATED
+      - BULK_CREATED
+      - UPDATED
+      - BULK_UPDATED
+      - DELETED
+      - BULK_DELETED
+      - RESTORED
+      - BULK_RESTORED
+      - UPSERTED
+    nullable: false
+    example: AuditingSideEffectEvent.CREATED
+  - name: auditableId
+    type: id
+    length: 36
+    nullable: true
+  - name: oldValue
+    type: json
+    nullable: true
+  - name: newValue
+    type: json
+    nullable: true
+  - name: ip
+    type: varchar
+    maxLength: 50
+    nullable: true
+  - name: method
+    type: enum
+    enumOptions:
+      - GET
+      - POST
+      - UPDATE
+      - DELETE
+    nullable: false
+    example: AuditingSideEffectMethod.POST
+  - name: baseUrl
+    type: varchar
+    maxLength: 2047
+    nullable: true
+  - name: params
+    type: json
+    nullable: true
+  - name: query
+    type: json
+    nullable: true
+  - name: body
+    type: json
+    nullable: true
+  - name: userAgent
+    type: varchar
+    maxLength: 1023
+    nullable: true
+  - name: tags
+    type: json
+    nullable: true
+  - name: isRollback
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
+  - name: rollbackSideEffectId
+    type: id
+    length: 36
+    nullable: true
+    index: index
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis:
+  - path: auditing/side-effect/rollback
+    resolverType: mutation
+    httpMethod: post

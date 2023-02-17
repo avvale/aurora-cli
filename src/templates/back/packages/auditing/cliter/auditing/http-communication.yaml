@@ -1,0 +1,61 @@
+version: 0.0.1
+boundedContextName: auditing
+moduleName: http-communication
+moduleNames: http-communications
+aggregateName: AuditingHttpCommunication
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: code
+    type: varchar
+    maxLength: 100
+    nullable: true
+  - name: event
+    type: enum
+    enumOptions:
+      - REQUEST_FULFILLED
+      - REQUEST_REJECTED
+      - RESPONSE_FULFILLED
+      - RESPONSE_REJECTED
+    nullable: false
+    example: AuditingHttpCommunicationEvent.REQUEST_FULFILLED
+  - name: status
+    type: smallint.unsigned
+    maxLength: 5
+    nullable: true
+  - name: method
+    type: varchar
+    maxLength: 25
+    nullable: false
+  - name: url
+    type: varchar
+    maxLength: 2048
+    nullable: false
+  - name: httpRequest
+    type: json
+    nullable: true
+  - name: httpRequestRejected
+    type: json
+    nullable: true
+  - name: httpResponse
+    type: json
+    nullable: true
+  - name: httpResponseRejected
+    type: json
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis: []
