@@ -20,8 +20,7 @@ import * as _ from 'lodash';
 // has OAuth
 import { IamModule } from '@api/iam/iam.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
-import { AuthenticationJwtGuard } from '{{ config.apiContainer }}/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '{{ config.apiContainer }}/iam/shared/guards/authorization.guard';
+import { AuthenticationGuard, AuthorizationGuard } from '{{ config.auroraCorePackage }}';
 {{/if }}
 
 // disable import foreign modules, can be micro-services
@@ -79,7 +78,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             ],
         })
             {{#if schema.hasOAuth }}
-            .overrideGuard(AuthenticationJwtGuard)
+            .overrideGuard(AuthenticationGuard)
             .useValue({ canActivate: () => true })
             .overrideGuard(AuthorizationGuard)
             .useValue({ canActivate: () => true })
