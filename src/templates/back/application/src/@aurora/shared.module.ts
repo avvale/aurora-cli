@@ -10,7 +10,7 @@ import { CqrsConfigModule } from './cqrs-config.module';
         ConfigModule.forRoot({ isGlobal: true }),
         CoreModule,
         CqrsConfigModule,
-        CqrsModule,
+        CqrsModule
     ],
     providers: [
         AddI18NConstraintService,

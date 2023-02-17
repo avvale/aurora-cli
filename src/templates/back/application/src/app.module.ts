@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 
 @Module({
     imports: [
-        CoreModule,
+        CoreModule
     ],
     controllers: [
         AppController,
