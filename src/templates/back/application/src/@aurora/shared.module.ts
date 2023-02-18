@@ -13,7 +13,7 @@ import { CqrsConfigModule } from './cqrs-config.module';
         CqrsModule
     ],
     providers: [
-        AddI18NConstraintService,
+        AddI18NConstraintService
     ],
     exports: [
         AddI18NConstraintService,
