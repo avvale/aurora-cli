@@ -19,7 +19,7 @@ import { CqrsConfigModule } from './cqrs-config.module';
         AddI18NConstraintService,
         CacheModule,
         ConfigModule,
-        CqrsConfigModule,
+        CqrsConfigModule
     ],
 })
 export class SharedModule {}
