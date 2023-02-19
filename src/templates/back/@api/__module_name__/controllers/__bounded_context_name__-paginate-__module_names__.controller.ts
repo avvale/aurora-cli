@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Body, Controller, HttpCode, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}{{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, {{/if}}{{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}Pagination, {{#if schema.hasOAuth}}Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasTenant}}
 
 // tenant

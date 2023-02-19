@@ -676,7 +676,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    declareAuthModuleInShareModule(): void
+    declareAuthJwtStrategyRegistryModuleInShareModule(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join(cliterConfig.auroraLocalPackage, 'shared.module.ts')));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'SharedModule', 'Module');
@@ -684,9 +684,9 @@ export class CodeWriter
         // register import auth module
         ImportDriver.createImportItems(
             sourceFile,
-            `../${cliterConfig.appContainer}/o-auth/shared/modules/auth.module`,
+            `${cliterConfig.appContainer}/o-auth/shared/modules/auth-jwt-strategy-registry.module`,
             [
-                'AuthModule',
+                'AuthJwtStrategyRegistryModule',
             ],
         );
 
@@ -704,16 +704,16 @@ export class CodeWriter
         const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
         const importsElements = importsArray.getElements();
 
-        // check if AuthModule is imported
-        if (!importsElements.find(el => el.getText() === 'AuthModule.forRoot(jwtConfig)')) importsArray.addElement('AuthModule.forRoot(jwtConfig)', { useNewLines: true });
+        // check if AuthJwtStrategyRegistryModule is imported
+        if (!importsElements.find(el => el.getText() === 'AuthJwtStrategyRegistryModule.forRoot(jwtConfig)')) importsArray.addElement('AuthJwtStrategyRegistryModule.forRoot(jwtConfig)', { useNewLines: true });
 
         // register auth module
         const exportsArgument: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('exports');
         const exportsArray = exportsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
         const exportsElements = exportsArray.getElements();
 
-        // check if AuthModule is imported
-        if (!exportsElements.find(el => el.getText() === 'AuthModule')) exportsArray.addElement('AuthModule', { useNewLines: true });
+        // check if AuthJwtStrategyRegistryModule is exported
+        if (!exportsElements.find(el => el.getText() === 'AuthJwtStrategyRegistryModule')) exportsArray.addElement('AuthJwtStrategyRegistryModule', { useNewLines: true });
 
         sourceFile?.saveSync();
     }

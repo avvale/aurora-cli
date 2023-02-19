@@ -18,5 +18,5 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
     codeWriter.declareApplicationItemsInModule();
     codeWriter.declareBoundedContextModuleInApplicationModule();
     codeWriter.declareApplicationItemsExports();
-    if (generateCommandState.schema.hasOAuth) codeWriter.declareAuthModuleInShareModule();
+    if (generateCommandState.schema.hasOAuth) codeWriter.declareAuthJwtStrategyRegistryModuleInShareModule();
 };
