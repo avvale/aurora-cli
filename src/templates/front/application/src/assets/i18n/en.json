@@ -92,6 +92,8 @@
     "Selects": "Selects",
     "Send": "Send",
     "SendWarning": "Do you wish to send the {{ entity }}?",
+    "Sent.F": "Sent",
+    "Sent.M": "Sent",
     "SignIn": "Sign In",
     "SignInErrors": {
         "requiredEmail": "Email address is required",

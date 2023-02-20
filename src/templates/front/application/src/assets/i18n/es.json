@@ -92,6 +92,8 @@
     "Selects": "Selectores",
     "Send": "Enviar",
     "SendWarning": "¿Desea enviar {{ entity }}?",
+    "Sent.F": "Enviada",
+    "Sent.M": "Enviado",
     "SignIn": "Acceder",
     "SignInErrors": {
         "requiredEmail": "Se requiere la dirección de email",
