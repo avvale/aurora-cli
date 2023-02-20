@@ -669,7 +669,7 @@ export class CodeWriter
         // export seed
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/seeds/${this.moduleName.toKebabCase()}.seed`,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/mock/mock-${this.moduleName.toKebabCase()}.data`,
             [`${this.moduleNames.toCamelCase()}`],
         );
 

@@ -10,7 +10,7 @@ import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '{{ config.a
 import { AddI18NConstraintService } from '{{ config.auroraCorePackage }}';
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
 import { GraphQLConfigModule } from '{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
 import { {{ toPascalCase schema.boundedContextName }}Module } from '{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
 import * as request from 'supertest';

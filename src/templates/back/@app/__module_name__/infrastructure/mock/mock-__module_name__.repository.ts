@@ -5,7 +5,7 @@ import {
     {{> importValueObjects }}
 } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/value-objects';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toCamelCase schema.moduleNames }} } from '../seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { {{ toCamelCase schema.moduleNames }} } from './mock-{{ toKebabCase schema.moduleName }}.data';
 
 @Injectable()
 export class Mock{{ toPascalCase schema.moduleName }}Repository extends MockRepository<{{ schema.aggregateName }}> implements I{{ toPascalCase schema.moduleName }}Repository

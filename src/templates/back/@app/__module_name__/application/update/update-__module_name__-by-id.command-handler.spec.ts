@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
 import { Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './update-{{ toKebabCase schema.moduleName }}-by-id.command-handler';
 import { Update{{ toPascalCase schema.moduleName }}ByIdCommand } from './update-{{ toKebabCase schema.moduleName }}-by-id.command';
 import { Update{{ toPascalCase schema.moduleName }}ByIdService } from './update-{{ toKebabCase schema.moduleName }}-by-id.service';

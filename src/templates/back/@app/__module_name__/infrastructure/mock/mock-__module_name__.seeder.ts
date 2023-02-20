@@ -4,7 +4,7 @@ import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toCamelCase schema.moduleNames }} } from '../seeds/{{ toKebabCase schema.moduleName }}.seed';
+import { {{ toCamelCase schema.moduleNames }} } from './mock-{{ toKebabCase schema.moduleName }}.data';
 import * as _ from 'lodash';
 
 @Injectable()
