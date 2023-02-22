@@ -1,6 +1,5 @@
 export * from './authentication';
 export * from './authorization';
-export * from './environments-information';
 export * from './graphql';
 export * from './http';
 export * from './iam';
@@ -8,3 +7,4 @@ export * from './lang';
 export * from './orm';
 export * from './routing';
 export * from './session';
+export * from './spinner-manager';
