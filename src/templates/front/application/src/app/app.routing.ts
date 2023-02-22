@@ -66,17 +66,18 @@ export const appRoutes: Route[] = [
     // Admin routes
     {
         path            : '',
+        // TODO, analizar el uso de canMatch
+        // canMatch        : [AuthGuard],
         canActivate     : [AuthGuard],
         canActivateChild: [AuthGuard],
         component       : LayoutComponent,
         resolve         : {
             initialData: InitialDataResolver,
         },
+        // add here your module routes
         children: [
             { path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule) },
-            { path: 'kitchen-sink', loadChildren: () => import('app/modules/admin/kitchen-sink/kitchen-sink.module').then(m => m.KitchenSinkModule) },
-
-            // add here your module routes
+            { path: 'kitchen-sink', loadChildren: () => import('app/modules/admin/kitchen-sink/kitchen-sink.module').then(m => m.KitchenSinkModule) }
         ],
     },
 
