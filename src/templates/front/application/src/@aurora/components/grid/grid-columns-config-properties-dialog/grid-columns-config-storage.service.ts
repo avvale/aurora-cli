@@ -1,8 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { log, ColumnConfigStorage, Utils } from '@aurora';
+import { ColumnConfigStorage, log, UserMetaStorageService, Utils } from '@aurora';
 import { BehaviorSubject, combineLatest, from, lastValueFrom, map, Observable, Subject, takeUntil } from 'rxjs';
 import { ColumnConfig } from '..';
-import { UserMetaStorageService } from '../../user-meta-storage';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 @Injectable({

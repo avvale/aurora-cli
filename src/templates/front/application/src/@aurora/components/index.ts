@@ -18,5 +18,5 @@ export { RibbonEnvironmentModule } from './ribbon-environment';
 export * from './split-button';
 export * from './template-dialog';
 export * from './title';
-export { UserMetaStorageLocalStorageService, UserMetaStorageService } from './user-meta-storage';
+export { UserMetaStorageLocalStorageAdapterService, UserMetaStorageService } from './user-meta-storage';
 export * from './validation-messages';

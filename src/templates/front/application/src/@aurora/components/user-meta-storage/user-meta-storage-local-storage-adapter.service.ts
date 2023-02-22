@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { SessionService, UserMetaStorage, UserMetaStorageService } from '@aurora';
+import { SessionService, UserMetaStorage } from '@aurora';
 import { BehaviorSubject, map, Observable, of, Subject } from 'rxjs';
+import { UserMetaStorageService } from './user-meta-storage.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserMetaStorageLocalStorageService extends UserMetaStorageService
+export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageService
 {
-    dataSubject$: BehaviorSubject<UserMetaStorage | null> = new BehaviorSubject(null);
+    metaSubject$: BehaviorSubject<UserMetaStorage | null> = new BehaviorSubject(null);
     unsubscribeAll$: Subject<void> = new Subject();
     nameStorage: 'userMeta';
 
-    get data$(): Observable<UserMetaStorage>
+    get meta$(): Observable<UserMetaStorage>
     {
-        return this.dataSubject$.asObservable();
+        return this.metaSubject$.asObservable();
     }
 
     constructor(
@@ -31,7 +32,7 @@ export class UserMetaStorageLocalStorageService extends UserMetaStorageService
 
     updateUserMeta(keyUserMeta: string, keyUserMetaValue: any): Observable<void>
     {
-        let currentUserMeta = this.dataSubject$.value;
+        let currentUserMeta = this.metaSubject$.value;
 
         if (typeof currentUserMeta === 'object')
         {
@@ -44,7 +45,7 @@ export class UserMetaStorageLocalStorageService extends UserMetaStorageService
         }
 
         this.sessionService.updateSession(this.nameStorage, currentUserMeta);
-        this.dataSubject$.next(currentUserMeta);
+        this.metaSubject$.next(currentUserMeta);
 
         return this.getUserMeta()
             .pipe(
@@ -55,7 +56,7 @@ export class UserMetaStorageLocalStorageService extends UserMetaStorageService
     saveUserMeta(userMeta: UserMetaStorage): Observable<void>
     {
         this.sessionService.updateSession(this.nameStorage, userMeta);
-        this.dataSubject$.next(userMeta);
+        this.metaSubject$.next(userMeta);
 
         return this.getUserMeta()
             .pipe(
@@ -66,7 +67,7 @@ export class UserMetaStorageLocalStorageService extends UserMetaStorageService
     clearUserMeta(): Observable<void>
     {
         this.sessionService.updateSession(this.nameStorage, null);
-        this.dataSubject$.next(null);
+        this.metaSubject$.next(null);
 
         return this.getUserMeta()
             .pipe(
