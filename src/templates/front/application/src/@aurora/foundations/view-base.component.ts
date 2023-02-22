@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoService } from '@ngneat/transloco';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { Action, ActionService, SessionService } from '@aurora';
-import { filter, Subject, takeUntil } from 'rxjs';
+import { Action, ActionService, SessionService, SpinnerManagerService } from '@aurora';
+import { BehaviorSubject, filter, Subject, takeUntil } from 'rxjs';
 
 @Directive()
 export class ViewBaseComponent implements OnInit, OnDestroy
@@ -17,8 +17,9 @@ export class ViewBaseComponent implements OnInit, OnDestroy
     unsubscribeAll$: Subject<void> = new Subject();         // subject to destroy all subscriptions in ngOnDestroy life cycle
 
     // UI
-    snackBar: MatSnackBar;                                  // snack bar common to all components
     confirmationService: FuseConfirmationService;           // confirmation service to show dialogs
+    snackBar: MatSnackBar;                                  // snack bar common to all components
+    spinnerManagerService: SpinnerManagerService;           // service to control spinner
     translocoService: TranslocoService;                     // translation service
 
     currentViewAction: Action;
@@ -34,8 +35,9 @@ export class ViewBaseComponent implements OnInit, OnDestroy
         this.activatedRoute         = this.injector.get(ActivatedRoute);
 
         // UI
-        this.snackBar               = this.injector.get(MatSnackBar);
         this.confirmationService    = this.injector.get(FuseConfirmationService);
+        this.snackBar               = this.injector.get(MatSnackBar);
+        this.spinnerManagerService  = this.injector.get(SpinnerManagerService);
         this.translocoService       = this.injector.get(TranslocoService);
     }
 
@@ -49,6 +51,17 @@ export class ViewBaseComponent implements OnInit, OnDestroy
             )
             .subscribe(async action =>
             {
+                // if the spinner of the action is defined, it means that there is a specific key
+                // to obtain the BehaviorSubject that controls the spinner of the action
+                const spinnerFlag$ = action.spinner instanceof Function ?
+                    action.spinner() :
+                    action.spinner instanceof BehaviorSubject ?
+                        action.spinner :
+                        this.spinnerManagerService.getSpinnerFlag(action.id);
+
+                // show spinner
+                spinnerFlag$.next(true);
+
                 // set current view action to modify the view
                 if (action?.isViewAction) this.currentViewAction = action;
 
@@ -58,6 +71,9 @@ export class ViewBaseComponent implements OnInit, OnDestroy
                 if (action?.beforeRunAction instanceof Function) action.beforeRunAction(action);
                 await this.handleAction(action);
                 if (action?.afterRunAction instanceof Function)  action.afterRunAction(action);
+
+                // hide spinner
+                spinnerFlag$.next(false);
             });
 
         // init logic of component after set input
