@@ -1,4 +1,5 @@
 import { ColumnConfig, ColumnFilterStorage } from '@aurora';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Action
 {
@@ -6,6 +7,7 @@ export interface Action
     isViewAction?: boolean;
     beforeRunAction?: (action: Action) => void;
     afterRunAction?: (action: Action) => void;
+    spinner?: BehaviorSubject<boolean> | (() => BehaviorSubject<boolean>);
     data?: {
         [key: string]: any;
     };
