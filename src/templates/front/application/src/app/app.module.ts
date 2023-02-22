@@ -5,15 +5,13 @@ import { ExtraOptions, PreloadAllModules, RouteReuseStrategy, RouterModule } fro
 import { FuseModule } from '@fuse';
 import { FuseConfigModule } from '@fuse/services/config';
 import { FuseMockApiModule } from '@fuse/lib/mock-api';
-import { AuroraModule, AuthenticationService, AuthenticationMockAdapterService, EnvironmentsInformationService, EnvironmentsInformationMockAdapterService, AuthenticationDisabledAdapterGuard, LangService, JsonLangService, RouteReuseStrategyService, UserMetaStorageService, SessionService, SessionLocalStorageService, IamService, GridManagerService, AuroraGridManagerService, IamMockAdapterService } from '@aurora';
-import { HORIZONTAL_NAVIGATION, FUTURISTIC_NAVIGATION, DEFAULT_NAVIGATION, COMPACT_NAVIGATION } from '@aurora/components/navigation/navigation.types';
+import { AuroraGridManagerService, AuroraModule, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationService, COMPACT_NAVIGATION, DEFAULT_NAVIGATION, EnvironmentsInformationService, FUTURISTIC_NAVIGATION, GridManagerService, HORIZONTAL_NAVIGATION, IamAuroraAdapterService, IamService, JsonLangService, LangService, RibbonEnvironmentModule, RouteReuseStrategyService, SessionLocalStorageService, SessionService, UserMetaStorageLocalStorageAdapterService, UserMetaStorageService } from '@aurora';
 import { CoreModule } from 'app/core/core.module';
 import { appConfig } from 'app/core/config/app.config';
 import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
-import { UserMetaStorageLocalStorageService } from '@aurora/components/user-meta-storage/user-meta-storage-local-storage-adapter.service';
 import { compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation } from './core/navigation/default-navigation';
 import { AuthGuard } from './core/auth/guards/auth.guard';
 
@@ -44,6 +42,7 @@ const routerConfig: ExtraOptions = {
 
         // Aurora front module
         AuroraModule,
+        RibbonEnvironmentModule,
     ],
     providers: [
         {
