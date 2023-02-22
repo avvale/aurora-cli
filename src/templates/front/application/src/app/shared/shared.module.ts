@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BreadcrumbModule, DatepickerSqlFormatModule, DatetimepickerSqlFormatModule, ChipModule, EnvironmentsInformationModule, GridDialogModule, GridElementsManagerModule, GridModule, GridSelectElementModule, GridSelectMultipleElementsModule, TemplateDialogModule, TitleModule, SplitButtonModule, IconsModule, PipesModule, FileUploadModule, MatFormFieldAppearanceModule, FilePreviewOverlayModule, AuthorizationModule } from '@aurora';
+import { BreadcrumbModule, DatepickerSqlFormatModule, DatetimepickerSqlFormatModule, ChipModule, EnvironmentsInformationModule, GridDialogModule, GridElementsManagerModule, GridModule, GridSelectElementModule, GridSelectMultipleElementsModule, TemplateDialogModule, TitleModule, SplitButtonModule, IconsModule, PipesModule, FileUploadModule, MatFormFieldAppearanceModule, FilePreviewOverlayModule, AuthorizationModule, SpinnerManagerModule } from '@aurora';
 import { CustomModule } from './custom/custom.module';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
@@ -32,6 +32,7 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
         IconsModule,
         MatFormFieldAppearanceModule,
         PipesModule,
+        SpinnerManagerModule,
         SplitButtonModule,
         TemplateDialogModule,
         TitleModule,
@@ -59,6 +60,7 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
         GridSelectMultipleElementsModule,
         MatFormFieldAppearanceModule,
         PipesModule,
+        SpinnerManagerModule,
         SplitButtonModule,
         TemplateDialogModule,
         TitleModule,
