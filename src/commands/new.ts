@@ -8,7 +8,11 @@ export default class New extends Command
 
     static flags =
     {
-        help   : Flags.help({ char: 'h' }),
+        help : Flags.help({ char: 'h' }),
+        force: Flags.boolean({
+            char       : 'f',
+            description: 'Overwrite existing files.',
+        }),
         install: Flags.boolean({
             char       : 'i',
             description: 'Install dependencies after create item.',

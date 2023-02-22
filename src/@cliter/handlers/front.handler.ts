@@ -23,6 +23,7 @@ export class FrontHandler
             '.',
             {
                 verbose          : newFrontCommandState.flags.verbose,
+                force            : newFrontCommandState.flags.force,
                 useTemplateEngine: false,
             },
         );
