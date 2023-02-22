@@ -8,8 +8,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 // aurora
 import { ColumnConfig, ColumnConfigAction, ColumnDataType, GridData, GridColumnFilter, GridState, ExportGridState, ExportFormat, GridSearchState, GridSortState } from '../grid.types';
 import { GridCellValueTemplateDirective } from '../directives/grid-cell-value-template.directive';
-import { GridCustomHeaderTemplateDirective } from '../directives/grid-custom-header-template.directive';
 import { GridColumnsConfigPropertiesDialogComponent } from '../grid-columns-config-properties-dialog/grid-columns-config-properties-dialog.component';
+import { GridCustomHeaderTemplateDirective } from '../directives/grid-custom-header-template.directive';
 import { GridFiltersDialogComponent } from '../grid-filters-dialog/grid-filters-dialog.component';
 import { SelectionChange, SelectionModel } from '../selection-model/selection-model';
 

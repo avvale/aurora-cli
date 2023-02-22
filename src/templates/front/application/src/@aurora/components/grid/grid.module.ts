@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -32,6 +33,7 @@ import { FilterOperatorsPipe } from './grid-filters-dialog/pipes/filter-operator
 import { GetActionsPipe } from './pipes/get-actions.pipe';
 import { GetContactOperatorPipe } from './grid-filters-dialog/pipes/get-concat-operator.pipe';
 import { GetPipe } from './pipes/get.pipe';
+import { GetGridSpinnerFlagPipe } from './pipes/get-grid-spinner-flag.pipe';
 import { GridTranslatePipe } from './grid-translations/grid-translate.pipe';
 import { HasCellValueTemplatePipe } from './pipes/has-cell-value-template.pipe';
 import { HasCellValueWithFieldTemplatePipe } from './pipes/has-cell-value-with-field-template.pipe';
@@ -74,6 +76,7 @@ import { GridSearchComponent } from './grid-search/grid-search.component';
         MatInputModule,
         MatMenuModule,
         MatPaginatorModule,
+        MatProgressSpinnerModule,
         MatSelectModule,
         MatSortModule,
         MatTableModule,
@@ -94,6 +97,7 @@ import { GridSearchComponent } from './grid-search/grid-search.component';
         FilterOperatorsPipe,
         GetActionsPipe,
         GetContactOperatorPipe,
+        GetGridSpinnerFlagPipe,
         GetPipe,
         GridCellValueTemplateDirective,
         GridColumnsConfigPropertiesDialogComponent,

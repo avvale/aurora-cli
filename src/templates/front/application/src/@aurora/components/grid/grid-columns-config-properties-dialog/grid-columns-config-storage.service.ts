@@ -1,9 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { log, ColumnConfigStorage } from '@aurora';
+import { log, ColumnConfigStorage, Utils } from '@aurora';
 import { BehaviorSubject, combineLatest, from, lastValueFrom, map, Observable, Subject, takeUntil } from 'rxjs';
 import { ColumnConfig } from '..';
 import { UserMetaStorageService } from '../../user-meta-storage';
-import { Utils } from '../../../functions/utils';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 @Injectable({
@@ -93,7 +92,7 @@ export class GridColumnsConfigStorageService implements OnDestroy
 
                     if (response.originColumnsConfigHash !== columnConfigStorage.hash)
                     {
-                        log('[DEBUG] columns config changed in: ', id, originColumnsConfig);
+                        log('[DEBUG] columns config changed in :', id, originColumnsConfig);
 
                         // we use spread operator to break the origin config reference to avoid changing changes
                         const newColumnsConfigStorage = this.addChangesToColumnsConfig(columnConfigStorage.columnsConfig, cloneDeep(originColumnsConfig));

@@ -341,15 +341,20 @@
                                             <button
                                                 mat-menu-item
                                                 type="button"
+                                                [disabled]="action.spinner | getGridSpinnerFlag | async"
                                                 (click)="handleClickAction(action, row, $event)"
                                             >
                                                 <mat-icon
+                                                    *ngIf="!(action.spinner | getGridSpinnerFlag | async)"
                                                     [svgIcon]="action.svgIcon"
                                                     [matBadgeHidden]="action.badge?.hidden"
                                                     [matBadgeColor]="action.badge?.color"
                                                     [matBadge]="action.badge?.label"
                                                 >
                                                     {{ action.icon }}
+                                                </mat-icon>
+                                                <mat-icon *ngIf="action.spinner | getGridSpinnerFlag | async">
+                                                    <mat-spinner diameter="20"></mat-spinner>
                                                 </mat-icon>
                                                 <span>{{ (action.translation ? action.translation : action.id) | gridTranslate:'action':id | async }}</span>
                                             </button>
@@ -362,15 +367,20 @@
                                         <button
                                             mat-icon-button
                                             type="button"
+                                            [disabled]="action.spinner | getGridSpinnerFlag | async"
                                             (click)="handleClickAction(action, row, $event)"
                                         >
                                             <mat-icon
+                                                *ngIf="!(action.spinner | getGridSpinnerFlag | async)"
                                                 [svgIcon]="action.svgIcon"
                                                 [matBadgeHidden]="action.badge?.hidden"
                                                 [matBadgeColor]="action.badge?.color"
                                                 [matBadge]="action.badge?.label"
                                             >
-                                            {{ action.icon }}
+                                                {{ action.icon }}
+                                            </mat-icon>
+                                            <mat-icon *ngIf="action.spinner | getGridSpinnerFlag | async">
+                                                <mat-spinner diameter="20"></mat-spinner>
                                             </mat-icon>
                                         </button>
                                     </ng-container>
@@ -460,8 +470,12 @@
     </div>
 
     <div class="grid-footer">
-        <div *ngIf="!hasPagination" class="h-3"></div>
-    
+        <div
+            *ngIf="!hasPagination"
+            class="h-3"
+        >
+        </div>
+
         <mat-paginator
             *ngIf="hasPagination"
             showFirstLastButtons
