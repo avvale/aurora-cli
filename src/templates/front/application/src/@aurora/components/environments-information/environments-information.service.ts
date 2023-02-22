@@ -4,13 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { EnvironmentInformation, EnvironmentsInformation } from './environments-information.types';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { EnvironmentsInformationService } from './environments-information.service';
 import packageFile from '../../../../package.json';
 
 @Injectable({
     providedIn: 'root',
 })
-export class EnvironmentsInformationAuroraAdapterService extends EnvironmentsInformationService
+export class EnvironmentsInformationService
 {
     environmentsInformationSubject$: BehaviorSubject<EnvironmentsInformation | null> = new BehaviorSubject({
         app: {
@@ -31,12 +30,6 @@ export class EnvironmentsInformationAuroraAdapterService extends EnvironmentsInf
     constructor(
         private http: HttpClient,
     )
-    {
-        super();
-        this.init();
-    }
-
-    init(): void
     {
         this.http
             .get<EnvironmentInformation>(`${environment.api.rest}/core/environment-information`)
