@@ -1,3 +1,3 @@
-export * from './action.service';
-export * from './bootstrap.service';
-export * from './route-reuse-strategy.service';
+export { ActionService } from './action.service';
+export { BootstrapService } from './bootstrap.service';
+export { RouteReuseStrategyService } from './route-reuse-strategy.service';

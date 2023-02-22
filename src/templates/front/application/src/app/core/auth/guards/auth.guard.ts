@@ -34,7 +34,10 @@ export class AuthGuard implements CanMatch, CanActivate, CanActivateChild
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
     {
         // check permissions routes
-        if (!this.checkAuthorization(route.data.permission)) return false;
+        if (!this.checkAuthorization(route.data.permission))
+        {
+            return false;
+        }
 
         return this.checkAuthentication(route.url);
     }
@@ -48,7 +51,10 @@ export class AuthGuard implements CanMatch, CanActivate, CanActivateChild
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
     {
         // check permissions routes
-        if (!this.checkAuthorization(childRoute.data.permission)) return false;
+        if (!this.checkAuthorization(childRoute.data.permission))
+        {
+            return false;
+        }
 
         return this.checkAuthentication(childRoute.url);
     }

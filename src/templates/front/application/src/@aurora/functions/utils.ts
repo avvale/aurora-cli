@@ -53,6 +53,11 @@ export class Utils
         return str.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
     }
 
+    static wait(time: number): Promise<void>
+    {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
+
     /**
      * Remove all specified keys from an object, no matter how deep they are.
      * The removal is done in place, so run it on a copy if you don't want to modify the original object.

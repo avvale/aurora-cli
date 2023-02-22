@@ -7,7 +7,7 @@
     "MaxLength" : "Este campo no puede ser mayor que {{ maxlength }} caracteres.",
     "Min"       : "Este campo no puede ser menor que {{ min }}.",
     "MinLength" : "Este campo debe tener al menos {{ minlength }} caracteres.",
-    "NotEqual" : "El campo {{ fieldName }} no es igual que el campo {{ matchFieldName }}",
+    "NotEqual"  : "El campo {{ fieldName }} no es igual que el campo {{ matchFieldName }}",
     "Required"  : "Este campo es requerido.",
     "Pattern"   : "El valor del campo no coincide con el patrón indicado"
 }
