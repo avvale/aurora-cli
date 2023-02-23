@@ -136,14 +136,14 @@ export enum TemplateElement
     BACK_PIVOT                = 'back/pivot',
     BACK_PACKAGE              = 'back/package',
     BACK_TEST                 = 'back/test',
-    BACK_PACKAGES             = 'packages/back',
+    BACK_PACKAGES             = 'back/packages',
     BACK_POSTMAN              = 'back/postman',
     BACK_VALUE_OBJECT         = 'back/value-object',
     PIPELINE                  = 'pipeline',
     FRONT_APPLICATION         = 'front/application',
     FRONT_MODULE              = 'front/module',
     FRONT_MODULE_TRANSLATIONS = 'front/module-translations',
-    FRONT_PACKAGES            = 'packages/front',
+    FRONT_PACKAGES            = 'front/packages',
 }
 
 export enum TemplateFile
