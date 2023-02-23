@@ -1,0 +1,226 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    class="icon-size-8 mr-2"
+                >
+                    app_registration
+                </mat-icon>
+                {{ t('auditing.SideEffect') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+                *ngIf="'auditing.sideEffect.rollback' | can"
+                mat-flat-button
+                class="ml-3"
+                color="accent"
+                (click)="
+                    actionService.action({
+                        id          : 'auditing::sideEffect.detail.rollback',
+                        isViewAction: false
+                    })
+                "
+            >
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                >
+                    undo
+                </mat-icon>
+                {{ t('Rollback') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="auditingSideEffectFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('auditing.ModelName') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="modelName"
+                            maxlength="255"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.modelName | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-8"
+                    >
+                        <mat-label>{{ t('auditing.Email') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="email"
+                            maxlength="120"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.email | async }}</mat-error>
+                    </mat-form-field>
+                    <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="isRollback"
+                        >
+                            {{ t('auditing.IsRollback') }}
+                        </mat-checkbox>
+                    </div>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('auditing.Event') }}</mat-label>
+                        <mat-select formControlName="event">
+                            <mat-option
+                                *ngFor="let sideEffectEvent of auditingSideEffectEvent | keyvalue"
+                                [value]="sideEffectEvent.key"
+                            >
+                                {{ t('auditing.SideEffectEvent.' + sideEffectEvent.value) }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.event | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('auditing.Ip') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="ip"
+                            maxlength="19"
+                        >
+                        <mat-error>{{ formErrors?.ip | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('auditing.Method') }}</mat-label>
+                        <mat-select formControlName="method">
+                            <mat-option value="GET">GET</mat-option>
+                            <mat-option value="POST">POST</mat-option>
+                            <mat-option value="UPDATE">UPDATE</mat-option>
+                            <mat-option value="DELETE">DELETE</mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.method | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('auditing.BaseUrl') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="baseUrl"
+                            maxlength="2047"
+                        >
+                        <mat-error>{{ formErrors?.baseUrl | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('auditing.UserAgent') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="userAgent"
+                            maxlength="1023"
+                        >
+                        <mat-error>{{ formErrors?.userAgent | async }}</mat-error>
+                    </mat-form-field>
+                    <au-mat-form-field-appearance
+                        *ngIf="!(managedObject.params | isObjectEmpty)"
+                        [label]="t('auditing.Params')"
+                        class="col-12"
+                    >
+                        <ngx-json-viewer
+                            class="m-4"
+                            [json]="managedObject.params"
+                            [expanded]="false"
+                        >
+                        </ngx-json-viewer>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        *ngIf="!(managedObject.query | isObjectEmpty)"
+                        [label]="t('auditing.Query')"
+                        class="col-12"
+                    >
+                        <ngx-json-viewer
+                            class="m-4"
+                            [json]="managedObject.query"
+                            [expanded]="false"
+                        >
+                        </ngx-json-viewer>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        *ngIf="!(managedObject.body | isObjectEmpty)"
+                        [label]="t('auditing.Body')"
+                        class="col-12"
+                    >
+                        <ngx-json-viewer
+                            class="m-4"
+                            [json]="managedObject.body"
+                            [expanded]="false"
+                        >
+                        </ngx-json-viewer>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        *ngIf="!(managedObject.oldValue | isObjectEmpty)"
+                        [label]="t('auditing.OldValue')"
+                        class="col-12"
+                    >
+                        <ngx-json-viewer
+                            class="m-4"
+                            [json]="managedObject.oldValue"
+                            [expanded]="false"
+                        >
+                        </ngx-json-viewer>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        *ngIf="!(managedObject.newValue | isObjectEmpty)"
+                        [label]="t('auditing.NewValue')"
+                        class="col-12"
+                    >
+                        <ngx-json-viewer
+                            class="m-4"
+                            [json]="managedObject.newValue"
+                            [expanded]="false"
+                        >
+                        </ngx-json-viewer>
+                    </au-mat-form-field-appearance>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>
