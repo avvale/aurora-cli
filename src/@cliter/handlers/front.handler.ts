@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-static-only-class */
 import { TemplateGenerator } from '../utils/template-generator';
-import { addReferences, generateModuleFiles, generateTranslationFiles } from '../functions/front';
-import { GenerateCommandState, NewFrontCommandState, TemplateElement } from '../types';
+import { addPackageFiles, addReferences, generateModuleFiles, generateTranslationFiles } from '../functions/front';
+import { AddCommandState, GenerateCommandState, NewFrontCommandState, TemplateElement } from '../types';
 import { generateJsonLockFile } from '../functions/common';
 import { GlobalState } from '../store';
 import * as fs from 'node:fs';
@@ -44,5 +44,10 @@ export class FrontHandler
             generateCommandState,
             GlobalState.hasValue('lockFiles') ? GlobalState.getValue('lockFiles') : [],
         );
+    }
+
+    static async addPackage(addCommandState: AddCommandState): Promise<void>
+    {
+        await addPackageFiles(addCommandState);
     }
 }

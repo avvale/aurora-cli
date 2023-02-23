@@ -15,13 +15,13 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         generateCommandState.schema.aggregateName,
     );
 
-    codeWriter.generateDashboardInterface(
+    codeWriter.generateFrontInterface(
         generateCommandState.schema.properties,
         { overwrite: generateCommandState.flags.overwriteInterface },
     );
     codeWriter.generateFrontRoutes();
     codeWriter.declareDashboardComponents();
-    codeWriter.declareDashboardBoundedContext();
+    codeWriter.declareFrontBoundedContext();
     codeWriter.generateFrontNavigation();
     codeWriter.registerFrontNavigation();
     codeWriter.generateDashboardTranslations(generateCommandState.schema.properties, 'en');
