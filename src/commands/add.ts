@@ -145,12 +145,26 @@ export default class Add extends Command
                 }
 
                 case 'iam': {
-                    //
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'auditingNavigation');
+                    navigationSourceFile.saveSync();
+
+                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
+                    Installer.declareFrontRouting(routingSourceFile, 'iam');
+                    routingSourceFile.saveSync();
                     break;
                 }
 
                 case 'oAuth': {
-                    //
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'oAuth', 'auditingNavigation');
+                    navigationSourceFile.saveSync();
+
+                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
+                    Installer.declareFrontRouting(routingSourceFile, 'oAuth');
+                    routingSourceFile.saveSync();
                     break;
                 }
             }
