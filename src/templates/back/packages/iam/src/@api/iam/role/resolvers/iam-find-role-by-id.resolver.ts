@@ -1,0 +1,31 @@
+import { UseGuards } from '@nestjs/common';
+import { Resolver, Args, Query } from '@nestjs/graphql';
+import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+
+// @app
+import { IamFindRoleByIdHandler } from '../handlers/iam-find-role-by-id.handler';
+import { IamRole } from '@api/graphql';
+
+@Resolver()
+@Permissions('iam.role.get')
+@UseGuards(AuthenticationGuard, AuthorizationGuard)
+export class IamFindRoleByIdResolver
+{
+    constructor(
+        private readonly handler: IamFindRoleByIdHandler,
+    ) {}
+
+    @Query('iamFindRoleById')
+    async main(
+        @Args('id') id: string,
+        @Args('constraint') constraint?: QueryStatement,
+        @Timezone() timezone?: string,
+    ): Promise<IamRole>
+    {
+        return await this.handler.main(
+            id,
+            constraint,
+            timezone,
+        );
+    }
+}

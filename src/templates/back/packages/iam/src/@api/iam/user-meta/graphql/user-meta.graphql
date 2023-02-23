@@ -1,0 +1,21 @@
+
+type IamUserMeta
+{
+    id: ID!
+    meta: JSON
+}
+
+input IamUpdateUserMetaByIdInput
+{
+    meta: JSON
+}
+
+type Query
+{
+    iamFindUserMetaById(id: ID!): IamUserMeta
+}
+
+type Mutation
+{
+    iamUpdateUserMetaById(payload: IamUpdateUserMetaByIdInput!): IamUserMeta
+}

@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - iam/role",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - iamCreateRole",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamCreateRoleInput!)\n{\n\tiamCreateRole (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Handmade Steel Gloves\", \n\t\t\"isMaster\": true\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamCreateRoles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[IamCreateRoleInput]!)\n{\n\tiamCreateRoles (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"a830531b-5b0b-4dc4-ad49-d0e92ae71835\", \n\t\t\t\"name\": \"Licensed Plastic Sausages\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"10c3ac45-a8ac-4eba-8561-fa2a98a8169e\", \n\t\t\t\"name\": \"Intelligent Frozen Pizza\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f9c3267d-4ca2-436a-bee9-309345d14bc2\", \n\t\t\t\"name\": \"Handmade Cotton Keyboard\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0fc90204-7a6b-45e5-a684-83d2bf65c8b5\", \n\t\t\t\"name\": \"Rustic Fresh Bike\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"83a004c2-8ad6-47c8-ba0d-f6da4cb4ccf4\", \n\t\t\t\"name\": \"Fantastic Cotton Car\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"bc13a121-f9e9-43fc-907c-50345004a88b\", \n\t\t\t\"name\": \"Generic Soft Tuna\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"37a05c4b-6d06-48c9-bed7-f6c3740efc5c\", \n\t\t\t\"name\": \"Ergonomic Steel Gloves\", \n\t\t\t\"isMaster\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3978948f-b464-4dbb-b599-d3fa2a6e1319\", \n\t\t\t\"name\": \"Fantastic Fresh Fish\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"58d19f8c-bbde-4b99-b96d-44f8ab97b5e4\", \n\t\t\t\"name\": \"Ergonomic Cotton Chips\", \n\t\t\t\"isMaster\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d92c4556-627b-4f3a-8fb4-3305dda5d02b\", \n\t\t\t\"name\": \"Sleek Concrete Soap\", \n\t\t\t\"isMaster\": false\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamPaginateRoles",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateRoles (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamGetRoles",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamGetRoles (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindRole",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tiamFindRole (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamFindRoleById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tiamFindRoleById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamUpdateRole",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:IamUpdateRoleInput!)\n{\n\tiamUpdateRole (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Handcrafted Plastic Pizza\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteRoleById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tiamDeleteRoleById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - iamDeleteRoles",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteRoles (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tisMaster\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/role/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Incredible Soft Soap\", \n\t\"isMaster\": false, \n\t\"permissionIds\": [], \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/role/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"role",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/roles/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"3fe9ad8f-3d79-492e-948d-9dac11ef1a0e\", \n\t\t\"name\": \"Sleek Fresh Bacon\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"f6bfb098-4df7-42ec-8a31-9bc24dd4e21c\", \n\t\t\"name\": \"Awesome Soft Chicken\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"d4aa1005-82f7-4d95-8cd4-a566f0a09389\", \n\t\t\"name\": \"Unbranded Plastic Mouse\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"caccb8c3-c6d5-4b5d-9c3a-9380668db9d9\", \n\t\t\"name\": \"Practical Fresh Computer\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"10898db4-f4d8-40a2-ad0f-4a35849d6a7c\", \n\t\t\"name\": \"Handmade Rubber Salad\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"552dbebf-b52f-4f5c-b7ce-0c3dcedefb08\", \n\t\t\"name\": \"Refined Plastic Gloves\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"12f455fc-6533-400b-ab72-cf1d87789308\", \n\t\t\"name\": \"Licensed Soft Towels\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"71dad459-afba-4c46-89ff-640323ebc53f\", \n\t\t\"name\": \"Incredible Frozen Table\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"23bd8ce2-14c8-4469-9948-a7a602d3ee2f\", \n\t\t\"name\": \"Unbranded Steel Computer\", \n\t\t\"isMaster\": false, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b91e12fb-6ce4-42ac-9973-db7cc76f6d44\", \n\t\t\"name\": \"Handmade Plastic Chicken\", \n\t\t\"isMaster\": true, \n\t\t\"permissionIds\": [], \n\t\t\"accountIds\": []\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/roles/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"roles",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/roles/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/roles/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+                        "roles",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/roles/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/roles/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"roles",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/role/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/role/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"role",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/role/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/role/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"role",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/role/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handmade Granite Pizza\", \n\t\"isMaster\": true, \n\t\"permissionIds\": [], \n\t\"accountIds\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/role/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"role",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - iam/role/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/role/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"role",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - iam/roles/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/iam/roles/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"iam",
+						"roles",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

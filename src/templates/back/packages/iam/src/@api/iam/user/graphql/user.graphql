@@ -1,0 +1,119 @@
+
+type IamUser
+{
+    id: ID!
+    accountId: ID!
+    account: IamAccount
+    name: GraphQLString!
+    surname: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString!
+    password: GraphQLString!
+    rememberToken: GraphQLString
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreateUserInput
+{
+    id: ID!
+    name: GraphQLString!
+    surname: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString!
+    password: GraphQLString!
+    rememberToken: GraphQLString
+}
+
+input IamUpdateUserByIdInput
+{
+    id: ID!
+    name: GraphQLString
+    surname: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString
+    password: GraphQLString
+    rememberToken: GraphQLString
+}
+
+input IamUpdateUsersInput
+{
+    id: ID
+    name: GraphQLString
+    surname: GraphQLString
+    avatar: GraphQLString
+    mobile: GraphQLString
+    langId: ID
+    username: GraphQLString
+    password: GraphQLString
+    rememberToken: GraphQLString
+}
+
+type Query
+{
+    iamFindUser(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): IamUser
+
+    iamFindUserById(
+        id: ID
+        constraint: QueryStatement
+    ): IamUser
+
+    iamGetUsers(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamUser]!
+
+    iamPaginateUsers(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    iamCreateUser(
+        payload: IamCreateUserInput!
+    ): IamUser
+
+    iamCreateUsers(
+        payload: [IamCreateUserInput]!
+    ): Boolean!
+
+    iamUpdateUserById(
+        payload: IamUpdateUserByIdInput!
+        constraint: QueryStatement
+    ): IamUser
+
+    iamUpdateUsers(
+        payload: IamUpdateUsersInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamUser]!
+
+    iamUpsertUser(
+        payload: IamUpdateUserByIdInput!
+    ): IamUser
+
+    iamDeleteUserById(
+        id: ID!
+        constraint: QueryStatement
+    ): IamUser
+
+    iamDeleteUsers(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamUser]!
+
+}

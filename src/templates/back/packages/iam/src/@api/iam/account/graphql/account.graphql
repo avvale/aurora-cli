@@ -1,0 +1,137 @@
+enum IamAccountType {
+    USER
+    SERVICE
+}
+
+
+type IamAccount
+{
+    id: ID!
+    type: IamAccountType!
+    code: GraphQLString
+    email: GraphQLString!
+    isActive: GraphQLBoolean!
+    clientId: ID!
+    client: OAuthClient
+    scopes: JSON
+    dApplicationCodes: JSON!
+    dPermissions: JSON!
+    dTenants: JSON!
+    meta: JSON
+    roles: [IamRole]
+    tenants: [IamTenant]
+    user: IamUser
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreateAccountInput
+{
+    id: ID!
+    type: IamAccountType!
+    code: GraphQLString
+    email: GraphQLString!
+    isActive: GraphQLBoolean!
+    clientId: ID!
+    scopes: JSON
+    meta: JSON
+    roleIds: [ID]
+    tenantIds: [ID]
+    user: IamCreateUserInput
+}
+
+input IamUpdateAccountByIdInput
+{
+    id: ID!
+    type: IamAccountType
+    code: GraphQLString
+    email: GraphQLString
+    isActive: GraphQLBoolean
+    clientId: ID
+    scopes: JSON
+    meta: JSON
+    roleIds: [ID]
+    tenantIds: [ID]
+    user: IamUpdateUserByIdInput
+}
+
+input IamUpdateAccountsInput
+{
+    id: ID
+    type: IamAccountType
+    code: GraphQLString
+    email: GraphQLString
+    isActive: GraphQLBoolean
+    clientId: ID
+    scopes: JSON
+    dApplicationCodes: JSON
+    dPermissions: JSON
+    meta: JSON
+    roleIds: [ID]
+    tenantIds: [ID]
+    user: IamUpdateUsersInput
+}
+
+type Query
+{
+    iamFindAccount(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): IamAccount
+
+    iamFindAccountById(
+        id: ID
+        constraint: QueryStatement
+        queryGetClients: QueryStatement
+        constraintGetClients: QueryStatement
+    ): IamAccount
+
+    iamGetAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamAccount]!
+
+    iamPaginateAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+    # ---- customizations ----
+    iamMeAccount: IamAccount
+}
+
+type Mutation
+{
+    iamCreateAccount(
+        payload: IamCreateAccountInput!
+    ): IamAccount
+
+    iamUpdateAccountById(
+        payload: IamUpdateAccountByIdInput!
+        constraint: QueryStatement
+    ): IamAccount
+
+    iamUpdateAccounts(
+        payload: IamUpdateAccountsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamAccount]!
+
+    iamUpsertAccount(
+        payload: IamUpdateAccountByIdInput!
+    ): IamAccount
+
+    iamDeleteAccountById(
+        id: ID!
+        constraint: QueryStatement
+    ): IamAccount
+
+    iamDeleteAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamAccount]!
+
+    # ---- customizations ----
+    iamCreateAccounts(payload: [IamCreateAccountInput]!): Boolean!
+}

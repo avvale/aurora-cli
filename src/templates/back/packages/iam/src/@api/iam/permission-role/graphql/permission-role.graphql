@@ -1,0 +1,62 @@
+
+type IamPermissionRole
+{
+    permissionId: ID!
+    permission: IamPermission
+    roleId: ID!
+    role: IamRole
+}
+
+input IamCreatePermissionRoleInput
+{
+    permissionId: ID!
+    roleId: ID!
+}
+
+input IamDeletePermissionRoleInput
+{
+    permissionId: ID!
+    roleId: ID!
+}
+
+type Query
+{
+    iamFindPermissionRoleById(
+        permissionId: ID
+        roleId: ID
+        constraint: QueryStatement
+    ): IamPermissionRole
+
+    iamGetPermissionsRoles(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamPermissionRole]!
+
+    iamPaginatePermissionsRoles(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    iamCreatePermissionRole(
+        payload: IamCreatePermissionRoleInput!
+    ): IamPermissionRole
+
+    iamCreatePermissionsRoles(
+        payload: [IamCreatePermissionRoleInput]!
+    ): Boolean!
+
+    iamDeletePermissionRoleById(
+        payload: IamDeletePermissionRoleInput!
+        constraint: QueryStatement
+    ): IamPermissionRole
+
+    iamDeletePermissionsRoles(
+        payload: [IamDeletePermissionRoleInput]!
+        constraint: QueryStatement
+    ): [IamPermissionRole]!
+
+}

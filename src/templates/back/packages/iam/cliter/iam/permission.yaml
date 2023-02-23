@@ -1,0 +1,56 @@
+version: 0.0.1
+boundedContextName: iam
+moduleName: permission
+moduleNames: permissions
+aggregateName: IamPermission
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: boundedContextId
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: IamBoundedContext
+    relationshipModulePath: iam/bounded-context
+    relationshipKey: id
+    relationshipField: boundedContext
+    relationshipAvoidConstraint: true
+    index: index
+  - name: roles
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: role
+    relationshipAggregate: IamRole
+    relationshipModulePath: iam/role
+    relationshipAvoidConstraint: false
+    pivotAggregateName: IamPermissionsRoles
+    pivotPath: iam/permission
+    pivotFileName: permissions-roles
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis: []
+excluded:
+  - src/app/modules/admin/apps/iam/permission/permission-detail.component.html
+  - src/app/modules/admin/apps/iam/permission/permission-detail.component.ts
+  - src/app/modules/admin/apps/iam/permission/permission-list.component.html
+  - src/app/modules/admin/apps/iam/permission/permission-list.component.ts
+  - src/app/modules/admin/apps/iam/permission/permission.resolvers.ts
