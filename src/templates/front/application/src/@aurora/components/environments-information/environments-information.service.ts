@@ -31,6 +31,11 @@ export class EnvironmentsInformationService
         private http: HttpClient,
     )
     {
+        this.init();
+    }
+
+    init(): void
+    {
         this.http
             .get<EnvironmentInformation>(`${environment.api.rest}/core/environment-information`)
             .subscribe(environmentInformationServer =>
