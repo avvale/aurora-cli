@@ -4,8 +4,7 @@ import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache, Normali
 import { log, Utils } from '@aurora';
 import { TranslocoService } from '@ngneat/transloco';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-// import { HttpLink } from 'apollo-angular/http/http-link';
-import { HttpLink } from 'apollo-angular/build/http/http-link';
+import { HttpLink } from 'apollo-angular/http/http-link';
 import { environment } from 'environments/environment';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { lastValueFrom } from 'rxjs';
