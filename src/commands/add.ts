@@ -64,7 +64,15 @@ export default class Add extends Command
                     const sourceFile = Installer.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(sourceFile, 'iam', ['IamModule']);
 
-                    Installer.changeDecoratorPropertyAdapter(sourceFile, 'AppModule', 'providers', 'AuthorizationGuard', 'AuthorizationPermissionsGuard');
+                    Installer.changeDecoratorPropertyAdapter(
+                        sourceFile,
+                        'AppModule',
+                        'providers',
+                        'AuthorizationGuard',
+                        'AuthorizationPermissionsGuard',
+                        '@api/iam/shared/guards/authorization-permissions.guard',
+                        'Module',
+                    );
 
                     sourceFile.saveSync();
                     break;
@@ -75,7 +83,15 @@ export default class Add extends Command
                     const sourceFile = Installer.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(sourceFile, 'o-auth', ['OAuthModule']);
 
-                    Installer.changeDecoratorPropertyAdapter(sourceFile, 'AppModule', 'providers', 'AuthenticationGuard', 'AuthenticationJwtGuard');
+                    Installer.changeDecoratorPropertyAdapter(
+                        sourceFile,
+                        'AppModule',
+                        'providers',
+                        'AuthenticationGuard',
+                        'AuthenticationJwtGuard',
+                        '@api/iam/shared/guards/authorization-permissions.guard',
+                        'Module',
+                    );
 
                     sourceFile.saveSync();
                     break;

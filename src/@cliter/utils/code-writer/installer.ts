@@ -1,4 +1,4 @@
-import { Project, SourceFile, Decorator, ObjectLiteralExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
+import { Project, SourceFile, Decorator, ObjectLiteralExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode, PropertyAssignment } from 'ts-morph';
 import { SyntaxKind, NewLineKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
 import { ImportDriver } from './import.driver';
@@ -122,10 +122,22 @@ export const Installer =
         propertyName: string,
         provide: string,
         adapter: string,
+        adapterPath: string,
+        decoratorName: string,
     ): void
     {
+        const importedDeclarations: string[] = Installer.getImportedDeclarations(sourceFile);
+
+        if (importedDeclarations.includes(adapter)) return;
+
+        ImportDriver.createImportItems(
+            sourceFile,
+            adapterPath,
+            [adapter],
+        );
+
         const moduleClass = sourceFile.getClass(moduleName);
-        const moduleDecorator = moduleClass?.getDecorator('NgModule');
+        const moduleDecorator = moduleClass?.getDecorator(decoratorName);
         const moduleDecoratorArguments = moduleDecorator?.getArguments()[0] as ObjectLiteralExpression;
         const decoratorProperty = moduleDecoratorArguments.getProperty(propertyName) as InitializerExpressionGetableNode;
         const decoratorArrayProperty = decoratorProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
@@ -139,19 +151,24 @@ export const Installer =
                 let isProvideWanted = false;
                 for (const property of properties)
                 {
+                    if (!(property instanceof PropertyAssignment)) continue;
 
-                    console.log(property);
-
-                    /* if (property.getName() === 'provide' && property.getInitializer().getText() === provide)
+                    if (
+                        property.getName() === 'provide' &&
+                        property.getInitializer()?.getText() === provide
+                    )
                     {
                         isProvideWanted = true;
                     }
 
-                    if (isProvideWanted && property.getName() === 'useClass')
+                    if (
+                        isProvideWanted &&
+                        property.getName() === 'useClass'
+                    )
                     {
                         property.setInitializer(adapter);
                         break;
-                    } */
+                    }
                 }
             }
         }
