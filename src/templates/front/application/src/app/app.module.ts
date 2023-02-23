@@ -59,7 +59,7 @@ const routerConfig: ExtraOptions = {
         },
         {
             provide : UserMetaStorageService,
-            useClass: UserMetaStorageLocalStorageService,
+            useClass: UserMetaStorageLocalStorageAdapterService,
         },
         {
             provide : SessionService,
