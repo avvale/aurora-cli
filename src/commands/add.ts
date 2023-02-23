@@ -1,6 +1,7 @@
 import { Command, Flags } from '@oclif/core';
+import { ArrayLiteralExpression } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
-import { CommonDriver } from '../@cliter/utils/code-writer';
+import { CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver } from '../@cliter/utils/code-writer';
 
 export default class Add extends Command
 {
@@ -81,20 +82,45 @@ export default class Add extends Command
 
                 case 'oAuth': {
                     const project = CommonDriver.createProject(['tsconfig.json']);
-                    const sourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(sourceFile, 'o-auth', ['OAuthModule']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'o-auth', ['OAuthModule']);
 
                     Installer.changeDecoratorPropertyAdapter(
-                        sourceFile,
+                        appModuleSourceFile,
                         'AppModule',
                         'providers',
                         'AuthenticationGuard',
                         'AuthenticationJwtGuard',
-                        '@api/iam/shared/guards/authorization-permissions.guard',
+                        '@api/o-auth/shared/guards/authentication-jwt.guard',
                         'Module',
                     );
+                    appModuleSourceFile.saveSync();
 
-                    sourceFile.saveSync();
+                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+
+                    // add custom imports
+                    if (ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuthJwtStrategyRegistryModule')) break;
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@app/o-auth/shared/modules/auth-jwt-strategy-registry.module',
+                        ['AuthJwtStrategyRegistryModule'],
+                    );
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@app/o-auth/shared/jwt-config',
+                        ['jwtConfig'],
+                    );
+
+                    const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
+                    const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                    importsArray.addElement('AuthJwtStrategyRegistryModule.forRoot(jwtConfig)', { useNewLines: true });
+                    const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
+                    exportsArray.addElement('AuthJwtStrategyRegistryModule', { useNewLines: true });
+
+                    sharedModuleSourceFile.saveSync();
+
                     break;
                 }
             }
