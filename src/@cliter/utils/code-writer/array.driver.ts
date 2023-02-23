@@ -9,7 +9,7 @@ export class ArrayDriver
      * @param item          item to add to array
      * @param array         name array or Array literal where will be added the item
      */
-    public static addArrayItems(sourceFile: SourceFile, items: string[], array: string | ArrayLiteralExpression): void
+    public static addArrayItems(sourceFile: SourceFile, items: string[], array: string | ArrayLiteralExpression): void
     {
         let arrayLiteralExpression;
 
