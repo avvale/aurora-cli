@@ -1,3 +1,4 @@
+export * from './add-package-files.function';
 export * from './add-references.function';
 export * from './generate-additional-api-files.function';
 export * from './generate-api-files.function';

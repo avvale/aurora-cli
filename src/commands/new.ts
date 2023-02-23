@@ -31,7 +31,6 @@ export default class New extends Command
             options    : [
                 'back',
                 'front',
-                'back-package',
             ],
         },
         {
@@ -75,13 +74,6 @@ export default class New extends Command
                 });
 
                 if (flags.install) installDependencies(args.name);
-                break;
-
-            case 'back-package':
-                // stateService.packageName = args.name;
-                // TODO: generate package
-                // await Operations.generatePackage();
-                // if (flags.install) installDependencies(args.name);
                 break;
         }
     }

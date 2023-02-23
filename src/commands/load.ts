@@ -6,7 +6,7 @@ import { generateGraphqlTypes } from '../@cliter/functions/back';
 
 export default class Load extends Command
 {
-    static description = 'Reload aurora [bounded-context, module] from yaml file, located in the cliter folder';
+    static description = 'Load aurora [bounded-context, module] from yaml file, located in the cliter folder';
 
     static flags =
     {
@@ -46,7 +46,6 @@ export default class Load extends Command
             options    : [
                 'back',
                 'front',
-                'back-package',
             ],
         },
         {
