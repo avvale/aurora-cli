@@ -6,6 +6,7 @@ import { ArrayDriver } from './array.driver';
 import * as path from 'node:path';
 import { DecoratorDriver } from './decorator.driver';
 import { ObjectDriver } from './object.driver';
+import { ProviderDriver } from './provider.driver';
 
 export const Installer =
 {
@@ -113,41 +114,12 @@ export const Installer =
             [adapter],
         );
 
-        const moduleClass = sourceFile.getClass(moduleName);
-        const moduleDecorator = moduleClass?.getDecorator(decoratorName);
-        const moduleDecoratorArguments = moduleDecorator?.getArguments()[0] as ObjectLiteralExpression;
-        const decoratorProperty = moduleDecoratorArguments.getProperty(propertyName) as InitializerExpressionGetableNode;
-        const decoratorArrayProperty = decoratorProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, moduleName, decoratorName);
+        const decoratorArrayProperty = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, propertyName);
 
         for (const [index, value] of decoratorArrayProperty.getElements().entries())
         {
-            // const object = value.getInitializer();
-            if (value instanceof ObjectLiteralExpression)
-            {
-                const properties = value.getProperties();
-                let isProvideWanted = false;
-                for (const property of properties)
-                {
-                    if (!(property instanceof PropertyAssignment)) continue;
-
-                    if (
-                        property.getName() === 'provide' &&
-                        property.getInitializer()?.getText() === provide
-                    )
-                    {
-                        isProvideWanted = true;
-                    }
-
-                    if (
-                        isProvideWanted &&
-                        property.getName() === 'useClass'
-                    )
-                    {
-                        property.setInitializer(adapter);
-                        break;
-                    }
-                }
-            }
+            ProviderDriver.changeUseClass(value as ObjectLiteralExpression, provide, adapter);
         }
     },
 };

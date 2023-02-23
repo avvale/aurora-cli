@@ -1,4 +1,4 @@
-import { Expression, ObjectLiteralElementLike, ObjectLiteralExpression, PropertyAssignment } from 'ts-morph';
+import { ObjectLiteralElementLike, ObjectLiteralExpression, PropertyAssignment } from 'ts-morph';
 
 export class ObjectDriver
 {
