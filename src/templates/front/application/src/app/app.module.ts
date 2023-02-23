@@ -5,16 +5,12 @@ import { ExtraOptions, PreloadAllModules, RouteReuseStrategy, RouterModule } fro
 import { FuseModule } from '@fuse';
 import { FuseConfigModule } from '@fuse/services/config';
 import { FuseMockApiModule } from '@fuse/lib/mock-api';
-import { AuroraGridManagerService, AuroraModule, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationService, COMPACT_NAVIGATION, DEFAULT_NAVIGATION, EnvironmentsInformationService, FUTURISTIC_NAVIGATION, GridManagerService, HORIZONTAL_NAVIGATION, IamAuroraAdapterService, IamService, JsonLangService, LangService, RibbonEnvironmentModule, RouteReuseStrategyService, SessionLocalStorageService, SessionService, UserMetaStorageLocalStorageAdapterService, UserMetaStorageService } from '@aurora';
-import { CoreModule } from 'app/core/core.module';
-import { appConfig } from 'app/core/config/app.config';
+import { AuroraGridManagerService, AuroraModule, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationService, COMPACT_NAVIGATION, DEFAULT_NAVIGATION, EnvironmentsInformationMockAdapterService, EnvironmentsInformationService, FUTURISTIC_NAVIGATION, GridManagerService, HORIZONTAL_NAVIGATION, IamAuroraAdapterService, IamService, JsonLangService, LangService, RibbonEnvironmentModule, RouteReuseStrategyService, SessionLocalStorageService, SessionService, UserMetaStorageLocalStorageAdapterService, UserMetaStorageService } from '@aurora';
+import { appConfig, AuthGuard, compactNavigation, CoreModule, defaultNavigation, futuristicNavigation, horizontalNavigation } from 'app/core';
 import { mockApiServices } from 'app/mock-api';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
-import { compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation } from './core/navigation/default-navigation';
-import { AuthGuard } from './core/auth/guards/auth.guard';
-
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
     scrollPositionRestoration: 'enabled',
@@ -93,11 +89,14 @@ const routerConfig: ExtraOptions = {
             provide : HORIZONTAL_NAVIGATION,
             useValue: horizontalNavigation,
         },
-        // disable authentication Guard
+        {
+            provide : EnvironmentsInformationService,
+            useClass: EnvironmentsInformationMockAdapterService
+        },
         {
             provide : AuthGuard,
-            useClass: AuthenticationDisabledAdapterGuard,
-        },
+            useClass: AuthenticationDisabledAdapterGuard
+        }
     ],
     bootstrap: [
         AppComponent,
