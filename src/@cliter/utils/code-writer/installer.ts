@@ -37,21 +37,18 @@ export const Installer =
 
     declareBackPackageModule(sourceFile: SourceFile, boundedContextName: string, items: string[]): void
     {
-        const importedDeclarations: string[] = Installer.getImportedDeclarations(sourceFile);
+        if (ImportDriver.hasImportDeclarations(sourceFile, `${boundedContextName.toPascalCase()}Module`)) return;
 
-        if (!importedDeclarations.includes(`${boundedContextName.toPascalCase()}Module`))
-        {
-            ImportDriver.createImportItems(
-                sourceFile,
-                `${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.module`,
-                items,
-            );
+        ImportDriver.createImportItems(
+            sourceFile,
+            `${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.module`,
+            items,
+        );
 
-            const moduleDecoratorArguments = Installer.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
-            const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
-            const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-            importsArray.addElement(`${boundedContextName.toPascalCase()}Module`, { useNewLines: true });
-        }
+        const moduleDecoratorArguments = Installer.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
+        const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
+        const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        importsArray.addElement(`${boundedContextName.toPascalCase()}Module`, { useNewLines: true });
     },
 
     declareFrontNavigationMenu(
@@ -78,18 +75,6 @@ export const Installer =
         const moduleClass = sourceFile.getClass(className);
         const moduleDecorator: Decorator = moduleClass?.getDecorator(decorator) as Decorator;
         return moduleDecorator.getArguments()[0] as ObjectLiteralExpression;
-    },
-
-    getImportedDeclarations(sourceFile: SourceFile): string[]
-    {
-        const imports = sourceFile.getImportDeclarations();
-        let modules: string[] = [];
-        for (const importObj of imports)
-        {
-            modules = [...modules, ...importObj.getNamedImports().map(i => i.getName())];
-        }
-
-        return modules;
     },
 
     declareFrontRouting(sourceFile: SourceFile, boundedContextName: string, index = 5): void
@@ -126,9 +111,7 @@ export const Installer =
         decoratorName: string,
     ): void
     {
-        const importedDeclarations: string[] = Installer.getImportedDeclarations(sourceFile);
-
-        if (importedDeclarations.includes(adapter)) return;
+        if (ImportDriver.hasImportDeclarations(sourceFile, adapter)) return;
 
         ImportDriver.createImportItems(
             sourceFile,

@@ -8,6 +8,7 @@ export class ImportDriver
      * @param sourceFile
      * @param modules
      * @param path
+     * @return void
      */
     public static createImportItems(
         sourceFile: SourceFile,
@@ -55,25 +56,27 @@ export class ImportDriver
      *
      * @param sourceFile
      * @param moduleNames
+     * @return string[]
      */
-    private static getUniqueImportItems(sourceFile: SourceFile, items: string[]): string[]
+    public static getUniqueImportItems(sourceFile: SourceFile, items: string[]): string[]
     {
         // get import to avoid duplicities
         const imports = sourceFile.getImportDeclarations();
 
         // get names imported
-        const itemsImported = imports.flatMap(i => i.getNamedImports().map(j => j.getName()));
+        const itemsImported = new Set(imports.flatMap(i => i.getNamedImports().map(j => j.getName())));
 
         // filter only items where is not imported
-        return items.filter(item => !itemsImported.includes(item));
+        return items.filter(item => !itemsImported.has(item));
     }
 
     /**
      * Return import paths from source
      *
      * @param sourceFile
+     * @return string[]
      */
-    private static getImportPaths(sourceFile: SourceFile): string[]
+    public static getImportPaths(sourceFile: SourceFile): string[]
     {
         const imports = sourceFile.getImportDeclarations();
         const paths: string[] = [];
@@ -81,6 +84,32 @@ export class ImportDriver
         {
             paths.push(importObj.getModuleSpecifier().getLiteralValue());
         }
+
         return paths;
+    }
+
+    /**
+     * Return import items from source
+     *
+     * @param sourceFile
+     * @return string[]
+     */
+    public static getImportedDeclarations(sourceFile: SourceFile): string[]
+    {
+        const imports = sourceFile.getImportDeclarations();
+        let declarations: string[] = [];
+        for (const importObj of imports)
+        {
+            declarations = [...declarations, ...importObj.getNamedImports().map(i => i.getName())];
+        }
+
+        return declarations;
+    }
+
+    public static hasImportDeclarations(sourceFile: SourceFile, declaration: string): boolean
+    {
+        const importedDeclarations = ImportDriver.getImportedDeclarations(sourceFile);
+
+        return importedDeclarations.includes(declaration);
     }
 }
