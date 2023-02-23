@@ -366,7 +366,7 @@ export class CodeWriter
     declareDashboardComponents(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'NgModule');
+        const moduleDecoratorArguments = CodeWriter.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'NgModule');
 
         // declarations
         const declarations: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('declarations') as InitializerExpressionGetableNode;
@@ -520,7 +520,7 @@ export class CodeWriter
     {
         // get decorator arguments
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.apiDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'Module');
+        const moduleDecoratorArguments = CodeWriter.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'Module');
 
         // providers
         const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
@@ -593,8 +593,8 @@ export class CodeWriter
     declareBoundedContextModuleInApplicationModule(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app.module.ts'));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
-        const modules: string[] = this.getImportedModules(sourceFile);
+        const moduleDecoratorArguments = CodeWriter.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
+        const modules: string[] = CodeWriter.getImportedDeclarations(sourceFile);
 
         if (!modules.includes(`${this.boundedContextName.toPascalCase()}Module`))
         {
@@ -679,7 +679,7 @@ export class CodeWriter
     declareAuthJwtStrategyRegistryModuleInShareModule(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join(cliterConfig.auroraLocalPackage, 'shared.module.ts')));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'SharedModule', 'Module');
+        const moduleDecoratorArguments = CodeWriter.getModuleDecoratorArguments(sourceFile, 'SharedModule', 'Module');
 
         // register import auth module
         ImportDriver.createImportItems(
@@ -727,22 +727,74 @@ export class CodeWriter
         return SequelizeModuleElement.getArguments()[0] as ArrayLiteralExpression;
     }
 
-    private getImportedModules(sourceFile: SourceFile): string[]
+
+    /****************
+     * new approach *
+     ****************/
+
+    static createProject(tsconfigPath: string[]): Project
+    {
+        return new Project({
+            tsConfigFilePath    : path.join(process.cwd(), ...tsconfigPath),
+            // these are the defaults
+            manipulationSettings: {
+                // TwoSpaces, FourSpaces, EightSpaces, or Tab
+                indentationText                : IndentationText.FourSpaces,
+                // LineFeed or CarriageReturnLineFeed
+                newLineKind                    : NewLineKind.LineFeed,
+                // Single or Double
+                quoteKind                      : QuoteKind.Single,
+                // Whether to change shorthand property assignments to property assignments
+                // and add aliases to import & export specifiers (see more information in
+                // the renaming section of the documentation).
+                usePrefixAndSuffixTextForRename: false,
+                // Whether to use trailing commas in multi-line scenarios where trailing
+                // commas would be used.
+                useTrailingCommas              : false,
+            },
+        });
+    }
+
+    static createSourceFile(project: Project, filePath: string[]): SourceFile
+    {
+        return project?.addSourceFileAtPath(path.join(process.cwd(), ...filePath));
+    }
+
+    static declareBackPackageModule(sourceFile: SourceFile, boundedContextName: string, items: string[]): void
+    {
+        const importedDeclarations: string[] = CodeWriter.getImportedDeclarations(sourceFile);
+
+        if (!importedDeclarations.includes(`${boundedContextName.toPascalCase()}Module`))
+        {
+            ImportDriver.createImportItems(
+                sourceFile,
+                `${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.module`,
+                items,
+            );
+
+            const moduleDecoratorArguments = CodeWriter.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
+            const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
+            const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+            importsArray.addElement(`${boundedContextName.toPascalCase()}Module`, { useNewLines: true });
+        }
+    }
+
+    static getModuleDecoratorArguments(sourceFile: SourceFile, className: string, decorator: string): ObjectLiteralExpression
+    {
+        const moduleClass = sourceFile.getClass(className);
+        const moduleDecorator: Decorator = moduleClass?.getDecorator(decorator) as Decorator;
+        return moduleDecorator.getArguments()[0] as ObjectLiteralExpression;
+    }
+
+    static getImportedDeclarations(sourceFile: SourceFile): string[]
     {
         const imports = sourceFile.getImportDeclarations();
         let modules: string[] = [];
         for (const importObj of imports)
         {
-            modules = modules.concat(importObj.getNamedImports().map(i => i.getName()));
+            modules = [...modules, ...importObj.getNamedImports().map(i => i.getName())];
         }
 
         return modules;
-    }
-
-    private getModuleDecoratorArguments(sourceFile: SourceFile, className: string, decorator: string): ObjectLiteralExpression
-    {
-        const moduleClass = sourceFile.getClass(className);
-        const moduleDecorator: Decorator = moduleClass?.getDecorator(decorator) as Decorator;
-        return moduleDecorator.getArguments()[0] as ObjectLiteralExpression;
     }
 }
