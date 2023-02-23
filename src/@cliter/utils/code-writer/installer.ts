@@ -1,43 +1,14 @@
-import { Project, SourceFile, Decorator, ObjectLiteralExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode, PropertyAssignment, ArrayLiteralExpression } from 'ts-morph';
-import { SyntaxKind, NewLineKind } from 'typescript';
+import { SourceFile, ObjectLiteralExpression, InitializerExpressionGetableNode, ArrayLiteralExpression } from 'ts-morph';
+import { SyntaxKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
-import { ImportDriver } from './import.driver';
-import { ArrayDriver } from './array.driver';
-import * as path from 'node:path';
-import { DecoratorDriver } from './decorator.driver';
-import { ObjectDriver } from './object.driver';
-import { ProviderDriver } from './provider.driver';
+import { ImportDriver } from './drivers/import.driver';
+import { ArrayDriver } from './drivers/array.driver';
+import { DecoratorDriver } from './drivers/decorator.driver';
+import { ObjectDriver } from './drivers/object.driver';
+import { ProviderDriver } from './drivers/provider.driver';
 
 export const Installer =
 {
-    createProject(tsconfigPath: string[]): Project
-    {
-        return new Project({
-            tsConfigFilePath    : path.join(process.cwd(), ...tsconfigPath),
-            // these are the defaults
-            manipulationSettings: {
-                // TwoSpaces, FourSpaces, EightSpaces, or Tab
-                indentationText                : IndentationText.FourSpaces,
-                // LineFeed or CarriageReturnLineFeed
-                newLineKind                    : NewLineKind.LineFeed,
-                // Single or Double
-                quoteKind                      : QuoteKind.Single,
-                // Whether to change shorthand property assignments to property assignments
-                // and add aliases to import & export specifiers (see more information in
-                // the renaming section of the documentation).
-                usePrefixAndSuffixTextForRename: false,
-                // Whether to use trailing commas in multi-line scenarios where trailing
-                // commas would be used.
-                useTrailingCommas              : false,
-            },
-        });
-    },
-
-    createSourceFile(project: Project, filePath: string[]): SourceFile
-    {
-        return project?.addSourceFileAtPath(path.join(process.cwd(), ...filePath));
-    },
-
     declareBackPackageModule(sourceFile: SourceFile, boundedContextName: string, items: string[]): void
     {
         if (ImportDriver.hasImportDeclarations(sourceFile, `${boundedContextName.toPascalCase()}Module`)) return;

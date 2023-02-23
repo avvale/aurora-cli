@@ -2,10 +2,10 @@ import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralEx
 import { SyntaxKind, NewLineKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
 import { Properties } from '../properties';
-import { ImportDriver } from './import.driver';
-import { ExportDriver } from './export.driver';
-import { ArrayDriver } from './array.driver';
-import { InterfaceDriver } from './interface.driver';
+import { ImportDriver } from './drivers/import.driver';
+import { ExportDriver } from './drivers/export.driver';
+import { ArrayDriver } from './drivers/array.driver';
+import { InterfaceDriver } from './drivers/interface.driver';
 import { ObjectTools } from '../object-tools';
 import * as path from 'node:path';
 import * as fs from 'node:fs';

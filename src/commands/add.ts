@@ -1,5 +1,6 @@
 import { Command, Flags } from '@oclif/core';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
+import { CommonDriver } from '../@cliter/utils/code-writer';
 
 export default class Add extends Command
 {
@@ -52,16 +53,16 @@ export default class Add extends Command
             switch (packageName)
             {
                 case 'auditing': {
-                    const project = Installer.createProject(['tsconfig.json']);
-                    const sourceFile = Installer.createSourceFile(project, ['src', 'app.module.ts']);
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const sourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(sourceFile, 'auditing', ['AuditingModule']);
                     sourceFile.saveSync();
                     break;
                 }
 
                 case 'iam': {
-                    const project = Installer.createProject(['tsconfig.json']);
-                    const sourceFile = Installer.createSourceFile(project, ['src', 'app.module.ts']);
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const sourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(sourceFile, 'iam', ['IamModule']);
 
                     Installer.changeDecoratorPropertyAdapter(
@@ -79,8 +80,8 @@ export default class Add extends Command
                 }
 
                 case 'oAuth': {
-                    const project = Installer.createProject(['tsconfig.json']);
-                    const sourceFile = Installer.createSourceFile(project, ['src', 'app.module.ts']);
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const sourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(sourceFile, 'o-auth', ['OAuthModule']);
 
                     Installer.changeDecoratorPropertyAdapter(
@@ -106,12 +107,12 @@ export default class Add extends Command
             switch (packageName)
             {
                 case 'auditing': {
-                    const project = Installer.createProject(['tsconfig.json']);
-                    const navigationSourceFile = Installer.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'auditing', 'auditingNavigation');
                     navigationSourceFile.saveSync();
 
-                    const routingSourceFile = Installer.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
+                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
                     Installer.declareFrontRouting(routingSourceFile, 'auditing');
                     routingSourceFile.saveSync();
                     break;
