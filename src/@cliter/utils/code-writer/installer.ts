@@ -1,12 +1,7 @@
 import { SourceFile, ObjectLiteralExpression, InitializerExpressionGetableNode, ArrayLiteralExpression } from 'ts-morph';
 import { SyntaxKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
-import { ImportDriver } from './drivers/import.driver';
-import { ArrayDriver } from './drivers/array.driver';
-import { DecoratorDriver } from './drivers/decorator.driver';
-import { ObjectDriver } from './drivers/object.driver';
-import { ProviderDriver } from './drivers/provider.driver';
-import { VariableDriver } from './drivers/variable.driver';
+import { ArrayDriver, DecoratorDriver, ImportDriver, ObjectDriver, ProviderDriver, VariableDriver } from './drivers';
 
 export const Installer =
 {
