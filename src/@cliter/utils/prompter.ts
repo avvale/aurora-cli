@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-array-push-push */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, SqlRelationship, SqlType } from '../types';
+import { GenerateCommandState, Scope, SqlRelationship, SqlType } from '../types';
 import { Property } from './property';
 import { cliterConfig } from '../config/cliter.config';
 import { getBoundedContextModuleFromFlag } from '../functions/common';
@@ -496,15 +496,17 @@ export const Prompter =
         return inquirer.prompt(questions);
     },
 
-    async promptAddPackage(): Promise<{ from: string; to: string; service: string;}>
+    async promptAddPackage(scope: Scope): Promise<{ from: string; to: string; service: string;}>
     {
         const questions = [];
         questions.push(
             {
-                name    : 'packageName',
-                message : 'Select the package to install',
-                type    : 'list',
-                choices : cliterConfig.packages,
+                name   : 'packageName',
+                message: 'Select the package to install',
+                type   : 'list',
+                choices: Scope.FRONT === scope ?
+                    cliterConfig.frontPackages :
+                    cliterConfig.backPackages,
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 validate: (packageName: string) => true,
             },

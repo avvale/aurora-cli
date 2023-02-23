@@ -30,7 +30,8 @@ export interface CliterConfig
     platformFromDeploy: string[];
     platformToDeploy: string[];
     serviceToDeploy: { front: { [key: string]: string[]; }, back: { [key: string]: string[]; } };
-    packages: string[];
+    backPackages: string[];
+    frontPackages: string[];
 }
 
 export const cliterConfig: CliterConfig =
@@ -312,8 +313,14 @@ export const cliterConfig: CliterConfig =
             onPremise  : ['Plesk'],
         },
     },
-    packages: [
+    backPackages: [
+        'auditing',
+        'iam',
         'oAuth',
-        'common',
+    ],
+    frontPackages: [
+        'auditing',
+        'iam',
+        'oAuth',
     ],
 };
