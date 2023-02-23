@@ -13,32 +13,4 @@ export class Operations
             '.',
         );
     }*/
-
-    /*
-    static async installBackPackage(packageName: string): Promise<void>
-    {
-        // create pipeline files
-        await TemplateGenerator.generateStaticContents(
-            TemplateElement.BACK_PACKAGES,
-            '.',
-            '.',
-            {
-                templateElementPath: path.join(packageName.toKebabCase()),
-            },
-        );
-    }*/
-
-    /*
-    static async installFrontPackage(packageName: string): Promise<void>
-    {
-        // create pipeline files
-        await TemplateGenerator.generateStaticContents(
-            TemplateElement.FRONT_PACKAGES,
-            '.',
-            '.',
-            {
-                templateElementPath: path.join(packageName.toKebabCase()),
-            },
-        );
-    }*/
 }
