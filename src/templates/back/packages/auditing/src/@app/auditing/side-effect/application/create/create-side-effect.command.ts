@@ -5,6 +5,7 @@ export class CreateSideEffectCommand
     constructor(
         public readonly payload: {
             id: string;
+            tags?: any;
             modelPath: string;
             modelName: string;
             operationId?: string;
@@ -22,7 +23,6 @@ export class CreateSideEffectCommand
             query?: any;
             body?: any;
             userAgent?: string;
-            tags?: any;
             isRollback: boolean;
             rollbackSideEffectId?: string;
         },

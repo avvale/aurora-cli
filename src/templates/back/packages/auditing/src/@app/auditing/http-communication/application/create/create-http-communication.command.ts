@@ -5,7 +5,7 @@ export class CreateHttpCommunicationCommand
     constructor(
         public readonly payload: {
             id: string;
-            code?: string;
+            tags?: any;
             event: string;
             status?: number;
             method: string;
@@ -14,6 +14,8 @@ export class CreateHttpCommunicationCommand
             httpRequestRejected?: any;
             httpResponse?: any;
             httpResponseRejected?: any;
+            isReprocessing: boolean;
+            reprocessingHttpCommunicationId?: string;
         },
         public readonly cQMetadata?: CQMetadata,
     ) {}

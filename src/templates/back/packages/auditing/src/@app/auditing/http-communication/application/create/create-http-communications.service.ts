@@ -3,7 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -12,6 +12,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -31,7 +33,7 @@ export class CreateHttpCommunicationsService
     async main(
         httpCommunications: {
             id: HttpCommunicationId;
-            code: HttpCommunicationCode;
+            tags: HttpCommunicationTags;
             event: HttpCommunicationEvent;
             status: HttpCommunicationStatus;
             method: HttpCommunicationMethod;
@@ -40,6 +42,8 @@ export class CreateHttpCommunicationsService
             httpRequestRejected: HttpCommunicationHttpRequestRejected;
             httpResponse: HttpCommunicationHttpResponse;
             httpResponseRejected: HttpCommunicationHttpResponseRejected;
+            isReprocessing: HttpCommunicationIsReprocessing;
+            reprocessingHttpCommunicationId: HttpCommunicationReprocessingHttpCommunicationId;
         } [],
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -47,7 +51,7 @@ export class CreateHttpCommunicationsService
         // create aggregate with factory pattern
         const aggregateHttpCommunications = httpCommunications.map(httpCommunication => AuditingHttpCommunication.register(
             httpCommunication.id,
-            httpCommunication.code,
+            httpCommunication.tags,
             httpCommunication.event,
             httpCommunication.status,
             httpCommunication.method,
@@ -56,6 +60,8 @@ export class CreateHttpCommunicationsService
             httpCommunication.httpRequestRejected,
             httpCommunication.httpResponse,
             httpCommunication.httpResponseRejected,
+            httpCommunication.isReprocessing,
+            httpCommunication.reprocessingHttpCommunicationId,
             new HttpCommunicationCreatedAt({ currentTimestamp: true }),
             new HttpCommunicationUpdatedAt({ currentTimestamp: true }),
             null, // deleteAt

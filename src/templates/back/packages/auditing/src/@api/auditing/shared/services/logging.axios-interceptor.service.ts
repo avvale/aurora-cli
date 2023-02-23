@@ -18,7 +18,7 @@ interface MetaAxiosRequestConfig extends InternalAxiosRequestConfig
 {
     [META_KEY]: {
         id: string;
-        code: string;
+        tags: string[] | number[];
     };
 }
 
@@ -62,16 +62,17 @@ export class LoggingAxiosInterceptorService implements OnModuleInit
             // set uuid to update response
             config[META_KEY] = {
                 id  : Utils.uuid(),
-                code: config.headers['X-Auditing-Code'] as string,
+                tags: JSON.parse(config.headers['X-Auditing-Tags']),
             };
 
             await this.commandBus.dispatch(new CreateHttpCommunicationCommand(
                 {
                     ...config[META_KEY],
-                    event      : AuditingHttpCommunicationEvent.REQUEST_FULFILLED,
-                    method     : config.method,
-                    url        : config.url,
-                    httpRequest: {
+                    event         : AuditingHttpCommunicationEvent.REQUEST_FULFILLED,
+                    method        : config.method,
+                    url           : config.url,
+                    isReprocessing: false,
+                    httpRequest   : {
                         auth               : config.auth,
                         baseUrl            : config.baseURL,
                         data               : config.data,

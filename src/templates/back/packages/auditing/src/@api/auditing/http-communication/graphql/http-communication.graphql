@@ -9,7 +9,7 @@ enum AuditingHttpCommunicationEvent {
 type AuditingHttpCommunication
 {
     id: ID!
-    code: GraphQLString
+    tags: JSON
     event: AuditingHttpCommunicationEvent!
     status: GraphQLInt
     method: GraphQLString!
@@ -18,6 +18,8 @@ type AuditingHttpCommunication
     httpRequestRejected: JSON
     httpResponse: JSON
     httpResponseRejected: JSON
+    isReprocessing: GraphQLBoolean!
+    reprocessingHttpCommunicationId: ID
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -26,7 +28,7 @@ type AuditingHttpCommunication
 input AuditingCreateHttpCommunicationInput
 {
     id: ID!
-    code: GraphQLString
+    tags: JSON
     event: AuditingHttpCommunicationEvent!
     status: GraphQLInt
     method: GraphQLString!
@@ -35,12 +37,14 @@ input AuditingCreateHttpCommunicationInput
     httpRequestRejected: JSON
     httpResponse: JSON
     httpResponseRejected: JSON
+    isReprocessing: GraphQLBoolean!
+    reprocessingHttpCommunicationId: ID
 }
 
 input AuditingUpdateHttpCommunicationByIdInput
 {
     id: ID!
-    code: GraphQLString
+    tags: JSON
     event: AuditingHttpCommunicationEvent
     status: GraphQLInt
     method: GraphQLString
@@ -49,12 +53,14 @@ input AuditingUpdateHttpCommunicationByIdInput
     httpRequestRejected: JSON
     httpResponse: JSON
     httpResponseRejected: JSON
+    isReprocessing: GraphQLBoolean
+    reprocessingHttpCommunicationId: ID
 }
 
 input AuditingUpdateHttpCommunicationsInput
 {
     id: ID
-    code: GraphQLString
+    tags: JSON
     event: AuditingHttpCommunicationEvent
     status: GraphQLInt
     method: GraphQLString
@@ -63,6 +69,8 @@ input AuditingUpdateHttpCommunicationsInput
     httpRequestRejected: JSON
     httpResponse: JSON
     httpResponseRejected: JSON
+    isReprocessing: GraphQLBoolean
+    reprocessingHttpCommunicationId: ID
 }
 
 type Query

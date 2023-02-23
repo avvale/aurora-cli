@@ -6,7 +6,7 @@ import { AuditingGetSideEffectsController } from './auditing-get-side-effects.co
 import { AuditingGetSideEffectsHandler } from '../handlers/auditing-get-side-effects.handler';
 
 // sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingGetSideEffectsController', () =>
 {

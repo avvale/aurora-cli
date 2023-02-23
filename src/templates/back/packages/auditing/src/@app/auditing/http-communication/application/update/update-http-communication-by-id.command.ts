@@ -6,7 +6,7 @@ export class UpdateHttpCommunicationByIdCommand
     constructor(
         public readonly payload: {
             id: string;
-            code?: string;
+            tags?: any;
             event?: string;
             status?: number;
             method?: string;
@@ -15,6 +15,8 @@ export class UpdateHttpCommunicationByIdCommand
             httpRequestRejected?: any;
             httpResponse?: any;
             httpResponseRejected?: any;
+            isReprocessing?: boolean;
+            reprocessingHttpCommunicationId?: string;
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

@@ -4,6 +4,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { Utils } from '@aurora-ts/core';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -21,7 +22,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -35,6 +35,7 @@ import { DeletedSideEffectEvent } from '../application/events/deleted-side-effec
 export class AuditingSideEffect extends AggregateRoot
 {
     id: SideEffectId;
+    tags: SideEffectTags;
     modelPath: SideEffectModelPath;
     modelName: SideEffectModelName;
     operationId: SideEffectOperationId;
@@ -52,7 +53,6 @@ export class AuditingSideEffect extends AggregateRoot
     query: SideEffectQuery;
     body: SideEffectBody;
     userAgent: SideEffectUserAgent;
-    tags: SideEffectTags;
     isRollback: SideEffectIsRollback;
     rollbackSideEffectId: SideEffectRollbackSideEffectId;
     createdAt: SideEffectCreatedAt;
@@ -63,6 +63,7 @@ export class AuditingSideEffect extends AggregateRoot
 
     constructor(
         id: SideEffectId,
+        tags: SideEffectTags,
         modelPath: SideEffectModelPath,
         modelName: SideEffectModelName,
         operationId: SideEffectOperationId,
@@ -80,7 +81,6 @@ export class AuditingSideEffect extends AggregateRoot
         query: SideEffectQuery,
         body: SideEffectBody,
         userAgent: SideEffectUserAgent,
-        tags: SideEffectTags,
         isRollback: SideEffectIsRollback,
         rollbackSideEffectId: SideEffectRollbackSideEffectId,
         createdAt: SideEffectCreatedAt,
@@ -91,6 +91,7 @@ export class AuditingSideEffect extends AggregateRoot
     {
         super();
         this.id = id;
+        this.tags = tags;
         this.modelPath = modelPath;
         this.modelName = modelName;
         this.operationId = operationId;
@@ -108,7 +109,6 @@ export class AuditingSideEffect extends AggregateRoot
         this.query = query;
         this.body = body;
         this.userAgent = userAgent;
-        this.tags = tags;
         this.isRollback = isRollback;
         this.rollbackSideEffectId = rollbackSideEffectId;
         this.createdAt = createdAt;
@@ -120,6 +120,7 @@ export class AuditingSideEffect extends AggregateRoot
 
     static register (
         id: SideEffectId,
+        tags: SideEffectTags,
         modelPath: SideEffectModelPath,
         modelName: SideEffectModelName,
         operationId: SideEffectOperationId,
@@ -137,7 +138,6 @@ export class AuditingSideEffect extends AggregateRoot
         query: SideEffectQuery,
         body: SideEffectBody,
         userAgent: SideEffectUserAgent,
-        tags: SideEffectTags,
         isRollback: SideEffectIsRollback,
         rollbackSideEffectId: SideEffectRollbackSideEffectId,
         createdAt: SideEffectCreatedAt,
@@ -148,6 +148,7 @@ export class AuditingSideEffect extends AggregateRoot
     {
         return new AuditingSideEffect(
             id,
+            tags,
             modelPath,
             modelName,
             operationId,
@@ -165,7 +166,6 @@ export class AuditingSideEffect extends AggregateRoot
             query,
             body,
             userAgent,
-            tags,
             isRollback,
             rollbackSideEffectId,
             createdAt,
@@ -180,6 +180,7 @@ export class AuditingSideEffect extends AggregateRoot
         this.apply(
             new CreatedSideEffectEvent(
                 sideEffect.id.value,
+                sideEffect.tags?.value,
                 sideEffect.modelPath.value,
                 sideEffect.modelName.value,
                 sideEffect.operationId?.value,
@@ -197,7 +198,6 @@ export class AuditingSideEffect extends AggregateRoot
                 sideEffect.query?.value,
                 sideEffect.body?.value,
                 sideEffect.userAgent?.value,
-                sideEffect.tags?.value,
                 sideEffect.isRollback.value,
                 sideEffect.rollbackSideEffectId?.value,
                 sideEffect.createdAt?.value,
@@ -212,6 +212,7 @@ export class AuditingSideEffect extends AggregateRoot
         this.apply(
             new UpdatedSideEffectEvent(
                 sideEffect.id?.value,
+                sideEffect.tags?.value,
                 sideEffect.modelPath?.value,
                 sideEffect.modelName?.value,
                 sideEffect.operationId?.value,
@@ -229,7 +230,6 @@ export class AuditingSideEffect extends AggregateRoot
                 sideEffect.query?.value,
                 sideEffect.body?.value,
                 sideEffect.userAgent?.value,
-                sideEffect.tags?.value,
                 sideEffect.isRollback?.value,
                 sideEffect.rollbackSideEffectId?.value,
                 sideEffect.createdAt?.value,
@@ -244,6 +244,7 @@ export class AuditingSideEffect extends AggregateRoot
         this.apply(
             new DeletedSideEffectEvent(
                 sideEffect.id.value,
+                sideEffect.tags?.value,
                 sideEffect.modelPath.value,
                 sideEffect.modelName.value,
                 sideEffect.operationId?.value,
@@ -261,7 +262,6 @@ export class AuditingSideEffect extends AggregateRoot
                 sideEffect.query?.value,
                 sideEffect.body?.value,
                 sideEffect.userAgent?.value,
-                sideEffect.tags?.value,
                 sideEffect.isRollback.value,
                 sideEffect.rollbackSideEffectId?.value,
                 sideEffect.createdAt?.value,
@@ -275,6 +275,7 @@ export class AuditingSideEffect extends AggregateRoot
     {
         return {
             id: this.id.value,
+            tags: this.tags?.value,
             modelPath: this.modelPath.value,
             modelName: this.modelName.value,
             operationId: this.operationId?.value,
@@ -292,7 +293,6 @@ export class AuditingSideEffect extends AggregateRoot
             query: this.query?.value,
             body: this.body?.value,
             userAgent: this.userAgent?.value,
-            tags: this.tags?.value,
             isRollback: this.isRollback.value,
             rollbackSideEffectId: this.rollbackSideEffectId?.value,
             createdAt: this.createdAt?.value,
@@ -308,6 +308,7 @@ export class AuditingSideEffect extends AggregateRoot
     {
         return {
             id: this.id.value,
+            tags: this.tags?.value,
             modelPath: this.modelPath.value,
             modelName: this.modelName.value,
             operationId: this.operationId?.value,
@@ -325,7 +326,6 @@ export class AuditingSideEffect extends AggregateRoot
             query: this.query?.value,
             body: this.body?.value,
             userAgent: this.userAgent?.value,
-            tags: this.tags?.value,
             isRollback: this.isRollback.value,
             rollbackSideEffectId: this.rollbackSideEffectId?.value,
             createdAt: this.createdAt?.value,

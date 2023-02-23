@@ -4,6 +4,7 @@ import { AuditingSideEffect } from './side-effect.aggregate';
 import { SideEffectResponse } from './side-effect.response';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -21,7 +22,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -81,6 +81,7 @@ export class SideEffectMapper implements IMapper
     {
         return AuditingSideEffect.register(
             new SideEffectId(sideEffect.id, { undefinable: true }),
+            new SideEffectTags(sideEffect.tags, { undefinable: true }),
             new SideEffectModelPath(sideEffect.modelPath, { undefinable: true }),
             new SideEffectModelName(sideEffect.modelName, { undefinable: true }),
             new SideEffectOperationId(sideEffect.operationId, { undefinable: true }),
@@ -98,7 +99,6 @@ export class SideEffectMapper implements IMapper
             new SideEffectQuery(sideEffect.query, { undefinable: true }),
             new SideEffectBody(sideEffect.body, { undefinable: true }),
             new SideEffectUserAgent(sideEffect.userAgent, { undefinable: true }),
-            new SideEffectTags(sideEffect.tags, { undefinable: true }),
             new SideEffectIsRollback(sideEffect.isRollback, { undefinable: true }),
             new SideEffectRollbackSideEffectId(sideEffect.rollbackSideEffectId, { undefinable: true }),
             new SideEffectCreatedAt(sideEffect.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
@@ -113,6 +113,7 @@ export class SideEffectMapper implements IMapper
 
         return new SideEffectResponse(
             sideEffect.id.value,
+            sideEffect.tags.value,
             sideEffect.modelPath.value,
             sideEffect.modelName.value,
             sideEffect.operationId.value,
@@ -130,7 +131,6 @@ export class SideEffectMapper implements IMapper
             sideEffect.query.value,
             sideEffect.body.value,
             sideEffect.userAgent.value,
-            sideEffect.tags.value,
             sideEffect.isRollback.value,
             sideEffect.rollbackSideEffectId.value,
             sideEffect.createdAt.value,

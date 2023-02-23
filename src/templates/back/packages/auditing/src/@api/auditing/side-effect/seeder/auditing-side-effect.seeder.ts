@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 //
 import { CreateSideEffectsCommand } from '@app/auditing/side-effect/application/create/create-side-effects.command';
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 @Injectable()
 export class AuditingSideEffectSeeder

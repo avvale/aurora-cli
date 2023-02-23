@@ -43,7 +43,7 @@ describe('UpsertHttpCommunicationCommandHandler', () =>
                 new UpsertHttpCommunicationCommand(
                     {
                         id: httpCommunications[0].id,
-                        code: httpCommunications[0].code,
+                        tags: httpCommunications[0].tags,
                         event: httpCommunications[0].event,
                         status: httpCommunications[0].status,
                         method: httpCommunications[0].method,
@@ -52,6 +52,8 @@ describe('UpsertHttpCommunicationCommandHandler', () =>
                         httpRequestRejected: httpCommunications[0].httpRequestRejected,
                         httpResponse: httpCommunications[0].httpResponse,
                         httpResponseRejected: httpCommunications[0].httpResponseRejected,
+                        isReprocessing: httpCommunications[0].isReprocessing,
+                        reprocessingHttpCommunicationId: httpCommunications[0].reprocessingHttpCommunicationId,
                     },
                     { timezone: process.env.TZ },
                 ),

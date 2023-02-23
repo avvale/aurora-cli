@@ -4,6 +4,7 @@ import { QueryStatement } from '@aurora-ts/core';
 import { CQMetadata } from '@aurora-ts/core';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -21,7 +22,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -43,6 +43,7 @@ export class UpdateSideEffectsService
     async main(
         payload: {
             id?: SideEffectId;
+            tags?: SideEffectTags;
             modelPath?: SideEffectModelPath;
             modelName?: SideEffectModelName;
             operationId?: SideEffectOperationId;
@@ -60,7 +61,6 @@ export class UpdateSideEffectsService
             query?: SideEffectQuery;
             body?: SideEffectBody;
             userAgent?: SideEffectUserAgent;
-            tags?: SideEffectTags;
             isRollback?: SideEffectIsRollback;
             rollbackSideEffectId?: SideEffectRollbackSideEffectId;
         },
@@ -72,6 +72,7 @@ export class UpdateSideEffectsService
         // create aggregate with factory pattern
         const sideEffect = AuditingSideEffect.register(
             payload.id,
+            payload.tags,
             payload.modelPath,
             payload.modelName,
             payload.operationId,
@@ -89,7 +90,6 @@ export class UpdateSideEffectsService
             payload.query,
             payload.body,
             payload.userAgent,
-            payload.tags,
             payload.isRollback,
             payload.rollbackSideEffectId,
             null, // createdAt

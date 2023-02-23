@@ -28,7 +28,7 @@ export class AddHttpCommunicationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(httpCommunication =>
                     new CreatedHttpCommunicationEvent(
                         httpCommunication.id.value,
-                        httpCommunication.code?.value,
+                        httpCommunication.tags?.value,
                         httpCommunication.event.value,
                         httpCommunication.status?.value,
                         httpCommunication.method.value,
@@ -37,6 +37,8 @@ export class AddHttpCommunicationsContextEvent extends AggregateRoot
                         httpCommunication.httpRequestRejected?.value,
                         httpCommunication.httpResponse?.value,
                         httpCommunication.httpResponseRejected?.value,
+                        httpCommunication.isReprocessing.value,
+                        httpCommunication.reprocessingHttpCommunicationId?.value,
                         httpCommunication.createdAt?.value,
                         httpCommunication.updatedAt?.value,
                         httpCommunication.deletedAt?.value,
@@ -53,7 +55,7 @@ export class AddHttpCommunicationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(httpCommunication =>
                     new UpdatedHttpCommunicationEvent(
                         httpCommunication.id.value,
-                        httpCommunication.code?.value,
+                        httpCommunication.tags?.value,
                         httpCommunication.event.value,
                         httpCommunication.status?.value,
                         httpCommunication.method.value,
@@ -62,6 +64,8 @@ export class AddHttpCommunicationsContextEvent extends AggregateRoot
                         httpCommunication.httpRequestRejected?.value,
                         httpCommunication.httpResponse?.value,
                         httpCommunication.httpResponseRejected?.value,
+                        httpCommunication.isReprocessing.value,
+                        httpCommunication.reprocessingHttpCommunicationId?.value,
                         httpCommunication.createdAt?.value,
                         httpCommunication.updatedAt?.value,
                         httpCommunication.deletedAt?.value,
@@ -78,7 +82,7 @@ export class AddHttpCommunicationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(httpCommunication =>
                     new DeletedHttpCommunicationEvent(
                         httpCommunication.id.value,
-                        httpCommunication.code?.value,
+                        httpCommunication.tags?.value,
                         httpCommunication.event.value,
                         httpCommunication.status?.value,
                         httpCommunication.method.value,
@@ -87,6 +91,8 @@ export class AddHttpCommunicationsContextEvent extends AggregateRoot
                         httpCommunication.httpRequestRejected?.value,
                         httpCommunication.httpResponse?.value,
                         httpCommunication.httpResponseRejected?.value,
+                        httpCommunication.isReprocessing.value,
+                        httpCommunication.reprocessingHttpCommunicationId?.value,
                         httpCommunication.createdAt?.value,
                         httpCommunication.updatedAt?.value,
                         httpCommunication.deletedAt?.value,

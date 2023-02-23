@@ -28,6 +28,7 @@ export class AddSideEffectsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(sideEffect =>
                     new CreatedSideEffectEvent(
                         sideEffect.id.value,
+                        sideEffect.tags?.value,
                         sideEffect.modelPath.value,
                         sideEffect.modelName.value,
                         sideEffect.operationId?.value,
@@ -45,7 +46,6 @@ export class AddSideEffectsContextEvent extends AggregateRoot
                         sideEffect.query?.value,
                         sideEffect.body?.value,
                         sideEffect.userAgent?.value,
-                        sideEffect.tags?.value,
                         sideEffect.isRollback.value,
                         sideEffect.rollbackSideEffectId?.value,
                         sideEffect.createdAt?.value,
@@ -64,6 +64,7 @@ export class AddSideEffectsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(sideEffect =>
                     new UpdatedSideEffectEvent(
                         sideEffect.id.value,
+                        sideEffect.tags?.value,
                         sideEffect.modelPath.value,
                         sideEffect.modelName.value,
                         sideEffect.operationId?.value,
@@ -81,7 +82,6 @@ export class AddSideEffectsContextEvent extends AggregateRoot
                         sideEffect.query?.value,
                         sideEffect.body?.value,
                         sideEffect.userAgent?.value,
-                        sideEffect.tags?.value,
                         sideEffect.isRollback.value,
                         sideEffect.rollbackSideEffectId?.value,
                         sideEffect.createdAt?.value,
@@ -100,6 +100,7 @@ export class AddSideEffectsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(sideEffect =>
                     new DeletedSideEffectEvent(
                         sideEffect.id.value,
+                        sideEffect.tags?.value,
                         sideEffect.modelPath.value,
                         sideEffect.modelName.value,
                         sideEffect.operationId?.value,
@@ -117,7 +118,6 @@ export class AddSideEffectsContextEvent extends AggregateRoot
                         sideEffect.query?.value,
                         sideEffect.body?.value,
                         sideEffect.userAgent?.value,
-                        sideEffect.tags?.value,
                         sideEffect.isRollback.value,
                         sideEffect.rollbackSideEffectId?.value,
                         sideEffect.createdAt?.value,

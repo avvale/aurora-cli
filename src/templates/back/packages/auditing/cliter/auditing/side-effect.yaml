@@ -12,6 +12,9 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
+  - name: tags
+    type: json
+    nullable: true
   - name: modelPath
     type: varchar
     maxLength: 1023
@@ -92,9 +95,6 @@ aggregateProperties:
   - name: userAgent
     type: varchar
     maxLength: 1023
-    nullable: true
-  - name: tags
-    type: json
     nullable: true
   - name: isRollback
     type: boolean

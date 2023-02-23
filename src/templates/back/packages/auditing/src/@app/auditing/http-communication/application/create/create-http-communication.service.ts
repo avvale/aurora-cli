@@ -3,7 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -12,6 +12,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -30,7 +32,7 @@ export class CreateHttpCommunicationService
     async main(
         payload: {
             id: HttpCommunicationId;
-            code: HttpCommunicationCode;
+            tags: HttpCommunicationTags;
             event: HttpCommunicationEvent;
             status: HttpCommunicationStatus;
             method: HttpCommunicationMethod;
@@ -39,6 +41,8 @@ export class CreateHttpCommunicationService
             httpRequestRejected: HttpCommunicationHttpRequestRejected;
             httpResponse: HttpCommunicationHttpResponse;
             httpResponseRejected: HttpCommunicationHttpResponseRejected;
+            isReprocessing: HttpCommunicationIsReprocessing;
+            reprocessingHttpCommunicationId: HttpCommunicationReprocessingHttpCommunicationId;
         },
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -46,7 +50,7 @@ export class CreateHttpCommunicationService
         // create aggregate with factory pattern
         const httpCommunication = AuditingHttpCommunication.register(
             payload.id,
-            payload.code,
+            payload.tags,
             payload.event,
             payload.status,
             payload.method,
@@ -55,6 +59,8 @@ export class CreateHttpCommunicationService
             payload.httpRequestRejected,
             payload.httpResponse,
             payload.httpResponseRejected,
+            payload.isReprocessing,
+            payload.reprocessingHttpCommunicationId,
             new HttpCommunicationCreatedAt({ currentTimestamp: true }),
             new HttpCommunicationUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

@@ -21,6 +21,7 @@ enum AuditingSideEffectMethod {
 type AuditingSideEffect
 {
     id: ID!
+    tags: JSON
     modelPath: GraphQLString!
     modelName: GraphQLString!
     operationId: ID
@@ -38,7 +39,6 @@ type AuditingSideEffect
     query: JSON
     body: JSON
     userAgent: GraphQLString
-    tags: JSON
     isRollback: GraphQLBoolean!
     rollbackSideEffectId: ID
     createdAt: GraphQLTimestamp
@@ -49,6 +49,7 @@ type AuditingSideEffect
 input AuditingCreateSideEffectInput
 {
     id: ID!
+    tags: JSON
     modelPath: GraphQLString!
     modelName: GraphQLString!
     operationId: ID
@@ -66,7 +67,6 @@ input AuditingCreateSideEffectInput
     query: JSON
     body: JSON
     userAgent: GraphQLString
-    tags: JSON
     isRollback: GraphQLBoolean!
     rollbackSideEffectId: ID
 }
@@ -74,6 +74,7 @@ input AuditingCreateSideEffectInput
 input AuditingUpdateSideEffectByIdInput
 {
     id: ID!
+    tags: JSON
     modelPath: GraphQLString
     modelName: GraphQLString
     operationId: ID
@@ -91,7 +92,6 @@ input AuditingUpdateSideEffectByIdInput
     query: JSON
     body: JSON
     userAgent: GraphQLString
-    tags: JSON
     isRollback: GraphQLBoolean
     rollbackSideEffectId: ID
 }
@@ -99,6 +99,7 @@ input AuditingUpdateSideEffectByIdInput
 input AuditingUpdateSideEffectsInput
 {
     id: ID
+    tags: JSON
     modelPath: GraphQLString
     modelName: GraphQLString
     operationId: ID
@@ -116,7 +117,6 @@ input AuditingUpdateSideEffectsInput
     query: JSON
     body: JSON
     userAgent: GraphQLString
-    tags: JSON
     isRollback: GraphQLBoolean
     rollbackSideEffectId: ID
 }

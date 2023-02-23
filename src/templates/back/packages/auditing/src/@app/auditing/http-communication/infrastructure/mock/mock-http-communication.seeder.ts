@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { MockSeeder } from '@aurora-ts/core';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -11,6 +11,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -39,7 +41,7 @@ export class MockHttpCommunicationSeeder extends MockSeeder<AuditingHttpCommunic
             this.collectionSource.push(
                 AuditingHttpCommunication.register(
                     new HttpCommunicationId(httpCommunication.id),
-                    new HttpCommunicationCode(httpCommunication.code),
+                    new HttpCommunicationTags(httpCommunication.tags),
                     new HttpCommunicationEvent(httpCommunication.event),
                     new HttpCommunicationStatus(httpCommunication.status),
                     new HttpCommunicationMethod(httpCommunication.method),
@@ -48,6 +50,8 @@ export class MockHttpCommunicationSeeder extends MockSeeder<AuditingHttpCommunic
                     new HttpCommunicationHttpRequestRejected(httpCommunication.httpRequestRejected),
                     new HttpCommunicationHttpResponse(httpCommunication.httpResponse),
                     new HttpCommunicationHttpResponseRejected(httpCommunication.httpResponseRejected),
+                    new HttpCommunicationIsReprocessing(httpCommunication.isReprocessing),
+                    new HttpCommunicationReprocessingHttpCommunicationId(httpCommunication.reprocessingHttpCommunicationId),
                     new HttpCommunicationCreatedAt({ currentTimestamp: true }),
                     new HttpCommunicationUpdatedAt({ currentTimestamp: true }),
                     new HttpCommunicationDeletedAt(null),

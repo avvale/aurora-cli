@@ -4,7 +4,7 @@ import { AuditingHttpCommunication } from './http-communication.aggregate';
 import { HttpCommunicationResponse } from './http-communication.response';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -13,6 +13,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -43,7 +45,7 @@ export class HttpCommunicationMapper implements IMapper
     {
         if (!Array.isArray(httpCommunications)) return;
 
-        return httpCommunications.map(httpCommunication  => this.makeAggregate(httpCommunication, cQMetadata));
+        return httpCommunications.map(httpCommunication => this.makeAggregate(httpCommunication, cQMetadata));
     }
 
     /**
@@ -70,7 +72,7 @@ export class HttpCommunicationMapper implements IMapper
     {
         return AuditingHttpCommunication.register(
             new HttpCommunicationId(httpCommunication.id, { undefinable: true }),
-            new HttpCommunicationCode(httpCommunication.code, { undefinable: true }),
+            new HttpCommunicationTags(httpCommunication.tags, { undefinable: true }),
             new HttpCommunicationEvent(httpCommunication.event, { undefinable: true }),
             new HttpCommunicationStatus(httpCommunication.status, { undefinable: true }),
             new HttpCommunicationMethod(httpCommunication.method, { undefinable: true }),
@@ -79,6 +81,8 @@ export class HttpCommunicationMapper implements IMapper
             new HttpCommunicationHttpRequestRejected(httpCommunication.httpRequestRejected, { undefinable: true }),
             new HttpCommunicationHttpResponse(httpCommunication.httpResponse, { undefinable: true }),
             new HttpCommunicationHttpResponseRejected(httpCommunication.httpResponseRejected, { undefinable: true }),
+            new HttpCommunicationIsReprocessing(httpCommunication.isReprocessing, { undefinable: true }),
+            new HttpCommunicationReprocessingHttpCommunicationId(httpCommunication.reprocessingHttpCommunicationId, { undefinable: true }),
             new HttpCommunicationCreatedAt(httpCommunication.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new HttpCommunicationUpdatedAt(httpCommunication.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new HttpCommunicationDeletedAt(httpCommunication.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
@@ -91,7 +95,7 @@ export class HttpCommunicationMapper implements IMapper
 
         return new HttpCommunicationResponse(
             httpCommunication.id.value,
-            httpCommunication.code.value,
+            httpCommunication.tags.value,
             httpCommunication.event.value,
             httpCommunication.status.value,
             httpCommunication.method.value,
@@ -100,6 +104,8 @@ export class HttpCommunicationMapper implements IMapper
             httpCommunication.httpRequestRejected.value,
             httpCommunication.httpResponse.value,
             httpCommunication.httpResponseRejected.value,
+            httpCommunication.isReprocessing.value,
+            httpCommunication.reprocessingHttpCommunicationId.value,
             httpCommunication.createdAt.value,
             httpCommunication.updatedAt.value,
             httpCommunication.deletedAt.value,

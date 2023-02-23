@@ -3,6 +3,7 @@ export class SideEffectResponse
 {
     constructor(
         public readonly id: string,
+        public readonly tags: any,
         public readonly modelPath: string,
         public readonly modelName: string,
         public readonly operationId: string,
@@ -20,7 +21,6 @@ export class SideEffectResponse
         public readonly query: any,
         public readonly body: any,
         public readonly userAgent: string,
-        public readonly tags: any,
         public readonly isRollback: boolean,
         public readonly rollbackSideEffectId: string,
         public readonly createdAt: string,

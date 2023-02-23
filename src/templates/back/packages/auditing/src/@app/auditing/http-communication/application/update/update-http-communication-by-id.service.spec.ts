@@ -7,7 +7,7 @@ import { httpCommunications } from '@app/auditing/http-communication/infrastruct
 import { UpdateHttpCommunicationByIdService } from './update-http-communication-by-id.service';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -16,6 +16,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -65,7 +67,7 @@ describe('UpdateHttpCommunicationByIdService', () =>
             expect(await service.main(
                 {
                     id: new HttpCommunicationId(httpCommunications[0].id),
-                    code: new HttpCommunicationCode(httpCommunications[0].code),
+                    tags: new HttpCommunicationTags(httpCommunications[0].tags),
                     event: new HttpCommunicationEvent(httpCommunications[0].event),
                     status: new HttpCommunicationStatus(httpCommunications[0].status),
                     method: new HttpCommunicationMethod(httpCommunications[0].method),
@@ -74,6 +76,8 @@ describe('UpdateHttpCommunicationByIdService', () =>
                     httpRequestRejected: new HttpCommunicationHttpRequestRejected(httpCommunications[0].httpRequestRejected),
                     httpResponse: new HttpCommunicationHttpResponse(httpCommunications[0].httpResponse),
                     httpResponseRejected: new HttpCommunicationHttpResponseRejected(httpCommunications[0].httpResponseRejected),
+                    isReprocessing: new HttpCommunicationIsReprocessing(httpCommunications[0].isReprocessing),
+                    reprocessingHttpCommunicationId: new HttpCommunicationReprocessingHttpCommunicationId(httpCommunications[0].reprocessingHttpCommunicationId),
                 },
             )).toBe(undefined);
         });

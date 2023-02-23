@@ -6,7 +6,7 @@ import { AuditingFindSideEffectResolver } from './auditing-find-side-effect.reso
 import { AuditingFindSideEffectHandler } from '../handlers/auditing-find-side-effect.handler';
 
 // sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingFindSideEffectResolver', () =>
 {

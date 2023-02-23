@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 import { FindSideEffectByIdService } from './find-side-effect-by-id.service';
 import { SideEffectId } from '../../domain/value-objects';
 import { ISideEffectRepository } from '../../domain/side-effect.repository';

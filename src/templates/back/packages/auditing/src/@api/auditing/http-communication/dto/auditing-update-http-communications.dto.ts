@@ -11,10 +11,10 @@ export class AuditingUpdateHttpCommunicationsDto
     id?: string;
 
     @ApiProperty({
-        type       : String,
-        description: 'code [input here api field description]',
+        type       : Object,
+        description: 'tags [input here api field description]',
     })
-    code?: string;
+    tags?: any;
 
     @ApiProperty({
         type       : AuditingHttpCommunicationEvent,
@@ -65,5 +65,18 @@ export class AuditingUpdateHttpCommunicationsDto
         description: 'httpResponseRejected [input here api field description]',
     })
     httpResponseRejected?: any;
+
+    @ApiProperty({
+        type       : Boolean,
+        description: 'isReprocessing [input here api field description]',
+        example    : true,
+    })
+    isReprocessing?: boolean;
+
+    @ApiProperty({
+        type       : String,
+        description: 'reprocessingHttpCommunicationId [input here api field description]',
+    })
+    reprocessingHttpCommunicationId?: string;
 
 }

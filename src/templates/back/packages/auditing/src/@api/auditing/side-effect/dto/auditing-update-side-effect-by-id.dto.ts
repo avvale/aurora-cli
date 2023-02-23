@@ -11,6 +11,12 @@ export class AuditingUpdateSideEffectByIdDto
     id: string;
 
     @ApiProperty({
+        type       : Object,
+        description: 'tags [input here api field description]',
+    })
+    tags?: any;
+
+    @ApiProperty({
         type       : String,
         description: 'modelPath [input here api field description]',
     })
@@ -116,12 +122,6 @@ export class AuditingUpdateSideEffectByIdDto
         description: 'userAgent [input here api field description]',
     })
     userAgent?: string;
-
-    @ApiProperty({
-        type       : Object,
-        description: 'tags [input here api field description]',
-    })
-    tags?: any;
 
     @ApiProperty({
         type       : Boolean,

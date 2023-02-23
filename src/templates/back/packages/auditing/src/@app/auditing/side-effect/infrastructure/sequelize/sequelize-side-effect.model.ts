@@ -33,6 +33,13 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     id: string;
 
     @Column({
+        field: 'tags',
+        allowNull: true,
+        type: DataTypes.JSON,
+    })
+    tags: any;
+
+    @Column({
         field: 'modelPath',
         allowNull: false,
         type: DataTypes.STRING(1023),
@@ -150,13 +157,6 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
         type: DataTypes.STRING(1023),
     })
     userAgent: string;
-
-    @Column({
-        field: 'tags',
-        allowNull: true,
-        type: DataTypes.JSON,
-    })
-    tags: any;
 
     @Column({
         field: 'isRollback',

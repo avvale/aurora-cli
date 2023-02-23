@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - auditing/http-communication",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - auditingCreateHttpCommunication",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AuditingCreateHttpCommunicationInput!)\n{\n\tauditingCreateHttpCommunication (payload:$payload)\n\t{\n\t\tid\n\t\ttags\n\t\tevent\n\t\tstatus\n\t\tmethod\n\t\turl\n\t\thttpRequest\n\t\thttpRequestRejected\n\t\thttpResponse\n\t\thttpResponseRejected\n\t\tisReprocessing\n\t\treprocessingHttpCommunicationId\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_FULFILLED', \n\t\t\"status\": 2204, \n\t\t\"method\": \"eu36aglvh5kzqxc9fu0gdgm1\", \n\t\t\"url\": \"rwxhu9gi5q7sjmikz43d9z2orr4bvlaatmu91q0l9pop7x0jtpw1gpphqfif2v7ctrdhgo17zq25e9fyccmt94729kkbafk2zfusste5w4xvyrxdlsog4stw10w3ukr6ki45nr2s5bv9l2x6w3rpwj7mrfk9ykai08e4ebqc31vruabxq4pm73oilp63m7qz3ciopnyt05moqz1sogp7rfkkjpgtwvzj9de69nyulv2iiwg7dmfi3k27x4htnijvuye8gqqrtjklwuq3a9xrb4y3jtin244dyh147jbxs1jqmw1em1uliijpbhc11a4hs40wxoo0gftxmrault7irqfu6kmtw0hhe9daukxv4yxao4j38eips0vxk99iklnbe2w8lcmgb6sazbic4o5ulfvqlcumbapczaosj9c4cyh04311kkkc0njelecytbp8plomkk4jfk1ptq39ax1rdxasu2xblmpc1sxf0hrtrq4y0u99b1pcqvcoj4wkjgdfv3r3zvcz7b183agl0xybh4pweusuzbmlncdki5wwetvkg7dhf07dizinget3pybmcaf0x3yvb4zy4e0n5vzd4l2gvihl0glcfknuqnzgz77lwxku1jvoohrcjifcmvddalxx7ptv5cwen2nc9qvcryao7xqc3ht3kxzxwdnse8qpk6pmehde1tfa6ekd33t3azgt0tvkhzx0us3j9ozlmuxccipf7toye20k28c8n3umvtmdcnknv00fih4jvt0ebf0tj9zb0de9tlr248o0t0ryawox5jdfg4xl4eygm6y9ilkwwpab5e27qsvxm4tte80f1nfg9mggb0uvcgyi1xcq4t9d2seacs1tk9ldhewuhtg4gdo9e1lr02pn8xkcclsc4a9w28p0ro9kjy69lrswbe1uwmtjk8o80olrhuo2vzkpbv69rj56boak72n3c2x1pkgsuk0rvd7tfnyxueeuw7wr4680ag8oa3d900y8k9uvk21ugg6v6j687doqy04vf9jvrhu2qe29vwafn8xyjeohmaf8j678y5oqd3edru1rf30yfb157plt844ewbtuxsk5yyww2o3php1b48avysthms5ddpdr5m5lixvpgnbsbjp8bymfll7d8y6qtwad8ysx0zofbosccep7wqn69455sk2mdjgu0mn9pj76fvevq36p1zf4gtcwgc2a8hzbyk1pyjr7ishpr2rrx26273ahmx1qq0el40ox3nw2o4c4ltqjec98gczod8sf130x11q6roipo2qbbr4gkt1u9trzox2kjsc4xd0zzmy0j7knsqxgapv9bqkw8dhxg2n4exls1bphunoodtsvpo1vhopd21hp8w4x43i8j6yrd7zzpbjbaka30nc0edayhj2v7jlkxyxi0izwqh86jdb10bd1mkurxhfw8bqbuhqms0wm10ik8ygxn5oja6ew34smgzky50eohk3zb2xsv5n380daililvp4mlbr0daipel5g9cb3pjqk83wafl5xq9sco5r9icyx2txqskkcmsua403u90ptdw8p3xgwjavzjq3j1zbljfwit9wbqatggcdh3y3qzebfxy6abn6dd7n8fimtg12i4s9e4ks2z2lzkyhtpfjras94d8e2wybhdvs1vgme8ayq57h42t3w43k0xw6g1izn1f1tfxrnvwp08wnitegm3smb3kpc9vpdb5kz6s4edquu8xghjfx9lbsvpcrbktpa5unvzevrvfoch9hfqhm0mpg3ouhpu0o5hxo75cu049wne7x016l6z6pnb5djr4w43dhcrjjfogtvye65ytbazf7nazkxbs42f01p3xoyf22onk6ntvb5gbr2ylsbcjmpmpy8ut69hvt5y7ket8a2pey76z4bl12kw73i4ml2nibgdtb2p699ctoq9hbiuum3900zzu8sy3vhslztgty7hkxoay2our0kl1ljifpist5zlt1xdfji3ix7cqqsfiw3xip4hw1z7j8iiadbl43sg298g8ywhuc\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingCreateHttpCommunications",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[AuditingCreateHttpCommunicationInput]!)\n{\n\tauditingCreateHttpCommunications (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"cec474b6-6d70-4820-8f63-a4d53e984b4f\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'REQUEST_FULFILLED', \n\t\t\t\"status\": 4595, \n\t\t\t\"method\": \"dxgh6da6pzjahoqng4iuy46b\", \n\t\t\t\"url\": \"wdt3hbrki10aycok7g1fvaeohga43cz69gvh79adkcepmj26elui399y00r4ap4wj4mdyk42jccpjmbo6i4xeqhcayqox62rmkqzchjyehdu1284ovig84nw4b5ei7g79y1wooianyxm0paopddo3y8vhefmhyr7qmj6zambcudxomyxa2xxjohh85l632bghjas6ujqduvkkwdpiq3dcktom810evcpu27vooc6wlp9oln45v5qr1absf7mmqbhhu2pupu5l6cjp5qk3ptcv54aebf0a307bsw6oetkch8hp1nz2uc5brk6fsyznjrznbo3qvp6eaqzcg3nr5609bwdyhjculyujb2xc0nhzsyekgxf4pfjxxuq7nrv0rmmj9chz3wiv9eluzxqzsr43fbmrb1lu356dho6cycdswehdxwwwk0swtznlnliitxt83cmjqlgovmjdn5v90op712qomkg2b9do7biq6dfqumwbw666mysx7sj1hmu2yzbixfaufcqqn0w6go1mqpm2pkq2ir0dgrmm44rearx7i14hpjn1ddkg3f2txq822dz7dsbhjbu8ivm2bz6dtxt4sniy8er4kllm58ia3ho0r8fko2afj6aqlc8g39dow99s9mglpd37tc7yi4rhtii37b2fcn9w9yk1jm7pyog72bwjrerl5bemvd12lh7kma0ab0v70ib8y4uh0se75kmvv9a58k4qusu9pukxbj0fiq1j0ryk5qr3d8ee44u5qe5dkv6j07s49igxmyvttxhqloxez1zlnt9td0pxwosamy3c2uzl1sqphdczibmmt7vyedjjjb5fas8tj9oy53a5rnbyiytzmaiw6p8ueu4ie1ut564b11ag5qv0k0tyjckxh8ed7d86hogywgpcqdm88hqie4i686cd7uis4sgy9ez8olbcvz93pdctqmhsygrn5ahv79t8ew1z8124fs7cw2mjnal3tp680fzvwarpp8801nmndf8wo4trucn2mbw3mwe7q8zo5uf4gzqq0arq6dpe2zqnuwltjxrg4wja8duwvvr7nvi2y80ks48yqo8g5zliqpcz7dgic278hkeohtpznzvbz5eqm4e0nev6c3uwbw2mo4wztl2hrclbi8xttxc410nx9rmrx1vys2ezihc9fll6anbnldnoooupiczpg95bktvupm0ttd5ybe3mvlcg5g5c0yfpfa4o12tafgrxdfsqyicgjor5m3ud73j1vw1rmlimxbv909pmfbk7ajpxj0pcrs5m1f77g1sj4c98468iv2bl6lp4x28y98dcehmr0hycv53e1nr4jyi9invgsihgwjp783ngv2k5bq5ziqwcvmcyhvjtsp6d7mhcmg45jwg4d21a4yh9fn0mbyfr0290je9tc7k9qr0gg3y5n5txil67da2qm0ke3yd2vw0b2q6p658vacc1r6583npm9gudtw6w2ea2k5aewoqumrgyljr3ga5tzbm2yzfp2husrm357d6p78v0ucct32nmgbqr5e0134gmphqnps44zzwcx41rwpkoigf8wspodg7q585l1gymdtsa0gnmoevjipy5jaf3rp68ad5qi5hqjkr9lgabo04o3emhd7qjp5edhgnqr9y7drir0d1wvdp6cl5fmtqtnuhf39auobwmn7aw9myglrfnbdqtfsbiod6i353bk9umgs0mxc3928axvsn444dadq8vqrfy1cozgzktx1v735g7kwzfmbw079lz36nikv5mz7jka4dfgpc3gujcfbsfdldy81cd5aghdzfrp927r0zl5prsxgd8bqm9jfwq2m2n8nop3e0xcnnnads090x0upus66yg6zxyyasiorik8n6zgu4txztfagdxfyqmzsx5fekftise1lrojynrjxvpget98ewjaiy0nybmz0ui2nuikpbab3l1zekmdpk1svh9aucjjz1jucj7mbvxcx8ag01mi6x1fmqntkytigyn7dheb7efw7jbgsoanxaz52kydupyn8\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": true, \n\t\t\t\"reprocessingHttpCommunicationId\": \"959c8fbd-6940-4537-8b5a-1d107636e85a\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c8dc4205-9f9c-4845-bf71-6d8b9874df9b\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'REQUEST_FULFILLED', \n\t\t\t\"status\": 2807, \n\t\t\t\"method\": \"0aj7bhzv1s8y7crrkk18uapx\", \n\t\t\t\"url\": \"vwlptowjw91g8iyfxku7u2ob1tt665nr3v4shqi9emc59crncosyjm4mz3nczrcwf4ny315jh7gug0k638b29u9huibuv7fxmahmvcobdf316z2jl8uscp5vqcaw61wtlujkrlrsyck1vb7o369xss27hc91js6206rjttri18g3wec999iwkjb0w1elzzyp8083jb0t142d9ns7rksaqybblz65qirshyx3s0gn02wzhc8fdxcoj44g62ewxdzdja3d9wyu4h2hm33rn6olkqdpwi26apmmt8q3aweanmrw2gapbfbm1bq4psv8u1i6q4du6srss4p7zdor85u1gobhf1x4d8wkw90xqndik5qc4prr18400s9g95a0c2vtj1az6tep25c9q8yg2kvtjoi1fbyz42hlfej8wbvqjqrum5w6m3mc9vxpgrinc2cu6xld33o6cjtmfys4z292gmt8rhjgng3i4nhcbnuntbob1yq70uxtj3jxltn43of318l3ov0glwpctuw499rsl3awq97i0ltxzho4nua8o026xlz0mswqi3cb1lmr8cjtfil8xogdedt3e47junqdfqwlmx6qarfc3wzxtwq47d3fbmz2n8lwc1t806ov1rc770elsrso2s7h9cx8ldssbgojnepabqujftxdio6jocw27hqw22czmqsf0dwcv9vgcvtt3k07oys5hbrjhz4zu18t92qxfl865n5xipixbri7e5nv4k6pbilvv6b7nm11qq4guk0uclz4l0uzf5sjuarqn56fbppq1vpp68o1kf82vxa4dcisl8si1havyoaxqstcqqurftunlak159de7wxrd03i4o9hdhqm7nvwhgsbid0k47rg6fia1of5sxirpleu5aomo11ohzld4fe0nfm168j2qhem9r7fj20t5cnw4k7i9vm2o268ldxxur6owmpyd0icl909ug0bparno1lhepbqd6v64rnazj9n1hnl2sh7n6x47mjkhlv22u93i1p1c6zxxcki85qywhla5jfn00zm5c74u1ir84qp41c87yoiv1njldwc8alrfla8cunzeonxbq5xx5rf2ya8u2z2vu8phzyn0cug5e3z5tj4foq4av8wllw93smit3w0zpzial8yrqthecbrm8kmlluqa1gf5l4r8t0rz0i3nkk8521svg28mkldt662hc7wlv1zmmivpim2auqbz4noquwhxj5m5l2vuoz1uhgn26nto24ipxi6l5236orzfu52q90z1y4bgari8jmbbzfxv52cbgssjg5uoaqr7s7ocyvzmzerdabpliqh2pc9xr2snmpz4jx4zjtirml33u1m1ovmdsxthq97wn5af3z1miedfgp787cjyb1q32e6ksqushsw1d6a8y9my32ti5yn8mic5kz6b2padmoeeii33pzyoen5a9ghx6tvc8lv1kfrc7lk89rmapdifc2ef0gd37kdahb9lw6o147zw68wxrvxdw1wegytzpf6egzq7dxlv4uiona25xhz74eot2zwvjjax6oar9fn6k246k6xzt7gpozyxozx8o37c4elpq8mmuux7defu963pyby8oy4gzuj3ya5o9m0q3zfknxzm0t5n07lj8prw24dqesvy0doy71uvk6yhkdpetvz8p4k2v0g5jmnclvp2n4h4cnvkp5cqh358dvrqw3fvc7xmwfu2acyf8lnccopmzhmn76u1drr9s8za4sil5l4otpni1jxrhsnlrli2zgltehaln94yfw0500eq907jhf255lpqvgq0hlbz4jyxgifsb2xoxx3jefm2tn4cn8hqejjhxwojintijsgwp07mcu5ewqunmv2si2tu0etriydch4bwhtryq0h1pkzgsfotbnfpv92dqm1bej6mztxpnkl8jnczd8z7qh62kfbcb2iy0rhpgxi9ffxtwik9sra8xpfy3a7x7vgd92japokqyt11mak1ygxutb54skhmwlia5zjj7ir8yh49d66tbcr86kya1f\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": true, \n\t\t\t\"reprocessingHttpCommunicationId\": \"4c1967b0-24ea-466d-9a36-9235fb4a6016\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"48c0c45e-61e9-4493-91e6-860817878c3f\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'RESPONSE_REJECTED', \n\t\t\t\"status\": 5579, \n\t\t\t\"method\": \"0n0mr8ourjwzqfw6upkjzo1l\", \n\t\t\t\"url\": \"ppuyaih3vmweuk143at3vkl3nv39rcg6e9kkufrdsuiuhl8lsc9lazrxcmsp0jtaj2lnv5zlcl8qf0ipng9f3gvcvxayxi1yabk33fmbnfrzief3vxsl4v1z36gdpfu9a8ljoa5o84ldgcvj95iapvm3ackfppnuzekyufot3bzi1zsnjgvzfyhdi3dqcmdhx6bjknbcz7z2gnl3ahmgy8idogrrvtwf377d7x17thcd2z3ljy0zrjtlbfhnbkth3ky03omp945vct110bvm9zhryzy7k7usyaod9su3bmehzdj6n94kmg6it6cdyi62a8pdrqwe6n8zgbbal0ozt1l0g32g0075glq9vi4gerph8rhj5lx08691hqtt83njs7czzbihk16cr1as775i46g8b70hckhk9c0frqdj5zgu7vyi7j2wjnrq8qoapggunvplqzqn7kc53xcbeqn5jl6f4xrw6aws0jeeq01cahfmfmqud5oaorlfqn6i4155jx3qncttwe3xe6ktdqa9u7nvx8q67xs3tpt0pdjz61e9s9fgghwgi9yfh1pws9vx91ngjdtjots9bnb174iw7obi58ykkcppmtguignyuwf1xz79s4bxi22vzdq78w0zu1tbizknp14e8mo1oub6whjpnnjw8weuqoa9vh334h3jvxmrkii7fraynfvmbv28sa4eh8g4ka7tiejj222haub7a0n7fuwn2qqny3hhh2tyvzqonkg6pgyr0f5w96swi3pqp9r7wup7nlztmkvd6d0qlr6zxr7dof0tcfxxhwprm94b1lv18r65ouyz0245t95bx62xrcoga13810tacqvt3ihxnj4p5ximjwy677jqbi5rvn1tinrdud4fiyzy6j4cnbn4rki655z19kwgg97lfwg9txrk070l3m90tiwxd3jx9fryj10k66c8jvntdr3jilpaip3a0t92sgg73g0c1nvntdotrra3ossei12mq5ilcv5k5mt7r4dtxo3uqe3avlm4ahbb77a5a7d9vd9rm418ia0fmlgj7g6a9ewzksy1iz7dltjo8v1fh657eir7gcc0lcn4e0t1sqn0natokcoa7qr4kbz1eenjgos4ko5fvrmv2zfp1i7cb7edgkig5byjq0q8ji6zdd8qmojo78o63ljoq3u49guirqvbwrqa1p5hom2teffkplbdj4g8hh7dhlo0wz90ums0zbm09d62dxn4ws93cdes442mffl5llbxzajv6m20dqw84x7d9hg4w31pjn46j0zgijlji8ap81nxcvp6su93hz869y2s1lw1pnr76mydjfs97x656r25dzug37sq8hvdir3exorqjam26k7bfsa6ycgvtatx9gnocmcgsvlvtv6k4z1iq5eij6rdyiv86464nk5o9imjmi7l0lst0d2rr3r4nui12ink521fr4mrsv7m5qs7l7dmu5t2l661evcen7gpjvr56hzk3c56tqja33g0ja7if6yns2ppeo5sqyuaklc1r94qy80b93co15jo2ug29qkunctjf23yq7h24e9zejfeo9k6m4a448mbbyxql3wucdxs3eitjlafsoseddcv8olxl9bvnixzfmehcpj9kxj72jbers1m1170k40j9nejgpiww8p6kt50hjyftb66huph6zexyeas7s1i9l44xfrzjnl7dz1yfkwv5l0iqvjgfgy4w0sdfhjsdfboqizy9l1aum4ok0vmhtgn91gkptphzv1dfw09b3zzo5sc8d6r3jbm28yqnok0zej3lr8fs993nfxnqix18veqxssg5x93iapittag78jyd8vyqvqhs1m6n4sl98s5fxsmnncl2wcgq96z00qu8alosu75fhkkv8z8w1jwsqcl5zlx63u9qix8ie7hs9i0upxmey8ziwwozk6a0ovz9fxq65wz7wg49xjy62xuxxb6zzqfkx4revedsajqy8xddsj1h4bthjb6p07cje2b7tv54nfdwk6l5gqxj535f2785d8\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": false, \n\t\t\t\"reprocessingHttpCommunicationId\": \"76be2135-7e65-4eeb-a9ce-329437f7a0a3\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8dea23ec-5724-4326-be38-055b92a07009\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'REQUEST_REJECTED', \n\t\t\t\"status\": 5903, \n\t\t\t\"method\": \"9a3irl5vy3ta56u5yevujmni\", \n\t\t\t\"url\": \"qrneh738ipq8voo9xsbm237zzufffo34gkdjmcafwmggwvh9eh0jd8wl36w7lwhd7h5njy1z187qrpg14ztmsn95bq8z441s4i06j6yljm7wowmy7q0yo604ab9e2pyvv4cj5a88wp72hi0ekbnd3qodmwn0jp1to8hlcrm1is782ryikcf778fx9rli9g8wum3k0slp9t0fzu086jkqphi77goo04q5s2raea5aou627vwpehv9ktyu6hai4lwq0cuaj0l98hdz8j1mp5bhpky4mm81v86apdetbvwykwyue010y2r1n23ldk1n75ahu4yii96dkuy46jzy5s0kq2slrma916adhw3n71s0p5k4ymwk0peh8kz3ajmr41gjx8k1ie9uu1a2jpg18zvieh4xa37rbenl32uur94876h4sg4h3n8lf0a14ujmepdhnx3oxcmb0omi9hxphx8c1f8s00qytm19voj6kw4ug7xswpi3w3975ui7xmxtpacxo5l4wfcrdaz53mkajxtvr1v3u935r246wu1t16dyk3dahhqih3lnl68soreu4vt6j0hwa7trd6jsuy6n4slmrez7bc8g7cjve1m0roc83lvw6vs7u52su0wdbg7qebyk14kaza8n2os6wgw087tii918k56fkql1a63vlbfhtgbayb2tguu05reydbnoshxl8axjirhs18buyoq10pwks5w68ntui213alereaqfmhuv50tupr0n0wy0dl48pw8vn42v6xcq1d7a1k3ysm6umjwam05vkwc41hzceabspur8ldxparoeeno2xkm715f7z9fg6ac8pwot9lgoksn0l037umxr8490gqqpu6nrpj0mmiyixn25zhg92g9ewymeahs7oqw0k72wes47f09si5t0tnwb5ebrig5ukz18eblyv9dfsctdmnzukoxjdwy1zyohpdbjtxs1d179l4orljfo3tk0yjhahi1cwgep43rxrcg3go3dyx9gn8xoct6z14kmc6us008d1domuvy7kxxidqabp7mjugjj859qayukqhqhe9qw3ft1hofh7uvva4alaki9fpcjbbgmzcex0agdcvb0ajd7m3jjm69dfxd2320sga59z7kyhipb6k6ojszl20amygp5z78xqruajesorcglcer8ujchczodcyb4kd94474dm7qnzl861jycvwh4l0ytcqxk6mt51a9ib0222theco9m8gk4um0p29w3hssyjqbajhl0wy5d0o8itvnoft35npkfz4z20qcgfjh40urloki8n71m0wlmb7qcz1f4qh9ilga5kf660gtge3ye3b3s9ovikhu53xi3qb1usx5dr4afiqgq23uk036e8kdnms7leejd596liul05lem0wwuns13qtsbylaxlvajfuvg2n7cgpmwoa30s9yhr4oj0gfuvqs8sapd2iq2tyzmle1llzyll6yl0ecssji3pb7hrbp710ckekytgnlvsnyxkgar66hutnpg8eubj6lkmu5vthid319zbdnxqchchkncdp6ax5ooaf1bq9fgc8dlwrf09qensz1ni9p9d8blszb07luoblvjgmype3ycsy5sbyxwu48zvjcz52l530n8rsubtm0zowleckv7dxagwv13fr7d5ta0x0mbkt0l4z33jz7y5cq2mxuyqmvs06evl4ksozakk784blqpduc6h9p85ihx8f4dcq5ffbkzzzvq3cmhyewjaxqfh9sn6yd474ii7i6nvzhh1p2g7mqs43qel5awckru8nk7g1f57fxzvojam2eyhi5cc5ybtmgrcw2fe0a3y4c1peum6myobortosgh6jdsf67m2ndercwhjhg20uv25p4a60xypa1mdawe1mjdocpxvd5d9vdztzh9d8n274cktphd74gsl3zvdbd1034ue6pwll5lthed2493jnzeaakqkzw1c9oyuzbcopzsji7mbxt5b2yuedjjxrtn44xclgjn473qdmlgj6t7j64vgh4bm96\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": true, \n\t\t\t\"reprocessingHttpCommunicationId\": \"9695dc11-58ce-47e9-aec1-95e3c6da71e3\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"31b66639-20b2-4c7b-a624-772c5b52a3ea\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'RESPONSE_FULFILLED', \n\t\t\t\"status\": 9612, \n\t\t\t\"method\": \"y14ele0c9e3ryl3g4y6k8b7c\", \n\t\t\t\"url\": \"c5qaxg9emf00nudous3au7ek8kjvwylgcyo5ksjf7qz7z0h8n84glysb7lsdg8oxe5nukdzlqz4h02q5749ft63j2asyddgq9as0peonzm9fnwezil9qk69iqvrt4yv32arjcs8aydle7vzboisz13dsvix2issskuiujusqgzsnjzcxgos8ok1yr1ktfy5desctiabeveyp6h3gf2zbfp5rb99o019m8cqu7eboyvan6yzjtgdcow2oyp3d19iuud8dkoftlhqcqds4bxp8e3fecpcpdms1gkdwmm236btiq6olozaw3eq6juhu9vg8dvlcp6gg4fc6qsne04zrplsuu7jlbutpquqcrw7n5pdhxe76gew5v8c8h6c3yf2ua6ui1b39fe9k0j4stuqlih2gcoabjla66f88423tomtqitprxbeqgccn0zc4m7kia9ofrq9p6jwkb8mqroy12eqpa0yzaqzqrjock3va72cn8vqxx2frjaw244sda625czz1bjy1zcbq4gjvayj61qut3mf271dsa7jdvl2nl0b37vicbmuyffdbqgarf56l29kmnep8khpsyhunfmue7jr8dmvdpsibixkyy1npprbe64582ac0lzb57e5p04h9ulvmelamepom7x2lrj2zaimowtkw17xrywzd5ztkpx5p4pqor5000zekv6lpqf6ysr59zdfr4tiwluevz4rgd5390rvhst0atfs0qlek2kbgvm87s95kvcjpbvl0hv22bylcwwt3f10oz9spbsbdz5734flozothzvw9y4sgi8b613orud0uo6ocru0eudhjxjjuhhfipoocyyzako7uegbgmcnlixqhoym2bx3ccm5nlvexdfno7x88w91pmo0v2mo50emfiecc5m9kjl1xw0mw2eso4fn3vplb0y8yfnkem558c837evalyjfpon1oddg7k33nmr0ndfr5lqbviffmhfkj4iwsgezg02p5vz6piynz9m81julpoqfe22byzos5gy65snx17rj408oce6o43cg6ooxrch98mqw4sgp78ka4vsob9uxhj1os7bvtct4oaa14rlhtpy6tdj5c53u8uy77k2azeacee0bgwiaxjmkrtr3nmuvgnp23j8di7yfcnyzxudsh7tcweh31nrh5adqv3jcu2fuempr3wyomuj8avayso7nl33g5ho70cspfgvhug4ehtxushxmg5m6e7oqwvtrii1nal49u2io5h13t53k8453pjro32507er528k5xkrmingwc81fjtd8x0llzidi4tem05wvrynprx2dlbfaaujw2w14js3abdn1z1oi8p1n2nuli5pxc12t75ya648ko2etomf2tbdr9ojpr9y44r523a2eh3fcxhyspqp08d9a2ghd3102ex28gqmgvifbs9qudyyi5u7ldayj4bo6vdfhe3ifyw9t66r65ca7j19kga906iim9xobqqdvoinhn84x8ub7yfkya47ww6s2v8jxq4m43pbugruqbs6lsveoqsllguau43hcodafilszuhlt6ub6g6oqhlhlbyc4yz4nqapzvnbdj53pg1mlzwdfmglz6hw0ytn65spyeee3gr1tvnorpa4a5wfnhul8xdxbcxtchyzrk9ihsanjo1bpbf30z0tmwjhz7w2oqw87rzbcxma8evsck3w8r90jmrxuvbl81spfvq99pal6wtzdp6khkc510ngsm22x5rbfxp28uygqg0cod7qt4jxcqvqb08f6eos5q2d3bd2innr51wd3wvzqrfpc68vvpo7tn258j9hu229bcibp3mc0oxz9d0mfx8fe90npywshhuknnn2g7aek59gcvy0ahzyfswy4su7jqeuzedoocqiss1m0ix9fjq5bcxey1x5teow60qa72reu2kjkw1hcc8yq1f702apax24hyc4crh46zzxl74q3hx58378lee1pr12uhybayxda0nsjib10to6zusir1nn7u99gp0iifja3jmjlxehrxhok\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": false, \n\t\t\t\"reprocessingHttpCommunicationId\": \"be10a4a9-e322-478d-88ff-7860d86973a5\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4131ffb1-fe92-462b-98e2-33a41e38f348\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'RESPONSE_FULFILLED', \n\t\t\t\"status\": 3338, \n\t\t\t\"method\": \"rjto7hng3s7a5zssk2ci9ka2\", \n\t\t\t\"url\": \"hrbz4mdm9yf4qmm5j1an6y72vhqydhk7soht2treyf9vloxtqkjwz5grlt38ugk7hcjyi2khrz4cj77z538t1m2enu6m9jjgvfn3hv956uy24nlli0cpeyc9oh1zw5566lrsxjqqjx99mpzsrlolf28829c8ej5r2p66jw4vd8wdo3upjt661gj9o83rhe91nwjv1bxbb2dhmdcjkr3q1ekf4z7ek46dbfewagnmp0tmatfb93lywyu6gu7ry2vpwz7x288ahajfips8h2nfhf6stgqgcr5kgc15nglh1cmb5kj44kjrbed8k1j2aj7bwunrxsdkevf9t1mqmevkleo2fh3c81151r0pyqibhmaupxl41ncfe4k8wibxo9g8vbtyb885qlqp9wi05dh8l8m45y7aweqakat3jomtbwe5p21yykllpkv9jls51mybr1ablzexpejdyxyj1r4nvp4nreobv04afx2mtp03jq0vpmpfu1rr3wov9zncumdn8hum11lnwdupkqsa6zy35z7774pbqh4t2woemjq1hdpqhnccp6ipnwv5oak0lwxhezxa3m9gbcwohzyjdw5h7ebocq7hwpu1yvzdasmo4vjbki2njnsxm8u378h4in4eu81yv74ryt9jsm1xn964icuylicfi590ad18krxzm1yx8yn6cbn76rbgp74r4wlyrjxl7nqf0bl0s7hx81rfidqy0o3s3gzoy3pn0djmawlexkd9q7s5o821op9126ks718ohtmrkc3czr339w4kjztv1dz04q4hokmabw2h54vqla2nkpv1g1s1eu71444ub7ddtbpzkx4s2rhgx7tyblmk1x0xc1uk32rbn1vc0a6tqb4epxwkekin04vrbulb5joncrtfvgp0tpmodac6ghxwosh6iniq3klkaicoqj6v2a3u8yar6n19iiwa80lcrd5nanmysuvqkil3l8e5z66y8suq5cce7na30fb2q1wlfsrdelrzhdw015trtvugeue5pwvga4t142ibrzne9cp8rh83dhlvr6lw6dsojzt1oebwdrdwjfyfx25zx0kxtcrsdbftqiw4y3lpvxugdpduphfvdgl427cd8qel4a5mw8491ttcrfd90ywg7dnn2o80hheiz92koeobt5d56o6yzm501oug2j7lo8074diu9lt73mt0cg841gp9c77q7nbpuugsssya7ac3o0x27uqnxm92zm1zygn0vcukurvznc23hate6kcq3k31lob6cqinfbxftczqa0kcg4hh2a67l9tn3sriszor0qpb43gks1w31d8lzym227n221mpwtyyeizpfxb0xf6u9vk8b89tzgi33zrq28wpfvj5bgh3c3idj7cifsw735ag8f4chxse0km4k0lx0fo64onk7vwgbvlkulsmwbpgxbgmvee2iar2exgap5od2f3ayoy18td6g61s5nxguv1z0kg2chqn3pocsxkhs6jsssasas49qzp4kt5znw4zqjed6g7pislh5ysu41n8of6vsq3787pv80ell5s92lr7odb9jtcc54jic8a1tibnv1s1iznei4bxkuni3fgpxx7q2drbmawhqlgfp2pya9wg18wu080r1yvc82hq4wnd8fmnj50jcuns1cbpjvr4iyp0zndcrsmgdkprsggqre95c2a6s3yo6qbonkpybsrd39k5cblyhowmywfe8izmemqtr3g3p4pbsjjn5qrvfxwcsrqxrf5c3f3089run85yz0si1n0dqxsu92xls4g4ocodpds6qw6q3hhehtbuca02ctniyoslfbvbbxhu4ebddik61wknx8zxirrppsohaqvjvm1gafcr1la5ryoj9ltk8el15988uf26zwgufsfvoigtj33nk6obfo04q1ys23c254byz9svoq91nc4ilstw0thf06naku1k37umh1busf92h3rtbbrihorokxv0zd60ui1v59z2ba4yif0hshz1641pwe6dvdlu1a53ztuamlc62om\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": false, \n\t\t\t\"reprocessingHttpCommunicationId\": \"d6f725dc-a67f-42ae-ae4e-842b279218c5\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d2c5ce54-f382-4416-993d-0647ad7f26dc\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'REQUEST_REJECTED', \n\t\t\t\"status\": 2033, \n\t\t\t\"method\": \"b1byaqiwv3awi485urqtmt2e\", \n\t\t\t\"url\": \"coyxbw9i2aidy6u7tvg2ln2wajnubnd75fpewx7v3gh5mczi3bfu3b2cdqog7uk374h40anxeg2uguuvwjf87cenwvbcos65qhvj8f5aqjt81910lkeupezsskh3herwfnp1rl5n0ex2k3vbbdmgbygt14gvdv4ii2xm6k65njpf1ml7y5mwyaaz1wihp1i5krl10ehfrmos62ymsf48q4pqrye79lmlcsb6zc2f5045m14w3fne51d1q080r8lfzbolzjg11gbsntcat952tvcf4j6cr29nys8e3abk9as8xfh1hnsl9lsgkdhj7axzrnv7ysilhomvb8lb84rjxefva71r4v0l8pq0kb8k6q65pnp18yd8am76tqa61yc9vevzqhr60grqfidj5vn04i9vsribcy3suxsfdnsc6qwhjs4wgg5s90iy83hv7mlqz9sepyn6wlopdtjvypcynzt94nxzo74vo8c8lfle5ia9sk51bmepkqyp9u10uzmyxce70huc6x5yhwphjo1hmc3rd6hsxr5q011ko2zbzx31jr3f9jnh4dshevzjahqf8c9a8zqrtastnv8wi23uzm5kisj1yac6vnoowol8m3t2o0myqjr8gqpxvqmzy11t6qlgbve78rp9fasay4o3tfzv5suoy8pcm5bgqijifw8s4j7ib00io08ti9xbb5o2x9vke7houo8dnmv8wolrot10npm9b2rugk5t36nynwvspwlbd4kc384d53spn7jhhaf5wd6saa1yy1t929gvlrgxgeqnp79y35mp33apyxj2ylb24fbrqm91h81wg58c2ha2p4ikeg0hlig6d5zjpqu7xjp9kjw6y8081piwqf0r4wwvlb5msaswzmarnc3fvekpup5bxwx8b6y4hncvnugivyc2pv9xpwuoj3j62dlo5eirxjcdmofub312m0c2qvir47448bw7zxxd26qws9e73fzb9afw364higzt0vzzl6xxifzvwe6wv5eunu3etk7fncc6nxtd7j0w6066qmef43njcqk1s6tsge2a3gootf1u4rqpnem4c1kirmgbym228f607u0gkp5z5hqukvp5l8r74sm8d1p8b50zxv28nx3gu3c4gp3d9pocvcjawelbztilbid09gpmbmnff02gckbfcj18yop053u0foyz0m544imgklvu7z55mw77hr0kjrlulrj18ipkojcuvxtfz0978yner6vgecbcsokj4t0on9n6qzjc4aink214iupqpl1c76vilh2fvl5fgcupla0m9curaprbkj3eqj84076w1hbnhkzoe0zbiumcrkfeczgd42hlsjjvnc3swd2kr0r4xsawubc7xzssxn9hphmlte25hfmzh2kj3omj8xx2hs37o4p55cwfya67zrcfiiruh975iu2touvcu4n4vtmm2vfsyzibqgdqecaxwy0f9xr5q4lzxrs2txg6mtjtrg3nwajic4uid5iu4ubuvhy867k4z49ach9qo0a3zit2vo2wj0bi3sq2td7ymv1mujzgzuzz3m91okh023o6vfm6zji5l825ae9v94cx7beclpqdq3994b3jtjjtai14b0cwt40cx5ag68h2tkt4ut5vzzcyv74xf2odrhxwxhyg2vbq1yayc0ycev8223xhqo30lg3945xzzdj5o5r1j8lqvoplcp9xke15qvvlp5veonga16destmo9v5quzbuziq0p0zps9dauutsqxd3svn3lpcm272t3db2p8j7hz9bjuvj6wc4ldl9849xe2gxcs8v237ikvdjj2jwxibf07tjcbz2bzsd3hypjzu78s6vwtwp45qqavao18m56uijlki6gd93cxukbc4xmhlzd80qrv95ildswrf66psp1zpccby0szfwgzusi8z2lto7b0a626ku3ye6yx55ncwpke1u2k7lity32pagm87ncieerllbingq4bqz1mbdlepzy3nmtvix8l7ov6l7asx8ldcm02wfpv75suotxcz\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": true, \n\t\t\t\"reprocessingHttpCommunicationId\": \"cf68a451-5d69-4c58-9ba3-ed2d1eac255f\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6c44e3c1-5abb-4813-9648-6bdeba67bc58\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'REQUEST_REJECTED', \n\t\t\t\"status\": 9101, \n\t\t\t\"method\": \"kvq2nmfpthvx4zrelgb1pj6w\", \n\t\t\t\"url\": \"3ar4zrld1t5gih0y8fqsmdqqf0vn0i3f7nxrtpsuw073bppvrngdmzw1so1tbckm2uchbffl1blk55nw5s8erf57syfbfrban3ee6quhxkp09vacuike47211447xqz7wruzh8o368mdvdpfy6j2xe167fnm6srycvhaw9hkf6puywbvkblie26syrunqec6fh53ztwclcs6n4cp7yk5bs61dsypi6i9x9d54q9xsvhdq9jrd4c1usn7un7t8hsw587nbif7rw9pduvtc4cc15jrf1k0uapa27z8053rbqx8b9vnpnv5a4cgupo5gfzpfzu1pi1ucx2k4498bssej9jkovdivvck4dabxqnyqn2y2wp3wenyu5g23giclbzerb31a5mlk2a4xskmgc9tcr8ra4ufs4o8dlf94qj8y6a2m3fyzpbyehsg69ibhckmqpiagc0yljjmqq8hz29tme40yniw2dorbyljlrgowf2bjnex2chnelfx8dn601fwcyzbypjcnpzhey5qy4bur5xgqekhjdk0xtjra7qkmx6mzt9d9ocjn30njoi1i61ok8kzz6m3kzc2q7kqw1m4pskl0u2qz324omd054t3tadr05tqc6jn08u3o95n8b8nwsa05on5pcgewr75jwgc91wtx5rlu6s4gqo0lrrg3ow2p2ign77oypbhkzrrb09d062m2bw2rganpm21egql6zf9dab0faqg3aopn696anxv4xwlcnew70c9ggf0cqht2yf5xjk5la91t6bg1pjpz8msiwqapw1iphk8jx6hh4bjzk6ah4gdxv0osq8i4q2owsy5n03df414fyywl9k9yemngk5czie2ahdfmt40e12zirzljaewnynqtawgjqk4rxtqn5ekq1217ylyw2mqykttquc2lcojkr0uh6r4nz68mnvswbzryv3r9zmd2zspzcek9keh1rtv4l7118cemo4k9yp1bh39b9nvr32lxk4em0xjjhh0v8ckosly4k4mf0wrdnli2kas3ymiroyjr0l43vvu2gsvgg0at9iquctbzdoqu0nbq86tbe6t2n5h7sbyuf61os1ulpn4f7b2pg30aqaiu04qfgos93qi2bpyt40yl9q1q0481yhrpkt93rfbeirztrka35b97wot5irbni8jmt5qh31pn4wpwnb32gcunri96pieipn996mmx16kul74izccom2dmg57hlvmtjukk7ery49kpgyhxwng5pkqgjc8c35qw76skt0p7k1g3ww2oxytbltofdk0rdlpiboakzlvi458vc6i396tq2o2s3kdyuhet99ysf94ehf0qbkdzjeth2uynlzouhvardehhoxdxg102gywfeui5m1qxffdz7cu3z17q5bxgjinxq65gxbxcdalffm0k6jcnxqeezwz68sas36058v5y17uhkdl8q2hg63tu310iwwcjwpn50fda7lf237vangjwxicea8g5t2e658s2iv8p07emjqzs8dgruppobznxazslu6vfb4xx9uqk6oi9caw55l5i9db4erya324hgd6ggcfkklbpp7urvpz912um99p1ntapxtau5vgpfpdl3t3njturyriae2pup8i9nsspom3i1e6vu55ssscsm90uxry3x19vaa37vx12wa5b1dwlsawjib3yrxzruno5bokt8zgyxhsdw7ar4ja0x4z6vn320n9cudvan3p7ugkfbpupf3jh1rg77wfkn8tn0r2jzpjh03aw41pw4731ddcl78rkvjlm8eqmewts60w5jkcpkkrvxysi7najr1z67q8aca7n8jrast7ihrtuidt4n3eeula5gclv2kry467ozct3opvcb9no6fq8r9dpb9gk4rosl9hbg2p6si8aihoohdjhox0jk21fr4hqvnmxp5rqv9ndy0wek6xeayz460pruedp5j4u517166g9dk2lcrfhp77lwacqfffffl47w75dksy40sy0ryxokq7vd69rf5j1c1jptn518mcxat\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": false, \n\t\t\t\"reprocessingHttpCommunicationId\": \"551f9199-f975-4119-8fbf-b56c62e46eb3\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b8c6722d-b8d8-4886-a082-4ef57dfcdf56\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'RESPONSE_FULFILLED', \n\t\t\t\"status\": 6511, \n\t\t\t\"method\": \"pullhxa23lc1t7vh7f2ee1ew\", \n\t\t\t\"url\": \"2odnnsvc7poz42hqrcnf54eu6hk1jrxd2brn48egmed04731ud096vo0wxk2ztj3ein30cozg8df6j2xfe5h4s80z3s1nq324kuo6jbpz9agwwroi45f1clzmpkcmzk013m2oa2lzewdbzfmx39675hvhkzvvd3mxgdaqa40crnvu9nxv3kipxprbaqg7lmdztw52ibi1epk50b81mmjncahihzfienfvk0b29ied07p2iab9dx3n3x7ucdaojmcbbvjjt3f9ssxbixgttutlaeavc27y9qxb96wnjns8e0k60wo6x1gz7iiiipydv0n1tzolbmcvkbcm9tyrwfste6b4m1e7680be600802kqf86buj5rm34sjozctup31515q01j0nhv70d0xvfhlc9gtwcw1626u5cb2jmuffn13xlyg5ohqtfbpbvtwunqkyu0r5z2cy2ter61p08t142dkptzq9vi2p4n2unrqb432hiit6w1hko6rvbivohaphp1llh90fedk3vl2xrwoa6lfvatdovszy3t2q8ixhnselp2rdprexhvz6avc64txtzbj0w4mf6tz58irizqro34uupaheryfzm49760mkf4yxvqynov4spd4087lybr203sx7czbx7tccgrbgs77toqu8m4qqp0bz5bbar8xdrxtqrp2i7quljzk9fx9zdmbz8nvz81q7i70jqvh637ruiqplmhrwbulyfekqh01d7ihmuv70oi7fbusoew0h78bgykxf8spzqkjde25xeo6m2dg4p1cso8ue44uloqfny65lvu7wcn5qo79vp9fxwc6cg311zmfo3sq7vzhtklycjhhvxj4qdna6o8exlhlo44f7caml26vqur91i5cjnghmwry4j4n02zod9d8dncgsq2tctrzq80si6rihbhkaag05pgm76wzkvplgjjxda6gvudgj2ljkfffto1golbvczn7x0lg2a6h16swglxjj6dpq5limc42bepun4svfr3mkcx5s11ccoqxq4nct4oxkgxijohomkc1d8ttzek989ec90hdpvzl6ppg0rh3n2t94bez874jtody1duvsanlm3931ju31izd0kcqdtrv8kxxajc3ncdiykidbryq2v929nnmxz0seumcoa1jlt854ns02s27lpvb4e1iginearamc04qx2bcfzw4kai7wzk4abi2k46zj44vgxtqdyuo0orleifo8xloapr971gk8lltzv742mk4fvkwns2hljd9wdnp3z684e23rp4uwm945r316vpzcw7wvvqyt7bm0ff4w16go6amhsfvm72ajo644yk9u92aspk55uiowofrqqxtcz8h6jst7189tbmav3jnawafwl2kgghmfjmtywqt7ikqvv4kpusy51ybde8lo801gpvyf3iuxuicd2pdvfu0qszxlj1ffy6adn1t9cle7yr7cln825pqxld7k798l710nz095x9n9ih09sqfoai1zuc19ks1hxj4xqgor1j81yavcfykgl9xf9da3sssoqz146wgkxitc8j0majgync7d3ull6sbsvirtvk0ojhjzjea1s4hmj8vrzm3nsiwzr78a1vgerqfjpv02mbpu4uhtvol63dfsnjc5izhgh81kwxhmsznwuxk70z7csruljs7u0ucdbazt36s173u41rho1yz0y0mfg7xas1cdbz8xfse70cr3ymbopm3epa2li56aqwuvut37c6a9rn6mr91b6p5k8qly9rj4x5bb84z4l8aal9vn8wtly06wi3fkfu4xwyva5m8i4ptxmp2ojsx21rkvrcorrjbbja76u96n5n07ajl0iht01vv7endov1z0y8ngiy1nbikvc8d3tfk9qggw4kmooqh8bizzplyh2qcq0n18fkxxioh4qpr2lcso0m4m5ic6rbomdr55eolsaxl3k0klxce0lgbjmi61bbsudyc5pbi21xr2nc7nm5wur80ajn2414hohs2keajs8ejjgp4hbjb7m8vqxtd\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": false, \n\t\t\t\"reprocessingHttpCommunicationId\": \"7dd94b01-b913-426c-8efb-0c6f9c862a0c\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1b8646d3-fa0e-4d50-a027-2106a059ecc0\", \n\t\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\t\"event\": 'RESPONSE_FULFILLED', \n\t\t\t\"status\": 3080, \n\t\t\t\"method\": \"1rzsr988crwig20fd2gektsl\", \n\t\t\t\"url\": \"3gej4eerrjfncnd52v69ooj8a43ydafepwjejqbtt764efdbizzhxtu5r59ca0165aiziq7ypwv1a0jsvona943tepge3aj83crhnqee7ioor4z2ttzyvhp678ic03sgqy5lw1r38ude2j1d923zruanq16qpmg3hzuvengxf97kpvm8benagnwixp9zg9b8swvbojx1cmjxi88bq1gerucyviyzb6cmkmns149h1bd3va2gv58nny0mr5aaav5eq0lunxyilrl7wn8h1x9fxjy4k6jkjbgfmok42pod3dxnow9g6dbul8iqx6ag70q0ydoihlpl8ql6mndceio5r9nr9te5cps8omp74v1pkkjc3tyc5g5y13lot9b7lg2ez9lla9j2vkzn8g87jq2u44ygiqsnll3v4eavmya0covrt4wv15aqxoll4gje22lx6a4egiqhl5qbj2ljpfb2sra5b6xp8ajwzh3p5k15ix2pyouahoi8xv148ut914zgvf0lipf19es0x2wajkc2mnzf5pd7ifxkc00cgygi9nua912w8q63t9c945pa3d6cltqra26bdv7phve40cdsamecex8ebfphpcmfhbuas3k0iwg173m8njp24sjnawu00yltu2wnooc62w0b4f2m1exo5qn7eo5cpk8fje9r8r4kwmi1zi8ebh4kv0wbrm7f0q7zcdfhj547k6oxohi95w83c93ad0of8fus3nj2il33jss6zz0ohov3k91adoo54g6ejnqhqbgnew0bbnaytosxv3v36y20wncjm60dx84wfo1mpd2qtgmcxl7rnnx12h40f92tu02cusbyv62y5pt5a8egv2bwvx5npg245b5gfuj3kpqqejtpht4p5rfbr7l9mhw7umbfc804qltraxl8vp42kw4ts463e1j70vu2uf43y86dwh8bwzegy631n6zkzrddpoicqa3pzksqb0uqq9ecwt8ltid41jjj8n27sd3y3avk466e4055r3p8jfcu2x9xdkxi67vqoexuxevngjv4we8hszhjsikdhkaw9cnjohv51s2pmjr2apx2tamrc9b9nslvrmcuthsnpmeapsrwx5pz7a02uoi8j8u3sxb5lzvskfsjs9872k1i69j5furas3zl259cb0f01s8sbh7h0vs8hr6mbcsjgvg2sjwwlcrnl17b3lwsoekq78lovjhw0v8xa7g0451ykaetipsclhxe9iwswiyott2fck7d136u7aknx45v2hoolzkasiza1y6co5ax7oo3dlfu4ra1k4fyvr91f6mbwlr46f2i2v203p8j79ibecxts6co4c8hkwc2liv0fx6rdae7b1jv4o55e8avpyuaaascf9k13rg3xkbun7ncfo6exnbs69g3viy4w2j961sdgr2umpt4qbc79djpuj0gpwofsm9gzt6bl67uzag9df9ouuf3uzvri42r4wbejtrzg0nm5s6s84utcj8h9h73ijdnk8iv9micvz6l8abbh6jfom35w0xgqtw2zavf8dqwjczohqxbn3hk3xx392obilkcvk1ajb4fb9wohh2nmiz13g2vk088ua105y6w090d1a462h01jszt4oylcvjst8o07he6wf83rtrm3crjym052fcrcw8b4bcmgex6gfncrjzbd5mbt8d96cu45qw5gfl0n3t8ko0y6wc8z7a5eaxid4knjj6u1zs40cdyii88whokscgg9uls7xyvhlhudia90gb4y4wxg719uep8soaxk01uuo2la83wat83r5tedpda18gl0i0d1e9mqivfrj6ygq3fcgs6fanpn5xxt1dhjjin4t4wxcs9wbgwfncyjdyzd9s8bu2vmif1tpo9t7orahfv1mt5x1uw3enjj1r61ok9tdowm51360sgs2o8vcd46tji48ul1pa4x7tdtip7nddtdjhzvfr9o8by5jk0n5yxwejbxvc070rbwo2r2caph1gevzabuchel6wxb62ihq9w7kce29zabr9cx24\", \n\t\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\t\"isReprocessing\": true, \n\t\t\t\"reprocessingHttpCommunicationId\": \"3d4fcf69-b296-4d50-b20c-d7a1dac704aa\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingPaginateHttpCommunications",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tauditingPaginateHttpCommunications (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingGetHttpCommunications",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tauditingGetHttpCommunications (query: $query)\n\t{\n\t\tid\n\t\ttags\n\t\tevent\n\t\tstatus\n\t\tmethod\n\t\turl\n\t\thttpRequest\n\t\thttpRequestRejected\n\t\thttpResponse\n\t\thttpResponseRejected\n\t\tisReprocessing\n\t\treprocessingHttpCommunicationId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingFindHttpCommunication",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tauditingFindHttpCommunication (query: $query)\n\t{\n\t\tid\n\t\ttags\n\t\tevent\n\t\tstatus\n\t\tmethod\n\t\turl\n\t\thttpRequest\n\t\thttpRequestRejected\n\t\thttpResponse\n\t\thttpResponseRejected\n\t\tisReprocessing\n\t\treprocessingHttpCommunicationId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingFindHttpCommunicationById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tauditingFindHttpCommunicationById (id:$id)\n\t{\n\t\tid\n\t\ttags\n\t\tevent\n\t\tstatus\n\t\tmethod\n\t\turl\n\t\thttpRequest\n\t\thttpRequestRejected\n\t\thttpResponse\n\t\thttpResponseRejected\n\t\tisReprocessing\n\t\treprocessingHttpCommunicationId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingUpdateHttpCommunication",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:AuditingUpdateHttpCommunicationInput!)\n{\n\tauditingUpdateHttpCommunication (payload:$payload)\n\t{\n\t\tid\n\t\ttags\n\t\tevent\n\t\tstatus\n\t\tmethod\n\t\turl\n\t\thttpRequest\n\t\thttpRequestRejected\n\t\thttpResponse\n\t\thttpResponseRejected\n\t\tisReprocessing\n\t\treprocessingHttpCommunicationId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'RESPONSE_REJECTED', \n\t\t\"status\": 4852, \n\t\t\"method\": \"p3rtd0s2g4jl8p0vwj88d088\", \n\t\t\"url\": \"dih38h4kfxloevt5tsnstgenokx7oyhadrg7b26yvit37lqerq72m7zg2dvbmosyzgu6sfsow3mu1s42qzuh5gamnndph5hss3l1kted5j1h9jkpu48hbbvxx7adlg7z5c0dwuknpq8fxa603k24dsig8hh2ak73b13wnpvj97usaq8mhw0176igg6pzpu2ktkc12vsxpqbyiq2rfs6hob6rpgr1f06yq6wkvcrt1gab01dhf06330aka9184aebaefj0zrq1q7ggslq6f6wd0yb9eskx1v9ull6ry5fjvpo0gmwzlxk0vsvf4vzyafkq5wdjcl4nfm5u5133u92lrbvy37spliv9suguodcxiel415ifvl3mgxxqbes0a5d86ugmitpwuitx4zwgbl22zo6sphiln5ha1vwmyixovt5om1xqdkbob5wmuk8h5h7fr9pfop31w5uopnb0q1k5f7rzx5qo42krlc9jj58pc6ss3xzjul9fkpik7g2i67sv325z48nevs0t7m96p61vamcx48nn7kl3rs56s9r1ns0yrpcg8lwnhdbr3335xhsncmke3oua922h9gdsel7v9fqdkjlaix1o496lrqxgvlerjq7hzf2o9wexjrp1gw8fbenbc6gp3zqy6q9xzpd1kp7jziws5kxadq1qmz9rk357tttf92ykktiw37vw5gqx4w6j8g89neg8cf2owzzmr5dywo05h3p5jwdg2a0tk5qw1qg5fmumakq998nvlu1oxez22hczjkizbuq58liu9hypo8lxyymto5yyof50oat7j9dthy8gxq9etplrrac9pc5ww680bw6b93evhu5puupi4zpp1arciuh2edkthxs17kigdcl5qwyfq8n9fzpdyv5sgeq905acfi7ug878h2m2ufb66hft830iozait6qrwrjbewwxrhcyl7mf1p48vfuj7xf5sb1py0pe3jrl7yhub6h8dnap7bpaueux6maq5cq2c60gv43yugli68kocog7onld12876119q4m982t17e3nk454ed92rb7cjjg80refrdzlwmmdsesbsm1ypdw4j58rf6lvsefznoqrg172dhf8hqf5zb07g4dpzkjewpo6mgnbqg6yjpxy6tl93l2nlvsagk0lmg9cbghyj8ir8k9g2lxlg6ctzec4okxbsr6s7l0jklqb7spmgtype3la5fioobsfm2cg1hlyaiz6t6es18jbfn2j84tvgw0gfktznycmxltdvyoxbhu7caux4r33wfwpkjwez2vf7rwh8izauy8imokj8ferhv7oc3hz1e9ut4l719957fle4trbeni8kmx1b7fwhjergo4998ezcxi7c35w87pwhzwf746urphdgl8xsty4rzlgfewa8yyj6qii28g4l5soun4bo7vrcflfse0h83jpb2gdr298gy57azhbo0q8h68tfpqrol3ys1lkxqkz6pbn3eeqckqpoihyacjtgofce31xc5ut29gv6dx5vcq2xjzpnm3ez5310d9b97sdrrk6qu14iu4yplq1pt8d2va73rltx1trjtzdbdyw8ei136ggm0rf0agiq3kbd4tye6nb5k0vr03yjlaqskao9bnayg77tcmfgpt3h4ztzuockrgneebx4kxgdz9nawx1v99jwmvhd5thsslj8dn85bhut63gyxng8ksvm23p20zez6yoea03xaneedlocr40xem3hh3ds7873f0dhy5o3wwzse31ey09uuzl8qkkzu5zav5oc4j62axdy9iwb7klyslp6zk4v04oowknup5m66ih753ux93mxcgtf67uyjmkl77yfeacimbs67nso07f1sw7krnweqfx69mbppq5b3augeno8x1eeo42wqig809c5xxtsjh1rweqk17dcxii5u8bh8kc650j61j0cmgesh2q45reu0hcgawnt6pzewehfr0ux0qd0h8mw10a6tqdonq6nm7r68y81pcihtvzmkhnto3ksqrt36k3n1z34cib11\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingDeleteHttpCommunicationById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tauditingDeleteHttpCommunicationById (id:$id)\n\t{\n\t\tid\n\t\ttags\n\t\tevent\n\t\tstatus\n\t\tmethod\n\t\turl\n\t\thttpRequest\n\t\thttpRequestRejected\n\t\thttpResponse\n\t\thttpResponseRejected\n\t\tisReprocessing\n\t\treprocessingHttpCommunicationId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - auditingDeleteHttpCommunications",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tauditingDeleteHttpCommunications (query: $query)\n\t{\n\t\tid\n\t\ttags\n\t\tevent\n\t\tstatus\n\t\tmethod\n\t\turl\n\t\thttpRequest\n\t\thttpRequestRejected\n\t\thttpResponse\n\t\thttpResponseRejected\n\t\tisReprocessing\n\t\treprocessingHttpCommunicationId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communication/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"tags\": { \"foo\" : \"bar\" }, \n\t\"event\": 'RESPONSE_FULFILLED', \n\t\"status\": 6183, \n\t\"method\": \"1s3o9c3he6wgus6gigaoy6e7\", \n\t\"url\": \"q8etztdj9lwjyazgd2l0gmfc6v9ucdjbieq7x83303dr5uns2n7eub31dhtggq6j455go0i5fd68od6mo4tphrzfnzandyfh1ecd6h8pqqaxc220gr4g6egpskz5z12kl3v81wd9v1767mumycgg2jucccck0rzozzn59jdrgc3nyqij5lexzbhpauhuf7s2aaqqnkujwisgdr69kdta0k0obqi5yyfpf2yzgnph25h2inrzomzn67jx1psc60v8whrh7c8zk4ymlez68rr3r3kcrmhhwm0rrxtbfm1tk0z4de21vp7i91sjx39f4zp6qe6dl7085qg7jtsegyelenovu11vhdfnem8jvhw0rv529jk6tw0fvojgosvfemsmi5t55je8c85oexe5jeokhg0toeu56dzb248wqcgf5lo00ixyi0dnyntezv3d384ailsrg5xsns2kjvpt8hpnyojhrx7sswz1e007isuu1wb4h5zb9v96iixb11ujf4gv3ezjah0wcwb8xdyfilw9f5aoggp9wk9g6af4jbvnfyfohod5qh43z0h8ctd94s1w6kvywffryp71hde8rvlzuf1c9xfpes9ge10iq453wbehlyejtsccseknydabo70av33o7thf56h634g6197lns4xjmgo3rkwm01ksm1gvnz1sjvc721ygktd3butfhpma4meypksmynitidrr3bsor1l5m7lziywwcpgm9kvtvgusvflgl7nyhcylcepwum7i3m7h1ll3ft1n1apzr3wgugl6ukyn2a30ug5s0h9w884txfgfywbczvmqc50qavhfkzgajbkf79y72q5qtvbeb34mlg7dth2708v4sjxh02rxqjik44kug16txpueaazgdupktik3de34hitry3e86w2jo9td346hatuuwwx0n9p2if5e1pu7hctpmf2bgw47h3ev85l6vibuesc75lvtm53qqvf8egic585h8b907cclnhzbot5tuv28ad2xstj2z8s8ao36qxwcswz48vhtj7x5874es5u5z5ii47g06585rxkgkxn8xoaqy4qwcj5g0x63k0xxftuqe90pgs6ps47tmlkumdq56sk7ic0n8zkqlr6qqubull6e65i8cbbz2hliebuoeevd9rdgktw828rgi0gu0d2p0d8wcqros4f1yyxnc02omz38fslk4gg2plc6e0n0wt0yxo4nd7b0af4bi5k45dvdchuhkgu8nmq25x7dn41z13i8k49ir796b3vhhvt1vf81qhjjd8q9yph17frfhdo0pkppso972fj86fj1wl37x4zjhlpr16h0xywtfaj2607e1hni1bkphd7mevlaht5mmjnxd6c0wuqwnaru3my5ciy29dmwee8ut5ee67qkwf5p5cau0hn0n859eifw3myqxbc72l1l4a3xfmoq2qcx19v2w1ahovopybw3ijh5dir0ahu6nzwr35vrwgtptmigahxvcu5jd4ij9fdfsun30bny83q7264724zz47b6fimli3ewza4mo82adqk40if7o3rh63rca41x0p5kj8p8a1nvva7trhhn1tmhafvwlzd3ebhaepmtybgn6v7b54qciighg0xwbpkqa5yfujzkkvpclfq3yn90b6a0n5xzkahxfr4g29j2e8uv4mq1t1lu7rgle0uflxbqmy3j7t0pe06kf7h4iflkwtc8fy9nhpuc41xpvrwg4b7ml6mvt89cnbbrd0ams6cvfz7yb6hx2sy9o0no7mys6l7ucr0lz9avq0afl9y0s07j2u34h9co1x9yywx122oraiw37xq22xxihfdf9y31fwkmdkl8edd2doa76b60fvnzpcxgr864mziu2ilulziecuf4510em6rgkt9ez6o2dxi4vr76fhchijtx7dymytviq09wtscxyy11ftcdcyzq2i1qocdvb40mwxpj3eqak8qqgng44j01vqgh0d58r25i3a7psmyx5p6vb4zwov17kzr9v0d8n7tkkvw924\", \n\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\"isReprocessing\": true, \n\t\"reprocessingHttpCommunicationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communication/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communication",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communications/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"4eac326c-3417-4da8-8351-c2404109d74b\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_REJECTED', \n\t\t\"status\": 4781, \n\t\t\"method\": \"oxuo30slucu9vl3umedzuft6\", \n\t\t\"url\": \"pq452wsseu5j4bjcbm99qrn9wqma4fs7lolsg9g43igwijm7qwd0s5potohz7xadrmm2w1dmupm0wkn1otst5agab1lvlnp10uhso0623vbefhpjzvnj0d7x2mkevn6m3ndb4qkb4gpxnlkrkuao02413e73rjm2sgtzp4fs2hkt4h80974pfdtrhif4dioz6ff3m40jll7jpwgmhe8os3wabz9rgdi3tumm2jgofhdyn9rf2y07vjs4a9gfynmpe4bx4b0rgl5hf6git91ppjm8vgb7s3lhjy7bdg5f7pk8d8erz4qr6c4dmyc288kqdtfyisg30btrjv0cq6ckn8qmt9xd6qr1cuyn7tkxbz496m4329oloojfo31t3sa8jotfvntyfbhxbuay5dyp31xyzxfnmtgvuvhcsm0zeh1pcipnovd8i7qljz6p762av39qumb3qbw6ls3n7460b07499jumyb3m4xoco6ipnan6dn1pcpkns3bcmtxbvjsicx2swymp6dr9i50df0g3gmjjss3bolj8o9ey19l02tw6z6i20r92wllvnlb2pmsia1wyiq9x6g2h383blex5b4ib9pbbibtypj3s49y6v1rubrj0v1cmmeptgo1hy8wfgyjuxj0nfp5t3fdkp2bk0oxifyxmklq0g9cqsrntp2proyzq2q3bz1wd551hj52rx53o3i9rbnnj6a5g84st9623yzkbk2dz7gz6ayzncmdxgqaqqetpn6kjqa6xb0250zqpxq4e3dkap8mcxap7y4duhl4ytiz1gzwhb6h12ay99rj34nkbi8fxakdp6h5090xkci6fqhjamq7u4prfcefsh0rjeh42ycuh85tjbmoyk8bvyk28nv32206j20sbkzx49kgxxltukv9bqo1ip63j997uux2so84bjhp8rcvjeotptcwm6pdvqz3n19q15tmif3oxz22fasowz1dfz5ewh5crilg63wc7a4u0p03aqp2nch70ejzymeqs9dox9bb8j7v4376vga9uxtjcdulofkaacalcp7ylvlwwfmitulz8cuo9lm4g98nt8wm0p8gam0yp47bpf6q81hkcu3tn1crfjl8fwkkn3mqd9i7of4b8d2uxl64560a3glrhybnpj3u70dyazjn4n2enbdscfv0g0wflliboigejtqv9iixj7mpbgz96tupt0c40p2xhesgkfyj1bbg9wd19eqzv3ucs26yfto2dt66ggxbo2y6vfk1aw7recqy6az4lyklfoiei9vnruc3f1x1z95s1qf14xcqbg5xlqoho2t6prg1bww2z2w4dli8xv41z9z3mpobefawgabreel7enjs2s09zjxg2pudmogscxg8k4m2eqxp9l22wbvzmwx9uixtfpeg8nvlfjoivmi9ovwcl4sormgh4eq80kfq4fisig9n0rfce64k7pt1oanwi85n1zig59lkaxnk921uk0hc8gmlo13vocsxmztvcmff5rf6d6nt8gge2ecr28u00q082lkz1ayeo7647nainfnwwad6gp7i57u9alpzxzzy4t8jdzwwam2wvjheytpzzugavmej1fwdcequxlbchvxd22zcs0azgaodx2g3bqlg81osqrjo22lxa2ssihrf0zgcyuqpfvc2dso41cjnt5or7arxgffd6eom0f2lx513ggbzaw64ketxyizycbsd9nb6nl7goeca9wfih0e9roe9ttd2h7mmsw8z7ym43x12g4yjhdrmmyyf4g4poyloux011mdx4v6ipkcc5reiprttn5vas1iegzqg4py7nlgdc3apww0myk5zsasp9id1kv1ntvgzhsccwkkb67m2z15320dmvpens67azelfj02tiyb8g3ssods7mznutb430b05hlncxrrvp8xha7crb09wlda7ejpqs1j5icrei37v1w7bokqitid3rd0fvto4f8gx5dl3dn1mm27oxqniaml1u15yqr8pq69wn9jachznh4pqa1j1ovcfvz6syjv\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": true, \n\t\t\"reprocessingHttpCommunicationId\": \"33b3f37a-c3df-46c1-92b5-5c14b95e1954\"\n\t}, \n\t{\n\t\t\"id\": \"259fd0ce-3116-48b8-b828-3a10b6a9093c\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_FULFILLED', \n\t\t\"status\": 6339, \n\t\t\"method\": \"037aq979k1498nf8s8cojqmb\", \n\t\t\"url\": \"5a0lmcalbigrnt37mox2r43h45hoie6vuwtfazd4w0tuu3ko0czvvzsmbeas6x4ga8p44s64jmcx1it38fpxe7j2gala8nz2alhdfs1ijgnax42xhkku9iuyb503jqyazcwza5bz326tjywh81m43td2745csljaa2o7jjgs79ypzrgdlz4y3fthjo9tax2920jbva26gauzc5bvt42nvmgtwnnsweh6h4mt4jt74oztga1xlvi8uhrnxdf8xwdk8owfbmlmih13558b7p1r79v4ivu3a56q9n0tw6jr4tzeqjhhkpzrxaozf4s5trnv7tsezuyjfn3e79lln47qkmusi60sw8atpizj7lzd4pgcp8zbgrje6heykdspvxfq5gd17imp0slqpshozvv0zs7bmqq1p43q803hcsxotwoytbm4zdftl0qh3z9oj7num1ujtnsg88ca4uvsrky2coylk6ywq5vw1c8cmabztew4076vbb0pf1w4qgh6xo3szmepbnae0l33k4xhpsmq49ezpgr3f4mqsgjddo54pt1s5ldapdwyk2cf6iayl0n0zpkqubvp46qtl3oqcdu84r7lz80vw981rnxxzhaezqba9g550jks4qjuhd2l1khvv4n9hk1q25qrmf7r03tzvteapexrn05t6armqa6olhclau19kps5n04wwv7twl7t2en301aun2gn6nme5phigzzmxxn9cbai0kc7qgzf1ua90no0j87f2qkjxhcrpk5s98iko09qplmy7j6ncja2j8ftmijvllqpy0a4tmdr9x2j5m1y3sfa7tywoinrxkmx5qzrhjwlkdzk6fguwb29kpqgfz3f3ozbft1uq4s3af27ttuxjf70dvfhe0fafkv236c9500pyozztm6g4tlywyfo7mb4bseeutjk1nnhp17sl0rco1s91lfvlwa6eyfq097bv1mbmb136h5a4um53gf1xmad2luh0boaldkrnj40wtb4k4bk8nnkpnesx5ppgc9ocedi3edm2l4a3znjnd2i53hx0uq73gkjpxdyr5u19opbz9i34ggepbgt70y2olx36c9valwv8dkqav74gu6ytijq11vfj5origh9zx1pwnf3h10elddn3xmnnovi4ogweh0u21as9klx47za396pe62ktauqm8kcy7vrjxk6sb71pgfx6joewukiqxkkwf9wuim9ooqmp1rg2sou9hblm4hiqquyoqtjnp5hnc7rkd571b73tpirp3zdmbdx1d2ypdoh1wvk6cr7qlitiad2cjmnlsmmyo8o6at4l42l450rfql7rkskjd2gbuiomeovq2zwpai7wxfvrqq441v0vhm164vqkxesv0l9r17sh2iac6ossg5rrg3q8zrkxye5mk7we6y105v0emcpgaw5p0cefv33u7zlcnn3ywkaq95x7wc2z4gk1bwlzg99adp0zwgptoi8dbzkk09wivegtc50hhkyygm7ls1bp3hp30528lgsu6azflytujrgyr10f4f92y85zpj61dc32ltwwha70h79ky0vm49wzlefcmwag0u5bg9uujea99ixxzo3nh9l1p9qwa3wr0pfx0af7f2atfiarjzfqtqs8vobcul7hi3a6segedzzxiw5yqw1o4152ncxyli5r5gsns5paancb8na3an73joln40hyrvpdaj8v2jhxvgr4p0rds25ikcf5kg26psdrt8gxvm7gfp8w2wr3flbpepeti7ykdy7z4th901d3xrd0edfnjmu4n7d7k8flaghwbdiwys0oh4kfc5xxmbqclm3t951qdt0aiojuyrg13udjaabacwl5us27jgguxsrd7ml44loswu7hvjh4macz2g8w2j5eahmyq9s1g46sdxdqt20xl5cjo2rpj9fdzyvhbht47ic4agfuza6ls46aw0b3bnzhasb6yycio9sxu3sqmizs0vmowaze250ra9oo6g6gkqzcie0z4v9ngiylspu9scg88amgt7x6fjo87oecr7\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": true, \n\t\t\"reprocessingHttpCommunicationId\": \"c5b042ec-e4c4-4c42-93d3-9e1f1d3dbfff\"\n\t}, \n\t{\n\t\t\"id\": \"a2c3c14b-a4b5-42af-8a86-500c7a3313d9\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'RESPONSE_REJECTED', \n\t\t\"status\": 4475, \n\t\t\"method\": \"ncaolp3c8u68r0skxfcz0xaa\", \n\t\t\"url\": \"jh3jtds411trh6s73w16x777tacyh2m43dzzb8n89istbmd9m6rjox5lvqlsgc330mi76v5k5jjnlvux3zkvu5vqwao1uxoq1pg471r4kr1fumlbotxamkqtwdp9qi7mfrm1vvoey3hu38obijzjgx22n8p3ixiq0mlkcsgjvv7db9y3iky7jlrymjvb8f2u6zxhd61ecjxfybihqo7t7oz22nx18fmy97utptlytv4dxoh1nr02g8yp3dq5njczj142rdq3sfqd2y6hpc6sjatrs16v28fv1nemd4yhht8pen0fvrpx3l76jti97lnlb1hee93c9ky8i87cottn4tfk9xikcz9l9k8ggtrp5zgiic59eyhg6mo2bc1kwljw4e98z77lcmxki754owiuf3qstp1dxbnc1b24bi6jwrqon6h8qiivfn7yf2b1gby5ewyha4g3e80pwv8gnyogx44mtv0uvgbf3n24t2qbqtiiims1iuvnj8q0poirw38x3dwt2fm3e6bgse9v0o76v287zq1uu1ku4j7bqjja2zwlpfu5h355mza0n18bjiwfeg8iwqculkkk4fxct018tllcm0fcazj2956lbvwmf3pvzbm7nmifgvjhz0gus8sqvx1jk0prqlstnxpfbh1680essc45jw2h6ilgtgfse9vdl09qh25ly8jn2qty94rsic9c4t6ez8bjp6908t1x0hr2rgp3t35w7v3htd2g0r9itcy5mw232qjlhyrpumronmleb7e7v2vgrm9jh1woy8qo63atp8xe6ivw48deev8plfvnzx4ufp4ktaluudeb800glce0pai8c6e6hd4jgyzipz851vdr37a78ldt55i3406ta4oevjhm8zpc0s1ksmod1x4wi9cv96kr7rj7o816zagdxgvpbwzzzes8gm6zwbslluis4zs1dch867ewyqs51rah66z9di3axr50ylutbl293k4sz4784ysbnn60vyzy60yzdmaxb3kcqqr6k2ino04v7in8897qsrkv38jas3qqcjfc1uapqd78cecnzxnqst4b3661wq0j6ujc61d3i9d4paa6xjnowqptruc8atvb33nx0c8wb9bxouumavt295yfg98dtpnp56unsutps5aiu276rj9le1aehrcpouov1djz1mhg54t0brab0073z5vme3rhi80zdwcqakw00uvyht7358ui19lsxrsffxxmhwxukixo21jymupgav466cdrpns8z48vn8xcl8iprqoikvqrfr3lhtfh0trb42u8v4m26j0skt9dlamu7hxxuitc6ig8bdhvp0y17v803an01npq3t651uxpoiwwx43yujawos6fl5azx9c0dsz0qvn5mb09pe3alelnmcpgkuzdkoiy34byg86p9p0qvvmsx9j479v3hls5ktxaa8pweka7a5uovlpxdc7icbqu1z90n73m5ko5madbvrpn2cr4n4gegi8mh27zlq0f34ydojw38dkrl2ol42c1xmzv9giex5hrmj1tbkwt17e9xmhel6xf3m5fzaas2uqh50gs26pat28l84nmhgutxygxiunfq2led69w4zaqv9qgk2o41buprq456tjlwp476wiqw57pjtj2ftlzjvhl8gje14jsdd7h76ksk931o62t38ii4ryx3ikvicjffc8iqseztihjl7sheury77heuboexkjioje306a59i0hqz6jjw98h8nz6hjtha76ok1jvgls1st1rfk6nhhw9m4nfmwobqixnfp5vv3zi72gzhwkick93eb7crursg6ofzw8pylzi343cj1923sqvxvr3hkvjd9eschdp42v5uvao6tg73bz1w4agpb7msv5qnvqczj3849ouwjsm3vhpgyx4gjclog89ugmeqdwzj6mjcuxehwwwk28r4eic0ry1m3etll9o9w6pryxcvgpkl3xuj7j9tpa2e5z7gdgh7j06rd400257foby721ldlkcbbgsmjcyho7kw5yzpxcf0i\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"768d6f11-b233-4fca-9f26-57ae3559a666\"\n\t}, \n\t{\n\t\t\"id\": \"41c129ef-01fa-4c4a-934d-08b5cdfbd19c\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_FULFILLED', \n\t\t\"status\": 8470, \n\t\t\"method\": \"5wfrkthx9fl0irbi8cb6jkux\", \n\t\t\"url\": \"3godze8hbglejfo2yjjvbvg68qy1i57yf6s9pci0p2cdij1t87zdbaps96llpojfb4lupf8r09htz1rusi4slm53fvlcr075n50cqdegf6zazn2sm4w4yhbibvbnosb58uuknwbmvzxcuvd6bdtajl15f77r415wil284gb3giw98sgxecnhhj9phini7b0z2mdfghs3j2zcegs8jrl5tca87rxe0qtfawxdcjkxa61xlmxlh0judakj9mt7b4jrpblcnp2g7jgptfp474yxpp1cgd5x4dnovtqhhttkm50vdews6ziqa5mph2jn2ng7rrux2d906zelst8l85kuc61ekw1huwsnmsyvt77fwmgb2ctsqhuumogd8ed01q1kdz4w5lb6oo2eynqs5po6pxjftvb17bjrysrjsdcrb2vpjd02ue287j1u9mix47mcg5igwyl4ekkqq6hwccxurib6q5ru047zxezsx14n4m80oe96mrmz7lq7e6j6ojc8hidfuv03dsayb96o67q79jc4vr5ouvt4uuwrefs7qwae9xmdl83jwlt65oh107wtg8uu1hc1u177sdi3wtz8qlum78ab6hwdqmc35i2v0dteci3emkmrwnxpun0wtojm6zjrfk24miylfbr5wlfrzcd4zjk092e58v58ilvwzjquaind5pkeg4clmbficnloxl3ac8x4kmp9h4za4scu3mt7q7lqyif1i029jvc46aptzhqjnwrysathmo3fxinis1y9utuof4oesabo32alnettepfc22id0jco156pitp0i597dwv1prgdctou0f1g9krb538kn966mc6rlnmgvp7w08rnobgkhw12m27kmay67r1kwqy8w8ea6qg0sdas1euzmotxuqmw1j4q9ft2k9v6rzfikqjh3lw6r8y5thjcjoueg1elhytpxd0p7xj2pe01qgnen5pfvow6one143ex9eplsds5abmlh8llteu0irz0vn6sjgpt1eksgmd5hkf09l86yxto2d5cc2tgttwnu39tv01um0ydv3gavu36ej3sqrug2s5mp0h9w0avbq6hqaes1rr3j59hgzpaukk566kxrdi5lj2t9pkmqb1a8u2rlzlgvr6otzy7v6wjmqj6u315y952736s3rhtx3ajmva1217og5eb0ck8pft3csm5j2es61ulzdhxj79dqsb0iii36ey0od9cvnnyf7unfs1jqtitkfnh10dbwyspzwzmdggutlo6ulna230a9xabxusrp0gwhw9bdcbpih3n8nhbwer2c5lc9vvmuq944tyjmr6zxyjbke26ketx0yodgneslsvp4qky7hr31s3yvck94tnqfsi88lwa0j4dddqu4bsrgvxaeu72besmsd7k4blszljjyw9npacveytxcnp02gou9dh2y2iqw09hr6k2s6ni27mg12dr742swrhghm2477qptnivlptifplt4812j4es9rcwmu7kcz0jig0tc9z4zqb1mvklte3txyv6jennyy71kdaquhgomxxuiplsqdgo0cs6wmufwh2kw2dewp9akvuumkca3nj2daq93z1rxgb2ffc9kdyjrznchgxvwncqrpeh9ej32ros7f7e7yxtwspbvabrk1ec27v1z5rbd51lntfrn6c0cj531uzv1ovlz0i3evsyq1q2najliily19aeov98orsya1ppj1c1s0jr5neimtelnmu7bmc7116e5j3t44byrtpb54jisbk3tclyk1uilaif75rkn8hnjpjq1457my13yccmo063vt0hioe7bfh65x2jwdc5f70ifo0u3b9aztkeuwwvjuxd515b0vkptgf5849yqfmqxeo5c7qe052vdwyzhuhzw7lk6x2wxtmtng9nxjighna3bezsuh3z38yzncilms972v3ouwe2n0ywb2lah0treasmxhhej70hxrw750ajh9avain2nmfst8ymzsxsjmd373xfrx8k524wozzck84h07i5ytw967f08oc\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"1e9d220a-1e3c-4a62-b0d0-0f3d0fe56d86\"\n\t}, \n\t{\n\t\t\"id\": \"91012323-f877-4f70-b80d-a55e527639e8\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_REJECTED', \n\t\t\"status\": 4908, \n\t\t\"method\": \"p2sx568a4hnqurgu6avnquyl\", \n\t\t\"url\": \"gbo1n6so5x8d7hyatznbm0rpenfv6iqilvg25btn1lk4salmodk5zuqdbp806o7tfo8seg9yloxbxc1m855v9fa6q5xu5aney8qtooqhx06tqoo079fje7osppug8ejyh4rl19kl34aoaczq6aqq43avj3l7bt6yt7yobj03rh6n4vv5ac7dbro3l8ojhy5p63w6krmhlip709zv45fcm5xszb2t4wtqx5y316hozhm82wfqny0a7e2bhrqekemet11k0rzn8tovcm7uogn0cifd7qupfxgbl13w4jn06xjyojgf1cqmeqo4dhaa5n160kxy44medem5ihfusghvxzc2h7f782hui70of57h59yq3sh0qxyitnkhp79wr44nglijl701qw9ov3e1zfo4nyuj80l5t1iuau6bovxlg9bcz64ftx2l4k6tyrnkcy1tb43ihxw3ox0l577oab5khvjjj9b7ijrrkt624829kdui5nlngdep7vy48fjfevi0e6m907nl2laxk4driwlqcwnzfsm1uk2mnuz0fdwt3h8gf14mr3aducqmm80zihze8hup0heex93g251kz6nw82fbcha1k65fjecbd4q5ayvl08opuulauvwa1ke7z4mpr8uxhzw19u30uuk5ib0pkx1rw57n2k6lpc04kxf73t8hekzm3vh7ybb6bo73w72mrvwhz63s24wrw0q8a2kb7wa0qajai6fa0du1g7ecickezs1u6dbe191wzf7dlw8l61jnkkiuj4oh3o4flhcv1lwdjpo5l2i0v25hd4bnml567r7ry6prraht7b9voum7o3y17bgol1qne03bilpb8n34buk6215s5vg0kv85wa4a4omxo3gkoykjk7adnmgga90c35ih68hfiyeq2ehyb8fdpz5vxca8nt26o7j26n61wa7a9nsrh4af688v2bihd7qj33g667p8466fodhplguxpvp6l18v6xbptfj27esqb13w0i9seh7nfs6qvnn7gbqyvo6yhl9clgzzigde0yc2fg8iicm7webz24rcfl9pto6vcp4dwvsrws9izo7c6dn43lq80h75jp5urx94zofsyhyjv5rfuj2efif51fjyt8a74r3m2znqcjdfclpzu2cmqwtb3q8euy0ld4gkfxy3xlkd4xuxx60xhi56ar5n0lrljtnaj72u33880xb009alyhnc0grbe5gmh7ssoapo6a93n0yxkl2jimn252q67ad06k7yhk9alyymqtvri085w2iy2a615b5vdb4gebbc32wneyo7chges8uldb6h8pqqxfilombfvjtc4v4zg6l1xp05q6eadpr1hsw89is3v3nkailhl9ti95culy5mpr24gcrpm9si3lqsy2duo6lelvuwe7g6nn2o1a8kpgyq5r0os91km3h8y1itb3mzacpbznehvjtqugmhd6yuo7aw4fbeyfd8druvpj5ny0t09586e2vr6q5v2dcnxyu5ma1h7sng4aawjnae7ttmaby0zk5mym06yw73ykrnjzxs74pjhxfp20hue3oq1uu7dydnxa5xmu54vty1z0yk29jv6zyb7h5hpcku909kwjzwtlpxiabv2fistgu9c86fqbqagezxckx40f7lagvr2flo2b1palt5fl9grlzfrcobg5si339l7is997t3ayqx3sxcl9yiyzo9j80ff961metmlp2xgs5bv3h39p416wmclpv52g1nfc3ymrmpymr76f6njq3co9z8so00hb9bfwtii4lx37xgecrabwhc42npf8n9dhvpa3kik3fu2buzg24guxyd2y1uhka9qm23kp87sn0ubvlpjpotavzbijpl8gzrlkjucvpwnh4i2me2nqd025hv4ef5etntsxndqyhu0575u0vwz0m4sq4bcwg9uizs69g36kfx7r6lie6m5sl2kvamvenxusdd3hgft98ozkmuhru7s9h2n3ethql7lqdj1sby5z3s58ir5imkt19096sftdev4iji2py\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"d0b9fe6f-bc4e-4719-84a8-12182eb3209e\"\n\t}, \n\t{\n\t\t\"id\": \"5bc84553-2049-45ee-8f2f-7a5b0ae78ca6\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'RESPONSE_REJECTED', \n\t\t\"status\": 5674, \n\t\t\"method\": \"bcs840iwof9z1ztoy8z30udr\", \n\t\t\"url\": \"8vskkt8cn8fqwfpzy48jn7ktixv4gd4xqawwneft4qs85eq3q4djvtoa7ehe4ts7hfuvjka87bji1142u4weqa35gt9daadwmsy2bzct5bzb579y3ttz2zfn99sy8vc08gatkhciuzo7ete0bo5atst1tcvd1ezbxwokvm3b72zxgitohj5n8llg4b5y97jz19ysji3jen5r238rluhw9t2jepay8r2upjhdz54hn6aonuhmhn34ne5psq3mtv6v5982lr3xk5m6fhnh6lqvp9jxmsxwg25s855pf55ofvlw1lzq3jxesao5vqi4bo0upgxsmuj6l7ac7ow3g9y96ubgyugdkzfkwzklj1xgfpaygnoylnwnz3j1hvlsix41es5eemsipxorfk6kb0oi947x463busgml6a9280yibf427przihbevfppgjtla21v8zbsn2avpvbq8v9d6p4u6lspfocwqmk3my600dhirsw36faff513kg7kcjs2jjeeilp6vq6w3c1srmmv44trv3karl70vcgwqkdhsooa9l5171qt9lvau15pm19u9520nee1e1bo8zbg9ymaz05mj1xd9z93unctwfvb2fv5r8j7373wgkljp4rmll4i2vb66r32pu3z5kiydw3r9jp2ikqs9hvx8726m5plq6rkhlyzvw5gr9vn1yq4wnh6uad72slg67dmssk37ibmlhbj3ukxi1vf3vhwqtr0kd790legffjyxqq49312rrt64jedgkhwk35bjv4azinji4lh4wf52q944qozn7o3p4zfwd24uyt0k8fcdiey89h03xk4cnde01wdtythnu7dq0ycmtnm0d06plupzzwhjksv6ikgp8lcy79og5f19uc1mlw115b4q5da4sv02xfguxvm6l0gihcgw77jltwf2zx4oumxzyef6w8ft902dx5vc8v748tvwlqnbvpo2ox4uk1eubq0kf3ly249fmxg1rwh8z92qlmmx1luu8lzbtoez1tjj2mueclgpw4yjqecfsxqguet1oq2edlau9qjj9zgzd3ki8vk2zflwj9jhm1csk7y5bn0mrernrq5yervzytr7o3x9wp4dyi5wpc5av92fgnpullyc86mkzdwxl5cjv1uy033paxhclvmtg6gnv24q4krhwntj3jv8ldi09ure2egc2elid7rxk8v97wxvcmswqg9z3dxcy2p068980msqld8u9ztbqjxpymoc0b7esoqofoxm3w8dvpbzt8z2rg0t9p6mnb075gxro6et5hgohdh0br4l1itwu7mofsyzx4k9z22wdclld39p4qfsvivvvfxvcj6jzaww6k8f96lpdrkgtyl2b9ite3yjfgbkpvcb5apdj6hca6n28lsfqscyev1lyepg9ydjalqp05vr2r60xnavmxbzf97x32j3fdb80qq1lhnyp30kln0uwpf83fjcx1s48l9qtwq32h6dbsb9rpqucif8pk8s1b4e7a97df2tb0hpzniurrs3uj7ws5fhr3ceqaps97ri4jfmg444ajron8e9b4f1qpr9qc98jyu5ffg6ynwtra0era31pu2sb7xep2y7luiecfwvuash79neskp9th5v1d3uqs73bp8ua5lwb9y9eopyfi4bjwu6kc2d0otpib8awduaq4t26aro8c1qg63yojaestwmvnaxaalecpaof4gf1ihbto086i9qznlgmnqgb7n7a8ylt6bs2unxgsup61wzsj7u62hdj195ltestf1vxq23spera3me9u49sii9llb6sbwn2xqeeu81d55ujx4wqjk6k3shaedglh3yxku3vsaha4kcaprxtrmviemh3qryl7iyjawyildcb3fs557y0entibntam6yxjcwydtw8lq3pcemhxp2xjbcwm80zfev5p8n2nmgaljjtmxpq64o8777c97ucrwy0x13c6azo0yt3mhsmcj95upj26ixsuiamjhef0wngbft5wcn4q38nrbri1kebck5epgwoiakm\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"6fb20182-d7bd-42a7-897c-8761200704b2\"\n\t}, \n\t{\n\t\t\"id\": \"6eed3c06-09dc-4986-bb29-0b80819fad1f\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'RESPONSE_REJECTED', \n\t\t\"status\": 7170, \n\t\t\"method\": \"eep43pksxaen2r13w5fiydmu\", \n\t\t\"url\": \"9w5jlf6qapykmwxqz9jjzatpjj0j88xrtorcl6pn9k4hqobbhiiqdcpxbhu4y8jxavywswljon1wzmm5td6hur7ghf6la6fe8fv8q0vri4kf6xunb1zadylgbqns6vju8mkfe8m6vkotnhe8j99nrsyb4oort4qirrg40q67qtvw6e3k9hed4io2pgc3ex0umgb88q9s7wpou8p52sxtxu9akzb6cc3r29yypg35aeeicbxzxgx7f8ttsoaq2x6ua09elfpvgmdww86a95cigxzbfxhodoepxwyparudghdpt4tlz6z7gkb96smyv64p12cvzumkwc1v20bsa7xiqtv80h3u92qp6i6j89sz62yue59e2bstn72cpjt3qqohckeyrh2mb2x5kk7f5sjev24tznm6vtzvytbvfukhr5ht4dz4oq49cix7za094c9r5v2d2d3pn7cugxzsvvsyj67aqjiqxe7nim8dm5wuofwia2pri4oq4jptns1z9yojhe5df3n0iju0qa1u2hojnh07hbfuqxw6ouy9d4u4h9orks85zz6fip8dpaf42dj19guf1fc61t5uwpcx0elqni4ow79b9uyv9my5kjroh4fiofm2fyzd7cl64yecqxebfq4b7ghrlb4mxlu36bksouhdewykh8n92oze23b05malg0venh5qh5owjkgjsl74nbroh71gd2uji26qpz5qfi4zyrhovdcs82dw3fcu61txbc891rpg1ppgq1vi7vzlmaahd300yugt4y8998gn412qcvwai9vak1e6brlkdtr3gxhsit6g1gwbjiyt4lt5zuygljr8sf0gjtfctrzwy42ega1nrsfxqt3hxh879hm9x84tx4xk1bbx7g77kchx1k67yvqjhepfcajrtmceeka8qop50o2p12ig6ggs9mb8w4oofsmtj09fnlgbnbaq6s0e1h578xgcsqtcnix1h6ycxbk3wikbft4g6tjeeht5mnsnjdazl8uuffnk1sh50sjs5zlg12281sfuk5w4w6r1avwe1drkd314a8m919oqzmnr4wm92evuc4qfq6rwfu9b0pp8exgdxynja0zrzrj4qqpggo1cogfdsxn40pcxahg6ta7iy9itulxz0qjwfzxkwgdfca16po7offoq0nlz9uoeexxi0qkp8hp5zqe95nhgqh4l7b6g70v104a5e0ie5aidla23jufqxes5eslw284t6067n39qv6ufajdcby6vgz14ooxbtizkl82aywdvlshxkg02gkmwoxyvqy51ay41t364r3ojuoqg9xrtxe6r6cuqtd14a5k4ag8r6ghudzknrq3whibguh0lshgbcumlhc2vfausnmlh1u78bbsyda5l5aygm4pbrebb66syh4iffzu7q0245ouvstqz2gu7bgli4qtq4o0egm5lvyno99g9j3its5d6t0ckhlp6c8zuslqohx0p6uaezuywfda8ap2aj5r6bz9onhs50o23p8w8davqxmawgyz5b772rkgwbpj3hc5pp459tna0u6ljgdw0hon0gbjkoo6bac5szbc0gvm6cywgddjq82l7rp7xcdcu3btdr2im726oxslohns2dedvh9pp0czc8lkgbx8cnavauucixbqh4b26nbghlp90is10ph115b4qlo6w9k4m2s0k4uh0a6o2rpyq2zpswfx3km1q9omhvtkt3jdkhg1m4xqbhlicr1hvz2me2vry2a756a3nqzxyjk8ordcjhm8lbjlshmcn7fzfjvb1rtlaukbtitezjrhuiq1cj70yaewnzh3ycta94tmfjlpc9r02cg320e4pbvx2ihhpwi6baw5a0yi1cupunwta78dzth87s1uc9q6fyrlnpp7lnvw9pufxvfr9kvrmbb3oanrjsxni3m9p7qoeahnyeu0cneiissaibc1ogagip94jssfjlfdru815nk4sgma2xed1n3wqfi9g9v4oibkk46dv2juwfhr0zthk0i5f4w8od5s9s94qfsj\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": true, \n\t\t\"reprocessingHttpCommunicationId\": \"dad81725-e499-4e39-8763-d5f1dbe5923b\"\n\t}, \n\t{\n\t\t\"id\": \"ee1aff67-7874-476d-bd1e-c46f8c3120f4\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_FULFILLED', \n\t\t\"status\": 7774, \n\t\t\"method\": \"vy46v9fwebm4zda0niw5eokd\", \n\t\t\"url\": \"ccmproili8ffxozt37vpd1zxmjgrtkx0h8kpdydghhdg1146gb430ajwhzxp6sfti67hmkcbqhemdc5hgvxuv2dl0oietqmmynlgdmdfuugs2003vs8d4b0wfdymzsijxp5oll41ctzp2hctck4yh6bk7wpmbl1glbhbua3a1n3pgdno63zdgjusaorlljclg8hw3qxw08b90vawqkejpbt5n15if4vkgxn5dryfwy6e8ffjc2o64t8fl66i8wodwqao08by4eaeshskid5yuged0pkeg6bu353jwlpwhp1mqpdh2lt7ecduun2su6e479yowtecwvvbr7nz6qefnpdvizd2oepon96p16d2tiyva0blxkux8rvpycyibj9zcopkgot1fvhtrpw4ns741loqgskp9llnztw066hgyhoa0j0rl9dh03i0r8nj9lr23q2zkkccey8idws15w48qlfjbqi1n1yogostclzwbsn3sjbyhvoc87fkldqe8olavyf84wegpcy5pmazkpbsp5aynizn6mhk3xsg4hbysax6ucvrhso0of1jorx2j96g5t6bpdg5x83euj3oclhr4h8azzua3c2prda2gtza0iqimh4besn7z7jcunw25b3vudrde2kg2sod6nrf4iyf9n9wg2178xdcuh7onl5o4gtlnp5yzef403jfx6xqb1ly6s0pqes7jbz4opmz9jee2bsa8gfe5ge20idesm9gev3q5pl19eizdnop2msaiqrt049zkink3cntp5i1skjc9113zow8eqrfwuovjxlmhsr03gvnc4n0bxipf1oeuyljtnz3mvgrhitt9e9m9g9kawo6zxp87apre4gvvu2dhs0uq3w2kl8p0nqm5facfztc3917vfxuthz4h8adb2rxs61g3yodz3i8czep08z19g5lq3p65vzxivs8nn6kk8tkupjrhot6ha7rw7ock0oe1sdotx5bhbcfuo39zaecsnt8nvynpoj3lu9gzvnirccy0m8ls67z9rtdtgm8wf3mqs76zcmnubrkyi79tbcyj3yyysmslpqicwczwvplpcd6smzrbjc1r6xjpvzno801n394u2oafb7djtrsi7ouc1nf1wsmeani5d19uxgxrelme628drxec0goh6slkkmv3eyakjb21qst2p7sj62xhsyg70qcty4o24i9x9zemnkpqpx8k7pk1t90p6523aia5386k3gqvv5x7rhdee61cc81vgjfe1nixmw4xeanrlry3cw6w0do36ee3mtooegz7k49e0bumj0av52ogh9walorm9x96eveislaed4qpp2bj9rdck8lp5exek2bvletuipf75nn7aycma8gsdip0214pqyyf3h51ndpaj54x7lel4uowxtrleinywnrll3ij0bp0opv4c2ylte8kp9e86xcba08c4nhhflkalh68un17o4pg685g78rw8cd98fxtiuwz8qnadsjpjf4ibsahfjvz9e6skqsx5x8dsfilqz0mn6rdiycnmhv2olmv272a4p161v32tm03sfced1nkqdzmn2lvqmikohrxefjbhawrayk2tu7o3wsseai2dt2o190kggxupkyvvztjylf9bjnxtfn1xmc9csmfoe05ugxvpt7my0bhaud1l7nwr3jubmsqr9nux3bsrz7ppc9un9626vny0o9a7kqclswktmoer5buigxe9vb19rygjea6fej4m0cpg97ssyto3mjw6zcqy9kgvqslnrlcbq8x992c1b15rmg3yefr3xp61wqfqq81e5atwnygo647bolqpnjlx8crbj17lo4g9cabq663qyd5cjgrevy2l9a3agjabbkigwvryj9018rry4kozs6wiqg1n1jd1xso88vobyxn0gt12bbv7gxyb2eqh9rhb91e2d8w99zj5rga1ffz8dako597n3poewqa5iq6i02c0hh1kzp7i3vctilxvnc1ypkvrou9rth3culcjdk80p652hpm4zdwgz6rn20s4q\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"1fdc890e-d8e2-445e-b94f-23c15faab29f\"\n\t}, \n\t{\n\t\t\"id\": \"ac6d0f20-71e2-40d4-87d0-4e405a92b88b\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_REJECTED', \n\t\t\"status\": 3676, \n\t\t\"method\": \"gqpym9ip0u6ew1zdlwtt22xz\", \n\t\t\"url\": \"gcrep39f58ujt61ssx2rw1f69fz1xvleuldw33iyhamwpjmg8fr5xy70tswjm1wnznptyohuhm0l9bb3uivb0ij5u8szaezendak7uwoan7btnt3al08uhz2754hbpf5hauyccpbk4supxzenz4xsv1y3h1c2noghw9iruvuvxlhjfkx5h22e2w7ike5hbvaowv9p69vh10g3b9xxva6f8u4w147kxo7xyi1i8w1fskoa47ze0q8ytfogaxqhve0xxr3p7ygwt21xx0r5suiiv3uj9bxze603mex0ywwkcn4mb620ad1nygx2pk54594e40wx8upwwwlmih5pn3u123olsnhd0b0xlvcr27qi90fqamofjs8uzq4lrb2l768bz56hy64g35gphq0cxtate9891l35refsarsmud89rh1qxmhi9gcjtegeq12az6xjfi0ihd8x68agnze096y89853il6e8h6hey9tpj31ahxikolv0643ewxfa1gvg3il5tajhvowrei3benw1ih28o0yqz2reej6qjnf0pudk4jd5wpfncxtahyid09qo5b2q5gwdwil9bklubprzk0xpkns44txgstm1h0pem3obuxpa51aycbg86s4yljw5hntnewitnxh2ycoig3sml5fnyd264ftqiexj4cchx8oey9t04f8vjfhsk7lh5f4xfd6yualobl8a90xvpys42a9vqtxkqt8okisw0459gbyj06g6wcfwfmd62gf969mhoyg0nnsa5v4pbcuqp161kq75tzrfl9hqw745yu4rkrn7bsyo1ilg26qbfghdsfwr62pofktah1fg0p1gcdal4irwylutvjruz6mveuvgamop1c7vm9r7a4hohsstaxhy8ysue7lei69x9txypkyblfsls535st2czsrw9cpwlzuq1xg8xsvz8gb7ltcodbmby8k73j2u5zfavc26vnre5kml5ro0pms0avd9j6ni5qkhso1xyv8x80716apndtdha39pjau7zf156jykdsc8u4h3iej0drnd4n4597mqpcxvhh3qeea4v8zbmlayxdprof1bqexshro5o19n4e89p2kpcuybfvavwqveg7vo7faewffr08kl0lrzcj7n2vpcx8xtf385jj0tqace7iu1xq7dua3bi756b3gac2y5vp0v4g7rw44hlzba9i6icehpqn1t80n7zbfl8k9i7e4qlitxy2fpf3ftdje3kb6ldic4td0ow18tito03kttk7q0qw1jw8muqifd8guatkj3r4wf4qgi4fh9646jjatd8kv9sknqoqxbz9rrgs7cani4745hx9i657yhv6q1sr1fsjr1gj5lfvdvso1p54xzigw0pk405hzkap1uwgmqxo837tw5cgc2upp6zl1p5htjtexoanu9xpbbhp4f5kv7m8gwr446mpiutd61io9nfyvc0ip2ejxwkllkm80cp6l7r3v991ce4vz1yv6ebx7wv6pbvhrdx1wp9lpy2x8d0w3b82e1gh0fb5hkdrrbeyg8bcg7x1m0thnyi4kjqcneftquw3uum25h8qouw9r9j648g4r83zcavfb2wx2e0oy0yj6488ben91w3bcb0k0bwmhfvb4ej4m1tm3jq6vbwrrwzf6k1jso8991az17pcqwpn8b48y5vpaa0evn1yk270zh9rgy2hdg7yoh2zcx2k22vpzybxmnnerohh6r5s3en8oqgl4k9xv6rd87bfuhbbvas6pyyzmzjlvu8rs9s6179tvfm0lkrzbwmy1knc3vyb9nfjfon9b0n5mec8gvdm5rkzhp4587u3e9xwcwnauyb0ap1h3k57np70e8t9vy2z6lsps7j80uor11pm039h1bfa3i8r8ky2t0322pkoky9w8ny4j12toevg7t67sa6j4i0bh361cjde9hvp0oo75vj48nro9ll0v706hmgpj0afp6wxot3fkynzsza7j4umj33pxtmu7oqhn95uf2v78pmfttwgaqt3yuf4ph7fg7r\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": true, \n\t\t\"reprocessingHttpCommunicationId\": \"6b6c03d6-46d8-4097-8101-2353129f5a6b\"\n\t}, \n\t{\n\t\t\"id\": \"620af40f-f942-4a05-a3ce-c505a222e647\", \n\t\t\"tags\": { \"foo\" : \"bar\" }, \n\t\t\"event\": 'REQUEST_FULFILLED', \n\t\t\"status\": 5174, \n\t\t\"method\": \"r4yafkv8f42kw79otnkgi1pe\", \n\t\t\"url\": \"kdj05el912lnp354ud698cc4w57pswwuon63hm1hg6cua5uw9wwsgvxqyjlvvpb5h0ffb3y1gexu00jkd4qjpmg4yj2m32sye5nw3wkh1o1svhu6rasu89d66ov2dz4j2yugctmrpxrdqbu1dwymrjvudm51c2wfo3bvzwu2mq73xyp2r9ptpwj09wd016is4m36g92zaix190dylbdiiar3g8mc9sbrohnqihqhe7arsr2n5mmfz00d1igpsemq3g0xl3gnmhu0pjm90wdhll8nxf5pe3g4xn0o7cb9ahbyblgedvmh5let4f6py6pfp4f5lzui099nfgk6qchi6nmvc11a08gak73listdu21n3e2g4kfkm1pkdrrl3poh9ekyhwot1acicmpnj1q1gcghi40c4u5dw7onouj4uc8h29g11esp5c3vt9w96d7cxp9s54ndv71j13wax7cvdhzt9gwbbgkmxjv876jzg8miiptbf7b8eaam1frjo4xr6p2gl4bp2n7d8xasiopxa6rvu9dqrs4uh7bwayfufxwjioia1e0izw007r9l890wg7wtsoyamfaoqe7n9lbw0b1zfj2z3cif7jegxwvqj7la5ddmq99gekjsgir35fh17jrsqluabb1zew5ut2vo8e610kzbv04hnplm4ifxc9m5qhfhfs5v4lox645pp2hp35bp7rnrq7aw00v01v46y7ywtd6j3tedwutfto1x1jxdp2ugudoy5zcgdwksc42414qf1yyykbv3kyphuhjv1wb2knv4jqp74cpvqnylo1xaiup6coqoha5w101l625xsodtq5sxupv4v1g1a35y1k4pjychmb5ywhpprc86ilner7z2rgul0f05ig9h60gbu0p1fsklwpm1wl2no0lnj0vy6c32sd6vtkqw68gdzpap6bif7glny7gnr1j87pdhxn7794irobr4i88hq8gb5j0mrclw9r7oopnrste403b2km45g2sbchijtiqnaov5ydc4crda7qczbcsj8ia4e0oz996zp8gt7jla2m0rf70q8r4d6241xycz47edo3d7nb49blubcx0q0qo865p4t5iae4lw4uhaqbp9i979m1z70xi8ganlbvk3rrtl9he3dbk15pve7cdo4jsvl0jc1fuep5bt5ihcbgla3nbrfxqj09nhu8x1n38d62dlpv04qplx3frr30pbnqvvnf3d2lble0qm6ywhk8i7rv9cobvwyr0s7mdu49r27vq8id4puv70oy5jenfuqexacusmuiywb7hiv4gpyw4h0pn6q4wk3eu51muj5g2vpbik94xeesmsg46qhakofh1umt9ujmvj34f42m7upztmd257zud0t2gsf8spozdsunsce1mllm0dm85g3di7kpb0d60k02c3f8j55s2u1se8paxlgt3fas5j1tiaxw2ufwr10spj9num2aosfu1dz8dtiqm4h2ewfxu49lhcy8p3x9p0dom1db8hv3oq9e4lkwh4p04r4yxyq5sa9l6a298dpu4dtrh6yxyano6aa3wojgz9zuzkv8m9yvtokclqqd3i0bx0lzqif0p42dkndtik88rhgc49a89dhz6v8oolptkdtfw2vg2u1y4hwu8dbjfn4iu8yivl49tu0yiorkcz6rlbvhb0a7i0482ck6gevuyfzn5bztg34y80t1v87lu1bptjnrfqid8wy4h7lka076d6m0put3vio0t3jwsafswa863tz75jpiu7wt7y98mbp1cx9963hroztt8neuaugzq5vhhifrtxxvuljsm6wg9tsg7fwhlppew0c3ietr6ohb3a0owp15egjhxj91yx0v04fuh0i9t370s7z8etr9lfq2d46w2kg44ff5j7a7erb6m5yz8baslruftrr60npks8daee87h1yi158cxtx74zq1we8eg8npz6qmevfwm1l6kulxra5rye5qajvmqmjxzba9hei8335aakugj66xr6e2zlqu8dcxoxjoos3eq0bjh\", \n\t\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\t\"isReprocessing\": false, \n\t\t\"reprocessingHttpCommunicationId\": \"4519c8de-ad19-4ecd-9ed4-6011df2f7a57\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communications/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communications",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communications/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communications/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+                        "http-communications",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communications/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communications/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communications",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communication/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communication/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communication",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communication/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communication/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communication",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communication/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"tags\": { \"foo\" : \"bar\" }, \n\t\"event\": 'RESPONSE_REJECTED', \n\t\"status\": 6100, \n\t\"method\": \"2sskxnson2jwldwopt6uiymt\", \n\t\"url\": \"hcihqard8ad5o28wo10gcp6cpivurzu28zwjpe2xll912qzoyi5a80z0l3rkl4760b7t0my28yvp84li0jnyit3xdaf6150kakfwq3eafjcd0udh72pbx2upkueap7t9kakfhiwwne048agss7zrr6evquqe32x5s1ifx4162wxolxmcjcc0sk44yhu21hvqz6gudg3ybma6ekpd67lhfj9o4hlxpu1tzdvqljs0hu9i04gxt8c99jtrbttzmikiwowridqcm0ttr3qt3uwy64fvtzsd19brzhfa6novritfme7adaw21tbo9f2f1kacoeutea9al22mvryfagz67q795gcza6b30ikvaaoclzkh4kkhfnfpov86kr3pqic6z235mjjl9hguxhtsry3uyn14t2tkkhtfza6ojcz1it9jsup39h8e0c59e4jke884vawrzgt56zczjrr6b9hxcpnxxpvt0m0clj1h24uruo663h6yn5wa95iflv048bp7lfp50q35u6cf0uxs1i9yohe8b2uzzuq3ctmzcd2j3lxtsl4q3aotckv9tgn7qe5cbyz1e4sbd4lvwb419cl1bgixsc192if6uvf0tzor1hhh7nu621k7x9rq2ad4sil4gzr6qa3gywwcq8y9gw9g468zh4pml4clhi0nysd2aoe3psac0m77tg8dgdhpg6l59bz9v54vgrq2ghgnz6d2sskt5o56wjiukmv0ww67tgvfsr2s8ridbnb2i02yolhc3s3rfclwrkspjzlnk4tl2q8xosq1ftth7bq2n0zs7yqgo1oic2f6kd2j86n2jmpvge4730918e0ibuap1zae75x53p7k2gp1gwrabtvaojh0w9e89m2bx292grz9i9x0t8g2oco3n7qtudoi59ot8mz6nr0gqm4ijtdigfwc3f08j473bwh7xqam7wgqfit9dzb91r65pdhiezdeqis6f0qtk4oj2ackkxo95xiyxoadqkj9g28mkmho31u1pq0dx0qhvvt220z586t2ch77mg9f1fz229trrzd3hnk4fmyudpp9sdiylklqbtrko4nllpg1jhma1133oenj2r55jkg5oiuzn2v1mesp3a52m0xt1zgyya8thmphss6sdb51lde7nd2mh9alkbrmdjg6dqj9m1lsbt4jtga6uijy2b8crf3ihzj8xy3cdfuu223ufsx1g2bt4y7kc7u1s5giwspq53tho3lth3dn3k472qnlvgqivllz2dzdp1knm20y2kd9pwecezq966xxqj5fknh71uwjgefh3whbweh0ug29jibqoxm1dwv6he1qvs25qww6rh4pb6nylejzpdx5kqpjz5zcuaxmcrp9f8nurcmjqa0lc94epdxbxxsj3vlmnos8g647hkre7oyqox979iadfao74jui9xvojfjft9oj3frgs8s5l1grevz5bdogtyis33a13wcqht8i8kzcqwkkjgxox2a9gvw68tt9duplrfa177076cz2g50ic628jv95mtl4r9ida6yzzdnmgcvsny0ony4lyl2kn0lmchs70l03jjporp5g1scxuft88imqkoefrutmk1vj5n7alp9ez6mgt292rcm2fjqowk80kik8xvkh7bv0q6e65lxmo0sdyiwblti8ysr51ba24n1ry7ttw6qb92cjj67xlmlmktksty174fxtvhbcyv8xszelj4r9pu3i3tsqfchew66fy0fh35e7a6olp854lukwheyg4g0atkfrt7n2hdtkcb6ix8rj40uk4mif5p8ca8c9javd7rgmwgntra5icd3q8p05m9rc04gwhuj2xwfui7k5zfr9wmoejs5atyy43mydg1xc3j5mclp9cpf9jmglruun05fhptxysx1pu0rjvao10iqzqxqjyqy81yw5vqnzyo1aulqaxo1g2xe8rqo3hiioftoce5ixm9jcs8c8dhpjveiv4t1yb3ivdtjngu7a9jk2vrcpnasb7omby91nnvilg17kneop1bq9f10\", \n\t\"httpRequest\": { \"foo\" : \"bar\" }, \n\t\"httpRequestRejected\": { \"foo\" : \"bar\" }, \n\t\"httpResponse\": { \"foo\" : \"bar\" }, \n\t\"httpResponseRejected\": { \"foo\" : \"bar\" }, \n\t\"isReprocessing\": false, \n\t\"reprocessingHttpCommunicationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communication/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communication",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - auditing/http-communication/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communication/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communication",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - auditing/http-communications/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auditing/http-communications/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auditing",
+						"http-communications",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

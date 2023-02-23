@@ -6,6 +6,7 @@ export class UpdateSideEffectsCommand
     constructor(
         public readonly payload: {
             id?: string;
+            tags?: any;
             modelPath?: string;
             modelName?: string;
             operationId?: string;
@@ -23,7 +24,6 @@ export class UpdateSideEffectsCommand
             query?: any;
             body?: any;
             userAgent?: string;
-            tags?: any;
             isRollback?: boolean;
             rollbackSideEffectId?: string;
         },

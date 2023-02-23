@@ -12,9 +12,8 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
-  - name: code
-    type: varchar
-    maxLength: 100
+  - name: tags
+    type: json
     nullable: true
   - name: event
     type: enum
@@ -49,6 +48,16 @@ aggregateProperties:
   - name: httpResponseRejected
     type: json
     nullable: true
+  - name: isReprocessing
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
+  - name: reprocessingHttpCommunicationId
+    type: id
+    length: 36
+    nullable: true
+    index: index
   - name: createdAt
     type: timestamp
     nullable: true

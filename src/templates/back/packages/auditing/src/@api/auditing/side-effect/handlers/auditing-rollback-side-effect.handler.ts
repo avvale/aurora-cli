@@ -1,6 +1,7 @@
 import { FindSideEffectByIdQuery } from '@app/auditing/side-effect/application/find/find-side-effect-by-id.query';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
+import * as path from 'node:path';
 
 // auditing
 import { AuditingMeta } from '@api/auditing/auditing.types';
@@ -26,7 +27,7 @@ export class AuditingRollbackSideEffectHandler
     ): Promise<boolean>
     {
         const sideEffect           = await this.queryBus.ask(new FindSideEffectByIdQuery(payload.id, constraint, { timezone }));
-        const modelPath            = '../../../../' + sideEffect.modelPath;
+        const modelPath            = path.join('..', '..', '..', '..', sideEffect.modelPath);
         const now                  = Utils.nowTimestamp();
         const rollbackSideEffectId = Utils.uuid();
         const m                    = await import(modelPath);

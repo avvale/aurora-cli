@@ -1,5 +1,5 @@
 export { HttpCommunicationId } from './http-communication-id';
-export { HttpCommunicationCode } from './http-communication-code';
+export { HttpCommunicationTags } from './http-communication-tags';
 export { HttpCommunicationEvent } from './http-communication-event';
 export { HttpCommunicationStatus } from './http-communication-status';
 export { HttpCommunicationMethod } from './http-communication-method';
@@ -8,6 +8,8 @@ export { HttpCommunicationHttpRequest } from './http-communication-http-request'
 export { HttpCommunicationHttpRequestRejected } from './http-communication-http-request-rejected';
 export { HttpCommunicationHttpResponse } from './http-communication-http-response';
 export { HttpCommunicationHttpResponseRejected } from './http-communication-http-response-rejected';
+export { HttpCommunicationIsReprocessing } from './http-communication-is-reprocessing';
+export { HttpCommunicationReprocessingHttpCommunicationId } from './http-communication-reprocessing-http-communication-id';
 export { HttpCommunicationCreatedAt } from './http-communication-created-at';
 export { HttpCommunicationUpdatedAt } from './http-communication-updated-at';
 export { HttpCommunicationDeletedAt } from './http-communication-deleted-at';

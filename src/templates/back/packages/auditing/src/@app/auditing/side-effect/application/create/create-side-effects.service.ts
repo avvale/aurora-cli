@@ -3,6 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -20,7 +21,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -42,6 +42,7 @@ export class CreateSideEffectsService
     async main(
         sideEffects: {
             id: SideEffectId;
+            tags: SideEffectTags;
             modelPath: SideEffectModelPath;
             modelName: SideEffectModelName;
             operationId: SideEffectOperationId;
@@ -59,7 +60,6 @@ export class CreateSideEffectsService
             query: SideEffectQuery;
             body: SideEffectBody;
             userAgent: SideEffectUserAgent;
-            tags: SideEffectTags;
             isRollback: SideEffectIsRollback;
             rollbackSideEffectId: SideEffectRollbackSideEffectId;
         } [],
@@ -69,6 +69,7 @@ export class CreateSideEffectsService
         // create aggregate with factory pattern
         const aggregateSideEffects = sideEffects.map(sideEffect => AuditingSideEffect.register(
             sideEffect.id,
+            sideEffect.tags,
             sideEffect.modelPath,
             sideEffect.modelName,
             sideEffect.operationId,
@@ -86,7 +87,6 @@ export class CreateSideEffectsService
             sideEffect.query,
             sideEffect.body,
             sideEffect.userAgent,
-            sideEffect.tags,
             sideEffect.isRollback,
             sideEffect.rollbackSideEffectId,
             new SideEffectCreatedAt({ currentTimestamp: true }),

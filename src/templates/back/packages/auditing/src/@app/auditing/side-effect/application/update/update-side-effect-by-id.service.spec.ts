@@ -3,10 +3,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 import { UpdateSideEffectByIdService } from './update-side-effect-by-id.service';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -24,7 +25,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -76,6 +76,7 @@ describe('UpdateSideEffectByIdService', () =>
             expect(await service.main(
                 {
                     id: new SideEffectId(sideEffects[0].id),
+                    tags: new SideEffectTags(sideEffects[0].tags),
                     modelPath: new SideEffectModelPath(sideEffects[0].modelPath),
                     modelName: new SideEffectModelName(sideEffects[0].modelName),
                     operationId: new SideEffectOperationId(sideEffects[0].operationId),
@@ -93,7 +94,6 @@ describe('UpdateSideEffectByIdService', () =>
                     query: new SideEffectQuery(sideEffects[0].query),
                     body: new SideEffectBody(sideEffects[0].body),
                     userAgent: new SideEffectUserAgent(sideEffects[0].userAgent),
-                    tags: new SideEffectTags(sideEffects[0].tags),
                     isRollback: new SideEffectIsRollback(sideEffects[0].isRollback),
                     rollbackSideEffectId: new SideEffectRollbackSideEffectId(sideEffects[0].rollbackSideEffectId),
                 },

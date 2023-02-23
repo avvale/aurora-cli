@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindSideEffectByIdQueryHandler } from './find-side-effect-by-id.query-handler';
 import { MockSideEffectRepository } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.repository';
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 import { ISideEffectRepository } from '@app/auditing/side-effect/domain/side-effect.repository';
 import { SideEffectMapper } from '@app/auditing/side-effect/domain/side-effect.mapper';
 import { FindSideEffectByIdQuery } from './find-side-effect-by-id.query';

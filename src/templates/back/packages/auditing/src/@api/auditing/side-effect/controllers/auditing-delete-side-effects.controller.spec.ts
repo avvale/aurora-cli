@@ -6,7 +6,7 @@ import { AuditingDeleteSideEffectsController } from './auditing-delete-side-effe
 import { AuditingDeleteSideEffectsHandler } from '../handlers/auditing-delete-side-effects.handler';
 
 // sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingDeleteSideEffectsController', () =>
 {

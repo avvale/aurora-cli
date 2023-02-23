@@ -4,7 +4,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 import { Utils } from '@aurora-ts/core';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -13,6 +13,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -24,7 +26,7 @@ import { DeletedHttpCommunicationEvent } from '../application/events/deleted-htt
 export class AuditingHttpCommunication extends AggregateRoot
 {
     id: HttpCommunicationId;
-    code: HttpCommunicationCode;
+    tags: HttpCommunicationTags;
     event: HttpCommunicationEvent;
     status: HttpCommunicationStatus;
     method: HttpCommunicationMethod;
@@ -33,6 +35,8 @@ export class AuditingHttpCommunication extends AggregateRoot
     httpRequestRejected: HttpCommunicationHttpRequestRejected;
     httpResponse: HttpCommunicationHttpResponse;
     httpResponseRejected: HttpCommunicationHttpResponseRejected;
+    isReprocessing: HttpCommunicationIsReprocessing;
+    reprocessingHttpCommunicationId: HttpCommunicationReprocessingHttpCommunicationId;
     createdAt: HttpCommunicationCreatedAt;
     updatedAt: HttpCommunicationUpdatedAt;
     deletedAt: HttpCommunicationDeletedAt;
@@ -41,7 +45,7 @@ export class AuditingHttpCommunication extends AggregateRoot
 
     constructor(
         id: HttpCommunicationId,
-        code: HttpCommunicationCode,
+        tags: HttpCommunicationTags,
         event: HttpCommunicationEvent,
         status: HttpCommunicationStatus,
         method: HttpCommunicationMethod,
@@ -50,6 +54,8 @@ export class AuditingHttpCommunication extends AggregateRoot
         httpRequestRejected: HttpCommunicationHttpRequestRejected,
         httpResponse: HttpCommunicationHttpResponse,
         httpResponseRejected: HttpCommunicationHttpResponseRejected,
+        isReprocessing: HttpCommunicationIsReprocessing,
+        reprocessingHttpCommunicationId: HttpCommunicationReprocessingHttpCommunicationId,
         createdAt: HttpCommunicationCreatedAt,
         updatedAt: HttpCommunicationUpdatedAt,
         deletedAt: HttpCommunicationDeletedAt,
@@ -58,7 +64,7 @@ export class AuditingHttpCommunication extends AggregateRoot
     {
         super();
         this.id = id;
-        this.code = code;
+        this.tags = tags;
         this.event = event;
         this.status = status;
         this.method = method;
@@ -67,6 +73,8 @@ export class AuditingHttpCommunication extends AggregateRoot
         this.httpRequestRejected = httpRequestRejected;
         this.httpResponse = httpResponse;
         this.httpResponseRejected = httpResponseRejected;
+        this.isReprocessing = isReprocessing;
+        this.reprocessingHttpCommunicationId = reprocessingHttpCommunicationId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -76,7 +84,7 @@ export class AuditingHttpCommunication extends AggregateRoot
 
     static register (
         id: HttpCommunicationId,
-        code: HttpCommunicationCode,
+        tags: HttpCommunicationTags,
         event: HttpCommunicationEvent,
         status: HttpCommunicationStatus,
         method: HttpCommunicationMethod,
@@ -85,6 +93,8 @@ export class AuditingHttpCommunication extends AggregateRoot
         httpRequestRejected: HttpCommunicationHttpRequestRejected,
         httpResponse: HttpCommunicationHttpResponse,
         httpResponseRejected: HttpCommunicationHttpResponseRejected,
+        isReprocessing: HttpCommunicationIsReprocessing,
+        reprocessingHttpCommunicationId: HttpCommunicationReprocessingHttpCommunicationId,
         createdAt: HttpCommunicationCreatedAt,
         updatedAt: HttpCommunicationUpdatedAt,
         deletedAt: HttpCommunicationDeletedAt,
@@ -93,7 +103,7 @@ export class AuditingHttpCommunication extends AggregateRoot
     {
         return new AuditingHttpCommunication(
             id,
-            code,
+            tags,
             event,
             status,
             method,
@@ -102,6 +112,8 @@ export class AuditingHttpCommunication extends AggregateRoot
             httpRequestRejected,
             httpResponse,
             httpResponseRejected,
+            isReprocessing,
+            reprocessingHttpCommunicationId,
             createdAt,
             updatedAt,
             deletedAt,
@@ -114,7 +126,7 @@ export class AuditingHttpCommunication extends AggregateRoot
         this.apply(
             new CreatedHttpCommunicationEvent(
                 httpCommunication.id.value,
-                httpCommunication.code?.value,
+                httpCommunication.tags?.value,
                 httpCommunication.event.value,
                 httpCommunication.status?.value,
                 httpCommunication.method.value,
@@ -123,6 +135,8 @@ export class AuditingHttpCommunication extends AggregateRoot
                 httpCommunication.httpRequestRejected?.value,
                 httpCommunication.httpResponse?.value,
                 httpCommunication.httpResponseRejected?.value,
+                httpCommunication.isReprocessing.value,
+                httpCommunication.reprocessingHttpCommunicationId?.value,
                 httpCommunication.createdAt?.value,
                 httpCommunication.updatedAt?.value,
                 httpCommunication.deletedAt?.value,
@@ -135,7 +149,7 @@ export class AuditingHttpCommunication extends AggregateRoot
         this.apply(
             new UpdatedHttpCommunicationEvent(
                 httpCommunication.id?.value,
-                httpCommunication.code?.value,
+                httpCommunication.tags?.value,
                 httpCommunication.event?.value,
                 httpCommunication.status?.value,
                 httpCommunication.method?.value,
@@ -144,6 +158,8 @@ export class AuditingHttpCommunication extends AggregateRoot
                 httpCommunication.httpRequestRejected?.value,
                 httpCommunication.httpResponse?.value,
                 httpCommunication.httpResponseRejected?.value,
+                httpCommunication.isReprocessing?.value,
+                httpCommunication.reprocessingHttpCommunicationId?.value,
                 httpCommunication.createdAt?.value,
                 httpCommunication.updatedAt?.value,
                 httpCommunication.deletedAt?.value,
@@ -156,7 +172,7 @@ export class AuditingHttpCommunication extends AggregateRoot
         this.apply(
             new DeletedHttpCommunicationEvent(
                 httpCommunication.id.value,
-                httpCommunication.code?.value,
+                httpCommunication.tags?.value,
                 httpCommunication.event.value,
                 httpCommunication.status?.value,
                 httpCommunication.method.value,
@@ -165,6 +181,8 @@ export class AuditingHttpCommunication extends AggregateRoot
                 httpCommunication.httpRequestRejected?.value,
                 httpCommunication.httpResponse?.value,
                 httpCommunication.httpResponseRejected?.value,
+                httpCommunication.isReprocessing.value,
+                httpCommunication.reprocessingHttpCommunicationId?.value,
                 httpCommunication.createdAt?.value,
                 httpCommunication.updatedAt?.value,
                 httpCommunication.deletedAt?.value,
@@ -176,7 +194,7 @@ export class AuditingHttpCommunication extends AggregateRoot
     {
         return {
             id: this.id.value,
-            code: this.code?.value,
+            tags: this.tags?.value,
             event: this.event.value,
             status: this.status?.value,
             method: this.method.value,
@@ -185,6 +203,8 @@ export class AuditingHttpCommunication extends AggregateRoot
             httpRequestRejected: this.httpRequestRejected?.value,
             httpResponse: this.httpResponse?.value,
             httpResponseRejected: this.httpResponseRejected?.value,
+            isReprocessing: this.isReprocessing.value,
+            reprocessingHttpCommunicationId: this.reprocessingHttpCommunicationId?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -198,7 +218,7 @@ export class AuditingHttpCommunication extends AggregateRoot
     {
         return {
             id: this.id.value,
-            code: this.code?.value,
+            tags: this.tags?.value,
             event: this.event.value,
             status: this.status?.value,
             method: this.method.value,
@@ -207,6 +227,8 @@ export class AuditingHttpCommunication extends AggregateRoot
             httpRequestRejected: this.httpRequestRejected?.value,
             httpResponse: this.httpResponse?.value,
             httpResponseRejected: this.httpResponseRejected?.value,
+            isReprocessing: this.isReprocessing.value,
+            reprocessingHttpCommunicationId: this.reprocessingHttpCommunicationId?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

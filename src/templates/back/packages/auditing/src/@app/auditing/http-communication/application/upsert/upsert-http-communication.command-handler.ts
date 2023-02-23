@@ -4,7 +4,7 @@ import { UpsertHttpCommunicationCommand } from './upsert-http-communication.comm
 import { UpsertHttpCommunicationService } from './upsert-http-communication.service';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -13,6 +13,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -31,7 +33,7 @@ export class UpsertHttpCommunicationCommandHandler implements ICommandHandler<Up
         await this.upsertHttpCommunicationService.main(
             {
                 id: new HttpCommunicationId(command.payload.id),
-                code: new HttpCommunicationCode(command.payload.code),
+                tags: new HttpCommunicationTags(command.payload.tags),
                 event: new HttpCommunicationEvent(command.payload.event),
                 status: new HttpCommunicationStatus(command.payload.status),
                 method: new HttpCommunicationMethod(command.payload.method),
@@ -40,6 +42,8 @@ export class UpsertHttpCommunicationCommandHandler implements ICommandHandler<Up
                 httpRequestRejected: new HttpCommunicationHttpRequestRejected(command.payload.httpRequestRejected),
                 httpResponse: new HttpCommunicationHttpResponse(command.payload.httpResponse),
                 httpResponseRejected: new HttpCommunicationHttpResponseRejected(command.payload.httpResponseRejected),
+                isReprocessing: new HttpCommunicationIsReprocessing(command.payload.isReprocessing),
+                reprocessingHttpCommunicationId: new HttpCommunicationReprocessingHttpCommunicationId(command.payload.reprocessingHttpCommunicationId),
             },
             command.cQMetadata,
         );

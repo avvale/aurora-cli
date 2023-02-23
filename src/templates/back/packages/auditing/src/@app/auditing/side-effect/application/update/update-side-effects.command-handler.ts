@@ -4,6 +4,7 @@ import { UpdateSideEffectsCommand } from './update-side-effects.command';
 import { UpdateSideEffectsService } from './update-side-effects.service';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -21,7 +22,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -42,6 +42,7 @@ export class UpdateSideEffectsCommandHandler implements ICommandHandler<UpdateSi
         await this.updateSideEffectsService.main(
             {
                 id: new SideEffectId(command.payload.id, { undefinable: true }),
+                tags: new SideEffectTags(command.payload.tags),
                 modelPath: new SideEffectModelPath(command.payload.modelPath, { undefinable: true }),
                 modelName: new SideEffectModelName(command.payload.modelName, { undefinable: true }),
                 operationId: new SideEffectOperationId(command.payload.operationId),
@@ -59,7 +60,6 @@ export class UpdateSideEffectsCommandHandler implements ICommandHandler<UpdateSi
                 query: new SideEffectQuery(command.payload.query),
                 body: new SideEffectBody(command.payload.body),
                 userAgent: new SideEffectUserAgent(command.payload.userAgent),
-                tags: new SideEffectTags(command.payload.tags),
                 isRollback: new SideEffectIsRollback(command.payload.isRollback, { undefinable: true }),
                 rollbackSideEffectId: new SideEffectRollbackSideEffectId(command.payload.rollbackSideEffectId),
             },

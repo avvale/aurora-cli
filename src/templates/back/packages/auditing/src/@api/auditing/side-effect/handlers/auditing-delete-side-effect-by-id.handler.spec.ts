@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { AuditingDeleteSideEffectByIdHandler } from './auditing-delete-side-effect-by-id.handler';
 
 // sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingDeleteSideEffectByIdController', () =>
 {

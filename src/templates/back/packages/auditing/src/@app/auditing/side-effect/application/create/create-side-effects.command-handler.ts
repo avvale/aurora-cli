@@ -4,6 +4,7 @@ import { CreateSideEffectsCommand } from './create-side-effects.command';
 import { CreateSideEffectsService } from './create-side-effects.service';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -21,7 +22,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -45,6 +45,7 @@ export class CreateSideEffectsCommandHandler implements ICommandHandler<CreateSi
                 {
                     return {
                         id: new SideEffectId(sideEffect.id),
+                        tags: new SideEffectTags(sideEffect.tags),
                         modelPath: new SideEffectModelPath(sideEffect.modelPath),
                         modelName: new SideEffectModelName(sideEffect.modelName),
                         operationId: new SideEffectOperationId(sideEffect.operationId),
@@ -62,7 +63,6 @@ export class CreateSideEffectsCommandHandler implements ICommandHandler<CreateSi
                         query: new SideEffectQuery(sideEffect.query),
                         body: new SideEffectBody(sideEffect.body),
                         userAgent: new SideEffectUserAgent(sideEffect.userAgent),
-                        tags: new SideEffectTags(sideEffect.tags),
                         isRollback: new SideEffectIsRollback(sideEffect.isRollback),
                         rollbackSideEffectId: new SideEffectRollbackSideEffectId(sideEffect.rollbackSideEffectId),
                     };

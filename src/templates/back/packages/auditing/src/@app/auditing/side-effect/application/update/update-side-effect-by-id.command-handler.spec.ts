@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 import { UpdateSideEffectByIdCommandHandler } from './update-side-effect-by-id.command-handler';
 import { UpdateSideEffectByIdCommand } from './update-side-effect-by-id.command';
 import { UpdateSideEffectByIdService } from './update-side-effect-by-id.service';
@@ -43,6 +43,7 @@ describe('UpdateSideEffectByIdCommandHandler', () =>
                 new UpdateSideEffectByIdCommand(
                     {
                         id: sideEffects[0].id,
+                        tags: sideEffects[0].tags,
                         modelPath: sideEffects[0].modelPath,
                         modelName: sideEffects[0].modelName,
                         operationId: sideEffects[0].operationId,
@@ -60,7 +61,6 @@ describe('UpdateSideEffectByIdCommandHandler', () =>
                         query: sideEffects[0].query,
                         body: sideEffects[0].body,
                         userAgent: sideEffects[0].userAgent,
-                        tags: sideEffects[0].tags,
                         isRollback: sideEffects[0].isRollback,
                         rollbackSideEffectId: sideEffects[0].rollbackSideEffectId,
                     },

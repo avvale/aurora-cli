@@ -7,7 +7,7 @@ import { AuditingCreateSideEffectHandler } from '../handlers/auditing-create-sid
 import { AuditingCreateSideEffectInput } from '@api/graphql';
 
 // sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingCreateSideEffectResolver', () =>
 {

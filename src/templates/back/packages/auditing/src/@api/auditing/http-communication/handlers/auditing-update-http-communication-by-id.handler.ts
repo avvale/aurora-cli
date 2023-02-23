@@ -40,6 +40,10 @@ export class AuditingUpdateHttpCommunicationByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(payload.id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
     }
 }

@@ -3,7 +3,7 @@ import { MockRepository, Utils } from '@aurora-ts/core';
 import { IHttpCommunicationRepository } from '@app/auditing/http-communication/domain/http-communication.repository';
 import {
     HttpCommunicationId,
-    HttpCommunicationCode,
+    HttpCommunicationTags,
     HttpCommunicationEvent,
     HttpCommunicationStatus,
     HttpCommunicationMethod,
@@ -12,6 +12,8 @@ import {
     HttpCommunicationHttpRequestRejected,
     HttpCommunicationHttpResponse,
     HttpCommunicationHttpResponseRejected,
+    HttpCommunicationIsReprocessing,
+    HttpCommunicationReprocessingHttpCommunicationId,
     HttpCommunicationCreatedAt,
     HttpCommunicationUpdatedAt,
     HttpCommunicationDeletedAt,
@@ -51,7 +53,7 @@ export class MockHttpCommunicationRepository extends MockRepository<AuditingHttp
 
             this.collectionSource.push(AuditingHttpCommunication.register(
                 new HttpCommunicationId(itemCollection.id),
-                new HttpCommunicationCode(itemCollection.code),
+                new HttpCommunicationTags(itemCollection.tags),
                 new HttpCommunicationEvent(itemCollection.event),
                 new HttpCommunicationStatus(itemCollection.status),
                 new HttpCommunicationMethod(itemCollection.method),
@@ -60,6 +62,8 @@ export class MockHttpCommunicationRepository extends MockRepository<AuditingHttp
                 new HttpCommunicationHttpRequestRejected(itemCollection.httpRequestRejected),
                 new HttpCommunicationHttpResponse(itemCollection.httpResponse),
                 new HttpCommunicationHttpResponseRejected(itemCollection.httpResponseRejected),
+                new HttpCommunicationIsReprocessing(itemCollection.isReprocessing),
+                new HttpCommunicationReprocessingHttpCommunicationId(itemCollection.reprocessingHttpCommunicationId),
                 new HttpCommunicationCreatedAt(itemCollection.createdAt),
                 new HttpCommunicationUpdatedAt(itemCollection.updatedAt),
                 new HttpCommunicationDeletedAt(itemCollection.deletedAt),

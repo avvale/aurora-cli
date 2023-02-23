@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteSideEffectByIdCommandHandler } from './delete-side-effect-by-id.command-handler';
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/seeds/side-effect.seed';
+import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 import { DeleteSideEffectByIdCommand } from './delete-side-effect-by-id.command';
 import { DeleteSideEffectByIdService } from './delete-side-effect-by-id.service';
 

@@ -1,4 +1,5 @@
 export { SideEffectId } from './side-effect-id';
+export { SideEffectTags } from './side-effect-tags';
 export { SideEffectModelPath } from './side-effect-model-path';
 export { SideEffectModelName } from './side-effect-model-name';
 export { SideEffectOperationId } from './side-effect-operation-id';
@@ -16,7 +17,6 @@ export { SideEffectParams } from './side-effect-params';
 export { SideEffectQuery } from './side-effect-query';
 export { SideEffectBody } from './side-effect-body';
 export { SideEffectUserAgent } from './side-effect-user-agent';
-export { SideEffectTags } from './side-effect-tags';
 export { SideEffectIsRollback } from './side-effect-is-rollback';
 export { SideEffectRollbackSideEffectId } from './side-effect-rollback-side-effect-id';
 export { SideEffectCreatedAt } from './side-effect-created-at';

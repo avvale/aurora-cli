@@ -3,6 +3,7 @@ import { MockRepository, Utils } from '@aurora-ts/core';
 import { ISideEffectRepository } from '@app/auditing/side-effect/domain/side-effect.repository';
 import {
     SideEffectId,
+    SideEffectTags,
     SideEffectModelPath,
     SideEffectModelName,
     SideEffectOperationId,
@@ -20,7 +21,6 @@ import {
     SideEffectQuery,
     SideEffectBody,
     SideEffectUserAgent,
-    SideEffectTags,
     SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
     SideEffectCreatedAt,
@@ -28,7 +28,7 @@ import {
     SideEffectDeletedAt,
 } from '@app/auditing/side-effect/domain/value-objects';
 import { AuditingSideEffect } from '../../domain/side-effect.aggregate';
-import { sideEffects } from '../seeds/side-effect.seed';
+import { sideEffects } from './mock-side-effect.data';
 
 @Injectable()
 export class MockSideEffectRepository extends MockRepository<AuditingSideEffect> implements ISideEffectRepository
@@ -62,6 +62,7 @@ export class MockSideEffectRepository extends MockRepository<AuditingSideEffect>
 
             this.collectionSource.push(AuditingSideEffect.register(
                 new SideEffectId(itemCollection.id),
+                new SideEffectTags(itemCollection.tags),
                 new SideEffectModelPath(itemCollection.modelPath),
                 new SideEffectModelName(itemCollection.modelName),
                 new SideEffectOperationId(itemCollection.operationId),
@@ -79,7 +80,6 @@ export class MockSideEffectRepository extends MockRepository<AuditingSideEffect>
                 new SideEffectQuery(itemCollection.query),
                 new SideEffectBody(itemCollection.body),
                 new SideEffectUserAgent(itemCollection.userAgent),
-                new SideEffectTags(itemCollection.tags),
                 new SideEffectIsRollback(itemCollection.isRollback),
                 new SideEffectRollbackSideEffectId(itemCollection.rollbackSideEffectId),
                 new SideEffectCreatedAt(itemCollection.createdAt),
