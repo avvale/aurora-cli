@@ -1,5 +1,5 @@
 export * from './additional-apis';
-export * from './code-writer';
+export { CodeWriter, Installer } from './code-writer';
 export * from './cypher';
 export * from './file-manager';
 export * from './fs-extend';
