@@ -50,10 +50,6 @@ const routerConfig: ExtraOptions = {
             useClass: AuthenticationMockAdapterService,
         },
         {
-            provide : EnvironmentsInformationService,
-            useClass: EnvironmentsInformationMockAdapterService,
-        },
-        {
             provide : RouteReuseStrategy,
             useClass: RouteReuseStrategyService,
         },
