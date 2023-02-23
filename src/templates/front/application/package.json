@@ -33,7 +33,7 @@
     "@pdfme/generator": "^1.0.17",
     "@rxweb/reactive-form-validators": "^13.0.0",
     "apexcharts": "3.36.3",
-    "apollo-angular": "^4.1.1",
+    "apollo-angular": "^4.2.1",
     "crypto-js": "3.3.0",
     "dayjs": "^1.11.7",
     "file-saver": "^2.0.5",
