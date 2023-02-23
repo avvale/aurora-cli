@@ -6,6 +6,7 @@ import { ArrayDriver } from './drivers/array.driver';
 import { DecoratorDriver } from './drivers/decorator.driver';
 import { ObjectDriver } from './drivers/object.driver';
 import { ProviderDriver } from './drivers/provider.driver';
+import { VariableDriver } from './drivers/variable.driver';
 
 export const Installer =
 {
@@ -45,11 +46,9 @@ export const Installer =
 
     declareFrontRouting(sourceFile: SourceFile, boundedContextName: string, index = 5): void
     {
-        const appRoutes = sourceFile.getVariableDeclarationOrThrow('appRoutes');
-        const appRoutesArray = appRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const appRoutesArray = VariableDriver.getInitializerVariable<ArrayLiteralExpression>(sourceFile, 'appRoutes');
         const objectRoute = appRoutesArray.getElements()[index] as ObjectLiteralExpression;
-        const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
-        const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const childrenRoutesArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(objectRoute, 'children');
         const childrenRoutesElements = childrenRoutesArray.getElements() as ObjectLiteralExpression[];
 
         // avoid duplicated declaration
