@@ -15,8 +15,8 @@ export class ImportDriver
         items: string[],
     ): void
     {
-        const itemsToImport: string[]   = ImportDriver.getUniqueImportItems(sourceFile, items);
-        const importPaths: string[]     = ImportDriver.getImportPaths(sourceFile);
+        const itemsToImport: string[] = ImportDriver.getUniqueImportItems(sourceFile, items);
+        const importPaths: string[]   = ImportDriver.getImportPaths(sourceFile);
 
         if (itemsToImport.length === 0) return;
 
