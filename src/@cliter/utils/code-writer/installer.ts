@@ -1,9 +1,11 @@
-import { Project, SourceFile, Decorator, ObjectLiteralExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode, PropertyAssignment } from 'ts-morph';
+import { Project, SourceFile, Decorator, ObjectLiteralExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode, PropertyAssignment, ArrayLiteralExpression } from 'ts-morph';
 import { SyntaxKind, NewLineKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
 import { ImportDriver } from './import.driver';
 import { ArrayDriver } from './array.driver';
 import * as path from 'node:path';
+import { DecoratorDriver } from './decorator.driver';
+import { ObjectDriver } from './object.driver';
 
 export const Installer =
 {
@@ -45,9 +47,8 @@ export const Installer =
             items,
         );
 
-        const moduleDecoratorArguments = Installer.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
-        const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
-        const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, 'AppModule', 'Module');
+        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
         importsArray.addElement(`${boundedContextName.toPascalCase()}Module`, { useNewLines: true });
     },
 
@@ -68,13 +69,6 @@ export const Installer =
             navigationItem,
             'adminNavigation',
         );
-    },
-
-    getModuleDecoratorArguments(sourceFile: SourceFile, className: string, decorator: string): ObjectLiteralExpression
-    {
-        const moduleClass = sourceFile.getClass(className);
-        const moduleDecorator: Decorator = moduleClass?.getDecorator(decorator) as Decorator;
-        return moduleDecorator.getArguments()[0] as ObjectLiteralExpression;
     },
 
     declareFrontRouting(sourceFile: SourceFile, boundedContextName: string, index = 5): void
