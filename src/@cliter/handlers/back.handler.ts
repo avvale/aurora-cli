@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/no-static-only-class */
-import { TemplateElement } from '../types';
+import { AddCommandState, TemplateElement } from '../types';
 import { TemplateGenerator } from '../utils/template-generator';
 import { generateJsonLockFile } from '../functions/common';
-import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nAppFiles, generateAppFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile } from '../functions/back';
+import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18NApiFiles, generateI18nAppFiles, generateAppFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, generateYamlConfigFile, addPackageFiles } from '../functions/back';
 import { GenerateCommandState, NewBackCommandState } from '../types';
 import { GlobalState } from '../store';
 import * as fs from 'node:fs';
@@ -23,6 +23,7 @@ export class BackHandler
             path.join(newBackCommandState.appName),
             '.',
             {
+                force  : newBackCommandState.flags.force,
                 verbose: newBackCommandState.flags.verbose,
             },
         );
@@ -72,5 +73,10 @@ export class BackHandler
             generateCommandState,
             GlobalState.hasValue('lockFiles') ? GlobalState.getValue('lockFiles') : [],
         );
+    }
+
+    static async addPackage(addCommandState: AddCommandState): Promise<void>
+    {
+        await addPackageFiles(addCommandState);
     }
 }

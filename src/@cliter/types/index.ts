@@ -7,6 +7,11 @@ export interface CommandState
     flags: LiteralObject;
 }
 
+export interface AddCommandState extends CommandState
+{
+    packageName: string;
+}
+
 export interface GenerateCommandState extends CommandState
 {
     lockFiles: LockFile[];
