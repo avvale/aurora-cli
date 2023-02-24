@@ -96,9 +96,8 @@ export default class Add extends Command
                     );
                     appModuleSourceFile.saveSync();
 
-                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
-
                     // add custom imports
+                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
                     if (ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuthJwtStrategyRegistryModule')) break;
 
                     ImportDriver.createImportItems(
@@ -153,6 +152,17 @@ export default class Add extends Command
                     const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
                     Installer.declareFrontRouting(routingSourceFile, 'iam');
                     routingSourceFile.saveSync();
+
+                    // add custom imports
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+                    if (ImportDriver.hasImportDeclarations(appModuleSourceFile, 'UserMetaStorageIamAdapterService')) break;
+
+                    ImportDriver.createImportItems(
+                        appModuleSourceFile,
+                        './modules/admin/apps/iam/user-meta/user-meta-storage-iam-adapter.service',
+                        ['UserMetaStorageIamAdapterService'],
+                    );
+                    appModuleSourceFile.saveSync();
                     break;
                 }
 
