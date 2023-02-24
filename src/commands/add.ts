@@ -164,6 +164,25 @@ export default class Add extends Command
                         './modules/admin/apps/iam/user-meta/user-meta-storage-iam-adapter.service',
                         ['UserMetaStorageIamAdapterService'],
                     );
+
+                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'UserMetaStorageService',
+                        'UserMetaStorageIamAdapterService',
+                    );
+
+                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'IamService',
+                        'IamAuroraAdapterService',
+                    );
+
                     appModuleSourceFile.saveSync();
                     break;
                 }
