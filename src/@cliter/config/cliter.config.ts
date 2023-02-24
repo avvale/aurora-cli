@@ -320,6 +320,7 @@ export const cliterConfig: CliterConfig =
     ],
     frontPackages: [
         'auditing',
+        'environments',
         'iam',
         'oAuth',
     ],

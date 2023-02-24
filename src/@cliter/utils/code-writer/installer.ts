@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 import { SourceFile, ObjectLiteralExpression, InitializerExpressionGetableNode, ArrayLiteralExpression } from 'ts-morph';
 import { SyntaxKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
@@ -64,11 +65,11 @@ export const Installer =
     changeDecoratorPropertyAdapter(
         sourceFile: SourceFile,
         moduleName: string,
+        decoratorName: string,
         propertyName: string,
         provide: string,
         adapter: string,
         adapterPath: string,
-        decoratorName: string,
     ): void
     {
         if (ImportDriver.hasImportDeclarations(sourceFile, adapter)) return;
@@ -79,12 +80,13 @@ export const Installer =
             [adapter],
         );
 
-        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, moduleName, decoratorName);
-        const decoratorArrayProperty = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, propertyName);
-
-        for (const [index, value] of decoratorArrayProperty.getElements().entries())
-        {
-            ProviderDriver.changeUseClass(value as ObjectLiteralExpression, provide, adapter);
-        }
+        DecoratorDriver.changeDecoratorPropertyAdapter(
+            sourceFile,
+            moduleName,
+            decoratorName,
+            propertyName,
+            provide,
+            adapter,
+        );
     },
 };

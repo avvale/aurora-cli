@@ -69,11 +69,11 @@ export default class Add extends Command
                     Installer.changeDecoratorPropertyAdapter(
                         sourceFile,
                         'AppModule',
+                        'Module',
                         'providers',
                         'AuthorizationGuard',
                         'AuthorizationPermissionsGuard',
                         '@api/iam/shared/guards/authorization-permissions.guard',
-                        'Module',
                     );
 
                     sourceFile.saveSync();
@@ -88,11 +88,11 @@ export default class Add extends Command
                     Installer.changeDecoratorPropertyAdapter(
                         appModuleSourceFile,
                         'AppModule',
+                        'Module',
                         'providers',
                         'AuthenticationGuard',
                         'AuthenticationJwtGuard',
                         '@api/o-auth/shared/guards/authentication-jwt.guard',
-                        'Module',
                     );
                     appModuleSourceFile.saveSync();
 
@@ -127,11 +127,11 @@ export default class Add extends Command
 
         if (args.scope === Scope.FRONT)
         {
-            await FrontHandler.addPackage(addCommandState);
-
             switch (packageName)
             {
                 case 'auditing': {
+                    await FrontHandler.addPackage(addCommandState);
+
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'auditing', 'auditingNavigation');
@@ -144,9 +144,11 @@ export default class Add extends Command
                 }
 
                 case 'iam': {
+                    await FrontHandler.addPackage(addCommandState);
+
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'auditingNavigation');
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'iamNavigation');
                     navigationSourceFile.saveSync();
 
                     const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
@@ -167,15 +169,53 @@ export default class Add extends Command
                 }
 
                 case 'oAuth': {
+                    await FrontHandler.addPackage(addCommandState);
+
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'oAuth', 'auditingNavigation');
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'oAuth', 'oAuthNavigation');
                     navigationSourceFile.saveSync();
 
                     const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
                     Installer.declareFrontRouting(routingSourceFile, 'oAuth');
                     routingSourceFile.saveSync();
+
+                    // add custom imports
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+
+                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'AuthenticationService',
+                        'AuthenticationAuroraAdapterService',
+                    );
+
+                    DecoratorDriver.removeDecoratorAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'AuthGuard',
+                    );
+
+                    appModuleSourceFile.saveSync();
                     break;
+                }
+
+                case 'environments': {
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+                    DecoratorDriver.removeDecoratorAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'EnvironmentsInformationService',
+                    );
+
+                    appModuleSourceFile.saveSync();
                 }
             }
         }

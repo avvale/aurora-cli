@@ -11,7 +11,29 @@ export class ProviderDriver
         if (!(object instanceof ObjectLiteralExpression)) return;
 
         const properties = object.getProperties();
-        let isProvideWanted = false;
+        for (const property of properties)
+        {
+            if (!(property instanceof PropertyAssignment)) continue;
+
+            if (
+                ProviderDriver.isProvideWanted(object, provide) &&
+                property.getName() === 'useClass'
+            )
+            {
+                property.setInitializer(adapter);
+                break;
+            }
+        }
+    }
+
+    public static isProvideWanted(
+        object: ObjectLiteralExpression,
+        provide: string,
+    ): boolean
+    {
+        if (!(object instanceof ObjectLiteralExpression)) return false;
+
+        const properties = object.getProperties();
         for (const property of properties)
         {
             if (!(property instanceof PropertyAssignment)) continue;
@@ -21,17 +43,10 @@ export class ProviderDriver
                 property.getInitializer()?.getText() === provide
             )
             {
-                isProvideWanted = true;
-            }
-
-            if (
-                isProvideWanted &&
-                property.getName() === 'useClass'
-            )
-            {
-                property.setInitializer(adapter);
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 }
