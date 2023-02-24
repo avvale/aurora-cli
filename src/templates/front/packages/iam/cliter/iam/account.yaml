@@ -1,0 +1,107 @@
+version: 0.0.1
+boundedContextName: iam
+moduleName: account
+moduleNames: accounts
+aggregateName: IamAccount
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: type
+    type: enum
+    enumOptions:
+      - USER
+      - SERVICE
+    nullable: false
+    example: IamAccountType.USER
+  - name: code
+    type: varchar
+    maxLength: 50
+    nullable: true
+    index: unique
+  - name: email
+    type: varchar
+    maxLength: 120
+    nullable: false
+    index: unique
+    example: john@gmial.com
+  - name: isActive
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
+  - name: clientId
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: OAuthClient
+    relationshipModulePath: o-auth/client
+    relationshipKey: id
+    relationshipField: client
+    relationshipAvoidConstraint: true
+  - name: scopes
+    type: json
+    nullable: true
+  - name: dApplicationCodes
+    type: json
+    nullable: false
+  - name: dPermissions
+    type: json
+    nullable: false
+  - name: dTenants
+    type: json
+    nullable: false
+  - name: meta
+    type: json
+    nullable: true
+  - name: roles
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: role
+    relationshipAggregate: IamRole
+    relationshipModulePath: iam/role
+    relationshipAvoidConstraint: false
+    pivotAggregateName: IamRolesAccounts
+    pivotPath: iam/role
+    pivotFileName: roles-accounts
+  - name: tenants
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: tenant
+    relationshipAggregate: IamTenant
+    relationshipModulePath: iam/tenant
+    relationshipAvoidConstraint: false
+    pivotAggregateName: IamTenantsAccounts
+    pivotPath: iam/tenant
+    pivotFileName: tenants-accounts
+  - name: user
+    type: IamUser
+    nullable: true
+    relationship: one-to-one
+    relationshipAggregate: IamUser
+    relationshipModulePath: iam/user
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis: []
+excluded:
+  - src/@api/iam/account/resolvers/iam-create-accounts.resolver.ts
+  - src/@api/iam/account/resolvers/iam-create-accounts.resolver.spec.ts
+  - src/@api/iam/account/controllers/iam-create-accounts.controller.ts
+  - src/@api/iam/account/controllers/iam-create-accounts.controller.spec.ts
+  - src/@api/iam/account/handlers/iam-create-accounts.handler.ts
+  - src/@api/iam/account/handlers/iam-create-accounts.handler.spec.ts

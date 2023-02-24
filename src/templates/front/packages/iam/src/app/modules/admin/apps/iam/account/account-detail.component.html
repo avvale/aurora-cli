@@ -1,0 +1,335 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    svgIcon="heroicons_solid:tag"
+                    class="icon-size-8 mr-2"
+                >
+                </mat-icon>
+                {{ t('iam.Account') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+                *ngIf="currentViewAction.id === 'iam::account.detail.edit'"
+                mat-flat-button
+                type="submit"
+                class="ml-3"
+                form="iamAccountFormDetail"
+                color="accent"
+                [disabled]="fg.pristine"
+            >
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:pencil-alt"
+                >
+                </mat-icon>
+                {{ t('Update') }}
+            </button>
+            <button
+                *ngIf="currentViewAction.id === 'iam::account.detail.new'"
+                mat-flat-button
+                type="submit"
+                form="iamAccountFormDetail"
+                class="ml-3"
+                color="accent"
+                [disabled]="fg.pristine"
+            >
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:save"
+                >
+                </mat-icon>
+                {{ t('Create') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="iamAccountFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('iam.Type') }}</mat-label>
+                        <mat-select
+                            formControlName="type"
+                            (selectionChange)="handleChangeAccountType($event)"
+                        >
+                            <mat-option
+                                *ngFor="let type of iamAccountType | keyvalue"
+                                [value]="type.key"
+                            >
+                                {{ t('iam.AccountType.' + type.value) }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.type | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('iam.Code') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="code"
+                            maxlength="50"
+                        >
+                        <mat-error>{{ formErrors?.code | async }}</mat-error>
+                    </mat-form-field>
+
+                    <ng-container *ngIf="(clients$ | async).length > 1 && currentViewAction.id === 'iam::account.detail.new'">
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-start-1 col-8"
+                        >
+                            <mat-label>{{ t('iam.Client') }}</mat-label>
+                            <mat-select
+                                formControlName="clientId"
+                            >
+                                <mat-option
+                                    *ngFor="let client of clients$ | async"
+                                    (onSelectionChange)="handleChangeClient($event, client)"
+                                    [value]="client.id"
+                                >
+                                    {{ client.name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>{{ formErrors?.clientId | async }}</mat-error>
+                        </mat-form-field>
+                    </ng-container>
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('iam.Email') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="email"
+                            maxlength="120"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.email | async }}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-3"
+                    >
+                        <mat-label>{{ t('iam.Tenants') }}</mat-label>
+                        <mat-select
+                            formControlName="tenantIds"
+                            multiple
+                        >
+                            <mat-option
+                                *ngFor="let tenant of tenants$ | async"
+                                [value]="tenant.id"
+                            >
+                                {{ tenant.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.tenantIds | async }}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-3"
+                    >
+                        <mat-label>{{ t('iam.Scopes') }}</mat-label>
+                        <mat-select
+                            formControlName="scopes"
+                            multiple
+                        >
+                            <mat-option
+                                *ngFor="let scopeOption of scopeOptions$ | async"
+                                [value]="scopeOption"
+                            >
+                                {{ scopeOption }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.scopes | async }}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-3"
+                    >
+                        <mat-label>{{ t('iam.Roles') }}</mat-label>
+                        <mat-select
+                            formControlName="roleIds"
+                            multiple
+                        >
+                            <mat-option
+                                *ngFor="let role of roles$ | async"
+                                [value]="role.id"
+                            >
+                                {{ role.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.roleIds | async }}</mat-error>
+                    </mat-form-field>
+
+                    <div class="col-3 pt-5">
+                        <mat-checkbox
+                            formControlName="isActive"
+                        >
+                            {{ t('iam.IsActive') }}
+                        </mat-checkbox>
+                    </div>
+
+                    <ng-container
+                        *ngIf="fg.get('type').value === iamAccountType.USER"
+                        formGroupName="user"
+                    >
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-6"
+                        >
+                            <mat-label>{{ t('iam.Name') }}</mat-label>
+                            <input
+                                matInput
+                                formControlName="name"
+                                maxlength="255"
+                            >
+                            <mat-error>{{ formErrors?.name | async }}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-6"
+                        >
+                            <mat-label>{{ t('iam.Surname') }}</mat-label>
+                            <input
+                                matInput
+                                formControlName="surname"
+                                maxlength="255"
+                            >
+                            <mat-error>{{ formErrors?.surname | async }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-toolbar class="p-0 col-12">
+                            <mat-icon class="mr-3">how_to_reg</mat-icon>
+                            <span> {{ t('DataAccess') }}</span>
+                        </mat-toolbar>
+
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-start-1 col-6"
+                        >
+                            <mat-label>{{ t('iam.Username') }}</mat-label>
+                            <input
+                                matInput
+                                formControlName="username"
+                                maxlength="120"
+                            >
+                            <mat-error>{{ formErrors['user.username'] | async }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-start-1 col-6"
+                        >
+                            <mat-label>{{ t('iam.Password') }}</mat-label>
+                            <mat-icon
+                                matSuffix
+                                matTooltip="{{ t('iam.ShowPassword') }}"
+                                class="inline-block cursor-pointer"
+                                *ngIf="!isShowPassword"
+                                (click)="isShowPassword = !isShowPassword"
+                            >
+                                lock
+                            </mat-icon>
+                            <mat-icon
+                                matSuffix
+                                matTooltip="{{ t('iam.HidePassword') }}"
+                                class="inline-block cursor-pointer"
+                                *ngIf="isShowPassword"
+                                (click)="isShowPassword = !isShowPassword"
+                            >
+                                lock_open
+                            </mat-icon>
+                            <mat-icon
+                                matSuffix
+                                [matTooltip]="t('iam.CreatePassword')"
+                                class="inline-block cursor-pointer ml-4"
+                                (click)="handleCreatePassword()"
+                            >
+                                cached
+                            </mat-icon>
+                            <input
+                                matInput
+                                formControlName="password"
+                                [type]="isShowPassword ? 'text' : 'password'"
+                                [required]="currentAction === 'iam::account.detail.new'"
+                                autocomplete="new-password"
+                            >
+                            <mat-hint
+                                align="end"
+                                aria-live="polite"
+                            >
+                                {{ fg.get('user.password').value?.length }}
+                            </mat-hint>
+                            <mat-error>{{ formErrors['user.password'] | async }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-password-strength
+                            class="col-start-1 col-6"
+                            [password]="fg.get('user.password').value"
+                        >
+                        </mat-password-strength>
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-start-1 col-6"
+                        >
+                            <mat-label>{{ t('RepeatPassword') }}</mat-label>
+                            <input
+                                matInput
+                                formControlName="repeatPassword"
+                                type="password"
+                                [required]="currentViewAction.id === 'iam::account.detail.new'"
+                                autocomplete="new-password"
+                            >
+                            <mat-hint
+                                align="end"
+                                aria-live="polite"
+                            >
+                                {{ user.get('repeatPassword')?.value?.length }}
+                            </mat-hint>
+                            <mat-error>{{ formErrors['user.repeatPassword'] | async }}</mat-error>
+                        </mat-form-field>
+
+                    </ng-container>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>

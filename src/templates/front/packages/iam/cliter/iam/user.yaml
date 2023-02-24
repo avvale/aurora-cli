@@ -1,0 +1,82 @@
+version: 0.0.1
+boundedContextName: iam
+moduleName: user
+moduleNames: users
+aggregateName: IamUser
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: accountId
+    type: id
+    length: 36
+    nullable: false
+    relationship: one-to-one
+    relationshipAggregate: IamAccount
+    relationshipModulePath: iam/account
+    relationshipField: account
+    index: index
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: surname
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: avatar
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: mobile
+    type: varchar
+    maxLength: 60
+    nullable: true
+  - name: langId
+    type: id
+    length: 36
+    nullable: true
+  - name: username
+    type: varchar
+    maxLength: 120
+    nullable: false
+    index: unique
+  - name: password
+    type: password
+    maxLength: 255
+    nullable: false
+  - name: rememberToken
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: meta
+    type: json
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis: []
+excluded:
+  - src/@api/iam/user/handlers/iam-create-user.handler.spec.ts
+  - src/@api/iam/user/handlers/iam-create-user.handler.ts
+  - src/@api/iam/user/controllers/iam-create-users.controller.spec.ts
+  - src/@api/iam/user/controllers/iam-create-users.controller.ts
+  - src/@api/iam/user/controllers/iam-create-user.controller.spec.ts
+  - src/@api/iam/user/controllers/iam-create-user.controller.ts
+  - src/@api/iam/user/handlers/iam-create-users.handler.spec.ts
+  - src/@api/iam/user/handlers/iam-create-users.handler.ts
+  - src/@api/iam/user/resolvers/iam-create-user.resolver.spec.ts
+  - src/@api/iam/user/resolvers/iam-create-user.resolver.ts
+  - src/@api/iam/user/resolvers/iam-create-users.resolver.spec.ts
+  - src/@api/iam/user/resolvers/iam-create-users.resolver.ts

@@ -1,0 +1,88 @@
+version: 0.0.1
+boundedContextName: o-auth
+moduleName: client
+moduleNames: clients
+aggregateName: OAuthClient
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: grantType
+    type: enum
+    enumOptions:
+      - AUTHORIZATION_CODE
+      - CLIENT_CREDENTIALS
+      - PASSWORD
+      - REFRESH_TOKEN
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: secret
+    type: varchar
+    maxLength: 90
+    nullable: false
+  - name: authUrl
+    type: varchar
+    maxLength: 2048
+    nullable: true
+  - name: redirect
+    type: varchar
+    maxLength: 2048
+    nullable: true
+  - name: scopeOptions
+    type: json
+    nullable: true
+  - name: expiredAccessToken
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: expiredRefreshToken
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: isActive
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
+  - name: isMaster
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: false
+  - name: applications
+    type: relationship
+    nullable: true
+    relationship: many-to-many
+    relationshipSingularName: application
+    relationshipAggregate: OAuthApplication
+    relationshipModulePath: o-auth/application
+    relationshipAvoidConstraint: true
+    pivotAggregateName: OAuthApplicationsClients
+    pivotPath: o-auth/application
+    pivotFileName: applications-clients
+  - name: accessTokens
+    type: OAuthAccessToken
+    nullable: true
+    relationship: one-to-many
+    relationshipSingularName: accessToken
+    relationshipAggregate: OAuthAccessToken
+    relationshipModulePath: o-auth/access-token
+    relationshipAvoidConstraint: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis: []

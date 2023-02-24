@@ -1,0 +1,277 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    class="icon-size-8 mr-2"
+                >
+                    extension
+                </mat-icon>
+                {{ t('iam.BoundedContext') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+                *ngIf="currentViewAction.id === 'iam::boundedContext.detail.edit'"
+                mat-flat-button
+                type="submit"
+                class="ml-3"
+                form="iamBoundedContextFormDetail"
+                color="accent"
+                [disabled]="fg.pristine"
+            >
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:pencil-alt"
+                >
+                </mat-icon>
+                {{ t('Update') }}
+            </button>
+            <button
+                *ngIf="currentViewAction.id === 'iam::boundedContext.detail.new'"
+                mat-flat-button
+                type="submit"
+                form="iamBoundedContextFormDetail"
+                class="ml-3"
+                color="accent"
+                [disabled]="fg.pristine"
+            >
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:save"
+                >
+                </mat-icon>
+                {{ t('Create') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="iamBoundedContextFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('iam.Name') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="name"
+                            maxlength="255"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('iam.Root') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="root"
+                            maxlength="30"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.root | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-2"
+                    >
+                        <mat-label>{{ t('iam.Sort') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="sort"
+                            type="number"
+                            maxlength="6"
+                        >
+                        <mat-error>{{ formErrors?.sort | async }}</mat-error>
+                    </mat-form-field>
+                    <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="isActive"
+                        >
+                            {{ t('iam.IsActive') }}
+                        </mat-checkbox>
+                    </div>
+
+                    <!-- Permissions associated to bounded context -->
+                    <au-grid-elements-manager
+                        *ngIf="currentViewAction.id === 'iam::boundedContext.detail.edit'"
+                        class="col-12 mt-7 mb-7"
+                        [columnsConfig]="permissionsColumnsConfig$ | async"
+                        [dialogIcon]="'lock'"
+                        [dialogTitle]="t('Permission')"
+                        [dialogWidth]="'60vw'"
+                        [gridData]="permissionsGridData$ | async"
+                        [gridState]="permissionsGridState"
+                        [id]="permissionsGridId"
+                        [label]="t('Permissions')"
+                        [originColumnsConfig]="originPermissionsColumnsConfig"
+                        #permissionsGridElementsManager
+                    >
+                        <!-- header grid buttons -->
+                        <ng-template
+                            auGridCustomButtonsHeaderDialogTemplate
+                        >
+                            <button
+                                mat-flat-button
+                                class="ml-2"
+                                type="button"
+                                (click)="
+                                    actionService.action({
+                                        id          : 'iam::boundedContext.detail.newPermission',
+                                        isViewAction: false
+                                    })
+                                "
+                            >
+                                <mat-icon class="mr-2">add</mat-icon>
+                                {{ t('New.F') }}
+                            </button>
+
+                        </ng-template>
+                        <!-- / header grid buttons -->
+
+                        <!-- permission form -->
+                        <ng-template
+                            auGridFormElementDetailDialogTemplate
+                            let-dialog
+                        >
+                            <form
+                                id="permissionDetailDialogForm"
+                                novalidate
+                                [formGroup]="permissionDialogFg"
+                                (ngSubmit)="handleSubmitPermissionForm($event, dialog)"
+                            >
+                                <div class="layout__container">
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-12"
+                                    >
+                                        <mat-label>{{ t('Name') }}</mat-label>
+                                        <input
+                                            matInput
+                                            formControlName="name"
+                                            maxlength="255"
+                                        >
+                                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </form>
+
+                            <div class="flex justify-end">
+                                <button
+                                    class="ml-3"
+                                    mat-flat-button
+                                    mat-dialog-close
+                                    [color]="'basic'"
+                                >
+                                    <mat-icon
+                                        class="icon-size-5 mr-2"
+                                        svgIcon="heroicons_solid:x"
+                                    >
+                                    </mat-icon>
+                                    {{ t('Cancel') }}
+                                </button>
+                                <button
+                                    class="ml-3"
+                                    type="submit"
+                                    form="permissionDetailDialogForm"
+                                    mat-flat-button
+                                    [disabled]="permissionDialogFg.pristine"
+                                    [color]="'accent'"
+                                >
+                                    <mat-icon
+                                        class="icon-size-5 mr-2"
+                                        svgIcon="heroicons_solid:pencil"
+                                    >
+                                    </mat-icon>
+                                    {{ t('Save') }}
+                                </button>
+                            </div>
+
+                        </ng-template>
+                        <!-- / permission form -->
+
+                        <au-grid-translations
+                            [actions]="t('Actions')"
+                            [AND]="t('AND')"
+                            [clearFilters]="t('ClearFilters')"
+                            [clickAndDragInfo]="t('ClickAndDragInfo')"
+                            [columns]="t('Columns')"
+                            [field]="t('Field')"
+                            [filter]="t('Filter')"
+                            [for]="permissionsGridId"
+                            [operator]="t('Operator')"
+                            [OR]="t('OR')"
+                            [pleaseSelectField]="t('PleaseSelectField')"
+                            [translations]="t('Translations')"
+                            [value]="t('Value')"
+                            [noData]="t('NoData')"
+                            [paginator]="{
+                                firstPageLabel: t('Paginator.FirstPageLabel'),
+                                itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
+                                lastPageLabel: t('Paginator.LastPageLabel'),
+                                nextPageLabel: t('Paginator.NextPageLabel'),
+                                ofLabel: t('Paginator.OfLabel'),
+                                previousPageLabel: t('Paginator.PreviousPageLabel')
+                            }"
+                            [operators]="{
+                                contains: t('Operators.Contains'),
+                                endsWith: t('Operators.EndsWith'),
+                                equals: t('Operators.Equals'),
+                                greaterThan: t('Operators.GreaterThan'),
+                                greaterThanEqual: t('Operators.GreaterThanEqual'),
+                                lessThan: t('Operators.LessThan'),
+                                lessThanEqual: t('Operators.LessThanEqual'),
+                                notEquals: t('Operators.NotEquals'),
+                                startsWith: t('Operators.StartsWith')
+                            }"
+                            [actionsMenu]="{
+                                edit: t('Edit'),
+                                delete: t('Delete')
+                            }"
+                        >
+                            <au-grid-column-translation
+                                *ngFor="let columnConfig of originLoadOrdersColumnsConfig"
+                                [field]="columnConfig.field"
+                            >
+                                {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                            </au-grid-column-translation>
+                        </au-grid-translations>
+
+                    </au-grid-elements-manager>
+                    <!-- / Permissions associated to bounded context -->
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>

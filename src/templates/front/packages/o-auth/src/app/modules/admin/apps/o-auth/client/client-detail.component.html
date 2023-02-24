@@ -1,0 +1,224 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    svgIcon="heroicons_solid:tag"
+                    class="icon-size-8 mr-2"
+                >
+                </mat-icon>
+                {{ t('oAuth.Client') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+                *ngIf="currentViewAction.id === 'oAuth::client.detail.edit'"
+                mat-flat-button
+                type="submit"
+                class="ml-3"
+                form="oAuthClientFormDetail"
+                color="accent"
+                [disabled]="fg.pristine"
+            >
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:pencil-alt"
+                >
+                </mat-icon>
+                {{ t('Update') }}
+            </button>
+            <button
+                *ngIf="currentViewAction.id === 'oAuth::client.detail.new'"
+                mat-flat-button
+                type="submit"
+                form="oAuthClientFormDetail"
+                class="ml-3"
+                color="accent"
+                [disabled]="fg.pristine"
+            >
+                <mat-icon
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:save"
+                >
+                </mat-icon>
+                {{ t('Create') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="oAuthClientFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('oAuth.GrantType') }}</mat-label>
+                        <mat-select formControlName="grantType">
+                            <mat-option
+                                *ngFor="let type of oAuthClientGrantType | keyvalue"
+                                [value]="type.key"
+                            >
+                                {{ t('oAuth.GrantTypeOptions.' + type.value) }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.grantType | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.Applications') }}</mat-label>
+                        <mat-select
+                            formControlName="applicationIds"
+                            multiple
+                        >
+                            <mat-option
+                                *ngFor="let application of applications$ | async"
+                                [value]="application.id"
+                            >
+                                [{{ application.code }}] {{ application.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.applicationIds | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.ScopeOptions') }}</mat-label>
+                        <mat-select
+                            formControlName="scopeOptions"
+                            multiple
+                        >
+                            <mat-option
+                                *ngFor="let scope of scopes$ | async"
+                                [value]="scope.code"
+                            >
+                                [{{ scope.code }}] {{ scope.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.scopeOptions | async }}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.Name') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="name"
+                            maxlength="255"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.Secret') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="secret"
+                            maxlength="90"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.secret | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.AuthUrl') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="authUrl"
+                            maxlength="2048"
+                        >
+                        <mat-error>{{ formErrors?.authUrl | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.Redirect') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="redirect"
+                            maxlength="2048"
+                        >
+                        <mat-error>{{ formErrors?.redirect | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-3"
+                    >
+                        <mat-label>{{ t('oAuth.ExpiredAccessToken') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="expiredAccessToken"
+                            type="number"
+                            maxlength="10"
+                        >
+                        <mat-error>{{ formErrors?.expiredAccessToken | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-3"
+                    >
+                        <mat-label>{{ t('oAuth.ExpiredRefreshToken') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="expiredRefreshToken"
+                            type="number"
+                            maxlength="10"
+                        >
+                        <mat-error>{{ formErrors?.expiredRefreshToken | async }}</mat-error>
+                    </mat-form-field>
+                    <div class="col-3 pt-5">
+                        <mat-checkbox
+                            formControlName="isActive"
+                        >
+                            {{ t('oAuth.IsActive') }}
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-3 pt-5">
+                        <mat-checkbox
+                            formControlName="isMaster"
+                        >
+                            {{ t('oAuth.IsMaster') }}
+                        </mat-checkbox>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>

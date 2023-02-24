@@ -1,0 +1,148 @@
+import gql from 'graphql-tag';
+
+export const fields = `
+    name
+    code
+    logo
+    isActive
+    meta
+    accounts {
+        id
+    }
+    createdAt
+    updatedAt
+`;
+
+export const relationsFields = '';
+
+// default methods
+export const paginationQuery = gql`
+    query IamPaginateTenants (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        pagination: iamPaginateTenants (
+            query: $query
+            constraint: $constraint
+        ) {
+            total
+            rows
+            count
+        }
+    }
+`;
+
+export const getQuery = gql`
+    query IamGetTenants (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        objects: iamGetTenants (
+            query: $query
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+    }
+`;
+
+export const findByIdQuery = gql`
+    query IamFindTenantById (
+        $id: ID
+        $constraint: QueryStatement
+    ) {
+        object: iamFindTenantById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+    }
+`;
+
+export const findQuery = gql`
+    query IamFindTenant (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        object: iamFindTenant (
+            query: $query
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+    }
+`;
+
+export const createMutation = gql`
+    mutation IamCreateTenant (
+        $payload: IamCreateTenantInput!
+    ) {
+        iamCreateTenant (
+            payload: $payload
+        ) {
+            ${fields}
+        }
+    }
+`;
+
+export const updateByIdMutation = gql`
+    mutation IamUpdateTenantById (
+        $payload: IamUpdateTenantByIdInput!
+        $constraint: QueryStatement
+    ) {
+        iamUpdateTenantById (
+            payload: $payload
+            constraint: $constraint
+        ) {
+            ${fields}
+        }
+    }
+`;
+
+export const updateMutation = gql`
+    mutation IamUpdateTenants (
+        $payload: IamUpdateTenantsInput!
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        iamUpdateTenants (
+            payload: $payload
+            query: $query
+            constraint: $constraint
+        ) {
+            ${fields}
+        }
+    }
+`;
+
+export const deleteByIdMutation = gql`
+    mutation IamDeleteTenantById (
+        $id: ID!
+        $constraint: QueryStatement
+    ) {
+        iamDeleteTenantById (
+            id: $id
+            constraint: $constraint
+        ) {
+            ${fields}
+        }
+    }
+`;
+
+export const deleteMutation = gql`
+    mutation IamDeleteTenants (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        iamDeleteTenants (
+            query: $query
+            constraint: $constraint
+        ) {
+            ${fields}
+        }
+    }
+`;
