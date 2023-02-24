@@ -58,6 +58,31 @@ export default class Add extends Command
                     const sourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(sourceFile, 'auditing', ['AuditingModule']);
                     sourceFile.saveSync();
+
+                    // add custom imports
+                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+                    if (ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuditingAxiosInterceptorService')) break;
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@nestjs/axios',
+                        ['HttpModule'],
+                    );
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@api/auditing/shared/services/auditing-axios-interceptor.service',
+                        ['AuditingAxiosInterceptorService'],
+                    );
+
+                    const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
+                    const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                    importsArray.addElement('HttpModule', { useNewLines: true });
+                    const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
+                    providersArray.addElement('AuditingAxiosInterceptorService', { useNewLines: true });
+
+                    sharedModuleSourceFile.saveSync();
+
                     break;
                 }
 
