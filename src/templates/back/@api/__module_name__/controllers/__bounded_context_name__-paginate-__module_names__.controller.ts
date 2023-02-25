@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, {{/if}}{{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}Pagination, {{#if schema.hasOAuth}}Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+{{#if schema.hasOAuth}}
+import { Auth } from '@aurora/decorators';
+{{/if}}
 {{#if schema.hasTenant}}
 
 // tenant
@@ -16,8 +19,7 @@ import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sch
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/paginate')
 {{#if schema.hasOAuth}}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
 {{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Controller
 {
