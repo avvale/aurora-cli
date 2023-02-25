@@ -1,8 +1,8 @@
-{{#if schema.hasOAuth}}
-import { UseGuards } from '@nestjs/common';
-{{/if}}
 import { Resolver, Args, Query } from '@nestjs/graphql';
 import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}{{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+{{#if schema.hasOAuth}}
+import { Auth } from '@aurora/decorators';
+{{/if}}
 {{#if schema.hasTenant}}
 
 // tenant
@@ -17,8 +17,7 @@ import { Pagination } from '@api/graphql';
 
 @Resolver()
 {{#if schema.hasOAuth}}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
 {{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Resolver
 {

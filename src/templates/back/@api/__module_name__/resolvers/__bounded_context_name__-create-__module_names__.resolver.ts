@@ -1,8 +1,8 @@
-{{#if schema.hasOAuth}}
-import { UseGuards } from '@nestjs/common';
-{{/if}}
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}Timezone } from '{{ config.auroraCorePackage }}';
+import { Timezone } from '{{ config.auroraCorePackage }}';
+{{#if schema.hasOAuth}}
+import { Auth } from '@aurora/decorators';
+{{/if}}
 {{#if schema.hasAuditing}}
 
 // auditing
@@ -23,8 +23,7 @@ import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schem
 
 @Resolver()
 {{#if schema.hasOAuth}}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.create')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.create')
 {{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Resolver
 {
