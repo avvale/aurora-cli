@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { OAuthClientDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthGetClientsHandler } from '../handlers/o-auth-get-clients.handler';
 
 @ApiTags('[o-auth] client')
 @Controller('o-auth/clients/get')
-@Permissions('oAuth.client.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.client.get')
 export class OAuthGetClientsController
 {
     constructor(

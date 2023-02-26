@@ -6,7 +6,7 @@ import { IamGetRolesController } from './iam-get-roles.controller';
 import { IamGetRolesHandler } from '../handlers/iam-get-roles.handler';
 
 // sources
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamGetRolesController', () =>
 {

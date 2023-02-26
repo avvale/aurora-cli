@@ -22,6 +22,9 @@ import { OAuthFindAccessTokenHandler } from './handlers/o-auth-find-access-token
 import { OAuthDeleteAccessTokenByIdHandler } from './handlers/o-auth-delete-access-token-by-id.handler';
 import { OAuthDeleteAccessTokensHandler } from './handlers/o-auth-delete-access-tokens.handler';
 
+// seeder
+import { OAuthAccessTokenSeeder } from './seeder/o-auth-access-token.seeder';
+
 export const OAuthAccessTokenControllers = [
     OAuthPaginateAccessTokensController,
     OAuthGetAccessTokensController,
@@ -47,4 +50,8 @@ export const OAuthAccessTokenApiHandlers = [
     OAuthFindAccessTokenHandler,
     OAuthDeleteAccessTokenByIdHandler,
     OAuthDeleteAccessTokensHandler,
+];
+
+export const OAuthAccessTokenServices = [
+    OAuthAccessTokenSeeder,
 ];

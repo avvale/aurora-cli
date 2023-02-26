@@ -12,8 +12,16 @@ export class PaginateAccessTokensService
         private readonly repository: IAccessTokenRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<OAuthAccessToken>>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<Pagination<OAuthAccessToken>>
     {
-        return await this.repository.paginate({ queryStatement, constraint, cQMetadata });
+        return await this.repository.paginate({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

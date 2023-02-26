@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { AuditingUpdateSideEffectByIdHandler } from '../handlers/auditing-update-side-effect-by-id.handler';
 import { AuditingSideEffect, AuditingUpdateSideEffectByIdInput } from '@api/graphql';
 
 @Resolver()
-@Permissions('auditing.sideEffect.update')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('auditing.sideEffect.update')
 export class AuditingUpdateSideEffectByIdResolver
 {
     constructor(

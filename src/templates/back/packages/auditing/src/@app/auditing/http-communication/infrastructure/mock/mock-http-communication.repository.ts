@@ -19,7 +19,7 @@ import {
     HttpCommunicationDeletedAt,
 } from '@app/auditing/http-communication/domain/value-objects';
 import { AuditingHttpCommunication } from '../../domain/http-communication.aggregate';
-import { httpCommunications } from '../seeds/http-communication.seed';
+import { httpCommunications } from './mock-http-communication.data';
 
 @Injectable()
 export class MockHttpCommunicationRepository extends MockRepository<AuditingHttpCommunication> implements IHttpCommunicationRepository

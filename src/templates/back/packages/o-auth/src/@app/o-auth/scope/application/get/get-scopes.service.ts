@@ -11,8 +11,16 @@ export class GetScopesService
         private readonly repository: IScopeRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthScope[]>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthScope[]>
     {
-        return await this.repository.get({ queryStatement, constraint, cQMetadata });
+        return await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

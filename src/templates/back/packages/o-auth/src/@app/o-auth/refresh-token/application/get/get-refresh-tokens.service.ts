@@ -11,8 +11,16 @@ export class GetRefreshTokensService
         private readonly repository: IRefreshTokenRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthRefreshToken[]>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthRefreshToken[]>
     {
-        return await this.repository.get({ queryStatement, constraint, cQMetadata });
+        return await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

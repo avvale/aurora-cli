@@ -11,7 +11,7 @@ import {
     RefreshTokenDeletedAt,
 } from '../../domain/value-objects';
 import { OAuthRefreshToken } from '../../domain/refresh-token.aggregate';
-import { refreshTokens } from '../seeds/refresh-token.seed';
+import { refreshTokens } from './mock-refresh-token.data';
 import * as _ from 'lodash';
 
 @Injectable()

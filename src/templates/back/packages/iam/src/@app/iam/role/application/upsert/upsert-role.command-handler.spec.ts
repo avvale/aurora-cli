@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 import { UpsertRoleCommandHandler } from './upsert-role.command-handler';
 import { UpsertRoleCommand } from './upsert-role.command';
 import { UpsertRoleService } from './upsert-role.service';

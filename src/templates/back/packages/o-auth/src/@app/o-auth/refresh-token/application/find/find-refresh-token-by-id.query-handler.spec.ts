@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindRefreshTokenByIdQueryHandler } from './find-refresh-token-by-id.query-handler';
 import { MockRefreshTokenRepository } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository';
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 import { IRefreshTokenRepository } from '@app/o-auth/refresh-token/domain/refresh-token.repository';
 import { RefreshTokenMapper } from '@app/o-auth/refresh-token/domain/refresh-token.mapper';
 import { FindRefreshTokenByIdQuery } from './find-refresh-token-by-id.query';

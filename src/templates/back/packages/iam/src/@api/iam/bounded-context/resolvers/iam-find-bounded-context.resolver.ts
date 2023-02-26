@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamFindBoundedContextHandler } from '../handlers/iam-find-bounded-context.handler';
 import { IamBoundedContext } from '@api/graphql';
 
 @Resolver()
-@Permissions('iam.boundedContext.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.boundedContext.get')
 export class IamFindBoundedContextResolver
 {
     constructor(

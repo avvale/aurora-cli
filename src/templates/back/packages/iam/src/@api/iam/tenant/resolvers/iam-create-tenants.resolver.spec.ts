@@ -6,7 +6,7 @@ import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler'
 import { IamCreateTenantInput } from '@api/graphql';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamCreateTenantsResolver', () =>
 {

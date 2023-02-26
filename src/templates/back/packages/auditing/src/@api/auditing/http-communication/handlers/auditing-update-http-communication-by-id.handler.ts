@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
 
 // @app
 import { FindHttpCommunicationByIdQuery } from '@app/auditing/http-communication/application/find/find-http-communication-by-id.query';

@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { AuditingPaginateSideEffectsHandler } from '../handlers/auditing-paginate-side-effects.handler';
 import { Pagination } from '@api/graphql';
 
 @Resolver()
-@Permissions('auditing.sideEffect.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('auditing.sideEffect.get')
 export class AuditingPaginateSideEffectsResolver
 {
     constructor(

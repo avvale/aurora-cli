@@ -1,16 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Auditing, AuditingMeta, {{#if schema.properties.hasI18n}}FormatLangCode, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Dto } from '../dto';
 {{#if schema.hasOAuth}}
 import { Auth } from '@aurora/decorators';
-{{/if}}
-{{#if schema.hasAuditing}}
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
 {{/if}}
 {{#if schema.hasTenant}}
 

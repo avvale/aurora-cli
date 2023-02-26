@@ -12,7 +12,7 @@ import {
     RoleDeletedAt,
 } from '@app/iam/role/domain/value-objects';
 import { IamRole } from '../../domain/role.aggregate';
-import { roles } from '../seeds/role.seed';
+import { roles } from './mock-role.data';
 
 @Injectable()
 export class MockRoleRepository extends MockRepository<IamRole> implements IRoleRepository

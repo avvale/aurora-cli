@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body, UseGuards } from '@nestjs/common';
+import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, CurrentAccount, Permissions, Timezone } from '@aurora-ts/core';
+import { CurrentAccount, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 import { IamUserMetaDto, IamUpdateUserMetaByIdDto } from '../dto';
 
 // @app
@@ -10,8 +11,7 @@ import { IamUpdateUserMetaByIdHandler } from '../handlers/iam-update-user-meta-b
 
 @ApiTags('[iam] user')
 @Controller('iam/user-meta/update')
-@Permissions('iam.user-meta.update')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.user-meta.update')
 export class IamUpdateUserMetaByIdController
 {
     constructor(

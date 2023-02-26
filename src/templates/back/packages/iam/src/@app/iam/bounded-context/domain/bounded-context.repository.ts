@@ -44,6 +44,14 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
         }
     ): Promise<IamBoundedContext[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<IamBoundedContext[]>;
+
     // count records
     abstract count(
         options?: {

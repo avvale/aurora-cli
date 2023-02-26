@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { OAuthGetScopesHandler } from './o-auth-get-scopes.handler';
 
 // sources
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthGetScopesHandler', () =>
 {

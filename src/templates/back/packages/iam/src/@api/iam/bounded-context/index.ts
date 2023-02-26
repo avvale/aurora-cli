@@ -7,6 +7,7 @@ import { IamFindBoundedContextByIdController } from './controllers/iam-find-boun
 import { IamFindBoundedContextController } from './controllers/iam-find-bounded-context.controller';
 import { IamUpdateBoundedContextByIdController } from './controllers/iam-update-bounded-context-by-id.controller';
 import { IamUpdateBoundedContextsController } from './controllers/iam-update-bounded-contexts.controller';
+import { IamUpsertBoundedContextController } from './controllers/iam-upsert-bounded-context.controller';
 import { IamDeleteBoundedContextByIdController } from './controllers/iam-delete-bounded-context-by-id.controller';
 import { IamDeleteBoundedContextsController } from './controllers/iam-delete-bounded-contexts.controller';
 
@@ -19,6 +20,7 @@ import { IamFindBoundedContextByIdResolver } from './resolvers/iam-find-bounded-
 import { IamFindBoundedContextResolver } from './resolvers/iam-find-bounded-context.resolver';
 import { IamUpdateBoundedContextByIdResolver } from './resolvers/iam-update-bounded-context-by-id.resolver';
 import { IamUpdateBoundedContextsResolver } from './resolvers/iam-update-bounded-contexts.resolver';
+import { IamUpsertBoundedContextResolver } from './resolvers/iam-upsert-bounded-context.resolver';
 import { IamDeleteBoundedContextByIdResolver } from './resolvers/iam-delete-bounded-context-by-id.resolver';
 import { IamDeleteBoundedContextsResolver } from './resolvers/iam-delete-bounded-contexts.resolver';
 
@@ -31,8 +33,12 @@ import { IamFindBoundedContextByIdHandler } from './handlers/iam-find-bounded-co
 import { IamFindBoundedContextHandler } from './handlers/iam-find-bounded-context.handler';
 import { IamUpdateBoundedContextByIdHandler } from './handlers/iam-update-bounded-context-by-id.handler';
 import { IamUpdateBoundedContextsHandler } from './handlers/iam-update-bounded-contexts.handler';
+import { IamUpsertBoundedContextHandler } from './handlers/iam-upsert-bounded-context.handler';
 import { IamDeleteBoundedContextByIdHandler } from './handlers/iam-delete-bounded-context-by-id.handler';
 import { IamDeleteBoundedContextsHandler } from './handlers/iam-delete-bounded-contexts.handler';
+
+// seeder
+import { IamBoundedContextSeeder } from './seeder/iam-bounded-context.seeder';
 
 export const IamBoundedContextControllers = [
     IamCreateBoundedContextController,
@@ -43,6 +49,7 @@ export const IamBoundedContextControllers = [
     IamFindBoundedContextController,
     IamUpdateBoundedContextByIdController,
     IamUpdateBoundedContextsController,
+    IamUpsertBoundedContextController,
     IamDeleteBoundedContextByIdController,
     IamDeleteBoundedContextsController,
 ];
@@ -56,6 +63,7 @@ export const IamBoundedContextResolvers = [
     IamFindBoundedContextResolver,
     IamUpdateBoundedContextByIdResolver,
     IamUpdateBoundedContextsResolver,
+    IamUpsertBoundedContextResolver,
     IamDeleteBoundedContextByIdResolver,
     IamDeleteBoundedContextsResolver,
 ];
@@ -69,6 +77,11 @@ export const IamBoundedContextApiHandlers = [
     IamFindBoundedContextHandler,
     IamUpdateBoundedContextByIdHandler,
     IamUpdateBoundedContextsHandler,
+    IamUpsertBoundedContextHandler,
     IamDeleteBoundedContextByIdHandler,
     IamDeleteBoundedContextsHandler,
+];
+
+export const IamBoundedContextServices = [
+    IamBoundedContextSeeder,
 ];

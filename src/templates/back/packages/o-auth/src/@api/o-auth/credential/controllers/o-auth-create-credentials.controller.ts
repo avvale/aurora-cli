@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Post, Body, Headers } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
 import { OAuthCreateCredentialsDto } from '../dto';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
 
 // @app
 import { OAuthCreateCredentialsHandler } from '../handlers/o-auth-create-credentials.handler';

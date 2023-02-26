@@ -1,6 +1,6 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, CurrentAccount, Permissions, Timezone } from '@aurora-ts/core';
+import { CurrentAccount, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamUpdateUserMetaByIdHandler } from '../handlers/iam-update-user-meta-by-id.handler';
@@ -8,8 +8,7 @@ import { IamUserMeta, IamUpdateUserMetaByIdInput } from '@api/graphql';
 import { AccountResponse } from '@app/iam/account/domain/account.response';
 
 @Resolver()
-@Permissions('iam.userData.update')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.userData.update')
 export class IamUpdateUserMetaByIdResolver
 {
     constructor(

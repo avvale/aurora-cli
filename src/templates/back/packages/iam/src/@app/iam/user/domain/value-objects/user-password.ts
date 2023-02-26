@@ -2,7 +2,7 @@ import { DataValueObject, PasswordValueObject, ValidationRules } from '@aurora-t
 
 export class UserPassword extends PasswordValueObject
 {
-    public readonly type: 'UserPassword';
+    public readonly type: string = 'UserPassword';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

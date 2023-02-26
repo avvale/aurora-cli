@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.handler';
 import { Pagination } from '@api/graphql';
 
 @Resolver()
-@Permissions('iam.tenant.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.tenant.get')
 export class IamPaginateTenantsResolver
 {
     constructor(

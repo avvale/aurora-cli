@@ -18,6 +18,10 @@ export class IamPaginateRolesHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateRolesQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new PaginateRolesQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

@@ -5,7 +5,11 @@ import { DataTypes } from 'sequelize';
 import { OAuthApplicationModel } from '@app/o-auth/application/infrastructure/sequelize/sequelize-application.model';
 import { OAuthClientModel } from '@app/o-auth/client/infrastructure/sequelize/sequelize-client.model';
 
-@Table({ modelName: 'OAuthApplicationsClients', freezeTableName: true, timestamps: false })
+@Table({
+    modelName: 'OAuthApplicationsClients',
+    freezeTableName: true,
+    timestamps: false,
+})
 export class OAuthApplicationsClientsModel extends Model<OAuthApplicationsClientsModel>
 {
     @ForeignKey(() => OAuthApplicationModel)

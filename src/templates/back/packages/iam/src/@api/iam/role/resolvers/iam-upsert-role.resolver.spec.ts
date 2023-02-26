@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpsertRoleResolver } from './iam-upsert-role.resolver';
 import { IamUpsertRoleHandler } from '../handlers/iam-upsert-role.handler';
-import { IamUpsertRoleInput } from '@api/graphql';
+import { IamUpdateRoleByIdInput } from '@api/graphql';
 
 // sources
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamUpsertRoleResolver', () =>
 {
@@ -50,7 +50,7 @@ describe('IamUpsertRoleResolver', () =>
         test('should return an role upserted', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await resolver.main(<IamUpsertRoleInput>roles[0])).toBe(roles[0]);
+            expect(await resolver.main(<IamUpdateRoleByIdInput>roles[0])).toBe(roles[0]);
         });
     });
 });

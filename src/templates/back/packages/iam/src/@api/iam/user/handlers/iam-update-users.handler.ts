@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurora-ts/core';
 
 // @app
 import { GetUsersQuery } from '@app/iam/user/application/get/get-users.query';

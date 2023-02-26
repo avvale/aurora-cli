@@ -3,6 +3,7 @@ import { CreateApplicationCommandHandler } from './application/create/create-app
 import { CreateApplicationsCommandHandler } from './application/create/create-applications.command-handler';
 import { UpdateApplicationByIdCommandHandler } from './application/update/update-application-by-id.command-handler';
 import { UpdateApplicationsCommandHandler } from './application/update/update-applications.command-handler';
+import { UpsertApplicationCommandHandler } from './application/upsert/upsert-application.command-handler';
 import { DeleteApplicationByIdCommandHandler } from './application/delete/delete-application-by-id.command-handler';
 import { DeleteApplicationsCommandHandler } from './application/delete/delete-applications.command-handler';
 
@@ -11,6 +12,7 @@ import { PaginateApplicationsQueryHandler } from './application/paginate/paginat
 import { GetApplicationsQueryHandler } from './application/get/get-applications.query-handler';
 import { FindApplicationQueryHandler } from './application/find/find-application.query-handler';
 import { FindApplicationByIdQueryHandler } from './application/find/find-application-by-id.query-handler';
+import { RawSQLApplicationsQueryHandler } from './application/raw-sql/raw-sql-applications.query-handler';
 
 // ---- customizations ----
 import { FindApplicationByAuthorizationHeaderQueryHandler } from './application/find/find-application-by-authorization-header.query-handler';
@@ -30,8 +32,10 @@ import { PaginateApplicationsService } from './application/paginate/paginate-app
 import { GetApplicationsService } from './application/get/get-applications.service';
 import { FindApplicationService } from './application/find/find-application.service';
 import { FindApplicationByIdService } from './application/find/find-application-by-id.service';
+import { RawSQLApplicationsService } from './application/raw-sql/raw-sql-applications.service';
 import { UpdateApplicationByIdService } from './application/update/update-application-by-id.service';
 import { UpdateApplicationsService } from './application/update/update-applications.service';
+import { UpsertApplicationService } from './application/upsert/upsert-application.service';
 import { DeleteApplicationByIdService } from './application/delete/delete-application-by-id.service';
 import { DeleteApplicationsService } from './application/delete/delete-applications.service';
 
@@ -55,6 +59,7 @@ export const OAuthApplicationHandlers = [
     CreateApplicationsCommandHandler,
     UpdateApplicationByIdCommandHandler,
     UpdateApplicationsCommandHandler,
+    UpsertApplicationCommandHandler,
     DeleteApplicationByIdCommandHandler,
     DeleteApplicationsCommandHandler,
 
@@ -63,6 +68,7 @@ export const OAuthApplicationHandlers = [
     GetApplicationsQueryHandler,
     FindApplicationQueryHandler,
     FindApplicationByIdQueryHandler,
+    RawSQLApplicationsQueryHandler,
 
     // ---- customizations ----
     FindApplicationByAuthorizationHeaderQueryHandler,
@@ -83,8 +89,10 @@ export const OAuthApplicationServices = [
     GetApplicationsService,
     FindApplicationService,
     FindApplicationByIdService,
+    RawSQLApplicationsService,
     UpdateApplicationByIdService,
     UpdateApplicationsService,
+    UpsertApplicationService,
     DeleteApplicationByIdService,
     DeleteApplicationsService,
 

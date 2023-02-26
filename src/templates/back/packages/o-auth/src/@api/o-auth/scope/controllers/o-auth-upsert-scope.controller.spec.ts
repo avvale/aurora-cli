@@ -6,7 +6,7 @@ import { OAuthUpsertScopeController } from './o-auth-upsert-scope.controller';
 import { OAuthUpsertScopeHandler } from '../handlers/o-auth-upsert-scope.handler';
 
 // sources
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthUpsertScopeController', () =>
 {

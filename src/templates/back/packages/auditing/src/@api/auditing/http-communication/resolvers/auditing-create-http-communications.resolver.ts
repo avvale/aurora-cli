@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { AuditingCreateHttpCommunicationsHandler } from '../handlers/auditing-create-http-communications.handler';
 import { AuditingCreateHttpCommunicationInput } from '@api/graphql';
 
 @Resolver()
-@Permissions('auditing.httpCommunication.create')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('auditing.httpCommunication.create')
 export class AuditingCreateHttpCommunicationsResolver
 {
     constructor(

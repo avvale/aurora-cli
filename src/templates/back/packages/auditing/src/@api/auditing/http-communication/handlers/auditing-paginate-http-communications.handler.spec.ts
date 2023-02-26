@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { AuditingPaginateHttpCommunicationsHandler } from './auditing-paginate-http-communications.handler';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingPaginateHttpCommunicationsHandler', () =>
 {

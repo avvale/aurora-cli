@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // @app
 import { FindScopeByIdQuery } from '@app/o-auth/scope/application/find/find-scope-by-id.query';
@@ -34,6 +31,10 @@ export class OAuthUpsertScopeHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindScopeByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new FindScopeByIdQuery(
+            payload.id,
+            {},
+            { timezone },
+        ));
     }
 }

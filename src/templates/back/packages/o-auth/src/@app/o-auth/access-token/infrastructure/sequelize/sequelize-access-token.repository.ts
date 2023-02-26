@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IAccessTokenRepository } from '../../domain/access-token.repository';
 import { OAuthAccessToken } from '../../domain/access-token.aggregate';
 import { AccessTokenMapper } from '../../domain/access-token.mapper';
@@ -16,6 +16,7 @@ export class SequelizeAccessTokenRepository extends SequelizeRepository<OAuthAcc
         @InjectModel(OAuthAccessTokenModel)
         public readonly repository: typeof OAuthAccessTokenModel,
         public readonly criteria: ICriteria,
+        public readonly auditingRunner: AuditingRunner,
     )
     {
         super();

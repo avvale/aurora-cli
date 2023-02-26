@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body, UseGuards } from '@nestjs/common';
+import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
 import { IamAccountDto, IamUpdateAccountByIdDto } from '../dto';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamUpdateAccountByIdHandler } from '../handlers/iam-update-account-by-id.handler';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/update')
-@Permissions('iam.account.update')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.account.update')
 export class IamUpdateAccountByIdController
 {
     constructor(

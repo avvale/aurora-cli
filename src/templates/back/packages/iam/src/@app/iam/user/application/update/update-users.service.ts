@@ -77,7 +77,11 @@ export class UpdateUsersService
         });
 
         // get objects to delete
-        const users = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const users = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const usersRegister = this.publisher.mergeObjectContext(

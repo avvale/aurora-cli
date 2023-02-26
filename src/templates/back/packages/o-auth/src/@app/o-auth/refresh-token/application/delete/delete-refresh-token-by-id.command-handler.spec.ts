@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteRefreshTokenByIdCommandHandler } from './delete-refresh-token-by-id.command-handler';
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 import { DeleteRefreshTokenByIdCommand } from './delete-refresh-token-by-id.command';
 import { DeleteRefreshTokenByIdService } from './delete-refresh-token-by-id.service';
 

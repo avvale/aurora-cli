@@ -2,7 +2,7 @@ import { IntValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class ClientExpiredRefreshToken extends IntValueObject
 {
-    public readonly type: 'ClientExpiredRefreshToken';
+    public readonly type: string = 'ClientExpiredRefreshToken';
 
     constructor(value: number, validationRules: ValidationRules = {})
     {

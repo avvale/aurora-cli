@@ -13,7 +13,7 @@ import {
     AccessTokenDeletedAt,
 } from '../../domain/value-objects';
 import { OAuthAccessToken } from '../../domain/access-token.aggregate';
-import { accessTokens } from '../seeds/access-token.seed';
+import { accessTokens } from './mock-access-token.data';
 import * as _ from 'lodash';
 
 @Injectable()

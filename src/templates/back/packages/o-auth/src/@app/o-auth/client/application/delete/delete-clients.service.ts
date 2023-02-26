@@ -20,7 +20,11 @@ export class DeleteClientsService
     ): Promise<void>
     {
         // get objects to delete
-        const clients = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const clients = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         await this.repository.delete({
             queryStatement,

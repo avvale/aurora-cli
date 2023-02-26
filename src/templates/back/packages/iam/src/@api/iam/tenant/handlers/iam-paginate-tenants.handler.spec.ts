@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { IamPaginateTenantsHandler } from './iam-paginate-tenants.handler';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamPaginateTenantsHandler', () =>
 {

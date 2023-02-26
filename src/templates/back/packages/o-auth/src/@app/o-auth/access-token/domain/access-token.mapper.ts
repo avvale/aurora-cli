@@ -42,7 +42,7 @@ export class AccessTokenMapper implements IMapper
     {
         if (!Array.isArray(accessTokens)) return;
 
-        return accessTokens.map(accessToken  => this.makeAggregate(accessToken, cQMetadata));
+        return accessTokens.map(accessToken => this.makeAggregate(accessToken, cQMetadata));
     }
 
     /**

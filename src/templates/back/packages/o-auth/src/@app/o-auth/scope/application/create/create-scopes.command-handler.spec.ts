@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 import { CreateScopesCommandHandler } from './create-scopes.command-handler';
 import { CreateScopesCommand } from './create-scopes.command';
 import { CreateScopesService } from './create-scopes.service';

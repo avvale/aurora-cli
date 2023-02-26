@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IHttpCommunicationRepository } from '../../domain/http-communication.repository';
 import { AuditingHttpCommunication } from '../../domain/http-communication.aggregate';
 import { HttpCommunicationMapper } from '../../domain/http-communication.mapper';
@@ -16,6 +16,7 @@ export class SequelizeHttpCommunicationRepository extends SequelizeRepository<Au
         @InjectModel(AuditingHttpCommunicationModel)
         public readonly repository: typeof AuditingHttpCommunicationModel,
         public readonly criteria: ICriteria,
+        public readonly auditingRunner: AuditingRunner,
     )
     {
         super();

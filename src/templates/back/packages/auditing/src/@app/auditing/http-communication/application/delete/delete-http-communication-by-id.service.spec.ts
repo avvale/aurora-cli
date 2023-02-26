@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 import { DeleteHttpCommunicationByIdService } from './delete-http-communication-by-id.service';
 import { HttpCommunicationId } from '../../domain/value-objects';
 import { IHttpCommunicationRepository } from '../../domain/http-communication.repository';

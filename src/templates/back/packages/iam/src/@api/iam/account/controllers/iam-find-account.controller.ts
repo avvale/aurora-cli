@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { IamAccountDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamFindAccountHandler } from '../handlers/iam-find-account.handler';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/find')
-@Permissions('iam.account.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.account.get')
 export class IamFindAccountController
 {
     constructor(

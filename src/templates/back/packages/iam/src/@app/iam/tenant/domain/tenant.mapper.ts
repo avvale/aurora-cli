@@ -41,7 +41,7 @@ export class TenantMapper implements IMapper
     {
         if (!Array.isArray(tenants)) return;
 
-        return tenants.map(tenant  => this.makeAggregate(tenant, cQMetadata));
+        return tenants.map(tenant => this.makeAggregate(tenant, cQMetadata));
     }
 
     /**

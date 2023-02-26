@@ -44,6 +44,14 @@ export abstract class IRefreshTokenRepository implements IRepository<OAuthRefres
         }
     ): Promise<OAuthRefreshToken[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<OAuthRefreshToken[]>;
+
     // count records
     abstract count(
         options?: {

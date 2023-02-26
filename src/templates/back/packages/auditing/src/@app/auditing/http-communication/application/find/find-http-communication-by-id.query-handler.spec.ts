@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindHttpCommunicationByIdQueryHandler } from './find-http-communication-by-id.query-handler';
 import { MockHttpCommunicationRepository } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.repository';
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 import { IHttpCommunicationRepository } from '@app/auditing/http-communication/domain/http-communication.repository';
 import { HttpCommunicationMapper } from '@app/auditing/http-communication/domain/http-communication.mapper';
 import { FindHttpCommunicationByIdQuery } from './find-http-communication-by-id.query';

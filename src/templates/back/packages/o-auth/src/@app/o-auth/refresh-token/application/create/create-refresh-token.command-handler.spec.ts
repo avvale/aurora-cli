@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { refreshTokensToCreate as refreshTokens } from '@app/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokensToCreate as refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 import { CreateRefreshTokenCommandHandler } from './create-refresh-token.command-handler';
 import { CreateRefreshTokenCommand } from './create-refresh-token.command';
 import { CreateRefreshTokenService } from './create-refresh-token.service';

@@ -18,6 +18,10 @@ export class OAuthPaginateRefreshTokensHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateRefreshTokensQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new PaginateRefreshTokensQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

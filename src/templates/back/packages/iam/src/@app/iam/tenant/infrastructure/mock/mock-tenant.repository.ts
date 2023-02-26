@@ -14,7 +14,7 @@ import {
     TenantDeletedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { IamTenant } from '../../domain/tenant.aggregate';
-import { tenants } from '../seeds/tenant.seed';
+import { tenants } from './mock-tenant.data';
 
 @Injectable()
 export class MockTenantRepository extends MockRepository<IamTenant> implements ITenantRepository

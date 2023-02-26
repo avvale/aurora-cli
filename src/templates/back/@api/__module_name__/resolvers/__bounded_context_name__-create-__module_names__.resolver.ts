@@ -1,13 +1,7 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Timezone } from '{{ config.auroraCorePackage }}';
+import { Auditing, AuditingMeta, Timezone } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasOAuth}}
 import { Auth } from '@aurora/decorators';
-{{/if}}
-{{#if schema.hasAuditing}}
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
 {{/if}}
 {{#if schema.hasTenant}}
 

@@ -11,8 +11,18 @@ export class FindUserByIdService
         private readonly repository: IUserRepository,
     ) {}
 
-    async main(id: UserId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamUser>
+    async main(
+        id: UserId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamUser>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

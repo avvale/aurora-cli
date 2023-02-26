@@ -44,6 +44,14 @@ export abstract class IClientRepository implements IRepository<OAuthClient>
         }
     ): Promise<OAuthClient[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<OAuthClient[]>;
+
     // count records
     abstract count(
         options?: {

@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, QueryStatement, Permissions, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
 import { OAuthRefreshTokenDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthDeleteRefreshTokensHandler } from '../handlers/o-auth-delete-refresh-tokens.handler';
 
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-tokens/delete')
-@Permissions('oAuth.refreshToken.delete')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.refreshToken.delete')
 export class OAuthDeleteRefreshTokensController
 {
     constructor(

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 import { UpdateTenantByIdCommandHandler } from './update-tenant-by-id.command-handler';
 import { UpdateTenantByIdCommand } from './update-tenant-by-id.command';
 import { UpdateTenantByIdService } from './update-tenant-by-id.service';

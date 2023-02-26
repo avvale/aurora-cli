@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthPaginateRefreshTokensHandler } from '../handlers/o-auth-paginate-refresh-tokens.handler';
 import { Pagination } from '@api/graphql';
 
 @Resolver()
-@Permissions('oAuth.refreshToken.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.refreshToken.get')
 export class OAuthPaginateRefreshTokensResolver
 {
     constructor(

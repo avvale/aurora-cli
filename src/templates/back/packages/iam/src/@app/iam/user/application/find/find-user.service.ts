@@ -11,8 +11,16 @@ export class FindUserService
         private readonly repository: IUserRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamUser>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamUser>
     {
-        return await this.repository.find({ queryStatement, constraint, cQMetadata });
+        return await this.repository.find({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

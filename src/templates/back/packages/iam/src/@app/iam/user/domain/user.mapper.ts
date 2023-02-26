@@ -45,7 +45,7 @@ export class UserMapper implements IMapper
     {
         if (!Array.isArray(users)) return;
 
-        return users.map(user  => this.makeAggregate(user, cQMetadata));
+        return users.map(user => this.makeAggregate(user, cQMetadata));
     }
 
     /**

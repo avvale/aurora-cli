@@ -9,7 +9,6 @@ import { MockSideEffectSeeder } from '@app/auditing/side-effect/infrastructure/m
 import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { AuditingModule } from '@api/auditing/auditing.module';
-import { AuthenticationGuard, AuthorizationGuard } from '@aurora-ts/core';
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
@@ -66,10 +65,10 @@ describe('side-effect', () =>
                 MockSideEffectSeeder,
             ],
         })
-            .overrideGuard(AuthenticationGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
-            .useValue({ canActivate: () => true })
+            //.overrideGuard(AuthenticationGuard)
+            //.useValue({ canActivate: () => true })
+            //.overrideGuard(AuthorizationGuard)
+            //.useValue({ canActivate: () => true })
             .compile();
 
         mockData = sideEffects;

@@ -44,6 +44,14 @@ export abstract class IScopeRepository implements IRepository<OAuthScope>
         }
     ): Promise<OAuthScope[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<OAuthScope[]>;
+
     // count records
     abstract count(
         options?: {

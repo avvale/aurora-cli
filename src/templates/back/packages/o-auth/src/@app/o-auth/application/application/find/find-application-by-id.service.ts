@@ -11,8 +11,18 @@ export class FindApplicationByIdService
         private readonly repository: IApplicationRepository,
     ) {}
 
-    async main(id: ApplicationId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthApplication>
+    async main(
+        id: ApplicationId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthApplication>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

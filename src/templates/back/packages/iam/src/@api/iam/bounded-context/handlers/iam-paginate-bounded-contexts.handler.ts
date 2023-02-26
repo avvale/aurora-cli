@@ -18,6 +18,10 @@ export class IamPaginateBoundedContextsHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateBoundedContextsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new PaginateBoundedContextsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

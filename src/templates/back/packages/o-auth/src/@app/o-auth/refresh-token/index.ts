@@ -8,6 +8,7 @@ import { PaginateRefreshTokensQueryHandler } from './application/paginate/pagina
 import { GetRefreshTokensQueryHandler } from './application/get/get-refresh-tokens.query-handler';
 import { FindRefreshTokenQueryHandler } from './application/find/find-refresh-token.query-handler';
 import { FindRefreshTokenByIdQueryHandler } from './application/find/find-refresh-token-by-id.query-handler';
+import { RawSQLRefreshTokensQueryHandler } from './application/raw-sql/raw-sql-refresh-tokens.query-handler';
 
 // events
 import { CreatedRefreshTokenEventHandler } from './application/events/created-refresh-token.event-handler';
@@ -20,6 +21,7 @@ import { PaginateRefreshTokensService } from './application/paginate/paginate-re
 import { GetRefreshTokensService } from './application/get/get-refresh-tokens.service';
 import { FindRefreshTokenService } from './application/find/find-refresh-token.service';
 import { FindRefreshTokenByIdService } from './application/find/find-refresh-token-by-id.service';
+import { RawSQLRefreshTokensService } from './application/raw-sql/raw-sql-refresh-tokens.service';
 import { DeleteRefreshTokenByIdService } from './application/delete/delete-refresh-token-by-id.service';
 import { DeleteRefreshTokensService } from './application/delete/delete-refresh-tokens.service';
 
@@ -44,6 +46,7 @@ export const OAuthRefreshTokenHandlers = [
     GetRefreshTokensQueryHandler,
     FindRefreshTokenQueryHandler,
     FindRefreshTokenByIdQueryHandler,
+    RawSQLRefreshTokensQueryHandler,
 
     // events
     CreatedRefreshTokenEventHandler,
@@ -57,6 +60,7 @@ export const OAuthRefreshTokenServices = [
     GetRefreshTokensService,
     FindRefreshTokenService,
     FindRefreshTokenByIdService,
+    RawSQLRefreshTokensService,
     DeleteRefreshTokenByIdService,
     DeleteRefreshTokensService,
 ];

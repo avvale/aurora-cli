@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 import { FindTenantByIdService } from './find-tenant-by-id.service';
 import { TenantId } from '../../domain/value-objects';
 import { ITenantRepository } from '../../domain/tenant.repository';

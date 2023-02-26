@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // custom items
 import { AuditingCreateHttpCommunicationsHandler } from './auditing-create-http-communications.handler';
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingCreateHttpCommunicationsHandler', () =>
 {

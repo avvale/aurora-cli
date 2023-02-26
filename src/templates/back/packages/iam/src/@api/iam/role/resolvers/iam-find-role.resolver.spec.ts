@@ -6,7 +6,7 @@ import { IamFindRoleResolver } from './iam-find-role.resolver';
 import { IamFindRoleHandler } from '../handlers/iam-find-role.handler';
 
 // sources
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamFindRoleResolver', () =>
 {

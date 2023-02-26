@@ -59,7 +59,11 @@ export class UpdateRolesService
         });
 
         // get objects to delete
-        const roles = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const roles = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const rolesRegister = this.publisher.mergeObjectContext(

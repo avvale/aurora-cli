@@ -11,8 +11,18 @@ export class FindScopeByIdService
         private readonly repository: IScopeRepository,
     ) {}
 
-    async main(id: ScopeId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthScope>
+    async main(
+        id: ScopeId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthScope>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

@@ -6,7 +6,7 @@ import { IamFindTenantByIdResolver } from './iam-find-tenant-by-id.resolver';
 import { IamFindTenantByIdHandler } from '../handlers/iam-find-tenant-by-id.handler';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamFindTenantByIdResolver', () =>
 {

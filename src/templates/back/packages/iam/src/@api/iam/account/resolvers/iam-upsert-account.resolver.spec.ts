@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpsertAccountResolver } from './iam-upsert-account.resolver';
 import { IamUpsertAccountHandler } from '../handlers/iam-upsert-account.handler';
-import { IamUpsertAccountInput } from '@api/graphql';
+import { IamUpdateAccountByIdInput } from '@api/graphql';
 
 // sources
 import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
@@ -50,7 +50,7 @@ describe('IamUpsertAccountResolver', () =>
         test('should return an account upserted', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await resolver.main(<IamUpsertAccountInput>accounts[0])).toBe(accounts[0]);
+            expect(await resolver.main(<IamUpdateAccountByIdInput>accounts[0])).toBe(accounts[0]);
         });
     });
 });

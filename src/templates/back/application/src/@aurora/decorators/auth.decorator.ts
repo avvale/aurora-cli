@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { applyDecorators, UseGuards } from '@nestjs/common';
-import { AuthenticationGuard, AuthorizationGuard, Permissions } from '@aurora-ts/core';
-import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationDisabledAdapterGuard, AuthorizationDisabledAdapterGuard, Permissions } from '@aurora-ts/core';
 
-export function Auth(permissions): Function
+export function Auth(...permissions: string[]): Function
 {
     return applyDecorators(
-        Permissions(permissions),
+        Permissions(...permissions),
         UseGuards(AuthenticationDisabledAdapterGuard, AuthorizationDisabledAdapterGuard),
     );
 }

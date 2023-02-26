@@ -1,10 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
-{{#if schema.hasAuditing}}
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
-{{/if}}
+import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
 
 // {{ config.appContainer }}
 import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';

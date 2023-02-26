@@ -2,7 +2,7 @@ import { BlobValueObject, DataValueObject, ValidationRules } from '@aurora-ts/co
 
 export class TenantLogo extends BlobValueObject
 {
-    public readonly type: 'TenantLogo';
+    public readonly type: string = 'TenantLogo';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

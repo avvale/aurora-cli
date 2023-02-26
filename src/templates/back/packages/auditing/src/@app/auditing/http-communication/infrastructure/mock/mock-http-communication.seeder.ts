@@ -18,7 +18,7 @@ import {
     HttpCommunicationDeletedAt,
 } from '../../domain/value-objects';
 import { AuditingHttpCommunication } from '../../domain/http-communication.aggregate';
-import { httpCommunications } from '../seeds/http-communication.seed';
+import { httpCommunications } from './mock-http-communication.data';
 import * as _ from 'lodash';
 
 @Injectable()

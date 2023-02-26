@@ -1,18 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamDeleteUsersHandler } from '../handlers/iam-delete-users.handler';
 import { IamUser } from '@api/graphql';
 
 @Resolver()
-@Permissions('iam.user.delete')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.user.delete')
 export class IamDeleteUsersResolver
 {
     constructor(

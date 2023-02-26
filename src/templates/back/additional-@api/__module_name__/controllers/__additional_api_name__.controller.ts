@@ -1,17 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post{{#if schema.hasOAuth}}, UseGuards{{/if}} } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 {{else}}
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto } from '../dto';
 {{/eq }}
-{{#if schema.hasAuditing}}
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+{{#if schema.hasOAuth}}
+import { Auth } from '@aurora/decorators';
 {{/if}}
 {{#if schema.hasTenant}}
 
@@ -28,11 +25,10 @@ import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ c
 @Controller('{{ currentAdditionalApi.path }}')
 {{#if schema.hasOAuth}}
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
 {{else}}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
 {{/eq }}
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
 {{/if}}
 export class {{ currentAdditionalApi.getClassName }}Controller
 {

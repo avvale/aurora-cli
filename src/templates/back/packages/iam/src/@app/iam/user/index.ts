@@ -12,6 +12,7 @@ import { PaginateUsersQueryHandler } from './application/paginate/paginate-users
 import { GetUsersQueryHandler } from './application/get/get-users.query-handler';
 import { FindUserQueryHandler } from './application/find/find-user.query-handler';
 import { FindUserByIdQueryHandler } from './application/find/find-user-by-id.query-handler';
+import { RawSQLUsersQueryHandler } from './application/raw-sql/raw-sql-users.query-handler';
 
 // ---- customizations ----
 import { FindUserByUsernamePasswordQueryHandler } from './application/find/find-user-by-username-password.query-handler';
@@ -31,6 +32,7 @@ import { PaginateUsersService } from './application/paginate/paginate-users.serv
 import { GetUsersService } from './application/get/get-users.service';
 import { FindUserService } from './application/find/find-user.service';
 import { FindUserByIdService } from './application/find/find-user-by-id.service';
+import { RawSQLUsersService } from './application/raw-sql/raw-sql-users.service';
 import { UpdateUserByIdService } from './application/update/update-user-by-id.service';
 import { UpdateUsersService } from './application/update/update-users.service';
 import { UpsertUserService } from './application/upsert/upsert-user.service';
@@ -65,6 +67,7 @@ export const IamUserHandlers = [
     GetUsersQueryHandler,
     FindUserQueryHandler,
     FindUserByIdQueryHandler,
+    RawSQLUsersQueryHandler,
 
     // ---- customizations ----
     FindUserByUsernamePasswordQueryHandler,
@@ -85,6 +88,7 @@ export const IamUserServices = [
     GetUsersService,
     FindUserService,
     FindUserByIdService,
+    RawSQLUsersService,
     UpdateUserByIdService,
     UpdateUsersService,
     UpsertUserService,

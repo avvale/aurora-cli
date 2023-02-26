@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { IamPermissionDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamFindPermissionByIdHandler } from '../handlers/iam-find-permission-by-id.handler';
 
 @ApiTags('[iam] permission')
 @Controller('iam/permission/find')
-@Permissions('iam.permission.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.permission.get')
 export class IamFindPermissionByIdController
 {
     constructor(

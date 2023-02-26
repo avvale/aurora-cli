@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { IamPermissionRoleDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamGetPermissionsRolesHandler } from '../handlers/iam-get-permissions-roles.handler';
 
 @ApiTags('[iam] permission-role')
 @Controller('iam/permissions-roles/get')
-@Permissions('iam.role.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.role.get')
 export class IamGetPermissionsRolesController
 {
     constructor(

@@ -8,7 +8,7 @@ import { IamAccountModel } from '@app/iam/account/infrastructure/sequelize/seque
 @Table({
     modelName: 'IamTenantsAccounts',
     freezeTableName: true,
-    timestamps: false
+    timestamps: false,
 })
 export class IamTenantsAccountsModel extends Model<IamTenantsAccountsModel>
 {

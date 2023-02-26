@@ -20,7 +20,11 @@ export class DeleteBoundedContextsService
     ): Promise<void>
     {
         // get objects to delete
-        const boundedContexts = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const boundedContexts = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         await this.repository.delete({
             queryStatement,

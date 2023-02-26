@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { IamFindTenantHandler } from './iam-find-tenant.handler';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamFindTenantHandler', () =>
 {

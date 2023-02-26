@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
 
 // @app
 import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
@@ -25,7 +22,11 @@ export class OAuthUpdateClientByIdHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthClient | OAuthClientDto>
     {
-        const client = await this.queryBus.ask(new FindClientByIdQuery(payload.id, constraint, { timezone }));
+        const client = await this.queryBus.ask(new FindClientByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
 
         const dataToUpdate = Utils.diff(payload, client);
 
@@ -43,6 +44,10 @@ export class OAuthUpdateClientByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindClientByIdQuery(payload.id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindClientByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
     }
 }

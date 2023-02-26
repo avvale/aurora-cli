@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 //
 import { CreateHttpCommunicationsCommand } from '@app/auditing/http-communication/application/create/create-http-communications.command';
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 @Injectable()
 export class AuditingHttpCommunicationSeeder

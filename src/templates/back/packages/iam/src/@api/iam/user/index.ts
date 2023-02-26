@@ -31,6 +31,9 @@ import { IamUpsertUserHandler } from './handlers/iam-upsert-user.handler';
 import { IamDeleteUserByIdHandler } from './handlers/iam-delete-user-by-id.handler';
 import { IamDeleteUsersHandler } from './handlers/iam-delete-users.handler';
 
+// seeder
+import { IamUserSeeder } from './seeder/iam-user.seeder';
+
 export const IamUserControllers = [
     IamPaginateUsersController,
     IamGetUsersController,
@@ -65,4 +68,8 @@ export const IamUserApiHandlers = [
     IamUpsertUserHandler,
     IamDeleteUserByIdHandler,
     IamDeleteUsersHandler,
+];
+
+export const IamUserServices = [
+    IamUserSeeder,
 ];

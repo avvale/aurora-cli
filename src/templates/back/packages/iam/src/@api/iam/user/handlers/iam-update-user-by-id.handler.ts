@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
 
 // @app
 import { FindUserByIdQuery } from '@app/iam/user/application/find/find-user-by-id.query';
@@ -25,7 +22,11 @@ export class IamUpdateUserByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamUser | IamUserDto>
     {
-        const user = await this.queryBus.ask(new FindUserByIdQuery(payload.id, constraint, { timezone }));
+        const user = await this.queryBus.ask(new FindUserByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
 
         const dataToUpdate = Utils.diff(payload, user);
 
@@ -43,6 +44,10 @@ export class IamUpdateUserByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindUserByIdQuery(payload.id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindUserByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
     }
 }

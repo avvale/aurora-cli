@@ -6,7 +6,7 @@ import { AuditingPaginateHttpCommunicationsController } from './auditing-paginat
 import { AuditingPaginateHttpCommunicationsHandler } from '../handlers/auditing-paginate-http-communications.handler';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingPaginateHttpCommunicationsController', () =>
 {

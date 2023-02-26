@@ -11,8 +11,18 @@ export class FindClientByIdService
         private readonly repository: IClientRepository,
     ) {}
 
-    async main(id: ClientId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthClient>
+    async main(
+        id: ClientId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthClient>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

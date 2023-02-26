@@ -44,6 +44,14 @@ export abstract class IRoleRepository implements IRepository<IamRole>
         }
     ): Promise<IamRole[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<IamRole[]>;
+
     // count records
     abstract count(
         options?: {

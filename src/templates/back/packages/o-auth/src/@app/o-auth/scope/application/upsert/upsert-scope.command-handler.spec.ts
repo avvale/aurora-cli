@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 import { UpsertScopeCommandHandler } from './upsert-scope.command-handler';
 import { UpsertScopeCommand } from './upsert-scope.command';
 import { UpsertScopeService } from './upsert-scope.service';
@@ -42,6 +42,9 @@ describe('UpsertScopeCommandHandler', () =>
             expect(await commandHandler.execute(
                 new UpsertScopeCommand(
                     {
+                        id: scopes[0].id,
+                        code: scopes[0].code,
+                        name: scopes[0].name,
                     },
                     { timezone: process.env.TZ },
                 ),

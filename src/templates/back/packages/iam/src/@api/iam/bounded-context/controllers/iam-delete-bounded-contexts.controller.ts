@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
 import { IamBoundedContextDto } from '../dto';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamDeleteBoundedContextsHandler } from '../handlers/iam-delete-bounded-contexts.handler';
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/delete')
-@Permissions('iam.boundedContext.delete')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.boundedContext.delete')
 export class IamDeleteBoundedContextsController
 {
     constructor(

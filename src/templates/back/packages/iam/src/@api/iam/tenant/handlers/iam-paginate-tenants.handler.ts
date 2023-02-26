@@ -18,6 +18,10 @@ export class IamPaginateTenantsHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateTenantsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new PaginateTenantsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

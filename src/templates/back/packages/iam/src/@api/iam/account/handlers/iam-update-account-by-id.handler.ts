@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
 import { Sequelize } from 'sequelize-typescript';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
 
 // @app
 import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';

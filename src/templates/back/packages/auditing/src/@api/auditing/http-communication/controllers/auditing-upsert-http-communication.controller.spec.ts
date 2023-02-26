@@ -6,7 +6,7 @@ import { AuditingUpsertHttpCommunicationController } from './auditing-upsert-htt
 import { AuditingUpsertHttpCommunicationHandler } from '../handlers/auditing-upsert-http-communication.handler';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingUpsertHttpCommunicationController', () =>
 {

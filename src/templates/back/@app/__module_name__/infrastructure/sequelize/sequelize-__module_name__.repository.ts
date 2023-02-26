@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '{{ config.auroraCorePackage }}';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '{{ config.auroraCorePackage }}';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Mapper } from '../../domain/{{ toKebabCase schema.moduleName }}.mapper';
@@ -16,6 +16,7 @@ export class Sequelize{{ toPascalCase schema.moduleName }}Repository extends Seq
         @InjectModel({{ schema.aggregateName }}Model)
         public readonly repository: typeof {{ schema.aggregateName }}Model,
         public readonly criteria: ICriteria,
+        public readonly auditingRunner: AuditingRunner,
     )
     {
         super();

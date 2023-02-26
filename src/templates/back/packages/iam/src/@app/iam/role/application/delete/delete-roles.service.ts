@@ -20,7 +20,11 @@ export class DeleteRolesService
     ): Promise<void>
     {
         // get objects to delete
-        const roles = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const roles = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         await this.repository.delete({
             queryStatement,

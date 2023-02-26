@@ -1,7 +1,7 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { AddI18NConstraintService, CoreModule } from '@aurora-ts/core';
+import { AddI18NConstraintService, AuditingRunner, AuditingRunnerDisabledImplementationService, CoreModule } from '@aurora-ts/core';
 import { CqrsConfigModule } from './cqrs-config.module';
 
 @Module({
@@ -13,13 +13,18 @@ import { CqrsConfigModule } from './cqrs-config.module';
         CqrsModule
     ],
     providers: [
-        AddI18NConstraintService
+        AddI18NConstraintService,
+        {
+            provide : AuditingRunner,
+            useClass: AuditingRunnerDisabledImplementationService,
+        },
     ],
     exports: [
         AddI18NConstraintService,
         CacheModule,
         ConfigModule,
         CqrsConfigModule,
+        AuditingRunner,
     ],
 })
 export class SharedModule {}

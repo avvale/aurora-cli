@@ -1,3 +1,4 @@
+// ignored file
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { CreatePermissionsCommand } from '@app/iam/permission/application/create/create-permissions.command';

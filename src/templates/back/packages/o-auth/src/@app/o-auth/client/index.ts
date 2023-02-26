@@ -12,6 +12,7 @@ import { PaginateClientsQueryHandler } from './application/paginate/paginate-cli
 import { GetClientsQueryHandler } from './application/get/get-clients.query-handler';
 import { FindClientQueryHandler } from './application/find/find-client.query-handler';
 import { FindClientByIdQueryHandler } from './application/find/find-client-by-id.query-handler';
+import { RawSQLClientsQueryHandler } from './application/raw-sql/raw-sql-clients.query-handler';
 
 // events
 import { CreatedClientEventHandler } from './application/events/created-client.event-handler';
@@ -28,6 +29,7 @@ import { PaginateClientsService } from './application/paginate/paginate-clients.
 import { GetClientsService } from './application/get/get-clients.service';
 import { FindClientService } from './application/find/find-client.service';
 import { FindClientByIdService } from './application/find/find-client-by-id.service';
+import { RawSQLClientsService } from './application/raw-sql/raw-sql-clients.service';
 import { UpdateClientByIdService } from './application/update/update-client-by-id.service';
 import { UpdateClientsService } from './application/update/update-clients.service';
 import { UpsertClientService } from './application/upsert/upsert-client.service';
@@ -59,6 +61,7 @@ export const OAuthClientHandlers = [
     GetClientsQueryHandler,
     FindClientQueryHandler,
     FindClientByIdQueryHandler,
+    RawSQLClientsQueryHandler,
 
     // events
     CreatedClientEventHandler,
@@ -76,6 +79,7 @@ export const OAuthClientServices = [
     GetClientsService,
     FindClientService,
     FindClientByIdService,
+    RawSQLClientsService,
     UpdateClientByIdService,
     UpdateClientsService,
     UpsertClientService,

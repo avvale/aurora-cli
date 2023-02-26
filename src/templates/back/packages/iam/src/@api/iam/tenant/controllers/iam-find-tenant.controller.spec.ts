@@ -6,7 +6,7 @@ import { IamFindTenantController } from './iam-find-tenant.controller';
 import { IamFindTenantHandler } from '../handlers/iam-find-tenant.handler';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamFindTenantController', () =>
 {

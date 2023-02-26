@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteHttpCommunicationByIdCommandHandler } from './delete-http-communication-by-id.command-handler';
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 import { DeleteHttpCommunicationByIdCommand } from './delete-http-communication-by-id.command';
 import { DeleteHttpCommunicationByIdService } from './delete-http-communication-by-id.service';
 

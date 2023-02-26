@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // @app
 import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
@@ -34,6 +31,10 @@ export class OAuthUpsertClientHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindClientByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new FindClientByIdQuery(
+            payload.id,
+            {},
+            { timezone },
+        ));
     }
 }

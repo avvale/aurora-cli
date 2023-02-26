@@ -6,7 +6,7 @@ import { AuditingFindHttpCommunicationController } from './auditing-find-http-co
 import { AuditingFindHttpCommunicationHandler } from '../handlers/auditing-find-http-communication.handler';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingFindHttpCommunicationController', () =>
 {

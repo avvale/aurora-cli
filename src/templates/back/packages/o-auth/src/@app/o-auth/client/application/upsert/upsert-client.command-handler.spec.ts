@@ -42,6 +42,18 @@ describe('UpsertClientCommandHandler', () =>
             expect(await commandHandler.execute(
                 new UpsertClientCommand(
                     {
+                        id: clients[0].id,
+                        grantType: clients[0].grantType,
+                        name: clients[0].name,
+                        secret: clients[0].secret,
+                        authUrl: clients[0].authUrl,
+                        redirect: clients[0].redirect,
+                        scopeOptions: clients[0].scopeOptions,
+                        expiredAccessToken: clients[0].expiredAccessToken,
+                        expiredRefreshToken: clients[0].expiredRefreshToken,
+                        isActive: clients[0].isActive,
+                        isMaster: clients[0].isMaster,
+                        applicationIds: clients[0].applicationIds,
                     },
                     { timezone: process.env.TZ },
                 ),

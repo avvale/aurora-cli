@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { OAuthFindRefreshTokenHandler } from './o-auth-find-refresh-token.handler';
 
 // sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 
 describe('OAuthFindRefreshTokenHandler', () =>
 {

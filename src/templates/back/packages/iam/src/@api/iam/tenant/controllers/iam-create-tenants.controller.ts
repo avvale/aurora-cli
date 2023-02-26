@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
 import { IamTenantDto, IamCreateTenantDto } from '../dto';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
 
 @ApiTags('[iam] tenant')
 @Controller('iam/tenants/create')
-@Permissions('iam.tenant.create')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.tenant.create')
 export class IamCreateTenantsController
 {
     constructor(

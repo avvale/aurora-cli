@@ -1,5 +1,5 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}{{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasOAuth}}
 import { Auth } from '@aurora/decorators';
 {{/if}}

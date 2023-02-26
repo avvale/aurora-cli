@@ -1,5 +1,8 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
+{{#if schema.hasAuditing}}
+import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurora-ts/core';
+{{/if}}
 import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withImportRelationshipOneToOne}}
@@ -19,12 +22,6 @@ import { {{ pivotAggregateName }}Model } from '{{ config.appContainer }}/{{ pivo
 {{/each}}
 {{#if schema.properties.hasI18n}}
 import { {{ schema.aggregateName }}I18NModel } from './sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
-{{/if}}
-{{#if schema.hasAuditing}}
-
-// auditing
-import { SequelizeAuditingAgent } from '{{ config.appContainer }}/auditing/side-effect/infrastructure/sequelize/sequelize-auditing-agent';
-import { AuditingSideEffectEvent } from '{{ config.apiContainer }}/graphql';
 {{/if}}
 
 @Table({

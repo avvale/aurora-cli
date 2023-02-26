@@ -65,7 +65,11 @@ export class UpdateTenantsService
         });
 
         // get objects to delete
-        const tenants = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const tenants = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantsRegister = this.publisher.mergeObjectContext(

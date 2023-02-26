@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamFindAccountHandler } from '../handlers/iam-find-account.handler';
 import { IamAccount } from '@api/graphql';
 
 @Resolver()
-@Permissions('iam.account.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.account.get')
 export class IamFindAccountResolver
 {
     constructor(

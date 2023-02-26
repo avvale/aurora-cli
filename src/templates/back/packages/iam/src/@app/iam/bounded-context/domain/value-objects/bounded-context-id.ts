@@ -2,7 +2,7 @@ import { DataValueObject, UuidValueObject, ValidationRules } from '@aurora-ts/co
 
 export class BoundedContextId extends UuidValueObject
 {
-    public readonly type: 'BoundedContextId';
+    public readonly type: string = 'BoundedContextId';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

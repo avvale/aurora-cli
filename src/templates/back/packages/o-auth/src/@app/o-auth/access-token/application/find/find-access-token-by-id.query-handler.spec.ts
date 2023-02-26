@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindAccessTokenByIdQueryHandler } from './find-access-token-by-id.query-handler';
 import { MockAccessTokenRepository } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.repository';
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 import { IAccessTokenRepository } from '@app/o-auth/access-token/domain/access-token.repository';
 import { AccessTokenMapper } from '@app/o-auth/access-token/domain/access-token.mapper';
 import { FindAccessTokenByIdQuery } from './find-access-token-by-id.query';

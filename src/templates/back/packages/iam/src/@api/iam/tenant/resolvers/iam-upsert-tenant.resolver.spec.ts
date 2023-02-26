@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { IamUpsertTenantResolver } from './iam-upsert-tenant.resolver';
 import { IamUpsertTenantHandler } from '../handlers/iam-upsert-tenant.handler';
-import { IamUpsertTenantInput } from '@api/graphql';
+import { IamUpdateTenantByIdInput } from '@api/graphql';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamUpsertTenantResolver', () =>
 {

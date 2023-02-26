@@ -1,8 +1,7 @@
 import { BadRequestException, Logger } from '@nestjs/common';
-import { Utils } from '@aurora-ts/core';
+import { AuditingMeta, Utils } from '@aurora-ts/core';
 import { AuditingSideEffectEvent } from '@api/graphql';
 import { AuditingSideEffectModel } from './sequelize-side-effect.model';
-import { AuditingMeta } from '@api/auditing/auditing.types';
 import * as _ from 'lodash';
 
 export class SequelizeAuditingAgent
@@ -96,32 +95,17 @@ export class SequelizeAuditingAgent
                 break;
         }
 
-        AuditingSideEffectModel.create({
-            id                  : auditingMeta.id ? auditingMeta.id : Utils.uuid(), // defined id when execute rollback to fill rollbackSideEffectId column
+        // execute auditing runner
+        auditingMeta.auditingRunner.create(
+            auditingMeta,
+            now,
+            event,
             modelPath,
             modelName,
-            operationId         : auditingMeta.operationId,
-            operationSort       : auditingMeta.operationSort,
-            accountId           : auditingMeta.account.id,
-            email               : auditingMeta.account.email,
-            event,
             auditableId,
             oldValue,
             newValue,
-            ip                  : auditingMeta.ip,
-            method              : auditingMeta.method,
-            baseUrl             : auditingMeta.baseUrl,
-            params              : auditingMeta.params,
-            query               : auditingMeta.query,
-            body                : auditingMeta.body,
-            userAgent           : auditingMeta.userAgent,
-            tags                : auditingMeta.tags,
-            isRollback          : false,
-            rollbackSideEffectId: null,
-            createdAt           : now,
-            updatedAt           : now,
-            deletedAt           : null,
-        });
+        );
     }
 
     private static parseObject(object: any): any

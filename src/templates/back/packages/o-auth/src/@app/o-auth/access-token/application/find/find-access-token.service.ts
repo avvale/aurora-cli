@@ -11,8 +11,16 @@ export class FindAccessTokenService
         private readonly repository: IAccessTokenRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthAccessToken>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthAccessToken>
     {
-        return await this.repository.find({ queryStatement, constraint, cQMetadata });
+        return await this.repository.find({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

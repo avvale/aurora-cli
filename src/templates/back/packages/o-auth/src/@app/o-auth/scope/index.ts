@@ -12,6 +12,7 @@ import { PaginateScopesQueryHandler } from './application/paginate/paginate-scop
 import { GetScopesQueryHandler } from './application/get/get-scopes.query-handler';
 import { FindScopeQueryHandler } from './application/find/find-scope.query-handler';
 import { FindScopeByIdQueryHandler } from './application/find/find-scope-by-id.query-handler';
+import { RawSQLScopesQueryHandler } from './application/raw-sql/raw-sql-scopes.query-handler';
 
 // events
 import { CreatedScopeEventHandler } from './application/events/created-scope.event-handler';
@@ -28,6 +29,7 @@ import { PaginateScopesService } from './application/paginate/paginate-scopes.se
 import { GetScopesService } from './application/get/get-scopes.service';
 import { FindScopeService } from './application/find/find-scope.service';
 import { FindScopeByIdService } from './application/find/find-scope-by-id.service';
+import { RawSQLScopesService } from './application/raw-sql/raw-sql-scopes.service';
 import { UpdateScopeByIdService } from './application/update/update-scope-by-id.service';
 import { UpdateScopesService } from './application/update/update-scopes.service';
 import { UpsertScopeService } from './application/upsert/upsert-scope.service';
@@ -59,6 +61,7 @@ export const OAuthScopeHandlers = [
     GetScopesQueryHandler,
     FindScopeQueryHandler,
     FindScopeByIdQueryHandler,
+    RawSQLScopesQueryHandler,
 
     // events
     CreatedScopeEventHandler,
@@ -76,6 +79,7 @@ export const OAuthScopeServices = [
     GetScopesService,
     FindScopeService,
     FindScopeByIdService,
+    RawSQLScopesService,
     UpdateScopeByIdService,
     UpdateScopesService,
     UpsertScopeService,

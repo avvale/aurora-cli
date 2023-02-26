@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Pagination, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Pagination, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthPaginateAccessTokensHandler } from '../handlers/o-auth-paginate-access-tokens.handler';
 
 @ApiTags('[o-auth] access-token')
 @Controller('o-auth/access-tokens/paginate')
-@Permissions('oAuth.accessToken.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.accessToken.get')
 export class OAuthPaginateAccessTokensController
 {
     constructor(

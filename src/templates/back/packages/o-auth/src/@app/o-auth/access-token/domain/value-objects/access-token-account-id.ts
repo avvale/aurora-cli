@@ -2,7 +2,7 @@ import { DataValueObject, UuidValueObject, ValidationRules } from '@aurora-ts/co
 
 export class AccessTokenAccountId extends UuidValueObject
 {
-    public readonly type: 'AccessTokenAccountId';
+    public readonly type: string = 'AccessTokenAccountId';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

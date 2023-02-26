@@ -44,6 +44,14 @@ export abstract class IAccessTokenRepository implements IRepository<OAuthAccessT
         }
     ): Promise<OAuthAccessToken[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<OAuthAccessToken[]>;
+
     // count records
     abstract count(
         options?: {

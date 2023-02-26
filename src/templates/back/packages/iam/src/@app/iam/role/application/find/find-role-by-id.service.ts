@@ -11,8 +11,18 @@ export class FindRoleByIdService
         private readonly repository: IRoleRepository,
     ) {}
 
-    async main(id: RoleId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamRole>
+    async main(
+        id: RoleId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamRole>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

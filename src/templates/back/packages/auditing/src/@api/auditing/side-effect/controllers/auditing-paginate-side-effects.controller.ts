@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Pagination, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Pagination, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { AuditingPaginateSideEffectsHandler } from '../handlers/auditing-paginate-side-effects.handler';
 
 @ApiTags('[auditing] side-effect')
 @Controller('auditing/side-effects/paginate')
-@Permissions('auditing.sideEffect.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('auditing.sideEffect.get')
 export class AuditingPaginateSideEffectsController
 {
     constructor(

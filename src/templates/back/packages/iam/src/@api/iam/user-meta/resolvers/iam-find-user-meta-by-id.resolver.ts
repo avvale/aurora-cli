@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
+import { Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamFindUserMetaByIdHandler } from '../handlers/iam-find-user-meta-by-id.handler';
 import { IamUserMeta } from '@api/graphql';
 
 @Resolver()
-@Permissions('iam.userData.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.userData.get')
 export class IamFindUserMetaByIdResolver
 {
     constructor(

@@ -11,8 +11,18 @@ export class FindRefreshTokenByIdService
         private readonly repository: IRefreshTokenRepository,
     ) {}
 
-    async main(id: RefreshTokenId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthRefreshToken>
+    async main(
+        id: RefreshTokenId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthRefreshToken>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

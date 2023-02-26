@@ -6,7 +6,7 @@ import { OAuthUpdateScopeByIdController } from './o-auth-update-scope-by-id.cont
 import { OAuthUpdateScopeByIdHandler } from '../handlers/o-auth-update-scope-by-id.handler';
 
 // sources
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthUpdateScopeByIdController', () =>
 {

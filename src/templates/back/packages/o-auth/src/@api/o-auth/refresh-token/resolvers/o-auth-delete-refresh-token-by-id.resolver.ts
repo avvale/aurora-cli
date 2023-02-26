@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthDeleteRefreshTokenByIdHandler } from '../handlers/o-auth-delete-refresh-token-by-id.handler';
 import { OAuthRefreshToken } from '@api/graphql';
 
 @Resolver()
-@Permissions('oAuth.refreshToken.delete')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.refreshToken.delete')
 export class OAuthDeleteRefreshTokenByIdResolver
 {
     constructor(

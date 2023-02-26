@@ -87,6 +87,10 @@ type Mutation
         constraint: QueryStatement
     ): [OAuthApplication]!
 
+    oAuthUpsertApplication(
+        payload: OAuthUpdateApplicationByIdInput!
+    ): OAuthApplication
+
     oAuthDeleteApplicationById(
         id: ID!
         constraint: QueryStatement

@@ -6,7 +6,7 @@ import { AuditingFindHttpCommunicationByIdResolver } from './auditing-find-http-
 import { AuditingFindHttpCommunicationByIdHandler } from '../handlers/auditing-find-http-communication-by-id.handler';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingFindHttpCommunicationByIdResolver', () =>
 {

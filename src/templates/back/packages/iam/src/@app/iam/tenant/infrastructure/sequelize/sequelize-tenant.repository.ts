@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { ITenantRepository } from '../../domain/tenant.repository';
 import { IamTenant } from '../../domain/tenant.aggregate';
 import { TenantMapper } from '../../domain/tenant.mapper';
@@ -16,6 +16,7 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
         @InjectModel(IamTenantModel)
         public readonly repository: typeof IamTenantModel,
         public readonly criteria: ICriteria,
+        public readonly auditingRunner: AuditingRunner,
     )
     {
         super();

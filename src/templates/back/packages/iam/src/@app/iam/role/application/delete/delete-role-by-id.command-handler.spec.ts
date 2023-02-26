@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteRoleByIdCommandHandler } from './delete-role-by-id.command-handler';
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 import { DeleteRoleByIdCommand } from './delete-role-by-id.command';
 import { DeleteRoleByIdService } from './delete-role-by-id.service';
 

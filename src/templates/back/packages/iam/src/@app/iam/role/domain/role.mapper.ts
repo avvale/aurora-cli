@@ -40,7 +40,7 @@ export class RoleMapper implements IMapper
     {
         if (!Array.isArray(roles)) return;
 
-        return roles.map(role  => this.makeAggregate(role, cQMetadata));
+        return roles.map(role => this.makeAggregate(role, cQMetadata));
     }
 
     /**

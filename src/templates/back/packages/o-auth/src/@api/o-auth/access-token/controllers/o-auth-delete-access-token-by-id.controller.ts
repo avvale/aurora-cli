@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Param, Delete, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Delete } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, QueryStatement, Permissions, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
 import { OAuthAccessTokenDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthDeleteAccessTokenByIdHandler } from '../handlers/o-auth-delete-access-token-by-id.handler';
 
 @ApiTags('[o-auth] access-token')
 @Controller('o-auth/access-token/delete')
-@Permissions('oAuth.accessToken.delete')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.accessToken.delete')
 export class OAuthDeleteAccessTokenByIdController
 {
     constructor(

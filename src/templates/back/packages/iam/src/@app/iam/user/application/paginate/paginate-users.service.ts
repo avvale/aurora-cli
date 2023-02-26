@@ -12,8 +12,16 @@ export class PaginateUsersService
         private readonly repository: IUserRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<Pagination<IamUser>>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<Pagination<IamUser>>
     {
-        return await this.repository.paginate({ queryStatement, constraint, cQMetadata });
+        return await this.repository.paginate({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

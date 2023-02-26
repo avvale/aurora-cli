@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, QueryStatement, Permissions, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { OAuthRefreshTokenDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthFindRefreshTokenByIdHandler } from '../handlers/o-auth-find-refresh-token-by-id.handler';
 
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-token/find')
-@Permissions('oAuth.refreshToken.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.refreshToken.get')
 export class OAuthFindRefreshTokenByIdController
 {
     constructor(

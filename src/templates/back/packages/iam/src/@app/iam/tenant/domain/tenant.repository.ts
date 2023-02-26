@@ -44,6 +44,14 @@ export abstract class ITenantRepository implements IRepository<IamTenant>
         }
     ): Promise<IamTenant[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<IamTenant[]>;
+
     // count records
     abstract count(
         options?: {

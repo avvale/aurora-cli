@@ -14,7 +14,7 @@ import * as _ from 'lodash';
 // has OAuth
 import { IamModule } from '@api/iam/iam.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
-import { AuthenticationGuard, AuthorizationGuard } from '@aurora-ts/core';
+import { AuthenticationGuard, AuthorizationGuard } from '@aurora-ts/core';<
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

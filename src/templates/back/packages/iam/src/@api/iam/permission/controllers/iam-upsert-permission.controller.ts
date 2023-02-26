@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
 import { IamPermissionDto, IamUpdatePermissionByIdDto } from '../dto';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamUpsertPermissionHandler } from '../handlers/iam-upsert-permission.handler';
 
 @ApiTags('[iam] permission')
 @Controller('iam/permission/upsert')
-@Permissions('iam.permission.upsert')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.permission.upsert')
 export class IamUpsertPermissionController
 {
     constructor(

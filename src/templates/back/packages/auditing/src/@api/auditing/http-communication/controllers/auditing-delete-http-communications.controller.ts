@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
 import { AuditingHttpCommunicationDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { AuditingDeleteHttpCommunicationsHandler } from '../handlers/auditing-delete-http-communications.handler';
 
 @ApiTags('[auditing] http-communication')
 @Controller('auditing/http-communications/delete')
-@Permissions('auditing.httpCommunication.delete')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('auditing.httpCommunication.delete')
 export class AuditingDeleteHttpCommunicationsController
 {
     constructor(

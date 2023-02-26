@@ -40,7 +40,7 @@ export class ApplicationMapper implements IMapper
     {
         if (!Array.isArray(applications)) return;
 
-        return applications.map(application  => this.makeAggregate(application, cQMetadata));
+        return applications.map(application => this.makeAggregate(application, cQMetadata));
     }
 
     /**

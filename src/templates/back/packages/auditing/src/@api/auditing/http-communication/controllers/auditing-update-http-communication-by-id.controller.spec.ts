@@ -6,7 +6,7 @@ import { AuditingUpdateHttpCommunicationByIdController } from './auditing-update
 import { AuditingUpdateHttpCommunicationByIdHandler } from '../handlers/auditing-update-http-communication-by-id.handler';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingUpdateHttpCommunicationByIdController', () =>
 {

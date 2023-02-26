@@ -6,7 +6,7 @@ import { IamUpsertRoleController } from './iam-upsert-role.controller';
 import { IamUpsertRoleHandler } from '../handlers/iam-upsert-role.handler';
 
 // sources
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamUpsertRoleController', () =>
 {

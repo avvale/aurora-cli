@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindScopeByIdQueryHandler } from './find-scope-by-id.query-handler';
 import { MockScopeRepository } from '@app/o-auth/scope/infrastructure/mock/mock-scope.repository';
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 import { IScopeRepository } from '@app/o-auth/scope/domain/scope.repository';
 import { ScopeMapper } from '@app/o-auth/scope/domain/scope.mapper';
 import { FindScopeByIdQuery } from './find-scope-by-id.query';

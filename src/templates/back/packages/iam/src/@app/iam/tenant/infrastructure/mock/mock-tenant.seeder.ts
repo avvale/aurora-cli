@@ -13,7 +13,7 @@ import {
     TenantDeletedAt,
 } from '../../domain/value-objects';
 import { IamTenant } from '../../domain/tenant.aggregate';
-import { tenants } from '../seeds/tenant.seed';
+import { tenants } from './mock-tenant.data';
 import * as _ from 'lodash';
 
 @Injectable()

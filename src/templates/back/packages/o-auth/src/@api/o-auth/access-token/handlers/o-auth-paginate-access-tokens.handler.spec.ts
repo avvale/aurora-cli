@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurora-ts/core';
 import { OAuthPaginateAccessTokensHandler } from './o-auth-paginate-access-tokens.handler';
 
 // sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 
 describe('OAuthPaginateAccessTokensHandler', () =>
 {

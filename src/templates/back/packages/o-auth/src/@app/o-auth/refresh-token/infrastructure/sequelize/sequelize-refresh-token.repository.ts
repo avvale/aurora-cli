@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IRefreshTokenRepository } from '../../domain/refresh-token.repository';
 import { OAuthRefreshToken } from '../../domain/refresh-token.aggregate';
 import { RefreshTokenMapper } from '../../domain/refresh-token.mapper';
@@ -16,6 +16,7 @@ export class SequelizeRefreshTokenRepository extends SequelizeRepository<OAuthRe
         @InjectModel(OAuthRefreshTokenModel)
         public readonly repository: typeof OAuthRefreshTokenModel,
         public readonly criteria: ICriteria,
+        public readonly auditingRunner: AuditingRunner,
     )
     {
         super();

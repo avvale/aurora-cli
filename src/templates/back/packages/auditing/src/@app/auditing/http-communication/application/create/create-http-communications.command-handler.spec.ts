@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 import { CreateHttpCommunicationsCommandHandler } from './create-http-communications.command-handler';
 import { CreateHttpCommunicationsCommand } from './create-http-communications.command';
 import { CreateHttpCommunicationsService } from './create-http-communications.service';

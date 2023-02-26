@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus } from '@aurora-ts/core';
 
 // @app
 import { CreatePermissionsCommand } from '@app/iam/permission/application/create/create-permissions.command';

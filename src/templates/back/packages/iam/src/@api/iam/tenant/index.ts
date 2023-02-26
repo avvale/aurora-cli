@@ -37,6 +37,9 @@ import { IamUpsertTenantHandler } from './handlers/iam-upsert-tenant.handler';
 import { IamDeleteTenantByIdHandler } from './handlers/iam-delete-tenant-by-id.handler';
 import { IamDeleteTenantsHandler } from './handlers/iam-delete-tenants.handler';
 
+// seeder
+import { IamTenantSeeder } from './seeder/iam-tenant.seeder';
+
 export const IamTenantControllers = [
     IamCreateTenantController,
     IamCreateTenantsController,
@@ -77,4 +80,8 @@ export const IamTenantApiHandlers = [
     IamUpsertTenantHandler,
     IamDeleteTenantByIdHandler,
     IamDeleteTenantsHandler,
+];
+
+export const IamTenantServices = [
+    IamTenantSeeder,
 ];

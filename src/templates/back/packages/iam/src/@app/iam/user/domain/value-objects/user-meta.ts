@@ -2,7 +2,7 @@ import { JsonValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class UserMeta extends JsonValueObject
 {
-    public readonly type: 'UserMeta';
+    public readonly type: string = 'UserMeta';
 
     constructor(value: any, validationRules: ValidationRules = {})
     {

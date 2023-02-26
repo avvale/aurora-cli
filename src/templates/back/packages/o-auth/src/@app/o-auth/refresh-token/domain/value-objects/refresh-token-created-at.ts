@@ -2,7 +2,7 @@ import { DataValueObject, TimestampValueObject, ValidationRules } from '@aurora-
 
 export class RefreshTokenCreatedAt extends TimestampValueObject
 {
-    public readonly type: 'RefreshTokenCreatedAt';
+    public readonly type: string = 'RefreshTokenCreatedAt';
 
     constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

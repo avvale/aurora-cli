@@ -36,7 +36,7 @@ export class ScopeMapper implements IMapper
     {
         if (!Array.isArray(scopes)) return;
 
-        return scopes.map(scope  => this.makeAggregate(scope, cQMetadata));
+        return scopes.map(scope => this.makeAggregate(scope, cQMetadata));
     }
 
     /**

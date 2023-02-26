@@ -6,7 +6,7 @@ import { IamUpsertTenantController } from './iam-upsert-tenant.controller';
 import { IamUpsertTenantHandler } from '../handlers/iam-upsert-tenant.handler';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamUpsertTenantController', () =>
 {

@@ -11,8 +11,18 @@ export class FindBoundedContextByIdService
         private readonly repository: IBoundedContextRepository,
     ) {}
 
-    async main(id: BoundedContextId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamBoundedContext>
+    async main(
+        id: BoundedContextId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamBoundedContext>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

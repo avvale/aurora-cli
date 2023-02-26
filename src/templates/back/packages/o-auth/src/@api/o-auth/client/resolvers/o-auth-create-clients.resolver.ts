@@ -1,18 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthCreateClientsHandler } from '../handlers/o-auth-create-clients.handler';
 import { OAuthCreateClientInput } from '@api/graphql';
 
 @Resolver()
-@Permissions('oAuth.client.create')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.client.create')
 export class OAuthCreateClientsResolver
 {
     constructor(

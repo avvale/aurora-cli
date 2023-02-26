@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
 
 // @app
 import { FindBoundedContextByIdQuery } from '@app/iam/bounded-context/application/find/find-bounded-context-by-id.query';
@@ -25,7 +22,11 @@ export class IamUpdateBoundedContextByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamBoundedContext | IamBoundedContextDto>
     {
-        const boundedContext = await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, constraint, { timezone }));
+        const boundedContext = await this.queryBus.ask(new FindBoundedContextByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
 
         const dataToUpdate = Utils.diff(payload, boundedContext);
 
@@ -43,6 +44,10 @@ export class IamUpdateBoundedContextByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindBoundedContextByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
     }
 }

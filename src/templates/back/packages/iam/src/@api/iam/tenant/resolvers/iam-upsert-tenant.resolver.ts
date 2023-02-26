@@ -1,18 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamUpsertTenantHandler } from '../handlers/iam-upsert-tenant.handler';
 import { IamTenant, IamUpdateTenantByIdInput } from '@api/graphql';
 
 @Resolver()
-@Permissions('iam.tenant.upsert')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.tenant.upsert')
 export class IamUpsertTenantResolver
 {
     constructor(

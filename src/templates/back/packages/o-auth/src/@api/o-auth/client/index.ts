@@ -37,6 +37,9 @@ import { OAuthUpsertClientHandler } from './handlers/o-auth-upsert-client.handle
 import { OAuthDeleteClientByIdHandler } from './handlers/o-auth-delete-client-by-id.handler';
 import { OAuthDeleteClientsHandler } from './handlers/o-auth-delete-clients.handler';
 
+// seeder
+import { OAuthClientSeeder } from './seeder/o-auth-client.seeder';
+
 export const OAuthClientControllers = [
     OAuthCreateClientController,
     OAuthCreateClientsController,
@@ -77,4 +80,8 @@ export const OAuthClientApiHandlers = [
     OAuthUpsertClientHandler,
     OAuthDeleteClientByIdHandler,
     OAuthDeleteClientsHandler,
+];
+
+export const OAuthClientServices = [
+    OAuthClientSeeder,
 ];

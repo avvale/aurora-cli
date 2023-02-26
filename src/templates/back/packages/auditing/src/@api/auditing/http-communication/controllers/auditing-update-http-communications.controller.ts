@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body, UseGuards } from '@nestjs/common';
+import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
 import { AuditingHttpCommunicationDto, AuditingUpdateHttpCommunicationsDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { AuditingUpdateHttpCommunicationsHandler } from '../handlers/auditing-update-http-communications.handler';
 
 @ApiTags('[auditing] http-communication')
 @Controller('auditing/http-communications/update')
-@Permissions('auditing.httpCommunication.update')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('auditing.httpCommunication.update')
 export class AuditingUpdateHttpCommunicationsController
 {
     constructor(

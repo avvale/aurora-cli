@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { ISideEffectRepository } from '../../domain/side-effect.repository';
 import { AuditingSideEffect } from '../../domain/side-effect.aggregate';
 import { SideEffectMapper } from '../../domain/side-effect.mapper';
@@ -16,6 +16,7 @@ export class SequelizeSideEffectRepository extends SequelizeRepository<AuditingS
         @InjectModel(AuditingSideEffectModel)
         public readonly repository: typeof AuditingSideEffectModel,
         public readonly criteria: ICriteria,
+        public readonly auditingRunner: AuditingRunner,
     )
     {
         super();

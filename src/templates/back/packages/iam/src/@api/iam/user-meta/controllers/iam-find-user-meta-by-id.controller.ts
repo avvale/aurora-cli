@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, HttpCode, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
+import { Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 import { IamUserMetaDto } from '../dto';
 
 // @app
@@ -9,8 +10,7 @@ import { IamFindUserMetaByIdHandler } from '../handlers/iam-find-user-meta-by-id
 
 @ApiTags('[iam] user')
 @Controller('iam/user-data/find')
-@Permissions('iam.userData.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.userData.get')
 export class IamFindUserMetaByIdController
 {
     constructor(

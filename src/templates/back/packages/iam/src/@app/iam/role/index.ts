@@ -12,6 +12,7 @@ import { PaginateRolesQueryHandler } from './application/paginate/paginate-roles
 import { GetRolesQueryHandler } from './application/get/get-roles.query-handler';
 import { FindRoleQueryHandler } from './application/find/find-role.query-handler';
 import { FindRoleByIdQueryHandler } from './application/find/find-role-by-id.query-handler';
+import { RawSQLRolesQueryHandler } from './application/raw-sql/raw-sql-roles.query-handler';
 
 // events
 import { CreatedRoleEventHandler } from './application/events/created-role.event-handler';
@@ -28,6 +29,7 @@ import { PaginateRolesService } from './application/paginate/paginate-roles.serv
 import { GetRolesService } from './application/get/get-roles.service';
 import { FindRoleService } from './application/find/find-role.service';
 import { FindRoleByIdService } from './application/find/find-role-by-id.service';
+import { RawSQLRolesService } from './application/raw-sql/raw-sql-roles.service';
 import { UpdateRoleByIdService } from './application/update/update-role-by-id.service';
 import { UpdateRolesService } from './application/update/update-roles.service';
 import { UpsertRoleService } from './application/upsert/upsert-role.service';
@@ -66,6 +68,7 @@ export const IamRoleHandlers = [
     GetRolesQueryHandler,
     FindRoleQueryHandler,
     FindRoleByIdQueryHandler,
+    RawSQLRolesQueryHandler,
 
     // events
     CreatedRoleEventHandler,
@@ -87,6 +90,7 @@ export const IamRoleServices = [
     GetRolesService,
     FindRoleService,
     FindRoleByIdService,
+    RawSQLRolesService,
     UpdateRoleByIdService,
     UpdateRolesService,
     UpsertRoleService,

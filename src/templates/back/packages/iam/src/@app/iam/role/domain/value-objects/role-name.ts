@@ -2,7 +2,7 @@ import { StringValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class RoleName extends StringValueObject
 {
-    public readonly type: 'RoleName';
+    public readonly type: string = 'RoleName';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {

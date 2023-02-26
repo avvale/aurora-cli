@@ -2,7 +2,7 @@ import { BooleanValueObject, DataValueObject, ValidationRules } from '@aurora-ts
 
 export class ClientIsActive extends BooleanValueObject
 {
-    public readonly type: 'ClientIsActive';
+    public readonly type: string = 'ClientIsActive';
 
     constructor(value: boolean, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

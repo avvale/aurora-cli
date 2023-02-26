@@ -68,7 +68,7 @@ export class UpsertClientService
 
         await this.repository
             .upsert(client, {
-                upsertOptions: cQMetadata?.repositoryOptions
+                upsertOptions: cQMetadata?.repositoryOptions,
             });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events

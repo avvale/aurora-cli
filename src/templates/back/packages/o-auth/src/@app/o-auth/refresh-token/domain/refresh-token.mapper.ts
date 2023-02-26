@@ -39,7 +39,7 @@ export class RefreshTokenMapper implements IMapper
     {
         if (!Array.isArray(refreshTokens)) return;
 
-        return refreshTokens.map(refreshToken  => this.makeAggregate(refreshToken, cQMetadata));
+        return refreshTokens.map(refreshToken => this.makeAggregate(refreshToken, cQMetadata));
     }
 
     /**

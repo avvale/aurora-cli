@@ -11,8 +11,16 @@ export class GetUsersService
         private readonly repository: IUserRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamUser[]>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamUser[]>
     {
-        return await this.repository.get({ queryStatement, constraint, cQMetadata });
+        return await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

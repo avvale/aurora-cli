@@ -11,7 +11,7 @@ import {
     RoleDeletedAt,
 } from '../../domain/value-objects';
 import { IamRole } from '../../domain/role.aggregate';
-import { roles } from '../seeds/role.seed';
+import { roles } from './mock-role.data';
 import * as _ from 'lodash';
 
 @Injectable()

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, HttpCode, Headers, Get, UseGuards } from '@nestjs/common';
+import { Controller, HttpCode, Headers, Get } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { AuthenticationGuard } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 import { IamAccountDto } from '../dto';
 
 // @app
@@ -9,7 +9,7 @@ import { IamMeAccountHandler } from '../handlers/iam-me-account.handler';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/me')
-@UseGuards(AuthenticationGuard)
+@Auth()
 export class IamMeAccountController
 {
     constructor(

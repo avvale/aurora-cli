@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus } from '@aurora-ts/core';
 
 // @app
 import { CreateSideEffectsCommand } from '@app/auditing/side-effect/application/create/create-side-effects.command';

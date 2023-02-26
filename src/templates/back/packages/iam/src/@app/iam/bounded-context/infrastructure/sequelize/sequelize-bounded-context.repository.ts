@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
 import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 import { BoundedContextMapper } from '../../domain/bounded-context.mapper';
@@ -16,6 +16,7 @@ export class SequelizeBoundedContextRepository extends SequelizeRepository<IamBo
         @InjectModel(IamBoundedContextModel)
         public readonly repository: typeof IamBoundedContextModel,
         public readonly criteria: ICriteria,
+        public readonly auditingRunner: AuditingRunner,
     )
     {
         super();

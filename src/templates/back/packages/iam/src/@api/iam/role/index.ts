@@ -37,6 +37,9 @@ import { IamUpsertRoleHandler } from './handlers/iam-upsert-role.handler';
 import { IamDeleteRoleByIdHandler } from './handlers/iam-delete-role-by-id.handler';
 import { IamDeleteRolesHandler } from './handlers/iam-delete-roles.handler';
 
+// seeder
+import { IamRoleSeeder } from './seeder/iam-role.seeder';
+
 export const IamRoleControllers = [
     IamCreateRoleController,
     IamCreateRolesController,
@@ -77,4 +80,8 @@ export const IamRoleApiHandlers = [
     IamUpsertRoleHandler,
     IamDeleteRoleByIdHandler,
     IamDeleteRolesHandler,
+];
+
+export const IamRoleServices = [
+    IamRoleSeeder,
 ];

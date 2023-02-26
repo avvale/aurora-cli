@@ -44,6 +44,14 @@ export abstract class IUserRepository implements IRepository<IamUser>
         }
     ): Promise<IamUser[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<IamUser[]>;
+
     // count records
     abstract count(
         options?: {

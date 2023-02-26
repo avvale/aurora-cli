@@ -9,6 +9,10 @@ import { DataTypes } from 'sequelize';
     timestamps: false,
     indexes: [
         {
+            fields: ['tags'],
+            unique: false,
+        },
+        {
             fields: ['reprocessingHttpCommunicationId'],
             unique: false,
         },

@@ -11,8 +11,16 @@ export class FindRoleService
         private readonly repository: IRoleRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamRole>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamRole>
     {
-        return await this.repository.find({ queryStatement, constraint, cQMetadata });
+        return await this.repository.find({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

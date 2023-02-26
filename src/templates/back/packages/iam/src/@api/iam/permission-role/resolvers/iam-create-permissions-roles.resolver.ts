@@ -1,18 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, Timezone } from '@aurora-ts/core';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamCreatePermissionsRolesHandler } from '../handlers/iam-create-permissions-roles.handler';
 import { IamCreatePermissionRoleInput } from '@api/graphql';
 
 @Resolver()
-@Permissions('iam.role.create')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.role.create')
 export class IamCreatePermissionsRolesResolver
 {
     constructor(

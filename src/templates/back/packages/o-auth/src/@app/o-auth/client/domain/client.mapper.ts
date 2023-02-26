@@ -47,7 +47,7 @@ export class ClientMapper implements IMapper
     {
         if (!Array.isArray(clients)) return;
 
-        return clients.map(client  => this.makeAggregate(client, cQMetadata));
+        return clients.map(client => this.makeAggregate(client, cQMetadata));
     }
 
     /**

@@ -4,10 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { OAuthUpsertScopeResolver } from './o-auth-upsert-scope.resolver';
 import { OAuthUpsertScopeHandler } from '../handlers/o-auth-upsert-scope.handler';
-import { OAuthUpsertScopeInput } from '@api/graphql';
+import { OAuthUpdateScopeByIdInput } from '@api/graphql';
 
 // sources
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthUpsertScopeResolver', () =>
 {
@@ -50,7 +50,7 @@ describe('OAuthUpsertScopeResolver', () =>
         test('should return an scope upserted', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(scopes[0])));
-            expect(await resolver.main(<OAuthUpsertScopeInput>scopes[0])).toBe(scopes[0]);
+            expect(await resolver.main(<OAuthUpdateScopeByIdInput>scopes[0])).toBe(scopes[0]);
         });
     });
 });

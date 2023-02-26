@@ -59,10 +59,10 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(instance: OAuthApplicationModel, options): void
+    static auditingBulkUpdate(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_UPDATED,
             '@app/o-auth/application/infrastructure/sequelize/sequelize-application.model',
@@ -83,10 +83,10 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(instance: OAuthApplicationModel, options): void
+    static auditingBulkDestroy(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_DELETED,
             '@app/o-auth/application/infrastructure/sequelize/sequelize-application.model',
@@ -107,10 +107,10 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(instance: OAuthApplicationModel, options): void
+    static auditingBulkRestore(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_RESTORED,
             '@app/o-auth/application/infrastructure/sequelize/sequelize-application.model',

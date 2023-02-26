@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { accessTokensToCreate as accessTokens } from '@app/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokensToCreate as accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 import { CreateAccessTokenCommandHandler } from './create-access-token.command-handler';
 import { CreateAccessTokenCommand } from './create-access-token.command';
 import { CreateAccessTokenService } from './create-access-token.service';

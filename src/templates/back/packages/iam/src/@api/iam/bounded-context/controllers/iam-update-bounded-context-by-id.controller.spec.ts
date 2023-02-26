@@ -43,7 +43,7 @@ describe('IamUpdateBoundedContextByIdController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a boundedContext created', async () =>
+        test('should return a boundedContext updated', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
             expect(await controller.main(boundedContexts[0])).toBe(boundedContexts[0]);

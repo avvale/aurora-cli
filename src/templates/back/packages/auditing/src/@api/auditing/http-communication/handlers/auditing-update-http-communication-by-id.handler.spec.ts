@@ -7,7 +7,7 @@ import { AuditingUpdateHttpCommunicationByIdHandler } from './auditing-update-ht
 import { AuditingUpdateHttpCommunicationByIdInput } from '@api/graphql';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingUpdateHttpCommunicationByIdHandler', () =>
 {

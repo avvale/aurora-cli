@@ -2,8 +2,12 @@
     "version": "0.0.1",
     "files": [
         {
+            "path": "src/@app/iam/iam.seed.ts",
+            "integrity": "sha1:56733e19a3fe53f6553991d30da813977d0c996a"
+        },
+        {
             "path": "src/@app/iam/user/application/create/create-user.command-handler.spec.ts",
-            "integrity": "sha1:f55401744b63cfac284a3f5b510ec8bcf7b73de6"
+            "integrity": "sha1:01b1c9a90acfb0e18816bf8db789512c8752d86f"
         },
         {
             "path": "src/@app/iam/user/application/create/create-user.command-handler.ts",
@@ -11,19 +15,19 @@
         },
         {
             "path": "src/@app/iam/user/application/create/create-user.command.ts",
-            "integrity": "sha1:8c371652b9980e5987abd389ae108c146045d4c3"
+            "integrity": "sha1:6902a1db43fd34c2c4b02df5fe9430b5ed2ccb47"
         },
         {
             "path": "src/@app/iam/user/application/create/create-user.service.spec.ts",
-            "integrity": "sha1:7ecb38c6725f65fce87428d703ef0c6c6ffee9ed"
+            "integrity": "sha1:8d98cbfa62ab400a25c540c1e5b8038a18248a97"
         },
         {
             "path": "src/@app/iam/user/application/create/create-user.service.ts",
-            "integrity": "sha1:84e52648606f639c1c51fe8dc64efdd0d9bfeec1"
+            "integrity": "sha1:4b31b36a9037e811b64afa3c2a1a5f92394cbd15"
         },
         {
             "path": "src/@app/iam/user/application/create/create-users.command-handler.spec.ts",
-            "integrity": "sha1:4ec3217b341d4c2ea76a4be4a6aa0fae7dad33b7"
+            "integrity": "sha1:d1ac4dd80ab5939f71e05a2ad7335ba36ebbae43"
         },
         {
             "path": "src/@app/iam/user/application/create/create-users.command-handler.ts",
@@ -31,7 +35,7 @@
         },
         {
             "path": "src/@app/iam/user/application/create/create-users.command.ts",
-            "integrity": "sha1:6cc33e72028316a905fbafdfa5167378a919bc5e"
+            "integrity": "sha1:71f794198551f4cb6e3f0879440e88adbfd63043"
         },
         {
             "path": "src/@app/iam/user/application/create/create-users.service.spec.ts",
@@ -39,11 +43,11 @@
         },
         {
             "path": "src/@app/iam/user/application/create/create-users.service.ts",
-            "integrity": "sha1:287fa62ef469a4ae112d78c0e3277571f708cf91"
+            "integrity": "sha1:9dd6257fbc51de16a58f2df1c5a52be2ec5e2844"
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-user-by-id.command-handler.spec.ts",
-            "integrity": "sha1:c4220acb38ab50aaf245f640ae902087846c37be"
+            "integrity": "sha1:88f4976e39624902c02e4cfbfe327be8aaad1559"
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-user-by-id.command-handler.ts",
@@ -51,15 +55,15 @@
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-user-by-id.command.ts",
-            "integrity": "sha1:54b7bf52c5f650f0b480ac779d0562776ddca2eb"
+            "integrity": "sha1:1607f7c21000d96c02b401e92cf640ff78c14da6"
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-user-by-id.service.spec.ts",
-            "integrity": "sha1:bdba2d27167939f6a7afefd2d2ff72769b43dc0a"
+            "integrity": "sha1:ca3a494da92e6cb2f49791ad46bfa52f69cbe95d"
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-user-by-id.service.ts",
-            "integrity": "sha1:9bdc0205ff437a0a9c88ac46e827e216c626ccdf"
+            "integrity": "sha1:aaa7a4c682ab6c4394dd7ecc53b956e2ddab62a4"
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-users.command-handler.spec.ts",
@@ -71,7 +75,7 @@
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-users.command.ts",
-            "integrity": "sha1:7831fd74f109db96de6b5fd80919bdd5aa113370"
+            "integrity": "sha1:b5e329ffe4c6713956fabad795d55e2cf0e60a36"
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-users.service.spec.ts",
@@ -79,7 +83,7 @@
         },
         {
             "path": "src/@app/iam/user/application/delete/delete-users.service.ts",
-            "integrity": "sha1:b2064983843d6faf1f7f2d948d850edc22c1eb6b"
+            "integrity": "sha1:e4fc63d311a9a76e7473da762359b01c263f007b"
         },
         {
             "path": "src/@app/iam/user/application/events/add-users-context.event.ts",
@@ -135,7 +139,7 @@
         },
         {
             "path": "src/@app/iam/user/application/find/find-user-by-id.query-handler.spec.ts",
-            "integrity": "sha1:3ad86189c04db0e625d7d3452eec27246a1afaf7"
+            "integrity": "sha1:a24837103279bd05794bbdf6f5aa635029998366"
         },
         {
             "path": "src/@app/iam/user/application/find/find-user-by-id.query-handler.ts",
@@ -143,19 +147,19 @@
         },
         {
             "path": "src/@app/iam/user/application/find/find-user-by-id.query.ts",
-            "integrity": "sha1:75e7746dd2e525a8622d96093f54cbd61817898d"
+            "integrity": "sha1:1ba91428c3d6e2f06034c604361c6b7d428c0b2e"
         },
         {
             "path": "src/@app/iam/user/application/find/find-user-by-id.service.spec.ts",
-            "integrity": "sha1:f91427cda9af2be01498b40b37963153c68d520a"
+            "integrity": "sha1:9e19e28b13fc7f7ec86a7ff5d078edc36c384e40"
         },
         {
             "path": "src/@app/iam/user/application/find/find-user-by-id.service.ts",
-            "integrity": "sha1:8627653f7733a01754d5812e0173008a278fc794"
+            "integrity": "sha1:f8098885fa61eb23db5df70ac646725230437c0e"
         },
         {
             "path": "src/@app/iam/user/application/find/find-user.query-handler.spec.ts",
-            "integrity": "sha1:9e4bcb395cbd10db76fe1c39fba9991d4675433d"
+            "integrity": "sha1:dd8856d73e579ba49263e81296933d817adbbdb3"
         },
         {
             "path": "src/@app/iam/user/application/find/find-user.query-handler.ts",
@@ -163,7 +167,7 @@
         },
         {
             "path": "src/@app/iam/user/application/find/find-user.query.ts",
-            "integrity": "sha1:3dc8bbf03e58f41cadd6bd0cb82385981b2a2789"
+            "integrity": "sha1:701aafacf252fdf9cf85f033b1c7c7e2ef7905f0"
         },
         {
             "path": "src/@app/iam/user/application/find/find-user.service.spec.ts",
@@ -171,11 +175,11 @@
         },
         {
             "path": "src/@app/iam/user/application/find/find-user.service.ts",
-            "integrity": "sha1:7f08af3612a9b4c74c4bf117859a9b57d880dbc8"
+            "integrity": "sha1:f96170ee27875b5f76b9fc4405c7158c8f139624"
         },
         {
             "path": "src/@app/iam/user/application/get/get-users.query-handler.spec.ts",
-            "integrity": "sha1:f8cf9664de04ea24644a1e5e9d7b5905c384fd53"
+            "integrity": "sha1:3d6502e310e36481eae15d101f62a29893e475ef"
         },
         {
             "path": "src/@app/iam/user/application/get/get-users.query-handler.ts",
@@ -183,7 +187,7 @@
         },
         {
             "path": "src/@app/iam/user/application/get/get-users.query.ts",
-            "integrity": "sha1:e967b6892eccde305e9003e070119986f8de84c5"
+            "integrity": "sha1:06d158935ba1c927822826768677449f2cb7704d"
         },
         {
             "path": "src/@app/iam/user/application/get/get-users.service.spec.ts",
@@ -191,19 +195,19 @@
         },
         {
             "path": "src/@app/iam/user/application/get/get-users.service.ts",
-            "integrity": "sha1:c5a39fc065712ce2af13229f2dcbace0abdb72aa"
+            "integrity": "sha1:7f46c9cb27351f197c861ca005c10f980e8ac519"
         },
         {
             "path": "src/@app/iam/user/application/paginate/paginate-users.query-handler.spec.ts",
-            "integrity": "sha1:40c545a44d0aedcf47cdc540e6d7b8262b0860f1"
+            "integrity": "sha1:c29410015b42d7cd1296583b62a2bc0358e0c8a9"
         },
         {
             "path": "src/@app/iam/user/application/paginate/paginate-users.query-handler.ts",
-            "integrity": "sha1:1407b36d307bd374920f112c99472a9c65490f3a"
+            "integrity": "sha1:60938fcae8a597439a66e2cefda9cb3974289f2a"
         },
         {
             "path": "src/@app/iam/user/application/paginate/paginate-users.query.ts",
-            "integrity": "sha1:3bd43155c295799f8370c5e5fff60a8e3fbe8893"
+            "integrity": "sha1:26466362ef2766512ee375004c71807758eef254"
         },
         {
             "path": "src/@app/iam/user/application/paginate/paginate-users.service.spec.ts",
@@ -211,7 +215,27 @@
         },
         {
             "path": "src/@app/iam/user/application/paginate/paginate-users.service.ts",
-            "integrity": "sha1:dcd7b2c1a713333ea504063ea39224447926e3d8"
+            "integrity": "sha1:99d84964f1be38785a7fce1860147505126fd75c"
+        },
+        {
+            "path": "src/@app/iam/user/application/raw-sql/raw-sql-users.query-handler.spec.ts",
+            "integrity": "sha1:b3e05ce60a8b25051eff0c00e91936d574e781c6"
+        },
+        {
+            "path": "src/@app/iam/user/application/raw-sql/raw-sql-users.query-handler.ts",
+            "integrity": "sha1:47a4a0cd104adf104b739dbfb27011c2408e9a49"
+        },
+        {
+            "path": "src/@app/iam/user/application/raw-sql/raw-sql-users.query.ts",
+            "integrity": "sha1:c15eb5be12563314193fa1304d7e7c444307d0c6"
+        },
+        {
+            "path": "src/@app/iam/user/application/raw-sql/raw-sql-users.service.spec.ts",
+            "integrity": "sha1:1cf78f415dcd2b6a65bb767e2e5f17434fe9a213"
+        },
+        {
+            "path": "src/@app/iam/user/application/raw-sql/raw-sql-users.service.ts",
+            "integrity": "sha1:7320d621900e097d35ad190d9b98a77527ac8d11"
         },
         {
             "path": "src/@app/iam/user/application/sagas/user.sagas.ts",
@@ -219,7 +243,7 @@
         },
         {
             "path": "src/@app/iam/user/application/update/update-user-by-id.command-handler.spec.ts",
-            "integrity": "sha1:47c5d9d63c890dbbd6631dd64afb25eb312dbe8a"
+            "integrity": "sha1:6e3402698d12703c036fe0cfb79a9d5e93891d50"
         },
         {
             "path": "src/@app/iam/user/application/update/update-user-by-id.command-handler.ts",
@@ -227,19 +251,19 @@
         },
         {
             "path": "src/@app/iam/user/application/update/update-user-by-id.command.ts",
-            "integrity": "sha1:071f205ba600aa87bb9120a3591879f08daaf12c"
+            "integrity": "sha1:538747cbf045bdbec0fd266ba077ea988e3dc641"
         },
         {
             "path": "src/@app/iam/user/application/update/update-user-by-id.service.spec.ts",
-            "integrity": "sha1:0dd69228ca84e50eb39c96ee00ded68854211459"
+            "integrity": "sha1:aeddf8d40cbc10a50940cd3c53653d6f3f4dff0b"
         },
         {
             "path": "src/@app/iam/user/application/update/update-user-by-id.service.ts",
-            "integrity": "sha1:ededc7f6ebf0ca29604a023dba491359956eab34"
+            "integrity": "sha1:e5fac968b5cec04ab4ce7250836977edc6617646"
         },
         {
             "path": "src/@app/iam/user/application/update/update-users.command-handler.spec.ts",
-            "integrity": "sha1:851eb1ff50b4c6c1f34fe28531ccd5abc38e9dd0"
+            "integrity": "sha1:6dbf8967d2117b2d815bc53d47fb8fb645d2e21c"
         },
         {
             "path": "src/@app/iam/user/application/update/update-users.command-handler.ts",
@@ -247,19 +271,19 @@
         },
         {
             "path": "src/@app/iam/user/application/update/update-users.command.ts",
-            "integrity": "sha1:8e7e48aab7369051b8dcb9e314c44c90b47d1ef6"
+            "integrity": "sha1:be6deedf0db7630b19344a95922dcd3f9b01dd8d"
         },
         {
             "path": "src/@app/iam/user/application/update/update-users.service.spec.ts",
-            "integrity": "sha1:8e9eff7221d3425293a63819938dac4cde74841f"
+            "integrity": "sha1:c18cf90a9f6efc3c737098a7ebe5ab95c4738c67"
         },
         {
             "path": "src/@app/iam/user/application/update/update-users.service.ts",
-            "integrity": "sha1:5e4e85afd71b25b4072819e92a5f6e3e7ff770ff"
+            "integrity": "sha1:1544d97861347c1b109cc3529ba071366f0570b7"
         },
         {
             "path": "src/@app/iam/user/application/upsert/upsert-user.command-handler.spec.ts",
-            "integrity": "sha1:2038bba10dcaaf00614a995fdcb7a09667e94251"
+            "integrity": "sha1:4f94dd4aef083435a1f303c0f418698d1ccc9e04"
         },
         {
             "path": "src/@app/iam/user/application/upsert/upsert-user.command-handler.ts",
@@ -267,31 +291,31 @@
         },
         {
             "path": "src/@app/iam/user/application/upsert/upsert-user.command.ts",
-            "integrity": "sha1:ca47ff5b3b04ceefb8b8088d3135c3bb8f27b648"
+            "integrity": "sha1:40a29eb5b68fbb3ea2787ab4fd629cbaafd42f61"
         },
         {
             "path": "src/@app/iam/user/application/upsert/upsert-user.service.spec.ts",
-            "integrity": "sha1:1588f31e8db0f816f41584d6399993448738d999"
+            "integrity": "sha1:901559142ed9e906a4ceac580e60004596d174c1"
         },
         {
             "path": "src/@app/iam/user/application/upsert/upsert-user.service.ts",
-            "integrity": "sha1:d11f7310434e34b53177766893a0b6a90988a254"
+            "integrity": "sha1:d591dc82886e0371937147369e7286c9def74dc3"
         },
         {
             "path": "src/@app/iam/user/domain/user.aggregate.ts",
-            "integrity": "sha1:86ea46eae0e972f0632075ea06f04847fb87d3a0"
+            "integrity": "sha1:100951a2fe4c216570d99684a2ea847bc2827780"
         },
         {
             "path": "src/@app/iam/user/domain/user.mapper.ts",
-            "integrity": "sha1:c7927f63b758b15eee1eeebf83e1feba5f83e0c5"
+            "integrity": "sha1:c59db2a5f3c2e8792c57c1fd10f5e5d4a29e1ded"
         },
         {
             "path": "src/@app/iam/user/domain/user.repository.ts",
-            "integrity": "sha1:46ddd35f49a5df79130b217708e6bb144a7797d8"
+            "integrity": "sha1:76c1ff2a4dbaf401183ba9678fcebd7f87b347ce"
         },
         {
             "path": "src/@app/iam/user/domain/user.response.ts",
-            "integrity": "sha1:2333c7944a8b5d70c5d479af3cbf8ed3d8e4a1e7"
+            "integrity": "sha1:d8d5274502aa61cf04511c21d802b451de3f000f"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/index.ts",
@@ -299,171 +323,159 @@
         },
         {
             "path": "src/@app/iam/user/index.ts",
-            "integrity": "sha1:421367a61946cbd1d8be5b678e4594629468e6fc"
+            "integrity": "sha1:d62e5a290d485779cd94d6bf08791a3134b18804"
+        },
+        {
+            "path": "src/@app/iam/user/infrastructure/mock/mock-user.data.ts",
+            "integrity": "sha1:d3de7176d86100b9cd255e339cf3085b89c78bc5"
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/mock-user.repository.ts",
-            "integrity": "sha1:f01708dbfeeb5c521b4e647ee127c9ab02ecc3d4"
+            "integrity": "sha1:be9d9a2fab525ba1f2c6d461ac8454977ddb1410"
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/mock-user.seeder.ts",
-            "integrity": "sha1:19d908196102ced7f930c9d3fec492c22ce91d9b"
-        },
-        {
-            "path": "src/@app/iam/user/infrastructure/seeds/user.seed.ts",
-            "integrity": "sha1:5f1625672c3290d654afa45d249b2d697a22c9c2"
+            "integrity": "sha1:959821a45a86fcdc430ffec2b3ca8de9b281e767"
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/sequelize-user.model.ts",
-            "integrity": "sha1:37a9ff4ba8b78bc964dc2d54b8a017bdb734af72"
+            "integrity": "sha1:600f50a81ba34af2f60689d67bedb9944bd482f5"
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/sequelize-user.repository.ts",
-            "integrity": "sha1:36b93f38e1e468318979c262b661e1d8c89a6797"
+            "integrity": "sha1:a463bcf439133f01b9549673d2056ae4cd968ace"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-id.ts",
-            "integrity": "sha1:a8c3b0f3b481b52b61bec6a08997aed831f29e9c"
+            "integrity": "sha1:5e711f3c1310fc2ae0bc12b73400e62663d80cc7"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-account-id.ts",
-            "integrity": "sha1:f000f66d73c4d5bfde31c26e947dea9241fd0ebe"
+            "integrity": "sha1:74bab2fee188b6ba3a8bb202658100b6341d9b72"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-name.ts",
-            "integrity": "sha1:6ac36a137ac7685a71349156ca4a6bd11992feb2"
+            "integrity": "sha1:e9961b2be59aab1e1afb04fb7e4d1893b806e325"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-surname.ts",
-            "integrity": "sha1:719d3a3deb965dd5fb6099b388752f836347fa05"
+            "integrity": "sha1:5524109da202061a6c90046efb1eb4e3ad95d06b"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-avatar.ts",
-            "integrity": "sha1:da9668ba519747dbe4b718a54e85cd61cb41e11e"
+            "integrity": "sha1:218e871b15afb9aef43c3df1f9d8dfa21817e884"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-mobile.ts",
-            "integrity": "sha1:6f1b80dac9c8987e68b8edf0ab67e94cf8aa01bd"
+            "integrity": "sha1:6dcc92b348db4be5afae8b4e20c8211ad1a9419b"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-lang-id.ts",
-            "integrity": "sha1:52542bb7fa8ece05a6cfaa469c8a53e9683314db"
+            "integrity": "sha1:6187498231c278d2313f508a73352473cd82d9c6"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-username.ts",
-            "integrity": "sha1:1a0833f68b718fc9ee297975f2db6f5b78b7bf8e"
+            "integrity": "sha1:2031f3ed30c7b534e35f6344e0add6f46cd04499"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-password.ts",
-            "integrity": "sha1:44398d85293233014919e10aba72b44c8e5b38ed"
+            "integrity": "sha1:b186d379dedee93e84aa5affc0a02d70f948d49d"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-remember-token.ts",
-            "integrity": "sha1:d8d1aed879f87d530f1e4344d4f3045fff4ef2cb"
+            "integrity": "sha1:e3542e5a1dc27e06d0a606951d3c89dd5b0cb0df"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-meta.ts",
-            "integrity": "sha1:1c72382a10acbe147dc9d0edf14d4b690e6ed7d1"
+            "integrity": "sha1:1efc691bb3e8a9b1d77764608436b5f331888786"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-created-at.ts",
-            "integrity": "sha1:e4faca0e2bf386fa970c49cf0ecd982789594d44"
+            "integrity": "sha1:d0a378e1af574cfadedef2376730219b91abbb22"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-updated-at.ts",
-            "integrity": "sha1:b12c014277c37d0a4266679e8da991a404ac5b8c"
+            "integrity": "sha1:5daf9b058cec231087187a68d8269af05e313e42"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/user-deleted-at.ts",
-            "integrity": "sha1:f2077e0c851d0ad0c6851552da347851ccd604ec"
+            "integrity": "sha1:90d329de8a8e0f899c1df684ff8f684465648b24"
         },
         {
-            "path": "src/@api/iam/user/controllers/iam-create-user.controller.spec.ts",
-            "integrity": "sha1:134b07bb13f53822ed838f7198518f89677f990d"
-        },
-        {
-            "path": "src/@api/iam/user/controllers/iam-create-user.controller.ts",
-            "integrity": "sha1:5f91a425a91ea0ce16014cc0482f5e73e6a7130e"
-        },
-        {
-            "path": "src/@api/iam/user/controllers/iam-create-users.controller.spec.ts",
-            "integrity": "sha1:63a25ca702a4767b7e1e8d56b5d0c64217624661"
-        },
-        {
-            "path": "src/@api/iam/user/controllers/iam-create-users.controller.ts",
-            "integrity": "sha1:8b8e9e9472ff33e6267007a94c120d27ba7476fd"
+            "path": "src/@api/iam/iam.seeder.ts",
+            "integrity": "sha1:1ee1b52a0071fcf008a3d0d4ffb4a3782be54f76"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-delete-user-by-id.controller.spec.ts",
-            "integrity": "sha1:f6ecc9bf5e8bf11a918e27db851b8b820ff8af3a"
+            "integrity": "sha1:76ffb959decee6ee0ede2a857c08a85c61a3dc88"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-delete-user-by-id.controller.ts",
-            "integrity": "sha1:62f7e3bf51ccb2bf02552b89fa944ac5ae415df2"
+            "integrity": "sha1:2e15cc0ea6b10feb5d8293b590408e57bc368aa2"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-delete-users.controller.spec.ts",
-            "integrity": "sha1:e3b9f261d9b7b607795105ef614f173344d4b17a"
+            "integrity": "sha1:c04bda109c2760a52318e2312af6c0706902747d"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-delete-users.controller.ts",
-            "integrity": "sha1:1eb1e95efa971a441b230f3236529b180c066f8b"
+            "integrity": "sha1:0d9abfcda4505dc72b722c22cbe94041cd466966"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-find-user-by-id.controller.spec.ts",
-            "integrity": "sha1:0360c476d6c1ce147a84dea3b41ae0e92b4ee287"
+            "integrity": "sha1:385deccfa879e7f5a22f21d0b3a466d15b488425"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-find-user-by-id.controller.ts",
-            "integrity": "sha1:d8d36f9e19e364f38d120aadb915699fa2f5d6f8"
+            "integrity": "sha1:7b7da8af093290c965a01885ddef4ed93790b253"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-find-user.controller.spec.ts",
-            "integrity": "sha1:82b9f61fe551ffd0a9cf900d5dd4092a5dd3a07a"
+            "integrity": "sha1:0ba96c6ad3dd09ee0e46095fd3c1e186c06c1cbc"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-find-user.controller.ts",
-            "integrity": "sha1:d2d8d1ec90ec2829fcfd6e291b1af58012bf29bd"
+            "integrity": "sha1:e23b354cae4054943d86c94990d42a1c344f112e"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-get-users.controller.spec.ts",
-            "integrity": "sha1:b17fb3023dc159688ea33ac4515e2a6c6d127f73"
+            "integrity": "sha1:bf0721e4e4977e1b66e6203655a26aff95ac8c4b"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-get-users.controller.ts",
-            "integrity": "sha1:098a5e0dffe28f38b5bcf6a6204991ba3ab0cc70"
+            "integrity": "sha1:6beafa559747cc0e3b6c8326a8f609f42f5cf529"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-paginate-users.controller.spec.ts",
-            "integrity": "sha1:548d738894a5c32b45c1546c6c0c5a9d67a85d6d"
+            "integrity": "sha1:d88b579ae800e9ebc97059123466f39c19ae3e33"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-paginate-users.controller.ts",
-            "integrity": "sha1:97fddeb552cf1c167213dc8dff178de007e070b2"
+            "integrity": "sha1:64254497c7287de6f285ad20c12191c6a551d10a"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-update-user-by-id.controller.spec.ts",
-            "integrity": "sha1:aee4f710d06d1514c5770251dcefafb98b347857"
+            "integrity": "sha1:21c61581a7b3c301486ac3768059058f35de1c89"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-update-user-by-id.controller.ts",
-            "integrity": "sha1:667fbd449b95cba144939a397b2584f95ee7e9f8"
+            "integrity": "sha1:63e6e30c7eba614341d59147e99fe91fef16cb38"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-update-users.controller.spec.ts",
-            "integrity": "sha1:f9ac04d21cbb38c012b204647fee2c0434297e60"
+            "integrity": "sha1:3c34c87954601e6b92f11ef709f5b9c556adfd8d"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-update-users.controller.ts",
-            "integrity": "sha1:be8c3201a07cd7e7a641844de126fb5a5b221105"
+            "integrity": "sha1:1b92a02b415c6e6e4998b5cd118676f259d87019"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-upsert-user.controller.spec.ts",
-            "integrity": "sha1:f9b33e137707625045bdb941c4c6b81d56af1d83"
+            "integrity": "sha1:592db9823be552be6d922ad7a5f0165ef790a3ca"
         },
         {
             "path": "src/@api/iam/user/controllers/iam-upsert-user.controller.ts",
-            "integrity": "sha1:ca01fd52df2f6003826bcc9d04b503bda4809249"
+            "integrity": "sha1:7b65416e36637bd0d3f261a8f490681f06589770"
         },
         {
             "path": "src/@api/iam/user/dto/iam-user.dto.ts",
@@ -487,203 +499,167 @@
         },
         {
             "path": "src/@api/iam/user/graphql/user.graphql",
-            "integrity": "sha1:987e38452253ad4be3ed1f8b16d4570657163210"
-        },
-        {
-            "path": "src/@api/iam/user/handlers/iam-create-user.handler.spec.ts",
-            "integrity": "sha1:0faf8b97ace4e16dafd6589a8d6979d05397bcd5"
-        },
-        {
-            "path": "src/@api/iam/user/handlers/iam-create-user.handler.ts",
-            "integrity": "sha1:b15744a01bb64ed7743307d229d85ce3d8e56502"
-        },
-        {
-            "path": "src/@api/iam/user/handlers/iam-create-users.handler.spec.ts",
-            "integrity": "sha1:c29132a5671e5f94a277bb2d0216b6e13da09189"
-        },
-        {
-            "path": "src/@api/iam/user/handlers/iam-create-users.handler.ts",
-            "integrity": "sha1:4affe8f8b37c3219c7119a61435f4ada6f3edb87"
+            "integrity": "sha1:805774e6c89e1c8df91255ae155ab7024f62a893"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-delete-user-by-id.handler.spec.ts",
-            "integrity": "sha1:b9087b51beea2772b466acc6977ba332f3187346"
+            "integrity": "sha1:d88eaec814f3f1169aa9bfdc3ec747f664d95387"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-delete-user-by-id.handler.ts",
-            "integrity": "sha1:f8579f1395f023fee59a9ff13a28e92027ed6e98"
+            "integrity": "sha1:8fe6b3ce0c64e497284cf19097e95db55b4856ec"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-delete-users.handler.spec.ts",
-            "integrity": "sha1:f276dd74d3391c0de1e0de4cbe20e82cbda13b85"
+            "integrity": "sha1:0bb1799ead638da98075464c8cac1f3fc1e511a8"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-delete-users.handler.ts",
-            "integrity": "sha1:8cb931bbedec59ac54412fea01f43f738c85fec8"
+            "integrity": "sha1:c4a0bd09b789d0a9f0131284e684e75d11dde797"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-find-user-by-id.handler.spec.ts",
-            "integrity": "sha1:20e5dabde6af3e8d2d403741a243663b48612fee"
+            "integrity": "sha1:873d45a22c4ad9d236590f0e0b4037bc42bc96c3"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-find-user-by-id.handler.ts",
-            "integrity": "sha1:5a1736b7031ba643a09f5ff5cf60aee33772fa74"
+            "integrity": "sha1:c4f8169805bfcd23a9dac31b2fedfd9e0b7ce083"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-find-user.handler.spec.ts",
-            "integrity": "sha1:ca2b5e3fd43f973fd450542980eea06325e0ce88"
+            "integrity": "sha1:1a5bf20aff2b415712a267148a76e5a9baf5df19"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-find-user.handler.ts",
-            "integrity": "sha1:e4a84c7cd4e95ae2390c5db679bb5281a43bb736"
+            "integrity": "sha1:3983be199f0a0d790603f1919574ee55b5efb867"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-get-users.handler.spec.ts",
-            "integrity": "sha1:ce8e815a3031b5c16903c1979c1de67928fb0143"
+            "integrity": "sha1:dd446cca7019bfb4c07f0495593fb08b0f947841"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-get-users.handler.ts",
-            "integrity": "sha1:50a415d188681e7c31002aadbde67e96e465d855"
+            "integrity": "sha1:33b1b175939ccfe63f546142bb8c6b6c0142ac17"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-paginate-users.handler.spec.ts",
-            "integrity": "sha1:3c280acea24a82821cf4f3a5ccedf489b062e99d"
+            "integrity": "sha1:31801c843c18795ecc8db8a3d582facae48e81e8"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-paginate-users.handler.ts",
-            "integrity": "sha1:ab7144dd3098ca3a126b416507304e2fd51585da"
+            "integrity": "sha1:fb8352419a574a14f593b95e92da21f2040e5272"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-update-user-by-id.handler.spec.ts",
-            "integrity": "sha1:2ec5045a0da9aeab600705038bb26fb52eb88a00"
+            "integrity": "sha1:5ffd17f1b678d547a992c041b776f365f8fb02cf"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-update-user-by-id.handler.ts",
-            "integrity": "sha1:7954af1ed9e25de814d8477d251a1426357eb872"
+            "integrity": "sha1:f5101951d3b13762a3bb8162b1ab476eb692f139"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-update-users.handler.spec.ts",
-            "integrity": "sha1:9209865c63ea99611cea05a1d8590e10fb21b8aa"
+            "integrity": "sha1:98f54a7368531a86fb4a6ae1bd06ed4b853da5b6"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-update-users.handler.ts",
-            "integrity": "sha1:9e51b5739b8f98e666eaa52af701569ef681bfcb"
+            "integrity": "sha1:23184678b49d46b9ad926b6d5c219003c095664d"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-upsert-user.handler.spec.ts",
-            "integrity": "sha1:9217c298994bb6fecbf0107e8af4628e2a70bbb3"
+            "integrity": "sha1:e8e92bba0b29a4bac7e7dd07fdadf9da8203a784"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-upsert-user.handler.ts",
-            "integrity": "sha1:5adf7cd9e726d4154d78bc8c4ae3f2f2ba3c81f6"
+            "integrity": "sha1:c68e360029b5064a96c8290eb29d96edcc01234f"
         },
         {
             "path": "src/@api/iam/user/index.ts",
-            "integrity": "sha1:7e86acce047990dd09dea8858f78a5cce891a154"
-        },
-        {
-            "path": "src/@api/iam/user/resolvers/iam-create-user.resolver.spec.ts",
-            "integrity": "sha1:b293298994a4d578c17d852b46ccc3dd6aa9e7ad"
-        },
-        {
-            "path": "src/@api/iam/user/resolvers/iam-create-user.resolver.ts",
-            "integrity": "sha1:823430492fc599e72488ea5a0fc00ede9f4cb45b"
-        },
-        {
-            "path": "src/@api/iam/user/resolvers/iam-create-users.resolver.spec.ts",
-            "integrity": "sha1:6594e044f80dbc4513d86cd137d135ad68d06a11"
-        },
-        {
-            "path": "src/@api/iam/user/resolvers/iam-create-users.resolver.ts",
-            "integrity": "sha1:f1f518ea868397cd13138151439f6072561ca353"
+            "integrity": "sha1:65c940f1574a5d984a1748793e8c2ce1b8db0518"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-delete-user-by-id.resolver.spec.ts",
-            "integrity": "sha1:4dbbe2d7b8386951857ab45ed85209651564bb9e"
+            "integrity": "sha1:4750c7850465da92c289a8117afe8b0ce3b600d0"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-delete-user-by-id.resolver.ts",
-            "integrity": "sha1:a679daf4dab7cc3e2116cca6208da31b3b141591"
+            "integrity": "sha1:eff0ececf348fb5547b5673d2e293bb5cfaead41"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-delete-users.resolver.spec.ts",
-            "integrity": "sha1:4cb5476279930eee65d748b86099909e6f9fcb4e"
+            "integrity": "sha1:37d64162240dae890624c482a646c463d53e1c81"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-delete-users.resolver.ts",
-            "integrity": "sha1:27b6fb662b39143309268ae0c91495ed1eabd70e"
+            "integrity": "sha1:d403534766b2703e27e3809ff6b3a098ea6d9237"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-find-user-by-id.resolver.spec.ts",
-            "integrity": "sha1:f074e6ad58927246857a96a80bce9d77eba1178e"
+            "integrity": "sha1:5fe291afafe00682f626e50553b017a4c9bb615d"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-find-user-by-id.resolver.ts",
-            "integrity": "sha1:353d06d5891ff97ef8b81b622c5808c9d682f4f2"
+            "integrity": "sha1:869f353f34b6bc03333ad94ee9f956531255741b"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-find-user.resolver.spec.ts",
-            "integrity": "sha1:147485adeda77219b09e5841827bb4dab8ec93c5"
+            "integrity": "sha1:ab81ca6b92fd60186f31706df7df2cae2ea4d95d"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-find-user.resolver.ts",
-            "integrity": "sha1:6232403a8055e3a4b1650484c5ffdfa2ab614c60"
+            "integrity": "sha1:6075cd2a649584c78d1f6705b3c557908b0fe359"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-get-users.resolver.spec.ts",
-            "integrity": "sha1:850166348ec08cb515a982558444055cd26f524b"
+            "integrity": "sha1:b985bacb4e45ffa1b4f7f821455b972ce4645a0f"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-get-users.resolver.ts",
-            "integrity": "sha1:23069d04dbb784af52c4e77a02feddc280e1d208"
+            "integrity": "sha1:e201621adee9cb12d712ad6bc4d4f3531822f744"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-paginate-users.resolver.spec.ts",
-            "integrity": "sha1:68f48c2dda49a50f71236731a0636b40d9287e65"
+            "integrity": "sha1:b1108600631b1f504e4df15cec60cab82964df98"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-paginate-users.resolver.ts",
-            "integrity": "sha1:d24801920b61f43a8287883141baeddbb3be4466"
+            "integrity": "sha1:02f73d01e43768547c6b214a05580d08d4cda8ca"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-update-user-by-id.resolver.spec.ts",
-            "integrity": "sha1:009701a6d352fcbe9448ce3a91ae5ede6597b647"
+            "integrity": "sha1:715dddeab950dd82dd7a8ea9542aedf72b9e145e"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-update-user-by-id.resolver.ts",
-            "integrity": "sha1:3828588c776247b431d547e4f4fef943e4ee744b"
+            "integrity": "sha1:41fc336df3b2b1630d05fe218d1e0c1a72160737"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-update-users.resolver.spec.ts",
-            "integrity": "sha1:b287b9236727cf8a9297cff08c8b3f759a70f47e"
+            "integrity": "sha1:5dbc7a6562bdd5a91f41ee454c2f498535188d9c"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-update-users.resolver.ts",
-            "integrity": "sha1:530f2b9386b4177c3cecd8621e7972d710e15152"
+            "integrity": "sha1:2d7d27253039c22f907658044e73d98ff3f3fb6f"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-upsert-user.resolver.spec.ts",
-            "integrity": "sha1:5ac410ce3f35e654b5185fbddfa4ea1294c8d9e0"
+            "integrity": "sha1:d2a13c2d96e5fdc6e6ac654b9d7054e1ce729998"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-upsert-user.resolver.ts",
-            "integrity": "sha1:cf7d08a331c7a915c50ce6a00bce90bf70e31924"
+            "integrity": "sha1:3e4d940c0e384b18b2e06a9d7cd2438f4ddade77"
         },
         {
-            "path": "src/@api/iam/user/seeder/seeder.module.ts",
-            "integrity": "sha1:b47e6f0693ef67fff3a1d940029b2a524adc91cc"
-        },
-        {
-            "path": "src/@api/iam/user/seeder/seeder.ts",
-            "integrity": "sha1:f07dba7fe985db6be408109f19a9837370059fc6"
+            "path": "src/@api/iam/user/seeder/iam-user.seeder.ts",
+            "integrity": "sha1:2359b66b3e9d7d526e456cb5dff05cefd0c7993a"
         },
         {
             "path": "test/acceptance/iam/user.e2e-spec.ts",
-            "integrity": "sha1:c4ab33c3f81f83eb97ba1ee1a5648119c0bfdf35"
+            "integrity": "sha1:f3384367b956314077e29948ebcedcafa3e1792b"
         },
         {
-            "path": "postman/iam.user.postman.json",
-            "integrity": "sha1:b681262c8bd18a44ef79fef4cb801b3540c4cd6e"
+            "path": "postman/iam/iam.user.postman.json",
+            "integrity": "sha1:f4bb2bb285a18c09a2dfb0077237f3f7c83b1af8"
         }
     ]
 }

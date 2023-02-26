@@ -11,8 +11,16 @@ export class GetApplicationsService
         private readonly repository: IApplicationRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<OAuthApplication[]>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<OAuthApplication[]>
     {
-        return await this.repository.get({ queryStatement, constraint, cQMetadata });
+        return await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

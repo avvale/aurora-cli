@@ -11,8 +11,16 @@ export class GetTenantsService
         private readonly repository: ITenantRepository,
     ) {}
 
-    async main(queryStatement?: QueryStatement, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamTenant[]>
+    async main(
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamTenant[]>
     {
-        return await this.repository.get({ queryStatement, constraint, cQMetadata });
+        return await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
     }
 }

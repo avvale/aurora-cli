@@ -20,7 +20,11 @@ export class DeleteAccessTokensService
     ): Promise<void>
     {
         // get objects to delete
-        const accessTokens = await this.repository.get({ queryStatement, constraint, cQMetadata });
+        const accessTokens = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         await this.repository.delete({
             queryStatement,

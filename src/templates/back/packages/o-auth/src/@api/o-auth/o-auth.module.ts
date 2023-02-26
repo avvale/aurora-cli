@@ -3,12 +3,12 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '@aurora/shared.module';
 import { OAuthSeeder } from './o-auth.seeder';
 import { OAuthModels, OAuthHandlers, OAuthServices, OAuthRepositories, OAuthSagas } from '@app/o-auth';
-import { OAuthApplicationControllers, OAuthApplicationResolvers, OAuthApplicationApiHandlers } from './application';
-import { OAuthClientControllers, OAuthClientResolvers, OAuthClientApiHandlers } from './client';
-import { OAuthAccessTokenControllers, OAuthAccessTokenResolvers, OAuthAccessTokenApiHandlers } from './access-token';
-import { OAuthRefreshTokenControllers, OAuthRefreshTokenResolvers, OAuthRefreshTokenApiHandlers } from './refresh-token';
+import { OAuthApplicationControllers, OAuthApplicationResolvers, OAuthApplicationApiHandlers, OAuthApplicationServices } from './application';
+import { OAuthClientControllers, OAuthClientResolvers, OAuthClientApiHandlers, OAuthClientServices } from './client';
+import { OAuthAccessTokenControllers, OAuthAccessTokenResolvers, OAuthAccessTokenApiHandlers, OAuthAccessTokenServices } from './access-token';
+import { OAuthRefreshTokenControllers, OAuthRefreshTokenResolvers, OAuthRefreshTokenApiHandlers, OAuthRefreshTokenServices } from './refresh-token';
 import { OAuthCredentialControllers, OAuthCredentialResolvers, OAuthCredentialApiHandlers } from './credential';
-import { OAuthScopeControllers, OAuthScopeResolvers, OAuthScopeApiHandlers } from './scope';
+import { OAuthScopeControllers, OAuthScopeResolvers, OAuthScopeApiHandlers, OAuthScopeServices } from './scope';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
 
 @Module({
@@ -47,6 +47,11 @@ import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/a
 
         // ---- customizations ----
         IamCreatePermissionsFromRolesService,
+        ...OAuthAccessTokenServices,
+        ...OAuthApplicationServices,
+        ...OAuthClientServices,
+        ...OAuthRefreshTokenServices,
+        ...OAuthScopeServices
     ],
 })
 export class OAuthModule {}

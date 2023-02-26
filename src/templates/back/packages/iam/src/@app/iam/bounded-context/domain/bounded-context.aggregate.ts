@@ -150,13 +150,7 @@ export class IamBoundedContext extends AggregateRoot
         };
     }
 
-
-    toI18nDTO(): LiteralObject
-    {
-        return {
-        };
-    }
-
+    // function called to get data for repository side effect methods
     toRepository(): LiteralObject
     {
         return {

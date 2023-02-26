@@ -44,6 +44,14 @@ export abstract class IApplicationRepository implements IRepository<OAuthApplica
         }
     ): Promise<OAuthApplication[]>;
 
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<OAuthApplication[]>;
+
     // count records
     abstract count(
         options?: {

@@ -39,7 +39,7 @@ export class BoundedContextMapper implements IMapper
     {
         if (!Array.isArray(boundedContexts)) return;
 
-        return boundedContexts.map(boundedContext  => this.makeAggregate(boundedContext, cQMetadata));
+        return boundedContexts.map(boundedContext => this.makeAggregate(boundedContext, cQMetadata));
     }
 
     /**

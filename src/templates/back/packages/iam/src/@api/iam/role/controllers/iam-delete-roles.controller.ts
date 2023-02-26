@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Delete, Body, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurora-ts/core';
 import { IamRoleDto } from '../dto';
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { IamDeleteRolesHandler } from '../handlers/iam-delete-roles.handler';
 
 @ApiTags('[iam] role')
 @Controller('iam/roles/delete')
-@Permissions('iam.role.delete')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('iam.role.delete')
 export class IamDeleteRolesController
 {
     constructor(

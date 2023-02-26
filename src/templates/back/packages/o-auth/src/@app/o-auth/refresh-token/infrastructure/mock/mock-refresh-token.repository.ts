@@ -12,7 +12,7 @@ import {
     RefreshTokenDeletedAt,
 } from '@app/o-auth/refresh-token/domain/value-objects';
 import { OAuthRefreshToken } from '../../domain/refresh-token.aggregate';
-import { refreshTokens } from '../seeds/refresh-token.seed';
+import { refreshTokens } from './mock-refresh-token.data';
 
 @Injectable()
 export class MockRefreshTokenRepository extends MockRepository<OAuthRefreshToken> implements IRefreshTokenRepository

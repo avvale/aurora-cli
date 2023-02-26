@@ -6,9 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { IHttpCommunicationRepository } from '@app/auditing/http-communication/domain/http-communication.repository';
 import { MockHttpCommunicationSeeder } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.seeder';
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { AuthenticationGuard, AuthorizationGuard } from '@aurora-ts/core';
 import { AuditingModule } from '@api/auditing/auditing.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
@@ -60,10 +59,10 @@ describe('http-communication', () =>
                 MockHttpCommunicationSeeder,
             ],
         })
-            .overrideGuard(AuthenticationGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
-            .useValue({ canActivate: () => true })
+            //.overrideGuard(AuthenticationGuard)
+            //.useValue({ canActivate: () => true })
+            //.overrideGuard(AuthorizationGuard)
+            //.useValue({ canActivate: () => true })
             .compile();
 
         mockData = httpCommunications;

@@ -8,6 +8,7 @@ import { PaginateAccessTokensQueryHandler } from './application/paginate/paginat
 import { GetAccessTokensQueryHandler } from './application/get/get-access-tokens.query-handler';
 import { FindAccessTokenQueryHandler } from './application/find/find-access-token.query-handler';
 import { FindAccessTokenByIdQueryHandler } from './application/find/find-access-token-by-id.query-handler';
+import { RawSQLAccessTokensQueryHandler } from './application/raw-sql/raw-sql-access-tokens.query-handler';
 
 // events
 import { CreatedAccessTokenEventHandler } from './application/events/created-access-token.event-handler';
@@ -20,6 +21,7 @@ import { PaginateAccessTokensService } from './application/paginate/paginate-acc
 import { GetAccessTokensService } from './application/get/get-access-tokens.service';
 import { FindAccessTokenService } from './application/find/find-access-token.service';
 import { FindAccessTokenByIdService } from './application/find/find-access-token-by-id.service';
+import { RawSQLAccessTokensService } from './application/raw-sql/raw-sql-access-tokens.service';
 import { DeleteAccessTokenByIdService } from './application/delete/delete-access-token-by-id.service';
 import { DeleteAccessTokensService } from './application/delete/delete-access-tokens.service';
 
@@ -44,6 +46,7 @@ export const OAuthAccessTokenHandlers = [
     GetAccessTokensQueryHandler,
     FindAccessTokenQueryHandler,
     FindAccessTokenByIdQueryHandler,
+    RawSQLAccessTokensQueryHandler,
 
     // events
     CreatedAccessTokenEventHandler,
@@ -57,6 +60,7 @@ export const OAuthAccessTokenServices = [
     GetAccessTokensService,
     FindAccessTokenService,
     FindAccessTokenByIdService,
+    RawSQLAccessTokensService,
     DeleteAccessTokenByIdService,
     DeleteAccessTokensService,
 ];

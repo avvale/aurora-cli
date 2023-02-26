@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteScopeByIdCommandHandler } from './delete-scope-by-id.command-handler';
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 import { DeleteScopeByIdCommand } from './delete-scope-by-id.command';
 import { DeleteScopeByIdService } from './delete-scope-by-id.service';
 

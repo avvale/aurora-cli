@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
 import { AuditingSideEffectDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { AuditingGetSideEffectsHandler } from '../handlers/auditing-get-side-effects.handler';
 
 @ApiTags('[auditing] side-effect')
 @Controller('auditing/side-effects/get')
-@Permissions('auditing.sideEffect.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('auditing.sideEffect.get')
 export class AuditingGetSideEffectsController
 {
     constructor(

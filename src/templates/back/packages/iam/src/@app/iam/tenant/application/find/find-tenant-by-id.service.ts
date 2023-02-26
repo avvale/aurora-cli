@@ -11,8 +11,18 @@ export class FindTenantByIdService
         private readonly repository: ITenantRepository,
     ) {}
 
-    async main(id: TenantId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<IamTenant>
+    async main(
+        id: TenantId,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<IamTenant>
     {
-        return await this.repository.findById(id, { constraint, cQMetadata });
+        return await this.repository.findById(
+            id,
+            {
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

@@ -12,6 +12,7 @@ import { PaginateTenantsQueryHandler } from './application/paginate/paginate-ten
 import { GetTenantsQueryHandler } from './application/get/get-tenants.query-handler';
 import { FindTenantQueryHandler } from './application/find/find-tenant.query-handler';
 import { FindTenantByIdQueryHandler } from './application/find/find-tenant-by-id.query-handler';
+import { RawSQLTenantsQueryHandler } from './application/raw-sql/raw-sql-tenants.query-handler';
 
 // events
 import { CreatedTenantEventHandler } from './application/events/created-tenant.event-handler';
@@ -28,6 +29,7 @@ import { PaginateTenantsService } from './application/paginate/paginate-tenants.
 import { GetTenantsService } from './application/get/get-tenants.service';
 import { FindTenantService } from './application/find/find-tenant.service';
 import { FindTenantByIdService } from './application/find/find-tenant-by-id.service';
+import { RawSQLTenantsService } from './application/raw-sql/raw-sql-tenants.service';
 import { UpdateTenantByIdService } from './application/update/update-tenant-by-id.service';
 import { UpdateTenantsService } from './application/update/update-tenants.service';
 import { UpsertTenantService } from './application/upsert/upsert-tenant.service';
@@ -60,6 +62,7 @@ export const IamTenantHandlers = [
     GetTenantsQueryHandler,
     FindTenantQueryHandler,
     FindTenantByIdQueryHandler,
+    RawSQLTenantsQueryHandler,
 
     // events
     CreatedTenantEventHandler,
@@ -77,6 +80,7 @@ export const IamTenantServices = [
     GetTenantsService,
     FindTenantService,
     FindTenantByIdService,
+    RawSQLTenantsService,
     UpdateTenantByIdService,
     UpdateTenantsService,
     UpsertTenantService,

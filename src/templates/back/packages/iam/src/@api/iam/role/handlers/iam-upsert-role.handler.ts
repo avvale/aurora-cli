@@ -1,8 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
-
-// auditing
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurora-ts/core';
 
 // @app
 import { FindRoleByIdQuery } from '@app/iam/role/application/find/find-role-by-id.query';
@@ -34,6 +31,10 @@ export class IamUpsertRoleHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindRoleByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new FindRoleByIdQuery(
+            payload.id,
+            {},
+            { timezone },
+        ));
     }
 }

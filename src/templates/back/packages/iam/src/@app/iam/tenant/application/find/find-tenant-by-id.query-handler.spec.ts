@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { FindTenantByIdQueryHandler } from './find-tenant-by-id.query-handler';
 import { MockTenantRepository } from '@app/iam/tenant/infrastructure/mock/mock-tenant.repository';
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 import { ITenantRepository } from '@app/iam/tenant/domain/tenant.repository';
 import { TenantMapper } from '@app/iam/tenant/domain/tenant.mapper';
 import { FindTenantByIdQuery } from './find-tenant-by-id.query';

@@ -14,7 +14,7 @@ import {
     AccessTokenDeletedAt,
 } from '@app/o-auth/access-token/domain/value-objects';
 import { OAuthAccessToken } from '../../domain/access-token.aggregate';
-import { accessTokens } from '../seeds/access-token.seed';
+import { accessTokens } from './mock-access-token.data';
 
 @Injectable()
 export class MockAccessTokenRepository extends MockRepository<OAuthAccessToken> implements IAccessTokenRepository

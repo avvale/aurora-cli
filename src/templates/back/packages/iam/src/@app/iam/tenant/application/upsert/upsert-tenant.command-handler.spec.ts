@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 import { UpsertTenantCommandHandler } from './upsert-tenant.command-handler';
 import { UpsertTenantCommand } from './upsert-tenant.command';
 import { UpsertTenantService } from './upsert-tenant.service';
@@ -42,6 +42,13 @@ describe('UpsertTenantCommandHandler', () =>
             expect(await commandHandler.execute(
                 new UpsertTenantCommand(
                     {
+                        id: tenants[0].id,
+                        name: tenants[0].name,
+                        code: tenants[0].code,
+                        logo: tenants[0].logo,
+                        isActive: tenants[0].isActive,
+                        meta: tenants[0].meta,
+                        accountIds: tenants[0].accountIds,
                     },
                     { timezone: process.env.TZ },
                 ),

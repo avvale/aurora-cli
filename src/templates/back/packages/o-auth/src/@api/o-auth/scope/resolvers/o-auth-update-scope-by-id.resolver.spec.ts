@@ -7,7 +7,7 @@ import { OAuthUpdateScopeByIdHandler } from '../handlers/o-auth-update-scope-by-
 import { OAuthUpdateScopeByIdInput } from '@api/graphql';
 
 // sources
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthUpdateScopeByIdResolver', () =>
 {

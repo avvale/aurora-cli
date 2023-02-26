@@ -2,7 +2,7 @@ import { SmallintValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class BoundedContextSort extends SmallintValueObject
 {
-    public readonly type: 'BoundedContextSort';
+    public readonly type: string = 'BoundedContextSort';
 
     constructor(value: number, validationRules: ValidationRules = {})
     {

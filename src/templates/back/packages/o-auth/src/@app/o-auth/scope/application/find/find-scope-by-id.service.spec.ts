@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 import { FindScopeByIdService } from './find-scope-by-id.service';
 import { ScopeId } from '../../domain/value-objects';
 import { IScopeRepository } from '../../domain/scope.repository';

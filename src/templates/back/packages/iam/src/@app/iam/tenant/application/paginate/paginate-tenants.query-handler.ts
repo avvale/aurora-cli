@@ -12,7 +12,11 @@ export class PaginateTenantsQueryHandler implements IQueryHandler<PaginateTenant
 
     async execute(query: PaginateTenantsQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateTenantsService.main(query.queryStatement, query.constraint, query.cQMetadata);
+        const { total, count, rows } = await this.paginateTenantsService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return new PaginationResponse(
             total,

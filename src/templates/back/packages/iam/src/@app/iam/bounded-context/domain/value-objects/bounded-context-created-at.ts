@@ -2,7 +2,7 @@ import { DataValueObject, TimestampValueObject, ValidationRules } from '@aurora-
 
 export class BoundedContextCreatedAt extends TimestampValueObject
 {
-    public readonly type: 'BoundedContextCreatedAt';
+    public readonly type: string = 'BoundedContextCreatedAt';
 
     constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

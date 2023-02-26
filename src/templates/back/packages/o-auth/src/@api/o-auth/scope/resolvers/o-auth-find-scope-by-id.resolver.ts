@@ -1,14 +1,13 @@
-import { UseGuards } from '@nestjs/common';
 import { Resolver, Args, Query } from '@nestjs/graphql';
-import { AuthenticationGuard, AuthorizationGuard, Permissions, QueryStatement, Timezone } from '@aurora-ts/core';
+import { QueryStatement, Timezone } from '@aurora-ts/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { OAuthFindScopeByIdHandler } from '../handlers/o-auth-find-scope-by-id.handler';
 import { OAuthScope } from '@api/graphql';
 
 @Resolver()
-@Permissions('oAuth.scope.get')
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
+@Auth('oAuth.scope.get')
 export class OAuthFindScopeByIdResolver
 {
     constructor(

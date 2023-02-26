@@ -6,7 +6,7 @@ import { IamDeleteRolesController } from './iam-delete-roles.controller';
 import { IamDeleteRolesHandler } from '../handlers/iam-delete-roles.handler';
 
 // sources
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamDeleteRolesController', () =>
 {

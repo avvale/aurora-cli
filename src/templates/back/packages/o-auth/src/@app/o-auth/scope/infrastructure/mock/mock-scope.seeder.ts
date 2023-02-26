@@ -9,7 +9,7 @@ import {
     ScopeDeletedAt,
 } from '../../domain/value-objects';
 import { OAuthScope } from '../../domain/scope.aggregate';
-import { scopes } from '../seeds/scope.seed';
+import { scopes } from './mock-scope.data';
 import * as _ from 'lodash';
 
 @Injectable()

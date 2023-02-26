@@ -37,6 +37,9 @@ import { OAuthUpsertScopeHandler } from './handlers/o-auth-upsert-scope.handler'
 import { OAuthDeleteScopeByIdHandler } from './handlers/o-auth-delete-scope-by-id.handler';
 import { OAuthDeleteScopesHandler } from './handlers/o-auth-delete-scopes.handler';
 
+// seeder
+import { OAuthScopeSeeder } from './seeder/o-auth-scope.seeder';
+
 export const OAuthScopeControllers = [
     OAuthCreateScopeController,
     OAuthCreateScopesController,
@@ -77,4 +80,8 @@ export const OAuthScopeApiHandlers = [
     OAuthUpsertScopeHandler,
     OAuthDeleteScopeByIdHandler,
     OAuthDeleteScopesHandler,
+];
+
+export const OAuthScopeServices = [
+    OAuthScopeSeeder,
 ];

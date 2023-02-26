@@ -12,7 +12,11 @@ export class PaginateRolesQueryHandler implements IQueryHandler<PaginateRolesQue
 
     async execute(query: PaginateRolesQuery): Promise<PaginationResponse>
     {
-        const { total, count, rows } = await this.paginateRolesService.main(query.queryStatement, query.constraint, query.cQMetadata);
+        const { total, count, rows } = await this.paginateRolesService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
 
         return new PaginationResponse(
             total,

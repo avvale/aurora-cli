@@ -1,13 +1,7 @@
-{{#if schema.hasOAuth}}
-import { UseGuards } from '@nestjs/common';
-{{/if}}
 import { Resolver, Args{{#eq currentAdditionalApi.resolverType resolverType.QUERY }}, Query{{else}}, Mutation{{/eq }} } from '@nestjs/graphql';
-import { {{#if schema.hasOAuth}}AuthenticationGuard, AuthorizationGuard, Permissions, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-{{#if schema.hasAuditing}}
-
-// auditing
-import { Auditing } from '@api/auditing/shared/decorators/auditing.decorator';
-import { AuditingMeta } from '@api/auditing/auditing.types';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+{{#if schema.hasOAuth}}
+import { Auth } from '@aurora/decorators';
 {{/if}}
 {{#if schema.hasTenant}}
 
@@ -28,11 +22,10 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 @Resolver()
 {{#if schema.hasOAuth}}
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
 {{else}}
-@Permissions('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
 {{/eq }}
-@UseGuards(AuthenticationGuard, AuthorizationGuard)
 {{/if}}
 export class {{ currentAdditionalApi.getClassName }}Resolver
 {

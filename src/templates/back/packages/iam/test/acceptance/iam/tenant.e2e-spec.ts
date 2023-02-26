@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ITenantRepository } from '@app/iam/tenant/domain/tenant.repository';
 import { MockTenantSeeder } from '@app/iam/tenant/infrastructure/mock/mock-tenant.seeder';
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { IamModule } from '@api/iam/iam.module';
 import * as request from 'supertest';

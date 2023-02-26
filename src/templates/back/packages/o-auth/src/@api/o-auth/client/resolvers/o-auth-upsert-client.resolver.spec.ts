@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 // custom items
 import { OAuthUpsertClientResolver } from './o-auth-upsert-client.resolver';
 import { OAuthUpsertClientHandler } from '../handlers/o-auth-upsert-client.handler';
-import { OAuthUpsertClientInput } from '@api/graphql';
+import { OAuthUpdateClientByIdInput } from '@api/graphql';
 
 // sources
 import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
@@ -50,7 +50,7 @@ describe('OAuthUpsertClientResolver', () =>
         test('should return an client upserted', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await resolver.main(<OAuthUpsertClientInput>clients[0])).toBe(clients[0]);
+            expect(await resolver.main(<OAuthUpdateClientByIdInput>clients[0])).toBe(clients[0]);
         });
     });
 });

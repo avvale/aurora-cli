@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/seeds/access-token.seed';
+import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 import { FindAccessTokenByIdService } from './find-access-token-by-id.service';
 import { AccessTokenId } from '../../domain/value-objects';
 import { IAccessTokenRepository } from '../../domain/access-token.repository';

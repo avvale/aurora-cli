@@ -7,7 +7,7 @@ import { IamUpdateTenantByIdHandler } from '../handlers/iam-update-tenant-by-id.
 import { IamUpdateTenantByIdInput } from '@api/graphql';
 
 // sources
-import { tenants } from '@app/iam/tenant/infrastructure/seeds/tenant.seed';
+import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamUpdateTenantByIdResolver', () =>
 {

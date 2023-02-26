@@ -52,10 +52,10 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(instance: IamBoundedContextModel, options): void
+    static auditingBulkUpdate(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_UPDATED,
             '@app/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model',
@@ -76,10 +76,10 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(instance: IamBoundedContextModel, options): void
+    static auditingBulkDestroy(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_DELETED,
             '@app/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model',
@@ -100,10 +100,10 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(instance: IamBoundedContextModel, options): void
+    static auditingBulkRestore(options): void
     {
         SequelizeAuditingAgent.registerSideEffect(
-            instance,
+            null,
             options,
             AuditingSideEffectEvent.BULK_RESTORED,
             '@app/iam/bounded-context/infrastructure/sequelize/sequelize-bounded-context.model',

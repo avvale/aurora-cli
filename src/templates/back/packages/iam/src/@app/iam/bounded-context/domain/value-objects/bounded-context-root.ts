@@ -2,7 +2,7 @@ import { StringValueObject, ValidationRules } from '@aurora-ts/core';
 
 export class BoundedContextRoot extends StringValueObject
 {
-    public readonly type: 'BoundedContextRoot';
+    public readonly type: string = 'BoundedContextRoot';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {

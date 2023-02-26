@@ -6,7 +6,7 @@ import { OAuthPaginateRefreshTokensResolver } from './o-auth-paginate-refresh-to
 import { OAuthPaginateRefreshTokensHandler } from '../handlers/o-auth-paginate-refresh-tokens.handler';
 
 // sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
+import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 
 describe('OAuthPaginateRefreshTokensResolver', () =>
 {

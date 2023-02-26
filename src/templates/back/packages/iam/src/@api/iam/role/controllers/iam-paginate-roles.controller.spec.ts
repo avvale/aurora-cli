@@ -6,7 +6,7 @@ import { IamPaginateRolesController } from './iam-paginate-roles.controller';
 import { IamPaginateRolesHandler } from '../handlers/iam-paginate-roles.handler';
 
 // sources
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamPaginateRolesController', () =>
 {

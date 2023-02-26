@@ -6,7 +6,7 @@ import { OAuthDeleteScopeByIdResolver } from './o-auth-delete-scope-by-id.resolv
 import { OAuthDeleteScopeByIdHandler } from '../handlers/o-auth-delete-scope-by-id.handler';
 
 // sources
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
+import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthDeleteScopeByIdResolver', () =>
 {

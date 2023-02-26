@@ -2,7 +2,7 @@ import { BooleanValueObject, DataValueObject, ValidationRules } from '@aurora-ts
 
 export class RefreshTokenIsRevoked extends BooleanValueObject
 {
-    public readonly type: 'RefreshTokenIsRevoked';
+    public readonly type: string = 'RefreshTokenIsRevoked';
 
     constructor(value: boolean, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {

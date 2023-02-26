@@ -6,7 +6,7 @@ import { AuditingDeleteHttpCommunicationsResolver } from './auditing-delete-http
 import { AuditingDeleteHttpCommunicationsHandler } from '../handlers/auditing-delete-http-communications.handler';
 
 // sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/seeds/http-communication.seed';
+import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingDeleteHttpCommunicationsResolver', () =>
 {

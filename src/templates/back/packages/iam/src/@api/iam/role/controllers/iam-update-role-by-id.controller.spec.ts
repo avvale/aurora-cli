@@ -6,7 +6,7 @@ import { IamUpdateRoleByIdController } from './iam-update-role-by-id.controller'
 import { IamUpdateRoleByIdHandler } from '../handlers/iam-update-role-by-id.handler';
 
 // sources
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamUpdateRoleByIdController', () =>
 {

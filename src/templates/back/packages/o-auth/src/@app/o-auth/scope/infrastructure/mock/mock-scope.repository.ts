@@ -10,7 +10,7 @@ import {
     ScopeDeletedAt,
 } from '@app/o-auth/scope/domain/value-objects';
 import { OAuthScope } from '../../domain/scope.aggregate';
-import { scopes } from '../seeds/scope.seed';
+import { scopes } from './mock-scope.data';
 
 @Injectable()
 export class MockScopeRepository extends MockRepository<OAuthScope> implements IScopeRepository
