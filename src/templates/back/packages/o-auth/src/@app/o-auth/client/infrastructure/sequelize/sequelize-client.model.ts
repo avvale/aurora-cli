@@ -1,14 +1,11 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
+import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurora-ts/core';
 import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { OAuthAccessTokenModel } from '@app/o-auth/access-token/infrastructure/sequelize/sequelize-access-token.model';
 import { OAuthApplicationModel } from '@app/o-auth/application/infrastructure/sequelize/sequelize-application.model';
 import { OAuthApplicationsClientsModel } from '@app/o-auth/application/infrastructure/sequelize/sequelize-applications-clients.model';
-
-// auditing
-import { SequelizeAuditingAgent } from '@app/auditing/side-effect/infrastructure/sequelize/sequelize-auditing-agent';
-import { AuditingSideEffectEvent } from '@api/graphql';
 
 @Table({
     modelName: 'OAuthClient',

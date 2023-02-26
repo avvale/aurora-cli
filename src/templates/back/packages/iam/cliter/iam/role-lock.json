@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/iam/role/infrastructure/mock/mock-role.data.ts",
-            "integrity": "sha1:629a372328925852d70759dbc19b91c2ce8224e9"
+            "integrity": "sha1:894b4e7bcd07634226d105ab125b4d0f33802c7b"
         },
         {
             "path": "src/@app/iam/role/infrastructure/mock/mock-role.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/iam/role/infrastructure/sequelize/sequelize-role.model.ts",
-            "integrity": "sha1:3efc7304e4182d184e0c32092e6d921763b630cf"
+            "integrity": "sha1:a8336ec91f4e98bf61f62f7a4bcc76d07f397416"
         },
         {
             "path": "src/@app/iam/role/infrastructure/sequelize/sequelize-role.repository.ts",
@@ -683,11 +683,11 @@
         },
         {
             "path": "test/acceptance/iam/role.e2e-spec.ts",
-            "integrity": "sha1:4e7c0280b63a1e280bfc7a4c80a50d89b49e4e6a"
+            "integrity": "sha1:141f8108d3f4fa2f6189f45bce8aa757f9687c90"
         },
         {
             "path": "postman/iam/iam.role.postman.json",
-            "integrity": "sha1:7685be4bceec01644d88cc3fd2a776d9e9d762b9"
+            "integrity": "sha1:b6021a90a60c8453ca09c62db38c3e3aa36ebfe5"
         }
     ]
 }

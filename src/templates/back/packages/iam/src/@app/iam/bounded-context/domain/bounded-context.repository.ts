@@ -110,7 +110,7 @@ export abstract class IBoundedContextRepository implements IRepository<IamBounde
         }
     ): Promise<void>;
 
-    // insert or update key identification elements already existing in the table
+    // insert or update key identification element already existing in the table
     abstract upsert(
         boundedContext: IamBoundedContext,
         options?: {

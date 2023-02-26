@@ -42,6 +42,11 @@ describe('UpsertRoleCommandHandler', () =>
             expect(await commandHandler.execute(
                 new UpsertRoleCommand(
                     {
+                        id: roles[0].id,
+                        name: roles[0].name,
+                        isMaster: roles[0].isMaster,
+                        permissionIds: roles[0].permissionIds,
+                        accountIds: roles[0].accountIds,
                     },
                     { timezone: process.env.TZ },
                 ),

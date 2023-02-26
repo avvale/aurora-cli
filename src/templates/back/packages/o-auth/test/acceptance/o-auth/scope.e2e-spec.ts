@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { IScopeRepository } from '@app/o-auth/scope/domain/scope.repository';
 import { MockScopeSeeder } from '@app/o-auth/scope/infrastructure/mock/mock-scope.seeder';
 import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
@@ -11,10 +13,6 @@ import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-
-// has OAuth
-import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -63,9 +61,7 @@ describe('scope', () =>
                 MockScopeSeeder,
             ],
         })
-            .overrideGuard(AuthenticationJwtGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
+            .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 

@@ -4,6 +4,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { IBoundedContextRepository } from '@app/iam/bounded-context/domain/bounded-context.repository';
 import { MockBoundedContextSeeder } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
 import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
@@ -11,10 +12,6 @@ import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { IamModule } from '@api/iam/iam.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-
-// has OAuth
-import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // ---- customizations ----
 import { OAuthModule } from '@api/o-auth/o-auth.module';
@@ -67,9 +64,7 @@ describe('bounded-context', () =>
                 MockBoundedContextSeeder,
             ],
         })
-            .overrideGuard(AuthenticationJwtGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
+            .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 

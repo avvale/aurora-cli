@@ -5,6 +5,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { IAccountRepository } from '@app/iam/account/domain/account.repository';
 import { MockAccountSeeder } from '@app/iam/account/infrastructure/mock/mock-account.seeder';
 import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';

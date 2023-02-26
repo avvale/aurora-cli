@@ -4,6 +4,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { IHttpCommunicationRepository } from '@app/auditing/http-communication/domain/http-communication.repository';
 import { MockHttpCommunicationSeeder } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.seeder';
 import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
@@ -59,10 +60,8 @@ describe('http-communication', () =>
                 MockHttpCommunicationSeeder,
             ],
         })
-            //.overrideGuard(AuthenticationGuard)
-            //.useValue({ canActivate: () => true })
-            //.overrideGuard(AuthorizationGuard)
-            //.useValue({ canActivate: () => true })
+            .overrideGuard(Auth)
+            .useValue({ canActivate: () => true })
             .compile();
 
         mockData = httpCommunications;

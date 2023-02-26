@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { IUserRepository } from '@app/iam/user/domain/user.repository';
 import { MockUserSeeder } from '@app/iam/user/infrastructure/mock/mock-user.seeder';
 import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
@@ -13,10 +15,6 @@ import * as request from 'supertest';
 import * as _ from 'lodash';
 
 // has OAuth
-import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
-
-// ---- customizations ----
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { IAccountRepository } from '@app/iam/account/domain/account.repository';
 import { MockAccountSeeder } from '@app/iam/account/infrastructure/mock/mock-account.seeder';
@@ -72,9 +70,7 @@ describe('user', () =>
                 MockUserSeeder,
             ],
         })
-            .overrideGuard(AuthenticationJwtGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
+            .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 

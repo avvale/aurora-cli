@@ -1,15 +1,12 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
+import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurora-ts/core';
 import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { IamPermissionModel } from '@app/iam/permission/infrastructure/sequelize/sequelize-permission.model';
 import { IamPermissionsRolesModel } from '@app/iam/permission-role/infrastructure/sequelize/sequelize-permissions-roles.model';
 import { IamAccountModel } from '@app/iam/account/infrastructure/sequelize/sequelize-account.model';
 import { IamRolesAccountsModel } from '@app/iam/role/infrastructure/sequelize/sequelize-roles-accounts.model';
-
-// auditing
-import { SequelizeAuditingAgent } from '@app/auditing/side-effect/infrastructure/sequelize/sequelize-auditing-agent';
-import { AuditingSideEffectEvent } from '@api/graphql';
 
 @Table({
     modelName: 'IamRole',

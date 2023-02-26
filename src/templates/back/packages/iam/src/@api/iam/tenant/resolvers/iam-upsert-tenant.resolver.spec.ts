@@ -50,7 +50,7 @@ describe('IamUpsertTenantResolver', () =>
         test('should return an tenant upserted', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await resolver.main(<IamUpsertTenantInput>tenants[0])).toBe(tenants[0]);
+            expect(await resolver.main(<IamUpdateTenantByIdInput>tenants[0])).toBe(tenants[0]);
         });
     });
 });

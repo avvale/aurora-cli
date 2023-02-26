@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { IRefreshTokenRepository } from '@app/o-auth/refresh-token/domain/refresh-token.repository';
 import { MockRefreshTokenSeeder } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.seeder';
 import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/seeds/refresh-token.seed';
@@ -11,10 +13,6 @@ import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-
-// has OAuth
-import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -63,9 +61,7 @@ describe('refresh-token', () =>
                 MockRefreshTokenSeeder,
             ],
         })
-            .overrideGuard(AuthenticationJwtGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
+            .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 

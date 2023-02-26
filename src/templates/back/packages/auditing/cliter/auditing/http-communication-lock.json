@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data.ts",
-            "integrity": "sha1:17a7d222d61e8b9a3f092e46eb7d4d083c901e70"
+            "integrity": "sha1:0804fb4f18a2cbf562a47c137db801bdd117bc3d"
         },
         {
             "path": "src/@app/auditing/http-communication/infrastructure/mock/mock-http-communication.repository.ts",
@@ -707,11 +707,11 @@
         },
         {
             "path": "test/acceptance/auditing/http-communication.e2e-spec.ts",
-            "integrity": "sha1:9fde4dd68f4b620f2103d5fda7a314a657a932d7"
+            "integrity": "sha1:4fd3df55ba36204192cd5fe469fb6fefb174f22d"
         },
         {
             "path": "postman/auditing/auditing.http-communication.postman.json",
-            "integrity": "sha1:58578669065a8786870bbc05eecebcbf98a9b3f2"
+            "integrity": "sha1:6cf38fdfc55732b2861f8880dec6e54fb7446001"
         }
     ]
 }

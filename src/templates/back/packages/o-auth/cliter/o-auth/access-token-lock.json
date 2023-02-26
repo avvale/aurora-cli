@@ -223,7 +223,7 @@
         },
         {
             "path": "src/@app/o-auth/access-token/infrastructure/mock/mock-access-token.data.ts",
-            "integrity": "sha1:9ba23b430617d126abc016e1d61a8c83708eff14"
+            "integrity": "sha1:850b7593e4e6bb1e233767f2253aacb5cad5fe62"
         },
         {
             "path": "src/@app/o-auth/access-token/infrastructure/mock/mock-access-token.repository.ts",
@@ -463,11 +463,11 @@
         },
         {
             "path": "test/acceptance/o-auth/access-token.e2e-spec.ts",
-            "integrity": "sha1:a6cb0e2b897f52767e7029417e02810d74793e91"
+            "integrity": "sha1:ae9c0d6d9eb4e450fa84e33e4b421f3ebfc73776"
         },
         {
             "path": "postman/o-auth/o-auth.access-token.postman.json",
-            "integrity": "sha1:2bdb1cbf9b722852d2288d6bfd78c9905a7e7702"
+            "integrity": "sha1:76fa9531393778ebd01185f01d75ffe6ad072465"
         }
     ]
 }

@@ -223,7 +223,7 @@
         },
         {
             "path": "src/@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data.ts",
-            "integrity": "sha1:58df420df47d33b8a0aa05a9101b9bb26ffa3c60"
+            "integrity": "sha1:11bf1504452c0b7aa073434d5990c0812d3a14ee"
         },
         {
             "path": "src/@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.repository.ts",
@@ -455,11 +455,11 @@
         },
         {
             "path": "test/acceptance/o-auth/refresh-token.e2e-spec.ts",
-            "integrity": "sha1:ca62b88b02857e6344e4b5ccbef1fbbb50f0aeaa"
+            "integrity": "sha1:ecf889b4b4c11dc206ada0bb73db3d5d25bf89a1"
         },
         {
             "path": "postman/o-auth/o-auth.refresh-token.postman.json",
-            "integrity": "sha1:b5cf65e7946fb7c332d03e1e17dd0e87db20c4bc"
+            "integrity": "sha1:c8cf8d961151e42ad2aa01625a05c812d03a2b2c"
         }
     ]
 }

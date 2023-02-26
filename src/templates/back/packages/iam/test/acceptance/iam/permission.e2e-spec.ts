@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { IPermissionRepository } from '@app/iam/permission/domain/permission.repository';
 import { MockPermissionSeeder } from '@app/iam/permission/infrastructure/mock/mock-permission.seeder';
 import { permissions } from '@app/iam/permission/infrastructure/seeds/permission.seed';
@@ -14,7 +16,6 @@ import * as _ from 'lodash';
 // has OAuth
 import { IamModule } from '@api/iam/iam.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
-import { AuthenticationGuard, AuthorizationGuard } from '@aurora-ts/core';<
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -64,9 +65,7 @@ describe('permission', () =>
                 MockPermissionSeeder,
             ],
         })
-            .overrideGuard(AuthenticationGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
+            .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 

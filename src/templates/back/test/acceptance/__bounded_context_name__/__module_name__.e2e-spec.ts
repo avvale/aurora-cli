@@ -1,9 +1,13 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+{{#if schema.hasOAuth }}
+import { Auth } from '@aurora/decorators';
+{{/if }}
 import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
 import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
@@ -20,7 +24,6 @@ import * as _ from 'lodash';
 // has OAuth
 import { IamModule } from '@api/iam/iam.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
-import { AuthenticationGuard, AuthorizationGuard } from '{{ config.auroraCorePackage }}';
 {{/if }}
 
 // disable import foreign modules, can be micro-services
@@ -78,9 +81,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             ],
         })
             {{#if schema.hasOAuth }}
-            .overrideGuard(AuthenticationGuard)
-            .useValue({ canActivate: () => true })
-            .overrideGuard(AuthorizationGuard)
+            .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             {{/if }}
             {{#if schema.properties.hasI18n}}

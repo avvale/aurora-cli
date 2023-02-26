@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { ISideEffectRepository } from '@app/auditing/side-effect/domain/side-effect.repository';
 import { MockSideEffectSeeder } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.seeder';
 import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
@@ -65,10 +67,8 @@ describe('side-effect', () =>
                 MockSideEffectSeeder,
             ],
         })
-            //.overrideGuard(AuthenticationGuard)
-            //.useValue({ canActivate: () => true })
-            //.overrideGuard(AuthorizationGuard)
-            //.useValue({ canActivate: () => true })
+            .overrideGuard(Auth)
+            .useValue({ canActivate: () => true })
             .compile();
 
         mockData = sideEffects;
@@ -748,6 +748,7 @@ describe('side-effect', () =>
                         auditingCreateSideEffect (payload:$payload)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -765,7 +766,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                         }
@@ -834,6 +834,7 @@ describe('side-effect', () =>
                         auditingGetSideEffects (query:$query)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -851,7 +852,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -883,6 +883,7 @@ describe('side-effect', () =>
                         auditingCreateSideEffect (payload:$payload)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -900,7 +901,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                         }
@@ -932,6 +932,7 @@ describe('side-effect', () =>
                         auditingFindSideEffect (query:$query)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -949,7 +950,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -989,6 +989,7 @@ describe('side-effect', () =>
                         auditingFindSideEffect (query:$query)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1006,7 +1007,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -1044,6 +1044,7 @@ describe('side-effect', () =>
                         auditingFindSideEffectById (id:$id)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1061,7 +1062,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -1094,6 +1094,7 @@ describe('side-effect', () =>
                         auditingFindSideEffectById (id:$id)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1111,7 +1112,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -1142,6 +1142,7 @@ describe('side-effect', () =>
                         auditingUpdateSideEffectById (payload:$payload)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1159,7 +1160,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -1195,6 +1195,7 @@ describe('side-effect', () =>
                         auditingUpdateSideEffectById (payload:$payload)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1212,7 +1213,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -1246,6 +1246,7 @@ describe('side-effect', () =>
                         auditingUpdateSideEffects (payload:$payload query:$query)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1263,7 +1264,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -1302,6 +1302,7 @@ describe('side-effect', () =>
                         auditingDeleteSideEffectById (id:$id)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1319,7 +1320,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt
@@ -1352,6 +1352,7 @@ describe('side-effect', () =>
                         auditingDeleteSideEffectById (id:$id)
                         {
                             id
+                            tags
                             modelPath
                             modelName
                             operationId
@@ -1369,7 +1370,6 @@ describe('side-effect', () =>
                             query
                             body
                             userAgent
-                            tags
                             isRollback
                             rollbackSideEffectId
                             createdAt

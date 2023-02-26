@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/mock-user.data.ts",
-            "integrity": "sha1:d3de7176d86100b9cd255e339cf3085b89c78bc5"
+            "integrity": "sha1:9b55ad92e1383ea9872af129d4ff5cf0a65edf86"
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/mock-user.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/sequelize-user.model.ts",
-            "integrity": "sha1:600f50a81ba34af2f60689d67bedb9944bd482f5"
+            "integrity": "sha1:bfa01a3dab2284967d746e6c5ecbd6c9578b9f12"
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/sequelize-user.repository.ts",
@@ -655,11 +655,11 @@
         },
         {
             "path": "test/acceptance/iam/user.e2e-spec.ts",
-            "integrity": "sha1:f3384367b956314077e29948ebcedcafa3e1792b"
+            "integrity": "sha1:9d2ffd2c67a3c9a46017667161984aec02c5e061"
         },
         {
             "path": "postman/iam/iam.user.postman.json",
-            "integrity": "sha1:f4bb2bb285a18c09a2dfb0077237f3f7c83b1af8"
+            "integrity": "sha1:643e68a335a59c4a9571c651a2a730e03176ce6a"
         }
     ]
 }

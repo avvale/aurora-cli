@@ -1,3 +1,4 @@
+// ignored file
 import { OAuthClientGrantType } from '@api/graphql';
 
 export const boundedContexts = [

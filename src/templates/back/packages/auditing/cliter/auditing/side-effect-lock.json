@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data.ts",
-            "integrity": "sha1:3187d0f77e0cc5ea00d670418c37114a27ac5d03"
+            "integrity": "sha1:7f9ff86dae2398b7cb4acf6449c36c406782175f"
         },
         {
             "path": "src/@app/auditing/side-effect/infrastructure/mock/mock-side-effect.repository.ts",
@@ -767,11 +767,11 @@
         },
         {
             "path": "test/acceptance/auditing/side-effect.e2e-spec.ts",
-            "integrity": "sha1:41c8e841226ceec83deb703f89c5072e34cc812d"
+            "integrity": "sha1:a28fd4fcd479dbb446447af30c1c128284ea588b"
         },
         {
             "path": "postman/auditing/auditing.side-effect.postman.json",
-            "integrity": "sha1:f9433ad0975eb18f5fda4665ca242829d87ebc78"
+            "integrity": "sha1:063904b9cfd228e4ff3b5ab485dbe9c8aaf4b10f"
         }
     ]
 }

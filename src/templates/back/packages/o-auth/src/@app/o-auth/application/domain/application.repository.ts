@@ -110,7 +110,7 @@ export abstract class IApplicationRepository implements IRepository<OAuthApplica
         }
     ): Promise<void>;
 
-    // insert or update key identification elements already existing in the table
+    // insert or update key identification element already existing in the table
     abstract upsert(
         application: OAuthApplication,
         options?: {
