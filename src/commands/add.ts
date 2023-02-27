@@ -109,8 +109,7 @@ export default class Add extends Command
                     const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
                     if (callExpression)
                     {
-                        CallExpressionDriver.removeArgument(callExpression, 'AuthorizationDisabledAdapterGuard');
-                        callExpression.addArgument('AuthorizationPermissionsGuard');
+                        CallExpressionDriver.replaceArgument(callExpression, 'AuthorizationDisabledAdapterGuard', 'AuthorizationPermissionsGuard');
                     }
 
                     authDecoratorSourceFile.saveSync();
@@ -159,8 +158,7 @@ export default class Add extends Command
                     const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
                     if (callExpression)
                     {
-                        CallExpressionDriver.removeArgument(callExpression, 'AuthenticationDisabledAdapterGuard');
-                        callExpression.addArgument('AuthenticationJwtGuard');
+                        CallExpressionDriver.replaceArgument(callExpression, 'AuthenticationDisabledAdapterGuard', 'AuthenticationJwtGuard');
                     }
 
                     authDecoratorSourceFile.saveSync();

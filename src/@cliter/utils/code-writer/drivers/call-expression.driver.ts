@@ -2,21 +2,6 @@ import { CallExpression, SourceFile, SyntaxKind } from 'ts-morph';
 
 export class CallExpressionDriver
 {
-    public static removeArgument(
-        callExpression: CallExpression,
-        argumentName: string,
-    ): void
-    {
-        for (const [index, value] of callExpression.getArguments().entries())
-        {
-            if (value.getText() === argumentName)
-            {
-                callExpression.removeArgument(index);
-                break;
-            }
-        }
-    }
-
     public static findCallExpression(
         sourceFile: SourceFile,
         functionName: string,
@@ -50,5 +35,37 @@ export class CallExpressionDriver
         }
 
         return callExpressionsTarget;
+    }
+
+    public static replaceArgument(
+        callExpression: CallExpression,
+        oldArgumentName: string,
+        newArgumentName: string,
+    ): void
+    {
+        for (const [index, value] of callExpression.getArguments().entries())
+        {
+            if (value.getText() === oldArgumentName)
+            {
+                callExpression.insertArgument(index, newArgumentName);
+                CallExpressionDriver.removeArgument(callExpression, oldArgumentName);
+                break;
+            }
+        }
+    }
+
+    public static removeArgument(
+        callExpression: CallExpression,
+        argumentName: string,
+    ): void
+    {
+        for (const [index, value] of callExpression.getArguments().entries())
+        {
+            if (value.getText() === argumentName)
+            {
+                callExpression.removeArgument(index);
+                break;
+            }
+        }
     }
 }
