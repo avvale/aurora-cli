@@ -87,6 +87,21 @@ export default class Add extends Command
                         providersArray.addElement('AuditingAxiosInterceptorService', { useNewLines: true });
                     }
 
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@api/auditing/shared/services/auditing-runner-aurora-implementation.service',
+                        ['AuditingRunnerAuroraImplementationService'],
+                    );
+
+                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'providers',
+                        'AuditingRunner',
+                        'AuditingRunnerAuroraImplementationService',
+                    );
+
                     sharedModuleSourceFile.saveSync();
 
                     break;
