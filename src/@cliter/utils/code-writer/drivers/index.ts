@@ -1,4 +1,5 @@
 export { ArrayDriver } from './array.driver';
+export { CallExpressionDriver } from './call-expression.driver';
 export { CommonDriver } from './common.driver';
 export { DecoratorDriver } from './decorator.driver';
 export { ExportDriver } from './export.driver';

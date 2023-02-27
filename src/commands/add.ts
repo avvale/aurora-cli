@@ -1,7 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import { ArrayLiteralExpression } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
-import { CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver } from '../@cliter/utils/code-writer';
+import { CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver } from '../@cliter/utils/code-writer';
 
 export default class Add extends Command
 {
@@ -61,25 +61,31 @@ export default class Add extends Command
 
                     // add custom imports
                     const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
-                    if (ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuditingAxiosInterceptorService')) break;
-
-                    ImportDriver.createImportItems(
-                        sharedModuleSourceFile,
-                        '@nestjs/axios',
-                        ['HttpModule'],
-                    );
-
-                    ImportDriver.createImportItems(
-                        sharedModuleSourceFile,
-                        '@api/auditing/shared/services/auditing-axios-interceptor.service',
-                        ['AuditingAxiosInterceptorService'],
-                    );
-
                     const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
-                    const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
-                    importsArray.addElement('HttpModule', { useNewLines: true });
-                    const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
-                    providersArray.addElement('AuditingAxiosInterceptorService', { useNewLines: true });
+
+                    if (!ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'HttpModule'))
+                    {
+                        ImportDriver.createImportItems(
+                            sharedModuleSourceFile,
+                            '@nestjs/axios',
+                            ['HttpModule'],
+                        );
+
+                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                        importsArray.addElement('HttpModule', { useNewLines: true });
+                    }
+
+                    if (!ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuditingAxiosInterceptorService'))
+                    {
+                        ImportDriver.createImportItems(
+                            sharedModuleSourceFile,
+                            '@api/auditing/shared/services/auditing-axios-interceptor.service',
+                            ['AuditingAxiosInterceptorService'],
+                        );
+
+                        const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
+                        providersArray.addElement('AuditingAxiosInterceptorService', { useNewLines: true });
+                    }
 
                     sharedModuleSourceFile.saveSync();
 
@@ -88,20 +94,26 @@ export default class Add extends Command
 
                 case 'iam': {
                     const project = CommonDriver.createProject(['tsconfig.json']);
-                    const sourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(sourceFile, 'iam', ['IamModule']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'iam', ['IamModule']);
+                    appModuleSourceFile.saveSync();
 
-                    Installer.changeDecoratorPropertyAdapter(
-                        sourceFile,
-                        'AppModule',
-                        'Module',
-                        'providers',
-                        'AuthorizationGuard',
-                        'AuthorizationPermissionsGuard',
+                    // change auth decorator
+                    const authDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+                    ImportDriver.createImportItems(
+                        authDecoratorSourceFile,
                         '@api/iam/shared/guards/authorization-permissions.guard',
+                        ['AuthorizationPermissionsGuard'],
                     );
 
-                    sourceFile.saveSync();
+                    const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
+                    if (callExpression)
+                    {
+                        CallExpressionDriver.removeArgument(callExpression, 'AuthorizationDisabledAdapterGuard');
+                        callExpression.addArgument('AuthorizationPermissionsGuard');
+                    }
+
+                    authDecoratorSourceFile.saveSync();
                     break;
                 }
 
@@ -109,41 +121,49 @@ export default class Add extends Command
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(appModuleSourceFile, 'o-auth', ['OAuthModule']);
-
-                    Installer.changeDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'Module',
-                        'providers',
-                        'AuthenticationGuard',
-                        'AuthenticationJwtGuard',
-                        '@api/o-auth/shared/guards/authentication-jwt.guard',
-                    );
                     appModuleSourceFile.saveSync();
 
-                    // add custom imports
+                    // imports to shared module
                     const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
-                    if (ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuthJwtStrategyRegistryModule')) break;
+                    if (!ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuthJwtStrategyRegistryModule'))
+                    {
+                        ImportDriver.createImportItems(
+                            sharedModuleSourceFile,
+                            '@app/o-auth/shared/modules/auth-jwt-strategy-registry.module',
+                            ['AuthJwtStrategyRegistryModule'],
+                        );
 
-                    ImportDriver.createImportItems(
-                        sharedModuleSourceFile,
-                        '@app/o-auth/shared/modules/auth-jwt-strategy-registry.module',
-                        ['AuthJwtStrategyRegistryModule'],
-                    );
+                        ImportDriver.createImportItems(
+                            sharedModuleSourceFile,
+                            '@app/o-auth/shared/jwt-config',
+                            ['jwtConfig'],
+                        );
 
-                    ImportDriver.createImportItems(
-                        sharedModuleSourceFile,
-                        '@app/o-auth/shared/jwt-config',
-                        ['jwtConfig'],
-                    );
-
-                    const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
-                    const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
-                    importsArray.addElement('AuthJwtStrategyRegistryModule.forRoot(jwtConfig)', { useNewLines: true });
-                    const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
-                    exportsArray.addElement('AuthJwtStrategyRegistryModule', { useNewLines: true });
+                        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
+                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                        importsArray.addElement('AuthJwtStrategyRegistryModule.forRoot(jwtConfig)', { useNewLines: true });
+                        const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
+                        exportsArray.addElement('AuthJwtStrategyRegistryModule', { useNewLines: true });
+                    }
 
                     sharedModuleSourceFile.saveSync();
+
+                    // change Auth decorator
+                    const authDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+                    ImportDriver.createImportItems(
+                        authDecoratorSourceFile,
+                        '@api/o-auth/shared/guards/authentication-jwt.guard',
+                        ['AuthenticationJwtGuard'],
+                    );
+
+                    const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
+                    if (callExpression)
+                    {
+                        CallExpressionDriver.removeArgument(callExpression, 'AuthenticationDisabledAdapterGuard');
+                        callExpression.addArgument('AuthenticationJwtGuard');
+                    }
+
+                    authDecoratorSourceFile.saveSync();
 
                     break;
                 }
@@ -182,13 +202,14 @@ export default class Add extends Command
 
                     // add custom imports
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
-                    if (ImportDriver.hasImportDeclarations(appModuleSourceFile, 'UserMetaStorageIamAdapterService')) break;
-
-                    ImportDriver.createImportItems(
-                        appModuleSourceFile,
-                        './modules/admin/apps/iam/user-meta/user-meta-storage-iam-adapter.service',
-                        ['UserMetaStorageIamAdapterService'],
-                    );
+                    if (!ImportDriver.hasImportDeclarations(appModuleSourceFile, 'UserMetaStorageIamAdapterService'))
+                    {
+                        ImportDriver.createImportItems(
+                            appModuleSourceFile,
+                            './modules/admin/apps/iam/user-meta/user-meta-storage-iam-adapter.service',
+                            ['UserMetaStorageIamAdapterService'],
+                        );
+                    }
 
                     DecoratorDriver.changeDecoratorPropertyAdapter(
                         appModuleSourceFile,
