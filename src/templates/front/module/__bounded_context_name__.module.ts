@@ -12,6 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -35,6 +36,7 @@ import { {{ toPascalCase schema.boundedContextName }}Component } from './{{ toKe
         MatDatepickerModule,
         MatIconModule,
         MatInputModule,
+        MatProgressSpinnerModule,
         MatSelectModule,
         MatSnackBarModule,
     ],
