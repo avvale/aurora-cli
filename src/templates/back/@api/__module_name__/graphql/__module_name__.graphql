@@ -30,7 +30,7 @@ type {{ schema.aggregateName }}
 {{/eq}}
 {{#eq relationship ../relationship.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type .ID ~}}
+{{#eq type ../sqlType.ID ~}}
     {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
     {{ toCamelCase relationshipField }}: {{ relationshipAggregate }}
 {{else ~}}
