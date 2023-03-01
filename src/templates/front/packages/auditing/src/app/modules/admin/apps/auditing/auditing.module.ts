@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -38,6 +39,7 @@ import { HttpCommunicationDetailComponent } from './http-communication/http-comm
         MatCheckboxModule,
         MatIconModule,
         MatInputModule,
+        MatProgressSpinnerModule,
         MatSelectModule,
         MatSnackBarModule,
         MatTooltipModule,

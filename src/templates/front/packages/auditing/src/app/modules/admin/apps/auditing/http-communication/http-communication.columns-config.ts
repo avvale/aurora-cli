@@ -3,8 +3,8 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 export const httpCommunicationColumnsConfig: ColumnConfig[] = [
     {
         type : ColumnDataType.STRING,
-        field: 'code',
-        sort : 'code',
+        field: 'tags',
+        sort : 'tags',
     },
     {
         type : ColumnDataType.NUMBER,

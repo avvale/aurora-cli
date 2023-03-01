@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
-    code
+    tags
     event
     status
     method

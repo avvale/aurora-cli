@@ -2,6 +2,11 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const sideEffectColumnsConfig: ColumnConfig[] = [
     {
+        type : ColumnDataType.STRING,
+        field: 'tags',
+        sort : 'tags',
+    },
+    {
         type     : ColumnDataType.STRING,
         field    : 'createdAt',
         sort     : 'createdAt',
@@ -26,11 +31,6 @@ export const sideEffectColumnsConfig: ColumnConfig[] = [
         type : ColumnDataType.STRING,
         field: 'auditableId',
         sort : 'auditableId',
-    },
-    {
-        type : ColumnDataType.STRING,
-        field: 'tags',
-        sort : 'tags',
     },
     {
         type : ColumnDataType.STRING,
