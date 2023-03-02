@@ -53,6 +53,10 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{#if schema.properties.hasI18n}}
         constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
         {{/if}}
-        return await this.queryBus.ask(new Get{{ toPascalCase schema.moduleNames }}Query(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new Get{{ toPascalCase schema.moduleNames }}Query(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }
