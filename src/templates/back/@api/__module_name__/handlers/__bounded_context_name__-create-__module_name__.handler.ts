@@ -47,10 +47,23 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         ));
 
         {{#if schema.properties.hasI18n}}
-        const constraint = await this.addI18NConstraintService.main({}, '{{ toCamelCase schema.moduleName }}I18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, constraint, { timezone }));
+        const constraint = await this.addI18NConstraintService.main(
+            {},
+            '{{ toCamelCase schema.moduleName }}I18N',
+            payload.langId,
+            { contentLanguageFormat: FormatLangCode.ID },
+        );
+        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+            payload.id,
+            constraint,
+            { timezone },
+        ));
         {{else}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+            payload.id,
+            {},
+            { timezone },
+        ));
         {{/if}}
     }
 }

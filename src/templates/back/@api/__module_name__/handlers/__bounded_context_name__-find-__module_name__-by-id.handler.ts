@@ -34,8 +34,16 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto>
     {
         {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
+        constraint = await this.addI18NConstraintService.main(
+            constraint,
+            '{{ toCamelCase schema.moduleName }}I18N',
+            contentLanguage,
+        );
         {{/if}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+            id,
+            constraint,
+            { timezone },
+        ));
     }
 }
