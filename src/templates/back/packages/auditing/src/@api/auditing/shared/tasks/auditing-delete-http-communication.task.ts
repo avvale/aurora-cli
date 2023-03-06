@@ -34,7 +34,7 @@ export class AuditingDeleteHttpCommunicationTasksService
         }
         catch (error)
         {
-            Logger.error('Error to delete records from HttpCommunication table: ' +  error.message, 'AuditingDeleteHttpCommunicationTasksService');
+            Logger.error('Error to delete records from HttpCommunication table: ' + error.message, 'AuditingDeleteHttpCommunicationTasksService');
         }
     }
 }

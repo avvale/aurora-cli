@@ -34,7 +34,7 @@ export class AuditingDeleteSideEffectTasksService
         }
         catch (error)
         {
-            Logger.error('Error to delete records from SideEffect table: ' +  error.message, 'AuditingDeleteSideEffectTasksService');
+            Logger.error('Error to delete records from SideEffect table: ' + error.message, 'AuditingDeleteSideEffectTasksService');
         }
     }
 }
