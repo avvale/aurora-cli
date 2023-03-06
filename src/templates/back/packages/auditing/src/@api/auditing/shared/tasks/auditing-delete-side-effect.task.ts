@@ -16,18 +16,25 @@ export class AuditingDeleteSideEffectTasksService
     @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_MIDNIGHT) // Every first day of the month at 00:00:00
     async handleCron(): Promise<void>
     {
-        const deleteBeforeAt = dayjs().subtract(1, 'month').format('YYYY-MM-DD HH:mm:ss');
+        try
+        {
+            const deleteBeforeAt = dayjs().subtract(1, 'month').format('YYYY-MM-DD HH:mm:ss');
 
-        await this.commandBus.dispatch(new DeleteSideEffectsCommand(
-            {
-                where: {
-                    createdAt: {
-                        [Operator.lte]: deleteBeforeAt,
+            await this.commandBus.dispatch(new DeleteSideEffectsCommand(
+                {
+                    where: {
+                        createdAt: {
+                            [Operator.lte]: deleteBeforeAt,
+                        },
                     },
                 },
-            },
-        ));
+            ));
 
-        Logger.debug('Delete side effects before ' + deleteBeforeAt, 'AuditingDeleteSideEffectTasksService');
+            Logger.debug('Delete side effects before ' + deleteBeforeAt, 'AuditingDeleteSideEffectTasksService');
+        }
+        catch (error)
+        {
+            Logger.error('Error to delete records from SideEffect table: ' +  error.message, 'AuditingDeleteSideEffectTasksService');
+        }
     }
 }
