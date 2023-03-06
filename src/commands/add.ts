@@ -55,11 +55,28 @@ export default class Add extends Command
             {
                 case 'auditing': {
                     const project = CommonDriver.createProject(['tsconfig.json']);
-                    const sourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(sourceFile, 'auditing', ['AuditingModule']);
-                    sourceFile.saveSync();
 
-                    // add custom imports
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    const appModuleClassDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(appModuleSourceFile, 'AppModule', 'Module');
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'auditing', ['AuditingModule']);
+
+                    // add ScheduleModule
+                    if (!ImportDriver.hasImportDeclarations(appModuleSourceFile, 'ScheduleModule'))
+                    {
+                        ImportDriver.createImportItems(
+                            appModuleSourceFile,
+                            '@nestjs/schedule',
+                            ['ScheduleModule'],
+                        );
+
+                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(appModuleClassDecoratorArguments, 'imports');
+                        importsArray.addElement('ScheduleModule.forRoot()', { useNewLines: true });
+                    }
+
+                    appModuleSourceFile.saveSync();
+
+                    // shared.module.ts file
                     const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
                     const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
 
