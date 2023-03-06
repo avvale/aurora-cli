@@ -5,6 +5,8 @@ import { AuditingSeeder } from './auditing.seeder';
 import { AuditingModels, AuditingHandlers, AuditingServices, AuditingRepositories, AuditingSagas } from '@app/auditing';
 import { AuditingSideEffectControllers, AuditingSideEffectResolvers, AuditingSideEffectApiHandlers, AuditingSideEffectServices } from './side-effect';
 import { AuditingHttpCommunicationControllers, AuditingHttpCommunicationResolvers, AuditingHttpCommunicationApiHandlers, AuditingHttpCommunicationServices } from './http-communication';
+import { AuditingDeleteSideEffectTasksService } from './shared/tasks/auditing-delete-side-effect.task';
+import { AuditingDeleteHttpCommunicationTasksService } from './shared/tasks/auditing-delete-http-communication.task';
 
 @Module({
     imports: [
@@ -18,6 +20,8 @@ import { AuditingHttpCommunicationControllers, AuditingHttpCommunicationResolver
         ...AuditingHttpCommunicationControllers,
     ],
     providers: [
+        AuditingDeleteHttpCommunicationTasksService,
+        AuditingDeleteSideEffectTasksService,
         AuditingSeeder,
         ...AuditingHandlers,
         ...AuditingServices,
