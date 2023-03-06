@@ -10,8 +10,9 @@ export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleNam
             name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ toPascalCase moduleNameSuffix }}{{ toPascalCase currentProperty.name }}',
             nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
-            {{#if currentProperty.length}}length     : {{ currentProperty.length }},{{/if}}
-
+            {{#if currentProperty.length}}
+            length     : {{ currentProperty.length }},
+            {{/if}}
         }, validationRules));
     }
 }
