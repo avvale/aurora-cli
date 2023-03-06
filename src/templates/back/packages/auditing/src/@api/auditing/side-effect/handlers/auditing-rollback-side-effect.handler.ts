@@ -1,6 +1,6 @@
 import { FindSideEffectByIdQuery } from '@app/auditing/side-effect/application/find/find-side-effect-by-id.query';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
+import { AuditingMeta, AuditingRunner, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
 import * as path from 'node:path';
 
 // @app
@@ -14,6 +14,7 @@ export class AuditingRollbackSideEffectHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        private readonly auditingRunner: AuditingRunner,
     ) {}
 
     async main(
@@ -45,7 +46,10 @@ export class AuditingRollbackSideEffectHandler
                 if (!objectCreated) throw new BadRequestException(`The object from model ${sideEffect.modelName} with id ${sideEffect.auditableId} no longer exists in the database`);
 
                 await objectCreated.destroy({
-                    auditing,
+                    auditing: {
+                        ...auditing,
+                        auditingRunner: this.auditingRunner,
+                    },
                 });
                 break;
 
@@ -63,7 +67,10 @@ export class AuditingRollbackSideEffectHandler
                             updatedAt: now,
                         },
                         {
-                            auditing,
+                            auditing: {
+                                ...auditing,
+                                auditingRunner: this.auditingRunner,
+                            },
                         },
                     );
                 break;
@@ -77,7 +84,10 @@ export class AuditingRollbackSideEffectHandler
                             updatedAt: now,
                         },
                         {
-                            auditing,
+                            auditing: {
+                                ...auditing,
+                                auditingRunner: this.auditingRunner,
+                            },
                         },
                     );
                 break;

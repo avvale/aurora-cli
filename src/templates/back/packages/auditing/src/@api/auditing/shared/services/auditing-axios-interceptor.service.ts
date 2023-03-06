@@ -62,7 +62,7 @@ export class AuditingAxiosInterceptorService implements OnModuleInit
             // set uuid to update response
             config[META_KEY] = {
                 id  : Utils.uuid(),
-                tags: JSON.parse(config.headers['X-Auditing-Tags']),
+                tags: config.headers['X-Auditing-Tags'] ? config.headers['X-Auditing-Tags'].split(',') : [],
             };
 
             await this.commandBus.dispatch(new CreateHttpCommunicationCommand(

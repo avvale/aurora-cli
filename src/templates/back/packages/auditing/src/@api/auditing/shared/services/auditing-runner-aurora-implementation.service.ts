@@ -16,9 +16,12 @@ export class AuditingRunnerAuroraImplementationService extends AuditingRunner
         newValue: any,
     ): void
     {
+        // execute tags function if it is a function, to customize tags
+        auditingMeta.tags = typeof auditingMeta.tags === 'function' ? auditingMeta.tags(oldValue, newValue, auditingMeta) : auditingMeta.tags;
+
         AuditingSideEffectModel.create({
             id                  : auditingMeta.id ? auditingMeta.id : Utils.uuid(), // defined id when execute rollback to fill rollbackSideEffectId column
-            tags                : auditingMeta.tags,
+            tags                : Array.isArray(auditingMeta.tags) ? auditingMeta.tags : null,
             modelPath,
             modelName,
             operationId         : auditingMeta.operationId,
