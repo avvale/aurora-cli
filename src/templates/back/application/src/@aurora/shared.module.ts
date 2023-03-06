@@ -21,10 +21,10 @@ import { CqrsConfigModule } from './cqrs-config.module';
     ],
     exports: [
         AddI18NConstraintService,
+        AuditingRunner,
         CacheModule,
         ConfigModule,
-        CqrsConfigModule,
-        AuditingRunner,
+        CqrsConfigModule
     ],
 })
 export class SharedModule {}
