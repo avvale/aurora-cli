@@ -24,7 +24,7 @@
                 class="ml-3"
                 form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getSpinnerFlag | async)"
             >
                 <mat-icon
                     *ngIf="!('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getSpinnerFlag | async)"
@@ -44,7 +44,7 @@
                 form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                 class="ml-3"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getSpinnerFlag | async)"
             >
                 <mat-icon
                     *ngIf="!('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getSpinnerFlag | async)"

@@ -165,6 +165,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row => {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = {{ toCamelCase schema.moduleName }}ColumnsConfig.map({{ toCamelCase schema.moduleName }}ColumnConfig => {{ toCamelCase schema.moduleName }}ColumnConfig.field);
                 const headers: string[] = columns.map(column => this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.' + column.toPascalCase()));
 
