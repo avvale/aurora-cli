@@ -1,4 +1,4 @@
-import { Command, Flags } from '@oclif/core';
+import { Args, Command, Flags } from '@oclif/core';
 import { Prompter, ModuleDefinitionSchema, YamlManager, Scope, ScopeElement, BackHandler } from '../@cliter';
 import { FrontHandler } from '../@cliter/handlers/front.handler';
 import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../@cliter/functions/common';
@@ -8,8 +8,7 @@ export default class Load extends Command
 {
     static description = 'Load aurora [bounded-context, module] from yaml file, located in the cliter folder';
 
-    static flags =
-    {
+    static flags = {
         help : Flags.help({ char: 'h' }),
         force: Flags.boolean({
             char       : 'f',
@@ -38,8 +37,8 @@ export default class Load extends Command
         }),
     };
 
-    static args = [
-        {
+    static args = {
+        firstArg: Args.string({
             name       : 'scope',
             required   : true,
             description: 'Scope where our command will act.',
@@ -47,8 +46,8 @@ export default class Load extends Command
                 'back',
                 'front',
             ],
-        },
-        {
+        }),
+        secondArg: Args.string({
             name       : 'element',
             required   : true,
             description: 'Type element to load.',
@@ -56,8 +55,8 @@ export default class Load extends Command
                 'bounded-context',
                 'module',
             ],
-        },
-    ];
+        }),
+    };
 
     static examples = [
         '$ aurora load back module -n=my-bounded-context/my-module',
@@ -68,7 +67,7 @@ export default class Load extends Command
     {
         const { args, flags }   = await this.parse(Load);
 
-        if (args.element === ScopeElement.MODULE)
+        if (args.secondArg === ScopeElement.MODULE)
         {
             const flagName: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.name);
             const { boundedContextName, moduleName } = await Prompter.promptForLoadModule(flagName.boundedContextName, flagName.moduleName);
@@ -84,7 +83,7 @@ export default class Load extends Command
                 schema,
             };
 
-            if (args.scope === Scope.BACK)
+            if (args.firstArg === Scope.BACK)
             {
                 await BackHandler.generateModule(
                     generateCommandState,
@@ -96,7 +95,7 @@ export default class Load extends Command
                 if (!flags.noGraphQLTypes) await generateGraphqlTypes(generateCommandState);
             }
 
-            if (args.scope === Scope.FRONT)
+            if (args.firstArg === Scope.FRONT)
             {
                 await FrontHandler.generateModule(generateCommandState);
             }

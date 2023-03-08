@@ -1,4 +1,4 @@
-import { Command, Flags } from '@oclif/core';
+import { Args, Command, Flags } from '@oclif/core';
 import { BackHandler, FrontHandler, Scope } from '../@cliter';
 import { generateEnvFile, installDependencies } from '../@cliter/functions/back';
 
@@ -23,8 +23,8 @@ export default class New extends Command
         }),
     };
 
-    static args = [
-        {
+    static args = {
+        firstArg: Args.string({
             name       : 'scope',
             required   : true,
             description: 'Scope where our command will act.',
@@ -32,13 +32,13 @@ export default class New extends Command
                 'back',
                 'front',
             ],
-        },
-        {
+        }),
+        secondArg: Args.string({
             name       : 'name',
             required   : true,
             description: 'Name of item to create',
-        },
-    ];
+        }),
+    };
 
     static examples = [
         '$ aurora new back my-app',
@@ -49,31 +49,31 @@ export default class New extends Command
     {
         const { args, flags } = await this.parse(New);
 
-        switch (args.scope)
+        switch (args.firstArg)
         {
             case Scope.BACK:
                 await BackHandler.new({
-                    appName: args.name,
+                    appName: args.secondArg,
                     command: this,
                     flags,
                 });
 
                 await generateEnvFile(
                     this,
-                    args.name,
+                    args.secondArg,
                 );
 
-                if (flags.install) installDependencies(args.name);
+                if (flags.install) await installDependencies(args.secondArg);
                 break;
 
             case Scope.FRONT:
                 await FrontHandler.new({
-                    appName: args.name,
+                    appName: args.secondArg,
                     command: this,
                     flags,
                 });
 
-                if (flags.install) installDependencies(args.name);
+                if (flags.install) await installDependencies(args.secondArg);
                 break;
         }
     }

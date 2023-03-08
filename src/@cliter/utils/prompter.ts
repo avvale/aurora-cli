@@ -186,75 +186,6 @@ export const Prompter =
         return inquirer.prompt(questions);
     },
 
-    async promptForSeedModule(boundedContextName?: string, moduleName?: string)
-    {
-        const questions = [];
-
-        questions.push({
-            name   : 'boundedContextName',
-            message: 'Input the name of bonded context where is the module to run seed',
-            type   : 'input',
-            when   : (answers: any) =>
-            {
-                if (boundedContextName)
-                {
-                    answers.boundedContextName = boundedContextName;
-                    return false;
-                }
-
-                return true;
-            },
-        }, {
-            name   : 'moduleName',
-            message: 'Input the name of module',
-            type   : 'input',
-            when   : (answers: any) =>
-            {
-                if (moduleName)
-                {
-                    answers.moduleName = moduleName;
-                    return false;
-                }
-
-                return true;
-            },
-        });
-
-        const response = await inquirer.prompt(questions);
-
-        return {
-            boundedContextName: response.boundedContextName.toKebabCase(),
-            moduleName        : response.moduleName.toKebabCase(),
-        };
-    },
-
-    async promptForSeedBoundedContext(boundedContextName?: string)
-    {
-        const questions = [];
-
-        questions.push({
-            name   : 'boundedContextName',
-            message: 'Input the name of bonded context where are the modules for run seeds',
-            type   : 'input',
-            when   : (answers: any) =>
-            {
-                if (boundedContextName)
-                {
-                    answers.boundedContextName = boundedContextName;
-                    return false;
-                }
-
-                return true;
-            },
-        });
-
-        const response = await inquirer.prompt(questions);
-
-        return {
-            boundedContextName: response.boundedContextName.toKebabCase(),
-        };
-    },
-
     async promptDefineAggregateProperty(generateCommandState: GenerateCommandState): Promise<Property>
     {
         const questions = [];
@@ -460,7 +391,7 @@ export const Prompter =
         });
     },
 
-    async promptAddPipeline(scope: 'back' | 'front'): Promise<{ from: string; to: string; service: string;}>
+    async promptAddPipeline(scope: string): Promise<{ from: string; to: string; service: string;}>
     {
         const questions = [];
         let platform = '';
@@ -496,7 +427,7 @@ export const Prompter =
         return inquirer.prompt(questions);
     },
 
-    async promptAddPackage(scope: Scope): Promise<{ from: string; to: string; service: string;}>
+    async promptAddPackage(scope: string): Promise<{ from: string; to: string; service: string;}>
     {
         const questions = [];
         questions.push(

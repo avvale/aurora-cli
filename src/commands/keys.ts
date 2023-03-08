@@ -11,8 +11,6 @@ export default class Key extends Command
         help: Flags.help({ char: 'h' }),
     };
 
-    static args = [];
-
     static examples = [
         '$ aurora keys',
         '$ aurora --help',
@@ -20,8 +18,6 @@ export default class Key extends Command
 
     public async run(): Promise<void>
     {
-        const { args, flags } = await this.parse(Key);
-
         const { prvKeyObj, pubKeyObj } = rs.KEYUTIL.generateKeypair('RSA', 2048);
 
         const prvPEM = rs.KEYUTIL.getPEM(prvKeyObj, 'PKCS1PRV');

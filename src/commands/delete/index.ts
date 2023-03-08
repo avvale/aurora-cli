@@ -4,7 +4,7 @@ import * as chalk from 'chalk';
 import * as inquirer from 'inquirer';
 import * as emoji from 'node-emoji';
 import * as logSymbols from 'log-symbols';
-import { Command, Flags } from '@oclif/core';
+import { Args, Command, Flags } from '@oclif/core';
 import { cliterConfig, FsExtend, TemplateElement } from '../../@cliter';
 
 export default class Delete extends Command
@@ -15,40 +15,40 @@ export default class Delete extends Command
         help: Flags.help({ char: 'h' }),
     };
 
-    static args = [
-        {
+    static args = {
+        firstArg: Args.string({
             name       : 'elementType',
             description: 'Type element to delete',
             options    : ['bounded-context', 'b', 'module', 'm'],
             required   : true,
-        },
-        {
+        }),
+        secondArg: Args.string({
             name       : 'elementName',
             description: 'Name element to create',
             required   : true,
-        }
-    ];
+        }),
+    };
 
     async run(): Promise<void>
     {
         const { args, flags } = await this.parse(Delete);
 
-        if (args.elementType === 'b') args.elementType = TemplateElement.BACK_BOUNDED_CONTEXT;
-        if (args.elementType === 'm') args.elementType = TemplateElement.BACK_APP;
+        if (args.firstArg === 'b') args.firstArg = TemplateElement.BACK_BOUNDED_CONTEXT;
+        if (args.firstArg === 'm') args.firstArg = TemplateElement.BACK_APP;
 
-        if (args.elementType === TemplateElement.BACK_APP)
+        if (args.firstArg === TemplateElement.BACK_APP)
         {
-            if (fs.existsSync(path.join(process.cwd(), 'src', cliterConfig.appContainer, args.elementName)))
+            if (fs.existsSync(path.join(process.cwd(), 'src', cliterConfig.appContainer, args.secondArg)))
             {
-                if ((await this.promptForDelete(args.elementName)).hasDelete)
+                if ((await this.promptForDelete(args.secondArg)).hasDelete)
                 {
-                    FsExtend.rmDir(path.join(process.cwd(), 'src', cliterConfig.appContainer, args.elementName));
-                    this.log(`%s %s Module ${args.elementName} has been deleted %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
+                    FsExtend.rmDir(path.join(process.cwd(), 'src', cliterConfig.appContainer, args.secondArg));
+                    this.log(`%s %s Module ${args.secondArg} has been deleted %s`, chalk.green.bold('DONE'), emoji.get('open_file_folder'), logSymbols.success);
                 }
             }
             else
             {
-                this.log(`%s Module ${args.elementName} not exist, be sure to enter the module in the format: bounded-context/module %s`, chalk.yellow.bold('WARNING'), logSymbols.warning);
+                this.log(`%s Module ${args.secondArg} not exist, be sure to enter the module in the format: bounded-context/module %s`, chalk.yellow.bold('WARNING'), logSymbols.warning);
             }
         }
     }

@@ -1,14 +1,13 @@
-import { Command, Flags } from '@oclif/core';
+import { Args, Command, Flags } from '@oclif/core';
 import { ArrayLiteralExpression } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver } from '../@cliter/utils/code-writer';
 
-export default class Add extends Command
+export class Add extends Command
 {
     static description = 'Add a aurora package';
 
-    static flags =
-    {
+    static flags = {
         help : Flags.help({ char: 'h' }),
         force: Flags.boolean({
             char       : 'f',
@@ -16,8 +15,8 @@ export default class Add extends Command
         }),
     };
 
-    static args = [
-        {
+    static args = {
+        firstArg: Args.string({
             name       : 'scope',
             required   : true,
             description: 'Scope where our command will act.',
@@ -25,8 +24,8 @@ export default class Add extends Command
                 Scope.BACK,
                 Scope.FRONT,
             ],
-        },
-    ];
+        }),
+    };
 
     static examples = [
         '$ aurora add back auditing',
@@ -34,11 +33,11 @@ export default class Add extends Command
         '$ aurora --help',
     ];
 
-    public async run(): Promise<void>
+    async run(): Promise<void>
     {
         const { args, flags } = await this.parse(Add);
 
-        const { packageName }: any = await Prompter.promptAddPackage(args.scope);
+        const { packageName }: any = await Prompter.promptAddPackage(args.firstArg);
 
         // define state like a generate command
         const addCommandState = {
@@ -47,7 +46,7 @@ export default class Add extends Command
             packageName,
         };
 
-        if (args.scope === Scope.BACK)
+        if (args.firstArg === Scope.BACK)
         {
             await BackHandler.addPackage(addCommandState);
 
@@ -200,7 +199,7 @@ export default class Add extends Command
             }
         }
 
-        if (args.scope === Scope.FRONT)
+        if (args.firstArg === Scope.FRONT)
         {
             switch (packageName)
             {

@@ -1,4 +1,4 @@
-import { Command, Flags } from '@oclif/core';
+import { Args, Command, Flags } from '@oclif/core';
 import { AdditionalApis, BackHandler, Prompter, Properties, Property, Scope, ScopeElement, SqlType } from '../@cliter';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
 import { getBoundedContextModuleFromFlag } from '../@cliter/functions/common';
@@ -7,8 +7,7 @@ export default class Generate extends Command
 {
     static description = 'Generate aurora item';
 
-    static flags =
-    {
+    static flags = {
         help : Flags.help({ char: 'h' }),
         force: Flags.boolean({
             char       : 'f',
@@ -29,8 +28,8 @@ export default class Generate extends Command
         }),
     };
 
-    static args = [
-        {
+    static args = {
+        firstArg: Args.string({
             name       : 'scope',
             required   : true,
             description: 'Scope where our command will act.',
@@ -38,8 +37,8 @@ export default class Generate extends Command
                 'back',
                 'front',
             ],
-        },
-        {
+        }),
+        secondArg: Args.string({
             name       : 'element',
             required   : true,
             description: 'Type of element to generate.',
@@ -48,8 +47,8 @@ export default class Generate extends Command
                 'bounded-context',
                 'module',
             ],
-        },
-    ];
+        }),
+    };
 
     static examples = [
         '$ aurora generate back module -n=my-bounded-context/my-module',
@@ -61,8 +60,8 @@ export default class Generate extends Command
         const { args, flags } = await this.parse(Generate);
 
         if (
-            args.scope === Scope.BACK &&
-            args.element === ScopeElement.MODULE
+            args.firstArg === Scope.BACK &&
+            args.secondArg === ScopeElement.MODULE
         )
         {
             const flagName: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.name);
@@ -118,7 +117,7 @@ export default class Generate extends Command
                 { hasGenerateTestingFiles: true },
             );
 
-            if (args.scope === Scope.BACK && !flags.noGraphQLTypes)
+            if (args.firstArg === Scope.BACK && !flags.noGraphQLTypes)
             {
                 await generateGraphqlTypes(generateCommandState);
             }
