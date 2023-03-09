@@ -23,7 +23,6 @@
         "cli-table3": "^0.6.3",
         "copyfiles": "^2.4.1",
         "dayjs": "^1.11.7",
-        "execa": "^7.0.0",
         "faker": "^5.5.3",
         "handlebars": "^4.7.7",
         "handlebars-helpers": "^0.10.0",

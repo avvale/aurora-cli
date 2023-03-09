@@ -1,6 +1,7 @@
-import { Args, Command, Flags } from '@oclif/core';
+import { Args, Command, Flags, ux } from '@oclif/core';
 import { ArrayLiteralExpression } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
+import { exec } from '../@cliter/functions/common';
 import { CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver } from '../@cliter/utils/code-writer';
 
 export class Add extends Command
@@ -53,6 +54,11 @@ export class Add extends Command
             switch (packageName)
             {
                 case 'auditing': {
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@nestjs/axios', '@nestjs/schedule']);
+                    await exec('npm', ['install', '-D', '@types/cron']);
+                    ux.action.stop('Completed.');
+
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
                     // app.module.ts file
@@ -120,6 +126,9 @@ export class Add extends Command
 
                     sharedModuleSourceFile.saveSync();
 
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed.');
                     break;
                 }
 
@@ -144,10 +153,20 @@ export class Add extends Command
                     }
 
                     authDecoratorSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed.');
+
                     break;
                 }
 
                 case 'oAuth': {
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@nestjs/jwt', '@nestjs/passport', 'passport-jwt']);
+                    await exec('npm', ['install', '-D', '@types/passport-jwt']);
+                    ux.action.stop('Completed.');
+
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(appModuleSourceFile, 'o-auth', ['OAuthModule']);
@@ -193,6 +212,10 @@ export class Add extends Command
                     }
 
                     authDecoratorSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed.');
 
                     break;
                 }
