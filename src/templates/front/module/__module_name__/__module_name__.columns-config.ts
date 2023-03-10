@@ -4,9 +4,10 @@ export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = 
     {{#each schema.properties.gridFields}}
     {{#if (isAllowProperty ../schema.moduleName this) }}
     {
-        type : ColumnDataType.{{ getColumnDataType }},
-        field: '{{ toCamelCase name }}',
-        sort : '{{ toCamelCase name }}',
+        type       : ColumnDataType.{{ getColumnDataType }},
+        field      : '{{ toCamelCase name }}',
+        sort       : '{{ toCamelCase name }}',
+        translation: '{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name }}',
     },
     {{/if}}
     {{/each}}
