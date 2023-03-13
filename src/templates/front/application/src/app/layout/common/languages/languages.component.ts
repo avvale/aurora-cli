@@ -52,7 +52,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
             this.activeLang = activeLang;
 
             // Update the navigation
-            this._updateNavigation(activeLang);
+            this.updateNavigationTranslations(activeLang);
         });
 
         // Set the country iso codes for languages for flags
@@ -103,7 +103,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
      * @param lang
      * @private
      */
-    private _updateNavigation(lang: string): void
+    private updateNavigationTranslations(lang: string): void
     {
         // Get the component -> navigation data -> item
         const navComponent = this.fuseNavigationService.getComponent<FuseVerticalNavigationComponent>('mainNavigation');

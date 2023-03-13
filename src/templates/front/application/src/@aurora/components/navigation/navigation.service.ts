@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
-import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
-import { FuseNavigationService } from '@fuse/components/navigation';
+import { AuthorizationService } from '@aurora';
 import { IamService } from '@aurora/modules/iam/iam.service';
+import { FuseNavigationService } from '@fuse/components/navigation';
+import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { adminNavigation } from 'app/modules/admin/admin.navigation';
-import { COMPACT_NAVIGATION, DEFAULT_NAVIGATION, FUTURISTIC_NAVIGATION, HORIZONTAL_NAVIGATION } from './navigation.types';
 import cloneDeep from 'lodash-es/cloneDeep';
+import { COMPACT_NAVIGATION, DEFAULT_NAVIGATION, FUTURISTIC_NAVIGATION, HORIZONTAL_NAVIGATION } from './navigation.types';
 
 @Injectable({
     providedIn: 'root',
@@ -18,6 +19,7 @@ export class NavigationService
     constructor(
         private readonly fuseNavigationService: FuseNavigationService,
         private readonly iamService: IamService,
+        private readonly authorizationService: AuthorizationService,
         @Inject(COMPACT_NAVIGATION) private readonly compactNavigation: FuseNavigationItem[],
         @Inject(DEFAULT_NAVIGATION) private readonly defaultNavigation: FuseNavigationItem[],
         @Inject(FUTURISTIC_NAVIGATION) private readonly futuristicNavigation: FuseNavigationItem[],
@@ -65,8 +67,8 @@ export class NavigationService
         // get applications item to set navigation
         const applicationsMenu = this.fuseNavigationService.getItem('applications', this.defaultNavigation);
 
-        // set admin navigation
-        applicationsMenu.children = this._checkNavigationPermissions(adminNavigation, this.iamService.me.dPermissions.all);
+        // set admin navigation and check navigation permissions
+        applicationsMenu.children = this.checkNavigationPermissions(adminNavigation, this.iamService.me.dPermissions.all);
 
         return {
             compact   : cloneDeep(this.compactNavigation),
@@ -104,7 +106,7 @@ export class NavigationService
         return flatNavigation;
     }
 
-    private _checkNavigationPermissions(navigation: FuseNavigationItem[], permissions: string[]): FuseNavigationItem[]
+    private checkNavigationPermissions(navigation: FuseNavigationItem[], permissions: string[]): FuseNavigationItem[]
     {
         const navigationResponse: FuseNavigationItem[] = [];
 
@@ -114,11 +116,14 @@ export class NavigationService
             if (item.children)
             {
                 // call function recursive
-                item.children = this._checkNavigationPermissions(item.children, permissions);
+                item.children = this.checkNavigationPermissions(item.children, permissions);
             }
 
             // check if has resource and has access permission
-            if (item.meta?.permission && permissions.includes(item.meta.permission))
+            if (
+                item.meta?.permission &&
+                this.authorizationService.can(item.meta.permission)
+            )
             {
                 navigationResponse.push(item);
             }

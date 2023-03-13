@@ -26,9 +26,9 @@ export class AuthorizationService
     can(permissions: string | string[]): boolean
     {
         // permissions must to be defined to be able to check it
-        if ( !permissions ) return true;
+        if (!permissions) return true;
 
-        if (! Array.isArray(permissions)) permissions = [permissions];
+        if (!Array.isArray(permissions)) permissions = [permissions];
 
         for (const permission of permissions)
         {

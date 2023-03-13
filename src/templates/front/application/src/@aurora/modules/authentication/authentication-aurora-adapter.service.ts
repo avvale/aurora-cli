@@ -23,14 +23,7 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
         super();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Accessors
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Setter & getter for access token, refresh token and credentials
-     */
-
+    // ---- customization ----
     // get graphqlService across injector to avoid cyclic dependency
     // TODO, ver como desde el contructor poder esperar a tener la instancia de apollo construida, con el fordward??
     get graphqlService(): GraphQLService
@@ -38,6 +31,13 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
         return this.injector.get(GraphQLService);
     }
 
+    // -----------------------------------------------------------------------------------------------------
+    // @ Accessors
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Setter & getter for access token, refresh token and credentials
+     */
     get accessToken(): string
     {
         return this.credentials?.accessToken ?? '';
