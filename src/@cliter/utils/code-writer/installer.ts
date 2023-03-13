@@ -2,7 +2,7 @@
 import { SourceFile, ObjectLiteralExpression, InitializerExpressionGetableNode, ArrayLiteralExpression } from 'ts-morph';
 import { SyntaxKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
-import { ArrayDriver, DecoratorDriver, ImportDriver, ObjectDriver, ProviderDriver, VariableDriver } from './drivers';
+import { ArrayDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from './drivers';
 
 export const Installer =
 {
@@ -62,7 +62,7 @@ export const Installer =
             , { useNewLines: true });
     },
 
-    changeDecoratorPropertyAdapter(
+    changeModuleDecoratorPropertyAdapter(
         sourceFile: SourceFile,
         moduleName: string,
         decoratorName: string,
@@ -80,7 +80,7 @@ export const Installer =
             [adapter],
         );
 
-        DecoratorDriver.changeDecoratorPropertyAdapter(
+        DecoratorDriver.changeModuleDecoratorPropertyAdapter(
             sourceFile,
             moduleName,
             decoratorName,

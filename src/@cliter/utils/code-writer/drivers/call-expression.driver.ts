@@ -54,6 +54,14 @@ export class CallExpressionDriver
         }
     }
 
+    public static addArgument(
+        callExpression: CallExpression,
+        argumentName: string,
+    ): void
+    {
+        callExpression.addArgument(argumentName);
+    }
+
     public static removeArgument(
         callExpression: CallExpression,
         argumentName: string,
@@ -66,6 +74,19 @@ export class CallExpressionDriver
                 callExpression.removeArgument(index);
                 break;
             }
+        }
+    }
+
+    public static removeAllArguments(
+        callExpression: CallExpression,
+    ): void
+    {
+        // eslint-disable-next-line no-unreachable-loop
+        for (const [index, value] of callExpression.getArguments().entries())
+        {
+            callExpression.removeArgument(index);
+            CallExpressionDriver.removeAllArguments(callExpression);
+            break;
         }
     }
 }

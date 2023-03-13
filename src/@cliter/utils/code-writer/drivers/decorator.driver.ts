@@ -16,7 +16,40 @@ export class DecoratorDriver
         return moduleDecorator.getArguments()[0] as ObjectLiteralExpression;
     }
 
-    public static changeDecoratorPropertyAdapter(
+    public static addModuleDecoratorProperty(
+        sourceFile: SourceFile,
+        moduleName: string,
+        decoratorName: string,
+        propertyName: string,
+        module: string,
+    ): void
+    {
+        if (DecoratorDriver.hasModuleDecoratorProperty(sourceFile, moduleName, decoratorName, propertyName, module)) return;
+
+        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, moduleName, decoratorName);
+        const decoratorArrayProperty = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, propertyName);
+        decoratorArrayProperty.addElement(module, { useNewLines: true });
+    }
+
+    public static hasModuleDecoratorProperty(
+        sourceFile: SourceFile,
+        moduleName: string,
+        decoratorName: string,
+        propertyName: string,
+        module: string,
+    ): boolean
+    {
+        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, moduleName, decoratorName);
+        const decoratorArrayProperty = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, propertyName);
+        for (const [index, value] of decoratorArrayProperty.getElements().entries())
+        {
+            if (value.getText() === module) return true;
+        }
+
+        return false;
+    }
+
+    public static changeModuleDecoratorPropertyAdapter(
         sourceFile: SourceFile,
         moduleName: string,
         decoratorName: string,

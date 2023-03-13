@@ -1,8 +1,8 @@
 import { Args, Command, Flags, ux } from '@oclif/core';
-import { ArrayLiteralExpression } from 'ts-morph';
+import { ArrayLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { exec } from '../@cliter/functions/common';
-import { CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver } from '../@cliter/utils/code-writer';
+import { CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer';
 
 export class Add extends Command
 {
@@ -49,11 +49,11 @@ export class Add extends Command
 
         if (args.firstArg === Scope.BACK)
         {
-            await BackHandler.addPackage(addCommandState);
-
             switch (packageName)
             {
                 case 'auditing': {
+                    await BackHandler.addPackage(addCommandState);
+
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@nestjs/axios', '@nestjs/schedule']);
                     await exec('npm', ['install', '-D', '@types/cron']);
@@ -115,7 +115,7 @@ export class Add extends Command
                         ['AuditingRunnerAuroraImplementationService'],
                     );
 
-                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
                         sharedModuleSourceFile,
                         'SharedModule',
                         'Module',
@@ -132,7 +132,47 @@ export class Add extends Command
                     break;
                 }
 
+                case 'azureAd': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@nestjs/passport', 'passport-azure-ad']);
+                    ux.action.stop('Completed.');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'azure-ad',
+                        ['AzureAdModule'],
+                    );
+
+                    appModuleSourceFile.saveSync();
+
+                    // auth.decorator.ts file, change Auth decorator
+                    const authDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+                    ImportDriver.createImportItems(
+                        authDecoratorSourceFile,
+                        '@api/azure-ad/azure-ad.guard',
+                        ['AzureADGuard'],
+                    );
+
+                    const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
+                    if (callExpression)
+                    {
+                        CallExpressionDriver.removeAllArguments(callExpression);
+                        CallExpressionDriver.addArgument(callExpression, 'AzureADGuard');
+                    }
+
+                    authDecoratorSourceFile.saveSync();
+                    break;
+                }
+
                 case 'iam': {
+                    await BackHandler.addPackage(addCommandState);
+
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(appModuleSourceFile, 'iam', ['IamModule']);
@@ -162,6 +202,8 @@ export class Add extends Command
                 }
 
                 case 'oAuth': {
+                    await BackHandler.addPackage(addCommandState);
+
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@nestjs/jwt', '@nestjs/passport', 'passport-jwt']);
                     await exec('npm', ['install', '-D', '@types/passport-jwt']);
@@ -240,6 +282,168 @@ export class Add extends Command
                     break;
                 }
 
+                case 'azureAd': {
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@azure/msal-angular', '@azure/msal-browser']);
+                    ux.action.stop('Completed.');
+
+                    await FrontHandler.addPackage(addCommandState);
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+
+                    // import AzureAdModule
+                    ImportDriver.createImportItems(
+                        appModuleSourceFile,
+                        './modules/azure-ad/azure-ad.module',
+                        ['AzureAdModule'],
+                    );
+                    DecoratorDriver.addModuleDecoratorProperty(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'imports',
+                        'AzureAdModule,',
+                    );
+
+                    // implement MsalGuard adapter
+                    ImportDriver.createImportItems(
+                        appModuleSourceFile,
+                        '@azure/msal-angular',
+                        ['MsalGuard'],
+                    );
+                    DecoratorDriver.addModuleDecoratorProperty(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        `
+{
+    provide    : AuthGuard,
+    useExisting: MsalGuard,
+},`,
+                    );
+
+                    // implement AuthenticationAzureAdAdapterService adapter
+                    ImportDriver.createImportItems(
+                        appModuleSourceFile,
+                        './modules/azure-ad/authentication-azure-ad-adapter.service',
+                        ['AuthenticationAzureAdAdapterService'],
+                    );
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'AuthenticationService',
+                        'AuthenticationAzureAdAdapterService',
+                    );
+
+                    // implement AuthorizationAzureAdAdapterService adapter
+                    ImportDriver.createImportItems(
+                        appModuleSourceFile,
+                        './modules/azure-ad/authorization-azure-ad-adapter.service',
+                        ['AuthorizationAzureAdAdapterService'],
+                    );
+                    DecoratorDriver.addModuleDecoratorProperty(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        `
+{
+    provide    : AuthorizationService,
+    useExisting: AuthorizationAzureAdAdapterService,
+},`,
+                    );
+
+                    // implement IamAzureAdAdapterService adapter
+                    ImportDriver.createImportItems(
+                        appModuleSourceFile,
+                        './modules/azure-ad/iam-azure-ad-adapter.service',
+                        ['IamAzureAdAdapterService'],
+                    );
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'IamService',
+                        'IamAzureAdAdapterService',
+                    );
+
+                    appModuleSourceFile.organizeImports();
+                    appModuleSourceFile.saveSync();
+
+                    // implement environments azure ad variables
+                    const environmentFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.ts']);
+                    const environmentVariable = VariableDriver.getVariable(environmentFile, 'environment');
+                    const environmentObject = environmentVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    environmentObject?.addPropertyAssignment({
+                        name       : 'azureAd',
+                        initializer: Writers.object({
+                            tenant     : '\'\'',
+                            authority  : '\'\'',
+                            clientId   : '\'\'',
+                            redirectUri: '\'\'',
+                            scopes     : '[]',
+                        }),
+                    });
+                    environmentFile.saveSync();
+
+                    // implement environments azure ad variables
+                    const environmentProdFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.prod.ts']);
+                    const environmentProdVariable = VariableDriver.getVariable(environmentProdFile, 'environment');
+                    const environmentProdObject = environmentProdVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    environmentProdObject?.addPropertyAssignment({
+                        name       : 'azureAd',
+                        initializer: Writers.object({
+                            tenant     : '\'\'',
+                            authority  : '\'\'',
+                            clientId   : '\'\'',
+                            redirectUri: '\'\'',
+                            scopes     : '[]',
+                        }),
+                    });
+                    environmentProdFile.saveSync();
+
+                    // implement environments azure ad variables
+                    const environmentLocalFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.local.ts']);
+                    const environmentLocalVariable = VariableDriver.getVariable(environmentLocalFile, 'environment');
+                    const environmentLocalObject = environmentLocalVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    environmentLocalObject?.addPropertyAssignment({
+                        name       : 'azureAd',
+                        initializer: Writers.object({
+                            tenant     : '\'\'',
+                            authority  : '\'\'',
+                            clientId   : '\'\'',
+                            redirectUri: '\'\'',
+                            scopes     : '[]',
+                        }),
+                    });
+                    environmentLocalFile.saveSync();
+
+                    // implement environments azure ad variables
+                    const environmentDevFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.dev.ts']);
+                    const environmentDevVariable = VariableDriver.getVariable(environmentDevFile, 'environment');
+                    const environmentDevObject = environmentDevVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    environmentDevObject?.addPropertyAssignment({
+                        name       : 'azureAd',
+                        initializer: Writers.object({
+                            tenant     : '\'\'',
+                            authority  : '\'\'',
+                            clientId   : '\'\'',
+                            redirectUri: '\'\'',
+                            scopes     : '[]',
+                        }),
+                    });
+                    environmentDevFile.saveSync();
+
+                    break;
+                }
+
                 case 'iam': {
                     await FrontHandler.addPackage(addCommandState);
 
@@ -263,7 +467,7 @@ export class Add extends Command
                         );
                     }
 
-                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
                         appModuleSourceFile,
                         'AppModule',
                         'NgModule',
@@ -272,7 +476,7 @@ export class Add extends Command
                         'UserMetaStorageIamAdapterService',
                     );
 
-                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
                         appModuleSourceFile,
                         'AppModule',
                         'NgModule',
@@ -297,10 +501,10 @@ export class Add extends Command
                     Installer.declareFrontRouting(routingSourceFile, 'oAuth');
                     routingSourceFile.saveSync();
 
-                    // add custom imports
+                    // app.module.ts
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
 
-                    DecoratorDriver.changeDecoratorPropertyAdapter(
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
                         appModuleSourceFile,
                         'AppModule',
                         'NgModule',
