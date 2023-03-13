@@ -315,11 +315,13 @@ export const cliterConfig: CliterConfig =
     },
     backPackages: [
         'auditing',
+        'azureAd',
         'iam',
         'oAuth',
     ],
     frontPackages: [
         'auditing',
+        'azureAd',
         'environments',
         'iam',
         'oAuth',
