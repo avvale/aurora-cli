@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService, Credentials, GraphQLService } from '@aurora';
-import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-import { Observable, of } from 'rxjs';
+import { MsalService } from '@azure/msal-angular';
+import { lastValueFrom, Observable, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -14,8 +15,8 @@ export class AuthenticationAzureAdAdapterService extends AuthenticationService
      * Constructor
      */
     constructor(
-        private readonly msalBroadcastService: MsalBroadcastService,
         private readonly authService: MsalService,
+        private readonly router: Router,
     )
     {
         super();
@@ -115,6 +116,15 @@ export class AuthenticationAzureAdAdapterService extends AuthenticationService
 
         // Return the observable
         return of(true);
+    }
+
+    async signOutAction(): Promise<void>
+    {
+        await lastValueFrom(
+            this.signOut(),
+        );
+
+        this.router.navigate(['/']);
     }
 
     /**
