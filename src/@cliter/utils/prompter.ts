@@ -128,7 +128,7 @@ export const Prompter =
             moduleName        : response.moduleName.toKebabCase(),
             moduleNames       : response.moduleNames.toKebabCase(),
             hasOAuth          : response.hasOAuth,
-            hasTenant         : response.hasOAuth,
+            hasTenant         : false,
         };
     },
 
