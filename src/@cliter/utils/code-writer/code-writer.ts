@@ -676,48 +676,6 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    declareAuthJwtStrategyRegistryModuleInShareModule(): void
-    {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, path.join(cliterConfig.auroraLocalPackage, 'shared.module.ts')));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'SharedModule', 'Module');
-
-        // register import auth module
-        ImportDriver.createImportItems(
-            sourceFile,
-            `${cliterConfig.appContainer}/o-auth/shared/modules/auth-jwt-strategy-registry.module`,
-            [
-                'AuthJwtStrategyRegistryModule',
-            ],
-        );
-
-        // add JWT configuration
-        ImportDriver.createImportItems(
-            sourceFile,
-            `../${cliterConfig.appContainer}/o-auth/shared/jwt-config`,
-            [
-                'jwtConfig',
-            ],
-        );
-
-        // register auth module
-        const importsArgument: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('imports');
-        const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-        const importsElements = importsArray.getElements();
-
-        // check if AuthJwtStrategyRegistryModule is imported
-        if (!importsElements.find(el => el.getText() === 'AuthJwtStrategyRegistryModule.forRoot(jwtConfig)')) importsArray.addElement('AuthJwtStrategyRegistryModule.forRoot(jwtConfig)', { useNewLines: true });
-
-        // register auth module
-        const exportsArgument: InitializerExpressionGetableNode = <InitializerExpressionGetableNode>moduleDecoratorArguments.getProperty('exports');
-        const exportsArray = exportsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-        const exportsElements = exportsArray.getElements();
-
-        // check if AuthJwtStrategyRegistryModule is exported
-        if (!exportsElements.find(el => el.getText() === 'AuthJwtStrategyRegistryModule')) exportsArray.addElement('AuthJwtStrategyRegistryModule', { useNewLines: true });
-
-        sourceFile?.saveSync();
-    }
-
     private getModelArrayArgument(moduleDecoratorArguments: ObjectLiteralExpression): ArrayLiteralExpression
     {
         const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
