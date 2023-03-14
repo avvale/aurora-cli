@@ -30,6 +30,9 @@ export abstract class AuthenticationService<T = Credentials>
 
     abstract signOut(): Observable<any>;
 
+    // action to be executed after sign out
+    abstract signOutAction(): void
+
     abstract signUp(user: { name: string; email: string; password: string; company: string; }): Observable<any>;
 
     abstract unlockSession(credentials: { email: string; password: string; }): Observable<any>;

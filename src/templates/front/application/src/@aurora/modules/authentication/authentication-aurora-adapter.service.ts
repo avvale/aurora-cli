@@ -1,9 +1,10 @@
-import { Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { first, Observable, of, switchMap, throwError } from 'rxjs';
-import { Credentials, GraphQLService, oAuthCreateCredentials, OAuthClientGrantType, Utils } from '@aurora';
-import { AuthenticationService } from './authentication.service';
+import { Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
+import { Credentials, GraphQLService, OAuthClientGrantType, oAuthCreateCredentials, Utils } from '@aurora';
 import { AuthUtils } from 'app/core/auth/auth.utils';
+import { first, Observable, of, switchMap, throwError } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
     providedIn: 'root',
@@ -16,8 +17,9 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
      * Constructor
      */
     constructor(
-        private httpClient: HttpClient,
-        private injector: Injector,
+        private readonly httpClient: HttpClient,
+        private readonly injector: Injector,
+        private readonly router: Router,
     )
     {
         super();
@@ -181,6 +183,11 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
 
         // Return the observable
         return of(true);
+    }
+
+    async signOutAction(): Promise<void>
+    {
+        this.router.navigate(['/sign-out']);
     }
 
     /**

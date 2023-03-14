@@ -4,7 +4,7 @@ import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
 
 // ---- customizations ----
-import { Account, IamService } from '@aurora';
+import { Account, AuthenticationService, IamService } from '@aurora';
 
 @Component({
     selector       : 'user',
@@ -32,6 +32,7 @@ export class UserComponent implements OnInit, OnDestroy
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _router: Router,
         private readonly iamService: IamService,
+        private readonly authenticationService: AuthenticationService,
     )
     {
     }
@@ -96,6 +97,6 @@ export class UserComponent implements OnInit, OnDestroy
      */
     signOut(): void
     {
-        this._router.navigate(['/sign-out']);
+        this.authenticationService.signOutAction();
     }
 }
