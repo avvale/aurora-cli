@@ -11,6 +11,7 @@ export interface CliterConfig
     auroraLocalPackage: string;
     configYamlVersion: string;
     lockJsonVersion: string;
+    schemaDefinitionExtension: string;
     timestampFields: string[];
     deletedAtField: string[];
     sqlTypesEquivalenceDashboardColumnDataTypes: { [key: string]: string };
@@ -48,6 +49,7 @@ export const cliterConfig: CliterConfig =
     auroraCorePackage                          : '@aurora-ts/core',
     configYamlVersion                          : '0.0.1',
     lockJsonVersion                            : '0.0.1',
+    schemaDefinitionExtension                  : '.aurora.yaml',
     timestampFields                            : ['createdAt', 'updatedAt', 'deletedAt'],
     deletedAtField                             : ['deletedAt'],
     sqlTypesEquivalenceDashboardColumnDataTypes: {

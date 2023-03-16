@@ -110,10 +110,10 @@ export default class Load extends Command
             const yamlFiles = fs.readdirSync(path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase()));
 
             const batchOperations = [];
-            for (const yamlFile of yamlFiles.filter(files => files.endsWith('.yaml')))
+            for (const yamlFile of yamlFiles.filter(files => files.endsWith(cliterConfig.schemaDefinitionExtension)))
             {
                 // create yaml file
-                const schema: ModuleDefinitionSchema    = YamlManager.loadYamlConfigFile(boundedContextName, yamlFile.replace('.yaml', ''));
+                const schema: ModuleDefinitionSchema    = YamlManager.loadYamlConfigFile(boundedContextName, yamlFile.replace(cliterConfig.schemaDefinitionExtension, ''));
                 const currentLockFiles: LockFile[]      = this.loadJsonLockFile(boundedContextName, schema.moduleName);
 
                 // set stateService

@@ -6,12 +6,16 @@ import { ModuleDefinitionSchema } from '../types';
 import { Properties } from './properties';
 import { AdditionalApi } from './additional-api';
 import { AdditionalApis } from './additional-apis';
+import { cliterConfig } from '../config';
 
 export class YamlManager
 {
-    public static loadYamlConfigFile(boundedContextName: string, moduleName: string): ModuleDefinitionSchema
+    public static loadYamlConfigFile(
+        boundedContextName: string,
+        moduleName: string,
+    ): ModuleDefinitionSchema
     {
-        const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + '.yaml');
+        const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + cliterConfig.schemaDefinitionExtension);
 
         // read yaml file
         const yamlObj = yaml.load(fs.readFileSync(yamlPath, 'utf8')) as any;

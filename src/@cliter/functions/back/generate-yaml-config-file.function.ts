@@ -32,5 +32,5 @@ export const generateYamlConfigFile = async (generateCommandState: GenerateComma
 
     if (!fs.existsSync(yamlPath)) fs.mkdirSync(yamlPath, { recursive: true });
 
-    fs.writeFileSync(path.join(yamlPath, `${generateCommandState.schema.moduleName}.yaml`), yamlStr, 'utf8');
+    fs.writeFileSync(path.join(yamlPath, `${generateCommandState.schema.moduleName}${cliterConfig.schemaDefinitionExtension}`), yamlStr, 'utf8');
 };

@@ -1,6 +1,6 @@
 import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralExpression, CallExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
 import { SyntaxKind, NewLineKind } from 'typescript';
-import { cliterConfig } from '../../config/cliter.config';
+import { cliterConfig } from '../../config';
 import { Properties } from '../properties';
 import { ImportDriver } from './drivers/import.driver';
 import { ExportDriver } from './drivers/export.driver';
@@ -65,7 +65,7 @@ export class CodeWriter
             for (const yamlFile of yamlFiles)
             {
                 // get filename of e2e test
-                const e2eTestFile = yamlFile.replace('.yaml', '.e2e-spec.ts');
+                const e2eTestFile = yamlFile.replace(cliterConfig.schemaDefinitionExtension, '.e2e-spec.ts');
 
                 const e2eTestPath = path.join(process.cwd(), 'test', 'acceptance', this.boundedContextName.toKebabCase(), e2eTestFile);
 
