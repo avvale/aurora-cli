@@ -20,12 +20,6 @@ import { {{ toPascalCase schema.boundedContextName }}Module } from '{{ config.ap
 import * as request from 'supertest';
 import * as _ from 'lodash';
 
-{{#if schema.hasOAuth }}
-// has OAuth
-import { IamModule } from '@api/iam/iam.module';
-import { OAuthModule } from '@api/o-auth/o-auth.module';
-{{/if }}
-
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 {{setVar 'language' '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a'}}
@@ -49,10 +43,6 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
-                {{#if schema.hasOAuth }}
-                OAuthModule,
-                IamModule,
-                {{/if }}
                 {{ toPascalCase schema.boundedContextName }}Module,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
@@ -513,8 +503,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -647,8 +637,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -712,8 +702,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -773,8 +763,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -870,8 +860,8 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
