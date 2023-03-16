@@ -29,7 +29,6 @@
     "@apollo/client": "^3.7.10",
     "@ng-matero/extensions": "^15.0.1",
     "@ngneat/transloco": "4.2.2",
-    "@pdfme/generator": "^1.0.17",
     "@rxweb/reactive-form-validators": "^13.0.0",
     "apexcharts": "3.36.3",
     "apollo-angular": "^4.2.1",
