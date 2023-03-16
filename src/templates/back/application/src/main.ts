@@ -22,7 +22,7 @@ dayjs.extend(dayOfYear);
 
 async function bootstrap(): Promise<void>
 {
-    const app           = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule);
     const configService = app.get(ConfigService);
 
     if (configService.get<string>('SWAGGER') === 'true')
