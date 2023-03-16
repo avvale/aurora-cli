@@ -11,8 +11,7 @@
     "start:local": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --configuration=localhost",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "publish:application": "rm -rf ./node_modules && rm -rf ./.angular && rm -rf ../aurora-cli/src/templates/front/application && mkdir ../aurora-cli/src/templates/front/application && cp -r . ../aurora-cli/src/templates/front/application/ && rm -rf ../aurora-cli/src/templates/front/application/.git && cd ../aurora-cli && npm run build"
+    "test": "ng test"
   },
   "dependencies": {
     "@angular-material-extensions/password-strength": "^12.0.2",
