@@ -38,7 +38,7 @@ const routerConfig: ExtraOptions = {
 
         // Aurora front module
         AuroraModule,
-        RibbonEnvironmentModule
+        RibbonEnvironmentModule,
     ],
     providers: [
         {
