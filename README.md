@@ -19,7 +19,7 @@ $ npm install -g @aurora-ts/cli
 $ aurora COMMAND
 running command...
 $ aurora (--version)
-@aurora-ts/cli/2.0.1 darwin-arm64 node-v16.15.0
+@aurora-ts/cli/2.1.0 darwin-arm64 node-v18.14.0
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND
@@ -28,16 +28,16 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`aurora add`](#aurora-add)
-* [`aurora delete ELEMENTTYPE ELEMENTNAME`](#aurora-delete-elementtype-elementname)
-* [`aurora generate SCOPE ELEMENT`](#aurora-generate-scope-element)
+* [`aurora add FIRSTARG`](#aurora-add-firstarg)
+* [`aurora delete FIRSTARG SECONDARG`](#aurora-delete-firstarg-secondarg)
+* [`aurora generate FIRSTARG SECONDARG`](#aurora-generate-firstarg-secondarg)
 * [`aurora hello PERSON`](#aurora-hello-person)
 * [`aurora hello world`](#aurora-hello-world)
 * [`aurora help [COMMAND]`](#aurora-help-command)
 * [`aurora keys`](#aurora-keys)
-* [`aurora load SCOPE ELEMENT`](#aurora-load-scope-element)
-* [`aurora new SCOPE NAME`](#aurora-new-scope-name)
-* [`aurora pipeline SCOPE`](#aurora-pipeline-scope)
+* [`aurora load FIRSTARG SECONDARG`](#aurora-load-firstarg-secondarg)
+* [`aurora new FIRSTARG SECONDARG`](#aurora-new-firstarg-secondarg)
+* [`aurora pipeline FIRSTARG`](#aurora-pipeline-firstarg)
 * [`aurora plugins`](#aurora-plugins)
 * [`aurora plugins:install PLUGIN...`](#aurora-pluginsinstall-plugin)
 * [`aurora plugins:inspect PLUGIN...`](#aurora-pluginsinspect-plugin)
@@ -47,43 +47,46 @@ USAGE
 * [`aurora plugins:uninstall PLUGIN...`](#aurora-pluginsuninstall-plugin-1)
 * [`aurora plugins:uninstall PLUGIN...`](#aurora-pluginsuninstall-plugin-2)
 * [`aurora plugins update`](#aurora-plugins-update)
-* [`aurora seed ELEMENTTYPE`](#aurora-seed-elementtype)
 
-## `aurora add`
+## `aurora add FIRSTARG`
 
-Generate pipeline to deploy application in cloud
+Add a aurora package
 
 ```
 USAGE
-  $ aurora add [-h] [-f] [-d]
+  $ aurora add FIRSTARG [-h] [-f]
+
+ARGUMENTS
+  FIRSTARG  (back|front) Scope where our command will act.
 
 FLAGS
-  -d, --dashboard
-  -f, --force
-  -h, --help       Show CLI help.
+  -f, --force  Overwrite existing files.
+  -h, --help   Show CLI help.
 
 DESCRIPTION
-  Generate pipeline to deploy application in cloud
+  Add a aurora package
 
 EXAMPLES
-  $ aurora add
+  $ aurora add back auditing
+
+  $ aurora add back auditing -f
 
   $ aurora --help
 ```
 
-_See code: [dist/commands/add/index.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/add/index.ts)_
+_See code: [dist/commands/add.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/add.ts)_
 
-## `aurora delete ELEMENTTYPE ELEMENTNAME`
+## `aurora delete FIRSTARG SECONDARG`
 
 Delete elements
 
 ```
 USAGE
-  $ aurora delete [ELEMENTTYPE] [ELEMENTNAME] [-h]
+  $ aurora delete FIRSTARG SECONDARG [-h]
 
 ARGUMENTS
-  ELEMENTTYPE  (bounded-context|b|module|m) Type element to delete
-  ELEMENTNAME  Name element to create
+  FIRSTARG   (bounded-context|b|module|m) Type element to delete
+  SECONDARG  Name element to create
 
 FLAGS
   -h, --help  Show CLI help.
@@ -92,19 +95,19 @@ DESCRIPTION
   Delete elements
 ```
 
-_See code: [dist/commands/delete/index.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/delete/index.ts)_
+_See code: [dist/commands/delete/index.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/delete/index.ts)_
 
-## `aurora generate SCOPE ELEMENT`
+## `aurora generate FIRSTARG SECONDARG`
 
 Generate aurora item
 
 ```
 USAGE
-  $ aurora generate [SCOPE] [ELEMENT] -n <value> [-h] [-f] [-g] [-v]
+  $ aurora generate FIRSTARG SECONDARG -n <value> [-h] [-f] [-g] [-v]
 
 ARGUMENTS
-  SCOPE    (back|front) Scope where our command will act.
-  ELEMENT  (api|bounded-context|module) Type of element to generate.
+  FIRSTARG   (back|front) Scope where our command will act.
+  SECONDARG  (api|bounded-context|module) Type of element to generate.
 
 FLAGS
   -f, --force           Overwrite existing files.
@@ -122,7 +125,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/generate.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/generate.ts)_
+_See code: [dist/commands/generate.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/generate.ts)_
 
 ## `aurora hello PERSON`
 
@@ -130,7 +133,7 @@ Say hello
 
 ```
 USAGE
-  $ aurora hello [PERSON] -f <value>
+  $ aurora hello PERSON -f <value>
 
 ARGUMENTS
   PERSON  Person to say hello to
@@ -146,7 +149,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/hello/index.ts)_
 
 ## `aurora hello world`
 
@@ -204,19 +207,19 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/keys.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/keys.ts)_
+_See code: [dist/commands/keys.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/keys.ts)_
 
-## `aurora load SCOPE ELEMENT`
+## `aurora load FIRSTARG SECONDARG`
 
-Reload aurora [bounded-context, module] from yaml file, located in the cliter folder
+Load aurora [bounded-context, module] from yaml file, located in the cliter folder
 
 ```
 USAGE
-  $ aurora load [SCOPE] [ELEMENT] -n <value> [-h] [-f] [-g] [-w] [-t] [-v]
+  $ aurora load FIRSTARG SECONDARG -n <value> [-h] [-f] [-g] [-w] [-t] [-v]
 
 ARGUMENTS
-  SCOPE    (back|front|back-package) Scope where our command will act.
-  ELEMENT  (bounded-context|module) Type element to load.
+  FIRSTARG   (back|front) Scope where our command will act.
+  SECONDARG  (bounded-context|module) Type element to load.
 
 FLAGS
   -f, --force               Overwrite existing files.
@@ -228,7 +231,7 @@ FLAGS
   -w, --overwriteInterface  Overwrite front interfaces.
 
 DESCRIPTION
-  Reload aurora [bounded-context, module] from yaml file, located in the cliter folder
+  Load aurora [bounded-context, module] from yaml file, located in the cliter folder
 
 EXAMPLES
   $ aurora load back module -n=my-bounded-context/my-module
@@ -236,21 +239,22 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/load.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/load.ts)_
+_See code: [dist/commands/load.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/load.ts)_
 
-## `aurora new SCOPE NAME`
+## `aurora new FIRSTARG SECONDARG`
 
 Create new aurora item
 
 ```
 USAGE
-  $ aurora new [SCOPE] [NAME] [-h] [-i] [-v]
+  $ aurora new FIRSTARG SECONDARG [-h] [-f] [-i] [-v]
 
 ARGUMENTS
-  SCOPE  (back|front|back-package) Scope where our command will act.
-  NAME   Name of item to create
+  FIRSTARG   (back|front) Scope where our command will act.
+  SECONDARG  Name of item to create
 
 FLAGS
+  -f, --force    Overwrite existing files.
   -h, --help     Show CLI help.
   -i, --install  Install dependencies after create item.
   -v, --verbose  Reports on screen all the steps followed by the command.
@@ -264,18 +268,18 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/new.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/new.ts)_
+_See code: [dist/commands/new.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/new.ts)_
 
-## `aurora pipeline SCOPE`
+## `aurora pipeline FIRSTARG`
 
 Generate pipeline to deploy application in cloud
 
 ```
 USAGE
-  $ aurora pipeline [SCOPE] [-h] [-f]
+  $ aurora pipeline FIRSTARG [-h] [-f]
 
 ARGUMENTS
-  SCOPE  (back|front) Scope where our command will act.
+  FIRSTARG  (back|front) Scope where our command will act.
 
 FLAGS
   -f, --force  Overwrite existing files.
@@ -292,7 +296,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/pipeline.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/pipeline.ts)_
+_See code: [dist/commands/pipeline.ts](https://github.com/techedge-group/aurora-cli/blob/v2.1.0/dist/commands/pipeline.ts)_
 
 ## `aurora plugins`
 
@@ -312,7 +316,7 @@ EXAMPLES
   $ aurora plugins
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.9/src/commands/plugins/index.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.4.0/src/commands/plugins/index.ts)_
 
 ## `aurora plugins:install PLUGIN...`
 
@@ -366,6 +370,9 @@ ARGUMENTS
 FLAGS
   -h, --help     Show CLI help.
   -v, --verbose
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
   Displays installation properties of a plugin.
@@ -523,27 +530,4 @@ FLAGS
 DESCRIPTION
   Update installed plugins.
 ```
-
-## `aurora seed ELEMENTTYPE`
-
-Seed database with bounded context or module selected
-
-```
-USAGE
-  $ aurora seed [ELEMENTTYPE] [-h] [-m <value>] [-b <value>] [-v]
-
-ARGUMENTS
-  ELEMENTTYPE  (bounded-context|b|module|m) Type element to create
-
-FLAGS
-  -b, --boundedContext=<value>
-  -h, --help                    Show CLI help.
-  -m, --module=<value>
-  -v, --verbose
-
-DESCRIPTION
-  Seed database with bounded context or module selected
-```
-
-_See code: [dist/commands/seed/index.ts](https://github.com/techedge-group/aurora-cli/blob/v2.0.1/dist/commands/seed/index.ts)_
 <!-- commandsstop -->
