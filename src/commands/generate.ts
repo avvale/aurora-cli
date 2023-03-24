@@ -1,5 +1,5 @@
 import { Args, Command, Flags } from '@oclif/core';
-import { AdditionalApis, BackHandler, Prompter, Properties, Property, Scope, ScopeElement, SqlType } from '../@cliter';
+import { AdditionalApis, BackHandler, ModuleDefinitionSchema, Prompter, Properties, Property, Scope, ScopeElement, SqlType } from '../@cliter';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
 import { getBoundedContextModuleFromFlag } from '../@cliter/functions/common';
 
@@ -67,35 +67,44 @@ export default class Generate extends Command
             const flagName: { boundedContextName?: string; moduleName?: string; } = getBoundedContextModuleFromFlag(this, flags.name);
             const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant } = await Prompter.promptForGenerateModule(flagName.boundedContextName, flagName.moduleName);
 
+            // define properties for generate command
             const properties: Properties = new Properties();
-            properties.moduleName        = moduleName;
 
-            // add id property for model
-            properties.add(new Property({
-                name      : 'id',
-                type      : SqlType.ID,
-                primaryKey: true,
-                length    : 36,
-                nullable  : false,
-            }));
+            // define schema for generate command
+            const schema: ModuleDefinitionSchema = {
+                boundedContextName,
+                moduleName,
+                moduleNames,
+                aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
+                hasOAuth,
+                hasTenant,
+                hasAuditing   : false,
+                properties,
+                additionalApis: new AdditionalApis(),
+            };
+
+            // reference schema in properties
+            properties.schema = schema;
 
             // define state for generate command
             const generateCommandState = {
                 command  : this,
                 flags,
                 lockFiles: [],
-                schema   : {
-                    boundedContextName,
-                    moduleName,
-                    moduleNames,
-                    aggregateName : boundedContextName.toPascalCase() + moduleName.toPascalCase(),
-                    hasOAuth,
-                    hasTenant,
-                    hasAuditing   : false,
-                    properties,
-                    additionalApis: new AdditionalApis(),
-                },
+                schema,
             };
+
+            // add id property for model
+            properties.add(
+                new Property({
+                    name      : 'id',
+                    type      : SqlType.ID,
+                    primaryKey: true,
+                    length    : 36,
+                    nullable  : false,
+                    schema,
+                }),
+            );
 
             // add properties defined by user
             // eslint-disable-next-line no-await-in-loop
@@ -107,9 +116,9 @@ export default class Generate extends Command
             }
 
             // add time stamp properties for model
-            properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true }));
-            properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true }));
-            properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true }));
+            properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true, schema }));
+            properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true, schema }));
+            properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true, schema }));
 
             // generate module files
             BackHandler.generateModule(

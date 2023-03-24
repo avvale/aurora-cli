@@ -1,7 +1,7 @@
-import { SqlRelationship, SqlType, SqlIndex, ModuleDefinitionSchema } from '../types';
-import { cliterConfig } from '../config/cliter.config';
 import * as faker from 'faker';
-import * as _ from 'lodash';
+import { cliterConfig } from '../config/cliter.config';
+import { ModuleDefinitionSchema, SqlIndex, SqlRelationship, SqlType } from '../types';
+import { Properties } from './properties';
 import { YamlManager } from './yaml-manager';
 
 export class Property
@@ -41,6 +41,8 @@ export class Property
     public isI18n?: boolean;
     public example?: any;
     public faker?: string;
+    public webComponent?: string;
+    public schema?: ModuleDefinitionSchema;
 
     constructor(
         payload: {
@@ -72,6 +74,8 @@ export class Property
             isI18n?: boolean;
             example?: any;
             faker?: any;
+            webComponent?: string;
+            schema?: ModuleDefinitionSchema;
         },
     )
     {
@@ -103,6 +107,8 @@ export class Property
         this.isI18n = payload.isI18n;
         this.example = payload.example;
         this.faker = payload.faker;
+        this.webComponent = payload.webComponent;
+        this.schema = payload.schema;
 
         if (
             (
@@ -223,19 +229,43 @@ export class Property
 
     get getRelationshipBoundedContext(): string | null
     {
-        if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).boundedContextName;
+        try
+        {
+            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).boundedContextName;
+        }
+        catch
+        {
+            this.throwRelationshipEntityNorCreated();
+        }
+
         return null;
     }
 
     get getRelationshipModule(): string | null
     {
-        if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleName;
+        try
+        {
+            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleName;
+        }
+        catch
+        {
+            this.throwRelationshipEntityNorCreated();
+        }
+
         return null;
     }
 
     get getRelationshipModules(): string | null
     {
-        if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleNames;
+        try
+        {
+            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleNames;
+        }
+        catch
+        {
+            this.throwRelationshipEntityNorCreated();
+        }
+
         return null;
     }
 
@@ -361,5 +391,30 @@ export class Property
             example                    : this.example,
             faker                      : this.faker,
         };
+    }
+
+    private throwRelationshipEntityNorCreated(): void
+    {
+        throw new Error(`
+Getting relationship module path for ${this.name} property.
+    Path: ${this.relationshipModulePath}
+    Aggregate: ${this.relationshipAggregate}
+    Relationship: ${this.relationship}
+
+For fields with relationship, you must previously create the yaml
+of the related entity, you can do it manually or through the CLI
+using the command:
+
+aurora generate back module -n=${this.relationshipModulePath}
+
+And create related entity.
+
+The yaml for the current entity has been created, regenerate
+the module ${this.schema?.boundedContextName}/${this.schema?.moduleName} again when you have created the yaml
+for the entity related ${this.relationshipModulePath}, with the command:
+
+aurora load back module -n=${this.schema?.boundedContextName}/${this.schema?.moduleName} -ft
+
+`);
     }
 }

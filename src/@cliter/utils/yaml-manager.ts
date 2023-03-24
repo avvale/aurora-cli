@@ -22,8 +22,23 @@ export class YamlManager
 
         YamlManager.parseModuleDefinitionSchema(yamlObj);
 
-        const properties        = new Properties();
-        properties.moduleName   = yamlObj.moduleName;
+        const properties     = new Properties();
+        const additionalApis = new AdditionalApis();
+        const schema: ModuleDefinitionSchema = {
+            boundedContextName: yamlObj.boundedContextName,
+            moduleName        : yamlObj.moduleName,
+            moduleNames       : yamlObj.moduleNames,
+            aggregateName     : yamlObj.aggregateName,
+            hasOAuth          : yamlObj.hasOAuth,
+            hasTenant         : yamlObj.hasTenant,
+            hasAuditing       : yamlObj.hasAuditing,
+            properties,
+            additionalApis,
+            excluded          : yamlObj.excluded,
+        };
+
+        // reference schema in properties
+        properties.schema = schema;
 
         for (const property of yamlObj.aggregateProperties)
         {
@@ -57,11 +72,10 @@ export class YamlManager
                     isI18n                     : property?.isI18n,
                     example                    : property?.example,
                     faker                      : property?.faker,
+                    schema,
                 }),
             );
         }
-
-        const additionalApis = new AdditionalApis();
 
         if (Array.isArray(yamlObj.additionalApis))
         {
@@ -77,18 +91,7 @@ export class YamlManager
             }
         }
 
-        return {
-            boundedContextName: yamlObj.boundedContextName,
-            moduleName        : yamlObj.moduleName,
-            moduleNames       : yamlObj.moduleNames,
-            aggregateName     : yamlObj.aggregateName,
-            hasOAuth          : yamlObj.hasOAuth,
-            hasTenant         : yamlObj.hasTenant,
-            hasAuditing       : yamlObj.hasAuditing,
-            properties,
-            additionalApis,
-            excluded          : yamlObj.excluded,
-        };
+        return schema;
     }
 
     private static parseModuleDefinitionSchema(yamlObj: any): void

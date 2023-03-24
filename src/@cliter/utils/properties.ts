@@ -1,12 +1,13 @@
 import { Property } from './property';
-import { SqlIndex, SqlRelationship, SqlType } from '../types';
+import { ModuleDefinitionSchema, SqlIndex, SqlRelationship, SqlType } from '../types';
 
 export class Properties
 {
-    moduleName                  = '';
-    properties: Property[]      = [];
-    timestampFields: string[]   = ['createdAt', 'updatedAt', 'deletedAt'];
-    deletedAtField: string[]    = ['deletedAt'];
+    schema!: ModuleDefinitionSchema;
+    properties: Property[] = [];
+    timestampFields: string[] = ['createdAt', 'updatedAt', 'deletedAt'];
+    deletedAtField: string[] = ['deletedAt'];
+
 
     *[Symbol.iterator]()
     {
@@ -245,44 +246,52 @@ export class Properties
      ************/
     get createService(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
-            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
-            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
-            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
+            .filter(property => !this.timestampFields.includes(property.name))                                                          // exclude timestamps
+            .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                                  // exclude one to many relations
+            .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))                 // exclude one to one relations without relationshipField, is relation one to one without xxxxId
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
+            .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                       // exclude dataLang if has i18n table
     }
 
     get createItemsService(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'));   // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'));   // exclude relationship id of i18n table
     }
 
     get updateService(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get upsertService(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'));   // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'));   // exclude relationship id of i18n table
     }
 
     // events
@@ -312,23 +321,27 @@ export class Properties
      ***************/
     get createController(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get updateController(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
@@ -400,25 +413,29 @@ export class Properties
      ***********/
     get postmanGraphQLCreateQuery(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                             // exclude many to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get postmanGraphQLCreateVariables(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => property.relationship !== SqlRelationship.MANY_TO_MANY)                                             // exclude many to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
@@ -464,12 +481,14 @@ export class Properties
 
     get postmanGraphQLUpdateVariables(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to one relations without relationshipField, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));
     }
 
@@ -504,39 +523,45 @@ export class Properties
      ***********/
     get test(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship !== SqlRelationship.ONE_TO_MANY)                                              // exclude one to many relations
             .filter(property => !(property.relationship === SqlRelationship.ONE_TO_ONE && !property.relationshipField))             // exclude one to many relations
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get isNotNullable(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties.filter(property => property.nullable === false)
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get hasLength(): Property[]
     {
+        if (!this.schema) throw new Error('Schema property is not defined');
+
         return this.properties.filter(property => !!property.length)
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
-            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
+            .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id'))    // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'dataLang'));                                   // exclude dataLang if has i18n table
     }
 
     get hasMaxLength(): Property[]
     {
-        return this.properties.filter(property => !!property.maxLength);
+        return this.properties.filter(property => Boolean(property.maxLength));
     }
 
     get hasMinLength(): Property[]
     {
-        return this.properties.filter(property => !!property.minLength);
+        return this.properties.filter(property => Boolean(property.minLength));
     }
 
     get isDecimal(): Property[]

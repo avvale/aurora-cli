@@ -388,6 +388,7 @@ export const Prompter =
             pivotPath               : response.pivotPath,
             pivotFileName           : response.pivotFileName,
             index                   : response.index,
+            schema                  : generateCommandState.schema,
         });
     },
 
