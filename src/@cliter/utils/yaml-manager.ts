@@ -72,6 +72,7 @@ export class YamlManager
                     isI18n                     : property?.isI18n,
                     example                    : property?.example,
                     faker                      : property?.faker,
+                    webComponent               : property?.webComponent,
                     schema,
                 }),
             );

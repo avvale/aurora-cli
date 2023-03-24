@@ -390,6 +390,7 @@ export class Property
             isI18n                     : this.isI18n,
             example                    : this.example,
             faker                      : this.faker,
+            webComponent               : this.webComponent,
         };
     }
 
