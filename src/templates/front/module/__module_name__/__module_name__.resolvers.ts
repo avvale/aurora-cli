@@ -5,6 +5,10 @@ import { Observable } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toCamelCase schema.moduleName }}ColumnsConfig } from './{{ toKebabCase schema.moduleName }}.columns-config';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
+{{#each schema.properties.withWebComponents}}
+import { {{ getRelationshipAggregateName }} } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipBoundedContext }}.types';
+import { {{ toPascalCase getRelationshipModule }}Service } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/{{ toKebabCase getRelationshipModule }}.service';
+{{/each}}
 
 @Injectable({
     providedIn: 'root',
@@ -53,10 +57,23 @@ export class {{ toPascalCase schema.moduleName }}PaginationResolver implements R
 @Injectable({
     providedIn: 'root',
 })
+{{#eq schema.properties.lengthWebComponents 0 }}
 export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<Action>
+{{else ~}}
+export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<{
+    {{#each schema.properties.withWebComponents}}
+    {{#eq webComponent 'select'}}
+    {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+    {{/eq}}
+    {{/each}}
+}>
+{{/eq}}
 {
     constructor(
         private readonly actionService: ActionService,
+        {{#unlessEq schema.properties.lengthWebComponents 0 }}
+        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        {{/unlessEq}}
     )
     {}
 
@@ -69,12 +86,26 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
+{{#eq schema.properties.lengthWebComponents 0 }}
     ): Action
+{{else}}
+    ): Observable<{
+    {{#each schema.properties.withWebComponents}}
+    {{#eq webComponent 'select'}}
+        {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+    {{/eq}}
+    {{/each}}
+    }>
+{{/eq}}
     {
-        return this.actionService.action({
+        {{#eq schema.properties.lengthWebComponents 0 }}return {{/eq}}this.actionService.action({
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
             isViewAction: true,
         });
+        {{#unlessEq schema.properties.lengthWebComponents 0 }}
+
+        return this.{{ toCamelCase schema.moduleName }}Service.getRelations();
+        {{/unlessEq}}
     }
 }
 
@@ -83,6 +114,11 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
 })
 export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve<{
     object: {{ schema.aggregateName }};
+    {{#each schema.properties.withWebComponents}}
+    {{#eq webComponent 'select'}}
+    {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+    {{/eq}}
+    {{/each}}
 }>
 {
     constructor(
@@ -102,6 +138,11 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
         state: RouterStateSnapshot,
     ): Observable<{
         object: {{ schema.aggregateName }};
+        {{#each schema.properties.withWebComponents}}
+        {{#eq webComponent 'select'}}
+        {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+        {{/eq}}
+        {{/each}}
     }>
     {
         this.actionService.action({
@@ -109,8 +150,14 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
             isViewAction: true,
         });
 
+        {{#eq schema.properties.lengthWebComponents 0 }}
         return this.{{ toCamelCase schema.moduleName }}Service.findById({
             id: route.paramMap.get('id'),
         });
+        {{else}}
+        return this.{{ toCamelCase schema.moduleName }}Service.findByIdWithRelations({
+            id: route.paramMap.get('id'),
+        });
+        {{/eq}}
     }
 }

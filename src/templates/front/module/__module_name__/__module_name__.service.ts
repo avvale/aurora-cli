@@ -3,7 +3,11 @@ import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { {{ schema.aggregateName }}, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation{{#each schema.additionalApis}}, {{getVariableName}}{{ toPascalCase resolverType }}{{/each}} } from './{{ toKebabCase schema.moduleName }}.graphql';
+import { paginationQuery, getQuery, {{#unlessEq schema.properties.lengthWebComponents 0 }}getRelations, {{/unlessEq}}fields, findByIdQuery, {{#unlessEq schema.properties.lengthWebComponents 0 }}findByIdWithRelationsQuery, {{/unlessEq}}findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation{{#each schema.additionalApis}}, {{getVariableName}}{{ toPascalCase resolverType }}{{/each}} } from './{{ toKebabCase schema.moduleName }}.graphql';
+{{#each schema.properties.withWebComponents}}
+import { {{ getRelationshipAggregateName }} } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipBoundedContext }}.types';
+import { {{ toPascalCase getRelationshipModule }}Service } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/{{ toKebabCase getRelationshipModule }}.service';
+{{/each}}
 
 @Injectable({
     providedIn: 'root',
@@ -16,6 +20,9 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     constructor(
         private readonly graphqlService: GraphQLService,
+        {{#each schema.properties.withWebComponents}}
+        private readonly {{ toCamelCase getRelationshipModule }}Service: {{ toPascalCase getRelationshipModule }}Service,
+        {{/each}}
     ) {}
 
     /**
@@ -102,6 +109,77 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 
+    {{#unlessEq schema.properties.lengthWebComponents 0 }}
+    findByIdWithRelations(
+        {
+            graphqlStatement = findByIdWithRelationsQuery,
+            id = '',
+            constraint = {},
+            {{#each schema.properties.withWebComponents}}
+            {{#eq webComponent 'select'}}
+            query{{ toPascalCase getRelationshipModules }} = {},
+            constraint{{ toPascalCase getRelationshipModules }} = {},
+            {{/eq}}
+            {{/each}}
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            {{#each schema.properties.withWebComponents}}
+            {{#eq webComponent 'select'}}
+            query{{ toPascalCase getRelationshipModules }}?: QueryStatement;
+            constraint{{ toPascalCase getRelationshipModules }}?: QueryStatement;
+            {{/eq}}
+            {{/each}}
+        } = {},
+    ): Observable<{
+        object: {{ schema.aggregateName }};
+        {{#each schema.properties.withWebComponents}}
+        {{#eq webComponent 'select'}}
+        {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+        {{/eq}}
+        {{/each}}
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: {{ schema.aggregateName }};
+                {{#each schema.properties.withWebComponents}}
+                {{#eq webComponent 'select'}}
+                {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+                {{/eq}}
+                {{/each}}
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                    {{#each schema.properties.withWebComponents}}
+                    {{#eq webComponent 'select'}}
+                    query{{ toPascalCase getRelationshipModules }},
+                    constraint{{ toPascalCase getRelationshipModules }},
+                    {{/eq}}
+                    {{/each}}
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
+                    {{#each schema.properties.withWebComponents}}
+                    {{#eq webComponent 'select'}}
+                    this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}Subject$.next(data.{{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }});
+                    {{/eq}}
+                    {{/each}}
+                }),
+            );
+    }
+    {{/unlessEq}}
+
     find(
         {
             graphqlStatement = findQuery,
@@ -173,6 +251,66 @@ export class {{ toPascalCase schema.moduleName }}Service
                 }),
             );
     }
+
+    {{#unlessEq schema.properties.lengthWebComponents 0 }}
+    getRelations(
+        {
+            {{#each schema.properties.withWebComponents}}
+            {{#eq webComponent 'select'}}
+            query{{ toPascalCase getRelationshipModules }} = {},
+            constraint{{ toPascalCase getRelationshipModules }} = {},
+            {{/eq}}
+            {{/each}}
+        }: {
+            {{#each schema.properties.withWebComponents}}
+            {{#eq webComponent 'select'}}
+            query{{ toPascalCase getRelationshipModules }}?: QueryStatement;
+            constraint{{ toPascalCase getRelationshipModules }}?: QueryStatement;
+            {{/eq}}
+            {{/each}}
+        } = {},
+    ): Observable<{
+        {{#each schema.properties.withWebComponents}}
+        {{#eq webComponent 'select'}}
+        {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+        {{/eq}}
+        {{/each}}
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                {{#each schema.properties.withWebComponents}}
+                {{#eq webComponent 'select'}}
+                {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+                {{/eq}}
+                {{/each}}
+            }>({
+                query    : getRelations,
+                variables: {
+                    {{#each schema.properties.withWebComponents}}
+                    {{#eq webComponent 'select'}}
+                    query{{ toPascalCase getRelationshipModules }},
+                    constraint{{ toPascalCase getRelationshipModules }},
+                    {{/eq}}
+                    {{/each}}
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    {{#each schema.properties.withWebComponents}}
+                    {{#eq webComponent 'select'}}
+                    this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}Subject$.next(data.{{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }});
+                    {{/eq}}
+                    {{/each}}
+                }),
+            );
+    }
+    {{/unlessEq}}
 
     create<T>(
         {

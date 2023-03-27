@@ -21,6 +21,15 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
     managedObject: {{ schema.aggregateName }};
+{{#unlessEq schema.properties.lengthWebComponents 0 }}
+
+    // relationships
+    {{#each schema.properties.withWebComponents}}
+    {{#eq webComponent 'select'}}
+    {{ toCamelCase getRelationshipModules }}$: Observable<{{ getRelationshipAggregateName }}[]>;
+    {{/eq}}
+    {{/each}}
+{{/unlessEq}}
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
@@ -32,6 +41,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     constructor(
         protected readonly injector: Injector,
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        {{#each schema.properties.withWebComponents}}
+        {{#eq webComponent 'select'}}
+        private readonly {{ toCamelCase getRelationshipModule }}Service: {{ toPascalCase getRelationshipModule }}Service,
+        {{/eq}}
+        {{/each}}
     )
     {
         super(injector);

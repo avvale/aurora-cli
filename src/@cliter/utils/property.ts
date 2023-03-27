@@ -269,6 +269,34 @@ export class Property
         return null;
     }
 
+    get getRelationshipProperties(): Properties | null
+    {
+        try
+        {
+            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).properties;
+        }
+        catch
+        {
+            this.throwRelationshipEntityNorCreated();
+        }
+
+        return null;
+    }
+
+    get getRelationshipAggregateName(): string | null
+    {
+        try
+        {
+            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).aggregateName;
+        }
+        catch
+        {
+            this.throwRelationshipEntityNorCreated();
+        }
+
+        return null;
+    }
+
     get getJavascriptType(): string
     {
         if (this.relationship === SqlRelationship.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;

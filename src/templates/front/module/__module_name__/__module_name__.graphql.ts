@@ -10,7 +10,20 @@ export const fields = `
     {{/each}}
 `;
 
-export const relationsFields = '';
+export const relationsFields = `
+    {{#each schema.properties.withWebComponents}}
+    {{#eq webComponent 'select'}}
+    {{ getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }} (
+        query: $query{{ toPascalCase getRelationshipModules }}
+        constraint: $constraint{{ toPascalCase getRelationshipModules }}
+    ) {
+        {{#each getRelationshipProperties.withoutTimestampsWithoutRelationship}}
+        {{ name }}
+        {{/each}}
+    }
+    {{/eq}}
+    {{/each}}
+`;
 
 // default methods
 export const paginationQuery = gql`
@@ -43,6 +56,21 @@ export const getQuery = gql`
         }
     }
 `;
+{{#unlessEq schema.properties.lengthWebComponents 0 }}
+
+export const getRelations = gql`
+    query {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Relations(
+        {{#each schema.properties.withWebComponents}}
+        {{#eq webComponent 'select'}}
+        $query{{ toPascalCase getRelationshipModules }}: QueryStatement
+        $constraint{{ toPascalCase getRelationshipModules }}: QueryStatement
+        {{/eq}}
+        {{/each}}
+    ) {
+        ${relationsFields}
+    }
+`;
+{{/unlessEq}}
 
 export const findByIdQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
@@ -58,6 +86,30 @@ export const findByIdQuery = gql`
         }
     }
 `;
+{{#unlessEq schema.properties.lengthWebComponents 0 }}
+
+export const findByIdWithRelationsQuery = gql`
+    query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdWithRelations (
+        $id: ID
+        $constraint: QueryStatement
+        {{#each schema.properties.withWebComponents}}
+        {{#eq webComponent 'select'}}
+        $query{{ toPascalCase getRelationshipModules }}: QueryStatement
+        $constraint{{ toPascalCase getRelationshipModules }}: QueryStatement
+        {{/eq}}
+        {{/each}}
+    ) {
+        object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+        ${relationsFields}
+    }
+`;
+{{/unlessEq}}
 
 export const findQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (
