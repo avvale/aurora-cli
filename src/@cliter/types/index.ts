@@ -26,6 +26,14 @@ export interface GeneratePipelineCommandState extends CommandState
     service: string;
 }
 
+export interface ImportStatement
+{
+    items: string[] | string;
+    path: string;
+    defaultImport?: boolean;
+    oneRowByItem?: boolean;
+}
+
 export interface LiteralObject
 {
     [key: string]: any;

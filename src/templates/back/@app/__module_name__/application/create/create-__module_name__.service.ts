@@ -1,16 +1,29 @@
-import { ConflictException, Injectable{{#if schema.properties.hasI18n}}, NotFoundException{{/if}} } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { CQMetadata } from '@aurora-ts/core';
-import {
-    {{> importValueObjects }}
-} from '../../domain/value-objects';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18NRepository}}
-import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-{{#if schema.properties.hasI18n}}
-import * as _ from 'lodash';
-{{/if}}
+{{
+    setVar 'arrayImports' (
+        array
+            (object items=(array 'ConflictException' 'Injectable') path='@nestjs/common')
+            (object items='EventPublisher' path='@nestjs/cqrs')
+            (object items='CQMetadata' path='@aurora-ts/core')
 
+            (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.repository'))
+            (object items=schema.aggregateName path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.aggregate'))
+    )
+~}}
+{{#each schema.properties.valueObjects}}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{ push ../arrayImports
+    (object items=(sumStrings (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
+~}}
+{{/if}}
+{{/each}}
+{{#if schema.properties.hasI18n}}
+{{ push arrayImports
+    (object items='NotFoundException' path='@nestjs/common')
+    (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18NRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
+    (object items='* as _' path='lodash' defaultImport=true)
+~}}
+{{/if}}
+{{{ importManager (object imports=arrayImports) }}}
 @Injectable()
 export class Create{{ toPascalCase schema.moduleName }}Service
 {

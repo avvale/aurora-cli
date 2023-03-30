@@ -1,9 +1,13 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
+import { lastValueFrom, {{#unlessEq schema.properties.lengthWebComponents 0 }}Observable, {{/unlessEq}}takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
+{{#each schema.properties.withWebComponents}}
+import { {{ getRelationshipAggregateName }} } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipBoundedContext }}.types';
+import { {{ toPascalCase getRelationshipModule }}Service } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/{{ toKebabCase getRelationshipModule }}.service';
+{{/each}}
 
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-detail',
@@ -54,7 +58,17 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        {{#eq schema.properties.lengthWebComponents 0 }}
+        /**/
+        {{else}}
+        {{#each schema.properties.withWebComponents}}
+        {{#eq webComponent 'select'}}
+        this.{{ toCamelCase getRelationshipModules }}$ = this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}$;
+        {{/eq}}
+        {{/each}}
+        {{/eq}}
+    }
 
     onSubmit($event): void
     {

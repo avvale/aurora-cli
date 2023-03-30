@@ -1,8 +1,8 @@
-import { Property } from '../..';
+import { Property, SqlRelationship } from '../..';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
 
-handlebars.registerHelper('isAllowProperty', function(moduleName, property: Property): boolean
+handlebars.registerHelper('isAllowProperty', function(moduleName: string, property: Property): boolean
 {
     if (property.isI18n)
     {
@@ -12,6 +12,8 @@ handlebars.registerHelper('isAllowProperty', function(moduleName, property: Prop
             property.name !== 'updatedAt' &&
             property.name !== 'deletedAt';
     }
+
+    if (property.isRelationship && property.relationship === SqlRelationship.ONE_TO_MANY) return false;
 
     return true;
 });

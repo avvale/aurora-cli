@@ -13,7 +13,7 @@ export const fields = `
 export const relationsFields = `
     {{#each schema.properties.withWebComponents}}
     {{#eq webComponent 'select'}}
-    {{ getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }} (
+    {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }} (
         query: $query{{ toPascalCase getRelationshipModules }}
         constraint: $constraint{{ toPascalCase getRelationshipModules }}
     ) {

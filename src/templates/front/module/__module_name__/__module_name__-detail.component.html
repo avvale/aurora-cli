@@ -124,6 +124,10 @@
 
                     {{/eq}}
                     {{/if}}
+                    {{#eq webComponent 'select'}}
+                    {{> selectWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
                     {{/each}}
 
                 </div>
