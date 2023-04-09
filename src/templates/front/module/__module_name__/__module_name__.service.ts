@@ -1,14 +1,38 @@
-import { Injectable } from '@angular/core';
-import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
-import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { {{ schema.aggregateName }}, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
-import { paginationQuery, getQuery, {{#unlessEq schema.properties.lengthWebComponents 0 }}getRelations, {{/unlessEq}}fields, findByIdQuery, {{#unlessEq schema.properties.lengthWebComponents 0 }}findByIdWithRelationsQuery, {{/unlessEq}}findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation{{#each schema.additionalApis}}, {{getVariableName}}{{ toPascalCase resolverType }}{{/each}} } from './{{ toKebabCase schema.moduleName }}.graphql';
-{{#each schema.properties.withWebComponents}}
-import { {{ getRelationshipAggregateName }} } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipBoundedContext }}.types';
-import { {{ toPascalCase getRelationshipModule }}Service } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/{{ toKebabCase getRelationshipModule }}.service';
+{{
+    setVar 'arrayImports' (
+        array
+            (object items='Injectable' path='@angular/core')
+            (object items=(array 'DocumentNode' 'FetchResult') path='@apollo/client/core')
+            (object items=(array 'GraphQLService' 'GridData' 'parseGqlFields' 'QueryStatement') path='@aurora')
+            (object items=(array 'BehaviorSubject' 'first' 'map' 'Observable' 'tap') path='rxjs')
+            (object items=(array schema.aggregateName (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ById') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames))) path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types'))
+            (object items=(array 'paginationQuery' 'getQuery' 'fields' 'findByIdQuery' 'findQuery' 'createMutation' 'updateByIdMutation' 'updateMutation' 'deleteByIdMutation' 'deleteMutation') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
+    )
+~}}
+{{#unlessEq schema.properties.lengthWebComponents 0 }}
+{{ push arrayImports
+    (object items=(array 'getRelations' 'findByIdWithRelationsQuery') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
+~}}
+{{/unlessEq}}
+{{#each schema.additionalApis}}
+{{ push ../arrayImports
+    (object items=(sumStrings getVariableName (toPascalCase ../resolverType)) path=(sumStrings './' (toKebabCase ../schema.moduleName) '.graphql'))
+~}}
 {{/each}}
-
+{{#each schema.properties.withWebComponents}}
+{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{ push ../arrayImports
+    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContext) '.types'))
+    (object items=(sumStrings (toPascalCase getRelationshipModule) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.service'))
+~}}
+{{else}}
+{{ push ../arrayImports
+    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipBoundedContext) '.types'))
+    (object items=(sumStrings (toPascalCase getRelationshipModule) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.service'))
+~}}
+{{/eq}}
+{{/each}}
+{{{ importManager (object imports=arrayImports) }}}
 @Injectable({
     providedIn: 'root',
 })

@@ -4,7 +4,6 @@
             (object items=(array 'ConflictException' 'Injectable') path='@nestjs/common')
             (object items='EventPublisher' path='@nestjs/cqrs')
             (object items='CQMetadata' path='@aurora-ts/core')
-
             (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.repository'))
             (object items=schema.aggregateName path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.aggregate'))
     )
