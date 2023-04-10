@@ -124,8 +124,12 @@
 
                     {{/eq}}
                     {{/if}}
-                    {{#eq webComponent 'select'}}
+                    {{#eq webComponent.type 'select'}}
                     {{> selectWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq webComponent.type 'grid-select-element'}}
+                    {{> gridSelectElementWebComponent schema=../schema property=.}}
 
                     {{/eq}}
                     {{/each}}

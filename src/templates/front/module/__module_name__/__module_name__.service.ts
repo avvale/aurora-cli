@@ -140,7 +140,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             id = '',
             constraint = {},
             {{#each schema.properties.withWebComponents}}
-            {{#eq webComponent 'select'}}
+            {{#eq webComponent.type 'select'}}
             query{{ toPascalCase getRelationshipModules }} = {},
             constraint{{ toPascalCase getRelationshipModules }} = {},
             {{/eq}}
@@ -150,7 +150,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             id?: string;
             constraint?: QueryStatement;
             {{#each schema.properties.withWebComponents}}
-            {{#eq webComponent 'select'}}
+            {{#eq webComponent.type 'select'}}
             query{{ toPascalCase getRelationshipModules }}?: QueryStatement;
             constraint{{ toPascalCase getRelationshipModules }}?: QueryStatement;
             {{/eq}}
@@ -159,7 +159,7 @@ export class {{ toPascalCase schema.moduleName }}Service
     ): Observable<{
         object: {{ schema.aggregateName }};
         {{#each schema.properties.withWebComponents}}
-        {{#eq webComponent 'select'}}
+        {{#eq webComponent.type 'select'}}
         {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
         {{/each}}
@@ -170,7 +170,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .watchQuery<{
                 object: {{ schema.aggregateName }};
                 {{#each schema.properties.withWebComponents}}
-                {{#eq webComponent 'select'}}
+                {{#eq webComponent.type 'select'}}
                 {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
                 {{/eq}}
                 {{/each}}
@@ -180,7 +180,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                     id,
                     constraint,
                     {{#each schema.properties.withWebComponents}}
-                    {{#eq webComponent 'select'}}
+                    {{#eq webComponent.type 'select'}}
                     query{{ toPascalCase getRelationshipModules }},
                     constraint{{ toPascalCase getRelationshipModules }},
                     {{/eq}}
@@ -195,7 +195,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 {
                     this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
                     {{#each schema.properties.withWebComponents}}
-                    {{#eq webComponent 'select'}}
+                    {{#eq webComponent.type 'select'}}
                     this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}Subject$.next(data.{{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }});
                     {{/eq}}
                     {{/each}}
@@ -280,14 +280,14 @@ export class {{ toPascalCase schema.moduleName }}Service
     getRelations(
         {
             {{#each schema.properties.withWebComponents}}
-            {{#eq webComponent 'select'}}
+            {{#eq webComponent.type 'select'}}
             query{{ toPascalCase getRelationshipModules }} = {},
             constraint{{ toPascalCase getRelationshipModules }} = {},
             {{/eq}}
             {{/each}}
         }: {
             {{#each schema.properties.withWebComponents}}
-            {{#eq webComponent 'select'}}
+            {{#eq webComponent.type 'select'}}
             query{{ toPascalCase getRelationshipModules }}?: QueryStatement;
             constraint{{ toPascalCase getRelationshipModules }}?: QueryStatement;
             {{/eq}}
@@ -295,7 +295,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         } = {},
     ): Observable<{
         {{#each schema.properties.withWebComponents}}
-        {{#eq webComponent 'select'}}
+        {{#eq webComponent.type 'select'}}
         {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
         {{/each}}
@@ -305,7 +305,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .client()
             .watchQuery<{
                 {{#each schema.properties.withWebComponents}}
-                {{#eq webComponent 'select'}}
+                {{#eq webComponent.type 'select'}}
                 {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
                 {{/eq}}
                 {{/each}}
@@ -313,7 +313,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 query    : getRelations,
                 variables: {
                     {{#each schema.properties.withWebComponents}}
-                    {{#eq webComponent 'select'}}
+                    {{#eq webComponent.type 'select'}}
                     query{{ toPascalCase getRelationshipModules }},
                     constraint{{ toPascalCase getRelationshipModules }},
                     {{/eq}}
@@ -327,7 +327,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 tap(data =>
                 {
                     {{#each schema.properties.withWebComponents}}
-                    {{#eq webComponent 'select'}}
+                    {{#eq webComponent.type 'select'}}
                     this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}Subject$.next(data.{{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }});
                     {{/eq}}
                     {{/each}}

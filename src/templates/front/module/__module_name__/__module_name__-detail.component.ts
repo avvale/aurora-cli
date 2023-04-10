@@ -29,7 +29,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
     // relationships
     {{#each schema.properties.withWebComponents}}
-    {{#eq webComponent 'select'}}
+    {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipModules }}$: Observable<{{ getRelationshipAggregateName }}[]>;
     {{/eq}}
     {{/each}}
@@ -46,7 +46,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         protected readonly injector: Injector,
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
         {{#each schema.properties.withWebComponents}}
-        {{#eq webComponent 'select'}}
+        {{#eq webComponent.type 'select'}}
         private readonly {{ toCamelCase getRelationshipModule }}Service: {{ toPascalCase getRelationshipModule }}Service,
         {{/eq}}
         {{/each}}
@@ -63,7 +63,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         /**/
         {{else}}
         {{#each schema.properties.withWebComponents}}
-        {{#eq webComponent 'select'}}
+        {{#eq webComponent.type 'select'}}
         this.{{ toCamelCase getRelationshipModules }}$ = this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}$;
         {{/eq}}
         {{/each}}

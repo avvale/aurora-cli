@@ -62,7 +62,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
 {{else ~}}
 export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<{
     {{#each schema.properties.withWebComponents}}
-    {{#eq webComponent 'select'}}
+    {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
     {{/eq}}
     {{/each}}
@@ -91,7 +91,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
 {{else}}
     ): Observable<{
     {{#each schema.properties.withWebComponents}}
-    {{#eq webComponent 'select'}}
+    {{#eq webComponent.type 'select'}}
         {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
     {{/eq}}
     {{/each}}
@@ -115,7 +115,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
 export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve<{
     object: {{ schema.aggregateName }};
     {{#each schema.properties.withWebComponents}}
-    {{#eq webComponent 'select'}}
+    {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
     {{/eq}}
     {{/each}}
@@ -139,7 +139,7 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
     ): Observable<{
         object: {{ schema.aggregateName }};
         {{#each schema.properties.withWebComponents}}
-        {{#eq webComponent 'select'}}
+        {{#eq webComponent.type 'select'}}
         {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
         {{/each}}

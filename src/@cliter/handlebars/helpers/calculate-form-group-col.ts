@@ -23,6 +23,7 @@ handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
             return 'col-4';
 
         case SqlType.ID:
+            if (property.webComponent?.type === 'grid-select-element') return 'col-start-1 col-6';
             return `col-6`;
 
         case SqlType.INT:

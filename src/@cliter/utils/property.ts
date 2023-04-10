@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 import { cliterConfig } from '../config/cliter.config';
-import { ModuleDefinitionSchema, SqlIndex, SqlRelationship, SqlType } from '../types';
+import { ModuleDefinitionSchema, SqlIndex, SqlRelationship, SqlType, WebComponent } from '../types';
 import { Properties } from './properties';
 import { YamlManager } from './yaml-manager';
 
@@ -41,7 +41,7 @@ export class Property
     public isI18n?: boolean;
     public example?: any;
     public faker?: string;
-    public webComponent?: string;
+    public webComponent?: WebComponent;
     public schema?: ModuleDefinitionSchema;
 
     constructor(
@@ -74,7 +74,7 @@ export class Property
             isI18n?: boolean;
             example?: any;
             faker?: any;
-            webComponent?: string;
+            webComponent?: WebComponent;
             schema?: ModuleDefinitionSchema;
         },
     )

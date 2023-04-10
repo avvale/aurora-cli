@@ -48,7 +48,7 @@ export class Properties
 
     get lengthWebComponents(): number
     {
-        return this.properties.filter(property => Boolean(property.webComponent)).length;
+        return this.properties.filter(property => Boolean(property.webComponent?.type)).length;
     }
 
     get withoutDeletedAt(): Property[]
@@ -172,7 +172,7 @@ export class Properties
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
-            .filter(property => Boolean(property.webComponent));
+            .filter(property => Boolean(property.webComponent?.type));
     }
 
     /*************

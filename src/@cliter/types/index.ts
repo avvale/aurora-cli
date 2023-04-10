@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-import { AdditionalApis, Properties } from '../utils';
+import { AdditionalApis, Properties, Property } from '../utils';
 
 export interface CommandState
 {
@@ -158,4 +158,10 @@ export enum TemplateFile
 {
     FILE            = 'bounded-context',
     VALUE_OBJECT    = 'module',
+}
+
+export interface WebComponent
+{
+    type: string;
+    property: Property;
 }
