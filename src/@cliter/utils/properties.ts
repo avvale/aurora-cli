@@ -8,7 +8,6 @@ export class Properties
     timestampFields: string[] = ['createdAt', 'updatedAt', 'deletedAt'];
     deletedAtField: string[] = ['deletedAt'];
 
-
     *[Symbol.iterator]()
     {
         for (const property of this.properties) yield property;
@@ -43,7 +42,7 @@ export class Properties
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
-            .filter(property => property.type !== SqlType.RELATIONSHIP);
+            .filter(property => !property.relationship);
     }
 
     get lengthWebComponents(): number
@@ -96,7 +95,7 @@ export class Properties
      ****************/
     get withRelationship(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType.RELATIONSHIP);
+        return this.properties.filter(property => Boolean(property.relationship));
     }
 
     get withRelationshipOneToOne(): Property[]
@@ -419,7 +418,7 @@ export class Properties
 
     get schemaRelations(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType.RELATIONSHIP); // only relationship
+        return this.properties.filter(property => Boolean(property.relationship)); // only relationship
     }
 
     get columnsWithIndex(): Property[]
