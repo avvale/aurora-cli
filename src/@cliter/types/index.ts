@@ -69,6 +69,23 @@ export interface NewFrontCommandState extends CommandState
     appName: string;
 }
 
+export interface PropertyWebComponent
+{
+    type: WebComponentType;
+    property: Property;
+}
+
+export interface PropertyRelationship
+{
+    type: SqlRelationship;
+    singularName: string;
+    aggregate: string;
+    modulePath: string;
+    key: string;
+    field: string;
+    avoidConstraint: boolean;
+}
+
 export enum ResolverType
 {
     QUERY = 'query',
@@ -160,8 +177,9 @@ export enum TemplateFile
     VALUE_OBJECT    = 'module',
 }
 
-export interface WebComponent
+export enum WebComponentType
 {
-    type: string;
-    property: Property;
+    GRID_SELECT_ELEMENT   = 'grid-select-element',
+    GRID_ELEMENTS_MANAGER = 'grid-elements-manager',
+    SELECT                = 'select'
 }
