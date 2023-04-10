@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-array-push-push */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, Scope, SqlRelationship, SqlType } from '../types';
+import { GenerateCommandState, Scope, RelationshipType, SqlType } from '../types';
 import { Property } from './property';
 import { cliterConfig } from '../config/cliter.config';
 import { getBoundedContextModuleFromFlag } from '../functions/common';
@@ -207,7 +207,7 @@ export const Prompter =
             name   : 'relationship',
             message: 'What kind of relationship do you want to create?',
             type   : 'list',
-            choices: Object.values(SqlRelationship).filter(item => ['none', 'one-to-one', 'many-to-one'].includes(item)),
+            choices: Object.values(RelationshipType).filter(item => ['none', 'one-to-one', 'many-to-one'].includes(item)),
             when   : (answers: any) =>
             {
                 if (answers.name.endsWith('Id'))
@@ -240,7 +240,7 @@ export const Prompter =
             name   : 'relationship',
             message: 'What kind of relationship do you want to create?',
             type   : 'list',
-            choices: Object.values(SqlRelationship).filter(item => !['many-to-one'].includes(item)),
+            choices: Object.values(RelationshipType).filter(item => !['many-to-one'].includes(item)),
             when   : (answers: any) => answers.type === SqlType.RELATIONSHIP,
         });
 
@@ -249,8 +249,8 @@ export const Prompter =
             message: 'The property name will be plural, type its singular (example: for cars type car)',
             type   : 'input',
             when   : (answers: any) =>
-                answers.relationship === SqlRelationship.ONE_TO_MANY ||
-                answers.relationship === SqlRelationship.MANY_TO_MANY,
+                answers.relationship === RelationshipType.ONE_TO_MANY ||
+                answers.relationship === RelationshipType.MANY_TO_MANY,
         });
 
         questions.push({
@@ -258,10 +258,10 @@ export const Prompter =
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
             when   : (answers: any) =>
-                answers.relationship === SqlRelationship.ONE_TO_ONE ||
-                answers.relationship === SqlRelationship.MANY_TO_ONE ||
-                answers.relationship === SqlRelationship.ONE_TO_MANY ||
-                answers.relationship === SqlRelationship.MANY_TO_MANY,
+                answers.relationship === RelationshipType.ONE_TO_ONE ||
+                answers.relationship === RelationshipType.MANY_TO_ONE ||
+                answers.relationship === RelationshipType.ONE_TO_MANY ||
+                answers.relationship === RelationshipType.MANY_TO_MANY,
         });
 
         questions.push({
@@ -270,17 +270,17 @@ export const Prompter =
             type   : 'input',
             when   : (answers: any) =>
             {
-                if (answers.relationship === SqlRelationship.ONE_TO_MANY || (answers.relationship === SqlRelationship.ONE_TO_ONE && !answers.name.endsWith('Id'))) answers.type =  answers.relationshipAggregate;
-                if (answers.relationship === SqlRelationship.ONE_TO_ONE && answers.name.endsWith('Id'))
+                if (answers.relationship === RelationshipType.ONE_TO_MANY || (answers.relationship === RelationshipType.ONE_TO_ONE && !answers.name.endsWith('Id'))) answers.type =  answers.relationshipAggregate;
+                if (answers.relationship === RelationshipType.ONE_TO_ONE && answers.name.endsWith('Id'))
                 {
                     answers.type = 'id';
                     answers.length = 36;
                 }
 
                 // by default all many to many relationship will be nullable
-                if (answers.relationship === SqlRelationship.MANY_TO_MANY) answers.nullable =  true;
+                if (answers.relationship === RelationshipType.MANY_TO_MANY) answers.nullable =  true;
 
-                return answers.relationship === SqlRelationship.ONE_TO_ONE || answers.relationship === SqlRelationship.MANY_TO_ONE || answers.relationship === SqlRelationship.ONE_TO_MANY || answers.relationship === SqlRelationship.MANY_TO_MANY;
+                return answers.relationship === RelationshipType.ONE_TO_ONE || answers.relationship === RelationshipType.MANY_TO_ONE || answers.relationship === RelationshipType.ONE_TO_MANY || answers.relationship === RelationshipType.MANY_TO_MANY;
             },
         });
 
@@ -290,7 +290,7 @@ export const Prompter =
             type   : 'confirm',
             when   : (answers: any) =>
             {
-                return answers.relationship === SqlRelationship.MANY_TO_MANY;
+                return answers.relationship === RelationshipType.MANY_TO_MANY;
             },
         });
 
@@ -319,7 +319,7 @@ export const Prompter =
                     answers.pivotFileName       = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
-                if (!answers.hasPivotTable && answers.relationship === SqlRelationship.MANY_TO_MANY)
+                if (!answers.hasPivotTable && answers.relationship === RelationshipType.MANY_TO_MANY)
                 {
                     const relationshipModulePath = getBoundedContextModuleFromFlag(generateCommandState.command, answers.relationshipModulePath);
                     answers.pivotAggregateName   = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
@@ -340,14 +340,14 @@ export const Prompter =
             type   : 'confirm',
             when   : (answers: any) =>
             {
-                if (answers.relationship === SqlRelationship.ONE_TO_MANY)
+                if (answers.relationship === RelationshipType.ONE_TO_MANY)
                 {
                     // a field with relation one-to-many always will be nullable
                     answers.nullable = true;
                     return false;
                 }
 
-                if (answers.relationship === SqlRelationship.MANY_TO_MANY)
+                if (answers.relationship === RelationshipType.MANY_TO_MANY)
                 {
                     // answers.nullable = true;
                     return false;
@@ -364,7 +364,7 @@ export const Prompter =
         if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && !response.length) response.length = cliterConfig.defaultTypeLength[response.type];
 
         // delete relationship none value
-        if (response.relationship === SqlRelationship.NONE) delete response.relationship;
+        if (response.relationship === RelationshipType.NONE) delete response.relationship;
 
         return new Property({
             name                    : response.name,
@@ -382,8 +382,8 @@ export const Prompter =
             relationshipSingularName: response.relationshipSingularName,
             relationshipAggregate   : response.relationshipAggregate,
             relationshipModulePath  : response.relationshipModulePath,
-            relationshipKey         : response.relationship === SqlRelationship.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
-            relationshipField       : response.relationship === SqlRelationship.MANY_TO_ONE || (response.relationship === SqlRelationship.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
+            relationshipKey         : response.relationship === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
+            relationshipField       : response.relationship === RelationshipType.MANY_TO_ONE || (response.relationship === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
             pivotAggregateName      : response.pivotAggregateName,
             pivotPath               : response.pivotPath,
             pivotFileName           : response.pivotFileName,
@@ -461,7 +461,7 @@ export const Prompter =
             { origin: 'minLength',                   alias: 'MinL.' },
             { origin: 'maxLength',                   alias: 'MaxL.' },
             { origin: 'nullable',                    alias: 'Nullable' },
-            { origin: 'relationship',                alias: 'SqlRelationship' },
+            { origin: 'relationship',                alias: 'RelationshipType' },
             { origin: 'relationshipSingularName',    alias: 'Singular' },
             { origin: 'relationshipAggregate',       alias: 'R. Aggregate' },
             { origin: 'relationshipModulePath',      alias: 'R. Module Path' },

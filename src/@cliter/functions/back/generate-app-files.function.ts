@@ -1,5 +1,5 @@
 import { cliterConfig } from '../../config';
-import { GenerateCommandState, SqlRelationship, TemplateElement } from '../../types';
+import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 import * as path from 'node:path';
 
@@ -27,7 +27,7 @@ export const generateAppFiles = async (generateCommandState: GenerateCommandStat
             lockFiles         : generateCommandState.lockFiles,
             templateData      : {
                 ...generateCommandState,
-                relationship: SqlRelationship,
+                relationship: RelationshipType,
             },
         },
     );

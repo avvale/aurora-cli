@@ -77,13 +77,22 @@ export interface PropertyWebComponent
 
 export interface PropertyRelationship
 {
-    type: SqlRelationship;
+    type: RelationshipType;
     singularName: string;
     aggregate: string;
     modulePath: string;
     key: string;
     field: string;
     avoidConstraint: boolean;
+}
+
+export enum RelationshipType
+{
+    NONE            = 'none',
+    ONE_TO_ONE      = 'one-to-one',
+    ONE_TO_MANY     = 'one-to-many',
+    MANY_TO_ONE     = 'many-to-one',
+    MANY_TO_MANY    = 'many-to-many'
 }
 
 export enum ResolverType
@@ -108,15 +117,6 @@ export enum SqlIndex
 {
     UNIQUE  = 'unique',
     INDEX   = 'index'
-}
-
-export enum SqlRelationship
-{
-    NONE            = 'none',
-    ONE_TO_ONE      = 'one-to-one',
-    ONE_TO_MANY     = 'one-to-many',
-    MANY_TO_ONE     = 'many-to-one',
-    MANY_TO_MANY    = 'many-to-many'
 }
 
 export enum SqlType

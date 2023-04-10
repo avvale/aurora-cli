@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import * as path from 'node:path';
 import { cliterConfig } from '../../config';
-import { GenerateCommandState, SqlRelationship, TemplateElement } from '../../types';
+import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
 import { FileManager, TemplateGenerator } from '../../utils';
 
 export const generatePivotTables = async (generateCommandState: GenerateCommandState): Promise<void> =>
@@ -27,7 +27,7 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
                     lockFiles         : generateCommandState.lockFiles,
                     templateData      : {
                         ...generateCommandState,
-                        relationship: SqlRelationship,
+                        relationship: RelationshipType,
                     },
                     currentProperty: property,
                 },
