@@ -28,8 +28,8 @@ export const generateApiFiles = async (generateCommandState: GenerateCommandStat
             lockFiles         : generateCommandState.lockFiles,
             templateData      : {
                 ...generateCommandState,
-                sqlType     : SqlType,
-                relationship: RelationshipType,
+                sqlType         : SqlType,
+                relationshipType: RelationshipType,
             },
         },
     );

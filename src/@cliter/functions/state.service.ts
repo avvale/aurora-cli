@@ -24,7 +24,7 @@ export class StateService
     public schema!: ModuleDefinitionSchema;
     public lockFiles: LockFile[] = [];
     public flags!: LiteralObject;
-    public relationship = RelationshipType;
+    public relationshipType = RelationshipType;
     public resolverType = ResolverType;
     public sqlType = SqlType;
     private _originFiles: string[] = []; // origin files generated

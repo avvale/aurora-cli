@@ -2,16 +2,16 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withRelationshipOneToOne}}
-import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
-import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipOneToMany}}
-import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withRelationshipManyToMany}}
-import { {{ relationshipAggregate }}Model } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
 import { {{ pivotAggregateName }}Model } from '{{ config.appContainer }}/{{ pivotPath }}/infrastructure/sequelize/sequelize-{{ pivotFileName }}.model';
 {{/each}}
 
@@ -21,11 +21,11 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
     {{#each schema.properties.modelColumns}}
     {{#if isI18n }}
     {{#if hasColumnDecorator }}
-    {{#eq relationship ../relationship.ONE_TO_ONE }}
-    @ForeignKey(() => {{ relationshipAggregate }}Model)
+    {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
+    @ForeignKey(() => {{ relationship.aggregate }}Model)
     {{/eq}}
-    {{#eq relationship ../relationship.MANY_TO_ONE }}
-    @ForeignKey(() => {{ relationshipAggregate }}Model)
+    {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
+    @ForeignKey(() => {{ relationship.aggregate }}Model)
     {{/eq}}
     {{#eq index 'index' }}
     {{! @Index :: https://github.com/RobinBuschmann/sequelize-typescript/issues/725 }}
@@ -52,7 +52,7 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
         defaultValue: {{ getDefaultValue }},
         {{/if}}
         {{#if false }}
-        {{#eq relationship ../relationship.MANY_TO_ONE }}
+        {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
         references: {
             key: '{{ getReferenceKey }}'
         },
@@ -65,27 +65,27 @@ export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggrega
     {{/if}}
     {{#if hasHasOneDecorator }}
 
-    @HasOne(() => {{ relationshipAggregate }}Model)
-    {{ toCamelCase name }}: {{ relationshipAggregate }}Model;
+    @HasOne(() => {{ relationship.aggregate }}Model)
+    {{ toCamelCase name }}: {{ relationship.aggregate }}Model;
     {{/if}}
     {{#if hasBelongsToDecorator }}
 
-    @BelongsTo(() => {{ relationshipAggregate }}Model, { constraints: false })
-    {{ toCamelCase relationshipField }}: {{ relationshipAggregate }}Model;
+    @BelongsTo(() => {{ relationship.aggregate }}Model, { constraints: false })
+    {{ toCamelCase relationship.field }}: {{ relationship.aggregate }}Model;
     {{/if}}
     {{#if hasHasManyDecorator }}
 
-    @HasMany(() => {{ relationshipAggregate }}Model{{#if relationshipKey }}, '{{ relationshipKey }}'{{/if}})
-    {{ toCamelCase name }}: {{ relationshipAggregate }}Model[];
+    @HasMany(() => {{ relationship.aggregate }}Model{{#if relationship.key }}, '{{ relationship.key }}'{{/if}})
+    {{ toCamelCase name }}: {{ relationship.aggregate }}Model[];
     {{/if}}
     {{#if hasBelongsToManyDecorator }}
 
     {{#if pivotAggregateName }}
-    @BelongsToMany(() => {{ relationshipAggregate }}Model, { through: () => {{ pivotAggregateName }}Model, uniqueKey: 'Uq01{{ toPascalCase pivotAggregateName }}' })
-    {{ toCamelCase originName }}: {{ relationshipAggregate }}Model[];
+    @BelongsToMany(() => {{ relationship.aggregate }}Model, { through: () => {{ pivotAggregateName }}Model, uniqueKey: 'Uq01{{ toPascalCase pivotAggregateName }}' })
+    {{ toCamelCase originName }}: {{ relationship.aggregate }}Model[];
     {{else}}
-    @BelongsToMany(() => {{ relationshipAggregate }}Model, () => {{ pivotAggregateName }}Model)
-    {{ toCamelCase originName }}: {{ relationshipAggregate }}Model[];
+    @BelongsToMany(() => {{ relationship.aggregate }}Model, () => {{ pivotAggregateName }}Model)
+    {{ toCamelCase originName }}: {{ relationship.aggregate }}Model[];
     {{/if}}
     {{/if}}
 

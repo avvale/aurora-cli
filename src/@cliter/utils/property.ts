@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 import { cliterConfig } from '../config/cliter.config';
-import { ModuleDefinitionSchema, SqlIndex, RelationshipType, SqlType, PropertyWebComponent } from '../types';
+import { ModuleDefinitionSchema, SqlIndex, RelationshipType, SqlType, PropertyWebComponent, PropertyRelationship } from '../types';
 import { Properties } from './properties';
 import { YamlManager } from './yaml-manager';
 
@@ -24,14 +24,7 @@ export class Property
     public maxLength?: number;
     public nullable?: boolean;
     public defaultValue?: string | number;
-    public relationship?: RelationshipType;
-    public relationshipSingularName?: string;
-    public relationshipAggregate?: string;
-    public relationshipModulePath?: string;
-    public relationshipKey?: string;
-    public relationshipField?: string;
-    public relationshipAvoidConstraint?: boolean;
-    public relationshipPackageName?: string;
+    public relationship?: PropertyRelationship;
     public pivotAggregateName?: string;
     public pivotPath?: string;
     public pivotFileName?: string;
@@ -57,14 +50,7 @@ export class Property
             maxLength?: number;
             nullable?: boolean;
             defaultValue?: string | number;
-            relationship?: RelationshipType;
-            relationshipSingularName?: string;
-            relationshipAggregate?: string;
-            relationshipModulePath?: string;
-            relationshipKey?: string;
-            relationshipField?: string;
-            relationshipAvoidConstraint?: boolean;
-            relationshipPackageName?: string;
+            relationship?: PropertyRelationship;
             pivotAggregateName?: string;
             pivotPath?: string;
             pivotFileName?: string;
@@ -91,13 +77,6 @@ export class Property
         this.nullable = payload.nullable;
         this.defaultValue = payload.defaultValue;
         this.relationship = payload.relationship;
-        this.relationshipSingularName = payload.relationshipSingularName;
-        this.relationshipAggregate = payload.relationshipAggregate;
-        this.relationshipModulePath = payload.relationshipModulePath;
-        this.relationshipKey = payload.relationshipKey;
-        this.relationshipField = payload.relationshipField;
-        this.relationshipAvoidConstraint = payload.relationshipAvoidConstraint;
-        this.relationshipPackageName = payload.relationshipPackageName;
         this.pivotAggregateName = payload.pivotAggregateName;
         this.pivotPath = payload.pivotPath;
         this.pivotFileName = payload.pivotFileName;
@@ -148,40 +127,40 @@ export class Property
 
     get hasColumnDecorator(): boolean
     {
-        return this.relationship !== RelationshipType.ONE_TO_MANY &&
-            this.relationship !== RelationshipType.MANY_TO_MANY &&
+        return this.relationship?.type !== RelationshipType.ONE_TO_MANY &&
+            this.relationship?.type !== RelationshipType.MANY_TO_MANY &&
             !(
-                this.relationship === RelationshipType.ONE_TO_ONE &&
-                !this.relationshipField
+                this.relationship?.type === RelationshipType.ONE_TO_ONE &&
+                !this.relationship.field
             );
     }
 
     get hasHasOneDecorator(): boolean
     {
-        return this.relationship === RelationshipType.ONE_TO_ONE &&
-            !this.relationshipField;
+        return this.relationship?.type === RelationshipType.ONE_TO_ONE &&
+            !this.relationship.field;
     }
 
     get hasBelongsToDecorator(): boolean
     {
         return  (
-            this.relationship === RelationshipType.MANY_TO_ONE &&
-            Boolean(this.relationshipField)
+            this.relationship?.type === RelationshipType.MANY_TO_ONE &&
+            Boolean(this.relationship.field)
         ) ||
         (
-            this.relationship === RelationshipType.ONE_TO_ONE &&
-            Boolean(this.relationshipField)
+            this.relationship?.type === RelationshipType.ONE_TO_ONE &&
+            Boolean(this.relationship.field)
         );
     }
 
     get hasHasManyDecorator(): boolean
     {
-        return this.relationship === RelationshipType.ONE_TO_MANY;
+        return this.relationship?.type === RelationshipType.ONE_TO_MANY;
     }
 
     get hasBelongsToManyDecorator(): boolean
     {
-        return this.relationship === RelationshipType.MANY_TO_MANY;
+        return this.relationship?.type === RelationshipType.MANY_TO_MANY;
     }
 
     get getDefaultValue(): any
@@ -191,12 +170,12 @@ export class Property
 
     get getReferenceKey(): any
     {
-        return this.relationshipKey ? this.relationshipKey : 'id';
+        return this.relationship?.key ? this.relationship?.key : 'id';
     }
 
     get isRelationship(): boolean
     {
-        return Boolean(this.relationship);
+        return this.type === SqlType.RELATIONSHIP;
     }
 
     get isBinary(): boolean
@@ -213,7 +192,7 @@ export class Property
     get name(): string
     {
         // properties that represent many to many relationships, are arrays of ids
-        if (this.relationship === RelationshipType.MANY_TO_MANY) return `${this.relationshipSingularName}Ids`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY) return `${this.relationship.singularName}Ids`;
         return this._name;
     }
 
@@ -231,7 +210,7 @@ export class Property
     {
         try
         {
-            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).boundedContextName;
+            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).boundedContextName;
         }
         catch
         {
@@ -245,7 +224,7 @@ export class Property
     {
         try
         {
-            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleName;
+            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).moduleName;
         }
         catch
         {
@@ -259,7 +238,7 @@ export class Property
     {
         try
         {
-            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).moduleNames;
+            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).moduleNames;
         }
         catch
         {
@@ -273,7 +252,7 @@ export class Property
     {
         try
         {
-            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).properties;
+            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).properties;
         }
         catch
         {
@@ -287,7 +266,7 @@ export class Property
     {
         try
         {
-            if (this.relationshipModulePath) return this.parseModuleSection(this.relationshipModulePath).aggregateName;
+            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).aggregateName;
         }
         catch
         {
@@ -299,16 +278,16 @@ export class Property
 
     get getJavascriptType(): string
     {
-        if (this.relationship === RelationshipType.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
-        if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationshipAggregate}[]`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
+        if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
 
         return this.config.sqlTypesEquivalenceJavascriptTypes[this.type];
     }
 
     get getJavascriptModelType(): string
     {
-        if (this.relationship === RelationshipType.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
-        if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationshipAggregate}[]`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
+        if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
 
         return this.config.sqlTypesEquivalenceJavascriptModelTypes[this.type];
     }
@@ -342,23 +321,23 @@ export class Property
      ***********/
     get getGraphqlType(): string | undefined
     {
-        if (this.relationship === RelationshipType.ONE_TO_MANY || this.relationship === RelationshipType.MANY_TO_MANY)    return `[${this.relationshipAggregate}]`;
-        if (this.relationship === RelationshipType.MANY_TO_ONE)                                                          return `${this.relationshipAggregate}`;
-        if (this.relationship === RelationshipType.ONE_TO_ONE)                                                           return `${this.relationshipAggregate}`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_MANY || this.relationship?.type === RelationshipType.MANY_TO_MANY) return `[${this.relationship?.aggregate}]`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_ONE)                                                              return `${this.relationship?.aggregate}`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE)                                                               return `${this.relationship?.aggregate}`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlCreateType(): string
     {
-        if (this.relationship === RelationshipType.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship === RelationshipType.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                          return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Input`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlUpdateType(): string
     {
-        if (this.relationship === RelationshipType.MANY_TO_MANY)                             return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship === RelationshipType.ONE_TO_ONE && !this.relationshipField)    return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                           return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Input`;
         return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
     }
 
@@ -389,36 +368,29 @@ export class Property
     toDto(): any
     {
         return {
-            id                         : this.id,
-            name                       : this._name,
-            type                       : this.type,
-            primaryKey                 : this.primaryKey,
-            autoIncrement              : this.autoIncrement,
-            enumOptions                : this.enumOptions,
-            decimals                   : this.decimals,
-            length                     : this.length,
-            minLength                  : this.minLength,
-            maxLength                  : this.maxLength,
-            nullable                   : this.nullable,
-            defaultValue               : this.defaultValue,
-            relationship               : this.relationship,
-            relationshipSingularName   : this.relationshipSingularName,
-            relationshipAggregate      : this.relationshipAggregate,
-            relationshipModulePath     : this.relationshipModulePath,
-            relationshipKey            : this.relationshipKey,
-            relationshipField          : this.relationshipField,
-            relationshipAvoidConstraint: this.relationshipAvoidConstraint,
-            relationshipPackageName    : this.relationshipPackageName,
-            pivotAggregateName         : this.pivotAggregateName,
-            pivotPath                  : this.pivotPath,
-            pivotFileName              : this.pivotFileName,
-            isDenormalized             : this.isDenormalized,
-            index                      : this.index,
-            indexName                  : this.indexName,
-            isI18n                     : this.isI18n,
-            example                    : this.example,
-            faker                      : this.faker,
-            webComponent               : this.webComponent,
+            id                : this.id,
+            name              : this._name,
+            type              : this.type,
+            primaryKey        : this.primaryKey,
+            autoIncrement     : this.autoIncrement,
+            enumOptions       : this.enumOptions,
+            decimals          : this.decimals,
+            length            : this.length,
+            minLength         : this.minLength,
+            maxLength         : this.maxLength,
+            nullable          : this.nullable,
+            defaultValue      : this.defaultValue,
+            relationship      : this.relationship,
+            pivotAggregateName: this.pivotAggregateName,
+            pivotPath         : this.pivotPath,
+            pivotFileName     : this.pivotFileName,
+            isDenormalized    : this.isDenormalized,
+            index             : this.index,
+            indexName         : this.indexName,
+            isI18n            : this.isI18n,
+            example           : this.example,
+            faker             : this.faker,
+            webComponent      : this.webComponent,
         };
     }
 
@@ -426,21 +398,21 @@ export class Property
     {
         throw new Error(`
 Getting relationship module path for ${this.name} property.
-    Path: ${this.relationshipModulePath}
-    Aggregate: ${this.relationshipAggregate}
-    Relationship: ${this.relationship}
+    Path: ${this.relationship?.modulePath}
+    Aggregate: ${this.relationship?.aggregate}
+    Relationship: ${this.relationship?.type}
 
 For fields with relationship, you must previously create the yaml
 of the related entity, you can do it manually or through the CLI
 using the command:
 
-aurora generate back module -n=${this.relationshipModulePath}
+aurora generate back module -n=${this.relationship?.modulePath}
 
 And create related entity.
 
 The yaml for the current entity has been created, regenerate
 the module ${this.schema?.boundedContextName}/${this.schema?.moduleName} again when you have created the yaml
-for the entity related ${this.relationshipModulePath}, with the command:
+for the entity related ${this.relationship?.modulePath}, with the command:
 
 aurora load back module -n=${this.schema?.boundedContextName}/${this.schema?.moduleName} -ft
 

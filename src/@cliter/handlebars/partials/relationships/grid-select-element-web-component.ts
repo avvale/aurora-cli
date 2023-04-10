@@ -5,10 +5,10 @@ handlebars.registerPartial('gridSelectElementWebComponent',
     appearance="outline"
     class="{{ calculateFormGroupCol property }}"
 >
-    <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}') }}</mat-label>
+    <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name }}') }}</mat-label>
     <input
         matInput
-        formControlName="{{ toCamelCase property.relationshipField }}Name"
+        formControlName="{{ toCamelCase property.relationship?.field }}Name"
         readonly
     >
     <button
@@ -19,7 +19,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         [aria-label]="t('Search')"
         (click)="
             actionService.action({
-                id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.{{ toCamelCase property.relationshipField }}OpenDialog',
+                id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.{{ toCamelCase property.relationship?.field }}OpenDialog',
                 isViewAction: false
             })
         "

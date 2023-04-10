@@ -204,7 +204,7 @@ export const Prompter =
 
         // only if filed end with Id
         questions.push({
-            name   : 'relationship',
+            name   : 'relationship.type',
             message: 'What kind of relationship do you want to create?',
             type   : 'list',
             choices: Object.values(RelationshipType).filter(item => ['none', 'one-to-one', 'many-to-one'].includes(item)),
@@ -237,7 +237,7 @@ export const Prompter =
         });
 
         questions.push({
-            name   : 'relationship',
+            name   : 'relationship.type',
             message: 'What kind of relationship do you want to create?',
             type   : 'list',
             choices: Object.values(RelationshipType).filter(item => !['many-to-one'].includes(item)),
@@ -245,42 +245,45 @@ export const Prompter =
         });
 
         questions.push({
-            name   : 'relationshipSingularName',
+            name   : 'relationship.singularName',
             message: 'The property name will be plural, type its singular (example: for cars type car)',
             type   : 'input',
             when   : (answers: any) =>
-                answers.relationship === RelationshipType.ONE_TO_MANY ||
-                answers.relationship === RelationshipType.MANY_TO_MANY,
+                answers.relationship.type === RelationshipType.ONE_TO_MANY ||
+                answers.relationship.type === RelationshipType.MANY_TO_MANY,
         });
 
         questions.push({
-            name   : 'relationshipAggregate',
+            name   : 'relationship.aggregate',
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
             when   : (answers: any) =>
-                answers.relationship === RelationshipType.ONE_TO_ONE ||
-                answers.relationship === RelationshipType.MANY_TO_ONE ||
-                answers.relationship === RelationshipType.ONE_TO_MANY ||
-                answers.relationship === RelationshipType.MANY_TO_MANY,
+                answers.relationship.type === RelationshipType.ONE_TO_ONE ||
+                answers.relationship.type === RelationshipType.MANY_TO_ONE ||
+                answers.relationship.type === RelationshipType.ONE_TO_MANY ||
+                answers.relationship.type === RelationshipType.MANY_TO_MANY,
         });
 
         questions.push({
-            name   : 'relationshipModulePath',
+            name   : 'relationship.modulePath',
             message: 'Type path to module where to find the aggregate with which you want to relate this property? Type with format: bounded-context/module',
             type   : 'input',
             when   : (answers: any) =>
             {
-                if (answers.relationship === RelationshipType.ONE_TO_MANY || (answers.relationship === RelationshipType.ONE_TO_ONE && !answers.name.endsWith('Id'))) answers.type =  answers.relationshipAggregate;
-                if (answers.relationship === RelationshipType.ONE_TO_ONE && answers.name.endsWith('Id'))
+                if (answers.relationship.type === RelationshipType.ONE_TO_MANY || (answers.relationship.type === RelationshipType.ONE_TO_ONE && !answers.name.endsWith('Id'))) answers.type =  answers.relationship.aggregate;
+                if (answers.relationship.type === RelationshipType.ONE_TO_ONE && answers.name.endsWith('Id'))
                 {
                     answers.type = 'id';
                     answers.length = 36;
                 }
 
                 // by default all many to many relationship will be nullable
-                if (answers.relationship === RelationshipType.MANY_TO_MANY) answers.nullable =  true;
+                if (answers.relationship.type === RelationshipType.MANY_TO_MANY) answers.nullable =  true;
 
-                return answers.relationship === RelationshipType.ONE_TO_ONE || answers.relationship === RelationshipType.MANY_TO_ONE || answers.relationship === RelationshipType.ONE_TO_MANY || answers.relationship === RelationshipType.MANY_TO_MANY;
+                return  answers.relationship.type === RelationshipType.ONE_TO_ONE ||
+                        answers.relationship.type === RelationshipType.MANY_TO_ONE ||
+                        answers.relationship.type === RelationshipType.ONE_TO_MANY ||
+                        answers.relationship.type === RelationshipType.MANY_TO_MANY;
             },
         });
 
@@ -290,7 +293,7 @@ export const Prompter =
             type   : 'confirm',
             when   : (answers: any) =>
             {
-                return answers.relationship === RelationshipType.MANY_TO_MANY;
+                return answers.relationship.type === RelationshipType.MANY_TO_MANY;
             },
         });
 
@@ -319,15 +322,15 @@ export const Prompter =
                     answers.pivotFileName       = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
-                if (!answers.hasPivotTable && answers.relationship === RelationshipType.MANY_TO_MANY)
+                if (!answers.hasPivotTable && answers.relationship.type === RelationshipType.MANY_TO_MANY)
                 {
-                    const relationshipModulePath = getBoundedContextModuleFromFlag(generateCommandState.command, answers.relationshipModulePath);
+                    const relationshipModulePath = getBoundedContextModuleFromFlag(generateCommandState.command, answers.relationship.modulePath);
                     answers.pivotAggregateName   = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
-                    answers.pivotPath            = answers.relationshipModulePath;
+                    answers.pivotPath            = answers.relationship.modulePath;
                     answers.pivotFileName        = `${name.toKebabCase()}-${generateCommandState.schema.moduleNames.toKebabCase()}`;
                 }
 
-                if (answers.relationship) return false;
+                if (answers.relationship.type) return false;
 
                 // eslint-disable-next-line unicorn/explicit-length-check
                 return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && !answers.length;
@@ -340,14 +343,14 @@ export const Prompter =
             type   : 'confirm',
             when   : (answers: any) =>
             {
-                if (answers.relationship === RelationshipType.ONE_TO_MANY)
+                if (answers.relationship.type === RelationshipType.ONE_TO_MANY)
                 {
                     // a field with relation one-to-many always will be nullable
                     answers.nullable = true;
                     return false;
                 }
 
-                if (answers.relationship === RelationshipType.MANY_TO_MANY)
+                if (answers.relationship.type === RelationshipType.MANY_TO_MANY)
                 {
                     // answers.nullable = true;
                     return false;
@@ -363,32 +366,33 @@ export const Prompter =
         // eslint-disable-next-line unicorn/explicit-length-check
         if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && !response.length) response.length = cliterConfig.defaultTypeLength[response.type];
 
-        // delete relationship none value
-        if (response.relationship === RelationshipType.NONE) delete response.relationship;
-
         return new Property({
-            name                    : response.name,
-            type                    : response.type,
-            primaryKey              : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
-            autoIncrement           : response.autoIncrement,
-            enumOptions             : response.enumOptions,
-            decimals                : response.decimals,
-            length                  : response.length,
-            minLength               : response.minLength,
-            maxLength               : response.maxLength,
-            nullable                : response.nullable,
-            defaultValue            : response.defaultValue,
-            relationship            : response.relationship,
-            relationshipSingularName: response.relationshipSingularName,
-            relationshipAggregate   : response.relationshipAggregate,
-            relationshipModulePath  : response.relationshipModulePath,
-            relationshipKey         : response.relationship === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
-            relationshipField       : response.relationship === RelationshipType.MANY_TO_ONE || (response.relationship === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
-            pivotAggregateName      : response.pivotAggregateName,
-            pivotPath               : response.pivotPath,
-            pivotFileName           : response.pivotFileName,
-            index                   : response.index,
-            schema                  : generateCommandState.schema,
+            name         : response.name,
+            type         : response.type,
+            primaryKey   : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
+            autoIncrement: response.autoIncrement,
+            enumOptions  : response.enumOptions,
+            decimals     : response.decimals,
+            length       : response.length,
+            minLength    : response.minLength,
+            maxLength    : response.maxLength,
+            nullable     : response.nullable,
+            defaultValue : response.defaultValue,
+            // delete relationship with none value
+            relationship : response.relationship.type === RelationshipType.NONE ? undefined : {
+                type           : response.relationship.type,
+                singularName   : response.relationship.singularName,
+                aggregate      : response.relationship.aggregate,
+                modulePath     : response.relationship.modulePath,
+                key            : response.relationship.type === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
+                field          : response.relationship.type === RelationshipType.MANY_TO_ONE || (response.relationship.type === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
+                avoidConstraint: true,
+            },
+            pivotAggregateName: response.pivotAggregateName,
+            pivotPath         : response.pivotPath,
+            pivotFileName     : response.pivotFileName,
+            index             : response.index,
+            schema            : generateCommandState.schema,
         });
     },
 
@@ -461,12 +465,12 @@ export const Prompter =
             { origin: 'minLength',                   alias: 'MinL.' },
             { origin: 'maxLength',                   alias: 'MaxL.' },
             { origin: 'nullable',                    alias: 'Nullable' },
-            { origin: 'relationship',                alias: 'RelationshipType' },
-            { origin: 'relationshipSingularName',    alias: 'Singular' },
-            { origin: 'relationshipAggregate',       alias: 'R. Aggregate' },
-            { origin: 'relationshipModulePath',      alias: 'R. Module Path' },
-            { origin: 'relationshipKey',             alias: 'R. Key' },
-            { origin: 'relationshipField',           alias: 'R. Field' },
+            { origin: 'relationship.type',           alias: 'RelationshipType' },
+            { origin: 'relationship.singularName',   alias: 'Singular' },
+            { origin: 'relationship.aggregate',      alias: 'R. Aggregate' },
+            { origin: 'relationship.modulePath',     alias: 'R. Module Path' },
+            { origin: 'relationship.key',            alias: 'R. Key' },
+            { origin: 'relationship.field',          alias: 'R. Field' },
             { origin: 'pivotAggregateName',          alias: 'Pivot' },
             { origin: 'index',                       alias: 'Index' },
         ];

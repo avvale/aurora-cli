@@ -13,7 +13,7 @@ handlebars.registerHelper('isAllowProperty', function(moduleName: string, proper
             property.name !== 'deletedAt';
     }
 
-    if (property.isRelationship && property.relationship === RelationshipType.ONE_TO_MANY) return false;
+    if (property.isRelationship && property.relationship?.type === RelationshipType.ONE_TO_MANY) return false;
 
     return true;
 });

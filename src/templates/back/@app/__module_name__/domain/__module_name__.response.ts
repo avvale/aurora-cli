@@ -1,16 +1,16 @@
 {{#each schema.properties.withImportRelationshipOneToOne}}
-import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
 {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withImportRelationshipOneToMany}}
-import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToMany}}
-import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.response{{/if}}';
 {{/each}}
 
 export class {{ toPascalCase schema.moduleName }}Response
@@ -22,14 +22,14 @@ export class {{ toPascalCase schema.moduleName }}Response
         {{/if}}
         {{/each}}
         {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
-        public readonly {{ toCamelCase relationshipField }}: {{ toPascalCase getRelationshipModule }}Response,
+        public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase getRelationshipModule }}Response,
         {{/each}}
         {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
         public readonly {{ toCamelCase originName }}: {{ toPascalCase getRelationshipModule }}Response,
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
         {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-        public readonly {{ toCamelCase relationshipField }}: {{ toPascalCase getRelationshipModule }}Response,
+        public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase getRelationshipModule }}Response,
         {{/unless}}
         {{/each}}
         {{#each schema.properties.withRelationshipOneToMany}}

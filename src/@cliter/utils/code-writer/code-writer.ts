@@ -58,9 +58,9 @@ export class CodeWriter
 
         for (const foreignRelationship of foreignRelationships)
         {
-            if (!foreignRelationship.relationshipModulePath) return;
+            if (!foreignRelationship.relationship?.modulePath) return;
 
-            const foreignBoundedContextName = foreignRelationship.relationshipModulePath.split('/')[0];
+            const foreignBoundedContextName = foreignRelationship.relationship?.modulePath.split('/')[0];
 
             for (const yamlFile of yamlFiles)
             {
@@ -78,8 +78,8 @@ export class CodeWriter
                     // register import in e2e test
                     ImportDriver.createImportItems(
                         sourceFile,
-                        foreignRelationship.relationshipPackageName ?
-                            foreignRelationship.relationshipPackageName :
+                        foreignRelationship.relationship.packageName ?
+                            foreignRelationship.relationship.packageName :
                             `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
                         [
                             `${foreignBoundedContextName.toPascalCase()}Module`,

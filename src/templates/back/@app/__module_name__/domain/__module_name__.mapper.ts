@@ -6,18 +6,18 @@ import {
     {{> importValueObjects }}
 } from './value-objects';
 {{#each schema.properties.withImportRelationshipOneToOne}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
 {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withImportRelationshipOneToMany}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToMany}}
-import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}{{ config.appContainer }}/{{ relationshipModulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
+import { {{ toPascalCase getRelationshipModule }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModule }}.mapper{{/if}}';
 {{/each}}
 
 export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
@@ -81,14 +81,14 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
             {{/if}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18N.{{/if}}{{ toCamelCase relationshipField }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18N.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18N.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
             {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18N.{{/if}}{{ toCamelCase relationshipField }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18N.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
             {{/unless}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToMany}}
@@ -111,14 +111,14 @@ export class {{ toPascalCase schema.moduleName }}Mapper implements IMapper
             {{/if}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationshipField }}) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationship.field }}) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
             this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase originName }}) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
             {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationshipField }}) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipModule }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationship.field }}) : undefined,
             {{/unless}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToMany}}

@@ -27,7 +27,7 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
                     lockFiles         : generateCommandState.lockFiles,
                     templateData      : {
                         ...generateCommandState,
-                        relationship: RelationshipType,
+                        relationshipType: RelationshipType,
                     },
                     currentProperty: property,
                 },

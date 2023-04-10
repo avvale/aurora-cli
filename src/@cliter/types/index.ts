@@ -78,12 +78,13 @@ export interface PropertyWebComponent
 export interface PropertyRelationship
 {
     type: RelationshipType;
-    singularName: string;
+    singularName?: string;
     aggregate: string;
     modulePath: string;
-    key: string;
+    key?: string;
     field: string;
     avoidConstraint: boolean;
+    packageName?: string;
 }
 
 export enum RelationshipType

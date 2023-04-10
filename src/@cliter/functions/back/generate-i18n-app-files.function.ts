@@ -22,7 +22,7 @@ export const generateI18nAppFiles = async (generateCommandState: GenerateCommand
                 lockFiles         : generateCommandState.lockFiles,
                 templateData      : {
                     ...generateCommandState,
-                    relationship: RelationshipType,
+                    relationshipType: RelationshipType,
                 },
             },
         );

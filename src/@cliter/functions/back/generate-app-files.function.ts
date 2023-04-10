@@ -27,7 +27,7 @@ export const generateAppFiles = async (generateCommandState: GenerateCommandStat
             lockFiles         : generateCommandState.lockFiles,
             templateData      : {
                 ...generateCommandState,
-                relationship: RelationshipType,
+                relationshipType: RelationshipType,
             },
         },
     );

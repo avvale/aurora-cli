@@ -2,7 +2,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 {{#each schema.properties.withImportRelationshipOneToOne}}
 {{#unlessEq type ../sqlType.ID }}
-import { {{ toPascalCase getRelationshipBoundedContext }}Create{{ toPascalCase getRelationshipModule }}Dto } from '{{#if relationshipPackageName }}{{ relationshipPackageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-create-{{ toKebabCase getRelationshipModule }}.dto{{/if}}';
+import { {{ toPascalCase getRelationshipBoundedContext }}Create{{ toPascalCase getRelationshipModule }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-create-{{ toKebabCase getRelationshipModule }}.dto{{/if}}';
 {{/unlessEq}}
 {{/each}}
 {{#if schema.properties.hasEnum}}
@@ -14,7 +14,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 {{#each schema.properties.dtoInputProperties}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{setVar 'isCommonProperty' true ~}}
-{{#eq relationship ../relationship.MANY_TO_ONE}}
+{{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : String,
@@ -24,7 +24,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: string;
 
 {{/eq}}
-{{#eq relationship ../relationship.MANY_TO_MANY}}
+{{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : [String],
@@ -33,11 +33,11 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase relationshipSingularName }}Ids{{#if nullable }}?{{/if}}: string[];
+    {{ toCamelCase relationship.singularName }}Ids{{#if nullable }}?{{/if}}: string[];
 
 {{/eq}}
-{{#eq relationship ../relationship.ONE_TO_MANY}}{{setVar 'isCommonProperty' false ~}}{{/eq ~}}
-{{#eq relationship ../relationship.ONE_TO_ONE}}
+{{#eq relationship.type ../relationshipType.ONE_TO_MANY}}{{setVar 'isCommonProperty' false ~}}{{/eq ~}}
+{{#eq relationship.type ../relationshipType.ONE_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
 {{#eq type ../sqlType.ID ~}}
     @ApiProperty({
