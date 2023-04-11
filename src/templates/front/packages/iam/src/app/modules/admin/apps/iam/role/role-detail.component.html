@@ -27,9 +27,13 @@
                 [disabled]="fg.pristine"
             >
                 <mat-icon
+                    *ngIf="!('iam::role.detail.update' | getSpinnerFlag | async)"
                     class="icon-size-5 mr-2"
                     svgIcon="heroicons_solid:pencil-alt"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::role.detail.update' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Update') }}
             </button>
@@ -43,9 +47,13 @@
                 [disabled]="fg.pristine"
             >
                 <mat-icon
+                    *ngIf="!('iam::role.detail.create' | getSpinnerFlag | async)"
                     class="icon-size-5 mr-2"
                     svgIcon="heroicons_solid:save"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::role.detail.create' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Create') }}
             </button>
