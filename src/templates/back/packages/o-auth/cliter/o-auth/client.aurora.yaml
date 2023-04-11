@@ -60,22 +60,25 @@ aggregateProperties:
   - name: applications
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: application
-    relationshipAggregate: OAuthApplication
-    relationshipModulePath: o-auth/application
-    relationshipAvoidConstraint: true
-    pivotAggregateName: OAuthApplicationsClients
-    pivotPath: o-auth/application
-    pivotFileName: applications-clients
+    relationship:
+      type: many-to-many
+      singularName: application
+      aggregate: OAuthApplication
+      modulePath: o-auth/application
+      avoidConstraint: true
+      pivot:
+        aggregate: OAuthApplicationsClients
+        modulePath: o-auth/application
+        fileName: applications-clients
   - name: accessTokens
-    type: OAuthAccessToken
+    type: relationship
     nullable: true
-    relationship: one-to-many
-    relationshipSingularName: accessToken
-    relationshipAggregate: OAuthAccessToken
-    relationshipModulePath: o-auth/access-token
-    relationshipAvoidConstraint: true
+    relationship:
+      type: one-to-many
+      singularName: accessToken
+      aggregate: OAuthAccessToken
+      modulePath: o-auth/access-token
+      avoidConstraint: true
   - name: createdAt
     type: timestamp
     nullable: true

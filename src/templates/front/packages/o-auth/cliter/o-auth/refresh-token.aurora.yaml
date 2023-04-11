@@ -16,11 +16,12 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: one-to-one
-    relationshipAggregate: OAuthAccessToken
-    relationshipModulePath: o-auth/access-token
-    relationshipField: accessToken
-    relationshipAvoidConstraint: true
+    relationship:
+      type: one-to-one
+      aggregate: OAuthAccessToken
+      modulePath: o-auth/access-token
+      field: accessToken
+      avoidConstraint: true
     index: index
   - name: token
     type: text

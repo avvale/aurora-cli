@@ -39,12 +39,13 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: OAuthClient
-    relationshipModulePath: o-auth/client
-    relationshipKey: id
-    relationshipField: client
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: OAuthClient
+      modulePath: o-auth/client
+      key: id
+      field: client
+      avoidConstraint: true
   - name: scopes
     type: json
     nullable: true
@@ -63,31 +64,36 @@ aggregateProperties:
   - name: roles
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: role
-    relationshipAggregate: IamRole
-    relationshipModulePath: iam/role
-    relationshipAvoidConstraint: false
-    pivotAggregateName: IamRolesAccounts
-    pivotPath: iam/role
-    pivotFileName: roles-accounts
+    relationship:
+      type: many-to-many
+      singularName: role
+      aggregate: IamRole
+      modulePath: iam/role
+      avoidConstraint: false
+      pivot:
+        aggregate: IamRolesAccounts
+        modulePath: iam/role
+        fileName: roles-accounts
   - name: tenants
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: tenant
-    relationshipAggregate: IamTenant
-    relationshipModulePath: iam/tenant
-    relationshipAvoidConstraint: false
-    pivotAggregateName: IamTenantsAccounts
-    pivotPath: iam/tenant
-    pivotFileName: tenants-accounts
+    relationship:
+      type: many-to-many
+      singularName: tenant
+      aggregate: IamTenant
+      modulePath: iam/tenant
+      avoidConstraint: false
+      pivot:
+        aggregate: IamTenantsAccounts
+        modulePath: iam/tenant
+        fileName: tenants-accounts
   - name: user
-    type: IamUser
+    type: relationship
     nullable: true
-    relationship: one-to-one
-    relationshipAggregate: IamUser
-    relationshipModulePath: iam/user
+    relationship:
+      type: one-to-one
+      aggregate: IamUser
+      modulePath: iam/user
   - name: createdAt
     type: timestamp
     nullable: true

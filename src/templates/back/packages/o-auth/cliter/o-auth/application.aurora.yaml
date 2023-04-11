@@ -33,14 +33,16 @@ aggregateProperties:
   - name: clients
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: client
-    relationshipAggregate: OAuthClient
-    relationshipModulePath: o-auth/client
-    relationshipAvoidConstraint: true
-    pivotAggregateName: OAuthApplicationsClients
-    pivotPath: o-auth/application
-    pivotFileName: applications-clients
+    relationship:
+      type: many-to-many
+      singularName: client
+      aggregate: OAuthClient
+      modulePath: o-auth/client
+      avoidConstraint: true
+      pivot:
+        aggregate: OAuthApplicationsClients
+        modulePath: o-auth/application
+        fileName: applications-clients
   - name: createdAt
     type: timestamp
     nullable: true

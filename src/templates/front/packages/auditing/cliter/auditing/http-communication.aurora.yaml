@@ -15,6 +15,7 @@ aggregateProperties:
   - name: tags
     type: json
     nullable: true
+    index: index
   - name: event
     type: enum
     enumOptions:

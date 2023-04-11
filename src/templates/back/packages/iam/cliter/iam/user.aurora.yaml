@@ -16,10 +16,11 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: one-to-one
-    relationshipAggregate: IamAccount
-    relationshipModulePath: iam/account
-    relationshipField: account
+    relationship:
+      type: one-to-one
+      aggregate: IamAccount
+      modulePath: iam/account
+      field: account
     index: index
   - name: name
     type: varchar

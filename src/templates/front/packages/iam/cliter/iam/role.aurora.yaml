@@ -24,25 +24,29 @@ aggregateProperties:
   - name: permissions
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: permission
-    relationshipAggregate: IamPermission
-    relationshipModulePath: iam/permission
-    relationshipAvoidConstraint: false
-    pivotAggregateName: IamPermissionsRoles
-    pivotPath: iam/permission
-    pivotFileName: permissions-roles
+    relationship:
+      type: many-to-many
+      singularName: permission
+      aggregate: IamPermission
+      modulePath: iam/permission
+      avoidConstraint: false
+      pivot:
+        aggregate: IamPermissionsRoles
+        modulePath: iam/permission
+        fileName: permissions-roles
   - name: accounts
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: account
-    relationshipAggregate: IamAccount
-    relationshipModulePath: iam/account
-    relationshipAvoidConstraint: false
-    pivotAggregateName: IamRolesAccounts
-    pivotPath: iam/role
-    pivotFileName: roles-accounts
+    relationship:
+      type: many-to-many
+      singularName: account
+      aggregate: IamAccount
+      modulePath: iam/account
+      avoidConstraint: false
+      pivot:
+        aggregate: IamRolesAccounts
+        modulePath: iam/role
+        fileName: roles-accounts
   - name: createdAt
     type: timestamp
     nullable: true

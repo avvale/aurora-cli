@@ -20,24 +20,27 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: IamBoundedContext
-    relationshipModulePath: iam/bounded-context
-    relationshipKey: id
-    relationshipField: boundedContext
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: IamBoundedContext
+      modulePath: iam/bounded-context
+      key: id
+      field: boundedContext
+      avoidConstraint: true
     index: index
   - name: roles
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: role
-    relationshipAggregate: IamRole
-    relationshipModulePath: iam/role
-    relationshipAvoidConstraint: false
-    pivotAggregateName: IamPermissionsRoles
-    pivotPath: iam/permission
-    pivotFileName: permissions-roles
+    relationship:
+      type: many-to-many
+      singularName: role
+      aggregate: IamRole
+      modulePath: iam/role
+      avoidConstraint: false
+      pivot:
+        aggregate: IamPermissionsRoles
+        modulePath: iam/permission
+        fileName: permissions-roles
   - name: createdAt
     type: timestamp
     nullable: true

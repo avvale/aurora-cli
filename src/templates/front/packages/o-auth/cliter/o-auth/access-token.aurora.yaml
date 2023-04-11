@@ -16,12 +16,13 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: OAuthClient
-    relationshipModulePath: o-auth/client
-    relationshipKey: id
-    relationshipField: client
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: OAuthClient
+      modulePath: o-auth/client
+      key: id
+      field: client
+      avoidConstraint: true
     index: index
   - name: accountId
     type: id
@@ -43,12 +44,13 @@ aggregateProperties:
     type: timestamp
     nullable: true
   - name: refreshToken
-    type: OAuthRefreshToken
+    type: relationship
     nullable: true
-    relationship: one-to-one
-    relationshipAggregate: OAuthRefreshToken
-    relationshipModulePath: o-auth/refresh-token
-    relationshipAvoidConstraint: true
+    relationship:
+      type: one-to-one
+      aggregate: OAuthRefreshToken
+      modulePath: o-auth/refresh-token
+      avoidConstraint: true
   - name: createdAt
     type: timestamp
     nullable: true

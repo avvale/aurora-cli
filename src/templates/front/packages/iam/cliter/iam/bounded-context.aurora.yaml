@@ -1,8 +1,8 @@
 version: 0.0.1
 boundedContextName: iam
-moduleName: tenant
-moduleNames: tenants
-aggregateName: IamTenant
+moduleName: bounded-context
+moduleNames: bounded-contexts
+aggregateName: IamBoundedContext
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
@@ -16,33 +16,28 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: false
-  - name: code
+  - name: root
     type: varchar
-    maxLength: 50
-    nullable: true
-    index: unique
-  - name: logo
-    type: blob.medium
+    maxLength: 30
+    nullable: false
+  - name: sort
+    type: smallint.unsigned
+    maxLength: 6
     nullable: true
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: false
     example: true
-  - name: meta
-    type: json
-    nullable: true
-  - name: accounts
+  - name: permissions
     type: relationship
     nullable: true
-    relationship: many-to-many
-    relationshipSingularName: account
-    relationshipAggregate: IamAccount
-    relationshipModulePath: iam/account
-    relationshipAvoidConstraint: false
-    pivotAggregateName: IamTenantsAccounts
-    pivotPath: iam/tenant
-    pivotFileName: tenants-accounts
+    relationship:
+      type: one-to-many
+      singularName: permission
+      aggregate: IamPermission
+      modulePath: iam/permission
+      avoidConstraint: true
   - name: createdAt
     type: timestamp
     nullable: true
