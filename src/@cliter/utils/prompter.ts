@@ -270,8 +270,18 @@ export const Prompter =
             type   : 'input',
             when   : (answers: any) =>
             {
-                if (answers.relationship.type === RelationshipType.ONE_TO_MANY || (answers.relationship.type === RelationshipType.ONE_TO_ONE && !answers.name.endsWith('Id'))) answers.type =  answers.relationship.aggregate;
-                if (answers.relationship.type === RelationshipType.ONE_TO_ONE && answers.name.endsWith('Id'))
+                if (
+                    answers.relationship.type === RelationshipType.ONE_TO_MANY ||
+                    (
+                        answers.relationship.type === RelationshipType.ONE_TO_ONE &&
+                        !answers.name.endsWith('Id')
+                    )
+                ) answers.type = answers.relationship.aggregate;
+
+                if (
+                    answers.relationship.type === RelationshipType.ONE_TO_ONE &&
+                    answers.name.endsWith('Id')
+                )
                 {
                     answers.type = 'id';
                     answers.length = 36;
