@@ -1,5 +1,5 @@
 import { Args, Command, Flags } from '@oclif/core';
-import { AdditionalApis, BackHandler, ModuleDefinitionSchema, Prompter, Properties, Property, Scope, ScopeElement, SqlType } from '../@cliter';
+import { AdditionalApis, BackHandler, ModuleDefinitionSchema, Prompter, Properties, Property, Scope, ScopeElement, PropertyType } from '../@cliter';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
 import { getBoundedContextModuleFromFlag } from '../@cliter/functions/common';
 
@@ -98,7 +98,7 @@ export default class Generate extends Command
             properties.add(
                 new Property({
                     name      : 'id',
-                    type      : SqlType.ID,
+                    type      : PropertyType.ID,
                     primaryKey: true,
                     length    : 36,
                     nullable  : false,
@@ -116,9 +116,9 @@ export default class Generate extends Command
             }
 
             // add time stamp properties for model
-            properties.add(new Property({ name: 'createdAt', type: SqlType.TIMESTAMP, nullable: true, schema }));
-            properties.add(new Property({ name: 'updatedAt', type: SqlType.TIMESTAMP, nullable: true, schema }));
-            properties.add(new Property({ name: 'deletedAt', type: SqlType.TIMESTAMP, nullable: true, schema }));
+            properties.add(new Property({ name: 'createdAt', type: PropertyType.TIMESTAMP, nullable: true, schema }));
+            properties.add(new Property({ name: 'updatedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }));
+            properties.add(new Property({ name: 'deletedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }));
 
             // generate module files
             BackHandler.generateModule(

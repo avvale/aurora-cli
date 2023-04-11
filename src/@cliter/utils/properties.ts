@@ -1,5 +1,5 @@
 import { Property } from './property';
-import { ModuleDefinitionSchema, SqlIndex, RelationshipType, SqlType } from '../types';
+import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType } from '../types';
 
 export class Properties
 {
@@ -25,12 +25,12 @@ export class Properties
 
     get hasEnum(): boolean
     {
-        return this.properties.some(property => property.type === SqlType.ENUM);
+        return this.properties.some(property => property.type === PropertyType.ENUM);
     }
 
     get hasIndex(): boolean
     {
-        return this.properties.some(property => property.index === SqlIndex.INDEX || property.index === SqlIndex.UNIQUE);
+        return this.properties.some(property => property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE);
     }
 
     get withoutTimestamps(): Property[]
@@ -131,7 +131,7 @@ export class Properties
 
     get withRelationshipType(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType.RELATIONSHIP);
+        return this.properties.filter(property => property.type === PropertyType.RELATIONSHIP);
     }
 
     get withTimezone(): Property[]
@@ -141,7 +141,7 @@ export class Properties
 
     get id(): Property | undefined
     {
-        return this.properties.find(property => property.type === SqlType.ID);
+        return this.properties.find(property => property.type === PropertyType.ID);
     }
 
     /*************
@@ -584,34 +584,34 @@ export class Properties
 
     get isDecimal(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType.DECIMAL);
+        return this.properties.filter(property => property.type === PropertyType.DECIMAL);
     }
 
     get isInteger(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType.INT);
+        return this.properties.filter(property => property.type === PropertyType.INT);
     }
 
     get isIntegerUnsigned(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType['INT.UNSIGNED']);
+        return this.properties.filter(property => property.type === PropertyType['INT.UNSIGNED']);
     }
 
     get isBoolean(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType.BOOLEAN);
+        return this.properties.filter(property => property.type === PropertyType.BOOLEAN);
     }
 
     get isEnum(): Property[]
     {
-        return this.properties.filter(property => property.type === SqlType.ENUM);
+        return this.properties.filter(property => property.type === PropertyType.ENUM);
     }
 
     get isTimestamp(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))          // exclude timestamps
-            .filter(property => property.type === SqlType.TIMESTAMP);
+            .filter(property => property.type === PropertyType.TIMESTAMP);
     }
 
     /**********

@@ -4,7 +4,7 @@ import { singleton } from 'tsyringe';
 
 // imports
 import { Command } from '@oclif/core';
-import { LiteralObject, LockFile, ModuleDefinitionSchema, ResolverType, RelationshipType, SqlType } from '../types';
+import { LiteralObject, LockFile, ModuleDefinitionSchema, ResolverType, RelationshipType, PropertyType } from '../types';
 import { CliterConfig, cliterConfig } from '../config/cliter.config';
 import { AdditionalApi } from '../utils/additional-api';
 import { v4 as uuidv4 } from 'uuid';
@@ -26,7 +26,7 @@ export class StateService
     public flags!: LiteralObject;
     public relationshipType = RelationshipType;
     public resolverType = ResolverType;
-    public sqlType = SqlType;
+    public propertyType = PropertyType;
     private _originFiles: string[] = []; // origin files generated
 
     get uuid(): string

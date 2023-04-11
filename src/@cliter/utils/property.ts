@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 import { cliterConfig } from '../config/cliter.config';
-import { ModuleDefinitionSchema, SqlIndex, RelationshipType, SqlType, PropertyWebComponent, PropertyRelationship } from '../types';
+import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType, PropertyWebComponent, PropertyRelationship } from '../types';
 import { Properties } from './properties';
 import { YamlManager } from './yaml-manager';
 
@@ -14,7 +14,7 @@ export class Property
     public config       = cliterConfig;
     public id: string   = faker.datatype.uuid();
     private _name: string;
-    public type: SqlType;
+    public type: PropertyType;
     public primaryKey?: boolean;
     public autoIncrement?: boolean;
     private _enumOptions?: string;
@@ -29,7 +29,7 @@ export class Property
     public pivotPath?: string;
     public pivotFileName?: string;
     public isDenormalized?: boolean;
-    public index?: SqlIndex;
+    public index?: PropertyIndex;
     public indexName?: string;
     public isI18n?: boolean;
     public example?: any;
@@ -40,7 +40,7 @@ export class Property
     constructor(
         payload: {
             name: string;
-            type: SqlType;
+            type: PropertyType;
             primaryKey?: boolean;
             autoIncrement?: boolean;
             enumOptions?: string;
@@ -55,7 +55,7 @@ export class Property
             pivotPath?: string;
             pivotFileName?: string;
             isDenormalized?: boolean;
-            index?: SqlIndex;
+            index?: PropertyIndex;
             indexName?: string;
             isI18n?: boolean;
             example?: any;
@@ -91,13 +91,13 @@ export class Property
 
         if (
             (
-                this.type === SqlType.VARCHAR ||
-                this.type === SqlType.TINYINT ||
-                this.type === SqlType['TINYINT.UNSIGNED'] ||
-                this.type === SqlType.INT ||
-                this.type === SqlType['INT.UNSIGNED'] ||
-                this.type === SqlType.SMALLINT ||
-                this.type === SqlType['SMALLINT.UNSIGNED']
+                this.type === PropertyType.VARCHAR ||
+                this.type === PropertyType.TINYINT ||
+                this.type === PropertyType['TINYINT.UNSIGNED'] ||
+                this.type === PropertyType.INT ||
+                this.type === PropertyType['INT.UNSIGNED'] ||
+                this.type === PropertyType.SMALLINT ||
+                this.type === PropertyType['SMALLINT.UNSIGNED']
             ) &&
             typeof this.length === 'number' && typeof this.maxLength !== 'number'
         )
@@ -116,13 +116,13 @@ export class Property
          *   - 2
          *   nullable: false
          *********************************************************************************/
-        if (this.type === SqlType.DECIMAL) this.maxLength = undefined;
+        if (this.type === PropertyType.DECIMAL) this.maxLength = undefined;
     }
 
     // handlebars functions
     get hasTimezone(): boolean
     {
-        return this.type === SqlType.TIMESTAMP;
+        return this.type === PropertyType.TIMESTAMP;
     }
 
     get hasColumnDecorator(): boolean
@@ -175,12 +175,12 @@ export class Property
 
     get isRelationship(): boolean
     {
-        return this.type === SqlType.RELATIONSHIP;
+        return this.type === PropertyType.RELATIONSHIP;
     }
 
     get isBinary(): boolean
     {
-        return this.type === SqlType.BLOB || this.type === SqlType.MEDIUMBLOB || this.type === SqlType.LONGBLOB;
+        return this.type === PropertyType.BLOB || this.type === PropertyType.MEDIUMBLOB || this.type === PropertyType.LONGBLOB;
     }
 
     // property names
@@ -278,29 +278,29 @@ export class Property
 
     get getJavascriptType(): string
     {
-        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
-        if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
+        if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
 
-        return this.config.sqlTypesEquivalenceJavascriptTypes[this.type];
+        return this.config.propertyTypesEquivalenceJavascriptTypes[this.type];
     }
 
     get getJavascriptModelType(): string
     {
-        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.sqlTypesEquivalenceJavascriptTypes.manyToMany;
-        if (this.type === SqlType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
+        if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
 
-        return this.config.sqlTypesEquivalenceJavascriptModelTypes[this.type];
+        return this.config.propertyTypesEquivalenceJavascriptModelTypes[this.type];
     }
 
     get getSequelizeType(): string
     {
         let parameter: number | string | undefined | number[];
-        if (this.type === SqlType.CHAR)    parameter = this.length;                 // parameter = length
-        if (this.type === SqlType.VARCHAR) parameter = this.maxLength;              // parameter = maxLength
-        if (this.type === SqlType.ENUM)    parameter = this.enumOptionsArrayItems;  // parameter = values
-        if (this.type === SqlType.DECIMAL) parameter = this.decimals;               // parameter = decimals
+        if (this.type === PropertyType.CHAR)    parameter = this.length;                 // parameter = length
+        if (this.type === PropertyType.VARCHAR) parameter = this.maxLength;              // parameter = maxLength
+        if (this.type === PropertyType.ENUM)    parameter = this.enumOptionsArrayItems;  // parameter = values
+        if (this.type === PropertyType.DECIMAL) parameter = this.decimals;               // parameter = decimals
 
-        return cliterConfig.sqlTypesEquivalenceSequelizeTypes[this.type](parameter);
+        return cliterConfig.propertyTypesEquivalenceSequelizeTypes[this.type](parameter);
     }
 
     /********
@@ -308,12 +308,12 @@ export class Property
      ********/
     get getSwaggerType(): string
     {
-        return this.config.sqlTypesEquivalenceSwaggerTypes[this.type];
+        return this.config.propertyTypesEquivalenceSwaggerTypes[this.type];
     }
 
     get getDtoType(): string
     {
-        return this.config.sqlTypesEquivalenceDtoTypes[this.type];
+        return this.config.propertyTypesEquivalenceDtoTypes[this.type];
     }
 
     /***********
@@ -324,21 +324,21 @@ export class Property
         if (this.relationship?.type === RelationshipType.ONE_TO_MANY || this.relationship?.type === RelationshipType.MANY_TO_MANY) return `[${this.relationship?.aggregate}]`;
         if (this.relationship?.type === RelationshipType.MANY_TO_ONE)                                                              return `${this.relationship?.aggregate}`;
         if (this.relationship?.type === RelationshipType.ONE_TO_ONE)                                                               return `${this.relationship?.aggregate}`;
-        return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
+        return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlCreateType(): string
     {
-        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                          return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                          return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
         if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Input`;
-        return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
+        return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlUpdateType(): string
     {
-        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                           return this.config.sqlTypesEquivalenceQraphqlTypes.manyToMany;
+        if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                           return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
         if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Input`;
-        return this.config.sqlTypesEquivalenceQraphqlTypes[this.type];
+        return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
     /*************
@@ -346,7 +346,7 @@ export class Property
      *************/
     get getColumnDataType(): string
     {
-        return this.config.sqlTypesEquivalenceDashboardColumnDataTypes[this.type];
+        return this.config.propertyTypesEquivalenceDashboardColumnDataTypes[this.type];
     }
 
     /*****************

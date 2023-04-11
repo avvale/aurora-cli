@@ -87,40 +87,13 @@ export interface PropertyRelationship
     packageName?: string;
 }
 
-export enum RelationshipType
-{
-    NONE            = 'none',
-    ONE_TO_ONE      = 'one-to-one',
-    ONE_TO_MANY     = 'one-to-many',
-    MANY_TO_ONE     = 'many-to-one',
-    MANY_TO_MANY    = 'many-to-many'
-}
-
-export enum ResolverType
-{
-    QUERY = 'query',
-    MUTATION = 'mutation',
-}
-
-export enum Scope
-{
-    BACK  = 'back',
-    PIPELINE = 'pipeline',
-    FRONT = 'front',
-}
-
-export enum ScopeElement
-{
-    MODULE  = 'module',
-}
-
-export enum SqlIndex
+export enum PropertyIndex
 {
     UNIQUE  = 'unique',
     INDEX   = 'index'
 }
 
-export enum SqlType
+export enum PropertyType
 {
     'BIGINT.UNSIGNED'   = 'bigint.unsigned',
     'BIGINT'            = 'bigint',
@@ -147,6 +120,33 @@ export enum SqlType
     'TINYINT.UNSIGNED'  = 'tinyint.unsigned',
     'TINYINT'           = 'tinyint',
     'VARCHAR'           = 'varchar',
+}
+
+export enum RelationshipType
+{
+    NONE            = 'none',
+    ONE_TO_ONE      = 'one-to-one',
+    ONE_TO_MANY     = 'one-to-many',
+    MANY_TO_ONE     = 'many-to-one',
+    MANY_TO_MANY    = 'many-to-many'
+}
+
+export enum ResolverType
+{
+    QUERY = 'query',
+    MUTATION = 'mutation',
+}
+
+export enum Scope
+{
+    BACK  = 'back',
+    PIPELINE = 'pipeline',
+    FRONT = 'front',
+}
+
+export enum ScopeElement
+{
+    MODULE  = 'module',
 }
 
 export enum TemplateElement

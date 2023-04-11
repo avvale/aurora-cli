@@ -1,4 +1,4 @@
-import { Mocker, MockerFixed, ModuleDefinitionSchema, Property, SqlType } from '../../../@cliter';
+import { Mocker, MockerFixed, ModuleDefinitionSchema, Property, PropertyType } from '../../../@cliter';
 import { v5 as uuidv5 } from 'uuid';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
@@ -49,21 +49,21 @@ handlebars.registerHelper('mocker', function(
 
     // set spanish uuid language, for langId field in i18n entity
     if (
-        property?.type === SqlType.ID
+        property?.type === PropertyType.ID
         && (length || property?.length) === 36
         && property.isI18n
         && property.name === 'langId'
     ) return '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a';
 
     if (
-        property?.type === SqlType.ID
+        property?.type === PropertyType.ID
         && hasUuidSeed
         && (length || property?.length) === 36
     ) return uuidv5(uuidSeed, namespace);
 
-    if (property?.type === SqlType.ENUM && type === MockType.SEED) return property.enumOptions ? `${schema?.boundedContextName.toPascalCase()}${schema?.moduleName.toPascalCase()}${property.name.toPascalCase()}.${_.shuffle(property.enumOptions)[0]}` : null;
-    if (property?.type === SqlType.ENUM) return property.enumOptions ? `'${_.shuffle(property.enumOptions)[0]}'` : null;
-    if (property?.type === SqlType.RELATIONSHIP) return '[]';
+    if (property?.type === PropertyType.ENUM && type === MockType.SEED) return property.enumOptions ? `${schema?.boundedContextName.toPascalCase()}${schema?.moduleName.toPascalCase()}${property.name.toPascalCase()}.${_.shuffle(property.enumOptions)[0]}` : null;
+    if (property?.type === PropertyType.ENUM) return property.enumOptions ? `'${_.shuffle(property.enumOptions)[0]}'` : null;
+    if (property?.type === PropertyType.RELATIONSHIP) return '[]';
 
     let propertyTotalDigits = 5;
     let propertyDecimalDigits = 3;

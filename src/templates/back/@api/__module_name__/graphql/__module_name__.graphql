@@ -30,14 +30,14 @@ type {{ schema.aggregateName }}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type ../sqlType.ID ~}}
+{{#eq type ../propertyType.ID ~}}
     {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregate }}
 {{else ~}}
     {{ toCamelCase originName }}: {{ relationship.aggregate }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{/eq}}
-{{#eq type ../sqlType.ENUM}}
+{{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
@@ -64,13 +64,13 @@ input {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.m
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}{{setVar 'isCommonProperty' false ~}}{{/eq ~}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type ../sqlType.ID ~}}
+{{#eq type ../propertyType.ID ~}}
     {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
 {{else ~}}
     {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContext }}Create{{ toPascalCase getRelationshipModule }}Input{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{/eq}}
-{{#eq type ../sqlType.ENUM}}
+{{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
@@ -97,13 +97,13 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}{{setVar 'isCommonProperty' false ~}}{{/eq ~}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type ../sqlType.ID ~}}
+{{#eq type ../propertyType.ID ~}}
     {{ toCamelCase originName }}: ID
 {{else ~}}
     {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModule }}ByIdInput
 {{/eq}}
 {{/eq}}
-{{#eq type ../sqlType.ENUM}}
+{{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}
 {{/eq}}
@@ -130,13 +130,13 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}{{setVar 'isCommonProperty' false ~}}{{/eq ~}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type ../sqlType.ID ~}}
+{{#eq type ../propertyType.ID ~}}
     {{ toCamelCase originName }}: ID
 {{else ~}}
     {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModules }}Input
 {{/eq}}
 {{/eq}}
-{{#eq type ../sqlType.ENUM}}
+{{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}
 {{/eq}}

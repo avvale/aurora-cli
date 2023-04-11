@@ -1,28 +1,28 @@
-import { Property, SqlType } from '../..';
+import { Property, PropertyType } from '../..';
 import * as handlebars from 'handlebars';
 
 handlebars.registerHelper('initialFormGroupData', function(property: Property)
 {
     switch (property.type)
     {
-        case SqlType.CHAR:
-        case SqlType.ENUM:
-        case SqlType.ID:
-        case SqlType.TEXT:
-        case SqlType.TIMESTAMP:
-        case SqlType.VARCHAR:
+        case PropertyType.CHAR:
+        case PropertyType.ENUM:
+        case PropertyType.ID:
+        case PropertyType.TEXT:
+        case PropertyType.TIMESTAMP:
+        case PropertyType.VARCHAR:
             return `''`;
 
-        case SqlType.INT:
-        case SqlType['INT.UNSIGNED']:
-        case SqlType.SMALLINT:
-        case SqlType.JSON:
-        case SqlType.DATE:
-        case SqlType.DECIMAL:
-        case SqlType['SMALLINT.UNSIGNED']:
+        case PropertyType.INT:
+        case PropertyType['INT.UNSIGNED']:
+        case PropertyType.SMALLINT:
+        case PropertyType.JSON:
+        case PropertyType.DATE:
+        case PropertyType.DECIMAL:
+        case PropertyType['SMALLINT.UNSIGNED']:
             return `null`;
 
-        case SqlType.BOOLEAN:
+        case PropertyType.BOOLEAN:
             return `false`;
     }
 });

@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-array-push-push */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, Scope, RelationshipType, SqlType } from '../types';
+import { GenerateCommandState, Scope, RelationshipType, PropertyType } from '../types';
 import { Property } from './property';
 import { cliterConfig } from '../config/cliter.config';
 import { getBoundedContextModuleFromFlag } from '../functions/common';
@@ -225,7 +225,7 @@ export const Prompter =
             name   : 'type',
             message: 'What\'s the type of property?',
             type   : 'list',
-            choices: Object.values(SqlType),
+            choices: Object.values(PropertyType),
             when   : (answers: any) => !answers.type,
         });
 
@@ -233,7 +233,7 @@ export const Prompter =
             name   : 'enumOptions',
             message: 'Set comma separated enumeration options, example: ONE,TWO,THREE,FOUR',
             type   : 'input',
-            when   : (answers: any) => answers.type === SqlType.ENUM,
+            when   : (answers: any) => answers.type === PropertyType.ENUM,
         });
 
         questions.push({
@@ -241,7 +241,7 @@ export const Prompter =
             message: 'What kind of relationship do you want to create?',
             type   : 'list',
             choices: Object.values(RelationshipType).filter(item => !['many-to-one'].includes(item)),
-            when   : (answers: any) => answers.type === SqlType.RELATIONSHIP,
+            when   : (answers: any) => answers.type === PropertyType.RELATIONSHIP,
         });
 
         questions.push({
@@ -303,7 +303,7 @@ export const Prompter =
             name   : 'decimals',
             message: 'Set total digits and decimals comma separated, example: 10,2',
             type   : 'input',
-            when   : (answers: any) => answers.type === SqlType.DECIMAL,
+            when   : (answers: any) => answers.type === PropertyType.DECIMAL,
             filter : (answers: string) => answers.split(',').map(item => Number.parseInt(item.trim(), 10)),
         });
 
@@ -314,7 +314,7 @@ export const Prompter =
             when   : (answers: any) =>
             {
                 // avoid length for decimal values
-                if (answers.type === SqlType.DECIMAL || answers.type === SqlType.FLOAT) return false;
+                if (answers.type === PropertyType.DECIMAL || answers.type === PropertyType.FLOAT) return false;
 
                 // set pivotAggregateName value
                 if (answers.hasPivotTable)

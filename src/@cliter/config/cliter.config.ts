@@ -14,13 +14,13 @@ export interface CliterConfig
     schemaDefinitionExtension: string;
     timestampFields: string[];
     deletedAtField: string[];
-    sqlTypesEquivalenceDashboardColumnDataTypes: { [key: string]: string };
-    sqlTypesEquivalenceJavascriptTypes: { [key: string]: string };
-    sqlTypesEquivalenceJavascriptModelTypes: { [key: string]: string };
-    sqlTypesEquivalenceSwaggerTypes: { [key: string]: string };
-    sqlTypesEquivalenceDtoTypes: { [key: string]: string };
-    sqlTypesEquivalenceQraphqlTypes: { [key: string]: string };
-    sqlTypesEquivalenceSequelizeTypes: { [key: string]: Function };
+    propertyTypesEquivalenceDashboardColumnDataTypes: { [key: string]: string };
+    propertyTypesEquivalenceJavascriptTypes: { [key: string]: string };
+    propertyTypesEquivalenceJavascriptModelTypes: { [key: string]: string };
+    propertyTypesEquivalenceSwaggerTypes: { [key: string]: string };
+    propertyTypesEquivalenceDtoTypes: { [key: string]: string };
+    propertyTypesEquivalenceQraphqlTypes: { [key: string]: string };
+    propertyTypesEquivalenceSequelizeTypes: { [key: string]: Function };
     defaultTypeLength: { [key: string]: number };
     quotationTypes: { [key: string]: boolean };
     fileTags: { [key: string]: string };
@@ -52,7 +52,7 @@ export const cliterConfig: CliterConfig =
     schemaDefinitionExtension                  : '.aurora.yaml',
     timestampFields                            : ['createdAt', 'updatedAt', 'deletedAt'],
     deletedAtField                             : ['deletedAt'],
-    sqlTypesEquivalenceDashboardColumnDataTypes: {
+    propertyTypesEquivalenceDashboardColumnDataTypes: {
         'bigint.unsigned'  : 'NUMBER',
         'blob.long'        : 'BINARY',
         'blob.medium'      : 'BINARY',
@@ -79,7 +79,7 @@ export const cliterConfig: CliterConfig =
         tinyint            : 'NUMBER',
         varchar            : 'STRING',
     },
-    sqlTypesEquivalenceJavascriptTypes: {
+    propertyTypesEquivalenceJavascriptTypes: {
         'bigint.unsigned'  : 'number',
         'blob.long'        : 'string',
         'blob.medium'      : 'string',
@@ -106,7 +106,7 @@ export const cliterConfig: CliterConfig =
         tinyint            : 'number',
         varchar            : 'string',
     },
-    sqlTypesEquivalenceJavascriptModelTypes: {
+    propertyTypesEquivalenceJavascriptModelTypes: {
         'bigint.unsigned'  : 'number',
         'blob.long'        : 'Buffer',
         'blob.medium'      : 'Buffer',
@@ -133,7 +133,7 @@ export const cliterConfig: CliterConfig =
         tinyint            : 'number',
         varchar            : 'string',
     },
-    sqlTypesEquivalenceSwaggerTypes: {
+    propertyTypesEquivalenceSwaggerTypes: {
         'bigint.unsigned'  : 'Number',
         'blob.long'        : 'String',
         'blob.medium'      : 'String',
@@ -160,7 +160,7 @@ export const cliterConfig: CliterConfig =
         tinyint            : 'Number',
         varchar            : 'String',
     },
-    sqlTypesEquivalenceDtoTypes: {
+    propertyTypesEquivalenceDtoTypes: {
         'bigint.unsigned'  : 'number',
         'blob.long'        : 'string',
         'blob.medium'      : 'string',
@@ -187,7 +187,7 @@ export const cliterConfig: CliterConfig =
         tinyint            : 'number',
         varchar            : 'string',
     },
-    sqlTypesEquivalenceQraphqlTypes: {
+    propertyTypesEquivalenceQraphqlTypes: {
         'bigint.unsigned'  : 'GraphQLInt',
         'blob.long'        : 'GraphQLString',
         'blob.medium'      : 'GraphQLString',
@@ -214,7 +214,7 @@ export const cliterConfig: CliterConfig =
         tinyint            : 'GraphQLInt',
         varchar            : 'GraphQLString',
     },
-    sqlTypesEquivalenceSequelizeTypes: {
+    propertyTypesEquivalenceSequelizeTypes: {
         'bigint.unsigned'  : (length: number): string => 'DataTypes.BIGINT.UNSIGNED',
         'blob.long'        : (length: number): string => 'DataTypes.BLOB(\'long\')',
         'blob.medium'      : (length: number): string => 'DataTypes.BLOB(\'medium\')',

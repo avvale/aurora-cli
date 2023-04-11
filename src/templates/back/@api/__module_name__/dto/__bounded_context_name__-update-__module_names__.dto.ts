@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 {{#each schema.properties.withImportRelationshipOneToOne}}
-{{#unlessEq type ../sqlType.ID }}
+{{#unlessEq type ../propertyType.ID }}
 import { {{ toPascalCase getRelationshipBoundedContext }}Update{{ toPascalCase getRelationshipModules }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-update-{{ toKebabCase getRelationshipModules }}.dto{{/if}}';
 {{/unlessEq}}
 {{/each}}
@@ -39,7 +39,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}{{setVar 'isCommonProperty' false ~}}{{/eq ~}} 
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type ../sqlType.ID ~}}
+{{#eq type ../propertyType.ID ~}}
     @ApiProperty({
         type       : String,
         description: '{{ toCamelCase originName }} [input here api field description]',
@@ -59,7 +59,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
 {{/eq}}
 {{/eq}}
-{{#eq type ../sqlType.ENUM}}
+{{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }},

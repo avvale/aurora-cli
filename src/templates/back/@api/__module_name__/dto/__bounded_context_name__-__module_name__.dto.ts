@@ -74,7 +74,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
-{{#eq type ../sqlType.ID ~}}
+{{#eq type ../propertyType.ID ~}}
     @ApiProperty({
         type       : String,
         description: '{{ toCamelCase originName }} [input here api field description]',
@@ -103,7 +103,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
 {{/eq}}
 {{/eq}}
-{{#eq type ../sqlType.ENUM}}
+{{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }},
