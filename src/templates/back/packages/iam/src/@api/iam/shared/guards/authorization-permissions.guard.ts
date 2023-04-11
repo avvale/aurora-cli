@@ -1,6 +1,6 @@
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { getRequestFromExecutionContext } from '@aurora-ts/core';
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { GqlExecutionContext } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -14,28 +14,18 @@ export class AuthorizationPermissionsGuard implements CanActivate
 
         if (!permissions) return true;
 
-        // check that each permission is included in account permissions
-        if (context['contextType'] === 'graphql')
-        {
-            const ctx = GqlExecutionContext.create(context);
-            if (permissions.every(permission => ctx.getContext().req.user.dPermissions.all?.includes(permission))) return true;
+        if (permissions.every(permission => this.getRequest(context).user.dPermissions.all?.includes(permission))) return true;
 
-            throw new UnauthorizedException({
-                statusCode: 403,
-                message   : 'Forbidden resource, requires the following permissions ' + permissions.join(', '),
-                error     : 'Forbidden',
-            });
-        }
-        else if (context['contextType'] === 'http')
-        {
-            const ctx = context.switchToHttp();
-            if (permissions.every(permission => ctx.getRequest().user.dPermissions.all?.includes(permission))) return true;
+        throw new UnauthorizedException({
+            statusCode: 403,
+            message   : 'Forbidden resource, requires the following permissions ' + permissions.join(', '),
+            error     : 'Forbidden',
+        });
+    }
 
-            throw new UnauthorizedException({
-                statusCode: 403,
-                message   : 'Forbidden resource, requires the following permissions ' + permissions.join(', '),
-                error     : 'Forbidden',
-            });
-        }
+    // override the getRequest() method for return request from graphql or rest api.
+    getRequest<T = any>(context: ExecutionContext): T
+    {
+        return getRequestFromExecutionContext(context);
     }
 }
