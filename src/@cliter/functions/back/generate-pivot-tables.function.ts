@@ -8,8 +8,8 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
 {
     for (const property of generateCommandState.schema.properties.withRelationshipManyToMany)
     {
-        // only create table if has in pivotPath
-        if (property.pivotPath === `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`)
+        // only create table if has in relationship.pivot.modulePath
+        if (property.relationship?.pivot?.modulePath === `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`)
         {
             // create module files
             await TemplateGenerator.generateStaticContents(

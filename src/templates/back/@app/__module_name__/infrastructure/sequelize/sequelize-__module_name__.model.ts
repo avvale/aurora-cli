@@ -18,7 +18,7 @@ import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageNam
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToMany}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModule }}.model{{/if}}';
-import { {{ pivotAggregateName }}Model } from '{{ config.appContainer }}/{{ pivotPath }}/infrastructure/sequelize/sequelize-{{ pivotFileName }}.model';
+import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}/infrastructure/sequelize/sequelize-{{ relationship.pivot.fileName }}.model';
 {{/each}}
 {{#if schema.properties.hasI18n}}
 import { {{ schema.aggregateName }}I18NModel } from './sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
@@ -226,10 +226,10 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if hasBelongsToManyDecorator }}
 
-    {{#if pivotAggregateName }}
+    {{#if relationship.pivot.aggregate }}
     @BelongsToMany(() => {{ relationship.aggregate }}Model, {
-        through: () => {{ pivotAggregateName }}Model,
-        uniqueKey: 'Uq01{{ toPascalCase pivotAggregateName }}',
+        through: () => {{ relationship.pivot.aggregate }}Model,
+        uniqueKey: 'Uq01{{ toPascalCase relationship.pivot.aggregate }}',
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
@@ -249,7 +249,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{else}}
     @BelongsToMany(() => {{ relationship.aggregate }}Model, {
-        through: () => {{ pivotAggregateName }}Model,
+        through: () => {{ relationship.pivot.aggregate }}Model,
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}

@@ -6,7 +6,7 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 import { {{ currentProperty.relationshipAggregate }}Model } from '{{ config.appContainer }}/{{ currentProperty.relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase currentProperty.getRelationshipModule }}.model';
 
 @Table({
-    modelName: '{{ toPascalCase currentProperty.pivotAggregateName }}',
+    modelName: '{{ toPascalCase currentProperty.relationship.pivot.aggregate }}',
     freezeTableName: true,
     timestamps: false,
 })

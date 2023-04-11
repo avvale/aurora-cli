@@ -140,17 +140,17 @@ export class CodeWriter
         );
 
         // pivot table model
-        for (const pivot of properties.withRelationshipManyToMany)
+        for (const property of properties.withRelationshipManyToMany)
         {
             ImportDriver.createImportItems(
                 sourceFile,
                 `./${this.moduleName.toKebabCase()}`,
-                [`${pivot.pivotAggregateName}Model`],
+                [`${property.relationship?.pivot?.aggregate}Model`],
             );
 
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `${pivot.pivotAggregateName}Model`,
+                `${property.relationship?.pivot?.aggregate}Model`,
                 `${this.boundedContextName.toPascalCase()}Models`,
             );
         }

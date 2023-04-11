@@ -113,7 +113,7 @@ export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 {{/if}}
 {{#each schema.properties.withRelationshipManyToMany}}
 {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-export { {{ pivotAggregateName }}Model } from './infrastructure/sequelize/sequelize-{{ pivotFileName }}.model';
+export { {{ relationship.pivot.aggregate }}Model } from './infrastructure/sequelize/sequelize-{{ relationship.pivot.fileName }}.model';
 {{/if}}
 {{/each}}
 

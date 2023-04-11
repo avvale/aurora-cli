@@ -25,9 +25,6 @@ export class Property
     public nullable?: boolean;
     public defaultValue?: string | number;
     public relationship?: PropertyRelationship;
-    public pivotAggregateName?: string;
-    public pivotPath?: string;
-    public pivotFileName?: string;
     public index?: PropertyIndex;
     public indexName?: string;
     public isI18n?: boolean;
@@ -50,9 +47,6 @@ export class Property
             nullable?: boolean;
             defaultValue?: string | number;
             relationship?: PropertyRelationship;
-            pivotAggregateName?: string;
-            pivotPath?: string;
-            pivotFileName?: string;
             index?: PropertyIndex;
             indexName?: string;
             isI18n?: boolean;
@@ -75,9 +69,6 @@ export class Property
         this.nullable = payload.nullable;
         this.defaultValue = payload.defaultValue;
         this.relationship = payload.relationship;
-        this.pivotAggregateName = payload.pivotAggregateName;
-        this.pivotPath = payload.pivotPath;
-        this.pivotFileName = payload.pivotFileName;
         this.index = payload.index;
         this.indexName = payload.indexName;
         this.isI18n = payload.isI18n;
@@ -365,28 +356,25 @@ export class Property
     toDto(): any
     {
         return {
-            id                : this.id,
-            name              : this._name,
-            type              : this.type,
-            primaryKey        : this.primaryKey,
-            autoIncrement     : this.autoIncrement,
-            enumOptions       : this.enumOptions,
-            decimals          : this.decimals,
-            length            : this.length,
-            minLength         : this.minLength,
-            maxLength         : this.maxLength,
-            nullable          : this.nullable,
-            defaultValue      : this.defaultValue,
-            relationship      : this.relationship,
-            pivotAggregateName: this.pivotAggregateName,
-            pivotPath         : this.pivotPath,
-            pivotFileName     : this.pivotFileName,
-            index             : this.index,
-            indexName         : this.indexName,
-            isI18n            : this.isI18n,
-            example           : this.example,
-            faker             : this.faker,
-            webComponent      : this.webComponent,
+            id           : this.id,
+            name         : this._name,
+            type         : this.type,
+            primaryKey   : this.primaryKey,
+            autoIncrement: this.autoIncrement,
+            enumOptions  : this.enumOptions,
+            decimals     : this.decimals,
+            length       : this.length,
+            minLength    : this.minLength,
+            maxLength    : this.maxLength,
+            nullable     : this.nullable,
+            defaultValue : this.defaultValue,
+            relationship : this.relationship,
+            index        : this.index,
+            indexName    : this.indexName,
+            isI18n       : this.isI18n,
+            example      : this.example,
+            faker        : this.faker,
+            webComponent : this.webComponent,
         };
     }
 

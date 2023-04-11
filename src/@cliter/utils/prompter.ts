@@ -316,20 +316,20 @@ export const Prompter =
                 // avoid length for decimal values
                 if (answers.type === PropertyType.DECIMAL || answers.type === PropertyType.FLOAT) return false;
 
-                // set pivotAggregateName value
+                // set pivot.aggregate value
                 if (answers.hasPivotTable)
                 {
-                    answers.pivotAggregateName = `${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}${name.toPascalCase()}`;
-                    answers.pivotPath          = `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`;
-                    answers.pivotFileName      = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
+                    answers.relationship.pivot.aggregate  = `${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}${name.toPascalCase()}`;
+                    answers.relationship.pivot.modulePath = `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`;
+                    answers.relationship.pivot.fileName   = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
                 if (!answers.hasPivotTable && answers.relationship.type === RelationshipType.MANY_TO_MANY)
                 {
                     const relationshipModulePath = getBoundedContextModuleFromFlag(generateCommandState.command, answers.relationship.modulePath);
-                    answers.pivotAggregateName   = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
-                    answers.pivotPath            = answers.relationship.modulePath;
-                    answers.pivotFileName        = `${name.toKebabCase()}-${generateCommandState.schema.moduleNames.toKebabCase()}`;
+                    answers.relationship.pivot.aggregate  = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
+                    answers.relationship.pivot.modulePath = answers.relationship.modulePath;
+                    answers.relationship.pivot.fileName   = `${name.toKebabCase()}-${generateCommandState.schema.moduleNames.toKebabCase()}`;
                 }
 
                 if (answers.relationship.type) return false;
@@ -389,12 +389,14 @@ export const Prompter =
                 key            : response.relationship.type === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
                 field          : response.relationship.type === RelationshipType.MANY_TO_ONE || (response.relationship.type === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
                 avoidConstraint: true,
+                pivot          : response.relationship.pivot?.aggregate ? {
+                    aggregate : response.relationship.pivot.aggregate,
+                    modulePath: response.relationship.pivot.modulePath,
+                    fileName  : response.relationship.pivot.fileName,
+                } : undefined,
             },
-            pivotAggregateName: response.pivotAggregateName,
-            pivotPath         : response.pivotPath,
-            pivotFileName     : response.pivotFileName,
-            index             : response.index,
-            schema            : generateCommandState.schema,
+            index : response.index,
+            schema: generateCommandState.schema,
         });
     },
 
@@ -456,25 +458,25 @@ export const Prompter =
     printValueObjectsTable(command: Command, items: Properties)
     {
         const headers: string[] = [];
-        const excludeHeaders: string[] = ['config', 'id', 'pivotAggregateName', 'pivotPath', 'pivotFileName'];
+        const excludeHeaders: string[] = ['config', 'id', 'relationship.pivot.aggregate', 'relationship.pivot.modulePath', 'relationship.pivot.fileName'];
         const aliases: {origin: string; alias: string}[] = [
-            { origin: '_name',                       alias: 'Name' },
-            { origin: 'type',                        alias: 'Type' },
-            { origin: 'primaryKey',                  alias: 'PK' },
-            { origin: 'enumOptions',                 alias: 'Enums' },
-            { origin: 'decimals',                    alias: 'Decimals' },
-            { origin: 'length',                      alias: 'Length' },
-            { origin: 'minLength',                   alias: 'MinL.' },
-            { origin: 'maxLength',                   alias: 'MaxL.' },
-            { origin: 'nullable',                    alias: 'Nullable' },
-            { origin: 'relationship.type',           alias: 'RelationshipType' },
-            { origin: 'relationship.singularName',   alias: 'Singular' },
-            { origin: 'relationship.aggregate',      alias: 'R. Aggregate' },
-            { origin: 'relationship.modulePath',     alias: 'R. Module Path' },
-            { origin: 'relationship.key',            alias: 'R. Key' },
-            { origin: 'relationship.field',          alias: 'R. Field' },
-            { origin: 'pivotAggregateName',          alias: 'Pivot' },
-            { origin: 'index',                       alias: 'Index' },
+            { origin: '_name',                        alias: 'Name' },
+            { origin: 'type',                         alias: 'Type' },
+            { origin: 'primaryKey',                   alias: 'PK' },
+            { origin: 'enumOptions',                  alias: 'Enums' },
+            { origin: 'decimals',                     alias: 'Decimals' },
+            { origin: 'length',                       alias: 'Length' },
+            { origin: 'minLength',                    alias: 'MinL.' },
+            { origin: 'maxLength',                    alias: 'MaxL.' },
+            { origin: 'nullable',                     alias: 'Nullable' },
+            { origin: 'relationship.type',            alias: 'RelationshipType' },
+            { origin: 'relationship.singularName',    alias: 'Singular' },
+            { origin: 'relationship.aggregate',       alias: 'R. Aggregate' },
+            { origin: 'relationship.modulePath',      alias: 'R. Module Path' },
+            { origin: 'relationship.key',             alias: 'R. Key' },
+            { origin: 'relationship.field',           alias: 'R. Field' },
+            { origin: 'relationship.pivot.aggregate', alias: 'Pivot' },
+            { origin: 'index',                        alias: 'Index' },
         ];
         const rows: any[] = [];
 

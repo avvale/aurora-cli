@@ -86,6 +86,7 @@ export interface PropertyRelationship
     avoidConstraint: boolean;
     packageName?: string;
     isDenormalized?: boolean;
+    pivot?: RelationshipPivot;
 }
 
 export enum PropertyIndex
@@ -121,6 +122,13 @@ export enum PropertyType
     'TINYINT.UNSIGNED'  = 'tinyint.unsigned',
     'TINYINT'           = 'tinyint',
     'VARCHAR'           = 'varchar',
+}
+
+export interface RelationshipPivot
+{
+    aggregate: string;
+    modulePath: string;
+    fileName: string;
 }
 
 export enum RelationshipType
