@@ -319,9 +319,9 @@ export const Prompter =
                 // set pivotAggregateName value
                 if (answers.hasPivotTable)
                 {
-                    answers.pivotAggregateName  = `${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}${name.toPascalCase()}`;
-                    answers.pivotPath           = `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`;
-                    answers.pivotFileName       = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
+                    answers.pivotAggregateName = `${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}${name.toPascalCase()}`;
+                    answers.pivotPath          = `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`;
+                    answers.pivotFileName      = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
                 if (!answers.hasPivotTable && answers.relationship.type === RelationshipType.MANY_TO_MANY)
