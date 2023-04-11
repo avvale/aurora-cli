@@ -235,7 +235,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{/if}}
     })
     {{ toCamelCase originName }}: {{ relationship.aggregate }}Model[];
-    {{#if isDenormalized }}
+    {{#if relationship.isDenormalized }}
 
     @Column({
         field: '{{ toCamelCase relationship.singularName }}Ids',

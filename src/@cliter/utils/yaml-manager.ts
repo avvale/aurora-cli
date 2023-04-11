@@ -59,7 +59,6 @@ export class YamlManager
                     pivotAggregateName: property?.pivotAggregateName,
                     pivotPath         : property?.pivotPath,
                     pivotFileName     : property?.pivotFileName,
-                    isDenormalized    : property?.isDenormalized,
                     index             : property?.index,
                     indexName         : property?.indexName,
                     isI18n            : property?.isI18n,

@@ -20,7 +20,7 @@ type {{ schema.aggregateName }}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase originName }}: [{{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}]{{#unless nullable }}!{{/unless}}
-    {{#if isDenormalized}}
+    {{#if relationship.isDenormalized}}
     {{ toCamelCase relationship.singularName }}Ids: JSON{{#unless nullable }}!{{/unless}}
     {{/if}}
 {{/eq}}

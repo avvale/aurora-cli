@@ -85,6 +85,7 @@ export interface PropertyRelationship
     field: string;
     avoidConstraint: boolean;
     packageName?: string;
+    isDenormalized?: boolean;
 }
 
 export enum PropertyIndex

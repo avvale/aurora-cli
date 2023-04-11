@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     })
     {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModule }}Dto[];
 
-{{#if isDenormalized}}
+{{#if relationship.isDenormalized}}
     @ApiProperty({
         type       : Object,
         description: '{{ toCamelCase relationship.singularName }}Ids [input here api field description]',
