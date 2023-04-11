@@ -271,14 +271,6 @@ export const Prompter =
             when   : (answers: any) =>
             {
                 if (
-                    answers.relationship.type === RelationshipType.ONE_TO_MANY ||
-                    (
-                        answers.relationship.type === RelationshipType.ONE_TO_ONE &&
-                        !answers.name.endsWith('Id')
-                    )
-                ) answers.type = answers.relationship.aggregate;
-
-                if (
                     answers.relationship.type === RelationshipType.ONE_TO_ONE &&
                     answers.name.endsWith('Id')
                 )

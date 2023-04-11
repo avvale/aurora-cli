@@ -1,4 +1,4 @@
-import { Property, RelationshipType } from '../..';
+import { Property } from '../..';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
 
@@ -12,8 +12,6 @@ handlebars.registerHelper('isAllowProperty', function(moduleName: string, proper
             property.name !== 'updatedAt' &&
             property.name !== 'deletedAt';
     }
-
-    if (property.isRelationship && property.relationship?.type === RelationshipType.ONE_TO_MANY) return false;
 
     return true;
 });
