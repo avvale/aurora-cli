@@ -117,7 +117,7 @@ export class AccountDetailComponent extends ViewDetailComponent
             code     : ['', [Validators.maxLength(50)]],
             email    : ['', [Validators.required, Validators.maxLength(120)]],
             isActive : false,
-            clientId : ['', [Validators.required]],
+            clientId : '',
             scopes   : [],
             tenantIds: [],
             roleIds  : [],

@@ -33,7 +33,7 @@ input IamCreateAccountInput
     code: GraphQLString
     email: GraphQLString!
     isActive: GraphQLBoolean!
-    clientId: ID!
+    clientId: ID
     scopes: JSON
     meta: JSON
     roleIds: [ID]
