@@ -26,8 +26,8 @@ describe('Update{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<Update{{ toPascalCase schema.moduleNames }}CommandHandler>(Update{{ toPascalCase schema.moduleNames }}CommandHandler);
-        service         = module.get<Update{{ toPascalCase schema.moduleNames }}Service>(Update{{ toPascalCase schema.moduleNames }}Service);
+        commandHandler = module.get<Update{{ toPascalCase schema.moduleNames }}CommandHandler>(Update{{ toPascalCase schema.moduleNames }}CommandHandler);
+        service = module.get<Update{{ toPascalCase schema.moduleNames }}Service>(Update{{ toPascalCase schema.moduleNames }}Service);
     });
 
     describe('main', () =>

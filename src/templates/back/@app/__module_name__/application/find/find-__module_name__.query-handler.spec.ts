@@ -34,10 +34,10 @@ describe('Find{{ toPascalCase schema.moduleName }}QueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<Find{{ toPascalCase schema.moduleName }}QueryHandler>(Find{{ toPascalCase schema.moduleName }}QueryHandler);
-        service         = module.get<Find{{ toPascalCase schema.moduleName }}Service>(Find{{ toPascalCase schema.moduleName }}Service);
-        repository      = <Mock{{ toPascalCase schema.moduleName }}Repository>module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
-        mapper          = new {{ toPascalCase schema.moduleName }}Mapper();
+        queryHandler = module.get<Find{{ toPascalCase schema.moduleName }}QueryHandler>(Find{{ toPascalCase schema.moduleName }}QueryHandler);
+        service = module.get<Find{{ toPascalCase schema.moduleName }}Service>(Find{{ toPascalCase schema.moduleName }}Service);
+        repository = <Mock{{ toPascalCase schema.moduleName }}Repository>module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
+        mapper = new {{ toPascalCase schema.moduleName }}Mapper();
     });
 
     describe('main', () =>

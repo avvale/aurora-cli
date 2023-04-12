@@ -26,8 +26,8 @@ describe('Upsert{{ toPascalCase schema.moduleName }}CommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<Upsert{{ toPascalCase schema.moduleName }}CommandHandler>(Upsert{{ toPascalCase schema.moduleName }}CommandHandler);
-        service         = module.get<Upsert{{ toPascalCase schema.moduleName }}Service>(Upsert{{ toPascalCase schema.moduleName }}Service);
+        commandHandler = module.get<Upsert{{ toPascalCase schema.moduleName }}CommandHandler>(Upsert{{ toPascalCase schema.moduleName }}CommandHandler);
+        service = module.get<Upsert{{ toPascalCase schema.moduleName }}Service>(Upsert{{ toPascalCase schema.moduleName }}Service);
     });
 
     describe('main', () =>

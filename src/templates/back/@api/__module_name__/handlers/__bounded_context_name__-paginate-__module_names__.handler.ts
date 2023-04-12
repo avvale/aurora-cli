@@ -38,7 +38,9 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

@@ -56,13 +56,17 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
         {{else}}
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
         {{/if}}
     }

@@ -43,7 +43,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}Query(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

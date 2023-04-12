@@ -45,9 +45,21 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     )
     {
         constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage);
-        const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(id, constraint, { timezone }));
+        const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand(id, constraint, { timezone }));
+        await this.commandBus.dispatch(new Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommand(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
         return {{ toCamelCase schema.moduleName }};
     }

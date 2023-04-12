@@ -38,7 +38,9 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, {{ toCamelCase schema.moduleName }});
@@ -64,13 +66,17 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
             {},
             '{{ toCamelCase schema.moduleName }}I18N',
             payload.langId,
-            { contentLanguageFormat: FormatLangCode.ID },
+            {
+                contentLanguageFormat: FormatLangCode.ID,
+            },
         );
         {{/if}}
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

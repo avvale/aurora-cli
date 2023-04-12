@@ -15,6 +15,10 @@ export class Get{{ toPascalCase schema.moduleNames }}QueryHandler implements IQu
 
     async execute(query: Get{{ toPascalCase schema.moduleNames }}Query): Promise<{{ toPascalCase schema.moduleName }}Response[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.get{{ toPascalCase schema.moduleNames }}Service.main(query.queryStatement, query.constraint, query.cQMetadata));
+        return this.mapper.mapAggregatesToResponses(await this.get{{ toPascalCase schema.moduleNames }}Service.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        ));
     }
 }

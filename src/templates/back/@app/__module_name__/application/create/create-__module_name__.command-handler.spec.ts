@@ -26,8 +26,8 @@ describe('Create{{ toPascalCase schema.moduleName }}CommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<Create{{ toPascalCase schema.moduleName }}CommandHandler>(Create{{ toPascalCase schema.moduleName }}CommandHandler);
-        service         = module.get<Create{{ toPascalCase schema.moduleName }}Service>(Create{{ toPascalCase schema.moduleName }}Service);
+        commandHandler = module.get<Create{{ toPascalCase schema.moduleName }}CommandHandler>(Create{{ toPascalCase schema.moduleName }}CommandHandler);
+        service = module.get<Create{{ toPascalCase schema.moduleName }}Service>(Create{{ toPascalCase schema.moduleName }}Service);
     });
 
     describe('main', () =>

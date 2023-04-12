@@ -15,6 +15,9 @@ export class RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler implements 
 
     async execute(query: RawSQL{{ toPascalCase schema.moduleNames }}Query): Promise<{{ toPascalCase schema.moduleName }}Response[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.rawSQL{{ toPascalCase schema.moduleNames }}Service.main(query.rawSQL, query.cQMetadata));
+        return this.mapper.mapAggregatesToResponses(await this.rawSQL{{ toPascalCase schema.moduleNames }}Service.main(
+            query.rawSQL,
+            query.cQMetadata,
+        ));
     }
 }

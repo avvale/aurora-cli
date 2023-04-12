@@ -35,10 +35,10 @@ describe('Paginate{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<Paginate{{ toPascalCase schema.moduleNames }}QueryHandler>(Paginate{{ toPascalCase schema.moduleNames }}QueryHandler);
-        service         = module.get<Paginate{{ toPascalCase schema.moduleNames }}Service>(Paginate{{ toPascalCase schema.moduleNames }}Service);
-        repository      = <Mock{{ toPascalCase schema.moduleName }}Repository>module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
-        mapper          = new {{ toPascalCase schema.moduleName }}Mapper();
+        queryHandler = module.get<Paginate{{ toPascalCase schema.moduleNames }}QueryHandler>(Paginate{{ toPascalCase schema.moduleNames }}QueryHandler);
+        service = module.get<Paginate{{ toPascalCase schema.moduleNames }}Service>(Paginate{{ toPascalCase schema.moduleNames }}Service);
+        repository = <Mock{{ toPascalCase schema.moduleName }}Repository>module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
+        mapper = new {{ toPascalCase schema.moduleName }}Mapper();
     });
 
     describe('main', () =>

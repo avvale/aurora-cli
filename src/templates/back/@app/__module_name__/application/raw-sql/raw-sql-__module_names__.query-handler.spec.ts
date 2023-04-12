@@ -34,10 +34,10 @@ describe('RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler>(RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler);
-        service         = module.get<RawSQL{{ toPascalCase schema.moduleNames }}Service>(RawSQL{{ toPascalCase schema.moduleNames }}Service);
-        repository      = <Mock{{ toPascalCase schema.moduleName }}Repository>module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
-        mapper          = new {{ toPascalCase schema.moduleName }}Mapper();
+        queryHandler = module.get<RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler>(RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler);
+        service = module.get<RawSQL{{ toPascalCase schema.moduleNames }}Service>(RawSQL{{ toPascalCase schema.moduleNames }}Service);
+        repository = <Mock{{ toPascalCase schema.moduleName }}Repository>module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
+        mapper = new {{ toPascalCase schema.moduleName }}Mapper();
     });
 
     describe('main', () =>

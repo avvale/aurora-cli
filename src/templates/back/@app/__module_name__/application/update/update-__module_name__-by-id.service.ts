@@ -57,12 +57,25 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdService
         {{#if schema.properties.hasI18n}}
         // delete dataLang property to avoid overwrite this value in database
         delete {{ toCamelCase schema.moduleName }}.dataLang;
-        {{/if}}
 
+        {{/if}}
         // update by id
-        await this.repository.updateById({{ toCamelCase schema.moduleName }}, { constraint, cQMetadata, updateByIdOptions: cQMetadata?.repositoryOptions });
+        await this.repository.updateById({{ toCamelCase schema.moduleName }}, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
         {{#if schema.properties.hasI18n}}
-        await this.repositoryI18n.updateById({{ toCamelCase schema.moduleName }}, { constraint, cQMetadata, updateByIdOptions: cQMetadata?.repositoryOptions, dataFactory: (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(), findArguments: { langId: {{ toCamelCase schema.moduleName }}.langId.value, {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value }});
+        await this.repositoryI18n.updateById({{toCamelCase schema.moduleName }}, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+            dataFactory: (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(),
+            findArguments: {
+                langId: {{ toCamelCase schema.moduleName }}.langId.value,
+                {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
+            },
+        });
         {{/if}}
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events

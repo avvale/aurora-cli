@@ -52,7 +52,13 @@ export class {{ currentAdditionalApi.getClassName }}Handler
         {{/if}}
             },
         ));
-        await this.queryBus.ask(new YourQuery(queryStatement, constraint, { timezone })); */
+        await this.queryBus.ask(new YourQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        )); */
 
         {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
         return [];

@@ -50,12 +50,12 @@ describe('Update{{ toPascalCase schema.moduleName }}ByIdService', () =>
         })
             .compile();
 
-        service         = module.get(Update{{ toPascalCase schema.moduleName }}ByIdService);
-        repository      = module.get(I{{ toPascalCase schema.moduleName }}Repository);
+        service = module.get(Update{{ toPascalCase schema.moduleName }}ByIdService);
+        repository = module.get(I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
-        repositoryI18N  = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
+        repositoryI18N = module.get(I{{ toPascalCase schema.moduleName }}I18NRepository);
         {{/if}}
-        mockRepository  = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
+        mockRepository = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 
     describe('main', () =>
