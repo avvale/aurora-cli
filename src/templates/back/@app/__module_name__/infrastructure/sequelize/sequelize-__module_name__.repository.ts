@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, LiteralObject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { AuditingRunner, ICriteria, SequelizeRepository } from '{{ config.auroraCorePackage }}';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
@@ -24,20 +24,42 @@ export class Sequelize{{ toPascalCase schema.moduleName }}Repository extends Seq
     {{#hasItems schema.properties.withRelationshipManyToMany }}
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model): Promise<void>
+    async createdAggregateHook(
+        aggregate: {{ schema.aggregateName }},
+        model: {{ schema.aggregateName }}Model,
+        createOptions: LiteralObject,
+    ): Promise<void>
     {
         // add many to many relation
         {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.length > 0) await model.$add('{{ toCamelCase originName }}', aggregate.{{ toCamelCase name }}.value);
+        if (aggregate.{{ toCamelCase name }}.length > 0)
+        {
+            await model.$add(
+                '{{ toCamelCase originName }}',
+                aggregate.{{ toCamelCase name }}.value,
+                createOptions,
+            );
+        }
         {{/each}}
     }
 
     // hook called after create aggregate
-    async updatedByIdAggregateHook(aggregate: {{ schema.aggregateName }}, model: {{ schema.aggregateName }}Model): Promise<void>
+    async updatedByIdAggregateHook(
+        aggregate: {{ schema.aggregateName }},
+        model: {{ schema.aggregateName }}Model,
+        updateByIdOptions: LiteralObject,
+    ): Promise<void>
     {
         // set many to many relation
         {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.isArray()) await model.$set('{{ toCamelCase originName }}', aggregate.{{ toCamelCase name }}.value);
+        if (aggregate.{{ toCamelCase name }}.isArray())
+        {
+            await model.$set(
+                '{{ toCamelCase originName }}',
+                aggregate.{{ toCamelCase name }}.value,
+                updateByIdOptions,
+            );
+        }
         {{/each}}
     }
     {{/hasItems}}
