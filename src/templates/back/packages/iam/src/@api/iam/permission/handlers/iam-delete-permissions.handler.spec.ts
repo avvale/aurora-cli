@@ -37,9 +37,9 @@ describe('IamDeletePermissionsHandler', () =>
         })
             .compile();
 
-        handler    = module.get<IamDeletePermissionsHandler>(IamDeletePermissionsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamDeletePermissionsHandler>(IamDeletePermissionsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamDeletePermissionsHandler should be defined', () =>

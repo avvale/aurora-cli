@@ -35,6 +35,10 @@ export class IamUpdateRolesHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetRolesQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetRolesQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

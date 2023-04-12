@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, LiteralObject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IAccountRepository } from '../../domain/account.repository';
@@ -23,18 +23,54 @@ export class SequelizeAccountRepository extends SequelizeRepository<IamAccount, 
     }
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: IamAccount, model: IamAccountModel): Promise<void>
+    async createdAggregateHook(
+        aggregate: IamAccount,
+        model: IamAccountModel,
+        createOptions: LiteralObject,
+    ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.roleIds.length > 0) await model.$add('roles', aggregate.roleIds.value);
-        if (aggregate.tenantIds.length > 0) await model.$add('tenants', aggregate.tenantIds.value);
+        if (aggregate.roleIds.length > 0)
+        {
+            await model.$add(
+                'roles',
+                aggregate.roleIds.value,
+                createOptions,
+            );
+        }
+        if (aggregate.tenantIds.length > 0)
+        {
+            await model.$add(
+                'tenants',
+                aggregate.tenantIds.value,
+                createOptions,
+            );
+        }
     }
 
     // hook called after create aggregate
-    async updatedByIdAggregateHook(aggregate: IamAccount, model: IamAccountModel): Promise<void>
+    async updatedByIdAggregateHook(
+        aggregate: IamAccount,
+        model: IamAccountModel,
+        updateByIdOptions: LiteralObject,
+    ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.roleIds.isArray()) await model.$set('roles', aggregate.roleIds.value);
-        if (aggregate.tenantIds.isArray()) await model.$set('tenants', aggregate.tenantIds.value);
+        if (aggregate.roleIds.isArray())
+        {
+            await model.$set(
+                'roles',
+                aggregate.roleIds.value,
+                updateByIdOptions,
+            );
+        }
+        if (aggregate.tenantIds.isArray())
+        {
+            await model.$set(
+                'tenants',
+                aggregate.tenantIds.value,
+                updateByIdOptions,
+            );
+        }
     }
 }

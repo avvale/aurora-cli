@@ -30,7 +30,7 @@ describe('IamPaginateTenantsResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<IamPaginateTenantsResolver>(IamPaginateTenantsResolver);
+        resolver = module.get<IamPaginateTenantsResolver>(IamPaginateTenantsResolver);
         handler = module.get<IamPaginateTenantsHandler>(IamPaginateTenantsHandler);
     });
 

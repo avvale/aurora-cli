@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { denormalizedRoles as roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { denormalizedRoles as roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 import { CreateRoleCommandHandler } from './create-role.command-handler';
 import { CreateRoleCommand } from './create-role.command';
 import { CreateRoleService } from './create-role.service';

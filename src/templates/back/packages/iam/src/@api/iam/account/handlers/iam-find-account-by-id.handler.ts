@@ -19,6 +19,10 @@ export class IamFindAccountByIdHandler
         timezone?: string,
     ): Promise<IamAccount | IamAccountDto>
     {
-        return await this.queryBus.ask(new FindAccountByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindAccountByIdQuery(
+            id,
+            constraint,
+            { timezone },
+        ));
     }
 }

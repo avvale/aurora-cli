@@ -1,20 +1,20 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
-import {
-    TenantId,
-    TenantName,
-    TenantCode,
-    TenantLogo,
-    TenantIsActive,
-    TenantMeta,
-    TenantAccountIds,
-    TenantCreatedAt,
-    TenantUpdatedAt,
-    TenantDeletedAt,
-} from '../../domain/value-objects';
 import { ITenantRepository } from '../../domain/tenant.repository';
 import { IamTenant } from '../../domain/tenant.aggregate';
+import {
+    TenantAccountIds,
+    TenantCode,
+    TenantCreatedAt,
+    TenantDeletedAt,
+    TenantId,
+    TenantIsActive,
+    TenantLogo,
+    TenantMeta,
+    TenantName,
+    TenantUpdatedAt,
+} from '../../domain/value-objects';
 
 @Injectable()
 export class CreateTenantService

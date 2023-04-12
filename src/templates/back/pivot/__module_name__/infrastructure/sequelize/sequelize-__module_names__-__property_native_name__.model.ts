@@ -3,7 +3,7 @@
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model';
-import { {{ currentProperty.relationshipAggregate }}Model } from '{{ config.appContainer }}/{{ currentProperty.relationshipModulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase currentProperty.getRelationshipModule }}.model';
+import { {{ currentProperty.relationship.aggregate }}Model } from '{{ config.appContainer }}/{{ currentProperty.relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase currentProperty.getRelationshipModule }}.model';
 
 @Table({
     modelName: '{{ toPascalCase currentProperty.relationship.pivot.aggregate }}',
@@ -19,7 +19,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     })
     {{ toCamelCase schema.moduleName }}Id: string;
 
-    @ForeignKey(() => {{ currentProperty.relationshipAggregate }}Model)
+    @ForeignKey(() => {{ currentProperty.relationship.aggregate }}Model)
     @Column({
         field: '{{ toCamelCase currentProperty.getRelationshipModule }}Id',
         type: DataTypes.UUID,

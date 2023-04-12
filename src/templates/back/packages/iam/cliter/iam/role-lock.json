@@ -23,7 +23,7 @@
         },
         {
             "path": "src/@app/iam/role/application/create/create-role.service.ts",
-            "integrity": "sha1:a353ac7025435e63545d93ce8362689a5ecaaf48"
+            "integrity": "sha1:289d0cb263b0b5f3507aa4e7d56821477795b678"
         },
         {
             "path": "src/@app/iam/role/application/create/create-roles.command-handler.spec.ts",
@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/iam/role/infrastructure/mock/mock-role.data.ts",
-            "integrity": "sha1:894b4e7bcd07634226d105ab125b4d0f33802c7b"
+            "integrity": "sha1:a6053ecda462fdfc265c209f2d3383539cd395dd"
         },
         {
             "path": "src/@app/iam/role/infrastructure/mock/mock-role.repository.ts",
@@ -343,7 +343,7 @@
         },
         {
             "path": "src/@app/iam/role/infrastructure/sequelize/sequelize-role.repository.ts",
-            "integrity": "sha1:11d07388ee3858f77779bc8089b94a291a3bf48a"
+            "integrity": "sha1:40ce7fa548fd3655c04fa4073d0490a9118a8ab6"
         },
         {
             "path": "src/@app/iam/role/domain/value-objects/role-id.ts",
@@ -503,7 +503,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-create-role.handler.ts",
-            "integrity": "sha1:de949366a54dd7b482a68d503a25c4bd5c0c1c44"
+            "integrity": "sha1:c3ff4317e0942b34aebbb42c4dcbe6ac4ba99162"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-create-roles.handler.spec.ts",
@@ -523,7 +523,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-delete-roles.handler.spec.ts",
-            "integrity": "sha1:56a03f0d856564bbed9e2613000395fc3272cbad"
+            "integrity": "sha1:59576399cf7d690bbeac737dbdc1a494170d821c"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-delete-roles.handler.ts",
@@ -535,7 +535,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-find-role-by-id.handler.ts",
-            "integrity": "sha1:1a4e859746a5ba8085830d0172a00a0adb452465"
+            "integrity": "sha1:6d73c57adc7d84cb7ac0016ca028b02798e714ba"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-find-role.handler.spec.ts",
@@ -543,7 +543,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-find-role.handler.ts",
-            "integrity": "sha1:fd9e90051ae5186f651e913bf493c7354eca85c2"
+            "integrity": "sha1:6458410fa9cb5e4ffe89897f610dfccd33fffc6e"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-get-roles.handler.spec.ts",
@@ -551,7 +551,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-get-roles.handler.ts",
-            "integrity": "sha1:dda68fa848bba40ba6a473d5cb57e03a87aec78f"
+            "integrity": "sha1:218a041ac52160178466625385258795304949d5"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-paginate-roles.handler.spec.ts",
@@ -563,7 +563,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-update-role-by-id.handler.spec.ts",
-            "integrity": "sha1:51f2df61955940420b35541a3cb4678ca9f6ca33"
+            "integrity": "sha1:8e49aef7d9554fd476c45f5cdb2aaffc81e89696"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-update-role-by-id.handler.ts",
@@ -575,7 +575,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-update-roles.handler.ts",
-            "integrity": "sha1:93fc014f2ffda758953cde46fdc6122cfb8aec0b"
+            "integrity": "sha1:c51a631ee37b458b913dd4a6233d77faead11fe6"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-upsert-role.handler.spec.ts",
@@ -647,7 +647,7 @@
         },
         {
             "path": "src/@api/iam/role/resolvers/iam-paginate-roles.resolver.spec.ts",
-            "integrity": "sha1:66a31f2234a9dce7d1778ef3859ad8ee9f9e773d"
+            "integrity": "sha1:a7af15b1a714b89aee1dda191ca62851963a89cb"
         },
         {
             "path": "src/@api/iam/role/resolvers/iam-paginate-roles.resolver.ts",
@@ -683,11 +683,11 @@
         },
         {
             "path": "test/acceptance/iam/role.e2e-spec.ts",
-            "integrity": "sha1:141f8108d3f4fa2f6189f45bce8aa757f9687c90"
+            "integrity": "sha1:f795d0459ad9d1a024126215fc414a154cc4c80d"
         },
         {
             "path": "postman/iam/iam.role.postman.json",
-            "integrity": "sha1:b6021a90a60c8453ca09c62db38c3e3aa36ebfe5"
+            "integrity": "sha1:e839392ce294e977a6780430f2b725ea0d3cdabb"
         }
     ]
 }

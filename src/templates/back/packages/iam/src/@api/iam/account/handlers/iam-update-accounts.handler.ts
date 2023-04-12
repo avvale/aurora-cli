@@ -35,6 +35,10 @@ export class IamUpdateAccountsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetAccountsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetAccountsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

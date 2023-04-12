@@ -30,7 +30,7 @@ describe('IamPaginateRolesResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<IamPaginateRolesResolver>(IamPaginateRolesResolver);
+        resolver = module.get<IamPaginateRolesResolver>(IamPaginateRolesResolver);
         handler = module.get<IamPaginateRolesHandler>(IamPaginateRolesHandler);
     });
 

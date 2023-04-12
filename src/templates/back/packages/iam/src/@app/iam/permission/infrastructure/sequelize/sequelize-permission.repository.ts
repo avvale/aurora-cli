@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, LiteralObject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IPermissionRepository } from '../../domain/permission.repository';
@@ -23,16 +23,38 @@ export class SequelizePermissionRepository extends SequelizeRepository<IamPermis
     }
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: IamPermission, model: IamPermissionModel): Promise<void>
+    async createdAggregateHook(
+        aggregate: IamPermission,
+        model: IamPermissionModel,
+        createOptions: LiteralObject,
+    ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.roleIds.length > 0) await model.$add('roles', aggregate.roleIds.value);
+        if (aggregate.roleIds.length > 0)
+        {
+            await model.$add(
+                'roles',
+                aggregate.roleIds.value,
+                createOptions,
+            );
+        }
     }
 
     // hook called after create aggregate
-    async updatedByIdAggregateHook(aggregate: IamPermission, model: IamPermissionModel): Promise<void>
+    async updatedByIdAggregateHook(
+        aggregate: IamPermission,
+        model: IamPermissionModel,
+        updateByIdOptions: LiteralObject,
+    ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.roleIds.isArray()) await model.$set('roles', aggregate.roleIds.value);
+        if (aggregate.roleIds.isArray())
+        {
+            await model.$set(
+                'roles',
+                aggregate.roleIds.value,
+                updateByIdOptions,
+            );
+        }
     }
 }

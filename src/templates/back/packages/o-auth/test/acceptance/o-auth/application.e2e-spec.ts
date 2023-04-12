@@ -506,8 +506,8 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -651,8 +651,8 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -724,8 +724,8 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -793,8 +793,8 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -904,8 +904,8 @@ describe('application', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 

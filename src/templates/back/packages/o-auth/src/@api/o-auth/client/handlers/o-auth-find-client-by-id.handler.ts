@@ -19,6 +19,10 @@ export class OAuthFindClientByIdHandler
         timezone?: string,
     ): Promise<OAuthClient | OAuthClientDto>
     {
-        return await this.queryBus.ask(new FindClientByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindClientByIdQuery(
+            id,
+            constraint,
+            { timezone },
+        ));
     }
 }

@@ -31,6 +31,10 @@ export class OAuthCreateApplicationHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindApplicationByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new FindApplicationByIdQuery(
+            payload.id,
+            {},
+            { timezone },
+        ));
     }
 }

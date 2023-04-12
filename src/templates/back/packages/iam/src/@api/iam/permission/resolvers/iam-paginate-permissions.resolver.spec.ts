@@ -30,7 +30,7 @@ describe('IamPaginatePermissionsResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<IamPaginatePermissionsResolver>(IamPaginatePermissionsResolver);
+        resolver = module.get<IamPaginatePermissionsResolver>(IamPaginatePermissionsResolver);
         handler = module.get<IamPaginatePermissionsHandler>(IamPaginatePermissionsHandler);
     });
 

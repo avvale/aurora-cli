@@ -38,9 +38,9 @@ describe('IamUpdateAccountByIdHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateAccountByIdHandler>(IamUpdateAccountByIdHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateAccountByIdHandler>(IamUpdateAccountByIdHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamUpdateAccountByIdHandler should be defined', () =>

@@ -35,6 +35,10 @@ export class IamUpdatePermissionsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetPermissionsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

@@ -1,19 +1,19 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
-import {
-    ApplicationId,
-    ApplicationCode,
-    ApplicationName,
-    ApplicationSecret,
-    ApplicationIsMaster,
-    ApplicationClientIds,
-    ApplicationCreatedAt,
-    ApplicationUpdatedAt,
-    ApplicationDeletedAt,
-} from '../../domain/value-objects';
 import { IApplicationRepository } from '../../domain/application.repository';
 import { OAuthApplication } from '../../domain/application.aggregate';
+import {
+    ApplicationClientIds,
+    ApplicationCode,
+    ApplicationCreatedAt,
+    ApplicationDeletedAt,
+    ApplicationId,
+    ApplicationIsMaster,
+    ApplicationName,
+    ApplicationSecret,
+    ApplicationUpdatedAt,
+} from '../../domain/value-objects';
 
 @Injectable()
 export class CreateApplicationService

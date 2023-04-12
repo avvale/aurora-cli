@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, LiteralObject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IApplicationRepository } from '../../domain/application.repository';
@@ -23,16 +23,38 @@ export class SequelizeApplicationRepository extends SequelizeRepository<OAuthApp
     }
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: OAuthApplication, model: OAuthApplicationModel): Promise<void>
+    async createdAggregateHook(
+        aggregate: OAuthApplication,
+        model: OAuthApplicationModel,
+        createOptions: LiteralObject,
+    ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.clientIds.length > 0) await model.$add('clients', aggregate.clientIds.value);
+        if (aggregate.clientIds.length > 0)
+        {
+            await model.$add(
+                'clients',
+                aggregate.clientIds.value,
+                createOptions,
+            );
+        }
     }
 
     // hook called after create aggregate
-    async updatedByIdAggregateHook(aggregate: OAuthApplication, model: OAuthApplicationModel): Promise<void>
+    async updatedByIdAggregateHook(
+        aggregate: OAuthApplication,
+        model: OAuthApplicationModel,
+        updateByIdOptions: LiteralObject,
+    ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.clientIds.isArray()) await model.$set('clients', aggregate.clientIds.value);
+        if (aggregate.clientIds.isArray())
+        {
+            await model.$set(
+                'clients',
+                aggregate.clientIds.value,
+                updateByIdOptions,
+            );
+        }
     }
 }

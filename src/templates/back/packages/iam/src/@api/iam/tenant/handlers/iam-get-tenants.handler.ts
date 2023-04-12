@@ -19,6 +19,10 @@ export class IamGetTenantsHandler
         timezone?: string,
     ): Promise<IamTenant[] | IamTenantDto[]>
     {
-        return await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetTenantsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

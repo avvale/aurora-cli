@@ -38,9 +38,9 @@ describe('IamUpdateRoleByIdHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateRoleByIdHandler>(IamUpdateRoleByIdHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateRoleByIdHandler>(IamUpdateRoleByIdHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamUpdateRoleByIdHandler should be defined', () =>

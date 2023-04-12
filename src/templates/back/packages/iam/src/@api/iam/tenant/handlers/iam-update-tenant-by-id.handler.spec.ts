@@ -38,9 +38,9 @@ describe('IamUpdateTenantByIdHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateTenantByIdHandler>(IamUpdateTenantByIdHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateTenantByIdHandler>(IamUpdateTenantByIdHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamUpdateTenantByIdHandler should be defined', () =>

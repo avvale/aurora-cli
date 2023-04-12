@@ -19,6 +19,10 @@ export class OAuthFindApplicationByIdHandler
         timezone?: string,
     ): Promise<OAuthApplication | OAuthApplicationDto>
     {
-        return await this.queryBus.ask(new FindApplicationByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindApplicationByIdQuery(
+            id,
+            constraint,
+            { timezone },
+        ));
     }
 }

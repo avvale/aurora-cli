@@ -37,9 +37,9 @@ describe('OAuthDeleteApplicationsHandler', () =>
         })
             .compile();
 
-        handler    = module.get<OAuthDeleteApplicationsHandler>(OAuthDeleteApplicationsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthDeleteApplicationsHandler>(OAuthDeleteApplicationsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthDeleteApplicationsHandler should be defined', () =>

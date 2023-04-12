@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, LiteralObject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { IClientRepository } from '../../domain/client.repository';
@@ -28,21 +28,46 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
     }
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: OAuthClient, model: OAuthClientModel): Promise<void>
+    async createdAggregateHook(
+        aggregate: OAuthClient,
+        model: OAuthClientModel,
+        createOptions: LiteralObject,
+    ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.applicationIds.length > 0) await model.$add('applications', aggregate.applicationIds.value);
+        if (aggregate.applicationIds.length > 0)
+        {
+            await model.$add(
+                'applications',
+                aggregate.applicationIds.value,
+                createOptions,
+            );
+        }
     }
 
     // hook called after create aggregate
-    async updatedByIdAggregateHook(aggregate: OAuthClient, model: OAuthClientModel): Promise<void>
+    async updatedByIdAggregateHook(
+        aggregate: OAuthClient,
+        model: OAuthClientModel,
+        updateByIdOptions: LiteralObject,
+    ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.applicationIds.isArray()) await model.$set('applications', aggregate.applicationIds.value);
+        if (aggregate.applicationIds.isArray())
+        {
+            await model.$set(
+                'applications',
+                aggregate.applicationIds.value,
+                updateByIdOptions,
+            );
+        }
     }
 
     // hook called after insert aggregates, to add relations between bulk inserted
-    async insertedAggregateHook(aggregates: OAuthClient[]): Promise<void>
+    async insertedAggregateHook(
+        aggregates: OAuthClient[],
+        insertOptions: LiteralObject,
+    ): Promise<void>
     {
         const intermediateDate: { clientId: string; applicationId: string; }[] = [];
         for (const aggregate of aggregates)
@@ -56,6 +81,9 @@ export class SequelizeClientRepository extends SequelizeRepository<OAuthClient, 
             }
         }
 
-        await this.repositoryIntermediate.bulkCreate(<OAuthApplicationsClientsModel[]>intermediateDate);
+        await this.repositoryIntermediate.bulkCreate(
+            <OAuthApplicationsClientsModel[]>intermediateDate,
+            insertOptions,
+        );
     }
 }

@@ -19,6 +19,10 @@ export class IamFindRoleByIdHandler
         timezone?: string,
     ): Promise<IamRole | IamRoleDto>
     {
-        return await this.queryBus.ask(new FindRoleByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindRoleByIdQuery(
+            id,
+            constraint,
+            { timezone },
+        ));
     }
 }

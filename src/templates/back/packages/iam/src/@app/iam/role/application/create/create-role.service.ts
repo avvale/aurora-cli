@@ -1,18 +1,18 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
-import {
-    RoleId,
-    RoleName,
-    RoleIsMaster,
-    RolePermissionIds,
-    RoleAccountIds,
-    RoleCreatedAt,
-    RoleUpdatedAt,
-    RoleDeletedAt,
-} from '../../domain/value-objects';
 import { IRoleRepository } from '../../domain/role.repository';
 import { IamRole } from '../../domain/role.aggregate';
+import {
+    RoleAccountIds,
+    RoleCreatedAt,
+    RoleDeletedAt,
+    RoleId,
+    RoleIsMaster,
+    RoleName,
+    RolePermissionIds,
+    RoleUpdatedAt,
+} from '../../domain/value-objects';
 
 @Injectable()
 export class CreateRoleService

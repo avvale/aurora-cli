@@ -35,6 +35,10 @@ export class OAuthUpdateApplicationsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetApplicationsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetApplicationsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

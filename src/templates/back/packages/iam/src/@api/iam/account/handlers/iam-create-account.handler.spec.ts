@@ -11,7 +11,7 @@ import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-acc
 
 // sources
 import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
-import { roles } from '@app/iam/role/infrastructure/seeds/role.seed';
+import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('IamCreateAccountHandler', () =>

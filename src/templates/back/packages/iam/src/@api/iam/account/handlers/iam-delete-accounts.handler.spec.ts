@@ -37,9 +37,9 @@ describe('IamDeleteAccountsHandler', () =>
         })
             .compile();
 
-        handler    = module.get<IamDeleteAccountsHandler>(IamDeleteAccountsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamDeleteAccountsHandler>(IamDeleteAccountsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamDeleteAccountsHandler should be defined', () =>

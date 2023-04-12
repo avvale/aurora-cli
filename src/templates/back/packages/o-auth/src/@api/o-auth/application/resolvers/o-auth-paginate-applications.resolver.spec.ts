@@ -30,7 +30,7 @@ describe('OAuthPaginateApplicationsResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<OAuthPaginateApplicationsResolver>(OAuthPaginateApplicationsResolver);
+        resolver = module.get<OAuthPaginateApplicationsResolver>(OAuthPaginateApplicationsResolver);
         handler = module.get<OAuthPaginateApplicationsHandler>(OAuthPaginateApplicationsHandler);
     });
 

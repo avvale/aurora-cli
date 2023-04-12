@@ -38,9 +38,9 @@ describe('IamUpdatePermissionByIdHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdatePermissionByIdHandler>(IamUpdatePermissionByIdHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdatePermissionByIdHandler>(IamUpdatePermissionByIdHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamUpdatePermissionByIdHandler should be defined', () =>

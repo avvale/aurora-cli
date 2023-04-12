@@ -37,9 +37,9 @@ describe('OAuthDeleteClientsHandler', () =>
         })
             .compile();
 
-        handler    = module.get<OAuthDeleteClientsHandler>(OAuthDeleteClientsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthDeleteClientsHandler>(OAuthDeleteClientsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthDeleteClientsHandler should be defined', () =>

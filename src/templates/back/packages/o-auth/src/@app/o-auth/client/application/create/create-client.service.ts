@@ -1,25 +1,25 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
-import {
-    ClientId,
-    ClientGrantType,
-    ClientName,
-    ClientSecret,
-    ClientAuthUrl,
-    ClientRedirect,
-    ClientScopeOptions,
-    ClientExpiredAccessToken,
-    ClientExpiredRefreshToken,
-    ClientIsActive,
-    ClientIsMaster,
-    ClientApplicationIds,
-    ClientCreatedAt,
-    ClientUpdatedAt,
-    ClientDeletedAt,
-} from '../../domain/value-objects';
 import { IClientRepository } from '../../domain/client.repository';
 import { OAuthClient } from '../../domain/client.aggregate';
+import {
+    ClientApplicationIds,
+    ClientAuthUrl,
+    ClientCreatedAt,
+    ClientDeletedAt,
+    ClientExpiredAccessToken,
+    ClientExpiredRefreshToken,
+    ClientGrantType,
+    ClientId,
+    ClientIsActive,
+    ClientIsMaster,
+    ClientName,
+    ClientRedirect,
+    ClientScopeOptions,
+    ClientSecret,
+    ClientUpdatedAt,
+} from '../../domain/value-objects';
 
 @Injectable()
 export class CreateClientService

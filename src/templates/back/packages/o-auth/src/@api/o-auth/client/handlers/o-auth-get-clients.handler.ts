@@ -19,6 +19,10 @@ export class OAuthGetClientsHandler
         timezone?: string,
     ): Promise<OAuthClient[] | OAuthClientDto[]>
     {
-        return await this.queryBus.ask(new GetClientsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetClientsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

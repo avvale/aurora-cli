@@ -35,6 +35,10 @@ export class IamUpdateTenantsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetTenantsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetTenantsQuery(
+            queryStatement,
+            constraint,
+            { timezone },
+        ));
     }
 }

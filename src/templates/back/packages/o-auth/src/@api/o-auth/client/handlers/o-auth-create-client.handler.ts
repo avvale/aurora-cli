@@ -31,6 +31,10 @@ export class OAuthCreateClientHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindClientByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new FindClientByIdQuery(
+            payload.id,
+            {},
+            { timezone },
+        ));
     }
 }

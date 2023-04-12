@@ -19,6 +19,10 @@ export class IamFindPermissionByIdHandler
         timezone?: string,
     ): Promise<IamPermission | IamPermissionDto>
     {
-        return await this.queryBus.ask(new FindPermissionByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new FindPermissionByIdQuery(
+            id,
+            constraint,
+            { timezone },
+        ));
     }
 }

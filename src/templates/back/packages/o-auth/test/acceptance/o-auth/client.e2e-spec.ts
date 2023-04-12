@@ -440,7 +440,7 @@ describe('client', () =>
                 expect(res.body.message).toContain('Value for ClientIsMaster has to be a boolean value');
             });
     });
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType has to be a enum option of AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD', () =>
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType has to be a enum option of AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
@@ -650,8 +650,8 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -812,8 +812,8 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -897,8 +897,8 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -978,8 +978,8 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -1105,8 +1105,8 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 

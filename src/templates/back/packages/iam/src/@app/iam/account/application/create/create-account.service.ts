@@ -1,26 +1,26 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { CQMetadata } from '@aurora-ts/core';
+import { IAccountRepository } from '../../domain/account.repository';
+import { IamAccount } from '../../domain/account.aggregate';
 import {
-    AccountId,
-    AccountType,
-    AccountCode,
-    AccountEmail,
-    AccountIsActive,
     AccountClientId,
-    AccountScopes,
+    AccountCode,
+    AccountCreatedAt,
     AccountDApplicationCodes,
     AccountDPermissions,
     AccountDTenants,
+    AccountDeletedAt,
+    AccountEmail,
+    AccountId,
+    AccountIsActive,
     AccountMeta,
     AccountRoleIds,
+    AccountScopes,
     AccountTenantIds,
-    AccountCreatedAt,
+    AccountType,
     AccountUpdatedAt,
-    AccountDeletedAt,
 } from '../../domain/value-objects';
-import { IAccountRepository } from '../../domain/account.repository';
-import { IamAccount } from '../../domain/account.aggregate';
 
 @Injectable()
 export class CreateAccountService

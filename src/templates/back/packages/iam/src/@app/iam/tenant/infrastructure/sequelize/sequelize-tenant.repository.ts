@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, LiteralObject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
 import { ITenantRepository } from '../../domain/tenant.repository';
@@ -23,16 +23,38 @@ export class SequelizeTenantRepository extends SequelizeRepository<IamTenant, Ia
     }
 
     // hook called after create aggregate
-    async createdAggregateHook(aggregate: IamTenant, model: IamTenantModel): Promise<void>
+    async createdAggregateHook(
+        aggregate: IamTenant,
+        model: IamTenantModel,
+        createOptions: LiteralObject,
+    ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.accountIds.length > 0) await model.$add('accounts', aggregate.accountIds.value);
+        if (aggregate.accountIds.length > 0)
+        {
+            await model.$add(
+                'accounts',
+                aggregate.accountIds.value,
+                createOptions,
+            );
+        }
     }
 
     // hook called after create aggregate
-    async updatedByIdAggregateHook(aggregate: IamTenant, model: IamTenantModel): Promise<void>
+    async updatedByIdAggregateHook(
+        aggregate: IamTenant,
+        model: IamTenantModel,
+        updateByIdOptions: LiteralObject,
+    ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.accountIds.isArray()) await model.$set('accounts', aggregate.accountIds.value);
+        if (aggregate.accountIds.isArray())
+        {
+            await model.$set(
+                'accounts',
+                aggregate.accountIds.value,
+                updateByIdOptions,
+            );
+        }
     }
 }

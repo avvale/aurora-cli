@@ -37,9 +37,9 @@ describe('IamDeleteRolesHandler', () =>
         })
             .compile();
 
-        handler    = module.get<IamDeleteRolesHandler>(IamDeleteRolesHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamDeleteRolesHandler>(IamDeleteRolesHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamDeleteRolesHandler should be defined', () =>
