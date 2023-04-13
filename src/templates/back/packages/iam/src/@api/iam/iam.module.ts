@@ -12,8 +12,6 @@ import { IamAccountControllers, IamAccountResolvers, IamAccountApiHandlers, IamA
 import { IamUserControllers, IamUserResolvers, IamUserApiHandlers, IamUserServices } from './user';
 import { IamUserMetaControllers, IamUserMetaResolvers, IamUserMetaApiHandlers } from './user-meta';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
-import { BullModule } from '@nestjs/bull';
-import { appQueues } from 'src/app.queues';
 
 @Module({
     imports: [
@@ -21,9 +19,6 @@ import { appQueues } from 'src/app.queues';
         SequelizeModule.forFeature([
             ...IamModels,
         ]),
-        BullModule.registerQueue(
-            ...appQueues.iam,
-        ),
     ],
     controllers: [
         ...IamAccountControllers,
