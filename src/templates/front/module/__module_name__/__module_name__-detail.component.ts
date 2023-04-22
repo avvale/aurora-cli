@@ -18,7 +18,7 @@
     (object items='ViewChild' path='@angular/core')
 ~}}
 {{ push arrayImports
-    (object items=(array 'ColumnConfig' 'ColumnDataType' 'GridData' 'GridSelectElementComponent') path='@aurora')
+    (object items=(array 'ColumnConfig' 'ColumnDataType' 'GridColumnsConfigStorageService' 'GridData' 'GridSelectElementComponent') path='@aurora')
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
@@ -108,8 +108,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     constructor(
         protected readonly injector: Injector,
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
+        private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
+        {{/unlessEq}}
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
+        private readonly {{ toCamelCase getRelationshipModule }}Service: {{ toPascalCase getRelationshipModule }}Service,
+        {{/eq}}
+        {{#eq webComponent.type 'grid-select-element'}}
         private readonly {{ toCamelCase getRelationshipModule }}Service: {{ toPascalCase getRelationshipModule }}Service,
         {{/eq}}
         {{/each}}
@@ -128,6 +134,13 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
         this.{{ toCamelCase getRelationshipModules }}$ = this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}$;
+        {{/eq}}
+        {{#eq webComponent.type 'grid-select-element'}}
+        // {{ toCamelCase getRelationshipModule }} grid-select-element
+        this.{{ toCamelCase getRelationshipModules }}ColumnsConfig$ = this.gridColumnsConfigStorageService
+            .getColumnsConfig(this.{{ toCamelCase getRelationshipModules }}GridId, this.{{ toCamelCase getRelationshipModules }}OriginColumnsConfig)
+            .pipe(takeUntil(this.unsubscribeAll$));
+        this.{{ toCamelCase getRelationshipModules }}GridData$ = this.{{ toCamelCase getRelationshipModule }}Service.pagination$;
         {{/eq}}
         {{/each}}
         {{/eq}}
