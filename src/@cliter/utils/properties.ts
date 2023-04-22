@@ -1,5 +1,5 @@
 import { Property } from './property';
-import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType } from '../types';
+import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType, WebComponentType } from '../types';
 
 export class Properties
 {
@@ -48,6 +48,11 @@ export class Properties
     get lengthWebComponents(): number
     {
         return this.properties.filter(property => Boolean(property.webComponent?.type)).length;
+    }
+
+    get lengthGridSelectElementWebComponents(): number
+    {
+        return this.properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT).length;
     }
 
     get withoutDeletedAt(): Property[]
@@ -170,8 +175,13 @@ export class Properties
     get withWebComponents(): Property[]
     {
         return this.properties
-            .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => Boolean(property.webComponent?.type));
+    }
+
+    get withGridSelectElementWebComponents(): Property[]
+    {
+        return this.properties
+            .filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT);
     }
 
     /*************

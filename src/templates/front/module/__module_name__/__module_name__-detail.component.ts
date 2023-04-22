@@ -1,14 +1,52 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, {{#unlessEq schema.properties.lengthWebComponents 0 }}Observable, {{/unlessEq}}takeUntil } from 'rxjs';
-import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
-import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
+{{
+    setVar 'arrayImports' (
+        array
+            (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
+            (object items='Validators' path='@angular/forms')
+            (object items=(array 'Action' 'Crumb' 'log' 'mapActions' 'Utils' 'ViewDetailComponent') path='@aurora')
+            (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
+            (object items=schema.aggregateName path=(sumStrings '../' toKebabCase schema.boundedContextName '.types'))
+            (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
+    )
+~}}
+{{#unlessEq schema.properties.lengthWebComponents 0 }}
+{{ push arrayImports
+    (object items='Observable' path='rxjs')
+~}}
+{{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
+{{ push arrayImports
+    (object items='ViewChild' path='@angular/core')
+~}}
+{{ push arrayImports
+    (object items=(array 'ColumnConfig' 'ColumnDataType' 'GridData' 'GridSelectElementComponent') path='@aurora')
+~}}
+{{/unlessEq}}
+{{/unlessEq}}
 {{#each schema.properties.withWebComponents}}
-import { {{ getRelationshipAggregateName }} } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipBoundedContext }}.types';
-import { {{ toPascalCase getRelationshipModule }}Service } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/{{ toKebabCase getRelationshipModule }}.service';
+{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{ push ../arrayImports
+    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContext) '.types'))
+    (object items=(sumStrings (toPascalCase getRelationshipModule) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.service'))
+~}}
+{{else}}
+{{ push ../arrayImports
+    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipBoundedContext) '.types'))
+    (object items=(sumStrings (toPascalCase getRelationshipModule) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.service'))
+~}}
+{{/eq}}
 {{/each}}
-
+{{#each schema.properties.withGridSelectElementWebComponents}}
+{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{ push ../arrayImports
+    (object items=(sumStrings (toCamelCase getRelationshipModule) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.columns-config'))
+~}}
+{{else}}
+{{ push ../arrayImports
+    (object items=(sumStrings (toCamelCase getRelationshipModule) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.columns-config'))
+~}}
+{{/eq}}
+{{/each}}
+{{{ importManager (object imports=arrayImports) }}}
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-detail',
     templateUrl    : './{{ toKebabCase schema.moduleName }}-detail.component.html',
@@ -31,6 +69,31 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{#each schema.properties.withWebComponents}}
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipModules }}$: Observable<{{ getRelationshipAggregateName }}[]>;
+    {{/eq}}
+    {{#eq webComponent.type 'grid-select-element'}}
+    @ViewChild('{{ toCamelCase getRelationshipModule }}GridElementSelector') {{ toCamelCase getRelationshipModules }}Component: GridSelectElementComponent;
+    {{ toCamelCase getRelationshipModules }}GridId: string = 'orion::order.detail.servicePointGridList';
+    {{ toCamelCase getRelationshipModules }}GridData$: Observable<GridData<{{ getRelationshipAggregateName }}>>;
+    {{ toCamelCase getRelationshipModules }}ColumnsConfig$: Observable<ColumnConfig[]>;
+    {{ toCamelCase getRelationshipModules }}OriginColumnsConfig: ColumnConfig[] = [
+        {
+            type   : ColumnDataType.ACTIONS,
+            field  : 'Actions',
+            sticky : true,
+            actions: row =>
+            {
+                return [
+                    {
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase getRelationshipModule }}',
+                        isViewAction: false,
+                        translation : 'select',
+                        icon        : 'add_link',
+                    },
+                ];
+            },
+        },
+        ...{{ toCamelCase getRelationshipModule }}ColumnsConfig,
+    ];
     {{/eq}}
     {{/each}}
 {{/unlessEq}}

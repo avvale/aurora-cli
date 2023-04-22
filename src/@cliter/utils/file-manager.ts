@@ -17,6 +17,7 @@ export class FileManager
     /**
      * Render filename and folder name
      * @param {string} name - name that include key to replace
+     * @param {string} currentProperty - property to render value object or pivot table
      * @return {string} - replaced name
      */
     static replaceFilename(
@@ -119,6 +120,8 @@ export class FileManager
      * @param {string} originPath - path to template folder
      * @param {string} relativeTargetBasePath - relative path to target folder
      * @param {string} relativeTargetPath - relative path to target folder
+     * @param {string} currentProperty - property to render value object or pivot table
+     *
      * @return {void}
      */
     static generateContents(
@@ -136,7 +139,7 @@ export class FileManager
             excludeFiles = [],
             lockFiles = [],
             templateData = {},
-            currentProperty, // property to render value object or pivot table
+            currentProperty,
             useTemplateEngine = true,
         }: {
             boundedContextName?: string;
@@ -260,6 +263,7 @@ export class FileManager
      * @param file File name of template without get target name
      * @param relativeTargetPath Relative path to folder where save file
      * @param targetBasePath Absolute path to project
+     * @param {string} currentProperty - property to render value object or pivot table
      * @returns void
      */
     static async manageFileTemplate(
