@@ -18,7 +18,7 @@
     (object items='ViewChild' path='@angular/core')
 ~}}
 {{ push arrayImports
-    (object items=(array 'ColumnConfig' 'ColumnDataType' 'GridColumnsConfigStorageService' 'GridData' 'GridSelectElementComponent') path='@aurora')
+    (object items=(array 'ColumnConfig' 'ColumnDataType' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectElementComponent' 'GridStateService' 'QueryStatementHandler') path='@aurora')
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
@@ -110,6 +110,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
         {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly gridStateService: GridStateService,
         {{/unlessEq}}
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
@@ -261,6 +263,37 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+            {{#each schema.properties.withGridSelectElementWebComponents}}
+
+            /* #region actions to manage {{ toCamelCase property.getRelationshipModules }} grid-select-element */
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModules }}OpenDialog':
+                this.{{ toCamelCase getRelationshipModules }}Component.gridState = {
+                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase getRelationshipModules }}GridId),
+                    page         : this.gridStateService.getPage(this.{{ toCamelCase getRelationshipModules }}GridId),
+                    sort         : this.gridStateService.getSort(this.{{ toCamelCase getRelationshipModules }}GridId),
+                    search       : this.gridStateService.getSearchState(this.{{ toCamelCase getRelationshipModules }}GridId),
+                };
+                this.{{ toCamelCase getRelationshipModules }}Component.openDialog();
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModules }}Pagination':
+                await lastValueFrom(
+                    this.{{ toCamelCase getRelationshipModule }}Service
+                        .pagination({
+                            query: action.data.query ?
+                                action.data.query :
+                                QueryStatementHandler
+                                    .init({ columnsConfig: {{ toCamelCase getRelationshipModule }}ColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase getRelationshipModules }}GridId))
+                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase getRelationshipModules }}GridId))
+                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase getRelationshipModules }}GridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase getRelationshipModules }}GridId))
+                                    .getQueryStatement(),
+                        }),
+                );
+                break;
+                /* #endregion actions to manage {{ toCamelCase property.getRelationshipModules }} grid-select-element */
+            {{/each}}
         }
     }
 }
