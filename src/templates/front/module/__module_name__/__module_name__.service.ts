@@ -305,6 +305,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             query{{ toPascalCase getRelationshipModules }} = {},
             constraint{{ toPascalCase getRelationshipModules }} = {},
             {{/eq}}
+            {{#eq webComponent.type 'grid-select-element'}}
+            queryPaginate{{ toPascalCase getRelationshipModules }} = {},
+            constraintPaginate{{ toPascalCase getRelationshipModules }} = {},
+            {{/eq}}
             {{/each}}
         }: {
             {{#each schema.properties.withWebComponents}}
@@ -312,12 +316,19 @@ export class {{ toPascalCase schema.moduleName }}Service
             query{{ toPascalCase getRelationshipModules }}?: QueryStatement;
             constraint{{ toPascalCase getRelationshipModules }}?: QueryStatement;
             {{/eq}}
+            {{#eq webComponent.type 'grid-select-element'}}
+            queryPaginate{{ toPascalCase getRelationshipModules }}?: QueryStatement;
+            constraintPaginate{{ toPascalCase getRelationshipModules }}?: QueryStatement;
+            {{/eq}}
             {{/each}}
         } = {},
     ): Observable<{
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
         {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+        {{/eq}}
+        {{#eq webComponent.type 'grid-select-element'}}
+        {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModules }}: GridData<{{ getRelationshipAggregateName }}>;
         {{/eq}}
         {{/each}}
     }>
@@ -329,6 +340,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 {{#eq webComponent.type 'select'}}
                 {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
                 {{/eq}}
+                {{#eq webComponent.type 'grid-select-element'}}
+                {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModules }}: GridData<{{ getRelationshipAggregateName }}>;
+                {{/eq}}
                 {{/each}}
             }>({
                 query    : getRelations,
@@ -337,6 +351,10 @@ export class {{ toPascalCase schema.moduleName }}Service
                     {{#eq webComponent.type 'select'}}
                     query{{ toPascalCase getRelationshipModules }},
                     constraint{{ toPascalCase getRelationshipModules }},
+                    {{/eq}}
+                    {{#eq webComponent.type 'grid-select-element'}}
+                    queryPaginate{{ toPascalCase getRelationshipModules }},
+                    constraintPaginate{{ toPascalCase getRelationshipModules }},
                     {{/eq}}
                     {{/each}}
                 },
@@ -350,6 +368,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                     {{#each schema.properties.withWebComponents}}
                     {{#eq webComponent.type 'select'}}
                     this.{{ toCamelCase getRelationshipModule }}Service.{{ toCamelCase getRelationshipModules }}Subject$.next(data.{{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }});
+                    {{/eq}}
+                    {{#eq webComponent.type 'grid-select-element'}}
+                    this.{{ toCamelCase getRelationshipModule }}Service.paginationSubject$.next(data.{{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModules }});
                     {{/eq}}
                     {{/each}}
                 }),

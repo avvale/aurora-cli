@@ -18,7 +18,7 @@
     (object items='ViewChild' path='@angular/core')
 ~}}
 {{ push arrayImports
-    (object items=(array 'ColumnConfig' 'ColumnDataType' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectElementComponent' 'GridStateService' 'QueryStatementHandler') path='@aurora')
+    (object items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectElementComponent' 'GridStateService' 'QueryStatementHandler') path='@aurora')
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
@@ -290,6 +290,37 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                                     .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase getRelationshipModules }}GridId))
                                     .getQueryStatement(),
                         }),
+                );
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase getRelationshipModule }}':
+                const {{ toCamelCase getRelationshipModule }} = action.data.row as {{ getRelationshipAggregateName }};
+
+                this.fg.get('{{ toCamelCase getRelationshipModule }}Id').setValue({{ toCamelCase getRelationshipModule }}.id);
+                this.fg.get('{{ toCamelCase getRelationshipModule }}Name').setValue({{ toCamelCase getRelationshipModule }}.name);
+                this.fg.markAsDirty();
+
+                this.{{ toCamelCase getRelationshipModules }}Component.closeDialog();
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModules }}':
+                const {{ toCamelCase getRelationshipModule }}Rows = await lastValueFrom(
+                    this.{{ toCamelCase getRelationshipModule }}Service
+                        .get({
+                            query     : action.data.query,
+                            constraint: { /**/ },
+                        }),
+                );
+
+                const {{ toCamelCase getRelationshipModule }}Columns: string[] = {{ toCamelCase getRelationshipModule }}ColumnsConfig.map({{ toCamelCase getRelationshipModule }}ColumnConfig => {{ toCamelCase getRelationshipModule }}ColumnConfig.field);
+                const {{ toCamelCase getRelationshipModule }}Headers = {{ toCamelCase getRelationshipModule }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+
+                exportRows(
+                    {{ toCamelCase getRelationshipModule }}Rows.objects,
+                    'order{{ toPascalCase getRelationshipModules }}.' + action.data.format,
+                    {{ toCamelCase getRelationshipModule }}Columns,
+                    {{ toCamelCase getRelationshipModule }}Headers,
+                    action.data.format,
                 );
                 break;
                 /* #endregion actions to manage {{ toCamelCase property.getRelationshipModules }} grid-select-element */

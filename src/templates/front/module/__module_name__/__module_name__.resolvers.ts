@@ -90,6 +90,9 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
     {{/eq}}
+    {{#eq webComponent.type 'grid-select-element'}}
+    {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModules }}: GridData<{{ getRelationshipAggregateName }}>;
+    {{/eq}}
     {{/each}}
 }>
 {{/eq}}
@@ -98,6 +101,10 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
         private readonly actionService: ActionService,
         {{#unlessEq schema.properties.lengthWebComponents 0 }}
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        {{/unlessEq}}
+        {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly gridStateService: GridStateService,
         {{/unlessEq}}
     )
     {}
@@ -119,17 +126,35 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     {{#eq webComponent.type 'select'}}
         {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
     {{/eq}}
+    {{#eq webComponent.type 'grid-select-element'}}
+        {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModules }}: GridData<{{ getRelationshipAggregateName }}>;
+    {{/eq}}
     {{/each}}
     }>
 {{/eq}}
     {
+        {{#each schema.properties.withGridSelectElementWebComponents}}
+        // paginate to manage {{ toCamelCase getRelationshipModules }} grid-select-element
+        const {{ toCamelCase getRelationshipModules }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModule }}GridList';
+        this.gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModules }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModules }}Pagination');
+        this.gridStateService.setExportActionId({{ toCamelCase getRelationshipModules }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModules }}');
+
+        {{/each}}
         {{#eq schema.properties.lengthWebComponents 0 }}return {{/eq}}this.actionService.action({
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
             isViewAction: true,
         });
         {{#unlessEq schema.properties.lengthWebComponents 0 }}
 
-        return this.{{ toCamelCase schema.moduleName }}Service.getRelations();
+        return this.{{ toCamelCase schema.moduleName }}Service.getRelations({{#each schema.properties.withGridSelectElementWebComponents}}{
+            queryPaginate{{ toPascalCase getRelationshipModules }}: QueryStatementHandler
+                .init({ columnsConfig: {{ toCamelCase getRelationshipModule }}ColumnsConfig })
+                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModules }}GridId))
+                .setSort(this.gridStateService.getSort({{ toCamelCase getRelationshipModules }}GridId))
+                .setPage(this.gridStateService.getPage({{ toCamelCase getRelationshipModules }}GridId))
+                .setSearch(this.gridStateService.getSearchState({{ toCamelCase getRelationshipModules }}GridId))
+                .getQueryStatement(),
+        }{{/each}});
         {{/unlessEq}}
     }
 }
@@ -142,6 +167,9 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
     {{#each schema.properties.withWebComponents}}
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
+    {{/eq}}
+    {{#eq webComponent.type 'grid-select-element'}}
+    {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModules }}: GridData<{{ getRelationshipAggregateName }}>;
     {{/eq}}
     {{/each}}
 }>
