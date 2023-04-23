@@ -208,7 +208,7 @@ export class Property
         return null;
     }
 
-    get getRelationshipModule(): string | null
+    get getRelationshipModuleName(): string | null
     {
         try
         {
@@ -222,7 +222,7 @@ export class Property
         return null;
     }
 
-    get getRelationshipModules(): string | null
+    get getRelationshipModuleNames(): string | null
     {
         try
         {
@@ -255,6 +255,20 @@ export class Property
         try
         {
             if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).aggregateName;
+        }
+        catch
+        {
+            this.throwRelationshipEntityNorCreated();
+        }
+
+        return null;
+    }
+
+    get getRelationshipSchema(): ModuleDefinitionSchema | null
+    {
+        try
+        {
+            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath);
         }
         catch
         {
@@ -318,14 +332,14 @@ export class Property
     get getGraphqlCreateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                          return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModule?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModuleName?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlUpdateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                           return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModule?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModuleName?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 

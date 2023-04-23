@@ -55,6 +55,11 @@ export class Properties
         return this.properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT).length;
     }
 
+    get lengthGridElementsManagerWebComponents(): number
+    {
+        return this.properties.filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER).length;
+    }
+
     get withoutDeletedAt(): Property[]
     {
         return this.properties.filter(property => !this.deletedAtField.includes(property.name));
@@ -182,6 +187,12 @@ export class Properties
     {
         return this.properties
             .filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT);
+    }
+
+    get withGridElementsManagerWebComponents(): Property[]
+    {
+        return this.properties
+            .filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER);
     }
 
     /*************
