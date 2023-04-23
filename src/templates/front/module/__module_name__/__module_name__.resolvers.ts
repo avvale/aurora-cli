@@ -1,15 +1,40 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-import { Observable } from 'rxjs';
-import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
-import { {{ toCamelCase schema.moduleName }}ColumnsConfig } from './{{ toKebabCase schema.moduleName }}.columns-config';
-import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
+{{
+    setVar 'arrayImports' (
+        array
+            (object items='Injectable' path='@angular/core')
+            (object items=(array 'ActivatedRouteSnapshot' 'Resolve' 'RouterStateSnapshot') path='@angular/router')
+            (object items=(array 'Action' 'ActionService' 'GridData' 'GridFiltersStorageService' 'GridStateService' 'QueryStatementHandler') path='@aurora')
+            (object items='Observable' path='rxjs')
+            (object items=schema.aggregateName path=(sumStrings '../' toKebabCase schema.boundedContextName '.types'))
+            (object items=(sumStrings (toCamelCase schema.moduleName) 'ColumnsConfig') path=(sumStrings './' (toKebabCase schema.moduleName) '.columns-config'))
+            (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' (toKebabCase schema.moduleName) '.service'))
+    )
+~}}
 {{#each schema.properties.withWebComponents}}
-import { {{ getRelationshipAggregateName }} } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipBoundedContext }}.types';
-import { {{ toPascalCase getRelationshipModule }}Service } from '../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModule }}/{{ toKebabCase getRelationshipModule }}.service';
+{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{ push ../arrayImports
+    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContext) '.types'))
+    (object items=(sumStrings (toPascalCase getRelationshipModule) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.service'))
+~}}
+{{else}}
+{{ push ../arrayImports
+    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipBoundedContext) '.types'))
+    (object items=(sumStrings (toPascalCase getRelationshipModule) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.service'))
+~}}
+{{/eq}}
 {{/each}}
-
+{{#each schema.properties.withGridSelectElementWebComponents}}
+{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{ push ../arrayImports
+    (object items=(sumStrings (toCamelCase getRelationshipModule) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.columns-config'))
+~}}
+{{else}}
+{{ push ../arrayImports
+    (object items=(sumStrings (toCamelCase getRelationshipModule) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModule) '/' (toKebabCase getRelationshipModule) '.columns-config'))
+~}}
+{{/eq}}
+{{/each}}
+{{{ importManager (object imports=arrayImports) }}}
 @Injectable({
     providedIn: 'root',
 })
@@ -124,6 +149,10 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
     constructor(
         private readonly actionService: ActionService,
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+        {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly gridStateService: GridStateService,
+        {{/unlessEq}}
     )
     {}
 
@@ -142,9 +171,19 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
         {{#eq webComponent.type 'select'}}
         {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModules }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
+        {{#eq webComponent.type 'grid-select-element'}}
+        {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModules }}: GridData<{{ getRelationshipAggregateName }}>;
+        {{/eq}}
         {{/each}}
     }>
     {
+        {{#each schema.properties.withGridSelectElementWebComponents}}
+        // paginate to manage {{ toCamelCase getRelationshipModules }} grid-select-element
+        const {{ toCamelCase getRelationshipModules }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModule }}GridList';
+        this.gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModules }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModules }}Pagination');
+        this.gridStateService.setExportActionId({{ toCamelCase getRelationshipModules }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModules }}');
+
+        {{/each}}
         this.actionService.action({
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit',
             isViewAction: true,
@@ -157,6 +196,16 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
         {{else}}
         return this.{{ toCamelCase schema.moduleName }}Service.findByIdWithRelations({
             id: route.paramMap.get('id'),
+            {{#each schema.properties.withGridSelectElementWebComponents}}
+            queryPaginate{{ toPascalCase getRelationshipModules }}: QueryStatementHandler
+                .init({ columnsConfig: {{ toCamelCase getRelationshipModule }}ColumnsConfig })
+                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModules }}GridId))
+                .setSort(this.gridStateService.getSort({{ toCamelCase getRelationshipModules }}GridId))
+                .setPage(this.gridStateService.getPage({{ toCamelCase getRelationshipModules }}GridId))
+                .setSearch(this.gridStateService.getSearchState({{ toCamelCase getRelationshipModules }}GridId))
+                .getQueryStatement(),
+            constraintPaginate{{ toPascalCase getRelationshipModules }}: { /**/ },
+            {{/each}}
         });
         {{/eq}}
     }

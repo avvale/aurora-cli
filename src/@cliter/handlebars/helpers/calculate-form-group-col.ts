@@ -1,4 +1,4 @@
-import { Property, PropertyType } from '../..';
+import { Property, PropertyType, WebComponentType } from '../..';
 import * as handlebars from 'handlebars';
 
 handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
@@ -23,7 +23,7 @@ handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
             return 'col-4';
 
         case PropertyType.ID:
-            if (property.webComponent?.type === 'grid-select-element') return 'col-start-1 col-6';
+            if (property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT) return 'col-start-1 col-6';
             return `col-6`;
 
         case PropertyType.INT:
