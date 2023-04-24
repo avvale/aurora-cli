@@ -315,6 +315,35 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         this.managedObject = item;
                         this.fg.patchValue(item);
                     });
+                {{#each schema.properties.withGridElementsManagerWebComponents}}
+
+                /* #region init actions to manage {{ toCamelCase getRelationshipSchema.moduleNames }} grid-elements-manager */
+                this.{{ toCamelCase getRelationshipSchema.moduleNames }}ColumnsConfig$ = this.gridColumnsConfigStorageService
+                    .getColumnsConfig(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId, this.origin{{ toPascalCase getRelationshipSchema.moduleNames }}ColumnsConfig)
+                    .pipe(takeUntil(this.unsubscribeAll$));
+
+                this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridState = {
+                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId),
+                    page         : this.gridStateService.getPage(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId),
+                    sort         : this.gridStateService.getSort(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId),
+                    search       : this.gridStateService.getSearchState(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId),
+                };
+
+                this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridData$ = this.{{ toCamelCase getRelationshipSchema.moduleName }}Service.pagination$;
+
+                // subscription to get contacts in edit {{ toCamelCase getRelationshipSchema.moduleName }} action
+                this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
+                    .{{ toCamelCase getRelationshipSchema.moduleName }}$
+                    .pipe(takeUntil(this.unsubscribeAll$))
+                    .subscribe(({{ toCamelCase getRelationshipSchema.moduleName }}: {{ getRelationshipSchema.aggregateName }}) =>
+                    {
+                        if ({{ toCamelCase getRelationshipSchema.moduleName }} && this.currentAction.id === 'orion::truck.detail.editTruckDepot')
+                        {
+                            this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg.patchValue({{ toCamelCase getRelationshipSchema.moduleName }});
+                        }
+                    });
+                /* #endregion init actions to manage {{ toCamelCase getRelationshipSchema.moduleNames }} grid-elements-manager */
+                {{/each}}
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create':
