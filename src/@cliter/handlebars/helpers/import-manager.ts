@@ -2,7 +2,8 @@ import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
 import { ImportStatement } from '../../types';
 
-handlebars.registerHelper('importManager', function({
+handlebars.registerHelper('importManager', function(
+    {
         imports = [],
     }: {
         imports: ImportStatement[];

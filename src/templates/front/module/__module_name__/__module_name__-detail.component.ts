@@ -29,42 +29,42 @@
     (object items='FormGroup' path='@angular/forms')
 ~}}
 {{ push arrayImports
-    (object items=(array 'ColumnConfig' 'ColumnDataType' 'GridData' 'GridElementsManagerComponent' 'GridState') path='@aurora')
+    (object items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridElementsManagerComponent' 'GridFiltersStorageService' 'GridState' 'GridStateService' 'QueryStatementHandler') path='@aurora')
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
 {{#each schema.properties.withWebComponents}}
-{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../arrayImports
-    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContext) '.types'))
+    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipSchema.boundedContextName) '.types'))
     (object items=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.service'))
 ~}}
 {{else}}
 {{ push ../arrayImports
-    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipBoundedContext) '.types'))
-    (object items=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.service'))
+    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.boundedContextName) '.types'))
+    (object items=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each schema.properties.withGridSelectElementWebComponents}}
-{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../arrayImports
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{else}}
 {{ push ../arrayImports
-    (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
+    (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each schema.properties.withGridElementsManagerWebComponents}}
-{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../arrayImports
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{else}}
 {{ push ../arrayImports
-    (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
+    (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
@@ -174,11 +174,19 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         {{/unlessEq}}
+        {{#unlessEq schema.properties.lengthGridElementsManagerWebComponents 0 }}
+        private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly gridStateService: GridStateService,
+        {{/unlessEq}}
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
         private readonly {{ toCamelCase getRelationshipSchema.moduleName }}Service: {{ toPascalCase getRelationshipSchema.moduleName }}Service,
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
+        private readonly {{ toCamelCase getRelationshipSchema.moduleName }}Service: {{ toPascalCase getRelationshipSchema.moduleName }}Service,
+        {{/eq}}
+        {{#eq webComponent.type 'grid-elements-manager'}}
         private readonly {{ toCamelCase getRelationshipSchema.moduleName }}Service: {{ toPascalCase getRelationshipSchema.moduleName }}Service,
         {{/eq}}
         {{/each}}
@@ -191,9 +199,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // the parent class you can use instead of ngOnInit
     init(): void
     {
-        {{#eq schema.properties.lengthWebComponents 0 }}
         /**/
-        {{else}}
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
         this.{{ toCamelCase getRelationshipSchema.moduleNames }}$ = this.{{ toCamelCase getRelationshipSchema.moduleName }}Service.{{ toCamelCase getRelationshipSchema.moduleNames }}$;
@@ -206,7 +212,6 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridData$ = this.{{ toCamelCase getRelationshipSchema.moduleName }}Service.pagination$;
         {{/eq}}
         {{/each}}
-        {{/eq}}
     }
 
     onSubmit($event): void
@@ -296,6 +301,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -364,6 +370,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
             {{#each schema.properties.withGridSelectElementWebComponents}}
 
             /* #region actions to manage {{ toCamelCase property.getRelationshipSchema.moduleNames }} grid-select-element */
@@ -425,6 +432,158 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
                 break;
                 /* #endregion actions to manage {{ toCamelCase property.getRelationshipSchema.moduleNames }} grid-select-element */
+            {{/each}}
+            {{#each schema.properties.withGridElementsManagerWebComponents}}
+
+            /* #region actions to manage {{ toCamelCase getRelationshipSchema.moduleNames }} grid-elements-manager */
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipSchema.moduleNames }}Pagination':
+                await lastValueFrom(
+                    this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
+                        .pagination({
+                            query: action.data.query ?
+                                action.data.query :
+                                QueryStatementHandler
+                                    .init({ columnsConfig: {{ toCamelCase getRelationshipSchema.moduleName }}ColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId))
+                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId))
+                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId))
+                                    .getQueryStatement(),
+                            constraint: {
+                                where: {
+                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
+                                },
+                            },
+                        }),
+                );
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase getRelationshipSchema.moduleName }}':
+                this.create{{ toPascalCase getRelationshipSchema.moduleName }}DialogForm();
+                this.{{ toCamelCase getRelationshipSchema.moduleNames }}Component.handleElementDetailDialog(action.id);
+                this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg.get('id').setValue(Utils.uuid());
+                this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg.get('{{ getForeignKey (object relationship=relationship schema=../schema) }}').setValue(this.managedObject.id);
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase getRelationshipSchema.moduleName }}':
+                await lastValueFrom(
+                    this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
+                        .create<{{ getRelationshipSchema.aggregateName }}>({
+                            object: this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg.value,
+                        }),
+                );
+
+                this.actionService.action({
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipSchema.moduleNames }}Pagination',
+                    isViewAction: false,
+                });
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase getRelationshipSchema.moduleName }}':
+                this.create{{ toPascalCase getRelationshipSchema.moduleName }}DialogForm();
+                await lastValueFrom(
+                    this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
+                        .findById({
+                            id        : action.data.row.id,
+                            constraint: {
+                                where: {
+                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
+                                },
+                            },
+                        }),
+                );
+                this.{{ toCamelCase getRelationshipSchema.moduleNames }}Component.handleElementDetailDialog(action.id);
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase getRelationshipSchema.moduleName }}':
+                this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg.removeControl('{{ getForeignKey (object relationship=relationship schema=../schema) }}');
+
+                await lastValueFrom(
+                    this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
+                        .updateById<{{ getRelationshipSchema.aggregateName }}>({
+                            object: this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg.value,
+                        }),
+                );
+                this.actionService.action({
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipSchema.moduleNames }}Pagination',
+                    isViewAction: false,
+                });
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.delete{{ toPascalCase getRelationshipSchema.moduleName }}':
+                const delete{{ toPascalCase getRelationshipSchema.moduleName }}DialogRef = this.confirmationService.open({
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('orion.{{ toPascalCase getRelationshipSchema.moduleName }}')}`,
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('orion.{{ toPascalCase getRelationshipSchema.moduleName }}') }),
+                    icon   : {
+                        show : true,
+                        name : 'heroicons_outline:exclamation',
+                        color: 'warn',
+                    },
+                    actions: {
+                        confirm: {
+                            show : true,
+                            label: this.translocoService.translate('Remove'),
+                            color: 'warn',
+                        },
+                        cancel: {
+                            show : true,
+                            label: this.translocoService.translate('Cancel'),
+                        },
+                    },
+                    dismissible: true,
+                });
+
+                delete{{ toPascalCase getRelationshipSchema.moduleName }}DialogRef
+                    .afterClosed()
+                    .subscribe(async result =>
+                    {
+                        if (result === 'confirmed')
+                        {
+                            try
+                            {
+                                await lastValueFrom(
+                                    this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
+                                        .deleteById<{{ getRelationshipSchema.aggregateName }}>(action.data.row.id),
+                                );
+
+                                this.actionService.action({
+                                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipSchema.moduleNames }}Pagination',
+                                    isViewAction: false,
+                                });
+                            }
+                            catch(error)
+                            {
+                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                            }
+                        }
+                    });
+                break;
+
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipSchema.moduleName }}s':
+                const rows = await lastValueFrom(
+                    this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
+                        .get({
+                            query     : action.data.query,
+                            constraint: {
+                                where: {
+                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
+                                },
+                            },
+                        }),
+                );
+
+                const columns: string[] = {{ toCamelCase getRelationshipSchema.moduleName }}ColumnsConfig.map({{ toCamelCase getRelationshipSchema.moduleName }}ColumnConfig => {{ toCamelCase getRelationshipSchema.moduleName }}ColumnConfig.field);
+                const headers = columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+
+                exportRows(
+                    rows.objects,
+                    '{{ toCamelCase getRelationshipSchema.moduleNames }}.' + action.data.format,
+                    columns,
+                    headers,
+                    action.data.format,
+                );
+                break;
+                /* #endregion actions to manage {{ toCamelCase getRelationshipSchema.moduleNames }} grid-elements-manager */
             {{/each}}
         }
     }
