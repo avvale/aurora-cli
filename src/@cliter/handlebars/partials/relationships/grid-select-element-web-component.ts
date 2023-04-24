@@ -19,7 +19,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         [aria-label]="t('Search')"
         (click)="
             actionService.action({
-                id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.{{ toCamelCase property.getRelationshipModuleNames }}OpenDialog',
+                id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.{{ toCamelCase property.getRelationshipSchema.moduleNames }}OpenDialog',
                 isViewAction: false
             })
         "
@@ -29,12 +29,12 @@ handlebars.registerPartial('gridSelectElementWebComponent',
     <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
 </mat-form-field>
 <au-grid-select-element
-    [columnsConfig]="{{ toCamelCase property.getRelationshipModuleNames }}ColumnsConfig$ | async"
-    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.getRelationshipModuleName }}')"
-    [gridData]="{{ toCamelCase property.getRelationshipModuleNames }}GridData$ | async"
-    [id]="{{ toCamelCase property.getRelationshipModuleNames }}GridId"
-    [originColumnsConfig]="{{ toCamelCase property.getRelationshipModuleNames }}OriginColumnsConfig"
-    #{{ toCamelCase property.getRelationshipModuleName }}GridElementSelector
+    [columnsConfig]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}ColumnsConfig$ | async"
+    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.getRelationshipSchema.moduleName }}')"
+    [gridData]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridData$ | async"
+    [id]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridId"
+    [originColumnsConfig]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}OriginColumnsConfig"
+    #{{ toCamelCase property.getRelationshipSchema.moduleName }}GridElementSelector
 >
     <au-grid-translations
         [actions]="t('Actions')"

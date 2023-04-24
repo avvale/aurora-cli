@@ -46,6 +46,7 @@ import '../handlebars/partials/inputs/decimal-input';
 import '../handlebars/partials/inputs/text-input';
 import '../handlebars/partials/inputs/timestamp-input';
 import '../handlebars/partials/inputs/varchar-input';
+import '../handlebars/partials/relationships/grid-elements-manager-web-component';
 import '../handlebars/partials/relationships/grid-select-element-web-component';
 import '../handlebars/partials/relationships/select-web-component';
 import '../handlebars/partials/many-to-many-array-items';

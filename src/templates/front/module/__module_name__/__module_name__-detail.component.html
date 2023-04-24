@@ -132,6 +132,10 @@
                     {{> gridSelectElementWebComponent schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq webComponent.type 'grid-elements-manager'}}
+                    {{> gridElementsManagerWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
                     {{/each}}
 
                 </div>
