@@ -19,7 +19,7 @@ import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toP
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto
 {
 {{#each schema.properties.dtoProperties}}
-{{#if (isAllowProperty ../schema.moduleName this) }}
+{{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}

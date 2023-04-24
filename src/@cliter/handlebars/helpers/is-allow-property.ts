@@ -2,7 +2,15 @@ import { Property, RelationshipType } from '../..';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
 
-handlebars.registerHelper('isAllowProperty', function(moduleName: string, property: Property): boolean
+handlebars.registerHelper('isAllowProperty', function(
+    moduleName: string,
+    property: Property,
+    {
+        allowOneToManyRelationShip = false,
+    }: {
+        allowOneToManyRelationShip: boolean;
+    },
+): boolean
 {
     if (property.isI18n)
     {
@@ -14,7 +22,7 @@ handlebars.registerHelper('isAllowProperty', function(moduleName: string, proper
     }
 
     // avoid print property of relationship
-    if (property.isRelationship && property.relationship?.type === RelationshipType.ONE_TO_MANY) return false;
+    if (property.isRelationship && property.relationship?.type === RelationshipType.ONE_TO_MANY) return allowOneToManyRelationShip;
 
     return true;
 });
