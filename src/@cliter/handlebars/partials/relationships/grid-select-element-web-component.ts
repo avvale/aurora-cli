@@ -44,7 +44,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         [columns]="t('Columns')"
         [field]="t('Field')"
         [filter]="t('Filter')"
-        [for]="servicePointsGridId"
+        [for]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridId"
         [operator]="t('Operator')"
         [OR]="t('OR')"
         [pleaseSelectField]="t('PleaseSelectField')"
@@ -75,7 +75,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         }"
     >
         <au-grid-column-translation
-            *ngFor="let columnConfig of servicePointsOriginColumnsConfig"
+            *ngFor="let columnConfig of {{ toCamelCase property.getRelationshipSchema.moduleNames }}OriginColumnsConfig"
             [field]="columnConfig.field"
         >
             \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}

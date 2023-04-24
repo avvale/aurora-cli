@@ -13,9 +13,9 @@ export const fields = `
 export const relationsFields = `
     {{#each schema.properties.withWebComponents}}
     {{#eq webComponent.type 'select'}}
-    {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModuleNames }} (
-        query: $query{{ toPascalCase getRelationshipModuleNames }}
-        constraint: $constraint{{ toPascalCase getRelationshipModuleNames }}
+    {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipSchema.moduleNames }} (
+        query: $query{{ toPascalCase getRelationshipSchema.moduleNames }}
+        constraint: $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}
     ) {
         {{#each getRelationshipProperties.withoutTimestampsWithoutRelationship}}
         {{ name }}
@@ -23,9 +23,9 @@ export const relationsFields = `
     }
     {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
-    {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModuleNames }} (
-        query:$queryPaginate{{ toPascalCase getRelationshipModuleNames }}
-        constraint:$constraintPaginate{{ toPascalCase getRelationshipModuleNames }}
+    {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipSchema.moduleNames }} (
+        query:$queryPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}
+        constraint:$constraintPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}
     ) {
         total
         rows
@@ -66,25 +66,25 @@ export const getQuery = gql`
         }
     }
 `;
-{{#unlessEq schema.properties.lengthWebComponents 0 }}
+{{#and (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
 
 export const getRelations = gql`
     query {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Relations(
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
-        $query{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
-        $constraint{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
+        $query{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
+        $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
-        $queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
-        $constraintPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
+        $queryPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
+        $constraintPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
         {{/eq}}
         {{/each}}
     ) {
         ${relationsFields}
     }
 `;
-{{/unlessEq}}
+{{/and}}
 
 export const findByIdQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
@@ -108,12 +108,16 @@ export const findByIdWithRelationsQuery = gql`
         $constraint: QueryStatement
         {{#each schema.properties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
-        $query{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
-        $constraint{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
+        $query{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
+        $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
-        $queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
-        $constraintPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatement
+        $queryPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
+        $constraintPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
+        {{/eq}}
+        {{#eq webComponent.type 'grid-elements-manager'}}
+        $queryPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
+        $constraintPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
         {{/eq}}
         {{/each}}
     ) {
@@ -124,6 +128,16 @@ export const findByIdWithRelationsQuery = gql`
             id
             #FIELDS
         }
+        {{#each schema.properties.withGridElementsManagerWebComponents}}
+        {{ toCamelCase ../schema.boundedContextName }}Paginate{{ toPascalCase getRelationshipSchema.moduleNames }} (
+            query: $queryPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}
+            constraint: $constraintPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}
+        ) {
+            total
+            rows
+            count
+        }
+        {{/each}}
         ${relationsFields}
     }
 `;

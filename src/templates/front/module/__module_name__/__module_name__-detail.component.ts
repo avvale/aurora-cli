@@ -95,7 +95,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{#eq webComponent.type 'grid-select-element'}}
     /* #region  variables to manage grid-select-element {{ toCamelCase getRelationshipSchema.moduleName }} */
     @ViewChild('{{ toCamelCase getRelationshipSchema.moduleName }}GridElementSelector') {{ toCamelCase getRelationshipSchema.moduleNames }}Component: GridSelectElementComponent;
-    {{ toCamelCase getRelationshipSchema.moduleNames }}GridId: string = 'orion::order.detail.servicePointGridList';
+    {{ toCamelCase getRelationshipSchema.moduleNames }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipSchema.moduleNames }}GridList';
     {{ toCamelCase getRelationshipSchema.moduleNames }}GridData$: Observable<GridData<{{ getRelationshipAggregateName }}>>;
     {{ toCamelCase getRelationshipSchema.moduleNames }}ColumnsConfig$: Observable<ColumnConfig[]>;
     {{ toCamelCase getRelationshipSchema.moduleNames }}OriginColumnsConfig: ColumnConfig[] = [
@@ -337,7 +337,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(({{ toCamelCase getRelationshipSchema.moduleName }}: {{ getRelationshipSchema.aggregateName }}) =>
                     {
-                        if ({{ toCamelCase getRelationshipSchema.moduleName }} && this.currentAction.id === 'orion::truck.detail.editTruckDepot')
+                        if ({{ toCamelCase getRelationshipSchema.moduleName }} && this.currentAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit{{ toPascalCase getRelationshipSchema.moduleName }}')
                         {
                             this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg.patchValue({{ toCamelCase getRelationshipSchema.moduleName }});
                         }
@@ -541,8 +541,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.delete{{ toPascalCase getRelationshipSchema.moduleName }}':
                 const delete{{ toPascalCase getRelationshipSchema.moduleName }}DialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('orion.{{ toPascalCase getRelationshipSchema.moduleName }}')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('orion.{{ toPascalCase getRelationshipSchema.moduleName }}') }),
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase getRelationshipSchema.moduleName }}')}`,
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase getRelationshipSchema.moduleName }}') }),
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation',

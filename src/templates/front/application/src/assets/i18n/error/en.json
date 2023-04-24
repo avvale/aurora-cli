@@ -1,13 +1,3 @@
 {
-    "1001": "To close and send a transport to SAP, all stages must be either closed or cancelled. At least one delivery is not closed or cancelled.",
-    "1002": "To close and send a transport to SAP, all stages must be either closed or cancelled. At least one withdrawal is not closed or cancelled.",
-    "1003": "To cancel a transport, deliveries must not have been made.",
-    "1004": "A delivery cannot be communicated to HESA without having previously communicated a load order for the same product as the delivery.",
-    "1005": "A logistical withdrawal requires a loading order for the same product to be communicated to HESA. It should be done prior to a delivery of the same material.",
-    "1006": "You must have a delivery for the same service point in the transport where the logistic withdrawal is located, to communicate it to HESA.",
-    "1007": "A logistic withdrawal requires only one logistic withdrawal execution to be communicated to HESA.",
-    "1008": "Error when communicating with HESA.",
-    "1009": "A quality withdrawal requires only one quality withdrawal execution to be communicated to HESA.",
-    "1010": "To close the transport all deliveries and deliveries must be completed.",
-    "1011": "The service point hos not credit."
+    "1001": "..."
 }

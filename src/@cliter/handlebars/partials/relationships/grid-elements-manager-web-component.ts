@@ -23,7 +23,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
             type="button"
             (click)="
                 actionService.action({
-                    id          : 'orion::truck.detail.newTruckDepot',
+                    id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new{{ toPascalCase property.getRelationshipSchema.moduleName }}',
                     isViewAction: false
                 })
             "
@@ -37,13 +37,60 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         let-dialog
     >
         <form
-            id="truckDepotDetailDialogForm"
+            id="{{ toCamelCase property.getRelationshipSchema.moduleName }}DetailDialogForm"
             novalidate
-            [formGroup]="truckDepotDialogFg"
-            (ngSubmit)="handleSubmitTruckDepotForm($event, dialog)"
+            [formGroup]="{{ toCamelCase property.getRelationshipSchema.moduleName }}DialogFg"
+            (ngSubmit)="handleSubmit{{ toPascalCase property.getRelationshipSchema.moduleName }}Form($event, dialog)"
         >
             <div class="layout__container">
+                {{#each property.getRelationshipSchema.properties.formDetailFields}}
+                {{#if (isAllowProperty ../schema.moduleName this) }}
+                {{#eq type 'varchar'}}
+                {{> varcharInput schema=../schema property=.}}
 
+                {{/eq}}
+                {{#eq type 'text'}}
+                {{> textInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'char'}}
+                {{> charInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'tinyint.unsigned'}}
+                {{> intInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'smallint.unsigned'}}
+                {{> intInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'enum'}}
+                {{> enumInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'boolean'}}
+                {{> booleanInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'int.unsigned'}}
+                {{> intInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'decimal'}}
+                {{> intInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'date'}}
+                {{> dateInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{#eq type 'timestamp'}}
+                {{> timestampInput schema=../schema property=.}}
+
+                {{/eq}}
+                {{/if}}
+                {{/each}}
             </div>
         </form>
         <div class="flex justify-end">
@@ -64,9 +111,9 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
                 mat-flat-button
                 class="ml-3"
                 type="submit"
-                form="truckDepotDetailDialogForm"
+                form="{{ toCamelCase property.getRelationshipSchema.moduleName }}DetailDialogForm"
                 color="accent"
-                [disabled]="truckDepotDialogFg.pristine"
+                [disabled]="{{ toCamelCase property.getRelationshipSchema.moduleName }}DialogFg.pristine"
             >
                 <mat-icon
                     class="icon-size-5 mr-2"
@@ -85,7 +132,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         [columns]="t('Columns')"
         [field]="t('Field')"
         [filter]="t('Filter')"
-        [for]="truckDepotsGridId"
+        [for]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridId"
         [operator]="t('Operator')"
         [OR]="t('OR')"
         [pleaseSelectField]="t('PleaseSelectField')"
@@ -119,7 +166,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         }"
     >
         <au-grid-column-translation
-            *ngFor="let columnConfig of originTruckDepotsColumnsConfig"
+            *ngFor="let columnConfig of origin{{ toPascalCase property.getRelationshipSchema.moduleNames }}ColumnsConfig"
             [field]="columnConfig.field"
         >
             \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}

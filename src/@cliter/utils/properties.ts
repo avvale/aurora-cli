@@ -50,6 +50,11 @@ export class Properties
         return this.properties.filter(property => Boolean(property.webComponent?.type)).length;
     }
 
+    get lengthSelectElementWebComponents(): number
+    {
+        return this.properties.filter(property => property.webComponent?.type === WebComponentType.SELECT).length;
+    }
+
     get lengthGridSelectElementWebComponents(): number
     {
         return this.properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT).length;
