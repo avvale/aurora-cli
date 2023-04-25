@@ -66,7 +66,7 @@ export const getQuery = gql`
         }
     }
 `;
-{{#and (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
+{{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
 
 export const getRelations = gql`
     query {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Relations(
@@ -84,7 +84,7 @@ export const getRelations = gql`
         ${relationsFields}
     }
 `;
-{{/and}}
+{{/or}}
 
 export const findByIdQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (

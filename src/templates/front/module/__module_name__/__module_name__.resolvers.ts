@@ -110,9 +110,9 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
 {
     constructor(
         private readonly actionService: ActionService,
-        {{#unlessEq schema.properties.lengthWebComponents 0 }}
+        {{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
-        {{/unlessEq}}
+        {{/or}}
         {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
@@ -155,7 +155,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
             id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
             isViewAction: true,
         });
-        {{#and (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
+        {{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
 
         return this.{{ toCamelCase schema.moduleName }}Service.getRelations({{#each schema.properties.withGridSelectElementWebComponents}}{
             queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatementHandler
@@ -166,7 +166,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
                 .setSearch(this.gridStateService.getSearchState({{ toCamelCase getRelationshipModuleNames }}GridId))
                 .getQueryStatement(),
         }{{/each}});
-        {{/and}}
+        {{/or}}
     }
 }
 

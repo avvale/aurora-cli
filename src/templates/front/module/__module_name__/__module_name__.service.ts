@@ -14,11 +14,11 @@
     (object items=(array 'findByIdWithRelationsQuery') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
 {{/unlessEq}}
-{{#and (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
+{{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
 {{ push arrayImports
     (object items=(array 'getRelations') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
-{{/and}}
+{{/or}}
 {{#each schema.additionalApis}}
 {{ push ../arrayImports
     (object items=(sumStrings getVariableName (toPascalCase ../resolverType)) path=(sumStrings './' (toKebabCase ../schema.moduleName) '.graphql'))
@@ -323,8 +323,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 
-    {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
-    {{#unlessEq schema.properties.lengthSelectElementWebComponents 0 }}
+    {{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
     getRelations(
         {
             {{#each schema.properties.withWebComponents}}
@@ -404,8 +403,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 
-    {{/unlessEq}}
-    {{/unlessEq}}
+    {{/or}}
     create<T>(
         {
             graphqlStatement = createMutation,
