@@ -1,5 +1,5 @@
 {{
-    setVar 'arrayImports' (
+    setVar 'importsArray' (
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
             (object items='Validators' path='@angular/forms')
@@ -10,37 +10,37 @@
     )
 ~}}
 {{#unlessEq schema.properties.lengthWebComponents 0 }}
-{{ push arrayImports
+{{ push importsArray
     (object items='Observable' path='rxjs')
 ~}}
 {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
-{{ push arrayImports
+{{ push importsArray
     (object items='ViewChild' path='@angular/core')
 ~}}
-{{ push arrayImports
+{{ push importsArray
     (object items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectElementComponent' 'GridStateService' 'QueryStatementHandler') path='@aurora')
 ~}}
 {{/unlessEq}}
 {{#unlessEq schema.properties.lengthGridElementsManagerWebComponents 0 }}
-{{ push arrayImports
+{{ push importsArray
     (object items='ViewChild' path='@angular/core')
 ~}}
-{{ push arrayImports
+{{ push importsArray
     (object items='FormGroup' path='@angular/forms')
 ~}}
-{{ push arrayImports
+{{ push importsArray
     (object items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridElementsManagerComponent' 'GridFiltersStorageService' 'GridState' 'GridStateService' 'QueryStatementHandler') path='@aurora')
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
 {{#each schema.properties.withWebComponents}}
 {{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipSchema.boundedContextName) '.types'))
     (object items=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.service'))
 ~}}
 {{else}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.boundedContextName) '.types'))
     (object items=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.service'))
 ~}}
@@ -48,27 +48,27 @@
 {{/each}}
 {{#each schema.properties.withGridSelectElementWebComponents}}
 {{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{else}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each schema.properties.withGridElementsManagerWebComponents}}
 {{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{else}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipSchema.boundedContextName) '/' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
-{{{ importManager (object imports=arrayImports) }}}
+{{{ importManager (object imports=importsArray) }}}
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-detail',
     templateUrl    : './{{ toKebabCase schema.moduleName }}-detail.component.html',

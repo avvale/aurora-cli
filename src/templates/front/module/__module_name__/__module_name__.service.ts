@@ -1,5 +1,5 @@
 {{
-    setVar 'arrayImports' (
+    setVar 'importsArray' (
         array
             (object items='Injectable' path='@angular/core')
             (object items=(array 'DocumentNode' 'FetchResult') path='@apollo/client/core')
@@ -10,34 +10,34 @@
     )
 ~}}
 {{#unlessEq schema.properties.lengthWebComponents 0 }}
-{{ push arrayImports
+{{ push importsArray
     (object items=(array 'findByIdWithRelationsQuery') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
 {{/unlessEq}}
 {{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
-{{ push arrayImports
+{{ push importsArray
     (object items=(array 'getRelations') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
 {{/or}}
 {{#each schema.additionalApis}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings getVariableName (toPascalCase ../resolverType)) path=(sumStrings './' (toKebabCase ../schema.moduleName) '.graphql'))
 ~}}
 {{/each}}
 {{#each schema.properties.withWebComponents}}
 {{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContext) '.types'))
     (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{else}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipBoundedContext) '.types'))
     (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
-{{{ importManager (object imports=arrayImports) }}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable({
     providedIn: 'root',
 })

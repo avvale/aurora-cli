@@ -1,5 +1,5 @@
 {{
-    setVar 'arrayImports' (
+    setVar 'importsArray' (
         array
             (object items=(array 'ConflictException' 'Injectable') path='@nestjs/common')
             (object items='EventPublisher' path='@nestjs/cqrs')
@@ -10,19 +10,19 @@
 ~}}
 {{#each schema.properties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
 {{#if schema.properties.hasI18n}}
-{{ push arrayImports
+{{ push importsArray
     (object items='NotFoundException' path='@nestjs/common')
     (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18NRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
     (object items='* as _' path='lodash' defaultImport=true)
 ~}}
 {{/if}}
-{{{ importManager (object imports=arrayImports) }}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class Create{{ toPascalCase schema.moduleName }}Service
 {

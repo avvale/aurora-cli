@@ -1,5 +1,5 @@
 {{
-    setVar 'arrayImports' (
+    setVar 'importsArray' (
         array
             (object items='Injectable' path='@angular/core')
             (object items=(array 'ActivatedRouteSnapshot' 'Resolve' 'RouterStateSnapshot') path='@angular/router')
@@ -12,12 +12,12 @@
 ~}}
 {{#each schema.properties.withWebComponents}}
 {{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContext) '.types'))
     (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{else}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipBoundedContext) '.types'))
     (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
@@ -25,27 +25,27 @@
 {{/each}}
 {{#each schema.properties.withGridSelectElementWebComponents}}
 {{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
 ~}}
 {{else}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each schema.properties.withGridElementsManagerWebComponents}}
 {{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
 ~}}
 {{else}}
-{{ push ../arrayImports
+{{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
-{{{ importManager (object imports=arrayImports) }}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable({
     providedIn: 'root',
 })
