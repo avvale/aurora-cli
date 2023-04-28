@@ -81,8 +81,12 @@ jobs:
         with:
           name: tested-artifact
 
+      - uses: geekyeggo/delete-artifact@v2
+        with:
+          name: tested-artifact
+
       - name: Unzip artifact for deployment
-        run: unzip -o release.zip
+        run: unzip -o release.zip -d src
 
       - name: Delete zip artifact
         run: rm release.zip
@@ -94,18 +98,18 @@ jobs:
 
       - name: Create .htaccess file
         run: |
-          touch .htaccess
-          echo "$HTACCESS" > .htaccess
-          ls . -a
+          touch src/.htaccess
+          echo "$HTACCESS" > src/.htaccess
+          ls src -a
         shell: bash
 
       - name: Deploy Plesk with rsync
-        uses: AEnterprise/rsync-deploy@v1.0
-        env:
-          DEPLOY_KEY: $\{{ env.SERVER_SSH_PRIVATE_KEY }}
-          ARGS: '-avzh --delete --include=".htaccess" --exclude=".*"'
-          SERVER_PORT: $\{{ env.SERVER_PORT }}
-          FOLDER: "./"
-          SERVER_IP: $\{{ env.SERVER_IP }}
-          USERNAME: $\{{ env.SERVER_SSH_USERNAME }}
-          SERVER_DESTINATION: $\{{ env.SERVER_PATH }}
+        uses: burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avzh --delete --include=".htaccess" --exclude=".*"
+          path: src/
+          remote_path: ${{ env.SERVER_PATH }}
+          remote_host: ${{ env.SERVER_HOST }}
+          remote_port: ${{ env.SERVER_PORT }}
+          remote_user: ${{ env.SERVER_USERNAME }}
+          remote_key: ${{ env.SERVER_KEY }}
