@@ -108,8 +108,8 @@ jobs:
         with:
           switches: -avzh --delete --include=".htaccess" --exclude=".*"
           path: src/
-          remote_path: ${{ env.SERVER_PATH }}
-          remote_host: ${{ env.SERVER_HOST }}
-          remote_port: ${{ env.SERVER_PORT }}
-          remote_user: ${{ env.SERVER_USERNAME }}
-          remote_key: ${{ env.SERVER_KEY }}
+          remote_path: $\{{ env.SERVER_PATH }}
+          remote_host: $\{{ env.SERVER_HOST }}
+          remote_port: $\{{ env.SERVER_PORT }}
+          remote_user: $\{{ env.SERVER_USERNAME }}
+          remote_key: $\{{ env.SERVER_KEY }}
