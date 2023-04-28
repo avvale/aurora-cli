@@ -15,8 +15,8 @@ import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-cl
 import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';
 import { CreateUserCommand } from '@app/iam/user/application/create/create-user.command';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
-import { GetClientsQuery } from '@app/o-auth/client/application/get/get-clients.query';
-import { FindUserQuery } from '@app/iam/user/application/find/find-user.query';
+import { GetAccountsQuery } from '@app/iam/account/application/get/get-accounts.query';
+import { GetUsersQuery } from '@app/iam/user/application/get/get-users.query';
 
 @Injectable()
 export class IamCreateAccountHandler
@@ -36,13 +36,18 @@ export class IamCreateAccountHandler
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto>
     {
-        const clients = await this.queryBus.ask(new GetClientsQuery(
+        const clients = await this.queryBus.ask(new GetAccountsQuery(
             {
                 where: {
-                    [Operator.or]: {
-                        code : payload.code ? payload.code : undefined,
-                        email: payload.email,
-                    },
+                    [Operator.or]: payload.code ?
+                        {
+                            code : payload.code,
+                            email: payload.email,
+                        } :
+                        {
+                            email: payload.email,
+                        }
+                    ,
                 },
             },
         ));
@@ -66,11 +71,11 @@ export class IamCreateAccountHandler
             }
 
             throw new ConflictException({});
-        } 
+        }
 
         if (payload.type === IamAccountType.USER)
         {
-            const user = await this.queryBus.ask(new FindUserQuery(
+            const users = await this.queryBus.ask(new GetUsersQuery(
                 {
                     where: {
                         username: payload.user.username,
@@ -78,7 +83,7 @@ export class IamCreateAccountHandler
                 },
             ));
 
-            if (!user) throw new ConflictException({
+            if (users.length > 0) throw new ConflictException({
                 message   : `The username ${payload.user.username} already exists in the database`,
                 statusCode: 101,
             });
