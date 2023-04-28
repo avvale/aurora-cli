@@ -12,18 +12,18 @@ export const extractGraphqlMessageErrors = (graphqlErrors: GraphQLErrors): strin
             return extensions
                 .exception
                 .errors
-                .map(error => `[${error.statusCode}] ${error.message}`);
+                .map(error => `${error.message}`);
         }
 
-        if (extensions.response?.message)
+        if (extensions.originalError?.message)
         {
-            return `[${extensions.response.statusCode}] ${extensions.response.message}`;
+            return `${extensions.originalError.message}`;
         }
 
     }).join('<br>');
 };
 
-export const extractGraphqlStatusCodeErrors = (graphqlErrors: GraphQLErrors): string =>
+export const extractGraphqlStatusErrorCodes = (graphqlErrors: GraphQLErrors): string =>
 {
     return graphqlErrors.map((graphqlError: GraphQLError) =>
     {
@@ -37,9 +37,9 @@ export const extractGraphqlStatusCodeErrors = (graphqlErrors: GraphQLErrors): st
                 .map(error => error.statusCode);
         }
 
-        if (extensions.response?.statusCode)
+        if (extensions.originalError?.statusCode)
         {
-            return extensions.response.statusCode;
+            return extensions.originalError.statusCode;
         }
 
     }).join('-');

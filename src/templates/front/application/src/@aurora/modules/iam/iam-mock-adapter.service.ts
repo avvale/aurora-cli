@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { UserMetaStorageService } from '@aurora';
 import { Account } from './iam.types';
 import { IamService } from './iam.service';
 import { account } from './data';
@@ -16,9 +15,7 @@ export class IamMockAdapterService extends IamService
     /**
      * Constructor
      */
-    constructor(
-        private userMetaStorageService: UserMetaStorageService,
-    )
+    constructor()
     {
         super();
     }
@@ -59,7 +56,6 @@ export class IamMockAdapterService extends IamService
     get(): Observable<{ me: Account; }>
     {
         this.account = account;
-        this.userMetaStorageService.metaSubject$.next(this.me.user.meta);
         return of({ me: this.me });
     }
 

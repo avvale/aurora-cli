@@ -8,7 +8,7 @@ import { HttpLink } from 'apollo-angular/http/http-link';
 import { environment } from 'environments/environment';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { lastValueFrom } from 'rxjs';
-import { extractGraphqlMessageErrors, extractGraphqlStatusCodeErrors } from './graphql.functions';
+import { extractGraphqlMessageErrors, extractGraphqlStatusErrorCodes } from './graphql.functions';
 
 export const apolloFactory = (
     httpLink: HttpLink,
@@ -60,10 +60,11 @@ export const apolloFactory = (
                 return;
             }
 
-            const errorMessage = translocoService.translate('error.' + extractGraphqlStatusCodeErrors(graphQLErrors));
+            const errorCodes = extractGraphqlStatusErrorCodes(graphQLErrors);
+            const errorMessage = translocoService.translate('error.' + errorCodes);
             confirmationService.open({
-                title  : 'Error',
-                message: errorMessage === 'error.' + extractGraphqlStatusCodeErrors(graphQLErrors) ? extractGraphqlMessageErrors(graphQLErrors) : errorMessage,
+                title  : `Error [${errorCodes}]`,
+                message: errorMessage === 'error.' + errorCodes ? extractGraphqlMessageErrors(graphQLErrors) : errorMessage,
                 icon   : {
                     show : true,
                     name : 'error',

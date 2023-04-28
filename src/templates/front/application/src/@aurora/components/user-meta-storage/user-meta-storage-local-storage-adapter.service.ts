@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SessionService, UserMetaStorage } from '@aurora';
-import { BehaviorSubject, map, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { UserMetaStorageService } from './user-meta-storage.service';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
 {
     metaSubject$: BehaviorSubject<UserMetaStorage | null> = new BehaviorSubject(null);
     unsubscribeAll$: Subject<void> = new Subject();
-    nameStorage: 'userMeta';
+    nameStorage: string = 'userMeta';
 
     get meta$(): Observable<UserMetaStorage>
     {
@@ -22,12 +22,18 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
     )
     {
         super();
+        this.metaSubject$.next(this.getUserMetaFromStorage());
+    }
+
+    private getUserMetaFromStorage(): UserMetaStorage
+    {
+        const session = this.sessionService.getSession();
+        return session && session[this.nameStorage] ? session[this.nameStorage] : null;
     }
 
     getUserMeta(): Observable<UserMetaStorage>
     {
-        const session = this.sessionService.getSession();
-        return of(session[this.nameStorage]);
+        return of(this.getUserMetaFromStorage());
     }
 
     updateUserMeta(keyUserMeta: string, keyUserMetaValue: any): Observable<void>
@@ -47,10 +53,7 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
         this.sessionService.updateSession(this.nameStorage, currentUserMeta);
         this.metaSubject$.next(currentUserMeta);
 
-        return this.getUserMeta()
-            .pipe(
-                map(() => undefined),
-            );
+        return of(undefined);
     }
 
     saveUserMeta(userMeta: UserMetaStorage): Observable<void>
@@ -58,10 +61,7 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
         this.sessionService.updateSession(this.nameStorage, userMeta);
         this.metaSubject$.next(userMeta);
 
-        return this.getUserMeta()
-            .pipe(
-                map(() => undefined),
-            );
+        return of(undefined);
     }
 
     clearUserMeta(): Observable<void>
@@ -69,9 +69,6 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
         this.sessionService.updateSession(this.nameStorage, null);
         this.metaSubject$.next(null);
 
-        return this.getUserMeta()
-            .pipe(
-                map(() => undefined),
-            );
+        return of(undefined);
     }
 }

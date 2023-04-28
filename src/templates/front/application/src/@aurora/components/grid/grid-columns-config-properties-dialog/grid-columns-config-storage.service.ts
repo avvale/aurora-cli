@@ -37,7 +37,7 @@ export class GridColumnsConfigStorageService implements OnDestroy
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe(meta =>
             {
-                if (meta) this.columnsConfigStorageSubject$.next(meta[this.nameStorage]);
+                if (meta && meta[this.nameStorage]) this.columnsConfigStorageSubject$.next(meta[this.nameStorage]);
             });
     }
 

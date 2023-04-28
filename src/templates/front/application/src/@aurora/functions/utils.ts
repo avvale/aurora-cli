@@ -32,7 +32,7 @@ export class Utils
         return dayjs().format('YYYY-MM-DD');
     }
 
-    public static dateFromFormat(date: string, format: string): dayjs.Dayjs
+    public static dateFromFormat(date: string, format: string = 'YYYY-MM-DD H:mm:ss'): dayjs.Dayjs
     {
         return dayjs(date, format);
     }
@@ -126,6 +126,18 @@ export class Utils
 
     static async encrypt(message, algorithm: 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512' = 'SHA-256'): Promise<string>
     {
+        if (!crypto.subtle)
+        {
+            console.warn(`SubtleCrypto API not supported.
+You may be losing functionality in your application by not being able to create hashes with strings.
+To access the SubtleCrypto API, you need to run your application under the secure context of a web server (HTTPS).
+
+Go to https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto for more information.
+`);
+
+            return '';
+        }
+
         const msgUint8 = new TextEncoder().encode(message);
         // encode as (utf-8) Uint8Array
         const hashBuffer = await crypto.subtle.digest(algorithm, msgUint8);
