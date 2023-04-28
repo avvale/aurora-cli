@@ -7,6 +7,7 @@ import '../handlebars/helpers/is-allow-property';
 import '../handlebars/helpers/bracket-close';
 import '../handlebars/helpers/bracket-open';
 import '../handlebars/helpers/calculate-form-group-col';
+import '../handlebars/helpers/constructor-injector-manager';
 import '../handlebars/helpers/get-foreign-key';
 import '../handlebars/helpers/has-comma-in-validation-form-control';
 import '../handlebars/helpers/has-items';

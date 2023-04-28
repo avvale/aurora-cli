@@ -109,14 +109,24 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
 {{/and}}
 {
     constructor(
-        private readonly actionService: ActionService,
-        {{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
-        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
-        {{/or}}
-        {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        {{/unlessEq}}
+{{
+    setVar 'injectionsArray' (
+        array
+            (object variableName='actionService' className='ActionService')
+    )
+~}}
+{{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
+{{ push injectionsArray
+    (object variableName=(sumStrings (toCamelCase schema.moduleName) 'Service') className=(sumStrings (toPascalCase schema.moduleName) 'Service'))
+~}}
+{{/or ~}}
+{{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
+{{ push injectionsArray
+    (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+    (object variableName='gridStateService' className='GridStateService')
+~}}
+{{/unlessEq ~}}
+{{{ constructorInjectorManager (object injections=injectionsArray) }}}
     )
     {}
 
@@ -189,16 +199,26 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
 }>
 {
     constructor(
-        private readonly actionService: ActionService,
-        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
-        {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        {{/unlessEq}}
-        {{#unlessEq schema.properties.lengthGridElementsManagerWebComponents 0 }}
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        {{/unlessEq}}
+{{
+    setVar 'injectionsArray' (
+        array
+            (object variableName='actionService' className='ActionService')
+            (object variableName=(sumStrings (toCamelCase schema.moduleName) 'Service') className=(sumStrings (toPascalCase schema.moduleName) 'Service'))
+    )
+~}}
+{{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
+{{ push injectionsArray
+    (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+    (object variableName='gridStateService' className='GridStateService')
+~}}
+{{/unlessEq ~}}
+{{#unlessEq schema.properties.lengthGridElementsManagerWebComponents 0 }}
+{{ push injectionsArray
+    (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+    (object variableName='gridStateService' className='GridStateService')
+~}}
+{{/unlessEq ~}}
+{{{ constructorInjectorManager (object injections=injectionsArray) }}}
     )
     {}
 

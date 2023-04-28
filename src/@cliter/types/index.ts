@@ -34,6 +34,14 @@ export interface ImportStatement
     oneRowByItem?: boolean;
 }
 
+export interface InjectionStatement
+{
+    scope: 'private' | 'public' | 'protected';
+    readonly?: boolean;
+    variableName: string;
+    className: string;
+}
+
 export interface LiteralObject
 {
     [key: string]: any;

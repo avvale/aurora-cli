@@ -5,8 +5,10 @@ import { ImportStatement } from '../../types';
 handlebars.registerHelper('importManager', function(
     {
         imports = [],
+        sortImports = true,
     }: {
         imports: ImportStatement[];
+        sortImports?: boolean;
     },
     context,
 )
@@ -27,34 +29,29 @@ handlebars.registerHelper('importManager', function(
                     if (!importsItems.includes(item)) importsItems.push(item);
                 }
             }
-            else
-            {
-                if (!importsItems.includes(items)) importsItems.push(items);
-            }
+            else if (!importsItems.includes(items)) importsItems.push(items);
         }
 
-        importsItems.sort();
+        if (sortImports) importsItems.sort();
         masterImport.items = importsItems;
 
         if (masterImport.defaultImport)
         {
             response += `import ${importsItems[0]} from '${path}';\n`;
         }
+        else if (masterImport.oneRowByItem)
+        {
+            response += 'import {\n';
+            for (const item of importsItems)
+            {
+                response += `    ${item},\n`;
+            }
+
+            response += `} from '${path}';\n`;
+        }
         else
         {
-            if (masterImport.oneRowByItem)
-            {
-                response += `import {\n`;
-                for (const item of importsItems)
-                {
-                    response += `    ${item},\n`;
-                }
-                response += `} from '${path}';\n`;
-            }
-            else
-            {
-                response += `import { ${importsItems.join(', ')} } from '${path}';\n`;
-            }
+            response += `import { ${importsItems.join(', ')} } from '${path}';\n`;
         }
     }
 
