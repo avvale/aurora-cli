@@ -3,17 +3,18 @@ name: Testing, Build and Deploy Back on Plesk
 on:
   push:
     branches:
-      - 'master'
+      - 'environments/plesk-production'
 
 env:
   # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
   # don't forget set like bin/bash ftp user
-  SERVER_SSH_PRIVATE_KEY: $\{{ secrets.SERVER_SSH_PRIVATE_KEY }}
+  # SSH private key
+  SERVER_KEY: $\{{ secrets.SERVER_KEY }}
   # default port SFTP 22
   SERVER_PORT: $\{{ secrets.SERVER_PORT }}
-  SERVER_IP: $\{{ secrets.SERVER_IP }}
-  # SFTP username
-  SERVER_SSH_USERNAME: $\{{ secrets.SERVER_SSH_USERNAME }}
+  SERVER_HOST: $\{{ secrets.SERVER_HOST }}
+  # SFTP/SSH username
+  SERVER_USERNAME: $\{{ secrets.SERVER_USERNAME }}
   # example /var/www/vhosts/contoso.com/httpdocs
   SERVER_PATH: $\{{ secrets.SERVER_PATH }}
   HTACCESS: |
