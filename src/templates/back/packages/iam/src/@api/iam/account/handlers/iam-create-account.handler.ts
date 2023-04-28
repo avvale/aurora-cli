@@ -1,5 +1,5 @@
-import { Injectable, LiteralObject } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Utils } from '@aurora-ts/core';
+import { ConflictException, Injectable, LiteralObject, Logger } from '@nestjs/common';
+import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Operator, Utils } from '@aurora-ts/core';
 import { Sequelize } from 'sequelize-typescript';
 
 // @app
@@ -15,6 +15,8 @@ import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-cl
 import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';
 import { CreateUserCommand } from '@app/iam/user/application/create/create-user.command';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
+import { GetClientsQuery } from '@app/o-auth/client/application/get/get-clients.query';
+import { FindUserQuery } from '@app/iam/user/application/find/find-user.query';
 
 @Injectable()
 export class IamCreateAccountHandler
@@ -34,6 +36,55 @@ export class IamCreateAccountHandler
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto>
     {
+        const clients = await this.queryBus.ask(new GetClientsQuery(
+            {
+                where: {
+                    [Operator.or]: {
+                        code : payload.code ? payload.code : undefined,
+                        email: payload.email,
+                    },
+                },
+            },
+        ));
+
+        if (clients.length > 0)
+        {
+            if (clients.some(client => client.email === payload.email))
+            {
+                throw new ConflictException({
+                    message   : `The email ${payload.code} already exists`,
+                    statusCode: 102,
+                });
+            }
+
+            if (clients.some(client => client.code === payload.code))
+            {
+                throw new ConflictException({
+                    message   : `The code ${payload.code} already exists`,
+                    statusCode: 103,
+                });
+            }
+
+            throw new ConflictException({});
+        } 
+
+        if (payload.type === IamAccountType.USER)
+        {
+            const user = await this.queryBus.ask(new FindUserQuery(
+                {
+                    where: {
+                        username: payload.user.username,
+                    },
+                },
+            ));
+
+            if (!user) throw new ConflictException({
+                message   : `The username ${payload.user.username} already exists in the database`,
+                statusCode: 101,
+            });
+        }
+
+
         // get token from Headers
         const jwt = <Jwt>this.jwtService.decode(headers.authorization.replace('Bearer ', ''));
 
@@ -65,7 +116,10 @@ export class IamCreateAccountHandler
         }));
 
         const transaction = await this.sequelize.transaction({
-            // logging: console.log,  // Just for debugging purposes
+            logging: message => Logger.log(message, [
+                'IamCreateAccountHandler',
+                `IamAccount.id: ${payload.id}`,
+            ]),
         });
 
         try

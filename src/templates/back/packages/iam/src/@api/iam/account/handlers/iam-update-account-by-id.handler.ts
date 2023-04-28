@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
 import { Sequelize } from 'sequelize-typescript';
 
@@ -51,7 +51,10 @@ export class IamUpdateAccountByIdHandler
         }
 
         const transaction = await this.sequelize.transaction({
-            // logging: console.log,  // Just for debugging purposes
+            logging: message => Logger.log(message, [
+                'IamUpdateAccountByIdHandler',
+                `IamAccount.id: ${payload.id}`,
+            ]),
         });
 
         try
