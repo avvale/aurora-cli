@@ -46,5 +46,10 @@
     "Type": "Type",
     "User": "User",
     "Username": "Username",
-    "Users": "Users"
+    "Users": "Users",
+    "error": {
+        "101": "El nombre de usuario ya existe.",
+        "102": "El correo electrónico ya existe.",
+        "103": "El código ya existe."
+    }
 }
