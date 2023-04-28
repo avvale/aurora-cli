@@ -33,9 +33,9 @@ describe('DeleteHttpCommunicationsService', () =>
         })
             .compile();
 
-        service         = module.get(DeleteHttpCommunicationsService);
-        repository      = module.get(IHttpCommunicationRepository);
-        mockRepository  = module.get(MockHttpCommunicationRepository);
+        service = module.get(DeleteHttpCommunicationsService);
+        repository = module.get(IHttpCommunicationRepository);
+        mockRepository = module.get(MockHttpCommunicationRepository);
     });
 
     describe('main', () =>

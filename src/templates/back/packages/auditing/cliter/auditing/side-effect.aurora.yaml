@@ -110,6 +110,7 @@ aggregateProperties:
   - name: createdAt
     type: timestamp
     nullable: true
+    index: index
   - name: updatedAt
     type: timestamp
     nullable: true

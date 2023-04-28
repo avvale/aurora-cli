@@ -26,8 +26,8 @@ describe('UpdateSideEffectByIdCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<UpdateSideEffectByIdCommandHandler>(UpdateSideEffectByIdCommandHandler);
-        service         = module.get<UpdateSideEffectByIdService>(UpdateSideEffectByIdService);
+        commandHandler = module.get<UpdateSideEffectByIdCommandHandler>(UpdateSideEffectByIdCommandHandler);
+        service = module.get<UpdateSideEffectByIdService>(UpdateSideEffectByIdService);
     });
 
     describe('main', () =>

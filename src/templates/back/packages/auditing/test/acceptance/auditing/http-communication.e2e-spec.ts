@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
@@ -139,6 +140,22 @@ describe('http-communication', () =>
             });
     });
 
+    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationIsReprocessing property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/auditing/http-communication/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isReprocessing: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for HttpCommunicationIsReprocessing must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -203,6 +220,22 @@ describe('http-communication', () =>
             });
     });
 
+    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationIsReprocessing property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/auditing/http-communication/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isReprocessing: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for HttpCommunicationIsReprocessing must be defined, can not be undefined');
+            });
+    });
+
     test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
@@ -219,19 +252,19 @@ describe('http-communication', () =>
             });
     });
 
-    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationCode is too large, has a maximum length of 100', () =>
+    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationReprocessingHttpCommunicationId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
             .post('/auditing/http-communication/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '*****************************************************************************************************',
+                reprocessingHttpCommunicationId: '*************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationCode is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for HttpCommunicationReprocessingHttpCommunicationId is not allowed, must be a length of 36');
             });
     });
 
@@ -283,6 +316,21 @@ describe('http-communication', () =>
             });
     });
 
+    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationIsReprocessing has to be a boolean value', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/auditing/http-communication/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isReprocessing: 'true',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for HttpCommunicationIsReprocessing has to be a boolean value');
+            });
+    });
     test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationEvent has to be a enum option of REQUEST_FULFILLED, REQUEST_REJECTED, RESPONSE_FULFILLED, RESPONSE_REJECTED', () =>
     {
         return request(app.getHttpServer())
@@ -471,7 +519,7 @@ describe('http-communication', () =>
                         auditingCreateHttpCommunication (payload:$payload)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -480,6 +528,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                         }
                     }
                 `,
@@ -492,8 +542,8 @@ describe('http-communication', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -546,7 +596,7 @@ describe('http-communication', () =>
                         auditingGetHttpCommunications (query:$query)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -555,6 +605,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -584,7 +636,7 @@ describe('http-communication', () =>
                         auditingCreateHttpCommunication (payload:$payload)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -593,6 +645,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                         }
                     }
                 `,
@@ -622,7 +676,7 @@ describe('http-communication', () =>
                         auditingFindHttpCommunication (query:$query)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -631,6 +685,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -651,8 +707,8 @@ describe('http-communication', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -668,7 +724,7 @@ describe('http-communication', () =>
                         auditingFindHttpCommunication (query:$query)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -677,6 +733,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -712,7 +770,7 @@ describe('http-communication', () =>
                         auditingFindHttpCommunicationById (id:$id)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -721,6 +779,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -734,8 +794,8 @@ describe('http-communication', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -751,7 +811,7 @@ describe('http-communication', () =>
                         auditingFindHttpCommunicationById (id:$id)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -760,6 +820,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -788,7 +850,7 @@ describe('http-communication', () =>
                         auditingUpdateHttpCommunicationById (payload:$payload)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -797,6 +859,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -813,8 +877,8 @@ describe('http-communication', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -830,7 +894,7 @@ describe('http-communication', () =>
                         auditingUpdateHttpCommunicationById (payload:$payload)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -839,6 +903,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -870,7 +936,7 @@ describe('http-communication', () =>
                         auditingUpdateHttpCommunications (payload:$payload query:$query)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -879,6 +945,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -915,7 +983,7 @@ describe('http-communication', () =>
                         auditingDeleteHttpCommunicationById (id:$id)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -924,6 +992,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }
@@ -937,8 +1007,8 @@ describe('http-communication', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -954,7 +1024,7 @@ describe('http-communication', () =>
                         auditingDeleteHttpCommunicationById (id:$id)
                         {
                             id
-                            code
+                            tags
                             event
                             status
                             method
@@ -963,6 +1033,8 @@ describe('http-communication', () =>
                             httpRequestRejected
                             httpResponse
                             httpResponseRejected
+                            isReprocessing
+                            reprocessingHttpCommunicationId
                             createdAt
                             updatedAt
                         }

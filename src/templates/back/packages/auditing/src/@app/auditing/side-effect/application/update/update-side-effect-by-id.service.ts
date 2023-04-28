@@ -95,9 +95,12 @@ export class UpdateSideEffectByIdService
             null, // deletedAt
         );
 
-
         // update by id
-        await this.repository.updateById(sideEffect, { constraint, cQMetadata, updateByIdOptions: cQMetadata?.repositoryOptions });
+        await this.repository.updateById(sideEffect, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const sideEffectRegister = this.publisher.mergeObjectContext(

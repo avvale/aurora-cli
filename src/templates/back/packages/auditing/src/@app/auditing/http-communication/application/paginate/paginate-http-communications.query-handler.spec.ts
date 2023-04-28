@@ -35,10 +35,10 @@ describe('PaginateHttpCommunicationsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<PaginateHttpCommunicationsQueryHandler>(PaginateHttpCommunicationsQueryHandler);
-        service         = module.get<PaginateHttpCommunicationsService>(PaginateHttpCommunicationsService);
-        repository      = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
-        mapper          = new HttpCommunicationMapper();
+        queryHandler = module.get<PaginateHttpCommunicationsQueryHandler>(PaginateHttpCommunicationsQueryHandler);
+        service = module.get<PaginateHttpCommunicationsService>(PaginateHttpCommunicationsService);
+        repository = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
+        mapper = new HttpCommunicationMapper();
     });
 
     describe('main', () =>

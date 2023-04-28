@@ -32,9 +32,9 @@ describe('CreateSideEffectsService', () =>
         })
             .compile();
 
-        service         = module.get(CreateSideEffectsService);
-        repository      = module.get(ISideEffectRepository);
-        mockRepository  = module.get(MockSideEffectRepository);
+        service = module.get(CreateSideEffectsService);
+        repository = module.get(ISideEffectRepository);
+        mockRepository = module.get(MockSideEffectRepository);
     });
 
     describe('main', () =>

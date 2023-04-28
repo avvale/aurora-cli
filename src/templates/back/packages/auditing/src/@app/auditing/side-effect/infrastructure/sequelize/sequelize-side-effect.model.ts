@@ -24,6 +24,10 @@ import { DataTypes } from 'sequelize';
             fields: ['rollbackSideEffectId'],
             unique: false,
         },
+        {
+            fields: ['createdAt'],
+            unique: false,
+        },
     ],
 })
 export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>

@@ -25,8 +25,8 @@ describe('DeleteSideEffectsCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<DeleteSideEffectsCommandHandler>(DeleteSideEffectsCommandHandler);
-        service         = module.get<DeleteSideEffectsService>(DeleteSideEffectsService);
+        commandHandler = module.get<DeleteSideEffectsCommandHandler>(DeleteSideEffectsCommandHandler);
+        service = module.get<DeleteSideEffectsService>(DeleteSideEffectsService);
     });
 
     describe('main', () =>

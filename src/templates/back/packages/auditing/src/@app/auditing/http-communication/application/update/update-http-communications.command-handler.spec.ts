@@ -26,8 +26,8 @@ describe('UpdateHttpCommunicationsCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<UpdateHttpCommunicationsCommandHandler>(UpdateHttpCommunicationsCommandHandler);
-        service         = module.get<UpdateHttpCommunicationsService>(UpdateHttpCommunicationsService);
+        commandHandler = module.get<UpdateHttpCommunicationsCommandHandler>(UpdateHttpCommunicationsCommandHandler);
+        service = module.get<UpdateHttpCommunicationsService>(UpdateHttpCommunicationsService);
     });
 
     describe('main', () =>

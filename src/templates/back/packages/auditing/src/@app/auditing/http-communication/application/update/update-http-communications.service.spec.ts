@@ -51,9 +51,9 @@ describe('UpdateHttpCommunicationsService', () =>
         })
             .compile();
 
-        service         = module.get(UpdateHttpCommunicationsService);
-        repository      = module.get(IHttpCommunicationRepository);
-        mockRepository  = module.get(MockHttpCommunicationRepository);
+        service = module.get(UpdateHttpCommunicationsService);
+        repository = module.get(IHttpCommunicationRepository);
+        mockRepository = module.get(MockHttpCommunicationRepository);
     });
 
     describe('main', () =>

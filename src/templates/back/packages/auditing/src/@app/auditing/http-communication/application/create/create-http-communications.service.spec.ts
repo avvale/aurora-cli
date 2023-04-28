@@ -32,9 +32,9 @@ describe('CreateHttpCommunicationsService', () =>
         })
             .compile();
 
-        service         = module.get(CreateHttpCommunicationsService);
-        repository      = module.get(IHttpCommunicationRepository);
-        mockRepository  = module.get(MockHttpCommunicationRepository);
+        service = module.get(CreateHttpCommunicationsService);
+        repository = module.get(IHttpCommunicationRepository);
+        mockRepository = module.get(MockHttpCommunicationRepository);
     });
 
     describe('main', () =>

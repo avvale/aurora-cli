@@ -34,10 +34,10 @@ describe('GetHttpCommunicationsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<GetHttpCommunicationsQueryHandler>(GetHttpCommunicationsQueryHandler);
-        service         = module.get<GetHttpCommunicationsService>(GetHttpCommunicationsService);
-        repository      = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
-        mapper          = new HttpCommunicationMapper();
+        queryHandler = module.get<GetHttpCommunicationsQueryHandler>(GetHttpCommunicationsQueryHandler);
+        service = module.get<GetHttpCommunicationsService>(GetHttpCommunicationsService);
+        repository = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
+        mapper = new HttpCommunicationMapper();
     });
 
     describe('main', () =>

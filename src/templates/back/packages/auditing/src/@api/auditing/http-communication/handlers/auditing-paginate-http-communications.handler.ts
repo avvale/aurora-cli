@@ -21,7 +21,9 @@ export class AuditingPaginateHttpCommunicationsHandler
         return await this.queryBus.ask(new PaginateHttpCommunicationsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

@@ -26,8 +26,8 @@ describe('UpsertHttpCommunicationCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<UpsertHttpCommunicationCommandHandler>(UpsertHttpCommunicationCommandHandler);
-        service         = module.get<UpsertHttpCommunicationService>(UpsertHttpCommunicationService);
+        commandHandler = module.get<UpsertHttpCommunicationCommandHandler>(UpsertHttpCommunicationCommandHandler);
+        service = module.get<UpsertHttpCommunicationService>(UpsertHttpCommunicationService);
     });
 
     describe('main', () =>

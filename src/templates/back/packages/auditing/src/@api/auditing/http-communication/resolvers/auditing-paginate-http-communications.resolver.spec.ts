@@ -30,7 +30,7 @@ describe('AuditingPaginateHttpCommunicationsResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<AuditingPaginateHttpCommunicationsResolver>(AuditingPaginateHttpCommunicationsResolver);
+        resolver = module.get<AuditingPaginateHttpCommunicationsResolver>(AuditingPaginateHttpCommunicationsResolver);
         handler = module.get<AuditingPaginateHttpCommunicationsHandler>(AuditingPaginateHttpCommunicationsHandler);
     });
 

@@ -21,7 +21,13 @@ export class AuditingDeleteHttpCommunicationByIdHandler
         timezone?: string,
     ): Promise<AuditingHttpCommunication | AuditingHttpCommunicationDto>
     {
-        const httpCommunication = await this.queryBus.ask(new FindHttpCommunicationByIdQuery(id, constraint, { timezone }));
+        const httpCommunication = await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
         await this.commandBus.dispatch(new DeleteHttpCommunicationByIdCommand(
             id,

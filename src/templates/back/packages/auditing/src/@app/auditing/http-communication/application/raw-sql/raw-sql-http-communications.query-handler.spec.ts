@@ -34,10 +34,10 @@ describe('RawSQLHttpCommunicationsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<RawSQLHttpCommunicationsQueryHandler>(RawSQLHttpCommunicationsQueryHandler);
-        service         = module.get<RawSQLHttpCommunicationsService>(RawSQLHttpCommunicationsService);
-        repository      = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
-        mapper          = new HttpCommunicationMapper();
+        queryHandler = module.get<RawSQLHttpCommunicationsQueryHandler>(RawSQLHttpCommunicationsQueryHandler);
+        service = module.get<RawSQLHttpCommunicationsService>(RawSQLHttpCommunicationsService);
+        repository = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
+        mapper = new HttpCommunicationMapper();
     });
 
     describe('main', () =>

@@ -27,6 +27,12 @@ export class AuditingCreateSideEffectHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindSideEffectByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new FindSideEffectByIdQuery(
+            payload.id,
+            {},
+            {
+                timezone,
+            },
+        ));
     }
 }

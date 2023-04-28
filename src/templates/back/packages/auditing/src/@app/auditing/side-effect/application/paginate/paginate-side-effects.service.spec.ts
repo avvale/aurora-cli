@@ -31,9 +31,9 @@ describe('PaginateSideEffectsService', () =>
         })
             .compile();
 
-        service         = module.get(PaginateSideEffectsService);
-        repository      = module.get(ISideEffectRepository);
-        mockRepository  = module.get(MockSideEffectRepository);
+        service = module.get(PaginateSideEffectsService);
+        repository = module.get(ISideEffectRepository);
+        mockRepository = module.get(MockSideEffectRepository);
     });
 
     describe('main', () =>

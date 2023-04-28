@@ -30,7 +30,7 @@ describe('AuditingPaginateSideEffectsResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<AuditingPaginateSideEffectsResolver>(AuditingPaginateSideEffectsResolver);
+        resolver = module.get<AuditingPaginateSideEffectsResolver>(AuditingPaginateSideEffectsResolver);
         handler = module.get<AuditingPaginateSideEffectsHandler>(AuditingPaginateSideEffectsHandler);
     });
 

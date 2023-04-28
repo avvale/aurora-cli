@@ -21,7 +21,9 @@ export class AuditingPaginateSideEffectsHandler
         return await this.queryBus.ask(new PaginateSideEffectsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

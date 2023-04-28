@@ -33,9 +33,9 @@ describe('DeleteSideEffectsService', () =>
         })
             .compile();
 
-        service         = module.get(DeleteSideEffectsService);
-        repository      = module.get(ISideEffectRepository);
-        mockRepository  = module.get(MockSideEffectRepository);
+        service = module.get(DeleteSideEffectsService);
+        repository = module.get(ISideEffectRepository);
+        mockRepository = module.get(MockSideEffectRepository);
     });
 
     describe('main', () =>

@@ -15,6 +15,10 @@ export class GetSideEffectsQueryHandler implements IQueryHandler<GetSideEffectsQ
 
     async execute(query: GetSideEffectsQuery): Promise<SideEffectResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getSideEffectsService.main(query.queryStatement, query.constraint, query.cQMetadata));
+        return this.mapper.mapAggregatesToResponses(await this.getSideEffectsService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        ));
     }
 }

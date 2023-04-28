@@ -19,6 +19,12 @@ export class AuditingFindSideEffectHandler
         timezone?: string,
     ): Promise<AuditingSideEffect | AuditingSideEffectDto>
     {
-        return await this.queryBus.ask(new FindSideEffectQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new FindSideEffectQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

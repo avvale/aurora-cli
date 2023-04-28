@@ -16,6 +16,10 @@ import { DataTypes } from 'sequelize';
             fields: ['reprocessingHttpCommunicationId'],
             unique: false,
         },
+        {
+            fields: ['createdAt'],
+            unique: false,
+        },
     ],
 })
 export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicationModel>

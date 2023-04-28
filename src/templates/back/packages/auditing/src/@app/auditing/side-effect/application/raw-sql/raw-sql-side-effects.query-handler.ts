@@ -15,6 +15,9 @@ export class RawSQLSideEffectsQueryHandler implements IQueryHandler<RawSQLSideEf
 
     async execute(query: RawSQLSideEffectsQuery): Promise<SideEffectResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.rawSQLSideEffectsService.main(query.rawSQL, query.cQMetadata));
+        return this.mapper.mapAggregatesToResponses(await this.rawSQLSideEffectsService.main(
+            query.rawSQL,
+            query.cQMetadata,
+        ));
     }
 }

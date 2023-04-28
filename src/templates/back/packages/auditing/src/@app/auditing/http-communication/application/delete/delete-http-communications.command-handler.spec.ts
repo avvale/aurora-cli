@@ -25,8 +25,8 @@ describe('DeleteHttpCommunicationsCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<DeleteHttpCommunicationsCommandHandler>(DeleteHttpCommunicationsCommandHandler);
-        service         = module.get<DeleteHttpCommunicationsService>(DeleteHttpCommunicationsService);
+        commandHandler = module.get<DeleteHttpCommunicationsCommandHandler>(DeleteHttpCommunicationsCommandHandler);
+        service = module.get<DeleteHttpCommunicationsService>(DeleteHttpCommunicationsService);
     });
 
     describe('main', () =>

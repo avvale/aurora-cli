@@ -27,6 +27,12 @@ export class AuditingCreateHttpCommunicationHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
+            payload.id,
+            {},
+            {
+                timezone,
+            },
+        ));
     }
 }

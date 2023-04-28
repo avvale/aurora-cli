@@ -15,6 +15,9 @@ export class RawSQLHttpCommunicationsQueryHandler implements IQueryHandler<RawSQ
 
     async execute(query: RawSQLHttpCommunicationsQuery): Promise<HttpCommunicationResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.rawSQLHttpCommunicationsService.main(query.rawSQL, query.cQMetadata));
+        return this.mapper.mapAggregatesToResponses(await this.rawSQLHttpCommunicationsService.main(
+            query.rawSQL,
+            query.cQMetadata,
+        ));
     }
 }

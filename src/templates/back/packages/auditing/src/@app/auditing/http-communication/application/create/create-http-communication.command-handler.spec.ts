@@ -26,8 +26,8 @@ describe('CreateHttpCommunicationCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<CreateHttpCommunicationCommandHandler>(CreateHttpCommunicationCommandHandler);
-        service         = module.get<CreateHttpCommunicationService>(CreateHttpCommunicationService);
+        commandHandler = module.get<CreateHttpCommunicationCommandHandler>(CreateHttpCommunicationCommandHandler);
+        service = module.get<CreateHttpCommunicationService>(CreateHttpCommunicationService);
     });
 
     describe('main', () =>

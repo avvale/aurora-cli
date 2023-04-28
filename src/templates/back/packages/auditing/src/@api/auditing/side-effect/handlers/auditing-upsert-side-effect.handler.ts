@@ -30,7 +30,9 @@ export class AuditingUpsertSideEffectHandler
         return await this.queryBus.ask(new FindSideEffectByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

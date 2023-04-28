@@ -26,8 +26,8 @@ describe('UpsertSideEffectCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<UpsertSideEffectCommandHandler>(UpsertSideEffectCommandHandler);
-        service         = module.get<UpsertSideEffectService>(UpsertSideEffectService);
+        commandHandler = module.get<UpsertSideEffectCommandHandler>(UpsertSideEffectCommandHandler);
+        service = module.get<UpsertSideEffectService>(UpsertSideEffectService);
     });
 
     describe('main', () =>

@@ -31,9 +31,9 @@ describe('PaginateHttpCommunicationsService', () =>
         })
             .compile();
 
-        service         = module.get(PaginateHttpCommunicationsService);
-        repository      = module.get(IHttpCommunicationRepository);
-        mockRepository  = module.get(MockHttpCommunicationRepository);
+        service = module.get(PaginateHttpCommunicationsService);
+        repository = module.get(IHttpCommunicationRepository);
+        mockRepository = module.get(MockHttpCommunicationRepository);
     });
 
     describe('main', () =>

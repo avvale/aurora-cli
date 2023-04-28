@@ -34,10 +34,10 @@ describe('GetSideEffectsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<GetSideEffectsQueryHandler>(GetSideEffectsQueryHandler);
-        service         = module.get<GetSideEffectsService>(GetSideEffectsService);
-        repository      = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
-        mapper          = new SideEffectMapper();
+        queryHandler = module.get<GetSideEffectsQueryHandler>(GetSideEffectsQueryHandler);
+        service = module.get<GetSideEffectsService>(GetSideEffectsService);
+        repository = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
+        mapper = new SideEffectMapper();
     });
 
     describe('main', () =>

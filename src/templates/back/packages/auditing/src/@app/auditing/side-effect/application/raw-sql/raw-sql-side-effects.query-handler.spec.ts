@@ -34,10 +34,10 @@ describe('RawSQLSideEffectsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<RawSQLSideEffectsQueryHandler>(RawSQLSideEffectsQueryHandler);
-        service         = module.get<RawSQLSideEffectsService>(RawSQLSideEffectsService);
-        repository      = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
-        mapper          = new SideEffectMapper();
+        queryHandler = module.get<RawSQLSideEffectsQueryHandler>(RawSQLSideEffectsQueryHandler);
+        service = module.get<RawSQLSideEffectsService>(RawSQLSideEffectsService);
+        repository = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
+        mapper = new SideEffectMapper();
     });
 
     describe('main', () =>

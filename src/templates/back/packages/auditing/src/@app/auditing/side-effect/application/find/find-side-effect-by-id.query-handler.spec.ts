@@ -35,10 +35,10 @@ describe('FindSideEffectByIdQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<FindSideEffectByIdQueryHandler>(FindSideEffectByIdQueryHandler);
-        service         = module.get<FindSideEffectByIdService>(FindSideEffectByIdService);
-        repository      = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
-        mapper          = new SideEffectMapper();
+        queryHandler = module.get<FindSideEffectByIdQueryHandler>(FindSideEffectByIdQueryHandler);
+        service = module.get<FindSideEffectByIdService>(FindSideEffectByIdService);
+        repository = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
+        mapper = new SideEffectMapper();
     });
 
     describe('main', () =>

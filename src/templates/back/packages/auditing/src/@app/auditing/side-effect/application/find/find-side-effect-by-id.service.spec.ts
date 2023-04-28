@@ -33,9 +33,9 @@ describe('FindSideEffectByIdService', () =>
         })
             .compile();
 
-        service         = module.get(FindSideEffectByIdService);
-        repository      = module.get(ISideEffectRepository);
-        mockRepository  = module.get(MockSideEffectRepository);
+        service = module.get(FindSideEffectByIdService);
+        repository = module.get(ISideEffectRepository);
+        mockRepository = module.get(MockSideEffectRepository);
     });
 
     describe('main', () =>

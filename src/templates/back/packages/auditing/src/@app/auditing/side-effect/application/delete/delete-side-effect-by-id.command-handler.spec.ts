@@ -26,8 +26,8 @@ describe('DeleteSideEffectByIdCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<DeleteSideEffectByIdCommandHandler>(DeleteSideEffectByIdCommandHandler);
-        service         = module.get<DeleteSideEffectByIdService>(DeleteSideEffectByIdService);
+        commandHandler = module.get<DeleteSideEffectByIdCommandHandler>(DeleteSideEffectByIdCommandHandler);
+        service = module.get<DeleteSideEffectByIdService>(DeleteSideEffectByIdService);
     });
 
     describe('main', () =>

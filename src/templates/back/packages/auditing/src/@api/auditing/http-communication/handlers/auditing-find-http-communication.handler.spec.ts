@@ -37,9 +37,9 @@ describe('AuditingFindHttpCommunicationHandler', () =>
         })
             .compile();
 
-        handler    = module.get<AuditingFindHttpCommunicationHandler>(AuditingFindHttpCommunicationHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<AuditingFindHttpCommunicationHandler>(AuditingFindHttpCommunicationHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingFindHttpCommunicationHandler should be defined', () =>

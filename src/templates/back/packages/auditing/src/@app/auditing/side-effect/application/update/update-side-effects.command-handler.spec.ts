@@ -26,8 +26,8 @@ describe('UpdateSideEffectsCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<UpdateSideEffectsCommandHandler>(UpdateSideEffectsCommandHandler);
-        service         = module.get<UpdateSideEffectsService>(UpdateSideEffectsService);
+        commandHandler = module.get<UpdateSideEffectsCommandHandler>(UpdateSideEffectsCommandHandler);
+        service = module.get<UpdateSideEffectsService>(UpdateSideEffectsService);
     });
 
     describe('main', () =>

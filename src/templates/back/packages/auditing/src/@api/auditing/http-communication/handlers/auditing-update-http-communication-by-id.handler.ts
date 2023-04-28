@@ -24,7 +24,9 @@ export class AuditingUpdateHttpCommunicationByIdHandler
         const httpCommunication = await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, httpCommunication);
@@ -43,7 +45,9 @@ export class AuditingUpdateHttpCommunicationByIdHandler
         return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

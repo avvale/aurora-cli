@@ -37,9 +37,9 @@ describe('AuditingUpsertSideEffectHandler', () =>
         })
             .compile();
 
-        handler     = module.get<AuditingUpsertSideEffectHandler>(AuditingUpsertSideEffectHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<AuditingUpsertSideEffectHandler>(AuditingUpsertSideEffectHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>

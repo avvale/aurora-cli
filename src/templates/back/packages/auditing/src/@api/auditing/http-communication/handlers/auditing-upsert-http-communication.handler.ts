@@ -30,7 +30,9 @@ export class AuditingUpsertHttpCommunicationHandler
         return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

@@ -35,10 +35,10 @@ describe('FindHttpCommunicationByIdQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<FindHttpCommunicationByIdQueryHandler>(FindHttpCommunicationByIdQueryHandler);
-        service         = module.get<FindHttpCommunicationByIdService>(FindHttpCommunicationByIdService);
-        repository      = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
-        mapper          = new HttpCommunicationMapper();
+        queryHandler = module.get<FindHttpCommunicationByIdQueryHandler>(FindHttpCommunicationByIdQueryHandler);
+        service = module.get<FindHttpCommunicationByIdService>(FindHttpCommunicationByIdService);
+        repository = <MockHttpCommunicationRepository>module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
+        mapper = new HttpCommunicationMapper();
     });
 
     describe('main', () =>

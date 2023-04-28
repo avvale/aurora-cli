@@ -24,7 +24,9 @@ export class AuditingUpdateSideEffectByIdHandler
         const sideEffect = await this.queryBus.ask(new FindSideEffectByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, sideEffect);
@@ -43,7 +45,9 @@ export class AuditingUpdateSideEffectByIdHandler
         return await this.queryBus.ask(new FindSideEffectByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

@@ -35,10 +35,10 @@ describe('PaginateSideEffectsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler    = module.get<PaginateSideEffectsQueryHandler>(PaginateSideEffectsQueryHandler);
-        service         = module.get<PaginateSideEffectsService>(PaginateSideEffectsService);
-        repository      = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
-        mapper          = new SideEffectMapper();
+        queryHandler = module.get<PaginateSideEffectsQueryHandler>(PaginateSideEffectsQueryHandler);
+        service = module.get<PaginateSideEffectsService>(PaginateSideEffectsService);
+        repository = <MockSideEffectRepository>module.get<ISideEffectRepository>(ISideEffectRepository);
+        mapper = new SideEffectMapper();
     });
 
     describe('main', () =>

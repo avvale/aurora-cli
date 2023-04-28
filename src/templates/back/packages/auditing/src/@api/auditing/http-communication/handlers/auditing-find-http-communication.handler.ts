@@ -19,6 +19,12 @@ export class AuditingFindHttpCommunicationHandler
         timezone?: string,
     ): Promise<AuditingHttpCommunication | AuditingHttpCommunicationDto>
     {
-        return await this.queryBus.ask(new FindHttpCommunicationQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new FindHttpCommunicationQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

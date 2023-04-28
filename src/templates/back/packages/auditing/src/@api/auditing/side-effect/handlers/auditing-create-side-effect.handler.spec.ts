@@ -37,9 +37,9 @@ describe('AuditingCreateSideEffectHandler', () =>
         })
             .compile();
 
-        handler     = module.get<AuditingCreateSideEffectHandler>(AuditingCreateSideEffectHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<AuditingCreateSideEffectHandler>(AuditingCreateSideEffectHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>

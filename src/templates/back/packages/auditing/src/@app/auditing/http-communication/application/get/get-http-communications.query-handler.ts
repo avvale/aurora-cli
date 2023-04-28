@@ -15,6 +15,10 @@ export class GetHttpCommunicationsQueryHandler implements IQueryHandler<GetHttpC
 
     async execute(query: GetHttpCommunicationsQuery): Promise<HttpCommunicationResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getHttpCommunicationsService.main(query.queryStatement, query.constraint, query.cQMetadata));
+        return this.mapper.mapAggregatesToResponses(await this.getHttpCommunicationsService.main(
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        ));
     }
 }

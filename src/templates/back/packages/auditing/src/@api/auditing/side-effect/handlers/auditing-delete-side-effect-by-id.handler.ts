@@ -21,7 +21,13 @@ export class AuditingDeleteSideEffectByIdHandler
         timezone?: string,
     ): Promise<AuditingSideEffect | AuditingSideEffectDto>
     {
-        const sideEffect = await this.queryBus.ask(new FindSideEffectByIdQuery(id, constraint, { timezone }));
+        const sideEffect = await this.queryBus.ask(new FindSideEffectByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
         await this.commandBus.dispatch(new DeleteSideEffectByIdCommand(
             id,

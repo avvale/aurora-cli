@@ -38,9 +38,9 @@ describe('AuditingUpdateSideEffectsHandler', () =>
         })
             .compile();
 
-        handler     = module.get<AuditingUpdateSideEffectsHandler>(AuditingUpdateSideEffectsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<AuditingUpdateSideEffectsHandler>(AuditingUpdateSideEffectsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingUpdateSideEffectsHandler should be defined', () =>

@@ -31,6 +31,12 @@ export class AuditingUpdateHttpCommunicationsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetHttpCommunicationsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetHttpCommunicationsQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }
