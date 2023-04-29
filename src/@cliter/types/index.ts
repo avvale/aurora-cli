@@ -154,6 +154,12 @@ export enum ResolverType
     MUTATION = 'mutation',
 }
 
+export interface ReturnTypeStatement
+{
+    variableName: string;
+    className: string;
+}
+
 export enum Scope
 {
     BACK  = 'back',

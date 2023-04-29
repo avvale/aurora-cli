@@ -27,6 +27,7 @@ import '../handlebars/helpers/postman-quotes';
 import '../handlebars/helpers/push';
 import '../handlebars/helpers/random-decimal-digits';
 import '../handlebars/helpers/random-integer-digits';
+import '../handlebars/helpers/return-type-manager';
 import '../handlebars/helpers/set-var';
 import '../handlebars/helpers/string-to-camel-case';
 import '../handlebars/helpers/string-to-kebab-case';

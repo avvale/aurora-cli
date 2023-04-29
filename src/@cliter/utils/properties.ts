@@ -188,6 +188,12 @@ export class Properties
             .filter(property => Boolean(property.webComponent?.type));
     }
 
+    get withSelectWebComponents(): Property[]
+    {
+        return this.properties
+            .filter(property => property.webComponent?.type === WebComponentType.SELECT);
+    }
+
     get withGridSelectElementWebComponents(): Property[]
     {
         return this.properties

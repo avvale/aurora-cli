@@ -14,12 +14,21 @@
 {{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContext) '.types'))
-    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{else}}
 {{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipBoundedContext) '.types'))
-    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
+~}}
+{{/eq}}
+{{/each}}
+{{#each schema.properties.withSelectWebComponents}}
+{{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
+~}}
+{{else}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
@@ -27,10 +36,12 @@
 {{#eq (toKebabCase getRelationshipBoundedContext) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
+    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{else}}
 {{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
+    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContext) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
@@ -184,18 +195,30 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     providedIn: 'root',
 })
 export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve<{
-    object: {{ schema.aggregateName }};
-    {{#each schema.properties.withWebComponents}}
-    {{#eq webComponent.type 'select'}}
-    {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
-    {{/eq}}
-    {{#eq webComponent.type 'grid-select-element'}}
-    {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
-    {{/eq}}
-    {{#eq webComponent.type 'grid-elements-manager'}}
-    {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
-    {{/eq}}
-    {{/each}}
+{{
+    setVar 'returnTypesArray' (
+        array
+            (object variableName='object' className=schema.aggregateName)
+    )
+~}}
+{{#each schema.properties.withWebComponents}}
+{{#eq webComponent.type 'select'}}
+{{ push ../returnTypesArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContext) 'Get' (toPascalCase getRelationshipModuleNames)) className=(sumStrings getRelationshipAggregateName '[]'))
+~}}
+{{/eq ~}}
+{{#eq webComponent.type 'grid-select-element'}}
+{{ push ../returnTypesArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContext) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+~}}
+{{/eq ~}}
+{{#eq webComponent.type 'grid-elements-manager'}}
+{{ push ../returnTypesArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContext) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+~}}
+{{/eq ~}}
+{{/each ~}}
+{{{ returnTypeManager (object returnTypes=returnTypesArray) }}}
 }>
 {
     constructor(
@@ -232,18 +255,30 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<{
-        object: {{ schema.aggregateName }};
-        {{#each schema.properties.withWebComponents}}
-        {{#eq webComponent.type 'select'}}
-        {{ toCamelCase getRelationshipBoundedContext }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
-        {{/eq}}
-        {{#eq webComponent.type 'grid-select-element'}}
-        {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
-        {{/eq}}
-        {{#eq webComponent.type 'grid-elements-manager'}}
-        {{ toCamelCase getRelationshipBoundedContext }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
-        {{/eq}}
-        {{/each}}
+{{
+    setVar 'returnTypesArray' (
+        array
+            (object variableName='object' className=schema.aggregateName)
+    )
+~}}
+{{#each schema.properties.withWebComponents}}
+{{#eq webComponent.type 'select'}}
+{{ push ../returnTypesArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContext) 'Get' (toPascalCase getRelationshipModuleNames)) className=(sumStrings getRelationshipAggregateName '[]'))
+~}}
+{{/eq ~}}
+{{#eq webComponent.type 'grid-select-element'}}
+{{ push ../returnTypesArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContext) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+~}}
+{{/eq ~}}
+{{#eq webComponent.type 'grid-elements-manager'}}
+{{ push ../returnTypesArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContext) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+~}}
+{{/eq ~}}
+{{/each ~}}
+{{{ returnTypeManager (object returnTypes=returnTypesArray nTabulations=2) }}}
     }>
     {
         {{#each schema.properties.withGridSelectElementWebComponents}}

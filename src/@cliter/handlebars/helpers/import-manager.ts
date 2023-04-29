@@ -32,7 +32,19 @@ handlebars.registerHelper('importManager', function(
             else if (!importsItems.includes(items)) importsItems.push(items);
         }
 
-        if (sortImports) importsItems.sort();
+        if (sortImports)
+        {
+            // sort injections by variableName
+            importsItems.sort((a, b) =>
+            {
+                const nameA = a.toLowerCase();
+                const nameB = b.toLowerCase();
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+            });
+        }
+
         masterImport.items = importsItems;
 
         if (masterImport.defaultImport)

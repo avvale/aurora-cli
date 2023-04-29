@@ -5,15 +5,16 @@ handlebars.registerHelper('injectorManager', function(
     {
         injections = [],
         sortInjections = true,
-        tabulation = '\t\t',
+        nTabulations = 2,
     }: {
         injections: InjectionStatement[];
         sortInjections?: boolean;
-        tabulation?: string,
+        nTabulations?: number,
     },
     context,
 )
 {
+    const tabulation = '\t';
     const injectionsResponse: InjectionStatement[] = [];
 
     for (const injection of injections)
@@ -34,8 +35,8 @@ handlebars.registerHelper('injectorManager', function(
         // sort injections by variableName
         injectionsResponse.sort((a, b) =>
         {
-            const nameA = a.variableName;
-            const nameB = b.variableName;
+            const nameA = a.variableName.toLowerCase();
+            const nameB = b.variableName.toLowerCase();
             if (nameA < nameB) return -1;
             if (nameA > nameB) return 1;
             return 0;
@@ -45,7 +46,7 @@ handlebars.registerHelper('injectorManager', function(
     let response = '';
     for (const [i, injectionResponse] of injectionsResponse.entries())
     {
-        response += `${tabulation}${injectionResponse.scope} ${injectionResponse.readonly && 'readonly'} ${injectionResponse.variableName}: ${injectionResponse.className},`;
+        response += `${tabulation.repeat(nTabulations)}${injectionResponse.scope} ${injectionResponse.readonly && 'readonly'} ${injectionResponse.variableName}: ${injectionResponse.className},`;
         if (i !== injectionsResponse.length - 1) response += '\n';
     }
 
