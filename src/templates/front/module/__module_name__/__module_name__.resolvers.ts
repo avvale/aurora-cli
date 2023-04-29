@@ -126,7 +126,7 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
-{{{ constructorInjectorManager (object injections=injectionsArray) }}}
+{{{ injectorManager (object injections=injectionsArray) }}}
     )
     {}
 
@@ -218,7 +218,7 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
     (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
-{{{ constructorInjectorManager (object injections=injectionsArray) }}}
+{{{ injectorManager (object injections=injectionsArray) }}}
     )
     {}
 

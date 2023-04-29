@@ -167,29 +167,45 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
-        {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
-        private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        {{/unlessEq}}
-        {{#unlessEq schema.properties.lengthGridElementsManagerWebComponents 0 }}
-        private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        {{/unlessEq}}
-        {{#each schema.properties.withWebComponents}}
-        {{#eq webComponent.type 'select'}}
-        private readonly {{ toCamelCase getRelationshipSchema.moduleName }}Service: {{ toPascalCase getRelationshipSchema.moduleName }}Service,
-        {{/eq}}
-        {{#eq webComponent.type 'grid-select-element'}}
-        private readonly {{ toCamelCase getRelationshipSchema.moduleName }}Service: {{ toPascalCase getRelationshipSchema.moduleName }}Service,
-        {{/eq}}
-        {{#eq webComponent.type 'grid-elements-manager'}}
-        private readonly {{ toCamelCase getRelationshipSchema.moduleName }}Service: {{ toPascalCase getRelationshipSchema.moduleName }}Service,
-        {{/eq}}
-        {{/each}}
+{{
+    setVar 'injectionsArray' (
+        array
+            (object scope='protected' variableName='injector' className='Injector')
+            (object variableName=(sumStrings (toCamelCase schema.moduleName) 'Service') className=(sumStrings (toPascalCase schema.moduleName) 'Service'))
+    )
+~}}
+{{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
+{{ push injectionsArray
+    (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
+    (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+    (object variableName='gridStateService' className='GridStateService')
+~}}
+{{/unlessEq ~}}
+{{#unlessEq schema.properties.lengthGridElementsManagerWebComponents 0 }}
+{{ push injectionsArray
+    (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
+    (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+    (object variableName='gridStateService' className='GridStateService')
+~}}
+{{/unlessEq ~}}
+{{#each schema.properties.withWebComponents}}
+{{#eq webComponent.type 'select'}}
+{{ push ../injectionsArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'Service') className=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service'))
+~}}
+{{/eq ~}}
+{{#eq webComponent.type 'grid-select-element'}}
+{{ push ../injectionsArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'Service') className=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service'))
+~}}
+{{/eq ~}}
+{{#eq webComponent.type 'grid-elements-manager'}}
+{{ push ../injectionsArray
+    (object variableName=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'Service') className=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service'))
+~}}
+{{/eq ~}}
+{{/each ~}}
+{{{ injectorManager (object injections=injectionsArray) }}}
     )
     {
         super(injector);

@@ -1,7 +1,7 @@
 import * as handlebars from 'handlebars';
 import { InjectionStatement } from '../../types';
 
-handlebars.registerHelper('constructorInjectorManager', function(
+handlebars.registerHelper('injectorManager', function(
     {
         injections = [],
         sortInjections = true,
