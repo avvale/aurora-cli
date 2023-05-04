@@ -249,8 +249,8 @@ export const Prompter =
             message: 'The property name will be plural, type its singular (example: for cars type car)',
             type   : 'input',
             when   : (answers: any) =>
-                answers.relationship.type === RelationshipType.ONE_TO_MANY ||
-                answers.relationship.type === RelationshipType.MANY_TO_MANY,
+                answers.relationship?.type === RelationshipType.ONE_TO_MANY ||
+                answers.relationship?.type === RelationshipType.MANY_TO_MANY,
         });
 
         questions.push({
@@ -258,10 +258,10 @@ export const Prompter =
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
             when   : (answers: any) =>
-                answers.relationship.type === RelationshipType.ONE_TO_ONE ||
-                answers.relationship.type === RelationshipType.MANY_TO_ONE ||
-                answers.relationship.type === RelationshipType.ONE_TO_MANY ||
-                answers.relationship.type === RelationshipType.MANY_TO_MANY,
+                answers.relationship?.type === RelationshipType.ONE_TO_ONE ||
+                answers.relationship?.type === RelationshipType.MANY_TO_ONE ||
+                answers.relationship?.type === RelationshipType.ONE_TO_MANY ||
+                answers.relationship?.type === RelationshipType.MANY_TO_MANY,
         });
 
         questions.push({
@@ -271,7 +271,7 @@ export const Prompter =
             when   : (answers: any) =>
             {
                 if (
-                    answers.relationship.type === RelationshipType.ONE_TO_ONE &&
+                    answers.relationship?.type === RelationshipType.ONE_TO_ONE &&
                     answers.name.endsWith('Id')
                 )
                 {
@@ -280,12 +280,12 @@ export const Prompter =
                 }
 
                 // by default all many to many relationship will be nullable
-                if (answers.relationship.type === RelationshipType.MANY_TO_MANY) answers.nullable =  true;
+                if (answers.relationship?.type === RelationshipType.MANY_TO_MANY) answers.nullable =  true;
 
-                return  answers.relationship.type === RelationshipType.ONE_TO_ONE ||
-                        answers.relationship.type === RelationshipType.MANY_TO_ONE ||
-                        answers.relationship.type === RelationshipType.ONE_TO_MANY ||
-                        answers.relationship.type === RelationshipType.MANY_TO_MANY;
+                return  answers.relationship?.type === RelationshipType.ONE_TO_ONE ||
+                        answers.relationship?.type === RelationshipType.MANY_TO_ONE ||
+                        answers.relationship?.type === RelationshipType.ONE_TO_MANY ||
+                        answers.relationship?.type === RelationshipType.MANY_TO_MANY;
             },
         });
 
@@ -295,7 +295,7 @@ export const Prompter =
             type   : 'confirm',
             when   : (answers: any) =>
             {
-                return answers.relationship.type === RelationshipType.MANY_TO_MANY;
+                return answers.relationship?.type === RelationshipType.MANY_TO_MANY;
             },
         });
 
@@ -324,7 +324,7 @@ export const Prompter =
                     answers.relationship.pivot.fileName   = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
-                if (!answers.hasPivotTable && answers.relationship.type === RelationshipType.MANY_TO_MANY)
+                if (!answers.hasPivotTable && answers.relationship?.type === RelationshipType.MANY_TO_MANY)
                 {
                     const relationshipModulePath = getBoundedContextModuleFromFlag(generateCommandState.command, answers.relationship.modulePath);
                     answers.relationship.pivot.aggregate  = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
@@ -332,7 +332,7 @@ export const Prompter =
                     answers.relationship.pivot.fileName   = `${name.toKebabCase()}-${generateCommandState.schema.moduleNames.toKebabCase()}`;
                 }
 
-                if (answers.relationship.type) return false;
+                if (answers.relationship?.type) return false;
 
                 // eslint-disable-next-line unicorn/explicit-length-check
                 return Object.keys(cliterConfig.defaultTypeLength).includes(answers.type) && !answers.length;
@@ -345,14 +345,14 @@ export const Prompter =
             type   : 'confirm',
             when   : (answers: any) =>
             {
-                if (answers.relationship.type === RelationshipType.ONE_TO_MANY)
+                if (answers.relationship?.type === RelationshipType.ONE_TO_MANY)
                 {
                     // a field with relation one-to-many always will be nullable
                     answers.nullable = true;
                     return false;
                 }
 
-                if (answers.relationship.type === RelationshipType.MANY_TO_MANY)
+                if (answers.relationship?.type === RelationshipType.MANY_TO_MANY)
                 {
                     // answers.nullable = true;
                     return false;
@@ -381,20 +381,23 @@ export const Prompter =
             nullable     : response.nullable,
             defaultValue : response.defaultValue,
             // delete relationship with none value
-            relationship : response.relationship.type === RelationshipType.NONE ? undefined : {
-                type           : response.relationship.type,
-                singularName   : response.relationship.singularName,
-                aggregate      : response.relationship.aggregate,
-                modulePath     : response.relationship.modulePath,
-                key            : response.relationship.type === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
-                field          : response.relationship.type === RelationshipType.MANY_TO_ONE || (response.relationship.type === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
-                avoidConstraint: true,
-                pivot          : response.relationship.pivot?.aggregate ? {
-                    aggregate : response.relationship.pivot.aggregate,
-                    modulePath: response.relationship.pivot.modulePath,
-                    fileName  : response.relationship.pivot.fileName,
-                } : undefined,
-            },
+            relationship : response.relationship ?
+                (response.relationship.type === RelationshipType.NONE ?
+                    undefined :
+                    {
+                        type           : response.relationship.type,
+                        singularName   : response.relationship.singularName,
+                        aggregate      : response.relationship.aggregate,
+                        modulePath     : response.relationship.modulePath,
+                        key            : response.relationship.type === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
+                        field          : response.relationship.type === RelationshipType.MANY_TO_ONE || (response.relationship.type === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
+                        avoidConstraint: true,
+                        pivot          : response.relationship.pivot?.aggregate ? {
+                            aggregate : response.relationship.pivot.aggregate,
+                            modulePath: response.relationship.pivot.modulePath,
+                            fileName  : response.relationship.pivot.fileName,
+                        } : undefined,
+                    }) : undefined,
             index : response.index,
             schema: generateCommandState.schema,
         });
