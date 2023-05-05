@@ -347,7 +347,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
                 this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridData$ = this.{{ toCamelCase getRelationshipSchema.moduleName }}Service.pagination$;
 
-                // subscription to get contacts in edit {{ toCamelCase getRelationshipSchema.moduleName }} action
+                // subscription to get {{ toCamelCase getRelationshipSchema.moduleName }} in edit {{ toCamelCase ../schema.moduleName }} action
                 this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
                     .{{ toCamelCase getRelationshipSchema.moduleName }}$
                     .pipe(takeUntil(this.unsubscribeAll$))
