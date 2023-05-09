@@ -14,10 +14,27 @@ export class QueueManagerJobService
         queue: Queue,
         data: T,
         tags: string | string[],
-        jobName?: string,
+        jobName: string,
+        opts?: JobOptions,
+    ): Promise<Job<T>>;
+    async add<T>(
+        queue: Queue,
+        data: T,
+        tags: string | string[],
+        opts?: JobOptions,
+    ): Promise<Job<T>>;
+    async add<T>(
+        queue: Queue,
+        data: T,
+        tags: string | string[],
+        jobNameOrOpts?: string | JobOptions,
         opts?: JobOptions,
     ): Promise<Job<T>>
     {
+        // get job name and opts
+        const jobName: string = typeof jobNameOrOpts === 'string' ? jobNameOrOpts : undefined;
+        opts = typeof jobNameOrOpts === 'object' ? jobNameOrOpts : opts;
+
         // add job to queue
         const job: Job = await queue.add(
             jobName,
