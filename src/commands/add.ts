@@ -271,8 +271,25 @@ export class Add extends Command
                     ux.action.stop('Completed.');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    const appModuleClassDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(appModuleSourceFile, 'AppModule', 'Module');
                     Installer.declareBackPackageModule(appModuleSourceFile, 'queue-manager', ['QueueManagerModule']);
+
+                    // add ScheduleModule
+                    if (!ImportDriver.hasImportDeclarations(appModuleSourceFile, 'ScheduleModule'))
+                    {
+                        ImportDriver.createImportItems(
+                            appModuleSourceFile,
+                            '@nestjs/schedule',
+                            ['ScheduleModule'],
+                        );
+
+                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(appModuleClassDecoratorArguments, 'imports');
+                        importsArray.addElement('ScheduleModule.forRoot()', { useNewLines: true });
+                    }
+
                     appModuleSourceFile.saveSync();
 
                     ux.action.start('Generating graphql types');
