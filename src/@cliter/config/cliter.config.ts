@@ -320,6 +320,7 @@ export const cliterConfig: CliterConfig =
         'azureAd',
         'iam',
         'oAuth',
+        'queueManager',
     ],
     frontPackages: [
         'auditing',
@@ -327,5 +328,6 @@ export const cliterConfig: CliterConfig =
         'environments',
         'iam',
         'oAuth',
+        'queueManager',
     ],
 };

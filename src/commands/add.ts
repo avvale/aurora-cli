@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { Args, Command, Flags, ux } from '@oclif/core';
 import { ArrayLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
@@ -254,6 +255,25 @@ export class Add extends Command
                     }
 
                     authDecoratorSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed.');
+
+                    break;
+                }
+
+                case 'queueManager': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@nestjs/bull', 'bull']);
+                    ux.action.stop('Completed.');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'queue-manager', ['QueueManagerModule']);
+                    appModuleSourceFile.saveSync();
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
