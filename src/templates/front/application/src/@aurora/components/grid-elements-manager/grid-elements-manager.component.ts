@@ -31,6 +31,8 @@ export class GridElementsManagerComponent
     @Input('dialogMaxWidth') dialogMaxWidth: string = '2048px';
     @Input('dialogMinWidth') dialogMinWidth: string = '240px';
     @Input('dialogHeight') dialogHeight: string = 'auto';
+    @Input() hasSearch: boolean = true;
+    @Input() hasFilterButton: boolean = true;
 
     // outputs
     @Output() action = new EventEmitter<Action>();

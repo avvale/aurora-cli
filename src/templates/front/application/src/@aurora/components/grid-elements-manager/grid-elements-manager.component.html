@@ -16,6 +16,8 @@
                 [gridData]="gridData"
                 [gridState]="gridState"
                 [originColumnsConfig]="originColumnsConfig"
+                [hasSearch]="hasSearch"
+                [hasFilterButton]="hasFilterButton"
                 (action)="action.emit($event)"
                 (columnFiltersChange)="columnFiltersChange.emit($event)"
                 (columnsConfigChange)="columnsConfigChange.emit($event)"

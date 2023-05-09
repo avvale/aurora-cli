@@ -8,6 +8,7 @@ export interface Action
     beforeRunAction?: (action: Action) => void;
     afterRunAction?: (action: Action) => void;
     spinner?: BehaviorSubject<boolean> | (() => BehaviorSubject<boolean>);
+    noCache?: boolean;
     data?: {
         [key: string]: any;
     };

@@ -33,13 +33,13 @@ export class ActionService
         action = {
             id          : null,
             isViewAction: true,
-            data        : null,
+            data        : {},
             ...action,
         };
 
         this.setCache(action.id, action.data);
 
-        const cachedAction = { ...action, data: this.getCache(action.id) };
+        const cachedAction = action.noCache ? action : { ...action, data: this.getCache(action.id) };
 
         this._action.next(cachedAction);
 
