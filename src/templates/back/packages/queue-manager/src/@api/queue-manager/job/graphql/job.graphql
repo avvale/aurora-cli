@@ -1,0 +1,39 @@
+type QueueManagerJob
+{
+    id: Any!
+    name: GraphQLString!
+    data: JSON!
+    opts: JSON!
+    progress: GraphQLInt!
+    delay: GraphQLInt!
+    timestamp: GraphQLInt!
+    attemptsMade: GraphQLInt!
+    failedReason: GraphQLString
+    stacktrace: [GraphQLString]!
+    returnvalue: Any
+    finishedOn: GraphQLInt
+    processedOn: GraphQLInt!
+}
+
+type Query
+{
+    queueManagerFindJobById(
+        id: GraphQLString!
+        name: GraphQLString!
+    ): QueueManagerJob
+
+    queueManagerPaginateJobs(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    queueManagerDeleteJobById(
+        id: GraphQLString!
+        name: GraphQLString!
+    ): QueueManagerJob
+
+}

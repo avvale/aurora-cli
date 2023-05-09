@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - queue-manager/job",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - queueManagerCreateJob",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:QueueManagerCreateJobInput!)\n{\n\tqueueManagerCreateJob (payload:$payload)\n\t{\n\t\tid\n\t\tpriority\n\t\tdelay\n\t\tattempts\n\t\trepeat\n\t\tbackoff\n\t\tlifo\n\t\ttimeout\n\t\tjobId\n\t\tremoveOnComplete\n\t\tremoveOnFail\n\t\tstackTraceLimit\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"priority\": 97351, \n\t\t\"delay\": 544467482, \n\t\t\"attempts\": 2, \n\t\t\"repeat\": \"3mi0zvg8ix2bep14dlcm87zwcz9dberhmlab5pltbklfcoxnk\", \n\t\t\"backoff\": 3, \n\t\t\"lifo\": false, \n\t\t\"timeout\": 255668794, \n\t\t\"jobId\": 362290770, \n\t\t\"removeOnComplete\": false, \n\t\t\"removeOnFail\": true, \n\t\t\"stackTraceLimit\": 94454\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerCreateJobs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[QueueManagerCreateJobInput]!)\n{\n\tqueueManagerCreateJobs (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"709d0f28-a8f1-4420-aa1b-8fbb113fae45\", \n\t\t\t\"priority\": 55192, \n\t\t\t\"delay\": 743414497, \n\t\t\t\"attempts\": 2, \n\t\t\t\"repeat\": \"0dzc0eyztz34cwpz2dnx5460vdfvvznkyafuv79r87xy52hm5\", \n\t\t\t\"backoff\": 8, \n\t\t\t\"lifo\": false, \n\t\t\t\"timeout\": 167760318, \n\t\t\t\"jobId\": 372753355, \n\t\t\t\"removeOnComplete\": true, \n\t\t\t\"removeOnFail\": false, \n\t\t\t\"stackTraceLimit\": 42251\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"bb03e970-22ef-4ec4-9080-13a47517ef77\", \n\t\t\t\"priority\": 76972, \n\t\t\t\"delay\": 370275866, \n\t\t\t\"attempts\": 4, \n\t\t\t\"repeat\": \"x8qeiu1okuwne2sxebrng0uusoianoucd508r0zvruxn6eqer\", \n\t\t\t\"backoff\": 7, \n\t\t\t\"lifo\": true, \n\t\t\t\"timeout\": 951377147, \n\t\t\t\"jobId\": 189908113, \n\t\t\t\"removeOnComplete\": true, \n\t\t\t\"removeOnFail\": false, \n\t\t\t\"stackTraceLimit\": 57906\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a72ed0c0-6cb8-4b3c-acc8-a7052fca23cf\", \n\t\t\t\"priority\": 16277, \n\t\t\t\"delay\": 727153593, \n\t\t\t\"attempts\": 6, \n\t\t\t\"repeat\": \"ox8s9s9gm4pofnfj79yyr1a77sxuqeqgka2tpzhvi5zitiwoo\", \n\t\t\t\"backoff\": 9, \n\t\t\t\"lifo\": false, \n\t\t\t\"timeout\": 923932503, \n\t\t\t\"jobId\": 143313179, \n\t\t\t\"removeOnComplete\": false, \n\t\t\t\"removeOnFail\": false, \n\t\t\t\"stackTraceLimit\": 45507\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8b5f462e-8c49-4ff6-8aad-4647370dc601\", \n\t\t\t\"priority\": 18030, \n\t\t\t\"delay\": 519920529, \n\t\t\t\"attempts\": 3, \n\t\t\t\"repeat\": \"yu6am1bt5ijybakc2jrkp9r1e709qr8cylv1bzw04ez4i75xi\", \n\t\t\t\"backoff\": 5, \n\t\t\t\"lifo\": false, \n\t\t\t\"timeout\": 342710307, \n\t\t\t\"jobId\": 142177542, \n\t\t\t\"removeOnComplete\": true, \n\t\t\t\"removeOnFail\": true, \n\t\t\t\"stackTraceLimit\": 35291\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"61234d9a-b8a2-4dce-a6d0-84c1d2493cfc\", \n\t\t\t\"priority\": 82760, \n\t\t\t\"delay\": 397189066, \n\t\t\t\"attempts\": 2, \n\t\t\t\"repeat\": \"63yt1emlwbaf5cot0gux83nj2kqqyvl85pn5spwi9pkafh1iw\", \n\t\t\t\"backoff\": 4, \n\t\t\t\"lifo\": true, \n\t\t\t\"timeout\": 278498569, \n\t\t\t\"jobId\": 354740134, \n\t\t\t\"removeOnComplete\": true, \n\t\t\t\"removeOnFail\": true, \n\t\t\t\"stackTraceLimit\": 13185\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"10958186-5619-4202-92ef-ba6c357ea205\", \n\t\t\t\"priority\": 11544, \n\t\t\t\"delay\": 233825725, \n\t\t\t\"attempts\": 5, \n\t\t\t\"repeat\": \"uxr93fp8dky21uf1knx4vtfl7j6q6gdfvugntbxjfe1t1eiov\", \n\t\t\t\"backoff\": 4, \n\t\t\t\"lifo\": false, \n\t\t\t\"timeout\": 459159723, \n\t\t\t\"jobId\": 610783050, \n\t\t\t\"removeOnComplete\": false, \n\t\t\t\"removeOnFail\": false, \n\t\t\t\"stackTraceLimit\": 78912\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1edeff64-466a-4ebf-bd2e-0a868d3bdec9\", \n\t\t\t\"priority\": 32475, \n\t\t\t\"delay\": 458178717, \n\t\t\t\"attempts\": 6, \n\t\t\t\"repeat\": \"fg1656sdp7dcoy17uydnayyegyuxhu61dlq6s7gf7i9ek23y2\", \n\t\t\t\"backoff\": 4, \n\t\t\t\"lifo\": true, \n\t\t\t\"timeout\": 357675905, \n\t\t\t\"jobId\": 582746514, \n\t\t\t\"removeOnComplete\": false, \n\t\t\t\"removeOnFail\": false, \n\t\t\t\"stackTraceLimit\": 22044\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5bcb7108-2a00-43f0-85dc-557f2be936b6\", \n\t\t\t\"priority\": 84098, \n\t\t\t\"delay\": 782938179, \n\t\t\t\"attempts\": 1, \n\t\t\t\"repeat\": \"zl0tdcccgowcj9zwm7yiqrzyfvq2l56b3awg719vjrx4tcv9f\", \n\t\t\t\"backoff\": 6, \n\t\t\t\"lifo\": false, \n\t\t\t\"timeout\": 219877967, \n\t\t\t\"jobId\": 229474584, \n\t\t\t\"removeOnComplete\": false, \n\t\t\t\"removeOnFail\": false, \n\t\t\t\"stackTraceLimit\": 60836\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"43d6cef5-2b94-49c9-ba72-e0adc609e381\", \n\t\t\t\"priority\": 33275, \n\t\t\t\"delay\": 337750746, \n\t\t\t\"attempts\": 5, \n\t\t\t\"repeat\": \"kwd151rjto8ux736qki9lalvozye1hafrhgvh0tb0pi2a3mpd\", \n\t\t\t\"backoff\": 1, \n\t\t\t\"lifo\": false, \n\t\t\t\"timeout\": 154950040, \n\t\t\t\"jobId\": 726262837, \n\t\t\t\"removeOnComplete\": false, \n\t\t\t\"removeOnFail\": false, \n\t\t\t\"stackTraceLimit\": 12217\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d496be07-3c0a-4f41-aad6-097d21cccf97\", \n\t\t\t\"priority\": 78138, \n\t\t\t\"delay\": 662226129, \n\t\t\t\"attempts\": 3, \n\t\t\t\"repeat\": \"lw3mvntl3qddm87f2djge3cckvl3dguflx13c2o6fyjbua39h\", \n\t\t\t\"backoff\": 5, \n\t\t\t\"lifo\": true, \n\t\t\t\"timeout\": 879940899, \n\t\t\t\"jobId\": 649002566, \n\t\t\t\"removeOnComplete\": true, \n\t\t\t\"removeOnFail\": true, \n\t\t\t\"stackTraceLimit\": 91443\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerPaginateJobs",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tqueueManagerPaginateJobs (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerGetJobs",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerGetJobs (query: $query)\n\t{\n\t\tid\n\t\tpriority\n\t\tdelay\n\t\tattempts\n\t\trepeat\n\t\tbackoff\n\t\tlifo\n\t\ttimeout\n\t\tjobId\n\t\tremoveOnComplete\n\t\tremoveOnFail\n\t\tstackTraceLimit\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerFindJob",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerFindJob (query: $query)\n\t{\n\t\tid\n\t\tpriority\n\t\tdelay\n\t\tattempts\n\t\trepeat\n\t\tbackoff\n\t\tlifo\n\t\ttimeout\n\t\tjobId\n\t\tremoveOnComplete\n\t\tremoveOnFail\n\t\tstackTraceLimit\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerFindJobById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tqueueManagerFindJobById (id:$id)\n\t{\n\t\tid\n\t\tpriority\n\t\tdelay\n\t\tattempts\n\t\trepeat\n\t\tbackoff\n\t\tlifo\n\t\ttimeout\n\t\tjobId\n\t\tremoveOnComplete\n\t\tremoveOnFail\n\t\tstackTraceLimit\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerUpdateJob",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:QueueManagerUpdateJobInput!)\n{\n\tqueueManagerUpdateJob (payload:$payload)\n\t{\n\t\tid\n\t\tpriority\n\t\tdelay\n\t\tattempts\n\t\trepeat\n\t\tbackoff\n\t\tlifo\n\t\ttimeout\n\t\tjobId\n\t\tremoveOnComplete\n\t\tremoveOnFail\n\t\tstackTraceLimit\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"priority\": 61522, \n\t\t\"delay\": 297431537, \n\t\t\"attempts\": 5, \n\t\t\"repeat\": \"r21s9vusg9r8mo4rmhthhgnkhcumb2p5x2nusqw7gthf5t3lz\", \n\t\t\"backoff\": 7, \n\t\t\"lifo\": false, \n\t\t\"timeout\": 481292177, \n\t\t\"jobId\": 250843245, \n\t\t\"removeOnComplete\": true, \n\t\t\"removeOnFail\": true, \n\t\t\"stackTraceLimit\": 70607\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerDeleteJobById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tqueueManagerDeleteJobById (id:$id)\n\t{\n\t\tid\n\t\tpriority\n\t\tdelay\n\t\tattempts\n\t\trepeat\n\t\tbackoff\n\t\tlifo\n\t\ttimeout\n\t\tjobId\n\t\tremoveOnComplete\n\t\tremoveOnFail\n\t\tstackTraceLimit\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerDeleteJobs",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tqueueManagerDeleteJobs (query: $query)\n\t{\n\t\tid\n\t\tpriority\n\t\tdelay\n\t\tattempts\n\t\trepeat\n\t\tbackoff\n\t\tlifo\n\t\ttimeout\n\t\tjobId\n\t\tremoveOnComplete\n\t\tremoveOnFail\n\t\tstackTraceLimit\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/job/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"priority\": 57538, \n\t\"delay\": 505731357, \n\t\"attempts\": 8, \n\t\"repeat\": \"jtg90e2is9uz4xo2x2h2xxt4u8stc1c0n08iiw3kqqd5tydym\", \n\t\"backoff\": 8, \n\t\"lifo\": true, \n\t\"timeout\": 654479079, \n\t\"jobId\": 495057978, \n\t\"removeOnComplete\": true, \n\t\"removeOnFail\": true, \n\t\"stackTraceLimit\": 76412\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/job/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"job",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/jobs/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"00bec406-5096-4e0f-8ac0-ca1526a2eb7d\", \n\t\t\"priority\": 14052, \n\t\t\"delay\": 947153967, \n\t\t\"attempts\": 5, \n\t\t\"repeat\": \"skgolsm7vnpz3s0y1gqm9t4subg7mo4w094nmiz5og3tle99i\", \n\t\t\"backoff\": 3, \n\t\t\"lifo\": true, \n\t\t\"timeout\": 435160409, \n\t\t\"jobId\": 388818043, \n\t\t\"removeOnComplete\": true, \n\t\t\"removeOnFail\": false, \n\t\t\"stackTraceLimit\": 29058\n\t}, \n\t{\n\t\t\"id\": \"ab01dc51-132b-4c5f-8768-5f01909c9a9b\", \n\t\t\"priority\": 39097, \n\t\t\"delay\": 792980738, \n\t\t\"attempts\": 2, \n\t\t\"repeat\": \"blovnuwtbij6mz9mmzl8evkkk3b8zzie3e74pz40p5l79g74d\", \n\t\t\"backoff\": 5, \n\t\t\"lifo\": true, \n\t\t\"timeout\": 592584804, \n\t\t\"jobId\": 855071971, \n\t\t\"removeOnComplete\": false, \n\t\t\"removeOnFail\": false, \n\t\t\"stackTraceLimit\": 40378\n\t}, \n\t{\n\t\t\"id\": \"f2d807eb-1b77-4034-954b-b60b5e884494\", \n\t\t\"priority\": 20043, \n\t\t\"delay\": 808600945, \n\t\t\"attempts\": 8, \n\t\t\"repeat\": \"j7rca2k09jbtskhzsvqt51pa9pcjj4ipquefjza3tfp0m06cu\", \n\t\t\"backoff\": 5, \n\t\t\"lifo\": true, \n\t\t\"timeout\": 923423504, \n\t\t\"jobId\": 432665453, \n\t\t\"removeOnComplete\": true, \n\t\t\"removeOnFail\": true, \n\t\t\"stackTraceLimit\": 79945\n\t}, \n\t{\n\t\t\"id\": \"2f9ce72e-c820-44ae-90fc-d99a4197c762\", \n\t\t\"priority\": 38862, \n\t\t\"delay\": 818994165, \n\t\t\"attempts\": 7, \n\t\t\"repeat\": \"5rqu4gtfxt2kt0yih4vgstavzta9djwynhpofsaspo21l2i1a\", \n\t\t\"backoff\": 2, \n\t\t\"lifo\": false, \n\t\t\"timeout\": 960188878, \n\t\t\"jobId\": 678088290, \n\t\t\"removeOnComplete\": false, \n\t\t\"removeOnFail\": false, \n\t\t\"stackTraceLimit\": 70528\n\t}, \n\t{\n\t\t\"id\": \"44647023-0987-4d41-a2f8-91e469489106\", \n\t\t\"priority\": 11013, \n\t\t\"delay\": 441979161, \n\t\t\"attempts\": 7, \n\t\t\"repeat\": \"8cu9gr0y56wv57gziiv0tt0vw6wn7kad0yud635zb22rpf7hn\", \n\t\t\"backoff\": 8, \n\t\t\"lifo\": false, \n\t\t\"timeout\": 685264944, \n\t\t\"jobId\": 243142226, \n\t\t\"removeOnComplete\": false, \n\t\t\"removeOnFail\": true, \n\t\t\"stackTraceLimit\": 92495\n\t}, \n\t{\n\t\t\"id\": \"7734389d-3b3e-4d5a-8a14-c52e1018d9e2\", \n\t\t\"priority\": 60923, \n\t\t\"delay\": 750739501, \n\t\t\"attempts\": 6, \n\t\t\"repeat\": \"0pbyxbr6wyy3a422w6mfnrdd4hmrl2ptpp2wbzyrbye4335fu\", \n\t\t\"backoff\": 8, \n\t\t\"lifo\": false, \n\t\t\"timeout\": 799080187, \n\t\t\"jobId\": 525407838, \n\t\t\"removeOnComplete\": false, \n\t\t\"removeOnFail\": false, \n\t\t\"stackTraceLimit\": 83464\n\t}, \n\t{\n\t\t\"id\": \"5017ff0b-9e00-4f3e-894b-096d1d7a047c\", \n\t\t\"priority\": 77268, \n\t\t\"delay\": 685263026, \n\t\t\"attempts\": 4, \n\t\t\"repeat\": \"xmy247ny5r99ags3jgv5qadmysp438e1858a3ozkr1k7lx26s\", \n\t\t\"backoff\": 8, \n\t\t\"lifo\": false, \n\t\t\"timeout\": 264322388, \n\t\t\"jobId\": 421262505, \n\t\t\"removeOnComplete\": true, \n\t\t\"removeOnFail\": true, \n\t\t\"stackTraceLimit\": 42341\n\t}, \n\t{\n\t\t\"id\": \"7bf564bb-1aff-47f4-8c83-b8ac0524cd4d\", \n\t\t\"priority\": 15748, \n\t\t\"delay\": 956480592, \n\t\t\"attempts\": 7, \n\t\t\"repeat\": \"24s3ccf4gxpprf23xz38s87x9vjvn6k8s196yqgeqb1skz3qw\", \n\t\t\"backoff\": 3, \n\t\t\"lifo\": false, \n\t\t\"timeout\": 446007700, \n\t\t\"jobId\": 828864227, \n\t\t\"removeOnComplete\": true, \n\t\t\"removeOnFail\": false, \n\t\t\"stackTraceLimit\": 88370\n\t}, \n\t{\n\t\t\"id\": \"af0d94e6-dd2b-4f05-bf6b-7f172650211a\", \n\t\t\"priority\": 85437, \n\t\t\"delay\": 290827610, \n\t\t\"attempts\": 1, \n\t\t\"repeat\": \"3cgdm82jszed83vz8crlx5uj3zayeobqrpwonwymrpwxgaob9\", \n\t\t\"backoff\": 6, \n\t\t\"lifo\": true, \n\t\t\"timeout\": 696702473, \n\t\t\"jobId\": 803695984, \n\t\t\"removeOnComplete\": true, \n\t\t\"removeOnFail\": false, \n\t\t\"stackTraceLimit\": 94192\n\t}, \n\t{\n\t\t\"id\": \"86876d5e-b785-4d9b-b8bd-ea9e6862cc54\", \n\t\t\"priority\": 28830, \n\t\t\"delay\": 525614282, \n\t\t\"attempts\": 1, \n\t\t\"repeat\": \"uxh8b7b68nrag0o3gy9zoi5759rkmrykr6eg34fa2v59o6elr\", \n\t\t\"backoff\": 3, \n\t\t\"lifo\": true, \n\t\t\"timeout\": 586027952, \n\t\t\"jobId\": 291845317, \n\t\t\"removeOnComplete\": false, \n\t\t\"removeOnFail\": true, \n\t\t\"stackTraceLimit\": 59924\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/jobs/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"jobs",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/jobs/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/jobs/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+                        "jobs",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/jobs/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/jobs/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"jobs",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/job/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/job/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"job",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/job/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/job/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"job",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/job/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"priority\": 62019, \n\t\"delay\": 247647796, \n\t\"attempts\": 5, \n\t\"repeat\": \"xtueop4w7ekvup9bjlsfo42k529l6e9p9sotjv1qzeuflu8l8\", \n\t\"backoff\": 8, \n\t\"lifo\": false, \n\t\"timeout\": 609167148, \n\t\"jobId\": 164230039, \n\t\"removeOnComplete\": true, \n\t\"removeOnFail\": true, \n\t\"stackTraceLimit\": 63113\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/job/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"job",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/job/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/job/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"job",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - queue-manager/jobs/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/jobs/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"jobs",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

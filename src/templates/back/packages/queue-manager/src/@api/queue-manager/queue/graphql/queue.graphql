@@ -1,0 +1,98 @@
+
+type QueueManagerQueue
+{
+    id: ID!
+    prefix: GraphQLString!
+    name: GraphQLString!
+    waitingJobs: GraphQLInt!
+    activeJobs: GraphQLInt!
+    completedJobs: GraphQLInt!
+    failedJobs: GraphQLInt!
+    delayedJobs: GraphQLInt!
+    pausedJobs: GraphQLInt!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input QueueManagerCreateQueueInput
+{
+    id: ID!
+    prefix: GraphQLString!
+    name: GraphQLString!
+}
+
+input QueueManagerUpdateQueueByIdInput
+{
+    id: ID!
+    prefix: GraphQLString
+    name: GraphQLString
+}
+
+input QueueManagerUpdateQueuesInput
+{
+    id: ID
+    prefix: GraphQLString
+    name: GraphQLString
+}
+
+type Query
+{
+    queueManagerFindQueue(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): QueueManagerQueue
+
+    queueManagerFindQueueById(
+        id: ID
+        constraint: QueryStatement
+    ): QueueManagerQueue
+
+    queueManagerGetQueues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [QueueManagerQueue]!
+
+    queueManagerPaginateQueues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    queueManagerCreateQueue(
+        payload: QueueManagerCreateQueueInput!
+    ): QueueManagerQueue
+
+    queueManagerCreateQueues(
+        payload: [QueueManagerCreateQueueInput]!
+    ): Boolean!
+
+    queueManagerUpdateQueueById(
+        payload: QueueManagerUpdateQueueByIdInput!
+        constraint: QueryStatement
+    ): QueueManagerQueue
+
+    queueManagerUpdateQueues(
+        payload: QueueManagerUpdateQueuesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [QueueManagerQueue]!
+
+    queueManagerUpsertQueue(
+        payload: QueueManagerUpdateQueueByIdInput!
+    ): QueueManagerQueue
+
+    queueManagerDeleteQueueById(
+        id: ID!
+        constraint: QueryStatement
+    ): QueueManagerQueue
+
+    queueManagerDeleteQueues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [QueueManagerQueue]!
+
+}

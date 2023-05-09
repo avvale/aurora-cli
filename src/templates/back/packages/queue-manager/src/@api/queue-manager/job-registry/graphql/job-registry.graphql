@@ -1,0 +1,100 @@
+
+type QueueManagerJobRegistry
+{
+    id: ID!
+    queueName: GraphQLString!
+    jobId: GraphQLString!
+    jobName: GraphQLString
+    tags: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input QueueManagerCreateJobRegistryInput
+{
+    id: ID!
+    queueName: GraphQLString!
+    jobId: GraphQLString!
+    jobName: GraphQLString
+    tags: JSON
+}
+
+input QueueManagerUpdateJobRegistryByIdInput
+{
+    id: ID!
+    queueName: GraphQLString
+    jobId: GraphQLString
+    jobName: GraphQLString
+    tags: JSON
+}
+
+input QueueManagerUpdateJobsRegistryInput
+{
+    id: ID
+    queueName: GraphQLString
+    jobId: GraphQLString
+    jobName: GraphQLString
+    tags: JSON
+}
+
+type Query
+{
+    queueManagerFindJobRegistry(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): QueueManagerJobRegistry
+
+    queueManagerFindJobRegistryById(
+        id: ID
+        constraint: QueryStatement
+    ): QueueManagerJobRegistry
+
+    queueManagerGetJobsRegistry(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [QueueManagerJobRegistry]!
+
+    queueManagerPaginateJobsRegistry(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    queueManagerCreateJobRegistry(
+        payload: QueueManagerCreateJobRegistryInput!
+    ): QueueManagerJobRegistry
+
+    queueManagerCreateJobsRegistry(
+        payload: [QueueManagerCreateJobRegistryInput]!
+    ): Boolean!
+
+    queueManagerUpdateJobRegistryById(
+        payload: QueueManagerUpdateJobRegistryByIdInput!
+        constraint: QueryStatement
+    ): QueueManagerJobRegistry
+
+    queueManagerUpdateJobsRegistry(
+        payload: QueueManagerUpdateJobsRegistryInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [QueueManagerJobRegistry]!
+
+    queueManagerUpsertJobRegistry(
+        payload: QueueManagerUpdateJobRegistryByIdInput!
+    ): QueueManagerJobRegistry
+
+    queueManagerDeleteJobRegistryById(
+        id: ID!
+        constraint: QueryStatement
+    ): QueueManagerJobRegistry
+
+    queueManagerDeleteJobsRegistry(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [QueueManagerJobRegistry]!
+
+}

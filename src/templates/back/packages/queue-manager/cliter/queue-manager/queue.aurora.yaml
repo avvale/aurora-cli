@@ -1,0 +1,34 @@
+version: 0.0.1
+boundedContextName: queue-manager
+moduleName: queue
+moduleNames: queues
+aggregateName: QueueManagerQueue
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: prefix
+    type: varchar
+    maxLength: 50
+    nullable: false
+    index: unique
+  - name: name
+    type: varchar
+    maxLength: 50
+    nullable: false
+    index: unique
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis: []

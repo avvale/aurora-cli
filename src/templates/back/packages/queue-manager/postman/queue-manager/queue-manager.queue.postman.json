@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - queue-manager/queue",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - queueManagerCreateQueue",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:QueueManagerCreateQueueInput!)\n{\n\tqueueManagerCreateQueue (payload:$payload)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"prefix\": \"veljk9c5kci1m087crgxekmbc2um9iif4ui2vo0ht70pwzimc\", \n\t\t\"name\": \"Handcrafted Frozen Shirt\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerCreateQueues",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[QueueManagerCreateQueueInput]!)\n{\n\tqueueManagerCreateQueues (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"082f4a31-c083-4150-aa8b-d22bf1dc89b9\", \n\t\t\t\"prefix\": \"g4f0jwwvhgnvxnle9izcv69svcag2i1ha1492hfnwvrb4o4el\", \n\t\t\t\"name\": \"Intelligent Granite Towels\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"33eae5a4-0676-471c-8ec3-d18845d730bc\", \n\t\t\t\"prefix\": \"7qx3a74ch7nlke412qzt3drzkgd7st1ywp1txs4k4yznyr7q4\", \n\t\t\t\"name\": \"Generic Soft Sausages\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2441f045-ecd6-4503-bc1a-7b8388541c61\", \n\t\t\t\"prefix\": \"45py6trk5bnteqnedk3xgwf4hkt3kd2xpwx4x3ixap6uwr7k9\", \n\t\t\t\"name\": \"Tasty Concrete Tuna\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ac5baba0-fb57-4506-9bfe-0285b38b36e5\", \n\t\t\t\"prefix\": \"fd9ikxkdnil2frut8psgzi4reh31nol1e9wom83thjecbzcb0\", \n\t\t\t\"name\": \"Intelligent Fresh Bike\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"05a3c993-a645-48c3-b486-80a200124c41\", \n\t\t\t\"prefix\": \"qijhxsarlmi74b3s7t51cw8cywhz4j4x1kiupael8j1f260ri\", \n\t\t\t\"name\": \"Ergonomic Frozen Soap\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d5347d00-661f-4268-9e2e-964721eb5775\", \n\t\t\t\"prefix\": \"plwr8kdmpk277fkl970s3z7o2edrh6xlse39m093dtfwaf8yg\", \n\t\t\t\"name\": \"Intelligent Frozen Fish\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"483be2e9-cafb-4970-980a-b7993d49c188\", \n\t\t\t\"prefix\": \"28im4j4zenwwkgkbtkz0ikg0idruffjr0thi4x0z7nzreytd3\", \n\t\t\t\"name\": \"Licensed Fresh Sausages\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"50599f70-b152-49a7-b056-32268a7ac8b0\", \n\t\t\t\"prefix\": \"v16m79qiqnwxj5uln364dygo1atfenpn4pb0hsp6g95lfaa3j\", \n\t\t\t\"name\": \"Tasty Steel Keyboard\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b877908e-6ea0-4dec-af90-61d6ae27cb4a\", \n\t\t\t\"prefix\": \"ewvh1z64zqb31g8e8ax5rfj388cj1g5kjjmym5r4e2owj0nbl\", \n\t\t\t\"name\": \"Unbranded Soft Shirt\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8025330d-84c4-470a-a939-3c3a27fd12ef\", \n\t\t\t\"prefix\": \"lbjrb246iwpcz6k8wmpox3p0r9wx70c07450afwq8kj5q0ffw\", \n\t\t\t\"name\": \"Awesome Steel Car\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerPaginateQueues",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tqueueManagerPaginateQueues (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerGetQueues",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerGetQueues (query: $query)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerFindQueue",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerFindQueue (query: $query)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerFindQueueById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tqueueManagerFindQueueById (id:$id)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerUpdateQueue",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:QueueManagerUpdateQueueInput!)\n{\n\tqueueManagerUpdateQueue (payload:$payload)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"prefix\": \"vxxk090zb6tp7alpo9fgfio48j9xr7w5n9dtv4jgh9bxel877\", \n\t\t\"name\": \"Intelligent Fresh Bike\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerDeleteQueueById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tqueueManagerDeleteQueueById (id:$id)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - queueManagerDeleteQueues",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tqueueManagerDeleteQueues (query: $query)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queue/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"prefix\": \"og41obfpi383wg0d7do7ire2h8f84zoz6yg7vg489ps2kirs7\", \n\t\"name\": \"Handcrafted Cotton Chicken\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queue/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queue",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queues/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"d696d61b-33e0-400b-ae9c-8b1a58502242\", \n\t\t\"prefix\": \"5c192xuv1f955dr11qqf3991s5p7wo0uvl5gswp0756zaii1c\", \n\t\t\"name\": \"Tasty Plastic Towels\"\n\t}, \n\t{\n\t\t\"id\": \"30db5660-8017-4a2e-8045-2efaf8998ea4\", \n\t\t\"prefix\": \"as3sz8eettae9di036qsk78vq70t0713wwz1st4g9bpb3ers2\", \n\t\t\"name\": \"Handmade Rubber Car\"\n\t}, \n\t{\n\t\t\"id\": \"57735ffb-52a4-48e1-823b-30c54179f711\", \n\t\t\"prefix\": \"tcc2qwvifvb2tj4t3ib4b91u4rs5iygtxqznln63rorrx2i61\", \n\t\t\"name\": \"Ergonomic Soft Fish\"\n\t}, \n\t{\n\t\t\"id\": \"9ca735e1-bf40-428a-b685-6416f0942d9a\", \n\t\t\"prefix\": \"7uo0b8dlsptxprunv5qvq79tkf0ldw4g6868mj80hgj3s6smk\", \n\t\t\"name\": \"Handcrafted Concrete Shirt\"\n\t}, \n\t{\n\t\t\"id\": \"fa02d0ad-0bd9-4b3b-ad3d-27ffe4f44e65\", \n\t\t\"prefix\": \"tqi44w0ckyjpiwpmeyu3cscdkf5txc1lvjdrq5e15cxi5dra8\", \n\t\t\"name\": \"Awesome Wooden Car\"\n\t}, \n\t{\n\t\t\"id\": \"f190c6fc-e7b4-4845-81be-3022acd0b2a2\", \n\t\t\"prefix\": \"0znya9t1hnow0tlvvb98sjukvwz779k2s03gu6sw6h039h424\", \n\t\t\"name\": \"Practical Granite Soap\"\n\t}, \n\t{\n\t\t\"id\": \"b1eec5bf-8be6-4946-946c-9d3da9218483\", \n\t\t\"prefix\": \"kxh0ovx6ex49wei8pkcyl0hu06mo2i7nfjv1h9c54cdtzcj6e\", \n\t\t\"name\": \"Generic Wooden Bike\"\n\t}, \n\t{\n\t\t\"id\": \"4f71d2f7-f8a8-4042-9d47-0a516a6de242\", \n\t\t\"prefix\": \"86ea4t19corf1fibkf8ktgbool0dpgyappzhuh4ijeu71nat9\", \n\t\t\"name\": \"Tasty Steel Pants\"\n\t}, \n\t{\n\t\t\"id\": \"67aa74d0-24d4-4d3e-94c0-9e45c5630847\", \n\t\t\"prefix\": \"o8nyt5nm6b5objj6924fvwr9x8onczdr9kiisppam2z542arn\", \n\t\t\"name\": \"Ergonomic Frozen Keyboard\"\n\t}, \n\t{\n\t\t\"id\": \"fa42a7dd-7c90-4abe-82f4-bce3377eb81a\", \n\t\t\"prefix\": \"bkn2jtjic18kaupwxo5t7ddecrj51nrbppei59hxggatidk2t\", \n\t\t\"name\": \"Awesome Soft Shoes\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queues/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queues",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queues/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queues/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+                        "queues",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queues/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queues/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queues",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queue/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queue/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queue",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queue/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queue/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queue",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queue/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"prefix\": \"k4fioxmvaeypv7bixmio621m2feb3kqydzkbisst5af56ulql\", \n\t\"name\": \"Unbranded Fresh Chair\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queue/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queue",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - queue-manager/queue/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queue/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queue",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - queue-manager/queues/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/queue-manager/queues/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"queue-manager",
+						"queues",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
