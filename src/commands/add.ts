@@ -464,6 +464,21 @@ export class Add extends Command
                     break;
                 }
 
+                case 'environments': {
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+                    DecoratorDriver.removeDecoratorAdapter(
+                        appModuleSourceFile,
+                        'AppModule',
+                        'NgModule',
+                        'providers',
+                        'EnvironmentsInformationService',
+                    );
+
+                    appModuleSourceFile.saveSync();
+                    break;
+                }
+
                 case 'iam': {
                     await FrontHandler.addPackage(addCommandState);
 
@@ -545,18 +560,18 @@ export class Add extends Command
                     break;
                 }
 
-                case 'environments': {
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
-                    DecoratorDriver.removeDecoratorAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
-                        'EnvironmentsInformationService',
-                    );
+                case 'queueManager': {
+                    await FrontHandler.addPackage(addCommandState);
 
-                    appModuleSourceFile.saveSync();
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'queueManager', 'queueManagerNavigation');
+                    navigationSourceFile.saveSync();
+
+                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
+                    Installer.declareFrontRouting(routingSourceFile, 'queueManager');
+                    routingSourceFile.saveSync();
+                    break;
                 }
             }
         }
