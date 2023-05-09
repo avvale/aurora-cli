@@ -1,0 +1,276 @@
+import { Injectable } from '@angular/core';
+import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
+import { QueueManagerCreateJobRegistry, QueueManagerJobRegistry, QueueManagerUpdateJobRegistryById, QueueManagerUpdateJobsRegistry } from '../queue-manager.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './job-registry.graphql';
+
+@Injectable({
+    providedIn: 'root',
+})
+export class JobRegistryService
+{
+    paginationSubject$: BehaviorSubject<GridData<QueueManagerJobRegistry> | null> = new BehaviorSubject(null);
+    jobRegistrySubject$: BehaviorSubject<QueueManagerJobRegistry | null> = new BehaviorSubject(null);
+    jobsRegistrySubject$: BehaviorSubject<QueueManagerJobRegistry[] | null> = new BehaviorSubject(null);
+
+    constructor(
+        private readonly graphqlService: GraphQLService,
+    ) {}
+
+    /**
+    * Getters
+    */
+    get pagination$(): Observable<GridData<QueueManagerJobRegistry>>
+    {
+        return this.paginationSubject$.asObservable();
+    }
+
+    get jobRegistry$(): Observable<QueueManagerJobRegistry>
+    {
+        return this.jobRegistrySubject$.asObservable();
+    }
+
+    get jobsRegistry$(): Observable<QueueManagerJobRegistry[]>
+    {
+        return this.jobsRegistrySubject$.asObservable();
+    }
+
+    pagination(
+        {
+            graphqlStatement = paginationQuery,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<GridData<QueueManagerJobRegistry>>
+    {
+        // get result, map ang throw data across observable
+        return this.graphqlService
+            .client()
+            .watchQuery<{ pagination: GridData<QueueManagerJobRegistry>; }>({
+                query    : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
+            );
+    }
+
+    findById(
+        {
+            graphqlStatement = findByIdQuery,
+            id = '',
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{
+        object: QueueManagerJobRegistry;
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: QueueManagerJobRegistry;
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.jobRegistrySubject$.next(data.object);
+                }),
+            );
+    }
+
+
+    find(
+        {
+            graphqlStatement = findQuery,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{
+        object: QueueManagerJobRegistry;
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: QueueManagerJobRegistry;
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
+                variables: {
+                    query,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.jobRegistrySubject$.next(data.object);
+                }),
+            );
+    }
+
+    get(
+        {
+            graphqlStatement = getQuery,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{
+        objects: QueueManagerJobRegistry[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                objects: QueueManagerJobRegistry[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
+                variables: {
+                    query,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.jobsRegistrySubject$.next(data.objects);
+                }),
+            );
+    }
+
+    create<T>(
+        {
+            graphqlStatement = createMutation,
+            object = null,
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: QueueManagerCreateJobRegistry;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
+                },
+            });
+    }
+
+    updateById<T>(
+        {
+            graphqlStatement = updateByIdMutation,
+            object = null,
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: QueueManagerUpdateJobRegistryById;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
+                },
+            });
+    }
+
+    update<T>(
+        {
+            graphqlStatement = updateMutation,
+            object = null,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: QueueManagerUpdateJobsRegistry;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
+                    query,
+                    constraint,
+                },
+            });
+    }
+
+    deleteById<T>(
+        id: string,
+        graphqlStatement = deleteByIdMutation,
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: { id },
+            });
+    }
+
+    delete<T>(
+        {
+            graphqlStatement = deleteMutation,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: { query, constraint },
+            });
+    }
+}

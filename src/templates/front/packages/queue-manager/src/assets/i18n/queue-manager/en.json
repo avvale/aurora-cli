@@ -1,0 +1,23 @@
+{
+    "ActiveJobs": "ActiveJobs",
+    "CompletedJobs": "Completed",
+    "Delay": "Delay",
+    "DelayedJobs": "Delayed",
+    "FailedJobs": "Failed",
+    "FailedReason": "Failed Reason",
+    "Job": "Job",
+    "JobId": "JobId",
+    "JobName": "JobName",
+    "JobRegistry": "JobRegistry",
+    "Jobs": "Jobs",
+    "JobsRegistry": "JobsRegistry",
+    "Name": "Name",
+    "PausedJobs": "Paused",
+    "Prefix": "Prefix",
+    "Queue": "Queue",
+    "QueueManager": "Queue Manager",
+    "QueueName": "QueueName",
+    "Queues": "Queues",
+    "Tags": "Tags",
+    "WaitingJobs": "Waiting"
+}

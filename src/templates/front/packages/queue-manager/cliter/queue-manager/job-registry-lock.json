@@ -1,0 +1,45 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/queue-manager.component.html",
+            "integrity": "sha1:a6aab421500581830708e34385e2166e7a039ba7"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/queue-manager.component.ts",
+            "integrity": "sha1:26333769c84099eedca54d189a8c9c6abd00d88d"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-detail.component.html",
+            "integrity": "sha1:e68f7af805c8f026f7ec078709def6aaf7d5ab18"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-detail.component.ts",
+            "integrity": "sha1:d82fe4a507a72b9e86ae565d0a3348f79ffda6bb"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-list.component.html",
+            "integrity": "sha1:38d2a5d851d6fa677b090c726d0f16e41e48b840"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-list.component.ts",
+            "integrity": "sha1:af7cce9c211fdcbef7640879f4f7b4ad33f76da8"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.columns-config.ts",
+            "integrity": "sha1:1e33d5ead653622f7520f6f9bcab2d9a7b02014e"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.graphql.ts",
+            "integrity": "sha1:ee0911dbf7e5d70736e3f4f2199240de0b5a1c43"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.resolvers.ts",
+            "integrity": "sha1:1f3e1a955ad85dfbe7d33afab199d82cf5ac2afd"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.service.ts",
+            "integrity": "sha1:f5c3749bd64a7a08eea4cd55d585b11bc8f74e89"
+        }
+    ]
+}

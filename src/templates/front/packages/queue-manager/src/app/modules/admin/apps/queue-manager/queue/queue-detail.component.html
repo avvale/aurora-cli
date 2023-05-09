@@ -1,0 +1,405 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                    class="icon-size-8 mr-2"
+                >
+                    chat_paste_go
+                </mat-icon>
+                {{ t('queueManager.Queue') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+                *ngIf="currentViewAction.id === 'queueManager::queue.detail.edit'"
+                mat-flat-button
+                type="submit"
+                class="ml-3"
+                form="queueManagerQueueFormDetail"
+                color="accent"
+                [disabled]="fg.pristine || ('queueManager::queue.detail.update' | getSpinnerFlag | async)"
+            >
+                <mat-icon
+                    *ngIf="!('queueManager::queue.detail.update' | getSpinnerFlag | async)"
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:pencil-alt"
+                >
+                </mat-icon>
+                <mat-icon *ngIf="'queueManager::queue.detail.update' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
+                </mat-icon>
+                {{ t('Update') }}
+            </button>
+            <button
+                *ngIf="currentViewAction.id === 'queueManager::queue.detail.new'"
+                mat-flat-button
+                type="submit"
+                form="queueManagerQueueFormDetail"
+                class="ml-3"
+                color="accent"
+                [disabled]="fg.pristine || ('queueManager::queue.detail.create' | getSpinnerFlag | async)"
+            >
+                <mat-icon
+                    *ngIf="!('queueManager::queue.detail.create' | getSpinnerFlag | async)"
+                    class="icon-size-5 mr-2"
+                    svgIcon="heroicons_solid:save"
+                >
+                </mat-icon>
+                <mat-icon *ngIf="'queueManager::queue.detail.create' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
+                </mat-icon>
+                {{ t('Create') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="queueManagerQueueFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-6"
+                    >
+                        <mat-label>{{ t('queueManager.Prefix') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="prefix"
+                            maxlength="50"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.prefix | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-6"
+                    >
+                        <mat-label>{{ t('queueManager.Name') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="name"
+                            maxlength="50"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+
+                    <!-- #region counters -->
+                    <au-mat-form-field-appearance
+                        [label]="t('queueManager.WaitingJobs')"
+                        class="col-2 cursor-pointer"
+                        (click)="
+                            actionService.action({
+                                id          : 'queueManager::queue.detail.changeTypeJobsPagination',
+                                isViewAction: false,
+                                data        : {
+                                    jobType: 'waiting'
+                                }
+                            })
+                        "
+                    >
+                        <p class="text-7xl">{{ managedObject.waitingJobs }}</p>
+                        <mat-icon
+                            *ngIf="currentJobType === 'waiting'"
+                            class="absolute top-2 right-2"
+                        >
+                            check
+                        </mat-icon>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        [label]="t('queueManager.ActiveJobs')"
+                        class="col-2 cursor-pointer"
+                        (click)="
+                            actionService.action({
+                                id          : 'queueManager::queue.detail.changeTypeJobsPagination',
+                                isViewAction: false,
+                                data        : {
+                                    jobType: 'active'
+                                }
+                            })
+                        "
+                    >
+                        <p class="text-7xl">{{ managedObject.activeJobs }}</p>
+                        <mat-icon
+                            *ngIf="currentJobType === 'active'"
+                            class="absolute top-2 right-2"
+                        >
+                            check
+                        </mat-icon>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        [label]="t('queueManager.CompletedJobs')"
+                        class="col-2 cursor-pointer"
+                        (click)="
+                            actionService.action({
+                                id          : 'queueManager::queue.detail.changeTypeJobsPagination',
+                                isViewAction: false,
+                                data        : {
+                                    jobType: 'completed'
+                                }
+                            })
+                        "
+                    >
+                        <p class="text-7xl">{{ managedObject.completedJobs }}</p>
+                        <mat-icon
+                            *ngIf="currentJobType === 'completed'"
+                            class="absolute top-2 right-2"
+                        >
+                            check
+                        </mat-icon>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        [label]="t('queueManager.FailedJobs')"
+                        class="col-2 cursor-pointer"
+                        (click)="
+                            actionService.action({
+                                id          : 'queueManager::queue.detail.changeTypeJobsPagination',
+                                isViewAction: false,
+                                data        : {
+                                    jobType: 'failed'
+                                }
+                            })
+                        "
+                    >
+                        <p class="text-7xl text-red-600">{{ managedObject.failedJobs }}</p>
+                        <mat-icon
+                            *ngIf="currentJobType === 'failed'"
+                            class="absolute top-2 right-2"
+                        >
+                            check
+                        </mat-icon>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        [label]="t('queueManager.DelayedJobs')"
+                        class="col-2 cursor-pointer"
+                        (click)="
+                            actionService.action({
+                                id          : 'queueManager::queue.detail.changeTypeJobsPagination',
+                                isViewAction: false,
+                                data        : {
+                                    jobType: 'delayed'
+                                }
+                            })
+                        "
+                    >
+                        <p class="text-7xl">{{ managedObject.delayedJobs }}</p>
+                        <mat-icon
+                            *ngIf="currentJobType === 'delayed'"
+                            class="absolute top-2 right-2"
+                        >
+                            check
+                        </mat-icon>
+                    </au-mat-form-field-appearance>
+                    <au-mat-form-field-appearance
+                        [label]="t('queueManager.PausedJobs')"
+                        class="col-2 cursor-pointer"
+                        (click)="
+                            actionService.action({
+                                id          : 'queueManager::queue.detail.changeTypeJobsPagination',
+                                isViewAction: false,
+                                data        : {
+                                    jobType: 'paused'
+                                }
+                            })
+                        "
+                    >
+                        <p class="text-7xl">{{ managedObject.pausedJobs }}</p>
+                        <mat-icon
+                            *ngIf="currentJobType === 'paused'"
+                            class="absolute top-2 right-2"
+                        >
+                            check
+                        </mat-icon>
+                    </au-mat-form-field-appearance>
+                    <!-- #endregion counters -->
+
+                    <!-- #region component to manage jobs -->
+                    <au-grid-elements-manager
+                        class="col-12 mt-2"
+                        [columnsConfig]="jobsColumnsConfig$ | async"
+                        [dialogTitle]="t('queueManager.Job')"
+                        [gridData]="jobsGridData$ | async"
+                        [gridState]="jobsGridState"
+                        [id]="jobsGridId"
+                        [label]="t('queueManager.Jobs')"
+                        [dialogIcon]="'engineering'"
+                        [originColumnsConfig]="jobsOriginColumnsConfig"
+                        [hasSearch]="false"
+                        [hasFilterButton]="false"
+                        #jobsGridElementsManager
+                    >
+                        <!-- #region header grid buttons -->
+                        <ng-template
+                            auGridCustomButtonsHeaderDialogTemplate
+                        >
+                            <!-- no buttons -->
+                        </ng-template>
+                        <!-- #endregion header grid buttons -->
+
+                        <ng-template
+                            auGridFormElementDetailDialogTemplate
+                            let-dialog
+                        >
+                            <form
+                                id="jobDetailDialogForm"
+                                novalidate
+                                [formGroup]="jobDialogFg"
+                                (ngSubmit)="handleSubmitBookForm($event, dialog)"
+                            >
+                                <div class="layout__container">
+
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-2"
+                                    >
+                                        <mat-label>{{ t('Id') }}</mat-label>
+                                        <input
+                                            matInput
+                                            formControlName="id"
+                                        >
+                                        <mat-error>{{ formErrors?.id | async }}</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-6"
+                                    >
+                                        <mat-label>{{ t('Name') }}</mat-label>
+                                        <input
+                                            matInput
+                                            formControlName="name"
+                                        >
+                                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-2"
+                                    >
+                                        <mat-label>{{ t('queueManager.Delay') }}</mat-label>
+                                        <input
+                                            matInput
+                                            formControlName="delay"
+                                        >
+                                        <mat-error>{{ formErrors?.delay | async }}</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field
+                                        *ngIf="managedJob?.failedReason"
+                                        appearance="outline"
+                                        class="col-12"
+                                    >
+                                        <mat-label>{{ t('queueManager.FailedReason') }}</mat-label>
+                                        <input
+                                            matInput
+                                            formControlName="failedReason"
+                                        >
+                                        <mat-error>{{ formErrors?.failedReason | async }}</mat-error>
+                                    </mat-form-field>
+                                    <au-mat-form-field-appearance
+                                        *ngIf="!(managedJob.opts | isObjectEmpty)"
+                                        [label]="t('Options')"
+                                        class="col-12"
+                                    >
+                                        <ngx-json-viewer
+                                            class="m-4"
+                                            [json]="managedJob.opts"
+                                            [expanded]="false"
+                                        >
+                                        </ngx-json-viewer>
+                                    </au-mat-form-field-appearance>
+                                    <au-mat-form-field-appearance
+                                        *ngIf="!(managedJob.data | isObjectEmpty)"
+                                        [label]="t('Data')"
+                                        class="col-12"
+                                    >
+                                        <ngx-json-viewer
+                                            class="m-4"
+                                            [json]="managedJob.data"
+                                            [expanded]="false"
+                                        >
+                                        </ngx-json-viewer>
+                                    </au-mat-form-field-appearance>
+                                </div>
+                            </form>
+                        </ng-template>
+                        <au-grid-translations
+                            [actions]="t('Actions')"
+                            [AND]="t('AND')"
+                            [clearFilters]="t('ClearFilters')"
+                            [clickAndDragInfo]="t('ClickAndDragInfo')"
+                            [columns]="t('Columns')"
+                            [field]="t('Field')"
+                            [filter]="t('Filter')"
+                            [for]="jobsGridId"
+                            [operator]="t('Operator')"
+                            [OR]="t('OR')"
+                            [pleaseSelectField]="t('PleaseSelectField')"
+                            [translations]="t('Translations')"
+                            [value]="t('Value')"
+                            [noData]="t('NoData')"
+                            [paginator]="{
+                                firstPageLabel: t('Paginator.FirstPageLabel'),
+                                itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
+                                lastPageLabel: t('Paginator.LastPageLabel'),
+                                nextPageLabel: t('Paginator.NextPageLabel'),
+                                ofLabel: t('Paginator.OfLabel'),
+                                previousPageLabel: t('Paginator.PreviousPageLabel')
+                            }"
+                            [operators]="{
+                                contains: t('Operators.Contains'),
+                                endsWith: t('Operators.EndsWith'),
+                                equals: t('Operators.Equals'),
+                                greaterThan: t('Operators.GreaterThan'),
+                                greaterThanEqual: t('Operators.GreaterThanEqual'),
+                                lessThan: t('Operators.LessThan'),
+                                lessThanEqual: t('Operators.LessThanEqual'),
+                                notEquals: t('Operators.NotEquals'),
+                                startsWith: t('Operators.StartsWith')
+                            }"
+                            [actionsMenu]="{
+                                edit: t('Edit'),
+                                delete: t('Delete'),
+                                cancel: t('Cancel'),
+                                close: t('Close'),
+                                remove: t('Remove')
+                            }"
+                        >
+                            <au-grid-column-translation
+                                *ngFor="let columnConfig of originJobsColumnsConfig"
+                                [field]="columnConfig.field"
+                            >
+                                {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                            </au-grid-column-translation>
+                        </au-grid-translations>
+                    </au-grid-elements-manager>
+                    <!-- #endregion component to manage jobs -->
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>

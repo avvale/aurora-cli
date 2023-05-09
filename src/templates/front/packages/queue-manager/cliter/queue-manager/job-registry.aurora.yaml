@@ -1,0 +1,42 @@
+version: 0.0.1
+boundedContextName: queue-manager
+moduleName: job-registry
+moduleNames: jobs-registry
+aggregateName: QueueManagerJobRegistry
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: queueName
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: jobId
+    type: varchar
+    maxLength: 36
+    nullable: false
+    index: unique
+  - name: jobName
+    type: varchar
+    maxLength: 50
+    nullable: true
+    defaultValue: __default__
+  - name: tags
+    type: json
+    nullable: true
+    index: index
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis: []
