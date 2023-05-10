@@ -7,6 +7,7 @@ import { getBoundedContextModuleFromFlag } from '../functions/common';
 import { Properties } from './properties';
 import * as inquirer from 'inquirer';
 import * as Table from 'cli-table3';
+import * as _ from 'lodash';
 
 export const Prompter =
 {
@@ -461,7 +462,7 @@ export const Prompter =
     printValueObjectsTable(command: Command, items: Properties)
     {
         const headers: string[] = [];
-        const excludeHeaders: string[] = ['config', 'id', 'relationship.pivot.aggregate', 'relationship.pivot.modulePath', 'relationship.pivot.fileName'];
+        const excludeHeaders: string[] = ['config', 'id'];
         const aliases: {origin: string; alias: string}[] = [
             { origin: '_name',                        alias: 'Name' },
             { origin: 'type',                         alias: 'Type' },
@@ -472,13 +473,7 @@ export const Prompter =
             { origin: 'minLength',                    alias: 'MinL.' },
             { origin: 'maxLength',                    alias: 'MaxL.' },
             { origin: 'nullable',                     alias: 'Nullable' },
-            { origin: 'relationship.type',            alias: 'RelationshipType' },
-            { origin: 'relationship.singularName',    alias: 'Singular' },
-            { origin: 'relationship.aggregate',       alias: 'R. Aggregate' },
-            { origin: 'relationship.modulePath',      alias: 'R. Module Path' },
-            { origin: 'relationship.key',             alias: 'R. Key' },
-            { origin: 'relationship.field',           alias: 'R. Field' },
-            { origin: 'relationship.pivot.aggregate', alias: 'Pivot' },
+            { origin: 'relationship',                 alias: 'Relationship Type' },
             { origin: 'index',                        alias: 'Index' },
         ];
         const rows: any[] = [];
@@ -491,7 +486,13 @@ export const Prompter =
                 if (item[key])
                 {
                     const alias = aliases.find(alias => alias.origin === key);
-                    if (!headers.includes(alias ? alias.alias : key) && !excludeHeaders.includes(key)) headers.push(alias ? alias.alias : key);
+                    if (
+                        !headers.includes(alias ? alias.alias : key) &&
+                        !excludeHeaders.includes(key)
+                    )
+                    {
+                        headers.push(alias ? alias.alias : key);
+                    }
                 }
             }
         }
@@ -502,20 +503,22 @@ export const Prompter =
             const row: any[] = [];
             for (const header of headers)
             {
-                const alias =   aliases.find(alias => alias.alias === header);
+                const alias = aliases.find(alias => alias.alias === header);
 
                 // get value for each header
-                const value =   header === 'Decimals' && Array.isArray(item.decimals) ?
-                    item.decimals.join(',') :
-                    (item[alias ?
-                        alias.origin :
-                        header
-                    ] ?
-                        item[
-                            alias ?
-                                alias.origin :
-                                header
-                        ] : '');
+                let value = '';
+                if (header === 'Decimals' && Array.isArray(item.decimals))
+                {
+                    value = item.decimals.join(',');
+                }
+                else if (alias?.origin === 'relationship')
+                {
+                    value = item.relationship?.type ? item.relationship.type : '';
+                }
+                else if (item[alias ? alias.origin : header])
+                {
+                    value = item[alias ? alias.origin : header];
+                }
 
                 row.push(value);
             }
