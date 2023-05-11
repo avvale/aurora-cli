@@ -1,4 +1,4 @@
-import { getRequestFromExecutionContext } from '@aurora-ts/core';
+import { getRequestFromExecutionContext } from '@aurorajs.dev/core';
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';

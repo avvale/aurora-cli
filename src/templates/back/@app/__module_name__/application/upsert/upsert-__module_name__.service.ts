@@ -1,6 +1,6 @@
 import { ConflictException, Injectable{{#if schema.properties.hasI18n}}, NotFoundException{{/if}} } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';

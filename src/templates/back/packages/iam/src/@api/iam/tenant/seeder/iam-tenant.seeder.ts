@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
 import { CreateTenantsCommand } from '@app/iam/tenant/application/create/create-tenants.command';

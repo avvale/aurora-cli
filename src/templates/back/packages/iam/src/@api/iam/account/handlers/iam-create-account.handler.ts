@@ -1,5 +1,5 @@
 import { ConflictException, Injectable, LiteralObject, Logger } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Operator, Utils } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Operator, Utils } from '@aurorajs.dev/core';
 import { Sequelize } from 'sequelize-typescript';
 
 // @app

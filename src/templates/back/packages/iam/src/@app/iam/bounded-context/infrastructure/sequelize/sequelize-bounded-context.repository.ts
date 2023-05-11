@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
 import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 import { BoundedContextMapper } from '../../domain/bounded-context.mapper';

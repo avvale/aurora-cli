@@ -1,4 +1,4 @@
-import { ICommandBus, SeederBoundedContext } from '@aurora-ts/core';
+import { ICommandBus, SeederBoundedContext } from '@aurorajs.dev/core';
 import { CreateBoundedContextsCommand } from '../application/create/create-bounded-contexts.command';
 
 export class BoundedContextHelper

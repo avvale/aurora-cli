@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { Operator, QueryStatement } from '@aurora-ts/core';
-import { CQMetadata } from '@aurora-ts/core';
+import { Operator, QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { ICountryRepository } from '../../domain/country.repository';
 import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
 import { AddCountriesContextEvent } from '../events/add-countries-context.event';

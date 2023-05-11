@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CQMetadata, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { IApplicationRepository } from '../../domain/application.repository';
 import { OAuthApplication } from '../../domain/application.aggregate';
 import { ApplicationAuthorizationHeader } from '../../domain/value-objects/application-authorization-header';

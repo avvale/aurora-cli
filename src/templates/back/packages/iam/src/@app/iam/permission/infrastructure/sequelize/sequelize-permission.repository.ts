@@ -1,6 +1,6 @@
 import { Injectable, LiteralObject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { IPermissionRepository } from '../../domain/permission.repository';
 import { IamPermission } from '../../domain/permission.aggregate';
 import { PermissionMapper } from '../../domain/permission.mapper';

@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { ICommandBus, Utils } from '@aurora-ts/core';
+import { ICommandBus, Utils } from '@aurorajs.dev/core';
 import type { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 
 // @api

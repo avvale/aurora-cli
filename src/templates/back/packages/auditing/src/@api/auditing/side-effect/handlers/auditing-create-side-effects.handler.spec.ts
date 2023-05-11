@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // custom items
 import { AuditingCreateSideEffectsHandler } from './auditing-create-side-effects.handler';

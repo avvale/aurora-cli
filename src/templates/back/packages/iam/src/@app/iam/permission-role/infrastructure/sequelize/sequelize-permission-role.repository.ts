@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { IPermissionRoleRepository } from '../../domain/permission-role.repository';
 import { IamPermissionRole } from '../../domain/permission-role.aggregate';
 import { PermissionRoleMapper } from '../../domain/permission-role.mapper';

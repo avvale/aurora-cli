@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // custom items
 import { CommonPaginateAdministrativeAreasLevel2Handler } from './common-paginate-administrative-areas-level-2.handler';

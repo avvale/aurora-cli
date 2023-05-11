@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { ICommandBus, Operator } from '@aurora-ts/core';
+import { ICommandBus, Operator } from '@aurorajs.dev/core';
 import { DeleteSideEffectsCommand } from '@app/auditing/side-effect/application/delete/delete-side-effects.command';
 import * as dayjs from 'dayjs';
 

@@ -1,5 +1,5 @@
 import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from '@aurora-ts/core';
+import { IMapper, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
 import { IamRole } from './role.aggregate';
 import { RoleResponse } from './role.response';
 import {

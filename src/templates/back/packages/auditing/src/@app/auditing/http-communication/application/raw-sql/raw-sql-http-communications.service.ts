@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { IHttpCommunicationRepository } from '../../domain/http-communication.repository';
 import { AuditingHttpCommunication } from '../../domain/http-communication.aggregate';
 

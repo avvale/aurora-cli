@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurora-ts/core';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 
 // @app
 import { GetRefreshTokensQuery } from '@app/o-auth/refresh-token/application/get/get-refresh-tokens.query';

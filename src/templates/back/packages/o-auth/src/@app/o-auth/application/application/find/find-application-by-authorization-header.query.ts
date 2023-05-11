@@ -1,4 +1,4 @@
-import { CQMetadata, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
 export class FindApplicationByAuthorizationHeaderQuery
 {

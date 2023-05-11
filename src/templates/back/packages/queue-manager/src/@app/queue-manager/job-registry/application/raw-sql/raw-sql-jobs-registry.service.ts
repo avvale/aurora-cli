@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { IJobRegistryRepository } from '../../domain/job-registry.repository';
 import { QueueManagerJobRegistry } from '../../domain/job-registry.aggregate';
 

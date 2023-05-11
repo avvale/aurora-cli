@@ -46,7 +46,7 @@ export const cliterConfig: CliterConfig =
     appContainer                               : '@app',
     apiContainer                               : '@api',
     auroraLocalPackage                         : '@aurora',
-    auroraCorePackage                          : '@aurora-ts/core',
+    auroraCorePackage                          : '@aurorajs.dev/core',
     configYamlVersion                          : '0.0.1',
     lockJsonVersion                            : '0.0.1',
     schemaDefinitionExtension                  : '.aurora.yaml',

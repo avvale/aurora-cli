@@ -1,5 +1,5 @@
-import { QueryStatement } from '@aurora-ts/core';
-import { CQMetadata } from '@aurora-ts/core';
+import { QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class FindAccessTokenByIdQuery
 {

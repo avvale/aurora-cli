@@ -3,7 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 {{#if schema.properties.hasI18n}}
 import { ConfigService } from '@nestjs/config';
 {{/if}}
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';

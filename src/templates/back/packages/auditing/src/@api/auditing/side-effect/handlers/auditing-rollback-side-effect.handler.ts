@@ -1,6 +1,6 @@
 import { FindSideEffectByIdQuery } from '@app/auditing/side-effect/application/find/find-side-effect-by-id.query';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { AuditingMeta, AuditingRunner, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurora-ts/core';
+import { AuditingMeta, AuditingRunner, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
 import * as path from 'node:path';
 
 // @app

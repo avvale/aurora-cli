@@ -1,6 +1,6 @@
 // ignored file
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { CreatePermissionsCommand } from '@app/iam/permission/application/create/create-permissions.command';
 import { CreateBoundedContextsCommand } from '@app/iam/bounded-context/application/create/create-bounded-contexts.command';
 import { boundedContexts, permissions } from '@app/auditing/auditing.seed';

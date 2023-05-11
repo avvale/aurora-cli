@@ -1,4 +1,4 @@
-import { DataValueObject, PasswordValueObject, ValidationRules } from '@aurora-ts/core';
+import { DataValueObject, PasswordValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class UserPassword extends PasswordValueObject
 {

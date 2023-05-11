@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { IRefreshTokenRepository } from '../../domain/refresh-token.repository';
 import { OAuthRefreshToken } from '../../domain/refresh-token.aggregate';
 import { RefreshTokenMapper } from '../../domain/refresh-token.mapper';

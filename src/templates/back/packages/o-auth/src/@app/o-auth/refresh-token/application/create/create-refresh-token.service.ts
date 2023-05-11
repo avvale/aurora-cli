@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { CQMetadata, Jwt, Utils } from '@aurora-ts/core';
+import { CQMetadata, Jwt, Utils } from '@aurorajs.dev/core';
 import {
     RefreshTokenId,
     RefreshTokenAccessTokenId,

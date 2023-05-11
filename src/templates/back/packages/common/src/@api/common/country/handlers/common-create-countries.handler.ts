@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AddI18NConstraintService, ICommandBus } from '@aurora-ts/core';
+import { AddI18NConstraintService, ICommandBus } from '@aurorajs.dev/core';
 
 // @app
 import { CreateCountriesCommand } from '@app/common/country/application/create/create-countries.command';

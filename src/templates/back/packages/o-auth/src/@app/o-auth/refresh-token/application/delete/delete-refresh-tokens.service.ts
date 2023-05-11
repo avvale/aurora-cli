@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurora-ts/core';
-import { CQMetadata } from '@aurora-ts/core';
+import { QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { IRefreshTokenRepository } from '../../domain/refresh-token.repository';
 import { AddRefreshTokensContextEvent } from '../events/add-refresh-tokens-context.event';
 

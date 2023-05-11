@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurora-ts/core';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 
 // @app
 import { PaginateHttpCommunicationsQuery } from '@app/auditing/http-communication/application/paginate/paginate-http-communications.query';

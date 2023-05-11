@@ -18,10 +18,10 @@
     "pack": "npm pack && cp $(node -p \"p=require('./package.json');p.name+'-'+p.version+'.tgz'\") ../aurora-app/{{ toKebabCase packageName }}.tgz && npm install ../aurora-app/{{ toKebabCase packageName }}.tgz --prefix ../aurora-app && rm -f $(node -p \"p=require('./package.json');p.name+'-'+p.version+'.tgz'\")"
   },
   "peerDependencies": {
-    "@aurora-ts/core": "^2.0.0",
+    "@aurorajs.dev/core": "^2.0.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/cqrs": "^8.0.1",
-    "aurora-ts-core": "^1.0.0",
+    "@aurorajs.dev/core": "^1.0.0",
     "graphql-type-json": "^0.3.2"
   },
   "dependencies": {},

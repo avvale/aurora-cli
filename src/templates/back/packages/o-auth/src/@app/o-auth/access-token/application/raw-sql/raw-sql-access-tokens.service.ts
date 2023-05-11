@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { IAccessTokenRepository } from '../../domain/access-token.repository';
 import { OAuthAccessToken } from '../../domain/access-token.aggregate';
 

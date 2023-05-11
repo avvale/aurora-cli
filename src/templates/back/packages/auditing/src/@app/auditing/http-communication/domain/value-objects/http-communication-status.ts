@@ -1,4 +1,4 @@
-import { SmallintValueObject, ValidationRules } from '@aurora-ts/core';
+import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class HttpCommunicationStatus extends SmallintValueObject
 {

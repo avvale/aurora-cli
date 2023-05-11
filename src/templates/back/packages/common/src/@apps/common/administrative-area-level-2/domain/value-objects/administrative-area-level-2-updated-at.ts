@@ -1,4 +1,4 @@
-import { DataValueObject, TimestampValueObject, ValidationRules } from '@aurora-ts/core';
+import { DataValueObject, TimestampValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class AdministrativeAreaLevel2UpdatedAt extends TimestampValueObject
 {

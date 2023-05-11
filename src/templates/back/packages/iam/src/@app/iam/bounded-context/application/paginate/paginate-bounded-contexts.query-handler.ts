@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { PaginationResponse } from '@aurora-ts/core';
+import { PaginationResponse } from '@aurorajs.dev/core';
 import { PaginateBoundedContextsQuery } from './paginate-bounded-contexts.query';
 import { PaginateBoundedContextsService } from './paginate-bounded-contexts.service';
 

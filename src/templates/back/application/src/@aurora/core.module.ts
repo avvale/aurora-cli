@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CoreEnvironmentInformationController, CorePreparationRequestController, CoreStatusController, SequelizeConfigModule } from '@aurora-ts/core';
+import { CoreEnvironmentInformationController, CorePreparationRequestController, CoreStatusController, SequelizeConfigModule } from '@aurorajs.dev/core';
 import { SharedModule } from './shared.module';
 import { GraphQLConfigModule } from './graphql/graphql-config.module';
 import { BootstrapService } from './services/bootstrap.service';

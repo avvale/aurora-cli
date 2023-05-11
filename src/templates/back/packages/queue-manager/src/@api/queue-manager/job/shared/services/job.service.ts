@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, Utils } from '@aurora-ts/core';
+import { ICommandBus, Utils } from '@aurorajs.dev/core';
 import { Job, JobOptions, Queue } from 'bull';
 import { CreateJobRegistryCommand } from '@app/queue-manager/job-registry/application/create/create-job-registry.command';
 

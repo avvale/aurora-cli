@@ -2,7 +2,7 @@
 import { ModuleRef } from '@nestjs/core';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ICommandBus, Utils } from '@aurora-ts/core';
+import { ICommandBus, Utils } from '@aurorajs.dev/core';
 import { getQueueToken } from '@nestjs/bull';
 import { QueueDefinition, QUEUE_REDIS } from '@app/queue-manager/queue-manager.types';
 import { CreateQueuesCommand } from '@app/queue-manager/queue/application/create/create-queues.command';

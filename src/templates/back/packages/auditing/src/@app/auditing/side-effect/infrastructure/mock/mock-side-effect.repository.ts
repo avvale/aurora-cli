@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurora-ts/core';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { ISideEffectRepository } from '@app/auditing/side-effect/domain/side-effect.repository';
 import {
     SideEffectId,

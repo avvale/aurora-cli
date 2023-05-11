@@ -1,5 +1,5 @@
 import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from '@aurora-ts/core';
+import { IMapper, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
 import { AuditingSideEffect } from './side-effect.aggregate';
 import { SideEffectResponse } from './side-effect.response';
 import {

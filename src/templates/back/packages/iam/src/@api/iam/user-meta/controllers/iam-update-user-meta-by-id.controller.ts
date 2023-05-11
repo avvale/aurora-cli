@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { CurrentAccount, Timezone } from '@aurora-ts/core';
+import { CurrentAccount, Timezone } from '@aurorajs.dev/core';
 import { Auth } from '@aurora/decorators';
 import { IamUserMetaDto, IamUpdateUserMetaByIdDto } from '../dto';
 

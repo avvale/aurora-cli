@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { AddI18NConstraintService, ContentLanguage, ICommandBus, IQueryBus, QueryStatement, Timezone } from '@aurora-ts/core';
+import { AddI18NConstraintService, ContentLanguage, ICommandBus, IQueryBus, QueryStatement, Timezone } from '@aurorajs.dev/core';
 
 // @app
 import { FindCountryByIdQuery } from '@app/common/country/application/find/find-country-by-id.query';

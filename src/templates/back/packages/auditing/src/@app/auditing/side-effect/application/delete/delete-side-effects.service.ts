@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurora-ts/core';
-import { CQMetadata } from '@aurora-ts/core';
+import { QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { ISideEffectRepository } from '../../domain/side-effect.repository';
 import { AddSideEffectsContextEvent } from '../events/add-side-effects-context.event';
 

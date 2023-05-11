@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus } from '@aurora-ts/core';
+import { ICommandBus } from '@aurorajs.dev/core';
 
 // @app
 import { CreateLangsCommand } from '@app/common/lang/application/create/create-langs.command';

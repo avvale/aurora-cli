@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurora-ts/core';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
 
 // @app
 import { OAuthCreateCredentialsHandler } from '../handlers/o-auth-create-credentials.handler';

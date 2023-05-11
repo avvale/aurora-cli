@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { ILangRepository } from '../../domain/lang.repository';
 import { CommonLang } from '../../domain/lang.aggregate';
 import { LangId } from '../../domain/value-objects';

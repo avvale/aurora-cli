@@ -6,7 +6,7 @@ import { CommonLangControllers, CommonLangResolvers, CommonLangApiHandlers } fro
 import { CommonCountryControllers, CommonCountryResolvers, CommonCountryApiHandlers } from './country';
 
 // custom
-import { IQueryBus } from '@aurora-ts/core';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { GetLangsQuery } from '../../@app/common/lang/application/get/get-langs.query';
 import { Cache } from 'cache-manager';
 import { CommonAdministrativeAreaLevel1Controllers, CommonAdministrativeAreaLevel1Resolvers, CommonAdministrativeAreaLevel1ApiHandlers } from './administrative-area-level-1';

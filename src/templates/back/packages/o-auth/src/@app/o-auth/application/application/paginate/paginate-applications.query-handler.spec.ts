@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PaginationResponse } from '@aurora-ts/core';
+import { PaginationResponse } from '@aurorajs.dev/core';
 
 // custom items
 import { PaginateApplicationsQueryHandler } from './paginate-applications.query-handler';

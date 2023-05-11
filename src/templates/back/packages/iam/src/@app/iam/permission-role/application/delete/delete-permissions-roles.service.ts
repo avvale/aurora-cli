@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement, Operator } from '@aurora-ts/core';
-import { CQMetadata } from '@aurora-ts/core';
+import { QueryStatement, Operator } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import {
     PermissionRolePermissionId,
     PermissionRoleRoleId,

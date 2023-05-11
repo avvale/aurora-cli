@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // @app
 import { FindBoundedContextByIdQuery } from '@app/iam/bounded-context/application/find/find-bounded-context-by-id.query';

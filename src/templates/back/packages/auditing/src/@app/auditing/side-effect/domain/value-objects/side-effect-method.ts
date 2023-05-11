@@ -1,4 +1,4 @@
-import { EnumValueObject, ValidationRules } from '@aurora-ts/core';
+import { EnumValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class SideEffectMethod extends EnumValueObject
 {

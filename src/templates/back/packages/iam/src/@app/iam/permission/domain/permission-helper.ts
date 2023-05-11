@@ -1,4 +1,4 @@
-import { ICommandBus, IQueryBus, SeederPermission } from '@aurora-ts/core';
+import { ICommandBus, IQueryBus, SeederPermission } from '@aurorajs.dev/core';
 import { CreatePermissionsCommand } from '../application/create/create-permissions.command';
 import { FindAccountByIdQuery } from '../../account/application/find/find-account-by-id.query';
 import { AccountResponse } from '../../account/domain/account.response';

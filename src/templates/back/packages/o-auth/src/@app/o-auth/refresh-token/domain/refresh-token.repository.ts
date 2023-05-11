@@ -1,6 +1,6 @@
 
 import { LiteralObject } from '@nestjs/common';
-import { CQMetadata, IRepository, Pagination, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, IRepository, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { OAuthRefreshToken } from './refresh-token.aggregate';
 import { RefreshTokenId } from './value-objects';
 

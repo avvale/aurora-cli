@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ICommandBus } from '@aurora-ts/core';
+import { ICommandBus } from '@aurorajs.dev/core';
 import { CreateBoundedContextsCommand } from '@app/iam/bounded-context/application/create/create-bounded-contexts.command';
 import { SeederModule } from './seeder.module';
 import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';

@@ -1,7 +1,7 @@
 /* eslint-disable key-spacing */
 import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { Utils } from '@aurora-ts/core';
+import { Utils } from '@aurorajs.dev/core';
 import {
     AccessTokenId,
     AccessTokenClientId,

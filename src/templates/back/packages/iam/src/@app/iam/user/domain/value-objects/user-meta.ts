@@ -1,4 +1,4 @@
-import { JsonValueObject, ValidationRules } from '@aurora-ts/core';
+import { JsonValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class UserMeta extends JsonValueObject
 {

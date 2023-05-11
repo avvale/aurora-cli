@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Put, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { FormatLangCode, QueryStatement, Timezone } from '@aurora-ts/core';
+import { FormatLangCode, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { CommonCountryDto, CommonUpdateCountriesDto } from '../dto';
 
 // @app

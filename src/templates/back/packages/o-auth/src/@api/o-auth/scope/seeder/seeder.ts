@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ICommandBus } from '@aurora-ts/core';
+import { ICommandBus } from '@aurorajs.dev/core';
 import { CreateScopesCommand } from '@app/o-auth/scope/application/create/create-scopes.command';
 import { SeederModule } from './seeder.module';
 import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { ILangRepository } from '../../domain/lang.repository';
 import { CommonLang } from '../../domain/lang.aggregate';
 import { LangMapper } from '../../domain/lang.mapper';

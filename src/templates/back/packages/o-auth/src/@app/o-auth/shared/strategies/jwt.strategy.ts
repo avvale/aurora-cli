@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { IQueryBus, Jwt } from '@aurora-ts/core';
+import { IQueryBus, Jwt } from '@aurorajs.dev/core';
 // todo, mover a @api para evitar coger un recurso de @api, desde el dominio?? no queda claro, donde se ubica la carpeta shared
 import { IamAccountDto } from '@api/iam/account/dto';
 import { FindAccountQuery } from '@app/iam/account/application/find/find-account.query';

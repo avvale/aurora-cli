@@ -1,6 +1,6 @@
 // ignored file
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { applications, boundedContexts, clients, permissions } from '@app/o-auth/o-auth.seed';
 
 // sources

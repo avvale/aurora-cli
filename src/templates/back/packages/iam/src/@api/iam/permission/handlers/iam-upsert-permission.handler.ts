@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // @app
 import { FindPermissionByIdQuery } from '@app/iam/permission/application/find/find-permission-by-id.query';

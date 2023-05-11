@@ -1,6 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { ITenantRepository } from '../../domain/tenant.repository';
 import { IamTenant } from '../../domain/tenant.aggregate';
 import {

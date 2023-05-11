@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, AuditingRunner, Utils } from '@aurora-ts/core';
+import { AuditingMeta, AuditingRunner, Utils } from '@aurorajs.dev/core';
 import { AuditingSideEffectModel } from '@app/auditing/side-effect';
 
 @Injectable()

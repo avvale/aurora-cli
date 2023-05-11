@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { ContentLanguage, QueryStatement, Timezone } from '@aurora-ts/core';
+import { ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { CommonCountryDto } from '../dto';
 
 // @app

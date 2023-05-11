@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { IQueueRepository } from '../../domain/queue.repository';
 import { QueueManagerQueue } from '../../domain/queue.aggregate';
 import { QueueId } from '../../domain/value-objects';

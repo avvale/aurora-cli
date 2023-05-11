@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ICriteria, SequelizeRepository } from '@aurora-ts/core';
+import { ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { IAdministrativeAreaLevel1Repository } from '../../domain/administrative-area-level-1.repository';
 import { CommonAdministrativeAreaLevel1 } from '../../domain/administrative-area-level-1.aggregate';
 import { AdministrativeAreaLevel1Mapper } from '../../domain/administrative-area-level-1.mapper';

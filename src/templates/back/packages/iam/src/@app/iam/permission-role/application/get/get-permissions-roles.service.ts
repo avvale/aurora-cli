@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurora-ts/core';
-import { CQMetadata } from '@aurora-ts/core';
+import { QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { IPermissionRoleRepository } from '../../domain/permission-role.repository';
 import { IamPermissionRole } from '../../domain/permission-role.aggregate';
 

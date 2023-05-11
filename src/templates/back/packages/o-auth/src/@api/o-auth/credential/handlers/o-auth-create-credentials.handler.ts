@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Utils } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Utils } from '@aurorajs.dev/core';
 
 // @app
 import { FindClientQuery } from '@app/o-auth/client/application/find/find-client.query';

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { ISideEffectRepository } from '../../domain/side-effect.repository';
 import { AuditingSideEffect } from '../../domain/side-effect.aggregate';
 

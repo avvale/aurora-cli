@@ -1,4 +1,4 @@
-import { CQMetadata, ICommandBus, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, ICommandBus, QueryStatement } from '@aurorajs.dev/core';
 import { AccountResponse } from './account.response';
 import { UpdateAccountByIdCommand } from '../application/update/update-account-by-id.command';
 

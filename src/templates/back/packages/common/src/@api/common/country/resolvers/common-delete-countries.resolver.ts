@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { ContentLanguage, QueryStatement, Timezone } from '@aurora-ts/core';
+import { ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';
 
 // @app
 import { CommonDeleteCountriesHandler } from '../handlers/common-delete-countries.handler';

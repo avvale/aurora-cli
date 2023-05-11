@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
 import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 import { BoundedContextId } from '../../domain/value-objects';

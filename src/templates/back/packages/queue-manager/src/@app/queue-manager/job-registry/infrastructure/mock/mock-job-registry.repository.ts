@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurora-ts/core';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { IJobRegistryRepository } from '@app/queue-manager/job-registry/domain/job-registry.repository';
 import {
     JobRegistryId,

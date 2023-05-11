@@ -1,4 +1,4 @@
-import { BooleanValueObject, ValidationRules } from '@aurora-ts/core';
+import { BooleanValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class LangIsActive extends BooleanValueObject
 {

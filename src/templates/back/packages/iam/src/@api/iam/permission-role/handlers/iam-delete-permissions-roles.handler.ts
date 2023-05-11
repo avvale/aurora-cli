@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, Operator, QueryStatement } from '@aurora-ts/core';
+import { AuditingMeta, ICommandBus, IQueryBus, Operator, QueryStatement } from '@aurorajs.dev/core';
 
 // @app
 import { GetPermissionsRolesQuery } from '@app/iam/permission-role/application/get/get-permissions-roles.query';

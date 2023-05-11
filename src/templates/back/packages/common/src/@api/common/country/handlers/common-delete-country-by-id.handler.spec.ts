@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AddI18NConstraintService, ICommandBus, IQueryBus } from '@aurora-ts/core';
+import { AddI18NConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // custom items
 import { CommonDeleteCountryByIdHandler } from './common-delete-country-by-id.handler';

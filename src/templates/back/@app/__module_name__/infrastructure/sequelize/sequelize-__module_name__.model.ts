@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 {{#if schema.hasAuditing}}
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurora-ts/core';
+import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 {{/if}}
 import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';

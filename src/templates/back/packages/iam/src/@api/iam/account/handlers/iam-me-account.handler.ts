@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IQueryBus, Jwt } from '@aurora-ts/core';
+import { IQueryBus, Jwt } from '@aurorajs.dev/core';
 
 // @app
 import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';

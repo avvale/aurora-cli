@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurora-ts/core';
-import { Pagination } from '@aurora-ts/core';
-import { CQMetadata } from '@aurora-ts/core';
+import { QueryStatement } from '@aurorajs.dev/core';
+import { Pagination } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { IBoundedContextRepository } from '../../domain/bounded-context.repository';
 import { IamBoundedContext } from '../../domain/bounded-context.aggregate';
 

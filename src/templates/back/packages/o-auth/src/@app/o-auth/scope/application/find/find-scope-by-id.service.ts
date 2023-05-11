@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { IScopeRepository } from '../../domain/scope.repository';
 import { OAuthScope } from '../../domain/scope.aggregate';
 import { ScopeId } from '../../domain/value-objects';

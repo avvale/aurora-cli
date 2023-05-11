@@ -1,5 +1,5 @@
 import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions } from '@aurora-ts/core';
+import { IMapper, MapperOptions } from '@aurorajs.dev/core';
 import { IamRoleAccount } from './role-account.aggregate';
 import {
     RoleRoleId,

@@ -1,5 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
-import { Operator } from '@aurora-ts/core';
+import { Operator } from '@aurorajs.dev/core';
 import { AccountResponse } from '@app/iam/account/domain/account.response';
 import * as _ from 'lodash';
 

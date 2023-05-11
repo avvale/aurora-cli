@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata } from '@aurora-ts/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { IRoleRepository } from '../../domain/role.repository';
 import { IamRole } from '../../domain/role.aggregate';
 

@@ -1,4 +1,4 @@
-import { IntValueObject, ValidationRules } from '@aurora-ts/core';
+import { IntValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class SideEffectOperationSort extends IntValueObject
 {

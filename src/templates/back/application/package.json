@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.5.0",
-    "@aurora-ts/core": "^2.2.0",
+    "@aurorajs.dev/core": "^2.2.0",
     "@nestjs/apollo": "^11.0.3",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",

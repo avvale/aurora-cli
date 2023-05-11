@@ -1,4 +1,4 @@
-import { StringValueObject, ValidationRules } from '@aurora-ts/core';
+import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class QueueName extends StringValueObject
 {

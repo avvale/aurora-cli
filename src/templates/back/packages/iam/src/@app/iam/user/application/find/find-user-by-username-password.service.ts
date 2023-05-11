@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CQMetadata, QueryStatement } from '@aurora-ts/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { IUserRepository } from '../../domain/user.repository';
 import { IamUser } from '../../domain/user.aggregate';
 import { UserPassword, UserUsername } from '../../domain/value-objects';

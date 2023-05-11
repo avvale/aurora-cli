@@ -15,11 +15,11 @@ aurora-ts-cli
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g @aurora-ts/cli
+$ npm install -g @aurorajs.dev/cli
 $ aurora COMMAND
 running command...
 $ aurora (--version)
-@aurora-ts/cli/2.1.3 darwin-arm64 node-v18.15.0
+@aurorajs.dev/cli/2.1.3 darwin-arm64 node-v18.15.0
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND

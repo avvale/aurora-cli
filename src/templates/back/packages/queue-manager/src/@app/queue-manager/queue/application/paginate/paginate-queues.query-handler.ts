@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { PaginationResponse } from '@aurora-ts/core';
+import { PaginationResponse } from '@aurorajs.dev/core';
 import { PaginateQueuesQuery } from './paginate-queues.query';
 import { PaginateQueuesService } from './paginate-queues.service';
 
