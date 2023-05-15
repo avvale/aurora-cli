@@ -121,7 +121,7 @@ jobs:
       - name: Deploy Plesk with rsync
         uses: burnett01/rsync-deployments@5.2.1
         with:
-          switches: -avzh --delete --include=".htaccess" --exclude=".*"
+          switches: -avzh --delete --include=".env" --exclude=".*"
           path: src/
           remote_path: $\{{ env.SERVER_PATH }}
           remote_host: $\{{ env.SERVER_HOST }}
