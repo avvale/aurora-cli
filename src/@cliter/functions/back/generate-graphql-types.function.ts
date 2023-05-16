@@ -5,7 +5,7 @@ export const generateGraphqlTypes = async (generateCommandState: GenerateCommand
 {
     return new Promise((resolve, reject) =>
     {
-        const graphqlTypes = shell.spawn('npm', ['run', 'graphql:types']);
+        const graphqlTypes = shell.spawn('npm', ['run', 'graphql:types'], { shell: true });
 
         graphqlTypes.stdout.on('data', data => { /**/ });
 
