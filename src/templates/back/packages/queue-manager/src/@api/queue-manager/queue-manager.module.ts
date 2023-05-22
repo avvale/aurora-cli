@@ -10,8 +10,6 @@ import { QueueManagerQueueApiHandlers, QueueManagerQueueControllers, QueueManage
 import { QueueManagerSeeder } from './queue-manager.seeder';
 import { QueueRedisImplementationService } from './shared/services/queue-redis-implementation.service';
 import { QueueManagerJobControllers, QueueManagerJobResolvers, QueueManagerJobApiHandlers, QueueManagerJobServices } from './job';
-import { QueueManagerSendEmailTasksService } from './shared/tasks/queue-manager-send-email.task';
-import { QueueManagerEmailConsumer } from './shared/consumers/queue-manager-email.consumer';
 import { QueueManagerJobRegistryControllers, QueueManagerJobRegistryResolvers, QueueManagerJobRegistryApiHandlers, QueueManagerJobRegistryServices } from './job-registry';
 
 @Module({
@@ -75,10 +73,6 @@ import { QueueManagerJobRegistryControllers, QueueManagerJobRegistryResolvers, Q
         ...QueueManagerJobRegistryResolvers,
         ...QueueManagerJobRegistryApiHandlers,
         ...QueueManagerJobRegistryServices,
-
-        // TODO, BORRAR ESTO, ES SOLO PARA PROBAR
-        QueueManagerSendEmailTasksService,
-        QueueManagerEmailConsumer,
     ],
 })
 export class QueueManagerModule {}
