@@ -9,11 +9,7 @@ import { DataTypes } from 'sequelize';
     timestamps: false,
     indexes: [
         {
-            fields: ['prefix'],
-            unique: true,
-        },
-        {
-            fields: ['name'],
+            fields: ['prefix', 'name'],
             unique: true,
         },
     ],

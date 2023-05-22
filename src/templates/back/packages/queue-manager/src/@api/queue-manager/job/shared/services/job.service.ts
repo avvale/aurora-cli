@@ -32,7 +32,7 @@ export class QueueManagerJobService
     ): Promise<Job<T>>
     {
         // get job name and opts
-        const jobName: string = typeof jobNameOrOpts === 'string' ? jobNameOrOpts : undefined;
+        const jobName: string = typeof jobNameOrOpts === 'string' ? jobNameOrOpts : '__default__';
         opts = typeof jobNameOrOpts === 'object' ? jobNameOrOpts : opts;
 
         // add job to queue

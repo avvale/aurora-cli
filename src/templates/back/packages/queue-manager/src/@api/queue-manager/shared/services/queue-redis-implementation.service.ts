@@ -28,9 +28,8 @@ export class QueueRedisImplementationService
         // get all queue names from all bounded contexts
         const queueNames = Object.values(QueueStorage) as string[];
 
-        // get all queues from redis
+        // get all queues from redis and delete all that not appear in app.queues
         const queues = await this.getQueues();
-        const payload = [];
         for (const queue of queues)
         {
             // delete all queues that are not register
@@ -43,24 +42,19 @@ export class QueueRedisImplementationService
                 this.queueRedis.del(`${queue.prefix}:${queue.name}:id`);
                 continue;
             }
+        }
 
+        // create queues that are register in app.queues
+        const payload = [];
+        for (const queueName of queueNames)
+        {
             try
             {
                 payload.push({
                     id    : Utils.uuid(),
-                    prefix: queue.prefix,
-                    name  : queue.name,
+                    prefix: queueManagerPrefix,
+                    name  : queueName,
                 });
-
-                // clean queues table
-                await this.commandBus.dispatch(new DeleteQueuesCommand({
-                    where: {},
-                }));
-
-                // create existing queues in redis
-                await this.commandBus.dispatch(new CreateQueuesCommand(
-                    payload,
-                ));
             }
             catch (error)
             {
@@ -71,6 +65,16 @@ export class QueueRedisImplementationService
                 );
             }
         }
+
+        // clean queues table
+        await this.commandBus.dispatch(new DeleteQueuesCommand({
+            where: {},
+        }));
+
+        // create existing queues in redis
+        await this.commandBus.dispatch(new CreateQueuesCommand(
+            payload,
+        ));
     }
 
     async addQueueCounters(queue): Promise<QueueManagerQueue>
