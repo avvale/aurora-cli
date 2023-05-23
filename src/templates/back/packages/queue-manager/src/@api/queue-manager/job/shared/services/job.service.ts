@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, Utils } from '@aurorajs.dev/core';
 import { Job, JobOptions, Queue } from 'bull';
 import { CreateJobRegistryCommand } from '@app/queue-manager/job-registry/application/create/create-job-registry.command';
+import { QueueManagerJobState } from '@api/graphql';
 
 @Injectable()
 export class QueueManagerJobService
@@ -49,6 +50,7 @@ export class QueueManagerJobService
             jobId    : job.id.toString(),
             jobName  : jobName ? jobName : undefined,
             tags     : Array.isArray(tags) ? tags : [tags],
+            state    : QueueManagerJobState.WAITING,
         }));
 
         return job;

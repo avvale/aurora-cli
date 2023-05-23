@@ -108,6 +108,22 @@ describe('job-registry', () =>
             });
     });
 
+    test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryState property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/queue-manager/job-registry/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                state: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for JobRegistryState must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryJobId property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -153,6 +169,22 @@ describe('job-registry', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for JobRegistryQueueName must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryState property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/queue-manager/job-registry/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                state: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for JobRegistryState must be defined, can not be undefined');
             });
     });
 
@@ -236,6 +268,21 @@ describe('job-registry', () =>
             });
     });
 
+    test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryState has to be a enum option of COMPLETED, WAITING, ACTIVE, DELAYED, FAILED, PAUSED', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/queue-manager/job-registry/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                state: '****',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for JobRegistryState has to be any of this options: COMPLETED, WAITING, ACTIVE, DELAYED, FAILED, PAUSED');
+            });
+    });
 
     test('/REST:POST queue-manager/job-registry/create - Got 409 Conflict, item already exist in database', () =>
     {
@@ -410,6 +457,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -480,6 +528,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -513,6 +562,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -546,6 +596,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -587,6 +638,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -626,6 +678,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -660,6 +713,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -692,6 +746,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -729,6 +784,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -764,6 +820,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -804,6 +861,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags
@@ -838,6 +896,7 @@ describe('job-registry', () =>
                         {
                             id
                             queueName
+                            state
                             jobId
                             jobName
                             tags

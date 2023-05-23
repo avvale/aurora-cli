@@ -1,5 +1,6 @@
 export { JobRegistryId } from './job-registry-id';
 export { JobRegistryQueueName } from './job-registry-queue-name';
+export { JobRegistryState } from './job-registry-state';
 export { JobRegistryJobId } from './job-registry-job-id';
 export { JobRegistryJobName } from './job-registry-job-name';
 export { JobRegistryTags } from './job-registry-tags';

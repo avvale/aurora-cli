@@ -44,6 +44,7 @@ describe('UpsertJobRegistryCommandHandler', () =>
                     {
                         id: jobsRegistry[0].id,
                         queueName: jobsRegistry[0].queueName,
+                        state: jobsRegistry[0].state,
                         jobId: jobsRegistry[0].jobId,
                         jobName: jobsRegistry[0].jobName,
                         tags: jobsRegistry[0].tags,

@@ -5,6 +5,7 @@ import { CQMetadata } from '@aurorajs.dev/core';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -28,6 +29,7 @@ export class UpdateJobsRegistryService
         payload: {
             id?: JobRegistryId;
             queueName?: JobRegistryQueueName;
+            state?: JobRegistryState;
             jobId?: JobRegistryJobId;
             jobName?: JobRegistryJobName;
             tags?: JobRegistryTags;
@@ -41,6 +43,7 @@ export class UpdateJobsRegistryService
         const jobRegistry = QueueManagerJobRegistry.register(
             payload.id,
             payload.queueName,
+            payload.state,
             payload.jobId,
             payload.jobName,
             payload.tags,

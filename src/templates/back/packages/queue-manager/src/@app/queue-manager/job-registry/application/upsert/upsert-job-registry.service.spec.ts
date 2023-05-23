@@ -8,6 +8,7 @@ import { UpsertJobRegistryService } from './upsert-job-registry.service';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -62,6 +63,7 @@ describe('UpsertJobRegistryService', () =>
                 {
                     id: new JobRegistryId(jobsRegistry[0].id),
                     queueName: new JobRegistryQueueName(jobsRegistry[0].queueName),
+                    state: new JobRegistryState(jobsRegistry[0].state),
                     jobId: new JobRegistryJobId(jobsRegistry[0].jobId),
                     jobName: new JobRegistryJobName(jobsRegistry[0].jobName),
                     tags: new JobRegistryTags(jobsRegistry[0].tags),

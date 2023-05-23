@@ -16,6 +16,19 @@ aggregateProperties:
     type: varchar
     maxLength: 50
     nullable: false
+  - name: state
+    type: enum
+    enumOptions:
+      - COMPLETED
+      - WAITING
+      - ACTIVE
+      - DELAYED
+      - FAILED
+      - PAUSED
+    nullable: false
+    defaultValue: WAITING
+    index: index
+    example: QueueManagerJobState.COMPLETED
   - name: jobId
     type: varchar
     maxLength: 36

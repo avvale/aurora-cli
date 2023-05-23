@@ -29,6 +29,7 @@ export class AddJobsRegistryContextEvent extends AggregateRoot
                     new CreatedJobRegistryEvent(
                         jobRegistry.id.value,
                         jobRegistry.queueName.value,
+                        jobRegistry.state.value,
                         jobRegistry.jobId.value,
                         jobRegistry.jobName?.value,
                         jobRegistry.tags?.value,
@@ -49,6 +50,7 @@ export class AddJobsRegistryContextEvent extends AggregateRoot
                     new UpdatedJobRegistryEvent(
                         jobRegistry.id.value,
                         jobRegistry.queueName.value,
+                        jobRegistry.state.value,
                         jobRegistry.jobId.value,
                         jobRegistry.jobName?.value,
                         jobRegistry.tags?.value,
@@ -69,6 +71,7 @@ export class AddJobsRegistryContextEvent extends AggregateRoot
                     new DeletedJobRegistryEvent(
                         jobRegistry.id.value,
                         jobRegistry.queueName.value,
+                        jobRegistry.state.value,
                         jobRegistry.jobId.value,
                         jobRegistry.jobName?.value,
                         jobRegistry.tags?.value,

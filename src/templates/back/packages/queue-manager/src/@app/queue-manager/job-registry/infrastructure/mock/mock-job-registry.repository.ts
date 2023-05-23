@@ -4,6 +4,7 @@ import { IJobRegistryRepository } from '@app/queue-manager/job-registry/domain/j
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -47,6 +48,7 @@ export class MockJobRegistryRepository extends MockRepository<QueueManagerJobReg
             this.collectionSource.push(QueueManagerJobRegistry.register(
                 new JobRegistryId(itemCollection.id),
                 new JobRegistryQueueName(itemCollection.queueName),
+                new JobRegistryState(itemCollection.state),
                 new JobRegistryJobId(itemCollection.jobId),
                 new JobRegistryJobName(itemCollection.jobName),
                 new JobRegistryTags(itemCollection.tags),

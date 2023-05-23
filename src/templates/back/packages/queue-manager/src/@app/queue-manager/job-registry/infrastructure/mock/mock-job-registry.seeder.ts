@@ -3,6 +3,7 @@ import { MockSeeder } from '@aurorajs.dev/core';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -35,6 +36,7 @@ export class MockJobRegistrySeeder extends MockSeeder<QueueManagerJobRegistry>
                 QueueManagerJobRegistry.register(
                     new JobRegistryId(jobRegistry.id),
                     new JobRegistryQueueName(jobRegistry.queueName),
+                    new JobRegistryState(jobRegistry.state),
                     new JobRegistryJobId(jobRegistry.jobId),
                     new JobRegistryJobName(jobRegistry.jobName),
                     new JobRegistryTags(jobRegistry.tags),

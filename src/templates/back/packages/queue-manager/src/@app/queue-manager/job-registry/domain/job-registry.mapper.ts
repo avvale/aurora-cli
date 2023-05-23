@@ -5,6 +5,7 @@ import { JobRegistryResponse } from './job-registry.response';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -66,6 +67,7 @@ export class JobRegistryMapper implements IMapper
         return QueueManagerJobRegistry.register(
             new JobRegistryId(jobRegistry.id, { undefinable: true }),
             new JobRegistryQueueName(jobRegistry.queueName, { undefinable: true }),
+            new JobRegistryState(jobRegistry.state, { undefinable: true }),
             new JobRegistryJobId(jobRegistry.jobId, { undefinable: true }),
             new JobRegistryJobName(jobRegistry.jobName, { undefinable: true }),
             new JobRegistryTags(jobRegistry.tags, { undefinable: true }),
@@ -82,6 +84,7 @@ export class JobRegistryMapper implements IMapper
         return new JobRegistryResponse(
             jobRegistry.id.value,
             jobRegistry.queueName.value,
+            jobRegistry.state.value,
             jobRegistry.jobId.value,
             jobRegistry.jobName.value,
             jobRegistry.tags.value,

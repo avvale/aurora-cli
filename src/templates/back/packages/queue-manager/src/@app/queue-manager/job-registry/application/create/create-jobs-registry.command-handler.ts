@@ -5,6 +5,7 @@ import { CreateJobsRegistryService } from './create-jobs-registry.service';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -30,6 +31,7 @@ export class CreateJobsRegistryCommandHandler implements ICommandHandler<CreateJ
                     return {
                         id: new JobRegistryId(jobRegistry.id),
                         queueName: new JobRegistryQueueName(jobRegistry.queueName),
+                        state: new JobRegistryState(jobRegistry.state),
                         jobId: new JobRegistryJobId(jobRegistry.jobId),
                         jobName: new JobRegistryJobName(jobRegistry.jobName),
                         tags: new JobRegistryTags(jobRegistry.tags),

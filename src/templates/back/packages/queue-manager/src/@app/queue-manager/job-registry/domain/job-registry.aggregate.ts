@@ -5,6 +5,7 @@ import { Utils } from '@aurorajs.dev/core';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -20,6 +21,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
 {
     id: JobRegistryId;
     queueName: JobRegistryQueueName;
+    state: JobRegistryState;
     jobId: JobRegistryJobId;
     jobName: JobRegistryJobName;
     tags: JobRegistryTags;
@@ -32,6 +34,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
     constructor(
         id: JobRegistryId,
         queueName: JobRegistryQueueName,
+        state: JobRegistryState,
         jobId: JobRegistryJobId,
         jobName: JobRegistryJobName,
         tags: JobRegistryTags,
@@ -44,6 +47,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
         super();
         this.id = id;
         this.queueName = queueName;
+        this.state = state;
         this.jobId = jobId;
         this.jobName = jobName;
         this.tags = tags;
@@ -57,6 +61,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
     static register (
         id: JobRegistryId,
         queueName: JobRegistryQueueName,
+        state: JobRegistryState,
         jobId: JobRegistryJobId,
         jobName: JobRegistryJobName,
         tags: JobRegistryTags,
@@ -69,6 +74,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
         return new QueueManagerJobRegistry(
             id,
             queueName,
+            state,
             jobId,
             jobName,
             tags,
@@ -85,6 +91,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
             new CreatedJobRegistryEvent(
                 jobRegistry.id.value,
                 jobRegistry.queueName.value,
+                jobRegistry.state.value,
                 jobRegistry.jobId.value,
                 jobRegistry.jobName?.value,
                 jobRegistry.tags?.value,
@@ -101,6 +108,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
             new UpdatedJobRegistryEvent(
                 jobRegistry.id?.value,
                 jobRegistry.queueName?.value,
+                jobRegistry.state?.value,
                 jobRegistry.jobId?.value,
                 jobRegistry.jobName?.value,
                 jobRegistry.tags?.value,
@@ -117,6 +125,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
             new DeletedJobRegistryEvent(
                 jobRegistry.id.value,
                 jobRegistry.queueName.value,
+                jobRegistry.state.value,
                 jobRegistry.jobId.value,
                 jobRegistry.jobName?.value,
                 jobRegistry.tags?.value,
@@ -132,6 +141,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
         return {
             id: this.id.value,
             queueName: this.queueName.value,
+            state: this.state.value,
             jobId: this.jobId.value,
             jobName: this.jobName?.value,
             tags: this.tags?.value,
@@ -149,6 +159,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
         return {
             id: this.id.value,
             queueName: this.queueName.value,
+            state: this.state.value,
             jobId: this.jobId.value,
             jobName: this.jobName?.value,
             tags: this.tags?.value,

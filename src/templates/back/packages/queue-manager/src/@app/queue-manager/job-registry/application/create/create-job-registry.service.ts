@@ -10,6 +10,7 @@ import {
 	JobRegistryJobId,
 	JobRegistryJobName,
 	JobRegistryQueueName,
+	JobRegistryState,
 	JobRegistryTags,
 	JobRegistryUpdatedAt,
 } from '../../domain/value-objects';
@@ -26,6 +27,7 @@ export class CreateJobRegistryService
         payload: {
             id: JobRegistryId;
             queueName: JobRegistryQueueName;
+            state: JobRegistryState;
             jobId: JobRegistryJobId;
             jobName: JobRegistryJobName;
             tags: JobRegistryTags;
@@ -37,6 +39,7 @@ export class CreateJobRegistryService
         const jobRegistry = QueueManagerJobRegistry.register(
             payload.id,
             payload.queueName,
+            payload.state,
             payload.jobId,
             payload.jobName,
             payload.tags,

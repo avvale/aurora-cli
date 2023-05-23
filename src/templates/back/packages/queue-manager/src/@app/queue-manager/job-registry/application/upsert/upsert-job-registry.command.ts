@@ -6,6 +6,7 @@ export class UpsertJobRegistryCommand
         public readonly payload: {
             id: string;
             queueName?: string;
+            state?: string;
             jobId?: string;
             jobName?: string;
             tags?: any;

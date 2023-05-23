@@ -4,6 +4,7 @@ import { CQMetadata } from '@aurorajs.dev/core';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -27,6 +28,7 @@ export class CreateJobsRegistryService
         jobsRegistry: {
             id: JobRegistryId;
             queueName: JobRegistryQueueName;
+            state: JobRegistryState;
             jobId: JobRegistryJobId;
             jobName: JobRegistryJobName;
             tags: JobRegistryTags;
@@ -38,6 +40,7 @@ export class CreateJobsRegistryService
         const aggregateJobsRegistry = jobsRegistry.map(jobRegistry => QueueManagerJobRegistry.register(
             jobRegistry.id,
             jobRegistry.queueName,
+            jobRegistry.state,
             jobRegistry.jobId,
             jobRegistry.jobName,
             jobRegistry.tags,

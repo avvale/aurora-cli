@@ -4,7 +4,7 @@ import { getQueueToken } from '@nestjs/bull';
 import { Job } from 'bull';
 
 // @app
-import { QueueManagerJob } from '@api/graphql';
+import { QueueManagerJob, QueueManagerJobState } from '@api/graphql';
 import { QueueManagerJobDto } from '../dto';
 
 @Injectable()
@@ -25,10 +25,14 @@ export class QueueManagerDeleteJobByIdHandler
         );
 
         const job: Job = await queueInstance.getJob(id);
+        const state = await job.getState();
 
         // remove job from redis database
         job.remove();
 
-        return job.toJSON();
+        return {
+            ...job.toJSON(),
+            state: QueueManagerJobState[state.toUpperCase()],
+        }
     }
 }

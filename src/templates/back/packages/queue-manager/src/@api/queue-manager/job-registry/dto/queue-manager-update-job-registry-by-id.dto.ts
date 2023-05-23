@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
+import { QueueManagerJobRegistryState, QueueManagerJobState } from '@api/graphql';
 
 export class QueueManagerUpdateJobRegistryByIdDto
 {
@@ -14,6 +15,14 @@ export class QueueManagerUpdateJobRegistryByIdDto
         description: 'queueName [input here api field description]',
     })
     queueName?: string;
+
+    @ApiProperty({
+        type       : QueueManagerJobRegistryState,
+        enum       : ['COMPLETED','WAITING','ACTIVE','DELAYED','FAILED','PAUSED'],
+        description: 'state [input here api field description]',
+        example    : QueueManagerJobState.COMPLETED,
+    })
+    state?: QueueManagerJobRegistryState;
 
     @ApiProperty({
         type       : String,

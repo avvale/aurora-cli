@@ -9,6 +9,10 @@ import { DataTypes } from 'sequelize';
     timestamps: false,
     indexes: [
         {
+            fields: ['state'],
+            unique: false,
+        },
+        {
             fields: ['jobId'],
             unique: true,
         },
@@ -34,6 +38,14 @@ export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryM
         type: DataTypes.STRING(50),
     })
     queueName: string;
+
+    @Column({
+        field: 'state',
+        allowNull: false,
+        type: DataTypes.ENUM('COMPLETED','WAITING','ACTIVE','DELAYED','FAILED','PAUSED'),
+        defaultValue: 'WAITING',
+    })
+    state: string;
 
     @Column({
         field: 'jobId',

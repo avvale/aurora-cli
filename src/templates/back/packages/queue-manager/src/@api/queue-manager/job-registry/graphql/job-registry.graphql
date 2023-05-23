@@ -1,8 +1,18 @@
+enum QueueManagerJobRegistryState {
+    COMPLETED
+    WAITING
+    ACTIVE
+    DELAYED
+    FAILED
+    PAUSED
+}
+
 
 type QueueManagerJobRegistry
 {
     id: ID!
     queueName: GraphQLString!
+    state: QueueManagerJobRegistryState!
     jobId: GraphQLString!
     jobName: GraphQLString
     tags: JSON
@@ -15,6 +25,7 @@ input QueueManagerCreateJobRegistryInput
 {
     id: ID!
     queueName: GraphQLString!
+    state: QueueManagerJobRegistryState!
     jobId: GraphQLString!
     jobName: GraphQLString
     tags: JSON
@@ -24,6 +35,7 @@ input QueueManagerUpdateJobRegistryByIdInput
 {
     id: ID!
     queueName: GraphQLString
+    state: QueueManagerJobRegistryState
     jobId: GraphQLString
     jobName: GraphQLString
     tags: JSON
@@ -33,6 +45,7 @@ input QueueManagerUpdateJobsRegistryInput
 {
     id: ID
     queueName: GraphQLString
+    state: QueueManagerJobRegistryState
     jobId: GraphQLString
     jobName: GraphQLString
     tags: JSON

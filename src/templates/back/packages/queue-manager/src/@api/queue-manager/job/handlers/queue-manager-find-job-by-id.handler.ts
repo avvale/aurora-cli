@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // @app
-import { QueueManagerJob } from '@api/graphql';
+import { QueueManagerJob, QueueManagerJobState } from '@api/graphql';
 import { QueueManagerJobDto } from '../dto';
 import { getQueueToken } from '@nestjs/bull';
 import { ModuleRef } from '@nestjs/core';
@@ -25,7 +25,11 @@ export class QueueManagerFindJobByIdHandler
         );
 
         const job: Job = await queueInstance.getJob(id);
+        const state = await job.getState();
 
-        return job.toJSON();
+        return {
+            ...job.toJSON(),
+            state: QueueManagerJobState[state.toUpperCase()],
+        }
     }
 }

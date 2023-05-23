@@ -5,6 +5,7 @@ import { UpsertJobRegistryService } from './upsert-job-registry.service';
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -27,6 +28,7 @@ export class UpsertJobRegistryCommandHandler implements ICommandHandler<UpsertJo
             {
                 id: new JobRegistryId(command.payload.id),
                 queueName: new JobRegistryQueueName(command.payload.queueName),
+                state: new JobRegistryState(command.payload.state),
                 jobId: new JobRegistryJobId(command.payload.jobId),
                 jobName: new JobRegistryJobName(command.payload.jobName),
                 tags: new JobRegistryTags(command.payload.tags),

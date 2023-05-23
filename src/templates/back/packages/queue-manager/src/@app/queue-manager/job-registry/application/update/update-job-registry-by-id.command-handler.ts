@@ -5,6 +5,7 @@ import { UpdateJobRegistryByIdService } from './update-job-registry-by-id.servic
 import {
     JobRegistryId,
     JobRegistryQueueName,
+    JobRegistryState,
     JobRegistryJobId,
     JobRegistryJobName,
     JobRegistryTags,
@@ -27,6 +28,7 @@ export class UpdateJobRegistryByIdCommandHandler implements ICommandHandler<Upda
             {
                 id: new JobRegistryId(command.payload.id),
                 queueName: new JobRegistryQueueName(command.payload.queueName, { undefinable: true }),
+                state: new JobRegistryState(command.payload.state, { undefinable: true }),
                 jobId: new JobRegistryJobId(command.payload.jobId, { undefinable: true }),
                 jobName: new JobRegistryJobName(command.payload.jobName),
                 tags: new JobRegistryTags(command.payload.tags),
