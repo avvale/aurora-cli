@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data.ts",
-            "integrity": "sha1:1fd31aca6af14e9754b3ccfeab9cc35b3a5696df"
+            "integrity": "sha1:71ec9314e6865da418424632427397a8b292959d"
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.repository.ts",
@@ -494,7 +494,7 @@
             "integrity": "sha1:82df229b68f3c4edd2cdf9ba314d13e8aa1cbfb1"
         },
         {
-            "path": "src/@api/queue-manager/job-registry/graphql/job-registry.graphql",
+            "path": "src/@api/queue-manager/job-registry/graphql/queue-manager-job-registry.graphql",
             "integrity": "sha1:1ce69efc78452000f7ba1f1cc848853660f4acab"
         },
         {
@@ -687,7 +687,7 @@
         },
         {
             "path": "postman/queue-manager/queue-manager.job-registry.postman.json",
-            "integrity": "sha1:96cc0b5299c2ea958e0892fdcf30be5a35c33892"
+            "integrity": "sha1:2e529be4b9f06320d73fd85b4178eb09111ac533"
         }
     ]
 }

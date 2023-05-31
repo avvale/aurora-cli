@@ -1,13 +1,11 @@
-import { ModuleRef } from '@nestjs/core';
 import { Injectable } from '@nestjs/common';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { getQueueToken } from '@nestjs/bull';
 
 // @app
 import { FindQueueByIdQuery } from '@app/queue-manager/queue/application/find/find-queue-by-id.query';
 import { QueueManagerQueue } from '@api/graphql';
 import { QueueManagerQueueDto } from '../dto';
-import { QueueRedisImplementationService } from '@api/queue-manager/shared/services/queue-redis-implementation.service';
+import { QueueRedisImplementationService } from '@api/queue-manager/shared/services';
 
 @Injectable()
 export class QueueManagerFindQueueByIdHandler
