@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 
 export const fields = `
     queueName
+    state
     jobId
     jobName
     tags

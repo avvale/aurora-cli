@@ -18,6 +18,7 @@
     "QueueManager": "Queue Manager",
     "QueueName": "QueueName",
     "Queues": "Queues",
+    "State": "State",
     "Tags": "Tags",
     "WaitingJobs": "Waiting"
 }

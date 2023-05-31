@@ -4,8 +4,8 @@ import { Action, ActionService, GridData, GridFiltersStorageService, GridStateSe
 import { Observable, Subject, first, map } from 'rxjs';
 import { QueueManagerJob, QueueManagerJobRegistry } from '../queue-manager.types';
 import { jobRegistryColumnsConfig } from './job-registry.columns-config';
-import { JobService } from '../job/job.service';
 import { JobRegistryService } from './job-registry.service';
+import { JobService } from '../job/job.service';
 
 @Injectable({
     providedIn: 'root',

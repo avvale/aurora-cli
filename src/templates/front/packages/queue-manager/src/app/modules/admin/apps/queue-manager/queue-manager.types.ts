@@ -101,3 +101,12 @@ export interface QueueManagerUpdateJobsRegistry {
     jobName?: string;
     tags?: any;
 }
+
+export enum QueueManagerJobState {
+    COMPLETED = 'COMPLETED',
+    WAITING = 'WAITING',
+    ACTIVE = 'ACTIVE',
+    DELAYED = 'DELAYED',
+    FAILED = 'FAILED',
+    PAUSED = 'PAUSED'
+}

@@ -17,46 +17,45 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-            <button
-                *ngIf="currentViewAction.id === 'queueManager::jobRegistry.detail.edit'"
-                mat-flat-button
-                type="submit"
-                class="ml-3"
-                form="queueManagerJobRegistryFormDetail"
+            <au-split-button
                 color="accent"
-                [disabled]="fg.pristine || ('queueManager::jobRegistry.detail.update' | getSpinnerFlag | async)"
             >
-                <mat-icon
-                    *ngIf="!('queueManager::jobRegistry.detail.update' | getSpinnerFlag | async)"
-                    class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
-                >
-                </mat-icon>
-                <mat-icon *ngIf="'queueManager::jobRegistry.detail.update' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Update') }}
-            </button>
-            <button
-                *ngIf="currentViewAction.id === 'queueManager::jobRegistry.detail.new'"
-                mat-flat-button
-                type="submit"
-                form="queueManagerJobRegistryFormDetail"
-                class="ml-3"
-                color="accent"
-                [disabled]="fg.pristine || ('queueManager::jobRegistry.detail.create' | getSpinnerFlag | async)"
-            >
-                <mat-icon
-                    *ngIf="!('queueManager::jobRegistry.detail.create' | getSpinnerFlag | async)"
-                    class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
-                >
-                </mat-icon>
-                <mat-icon *ngIf="'queueManager::jobRegistry.detail.create' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Create') }}
-            </button>
+                <ng-template auSplitMainButtonContentTemplate>
+                    <mat-icon
+                        *ngIf="!('orion::transport.detail.update' | getSpinnerFlag | async)"
+                        class="icon-size-5 mr-2"
+                    >
+                        settings
+                    </mat-icon>
+                    <mat-icon *ngIf="'orion::transport.detail.update' | getSpinnerFlag | async">
+                        <mat-spinner diameter="20"></mat-spinner>
+                    </mat-icon>
+                    {{ t('Operations') }}
+                </ng-template>
+                <ng-template auSplitMenuButtonsTemplate>
+                    <button
+                        *ngIf="managedObject | canCancelTransport"
+                        mat-menu-item
+                        (click)="
+                            handleAction({
+                                id: 'orion::transport.detail.cancelTransport',
+                                isViewAction: false
+                            })
+                        "
+                    >
+                        <mat-icon>block</mat-icon>
+                        <span>{{ t('orion.CancelTransport') }}</span>
+                    </button>
+                    <button
+                        *ngIf="managedObject | canCloseTransport"
+                        mat-menu-item
+                        (click)="handleCloseTransport()"
+                    >
+                        <mat-icon>lock</mat-icon>
+                        <span>{{ t('orion.CloseTransport') }}</span>
+                    </button>
+                </ng-template>
+            </au-split-button>
         </div>
         <!-- / Actions -->
 
@@ -98,6 +97,17 @@
                             formControlName="name"
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-2"
+                    >
+                        <mat-label>{{ t('State') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="state"
+                        >
+                        <mat-error>{{ formErrors?.state | async }}</mat-error>
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"

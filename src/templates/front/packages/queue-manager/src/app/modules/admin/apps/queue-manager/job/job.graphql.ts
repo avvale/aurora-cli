@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const fields = `
     id
     name
+    state
     data
     opts
     progress

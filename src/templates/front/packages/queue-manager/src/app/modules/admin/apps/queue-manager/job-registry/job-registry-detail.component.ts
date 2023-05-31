@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from 
 import { Validators } from '@angular/forms';
 import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
-import { QueueManagerJob, QueueManagerJobRegistry } from '../queue-manager.types';
+import { QueueManagerJob, QueueManagerJobRegistry, QueueManagerJobState } from '../queue-manager.types';
 import { JobRegistryService } from './job-registry.service';
 import { JobService } from '../job/job.service';
 
@@ -15,7 +15,7 @@ import { JobService } from '../job/job.service';
 export class JobRegistryDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
-    // ..
+    jobState = QueueManagerJobState;
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
@@ -82,6 +82,7 @@ export class JobRegistryDetailComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             id          : [{ value: '', disabled: true }],
             name        : [{ value: '', disabled: true }],
+            state       : [{ value: '', disabled: true }],
             delay       : [{ value: '', disabled: true }],
             failedReason: [{ value: '', disabled: true }],
         });
