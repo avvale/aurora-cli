@@ -14,19 +14,19 @@ import {
     CountryLatitude,
     CountryLongitude,
     CountryZoom,
-    CountryDataLang,
+    CountryAvailableLangs,
     CountryCreatedAt,
     CountryUpdatedAt,
     CountryDeletedAt,
-    CountryI18NLangId,
-    CountryI18NName,
-    CountryI18NSlug,
-    CountryI18NAdministrativeAreaLevel1,
-    CountryI18NAdministrativeAreaLevel2,
-    CountryI18NAdministrativeAreaLevel3,
+    CountryI18nLangId,
+    CountryI18nName,
+    CountryI18nSlug,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
 } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { CommonCountry } from '../../domain/country.aggregate';
 import * as _ from 'lodash';
 
@@ -36,7 +36,7 @@ export class CreateCountryService
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ICountryRepository,
-        private readonly repositoryI18n: ICountryI18NRepository,
+        private readonly repositoryI18n: ICountryI18nRepository,
     ) {}
 
     async main(
@@ -53,12 +53,12 @@ export class CreateCountryService
             latitude: CountryLatitude;
             longitude: CountryLongitude;
             zoom: CountryZoom;
-            langId: CountryI18NLangId;
-            name: CountryI18NName;
-            slug: CountryI18NSlug;
-            administrativeAreaLevel1: CountryI18NAdministrativeAreaLevel1;
-            administrativeAreaLevel2: CountryI18NAdministrativeAreaLevel2;
-            administrativeAreaLevel3: CountryI18NAdministrativeAreaLevel3;
+            langId: CountryI18nLangId;
+            name: CountryI18nName;
+            slug: CountryI18nSlug;
+            administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1;
+            administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2;
+            administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3;
         },
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -77,7 +77,7 @@ export class CreateCountryService
             payload.latitude,
             payload.longitude,
             payload.zoom,
-            null, // dataLang
+            null, // availableLangs
             new CountryCreatedAt({ currentTimestamp: true }),
             new CountryUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
@@ -92,19 +92,19 @@ export class CreateCountryService
         try
         {
             // try get object from database
-            const countryInDB = await this.repository.findById(country.id, { constraint: { include: ['countryI18N']}});
+            const countryInDB = await this.repository.findById(country.id, { constraint: { include: ['countryI18n']}});
 
-            if (countryInDB.dataLang.value.includes(country.langId.value)) throw new ConflictException(`Error to create CommonCountry, the id ${country['id']['value']} already exist in database`);
+            if (countryInDB.availableLangs.value.includes(country.langId.value)) throw new ConflictException(`Error to create CommonCountry, the id ${country['id']['value']} already exist in database`);
 
             // add new lang id to data lang field to create or update field
-            country.dataLang = new CountryDataLang(_.union(countryInDB.dataLang.value, [country.langId.value]));
-            await this.repository.update(country, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'dataLang'), updateOptions: cQMetadata?.repositoryOptions });
+            country.availableLangs = new CountryAvailableLangs(_.union(countryInDB.availableLangs.value, [country.langId.value]));
+            await this.repository.update(country, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'availableLangs'), updateOptions: cQMetadata?.repositoryOptions });
         }
         catch (error)
         {
             if (error instanceof NotFoundException)
             {
-                country.dataLang = new CountryDataLang([country.langId.value]);
+                country.availableLangs = new CountryAvailableLangs([country.langId.value]);
                 await this.repository.create(country, { createOptions: cQMetadata?.repositoryOptions });
             }
         }

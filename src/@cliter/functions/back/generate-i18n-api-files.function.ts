@@ -3,7 +3,7 @@ import { cliterConfig } from '../../config';
 import { GenerateCommandState, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 
-export const generateI18NApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateI18nApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (generateCommandState.schema.properties.hasI18n)
     {

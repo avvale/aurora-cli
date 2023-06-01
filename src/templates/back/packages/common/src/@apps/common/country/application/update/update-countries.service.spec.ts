@@ -18,26 +18,26 @@ import {
     CountryLatitude,
     CountryLongitude,
     CountryZoom,
-    CountryDataLang,
+    CountryAvailableLangs,
     CountryCreatedAt,
     CountryUpdatedAt,
     CountryDeletedAt,
-    CountryI18NLangId,
-    CountryI18NName,
-    CountryI18NSlug,
-    CountryI18NAdministrativeAreaLevel1,
-    CountryI18NAdministrativeAreaLevel2,
-    CountryI18NAdministrativeAreaLevel3,
+    CountryI18nLangId,
+    CountryI18nName,
+    CountryI18nSlug,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
 } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('UpdateCountriesService', () =>
 {
     let service: UpdateCountriesService;
     let repository: ICountryRepository;
-    let repositoryI18N: ICountryI18NRepository;
+    let repositoryI18n: ICountryI18nRepository;
     let mockRepository: MockCountryRepository;
 
     beforeAll(async () =>
@@ -57,7 +57,7 @@ describe('UpdateCountriesService', () =>
                     },
                 },
                 {
-                    provide : ICountryI18NRepository,
+                    provide : ICountryI18nRepository,
                     useValue: {
                         update: () => { /**/ },
                     },
@@ -68,7 +68,7 @@ describe('UpdateCountriesService', () =>
 
         service         = module.get(UpdateCountriesService);
         repository      = module.get(ICountryRepository);
-        repositoryI18N  = module.get(ICountryI18NRepository);
+        repositoryI18n  = module.get(ICountryI18nRepository);
         mockRepository  = module.get(MockCountryRepository);
     });
 
@@ -95,12 +95,12 @@ describe('UpdateCountriesService', () =>
                     latitude: new CountryLatitude(countries[0].latitude),
                     longitude: new CountryLongitude(countries[0].longitude),
                     zoom: new CountryZoom(countries[0].zoom),
-                    langId: new CountryI18NLangId(countries[0].langId),
-                    name: new CountryI18NName(countries[0].name),
-                    slug: new CountryI18NSlug(countries[0].slug),
-                    administrativeAreaLevel1: new CountryI18NAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
-                    administrativeAreaLevel2: new CountryI18NAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
-                    administrativeAreaLevel3: new CountryI18NAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
+                    langId: new CountryI18nLangId(countries[0].langId),
+                    name: new CountryI18nName(countries[0].name),
+                    slug: new CountryI18nSlug(countries[0].slug),
+                    administrativeAreaLevel1: new CountryI18nAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
+                    administrativeAreaLevel2: new CountryI18nAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
+                    administrativeAreaLevel3: new CountryI18nAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
                 },
             )).toBe(undefined);
         });

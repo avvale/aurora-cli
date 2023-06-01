@@ -196,7 +196,7 @@
         },
         {{#if schema.properties.hasI18n}}
         {
-			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdI18N",
+			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdI18n",
 			"request": {
 				"method": "POST",
 				"header": [

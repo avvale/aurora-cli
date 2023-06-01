@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteCountryByIdI18NCommandHandler } from './delete-country-by-id-i18n.command-handler';
+import { DeleteCountryByIdI18nCommandHandler } from './delete-country-by-id-i18n.command-handler';
 import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
-import { DeleteCountryByIdI18NCommand } from './delete-country-by-id-i18n.command';
-import { DeleteCountryByIdI18NService } from './delete-country-by-id-i18n.service';
+import { DeleteCountryByIdI18nCommand } from './delete-country-by-id-i18n.command';
+import { DeleteCountryByIdI18nService } from './delete-country-by-id-i18n.service';
 
-describe('DeleteCountryByIdI18NCommandHandler', () =>
+describe('DeleteCountryByIdI18nCommandHandler', () =>
 {
-    let commandHandler: DeleteCountryByIdI18NCommandHandler;
-    let service: DeleteCountryByIdI18NService;
+    let commandHandler: DeleteCountryByIdI18nCommandHandler;
+    let service: DeleteCountryByIdI18nService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                DeleteCountryByIdI18NCommandHandler,
+                DeleteCountryByIdI18nCommandHandler,
                 {
-                    provide: DeleteCountryByIdI18NService,
+                    provide: DeleteCountryByIdI18nService,
                     useValue: {
                         main: () => {},
                     },
@@ -26,21 +26,21 @@ describe('DeleteCountryByIdI18NCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<DeleteCountryByIdI18NCommandHandler>(DeleteCountryByIdI18NCommandHandler);
-        service         = module.get<DeleteCountryByIdI18NService>(DeleteCountryByIdI18NService);
+        commandHandler  = module.get<DeleteCountryByIdI18nCommandHandler>(DeleteCountryByIdI18nCommandHandler);
+        service         = module.get<DeleteCountryByIdI18nService>(DeleteCountryByIdI18nService);
     });
 
     describe('main', () =>
     {
-        test('DeleteCountryByIdI18NCommandHandler should be defined', () =>
+        test('DeleteCountryByIdI18nCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the DeleteCountryByIdI18NService', async () =>
+        test('should create the value object id and pass them as parameters to the DeleteCountryByIdI18nService', async () =>
         {
             expect(await commandHandler.execute(
-                new DeleteCountryByIdI18NCommand(
+                new DeleteCountryByIdI18nCommand(
                     countries[0].id,
                 )
             )).toBe(undefined);

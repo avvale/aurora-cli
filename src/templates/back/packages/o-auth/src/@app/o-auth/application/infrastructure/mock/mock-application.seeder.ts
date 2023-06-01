@@ -23,10 +23,10 @@ export class MockApplicationSeeder extends MockSeeder<OAuthApplication>
     constructor()
     {
         super();
-        this._createMockDataLang();
+        this._createMock();
     }
 
-    private _createMockDataLang(): void
+    private _createMock(): void
     {
         this.collectionSource = [];
 

@@ -8,7 +8,7 @@ import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18NRepository}}
+{{> importI18nRepository}}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from '../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
@@ -18,7 +18,7 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
-        {{> declareI18NRepository}}
+        {{> declareI18nRepository}}
         {{#if schema.properties.hasI18n}}
         private readonly configService: ConfigService,
         {{/if}}
@@ -58,10 +58,27 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         // insert
         {{#if schema.properties.hasI18n}}
         // delete duplicate elements from multiple languages
-        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)), cQMetadata?.repositoryOptions, { insertOptions: cQMetadata?.repositoryOptions });
-        await this.repositoryI18n.insert(aggregate{{ toPascalCase schema.moduleNames }}, { dataFactory: aggregate => aggregate.toI18nDTO(), insertOptions: cQMetadata?.repositoryOptions });
+        await this.repository.insert(
+            aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)),
+            {
+                insertOptions: cQMetadata?.repositoryOptions,
+            },
+        );
+
+        await this.repositoryI18n.insert(
+            aggregate{{ toPascalCase schema.moduleNames }},
+            {
+                dataFactory  : aggregate => aggregate.toI18nDTO(),
+                insertOptions: cQMetadata?.repositoryOptions,
+            },
+        );
         {{else}}
-        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}, { insertOptions: cQMetadata?.repositoryOptions });
+        await this.repository.insert(
+            aggregate{{ toPascalCase schema.moduleNames }},
+            {
+                insertOptions: cQMetadata?.repositoryOptions,
+            },
+        );
         {{/if}}
 
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality

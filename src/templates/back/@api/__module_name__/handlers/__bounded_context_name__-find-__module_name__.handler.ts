@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { {{#if schema.properties.hasI18n}}AddI18nConstraintService, {{/if}}IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasTenant}}
 
 // tenant
@@ -17,7 +17,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     constructor(
         private readonly queryBus: IQueryBus,
         {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly addI18nConstraintService: AddI18nConstraintService,
         {{/if}}
     ) {}
 
@@ -34,9 +34,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto>
     {
         {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main(
+        constraint = await this.addI18nConstraintService.main(
             constraint,
-            '{{ toCamelCase schema.moduleName }}I18N',
+            '{{ toCamelCase schema.moduleName }}I18n',
             contentLanguage,
         );
         {{/if}}

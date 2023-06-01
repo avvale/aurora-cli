@@ -5,7 +5,7 @@ import { CQMetadata, Pagination } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.moduleName }}Id } from './value-objects';
 
-export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implements IRepository<{{ schema.aggregateName }}>
+export abstract class I{{ toPascalCase schema.moduleName }}I18nRepository implements IRepository<{{ schema.aggregateName }}>
 {
     abstract readonly repository: any;
 
@@ -41,6 +41,14 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
         options?: {
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<{{ schema.aggregateName }}[]>;
+
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
             cQMetadata?: CQMetadata;
         }
     ): Promise<{{ schema.aggregateName }}[]>;
@@ -99,6 +107,15 @@ export abstract class I{{ toPascalCase schema.moduleName }}I18NRepository implem
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
+        }
+    ): Promise<void>;
+
+    // insert or update key identification element already existing in the table
+    abstract upsert(
+        {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
+        options?: {
+            upsertOptions?: LiteralObject;
             dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
         }
     ): Promise<void>;

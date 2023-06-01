@@ -8,7 +8,7 @@ import { Delete{{ toPascalCase schema.moduleName }}ByIdService } from './delete-
 import { {{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
-import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+import { I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
 
@@ -17,7 +17,7 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
     let service: Delete{{ toPascalCase schema.moduleName }}ByIdService;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
-    let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
+    let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18nRepository;
     {{/if}}
     let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
 
@@ -39,7 +39,7 @@ describe('Delete{{ toPascalCase schema.moduleName }}ByIdService', () =>
                 },
                 {{#if schema.properties.hasI18n}}
                 {
-                    provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
+                    provide : I{{ toPascalCase schema.moduleName }}I18nRepository,
                     useValue: {
                         get   : queryStatement => { /**/ },
                         delete: queryStatement => { /**/ },

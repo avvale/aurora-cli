@@ -7,14 +7,14 @@ import { countries } from '@app/common/country/infrastructure/seeds/country.seed
 import { DeleteCountryByIdService } from './delete-country-by-id.service';
 import { CountryId } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('DeleteCountryByIdService', () =>
 {
     let service: DeleteCountryByIdService;
     let repository: ICountryRepository;
-    let repositoryI18N: ICountryI18NRepository;
+    let repositoryI18n: ICountryI18nRepository;
     let mockRepository: MockCountryRepository;
 
     beforeAll(async () =>
@@ -34,7 +34,7 @@ describe('DeleteCountryByIdService', () =>
                     },
                 },
                 {
-                    provide : ICountryI18NRepository,
+                    provide : ICountryI18nRepository,
                     useValue: {
                         get   : queryStatement => { /**/ },
                         delete: queryStatement => { /**/ },

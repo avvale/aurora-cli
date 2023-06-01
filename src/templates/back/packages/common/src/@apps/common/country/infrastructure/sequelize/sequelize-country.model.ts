@@ -3,7 +3,7 @@
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { CommonLangModel } from '@app/common/lang/infrastructure/sequelize/sequelize-lang.model';
-import { CommonCountryI18NModel } from './sequelize-country-i18n.model';
+import { CommonCountryI18nModel } from './sequelize-country-i18n.model';
 
 @Table({ modelName: 'CommonCountry', freezeTableName: true, timestamps: false })
 export class CommonCountryModel extends Model<CommonCountryModel>
@@ -98,11 +98,11 @@ export class CommonCountryModel extends Model<CommonCountryModel>
     zoom: number;
 
     @Column({
-        field: 'dataLang',
+        field: 'availableLangs',
         allowNull: true,
         type: DataTypes.JSON,
     })
-    dataLang: any;
+    availableLangs: any;
 
     @Column({
         field: 'createdAt',
@@ -126,6 +126,6 @@ export class CommonCountryModel extends Model<CommonCountryModel>
     deletedAt: string;
 
     // i18n relation
-    @HasOne(() => CommonCountryI18NModel, { as: 'countryI18N' })
-    countryI18N: CommonCountryI18NModel;
+    @HasOne(() => CommonCountryI18nModel, { as: 'countryI18n' })
+    countryI18n: CommonCountryI18nModel;
 }

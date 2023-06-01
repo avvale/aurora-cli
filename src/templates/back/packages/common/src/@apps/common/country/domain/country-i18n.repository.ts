@@ -5,7 +5,7 @@ import { CQMetadata, Pagination } from '@aurorajs.dev/core';
 import { CommonCountry } from './country.aggregate';
 import { CountryId } from './value-objects';
 
-export abstract class ICountryI18NRepository implements IRepository<CommonCountry>
+export abstract class ICountryI18nRepository implements IRepository<CommonCountry>
 {
     abstract readonly repository: any;
 

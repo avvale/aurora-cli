@@ -57,7 +57,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
             constraint,
             timezone,
             {{#if schema.properties.hasI18n}}
-            contentLanguage?: string,
+            contentLanguage,
             {{/if}}
             {{#if schema.hasAuditing}}
             auditing,

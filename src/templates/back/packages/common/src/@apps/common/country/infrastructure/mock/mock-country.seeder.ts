@@ -13,16 +13,16 @@ import {
     CountryLatitude,
     CountryLongitude,
     CountryZoom,
-    CountryDataLang,
+    CountryAvailableLangs,
     CountryCreatedAt,
     CountryUpdatedAt,
     CountryDeletedAt,
-    CountryI18NLangId,
-    CountryI18NName,
-    CountryI18NSlug,
-    CountryI18NAdministrativeAreaLevel1,
-    CountryI18NAdministrativeAreaLevel2,
-    CountryI18NAdministrativeAreaLevel3,
+    CountryI18nLangId,
+    CountryI18nName,
+    CountryI18nSlug,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
 } from '../../domain/value-objects';
 import { CommonCountry } from '../../domain/country.aggregate';
 import { countries } from '../seeds/country.seed';
@@ -36,10 +36,10 @@ export class MockCountrySeeder extends MockSeeder<CommonCountry>
     constructor()
     {
         super();
-        this._createMockDataLang();
+        this._createMock();
     }
 
-    private _createMockDataLang(): void
+    private _createMock(): void
     {
         this.collectionSource = [];
 
@@ -59,16 +59,16 @@ export class MockCountrySeeder extends MockSeeder<CommonCountry>
                     new CountryLatitude(country.latitude),
                     new CountryLongitude(country.longitude),
                     new CountryZoom(country.zoom),
-                    new CountryDataLang(country.dataLang),
+                    new CountryAvailableLangs(country.availableLangs),
                     new CountryCreatedAt({ currentTimestamp: true }),
                     new CountryUpdatedAt({ currentTimestamp: true }),
                     new CountryDeletedAt(null),
-                    new CountryI18NLangId(country.langId),
-                    new CountryI18NName(country.name),
-                    new CountryI18NSlug(country.slug),
-                    new CountryI18NAdministrativeAreaLevel1(country.administrativeAreaLevel1),
-                    new CountryI18NAdministrativeAreaLevel2(country.administrativeAreaLevel2),
-                    new CountryI18NAdministrativeAreaLevel3(country.administrativeAreaLevel3),
+                    new CountryI18nLangId(country.langId),
+                    new CountryI18nName(country.name),
+                    new CountryI18nSlug(country.slug),
+                    new CountryI18nAdministrativeAreaLevel1(country.administrativeAreaLevel1),
+                    new CountryI18nAdministrativeAreaLevel2(country.administrativeAreaLevel2),
+                    new CountryI18nAdministrativeAreaLevel3(country.administrativeAreaLevel3),
                 ),
             );
         }

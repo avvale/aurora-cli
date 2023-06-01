@@ -18,7 +18,7 @@ import { Deleted{{ toPascalCase schema.moduleName }}Event } from '../application
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
-{{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
 {{/unless}}
 {{/each}}
@@ -45,7 +45,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {{ toCamelCase originName }}: {{ toPascalCase relationship.aggregate }};
     {{/each}}
     {{#each schema.properties.withRelationshipManyToOne}}
-    {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+    {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
     {{ toCamelCase relationship.field }}: {{ toPascalCase relationship.aggregate }};
     {{/unless}}
     {{/each}}
@@ -70,7 +70,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }},
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
-        {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregate }},
         {{/unless}}
         {{/each}}
@@ -97,7 +97,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.{{ toCamelCase originName }} = {{ toCamelCase originName }};
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
-        {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         this.{{ toCamelCase relationship.field }} = {{ toCamelCase relationship.field }};
         {{/unless}}
         {{/each}}
@@ -123,7 +123,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }},
         {{/each}}
         {{#each schema.properties.withRelationshipManyToOne}}
-        {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+        {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregate }},
         {{/unless}}
         {{/each}}
@@ -149,7 +149,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase originName }},
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
-            {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }},
             {{/unless}}
             {{/each}}
@@ -224,7 +224,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.toDTO(),
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
-            {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/unless}}
             {{/each}}
@@ -236,7 +236,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/each}}
         };
     }
-    {{#if hasI18n}}
+    {{#if schema.properties.hasI18n}}
 
     toI18nDTO(): LiteralObject
     {
@@ -246,7 +246,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{#eq name 'id'}}
             {{ toCamelCase name }}: Utils.uuid(),
             {{else}}
-            {{#if (isI18NRelationProperty ../schema.moduleName this)}}
+            {{#if (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase name }}: this.id.value,
             {{else}}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
@@ -280,7 +280,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.toDTO(),
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
-            {{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/unless}}
             {{/each}}

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AddI18NConstraintService, FormatLangCode, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { AddI18nConstraintService, FormatLangCode, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // @app
 import { FindCountryByIdQuery } from '@app/common/country/application/find/find-country-by-id.query';
@@ -13,7 +13,7 @@ export class CommonCreateCountryHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly addI18nConstraintService: AddI18nConstraintService,
     ) {}
 
     async main(
@@ -23,7 +23,7 @@ export class CommonCreateCountryHandler
     {
         await this.commandBus.dispatch(new CreateCountryCommand(payload, { timezone }));
 
-        const constraint = await this.addI18NConstraintService.main({}, 'countryI18N', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
+        const constraint = await this.addI18nConstraintService.main({}, 'countryI18n', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
         return await this.queryBus.ask(new FindCountryByIdQuery(payload.id, constraint, { timezone }));
     }
 }

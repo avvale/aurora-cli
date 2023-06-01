@@ -9,7 +9,7 @@ import { DataTypes } from 'sequelize';
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModuleName }}.model{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
-{{#unless (isI18NRelationProperty ../schema.moduleName this)}}
+{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/sequelize-{{ toKebabCase getRelationshipModuleName }}.model{{/if}}';
 {{/unless}}
 {{/each}}
@@ -21,7 +21,7 @@ import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageNam
 import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}/infrastructure/sequelize/sequelize-{{ relationship.pivot.fileName }}.model';
 {{/each}}
 {{#if schema.properties.hasI18n}}
-import { {{ schema.aggregateName }}I18NModel } from './sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
+import { {{ schema.aggregateName }}I18nModel } from './sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
 
 @Table({
@@ -262,7 +262,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/each}}
     {{#if schema.properties.hasI18n}}
     // i18n relation
-    @HasOne(() => {{ schema.aggregateName }}I18NModel, { as: '{{ schema.moduleName }}I18N' })
-    {{ toCamelCase schema.moduleName }}I18N: {{ schema.aggregateName }}I18NModel;
+    @HasOne(() => {{ schema.aggregateName }}I18nModel, { as: '{{ schema.moduleName }}I18n' })
+    {{ toCamelCase schema.moduleName }}I18n: {{ schema.aggregateName }}I18nModel;
     {{/if}}
 }

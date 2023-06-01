@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
+import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18nConstraintService, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
 
 // {{ config.appContainer }}
 import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
@@ -12,7 +12,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     constructor(
         private readonly commandBus: ICommandBus,
         {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly addI18nConstraintService: AddI18nConstraintService,
         {{/if}}
     ) {}
 

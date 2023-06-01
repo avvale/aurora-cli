@@ -5,8 +5,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ICountryRepository } from '@app/common/country/domain/country.repository';
-import { ICountryI18NRepository } from '@app/common/country/domain/country-i18n.repository';
-import { AddI18NConstraintService } from '@aurorajs.dev/core';
+import { ICountryI18nRepository } from '@app/common/country/domain/country-i18n.repository';
+import { AddI18nConstraintService } from '@aurorajs.dev/core';
 import { MockCountrySeeder } from '@app/common/country/infrastructure/mock/mock-country.seeder';
 import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
@@ -22,7 +22,7 @@ describe('country', () =>
 {
     let app: INestApplication;
     let countryRepository: ICountryRepository;
-    let repositoryI18N: ICountryI18NRepository;
+    let repositoryI18n: ICountryI18nRepository;
     let countrySeeder: MockCountrySeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,12 +63,12 @@ describe('country', () =>
                 MockCountrySeeder,
             ],
         })
-            .overrideProvider(AddI18NConstraintService)
+            .overrideProvider(AddI18nConstraintService)
             .useValue({
                 main: () =>
                     ({
                         include: [{
-                            association: 'countryI18N',
+                            association: 'countryI18n',
                             required   : true,
                             where      : { langId: '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a' }
                         }]
@@ -79,12 +79,12 @@ describe('country', () =>
         mockData = countries;
         app = module.createNestApplication();
         countryRepository = module.get<ICountryRepository>(ICountryRepository);
-        repositoryI18N  = module.get<ICountryI18NRepository>(ICountryI18NRepository);
+        repositoryI18n  = module.get<ICountryI18nRepository>(ICountryI18nRepository);
         countrySeeder = module.get<MockCountrySeeder>(MockCountrySeeder);
 
         // seed mock data in memory database
         await countryRepository.insert(countrySeeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
-        await repositoryI18N.insert(countrySeeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
+        await repositoryI18n.insert(countrySeeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
 
         await app.init();
     });
@@ -153,7 +153,7 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NLangId property can not to be null', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nLangId property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -165,11 +165,11 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NLangId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CountryI18nLangId must be defined, can not be null');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NName property can not to be null', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nName property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -181,11 +181,11 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CountryI18nName must be defined, can not be null');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NSlug property can not to be null', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -197,7 +197,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NSlug must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CountryI18nSlug must be defined, can not be null');
             });
     });
 
@@ -265,7 +265,7 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NLangId property can not to be undefined', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nLangId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -277,11 +277,11 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NLangId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CountryI18nLangId must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NName property can not to be undefined', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nName property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -293,11 +293,11 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CountryI18nName must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NSlug property can not to be undefined', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -309,7 +309,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NSlug must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CountryI18nSlug must be defined, can not be undefined');
             });
     });
 
@@ -377,7 +377,7 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NLangId is not allowed, must be a length of 36', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nLangId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -389,7 +389,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NLangId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for CountryI18nLangId is not allowed, must be a length of 36');
             });
     });
 
@@ -473,7 +473,7 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NSlug is too large, has a maximum length of 1024', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug is too large, has a maximum length of 1024', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -485,11 +485,11 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NSlug is too large, has a maximum length of 1024');
+                expect(res.body.message).toContain('Value for CountryI18nSlug is too large, has a maximum length of 1024');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NAdministrativeAreaLevel1 is too large, has a maximum length of 50', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 50', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -501,11 +501,11 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NAdministrativeAreaLevel1 is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 50');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NAdministrativeAreaLevel2 is too large, has a maximum length of 50', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 50', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -517,11 +517,11 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NAdministrativeAreaLevel2 is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 50');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18NAdministrativeAreaLevel3 is too large, has a maximum length of 50', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 50', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
@@ -533,7 +533,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18NAdministrativeAreaLevel3 is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 50');
             });
     });
 
@@ -879,7 +879,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -974,7 +974,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1031,7 +1031,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1086,7 +1086,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1136,7 +1136,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1184,7 +1184,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1237,7 +1237,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1288,7 +1288,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1344,7 +1344,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id
@@ -1394,7 +1394,7 @@ describe('country', () =>
                             latitude
                             longitude
                             zoom
-                            dataLang
+                            availableLangs
                             createdAt
                             updatedAt
                             id

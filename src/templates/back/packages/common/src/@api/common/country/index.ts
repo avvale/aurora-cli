@@ -8,7 +8,7 @@ import { CommonFindCountryController } from './controllers/common-find-country.c
 import { CommonUpdateCountryByIdController } from './controllers/common-update-country-by-id.controller';
 import { CommonUpdateCountriesController } from './controllers/common-update-countries.controller';
 import { CommonDeleteCountryByIdController } from './controllers/common-delete-country-by-id.controller';
-import { CommonDeleteCountryByIdI18NController } from './controllers/common-delete-country-by-id-i18n.controller';
+import { CommonDeleteCountryByIdI18nController } from './controllers/common-delete-country-by-id-i18n.controller';
 import { CommonDeleteCountriesController } from './controllers/common-delete-countries.controller';
 
 // resolvers
@@ -21,7 +21,7 @@ import { CommonFindCountryResolver } from './resolvers/common-find-country.resol
 import { CommonUpdateCountryByIdResolver } from './resolvers/common-update-country-by-id.resolver';
 import { CommonUpdateCountriesResolver } from './resolvers/common-update-countries.resolver';
 import { CommonDeleteCountryByIdResolver } from './resolvers/common-delete-country-by-id.resolver';
-import { CommonDeleteCountryByIdI18NResolver } from './resolvers/common-delete-country-by-id-i18n.resolver';
+import { CommonDeleteCountryByIdI18nResolver } from './resolvers/common-delete-country-by-id-i18n.resolver';
 import { CommonDeleteCountriesResolver } from './resolvers/common-delete-countries.resolver';
 
 // handlers
@@ -34,7 +34,7 @@ import { CommonFindCountryHandler } from './handlers/common-find-country.handler
 import { CommonUpdateCountryByIdHandler } from './handlers/common-update-country-by-id.handler';
 import { CommonUpdateCountriesHandler } from './handlers/common-update-countries.handler';
 import { CommonDeleteCountryByIdHandler } from './handlers/common-delete-country-by-id.handler';
-import { CommonDeleteCountryByIdI18NHandler } from './handlers/common-delete-country-by-id-i18n.handler';
+import { CommonDeleteCountryByIdI18nHandler } from './handlers/common-delete-country-by-id-i18n.handler';
 import { CommonDeleteCountriesHandler } from './handlers/common-delete-countries.handler';
 
 export const CommonCountryControllers = [
@@ -47,7 +47,7 @@ export const CommonCountryControllers = [
     CommonUpdateCountryByIdController,
     CommonUpdateCountriesController,
     CommonDeleteCountryByIdController,
-    CommonDeleteCountryByIdI18NController,
+    CommonDeleteCountryByIdI18nController,
     CommonDeleteCountriesController,
 ];
 
@@ -61,7 +61,7 @@ export const CommonCountryResolvers = [
     CommonUpdateCountryByIdResolver,
     CommonUpdateCountriesResolver,
     CommonDeleteCountryByIdResolver,
-    CommonDeleteCountryByIdI18NResolver,
+    CommonDeleteCountryByIdI18nResolver,
     CommonDeleteCountriesResolver,
 ];
 
@@ -75,6 +75,6 @@ export const CommonCountryApiHandlers = [
     CommonUpdateCountryByIdHandler,
     CommonUpdateCountriesHandler,
     CommonDeleteCountryByIdHandler,
-    CommonDeleteCountryByIdI18NHandler,
+    CommonDeleteCountryByIdI18nHandler,
     CommonDeleteCountriesHandler,
 ];

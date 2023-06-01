@@ -4,8 +4,8 @@ import { DataTypes } from 'sequelize';
 import { CommonCountryModel } from '@app/common/country/infrastructure/sequelize/sequelize-country.model';
 import { CommonLangModel } from '@app/common/lang/infrastructure/sequelize/sequelize-lang.model';
 
-@Table({ modelName: 'CommonCountryI18N', freezeTableName: true, timestamps: false })
-export class CommonCountryI18NModel extends Model<CommonCountryI18NModel>
+@Table({ modelName: 'CommonCountryI18n', freezeTableName: true, timestamps: false })
+export class CommonCountryI18nModel extends Model<CommonCountryI18nModel>
 {
     @Column({
         field: 'id',

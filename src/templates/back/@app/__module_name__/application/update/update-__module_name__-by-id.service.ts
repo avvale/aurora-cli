@@ -6,7 +6,7 @@ import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18NRepository}}
+{{> importI18nRepository}}
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdService
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
-        {{> declareI18NRepository}}
+        {{> declareI18nRepository}}
     ) {}
 
     async main(
@@ -41,8 +41,8 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdService
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18NDataLangProperty . ../schema.properties)}}
-            null, // dataLang
+{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+            null, // availableLangs
 {{else}}
             payload.{{ toCamelCase name }},
 {{/if}}
@@ -55,8 +55,8 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdService
         );
 
         {{#if schema.properties.hasI18n}}
-        // delete dataLang property to avoid overwrite this value in database
-        delete {{ toCamelCase schema.moduleName }}.dataLang;
+        // delete availableLangs property to avoid overwrite this value in database
+        delete {{ toCamelCase schema.moduleName }}.availableLangs;
 
         {{/if}}
         // update by id
@@ -66,12 +66,13 @@ export class Update{{ toPascalCase schema.moduleName }}ByIdService
             updateByIdOptions: cQMetadata?.repositoryOptions,
         });
         {{#if schema.properties.hasI18n}}
+
         await this.repositoryI18n.updateById({{toCamelCase schema.moduleName }}, {
             constraint,
             cQMetadata,
             updateByIdOptions: cQMetadata?.repositoryOptions,
-            dataFactory: (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(),
-            findArguments: {
+            dataFactory      : (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(),
+            findArguments    : {
                 langId: {{ toCamelCase schema.moduleName }}.langId.value,
                 {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
             },

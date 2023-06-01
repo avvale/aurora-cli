@@ -1,7 +1,7 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { AddI18NConstraintService, AuditingRunner, AuditingRunnerDisabledImplementationService, CoreModule } from '@aurorajs.dev/core';
+import { AddI18nConstraintService, AuditingRunner, AuditingRunnerDisabledImplementationService, CoreModule } from '@aurorajs.dev/core';
 import { CqrsConfigModule } from './cqrs-config.module';
 
 @Module({
@@ -13,14 +13,14 @@ import { CqrsConfigModule } from './cqrs-config.module';
         CqrsModule
     ],
     providers: [
-        AddI18NConstraintService,
+        AddI18nConstraintService,
         {
             provide : AuditingRunner,
             useClass: AuditingRunnerDisabledImplementationService,
         },
     ],
     exports: [
-        AddI18NConstraintService,
+        AddI18nConstraintService,
         AuditingRunner,
         CacheModule,
         ConfigModule,

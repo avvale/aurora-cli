@@ -1,13 +1,13 @@
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CountryI18NAdministrativeAreaLevel1 extends StringValueObject
+export class CountryI18nAdministrativeAreaLevel1 extends StringValueObject
 {
-    public readonly type: 'CountryI18NAdministrativeAreaLevel1';
+    public readonly type: 'CountryI18nAdministrativeAreaLevel1';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'CountryI18NAdministrativeAreaLevel1',
+            name       : 'CountryI18nAdministrativeAreaLevel1',
             nullable   : true,
             undefinable: true,
             maxLength  : 50,

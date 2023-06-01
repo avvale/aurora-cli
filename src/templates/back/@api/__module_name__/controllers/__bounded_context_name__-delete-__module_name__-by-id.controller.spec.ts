@@ -33,7 +33,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
             ],
             providers: [
                 {{#if schema.properties.hasI18n}}
-                AddI18NConstraintService,
+                AddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

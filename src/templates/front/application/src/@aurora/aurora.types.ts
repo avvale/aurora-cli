@@ -138,6 +138,6 @@ export interface Theme
 
 export interface Translatable
 {
-    dataLang: string[];
+    availableLangs: string[];
 }
 

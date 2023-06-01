@@ -28,10 +28,10 @@ export class MockUserSeeder extends MockSeeder<IamUser>
     constructor()
     {
         super();
-        this._createMockDataLang();
+        this._createMock();
     }
 
-    private _createMockDataLang(): void
+    private _createMock(): void
     {
         this.collectionSource = [];
 

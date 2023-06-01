@@ -1,7 +1,7 @@
 import { QueryStatement } from '@aurorajs.dev/core';
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class DeleteCountryByIdI18NCommand
+export class DeleteCountryByIdI18nCommand
 {
     constructor(
         public readonly id: string,

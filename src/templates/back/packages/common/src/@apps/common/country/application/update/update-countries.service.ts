@@ -15,19 +15,19 @@ import {
     CountryLatitude,
     CountryLongitude,
     CountryZoom,
-    CountryDataLang,
+    CountryAvailableLangs,
     CountryCreatedAt,
     CountryUpdatedAt,
     CountryDeletedAt,
-    CountryI18NLangId,
-    CountryI18NName,
-    CountryI18NSlug,
-    CountryI18NAdministrativeAreaLevel1,
-    CountryI18NAdministrativeAreaLevel2,
-    CountryI18NAdministrativeAreaLevel3,
+    CountryI18nLangId,
+    CountryI18nName,
+    CountryI18nSlug,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
 } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { CommonCountry } from '../../domain/country.aggregate';
 import { AddCountriesContextEvent } from '../events/add-countries-context.event';
 
@@ -37,7 +37,7 @@ export class UpdateCountriesService
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ICountryRepository,
-        private readonly repositoryI18n: ICountryI18NRepository,
+        private readonly repositoryI18n: ICountryI18nRepository,
     ) {}
 
     async main(
@@ -54,12 +54,12 @@ export class UpdateCountriesService
             latitude?: CountryLatitude;
             longitude?: CountryLongitude;
             zoom?: CountryZoom;
-            langId?: CountryI18NLangId;
-            name?: CountryI18NName;
-            slug?: CountryI18NSlug;
-            administrativeAreaLevel1?: CountryI18NAdministrativeAreaLevel1;
-            administrativeAreaLevel2?: CountryI18NAdministrativeAreaLevel2;
-            administrativeAreaLevel3?: CountryI18NAdministrativeAreaLevel3;
+            langId?: CountryI18nLangId;
+            name?: CountryI18nName;
+            slug?: CountryI18nSlug;
+            administrativeAreaLevel1?: CountryI18nAdministrativeAreaLevel1;
+            administrativeAreaLevel2?: CountryI18nAdministrativeAreaLevel2;
+            administrativeAreaLevel3?: CountryI18nAdministrativeAreaLevel3;
         },
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
@@ -80,7 +80,7 @@ export class UpdateCountriesService
             payload.latitude,
             payload.longitude,
             payload.zoom,
-            null, // dataLang
+            null, // availableLangs
             null, // createdAt
             new CountryUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
@@ -92,8 +92,8 @@ export class UpdateCountriesService
             payload.administrativeAreaLevel3,
         );
 
-        // delete dataLang property to avoid overwrite this value in database
-        delete country.dataLang;
+        // delete availableLangs property to avoid overwrite this value in database
+        delete country.availableLangs;
 
         // update
         await this.repository.update(country, {

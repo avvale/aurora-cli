@@ -37,17 +37,17 @@ export class MockClientRepository extends MockRepository<OAuthClient> implements
     constructor()
     {
         super();
-        this.createApplicationsMockDataLang();
-        this.createSourceMockData();
+        this.createApplicationsMockAvailableLangs();
+        this.createSourceMock();
     }
 
     public reset(): void
     {
-        this.createApplicationsMockDataLang();
-        this.createSourceMockData();
+        this.createApplicationsMockAvailableLangs();
+        this.createSourceMock();
     }
 
-    private createSourceMockData(): void
+    private createSourceMock(): void
     {
         this.collectionSource = [];
         const now = Utils.nowTimestamp();
@@ -80,7 +80,7 @@ export class MockClientRepository extends MockRepository<OAuthClient> implements
         }
     }
 
-    private createApplicationsMockDataLang(): void
+    private createApplicationsMockAvailableLangs(): void
     {
         this.collectionApplicationsSource = [];
 

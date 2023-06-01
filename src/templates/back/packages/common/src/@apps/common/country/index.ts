@@ -4,7 +4,7 @@ import { CreateCountriesCommandHandler } from './application/create/create-count
 import { UpdateCountryByIdCommandHandler } from './application/update/update-country-by-id.command-handler';
 import { UpdateCountriesCommandHandler } from './application/update/update-countries.command-handler';
 import { DeleteCountryByIdCommandHandler } from './application/delete/delete-country-by-id.command-handler';
-import { DeleteCountryByIdI18NCommandHandler } from './application/delete/delete-country-by-id-i18n.command-handler';
+import { DeleteCountryByIdI18nCommandHandler } from './application/delete/delete-country-by-id-i18n.command-handler';
 import { DeleteCountriesCommandHandler } from './application/delete/delete-countries.command-handler';
 
 // queries
@@ -31,18 +31,18 @@ import { FindCountryByIdService } from './application/find/find-country-by-id.se
 import { UpdateCountryByIdService } from './application/update/update-country-by-id.service';
 import { UpdateCountriesService } from './application/update/update-countries.service';
 import { DeleteCountryByIdService } from './application/delete/delete-country-by-id.service';
-import { DeleteCountryByIdI18NService } from './application/delete/delete-country-by-id-i18n.service';
+import { DeleteCountryByIdI18nService } from './application/delete/delete-country-by-id-i18n.service';
 import { DeleteCountriesService } from './application/delete/delete-countries.service';
 
 // models
 export { CommonCountryModel } from './infrastructure/sequelize/sequelize-country.model';
-export { CommonCountryI18NModel } from './infrastructure/sequelize/sequelize-country-i18n.model';
+export { CommonCountryI18nModel } from './infrastructure/sequelize/sequelize-country-i18n.model';
 
 // repository
 export { ICountryRepository } from './domain/country.repository';
 export { SequelizeCountryRepository } from './infrastructure/sequelize/sequelize-country.repository';
-export { ICountryI18NRepository } from './domain/country-i18n.repository';
-export { SequelizeCountryI18NRepository } from './infrastructure/sequelize/sequelize-country-i18n.repository';
+export { ICountryI18nRepository } from './domain/country-i18n.repository';
+export { SequelizeCountryI18nRepository } from './infrastructure/sequelize/sequelize-country-i18n.repository';
 
 // sagas
 export { CountrySagas } from './application/sagas/country.sagas';
@@ -54,7 +54,7 @@ export const CommonCountryHandlers = [
     UpdateCountryByIdCommandHandler,
     UpdateCountriesCommandHandler,
     DeleteCountryByIdCommandHandler,
-    DeleteCountryByIdI18NCommandHandler,
+    DeleteCountryByIdI18nCommandHandler,
     DeleteCountriesCommandHandler,
 
     // queries
@@ -82,6 +82,6 @@ export const CommonCountryServices = [
     UpdateCountryByIdService,
     UpdateCountriesService,
     DeleteCountryByIdService,
-    DeleteCountryByIdI18NService,
+    DeleteCountryByIdI18nService,
     DeleteCountriesService,
 ];

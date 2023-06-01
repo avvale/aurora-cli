@@ -13,7 +13,7 @@ type CommonCountry
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    dataLang: JSON
+    availableLangs: JSON
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -40,7 +40,7 @@ input CommonCreateCountryInput
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    dataLang: JSON
+    availableLangs: JSON
     langId: ID!
     name: GraphQLString!
     slug: GraphQLString!
@@ -63,7 +63,7 @@ input CommonUpdateCountryByIdInput
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    dataLang: JSON
+    availableLangs: JSON
     langId: ID
     name: GraphQLString
     slug: GraphQLString
@@ -86,7 +86,7 @@ input CommonUpdateCountriesInput
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    dataLang: JSON
+    availableLangs: JSON
     langId: ID
     name: GraphQLString
     slug: GraphQLString

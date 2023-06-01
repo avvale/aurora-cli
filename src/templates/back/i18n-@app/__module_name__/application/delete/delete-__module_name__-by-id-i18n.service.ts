@@ -2,17 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{#if schema.properties.hasI18n}}{{ toPascalCase schema.moduleName }}DataLang, {{/if}}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
+import { {{#if schema.properties.hasI18n}}{{ toPascalCase schema.moduleName }}AvailableLangs, {{/if}}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18NRepository}}
+{{> importI18nRepository}}
 
 @Injectable()
-export class Delete{{ toPascalCase schema.moduleName }}ByIdI18NService
+export class Delete{{ toPascalCase schema.moduleName }}ByIdI18nService
 {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
-        {{> declareI18NRepository}}
+        {{> declareI18nRepository}}
     ) {}
 
     async main(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
@@ -31,16 +31,16 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdI18NService
             }
         });
 
-        const dataLang = {{ toCamelCase schema.moduleName }}.dataLang.value.removeItem({{ toCamelCase schema.moduleName }}.langId.value);
+        const availableLangs = {{ toCamelCase schema.moduleName }}.availableLangs.value.removeItem({{ toCamelCase schema.moduleName }}.langId.value);
 
         // if has not any translation in i18n table, delete record
-        if (dataLang.length === 0)
+        if (availableLangs.length === 0)
         {
             await this.repository.deleteById({{ toCamelCase schema.moduleName }}.id, { cQMetadata });
         }
         else
         {
-            {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(dataLang);
+            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(availableLangs);
             await this.repository.update({{ toCamelCase schema.moduleName }});
         }
 

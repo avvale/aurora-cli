@@ -12,7 +12,7 @@ export class ActionTranslationObjectPipe implements PipeTransform
 {
     transform(object: Translatable, lang: CommonLang): string
     {
-        const langs: string[] = object.dataLang; // get langs from object
+        const langs: string[] = object.availableLangs; // get langs from object
 
         if (langs.indexOf(lang.id) === -1) return 'new';
         return 'edit';

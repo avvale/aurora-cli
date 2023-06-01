@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne, Unique, Index } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
@@ -15,8 +16,12 @@ import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageNam
 import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}/infrastructure/sequelize/sequelize-{{ relationship.pivot.fileName }}.model';
 {{/each}}
 
-@Table({ modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18N', freezeTableName: true, timestamps: false })
-export class {{ schema.aggregateName }}I18NModel extends Model<{{ schema.aggregateName }}I18NModel>
+@Table({
+    modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18n',
+    freezeTableName: true,
+    timestamps: false,
+})
+export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggregateName }}I18nModel>
 {
     {{#each schema.properties.modelColumns}}
     {{#if isI18n }}

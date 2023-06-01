@@ -3,7 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { {{#if schema.properties.hasI18n}}Operator, {{/if}}QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18NRepository}}
+{{> importI18nRepository}}
 import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from '../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class Delete{{ toPascalCase schema.moduleNames }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
-        {{> declareI18NRepository}}
+        {{> declareI18nRepository}}
     ) {}
 
     async main(

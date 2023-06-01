@@ -350,7 +350,7 @@
             "integrity": "sha1:792e269aa22315b7cd5fc9457da899f876b381f5"
         },
         {
-            "path": "src/@app/common/country/domain/value-objects/country-data-lang.ts",
+            "path": "src/@app/common/country/domain/value-objects/country-available-langs.ts",
             "integrity": "sha1:fde1c69176bec37dd5752f55d057ddbe469e3fda"
         },
         {

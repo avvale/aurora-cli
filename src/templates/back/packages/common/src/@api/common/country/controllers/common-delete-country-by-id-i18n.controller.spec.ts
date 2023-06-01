@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AddI18NConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { AddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // custom items
-import { CommonDeleteCountryByIdI18NController } from './common-delete-country-by-id-i18n.controller';
+import { CommonDeleteCountryByIdI18nController } from './common-delete-country-by-id-i18n.controller';
 
 // sources
 import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
 
-describe('CommonDeleteCountryByIdI18NController', () =>
+describe('CommonDeleteCountryByIdI18nController', () =>
 {
-    let controller: CommonDeleteCountryByIdI18NController;
+    let controller: CommonDeleteCountryByIdI18nController;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -23,10 +23,10 @@ describe('CommonDeleteCountryByIdI18NController', () =>
                 CacheModule.register(),
             ],
             controllers: [
-                CommonDeleteCountryByIdI18NController
+                CommonDeleteCountryByIdI18nController
             ],
             providers: [
-                AddI18NConstraintService,
+                AddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {
@@ -55,14 +55,14 @@ describe('CommonDeleteCountryByIdI18NController', () =>
         })
             .compile();
 
-        controller  = module.get<CommonDeleteCountryByIdI18NController>(CommonDeleteCountryByIdI18NController);
+        controller  = module.get<CommonDeleteCountryByIdI18nController>(CommonDeleteCountryByIdI18nController);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
     {
-        test('CommonDeleteCountryByIdI18NController should be defined', () =>
+        test('CommonDeleteCountryByIdI18nController should be defined', () =>
         {
             expect(controller).toBeDefined();
         });

@@ -13,7 +13,7 @@ export class UpdatedCountryEvent
         public readonly latitude: number,
         public readonly longitude: number,
         public readonly zoom: number,
-        public readonly dataLang: any,
+        public readonly availableLangs: any,
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,

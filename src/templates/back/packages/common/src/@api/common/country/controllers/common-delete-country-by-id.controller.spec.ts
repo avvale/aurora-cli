@@ -26,7 +26,7 @@ describe('CommonDeleteCountryByIdController', () =>
                 CommonDeleteCountryByIdController,
             ],
             providers: [
-                AddI18NConstraintService,
+                AddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

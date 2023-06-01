@@ -1,6 +1,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as yaml from 'js-yaml';
+import * as _ from 'lodash';
 import { Property } from './property';
 import { ModuleDefinitionSchema } from '../types';
 import { Properties } from './properties';
@@ -40,6 +41,7 @@ export class YamlManager
         // reference schema in properties
         properties.schema = schema;
 
+        // add aggregate properties
         for (const property of yamlObj.aggregateProperties)
         {
             properties.add(
@@ -58,7 +60,34 @@ export class YamlManager
                     relationship : property?.relationship,
                     index        : property?.index,
                     indexName    : property?.indexName,
-                    isI18n       : property?.isI18n,
+                    example      : property?.example,
+                    faker        : property?.faker,
+                    webComponent : property?.webComponent,
+                    schema,
+                }),
+            );
+        }
+
+        // add aggregate i18n properties
+        for (const property of yamlObj.aggregateI18nProperties)
+        {
+            properties.add(
+                new Property({
+                    isI18n       : true,
+                    name         : property.name,
+                    type         : property.type,
+                    primaryKey   : property?.primaryKey,
+                    autoIncrement: property?.autoIncrement,
+                    enumOptions  : property?.enumOptions?.join(),
+                    decimals     : property?.decimals,
+                    length       : property?.length,
+                    minLength    : property?.minLength,
+                    maxLength    : property?.maxLength,
+                    nullable     : property?.nullable,
+                    defaultValue : property?.defaultValue,
+                    relationship : property?.relationship,
+                    index        : property?.index,
+                    indexName    : property?.indexName,
                     example      : property?.example,
                     faker        : property?.faker,
                     webComponent : property?.webComponent,
@@ -82,6 +111,48 @@ export class YamlManager
         }
 
         return schema;
+    }
+
+    public static generateYamlConfigFile(
+        schema: ModuleDefinitionSchema,
+    ): void
+    {
+        // write yaml file
+        const yamlStr = yaml.dump(
+            {
+                version            : cliterConfig.configYamlVersion,
+                boundedContextName : schema.boundedContextName,
+                moduleName         : schema.moduleName,
+                moduleNames        : schema.moduleNames,
+                aggregateName      : schema.aggregateName,
+                hasOAuth           : schema.hasOAuth,
+                hasTenant          : schema.hasTenant,
+                hasAuditing        : schema.hasAuditing,
+                aggregateProperties: schema.properties
+                    .toDto()
+                    .filter(item => !item.isI18n)
+                    // omit id, is a internal id field when create property with prompt
+                    .map(item => _.omit(item, ['id'])),
+                aggregateI18nProperties: schema.properties
+                    .toDto()
+                    .filter(item => item.isI18n)
+                    // omit id, is a internal id field when create property with prompt
+                    // omit isI18n, is not necessary because it is inside the array aggregateI18nProperties
+                    .map(item => _.omit(item, ['id', 'isI18n'])),
+                additionalApis: schema.additionalApis.toDto().map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
+                excluded      : schema.excluded,
+            },
+            {
+                lineWidth  : -1,
+                skipInvalid: true,
+            },
+        );
+
+        const yamlPath = path.join(process.cwd(), 'cliter', schema.boundedContextName.toKebabCase());
+
+        if (!fs.existsSync(yamlPath)) fs.mkdirSync(yamlPath, { recursive: true });
+
+        fs.writeFileSync(path.join(yamlPath, `${schema.moduleName}${cliterConfig.schemaDefinitionExtension}`), yamlStr, 'utf8');
     }
 
     private static parseModuleDefinitionSchema(yamlObj: any): void

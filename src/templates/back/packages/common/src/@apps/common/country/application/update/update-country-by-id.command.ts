@@ -17,7 +17,7 @@ export class UpdateCountryByIdCommand
             latitude?: number;
             longitude?: number;
             zoom?: number;
-            dataLang?: any;
+            availableLangs?: any;
             langId?: string;
             name?: string;
             slug?: string;

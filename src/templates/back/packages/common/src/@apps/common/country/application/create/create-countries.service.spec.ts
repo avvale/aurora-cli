@@ -6,14 +6,14 @@ import { ConfigService } from '@nestjs/config';
 // custom items
 import { CreateCountriesService } from './create-countries.service';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('CreateCountriesService', () =>
 {
     let service: CreateCountriesService;
     let repository: ICountryRepository;
-    let repositoryI18N: ICountryI18NRepository;
+    let repositoryI18n: ICountryI18nRepository;
     let mockRepository: MockCountryRepository;
 
     beforeAll(async () =>
@@ -32,7 +32,7 @@ describe('CreateCountriesService', () =>
                     },
                 },
                 {
-                    provide : ICountryI18NRepository,
+                    provide : ICountryI18nRepository,
                     useValue: {
                         insert: () => { /**/ },
                     },

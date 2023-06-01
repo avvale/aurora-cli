@@ -5,14 +5,14 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 // custom items
 import { DeleteCountriesService } from './delete-countries.service';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
 describe('DeleteCountriesService', () =>
 {
     let service: DeleteCountriesService;
     let repository: ICountryRepository;
-    let repositoryI18N: ICountryI18NRepository;
+    let repositoryI18n: ICountryI18nRepository;
     let mockRepository: MockCountryRepository;
 
     beforeAll(async () =>
@@ -32,7 +32,7 @@ describe('DeleteCountriesService', () =>
                     },
                 },
                 {
-                    provide : ICountryI18NRepository,
+                    provide : ICountryI18nRepository,
                     useValue: {
                         get   : () => { /**/ },
                         delete: () => { /**/ },
@@ -44,7 +44,7 @@ describe('DeleteCountriesService', () =>
 
         service         = module.get(DeleteCountriesService);
         repository      = module.get(ICountryRepository);
-        repositoryI18N  = module.get(ICountryI18NRepository);
+        repositoryI18n  = module.get(ICountryI18nRepository);
         mockRepository  = module.get(MockCountryRepository);
     });
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AddI18NConstraintService, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { AddI18nConstraintService, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 
 // @app
 import { FindCountryByIdQuery } from '@app/common/country/application/find/find-country-by-id.query';
@@ -13,7 +13,7 @@ export class CommonDeleteCountryByIdHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly addI18nConstraintService: AddI18nConstraintService,
     ) {}
 
     async main(
@@ -23,7 +23,7 @@ export class CommonDeleteCountryByIdHandler
         contentLanguage?: string,
     ): Promise<CommonCountry | CommonCountryDto>
     {
-        constraint = await this.addI18NConstraintService.main(constraint, 'countryI18N', contentLanguage);
+        constraint = await this.addI18nConstraintService.main(constraint, 'countryI18n', contentLanguage);
         const country = await this.queryBus.ask(new FindCountryByIdQuery(id, constraint, { timezone }));
 
         await this.commandBus.dispatch(new DeleteCountryByIdCommand(id, constraint, { timezone }));

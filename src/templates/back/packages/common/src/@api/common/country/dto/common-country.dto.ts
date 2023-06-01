@@ -79,9 +79,9 @@ export class CommonCountryDto
 
     @ApiProperty({
         type       : Object,
-        description: 'dataLang [input here api field description]',
+        description: 'availableLangs [input here api field description]',
     })
-    dataLang?: any;
+    availableLangs?: any;
 
     @ApiProperty({
         type       : String,

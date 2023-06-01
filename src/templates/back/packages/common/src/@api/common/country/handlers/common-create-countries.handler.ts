@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AddI18NConstraintService, ICommandBus } from '@aurorajs.dev/core';
+import { AddI18nConstraintService, ICommandBus } from '@aurorajs.dev/core';
 
 // @app
 import { CreateCountriesCommand } from '@app/common/country/application/create/create-countries.command';
@@ -11,7 +11,7 @@ export class CommonCreateCountriesHandler
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly addI18nConstraintService: AddI18nConstraintService,
     ) {}
 
     async main(

@@ -3,7 +3,7 @@ import { EventPublisher } from '@nestjs/cqrs';
 import { Operator, QueryStatement } from '@aurorajs.dev/core';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { AddCountriesContextEvent } from '../events/add-countries-context.event';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class DeleteCountriesService
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ICountryRepository,
-        private readonly repositoryI18n: ICountryI18NRepository,
+        private readonly repositoryI18n: ICountryI18nRepository,
     ) {}
 
     async main(

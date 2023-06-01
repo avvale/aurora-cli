@@ -9,7 +9,7 @@ import { ConfigService } from '@nestjs/config';
 import { Create{{ toPascalCase schema.moduleNames }}Service } from './create-{{ toKebabCase schema.moduleNames }}.service';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
-import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+import { I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
 
@@ -18,7 +18,7 @@ describe('Create{{ toPascalCase schema.moduleNames }}Service', () =>
     let service: Create{{ toPascalCase schema.moduleNames }}Service;
     let repository: I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
-    let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
+    let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18nRepository;
     {{/if}}
     let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
 
@@ -39,7 +39,7 @@ describe('Create{{ toPascalCase schema.moduleNames }}Service', () =>
                 },
                 {{#if schema.properties.hasI18n}}
                 {
-                    provide : I{{ toPascalCase schema.moduleName }}I18NRepository,
+                    provide : I{{ toPascalCase schema.moduleName }}I18nRepository,
                     useValue: {
                         insert: () => { /**/ },
                     },

@@ -56,7 +56,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
             constraint,
             timezone,
             {{#if schema.properties.hasI18n}}
-            contentLanguage?: string,
+            contentLanguage,
             {{/if}}
         );
     }

@@ -4,17 +4,17 @@ import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
 import { countries } from '@app/common/country/infrastructure/seeds/country.seed';
-import { DeleteCountryByIdI18NService } from './delete-country-by-id-i18n.service';
+import { DeleteCountryByIdI18nService } from './delete-country-by-id-i18n.service';
 import { CountryId } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
 
-describe('DeleteCountryByIdI18NService', () =>
+describe('DeleteCountryByIdI18nService', () =>
 {
-    let service: DeleteCountryByIdI18NService;
+    let service: DeleteCountryByIdI18nService;
     let repository: ICountryRepository;
-    let repositoryI18N: ICountryI18NRepository;
+    let repositoryI18n: ICountryI18nRepository;
     let mockRepository: MockCountryRepository;
 
     beforeAll(async () =>
@@ -24,7 +24,7 @@ describe('DeleteCountryByIdI18NService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteCountryByIdI18NService,
+                DeleteCountryByIdI18nService,
                 MockCountryRepository,
                 {
                     provide : ICountryRepository,
@@ -35,7 +35,7 @@ describe('DeleteCountryByIdI18NService', () =>
                     },
                 },
                 {
-                    provide : ICountryI18NRepository,
+                    provide : ICountryI18nRepository,
                     useValue: {
                         delete: queryStatement => { /**/ },
                     },
@@ -44,15 +44,15 @@ describe('DeleteCountryByIdI18NService', () =>
         })
             .compile();
 
-        service         = module.get(DeleteCountryByIdI18NService);
+        service         = module.get(DeleteCountryByIdI18nService);
         repository      = module.get(ICountryRepository);
-        repositoryI18N  = module.get(ICountryI18NRepository);
+        repositoryI18n  = module.get(ICountryI18nRepository);
         mockRepository  = module.get(MockCountryRepository);
     });
 
     describe('main', () =>
     {
-        test('DeleteCountryByIdI18NService should be defined', () =>
+        test('DeleteCountryByIdI18nService should be defined', () =>
         {
             expect(service).toBeDefined();
         });

@@ -10,8 +10,8 @@ import { Auth } from '@aurora/decorators';
 {{/if }}
 import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
-import { I{{ toPascalCase schema.moduleName }}I18NRepository } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
-import { AddI18NConstraintService } from '{{ config.auroraCorePackage }}';
+import { I{{ toPascalCase schema.moduleName }}I18nRepository } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+import { AddI18nConstraintService } from '{{ config.auroraCorePackage }}';
 {{/if}}
 import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
@@ -28,7 +28,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     let app: INestApplication;
     let {{ toCamelCase schema.moduleName }}Repository: I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
-    let repositoryI18N: I{{ toPascalCase schema.moduleName }}I18NRepository;
+    let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18nRepository;
     {{/if }}
     let {{ toCamelCase schema.moduleName }}Seeder: Mock{{ toPascalCase schema.moduleName }}Seeder;
 
@@ -75,12 +75,12 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .useValue({ canActivate: () => true })
             {{/if }}
             {{#if schema.properties.hasI18n}}
-            .overrideProvider(AddI18NConstraintService)
+            .overrideProvider(AddI18nConstraintService)
             .useValue({
                 main: () =>
                     ({
                         include: [{
-                            association: '{{ toCamelCase schema.moduleName }}I18N',
+                            association: '{{ toCamelCase schema.moduleName }}I18n',
                             required   : true,
                             where      : { langId: '{{ language }}' }
                         }]
@@ -93,14 +93,14 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         app = module.createNestApplication();
         {{ toCamelCase schema.moduleName }}Repository = module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
-        repositoryI18N  = module.get<I{{ toPascalCase schema.moduleName }}I18NRepository>(I{{ toPascalCase schema.moduleName }}I18NRepository);
+        repositoryI18n  = module.get<I{{ toPascalCase schema.moduleName }}I18nRepository>(I{{ toPascalCase schema.moduleName }}I18nRepository);
         {{/if}}
         {{ toCamelCase schema.moduleName }}Seeder = module.get<Mock{{ toPascalCase schema.moduleName }}Seeder>(Mock{{ toPascalCase schema.moduleName }}Seeder);
 
         // seed mock data in memory database
         {{#if schema.properties.hasI18n}}
         await {{ toCamelCase schema.moduleName }}Repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
-        await repositoryI18N.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
+        await repositoryI18n.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource, { dataFactory: aggregate => aggregate.toI18nDTO() });
         {{else}}
         await {{ toCamelCase schema.moduleName }}Repository.insert({{ toCamelCase schema.moduleName }}Seeder.collectionSource);
         {{/if}}

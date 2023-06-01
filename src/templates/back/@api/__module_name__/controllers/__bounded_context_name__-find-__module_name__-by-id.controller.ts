@@ -55,7 +55,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
             constraint,
             timezone,
             {{#if schema.properties.hasI18n}}
-            contentLanguage?: string,
+            contentLanguage,
             {{/if}}
         );
     }

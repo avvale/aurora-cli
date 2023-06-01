@@ -2,17 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from '@aurorajs.dev/core';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { CountryDataLang, CountryId } from '../../domain/value-objects';
+import { CountryAvailableLangs, CountryId } from '../../domain/value-objects';
 import { ICountryRepository } from '../../domain/country.repository';
-import { ICountryI18NRepository } from '../../domain/country-i18n.repository';
+import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
 
 @Injectable()
-export class DeleteCountryByIdI18NService
+export class DeleteCountryByIdI18nService
 {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ICountryRepository,
-        private readonly repositoryI18n: ICountryI18NRepository,
+        private readonly repositoryI18n: ICountryI18nRepository,
     ) {}
 
     async main(id: CountryId, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
@@ -31,16 +31,16 @@ export class DeleteCountryByIdI18NService
             }
         });
 
-        const dataLang = country.dataLang.value.removeItem(country.langId.value);
+        const availableLangs = country.availableLangs.value.removeItem(country.langId.value);
 
         // if has not any translation in i18n table, delete record
-        if (dataLang.length === 0)
+        if (availableLangs.length === 0)
         {
             await this.repository.deleteById(country.id, { cQMetadata });
         }
         else
         {
-            country.dataLang = new CountryDataLang(dataLang);
+            country.availableLangs = new CountryAvailableLangs(availableLangs);
             await this.repository.update(country);
         }
 

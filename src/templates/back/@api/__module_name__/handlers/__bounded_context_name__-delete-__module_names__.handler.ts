@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18NConstraintService, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18nConstraintService, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasTenant}}
 
 // tenant
@@ -19,7 +19,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
         {{#if schema.properties.hasI18n}}
-        private readonly addI18NConstraintService: AddI18NConstraintService,
+        private readonly addI18nConstraintService: AddI18nConstraintService,
         {{/if}}
     ) {}
 
@@ -39,7 +39,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[] | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto[]>
     {
         {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18NConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18N', contentLanguage, { defineDefaultLanguage: false });
+        constraint = await this.addI18nConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18n', contentLanguage, { defineDefaultLanguage: false });
         {{/if}}
         const {{ toCamelCase schema.moduleNames }} = await this.queryBus.ask(new Get{{ toPascalCase schema.moduleNames }}Query(
             queryStatement,

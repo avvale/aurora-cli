@@ -13,7 +13,7 @@ export class CheckTranslationObjectPipe implements PipeTransform
         uncompletedClass: string = 'uncompleted-translations',
     ): string
     {
-        const langIds: string[] = object.dataLang; // get langs from object
+        const langIds: string[] = object.availableLangs; // get langs from object
         for (const lang of activatedLangs)
         {
             if (langIds.indexOf(lang.id) === -1) return uncompletedClass;

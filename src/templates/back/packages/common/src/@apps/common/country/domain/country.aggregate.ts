@@ -15,16 +15,16 @@ import {
     CountryLatitude,
     CountryLongitude,
     CountryZoom,
-    CountryDataLang,
+    CountryAvailableLangs,
     CountryCreatedAt,
     CountryUpdatedAt,
     CountryDeletedAt,
-    CountryI18NLangId,
-    CountryI18NName,
-    CountryI18NSlug,
-    CountryI18NAdministrativeAreaLevel1,
-    CountryI18NAdministrativeAreaLevel2,
-    CountryI18NAdministrativeAreaLevel3,
+    CountryI18nLangId,
+    CountryI18nName,
+    CountryI18nSlug,
+    CountryI18nAdministrativeAreaLevel1,
+    CountryI18nAdministrativeAreaLevel2,
+    CountryI18nAdministrativeAreaLevel3,
 } from './value-objects';
 import { CreatedCountryEvent } from '../application/events/created-country.event';
 import { UpdatedCountryEvent } from '../application/events/updated-country.event';
@@ -45,16 +45,16 @@ export class CommonCountry extends AggregateRoot
     latitude: CountryLatitude;
     longitude: CountryLongitude;
     zoom: CountryZoom;
-    dataLang: CountryDataLang;
+    availableLangs: CountryAvailableLangs;
     createdAt: CountryCreatedAt;
     updatedAt: CountryUpdatedAt;
     deletedAt: CountryDeletedAt;
-    langId: CountryI18NLangId;
-    name: CountryI18NName;
-    slug: CountryI18NSlug;
-    administrativeAreaLevel1: CountryI18NAdministrativeAreaLevel1;
-    administrativeAreaLevel2: CountryI18NAdministrativeAreaLevel2;
-    administrativeAreaLevel3: CountryI18NAdministrativeAreaLevel3;
+    langId: CountryI18nLangId;
+    name: CountryI18nName;
+    slug: CountryI18nSlug;
+    administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1;
+    administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2;
+    administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3;
 
     // eager relationship
     lang: CommonLang;
@@ -72,16 +72,16 @@ export class CommonCountry extends AggregateRoot
         latitude: CountryLatitude,
         longitude: CountryLongitude,
         zoom: CountryZoom,
-        dataLang: CountryDataLang,
+        availableLangs: CountryAvailableLangs,
         createdAt: CountryCreatedAt,
         updatedAt: CountryUpdatedAt,
         deletedAt: CountryDeletedAt,
-        langId: CountryI18NLangId,
-        name: CountryI18NName,
-        slug: CountryI18NSlug,
-        administrativeAreaLevel1: CountryI18NAdministrativeAreaLevel1,
-        administrativeAreaLevel2: CountryI18NAdministrativeAreaLevel2,
-        administrativeAreaLevel3: CountryI18NAdministrativeAreaLevel3,
+        langId: CountryI18nLangId,
+        name: CountryI18nName,
+        slug: CountryI18nSlug,
+        administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1,
+        administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2,
+        administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3,
 
         lang?: CommonLang,
     )
@@ -99,7 +99,7 @@ export class CommonCountry extends AggregateRoot
         this.latitude = latitude;
         this.longitude = longitude;
         this.zoom = zoom;
-        this.dataLang = dataLang;
+        this.availableLangs = availableLangs;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -127,16 +127,16 @@ export class CommonCountry extends AggregateRoot
         latitude: CountryLatitude,
         longitude: CountryLongitude,
         zoom: CountryZoom,
-        dataLang: CountryDataLang,
+        availableLangs: CountryAvailableLangs,
         createdAt: CountryCreatedAt,
         updatedAt: CountryUpdatedAt,
         deletedAt: CountryDeletedAt,
-        langId: CountryI18NLangId,
-        name: CountryI18NName,
-        slug: CountryI18NSlug,
-        administrativeAreaLevel1: CountryI18NAdministrativeAreaLevel1,
-        administrativeAreaLevel2: CountryI18NAdministrativeAreaLevel2,
-        administrativeAreaLevel3: CountryI18NAdministrativeAreaLevel3,
+        langId: CountryI18nLangId,
+        name: CountryI18nName,
+        slug: CountryI18nSlug,
+        administrativeAreaLevel1: CountryI18nAdministrativeAreaLevel1,
+        administrativeAreaLevel2: CountryI18nAdministrativeAreaLevel2,
+        administrativeAreaLevel3: CountryI18nAdministrativeAreaLevel3,
 
         lang?: CommonLang,
     ): CommonCountry
@@ -154,7 +154,7 @@ export class CommonCountry extends AggregateRoot
             latitude,
             longitude,
             zoom,
-            dataLang,
+            availableLangs,
             createdAt,
             updatedAt,
             deletedAt,
@@ -185,7 +185,7 @@ export class CommonCountry extends AggregateRoot
                 country.latitude?.value,
                 country.longitude?.value,
                 country.zoom?.value,
-                country.dataLang?.value,
+                country.availableLangs?.value,
                 country.createdAt?.value,
                 country.updatedAt?.value,
                 country.deletedAt?.value,
@@ -215,7 +215,7 @@ export class CommonCountry extends AggregateRoot
                 country.latitude?.value,
                 country.longitude?.value,
                 country.zoom?.value,
-                country.dataLang?.value,
+                country.availableLangs?.value,
                 country.createdAt?.value,
                 country.updatedAt?.value,
                 country.deletedAt?.value,
@@ -245,7 +245,7 @@ export class CommonCountry extends AggregateRoot
                 country.latitude?.value,
                 country.longitude?.value,
                 country.zoom?.value,
-                country.dataLang?.value,
+                country.availableLangs?.value,
                 country.createdAt?.value,
                 country.updatedAt?.value,
                 country.deletedAt?.value,
@@ -274,7 +274,7 @@ export class CommonCountry extends AggregateRoot
             latitude: this.latitude?.value,
             longitude: this.longitude?.value,
             zoom: this.zoom?.value,
-            dataLang: this.dataLang?.value,
+            availableLangs: this.availableLangs?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

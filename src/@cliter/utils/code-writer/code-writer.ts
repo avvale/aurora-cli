@@ -181,16 +181,16 @@ export class CodeWriter
                 sourceFile,
                 `./${this.moduleName.toKebabCase()}`,
                 [
-                    `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18NModel`,
-                    `I${this.moduleName.toPascalCase()}I18NRepository`,
-                    `Sequelize${this.moduleName.toPascalCase()}I18NRepository`,
+                    `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18nModel`,
+                    `I${this.moduleName.toPascalCase()}I18nRepository`,
+                    `Sequelize${this.moduleName.toPascalCase()}I18nRepository`,
                 ],
             );
 
             // models
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18NModel`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18nModel`,
                 `${this.boundedContextName.toPascalCase()}Models`,
             );
 
@@ -199,8 +199,8 @@ export class CodeWriter
                 sourceFile,
                 `
 {
-    provide : I${this.moduleName.toPascalCase()}I18NRepository,
-    useClass: Sequelize${this.moduleName.toPascalCase()}I18NRepository
+    provide : I${this.moduleName.toPascalCase()}I18nRepository,
+    useClass: Sequelize${this.moduleName.toPascalCase()}I18nRepository
 }`,
                 `${this.boundedContextName.toPascalCase()}Repositories`,
             );

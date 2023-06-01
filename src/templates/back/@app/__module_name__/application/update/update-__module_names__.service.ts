@@ -6,7 +6,7 @@ import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
 import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18NRepository}}
+{{> importI18nRepository}}
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
 import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from '../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
 
@@ -16,7 +16,7 @@ export class Update{{ toPascalCase schema.moduleNames }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
-        {{> declareI18NRepository}}
+        {{> declareI18nRepository}}
     ) {}
 
     async main(
@@ -43,8 +43,8 @@ export class Update{{ toPascalCase schema.moduleNames }}Service
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18NDataLangProperty . ../schema.properties)}}
-            null, // dataLang
+{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+            null, // availableLangs
 {{else}}
             payload.{{ toCamelCase name }},
 {{/if}}
@@ -57,8 +57,8 @@ export class Update{{ toPascalCase schema.moduleNames }}Service
         );
 
         {{#if schema.properties.hasI18n}}
-        // delete dataLang property to avoid overwrite this value in database
-        delete {{ toCamelCase schema.moduleName }}.dataLang;
+        // delete availableLangs property to avoid overwrite this value in database
+        delete {{ toCamelCase schema.moduleName }}.availableLangs;
         {{/if}}
 
         // update

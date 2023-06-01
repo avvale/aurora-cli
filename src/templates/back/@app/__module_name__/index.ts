@@ -19,7 +19,7 @@ import { Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './
 {{/notInArray}}
 {{#if schema.properties.hasI18n}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.command-handler.ts'}}
-import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommandHandler } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command-handler';
+import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command-handler';
 {{/notInArray}}
 {{/if}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
@@ -99,7 +99,7 @@ import { Delete{{ toPascalCase schema.moduleName }}ByIdService } from './applica
 {{/notInArray}}
 {{#if schema.properties.hasI18n}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.service.ts'}}
-import { Delete{{ toPascalCase schema.moduleName }}ByIdI18NService } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
+import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nService } from './application/delete/delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
 {{/notInArray}}
 {{/if}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.service.ts'}}
@@ -109,7 +109,7 @@ import { Delete{{ toPascalCase schema.moduleNames }}Service } from './applicatio
 // models
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.model';
 {{#if schema.properties.hasI18n}}
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18NModel } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18nModel } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
 {{#each schema.properties.withRelationshipManyToMany}}
 {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
@@ -121,8 +121,8 @@ export { {{ relationship.pivot.aggregate }}Model } from './infrastructure/sequel
 export { I{{ toPascalCase schema.moduleName }}Repository } from './domain/{{ toKebabCase schema.moduleName }}.repository';
 export { Sequelize{{ toPascalCase schema.moduleName }}Repository } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}.repository';
 {{#if schema.properties.hasI18n}}
-export { I{{ toPascalCase schema.moduleName }}I18NRepository } from './domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
-export { Sequelize{{ toPascalCase schema.moduleName }}I18NRepository } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}-i18n.repository';
+export { I{{ toPascalCase schema.moduleName }}I18nRepository } from './domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
+export { Sequelize{{ toPascalCase schema.moduleName }}I18nRepository } from './infrastructure/sequelize/sequelize-{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
 
 // sagas
@@ -150,7 +150,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#if schema.properties.hasI18n}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.command-handler.ts'}}
-    Delete{{ toPascalCase schema.moduleName }}ByIdI18NCommandHandler,
+    Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler,
     {{/notInArray}}
     {{/if}} 
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
@@ -231,7 +231,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#if schema.properties.hasI18n}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id-i18n.service.ts'}}
-    Delete{{ toPascalCase schema.moduleName }}ByIdI18NService,
+    Delete{{ toPascalCase schema.moduleName }}ByIdI18nService,
     {{/notInArray}}
     {{/if}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/delete-' (toKebabCase schema.moduleNames) '.service.ts'}}

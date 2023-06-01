@@ -2,7 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AddI18NConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { AddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // custom items
 import { CommonCreateCountryHandler } from './common-create-country.handler';
@@ -25,7 +25,7 @@ describe('CommonCreateCountryHandler', () =>
             ],
             providers: [
                 CommonCreateCountryHandler,
-                AddI18NConstraintService,
+                AddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

@@ -62,7 +62,7 @@ aggregateProperties:
     type: int.unsigned
     maxLength: 2
     nullable: true
-  - name: dataLang
+  - name: availableLangs
     type: json
     nullable: true
   - name: createdAt

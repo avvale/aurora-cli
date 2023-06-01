@@ -18,7 +18,7 @@
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
     (object items='NotFoundException' path='@nestjs/common')
-    (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18NRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
+    (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
     (object items='* as _' path='lodash' defaultImport=true)
 ~}}
 {{/if}}
@@ -29,7 +29,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
-        {{> declareI18NRepository}}
+        {{> declareI18nRepository}}
     ) {}
 
     async main(
@@ -54,8 +54,8 @@ export class Create{{ toPascalCase schema.moduleName }}Service
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18NDataLangProperty . ../schema.properties)}}
-            null, // dataLang
+{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+            null, // availableLangs
 {{else}}
             payload.{{ toCamelCase name }},
 {{/if}}
@@ -71,19 +71,27 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         try
         {
             // try get object from database
-            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById({{ toCamelCase schema.moduleName }}.id, { constraint: { include: ['{{ toCamelCase schema.moduleName }}I18N']}});
+            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById(
+                {{ toCamelCase schema.moduleName }}.id,
+                {
+                    constraint: {
+                        include: ['{{ toCamelCase schema.moduleName }}I18n'],
+                    },
+                },
+            );
 
-            if ({{ toCamelCase schema.moduleName }}InDB.dataLang.value.includes({{ toCamelCase schema.moduleName }}.langId.value)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${{ bracketOpen }}{{ toCamelCase schema.moduleName }}['id']['value']} already exist in database`);
+            // eslint-disable-next-line max-len
+            if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes({{ toCamelCase schema.moduleName }}.langId.value)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${{ bracketOpen }}{{ toCamelCase schema.moduleName }}['id']['value']} already exist in database`);
 
-            // add new lang id to data lang field to create or update field
-            {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang(_.union({{ toCamelCase schema.moduleName }}InDB.dataLang.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
-            await this.repository.update({{ toCamelCase schema.moduleName }}, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'dataLang'), updateOptions: cQMetadata?.repositoryOptions });
+            // add new language id to data lang field to create or update field
+            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
+            await this.repository.update({{ toCamelCase schema.moduleName }}, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'availableLangs'), updateOptions: cQMetadata?.repositoryOptions });
         }
         catch (error)
         {
             if (error instanceof NotFoundException)
             {
-                {{ toCamelCase schema.moduleName }}.dataLang = new {{ toPascalCase schema.moduleName }}DataLang([{{ toCamelCase schema.moduleName }}.langId.value]);
+                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs([{{ toCamelCase schema.moduleName }}.langId.value]);
                 await this.repository.create({{ toCamelCase schema.moduleName }}, { createOptions: cQMetadata?.repositoryOptions });
             }
         }
@@ -97,15 +105,18 @@ export class Create{{ toPascalCase schema.moduleName }}Service
                     where: {
                         {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
                         langId: aggregate['langId']['value'],
-                    }
+                    },
                 }),
-                {
-                    createOptions: cQMetadata?.repositoryOptions
-                },
+                createOptions: cQMetadata?.repositoryOptions,
             }
         );
         {{else}}
-        await this.repository.create({{ toCamelCase schema.moduleName }}, { createOptions: cQMetadata?.repositoryOptions });
+        await this.repository.create(
+            {{ toCamelCase schema.moduleName }},
+            {
+                createOptions: cQMetadata?.repositoryOptions,
+            },
+        );
         {{/if}}
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
