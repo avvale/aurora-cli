@@ -30,20 +30,7 @@ import { {{ schema.aggregateName }}I18nModel } from './sequelize-{{ toKebabCase 
     timestamps: false,
     {{#if schema.properties.hasIndex}}
     indexes: [
-        {{#each schema.properties.columnsWithIndex}}
-        {
-            fields: ['{{ toCamelCase name }}'],
-            {{#eq index 'index' }}
-            unique: false,
-            {{/eq}}
-            {{#eq index 'unique' }}
-            unique: true,
-            {{/eq}}
-            {{#if indexName}}
-            name: '{{ indexName }}',
-            {{/if}}
-        },
-        {{/each}}
+{{{ indexesManager (object indexes=schema.properties.columnsWithIndex) }}}
     ],
     {{/if}}
 })

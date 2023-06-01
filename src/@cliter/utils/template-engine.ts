@@ -12,6 +12,7 @@ import '../handlebars/helpers/has-comma-in-validation-form-control';
 import '../handlebars/helpers/has-items';
 import '../handlebars/helpers/has-validation-form-control';
 import '../handlebars/helpers/import-manager';
+import '../handlebars/helpers/indexes-manager';
 import '../handlebars/helpers/initial-form-group-data';
 import '../handlebars/helpers/injector-manager';
 import '../handlebars/helpers/is-i18n-available-langs-property';

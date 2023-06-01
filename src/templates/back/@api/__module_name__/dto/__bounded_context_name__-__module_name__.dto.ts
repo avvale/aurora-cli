@@ -4,7 +4,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
+{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';
+{{/unless}}
 {{/each}}
 {{#each schema.properties.withImportRelationshipOneToMany}}
 import { {{ toPascalCase getRelationshipBoundedContext }}{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContext }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContext }}-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';

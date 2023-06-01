@@ -30,7 +30,12 @@ export class Properties
 
     get hasIndex(): boolean
     {
-        return this.properties.some(property => property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE);
+        return this.properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && !property.isI18n);
+    }
+
+    get hasIndexI18n(): boolean
+    {
+        return this.properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && property.isI18n);
     }
 
     get withoutTimestamps(): Property[]
