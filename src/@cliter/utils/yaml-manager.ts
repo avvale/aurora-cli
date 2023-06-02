@@ -68,32 +68,35 @@ export class YamlManager
             );
         }
 
-        // add aggregate i18n properties
-        for (const property of yamlObj.aggregateI18nProperties)
+        if (Array.isArray(yamlObj.aggregateI18nProperties))
         {
-            properties.add(
-                new Property({
-                    isI18n       : true,
-                    name         : property.name,
-                    type         : property.type,
-                    primaryKey   : property?.primaryKey,
-                    autoIncrement: property?.autoIncrement,
-                    enumOptions  : property?.enumOptions?.join(),
-                    decimals     : property?.decimals,
-                    length       : property?.length,
-                    minLength    : property?.minLength,
-                    maxLength    : property?.maxLength,
-                    nullable     : property?.nullable,
-                    defaultValue : property?.defaultValue,
-                    relationship : property?.relationship,
-                    index        : property?.index,
-                    indexName    : property?.indexName,
-                    example      : property?.example,
-                    faker        : property?.faker,
-                    webComponent : property?.webComponent,
-                    schema,
-                }),
-            );
+            // add aggregate i18n properties
+            for (const property of yamlObj.aggregateI18nProperties)
+            {
+                properties.add(
+                    new Property({
+                        isI18n       : true,
+                        name         : property.name,
+                        type         : property.type,
+                        primaryKey   : property?.primaryKey,
+                        autoIncrement: property?.autoIncrement,
+                        enumOptions  : property?.enumOptions?.join(),
+                        decimals     : property?.decimals,
+                        length       : property?.length,
+                        minLength    : property?.minLength,
+                        maxLength    : property?.maxLength,
+                        nullable     : property?.nullable,
+                        defaultValue : property?.defaultValue,
+                        relationship : property?.relationship,
+                        index        : property?.index,
+                        indexName    : property?.indexName,
+                        example      : property?.example,
+                        faker        : property?.faker,
+                        webComponent : property?.webComponent,
+                        schema,
+                    }),
+                );
+            }
         }
 
         if (Array.isArray(yamlObj.additionalApis))
