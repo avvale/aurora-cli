@@ -39,6 +39,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
             '{{ toCamelCase schema.moduleName }}I18n',
             contentLanguage,
         );
+
         {{/if}}
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             id,

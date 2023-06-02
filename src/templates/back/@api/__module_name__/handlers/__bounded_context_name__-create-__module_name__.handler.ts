@@ -53,6 +53,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             payload.langId,
             { contentLanguageFormat: FormatLangCode.ID },
         );
+
         return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             constraint,

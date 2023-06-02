@@ -54,6 +54,6 @@ export class CommonModule
     async onApplicationBootstrap(): Promise<void>
     {
         // set lang in cache manager fo two years
-        await this.cacheManager.set('common/lang', await this.queryBus.ask(new GetLangsQuery()), { ttl: 60 * 60 * 24 * 365 * 2 });
+        await this.cacheManager.set('common/langs', await this.queryBus.ask(new GetLangsQuery()), { ttl: 60 * 60 * 24 * 365 * 2 });
     }
 }
