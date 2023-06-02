@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - common/lang",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - commonCreateLang",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CommonCreateLangInput!)\n{\n\tcommonCreateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tcustomCode\n\t\tdir\n\t\tsort\n\t\tisActive\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Unbranded Wooden Cheese\", \n\t\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\t\"iso6392\": \"2p\", \n\t\t\"iso6393\": \"mgz\", \n\t\t\"ietf\": \"u9ip9\", \n\t\t\"customCode\": \"7me15g1gi\", \n\t\t\"dir\": 'LTR', \n\t\t\"sort\": 78888, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonCreateLangs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[CommonCreateLangInput]!)\n{\n\tcommonCreateLangs (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"6b4f5e2a-0cb9-4099-bfac-caa7a675fc34\", \n\t\t\t\"name\": \"Handcrafted Rubber Chips\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/nightlife\", \n\t\t\t\"iso6392\": \"8m\", \n\t\t\t\"iso6393\": \"93v\", \n\t\t\t\"ietf\": \"eacor\", \n\t\t\t\"customCode\": \"0vxt7aswu\", \n\t\t\t\"dir\": 'RTL', \n\t\t\t\"sort\": 10589, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b682e24f-ae1a-4049-80f9-bceaaa897162\", \n\t\t\t\"name\": \"Fantastic Rubber Chips\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/food\", \n\t\t\t\"iso6392\": \"fw\", \n\t\t\t\"iso6393\": \"u2h\", \n\t\t\t\"ietf\": \"0rr2d\", \n\t\t\t\"customCode\": \"0cdgzyycs\", \n\t\t\t\"dir\": 'RTL', \n\t\t\t\"sort\": 82354, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"dafb1117-af3d-4b91-b67e-087b01364e7e\", \n\t\t\t\"name\": \"Small Granite Shoes\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/nightlife\", \n\t\t\t\"iso6392\": \"2n\", \n\t\t\t\"iso6393\": \"uty\", \n\t\t\t\"ietf\": \"tc4rf\", \n\t\t\t\"customCode\": \"roqu6u964\", \n\t\t\t\"dir\": 'LTR', \n\t\t\t\"sort\": 85403, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4ecef77e-6397-4a7a-89d0-7e01555333d2\", \n\t\t\t\"name\": \"Small Frozen Tuna\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/transport\", \n\t\t\t\"iso6392\": \"5c\", \n\t\t\t\"iso6393\": \"sbs\", \n\t\t\t\"ietf\": \"tzdvs\", \n\t\t\t\"customCode\": \"ulg4malwc\", \n\t\t\t\"dir\": 'LTR', \n\t\t\t\"sort\": 74959, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d814e6e9-bd3c-47e9-bd9d-bb939eaad073\", \n\t\t\t\"name\": \"Incredible Metal Mouse\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/fashion\", \n\t\t\t\"iso6392\": \"ie\", \n\t\t\t\"iso6393\": \"qdd\", \n\t\t\t\"ietf\": \"lix7q\", \n\t\t\t\"customCode\": \"te3uawpgs\", \n\t\t\t\"dir\": 'LTR', \n\t\t\t\"sort\": 65098, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3ef97d45-e098-411b-8756-171b60a05ca2\", \n\t\t\t\"name\": \"Fantastic Fresh Keyboard\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\t\"iso6392\": \"ws\", \n\t\t\t\"iso6393\": \"dbz\", \n\t\t\t\"ietf\": \"gw82y\", \n\t\t\t\"customCode\": \"3roku1k0x\", \n\t\t\t\"dir\": 'LTR', \n\t\t\t\"sort\": 93072, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c13ffa58-d057-4ddd-b80e-e0859d6fb46b\", \n\t\t\t\"name\": \"Practical Concrete Soap\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/technics\", \n\t\t\t\"iso6392\": \"f4\", \n\t\t\t\"iso6393\": \"d63\", \n\t\t\t\"ietf\": \"wgbar\", \n\t\t\t\"customCode\": \"0bbngktjg\", \n\t\t\t\"dir\": 'RTL', \n\t\t\t\"sort\": 43682, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0d2c1179-70d2-4904-91c1-aeb49c3370df\", \n\t\t\t\"name\": \"Fantastic Granite Mouse\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/food\", \n\t\t\t\"iso6392\": \"03\", \n\t\t\t\"iso6393\": \"rvf\", \n\t\t\t\"ietf\": \"giiy9\", \n\t\t\t\"customCode\": \"2ij5z72nc\", \n\t\t\t\"dir\": 'RTL', \n\t\t\t\"sort\": 56642, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6db651d2-9a71-4b59-94c7-e5b2ca3473da\", \n\t\t\t\"name\": \"Handmade Metal Fish\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/sports\", \n\t\t\t\"iso6392\": \"5s\", \n\t\t\t\"iso6393\": \"smm\", \n\t\t\t\"ietf\": \"hzdme\", \n\t\t\t\"customCode\": \"2ziwwsmsr\", \n\t\t\t\"dir\": 'LTR', \n\t\t\t\"sort\": 83540, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d2b830ea-fa91-43af-8070-71dd8baebe5b\", \n\t\t\t\"name\": \"Tasty Cotton Computer\", \n\t\t\t\"image\": \"http://placeimg.com/640/480/sports\", \n\t\t\t\"iso6392\": \"6q\", \n\t\t\t\"iso6393\": \"0g2\", \n\t\t\t\"ietf\": \"tvebq\", \n\t\t\t\"customCode\": \"l8n7e8pw6\", \n\t\t\t\"dir\": 'RTL', \n\t\t\t\"sort\": 31521, \n\t\t\t\"isActive\": true\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonPaginateLangs",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tcommonPaginateLangs (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonGetLangs",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcommonGetLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tcustomCode\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonFindLang",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tcommonFindLang (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tcustomCode\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonFindLangById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tcommonFindLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tcustomCode\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonUpdateLang",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:CommonUpdateLangInput!)\n{\n\tcommonUpdateLang (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tcustomCode\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Fantastic Wooden Computer\", \n\t\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\t\"iso6392\": \"ke\", \n\t\t\"iso6393\": \"7c2\", \n\t\t\"ietf\": \"55dij\", \n\t\t\"customCode\": \"h1aoy5kf6\", \n\t\t\"dir\": 'LTR', \n\t\t\"sort\": 44324, \n\t\t\"isActive\": false\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonDeleteLangById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tcommonDeleteLangById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tcustomCode\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - commonDeleteLangs",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tcommonDeleteLangs (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\timage\n\t\tiso6392\n\t\tiso6393\n\t\tietf\n\t\tcustomCode\n\t\tdir\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/lang/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handcrafted Steel Computer\", \n\t\"image\": \"http://placeimg.com/640/480/city\", \n\t\"iso6392\": \"fg\", \n\t\"iso6393\": \"vj9\", \n\t\"ietf\": \"kgtba\", \n\t\"customCode\": \"ya39ctvod\", \n\t\"dir\": 'RTL', \n\t\"sort\": 86121, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/lang/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"lang",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/langs/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"723a6153-a1b1-464a-9769-cf28be256689\", \n\t\t\"name\": \"Licensed Frozen Car\", \n\t\t\"image\": \"http://placeimg.com/640/480/nature\", \n\t\t\"iso6392\": \"6g\", \n\t\t\"iso6393\": \"xeo\", \n\t\t\"ietf\": \"0n51o\", \n\t\t\"customCode\": \"suxb4nsx0\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 40315, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"96898418-927b-4528-96cd-e64c3ce7b777\", \n\t\t\"name\": \"Intelligent Fresh Salad\", \n\t\t\"image\": \"http://placeimg.com/640/480/abstract\", \n\t\t\"iso6392\": \"mo\", \n\t\t\"iso6393\": \"hqw\", \n\t\t\"ietf\": \"jmpny\", \n\t\t\"customCode\": \"h3a5onp8g\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 44791, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"47583784-6258-4574-9c48-e906cbf926cf\", \n\t\t\"name\": \"Awesome Concrete Hat\", \n\t\t\"image\": \"http://placeimg.com/640/480/animals\", \n\t\t\"iso6392\": \"j3\", \n\t\t\"iso6393\": \"bi0\", \n\t\t\"ietf\": \"vfwtv\", \n\t\t\"customCode\": \"03lh6zwnz\", \n\t\t\"dir\": 'LTR', \n\t\t\"sort\": 90603, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"fb56dc5b-ff14-4a69-bd17-7f1544fc1fd3\", \n\t\t\"name\": \"Practical Soft Hat\", \n\t\t\"image\": \"http://placeimg.com/640/480/cats\", \n\t\t\"iso6392\": \"x6\", \n\t\t\"iso6393\": \"n6p\", \n\t\t\"ietf\": \"nvvq0\", \n\t\t\"customCode\": \"rtt63h9zk\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 14315, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"f165ce28-a820-4e80-88cc-f9bdf15ec0b0\", \n\t\t\"name\": \"Ergonomic Rubber Mouse\", \n\t\t\"image\": \"http://placeimg.com/640/480/technics\", \n\t\t\"iso6392\": \"mn\", \n\t\t\"iso6393\": \"8h4\", \n\t\t\"ietf\": \"r9t9z\", \n\t\t\"customCode\": \"qejwcdcb7\", \n\t\t\"dir\": 'LTR', \n\t\t\"sort\": 36039, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"f8346731-b444-477e-81d9-45b0214401c8\", \n\t\t\"name\": \"Small Granite Keyboard\", \n\t\t\"image\": \"http://placeimg.com/640/480/abstract\", \n\t\t\"iso6392\": \"c2\", \n\t\t\"iso6393\": \"080\", \n\t\t\"ietf\": \"s672z\", \n\t\t\"customCode\": \"dr9acwvog\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 26970, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"aea51e75-9569-4639-96ee-b12a02a04365\", \n\t\t\"name\": \"Handmade Frozen Towels\", \n\t\t\"image\": \"http://placeimg.com/640/480/abstract\", \n\t\t\"iso6392\": \"5z\", \n\t\t\"iso6393\": \"gsf\", \n\t\t\"ietf\": \"sovhq\", \n\t\t\"customCode\": \"9ctqszwj0\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 77223, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"bb41418b-7f57-4c30-b45a-f58b0b889d1d\", \n\t\t\"name\": \"Handmade Steel Chips\", \n\t\t\"image\": \"http://placeimg.com/640/480/fashion\", \n\t\t\"iso6392\": \"10\", \n\t\t\"iso6393\": \"9fy\", \n\t\t\"ietf\": \"szvmd\", \n\t\t\"customCode\": \"63z69bm84\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 33795, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"5910377e-c6a8-4eb7-ab29-c499a8e7eb78\", \n\t\t\"name\": \"Fantastic Steel Tuna\", \n\t\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\t\"iso6392\": \"z6\", \n\t\t\"iso6393\": \"vvj\", \n\t\t\"ietf\": \"ikj53\", \n\t\t\"customCode\": \"vfvgspyf6\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 94730, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"011ccbb8-f824-4fb4-86f5-e579789b1890\", \n\t\t\"name\": \"Tasty Plastic Soap\", \n\t\t\"image\": \"http://placeimg.com/640/480/food\", \n\t\t\"iso6392\": \"ag\", \n\t\t\"iso6393\": \"p5u\", \n\t\t\"ietf\": \"jvm74\", \n\t\t\"customCode\": \"86fmnqv4n\", \n\t\t\"dir\": 'RTL', \n\t\t\"sort\": 87876, \n\t\t\"isActive\": true\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/langs/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"langs",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/langs/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/langs/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+                        "langs",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/langs/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/langs/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"langs",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/lang/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/lang/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"lang",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/lang/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/lang/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"lang",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/lang/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Unbranded Wooden Keyboard\", \n\t\"image\": \"http://placeimg.com/640/480/people\", \n\t\"iso6392\": \"2o\", \n\t\"iso6393\": \"btm\", \n\t\"ietf\": \"g0gj0\", \n\t\"customCode\": \"ru2v6pnw5\", \n\t\"dir\": 'RTL', \n\t\"sort\": 60785, \n\t\"isActive\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/lang/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"lang",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - common/lang/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/lang/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"lang",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - common/langs/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/common/langs/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"common",
+						"langs",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

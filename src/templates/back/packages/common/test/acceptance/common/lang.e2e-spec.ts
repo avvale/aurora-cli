@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { INestApplication } from '@nestjs/common';
@@ -6,12 +7,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ILangRepository } from '@app/common/lang/domain/lang.repository';
 import { MockLangSeeder } from '@app/common/lang/infrastructure/mock/mock-lang.seeder';
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { CommonModule } from '@api/common/common.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';
-
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -480,7 +480,7 @@ describe('lang', () =>
                 {
                     where:
                     {
-                        id: '1d586482-ba57-46d3-b7a7-8fdaaea99c71',
+                        id: '0524f984-7af3-54b5-be42-aa676e21a43b',
                     },
                 },
             })
@@ -523,7 +523,7 @@ describe('lang', () =>
     test('/REST:POST common/lang/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .post('/common/lang/find/858e1375-64af-4f5f-8ffd-8970712c9119')
+            .post('/common/lang/find/e1008765-5914-5a94-9729-8844efd8fd1c')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -547,7 +547,7 @@ describe('lang', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                id: '27c087e1-a022-45f5-9d24-e3aafbe83c9d',
+                id: '0ae98c1f-6a28-5fb0-aa38-43817e2825c3',
             })
             .expect(404);
     });
@@ -571,7 +571,7 @@ describe('lang', () =>
     test('/REST:DELETE common/lang/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/common/lang/delete/2eaecd5b-2f46-4f7d-b09a-6ccc42c15875')
+            .delete('/common/lang/delete/8d7c096e-7a6b-552f-8488-65facaea7787')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -617,8 +617,8 @@ describe('lang', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -767,7 +767,7 @@ describe('lang', () =>
                     {
                         where:
                         {
-                            id: '3e8d99ec-6956-463e-8f00-8753019ec46f',
+                            id: '6b4af5d0-6a61-5dcc-8f1d-e1c9aecc0295',
                         },
                     },
                 },
@@ -776,8 +776,8 @@ describe('lang', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -852,15 +852,15 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '3fd2bbce-c13f-478e-9476-9434d2979da9',
+                    id: '42686200-8cc6-597e-9455-16d081e31c94',
                 },
             })
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -930,7 +930,7 @@ describe('lang', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        id: 'bb4435b5-38b4-418f-a2e7-439694f6e9fa',
+                        id: '2b232d00-b91d-576d-bf42-fef508edc1ff',
                     },
                 },
             })
@@ -938,8 +938,8 @@ describe('lang', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -1055,15 +1055,15 @@ describe('lang', () =>
                     }
                 `,
                 variables: {
-                    id: '31776299-716e-4065-8f01-b89282eac0fb',
+                    id: '0abe6538-e418-52f7-9fd1-7ce12b606194',
                 },
             })
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 

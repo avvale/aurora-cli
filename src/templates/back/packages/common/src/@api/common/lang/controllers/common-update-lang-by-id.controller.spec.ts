@@ -6,7 +6,7 @@ import { CommonUpdateLangByIdController } from './common-update-lang-by-id.contr
 import { CommonUpdateLangByIdHandler } from '../handlers/common-update-lang-by-id.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonUpdateLangByIdController', () =>
 {
@@ -43,7 +43,7 @@ describe('CommonUpdateLangByIdController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a lang created', async () =>
+        test('should return a lang updated', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
             expect(await controller.main(langs[0])).toBe(langs[0]);

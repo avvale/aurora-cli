@@ -6,7 +6,7 @@ import { CommonFindLangByIdController } from './common-find-lang-by-id.controlle
 import { CommonFindLangByIdHandler } from '../handlers/common-find-lang-by-id.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonFindLangByIdController', () =>
 {

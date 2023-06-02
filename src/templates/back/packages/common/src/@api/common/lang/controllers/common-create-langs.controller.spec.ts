@@ -5,7 +5,7 @@ import { CommonCreateLangsController } from './common-create-langs.controller';
 import { CommonCreateLangsHandler } from '../handlers/common-create-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonCreateLangsController', () =>
 {

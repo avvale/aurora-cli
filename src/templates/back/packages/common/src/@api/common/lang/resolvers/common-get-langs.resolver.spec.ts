@@ -6,7 +6,7 @@ import { CommonGetLangsResolver } from './common-get-langs.resolver';
 import { CommonGetLangsHandler } from '../handlers/common-get-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonGetLangsResolver', () =>
 {

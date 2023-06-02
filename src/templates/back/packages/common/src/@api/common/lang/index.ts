@@ -7,6 +7,7 @@ import { CommonFindLangByIdController } from './controllers/common-find-lang-by-
 import { CommonFindLangController } from './controllers/common-find-lang.controller';
 import { CommonUpdateLangByIdController } from './controllers/common-update-lang-by-id.controller';
 import { CommonUpdateLangsController } from './controllers/common-update-langs.controller';
+import { CommonUpsertLangController } from './controllers/common-upsert-lang.controller';
 import { CommonDeleteLangByIdController } from './controllers/common-delete-lang-by-id.controller';
 import { CommonDeleteLangsController } from './controllers/common-delete-langs.controller';
 
@@ -19,6 +20,7 @@ import { CommonFindLangByIdResolver } from './resolvers/common-find-lang-by-id.r
 import { CommonFindLangResolver } from './resolvers/common-find-lang.resolver';
 import { CommonUpdateLangByIdResolver } from './resolvers/common-update-lang-by-id.resolver';
 import { CommonUpdateLangsResolver } from './resolvers/common-update-langs.resolver';
+import { CommonUpsertLangResolver } from './resolvers/common-upsert-lang.resolver';
 import { CommonDeleteLangByIdResolver } from './resolvers/common-delete-lang-by-id.resolver';
 import { CommonDeleteLangsResolver } from './resolvers/common-delete-langs.resolver';
 
@@ -31,8 +33,12 @@ import { CommonFindLangByIdHandler } from './handlers/common-find-lang-by-id.han
 import { CommonFindLangHandler } from './handlers/common-find-lang.handler';
 import { CommonUpdateLangByIdHandler } from './handlers/common-update-lang-by-id.handler';
 import { CommonUpdateLangsHandler } from './handlers/common-update-langs.handler';
+import { CommonUpsertLangHandler } from './handlers/common-upsert-lang.handler';
 import { CommonDeleteLangByIdHandler } from './handlers/common-delete-lang-by-id.handler';
 import { CommonDeleteLangsHandler } from './handlers/common-delete-langs.handler';
+
+// seeder
+import { CommonLangSeeder } from './seeder/common-lang.seeder';
 
 export const CommonLangControllers = [
     CommonCreateLangController,
@@ -43,6 +49,7 @@ export const CommonLangControllers = [
     CommonFindLangController,
     CommonUpdateLangByIdController,
     CommonUpdateLangsController,
+    CommonUpsertLangController,
     CommonDeleteLangByIdController,
     CommonDeleteLangsController,
 ];
@@ -56,6 +63,7 @@ export const CommonLangResolvers = [
     CommonFindLangResolver,
     CommonUpdateLangByIdResolver,
     CommonUpdateLangsResolver,
+    CommonUpsertLangResolver,
     CommonDeleteLangByIdResolver,
     CommonDeleteLangsResolver,
 ];
@@ -69,6 +77,11 @@ export const CommonLangApiHandlers = [
     CommonFindLangHandler,
     CommonUpdateLangByIdHandler,
     CommonUpdateLangsHandler,
+    CommonUpsertLangHandler,
     CommonDeleteLangByIdHandler,
     CommonDeleteLangsHandler,
+];
+
+export const CommonLangServices = [
+    CommonLangSeeder,
 ];

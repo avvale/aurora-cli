@@ -18,6 +18,12 @@ export class CommonPaginateLangsHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateLangsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new PaginateLangsQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

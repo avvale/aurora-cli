@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { CommonFindLangHandler } from './common-find-lang.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonFindLangHandler', () =>
 {
@@ -37,9 +37,9 @@ describe('CommonFindLangHandler', () =>
         })
             .compile();
 
-        handler    = module.get<CommonFindLangHandler>(CommonFindLangHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<CommonFindLangHandler>(CommonFindLangHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonFindLangHandler should be defined', () =>

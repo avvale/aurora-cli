@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 
 // @app
 import { GetLangsQuery } from '@app/common/lang/application/get/get-langs.query';
@@ -19,11 +19,27 @@ export class CommonDeleteLangsHandler
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
+        auditing?: AuditingMeta,
     ): Promise<CommonLang[] | CommonLangDto[]>
     {
-        const langs = await this.queryBus.ask(new GetLangsQuery(queryStatement, constraint, { timezone }));
+        const langs = await this.queryBus.ask(new GetLangsQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteLangsCommand(queryStatement, constraint, { timezone }));
+        await this.commandBus.dispatch(new DeleteLangsCommand(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+                repositoryOptions: {
+                    auditing,
+                },
+            },
+        ));
 
         return langs;
     }

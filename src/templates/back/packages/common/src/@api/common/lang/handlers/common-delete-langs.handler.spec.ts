@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { CommonDeleteLangsHandler } from './common-delete-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonDeleteLangsHandler', () =>
 {
@@ -37,9 +37,9 @@ describe('CommonDeleteLangsHandler', () =>
         })
             .compile();
 
-        handler    = module.get<CommonDeleteLangsHandler>(CommonDeleteLangsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<CommonDeleteLangsHandler>(CommonDeleteLangsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonDeleteLangsHandler should be defined', () =>

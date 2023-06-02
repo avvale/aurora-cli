@@ -19,6 +19,12 @@ export class CommonGetLangsHandler
         timezone?: string,
     ): Promise<CommonLang[] | CommonLangDto[]>
     {
-        return await this.queryBus.ask(new GetLangsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetLangsQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

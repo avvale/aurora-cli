@@ -7,7 +7,7 @@ import { CommonUpdateLangsHandler } from '../handlers/common-update-langs.handle
 import { CommonUpdateLangsInput } from '@api/graphql';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonUpdateLangsResolver', () =>
 {

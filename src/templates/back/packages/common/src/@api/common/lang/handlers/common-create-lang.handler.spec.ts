@@ -6,7 +6,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { CommonCreateLangHandler } from './common-create-lang.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonCreateLangHandler', () =>
 {
@@ -37,9 +37,9 @@ describe('CommonCreateLangHandler', () =>
         })
             .compile();
 
-        handler     = module.get<CommonCreateLangHandler>(CommonCreateLangHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<CommonCreateLangHandler>(CommonCreateLangHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>

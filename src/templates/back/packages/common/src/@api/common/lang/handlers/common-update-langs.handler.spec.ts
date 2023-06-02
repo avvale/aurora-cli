@@ -7,7 +7,7 @@ import { CommonUpdateLangsHandler } from './common-update-langs.handler';
 import { CommonUpdateLangsInput } from '@api/graphql';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonUpdateLangsHandler', () =>
 {
@@ -38,9 +38,9 @@ describe('CommonUpdateLangsHandler', () =>
         })
             .compile();
 
-        handler     = module.get<CommonUpdateLangsHandler>(CommonUpdateLangsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<CommonUpdateLangsHandler>(CommonUpdateLangsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonUpdateLangsHandler should be defined', () =>

@@ -18,7 +18,7 @@ export class CommonFindLangByIdController
     @Post(':id')
     @HttpCode(200)
     @ApiOperation({ summary: 'Find lang by id' })
-    @ApiOkResponse({ description: 'The record has been successfully created.', type: CommonLangDto })
+    @ApiOkResponse({ description: 'The record has been successfully requested.', type: CommonLangDto })
     async main(
         @Param('id') id: string,
         @Body('constraint') constraint?: QueryStatement,

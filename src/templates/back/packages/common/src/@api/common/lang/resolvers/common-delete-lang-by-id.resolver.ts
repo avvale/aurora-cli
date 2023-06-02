@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
 
 // @app
 import { CommonDeleteLangByIdHandler } from '../handlers/common-delete-lang-by-id.handler';
@@ -17,12 +17,14 @@ export class CommonDeleteLangByIdResolver
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
+        @Auditing() auditing?: AuditingMeta,
     ): Promise<CommonLang>
     {
         return await this.handler.main(
             id,
             constraint,
             timezone,
+            auditing,
         );
     }
 }

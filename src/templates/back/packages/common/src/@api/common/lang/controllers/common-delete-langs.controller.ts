@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { CommonLangDto } from '../dto';
 
 // @app
@@ -24,12 +24,14 @@ export class CommonDeleteLangsController
         @Body('query') queryStatement?: QueryStatement,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
+        @Auditing() auditing?: AuditingMeta,
     )
     {
         return await this.handler.main(
             queryStatement,
             constraint,
             timezone,
+            auditing,
         );
     }
 }

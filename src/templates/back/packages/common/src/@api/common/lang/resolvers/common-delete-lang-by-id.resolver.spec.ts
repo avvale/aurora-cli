@@ -6,7 +6,7 @@ import { CommonDeleteLangByIdResolver } from './common-delete-lang-by-id.resolve
 import { CommonDeleteLangByIdHandler } from '../handlers/common-delete-lang-by-id.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonDeleteLangByIdResolver', () =>
 {

@@ -6,7 +6,7 @@ import { CommonPaginateLangsController } from './common-paginate-langs.controlle
 import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonPaginateLangsController', () =>
 {

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
 
 // @app
 import { CreateLangsCommand } from '@app/common/lang/application/create/create-langs.command';
@@ -16,9 +16,18 @@ export class CommonCreateLangsHandler
     async main(
         payload: CommonCreateLangInput[] | CommonCreateLangDto[],
         timezone?: string,
+        auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateLangsCommand(payload, { timezone }));
+        await this.commandBus.dispatch(new CreateLangsCommand(
+            payload,
+            {
+                timezone,
+                repositoryOptions: {
+                    auditing,
+                },
+            },
+        ));
         return true;
     }
 }

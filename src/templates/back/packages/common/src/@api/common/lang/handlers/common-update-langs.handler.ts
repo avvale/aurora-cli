@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 
 // @app
 import { GetLangsQuery } from '@app/common/lang/application/get/get-langs.query';
@@ -20,10 +20,27 @@ export class CommonUpdateLangsHandler
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
+        auditing?: AuditingMeta,
     ): Promise<CommonLang | CommonLangDto>
     {
-        await this.commandBus.dispatch(new UpdateLangsCommand(payload, queryStatement, constraint, { timezone }));
+        await this.commandBus.dispatch(new UpdateLangsCommand(
+            payload,
+            queryStatement,
+            constraint,
+            {
+                timezone,
+                repositoryOptions: {
+                    auditing,
+                },
+            },
+        ));
 
-        return await this.queryBus.ask(new GetLangsQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new GetLangsQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

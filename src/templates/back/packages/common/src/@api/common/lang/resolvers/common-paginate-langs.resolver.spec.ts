@@ -6,7 +6,7 @@ import { CommonPaginateLangsResolver } from './common-paginate-langs.resolver';
 import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 
 describe('CommonPaginateLangsResolver', () =>
 {
@@ -30,7 +30,7 @@ describe('CommonPaginateLangsResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<CommonPaginateLangsResolver>(CommonPaginateLangsResolver);
+        resolver = module.get<CommonPaginateLangsResolver>(CommonPaginateLangsResolver);
         handler = module.get<CommonPaginateLangsHandler>(CommonPaginateLangsHandler);
     });
 
