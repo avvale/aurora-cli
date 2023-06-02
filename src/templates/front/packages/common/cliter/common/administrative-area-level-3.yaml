@@ -1,0 +1,86 @@
+version: 0.0.1
+boundedContextName: common
+moduleName: administrative-area-level-3
+moduleNames: administrative-areas-level-3
+aggregateName: CommonAdministrativeAreaLevel3
+hasOAuth: false
+hasTenant: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: countryId
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CommonCountry
+    relationshipModulePath: common/country
+    relationshipKey: id
+    relationshipField: country
+    relationshipAvoidConstraint: true
+  - name: administrativeAreaLevel1Id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CommonAdministrativeAreaLevel1
+    relationshipModulePath: common/administrative-area-level-1
+    relationshipKey: id
+    relationshipField: administrativeAreaLevel1
+    relationshipAvoidConstraint: true
+  - name: administrativeAreaLevel2Id
+    type: id
+    length: 36
+    nullable: false
+    relationship: many-to-one
+    relationshipAggregate: CommonAdministrativeAreaLevel2
+    relationshipModulePath: common/administrative-area-level-2
+    relationshipKey: id
+    relationshipField: administrativeAreaLevel2
+    relationshipAvoidConstraint: true
+  - name: code
+    type: varchar
+    maxLength: 8
+    nullable: false
+    index: unique
+  - name: customCode
+    type: varchar
+    maxLength: 10
+    nullable: true
+    index: unique
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: slug
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: latitude
+    type: decimal
+    decimals:
+      - 17
+      - 4
+    nullable: true
+  - name: longitude
+    type: decimal
+    decimals:
+      - 17
+      - 4
+    nullable: true
+  - name: zoom
+    type: int.unsigned
+    maxLength: 2
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
