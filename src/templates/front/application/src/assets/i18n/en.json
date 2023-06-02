@@ -52,6 +52,7 @@
     "NotAccount": "Don't have an account?",
     "NoAuthorized": "No authorized",
     "NoAuthorizedMessage": "You are not authorized to access this section, permission {{ permission }} is required. Please check with your administrator to gain access..",
+    "Operations": "Operations",
     "Operator": "Operator",
     "Operators": {
         "Contains": "Contains",
@@ -108,6 +109,7 @@
     "SignedInAs": "Signed In As",
     "Slug": "Slug",
     "Sort": "Sort",
+    "State": "State",
     "Status": "Status",
     "Surname": "Surname",
     "ToggleFullscreen": "Toggle Fullscreen",
@@ -116,5 +118,6 @@
     "Update": "Update",
     "Value": "Value",
     "View": "View",
+    "YesCancel": "Yes, Cancel",
     "Zoom": "Zoom"
 }

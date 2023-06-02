@@ -52,6 +52,7 @@
     "NotAccount": "¿No tiene una cuenta?",
     "NoAuthorized": "No autorizado",
     "NoAuthorizedMessage": "No está autorizado para acceder a esta sección, requiere del permiso {{ permission }}. consulte con el administrador para poder acceder.",
+    "Operations": "Operaciones",
     "Operator": "Operador",
     "Operators": {
         "Contains": "Contiene",
@@ -108,6 +109,7 @@
     "SignedInAs": "Registrado como",
     "Slug": "Slug",
     "Sort": "Ordenar",
+    "State": "Estado",
     "Status": "Estados",
     "Surname": "Aprellidos",
     "ToggleFullscreen": "Alternar pantalla completa",
@@ -116,5 +118,6 @@
     "Unlink": "Desvincular",
     "Value": "Valor",
     "View": "Ver",
+    "YesCancel": "Si, Cancelar",
     "Zoom": "Zoom"
 }
