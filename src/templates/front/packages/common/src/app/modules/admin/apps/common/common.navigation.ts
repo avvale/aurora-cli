@@ -1,16 +1,17 @@
 import { FuseNavigationItem } from '@fuse/components/navigation';
 
 export const commonNavigation: FuseNavigationItem = {
-    id      : 'common',
-    title   : 'Common',
-    type    : 'collapsable',
-    icon    : 'heroicons_outline:tag',
-    children: [
+    id         : 'common',
+    title      : 'Common',
+    type       : 'collapsable',
+    iconFontSet: 'material-symbols-outlined',
+    icon       : 'interests',
+    children   : [
         {
             id   : 'langs',
             title: 'Lang',
             type : 'basic',
-            icon : 'heroicons_outline:tag',
+            icon : 'language',
             link : '/common/lang',
         },
     ],
