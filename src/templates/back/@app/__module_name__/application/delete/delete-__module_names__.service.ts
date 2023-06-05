@@ -32,10 +32,10 @@ export class Delete{{ toPascalCase schema.moduleNames }}Service
         await this.repositoryI18n.delete({
             queryStatement: {
                 where: {
-                    {{ toCamelCase schema.moduleName }}Id: { [Operator.in]: {{ toCamelCase schema.moduleNames }}.map(item => item.id) }
+                    {{ toCamelCase schema.moduleName }}Id: { [Operator.in]: {{ toCamelCase schema.moduleNames }}.map(item => item.id) },
                 },
             },
-            deleteOptions: cQMetadata?.repositoryOptions
+            deleteOptions: cQMetadata?.repositoryOptions,
         });
         {{/if}}
         await this.repository.delete({

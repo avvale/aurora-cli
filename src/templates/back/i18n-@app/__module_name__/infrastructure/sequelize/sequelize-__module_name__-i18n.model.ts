@@ -25,7 +25,13 @@ import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer 
     timestamps: false,
     {{#if schema.properties.hasIndexI18n}}
     indexes: [
-{{{ indexesManager (object indexes=schema.properties.columnsWithIndex) }}}
+{{{
+    indexesManager (
+        object
+            indexes=schema.properties.columnsWithIndex
+            isI18n=true
+    )
+}}}
     ],
     {{/if}}
 })

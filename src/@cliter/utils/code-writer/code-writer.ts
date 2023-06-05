@@ -224,7 +224,20 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}`,
-            properties.graphqlProperties.map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+            properties.graphqlProperties
+                // avoid duplicated properties from i18n table, id, createdAt, updatedAt, deletedAt
+                .filter(property =>
+                    !(
+                        property.isI18n &&
+                        (
+                            property.name === 'id' ||
+                            property.name === 'createdAt' ||
+                            property.name === 'updatedAt' ||
+                            property.name === 'deletedAt'
+                        )
+                    ),
+                )
+                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
             { overwrite },
         );
 
@@ -232,7 +245,17 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}Create${this.moduleName.toPascalCase()}`,
-            properties.graphqlInputProperties.map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+            properties.graphqlInputProperties
+                // avoid duplicated properties from i18n table, id
+                .filter(property =>
+                    !(
+                        property.isI18n &&
+                        (
+                            property.name === 'id'
+                        )
+                    ),
+                )
+                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
             { overwrite },
         );
 
@@ -240,7 +263,17 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}Update${this.moduleName.toPascalCase()}ById`,
-            properties.graphqlInputProperties.map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: property.getJavascriptType })),
+            properties.graphqlInputProperties
+                // avoid duplicated properties from i18n table, id
+                .filter(property =>
+                    !(
+                        property.isI18n &&
+                        (
+                            property.name === 'id'
+                        )
+                    ),
+                )
+                .map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: property.getJavascriptType })),
             { overwrite },
         );
 
@@ -248,7 +281,17 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}Update${this.moduleNames.toPascalCase()}`,
-            properties.graphqlInputProperties.map(property => ({ name: property.name.toCamelCase() + '?', type: property.getJavascriptType })),
+            properties.graphqlInputProperties
+                // avoid duplicated properties from i18n table, id
+                .filter(property =>
+                    !(
+                        property.isI18n &&
+                        (
+                            property.name === 'id'
+                        )
+                    ),
+                )
+                .map(property => ({ name: property.name.toCamelCase() + '?', type: property.getJavascriptType })),
             { overwrite },
         );
 

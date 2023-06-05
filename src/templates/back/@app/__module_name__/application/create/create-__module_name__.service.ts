@@ -85,7 +85,14 @@ export class Create{{ toPascalCase schema.moduleName }}Service
 
             // add new language id to data lang field to create or update field
             {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
-            await this.repository.update({{ toCamelCase schema.moduleName }}, { dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'availableLangs'), updateOptions: cQMetadata?.repositoryOptions });
+            await this.repository
+                .update(
+                    {{ toCamelCase schema.moduleName }},
+                    {
+                        dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'availableLangs'),
+                        updateOptions: cQMetadata?.repositoryOptions
+                    },
+                );
         }
         catch (error)
         {

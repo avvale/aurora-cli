@@ -166,7 +166,8 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 );
 
                 // format export rows
-                (rows.objects as any[]).forEach(row => {
+                (rows.objects as any[]).forEach(row =>
+                {
                     // row.id = row.id;
                 });
 

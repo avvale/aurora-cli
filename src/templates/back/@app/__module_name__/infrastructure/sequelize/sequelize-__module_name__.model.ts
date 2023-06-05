@@ -30,7 +30,13 @@ import { {{ schema.aggregateName }}I18nModel } from './sequelize-{{ toKebabCase 
     timestamps: false,
     {{#if schema.properties.hasIndex}}
     indexes: [
-{{{ indexesManager (object indexes=schema.properties.columnsWithIndex) }}}
+{{{
+    indexesManager (
+        object
+            indexes=schema.properties.columnsWithIndex
+            isI18n=false
+    )
+}}}
     ],
     {{/if}}
 })

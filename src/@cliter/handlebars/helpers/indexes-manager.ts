@@ -5,13 +5,17 @@ import { Property } from '../../utils';
 handlebars.registerHelper('indexesManager', function(
     {
         indexes = [],
+        isI18n = false,
     }: {
         indexes: Property[];
+        isI18n: boolean;
     },
     context,
 )
 {
-    const indexedGrouped = _.groupBy(indexes, 'indexName');
+    const propertiesToIndex = indexes.filter(index => Boolean(index.isI18n) === isI18n);
+
+    const indexedGrouped = _.groupBy(propertiesToIndex, 'indexName');
     let response = '';
 
     for (const [indexName, indexes] of Object.entries(indexedGrouped))
