@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 {{#if schema.properties.hasI18n}}
-import { CacheModule, CACHE_MANAGER } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { CacheModule } from '@nestjs/cache-manager';
 {{/if}}
 
 // custom items

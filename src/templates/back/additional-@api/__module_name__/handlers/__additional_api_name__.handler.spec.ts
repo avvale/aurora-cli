@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
+{{#if schema.properties.hasI18n}}
+import { CacheModule } from '@nestjs/cache-manager';
+{{/if}}
+
 
 // custom items
 import { {{ currentAdditionalApi.getClassName }}Handler } from './{{ currentAdditionalApi.getApiFileName }}.handler';
