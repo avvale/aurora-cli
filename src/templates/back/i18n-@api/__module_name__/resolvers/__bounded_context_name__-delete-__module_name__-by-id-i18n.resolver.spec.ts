@@ -34,7 +34,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
-                        get: (key: string) => key === 'common/lang' ? langs : null,
+                        get: (key: string) => key === 'common/langs' ? langs : null,
                     }
                 },
                 {
