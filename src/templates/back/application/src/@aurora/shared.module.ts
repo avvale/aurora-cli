@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
+import { AddI18nConstraintService, AuditingRunner, AuditingRunnerDisabledImplementationService, CoreModule } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { AddI18nConstraintService, AuditingRunner, AuditingRunnerDisabledImplementationService, CoreModule } from '@aurorajs.dev/core';
 import { CqrsConfigModule } from './cqrs-config.module';
 
 @Module({
