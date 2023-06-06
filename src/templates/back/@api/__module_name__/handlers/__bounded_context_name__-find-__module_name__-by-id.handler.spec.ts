@@ -37,13 +37,13 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                    },
                 },
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
                         get: (key: string) => key === 'common/langs' ? langs : null,
-                    }
+                    },
                 },
                 {{/if}}
                 {

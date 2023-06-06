@@ -31,13 +31,13 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     provide : ConfigService,
                     useValue: {
                         get: (key: string) => key === 'APP_LANG' ? 'es' : '',
-                    }
+                    },
                 },
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
                         get: (key: string) => key === 'common/langs' ? langs : null,
-                    }
+                    },
                 },
                 {
                     provide : IQueryBus,
