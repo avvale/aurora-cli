@@ -93,8 +93,8 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination':
                 await lastValueFrom(
                     this.{{ toCamelCase schema.moduleName }}Service.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit':
-                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit', action.data.row.id]);
+                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit', action.meta.row.id]);
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete':
@@ -142,7 +142,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                             {
                                 await lastValueFrom(
                                     this.{{ toCamelCase schema.moduleName }}Service
-                                        .deleteById<{{ schema.aggregateName }}>(action.data.row.id),
+                                        .deleteById<{{ schema.aggregateName }}>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
@@ -161,7 +161,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 const rows = await lastValueFrom(
                     this.{{ toCamelCase schema.moduleName }}Service
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -176,10 +176,10 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
 
                 exportRows(
                     rows.objects,
-                    '{{ toCamelCase schema.moduleNames }}.' + action.data.format,
+                    '{{ toCamelCase schema.moduleNames }}.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

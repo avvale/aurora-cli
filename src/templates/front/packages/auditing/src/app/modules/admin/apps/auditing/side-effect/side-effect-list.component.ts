@@ -88,8 +88,8 @@ export class SideEffectListComponent extends ViewBaseComponent
             case 'auditing::sideEffect.list.pagination':
                 await lastValueFrom(
                     this.sideEffectService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: sideEffectColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -102,7 +102,7 @@ export class SideEffectListComponent extends ViewBaseComponent
                 break;
 
             case 'auditing::sideEffect.list.edit':
-                this.router.navigate(['auditing/side-effect/edit', action.data.row.id]);
+                this.router.navigate(['auditing/side-effect/edit', action.meta.row.id]);
                 break;
 
             case 'auditing::sideEffect.list.delete':
@@ -137,7 +137,7 @@ export class SideEffectListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.sideEffectService
-                                        .deleteById<AuditingSideEffect>(action.data.row.id),
+                                        .deleteById<AuditingSideEffect>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'auditing::sideEffect.list.pagination',
@@ -156,7 +156,7 @@ export class SideEffectListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.sideEffectService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -165,10 +165,10 @@ export class SideEffectListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'sideEffects.' + action.data.format,
+                    'sideEffects.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

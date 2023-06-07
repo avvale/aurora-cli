@@ -433,8 +433,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
                         .pagination({
-                            query: action.data.query ?
-                                action.data.query :
+                            query: action.meta.query ?
+                                action.meta.query :
                                 QueryStatementHandler
                                     .init({ columnsConfig: {{ toCamelCase getRelationshipSchema.moduleName }}ColumnsConfig })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId))
@@ -447,7 +447,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 break;
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase getRelationshipSchema.moduleName }}':
-                const {{ toCamelCase getRelationshipSchema.moduleName }} = action.data.row as {{ getRelationshipAggregateName }};
+                const {{ toCamelCase getRelationshipSchema.moduleName }} = action.meta.row as {{ getRelationshipAggregateName }};
 
                 this.fg.get('{{ toCamelCase getRelationshipSchema.moduleName }}Id').setValue({{ toCamelCase getRelationshipSchema.moduleName }}.id);
                 this.fg.get('{{ toCamelCase getRelationshipSchema.moduleName }}Name').setValue({{ toCamelCase getRelationshipSchema.moduleName }}.name);
@@ -460,7 +460,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 const {{ toCamelCase getRelationshipSchema.moduleName }}Rows = await lastValueFrom(
                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
                         .get({
-                            query     : action.data.query,
+                            query     : action.meta.query,
                             constraint: { /**/ },
                         }),
                 );
@@ -470,10 +470,10 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
                 exportRows(
                     {{ toCamelCase getRelationshipSchema.moduleName }}Rows.objects,
-                    'order{{ toPascalCase getRelationshipSchema.moduleNames }}.' + action.data.format,
+                    'order{{ toPascalCase getRelationshipSchema.moduleNames }}.' + action.meta.format,
                     {{ toCamelCase getRelationshipSchema.moduleName }}Columns,
                     {{ toCamelCase getRelationshipSchema.moduleName }}Headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
                 /* #endregion actions to manage {{ toCamelCase property.getRelationshipSchema.moduleNames }} grid-select-element */
@@ -485,8 +485,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
                         .pagination({
-                            query: action.data.query ?
-                                action.data.query :
+                            query: action.meta.query ?
+                                action.meta.query :
                                 QueryStatementHandler
                                     .init({ columnsConfig: {{ toCamelCase getRelationshipSchema.moduleName }}ColumnsConfig })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase getRelationshipSchema.moduleNames }}GridId))
@@ -529,7 +529,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
                         .findById({
-                            id        : action.data.row.id,
+                            id        : action.meta.row.id,
                             constraint: {
                                 where: {
                                     {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
@@ -588,7 +588,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             {
                                 await lastValueFrom(
                                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
-                                        .deleteById<{{ getRelationshipSchema.aggregateName }}>(action.data.row.id),
+                                        .deleteById<{{ getRelationshipSchema.aggregateName }}>(action.meta.row.id),
                                 );
 
                                 this.actionService.action({
@@ -608,7 +608,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 const rows = await lastValueFrom(
                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
                         .get({
-                            query     : action.data.query,
+                            query     : action.meta.query,
                             constraint: {
                                 where: {
                                     {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
@@ -622,10 +622,10 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
                 exportRows(
                     rows.objects,
-                    '{{ toCamelCase getRelationshipSchema.moduleNames }}.' + action.data.format,
+                    '{{ toCamelCase getRelationshipSchema.moduleNames }}.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
                 /* #endregion actions to manage {{ toCamelCase getRelationshipSchema.moduleNames }} grid-elements-manager */

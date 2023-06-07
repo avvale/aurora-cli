@@ -93,8 +93,8 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
             case 'auditing::httpCommunication.list.pagination':
                 await lastValueFrom(
                     this.httpCommunicationService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: httpCommunicationColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
                 break;
 
             case 'auditing::httpCommunication.list.edit':
-                this.router.navigate(['auditing/http-communication/edit', action.data.row.id]);
+                this.router.navigate(['auditing/http-communication/edit', action.meta.row.id]);
                 break;
 
             case 'auditing::httpCommunication.list.delete':
@@ -142,7 +142,7 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.httpCommunicationService
-                                        .deleteById<AuditingHttpCommunication>(action.data.row.id),
+                                        .deleteById<AuditingHttpCommunication>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'auditing::httpCommunication.list.pagination',
@@ -161,7 +161,7 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.httpCommunicationService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'httpCommunications.' + action.data.format,
+                    'httpCommunications.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

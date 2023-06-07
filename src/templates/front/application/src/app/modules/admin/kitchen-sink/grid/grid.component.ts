@@ -119,7 +119,7 @@ export class GridComponent extends ViewBaseComponent
         switch (action.id)
         {
             case 'pagination':
-                this.dataEvent = { ...this.dataEvent, ...action.data.query };
+                this.dataEvent = { ...this.dataEvent, ...action.meta.query };
                 break;
 
             case 'edit':
