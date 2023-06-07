@@ -181,7 +181,7 @@ export class RoleDetailComponent extends ViewDetailComponent
         this.actionService.action({
             id          : 'iam::role.detail.permissionsPagination',
             isViewAction: false,
-            data        : {
+            meta        : {
                 query: QueryStatementHandler
                     .init({ columnsConfig: permissionColumnsConfig })
                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
@@ -221,7 +221,7 @@ export class RoleDetailComponent extends ViewDetailComponent
             this.actionService.action({
                 id          : 'iam::role.detail.removePermissionsRoles',
                 isViewAction: false,
-                data        : {
+                meta        : {
                     rows: this.permissionsRolesSelectedRows,
                 },
             });
@@ -242,7 +242,7 @@ export class RoleDetailComponent extends ViewDetailComponent
             this.actionService.action({
                 id          : 'iam::role.detail.addPermissionsRoles',
                 isViewAction: false,
-                data        : {
+                meta        : {
                     rows: this.permissionsSelectedRows,
                 },
             });
@@ -361,8 +361,8 @@ export class RoleDetailComponent extends ViewDetailComponent
                 await lastValueFrom(
                     this.permissionService
                         .pagination({
-                            query: action.data.query ?
-                                action.data.query :
+                            query: action.meta.query ?
+                                action.meta.query :
                                 QueryStatementHandler
                                     .init({ columnsConfig: permissionColumnsConfig })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
@@ -380,7 +380,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                     await lastValueFrom(
                         this.permissionRoleService
                             .delete({
-                                objects: action.data.rows
+                                objects: action.meta.rows
                                     .map(row => ({
                                         permissionId: row.permissionId,
                                         roleId      : this.managedObject.id,
@@ -420,7 +420,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                 const permissionRows = await lastValueFrom(
                     this.permissionService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -429,10 +429,10 @@ export class RoleDetailComponent extends ViewDetailComponent
 
                 exportRows(
                     permissionRows.objects,
-                    'permissions.' + action.data.format,
+                    'permissions.' + action.meta.format,
                     permissionColumns,
                     permissionHeaders,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
                 /* #endregion actions to manage permissions dialog */
@@ -441,7 +441,7 @@ export class RoleDetailComponent extends ViewDetailComponent
             case 'iam::role.detail.addPermissionRole':
                 await lastValueFrom(this.permissionRoleService.create({
                     object: {
-                        permissionId: action.data.row.id,
+                        permissionId: action.meta.row.id,
                         roleId      : this.managedObject.id,
                     },
                 }));
@@ -480,7 +480,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                     await lastValueFrom(
                         this.permissionRoleService
                             .insert({
-                                objects: action.data.rows
+                                objects: action.meta.rows
                                     // avoid insert rows already inserted
                                     .filter(row => this.rolePermissionsId.indexOf(row.id) === -1)
                                     .map(row => ({
@@ -519,7 +519,7 @@ export class RoleDetailComponent extends ViewDetailComponent
             case 'iam::role.detail.removePermissionRole':
                 await lastValueFrom(this.permissionRoleService.deleteById({
                     object: {
-                        permissionId: action.data.row.permissionId,
+                        permissionId: action.meta.row.permissionId,
                         roleId      : this.managedObject.id,
                     },
                 }));
@@ -548,8 +548,8 @@ export class RoleDetailComponent extends ViewDetailComponent
                 await lastValueFrom(
                     this.permissionRoleService
                         .pagination({
-                            query: action.data.query ?
-                                action.data.query :
+                            query: action.meta.query ?
+                                action.meta.query :
                                 QueryStatementHandler
                                     .init({ columnsConfig: permissionRoleColumnsConfig })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsRolesGridId))
@@ -589,7 +589,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                     this.permissionRoleService
                         .get({
                             graphqlStatement: getQueryExportPermissionsRoles,
-                            query           : action.data.query,
+                            query           : action.meta.query,
                             constraint      : {
                                 where: {
                                     roleId: this.managedObject.id,
@@ -608,10 +608,10 @@ export class RoleDetailComponent extends ViewDetailComponent
 
                 exportRows(
                     permissionRoleRows.objects.map(row => row.permission),
-                    'rolePermissions.' + action.data.format,
+                    'rolePermissions.' + action.meta.format,
                     permissionRoleColumns,
                     permissionRoleHeaders,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
                 /* #endregion actions to manage permissions roles */

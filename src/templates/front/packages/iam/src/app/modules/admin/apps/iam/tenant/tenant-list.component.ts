@@ -93,8 +93,8 @@ export class TenantListComponent extends ViewBaseComponent
             case 'iam::tenant.list.pagination':
                 await lastValueFrom(
                     this.tenantService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: tenantColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class TenantListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::tenant.list.edit':
-                this.router.navigate(['iam/tenant/edit', action.data.row.id]);
+                this.router.navigate(['iam/tenant/edit', action.meta.row.id]);
                 break;
 
             case 'iam::tenant.list.delete':
@@ -142,7 +142,7 @@ export class TenantListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.tenantService
-                                        .deleteById<IamTenant>(action.data.row.id),
+                                        .deleteById<IamTenant>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'iam::tenant.list.pagination',
@@ -161,7 +161,7 @@ export class TenantListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.tenantService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class TenantListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'tenants.' + action.data.format,
+                    'tenants.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

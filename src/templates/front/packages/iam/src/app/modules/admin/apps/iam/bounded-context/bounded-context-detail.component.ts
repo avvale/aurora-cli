@@ -264,8 +264,8 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                     this.permissionService
                         .pagination(
                             {
-                                query: action.data.query ?
-                                    action.data.query :
+                                query: action.meta.query ?
+                                    action.meta.query :
                                     QueryStatementHandler
                                         .init({ columnsConfig: permissionColumnsConfig })
                                         .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
@@ -307,7 +307,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                 await lastValueFrom(
                     this.permissionService
                         .findById({
-                            id        : action.data.row.id,
+                            id        : action.meta.row.id,
                             constraint: {
                                 where: {
                                     boundedContextId: this.managedObject.id,
@@ -366,7 +366,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                             {
                                 await lastValueFrom(
                                     this.permissionService
-                                        .deleteById<IamPermission>(action.data.row.id),
+                                        .deleteById<IamPermission>(action.meta.row.id),
                                 );
 
                                 this.actionService.action({
@@ -386,7 +386,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                 const rows = await lastValueFrom(
                     this.permissionService
                         .get({
-                            query     : action.data.query,
+                            query     : action.meta.query,
                             constraint: {
                                 where: {
                                     boundedContextId: this.managedObject.id,
@@ -400,10 +400,10 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
 
                 exportRows(
                     rows.objects,
-                    'bondedContextPermissions.' + action.data.format,
+                    'bondedContextPermissions.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
                 /* #endregion permissions actions */

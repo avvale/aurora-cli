@@ -93,8 +93,8 @@ export class RefreshTokenListComponent extends ViewBaseComponent
             case 'oAuth::refreshToken.list.pagination':
                 await lastValueFrom(
                     this.refreshTokenService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: refreshTokenColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class RefreshTokenListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::refreshToken.list.edit':
-                this.router.navigate(['o-auth/refresh-token/edit', action.data.row.id]);
+                this.router.navigate(['o-auth/refresh-token/edit', action.meta.row.id]);
                 break;
 
             case 'oAuth::refreshToken.list.delete':
@@ -142,7 +142,7 @@ export class RefreshTokenListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.refreshTokenService
-                                        .deleteById<OAuthRefreshToken>(action.data.row.id),
+                                        .deleteById<OAuthRefreshToken>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'oAuth::refreshToken.list.pagination',
@@ -161,7 +161,7 @@ export class RefreshTokenListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.refreshTokenService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class RefreshTokenListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'refreshTokens.' + action.data.format,
+                    'refreshTokens.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

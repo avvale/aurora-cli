@@ -93,8 +93,8 @@ export class ScopeListComponent extends ViewBaseComponent
             case 'oAuth::scope.list.pagination':
                 await lastValueFrom(
                     this.scopeService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: scopeColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class ScopeListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::scope.list.edit':
-                this.router.navigate(['o-auth/scope/edit', action.data.row.id]);
+                this.router.navigate(['o-auth/scope/edit', action.meta.row.id]);
                 break;
 
             case 'oAuth::scope.list.delete':
@@ -142,7 +142,7 @@ export class ScopeListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.scopeService
-                                        .deleteById<OAuthScope>(action.data.row.id),
+                                        .deleteById<OAuthScope>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'oAuth::scope.list.pagination',
@@ -161,7 +161,7 @@ export class ScopeListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.scopeService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class ScopeListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'scopes.' + action.data.format,
+                    'scopes.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

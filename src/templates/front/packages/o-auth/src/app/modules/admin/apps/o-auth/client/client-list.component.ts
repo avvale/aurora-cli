@@ -93,8 +93,8 @@ export class ClientListComponent extends ViewBaseComponent
             case 'oAuth::client.list.pagination':
                 await lastValueFrom(
                     this.clientService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: clientColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class ClientListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::client.list.edit':
-                this.router.navigate(['o-auth/client/edit', action.data.row.id]);
+                this.router.navigate(['o-auth/client/edit', action.meta.row.id]);
                 break;
 
             case 'oAuth::client.list.delete':
@@ -142,7 +142,7 @@ export class ClientListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.clientService
-                                        .deleteById<OAuthClient>(action.data.row.id),
+                                        .deleteById<OAuthClient>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'oAuth::client.list.pagination',
@@ -161,7 +161,7 @@ export class ClientListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.clientService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class ClientListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'clients.' + action.data.format,
+                    'clients.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

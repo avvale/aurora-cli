@@ -93,8 +93,8 @@ export class AccountListComponent extends ViewBaseComponent
             case 'iam::account.list.pagination':
                 await lastValueFrom(
                     this.accountService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: accountColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class AccountListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::account.list.edit':
-                this.router.navigate(['iam/account/edit', action.data.row.id]);
+                this.router.navigate(['iam/account/edit', action.meta.row.id]);
                 break;
 
             case 'iam::account.list.delete':
@@ -142,7 +142,7 @@ export class AccountListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.accountService
-                                        .deleteById<IamAccount>(action.data.row.id),
+                                        .deleteById<IamAccount>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'iam::account.list.pagination',
@@ -161,7 +161,7 @@ export class AccountListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.accountService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class AccountListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'accounts.' + action.data.format,
+                    'accounts.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

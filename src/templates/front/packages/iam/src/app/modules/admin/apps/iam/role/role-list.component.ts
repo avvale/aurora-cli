@@ -93,8 +93,8 @@ export class RoleListComponent extends ViewBaseComponent
             case 'iam::role.list.pagination':
                 await lastValueFrom(
                     this.roleService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: roleColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class RoleListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::role.list.edit':
-                this.router.navigate(['iam/role/edit', action.data.row.id]);
+                this.router.navigate(['iam/role/edit', action.meta.row.id]);
                 break;
 
             case 'iam::role.list.delete':
@@ -142,7 +142,7 @@ export class RoleListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.roleService
-                                        .deleteById<IamRole>(action.data.row.id),
+                                        .deleteById<IamRole>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'iam::role.list.pagination',
@@ -161,7 +161,7 @@ export class RoleListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.roleService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class RoleListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'roles.' + action.data.format,
+                    'roles.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

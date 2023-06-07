@@ -93,8 +93,8 @@ export class ApplicationListComponent extends ViewBaseComponent
             case 'oAuth::application.list.pagination':
                 await lastValueFrom(
                     this.applicationService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: applicationColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class ApplicationListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::application.list.edit':
-                this.router.navigate(['o-auth/application/edit', action.data.row.id]);
+                this.router.navigate(['o-auth/application/edit', action.meta.row.id]);
                 break;
 
             case 'oAuth::application.list.delete':
@@ -142,7 +142,7 @@ export class ApplicationListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.applicationService
-                                        .deleteById<OAuthApplication>(action.data.row.id),
+                                        .deleteById<OAuthApplication>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'oAuth::application.list.pagination',
@@ -161,7 +161,7 @@ export class ApplicationListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.applicationService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class ApplicationListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'applications.' + action.data.format,
+                    'applications.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

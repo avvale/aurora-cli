@@ -93,8 +93,8 @@ export class AccessTokenListComponent extends ViewBaseComponent
             case 'oAuth::accessToken.list.pagination':
                 await lastValueFrom(
                     this.accessTokenService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: accessTokenColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class AccessTokenListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::accessToken.list.edit':
-                this.router.navigate(['o-auth/access-token/edit', action.data.row.id]);
+                this.router.navigate(['o-auth/access-token/edit', action.meta.row.id]);
                 break;
 
             case 'oAuth::accessToken.list.delete':
@@ -142,7 +142,7 @@ export class AccessTokenListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.accessTokenService
-                                        .deleteById<OAuthAccessToken>(action.data.row.id),
+                                        .deleteById<OAuthAccessToken>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'oAuth::accessToken.list.pagination',
@@ -161,7 +161,7 @@ export class AccessTokenListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.accessTokenService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class AccessTokenListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'accessTokens.' + action.data.format,
+                    'accessTokens.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

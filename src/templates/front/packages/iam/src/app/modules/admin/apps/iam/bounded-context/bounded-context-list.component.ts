@@ -93,8 +93,8 @@ export class BoundedContextListComponent extends ViewBaseComponent
             case 'iam::boundedContext.list.pagination':
                 await lastValueFrom(
                     this.boundedContextService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: boundedContextColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::boundedContext.list.edit':
-                this.router.navigate(['iam/bounded-context/edit', action.data.row.id]);
+                this.router.navigate(['iam/bounded-context/edit', action.meta.row.id]);
                 break;
 
             case 'iam::boundedContext.list.delete':
@@ -142,7 +142,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.boundedContextService
-                                        .deleteById<IamBoundedContext>(action.data.row.id),
+                                        .deleteById<IamBoundedContext>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'iam::boundedContext.list.pagination',
@@ -161,7 +161,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.boundedContextService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -170,10 +170,10 @@ export class BoundedContextListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'boundedContexts.' + action.data.format,
+                    'boundedContexts.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }
