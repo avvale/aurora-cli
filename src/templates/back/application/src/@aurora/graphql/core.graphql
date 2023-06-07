@@ -35,5 +35,6 @@ type Pagination
 
 type Query
 {
+    coreGetLangs: Any!
     hello: String
 }
