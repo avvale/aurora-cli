@@ -6,7 +6,7 @@ import { langs } from './langs';
 import { CoreLang } from './lang.types';
 
 @Injectable()
-export class GetLangsFromJsonService implements CoreGetLangsService
+export class CoreGetLangsFromJsonService implements CoreGetLangsService
 {
     constructor(
         @Inject(CACHE_MANAGER) private cacheManager: Cache,

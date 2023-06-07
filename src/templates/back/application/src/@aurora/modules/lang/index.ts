@@ -1,0 +1,1 @@
+export { CoreGetLangsFromJsonService } from './core-get-langs-from-json.service';

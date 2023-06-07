@@ -1,4 +1,4 @@
-import { GetLangsFromJsonService } from '@aurora/modules/lang/get-langs-from-json.service';
+import { CoreGetLangsFromJsonService } from '@aurora/modules/lang';
 import { AddI18nConstraintService, AuditingRunner, AuditingRunnerDisabledImplementationService, CoreGetLangsService, CoreModule } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
