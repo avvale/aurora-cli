@@ -93,8 +93,8 @@ export class QueueListComponent extends ViewBaseComponent
             case 'queueManager::queue.list.pagination':
                 await lastValueFrom(
                     this.queueService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: queueColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class QueueListComponent extends ViewBaseComponent
                 break;
 
             case 'queueManager::queue.list.edit':
-                this.router.navigate(['queue-manager/queue/edit', action.data.row.id]);
+                this.router.navigate(['queue-manager/queue/edit', action.meta.row.id]);
                 break;
 
             case 'queueManager::queue.list.delete':
@@ -142,7 +142,7 @@ export class QueueListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.queueService
-                                        .deleteById<QueueManagerQueue>(action.data.row.id),
+                                        .deleteById<QueueManagerQueue>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'queueManager::queue.list.pagination',
@@ -161,7 +161,7 @@ export class QueueListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.queueService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -175,10 +175,10 @@ export class QueueListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'queues.' + action.data.format,
+                    'queues.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

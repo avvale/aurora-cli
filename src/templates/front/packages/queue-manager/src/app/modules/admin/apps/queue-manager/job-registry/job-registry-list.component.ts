@@ -93,8 +93,8 @@ export class JobRegistryListComponent extends ViewBaseComponent
             case 'queueManager::jobRegistry.list.pagination':
                 await lastValueFrom(
                     this.jobRegistryService.pagination({
-                        query: action.data.query ?
-                            action.data.query :
+                        query: action.meta.query ?
+                            action.meta.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: jobRegistryColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class JobRegistryListComponent extends ViewBaseComponent
                 break;
 
             case 'queueManager::jobRegistry.list.edit':
-                this.router.navigate(['queue-manager/job-registry/edit', action.data.row.id]);
+                this.router.navigate(['queue-manager/job-registry/edit', action.meta.row.id]);
                 break;
 
             case 'queueManager::jobRegistry.list.delete':
@@ -142,7 +142,7 @@ export class JobRegistryListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.jobRegistryService
-                                        .deleteById<QueueManagerJobRegistry>(action.data.row.id),
+                                        .deleteById<QueueManagerJobRegistry>(action.meta.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'queueManager::jobRegistry.list.pagination',
@@ -161,7 +161,7 @@ export class JobRegistryListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.jobRegistryService
                         .get({
-                            query: action.data.query,
+                            query: action.meta.query,
                         }),
                 );
 
@@ -175,10 +175,10 @@ export class JobRegistryListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'jobsRegistry.' + action.data.format,
+                    'jobsRegistry.' + action.meta.format,
                     columns,
                     headers,
-                    action.data.format,
+                    action.meta.format,
                 );
                 break;
         }

@@ -248,7 +248,7 @@ export class QueueDetailComponent extends ViewDetailComponent
 
             /* #region actions to manage jobs grid-elements-manager */
             case 'queueManager::queue.detail.changeTypeJobsPagination':
-                this.currentJobType = action.data.jobType;
+                this.currentJobType = action.meta.jobType;
 
                 // reset request pagination
                 this.gridStateService.setPageState(this.jobsGridId, { pageIndex: 0, pageSize: 10 });
@@ -266,8 +266,8 @@ export class QueueDetailComponent extends ViewDetailComponent
                 await lastValueFrom(
                     this.jobService
                         .pagination({
-                            query: action.data.query ?
-                                action.data.query :
+                            query: action.meta.query ?
+                                action.meta.query :
                                 QueryStatementHandler
                                     .init({ columnsConfig: jobColumnsConfig })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.jobsGridId))
@@ -290,7 +290,7 @@ export class QueueDetailComponent extends ViewDetailComponent
                 await lastValueFrom(
                     this.jobService
                         .findById({
-                            id  : action.data.row.id,
+                            id  : action.meta.row.id,
                             name: this.managedObject.name,
                         }),
                 );
@@ -299,8 +299,8 @@ export class QueueDetailComponent extends ViewDetailComponent
 
             case 'queueManager::queue.detail.removeJob':
                 const removeJobDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('queueManager.Job')} ${action.data.row.id}`,
-                    message: `${this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('queueManager.Job') })} ${action.data.row.id}`,
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('queueManager.Job')} ${action.meta.row.id}`,
+                    message: `${this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('queueManager.Job') })} ${action.meta.row.id}`,
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation',
@@ -331,7 +331,7 @@ export class QueueDetailComponent extends ViewDetailComponent
                                 await lastValueFrom(
                                     this.jobService
                                         .deleteById<QueueManagerJob>(
-                                            action.data.row.id,
+                                            action.meta.row.id,
                                             this.managedObject.name,
                                         ),
                                 );
