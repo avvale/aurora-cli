@@ -102,7 +102,7 @@ export class Add extends Command
                     {
                         ImportDriver.createImportItems(
                             sharedModuleSourceFile,
-                            '@api/auditing/shared/services/auditing-axios-interceptor.service',
+                            '@api/auditing/shared',
                             ['AuditingAxiosInterceptorService'],
                         );
 
@@ -112,7 +112,7 @@ export class Add extends Command
 
                     ImportDriver.createImportItems(
                         sharedModuleSourceFile,
-                        '@api/auditing/shared/services/auditing-runner-aurora-implementation.service',
+                        '@api/auditing/shared',
                         ['AuditingRunnerAuroraImplementationService'],
                     );
 
@@ -171,10 +171,48 @@ export class Add extends Command
                     break;
                 }
 
+                case 'common': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'common', ['CommonModule']);
+                    appModuleSourceFile.saveSync();
+
+                    // shared.module.ts file
+                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@api/common/shared',
+                        ['CommonGetLangsFromDbService'],
+                    );
+
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'providers',
+                        'CoreGetLangsService',
+                        'CommonGetLangsFromDbService',
+                    );
+
+                    sharedModuleSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed.');
+                    break;
+                }
+
                 case 'iam': {
                     await BackHandler.addPackage(addCommandState);
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(appModuleSourceFile, 'iam', ['IamModule']);
                     appModuleSourceFile.saveSync();
@@ -221,14 +259,8 @@ export class Add extends Command
                     {
                         ImportDriver.createImportItems(
                             sharedModuleSourceFile,
-                            '@app/o-auth/shared/modules/auth-jwt-strategy-registry.module',
-                            ['AuthJwtStrategyRegistryModule'],
-                        );
-
-                        ImportDriver.createImportItems(
-                            sharedModuleSourceFile,
-                            '@app/o-auth/shared/jwt-config',
-                            ['jwtConfig'],
+                            '@app/o-auth/shared',
+                            ['AuthJwtStrategyRegistryModule', 'jwtConfig'],
                         );
 
                         const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
