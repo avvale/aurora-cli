@@ -1,27 +1,27 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnConfigAction, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
-import { CommonLang } from '../common.types';
-import { LangService } from './lang.service';
-import { langColumnsConfig } from './lang.columns-config';
+import { CommonCountry } from '../common.types';
+import { CountryService } from './country.service';
+import { countryColumnsConfig } from './country.columns-config';
 
 @Component({
-    selector       : 'common-lang-list',
-    templateUrl    : './lang-list.component.html',
+    selector       : 'common-country-list',
+    templateUrl    : './country-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LangListComponent extends ViewBaseComponent
+export class CountryListComponent extends ViewBaseComponent
 {
     // ---- customizations ----
     // ..
 
     breadcrumb: Crumb[] = [
         { translation: 'App', routerLink: ['/']},
-        { translation: 'common.Langs' },
+        { translation: 'common.Countries' },
     ];
-    gridId: string = 'common::lang.list.mainGridList';
-    gridData$: Observable<GridData<CommonLang>>;
+    gridId: string = 'common::country.list.mainGridList';
+    gridData$: Observable<GridData<CommonCountry>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
@@ -33,12 +33,71 @@ export class LangListComponent extends ViewBaseComponent
             {
                 return [
                     {
-                        id         : 'common::lang.list.edit',
+                        id         : 'common::country.list.edit',
                         translation: 'edit',
                         icon       : 'mode_edit',
                     },
                     {
-                        id         : 'common::lang.list.delete',
+                        id         : 'common::country.list.delete',
+                        translation: 'delete',
+                        icon       : 'delete',
+                    },
+                ];
+            },
+        },
+        {
+            type                : ColumnDataType.TRANSLATIONS_MENU,
+            field               : 'translations',
+            translation         : 'Translations',
+            sticky              : true,
+            translationIconColor: row =>
+            {
+                const langs = this.sessionService.get('langs');
+
+                for (const lang of langs.filter(lang => lang.isActive))
+                {
+                    if (!row.availableLangs.includes(lang.id)) return 'warn';
+                }
+                return 'primary';
+            },
+            actions: row =>
+            {
+                const langs = this.sessionService.get('langs');
+                const transitionActions: ColumnConfigAction[] = [];
+
+                for (const lang of langs.filter(lang => lang.isActive))
+                {
+                    if (row.availableLangs.includes(lang.id))
+                    {
+                        transitionActions.push({
+                            id          : 'common::country.list.edit',
+                            translation : 'edit',
+                            isViewAction: true,
+                            meta        : { lang },
+                        });
+                    }
+                    else
+                    {
+                        transitionActions.push({
+                            id          : 'common::country.list.new',
+                            translation : 'new',
+                            isViewAction: true,
+                            meta        : { lang },
+                        });
+
+                    }
+                }
+
+                return transitionActions;
+
+                return [
+                    {
+                        id         : 'common::country.list.edit',
+                        translation: 'edit',
+                        icon       : 'mode_edit',
+                    },
+                    {
+                        id         : 'common::country.list.new',
                         translation: 'delete',
                         icon       : 'delete',
                     },
@@ -51,7 +110,7 @@ export class LangListComponent extends ViewBaseComponent
             translation: 'Selects',
             sticky     : true,
         },
-        ...langColumnsConfig,
+        ...countryColumnsConfig,
     ];
 
     constructor(
@@ -59,7 +118,7 @@ export class LangListComponent extends ViewBaseComponent
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
-        private readonly langService: LangService,
+        private readonly countryService: CountryService,
     )
     {
         super(injector);
@@ -75,7 +134,7 @@ export class LangListComponent extends ViewBaseComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
-            case 'common::lang.list.view':
+            case 'common::country.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
@@ -87,16 +146,16 @@ export class LangListComponent extends ViewBaseComponent
                     search       : this.gridStateService.getSearchState(this.gridId),
                 };
 
-                this.gridData$ = this.langService.pagination$;
+                this.gridData$ = this.countryService.pagination$;
                 break;
 
-            case 'common::lang.list.pagination':
+            case 'common::country.list.pagination':
                 await lastValueFrom(
-                    this.langService.pagination({
+                    this.countryService.pagination({
                         query: action.meta.query ?
                             action.meta.query :
                             QueryStatementHandler
-                                .init({ columnsConfig: langColumnsConfig })
+                                .init({ columnsConfig: countryColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -106,14 +165,14 @@ export class LangListComponent extends ViewBaseComponent
                 );
                 break;
 
-            case 'common::lang.list.edit':
-                this.router.navigate(['common/lang/edit', action.meta.row.id]);
+            case 'common::country.list.edit':
+                this.router.navigate(['common/country/edit', action.meta.row.id]);
                 break;
 
-            case 'common::lang.list.delete':
+            case 'common::country.list.delete':
                 const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('common.Lang')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('common.Lang') }),
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('common.Country')}`,
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('common.Country') }),
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation',
@@ -141,11 +200,11 @@ export class LangListComponent extends ViewBaseComponent
                             try
                             {
                                 await lastValueFrom(
-                                    this.langService
-                                        .deleteById<CommonLang>(action.meta.row.id),
+                                    this.countryService
+                                        .deleteById<CommonCountry>(action.meta.row.id),
                                 );
                                 this.actionService.action({
-                                    id          : 'common::lang.list.pagination',
+                                    id          : 'common::country.list.pagination',
                                     isViewAction: false,
                                 });
                             }
@@ -157,9 +216,9 @@ export class LangListComponent extends ViewBaseComponent
                     });
                 break;
 
-            case 'common::lang.list.export':
+            case 'common::country.list.export':
                 const rows = await lastValueFrom(
-                    this.langService
+                    this.countryService
                         .get({
                             query: action.meta.query,
                         }),
@@ -171,12 +230,12 @@ export class LangListComponent extends ViewBaseComponent
                     // row.id = row.id;
                 });
 
-                const columns: string[] = langColumnsConfig.map(langColumnConfig => langColumnConfig.field);
+                const columns: string[] = countryColumnsConfig.map(countryColumnConfig => countryColumnConfig.field);
                 const headers: string[] = columns.map(column => this.translocoService.translate('common.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,
-                    'langs.' + action.meta.format,
+                    'countries.' + action.meta.format,
                     columns,
                     headers,
                     action.meta.format,

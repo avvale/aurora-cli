@@ -2,36 +2,12 @@
     "version": "0.0.1",
     "files": [
         {
-            "path": "src/assets/i18n/common/en.json",
-            "integrity": "sha1:0b56d40c0630a74abec5398e01c6cd83263feddc"
-        },
-        {
-            "path": "src/assets/i18n/common/es.json",
-            "integrity": "sha1:0b56d40c0630a74abec5398e01c6cd83263feddc"
-        },
-        {
             "path": "src/app/modules/admin/apps/common/common.component.html",
             "integrity": "sha1:a6aab421500581830708e34385e2166e7a039ba7"
         },
         {
             "path": "src/app/modules/admin/apps/common/common.component.ts",
             "integrity": "sha1:ce9ee791d4b7282212000868aae802a312ebfdfa"
-        },
-        {
-            "path": "src/app/modules/admin/apps/common/common.module.ts",
-            "integrity": "sha1:7ca4ceecfa2b74ef606c99c07d83275bfe657ac4"
-        },
-        {
-            "path": "src/app/modules/admin/apps/common/common.navigation.ts",
-            "integrity": "sha1:9bb9adceec87e51db22eb14d35341be5c37b527d"
-        },
-        {
-            "path": "src/app/modules/admin/apps/common/common.routing.ts",
-            "integrity": "sha1:3e56d6324aa15c3e3c9fb84ce82f22566edc1f92"
-        },
-        {
-            "path": "src/app/modules/admin/apps/common/common.types.ts",
-            "integrity": "sha1:da39a3ee5e6b4b0d3255bfef95601890afd80709"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.html",
@@ -47,7 +23,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.ts",
-            "integrity": "sha1:f712149db5221ae60098f4d50d45fce3138df04c"
+            "integrity": "sha1:2ef90a84fffc0503c72e1d21e2573193c1aa9b1c"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.columns-config.ts",

@@ -14,5 +14,12 @@ export const commonNavigation: FuseNavigationItem = {
             icon : 'language',
             link : '/common/lang',
         },
+        {
+            id   : 'countries',
+            title: 'Country',
+            type : 'basic',
+            icon : 'flag',
+            link : '/common/country',
+        },
     ],
 };

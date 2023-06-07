@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, {{#if schema.properties.hasI18n}}ColumnConfigAction, {{/if}}ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
 import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
@@ -45,6 +45,54 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 ];
             },
         },
+        {{#if schema.properties.hasI18n}}
+        {
+            type                : ColumnDataType.TRANSLATIONS_MENU,
+            field               : 'translations',
+            translation         : 'Translations',
+            sticky              : true,
+            translationIconColor: row =>
+            {
+                const langs = this.sessionService.get('langs');
+
+                for (const lang of langs.filter(lang => lang.isActive))
+                {
+                    if (!row.availableLangs.includes(lang.id)) return 'warn';
+                }
+                return 'primary';
+            },
+            actions: row =>
+            {
+                const langs = this.sessionService.get('langs');
+                const transitionActions: ColumnConfigAction[] = [];
+
+                for (const lang of langs.filter(lang => lang.isActive))
+                {
+                    if (row.availableLangs.includes(lang.id))
+                    {
+                        transitionActions.push({
+                            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit',
+                            translation : 'edit',
+                            isViewAction: true,
+                            meta        : { lang },
+                        });
+                    }
+                    else
+                    {
+                        transitionActions.push({
+                            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.new',
+                            translation : 'new',
+                            isViewAction: true,
+                            meta        : { lang },
+                        });
+
+                    }
+                }
+
+                return transitionActions;
+            },
+        },
+        {{/if}}
         {
             type       : ColumnDataType.CHECKBOX,
             field      : 'select',

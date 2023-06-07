@@ -21,6 +21,8 @@ import { commonRoutes } from './common.routing';
 import { CommonComponent } from './common.component';
 import { LangListComponent } from './lang/lang-list.component';
 import { LangDetailComponent } from './lang/lang-detail.component';
+import { CountryListComponent } from './country/country-list.component';
+import { CountryDetailComponent } from './country/country-detail.component';
 
 @NgModule({
     imports: [
@@ -45,7 +47,9 @@ import { LangDetailComponent } from './lang/lang-detail.component';
     declarations: [
         CommonComponent,
         LangDetailComponent,
-        LangListComponent
+        LangListComponent,
+        CountryDetailComponent,
+        CountryListComponent
     ],
     providers: [
         {

@@ -93,8 +93,8 @@ export class LangListComponent extends ViewBaseComponent
             case 'common::lang.list.pagination':
                 await lastValueFrom(
                     this.langService.pagination({
-                        query: action.meta.query ?
-                            action.meta.query :
+                        query: action.data.query ?
+                            action.data.query :
                             QueryStatementHandler
                                 .init({ columnsConfig: langColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
@@ -107,7 +107,7 @@ export class LangListComponent extends ViewBaseComponent
                 break;
 
             case 'common::lang.list.edit':
-                this.router.navigate(['common/lang/edit', action.meta.row.id]);
+                this.router.navigate(['common/lang/edit', action.data.row.id]);
                 break;
 
             case 'common::lang.list.delete':
@@ -142,7 +142,7 @@ export class LangListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.langService
-                                        .deleteById<CommonLang>(action.meta.row.id),
+                                        .deleteById<CommonLang>(action.data.row.id),
                                 );
                                 this.actionService.action({
                                     id          : 'common::lang.list.pagination',
@@ -161,7 +161,7 @@ export class LangListComponent extends ViewBaseComponent
                 const rows = await lastValueFrom(
                     this.langService
                         .get({
-                            query: action.meta.query,
+                            query: action.data.query,
                         }),
                 );
 
@@ -176,10 +176,10 @@ export class LangListComponent extends ViewBaseComponent
 
                 exportRows(
                     rows.objects,
-                    'langs.' + action.meta.format,
+                    'langs.' + action.data.format,
                     columns,
                     headers,
-                    action.meta.format,
+                    action.data.format,
                 );
                 break;
         }
