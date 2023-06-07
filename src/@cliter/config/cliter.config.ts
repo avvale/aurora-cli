@@ -318,6 +318,7 @@ export const cliterConfig: CliterConfig =
     backPackages: [
         'auditing',
         'azureAd',
+        'common',
         'iam',
         'oAuth',
         'queueManager',
@@ -325,6 +326,7 @@ export const cliterConfig: CliterConfig =
     frontPackages: [
         'auditing',
         'azureAd',
+        'common',
         'environments',
         'iam',
         'oAuth',
