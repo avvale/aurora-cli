@@ -3,8 +3,9 @@ boundedContextName: common
 moduleName: country
 moduleNames: countries
 aggregateName: CommonCountry
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
+hasAuditing: true
 aggregateProperties:
   - name: id
     type: id
@@ -49,19 +50,28 @@ aggregateProperties:
   - name: latitude
     type: decimal
     decimals:
-      - 17
-      - 4
+      - 16
+      - 14
     nullable: true
   - name: longitude
     type: decimal
     decimals:
       - 17
-      - 4
+      - 14
     nullable: true
   - name: zoom
     type: int.unsigned
     maxLength: 2
     nullable: true
+  - name: mapType
+    type: enum
+    enumOptions:
+      - ROADMAP
+      - SATELLITE
+      - HYBRID
+      - TERRAIN
+    nullable: false
+    example: CommonCountryMapType.TERRAIN
   - name: availableLangs
     type: json
     nullable: true
@@ -74,70 +84,63 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+aggregateI18nProperties:
   - name: id
     type: id
     primaryKey: true
     length: 36
     nullable: false
-    isI18n: true
   - name: countryId
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: CommonCountry
-    relationshipModulePath: common/country
-    relationshipKey: id
-    relationshipField: country
+    relationship:
+      type: many-to-one
+      aggregate: CommonCountry
+      modulePath: common/country
+      key: id
+      field: country
     index: unique
     indexName: uniqueLangId
-    isI18n: true
   - name: langId
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: CommonLang
-    relationshipModulePath: common/lang
-    relationshipKey: id
-    relationshipField: lang
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: CommonLang
+      modulePath: common/lang
+      key: id
+      field: lang
+      avoidConstraint: true
     index: unique
     indexName: uniqueLangId
-    isI18n: true
   - name: name
     type: varchar
     nullable: false
-    isI18n: true
   - name: slug
     type: varchar
     maxLength: 1024
     nullable: false
-    isI18n: true
   - name: administrativeAreaLevel1
     type: varchar
     maxLength: 50
     nullable: true
-    isI18n: true
   - name: administrativeAreaLevel2
     type: varchar
     maxLength: 50
     nullable: true
-    isI18n: true
   - name: administrativeAreaLevel3
     type: varchar
     maxLength: 50
     nullable: true
-    isI18n: true
   - name: createdAt
     type: timestamp
     nullable: true
-    isI18n: true
   - name: updatedAt
     type: timestamp
     nullable: true
-    isI18n: true
   - name: deletedAt
     type: timestamp
     nullable: true
-    isI18n: true
+additionalApis: []

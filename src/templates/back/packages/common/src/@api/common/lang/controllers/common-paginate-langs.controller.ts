@@ -2,12 +2,14 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
 
 @ApiTags('[common] lang')
 @Controller('common/langs/paginate')
+@Auth('common.lang.get')
 export class CommonPaginateLangsController
 {
     constructor(

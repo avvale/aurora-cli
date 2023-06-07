@@ -3,12 +3,14 @@ import { Controller, Delete, Body } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
 import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { CommonLangDto } from '../dto';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 @ApiTags('[common] lang')
 @Controller('common/langs/delete')
+@Auth('common.lang.delete')
 export class CommonDeleteLangsController
 {
     constructor(

@@ -1,11 +1,13 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 import { CommonLang } from '@api/graphql';
 
 @Resolver()
+@Auth('common.lang.delete')
 export class CommonDeleteLangsResolver
 {
     constructor(

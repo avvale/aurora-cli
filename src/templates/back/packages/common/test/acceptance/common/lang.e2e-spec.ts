@@ -5,6 +5,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Auth } from '@aurora/decorators';
 import { ILangRepository } from '@app/common/lang/domain/lang.repository';
 import { MockLangSeeder } from '@app/common/lang/infrastructure/mock/mock-lang.seeder';
 import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
@@ -60,6 +61,8 @@ describe('lang', () =>
                 MockLangSeeder,
             ],
         })
+            .overrideGuard(Auth)
+            .useValue({ canActivate: () => true })
             .compile();
 
         mockData = langs;

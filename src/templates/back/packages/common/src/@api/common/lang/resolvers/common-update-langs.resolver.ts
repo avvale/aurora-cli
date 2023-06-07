@@ -1,11 +1,13 @@
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { CommonUpdateLangsHandler } from '../handlers/common-update-langs.handler';
 import { CommonLang, CommonUpdateLangsInput } from '@api/graphql';
 
 @Resolver()
+@Auth('common.lang.update')
 export class CommonUpdateLangsResolver
 {
     constructor(

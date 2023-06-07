@@ -3,7 +3,7 @@ boundedContextName: common
 moduleName: lang
 moduleNames: langs
 aggregateName: CommonLang
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
 hasAuditing: true
 aggregateProperties:

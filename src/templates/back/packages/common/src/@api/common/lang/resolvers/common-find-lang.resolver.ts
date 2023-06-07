@@ -1,11 +1,13 @@
 import { Resolver, Args, Query } from '@nestjs/graphql';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auth } from '@aurora/decorators';
 
 // @app
 import { CommonFindLangHandler } from '../handlers/common-find-lang.handler';
 import { CommonLang } from '@api/graphql';
 
 @Resolver()
+@Auth('common.lang.get')
 export class CommonFindLangResolver
 {
     constructor(
