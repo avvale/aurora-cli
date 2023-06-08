@@ -29,7 +29,7 @@ describe('CommonPaginateCountriesHandler', () =>
                 {
                     provide : ConfigService,
                     useValue: {
-                        get: (key: string) => key === 'APP_LANG' ? 'es' : '',
+                        get: (key: string) => key === 'APP_FALLBACK_LANG' ? 'es' : '',
                     },
                 },
                 {
