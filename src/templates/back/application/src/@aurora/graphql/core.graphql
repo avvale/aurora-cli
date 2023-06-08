@@ -36,5 +36,6 @@ type Pagination
 type Query
 {
     coreGetLangs: Any!
+    coreGetFallbackLang: String
     hello: String
 }

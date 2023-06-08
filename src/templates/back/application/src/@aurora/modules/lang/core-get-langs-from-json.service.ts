@@ -19,8 +19,13 @@ export class CoreGetLangsFromJsonService implements CoreGetLangsService
         if (langs) return langs;
 
         // get langs from json and return cache langs
-        await this.cacheManager.set('common/langs', await this.getJsonLangs());
+        await this.reset();
         return await this.cacheManager.get<CoreLang[]>('common/langs');
+    }
+
+    async reset(): Promise<void>
+    {
+        await this.cacheManager.set('common/langs', this.getJsonLangs());
     }
 
     getJsonLangs(): CoreLang[]
