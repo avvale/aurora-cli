@@ -56,7 +56,7 @@ handlebars.registerHelper('importManager', function(
             response += 'import {\n';
             for (const item of importsItems)
             {
-                response += `\t${item},\n`;
+                response += `    ${item},\n`;
             }
 
             response += `} from '${path}';\n`;

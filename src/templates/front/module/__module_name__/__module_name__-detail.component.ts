@@ -320,6 +320,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             /* #region common actions */
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
+                {{#if schema.properties.hasI18n}}
+                this.fg.get('langId').setValue(
+                    this.activatedRoute.snapshot.params.langId || this.sessionService.get('fallbackLang').id,
+                );
+                {{/if}}
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit':

@@ -20,6 +20,9 @@
     (object items='NotFoundException' path='@nestjs/common')
     (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
     (object items='* as _' path='lodash' defaultImport=true)
+    (object items='Cache' path='cache-manager')
+    (object items='CACHE_MANAGER' path='@nestjs/cache-manager')
+    (object items='Inject' path='@nestjs/common')
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
@@ -30,6 +33,9 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
         {{> declareI18nRepository}}
+        {{#if schema.properties.hasI18n}}
+        @Inject(CACHE_MANAGER) private cacheManager: Cache,
+        {{/if}}
     ) {}
 
     async main(
@@ -73,11 +79,20 @@ export class Create{{ toPascalCase schema.moduleName }}Service
             // try get object from database
             const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById(
                 {{ toCamelCase schema.moduleName }}.id,
+                {{#if schema.properties.hasI18n}}
                 {
                     constraint: {
-                        include: ['{{ toCamelCase schema.moduleName }}I18n'],
+                        include: [
+                            {
+                                association: '{{ toCamelCase schema.moduleName }}I18n',
+                                where      : {
+                                    langId: (await this.cacheManager.get<{ id: string; }>('common/fallback-lang')).id,
+                                },
+                            },
+                        ],
                     },
                 },
+                {{/if}}
             );
 
             // eslint-disable-next-line max-len
@@ -85,12 +100,18 @@ export class Create{{ toPascalCase schema.moduleName }}Service
 
             // add new language id to data lang field to create or update field
             {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
+
             await this.repository
                 .update(
                     {{ toCamelCase schema.moduleName }},
                     {
-                        dataFactory: aggregate => _.pick(aggregate.toI18nDTO(), 'id', 'availableLangs'),
-                        updateOptions: cQMetadata?.repositoryOptions
+                        dataFactory   : aggregate => _.pick(aggregate.toDTO(), 'id', 'availableLangs'),
+                        updateOptions : cQMetadata?.repositoryOptions,
+                        queryStatement: {
+                            where: {
+                                id: {{ toCamelCase schema.moduleName }}.id.value,
+                            },
+                        },
                     },
                 );
         }
@@ -115,7 +136,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
                     },
                 }),
                 createOptions: cQMetadata?.repositoryOptions,
-            }
+            },
         );
         {{else}}
         await this.repository.create(

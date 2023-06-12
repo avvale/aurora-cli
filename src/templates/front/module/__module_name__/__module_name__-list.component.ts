@@ -85,7 +85,6 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                             isViewAction: true,
                             meta        : { lang },
                         });
-
                     }
                 }
 
@@ -123,6 +122,16 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            {{#if schema.properties.hasI18n}}
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.new':
+                this.router
+                    .navigate([
+                        '{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/new',
+                        action.meta.row.id,
+                    ]);
+                break;
+
+            {{/if}}
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
@@ -155,7 +164,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit':
-                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        '{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete':
