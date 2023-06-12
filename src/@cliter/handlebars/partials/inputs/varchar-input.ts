@@ -8,7 +8,8 @@ handlebars.registerPartial('varcharInput',
     <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}') }}</mat-label>
     <input
         matInput
-        formControlName="{{ toCamelCase property.name }}"{{#if property.maxLength}}
+        formControlName="{{ toCamelCase property.name }}"
+        {{#if property.maxLength}}
         maxlength="{{ property.maxLength }}"
         {{/if}}
         {{#unless property.nullable }}

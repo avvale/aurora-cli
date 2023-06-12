@@ -177,7 +177,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{#unless relationship.avoidConstraint }}
         {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
         references: {
-            key: '{{ getReferenceKey }}'
+            key: '{{ getReferenceKey }}',
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION',

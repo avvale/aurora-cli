@@ -10,7 +10,7 @@ import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schem
 
 // sources
 {{#if schema.properties.hasI18n}}
-import { langs } from '{{#eq schema.boundedContextName 'common'}}{{ config.appContainer }}/common/lang/infrastructure/seeds/lang.seed{{else}}@aurorajs.dev/common{{/eq}}';
+import { langs } from '{{#eq schema.boundedContextName 'common'}}{{ config.appContainer }}/common/lang/infrastructure/mock/mock-lang.data{{else}}@aurorajs.dev/common{{/eq}}';
 {{/if}}
 import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
 
