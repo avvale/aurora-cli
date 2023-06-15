@@ -49,12 +49,39 @@ export { {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.modul
 {{/notInArray}}
 
 // domain
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.aggregate.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
+{{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.mapper.ts'}}
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper } from './domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.mapper';
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.mapper';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.response.ts'}}
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from './domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.response';
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.response';
 {{/notInArray}}
+{{#if schema.properties.hasI18n}}
+export { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-i18n.repository';
+{{/if}}
+
+// infrastructure
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.model';
+{{#if schema.properties.hasI18n}}
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18nModel } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
+{{/if}}
+{{#each schema.properties.withRelationshipManyToMany}}
+{{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
+export { {{ relationship.pivot.aggregate }}Model } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.boundedContextName }}-{{ relationship.pivot.fileName }}.model';
+{{/if}}
+{{/each}}
+export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}Repository } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.repository';
+{{#if schema.properties.hasI18n}}
+export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}I18nRepository } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.repository';
+{{/if}}
+
+// sagas
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Sagas } from './application/sagas/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.sagas';
 
 // command handlers
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/{{ toKebabCase schema.boundedContextName }}-create-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
@@ -163,28 +190,6 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/{{ toKebabCase schema.boundedContextName }}-delete/delete-' (toKebabCase schema.moduleNames) '.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service } from './application/delete/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.service';
 {{/notInArray}}
-
-// models
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.model';
-{{#if schema.properties.hasI18n}}
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18nModel } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
-{{/if}}
-{{#each schema.properties.withRelationshipManyToMany}}
-{{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-export { {{ relationship.pivot.aggregate }}Model } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.boundedContextName }}-{{ relationship.pivot.fileName }}.model';
-{{/if}}
-{{/each}}
-
-// repository
-export { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
-export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}Repository } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.repository';
-{{#if schema.properties.hasI18n}}
-export { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-i18n.repository';
-export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}I18nRepository } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.repository';
-{{/if}}
-
-// sagas
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Sagas } from './application/sagas/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.sagas';
 
 export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Handlers = [
     // commands
