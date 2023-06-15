@@ -48,6 +48,14 @@ export { {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schem
 export { {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }} } from './infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 {{/notInArray}}
 
+// domain
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.mapper.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper } from './domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.mapper';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.response.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from './domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.response';
+{{/notInArray}}
+
 // command handlers
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/{{ toKebabCase schema.boundedContextName }}-create-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}CommandHandler } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.command-handler';
