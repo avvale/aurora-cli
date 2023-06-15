@@ -29,17 +29,17 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
                     {{#each schema.properties.aggregate}}
                     {{#unless isI18n}}
 {{#eq name 'createdAt'}}
-                    new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
 {{else eq name 'updatedAt'}}
-                    new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq name 'deletedAt'}}
-                    new {{ toPascalCase ../schema.moduleName }}DeletedAt(null),
+                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}DeletedAt(null),
 {{else}}
-                    new {{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
+                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
 {{/eq}}
                     {{/unless}}
                     {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-                    new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
+                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}),
                     {{/and}}
                     {{/each}}
                 ),

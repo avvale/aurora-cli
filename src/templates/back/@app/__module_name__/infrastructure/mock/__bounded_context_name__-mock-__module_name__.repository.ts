@@ -13,7 +13,7 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
     public readonly repository: any;
     public readonly aggregateName: string = '{{ schema.aggregateName }}';
     public collectionSource: {{ schema.aggregateName }}[];
-    public deletedAtInstance: {{ toPascalCase schema.moduleName }}DeletedAt = new {{ toPascalCase schema.moduleName }}DeletedAt(null);
+    public deletedAtInstance: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}DeletedAt = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}DeletedAt(null);
 
     constructor()
     {
@@ -40,7 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
             this.collectionSource.push({{ schema.aggregateName }}.register(
                 {{#each schema.properties.mock}}
                 {{#if (isAllowProperty ../schema.moduleName this)}}
-                new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(itemCollection.{{ toCamelCase name }}),
+                new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(itemCollection.{{ toCamelCase name }}),
                 {{/if}}
                 {{/each}}
             ));

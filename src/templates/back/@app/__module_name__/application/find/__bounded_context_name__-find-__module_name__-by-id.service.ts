@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CQMetadata, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdService
@@ -12,7 +12,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ) {}
 
     async main(
-        id: {{ toPascalCase schema.moduleName }}Id,
+        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
     ): Promise<{{ schema.aggregateName }}>

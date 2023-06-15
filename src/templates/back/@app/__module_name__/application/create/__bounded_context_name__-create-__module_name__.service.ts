@@ -11,7 +11,7 @@
 {{#each schema.properties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{ push ../importsArray
-    (object items=(sumStrings (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
+    (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
@@ -36,7 +36,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         payload: {
             {{#each schema.properties.createService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
         },
@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         const contentLanguage = cQMetadata.meta.contentLanguage;
 
         // override langId value object with header content-language value
-        payload.langId = new {{ toPascalCase schema.moduleName }}I18nLangId(contentLanguage.id);
+        payload.langId = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18nLangId(contentLanguage.id);
 
         {{/if}}
         // create aggregate with factory pattern
@@ -56,9 +56,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             {{#each schema.properties.aggregate}}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
-            new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
 {{else eq name 'updatedAt'}}
-            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}
@@ -101,7 +101,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes(contentLanguage.id)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${contentLanguage.id} already exist in database`);
 
             // add available lang when create country
-            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [contentLanguage.id]));
+            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [contentLanguage.id]));
 
             await this.repository
                 .update(
@@ -121,7 +121,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {
             if (error instanceof NotFoundException)
             {
-                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs([contentLanguage.id]);
+                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs([contentLanguage.id]);
                 await this.repository
                     .create(
                         {{ toCamelCase schema.moduleName }},

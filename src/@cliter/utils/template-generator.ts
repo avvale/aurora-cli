@@ -141,7 +141,7 @@ export class TemplateGenerator
             TemplateGenerator.templatePath,
             ...TemplateElement.BACK_VALUE_OBJECT.split('/'),
             property.type,
-            '__module_name__-__property_name__.ts',
+            '__bounded_context_name__-__module_name__-__property_name__.ts',
         );
 
         // TODO, throw error when no exist value object
@@ -151,7 +151,7 @@ export class TemplateGenerator
         FileManager.manageFileTemplate(
             generateCommandState.command,
             originFilePath,
-            '__module_name__-__property_name__.ts',
+            '__bounded_context_name__-__module_name__-__property_name__.ts',
             path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),
             {
                 force             : generateCommandState.flags.force,

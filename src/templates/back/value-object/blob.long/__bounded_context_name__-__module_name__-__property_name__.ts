@@ -1,6 +1,6 @@
 import { BlobValueObject, DataValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
-export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }} extends BlobValueObject
+export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }} extends BlobValueObject
 {
     public readonly type: string = '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }}';
 

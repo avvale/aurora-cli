@@ -8,9 +8,9 @@
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
             (object items=(array 'ConfigModule' 'ConfigService') path='@nestjs/config')
             (object items=(array 'SequelizeModule') path='@nestjs/sequelize')
-            (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.moduleName) '.repository'))
-            (object items=(sumStrings 'Mock' (toPascalCase schema.moduleName) 'Seeder') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.seeder'))
-            (object items=(toCamelCase schema.moduleNames) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.data'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Seeder') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.seeder'))
+            (object items=(sumStrings (toCamelCase schema.boundedContextName) (toPascalCase schema.moduleNames)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.data'))
             (object items='GraphQLConfigModule' path='@aurora/graphql/graphql-config.module')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Module') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.boundedContextName)  '.module'))
             (object items='* as request' path='supertest' defaultImport=true)
@@ -20,7 +20,7 @@
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
     (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
-    (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/' (toKebabCase schema.moduleName) '-i18n.repository'))
+    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-i18n.repository'))
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
@@ -44,9 +44,9 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     let app: INestApplication;
     let {{ toCamelCase schema.moduleName }}Repository: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
-    let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18nRepository;
+    let repositoryI18n: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository;
     {{/if }}
-    let {{ toCamelCase schema.moduleName }}Seeder: Mock{{ toPascalCase schema.moduleName }}Seeder;
+    let {{ toCamelCase schema.moduleName }}Seeder: {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Seeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -83,7 +83,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                 }),
             ],
             providers: [
-                Mock{{ toPascalCase schema.moduleName }}Seeder,
+                {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Seeder,
             ],
         })
             {{#if schema.hasOAuth }}
@@ -105,13 +105,13 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .compile();
 
-        mockData = {{ toCamelCase schema.moduleNames }};
+        mockData = {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }};
         app = module.createNestApplication();
         {{ toCamelCase schema.moduleName }}Repository = module.get<{{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository>({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
-        repositoryI18n  = module.get<I{{ toPascalCase schema.moduleName }}I18nRepository>(I{{ toPascalCase schema.moduleName }}I18nRepository);
+        repositoryI18n  = module.get<{{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository>({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository);
         {{/if}}
-        {{ toCamelCase schema.moduleName }}Seeder = module.get<Mock{{ toPascalCase schema.moduleName }}Seeder>(Mock{{ toPascalCase schema.moduleName }}Seeder);
+        {{ toCamelCase schema.moduleName }}Seeder = module.get<{{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Seeder>({{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Seeder);
 
         // seed mock data in memory database
         {{#if schema.properties.hasI18n}}

@@ -1,17 +1,15 @@
-import { IntValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
+import { DataValueObject, TimestampValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
-export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }} extends IntValueObject
+export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }} extends TimestampValueObject
 {
     public readonly type: string = '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }}';
 
-    constructor(value: number, validationRules: ValidationRules = {})
+    constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
             name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }}',
             nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
-            maxLength  : {{ currentProperty.maxLength }},
-            unsigned   : false,
-        }, validationRules));
+        }, validationRules), data);
     }
 }

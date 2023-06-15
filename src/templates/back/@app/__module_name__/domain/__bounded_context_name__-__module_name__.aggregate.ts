@@ -15,25 +15,25 @@ import { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase sche
 import { {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event } from '../application/events/{{ toKebabCase schema.boundedContextName }}-deleted-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 {{#each schema.properties.withImportRelationshipOneToOne}}
-import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
+import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
+import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withImportRelationshipOneToMany}}
-import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
+import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToMany}}
-import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
+import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/domain/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.aggregate{{/if}}';
 {{/each}}
 
 export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each schema.properties.aggregate}}
     {{#if (isAllowProperty ../schema.moduleName this)}}
-    {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
     {{/if}}
     {{/each}}
 
@@ -59,7 +59,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     constructor(
         {{#each schema.properties.aggregate}}
         {{#if (isAllowProperty ../schema.moduleName this) }}
-        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+        {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
         {{/if}}
         {{/each}}
 
@@ -112,7 +112,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     static register (
         {{#each schema.properties.aggregate}}
         {{#if (isAllowProperty ../schema.moduleName this) }}
-        {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+        {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
         {{/if}}
         {{/each}}
 

@@ -11,7 +11,7 @@
 {{#each schema.properties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{ push ../importsArray
-    (object items=(sumStrings (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
+    (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
@@ -34,7 +34,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         payload: {
             {{#each schema.properties.updateService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
         },
@@ -46,7 +46,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         const contentLanguage = cQMetadata.meta.contentLanguage;
 
         // override langId value object with header content-language value
-        payload.langId = new {{ toPascalCase schema.moduleName }}I18nLangId(contentLanguage.id);
+        payload.langId = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18nLangId(contentLanguage.id);
 
         {{/if}}
         // create aggregate with factory pattern
@@ -56,7 +56,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{#eq name 'createdAt'}}
             null, // createdAt
 {{else eq name 'updatedAt'}}
-            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{#if schema.properties.hasI18n}}{{ toPascalCase schema.moduleName }}AvailableLangs, {{/if}}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
+import { {{#if schema.properties.hasI18n}}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs, {{/if}}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
 {{> importI18nRepository}}
 
@@ -15,7 +15,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         {{> declareI18nRepository}}
     ) {}
 
-    async main(id: {{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
+    async main(id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
     {
         // get object to delete
         const {{ toCamelCase schema.moduleName }} = await this.repository.findById(id, { constraint, cQMetadata });
@@ -40,7 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         }
         else
         {
-            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(availableLangs);
+            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs(availableLangs);
             await this.repository.update({{ toCamelCase schema.moduleName }});
         }
 

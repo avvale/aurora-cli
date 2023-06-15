@@ -12,7 +12,7 @@
 {{#each schema.properties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{ push ../importsArray
-    (object items=(sumStrings (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
+    (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
@@ -35,7 +35,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{ toCamelCase schema.moduleNames }}: {
             {{#each schema.properties.createItemsService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
         } [],
@@ -47,9 +47,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             {{#each schema.properties.aggregate}}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
-            new {{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
 {{else eq name 'updatedAt'}}
-            new {{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq name 'deletedAt'}}
             null, // deleteAt
 {{else}}

@@ -5,13 +5,13 @@
             (object items='EventPublisher' path='@nestjs/cqrs')
             (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository'))
-            (object items=(sumStrings (toPascalCase schema.moduleName) 'Id') path='../../domain/value-objects')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id') path='../../domain/value-objects')
     )
 ~}}
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
     (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-i18n.repository'))
-    (object items=(sumStrings (toPascalCase schema.moduleName) 'AvailableLangs') path='../../domain/value-objects')
+    (object items=(sumStrings (toPascalCase schema.boundedContextName)(toPascalCase schema.moduleName) 'AvailableLangs') path='../../domain/value-objects')
     (object items='* as _' path='lodash' defaultImport=true)
 ~}}
 {{/if}}
@@ -26,7 +26,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     ) {}
 
     async main(
-        id: {{ toPascalCase schema.moduleName }}Id,
+        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -84,7 +84,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
             );
 
             // update available langs when delete translation
-            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs({{ toCamelCase schema.moduleName }}.availableLangs.value.removeItem(contentLanguage.id));
+            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs({{ toCamelCase schema.moduleName }}.availableLangs.value.removeItem(contentLanguage.id));
 
             await this.repository
                 .update(

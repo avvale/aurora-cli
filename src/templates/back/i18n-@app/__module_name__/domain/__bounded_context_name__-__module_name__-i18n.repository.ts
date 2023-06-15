@@ -3,7 +3,7 @@ import { LiteralObject } from '@nestjs/common';
 import { IRepository, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata, Pagination } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toPascalCase schema.moduleName }}Id } from './value-objects';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from './value-objects';
 
 export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository implements IRepository<{{ schema.aggregateName }}>
 {
@@ -29,7 +29,7 @@ export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCa
 
     // find a single record by id
     abstract findById(
-        id: {{ toPascalCase schema.moduleName }}Id,
+        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
@@ -122,7 +122,7 @@ export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCa
 
     // delete record
     abstract deleteById(
-        id: {{ toPascalCase schema.moduleName }}Id,
+        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
         options?: {
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;

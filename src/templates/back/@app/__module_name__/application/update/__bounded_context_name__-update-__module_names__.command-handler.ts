@@ -21,10 +21,10 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
                 {{#each schema.properties.updateCommandHandler}}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#if hasTimezone}}
-                {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, { {{~#unless nullable}} undefinable: true {{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
+                {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, { {{~#unless nullable}} undefinable: true {{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}
                 {{#unless (isI18nAvailableLangsProperty . ../schema.properties)}}
-                {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}{{#unless nullable}}, { undefinable: true }{{/unless}}),
+                {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}{{#unless nullable}}, { undefinable: true }{{/unless}}),
                 {{/unless}}
                 {{/if}}
                 {{/if}}

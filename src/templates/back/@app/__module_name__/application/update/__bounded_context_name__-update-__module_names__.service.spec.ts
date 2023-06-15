@@ -71,7 +71,7 @@ describe('Update{{ toPascalCase schema.moduleNames }}Service', () =>
             expect(await service.main(
                 {
                     {{#each schema.properties.updateService}}
-                    {{ toCamelCase name }}: new {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }}),
+                    {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }}),
                     {{/each}}
                 },
             )).toBe(undefined);

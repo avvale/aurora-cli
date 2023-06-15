@@ -1,6 +1,6 @@
-import { EnumValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
+import { StringValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
-export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }} extends EnumValueObject
+export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }} extends StringValueObject
 {
     public readonly type: string = '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }}';
 
@@ -10,7 +10,9 @@ export class {{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleNam
             name       : '{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase currentProperty.name }}',
             nullable   : {{#if currentProperty.nullable}}true{{else}}false{{/if}},
             undefinable: {{#if currentProperty.nullable}}true{{else}}false{{/if}},
-            enumOptions: [{{{ currentProperty.enumOptionsArrayItems }}}],
+            {{#if currentProperty.maxLength}}
+            maxLength  : {{ currentProperty.maxLength }},
+            {{/if}}
         }, validationRules));
     }
 }
