@@ -5,8 +5,7 @@
             (object items=(array 'AuditingMeta' 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') path='../dto')
-            (object items=(sumStrings 'Find' (toPascalCase schema.moduleName) 'ByIdQuery') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/find/find-' (toKebabCase schema.moduleName) '-by-id.query'))
-            (object items=(sumStrings 'Delete' (toPascalCase schema.moduleName) 'ByIdCommand') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/delete-' (toKebabCase schema.moduleName) '-by-id.command'))
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdCommand') (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdQuery')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
@@ -63,7 +62,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         );
 
         {{/if}}
-        const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+        const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             id,
             constraint,
             {
@@ -71,7 +70,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
             },
         ));
 
-        await this.commandBus.dispatch(new Delete{{ toPascalCase schema.moduleName }}ByIdCommand(
+        await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommand(
             id,
             constraint,
             {

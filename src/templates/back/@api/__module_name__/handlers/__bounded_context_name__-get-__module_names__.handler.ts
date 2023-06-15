@@ -5,7 +5,7 @@
             (object items=(array 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') path='../dto')
-            (object items=(sumStrings 'Get' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/get/get-' (toKebabCase schema.moduleNames) '.query'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
@@ -57,7 +57,7 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
         );
 
         {{/if}}
-        return await this.queryBus.ask(new Get{{ toPascalCase schema.moduleNames }}Query(
+        return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Query(
             queryStatement,
             constraint,
             {

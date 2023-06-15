@@ -3,7 +3,7 @@
         array
             (object items='Injectable' path='@nestjs/common')
             (object items=(array 'AuditingMeta' 'ICommandBus') path=config.auroraCorePackage)
-            (object items=(sumStrings 'Create' (toPascalCase schema.moduleNames) 'Command') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/create/create-' (toKebabCase schema.moduleNames) '.command'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Command') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Input' ) path='@api/graphql')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Dto' ) path='../dto')
     )
@@ -30,7 +30,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{#if schema.properties.hasI18n}}
         // no content-language header is required.
         {{/if}}
-        await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command(
+        await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command(
             payload,
             {
                 timezone,

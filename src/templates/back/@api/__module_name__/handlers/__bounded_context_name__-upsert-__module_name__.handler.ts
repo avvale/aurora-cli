@@ -5,8 +5,7 @@
             (object items=(array 'AuditingMeta' 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdInput')) path='@api/graphql')
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdDto')) path='../dto')
-            (object items=(sumStrings 'Find' (toPascalCase schema.moduleName) 'ByIdQuery') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/find/find-' (toKebabCase schema.moduleName) '-by-id.query'))
-            (object items=(sumStrings 'Upsert' (toPascalCase schema.moduleName) 'Command') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/upsert/upsert-' (toKebabCase schema.moduleName) '.command'))
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdQuery') (sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Command')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
@@ -52,7 +51,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         if (!contentLanguage) throw new BadRequestException('To upsert a multi-language object, the content-language header must be defined.');
 
         {{/if}}
-        await this.commandBus.dispatch(new Upsert{{ toPascalCase schema.moduleName }}Command(
+        await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command(
             payload,
             {
                 timezone,
@@ -80,7 +79,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         );
 
         {{/if}}
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+        return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             {{#if schema.properties.hasI18n}}
             constraint,

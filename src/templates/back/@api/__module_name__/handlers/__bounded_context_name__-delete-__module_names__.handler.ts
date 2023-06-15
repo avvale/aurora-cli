@@ -5,8 +5,7 @@
             (object items=(array 'AuditingMeta' 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') path='../dto')
-            (object items=(sumStrings 'Get' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/get/get-' (toKebabCase schema.moduleNames) '.query'))
-            (object items=(sumStrings 'Delete' (toPascalCase schema.moduleNames) 'Command') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/delete-' (toKebabCase schema.moduleNames) '.command'))
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Command') (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Query')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
@@ -64,7 +63,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         );
 
         {{/if}}
-        const {{ toCamelCase schema.moduleNames }} = await this.queryBus.ask(new Get{{ toPascalCase schema.moduleNames }}Query(
+        const {{ toCamelCase schema.moduleNames }} = await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Query(
             queryStatement,
             constraint,
             {
@@ -72,7 +71,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
             },
         ));
 
-        await this.commandBus.dispatch(new Delete{{ toPascalCase schema.moduleNames }}Command(
+        await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Command(
             queryStatement,
             constraint,
             {

@@ -42,7 +42,7 @@ const importForeignModules = [];
 describe('{{ toKebabCase schema.moduleName }}', () =>
 {
     let app: INestApplication;
-    let {{ toCamelCase schema.moduleName }}Repository: I{{ toPascalCase schema.moduleName }}Repository;
+    let {{ toCamelCase schema.moduleName }}Repository: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
     let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18nRepository;
     {{/if }}
@@ -107,7 +107,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
 
         mockData = {{ toCamelCase schema.moduleNames }};
         app = module.createNestApplication();
-        {{ toCamelCase schema.moduleName }}Repository = module.get<I{{ toPascalCase schema.moduleName }}Repository>(I{{ toPascalCase schema.moduleName }}Repository);
+        {{ toCamelCase schema.moduleName }}Repository = module.get<{{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository>({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
         repositoryI18n  = module.get<I{{ toPascalCase schema.moduleName }}I18nRepository>(I{{ toPascalCase schema.moduleName }}I18nRepository);
         {{/if}}

@@ -5,8 +5,7 @@
             (object items=(array 'AuditingMeta' 'ICommandBus' 'IQueryBus' 'QueryStatement'  'Utils') path=config.auroraCorePackage)
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdInput')) path='@api/graphql')
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdDto')) path='../dto')
-            (object items=(sumStrings 'Find' (toPascalCase schema.moduleName) 'ByIdQuery') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/find/find-' (toKebabCase schema.moduleName) '-by-id.query'))
-            (object items=(sumStrings 'Update' (toPascalCase schema.moduleName) 'ByIdCommand') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/update-' (toKebabCase schema.moduleName) '-by-id.command'))
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdQuery') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdCommand')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
@@ -62,7 +61,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         );
 
         {{/if}}
-        const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+        const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             {{#if schema.properties.hasI18n}}
             constraintToFindById,
@@ -80,7 +79,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         const contentLanguageObject = await this.coreGetContentLanguageObjectService.get(contentLanguage);
 
         {{/if}}
-        await this.commandBus.dispatch(new Update{{ toPascalCase schema.moduleName }}ByIdCommand(
+        await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand(
             {
                 ...dataToUpdate,
                 {{#if schema.properties.hasI18n}}
@@ -106,7 +105,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
             },
         ));
 
-        return await this.queryBus.ask(new Find{{ toPascalCase schema.moduleName }}ByIdQuery(
+        return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
             {{#if schema.properties.hasI18n}}
             constraintToFindById,

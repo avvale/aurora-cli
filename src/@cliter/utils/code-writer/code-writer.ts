@@ -112,9 +112,9 @@ export class CodeWriter
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Handlers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`,
-                `I${this.moduleName.toPascalCase()}Repository`,
-                `Sequelize${this.moduleName.toPascalCase()}Repository`,
-                `${this.moduleName.toPascalCase()}Sagas`,
+                `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}Repository`,
+                `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Sagas`,
             ],
         );
 
@@ -160,8 +160,8 @@ export class CodeWriter
             sourceFile,
             `
 {
-    provide : I${this.moduleName.toPascalCase()}Repository,
-    useClass: Sequelize${this.moduleName.toPascalCase()}Repository
+    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}Repository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository
 }`,
             `${this.boundedContextName.toPascalCase()}Repositories`,
         );
@@ -169,7 +169,7 @@ export class CodeWriter
         // sagas
         ArrayDriver.addArrayItem(
             sourceFile,
-            `${this.moduleName.toPascalCase()}Sagas`,
+            `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Sagas`,
             `${this.boundedContextName.toPascalCase()}Sagas`,
         );
 
@@ -182,8 +182,8 @@ export class CodeWriter
                 `./${this.moduleName.toKebabCase()}`,
                 [
                     `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18nModel`,
-                    `I${this.moduleName.toPascalCase()}I18nRepository`,
-                    `Sequelize${this.moduleName.toPascalCase()}I18nRepository`,
+                    `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}I18nRepository`,
+                    `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}I18nRepository`,
                 ],
             );
 
@@ -199,8 +199,8 @@ export class CodeWriter
                 sourceFile,
                 `
 {
-    provide : I${this.moduleName.toPascalCase()}I18nRepository,
-    useClass: Sequelize${this.moduleName.toPascalCase()}I18nRepository
+    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}I18nRepository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}I18nRepository
 }`,
                 `${this.boundedContextName.toPascalCase()}Repositories`,
             );
@@ -684,7 +684,7 @@ export class CodeWriter
         // export aggregate
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.aggregate`,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.aggregate`,
             [`${this.aggregateName}`],
         );
 
@@ -698,22 +698,22 @@ export class CodeWriter
         // export response
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.response`,
-            [`${this.moduleName.toPascalCase()}Response`],
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.response`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Response`],
         );
 
         // export mapper
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.moduleName.toKebabCase()}.mapper`,
-            [`${this.moduleName.toPascalCase()}Mapper`],
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.mapper`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Mapper`],
         );
 
         // export seed
         ExportDriver.createExportItems(
             sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/mock/mock-${this.moduleName.toKebabCase()}.data`,
-            [`${this.moduleNames.toCamelCase()}`],
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/mock/${this.boundedContextName.toKebabCase()}-mock-${this.moduleName.toKebabCase()}.data`,
+            [`${this.boundedContextName.toCamelCase()}${this.moduleNames.toPascalCase()}`],
         );
 
         sourceFile?.saveSync();

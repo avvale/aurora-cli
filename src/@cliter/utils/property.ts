@@ -194,7 +194,7 @@ export class Property
         return typeof this._enumOptions === 'string' ? this._enumOptions.split(',').map(item => item.trim().toUpperCase()) : undefined;
     }
 
-    get getRelationshipBoundedContext(): string | null
+    get getRelationshipBoundedContextName(): string | null
     {
         try
         {
@@ -332,14 +332,14 @@ export class Property
     get getGraphqlCreateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                          return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Create${this.getRelationshipModuleName?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextName?.toPascalCase()}Create${this.getRelationshipModuleName?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlUpdateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                           return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContext?.toPascalCase()}Update${this.getRelationshipModuleName?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextName?.toPascalCase()}Update${this.getRelationshipModuleName?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 

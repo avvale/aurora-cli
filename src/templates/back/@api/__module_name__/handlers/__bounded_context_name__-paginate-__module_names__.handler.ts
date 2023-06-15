@@ -4,7 +4,7 @@
             (object items=(array 'Injectable') path='@nestjs/common')
             (object items=(array 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items='Pagination' path='@api/graphql')
-            (object items=(sumStrings 'Paginate' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/paginate/paginate-' (toKebabCase schema.moduleNames) '.query'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
@@ -55,7 +55,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         );
 
         {{/if}}
-        return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(
+        return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Query(
             queryStatement,
             constraint,
             {
