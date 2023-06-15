@@ -32,6 +32,13 @@ export class Update{{ toPascalCase schema.moduleNames }}Service
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
+        {{#if schema.properties.hasI18n}}
+        const contentLanguage = cQMetadata.meta.contentLanguage;
+
+        // override langId value object with header content-language value
+        payload.langId = new {{ toPascalCase schema.moduleName }}I18nLangId(contentLanguage.id);
+
+        {{/if}}
         // create aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
             {{#each schema.properties.aggregate}}
@@ -62,28 +69,37 @@ export class Update{{ toPascalCase schema.moduleNames }}Service
         {{/if}}
 
         // update
-        await this.repository.update({{ toCamelCase schema.moduleName }}, {
-            queryStatement,
-            constraint,
-            cQMetadata,
-            updateOptions: cQMetadata?.repositoryOptions,
-        });
+        await this.repository.update(
+            {{ toCamelCase schema.moduleName }},
+            {
+                queryStatement,
+                constraint,
+                cQMetadata,
+                updateOptions: cQMetadata?.repositoryOptions,
+            },
+        );
         {{#if schema.properties.hasI18n}}
-        await this.repositoryI18n.update({{ toCamelCase schema.moduleName }}, {
-            queryStatement,
-            constraint,
-            cQMetadata,
-            updateOptions: cQMetadata?.repositoryOptions,
-            dataFactory: (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(),
-        });
+
+        await this.repositoryI18n.update(
+            {{ toCamelCase schema.moduleName }},
+            {
+                queryStatement,
+                constraint,
+                cQMetadata,
+                updateOptions: cQMetadata?.repositoryOptions,
+                dataFactory  : (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(),
+            },
+        );
         {{/if}}
 
         // get objects to delete
-        const {{ toCamelCase schema.moduleNames }} = await this.repository.get({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
+        const {{ toCamelCase schema.moduleNames }} = await this.repository.get(
+            {
+                queryStatement,
+                constraint,
+                cQMetadata,
+            },
+        );
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const {{ toCamelCase schema.moduleNames }}Register = this.publisher.mergeObjectContext(

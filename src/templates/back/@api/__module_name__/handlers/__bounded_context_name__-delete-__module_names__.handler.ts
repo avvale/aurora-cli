@@ -1,17 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18nConstraintService, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
-{{#if schema.hasTenant}}
-
-// tenant
-import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'AuditingMeta' 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') path='../dto')
+            (object items=(sumStrings 'Get' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/get/get-' (toKebabCase schema.moduleNames) '.query'))
+            (object items=(sumStrings 'Delete' (toPascalCase schema.moduleNames) 'Command') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/delete-' (toKebabCase schema.moduleNames) '.command'))
+    )
+~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items=(array 'BadRequestException') path='@nestjs/common')
+    (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService' 'CoreGetFallbackLangService' 'CoreGetContentLanguageObjectService') path=config.auroraCorePackage)
+~}}
 {{/if}}
-
-// {{ config.appContainer }}
-import { Get{{ toPascalCase schema.moduleNames }}Query } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/get/get-{{ toKebabCase schema.moduleNames }}.query';
-import { Delete{{ toPascalCase schema.moduleNames }}Command } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/delete/delete-{{ toKebabCase schema.moduleNames }}.command';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '@api/graphql';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
-
+{{#if schema.hasTenant}}
+{{ push importsArray
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler
 {
@@ -19,7 +28,10 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
         {{#if schema.properties.hasI18n}}
-        private readonly addI18nConstraintService: AddI18nConstraintService,
+        private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
+        private readonly coreGetContentLanguageObjectService: CoreGetContentLanguageObjectService,
+        private readonly coreGetFallbackLangService: CoreGetFallbackLangService,
+        private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
         {{/if}}
     ) {}
 
@@ -39,7 +51,18 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[] | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto[]>
     {
         {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18nConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18n', contentLanguage, { defineDefaultLanguage: false });
+        if (!contentLanguage) throw new BadRequestException('To delete an multi-language objects, the content-language header must be defined.');
+
+        constraint = await this.coreAddI18nConstraintService.add(
+            constraint,
+            '{{ toCamelCase schema.moduleName }}I18n',
+            contentLanguage,
+            {
+                searchKeyLang        : this.coreGetSearchKeyLangService.get(),
+                defineDefaultLanguage: false,
+            },
+        );
+
         {{/if}}
         const {{ toCamelCase schema.moduleNames }} = await this.queryBus.ask(new Get{{ toPascalCase schema.moduleNames }}Query(
             queryStatement,
@@ -57,6 +80,12 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
                 {{#if schema.hasAuditing}}
                 repositoryOptions: {
                     auditing,
+                },
+                {{/if}}
+                {{#if schema.properties.hasI18n}}
+                meta: {
+                    fallbackLang   : await this.coreGetFallbackLangService.get(),
+                    contentLanguage: await this.coreGetContentLanguageObjectService.get(contentLanguage),
                 },
                 {{/if}}
             },

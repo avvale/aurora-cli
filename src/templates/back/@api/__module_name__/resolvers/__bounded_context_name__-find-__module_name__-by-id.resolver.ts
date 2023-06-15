@@ -1,20 +1,30 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Args' 'Query' 'Resolver') path='@nestjs/graphql')
+            (object items=(array 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-find-' (toKebabCase schema.moduleName) '-by-id.handler'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
+    )
+~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items='ContentLanguage' path=config.auroraCorePackage)
+~}}
+{{/if}}
 {{#if schema.hasOAuth}}
-import { Auth } from '@aurora/decorators';
+{{ push importsArray
+    (object items='Auth' path='@aurora/decorators')
+~}}
 {{/if}}
 {{#if schema.hasTenant}}
-
-// tenant
-import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
+{{ push importsArray
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
+    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-policy.decorator'))
+    (object items='CurrentAccount' path='../../../shared/decorators/current-account.decorator')
+~}}
 {{/if}}
-
-// {{ config.appContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}-by-id.handler';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '@api/graphql';
-
+{{{ importManager (object imports=importsArray) }}}
 @Resolver()
 {{#if schema.hasOAuth}}
 @Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')

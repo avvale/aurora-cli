@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, AddI18nConstraintService, FormatLangCode, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { AuditingMeta, AddI18nConstraintService, CoreSearchKeyLang, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 
 // @app
 import { GetCountriesQuery } from '@app/common/country/application/get/get-countries.query';
@@ -36,7 +36,7 @@ export class CommonUpdateCountriesHandler
             },
         ));
 
-        constraint = await this.addI18nConstraintService.main({}, 'countryI18n', payload.langId, { contentLanguageFormat: FormatLangCode.ID });
+        constraint = await this.addI18nConstraintService.main({}, 'countryI18n', payload.langId, { contentLanguageFormat: CoreSearchKeyLang.ID });
         return await this.queryBus.ask(new GetCountriesQuery(
             queryStatement,
             constraint,

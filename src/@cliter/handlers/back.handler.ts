@@ -56,7 +56,7 @@ export class BackHandler
         await generateAdditionalApiFiles(generateCommandState);
 
         // generate @api i18n files
-        await generateI18nApiFiles(generateCommandState);
+        // await generateI18nApiFiles(generateCommandState);
 
         // create references, write imports in ts files
         addReferences(generateCommandState);

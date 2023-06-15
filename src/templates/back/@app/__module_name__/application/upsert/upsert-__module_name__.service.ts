@@ -1,16 +1,28 @@
-import { ConflictException, Injectable{{#if schema.properties.hasI18n}}, NotFoundException{{/if}} } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { CQMetadata, Utils } from '@aurorajs.dev/core';
-import {
-    {{> importValueObjects }}
-} from '../../domain/value-objects';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18nRepository}}
-import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-{{#if schema.properties.hasI18n}}
-import * as _ from 'lodash';
+{{
+    setVar 'importsArray' (
+        array
+            (object items='Injectable' path='@nestjs/common')
+            (object items='EventPublisher' path='@nestjs/cqrs')
+            (object items=(array 'CQMetadata' 'Utils') path=config.auroraCorePackage)
+            (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.repository'))
+            (object items=schema.aggregateName path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.aggregate'))
+    )
+~}}
+{{#each schema.properties.valueObjects}}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{ push ../importsArray
+    (object items=(sumStrings (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
+~}}
 {{/if}}
-
+{{/each}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items=(array 'ConflictException' 'NotFoundException') path='@nestjs/common')
+    (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
+    (object items='* as _' path='lodash' defaultImport=true)
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class Upsert{{ toPascalCase schema.moduleName }}Service
 {
@@ -33,6 +45,13 @@ export class Upsert{{ toPascalCase schema.moduleName }}Service
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
+        {{#if schema.properties.hasI18n}}
+        const contentLanguage = cQMetadata.meta.contentLanguage;
+
+        // override langId value object with header content-language value
+        payload.langId = new {{ toPascalCase schema.moduleName }}I18nLangId(contentLanguage.id);
+
+        {{/if}}
         // upsert aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
             {{#each schema.properties.aggregate}}
@@ -61,12 +80,19 @@ export class Upsert{{ toPascalCase schema.moduleName }}Service
         try
         {
             // try get object from database
-            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById({{ toCamelCase schema.moduleName }}.id, { constraint: { include: ['{{ toCamelCase schema.moduleName }}I18n']}});
+            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById(
+                {{ toCamelCase schema.moduleName }}.id,
+                {
+                    constraint: {
+                        include: ['{{ toCamelCase schema.moduleName }}I18n'],
+                    },
+                },
+            );
 
-            if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes({{ toCamelCase schema.moduleName }}.langId.value)) throw new ConflictException(`Error to upsert {{ schema.aggregateName }}, the id ${{ bracketOpen }}{{ toCamelCase schema.moduleName }}['id']['value']} already exist in database`);
+            if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes(contentLanguage.id)) throw new ConflictException(`Error to upsert {{ schema.aggregateName }}, the id ${contentLanguage.id} already exist in database`);
 
             // add new lang id to data lang field to upsert field
-            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
+            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [contentLanguage.id]));
             await this.repository.update(
                 {{ toCamelCase schema.moduleName }},
                 {
@@ -79,7 +105,7 @@ export class Upsert{{ toPascalCase schema.moduleName }}Service
         {
             if (error instanceof NotFoundException)
             {
-                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs([{{ toCamelCase schema.moduleName }}.langId.value]);
+                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs([contentLanguage.id]);
                 await this.repository
                     .upsert(
                         {{ toCamelCase schema.moduleName }},
@@ -95,7 +121,7 @@ export class Upsert{{ toPascalCase schema.moduleName }}Service
                 queryStatement: {
                     where: {
                         {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
-                        langId: {{ toCamelCase schema.moduleName }}.langId.value,
+                        langId: contentLanguage.id,
                     },
                 },
             });

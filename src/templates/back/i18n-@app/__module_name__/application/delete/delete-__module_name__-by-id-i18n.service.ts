@@ -27,8 +27,8 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdI18nService
                 where: {
                     langId: {{ toCamelCase schema.moduleName }}.langId.value,
                     {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
-                }
-            }
+                },
+            },
         });
 
         const availableLangs = {{ toCamelCase schema.moduleName }}.availableLangs.value.removeItem({{ toCamelCase schema.moduleName }}.langId.value);

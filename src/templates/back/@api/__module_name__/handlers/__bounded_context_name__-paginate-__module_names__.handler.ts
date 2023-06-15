@@ -1,22 +1,32 @@
-import { Injectable } from '@nestjs/common';
-import { {{#if schema.properties.hasI18n}}AddI18nConstraintService, {{/if}}IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
-{{#if schema.hasTenant}}
-
-// tenant
-import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
+            (object items='Pagination' path='@api/graphql')
+            (object items=(sumStrings 'Paginate' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/paginate/paginate-' (toKebabCase schema.moduleNames) '.query'))
+    )
+~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items=(array 'BadRequestException') path='@nestjs/common')
+    (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
+~}}
 {{/if}}
-
-// {{ config.appContainer }}
-import { Paginate{{ toPascalCase schema.moduleNames }}Query } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/paginate/paginate-{{ toKebabCase schema.moduleNames }}.query';
-import { Pagination } from '@api/graphql';
-
+{{#if schema.hasTenant}}
+{{ push importsArray
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler
 {
     constructor(
         private readonly queryBus: IQueryBus,
         {{#if schema.properties.hasI18n}}
-        private readonly addI18nConstraintService: AddI18nConstraintService,
+        private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
+        private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
         {{/if}}
     ) {}
 
@@ -33,7 +43,17 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
     ): Promise<Pagination>
     {
         {{#if schema.properties.hasI18n}}
-        constraint = await this.addI18nConstraintService.main(constraint, '{{ toCamelCase schema.moduleName }}I18n', contentLanguage);
+        if (!contentLanguage) throw new BadRequestException('To paginate a multi-language objects, the content-language header must be defined.');
+
+        constraint = await this.coreAddI18nConstraintService.add(
+            constraint,
+            '{{ toCamelCase schema.moduleName }}I18n',
+            contentLanguage,
+            {
+                searchKeyLang: this.coreGetSearchKeyLangService.get(),
+            },
+        );
+
         {{/if}}
         return await this.queryBus.ask(new Paginate{{ toPascalCase schema.moduleNames }}Query(
             queryStatement,

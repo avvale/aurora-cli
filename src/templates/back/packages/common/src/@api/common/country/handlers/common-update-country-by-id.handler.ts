@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, AddI18nConstraintService, FormatLangCode, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, AddI18nConstraintService, CoreSearchKeyLang, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
 
 // @app
 import { FindCountryByIdQuery } from '@app/common/country/application/find/find-country-by-id.query';
@@ -52,7 +52,7 @@ export class CommonUpdateCountryByIdHandler
             'countryI18n',
             payload.langId,
             {
-                contentLanguageFormat: FormatLangCode.ID,
+                contentLanguageFormat: CoreSearchKeyLang.ID,
             },
         );
         return await this.queryBus.ask(new FindCountryByIdQuery(

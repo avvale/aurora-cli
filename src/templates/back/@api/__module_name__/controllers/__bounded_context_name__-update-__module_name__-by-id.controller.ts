@@ -1,22 +1,32 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto } from '../dto';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Body' 'Controller' 'Put') path='@nestjs/common')
+            (object items=(array 'ApiOkResponse' 'ApiTags' 'ApiOperation') path='@nestjs/swagger')
+            (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdDto')) path='../dto')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleName) '-by-id.handler'))
+    )
+~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items='ContentLanguage' path=config.auroraCorePackage)
+~}}
+{{/if}}
 {{#if schema.hasOAuth}}
-import { Auth } from '@aurora/decorators';
+{{ push importsArray
+    (object items='Auth' path='@aurora/decorators')
+~}}
 {{/if}}
 {{#if schema.hasTenant}}
-
-// tenant
-import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
+{{ push importsArray
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
+    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-policy.decorator'))
+    (object items='CurrentAccount' path='../../../shared/decorators/current-account.decorator')
+~}}
 {{/if}}
-
-// {{ config.appContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}-by-id.handler';
-
+{{{ importManager (object imports=importsArray) }}}
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/update')
 {{#if schema.hasOAuth}}
@@ -41,6 +51,9 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{/if}}
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
+        {{#if schema.properties.hasI18n}}
+        @ContentLanguage() contentLanguage?: string,
+        {{/if}}
         {{#if schema.hasAuditing}}
         @Auditing() auditing?: AuditingMeta,
         {{/if}}
@@ -53,6 +66,9 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
             {{/if}}
             constraint,
             timezone,
+            {{#if schema.properties.hasI18n}}
+            contentLanguage,
+            {{/if}}
             {{#if schema.hasAuditing}}
             auditing,
             {{/if}}

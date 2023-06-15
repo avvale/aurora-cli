@@ -1,20 +1,30 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '{{ config.auroraCorePackage }}';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Args' 'Mutation' 'Resolver') path='@nestjs/graphql')
+            (object items=(array 'Auditing' 'AuditingMeta' 'Timezone') path=config.auroraCorePackage)
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Handler') path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.handler'))
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdInput')) path='@api/graphql')
+    )
+~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items='ContentLanguage' path=config.auroraCorePackage)
+~}}
+{{/if}}
 {{#if schema.hasOAuth}}
-import { Auth } from '@aurora/decorators';
+{{ push importsArray
+    (object items='Auth' path='@aurora/decorators')
+~}}
 {{/if}}
 {{#if schema.hasTenant}}
-
-// tenant
-import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
-import { TenantPolicy } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-policy.decorator';
-import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
+{{ push importsArray
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
+    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-policy.decorator'))
+    (object items='CurrentAccount' path='../../../shared/decorators/current-account.decorator')
+~}}
 {{/if}}
-
-// {{ config.appContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}, {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput } from '@api/graphql';
-
+{{{ importManager (object imports=importsArray) }}}
 @Resolver()
 {{#if schema.hasOAuth}}
 @Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.upsert')
@@ -35,6 +45,9 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Timezone() timezone?: string,
+        {{#if schema.properties.hasI18n}}
+        @ContentLanguage() contentLanguage?: string,
+        {{/if}}
         {{#if schema.hasAuditing}}
         @Auditing() auditing?: AuditingMeta,
         {{/if}}
@@ -46,6 +59,9 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             account,
             {{/if}}
             timezone,
+            {{#if schema.properties.hasI18n}}
+            contentLanguage,
+            {{/if}}
             {{#if schema.hasAuditing}}
             auditing,
             {{/if}}

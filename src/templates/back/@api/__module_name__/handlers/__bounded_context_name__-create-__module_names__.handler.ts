@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18nConstraintService, {{/if}}ICommandBus } from '{{ config.auroraCorePackage }}';
-
-// {{ config.appContainer }}
-import { Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/application/create/create-{{ toKebabCase schema.moduleNames }}.command';
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input } from '@api/graphql';
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto } from '../dto';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items='Injectable' path='@nestjs/common')
+            (object items=(array 'AuditingMeta' 'ICommandBus') path=config.auroraCorePackage)
+            (object items=(sumStrings 'Create' (toPascalCase schema.moduleNames) 'Command') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/create/create-' (toKebabCase schema.moduleNames) '.command'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Input' ) path='@api/graphql')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Dto' ) path='../dto')
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        {{#if schema.properties.hasI18n}}
-        private readonly addI18nConstraintService: AddI18nConstraintService,
-        {{/if}}
     ) {}
 
     async main(
@@ -27,6 +27,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{/if}}
     ): Promise<boolean>
     {
+        {{#if schema.properties.hasI18n}}
+        // no content-language header is required.
+        {{/if}}
         await this.commandBus.dispatch(new Create{{ toPascalCase schema.moduleNames }}Command(
             payload,
             {
@@ -38,6 +41,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
                 {{/if}}
             },
         ));
+
         return true;
     }
 }

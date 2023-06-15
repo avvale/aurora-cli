@@ -1,17 +1,27 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-{{#if schema.properties.hasI18n}}
-import { ConfigService } from '@nestjs/config';
+{{
+    setVar 'importsArray' (
+        array
+            (object items='Injectable' path='@nestjs/common')
+            (object items='EventPublisher' path='@nestjs/cqrs')
+            (object items='CQMetadata' path=config.auroraCorePackage)
+            (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.repository'))
+            (object items=schema.aggregateName path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.aggregate'))
+            (object items=(sumStrings 'Add' (toPascalCase schema.moduleNames) 'ContextEvent') path=(sumStrings '../events/add-' toKebabCase schema.moduleNames '-context.event'))
+    )
+~}}
+{{#each schema.properties.valueObjects}}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{ push ../importsArray
+    (object items=(sumStrings (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path='../../domain/value-objects' oneRowByItem=true)
+~}}
 {{/if}}
-import { CQMetadata } from '@aurorajs.dev/core';
-import {
-    {{> importValueObjects }}
-} from '../../domain/value-objects';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18nRepository}}
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-import { Add{{ toPascalCase schema.moduleNames }}ContextEvent } from '../events/add-{{ toKebabCase schema.moduleNames }}-context.event';
-
+{{/each}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class Create{{ toPascalCase schema.moduleNames }}Service
 {
@@ -19,9 +29,6 @@ export class Create{{ toPascalCase schema.moduleNames }}Service
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
         {{> declareI18nRepository}}
-        {{#if schema.properties.hasI18n}}
-        private readonly configService: ConfigService,
-        {{/if}}
     ) {}
 
     async main(

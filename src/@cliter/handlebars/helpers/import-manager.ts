@@ -6,15 +6,39 @@ handlebars.registerHelper('importManager', function(
     {
         imports = [],
         sortImports = true,
+        sortImportedClasses = true,
     }: {
         imports: ImportStatement[];
         sortImports?: boolean;
+        sortImportedClasses?: boolean;
     },
     context,
 )
 {
-    const importsGrouped = _.groupBy(imports, 'path');
+    let importsGrouped = _.groupBy<ImportStatement>(imports, 'path') as { [path: string]: ImportStatement[] };
     let response = '';
+
+    if (sortImports)
+    {
+        // sort imports by path
+        const importsGroupedSorted: { [path: string]: ImportStatement[] } = {};
+        const paths = Object.keys(importsGrouped);
+        paths.sort((a, b) =>
+        {
+            const nameA = a.toLowerCase();
+            const nameB = b.toLowerCase();
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+        });
+
+        for (const path of paths)
+        {
+            importsGroupedSorted[path] = importsGrouped[path];
+        }
+
+        importsGrouped = importsGroupedSorted;
+    }
 
     for (const [path, imports] of Object.entries(importsGrouped))
     {
@@ -32,7 +56,7 @@ handlebars.registerHelper('importManager', function(
             else if (!importsItems.includes(items)) importsItems.push(items);
         }
 
-        if (sortImports)
+        if (sortImportedClasses)
         {
             // sort injections by variableName
             importsItems.sort((a, b) =>

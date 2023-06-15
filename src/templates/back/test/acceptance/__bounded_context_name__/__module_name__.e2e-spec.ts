@@ -1,25 +1,41 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
-import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { SequelizeModule } from '@nestjs/sequelize';
-{{#if schema.hasOAuth }}
-import { Auth } from '@aurora/decorators';
-{{/if }}
-import { I{{ toPascalCase schema.moduleName }}Repository } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}.repository';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'INestApplication') path='@nestjs/common')
+            (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
+            (object items=(array 'ConfigModule' 'ConfigService') path='@nestjs/config')
+            (object items=(array 'SequelizeModule') path='@nestjs/sequelize')
+            (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.moduleName) '.repository'))
+            (object items=(sumStrings 'Mock' (toPascalCase schema.moduleName) 'Seeder') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.seeder'))
+            (object items=(toCamelCase schema.moduleNames) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.data'))
+            (object items='GraphQLConfigModule' path='@aurora/graphql/graphql-config.module')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Module') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.boundedContextName)  '.module'))
+            (object items='* as request' path='supertest' defaultImport=true)
+            (object items='* as _' path='lodash' defaultImport=true)
+    )
+~}}
 {{#if schema.properties.hasI18n}}
-import { I{{ toPascalCase schema.moduleName }}I18nRepository } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
-import { AddI18nConstraintService } from '{{ config.auroraCorePackage }}';
+{{ push importsArray
+    (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+    (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/' (toKebabCase schema.moduleName) '-i18n.repository'))
+~}}
 {{/if}}
-import { Mock{{ toPascalCase schema.moduleName }}Seeder } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.seeder';
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
-import { GraphQLConfigModule } from '{{ config.auroraLocalPackage }}/graphql/graphql-config.module';
-import { {{ toPascalCase schema.boundedContextName }}Module } from '{{ config.apiContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.boundedContextName }}.module';
-import * as request from 'supertest';
-import * as _ from 'lodash';
-
+{{#if schema.hasOAuth}}
+{{ push importsArray
+    (object items='Auth' path='@aurora/decorators')
+~}}
+{{/if}}
+{{#if schema.hasTenant}}
+{{ push importsArray
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
+    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-policy.decorator'))
+    (object items='CurrentAccount' path='../../../shared/decorators/current-account.decorator')
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 {{setVar 'language' '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a'}}
@@ -75,16 +91,16 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .useValue({ canActivate: () => true })
             {{/if }}
             {{#if schema.properties.hasI18n}}
-            .overrideProvider(AddI18nConstraintService)
+            .overrideProvider(CoreAddI18nConstraintService)
             .useValue({
-                main: () =>
+                add: () =>
                     ({
                         include: [{
                             association: '{{ toCamelCase schema.moduleName }}I18n',
                             required   : true,
-                            where      : { langId: '{{ language }}' }
-                        }]
-                    })
+                            where      : { langId: '{{ language }}' },
+                        }],
+                    }),
             })
             {{/if }}
             .compile();

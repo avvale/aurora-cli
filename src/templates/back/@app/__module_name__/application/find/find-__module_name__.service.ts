@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '{{ config.auroraCorePackage }}';
-import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.moduleName }}.repository';
-import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.moduleName }}.aggregate';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items='Injectable' path='@nestjs/common')
+            (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
+            (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.repository'))
+            (object items=schema.aggregateName path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.aggregate'))
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class Find{{ toPascalCase schema.moduleName }}Service
 {
@@ -17,10 +21,12 @@ export class Find{{ toPascalCase schema.moduleName }}Service
         cQMetadata?: CQMetadata,
     ): Promise<{{ schema.aggregateName }}>
     {
-        return await this.repository.find({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
+        return await this.repository.find(
+            {
+                queryStatement,
+                constraint,
+                cQMetadata,
+            },
+        );
     }
 }

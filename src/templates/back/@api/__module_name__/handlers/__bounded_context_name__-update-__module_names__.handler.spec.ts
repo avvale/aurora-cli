@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
+            (object items=(array 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
+            (object items=(toCamelCase schema.moduleNames)  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.data'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings './' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.handler'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Input') path='@api/graphql')
+    )
+~}}
 {{#if schema.properties.hasI18n}}
-import { CacheModule, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { ConfigService } from '@nestjs/config';
+{{ push importsArray
+    (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
+    (object items='ConfigService' path='@nestjs/config')
+    (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+    (object items='langs' path=(sumStrings config.appContainer '/common/lang/infrastructure/mock/mock-lang.data'))
+~}}
 {{/if}}
-import { {{#if schema.properties.hasI18n}}AddI18nConstraintService, {{/if}}ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
-
-// custom items
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input } from '@api/graphql';
-
-// sources
-{{#if schema.properties.hasI18n}}
-import { langs } from '{{#eq schema.boundedContextName 'common'}}{{ config.appContainer }}/common/lang/infrastructure/mock/mock-lang.data{{else}}@aurorajs.dev/common{{/eq}}';
-{{/if}}
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
-
+{{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler', () =>
 {
     let handler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler;
@@ -33,7 +35,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Handler,
                 {{#if schema.properties.hasI18n}}
-                AddI18nConstraintService,
+                CoreAddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

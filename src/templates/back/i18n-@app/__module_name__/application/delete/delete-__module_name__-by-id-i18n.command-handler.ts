@@ -15,10 +15,11 @@ export class Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler im
     async execute(command: Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
-        await this.delete{{ toPascalCase schema.moduleName }}ByIdI18nService.main(
-            new {{ toPascalCase schema.moduleName }}Id(command.id),
-            command.constraint,
-            command.cQMetadata
-        );
+        await this.delete{{ toPascalCase schema.moduleName }}ByIdI18nService
+            .main(
+                new {{ toPascalCase schema.moduleName }}Id(command.id),
+                command.constraint,
+                command.cQMetadata,
+            );
     }
 }

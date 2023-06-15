@@ -1,9 +1,9 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'ConflictException' 'Injectable') path='@nestjs/common')
+            (object items='Injectable' path='@nestjs/common')
             (object items='EventPublisher' path='@nestjs/cqrs')
-            (object items='CQMetadata' path='@aurorajs.dev/core')
+            (object items='CQMetadata' path=config.auroraCorePackage)
             (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.repository'))
             (object items=schema.aggregateName path=(sumStrings '../../domain/' toKebabCase schema.moduleName '.aggregate'))
     )
@@ -17,12 +17,9 @@
 {{/each}}
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
-    (object items='NotFoundException' path='@nestjs/common')
+    (object items=(array 'ConflictException' 'NotFoundException') path='@nestjs/common')
     (object items=(sumStrings 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' toKebabCase schema.moduleName '-i18n.repository'))
     (object items='* as _' path='lodash' defaultImport=true)
-    (object items='Cache' path='cache-manager')
-    (object items='CACHE_MANAGER' path='@nestjs/cache-manager')
-    (object items='Inject' path='@nestjs/common')
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
@@ -33,9 +30,6 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         private readonly publisher: EventPublisher,
         private readonly repository: I{{ toPascalCase schema.moduleName }}Repository,
         {{> declareI18nRepository}}
-        {{#if schema.properties.hasI18n}}
-        @Inject(CACHE_MANAGER) private cacheManager: Cache,
-        {{/if}}
     ) {}
 
     async main(
@@ -49,6 +43,14 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
+        {{#if schema.properties.hasI18n}}
+        const fallbackLang = cQMetadata.meta.fallbackLang;
+        const contentLanguage = cQMetadata.meta.contentLanguage;
+
+        // override langId value object with header content-language value
+        payload.langId = new {{ toPascalCase schema.moduleName }}I18nLangId(contentLanguage.id);
+
+        {{/if}}
         // create aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
             {{#each schema.properties.aggregate}}
@@ -86,7 +88,7 @@ export class Create{{ toPascalCase schema.moduleName }}Service
                             {
                                 association: '{{ toCamelCase schema.moduleName }}I18n',
                                 where      : {
-                                    langId: (await this.cacheManager.get<{ id: string; }>('common/fallback-lang')).id,
+                                    langId: fallbackLang.id,
                                 },
                             },
                         ],
@@ -96,10 +98,10 @@ export class Create{{ toPascalCase schema.moduleName }}Service
             );
 
             // eslint-disable-next-line max-len
-            if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes({{ toCamelCase schema.moduleName }}.langId.value)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${{ bracketOpen }}{{ toCamelCase schema.moduleName }}['id']['value']} already exist in database`);
+            if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes(contentLanguage.id)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${contentLanguage.id} already exist in database`);
 
-            // add new language id to data lang field to create or update field
-            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [{{ toCamelCase schema.moduleName }}.langId.value]));
+            // add available lang when create country
+            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [contentLanguage.id]));
 
             await this.repository
                 .update(
@@ -119,8 +121,14 @@ export class Create{{ toPascalCase schema.moduleName }}Service
         {
             if (error instanceof NotFoundException)
             {
-                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs([{{ toCamelCase schema.moduleName }}.langId.value]);
-                await this.repository.create({{ toCamelCase schema.moduleName }}, { createOptions: cQMetadata?.repositoryOptions });
+                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.moduleName }}AvailableLangs([contentLanguage.id]);
+                await this.repository
+                    .create(
+                        {{ toCamelCase schema.moduleName }},
+                        {
+                            createOptions: cQMetadata?.repositoryOptions,
+                        },
+                    );
             }
         }
 

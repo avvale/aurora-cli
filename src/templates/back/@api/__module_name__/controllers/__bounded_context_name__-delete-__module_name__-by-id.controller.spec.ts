@@ -1,20 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdController')  path=(sumStrings './' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.controller'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdHandler')  path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.handler'))
+            (object items=(toCamelCase schema.moduleNames)  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.data'))
+    )
+~}}
 {{#if schema.properties.hasI18n}}
-import { CacheModule } from '@nestjs/cache-manager';
-import { ConfigService } from '@nestjs/config';
+{{ push importsArray
+    (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
+    (object items='ConfigService' path='@nestjs/config')
+    (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+    (object items='langs' path=(sumStrings config.appContainer '/common/lang/infrastructure/mock/mock-lang.data'))
+~}}
 {{/if}}
-
-// custom items
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.controller';
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.handler';
-
-// sources
-{{#if schema.properties.hasI18n}}
-import { langs } from '{{#eq schema.boundedContextName 'common'}}{{ config.appContainer }}/common/lang/infrastructure/mock/mock-lang.data{{else}}@aurorajs.dev/common{{/eq}}';
-{{/if}}
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
-
+{{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController', () =>
 {
     let controller: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController;
@@ -33,7 +35,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
             ],
             providers: [
                 {{#if schema.properties.hasI18n}}
-                AddI18nConstraintService,
+                CoreAddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

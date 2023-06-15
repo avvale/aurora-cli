@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18nConstraintService, FormatLangCode, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18nConstraintService, CoreSearchKeyLang, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasTenant}}
 
 // tenant
