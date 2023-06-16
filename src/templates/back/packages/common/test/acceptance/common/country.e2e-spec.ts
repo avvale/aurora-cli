@@ -1,20 +1,20 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { CommonModule } from '@api/common/common.module';
+import { CommonICountryI18nRepository } from '@app/common/country/domain/common-country-i18n.repository';
+import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
+import { commonCountries } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { CommonMockCountrySeeder } from '@app/common/country/infrastructure/mock/common-mock-country.seeder';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { CoreAddI18nConstraintService } from '@aurorajs.dev/core';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { ICountryRepository } from '@app/common/country/domain/country.repository';
-import { ICountryI18nRepository } from '@app/common/country/domain/country-i18n.repository';
-import { AddI18nConstraintService } from '@aurorajs.dev/core';
-import { MockCountrySeeder } from '@app/common/country/infrastructure/mock/mock-country.seeder';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { CommonModule } from '@api/common/common.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -22,9 +22,9 @@ const importForeignModules = [];
 describe('country', () =>
 {
     let app: INestApplication;
-    let countryRepository: ICountryRepository;
-    let repositoryI18n: ICountryI18nRepository;
-    let countrySeeder: MockCountrySeeder;
+    let countryRepository: CommonICountryRepository;
+    let repositoryI18n: CommonICountryI18nRepository;
+    let countrySeeder: CommonMockCountrySeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -61,29 +61,29 @@ describe('country', () =>
                 }),
             ],
             providers: [
-                MockCountrySeeder,
+                CommonMockCountrySeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
-            .overrideProvider(AddI18nConstraintService)
+            .overrideProvider(CoreAddI18nConstraintService)
             .useValue({
-                main: () =>
+                add: () =>
                     ({
                         include: [{
                             association: 'countryI18n',
                             required   : true,
-                            where      : { langId: '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a' }
-                        }]
-                    })
+                            where      : { langId: '4470b5ab-9d57-4c9d-a68f-5bf8e32f543a' },
+                        }],
+                    }),
             })
             .compile();
 
-        mockData = countries;
+        mockData = commonCountries;
         app = module.createNestApplication();
-        countryRepository = module.get<ICountryRepository>(ICountryRepository);
-        repositoryI18n  = module.get<ICountryI18nRepository>(ICountryI18nRepository);
-        countrySeeder = module.get<MockCountrySeeder>(MockCountrySeeder);
+        countryRepository = module.get<CommonICountryRepository>(CommonICountryRepository);
+        repositoryI18n  = module.get<CommonICountryI18nRepository>(CommonICountryI18nRepository);
+        countrySeeder = module.get<CommonMockCountrySeeder>(CommonMockCountrySeeder);
 
         // seed mock data in memory database
         await countryRepository.insert(countrySeeder.collectionSource.filter((item, index, self) => index === self.findIndex(t => t.id.value === item.id.value)));
@@ -609,7 +609,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 960.979929680423,
+                latitude: 536.3776876272565,
             })
             .expect(400)
             .then(res =>
@@ -624,7 +624,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 6166.322409567473,
+                longitude: 5572.888710982445,
             })
             .expect(400)
             .then(res =>
@@ -639,7 +639,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 8.509714891886825,
+                latitude: 3.282542596900878,
             })
             .expect(400)
             .then(res =>
@@ -654,7 +654,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 53.67558976620473,
+                longitude: 67.6443597968255,
             })
             .expect(400)
             .then(res =>

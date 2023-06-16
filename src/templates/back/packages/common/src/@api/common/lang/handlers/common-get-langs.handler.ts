@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetLangsQuery } from '@app/common/lang/application/get/get-langs.query';
-import { CommonLang } from '@api/graphql';
 import { CommonLangDto } from '../dto';
+import { CommonLang } from '@api/graphql';
+import { CommonGetLangsQuery } from '@app/common/lang';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonGetLangsHandler
@@ -19,7 +17,7 @@ export class CommonGetLangsHandler
         timezone?: string,
     ): Promise<CommonLang[] | CommonLangDto[]>
     {
-        return await this.queryBus.ask(new GetLangsQuery(
+        return await this.queryBus.ask(new CommonGetLangsQuery(
             queryStatement,
             constraint,
             {

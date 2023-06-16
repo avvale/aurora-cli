@@ -1,17 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { AddI18nConstraintService, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindCountryQuery } from '@app/common/country/application/find/find-country.query';
-import { CommonCountry } from '@api/graphql';
 import { CommonCountryDto } from '../dto';
+import { CommonCountry } from '@api/graphql';
+import { CommonFindCountryQuery } from '@app/common/country';
+import { CoreAddI18nConstraintService, CoreGetSearchKeyLangService, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonFindCountryHandler
 {
     constructor(
         private readonly queryBus: IQueryBus,
-        private readonly addI18nConstraintService: AddI18nConstraintService,
+        private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
+        private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
     ) {}
 
     async main(
@@ -21,12 +20,18 @@ export class CommonFindCountryHandler
         contentLanguage?: string,
     ): Promise<CommonCountry | CommonCountryDto>
     {
-        constraint = await this.addI18nConstraintService.main(
+        if (!contentLanguage) throw new BadRequestException('To find a multi-language object, the content-language header must be defined.');
+
+        constraint = await this.coreAddI18nConstraintService.add(
             constraint,
             'countryI18n',
             contentLanguage,
+            {
+                searchKeyLang: this.coreGetSearchKeyLangService.get(),
+            },
         );
-        return await this.queryBus.ask(new FindCountryQuery(
+
+        return await this.queryBus.ask(new CommonFindCountryQuery(
             queryStatement,
             constraint,
             {

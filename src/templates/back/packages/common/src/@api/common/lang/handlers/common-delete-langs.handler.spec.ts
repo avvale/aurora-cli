@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
 import { CommonDeleteLangsHandler } from './common-delete-langs.handler';
-
-// sources
 import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonDeleteLangsHandler', () =>
 {

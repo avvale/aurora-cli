@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateLangsCommand } from '@app/common/lang/application/create/create-langs.command';
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CommonCreateLangsCommand } from '@app/common/lang';
+import { commonLangs } from '@app/common/lang';
 
 @Injectable()
 export class CommonLangSeeder
@@ -15,8 +15,8 @@ export class CommonLangSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateLangsCommand(
-            langs,
+        await this.commandBus.dispatch(new CommonCreateLangsCommand(
+            commonLangs,
             {
                 timezone: process.env.TZ ,
             },

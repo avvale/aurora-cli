@@ -1,11 +1,8 @@
+import { CommonCreateLangDto, CommonLangDto } from '../dto';
+import { CommonCreateLangInput, CommonLang } from '@api/graphql';
+import { CommonCreateLangCommand, CommonFindLangByIdQuery } from '@app/common/lang';
+import { AuditingMeta, CoreGetLangsService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindLangByIdQuery } from '@app/common/lang/application/find/find-lang-by-id.query';
-import { CreateLangCommand } from '@app/common/lang/application/create/create-lang.command';
-import { CommonLang, CommonCreateLangInput } from '@api/graphql';
-import { CommonLangDto, CommonCreateLangDto } from '../dto';
 
 @Injectable()
 export class CommonCreateLangHandler
@@ -13,6 +10,7 @@ export class CommonCreateLangHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        private readonly coreGetLangsService: CoreGetLangsService,
     ) {}
 
     async main(
@@ -21,7 +19,7 @@ export class CommonCreateLangHandler
         auditing?: AuditingMeta,
     ): Promise<CommonLang | CommonLangDto>
     {
-        await this.commandBus.dispatch(new CreateLangCommand(
+        await this.commandBus.dispatch(new CommonCreateLangCommand(
             payload,
             {
                 timezone,
@@ -31,7 +29,10 @@ export class CommonCreateLangHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindLangByIdQuery(
+        // init cache langs to update langs
+        await this.coreGetLangsService.init();
+
+        return await this.queryBus.ask(new CommonFindLangByIdQuery(
             payload.id,
             {},
             {

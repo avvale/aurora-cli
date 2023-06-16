@@ -1,15 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { CacheModule } from '@nestjs/cache-manager';
-import { ConfigService } from '@nestjs/config';
-
-// custom items
-import { CommonDeleteCountryByIdController } from './common-delete-country-by-id.controller';
 import { CommonDeleteCountryByIdHandler } from '../handlers/common-delete-country-by-id.handler';
-
-// sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { CommonDeleteCountryByIdController } from './common-delete-country-by-id.controller';
 import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CoreAddI18nConstraintService } from '@aurorajs.dev/core';
+import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
+import { ConfigService } from '@nestjs/config';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonDeleteCountryByIdController', () =>
 {
@@ -26,7 +23,7 @@ describe('CommonDeleteCountryByIdController', () =>
                 CommonDeleteCountryByIdController,
             ],
             providers: [
-                AddI18nConstraintService,
+                CoreAddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

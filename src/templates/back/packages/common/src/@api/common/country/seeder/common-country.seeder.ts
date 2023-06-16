@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateCountriesCommand } from '@app/common/country/application/create/create-countries.command';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { CommonCreateCountriesCommand } from '@app/common/country';
+import { commonCountries } from '@app/common/country';
 
 @Injectable()
 export class CommonCountrySeeder
@@ -15,8 +15,8 @@ export class CommonCountrySeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateCountriesCommand(
-            countries,
+        await this.commandBus.dispatch(new CommonCreateCountriesCommand(
+            commonCountries,
             {
                 timezone: process.env.TZ ,
             },

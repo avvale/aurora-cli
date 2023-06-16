@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, AddI18nConstraintService, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindCountryByIdQuery } from '@app/common/country/application/find/find-country-by-id.query';
-import { DeleteCountryByIdCommand } from '@app/common/country/application/delete/delete-country-by-id.command';
-import { CommonCountry } from '@api/graphql';
 import { CommonCountryDto } from '../dto';
+import { CommonCountry } from '@api/graphql';
+import { CommonDeleteCountryByIdCommand, CommonFindCountryByIdQuery } from '@app/common/country';
+import { AuditingMeta, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetSearchKeyLangService, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonDeleteCountryByIdHandler
@@ -13,7 +10,10 @@ export class CommonDeleteCountryByIdHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly addI18nConstraintService: AddI18nConstraintService,
+        private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
+        private readonly coreGetContentLanguageObjectService: CoreGetContentLanguageObjectService,
+        private readonly coreGetFallbackLangService: CoreGetFallbackLangService,
+        private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
     ) {}
 
     async main(
@@ -24,8 +24,18 @@ export class CommonDeleteCountryByIdHandler
         auditing?: AuditingMeta,
     ): Promise<CommonCountry | CommonCountryDto>
     {
-        constraint = await this.addI18nConstraintService.main(constraint, 'countryI18n', contentLanguage);
-        const country = await this.queryBus.ask(new FindCountryByIdQuery(
+        if (!contentLanguage) throw new BadRequestException('To delete a multi-language object, the content-language header must be defined.');
+
+        constraint = await this.coreAddI18nConstraintService.add(
+            constraint,
+            'countryI18n',
+            contentLanguage,
+            {
+                searchKeyLang: this.coreGetSearchKeyLangService.get(),
+            },
+        );
+
+        const country = await this.queryBus.ask(new CommonFindCountryByIdQuery(
             id,
             constraint,
             {
@@ -33,13 +43,17 @@ export class CommonDeleteCountryByIdHandler
             },
         ));
 
-        await this.commandBus.dispatch(new DeleteCountryByIdCommand(
+        await this.commandBus.dispatch(new CommonDeleteCountryByIdCommand(
             id,
             constraint,
             {
                 timezone,
                 repositoryOptions: {
                     auditing,
+                },
+                meta: {
+                    fallbackLang   : await this.coreGetFallbackLangService.get(),
+                    contentLanguage: await this.coreGetContentLanguageObjectService.get(contentLanguage),
                 },
             },
         ));

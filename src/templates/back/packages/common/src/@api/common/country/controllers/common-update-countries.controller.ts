@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { CommonCountryDto, CommonUpdateCountriesDto } from '../dto';
-import { Auth } from '@aurora/decorators';
-
-// @app
 import { CommonUpdateCountriesHandler } from '../handlers/common-update-countries.handler';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Put } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] country')
 @Controller('common/countries/update')
@@ -25,6 +23,7 @@ export class CommonUpdateCountriesController
         @Body('query') queryStatement?: QueryStatement,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
+        @ContentLanguage() contentLanguage?: string,
         @Auditing() auditing?: AuditingMeta,
     )
     {
@@ -33,6 +32,7 @@ export class CommonUpdateCountriesController
             queryStatement,
             constraint,
             timezone,
+            contentLanguage,
             auditing,
         );
     }

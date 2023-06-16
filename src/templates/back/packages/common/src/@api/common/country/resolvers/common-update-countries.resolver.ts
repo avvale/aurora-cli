@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
 import { CommonUpdateCountriesHandler } from '../handlers/common-update-countries.handler';
 import { CommonCountry, CommonUpdateCountriesInput } from '@api/graphql';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.country.update')
@@ -20,6 +18,7 @@ export class CommonUpdateCountriesResolver
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
+        @ContentLanguage() contentLanguage?: string,
         @Auditing() auditing?: AuditingMeta,
     ): Promise<CommonCountry>
     {
@@ -28,6 +27,7 @@ export class CommonUpdateCountriesResolver
             queryStatement,
             constraint,
             timezone,
+            contentLanguage,
             auditing,
         );
     }

@@ -1,95 +1,118 @@
 // commands
-import { CreateCountryCommandHandler } from './application/create/create-country.command-handler';
-import { CreateCountriesCommandHandler } from './application/create/create-countries.command-handler';
-import { UpdateCountryByIdCommandHandler } from './application/update/update-country-by-id.command-handler';
-import { UpdateCountriesCommandHandler } from './application/update/update-countries.command-handler';
-import { UpsertCountryCommandHandler } from './application/upsert/upsert-country.command-handler';
-import { DeleteCountryByIdCommandHandler } from './application/delete/delete-country-by-id.command-handler';
-import { DeleteCountryByIdI18nCommandHandler } from './application/delete/delete-country-by-id-i18n.command-handler';
-import { DeleteCountriesCommandHandler } from './application/delete/delete-countries.command-handler';
+export { CommonCreateCountryCommand } from './application/create/common-create-country.command';
+export { CommonCreateCountriesCommand } from './application/create/common-create-countries.command';
+export { CommonUpdateCountryByIdCommand } from './application/update/common-update-country-by-id.command';
+export { CommonUpdateCountriesCommand } from './application/update/common-update-countries.command';
+export { CommonUpsertCountryCommand } from './application/upsert/common-upsert-country.command';
+export { CommonDeleteCountryByIdCommand } from './application/delete/common-delete-country-by-id.command';
+export { CommonDeleteCountryByIdI18nCommand } from './application/delete/common-delete-country-by-id-i18n.command';
+export { CommonDeleteCountriesCommand } from './application/delete/common-delete-countries.command';
 
 // queries
-import { PaginateCountriesQueryHandler } from './application/paginate/paginate-countries.query-handler';
-import { GetCountriesQueryHandler } from './application/get/get-countries.query-handler';
-import { FindCountryQueryHandler } from './application/find/find-country.query-handler';
-import { FindCountryByIdQueryHandler } from './application/find/find-country-by-id.query-handler';
-import { RawSQLCountriesQueryHandler } from './application/raw-sql/raw-sql-countries.query-handler';
+export { CommonPaginateCountriesQuery } from './application/paginate/common-paginate-countries.query';
+export { CommonGetCountriesQuery } from './application/get/common-get-countries.query';
+export { CommonFindCountryQuery } from './application/find/common-find-country.query';
+export { CommonFindCountryByIdQuery } from './application/find/common-find-country-by-id.query';
+export { CommonRawSQLCountriesQuery } from './application/raw-sql/common-raw-sql-countries.query';
 
-// events
-import { CreatedCountryEventHandler } from './application/events/created-country.event-handler';
-import { CreatedCountriesEventHandler } from './application/events/created-countries.event-handler';
-import { UpdatedCountryEventHandler } from './application/events/updated-country.event-handler';
-import { UpdatedCountriesEventHandler } from './application/events/updated-countries.event-handler';
-import { DeletedCountryEventHandler } from './application/events/deleted-country.event-handler';
-import { DeletedCountriesEventHandler } from './application/events/deleted-countries.event-handler';
+// mocks
+export { commonCountries } from './infrastructure/mock/common-mock-country.data';
 
-// services
-import { CreateCountryService } from './application/create/create-country.service';
-import { CreateCountriesService } from './application/create/create-countries.service';
-import { PaginateCountriesService } from './application/paginate/paginate-countries.service';
-import { GetCountriesService } from './application/get/get-countries.service';
-import { FindCountryService } from './application/find/find-country.service';
-import { FindCountryByIdService } from './application/find/find-country-by-id.service';
-import { RawSQLCountriesService } from './application/raw-sql/raw-sql-countries.service';
-import { UpdateCountryByIdService } from './application/update/update-country-by-id.service';
-import { UpdateCountriesService } from './application/update/update-countries.service';
-import { UpsertCountryService } from './application/upsert/upsert-country.service';
-import { DeleteCountryByIdService } from './application/delete/delete-country-by-id.service';
-import { DeleteCountryByIdI18nService } from './application/delete/delete-country-by-id-i18n.service';
-import { DeleteCountriesService } from './application/delete/delete-countries.service';
+// domain
+export { CommonCountry } from './domain/common-country.aggregate';
+export { CommonCountryMapper } from './domain/common-country.mapper';
+export { CommonICountryRepository } from './domain/common-country.repository';
+export { CommonCountryResponse } from './domain/common-country.response';
+export { CommonICountryI18nRepository } from './domain/common-country-i18n.repository';
 
-// models
-export { CommonCountryModel } from './infrastructure/sequelize/sequelize-country.model';
-export { CommonCountryI18nModel } from './infrastructure/sequelize/sequelize-country-i18n.model';
-
-// repository
-export { ICountryRepository } from './domain/country.repository';
-export { SequelizeCountryRepository } from './infrastructure/sequelize/sequelize-country.repository';
-export { ICountryI18nRepository } from './domain/country-i18n.repository';
-export { SequelizeCountryI18nRepository } from './infrastructure/sequelize/sequelize-country-i18n.repository';
+// infrastructure
+export { CommonCountryModel } from './infrastructure/sequelize/common-sequelize-country.model';
+export { CommonCountryI18nModel } from './infrastructure/sequelize/common-sequelize-country-i18n.model';
+export { CommonSequelizeCountryRepository } from './infrastructure/sequelize/common-sequelize-country.repository';
+export { CommonSequelizeCountryI18nRepository } from './infrastructure/sequelize/common-sequelize-country-i18n.repository';
 
 // sagas
-export { CountrySagas } from './application/sagas/country.sagas';
+export { CommonCountrySagas } from './application/sagas/common-country.sagas';
+
+// command handlers
+import { CommonCreateCountryCommandHandler } from './application/create/common-create-country.command-handler';
+import { CommonCreateCountriesCommandHandler } from './application/create/common-create-countries.command-handler';
+import { CommonUpdateCountryByIdCommandHandler } from './application/update/common-update-country-by-id.command-handler';
+import { CommonUpdateCountriesCommandHandler } from './application/update/common-update-countries.command-handler';
+import { CommonUpsertCountryCommandHandler } from './application/upsert/common-upsert-country.command-handler';
+import { CommonDeleteCountryByIdCommandHandler } from './application/delete/common-delete-country-by-id.command-handler';
+import { CommonDeleteCountryByIdI18nCommandHandler } from './application/delete/common-delete-country-by-id-i18n.command-handler';
+import { CommonDeleteCountriesCommandHandler } from './application/delete/common-delete-countries.command-handler';
+
+// query handlers
+import { CommonPaginateCountriesQueryHandler } from './application/paginate/common-paginate-countries.query-handler';
+import { CommonGetCountriesQueryHandler } from './application/get/common-get-countries.query-handler';
+import { CommonFindCountryQueryHandler } from './application/find/common-find-country.query-handler';
+import { CommonFindCountryByIdQueryHandler } from './application/find/common-find-country-by-id.query-handler';
+import { CommonRawSQLCountriesQueryHandler } from './application/raw-sql/common-raw-sql-countries.query-handler';
+
+// event handlers
+import { CommonCreatedCountryEventHandler } from './application/events/common-created-country.event-handler';
+import { CommonCreatedCountriesEventHandler } from './application/events/common-created-countries.event-handler';
+import { CommonUpdatedCountryEventHandler } from './application/events/common-updated-country.event-handler';
+import { CommonUpdatedCountriesEventHandler } from './application/events/common-updated-countries.event-handler';
+import { CommonDeletedCountryEventHandler } from './application/events/common-deleted-country.event-handler';
+import { CommonDeletedCountriesEventHandler } from './application/events/common-deleted-countries.event-handler';
+
+// services
+import { CommonCreateCountryService } from './application/create/common-create-country.service';
+import { CommonCreateCountriesService } from './application/create/common-create-countries.service';
+import { CommonPaginateCountriesService } from './application/paginate/common-paginate-countries.service';
+import { CommonGetCountriesService } from './application/get/common-get-countries.service';
+import { CommonFindCountryService } from './application/find/common-find-country.service';
+import { CommonFindCountryByIdService } from './application/find/common-find-country-by-id.service';
+import { CommonRawSQLCountriesService } from './application/raw-sql/common-raw-sql-countries.service';
+import { CommonUpdateCountryByIdService } from './application/update/common-update-country-by-id.service';
+import { CommonUpdateCountriesService } from './application/update/common-update-countries.service';
+import { CommonUpsertCountryService } from './application/upsert/common-upsert-country.service';
+import { CommonDeleteCountryByIdService } from './application/delete/common-delete-country-by-id.service';
+import { CommonDeleteCountryByIdI18nService } from './application/delete/common-delete-country-by-id-i18n.service';
+import { CommonDeleteCountriesService } from './application/delete/common-delete-countries.service';
 
 export const CommonCountryHandlers = [
     // commands
-    CreateCountryCommandHandler,
-    CreateCountriesCommandHandler,
-    UpdateCountryByIdCommandHandler,
-    UpdateCountriesCommandHandler,
-    UpsertCountryCommandHandler,
-    DeleteCountryByIdCommandHandler,
-    DeleteCountryByIdI18nCommandHandler,
-    DeleteCountriesCommandHandler,
+    CommonCreateCountryCommandHandler,
+    CommonCreateCountriesCommandHandler,
+    CommonUpdateCountryByIdCommandHandler,
+    CommonUpdateCountriesCommandHandler,
+    CommonUpsertCountryCommandHandler,
+    CommonDeleteCountryByIdCommandHandler,
+    CommonDeleteCountryByIdI18nCommandHandler,
+    CommonDeleteCountriesCommandHandler,
 
     // queries
-    PaginateCountriesQueryHandler,
-    GetCountriesQueryHandler,
-    FindCountryQueryHandler,
-    FindCountryByIdQueryHandler,
-    RawSQLCountriesQueryHandler,
+    CommonPaginateCountriesQueryHandler,
+    CommonGetCountriesQueryHandler,
+    CommonFindCountryQueryHandler,
+    CommonFindCountryByIdQueryHandler,
+    CommonRawSQLCountriesQueryHandler,
 
     // events
-    CreatedCountryEventHandler,
-    CreatedCountriesEventHandler,
-    UpdatedCountryEventHandler,
-    UpdatedCountriesEventHandler,
-    DeletedCountryEventHandler,
-    DeletedCountriesEventHandler,
+    CommonCreatedCountryEventHandler,
+    CommonCreatedCountriesEventHandler,
+    CommonUpdatedCountryEventHandler,
+    CommonUpdatedCountriesEventHandler,
+    CommonDeletedCountryEventHandler,
+    CommonDeletedCountriesEventHandler,
 ];
 
 export const CommonCountryServices = [
-    CreateCountryService,
-    CreateCountriesService,
-    PaginateCountriesService,
-    GetCountriesService,
-    FindCountryService,
-    FindCountryByIdService,
-    RawSQLCountriesService,
-    UpdateCountryByIdService,
-    UpdateCountriesService,
-    UpsertCountryService,
-    DeleteCountryByIdService,
-    DeleteCountryByIdI18nService,
-    DeleteCountriesService,
+    CommonCreateCountryService,
+    CommonCreateCountriesService,
+    CommonPaginateCountriesService,
+    CommonGetCountriesService,
+    CommonFindCountryService,
+    CommonFindCountryByIdService,
+    CommonRawSQLCountriesService,
+    CommonUpdateCountryByIdService,
+    CommonUpdateCountriesService,
+    CommonUpsertCountryService,
+    CommonDeleteCountryByIdService,
+    CommonDeleteCountryByIdI18nService,
+    CommonDeleteCountriesService,
 ];

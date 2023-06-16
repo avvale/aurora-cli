@@ -1,16 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { CacheModule, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { ConfigService } from '@nestjs/config';
-import { AddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
 import { CommonUpdateCountriesHandler } from './common-update-countries.handler';
 import { CommonUpdateCountriesInput } from '@api/graphql';
-
-// sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CoreAddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
+import { ConfigService } from '@nestjs/config';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateCountriesHandler', () =>
 {
@@ -26,7 +22,7 @@ describe('CommonUpdateCountriesHandler', () =>
             ],
             providers: [
                 CommonUpdateCountriesHandler,
-                AddI18nConstraintService,
+                CoreAddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

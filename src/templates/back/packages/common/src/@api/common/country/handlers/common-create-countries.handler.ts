@@ -1,17 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, AddI18nConstraintService, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateCountriesCommand } from '@app/common/country/application/create/create-countries.command';
-import { CommonCreateCountryInput } from '@api/graphql';
 import { CommonCreateCountryDto } from '../dto';
+import { CommonCreateCountryInput } from '@api/graphql';
+import { CommonCreateCountriesCommand } from '@app/common/country';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonCreateCountriesHandler
 {
     constructor(
         private readonly commandBus: ICommandBus,
-        private readonly addI18nConstraintService: AddI18nConstraintService,
     ) {}
 
     async main(
@@ -20,7 +17,8 @@ export class CommonCreateCountriesHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateCountriesCommand(
+        // no content-language header is required.
+        await this.commandBus.dispatch(new CommonCreateCountriesCommand(
             payload,
             {
                 timezone,
@@ -29,6 +27,7 @@ export class CommonCreateCountriesHandler
                 },
             },
         ));
+
         return true;
     }
 }

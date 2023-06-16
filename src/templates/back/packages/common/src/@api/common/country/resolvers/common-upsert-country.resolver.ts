@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
 import { CommonUpsertCountryHandler } from '../handlers/common-upsert-country.handler';
 import { CommonCountry, CommonUpdateCountryByIdInput } from '@api/graphql';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, ContentLanguage, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.country.upsert')
@@ -18,12 +16,14 @@ export class CommonUpsertCountryResolver
     async main(
         @Args('payload') payload: CommonUpdateCountryByIdInput,
         @Timezone() timezone?: string,
+        @ContentLanguage() contentLanguage?: string,
         @Auditing() auditing?: AuditingMeta,
     ): Promise<CommonCountry>
     {
         return await this.handler.main(
             payload,
             timezone,
+            contentLanguage,
             auditing,
         );
     }

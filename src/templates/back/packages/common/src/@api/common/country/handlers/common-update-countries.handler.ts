@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, AddI18nConstraintService, CoreSearchKeyLang, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetCountriesQuery } from '@app/common/country/application/get/get-countries.query';
-import { UpdateCountriesCommand } from '@app/common/country/application/update/update-countries.command';
-import { CommonCountry, CommonUpdateCountriesInput } from '@api/graphql';
 import { CommonCountryDto, CommonUpdateCountriesDto } from '../dto';
+import { CommonCountry, CommonUpdateCountriesInput } from '@api/graphql';
+import { CommonGetCountriesQuery, CommonUpdateCountriesCommand } from '@app/common/country';
+import { AuditingMeta, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetSearchKeyLangService, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonUpdateCountriesHandler
@@ -13,7 +10,9 @@ export class CommonUpdateCountriesHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly addI18nConstraintService: AddI18nConstraintService,
+        private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
+        private readonly coreGetContentLanguageObjectService: CoreGetContentLanguageObjectService,
+        private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
     ) {}
 
     async main(
@@ -21,10 +20,13 @@ export class CommonUpdateCountriesHandler
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
+        contentLanguage?: string,
         auditing?: AuditingMeta,
     ): Promise<CommonCountry | CommonCountryDto>
     {
-        await this.commandBus.dispatch(new UpdateCountriesCommand(
+        if (!contentLanguage) throw new BadRequestException('To update a multi-language objects, the content-language header must be defined.');
+
+        await this.commandBus.dispatch(new CommonUpdateCountriesCommand(
             payload,
             queryStatement,
             constraint,
@@ -33,11 +35,22 @@ export class CommonUpdateCountriesHandler
                 repositoryOptions: {
                     auditing,
                 },
+                meta: {
+                    contentLanguage: await this.coreGetContentLanguageObjectService.get(contentLanguage),
+                },
             },
         ));
 
-        constraint = await this.addI18nConstraintService.main({}, 'countryI18n', payload.langId, { contentLanguageFormat: CoreSearchKeyLang.ID });
-        return await this.queryBus.ask(new GetCountriesQuery(
+        constraint = await this.coreAddI18nConstraintService.add(
+            {},
+            'countryI18n',
+            contentLanguage,
+            {
+                searchKeyLang: this.coreGetSearchKeyLangService.get(),
+            },
+        );
+
+        return await this.queryBus.ask(new CommonGetCountriesQuery(
             queryStatement,
             constraint,
             {

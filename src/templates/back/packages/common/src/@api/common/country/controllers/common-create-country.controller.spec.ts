@@ -7,7 +7,7 @@ import { CommonCreateCountryController } from './common-create-country.controlle
 import { CommonCreateCountryHandler } from '../handlers/common-create-country.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
 
 describe('CommonCreateCountryController', () =>

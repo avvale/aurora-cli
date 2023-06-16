@@ -8,7 +8,7 @@ import { CommonUpdateCountriesHandler } from '../handlers/common-update-countrie
 import { CommonUpdateCountriesInput } from '@api/graphql';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
 
 describe('CommonUpdateCountriesResolver', () =>

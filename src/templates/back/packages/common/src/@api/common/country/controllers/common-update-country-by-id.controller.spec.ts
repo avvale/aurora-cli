@@ -7,7 +7,7 @@ import { CommonUpdateCountryByIdController } from './common-update-country-by-id
 import { CommonUpdateCountryByIdHandler } from '../handlers/common-update-country-by-id.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
 import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
 
 describe('CommonUpdateCountryByIdController', () =>

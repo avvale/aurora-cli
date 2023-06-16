@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { CacheModule, CACHE_MANAGER } from '@nestjs/cache-manager';
-import { ConfigService } from '@nestjs/config';
-import { AddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
 import { CommonFindCountryByIdHandler } from './common-find-country-by-id.handler';
-
-// sources
-import { langs } from '@app/common/lang/infrastructure/seeds/lang.seed';
 import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CoreAddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
+import { ConfigService } from '@nestjs/config';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonFindCountryByIdHandler', () =>
 {
@@ -25,7 +21,7 @@ describe('CommonFindCountryByIdHandler', () =>
             ],
             providers: [
                 CommonFindCountryByIdHandler,
-                AddI18nConstraintService,
+                CoreAddI18nConstraintService,
                 {
                     provide : ConfigService,
                     useValue: {

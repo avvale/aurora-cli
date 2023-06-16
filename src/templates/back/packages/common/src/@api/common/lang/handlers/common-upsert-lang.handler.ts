@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindLangByIdQuery } from '@app/common/lang/application/find/find-lang-by-id.query';
-import { UpsertLangCommand } from '@app/common/lang/application/upsert/upsert-lang.command';
-import { CommonLang, CommonUpdateLangByIdInput } from '@api/graphql';
 import { CommonLangDto, CommonUpdateLangByIdDto } from '../dto';
+import { CommonLang, CommonUpdateLangByIdInput } from '@api/graphql';
+import { CommonFindLangByIdQuery, CommonUpsertLangCommand } from '@app/common/lang';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonUpsertLangHandler
@@ -21,7 +18,7 @@ export class CommonUpsertLangHandler
         auditing?: AuditingMeta,
     ): Promise<CommonLang | CommonLangDto>
     {
-        await this.commandBus.dispatch(new UpsertLangCommand(
+        await this.commandBus.dispatch(new CommonUpsertLangCommand(
             payload,
             {
                 timezone,
@@ -31,7 +28,7 @@ export class CommonUpsertLangHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindLangByIdQuery(
+        return await this.queryBus.ask(new CommonFindLangByIdQuery(
             payload.id,
             {},
             {
