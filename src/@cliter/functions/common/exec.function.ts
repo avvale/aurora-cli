@@ -1,4 +1,4 @@
-import * as shell from 'node:child_process';
+import { spawn } from 'node:child_process';
 
 export const exec = async(
     command: string,
@@ -6,9 +6,19 @@ export const exec = async(
     {
         cwd = process.cwd(),
         verbose = false,
+        shell = true,
+        onStdout = (data: string) => verbose && console.log(`${data}`),
+        onStderr = (data: string) => verbose && console.error(`${data}`),
+        onError = (error: Error) => verbose && console.error(error),
+        onClose = (code: number | null | undefined) => verbose && console.log(`child process exited with code ${code}`),
     }: {
         cwd?: string;
         verbose?: boolean;
+        shell?: boolean;
+        onStdout?: (data: string) => void;
+        onStderr?: (data: string) => void;
+        onError?: (error: Error) => void;
+        onClose?: (code: number | null | undefined) => void;
     } = {},
 ): Promise<number | null | undefined> =>
 {
@@ -16,11 +26,21 @@ export const exec = async(
     {
         return new Promise((resolve, reject) =>
         {
-            const process = shell.spawn(command, args, { cwd });
-            process.stdout.on('data', data => verbose && console.log(`${data}`));
-            process.stderr.on('data', data => verbose && console.error(`${data}`));
-            process.on('error', err => reject(err));
-            process.on('close', code => resolve(code));
+            const process = spawn(command, args, { cwd, shell });
+            process.stdout.on('data', onStdout);
+            process.stderr.on('data', onStderr);
+
+            process.on('error', error =>
+            {
+                onError(error);
+                return reject(error);
+            });
+
+            process.on('close', code =>
+            {
+                onClose(code);
+                return resolve(code);
+            });
         });
     }
     catch (error)

@@ -1,6 +1,7 @@
-import { Args, Command, Flags } from '@oclif/core';
+import { Args, Command, Flags, ux } from '@oclif/core';
 import { BackHandler, FrontHandler, Scope } from '../@cliter';
 import { generateEnvFile, installDependencies } from '../@cliter/functions/back';
+import { exec } from '../@cliter/functions/common';
 
 export default class New extends Command
 {
@@ -13,9 +14,9 @@ export default class New extends Command
             char       : 'f',
             description: 'Overwrite existing files.',
         }),
-        install: Flags.boolean({
-            char       : 'i',
-            description: 'Install dependencies after create item.',
+        uninstall: Flags.boolean({
+            char       : 'u',
+            description: 'Not install dependencies after create item.',
         }),
         verbose: Flags.boolean({
             char       : 'v',
@@ -63,7 +64,18 @@ export default class New extends Command
                     args.secondArg,
                 );
 
-                if (flags.install) await installDependencies(args.secondArg);
+                if (!flags.uninstall)
+                {
+                    await installDependencies(args.secondArg);
+
+                    ux.action.start('Generating GraphQL types');
+                    await exec('npm', ['run', 'graphql:types'], {
+                        cwd    : args.secondArg,
+                        verbose: false,
+                        onClose: () => ux.action.stop('Completed!'),
+                    });
+                }
+
                 break;
 
             case Scope.FRONT:
@@ -73,7 +85,7 @@ export default class New extends Command
                     flags,
                 });
 
-                if (flags.install) await installDependencies(args.secondArg);
+                if (!flags.uninstall) await installDependencies(args.secondArg);
                 break;
         }
     }

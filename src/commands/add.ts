@@ -58,7 +58,7 @@ export class Add extends Command
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@nestjs/axios', '@nestjs/schedule']);
                     await exec('npm', ['install', '-D', '@types/cron']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
@@ -129,7 +129,7 @@ export class Add extends Command
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
                     break;
                 }
 
@@ -138,7 +138,7 @@ export class Add extends Command
 
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@nestjs/passport', 'passport-azure-ad']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
@@ -203,7 +203,7 @@ export class Add extends Command
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
                     break;
                 }
 
@@ -235,7 +235,7 @@ export class Add extends Command
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     break;
                 }
@@ -246,7 +246,7 @@ export class Add extends Command
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@nestjs/jwt', '@nestjs/passport', 'passport-jwt']);
                     await exec('npm', ['install', '-D', '@types/passport-jwt']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
@@ -290,7 +290,7 @@ export class Add extends Command
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     break;
                 }
@@ -300,7 +300,7 @@ export class Add extends Command
 
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@nestjs/bull', '@nestjs/schedule', 'bull', 'redis']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
@@ -326,7 +326,7 @@ export class Add extends Command
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     break;
                 }
@@ -354,7 +354,7 @@ export class Add extends Command
                 case 'azureAd': {
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@azure/msal-angular', '@azure/msal-browser']);
-                    ux.action.stop('Completed.');
+                    ux.action.stop('Completed!');
 
                     await FrontHandler.addPackage(addCommandState);
 
