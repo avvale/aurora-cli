@@ -4,7 +4,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Cache } from 'cache-manager';
-import { langs } from './langs';
+import { coreLangs } from './core-langs';
 
 @Injectable()
 export class CoreGetFallbackLangFromJsonService implements CoreGetFallbackLangService
@@ -18,7 +18,7 @@ export class CoreGetFallbackLangFromJsonService implements CoreGetFallbackLangSe
     {
         // return cache langs
         const lang = await this.cacheManager.get<T>('common/fallback-lang');
-        if (langs) return lang;
+        if (coreLangs) return lang;
 
         // get langs from json and return cache langs if cache is expired
         await this.init();
@@ -33,7 +33,7 @@ export class CoreGetFallbackLangFromJsonService implements CoreGetFallbackLangSe
     getJsonFallbackLang(): CoreLang
     {
         const fallbackLangIso6392 = this.configService.get('APP_FALLBACK_LANG');
-        return langs.find(lang => lang.iso6392 === fallbackLangIso6392);
+        return coreLangs.find(lang => lang.iso6392 === fallbackLangIso6392);
     }
 
     onApplicationBootstrap(): void

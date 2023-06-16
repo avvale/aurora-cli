@@ -3,7 +3,7 @@ import { CoreGetLangsService } from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { langs } from './langs';
+import { coreLangs } from './core-langs';
 
 @Injectable()
 export class CoreGetLangsFromJsonService implements CoreGetLangsService
@@ -30,7 +30,7 @@ export class CoreGetLangsFromJsonService implements CoreGetLangsService
 
     getJsonLangs(): CoreLang[]
     {
-        return langs;
+        return coreLangs;
     }
 
     onApplicationBootstrap(): void

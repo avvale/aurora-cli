@@ -1,6 +1,6 @@
 import { CoreLang, CoreLangDir } from '@api/graphql';
 
-export const langs: CoreLang[] = [
+export const coreLangs: CoreLang[] = [
     {
         id        : '94c893c1-3eb7-4f22-a878-b405c6d42e09',
         name      : 'Deutsch',
