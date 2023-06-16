@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 import { Args, Command, Flags, ux } from '@oclif/core';
+import * as fs from 'node:fs';
 import { ArrayLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { exec } from '../@cliter/functions/common';
@@ -50,6 +51,15 @@ export class Add extends Command
 
         if (args.firstArg === Scope.BACK)
         {
+            if (
+                !fs.existsSync('src/@api') ||
+                !fs.existsSync('src/@app') ||
+                !fs.existsSync('src/@aurora')
+            )
+            {
+                throw new Error('No Aurora back application is detected in the current directory.');
+            }
+
             switch (packageName)
             {
                 case 'auditing': {
@@ -335,6 +345,14 @@ export class Add extends Command
 
         if (args.firstArg === Scope.FRONT)
         {
+            if (
+                !fs.existsSync('src/@fuse') ||
+                !fs.existsSync('src/@aurora')
+            )
+            {
+                throw new Error('No Aurora front application is detected in the current directory.');
+            }
+
             switch (packageName)
             {
                 case 'auditing': {
