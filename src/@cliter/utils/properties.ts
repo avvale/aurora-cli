@@ -164,9 +164,9 @@ export class Properties
         return this.properties.find(property => property.type === PropertyType.ID);
     }
 
-    /*************
-     * DASHBOARD *
-     *************/
+    /*********
+     * FRONT *
+     *********/
     get gridFields(): Property[]
     {
         return this.properties
@@ -184,6 +184,15 @@ export class Properties
     get formGroupFields(): Property[]
     {
         return this.properties
+            .filter(property => property.name !== 'availableLangs')
+            .filter(property => !this.timestampFields.includes(property.name));
+    }
+
+    get formGroupFieldsIsNotI18n(): Property[]
+    {
+        return this.properties
+            .filter(property => property.name !== 'availableLangs')
+            .filter(property => !property.isI18n)
             .filter(property => !this.timestampFields.includes(property.name));
     }
 

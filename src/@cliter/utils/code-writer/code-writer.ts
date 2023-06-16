@@ -22,6 +22,7 @@ export class CodeWriter
         public readonly moduleName: string,
         public readonly moduleNames: string,
         public readonly aggregateName: string,
+        public readonly hasI18n: boolean,
     )
     {
         this.project = new Project({
@@ -365,6 +366,46 @@ export class CodeWriter
                 return !!foundItem;
             },
         );
+
+        // if module has i18n
+        if (this.hasI18n)
+        {
+            // add route to new i18n item
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `{ path: '${this.moduleName.toKebabCase()}/new/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
+                childrenRoutesArray,
+                (item: string, array: ArrayLiteralExpression | undefined) =>
+                {
+                    const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
+                    {
+                        return `'${this.moduleName.toKebabCase()}/new/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                    });
+
+                    return !!foundItem;
+                },
+            );
+
+            // add route to edit item
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `{ path: '${this.moduleName.toKebabCase()}/edit/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
+                childrenRoutesArray,
+                (item: string, array: ArrayLiteralExpression | undefined) =>
+                {
+                    const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
+                    {
+                        return `'${this.moduleName.toKebabCase()}/edit/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                    });
+
+                    return !!foundItem;
+                },
+            );
+
+            sourceFile?.saveSync();
+
+            return;
+        }
 
         // add route to edit item
         ArrayDriver.addArrayItem(

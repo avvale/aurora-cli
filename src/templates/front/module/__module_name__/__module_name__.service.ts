@@ -3,7 +3,7 @@
         array
             (object items='Injectable' path='@angular/core')
             (object items=(array 'DocumentNode' 'FetchResult') path='@apollo/client/core')
-            (object items=(array 'GraphQLService' 'GridData' 'parseGqlFields' 'QueryStatement') path='@aurora')
+            (object items=(array 'GraphQLHeaders' 'GraphQLService' 'GridData' 'parseGqlFields' 'QueryStatement') path='@aurora')
             (object items=(array 'BehaviorSubject' 'first' 'map' 'Observable' 'tap') path='rxjs')
             (object items=(array schema.aggregateName (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ById') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames))) path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types'))
             (object items=(array 'paginationQuery' 'getQuery' 'fields' 'findByIdQuery' 'findQuery' 'createMutation' 'updateByIdMutation' 'updateMutation' 'deleteByIdMutation' 'deleteMutation') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
@@ -77,10 +77,12 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<{{ schema.aggregateName }}>>
     {
@@ -92,6 +94,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -107,10 +112,12 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: {{ schema.aggregateName }};
@@ -125,6 +132,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     id,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -144,6 +154,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement = findByIdWithRelationsQuery,
             id = '',
             constraint = {},
+            headers = {},
             {{#each schema.properties.withWebComponents}}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase getRelationshipModuleNames }} = {},
@@ -162,6 +173,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
             {{#each schema.properties.withWebComponents}}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
@@ -227,6 +239,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                     {{/eq}}
                     {{/each}}
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
@@ -249,17 +264,19 @@ export class {{ toPascalCase schema.moduleName }}Service
                 }),
             );
     }
-    {{/unlessEq}}
 
+    {{/unlessEq}}
     find(
         {
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: {{ schema.aggregateName }};
@@ -274,6 +291,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -292,10 +312,12 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: {{ schema.aggregateName }}[];
@@ -310,6 +332,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -336,6 +361,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             constraintPaginate{{ toPascalCase getRelationshipModuleNames }} = {},
             {{/eq}}
             {{/each}}
+            headers = {},
         }: {
             {{#each schema.properties.withWebComponents}}
             {{#eq webComponent.type 'select'}}
@@ -347,6 +373,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             constraintPaginate{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
             {{/eq}}
             {{/each}}
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         {{#each schema.properties.withWebComponents}}
@@ -408,9 +435,11 @@ export class {{ toPascalCase schema.moduleName }}Service
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }};
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -421,6 +450,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -428,9 +460,11 @@ export class {{ toPascalCase schema.moduleName }}Service
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -440,6 +474,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -450,11 +487,13 @@ export class {{ toPascalCase schema.moduleName }}Service
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }};
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -467,19 +506,37 @@ export class {{ toPascalCase schema.moduleName }}Service
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -488,10 +545,12 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -499,7 +558,13 @@ export class {{ toPascalCase schema.moduleName }}Service
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 {{#unlessEq schema.additionalApis.lengthQueries 0 }}

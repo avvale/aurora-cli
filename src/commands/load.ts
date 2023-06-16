@@ -97,7 +97,9 @@ export default class Load extends Command
 
             if (args.firstArg === Scope.FRONT)
             {
-                await FrontHandler.generateModule(generateCommandState);
+                await FrontHandler.generateModule(
+                    generateCommandState,
+                );
             }
 
             await reviewOverwrites(generateCommandState);

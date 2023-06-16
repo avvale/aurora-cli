@@ -30,6 +30,7 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
         generateCommandState.schema.moduleName.toLowerCase(),
         generateCommandState.schema.moduleNames.toLowerCase(),
         generateCommandState.schema.aggregateName,
+        generateCommandState.schema.properties.hasI18n,
     );
 
     codeWriter.generateTestingForeignReferences(generateCommandState.schema.properties);

@@ -85,7 +85,12 @@
                 }"
                 [actionsMenu]="{
                     edit: t('Edit'),
+                    {{#unless schema.properties.hasI18n}}
                     delete: t('Delete')
+                    {{else}}
+                    delete: t('Delete'),
+                    new: t('New.M')
+                    {{/unless}}
                 }"
             >
                 <au-grid-column-translation

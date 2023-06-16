@@ -9,6 +9,11 @@
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
     )
 ~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items=(array 'CoreCurrentLangService' 'CoreLang') path='@aurora')
+~}}
+{{/if}}
 {{#unlessEq schema.properties.lengthWebComponents 0 }}
 {{ push importsArray
     (object items='Observable' path='rxjs')
@@ -85,6 +90,10 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
     managedObject: {{ schema.aggregateName }};
+    {{#if schema.properties.hasI18n}}
+    currentLang: CoreLang;
+    fallbackLang: CoreLang;
+    {{/if}}
 {{#unlessEq schema.properties.lengthWebComponents 0 }}
 
     // relationships
@@ -174,6 +183,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             (object variableName=(sumStrings (toCamelCase schema.moduleName) 'Service') className=(sumStrings (toPascalCase schema.moduleName) 'Service'))
     )
 ~}}
+{{#if schema.properties.hasI18n}}
+{{ push injectionsArray
+    (object variableName='coreCurrentLangService' className='CoreCurrentLangService')
+~}}
+{{/if}}
 {{#unlessEq schema.properties.lengthGridSelectElementWebComponents 0 }}
 {{ push injectionsArray
     (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
@@ -272,6 +286,17 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         });
     }
 
+    {{#if schema.properties.hasI18n}}
+    // disable fields when manage object
+    // that language is not APP_FALLBACK_LANG
+    disabledNotI18nFields(): void
+    {
+        {{#each schema.properties.formGroupFieldsIsNotI18n}}
+        this.fg.get('{{ toCamelCase name }}').disable();
+        {{/each}}
+    }
+
+    {{/if}}
     {{#each schema.properties.withGridElementsManagerWebComponents}}
     /* #region methods to manage {{ toPascalCase getRelationshipSchema.moduleNames }} */
     create{{ toPascalCase getRelationshipSchema.moduleName }}DialogForm(): void
@@ -319,15 +344,42 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         {
             /* #region common actions */
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new':
+                {{#unless schema.properties.hasI18n}}
                 this.fg.get('id').setValue(Utils.uuid());
-                {{#if schema.properties.hasI18n}}
-                this.fg.get('langId').setValue(
-                    this.activatedRoute.snapshot.params.langId || this.sessionService.get('fallbackLang').id,
-                );
-                {{/if}}
+                {{else}}
+                this.currentLang = this.coreCurrentLangService.currentLang;
+
+                // only when hasta id param, we are creating
+                // a record with an alternative language
+                if (this.activatedRoute.snapshot.paramMap.get('id'))
+                {
+                    this.{{ toCamelCase schema.moduleName }}Service
+                        .{{ toCamelCase schema.moduleName }}$
+                        .pipe(takeUntil(this.unsubscribeAll$))
+                        .subscribe(item =>
+                        {
+                            this.managedObject = item;
+                            this.fg.patchValue(item);
+                            this.disabledNotI18nFields();
+                        });
+                }
+                else
+                {
+                    // only when we create a record
+                    // with default language
+                    this.fg.get('id').setValue(Utils.uuid());
+                }
+
+                this.fg.get('langId').setValue(this.currentLang.id);
+                {{/unless}}
                 break;
 
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit':
+                {{#if schema.properties.hasI18n}}
+                this.currentLang = this.coreCurrentLangService.currentLang;
+                this.fallbackLang = this.sessionService.get('fallbackLang');
+
+                {{/if}}
                 this.{{ toCamelCase schema.moduleName }}Service
                     .{{ toCamelCase schema.moduleName }}$
                     .pipe(takeUntil(this.unsubscribeAll$))
@@ -335,6 +387,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     {
                         this.managedObject = item;
                         this.fg.patchValue(item);
+                        {{#if schema.properties.hasI18n}}
+                        if (this.fallbackLang.id !== this.currentLang.id) this.disabledNotI18nFields();
+                        {{/if}}
                     });
                 {{#each schema.properties.withGridElementsManagerWebComponents}}
 
@@ -373,7 +428,15 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     await lastValueFrom(
                         this.{{ toCamelCase schema.moduleName }}Service
                             .create<{{ schema.aggregateName }}>({
+                                {{#unless schema.properties.hasI18n}}
                                 object: this.fg.value,
+                                {{else}}
+                                // getRawValue to send disabled values
+                                object : this.fg.getRawValue(),
+                                headers: {
+                                    'Content-Language': this.currentLang[this.sessionService.get('searchKeyLang')],
+                                },
+                                {{/unless}}
                             }),
                     );
 
@@ -400,7 +463,15 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     await lastValueFrom(
                         this.{{ toCamelCase schema.moduleName }}Service
                             .updateById<{{ schema.aggregateName }}>({
+                                {{#unless schema.properties.hasI18n}}
                                 object: this.fg.value,
+                                {{else}}
+                                // getRawValue to send disabled values
+                                object : this.fg.getRawValue(),
+                                headers: {
+                                    'Content-Language': this.currentLang[this.sessionService.get('searchKeyLang')],
+                                },
+                                {{/unless}}
                             }),
                     );
 
@@ -420,6 +491,58 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+            {{#if schema.properties.hasI18n}}
+
+            case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete':
+                const deleteDialogRef = this.confirmationService.open({
+                    title  : `${this.translocoService.translate('DeleteTranslation')} ${this.translocoService.translate('Of').toLowerCase()} ${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}').toLowerCase()}`,
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
+                    icon   : {
+                        show : true,
+                        name : 'heroicons_outline:exclamation',
+                        color: 'warn',
+                    },
+                    actions: {
+                        confirm: {
+                            show : true,
+                            label: this.translocoService.translate('Remove'),
+                            color: 'warn',
+                        },
+                        cancel: {
+                            show : true,
+                            label: this.translocoService.translate('Cancel'),
+                        },
+                    },
+                    dismissible: true,
+                });
+
+                deleteDialogRef.afterClosed()
+                    .subscribe(async result =>
+                    {
+                        if (result === 'confirmed')
+                        {
+                            try
+                            {
+                                await lastValueFrom(
+                                    this.{{ toCamelCase schema.moduleName }}Service
+                                        .deleteById<{{ schema.aggregateName }}>({
+                                            id     : this.managedObject.id,
+                                            headers: {
+                                                'Content-Language': this.currentLang[this.sessionService.get('searchKeyLang')],
+                                            },
+                                        }),
+                                );
+
+                                this.router.navigate(['{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}']);
+                            }
+                            catch(error)
+                            {
+                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                            }
+                        }
+                    });
+                break;
+                {{/if}}
                 /* #endregion common actions */
             {{#each schema.properties.withGridSelectElementWebComponents}}
 

@@ -1,10 +1,20 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, {{#if schema.properties.hasI18n}}ColumnConfigAction, {{/if}}ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
-import { {{ schema.aggregateName }} } from '../{{ toKebabCase schema.boundedContextName }}.types';
-import { {{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.moduleName }}.service';
-import { {{ toCamelCase schema.moduleName }}ColumnsConfig } from './{{ toKebabCase schema.moduleName }}.columns-config';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
+            (object items=(array 'Action' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService' 'log' 'QueryStatementHandler' 'ViewBaseComponent') path='@aurora')
+            (object items=(array 'lastValueFrom' 'Observable' 'takeUntil') path='rxjs')
+            (object items=schema.aggregateName path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types'))
+            (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
+            (object items=(sumStrings (toCamelCase schema.moduleName) 'ColumnsConfig') path=(sumStrings './' toKebabCase schema.moduleName '.columns-config'))
+    )
+~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+    (object items=(array 'ColumnConfigAction' 'CoreLang') path='@aurora')
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-list',
     templateUrl    : './{{ toKebabCase schema.moduleName }}-list.component.html',
@@ -128,6 +138,9 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     .navigate([
                         '{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/new',
                         action.meta.row.id,
+                        {{#if schema.properties.hasI18n}}
+                        action.meta.lang && action.meta.lang[this.sessionService.get<string>('searchKeyLang')],
+                        {{/if}}
                     ]);
                 break;
 
@@ -159,6 +172,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                                 .setPage(this.gridStateService.getPage(this.gridId))
                                 .setSearch(this.gridStateService.getSearchState(this.gridId))
                                 .getQueryStatement(),
+                        {{#if schema.properties.hasI18n}}
+                        headers: {
+                            'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
+                        },
+                        {{/if}}
                     }),
                 );
                 break;
@@ -168,6 +186,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     .navigate([
                         '{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit',
                         action.meta.row.id,
+                        {{#if schema.properties.hasI18n}}
+                        action.meta.lang ?
+                            action.meta.lang[this.sessionService.get('searchKeyLang')] :
+                            this.sessionService.get<CoreLang>('fallbackLang')[this.sessionService.get<string>('searchKeyLang')],
+                        {{/if}}
                     ]);
                 break;
 
@@ -203,8 +226,16 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                             {
                                 await lastValueFrom(
                                     this.{{ toCamelCase schema.moduleName }}Service
-                                        .deleteById<{{ schema.aggregateName }}>(action.meta.row.id),
+                                        .deleteById<{{ schema.aggregateName }}>({
+                                            id: action.meta.row.id,
+                                            {{#if schema.properties.hasI18n}}
+                                            headers: {
+                                                'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
+                                            },
+                                            {{/if}}
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
                                     isViewAction: false,
@@ -223,6 +254,11 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     this.{{ toCamelCase schema.moduleName }}Service
                         .get({
                             query: action.meta.query,
+                            {{#if schema.properties.hasI18n}}
+                            headers: {
+                                'Content-Language': '*',
+                            },
+                            {{/if}}
                         }),
                 );
 
