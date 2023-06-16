@@ -1,5 +1,5 @@
 import { CoreGetFallbackLangFromJsonService, CoreGetLangsFromJsonService } from '@aurora/modules/lang';
-import { AddI18nConstraintService, AuditingRunner, AuditingRunnerDisabledImplementationService, CoreGetFallbackLangService, CoreGetLangsService, CoreModule } from '@aurorajs.dev/core';
+import { AuditingRunner, AuditingRunnerDisabledImplementationService, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -15,7 +15,9 @@ import { CqrsConfigModule } from './cqrs-config.module';
         CqrsModule
     ],
     providers: [
-        AddI18nConstraintService,
+        CoreAddI18nConstraintService,
+        CoreGetContentLanguageObjectService,
+        CoreGetSearchKeyLangService,
         {
             provide : AuditingRunner,
             useClass: AuditingRunnerDisabledImplementationService,
@@ -30,11 +32,14 @@ import { CqrsConfigModule } from './cqrs-config.module';
         },
     ],
     exports: [
-        AddI18nConstraintService,
+        CoreAddI18nConstraintService,
         AuditingRunner,
         CacheModule,
         ConfigModule,
+        CoreGetContentLanguageObjectService,
+        CoreGetFallbackLangService,
         CoreGetLangsService,
+        CoreGetSearchKeyLangService,
         CqrsConfigModule
     ],
 })

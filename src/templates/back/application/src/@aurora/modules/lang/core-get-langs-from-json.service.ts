@@ -1,9 +1,9 @@
+import { CoreLang } from '@api/graphql';
 import { CoreGetLangsService } from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { langs } from './langs';
-import { CoreLang } from './lang.types';
 
 @Injectable()
 export class CoreGetLangsFromJsonService implements CoreGetLangsService
@@ -12,18 +12,18 @@ export class CoreGetLangsFromJsonService implements CoreGetLangsService
         @Inject(CACHE_MANAGER) private cacheManager: Cache,
     ) {}
 
-    async get<CoreLang>(): Promise<CoreLang[]>
+    async get<T>(): Promise<T[]>
     {
         // return cache langs
-        const langs = await this.cacheManager.get<CoreLang[]>('common/langs');
+        const langs = await this.cacheManager.get<T[]>('common/langs');
         if (langs) return langs;
 
-        // get langs from json and return cache langs
-        await this.reset();
-        return await this.cacheManager.get<CoreLang[]>('common/langs');
+        // get langs from json and return cache langs if cache is expired
+        await this.init();
+        return await this.cacheManager.get<T[]>('common/langs');
     }
 
-    async reset(): Promise<void>
+    async init(): Promise<void>
     {
         await this.cacheManager.set('common/langs', this.getJsonLangs());
     }
@@ -31,5 +31,10 @@ export class CoreGetLangsFromJsonService implements CoreGetLangsService
     getJsonLangs(): CoreLang[]
     {
         return langs;
+    }
+
+    onApplicationBootstrap(): void
+    {
+        this.init();
     }
 }
