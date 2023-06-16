@@ -52,9 +52,11 @@ export class Add extends Command
         if (args.firstArg === Scope.BACK)
         {
             if (
-                !fs.existsSync('src/@api') ||
-                !fs.existsSync('src/@app') ||
-                !fs.existsSync('src/@aurora')
+                !(
+                    fs.existsSync('src/@api') &&
+                    fs.existsSync('src/@app') &&
+                    fs.existsSync('src/@aurora')
+                )
             )
             {
                 throw new Error('No Aurora back application is detected in the current directory.');
@@ -346,8 +348,10 @@ export class Add extends Command
         if (args.firstArg === Scope.FRONT)
         {
             if (
-                !fs.existsSync('src/@fuse') ||
-                !fs.existsSync('src/@aurora')
+                !(
+                    fs.existsSync('src/@fuse') &&
+                    fs.existsSync('src/@aurora')
+                )
             )
             {
                 throw new Error('No Aurora front application is detected in the current directory.');
