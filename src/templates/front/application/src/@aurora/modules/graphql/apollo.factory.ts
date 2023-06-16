@@ -17,13 +17,46 @@ export const apolloFactory = (
     translocoService: TranslocoService,
 ): ApolloClientOptions<NormalizedCacheObject> =>
 {
-    const headers = new Headers();
+    let headers: Headers;
 
-    const auth = setContext(async(operation, context) =>
+    const initHeaders = setContext(async(operation, context) =>
+    {
+        headers = new Headers();
+
+        // return original context headers
+        return {
+            headers: context.headers,
+        };
+    });
+
+    const customHeaders = setContext(async(operation, context) =>
+    {
+        if (context.headers)
+        {
+            for (const [key, value] of Object.entries(context.headers))
+            {
+                // set custom headers
+                headers.set(key, value as string);
+            }
+        }
+
+        return {
+            headers: Object.fromEntries(headers.entries()),
+        };
+    });
+
+    const timezone = setContext(async(operation, context) =>
     {
         // set user timezone
         headers.set('X-Timezone', Utils.timezone());
 
+        return {
+            headers: Object.fromEntries(headers.entries()),
+        };
+    });
+
+    const auth = setContext(async(operation, context) =>
+    {
         // return basic authentication form login
         if (operation.operationName === 'oAuthCreateCredentials')
         {
@@ -102,7 +135,17 @@ export const apolloFactory = (
     });
 
 
-    const link = ApolloLink.from([auth, error, httpLink.create({ uri: environment.api.graphql })]);
+    const link = ApolloLink.from([
+        initHeaders,
+        customHeaders,
+        timezone,
+        auth,
+        error,
+        httpLink.create({
+            uri: environment.api.graphql,
+        }),
+    ]);
+
     const cache = new InMemoryCache({
         addTypename: true,  // add __typename field in graphql types
     });

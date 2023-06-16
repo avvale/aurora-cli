@@ -9,7 +9,7 @@ export interface Action
     afterRunAction?: (action: Action) => void;
     spinner?: BehaviorSubject<boolean> | (() => BehaviorSubject<boolean>);
     noCache?: boolean;
-    data?: {
+    meta?: {
         [key: string]: any;
     };
 }
@@ -86,6 +86,11 @@ export interface Session
     [key: string]: any;
 }
 
+export interface Translatable
+{
+    availableLangs: string[];
+}
+
 export interface ColumnConfigStorage
 {
     id: string; // id of grid where apply filter
@@ -135,9 +140,3 @@ export interface Theme
     title: string;
     welcomeText: string; */
 }
-
-export interface Translatable
-{
-    availableLangs: string[];
-}
-

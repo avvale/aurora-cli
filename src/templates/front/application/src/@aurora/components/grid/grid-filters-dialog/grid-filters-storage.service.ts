@@ -62,7 +62,7 @@ export class GridFiltersStorageService implements OnDestroy
         this.columnFiltersChangeSubject$.next(columnFilterStorage);
 
         // save all column filters in session
-        this.sessionService.updateSession(this.nameStorage, columnFiltersStorage);
+        this.sessionService.set(this.nameStorage, columnFiltersStorage);
 
         log('[DEBUG] Set column filter: ', columnFilterStorage);
     }

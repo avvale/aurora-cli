@@ -8,11 +8,13 @@ import { IsObjectEmptyPipe } from './is-object-empty.pipe';
 import { LogPipe } from './log.pipe';
 import { SafePipe } from './safe.pipe';
 import { SortByPipe } from './sort-by.pipe';
+import { GetSessionPipe } from './get-session.pipe';
 
 @NgModule({
     declarations: [
         DateFormatPipe,
         GetPipe,
+        GetSessionPipe,
         IsObjectEmptyPipe,
         LogPipe,
         SafePipe,
@@ -24,6 +26,7 @@ import { SortByPipe } from './sort-by.pipe';
     exports: [
         DateFormatPipe,
         GetPipe,
+        GetSessionPipe,
         IsObjectEmptyPipe,
         LogPipe,
         SafePipe,

@@ -23,7 +23,10 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
         DatepickerComponent,
     ],
     providers: [
-        { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+        {
+            provide : ErrorStateMatcher,
+            useClass: ShowOnDirtyErrorStateMatcher,
+        },
     ],
 })
 export class DatepickerModule {}

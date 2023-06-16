@@ -1,5 +1,10 @@
 import { DocumentNode } from 'graphql';
 
+export interface GraphQLHeaders
+{
+    [key: string]: string;
+}
+
 export interface GraphQLStatements
 {
     fields: string;

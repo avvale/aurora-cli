@@ -27,8 +27,7 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
 
     private getUserMetaFromStorage(): UserMetaStorage
     {
-        const session = this.sessionService.getSession();
-        return session && session[this.nameStorage] ? session[this.nameStorage] : null;
+        return this.sessionService.get(this.nameStorage);
     }
 
     getUserMeta(): Observable<UserMetaStorage>
@@ -50,7 +49,7 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
             currentUserMeta = { [keyUserMeta]: keyUserMetaValue };
         }
 
-        this.sessionService.updateSession(this.nameStorage, currentUserMeta);
+        this.sessionService.set(this.nameStorage, currentUserMeta);
         this.metaSubject$.next(currentUserMeta);
 
         return of(undefined);
@@ -58,7 +57,7 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
 
     saveUserMeta(userMeta: UserMetaStorage): Observable<void>
     {
-        this.sessionService.updateSession(this.nameStorage, userMeta);
+        this.sessionService.set(this.nameStorage, userMeta);
         this.metaSubject$.next(userMeta);
 
         return of(undefined);
@@ -66,7 +65,7 @@ export class UserMetaStorageLocalStorageAdapterService extends UserMetaStorageSe
 
     clearUserMeta(): Observable<void>
     {
-        this.sessionService.updateSession(this.nameStorage, null);
+        this.sessionService.set(this.nameStorage, null);
         this.metaSubject$.next(null);
 
         return of(undefined);

@@ -1,2 +1,2 @@
-export * from './breadcrumb.module';
+export { BreadcrumbModule } from './breadcrumb.module';
 export * from './breadcrumb.types';

@@ -27,7 +27,7 @@ export class AuroraGridManagerService extends GridManagerService
         this.actionService.action({
             id          : this.gridStateService.getPaginationActionId(gridId),
             isViewAction: false,
-            data        : {
+            meta        : {
                 query: QueryStatementHandler
                     .init({ columnsConfig })
                     .setColumFilters(gridState.columnFilters)
@@ -112,7 +112,7 @@ export class AuroraGridManagerService extends GridManagerService
         this.actionService.action({
             id          : this.gridStateService.getExportActionId(gridId),
             isViewAction: false,
-            data        : {
+            meta        : {
                 query: QueryStatementHandler
                     .init({ columnsConfig })
                     .setColumFilters(gridState.columnFilters)

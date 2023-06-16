@@ -1,6 +1,10 @@
 {
     "admin": "Admin",
     "applications": "Applications",
+    "countries": "Countries",
     "example": "Example",
-    "exampleSection": "Example Section"
+    "exampleSection": "Example Section",
+    "jobsRegistry": "JobsRegistry",
+    "langs": "Langs",
+    "queues": "Queues"
 }

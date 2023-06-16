@@ -1,3 +1,3 @@
-export * from './json-lang.service';
-export * from './lang.service';
+export { CoreCurrentLangService } from './core-current-lang.service';
+export { CoreGetLangsService } from './core-get-langs.service';
 export * from './lang.types';

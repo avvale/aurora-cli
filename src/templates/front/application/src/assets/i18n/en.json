@@ -24,6 +24,7 @@
     "Delete": "Delete",
     "Deleted.F": "Deleted",
     "Deleted.M": "Deleted",
+    "DeleteTranslation": "Delete translation",
     "DeletionWarning": "You are going to delete record {{ entity }} {{ id }}",
     "Edit": "Edit",
     "Email": "Email",
@@ -52,6 +53,7 @@
     "NotAccount": "Don't have an account?",
     "NoAuthorized": "No authorized",
     "NoAuthorizedMessage": "You are not authorized to access this section, permission {{ permission }} is required. Please check with your administrator to gain access..",
+    "Of": "Of",
     "Operations": "Operations",
     "Operator": "Operator",
     "Operators": {
@@ -112,6 +114,7 @@
     "State": "State",
     "Status": "Status",
     "Surname": "Surname",
+    "Translations": "Translations",
     "ToggleFullscreen": "Toggle Fullscreen",
     "Type": "Type",
     "Unlink": "Unlink",

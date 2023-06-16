@@ -18,6 +18,7 @@ export interface ColumnConfig
     sticky?: boolean;
     actions?: (row: any) => ColumnConfigAction[];
     transform?: (row: any) => any;
+    translationIconColor?: (row: any) => string;
 }
 
 export interface ColumnConfigAction extends Action

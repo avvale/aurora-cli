@@ -1,9 +1,8 @@
 /* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { AuthenticationService, Environment, IamService, log, SessionService } from '@aurora';
-// import { LangService } from '@aurora';
-import { first, lastValueFrom } from 'rxjs';
+import { AuthenticationService, CoreGetLangsService, CoreSearchKeyLang, Environment, IamService, log, SessionService } from '@aurora';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +13,7 @@ export class BootstrapService
         private readonly sessionService: SessionService,
         private readonly iamService: IamService,
         private readonly authenticationService: AuthenticationService,
-        //private auroraLangService: LangService,
+        private readonly coreGetLangsService: CoreGetLangsService,
     ) {}
 
     async init(): Promise<void>
@@ -22,19 +21,14 @@ export class BootstrapService
         this.checkEnvironmentSchema(environment);
 
         // get session from local storage and set in session observable
-        this.sessionService.initSession();
+        this.sessionService.init();
 
-        // it may be that we do not have languages in the session, possibly because we do not use the module oAuth
-        // in this case we get the languages from the database or from a json hosted in assets folder
-        // TODO, revisar los idiomas
-        /* if (!this.sessionService.hasLangs)
-        {
-            // init subscribe to launch languages to subscribers
-            this.auroraLangService
-                .get()
-                .pipe(first())
-                .subscribe(langs => this.sessionService.session = { langs });
-        } */
+        // get languages from CACHE MANAGER in nestjs or json or
+        // database according to configuration in shared module
+        const data = await lastValueFrom(this.coreGetLangsService.get());
+        this.sessionService.set('langs', data.langs);
+        this.sessionService.set('fallbackLang', data.fallbackLang);
+        this.sessionService.set('searchKeyLang', data.searchKeyLang);
 
         // check token to request user
         if (await lastValueFrom(this.authenticationService.check()))

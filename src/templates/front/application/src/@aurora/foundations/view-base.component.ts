@@ -62,7 +62,8 @@ export class ViewBaseComponent implements OnInit, OnDestroy
                 // show spinner
                 spinnerFlag$.next(true);
 
-                // set current view action to modify the view
+                // set current view action to modify/change the view
+                // for example, when click edit from list view to go to edit view
                 if (action?.isViewAction) this.currentViewAction = action;
 
                 // set current action to modify the view

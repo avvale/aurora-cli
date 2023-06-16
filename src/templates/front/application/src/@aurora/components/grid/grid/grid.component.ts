@@ -1,6 +1,5 @@
 // angular
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
-import { CommonLang } from '@aurora/modules';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -76,9 +75,6 @@ export class GridComponent implements OnInit, AfterViewInit
     {
         this.gridState.columnFilters = columnFilters ? columnFilters : [];
     }
-
-    // langs to create TranslationMenuComponent form multi language objects
-    @Input() langs: CommonLang[] = [];
 
     // outputs
     @Output() action = new EventEmitter<Action>();
@@ -229,8 +225,8 @@ export class GridComponent implements OnInit, AfterViewInit
     {
         const action = {
             ...columnConfigAction,
-            data: {
-                ...columnConfigAction.data,
+            meta: {
+                ...columnConfigAction.meta,
                 row,
                 event,
             },

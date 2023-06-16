@@ -10,13 +10,15 @@ export abstract class SessionService<T = Session>
         return this.dataSubject$.asObservable();
     }
 
-    abstract initSession(): void;
+    abstract get session(): Session | null;
 
-    abstract getSession(): T | null;
+    abstract init(): void;
 
-    abstract updateSession(id: string, session: T | null): void;
+    abstract get<E = any>(id: string): E | null;
 
-    abstract saveSession(session: T | null): void;
+    abstract set<E = any>(id: string, value: E): void;
 
-    abstract clearSession(): void;
+    abstract save(session: T | null): void;
+
+    abstract clear(): void;
 }

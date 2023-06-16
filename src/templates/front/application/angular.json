@@ -68,7 +68,8 @@
                             "src/@fuse/styles/main.scss",
                             "src/styles/styles.scss",
                             "src/styles/tailwind.scss",
-                            "src/@aurora/styles/main.scss"
+                            "src/@aurora/styles/main.scss",
+                            "node_modules/flag-icons/css/flag-icons.min.css"
                         ],
                         "scripts": []
                     },

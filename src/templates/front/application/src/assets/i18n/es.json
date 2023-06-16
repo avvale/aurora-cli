@@ -24,6 +24,7 @@
     "Delete": "Borrar",
     "Deleted.F": "Borrada",
     "Deleted.M": "Borrado",
+    "DeleteTranslation": "Borrar traducción",
     "DeletionWarning": "Va a elimininar registro {{ entity }} {{ id }}",
     "Edit": "Editar",
     "Email": "Email",
@@ -52,6 +53,7 @@
     "NotAccount": "¿No tiene una cuenta?",
     "NoAuthorized": "No autorizado",
     "NoAuthorizedMessage": "No está autorizado para acceder a esta sección, requiere del permiso {{ permission }}. consulte con el administrador para poder acceder.",
+    "Of": "De",
     "Operations": "Operaciones",
     "Operator": "Operador",
     "Operators": {
@@ -112,6 +114,7 @@
     "State": "Estado",
     "Status": "Estados",
     "Surname": "Aprellidos",
+    "Translations": "Traducciones",
     "ToggleFullscreen": "Alternar pantalla completa",
     "Type": "Tipo",
     "Update": "Actualizar",

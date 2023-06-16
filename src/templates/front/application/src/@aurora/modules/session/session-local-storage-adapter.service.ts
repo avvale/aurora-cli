@@ -18,16 +18,7 @@ export class SessionLocalStorageService extends SessionService
         return this.dataSubject$.asObservable();
     }
 
-    initSession(): void
-    {
-        const session = this.getSession();
-
-        log('[DEBUG] Session initialized: ', session);
-
-        this.dataSubject$.next(session);
-    }
-
-    getSession(): Session | null
+    get session(): Session | null
     {
         const value = localStorage.getItem(this.sessionName);
 
@@ -36,7 +27,22 @@ export class SessionLocalStorageService extends SessionService
         return null;
     }
 
-    updateSession(keySession: string, keySessionValue: any): void
+    init(): void
+    {
+        log('[DEBUG] Session initialized: ', this.session);
+        this.dataSubject$.next(this.session);
+    }
+
+    get<T>(id: string): T | null
+    {
+        const value = localStorage.getItem(this.sessionName);
+
+        // check value is not null
+        if (value) return (JSON.parse(atob(value)) as Session)[id];
+        return null;
+    }
+
+    set(keySession: string, keySessionValue: any): void
     {
         let currentSession = this.dataSubject$.value;
 
@@ -50,10 +56,10 @@ export class SessionLocalStorageService extends SessionService
             currentSession = { [keySession]: keySessionValue };
         }
 
-        this.saveSession(currentSession);
+        this.save(currentSession);
     }
 
-    saveSession(data: Session): void
+    save(data: Session): void
     {
         if (data)
         {
@@ -65,7 +71,7 @@ export class SessionLocalStorageService extends SessionService
         }
     }
 
-    clearSession(): void
+    clear(): void
     {
         localStorage.removeItem(this.sessionName);
         this.dataSubject$.next(null);

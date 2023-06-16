@@ -16,7 +16,8 @@ const DEFAULT_MINUTE_NAMES = range(60, i => String(i));
 function range<T>(length: number, valueFunction: (index: number) => T): T[]
 {
     const valuesArray = Array(length);
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++)
+    {
         valuesArray[i] = valueFunction(i);
     }
     return valuesArray;
@@ -113,22 +114,22 @@ export class DateTimePickerDayjsAdapter extends DatetimeAdapter<Dayjs>
         // creating the Dayjs).
         if (month < 0 || month > 11)
         {
-            throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
+            throw new Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
         }
 
         if (date < 1)
         {
-            throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
+            throw new Error(`Invalid date "${date}". Date has to be greater than 0.`);
         }
 
         if (hour < 0 || hour > 23)
         {
-            throw Error(`Invalid hour "${hour}". Hour has to be between 0 and 23.`);
+            throw new Error(`Invalid hour "${hour}". Hour has to be between 0 and 23.`);
         }
 
         if (minute < 0 || minute > 59)
         {
-            throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
+            throw new Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
         }
 
         //const result = this._createDateWithOverflow(year, month, date, hour, minute);
@@ -137,7 +138,7 @@ export class DateTimePickerDayjsAdapter extends DatetimeAdapter<Dayjs>
         // Check that the date wasn't above the upper bound for the month, causing the month to overflow
         if (result.month() !== month)
         {
-            throw Error(`Invalid date "${date}" for month with index "${month}".`);
+            throw new Error(`Invalid date "${date}" for month with index "${month}".`);
         }
 
         return result;

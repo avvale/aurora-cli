@@ -1,9 +1,9 @@
 // angular
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ObserversModule } from '@angular/cdk/observers';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // material
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -26,33 +26,32 @@ import { MatTableModule } from '@angular/material/table';
 import { DatepickerSqlFormatModule } from '@aurora/components/datepicker-sql-format/datepicker-sql-format.module';
 
 // pipes
-import { ActionTranslationObjectPipe } from './pipes/action-translation-object.pipe';
-import { CheckTranslationObjectPipe } from './pipes/check-translation-object.pipe';
-import { FilterGridCustomHeaderTemplatesPositionPipe } from './pipes/select-positions-template.pipe';
 import { FilterOperatorsPipe } from './grid-filters-dialog/pipes/filter-operators.pipe';
-import { GetActionsPipe } from './pipes/get-actions.pipe';
 import { GetContactOperatorPipe } from './grid-filters-dialog/pipes/get-concat-operator.pipe';
-import { GetPipe } from './pipes/get.pipe';
-import { GetGridSpinnerFlagPipe } from './pipes/get-grid-spinner-flag.pipe';
+import { HasRenderOutboxPipe } from './grid-filters-dialog/pipes/has-render-outbox.pipe';
 import { GridTranslatePipe } from './grid-translations/grid-translate.pipe';
+import { GetActionsPipe } from './pipes/get-actions.pipe';
+import { GetGridSpinnerFlagPipe } from './pipes/get-grid-spinner-flag.pipe';
+import { GetTranslationIconColorPipe } from './pipes/get-translation-icon-color.pipe';
+import { GetPipe } from './pipes/get.pipe';
 import { HasCellValueTemplatePipe } from './pipes/has-cell-value-template.pipe';
 import { HasCellValueWithFieldTemplatePipe } from './pipes/has-cell-value-with-field-template.pipe';
-import { HasRenderOutboxPipe } from './grid-filters-dialog/pipes/has-render-outbox.pipe';
 import { IsOriginColumnConfigPipe } from './pipes/is-origin-column-config.pipe';
+import { FilterGridCustomHeaderTemplatesPositionPipe } from './pipes/select-positions-template.pipe';
 import { TransformDataCellPipe } from './pipes/transform-data-cell.pipe';
 
 // components & directives
+import { FlagIconModule } from '../flag-icon';
 import { GridCellValueTemplateDirective } from './directives/grid-cell-value-template.directive';
 import { GridCustomHeaderTemplateDirective } from './directives/grid-custom-header-template.directive';
 import { GridColumnsConfigPropertiesDialogComponent } from './grid-columns-config-properties-dialog/grid-columns-config-properties-dialog.component';
-import { GridColumnTranslationComponent } from './grid-translations/grid-column-translation.component';
 import { GridFiltersDialogComponent } from './grid-filters-dialog/grid-filters-dialog.component';
+import { GridSearchComponent } from './grid-search/grid-search.component';
+import { GridColumnTranslationComponent } from './grid-translations/grid-column-translation.component';
 import { GridTranslationsComponent } from './grid-translations/grid-translations.component';
 import { GridTranslationsService } from './grid-translations/grid-translations.service';
 import { GridComponent } from './grid/grid.component';
 import { PaginatorIntlService } from './grid/paginator-intl.service';
-import { TranslationMenuComponent } from './translations-menu/translations-menu.component';
-import { GridSearchComponent } from './grid-search/grid-search.component';
 
 @NgModule({
     entryComponents: [
@@ -63,6 +62,7 @@ import { GridSearchComponent } from './grid-search/grid-search.component';
         CommonModule,
         DatepickerSqlFormatModule,
         DragDropModule,
+        FlagIconModule,
         FormsModule,
         MatAutocompleteModule,
         MatBadgeModule,
@@ -91,14 +91,13 @@ import { GridSearchComponent } from './grid-search/grid-search.component';
         },
     ],
     declarations: [
-        ActionTranslationObjectPipe,
-        CheckTranslationObjectPipe,
         FilterGridCustomHeaderTemplatesPositionPipe,
         FilterOperatorsPipe,
         GetActionsPipe,
         GetContactOperatorPipe,
         GetGridSpinnerFlagPipe,
         GetPipe,
+        GetTranslationIconColorPipe,
         GridCellValueTemplateDirective,
         GridColumnsConfigPropertiesDialogComponent,
         GridColumnTranslationComponent,
@@ -113,7 +112,6 @@ import { GridSearchComponent } from './grid-search/grid-search.component';
         HasRenderOutboxPipe,
         IsOriginColumnConfigPipe,
         TransformDataCellPipe,
-        TranslationMenuComponent,
     ],
     exports: [
         GridCellValueTemplateDirective,

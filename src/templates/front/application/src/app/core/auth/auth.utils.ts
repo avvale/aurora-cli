@@ -139,7 +139,7 @@ export class AuthUtils
             }
             default:
             {
-                throw Error('Illegal base64url string!');
+                throw new Error('Illegal base64url string!');
             }
         }
         return this._b64DecodeUnicode(output);

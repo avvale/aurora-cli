@@ -297,19 +297,38 @@
                                 [ngClass]="columnConfig.headerClass"
                                 [mat-sort-header]="columnConfig.sort"
                             >
-                                {{ 'translations' | gridTranslate | async }}
+                                {{ columnConfig.field | gridTranslate:'column':id | async }}
                             </th>
                             <td
                                 mat-cell
                                 *matCellDef="let row"
                                 [ngClass]="columnConfig.bodyClass"
                             >
-                                <au-translations-menu
-                                    [langs]="langs"
-                                    [moduleUri]="moduleUri"
-                                    [row]="row"
-                                >
-                                </au-translations-menu>
+                                <div class="flex justify-center">
+                                    <button
+                                        mat-icon-button
+                                        [matMenuTriggerFor]="menu"
+                                        [color]="columnConfig.translationIconColor | getTranslationIconColor:row"
+                                    >
+                                        <mat-icon svgIcon="mat_solid:translate"></mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                        <ng-container *ngFor="let action of columnConfig.actions | getActions:row">
+                                            <button
+                                                mat-menu-item
+                                                type="button"
+                                                (click)="handleClickAction(action, row, $event)"
+                                            >
+                                                <au-flag-icon
+                                                    [flagCode]="action.meta.lang.image"
+                                                    fontSize="16px"
+                                                >
+                                                    {{ (action.translation ? action.translation : action.id) | gridTranslate:'action':id | async }}
+                                                </au-flag-icon>
+                                            </button>
+                                        </ng-container>
+                                    </mat-menu>
+                                </div>
                             </td>
                         </ng-container>
 
