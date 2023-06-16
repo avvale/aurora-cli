@@ -340,11 +340,13 @@ export class Add extends Command
                 case 'auditing': {
                     await FrontHandler.addPackage(addCommandState);
 
+                    // add module in main navigation menu
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'auditing', 'auditingNavigation');
                     navigationSourceFile.saveSync();
 
+                    // add lazy loading module to app routing
                     const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
                     Installer.declareFrontRouting(routingSourceFile, 'auditing');
                     routingSourceFile.saveSync();
@@ -510,6 +512,22 @@ export class Add extends Command
                     });
                     environmentDevFile.saveSync();
 
+                    break;
+                }
+
+                case 'common': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    // add module in main navigation menu
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'common', 'commonNavigation');
+                    navigationSourceFile.saveSync();
+
+                    // add lazy loading module to app routing
+                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
+                    Installer.declareFrontRouting(routingSourceFile, 'common');
+                    routingSourceFile.saveSync();
                     break;
                 }
 
