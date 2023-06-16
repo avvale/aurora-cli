@@ -6,19 +6,19 @@ import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/c
 import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.properties.withImportRelationshipOneToOne}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/{{ toKebabCase getRelationshipBoundedContextName }}-sequelize-{{ toKebabCase getRelationshipModuleName }}.model{{/if}}';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/{{ toKebabCase getRelationshipBoundedContextName }}-sequelize-{{ toKebabCase getRelationshipModuleName }}.model{{/if}}';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withImportRelationshipOneToMany}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/{{ toKebabCase getRelationshipBoundedContextName }}-sequelize-{{ toKebabCase getRelationshipModuleName }}.model{{/if}}';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToMany}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}/infrastructure/sequelize/{{ toKebabCase getRelationshipBoundedContextName }}-sequelize-{{ toKebabCase getRelationshipModuleName }}.model{{/if}}';
-import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}/infrastructure/sequelize/sequelize-{{ relationship.pivot.fileName }}.model';
+import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}';
 {{/each}}
 {{#if schema.properties.hasI18n}}
 import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';

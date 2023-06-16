@@ -101,7 +101,7 @@ aggregateI18nProperties:
       key: id
       field: country
     index: unique
-    indexName: uniqueLangId
+    indexName: uniqueCountryIdLangId
   - name: langId
     type: id
     length: 36
@@ -114,7 +114,7 @@ aggregateI18nProperties:
       field: lang
       avoidConstraint: true
     index: unique
-    indexName: uniqueLangId
+    indexName: uniqueCountryIdLangId
   - name: name
     type: varchar
     nullable: false
