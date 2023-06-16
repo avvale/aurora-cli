@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-import { Observable } from 'rxjs';
 import { CommonCountry } from '../common.types';
 import { countryColumnsConfig } from './country.columns-config';
 import { CountryService } from './country.service';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Action, ActionService, CoreCurrentLangService, CoreLang, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler, SessionService } from '@aurora';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -16,6 +16,7 @@ export class CountryPaginationResolver implements Resolve<GridData<CommonCountry
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly countryService: CountryService,
+        private readonly sessionService: SessionService,
     ) {}
 
     /**
@@ -46,6 +47,9 @@ export class CountryPaginationResolver implements Resolve<GridData<CommonCountry
                 .setPage(this.gridStateService.getPage(gridId))
                 .setSearch(this.gridStateService.getSearchState(gridId))
                 .getQueryStatement(),
+            headers: {
+                'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
+            },
         });
     }
 }
@@ -53,10 +57,13 @@ export class CountryPaginationResolver implements Resolve<GridData<CommonCountry
 @Injectable({
     providedIn: 'root',
 })
-export class CountryNewResolver implements Resolve<Action>
+export class CountryNewResolver implements Resolve<Action | { object: CommonCountry; }>
 {
     constructor(
 		private readonly actionService: ActionService,
+		private readonly coreCurrentLangService: CoreCurrentLangService,
+		private readonly countryService: CountryService,
+		private readonly sessionService: SessionService,
     )
     {}
 
@@ -69,12 +76,44 @@ export class CountryNewResolver implements Resolve<Action>
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
-    ): Action
+    ): Action | Observable<{ object: CommonCountry; }>
     {
-        return this.actionService.action({
+        const action = this.actionService.action({
             id          : 'common::country.detail.new',
             isViewAction: true,
         });
+
+        // set current lang
+        this.coreCurrentLangService.setCurrentLang(
+            this.sessionService
+                .get<CoreLang[]>('langs')
+                .find((lang: CoreLang) => lang[this.sessionService.get('searchKeyLang')] === route.paramMap.get('langId')) ||
+            this.sessionService.get<CoreLang>('fallbackLang'),
+        );
+
+        if (route.paramMap.get('id') && route.paramMap.get('langId'))
+        {
+            return this.countryService
+                .findById({
+                    id        : route.paramMap.get('id'),
+                    constraint: {
+                        include: [{
+                            association: 'countryI18n',
+                            required   : true,
+                            where      : {
+                                // retrieves object with the fallback lang to have
+                                // a guide to the texts to be translated
+                                langId: this.sessionService.get('fallbackLang').id,
+                            },
+                        }],
+                    },
+                    headers: {
+                        'Content-Language': route.paramMap.get('langId'),
+                    },
+                });
+        }
+
+        return action;
     }
 }
 
@@ -87,7 +126,9 @@ export class CountryEditResolver implements Resolve<{
 {
     constructor(
 		private readonly actionService: ActionService,
+		private readonly coreCurrentLangService: CoreCurrentLangService,
 		private readonly countryService: CountryService,
+		private readonly sessionService: SessionService,
     )
     {}
 
@@ -109,8 +150,19 @@ export class CountryEditResolver implements Resolve<{
             isViewAction: true,
         });
 
-        return this.countryService.findById({
-            id: route.paramMap.get('id'),
-        });
+        // set current lang
+        this.coreCurrentLangService.setCurrentLang(
+            this.sessionService
+                .get<CoreLang[]>('langs')
+                .find((lang: CoreLang) => lang[this.sessionService.get('searchKeyLang')] === route.paramMap.get('langId')),
+        );
+
+        return this.countryService
+            .findById({
+                id: route.paramMap.get('id'),
+                headers: {
+                    'Content-Language': route.paramMap.get('langId'),
+                },
+            });
     }
 }

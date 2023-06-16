@@ -23,7 +23,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.ts",
-            "integrity": "sha1:2ef90a84fffc0503c72e1d21e2573193c1aa9b1c"
+            "integrity": "sha1:bd2ad43c701185f69de87840c2387a9d2ed21f39"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.columns-config.ts",

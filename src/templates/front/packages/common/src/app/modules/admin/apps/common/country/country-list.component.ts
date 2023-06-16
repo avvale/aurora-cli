@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnConfigAction, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { CommonCountry } from '../common.types';
-import { CountryService } from './country.service';
 import { countryColumnsConfig } from './country.columns-config';
+import { CountryService } from './country.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnConfigAction, ColumnDataType, CoreLang, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'common-country-list',
@@ -84,24 +84,10 @@ export class CountryListComponent extends ViewBaseComponent
                             isViewAction: true,
                             meta        : { lang },
                         });
-
                     }
                 }
 
                 return transitionActions;
-
-                return [
-                    {
-                        id         : 'common::country.list.edit',
-                        translation: 'edit',
-                        icon       : 'mode_edit',
-                    },
-                    {
-                        id         : 'common::country.list.new',
-                        translation: 'delete',
-                        icon       : 'delete',
-                    },
-                ];
             },
         },
         {
@@ -134,6 +120,15 @@ export class CountryListComponent extends ViewBaseComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            case 'common::country.list.new':
+                this.router
+                    .navigate([
+                        'common/country/new',
+                        action.meta.row.id,
+                        action.meta.lang && action.meta.lang[this.sessionService.get<string>('searchKeyLang')],
+                    ]);
+                break;
+
             case 'common::country.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
@@ -161,12 +156,22 @@ export class CountryListComponent extends ViewBaseComponent
                                 .setPage(this.gridStateService.getPage(this.gridId))
                                 .setSearch(this.gridStateService.getSearchState(this.gridId))
                                 .getQueryStatement(),
+                        headers: {
+                            'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
+                        },
                     }),
                 );
                 break;
 
             case 'common::country.list.edit':
-                this.router.navigate(['common/country/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'common/country/edit',
+                        action.meta.row.id,
+                        action.meta.lang ?
+                            action.meta.lang[this.sessionService.get('searchKeyLang')] :
+                            this.sessionService.get<CoreLang>('fallbackLang')[this.sessionService.get<string>('searchKeyLang')],
+                    ]);
                 break;
 
             case 'common::country.list.delete':
@@ -201,8 +206,14 @@ export class CountryListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.countryService
-                                        .deleteById<CommonCountry>(action.meta.row.id),
+                                        .deleteById<CommonCountry>({
+                                            id: action.meta.row.id,
+                                            headers: {
+                                                'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
+                                            },
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'common::country.list.pagination',
                                     isViewAction: false,
@@ -221,6 +232,9 @@ export class CountryListComponent extends ViewBaseComponent
                     this.countryService
                         .get({
                             query: action.meta.query,
+                            headers: {
+                                'Content-Language': '*',
+                            },
                         }),
                 );
 

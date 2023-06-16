@@ -18,7 +18,8 @@ export const commonRoutes: Route[] = [
             { path: 'lang/edit/:id', component: LangDetailComponent, resolve: { data: LangEditResolver }, data: { permission: 'common.lang.get' }},
             { path: 'country', component: CountryListComponent, resolve: { data: CountryPaginationResolver }, data: { permission: 'common.country.get' }},
             { path: 'country/new', component: CountryDetailComponent, resolve: { data: CountryNewResolver }, data: { permission: 'common.country.create' }},
-            { path: 'country/edit/:id', component: CountryDetailComponent, resolve: { data: CountryEditResolver }, data: { permission: 'common.country.get' }},
+            { path: 'country/new/:id/:langId', component: CountryDetailComponent, resolve: { data: CountryNewResolver }, data: { permission: 'common.country.create' }},
+            { path: 'country/edit/:id/:langId', component: CountryDetailComponent, resolve: { data: CountryEditResolver }, data: { permission: 'common.country.get' }},
         ],
     },
 ];

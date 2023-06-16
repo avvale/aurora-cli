@@ -66,7 +66,7 @@ export interface CommonCountry {
     latitude?: number;
     longitude?: number;
     zoom?: number;
-    mapType: string;
+    mapType: CommonCountryMapType;
     availableLangs?: any;
     createdAt?: string;
     updatedAt?: string;
@@ -93,7 +93,7 @@ export interface CommonCreateCountry {
     latitude?: number;
     longitude?: number;
     zoom?: number;
-    mapType: string;
+    mapType: CommonCountryMapType;
     availableLangs?: any;
     countryId: string;
     langId: string;
@@ -117,7 +117,7 @@ export interface CommonUpdateCountryById {
     latitude?: number;
     longitude?: number;
     zoom?: number;
-    mapType?: string;
+    mapType?: CommonCountryMapType;
     availableLangs?: any;
     countryId?: string;
     langId?: string;
@@ -126,6 +126,13 @@ export interface CommonUpdateCountryById {
     administrativeAreaLevel1?: string;
     administrativeAreaLevel2?: string;
     administrativeAreaLevel3?: string;
+}
+
+export enum CommonCountryMapType {
+    ROADMAP = 'ROADMAP',
+    SATELLITE = 'SATELLITE',
+    HYBRID = 'HYBRID',
+    TERRAIN = 'TERRAIN'
 }
 
 export interface CommonUpdateCountries {
@@ -141,7 +148,7 @@ export interface CommonUpdateCountries {
     latitude?: number;
     longitude?: number;
     zoom?: number;
-    mapType?: string;
+    mapType?: CommonCountryMapType;
     availableLangs?: any;
     countryId?: string;
     langId?: string;

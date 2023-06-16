@@ -18,6 +18,34 @@
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
             <button
+                *ngIf="
+                    currentViewAction.id === 'common::country.detail.edit' &&
+                    currentLang.id !== fallbackLang.id
+                "
+                mat-flat-button
+                type="button"
+                class="ml-3"
+                color="warn"
+                [disabled]="'common::country.detail.delete' | getSpinnerFlag | async"
+                (click)="
+                    actionService.action({
+                        id          : 'common::country.detail.delete',
+                        isViewAction: false
+                    })
+                "
+            >
+                <mat-icon
+                    *ngIf="!('common::country.detail.delete' | getSpinnerFlag | async)"
+                    class="icon-size-5 mr-2"
+                >
+                    delete
+                </mat-icon>
+                <mat-icon *ngIf="'common::country.detail.delete' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
+                </mat-icon>
+                {{ t('DeleteTranslation') }}
+            </button>
+            <button
                 *ngIf="currentViewAction.id === 'common::country.detail.edit'"
                 mat-flat-button
                 type="submit"
@@ -77,6 +105,37 @@
 
                 <div class="layout__container">
 
+                    <au-flag-lang
+                        appearance="outline"
+                        class="col-4"
+                        [label]="t('Language')"
+                        [lang]="currentLang"
+                    >
+                    </au-flag-lang>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-8"
+                    >
+                        <mat-label>{{ t('common.Name') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="name"        required
+                        >
+                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('common.Slug') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="slug"
+                            maxlength="1024"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.slug | async }}</mat-error>
+                    </mat-form-field>
                     <mat-form-field
                         appearance="outline"
                         class="col-2"
@@ -115,7 +174,7 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class="col-2"
+                        class="col-4"
                     >
                         <mat-label>{{ t('common.CustomCode') }}</mat-label>
                         <input
@@ -164,7 +223,7 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class=""
+                        class="col-3"
                     >
                         <mat-label>{{ t('common.Latitude') }}</mat-label>
                         <input
@@ -176,7 +235,7 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class=""
+                        class="col-3"
                     >
                         <mat-label>{{ t('common.Longitude') }}</mat-label>
                         <input
@@ -188,53 +247,31 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class="col-2"
+                        class="col-1"
                     >
                         <mat-label>{{ t('common.Zoom') }}</mat-label>
                         <input
                             matInput
                             formControlName="zoom"
                             type="number"
-                            maxlength="2"
+                            maxlength="1"
                         >
                         <mat-error>{{ formErrors?.zoom | async }}</mat-error>
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class="col-4"
+                        class="col-3"
                     >
                         <mat-label>{{ t('common.MapType') }}</mat-label>
                         <mat-select formControlName="mapType">
-                            <mat-option value="ROADMAP">ROADMAP</mat-option>
-                            <mat-option value="SATELLITE">SATELLITE</mat-option>
-                            <mat-option value="HYBRID">HYBRID</mat-option>
-                            <mat-option value="TERRAIN">TERRAIN</mat-option>
+                            <mat-option
+                                *ngFor="let mapType  of commonCountryMapType | keyvalue"
+                                [value]="mapType.key"
+                            >
+                                {{ mapType.value }}
+                            </mat-option>
                         </mat-select>
                         <mat-error>{{ formErrors?.mapType | async }}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-12"
-                    >
-                        <mat-label>{{ t('common.Name') }}</mat-label>
-                        <input
-                            matInput
-                            formControlName="name"        required
-                        >
-                        <mat-error>{{ formErrors?.name | async }}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-12"
-                    >
-                        <mat-label>{{ t('common.Slug') }}</mat-label>
-                        <input
-                            matInput
-                            formControlName="slug"
-                            maxlength="1024"
-                            required
-                        >
-                        <mat-error>{{ formErrors?.slug | async }}</mat-error>
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"

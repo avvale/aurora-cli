@@ -48,7 +48,6 @@
             [gridState]="gridState"
             [id]="gridId"
             [originColumnsConfig]="originColumnsConfig"
-            [langs]="'langs' | getSession"
         >
             <au-grid-translations
                 [actions]="t('Actions')"
@@ -86,7 +85,8 @@
                 }"
                 [actionsMenu]="{
                     edit: t('Edit'),
-                    delete: t('Delete')
+                    delete: t('Delete'),
+                    new: t('New.M')
                 }"
             >
                 <au-grid-column-translation

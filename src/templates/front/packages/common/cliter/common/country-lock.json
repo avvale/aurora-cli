@@ -11,19 +11,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-detail.component.html",
-            "integrity": "sha1:b77dfa35f61b3c9e4fb67168f351b3b5f03d3ceb"
+            "integrity": "sha1:052bbbaf67d1696422f3c60afcd8ce8eddb6caef"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-detail.component.ts",
-            "integrity": "sha1:d802c98b6ff544e89f285adf985370f0ab2ae2d0"
+            "integrity": "sha1:b91a58ef4db3eb830282e78f8342135408e7d5e8"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-list.component.html",
-            "integrity": "sha1:8e663a5559e6fc2bf5e936a92073a508625f235b"
+            "integrity": "sha1:4f9e591304445e984ad0e764af4f430dd1b9c205"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-list.component.ts",
-            "integrity": "sha1:868ae59984390bcd8f64720fdfb1bd34e10858ae"
+            "integrity": "sha1:c2f14720ae8156d8bfc7e8fc69111a62f94587ac"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country.columns-config.ts",
@@ -35,11 +35,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country.resolvers.ts",
-            "integrity": "sha1:3121801081ea6e8f798919ca5d0053963a705b0a"
+            "integrity": "sha1:98f6c360465f1d74b6641c63c0e213490fe6e194"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country.service.ts",
-            "integrity": "sha1:b7ad216b90845b266cb7a370a5884fa8277c9307"
+            "integrity": "sha1:929c19e2ef9af41f10295914e38138071269ca84"
         }
     ]
 }
