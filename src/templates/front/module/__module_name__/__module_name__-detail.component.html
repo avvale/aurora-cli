@@ -107,6 +107,15 @@
 
                 <div class="layout__container">
 
+                    {{#if schema.properties.hasI18n}}
+                    <au-flag-lang
+                        appearance="outline"
+                        class="col-4"
+                        [label]="t('Language')"
+                        [lang]="currentLang"
+                    >
+                    </au-flag-lang>
+                    {{/if}}
                     {{#each schema.properties.formDetailFields}}
                     {{#if (isAllowProperty ../schema.moduleName this) }}
                     {{#eq type 'varchar'}}

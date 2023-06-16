@@ -171,6 +171,8 @@ export class Properties
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
+            .filter(property => property.name !== 'availableLangs')
+            .filter(property => property.name !== 'meta')
             .filter(property => property.name !== 'id');
     }
 
@@ -184,16 +186,18 @@ export class Properties
     get formGroupFields(): Property[]
     {
         return this.properties
+            .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => property.name !== 'availableLangs')
-            .filter(property => !this.timestampFields.includes(property.name));
+            .filter(property => property.name !== 'meta');
     }
 
     get formGroupFieldsIsNotI18n(): Property[]
     {
         return this.properties
-            .filter(property => property.name !== 'availableLangs')
+            .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => !property.isI18n)
-            .filter(property => !this.timestampFields.includes(property.name));
+            .filter(property => property.name !== 'availableLangs')
+            .filter(property => property.name !== 'meta');
     }
 
     get withWebComponents(): Property[]
