@@ -733,7 +733,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 break;
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipSchema.moduleName }}s':
-                const rows = await lastValueFrom(
+                const {{ toCamelCase getRelationshipSchema.moduleName }}Rows = await lastValueFrom(
                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
                         .get({
                             query     : action.meta.query,
@@ -745,14 +745,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         }),
                 );
 
-                const columns: string[] = {{ toCamelCase getRelationshipSchema.moduleName }}ColumnsConfig.map({{ toCamelCase getRelationshipSchema.moduleName }}ColumnConfig => {{ toCamelCase getRelationshipSchema.moduleName }}ColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+                const {{ toCamelCase getRelationshipSchema.moduleName }}Columns: string[] = {{ toCamelCase getRelationshipSchema.moduleName }}ColumnsConfig.map({{ toCamelCase getRelationshipSchema.moduleName }}ColumnConfig => {{ toCamelCase getRelationshipSchema.moduleName }}ColumnConfig.field);
+                const {{ toCamelCase getRelationshipSchema.moduleName }}Headers = {{ toCamelCase getRelationshipSchema.moduleName }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
 
                 exportRows(
-                    rows.objects,
+                    {{ toCamelCase getRelationshipSchema.moduleName }}Rows.objects,
                     '{{ toCamelCase getRelationshipSchema.moduleNames }}.' + action.meta.format,
-                    columns,
-                    headers,
+                    {{ toCamelCase getRelationshipSchema.moduleName }}Columns,
+                    {{ toCamelCase getRelationshipSchema.moduleName }}Headers,
                     action.meta.format,
                 );
                 break;
