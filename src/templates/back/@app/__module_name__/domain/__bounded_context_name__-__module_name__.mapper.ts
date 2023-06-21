@@ -81,21 +81,21 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             {{/if}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipManyToOne}}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
             {{/unless}}
             {{/each}}
             {{#each schema.properties.withRelationshipOneToMany}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.properties.withRelationshipManyToMany}}
-            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
             {{/each}}
         );
     }
