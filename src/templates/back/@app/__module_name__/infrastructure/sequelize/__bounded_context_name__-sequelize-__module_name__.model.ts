@@ -255,7 +255,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/each}}
     {{#if schema.properties.hasI18n}}
     // i18n relation
-    @HasOne(() => {{ schema.aggregateName }}I18nModel, { as: '{{ schema.moduleName }}I18n' })
+    @HasOne(() => {{ schema.aggregateName }}I18nModel, { as: '{{ toCamelCase schema.moduleName }}I18n' })
     {{ toCamelCase schema.moduleName }}I18n: {{ schema.aggregateName }}I18nModel;
     {{/if}}
 }
