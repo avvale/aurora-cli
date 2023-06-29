@@ -14,4 +14,4 @@ import * as _ from 'lodash';
 String.prototype.toCamelCase = function (this: string): string
 {
     return _.camelCase(this);
-}
+};

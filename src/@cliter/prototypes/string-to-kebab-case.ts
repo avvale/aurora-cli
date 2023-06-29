@@ -14,4 +14,4 @@ import * as _ from 'lodash';
 String.prototype.toKebabCase = function (this: string): string
 {
     return _.kebabCase(this);
-}
+};

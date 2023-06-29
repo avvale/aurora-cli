@@ -12,6 +12,6 @@ import * as _ from 'lodash';
  */
 String.prototype.toPascalCase = function (this: string): string
 {
-    _.mixin({ 'pascalCase': _.flow(_.camelCase, _.upperFirst) });
+    _.mixin({ pascalCase: _.flow(_.camelCase, _.upperFirst) });
     return _.pascalCase(this);
-}
+};

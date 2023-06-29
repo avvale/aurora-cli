@@ -14,4 +14,4 @@ import * as _ from 'lodash';
 String.prototype.toSnakeCase = function (this: string): string
 {
     return _.snakeCase(this);
-}
+};
