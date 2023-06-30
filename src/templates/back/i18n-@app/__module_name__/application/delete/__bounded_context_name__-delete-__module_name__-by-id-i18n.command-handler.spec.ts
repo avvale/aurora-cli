@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command-handler';
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommand } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command';
 import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nService } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
 
@@ -41,7 +41,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
         {
             expect(await commandHandler.execute(
                 new Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommand(
-                    {{ toCamelCase schema.moduleNames }}[0].id,
+                    {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].id,
                 ),
             )).toBe(undefined);
         });

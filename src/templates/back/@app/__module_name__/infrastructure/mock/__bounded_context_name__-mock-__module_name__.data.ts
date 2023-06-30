@@ -4,7 +4,7 @@
 import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{/each}} } from '@api/graphql';
 {{/if}}
 
-export const {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }} = [
+export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data = [
     {{#loops 20}}
     {
         {{#each ../schema.properties.seed as |seedProperty seedId|}}

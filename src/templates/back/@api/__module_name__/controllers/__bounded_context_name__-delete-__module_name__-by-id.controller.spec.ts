@@ -5,7 +5,7 @@
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdController')  path=(sumStrings './' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.controller'))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdHandler')  path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.handler'))
-            (object items=(toCamelCase schema.moduleNames)  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.data'))
+            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.data'))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
@@ -72,8 +72,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
 
         test('should return an {{ toCamelCase schema.moduleName }} deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }}[0])));
-            expect(await controller.main({{ toCamelCase schema.moduleNames }}[0].id)).toBe({{ toCamelCase schema.moduleNames }}[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0])));
+            expect(await controller.main({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].id)).toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0]);
         });
     });
 });

@@ -105,7 +105,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             {{/if }}
             .compile();
 
-        mockData = {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }};
+        mockData = {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data;
         app = module.createNestApplication();
         {{ toCamelCase schema.moduleName }}Repository = module.get<{{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository>({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}

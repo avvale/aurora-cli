@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}-by-id.service';
 import {
     {{> importValueObjects }}
@@ -12,7 +12,7 @@ import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.mod
 {{#if schema.properties.hasI18n}}
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
-import { Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
+import { {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.repository';
 
 describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService', () =>
 {
@@ -21,7 +21,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
     {{#if schema.properties.hasI18n}}
     let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18nRepository;
     {{/if}}
-    let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
+    let mockRepository: {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
     {
@@ -30,8 +30,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                Update{{ toPascalCase schema.moduleName }}ByIdService,
-                Mock{{ toPascalCase schema.moduleName }}Repository,
+                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService,
+                {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
@@ -50,17 +50,17 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
         })
             .compile();
 
-        service = module.get(Update{{ toPascalCase schema.moduleName }}ByIdService);
+        service = module.get({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService);
         repository = module.get({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
         repositoryI18n = module.get(I{{ toPascalCase schema.moduleName }}I18nRepository);
         {{/if}}
-        mockRepository = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
+        mockRepository = module.get({{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 
     describe('main', () =>
     {
-        test('Update{{ toPascalCase schema.moduleName }}ByIdService should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
@@ -70,7 +70,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
             expect(await service.main(
                 {
                     {{#each schema.properties.updateService}}
-                    {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }}),
+                    {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase name }}),
                     {{/each}}
                 },
             )).toBe(undefined);

@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { Delete{{ toPascalCase schema.moduleNames }}CommandHandler } from './delete-{{ toKebabCase schema.moduleNames }}.command-handler';
-import { Delete{{ toPascalCase schema.moduleNames }}Command } from './delete-{{ toKebabCase schema.moduleNames }}.command';
-import { Delete{{ toPascalCase schema.moduleNames }}Service } from './delete-{{ toKebabCase schema.moduleNames }}.service';
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.command-handler';
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Command } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.command';
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.service';
 
 describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
 {
     let commandHandler: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler;
-    let service: Delete{{ toPascalCase schema.moduleNames }}Service;
+    let service: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                Delete{{ toPascalCase schema.moduleNames }}CommandHandler,
+                {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler,
                 {
-                    provide : Delete{{ toPascalCase schema.moduleNames }}Service,
+                    provide : {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -25,13 +25,13 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
         })
             .compile();
 
-        commandHandler = module.get<Delete{{ toPascalCase schema.moduleNames }}CommandHandler>(Delete{{ toPascalCase schema.moduleNames }}CommandHandler);
-        service = module.get<Delete{{ toPascalCase schema.moduleNames }}Service>(Delete{{ toPascalCase schema.moduleNames }}Service);
+        commandHandler = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler);
+        service = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service);
     });
 
     describe('main', () =>
     {
-        test('Delete{{ toPascalCase schema.moduleNames }}CommandHandler should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
@@ -39,7 +39,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new Delete{{ toPascalCase schema.moduleNames }}Command(),
+                new {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Command(),
             )).toBe(undefined);
         });
     });

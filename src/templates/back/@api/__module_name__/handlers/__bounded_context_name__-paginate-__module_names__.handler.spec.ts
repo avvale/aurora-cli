@@ -4,7 +4,7 @@
         array
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object items=(array 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
-            (object items=(toCamelCase schema.moduleNames)  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.data'))
+            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.data'))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings './' (toKebabCase schema.boundedContextName) '-paginate-' (toKebabCase schema.moduleNames) '.handler'))
     )
 ~}}
@@ -84,14 +84,14 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
         test('should return a {{ toCamelCase schema.moduleNames }}', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: {{ toCamelCase schema.moduleNames }}.length,
-                count: {{ toCamelCase schema.moduleNames }}.length,
-                rows : {{ toCamelCase schema.moduleNames }},
+                total: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
+                count: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
+                rows : {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
             })));
             expect(await handler.main()).toEqual({
-                total: {{ toCamelCase schema.moduleNames }}.length,
-                count: {{ toCamelCase schema.moduleNames }}.length,
-                rows : {{ toCamelCase schema.moduleNames }},
+                total: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
+                count: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
+                rows : {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
             });
         });
     });

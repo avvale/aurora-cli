@@ -45,7 +45,7 @@ export { {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schem
 
 // mocks
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-' (toKebabCase schema.moduleName) '.data.ts'}}
-export { {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }} } from './infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
+export { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from './infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 {{/notInArray}}
 
 // domain

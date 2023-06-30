@@ -5,7 +5,7 @@ import {
     {{> importValueObjects }}
 } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/domain/value-objects';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }} } from './{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from './{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository extends MockRepository<{{ schema.aggregateName }}> implements {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository
@@ -31,7 +31,7 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
         this.collectionSource = [];
         const now = Utils.nowTimestamp();
 
-        for (const itemCollection of <any[]>{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }})
+        for (const itemCollection of <any[]>{{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data)
         {
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;

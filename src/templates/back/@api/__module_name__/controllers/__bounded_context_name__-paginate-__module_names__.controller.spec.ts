@@ -12,7 +12,7 @@ import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sch
 {{#if schema.properties.hasI18n}}
 import { langs } from '{{#eq schema.boundedContextName 'common'}}{{ config.appContainer }}/common/lang/infrastructure/mock/mock-lang.data{{else}}@aurorajs.dev/common{{/eq}}';
 {{/if}}
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 
 describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Controller', () =>
 {
@@ -52,17 +52,17 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
             expect(controller).toBeDefined();
         });
 
-        test('should return a {{ toCamelCase schema.moduleNames }}', async () =>
+        test('should return a {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : {{ toCamelCase schema.moduleNames }},
+                rows : {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : {{ toCamelCase schema.moduleNames }},
+                rows : {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
             });
         });
     });

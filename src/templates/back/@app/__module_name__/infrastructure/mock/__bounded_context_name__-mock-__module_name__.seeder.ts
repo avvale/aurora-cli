@@ -4,7 +4,7 @@ import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }} } from './{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from './{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
     {
         this.collectionSource = [];
 
-        for (const {{ toCamelCase schema.moduleName }} of _.orderBy({{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}, ['id']))
+        for (const {{ toCamelCase schema.moduleName }} of _.orderBy({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data, ['id']))
         {
             this.collectionSource.push(
                 {{ schema.aggregateName }}.register(

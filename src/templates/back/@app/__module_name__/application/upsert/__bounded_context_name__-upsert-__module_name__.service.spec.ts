@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.service';
 import {
     {{> importValueObjects }}
@@ -12,17 +12,17 @@ import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.mod
 {{#if schema.properties.hasI18n}}
 import { I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
-import { Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
+import { {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.repository';
 
-describe('Upsert{{ toPascalCase schema.moduleName }}Service', () =>
+describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service', () =>
 
 {
-    let service: Upsert{{ toPascalCase schema.moduleName }}Service;
+    let service: {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service;
     let repository: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository;
     {{#if schema.properties.hasI18n}}
     let repositoryI18n: I{{ toPascalCase schema.moduleName }}I18nRepository;
     {{/if}}
-    let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
+    let mockRepository: {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
     {
@@ -31,8 +31,8 @@ describe('Upsert{{ toPascalCase schema.moduleName }}Service', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                Upsert{{ toPascalCase schema.moduleName }}Service,
-                Mock{{ toPascalCase schema.moduleName }}Repository,
+                {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service,
+                {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
@@ -51,17 +51,17 @@ describe('Upsert{{ toPascalCase schema.moduleName }}Service', () =>
         })
             .compile();
 
-        service = module.get(Upsert{{ toPascalCase schema.moduleName }}Service);
+        service = module.get({{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service);
         repository = module.get({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository);
         {{#if schema.properties.hasI18n}}
         repositoryI18n = module.get(I{{ toPascalCase schema.moduleName }}I18nRepository);
         {{/if}}
-        mockRepository = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
+        mockRepository = module.get({{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 
     describe('main', () =>
     {
-        test('Upsert{{ toPascalCase schema.moduleName }}Service should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service should be defined', () =>
         {
             expect(service).toBeDefined();
         });
@@ -71,7 +71,7 @@ describe('Upsert{{ toPascalCase schema.moduleName }}Service', () =>
             expect(await service.main(
                 {
                     {{#each schema.properties.upsertService}}
-                    {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }}),
+                    {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase name }}),
                     {{/each}}
                 },
             )).toBe(undefined);

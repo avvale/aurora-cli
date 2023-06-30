@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.command-handler';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Command } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.command';
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service } from './{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.service';
 
-describe('Update{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
+describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
 {
-    let commandHandler: Update{{ toPascalCase schema.moduleNames }}CommandHandler;
-    let service: Update{{ toPascalCase schema.moduleNames }}Service;
+    let commandHandler: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler;
+    let service: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                Update{{ toPascalCase schema.moduleNames }}CommandHandler,
+                {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler,
                 {
-                    provide : Update{{ toPascalCase schema.moduleNames }}Service,
+                    provide : {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,8 +26,8 @@ describe('Update{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<Update{{ toPascalCase schema.moduleNames }}CommandHandler>(Update{{ toPascalCase schema.moduleNames }}CommandHandler);
-        service = module.get<Update{{ toPascalCase schema.moduleNames }}Service>(Update{{ toPascalCase schema.moduleNames }}Service);
+        commandHandler = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler);
+        service = module.get<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service>({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service);
     });
 
     describe('main', () =>
@@ -40,10 +40,10 @@ describe('Update{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
         test('should return an {{ toCamelCase schema.moduleNames }} updated', async () =>
         {
             expect(await commandHandler.execute(
-                new Update{{ toPascalCase schema.moduleNames }}Command(
+                new {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Command(
                     {
                         {{#each schema.properties.updateController}}
-                        {{ toCamelCase name }}: {{ toCamelCase ../schema.moduleNames }}[0].{{ toCamelCase name }},
+                        {{ toCamelCase name }}: {{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase name }},
                         {{/each}}
                     },
                     {},

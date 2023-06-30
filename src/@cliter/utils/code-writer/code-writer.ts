@@ -754,7 +754,7 @@ export class CodeWriter
         ExportDriver.createExportItems(
             sourceFile,
             `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/mock/${this.boundedContextName.toKebabCase()}-mock-${this.moduleName.toKebabCase()}.data`,
-            [`${this.boundedContextName.toCamelCase()}${this.moduleNames.toPascalCase()}`],
+            [`${this.boundedContextName.toCamelCase()}Mock${this.moduleName.toPascalCase()}Data`],
         );
 
         sourceFile?.saveSync();

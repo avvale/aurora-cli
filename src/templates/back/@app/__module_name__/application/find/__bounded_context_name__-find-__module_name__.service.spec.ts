@@ -2,15 +2,15 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
 
 // custom items
-import { Find{{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}.service';
+import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.boundedContextName }}-find-{{ toKebabCase schema.moduleName }}.service';
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
-import { Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.repository';
+import { {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.repository';
 
-describe('Find{{ toPascalCase schema.moduleName }}Service', () =>
+describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Service', () =>
 {
-    let service: Find{{ toPascalCase schema.moduleName }}Service;
+    let service: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Service;
     let repository: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository;
-    let mockRepository: Mock{{ toPascalCase schema.moduleName }}Repository;
+    let mockRepository: {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
     {
@@ -19,8 +19,8 @@ describe('Find{{ toPascalCase schema.moduleName }}Service', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                Find{{ toPascalCase schema.moduleName }}Service,
-                Mock{{ toPascalCase schema.moduleName }}Repository,
+                {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Service,
+                {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository,
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository,
                     useValue: {
@@ -31,14 +31,14 @@ describe('Find{{ toPascalCase schema.moduleName }}Service', () =>
         })
             .compile();
 
-        service = module.get(Find{{ toPascalCase schema.moduleName }}Service);
+        service = module.get({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Service);
         repository = module.get({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository);
-        mockRepository = module.get(Mock{{ toPascalCase schema.moduleName }}Repository);
+        mockRepository = module.get({{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 
     describe('main', () =>
     {
-        test('Find{{ toPascalCase schema.moduleName }}Service should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Service should be defined', () =>
         {
             expect(service).toBeDefined();
         });

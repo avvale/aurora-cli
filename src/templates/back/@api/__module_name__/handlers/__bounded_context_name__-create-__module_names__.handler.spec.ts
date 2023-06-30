@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.handler';
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
 
 describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler', () =>
 {
@@ -44,9 +44,9 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
             expect(handler).toBeDefined();
         });
 
-        test('should return an {{ toCamelCase schema.moduleNames }} created', async () =>
+        test('should return an {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data created', async () =>
         {
-            expect(await handler.main({{ toCamelCase schema.moduleNames }})).toBe(true);
+            expect(await handler.main({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data)).toBe(true);
         });
     });
 });

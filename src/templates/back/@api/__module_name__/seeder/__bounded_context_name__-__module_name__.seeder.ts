@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}';
-import { {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}';
 
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Seeder
@@ -16,7 +16,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     async main(): Promise<boolean>
     {
         await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command(
-            {{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }},
+            {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
             {
                 timezone: process.env.TZ ,
             },

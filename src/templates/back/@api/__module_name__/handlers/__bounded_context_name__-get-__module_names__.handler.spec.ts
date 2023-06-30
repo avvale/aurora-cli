@@ -4,7 +4,7 @@
         array
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object items=(array 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
-            (object items=(toCamelCase schema.moduleNames)  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/mock-' (toKebabCase schema.moduleName) '.data'))
+            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.data'))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings './' (toKebabCase schema.boundedContextName) '-get-' (toKebabCase schema.moduleNames) '.handler'))
     )
 ~}}
@@ -81,10 +81,10 @@ describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.
             expect(handler).toBeDefined();
         });
 
-        test('should return a {{ toCamelCase schema.moduleNames }}', async () =>
+        test('should return a {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.moduleNames }})));
-            expect(await handler.main()).toBe({{ toCamelCase schema.moduleNames }});
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data)));
+            expect(await handler.main()).toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data);
         });
     });
 });

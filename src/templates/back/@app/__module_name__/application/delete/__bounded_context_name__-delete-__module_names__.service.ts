@@ -45,7 +45,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         if ({{ toCamelCase schema.moduleNames }}.length === 0) return;
 
         {{#if schema.properties.hasI18n}}
-        if ({{ toCamelCase schema.moduleNames }}[0].langId.value === fallbackLang.id)
+        if ({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].langId.value === fallbackLang.id)
         {
             // delete all translations if delete fallback language
             await this.repository.delete({

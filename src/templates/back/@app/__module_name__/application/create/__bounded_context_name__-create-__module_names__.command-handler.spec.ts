@@ -2,23 +2,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { {{ toCamelCase schema.moduleNames }} } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/mock-{{ toKebabCase schema.moduleName }}.data';
-import { Create{{ toPascalCase schema.moduleNames }}CommandHandler } from './create-{{ toKebabCase schema.moduleNames }}.command-handler';
-import { Create{{ toPascalCase schema.moduleNames }}Command } from './create-{{ toKebabCase schema.moduleNames }}.command';
-import { Create{{ toPascalCase schema.moduleNames }}Service } from './create-{{ toKebabCase schema.moduleNames }}.service';
+import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}CommandHandler } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.command-handler';
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.command';
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Service } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.service';
 
-describe('Create{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
+describe('{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
 {
-    let commandHandler: Create{{ toPascalCase schema.moduleNames }}CommandHandler;
-    let service: Create{{ toPascalCase schema.moduleNames }}Service;
+    let commandHandler: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}CommandHandler;
+    let service: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Service;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                Create{{ toPascalCase schema.moduleNames }}CommandHandler,
+                {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}CommandHandler,
                 {
-                    provide : Create{{ toPascalCase schema.moduleNames }}Service,
+                    provide : {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Service,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -27,22 +27,22 @@ describe('Create{{ toPascalCase schema.moduleNames }}CommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<Create{{ toPascalCase schema.moduleNames }}CommandHandler>(Create{{ toPascalCase schema.moduleNames }}CommandHandler);
-        service = module.get<Create{{ toPascalCase schema.moduleNames }}Service>(Create{{ toPascalCase schema.moduleNames }}Service);
+        commandHandler = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}CommandHandler>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}CommandHandler);
+        service = module.get<{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Service>({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Service);
     });
 
     describe('main', () =>
     {
-        test('Create{{ toPascalCase schema.moduleNames }}CommandHandler should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}CommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return {{ toCamelCase schema.moduleNames }} createds', async () =>
+        test('should return {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data createds', async () =>
         {
             expect(await commandHandler.execute(
-                new Create{{ toPascalCase schema.moduleNames }}Command(
-                    {{ toCamelCase schema.moduleNames }},
+                new {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command(
+                    {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
                     { timezone: process.env.TZ },
                 ),
             )).toBe(undefined);
