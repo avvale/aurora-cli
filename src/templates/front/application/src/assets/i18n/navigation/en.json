@@ -1,9 +1,11 @@
 {
     "admin": "Admin",
     "applications": "Applications",
+    "collections": "Collections",
     "countries": "Countries",
     "example": "Example",
     "exampleSection": "Example Section",
+    "fields": "Fields",
     "jobsRegistry": "JobsRegistry",
     "langs": "Langs",
     "queues": "Queues"

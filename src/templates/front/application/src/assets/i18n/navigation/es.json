@@ -1,9 +1,11 @@
 {
     "admin": "Administración",
     "applications": "Aplicaciones",
+    "collections": "Collections",
     "countries": "Countries",
     "example": "Ejemplo",
     "exampleSection": "Sección de ejemplo",
+    "fields": "Fields",
     "jobsRegistry": "JobsRegistry",
     "langs": "Idiomas",
     "queues": "Queues"
