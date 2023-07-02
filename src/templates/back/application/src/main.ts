@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { setTimeZoneApplication } from '@aurorajs.dev/core';
-import { AppModule } from './app.module';
 import { urlencoded, json } from 'express';
 import * as utc from 'dayjs/plugin/utc';
 import * as timezone from 'dayjs/plugin/timezone';
