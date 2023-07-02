@@ -1,10 +1,18 @@
-import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, LiteralObject, SequelizeRepository } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
-import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.mapper';
-import { {{ schema.aggregateName }}Model } from './{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.model';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'InjectModel') path='@nestjs/sequelize')
+            (object items=(array 'AuditingRunner' 'ICriteria' 'SequelizeRepository') path=config.auroraCorePackage)
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper') (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Model') (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+    )
+~}}
+{{#hasItems schema.properties.withRelationshipManyToMany }}
+{{ push importsArray
+    (object items='LiteralObject' path=config.auroraCorePackage)
+~}}
+{{/hasItems}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}Repository extends SequelizeRepository<{{ schema.aggregateName }}, {{ schema.aggregateName }}Model> implements {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository
 {
