@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.7.5",
-    "@aurorajs.dev/core": "^2.2.0",
+    "@aurorajs.dev/core": "^3.0.0",
     "@nestjs/apollo": "^12.0.7",
     "@nestjs/cache-manager": "^2.0.1",
     "@nestjs/common": "^10.0.0",
