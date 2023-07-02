@@ -1,5 +1,4 @@
-import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from '{{ config.auroraCorePackage }}';
+import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.response';
 import {

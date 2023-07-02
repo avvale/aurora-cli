@@ -1,6 +1,4 @@
-
-import { LiteralObject } from '@nestjs/common';
-import { CQMetadata, IRepository, Pagination, QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { IamBoundedContext } from './bounded-context.aggregate';
 import { BoundedContextId } from './value-objects';
 

@@ -1,9 +1,9 @@
-import { Injectable, LiteralObject } from '@nestjs/common';
+import { AuditingRunner, ICriteria, LiteralObject, SequelizeRepository } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
-import { IHttpCommunicationRepository } from '../../domain/http-communication.repository';
 import { AuditingHttpCommunication } from '../../domain/http-communication.aggregate';
 import { HttpCommunicationMapper } from '../../domain/http-communication.mapper';
+import { IHttpCommunicationRepository } from '../../domain/http-communication.repository';
 import { AuditingHttpCommunicationModel } from './sequelize-http-communication.model';
 
 @Injectable()

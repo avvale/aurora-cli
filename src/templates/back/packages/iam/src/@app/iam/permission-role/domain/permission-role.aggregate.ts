@@ -1,4 +1,4 @@
-import { LiteralObject } from '@nestjs/common';
+import { LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 import {
     PermissionRolePermissionId,

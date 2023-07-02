@@ -1,32 +1,31 @@
-import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 import { AuditingSideEffect } from './side-effect.aggregate';
 import { SideEffectResponse } from './side-effect.response';
 import {
-    SideEffectId,
-    SideEffectTags,
-    SideEffectModelPath,
-    SideEffectModelName,
-    SideEffectOperationId,
-    SideEffectOperationSort,
     SideEffectAccountId,
+    SideEffectAuditableId,
+    SideEffectBaseUrl,
+    SideEffectBody,
+    SideEffectCreatedAt,
+    SideEffectDeletedAt,
     SideEffectEmail,
     SideEffectEvent,
-    SideEffectAuditableId,
-    SideEffectOldValue,
-    SideEffectNewValue,
+    SideEffectId,
     SideEffectIp,
+    SideEffectIsRollback,
     SideEffectMethod,
-    SideEffectBaseUrl,
+    SideEffectModelName,
+    SideEffectModelPath,
+    SideEffectNewValue,
+    SideEffectOldValue,
+    SideEffectOperationId,
+    SideEffectOperationSort,
     SideEffectParams,
     SideEffectQuery,
-    SideEffectBody,
-    SideEffectUserAgent,
-    SideEffectIsRollback,
     SideEffectRollbackSideEffectId,
-    SideEffectCreatedAt,
+    SideEffectTags,
     SideEffectUpdatedAt,
-    SideEffectDeletedAt,
+    SideEffectUserAgent,
 } from './value-objects';
 
 export class SideEffectMapper implements IMapper

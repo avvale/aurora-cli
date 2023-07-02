@@ -1,7 +1,6 @@
 /* eslint-disable key-spacing */
-import { LiteralObject } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { Utils } from '@aurorajs.dev/core';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
 import {
     CommonCountryId,
     CommonCountryIso3166Alpha2,

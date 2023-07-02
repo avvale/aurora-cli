@@ -1,6 +1,6 @@
-import { Injectable, LiteralObject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
+import { AuditingRunner, ICriteria, LiteralObject, SequelizeRepository } from '@aurorajs.dev/core';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
 import { CommonLang } from '../../domain/common-lang.aggregate';
 import { CommonLangMapper } from '../../domain/common-lang.mapper';

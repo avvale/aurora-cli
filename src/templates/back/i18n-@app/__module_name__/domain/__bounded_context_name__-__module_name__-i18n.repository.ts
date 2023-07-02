@@ -1,6 +1,4 @@
-
-import { LiteralObject } from '@nestjs/common';
-import { IRepository, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { IRepository, QueryStatement, LiteralObject } from '{{ config.auroraCorePackage }}';
 import { CQMetadata, Pagination } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from './value-objects';

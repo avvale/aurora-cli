@@ -1,5 +1,4 @@
-import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
+import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
 import { OAuthRefreshToken } from './refresh-token.aggregate';
 import { RefreshTokenResponse } from './refresh-token.response';
 import {

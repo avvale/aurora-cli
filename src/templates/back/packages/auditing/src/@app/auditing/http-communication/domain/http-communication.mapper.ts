@@ -1,5 +1,4 @@
-import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 import { AuditingHttpCommunication } from './http-communication.aggregate';
 import { HttpCommunicationResponse } from './http-communication.response';
 import {

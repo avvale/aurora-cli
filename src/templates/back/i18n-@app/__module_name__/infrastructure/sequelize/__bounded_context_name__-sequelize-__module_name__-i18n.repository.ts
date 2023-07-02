@@ -1,5 +1,5 @@
-import { Injectable, LiteralObject } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
+import { Injectable } from '@nestjs/common';
+import { InjectModel, LiteralObject } from '@nestjs/sequelize';
 import { AuditingRunner, ICriteria, SequelizeRepository } from '{{ config.auroraCorePackage }}';
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-i18n.repository';
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';

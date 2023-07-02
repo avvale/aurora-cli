@@ -1,20 +1,19 @@
-import { LiteralObject } from '@nestjs/common';
-import { IMapper, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
+import { AccountMapper } from '@app/iam/account/domain/account.mapper';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 import { IamTenant } from './tenant.aggregate';
 import { TenantResponse } from './tenant.response';
 import {
-    TenantId,
-    TenantName,
-    TenantCode,
-    TenantLogo,
-    TenantIsActive,
-    TenantMeta,
     TenantAccountIds,
+    TenantCode,
     TenantCreatedAt,
-    TenantUpdatedAt,
     TenantDeletedAt,
+    TenantId,
+    TenantIsActive,
+    TenantLogo,
+    TenantMeta,
+    TenantName,
+    TenantUpdatedAt,
 } from './value-objects';
-import { AccountMapper } from '@app/iam/account/domain/account.mapper';
 
 export class TenantMapper implements IMapper
 {
