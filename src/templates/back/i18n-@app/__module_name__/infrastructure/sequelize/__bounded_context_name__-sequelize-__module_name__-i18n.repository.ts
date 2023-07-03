@@ -1,11 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel, LiteralObject } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, SequelizeRepository } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-i18n.repository';
-import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.mapper';
-import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'InjectModel') path='@nestjs/sequelize')
+            (object items=(array 'AuditingRunner' 'ICriteria' 'SequelizeRepository') path=config.auroraCorePackage)
+            (object
+                items=(
+                    array
+                        schema.aggregateName
+                        (sumStrings schema.aggregateName 'I18nModel')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository')
+                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper')
+                )
+                path=(
+                    sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)
+                )
+            )
+    )
+~}}
+{{#hasItems schema.properties.withRelationshipManyToMany }}
+{{ push importsArray
+    (object items='LiteralObject' path=config.auroraCorePackage)
+~}}
+{{/hasItems}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}I18nRepository extends SequelizeRepository<{{ schema.aggregateName }}, {{ schema.aggregateName }}I18nModel> implements {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository
 {

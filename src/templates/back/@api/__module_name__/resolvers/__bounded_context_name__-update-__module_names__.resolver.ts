@@ -19,7 +19,7 @@
 {{/if}}
 {{#if schema.hasAuditing}}
 {{ push importsArray
-    (object items=(array 'AuditingMeta' 'AuditingMeta') path=config.auroraCorePackage)
+    (object items=(array 'Auditing' 'AuditingMeta' 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
