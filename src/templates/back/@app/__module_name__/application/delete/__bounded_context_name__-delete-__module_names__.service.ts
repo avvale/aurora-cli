@@ -1,16 +1,25 @@
 {{
-    setVar 'importsArray' (
+    setVar 'importsArray'
+    (
         array
             (object items='Injectable' path='@nestjs/common')
             (object items='EventPublisher' path='@nestjs/cqrs')
             (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository'))
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent') path=(sumStrings '../events/' (toKebabCase schema.boundedContextName) '-add-' (toKebabCase schema.moduleNames) '-context.event'))
+            (object
+                items=(
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent')
+                )
+                path=(
+                    sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)
+                )
+            )
     )
 ~}}
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
-    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-i18n.repository'))
+    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     (object items='Operator' path=config.auroraCorePackage)
 ~}}
 {{/if}}
@@ -45,7 +54,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         if ({{ toCamelCase schema.moduleNames }}.length === 0) return;
 
         {{#if schema.properties.hasI18n}}
-        if ({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].langId.value === fallbackLang.id)
+        if ({{ toCamelCase schema.moduleNames }}[0].langId.value === fallbackLang.id)
         {
             // delete all translations if delete fallback language
             await this.repository.delete({
