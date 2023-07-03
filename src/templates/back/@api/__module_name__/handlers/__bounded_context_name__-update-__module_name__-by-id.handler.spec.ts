@@ -4,8 +4,8 @@
         array
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object items=(array 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
-            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.data'))
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings './' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleName) '-by-id.handler'))
+            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdInput') path='@api/graphql')
     )
 ~}}
@@ -14,7 +14,7 @@
     (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
     (object items='ConfigService' path='@nestjs/config')
     (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
-    (object items='langs' path=(sumStrings config.appContainer '/common/lang/infrastructure/mock/mock-lang.data'))
+    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
@@ -45,7 +45,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
-                        get: (key: string) => key === 'common/langs' ? langs : null,
+                        get: (key: string) => key === 'common/langs' ? commonMockLangData : null,
                     },
                 },
                 {{/if}}

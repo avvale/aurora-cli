@@ -20,6 +20,7 @@
     (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
     (object items='ConfigService' path='@nestjs/config')
     (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
@@ -51,7 +52,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
-                        get: (key: string) => key === 'common/langs' ? langs : null,
+                        get: (key: string) => key === 'common/langs' ? commonMockLangData : null,
                     },
                 },
                 {{/if}}

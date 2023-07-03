@@ -8,11 +8,18 @@
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
             (object items=(array 'ConfigModule' 'ConfigService') path='@nestjs/config')
             (object items=(array 'SequelizeModule') path='@nestjs/sequelize')
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository'))
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Seeder') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.seeder'))
-            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.data'))
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Seeder')
+                        (sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
+                )
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Module') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.boundedContextName) '.module'))
             (object items='GraphQLConfigModule' path='@aurora/graphql/graphql-config.module')
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Module') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.boundedContextName)  '.module'))
             (object items='* as request' path='supertest' defaultImport=true)
             (object items='* as _' path='lodash' defaultImport=true)
     )
@@ -20,7 +27,7 @@
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
     (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
-    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-i18n.repository'))
+    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
@@ -30,9 +37,9 @@
 {{/if}}
 {{#if schema.hasTenant}}
 {{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
-    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-policy.decorator'))
-    (object items='CurrentAccount' path='../../../shared/decorators/current-account.decorator')
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+    (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

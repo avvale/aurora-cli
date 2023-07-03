@@ -34,9 +34,9 @@
 {{/if}}
 {{#if schema.hasTenant}}
 {{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
-    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-policy.decorator'))
-    (object items='CurrentAccount' path='../../../shared/decorators/current-account.decorator')
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+    (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

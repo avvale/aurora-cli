@@ -4,14 +4,14 @@
             (object items='Injectable' path='@nestjs/common')
             (object items='EventPublisher' path='@nestjs/cqrs')
             (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings '../../domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository'))
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id') path='../../domain/value-objects')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects'))
     )
 ~}}
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
-    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings '../../domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-i18n.repository'))
-    (object items=(sumStrings (toPascalCase schema.boundedContextName)(toPascalCase schema.moduleName) 'AvailableLangs') path='../../domain/value-objects')
+    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+    (object items=(sumStrings (toPascalCase schema.boundedContextName)(toPascalCase schema.moduleName) 'AvailableLangs') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects'))
     (object items='* as _' path='lodash' defaultImport=true)
 ~}}
 {{/if}}

@@ -3,7 +3,7 @@
         array
             (object items=(array 'Args' 'Query' 'Resolver') path='@nestjs/graphql')
             (object items=(array 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-find-' (toKebabCase schema.moduleName) '-by-id.handler'))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
     )
 ~}}
@@ -19,9 +19,9 @@
 {{/if}}
 {{#if schema.hasTenant}}
 {{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
-    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-policy.decorator'))
-    (object items='CurrentAccount' path='../../../shared/decorators/current-account.decorator')
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+    (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
