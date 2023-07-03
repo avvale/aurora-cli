@@ -1,17 +1,16 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { CommonModule } from '@api/common/common.module';
+import { CommonIAdministrativeAreaLevel3Repository, commonMockAdministrativeAreaLevel3Data, CommonMockAdministrativeAreaLevel3Seeder } from '@app/common/administrative-area-level-3';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { IAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3/domain/administrative-area-level-3.repository';
-import { MockAdministrativeAreaLevel3Seeder } from '@app/common/administrative-area-level-3/infrastructure/mock/mock-administrative-area-level-3.seeder';
-import { administrativeAreasLevel3 } from '@app/common/administrative-area-level-3/infrastructure/seeds/administrative-area-level-3.seed';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { CommonModule } from '@api/common/common.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
-
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -19,8 +18,8 @@ const importForeignModules = [];
 describe('administrative-area-level-3', () =>
 {
     let app: INestApplication;
-    let administrativeAreaLevel3Repository: IAdministrativeAreaLevel3Repository;
-    let administrativeAreaLevel3Seeder: MockAdministrativeAreaLevel3Seeder;
+    let administrativeAreaLevel3Repository: CommonIAdministrativeAreaLevel3Repository;
+    let administrativeAreaLevel3Seeder: CommonMockAdministrativeAreaLevel3Seeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -57,15 +56,17 @@ describe('administrative-area-level-3', () =>
                 }),
             ],
             providers: [
-                MockAdministrativeAreaLevel3Seeder,
+                CommonMockAdministrativeAreaLevel3Seeder,
             ],
         })
+            .overrideGuard(Auth)
+            .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = administrativeAreasLevel3;
+        mockData = commonMockAdministrativeAreaLevel3Data;
         app = module.createNestApplication();
-        administrativeAreaLevel3Repository = module.get<IAdministrativeAreaLevel3Repository>(IAdministrativeAreaLevel3Repository);
-        administrativeAreaLevel3Seeder = module.get<MockAdministrativeAreaLevel3Seeder>(MockAdministrativeAreaLevel3Seeder);
+        administrativeAreaLevel3Repository = module.get<CommonIAdministrativeAreaLevel3Repository>(CommonIAdministrativeAreaLevel3Repository);
+        administrativeAreaLevel3Seeder = module.get<CommonMockAdministrativeAreaLevel3Seeder>(CommonMockAdministrativeAreaLevel3Seeder);
 
         // seed mock data in memory database
         await administrativeAreaLevel3Repository.insert(administrativeAreaLevel3Seeder.collectionSource);
@@ -185,6 +186,22 @@ describe('administrative-area-level-3', () =>
             });
     });
 
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3MapType property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/administrative-area-level-3/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                mapType: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3MapType must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Id property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -297,6 +314,22 @@ describe('administrative-area-level-3', () =>
             });
     });
 
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3MapType property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/administrative-area-level-3/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                mapType: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3MapType must be defined, can not be undefined');
+            });
+    });
+
     test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Id is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
@@ -393,35 +426,35 @@ describe('administrative-area-level-3', () =>
             });
     });
 
-    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Name is too large, has a maximum length of 255', () =>
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Name is too large, has a maximum length of 100', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-3/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '****************************************************************************************************************************************************************************************************************************************************************',
+                name: '*****************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Name is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Name is too large, has a maximum length of 100');
             });
     });
 
-    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Slug is too large, has a maximum length of 255', () =>
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Slug is too large, has a maximum length of 100', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-3/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                slug: '****************************************************************************************************************************************************************************************************************************************************************',
+                slug: '*****************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Slug is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Slug is too large, has a maximum length of 100');
             });
     });
 
@@ -456,64 +489,79 @@ describe('administrative-area-level-3', () =>
                 expect(res.body.message).toContain('The numerical value for AdministrativeAreaLevel3Zoom must have a positive sign, this field does not accept negative values');
             });
     });
-    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Latitude is too large, has a maximum decimal integers length of 13', () =>
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3MapType has to be a enum option of ROADMAP, SATELLITE, HYBRID, TERRAIN', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-3/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 88648902483445.12,
+                mapType: '****',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Latitude is too large, has a maximum length of 13 integers in');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3MapType has to be any of this options: ROADMAP, SATELLITE, HYBRID, TERRAIN');
             });
     });
-    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Longitude is too large, has a maximum decimal integers length of 13', () =>
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Latitude is too large, has a maximum decimal integers length of 2', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-3/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 30847994072442.973,
+                latitude: 727.8716376620772,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Longitude is too large, has a maximum length of 13 integers in');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Latitude is too large, has a maximum length of 2 integers in');
             });
     });
-    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Latitude is too large, has a maximum decimals length of 4', () =>
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Longitude is too large, has a maximum decimal integers length of 3', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-3/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 952379223776.788,
+                longitude: 9898.500478873588,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Latitude is too large, has a maximum length of 4 decimals in');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Longitude is too large, has a maximum length of 3 integers in');
             });
     });
-    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Longitude is too large, has a maximum decimals length of 4', () =>
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Latitude is too large, has a maximum decimals length of 14', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-3/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 205652984148.17084,
+                latitude: 6.246895982700607,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Longitude is too large, has a maximum length of 4 decimals in');
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Latitude is too large, has a maximum length of 14 decimals in');
+            });
+    });
+    test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Longitude is too large, has a maximum decimals length of 14', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/administrative-area-level-3/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                longitude: 47.81835807553372,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for AdministrativeAreaLevel3Longitude is too large, has a maximum length of 14 decimals in');
             });
     });
 
@@ -573,7 +621,7 @@ describe('administrative-area-level-3', () =>
                 {
                     where:
                     {
-                        id: '52d37690-b39a-41c7-8dae-7f29367a9b9a',
+                        id: '04e2b576-941b-5e5c-9e94-8a9b43e21df6',
                     },
                 },
             })
@@ -616,7 +664,7 @@ describe('administrative-area-level-3', () =>
     test('/REST:POST common/administrative-area-level-3/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .post('/common/administrative-area-level-3/find/0499fbff-31ca-47f0-b70c-4118f5c67eea')
+            .post('/common/administrative-area-level-3/find/78484f74-0fab-5d35-bbe4-0ce9f02f98c7')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -640,7 +688,7 @@ describe('administrative-area-level-3', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                id: '06584582-75c4-4d8e-bf99-cf98778182de',
+                id: 'f2106adc-d850-52e0-82ee-d20ca40b012e',
             })
             .expect(404);
     });
@@ -664,7 +712,7 @@ describe('administrative-area-level-3', () =>
     test('/REST:DELETE common/administrative-area-level-3/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/common/administrative-area-level-3/delete/1dcc439c-997e-4bac-8a3b-b9ab2fa61a7c')
+            .delete('/common/administrative-area-level-3/delete/e2035779-8b36-509f-991a-2298eb2c9099')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -699,6 +747,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                         }
                     }
                 `,
@@ -711,8 +760,8 @@ describe('administrative-area-level-3', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -772,6 +821,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
@@ -811,6 +861,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                         }
                     }
                 `,
@@ -847,6 +898,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
@@ -858,7 +910,7 @@ describe('administrative-area-level-3', () =>
                     {
                         where:
                         {
-                            id: 'e61f01dc-1cb3-499b-8d18-44beaf50e96c',
+                            id: 'dee52344-82f3-5db0-b8d7-45e7ef28b56e',
                         },
                     },
                 },
@@ -867,8 +919,8 @@ describe('administrative-area-level-3', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -891,6 +943,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
@@ -933,21 +986,22 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: 'f8fd04bb-b789-47bb-b887-9b7962526f14',
+                    id: '254e9514-dc7e-52f6-be09-d80e9a5b4307',
                 },
             })
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -970,6 +1024,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
@@ -1005,6 +1060,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
@@ -1013,7 +1069,7 @@ describe('administrative-area-level-3', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        id: 'f337deac-98f9-464b-91bc-fc704bc9117e',
+                        id: '58fedf22-034e-5934-aba6-22fbfb8eca55',
                     },
                 },
             })
@@ -1021,8 +1077,8 @@ describe('administrative-area-level-3', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -1045,6 +1101,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
@@ -1083,6 +1140,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
@@ -1126,21 +1184,22 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '8f73a34e-afd8-49a5-8107-b0b2641c94f6',
+                    id: '5da45096-103a-5605-9624-de829133d812',
                 },
             })
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -1163,6 +1222,7 @@ describe('administrative-area-level-3', () =>
                             latitude
                             longitude
                             zoom
+                            mapType
                             createdAt
                             updatedAt
                         }

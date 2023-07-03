@@ -1,0 +1,133 @@
+enum CommonAdministrativeAreaLevel2MapType {
+    ROADMAP
+    SATELLITE
+    HYBRID
+    TERRAIN
+}
+
+
+type CommonAdministrativeAreaLevel2
+{
+    id: ID!
+    countryId: ID!
+    country: CommonCountry
+    administrativeAreaLevel1Id: ID!
+    administrativeAreaLevel1: CommonAdministrativeAreaLevel1
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+    mapType: CommonAdministrativeAreaLevel2MapType!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input CommonCreateAdministrativeAreaLevel2Input
+{
+    id: ID!
+    countryId: ID!
+    administrativeAreaLevel1Id: ID!
+    code: GraphQLString!
+    customCode: GraphQLString
+    name: GraphQLString!
+    slug: GraphQLString!
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+    mapType: CommonAdministrativeAreaLevel2MapType!
+}
+
+input CommonUpdateAdministrativeAreaLevel2ByIdInput
+{
+    id: ID!
+    countryId: ID
+    administrativeAreaLevel1Id: ID
+    code: GraphQLString
+    customCode: GraphQLString
+    name: GraphQLString
+    slug: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+    mapType: CommonAdministrativeAreaLevel2MapType
+}
+
+input CommonUpdateAdministrativeAreasLevel2Input
+{
+    id: ID
+    countryId: ID
+    administrativeAreaLevel1Id: ID
+    code: GraphQLString
+    customCode: GraphQLString
+    name: GraphQLString
+    slug: GraphQLString
+    latitude: GraphQLFloat
+    longitude: GraphQLFloat
+    zoom: GraphQLInt
+    mapType: CommonAdministrativeAreaLevel2MapType
+}
+
+type Query
+{
+    commonFindAdministrativeAreaLevel2(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): CommonAdministrativeAreaLevel2
+
+    commonFindAdministrativeAreaLevel2ById(
+        id: ID
+        constraint: QueryStatement
+    ): CommonAdministrativeAreaLevel2
+
+    commonGetAdministrativeAreasLevel2(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAdministrativeAreaLevel2]!
+
+    commonPaginateAdministrativeAreasLevel2(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    commonCreateAdministrativeAreaLevel2(
+        payload: CommonCreateAdministrativeAreaLevel2Input!
+    ): CommonAdministrativeAreaLevel2
+
+    commonCreateAdministrativeAreasLevel2(
+        payload: [CommonCreateAdministrativeAreaLevel2Input]!
+    ): Boolean!
+
+    commonUpdateAdministrativeAreaLevel2ById(
+        payload: CommonUpdateAdministrativeAreaLevel2ByIdInput!
+        constraint: QueryStatement
+    ): CommonAdministrativeAreaLevel2
+
+    commonUpdateAdministrativeAreasLevel2(
+        payload: CommonUpdateAdministrativeAreasLevel2Input!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAdministrativeAreaLevel2]!
+
+    commonUpsertAdministrativeAreaLevel2(
+        payload: CommonUpdateAdministrativeAreaLevel2ByIdInput!
+    ): CommonAdministrativeAreaLevel2
+
+    commonDeleteAdministrativeAreaLevel2ById(
+        id: ID!
+        constraint: QueryStatement
+    ): CommonAdministrativeAreaLevel2
+
+    commonDeleteAdministrativeAreasLevel2(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAdministrativeAreaLevel2]!
+
+}

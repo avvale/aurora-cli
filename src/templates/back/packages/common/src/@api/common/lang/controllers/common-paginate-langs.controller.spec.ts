@@ -6,7 +6,7 @@ import { CommonPaginateLangsController } from './common-paginate-langs.controlle
 import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonPaginateLangsController', () =>
 {
@@ -43,17 +43,17 @@ describe('CommonPaginateLangsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a langs', async () =>
+        test('should return a commonMockLangData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : langs,
+                rows : commonMockLangData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : langs,
+                rows : commonMockLangData,
             });
         });
     });

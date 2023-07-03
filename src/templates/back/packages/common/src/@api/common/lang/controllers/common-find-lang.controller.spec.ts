@@ -6,7 +6,7 @@ import { CommonFindLangController } from './common-find-lang.controller';
 import { CommonFindLangHandler } from '../handlers/common-find-lang.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonFindLangController', () =>
 {
@@ -45,8 +45,8 @@ describe('CommonFindLangController', () =>
 
         test('should return a lang', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await controller.main()).toBe(langs[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await controller.main()).toBe(commonMockLangData[0]);
         });
     });
 });

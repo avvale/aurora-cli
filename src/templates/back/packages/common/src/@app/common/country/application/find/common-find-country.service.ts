@@ -1,5 +1,4 @@
-import { CommonCountry } from '../../domain/common-country.aggregate';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
+import { CommonCountry, CommonICountryRepository } from '@app/common/country';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 

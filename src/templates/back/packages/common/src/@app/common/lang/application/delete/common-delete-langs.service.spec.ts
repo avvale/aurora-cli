@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { DeleteLangsService } from './delete-langs.service';
+import { CommonDeleteLangsService } from './common-delete-langs.service';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
 describe('CommonDeleteLangsService', () =>
 {
-    let service: DeleteLangsService;
+    let service: CommonDeleteLangsService;
     let repository: CommonILangRepository;
-    let mockRepository: MockLangRepository;
+    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -20,8 +20,9 @@ describe('CommonDeleteLangsService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteLangsService,
-                MockLangRepository,
+                UnhandledExceptionBus,
+                CommonDeleteLangsService,
+                CommonMockLangRepository,
                 {
                     provide : CommonILangRepository,
                     useValue: {
@@ -33,14 +34,14 @@ describe('CommonDeleteLangsService', () =>
         })
             .compile();
 
-        service = module.get(DeleteLangsService);
+        service = module.get(CommonDeleteLangsService);
         repository = module.get(CommonILangRepository);
-        mockRepository = module.get(MockLangRepository);
+        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>
     {
-        test('DeleteLangsService should be defined', () =>
+        test('CommonDeleteLangsService should be defined', () =>
         {
             expect(service).toBeDefined();
         });

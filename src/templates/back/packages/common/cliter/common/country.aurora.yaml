@@ -117,11 +117,14 @@ aggregateI18nProperties:
     indexName: uniqueCountryIdLangId
   - name: name
     type: varchar
+    maxLength: 100
     nullable: false
+    index: index
   - name: slug
     type: varchar
-    maxLength: 1024
+    maxLength: 100
     nullable: false
+    index: index
   - name: administrativeAreaLevel1
     type: varchar
     maxLength: 50

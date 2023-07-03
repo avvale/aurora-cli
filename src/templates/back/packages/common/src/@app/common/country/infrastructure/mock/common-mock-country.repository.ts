@@ -27,7 +27,7 @@ import {
     CommonCountryI18nAdministrativeAreaLevel3,
 } from '@app/common/country/domain/value-objects';
 import { CommonCountry } from '../../domain/common-country.aggregate';
-import { commonCountries } from './common-mock-country.data';
+import { commonMockCountryData } from './common-mock-country.data';
 
 @Injectable()
 export class CommonMockCountryRepository extends MockRepository<CommonCountry> implements CommonICountryRepository
@@ -53,7 +53,7 @@ export class CommonMockCountryRepository extends MockRepository<CommonCountry> i
         this.collectionSource = [];
         const now = Utils.nowTimestamp();
 
-        for (const itemCollection of <any[]>commonCountries)
+        for (const itemCollection of <any[]>commonMockCountryData)
         {
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;

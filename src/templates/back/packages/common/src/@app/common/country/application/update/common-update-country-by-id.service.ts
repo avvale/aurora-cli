@@ -1,6 +1,4 @@
-import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
-import { CommonCountry } from '../../domain/common-country.aggregate';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
+import { CommonCountry, CommonICountryI18nRepository, CommonICountryRepository } from '@app/common/country';
 import {
     CommonCountryAdministrativeAreas,
     CommonCountryAvailableLangs,
@@ -25,7 +23,7 @@ import {
     CommonCountrySort,
     CommonCountryUpdatedAt,
     CommonCountryZoom,
-} from '../../domain/value-objects';
+} from '@app/common/country/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';

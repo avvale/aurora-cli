@@ -1,4 +1,4 @@
-import { CommonUpsertLangHandler } from '../handlers/common-upsert-lang.handler';
+import { CommonUpsertLangHandler } from '@api/common/lang';
 import { CommonLang, CommonUpdateLangByIdInput } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
 import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';

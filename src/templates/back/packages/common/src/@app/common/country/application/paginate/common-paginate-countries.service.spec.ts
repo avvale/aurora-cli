@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
 import { CommonPaginateCountriesService } from './common-paginate-countries.service';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
-describe('PaginateCountriesService', () =>
+describe('CommonPaginateCountriesService', () =>
 {
-    let service: PaginateCountriesService;
+    let service: CommonPaginateCountriesService;
     let repository: CommonICountryRepository;
-    let mockRepository: MockCountryRepository;
+    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -19,8 +19,9 @@ describe('PaginateCountriesService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                PaginateCountriesService,
-                MockCountryRepository,
+                UnhandledExceptionBus,
+                CommonPaginateCountriesService,
+                CommonMockCountryRepository,
                 {
                     provide : CommonICountryRepository,
                     useValue: {
@@ -31,14 +32,14 @@ describe('PaginateCountriesService', () =>
         })
             .compile();
 
-        service = module.get(PaginateCountriesService);
+        service = module.get(CommonPaginateCountriesService);
         repository = module.get(CommonICountryRepository);
-        mockRepository = module.get(MockCountryRepository);
+        mockRepository = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>
     {
-        test('PaginateCountriesService should be defined', () =>
+        test('CommonPaginateCountriesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });

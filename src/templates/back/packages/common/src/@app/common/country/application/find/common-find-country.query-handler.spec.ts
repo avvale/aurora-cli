@@ -1,31 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { FindCountryQueryHandler } from './common-find-country.query-handler';
-import { MockCountryRepository } from '@app/common/country/infrastructure/mock/mock-country.repository';
+import { CommonFindCountryQueryHandler } from './common-find-country.query-handler';
+import { CommonMockCountryRepository } from '@app/common/country/infrastructure/mock/common-mock-country.repository';
 import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
 import { CommonCountryMapper } from '@app/common/country/domain/common-country.mapper';
-import { FindCountryQuery } from './common-find-country.query';
-import { FindCountryService } from './common-find-country.service';
+import { CommonFindCountryQuery } from './common-find-country.query';
+import { CommonFindCountryService } from './common-find-country.service';
 
-describe('FindCountryQueryHandler', () =>
+describe('CommonFindCountryQueryHandler', () =>
 {
-    let queryHandler: FindCountryQueryHandler;
-    let service: FindCountryService;
-    let repository: MockCountryRepository;
-    let mapper: CountryMapper;
+    let queryHandler: CommonFindCountryQueryHandler;
+    let service: CommonFindCountryService;
+    let repository: CommonMockCountryRepository;
+    let mapper: CommonCountryMapper;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                FindCountryQueryHandler,
+                CommonFindCountryQueryHandler,
                 {
                     provide : CommonICountryRepository,
-                    useClass: MockCountryRepository,
+                    useClass: CommonMockCountryRepository,
                 },
                 {
-                    provide : FindCountryService,
+                    provide : CommonFindCountryService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -34,15 +34,15 @@ describe('FindCountryQueryHandler', () =>
         })
             .compile();
 
-        queryHandler = module.get<FindCountryQueryHandler>(FindCountryQueryHandler);
-        service = module.get<FindCountryService>(FindCountryService);
-        repository = <MockCountryRepository>module.get<CommonICountryRepository>(CommonICountryRepository);
-        mapper = new CountryMapper();
+        queryHandler = module.get<CommonFindCountryQueryHandler>(CommonFindCountryQueryHandler);
+        service = module.get<CommonFindCountryService>(CommonFindCountryService);
+        repository = <CommonMockCountryRepository>module.get<CommonICountryRepository>(CommonICountryRepository);
+        mapper = new CommonCountryMapper();
     });
 
     describe('main', () =>
     {
-        test('FindCountryQueryHandler should be defined', () =>
+        test('CommonFindCountryQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
@@ -51,7 +51,7 @@ describe('FindCountryQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
-                new FindCountryQuery(),
+                new CommonFindCountryQuery(),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

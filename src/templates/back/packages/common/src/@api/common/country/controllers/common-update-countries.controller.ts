@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { CommonCountryDto, CommonUpdateCountriesDto } from '../dto';
-import { CommonUpdateCountriesHandler } from '../handlers/common-update-countries.handler';
+import { CommonCountryDto, CommonUpdateCountriesDto, CommonUpdateCountriesHandler } from '@api/common/country';
 import { Auth } from '@aurora/decorators';
 import { Auditing, AuditingMeta, ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { Body, Controller, Put } from '@nestjs/common';

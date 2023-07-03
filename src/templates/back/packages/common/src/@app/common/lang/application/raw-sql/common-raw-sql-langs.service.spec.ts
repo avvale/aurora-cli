@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { RawSQLLangsService } from './raw-sql-langs.service';
+import { CommonRawSQLLangsService } from './common-raw-sql-langs.service';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
-describe('RawSQLLangsService', () =>
+describe('CommonRawSQLLangsService ', () =>
 {
-    let service: RawSQLLangsService;
+    let service: CommonRawSQLLangsService ;
     let repository: CommonILangRepository;
-    let mockRepository: MockLangRepository;
+    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -19,8 +19,9 @@ describe('RawSQLLangsService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                RawSQLLangsService,
-                MockLangRepository,
+                UnhandledExceptionBus,
+                CommonRawSQLLangsService ,
+                CommonMockLangRepository,
                 {
                     provide : CommonILangRepository,
                     useValue: {
@@ -31,9 +32,9 @@ describe('RawSQLLangsService', () =>
         })
             .compile();
 
-        service         = module.get(RawSQLLangsService);
+        service         = module.get(CommonRawSQLLangsService );
         repository      = module.get(CommonILangRepository);
-        mockRepository  = module.get(MockLangRepository);
+        mockRepository  = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>

@@ -3,8 +3,8 @@
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { CommonCountryModel } from '@app/common/country/infrastructure/sequelize/common-sequelize-country.model';
-import { CommonLangModel } from '@app/common/lang/infrastructure/sequelize/common-sequelize-lang.model';
+import { CommonCountryModel } from '@app/common/country';
+import { CommonLangModel } from '@app/common/lang';
 
 @Table({
     modelName: 'CommonCountryI18n',
@@ -14,7 +14,15 @@ import { CommonLangModel } from '@app/common/lang/infrastructure/sequelize/commo
 		{
 			fields: ['countryId', 'langId'],
 			unique: true,
-			name: 'uniqueLangId',
+			name: 'uniqueCountryIdLangId',
+		},
+		{
+			fields: ['name'],
+			unique: false,
+		},
+		{
+			fields: ['slug'],
+			unique: false,
 		},
 
     ],
@@ -170,14 +178,14 @@ export class CommonCountryI18nModel extends Model<CommonCountryI18nModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(undefined),
+        type: DataTypes.STRING(100),
     })
     name: string;
 
     @Column({
         field: 'slug',
         allowNull: false,
-        type: DataTypes.STRING(1024),
+        type: DataTypes.STRING(100),
     })
     slug: string;
 

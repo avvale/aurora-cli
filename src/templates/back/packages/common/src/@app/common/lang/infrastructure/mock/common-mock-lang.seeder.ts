@@ -16,7 +16,7 @@ import {
     CommonLangDeletedAt,
 } from '../../domain/value-objects';
 import { CommonLang } from '../../domain/common-lang.aggregate';
-import { commonLangs } from './common-mock-lang.data';
+import { commonMockLangData } from './common-mock-lang.data';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -34,7 +34,7 @@ export class CommonMockLangSeeder extends MockSeeder<CommonLang>
     {
         this.collectionSource = [];
 
-        for (const lang of _.orderBy(commonLangs, ['id']))
+        for (const lang of _.orderBy(commonMockLangData, ['id']))
         {
             this.collectionSource.push(
                 CommonLang.register(

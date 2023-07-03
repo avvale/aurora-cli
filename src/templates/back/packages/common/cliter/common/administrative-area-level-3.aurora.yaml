@@ -1,0 +1,103 @@
+version: 0.0.1
+boundedContextName: common
+moduleName: administrative-area-level-3
+moduleNames: administrative-areas-level-3
+aggregateName: CommonAdministrativeAreaLevel3
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: countryId
+    type: id
+    length: 36
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregate: CommonCountry
+      modulePath: common/country
+      key: id
+      field: country
+      avoidConstraint: true
+  - name: administrativeAreaLevel1Id
+    type: id
+    length: 36
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregate: CommonAdministrativeAreaLevel1
+      modulePath: common/administrative-area-level-1
+      key: id
+      field: administrativeAreaLevel1
+      avoidConstraint: true
+  - name: administrativeAreaLevel2Id
+    type: id
+    length: 36
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregate: CommonAdministrativeAreaLevel2
+      modulePath: common/administrative-area-level-2
+      key: id
+      field: administrativeAreaLevel2
+      avoidConstraint: true
+  - name: code
+    type: varchar
+    maxLength: 8
+    nullable: false
+    index: unique
+  - name: customCode
+    type: varchar
+    maxLength: 10
+    nullable: true
+    index: unique
+  - name: name
+    type: varchar
+    maxLength: 100
+    nullable: false
+    index: index
+  - name: slug
+    type: varchar
+    maxLength: 100
+    nullable: false
+    index: index
+  - name: latitude
+    type: decimal
+    decimals:
+      - 16
+      - 14
+    nullable: true
+  - name: longitude
+    type: decimal
+    decimals:
+      - 17
+      - 14
+    nullable: true
+  - name: zoom
+    type: int.unsigned
+    maxLength: 2
+    nullable: true
+  - name: mapType
+    type: enum
+    enumOptions:
+      - ROADMAP
+      - SATELLITE
+      - HYBRID
+      - TERRAIN
+    nullable: false
+    example: CommonAdministrativeAreaLevel3MapType.TERRAIN
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+aggregateI18nProperties: []
+additionalApis: []

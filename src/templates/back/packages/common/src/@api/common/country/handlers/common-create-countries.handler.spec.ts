@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // custom items
 import { CommonCreateCountriesHandler } from './common-create-countries.handler';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 
 describe('CommonCreateCountriesHandler', () =>
 {
@@ -44,9 +44,9 @@ describe('CommonCreateCountriesHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an countries created', async () =>
+        test('should return an commonMockCountryData created', async () =>
         {
-            expect(await handler.main(countries)).toBe(true);
+            expect(await handler.main(commonMockCountryData)).toBe(true);
         });
     });
 });

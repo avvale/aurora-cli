@@ -6,7 +6,7 @@ import { CommonFindLangByIdController } from './common-find-lang-by-id.controlle
 import { CommonFindLangByIdHandler } from '../handlers/common-find-lang-by-id.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonFindLangByIdController', () =>
 {
@@ -45,8 +45,8 @@ describe('CommonFindLangByIdController', () =>
 
         test('should return an lang by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await controller.main(langs[0].id)).toBe(langs[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await controller.main(commonMockLangData[0].id)).toBe(commonMockLangData[0]);
         });
     });
 });

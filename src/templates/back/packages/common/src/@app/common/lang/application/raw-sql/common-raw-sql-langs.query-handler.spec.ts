@@ -1,31 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { MockLangRepository } from '@app/common/lang/infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '@app/common/lang/infrastructure/mock/common-mock-lang.repository';
 import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
 import { CommonLangMapper } from '@app/common/lang/domain/common-lang.mapper';
-import { RawSQLLangsQueryHandler } from './raw-sql-langs.query-handler';
-import { RawSQLLangsQuery } from './raw-sql-langs.query';
-import { RawSQLLangsService } from './raw-sql-langs.service';
+import { CommonRawSQLLangsQueryHandler } from './common-raw-sql-langs.query-handler';
+import { CommonRawSQLLangsQuery } from './common-raw-sql-langs.query';
+import { CommonRawSQLLangsService } from './common-raw-sql-langs.service';
 
 describe('RawSQLLangsQueryHandler', () =>
 {
-    let queryHandler: RawSQLLangsQueryHandler;
-    let service: RawSQLLangsService;
-    let repository: MockLangRepository;
-    let mapper: LangMapper;
+    let queryHandler: CommonRawSQLLangsQueryHandler;
+    let service: CommonRawSQLLangsService;
+    let repository: CommonMockLangRepository;
+    let mapper: CommonLangMapper;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                RawSQLLangsQueryHandler,
+                CommonRawSQLLangsQueryHandler,
                 {
                     provide : CommonILangRepository,
-                    useClass: MockLangRepository,
+                    useClass: CommonMockLangRepository,
                 },
                 {
-                    provide : RawSQLLangsService,
+                    provide : CommonRawSQLLangsService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -34,15 +34,15 @@ describe('RawSQLLangsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler = module.get<RawSQLLangsQueryHandler>(RawSQLLangsQueryHandler);
-        service = module.get<RawSQLLangsService>(RawSQLLangsService);
-        repository = <MockLangRepository>module.get<CommonILangRepository>(CommonILangRepository);
-        mapper = new LangMapper();
+        queryHandler = module.get<CommonRawSQLLangsQueryHandler>(CommonRawSQLLangsQueryHandler);
+        service = module.get<CommonRawSQLLangsService>(CommonRawSQLLangsService);
+        repository = <CommonMockLangRepository>module.get<CommonILangRepository>(CommonILangRepository);
+        mapper = new CommonLangMapper();
     });
 
     describe('main', () =>
     {
-        test('RawSQLLangsQueryHandler should be defined', () =>
+        test('CommonRawSQLLangsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
@@ -51,7 +51,7 @@ describe('RawSQLLangsQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
             expect(await queryHandler.execute(
-                new RawSQLLangsQuery(),
+                new CommonRawSQLLangsQuery(),
             )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
         });
     });

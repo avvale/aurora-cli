@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { RawSQLCountriesService } from './raw-sql-countries.service';
+import { CommonRawSQLCountriesService } from './common-raw-sql-countries.service';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
-describe('RawSQLCountriesService', () =>
+describe('CommonRawSQLCountriesService ', () =>
 {
-    let service: RawSQLCountriesService;
+    let service: CommonRawSQLCountriesService ;
     let repository: CommonICountryRepository;
-    let mockRepository: MockCountryRepository;
+    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -19,8 +19,9 @@ describe('RawSQLCountriesService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                RawSQLCountriesService,
-                MockCountryRepository,
+                UnhandledExceptionBus,
+                CommonRawSQLCountriesService ,
+                CommonMockCountryRepository,
                 {
                     provide : CommonICountryRepository,
                     useValue: {
@@ -31,9 +32,9 @@ describe('RawSQLCountriesService', () =>
         })
             .compile();
 
-        service         = module.get(RawSQLCountriesService);
+        service         = module.get(CommonRawSQLCountriesService );
         repository      = module.get(CommonICountryRepository);
-        mockRepository  = module.get(MockCountryRepository);
+        mockRepository  = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>

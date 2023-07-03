@@ -1,5 +1,4 @@
-import { CommonLang } from '../../domain/common-lang.aggregate';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
+import { CommonILangRepository, CommonLang } from '@app/common/lang';
 import {
     CommonLangCreatedAt,
     CommonLangCustomCode,
@@ -14,7 +13,7 @@ import {
     CommonLangName,
     CommonLangSort,
     CommonLangUpdatedAt,
-} from '../../domain/value-objects';
+} from '@app/common/lang/domain/value-objects';
 import { CQMetadata, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';

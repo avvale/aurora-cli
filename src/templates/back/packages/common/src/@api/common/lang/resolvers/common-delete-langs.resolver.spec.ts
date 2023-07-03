@@ -6,7 +6,7 @@ import { CommonDeleteLangsResolver } from './common-delete-langs.resolver';
 import { CommonDeleteLangsHandler } from '../handlers/common-delete-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonDeleteLangsResolver', () =>
 {
@@ -46,10 +46,10 @@ describe('CommonDeleteLangsResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return an langs deleted', async () =>
+        test('should return an commonMockLangData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs)));
-            expect(await resolver.main()).toBe(langs);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData)));
+            expect(await resolver.main()).toBe(commonMockLangData);
         });
     });
 });

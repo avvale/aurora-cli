@@ -7,7 +7,7 @@ import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler'
 import { CommonCreateLangInput } from '@api/graphql';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonCreateLangResolver', () =>
 {
@@ -49,8 +49,8 @@ describe('CommonCreateLangResolver', () =>
 
         test('should return an lang created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await resolver.main(<CommonCreateLangInput>langs[0])).toBe(langs[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await resolver.main(<CommonCreateLangInput>commonMockLangData[0])).toBe(commonMockLangData[0]);
         });
     });
 });

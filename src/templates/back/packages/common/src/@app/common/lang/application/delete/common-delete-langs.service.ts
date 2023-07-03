@@ -1,5 +1,4 @@
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonAddLangsContextEvent } from '../events/common-add-langs-context.event';
+import { CommonAddLangsContextEvent, CommonILangRepository } from '@app/common/lang';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';

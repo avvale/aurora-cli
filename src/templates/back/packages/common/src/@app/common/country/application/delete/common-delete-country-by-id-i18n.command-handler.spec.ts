@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { DeleteCountryByIdI18nCommandHandler } from './delete-country-by-id-i18n.command-handler';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 import { DeleteCountryByIdI18nCommand } from './delete-country-by-id-i18n.command';
 import { DeleteCountryByIdI18nService } from './delete-country-by-id-i18n.service';
 
@@ -41,7 +41,7 @@ describe('CommonDeleteCountryByIdI18nCommandHandler', () =>
         {
             expect(await commandHandler.execute(
                 new DeleteCountryByIdI18nCommand(
-                    countries[0].id,
+                    commonMockCountryData[0].id,
                 ),
             )).toBe(undefined);
         });

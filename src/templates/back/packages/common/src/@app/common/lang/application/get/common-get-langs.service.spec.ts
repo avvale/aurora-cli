@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { GetLangsService } from './get-langs.service';
+import { CommonGetLangsService } from './common-get-langs.service';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
-describe('GetLangsService', () =>
+describe('CommonGetLangsService', () =>
 {
-    let service: GetLangsService;
+    let service: CommonGetLangsService;
     let repository: CommonILangRepository;
-    let mockRepository: MockLangRepository;
+    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -19,8 +19,9 @@ describe('GetLangsService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                GetLangsService,
-                MockLangRepository,
+                UnhandledExceptionBus,
+                CommonGetLangsService,
+                CommonMockLangRepository,
                 {
                     provide : CommonILangRepository,
                     useValue: {
@@ -31,9 +32,9 @@ describe('GetLangsService', () =>
         })
             .compile();
 
-        service = module.get(GetLangsService);
+        service = module.get(CommonGetLangsService);
         repository = module.get(CommonILangRepository);
-        mockRepository = module.get(MockLangRepository);
+        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>

@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { FindLangByIdService } from './common-find-lang-by-id.service';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
+import { CommonFindLangByIdService } from './common-find-lang-by-id.service';
 import { CommonLangId } from '../../domain/value-objects';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
-describe('FindLangByIdService', () =>
+describe('CommonFindLangByIdService', () =>
 {
-    let service: FindLangByIdService;
+    let service: CommonFindLangByIdService;
     let repository: CommonILangRepository;
-    let mockRepository: MockLangRepository;
+    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -21,8 +21,9 @@ describe('FindLangByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                FindLangByIdService,
-                MockLangRepository,
+                UnhandledExceptionBus,
+                CommonFindLangByIdService,
+                CommonMockLangRepository,
                 {
                     provide : CommonILangRepository,
                     useValue: {
@@ -33,9 +34,9 @@ describe('FindLangByIdService', () =>
         })
             .compile();
 
-        service = module.get(FindLangByIdService);
+        service = module.get(CommonFindLangByIdService);
         repository = module.get(CommonILangRepository);
-        mockRepository = module.get(MockLangRepository);
+        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>
@@ -49,7 +50,7 @@ describe('FindLangByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new LangId(langs[0].id),
+                new CommonLangId(commonMockLangData[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

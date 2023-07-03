@@ -1,4 +1,4 @@
-import { CommonFindLangByIdHandler } from '../handlers/common-find-lang-by-id.handler';
+import { CommonFindLangByIdHandler } from '@api/common/lang';
 import { CommonLang } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';

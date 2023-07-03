@@ -1,6 +1,4 @@
-
-import { LiteralObject } from '@nestjs/common';
-import { IRepository, QueryStatement } from '@aurorajs.dev/core';
+import { IRepository, QueryStatement, LiteralObject } from '@aurorajs.dev/core';
 import { CQMetadata, Pagination } from '@aurorajs.dev/core';
 import { CommonCountry } from './common-country.aggregate';
 import { CommonCountryId } from './value-objects';

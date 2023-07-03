@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
-import { CommonCreateCountryCommandHandler } from './create-country.command-handler';
-import { CommonCreateCountryCommand } from './create-country.command';
-import { CommonCreateCountryService } from './create-country.service';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { CommonCreateCountryCommandHandler } from './common-create-country.command-handler';
+import { CommonCreateCountryCommand } from './common-create-country.command';
+import { CommonCreateCountryService } from './common-create-country.service';
 
 describe('CommonCreateCountryCommandHandler', () =>
 {
-    let commandHandler: CreateCountryCommandHandler;
-    let service: CreateCountryService;
+    let commandHandler: CommonCreateCountryCommandHandler;
+    let service: CommonCreateCountryService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                CreateCountryCommandHandler,
+                CommonCreateCountryCommandHandler,
                 {
-                    provide : CreateCountryService,
+                    provide : CommonCreateCountryService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,8 +26,8 @@ describe('CommonCreateCountryCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<CreateCountryCommandHandler>(CreateCountryCommandHandler);
-        service = module.get<CreateCountryService>(CreateCountryService);
+        commandHandler = module.get<CommonCreateCountryCommandHandler>(CommonCreateCountryCommandHandler);
+        service = module.get<CommonCreateCountryService>(CommonCreateCountryService);
     });
 
     describe('main', () =>
@@ -37,30 +37,30 @@ describe('CommonCreateCountryCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateCountryService', async () =>
+        test('should create the values objects and pass them as parameters to the CommonCreateCountryService', async () =>
         {
             expect(await commandHandler.execute(
-                new CreateCountryCommand(
+                new CommonCreateCountryCommand(
                     {
-                        id: countries[0].id,
-                        iso3166Alpha2: countries[0].iso3166Alpha2,
-                        iso3166Alpha3: countries[0].iso3166Alpha3,
-                        iso3166Numeric: countries[0].iso3166Numeric,
-                        customCode: countries[0].customCode,
-                        prefix: countries[0].prefix,
-                        image: countries[0].image,
-                        sort: countries[0].sort,
-                        administrativeAreas: countries[0].administrativeAreas,
-                        latitude: countries[0].latitude,
-                        longitude: countries[0].longitude,
-                        zoom: countries[0].zoom,
-                        mapType: countries[0].mapType,
-                        langId: countries[0].langId,
-                        name: countries[0].name,
-                        slug: countries[0].slug,
-                        administrativeAreaLevel1: countries[0].administrativeAreaLevel1,
-                        administrativeAreaLevel2: countries[0].administrativeAreaLevel2,
-                        administrativeAreaLevel3: countries[0].administrativeAreaLevel3,
+                        id: commonMockCountryData[0].id,
+                        iso3166Alpha2: commonMockCountryData[0].iso3166Alpha2,
+                        iso3166Alpha3: commonMockCountryData[0].iso3166Alpha3,
+                        iso3166Numeric: commonMockCountryData[0].iso3166Numeric,
+                        customCode: commonMockCountryData[0].customCode,
+                        prefix: commonMockCountryData[0].prefix,
+                        image: commonMockCountryData[0].image,
+                        sort: commonMockCountryData[0].sort,
+                        administrativeAreas: commonMockCountryData[0].administrativeAreas,
+                        latitude: commonMockCountryData[0].latitude,
+                        longitude: commonMockCountryData[0].longitude,
+                        zoom: commonMockCountryData[0].zoom,
+                        mapType: commonMockCountryData[0].mapType,
+                        langId: commonMockCountryData[0].langId,
+                        name: commonMockCountryData[0].name,
+                        slug: commonMockCountryData[0].slug,
+                        administrativeAreaLevel1: commonMockCountryData[0].administrativeAreaLevel1,
+                        administrativeAreaLevel2: commonMockCountryData[0].administrativeAreaLevel2,
+                        administrativeAreaLevel3: commonMockCountryData[0].administrativeAreaLevel3,
                     },
                     { timezone: process.env.TZ },
                 ),

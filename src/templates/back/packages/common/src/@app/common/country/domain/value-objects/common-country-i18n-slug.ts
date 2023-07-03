@@ -10,7 +10,7 @@ export class CommonCountryI18nSlug extends StringValueObject
             name       : 'CountryI18nSlug',
             nullable   : false,
             undefinable: false,
-            maxLength  : 1024,
+            maxLength  : 100,
         }, validationRules));
     }
 }

@@ -26,7 +26,7 @@ import {
     CommonCountryI18nAdministrativeAreaLevel3,
 } from '../../domain/value-objects';
 import { CommonCountry } from '../../domain/common-country.aggregate';
-import { commonCountries } from './common-mock-country.data';
+import { commonMockCountryData } from './common-mock-country.data';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -44,7 +44,7 @@ export class CommonMockCountrySeeder extends MockSeeder<CommonCountry>
     {
         this.collectionSource = [];
 
-        for (const country of _.orderBy(commonCountries, ['id']))
+        for (const country of _.orderBy(commonMockCountryData, ['id']))
         {
             this.collectionSource.push(
                 CommonCountry.register(

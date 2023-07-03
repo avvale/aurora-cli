@@ -2,10 +2,7 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { CommonModule } from '@api/common/common.module';
-import { CommonICountryI18nRepository } from '@app/common/country/domain/common-country-i18n.repository';
-import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
-import { commonCountries } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonMockCountrySeeder } from '@app/common/country/infrastructure/mock/common-mock-country.seeder';
+import { CommonICountryI18nRepository, CommonICountryRepository, commonMockCountryData, CommonMockCountrySeeder } from '@app/common/country';
 import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { CoreAddI18nConstraintService } from '@aurorajs.dev/core';
@@ -79,7 +76,7 @@ describe('country', () =>
             })
             .compile();
 
-        mockData = commonCountries;
+        mockData = commonMockCountryData;
         app = module.createNestApplication();
         countryRepository = module.get<CommonICountryRepository>(CommonICountryRepository);
         repositoryI18n  = module.get<CommonICountryI18nRepository>(CommonICountryI18nRepository);
@@ -508,19 +505,35 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug is too large, has a maximum length of 1024', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nName is too large, has a maximum length of 100', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                slug: '*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                name: '*****************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nSlug is too large, has a maximum length of 1024');
+                expect(res.body.message).toContain('Value for CountryI18nName is too large, has a maximum length of 100');
+            });
+    });
+
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug is too large, has a maximum length of 100', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/country/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                slug: '*****************************************************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CountryI18nSlug is too large, has a maximum length of 100');
             });
     });
 
@@ -609,7 +622,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 536.3776876272565,
+                latitude: 205.99275444058145,
             })
             .expect(400)
             .then(res =>
@@ -624,7 +637,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 5572.888710982445,
+                longitude: 1896.226943561679,
             })
             .expect(400)
             .then(res =>
@@ -639,7 +652,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 3.282542596900878,
+                latitude: 6.550473361711377,
             })
             .expect(400)
             .then(res =>
@@ -654,7 +667,7 @@ describe('country', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 67.6443597968255,
+                longitude: 90.11641355055885,
             })
             .expect(400)
             .then(res =>

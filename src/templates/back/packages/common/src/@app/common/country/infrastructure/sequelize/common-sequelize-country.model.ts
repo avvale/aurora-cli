@@ -3,7 +3,7 @@
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { CommonLangModel } from '@app/common/lang/infrastructure/sequelize/common-sequelize-lang.model';
+import { CommonLangModel } from '@app/common/lang';
 import { CommonCountryI18nModel } from './common-sequelize-country-i18n.model';
 
 @Table({

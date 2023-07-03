@@ -2,23 +2,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { CreateLangsCommandHandler } from './create-langs.command-handler';
-import { CreateLangsCommand } from './create-langs.command';
-import { CreateLangsService } from './create-langs.service';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
+import { CommonCreateLangsCommandHandler } from './common-create-langs.command-handler';
+import { CommonCreateLangsCommand } from './common-create-langs.command';
+import { CommonCreateLangsService } from './common-create-langs.service';
 
-describe('CreateLangsCommandHandler', () =>
+describe('commonCreateLangsCommandHandler', () =>
 {
-    let commandHandler: CreateLangsCommandHandler;
-    let service: CreateLangsService;
+    let commandHandler: CommonCreateLangsCommandHandler;
+    let service: CommonCreateLangsService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                CreateLangsCommandHandler,
+                CommonCreateLangsCommandHandler,
                 {
-                    provide : CreateLangsService,
+                    provide : CommonCreateLangsService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -27,22 +27,22 @@ describe('CreateLangsCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<CreateLangsCommandHandler>(CreateLangsCommandHandler);
-        service = module.get<CreateLangsService>(CreateLangsService);
+        commandHandler = module.get<CommonCreateLangsCommandHandler>(CommonCreateLangsCommandHandler);
+        service = module.get<CommonCreateLangsService>(CommonCreateLangsService);
     });
 
     describe('main', () =>
     {
-        test('CreateLangsCommandHandler should be defined', () =>
+        test('CommonCreateLangsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return langs createds', async () =>
+        test('should return CommonMockLangData createds', async () =>
         {
             expect(await commandHandler.execute(
-                new CreateLangsCommand(
-                    langs,
+                new CommonCreateLangsCommand(
+                    commonMockLangData,
                     { timezone: process.env.TZ },
                 ),
             )).toBe(undefined);

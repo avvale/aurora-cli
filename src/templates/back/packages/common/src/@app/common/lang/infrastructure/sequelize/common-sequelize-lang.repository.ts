@@ -1,10 +1,7 @@
+import { CommonILangRepository, CommonLang, CommonLangMapper, CommonLangModel } from '@app/common/lang';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, LiteralObject, SequelizeRepository } from '@aurorajs.dev/core';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonLang } from '../../domain/common-lang.aggregate';
-import { CommonLangMapper } from '../../domain/common-lang.mapper';
-import { CommonLangModel } from './common-sequelize-lang.model';
 
 @Injectable()
 export class CommonSequelizeLangRepository extends SequelizeRepository<CommonLang, CommonLangModel> implements CommonILangRepository

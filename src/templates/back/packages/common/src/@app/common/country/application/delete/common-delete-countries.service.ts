@@ -1,6 +1,4 @@
-import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonAddCountriesContextEvent } from '../events/common-add-countries-context.event';
+import { CommonAddCountriesContextEvent, CommonICountryI18nRepository, CommonICountryRepository } from '@app/common/country';
 import { CQMetadata, Operator, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';

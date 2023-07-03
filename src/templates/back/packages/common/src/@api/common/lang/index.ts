@@ -1,3 +1,35 @@
+// export DTOs
+export { CommonLangDto } from './dto/common-lang.dto';
+export { CommonCreateLangDto } from './dto/common-create-lang.dto';
+export { CommonUpdateLangByIdDto } from './dto/common-update-lang-by-id.dto';
+export { CommonUpdateLangsDto } from './dto/common-update-langs.dto';
+
+// export handlers
+export { CommonCreateLangHandler } from './handlers/common-create-lang.handler';
+export { CommonCreateLangsHandler } from './handlers/common-create-langs.handler';
+export { CommonPaginateLangsHandler } from './handlers/common-paginate-langs.handler';
+export { CommonGetLangsHandler } from './handlers/common-get-langs.handler';
+export { CommonFindLangByIdHandler } from './handlers/common-find-lang-by-id.handler';
+export { CommonFindLangHandler } from './handlers/common-find-lang.handler';
+export { CommonUpdateLangByIdHandler } from './handlers/common-update-lang-by-id.handler';
+export { CommonUpdateLangsHandler } from './handlers/common-update-langs.handler';
+export { CommonUpsertLangHandler } from './handlers/common-upsert-lang.handler';
+export { CommonDeleteLangByIdHandler } from './handlers/common-delete-lang-by-id.handler';
+export { CommonDeleteLangsHandler } from './handlers/common-delete-langs.handler';
+
+// export controllers
+export { CommonCreateLangController } from './controllers/common-create-lang.controller';
+export { CommonCreateLangsController } from './controllers/common-create-langs.controller';
+export { CommonPaginateLangsController } from './controllers/common-paginate-langs.controller';
+export { CommonGetLangsController } from './controllers/common-get-langs.controller';
+export { CommonFindLangByIdController } from './controllers/common-find-lang-by-id.controller';
+export { CommonFindLangController } from './controllers/common-find-lang.controller';
+export { CommonUpdateLangByIdController } from './controllers/common-update-lang-by-id.controller';
+export { CommonUpdateLangsController } from './controllers/common-update-langs.controller';
+export { CommonUpsertLangController } from './controllers/common-upsert-lang.controller';
+export { CommonDeleteLangByIdController } from './controllers/common-delete-lang-by-id.controller';
+export { CommonDeleteLangsController } from './controllers/common-delete-langs.controller';
+
 // controllers
 import { CommonCreateLangController } from './controllers/common-create-lang.controller';
 import { CommonCreateLangsController } from './controllers/common-create-langs.controller';

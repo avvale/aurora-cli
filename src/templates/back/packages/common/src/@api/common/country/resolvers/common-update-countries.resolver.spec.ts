@@ -9,7 +9,7 @@ import { CommonUpdateCountriesInput } from '@api/graphql';
 
 // sources
 import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 
 describe('CommonUpdateCountriesResolver', () =>
 {
@@ -52,8 +52,8 @@ describe('CommonUpdateCountriesResolver', () =>
 
         test('should return a countries updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
-            expect(await resolver.main(<CommonUpdateCountriesInput>countries[0])).toBe(countries[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData[0])));
+            expect(await resolver.main(<CommonUpdateCountriesInput>commonMockCountryData[0])).toBe(commonMockCountryData[0]);
         });
     });
 });

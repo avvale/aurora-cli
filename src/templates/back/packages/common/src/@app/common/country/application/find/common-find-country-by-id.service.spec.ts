@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
-import { FindCountryByIdService } from './common-find-country-by-id.service';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { CommonFindCountryByIdService } from './common-find-country-by-id.service';
 import { CommonCountryId } from '../../domain/value-objects';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
-describe('FindCountryByIdService', () =>
+describe('CommonFindCountryByIdService', () =>
 {
-    let service: FindCountryByIdService;
+    let service: CommonFindCountryByIdService;
     let repository: CommonICountryRepository;
-    let mockRepository: MockCountryRepository;
+    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -21,8 +21,9 @@ describe('FindCountryByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                FindCountryByIdService,
-                MockCountryRepository,
+                UnhandledExceptionBus,
+                CommonFindCountryByIdService,
+                CommonMockCountryRepository,
                 {
                     provide : CommonICountryRepository,
                     useValue: {
@@ -33,9 +34,9 @@ describe('FindCountryByIdService', () =>
         })
             .compile();
 
-        service = module.get(FindCountryByIdService);
+        service = module.get(CommonFindCountryByIdService);
         repository = module.get(CommonICountryRepository);
-        mockRepository = module.get(MockCountryRepository);
+        mockRepository = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>
@@ -49,7 +50,7 @@ describe('FindCountryByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new CountryId(countries[0].id),
+                new CommonCountryId(commonMockCountryData[0].id),
             )).toBe(mockRepository.collectionSource[0]);
         });
     });

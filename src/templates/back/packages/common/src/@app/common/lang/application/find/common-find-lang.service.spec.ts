@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { FindLangService } from './common-find-lang.service';
+import { CommonFindLangService } from './common-find-lang.service';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
-describe('FindLangService', () =>
+describe('CommonFindLangService', () =>
 {
-    let service: FindLangService;
+    let service: CommonFindLangService;
     let repository: CommonILangRepository;
-    let mockRepository: MockLangRepository;
+    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -19,8 +19,9 @@ describe('FindLangService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                FindLangService,
-                MockLangRepository,
+                UnhandledExceptionBus,
+                CommonFindLangService,
+                CommonMockLangRepository,
                 {
                     provide : CommonILangRepository,
                     useValue: {
@@ -31,14 +32,14 @@ describe('FindLangService', () =>
         })
             .compile();
 
-        service = module.get(FindLangService);
+        service = module.get(CommonFindLangService);
         repository = module.get(CommonILangRepository);
-        mockRepository = module.get(MockLangRepository);
+        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>
     {
-        test('FindLangService should be defined', () =>
+        test('CommonFindLangService should be defined', () =>
         {
             expect(service).toBeDefined();
         });

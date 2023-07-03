@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // custom items
 import { CommonCreateLangsHandler } from './common-create-langs.handler';
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonCreateLangsHandler', () =>
 {
@@ -44,9 +44,9 @@ describe('CommonCreateLangsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an langs created', async () =>
+        test('should return an commonMockLangData created', async () =>
         {
-            expect(await handler.main(langs)).toBe(true);
+            expect(await handler.main(commonMockLangData)).toBe(true);
         });
     });
 });

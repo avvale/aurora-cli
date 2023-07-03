@@ -1,4 +1,4 @@
-import { CommonFindCountryByIdHandler } from '../handlers/common-find-country-by-id.handler';
+import { CommonFindCountryByIdHandler } from '@api/common/country';
 import { CommonCountry } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
 import { ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';

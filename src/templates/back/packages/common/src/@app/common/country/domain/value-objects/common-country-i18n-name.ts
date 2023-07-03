@@ -10,6 +10,7 @@ export class CommonCountryI18nName extends StringValueObject
             name       : 'CountryI18nName',
             nullable   : false,
             undefinable: false,
+            maxLength  : 100,
         }, validationRules));
     }
 }

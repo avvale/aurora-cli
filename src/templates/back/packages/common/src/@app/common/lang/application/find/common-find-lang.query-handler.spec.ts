@@ -1,31 +1,31 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { FindLangQueryHandler } from './common-find-lang.query-handler';
-import { MockLangRepository } from '@app/common/lang/infrastructure/mock/mock-lang.repository';
+import { CommonFindLangQueryHandler } from './common-find-lang.query-handler';
+import { CommonMockLangRepository } from '@app/common/lang/infrastructure/mock/common-mock-lang.repository';
 import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
 import { CommonLangMapper } from '@app/common/lang/domain/common-lang.mapper';
-import { FindLangQuery } from './common-find-lang.query';
-import { FindLangService } from './common-find-lang.service';
+import { CommonFindLangQuery } from './common-find-lang.query';
+import { CommonFindLangService } from './common-find-lang.service';
 
-describe('FindLangQueryHandler', () =>
+describe('CommonFindLangQueryHandler', () =>
 {
-    let queryHandler: FindLangQueryHandler;
-    let service: FindLangService;
-    let repository: MockLangRepository;
-    let mapper: LangMapper;
+    let queryHandler: CommonFindLangQueryHandler;
+    let service: CommonFindLangService;
+    let repository: CommonMockLangRepository;
+    let mapper: CommonLangMapper;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                FindLangQueryHandler,
+                CommonFindLangQueryHandler,
                 {
                     provide : CommonILangRepository,
-                    useClass: MockLangRepository,
+                    useClass: CommonMockLangRepository,
                 },
                 {
-                    provide : FindLangService,
+                    provide : CommonFindLangService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -34,15 +34,15 @@ describe('FindLangQueryHandler', () =>
         })
             .compile();
 
-        queryHandler = module.get<FindLangQueryHandler>(FindLangQueryHandler);
-        service = module.get<FindLangService>(FindLangService);
-        repository = <MockLangRepository>module.get<CommonILangRepository>(CommonILangRepository);
-        mapper = new LangMapper();
+        queryHandler = module.get<CommonFindLangQueryHandler>(CommonFindLangQueryHandler);
+        service = module.get<CommonFindLangService>(CommonFindLangService);
+        repository = <CommonMockLangRepository>module.get<CommonILangRepository>(CommonILangRepository);
+        mapper = new CommonLangMapper();
     });
 
     describe('main', () =>
     {
-        test('FindLangQueryHandler should be defined', () =>
+        test('CommonFindLangQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
@@ -51,7 +51,7 @@ describe('FindLangQueryHandler', () =>
         {
             jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
             expect(await queryHandler.execute(
-                new FindLangQuery(),
+                new CommonFindLangQuery(),
             )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
         });
     });

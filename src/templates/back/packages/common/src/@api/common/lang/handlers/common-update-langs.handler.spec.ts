@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CommonUpdateLangsHandler } from './common-update-langs.handler';
+import { CommonUpdateLangsHandler } from '@api/common/lang';
 import { CommonUpdateLangsInput } from '@api/graphql';
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
@@ -53,8 +53,8 @@ describe('CommonUpdateLangsHandler', () =>
 
         test('should return a langs updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await handler.main(<CommonUpdateLangsInput>langs[0])).toBe(langs[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await handler.main(<CommonUpdateLangsInput>commonMockLangData[0])).toBe(commonMockLangData[0]);
         });
     });
 });

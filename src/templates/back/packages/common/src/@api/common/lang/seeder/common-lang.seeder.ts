@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
 import { CommonCreateLangsCommand } from '@app/common/lang';
-import { commonLangs } from '@app/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 
 @Injectable()
 export class CommonLangSeeder
@@ -16,7 +16,7 @@ export class CommonLangSeeder
     async main(): Promise<boolean>
     {
         await this.commandBus.dispatch(new CommonCreateLangsCommand(
-            commonLangs,
+            commonMockLangData,
             {
                 timezone: process.env.TZ ,
             },

@@ -6,7 +6,7 @@ import { CommonCreateLangsHandler } from '../handlers/common-create-langs.handle
 import { CommonCreateLangInput } from '@api/graphql';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonCreateLangsResolver', () =>
 {
@@ -46,7 +46,7 @@ describe('CommonCreateLangsResolver', () =>
 
         test('should return an langs created', async () =>
         {
-            expect(await resolver.main(<CommonCreateLangInput[]>langs)).toBe(undefined);
+            expect(await resolver.main(<CommonCreateLangInput[]>commonMockLangData)).toBe(undefined);
         });
     });
 });

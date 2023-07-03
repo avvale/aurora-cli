@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 import { CommonUpdateLangByIdCommandHandler } from './common-update-lang-by-id.command-handler';
 import { CommonUpdateLangByIdCommand } from './common-update-lang-by-id.command';
 import { CommonUpdateLangByIdService } from './common-update-lang-by-id.service';
@@ -15,9 +15,9 @@ describe('CommonUpdateLangByIdCommandHandler', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                UpdateLangByIdCommandHandler,
+                CommonUpdateLangByIdCommandHandler,
                 {
-                    provide : UpdateLangByIdService,
+                    provide : CommonUpdateLangByIdService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,8 +26,8 @@ describe('CommonUpdateLangByIdCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<UpdateLangByIdCommandHandler>(UpdateLangByIdCommandHandler);
-        service = module.get<UpdateLangByIdService>(UpdateLangByIdService);
+        commandHandler = module.get<CommonUpdateLangByIdCommandHandler>(CommonUpdateLangByIdCommandHandler);
+        service = module.get<CommonUpdateLangByIdService>(CommonUpdateLangByIdService);
     });
 
     describe('main', () =>
@@ -40,18 +40,18 @@ describe('CommonUpdateLangByIdCommandHandler', () =>
         test('should return an lang created', async () =>
         {
             expect(await commandHandler.execute(
-                new UpdateLangByIdCommand(
+                new CommonUpdateLangByIdCommand(
                     {
-                        id: langs[0].id,
-                        name: langs[0].name,
-                        image: langs[0].image,
-                        iso6392: langs[0].iso6392,
-                        iso6393: langs[0].iso6393,
-                        ietf: langs[0].ietf,
-                        customCode: langs[0].customCode,
-                        dir: langs[0].dir,
-                        sort: langs[0].sort,
-                        isActive: langs[0].isActive,
+                        id: commonMockLangData[0].id,
+                        name: commonMockLangData[0].name,
+                        image: commonMockLangData[0].image,
+                        iso6392: commonMockLangData[0].iso6392,
+                        iso6393: commonMockLangData[0].iso6393,
+                        ietf: commonMockLangData[0].ietf,
+                        customCode: commonMockLangData[0].customCode,
+                        dir: commonMockLangData[0].dir,
+                        sort: commonMockLangData[0].sort,
+                        isActive: commonMockLangData[0].isActive,
                     },
                     {},
                     { timezone: process.env.TZ },

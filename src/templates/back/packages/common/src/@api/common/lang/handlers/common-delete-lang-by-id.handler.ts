@@ -1,4 +1,4 @@
-import { CommonLangDto } from '../dto';
+import { CommonLangDto } from '@api/common/lang';
 import { CommonLang } from '@api/graphql';
 import { CommonDeleteLangByIdCommand, CommonFindLangByIdQuery } from '@app/common/lang';
 import { AuditingMeta, CoreGetLangsService, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';

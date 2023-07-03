@@ -3,7 +3,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
 import { CommonCreateCountriesCommand } from '@app/common/country';
-import { commonCountries } from '@app/common/country';
+import { commonMockCountryData } from '@app/common/country';
 
 @Injectable()
 export class CommonCountrySeeder
@@ -16,7 +16,7 @@ export class CommonCountrySeeder
     async main(): Promise<boolean>
     {
         await this.commandBus.dispatch(new CommonCreateCountriesCommand(
-            commonCountries,
+            commonMockCountryData,
             {
                 timezone: process.env.TZ ,
             },

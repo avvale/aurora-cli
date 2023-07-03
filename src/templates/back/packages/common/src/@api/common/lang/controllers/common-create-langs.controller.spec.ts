@@ -5,7 +5,7 @@ import { CommonCreateLangsController } from './common-create-langs.controller';
 import { CommonCreateLangsHandler } from '../handlers/common-create-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonCreateLangsController', () =>
 {
@@ -40,9 +40,9 @@ describe('CommonCreateLangsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an langs created', async () =>
+        test('should return an commonMockLangData created', async () =>
         {
-            expect(await controller.main(langs)).toBe(undefined);
+            expect(await controller.main(commonMockLangData)).toBe(undefined);
         });
     });
 });

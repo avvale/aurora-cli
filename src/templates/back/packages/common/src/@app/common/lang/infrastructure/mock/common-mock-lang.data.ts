@@ -3,7 +3,7 @@
 /* eslint-disable key-spacing */
 import { CommonLangDir } from '@api/graphql';
 
-export const commonLangs = [
+export const commonMockLangData = [
     {
         id        : '94c893c1-3eb7-4f22-a878-b405c6d42e09',
         name      : 'Deutsch',

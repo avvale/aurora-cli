@@ -3,30 +3,30 @@ import { PaginationResponse } from '@aurorajs.dev/core';
 
 // custom items
 import { CommonPaginateLangsQueryHandler } from './common-paginate-langs.query-handler';
-import { MockLangRepository } from '@app/common/lang/infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '@app/common/lang/infrastructure/mock/common-mock-lang.repository';
 import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
 import { CommonLangMapper } from '@app/common/lang/domain/common-lang.mapper';
 import { CommonPaginateLangsQuery } from './common-paginate-langs.query';
 import { CommonPaginateLangsService } from './common-paginate-langs.service';
 
-describe('PaginateLangsQueryHandler', () =>
+describe('CommonPaginateLangsQueryHandler', () =>
 {
-    let queryHandler: PaginateLangsQueryHandler;
-    let service: PaginateLangsService;
-    let repository: MockLangRepository;
-    let mapper: LangMapper;
+    let queryHandler: CommonPaginateLangsQueryHandler;
+    let service: CommonPaginateLangsService;
+    let repository: CommonMockLangRepository;
+    let mapper: CommonLangMapper;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                PaginateLangsQueryHandler,
+                CommonPaginateLangsQueryHandler,
                 {
                     provide : CommonILangRepository,
-                    useClass: MockLangRepository,
+                    useClass: CommonMockLangRepository,
                 },
                 {
-                    provide : PaginateLangsService,
+                    provide : CommonPaginateLangsService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -35,15 +35,15 @@ describe('PaginateLangsQueryHandler', () =>
         })
             .compile();
 
-        queryHandler = module.get<PaginateLangsQueryHandler>(PaginateLangsQueryHandler);
-        service = module.get<PaginateLangsService>(PaginateLangsService);
-        repository = <MockLangRepository>module.get<CommonILangRepository>(CommonILangRepository);
-        mapper = new LangMapper();
+        queryHandler = module.get<CommonPaginateLangsQueryHandler>(CommonPaginateLangsQueryHandler);
+        service = module.get<CommonPaginateLangsService>(CommonPaginateLangsService);
+        repository = <CommonMockLangRepository>module.get<CommonILangRepository>(CommonILangRepository);
+        mapper = new CommonLangMapper();
     });
 
     describe('main', () =>
     {
-        test('PaginateLangsQueryHandler should be defined', () =>
+        test('CommonPaginateLangsQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
@@ -58,7 +58,7 @@ describe('PaginateLangsQueryHandler', () =>
                 },
             )));
             expect(await queryHandler.execute(
-                new PaginateLangsQuery(
+                new CommonPaginateLangsQuery(
                     {
                         offset: 0,
                         limit : 10,

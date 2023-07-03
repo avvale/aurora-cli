@@ -8,7 +8,7 @@ import { CommonGetCountriesHandler } from '../handlers/common-get-countries.hand
 
 // sources
 import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 
 describe('CommonGetCountriesController', () =>
 {
@@ -46,10 +46,10 @@ describe('CommonGetCountriesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a countries', async () =>
+        test('should return a commonMockCountryData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(countries)));
-            expect(await controller.main()).toBe(countries);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData)));
+            expect(await controller.main()).toBe(commonMockCountryData);
         });
     });
 });

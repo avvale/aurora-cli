@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CommonDeleteLangByIdHandler } from '../handlers/common-delete-lang-by-id.handler';
-import { CommonDeleteLangByIdController } from './common-delete-lang-by-id.controller';
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CommonDeleteLangByIdController, CommonDeleteLangByIdHandler } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonDeleteLangByIdController', () =>
@@ -41,8 +40,8 @@ describe('CommonDeleteLangByIdController', () =>
 
         test('should return an lang deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await controller.main(langs[0].id)).toBe(langs[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await controller.main(commonMockLangData[0].id)).toBe(commonMockLangData[0]);
         });
     });
 });

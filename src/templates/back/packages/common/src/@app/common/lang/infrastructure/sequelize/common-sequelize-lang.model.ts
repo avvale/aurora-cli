@@ -149,7 +149,7 @@ export class CommonLangModel extends Model<CommonLangModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(undefined),
+        type: DataTypes.STRING(100),
     })
     name: string;
 

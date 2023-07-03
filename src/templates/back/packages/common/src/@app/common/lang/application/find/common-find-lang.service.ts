@@ -1,5 +1,4 @@
-import { CommonLang } from '../../domain/common-lang.aggregate';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
+import { CommonILangRepository, CommonLang } from '@app/common/lang';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 

@@ -1,4 +1,3 @@
-
 import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { CommonCountry } from './common-country.aggregate';
 import { CommonCountryId } from './value-objects';

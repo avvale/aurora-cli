@@ -1,4 +1,4 @@
-import { CommonCreateCountryHandler } from '../handlers/common-create-country.handler';
+import { CommonCreateCountryHandler } from '@api/common/country';
 import { CommonCountry, CommonCreateCountryInput } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
 import { Auditing, AuditingMeta, ContentLanguage, Timezone } from '@aurorajs.dev/core';

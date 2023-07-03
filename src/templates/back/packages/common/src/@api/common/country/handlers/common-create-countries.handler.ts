@@ -1,4 +1,4 @@
-import { CommonCreateCountryDto } from '../dto';
+import { CommonCreateCountryDto } from '@api/common/country';
 import { CommonCreateCountryInput } from '@api/graphql';
 import { CommonCreateCountriesCommand } from '@app/common/country';
 import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';

@@ -1,10 +1,7 @@
+import { CommonCountry, CommonCountryI18nModel, CommonCountryMapper, CommonICountryI18nRepository } from '@app/common/country';
+import { AuditingRunner, ICriteria, SequelizeRepository } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuditingRunner, ICriteria, LiteralObject, SequelizeRepository } from '@aurorajs.dev/core';
-import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
-import { CommonCountry } from '../../domain/common-country.aggregate';
-import { CommonCountryMapper } from '../../domain/common-country.mapper';
-import { CommonCountryI18nModel } from './common-sequelize-country-i18n.model';
 
 @Injectable()
 export class CommonSequelizeCountryI18nRepository extends SequelizeRepository<CommonCountry, CommonCountryI18nModel> implements CommonICountryI18nRepository

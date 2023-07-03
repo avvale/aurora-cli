@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CommonPaginateLangsHandler } from './common-paginate-langs.handler';
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CommonPaginateLangsHandler } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
@@ -53,14 +53,14 @@ describe('CommonPaginateLangsHandler', () =>
         test('should return a langs', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: langs.length,
-                count: langs.length,
-                rows : langs,
+                total: commonMockLangData.length,
+                count: commonMockLangData.length,
+                rows : commonMockLangData,
             })));
             expect(await handler.main()).toEqual({
-                total: langs.length,
-                count: langs.length,
-                rows : langs,
+                total: commonMockLangData.length,
+                count: commonMockLangData.length,
+                rows : commonMockLangData,
             });
         });
     });

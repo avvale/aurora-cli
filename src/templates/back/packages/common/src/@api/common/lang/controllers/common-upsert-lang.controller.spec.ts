@@ -6,7 +6,7 @@ import { CommonUpsertLangController } from './common-upsert-lang.controller';
 import { CommonUpsertLangHandler } from '../handlers/common-upsert-lang.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonUpsertLangController', () =>
 {
@@ -45,8 +45,8 @@ describe('CommonUpsertLangController', () =>
 
         test('should return an lang upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await controller.main(langs[0])).toBe(langs[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await controller.main(commonMockLangData[0])).toBe(commonMockLangData[0]);
         });
     });
 });

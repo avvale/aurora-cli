@@ -8,7 +8,7 @@ import { CommonDeleteCountriesHandler } from '../handlers/common-delete-countrie
 
 // sources
 import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 
 describe('CommonDeleteCountriesResolver', () =>
 {
@@ -49,10 +49,10 @@ describe('CommonDeleteCountriesResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return an countries deleted', async () =>
+        test('should return an commonMockCountryData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(countries)));
-            expect(await resolver.main()).toBe(countries);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData)));
+            expect(await resolver.main()).toBe(commonMockCountryData);
         });
     });
 });

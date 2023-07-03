@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 import { CommonDeleteLangByIdService } from './common-delete-lang-by-id.service';
 import { CommonLangId } from '../../domain/value-objects';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
 describe('CommonDeleteLangByIdService', () =>
 {
     let service: CommonDeleteLangByIdService;
     let repository: CommonILangRepository;
-    let mockRepository: MockLangRepository;
+    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -22,8 +22,9 @@ describe('CommonDeleteLangByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteLangByIdService,
-                MockLangRepository,
+                UnhandledExceptionBus,
+                CommonDeleteLangByIdService,
+                CommonMockLangRepository,
                 {
                     provide : CommonILangRepository,
                     useValue: {
@@ -35,14 +36,14 @@ describe('CommonDeleteLangByIdService', () =>
         })
             .compile();
 
-        service = module.get(DeleteLangByIdService);
+        service = module.get(CommonDeleteLangByIdService);
         repository = module.get(CommonILangRepository);
-        mockRepository = module.get(MockLangRepository);
+        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>
     {
-        test('DeleteLangByIdService should be defined', () =>
+        test('CommonDeleteLangByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
@@ -51,7 +52,7 @@ describe('CommonDeleteLangByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new LangId(langs[0].id),
+                new CommonLangId(commonMockLangData[0].id),
             )).toBe(undefined);
         });
     });

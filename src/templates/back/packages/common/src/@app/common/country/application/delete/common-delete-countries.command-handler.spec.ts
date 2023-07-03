@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteCountriesCommandHandler } from './delete-countries.command-handler';
-import { DeleteCountriesCommand } from './delete-countries.command';
-import { DeleteCountriesService } from './delete-countries.service';
+import { CommonDeleteCountriesCommandHandler } from './common-delete-countries.command-handler';
+import { CommonDeleteCountriesCommand } from './common-delete-countries.command';
+import { CommonDeleteCountriesService } from './common-delete-countries.service';
 
 describe('CommonDeleteCountriesCommandHandler', () =>
 {
     let commandHandler: CommonDeleteCountriesCommandHandler;
-    let service: DeleteCountriesService;
+    let service: CommonDeleteCountriesService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                DeleteCountriesCommandHandler,
+                CommonDeleteCountriesCommandHandler,
                 {
-                    provide : DeleteCountriesService,
+                    provide : CommonDeleteCountriesService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -25,13 +25,13 @@ describe('CommonDeleteCountriesCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<DeleteCountriesCommandHandler>(DeleteCountriesCommandHandler);
-        service = module.get<DeleteCountriesService>(DeleteCountriesService);
+        commandHandler = module.get<CommonDeleteCountriesCommandHandler>(CommonDeleteCountriesCommandHandler);
+        service = module.get<CommonDeleteCountriesService>(CommonDeleteCountriesService);
     });
 
     describe('main', () =>
     {
-        test('DeleteCountriesCommandHandler should be defined', () =>
+        test('CommonDeleteCountriesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
@@ -39,7 +39,7 @@ describe('CommonDeleteCountriesCommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new DeleteCountriesCommand(),
+                new CommonDeleteCountriesCommand(),
             )).toBe(undefined);
         });
     });

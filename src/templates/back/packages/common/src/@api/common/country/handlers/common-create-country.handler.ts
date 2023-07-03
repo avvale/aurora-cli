@@ -1,4 +1,4 @@
-import { CommonCountryDto, CommonCreateCountryDto } from '../dto';
+import { CommonCountryDto, CommonCreateCountryDto } from '@api/common/country';
 import { CommonCountry, CommonCreateCountryInput } from '@api/graphql';
 import { CommonCreateCountryCommand, CommonFindCountryByIdQuery } from '@app/common/country';
 import { AuditingMeta, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetSearchKeyLangService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';

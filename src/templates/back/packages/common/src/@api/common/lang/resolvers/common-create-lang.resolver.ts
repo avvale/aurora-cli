@@ -1,4 +1,4 @@
-import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler';
+import { CommonCreateLangHandler } from '@api/common/lang';
 import { CommonCreateLangInput, CommonLang } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
 import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';

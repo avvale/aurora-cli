@@ -1,22 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteLangsCommandHandler } from './delete-langs.command-handler';
-import { DeleteLangsCommand } from './delete-langs.command';
-import { DeleteLangsService } from './delete-langs.service';
+import { CommonDeleteLangsCommandHandler } from './common-delete-langs.command-handler';
+import { CommonDeleteLangsCommand } from './common-delete-langs.command';
+import { CommonDeleteLangsService } from './common-delete-langs.service';
 
 describe('CommonDeleteLangsCommandHandler', () =>
 {
     let commandHandler: CommonDeleteLangsCommandHandler;
-    let service: DeleteLangsService;
+    let service: CommonDeleteLangsService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                DeleteLangsCommandHandler,
+                CommonDeleteLangsCommandHandler,
                 {
-                    provide : DeleteLangsService,
+                    provide : CommonDeleteLangsService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -25,13 +25,13 @@ describe('CommonDeleteLangsCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<DeleteLangsCommandHandler>(DeleteLangsCommandHandler);
-        service = module.get<DeleteLangsService>(DeleteLangsService);
+        commandHandler = module.get<CommonDeleteLangsCommandHandler>(CommonDeleteLangsCommandHandler);
+        service = module.get<CommonDeleteLangsService>(CommonDeleteLangsService);
     });
 
     describe('main', () =>
     {
-        test('DeleteLangsCommandHandler should be defined', () =>
+        test('CommonDeleteLangsCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
@@ -39,7 +39,7 @@ describe('CommonDeleteLangsCommandHandler', () =>
         test('should return void', async () =>
         {
             expect(await commandHandler.execute(
-                new DeleteLangsCommand(),
+                new CommonDeleteLangsCommand(),
             )).toBe(undefined);
         });
     });

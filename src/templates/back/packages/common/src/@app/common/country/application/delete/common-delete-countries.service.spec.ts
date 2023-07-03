@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { DeleteCountriesService } from './delete-countries.service';
+import { CommonDeleteCountriesService } from './common-delete-countries.service';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
 import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
-import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
 describe('CommonDeleteCountriesService', () =>
 {
-    let service: DeleteCountriesService;
+    let service: CommonDeleteCountriesService;
     let repository: CommonICountryRepository;
     let repositoryI18n: ICountryI18nRepository;
-    let mockRepository: MockCountryRepository;
+    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -22,8 +22,9 @@ describe('CommonDeleteCountriesService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteCountriesService,
-                MockCountryRepository,
+                UnhandledExceptionBus,
+                CommonDeleteCountriesService,
+                CommonMockCountryRepository,
                 {
                     provide : CommonICountryRepository,
                     useValue: {
@@ -42,15 +43,15 @@ describe('CommonDeleteCountriesService', () =>
         })
             .compile();
 
-        service = module.get(DeleteCountriesService);
+        service = module.get(CommonDeleteCountriesService);
         repository = module.get(CommonICountryRepository);
         repositoryI18n = module.get(ICountryI18nRepository);
-        mockRepository = module.get(MockCountryRepository);
+        mockRepository = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>
     {
-        test('DeleteCountriesService should be defined', () =>
+        test('CommonDeleteCountriesService should be defined', () =>
         {
             expect(service).toBeDefined();
         });

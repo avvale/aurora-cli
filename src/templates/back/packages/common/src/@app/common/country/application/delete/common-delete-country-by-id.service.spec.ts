@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 import { CommonDeleteCountryByIdService } from './common-delete-country-by-id.service';
 import { CommonCountryId } from '../../domain/value-objects';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
 import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
-import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
 describe('CommonDeleteCountryByIdService', () =>
 {
     let service: CommonDeleteCountryByIdService;
     let repository: CommonICountryRepository;
     let repositoryI18n: ICountryI18nRepository;
-    let mockRepository: MockCountryRepository;
+    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -24,8 +24,9 @@ describe('CommonDeleteCountryByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                DeleteCountryByIdService,
-                MockCountryRepository,
+                UnhandledExceptionBus,
+                CommonDeleteCountryByIdService,
+                CommonMockCountryRepository,
                 {
                     provide : CommonICountryRepository,
                     useValue: {
@@ -44,14 +45,14 @@ describe('CommonDeleteCountryByIdService', () =>
         })
             .compile();
 
-        service = module.get(DeleteCountryByIdService);
+        service = module.get(CommonDeleteCountryByIdService);
         repository = module.get(CommonICountryRepository);
-        mockRepository = module.get(MockCountryRepository);
+        mockRepository = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>
     {
-        test('DeleteCountryByIdService should be defined', () =>
+        test('CommonDeleteCountryByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
@@ -60,7 +61,7 @@ describe('CommonDeleteCountryByIdService', () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
             expect(await service.main(
-                new CountryId(countries[0].id),
+                new CommonCountryId(commonMockCountryData[0].id),
             )).toBe(undefined);
         });
     });

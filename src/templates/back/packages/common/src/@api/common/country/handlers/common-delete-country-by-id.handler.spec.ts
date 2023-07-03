@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CommonDeleteCountryByIdHandler } from './common-delete-country-by-id.handler';
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CommonDeleteCountryByIdHandler } from '@api/common/country';
+import { commonMockCountryData } from '@app/common/country';
+import { commonMockLangData } from '@app/common/lang';
 import { CoreAddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
 import { ConfigService } from '@nestjs/config';
@@ -31,7 +31,7 @@ describe('CommonDeleteCountryByIdController', () =>
                 {
                     provide : CACHE_MANAGER,
                     useValue: {
-                        get: (key: string) => key === 'common/langs' ? langs : null,
+                        get: (key: string) => key === 'common/langs' ? commonMockLangData : null,
                     },
                 },
                 {
@@ -64,8 +64,8 @@ describe('CommonDeleteCountryByIdController', () =>
 
         test('should return an country deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(countries[0])));
-            expect(await handler.main(countries[0].id)).toBe(countries[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData[0])));
+            expect(await handler.main(commonMockCountryData[0].id)).toBe(commonMockCountryData[0]);
         });
     });
 });

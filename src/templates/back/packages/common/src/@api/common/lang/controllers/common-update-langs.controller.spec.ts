@@ -6,7 +6,7 @@ import { CommonUpdateLangsController } from './common-update-langs.controller';
 import { CommonUpdateLangsHandler } from '../handlers/common-update-langs.handler';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonUpdateLangsController', () =>
 {
@@ -45,8 +45,8 @@ describe('CommonUpdateLangsController', () =>
 
         test('should return a langs updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await controller.main(langs[0])).toBe(langs[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await controller.main(commonMockLangData[0])).toBe(commonMockLangData[0]);
         });
     });
 });

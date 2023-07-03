@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 import { CommonUpdateCountryByIdService } from './common-update-country-by-id.service';
 import {
     CommonCountryId,
@@ -32,14 +32,14 @@ import {
 } from '../../domain/value-objects';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
 import { CommonICountryI18nRepository } from '../../domain/country-i18n.repository';
-import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
 describe('CommonUpdateCountryByIdService', () =>
 {
     let service: CommonUpdateCountryByIdService;
     let repository: CommonICountryRepository;
     let repositoryI18n: ICountryI18nRepository;
-    let mockRepository: MockCountryRepository;
+    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -48,8 +48,9 @@ describe('CommonUpdateCountryByIdService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                UpdateCountryByIdService,
-                MockCountryRepository,
+                UnhandledExceptionBus,
+                CommonUpdateCountryByIdService,
+                CommonMockCountryRepository,
                 {
                     provide : CommonICountryRepository,
                     useValue: {
@@ -66,15 +67,15 @@ describe('CommonUpdateCountryByIdService', () =>
         })
             .compile();
 
-        service = module.get(UpdateCountryByIdService);
+        service = module.get(CommonUpdateCountryByIdService);
         repository = module.get(CommonICountryRepository);
         repositoryI18n = module.get(ICountryI18nRepository);
-        mockRepository = module.get(MockCountryRepository);
+        mockRepository = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>
     {
-        test('UpdateCountryByIdService should be defined', () =>
+        test('CommonUpdateCountryByIdService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
@@ -83,25 +84,25 @@ describe('CommonUpdateCountryByIdService', () =>
         {
             expect(await service.main(
                 {
-                    id: new CommonCountryId(countries[0].id),
-                    iso3166Alpha2: new CommonCountryIso3166Alpha2(countries[0].iso3166Alpha2),
-                    iso3166Alpha3: new CommonCountryIso3166Alpha3(countries[0].iso3166Alpha3),
-                    iso3166Numeric: new CommonCountryIso3166Numeric(countries[0].iso3166Numeric),
-                    customCode: new CommonCountryCustomCode(countries[0].customCode),
-                    prefix: new CommonCountryPrefix(countries[0].prefix),
-                    image: new CommonCountryImage(countries[0].image),
-                    sort: new CommonCountrySort(countries[0].sort),
-                    administrativeAreas: new CommonCountryAdministrativeAreas(countries[0].administrativeAreas),
-                    latitude: new CommonCountryLatitude(countries[0].latitude),
-                    longitude: new CommonCountryLongitude(countries[0].longitude),
-                    zoom: new CommonCountryZoom(countries[0].zoom),
-                    mapType: new CommonCountryMapType(countries[0].mapType),
-                    langId: new CommonCountryI18nLangId(countries[0].langId),
-                    name: new CommonCountryI18nName(countries[0].name),
-                    slug: new CommonCountryI18nSlug(countries[0].slug),
-                    administrativeAreaLevel1: new CommonCountryI18nAdministrativeAreaLevel1(countries[0].administrativeAreaLevel1),
-                    administrativeAreaLevel2: new CommonCountryI18nAdministrativeAreaLevel2(countries[0].administrativeAreaLevel2),
-                    administrativeAreaLevel3: new CommonCountryI18nAdministrativeAreaLevel3(countries[0].administrativeAreaLevel3),
+                    id: new CommonCountryId(commonMockCountryData[0].id),
+                    iso3166Alpha2: new CommonCountryIso3166Alpha2(commonMockCountryData[0].iso3166Alpha2),
+                    iso3166Alpha3: new CommonCountryIso3166Alpha3(commonMockCountryData[0].iso3166Alpha3),
+                    iso3166Numeric: new CommonCountryIso3166Numeric(commonMockCountryData[0].iso3166Numeric),
+                    customCode: new CommonCountryCustomCode(commonMockCountryData[0].customCode),
+                    prefix: new CommonCountryPrefix(commonMockCountryData[0].prefix),
+                    image: new CommonCountryImage(commonMockCountryData[0].image),
+                    sort: new CommonCountrySort(commonMockCountryData[0].sort),
+                    administrativeAreas: new CommonCountryAdministrativeAreas(commonMockCountryData[0].administrativeAreas),
+                    latitude: new CommonCountryLatitude(commonMockCountryData[0].latitude),
+                    longitude: new CommonCountryLongitude(commonMockCountryData[0].longitude),
+                    zoom: new CommonCountryZoom(commonMockCountryData[0].zoom),
+                    mapType: new CommonCountryMapType(commonMockCountryData[0].mapType),
+                    langId: new CommonCountryI18nLangId(commonMockCountryData[0].langId),
+                    name: new CommonCountryI18nName(commonMockCountryData[0].name),
+                    slug: new CommonCountryI18nSlug(commonMockCountryData[0].slug),
+                    administrativeAreaLevel1: new CommonCountryI18nAdministrativeAreaLevel1(commonMockCountryData[0].administrativeAreaLevel1),
+                    administrativeAreaLevel2: new CommonCountryI18nAdministrativeAreaLevel2(commonMockCountryData[0].administrativeAreaLevel2),
+                    administrativeAreaLevel3: new CommonCountryI18nAdministrativeAreaLevel3(commonMockCountryData[0].administrativeAreaLevel3),
                 },
             )).toBe(undefined);
         });

@@ -17,7 +17,7 @@ import {
     CommonLangDeletedAt,
 } from '@app/common/lang/domain/value-objects';
 import { CommonLang } from '../../domain/common-lang.aggregate';
-import { commonLangs } from './common-mock-lang.data';
+import { commonMockLangData } from './common-mock-lang.data';
 
 @Injectable()
 export class CommonMockLangRepository extends MockRepository<CommonLang> implements CommonILangRepository
@@ -43,7 +43,7 @@ export class CommonMockLangRepository extends MockRepository<CommonLang> impleme
         this.collectionSource = [];
         const now = Utils.nowTimestamp();
 
-        for (const itemCollection of <any[]>commonLangs)
+        for (const itemCollection of <any[]>commonMockLangData)
         {
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;

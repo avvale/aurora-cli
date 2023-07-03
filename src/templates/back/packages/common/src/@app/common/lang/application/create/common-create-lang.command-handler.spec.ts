@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { CommonCreateLangCommandHandler } from './create-lang.command-handler';
-import { CommonCreateLangCommand } from './create-lang.command';
-import { CommonCreateLangService } from './create-lang.service';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
+import { CommonCreateLangCommandHandler } from './common-create-lang.command-handler';
+import { CommonCreateLangCommand } from './common-create-lang.command';
+import { CommonCreateLangService } from './common-create-lang.service';
 
 describe('CommonCreateLangCommandHandler', () =>
 {
-    let commandHandler: CreateLangCommandHandler;
-    let service: CreateLangService;
+    let commandHandler: CommonCreateLangCommandHandler;
+    let service: CommonCreateLangService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                CreateLangCommandHandler,
+                CommonCreateLangCommandHandler,
                 {
-                    provide : CreateLangService,
+                    provide : CommonCreateLangService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,8 +26,8 @@ describe('CommonCreateLangCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<CreateLangCommandHandler>(CreateLangCommandHandler);
-        service = module.get<CreateLangService>(CreateLangService);
+        commandHandler = module.get<CommonCreateLangCommandHandler>(CommonCreateLangCommandHandler);
+        service = module.get<CommonCreateLangService>(CommonCreateLangService);
     });
 
     describe('main', () =>
@@ -37,21 +37,21 @@ describe('CommonCreateLangCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the CreateLangService', async () =>
+        test('should create the values objects and pass them as parameters to the CommonCreateLangService', async () =>
         {
             expect(await commandHandler.execute(
-                new CreateLangCommand(
+                new CommonCreateLangCommand(
                     {
-                        id: langs[0].id,
-                        name: langs[0].name,
-                        image: langs[0].image,
-                        iso6392: langs[0].iso6392,
-                        iso6393: langs[0].iso6393,
-                        ietf: langs[0].ietf,
-                        customCode: langs[0].customCode,
-                        dir: langs[0].dir,
-                        sort: langs[0].sort,
-                        isActive: langs[0].isActive,
+                        id: commonMockLangData[0].id,
+                        name: commonMockLangData[0].name,
+                        image: commonMockLangData[0].image,
+                        iso6392: commonMockLangData[0].iso6392,
+                        iso6393: commonMockLangData[0].iso6393,
+                        ietf: commonMockLangData[0].ietf,
+                        customCode: commonMockLangData[0].customCode,
+                        dir: commonMockLangData[0].dir,
+                        sort: commonMockLangData[0].sort,
+                        isActive: commonMockLangData[0].isActive,
                     },
                     { timezone: process.env.TZ },
                 ),

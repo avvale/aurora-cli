@@ -6,7 +6,7 @@ import { CommonCreateCountriesHandler } from '../handlers/common-create-countrie
 import { CommonCreateCountryInput } from '@api/graphql';
 
 // sources
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 
 describe('CommonCreateCountriesResolver', () =>
 {
@@ -46,7 +46,7 @@ describe('CommonCreateCountriesResolver', () =>
 
         test('should return an countries created', async () =>
         {
-            expect(await resolver.main(<CommonCreateCountryInput[]>countries)).toBe(undefined);
+            expect(await resolver.main(<CommonCreateCountryInput[]>commonMockCountryData)).toBe(undefined);
         });
     });
 });

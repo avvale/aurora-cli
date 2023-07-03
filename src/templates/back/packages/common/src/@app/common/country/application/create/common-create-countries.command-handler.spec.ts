@@ -2,23 +2,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
-import { CreateCountriesCommandHandler } from './create-countries.command-handler';
-import { CreateCountriesCommand } from './create-countries.command';
-import { CreateCountriesService } from './create-countries.service';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { CommonCreateCountriesCommandHandler } from './common-create-countries.command-handler';
+import { CommonCreateCountriesCommand } from './common-create-countries.command';
+import { CommonCreateCountriesService } from './common-create-countries.service';
 
-describe('CreateCountriesCommandHandler', () =>
+describe('commonCreateCountriesCommandHandler', () =>
 {
-    let commandHandler: CreateCountriesCommandHandler;
-    let service: CreateCountriesService;
+    let commandHandler: CommonCreateCountriesCommandHandler;
+    let service: CommonCreateCountriesService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                CreateCountriesCommandHandler,
+                CommonCreateCountriesCommandHandler,
                 {
-                    provide : CreateCountriesService,
+                    provide : CommonCreateCountriesService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -27,22 +27,22 @@ describe('CreateCountriesCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<CreateCountriesCommandHandler>(CreateCountriesCommandHandler);
-        service = module.get<CreateCountriesService>(CreateCountriesService);
+        commandHandler = module.get<CommonCreateCountriesCommandHandler>(CommonCreateCountriesCommandHandler);
+        service = module.get<CommonCreateCountriesService>(CommonCreateCountriesService);
     });
 
     describe('main', () =>
     {
-        test('CreateCountriesCommandHandler should be defined', () =>
+        test('CommonCreateCountriesCommandHandler should be defined', () =>
         {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return countries createds', async () =>
+        test('should return CommonMockCountryData createds', async () =>
         {
             expect(await commandHandler.execute(
-                new CreateCountriesCommand(
-                    countries,
+                new CommonCreateCountriesCommand(
+                    commonMockCountryData,
                     { timezone: process.env.TZ },
                 ),
             )).toBe(undefined);

@@ -7,7 +7,7 @@ import { CommonUpdateLangsHandler } from '../handlers/common-update-langs.handle
 import { CommonUpdateLangsInput } from '@api/graphql';
 
 // sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonUpdateLangsResolver', () =>
 {
@@ -49,8 +49,8 @@ describe('CommonUpdateLangsResolver', () =>
 
         test('should return a langs updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(langs[0])));
-            expect(await resolver.main(<CommonUpdateLangsInput>langs[0])).toBe(langs[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
+            expect(await resolver.main(<CommonUpdateLangsInput>commonMockLangData[0])).toBe(commonMockLangData[0]);
         });
     });
 });

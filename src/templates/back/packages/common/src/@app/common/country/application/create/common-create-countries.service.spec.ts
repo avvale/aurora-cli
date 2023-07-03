@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { ConfigService } from '@nestjs/config';
 
 // custom items
-import { CreateCountriesService } from './create-countries.service';
+import { CommonCreateCountriesService } from './common-create-countries.service';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
 import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
-import { MockCountryRepository } from '../../infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
-describe('CreateCountriesService', () =>
+describe('CommonCreateCountriesService', () =>
 {
-    let service: CreateCountriesService;
+    let service: CommonCreateCountriesService;
     let repository: CommonICountryRepository;
     let repositoryI18n: ICountryI18nRepository;
-    let mockRepository: MockCountryRepository;
+    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -23,8 +23,9 @@ describe('CreateCountriesService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                CreateCountriesService,
-                MockCountryRepository,
+                UnhandledExceptionBus,
+                CommonCreateCountriesService,
+                CommonMockCountryRepository,
                 {
                     provide : CommonICountryRepository,
                     useValue: {
@@ -47,9 +48,9 @@ describe('CreateCountriesService', () =>
         })
             .compile();
 
-        service = module.get(CreateCountriesService);
+        service = module.get(CommonCreateCountriesService);
         repository = module.get(CommonICountryRepository);
-        mockRepository = module.get(MockCountryRepository);
+        mockRepository = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>

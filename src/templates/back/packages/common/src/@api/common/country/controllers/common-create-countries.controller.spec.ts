@@ -5,7 +5,7 @@ import { CommonCreateCountriesController } from './common-create-countries.contr
 import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
 
 // sources
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 
 describe('CommonCreateCountriesController', () =>
 {
@@ -40,9 +40,9 @@ describe('CommonCreateCountriesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an countries created', async () =>
+        test('should return an commonMockCountryData created', async () =>
         {
-            expect(await controller.main(countries)).toBe(undefined);
+            expect(await controller.main(commonMockCountryData)).toBe(undefined);
         });
     });
 });

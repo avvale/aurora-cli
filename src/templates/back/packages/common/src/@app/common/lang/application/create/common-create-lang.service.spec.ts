@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus } from '@nestjs/cqrs';
+import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
 
 // custom items
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { CreateLangService } from './create-lang.service';
+import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
+import { CommonCreateLangService } from './common-create-lang.service';
 import {
     CommonLangId,
     CommonLangName,
@@ -21,14 +21,14 @@ import {
     CommonLangDeletedAt,
 } from '../../domain/value-objects';
 import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { MockLangRepository } from '../../infrastructure/mock/mock-lang.repository';
+import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
 describe('CommonCreateLangService', () =>
 
 {
-    let service: CreateLangService;
+    let service: CommonCreateLangService;
     let repository: CommonILangRepository;
-    let mockRepository: MockLangRepository;
+    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -37,8 +37,9 @@ describe('CommonCreateLangService', () =>
                 CommandBus,
                 EventBus,
                 EventPublisher,
-                CreateLangService,
-                MockLangRepository,
+                UnhandledExceptionBus,
+                CommonCreateLangService,
+                CommonMockLangRepository,
                 {
                     provide : CommonILangRepository,
                     useValue: {
@@ -49,14 +50,14 @@ describe('CommonCreateLangService', () =>
         })
             .compile();
 
-        service = module.get(CreateLangService);
+        service = module.get(CommonCreateLangService);
         repository = module.get(CommonILangRepository);
-        mockRepository = module.get(MockLangRepository);
+        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>
     {
-        test('CreateLangService should be defined', () =>
+        test('CommonCreateLangService should be defined', () =>
         {
             expect(service).toBeDefined();
         });
@@ -65,16 +66,16 @@ describe('CommonCreateLangService', () =>
         {
             expect(await service.main(
                 {
-                    id: new CommonLangId(langs[0].id),
-                    name: new CommonLangName(langs[0].name),
-                    image: new CommonLangImage(langs[0].image),
-                    iso6392: new CommonLangIso6392(langs[0].iso6392),
-                    iso6393: new CommonLangIso6393(langs[0].iso6393),
-                    ietf: new CommonLangIetf(langs[0].ietf),
-                    customCode: new CommonLangCustomCode(langs[0].customCode),
-                    dir: new CommonLangDir(langs[0].dir),
-                    sort: new CommonLangSort(langs[0].sort),
-                    isActive: new CommonLangIsActive(langs[0].isActive),
+                    id: new CommonLangId(commonMockLangData[0].id),
+                    name: new CommonLangName(commonMockLangData[0].name),
+                    image: new CommonLangImage(commonMockLangData[0].image),
+                    iso6392: new CommonLangIso6392(commonMockLangData[0].iso6392),
+                    iso6393: new CommonLangIso6393(commonMockLangData[0].iso6393),
+                    ietf: new CommonLangIetf(commonMockLangData[0].ietf),
+                    customCode: new CommonLangCustomCode(commonMockLangData[0].customCode),
+                    dir: new CommonLangDir(commonMockLangData[0].dir),
+                    sort: new CommonLangSort(commonMockLangData[0].sort),
+                    isActive: new CommonLangIsActive(commonMockLangData[0].isActive),
                 },
             )).toBe(undefined);
         });

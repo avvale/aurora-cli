@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { countries } from '@app/common/country/infrastructure/mock/mock-country.data';
+import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 import { CommonUpsertCountryCommandHandler } from './common-upsert-country.command-handler';
 import { CommonUpsertCountryCommand } from './common-upsert-country.command';
 import { CommonUpsertCountryService } from './common-upsert-country.service';
 
-describe('UpsertCountryCommandHandler', () =>
+describe('CommonUpsertCountryCommandHandler', () =>
 {
-    let commandHandler: UpsertCountryCommandHandler;
-    let service: UpsertCountryService;
+    let commandHandler: CommonUpsertCountryCommandHandler;
+    let service: CommonUpsertCountryService;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                UpsertCountryCommandHandler,
+                CommonUpsertCountryCommandHandler,
                 {
-                    provide : UpsertCountryService,
+                    provide : CommonUpsertCountryService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,8 +26,8 @@ describe('UpsertCountryCommandHandler', () =>
         })
             .compile();
 
-        commandHandler = module.get<UpsertCountryCommandHandler>(UpsertCountryCommandHandler);
-        service = module.get<UpsertCountryService>(UpsertCountryService);
+        commandHandler = module.get<CommonUpsertCountryCommandHandler>(CommonUpsertCountryCommandHandler);
+        service = module.get<CommonUpsertCountryService>(CommonUpsertCountryService);
     });
 
     describe('main', () =>
@@ -37,30 +37,30 @@ describe('UpsertCountryCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should upsert the values objects and pass them as parameters to the UpsertCountryService', async () =>
+        test('should upsert the values objects and pass them as parameters to the CommonUpsertCountryService', async () =>
         {
             expect(await commandHandler.execute(
-                new UpsertCountryCommand(
+                new CommonUpsertCountryCommand(
                     {
-                        id: countries[0].id,
-                        iso3166Alpha2: countries[0].iso3166Alpha2,
-                        iso3166Alpha3: countries[0].iso3166Alpha3,
-                        iso3166Numeric: countries[0].iso3166Numeric,
-                        customCode: countries[0].customCode,
-                        prefix: countries[0].prefix,
-                        image: countries[0].image,
-                        sort: countries[0].sort,
-                        administrativeAreas: countries[0].administrativeAreas,
-                        latitude: countries[0].latitude,
-                        longitude: countries[0].longitude,
-                        zoom: countries[0].zoom,
-                        mapType: countries[0].mapType,
-                        langId: countries[0].langId,
-                        name: countries[0].name,
-                        slug: countries[0].slug,
-                        administrativeAreaLevel1: countries[0].administrativeAreaLevel1,
-                        administrativeAreaLevel2: countries[0].administrativeAreaLevel2,
-                        administrativeAreaLevel3: countries[0].administrativeAreaLevel3,
+                        id: commonMockCountryData[0].id,
+                        iso3166Alpha2: commonMockCountryData[0].iso3166Alpha2,
+                        iso3166Alpha3: commonMockCountryData[0].iso3166Alpha3,
+                        iso3166Numeric: commonMockCountryData[0].iso3166Numeric,
+                        customCode: commonMockCountryData[0].customCode,
+                        prefix: commonMockCountryData[0].prefix,
+                        image: commonMockCountryData[0].image,
+                        sort: commonMockCountryData[0].sort,
+                        administrativeAreas: commonMockCountryData[0].administrativeAreas,
+                        latitude: commonMockCountryData[0].latitude,
+                        longitude: commonMockCountryData[0].longitude,
+                        zoom: commonMockCountryData[0].zoom,
+                        mapType: commonMockCountryData[0].mapType,
+                        langId: commonMockCountryData[0].langId,
+                        name: commonMockCountryData[0].name,
+                        slug: commonMockCountryData[0].slug,
+                        administrativeAreaLevel1: commonMockCountryData[0].administrativeAreaLevel1,
+                        administrativeAreaLevel2: commonMockCountryData[0].administrativeAreaLevel2,
+                        administrativeAreaLevel3: commonMockCountryData[0].administrativeAreaLevel3,
                     },
                     { timezone: process.env.TZ },
                 ),

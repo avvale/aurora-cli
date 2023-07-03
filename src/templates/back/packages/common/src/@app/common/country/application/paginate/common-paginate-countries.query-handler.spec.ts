@@ -3,30 +3,30 @@ import { PaginationResponse } from '@aurorajs.dev/core';
 
 // custom items
 import { CommonPaginateCountriesQueryHandler } from './common-paginate-countries.query-handler';
-import { MockCountryRepository } from '@app/common/country/infrastructure/mock/mock-country.repository';
+import { CommonMockCountryRepository } from '@app/common/country/infrastructure/mock/common-mock-country.repository';
 import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
 import { CommonCountryMapper } from '@app/common/country/domain/common-country.mapper';
 import { CommonPaginateCountriesQuery } from './common-paginate-countries.query';
 import { CommonPaginateCountriesService } from './common-paginate-countries.service';
 
-describe('PaginateCountriesQueryHandler', () =>
+describe('CommonPaginateCountriesQueryHandler', () =>
 {
-    let queryHandler: PaginateCountriesQueryHandler;
-    let service: PaginateCountriesService;
-    let repository: MockCountryRepository;
-    let mapper: CountryMapper;
+    let queryHandler: CommonPaginateCountriesQueryHandler;
+    let service: CommonPaginateCountriesService;
+    let repository: CommonMockCountryRepository;
+    let mapper: CommonCountryMapper;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                PaginateCountriesQueryHandler,
+                CommonPaginateCountriesQueryHandler,
                 {
                     provide : CommonICountryRepository,
-                    useClass: MockCountryRepository,
+                    useClass: CommonMockCountryRepository,
                 },
                 {
-                    provide : PaginateCountriesService,
+                    provide : CommonPaginateCountriesService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -35,15 +35,15 @@ describe('PaginateCountriesQueryHandler', () =>
         })
             .compile();
 
-        queryHandler = module.get<PaginateCountriesQueryHandler>(PaginateCountriesQueryHandler);
-        service = module.get<PaginateCountriesService>(PaginateCountriesService);
-        repository = <MockCountryRepository>module.get<CommonICountryRepository>(CommonICountryRepository);
-        mapper = new CountryMapper();
+        queryHandler = module.get<CommonPaginateCountriesQueryHandler>(CommonPaginateCountriesQueryHandler);
+        service = module.get<CommonPaginateCountriesService>(CommonPaginateCountriesService);
+        repository = <CommonMockCountryRepository>module.get<CommonICountryRepository>(CommonICountryRepository);
+        mapper = new CommonCountryMapper();
     });
 
     describe('main', () =>
     {
-        test('PaginateCountriesQueryHandler should be defined', () =>
+        test('CommonPaginateCountriesQueryHandler should be defined', () =>
         {
             expect(queryHandler).toBeDefined();
         });
@@ -58,7 +58,7 @@ describe('PaginateCountriesQueryHandler', () =>
                 },
             )));
             expect(await queryHandler.execute(
-                new PaginateCountriesQuery(
+                new CommonPaginateCountriesQuery(
                     {
                         offset: 0,
                         limit : 10,

@@ -5,6 +5,9 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { CommonSeeder } from './common.seeder';
 import { CommonCountryApiHandlers, CommonCountryControllers, CommonCountryResolvers, CommonCountryServices } from './country';
 import { CommonLangApiHandlers, CommonLangControllers, CommonLangResolvers, CommonLangServices } from './lang';
+import { CommonAdministrativeAreaLevel1Controllers, CommonAdministrativeAreaLevel1Resolvers, CommonAdministrativeAreaLevel1ApiHandlers, CommonAdministrativeAreaLevel1Services } from './administrative-area-level-1';
+import { CommonAdministrativeAreaLevel2Controllers, CommonAdministrativeAreaLevel2Resolvers, CommonAdministrativeAreaLevel2ApiHandlers, CommonAdministrativeAreaLevel2Services } from './administrative-area-level-2';
+import { CommonAdministrativeAreaLevel3Controllers, CommonAdministrativeAreaLevel3Resolvers, CommonAdministrativeAreaLevel3ApiHandlers, CommonAdministrativeAreaLevel3Services } from './administrative-area-level-3';
 
 @Module({
     imports: [
@@ -15,7 +18,10 @@ import { CommonLangApiHandlers, CommonLangControllers, CommonLangResolvers, Comm
     ],
     controllers: [
         ...CommonLangControllers,
-        ...CommonCountryControllers
+        ...CommonCountryControllers,
+        ...CommonAdministrativeAreaLevel1Controllers,
+        ...CommonAdministrativeAreaLevel2Controllers,
+        ...CommonAdministrativeAreaLevel3Controllers
     ],
     providers: [
         CommonSeeder,
@@ -28,7 +34,16 @@ import { CommonLangApiHandlers, CommonLangControllers, CommonLangResolvers, Comm
         ...CommonLangServices,
         ...CommonCountryResolvers,
         ...CommonCountryApiHandlers,
-        ...CommonCountryServices
+        ...CommonCountryServices,
+        ...CommonAdministrativeAreaLevel1Resolvers,
+        ...CommonAdministrativeAreaLevel1ApiHandlers,
+        ...CommonAdministrativeAreaLevel1Services,
+        ...CommonAdministrativeAreaLevel2Resolvers,
+        ...CommonAdministrativeAreaLevel2ApiHandlers,
+        ...CommonAdministrativeAreaLevel2Services,
+        ...CommonAdministrativeAreaLevel3Resolvers,
+        ...CommonAdministrativeAreaLevel3ApiHandlers,
+        ...CommonAdministrativeAreaLevel3Services
     ],
 })
 export class CommonModule {}

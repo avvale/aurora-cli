@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { CommonGetLangsHandler } from './common-get-langs.handler';
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
+import { CommonGetLangsHandler } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
@@ -50,10 +50,10 @@ describe('CommonGetLangsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return a langs', async () =>
+        test('should return a commonMockLangData', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(langs)));
-            expect(await handler.main()).toBe(langs);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData)));
+            expect(await handler.main()).toBe(commonMockLangData);
         });
     });
 });
