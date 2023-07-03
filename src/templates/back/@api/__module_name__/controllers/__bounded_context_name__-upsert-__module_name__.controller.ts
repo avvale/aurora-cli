@@ -4,7 +4,7 @@
         array
             (object items=(array 'Body' 'Controller' 'Post') path='@nestjs/common')
             (object items=(array 'ApiCreatedResponse' 'ApiOperation' 'ApiTags') path='@nestjs/swagger')
-            (object items=(array 'Auditing' 'AuditingMeta' 'Timezone') path=config.auroraCorePackage)
+            (object items=(array 'Timezone') path=config.auroraCorePackage)
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdDto')) path='../dto')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Handler') path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.handler'))
     )
@@ -17,6 +17,11 @@
 {{#if schema.hasOAuth}}
 {{ push importsArray
     (object items='Auth' path='@aurora/decorators')
+~}}
+{{/if}}
+{{#if schema.hasAuditing}}
+{{ push importsArray
+    (object items=(array 'Auditing' 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}

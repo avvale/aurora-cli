@@ -2,12 +2,17 @@
     setVar 'importsArray' (
         array
             (object items='Injectable' path='@nestjs/common')
-            (object items=(array 'AuditingMeta' 'ICommandBus') path=config.auroraCorePackage)
+            (object items=(array 'ICommandBus') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Command') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Input' ) path='@api/graphql')
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Dto' ) path='../dto')
     )
 ~}}
+{{#if schema.hasAuditing}}
+{{ push importsArray
+    (object items=(array 'AuditingMeta') path=config.auroraCorePackage)
+~}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler

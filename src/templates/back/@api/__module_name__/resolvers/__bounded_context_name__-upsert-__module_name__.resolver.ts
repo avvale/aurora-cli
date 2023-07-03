@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Args' 'Mutation' 'Resolver') path='@nestjs/graphql')
-            (object items=(array 'Auditing' 'AuditingMeta' 'Timezone') path=config.auroraCorePackage)
+            (object items=(array 'Timezone') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Handler') path=(sumStrings '../handlers/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.handler'))
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdInput')) path='@api/graphql')
     )
@@ -15,6 +15,11 @@
 {{#if schema.hasOAuth}}
 {{ push importsArray
     (object items='Auth' path='@aurora/decorators')
+~}}
+{{/if}}
+{{#if schema.hasAuditing}}
+{{ push importsArray
+    (object items=(array 'Auditing' 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}

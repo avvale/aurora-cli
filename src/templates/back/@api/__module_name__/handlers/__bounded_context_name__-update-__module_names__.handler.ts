@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Injectable') path='@nestjs/common')
-            (object items=(array 'AuditingMeta' 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
+            (object items=(array 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Input')) path='@api/graphql')
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Dto')) path='../dto')
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Query') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Command')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
@@ -12,6 +12,11 @@
 {{ push importsArray
     (object items=(array 'BadRequestException') path='@nestjs/common')
     (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService' 'CoreGetContentLanguageObjectService') path=config.auroraCorePackage)
+~}}
+{{/if}}
+{{#if schema.hasAuditing}}
+{{ push importsArray
+    (object items=(array 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
