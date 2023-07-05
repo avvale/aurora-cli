@@ -34,6 +34,7 @@
 {{ push importsArray
     (object items=(array 'langs') path='@aurora')
 ~}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller', () =>
 {
