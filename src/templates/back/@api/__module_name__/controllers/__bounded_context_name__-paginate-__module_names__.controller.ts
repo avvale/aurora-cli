@@ -19,7 +19,7 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Body' 'Controller' 'HttpCpde' 'Post')  path='@nestjs/common')
+            (object items=(array 'Body' 'Controller' 'HttpCode' 'Post')  path='@nestjs/common')
             (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation' 'ApiQuery') path='@nestjs/swagger')
             (object items=(array 'Pagination' 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
             (object
@@ -28,7 +28,7 @@
                     array
                     (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Handler')
                 )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
         )
     )
 ~}}

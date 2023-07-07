@@ -29,9 +29,9 @@
                     array
                         (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Dto')
-                        (sumStrings (toCamelCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Handler')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Handler')
                 )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )    
     )
 ~}}
@@ -49,7 +49,7 @@
 {{/if}}
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
-    (object items=(array 'langs') path='@aurora')
+    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
