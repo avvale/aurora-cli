@@ -23,16 +23,21 @@
             (object items=(array 'Body' 'Controller' 'Delet')  path='@nestjs/common')
             (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation' 'ApiBody' 'ApiQuery')  path='@nestjs/swagger')
             (object items=(array 'Auditing' 'AuditingMeta' 'Timezone' 'QueryStatement')  path=config.auroraCorePackage)
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto')  path=config.appContainer '../dto')
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings config.appContainer '../handlers' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '.handler'))
-            
-            
+            (object
+                items=
+                (
+                    array
+                    (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto')
+                    (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Handler')
+                )
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
     )
 ~}}
 {{#if schema.hasTenant}}
 {{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
-    (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared/domain/decorators/tenant-contraint.decorator'))
+    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+    (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared'))
     (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
