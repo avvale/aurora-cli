@@ -445,7 +445,9 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    declareDashboardComponents(): void
+    // declare front components for application with not standalone components
+    // from angular v16 is not necessary to declare components in module
+    declareFrontComponents(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'NgModule');
@@ -482,7 +484,7 @@ export class CodeWriter
 
     declareFrontBoundedContext(index = 5): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app', 'app.routing.ts'));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app', 'app.routes.ts'));
 
         const appRoutes = sourceFile.getVariableDeclarationOrThrow('appRoutes');
         const appRoutesArray = appRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
@@ -502,7 +504,7 @@ export class CodeWriter
 
         // set routes
         childrenRoutesArray?.addElement(
-            `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module').then(m => m.${this.boundedContextName.toPascalCase()}Module) },`
+            `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.routes') },`
             , { useNewLines: true });
 
         sourceFile?.saveSync();

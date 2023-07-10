@@ -21,7 +21,6 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         { overwrite: generateCommandState.flags.overwriteInterface },
     );
     codeWriter.generateFrontRoutes();
-    codeWriter.declareDashboardComponents();
     codeWriter.declareFrontBoundedContext();
     codeWriter.generateFrontNavigation();
     codeWriter.registerFrontNavigation();

@@ -3,7 +3,7 @@
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
             (object items='Validators' path='@angular/forms')
-            (object items=(array 'Action' 'Crumb' 'log' 'mapActions' 'Utils' 'ViewDetailComponent') path='@aurora')
+            (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'Utils' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings '../' toKebabCase schema.boundedContextName '.types'))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
@@ -79,6 +79,10 @@
     templateUrl    : './{{ toKebabCase schema.moduleName }}-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports
+    ],
 })
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent
 {
