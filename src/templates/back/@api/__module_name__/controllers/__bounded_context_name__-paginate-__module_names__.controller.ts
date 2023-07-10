@@ -1,21 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-// import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-// import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-// import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}Pagination, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-// {{#if schema.hasOAuth}}
-// import { Auth } from '@aurora/decorators';
-// {{/if}}
-// {{#if schema.hasTenant}}
-
-// tenant
-// import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
-// import { TenantConstraint } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-// import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
-// {{/if}}
-
-// {{ config.appContainer }}
-// import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.handler';
-
 {{
     setVar 'importsArray' (
         array

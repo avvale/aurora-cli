@@ -1,22 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-// import { Body, Controller, Post } from '@nestjs/common';
-// import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-// import { Auditing, AuditingMeta, Timezone } from '{{ config.auroraCorePackage }}';
-// import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto, {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto } from '../dto';
-// {{#if schema.hasOAuth}}
-// import { Auth } from '@aurora/decorators';
-// {{/if}}
-// {{#if schema.hasTenant}}
-
-// tenant
-// import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
-// import { TenantPolicy } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-policy.decorator';
-// import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
-// {{/if}}
-
-// {{ config.appContainer }}
-// import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.handler';
-
 {{
     setVar 'importsArray' (
         array
