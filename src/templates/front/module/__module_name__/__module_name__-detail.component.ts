@@ -81,7 +81,7 @@
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        ...defaultDetailImports
+        ...defaultDetailImports,
     ],
 })
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent
@@ -503,7 +503,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -693,7 +693,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase getRelationshipSchema.moduleName }}') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {

@@ -22,7 +22,7 @@
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        ...defaultListImports
+        ...defaultListImports,
     ],
 })
 export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseComponent
@@ -204,7 +204,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
                     icon   : {
                         show : true,
-                        name : 'mat_outline:warning_amber',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
