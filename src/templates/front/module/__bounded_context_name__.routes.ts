@@ -1,11 +1,18 @@
 /* eslint-disable max-len */
-import { Route } from '@angular/router';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
 import { {{ toPascalCase schema.boundedContextName }}Component } from './{{ toKebabCase schema.boundedContextName }}.component';
 
-export const {{ toCamelCase schema.boundedContextName }}Routes: Route[] = [
+export default [
     {
         path     : '',
         component: {{ toPascalCase schema.boundedContextName }}Component,
         children : [],
+        providers: [
+            {
+                provide : TRANSLOCO_SCOPE,
+                useValue: '{{ toCamelCase schema.boundedContextName }}',
+                multi   : true,
+            },
+        ],
     },
 ];

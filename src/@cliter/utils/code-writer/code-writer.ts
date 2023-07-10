@@ -1,14 +1,14 @@
-import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralExpression, CallExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
-import { SyntaxKind, NewLineKind } from 'typescript';
-import { cliterConfig } from '../../config';
-import { Properties } from '../properties';
-import { ImportDriver } from './drivers/import.driver';
-import { ExportDriver } from './drivers/export.driver';
-import { ArrayDriver } from './drivers/array.driver';
-import { InterfaceDriver } from './drivers/interface.driver';
-import { ObjectTools } from '../object-tools';
-import * as path from 'node:path';
 import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, InitializerExpressionGetableNode, ObjectLiteralExpression, Project, QuoteKind, SourceFile } from 'ts-morph';
+import { NewLineKind, SyntaxKind } from 'typescript';
+import { cliterConfig } from '../../config';
+import { ObjectTools } from '../object-tools';
+import { Properties } from '../properties';
+import { ArrayDriver } from './drivers/array.driver';
+import { ExportDriver } from './drivers/export.driver';
+import { ImportDriver } from './drivers/import.driver';
+import { InterfaceDriver } from './drivers/interface.driver';
 
 export class CodeWriter
 {
@@ -301,11 +301,9 @@ export class CodeWriter
 
     generateFrontRoutes(index = 0): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
-
-        const routes = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Routes');
-        const routesArray = routes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routes.ts`));
+        const defaultExportDeclarations = sourceFile.getExportedDeclarations();
+        const routesArray = (defaultExportDeclarations.get('default') as ArrayLiteralExpression[])[0];
         const objectRoute = routesArray.getElements()[index] as ObjectLiteralExpression;
         const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
         const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
