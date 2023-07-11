@@ -1,8 +1,8 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
-            (object items=(array 'CacheModule')  path='@nestjs/cache-manager')
+            (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
+            (object items=(array 'CacheModule') path='@nestjs/cache-manager')
             (object
                 items=
                 (
@@ -16,11 +16,7 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-    {{#eq schema.boundedContextName 'common'}}
-        {{ push importsArray (object items=(array 'langs') path='{{ config.appContainer }}/common/lang/infrastructure/mock/mock-lang.data') ~}}
-    {{else}}
-        {{ push importsArray (object items=(array 'langs') path='@aurorajs.dev/common') ~}}
-    {{/eq}}
+    {{ push importsArray (object items=(array 'langs') path= '/common/lang/infrastructure/mock/mock-lang.data') }}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller', () =>
