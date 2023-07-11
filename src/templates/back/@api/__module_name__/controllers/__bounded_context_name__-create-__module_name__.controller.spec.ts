@@ -16,9 +16,11 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items=(array 'langs') path='@aurora')
-~}}
+    {{#eq schema.boundedContextName 'common'}}
+        {{ push importsArray (object items=(array 'langs') path='{{ config.appContainer }}/common/lang/infrastructure/mock/mock-lang.data') ~}}
+    {{else}}
+        {{ push importsArray (object items=(array 'langs') path='@aurorajs.dev/common') ~}}
+    {{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller', () =>
