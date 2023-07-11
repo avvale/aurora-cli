@@ -327,16 +327,16 @@ export class CodeWriter
             sourceFile,
             `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}.resolvers`,
             [
-                `${this.moduleName.toPascalCase()}EditResolver`,
-                `${this.moduleName.toPascalCase()}NewResolver`,
-                `${this.moduleName.toPascalCase()}PaginationResolver`,
+                `${this.moduleName.toCamelCase()}EditResolver`,
+                `${this.moduleName.toCamelCase()}NewResolver`,
+                `${this.moduleName.toCamelCase()}PaginationResolver`,
             ],
         );
 
         // add route to list items
         ArrayDriver.addArrayItem(
             sourceFile,
-            `{ path: '${this.moduleName.toKebabCase()}', component: ${this.moduleName.toPascalCase()}ListComponent, resolve: { data: ${this.moduleName.toPascalCase()}PaginationResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }}`,
+            `{ path: '${this.moduleName.toKebabCase()}', component: ${this.moduleName.toPascalCase()}ListComponent, resolve: { data: ${this.moduleName.toCamelCase()}PaginationResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }}`,
             childrenRoutesArray,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
@@ -345,14 +345,14 @@ export class CodeWriter
                     return `'${this.moduleName.toKebabCase()}'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                 });
 
-                return !!foundItem;
+                return Boolean(foundItem);
             },
         );
 
         // add route to new item
         ArrayDriver.addArrayItem(
             sourceFile,
-            `{ path: '${this.moduleName.toKebabCase()}/new', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
+            `{ path: '${this.moduleName.toKebabCase()}/new', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
             childrenRoutesArray,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
@@ -361,7 +361,7 @@ export class CodeWriter
                     return `'${this.moduleName.toKebabCase()}/new'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                 });
 
-                return !!foundItem;
+                return Boolean(foundItem);
             },
         );
 
@@ -371,7 +371,7 @@ export class CodeWriter
             // add route to new i18n item
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `{ path: '${this.moduleName.toKebabCase()}/new/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
+                `{ path: '${this.moduleName.toKebabCase()}/new/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
                 childrenRoutesArray,
                 (item: string, array: ArrayLiteralExpression | undefined) =>
                 {
@@ -380,14 +380,14 @@ export class CodeWriter
                         return `'${this.moduleName.toKebabCase()}/new/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                     });
 
-                    return !!foundItem;
+                    return Boolean(foundItem);
                 },
             );
 
             // add route to edit item
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `{ path: '${this.moduleName.toKebabCase()}/edit/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
+                `{ path: '${this.moduleName.toKebabCase()}/edit/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
                 childrenRoutesArray,
                 (item: string, array: ArrayLiteralExpression | undefined) =>
                 {
@@ -396,7 +396,7 @@ export class CodeWriter
                         return `'${this.moduleName.toKebabCase()}/edit/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                     });
 
-                    return !!foundItem;
+                    return Boolean(foundItem);
                 },
             );
 
@@ -408,7 +408,7 @@ export class CodeWriter
         // add route to edit item
         ArrayDriver.addArrayItem(
             sourceFile,
-            `{ path: '${this.moduleName.toKebabCase()}/edit/:id', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
+            `{ path: '${this.moduleName.toKebabCase()}/edit/:id', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
             childrenRoutesArray,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
@@ -417,7 +417,7 @@ export class CodeWriter
                     return `'${this.moduleName.toKebabCase()}/edit/:id'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                 });
 
-                return !!foundItem;
+                return Boolean(foundItem);
             },
         );
 

@@ -10,7 +10,7 @@ export default [
         providers: [
             {
                 provide : TRANSLOCO_SCOPE,
-                useValue: '{{ toCamelCase schema.boundedContextName }}',
+                useValue: '{{ toKebabCase schema.boundedContextName }}',
                 multi   : true,
             },
         ],

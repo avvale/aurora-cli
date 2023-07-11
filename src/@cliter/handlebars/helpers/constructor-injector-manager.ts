@@ -1,13 +1,13 @@
 import * as handlebars from 'handlebars';
-import { InjectionStatement } from '../../types';
+import { ConstructorInjectionStatement } from '../../types';
 
-handlebars.registerHelper('injectorManager', function(
+handlebars.registerHelper('constructorInjectorManager', function(
     {
         injections = [],
         sortInjections = true,
         nTabulations = 2,
     }: {
-        injections: InjectionStatement[];
+        injections: ConstructorInjectionStatement[];
         sortInjections?: boolean;
         nTabulations?: number,
     },
@@ -15,7 +15,7 @@ handlebars.registerHelper('injectorManager', function(
 )
 {
     const tabulation = '\t';
-    const injectionsResponse: InjectionStatement[] = [];
+    const injectionsResponse: ConstructorInjectionStatement[] = [];
 
     for (const injection of injections)
     {

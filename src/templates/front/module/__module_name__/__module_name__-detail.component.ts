@@ -223,7 +223,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 ~}}
 {{/eq ~}}
 {{/each ~}}
-{{{ injectorManager (object injections=injectionsArray) }}}
+{{{ constructorInjectorManager (object injections=injectionsArray) }}}
     )
     {
         super(injector);
