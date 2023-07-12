@@ -2,13 +2,13 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
+            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object
                 items=
                 (
                     array
                     (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdController')
                     (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdHandler')
-                    (sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
         )
@@ -16,16 +16,16 @@
 ~}}
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
-    (object items=(array 'CacheModule') path='@nest/cache-manager')
+    (object items=(array 'CacheModule') path='@nestjs/cache-manager')
 ~}}
-{{#eq schema.boundedContextName 'common'}}
+{{#eq schema.boundedContext 'common'}}
 {{ push importsArray
-    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
-~}}
+    (object items=(array 'langs') path=(sumStrings config.appContrainer '/common/lang'))
+}}
 {{else}}
 {{ push importsArray
-    (object items='commonMockLangData' path='@aurorajs.dev/common')
-~}}
+    (object items=(array 'langs') path='@aurorajs.dev/common')
+}}
 {{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
