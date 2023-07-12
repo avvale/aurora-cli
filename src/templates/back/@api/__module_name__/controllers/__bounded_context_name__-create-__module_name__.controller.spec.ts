@@ -16,15 +16,15 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-        {{#eq schema.boundedContext 'common'}}
-            {{ push importsArray
-                (object items=(array 'langs') path=(sumStrings config.appContrainer '/common/lang'))
-            }}
-            {{else}}
-            {{ push importsArray
-                (object items=(array 'langs') path='@aurorajs.dev/common')
-            }}
-        {{/eq}}
+{{#eq schema.boundedContext 'common'}}
+    {{ push importsArray
+        (object items=(array 'langs') path=(sumStrings config.appContrainer '/common/lang'))
+    }}
+    {{else}}
+    {{ push importsArray
+        (object items=(array 'langs') path='@aurorajs.dev/common')
+    }}
+{{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller', () =>

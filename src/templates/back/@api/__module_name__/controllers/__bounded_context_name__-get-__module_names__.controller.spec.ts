@@ -2,6 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Testing' 'TestingModule')  path='@nestjs/testing')
+            (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object
                 items=
                 (
@@ -17,8 +18,16 @@
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
     (object items=(array 'CacheModule') path='@nest/cache-manager')
-    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
+{{#eq schema.boundedContext 'common'}}
+    {{ push importsArray
+        (object items=(array 'langs') path=(sumStrings config.appContrainer '/common/lang'))
+    }}
+    {{else}}
+    {{ push importsArray
+        (object items=(array 'langs') path='@aurorajs.dev/common')
+    }}
+{{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller', () =>

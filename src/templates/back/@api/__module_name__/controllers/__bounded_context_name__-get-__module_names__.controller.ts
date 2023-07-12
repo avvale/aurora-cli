@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Body' 'Controller' 'HttpCode' 'Post')  path='@nestjs/common')
-            (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation' 'ApiBody' 'ApiQuery')  path='@nestjs/swagger')
+            (object items=(array 'ApiBody' 'ApiOkResponse' 'ApiOperation' 'ApiQuery' 'ApiTags')  path='@nestjs/swagger')
             (object items=(array 'Timezone' 'QueryStatement')  path=config.auroraCorePackage)
             (object
                 items=
@@ -35,6 +35,9 @@
 {{{ importManager (object imports=importsArray) }}}
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/get')
+{{#if schema.hasOAuth}}
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
+{{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller
 {
     constructor(
