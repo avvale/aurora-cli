@@ -18,7 +18,6 @@
 {{ push importsArray
     (object items=(array 'CacheModule') path='@nestjs/cache-manager')
 ~}}
-{{/if}}
 {{#if schema.properties.hasI18n}}
         {{#eq schema.boundedContext 'common'}}
             {{ push importsArray
