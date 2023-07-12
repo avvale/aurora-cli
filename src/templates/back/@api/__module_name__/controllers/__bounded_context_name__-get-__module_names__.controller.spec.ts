@@ -1,15 +1,14 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Testing' 'TestingModule')  path='@nestjs/testing')
+            (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object
                 items=
                 (
                     array
-                    (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleName) 'Controller')
-                    (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleName) 'Handler')
-                    (sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
+                    (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Controller')
+                    (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
         )
@@ -17,7 +16,7 @@
 ~}}
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
-    (object items=(array 'CacheModule') path='@nest/cache-manager')
+    (object items=(array 'CacheModule') path='@nestjs/cache-manager')
 ~}}
 {{#eq schema.boundedContext 'common'}}
     {{ push importsArray
