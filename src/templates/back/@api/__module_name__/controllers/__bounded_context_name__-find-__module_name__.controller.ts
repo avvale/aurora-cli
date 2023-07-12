@@ -35,6 +35,9 @@
 {{{ importManager (object imports=importsArray) }}}
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/find')
+{{#if schema.hasOAuth}}
+@Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
+{{/if}}
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller
 {
     constructor(
