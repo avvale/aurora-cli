@@ -17,8 +17,16 @@
 {{#if schema.properties.hasI18n}}
 {{ push importsArray
     (object items=(array 'CacheModule') path='@nest/cache-manager')
+~}}
+{{#eq schema.boundedContextName 'common'}}
+{{ push importsArray
     (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
+{{else}}
+{{ push importsArray
+    (object items='commonMockLangData' path='@aurorajs.dev/common')
+~}}
+{{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}Controller', () =>
