@@ -720,7 +720,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             {
                                 await lastValueFrom(
                                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
-                                        .deleteById<{{ getRelationshipSchema.aggregateName }}>(action.meta.row.id),
+                                        .deleteById<{{ getRelationshipSchema.aggregateName }}>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
 
                                 this.actionService.action({
