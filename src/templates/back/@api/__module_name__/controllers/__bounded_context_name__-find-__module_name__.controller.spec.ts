@@ -1,7 +1,7 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Testing' 'TestingModule')  path='@nestjs/testing')
+            (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object
                 items=
                 (
