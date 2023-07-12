@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Body' 'Controller' 'HttpCode' 'Param' 'Post')  path='@nestjs/common')
-            (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation')  path='@nestjs/swagger')
+            (object items=(array 'ApiOkResponse' 'ApiOperation' 'ApiTags')  path='@nestjs/swagger')
             (object items=(array 'Timezone' 'QueryStatement')  path=config.auroraCorePackage)
             (object
                 items=
