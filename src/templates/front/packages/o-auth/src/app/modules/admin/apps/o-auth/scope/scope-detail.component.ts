@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { OAuthScope } from '../o-auth.types';
 import { ScopeService } from './scope.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-scope-detail',
     templateUrl    : './scope-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+    ],
 })
 export class ScopeDetailComponent extends ViewDetailComponent
 {
@@ -30,8 +34,8 @@ export class ScopeDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly scopeService: ScopeService,
+		protected readonly injector: Injector,
+		private readonly scopeService: ScopeService,
     )
     {
         super(injector);
@@ -40,7 +44,9 @@ export class ScopeDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -87,6 +93,7 @@ export class ScopeDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'oAuth::scope.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -155,6 +162,7 @@ export class ScopeDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }

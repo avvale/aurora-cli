@@ -1,9 +1,9 @@
+import { OAuthAccessToken, OAuthCreateAccessToken, OAuthUpdateAccessTokenById, OAuthUpdateAccessTokens } from '../o-auth.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './access-token.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { OAuthAccessToken, OAuthCreateAccessToken, OAuthUpdateAccessTokenById, OAuthUpdateAccessTokens } from '../o-auth.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './access-token.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -41,10 +41,12 @@ export class AccessTokenService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<OAuthAccessToken>>
     {
@@ -57,12 +59,15 @@ export class AccessTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<OAuthAccessToken>; };}, GridData<OAuthAccessToken>>(result => result.data.pagination),
-                tap((pagination: GridData<OAuthAccessToken>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -71,10 +76,12 @@ export class AccessTokenService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthAccessToken;
@@ -90,21 +97,15 @@ export class AccessTokenService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthAccessToken;
-                    };
-                },
-                {
-                    object: OAuthAccessToken;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthAccessToken;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.accessTokenSubject$.next(data.object);
                 }),
@@ -116,10 +117,12 @@ export class AccessTokenService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthAccessToken;
@@ -135,21 +138,15 @@ export class AccessTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthAccessToken;
-                    };
-                },
-                {
-                    object: OAuthAccessToken;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthAccessToken;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.accessTokenSubject$.next(data.object);
                 }),
@@ -161,10 +158,12 @@ export class AccessTokenService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: OAuthAccessToken[];
@@ -180,21 +179,15 @@ export class AccessTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: OAuthAccessToken[];
-                    };
-                },
-                {
-                    objects: OAuthAccessToken[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: OAuthAccessToken[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.accessTokensSubject$.next(data.objects);
                 }),
@@ -205,9 +198,11 @@ export class AccessTokenService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthCreateAccessToken;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -218,6 +213,9 @@ export class AccessTokenService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -225,9 +223,11 @@ export class AccessTokenService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateAccessTokenById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -237,6 +237,9 @@ export class AccessTokenService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -247,11 +250,13 @@ export class AccessTokenService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateAccessTokens;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -264,19 +269,37 @@ export class AccessTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -285,10 +308,12 @@ export class AccessTokenService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -296,7 +321,13 @@ export class AccessTokenService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 }

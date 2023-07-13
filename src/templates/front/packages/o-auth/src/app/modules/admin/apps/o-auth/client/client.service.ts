@@ -1,11 +1,13 @@
+import { OAuthApplication, OAuthClient, OAuthCreateClient, OAuthScope, OAuthUpdateClientById, OAuthUpdateClients } from '../o-auth.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, getRelations, paginationQuery, updateByIdMutation, updateMutation } from './client.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { ApplicationService } from '../application/application.service';
-import { OAuthApplication, OAuthClient, OAuthCreateClient, OAuthScope, OAuthUpdateClientById, OAuthUpdateClients } from '../o-auth.types';
+
+// ---- customizations ----
 import { ScopeService } from '../scope/scope.service';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, getRelations, findByIdWithRelationsQuery } from './client.graphql';
+import { ApplicationService } from '../application/application.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,7 +22,7 @@ export class ClientService
         private readonly graphqlService: GraphQLService,
         private readonly scopeService: ScopeService,
         private readonly applicationService: ApplicationService,
-    ) { }
+    ) {}
 
     /**
     * Getters
@@ -45,10 +47,12 @@ export class ClientService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<OAuthClient>>
     {
@@ -61,12 +65,15 @@ export class ClientService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<OAuthClient>; };}, GridData<OAuthClient>>(result => result.data.pagination),
-                tap((pagination: GridData<OAuthClient>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -75,10 +82,12 @@ export class ClientService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthClient;
@@ -94,21 +103,15 @@ export class ClientService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthClient;
-                    };
-                },
-                {
-                    object: OAuthClient;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthClient;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.clientSubject$.next(data.object);
                 }),
@@ -120,10 +123,12 @@ export class ClientService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthClient;
@@ -139,21 +144,15 @@ export class ClientService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthClient;
-                    };
-                },
-                {
-                    object: OAuthClient;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthClient;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.clientSubject$.next(data.object);
                 }),
@@ -165,10 +164,12 @@ export class ClientService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: OAuthClient[];
@@ -184,21 +185,15 @@ export class ClientService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: OAuthClient[];
-                    };
-                },
-                {
-                    objects: OAuthClient[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: OAuthClient[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.clientsSubject$.next(data.objects);
                 }),
@@ -209,9 +204,11 @@ export class ClientService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthCreateClient;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -222,6 +219,9 @@ export class ClientService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -229,9 +229,11 @@ export class ClientService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateClientById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -241,6 +243,9 @@ export class ClientService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -251,11 +256,13 @@ export class ClientService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateClients;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -268,19 +275,37 @@ export class ClientService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -289,10 +314,12 @@ export class ClientService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -300,12 +327,24 @@ export class ClientService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
     // ---- customizations ----
-    getRelations(): Observable<{
+    getRelations(
+        {
+            headers = {},
+        }: {
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
         oAuthGetScopes: OAuthScope[];
     }>
     {
@@ -316,19 +355,15 @@ export class ClientService
             }>({
                 query    : getRelations,
                 variables: {},
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: {
-                    oAuthGetScopes: OAuthScope[];
-                };},
-                {
-                    oAuthGetScopes: OAuthScope[];
-                }>(result => result.data),
-                tap((data: {
-                    oAuthGetScopes: OAuthScope[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.scopeService.scopesSubject$.next(data.oAuthGetScopes);
                 }),
@@ -340,10 +375,12 @@ export class ClientService
             graphqlStatement = findByIdWithRelationsQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthClient;
@@ -363,22 +400,14 @@ export class ClientService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthClient;
-                        oAuthGetScopes: OAuthScope[];
-                        oAuthGetApplications: OAuthApplication[];
-                    };
-                },
-                {
-                    object: OAuthClient;
-                    oAuthGetScopes: OAuthScope[];
-                    oAuthGetApplications: OAuthApplication[];
-                }>(result => result.data),
+                map(result => result.data),
                 tap((data: {
                     object: OAuthClient;
                     oAuthGetScopes: OAuthScope[];

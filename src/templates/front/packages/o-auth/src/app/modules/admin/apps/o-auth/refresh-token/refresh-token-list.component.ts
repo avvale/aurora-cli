@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { OAuthRefreshToken } from '../o-auth.types';
-import { RefreshTokenService } from './refresh-token.service';
 import { refreshTokenColumnsConfig } from './refresh-token.columns-config';
+import { RefreshTokenService } from './refresh-token.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-refresh-token-list',
     templateUrl    : './refresh-token-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class RefreshTokenListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class RefreshTokenListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::refreshToken.list.edit':
-                this.router.navigate(['o-auth/refresh-token/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'o-auth/refresh-token/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'oAuth::refreshToken.list.delete':
@@ -116,7 +124,7 @@ export class RefreshTokenListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('oAuth.RefreshToken') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class RefreshTokenListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.refreshTokenService
-                                        .deleteById<OAuthRefreshToken>(action.meta.row.id),
+                                        .deleteById<OAuthRefreshToken>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'oAuth::refreshToken.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class RefreshTokenListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = refreshTokenColumnsConfig.map(refreshTokenColumnConfig => refreshTokenColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

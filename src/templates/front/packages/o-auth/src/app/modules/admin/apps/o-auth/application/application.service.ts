@@ -1,9 +1,9 @@
+import { OAuthApplication, OAuthCreateApplication, OAuthUpdateApplicationById, OAuthUpdateApplications } from '../o-auth.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './application.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { OAuthApplication, OAuthCreateApplication, OAuthUpdateApplicationById, OAuthUpdateApplications } from '../o-auth.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './application.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -41,10 +41,12 @@ export class ApplicationService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<OAuthApplication>>
     {
@@ -57,12 +59,15 @@ export class ApplicationService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<OAuthApplication>; };}, GridData<OAuthApplication>>(result => result.data.pagination),
-                tap((pagination: GridData<OAuthApplication>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -71,10 +76,12 @@ export class ApplicationService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthApplication;
@@ -90,21 +97,15 @@ export class ApplicationService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthApplication;
-                    };
-                },
-                {
-                    object: OAuthApplication;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthApplication;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.applicationSubject$.next(data.object);
                 }),
@@ -116,10 +117,12 @@ export class ApplicationService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthApplication;
@@ -135,21 +138,15 @@ export class ApplicationService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthApplication;
-                    };
-                },
-                {
-                    object: OAuthApplication;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthApplication;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.applicationSubject$.next(data.object);
                 }),
@@ -161,10 +158,12 @@ export class ApplicationService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: OAuthApplication[];
@@ -180,21 +179,15 @@ export class ApplicationService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: OAuthApplication[];
-                    };
-                },
-                {
-                    objects: OAuthApplication[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: OAuthApplication[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.applicationsSubject$.next(data.objects);
                 }),
@@ -205,9 +198,11 @@ export class ApplicationService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthCreateApplication;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -218,6 +213,9 @@ export class ApplicationService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -225,9 +223,11 @@ export class ApplicationService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateApplicationById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -237,6 +237,9 @@ export class ApplicationService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -247,11 +250,13 @@ export class ApplicationService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateApplications;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -264,19 +269,37 @@ export class ApplicationService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -285,10 +308,12 @@ export class ApplicationService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -296,7 +321,13 @@ export class ApplicationService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 }

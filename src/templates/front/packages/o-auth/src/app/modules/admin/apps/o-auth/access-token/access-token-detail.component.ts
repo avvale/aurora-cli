@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 import { OAuthAccessToken } from '../o-auth.types';
 import { AccessTokenService } from './access-token.service';
@@ -10,6 +11,11 @@ import { AccessTokenService } from './access-token.service';
     templateUrl    : './access-token-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        MatCheckboxModule,
+    ],
 })
 export class AccessTokenDetailComponent extends ViewDetailComponent
 {
@@ -30,8 +36,8 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly accessTokenService: AccessTokenService,
+		private readonly accessTokenService: AccessTokenService,
+		protected readonly injector: Injector,
     )
     {
         super(injector);
@@ -40,7 +46,9 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -76,11 +84,11 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id       : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            clientId : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            clientId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             accountId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
-            token    : ['', [Validators.required]],
-            name     : ['', [Validators.maxLength(255)]],
+            token: ['', [Validators.required]],
+            name: ['', [Validators.maxLength(255)]],
             isRevoked: false,
             expiresAt: '',
         });
@@ -91,6 +99,7 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'oAuth::accessToken.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -159,6 +168,7 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }

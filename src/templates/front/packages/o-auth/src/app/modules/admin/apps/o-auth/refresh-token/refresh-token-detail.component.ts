@@ -1,15 +1,21 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { OAuthRefreshToken } from '../o-auth.types';
 import { RefreshTokenService } from './refresh-token.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-refresh-token-detail',
     templateUrl    : './refresh-token-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        MatCheckboxModule,
+    ],
 })
 export class RefreshTokenDetailComponent extends ViewDetailComponent
 {
@@ -30,8 +36,8 @@ export class RefreshTokenDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly refreshTokenService: RefreshTokenService,
+		protected readonly injector: Injector,
+		private readonly refreshTokenService: RefreshTokenService,
     )
     {
         super(injector);
@@ -40,7 +46,9 @@ export class RefreshTokenDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -89,6 +97,7 @@ export class RefreshTokenDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'oAuth::refreshToken.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -157,6 +166,7 @@ export class RefreshTokenDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }

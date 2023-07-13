@@ -1,15 +1,21 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { OAuthApplication } from '../o-auth.types';
 import { ApplicationService } from './application.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-application-detail',
     templateUrl    : './application-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        MatCheckboxModule,
+    ],
 })
 export class ApplicationDetailComponent extends ViewDetailComponent
 {
@@ -30,8 +36,8 @@ export class ApplicationDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly applicationService: ApplicationService,
+		private readonly applicationService: ApplicationService,
+		protected readonly injector: Injector,
     )
     {
         super(injector);
@@ -40,7 +46,9 @@ export class ApplicationDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -76,10 +84,10 @@ export class ApplicationDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id      : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            code    : ['', [Validators.required, Validators.maxLength(50)]],
-            name    : ['', [Validators.required, Validators.maxLength(255)]],
-            secret  : ['', [Validators.required, Validators.maxLength(90)]],
+            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            code: ['', [Validators.required, Validators.maxLength(50)]],
+            name: ['', [Validators.required, Validators.maxLength(255)]],
+            secret: ['', [Validators.required, Validators.maxLength(90)]],
             isMaster: false,
         });
     }
@@ -89,6 +97,7 @@ export class ApplicationDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'oAuth::application.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -157,6 +166,7 @@ export class ApplicationDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }

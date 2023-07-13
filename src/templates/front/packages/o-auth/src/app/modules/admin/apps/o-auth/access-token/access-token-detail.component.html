@@ -7,7 +7,7 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
-                    svgIcon="heroicons_solid:tag"
+                    svgIcon="mat_solid:password"
                     class="icon-size-8 mr-2"
                 >
                 </mat-icon>
@@ -24,12 +24,16 @@
                 class="ml-3"
                 form="oAuthAccessTokenFormDetail"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('oAuth::accessToken.detail.update' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('oAuth::accessToken.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'oAuth::accessToken.detail.update' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Update') }}
             </button>
@@ -40,12 +44,16 @@
                 form="oAuthAccessTokenFormDetail"
                 class="ml-3"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('oAuth::accessToken.detail.create' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('oAuth::accessToken.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'oAuth::accessToken.detail.create' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Create') }}
             </button>
@@ -73,18 +81,6 @@
                         appearance="outline"
                         class="col-12"
                     >
-                        <mat-label>{{ t('oAuth.Token') }}</mat-label>
-                        <textarea
-                            matInput
-                            formControlName="token"
-                        >
-                        </textarea>
-                        <mat-error>{{ formErrors?.token | async }}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-12"
-                    >
                         <mat-label>{{ t('oAuth.Name') }}</mat-label>
                         <input
                             matInput
@@ -93,7 +89,19 @@
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
                     </mat-form-field>
-                    <div class="col-4 pt-5">
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.Token') }}</mat-label>
+                        <textarea
+                            matInput
+                            formControlName="token"
+                        >
+                        </textarea>
+                        <mat-error>{{ formErrors?.token | async }}</mat-error>
+                    </mat-form-field>
+                    <div class="col-3 pt-5">
                         <mat-checkbox
                             formControlName="isRevoked"
                         >
@@ -102,7 +110,7 @@
                     </div>
                     <mat-form-field
                         appearance="outline"
-                        class="col-4"
+                        class="au-datepicker col-4"
                     >
                         <mat-label>{{ t('oAuth.ExpiresAt') }}</mat-label>
                         <input

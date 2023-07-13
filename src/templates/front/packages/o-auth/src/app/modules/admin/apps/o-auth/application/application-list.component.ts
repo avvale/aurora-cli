@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { OAuthApplication } from '../o-auth.types';
-import { ApplicationService } from './application.service';
 import { applicationColumnsConfig } from './application.columns-config';
+import { ApplicationService } from './application.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-application-list',
     templateUrl    : './application-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class ApplicationListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class ApplicationListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::application.list.edit':
-                this.router.navigate(['o-auth/application/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'o-auth/application/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'oAuth::application.list.delete':
@@ -116,7 +124,7 @@ export class ApplicationListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('oAuth.Application') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class ApplicationListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.applicationService
-                                        .deleteById<OAuthApplication>(action.meta.row.id),
+                                        .deleteById<OAuthApplication>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'oAuth::application.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class ApplicationListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = applicationColumnsConfig.map(applicationColumnConfig => applicationColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

@@ -4,7 +4,7 @@ export const oAuthNavigation: FuseNavigationItem = {
     id   : 'oAuth',
     title: 'OAuth',
     type : 'collapsable',
-    icon : 'heroicons_outline:tag',
+    icon : 'mat_outline:security',
     meta : {
         permission: 'oAuth.access',
     },
@@ -13,7 +13,7 @@ export const oAuthNavigation: FuseNavigationItem = {
             id   : 'scopes',
             title: 'Scope',
             type : 'basic',
-            icon : 'ads_click',
+            icon : 'mat_outline:ads_click',
             link : '/o-auth/scope',
             meta : {
                 permission: 'oAuth.scope.access',
@@ -23,7 +23,7 @@ export const oAuthNavigation: FuseNavigationItem = {
             id   : 'applications',
             title: 'Application',
             type : 'basic',
-            icon : 'apps',
+            icon : 'mat_outline:apps',
             link : '/o-auth/application',
             meta : {
                 permission: 'oAuth.application.access',
@@ -33,7 +33,7 @@ export const oAuthNavigation: FuseNavigationItem = {
             id   : 'clients',
             title: 'Client',
             type : 'basic',
-            icon : 'workspaces',
+            icon : 'mat_outline:workspaces',
             link : '/o-auth/client',
             meta : {
                 permission: 'oAuth.client.access',
@@ -43,7 +43,7 @@ export const oAuthNavigation: FuseNavigationItem = {
             id   : 'accessTokens',
             title: 'AccessToken',
             type : 'basic',
-            icon : 'password',
+            icon : 'mat_outline:password',
             link : '/o-auth/access-token',
             meta : {
                 permission: 'oAuth.accessToken.access',
@@ -53,7 +53,7 @@ export const oAuthNavigation: FuseNavigationItem = {
             id   : 'refreshTokens',
             title: 'RefreshToken',
             type : 'basic',
-            icon : 'password',
+            icon : 'mat_outline:password',
             link : '/o-auth/refresh-token',
             meta : {
                 permission: 'oAuth.refreshToken.access',

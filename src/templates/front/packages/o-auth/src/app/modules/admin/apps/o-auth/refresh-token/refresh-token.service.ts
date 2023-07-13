@@ -1,9 +1,9 @@
+import { OAuthCreateRefreshToken, OAuthRefreshToken, OAuthUpdateRefreshTokenById, OAuthUpdateRefreshTokens } from '../o-auth.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './refresh-token.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { OAuthRefreshToken, OAuthCreateRefreshToken, OAuthUpdateRefreshTokenById, OAuthUpdateRefreshTokens } from '../o-auth.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './refresh-token.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -41,10 +41,12 @@ export class RefreshTokenService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<OAuthRefreshToken>>
     {
@@ -57,12 +59,15 @@ export class RefreshTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<OAuthRefreshToken>; };}, GridData<OAuthRefreshToken>>(result => result.data.pagination),
-                tap((pagination: GridData<OAuthRefreshToken>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -71,10 +76,12 @@ export class RefreshTokenService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthRefreshToken;
@@ -90,21 +97,15 @@ export class RefreshTokenService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthRefreshToken;
-                    };
-                },
-                {
-                    object: OAuthRefreshToken;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthRefreshToken;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.refreshTokenSubject$.next(data.object);
                 }),
@@ -116,10 +117,12 @@ export class RefreshTokenService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthRefreshToken;
@@ -135,21 +138,15 @@ export class RefreshTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthRefreshToken;
-                    };
-                },
-                {
-                    object: OAuthRefreshToken;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthRefreshToken;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.refreshTokenSubject$.next(data.object);
                 }),
@@ -161,10 +158,12 @@ export class RefreshTokenService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: OAuthRefreshToken[];
@@ -180,21 +179,15 @@ export class RefreshTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: OAuthRefreshToken[];
-                    };
-                },
-                {
-                    objects: OAuthRefreshToken[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: OAuthRefreshToken[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.refreshTokensSubject$.next(data.objects);
                 }),
@@ -205,9 +198,11 @@ export class RefreshTokenService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthCreateRefreshToken;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -218,6 +213,9 @@ export class RefreshTokenService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -225,9 +223,11 @@ export class RefreshTokenService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateRefreshTokenById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -237,6 +237,9 @@ export class RefreshTokenService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -247,11 +250,13 @@ export class RefreshTokenService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateRefreshTokens;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -264,19 +269,37 @@ export class RefreshTokenService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -285,10 +308,12 @@ export class RefreshTokenService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -296,7 +321,13 @@ export class RefreshTokenService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 }

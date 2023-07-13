@@ -1,17 +1,27 @@
+import { OAuthApplication, OAuthClient, OAuthClientGrantType, OAuthScope } from '../o-auth.types';
+import { ClientService } from './client.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
-import { ApplicationService } from '../application/application.service';
-import { OAuthClient, OAuthClientGrantType, OAuthScope, OAuthApplication } from '../o-auth.types';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { Observable, lastValueFrom, takeUntil } from 'rxjs';
+
+// ---- customizations ----
 import { ScopeService } from '../scope/scope.service';
-import { ClientService } from './client.service';
+import { ApplicationService } from '../application/application.service';
+import { KeyValuePipe, NgForOf } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector       : 'o-auth-client-detail',
     templateUrl    : './client-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        KeyValuePipe, MatCheckboxModule, MatSelectModule, NgForOf,
+    ],
 })
 export class ClientDetailComponent extends ViewDetailComponent
 {
@@ -85,18 +95,18 @@ export class ClientDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id                 : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            grantType          : ['', [Validators.required]],
-            name               : ['', [Validators.required, Validators.maxLength(255)]],
-            secret             : ['', [Validators.required, Validators.maxLength(90)]],
-            authUrl            : ['', [Validators.maxLength(2048)]],
-            redirect           : ['', [Validators.maxLength(2048)]],
-            applicationIds     : [],
-            scopeOptions       : [],
-            expiredAccessToken : [null, [Validators.maxLength(10)]],
+            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            grantType: ['', [Validators.required]],
+            name: ['', [Validators.required, Validators.maxLength(255)]],
+            secret: ['', [Validators.required, Validators.maxLength(90)]],
+            authUrl: ['', [Validators.maxLength(2048)]],
+            redirect: ['', [Validators.maxLength(2048)]],
+            applicationIds: [],
+            scopeOptions: [],
+            expiredAccessToken: [null, [Validators.maxLength(10)]],
             expiredRefreshToken: [null, [Validators.maxLength(10)]],
-            isActive           : false,
-            isMaster           : false,
+            isActive: false,
+            isMaster: false,
         });
     }
 
@@ -105,6 +115,7 @@ export class ClientDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'oAuth::client.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -176,6 +187,7 @@ export class ClientDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }
