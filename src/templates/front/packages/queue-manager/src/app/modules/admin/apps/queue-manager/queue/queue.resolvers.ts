@@ -1,137 +1,92 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-import { Observable } from 'rxjs';
 import { QueueManagerQueue } from '../queue-manager.types';
 import { queueColumnsConfig } from './queue.columns-config';
-import { jobColumnsConfig } from '../job/job.columns-config';
 import { QueueService } from './queue.service';
+import { inject } from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class QueuePaginationResolver implements Resolve<GridData<QueueManagerQueue>>
+// ---- customizations ----
+import { jobColumnsConfig } from '../job/job.columns-config';
+
+export const queuePaginationResolver: ResolveFn<GridData<QueueManagerQueue>> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
-        private readonly actionService: ActionService,
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        private readonly queueService: QueueService,
-    ) {}
+    const actionService = inject(ActionService);
+    const gridFiltersStorageService = inject(GridFiltersStorageService);
+    const gridStateService = inject(GridStateService);
+    const queueService = inject(QueueService);
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<GridData<QueueManagerQueue>>
-    {
-        this.actionService.action({
-            id          : 'queueManager::queue.list.view',
-            isViewAction: true,
-        });
+    actionService.action({
+        id          : 'queueManager::queue.list.view',
+        isViewAction: true,
+    });
 
-        const gridId = 'queueManager::queue.list.mainGridList';
-        this.gridStateService.setPaginationActionId(gridId, 'queueManager::queue.list.pagination');
-        this.gridStateService.setExportActionId(gridId, 'queueManager::queue.list.export');
+    const gridId = 'queueManager::queue.list.mainGridList';
+    gridStateService.setPaginationActionId(gridId, 'queueManager::queue.list.pagination');
+    gridStateService.setExportActionId(gridId, 'queueManager::queue.list.export');
 
-        return this.queueService.pagination({
-            query: QueryStatementHandler
-                .init({ columnsConfig: queueColumnsConfig })
-                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(gridId))
-                .setSort(this.gridStateService.getSort(gridId))
-                .setPage(this.gridStateService.getPage(gridId))
-                .setSearch(this.gridStateService.getSearchState(gridId))
-                .getQueryStatement(),
-        });
-    }
-}
+    return queueService.pagination({
+        query: QueryStatementHandler
+            .init({ columnsConfig: queueColumnsConfig })
+            .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
+            .setSort(gridStateService.getSort(gridId))
+            .setPage(gridStateService.getPage(gridId))
+            .setSearch(gridStateService.getSearchState(gridId))
+            .getQueryStatement(),
+    });
+};
 
-@Injectable({
-    providedIn: 'root',
-})
-export class QueueNewResolver implements Resolve<Action>
+export const queueNewResolver: ResolveFn<Action> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
-		private readonly actionService: ActionService,
-    )
-    {}
+	const actionService = inject(ActionService);
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Action
-    {
-        return this.actionService.action({
-            id          : 'queueManager::queue.detail.new',
-            isViewAction: true,
-        });
-    }
-}
+    return actionService.action({
+        id          : 'queueManager::queue.detail.new',
+        isViewAction: true,
+    });
+};
 
-@Injectable({
-    providedIn: 'root',
-})
-export class QueueEditResolver implements Resolve<{
+export const queueEditResolver: ResolveFn<{
 	object: QueueManagerQueue;
-}>
+}> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
-		private readonly actionService: ActionService,
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-		private readonly queueService: QueueService,
-    )
-    {}
+	const actionService = inject(ActionService);
+	const queueService = inject(QueueService);
+    const gridFiltersStorageService = inject(GridFiltersStorageService);
+    const gridStateService = inject(GridStateService);
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<{
-		object: QueueManagerQueue;
-    }>
-    {
-        this.actionService.action({
-            id          : 'queueManager::queue.detail.edit',
-            isViewAction: true,
-        });
+    actionService.action({
+        id          : 'queueManager::queue.detail.edit',
+        isViewAction: true,
+    });
 
-        // job grid elements manager
-        const jobsGridId = 'queueManager::queue.detail.jobsGridList';
-        this.gridStateService.setPaginationActionId(jobsGridId, 'queueManager::queue.detail.jobsPagination');
-        this.gridStateService.setExportActionId(jobsGridId, 'queueManager::queue.detail.exportJobs');
+    // job grid elements manager
+    const jobsGridId = 'queueManager::queue.detail.jobsGridList';
+    gridStateService.setPaginationActionId(jobsGridId, 'queueManager::queue.detail.jobsPagination');
+    gridStateService.setExportActionId(jobsGridId, 'queueManager::queue.detail.exportJobs');
 
-        return this.queueService.findByIdWithRelations({
-            id               : route.paramMap.get('id'),
-            queryPaginateJobs: QueryStatementHandler
-                .init({ columnsConfig: jobColumnsConfig })
-                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(jobsGridId))
-                .setSort(this.gridStateService.getSort(jobsGridId))
-                .setPage(this.gridStateService.getPage(jobsGridId))
-                .setSearch(this.gridStateService.getSearchState(jobsGridId))
-                .getQueryStatement(),
-            constraintPaginateJobs: {
-                where: {
-                    queueId: route.paramMap.get('id'),
-                    jobType: 'failed',
-                },
+    return queueService.findByIdWithRelations({
+        id               : route.paramMap.get('id'),
+        queryPaginateJobs: QueryStatementHandler
+            .init({ columnsConfig: jobColumnsConfig })
+            .setColumFilters(gridFiltersStorageService.getColumnFilterState(jobsGridId))
+            .setSort(gridStateService.getSort(jobsGridId))
+            .setPage(gridStateService.getPage(jobsGridId))
+            .setSearch(gridStateService.getSearchState(jobsGridId))
+            .getQueryStatement(),
+        constraintPaginateJobs: {
+            where: {
+                queueId: route.paramMap.get('id'),
+                jobType: 'failed',
             },
-        });
-    }
-}
+        },
+    });
+};

@@ -1,16 +1,23 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { QueueManagerJob, QueueManagerJobRegistry, QueueManagerJobState } from '../queue-manager.types';
 import { JobRegistryService } from './job-registry.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, Crumb, IsObjectEmptyPipe, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
+
+// ---- customizations ----
 import { JobService } from '../job/job.service';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
     selector       : 'queue-manager-job-registry-detail',
     templateUrl    : './job-registry-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        IsObjectEmptyPipe, MatFormFieldAppearanceComponent, NgxJsonViewerModule,
+    ],
 })
 export class JobRegistryDetailComponent extends ViewDetailComponent
 {

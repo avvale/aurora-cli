@@ -29,8 +29,8 @@
             >
                 <mat-icon
                     *ngIf="!('queueManager::queue.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'queueManager::queue.detail.update' | getSpinnerFlag | async">
@@ -49,8 +49,8 @@
             >
                 <mat-icon
                     *ngIf="!('queueManager::queue.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'queueManager::queue.detail.create' | getSpinnerFlag | async">
@@ -113,7 +113,7 @@
                             actionService.action({
                                 id          : 'queueManager::queue.detail.changeTypeJobsPagination',
                                 isViewAction: false,
-                                data        : {
+                                meta        : {
                                     jobType: 'waiting'
                                 }
                             })
@@ -134,7 +134,7 @@
                             actionService.action({
                                 id          : 'queueManager::queue.detail.changeTypeJobsPagination',
                                 isViewAction: false,
-                                data        : {
+                                meta        : {
                                     jobType: 'active'
                                 }
                             })
@@ -155,7 +155,7 @@
                             actionService.action({
                                 id          : 'queueManager::queue.detail.changeTypeJobsPagination',
                                 isViewAction: false,
-                                data        : {
+                                meta        : {
                                     jobType: 'completed'
                                 }
                             })
@@ -176,7 +176,7 @@
                             actionService.action({
                                 id          : 'queueManager::queue.detail.changeTypeJobsPagination',
                                 isViewAction: false,
-                                data        : {
+                                meta        : {
                                     jobType: 'failed'
                                 }
                             })
@@ -197,7 +197,7 @@
                             actionService.action({
                                 id          : 'queueManager::queue.detail.changeTypeJobsPagination',
                                 isViewAction: false,
-                                data        : {
+                                meta        : {
                                     jobType: 'delayed'
                                 }
                             })
@@ -218,7 +218,7 @@
                             actionService.action({
                                 id          : 'queueManager::queue.detail.changeTypeJobsPagination',
                                 isViewAction: false,
-                                data        : {
+                                meta        : {
                                     jobType: 'paused'
                                 }
                             })

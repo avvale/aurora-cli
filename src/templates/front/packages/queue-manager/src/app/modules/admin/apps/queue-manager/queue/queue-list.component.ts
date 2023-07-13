@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { QueueManagerQueue } from '../queue-manager.types';
-import { QueueService } from './queue.service';
 import { queueColumnsConfig } from './queue.columns-config';
+import { QueueService } from './queue.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'queue-manager-queue-list',
     templateUrl    : './queue-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class QueueListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class QueueListComponent extends ViewBaseComponent
                 break;
 
             case 'queueManager::queue.list.edit':
-                this.router.navigate(['queue-manager/queue/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'queue-manager/queue/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'queueManager::queue.list.delete':
@@ -116,7 +124,7 @@ export class QueueListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('queueManager.Queue') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class QueueListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.queueService
-                                        .deleteById<QueueManagerQueue>(action.meta.row.id),
+                                        .deleteById<QueueManagerQueue>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'queueManager::queue.list.pagination',
                                     isViewAction: false,
@@ -166,7 +177,8 @@ export class QueueListComponent extends ViewBaseComponent
                 );
 
                 // format export rows
-                (rows.objects as any[]).forEach(row => {
+                (rows.objects as any[]).forEach(row =>
+                {
                     // row.id = row.id;
                 });
 
