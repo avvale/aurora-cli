@@ -1,10 +1,13 @@
 import { FuseNavigationItem } from '@fuse/components/navigation';
 
 export const searchEngineNavigation: FuseNavigationItem = {
-    id      : 'searchEngine',
-    title   : 'SearchEngine',
-    type    : 'collapsable',
-    icon    : 'manage_search',
+    id   : 'searchEngine',
+    title: 'SearchEngine',
+    type : 'collapsable',
+    icon : 'manage_search',
+    meta : {
+        permission: 'searchEngine.access',
+    },
     children: [
         {
             id   : 'collections',
@@ -12,6 +15,9 @@ export const searchEngineNavigation: FuseNavigationItem = {
             type : 'basic',
             icon : 'mat_outline:segment',
             link : '/search-engine/collection',
+            meta : {
+                permission: 'searchEngine.collection.access',
+            },
         },
         {
             id   : 'fields',
@@ -19,6 +25,9 @@ export const searchEngineNavigation: FuseNavigationItem = {
             type : 'basic',
             icon : 'mat_outline:input',
             link : '/search-engine/field',
+            meta : {
+                permission: 'searchEngine.field.access',
+            },
         },
     ],
 };

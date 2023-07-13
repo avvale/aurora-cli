@@ -6,13 +6,19 @@ export const commonNavigation: FuseNavigationItem = {
     type       : 'collapsable',
     iconFontSet: 'material-symbols-outlined',
     icon       : 'interests',
-    children   : [
+    meta       : {
+        permission: 'common.access',
+    },
+    children: [
         {
             id   : 'langs',
             title: 'Lang',
             type : 'basic',
             icon : 'language',
             link : '/common/lang',
+            meta : {
+                permission: 'common.lang.access',
+            },
         },
         {
             id   : 'countries',
@@ -20,6 +26,9 @@ export const commonNavigation: FuseNavigationItem = {
             type : 'basic',
             icon : 'flag',
             link : '/common/country',
+            meta : {
+                permission: 'common.country.access',
+            },
         },
     ],
 };
