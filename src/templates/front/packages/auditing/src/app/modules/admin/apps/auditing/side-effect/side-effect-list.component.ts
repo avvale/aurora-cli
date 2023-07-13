@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { AuditingSideEffect } from '../auditing.types';
-import { SideEffectService } from './side-effect.service';
 import { sideEffectColumnsConfig } from './side-effect.columns-config';
+import { SideEffectService } from './side-effect.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'auditing-side-effect-list',
     templateUrl    : './side-effect-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class SideEffectListComponent extends ViewBaseComponent
 {
@@ -102,7 +106,11 @@ export class SideEffectListComponent extends ViewBaseComponent
                 break;
 
             case 'auditing::sideEffect.list.edit':
-                this.router.navigate(['auditing/side-effect/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'auditing/side-effect/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'auditing::sideEffect.list.delete':
@@ -111,7 +119,7 @@ export class SideEffectListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('auditing.SideEffect') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -137,8 +145,11 @@ export class SideEffectListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.sideEffectService
-                                        .deleteById<AuditingSideEffect>(action.meta.row.id),
+                                        .deleteById<AuditingSideEffect>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'auditing::sideEffect.list.pagination',
                                     isViewAction: false,
@@ -160,8 +171,14 @@ export class SideEffectListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = sideEffectColumnsConfig.map(sideEffectColumnConfig => sideEffectColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('auditing.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('auditing.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

@@ -1,15 +1,21 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { AuditingHttpCommunication } from '../auditing.types';
 import { HttpCommunicationService } from './http-communication.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { Action, Crumb, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent } from '@aurora';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'auditing-http-communication-detail',
     templateUrl    : './http-communication-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        MatFormFieldAppearanceComponent, NgxJsonViewerModule,
+    ],
 })
 export class HttpCommunicationDetailComponent extends ViewDetailComponent
 {
@@ -30,8 +36,8 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly httpCommunicationService: HttpCommunicationService,
+		private readonly httpCommunicationService: HttpCommunicationService,
+		protected readonly injector: Injector,
     )
     {
         super(injector);
@@ -40,7 +46,9 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -94,6 +102,7 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'auditing::httpCommunication.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -162,6 +171,7 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }

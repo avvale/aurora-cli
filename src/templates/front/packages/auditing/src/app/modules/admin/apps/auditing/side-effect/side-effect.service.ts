@@ -1,9 +1,9 @@
+import { AuditingCreateSideEffect, AuditingSideEffect, AuditingUpdateSideEffectById, AuditingUpdateSideEffects } from '../auditing.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, rollbackSideEffectMutation, updateByIdMutation, updateMutation } from './side-effect.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { AuditingSideEffect, AuditingCreateSideEffect, AuditingUpdateSideEffectById, AuditingUpdateSideEffects } from '../auditing.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, rollbackSideEffectMutation } from './side-effect.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -41,10 +41,12 @@ export class SideEffectService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<AuditingSideEffect>>
     {
@@ -79,12 +81,15 @@ export class SideEffectService
                         ],
                     },
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<AuditingSideEffect>; };}, GridData<AuditingSideEffect>>(result => result.data.pagination),
-                tap((pagination: GridData<AuditingSideEffect>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -93,10 +98,12 @@ export class SideEffectService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: AuditingSideEffect;
@@ -112,21 +119,15 @@ export class SideEffectService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: AuditingSideEffect;
-                    };
-                },
-                {
-                    object: AuditingSideEffect;
-                }>(result => result.data),
-                tap((data: {
-                    object: AuditingSideEffect;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.sideEffectSubject$.next(data.object);
                 }),
@@ -138,10 +139,12 @@ export class SideEffectService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: AuditingSideEffect;
@@ -157,21 +160,15 @@ export class SideEffectService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: AuditingSideEffect;
-                    };
-                },
-                {
-                    object: AuditingSideEffect;
-                }>(result => result.data),
-                tap((data: {
-                    object: AuditingSideEffect;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.sideEffectSubject$.next(data.object);
                 }),
@@ -183,10 +180,12 @@ export class SideEffectService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: AuditingSideEffect[];
@@ -202,21 +201,15 @@ export class SideEffectService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: AuditingSideEffect[];
-                    };
-                },
-                {
-                    objects: AuditingSideEffect[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: AuditingSideEffect[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.sideEffectsSubject$.next(data.objects);
                 }),
@@ -227,9 +220,11 @@ export class SideEffectService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: AuditingCreateSideEffect;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -240,6 +235,9 @@ export class SideEffectService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -247,9 +245,11 @@ export class SideEffectService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: AuditingUpdateSideEffectById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -259,6 +259,9 @@ export class SideEffectService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -269,11 +272,13 @@ export class SideEffectService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: AuditingUpdateSideEffects;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -286,19 +291,37 @@ export class SideEffectService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -307,10 +330,12 @@ export class SideEffectService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -318,7 +343,13 @@ export class SideEffectService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 

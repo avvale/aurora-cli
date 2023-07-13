@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { AuditingHttpCommunication } from '../auditing.types';
-import { HttpCommunicationService } from './http-communication.service';
 import { httpCommunicationColumnsConfig } from './http-communication.columns-config';
+import { HttpCommunicationService } from './http-communication.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'auditing-http-communication-list',
     templateUrl    : './http-communication-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class HttpCommunicationListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
                 break;
 
             case 'auditing::httpCommunication.list.edit':
-                this.router.navigate(['auditing/http-communication/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'auditing/http-communication/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'auditing::httpCommunication.list.delete':
@@ -116,7 +124,7 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('auditing.HttpCommunication') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.httpCommunicationService
-                                        .deleteById<AuditingHttpCommunication>(action.meta.row.id),
+                                        .deleteById<AuditingHttpCommunication>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'auditing::httpCommunication.list.pagination',
                                     isViewAction: false,
@@ -164,6 +175,12 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
                             query: action.meta.query,
                         }),
                 );
+
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
 
                 const columns: string[] = httpCommunicationColumnsConfig.map(httpCommunicationColumnConfig => httpCommunicationColumnConfig.field);
                 const headers: string[] = columns.map(column => this.translocoService.translate('auditing.' + column.toPascalCase()));

@@ -1,15 +1,24 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
+import { KeyValuePipe, NgForOf } from '@angular/common';
 import { AuditingSideEffect, AuditingSideEffectEvent } from '../auditing.types';
 import { SideEffectService } from './side-effect.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { Action, CanPipe, Crumb, defaultDetailImports, IsObjectEmptyPipe, log, mapActions, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
     selector       : 'auditing-side-effect-detail',
     templateUrl    : './side-effect-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        CanPipe, IsObjectEmptyPipe, KeyValuePipe, MatCheckboxModule, MatFormFieldAppearanceComponent, MatSelectModule, NgForOf, NgxJsonViewerModule,
+    ],
 })
 export class SideEffectDetailComponent extends ViewDetailComponent
 {
@@ -30,8 +39,8 @@ export class SideEffectDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly sideEffectService: SideEffectService,
+		protected readonly injector: Injector,
+		private readonly sideEffectService: SideEffectService,
     )
     {
         super(injector);
@@ -40,7 +49,9 @@ export class SideEffectDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -77,6 +88,7 @@ export class SideEffectDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            tags: null,
             modelPath: ['', [Validators.required, Validators.maxLength(1023)]],
             modelName: ['', [Validators.required, Validators.maxLength(255)]],
             operationId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
@@ -89,12 +101,11 @@ export class SideEffectDetailComponent extends ViewDetailComponent
             newValue: null,
             ip: ['', [Validators.maxLength(19)]],
             method: ['', [Validators.required]],
-            baseUrl: ['', [Validators.maxLength(2048)]],
+            baseUrl: ['', [Validators.maxLength(2047)]],
             params: null,
             query: null,
             body: null,
             userAgent: ['', [Validators.maxLength(1023)]],
-            tags: null,
             isRollback: false,
             rollbackSideEffectId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
         });
@@ -105,6 +116,7 @@ export class SideEffectDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'auditing::sideEffect.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -174,6 +186,7 @@ export class SideEffectDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+            /* #endregion common actions */
 
             // ---- customizations ----
             case 'auditing::sideEffect.detail.rollback':
@@ -182,7 +195,7 @@ export class SideEffectDetailComponent extends ViewDetailComponent
                     message: this.translocoService.translate('auditing.RollbackAlertMessage'),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
