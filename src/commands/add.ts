@@ -580,36 +580,37 @@ export class Add extends Command
                     Installer.declareFrontRouting(routesSourceFile, 'iam');
                     routesSourceFile.saveSync();
 
-                    // add custom imports
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
-                    if (!ImportDriver.hasImportDeclarations(appModuleSourceFile, 'UserMetaStorageIamAdapterService'))
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
+
+                    if (!ImportDriver.hasImportDeclarations(auroraProviderSourceFile, 'UserMetaStorageIamAdapterService'))
                     {
                         ImportDriver.createImportItems(
-                            appModuleSourceFile,
-                            './modules/admin/apps/iam/user-meta/user-meta-storage-iam-adapter.service',
+                            auroraProviderSourceFile,
+                            'app/modules/admin/apps/iam',
                             ['UserMetaStorageIamAdapterService'],
                         );
                     }
 
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // change UserMetaStorageService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
                         'UserMetaStorageService',
                         'UserMetaStorageIamAdapterService',
                     );
 
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // change IamService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
                         'IamService',
                         'IamAuroraAdapterService',
                     );
 
-                    appModuleSourceFile.saveSync();
+                    auroraProviderSourceFile.saveSync();
                     break;
                 }
 
