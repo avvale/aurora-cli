@@ -368,10 +368,10 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'auditing', 'auditingNavigation');
                     navigationSourceFile.saveSync();
 
-                    // add lazy loading module to app routing
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'auditing');
-                    routingSourceFile.saveSync();
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'auditing');
+                    routesSourceFile.saveSync();
                     break;
                 }
 
@@ -546,10 +546,10 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'common', 'commonNavigation');
                     navigationSourceFile.saveSync();
 
-                    // add lazy loading module to app routing
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'common');
-                    routingSourceFile.saveSync();
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'common');
+                    routesSourceFile.saveSync();
                     break;
                 }
 
@@ -576,9 +576,9 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'iamNavigation');
                     navigationSourceFile.saveSync();
 
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'iam');
-                    routingSourceFile.saveSync();
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'iam');
+                    routesSourceFile.saveSync();
 
                     // add custom imports
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
@@ -621,9 +621,9 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'oAuth', 'oAuthNavigation');
                     navigationSourceFile.saveSync();
 
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'oAuth');
-                    routingSourceFile.saveSync();
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'oAuth');
+                    routesSourceFile.saveSync();
 
                     // app.module.ts
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
@@ -657,9 +657,9 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'queueManager', 'queueManagerNavigation');
                     navigationSourceFile.saveSync();
 
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'queueManager');
-                    routingSourceFile.saveSync();
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'queueManager');
+                    routesSourceFile.saveSync();
                     break;
                 }
             }
