@@ -4,7 +4,7 @@ import * as fs from 'node:fs';
 import { ArrayLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { exec } from '../@cliter/functions/common';
-import { CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer';
+import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer';
 
 export class Add extends Command
 {
@@ -625,27 +625,27 @@ export class Add extends Command
                     Installer.declareFrontRouting(routesSourceFile, 'oAuth');
                     routesSourceFile.saveSync();
 
-                    // app.module.ts
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
 
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // change AuthenticationService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
                         'AuthenticationService',
                         'AuthenticationAuroraAdapterService',
                     );
 
-                    DecoratorDriver.removeDecoratorAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // remove AuthGuard
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
                         'AuthGuard',
                     );
 
-                    appModuleSourceFile.saveSync();
+                    auroraProviderSourceFile.saveSync();
                     break;
                 }
 

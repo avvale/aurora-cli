@@ -1,5 +1,5 @@
 export * from './authentication';
-export * from './authorization';
+export * from './authorization/public-api';
 export * from './graphql';
 export * from './iam';
 export * from './lang';
