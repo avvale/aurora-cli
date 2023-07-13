@@ -5,13 +5,13 @@ export const langColumnsConfig: ColumnConfig[] = [
         type       : ColumnDataType.STRING,
         field      : 'name',
         sort       : 'name',
-        translation: 'common.Name',
+        translation: 'Name',
     },
     {
         type       : ColumnDataType.STRING,
         field      : 'image',
         sort       : 'image',
-        translation: 'common.Image',
+        translation: 'Image',
     },
     {
         type       : ColumnDataType.STRING,
