@@ -18,20 +18,6 @@
 // import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{/each}} } from '@api/graphql';
 // {{/if}}
 
-{{
-    setVar 'importsArray' (
-        array
-            (object items=(array 'ApiProperty') path='@nestjs/swagger')
-    )
-~}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
-{{#unless (isI18nRelationProperty schema.moduleName this)}}
-{{ push ../importsArray
-(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-' (toKebabCase getRelationshipModuleName) '.dto'))
-~}}
-{{/unless}}
-{{/each}}
-{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto
 {
 {{#each schema.properties.dtoProperties}}
