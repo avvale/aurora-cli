@@ -1,12 +1,10 @@
+import { IamBoundedContext, IamCreateBoundedContext, IamPermission, IamUpdateBoundedContextById, IamUpdateBoundedContexts } from '../iam.types';
+import { PermissionService } from '../permission/permission.service';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './bounded-context.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { IamBoundedContext, IamCreateBoundedContext, IamPermission, IamUpdateBoundedContextById, IamUpdateBoundedContexts } from '../iam.types';
-import { paginationQuery, getQuery, fields, findByIdWithRelationsQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, findByIdQuery } from './bounded-context.graphql';
-
-// ---- customizations ----
-import { PermissionService } from '../permission/permission.service';
 
 @Injectable({
     providedIn: 'root',
@@ -45,10 +43,12 @@ export class BoundedContextService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<IamBoundedContext>>
     {
@@ -61,12 +61,15 @@ export class BoundedContextService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<IamBoundedContext>; };}, GridData<IamBoundedContext>>(result => result.data.pagination),
-                tap((pagination: GridData<IamBoundedContext>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -75,10 +78,12 @@ export class BoundedContextService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamBoundedContext;
@@ -94,228 +99,34 @@ export class BoundedContextService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamBoundedContext;
-                    };
-                },
-                {
-                    object: IamBoundedContext;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamBoundedContext;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.boundedContextSubject$.next(data.object);
                 }),
             );
     }
 
-    find(
-        {
-            graphqlStatement = findQuery,
-            query = {},
-            constraint = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-        } = {},
-    ): Observable<{
-        object: IamBoundedContext;
-    }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{
-                object: IamBoundedContext;
-            }>({
-                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
-                variables: {
-                    query,
-                    constraint,
-                },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map<{
-                    data: {
-                        object: IamBoundedContext;
-                    };
-                },
-                {
-                    object: IamBoundedContext;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamBoundedContext;
-                }) =>
-                {
-                    this.boundedContextSubject$.next(data.object);
-                }),
-            );
-    }
-
-    get(
-        {
-            graphqlStatement = getQuery,
-            query = {},
-            constraint = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-        } = {},
-    ): Observable<{
-        objects: IamBoundedContext[];
-    }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{
-                objects: IamBoundedContext[];
-            }>({
-                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
-                variables: {
-                    query,
-                    constraint,
-                },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map<{
-                    data: {
-                        objects: IamBoundedContext[];
-                    };
-                },
-                {
-                    objects: IamBoundedContext[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: IamBoundedContext[];
-                }) =>
-                {
-                    this.boundedContextsSubject$.next(data.objects);
-                }),
-            );
-    }
-
-    create<T>(
-        {
-            graphqlStatement = createMutation,
-            object = null,
-        }: {
-            graphqlStatement?: DocumentNode;
-            object?: IamCreateBoundedContext;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    payload: object,
-                },
-            });
-    }
-
-    updateById<T>(
-        {
-            graphqlStatement = updateByIdMutation,
-            object = null,
-        }: {
-            graphqlStatement?: DocumentNode;
-            object?: IamUpdateBoundedContextById;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    payload: object,
-                },
-            });
-    }
-
-    update<T>(
-        {
-            graphqlStatement = updateMutation,
-            object = null,
-            query = {},
-            constraint = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            object?: IamUpdateBoundedContexts;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    payload: object,
-                    query,
-                    constraint,
-                },
-            });
-    }
-
-    deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: { id },
-            });
-    }
-
-    delete<T>(
-        {
-            graphqlStatement = deleteMutation,
-            query = {},
-            constraint = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: { query, constraint },
-            });
-    }
-
-    // ---- customizations ----
     findByIdWithRelations(
         {
             graphqlStatement = findByIdWithRelationsQuery,
             id = '',
             constraint = {},
+            headers = {},
             queryPaginatePermissions = {},
             constraintPaginatePermissions = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
             queryPaginatePermissions?: QueryStatement;
             constraintPaginatePermissions?: QueryStatement;
         } = {},
@@ -334,37 +145,241 @@ export class BoundedContextService
                 variables: {
                     id,
                     constraint,
-                    queryPaginatePermissions: {
-                        ...queryPaginatePermissions,
-                        where: {
-                            ...queryPaginatePermissions.where,
-                            boundedContextId: id,
-                        },
-                    },
+                    queryPaginatePermissions,
                     constraintPaginatePermissions,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamBoundedContext;
-                        iamPaginatePermissions: GridData<IamPermission>;
-                    };
-                },
-                {
-                    object: IamBoundedContext;
-                    iamPaginatePermissions: GridData<IamPermission>;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamBoundedContext;
-                    iamPaginatePermissions: GridData<IamPermission>;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.boundedContextSubject$.next(data.object);
                     this.permissionService.paginationSubject$.next(data.iamPaginatePermissions);
                 }),
             );
+    }
+
+    find(
+        {
+            graphqlStatement = findQuery,
+            query = {},
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        object: IamBoundedContext;
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: IamBoundedContext;
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.boundedContextSubject$.next(data.object);
+                }),
+            );
+    }
+
+    get(
+        {
+            graphqlStatement = getQuery,
+            query = {},
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        objects: IamBoundedContext[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                objects: IamBoundedContext[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.boundedContextsSubject$.next(data.objects);
+                }),
+            );
+    }
+
+    create<T>(
+        {
+            graphqlStatement = createMutation,
+            object = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: IamCreateBoundedContext;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
+    updateById<T>(
+        {
+            graphqlStatement = updateByIdMutation,
+            object = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: IamUpdateBoundedContextById;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
+    update<T>(
+        {
+            graphqlStatement = updateMutation,
+            object = null,
+            query = {},
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: IamUpdateBoundedContexts;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
+    deleteById<T>(
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
+    delete<T>(
+        {
+            graphqlStatement = deleteMutation,
+            query = {},
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            });
     }
 }

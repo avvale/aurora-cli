@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { GraphQLService, UserMetaStorage, UserMetaStorageService } from '@aurora';
-import { BehaviorSubject, first, map, mapTo, Observable, tap } from 'rxjs';
+import { GraphQLService, UserMetaStorage } from '@aurora';
+import { BehaviorSubject, Observable, first, map, tap } from 'rxjs';
 import { findUserMetaById, updateUserMetaByIdMutation } from './user-meta.graphql';
+import { UserMetaStorageService } from '@aurora/components/user-meta-storage/user-meta-storage.service'; // no barrel
 
 @Injectable({
     providedIn: 'root',
@@ -28,13 +29,15 @@ export class UserMetaStorageIamAdapterService extends UserMetaStorageService
             .client()
             .watchQuery<{ iamGetUserMeta: UserMetaStorage; }>({
                 query    : findUserMetaById,
-                variables: { id: keyUserMeta },
+                variables: {
+                    id: keyUserMeta,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { iamGetUserMeta: UserMetaStorage; };}, UserMetaStorage>(result => result.data.iamGetUserMeta),
-                tap((iamGetUserMeta: UserMetaStorage) => this.metaSubject$.next(iamGetUserMeta)),
+                map(result => result.data.iamGetUserMeta),
+                tap(iamGetUserMeta => this.metaSubject$.next(iamGetUserMeta)),
             );
     }
 
@@ -44,12 +47,17 @@ export class UserMetaStorageIamAdapterService extends UserMetaStorageService
 
         if (typeof currentUserMeta === 'object')
         {
-            currentUserMeta = { ...currentUserMeta, [keyUserMeta]: keyUserMetaValue };
+            currentUserMeta = {
+                ...currentUserMeta,
+                [keyUserMeta]: keyUserMetaValue,
+            };
         }
         else
         {
             // create object if not exist user meta
-            currentUserMeta = { [keyUserMeta]: keyUserMetaValue };
+            currentUserMeta = {
+                [keyUserMeta]: keyUserMetaValue,
+            };
         }
 
         return this.saveUserMeta(currentUserMeta);
@@ -62,11 +70,13 @@ export class UserMetaStorageIamAdapterService extends UserMetaStorageService
             .mutate({
                 mutation : updateUserMetaByIdMutation,
                 variables: {
-                    payload: { meta },
+                    payload: {
+                        meta,
+                    },
                 },
             })
             .pipe(
-                mapTo(undefined),
+                map(() => undefined),
             );
     }
 
@@ -77,11 +87,13 @@ export class UserMetaStorageIamAdapterService extends UserMetaStorageService
             .mutate({
                 mutation : updateUserMetaByIdMutation,
                 variables: {
-                    payload: { meta: null },
+                    payload: {
+                        meta: null,
+                    },
                 },
             })
             .pipe(
-                mapTo(undefined),
+                map(() => undefined),
             );
     }
 }

@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { IamBoundedContext } from '../iam.types';
-import { BoundedContextService } from './bounded-context.service';
 import { boundedContextColumnsConfig } from './bounded-context.columns-config';
+import { BoundedContextService } from './bounded-context.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'iam-bounded-context-list',
     templateUrl    : './bounded-context-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class BoundedContextListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class BoundedContextListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::boundedContext.list.edit':
-                this.router.navigate(['iam/bounded-context/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'iam/bounded-context/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'iam::boundedContext.list.delete':
@@ -116,7 +124,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('iam.BoundedContext') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class BoundedContextListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.boundedContextService
-                                        .deleteById<IamBoundedContext>(action.meta.row.id),
+                                        .deleteById<IamBoundedContext>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'iam::boundedContext.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class BoundedContextListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = boundedContextColumnsConfig.map(boundedContextColumnConfig => boundedContextColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

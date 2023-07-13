@@ -7,7 +7,7 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
-                    svgIcon="heroicons_solid:tag"
+                    svgIcon="mat_solid:manage_accounts"
                     class="icon-size-8 mr-2"
                 >
                 </mat-icon>
@@ -24,12 +24,16 @@
                 class="ml-3"
                 form="iamAccountFormDetail"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('iam::account.detail.update' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('iam::account.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::account.detail.update' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Update') }}
             </button>
@@ -40,12 +44,16 @@
                 form="iamAccountFormDetail"
                 class="ml-3"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('iam::account.detail.create' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('iam::account.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::account.detail.create' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Create') }}
             </button>
@@ -230,7 +238,11 @@
                         </mat-form-field>
 
                         <mat-toolbar class="p-0 col-12">
-                            <mat-icon class="mr-3">how_to_reg</mat-icon>
+                            <mat-icon
+                                svgIcon="mat_solid:how_to_reg"
+                                class="mr-3"
+                            >
+                            </mat-icon>
                             <span> {{ t('DataAccess') }}</span>
                         </mat-toolbar>
 
@@ -254,29 +266,29 @@
                             <mat-label>{{ t('iam.Password') }}</mat-label>
                             <mat-icon
                                 matSuffix
+                                svgIcon="mat_solid:lock"
                                 matTooltip="{{ t('iam.ShowPassword') }}"
                                 class="inline-block cursor-pointer"
                                 *ngIf="!isShowPassword"
                                 (click)="isShowPassword = !isShowPassword"
                             >
-                                lock
                             </mat-icon>
                             <mat-icon
                                 matSuffix
+                                svgIcon="mat_solid:lock_open"
                                 matTooltip="{{ t('iam.HidePassword') }}"
                                 class="inline-block cursor-pointer"
                                 *ngIf="isShowPassword"
                                 (click)="isShowPassword = !isShowPassword"
                             >
-                                lock_open
                             </mat-icon>
                             <mat-icon
                                 matSuffix
+                                svgIcon="mat_solid:cached"
                                 [matTooltip]="t('iam.CreatePassword')"
                                 class="inline-block cursor-pointer ml-4"
                                 (click)="handleCreatePassword()"
                             >
-                                cached
                             </mat-icon>
                             <input
                                 matInput

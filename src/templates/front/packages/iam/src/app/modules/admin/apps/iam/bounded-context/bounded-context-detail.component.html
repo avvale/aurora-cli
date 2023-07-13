@@ -7,9 +7,9 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
+                    svgIcon="mat_outline:extension"
                     class="icon-size-8 mr-2"
                 >
-                    extension
                 </mat-icon>
                 {{ t('iam.BoundedContext') }}
             </au-title>
@@ -24,12 +24,16 @@
                 class="ml-3"
                 form="iamBoundedContextFormDetail"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('iam::boundedContext.detail.update' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('iam::boundedContext.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::boundedContext.detail.update' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Update') }}
             </button>
@@ -40,12 +44,16 @@
                 form="iamBoundedContextFormDetail"
                 class="ml-3"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('iam::boundedContext.detail.create' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('iam::boundedContext.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::boundedContext.detail.create' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Create') }}
             </button>
@@ -115,23 +123,21 @@
                             {{ t('iam.IsActive') }}
                         </mat-checkbox>
                     </div>
-
-                    <!-- Permissions associated to bounded context -->
+                    <!-- #region component to manage permissions -->
                     <au-grid-elements-manager
                         *ngIf="currentViewAction.id === 'iam::boundedContext.detail.edit'"
-                        class="col-12 mt-7 mb-7"
+                        class="col-12"
                         [columnsConfig]="permissionsColumnsConfig$ | async"
+                        [dialogTitle]="t('iam.Permission')"
                         [dialogIcon]="'lock'"
-                        [dialogTitle]="t('Permission')"
                         [dialogWidth]="'60vw'"
                         [gridData]="permissionsGridData$ | async"
                         [gridState]="permissionsGridState"
                         [id]="permissionsGridId"
-                        [label]="t('Permissions')"
+                        [label]="t('iam.Permissions')"
                         [originColumnsConfig]="originPermissionsColumnsConfig"
                         #permissionsGridElementsManager
                     >
-                        <!-- header grid buttons -->
                         <ng-template
                             auGridCustomButtonsHeaderDialogTemplate
                         >
@@ -149,11 +155,7 @@
                                 <mat-icon class="mr-2">add</mat-icon>
                                 {{ t('New.F') }}
                             </button>
-
                         </ng-template>
-                        <!-- / header grid buttons -->
-
-                        <!-- permission form -->
                         <ng-template
                             auGridFormElementDetailDialogTemplate
                             let-dialog
@@ -165,7 +167,6 @@
                                 (ngSubmit)="handleSubmitPermissionForm($event, dialog)"
                             >
                                 <div class="layout__container">
-
                                     <mat-form-field
                                         appearance="outline"
                                         class="col-12"
@@ -175,18 +176,18 @@
                                             matInput
                                             formControlName="name"
                                             maxlength="255"
+                                            required
                                         >
                                         <mat-error>{{ formErrors?.name | async }}</mat-error>
                                     </mat-form-field>
                                 </div>
                             </form>
-
                             <div class="flex justify-end">
                                 <button
-                                    class="ml-3"
                                     mat-flat-button
                                     mat-dialog-close
-                                    [color]="'basic'"
+                                    class="ml-3"
+                                    color="basic"
                                 >
                                     <mat-icon
                                         class="icon-size-5 mr-2"
@@ -196,12 +197,12 @@
                                     {{ t('Cancel') }}
                                 </button>
                                 <button
+                                    mat-flat-button
                                     class="ml-3"
                                     type="submit"
                                     form="permissionDetailDialogForm"
-                                    mat-flat-button
+                                    color="accent"
                                     [disabled]="permissionDialogFg.pristine"
-                                    [color]="'accent'"
                                 >
                                     <mat-icon
                                         class="icon-size-5 mr-2"
@@ -211,10 +212,7 @@
                                     {{ t('Save') }}
                                 </button>
                             </div>
-
                         </ng-template>
-                        <!-- / permission form -->
-
                         <au-grid-translations
                             [actions]="t('Actions')"
                             [AND]="t('AND')"
@@ -251,19 +249,20 @@
                             }"
                             [actionsMenu]="{
                                 edit: t('Edit'),
-                                delete: t('Delete')
+                                delete: t('Delete'),
+                                cancel: t('Cancel'),
+                                close: t('Close')
                             }"
                         >
                             <au-grid-column-translation
-                                *ngFor="let columnConfig of originLoadOrdersColumnsConfig"
+                                *ngFor="let columnConfig of originPermissionsColumnsConfig"
                                 [field]="columnConfig.field"
                             >
                                 {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
                             </au-grid-column-translation>
                         </au-grid-translations>
-
                     </au-grid-elements-manager>
-                    <!-- / Permissions associated to bounded context -->
+                    <!-- #endregion component to manage permissions -->
 
                 </div>
 

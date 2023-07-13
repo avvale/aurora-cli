@@ -1,15 +1,21 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { IamTenant } from '../iam.types';
 import { TenantService } from './tenant.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'iam-tenant-detail',
     templateUrl    : './tenant-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        MatCheckboxModule,
+    ],
 })
 export class TenantDetailComponent extends ViewDetailComponent
 {
@@ -30,8 +36,8 @@ export class TenantDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly tenantService: TenantService,
+		protected readonly injector: Injector,
+		private readonly tenantService: TenantService,
     )
     {
         super(injector);
@@ -40,7 +46,9 @@ export class TenantDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -76,11 +84,11 @@ export class TenantDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id        : '',
-            name      : ['', [Validators.required, Validators.maxLength(255)]],
-            code      : ['', [Validators.maxLength(50)]],
-            logo      : [null, [Validators.maxLength(255)]],
-            isActive  : false,
+            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            name: ['', [Validators.required, Validators.maxLength(255)]],
+            code: ['', [Validators.maxLength(50)]],
+            logo: ['', [Validators.maxLength(255)]],
+            isActive: false,
             accountIds: [],
         });
     }
@@ -90,6 +98,7 @@ export class TenantDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'iam::tenant.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -158,6 +167,7 @@ export class TenantDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }

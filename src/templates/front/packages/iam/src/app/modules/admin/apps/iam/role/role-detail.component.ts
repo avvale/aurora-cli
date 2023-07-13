@@ -1,23 +1,27 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { SelectionChange } from '@angular/cdk/collections';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleElementsComponent, GridState, GridStateService, log, mapActions, QueryStatementHandler, SelectionModel, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, GridState, GridStateService, QueryStatementHandler, SelectionChange, SelectionModel, Utils, ViewDetailComponent, defaultDetailImports, exportRows, log, mapActions } from '@aurora';
+import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 import { IamPermission, IamPermissionRole, IamRole } from '../iam.types';
-import { RoleService } from './role.service';
-
-// ---- customizations ----
-import { PermissionService } from '../permission/permission.service';
-import { PermissionRoleService } from '../permission-role/permission-role.service';
-import { permissionColumnsConfig } from '../permission/permission.columns-config';
 import { permissionRoleColumnsConfig } from '../permission-role/permission-role.columns-config';
 import { getQueryExportPermissionsRoles } from '../permission-role/permission-role.graphql';
+import { PermissionRoleService } from '../permission-role/permission-role.service';
+import { permissionColumnsConfig } from '../permission/permission.columns-config';
+import { PermissionService } from '../permission/permission.service';
+import { RoleService } from './role.service';
 
 @Component({
     selector       : 'iam-role-detail',
     templateUrl    : './role-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, MatCheckboxModule, NgFor,
+    ],
 })
 export class RoleDetailComponent extends ViewDetailComponent
 {
@@ -132,7 +136,9 @@ export class RoleDetailComponent extends ViewDetailComponent
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
     init(): void
-    { /**/ }
+    {
+        /**/
+    }
 
     onSubmit($event): void
     {
@@ -257,6 +263,7 @@ export class RoleDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'iam::role.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -355,6 +362,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
 
             /* #region actions to manage permissions dialog */
             case 'iam::role.detail.permissionsPagination':

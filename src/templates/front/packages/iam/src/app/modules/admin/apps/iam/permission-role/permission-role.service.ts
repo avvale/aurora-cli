@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { IamUpdatePermissionById, IamUpdatePermissions, IamPermissionRole, IamCreatePermissionRole, IamDeletePermissionRole } from '../iam.types';
 import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, insertMutation } from './permission-role.graphql';
@@ -41,10 +41,12 @@ export class PermissionRoleService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<IamPermissionRole>>
     {
@@ -57,12 +59,15 @@ export class PermissionRoleService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<IamPermissionRole>; };}, GridData<IamPermissionRole>>(result => result.data.pagination),
-                tap((pagination: GridData<IamPermissionRole>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -71,10 +76,12 @@ export class PermissionRoleService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamPermissionRole;
@@ -90,21 +97,15 @@ export class PermissionRoleService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamPermissionRole;
-                    };
-                },
-                {
-                    object: IamPermissionRole;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamPermissionRole;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.permissionRoleSubject$.next(data.object);
                 }),
@@ -116,10 +117,12 @@ export class PermissionRoleService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamPermissionRole;
@@ -135,21 +138,15 @@ export class PermissionRoleService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamPermissionRole;
-                    };
-                },
-                {
-                    object: IamPermissionRole;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamPermissionRole;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.permissionRoleSubject$.next(data.object);
                 }),
@@ -161,10 +158,12 @@ export class PermissionRoleService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: IamPermissionRole[];
@@ -180,21 +179,15 @@ export class PermissionRoleService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: IamPermissionRole[];
-                    };
-                },
-                {
-                    objects: IamPermissionRole[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: IamPermissionRole[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.permissionsRolesSubject$.next(data.objects);
                 }),
@@ -205,9 +198,11 @@ export class PermissionRoleService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamCreatePermissionRole;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -218,6 +213,9 @@ export class PermissionRoleService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -225,9 +223,11 @@ export class PermissionRoleService
         {
             graphqlStatement = insertMutation,
             objects = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             objects?: IamCreatePermissionRole[];
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -238,6 +238,9 @@ export class PermissionRoleService
                 variables: {
                     payload: objects,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -245,9 +248,11 @@ export class PermissionRoleService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamUpdatePermissionById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -258,6 +263,9 @@ export class PermissionRoleService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -267,11 +275,13 @@ export class PermissionRoleService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamUpdatePermissions;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -284,6 +294,9 @@ export class PermissionRoleService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -292,10 +305,12 @@ export class PermissionRoleService
             graphqlStatement = deleteByIdMutation,
             object = null,
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamDeletePermissionRole;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -307,6 +322,9 @@ export class PermissionRoleService
                     payload: object,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -315,10 +333,12 @@ export class PermissionRoleService
             graphqlStatement = deleteMutation,
             objects = null,
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             objects?: IamDeletePermissionRole[];
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -329,6 +349,9 @@ export class PermissionRoleService
                 variables: {
                     payload: objects,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             });
     }

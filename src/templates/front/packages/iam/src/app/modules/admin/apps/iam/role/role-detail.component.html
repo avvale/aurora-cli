@@ -7,9 +7,9 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
+                    svgIcon="mat_solid:groups"
                     class="icon-size-8 mr-2"
                 >
-                    groups
                 </mat-icon>
                 {{ t('iam.Role') }}
             </au-title>
@@ -24,12 +24,12 @@
                 class="ml-3"
                 form="iamRoleFormDetail"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('iam::role.detail.update' | getSpinnerFlag | async)"
             >
                 <mat-icon
                     *ngIf="!('iam::role.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'iam::role.detail.update' | getSpinnerFlag | async">
@@ -44,12 +44,12 @@
                 form="iamRoleFormDetail"
                 class="ml-3"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('iam::role.detail.create' | getSpinnerFlag | async)"
             >
                 <mat-icon
                     *ngIf="!('iam::role.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'iam::role.detail.create' | getSpinnerFlag | async">
@@ -90,7 +90,7 @@
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
                     </mat-form-field>
-                    <div class="col-3 pt-2">
+                    <div class="col-3 pt-5">
                         <mat-checkbox
                             formControlName="isMaster"
                         >
@@ -180,7 +180,7 @@
                                     class="mr-2"
                                     (click)="handleOpenPermissionsDialog(newActionId)"
                                 >
-                                    <mat-icon>add</mat-icon>
+                                    <mat-icon svgIcon="mat_solid:add"></mat-icon>
                                     <span class="cdk-visually-hidden">
                                         Add new item
                                     </span>
@@ -190,7 +190,11 @@
                                     [disabled]="permissionsRolesSelectedRows.length === 0"
                                     (click)="handleRemovePermissionsSelected()"
                                 >
-                                    <mat-icon class="mr-2">link_off</mat-icon>
+                                    <mat-icon
+                                        class="mr-2"
+                                        svgIcon="mat_solid:link_off"
+                                    >
+                                    </mat-icon>
                                     {{ t('RemoveSelected') }}
                                 </button>
                             </div>
