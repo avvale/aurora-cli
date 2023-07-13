@@ -13,13 +13,13 @@ module.exports = (data) =>
     {
         let scss = '';
 
-        if ( typeof chunk === "object" && !Array.isArray(chunk) )
+        if ( typeof chunk === 'object' && !Array.isArray(chunk) )
         {
             _.mapKeys(chunk, (value, key) =>
             {
                 scss += key + ': ';
 
-                if ( typeof value === "object" )
+                if ( typeof value === 'object' )
                 {
                     if ( Array.isArray(value) )
                     {

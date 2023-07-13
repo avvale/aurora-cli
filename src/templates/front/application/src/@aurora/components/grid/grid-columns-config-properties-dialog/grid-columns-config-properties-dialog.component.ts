@@ -1,13 +1,24 @@
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AsyncPipe, NgForOf } from '@angular/common';
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ColumnConfig, ColumnDataType, ColumnsConfigChange } from '../grid.types';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import cloneDeep from 'lodash-es/cloneDeep';
+import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
+import { ColumnConfig, ColumnDataType, ColumnsConfigChange } from '../grid.types';
 
 @Component({
     selector   : 'au-grid-columns-config-properties-dialog',
     templateUrl: 'grid-columns-config-properties-dialog.component.html',
     styleUrls  : ['./grid-columns-config-properties-dialog.component.scss'],
+    standalone : true,
+    imports    : [
+        AsyncPipe, GridTranslatePipe, MatButtonModule, MatCheckboxModule, MatDialogModule, DragDropModule,
+        MatIconModule,NgForOf, FormsModule
+    ],
 })
 export class GridColumnsConfigPropertiesDialogComponent implements OnInit
 {

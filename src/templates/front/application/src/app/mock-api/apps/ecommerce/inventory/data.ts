@@ -4,106 +4,106 @@ export const categories = [
         id      : 'b899ec30-b85a-40ab-bb1f-18a596d5c6de',
         parentId: null,
         name    : 'Mens',
-        slug    : 'mens'
+        slug    : 'mens',
     },
     {
         id      : '07986d93-d4eb-4de1-9448-2538407f7254',
         parentId: null,
         name    : 'Ladies',
-        slug    : 'ladies'
+        slug    : 'ladies',
     },
     {
         id      : 'ad12aa94-3863-47f8-acab-a638ef02a3e9',
         parentId: null,
         name    : 'Unisex',
-        slug    : 'unisex'
-    }
+        slug    : 'unisex',
+    },
 ];
 export const brands = [
     {
         id  : 'e1789f32-9475-43e7-9256-451d2e3a2282',
         name: 'Benton',
-        slug: 'benton'
+        slug: 'benton',
     },
     {
         id  : '61d52c2a-8947-4a2c-8c35-f36baef45b96',
         name: 'Capmia',
-        slug: 'capmia'
+        slug: 'capmia',
     },
     {
         id  : 'f9987124-7ada-4b93-bef7-35280b3ddbd7',
         name: 'Lara',
-        slug: 'lara'
+        slug: 'lara',
     },
     {
         id  : '5913ee46-a497-41db-a118-ee506011529f',
         name: 'Premera',
-        slug: 'premera'
+        slug: 'premera',
     },
     {
         id  : '2c4d98d8-f334-4125-9596-862515f5526b',
         name: 'Zeon',
-        slug: 'zeon'
-    }
+        slug: 'zeon',
+    },
 ];
 export const tags = [
     {
         id   : '167190fa-51b4-45fc-a742-8ce1b33d24ea',
-        title: 'mens'
+        title: 'mens',
     },
     {
         id   : '3baea410-a7d6-4916-b79a-bdce50c37f95',
-        title: 'ladies'
+        title: 'ladies',
     },
     {
         id   : '8ec8f60d-552f-4216-9f11-462b95b1d306',
-        title: 'unisex'
+        title: 'unisex',
     },
     {
         id   : '8837b93f-388b-43cc-851d-4ca8f23f3a61',
-        title: '44mm'
+        title: '44mm',
     },
     {
         id   : '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
-        title: '40mm'
+        title: '40mm',
     },
     {
         id   : '2300ac48-f268-466a-b765-8b878b6e14a7',
-        title: '5 ATM'
+        title: '5 ATM',
     },
     {
         id   : '0b11b742-3125-4d75-9a6f-84af7fde1969',
-        title: '10 ATM'
+        title: '10 ATM',
     },
     {
         id   : '0fc39efd-f640-41f8-95a5-3f1d749df200',
-        title: 'automatic'
+        title: 'automatic',
     },
     {
         id   : '7d6dd47e-7472-4f8b-93d4-46c114c44533',
-        title: 'chronograph'
+        title: 'chronograph',
     },
     {
         id   : 'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
-        title: 'watch'
-    }
+        title: 'watch',
+    },
 ];
 export const vendors = [
     {
         id  : '987dd10a-43b1-49f9-bfd9-05bb2dbc7029',
         name: 'Evel',
-        slug: 'evel'
+        slug: 'evel',
     },
     {
         id  : '998b0c07-abfd-4ba3-8de1-7563ef3c4d57',
         name: 'Mivon',
-        slug: 'mivon'
+        slug: 'mivon',
     },
     {
         id  : '05ebb527-d733-46a9-acfb-a4e4ec960024',
         name: 'Neogen',
-        slug: 'neogen'
-    }
+        slug: 'neogen',
+    },
 ];
 export const products = [
     {
@@ -116,7 +116,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ETV-2425',
         barcode    : '8346201275534',
@@ -133,9 +133,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-01-01.jpg',
             'assets/images/apps/ecommerce/products/watch-01-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-01-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-01-03.jpg',
         ],
-        active     : true
+        active     : true,
     },
     {
         id         : '00b0292f-3d50-4669-a0c4-7a9d85efc98d',
@@ -147,7 +147,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ATH-7573',
         barcode    : '8278968055700',
@@ -164,9 +164,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-02-01.jpg',
             'assets/images/apps/ecommerce/products/watch-02-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-02-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-02-03.jpg',
         ],
-        active     : true
+        active     : true,
     },
     {
         id         : '3f34e2fb-95bf-4f61-be28-956d2c7e4eb2',
@@ -178,7 +178,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ADH-1921',
         barcode    : '8808746892183',
@@ -195,9 +195,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-03-01.jpg',
             'assets/images/apps/ecommerce/products/watch-03-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-03-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-03-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '8fcce528-d878-4cc8-99f7-bd3451ed5405',
@@ -209,7 +209,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'EAP-7752',
         barcode    : '8866355574164',
@@ -226,9 +226,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-04-01.jpg',
             'assets/images/apps/ecommerce/products/watch-04-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-04-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-04-03.jpg',
         ],
-        active     : true
+        active     : true,
     },
     {
         id         : '91d96e18-d3f5-4c32-a8bf-1fc525cb92c0',
@@ -240,7 +240,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ADP-5745',
         barcode    : '8390590339828',
@@ -257,9 +257,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-05-01.jpg',
             'assets/images/apps/ecommerce/products/watch-05-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-05-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-05-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : 'd7a47d7c-4cdf-4319-bbaa-37ade38c622c',
@@ -271,7 +271,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ATV-2569',
         barcode    : '8238990048137',
@@ -288,9 +288,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-06-01.jpg',
             'assets/images/apps/ecommerce/products/watch-06-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-06-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-06-03.jpg',
         ],
-        active     : true
+        active     : true,
     },
     {
         id         : 'ecf0b3df-38c3-45dc-972b-c509a3dc053e',
@@ -302,7 +302,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'EAH-2563',
         barcode    : '8638426908385',
@@ -319,9 +319,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-07-01.jpg',
             'assets/images/apps/ecommerce/products/watch-07-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-07-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-07-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '5765080a-aaee-40b9-86be-c18b9d79c73c',
@@ -333,7 +333,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ATH-6399',
         barcode    : '8881883828441',
@@ -350,9 +350,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-08-01.jpg',
             'assets/images/apps/ecommerce/products/watch-08-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-08-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-08-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '6e71be88-b225-474c-91e5-111ced7d6220',
@@ -364,7 +364,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ELH-2495',
         barcode    : '8268777127281',
@@ -381,9 +381,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-09-01.jpg',
             'assets/images/apps/ecommerce/products/watch-09-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-09-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-09-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '51242500-6983-4a78-bff3-d278eb4e3a57',
@@ -395,7 +395,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ATT-6019',
         barcode    : '8452763551765',
@@ -412,9 +412,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-10-01.jpg',
             'assets/images/apps/ecommerce/products/watch-10-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-10-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-10-03.jpg',
         ],
-        active     : true
+        active     : true,
     },
     {
         id         : '844a4395-233f-4ffb-85bd-7baa0e490a88',
@@ -426,7 +426,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ADH-2335',
         barcode    : '8385907318041',
@@ -443,9 +443,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-11-01.jpg',
             'assets/images/apps/ecommerce/products/watch-11-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-11-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-11-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '7520f1b6-3c45-46ef-a4d5-881971212d1e',
@@ -457,7 +457,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ATH-3064',
         barcode    : '8608510561856',
@@ -474,9 +474,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-12-01.jpg',
             'assets/images/apps/ecommerce/products/watch-12-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-12-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-12-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '683e41d8-6ebc-4e6a-a7c1-9189ca52ef19',
@@ -488,7 +488,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ADV-3188',
         barcode    : '8334758988643',
@@ -505,9 +505,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-13-01.jpg',
             'assets/images/apps/ecommerce/products/watch-13-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-13-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-13-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : 'd4e52238-292d-462b-b9bb-1751030132e2',
@@ -519,7 +519,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ATT-7423',
         barcode    : '8417153336369',
@@ -536,9 +536,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-14-01.jpg',
             'assets/images/apps/ecommerce/products/watch-14-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-14-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-14-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '98861dfc-0d21-4fd5-81aa-49785d003d95',
@@ -550,7 +550,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'AAT-6453',
         barcode    : '8501386761670',
@@ -567,9 +567,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-15-01.jpg',
             'assets/images/apps/ecommerce/products/watch-15-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-15-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-15-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : 'a71f9b10-e884-4aad-9810-29fe10ce6d42',
@@ -581,7 +581,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'AAP-4902',
         barcode    : '8847387136582',
@@ -598,9 +598,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-16-01.jpg',
             'assets/images/apps/ecommerce/products/watch-16-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-16-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-16-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '149e6db5-4ecc-4021-bc56-08b27514a746',
@@ -612,7 +612,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '2300ac48-f268-466a-b765-8b878b6e14a7',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ALV-194',
         barcode    : '8860845382207',
@@ -629,9 +629,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-17-01.jpg',
             'assets/images/apps/ecommerce/products/watch-17-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-17-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-17-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '655287de-2e24-41f3-a82f-8b08548ecc39',
@@ -643,7 +643,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ADH-5492',
         barcode    : '8611606513571',
@@ -660,9 +660,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-18-01.jpg',
             'assets/images/apps/ecommerce/products/watch-18-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-18-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-18-03.jpg',
         ],
-        active     : true
+        active     : true,
     },
     {
         id         : 'c215b427-d840-4537-aea1-a9bdfa49441b',
@@ -674,7 +674,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'AAT-6702',
         barcode    : '8330223562386',
@@ -691,9 +691,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-19-01.jpg',
             'assets/images/apps/ecommerce/products/watch-19-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-19-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-19-03.jpg',
         ],
-        active     : true
+        active     : true,
     },
     {
         id         : '8b1d9366-891e-49cd-aafb-ac65ce2741e2',
@@ -705,7 +705,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'EDH-5599',
         barcode    : '8309212335274',
@@ -722,9 +722,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-20-01.jpg',
             'assets/images/apps/ecommerce/products/watch-20-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-20-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-20-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '54e29534-518b-4006-b72a-f21fac6c4d5e',
@@ -736,7 +736,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ADP-3719',
         barcode    : '8879167838673',
@@ -753,9 +753,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-21-01.jpg',
             'assets/images/apps/ecommerce/products/watch-21-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-21-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-21-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : '6a5726e8-c467-45ea-92ab-d83235a06405',
@@ -767,7 +767,7 @@ export const products = [
             '7d6dd47e-7472-4f8b-93d4-46c114c44533',
             '8837b93f-388b-43cc-851d-4ca8f23f3a61',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'ATH-3399',
         barcode    : '8356410903599',
@@ -784,9 +784,9 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-22-01.jpg',
             'assets/images/apps/ecommerce/products/watch-22-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-22-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-22-03.jpg',
         ],
-        active     : false
+        active     : false,
     },
     {
         id         : 'd7d1d6df-e91f-4c53-982a-2720bc2b4cdd',
@@ -798,7 +798,7 @@ export const products = [
             '0fc39efd-f640-41f8-95a5-3f1d749df200',
             '8f868ddb-d4a2-461d-bc3b-d7c8668687c3',
             '0b11b742-3125-4d75-9a6f-84af7fde1969',
-            'b1286f3a-e2d0-4237-882b-f0efc0819ec3'
+            'b1286f3a-e2d0-4237-882b-f0efc0819ec3',
         ],
         sku        : 'EAV-4030',
         barcode    : '8545771786193',
@@ -815,8 +815,8 @@ export const products = [
         images     : [
             'assets/images/apps/ecommerce/products/watch-23-01.jpg',
             'assets/images/apps/ecommerce/products/watch-23-02.jpg',
-            'assets/images/apps/ecommerce/products/watch-23-03.jpg'
+            'assets/images/apps/ecommerce/products/watch-23-03.jpg',
         ],
-        active     : true
-    }
+        active     : true,
+    },
 ];

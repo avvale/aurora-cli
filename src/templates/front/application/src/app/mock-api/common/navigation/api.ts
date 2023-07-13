@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash-es';
 import { FuseNavigationItem } from '@fuse/components/navigation';
 import { FuseMockApiService } from '@fuse/lib/mock-api';
 import { compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation } from 'app/mock-api/common/navigation/data';
+import { cloneDeep } from 'lodash-es';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class NavigationMockApi
 {
     private readonly _compactNavigation: FuseNavigationItem[] = compactNavigation;
@@ -37,11 +35,13 @@ export class NavigationMockApi
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
             .onGet('api/common/navigation')
-            .reply(() => {
-
+            .reply(() =>
+            {
                 // Fill compact navigation children using the default navigation
-                this._compactNavigation.forEach((compactNavItem) => {
-                    this._defaultNavigation.forEach((defaultNavItem) => {
+                this._compactNavigation.forEach((compactNavItem) =>
+                {
+                    this._defaultNavigation.forEach((defaultNavItem) =>
+                    {
                         if ( defaultNavItem.id === compactNavItem.id )
                         {
                             compactNavItem.children = cloneDeep(defaultNavItem.children);
@@ -50,8 +50,10 @@ export class NavigationMockApi
                 });
 
                 // Fill futuristic navigation children using the default navigation
-                this._futuristicNavigation.forEach((futuristicNavItem) => {
-                    this._defaultNavigation.forEach((defaultNavItem) => {
+                this._futuristicNavigation.forEach((futuristicNavItem) =>
+                {
+                    this._defaultNavigation.forEach((defaultNavItem) =>
+                    {
                         if ( defaultNavItem.id === futuristicNavItem.id )
                         {
                             futuristicNavItem.children = cloneDeep(defaultNavItem.children);
@@ -60,8 +62,10 @@ export class NavigationMockApi
                 });
 
                 // Fill horizontal navigation children using the default navigation
-                this._horizontalNavigation.forEach((horizontalNavItem) => {
-                    this._defaultNavigation.forEach((defaultNavItem) => {
+                this._horizontalNavigation.forEach((horizontalNavItem) =>
+                {
+                    this._defaultNavigation.forEach((defaultNavItem) =>
+                    {
                         if ( defaultNavItem.id === horizontalNavItem.id )
                         {
                             horizontalNavItem.children = cloneDeep(defaultNavItem.children);
@@ -76,8 +80,8 @@ export class NavigationMockApi
                         compact   : cloneDeep(this._compactNavigation),
                         default   : cloneDeep(this._defaultNavigation),
                         futuristic: cloneDeep(this._futuristicNavigation),
-                        horizontal: cloneDeep(this._horizontalNavigation)
-                    }
+                        horizontal: cloneDeep(this._horizontalNavigation),
+                    },
                 ];
             });
     }

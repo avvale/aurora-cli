@@ -3,6 +3,7 @@ import { GridCustomHeaderPosition } from '@aurora/components/grid/grid.types';
 
 @Directive({
     selector: '[auGridSelectElementCustomHeaderTemplate]',
+    standalone: true,
 })
 export class GridSelectElementCustomHeaderTemplateDirective
 {

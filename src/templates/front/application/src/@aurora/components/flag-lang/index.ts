@@ -1,1 +1,1 @@
-export { FlagLangModule } from './flag-lang.module';
+export * from './public-api';

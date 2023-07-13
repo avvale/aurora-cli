@@ -1,2 +1,1 @@
-export * from './grid-select-element.component';
-export * from './grid-select-element.module';
+export * from '@aurora/components/grid-select-element/public-api';

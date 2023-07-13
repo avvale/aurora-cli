@@ -8,6 +8,7 @@ import { GridActionsMenuMessages, GridOperatorsMessages, GridPaginatorMessages }
     selector       : 'au-grid-translations',
     template       : '',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
 })
 export class GridTranslationsComponent
 {

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { map, Observable, ReplaySubject, switchMap } from 'rxjs';
-import { fromPairs } from 'lodash-es';
+import { Injectable } from '@angular/core';
 import { FuseConfigService } from '@fuse/services/config';
+import { fromPairs } from 'lodash-es';
+import { map, Observable, ReplaySubject, switchMap } from 'rxjs';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class FuseMediaWatcherService
 {
     private _onMediaChange: ReplaySubject<{ matchingAliases: string[]; matchingQueries: any }> = new ReplaySubject<{ matchingAliases: string[]; matchingQueries: any }>(1);
@@ -14,14 +14,14 @@ export class FuseMediaWatcherService
      */
     constructor(
         private _breakpointObserver: BreakpointObserver,
-        private _fuseConfigService: FuseConfigService
+        private _fuseConfigService: FuseConfigService,
     )
     {
         this._fuseConfigService.config$.pipe(
             map(config => fromPairs(Object.entries(config.screens).map(([alias, screen]) => ([alias, `(min-width: ${screen})`])))),
             switchMap(screens => this._breakpointObserver.observe(Object.values(screens)).pipe(
-                map((state) => {
-
+                map((state) =>
+                {
                     // Prepare the observable values and set their defaults
                     const matchingAliases: string[] = [];
                     const matchingQueries: any = {};
@@ -44,10 +44,10 @@ export class FuseMediaWatcherService
                     // Execute the observable
                     this._onMediaChange.next({
                         matchingAliases,
-                        matchingQueries
+                        matchingQueries,
                     });
-                })
-            ))
+                }),
+            )),
         ).subscribe();
     }
 

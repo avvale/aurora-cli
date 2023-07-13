@@ -26,9 +26,9 @@ const normalizeTheme = (theme) =>
             paletteName,
             {
                 ...palette,
-                DEFAULT: palette['DEFAULT'] || palette[500]
-            }
-        ]
+                DEFAULT: palette['DEFAULT'] || palette[500],
+            },
+        ],
     ));
 };
 
@@ -38,7 +38,7 @@ const normalizeTheme = (theme) =>
 const theming = plugin.withOptions((options) => ({
         addComponents,
         e,
-        theme
+        theme,
     }) =>
     {
         /**
@@ -48,7 +48,7 @@ const theming = plugin.withOptions((options) => ({
          */
         const userThemes = _.fromPairs(_.map(options.themes, (theme, themeName) => [
             themeName,
-            _.defaults({}, theme, options.themes['default'])
+            _.defaults({}, theme, options.themes['default']),
         ]));
 
         /**
@@ -57,7 +57,7 @@ const theming = plugin.withOptions((options) => ({
          */
         let themes = _.fromPairs(_.map(userThemes, (theme, themeName) => [
             themeName,
-            normalizeTheme(theme)
+            normalizeTheme(theme),
         ]));
 
         /**
@@ -73,12 +73,12 @@ const theming = plugin.withOptions((options) => ({
                         ...palette,
                         contrast: _.fromPairs(_.map(generateContrasts(palette), (color, hue) => [
                             hue,
-                            _.get(userThemes[themeName], [`on-${paletteName}`, hue]) || color
-                        ]))
-                    }
+                            _.get(userThemes[themeName], [`on-${paletteName}`, hue]) || color,
+                        ])),
+                    },
                 ])),
-                ['primary', 'accent', 'warn']
-            )
+                ['primary', 'accent', 'warn'],
+            ),
         ]));
 
         /**
@@ -89,8 +89,8 @@ const theming = plugin.withOptions((options) => ({
             themeName,
             {
                 selector: `".theme-${themeName}"`,
-                ...theme
-            }
+                ...theme,
+            },
         ]));
 
         /* Generate the SASS map using the themes object */
@@ -134,15 +134,15 @@ const theming = plugin.withOptions((options) => ({
                 _.fromPairs(_.flatten(_.map(flattenColorPalette(_.fromPairs(_.flatten(_.map(normalizeTheme(theme), (palette, paletteName) => [
                         [
                             e(paletteName),
-                            palette
+                            palette,
                         ],
                         [
                             `on-${e(paletteName)}`,
-                            _.fromPairs(_.map(generateContrasts(palette), (color, hue) => [hue, _.get(theme, [`on-${paletteName}`, hue]) || color]))
-                        ]
-                    ])
-                ))), (value, key) => [[`--fuse-${e(key)}`, value], [`--fuse-${e(key)}-rgb`, chroma(value).rgb().join(',')]])))
-            ]))
+                            _.fromPairs(_.map(generateContrasts(palette), (color, hue) => [hue, _.get(theme, [`on-${paletteName}`, hue]) || color])),
+                        ],
+                    ]),
+                ))), (value, key) => [[`--fuse-${e(key)}`, value], [`--fuse-${e(key)}-rgb`, chroma(value).rgb().join(',')]]))),
+            ])),
         );
 
         /**
@@ -185,8 +185,8 @@ const theming = plugin.withOptions((options) => ({
 
                     /* Generate custom properties from customProps */
                     ..._.fromPairs(_.flatten(_.map(background, (value, key) => [[`--fuse-${e(key)}`, value], [`--fuse-${e(key)}-rgb`, chroma(value).rgb().join(',')]]))),
-                    ..._.fromPairs(_.flatten(_.map(foreground, (value, key) => [[`--fuse-${e(key)}`, value], [`--fuse-${e(key)}-rgb`, chroma(value).rgb().join(',')]])))
-                }
+                    ..._.fromPairs(_.flatten(_.map(foreground, (value, key) => [[`--fuse-${e(key)}`, value], [`--fuse-${e(key)}-rgb`, chroma(value).rgb().join(',')]]))),
+                },
             };
         });
 
@@ -211,8 +211,8 @@ const theming = plugin.withOptions((options) => ({
                      */
                     colors: _.fromPairs(_.flatten(_.map(_.keys(flattenColorPalette(normalizeTheme(options.themes.default))), (name) => [
                         [name, `rgba(var(--fuse-${name}-rgb), <alpha-value>)`],
-                        [`on-${name}`, `rgba(var(--fuse-on-${name}-rgb), <alpha-value>)`]
-                    ])))
+                        [`on-${name}`, `rgba(var(--fuse-on-${name}-rgb), <alpha-value>)`],
+                    ]))),
                 },
                 fuse  : {
                     customProps: {
@@ -223,7 +223,7 @@ const theming = plugin.withOptions((options) => ({
                                 'bg-default'   : colors.slate[100],
                                 'bg-dialog'    : '#FFFFFF',
                                 'bg-hover'     : chroma(colors.slate[400]).alpha(0.12).css(),
-                                'bg-status-bar': colors.slate[300]
+                                'bg-status-bar': colors.slate[300],
                             },
                             dark : {
                                 'bg-app-bar'   : colors.slate[900],
@@ -231,8 +231,8 @@ const theming = plugin.withOptions((options) => ({
                                 'bg-default'   : colors.slate[900],
                                 'bg-dialog'    : colors.slate[800],
                                 'bg-hover'     : 'rgba(255, 255, 255, 0.05)',
-                                'bg-status-bar': colors.slate[900]
-                            }
+                                'bg-status-bar': colors.slate[900],
+                            },
                         },
                         foreground: {
                             light: {
@@ -243,7 +243,7 @@ const theming = plugin.withOptions((options) => ({
                                 'border'        : colors.slate[200],
                                 'divider'       : colors.slate[200],
                                 'icon'          : colors.slate[500],
-                                'mat-icon'      : colors.slate[500]
+                                'mat-icon'      : colors.slate[500],
                             },
                             dark : {
                                 'text-default'  : '#FFFFFF',
@@ -253,14 +253,14 @@ const theming = plugin.withOptions((options) => ({
                                 'border'        : chroma(colors.slate[100]).alpha(0.12).css(),
                                 'divider'       : chroma(colors.slate[100]).alpha(0.12).css(),
                                 'icon'          : colors.slate[400],
-                                'mat-icon'      : colors.slate[400]
-                            }
-                        }
-                    }
-                }
-            }
+                                'mat-icon'      : colors.slate[400],
+                            },
+                        },
+                    },
+                },
+            },
         };
-    }
+    },
 );
 
 module.exports = theming;

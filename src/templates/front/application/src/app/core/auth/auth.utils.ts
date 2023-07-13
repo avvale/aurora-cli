@@ -67,7 +67,7 @@ export class AuthUtils
         if ( str.length % 4 === 1 )
         {
             throw new Error(
-                '\'atob\' failed: The string to be decoded is not correctly encoded.'
+                '\'atob\' failed: The string to be decoded is not correctly encoded.',
             );
         }
 
@@ -139,7 +139,7 @@ export class AuthUtils
             }
             default:
             {
-                throw new Error('Illegal base64url string!');
+                throw Error('Illegal base64url string!');
             }
         }
         return this._b64DecodeUnicode(output);

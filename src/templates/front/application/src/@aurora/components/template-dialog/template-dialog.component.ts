@@ -1,11 +1,14 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, Inject, TemplateRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'au-template-dialog',
     template: `
         <ng-container [ngTemplateOutlet]="data.template"></ng-container>
     `,
+    standalone: true,
+    imports: [NgTemplateOutlet],
 })
 export class TemplateDialogComponent<T = undefined>
 {

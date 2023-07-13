@@ -1,2 +1,1 @@
-export * from './template-dialog.component';
-export * from './template-dialog.module';
+export * from '@aurora/components/template-dialog/public-api';

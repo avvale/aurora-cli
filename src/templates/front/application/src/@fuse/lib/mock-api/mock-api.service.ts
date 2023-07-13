@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { compact, fromPairs } from 'lodash-es';
 import { FuseMockApiHandler } from '@fuse/lib/mock-api/mock-api.request-handler';
 import { FuseMockApiMethods } from '@fuse/lib/mock-api/mock-api.types';
+import { compact, fromPairs } from 'lodash-es';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class FuseMockApiService
 {
     private _handlers: { [key: string]: Map<string, FuseMockApiHandler> } = {
@@ -16,7 +14,7 @@ export class FuseMockApiService
         'put'    : new Map<string, FuseMockApiHandler>(),
         'head'   : new Map<string, FuseMockApiHandler>(),
         'jsonp'  : new Map<string, FuseMockApiHandler>(),
-        'options': new Map<string, FuseMockApiHandler>()
+        'options': new Map<string, FuseMockApiHandler>(),
     };
 
     /**
@@ -42,7 +40,7 @@ export class FuseMockApiService
         // Prepare the return object
         const matchingHandler: { handler: FuseMockApiHandler | undefined; urlParams: { [key: string]: string } } = {
             handler  : undefined,
-            urlParams: {}
+            urlParams: {},
         };
 
         // Split the url
@@ -52,8 +50,8 @@ export class FuseMockApiService
         const handlers = this._handlers[method.toLowerCase()];
 
         // Iterate through the handlers
-        handlers.forEach((handler, handlerUrl) => {
-
+        handlers.forEach((handler, handlerUrl) =>
+        {
             // Skip if there is already a matching handler
             if ( matchingHandler.handler )
             {
@@ -80,7 +78,7 @@ export class FuseMockApiService
 
                 // Extract and assign the parameters
                 matchingHandler.urlParams = fromPairs(compact(handlerUrlParts.map((handlerUrlPart, index) =>
-                    handlerUrlPart.startsWith(':') ? [handlerUrlPart.substring(1), urlParts[index]] : undefined
+                    handlerUrlPart.startsWith(':') ? [handlerUrlPart.substring(1), urlParts[index]] : undefined,
                 )));
             }
         });

@@ -1,15 +1,20 @@
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { IsActiveMatchOptions } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { FuseVerticalNavigationComponent } from '@fuse/components/navigation/vertical/vertical.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
+import { FuseVerticalNavigationComponent } from '@fuse/components/navigation/vertical/vertical.component';
 import { FuseUtilsService } from '@fuse/services/utils/utils.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'fuse-vertical-navigation-basic-item',
     templateUrl    : './basic.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [NgClass, NgIf, RouterLink, RouterLinkActive, MatTooltipModule, NgTemplateOutlet, MatIconModule],
 })
 export class FuseVerticalNavigationBasicItemComponent implements OnInit, OnDestroy
 {
@@ -26,7 +31,7 @@ export class FuseVerticalNavigationBasicItemComponent implements OnInit, OnDestr
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseNavigationService: FuseNavigationService,
-        private _fuseUtilsService: FuseUtilsService
+        private _fuseUtilsService: FuseUtilsService,
     )
     {
         // Set the equivalent of {exact: false} as default for active match options.
@@ -61,9 +66,9 @@ export class FuseVerticalNavigationBasicItemComponent implements OnInit, OnDestr
 
         // Subscribe to onRefreshed on the navigation component
         this._fuseVerticalNavigationComponent.onRefreshed.pipe(
-            takeUntil(this._unsubscribeAll)
-        ).subscribe(() => {
-
+            takeUntil(this._unsubscribeAll),
+        ).subscribe(() =>
+        {
             // Mark for check
             this._changeDetectorRef.markForCheck();
         });

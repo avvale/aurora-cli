@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, ReplaySubject, switchMap, take, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Message } from 'app/layout/common/messages/messages.types';
+import { map, Observable, ReplaySubject, switchMap, take, tap } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class MessagesService
 {
     private _messages: ReplaySubject<Message[]> = new ReplaySubject<Message[]>(1);
@@ -39,7 +37,8 @@ export class MessagesService
     getAll(): Observable<Message[]>
     {
         return this._httpClient.get<Message[]>('api/common/messages').pipe(
-            tap((messages) => {
+            tap((messages) =>
+            {
                 this._messages.next(messages);
             }),
         );
@@ -55,15 +54,15 @@ export class MessagesService
         return this.messages$.pipe(
             take(1),
             switchMap(messages => this._httpClient.post<Message>('api/common/messages', {message}).pipe(
-                map((newMessage) => {
-
+                map((newMessage) =>
+                {
                     // Update the messages with the new message
                     this._messages.next([...messages, newMessage]);
 
                     // Return the new message from observable
                     return newMessage;
-                })
-            ))
+                }),
+            )),
         );
     }
 
@@ -79,10 +78,10 @@ export class MessagesService
             take(1),
             switchMap(messages => this._httpClient.patch<Message>('api/common/messages', {
                 id,
-                message
+                message,
             }).pipe(
-                map((updatedMessage: Message) => {
-
+                map((updatedMessage: Message) =>
+                {
                     // Find the index of the updated message
                     const index = messages.findIndex(item => item.id === id);
 
@@ -94,8 +93,8 @@ export class MessagesService
 
                     // Return the updated message
                     return updatedMessage;
-                })
-            ))
+                }),
+            )),
         );
     }
 
@@ -109,8 +108,8 @@ export class MessagesService
         return this.messages$.pipe(
             take(1),
             switchMap(messages => this._httpClient.delete<boolean>('api/common/messages', {params: {id}}).pipe(
-                map((isDeleted: boolean) => {
-
+                map((isDeleted: boolean) =>
+                {
                     // Find the index of the deleted message
                     const index = messages.findIndex(item => item.id === id);
 
@@ -122,8 +121,8 @@ export class MessagesService
 
                     // Return the deleted status
                     return isDeleted;
-                })
-            ))
+                }),
+            )),
         );
     }
 
@@ -135,10 +134,11 @@ export class MessagesService
         return this.messages$.pipe(
             take(1),
             switchMap(messages => this._httpClient.get<boolean>('api/common/messages/mark-all-as-read').pipe(
-                map((isUpdated: boolean) => {
-
+                map((isUpdated: boolean) =>
+                {
                     // Go through all messages and set them as read
-                    messages.forEach((message, index) => {
+                    messages.forEach((message, index) =>
+                    {
                         messages[index].read = true;
                     });
 
@@ -147,8 +147,8 @@ export class MessagesService
 
                     // Return the updated status
                     return isUpdated;
-                })
-            ))
+                }),
+            )),
         );
     }
 }

@@ -1,14 +1,18 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject, takeUntil } from 'rxjs';
+import { NgIf } from '@angular/common';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FuseLoadingService } from '@fuse/services/loading';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector     : 'fuse-loading-bar',
     templateUrl  : './loading-bar.component.html',
     styleUrls    : ['./loading-bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    exportAs     : 'fuseLoadingBar'
+    exportAs     : 'fuseLoadingBar',
+    standalone   : true,
+    imports      : [NgIf, MatProgressBarModule],
 })
 export class FuseLoadingBarComponent implements OnChanges, OnInit, OnDestroy
 {
@@ -52,19 +56,22 @@ export class FuseLoadingBarComponent implements OnChanges, OnInit, OnDestroy
         // Subscribe to the service
         this._fuseLoadingService.mode$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((value) => {
+            .subscribe((value) =>
+            {
                 this.mode = value;
             });
 
         this._fuseLoadingService.progress$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((value) => {
+            .subscribe((value) =>
+            {
                 this.progress = value;
             });
 
         this._fuseLoadingService.show$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((value) => {
+            .subscribe((value) =>
+            {
                 this.show = value;
             });
 

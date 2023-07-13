@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 export interface Action
 {
     id: string;
-    isViewAction?: boolean;
+    isViewAction?: boolean; // if true set variable currentViewAction, this variable is taken into account, to show or not, elements of the view
     beforeRunAction?: (action: Action) => void;
     afterRunAction?: (action: Action) => void;
     spinner?: BehaviorSubject<boolean> | (() => BehaviorSubject<boolean>);

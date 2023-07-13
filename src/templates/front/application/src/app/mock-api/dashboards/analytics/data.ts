@@ -13,486 +13,486 @@ export const analytics = {
                     data: [
                         {
                             x: now.minus({months: 12}).plus({day: 1}).toJSDate(),
-                            y: 4884
+                            y: 4884,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 4}).toJSDate(),
-                            y: 5351
+                            y: 5351,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 7}).toJSDate(),
-                            y: 5293
+                            y: 5293,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 10}).toJSDate(),
-                            y: 4908
+                            y: 4908,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 13}).toJSDate(),
-                            y: 5027
+                            y: 5027,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 16}).toJSDate(),
-                            y: 4837
+                            y: 4837,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 19}).toJSDate(),
-                            y: 4484
+                            y: 4484,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 22}).toJSDate(),
-                            y: 4071
+                            y: 4071,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 25}).toJSDate(),
-                            y: 4124
+                            y: 4124,
                         },
                         {
                             x: now.minus({months: 12}).plus({day: 28}).toJSDate(),
-                            y: 4563
+                            y: 4563,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 1}).toJSDate(),
-                            y: 3820
+                            y: 3820,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 4}).toJSDate(),
-                            y: 3968
+                            y: 3968,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 7}).toJSDate(),
-                            y: 4102
+                            y: 4102,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 10}).toJSDate(),
-                            y: 3941
+                            y: 3941,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 13}).toJSDate(),
-                            y: 3566
+                            y: 3566,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 16}).toJSDate(),
-                            y: 3853
+                            y: 3853,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 19}).toJSDate(),
-                            y: 3853
+                            y: 3853,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 22}).toJSDate(),
-                            y: 4069
+                            y: 4069,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 25}).toJSDate(),
-                            y: 3879
+                            y: 3879,
                         },
                         {
                             x: now.minus({months: 11}).plus({day: 28}).toJSDate(),
-                            y: 4298
+                            y: 4298,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 1}).toJSDate(),
-                            y: 4355
+                            y: 4355,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 4}).toJSDate(),
-                            y: 4065
+                            y: 4065,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 7}).toJSDate(),
-                            y: 3650
+                            y: 3650,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 10}).toJSDate(),
-                            y: 3379
+                            y: 3379,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 13}).toJSDate(),
-                            y: 3191
+                            y: 3191,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 16}).toJSDate(),
-                            y: 2968
+                            y: 2968,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 19}).toJSDate(),
-                            y: 2957
+                            y: 2957,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 22}).toJSDate(),
-                            y: 3313
+                            y: 3313,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 25}).toJSDate(),
-                            y: 3708
+                            y: 3708,
                         },
                         {
                             x: now.minus({months: 10}).plus({day: 28}).toJSDate(),
-                            y: 3586
+                            y: 3586,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 1}).toJSDate(),
-                            y: 3965
+                            y: 3965,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 4}).toJSDate(),
-                            y: 3901
+                            y: 3901,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 7}).toJSDate(),
-                            y: 3410
+                            y: 3410,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 10}).toJSDate(),
-                            y: 3748
+                            y: 3748,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 13}).toJSDate(),
-                            y: 3929
+                            y: 3929,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 16}).toJSDate(),
-                            y: 3846
+                            y: 3846,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 19}).toJSDate(),
-                            y: 3771
+                            y: 3771,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 22}).toJSDate(),
-                            y: 4015
+                            y: 4015,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 25}).toJSDate(),
-                            y: 3589
+                            y: 3589,
                         },
                         {
                             x: now.minus({months: 9}).plus({day: 28}).toJSDate(),
-                            y: 3150
+                            y: 3150,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 1}).toJSDate(),
-                            y: 3050
+                            y: 3050,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 4}).toJSDate(),
-                            y: 2574
+                            y: 2574,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 7}).toJSDate(),
-                            y: 2823
+                            y: 2823,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 10}).toJSDate(),
-                            y: 2848
+                            y: 2848,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 13}).toJSDate(),
-                            y: 3000
+                            y: 3000,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 16}).toJSDate(),
-                            y: 3216
+                            y: 3216,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 19}).toJSDate(),
-                            y: 3299
+                            y: 3299,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 22}).toJSDate(),
-                            y: 3768
+                            y: 3768,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 25}).toJSDate(),
-                            y: 3524
+                            y: 3524,
                         },
                         {
                             x: now.minus({months: 8}).plus({day: 28}).toJSDate(),
-                            y: 3918
+                            y: 3918,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 1}).toJSDate(),
-                            y: 4145
+                            y: 4145,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 4}).toJSDate(),
-                            y: 4378
+                            y: 4378,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 7}).toJSDate(),
-                            y: 3941
+                            y: 3941,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 10}).toJSDate(),
-                            y: 3932
+                            y: 3932,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 13}).toJSDate(),
-                            y: 4380
+                            y: 4380,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 16}).toJSDate(),
-                            y: 4243
+                            y: 4243,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 19}).toJSDate(),
-                            y: 4367
+                            y: 4367,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 22}).toJSDate(),
-                            y: 3879
+                            y: 3879,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 25}).toJSDate(),
-                            y: 4357
+                            y: 4357,
                         },
                         {
                             x: now.minus({months: 7}).plus({day: 28}).toJSDate(),
-                            y: 4181
+                            y: 4181,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 1}).toJSDate(),
-                            y: 4619
+                            y: 4619,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 4}).toJSDate(),
-                            y: 4769
+                            y: 4769,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 7}).toJSDate(),
-                            y: 4901
+                            y: 4901,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 10}).toJSDate(),
-                            y: 4640
+                            y: 4640,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 13}).toJSDate(),
-                            y: 5128
+                            y: 5128,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 16}).toJSDate(),
-                            y: 5015
+                            y: 5015,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 19}).toJSDate(),
-                            y: 5360
+                            y: 5360,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 22}).toJSDate(),
-                            y: 5608
+                            y: 5608,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 25}).toJSDate(),
-                            y: 5272
+                            y: 5272,
                         },
                         {
                             x: now.minus({months: 6}).plus({day: 28}).toJSDate(),
-                            y: 5660
+                            y: 5660,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 1}).toJSDate(),
-                            y: 5836
+                            y: 5836,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 4}).toJSDate(),
-                            y: 5659
+                            y: 5659,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 7}).toJSDate(),
-                            y: 5575
+                            y: 5575,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 10}).toJSDate(),
-                            y: 5474
+                            y: 5474,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 13}).toJSDate(),
-                            y: 5427
+                            y: 5427,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 16}).toJSDate(),
-                            y: 5865
+                            y: 5865,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 19}).toJSDate(),
-                            y: 5700
+                            y: 5700,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 22}).toJSDate(),
-                            y: 6052
+                            y: 6052,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 25}).toJSDate(),
-                            y: 5760
+                            y: 5760,
                         },
                         {
                             x: now.minus({months: 5}).plus({day: 28}).toJSDate(),
-                            y: 5648
+                            y: 5648,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 1}).toJSDate(),
-                            y: 5435
+                            y: 5435,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 4}).toJSDate(),
-                            y: 5239
+                            y: 5239,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 7}).toJSDate(),
-                            y: 5452
+                            y: 5452,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 10}).toJSDate(),
-                            y: 5416
+                            y: 5416,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 13}).toJSDate(),
-                            y: 5195
+                            y: 5195,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 16}).toJSDate(),
-                            y: 5119
+                            y: 5119,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 19}).toJSDate(),
-                            y: 4635
+                            y: 4635,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 22}).toJSDate(),
-                            y: 4833
+                            y: 4833,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 25}).toJSDate(),
-                            y: 4584
+                            y: 4584,
                         },
                         {
                             x: now.minus({months: 4}).plus({day: 28}).toJSDate(),
-                            y: 4822
+                            y: 4822,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 1}).toJSDate(),
-                            y: 4582
+                            y: 4582,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 4}).toJSDate(),
-                            y: 4348
+                            y: 4348,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 7}).toJSDate(),
-                            y: 4132
+                            y: 4132,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 10}).toJSDate(),
-                            y: 4099
+                            y: 4099,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 13}).toJSDate(),
-                            y: 3849
+                            y: 3849,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 16}).toJSDate(),
-                            y: 4010
+                            y: 4010,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 19}).toJSDate(),
-                            y: 4486
+                            y: 4486,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 22}).toJSDate(),
-                            y: 4403
+                            y: 4403,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 25}).toJSDate(),
-                            y: 4141
+                            y: 4141,
                         },
                         {
                             x: now.minus({months: 3}).plus({day: 28}).toJSDate(),
-                            y: 3780
+                            y: 3780,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 1}).toJSDate(),
-                            y: 3524
+                            y: 3524,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 4}).toJSDate(),
-                            y: 3212
+                            y: 3212,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 7}).toJSDate(),
-                            y: 3568
+                            y: 3568,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 10}).toJSDate(),
-                            y: 3800
+                            y: 3800,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 13}).toJSDate(),
-                            y: 3796
+                            y: 3796,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 16}).toJSDate(),
-                            y: 3870
+                            y: 3870,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 19}).toJSDate(),
-                            y: 3745
+                            y: 3745,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 22}).toJSDate(),
-                            y: 3751
+                            y: 3751,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 25}).toJSDate(),
-                            y: 3310
+                            y: 3310,
                         },
                         {
                             x: now.minus({months: 2}).plus({day: 28}).toJSDate(),
-                            y: 3509
+                            y: 3509,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 1}).toJSDate(),
-                            y: 3187
+                            y: 3187,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 4}).toJSDate(),
-                            y: 2918
+                            y: 2918,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 7}).toJSDate(),
-                            y: 3191
+                            y: 3191,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 10}).toJSDate(),
-                            y: 3437
+                            y: 3437,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 13}).toJSDate(),
-                            y: 3291
+                            y: 3291,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 16}).toJSDate(),
-                            y: 3317
+                            y: 3317,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 19}).toJSDate(),
-                            y: 3716
+                            y: 3716,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 22}).toJSDate(),
-                            y: 3260
+                            y: 3260,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 25}).toJSDate(),
-                            y: 3694
+                            y: 3694,
                         },
                         {
                             x: now.minus({months: 1}).plus({day: 28}).toJSDate(),
-                            y: 3598
-                        }
-                    ]
-                }
+                            y: 3598,
+                        },
+                    ],
+                },
             ],
             'last-year': [
                 {
@@ -500,488 +500,488 @@ export const analytics = {
                     data: [
                         {
                             x: now.minus({months: 24}).plus({day: 1}).toJSDate(),
-                            y: 2021
+                            y: 2021,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 4}).toJSDate(),
-                            y: 1749
+                            y: 1749,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 7}).toJSDate(),
-                            y: 1654
+                            y: 1654,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 10}).toJSDate(),
-                            y: 1900
+                            y: 1900,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 13}).toJSDate(),
-                            y: 1647
+                            y: 1647,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 16}).toJSDate(),
-                            y: 1315
+                            y: 1315,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 19}).toJSDate(),
-                            y: 1807
+                            y: 1807,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 22}).toJSDate(),
-                            y: 1793
+                            y: 1793,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 25}).toJSDate(),
-                            y: 1892
+                            y: 1892,
                         },
                         {
                             x: now.minus({months: 24}).plus({day: 28}).toJSDate(),
-                            y: 1846
+                            y: 1846,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 1}).toJSDate(),
-                            y: 1804
+                            y: 1804,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 4}).toJSDate(),
-                            y: 1778
+                            y: 1778,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 7}).toJSDate(),
-                            y: 2015
+                            y: 2015,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 10}).toJSDate(),
-                            y: 1892
+                            y: 1892,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 13}).toJSDate(),
-                            y: 1708
+                            y: 1708,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 16}).toJSDate(),
-                            y: 1711
+                            y: 1711,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 19}).toJSDate(),
-                            y: 1570
+                            y: 1570,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 22}).toJSDate(),
-                            y: 1507
+                            y: 1507,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 25}).toJSDate(),
-                            y: 1451
+                            y: 1451,
                         },
                         {
                             x: now.minus({months: 23}).plus({day: 28}).toJSDate(),
-                            y: 1522
+                            y: 1522,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 1}).toJSDate(),
-                            y: 1977
+                            y: 1977,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 4}).toJSDate(),
-                            y: 2367
+                            y: 2367,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 7}).toJSDate(),
-                            y: 2798
+                            y: 2798,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 10}).toJSDate(),
-                            y: 3080
+                            y: 3080,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 13}).toJSDate(),
-                            y: 2856
+                            y: 2856,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 16}).toJSDate(),
-                            y: 2745
+                            y: 2745,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 19}).toJSDate(),
-                            y: 2750
+                            y: 2750,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 22}).toJSDate(),
-                            y: 2728
+                            y: 2728,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 25}).toJSDate(),
-                            y: 2436
+                            y: 2436,
                         },
                         {
                             x: now.minus({months: 22}).plus({day: 28}).toJSDate(),
-                            y: 2289
+                            y: 2289,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 1}).toJSDate(),
-                            y: 2804
+                            y: 2804,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 4}).toJSDate(),
-                            y: 2777
+                            y: 2777,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 7}).toJSDate(),
-                            y: 3024
+                            y: 3024,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 10}).toJSDate(),
-                            y: 2657
+                            y: 2657,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 13}).toJSDate(),
-                            y: 2218
+                            y: 2218,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 16}).toJSDate(),
-                            y: 1964
+                            y: 1964,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 19}).toJSDate(),
-                            y: 1674
+                            y: 1674,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 22}).toJSDate(),
-                            y: 1721
+                            y: 1721,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 25}).toJSDate(),
-                            y: 2005
+                            y: 2005,
                         },
                         {
                             x: now.minus({months: 21}).plus({day: 28}).toJSDate(),
-                            y: 1613
+                            y: 1613,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 1}).toJSDate(),
-                            y: 1071
+                            y: 1071,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 4}).toJSDate(),
-                            y: 1079
+                            y: 1079,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 7}).toJSDate(),
-                            y: 1133
+                            y: 1133,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 10}).toJSDate(),
-                            y: 1536
+                            y: 1536,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 13}).toJSDate(),
-                            y: 2016
+                            y: 2016,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 16}).toJSDate(),
-                            y: 2256
+                            y: 2256,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 19}).toJSDate(),
-                            y: 1934
+                            y: 1934,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 22}).toJSDate(),
-                            y: 1832
+                            y: 1832,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 25}).toJSDate(),
-                            y: 2075
+                            y: 2075,
                         },
                         {
                             x: now.minus({months: 20}).plus({day: 28}).toJSDate(),
-                            y: 1709
+                            y: 1709,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 1}).toJSDate(),
-                            y: 1831
+                            y: 1831,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 4}).toJSDate(),
-                            y: 1434
+                            y: 1434,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 7}).toJSDate(),
-                            y: 1293
+                            y: 1293,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 10}).toJSDate(),
-                            y: 1064
+                            y: 1064,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 13}).toJSDate(),
-                            y: 1080
+                            y: 1080,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 16}).toJSDate(),
-                            y: 1032
+                            y: 1032,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 19}).toJSDate(),
-                            y: 1280
+                            y: 1280,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 22}).toJSDate(),
-                            y: 1344
+                            y: 1344,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 25}).toJSDate(),
-                            y: 1835
+                            y: 1835,
                         },
                         {
                             x: now.minus({months: 19}).plus({day: 28}).toJSDate(),
-                            y: 2287
+                            y: 2287,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 1}).toJSDate(),
-                            y: 2692
+                            y: 2692,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 4}).toJSDate(),
-                            y: 2250
+                            y: 2250,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 7}).toJSDate(),
-                            y: 1814
+                            y: 1814,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 10}).toJSDate(),
-                            y: 1906
+                            y: 1906,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 13}).toJSDate(),
-                            y: 1973
+                            y: 1973,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 16}).toJSDate(),
-                            y: 1882
+                            y: 1882,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 19}).toJSDate(),
-                            y: 2333
+                            y: 2333,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 22}).toJSDate(),
-                            y: 2048
+                            y: 2048,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 25}).toJSDate(),
-                            y: 2547
+                            y: 2547,
                         },
                         {
                             x: now.minus({months: 18}).plus({day: 28}).toJSDate(),
-                            y: 2884
+                            y: 2884,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 1}).toJSDate(),
-                            y: 2771
+                            y: 2771,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 4}).toJSDate(),
-                            y: 2522
+                            y: 2522,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 7}).toJSDate(),
-                            y: 2543
+                            y: 2543,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 10}).toJSDate(),
-                            y: 2413
+                            y: 2413,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 13}).toJSDate(),
-                            y: 2002
+                            y: 2002,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 16}).toJSDate(),
-                            y: 1838
+                            y: 1838,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 19}).toJSDate(),
-                            y: 1830
+                            y: 1830,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 22}).toJSDate(),
-                            y: 1872
+                            y: 1872,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 25}).toJSDate(),
-                            y: 2246
+                            y: 2246,
                         },
                         {
                             x: now.minus({months: 17}).plus({day: 28}).toJSDate(),
-                            y: 2171
+                            y: 2171,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 1}).toJSDate(),
-                            y: 2988
+                            y: 2988,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 4}).toJSDate(),
-                            y: 2694
+                            y: 2694,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 7}).toJSDate(),
-                            y: 2806
+                            y: 2806,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 10}).toJSDate(),
-                            y: 3040
+                            y: 3040,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 13}).toJSDate(),
-                            y: 2898
+                            y: 2898,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 16}).toJSDate(),
-                            y: 3013
+                            y: 3013,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 19}).toJSDate(),
-                            y: 2760
+                            y: 2760,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 22}).toJSDate(),
-                            y: 3021
+                            y: 3021,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 25}).toJSDate(),
-                            y: 2688
+                            y: 2688,
                         },
                         {
                             x: now.minus({months: 16}).plus({day: 28}).toJSDate(),
-                            y: 2572
+                            y: 2572,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 1}).toJSDate(),
-                            y: 2789
+                            y: 2789,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 4}).toJSDate(),
-                            y: 3069
+                            y: 3069,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 7}).toJSDate(),
-                            y: 3142
+                            y: 3142,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 10}).toJSDate(),
-                            y: 3614
+                            y: 3614,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 13}).toJSDate(),
-                            y: 3202
+                            y: 3202,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 16}).toJSDate(),
-                            y: 2730
+                            y: 2730,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 19}).toJSDate(),
-                            y: 2951
+                            y: 2951,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 22}).toJSDate(),
-                            y: 3267
+                            y: 3267,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 25}).toJSDate(),
-                            y: 2882
+                            y: 2882,
                         },
                         {
                             x: now.minus({months: 15}).plus({day: 28}).toJSDate(),
-                            y: 2885
+                            y: 2885,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 1}).toJSDate(),
-                            y: 2915
+                            y: 2915,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 4}).toJSDate(),
-                            y: 2790
+                            y: 2790,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 7}).toJSDate(),
-                            y: 3071
+                            y: 3071,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 10}).toJSDate(),
-                            y: 2802
+                            y: 2802,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 13}).toJSDate(),
-                            y: 2382
+                            y: 2382,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 16}).toJSDate(),
-                            y: 1883
+                            y: 1883,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 19}).toJSDate(),
-                            y: 1448
+                            y: 1448,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 22}).toJSDate(),
-                            y: 1176
+                            y: 1176,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 25}).toJSDate(),
-                            y: 1275
+                            y: 1275,
                         },
                         {
                             x: now.minus({months: 14}).plus({day: 28}).toJSDate(),
-                            y: 1136
+                            y: 1136,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 1}).toJSDate(),
-                            y: 1160
+                            y: 1160,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 4}).toJSDate(),
-                            y: 1524
+                            y: 1524,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 7}).toJSDate(),
-                            y: 1305
+                            y: 1305,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 10}).toJSDate(),
-                            y: 1725
+                            y: 1725,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 13}).toJSDate(),
-                            y: 1850
+                            y: 1850,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 16}).toJSDate(),
-                            y: 2304
+                            y: 2304,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 19}).toJSDate(),
-                            y: 2187
+                            y: 2187,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 22}).toJSDate(),
-                            y: 2597
+                            y: 2597,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 25}).toJSDate(),
-                            y: 2246
+                            y: 2246,
                         },
                         {
                             x: now.minus({months: 13}).plus({day: 28}).toJSDate(),
-                            y: 1767
-                        }
-                    ]
-                }
-            ]
-        }
+                            y: 1767,
+                        },
+                    ],
+                },
+            ],
+        },
     },
     conversions        : {
         amount: 4123,
@@ -991,14 +991,14 @@ export const analytics = {
             now.minus({days: 31}).toFormat('dd MMM') + ' - ' + now.minus({days: 24}).toFormat('dd MMM'),
             now.minus({days: 23}).toFormat('dd MMM') + ' - ' + now.minus({days: 16}).toFormat('dd MMM'),
             now.minus({days: 15}).toFormat('dd MMM') + ' - ' + now.minus({days: 8}).toFormat('dd MMM'),
-            now.minus({days: 7}).toFormat('dd MMM') + ' - ' + now.toFormat('dd MMM')
+            now.minus({days: 7}).toFormat('dd MMM') + ' - ' + now.toFormat('dd MMM'),
         ],
         series: [
             {
                 name: 'Conversions',
-                data: [4412, 4345, 4541, 4677, 4322, 4123]
-            }
-        ]
+                data: [4412, 4345, 4541, 4677, 4322, 4123],
+            },
+        ],
     },
     impressions        : {
         amount: 46085,
@@ -1006,14 +1006,14 @@ export const analytics = {
             now.minus({days: 31}).toFormat('dd MMM') + ' - ' + now.minus({days: 24}).toFormat('dd MMM'),
             now.minus({days: 23}).toFormat('dd MMM') + ' - ' + now.minus({days: 16}).toFormat('dd MMM'),
             now.minus({days: 15}).toFormat('dd MMM') + ' - ' + now.minus({days: 8}).toFormat('dd MMM'),
-            now.minus({days: 7}).toFormat('dd MMM') + ' - ' + now.toFormat('dd MMM')
+            now.minus({days: 7}).toFormat('dd MMM') + ' - ' + now.toFormat('dd MMM'),
         ],
         series: [
             {
                 name: 'Impressions',
-                data: [11577, 11441, 11544, 11523]
-            }
-        ]
+                data: [11577, 11441, 11544, 11523],
+            },
+        ],
     },
     visits             : {
         amount: 62083,
@@ -1021,14 +1021,14 @@ export const analytics = {
             now.minus({days: 31}).toFormat('dd MMM') + ' - ' + now.minus({days: 24}).toFormat('dd MMM'),
             now.minus({days: 23}).toFormat('dd MMM') + ' - ' + now.minus({days: 16}).toFormat('dd MMM'),
             now.minus({days: 15}).toFormat('dd MMM') + ' - ' + now.minus({days: 8}).toFormat('dd MMM'),
-            now.minus({days: 7}).toFormat('dd MMM') + ' - ' + now.toFormat('dd MMM')
+            now.minus({days: 7}).toFormat('dd MMM') + ' - ' + now.toFormat('dd MMM'),
         ],
         series: [
             {
                 name: 'Visits',
-                data: [15521, 15519, 15522, 15521]
-            }
-        ]
+                data: [15521, 15519, 15522, 15521],
+            },
+        ],
     },
     visitorsVsPageViews: {
         overallScore  : 472,
@@ -1040,563 +1040,563 @@ export const analytics = {
                 data: [
                     {
                         x: now.minus({days: 65}).toJSDate(),
-                        y: 4769
+                        y: 4769,
                     },
                     {
                         x: now.minus({days: 64}).toJSDate(),
-                        y: 4901
+                        y: 4901,
                     },
                     {
                         x: now.minus({days: 63}).toJSDate(),
-                        y: 4640
+                        y: 4640,
                     },
                     {
                         x: now.minus({days: 62}).toJSDate(),
-                        y: 5128
+                        y: 5128,
                     },
                     {
                         x: now.minus({days: 61}).toJSDate(),
-                        y: 5015
+                        y: 5015,
                     },
                     {
                         x: now.minus({days: 60}).toJSDate(),
-                        y: 5360
+                        y: 5360,
                     },
                     {
                         x: now.minus({days: 59}).toJSDate(),
-                        y: 5608
+                        y: 5608,
                     },
                     {
                         x: now.minus({days: 58}).toJSDate(),
-                        y: 5272
+                        y: 5272,
                     },
                     {
                         x: now.minus({days: 57}).toJSDate(),
-                        y: 5660
+                        y: 5660,
                     },
                     {
                         x: now.minus({days: 56}).toJSDate(),
-                        y: 6026
+                        y: 6026,
                     },
                     {
                         x: now.minus({days: 55}).toJSDate(),
-                        y: 5836
+                        y: 5836,
                     },
                     {
                         x: now.minus({days: 54}).toJSDate(),
-                        y: 5659
+                        y: 5659,
                     },
                     {
                         x: now.minus({days: 53}).toJSDate(),
-                        y: 5575
+                        y: 5575,
                     },
                     {
                         x: now.minus({days: 52}).toJSDate(),
-                        y: 5474
+                        y: 5474,
                     },
                     {
                         x: now.minus({days: 51}).toJSDate(),
-                        y: 5427
+                        y: 5427,
                     },
                     {
                         x: now.minus({days: 50}).toJSDate(),
-                        y: 5865
+                        y: 5865,
                     },
                     {
                         x: now.minus({days: 49}).toJSDate(),
-                        y: 5700
+                        y: 5700,
                     },
                     {
                         x: now.minus({days: 48}).toJSDate(),
-                        y: 6052
+                        y: 6052,
                     },
                     {
                         x: now.minus({days: 47}).toJSDate(),
-                        y: 5760
+                        y: 5760,
                     },
                     {
                         x: now.minus({days: 46}).toJSDate(),
-                        y: 5648
+                        y: 5648,
                     },
                     {
                         x: now.minus({days: 45}).toJSDate(),
-                        y: 5510
+                        y: 5510,
                     },
                     {
                         x: now.minus({days: 44}).toJSDate(),
-                        y: 5435
+                        y: 5435,
                     },
                     {
                         x: now.minus({days: 43}).toJSDate(),
-                        y: 5239
+                        y: 5239,
                     },
                     {
                         x: now.minus({days: 42}).toJSDate(),
-                        y: 5452
+                        y: 5452,
                     },
                     {
                         x: now.minus({days: 41}).toJSDate(),
-                        y: 5416
+                        y: 5416,
                     },
                     {
                         x: now.minus({days: 40}).toJSDate(),
-                        y: 5195
+                        y: 5195,
                     },
                     {
                         x: now.minus({days: 39}).toJSDate(),
-                        y: 5119
+                        y: 5119,
                     },
                     {
                         x: now.minus({days: 38}).toJSDate(),
-                        y: 4635
+                        y: 4635,
                     },
                     {
                         x: now.minus({days: 37}).toJSDate(),
-                        y: 4833
+                        y: 4833,
                     },
                     {
                         x: now.minus({days: 36}).toJSDate(),
-                        y: 4584
+                        y: 4584,
                     },
                     {
                         x: now.minus({days: 35}).toJSDate(),
-                        y: 4822
+                        y: 4822,
                     },
                     {
                         x: now.minus({days: 34}).toJSDate(),
-                        y: 4330
+                        y: 4330,
                     },
                     {
                         x: now.minus({days: 33}).toJSDate(),
-                        y: 4582
+                        y: 4582,
                     },
                     {
                         x: now.minus({days: 32}).toJSDate(),
-                        y: 4348
+                        y: 4348,
                     },
                     {
                         x: now.minus({days: 31}).toJSDate(),
-                        y: 4132
+                        y: 4132,
                     },
                     {
                         x: now.minus({days: 30}).toJSDate(),
-                        y: 4099
+                        y: 4099,
                     },
                     {
                         x: now.minus({days: 29}).toJSDate(),
-                        y: 3849
+                        y: 3849,
                     },
                     {
                         x: now.minus({days: 28}).toJSDate(),
-                        y: 4010
+                        y: 4010,
                     },
                     {
                         x: now.minus({days: 27}).toJSDate(),
-                        y: 4486
+                        y: 4486,
                     },
                     {
                         x: now.minus({days: 26}).toJSDate(),
-                        y: 4403
+                        y: 4403,
                     },
                     {
                         x: now.minus({days: 25}).toJSDate(),
-                        y: 4141
+                        y: 4141,
                     },
                     {
                         x: now.minus({days: 24}).toJSDate(),
-                        y: 3780
+                        y: 3780,
                     },
                     {
                         x: now.minus({days: 23}).toJSDate(),
-                        y: 3929
+                        y: 3929,
                     },
                     {
                         x: now.minus({days: 22}).toJSDate(),
-                        y: 3524
+                        y: 3524,
                     },
                     {
                         x: now.minus({days: 21}).toJSDate(),
-                        y: 3212
+                        y: 3212,
                     },
                     {
                         x: now.minus({days: 20}).toJSDate(),
-                        y: 3568
+                        y: 3568,
                     },
                     {
                         x: now.minus({days: 19}).toJSDate(),
-                        y: 3800
+                        y: 3800,
                     },
                     {
                         x: now.minus({days: 18}).toJSDate(),
-                        y: 3796
+                        y: 3796,
                     },
                     {
                         x: now.minus({days: 17}).toJSDate(),
-                        y: 3870
+                        y: 3870,
                     },
                     {
                         x: now.minus({days: 16}).toJSDate(),
-                        y: 3745
+                        y: 3745,
                     },
                     {
                         x: now.minus({days: 15}).toJSDate(),
-                        y: 3751
+                        y: 3751,
                     },
                     {
                         x: now.minus({days: 14}).toJSDate(),
-                        y: 3310
+                        y: 3310,
                     },
                     {
                         x: now.minus({days: 13}).toJSDate(),
-                        y: 3509
+                        y: 3509,
                     },
                     {
                         x: now.minus({days: 12}).toJSDate(),
-                        y: 3311
+                        y: 3311,
                     },
                     {
                         x: now.minus({days: 11}).toJSDate(),
-                        y: 3187
+                        y: 3187,
                     },
                     {
                         x: now.minus({days: 10}).toJSDate(),
-                        y: 2918
+                        y: 2918,
                     },
                     {
                         x: now.minus({days: 9}).toJSDate(),
-                        y: 3191
+                        y: 3191,
                     },
                     {
                         x: now.minus({days: 8}).toJSDate(),
-                        y: 3437
+                        y: 3437,
                     },
                     {
                         x: now.minus({days: 7}).toJSDate(),
-                        y: 3291
+                        y: 3291,
                     },
                     {
                         x: now.minus({days: 6}).toJSDate(),
-                        y: 3317
+                        y: 3317,
                     },
                     {
                         x: now.minus({days: 5}).toJSDate(),
-                        y: 3716
+                        y: 3716,
                     },
                     {
                         x: now.minus({days: 4}).toJSDate(),
-                        y: 3260
+                        y: 3260,
                     },
                     {
                         x: now.minus({days: 3}).toJSDate(),
-                        y: 3694
+                        y: 3694,
                     },
                     {
                         x: now.minus({days: 2}).toJSDate(),
-                        y: 3598
+                        y: 3598,
                     },
                     {
                         x: now.minus({days: 1}).toJSDate(),
-                        y: 3812
-                    }
-                ]
+                        y: 3812,
+                    },
+                ],
             },
             {
                 name: 'Visitors',
                 data: [
                     {
                         x: now.minus({days: 65}).toJSDate(),
-                        y: 1654
+                        y: 1654,
                     },
                     {
                         x: now.minus({days: 64}).toJSDate(),
-                        y: 1900
+                        y: 1900,
                     },
                     {
                         x: now.minus({days: 63}).toJSDate(),
-                        y: 1647
+                        y: 1647,
                     },
                     {
                         x: now.minus({days: 62}).toJSDate(),
-                        y: 1315
+                        y: 1315,
                     },
                     {
                         x: now.minus({days: 61}).toJSDate(),
-                        y: 1807
+                        y: 1807,
                     },
                     {
                         x: now.minus({days: 60}).toJSDate(),
-                        y: 1793
+                        y: 1793,
                     },
                     {
                         x: now.minus({days: 59}).toJSDate(),
-                        y: 1892
+                        y: 1892,
                     },
                     {
                         x: now.minus({days: 58}).toJSDate(),
-                        y: 1846
+                        y: 1846,
                     },
                     {
                         x: now.minus({days: 57}).toJSDate(),
-                        y: 1966
+                        y: 1966,
                     },
                     {
                         x: now.minus({days: 56}).toJSDate(),
-                        y: 1804
+                        y: 1804,
                     },
                     {
                         x: now.minus({days: 55}).toJSDate(),
-                        y: 1778
+                        y: 1778,
                     },
                     {
                         x: now.minus({days: 54}).toJSDate(),
-                        y: 2015
+                        y: 2015,
                     },
                     {
                         x: now.minus({days: 53}).toJSDate(),
-                        y: 1892
+                        y: 1892,
                     },
                     {
                         x: now.minus({days: 52}).toJSDate(),
-                        y: 1708
+                        y: 1708,
                     },
                     {
                         x: now.minus({days: 51}).toJSDate(),
-                        y: 1711
+                        y: 1711,
                     },
                     {
                         x: now.minus({days: 50}).toJSDate(),
-                        y: 1570
+                        y: 1570,
                     },
                     {
                         x: now.minus({days: 49}).toJSDate(),
-                        y: 1507
+                        y: 1507,
                     },
                     {
                         x: now.minus({days: 48}).toJSDate(),
-                        y: 1451
+                        y: 1451,
                     },
                     {
                         x: now.minus({days: 47}).toJSDate(),
-                        y: 1522
+                        y: 1522,
                     },
                     {
                         x: now.minus({days: 46}).toJSDate(),
-                        y: 1801
+                        y: 1801,
                     },
                     {
                         x: now.minus({days: 45}).toJSDate(),
-                        y: 1977
+                        y: 1977,
                     },
                     {
                         x: now.minus({days: 44}).toJSDate(),
-                        y: 2367
+                        y: 2367,
                     },
                     {
                         x: now.minus({days: 43}).toJSDate(),
-                        y: 2798
+                        y: 2798,
                     },
                     {
                         x: now.minus({days: 42}).toJSDate(),
-                        y: 3080
+                        y: 3080,
                     },
                     {
                         x: now.minus({days: 41}).toJSDate(),
-                        y: 2856
+                        y: 2856,
                     },
                     {
                         x: now.minus({days: 40}).toJSDate(),
-                        y: 2745
+                        y: 2745,
                     },
                     {
                         x: now.minus({days: 39}).toJSDate(),
-                        y: 2750
+                        y: 2750,
                     },
                     {
                         x: now.minus({days: 38}).toJSDate(),
-                        y: 2728
+                        y: 2728,
                     },
                     {
                         x: now.minus({days: 37}).toJSDate(),
-                        y: 2436
+                        y: 2436,
                     },
                     {
                         x: now.minus({days: 36}).toJSDate(),
-                        y: 2289
+                        y: 2289,
                     },
                     {
                         x: now.minus({days: 35}).toJSDate(),
-                        y: 2657
+                        y: 2657,
                     },
                     {
                         x: now.minus({days: 34}).toJSDate(),
-                        y: 2804
+                        y: 2804,
                     },
                     {
                         x: now.minus({days: 33}).toJSDate(),
-                        y: 2777
+                        y: 2777,
                     },
                     {
                         x: now.minus({days: 32}).toJSDate(),
-                        y: 3024
+                        y: 3024,
                     },
                     {
                         x: now.minus({days: 31}).toJSDate(),
-                        y: 2657
+                        y: 2657,
                     },
                     {
                         x: now.minus({days: 30}).toJSDate(),
-                        y: 2218
+                        y: 2218,
                     },
                     {
                         x: now.minus({days: 29}).toJSDate(),
-                        y: 1964
+                        y: 1964,
                     },
                     {
                         x: now.minus({days: 28}).toJSDate(),
-                        y: 1674
+                        y: 1674,
                     },
                     {
                         x: now.minus({days: 27}).toJSDate(),
-                        y: 1721
+                        y: 1721,
                     },
                     {
                         x: now.minus({days: 26}).toJSDate(),
-                        y: 2005
+                        y: 2005,
                     },
                     {
                         x: now.minus({days: 25}).toJSDate(),
-                        y: 1613
+                        y: 1613,
                     },
                     {
                         x: now.minus({days: 24}).toJSDate(),
-                        y: 1295
+                        y: 1295,
                     },
                     {
                         x: now.minus({days: 23}).toJSDate(),
-                        y: 1071
+                        y: 1071,
                     },
                     {
                         x: now.minus({days: 22}).toJSDate(),
-                        y: 799
+                        y: 799,
                     },
                     {
                         x: now.minus({days: 21}).toJSDate(),
-                        y: 1133
+                        y: 1133,
                     },
                     {
                         x: now.minus({days: 20}).toJSDate(),
-                        y: 1536
+                        y: 1536,
                     },
                     {
                         x: now.minus({days: 19}).toJSDate(),
-                        y: 2016
+                        y: 2016,
                     },
                     {
                         x: now.minus({days: 18}).toJSDate(),
-                        y: 2256
+                        y: 2256,
                     },
                     {
                         x: now.minus({days: 17}).toJSDate(),
-                        y: 1934
+                        y: 1934,
                     },
                     {
                         x: now.minus({days: 16}).toJSDate(),
-                        y: 1832
+                        y: 1832,
                     },
                     {
                         x: now.minus({days: 15}).toJSDate(),
-                        y: 2075
+                        y: 2075,
                     },
                     {
                         x: now.minus({days: 14}).toJSDate(),
-                        y: 1709
+                        y: 1709,
                     },
                     {
                         x: now.minus({days: 13}).toJSDate(),
-                        y: 1932
+                        y: 1932,
                     },
                     {
                         x: now.minus({days: 12}).toJSDate(),
-                        y: 1831
+                        y: 1831,
                     },
                     {
                         x: now.minus({days: 11}).toJSDate(),
-                        y: 1434
+                        y: 1434,
                     },
                     {
                         x: now.minus({days: 10}).toJSDate(),
-                        y: 993
+                        y: 993,
                     },
                     {
                         x: now.minus({days: 9}).toJSDate(),
-                        y: 1064
+                        y: 1064,
                     },
                     {
                         x: now.minus({days: 8}).toJSDate(),
-                        y: 618
+                        y: 618,
                     },
                     {
                         x: now.minus({days: 7}).toJSDate(),
-                        y: 1032
+                        y: 1032,
                     },
                     {
                         x: now.minus({days: 6}).toJSDate(),
-                        y: 1280
+                        y: 1280,
                     },
                     {
                         x: now.minus({days: 5}).toJSDate(),
-                        y: 1344
+                        y: 1344,
                     },
                     {
                         x: now.minus({days: 4}).toJSDate(),
-                        y: 1835
+                        y: 1835,
                     },
                     {
                         x: now.minus({days: 3}).toJSDate(),
-                        y: 2287
+                        y: 2287,
                     },
                     {
                         x: now.minus({days: 2}).toJSDate(),
-                        y: 2226
+                        y: 2226,
                     },
                     {
                         x: now.minus({days: 1}).toJSDate(),
-                        y: 2692
-                    }
-                ]
-            }
-        ]
+                        y: 2692,
+                    },
+                ],
+            },
+        ],
     },
     newVsReturning     : {
         uniqueVisitors: 46085,
         series        : [80, 20],
         labels        : [
             'New',
-            'Returning'
-        ]
+            'Returning',
+        ],
     },
     gender             : {
         uniqueVisitors: 46085,
         series        : [55, 45],
         labels        : [
             'Male',
-            'Female'
-        ]
+            'Female',
+        ],
     },
     age                : {
         uniqueVisitors: 46085,
         series        : [35, 65],
         labels        : [
             'Under 30',
-            'Over 30'
-        ]
+            'Over 30',
+        ],
     },
     language           : {
         uniqueVisitors: 46085,
         series        : [25, 75],
         labels        : [
             'English',
-            'Other'
-        ]
-    }
+            'Other',
+        ],
+    },
 };

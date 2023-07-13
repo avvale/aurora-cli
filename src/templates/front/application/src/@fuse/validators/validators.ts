@@ -20,8 +20,8 @@ export class FuseValidators
      */
     static mustMatch(controlPath: string, matchingControlPath: string): ValidatorFn
     {
-        return (formGroup: AbstractControl): ValidationErrors | null => {
-
+        return (formGroup: AbstractControl): ValidationErrors | null =>
+        {
             // Get the control and matching control
             const control = formGroup.get(controlPath);
             const matchingControl = formGroup.get(matchingControlPath);

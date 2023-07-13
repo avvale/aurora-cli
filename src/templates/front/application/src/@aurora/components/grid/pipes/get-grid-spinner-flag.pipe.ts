@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Pipe({
     name: 'getGridSpinnerFlag',
+    standalone: true,
 })
 export class GetGridSpinnerFlagPipe implements PipeTransform
 {

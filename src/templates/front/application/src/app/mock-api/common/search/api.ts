@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash-es';
 import { FuseNavigationItem, FuseNavigationService } from '@fuse/components/navigation';
 import { FuseMockApiService } from '@fuse/lib/mock-api';
-import { defaultNavigation } from 'app/mock-api/common/navigation/data';
 import { contacts } from 'app/mock-api/apps/contacts/data';
 import { tasks } from 'app/mock-api/apps/tasks/data';
+import { defaultNavigation } from 'app/mock-api/common/navigation/data';
+import { cloneDeep } from 'lodash-es';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class SearchMockApi
 {
     private readonly _defaultNavigation: FuseNavigationItem[] = defaultNavigation;
@@ -20,7 +18,7 @@ export class SearchMockApi
      */
     constructor(
         private _fuseMockApiService: FuseMockApiService,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
     )
     {
         // Register Mock API handlers
@@ -44,8 +42,8 @@ export class SearchMockApi
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
             .onPost('api/common/search')
-            .reply(({request}) => {
-
+            .reply(({request}) =>
+            {
                 // Get the search query
                 const query = cloneDeep(request.body.query.toLowerCase());
 
@@ -75,8 +73,8 @@ export class SearchMockApi
                 if ( contactsResults.length > 0 )
                 {
                     // Normalize the results
-                    contactsResults.forEach((result) => {
-
+                    contactsResults.forEach((result) =>
+                    {
                         // Add a link
                         result.link = '/apps/contacts/' + result.id;
 
@@ -88,7 +86,7 @@ export class SearchMockApi
                     results.push({
                         id     : 'contacts',
                         label  : 'Contacts',
-                        results: contactsResults
+                        results: contactsResults,
                     });
                 }
 
@@ -96,8 +94,8 @@ export class SearchMockApi
                 if ( pagesResults.length > 0 )
                 {
                     // Normalize the results
-                    pagesResults.forEach((result: any) => {
-
+                    pagesResults.forEach((result: any) =>
+                    {
                         // Add the page title as the value
                         result.value = result.title;
                     });
@@ -106,7 +104,7 @@ export class SearchMockApi
                     results.push({
                         id     : 'pages',
                         label  : 'Pages',
-                        results: pagesResults
+                        results: pagesResults,
                     });
                 }
 
@@ -114,8 +112,8 @@ export class SearchMockApi
                 if ( tasksResults.length > 0 )
                 {
                     // Normalize the results
-                    tasksResults.forEach((result) => {
-
+                    tasksResults.forEach((result) =>
+                    {
                         // Add a link
                         result.link = '/apps/tasks/' + result.id;
 
@@ -127,7 +125,7 @@ export class SearchMockApi
                     results.push({
                         id     : 'tasks',
                         label  : 'Tasks',
-                        results: tasksResults
+                        results: tasksResults,
                     });
                 }
 

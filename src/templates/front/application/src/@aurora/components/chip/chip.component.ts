@@ -9,6 +9,7 @@ type ChipColor = 'primary' | 'accent' | 'warn' | 'success';
     styleUrls      : ['./chip.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation  : ViewEncapsulation.None,
+    standalone     : true,
 })
 export class ChipComponent
 {

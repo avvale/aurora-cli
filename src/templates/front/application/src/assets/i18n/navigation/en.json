@@ -1,12 +1,22 @@
 {
+    "accessTokens": "AccessTokens",
+    "accounts": "Accounts",
     "admin": "Admin",
     "applications": "Applications",
+    "boundedContexts": "BoundedContexts",
+    "clients": "Clients",
     "collections": "Collections",
     "countries": "Countries",
     "example": "Example",
     "exampleSection": "Example Section",
     "fields": "Fields",
+    "httpCommunications": "HttpCommunications",
     "jobsRegistry": "JobsRegistry",
     "langs": "Langs",
-    "queues": "Queues"
+    "queues": "Queues",
+    "refreshTokens": "RefreshTokens",
+    "roles": "Roles",
+    "scopes": "Scopes",
+    "sideEffects": "SideEffects",
+    "tenants": "Tenants"
 }

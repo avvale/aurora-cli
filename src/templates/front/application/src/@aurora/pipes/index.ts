@@ -1,1 +1,1 @@
-export * from './pipes.module';
+export * from '@aurora/pipes/public-api';

@@ -4,8 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
  * Finds an object from given source using the given key - value pairs
  */
 @Pipe({
-    name: 'fuseFindByKey',
-    pure: false
+    name      : 'fuseFindByKey',
+    pure      : false,
+    standalone: true,
 })
 export class FuseFindByKeyPipe implements PipeTransform
 {

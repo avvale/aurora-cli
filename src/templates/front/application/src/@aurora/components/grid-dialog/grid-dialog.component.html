@@ -32,7 +32,7 @@
             (searchClose)="searchClose.emit()"
             (search)="search.emit($event)"
         >
-            <!-- proxy to pass GridCustomHeaderTemplateDirective -->
+            <!-- container to pass GridCustomHeaderTemplateDirective -->
             <ng-container *ngFor="let gridCustomHeaderTemplate of data.gridCustomHeadersTemplate">
                 <ng-template
                     auGridCustomHeaderTemplate
@@ -53,7 +53,7 @@
                 position="right"
             ></ng-template>
 
-            <!-- proxy to pass GridCellValueTemplateDirective -->
+            <!-- container to pass GridCellValueTemplateDirective -->
             <ng-container *ngFor="let gridCellValueTemplate of data.gridCellValuesTemplate">
                 <ng-template
                     auGridCellValueTemplate

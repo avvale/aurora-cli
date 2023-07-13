@@ -2,6 +2,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
     selector: '[auGridFormElementDetailDialogTemplate]',
+    standalone: true,
 })
 export class GridFormElementDetailDialogTemplateDirective
 {

@@ -3,8 +3,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 @Directive({
-    selector: '[fuseScrollReset]',
-    exportAs: 'fuseScrollReset'
+    selector  : '[fuseScrollReset]',
+    exportAs  : 'fuseScrollReset',
+    standalone: true,
 })
 export class FuseScrollResetDirective implements OnInit, OnDestroy
 {
@@ -15,7 +16,7 @@ export class FuseScrollResetDirective implements OnInit, OnDestroy
      */
     constructor(
         private _elementRef: ElementRef,
-        private _router: Router
+        private _router: Router,
     )
     {
     }
@@ -32,9 +33,9 @@ export class FuseScrollResetDirective implements OnInit, OnDestroy
         // Subscribe to NavigationEnd event
         this._router.events.pipe(
             filter(event => event instanceof NavigationEnd),
-            takeUntil(this._unsubscribeAll)
-        ).subscribe(() => {
-
+            takeUntil(this._unsubscribeAll),
+        ).subscribe(() =>
+        {
             // Reset the element's scroll position to the top
             this._elementRef.nativeElement.scrollTop = 0;
         });

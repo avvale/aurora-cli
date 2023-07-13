@@ -10,15 +10,15 @@ const zoomIn = trigger('zoomIn',
         state('void',
             style({
                 opacity  : 0,
-                transform: 'scale(0.5)'
-            })
+                transform: 'scale(0.5)',
+            }),
         ),
 
         state('*',
             style({
                 opacity  : 1,
-                transform: 'scale(1)'
-            })
+                transform: 'scale(1)',
+            }),
         ),
 
         // Prevent the transition if the state is false
@@ -28,11 +28,11 @@ const zoomIn = trigger('zoomIn',
         transition('void => *', animate('{{timings}}'),
             {
                 params: {
-                    timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`
-                }
-            }
-        )
-    ]
+                    timings: `${FuseAnimationDurations.entering} ${FuseAnimationCurves.deceleration}`,
+                },
+            },
+        ),
+    ],
 );
 
 // -----------------------------------------------------------------------------------------------------
@@ -44,15 +44,15 @@ const zoomOut = trigger('zoomOut',
         state('*',
             style({
                 opacity  : 1,
-                transform: 'scale(1)'
-            })
+                transform: 'scale(1)',
+            }),
         ),
 
         state('void',
             style({
                 opacity  : 0,
-                transform: 'scale(0.5)'
-            })
+                transform: 'scale(0.5)',
+            }),
         ),
 
         // Prevent the transition if the state is false
@@ -62,11 +62,11 @@ const zoomOut = trigger('zoomOut',
         transition('* => void', animate('{{timings}}'),
             {
                 params: {
-                    timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`
-                }
-            }
-        )
-    ]
+                    timings: `${FuseAnimationDurations.exiting} ${FuseAnimationCurves.acceleration}`,
+                },
+            },
+        ),
+    ],
 );
 
 export { zoomIn, zoomOut };

@@ -1,2 +1,1 @@
-export * from './navigation.service';
-export * from './navigation.types';
+export * from '@aurora/components/navigation/public-api';

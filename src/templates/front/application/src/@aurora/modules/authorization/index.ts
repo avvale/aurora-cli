@@ -1,2 +1,2 @@
-export * from './authorization.module';
-export * from './authorization.service';
+export { AuthorizationService } from './authorization.service';
+export { CanPipe } from './pipes/can.pipe';

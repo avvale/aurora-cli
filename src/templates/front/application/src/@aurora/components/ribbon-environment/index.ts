@@ -1,1 +1,1 @@
-export * from './ribbon-environment.module';
+export * from '@aurora/components/ribbon-environment/public-api';

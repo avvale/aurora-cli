@@ -1,8 +1,12 @@
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations/public-api';
-import { debounceTime, filter, map, Subject, takeUntil } from 'rxjs';
+import { Subject, debounceTime, filter, map, takeUntil } from 'rxjs';
 import { GridSearchState } from '../grid.types';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 
 @Component({
     selector       : 'au-grid-search',
@@ -10,6 +14,8 @@ import { GridSearchState } from '../grid.types';
     styles         : [':host { display: inline-block }'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations     : fuseAnimations,
+    standalone     : true,
+    imports        : [AsyncPipe, GridTranslatePipe, NgIf, NgForOf, MatButtonModule, MatIconModule, ReactiveFormsModule],
 })
 export class GridSearchComponent implements OnInit
 {
@@ -44,6 +50,7 @@ export class GridSearchComponent implements OnInit
             )
             .subscribe(value =>
             {
+                console.log('value', value);
                 this.search.emit({
                     value,
                     isOpen: this.opened,

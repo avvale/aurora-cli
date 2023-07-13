@@ -1,16 +1,36 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { Overlay } from '@angular/cdk/overlay';
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { MatAutocomplete } from '@angular/material/autocomplete';
-import { debounceTime, filter, map, Subject, takeUntil } from 'rxjs';
+import { Component, ElementRef, EventEmitter, HostBinding, inject, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { MAT_AUTOCOMPLETE_SCROLL_STRATEGY, MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations/public-api';
+import { debounceTime, filter, map, Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector     : 'search',
     templateUrl  : './search.component.html',
     encapsulation: ViewEncapsulation.None,
     exportAs     : 'fuseSearch',
-    animations   : fuseAnimations
+    animations   : fuseAnimations,
+    standalone   : true,
+    imports      : [NgIf, MatButtonModule, MatIconModule, FormsModule, MatAutocompleteModule, ReactiveFormsModule, MatOptionModule, NgFor, RouterLink, NgTemplateOutlet, MatFormFieldModule, MatInputModule, NgClass],
+    providers    : [
+        {
+            provide   : MAT_AUTOCOMPLETE_SCROLL_STRATEGY,
+            useFactory: () =>
+            {
+                const overlay = inject(Overlay);
+                return () => overlay.scrollStrategies.block();
+            },
+        },
+    ],
 })
 export class SearchComponent implements OnChanges, OnInit, OnDestroy
 {
@@ -31,7 +51,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy
     constructor(
         private _elementRef: ElementRef,
         private _httpClient: HttpClient,
-        private _renderer2: Renderer2
+        private _renderer2: Renderer2,
     )
     {
     }
@@ -48,7 +68,7 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy
         return {
             'search-appearance-bar'  : this.appearance === 'bar',
             'search-appearance-basic': this.appearance === 'basic',
-            'search-opened'          : this.opened
+            'search-opened'          : this.opened,
         };
     }
 
@@ -65,8 +85,8 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy
         if ( value )
         {
             // Give Angular time to complete the change detection cycle
-            setTimeout(() => {
-
+            setTimeout(() =>
+            {
                 // Focus to the input element
                 value.nativeElement.focus();
             });
@@ -114,8 +134,8 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy
             .pipe(
                 debounceTime(this.debounce),
                 takeUntil(this._unsubscribeAll),
-                map((value) => {
-
+                map((value) =>
+                {
                     // Set the resultSets to null if there is no value or
                     // the length of the value is smaller than the minLength
                     // so the autocomplete panel can be closed
@@ -129,12 +149,13 @@ export class SearchComponent implements OnChanges, OnInit, OnDestroy
                 }),
                 // Filter out undefined/null/false statements and also
                 // filter out the values that are smaller than minLength
-                filter(value => value && value.length >= this.minLength)
+                filter(value => value && value.length >= this.minLength),
             )
-            .subscribe((value) => {
+            .subscribe((value) =>
+            {
                 this._httpClient.post('api/common/search', {query: value})
-                    .subscribe((resultSets: any) => {
-
+                    .subscribe((resultSets: any) =>
+                    {
                         // Store the result sets
                         this.resultSets = resultSets;
 

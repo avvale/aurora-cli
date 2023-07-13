@@ -1,3 +1,4 @@
+import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -29,6 +30,10 @@ import { Component, Input } from '@angular/core';
             <ng-content></ng-content>
         </ng-container>
     `,
+    standalone: true,
+    imports: [
+        NgClass, NgIf, NgStyle
+    ],
 })
 
 export class FlagIconComponent

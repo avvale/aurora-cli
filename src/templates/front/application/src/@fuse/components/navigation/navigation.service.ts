@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class FuseNavigationService
 {
     private _componentRegistry: Map<string, any> = new Map<string, any>();
@@ -160,7 +158,7 @@ export class FuseNavigationService
     getItemParent(
         id: string,
         navigation: FuseNavigationItem[],
-        parent: FuseNavigationItem[] | FuseNavigationItem
+        parent: FuseNavigationItem[] | FuseNavigationItem,
     ): FuseNavigationItem[] | FuseNavigationItem | null
     {
         for ( const item of navigation )

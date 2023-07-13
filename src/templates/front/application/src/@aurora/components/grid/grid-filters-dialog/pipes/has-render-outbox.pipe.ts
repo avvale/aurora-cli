@@ -6,6 +6,7 @@ import { GridColumnFilter } from '../../grid.types';
  */
 @Pipe({
     name: 'hasRenderOutbox',
+    standalone: true,
 })
 export class HasRenderOutboxPipe implements PipeTransform
 {

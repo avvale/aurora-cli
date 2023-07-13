@@ -44,7 +44,8 @@
                             "dayjs/plugin/timezone",
                             "dayjs/plugin/isoWeek",
                             "dayjs/plugin/utc",
-                            "dayjs/plugin/weekOfYear"
+                            "dayjs/plugin/weekOfYear",
+                            "quill"
                         ],
                         "assets": [
                             "src/favicon-16x16.png",

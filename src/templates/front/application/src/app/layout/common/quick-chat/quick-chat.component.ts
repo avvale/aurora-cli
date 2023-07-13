@@ -1,16 +1,24 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Inject, NgZone, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
-import { Subject, takeUntil } from 'rxjs';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { DatePipe, DOCUMENT, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Inject, NgZone, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { FuseScrollbarDirective } from '@fuse/directives/scrollbar';
 import { QuickChatService } from 'app/layout/common/quick-chat/quick-chat.service';
 import { Chat } from 'app/layout/common/quick-chat/quick-chat.types';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector     : 'quick-chat',
     templateUrl  : './quick-chat.component.html',
     styleUrls    : ['./quick-chat.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    exportAs     : 'quickChat'
+    exportAs     : 'quickChat',
+    standalone   : true,
+    imports      : [NgClass, NgIf, MatIconModule, MatButtonModule, FuseScrollbarDirective, NgFor, NgTemplateOutlet, MatFormFieldModule, MatInputModule, TextFieldModule, DatePipe],
 })
 export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
 {
@@ -33,7 +41,7 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
         private _renderer2: Renderer2,
         private _ngZone: NgZone,
         private _quickChatService: QuickChatService,
-        private _scrollStrategyOptions: ScrollStrategyOptions
+        private _scrollStrategyOptions: ScrollStrategyOptions,
     )
     {
     }
@@ -48,7 +56,7 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
     @HostBinding('class') get classList(): any
     {
         return {
-            'quick-chat-opened': this.opened
+            'quick-chat-opened': this.opened,
         };
     }
 
@@ -62,10 +70,10 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
     private _resizeMessageInput(): void
     {
         // This doesn't need to trigger Angular's change detection by itself
-        this._ngZone.runOutsideAngular(() => {
-
-            setTimeout(() => {
-
+        this._ngZone.runOutsideAngular(() =>
+        {
+            setTimeout(() =>
+            {
                 // Set the height to 'auto' so we can correctly read the scrollHeight
                 this.messageInput.nativeElement.style.height = 'auto';
 
@@ -87,21 +95,24 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
         // Chat
         this._quickChatService.chat$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((chat: Chat) => {
+            .subscribe((chat: Chat) =>
+            {
                 this.chat = chat;
             });
 
         // Chats
         this._quickChatService.chats$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((chats: Chat[]) => {
+            .subscribe((chats: Chat[]) =>
+            {
                 this.chats = chats;
             });
 
         // Selected chat
         this._quickChatService.chat$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((chat: Chat) => {
+            .subscribe((chat: Chat) =>
+            {
                 this.selectedChat = chat;
             });
     }
@@ -117,8 +128,10 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
         // adding the '.cdk-global-scrollblock' to the html element breaks the navigation's position.
         // This fixes the problem by reading the 'top' value from the html element and adding it as a
         // 'marginTop' to the navigation itself.
-        this._mutationObserver = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
+        this._mutationObserver = new MutationObserver((mutations) =>
+        {
+            mutations.forEach((mutation) =>
+            {
                 const mutationTarget = mutation.target as HTMLElement;
                 if ( mutation.attributeName === 'class' )
                 {
@@ -136,7 +149,7 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
         });
         this._mutationObserver.observe(this._document.documentElement, {
             attributes     : true,
-            attributeFilter: ['class']
+            attributeFilter: ['class'],
         });
     }
 
@@ -260,7 +273,8 @@ export class QuickChatComponent implements OnInit, AfterViewInit, OnDestroy
         this._scrollStrategy.enable();
 
         // Add an event listener to the overlay
-        this._overlay.addEventListener('click', () => {
+        this._overlay.addEventListener('click', () =>
+        {
             this.close();
         });
     }

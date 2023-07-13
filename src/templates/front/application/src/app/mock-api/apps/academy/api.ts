@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash-es';
 import { FuseMockApiService } from '@fuse/lib/mock-api/mock-api.service';
 import { categories as categoriesData, courses as coursesData, demoCourseSteps as demoCourseStepsData } from 'app/mock-api/apps/academy/data';
+import { cloneDeep } from 'lodash-es';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class AcademyMockApi
 {
     private _categories: any[] = categoriesData;
@@ -35,8 +33,8 @@ export class AcademyMockApi
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
             .onGet('api/apps/academy/categories')
-            .reply(() => {
-
+            .reply(() =>
+            {
                 // Clone the categories
                 const categories = cloneDeep(this._categories);
 
@@ -51,8 +49,8 @@ export class AcademyMockApi
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
             .onGet('api/apps/academy/courses')
-            .reply(() => {
-
+            .reply(() =>
+            {
                 // Clone the courses
                 const courses = cloneDeep(this._courses);
 
@@ -64,8 +62,8 @@ export class AcademyMockApi
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
             .onGet('api/apps/academy/courses/course')
-            .reply(({request}) => {
-
+            .reply(({request}) =>
+            {
                 // Get the id from the params
                 const id = request.params.get('id');
 
@@ -82,7 +80,7 @@ export class AcademyMockApi
 
                 return [
                     200,
-                    course
+                    course,
                 ];
             });
     }
