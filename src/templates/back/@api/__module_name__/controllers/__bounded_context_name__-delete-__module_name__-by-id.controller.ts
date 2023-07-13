@@ -1,8 +1,8 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Body' 'Controller' 'Param' 'Delete')  path='@nestjs/common')
-            (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation')  path='@nestjs/swagger')
+            (object items=(array 'Body' 'Controller' 'Param' 'Delete') path='@nestjs/common')
+            (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation') path='@nestjs/swagger')
             (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
             (object
                 items=
@@ -12,7 +12,6 @@
                     (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdHandler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)) 
-    
             )
     )
 ~}}
