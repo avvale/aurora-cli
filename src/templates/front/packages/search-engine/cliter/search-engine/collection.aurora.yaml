@@ -1,0 +1,79 @@
+version: 0.0.1
+boundedContextName: search-engine
+moduleName: collection
+moduleNames: collections
+aggregateName: SearchEngineCollection
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+    index: unique
+  - name: alias
+    type: varchar
+    maxLength: 255
+    nullable: true
+    index: unique
+  - name: status
+    type: enum
+    enumOptions:
+      - CONSOLIDATED
+      - INDEXING
+    nullable: false
+    defaultValue: CONSOLIDATED
+    example: SearchEngineCollectionStatus.CONSOLIDATED
+  - name: documentsNumber
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: defaultSortingField
+    type: varchar
+    maxLength: 255
+    nullable: true
+  - name: numMemoryShards
+    type: smallint.unsigned
+    maxLength: 5
+    nullable: true
+  - name: timestampCreatedAt
+    type: int.unsigned
+    maxLength: 10
+    nullable: true
+  - name: isEnableNestedFields
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
+  - name: fields
+    type: relationship
+    nullable: true
+    relationship:
+      type: one-to-many
+      singularName: field
+      aggregate: SearchEngineField
+      modulePath: search-engine/field
+      key: collectionId
+      avoidConstraint: true
+    webComponent:
+      type: grid-elements-manager
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+aggregateI18nProperties: []
+additionalApis:
+  - path: search-engine/collection/index
+    resolverType: mutation
+    httpMethod: post

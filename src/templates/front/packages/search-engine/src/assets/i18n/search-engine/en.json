@@ -1,0 +1,18 @@
+{
+    "Alias": "Alias",
+    "Collection": "Collection",
+    "CollectionId": "CollectionId",
+    "Collections": "Collections",
+    "DefaultSortingField": "DefaultSortingField",
+    "DocumentsNumber": "DocumentsNumber",
+    "Field": "Field",
+    "Fields": "Fields",
+    "IndexWarning": "You are going to index collection {{ alias }}",
+    "IsEnableNestedFields": "IsEnableNestedFields",
+    "IsNullable": "IsNullable",
+    "Name": "Name",
+    "NumMemoryShards": "NumMemoryShards",
+    "Status": "Status",
+    "TimestampCreatedAt": "TimestampCreatedAt",
+    "Type": "Type"
+}

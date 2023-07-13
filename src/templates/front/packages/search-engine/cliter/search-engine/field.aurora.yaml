@@ -1,0 +1,49 @@
+version: 0.0.1
+boundedContextName: search-engine
+moduleName: field
+moduleNames: fields
+aggregateName: SearchEngineField
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: collectionId
+    type: id
+    length: 36
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregate: SearchEngineCollection
+      modulePath: search-engine/collection
+      key: id
+      field: collection
+      avoidConstraint: true
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: type
+    type: varchar
+    maxLength: 20
+    nullable: false
+  - name: isNullable
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+aggregateI18nProperties: []
+additionalApis: []
