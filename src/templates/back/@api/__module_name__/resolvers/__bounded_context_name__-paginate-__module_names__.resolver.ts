@@ -31,6 +31,7 @@
 (object items=(array 'ContentLanguage') path=config.auroraCorePackage)
 ~}}
 {{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Resolver()
 {{#if schema.hasOAuth}}
 @Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
