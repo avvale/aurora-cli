@@ -1,7 +1,7 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Args' 'Query' 'Mutation') path='@nestjs/graphql')
+            (object items=(array 'Args' 'Resolver' 'Mutation') path='@nestjs/graphql')
             (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
@@ -19,7 +19,7 @@
 {{/if}}
 {{#if schema.hasTenant}}
 {{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+    (object items='AccountResponse' pathñ=(sumStrings config.appContainer '/iam/account'))
     (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
     (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
