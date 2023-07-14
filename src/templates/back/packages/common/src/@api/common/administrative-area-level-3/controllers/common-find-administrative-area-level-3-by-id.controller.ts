@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { CommonAdministrativeAreaLevel3Dto } from '../dto';
+import { CommonAdministrativeAreaLevel3Dto, CommonFindAdministrativeAreaLevel3ByIdHandler } from '@api/common/administrative-area-level-3';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { CommonFindAdministrativeAreaLevel3ByIdHandler } from '../handlers/common-find-administrative-area-level-3-by-id.handler';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] administrative-area-level-3')
 @Controller('common/administrative-area-level-3/find')

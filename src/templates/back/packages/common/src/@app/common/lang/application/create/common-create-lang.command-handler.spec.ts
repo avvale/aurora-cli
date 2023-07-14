@@ -1,10 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 import { CommonCreateLangCommandHandler } from './common-create-lang.command-handler';
-import { CommonCreateLangCommand } from './common-create-lang.command';
 import { CommonCreateLangService } from './common-create-lang.service';
+import { CommonCreateLangCommand, commonMockLangData } from '@app/common/lang';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateLangCommandHandler', () =>
 {

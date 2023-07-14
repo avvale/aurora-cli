@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonFindAdministrativeAreaLevel2Controller, CommonFindAdministrativeAreaLevel2Handler } from '@api/common/administrative-area-level-2';
+import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindAdministrativeAreaLevel2Controller } from './common-find-administrative-area-level-2.controller';
-import { CommonFindAdministrativeAreaLevel2Handler } from '../handlers/common-find-administrative-area-level-2.handler';
-
-// sources
-import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.data';
 
 describe('CommonFindAdministrativeAreaLevel2Controller', () =>
 {

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonGetLangsController, CommonGetLangsHandler } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonGetLangsController } from './common-get-langs.controller';
-import { CommonGetLangsHandler } from '../handlers/common-get-langs.handler';
-
-// sources
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonGetLangsController', () =>
 {

@@ -22,11 +22,11 @@ import { CommonAdministrativeAreaLevel2Model } from '@app/common/administrative-
 		},
 		{
 			fields: ['name'],
-			unique: true,
+			unique: false,
 		},
 		{
 			fields: ['slug'],
-			unique: true,
+			unique: false,
 		},
 
     ],

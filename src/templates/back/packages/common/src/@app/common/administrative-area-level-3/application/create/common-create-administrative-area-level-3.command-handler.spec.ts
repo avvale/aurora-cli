@@ -1,10 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.data';
 import { CommonCreateAdministrativeAreaLevel3CommandHandler } from './common-create-administrative-area-level-3.command-handler';
-import { CommonCreateAdministrativeAreaLevel3Command } from './common-create-administrative-area-level-3.command';
 import { CommonCreateAdministrativeAreaLevel3Service } from './common-create-administrative-area-level-3.service';
+import { CommonCreateAdministrativeAreaLevel3Command, commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateAdministrativeAreaLevel3CommandHandler', () =>
 {

@@ -1,11 +1,6 @@
+import { CommonCreateCountriesController, CommonCreateCountriesHandler } from '@api/common/country';
+import { commonMockCountryData } from '@app/common/country';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonCreateCountriesController } from './common-create-countries.controller';
-import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
-
-// sources
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
 
 describe('CommonCreateCountriesController', () =>
 {
