@@ -3,8 +3,9 @@ boundedContextName: common
 moduleName: administrative-area-level-3
 moduleNames: administrative-areas-level-3
 aggregateName: CommonAdministrativeAreaLevel3
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
+hasAuditing: true
 aggregateProperties:
   - name: id
     type: id
@@ -15,32 +16,35 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: CommonCountry
-    relationshipModulePath: common/country
-    relationshipKey: id
-    relationshipField: country
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: CommonCountry
+      modulePath: common/country
+      key: id
+      field: country
+      avoidConstraint: true
   - name: administrativeAreaLevel1Id
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: CommonAdministrativeAreaLevel1
-    relationshipModulePath: common/administrative-area-level-1
-    relationshipKey: id
-    relationshipField: administrativeAreaLevel1
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: CommonAdministrativeAreaLevel1
+      modulePath: common/administrative-area-level-1
+      key: id
+      field: administrativeAreaLevel1
+      avoidConstraint: true
   - name: administrativeAreaLevel2Id
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: CommonAdministrativeAreaLevel2
-    relationshipModulePath: common/administrative-area-level-2
-    relationshipKey: id
-    relationshipField: administrativeAreaLevel2
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: CommonAdministrativeAreaLevel2
+      modulePath: common/administrative-area-level-2
+      key: id
+      field: administrativeAreaLevel2
+      avoidConstraint: true
   - name: code
     type: varchar
     maxLength: 8
@@ -53,28 +57,39 @@ aggregateProperties:
     index: unique
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 100
     nullable: false
+    index: index
   - name: slug
     type: varchar
-    maxLength: 255
+    maxLength: 100
     nullable: false
+    index: index
   - name: latitude
     type: decimal
     decimals:
-      - 17
-      - 4
+      - 16
+      - 14
     nullable: true
   - name: longitude
     type: decimal
     decimals:
       - 17
-      - 4
+      - 14
     nullable: true
   - name: zoom
     type: int.unsigned
     maxLength: 2
     nullable: true
+  - name: mapType
+    type: enum
+    enumOptions:
+      - ROADMAP
+      - SATELLITE
+      - HYBRID
+      - TERRAIN
+    nullable: false
+    example: CommonAdministrativeAreaLevel3MapType.TERRAIN
   - name: createdAt
     type: timestamp
     nullable: true
@@ -84,3 +99,5 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+aggregateI18nProperties: []
+additionalApis: []

@@ -3,8 +3,9 @@ boundedContextName: common
 moduleName: administrative-area-level-1
 moduleNames: administrative-areas-level-1
 aggregateName: CommonAdministrativeAreaLevel1
-hasOAuth: false
+hasOAuth: true
 hasTenant: false
+hasAuditing: true
 aggregateProperties:
   - name: id
     type: id
@@ -15,12 +16,13 @@ aggregateProperties:
     type: id
     length: 36
     nullable: false
-    relationship: many-to-one
-    relationshipAggregate: CommonCountry
-    relationshipModulePath: common/country
-    relationshipKey: id
-    relationshipField: country
-    relationshipAvoidConstraint: true
+    relationship:
+      type: many-to-one
+      aggregate: CommonCountry
+      modulePath: common/country
+      key: id
+      field: country
+      avoidConstraint: true
   - name: code
     type: varchar
     maxLength: 8
@@ -33,28 +35,39 @@ aggregateProperties:
     index: unique
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 100
     nullable: false
+    index: index
   - name: slug
     type: varchar
-    maxLength: 255
+    maxLength: 100
     nullable: false
+    index: index
   - name: latitude
     type: decimal
     decimals:
-      - 17
-      - 4
+      - 16
+      - 14
     nullable: true
   - name: longitude
     type: decimal
     decimals:
       - 17
-      - 4
+      - 14
     nullable: true
   - name: zoom
     type: int.unsigned
     maxLength: 2
     nullable: true
+  - name: mapType
+    type: enum
+    enumOptions:
+      - ROADMAP
+      - SATELLITE
+      - HYBRID
+      - TERRAIN
+    nullable: false
+    example: CommonAdministrativeAreaLevel1MapType.TERRAIN
   - name: createdAt
     type: timestamp
     nullable: true
@@ -64,3 +77,5 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+aggregateI18nProperties: []
+additionalApis: []

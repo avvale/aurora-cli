@@ -14,7 +14,7 @@ export const commonNavigation: FuseNavigationItem = {
             id   : 'langs',
             title: 'Lang',
             type : 'basic',
-            icon : 'language',
+            icon : 'mat_outline:language',
             link : '/common/lang',
             meta : {
                 permission: 'common.lang.access',
@@ -24,11 +24,35 @@ export const commonNavigation: FuseNavigationItem = {
             id   : 'countries',
             title: 'Country',
             type : 'basic',
-            icon : 'flag',
+            icon : 'mat_outline:flag',
             link : '/common/country',
             meta : {
                 permission: 'common.country.access',
             },
+        },
+        {
+            id   : 'administrativeAreasLevel1',
+            title: 'AdministrativeAreaLevel1',
+            type : 'basic',
+            icon : 'mat_outline:share_location',
+            link : '/common/administrative-area-level-1',
+            meta : {
+                permission: 'common.administrativeAreaLevel1.access',
+            },
+        },
+        {
+            id   : 'administrativeAreasLevel2',
+            title: 'AdministrativeAreaLevel2',
+            type : 'basic',
+            icon : 'mat_outline:share_location',
+            link : '/common/administrative-area-level-2',
+        },
+        {
+            id   : 'administrativeAreasLevel3',
+            title: 'AdministrativeAreaLevel3',
+            type : 'basic',
+            icon : 'mat_outline:share_location',
+            link : '/common/administrative-area-level-3',
         },
     ],
 };
