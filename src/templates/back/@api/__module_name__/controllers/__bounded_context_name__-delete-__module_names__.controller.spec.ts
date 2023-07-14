@@ -18,15 +18,6 @@
 {{ push importsArray
     (object items=(array 'CacheModule') path='@nestjs/cache-manager')
 ~}}
-{{#eq schema.boundedContext 'common'}}
-    {{ push importsArray
-        (object items=(array 'langs') path=(sumStrings config.appContrainer '/common/lang'))
-    }}
-    {{else}}
-    {{ push importsArray
-        (object items=(array 'langs') path='@aurorajs.dev/common')
-    }}
-{{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Controller', () =>
