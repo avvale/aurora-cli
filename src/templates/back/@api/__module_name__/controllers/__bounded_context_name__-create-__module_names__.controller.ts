@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 {{
     setVar 'importsArray' (
         array
@@ -13,7 +14,7 @@
                         (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-            )    
+            )
     )
 ~}}
 {{#if schema.hasTenant}}
@@ -26,11 +27,6 @@
 {{#if schema.hasOAuth}}
 {{ push importsArray
     (object items='Auth' path='@aurora/decorators')
-~}}
-{{/if}}
-{{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

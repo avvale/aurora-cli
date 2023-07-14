@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 {{
     setVar 'importsArray' (
         array
@@ -12,7 +13,7 @@
                         (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )      
+        )
     )
 ~}}
 {{#if schema.properties.hasI18n}}
