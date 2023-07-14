@@ -7,8 +7,8 @@
                 items=
                 (
                     array
-                    (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Controller')
-                    (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Handler')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Controller')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
@@ -18,15 +18,6 @@
 {{ push importsArray
     (object items=(array 'CacheModule') path='@nestjs/cache-manager')
 ~}}
-{{#eq schema.boundedContext 'common'}}
-    {{ push importsArray
-        (object items=(array 'langs') path=(sumStrings config.appContrainer '/common/lang'))
-    }}
-    {{else}}
-    {{ push importsArray
-        (object items=(array 'langs') path='@aurorajs.dev/common')
-    }}
-{{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Controller', () =>
