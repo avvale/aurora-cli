@@ -1,20 +1,37 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Resolver' 'Args' 'Mutation') path='@nestjs/graphql')
+            (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
+            (object
+                items=
+                (
+                    array
+                    (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Handler')
+                )
+                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )      
+    )
+~}}
+{{#if schema.properties.hasI18n}}
+{{ push importsArray
+(object items='ContentLanguage' path=config.auroraCorePackage)
+~}}
+{{/if}}
 {{#if schema.hasOAuth}}
-import { Auth } from '@aurora/decorators';
+{{ push importsArray
+(object items='Auth' path='@aurora/decorators')
+~}}
 {{/if}}
 {{#if schema.hasTenant}}
-
-// tenant
-import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
+{{ push importsArray
+(object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+(object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+(object items='CurrentAccount' path=config.auroraCorePackage)
+~}}
 {{/if}}
-
-// {{ config.appContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.handler';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '@api/graphql';
-
+{{{ importManager (object imports=importsArray) }}}
 @Resolver()
 {{#if schema.hasOAuth}}
 @Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.delete')
