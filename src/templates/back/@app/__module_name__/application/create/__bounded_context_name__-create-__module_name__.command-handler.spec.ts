@@ -7,11 +7,25 @@
                 (
                     array
                         (sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'CommandHandler')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Command')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Service')
                 )
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'CommandHandler')
+                )
+                path=(sumStrings './' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.command-handler')    
+            )
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Service')
+                )
+                path=(sumStrings './' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.service')    
             )
     )
 ~}}
