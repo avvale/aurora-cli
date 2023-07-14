@@ -1,14 +1,27 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'ApiProperty') path='@nestjs/swagger')
+    )
+~}}
 {{#each schema.properties.withImportRelationshipOneToOne}}
-{{#unlessEq type ../propertyType.ID }}
-import { {{ toPascalCase getRelationshipBoundedContextName }}Create{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContextName }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContextName }}-create-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';
+{{#unlessEq type ../propertyType.ID}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) 'Create' (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-' (toKebabCase getRelationshipModuleName) '.dto'))
+~}}
 {{/unlessEq}}
 {{/each}}
 {{#if schema.properties.hasEnum}}
-import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{/each}} } from '@api/graphql';
+{{#each schema.properties.isEnum}}
+{{#unless @first}},
+{{/unless}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')
+~}}
+{{/each}}
 {{/if}}
-
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto
 {
 {{#each schema.properties.dtoInputProperties}}

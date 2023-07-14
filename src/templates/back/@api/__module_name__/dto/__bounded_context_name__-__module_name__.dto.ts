@@ -1,23 +1,42 @@
 /* eslint-disable indent */
-// import { ApiProperty } from '@nestjs/swagger';
-// {{#each schema.properties.withImportRelationshipManyToMany}}
-// import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContextName }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';
-// {{/each}}
-// {{#each schema.properties.withImportRelationshipManyToOne}}
-// {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-// import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContextName }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';
-// {{/unless}}
-// {{/each}}
-// {{#each schema.properties.withImportRelationshipOneToMany}}
-// import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContextName }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';
-// {{/each}}
-// {{#each schema.properties.withImportRelationshipOneToOne}}
-// import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}../../../{{ toKebabCase getRelationshipBoundedContextName }}/{{ toKebabCase getRelationshipModuleName }}/dto/{{ toKebabCase getRelationshipBoundedContextName }}-{{ toKebabCase getRelationshipModuleName }}.dto{{/if}}';
-// {{/each}}
-// {{#if schema.properties.hasEnum}}
-// import { {{#each schema.properties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{/each}} } from '@api/graphql';
-// {{/if}}
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'ApiProperty') path='@nestjs/swagger')
+    )
+~}}
+{{#each schema.properties.withImportRelationshipManyToMany}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-' (toKebabCase getRelationshipModuleName) '.dto'))
+~}}
+{{/each}}
+{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#unless (isI18nRelationProperty schema.moduleName this)}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-' (toKebabCase getRelationshipModuleName) '.dto'))
+~}}
+{{/unless}}
+{{/each}}
+{{#each schema.properties.withImportRelationshipOneToMany}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-' (toKebabCase getRelationshipModuleName) '.dto'))
+~}}
+{{/each}}
+{{#each schema.properties.withImportRelationshipOneToOne}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-' (toKebabCase getRelationshipModuleName) '.dto'))
+~}}
+{{/each}}
+{{#if schema.properties.hasEnum}}
+{{#each schema.properties.isEnum}}
+{{#unless @first}},
+{{/unless}}
+{{ push ../importsArray
+(object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')
+~}}
+{{/each}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto
 {
 {{#each schema.properties.dtoProperties}}
