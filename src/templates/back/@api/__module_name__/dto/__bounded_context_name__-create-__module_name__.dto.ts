@@ -8,7 +8,7 @@
 {{#each schema.properties.withImportRelationshipOneToOne}}
 {{#unlessEq type ../propertyType.ID}}
 {{ push ../importsArray
-(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) 'Create' (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-' (toKebabCase getRelationshipModuleName) '.dto'))
+(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) 'Create' (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-create-' (toKebabCase getRelationshipModuleName) '.dto'))
 ~}}
 {{/unlessEq}}
 {{/each}}
