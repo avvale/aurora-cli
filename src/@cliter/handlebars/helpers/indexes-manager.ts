@@ -48,7 +48,7 @@ handlebars.registerHelper('indexesManager', function(
         {
             response += '\t\t{\n';
             response += `\t\t\tfields: ['${index.name}'],\n`;
-            response += `\t\t\tunique: ${indexedGrouped.undefined[0].index === 'unique' ? 'true' : 'false'},\n`;
+            response += `\t\t\tunique: ${index.index === 'unique' ? 'true' : 'false'},\n`;
             response += '\t\t},\n';
         }
     }
