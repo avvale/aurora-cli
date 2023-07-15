@@ -38,7 +38,7 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@oclif/test": "^2.3.8",
+        "@oclif/test": "^2.3.28",
         "@types/chai": "^4",
         "@types/faker": "^5.5.9",
         "@types/handlebars": "^4.1.0",
