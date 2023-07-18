@@ -33,6 +33,7 @@
         "@rxweb/reactive-form-validators": "^13.0.1",
         "apexcharts": "3.40.0",
         "apollo-angular": "^5.0.0",
+        "apollo-upload-client": "^17.0.0",
         "crypto-js": "3.3.0",
         "dayjs": "^1.11.9",
         "file-saver": "^2.0.5",
