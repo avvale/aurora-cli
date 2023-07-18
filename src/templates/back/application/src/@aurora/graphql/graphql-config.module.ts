@@ -23,10 +23,6 @@ import GraphQLJSON from 'graphql-type-json';
                 definitions: configService.get('GRAPHQL_CREATE_DEFINITIONS') === 'true' ?  {
                     path: join(process.cwd(), 'src/@api/graphql.ts'),
                 } : undefined,
-                /* uploads: {
-                    maxFileSize: 100000000, // 100 MB
-                    maxFiles   : 5,
-                } */
             }),
             inject: [ConfigService],
         }),
