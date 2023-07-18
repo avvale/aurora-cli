@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService, Credentials, GraphQLService } from '@aurora';
+import { Credentials, GraphQLService } from '@aurora';
+import { AuthenticationService } from '@aurora/modules/authentication';
 import { MsalService } from '@azure/msal-angular';
 import { lastValueFrom, Observable, of } from 'rxjs';
 

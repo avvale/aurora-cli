@@ -1,10 +1,11 @@
 import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache, NormalizedCacheObject } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { AuthenticationService, extractGraphqlMessageErrors, extractGraphqlStatusErrorCodes, Utils, log } from '@aurora';
+import { AuthenticationService, Utils, extractGraphqlMessageErrors, extractGraphqlStatusErrorCodes, log } from '@aurora';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { TranslocoService } from '@ngneat/transloco';
 import { HttpLink } from 'apollo-angular/http/http-link';
+import { createUploadLink } from 'apollo-upload-client';
 import { environment } from 'environments/environment';
 import { lastValueFrom } from 'rxjs';
 
@@ -135,7 +136,13 @@ export const apolloFactory = (
         timezone,
         auth,
         error,
-        httpLink.create({
+        /**
+         * Apollo upload client, replace to
+         *  httpLink.create({
+         *    uri: environment.api.graphql,
+         *  }),
+         */
+        createUploadLink({
             uri: environment.api.graphql,
         }),
     ]);

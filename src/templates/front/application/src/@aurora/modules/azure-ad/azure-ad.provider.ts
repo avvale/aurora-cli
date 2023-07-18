@@ -109,6 +109,7 @@ export const provideAzureAd = (): Array<Provider | EnvironmentProviders> =>
             provide : IamService,
             useClass: IamAzureAdAdapterService,
         },
+        MsalGuard,
         MsalService,
         MsalBroadcastService,
     ];

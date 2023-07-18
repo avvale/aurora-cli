@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Account, IamService, log } from '@aurora';
+import { Account, log } from '@aurora';
+import { IamService } from '@aurora/modules/iam';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { InteractionStatus } from '@azure/msal-browser';
 import { filter, map, Observable, of, ReplaySubject } from 'rxjs';
