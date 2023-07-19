@@ -24,8 +24,9 @@
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
-{{ push importsArray
-    (object items='Auth' path='@aurora/decorators')
+{{ 
+    push importsArray
+        (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
 {{#if schema.properties.hasI18n}}
