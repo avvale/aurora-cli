@@ -28,11 +28,6 @@
     (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
-{{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
-~}}
-{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleNames }}/create')
