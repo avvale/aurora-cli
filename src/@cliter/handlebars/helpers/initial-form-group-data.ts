@@ -6,13 +6,15 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
     switch (property.type)
     {
         case PropertyType.CHAR:
-        case PropertyType.ENUM:
         case PropertyType.ID:
         case PropertyType.TEXT:
         case PropertyType.TIMESTAMP:
         case PropertyType.VARCHAR:
             return `''`;
 
+        case PropertyType.ENUM:
+        case PropertyType.TINYINT:
+        case PropertyType['TINYINT.UNSIGNED']:
         case PropertyType.INT:
         case PropertyType['INT.UNSIGNED']:
         case PropertyType.SMALLINT:

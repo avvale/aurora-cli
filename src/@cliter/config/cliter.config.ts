@@ -70,7 +70,7 @@ export const cliterConfig: CliterConfig =
         float              : 'NUMBER',
         id                 : 'STRING',
         int                : 'NUMBER',
-        json               : '',
+        json               : 'STRING',
         manyToMany         : '',
         password           : 'STRING',
         smallint           : 'NUMBER',
