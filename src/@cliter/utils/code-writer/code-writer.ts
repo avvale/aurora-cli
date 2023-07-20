@@ -608,11 +608,11 @@ export class CodeWriter
 
         // providers
         const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
-        const providersArray: ArrayLiteralExpression = providers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression) as ArrayLiteralExpression;
+        const providersArray: ArrayLiteralExpression = providers?.getInitializer() as ArrayLiteralExpression;
 
         // controllers
         const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
-        const controllersArray = controllers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const controllersArray = controllers?.getInitializer() as ArrayLiteralExpression;
 
         // register imports from bounded context from @app
         ImportDriver.createImportItems(
@@ -763,7 +763,7 @@ export class CodeWriter
     private getModelArrayArgument(moduleDecoratorArguments: ObjectLiteralExpression): ArrayLiteralExpression
     {
         const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
-        const importsArray: ArrayLiteralExpression = importsArgument.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const importsArray: ArrayLiteralExpression = importsArgument.getInitializer() as ArrayLiteralExpression;
         const importsElements = importsArray.getElements();
         const SequelizeModuleElement: CallExpression = importsElements.find(el => el.getText().indexOf('SequelizeModule.forFeature') === 0) as CallExpression;
         return SequelizeModuleElement.getArguments()[0] as ArrayLiteralExpression;
