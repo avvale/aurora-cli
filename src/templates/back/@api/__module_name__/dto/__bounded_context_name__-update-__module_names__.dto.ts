@@ -9,7 +9,7 @@
 {{#unlessEq type ../propertyType.ID}}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) 'Update' (toPascalCase getRelationshipModuleNames) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/dto/' (toKebabCase getRelationshipBoundedContextName) '-update-' (toKebabCase getRelationshipModuleNames) '.dto'))
+        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) 'Update' (toPascalCase getRelationshipModuleNames) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/unlessEq}}
 {{/each}}
