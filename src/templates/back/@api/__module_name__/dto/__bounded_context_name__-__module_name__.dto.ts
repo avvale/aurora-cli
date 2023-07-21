@@ -33,8 +33,6 @@
 {{/each}}
 {{#if schema.properties.hasEnum}}
 {{#each schema.properties.isEnum}}
-{{#unless @first}},
-{{/unless}}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')
