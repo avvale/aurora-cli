@@ -6,8 +6,9 @@
     )
 ~}}
 {{#each schema.properties.withImportRelationshipManyToMany}}
-{{ push ../importsArray
-(object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+{{ 
+    push ../importsArray
+        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/each}}
 {{#each schema.properties.withImportRelationshipManyToOne}}
