@@ -8,27 +8,30 @@
                 items=
                 (
                     array
-                    (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Handler')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
         )      
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-(object items='ContentLanguage' path=config.auroraCorePackage)
+{{ 
+    push importsArray
+        (object items='ContentLanguage' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
-{{ push importsArray
-(object items='Auth' path='@aurora/decorators')
+{{ 
+    push importsArray
+        (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
-{{ push importsArray
-(object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-(object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
-(object items='CurrentAccount' path=config.auroraCorePackage)
+{{ 
+    push importsArray
+        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
