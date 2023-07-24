@@ -18,8 +18,9 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-(object items=(array 'CacheModule') path='@nestjs/cache-manager')
+{{
+    push importsArray
+        (object items=(array 'CacheModule') path='@nestjs/cache-manager')
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
