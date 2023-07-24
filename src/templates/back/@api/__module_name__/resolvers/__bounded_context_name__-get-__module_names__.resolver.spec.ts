@@ -8,26 +8,18 @@
                 items=
                 (
                     array
-                    (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Resolver')
-                    (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Resolver')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
         )
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items=(array 'CacheModule') path='@nestjs/cache-manager')
+{{
+    push importsArray
+        (object items=(array 'CacheModule') path='@nestjs/cache-manager')
 ~}}
-{{#eq schema.boundedContext 'common'}}
-    {{ push importsArray
-        (object items=(array 'langs') path=(sumStrings config.appContrainer '/common/lang'))
-    }}
-    {{else}}
-    {{ push importsArray
-        (object items=(array 'langs') path='@aurorajs.dev/common')
-    }}
-{{/eq}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver', () =>
