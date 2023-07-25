@@ -3,7 +3,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
-            (object items=(array 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
+            (object items=(array 'IQueryBus') path=config.auroraCorePackage)
             (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
@@ -22,7 +22,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
 {
     let handler: {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -55,12 +54,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
                 {{#if schema.properties.hasI18n}}
                 {
                     provide : CoreGetSearchKeyLangService,
@@ -75,7 +68,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
 
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>

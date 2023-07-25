@@ -13,7 +13,7 @@
     push importsArray
         (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
         (object items='ConfigService' path='@nestjs/config')
-        (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetContentLanguageObjectService' 'CoreGetFallbackLangService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
         (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
@@ -22,7 +22,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
 {
     let handler: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -61,13 +60,54 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                         dispatch: () => { /**/ },
                     },
                 },
+                {{#if schema.properties.hasI18n}}
+                {
+                    provide : CoreGetContentLanguageObjectService,
+                    useValue: {
+                        get: () => ({
+                            id        : '7c4754e7-3363-48ca-af99-632522226b51',
+                            name      : 'English',
+                            image     : 'us',
+                            iso6392   : 'en',
+                            iso6393   : 'eng',
+                            ietf      : 'en-US',
+                            customCode: null,
+                            dir       : 'RTL',
+                            sort      : 0,
+                            isActive  : true,
+                        }),
+                    },
+                },
+                {
+                    provide : CoreGetSearchKeyLangService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
+                {
+                    provide : CoreGetFallbackLangService,
+                    useValue: {
+                        get: () => ({
+                            id        : '7c4754e7-3363-48ca-af99-632522226b51',
+                            name      : 'English',
+                            image     : 'us',
+                            iso6392   : 'en',
+                            iso6393   : 'eng',
+                            ietf      : 'en-US',
+                            customCode: null,
+                            dir       : 'RTL',
+                            sort      : 0,
+                            isActive  : true,
+                        }),
+                    },
+                },
+                {{/if}}
             ],
         })
             .compile();
 
         handler = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -80,7 +120,17 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
         test('should return an {{ toCamelCase schema.moduleName }} deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0])));
-            expect(await handler.main({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].id)).toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0]);
+            expect(
+                await handler.main(
+                    {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].id,
+                    {},
+                    'Europe/Madrid',
+                    {{#if schema.properties.hasI18n}}
+                    'en',
+                    {{/if}}
+                ),
+            )
+                .toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0]);
         });
     });
 });
