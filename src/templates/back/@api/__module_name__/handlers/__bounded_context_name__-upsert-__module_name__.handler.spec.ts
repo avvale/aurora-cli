@@ -97,8 +97,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
             expect(
                 await handler.main(
                     {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0],
-                    {{#if schema.properties.hasI18n}}
                     'Europe/Madrid',
+                    {{#if schema.properties.hasI18n}}
                     'en',
                     {{/if}}
                 ))

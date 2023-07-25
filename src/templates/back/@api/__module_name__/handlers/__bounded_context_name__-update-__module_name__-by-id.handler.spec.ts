@@ -14,7 +14,7 @@
     push importsArray
         (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
         (object items='ConfigService' path='@nestjs/config')
-        (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetContentLanguageObjectService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
         (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
@@ -62,6 +62,31 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                         dispatch: () => { /**/ },
                     },
                 },
+                {{#if schema.properties.hasI18n}}
+                {
+                    provide : CoreGetContentLanguageObjectService,
+                    useValue: {
+                        get: () => ({
+                            id        : '7c4754e7-3363-48ca-af99-632522226b51',
+                            name      : 'English',
+                            image     : 'us',
+                            iso6392   : 'en',
+                            iso6393   : 'eng',
+                            ietf      : 'en-US',
+                            customCode: null,
+                            dir       : 'RTL',
+                            sort      : 0,
+                            isActive  : true,
+                        }),
+                    },
+                },
+                {
+                    provide : CoreGetSearchKeyLangService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
+                {{/if}}
             ],
         })
             .compile();
@@ -86,7 +111,16 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
         test('should return a {{ toCamelCase schema.moduleName }} updated', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0])));
-            expect(await handler.main(<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput>{{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0])).toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0]);
+            expect(
+                await handler.main(
+                    <{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput>{{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0],
+                    {},
+                    'Europe/Madrid',
+                    {{#if schema.properties.hasI18n}}
+                    'en',
+                    {{/if}}
+                ))
+                .toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0]);
         });
     });
 });
