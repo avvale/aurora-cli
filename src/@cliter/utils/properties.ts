@@ -632,7 +632,7 @@ export class Properties
         return this.properties.filter(property => Boolean(property.minLength));
     }
 
-    get isDecimal(): Property[]
+    get decimalProperties(): Property[]
     {
         return this.properties.filter(property => property.type === PropertyType.DECIMAL);
     }

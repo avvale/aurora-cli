@@ -10,13 +10,13 @@ export class Mocker
         fieldType: string,
         fieldName: string,
         {
-            length = undefined,
-            maxLength = undefined,
-            minLength = undefined,
+            length,
+            maxLength,
+            minLength,
             scapeQuotes = false,
             checkFieldNameMeaning = false,
-            totalDigits = undefined,
-            decimalDigits = undefined,
+            totalDigits,
+            decimalDigits,
         }: {
             length?: number;
             maxLength?: number;

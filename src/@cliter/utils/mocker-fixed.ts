@@ -4,7 +4,7 @@ import randomNumber from './random-number';
 
 export class MockerFixed
 {
-    mock(
+    static mock(
         fieldType: string,
         fieldName: string,
         {
@@ -28,7 +28,7 @@ export class MockerFixed
         // according to the meaning of the field use a faker function to obtain the mock
         if (checkFieldNameMeaning)
         {
-            const mockByFieldNameMeaning = this.mockByFieldNameMeaning(fieldName);
+            const mockByFieldNameMeaning = MockerFixed.mockByFieldNameMeaning(fieldName);
             if (mockByFieldNameMeaning) return mockByFieldNameMeaning;
         }
 
@@ -90,7 +90,7 @@ export class MockerFixed
                 return Number.parseInt('1'.repeat(maxLength));
 
             case 'decimal':
-                return totalDigits && decimalDigits ? Number.parseFloat('1'.repeat(totalDigits) + '.' + '1'.repeat(decimalDigits)) : Number.parseFloat('1'.repeat(5) + '.' + '1'.repeat(2));
+                return totalDigits && decimalDigits ? ('1'.repeat(totalDigits - decimalDigits) + '.' + '1'.repeat(decimalDigits)) : Number.parseFloat('1'.repeat(5) + '.' + '1'.repeat(2));
 
             case 'random.float':
                 return maxLength ? randomNumber(maxLength) : faker.datatype.float();
@@ -122,7 +122,7 @@ export class MockerFixed
         }
     }
 
-    mockByFieldNameMeaning(fieldName: string): string | number | boolean | undefined
+    private static mockByFieldNameMeaning(fieldName: string): string | number | boolean | undefined
     {
         switch (fieldName)
         {

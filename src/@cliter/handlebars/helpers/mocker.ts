@@ -74,7 +74,7 @@ handlebars.registerHelper('mocker', function(
         propertyDecimalDigits = property.decimals[1];
     }
 
-    if (type === MockType.FIXED_DATA) return new MockerFixed().mock(
+    if (type === MockType.FIXED_DATA) return MockerFixed.mock(
         property?.faker ? property.faker : property?.type as string,
         property?.name as string,
         {
