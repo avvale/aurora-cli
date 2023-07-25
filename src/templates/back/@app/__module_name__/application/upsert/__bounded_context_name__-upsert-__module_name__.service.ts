@@ -17,16 +17,18 @@
 ~}}
 {{#each schema.properties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
-{{ push ../importsArray
-    (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+{{
+    push ../importsArray
+        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items=(array 'ConflictException' 'NotFoundException') path='@nestjs/common')
-    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
-    (object items='* as _' path='lodash' defaultImport=true)
+{{
+    push importsArray
+        (object items=(array 'ConflictException' 'NotFoundException') path='@nestjs/common')
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (object items='* as _' path='lodash' defaultImport=true)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

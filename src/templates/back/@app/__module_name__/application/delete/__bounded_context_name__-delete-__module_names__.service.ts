@@ -19,9 +19,10 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
-    (object items='Operator' path=config.auroraCorePackage)
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (object items='Operator' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

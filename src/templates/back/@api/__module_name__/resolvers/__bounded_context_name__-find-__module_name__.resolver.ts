@@ -11,17 +11,17 @@
                         (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )      
+        )
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ 
+{{
     push importsArray
         (object items='ContentLanguage' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
-{{ 
+{{
     push importsArray
         (object items='Auth' path='@aurora/decorators')
 ~}}

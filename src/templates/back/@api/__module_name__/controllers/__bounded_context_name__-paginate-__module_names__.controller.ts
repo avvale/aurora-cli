@@ -16,7 +16,7 @@
     )
 ~}}
 {{#if schema.hasTenant}}
-{{ 
+{{
     push importsArray
         (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
         (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared'))

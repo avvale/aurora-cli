@@ -13,11 +13,11 @@
                         (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )      
+        )
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ 
+{{
     push importsArray
         (object items='ContentLanguage' path=config.auroraCorePackage)
 ~}}

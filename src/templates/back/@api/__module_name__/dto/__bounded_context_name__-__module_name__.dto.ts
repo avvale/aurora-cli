@@ -20,7 +20,7 @@
 {{/unless}}
 {{/each}}
 {{#each schema.properties.withImportRelationshipOneToMany}}
-{{ 
+{{
     push ../importsArray
         (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
 ~}}

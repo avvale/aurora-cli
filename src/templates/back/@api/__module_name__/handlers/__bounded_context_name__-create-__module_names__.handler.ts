@@ -9,8 +9,9 @@
     )
 ~}}
 {{#if schema.hasAuditing}}
-{{ push importsArray
-    (object items=(array 'AuditingMeta') path=config.auroraCorePackage)
+{{
+    push importsArray
+        (object items=(array 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

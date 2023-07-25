@@ -9,10 +9,11 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
-    (object items=(sumStrings (toPascalCase schema.boundedContextName)(toPascalCase schema.moduleName) 'AvailableLangs') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects'))
-    (object items='* as _' path='lodash' defaultImport=true)
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (object items=(sumStrings (toPascalCase schema.boundedContextName)(toPascalCase schema.moduleName) 'AvailableLangs') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects'))
+        (object items='* as _' path='lodash' defaultImport=true)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

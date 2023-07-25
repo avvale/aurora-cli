@@ -8,14 +8,16 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items=(array 'BadRequestException') path='@nestjs/common')
-    (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
+{{
+    push importsArray
+        (object items=(array 'BadRequestException') path='@nestjs/common')
+        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
-{{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+{{
+    push importsArray
+        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

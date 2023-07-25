@@ -18,18 +18,21 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items='ContentLanguage' path=config.auroraCorePackage)
+{{
+    push importsArray
+        (object items='ContentLanguage' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
-{{ push importsArray
-    (object items='Auth' path='@aurora/decorators')
+{{
+    push importsArray
+        (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
 {{#if schema.hasAuditing}}
-{{ push importsArray
-    (object items=(array 'Auditing' 'AuditingMeta') path=config.auroraCorePackage)
+{{
+    push importsArray
+        (object items=(array 'Auditing' 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}

@@ -17,7 +17,7 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ 
+{{
     push importsArray
         (object items='ContentLanguage' path=config.auroraCorePackage)
 ~}}
@@ -29,7 +29,7 @@
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
-{{   
+{{
     push importsArray
         (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
         (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))

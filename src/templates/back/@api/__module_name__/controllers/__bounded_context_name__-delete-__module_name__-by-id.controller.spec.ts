@@ -16,11 +16,12 @@
     )
 ~}}
 {{#if schema.properties.hasI18n}}
-{{ push importsArray
-    (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
-    (object items='ConfigService' path='@nestjs/config')
-    (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
-    (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
+{{
+    push importsArray
+        (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
+        (object items='ConfigService' path='@nestjs/config')
+        (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+        (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
