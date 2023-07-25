@@ -13,7 +13,7 @@
     push importsArray
         (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
         (object items='ConfigService' path='@nestjs/config')
-        (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetContentLanguageObjectService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
         (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
@@ -61,6 +61,20 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
                         dispatch: () => { /**/ },
                     },
                 },
+                {{#if schema.properties.hasI18n}}
+                {
+                    provide : CoreGetContentLanguageObjectService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
+                {
+                    provide : CoreGetSearchKeyLangService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
+                {{/if}}
             ],
         })
             .compile();
@@ -80,7 +94,15 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
         test('should return an {{ toCamelCase schema.moduleName }} upserted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0])));
-            expect(await handler.main({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0])).toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0]);
+            expect(
+                await handler.main(
+                    {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0],
+                    {{#if schema.properties.hasI18n}}
+                    'Europe/Madrid',
+                    'en',
+                    {{/if}}
+                ))
+                .toBe({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0]);
         });
     });
 });

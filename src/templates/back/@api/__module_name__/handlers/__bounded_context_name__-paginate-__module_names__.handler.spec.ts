@@ -13,7 +13,7 @@
     push importsArray
         (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
         (object items='ConfigService' path='@nestjs/config')
-        (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
+        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
         (object items='commonMockLangData' path=(sumStrings config.appContainer '/common/lang'))
 ~}}
 {{/if}}
@@ -61,6 +61,14 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
                         dispatch: () => { /**/ },
                     },
                 },
+                {{#if schema.properties.hasI18n}}
+                {
+                    provide : CoreGetSearchKeyLangService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
+                {{/if}}
             ],
         })
             .compile();
@@ -89,11 +97,21 @@ describe('{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase sc
                 count: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
                 rows : {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
             })));
-            expect(await handler.main()).toEqual({
-                total: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
-                count: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
-                rows : {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    {{#if schema.properties.hasI18n}}
+                    'Europe/Madrid',
+                    'en',
+                    {{/if}}
+                ),
+            )
+                .toEqual({
+                    total: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
+                    count: {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data.length,
+                    rows : {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data,
+                });
         });
     });
 });
