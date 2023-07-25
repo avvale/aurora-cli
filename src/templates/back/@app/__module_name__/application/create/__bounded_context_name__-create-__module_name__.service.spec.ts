@@ -18,11 +18,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
 
 {
     let service: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Service;
-    let repository: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository;
-    {{#if schema.properties.hasI18n}}
-    let repositoryI18n: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository;
-    {{/if}}
-    let mockRepository: {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository;
 
     beforeAll(async () =>
     {
@@ -53,11 +48,6 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
             .compile();
 
         service = module.get({{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Service);
-        repository = module.get({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository);
-        {{#if schema.properties.hasI18n}}
-        repositoryI18n = module.get({{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository,);
-        {{/if}}
-        mockRepository = module.get({{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository);
     });
 
     describe('main', () =>
@@ -103,11 +93,12 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
                                 sort      : 0,
                                 isActive  : true,
                             },
-                        }
+                        },
                     },
                     {{/if}}
                 ),
-            ).toBe(undefined);
+            )
+                .toBe(undefined);
         });
     });
 });

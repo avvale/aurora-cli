@@ -38,51 +38,55 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
 
         {{/if}}
         // get object to delete
-        const {{ toCamelCase schema.moduleName }} = await this.repository.findById(
-            id,
-            {
-                constraint,
-                cQMetadata,
-            },
-        );
+        const {{ toCamelCase schema.moduleName }} = await this.repository
+            .findById(
+                id,
+                {
+                    constraint,
+                    cQMetadata,
+                },
+            );
 
         {{#if schema.properties.hasI18n}}
         if ({{ toCamelCase schema.moduleName }}.langId.value === fallbackLang.id)
         {
             // delete all translations if delete fallback language
-            await this.repository.deleteById(
-                {{ toCamelCase schema.moduleName }}.id,
-                {
-                    deleteOptions: cQMetadata?.repositoryOptions,
-                    cQMetadata,
-                },
-            );
-
-            await this.repositoryI18n.delete(
-                {
-                    queryStatement: {
-                        where: {
-                            {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
-                        },
+            await this.repository
+                .deleteById(
+                    {{ toCamelCase schema.moduleName }}.id,
+                    {
+                        deleteOptions: cQMetadata?.repositoryOptions,
+                        cQMetadata,
                     },
-                    deleteOptions: cQMetadata?.repositoryOptions,
-                },
-            );
+                );
+
+            await this.repositoryI18n
+                .delete(
+                    {
+                        queryStatement: {
+                            where: {
+                                {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
+                            },
+                        },
+                        deleteOptions: cQMetadata?.repositoryOptions,
+                    },
+                );
         }
         else
         {
             // delete only one translation
-            await this.repositoryI18n.delete(
-                {
-                    queryStatement: {
-                        where: {
-                            {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
-                            langId   : contentLanguage.id,
+            await this.repositoryI18n
+                .delete(
+                    {
+                        queryStatement: {
+                            where: {
+                                {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
+                                langId   : contentLanguage.id,
+                            },
                         },
+                        deleteOptions: cQMetadata?.repositoryOptions,
                     },
-                    deleteOptions: cQMetadata?.repositoryOptions,
-                },
-            );
+                );
 
             // update available langs when delete translation
             {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs({{ toCamelCase schema.moduleName }}.availableLangs.value.removeItem(contentLanguage.id));
@@ -104,13 +108,14 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         {{else}}
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
-        await this.repository.deleteById(
-            {{ toCamelCase schema.moduleName }}.id,
-            {
-                deleteOptions: cQMetadata?.repositoryOptions,
-                cQMetadata,
-            },
-        );
+        await this.repository
+            .deleteById(
+                {{ toCamelCase schema.moduleName }}.id,
+                {
+                    deleteOptions: cQMetadata?.repositoryOptions,
+                    cQMetadata,
+                },
+            );
         {{/if}}
 
         // insert EventBus in object, to be able to apply and commit events
