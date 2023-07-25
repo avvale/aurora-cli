@@ -14,19 +14,21 @@
                         (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-            )
+            )    
     )
 ~}}
 {{#if schema.hasTenant}}
-{{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
-    (object items='CurrentAccount' path=config.auroraCorePackage)
+{{   
+    push importsArray
+        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
-{{ push importsArray
-    (object items='Auth' path='@aurora/decorators')
+{{ 
+    push importsArray
+        (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

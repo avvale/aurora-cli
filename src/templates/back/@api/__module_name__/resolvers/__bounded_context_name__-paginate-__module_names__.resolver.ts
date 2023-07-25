@@ -1,20 +1,40 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { {{#if schema.properties.hasI18n}}ContentLanguage, {{/if}}QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
-{{#if schema.hasOAuth}}
-import { Auth } from '@aurora/decorators';
-{{/if}}
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Resolver' 'Args' 'Query') path='@nestjs/graphql')
+            (object items=(array 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
+            (object items=(array 'Pagination') path='@api/graphql')
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Handler')
+                )
+                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+    )
+~}}
 {{#if schema.hasTenant}}
-
-// tenant
-import { AccountResponse } from '{{ config.appContainer }}/iam/account/domain/account.response';
-import { TenantConstraint } from '{{ config.appContainer }}/iam/shared/domain/decorators/tenant-constraint.decorator';
-import { CurrentAccount } from '../../../shared/decorators/current-account.decorator';
+{{
+    push importsArray
+        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='CurrentAccount' path=config.auroraCorePackage)
+~}}
 {{/if}}
-
-// {{ config.appContainer }}
-import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler } from '../handlers/{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.handler';
-import { Pagination } from '@api/graphql';
-
+{{#if schema.hasOAuth}}
+{{
+    push importsArray
+        (object items='Auth' path='@aurora/decorators')
+~}}
+{{/if}}
+{{#if schema.properties.hasI18n}}
+{{
+    push importsArray
+        (object items=(array 'ContentLanguage') path=config.auroraCorePackage)
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Resolver()
 {{#if schema.hasOAuth}}
 @Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.get')
