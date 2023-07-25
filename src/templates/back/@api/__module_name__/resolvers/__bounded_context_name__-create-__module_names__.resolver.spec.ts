@@ -2,20 +2,25 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
-            (object items=(array 'CacheModule') path='@nestjs/cache-manager')
             (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Input') path='@api/graphql')
             (object
                 items=
                 (
                     array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Resolver')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Handler')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Resolver')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleNames) 'Handler')
                 )
                 path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
     )
 ~}}
+{{#if schema.properties.hasI18n}}
+{{
+    push importsArray
+        (object items=(array 'CacheModule') path='@nestjs/cache-manager')
+~}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Resolver', () =>
 {

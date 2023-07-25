@@ -3,7 +3,6 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
-            (object items=(array 'CacheModule') path='@nestjs/cache-manager')
             (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Input') path='@api/graphql')
             (object
