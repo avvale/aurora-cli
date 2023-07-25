@@ -1,23 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command-handler';
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command-handler';
 import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.data';
-import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommand } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command';
-import { Delete{{ toPascalCase schema.moduleName }}ByIdI18nService } from './delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommand } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.command';
+import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nService } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id-i18n.service';
 
 describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler', () =>
 {
-    let commandHandler: Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler;
-    let service: Delete{{ toPascalCase schema.moduleName }}ByIdI18nService;
+    let commandHandler: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler,
+                {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler,
                 {
-                    provide : Delete{{ toPascalCase schema.moduleName }}ByIdI18nService,
+                    provide : {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,8 +25,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
         })
             .compile();
 
-        commandHandler  = module.get<Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler>(Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler);
-        service         = module.get<Delete{{ toPascalCase schema.moduleName }}ByIdI18nService>(Delete{{ toPascalCase schema.moduleName }}ByIdI18nService);
+        commandHandler = module.get<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler>({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommandHandler);
     });
 
     describe('main', () =>
@@ -39,11 +37,14 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
 
         test('should create the value object id and pass them as parameters to the Delete{{ toPascalCase schema.moduleName }}ByIdI18nService', async () =>
         {
-            expect(await commandHandler.execute(
-                new Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommand(
-                    {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].id,
+            expect(
+                await commandHandler.execute(
+                    new {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nCommand(
+                        {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].id,
+                    ),
                 ),
-            )).toBe(undefined);
+            )
+                .toBe(undefined);
         });
     });
 });

@@ -15,28 +15,46 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         {{> declareI18nRepository}}
     ) {}
 
-    async main(id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id, constraint?: QueryStatement, cQMetadata?: CQMetadata): Promise<void>
+    async main(
+        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<void>
     {
         // get object to delete
-        const {{ toCamelCase schema.moduleName }} = await this.repository.findById(id, { constraint, cQMetadata });
+        const {{ toCamelCase schema.moduleName }} = await this.repository
+            .findById(
+                id,
+                {
+                    constraint,
+                    cQMetadata,
+                },
+            );
 
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
-        await this.repositoryI18n.delete({
-            queryStatement: {
-                where: {
-                    langId: {{ toCamelCase schema.moduleName }}.langId.value,
-                    {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
+        await this.repositoryI18n
+            .delete({
+                queryStatement: {
+                    where: {
+                        langId: {{ toCamelCase schema.moduleName }}.langId.value,
+                        {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
+                    },
                 },
-            },
-        });
+            });
 
         const availableLangs = {{ toCamelCase schema.moduleName }}.availableLangs.value.removeItem({{ toCamelCase schema.moduleName }}.langId.value);
 
         // if has not any translation in i18n table, delete record
         if (availableLangs.length === 0)
         {
-            await this.repository.deleteById({{ toCamelCase schema.moduleName }}.id, { cQMetadata });
+            await this.repository
+                .deleteById(
+                    {{ toCamelCase schema.moduleName }}.id,
+                    {
+                        cQMetadata,
+                    },
+                );
         }
         else
         {
