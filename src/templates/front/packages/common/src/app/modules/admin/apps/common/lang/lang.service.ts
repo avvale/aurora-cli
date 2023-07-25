@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
-import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { CommonCreateLang, CommonLang, CommonUpdateLangById, CommonUpdateLangs } from '../common.types';
 import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './lang.graphql';
+import { Injectable } from '@angular/core';
+import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -41,10 +41,12 @@ export class LangService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<CommonLang>>
     {
@@ -56,6 +58,9 @@ export class LangService
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -71,10 +76,12 @@ export class LangService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: CommonLang;
@@ -90,6 +97,9 @@ export class LangService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
@@ -102,16 +112,17 @@ export class LangService
             );
     }
 
-
     find(
         {
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: CommonLang;
@@ -126,6 +137,9 @@ export class LangService
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -144,10 +158,12 @@ export class LangService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: CommonLang[];
@@ -162,6 +178,9 @@ export class LangService
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -179,9 +198,11 @@ export class LangService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: CommonCreateLang;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -192,6 +213,9 @@ export class LangService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -199,9 +223,11 @@ export class LangService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: CommonUpdateLangById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -211,6 +237,9 @@ export class LangService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -221,11 +250,13 @@ export class LangService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: CommonUpdateLangs;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -238,19 +269,37 @@ export class LangService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -259,10 +308,12 @@ export class LangService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -270,7 +321,13 @@ export class LangService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 }

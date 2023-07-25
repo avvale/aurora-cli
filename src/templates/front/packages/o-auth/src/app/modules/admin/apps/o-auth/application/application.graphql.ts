@@ -9,7 +9,8 @@ export const fields = `
     updatedAt
 `;
 
-export const relationsFields = '';
+export const relationsFields = `
+`;
 
 // default methods
 export const paginationQuery = gql`

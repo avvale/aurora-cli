@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, Component, Input, OnChanges, SimpleChanges, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
@@ -7,7 +8,9 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
     templateUrl  : './masonry.component.html',
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations,
-    exportAs     : 'fuseMasonry'
+    exportAs     : 'fuseMasonry',
+    standalone   : true,
+    imports      : [NgTemplateOutlet],
 })
 export class FuseMasonryComponent implements OnChanges, AfterViewInit
 {

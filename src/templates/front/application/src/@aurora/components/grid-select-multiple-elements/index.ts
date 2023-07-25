@@ -1,2 +1,1 @@
-export * from './grid-select-multiple-elements.component';
-export * from './grid-select-multiple-elements.module';
+export * from '@aurora/components/grid-select-multiple-elements/public-api';

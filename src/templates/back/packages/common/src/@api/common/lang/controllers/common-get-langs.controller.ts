@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { CommonLangDto } from '../dto';
+import { CommonGetLangsHandler, CommonLangDto } from '@api/common/lang';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { CommonGetLangsHandler } from '../handlers/common-get-langs.handler';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] lang')
 @Controller('common/langs/get')

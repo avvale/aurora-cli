@@ -1,23 +1,31 @@
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { KeyValuePipe, NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { Action, Crumb, log, mapActions, notEqual, OAuthClientGrantType, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil, BehaviorSubject } from 'rxjs';
-import { IamAccount, IamAccountType, IamRole, IamTenant } from '../iam.types';
-import { AccountService } from './account.service';
-
-// ---- customizations ----
-import { OAuthClient, OAuthScope } from '../../o-auth/o-auth.types';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatOptionSelectionChange } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { BehaviorSubject, Observable, lastValueFrom, takeUntil } from 'rxjs';
 import { ClientService } from '../../o-auth/client/client.service';
+import { OAuthClient, OAuthClientGrantType, OAuthScope } from '../../o-auth/o-auth.types';
+import { IamAccount, IamAccountType, IamRole, IamTenant } from '../iam.types';
 import { RoleService } from '../role/role.service';
 import { TenantService } from '../tenant/tenant.service';
-import { MatOptionSelectionChange } from '@angular/material/core';
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { AccountService } from './account.service';
 
 @Component({
     selector       : 'iam-account-detail',
     templateUrl    : './account-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        KeyValuePipe, MatCheckboxModule, MatPasswordStrengthModule, MatSelectModule, MatToolbarModule, NgForOf,
+    ],
 })
 export class AccountDetailComponent extends ViewDetailComponent
 {
@@ -61,7 +69,7 @@ export class AccountDetailComponent extends ViewDetailComponent
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    async init(): Promise<void>
+    init(): void
     {
         this.tenants$ = this.tenantService.tenants$;
         this.roles$ = this.roleService.roles$;
@@ -112,7 +120,7 @@ export class AccountDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id       : '',
+            id       : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             type     : ['', [Validators.required]],
             code     : ['', [Validators.maxLength(50)]],
             email    : ['', [Validators.required, Validators.maxLength(120)]],
@@ -189,7 +197,7 @@ export class AccountDetailComponent extends ViewDetailComponent
                 }
                 else if (this.currentViewAction.id === 'iam::account.detail.edit')
                 {
-                    this.fg.get('user.repeatPassword').setValidators([Validators.maxLength(50), RxwebValidators.compare({ fieldName: 'password'})]);
+                    this.fg.get('user.repeatPassword').setValidators([Validators.maxLength(50), RxwebValidators.compare({ fieldName: 'password' })]);
                     this.fg.get('user.repeatPassword').updateValueAndValidity();
                 }
                 break;
@@ -207,6 +215,7 @@ export class AccountDetailComponent extends ViewDetailComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'iam::account.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
@@ -285,6 +294,7 @@ export class AccountDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
+                /* #endregion common actions */
         }
     }
 }

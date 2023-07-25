@@ -1,1 +1,1 @@
-export * from './decimal/decimal.module';
+export * from './public-api';

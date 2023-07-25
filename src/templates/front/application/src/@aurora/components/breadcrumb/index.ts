@@ -1,2 +1,1 @@
-export { BreadcrumbModule } from './breadcrumb.module';
-export * from './breadcrumb.types';
+export * from '@aurora/components/breadcrumb/public-api';

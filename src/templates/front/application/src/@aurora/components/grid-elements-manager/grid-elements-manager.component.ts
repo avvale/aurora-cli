@@ -1,16 +1,22 @@
+import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Action } from '@aurora/aurora.types';
+import { GridComponent, GridCustomHeaderTemplateDirective } from '@aurora/components/grid';
 import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
-import { GridElementDetailDialogComponent } from './grid-element-detail-dialog.component';
-import { GridFormElementDetailDialogTemplateDirective } from './directives/grid-form-element-detail-dialog-template.directive';
 import { GridCustomButtonsHeaderDialogTemplateDirective } from './directives/grid-custom-buttons-header-dialog-template.directive';
 import { GridElementsManagerCellValueTemplateDirective } from './directives/grid-elements-manager-cell-value-template.directive';
+import { GridFormElementDetailDialogTemplateDirective } from './directives/grid-form-element-detail-dialog-template.directive';
+import { GridElementDetailDialogComponent } from './grid-element-detail-dialog.component';
 
 @Component({
     selector       : 'au-grid-elements-manager',
     templateUrl    : './grid-elements-manager.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        GridComponent, GridCustomHeaderTemplateDirective, NgForOf, NgIf, NgTemplateOutlet,
+    ],
 })
 export class GridElementsManagerComponent
 {

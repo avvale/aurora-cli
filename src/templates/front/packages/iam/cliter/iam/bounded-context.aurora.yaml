@@ -38,6 +38,8 @@ aggregateProperties:
       aggregate: IamPermission
       modulePath: iam/permission
       avoidConstraint: true
+    webComponent:
+      type: grid-elements-manager
   - name: createdAt
     type: timestamp
     nullable: true

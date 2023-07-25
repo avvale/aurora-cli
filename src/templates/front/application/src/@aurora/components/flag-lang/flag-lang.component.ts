@@ -1,4 +1,8 @@
+import { NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Appearance, CoreLang } from '@aurora';
 
 @Component({
@@ -30,6 +34,10 @@ import { Appearance, CoreLang } from '@aurora';
             >
         </mat-form-field>
     `,
+    standalone: true,
+    imports: [
+        FormsModule, MatFormFieldModule, MatInputModule, NgStyle,
+    ],
 })
 export class FlagLangComponent
 {

@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
-            (object items=(array 'Action' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService' 'log' 'QueryStatementHandler' 'ViewBaseComponent') path='@aurora')
+            (object items=(array 'Action' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService'  'log' 'QueryStatementHandler' 'ViewBaseComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'Observable' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types'))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
@@ -20,6 +20,10 @@
     templateUrl    : './{{ toKebabCase schema.moduleName }}-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseComponent
 {
@@ -200,7 +204,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonDeleteAdministrativeAreasLevel1Controller, CommonDeleteAdministrativeAreasLevel1Handler } from '@api/common/administrative-area-level-1';
+import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteAdministrativeAreasLevel1Controller } from './common-delete-administrative-areas-level-1.controller';
-import { CommonDeleteAdministrativeAreasLevel1Handler } from '../handlers/common-delete-administrative-areas-level-1.handler';
-
-// sources
-import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.data';
 
 describe('CommonDeleteAdministrativeAreasLevel1Controller', () =>
 {

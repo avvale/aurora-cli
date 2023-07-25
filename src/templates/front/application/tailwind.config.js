@@ -287,8 +287,7 @@ const config = {
         require(path.resolve(__dirname, ('src/@fuse/tailwind/plugins/theming')))({themes}),
 
         // Other third party and/or custom plugins
-        require('@tailwindcss/typography')({modifiers: ['sm', 'lg']}),
-        require('@tailwindcss/line-clamp')
+        require('@tailwindcss/typography')({modifiers: ['sm', 'lg']})
     ]
 };
 

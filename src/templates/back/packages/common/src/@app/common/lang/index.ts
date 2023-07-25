@@ -28,6 +28,12 @@ export { CommonDeletedLangEvent } from './application/events/common-deleted-lang
 export { CommonUpdatedLangsEvent } from './application/events/common-updated-langs.event';
 export { CommonUpdatedLangEvent } from './application/events/common-updated-lang.event';
 
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
+
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
 // domain
 export { CommonLang } from './domain/common-lang.aggregate';
 export { CommonLangMapper } from './domain/common-lang.mapper';

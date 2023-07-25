@@ -1,14 +1,13 @@
+import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache, NormalizedCacheObject } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache, NormalizedCacheObject } from '@apollo/client/core';
-import { log, Utils } from '@aurora';
-import { TranslocoService } from '@ngneat/transloco';
+import { AuthenticationService, Utils, extractGraphqlMessageErrors, extractGraphqlStatusErrorCodes, log } from '@aurora';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { TranslocoService } from '@ngneat/transloco';
 import { HttpLink } from 'apollo-angular/http/http-link';
+import { createUploadLink } from 'apollo-upload-client';
 import { environment } from 'environments/environment';
-import { AuthenticationService } from '../authentication/authentication.service';
 import { lastValueFrom } from 'rxjs';
-import { extractGraphqlMessageErrors, extractGraphqlStatusErrorCodes } from './graphql.functions';
 
 export const apolloFactory = (
     httpLink: HttpLink,
@@ -17,12 +16,12 @@ export const apolloFactory = (
     translocoService: TranslocoService,
 ): ApolloClientOptions<NormalizedCacheObject> =>
 {
-    let headers: Headers;
+    // Container of headers in force during the whole execution of the application.
+    // Doesn't reset on each call, keep headers from every calls.
+    const headers = {};
 
     const initHeaders = setContext(async(operation, context) =>
     {
-        headers = new Headers();
-
         // return original context headers
         return {
             headers: context.headers,
@@ -36,22 +35,21 @@ export const apolloFactory = (
             for (const [key, value] of Object.entries(context.headers))
             {
                 // set custom headers
-                headers.set(key, value as string);
+                headers[key] = value;
             }
         }
 
         return {
-            headers: Object.fromEntries(headers.entries()),
+            headers,
         };
     });
 
     const timezone = setContext(async(operation, context) =>
     {
-        // set user timezone
-        headers.set('X-Timezone', Utils.timezone());
+        headers['X-Timezone'] = Utils.timezone();
 
         return {
-            headers: Object.fromEntries(headers.entries()),
+            headers,
         };
     });
 
@@ -60,19 +58,17 @@ export const apolloFactory = (
         // return basic authentication form login
         if (operation.operationName === 'oAuthCreateCredentials')
         {
-            headers.set('Authorization', `Basic ${btoa(environment.oAuth.applicationCode + ':' + environment.oAuth.applicationSecret)}`);
+            headers['Authorization'] = `Basic ${btoa(environment.oAuth.applicationCode + ':' + environment.oAuth.applicationSecret)}`;
         }
-        else
+        // check access token, if is expired create other one with refresh token
+        else if (await lastValueFrom(authenticationService.check()))
         {
-            // check access token, if is expired create other one with refresh token
-            await lastValueFrom(authenticationService.check());
-
             // set bearer token
-            headers.set('Authorization', `Bearer ${authenticationService.accessToken}`);
+            headers['Authorization'] = `Bearer ${authenticationService.accessToken}`;
         }
 
         return {
-            headers: Object.fromEntries(headers.entries()),
+            headers,
         };
     });
 
@@ -134,14 +130,19 @@ export const apolloFactory = (
         }
     });
 
-
     const link = ApolloLink.from([
         initHeaders,
         customHeaders,
         timezone,
         auth,
         error,
-        httpLink.create({
+        /**
+         * Apollo upload client, replace to
+         *  httpLink.create({
+         *    uri: environment.api.graphql,
+         *  }),
+         */
+        createUploadLink({
             uri: environment.api.graphql,
         }),
     ]);

@@ -58,8 +58,8 @@
             >
                 <mat-icon
                     *ngIf="!('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getSpinnerFlag | async">
@@ -78,8 +78,8 @@
             >
                 <mat-icon
                     *ngIf="!('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getSpinnerFlag | async">

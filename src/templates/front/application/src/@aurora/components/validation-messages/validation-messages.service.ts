@@ -5,7 +5,9 @@ import { Utils } from '../..';
 import { merge, Observable, Subject } from 'rxjs';
 import { ValidateOptions, CustomMessage, FormMessageErrors } from './validation-messages.types';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ValidationMessagesService
 {
     private validate$ = new Subject();

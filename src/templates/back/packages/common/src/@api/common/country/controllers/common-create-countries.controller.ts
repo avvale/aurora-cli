@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { CommonCountryDto, CommonCreateCountryDto } from '../dto';
+import { CommonCountryDto, CommonCreateCountriesHandler, CommonCreateCountryDto } from '@api/common/country';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { CommonCreateCountriesHandler } from '../handlers/common-create-countries.handler';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiBody, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] country')
 @Controller('common/countries/create')

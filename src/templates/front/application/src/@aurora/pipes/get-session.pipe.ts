@@ -4,6 +4,7 @@ import { SessionService } from '../modules/session/session.service';
 @Pipe({
     name: 'getSession',
     pure: true,
+    standalone: true,
 })
 export class GetSessionPipe implements PipeTransform
 {

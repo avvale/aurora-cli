@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { OAuthScope } from '../o-auth.types';
-import { ScopeService } from './scope.service';
 import { scopeColumnsConfig } from './scope.columns-config';
+import { ScopeService } from './scope.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-scope-list',
     templateUrl    : './scope-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class ScopeListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class ScopeListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::scope.list.edit':
-                this.router.navigate(['o-auth/scope/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'o-auth/scope/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'oAuth::scope.list.delete':
@@ -116,7 +124,7 @@ export class ScopeListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('oAuth.Scope') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class ScopeListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.scopeService
-                                        .deleteById<OAuthScope>(action.meta.row.id),
+                                        .deleteById<OAuthScope>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'oAuth::scope.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class ScopeListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = scopeColumnsConfig.map(scopeColumnConfig => scopeColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

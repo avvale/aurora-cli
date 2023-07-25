@@ -29,6 +29,12 @@ export { CommonDeletedCountryEvent } from './application/events/common-deleted-c
 export { CommonUpdatedCountriesEvent } from './application/events/common-updated-countries.event';
 export { CommonUpdatedCountryEvent } from './application/events/common-updated-country.event';
 
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
+
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
 // domain
 export { CommonCountry } from './domain/common-country.aggregate';
 export { CommonCountryMapper } from './domain/common-country.mapper';

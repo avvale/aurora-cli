@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonUpdateAdministrativeAreasLevel3Controller, CommonUpdateAdministrativeAreasLevel3Handler } from '@api/common/administrative-area-level-3';
+import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonUpdateAdministrativeAreasLevel3Controller } from './common-update-administrative-areas-level-3.controller';
-import { CommonUpdateAdministrativeAreasLevel3Handler } from '../handlers/common-update-administrative-areas-level-3.handler';
-
-// sources
-import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.data';
 
 describe('CommonUpdateAdministrativeAreasLevel3Controller', () =>
 {

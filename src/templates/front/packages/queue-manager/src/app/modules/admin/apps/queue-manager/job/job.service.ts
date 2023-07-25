@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, QueryStatement, parseGqlFields } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, QueryStatement, parseGqlFields } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { QueueManagerJob } from '../queue-manager.types';
 import { deleteByIdMutation, fields, findByIdQuery, paginationQuery } from './job.graphql';
@@ -41,10 +41,12 @@ export class JobService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<QueueManagerJob>>
     {
@@ -71,10 +73,12 @@ export class JobService
             graphqlStatement = findByIdQuery,
             id = '',
             name = '',
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             name?: string;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: QueueManagerJob;
@@ -90,6 +94,9 @@ export class JobService
                     id,
                     name,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
@@ -103,16 +110,33 @@ export class JobService
     }
 
     deleteById<T>(
-        id: string,
-        name: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            name = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            name?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id, name },
+                variables: {
+                    id,
+                    name,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 }

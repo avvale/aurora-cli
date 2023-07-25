@@ -8,7 +8,6 @@ scalar GraphQLFloat
 scalar GraphQLBoolean
 scalar GraphQLISODateTime
 scalar GraphQLTimestamp
-scalar GraphQLUpload
 
 type CoreLang
 {

@@ -3,7 +3,7 @@
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
             (object items='Validators' path='@angular/forms')
-            (object items=(array 'Action' 'Crumb' 'log' 'mapActions' 'Utils' 'ViewDetailComponent') path='@aurora')
+            (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'Utils' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings '../' toKebabCase schema.boundedContextName '.types'))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
@@ -79,6 +79,10 @@
     templateUrl    : './{{ toKebabCase schema.moduleName }}-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+    ],
 })
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent
 {
@@ -219,7 +223,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 ~}}
 {{/eq ~}}
 {{/each ~}}
-{{{ injectorManager (object injections=injectionsArray) }}}
+{{{ constructorInjectorManager (object injections=injectionsArray) }}}
     )
     {
         super(injector);
@@ -499,7 +503,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -689,7 +693,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase getRelationshipSchema.moduleName }}') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -716,7 +720,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             {
                                 await lastValueFrom(
                                     this.{{ toCamelCase getRelationshipSchema.moduleName }}Service
-                                        .deleteById<{{ getRelationshipSchema.aggregateName }}>(action.meta.row.id),
+                                        .deleteById<{{ getRelationshipSchema.aggregateName }}>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
 
                                 this.actionService.action({

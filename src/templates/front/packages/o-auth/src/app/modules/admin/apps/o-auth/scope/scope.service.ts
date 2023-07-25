@@ -1,9 +1,9 @@
+import { OAuthCreateScope, OAuthScope, OAuthUpdateScopeById, OAuthUpdateScopes } from '../o-auth.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './scope.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { OAuthScope, OAuthCreateScope, OAuthUpdateScopeById, OAuthUpdateScopes } from '../o-auth.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './scope.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -41,10 +41,12 @@ export class ScopeService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<OAuthScope>>
     {
@@ -57,12 +59,15 @@ export class ScopeService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<OAuthScope>; };}, GridData<OAuthScope>>(result => result.data.pagination),
-                tap((pagination: GridData<OAuthScope>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -71,10 +76,12 @@ export class ScopeService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthScope;
@@ -90,21 +97,15 @@ export class ScopeService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthScope;
-                    };
-                },
-                {
-                    object: OAuthScope;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthScope;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.scopeSubject$.next(data.object);
                 }),
@@ -116,10 +117,12 @@ export class ScopeService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: OAuthScope;
@@ -135,21 +138,15 @@ export class ScopeService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: OAuthScope;
-                    };
-                },
-                {
-                    object: OAuthScope;
-                }>(result => result.data),
-                tap((data: {
-                    object: OAuthScope;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.scopeSubject$.next(data.object);
                 }),
@@ -161,10 +158,12 @@ export class ScopeService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: OAuthScope[];
@@ -180,21 +179,15 @@ export class ScopeService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: OAuthScope[];
-                    };
-                },
-                {
-                    objects: OAuthScope[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: OAuthScope[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.scopesSubject$.next(data.objects);
                 }),
@@ -205,9 +198,11 @@ export class ScopeService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthCreateScope;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -218,6 +213,9 @@ export class ScopeService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -225,9 +223,11 @@ export class ScopeService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateScopeById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -237,6 +237,9 @@ export class ScopeService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -247,11 +250,13 @@ export class ScopeService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: OAuthUpdateScopes;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -264,19 +269,37 @@ export class ScopeService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -285,10 +308,12 @@ export class ScopeService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -296,7 +321,13 @@ export class ScopeService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 }

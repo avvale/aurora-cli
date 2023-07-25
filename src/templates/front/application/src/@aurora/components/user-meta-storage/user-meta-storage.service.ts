@@ -1,4 +1,4 @@
-import { UserMetaStorage } from '@aurora/aurora.types';
+import { UserMetaStorage } from '@aurora';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export abstract class UserMetaStorageService<T = UserMetaStorage>
@@ -14,7 +14,7 @@ export abstract class UserMetaStorageService<T = UserMetaStorage>
 
     abstract updateUserMeta(keyUserMeta: string, keyUserMetaValue: any): Observable<void>;
 
-    abstract saveUserMeta(meta: UserMetaStorage): Observable<void>;
+    abstract saveUserMeta(meta: T): Observable<void>;
 
     abstract clearUserMeta(): Observable<void>;
 }

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    tags
     modelPath
     modelName
     operationId
@@ -18,14 +19,14 @@ export const fields = `
     query
     body
     userAgent
-    tags
     isRollback
     rollbackSideEffectId
     createdAt
     updatedAt
 `;
 
-export const relationsFields = '';
+export const relationsFields = `
+`;
 
 // default methods
 export const paginationQuery = gql`

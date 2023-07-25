@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { filter, Subject, takeUntil } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertAppearance, FuseAlertType } from '@fuse/components/alert/alert.types';
 import { FuseAlertService } from '@fuse/components/alert/alert.service';
+import { FuseAlertAppearance, FuseAlertType } from '@fuse/components/alert/alert.types';
 import { FuseUtilsService } from '@fuse/services/utils/utils.service';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'fuse-alert',
@@ -13,7 +16,9 @@ import { FuseUtilsService } from '@fuse/services/utils/utils.service';
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations     : fuseAnimations,
-    exportAs       : 'fuseAlert'
+    exportAs       : 'fuseAlert',
+    standalone     : true,
+    imports        : [NgIf, MatIconModule, MatButtonModule],
 })
 export class FuseAlertComponent implements OnChanges, OnInit, OnDestroy
 {
@@ -39,7 +44,7 @@ export class FuseAlertComponent implements OnChanges, OnInit, OnDestroy
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseAlertService: FuseAlertService,
-        private _fuseUtilsService: FuseUtilsService
+        private _fuseUtilsService: FuseUtilsService,
     )
     {
     }
@@ -69,7 +74,7 @@ export class FuseAlertComponent implements OnChanges, OnInit, OnDestroy
             'fuse-alert-type-info'         : this.type === 'info',
             'fuse-alert-type-success'      : this.type === 'success',
             'fuse-alert-type-warning'      : this.type === 'warning',
-            'fuse-alert-type-error'        : this.type === 'error'
+            'fuse-alert-type-error'        : this.type === 'error',
         };
         /* eslint-enable @typescript-eslint/naming-convention */
     }
@@ -119,10 +124,10 @@ export class FuseAlertComponent implements OnChanges, OnInit, OnDestroy
         this._fuseAlertService.onDismiss
             .pipe(
                 filter(name => this.name === name),
-                takeUntil(this._unsubscribeAll)
+                takeUntil(this._unsubscribeAll),
             )
-            .subscribe(() => {
-
+            .subscribe(() =>
+            {
                 // Dismiss the alert
                 this.dismiss();
             });
@@ -131,10 +136,10 @@ export class FuseAlertComponent implements OnChanges, OnInit, OnDestroy
         this._fuseAlertService.onShow
             .pipe(
                 filter(name => this.name === name),
-                takeUntil(this._unsubscribeAll)
+                takeUntil(this._unsubscribeAll),
             )
-            .subscribe(() => {
-
+            .subscribe(() =>
+            {
                 // Show the alert
                 this.show();
             });

@@ -31,6 +31,7 @@ export const sideEffectColumnsConfig: ColumnConfig[] = [
         type : ColumnDataType.STRING,
         field: 'auditableId',
         sort : 'auditableId',
+        hidden: true,
     },
     {
         type : ColumnDataType.STRING,
@@ -49,18 +50,9 @@ export const sideEffectColumnsConfig: ColumnConfig[] = [
     },
     {
         type : ColumnDataType.STRING,
-        field: 'params',
-        sort : 'params',
-    },
-    {
-        type : ColumnDataType.STRING,
-        field: 'query',
-        sort : 'query',
-    },
-    {
-        type : ColumnDataType.STRING,
         field: 'userAgent',
         sort : 'userAgent',
+        hidden: true,
     },
     {
         type : ColumnDataType.BOOLEAN,

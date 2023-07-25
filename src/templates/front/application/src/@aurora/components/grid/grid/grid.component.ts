@@ -1,27 +1,41 @@
-// angular
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { AsyncPipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-
-// aurora
-import { ColumnConfig, ColumnConfigAction, ColumnDataType, GridData, GridColumnFilter, GridState, ExportGridState, ExportFormat, GridSearchState, GridSortState } from '../grid.types';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { Action, GridManagerService } from '@aurora';
+import { FlagIconComponent } from '@aurora/components';
+import { GetPipe } from '@aurora/pipes/get.pipe';
+import { merge, tap } from 'rxjs';
 import { GridCellValueTemplateDirective } from '../directives/grid-cell-value-template.directive';
-import { GridColumnsConfigPropertiesDialogComponent } from '../grid-columns-config-properties-dialog/grid-columns-config-properties-dialog.component';
 import { GridCustomHeaderTemplateDirective } from '../directives/grid-custom-header-template.directive';
+import { GridColumnsConfigPropertiesDialogComponent } from '../grid-columns-config-properties-dialog/grid-columns-config-properties-dialog.component';
 import { GridFiltersDialogComponent } from '../grid-filters-dialog/grid-filters-dialog.component';
+import { GridSearchComponent } from '../grid-search/grid-search.component';
+import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
+import { ColumnConfig, ColumnConfigAction, ColumnDataType, ExportFormat, ExportGridState, GridColumnFilter, GridData, GridSearchState, GridSortState, GridState } from '../grid.types';
+import { FilterGridCustomHeaderTemplatesPositionPipe, GetActionsPipe, GetGridSpinnerFlagPipe, GetTranslationIconColorPipe, HasCellValueTemplatePipe, IsOriginColumnConfigPipe, TransformDataCellPipe } from '../pipes';
 import { SelectionChange, SelectionModel } from '../selection-model/selection-model';
 
-// third party libraries
-import { merge, tap } from 'rxjs';
-import { Action, GridManagerService } from '@aurora';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-
+// no barrel
 @Component({
     selector       : 'au-grid',
     templateUrl    : './grid.component.html',
     styleUrls      : ['./grid.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        AsyncPipe, DragDropModule, FilterGridCustomHeaderTemplatesPositionPipe, FlagIconComponent, GetActionsPipe, GetGridSpinnerFlagPipe, GetPipe, GridSearchComponent, GridTranslatePipe, GetTranslationIconColorPipe,
+        HasCellValueTemplatePipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
+        NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, TransformDataCellPipe,
+    ],
 })
 export class GridComponent implements OnInit, AfterViewInit
 {
@@ -321,7 +335,8 @@ export class GridComponent implements OnInit, AfterViewInit
             .subscribe(data =>
             {
                 // dialog is closed without actions
-                if (data === undefined) return;
+                // must check string empty
+                if (!data) return;
 
                 this.gridState = {
                     ...this.gridState,

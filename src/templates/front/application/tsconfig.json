@@ -17,11 +17,7 @@
         "resolveJsonModule": true,
         "lib": [
             "ES2022",
-            "dom",
-            /* https://stackoverflow.com/questions/71510368/why-is-dom-and-dom-iterable-seperate */
-            "dom.iterable",
-            /* config for Apollo graphQL https://apollo-angular.com/docs/get-started */
-            "esnext.asynciterable"
+            "dom"
         ]
     },
     "angularCompilerOptions": {

@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { CommonLang } from '../common.types';
-import { LangService } from './lang.service';
 import { langColumnsConfig } from './lang.columns-config';
+import { LangService } from './lang.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'common-lang-list',
     templateUrl    : './lang-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class LangListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class LangListComponent extends ViewBaseComponent
                 break;
 
             case 'common::lang.list.edit':
-                this.router.navigate(['common/lang/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'common/lang/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'common::lang.list.delete':
@@ -116,7 +124,7 @@ export class LangListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('common.Lang') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class LangListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.langService
-                                        .deleteById<CommonLang>(action.meta.row.id),
+                                        .deleteById<CommonLang>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'common::lang.list.pagination',
                                     isViewAction: false,

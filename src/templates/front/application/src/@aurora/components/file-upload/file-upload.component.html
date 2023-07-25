@@ -1,7 +1,7 @@
 <div class="block">
     <p class="text-base opacity-60" *ngIf="label != ''">{{ label }}</p>
     <ngx-file-drop
-        [dropZoneLabel]="dropLabel" 
+        [dropZoneLabel]="dropLabel"
         dropZoneClassName="border-2 border-dashed rounded text-base"
         [browseBtnLabel]="browseLabel"
         browseBtnClassName="ml-1 cursor-pointer text-base underline underline-offset-2"
@@ -13,14 +13,15 @@
         [multiple]="isMultiple"
         (onFileDrop)="fileAdd($event)"
         (onFileOver)="fileEnter($event)"
-        (onFileLeave)="fileLeave($event)">
+        (onFileLeave)="fileLeave($event)"
+    >
         <!-- <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
             Optional custom content that replaces the the entire default content.
             <button type="button" (click)="openFileSelector()">Browse Files</button>
         </ng-template> -->
     </ngx-file-drop>
     <div class="block pt-4">
-        <ng-container *ngFor="let file of addedFiles">
+        <ng-container *ngFor="let file of filesContainer">
             <div class="flex justify-between items-center p-4 mb-2 border rounded">
                 <p class="text-base flex items-center">
                     <mat-icon
@@ -42,7 +43,7 @@
                     (click)="fileRemove(file)">
                     <mat-icon
                         class="icon-size-5"
-                        [svgIcon]="'heroicons_solid:trash'"
+                        svgIcon="mat_solid:delete"
                     >
                     </mat-icon>
                 </button>

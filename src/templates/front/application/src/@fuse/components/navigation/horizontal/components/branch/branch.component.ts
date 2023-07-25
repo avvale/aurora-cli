@@ -1,15 +1,22 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BooleanInput } from '@angular/cdk/coercion';
-import { MatMenu } from '@angular/material/menu';
-import { Subject, takeUntil } from 'rxjs';
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FuseHorizontalNavigationBasicItemComponent } from '@fuse/components/navigation/horizontal/components/basic/basic.component';
+import { FuseHorizontalNavigationDividerItemComponent } from '@fuse/components/navigation/horizontal/components/divider/divider.component';
 import { FuseHorizontalNavigationComponent } from '@fuse/components/navigation/horizontal/horizontal.component';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'fuse-horizontal-navigation-branch-item',
     templateUrl    : './branch.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [NgIf, NgClass, MatMenuModule, NgTemplateOutlet, NgFor, FuseHorizontalNavigationBasicItemComponent, forwardRef(() => FuseHorizontalNavigationBranchItemComponent), FuseHorizontalNavigationDividerItemComponent, MatTooltipModule, MatIconModule],
 })
 export class FuseHorizontalNavigationBranchItemComponent implements OnInit, OnDestroy
 {
@@ -30,7 +37,7 @@ export class FuseHorizontalNavigationBranchItemComponent implements OnInit, OnDe
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
     )
     {
     }
@@ -49,9 +56,9 @@ export class FuseHorizontalNavigationBranchItemComponent implements OnInit, OnDe
 
         // Subscribe to onRefreshed on the navigation component
         this._fuseHorizontalNavigationComponent.onRefreshed.pipe(
-            takeUntil(this._unsubscribeAll)
-        ).subscribe(() => {
-
+            takeUntil(this._unsubscribeAll),
+        ).subscribe(() =>
+        {
             // Mark for check
             this._changeDetectorRef.markForCheck();
         });

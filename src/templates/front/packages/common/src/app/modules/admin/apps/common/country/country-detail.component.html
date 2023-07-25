@@ -7,9 +7,9 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
+                    svgIcon="mat_solid:flag"
                     class="icon-size-8 mr-2"
                 >
-                    flag
                 </mat-icon>
                 {{ t('common.Country') }}
             </au-title>
@@ -56,8 +56,8 @@
             >
                 <mat-icon
                     *ngIf="!('common::country.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'common::country.detail.update' | getSpinnerFlag | async">
@@ -76,8 +76,8 @@
             >
                 <mat-icon
                     *ngIf="!('common::country.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
                 </mat-icon>
                 <mat-icon *ngIf="'common::country.detail.create' | getSpinnerFlag | async">

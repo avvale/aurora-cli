@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { IamAccount } from '../iam.types';
-import { AccountService } from './account.service';
 import { accountColumnsConfig } from './account.columns-config';
+import { AccountService } from './account.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'iam-account-list',
     templateUrl    : './account-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class AccountListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class AccountListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::account.list.edit':
-                this.router.navigate(['iam/account/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'iam/account/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'iam::account.list.delete':
@@ -116,7 +124,7 @@ export class AccountListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('iam.Account') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class AccountListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.accountService
-                                        .deleteById<IamAccount>(action.meta.row.id),
+                                        .deleteById<IamAccount>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'iam::account.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class AccountListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = accountColumnsConfig.map(accountColumnConfig => accountColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

@@ -1,1 +1,1 @@
-export * from './datetimepicker-sql-format.module';
+export * from '@aurora/components/datetimepicker-sql-format/public-api';

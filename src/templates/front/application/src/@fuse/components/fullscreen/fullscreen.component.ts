@@ -1,5 +1,8 @@
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FSDocument, FSDocumentElement } from '@fuse/components/fullscreen/fullscreen.types';
 
 @Component({
@@ -7,7 +10,9 @@ import { FSDocument, FSDocumentElement } from '@fuse/components/fullscreen/fulls
     templateUrl    : './fullscreen.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'fuseFullscreen'
+    exportAs       : 'fuseFullscreen',
+    standalone     : true,
+    imports        : [MatButtonModule, MatTooltipModule, NgTemplateOutlet, MatIconModule],
 })
 export class FuseFullscreenComponent implements OnInit
 {

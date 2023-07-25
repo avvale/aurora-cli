@@ -1,40 +1,39 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { merge } from 'lodash-es';
-import { FuseConfirmationDialogComponent } from '@fuse/services/confirmation/dialog/dialog.component';
 import { FuseConfirmationConfig } from '@fuse/services/confirmation/confirmation.types';
+import { FuseConfirmationDialogComponent } from '@fuse/services/confirmation/dialog/dialog.component';
+import { merge } from 'lodash-es';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class FuseConfirmationService
 {
+    private _matDialog: MatDialog = inject(MatDialog);
     private _defaultConfig: FuseConfirmationConfig = {
         title      : 'Confirm action',
         message    : 'Are you sure you want to confirm this action?',
         icon       : {
             show : true,
-            name : 'heroicons_outline:exclamation',
-            color: 'warn'
+            name : 'heroicons_outline:exclamation-triangle',
+            color: 'warn',
         },
         actions    : {
             confirm: {
                 show : true,
                 label: 'Confirm',
-                color: 'warn'
+                color: 'warn',
             },
             cancel : {
                 show : true,
-                label: 'Cancel'
-            }
+                label: 'Cancel',
+            },
         },
-        dismissible: false
+        dismissible: false,
     };
 
     /**
      * Constructor
      */
-    constructor(
-        private _matDialog: MatDialog
-    )
+    constructor()
     {
     }
 
@@ -52,7 +51,7 @@ export class FuseConfirmationService
             autoFocus   : false,
             disableClose: !userConfig.dismissible,
             data        : userConfig,
-            panelClass  : 'fuse-confirmation-dialog-panel'
+            panelClass  : 'fuse-confirmation-dialog-panel',
         });
     }
 }

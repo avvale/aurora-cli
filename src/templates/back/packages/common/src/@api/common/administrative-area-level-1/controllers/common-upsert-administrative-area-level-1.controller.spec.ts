@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonUpsertAdministrativeAreaLevel1Controller, CommonUpsertAdministrativeAreaLevel1Handler } from '@api/common/administrative-area-level-1';
+import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonUpsertAdministrativeAreaLevel1Controller } from './common-upsert-administrative-area-level-1.controller';
-import { CommonUpsertAdministrativeAreaLevel1Handler } from '../handlers/common-upsert-administrative-area-level-1.handler';
-
-// sources
-import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.data';
 
 describe('CommonUpsertAdministrativeAreaLevel1Controller', () =>
 {

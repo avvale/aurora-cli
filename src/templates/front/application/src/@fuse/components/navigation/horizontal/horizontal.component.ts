@@ -1,9 +1,13 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
 import { FuseUtilsService } from '@fuse/services/utils/utils.service';
+import { ReplaySubject, Subject } from 'rxjs';
+import { FuseHorizontalNavigationBasicItemComponent } from './components/basic/basic.component';
+import { FuseHorizontalNavigationBranchItemComponent } from './components/branch/branch.component';
+import { FuseHorizontalNavigationSpacerItemComponent } from './components/spacer/spacer.component';
 
 @Component({
     selector       : 'fuse-horizontal-navigation',
@@ -12,7 +16,9 @@ import { FuseUtilsService } from '@fuse/services/utils/utils.service';
     animations     : fuseAnimations,
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'fuseHorizontalNavigation'
+    exportAs       : 'fuseHorizontalNavigation',
+    standalone     : true,
+    imports        : [NgFor, NgIf, FuseHorizontalNavigationBasicItemComponent, FuseHorizontalNavigationBranchItemComponent, FuseHorizontalNavigationSpacerItemComponent],
 })
 export class FuseHorizontalNavigationComponent implements OnChanges, OnInit, OnDestroy
 {
@@ -28,7 +34,7 @@ export class FuseHorizontalNavigationComponent implements OnChanges, OnInit, OnD
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseNavigationService: FuseNavigationService,
-        private _fuseUtilsService: FuseUtilsService
+        private _fuseUtilsService: FuseUtilsService,
     )
     {
     }

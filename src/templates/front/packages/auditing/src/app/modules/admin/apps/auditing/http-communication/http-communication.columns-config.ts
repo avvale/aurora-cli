@@ -1,3 +1,4 @@
+// ignored file
 import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const httpCommunicationColumnsConfig: ColumnConfig[] = [

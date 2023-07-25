@@ -1,9 +1,16 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { FormsModule, NgForm, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
+import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 import { FuseValidators } from '@fuse/validators';
-import { FuseAlertType } from '@fuse/components/alert';
+import { finalize } from 'rxjs';
 
 // ---- customizations ----
 import { AuthenticationService } from '@aurora';
@@ -12,7 +19,9 @@ import { AuthenticationService } from '@aurora';
     selector     : 'auth-reset-password',
     templateUrl  : './reset-password.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations   : fuseAnimations,
+    standalone   : true,
+    imports      : [NgIf, FuseAlertComponent, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule, RouterLink],
 })
 export class AuthResetPasswordComponent implements OnInit
 {
@@ -20,7 +29,7 @@ export class AuthResetPasswordComponent implements OnInit
 
     alert: { type: FuseAlertType; message: string } = {
         type   : 'success',
-        message: ''
+        message: '',
     };
     resetPasswordForm: UntypedFormGroup;
     showAlert: boolean = false;
@@ -29,8 +38,10 @@ export class AuthResetPasswordComponent implements OnInit
      * Constructor
      */
     constructor(
+        private _formBuilder: UntypedFormBuilder,
+
+        // ---- customizations ----
         private authenticationService: AuthenticationService,
-        private _formBuilder: UntypedFormBuilder
     )
     {
     }
@@ -45,8 +56,7 @@ export class AuthResetPasswordComponent implements OnInit
     ngOnInit(): void
     {
         // Create the form
-        this.resetPasswordForm = this._formBuilder.group(
-            {
+        this.resetPasswordForm = this._formBuilder.group({
                 password       : ['', Validators.required],
                 passwordConfirm: ['', Validators.required],
             },
@@ -82,7 +92,6 @@ export class AuthResetPasswordComponent implements OnInit
             .pipe(
                 finalize(() =>
                 {
-
                     // Re-enable the form
                     this.resetPasswordForm.enable();
 
@@ -91,12 +100,11 @@ export class AuthResetPasswordComponent implements OnInit
 
                     // Show the alert
                     this.showAlert = true;
-                })
+                }),
             )
             .subscribe(
                 (response) =>
                 {
-
                     // Set the alert
                     this.alert = {
                         type   : 'success',
@@ -105,13 +113,12 @@ export class AuthResetPasswordComponent implements OnInit
                 },
                 (response) =>
                 {
-
                     // Set the alert
                     this.alert = {
                         type   : 'error',
                         message: 'Something went wrong, please try again.',
                     };
-                }
+                },
             );
     }
 }

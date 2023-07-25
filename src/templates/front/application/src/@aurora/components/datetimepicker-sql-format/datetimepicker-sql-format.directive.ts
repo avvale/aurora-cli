@@ -5,6 +5,7 @@ import * as dayjs from 'dayjs';
 
 @Directive({
     selector: '[auDatetimepickerSqlFormat]',
+    standalone: true,
 })
 export class DatetimepickerSqlFormatDirective
 {

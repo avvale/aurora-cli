@@ -7,7 +7,7 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
-                    svgIcon="heroicons_solid:tag"
+                    svgIcon="mat_solid:workspaces"
                     class="icon-size-8 mr-2"
                 >
                 </mat-icon>
@@ -24,12 +24,16 @@
                 class="ml-3"
                 form="oAuthClientFormDetail"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('oAuth::client.detail.update' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('oAuth::client.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil-alt"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'oAuth::client.detail.update' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Update') }}
             </button>
@@ -40,12 +44,16 @@
                 form="oAuthClientFormDetail"
                 class="ml-3"
                 color="accent"
-                [disabled]="fg.pristine"
+                [disabled]="fg.pristine || ('oAuth::client.detail.create' | getSpinnerFlag | async)"
             >
                 <mat-icon
+                    *ngIf="!('oAuth::client.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:save"
                 >
+                </mat-icon>
+                <mat-icon *ngIf="'oAuth::client.detail.create' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
                 </mat-icon>
                 {{ t('Create') }}
             </button>

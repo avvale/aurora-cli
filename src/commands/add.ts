@@ -4,7 +4,7 @@ import * as fs from 'node:fs';
 import { ArrayLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { exec } from '../@cliter/functions/common';
-import { CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer';
+import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer';
 
 export class Add extends Command
 {
@@ -368,10 +368,10 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'auditing', 'auditingNavigation');
                     navigationSourceFile.saveSync();
 
-                    // add lazy loading module to app routing
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'auditing');
-                    routingSourceFile.saveSync();
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'auditing');
+                    routesSourceFile.saveSync();
                     break;
                 }
 
@@ -380,95 +380,50 @@ export class Add extends Command
                     await exec('npm', ['install', '@azure/msal-angular', '@azure/msal-browser']);
                     ux.action.stop('Completed!');
 
-                    await FrontHandler.addPackage(addCommandState);
-
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
-                    // app.module.ts
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
 
                     // import AzureAdModule
                     ImportDriver.createImportItems(
-                        appModuleSourceFile,
-                        './modules/azure-ad/azure-ad.module',
-                        ['AzureAdModule'],
+                        auroraProviderSourceFile,
+                        './modules/azure-ad',
+                        ['provideAzureAd'],
                     );
-                    DecoratorDriver.addModuleDecoratorProperty(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'imports',
-                        'AzureAdModule,',
+                    returnArray?.addElement('provideAzureAd()', { useNewLines: true });
+
+
+                    // remove AuthGuard, will be replaced by MsalGuard defined in provideAzureAd()
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
+                        'AuthGuard',
                     );
 
-                    // implement MsalGuard adapter
-                    ImportDriver.createImportItems(
-                        appModuleSourceFile,
-                        '@azure/msal-angular',
-                        ['MsalGuard'],
-                    );
-                    DecoratorDriver.addModuleDecoratorProperty(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
-                        `
-{
-    provide    : AuthGuard,
-    useExisting: MsalGuard,
-},`,
-                    );
-
-                    // implement AuthenticationAzureAdAdapterService adapter
-                    ImportDriver.createImportItems(
-                        appModuleSourceFile,
-                        './modules/azure-ad/authentication-azure-ad-adapter.service',
-                        ['AuthenticationAzureAdAdapterService'],
-                    );
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // remove AuthenticationService, will be replaced by AuthenticationAzureAdAdapterService defined in provideAzureAd()
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
                         'AuthenticationService',
-                        'AuthenticationAzureAdAdapterService',
                     );
 
-                    // implement AuthorizationAzureAdAdapterService adapter
-                    ImportDriver.createImportItems(
-                        appModuleSourceFile,
-                        './modules/azure-ad/authorization-azure-ad-adapter.service',
-                        ['AuthorizationAzureAdAdapterService'],
-                    );
-                    DecoratorDriver.addModuleDecoratorProperty(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
-                        `
-{
-    provide    : AuthorizationService,
-    useExisting: AuthorizationAzureAdAdapterService,
-},`,
+                    // remove AuthorizationService, will be replaced by AuthorizationAzureAdAdapterService defined in provideAzureAd()
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
+                        'AuthorizationService',
                     );
 
-                    // implement IamAzureAdAdapterService adapter
-                    ImportDriver.createImportItems(
-                        appModuleSourceFile,
-                        './modules/azure-ad/iam-azure-ad-adapter.service',
-                        ['IamAzureAdAdapterService'],
-                    );
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // remove IamService, will be replaced by IamAzureAdAdapterService defined in provideAzureAd()
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
                         'IamService',
-                        'IamAzureAdAdapterService',
                     );
 
-                    appModuleSourceFile.organizeImports();
-                    appModuleSourceFile.saveSync();
+                    auroraProviderSourceFile.organizeImports();
+                    auroraProviderSourceFile.saveSync();
 
                     // implement environments azure ad variables
                     const environmentFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.ts']);
@@ -546,10 +501,10 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'common', 'commonNavigation');
                     navigationSourceFile.saveSync();
 
-                    // add lazy loading module to app routing
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'common');
-                    routingSourceFile.saveSync();
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'common');
+                    routesSourceFile.saveSync();
                     break;
                 }
 
@@ -576,40 +531,41 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'iamNavigation');
                     navigationSourceFile.saveSync();
 
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'iam');
-                    routingSourceFile.saveSync();
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'iam');
+                    routesSourceFile.saveSync();
 
-                    // add custom imports
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
-                    if (!ImportDriver.hasImportDeclarations(appModuleSourceFile, 'UserMetaStorageIamAdapterService'))
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
+
+                    if (!ImportDriver.hasImportDeclarations(auroraProviderSourceFile, 'UserMetaStorageIamAdapterService'))
                     {
                         ImportDriver.createImportItems(
-                            appModuleSourceFile,
-                            './modules/admin/apps/iam/user-meta/user-meta-storage-iam-adapter.service',
+                            auroraProviderSourceFile,
+                            'app/modules/admin/apps/iam',
                             ['UserMetaStorageIamAdapterService'],
                         );
                     }
 
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // change UserMetaStorageService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
                         'UserMetaStorageService',
                         'UserMetaStorageIamAdapterService',
                     );
 
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // change IamService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
                         'IamService',
                         'IamAuroraAdapterService',
                     );
 
-                    appModuleSourceFile.saveSync();
+                    auroraProviderSourceFile.saveSync();
                     break;
                 }
 
@@ -621,31 +577,31 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'oAuth', 'oAuthNavigation');
                     navigationSourceFile.saveSync();
 
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'oAuth');
-                    routingSourceFile.saveSync();
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'oAuth');
+                    routesSourceFile.saveSync();
 
-                    // app.module.ts
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
 
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // change AuthenticationService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
                         'AuthenticationService',
                         'AuthenticationAuroraAdapterService',
                     );
 
-                    DecoratorDriver.removeDecoratorAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+                    // remove AuthGuard
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
                         'AuthGuard',
                     );
 
-                    appModuleSourceFile.saveSync();
+                    auroraProviderSourceFile.saveSync();
                     break;
                 }
 
@@ -657,9 +613,9 @@ export class Add extends Command
                     Installer.declareFrontNavigationMenu(navigationSourceFile, 'queueManager', 'queueManagerNavigation');
                     navigationSourceFile.saveSync();
 
-                    const routingSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routing.ts']);
-                    Installer.declareFrontRouting(routingSourceFile, 'queueManager');
-                    routingSourceFile.saveSync();
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'queueManager');
+                    routesSourceFile.saveSync();
                     break;
                 }
             }

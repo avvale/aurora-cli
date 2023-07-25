@@ -1,14 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonFindCountryByIdController, CommonFindCountryByIdHandler } from '@api/common/country';
+import { commonMockCountryData } from '@app/common/country';
 import { CacheModule } from '@nestjs/cache-manager';
-
-// custom items
-import { CommonFindCountryByIdController } from './common-find-country-by-id.controller';
-import { CommonFindCountryByIdHandler } from '../handlers/common-find-country-by-id.handler';
-
-// sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonFindCountryByIdController', () =>
 {

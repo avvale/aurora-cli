@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonPaginateAdministrativeAreasLevel1Controller, CommonPaginateAdministrativeAreasLevel1Handler } from '@api/common/administrative-area-level-1';
+import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonPaginateAdministrativeAreasLevel1Controller } from './common-paginate-administrative-areas-level-1.controller';
-import { CommonPaginateAdministrativeAreasLevel1Handler } from '../handlers/common-paginate-administrative-areas-level-1.handler';
-
-// sources
-import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.data';
 
 describe('CommonPaginateAdministrativeAreasLevel1Controller', () =>
 {

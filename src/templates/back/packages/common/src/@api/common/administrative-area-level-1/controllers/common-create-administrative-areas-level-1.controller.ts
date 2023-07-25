@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { CommonAdministrativeAreaLevel1Dto, CommonCreateAdministrativeAreaLevel1Dto } from '../dto';
+import { CommonAdministrativeAreaLevel1Dto, CommonCreateAdministrativeAreaLevel1Dto, CommonCreateAdministrativeAreasLevel1Handler } from '@api/common/administrative-area-level-1';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { CommonCreateAdministrativeAreasLevel1Handler } from '../handlers/common-create-administrative-areas-level-1.handler';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiBody, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] administrative-area-level-1')
 @Controller('common/administrative-areas-level-1/create')

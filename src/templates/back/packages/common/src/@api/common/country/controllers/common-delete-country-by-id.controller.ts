@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Param, Delete } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { CommonCountryDto } from '../dto';
+import { CommonCountryDto, CommonDeleteCountryByIdHandler } from '@api/common/country';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { CommonDeleteCountryByIdHandler } from '../handlers/common-delete-country-by-id.handler';
+import { Auditing, AuditingMeta, ContentLanguage, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete, Param } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] country')
 @Controller('common/country/delete')

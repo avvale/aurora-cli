@@ -2,7 +2,8 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 import { GridCustomHeaderPosition } from '../grid.types';
 
 @Directive({
-    selector: '[auGridCustomHeaderTemplate]',
+    selector  : '[auGridCustomHeaderTemplate]',
+    standalone: true,
 })
 export class GridCustomHeaderTemplateDirective
 {

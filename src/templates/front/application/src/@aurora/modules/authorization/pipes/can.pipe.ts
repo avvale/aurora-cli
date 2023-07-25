@@ -4,6 +4,7 @@ import { AuthorizationService } from '../authorization.service';
 @Pipe({
     name: 'can',
     pure: true,
+    standalone: true,
 })
 export class CanPipe implements PipeTransform
 {

@@ -3,6 +3,7 @@ import { ColumnConfig } from '../grid.types';
 
 @Pipe({
     name: 'isOriginColumnConfig',
+    standalone: true,
 })
 export class IsOriginColumnConfigPipe implements PipeTransform
 {

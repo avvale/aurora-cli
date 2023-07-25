@@ -4,7 +4,7 @@
         mat-icon-button
         *ngIf="!opened"
         (click)="open()">
-        <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
+        <mat-icon [svgIcon]="'heroicons_outline:magnifying-glass'"></mat-icon>
     </button>
     <div
         class="absolute inset-0 flex items-center shrink-0 z-99 bg-card"
@@ -13,7 +13,7 @@
         @slideOutTop>
         <mat-icon
             class="absolute ml-6 sm:ml-8"
-            [svgIcon]="'heroicons_outline:search'"></mat-icon>
+            [svgIcon]="'heroicons_outline:magnifying-glass'"></mat-icon>
         <input
             class="w-full h-full px-16 sm:px-18"
             [formControl]="searchControl"
@@ -60,7 +60,7 @@
             class="absolute top-1/2 right-5 sm:right-7 shrink-0 w-10 h-10 -mt-5"
             mat-icon-button
             (click)="close()">
-            <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+            <mat-icon [svgIcon]="'heroicons_outline:x-mark'"></mat-icon>
         </button>
     </div>
 </ng-container>
@@ -73,7 +73,7 @@
             [subscriptSizing]="'dynamic'">
             <mat-icon
                 matPrefix
-                [svgIcon]="'heroicons_outline:search'"></mat-icon>
+                [svgIcon]="'heroicons_outline:magnifying-glass'"></mat-icon>
             <input
                 matInput
                 [formControl]="searchControl"

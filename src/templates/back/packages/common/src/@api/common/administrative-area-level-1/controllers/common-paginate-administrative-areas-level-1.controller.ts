@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { CommonPaginateAdministrativeAreasLevel1Handler } from '@api/common/administrative-area-level-1';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { CommonPaginateAdministrativeAreasLevel1Handler } from '../handlers/common-paginate-administrative-areas-level-1.handler';
+import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] administrative-area-level-1')
 @Controller('common/administrative-areas-level-1/paginate')

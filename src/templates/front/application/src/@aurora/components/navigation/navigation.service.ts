@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { AuthorizationService } from '@aurora';
-import { IamService } from '@aurora/modules/iam/iam.service';
+import { AuthorizationService, IamService } from '@aurora';
 import { FuseNavigationService } from '@fuse/components/navigation';
 import { FuseNavigationItem } from '@fuse/components/navigation/navigation.types';
 import { Navigation } from 'app/core/navigation/navigation.types';

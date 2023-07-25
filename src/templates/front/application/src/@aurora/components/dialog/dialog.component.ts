@@ -7,6 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     styleUrls      : ['./dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation  : ViewEncapsulation.None,
+    standalone     : true,
 })
 export class DialogComponent
 {

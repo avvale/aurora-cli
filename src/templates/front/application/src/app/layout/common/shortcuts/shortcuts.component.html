@@ -3,7 +3,7 @@
     mat-icon-button
     (click)="openPanel()"
     #shortcutsOrigin>
-    <mat-icon [svgIcon]="'heroicons_outline:bookmark'"></mat-icon>
+    <mat-icon [svgIcon]="'heroicons_outline:squares-plus'"></mat-icon>
 </button>
 
 <!-- Shortcuts panel -->
@@ -18,7 +18,7 @@
                     (click)="closePanel()">
                     <mat-icon
                         class="icon-size-5 text-current"
-                        [svgIcon]="'heroicons_solid:x'"></mat-icon>
+                        [svgIcon]="'heroicons_solid:x-mark'"></mat-icon>
                 </button>
             </div>
             <div class="flex items-center text-lg font-medium leading-10">
@@ -41,7 +41,7 @@
                         [matTooltip]="'Enter edit mode'">
                         <mat-icon
                             class="icon-size-5 text-current"
-                            [svgIcon]="'heroicons_solid:pencil-alt'"></mat-icon>
+                            [svgIcon]="'heroicons_solid:pencil-square'"></mat-icon>
                     </button>
                     <!-- Enter 'add' mode -->
                     <button

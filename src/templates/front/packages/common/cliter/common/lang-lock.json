@@ -7,23 +7,23 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/common.component.ts",
-            "integrity": "sha1:ce9ee791d4b7282212000868aae802a312ebfdfa"
+            "integrity": "sha1:c740eb47d0df3adc39f39eeabc14f387926b963e"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.html",
-            "integrity": "sha1:22dd51262651c57af522fc5a619e0606591d630b"
+            "integrity": "sha1:b9865fe4f596a8a2eb3b76eedfd3e49539617fec"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.ts",
-            "integrity": "sha1:4ac023dbfab8fb4c13de23c60e9f7902db6d63c3"
+            "integrity": "sha1:0d526d5df80ccafd0f0e4bc21520c3b8850440d4"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.html",
-            "integrity": "sha1:11e3deee89878dad918dd666bcc47f359d1f585e"
+            "integrity": "sha1:a4d87520a0c40b796f07bc95c2e6bf9913d15b6b"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.ts",
-            "integrity": "sha1:bd2ad43c701185f69de87840c2387a9d2ed21f39"
+            "integrity": "sha1:08b1acbba0572db0981cc958db401becb573e1be"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.columns-config.ts",
@@ -35,11 +35,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.resolvers.ts",
-            "integrity": "sha1:30490ee86a6f5ccc3f48bb49374d603fa72d7f6d"
+            "integrity": "sha1:02550631a4278cf621d306f6e6c0536abcfecde8"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.service.ts",
-            "integrity": "sha1:e7edb2a9fce32f3bc516f92d2dbb7f069e27063a"
+            "integrity": "sha1:b9e794011e8ee1760fd4f1a6395f5e4aa075d49c"
         }
     ]
 }

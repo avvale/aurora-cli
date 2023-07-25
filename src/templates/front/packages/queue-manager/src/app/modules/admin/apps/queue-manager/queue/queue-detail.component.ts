@@ -1,17 +1,25 @@
+import { NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridState, GridStateService, log, mapActions, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnTranslationComponent, GridColumnsConfigStorageService, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, IsObjectEmptyPipe, MatFormFieldAppearanceComponent, QueryStatementHandler, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 import { jobColumnsConfig } from '../job/job.columns-config';
+import { JobService } from '../job/job.service';
 import { QueueJobType, QueueManagerJob, QueueManagerQueue } from '../queue-manager.types';
 import { QueueService } from './queue.service';
-import { JobService } from '../job/job.service';
 
 @Component({
     selector       : 'queue-manager-queue-detail',
     templateUrl    : './queue-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultDetailImports,
+        GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridElementsManagerComponent, GridTranslationsComponent, MatFormFieldAppearanceComponent, NgForOf,
+        GridFormElementDetailDialogTemplateDirective, IsObjectEmptyPipe, NgxJsonViewerModule
+    ],
 })
 export class QueueDetailComponent extends ViewDetailComponent
 {
@@ -303,7 +311,7 @@ export class QueueDetailComponent extends ViewDetailComponent
                     message: `${this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('queueManager.Job') })} ${action.meta.row.id}`,
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -330,10 +338,10 @@ export class QueueDetailComponent extends ViewDetailComponent
                             {
                                 await lastValueFrom(
                                     this.jobService
-                                        .deleteById<QueueManagerJob>(
-                                            action.meta.row.id,
-                                            this.managedObject.name,
-                                        ),
+                                        .deleteById<QueueManagerJob>({
+                                            id: action.meta.row.id,
+                                            name: this.managedObject.name,
+                                        }),
                                 );
 
                                 this.actionService.action({
@@ -349,7 +357,6 @@ export class QueueDetailComponent extends ViewDetailComponent
                     });
                 break;
             /* #endregion actions to manage jobs grid-elements-manager */
-
         }
     }
 }

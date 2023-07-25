@@ -77,6 +77,12 @@ export { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase sche
 export { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event } from './application/events/{{ toKebabCase schema.boundedContextName }}-updated-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
+
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
 // domain
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.aggregate.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';

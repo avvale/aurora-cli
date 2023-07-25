@@ -1,9 +1,9 @@
+import { IamCreateTenant, IamTenant, IamUpdateTenantById, IamUpdateTenants } from '../iam.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './tenant.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { IamTenant, IamCreateTenant, IamUpdateTenantById, IamUpdateTenants } from '../iam.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './tenant.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -41,10 +41,12 @@ export class TenantService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<IamTenant>>
     {
@@ -57,12 +59,15 @@ export class TenantService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<IamTenant>; };}, GridData<IamTenant>>(result => result.data.pagination),
-                tap((pagination: GridData<IamTenant>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -71,10 +76,12 @@ export class TenantService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamTenant;
@@ -90,21 +97,15 @@ export class TenantService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamTenant;
-                    };
-                },
-                {
-                    object: IamTenant;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamTenant;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.tenantSubject$.next(data.object);
                 }),
@@ -116,10 +117,12 @@ export class TenantService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamTenant;
@@ -135,21 +138,15 @@ export class TenantService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamTenant;
-                    };
-                },
-                {
-                    object: IamTenant;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamTenant;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.tenantSubject$.next(data.object);
                 }),
@@ -161,10 +158,12 @@ export class TenantService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: IamTenant[];
@@ -180,21 +179,15 @@ export class TenantService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: IamTenant[];
-                    };
-                },
-                {
-                    objects: IamTenant[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: IamTenant[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.tenantsSubject$.next(data.objects);
                 }),
@@ -205,9 +198,11 @@ export class TenantService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamCreateTenant;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -218,6 +213,9 @@ export class TenantService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -225,9 +223,11 @@ export class TenantService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamUpdateTenantById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -237,6 +237,9 @@ export class TenantService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -247,11 +250,13 @@ export class TenantService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamUpdateTenants;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -264,19 +269,37 @@ export class TenantService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -285,10 +308,12 @@ export class TenantService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -296,7 +321,13 @@ export class TenantService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 }

@@ -9,87 +9,87 @@ export const folders = [
         id   : '7c004a19-4506-48ef-93ab-f16381302e3b',
         title: 'Inbox',
         slug : 'inbox',
-        icon : 'heroicons_outline:inbox'
+        icon : 'heroicons_outline:inbox',
     },
     {
         id   : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         title: 'Sent',
         slug : 'sent',
-        icon : 'heroicons_outline:paper-airplane'
+        icon : 'heroicons_outline:paper-airplane',
     },
     {
         id   : 'fbdc8e79-a0c4-4a27-bc98-9c81ee7a86e5',
         title: 'Drafts',
         slug : 'drafts',
-        icon : 'heroicons_outline:document'
+        icon : 'heroicons_outline:document',
     },
     {
         id   : '0197c436-2ef3-424d-b546-8b7f49186e15',
         title: 'Spam',
         slug : 'spam',
-        icon : 'heroicons_outline:exclamation'
+        icon : 'heroicons_outline:exclamation-triangle',
     },
     {
         id   : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
         title: 'Trash',
         slug : 'trash',
-        icon : 'heroicons_outline:trash'
-    }
+        icon : 'heroicons_outline:trash',
+    },
 ];
 export const filters = [
     {
         id   : 'de1b41f6-6839-4f1b-9d2c-07e55f6f8f82',
         title: 'Starred',
         slug : 'starred',
-        icon : 'heroicons_outline:star'
+        icon : 'heroicons_outline:star',
     },
     {
         id   : '71bba1ec-a90e-4a71-9932-4bab0a99aa1c',
         title: 'Important',
         slug : 'important',
-        icon : 'heroicons_outline:exclamation-circle'
-    }
+        icon : 'heroicons_outline:exclamation-circle',
+    },
 ];
 export const labels = [
     {
         id   : 'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
         title: 'Personal',
         slug : 'personal',
-        color: 'blue'
+        color: 'blue',
     },
     {
         id   : '745cf30e-ca84-47a1-a553-b70eb630d8e7',
         title: 'Work',
         slug : 'work',
-        color: 'indigo'
+        color: 'indigo',
     },
     {
         id   : '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
         title: 'Payments',
         slug : 'payments',
-        color: 'red'
+        color: 'red',
     },
     {
         id   : 'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
         title: 'Invoices',
         slug : 'invoices',
-        color: 'teal'
+        color: 'teal',
     },
     {
         id   : '184cd689-4ee4-47cf-9f8a-12233d614326',
         title: 'Accounts',
         slug : 'accounts',
-        color: 'purple'
+        color: 'purple',
     },
     {
         id   : 'b67fc437-6118-4ec8-a3c7-9320b828e3fc',
         title: 'Forums',
         slug : 'forums',
-        color: 'green'
-    }
+        color: 'green',
+    },
 ];
 export const settings = {
-    messageLayout: 'right'
+    messageLayout: 'right',
 };
 export const mails = [
     {
@@ -97,16 +97,19 @@ export const mails = [
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-01.jpg',
-            contact: 'Myra Dudley <myra.dudley@company.com>'
+            contact: 'Myra Dudley <myra.dudley@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         bcc        : [
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
-        date       : now.set({hour: 20, minute: 13}).toISO(), // Today - 20:13
+        date       : now.set({
+            hour  : 20,
+            minute: 13,
+        }).toISO(), // Today - 20:13
         subject    : 'Please review and sign the attached agreement',
         content    : 'Hi Brian,\n\nUllamco deserunt commodo esse deserunt deserunt quis eiusmod. Laborum sint excepteur non sit eiusmod sunt voluptate ipsum nisi ullamco magna. Lorem consectetur est dolor minim exercitation deserunt quis duis fugiat ipsum incididunt non. Anim aute ipsum cupidatat nisi occaecat quis sit nisi labore labore dolore do. Pariatur veniam culpa quis veniam nisi exercitation veniam ut. Quis do sint proident fugiat ad.\n\nNon id nisi commodo veniam. Veniam veniam minim ea laborum voluptate id duis deserunt. Anim ut ut amet et ullamco nulla fugiat id incididunt adipisicing excepteur amet. Ex amet eu cillum non fugiat velit dolore. Incididunt duis est eu et ex sunt consectetur cillum nisi aute proident.\n\nIncididunt excepteur laborum quis sit. Ex quis officia incididunt proident aliqua adipisicing. Irure ad in Lorem laborum deserunt nulla consequat. Pariatur excepteur exercitation cupidatat aute.\n\nCheers!\nMyra Dudley',
         attachments: [
@@ -115,22 +118,22 @@ export const mails = [
                 name       : 'mystery-forest.jpg',
                 size       : 15539,
                 preview    : 'mystery-forest_preview.jpg',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'application/pdf',
                 name       : 'montly-invoice.pdf',
                 size       : 243449,
                 preview    : 'pdf',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/jpeg',
                 name       : 'birds-eye-sydney.jpg',
                 size       : 14294,
                 preview    : 'birds-eye-sydney_preview.jpg',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : true,
         important  : true,
@@ -139,18 +142,21 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'c531bc01-8a9e-481b-adf8-95303a6938c5',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-01.jpg',
-            contact: 'Shaw Murray <shaw.murray@company.com>'
+            contact: 'Shaw Murray <shaw.murray@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
-        date       : now.set({hour: 18, minute: 56}).toISO(), // Today - 18:56
+        date       : now.set({
+            hour  : 18,
+            minute: 56,
+        }).toISO(), // Today - 18:56
         subject    : 'Delivery address confirmation',
         content    : 'Dear Brian,\n\nDolore consectetur est cupidatat ipsum reprehenderit anim quis veniam anim ipsum incididunt exercitation. Velit exercitation culpa eiusmod dolore labore irure. Duis esse quis elit pariatur labore occaecat esse voluptate dolore deserunt cillum irure. Aute qui nulla est exercitation qui sunt anim aliquip. Ex ad est velit laboris exercitation ea ut pariatur. Amet reprehenderit ut est id sunt commodo anim et est voluptate et.\n\nMagna aliqua incididunt non ut voluptate nulla aliqua exercitation elit consectetur cupidatat. Proident in reprehenderit occaecat laborum non eu amet id aliqua nulla dolore. Eiusmod quis adipisicing quis cupidatat labore.\n\nReprehenderit nulla ullamco est dolore ex irure sunt nostrud reprehenderit quis dolor. Tempor nostrud elit elit aute ut ut eiusmod laboris excepteur consequat ex. Velit id ex ullamco in. Ea elit Lorem Lorem aliquip amet consequat irure nisi qui cillum incididunt. Commodo aute Lorem eiusmod veniam consectetur aute eu dolore. Ea magna incididunt laboris quis quis et tempor dolore dolore ut nisi.\n\nBest Regards,\nShaw Murray',
         attachments: [],
@@ -159,21 +165,24 @@ export const mails = [
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'ebc80fc3-6c56-4cae-a45a-771b15ced076',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-02.jpg',
-            contact: 'Sanders Beck <sanders.beck@company.com>'
+            contact: 'Sanders Beck <sanders.beck@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
-        date       : now.set({hour: 14, minute: 35}).toISO(), // Today - 14:35
+        date       : now.set({
+            hour  : 14,
+            minute: 35,
+        }).toISO(), // Today - 14:35
         subject    : 'Insurance documents',
         content    : 'Hi Brian,\n\nAliquip ipsum sunt sit sunt velit velit pariatur. Nisi incididunt eiusmod consequat ut cillum eu exercitation. Enim proident nostrud aute in. Non irure nisi duis aliquip commodo proident veniam adipisicing id velit. Enim magna Lorem fugiat tempor.\n\nCommodo non nulla incididunt irure voluptate. Fugiat culpa cillum aute quis. Voluptate veniam adipisicing dolor sint. Proident eiusmod quis duis ipsum sit eu.\n\nDeserunt reprehenderit adipisicing reprehenderit ipsum. Laborum in veniam amet occaecat tempor esse enim dolore elit sit quis adipisicing. Aute occaecat eiusmod enim cupidatat sunt.\n\nBest Regards,\nSanders Beck',
         attachments: [],
@@ -181,17 +190,20 @@ export const mails = [
         important  : false,
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '981c5ffb-7c88-47a8-b60f-f16150eeae9d',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-03.jpg',
-            contact: 'Zimmerman Gould <zimmerman.gould@company.com>'
+            contact: 'Zimmerman Gould <zimmerman.gould@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
-        date       : now.minus({day: 1}).set({hour: 22, minute: 26}).toISO(), // Yesterday - 22:26
+        date       : now.minus({day: 1}).set({
+            hour  : 22,
+            minute: 26,
+        }).toISO(), // Yesterday - 22:26
         subject    : 'Previous clients and their invoices',
         content    : 'Dear Brian,\n\nDo aute eu dolore officia laborum id anim fugiat incididunt nulla esse proident. Veniam veniam nostrud ut nisi magna ipsum ea eiusmod esse velit id aliqua nisi irure. Amet laborum fugiat deserunt est. Quis amet veniam anim nostrud irure cillum voluptate consequat qui cupidatat minim occaecat elit enim. Ut ut incididunt cillum sit sit irure culpa. Culpa exercitation minim velit eu. Ipsum exercitation excepteur et ad do sit.\n\nVeniam cupidatat officia aliqua ad excepteur cillum laboris deserunt esse laboris adipisicing reprehenderit. Reprehenderit anim consectetur pariatur labore do in irure. Ad consequat commodo non pariatur occaecat. Eiusmod cillum non anim consequat culpa nisi. Est nulla ut sint qui deserunt anim. Excepteur qui occaecat dolore nulla occaecat cupidatat aute sit laborum magna.\n\nConsequat aliqua commodo officia excepteur. Ex consectetur elit dolor exercitation ullamco amet laboris. Deserunt nulla non proident est pariatur reprehenderit reprehenderit. Ea nisi id aliqua cillum velit tempor ipsum dolor proident cillum eiusmod et ipsum anim. Elit non quis mollit enim Lorem cupidatat et labore. Laboris cillum reprehenderit aute veniam aliqua esse officia proident deserunt. Eiusmod laboris ullamco amet consectetur amet.\n\nKind Regards,\nZimmerman Gould',
         attachments: [],
@@ -199,20 +211,23 @@ export const mails = [
         important  : false,
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'a8d0645d-ac30-4f1a-a163-06e949120289',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-02.jpg',
-            contact: 'Karina Alford <karina.alford@company.com>'
+            contact: 'Karina Alford <karina.alford@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
-        date       : now.minus({day: 1}).set({hour: 20, minute: 5}).toISO(), // Yesterday - 20:05
+        date       : now.minus({day: 1}).set({
+            hour  : 20,
+            minute: 5,
+        }).toISO(), // Yesterday - 20:05
         subject    : 'Quote for a new web design project',
         content    : 'Hey Brian,\n\nNisi officia aliqua ex non cupidatat sint ullamco. Irure pariatur ullamco consequat ut eu anim. Ut ad elit pariatur est non sunt. Tempor dolore quis commodo dolore duis officia laboris nostrud sint. Exercitation ullamco laboris eiusmod culpa ut.\n\nAute Lorem aute occaecat dolore tempor ipsum proident fugiat deserunt non incididunt velit nulla. Dolor pariatur tempor amet qui eu exercitation. Tempor minim culpa proident nisi esse ea. Enim est fugiat aliqua aliqua aute velit laborum cupidatat irure nisi dolor deserunt aliqua.\n\nFugiat ut dolor tempor sunt aliquip dolor nostrud. Consequat incididunt ullamco cillum dolore excepteur deserunt est dolor aliquip irure do mollit officia. Consectetur cillum et non minim nisi. Esse quis sunt deserunt elit sint velit tempor et ullamco laboris officia excepteur. Veniam ad ut aliqua sunt consequat reprehenderit nostrud non in duis aute quis pariatur. Occaecat mollit anim non pariatur. Ad do ad id fugiat et culpa laborum esse cupidatat voluptate elit ut magna voluptate.\n\nBest Regards,\nKarina Alford',
         attachments: [],
@@ -220,20 +235,23 @@ export const mails = [
         important  : true,
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'fd117ed9-1285-4aca-8c1c-5c96e732c558',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-03.jpg',
-            contact: 'Carla Gray <carla.gray@company.com>'
+            contact: 'Carla Gray <carla.gray@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
-        date       : now.minus({day: 1}).set({hour: 16, minute: 43}).toISO(), // Yesterday - 16:43
+        date       : now.minus({day: 1}).set({
+            hour  : 16,
+            minute: 43,
+        }).toISO(), // Yesterday - 16:43
         subject    : 'Nulla culpa consectetur aute ex eu irure incididunt aliqua cupidatat sit cillum fugiat anim ea',
         content    : 'Hey Brian,\n\nDo pariatur occaecat tempor duis. Aute occaecat non consequat ut occaecat sint. Cillum reprehenderit elit nisi incididunt in labore pariatur. Labore mollit pariatur nulla officia esse anim exercitation nisi commodo culpa laborum amet nisi.\n\nSunt culpa mollit nostrud excepteur adipisicing sit do. Cillum voluptate amet do sit quis aliquip ea est qui elit. Veniam exercitation sit reprehenderit labore officia in labore excepteur eiusmod exercitation.\n\nEnim nostrud est non esse reprehenderit in ea eiusmod. Duis incididunt amet aliquip dolor esse. Nostrud qui commodo in non nostrud proident enim cupidatat. Aute sunt aliqua excepteur qui occaecat nulla incididunt commodo adipisicing ipsum.\n\nKind Regards,\nCarla Gray',
         attachments: [],
@@ -241,21 +259,24 @@ export const mails = [
         important  : false,
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'a307d83b-d256-4af5-948a-148878a7eaad',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-04.jpg',
-            contact: 'Rice Cash <rice.cash@company.com>'
+            contact: 'Rice Cash <rice.cash@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
-        date       : now.minus({day: 2}).set({hour: 11, minute: 28}).toISO(), // 2 days ago - 11:28
+        date       : now.minus({day: 2}).set({
+            hour  : 11,
+            minute: 28,
+        }).toISO(), // 2 days ago - 11:28
         subject    : 'Ipsum laborum minim aute labore in',
         content    : 'Dear Brian,\n\nLaboris non ad et aute sint aliquip mollit voluptate velit dolore magna fugiat ex. Voluptate amet aute deserunt tempor non laboris cillum. Voluptate veniam magna sint magna proident exercitation adipisicing aute id ad tempor reprehenderit magna ullamco. Laborum Lorem anim elit aliquip ut aute minim fugiat aliquip. Eiusmod est et occaecat dolore anim laborum ullamco ipsum commodo.\n\nCommodo amet veniam nostrud mollit quis sint qui nulla elit esse excepteur ullamco esse magna. Nisi duis aute est in mollit irure enim tempor in. Mollit ipsum laboris et velit ex excepteur pariatur. Cillum veniam id ipsum magna. Laborum duis aliquip ut ipsum ad aliqua id sit pariatur consequat sit. Sit nulla nulla ullamco nulla eiusmod et in dolore sint reprehenderit cupidatat.\n\nIpsum mollit cupidatat magna occaecat labore est fugiat est fugiat fugiat nulla labore laboris. Eiusmod aute adipisicing pariatur aliquip sint enim anim in dolore enim aute culpa nulla. Minim magna enim officia ipsum elit quis do velit deserunt Lorem veniam excepteur.\n\nKind Regards,\nRice Cash',
         attachments: [
@@ -264,41 +285,44 @@ export const mails = [
                 name       : 'lake-of-carezza.png',
                 size       : 13071,
                 preview    : 'lake-of-carrezza_preview.png',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/jpeg',
                 name       : 'birds-eye-sydney.jpg',
                 size       : 14294,
                 preview    : 'birds-eye-sydney_preview.jpg',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/png',
                 name       : 'yosemite-national-park.png',
                 size       : 14242,
                 preview    : 'yosemite-national-park_preview.png',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : true,
         important  : true,
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '67664fa3-3a87-4ab8-8c2c-dfd2b1de4c14',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-04.jpg',
-            contact: 'Elaine Ortiz <elaine.ortiz@company.com>'
+            contact: 'Elaine Ortiz <elaine.ortiz@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
-        date       : now.minus({day: 2}).set({hour: 7, minute: 12}).toISO(), // 2 days ago - 07:12
+        date       : now.minus({day: 2}).set({
+            hour  : 7,
+            minute: 12,
+        }).toISO(), // 2 days ago - 07:12
         subject    : 'Ipsum fugiat ad deserunt cillum sunt fugiat',
         content    : 'Hello Brian,\n\nId Lorem laborum eiusmod eiusmod mollit magna dolore. Et commodo officia fugiat dolor aliqua proident mollit ut commodo ullamco. Sunt nulla eu dolor velit velit reprehenderit. Culpa esse veniam fugiat eiusmod id veniam sunt reprehenderit minim mollit. Esse qui ea irure pariatur eu ullamco pariatur ipsum reprehenderit proident mollit proident. Nisi fugiat ut est aliquip nulla in non dolore.\n\nCulpa irure cillum ex fugiat cupidatat eiusmod non. Qui irure velit consectetur minim eu excepteur eiusmod veniam irure ad culpa nisi. Nisi sit nostrud quis ullamco aliquip non consequat sunt reprehenderit velit dolor dolor laboris. Dolore in Lorem consectetur nostrud. Laborum cupidatat exercitation voluptate duis amet. Sunt sint minim do in commodo ipsum commodo ea qui velit deserunt qui anim fugiat.\n\nExercitation et qui consequat incididunt nisi incididunt cupidatat officia in. Sit eiusmod anim aliqua elit. Nisi mollit ut non pariatur enim fugiat sint labore velit nostrud eu. Eiusmod id laboris laboris duis enim aute ipsum in magna. Sit eiusmod amet duis commodo sint et anim ex sunt deserunt dolor incididunt. Eiusmod duis dolore dolor elit occaecat do adipisicing ullamco ex laboris aliqua adipisicing. Labore pariatur aute proident mollit elit commodo labore minim dolore non in cillum.\n\nCheers!\nElaine Ortiz',
         attachments: [],
@@ -310,21 +334,24 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'd5913a7e-25f8-4163-bbf0-81d034163ce7',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-05.jpg',
-            contact: 'Fleming Stone <fleming.stone@company.com>'
+            contact: 'Fleming Stone <fleming.stone@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
-        date       : now.minus({day: 2}).set({hour: 6, minute: 1}).toISO(), // 2 days ago - 06:01
+        date       : now.minus({day: 2}).set({
+            hour  : 6,
+            minute: 1,
+        }).toISO(), // 2 days ago - 06:01
         subject    : 'Deserunt exercitation ut nulla elit Lorem',
         content    : 'Hi Brian,\n\nEst labore sunt sunt Lorem dolore. In excepteur esse proident ut consectetur dolor voluptate laborum veniam pariatur. Excepteur ut veniam sit culpa exercitation qui nulla nulla magna ea in dolore et consequat. Irure minim ad cupidatat amet reprehenderit excepteur incididunt nulla eu et excepteur anim et aliqua.\n\nSint sint Lorem magna est irure sint ea cupidatat fugiat. Occaecat non adipisicing magna magna culpa sit commodo aute ex consequat amet minim esse ut. In nulla eiusmod veniam deserunt in.\n\nIn aute excepteur qui pariatur fugiat. Occaecat velit voluptate proident occaecat ut laboris occaecat pariatur aute dolore do. Ut commodo ipsum est non commodo ut ea qui labore veniam. Occaecat nostrud eu dolor tempor velit excepteur sint occaecat excepteur aliqua aliquip. Magna mollit ea aliquip exercitation do elit ex reprehenderit esse aliqua elit.\n\nKind Regards,\nFleming Stone',
         attachments: [],
@@ -335,18 +362,21 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'b099a8e2-ffcc-4ae1-866d-8f8f6bd95ab3',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-06.jpg',
-            contact: 'England Wiley <england.wiley@company.com>'
+            contact: 'England Wiley <england.wiley@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
-        date       : now.minus({day: 5}).set({hour: 15, minute: 36}).toISO(), // 5 days ago - 15:36
+        date       : now.minus({day: 5}).set({
+            hour  : 15,
+            minute: 36,
+        }).toISO(), // 5 days ago - 15:36
         subject    : 'Minim do reprehenderit dolor ipsum officia magna laborum est anim in fugiat',
         content    : 'Dear Brian,\n\nAd do minim id ad ex sit reprehenderit labore do occaecat fugiat ut enim. Et sunt dolore sint non consequat ut. Esse deserunt nostrud pariatur nulla ullamco nulla sit aliquip culpa sunt ipsum. Ut ad minim qui anim amet aute cupidatat. Est ullamco duis laboris nulla labore incididunt consectetur. Cillum sunt mollit nulla laborum non tempor veniam consequat.\n\nAmet fugiat velit id deserunt pariatur velit laboris consectetur quis officia. Culpa nostrud deserunt nostrud esse labore esse consequat labore fugiat. Nostrud duis ex nulla et do.\n\nPariatur mollit ex adipisicing nostrud nostrud occaecat. Id tempor irure cupidatat duis cillum cupidatat nostrud enim anim. Esse nisi pariatur nisi elit elit sit quis ullamco dolor dolore pariatur est sint. Sint ex aliqua id sunt sunt magna amet ex sit anim. Irure aliquip fugiat ipsum tempor irure nisi Lorem anim sit ullamco. Exercitation nostrud mollit est non enim.\n\nBest Regards,\nEngland Wiley',
         attachments: [],
@@ -357,15 +387,15 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : '7bd21940-3388-479c-b1bc-3ebceb0472d8',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-07.jpg',
-            contact: 'Ingram Fowler <ingram.fowler@company.com>'
+            contact: 'Ingram Fowler <ingram.fowler@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sun Jan 07 2018 03:51:20 GMT+0000 (UTC)').toISOString(),
@@ -376,14 +406,14 @@ export const mails = [
         important  : true,
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '2d105bae-b4e5-4ba3-a40e-e9e2b5cc671a',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-05.jpg',
-            contact: 'Diana Walsh <diana.walsh@company.com>'
+            contact: 'Diana Walsh <diana.walsh@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Fri Jun 29 2018 07:37:52 GMT+0000 (UTC)').toISOString(),
@@ -395,22 +425,22 @@ export const mails = [
                 name       : 'yosemite-national-park.png',
                 size       : 14242,
                 preview    : 'yosemite-national-park_preview.png',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'application/pdf',
                 name       : 'montly-invoice.pdf',
                 size       : 243449,
                 preview    : 'pdf',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/jpeg',
                 name       : 'mystery-forest.jpg',
                 size       : 15539,
                 preview    : 'mystery-forest_preview.jpg',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : true,
         important  : false,
@@ -420,15 +450,15 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '4c3bd79a-6429-466d-b962-8eb09c524969',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-08.jpg',
-            contact: 'Mckinney Marsh <mckinney.marsh@company.com>'
+            contact: 'Mckinney Marsh <mckinney.marsh@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Wed Jun 20 2018 15:24:03 GMT+0000 (UTC)').toISOString(),
@@ -444,19 +474,19 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '770d24d1-1b9b-49ec-bcb4-f6feffc305ff',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-09.jpg',
-            contact: 'Meyer Fuller <meyer.fuller@company.com>'
+            contact: 'Meyer Fuller <meyer.fuller@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Wed Jan 31 2018 08:17:08 GMT+0000 (UTC)').toISOString(),
         subject    : 'Excepteur sunt ut ipsum ad culpa aliqua quis',
@@ -471,19 +501,19 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '3e2100de-ca0a-4a8e-a1c5-6c13172333dc',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-06.jpg',
-            contact: 'Carolina Wade <carolina.wade@company.com>'
+            contact: 'Carolina Wade <carolina.wade@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sat Mar 24 2018 17:50:27 GMT+0000 (UTC)').toISOString(),
         subject    : 'In sunt pariatur sunt sint exercitation',
@@ -496,15 +526,15 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'e1291d1a-fba6-4b23-b259-dd7c9074e976',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-10.jpg',
-            contact: 'Graves Huber <graves.huber@company.com>'
+            contact: 'Graves Huber <graves.huber@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sun Mar 25 2018 02:46:44 GMT+0000 (UTC)').toISOString(),
@@ -516,15 +546,15 @@ export const mails = [
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '7cba834c-3011-4897-be7d-ee43bbe69114',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-11.jpg',
-            contact: 'Tucker Santiago <tucker.santiago@company.com>'
+            contact: 'Tucker Santiago <tucker.santiago@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Mon Sep 17 2018 14:41:42 GMT+0000 (UTC)').toISOString(),
@@ -540,20 +570,20 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : 'd0de071d-2d72-4e0f-b903-79ca6ade9dbd',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-07.jpg',
-            contact: 'Becky Cain <becky.cain@company.com>'
+            contact: 'Becky Cain <becky.cain@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Fri Nov 30 2018 09:14:15 GMT+0000 (UTC)').toISOString(),
         subject    : 'Exercitation amet laborum officia nulla nulla adipisicing mollit culpa eiusmod irure deserunt voluptate laborum',
@@ -564,42 +594,42 @@ export const mails = [
                 name       : 'mystery-forest.jpg',
                 size       : 15539,
                 preview    : 'mystery-forest_preview.jpg',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/png',
                 name       : 'lake-of-carezza.png',
                 size       : 13071,
                 preview    : 'lake-of-carrezza_preview.png',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/png',
                 name       : 'yosemite-national-park.png',
                 size       : 14242,
                 preview    : 'yosemite-national-park_preview.png',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : false,
         important  : false,
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'd39c93b9-10d3-426f-a205-0ee5b30cd983',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-12.jpg',
-            contact: 'Miller Vazquez <miller.vazquez@company.com>'
+            contact: 'Miller Vazquez <miller.vazquez@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sun May 06 2018 19:35:14 GMT+0000 (UTC)').toISOString(),
         subject    : 'Ullamco eu nulla labore occaecat',
@@ -612,19 +642,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : '4e881b4f-bf47-472f-a1fe-f787a66d37dd',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-13.jpg',
-            contact: 'Delgado Stevens <delgado.stevens@company.com>'
+            contact: 'Delgado Stevens <delgado.stevens@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Wed Jan 17 2018 09:56:25 GMT+0000 (UTC)').toISOString(),
         subject    : 'Ut velit occaecat nostrud ullamco non excepteur velit ipsum ut',
@@ -638,15 +668,15 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '5dad8b60-8d98-4215-88b8-41158e167686',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-08.jpg',
-            contact: 'Concepcion Cleveland <concepcion.cleveland@company.com>'
+            contact: 'Concepcion Cleveland <concepcion.cleveland@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Fri Aug 17 2018 04:41:26 GMT+0000 (UTC)').toISOString(),
@@ -660,19 +690,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'eeccc250-8952-47e1-adff-31847289b4dd',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-09.jpg',
-            contact: 'Robin Berger <robin.berger@company.com>'
+            contact: 'Robin Berger <robin.berger@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Thu Apr 26 2018 20:55:18 GMT+0000 (UTC)').toISOString(),
         subject    : 'Reprehenderit ipsum aute cupidatat qui exercitation dolore voluptate labore veniam consequat quis',
@@ -683,19 +713,19 @@ export const mails = [
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'e8b006ad-e140-4fea-bb32-cc346e66eb93',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-10.jpg',
-            contact: 'Lynnette Burton <lynnette.burton@company.com>'
+            contact: 'Lynnette Burton <lynnette.burton@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Fri Nov 02 2018 16:15:50 GMT+0000 (UTC)').toISOString(),
         subject    : 'Consectetur deserunt qui ex occaecat dolore officia cillum magna magna adipisicing elit magna velit',
@@ -705,18 +735,18 @@ export const mails = [
         important  : true,
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'c6fc1d86-4a1f-4071-9c75-618fe2d853aa',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-11.jpg',
-            contact: 'Carmella Rios <carmella.rios@company.com>'
+            contact: 'Carmella Rios <carmella.rios@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Thu Jul 05 2018 14:26:57 GMT+0000 (UTC)').toISOString(),
         subject    : 'Proident dolore minim deserunt commodo elit aute laborum ullamco laboris anim consequat',
@@ -728,15 +758,15 @@ export const mails = [
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : 'c062a90f-52e9-4102-8def-1f8f9813deb4',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-14.jpg',
-            contact: 'Molina Pace <molina.pace@company.com>'
+            contact: 'Molina Pace <molina.pace@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Mon Sep 17 2018 21:45:31 GMT+0000 (UTC)').toISOString(),
@@ -748,35 +778,35 @@ export const mails = [
                 name       : 'birds-eye-sydney.jpg',
                 size       : 14294,
                 preview    : 'birds-eye-sydney_preview.jpg',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/png',
                 name       : 'yosemite-national-park.png',
                 size       : 14242,
                 preview    : 'yosemite-national-park_preview.png',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : true,
         important  : false,
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '545d12a6-e0f3-464d-af45-618163933a71',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-12.jpg',
-            contact: 'Olga Osborn <olga.osborn@company.com>'
+            contact: 'Olga Osborn <olga.osborn@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Thu Sep 27 2018 13:45:14 GMT+0000 (UTC)').toISOString(),
         subject    : 'Elit tempor enim nisi cillum cillum esse do magna exercitation minim',
@@ -791,20 +821,20 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '23456530-2cd4-4558-95d0-6311c2ee2ee8',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-13.jpg',
-            contact: 'Brooke Petersen <brooke.petersen@company.com>'
+            contact: 'Brooke Petersen <brooke.petersen@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sun Jul 22 2018 14:49:16 GMT+0000 (UTC)').toISOString(),
         subject    : 'Anim laboris aliquip excepteur consectetur eu enim sunt velit qui deserunt',
@@ -817,19 +847,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'affeecf6-e3c5-4377-8070-96f5ed9c6500',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-15.jpg',
-            contact: 'Estes Walter <estes.walter@company.com>'
+            contact: 'Estes Walter <estes.walter@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Tue Jul 17 2018 03:52:54 GMT+0000 (UTC)').toISOString(),
         subject    : 'Reprehenderit ad do quis ut fugiat proident labore',
@@ -840,15 +870,15 @@ export const mails = [
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'cb00d05c-6660-4dbb-a794-f22cff93f001',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-16.jpg',
-            contact: 'Holman Oconnor <holman.oconnor@company.com>'
+            contact: 'Holman Oconnor <holman.oconnor@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sat Jan 13 2018 22:30:44 GMT+0000 (UTC)').toISOString(),
@@ -860,20 +890,20 @@ export const mails = [
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '7bd27a67-df7c-4a2d-8042-1fb8a690d98e',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-17.jpg',
-            contact: 'Oneill Irwin <oneill.irwin@company.com>'
+            contact: 'Oneill Irwin <oneill.irwin@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sat Nov 17 2018 08:17:34 GMT+0000 (UTC)').toISOString(),
         subject    : 'Eu in ut dolor amet consequat aute esse non fugiat minim cillum sunt aliquip cillum',
@@ -888,19 +918,19 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : 'ccfb3a90-e18c-4645-8c00-4357d9bcd321',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-14.jpg',
-            contact: 'Marcie Morgan <marcie.morgan@company.com>'
+            contact: 'Marcie Morgan <marcie.morgan@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Tue Nov 20 2018 05:55:32 GMT+0000 (UTC)').toISOString(),
         subject    : 'Magna velit cillum dolor reprehenderit aliqua ut aute nisi in sunt Lorem laboris elit do',
@@ -910,19 +940,19 @@ export const mails = [
         important  : false,
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'a18b1961-ad32-4d00-984f-afef8ee0f4e9',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-18.jpg',
-            contact: 'Crane Trevino <crane.trevino@company.com>'
+            contact: 'Crane Trevino <crane.trevino@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sat Nov 03 2018 01:52:28 GMT+0000 (UTC)').toISOString(),
         subject    : 'Tempor consectetur officia excepteur culpa',
@@ -937,19 +967,19 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '3aaa5e3f-b8b5-47fc-9967-5f65dd8c7251',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-15.jpg',
-            contact: 'Kristine Wiggins <kristine.wiggins@company.com>'
+            contact: 'Kristine Wiggins <kristine.wiggins@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Tue Jan 09 2018 13:55:10 GMT+0000 (UTC)').toISOString(),
         subject    : 'Magna aute enim magna aliqua aliquip enim elit eiusmod nulla nostrud',
@@ -960,41 +990,41 @@ export const mails = [
                 name       : 'account-details.pdf',
                 size       : 127844,
                 preview    : 'pdf',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/jpeg',
                 name       : 'mystery-forest.jpg',
                 size       : 15539,
                 preview    : 'mystery-forest_preview.jpg',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/jpeg',
                 name       : 'birds-eye-sydney.jpg',
                 size       : 14294,
                 preview    : 'birds-eye-sydney_preview.jpg',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : true,
         important  : false,
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '0f72d2d0-bea4-4c0f-ace0-0be9f14c37f1',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-16.jpg',
-            contact: 'Terrie Carney <terrie.carney@company.com>'
+            contact: 'Terrie Carney <terrie.carney@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Tue Jan 23 2018 00:03:55 GMT+0000 (UTC)').toISOString(),
         subject    : 'Laboris in incididunt labore labore deserunt deserunt nostrud mollit voluptate non ex',
@@ -1004,19 +1034,19 @@ export const mails = [
         important  : false,
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'f825c5a3-2be8-4d48-9c4e-da60ff0e63f3',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-19.jpg',
-            contact: 'Goff Jennings <goff.jennings@company.com>'
+            contact: 'Goff Jennings <goff.jennings@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Tue Aug 07 2018 05:20:39 GMT+0000 (UTC)').toISOString(),
         subject    : 'Labore sint dolor nulla nostrud commodo amet nisi mollit commodo eiusmod duis quis irure non',
@@ -1030,19 +1060,19 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'e6dc9600-a3ab-4571-b2f2-ed00ee08e163',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-20.jpg',
-            contact: 'Browning Sanchez <browning.sanchez@company.com>'
+            contact: 'Browning Sanchez <browning.sanchez@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Fri Mar 16 2018 20:31:08 GMT+0000 (UTC)').toISOString(),
         subject    : 'Mollit cupidatat commodo consectetur duis ea elit est sint sunt ea qui nostrud incididunt',
@@ -1055,15 +1085,15 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : '0f22fedf-ea89-414e-91a4-0df0d9501ef2',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-01.jpg',
-            contact: 'Carey Lyons <carey.lyons@company.com>'
+            contact: 'Carey Lyons <carey.lyons@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Tue May 01 2018 07:56:59 GMT+0000 (UTC)').toISOString(),
@@ -1075,15 +1105,15 @@ export const mails = [
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'd942f99b-8925-49f0-b75b-2c48b714b1cf',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-02.jpg',
-            contact: 'Hendrix Goodwin <hendrix.goodwin@company.com>'
+            contact: 'Hendrix Goodwin <hendrix.goodwin@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Mon Jan 22 2018 19:04:29 GMT+0000 (UTC)').toISOString(),
@@ -1098,19 +1128,19 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '036c24e8-d8bc-4f0e-9a72-6fa884d69bb3',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-17.jpg',
-            contact: 'Leticia Fulton <leticia.fulton@company.com>'
+            contact: 'Leticia Fulton <leticia.fulton@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sat Mar 31 2018 05:44:48 GMT+0000 (UTC)').toISOString(),
         subject    : 'Est nostrud labore excepteur quis consectetur proident cupidatat',
@@ -1121,20 +1151,20 @@ export const mails = [
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '3dac4463-73aa-4bd4-a3d8-662ce38635cc',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-18.jpg',
-            contact: 'Carmen Shannon <carmen.shannon@company.com>'
+            contact: 'Carmen Shannon <carmen.shannon@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Fri Jun 15 2018 23:26:09 GMT+0000 (UTC)').toISOString(),
         subject    : 'Aute est laboris laborum consectetur cupidatat',
@@ -1145,20 +1175,20 @@ export const mails = [
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '6bb27e81-ee53-4db3-acc7-bd1267cd475d',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-19.jpg',
-            contact: 'Hattie Snow <hattie.snow@company.com>'
+            contact: 'Hattie Snow <hattie.snow@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Fri Jun 08 2018 01:23:42 GMT+0000 (UTC)').toISOString(),
         subject    : 'Officia exercitation exercitation ad exercitation ea ut ullamco',
@@ -1172,15 +1202,15 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'bfac8e5d-6487-4747-b827-67179ac5c206',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-20.jpg',
-            contact: 'Brandi Bradley <brandi.bradley@company.com>'
+            contact: 'Brandi Bradley <brandi.bradley@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sat Nov 17 2018 10:51:44 GMT+0000 (UTC)').toISOString(),
@@ -1192,15 +1222,15 @@ export const mails = [
                 name       : 'yosemite-national-park.png',
                 size       : 14242,
                 preview    : 'yosemite-national-park_preview.png',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'image/png',
                 name       : 'yosemite-national-park.png',
                 size       : 14242,
                 preview    : 'yosemite-national-park_preview.png',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : true,
         important  : false,
@@ -1208,19 +1238,19 @@ export const mails = [
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : '81b49a0a-e934-422a-81a8-8506d6f24e0e',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-01.jpg',
-            contact: 'Patsy Potter <patsy.potter@company.com>'
+            contact: 'Patsy Potter <patsy.potter@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Tue May 15 2018 15:37:38 GMT+0000 (UTC)').toISOString(),
         subject    : 'Ullamco fugiat fugiat non occaecat proident exercitation proident Lorem adipisicing commodo fugiat',
@@ -1230,18 +1260,18 @@ export const mails = [
         important  : false,
         unread     : true,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '8355b50a-f347-4177-8cef-6410c0aa46d1',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-02.jpg',
-            contact: 'Kathleen Cox <kathleen.cox@company.com>'
+            contact: 'Kathleen Cox <kathleen.cox@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sun Aug 26 2018 04:47:12 GMT+0000 (UTC)').toISOString(),
         subject    : 'Est fugiat reprehenderit cupidatat sunt velit aliquip reprehenderit exercitation',
@@ -1251,14 +1281,14 @@ export const mails = [
         important  : false,
         unread     : false,
         folder     : '7c004a19-4506-48ef-93ab-f16381302e3b',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '6d2bfbce-465b-4e8f-a79e-cd13ab8571c6',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-03.jpg',
-            contact: 'Kristina Ramirez <kristina.ramirez@company.com>'
+            contact: 'Kristina Ramirez <kristina.ramirez@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Tue Mar 06 2018 16:13:56 GMT+0000 (UTC)').toISOString(),
@@ -1273,15 +1303,15 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'd8815854-8726-4280-a5bf-eafd40b3972a',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-03.jpg',
-            contact: 'Mays Glass <mays.glass@company.com>'
+            contact: 'Mays Glass <mays.glass@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Thu Jan 04 2018 11:10:36 GMT+0000 (UTC)').toISOString(),
@@ -1295,19 +1325,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'bd7ac4df-77fa-45da-8eaf-31303ba794c4',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-04.jpg',
-            contact: 'Barber Zimmerman <barber.zimmerman@company.com>'
+            contact: 'Barber Zimmerman <barber.zimmerman@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Thu Aug 09 2018 01:33:05 GMT+0000 (UTC)').toISOString(),
         subject    : 'Sit elit aliquip sint ullamco tempor in duis Lorem laboris sunt laborum',
@@ -1318,20 +1348,20 @@ export const mails = [
         unread     : false,
         folder     : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'f5fe9764-70b0-407e-a015-96b04da948a7',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-04.jpg',
-            contact: 'Ginger Fry <ginger.fry@company.com>'
+            contact: 'Ginger Fry <ginger.fry@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Fri Jan 12 2018 15:46:37 GMT+0000 (UTC)').toISOString(),
         subject    : 'Fugiat voluptate Lorem id sint enim irure in velit nostrud commodo incididunt',
@@ -1343,15 +1373,15 @@ export const mails = [
         folder     : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : '3de07c8c-e687-4138-9967-7fd1feea17ee',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-05.jpg',
-            contact: 'Gardner Burnett <gardner.burnett@company.com>'
+            contact: 'Gardner Burnett <gardner.burnett@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Mon Mar 19 2018 13:34:20 GMT+0000 (UTC)').toISOString(),
@@ -1364,20 +1394,20 @@ export const mails = [
         folder     : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : 'd2bbcbbb-aa31-48ee-bbe4-2976b7043e78',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-05.jpg',
-            contact: 'Lula Lucas <lula.lucas@company.com>'
+            contact: 'Lula Lucas <lula.lucas@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Mon Nov 26 2018 16:08:25 GMT+0000 (UTC)').toISOString(),
         subject    : 'Quis anim labore esse proident',
@@ -1392,15 +1422,15 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '1a166107-cc66-42dd-96a2-91b1a40f8c62',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-06.jpg',
-            contact: 'Mcguire Crosby <mcguire.crosby@company.com>'
+            contact: 'Mcguire Crosby <mcguire.crosby@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Fri Mar 09 2018 04:54:41 GMT+0000 (UTC)').toISOString(),
@@ -1413,19 +1443,19 @@ export const mails = [
         folder     : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : '3fbf66d3-cc2d-4256-a276-ad73da93b7fd',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-07.jpg',
-            contact: 'Walsh Bender <walsh.bender@company.com>'
+            contact: 'Walsh Bender <walsh.bender@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Thu Nov 22 2018 20:26:17 GMT+0000 (UTC)').toISOString(),
         subject    : 'Mollit voluptate eu excepteur nisi labore dolor aliquip magna incididunt ipsum quis ex irure',
@@ -1436,15 +1466,15 @@ export const mails = [
                 name       : 'mystery-forest.jpg',
                 size       : 15539,
                 preview    : 'mystery-forest_preview.jpg',
-                downloadUrl: ''
+                downloadUrl: '',
             },
             {
                 type       : 'application/pdf',
                 name       : 'montly-invoice.pdf',
                 size       : 243449,
                 preview    : 'pdf',
-                downloadUrl: ''
-            }
+                downloadUrl: '',
+            },
         ],
         starred    : false,
         important  : false,
@@ -1453,19 +1483,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'b460fff2-8530-4464-8c44-744cd3de3bf8',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-08.jpg',
-            contact: 'Baker Guthrie <baker.guthrie@company.com>'
+            contact: 'Baker Guthrie <baker.guthrie@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sat Jul 21 2018 07:51:09 GMT+0000 (UTC)').toISOString(),
         subject    : 'In ipsum elit esse laboris qui',
@@ -1478,20 +1508,20 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : '16c18231-82ea-403d-895a-2a4bc27b61ca',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-06.jpg',
-            contact: 'Olivia Ratliff <olivia.ratliff@company.com>'
+            contact: 'Olivia Ratliff <olivia.ratliff@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Mon Feb 19 2018 13:18:23 GMT+0000 (UTC)').toISOString(),
         subject    : 'Mollit ex magna non Lorem id',
@@ -1502,20 +1532,20 @@ export const mails = [
         unread     : false,
         folder     : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'dfa4d802-b833-49c1-afdc-02116d73e35a',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-09.jpg',
-            contact: 'Schneider Kirby <schneider.kirby@company.com>'
+            contact: 'Schneider Kirby <schneider.kirby@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Mon Nov 12 2018 09:55:21 GMT+0000 (UTC)').toISOString(),
         subject    : 'Occaecat eiusmod cillum nostrud dolore et proident est esse magna mollit enim',
@@ -1530,15 +1560,15 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '84c4ef35-da0d-4d1f-a966-f7f413545b04',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-10.jpg',
-            contact: 'Griffith Keith <griffith.keith@company.com>'
+            contact: 'Griffith Keith <griffith.keith@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Tue Dec 11 2018 06:27:01 GMT+0000 (UTC)').toISOString(),
@@ -1553,19 +1583,19 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '0c78627f-5cbe-4d21-8491-455e98bf6f69',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-07.jpg',
-            contact: 'Beverly Pugh <beverly.pugh@company.com>'
+            contact: 'Beverly Pugh <beverly.pugh@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sun Oct 21 2018 14:36:41 GMT+0000 (UTC)').toISOString(),
         subject    : 'Mollit irure adipisicing in consectetur aliqua labore pariatur minim',
@@ -1579,15 +1609,15 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '3d382fb3-b5f5-43e3-b0bc-f2a6f29a5ee6',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-08.jpg',
-            contact: 'Ila Mclaughlin <ila.mclaughlin@company.com>'
+            contact: 'Ila Mclaughlin <ila.mclaughlin@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Wed Aug 01 2018 13:55:15 GMT+0000 (UTC)').toISOString(),
@@ -1603,20 +1633,20 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '7fd27d57-ccca-432d-af26-c3b609448fb7',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-09.jpg',
-            contact: 'Jenna Manning <jenna.manning@company.com>'
+            contact: 'Jenna Manning <jenna.manning@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sat Dec 08 2018 20:09:08 GMT+0000 (UTC)').toISOString(),
         subject    : 'Quis deserunt excepteur eiusmod reprehenderit enim exercitation voluptate anim',
@@ -1629,19 +1659,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : '18ba20d3-d7bc-4fc7-85dd-2db4db3196fe',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-10.jpg',
-            contact: 'Deann Hansen <deann.hansen@company.com>'
+            contact: 'Deann Hansen <deann.hansen@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Thu Jan 10 2019 12:13:47 GMT+0000 (UTC)').toISOString(),
         subject    : 'Duis minim quis in labore voluptate laboris do consequat eu anim sit deserunt incididunt',
@@ -1652,15 +1682,15 @@ export const mails = [
         unread     : false,
         folder     : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '476cb471-b3c1-4235-b5ef-3066b028483d',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-11.jpg',
-            contact: 'Tisha Moore <tisha.moore@company.com>'
+            contact: 'Tisha Moore <tisha.moore@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Wed Mar 07 2018 05:58:09 GMT+0000 (UTC)').toISOString(),
@@ -1675,20 +1705,20 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'a8aea501-17e9-4e40-b3a9-04f33b13cb8a',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-12.jpg',
-            contact: 'Janette Elliott <janette.elliott@company.com>'
+            contact: 'Janette Elliott <janette.elliott@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Mon May 07 2018 20:07:15 GMT+0000 (UTC)').toISOString(),
         subject    : 'Veniam amet voluptate Lorem qui ut id culpa mollit reprehenderit est',
@@ -1699,15 +1729,15 @@ export const mails = [
         unread     : true,
         folder     : '1ee2ea29-9a1f-4c27-b4d2-5e465703b6a0',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'cb55f824-40ed-4696-afaa-f3f8d3fb8614',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-13.jpg',
-            contact: 'Bettie Wyatt <bettie.wyatt@company.com>'
+            contact: 'Bettie Wyatt <bettie.wyatt@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Mon Dec 03 2018 17:07:32 GMT+0000 (UTC)').toISOString(),
@@ -1720,20 +1750,20 @@ export const mails = [
         folder     : 'fbdc8e79-a0c4-4a27-bc98-9c81ee7a86e5',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : '92dddecc-4758-4c48-8ef4-a59de4ab0705',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-11.jpg',
-            contact: 'Hardy Dale <hardy.dale@company.com>'
+            contact: 'Hardy Dale <hardy.dale@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Fri Nov 16 2018 21:53:34 GMT+0000 (UTC)').toISOString(),
         subject    : 'Aute commodo nostrud nisi quis sunt ex',
@@ -1744,15 +1774,15 @@ export const mails = [
         unread     : false,
         folder     : 'fbdc8e79-a0c4-4a27-bc98-9c81ee7a86e5',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '3f3f6154-a8ff-40d6-8b57-4c0f73d2cd8b',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-14.jpg',
-            contact: 'Eileen Bush <eileen.bush@company.com>'
+            contact: 'Eileen Bush <eileen.bush@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sat Feb 24 2018 12:22:13 GMT+0000 (UTC)').toISOString(),
@@ -1764,19 +1794,19 @@ export const mails = [
         unread     : false,
         folder     : 'fbdc8e79-a0c4-4a27-bc98-9c81ee7a86e5',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '2c80bcbe-c9cd-4eec-83fa-b9994713a784',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-15.jpg',
-            contact: 'Melody Mcintosh <melody.mcintosh@company.com>'
+            contact: 'Melody Mcintosh <melody.mcintosh@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Fri Jul 27 2018 07:20:48 GMT+0000 (UTC)').toISOString(),
         subject    : 'Reprehenderit consequat aliquip duis incididunt excepteur aliquip excepteur velit labore laboris',
@@ -1787,20 +1817,20 @@ export const mails = [
         unread     : false,
         folder     : 'fbdc8e79-a0c4-4a27-bc98-9c81ee7a86e5',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '2a44e5b7-e01c-43db-b586-540390f46f95',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-12.jpg',
-            contact: 'Dale Talley <dale.talley@company.com>'
+            contact: 'Dale Talley <dale.talley@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Tue Jan 02 2018 07:20:01 GMT+0000 (UTC)').toISOString(),
         subject    : 'Aute occaecat est amet adipisicing aute voluptate incididunt adipisicing pariatur esse anim ipsum labore',
@@ -1813,19 +1843,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'be1e969d-d52f-4824-83e5-c184b042b601',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-13.jpg',
-            contact: 'Britt Massey <britt.massey@company.com>'
+            contact: 'Britt Massey <britt.massey@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Tue Oct 09 2018 00:12:17 GMT+0000 (UTC)').toISOString(),
         subject    : 'Cillum tempor cillum ex esse eu Lorem',
@@ -1840,20 +1870,20 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : '8c7c9bff-6ca6-47ba-9242-cd9b1715eac7',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-16.jpg',
-            contact: 'Madelyn Haynes <madelyn.haynes@company.com>'
+            contact: 'Madelyn Haynes <madelyn.haynes@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sat Mar 03 2018 18:08:05 GMT+0000 (UTC)').toISOString(),
         subject    : 'Irure enim minim dolore et',
@@ -1867,20 +1897,20 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'afd52898-82e9-4fd4-8d6a-2391ec817e2a',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-14.jpg',
-            contact: 'Rowland Sweet <rowland.sweet@company.com>'
+            contact: 'Rowland Sweet <rowland.sweet@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Fri Jun 22 2018 14:39:18 GMT+0000 (UTC)').toISOString(),
         subject    : 'Sunt et proident ullamco qui id irure occaecat anim aute elit amet',
@@ -1890,18 +1920,18 @@ export const mails = [
         important  : true,
         unread     : true,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'e43d83f0-51ea-4da9-b18f-0de380b5156a',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-17.jpg',
-            contact: 'Fern Shaw <fern.shaw@company.com>'
+            contact: 'Fern Shaw <fern.shaw@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Wed Feb 21 2018 06:23:12 GMT+0000 (UTC)').toISOString(),
         subject    : 'Nisi esse incididunt nisi aliqua aliqua laborum occaecat quis duis minim',
@@ -1911,18 +1941,18 @@ export const mails = [
         important  : false,
         unread     : true,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '4e1d4820-e907-405a-990a-4a5772f482ad',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-18.jpg',
-            contact: 'Lorraine Ballard <lorraine.ballard@company.com>'
+            contact: 'Lorraine Ballard <lorraine.ballard@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sun Jun 24 2018 13:46:02 GMT+0000 (UTC)').toISOString(),
         subject    : 'Velit nisi ut laboris id et do aliquip',
@@ -1935,20 +1965,20 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'f0f2d069-50a0-484f-a4a2-3a272fcb433b',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-15.jpg',
-            contact: 'Jennings Franklin <jennings.franklin@company.com>'
+            contact: 'Jennings Franklin <jennings.franklin@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Thu Apr 26 2018 06:34:54 GMT+0000 (UTC)').toISOString(),
         subject    : 'Enim esse aliqua elit incididunt aliqua mollit amet quis occaecat veniam occaecat proident',
@@ -1958,14 +1988,14 @@ export const mails = [
         important  : false,
         unread     : true,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '7c93dbde-8b56-43a3-ade1-b132906679c4',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-19.jpg',
-            contact: 'Colette Cole <colette.cole@company.com>'
+            contact: 'Colette Cole <colette.cole@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Fri Sep 21 2018 08:37:21 GMT+0000 (UTC)').toISOString(),
@@ -1979,19 +2009,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : '7335d11d-04b1-4250-817a-6fdf3e099239',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-20.jpg',
-            contact: 'Kim Carlson <kim.carlson@company.com>'
+            contact: 'Kim Carlson <kim.carlson@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Wed Nov 28 2018 07:57:15 GMT+0000 (UTC)').toISOString(),
         subject    : 'Ullamco ad consectetur ut esse',
@@ -2004,19 +2034,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'e9dd17ec-4fc3-424e-89e5-c58d9d235764',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-01.jpg',
-            contact: 'Rena Park <rena.park@company.com>'
+            contact: 'Rena Park <rena.park@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sat Oct 13 2018 12:57:58 GMT+0000 (UTC)').toISOString(),
         subject    : 'Nulla qui anim ullamco officia elit',
@@ -2026,19 +2056,19 @@ export const mails = [
         important  : false,
         unread     : false,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '5fb8f4b5-fad4-4a82-8519-a732e68a48be',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-16.jpg',
-            contact: 'Haney Gibson <haney.gibson@company.com>'
+            contact: 'Haney Gibson <haney.gibson@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Tue Oct 23 2018 00:16:47 GMT+0000 (UTC)').toISOString(),
         subject    : 'Veniam consequat ipsum occaecat ipsum',
@@ -2048,18 +2078,18 @@ export const mails = [
         important  : true,
         unread     : true,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'e766ddd9-e9ea-499c-bb10-72fa57a03059',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-02.jpg',
-            contact: 'Freda Frank <freda.frank@company.com>'
+            contact: 'Freda Frank <freda.frank@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Wed Nov 21 2018 01:26:11 GMT+0000 (UTC)').toISOString(),
         subject    : 'Magna sint dolor sit laborum enim',
@@ -2070,19 +2100,19 @@ export const mails = [
         unread     : false,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '03693a62-d6bd-47c8-8f8e-112f21042722',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-17.jpg',
-            contact: 'Burns White <burns.white@company.com>'
+            contact: 'Burns White <burns.white@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Mon May 14 2018 20:06:57 GMT+0000 (UTC)').toISOString(),
         subject    : 'Veniam cillum ad proident incididunt nisi exercitation est',
@@ -2092,14 +2122,14 @@ export const mails = [
         important  : false,
         unread     : false,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'c59f5ea4-4f5d-4b9e-9c3c-a996b18fd98c',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-18.jpg',
-            contact: 'Fischer Cervantes <fischer.cervantes@company.com>'
+            contact: 'Fischer Cervantes <fischer.cervantes@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Thu Dec 13 2018 03:52:15 GMT+0000 (UTC)').toISOString(),
@@ -2112,19 +2142,19 @@ export const mails = [
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : '9ed5d4c1-819a-4719-88d7-cd7b08b2228d',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-19.jpg',
-            contact: 'Cervantes Reyes <cervantes.reyes@company.com>'
+            contact: 'Cervantes Reyes <cervantes.reyes@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Tue Oct 16 2018 11:06:27 GMT+0000 (UTC)').toISOString(),
         subject    : 'Et eu adipisicing aliqua nisi minim commodo anim aliqua aliquip',
@@ -2137,15 +2167,15 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'a769720b-0c64-483c-925c-5d747c61bff4',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-20.jpg',
-            contact: 'Cooke Whitney <cooke.whitney@company.com>'
+            contact: 'Cooke Whitney <cooke.whitney@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sat Jul 28 2018 14:16:37 GMT+0000 (UTC)').toISOString(),
@@ -2156,19 +2186,19 @@ export const mails = [
         important  : false,
         unread     : true,
         folder     : '0197c436-2ef3-424d-b546-8b7f49186e15',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'e6b83f13-c25e-4355-913f-54d93d8393f6',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-03.jpg',
-            contact: 'Lee Lloyd <lee.lloyd@company.com>'
+            contact: 'Lee Lloyd <lee.lloyd@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Thu Oct 18 2018 02:56:36 GMT+0000 (UTC)').toISOString(),
         subject    : 'Culpa incididunt amet sunt ipsum ad nostrud exercitation ea',
@@ -2181,20 +2211,20 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : '5c5c4ba7-542b-46b0-b0ce-976f5189d72c',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-01.jpg',
-            contact: 'Benson Shields <benson.shields@company.com>'
+            contact: 'Benson Shields <benson.shields@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sun Apr 01 2018 20:39:05 GMT+0000 (UTC)').toISOString(),
         subject    : 'Sit incididunt ad tempor veniam duis',
@@ -2204,19 +2234,19 @@ export const mails = [
         important  : true,
         unread     : true,
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
-        labels     : []
+        labels     : [],
     },
     {
         id         : '36abfef2-f86a-4c9e-99de-1869f0b3e71b',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-02.jpg',
-            contact: 'Emerson Whitehead <emerson.whitehead@company.com>'
+            contact: 'Emerson Whitehead <emerson.whitehead@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sun Jun 24 2018 11:19:49 GMT+0000 (UTC)').toISOString(),
         subject    : 'Esse ea ut est excepteur',
@@ -2230,19 +2260,19 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'b1a0ab26-6c86-4888-b2f1-69928b3ca718',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-04.jpg',
-            contact: 'Annabelle Greene <annabelle.greene@company.com>'
+            contact: 'Annabelle Greene <annabelle.greene@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Thu Aug 30 2018 03:24:13 GMT+0000 (UTC)').toISOString(),
         subject    : 'Commodo reprehenderit laborum nostrud culpa et aliquip',
@@ -2253,15 +2283,15 @@ export const mails = [
         unread     : false,
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '87cf5188-34dc-4947-b780-48c7fb6b6b23',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-03.jpg',
-            contact: 'Dawson Lewis <dawson.lewis@company.com>'
+            contact: 'Dawson Lewis <dawson.lewis@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Fri Aug 03 2018 03:03:12 GMT+0000 (UTC)').toISOString(),
@@ -2276,20 +2306,20 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '8749e3bc-24b3-43f3-997b-ee0b5bd7a442',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-04.jpg',
-            contact: 'Cole Dotson <cole.dotson@company.com>'
+            contact: 'Cole Dotson <cole.dotson@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Tue Sep 04 2018 09:09:08 GMT+0000 (UTC)').toISOString(),
         subject    : 'Sint quis veniam tempor sint',
@@ -2303,15 +2333,15 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '108ca3fa-a4dd-4988-a7ea-659ab4446050',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-05.jpg',
-            contact: 'Bernard Cunningham <bernard.cunningham@company.com>'
+            contact: 'Bernard Cunningham <bernard.cunningham@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Tue Aug 21 2018 08:51:03 GMT+0000 (UTC)').toISOString(),
@@ -2326,20 +2356,20 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : '63a362be-4ea7-4cc1-985f-5202db9c1370',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-06.jpg',
-            contact: 'Edwards Mcconnell <edwards.mcconnell@company.com>'
+            contact: 'Edwards Mcconnell <edwards.mcconnell@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Fri Jul 20 2018 05:22:32 GMT+0000 (UTC)').toISOString(),
         subject    : 'Amet ipsum voluptate voluptate dolore proident voluptate officia cillum adipisicing tempor tempor ad anim',
@@ -2351,19 +2381,19 @@ export const mails = [
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : 'ce206b7e-bbd0-4cd1-b69a-a8d4ef5b10bf',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-05.jpg',
-            contact: 'Lizzie Sanders <lizzie.sanders@company.com>'
+            contact: 'Lizzie Sanders <lizzie.sanders@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Fri Sep 07 2018 01:29:31 GMT+0000 (UTC)').toISOString(),
         subject    : 'Sint enim elit Lorem laboris',
@@ -2378,20 +2408,20 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
     },
     {
         id         : 'f7c2e821-b2e2-4103-bb20-ddcd3a42dc7c',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-06.jpg',
-            contact: 'Elise Hicks <elise.hicks@company.com>'
+            contact: 'Elise Hicks <elise.hicks@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
             'Graham Belltower <graham.belltower@company.com>',
-            'Julie T. <julie.t@company.com>'
+            'Julie T. <julie.t@company.com>',
         ],
         date       : new Date('Sun Mar 04 2018 15:45:07 GMT+0000 (UTC)').toISOString(),
         subject    : 'Cillum proident non officia mollit nulla dolor eiusmod et aliquip laboris ut adipisicing dolor deserunt',
@@ -2402,19 +2432,19 @@ export const mails = [
         unread     : false,
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : 'd8ca28a0-7fb7-4cd4-9058-3a867f841f76',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-07.jpg',
-            contact: 'Sherri Roth <sherri.roth@company.com>'
+            contact: 'Sherri Roth <sherri.roth@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Thu Dec 20 2018 09:37:24 GMT+0000 (UTC)').toISOString(),
         subject    : 'Ex laboris et sunt ex aute aute nisi',
@@ -2427,19 +2457,19 @@ export const mails = [
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
-            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3'
-        ]
+            '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
+        ],
     },
     {
         id         : 'b48be636-410c-485a-9442-7de7ce807dc2',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-07.jpg',
-            contact: 'Skinner Hawkins <skinner.hawkins@company.com>'
+            contact: 'Skinner Hawkins <skinner.hawkins@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sun Jun 10 2018 07:50:01 GMT+0000 (UTC)').toISOString(),
         subject    : 'Eu cillum amet dolore labore voluptate qui mollit ad anim ipsum laborum eiusmod aliquip',
@@ -2451,15 +2481,15 @@ export const mails = [
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : 'efe990eb-6559-48a6-a909-320c465de739',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-08.jpg',
-            contact: 'Velma Ellison <velma.ellison@company.com>'
+            contact: 'Velma Ellison <velma.ellison@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Thu Nov 01 2018 10:59:46 GMT+0000 (UTC)').toISOString(),
@@ -2472,15 +2502,15 @@ export const mails = [
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
         labels     : [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
-            '745cf30e-ca84-47a1-a553-b70eb630d8e7'
-        ]
+            '745cf30e-ca84-47a1-a553-b70eb630d8e7',
+        ],
     },
     {
         id         : 'd2bc3670-63f7-47c3-9d3d-4998c716f04a',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-09.jpg',
-            contact: 'Tamara Fitzgerald <tamara.fitzgerald@company.com>'
+            contact: 'Tamara Fitzgerald <tamara.fitzgerald@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sat Feb 24 2018 15:37:16 GMT+0000 (UTC)').toISOString(),
@@ -2492,15 +2522,15 @@ export const mails = [
         unread     : true,
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
         labels     : [
-            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e'
-        ]
+            'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
+        ],
     },
     {
         id         : '07b4d696-7657-4535-9838-3efb42355cbb',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-08.jpg',
-            contact: 'Duncan Gilmore <duncan.gilmore@company.com>'
+            contact: 'Duncan Gilmore <duncan.gilmore@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Mon Dec 31 2018 08:15:40 GMT+0000 (UTC)').toISOString(),
@@ -2511,14 +2541,14 @@ export const mails = [
         important  : false,
         unread     : true,
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'b8424db5-c607-4b9a-b88f-78c54343a342',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/female-10.jpg',
-            contact: 'Betty Dean <betty.dean@company.com>'
+            contact: 'Betty Dean <betty.dean@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Thu Aug 16 2018 06:17:15 GMT+0000 (UTC)').toISOString(),
@@ -2533,15 +2563,15 @@ export const mails = [
             'b167d3c4-f6ed-4ea6-9579-a12f95a9d76e',
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
-            'b2d1e4e7-7cfd-4b51-ae59-217a093df754'
-        ]
+            'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
+        ],
     },
     {
         id         : 'edf1399f-e829-4bde-ae5b-e03d18ad2f76',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-09.jpg',
-            contact: 'Pate Gardner <pate.gardner@company.com>'
+            contact: 'Pate Gardner <pate.gardner@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         date       : new Date('Sat May 26 2018 10:36:30 GMT+0000 (UTC)').toISOString(),
@@ -2552,18 +2582,18 @@ export const mails = [
         important  : false,
         unread     : true,
         folder     : '2fa74637-d362-4fd2-9a88-f7195a88bdde',
-        labels     : []
+        labels     : [],
     },
     {
         id         : 'bcc422a2-8a39-416e-8205-a5ce354ea622',
         type       : 'mail',
         from       : {
             avatar : 'assets/images/avatars/male-10.jpg',
-            contact: 'Lawson Kidd <lawson.kidd@company.com>'
+            contact: 'Lawson Kidd <lawson.kidd@company.com>',
         },
         to         : 'me <hughes.brian@company.com>',
         cc         : [
-            'Graham Belltower <graham.belltower@company.com>'
+            'Graham Belltower <graham.belltower@company.com>',
         ],
         date       : new Date('Sun Mar 18 2018 02:18:44 GMT+0000 (UTC)').toISOString(),
         subject    : 'Proident non proident dolore non dolor reprehenderit',
@@ -2578,7 +2608,7 @@ export const mails = [
             '745cf30e-ca84-47a1-a553-b70eb630d8e7',
             '8b035cb5-65c0-4ab1-bb4c-43b0e442d1f3',
             'b2d1e4e7-7cfd-4b51-ae59-217a093df754',
-            '184cd689-4ee4-47cf-9f8a-12233d614326'
-        ]
-    }
+            '184cd689-4ee4-47cf-9f8a-12233d614326',
+        ],
+    },
 ];

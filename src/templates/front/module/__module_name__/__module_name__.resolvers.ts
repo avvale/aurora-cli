@@ -1,10 +1,9 @@
 {{
     setVar 'importsArray' (
         array
-            (object items='Injectable' path='@angular/core')
-            (object items=(array 'ActivatedRouteSnapshot' 'Resolve' 'RouterStateSnapshot') path='@angular/router')
+            (object items='inject' path='@angular/core')
+            (object items=(array 'ActivatedRouteSnapshot' 'ResolveFn' 'RouterStateSnapshot') path='@angular/router')
             (object items=(array 'Action' 'ActionService' 'GridData' 'GridFiltersStorageService' 'GridStateService' 'QueryStatementHandler') path='@aurora')
-            (object items='Observable' path='rxjs')
             (object items=schema.aggregateName path=(sumStrings '../' toKebabCase schema.boundedContextName '.types'))
             (object items=(sumStrings (toCamelCase schema.moduleName) 'ColumnsConfig') path=(sumStrings './' (toKebabCase schema.moduleName) '.columns-config'))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' (toKebabCase schema.moduleName) '.service'))
@@ -62,65 +61,48 @@
 {{/eq}}
 {{/each}}
 {{{ importManager (object imports=importsArray) }}}
-@Injectable({
-    providedIn: 'root',
-})
-export class {{ toPascalCase schema.moduleName }}PaginationResolver implements Resolve<GridData<{{ schema.aggregateName }}>>
+export const {{ toCamelCase schema.moduleName }}PaginationResolver: ResolveFn<GridData<{{ schema.aggregateName }}>> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
-        private readonly actionService: ActionService,
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
+    const actionService = inject(ActionService);
+    const gridFiltersStorageService = inject(GridFiltersStorageService);
+    const gridStateService = inject(GridStateService);
+    const {{ toCamelCase schema.moduleName }}Service = inject({{ toPascalCase schema.moduleName }}Service);
+    {{#if schema.properties.hasI18n}}
+    const sessionService = inject(SessionService);
+    {{/if}}
+
+    actionService.action({
+        id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view',
+        isViewAction: true,
+    });
+
+    const gridId = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
+    gridStateService.setPaginationActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination');
+    gridStateService.setExportActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.export');
+
+    return {{ toCamelCase schema.moduleName }}Service.pagination({
+        query: QueryStatementHandler
+            .init({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
+            .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
+            .setSort(gridStateService.getSort(gridId))
+            .setPage(gridStateService.getPage(gridId))
+            .setSearch(gridStateService.getSearchState(gridId))
+            .getQueryStatement(),
         {{#if schema.properties.hasI18n}}
-        private readonly sessionService: SessionService,
+        headers: {
+            'Content-Language': sessionService.get('fallbackLang')[sessionService.get('searchKeyLang')],
+        },
         {{/if}}
-    ) {}
+    });
+};
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<GridData<{{ schema.aggregateName }}>>
-    {
-        this.actionService.action({
-            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.view',
-            isViewAction: true,
-        });
-
-        const gridId = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
-        this.gridStateService.setPaginationActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination');
-        this.gridStateService.setExportActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.export');
-
-        return this.{{ toCamelCase schema.moduleName }}Service.pagination({
-            query: QueryStatementHandler
-                .init({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
-                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(gridId))
-                .setSort(this.gridStateService.getSort(gridId))
-                .setPage(this.gridStateService.getPage(gridId))
-                .setSearch(this.gridStateService.getSearchState(gridId))
-                .getQueryStatement(),
-            {{#if schema.properties.hasI18n}}
-            headers: {
-                'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
-            },
-            {{/if}}
-        });
-    }
-}
-
-@Injectable({
-    providedIn: 'root',
-})
 {{#and (eq schema.properties.lengthGridSelectElementWebComponents 0) (eq schema.properties.lengthSelectElementWebComponents 0) }}
-export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<Action{{#if schema.properties.hasI18n}} | { object: {{ schema.aggregateName }}; }{{/if}}>
+export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<Action{{#if schema.properties.hasI18n}} | { object: {{ schema.aggregateName }}; }{{/if}}> = (
 {{else ~}}
-export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<{
+export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     {{#each schema.properties.withWebComponents}}
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipBoundedContextName }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
@@ -129,10 +111,12 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     {{ toCamelCase getRelationshipBoundedContextName }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
     {{/eq}}
     {{/each}}
-}>
+}> = (
 {{/and}}
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
 {{
     setVar 'injectionsArray' (
         array
@@ -157,101 +141,71 @@ export class {{ toPascalCase schema.moduleName }}NewResolver implements Resolve<
     (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
-{{{ injectorManager (object injections=injectionsArray) }}}
-    )
-    {}
+{{{ variablesInjectorManager (object injections=injectionsArray) }}}
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-{{#and (eq schema.properties.lengthGridSelectElementWebComponents 0) (eq schema.properties.lengthSelectElementWebComponents 0) }}
-    ): Action{{#if schema.properties.hasI18n}} | Observable<{ object: {{ schema.aggregateName }}; }>{{/if}}
-{{else}}
-    ): Observable<{
-    {{#each schema.properties.withWebComponents}}
-    {{#eq webComponent.type 'select'}}
-        {{ toCamelCase getRelationshipBoundedContextName }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
-    {{/eq}}
-    {{#eq webComponent.type 'grid-select-element'}}
-        {{ toCamelCase getRelationshipBoundedContextName }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
-    {{/eq}}
+    {{#each schema.properties.withGridSelectElementWebComponents}}
+    // paginate to manage {{ toCamelCase getRelationshipModuleNames }} grid-select-element
+    const {{ toCamelCase getRelationshipModuleNames }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}GridList';
+    gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}Pagination');
+    gridStateService.setExportActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModuleNames }}');
+
     {{/each}}
-    }>
-{{/and}}
+    {{#and (eq schema.properties.lengthGridSelectElementWebComponents 0) (eq schema.properties.lengthSelectElementWebComponents 0) }}{{#unless schema.properties.hasI18n}}return {{else}}const action = {{/unless}}{{/and}}actionService.action({
+        id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
+        isViewAction: true,
+    });
+    {{#if schema.properties.hasI18n}}
+
+    // set current lang
+    coreCurrentLangService.setCurrentLang(
+        sessionService
+            .get<CoreLang[]>('langs')
+            .find((lang: CoreLang) => lang[sessionService.get('searchKeyLang')] === route.paramMap.get('langId')) ||
+        sessionService.get<CoreLang>('fallbackLang'),
+    );
+
+    if (route.paramMap.get('id') && route.paramMap.get('langId'))
     {
-        {{#each schema.properties.withGridSelectElementWebComponents}}
-        // paginate to manage {{ toCamelCase getRelationshipModuleNames }} grid-select-element
-        const {{ toCamelCase getRelationshipModuleNames }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}GridList';
-        this.gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}Pagination');
-        this.gridStateService.setExportActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModuleNames }}');
-
-        {{/each}}
-        {{#and (eq schema.properties.lengthGridSelectElementWebComponents 0) (eq schema.properties.lengthSelectElementWebComponents 0) }}{{#unless schema.properties.hasI18n}}return {{else}}const action = {{/unless}}{{/and}}this.actionService.action({
-            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
-            isViewAction: true,
-        });
-        {{#if schema.properties.hasI18n}}
-
-        // set current lang
-        this.coreCurrentLangService.setCurrentLang(
-            this.sessionService
-                .get<CoreLang[]>('langs')
-                .find((lang: CoreLang) => lang[this.sessionService.get('searchKeyLang')] === route.paramMap.get('langId')) ||
-            this.sessionService.get<CoreLang>('fallbackLang'),
-        );
-
-        if (route.paramMap.get('id') && route.paramMap.get('langId'))
-        {
-            return this.{{ toCamelCase schema.moduleName }}Service
-                .findById({
-                    id        : route.paramMap.get('id'),
-                    constraint: {
-                        include: [{
-                            association: '{{ toCamelCase schema.moduleName }}I18n',
-                            required   : true,
-                            where      : {
-                                // retrieves object with the fallback lang to have
-                                // a guide to the texts to be translated
-                                langId: this.sessionService.get('fallbackLang').id,
-                            },
-                        }],
-                    },
-                    headers: {
-                        'Content-Language': route.paramMap.get('langId'),
-                    },
-                });
-        }
-        {{/if}}
-        {{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
-
-        return this.{{ toCamelCase schema.moduleName }}Service.getRelations({{#each schema.properties.withGridSelectElementWebComponents}}{
-            queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatementHandler
-                .init({ columnsConfig: {{ toCamelCase getRelationshipModuleName }}ColumnsConfig })
-                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModuleNames }}GridId))
-                .setSort(this.gridStateService.getSort({{ toCamelCase getRelationshipModuleNames }}GridId))
-                .setPage(this.gridStateService.getPage({{ toCamelCase getRelationshipModuleNames }}GridId))
-                .setSearch(this.gridStateService.getSearchState({{ toCamelCase getRelationshipModuleNames }}GridId))
-                .getQueryStatement(),
-        }{{/each}});
-        {{else}}
-        {{#if schema.properties.hasI18n}}
-
-        return action;
-        {{/if}}
-        {{/or}}
+        return {{ toCamelCase schema.moduleName }}Service
+            .findById({
+                id        : route.paramMap.get('id'),
+                constraint: {
+                    include: [{
+                        association: '{{ toCamelCase schema.moduleName }}I18n',
+                        required   : true,
+                        where      : {
+                            // retrieves object with the fallback lang to have
+                            // a guide to the texts to be translated
+                            langId: sessionService.get('fallbackLang').id,
+                        },
+                    }],
+                },
+                headers: {
+                    'Content-Language': route.paramMap.get('langId'),
+                },
+            });
     }
-}
+    {{/if}}
+    {{#or (unlessEq schema.properties.lengthGridSelectElementWebComponents 0) (unlessEq schema.properties.lengthSelectElementWebComponents 0) }}
 
-@Injectable({
-    providedIn: 'root',
-})
-export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve<{
+    return {{ toCamelCase schema.moduleName }}Service.getRelations({{#each schema.properties.withGridSelectElementWebComponents}}{
+        queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatementHandler
+            .init({ columnsConfig: {{ toCamelCase getRelationshipModuleName }}ColumnsConfig })
+            .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModuleNames }}GridId))
+            .setSort(gridStateService.getSort({{ toCamelCase getRelationshipModuleNames }}GridId))
+            .setPage(gridStateService.getPage({{ toCamelCase getRelationshipModuleNames }}GridId))
+            .setSearch(gridStateService.getSearchState({{ toCamelCase getRelationshipModuleNames }}GridId))
+            .getQueryStatement(),
+    }{{/each}});
+    {{else}}
+    {{#if schema.properties.hasI18n}}
+
+    return action;
+    {{/if}}
+    {{/or}}
+};
+
+export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
 {{
     setVar 'returnTypesArray' (
         array
@@ -276,9 +230,11 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
 {{/eq ~}}
 {{/each ~}}
 {{{ returnTypeManager (object returnTypes=returnTypesArray) }}}
-}>
+}> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
 {{
     setVar 'injectionsArray' (
         array
@@ -304,118 +260,79 @@ export class {{ toPascalCase schema.moduleName }}EditResolver implements Resolve
     (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
-{{{ injectorManager (object injections=injectionsArray) }}}
-    )
-    {}
+{{{ variablesInjectorManager (object injections=injectionsArray) }}}
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<{
-{{
-    setVar 'returnTypesArray' (
-        array
-            (object variableName='object' className=schema.aggregateName)
-    )
-~}}
-{{#each schema.properties.withWebComponents}}
-{{#eq webComponent.type 'select'}}
-{{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContextName) 'Get' (toPascalCase getRelationshipModuleNames)) className=(sumStrings getRelationshipAggregateName '[]'))
-~}}
-{{/eq ~}}
-{{#eq webComponent.type 'grid-select-element'}}
-{{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContextName) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
-~}}
-{{/eq ~}}
-{{#eq webComponent.type 'grid-elements-manager'}}
-{{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContextName) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
-~}}
-{{/eq ~}}
-{{/each ~}}
-{{{ returnTypeManager (object returnTypes=returnTypesArray nTabulations=2) }}}
-    }>
-    {
-        {{#each schema.properties.withGridSelectElementWebComponents}}
-        // paginate to manage {{ toCamelCase getRelationshipModuleNames }} grid-select-element
-        const {{ toCamelCase getRelationshipModuleNames }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}GridList';
-        this.gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}Pagination');
-        this.gridStateService.setExportActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModuleNames }}');
+    {{#each schema.properties.withGridSelectElementWebComponents}}
+    // paginate to manage {{ toCamelCase getRelationshipModuleNames }} grid-select-element
+    const {{ toCamelCase getRelationshipModuleNames }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}GridList';
+    gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}Pagination');
+    gridStateService.setExportActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModuleNames }}');
 
-        {{/each}}
-        {{#each schema.properties.withGridElementsManagerWebComponents}}
-        // paginate to manage {{ toCamelCase getRelationshipModuleNames }} grid-elements-manager
-        const {{ toCamelCase getRelationshipModuleNames }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}GridList';
-        this.gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}Pagination');
-        this.gridStateService.setExportActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModuleNames }}');
+    {{/each}}
+    {{#each schema.properties.withGridElementsManagerWebComponents}}
+    // paginate to manage {{ toCamelCase getRelationshipModuleNames }} grid-elements-manager
+    const {{ toCamelCase getRelationshipModuleNames }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}GridList';
+    gridStateService.setPaginationActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipModuleNames }}Pagination');
+    gridStateService.setExportActionId({{ toCamelCase getRelationshipModuleNames }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase getRelationshipModuleNames }}');
 
-        {{/each}}
-        this.actionService.action({
-            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit',
-            isViewAction: true,
+    {{/each}}
+    actionService.action({
+        id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit',
+        isViewAction: true,
+    });
+
+    {{#if schema.properties.hasI18n}}
+    // set current lang
+    coreCurrentLangService.setCurrentLang(
+        sessionService
+            .get<CoreLang[]>('langs')
+            .find((lang: CoreLang) => lang[sessionService.get('searchKeyLang')] === route.paramMap.get('langId')),
+    );
+
+    {{/if}}
+    {{#eq schema.properties.lengthWebComponents 0 }}
+    return {{ toCamelCase schema.moduleName }}Service
+        .findById({
+            id: route.paramMap.get('id'),
+            {{#if schema.properties.hasI18n}}
+            headers: {
+                'Content-Language': route.paramMap.get('langId'),
+            },
+            {{/if}}
         });
-
-        {{#if schema.properties.hasI18n}}
-        // set current lang
-        this.coreCurrentLangService.setCurrentLang(
-            this.sessionService
-                .get<CoreLang[]>('langs')
-                .find((lang: CoreLang) => lang[this.sessionService.get('searchKeyLang')] === route.paramMap.get('langId')),
-        );
-
-        {{/if}}
-        {{#eq schema.properties.lengthWebComponents 0 }}
-        return this.{{ toCamelCase schema.moduleName }}Service
-            .findById({
-                id: route.paramMap.get('id'),
-                {{#if schema.properties.hasI18n}}
-                headers: {
-                    'Content-Language': route.paramMap.get('langId'),
+    {{else}}
+    return {{ toCamelCase schema.moduleName }}Service
+        .findByIdWithRelations({
+            id: route.paramMap.get('id'),
+            {{#if schema.properties.hasI18n}}
+            headers: {
+                'Content-Language': route.paramMap.get('langId'),
+            },
+            {{/if}}
+            {{#each schema.properties.withGridSelectElementWebComponents}}
+            queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatementHandler
+                .init({ columnsConfig: {{ toCamelCase getRelationshipModuleName }}ColumnsConfig })
+                .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .setSort(gridStateService.getSort({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .setPage(gridStateService.getPage({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .setSearch(gridStateService.getSearchState({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .getQueryStatement(),
+            constraintPaginate{{ toPascalCase getRelationshipModuleNames }}: { /**/ },
+            {{/each}}
+            {{#each schema.properties.withGridElementsManagerWebComponents}}
+            queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatementHandler
+                .init({ columnsConfig: {{ toCamelCase getRelationshipModuleName }}ColumnsConfig })
+                .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .setSort(gridStateService.getSort({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .setPage(gridStateService.getPage({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .setSearch(gridStateService.getSearchState({{ toCamelCase getRelationshipModuleNames }}GridId))
+                .getQueryStatement(),
+            constraintPaginate{{ toPascalCase getRelationshipModuleNames }}: {
+                where: {
+                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: route.paramMap.get('id'),
                 },
-                {{/if}}
-            });
-        {{else}}
-        return this.{{ toCamelCase schema.moduleName }}Service
-            .findByIdWithRelations({
-                id: route.paramMap.get('id'),
-                {{#if schema.properties.hasI18n}}
-                headers: {
-                    'Content-Language': route.paramMap.get('langId'),
-                },
-                {{/if}}
-                {{#each schema.properties.withGridSelectElementWebComponents}}
-                queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatementHandler
-                    .init({ columnsConfig: {{ toCamelCase getRelationshipModuleName }}ColumnsConfig })
-                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .setSort(this.gridStateService.getSort({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .setPage(this.gridStateService.getPage({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .setSearch(this.gridStateService.getSearchState({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .getQueryStatement(),
-                constraintPaginate{{ toPascalCase getRelationshipModuleNames }}: { /**/ },
-                {{/each}}
-                {{#each schema.properties.withGridElementsManagerWebComponents}}
-                queryPaginate{{ toPascalCase getRelationshipModuleNames }}: QueryStatementHandler
-                    .init({ columnsConfig: {{ toCamelCase getRelationshipModuleName }}ColumnsConfig })
-                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .setSort(this.gridStateService.getSort({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .setPage(this.gridStateService.getPage({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .setSearch(this.gridStateService.getSearchState({{ toCamelCase getRelationshipModuleNames }}GridId))
-                    .getQueryStatement(),
-                constraintPaginate{{ toPascalCase getRelationshipModuleNames }}: {
-                    where: {
-                        {{ getForeignKey (object relationship=relationship schema=../schema) }}: route.paramMap.get('id'),
-                    },
-                },
-                {{/each}}
-            });
-        {{/eq}}
-    }
-}
+            },
+            {{/each}}
+        });
+    {{/eq}}
+};

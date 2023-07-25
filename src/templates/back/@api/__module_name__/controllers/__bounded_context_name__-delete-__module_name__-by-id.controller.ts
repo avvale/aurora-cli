@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Body' 'Controller' 'Param' 'Delete') path='@nestjs/common')
-            (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation') path='@nestjs/swagger')
+            (object items=(array 'Body' 'Controller' 'Param' 'Delete')  path='@nestjs/common')
+            (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation')  path='@nestjs/swagger')
             (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
             (object
                 items=

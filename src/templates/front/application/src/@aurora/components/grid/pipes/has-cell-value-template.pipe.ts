@@ -7,6 +7,7 @@ import { ColumnConfig } from '../grid.types';
  */
 @Pipe({
     name: 'hasCellValueTemplate',
+    standalone: true,
 })
 export class HasCellValueTemplatePipe implements PipeTransform
 {

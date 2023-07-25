@@ -20,11 +20,11 @@ import { CommonCountryModel } from '@app/common/country';
 		},
 		{
 			fields: ['name'],
-			unique: true,
+			unique: false,
 		},
 		{
 			fields: ['slug'],
-			unique: true,
+			unique: false,
 		},
 
     ],

@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { IamTenant } from '../iam.types';
-import { TenantService } from './tenant.service';
 import { tenantColumnsConfig } from './tenant.columns-config';
+import { TenantService } from './tenant.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'iam-tenant-list',
     templateUrl    : './tenant-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class TenantListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class TenantListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::tenant.list.edit':
-                this.router.navigate(['iam/tenant/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'iam/tenant/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'iam::tenant.list.delete':
@@ -116,7 +124,7 @@ export class TenantListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('iam.Tenant') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class TenantListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.tenantService
-                                        .deleteById<IamTenant>(action.meta.row.id),
+                                        .deleteById<IamTenant>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'iam::tenant.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class TenantListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = tenantColumnsConfig.map(tenantColumnConfig => tenantColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

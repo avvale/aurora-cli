@@ -1,11 +1,13 @@
+import { NgFor, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { take } from 'rxjs';
-import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
+import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
+import { take } from 'rxjs';
 
 // ---- customizations ----
 import { NavigationService as AuroraNavigationService } from '@aurora/components/navigation/navigation.service';
-
 
 @Component({
     selector       : 'languages',
@@ -13,6 +15,8 @@ import { NavigationService as AuroraNavigationService } from '@aurora/components
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     exportAs       : 'languages',
+    standalone     : true,
+    imports        : [MatButtonModule, MatMenuModule, NgTemplateOutlet, NgFor],
 })
 export class LanguagesComponent implements OnInit, OnDestroy
 {
@@ -24,8 +28,11 @@ export class LanguagesComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
-        private changeDetectorRef: ChangeDetectorRef,
-        private fuseNavigationService: FuseNavigationService,
+        private _changeDetectorRef: ChangeDetectorRef,
+        private _fuseNavigationService: FuseNavigationService,
+        private _translocoService: TranslocoService,
+
+        // ---- customizations ----
         private auroraNavigationService: AuroraNavigationService,
         private translocoService: TranslocoService,
     )
@@ -42,17 +49,16 @@ export class LanguagesComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Get the available languages from transloco
-        this.availableLangs = this.translocoService.getAvailableLangs();
+        this.availableLangs = this._translocoService.getAvailableLangs();
 
         // Subscribe to language changes
-        this.translocoService.langChanges$.subscribe(activeLang =>
+        this._translocoService.langChanges$.subscribe((activeLang) =>
         {
-
             // Get the active lang
             this.activeLang = activeLang;
 
             // Update the navigation
-            this.updateNavigationTranslations(activeLang);
+            this._updateNavigation(activeLang);
         });
 
         // Set the country iso codes for languages for flags
@@ -65,7 +71,9 @@ export class LanguagesComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void { /**/ }
+    ngOnDestroy(): void
+    {
+    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
@@ -79,7 +87,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
     setActiveLang(lang: string): void
     {
         // Set the active lang
-        this.translocoService.setActiveLang(lang);
+        this._translocoService.setActiveLang(lang);
     }
 
     /**
@@ -103,13 +111,16 @@ export class LanguagesComponent implements OnInit, OnDestroy
      * @param lang
      * @private
      */
-    private updateNavigationTranslations(lang: string): void
+    private _updateNavigation(lang: string): void
     {
         // Get the component -> navigation data -> item
-        const navComponent = this.fuseNavigationService.getComponent<FuseVerticalNavigationComponent>('mainNavigation');
+        const navComponent = this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>('mainNavigation');
 
         // Return if the navigation component does not exist
-        if (!navComponent) return null;
+        if ( !navComponent )
+        {
+            return null;
+        }
 
         // Get the flat navigation data
         const navigation = navComponent.navigation;

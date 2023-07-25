@@ -24,6 +24,7 @@
     "Delete": "Borrar",
     "Deleted.F": "Borrada",
     "Deleted.M": "Borrado",
+    "Deleted.M.P": "Borrados",
     "DeleteTranslation": "Borrar traducción",
     "DeletionWarning": "Va a elimininar registro {{ entity }} {{ id }}",
     "Edit": "Editar",

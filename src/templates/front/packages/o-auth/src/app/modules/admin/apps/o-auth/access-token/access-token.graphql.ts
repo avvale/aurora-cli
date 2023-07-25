@@ -7,7 +7,9 @@ export const fields = `
     name
     isRevoked
     expiresAt
-    refreshToken
+    refreshToken {
+        id
+    }
     createdAt
     updatedAt
 `;

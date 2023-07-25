@@ -28,6 +28,12 @@ export { CommonDeletedAdministrativeAreaLevel2Event } from './application/events
 export { CommonUpdatedAdministrativeAreasLevel2Event } from './application/events/common-updated-administrative-areas-level-2.event';
 export { CommonUpdatedAdministrativeAreaLevel2Event } from './application/events/common-updated-administrative-area-level-2.event';
 
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
+
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
 // domain
 export { CommonAdministrativeAreaLevel2 } from './domain/common-administrative-area-level-2.aggregate';
 export { CommonAdministrativeAreaLevel2Mapper } from './domain/common-administrative-area-level-2.mapper';

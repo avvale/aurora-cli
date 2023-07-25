@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FuseDrawerComponent } from '@fuse/components/drawer/drawer.component';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class FuseDrawerService
 {
     private _componentRegistry: Map<string, FuseDrawerComponent> = new Map<string, FuseDrawerComponent>();

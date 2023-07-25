@@ -53,7 +53,7 @@
                 class="max-w-36"
                 src="assets/images/logo/logo-text-on-dark.svg">
         </div>
-
+        <!-- ---- customizations ---- -->
         <au-environments-information class="fixed bottom-0 left-0 text-xs opacity-60 right-0 pointer-events-none"></au-environments-information>
     </ng-container>
 </fuse-vertical-navigation>
@@ -62,26 +62,25 @@
 <div class="flex flex-col flex-auto w-full min-w-0">
 
     <!-- Header -->
-    <div class="relative flex flex-0 items-center w-full h-[3.25rem] px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
+    <div class="relative flex flex-0 items-center w-full h-16 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
         <!-- Navigation toggle button -->
         <button
             mat-icon-button
             (click)="toggleNavigation('mainNavigation')">
-            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+            <mat-icon [svgIcon]="'heroicons_outline:bars-3'"></mat-icon>
         </button>
         <!-- Components -->
         <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
             <languages></languages>
             <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
-            <!-- <search [appearance]="'bar'"></search> -->
-            <!-- <shortcuts></shortcuts> -->
-            <!-- <messages></messages> -->
-            <!-- Quick chat toggle button-->
-            <!-- <button
+            <!-- <search [appearance]="'bar'"></search>
+            <shortcuts></shortcuts>
+            <messages></messages>
+            <button
                 class="lg:hidden"
                 mat-icon-button
                 (click)="quickChat.toggle()">
-                <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
+                <mat-icon [svgIcon]="'heroicons_outline:chat-bubble-left-right'"></mat-icon>
             </button> -->
         </div>
     </div>

@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue-manager.component.ts",
-            "integrity": "sha1:26333769c84099eedca54d189a8c9c6abd00d88d"
+            "integrity": "sha1:8b727822baf9718adfa14cd880ad7c0e6568bc0d"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-detail.component.html",
-            "integrity": "sha1:fda8a01bf915eff3392b57be75cdb309340c19ed"
+            "integrity": "sha1:57ddeaea7221f230ff472a1fe9a0a4993014ac0f"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-detail.component.ts",
-            "integrity": "sha1:194fad71dd2fa482f2376719cdf759332c06c1b9"
+            "integrity": "sha1:1653546afd2807dba6e46d2352aef1ab28945851"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-list.component.html",
-            "integrity": "sha1:17412951d38279a7a937aa6fef6c9f2ab51da7d8"
+            "integrity": "sha1:e8b38897d2868d07f395a6817147ffd02991296b"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-list.component.ts",
-            "integrity": "sha1:816a8053023414f33662e18b94acdf93ea0cdf8d"
+            "integrity": "sha1:4c71bd17c09598e20b86f7989a3b230a9e55fd82"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue.columns-config.ts",
-            "integrity": "sha1:51f65a6f82664f821734cad29e40abe0d231c6dc"
+            "integrity": "sha1:c4435881e898d0327bd9ecc789fc06b5e463c8d9"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue.graphql.ts",
-            "integrity": "sha1:34420a055c94e8b2c649bb7b6bdf9d3b25cb4f5a"
+            "integrity": "sha1:9b3e98e1aa4ed841bdbab3307f000942d8305279"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue.resolvers.ts",
-            "integrity": "sha1:93837c9469fa6516d999af2c9b8e6d97e34cd276"
+            "integrity": "sha1:f9feb75b1f07233f287e4a57015a7c233aeaaa65"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue.service.ts",
-            "integrity": "sha1:66c1c1e5257b4e4d74258aebeadfc8f8f13be530"
+            "integrity": "sha1:8a5ef65e01d6b211bef8e9069cde85104cc47d07"
         }
     ]
 }

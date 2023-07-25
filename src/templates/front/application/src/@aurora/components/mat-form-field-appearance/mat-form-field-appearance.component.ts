@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     selector       : 'au-mat-form-field-appearance',
     templateUrl    : './mat-form-field-appearance.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
 })
 export class MatFormFieldAppearanceComponent
 {

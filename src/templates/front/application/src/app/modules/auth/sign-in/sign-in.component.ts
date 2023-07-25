@@ -1,17 +1,31 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule, NgForm, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
+import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 
 // ---- customizations ----
 import { AuthenticationService, IamService, log } from '@aurora';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
     selector     : 'auth-sign-in',
     templateUrl  : './sign-in.component.html',
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations,
+    standalone   : true,
+    imports      : [
+        // ---- customizations ----
+        TranslocoModule,
+        RouterLink, FuseAlertComponent, NgIf, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule, MatProgressSpinnerModule
+    ],
 })
 export class AuthSignInComponent implements OnInit
 {
@@ -31,6 +45,8 @@ export class AuthSignInComponent implements OnInit
         private _activatedRoute: ActivatedRoute,
         private _formBuilder: UntypedFormBuilder,
         private _router: Router,
+
+        // ---- customizations ----
         private authenticationService: AuthenticationService,
         private iamService: IamService,
     )
@@ -76,16 +92,30 @@ export class AuthSignInComponent implements OnInit
         this.showAlert = false;
 
         // Sign in
-        this.authenticationService
-            .signIn(this.signInForm.value)
-            .subscribe({
-                next: () =>
+        this.authenticationService.signIn(this.signInForm.value)
+            .subscribe(
+                () =>
                 {
-                    /**/
+                    // Set the redirect url.
+                    // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
+                    // to the correct page after a successful sign in. This way, that url can be set via
+                    // routing file and we don't have to touch here.
+                    const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
+
+                    // ---- customizations ----
+                    // after sing in, get user, calling get, after that, user will be available in iamService.me
+                    this.iamService.get()
+                        .subscribe(() =>
+                        {
+                            console.log('redirectURL', redirectURL);
+                            // Navigate to the redirect url
+                            this._router.navigateByUrl(redirectURL)
+                        });
+
                 },
-                error: error =>
+                (response) =>
                 {
-                    log(`[DEBUG] ${error}`);
+                    log(`[DEBUG] Error to login application: ${response}`);
 
                     // Re-enable the form
                     this.signInForm.enable();
@@ -102,21 +132,6 @@ export class AuthSignInComponent implements OnInit
                     // Show the alert
                     this.showAlert = true;
                 },
-                complete: () =>
-                {
-                    // Set the redirect url.
-                    // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
-                    // to the correct page after a successful sign in. This way, that url can be set via
-                    // routing file and we don't have to touch here.
-                    const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
-
-                    // ---- customizations ----
-                    // after sing in, get user, calling get, after that, user will be available in iamService.me
-                    this.iamService.get()
-                        .subscribe(() =>
-                            this._router.navigateByUrl(redirectURL),
-                        );
-                },
-            });
+            );
     }
 }

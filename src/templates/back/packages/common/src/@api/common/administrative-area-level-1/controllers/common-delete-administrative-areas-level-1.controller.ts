@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { CommonAdministrativeAreaLevel1Dto } from '../dto';
+import { CommonAdministrativeAreaLevel1Dto, CommonDeleteAdministrativeAreasLevel1Handler } from '@api/common/administrative-area-level-1';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { CommonDeleteAdministrativeAreasLevel1Handler } from '../handlers/common-delete-administrative-areas-level-1.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[common] administrative-area-level-1')
 @Controller('common/administrative-areas-level-1/delete')

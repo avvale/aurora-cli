@@ -1,15 +1,13 @@
+import { IamAccount, IamCreateAccount, IamRole, IamTenant, IamUpdateAccountById, IamUpdateAccounts } from '../iam.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, getRelations, paginationQuery, updateByIdMutation, updateMutation } from './account.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { IamAccount, IamCreateAccount, IamRole, IamTenant, IamUpdateAccountById, IamUpdateAccounts } from '../iam.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, getRelations, findByIdWithRelationsQuery } from './account.graphql';
-
-// ---- customizations ----
 import { RoleService } from '../role/role.service';
 import { TenantService } from '../tenant/tenant.service';
-import { OAuthClient } from '../../o-auth/o-auth.types';
 import { ClientService } from '../../o-auth/client/client.service';
+import { OAuthClient } from '../../o-auth/o-auth.types';
 
 @Injectable({
     providedIn: 'root',
@@ -50,10 +48,12 @@ export class AccountService
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<GridData<IamAccount>>
     {
@@ -66,12 +66,15 @@ export class AccountService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: { pagination: GridData<IamAccount>; };}, GridData<IamAccount>>(result => result.data.pagination),
-                tap((pagination: GridData<IamAccount>) => this.paginationSubject$.next(pagination)),
+                map(result => result.data.pagination),
+                tap(pagination => this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -80,10 +83,12 @@ export class AccountService
             graphqlStatement = findByIdQuery,
             id = '',
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamAccount;
@@ -99,21 +104,15 @@ export class AccountService
                     id,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamAccount;
-                    };
-                },
-                {
-                    object: IamAccount;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamAccount;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.accountSubject$.next(data.object);
                 }),
@@ -125,10 +124,12 @@ export class AccountService
             graphqlStatement = findQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamAccount;
@@ -144,21 +145,15 @@ export class AccountService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamAccount;
-                    };
-                },
-                {
-                    object: IamAccount;
-                }>(result => result.data),
-                tap((data: {
-                    object: IamAccount;
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.accountSubject$.next(data.object);
                 }),
@@ -170,10 +165,12 @@ export class AccountService
             graphqlStatement = getQuery,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: IamAccount[];
@@ -189,21 +186,15 @@ export class AccountService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        objects: IamAccount[];
-                    };
-                },
-                {
-                    objects: IamAccount[];
-                }>(result => result.data),
-                tap((data: {
-                    objects: IamAccount[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.accountsSubject$.next(data.objects);
                 }),
@@ -214,9 +205,11 @@ export class AccountService
         {
             graphqlStatement = createMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamCreateAccount;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -227,6 +220,9 @@ export class AccountService
                 variables: {
                     payload: object,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -234,9 +230,11 @@ export class AccountService
         {
             graphqlStatement = updateByIdMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamUpdateAccountById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -246,6 +244,9 @@ export class AccountService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
@@ -256,11 +257,13 @@ export class AccountService
             object = null,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamUpdateAccounts;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -273,19 +276,37 @@ export class AccountService
                     query,
                     constraint,
                 },
+                context: {
+                    headers,
+                },
             });
     }
 
     deleteById<T>(
-        id: string,
-        graphqlStatement = deleteByIdMutation,
+        {
+            graphqlStatement = deleteByIdMutation,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
     ): Observable<FetchResult<T>>
     {
         return this.graphqlService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { id },
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -294,10 +315,12 @@ export class AccountService
             graphqlStatement = deleteMutation,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -305,7 +328,13 @@ export class AccountService
             .client()
             .mutate({
                 mutation : graphqlStatement,
-                variables: { query, constraint },
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
             });
     }
 
@@ -314,9 +343,11 @@ export class AccountService
         {
             queryGetClients = {},
             constraintGetClients = {},
+            headers = {},
         }: {
             queryGetClients?: QueryStatement;
             constraintGetClients?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         iamGetTenants: IamTenant[];
@@ -336,25 +367,15 @@ export class AccountService
                     queryGetClients,
                     constraintGetClients,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{ data: {
-                    iamGetTenants: IamTenant[];
-                    iamGetRoles: IamRole[];
-                    oAuthGetClients: OAuthClient[];
-                };},
-                {
-                    iamGetTenants: IamTenant[];
-                    iamGetRoles: IamRole[];
-                    oAuthGetClients: OAuthClient[];
-                }>(result => result.data),
-                tap((data: {
-                    iamGetTenants: IamTenant[];
-                    iamGetRoles: IamRole[];
-                    oAuthGetClients: OAuthClient[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.tenantService.tenantsSubject$.next(data.iamGetTenants);
                     this.roleService.rolesSubject$.next(data.iamGetRoles);
@@ -370,12 +391,14 @@ export class AccountService
             constraint = {},
             queryGetClients = {},
             constraintGetClients = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
             queryGetClients?: QueryStatement;
             constraintGetClients?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamAccount;
@@ -399,30 +422,15 @@ export class AccountService
                     queryGetClients,
                     constraintGetClients,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamAccount;
-                        iamGetTenants: IamTenant[];
-                        iamGetRoles: IamRole[];
-                        oAuthGetClients: OAuthClient[];
-                    };
-                },
-                {
-                    object: IamAccount;
-                    iamGetTenants: IamTenant[];
-                    iamGetRoles: IamRole[];
-                    oAuthGetClients: OAuthClient[];
-                }>(result => result.data),
-                tap((data: {
-                    object: IamAccount;
-                    iamGetTenants: IamTenant[];
-                    iamGetRoles: IamRole[];
-                    oAuthGetClients: OAuthClient[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.accountSubject$.next(data.object);
                     this.tenantService.tenantsSubject$.next(data.iamGetTenants);

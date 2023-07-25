@@ -1,11 +1,6 @@
+import { CommonCreateLangsController, CommonCreateLangsHandler } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonCreateLangsController } from './common-create-langs.controller';
-import { CommonCreateLangsHandler } from '../handlers/common-create-langs.handler';
-
-// sources
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonCreateLangsController', () =>
 {

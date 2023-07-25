@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { OAuthClient } from '../o-auth.types';
-import { ClientService } from './client.service';
 import { clientColumnsConfig } from './client.columns-config';
+import { ClientService } from './client.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-client-list',
     templateUrl    : './client-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class ClientListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class ClientListComponent extends ViewBaseComponent
                 break;
 
             case 'oAuth::client.list.edit':
-                this.router.navigate(['o-auth/client/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'o-auth/client/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'oAuth::client.list.delete':
@@ -116,7 +124,7 @@ export class ClientListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('oAuth.Client') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class ClientListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.clientService
-                                        .deleteById<OAuthClient>(action.meta.row.id),
+                                        .deleteById<OAuthClient>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'oAuth::client.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class ClientListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = clientColumnsConfig.map(clientColumnConfig => clientColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

@@ -12,6 +12,14 @@ export interface AddCommandState extends CommandState
     packageName: string;
 }
 
+export interface ConstructorInjectionStatement
+{
+    scope: 'private' | 'public' | 'protected';
+    readonly?: boolean;
+    variableName: string;
+    className: string;
+}
+
 export interface GenerateCommandState extends CommandState
 {
     lockFiles: LockFile[];
@@ -32,14 +40,6 @@ export interface ImportStatement
     path: string;
     defaultImport?: boolean;
     oneRowByItem?: boolean;
-}
-
-export interface InjectionStatement
-{
-    scope: 'private' | 'public' | 'protected';
-    readonly?: boolean;
-    variableName: string;
-    className: string;
 }
 
 export interface LiteralObject
@@ -199,6 +199,12 @@ export enum TemplateFile
 {
     FILE            = 'bounded-context',
     VALUE_OBJECT    = 'module',
+}
+
+export interface VariableInjectionStatement
+{
+    variableName: string;
+    className: string;
 }
 
 export enum WebComponentType

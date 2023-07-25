@@ -1,9 +1,13 @@
+import { NgClass, NgFor } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
+import { FuseDrawerComponent } from '@fuse/components/drawer';
+import { FuseConfig, FuseConfigService, Scheme, Theme, Themes } from '@fuse/services/config';
+
 import { Subject, takeUntil } from 'rxjs';
-import { FuseConfigService } from '@fuse/services/config';
-import { AppConfig, Scheme, Theme, Themes } from 'app/core/config/app.config';
-import { Layout } from 'app/layout/layout.types';
 
 @Component({
     selector     : 'settings',
@@ -18,18 +22,21 @@ import { Layout } from 'app/layout/layout.types';
             }
 
             @media (screen and min-width: 1280px) {
+
                 empty-layout + settings .settings-cog {
                     right: 0 !important;
                 }
             }
-        `
+        `,
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone   : true,
+    imports      : [MatIconModule, FuseDrawerComponent, MatButtonModule, NgFor, NgClass, MatTooltipModule],
 })
 export class SettingsComponent implements OnInit, OnDestroy
 {
-    config: AppConfig;
-    layout: Layout;
+    config: FuseConfig;
+    layout: string;
     scheme: 'dark' | 'light';
     theme: string;
     themes: Themes;
@@ -40,7 +47,7 @@ export class SettingsComponent implements OnInit, OnDestroy
      */
     constructor(
         private _router: Router,
-        private _fuseConfigService: FuseConfigService
+        private _fuseConfigService: FuseConfigService,
     )
     {
     }
@@ -57,8 +64,8 @@ export class SettingsComponent implements OnInit, OnDestroy
         // Subscribe to config changes
         this._fuseConfigService.config$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((config: AppConfig) => {
-
+            .subscribe((config: FuseConfig) =>
+            {
                 // Store the config
                 this.config = config;
             });
@@ -88,11 +95,11 @@ export class SettingsComponent implements OnInit, OnDestroy
         // Clear the 'layout' query param to allow layout changes
         this._router.navigate([], {
             queryParams        : {
-                layout: null
+                layout: null,
             },
-            queryParamsHandling: 'merge'
-        }).then(() => {
-
+            queryParamsHandling: 'merge',
+        }).then(() =>
+        {
             // Set the config
             this._fuseConfigService.config = {layout};
         });

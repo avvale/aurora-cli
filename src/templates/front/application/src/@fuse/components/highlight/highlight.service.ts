@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import hljs from 'highlight.js';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class FuseHighlightService
 {
     /**
@@ -61,19 +59,19 @@ export class FuseHighlightService
 
         // Iterate through the lines
         lines.filter(line => line.length)
-             .forEach((line, index) => {
+            .forEach((line, index) =>
+            {
+                // Always get the indentation of the first line so we can
+                // have something to compare with
+                if ( index === 0 )
+                {
+                    indentation = line.search(/\S|$/);
+                    return;
+                }
 
-                 // Always get the indentation of the first line so we can
-                 // have something to compare with
-                 if ( index === 0 )
-                 {
-                     indentation = line.search(/\S|$/);
-                     return;
-                 }
-
-                 // Look at all the remaining lines to figure out the smallest indentation.
-                 indentation = Math.min(line.search(/\S|$/), indentation);
-             });
+                // Look at all the remaining lines to figure out the smallest indentation.
+                indentation = Math.min(line.search(/\S|$/), indentation);
+            });
 
         // Iterate through the lines one more time, remove the extra
         // indentation, join them together and return it

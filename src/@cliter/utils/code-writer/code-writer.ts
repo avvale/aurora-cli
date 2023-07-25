@@ -1,14 +1,14 @@
-import { Project, SourceFile, Decorator, ObjectLiteralExpression, ArrayLiteralExpression, CallExpression, IndentationText, QuoteKind, InitializerExpressionGetableNode } from 'ts-morph';
-import { SyntaxKind, NewLineKind } from 'typescript';
-import { cliterConfig } from '../../config';
-import { Properties } from '../properties';
-import { ImportDriver } from './drivers/import.driver';
-import { ExportDriver } from './drivers/export.driver';
-import { ArrayDriver } from './drivers/array.driver';
-import { InterfaceDriver } from './drivers/interface.driver';
-import { ObjectTools } from '../object-tools';
-import * as path from 'node:path';
 import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, InitializerExpressionGetableNode, ObjectLiteralExpression, Project, QuoteKind, SourceFile } from 'ts-morph';
+import { NewLineKind, SyntaxKind } from 'typescript';
+import { cliterConfig } from '../../config';
+import { ObjectTools } from '../object-tools';
+import { Properties } from '../properties';
+import { ArrayDriver } from './drivers/array.driver';
+import { ExportDriver } from './drivers/export.driver';
+import { ImportDriver } from './drivers/import.driver';
+import { InterfaceDriver } from './drivers/interface.driver';
 
 export class CodeWriter
 {
@@ -301,11 +301,9 @@ export class CodeWriter
 
     generateFrontRoutes(index = 0): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routing.ts`));
-
-        const routes = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Routes');
-        const routesArray = routes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.routes.ts`));
+        const defaultExportDeclarations = sourceFile.getExportedDeclarations();
+        const routesArray = (defaultExportDeclarations.get('default') as ArrayLiteralExpression[])[0];
         const objectRoute = routesArray.getElements()[index] as ObjectLiteralExpression;
         const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
         const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
@@ -329,16 +327,16 @@ export class CodeWriter
             sourceFile,
             `./${this.moduleName.toKebabCase()}/${this.moduleName.toKebabCase()}.resolvers`,
             [
-                `${this.moduleName.toPascalCase()}EditResolver`,
-                `${this.moduleName.toPascalCase()}NewResolver`,
-                `${this.moduleName.toPascalCase()}PaginationResolver`,
+                `${this.moduleName.toCamelCase()}EditResolver`,
+                `${this.moduleName.toCamelCase()}NewResolver`,
+                `${this.moduleName.toCamelCase()}PaginationResolver`,
             ],
         );
 
         // add route to list items
         ArrayDriver.addArrayItem(
             sourceFile,
-            `{ path: '${this.moduleName.toKebabCase()}', component: ${this.moduleName.toPascalCase()}ListComponent, resolve: { data: ${this.moduleName.toPascalCase()}PaginationResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }}`,
+            `{ path: '${this.moduleName.toKebabCase()}', component: ${this.moduleName.toPascalCase()}ListComponent, resolve: { data: ${this.moduleName.toCamelCase()}PaginationResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }}`,
             childrenRoutesArray,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
@@ -347,14 +345,14 @@ export class CodeWriter
                     return `'${this.moduleName.toKebabCase()}'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                 });
 
-                return !!foundItem;
+                return Boolean(foundItem);
             },
         );
 
         // add route to new item
         ArrayDriver.addArrayItem(
             sourceFile,
-            `{ path: '${this.moduleName.toKebabCase()}/new', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
+            `{ path: '${this.moduleName.toKebabCase()}/new', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
             childrenRoutesArray,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
@@ -363,7 +361,7 @@ export class CodeWriter
                     return `'${this.moduleName.toKebabCase()}/new'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                 });
 
-                return !!foundItem;
+                return Boolean(foundItem);
             },
         );
 
@@ -373,7 +371,7 @@ export class CodeWriter
             // add route to new i18n item
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `{ path: '${this.moduleName.toKebabCase()}/new/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
+                `{ path: '${this.moduleName.toKebabCase()}/new/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}NewResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.create' }},`,
                 childrenRoutesArray,
                 (item: string, array: ArrayLiteralExpression | undefined) =>
                 {
@@ -382,14 +380,14 @@ export class CodeWriter
                         return `'${this.moduleName.toKebabCase()}/new/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                     });
 
-                    return !!foundItem;
+                    return Boolean(foundItem);
                 },
             );
 
             // add route to edit item
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `{ path: '${this.moduleName.toKebabCase()}/edit/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
+                `{ path: '${this.moduleName.toKebabCase()}/edit/:id/:langId', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
                 childrenRoutesArray,
                 (item: string, array: ArrayLiteralExpression | undefined) =>
                 {
@@ -398,7 +396,7 @@ export class CodeWriter
                         return `'${this.moduleName.toKebabCase()}/edit/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                     });
 
-                    return !!foundItem;
+                    return Boolean(foundItem);
                 },
             );
 
@@ -410,7 +408,7 @@ export class CodeWriter
         // add route to edit item
         ArrayDriver.addArrayItem(
             sourceFile,
-            `{ path: '${this.moduleName.toKebabCase()}/edit/:id', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toPascalCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
+            `{ path: '${this.moduleName.toKebabCase()}/edit/:id', component: ${this.moduleName.toPascalCase()}DetailComponent, resolve: { data: ${this.moduleName.toCamelCase()}EditResolver }, data: { permission: '${this.boundedContextName.toCamelCase()}.${this.moduleName.toCamelCase()}.get' }},`,
             childrenRoutesArray,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
@@ -419,7 +417,7 @@ export class CodeWriter
                     return `'${this.moduleName.toKebabCase()}/edit/:id'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                 });
 
-                return !!foundItem;
+                return Boolean(foundItem);
             },
         );
 
@@ -447,7 +445,9 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    declareDashboardComponents(): void
+    // declare front components for application with not standalone components
+    // from angular v16 is not necessary to declare components in module
+    declareFrontComponents(): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
         const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'NgModule');
@@ -484,7 +484,7 @@ export class CodeWriter
 
     declareFrontBoundedContext(index = 5): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app', 'app.routing.ts'));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app', 'app.routes.ts'));
 
         const appRoutes = sourceFile.getVariableDeclarationOrThrow('appRoutes');
         const appRoutesArray = appRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
@@ -504,7 +504,7 @@ export class CodeWriter
 
         // set routes
         childrenRoutesArray?.addElement(
-            `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module').then(m => m.${this.boundedContextName.toPascalCase()}Module) },`
+            `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.routes') },`
             , { useNewLines: true });
 
         sourceFile?.saveSync();
@@ -608,11 +608,11 @@ export class CodeWriter
 
         // providers
         const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
-        const providersArray: ArrayLiteralExpression = providers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression) as ArrayLiteralExpression;
+        const providersArray: ArrayLiteralExpression = providers?.getInitializer() as ArrayLiteralExpression;
 
         // controllers
         const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
-        const controllersArray = controllers?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const controllersArray = controllers?.getInitializer() as ArrayLiteralExpression;
 
         // register imports from bounded context from @app
         ImportDriver.createImportItems(
@@ -763,7 +763,7 @@ export class CodeWriter
     private getModelArrayArgument(moduleDecoratorArguments: ObjectLiteralExpression): ArrayLiteralExpression
     {
         const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
-        const importsArray: ArrayLiteralExpression = importsArgument.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const importsArray: ArrayLiteralExpression = importsArgument.getInitializer() as ArrayLiteralExpression;
         const importsElements = importsArray.getElements();
         const SequelizeModuleElement: CallExpression = importsElements.find(el => el.getText().indexOf('SequelizeModule.forFeature') === 0) as CallExpression;
         return SequelizeModuleElement.getArguments()[0] as ArrayLiteralExpression;

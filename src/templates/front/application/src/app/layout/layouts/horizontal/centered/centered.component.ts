@@ -1,15 +1,28 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { FuseFullscreenComponent } from '@fuse/components/fullscreen';
+import { FuseLoadingBarComponent } from '@fuse/components/loading-bar';
+import { FuseHorizontalNavigationComponent, FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
-import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
+import { Navigation } from 'app/core/navigation/navigation.types';
+import { LanguagesComponent } from 'app/layout/common/languages/languages.component';
+import { MessagesComponent } from 'app/layout/common/messages/messages.component';
+import { NotificationsComponent } from 'app/layout/common/notifications/notifications.component';
+import { SearchComponent } from 'app/layout/common/search/search.component';
+import { ShortcutsComponent } from 'app/layout/common/shortcuts/shortcuts.component';
+import { UserComponent } from 'app/layout/common/user/user.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector     : 'centered-layout',
     templateUrl  : './centered.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone   : true,
+    imports      : [FuseLoadingBarComponent, NgIf, FuseVerticalNavigationComponent, FuseHorizontalNavigationComponent, MatButtonModule, MatIconModule, LanguagesComponent, FuseFullscreenComponent, SearchComponent, ShortcutsComponent, MessagesComponent, NotificationsComponent, UserComponent, RouterOutlet],
 })
 export class CenteredLayoutComponent implements OnInit, OnDestroy
 {
@@ -25,7 +38,7 @@ export class CenteredLayoutComponent implements OnInit, OnDestroy
         private _router: Router,
         private _navigationService: NavigationService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
     )
     {
     }
@@ -54,15 +67,16 @@ export class CenteredLayoutComponent implements OnInit, OnDestroy
         // Subscribe to navigation data
         this._navigationService.navigation$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((navigation: Navigation) => {
+            .subscribe((navigation: Navigation) =>
+            {
                 this.navigation = navigation;
             });
 
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(({matchingAliases}) => {
-
+            .subscribe(({matchingAliases}) =>
+            {
                 // Check if the screen is small
                 this.isScreenSmall = !matchingAliases.includes('md');
             });

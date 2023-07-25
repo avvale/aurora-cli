@@ -1,11 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output, QueryList, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SelectionChange } from '@angular/cdk/collections';
-import { Action } from '@aurora/aurora.types';
-import { BehaviorSubject, Observable, of, Subject, takeUntil } from 'rxjs';
+import { AsyncPipe, NgForOf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output, QueryList, ViewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { Action } from '@aurora';
+import { BehaviorSubject, Observable, Subject, of, takeUntil } from 'rxjs';
 import { ColumnConfig, GridCustomHeaderTemplateDirective, GridData, GridState } from '../grid';
-import { GridComponent } from '../grid/grid/grid.component';
 import { GridCellValueTemplateDirective } from '../grid/directives/grid-cell-value-template.directive';
+import { GridComponent } from '../grid/grid/grid.component';
 import { SelectionModel } from '../grid/selection-model/selection-model';
 
 @Component({
@@ -13,6 +16,10 @@ import { SelectionModel } from '../grid/selection-model/selection-model';
     templateUrl    : './grid-dialog.component.html',
     styleUrls      : ['grid-dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        AsyncPipe, GridComponent, GridCustomHeaderTemplateDirective, MatButtonModule, MatDialogModule, MatIconModule, NgForOf, NgTemplateOutlet,
+    ],
 })
 export class GridDialogComponent
 {
@@ -31,13 +38,6 @@ export class GridDialogComponent
 
     // view
     @ViewChild(GridComponent) gridComponent: GridComponent;
-
-    // TODO añadir búsqeuda automática cuando esté presente este evento
-    /* @HostListener('document:keypress', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent): void
-    {
-        // console.log(event.key);
-    } */
 
     // outputs
     @Output() action = new EventEmitter<Action>();

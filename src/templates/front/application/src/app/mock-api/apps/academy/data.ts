@@ -3,23 +3,23 @@ export const categories = [
     {
         id   : '9a67dff7-3c38-4052-a335-0cef93438ff6',
         title: 'Web',
-        slug : 'web'
+        slug : 'web',
     },
     {
         id   : 'a89672f5-e00d-4be4-9194-cb9d29f82165',
         title: 'Firebase',
-        slug : 'firebase'
+        slug : 'firebase',
     },
     {
         id   : '02f42092-bb23-4552-9ddb-cfdcc235d48f',
         title: 'Cloud',
-        slug : 'cloud'
+        slug : 'cloud',
     },
     {
         id   : '5648a630-979f-4403-8c41-fc9790dea8cd',
         title: 'Android',
-        slug : 'android'
-    }
+        slug : 'android',
+    },
 ];
 export const courses = [
     {
@@ -34,8 +34,8 @@ export const courses = [
         featured   : true,
         progress   : {
             currentStep: 3,
-            completed  : 2
-        }
+            completed  : 2,
+        },
     },
     {
         id         : 'f924007a-2ee9-470b-a316-8d21ed78277f',
@@ -49,8 +49,8 @@ export const courses = [
         featured   : true,
         progress   : {
             currentStep: 5,
-            completed  : 3
-        }
+            completed  : 3,
+        },
     },
     {
         id         : '0c06e980-abb5-4ba7-ab65-99a228cab36b',
@@ -64,8 +64,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 10,
-            completed  : 1
-        }
+            completed  : 1,
+        },
     },
     {
         id         : '1b9a9acc-9a36-403e-a1e7-b11780179e38',
@@ -79,8 +79,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 4,
-            completed  : 3
-        }
+            completed  : 3,
+        },
     },
     {
         id         : '55eb415f-3f4e-4853-a22b-f0ae91331169',
@@ -94,8 +94,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 6,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : 'fad2ab23-1011-4028-9a54-e52179ac4a50',
@@ -109,8 +109,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 6,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : 'c4bc107b-edc4-47a7-a7a8-4fb09732e794',
@@ -124,8 +124,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : '1449f945-d032-460d-98e3-406565a22293',
@@ -139,8 +139,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 3,
-            completed  : 1
-        }
+            completed  : 1,
+        },
     },
     {
         id         : 'f05e08ab-f3e3-4597-a032-6a4b69816f24',
@@ -154,8 +154,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 1
-        }
+            completed  : 1,
+        },
     },
     {
         id         : '181728f4-87c8-45c5-b9cc-92265bcd2f4d',
@@ -169,8 +169,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : 'fcbfedbf-6187-4b3b-89d3-1a7cb4e11616',
@@ -184,8 +184,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : '5213f6a1-1dd7-4b1d-b6e9-ffb7af534f28',
@@ -199,8 +199,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : '02992ac9-d1a3-4167-b70e-8a1d5b5ba253',
@@ -214,8 +214,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 8,
-            completed  : 2
-        }
+            completed  : 2,
+        },
     },
     {
         id         : '2139512f-41fb-4a4a-841a-0b4ac034f9b4',
@@ -229,8 +229,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : '65e0a0e0-d8c0-4117-a3cb-eb74f8e28809',
@@ -244,8 +244,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : 'c202ebc9-9be3-433a-9d38-7003b3ed7b7a',
@@ -259,8 +259,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : '980ae7da-9f77-4e30-aa98-1b1ea594e775',
@@ -274,8 +274,8 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 0,
-            completed  : 0
-        }
+            completed  : 0,
+        },
     },
     {
         id         : 'c9748ea9-4117-492c-bdb2-55085b515978',
@@ -289,9 +289,9 @@ export const courses = [
         featured   : false,
         progress   : {
             currentStep: 2,
-            completed  : 0
-        }
-    }
+            completed  : 0,
+        },
+    },
 ];
 export const demoCourseContent = `
 <p class="lead">
@@ -654,66 +654,66 @@ export const demoCourseSteps = [
         order   : 0,
         title   : 'Introduction',
         subtitle: 'Introducing the library and how it works',
-        content : `<h2 class="text-2xl sm:text-3xl">Introduction</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Introduction</h1> ${demoCourseContent}`,
     },
     {
         order   : 1,
         title   : 'Get the sample code',
         subtitle: 'Where to find the sample code and how to access it',
-        content : `<h2 class="text-2xl sm:text-3xl">Get the sample code</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Get the sample code</h1> ${demoCourseContent}`,
     },
     {
         order   : 2,
         title   : 'Create a Firebase project and Set up your app',
         subtitle: 'How to create a basic Firebase project and how to run it locally',
-        content : `<h2 class="text-2xl sm:text-3xl">Create a Firebase project and Set up your app</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Create a Firebase project and Set up your app</h1> ${demoCourseContent}`,
     },
     {
         order   : 3,
         title   : 'Install the Firebase Command Line Interface',
         subtitle: 'Setting up the Firebase CLI to access command line tools',
-        content : `<h2 class="text-2xl sm:text-3xl">Install the Firebase Command Line Interface</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Install the Firebase Command Line Interface</h1> ${demoCourseContent}`,
     },
     {
         order   : 4,
         title   : 'Deploy and run the web app',
         subtitle: 'How to build, push and run the project remotely',
-        content : `<h2 class="text-2xl sm:text-3xl">Deploy and run the web app</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Deploy and run the web app</h1> ${demoCourseContent}`,
     },
     {
         order   : 5,
         title   : 'The Functions Directory',
         subtitle: 'Introducing the Functions and Functions Directory',
-        content : `<h2 class="text-2xl sm:text-3xl">The Functions Directory</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">The Functions Directory</h1> ${demoCourseContent}`,
     },
     {
         order   : 6,
         title   : 'Import the Cloud Functions and Firebase Admin modules',
         subtitle: 'Create your first Function and run it to administer your app',
-        content : `<h2 class="text-2xl sm:text-3xl">Import the Cloud Functions and Firebase Admin modules</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Import the Cloud Functions and Firebase Admin modules</h1> ${demoCourseContent}`,
     },
     {
         order   : 7,
         title   : 'Welcome New Users',
         subtitle: 'How to create a welcome message for the new users',
-        content : `<h2 class="text-2xl sm:text-3xl">Welcome New Users</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Welcome New Users</h1> ${demoCourseContent}`,
     },
     {
         order   : 8,
         title   : 'Images moderation',
         subtitle: 'How to moderate images; crop, resize, optimize',
-        content : `<h2 class="text-2xl sm:text-3xl">Images moderation</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">Images moderation</h1> ${demoCourseContent}`,
     },
     {
         order   : 9,
         title   : 'New Message Notifications',
         subtitle: 'How to create and push a notification to a user',
-        content : `<h2 class="text-2xl sm:text-3xl">New Message Notifications</h1> ${demoCourseContent}`
+        content : `<h2 class="text-2xl sm:text-3xl">New Message Notifications</h1> ${demoCourseContent}`,
     },
     {
         order   : 10,
         title   : 'Congratulations!',
         subtitle: 'Nice work, you have created your first application',
-        content : `<h2 class="text-2xl sm:text-3xl">Congratulations!</h1> ${demoCourseContent}`
-    }
+        content : `<h2 class="text-2xl sm:text-3xl">Congratulations!</h1> ${demoCourseContent}`,
+    },
 ];

@@ -1,15 +1,22 @@
+import { I18nPluralPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { finalize, Subject, takeUntil, takeWhile, tap, timer } from 'rxjs';
 
 // ---- customizations ----
 import { AuthenticationService, IamService } from '@aurora';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector     : 'auth-sign-out',
     templateUrl  : './sign-out.component.html',
     encapsulation: ViewEncapsulation.None,
+    standalone   : true,
+    imports      : [
+        // ---- customizations ----
+        TranslocoModule,
+        NgIf, RouterLink, I18nPluralPipe
+    ],
 })
 export class AuthSignOutComponent implements OnInit, OnDestroy
 {
@@ -24,10 +31,13 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
-        private readonly authenticationService: AuthenticationService,
+        private _router: Router,
+
+        // ---- customizations ----
         private readonly translocoService: TranslocoService,
         private readonly iamService: IamService,
-        private readonly router: Router,
+        private readonly authenticationService: AuthenticationService,
+
     )
     {
     }
@@ -51,7 +61,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
             .pipe(
                 finalize(() =>
                 {
-                    this.router.navigate(['sign-in']);
+                    this._router.navigate(['sign-in']);
                 }),
                 takeWhile(() => this.countdown > 0),
                 takeUntil(this._unsubscribeAll),

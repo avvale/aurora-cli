@@ -1,16 +1,17 @@
-import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/animations';
-import { FuseDrawerMode, FuseDrawerPosition } from '@fuse/components/drawer/drawer.types';
-import { FuseDrawerService } from '@fuse/components/drawer/drawer.service';
-import { FuseUtilsService } from '@fuse/services/utils/utils.service';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { FuseDrawerService } from '@fuse/components/drawer/drawer.service';
+import { FuseDrawerMode, FuseDrawerPosition } from '@fuse/components/drawer/drawer.types';
+import { FuseUtilsService } from '@fuse/services/utils/utils.service';
 
 @Component({
     selector     : 'fuse-drawer',
     templateUrl  : './drawer.component.html',
     styleUrls    : ['./drawer.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    exportAs     : 'fuseDrawer'
+    exportAs     : 'fuseDrawer',
+    standalone   : true,
 })
 export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy
 {
@@ -45,10 +46,11 @@ export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy
         private _elementRef: ElementRef,
         private _renderer2: Renderer2,
         private _fuseDrawerService: FuseDrawerService,
-        private _fuseUtilsService: FuseUtilsService
+        private _fuseUtilsService: FuseUtilsService,
     )
     {
-        this._handleOverlayClick = (): void => {
+        this._handleOverlayClick = (): void =>
+        {
             this.close();
         };
     }
@@ -69,7 +71,7 @@ export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy
             'fuse-drawer-hover'                      : this._hovered,
             [`fuse-drawer-mode-${this.mode}`]        : true,
             'fuse-drawer-opened'                     : this.opened,
-            [`fuse-drawer-position-${this.position}`]: true
+            [`fuse-drawer-position-${this.position}`]: true,
         };
         /* eslint-enable @typescript-eslint/naming-convention */
     }
@@ -80,7 +82,7 @@ export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy
     @HostBinding('style') get styleList(): any
     {
         return {
-            'visibility': this.opened ? 'visible' : 'hidden'
+            'visibility': this.opened ? 'visible' : 'hidden',
         };
     }
 
@@ -173,7 +175,8 @@ export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy
             // Enable the animations after a delay
             // The delay must be bigger than the current transition-duration
             // to make sure nothing will be animated while the mode is changing
-            setTimeout(() => {
+            setTimeout(() =>
+            {
                 this._enableAnimations();
             }, 500);
         }
@@ -345,7 +348,7 @@ export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy
         // Create enter animation and attach it to the player
         this._player = this._animationBuilder.build([
             style({opacity: 0}),
-            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 1}))
+            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 1})),
         ]).create(this._overlay);
 
         // Play the animation
@@ -369,15 +372,15 @@ export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy
 
         // Create the leave animation and attach it to the player
         this._player = this._animationBuilder.build([
-            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 0}))
+            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 0})),
         ]).create(this._overlay);
 
         // Play the animation
         this._player.play();
 
         // Once the animation is done...
-        this._player.onDone(() => {
-
+        this._player.onDone(() =>
+        {
             // If the overlay still exists...
             if ( this._overlay )
             {

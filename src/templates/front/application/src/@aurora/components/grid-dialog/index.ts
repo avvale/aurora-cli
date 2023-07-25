@@ -1,2 +1,1 @@
-export * from './grid-dialog.component';
-export * from './grid-dialog.module';
+export * from '@aurora/components/grid-dialog/public-api';

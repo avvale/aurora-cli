@@ -1,1 +1,1 @@
-export * from './dialog.module';
+export * from '@aurora/components/dialog/public-api';

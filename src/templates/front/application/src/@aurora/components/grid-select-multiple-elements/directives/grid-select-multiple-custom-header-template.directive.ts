@@ -2,7 +2,8 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 import { GridCustomHeaderPosition } from '@aurora/components/grid/grid.types';
 
 @Directive({
-    selector: '[auGridSelectMultipleCustomHeaderTemplate]',
+    selector  : '[auGridSelectMultipleCustomHeaderTemplate]',
+    standalone: true,
 })
 export class GridSelectMultipleCustomHeaderTemplateDirective
 {

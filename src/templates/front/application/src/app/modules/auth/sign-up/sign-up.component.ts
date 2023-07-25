@@ -1,8 +1,15 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule, NgForm, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
+import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 
 // ---- customizations ----
 import { AuthenticationService } from '@aurora';
@@ -12,12 +19,14 @@ import { AuthenticationService } from '@aurora';
     templateUrl  : './sign-up.component.html',
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations,
+    standalone   : true,
+    imports      : [RouterLink, NgIf, FuseAlertComponent, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule, MatProgressSpinnerModule],
 })
 export class AuthSignUpComponent implements OnInit
 {
     @ViewChild('signUpNgForm') signUpNgForm: NgForm;
 
-    alert: { type: FuseAlertType; message: string; } = {
+    alert: { type: FuseAlertType; message: string } = {
         type   : 'success',
         message: '',
     };
@@ -28,9 +37,11 @@ export class AuthSignUpComponent implements OnInit
      * Constructor
      */
     constructor(
-        private authenticationService: AuthenticationService,
         private _formBuilder: UntypedFormBuilder,
         private _router: Router,
+
+        // ---- customizations ----
+        private authenticationService: AuthenticationService,
     )
     {
     }
@@ -45,8 +56,7 @@ export class AuthSignUpComponent implements OnInit
     ngOnInit(): void
     {
         // Create the form
-        this.signUpForm = this._formBuilder.group(
-            {
+        this.signUpForm = this._formBuilder.group({
                 name      : ['', Validators.required],
                 email     : ['', [Validators.required, Validators.email]],
                 password  : ['', Validators.required],
@@ -80,15 +90,13 @@ export class AuthSignUpComponent implements OnInit
         // Sign up
         this.authenticationService.signUp(this.signUpForm.value)
             .subscribe(
-                response =>
+                (response) =>
                 {
-
                     // Navigate to the confirmation required page
                     this._router.navigateByUrl('/confirmation-required');
                 },
-                response =>
+                (response) =>
                 {
-
                     // Re-enable the form
                     this.signUpForm.enable();
 

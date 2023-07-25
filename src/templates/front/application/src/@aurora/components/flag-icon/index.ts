@@ -1,1 +1,1 @@
-export { FlagIconModule } from './flag-icon.module';
+export * from './public-api';

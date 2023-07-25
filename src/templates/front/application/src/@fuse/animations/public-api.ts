@@ -11,5 +11,5 @@ export const fuseAnimations = [
     shake,
     slideInTop, slideInBottom, slideInLeft, slideInRight,
     slideOutTop, slideOutBottom, slideOutLeft, slideOutRight,
-    zoomIn, zoomOut
+    zoomIn, zoomOut,
 ];

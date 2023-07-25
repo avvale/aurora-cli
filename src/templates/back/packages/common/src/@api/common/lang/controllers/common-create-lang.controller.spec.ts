@@ -1,12 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonCreateLangController, CommonCreateLangHandler } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
+import { CacheModule } from '@nestjs/cache-manager';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonCreateLangController } from './common-create-lang.controller';
-import { CommonCreateLangHandler } from '../handlers/common-create-lang.handler';
-
-// sources
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonCreateLangController', () =>
 {

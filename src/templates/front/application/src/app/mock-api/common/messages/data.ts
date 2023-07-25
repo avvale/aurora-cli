@@ -11,7 +11,7 @@ export const messages = [
         title      : 'Gary Peters',
         description: 'We should talk about that at lunch!',
         time       : now.minus({minutes: 25}).toISO(), // 25 minutes ago
-        read       : false
+        read       : false,
     },
     {
         id         : '608b4479-a3ac-4e26-8675-3609c52aca58',
@@ -19,7 +19,7 @@ export const messages = [
         title      : 'Leo Gill (Client #8817)',
         description: 'You can download the latest invoices now. Please check and let me know.',
         time       : now.minus({minutes: 50}).toISO(), // 50 minutes ago
-        read       : false
+        read       : false,
     },
     {
         id         : '22148c0c-d788-4d49-9467-447677d11b76',
@@ -29,7 +29,7 @@ export const messages = [
         time       : now.minus({hours: 3}).toISO(), // 3 hours ago
         read       : true,
         link       : '/dashboards/project',
-        useRouter  : true
+        useRouter  : true,
     },
     {
         id         : '492e2917-760c-4921-aa5a-3201a857cd48',
@@ -39,7 +39,7 @@ export const messages = [
         time       : now.minus({hours: 5}).toISO(), // 5 hours ago
         read       : true,
         link       : '/dashboards/project',
-        useRouter  : true
+        useRouter  : true,
     },
     {
         id         : '214a46e5-cae7-4b18-9869-eabde7c7ea52',
@@ -49,7 +49,7 @@ export const messages = [
         time       : now.minus({hours: 7}).toISO(), // 7 hours ago
         read       : false,
         link       : '/dashboards/project',
-        useRouter  : true
+        useRouter  : true,
     },
     {
         id         : '95930319-61cc-4c7e-9324-f1091865330c',
@@ -59,7 +59,7 @@ export const messages = [
         time       : now.minus({hours: 9}).toISO(), // 9 hours ago
         read       : false,
         link       : '/dashboards/project',
-        useRouter  : true
+        useRouter  : true,
     },
     {
         id         : '802935e9-9577-48bc-98d1-308a4872afd7',
@@ -69,7 +69,7 @@ export const messages = [
         time       : now.minus({day: 1}).toISO(), // 1 day ago
         read       : true,
         link       : 'https://www.google.com',
-        useRouter  : false
+        useRouter  : false,
     },
     {
         id         : '059f3738-633b-48ea-ad83-19016ce24c62',
@@ -79,7 +79,7 @@ export const messages = [
         time       : now.minus({day: 3}).toISO(), // 3 days ago
         read       : false,
         link       : '/dashboards/project',
-        useRouter  : true
+        useRouter  : true,
     },
     {
         id         : '5c2bb44d-5ca7-42ff-ad7e-46ced9f49a24',
@@ -89,6 +89,6 @@ export const messages = [
         time       : now.minus({day: 4}).toISO(), // 4 days ago
         read       : true,
         link       : '/dashboards/project',
-        useRouter  : true
-    }
+        useRouter  : true,
+    },
 ];

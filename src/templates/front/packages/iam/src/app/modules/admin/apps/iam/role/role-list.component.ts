@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, ColumnConfig, ColumnDataType, Crumb, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
-import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { IamRole } from '../iam.types';
-import { RoleService } from './role.service';
 import { roleColumnsConfig } from './role.columns-config';
+import { RoleService } from './role.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'iam-role-list',
     templateUrl    : './role-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        ...defaultListImports,
+    ],
 })
 export class RoleListComponent extends ViewBaseComponent
 {
@@ -107,7 +111,11 @@ export class RoleListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::role.list.edit':
-                this.router.navigate(['iam/role/edit', action.meta.row.id]);
+                this.router
+                    .navigate([
+                        'iam/role/edit',
+                        action.meta.row.id,
+                    ]);
                 break;
 
             case 'iam::role.list.delete':
@@ -116,7 +124,7 @@ export class RoleListComponent extends ViewBaseComponent
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('iam.Role') }),
                     icon   : {
                         show : true,
-                        name : 'heroicons_outline:exclamation',
+                        name : 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
@@ -142,8 +150,11 @@ export class RoleListComponent extends ViewBaseComponent
                             {
                                 await lastValueFrom(
                                     this.roleService
-                                        .deleteById<IamRole>(action.meta.row.id),
+                                        .deleteById<IamRole>({
+                                            id: action.meta.row.id,
+                                        }),
                                 );
+
                                 this.actionService.action({
                                     id          : 'iam::role.list.pagination',
                                     isViewAction: false,
@@ -165,8 +176,14 @@ export class RoleListComponent extends ViewBaseComponent
                         }),
                 );
 
+                // format export rows
+                (rows.objects as any[]).forEach(row =>
+                {
+                    // row.id = row.id;
+                });
+
                 const columns: string[] = roleColumnsConfig.map(roleColumnConfig => roleColumnConfig.field);
-                const headers = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
 
                 exportRows(
                     rows.objects,

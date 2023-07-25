@@ -3,6 +3,7 @@ import { ColumnConfigAction } from '../grid.types';
 
 @Pipe({
     name: 'getActions',
+    standalone: true,
 })
 export class GetActionsPipe implements PipeTransform
 {

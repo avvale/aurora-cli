@@ -22,7 +22,7 @@ const generatePalette = (config) =>
         600: null,
         700: null,
         800: null,
-        900: null
+        900: null,
     };
 
     // If a single color is provided,
@@ -58,14 +58,14 @@ const generatePalette = (config) =>
     colors.unshift(
         chroma.scale(['white', palette[500]])
             .domain([0, 1])
-            .mode("lrgb")
-            .colors(50)[1]
+            .mode('lrgb')
+            .colors(50)[1],
     );
     colors.push(
         chroma.scale(['black', palette[500]])
             .domain([0, 1])
-            .mode("lrgb")
-            .colors(10)[1]
+            .mode('lrgb')
+            .colors(10)[1],
     );
 
     // Prepare the domains array
@@ -74,7 +74,7 @@ const generatePalette = (config) =>
         ...Object.entries(palette)
             .filter(([key, value]) => value)
             .map(([key]) => parseInt(key) / 1000),
-        1
+        1,
     ];
 
     // Generate the color scale
@@ -93,7 +93,7 @@ const generatePalette = (config) =>
         600: scale(0.6).hex(),
         700: scale(0.7).hex(),
         800: scale(0.8).hex(),
-        900: scale(0.9).hex()
+        900: scale(0.9).hex(),
     };
 };
 

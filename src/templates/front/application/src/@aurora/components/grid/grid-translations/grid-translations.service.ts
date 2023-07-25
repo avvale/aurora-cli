@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GridActionsMenuMessages, GridMessages, GridOperatorsMessages, GridPaginatorMessages } from '../grid.types';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class GridTranslationsService
 {
     // custom messages

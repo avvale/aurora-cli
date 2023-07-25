@@ -9,7 +9,8 @@ export const fields = `
     updatedAt
 `;
 
-export const relationsFields = '';
+export const relationsFields = `
+`;
 
 // default methods
 export const paginationQuery = gql`
@@ -55,6 +56,32 @@ export const findByIdQuery = gql`
             id
             #FIELDS
         }
+    }
+`;
+
+export const findByIdWithRelationsQuery = gql`
+    query IamFindBoundedContextByIdWithRelations (
+        $id: ID
+        $constraint: QueryStatement
+        $queryPaginatePermissions: QueryStatement
+        $constraintPaginatePermissions: QueryStatement
+    ) {
+        object: iamFindBoundedContextById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+        iamPaginatePermissions (
+            query: $queryPaginatePermissions
+            constraint: $constraintPaginatePermissions
+        ) {
+            total
+            rows
+            count
+        }
+        ${relationsFields}
     }
 `;
 
@@ -140,32 +167,5 @@ export const deleteMutation = gql`
         ) {
             ${fields}
         }
-    }
-`;
-
-// ---- customizations ----
-export const findByIdWithRelationsQuery = gql`
-    query IamFindBoundedContextById (
-        $id: ID
-        $constraint: QueryStatement
-        $queryPaginatePermissions: QueryStatement
-        $constraintPaginatePermissions: QueryStatement
-    ) {
-        object: iamFindBoundedContextById (
-            id: $id
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
-        iamPaginatePermissions (
-            query: $queryPaginatePermissions
-            constraint: $constraintPaginatePermissions
-        ) {
-            total
-            rows
-            count
-        }
-        ${relationsFields}
     }
 `;

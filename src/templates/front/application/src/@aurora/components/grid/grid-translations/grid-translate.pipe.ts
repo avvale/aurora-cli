@@ -8,6 +8,7 @@ import { GridMessages } from '../grid.types';
  */
 @Pipe({
     name: 'gridTranslate',
+    standalone: true,
 })
 export class GridTranslatePipe implements PipeTransform, OnDestroy
 {

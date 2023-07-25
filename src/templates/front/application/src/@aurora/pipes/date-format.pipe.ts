@@ -4,6 +4,7 @@ import { Utils } from '@aurora';
 @Pipe({
     name: 'dateFormat',
     pure: true,
+    standalone: true,
 })
 export class DateFormatPipe implements PipeTransform
 {

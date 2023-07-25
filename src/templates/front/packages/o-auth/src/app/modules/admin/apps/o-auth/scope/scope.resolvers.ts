@@ -1,108 +1,70 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-import { Observable } from 'rxjs';
 import { OAuthScope } from '../o-auth.types';
 import { scopeColumnsConfig } from './scope.columns-config';
 import { ScopeService } from './scope.service';
+import { inject } from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class ScopePaginationResolver implements Resolve<GridData<OAuthScope>>
+export const scopePaginationResolver: ResolveFn<GridData<OAuthScope>> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
-        private readonly actionService: ActionService,
-        private readonly gridFiltersStorageService: GridFiltersStorageService,
-        private readonly gridStateService: GridStateService,
-        private readonly scopeService: ScopeService,
-    ) {}
+    const actionService = inject(ActionService);
+    const gridFiltersStorageService = inject(GridFiltersStorageService);
+    const gridStateService = inject(GridStateService);
+    const scopeService = inject(ScopeService);
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<GridData<OAuthScope>>
-    {
-        const gridId = 'oAuth::scope.list.mainGridList';
-        this.actionService.action({ id: 'oAuth::scope.list.view' });
-        this.gridStateService.setPaginationActionId(gridId, 'oAuth::scope.list.pagination');
-        this.gridStateService.setExportActionId(gridId, 'oAuth::scope.list.export');
-        return this.scopeService.pagination({
-            query: QueryStatementHandler
-                .init({ columnsConfig: scopeColumnsConfig })
-                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(gridId))
-                .setSort(this.gridStateService.getSort(gridId))
-                .setPage(this.gridStateService.getPage(gridId))
-                .setSearch(this.gridStateService.getSearchState(gridId))
-                .getQueryStatement(),
-        });
-    }
-}
+    actionService.action({
+        id          : 'oAuth::scope.list.view',
+        isViewAction: true,
+    });
 
-@Injectable({
-    providedIn: 'root',
-})
-export class ScopeNewResolver implements Resolve<Action>
+    const gridId = 'oAuth::scope.list.mainGridList';
+    gridStateService.setPaginationActionId(gridId, 'oAuth::scope.list.pagination');
+    gridStateService.setExportActionId(gridId, 'oAuth::scope.list.export');
+
+    return scopeService.pagination({
+        query: QueryStatementHandler
+            .init({ columnsConfig: scopeColumnsConfig })
+            .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
+            .setSort(gridStateService.getSort(gridId))
+            .setPage(gridStateService.getPage(gridId))
+            .setSearch(gridStateService.getSearchState(gridId))
+            .getQueryStatement(),
+    });
+};
+
+export const scopeNewResolver: ResolveFn<Action> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
-        private readonly actionService: ActionService,
-    )
-    {}
+	const actionService = inject(ActionService);
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Action
-    {
-        return this.actionService.action({
-            id          : 'oAuth::scope.detail.new',
-            isViewAction: true,
-        });
-    }
-}
+    return actionService.action({
+        id          : 'oAuth::scope.detail.new',
+        isViewAction: true,
+    });
+};
 
-@Injectable({
-    providedIn: 'root',
-})
-export class ScopeEditResolver implements Resolve<{
-    object: OAuthScope;
-}>
+export const scopeEditResolver: ResolveFn<{
+	object: OAuthScope;
+}> = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+) =>
 {
-    constructor(
-        private readonly actionService: ActionService,
-        private readonly scopeService: ScopeService,
-    )
-    {}
+	const actionService = inject(ActionService);
+	const scopeService = inject(ScopeService);
 
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<{
-        object: OAuthScope;
-    }>
-    {
-        this.actionService.action({
-            id          : 'oAuth::scope.detail.edit',
-            isViewAction: true,
+    actionService.action({
+        id          : 'oAuth::scope.detail.edit',
+        isViewAction: true,
+    });
+
+    return scopeService
+        .findById({
+            id: route.paramMap.get('id'),
         });
-        return this.scopeService.findById({ id: route.paramMap.get('id') });
-    }
-}
+};

@@ -1,1 +1,1 @@
-export * from './mat-form-field-appearance.module';
+export * from './public-api';

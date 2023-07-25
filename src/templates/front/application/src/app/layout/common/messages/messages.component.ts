@@ -1,17 +1,23 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { MatButton } from '@angular/material/button';
-import { Subject, takeUntil } from 'rxjs';
-import { Message } from 'app/layout/common/messages/messages.types';
+import { DatePipe, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterLink } from '@angular/router';
 import { MessagesService } from 'app/layout/common/messages/messages.service';
+import { Message } from 'app/layout/common/messages/messages.types';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'messages',
     templateUrl    : './messages.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'messages'
+    exportAs       : 'messages',
+    standalone     : true,
+    imports        : [MatButtonModule, NgIf, MatIconModule, MatTooltipModule, NgFor, NgClass, NgTemplateOutlet, RouterLink, DatePipe],
 })
 export class MessagesComponent implements OnInit, OnDestroy
 {
@@ -30,7 +36,7 @@ export class MessagesComponent implements OnInit, OnDestroy
         private _changeDetectorRef: ChangeDetectorRef,
         private _messagesService: MessagesService,
         private _overlay: Overlay,
-        private _viewContainerRef: ViewContainerRef
+        private _viewContainerRef: ViewContainerRef,
     )
     {
     }
@@ -47,8 +53,8 @@ export class MessagesComponent implements OnInit, OnDestroy
         // Subscribe to message changes
         this._messagesService.messages$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((messages: Message[]) => {
-
+            .subscribe((messages: Message[]) =>
+            {
                 // Load the messages
                 this.messages = messages;
 
@@ -165,39 +171,40 @@ export class MessagesComponent implements OnInit, OnDestroy
             backdropClass   : 'fuse-backdrop-on-mobile',
             scrollStrategy  : this._overlay.scrollStrategies.block(),
             positionStrategy: this._overlay.position()
-                                  .flexibleConnectedTo(this._messagesOrigin._elementRef.nativeElement)
-                                  .withLockedPosition(true)
-                                  .withPush(true)
-                                  .withPositions([
-                                      {
-                                          originX : 'start',
-                                          originY : 'bottom',
-                                          overlayX: 'start',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'start',
-                                          originY : 'top',
-                                          overlayX: 'start',
-                                          overlayY: 'bottom'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'bottom',
-                                          overlayX: 'end',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'top',
-                                          overlayX: 'end',
-                                          overlayY: 'bottom'
-                                      }
-                                  ])
+                .flexibleConnectedTo(this._messagesOrigin._elementRef.nativeElement)
+                .withLockedPosition(true)
+                .withPush(true)
+                .withPositions([
+                    {
+                        originX : 'start',
+                        originY : 'bottom',
+                        overlayX: 'start',
+                        overlayY: 'top',
+                    },
+                    {
+                        originX : 'start',
+                        originY : 'top',
+                        overlayX: 'start',
+                        overlayY: 'bottom',
+                    },
+                    {
+                        originX : 'end',
+                        originY : 'bottom',
+                        overlayX: 'end',
+                        overlayY: 'top',
+                    },
+                    {
+                        originX : 'end',
+                        originY : 'top',
+                        overlayX: 'end',
+                        overlayY: 'bottom',
+                    },
+                ]),
         });
 
         // Detach the overlay from the portal on backdrop click
-        this._overlayRef.backdropClick().subscribe(() => {
+        this._overlayRef.backdropClick().subscribe(() =>
+        {
             this._overlayRef.detach();
         });
     }

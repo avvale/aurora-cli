@@ -1,15 +1,21 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/animations';
-import { DOCUMENT } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
-import { delay, filter, merge, ReplaySubject, Subject, Subscription, takeUntil } from 'rxjs';
+import { DOCUMENT, NgFor, NgIf } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, Renderer2, SimpleChanges, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseNavigationItem, FuseVerticalNavigationAppearance, FuseVerticalNavigationMode, FuseVerticalNavigationPosition } from '@fuse/components/navigation/navigation.types';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { FuseNavigationItem, FuseVerticalNavigationAppearance, FuseVerticalNavigationMode, FuseVerticalNavigationPosition } from '@fuse/components/navigation/navigation.types';
+import { FuseVerticalNavigationAsideItemComponent } from '@fuse/components/navigation/vertical/components/aside/aside.component';
+import { FuseVerticalNavigationBasicItemComponent } from '@fuse/components/navigation/vertical/components/basic/basic.component';
+import { FuseVerticalNavigationCollapsableItemComponent } from '@fuse/components/navigation/vertical/components/collapsable/collapsable.component';
+import { FuseVerticalNavigationDividerItemComponent } from '@fuse/components/navigation/vertical/components/divider/divider.component';
+import { FuseVerticalNavigationGroupItemComponent } from '@fuse/components/navigation/vertical/components/group/group.component';
+import { FuseVerticalNavigationSpacerItemComponent } from '@fuse/components/navigation/vertical/components/spacer/spacer.component';
 import { FuseScrollbarDirective } from '@fuse/directives/scrollbar/scrollbar.directive';
 import { FuseUtilsService } from '@fuse/services/utils/utils.service';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { delay, filter, merge, ReplaySubject, Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'fuse-vertical-navigation',
@@ -18,7 +24,9 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
     animations     : fuseAnimations,
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'fuseVerticalNavigation'
+    exportAs       : 'fuseVerticalNavigation',
+    standalone     : true,
+    imports        : [FuseScrollbarDirective, NgFor, NgIf, FuseVerticalNavigationAsideItemComponent, FuseVerticalNavigationBasicItemComponent, FuseVerticalNavigationCollapsableItemComponent, FuseVerticalNavigationDividerItemComponent, FuseVerticalNavigationGroupItemComponent, FuseVerticalNavigationSpacerItemComponent],
 })
 export class FuseVerticalNavigationComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 {
@@ -72,13 +80,15 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         private _router: Router,
         private _scrollStrategyOptions: ScrollStrategyOptions,
         private _fuseNavigationService: FuseNavigationService,
-        private _fuseUtilsService: FuseUtilsService
+        private _fuseUtilsService: FuseUtilsService,
     )
     {
-        this._handleAsideOverlayClick = (): void => {
+        this._handleAsideOverlayClick = (): void =>
+        {
             this.closeAside();
         };
-        this._handleOverlayClick = (): void => {
+        this._handleOverlayClick = (): void =>
+        {
             this.close();
         };
     }
@@ -102,7 +112,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
             'fuse-vertical-navigation-mode-side'                      : this.mode === 'side',
             'fuse-vertical-navigation-opened'                         : this.opened,
             'fuse-vertical-navigation-position-left'                  : this.position === 'left',
-            'fuse-vertical-navigation-position-right'                 : this.position === 'right'
+            'fuse-vertical-navigation-position-right'                 : this.position === 'right',
         };
         /* eslint-enable @typescript-eslint/naming-convention */
     }
@@ -113,7 +123,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
     @HostBinding('style') get styleList(): any
     {
         return {
-            'visibility': this.opened ? 'visible' : 'hidden'
+            'visibility': this.opened ? 'visible' : 'hidden',
         };
     }
 
@@ -142,16 +152,17 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         this._fuseScrollbarDirectivesSubscription =
             merge(
                 this.onCollapsableItemCollapsed,
-                this.onCollapsableItemExpanded
+                this.onCollapsableItemExpanded,
             )
                 .pipe(
                     takeUntil(this._unsubscribeAll),
-                    delay(250)
+                    delay(250),
                 )
-                .subscribe(() => {
-
+                .subscribe(() =>
+                {
                     // Loop through the scrollbars and update them
-                    fuseScrollbarDirectives.forEach((fuseScrollbarDirective) => {
+                    fuseScrollbarDirectives.forEach((fuseScrollbarDirective) =>
+                    {
                         fuseScrollbarDirective.update();
                     });
                 });
@@ -253,7 +264,8 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
             // Enable the animations after a delay
             // The delay must be bigger than the current transition-duration
             // to make sure nothing will be animated while the mode changing
-            setTimeout(() => {
+            setTimeout(() =>
+            {
                 this._enableAnimations();
             }, 500);
         }
@@ -308,10 +320,10 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         this._router.events
             .pipe(
                 filter(event => event instanceof NavigationEnd),
-                takeUntil(this._unsubscribeAll)
+                takeUntil(this._unsubscribeAll),
             )
-            .subscribe(() => {
-
+            .subscribe(() =>
+            {
                 // If the mode is 'over' and the navigation is opened...
                 if ( this.mode === 'over' && this.opened )
                 {
@@ -339,8 +351,10 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         // adding the '.cdk-global-scrollblock' to the html element breaks the navigation's position.
         // This fixes the problem by reading the 'top' value from the html element and adding it as a
         // 'marginTop' to the navigation itself.
-        this._mutationObserver = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
+        this._mutationObserver = new MutationObserver((mutations) =>
+        {
+            mutations.forEach((mutation) =>
+            {
                 const mutationTarget = mutation.target as HTMLElement;
                 if ( mutation.attributeName === 'class' )
                 {
@@ -358,11 +372,11 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         });
         this._mutationObserver.observe(this._document.documentElement, {
             attributes     : true,
-            attributeFilter: ['class']
+            attributeFilter: ['class'],
         });
 
-        setTimeout(() => {
-
+        setTimeout(() =>
+        {
             // Return if 'navigation content' element does not exist
             if ( !this._navigationContentEl )
             {
@@ -386,8 +400,8 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
             else
             {
                 // Go through all the scrollbar directives
-                this._fuseScrollbarDirectives.forEach((fuseScrollbarDirective) => {
-
+                this._fuseScrollbarDirectives.forEach((fuseScrollbarDirective) =>
+                {
                     // Skip if not enabled
                     if ( !fuseScrollbarDirective.isEnabled() )
                     {
@@ -624,7 +638,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
 
         // Create the enter animation and attach it to the player
         this._player = this._animationBuilder.build([
-            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 1}))
+            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 1})),
         ]).create(this._overlay);
 
         // Play the animation
@@ -648,15 +662,15 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
 
         // Create the leave animation and attach it to the player
         this._player = this._animationBuilder.build([
-            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 0}))
+            animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 0})),
         ]).create(this._overlay);
 
         // Play the animation
         this._player.play();
 
         // Once the animation is done...
-        this._player.onDone(() => {
-
+        this._player.onDone(() =>
+        {
             // If the overlay still exists...
             if ( this._overlay )
             {
@@ -699,7 +713,7 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         this._player =
             this._animationBuilder
                 .build([
-                    animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 1}))
+                    animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 1})),
                 ]).create(this._asideOverlay);
 
         // Play the animation
@@ -725,15 +739,15 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         this._player =
             this._animationBuilder
                 .build([
-                    animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 0}))
+                    animate('300ms cubic-bezier(0.25, 0.8, 0.25, 1)', style({opacity: 0})),
                 ]).create(this._asideOverlay);
 
         // Play the animation
         this._player.play();
 
         // Once the animation is done...
-        this._player.onDone(() => {
-
+        this._player.onDone(() =>
+        {
             // If the aside overlay still exists...
             if ( this._asideOverlay )
             {

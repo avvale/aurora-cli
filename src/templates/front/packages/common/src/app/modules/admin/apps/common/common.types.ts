@@ -158,3 +158,180 @@ export interface CommonUpdateCountries {
     administrativeAreaLevel2?: string;
     administrativeAreaLevel3?: string;
 }
+
+export interface CommonAdministrativeAreaLevel1 {
+    id: string;
+    countryId: string;
+    code: string;
+    customCode?: string;
+    name: string;
+    slug: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType: string;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface CommonCreateAdministrativeAreaLevel1 {
+    id: string;
+    countryId: string;
+    code: string;
+    customCode?: string;
+    name: string;
+    slug: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType: string;
+}
+
+export interface CommonUpdateAdministrativeAreaLevel1ById {
+    id: string;
+    countryId?: string;
+    code?: string;
+    customCode?: string;
+    name?: string;
+    slug?: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType?: string;
+}
+
+export interface CommonUpdateAdministrativeAreasLevel1 {
+    id?: string;
+    countryId?: string;
+    code?: string;
+    customCode?: string;
+    name?: string;
+    slug?: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType?: string;
+}
+
+export interface CommonAdministrativeAreaLevel2 {
+    id: string;
+    countryId: string;
+    administrativeAreaLevel1Id: string;
+    code: string;
+    customCode?: string;
+    name: string;
+    slug: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType: string;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface CommonCreateAdministrativeAreaLevel2 {
+    id: string;
+    countryId: string;
+    administrativeAreaLevel1Id: string;
+    code: string;
+    customCode?: string;
+    name: string;
+    slug: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType: string;
+}
+
+export interface CommonUpdateAdministrativeAreaLevel2ById {
+    id: string;
+    countryId?: string;
+    administrativeAreaLevel1Id?: string;
+    code?: string;
+    customCode?: string;
+    name?: string;
+    slug?: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType?: string;
+}
+
+export interface CommonUpdateAdministrativeAreasLevel2 {
+    id?: string;
+    countryId?: string;
+    administrativeAreaLevel1Id?: string;
+    code?: string;
+    customCode?: string;
+    name?: string;
+    slug?: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType?: string;
+}
+
+export interface CommonAdministrativeAreaLevel3 {
+    id: string;
+    countryId: string;
+    administrativeAreaLevel1Id: string;
+    administrativeAreaLevel2Id: string;
+    code: string;
+    customCode?: string;
+    name: string;
+    slug: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType: string;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface CommonCreateAdministrativeAreaLevel3 {
+    id: string;
+    countryId: string;
+    administrativeAreaLevel1Id: string;
+    administrativeAreaLevel2Id: string;
+    code: string;
+    customCode?: string;
+    name: string;
+    slug: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType: string;
+}
+
+export interface CommonUpdateAdministrativeAreaLevel3ById {
+    id: string;
+    countryId?: string;
+    administrativeAreaLevel1Id?: string;
+    administrativeAreaLevel2Id?: string;
+    code?: string;
+    customCode?: string;
+    name?: string;
+    slug?: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType?: string;
+}
+
+export interface CommonUpdateAdministrativeAreasLevel3 {
+    id?: string;
+    countryId?: string;
+    administrativeAreaLevel1Id?: string;
+    administrativeAreaLevel2Id?: string;
+    code?: string;
+    customCode?: string;
+    name?: string;
+    slug?: string;
+    latitude?: number;
+    longitude?: number;
+    zoom?: number;
+    mapType?: string;
+}

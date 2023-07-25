@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EmbeddedViewRef, Input, OnChanges, Renderer2, SecurityContext, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FuseHighlightService } from '@fuse/components/highlight/highlight.service';
@@ -8,7 +9,9 @@ import { FuseHighlightService } from '@fuse/components/highlight/highlight.servi
     styleUrls      : ['./highlight.component.scss'],
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'fuseHighlight'
+    exportAs       : 'fuseHighlight',
+    standalone     : true,
+    imports        : [NgClass],
 })
 export class FuseHighlightComponent implements OnChanges, AfterViewInit
 {
@@ -28,7 +31,7 @@ export class FuseHighlightComponent implements OnChanges, AfterViewInit
         private _elementRef: ElementRef,
         private _renderer2: Renderer2,
         private _fuseHighlightService: FuseHighlightService,
-        private _viewContainerRef: ViewContainerRef
+        private _viewContainerRef: ViewContainerRef,
     )
     {
     }
@@ -123,7 +126,7 @@ export class FuseHighlightComponent implements OnChanges, AfterViewInit
         // Render and insert the template
         this._viewRef = this._viewContainerRef.createEmbeddedView(this.templateRef, {
             highlightedCode: this.highlightedCode,
-            lang           : this.lang
+            lang           : this.lang,
         });
 
         // Detect the changes

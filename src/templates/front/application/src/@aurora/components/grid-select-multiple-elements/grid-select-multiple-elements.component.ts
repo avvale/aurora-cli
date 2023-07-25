@@ -1,20 +1,28 @@
-import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { SelectionChange } from '@angular/cdk/collections';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Action } from '@aurora/aurora.types';
+import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { Action } from '@aurora';
+import { GridCustomHeaderTemplateDirective } from '@aurora/components/grid/directives/grid-custom-header-template.directive';
 import { GridDialogComponent } from '../grid-dialog/grid-dialog.component';
 import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
+import { GridComponent } from '../grid/grid/grid.component';
+import { SelectionModel } from '../grid/selection-model/selection-model';
 import { GridSelectMultipleCellValueDialogTemplateDirective } from './directives/grid-select-multiple-cell-value-dialog-template.directive';
 import { GridSelectMultipleCellValueTemplateDirective } from './directives/grid-select-multiple-cell-value-template.directive';
 import { GridSelectMultipleCustomHeaderDialogTemplateDirective } from './directives/grid-select-multiple-custom-header-dialog-template.directive';
 import { GridSelectMultipleCustomHeaderTemplateDirective } from './directives/grid-select-multiple-custom-header-template.directive';
-import { SelectionModel } from '../grid/selection-model/selection-model';
 
 @Component({
     selector       : 'au-grid-select-multiple-elements',
     templateUrl    : './grid-select-multiple-elements.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone     : true,
+    imports        : [
+        GridComponent, GridCustomHeaderTemplateDirective, MatIconModule, NgForOf, NgIf, NgTemplateOutlet,
+    ],
 })
 export class GridSelectMultipleElementsComponent
 {
