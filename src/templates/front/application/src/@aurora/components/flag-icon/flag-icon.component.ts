@@ -16,7 +16,9 @@ import { Component, Input } from '@angular/core';
         }
     `],
     template: `
-        <ng-container *ngIf="flagCode">
+        <ng-container
+            *ngIf="flagCode"
+        >
             <span
                 class="fi fi-{{ flagCode }}"
                 [ngClass]="{'rounded': rounded}"
@@ -31,8 +33,8 @@ import { Component, Input } from '@angular/core';
         </ng-container>
     `,
     standalone: true,
-    imports: [
-        NgClass, NgIf, NgStyle
+    imports   : [
+        NgClass, NgIf, NgStyle,
     ],
 })
 
