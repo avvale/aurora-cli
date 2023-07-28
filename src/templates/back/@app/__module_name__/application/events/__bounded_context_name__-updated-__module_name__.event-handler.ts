@@ -1,6 +1,21 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event } from './{{ toKebabCase schema.boundedContextName }}-updated-{{ toKebabCase schema.moduleName }}.event';
 
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'EventsHandler' 'IEventHandler') path='@nestjs/cqrs')
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Updated' (toPascalCase schema.moduleName) 'Event')
+                )
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 @EventsHandler({{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event)
 export class {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}EventHandler implements IEventHandler<{{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event>
 {
