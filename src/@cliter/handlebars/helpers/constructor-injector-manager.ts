@@ -14,7 +14,8 @@ handlebars.registerHelper('constructorInjectorManager', function(
     context,
 )
 {
-    const tabulation = '\t';
+    // tabulation can be changed to 4 spaces or 2 spaces or 1 tabulation \t
+    const tabulation = '    ';
     const injectionsResponse: ConstructorInjectionStatement[] = [];
 
     for (const injection of injections)
