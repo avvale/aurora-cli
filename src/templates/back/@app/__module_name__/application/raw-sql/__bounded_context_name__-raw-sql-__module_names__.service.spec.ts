@@ -25,7 +25,7 @@ describe('{{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase sche
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [
+            providers: [ 
                 CommandBus,
                 EventBus,
                 EventPublisher,
