@@ -1,5 +1,5 @@
 import * as dayjs from 'dayjs';
-import * as crypto from 'crypto';
+import * as crypto from 'node:crypto';
 declare const Buffer: any;
 
 export class Cypher
@@ -24,6 +24,6 @@ export class Cypher
 
     public static base64Decode(data: string): string
     {
-        return Buffer.from(data, 'base64').toString('utf-8')
+        return Buffer.from(data, 'base64').toString('utf-8');
     }
 }

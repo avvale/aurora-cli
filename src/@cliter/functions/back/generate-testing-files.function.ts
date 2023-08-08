@@ -18,7 +18,9 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
             verbose           : generateCommandState.flags.verbose,
             excludeFiles      : generateCommandState.schema.excluded,
             lockFiles         : generateCommandState.lockFiles,
-            templateData      : { ...generateCommandState },
+            templateData      : {
+                ...generateCommandState,
+            },
         },
     );
 
