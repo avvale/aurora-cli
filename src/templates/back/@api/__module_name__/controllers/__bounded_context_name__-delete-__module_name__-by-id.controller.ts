@@ -4,7 +4,7 @@
         array
             (object items=(array 'Body' 'Controller' 'Param' 'Delete')  path='@nestjs/common')
             (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation')  path='@nestjs/swagger')
-            (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
+            (object items=(array 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
             (object
                 items=
                 (
@@ -26,6 +26,12 @@
 {{ 
     push importsArray
         (object items='Auth' path='@aurora/decorators')
+~}}
+{{/if}}
+{{#if schema.hasAuditing}}
+{{
+    push importsArray
+        (object items=(array 'Auditing' 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
