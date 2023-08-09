@@ -1,14 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonGetCountriesHandler, CommonGetCountriesResolver } from '@api/common/country';
+import { commonMockCountryData } from '@app/common/country';
 import { CacheModule } from '@nestjs/cache-manager';
-
-// custom items
-import { CommonGetCountriesResolver } from './common-get-countries.resolver';
-import { CommonGetCountriesHandler } from '../handlers/common-get-countries.handler';
-
-// sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonGetCountriesResolver', () =>
 {

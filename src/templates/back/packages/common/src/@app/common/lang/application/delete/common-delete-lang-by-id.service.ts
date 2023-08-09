@@ -19,23 +19,25 @@ export class CommonDeleteLangByIdService
     ): Promise<void>
     {
         // get object to delete
-        const lang = await this.repository.findById(
-            id,
-            {
-                constraint,
-                cQMetadata,
-            },
-        );
+        const lang = await this.repository
+            .findById(
+                id,
+                {
+                    constraint,
+                    cQMetadata,
+                },
+            );
 
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
-        await this.repository.deleteById(
-            lang.id,
-            {
-                deleteOptions: cQMetadata?.repositoryOptions,
-                cQMetadata,
-            },
-        );
+        await this.repository
+            .deleteById(
+                lang.id,
+                {
+                    deleteOptions: cQMetadata?.repositoryOptions,
+                    cQMetadata,
+                },
+            );
 
         // insert EventBus in object, to be able to apply and commit events
         const langRegister = this.publisher.mergeObjectContext(lang);

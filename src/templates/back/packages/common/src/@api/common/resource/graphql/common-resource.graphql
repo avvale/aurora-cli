@@ -1,0 +1,100 @@
+
+type CommonResource
+{
+    id: ID!
+    code: GraphQLString!
+    name: GraphQLString!
+    isActive: GraphQLBoolean!
+    hasAttachments: GraphQLBoolean!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input CommonCreateResourceInput
+{
+    id: ID!
+    code: GraphQLString!
+    name: GraphQLString!
+    isActive: GraphQLBoolean!
+    hasAttachments: GraphQLBoolean!
+}
+
+input CommonUpdateResourceByIdInput
+{
+    id: ID!
+    code: GraphQLString
+    name: GraphQLString
+    isActive: GraphQLBoolean
+    hasAttachments: GraphQLBoolean
+}
+
+input CommonUpdateResourcesInput
+{
+    id: ID
+    code: GraphQLString
+    name: GraphQLString
+    isActive: GraphQLBoolean
+    hasAttachments: GraphQLBoolean
+}
+
+type Query
+{
+    commonFindResource(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): CommonResource
+
+    commonFindResourceById(
+        id: ID
+        constraint: QueryStatement
+    ): CommonResource
+
+    commonGetResources(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonResource]!
+
+    commonPaginateResources(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    commonCreateResource(
+        payload: CommonCreateResourceInput!
+    ): CommonResource
+
+    commonCreateResources(
+        payload: [CommonCreateResourceInput]!
+    ): Boolean!
+
+    commonUpdateResourceById(
+        payload: CommonUpdateResourceByIdInput!
+        constraint: QueryStatement
+    ): CommonResource
+
+    commonUpdateResources(
+        payload: CommonUpdateResourcesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonResource]!
+
+    commonUpsertResource(
+        payload: CommonUpdateResourceByIdInput!
+    ): CommonResource
+
+    commonDeleteResourceById(
+        id: ID!
+        constraint: QueryStatement
+    ): CommonResource
+
+    commonDeleteResources(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonResource]!
+
+}

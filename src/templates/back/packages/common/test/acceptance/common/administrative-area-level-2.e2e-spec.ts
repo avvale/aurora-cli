@@ -463,7 +463,7 @@ describe('administrative-area-level-2', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 372.49203196857235,
+                latitude: 111.11111111111111,
             })
             .expect(400)
             .then(res =>
@@ -478,7 +478,7 @@ describe('administrative-area-level-2', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 5371.609946266088,
+                longitude: 1111.11111111111111,
             })
             .expect(400)
             .then(res =>
@@ -493,7 +493,7 @@ describe('administrative-area-level-2', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                latitude: 1.150569788156931,
+                latitude: 1.111111111111111,
             })
             .expect(400)
             .then(res =>
@@ -508,7 +508,7 @@ describe('administrative-area-level-2', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                longitude: 94.49379404904876,
+                longitude: 11.111111111111111,
             })
             .expect(400)
             .then(res =>

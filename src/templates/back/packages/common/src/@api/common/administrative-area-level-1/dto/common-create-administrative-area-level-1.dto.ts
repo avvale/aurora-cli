@@ -1,6 +1,6 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
 import { CommonAdministrativeAreaLevel1MapType } from '@api/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonCreateAdministrativeAreaLevel1Dto
 {

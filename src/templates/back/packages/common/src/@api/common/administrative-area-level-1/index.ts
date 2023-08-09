@@ -30,6 +30,19 @@ export { CommonUpsertAdministrativeAreaLevel1Controller } from './controllers/co
 export { CommonDeleteAdministrativeAreaLevel1ByIdController } from './controllers/common-delete-administrative-area-level-1-by-id.controller';
 export { CommonDeleteAdministrativeAreasLevel1Controller } from './controllers/common-delete-administrative-areas-level-1.controller';
 
+// exports resolvers
+export { CommonCreateAdministrativeAreaLevel1Resolver } from './resolvers/common-create-administrative-area-level-1.resolver';
+export { CommonCreateAdministrativeAreasLevel1Resolver } from './resolvers/common-create-administrative-areas-level-1.resolver';
+export { CommonPaginateAdministrativeAreasLevel1Resolver } from './resolvers/common-paginate-administrative-areas-level-1.resolver';
+export { CommonGetAdministrativeAreasLevel1Resolver } from './resolvers/common-get-administrative-areas-level-1.resolver';
+export { CommonFindAdministrativeAreaLevel1ByIdResolver } from './resolvers/common-find-administrative-area-level-1-by-id.resolver';
+export { CommonFindAdministrativeAreaLevel1Resolver } from './resolvers/common-find-administrative-area-level-1.resolver';
+export { CommonUpdateAdministrativeAreaLevel1ByIdResolver } from './resolvers/common-update-administrative-area-level-1-by-id.resolver';
+export { CommonUpdateAdministrativeAreasLevel1Resolver } from './resolvers/common-update-administrative-areas-level-1.resolver';
+export { CommonUpsertAdministrativeAreaLevel1Resolver } from './resolvers/common-upsert-administrative-area-level-1.resolver';
+export { CommonDeleteAdministrativeAreaLevel1ByIdResolver } from './resolvers/common-delete-administrative-area-level-1-by-id.resolver';
+export { CommonDeleteAdministrativeAreasLevel1Resolver } from './resolvers/common-delete-administrative-areas-level-1.resolver';
+
 // controllers
 import { CommonCreateAdministrativeAreaLevel1Controller } from './controllers/common-create-administrative-area-level-1.controller';
 import { CommonCreateAdministrativeAreasLevel1Controller } from './controllers/common-create-administrative-areas-level-1.controller';

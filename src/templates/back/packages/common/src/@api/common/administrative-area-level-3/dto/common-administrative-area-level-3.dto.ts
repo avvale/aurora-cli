@@ -1,9 +1,9 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
-import { CommonCountryDto } from '../../../common/country/dto/common-country.dto';
-import { CommonAdministrativeAreaLevel1Dto } from '../../../common/administrative-area-level-1/dto/common-administrative-area-level-1.dto';
-import { CommonAdministrativeAreaLevel2Dto } from '../../../common/administrative-area-level-2/dto/common-administrative-area-level-2.dto';
+import { CommonAdministrativeAreaLevel1Dto } from '@api/common/administrative-area-level-1';
+import { CommonAdministrativeAreaLevel2Dto } from '@api/common/administrative-area-level-2';
+import { CommonCountryDto } from '@api/common/country';
 import { CommonAdministrativeAreaLevel3MapType } from '@api/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonAdministrativeAreaLevel3Dto
 {

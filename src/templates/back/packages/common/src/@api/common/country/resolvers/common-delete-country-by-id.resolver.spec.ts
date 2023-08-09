@@ -1,14 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonDeleteCountryByIdHandler, CommonDeleteCountryByIdResolver } from '@api/common/country';
+import { commonMockCountryData } from '@app/common/country';
 import { CacheModule } from '@nestjs/cache-manager';
-
-// custom items
-import { CommonDeleteCountryByIdResolver } from './common-delete-country-by-id.resolver';
-import { CommonDeleteCountryByIdHandler } from '../handlers/common-delete-country-by-id.handler';
-
-// sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonDeleteCountryByIdResolver', () =>
 {

@@ -3,20 +3,26 @@ import { CommonCountryHandlers, CommonCountryServices, CommonCountryModel, Commo
 import { CommonAdministrativeAreaLevel1Handlers, CommonAdministrativeAreaLevel1Services, CommonAdministrativeAreaLevel1Model, CommonIAdministrativeAreaLevel1Repository, CommonSequelizeAdministrativeAreaLevel1Repository, CommonAdministrativeAreaLevel1Sagas } from './administrative-area-level-1';
 import { CommonAdministrativeAreaLevel2Handlers, CommonAdministrativeAreaLevel2Services, CommonAdministrativeAreaLevel2Model, CommonIAdministrativeAreaLevel2Repository, CommonSequelizeAdministrativeAreaLevel2Repository, CommonAdministrativeAreaLevel2Sagas } from './administrative-area-level-2';
 import { CommonAdministrativeAreaLevel3Handlers, CommonAdministrativeAreaLevel3Services, CommonAdministrativeAreaLevel3Model, CommonIAdministrativeAreaLevel3Repository, CommonSequelizeAdministrativeAreaLevel3Repository, CommonAdministrativeAreaLevel3Sagas } from './administrative-area-level-3';
+import { CommonResourceHandlers, CommonResourceServices, CommonResourceModel, CommonIResourceRepository, CommonSequelizeResourceRepository, CommonResourceSagas } from './resource';
+import { CommonAttachmentFamilyHandlers, CommonAttachmentFamilyServices, CommonAttachmentFamilyModel, CommonIAttachmentFamilyRepository, CommonSequelizeAttachmentFamilyRepository, CommonAttachmentFamilySagas } from './attachment-family';
 
 export const CommonHandlers = [
     ...CommonLangHandlers,
     ...CommonCountryHandlers,
     ...CommonAdministrativeAreaLevel1Handlers,
     ...CommonAdministrativeAreaLevel2Handlers,
-    ...CommonAdministrativeAreaLevel3Handlers
+    ...CommonAdministrativeAreaLevel3Handlers,
+    ...CommonResourceHandlers,
+    ...CommonAttachmentFamilyHandlers
 ];
 export const CommonServices = [
     ...CommonLangServices,
     ...CommonCountryServices,
     ...CommonAdministrativeAreaLevel1Services,
     ...CommonAdministrativeAreaLevel2Services,
-    ...CommonAdministrativeAreaLevel3Services
+    ...CommonAdministrativeAreaLevel3Services,
+    ...CommonResourceServices,
+    ...CommonAttachmentFamilyServices
 ];
 export const CommonModels = [
     CommonLangModel,
@@ -24,7 +30,9 @@ export const CommonModels = [
     CommonCountryI18nModel,
     CommonAdministrativeAreaLevel1Model,
     CommonAdministrativeAreaLevel2Model,
-    CommonAdministrativeAreaLevel3Model
+    CommonAdministrativeAreaLevel3Model,
+    CommonResourceModel,
+    CommonAttachmentFamilyModel
 ];
 export const CommonRepositories = [
     {
@@ -50,6 +58,14 @@ export const CommonRepositories = [
     {
         provide : CommonIAdministrativeAreaLevel3Repository,
         useClass: CommonSequelizeAdministrativeAreaLevel3Repository
+    },
+    {
+        provide : CommonIResourceRepository,
+        useClass: CommonSequelizeResourceRepository
+    },
+    {
+        provide : CommonIAttachmentFamilyRepository,
+        useClass: CommonSequelizeAttachmentFamilyRepository
     }
 ];
 export const CommonSagas = [
@@ -57,6 +73,8 @@ export const CommonSagas = [
     CommonLangSagas,
     CommonAdministrativeAreaLevel1Sagas,
     CommonAdministrativeAreaLevel2Sagas,
-    CommonAdministrativeAreaLevel3Sagas
+    CommonAdministrativeAreaLevel3Sagas,
+    CommonResourceSagas,
+    CommonAttachmentFamilySagas
 ];
 

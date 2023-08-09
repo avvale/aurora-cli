@@ -1,6 +1,5 @@
 import { CommonCreateAdministrativeAreaLevel1Controller, CommonCreateAdministrativeAreaLevel1Handler } from '@api/common/administrative-area-level-1';
 import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1';
-import { CacheModule } from '@nestjs/cache-manager';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateAdministrativeAreaLevel1Controller', () =>
@@ -41,7 +40,12 @@ describe('CommonCreateAdministrativeAreaLevel1Controller', () =>
         test('should return an administrativeAreaLevel1 created', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel1Data[0])));
-            expect(await controller.main(commonMockAdministrativeAreaLevel1Data[0])).toBe(commonMockAdministrativeAreaLevel1Data[0]);
+            expect(
+                await controller.main(
+                    commonMockAdministrativeAreaLevel1Data[0],
+                ),
+            )
+                .toBe(commonMockAdministrativeAreaLevel1Data[0]);
         });
     });
 });

@@ -1,7 +1,7 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
-import { CommonLangDto } from '../../../common/lang/dto/common-lang.dto';
+import { CommonLangDto } from '@api/common/lang';
 import { CommonCountryMapType } from '@api/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonCountryDto
 {

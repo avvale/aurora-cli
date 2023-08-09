@@ -5,7 +5,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateCountriesController', () =>
 {
     let controller: CommonCreateCountriesController;
-    let handler: CommonCreateCountriesHandler;
 
     beforeAll(async () =>
     {
@@ -25,7 +24,6 @@ describe('CommonCreateCountriesController', () =>
             .compile();
 
         controller = module.get<CommonCreateCountriesController>(CommonCreateCountriesController);
-        handler = module.get<CommonCreateCountriesHandler>(CommonCreateCountriesHandler);
     });
 
     describe('main', () =>
@@ -37,7 +35,12 @@ describe('CommonCreateCountriesController', () =>
 
         test('should return an commonMockCountryData created', async () =>
         {
-            expect(await controller.main(commonMockCountryData)).toBe(undefined);
+            expect(
+                await controller.main(
+                    commonMockCountryData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

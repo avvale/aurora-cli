@@ -1,15 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { CacheModule } from '@nestjs/cache-manager';
-
-// custom items
-import { CommonUpdateCountryByIdResolver } from './common-update-country-by-id.resolver';
-import { CommonUpdateCountryByIdHandler } from '../handlers/common-update-country-by-id.handler';
+import { CommonUpdateCountryByIdHandler, CommonUpdateCountryByIdResolver } from '@api/common/country';
 import { CommonUpdateCountryByIdInput } from '@api/graphql';
-
-// sources
-import { langs } from '@app/common/lang/infrastructure/mock/mock-lang.data';
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
+import { commonMockCountryData } from '@app/common/country';
+import { CacheModule } from '@nestjs/cache-manager';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateCountryByIdResolver', () =>
 {

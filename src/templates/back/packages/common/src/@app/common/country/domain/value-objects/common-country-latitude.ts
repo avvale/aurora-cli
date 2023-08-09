@@ -2,12 +2,12 @@ import { DecimalValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonCountryLatitude extends DecimalValueObject
 {
-    public readonly type: string = 'CountryLatitude';
+    public readonly type: string = 'CommonCountryLatitude';
 
     constructor(value: number, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'CountryLatitude',
+            name       : 'CommonCountryLatitude',
             nullable   : true,
             undefinable: true,
             decimals   : [16, 14],

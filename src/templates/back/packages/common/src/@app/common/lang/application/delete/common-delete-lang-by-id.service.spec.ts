@@ -51,9 +51,13 @@ describe('CommonDeleteLangByIdService', () =>
         test('should delete lang and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main(
-                new CommonLangId(commonMockLangData[0].id),
-            )).toBe(undefined);
+            expect(
+                await service.main(
+                    new CommonLangId(commonMockLangData[0].id),
+                    {},
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

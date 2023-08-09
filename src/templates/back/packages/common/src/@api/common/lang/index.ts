@@ -30,6 +30,19 @@ export { CommonUpsertLangController } from './controllers/common-upsert-lang.con
 export { CommonDeleteLangByIdController } from './controllers/common-delete-lang-by-id.controller';
 export { CommonDeleteLangsController } from './controllers/common-delete-langs.controller';
 
+// exports resolvers
+export { CommonCreateLangResolver } from './resolvers/common-create-lang.resolver';
+export { CommonCreateLangsResolver } from './resolvers/common-create-langs.resolver';
+export { CommonPaginateLangsResolver } from './resolvers/common-paginate-langs.resolver';
+export { CommonGetLangsResolver } from './resolvers/common-get-langs.resolver';
+export { CommonFindLangByIdResolver } from './resolvers/common-find-lang-by-id.resolver';
+export { CommonFindLangResolver } from './resolvers/common-find-lang.resolver';
+export { CommonUpdateLangByIdResolver } from './resolvers/common-update-lang-by-id.resolver';
+export { CommonUpdateLangsResolver } from './resolvers/common-update-langs.resolver';
+export { CommonUpsertLangResolver } from './resolvers/common-upsert-lang.resolver';
+export { CommonDeleteLangByIdResolver } from './resolvers/common-delete-lang-by-id.resolver';
+export { CommonDeleteLangsResolver } from './resolvers/common-delete-langs.resolver';
+
 // controllers
 import { CommonCreateLangController } from './controllers/common-create-lang.controller';
 import { CommonCreateLangsController } from './controllers/common-create-langs.controller';

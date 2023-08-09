@@ -2,12 +2,12 @@ import { BooleanValueObject, DataValueObject, ValidationRules } from '@aurorajs.
 
 export class CommonLangIsActive extends BooleanValueObject
 {
-    public readonly type: string = 'LangIsActive';
+    public readonly type: string = 'CommonLangIsActive';
 
     constructor(value: boolean, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
-            name       : 'LangIsActive',
+            name       : 'CommonLangIsActive',
             nullable   : false,
             undefinable: false,
         }, validationRules), data);

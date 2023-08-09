@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonDeleteLangByIdHandler, CommonDeleteLangByIdResolver } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteLangByIdResolver } from './common-delete-lang-by-id.resolver';
-import { CommonDeleteLangByIdHandler } from '../handlers/common-delete-lang-by-id.handler';
-
-// sources
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonDeleteLangByIdResolver', () =>
 {
