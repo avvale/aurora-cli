@@ -14,12 +14,6 @@
         )
     )
 ~}}
-// {{#each schema.properties.valueObjects}}
-//     {{
-//         push ../importsArray
-//             (object items=(array schema.properties.valueObjects) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value/objects'))
-//     }}
-// {{/each}}
 {{{ importManager (object imports=importsArray) }}}
 @CommandHandler({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand)
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler implements ICommandHandler<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand>
