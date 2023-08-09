@@ -143,6 +143,9 @@ export class CodeWriter
         // pivot table model
         for (const property of properties.withRelationshipManyToMany)
         {
+            if (property.relationship?.pivot?.modulePath !== `${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`)
+                continue;
+
             ImportDriver.createImportItems(
                 sourceFile,
                 `./${this.moduleName.toKebabCase()}`,

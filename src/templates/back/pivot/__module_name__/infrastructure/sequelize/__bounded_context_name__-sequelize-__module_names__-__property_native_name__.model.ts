@@ -2,8 +2,8 @@
 /* eslint-disable key-spacing */
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.model';
-import { {{ currentProperty.relationship.aggregate }}Model } from '{{ config.appContainer }}/{{ currentProperty.relationship.modulePath }}/infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase currentProperty.getRelationshipModuleName }}.model';
+import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}';
+import { {{ currentProperty.relationship.aggregate }}Model } from '{{ config.appContainer }}/{{ currentProperty.relationship.modulePath }}';
 
 @Table({
     modelName: '{{ toPascalCase currentProperty.relationship.pivot.aggregate }}',

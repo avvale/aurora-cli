@@ -39,46 +39,4 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         super();
     }
-    {{#hasItems schema.properties.withRelationshipManyToMany }}
-
-    // hook called after create aggregate
-    async createdAggregateHook(
-        aggregate: {{ schema.aggregateName }},
-        model: {{ schema.aggregateName }}Model,
-        createOptions: LiteralObject,
-    ): Promise<void>
-    {
-        // add many to many relation
-        {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.length > 0)
-        {
-            await model.$add(
-                '{{ toCamelCase originName }}',
-                aggregate.{{ toCamelCase name }}.value,
-                createOptions,
-            );
-        }
-        {{/each}}
-    }
-
-    // hook called after create aggregate
-    async updatedAggregateHook(
-        aggregate: {{ schema.aggregateName }},
-        model: {{ schema.aggregateName }}Model,
-        updateByIdOptions: LiteralObject,
-    ): Promise<void>
-    {
-        // set many to many relation
-        {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.isArray())
-        {
-             await model.$set(
-                '{{ toCamelCase originName }}',
-                aggregate.{{ toCamelCase name }}.value,
-                updateByIdOptions,
-            );
-        }
-        {{/each}}
-    }
-    {{/hasItems}}
 }
