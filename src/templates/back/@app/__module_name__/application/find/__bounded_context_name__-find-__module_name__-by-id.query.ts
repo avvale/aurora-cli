@@ -1,7 +1,7 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'QueryStatement' 'CQMetadata') path='@nestjs/testing')
+            (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}
