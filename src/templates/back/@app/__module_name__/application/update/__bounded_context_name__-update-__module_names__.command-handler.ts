@@ -1,12 +1,8 @@
 /* eslint-disable key-spacing */
-import {
-    {{> importValueObjects }}
-} from '../../domain/value-objects';
-
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/testing')
+            (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
             (object
                 items=
                 (
@@ -18,6 +14,19 @@ import {
         )
     )
 ~}}
+{{#each schema.properties.valueObjects}}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (object 
+            items=
+                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name))
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
 {{{ importManager (object imports=importsArray) }}}
 @CommandHandler({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Command)
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler implements ICommandHandler<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Command>

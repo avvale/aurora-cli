@@ -10,26 +10,6 @@ import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.mod
 import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
 import { {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase schema.moduleNames }}ContextEvent } from '../events/{{ toKebabCase schema.boundedContextName }}-add-{{ toKebabCase schema.moduleNames }}-context.event';
 
-// {{
-//     setVar 'importsArray' (
-//         array
-//             (object items=(array 'Injectable') path='@nestjs/common')
-//             (object items=(array 'EventPublisher') path='@nestjs/cqrs')
-//             (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
-//             (object
-//                 items=
-//                 (
-//                     array
-//                         (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
-//                         (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
-//                         (sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent')
-                        
-//                 )
-//                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-//         )
-//     )
-// ~}}
-// {{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service
 {

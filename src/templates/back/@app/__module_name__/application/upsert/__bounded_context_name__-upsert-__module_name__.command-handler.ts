@@ -1,23 +1,11 @@
 /* eslint-disable key-spacing */
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command } from './{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.command';
+import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service } from './{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.service';
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
-{{
-    setVar 'importsArray' (
-        array
-            (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Command')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Service')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
-    )
-~}}
-{{{ importManager (object imports=importsArray) }}}
+
 @CommandHandler({{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command)
 export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}CommandHandler implements ICommandHandler<{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command>
 {
