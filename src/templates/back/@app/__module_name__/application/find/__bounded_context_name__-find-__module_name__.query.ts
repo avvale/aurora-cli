@@ -1,7 +1,8 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
+            (object items=(array 'CQMetadata' 'QueryStatement') path=config.auroraCorePackage)
+
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}
