@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateScopeResolver } from './o-auth-create-scope.resolver';
-import { OAuthCreateScopeHandler } from '../handlers/o-auth-create-scope.handler';
 import { OAuthCreateScopeInput } from '@api/graphql';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
+import { OAuthCreateScopeHandler, OAuthCreateScopeResolver } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateScopeResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('OAuthCreateScopeResolver', () =>
 
         test('should return an scope created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(scopes[0])));
-            expect(await resolver.main(<OAuthCreateScopeInput>scopes[0])).toBe(scopes[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+            expect(await resolver.main(<OAuthCreateScopeInput>oAuthMockScopeData[0])).toBe(oAuthMockScopeData[0]);
         });
     });
 });

@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthUpsertScopeHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthUpsertScopeHandler } from './o-auth-upsert-scope.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpsertScopeHandler', () =>
 {
     let handler: OAuthUpsertScopeHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('OAuthUpsertScopeHandler', () =>
         })
             .compile();
 
-        handler     = module.get<OAuthUpsertScopeHandler>(OAuthUpsertScopeHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthUpsertScopeHandler>(OAuthUpsertScopeHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,13 @@ describe('OAuthUpsertScopeHandler', () =>
 
         test('should return an scope upserted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(scopes[0])));
-            expect(await handler.main(scopes[0])).toBe(scopes[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+            expect(
+                await handler.main(
+                    oAuthMockScopeData[0],
+                    'Europe/Madrid',
+                ))
+                .toBe(oAuthMockScopeData[0]);
         });
     });
 });

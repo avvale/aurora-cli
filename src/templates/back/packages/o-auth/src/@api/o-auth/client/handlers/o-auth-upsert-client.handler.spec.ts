@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthUpsertClientHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthUpsertClientHandler } from './o-auth-upsert-client.handler';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpsertClientHandler', () =>
 {
     let handler: OAuthUpsertClientHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('OAuthUpsertClientHandler', () =>
         })
             .compile();
 
-        handler     = module.get<OAuthUpsertClientHandler>(OAuthUpsertClientHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthUpsertClientHandler>(OAuthUpsertClientHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,13 @@ describe('OAuthUpsertClientHandler', () =>
 
         test('should return an client upserted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await handler.main(clients[0])).toBe(clients[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+            expect(
+                await handler.main(
+                    oAuthMockClientData[0],
+                    'Europe/Madrid',
+                ))
+                .toBe(oAuthMockClientData[0]);
         });
     });
 });

@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationSeeder } from '@app/o-auth/application';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IApplicationRepository } from '@app/o-auth/application/domain/application.repository';
-import { MockApplicationSeeder } from '@app/o-auth/application/infrastructure/mock/mock-application.seeder';
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { OAuthModule } from '@api/o-auth/o-auth.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,8 +18,8 @@ const importForeignModules = [];
 describe('application', () =>
 {
     let app: INestApplication;
-    let applicationRepository: IApplicationRepository;
-    let applicationSeeder: MockApplicationSeeder;
+    let applicationRepository: OAuthIApplicationRepository;
+    let applicationSeeder: OAuthMockApplicationSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -58,17 +56,17 @@ describe('application', () =>
                 }),
             ],
             providers: [
-                MockApplicationSeeder,
+                OAuthMockApplicationSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = applications;
+        mockData = oAuthMockApplicationData;
         app = module.createNestApplication();
-        applicationRepository = module.get<IApplicationRepository>(IApplicationRepository);
-        applicationSeeder = module.get<MockApplicationSeeder>(MockApplicationSeeder);
+        applicationRepository = module.get<OAuthIApplicationRepository>(OAuthIApplicationRepository);
+        applicationSeeder = module.get<OAuthMockApplicationSeeder>(OAuthMockApplicationSeeder);
 
         // seed mock data in memory database
         await applicationRepository.insert(applicationSeeder.collectionSource);
@@ -386,7 +384,6 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: 'aurora2', // code is a unique key
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(201);
@@ -452,7 +449,6 @@ describe('application', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: 'aurora2', // code is a unique key
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
@@ -603,7 +599,6 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        code: 'aurora2', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -822,7 +817,6 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        code: 'aurora2', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -858,7 +852,6 @@ describe('application', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        code: 'aurora2', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                     query: {

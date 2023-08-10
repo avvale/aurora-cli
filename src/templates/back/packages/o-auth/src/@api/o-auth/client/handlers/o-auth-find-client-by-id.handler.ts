@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
 import { OAuthClient } from '@api/graphql';
-import { OAuthClientDto } from '../dto';
+import { OAuthClientDto } from '@api/o-auth/client';
+import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindClientByIdHandler
@@ -19,10 +17,12 @@ export class OAuthFindClientByIdHandler
         timezone?: string,
     ): Promise<OAuthClient | OAuthClientDto>
     {
-        return await this.queryBus.ask(new FindClientByIdQuery(
+        return await this.queryBus.ask(new OAuthFindClientByIdQuery(
             id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

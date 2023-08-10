@@ -1,6 +1,6 @@
-export { ScopeId } from './scope-id';
-export { ScopeCode } from './scope-code';
-export { ScopeName } from './scope-name';
-export { ScopeCreatedAt } from './scope-created-at';
-export { ScopeUpdatedAt } from './scope-updated-at';
-export { ScopeDeletedAt } from './scope-deleted-at';
+export { OAuthScopeId } from './o-auth-scope-id';
+export { OAuthScopeCode } from './o-auth-scope-code';
+export { OAuthScopeName } from './o-auth-scope-name';
+export { OAuthScopeCreatedAt } from './o-auth-scope-created-at';
+export { OAuthScopeUpdatedAt } from './o-auth-scope-updated-at';
+export { OAuthScopeDeletedAt } from './o-auth-scope-deleted-at';

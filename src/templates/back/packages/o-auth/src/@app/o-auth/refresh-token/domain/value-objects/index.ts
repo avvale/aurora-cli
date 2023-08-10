@@ -1,9 +1,11 @@
-export { RefreshTokenId } from './refresh-token-id';
-export { RefreshTokenAccessTokenId } from './refresh-token-access-token-id';
-export { RefreshTokenToken } from './refresh-token-token';
-export { RefreshTokenIsRevoked } from './refresh-token-is-revoked';
-export { RefreshTokenExpiresAt } from './refresh-token-expires-at';
-export { RefreshTokenCreatedAt } from './refresh-token-created-at';
-export { RefreshTokenUpdatedAt } from './refresh-token-updated-at';
-export { RefreshTokenDeletedAt } from './refresh-token-deleted-at';
-export { RefreshTokenExpiredRefreshToken } from './refresh-token-expired-refresh-token';
+export { OAuthRefreshTokenId } from './o-auth-refresh-token-id';
+export { OAuthRefreshTokenAccessTokenId } from './o-auth-refresh-token-access-token-id';
+export { OAuthRefreshTokenToken } from './o-auth-refresh-token-token';
+export { OAuthRefreshTokenIsRevoked } from './o-auth-refresh-token-is-revoked';
+export { OAuthRefreshTokenExpiresAt } from './o-auth-refresh-token-expires-at';
+export { OAuthRefreshTokenCreatedAt } from './o-auth-refresh-token-created-at';
+export { OAuthRefreshTokenUpdatedAt } from './o-auth-refresh-token-updated-at';
+export { OAuthRefreshTokenDeletedAt } from './o-auth-refresh-token-deleted-at';
+
+// ---- customizations ----
+export { OAuthRefreshTokenExpiredRefreshToken } from './o-auth-refresh-token-expired-refresh-token';

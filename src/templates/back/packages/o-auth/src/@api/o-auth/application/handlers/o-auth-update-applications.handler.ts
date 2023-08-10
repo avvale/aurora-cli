@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetApplicationsQuery } from '@app/o-auth/application/application/get/get-applications.query';
-import { UpdateApplicationsCommand } from '@app/o-auth/application/application/update/update-applications.command';
 import { OAuthApplication, OAuthUpdateApplicationsInput } from '@api/graphql';
-import { OAuthApplicationDto, OAuthUpdateApplicationsDto } from '../dto';
+import { OAuthApplicationDto, OAuthUpdateApplicationsDto } from '@api/o-auth/application';
+import { OAuthGetApplicationsQuery, OAuthUpdateApplicationsCommand } from '@app/o-auth/application';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpdateApplicationsHandler
@@ -23,7 +20,7 @@ export class OAuthUpdateApplicationsHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthApplication | OAuthApplicationDto>
     {
-        await this.commandBus.dispatch(new UpdateApplicationsCommand(
+        await this.commandBus.dispatch(new OAuthUpdateApplicationsCommand(
             payload,
             queryStatement,
             constraint,
@@ -35,10 +32,12 @@ export class OAuthUpdateApplicationsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetApplicationsQuery(
+        return await this.queryBus.ask(new OAuthGetApplicationsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

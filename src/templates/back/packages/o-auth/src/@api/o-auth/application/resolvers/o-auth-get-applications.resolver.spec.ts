@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthGetApplicationsHandler, OAuthGetApplicationsResolver } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthGetApplicationsResolver } from './o-auth-get-applications.resolver';
-import { OAuthGetApplicationsHandler } from '../handlers/o-auth-get-applications.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthGetApplicationsResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('OAuthGetApplicationsResolver', () =>
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a applications', async () =>
+        test('should return a oAuthMockApplicationData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications)));
-            expect(await resolver.main()).toBe(applications);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData)));
+            expect(await resolver.main()).toBe(oAuthMockApplicationData);
         });
     });
 });

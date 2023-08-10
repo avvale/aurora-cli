@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 // ---- customizations ----
 import { AuthModule } from '@app/o-auth/shared/modules/auth.module';
 import { IamModule } from '@api/iam/iam.module';
-import { MockJwtService } from '@app/o-auth/access-token/infrastructure/mock/mock-jwt.service';
+import { MockJwtService } from '@app/o-auth/access-token/infrastructure/mock/o-auth-mock-jwt.service';
 import { OAuthClientGrantType } from '@api/graphql';
 import { IApplicationRepository } from '@app/o-auth/application';
 import { MockApplicationSeeder } from '@app/o-auth/application/infrastructure/mock/mock-application.seeder';

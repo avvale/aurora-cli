@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateApplicationsResolver } from './o-auth-create-applications.resolver';
-import { OAuthCreateApplicationsHandler } from '../handlers/o-auth-create-applications.handler';
 import { OAuthCreateApplicationInput } from '@api/graphql';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
+import { OAuthCreateApplicationsHandler, OAuthCreateApplicationsResolver } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateApplicationsResolver', () =>
 {
     let resolver: OAuthCreateApplicationsResolver;
-    let handler: OAuthCreateApplicationsHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('OAuthCreateApplicationsResolver', () =>
             .compile();
 
         resolver = module.get<OAuthCreateApplicationsResolver>(OAuthCreateApplicationsResolver);
-        handler = module.get<OAuthCreateApplicationsHandler>(OAuthCreateApplicationsHandler);
     });
 
     test('OAuthCreateApplicationsResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('OAuthCreateApplicationsResolver', () =>
 
         test('should return an applications created', async () =>
         {
-            expect(await resolver.main(<OAuthCreateApplicationInput[]>applications)).toBe(undefined);
+            expect(await resolver.main(<OAuthCreateApplicationInput[]>oAuthMockApplicationData)).toBe(undefined);
         });
     });
 });

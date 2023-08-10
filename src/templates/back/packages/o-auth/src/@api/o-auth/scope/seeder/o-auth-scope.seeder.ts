@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateScopesCommand } from '@app/o-auth/scope/application/create/create-scopes.command';
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
+import { OAuthCreateScopesCommand } from '@app/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
 
 @Injectable()
 export class OAuthScopeSeeder
@@ -15,8 +15,8 @@ export class OAuthScopeSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateScopesCommand(
-            scopes,
+        await this.commandBus.dispatch(new OAuthCreateScopesCommand(
+            oAuthMockScopeData,
             {
                 timezone: process.env.TZ ,
             },

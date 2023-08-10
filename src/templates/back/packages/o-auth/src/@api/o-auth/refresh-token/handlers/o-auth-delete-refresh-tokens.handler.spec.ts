@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthDeleteRefreshTokensHandler } from '@api/o-auth/refresh-token';
+import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthDeleteRefreshTokensHandler } from './o-auth-delete-refresh-tokens.handler';
-
-// sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteRefreshTokensHandler', () =>
 {
     let handler: OAuthDeleteRefreshTokensHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('OAuthDeleteRefreshTokensHandler', () =>
         })
             .compile();
 
-        handler    = module.get<OAuthDeleteRefreshTokensHandler>(OAuthDeleteRefreshTokensHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthDeleteRefreshTokensHandler>(OAuthDeleteRefreshTokensHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('OAuthDeleteRefreshTokensHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('OAuthDeleteRefreshTokensHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an refreshTokens deleted', async () =>
+        test('should return an oAuthMockRefreshTokenData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await handler.main()).toBe(refreshTokens);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockRefreshTokenData);
         });
     });
 });

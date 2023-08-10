@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetApplicationsQuery } from '@app/o-auth/application/application/get/get-applications.query';
 import { OAuthApplication } from '@api/graphql';
-import { OAuthApplicationDto } from '../dto';
+import { OAuthApplicationDto } from '@api/o-auth/application';
+import { OAuthGetApplicationsQuery } from '@app/o-auth/application';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthGetApplicationsHandler
@@ -19,10 +17,12 @@ export class OAuthGetApplicationsHandler
         timezone?: string,
     ): Promise<OAuthApplication[] | OAuthApplicationDto[]>
     {
-        return await this.queryBus.ask(new GetApplicationsQuery(
+        return await this.queryBus.ask(new OAuthGetApplicationsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

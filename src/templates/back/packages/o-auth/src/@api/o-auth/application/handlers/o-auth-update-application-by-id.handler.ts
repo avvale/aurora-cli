@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindApplicationByIdQuery } from '@app/o-auth/application/application/find/find-application-by-id.query';
-import { UpdateApplicationByIdCommand } from '@app/o-auth/application/application/update/update-application-by-id.command';
 import { OAuthApplication, OAuthUpdateApplicationByIdInput } from '@api/graphql';
-import { OAuthApplicationDto, OAuthUpdateApplicationByIdDto } from '../dto';
+import { OAuthApplicationDto, OAuthUpdateApplicationByIdDto } from '@api/o-auth/application';
+import { OAuthFindApplicationByIdQuery, OAuthUpdateApplicationByIdCommand } from '@app/o-auth/application';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpdateApplicationByIdHandler
@@ -22,15 +19,17 @@ export class OAuthUpdateApplicationByIdHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthApplication | OAuthApplicationDto>
     {
-        const application = await this.queryBus.ask(new FindApplicationByIdQuery(
+        const application = await this.queryBus.ask(new OAuthFindApplicationByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, application);
 
-        await this.commandBus.dispatch(new UpdateApplicationByIdCommand(
+        await this.commandBus.dispatch(new OAuthUpdateApplicationByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -44,10 +43,12 @@ export class OAuthUpdateApplicationByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindApplicationByIdQuery(
+        return await this.queryBus.ask(new OAuthFindApplicationByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

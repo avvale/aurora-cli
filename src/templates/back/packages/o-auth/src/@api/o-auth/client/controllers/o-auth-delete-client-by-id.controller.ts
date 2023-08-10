@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Param, Delete } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { OAuthClientDto } from '../dto';
+import { OAuthClientDto, OAuthDeleteClientByIdHandler } from '@api/o-auth/client';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthDeleteClientByIdHandler } from '../handlers/o-auth-delete-client-by-id.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete, Param } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[o-auth] client')
 @Controller('o-auth/client/delete')

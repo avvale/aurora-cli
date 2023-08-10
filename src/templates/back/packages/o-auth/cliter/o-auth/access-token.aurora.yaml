@@ -60,6 +60,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+aggregateI18nProperties: []
 additionalApis: []
 excluded:
   - src/@api/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts
@@ -92,31 +93,30 @@ excluded:
   - src/@api/o-auth/access-token/resolvers/o-auth-update-access-tokens.resolver.ts
   - src/@api/o-auth/access-token/resolvers/o-auth-upsert-access-token.resolver.spec.ts
   - src/@api/o-auth/access-token/resolvers/o-auth-upsert-access-token.resolver.ts
-  - src/@app/o-auth/access-token/application/create/create-access-tokens.command-handler.spec.ts
-  - src/@app/o-auth/access-token/application/create/create-access-tokens.command-handler.ts
-  - src/@app/o-auth/access-token/application/create/create-access-tokens.command.ts
-  - src/@app/o-auth/access-token/application/create/create-access-tokens.service.spec.ts
-  - src/@app/o-auth/access-token/application/create/create-access-tokens.service.ts
-  - src/@app/o-auth/access-token/application/update/update-access-token-by-id.command-handler.spec.ts
-  - src/@app/o-auth/access-token/application/update/update-access-token-by-id.command-handler.ts
-  - src/@app/o-auth/access-token/application/update/update-access-token-by-id.command.ts
-  - src/@app/o-auth/access-token/application/update/update-access-token-by-id.service.spec.ts
-  - src/@app/o-auth/access-token/application/update/update-access-token-by-id.service.ts
-  - src/@app/o-auth/access-token/application/update/update-access-tokens.command-handler.spec.ts
-  - src/@app/o-auth/access-token/application/update/update-access-tokens.command-handler.ts
-  - src/@app/o-auth/access-token/application/update/update-access-tokens.command.ts
-  - src/@app/o-auth/access-token/application/update/update-access-tokens.service.spec.ts
-  - src/@app/o-auth/access-token/application/update/update-access-tokens.service.ts
-  - src/@app/o-auth/access-token/application/upsert/upsert-access-token.command-handler.spec.ts
-  - src/@app/o-auth/access-token/application/upsert/upsert-access-token.command-handler.ts
-  - src/@app/o-auth/access-token/application/upsert/upsert-access-token.command.ts
-  - src/@app/o-auth/access-token/application/upsert/upsert-access-token.service.spec.ts
-  - src/@app/o-auth/access-token/application/upsert/upsert-access-token.service.ts
-  - src/@app/o-auth/access-token/application/events/created-access-tokens.event-handler.ts
-  - src/@app/o-auth/access-token/application/events/created-access-tokens.event.ts
-  - src/@app/o-auth/access-token/application/events/updated-access-token.event-handler.ts
-  - src/@app/o-auth/access-token/application/events/updated-access-token.event.ts
-  - src/@app/o-auth/access-token/application/events/updated-access-tokens.event-handler.ts
-  - src/@app/o-auth/access-token/application/events/updated-access-tokens.event.ts
-  - src/@api/o-auth/access-token/seeder/seeder.ts
-  - src/@api/o-auth/access-token/seeder/seeder.module.ts
+  - src/@api/o-auth/access-token/seeder/o-auth-access-token.seeder.ts
+  - src/@app/o-auth/access-token/application/create/o-auth-create-access-tokens.command-handler.spec.ts
+  - src/@app/o-auth/access-token/application/create/o-auth-create-access-tokens.command-handler.ts
+  - src/@app/o-auth/access-token/application/create/o-auth-create-access-tokens.command.ts
+  - src/@app/o-auth/access-token/application/create/o-auth-create-access-tokens.service.spec.ts
+  - src/@app/o-auth/access-token/application/create/o-auth-create-access-tokens.service.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-token-by-id.command-handler.spec.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-token-by-id.command-handler.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-token-by-id.command.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-token-by-id.service.spec.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-token-by-id.service.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-tokens.command-handler.spec.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-tokens.command-handler.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-tokens.command.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-tokens.service.spec.ts
+  - src/@app/o-auth/access-token/application/update/o-auth-update-access-tokens.service.ts
+  - src/@app/o-auth/access-token/application/upsert/o-auth-upsert-access-token.command-handler.spec.ts
+  - src/@app/o-auth/access-token/application/upsert/o-auth-upsert-access-token.command-handler.ts
+  - src/@app/o-auth/access-token/application/upsert/o-auth-upsert-access-token.command.ts
+  - src/@app/o-auth/access-token/application/upsert/o-auth-upsert-access-token.service.spec.ts
+  - src/@app/o-auth/access-token/application/upsert/o-auth-upsert-access-token.service.ts
+  - src/@app/o-auth/access-token/application/events/o-auth-created-access-tokens.event-handler.ts
+  - src/@app/o-auth/access-token/application/events/o-auth-created-access-tokens.event.ts
+  - src/@app/o-auth/access-token/application/events/o-auth-updated-access-token.event-handler.ts
+  - src/@app/o-auth/access-token/application/events/o-auth-updated-access-token.event.ts
+  - src/@app/o-auth/access-token/application/events/o-auth-updated-access-tokens.event-handler.ts
+  - src/@app/o-auth/access-token/application/events/o-auth-updated-access-tokens.event.ts

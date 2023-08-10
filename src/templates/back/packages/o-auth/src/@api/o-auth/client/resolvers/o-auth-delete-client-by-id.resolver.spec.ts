@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteClientByIdHandler, OAuthDeleteClientByIdResolver } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteClientByIdResolver } from './o-auth-delete-client-by-id.resolver';
-import { OAuthDeleteClientByIdHandler } from '../handlers/o-auth-delete-client-by-id.handler';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('OAuthDeleteClientByIdResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('OAuthDeleteClientByIdResolver', () =>
 
         test('should return an client deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await resolver.main(clients[0].id)).toBe(clients[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+            expect(await resolver.main(oAuthMockClientData[0].id)).toBe(oAuthMockClientData[0]);
         });
     });
 });

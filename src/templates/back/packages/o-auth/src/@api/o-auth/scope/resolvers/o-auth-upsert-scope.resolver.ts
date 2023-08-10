@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthUpsertScopeHandler } from '../handlers/o-auth-upsert-scope.handler';
 import { OAuthScope, OAuthUpdateScopeByIdInput } from '@api/graphql';
+import { OAuthUpsertScopeHandler } from '@api/o-auth/scope';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.scope.upsert')

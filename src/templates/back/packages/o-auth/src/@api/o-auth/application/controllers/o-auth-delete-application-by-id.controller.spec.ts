@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteApplicationByIdController, OAuthDeleteApplicationByIdHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteApplicationByIdController } from './o-auth-delete-application-by-id.controller';
-import { OAuthDeleteApplicationByIdHandler } from '../handlers/o-auth-delete-application-by-id.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthDeleteApplicationByIdController', () =>
 {
@@ -45,8 +40,8 @@ describe('OAuthDeleteApplicationByIdController', () =>
 
         test('should return an application deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await controller.main(applications[0].id)).toBe(applications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(await controller.main(oAuthMockApplicationData[0].id)).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteScopesController, OAuthDeleteScopesHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteScopesController } from './o-auth-delete-scopes.controller';
-import { OAuthDeleteScopesHandler } from '../handlers/o-auth-delete-scopes.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthDeleteScopesController', () =>
 {
@@ -43,10 +37,10 @@ describe('OAuthDeleteScopesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an scopes deleted', async () =>
+        test('should return an oAuthMockScopeData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(scopes)));
-            expect(await controller.main()).toBe(scopes);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData)));
+            expect(await controller.main()).toBe(oAuthMockScopeData);
         });
     });
 });

@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateClientsCommand } from '@app/o-auth/client/application/create/create-clients.command';
 import { OAuthCreateClientInput } from '@api/graphql';
-import { OAuthCreateClientDto } from '../dto';
+import { OAuthCreateClientDto } from '@api/o-auth/client';
+import { OAuthCreateClientsCommand } from '@app/o-auth/client';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthCreateClientsHandler
@@ -19,7 +17,7 @@ export class OAuthCreateClientsHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateClientsCommand(
+        await this.commandBus.dispatch(new OAuthCreateClientsCommand(
             payload,
             {
                 timezone,
@@ -28,6 +26,7 @@ export class OAuthCreateClientsHandler
                 },
             },
         ));
+
         return true;
     }
 }

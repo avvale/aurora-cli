@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateScopesCommand } from '@app/o-auth/scope/application/create/create-scopes.command';
 import { OAuthCreateScopeInput } from '@api/graphql';
-import { OAuthCreateScopeDto } from '../dto';
+import { OAuthCreateScopeDto } from '@api/o-auth/scope';
+import { OAuthCreateScopesCommand } from '@app/o-auth/scope';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthCreateScopesHandler
@@ -19,7 +17,7 @@ export class OAuthCreateScopesHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateScopesCommand(
+        await this.commandBus.dispatch(new OAuthCreateScopesCommand(
             payload,
             {
                 timezone,
@@ -28,6 +26,7 @@ export class OAuthCreateScopesHandler
                 },
             },
         ));
+
         return true;
     }
 }

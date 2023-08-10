@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthDeleteAccessTokensHandler } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthDeleteAccessTokensHandler } from './o-auth-delete-access-tokens.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteAccessTokensHandler', () =>
 {
     let handler: OAuthDeleteAccessTokensHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('OAuthDeleteAccessTokensHandler', () =>
         })
             .compile();
 
-        handler    = module.get<OAuthDeleteAccessTokensHandler>(OAuthDeleteAccessTokensHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthDeleteAccessTokensHandler>(OAuthDeleteAccessTokensHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('OAuthDeleteAccessTokensHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('OAuthDeleteAccessTokensHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an accessTokens deleted', async () =>
+        test('should return an oAuthMockAccessTokenData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
-            expect(await handler.main()).toBe(accessTokens);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockAccessTokenData);
         });
     });
 });

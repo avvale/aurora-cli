@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthPaginateRefreshTokensHandler, OAuthPaginateRefreshTokensResolver } from '@api/o-auth/refresh-token';
+import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthPaginateRefreshTokensResolver } from './o-auth-paginate-refresh-tokens.resolver';
-import { OAuthPaginateRefreshTokensHandler } from '../handlers/o-auth-paginate-refresh-tokens.handler';
-
-// sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 
 describe('OAuthPaginateRefreshTokensResolver', () =>
 {
@@ -30,7 +25,7 @@ describe('OAuthPaginateRefreshTokensResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<OAuthPaginateRefreshTokensResolver>(OAuthPaginateRefreshTokensResolver);
+        resolver = module.get<OAuthPaginateRefreshTokensResolver>(OAuthPaginateRefreshTokensResolver);
         handler = module.get<OAuthPaginateRefreshTokensHandler>(OAuthPaginateRefreshTokensHandler);
     });
 
@@ -46,17 +41,17 @@ describe('OAuthPaginateRefreshTokensResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a refreshTokens', async () =>
+        test('should return a oAuthMockRefreshTokenData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : refreshTokens,
+                rows : oAuthMockRefreshTokenData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : refreshTokens,
+                rows : oAuthMockRefreshTokenData,
             });
         });
     });

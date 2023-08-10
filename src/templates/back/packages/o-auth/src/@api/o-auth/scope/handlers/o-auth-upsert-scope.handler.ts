@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindScopeByIdQuery } from '@app/o-auth/scope/application/find/find-scope-by-id.query';
-import { UpsertScopeCommand } from '@app/o-auth/scope/application/upsert/upsert-scope.command';
 import { OAuthScope, OAuthUpdateScopeByIdInput } from '@api/graphql';
-import { OAuthScopeDto, OAuthUpdateScopeByIdDto } from '../dto';
+import { OAuthScopeDto, OAuthUpdateScopeByIdDto } from '@api/o-auth/scope';
+import { OAuthFindScopeByIdQuery, OAuthUpsertScopeCommand } from '@app/o-auth/scope';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpsertScopeHandler
@@ -21,7 +18,7 @@ export class OAuthUpsertScopeHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthScope | OAuthScopeDto>
     {
-        await this.commandBus.dispatch(new UpsertScopeCommand(
+        await this.commandBus.dispatch(new OAuthUpsertScopeCommand(
             payload,
             {
                 timezone,
@@ -31,10 +28,12 @@ export class OAuthUpsertScopeHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindScopeByIdQuery(
+        return await this.queryBus.ask(new OAuthFindScopeByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

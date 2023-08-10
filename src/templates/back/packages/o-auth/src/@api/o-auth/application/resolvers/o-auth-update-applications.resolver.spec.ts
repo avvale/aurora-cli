@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthUpdateApplicationsResolver } from './o-auth-update-applications.resolver';
-import { OAuthUpdateApplicationsHandler } from '../handlers/o-auth-update-applications.handler';
 import { OAuthUpdateApplicationsInput } from '@api/graphql';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
+import { OAuthUpdateApplicationsHandler, OAuthUpdateApplicationsResolver } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpdateApplicationsResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('OAuthUpdateApplicationsResolver', () =>
 
         test('should return a applications updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await resolver.main(<OAuthUpdateApplicationsInput>applications[0])).toBe(applications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(await resolver.main(<OAuthUpdateApplicationsInput>oAuthMockApplicationData[0])).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

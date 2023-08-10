@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token/application/find/find-refresh-token-by-id.query';
-import { DeleteRefreshTokenByIdCommand } from '@app/o-auth/refresh-token/application/delete/delete-refresh-token-by-id.command';
 import { OAuthRefreshToken } from '@api/graphql';
-import { OAuthRefreshTokenDto } from '../dto';
+import { OAuthRefreshTokenDto } from '@api/o-auth/refresh-token';
+import { OAuthDeleteRefreshTokenByIdCommand, OAuthFindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthDeleteRefreshTokenByIdHandler
@@ -21,9 +18,15 @@ export class OAuthDeleteRefreshTokenByIdHandler
         timezone?: string,
     ): Promise<OAuthRefreshToken | OAuthRefreshTokenDto>
     {
-        const refreshToken = await this.queryBus.ask(new FindRefreshTokenByIdQuery(id, constraint, { timezone }));
+        const refreshToken = await this.queryBus.ask(new OAuthFindRefreshTokenByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteRefreshTokenByIdCommand(
+        await this.commandBus.dispatch(new OAuthDeleteRefreshTokenByIdCommand(
             id,
             constraint,
             {

@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthPaginateAccessTokensHandler, OAuthPaginateAccessTokensResolver } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthPaginateAccessTokensResolver } from './o-auth-paginate-access-tokens.resolver';
-import { OAuthPaginateAccessTokensHandler } from '../handlers/o-auth-paginate-access-tokens.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 
 describe('OAuthPaginateAccessTokensResolver', () =>
 {
@@ -30,7 +25,7 @@ describe('OAuthPaginateAccessTokensResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<OAuthPaginateAccessTokensResolver>(OAuthPaginateAccessTokensResolver);
+        resolver = module.get<OAuthPaginateAccessTokensResolver>(OAuthPaginateAccessTokensResolver);
         handler = module.get<OAuthPaginateAccessTokensHandler>(OAuthPaginateAccessTokensHandler);
     });
 
@@ -46,17 +41,17 @@ describe('OAuthPaginateAccessTokensResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a accessTokens', async () =>
+        test('should return a oAuthMockAccessTokenData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : accessTokens,
+                rows : oAuthMockAccessTokenData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : accessTokens,
+                rows : oAuthMockAccessTokenData,
             });
         });
     });

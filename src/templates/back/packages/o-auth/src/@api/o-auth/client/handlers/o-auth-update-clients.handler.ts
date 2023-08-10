@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetClientsQuery } from '@app/o-auth/client/application/get/get-clients.query';
-import { UpdateClientsCommand } from '@app/o-auth/client/application/update/update-clients.command';
 import { OAuthClient, OAuthUpdateClientsInput } from '@api/graphql';
-import { OAuthClientDto, OAuthUpdateClientsDto } from '../dto';
+import { OAuthClientDto, OAuthUpdateClientsDto } from '@api/o-auth/client';
+import { OAuthGetClientsQuery, OAuthUpdateClientsCommand } from '@app/o-auth/client';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpdateClientsHandler
@@ -23,7 +20,7 @@ export class OAuthUpdateClientsHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthClient | OAuthClientDto>
     {
-        await this.commandBus.dispatch(new UpdateClientsCommand(
+        await this.commandBus.dispatch(new OAuthUpdateClientsCommand(
             payload,
             queryStatement,
             constraint,
@@ -35,10 +32,12 @@ export class OAuthUpdateClientsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetClientsQuery(
+        return await this.queryBus.ask(new OAuthGetClientsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

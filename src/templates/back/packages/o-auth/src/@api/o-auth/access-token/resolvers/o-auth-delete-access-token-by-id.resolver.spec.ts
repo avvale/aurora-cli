@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteAccessTokenByIdHandler, OAuthDeleteAccessTokenByIdResolver } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteAccessTokenByIdResolver } from './o-auth-delete-access-token-by-id.resolver';
-import { OAuthDeleteAccessTokenByIdHandler } from '../handlers/o-auth-delete-access-token-by-id.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 
 describe('OAuthDeleteAccessTokenByIdResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('OAuthDeleteAccessTokenByIdResolver', () =>
 
         test('should return an accessToken deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accessTokens[0])));
-            expect(await resolver.main(accessTokens[0].id)).toBe(accessTokens[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData[0])));
+            expect(await resolver.main(oAuthMockAccessTokenData[0].id)).toBe(oAuthMockAccessTokenData[0]);
         });
     });
 });

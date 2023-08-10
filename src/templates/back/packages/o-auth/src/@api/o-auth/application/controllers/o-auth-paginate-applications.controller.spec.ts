@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthPaginateApplicationsController, OAuthPaginateApplicationsHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthPaginateApplicationsController } from './o-auth-paginate-applications.controller';
-import { OAuthPaginateApplicationsHandler } from '../handlers/o-auth-paginate-applications.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthPaginateApplicationsController', () =>
 {
@@ -43,17 +37,17 @@ describe('OAuthPaginateApplicationsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a applications', async () =>
+        test('should return a oAuthMockApplicationData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : applications,
+                rows : oAuthMockApplicationData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : applications,
+                rows : oAuthMockApplicationData,
             });
         });
     });
