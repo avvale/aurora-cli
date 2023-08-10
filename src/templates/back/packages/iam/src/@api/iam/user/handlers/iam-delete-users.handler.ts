@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetUsersQuery } from '@app/iam/user/application/get/get-users.query';
-import { DeleteUsersCommand } from '@app/iam/user/application/delete/delete-users.command';
 import { IamUser } from '@api/graphql';
-import { IamUserDto } from '../dto';
+import { IamUserDto } from '@api/iam/user';
+import { IamDeleteUsersCommand, IamGetUsersQuery } from '@app/iam/user';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteUsersHandler
@@ -22,9 +19,15 @@ export class IamDeleteUsersHandler
         auditing?: AuditingMeta,
     ): Promise<IamUser[] | IamUserDto[]>
     {
-        const users = await this.queryBus.ask(new GetUsersQuery(queryStatement, constraint, { timezone }));
+        const users = await this.queryBus.ask(new IamGetUsersQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteUsersCommand(
+        await this.commandBus.dispatch(new IamDeleteUsersCommand(
             queryStatement,
             constraint,
             {

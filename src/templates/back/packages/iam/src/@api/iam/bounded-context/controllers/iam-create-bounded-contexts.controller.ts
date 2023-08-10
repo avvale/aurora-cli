@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { IamBoundedContextDto, IamCreateBoundedContextDto } from '../dto';
+import { IamBoundedContextDto, IamCreateBoundedContextDto, IamCreateBoundedContextsHandler } from '@api/iam/bounded-context';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-contexts.handler';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiBody, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/create')

@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindPermissionByIdQuery } from '@app/iam/permission/application/find/find-permission-by-id.query';
-import { UpdatePermissionByIdCommand } from '@app/iam/permission/application/update/update-permission-by-id.command';
 import { IamPermission, IamUpdatePermissionByIdInput } from '@api/graphql';
-import { IamPermissionDto, IamUpdatePermissionByIdDto } from '../dto';
+import { IamPermissionDto, IamUpdatePermissionByIdDto } from '@api/iam/permission';
+import { IamFindPermissionByIdQuery, IamUpdatePermissionByIdCommand } from '@app/iam/permission';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdatePermissionByIdHandler
@@ -22,15 +19,17 @@ export class IamUpdatePermissionByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamPermission | IamPermissionDto>
     {
-        const permission = await this.queryBus.ask(new FindPermissionByIdQuery(
+        const permission = await this.queryBus.ask(new IamFindPermissionByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, permission);
 
-        await this.commandBus.dispatch(new UpdatePermissionByIdCommand(
+        await this.commandBus.dispatch(new IamUpdatePermissionByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -44,10 +43,12 @@ export class IamUpdatePermissionByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindPermissionByIdQuery(
+        return await this.queryBus.ask(new IamFindPermissionByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

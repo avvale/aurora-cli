@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { IamCreatePermissionInput, IamPermission } from '@api/graphql';
+import { IamCreatePermissionDto, IamPermissionDto } from '@api/iam/permission';
+import { IamCreatePermissionCommand, IamFindPermissionByIdQuery } from '@app/iam/permission';
 import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindPermissionByIdQuery } from '@app/iam/permission/application/find/find-permission-by-id.query';
-import { CreatePermissionCommand } from '@app/iam/permission/application/create/create-permission.command';
-import { IamPermission, IamCreatePermissionInput } from '@api/graphql';
-import { IamPermissionDto, IamCreatePermissionDto } from '../dto';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreatePermissionHandler
@@ -21,7 +18,7 @@ export class IamCreatePermissionHandler
         auditing?: AuditingMeta,
     ): Promise<IamPermission | IamPermissionDto>
     {
-        await this.commandBus.dispatch(new CreatePermissionCommand(
+        await this.commandBus.dispatch(new IamCreatePermissionCommand(
             payload,
             {
                 timezone,
@@ -31,10 +28,12 @@ export class IamCreatePermissionHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindPermissionByIdQuery(
+        return await this.queryBus.ask(new IamFindPermissionByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

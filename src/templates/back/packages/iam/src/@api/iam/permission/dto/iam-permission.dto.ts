@@ -1,7 +1,7 @@
 /* eslint-disable indent */
+import { IamBoundedContextDto } from '@api/iam/bounded-context';
+import { IamRoleDto } from '@api/iam/role';
 import { ApiProperty } from '@nestjs/swagger';
-import { IamRoleDto } from '../../../iam/role/dto/iam-role.dto';
-import { IamBoundedContextDto } from '../../../iam/bounded-context/dto/iam-bounded-context.dto';
 
 export class IamPermissionDto
 {

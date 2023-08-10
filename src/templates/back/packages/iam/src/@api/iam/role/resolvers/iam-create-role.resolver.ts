@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { IamCreateRoleInput, IamRole } from '@api/graphql';
+import { IamCreateRoleHandler } from '@api/iam/role';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamCreateRoleHandler } from '../handlers/iam-create-role.handler';
-import { IamRole, IamCreateRoleInput } from '@api/graphql';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.role.create')

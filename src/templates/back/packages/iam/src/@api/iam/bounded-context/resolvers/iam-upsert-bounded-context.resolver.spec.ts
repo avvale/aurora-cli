@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpsertBoundedContextResolver } from './iam-upsert-bounded-context.resolver';
-import { IamUpsertBoundedContextHandler } from '../handlers/iam-upsert-bounded-context.handler';
 import { IamUpdateBoundedContextByIdInput } from '@api/graphql';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
+import { IamUpsertBoundedContextHandler, IamUpsertBoundedContextResolver } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertBoundedContextResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamUpsertBoundedContextResolver', () =>
 
         test('should return an boundedContext upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await resolver.main(<IamUpdateBoundedContextByIdInput>boundedContexts[0])).toBe(boundedContexts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(await resolver.main(<IamUpdateBoundedContextByIdInput>iamMockBoundedContextData[0])).toBe(iamMockBoundedContextData[0]);
         });
     });
 });

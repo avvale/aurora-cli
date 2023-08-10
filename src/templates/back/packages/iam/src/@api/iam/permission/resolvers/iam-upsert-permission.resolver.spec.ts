@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpsertPermissionResolver } from './iam-upsert-permission.resolver';
-import { IamUpsertPermissionHandler } from '../handlers/iam-upsert-permission.handler';
 import { IamUpdatePermissionByIdInput } from '@api/graphql';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { IamUpsertPermissionHandler, IamUpsertPermissionResolver } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertPermissionResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamUpsertPermissionResolver', () =>
 
         test('should return an permission upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await resolver.main(<IamUpdatePermissionByIdInput>permissions[0])).toBe(permissions[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(await resolver.main(<IamUpdatePermissionByIdInput>iamMockPermissionData[0])).toBe(iamMockPermissionData[0]);
         });
     });
 });

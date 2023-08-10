@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamCreateAccountController, IamCreateAccountHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateAccountController } from './iam-create-account.controller';
-import { IamCreateAccountHandler } from '../handlers/iam-create-account.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamCreateAccountController', () =>
 {
@@ -45,16 +39,13 @@ describe('IamCreateAccountController', () =>
 
         test('should return an account created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await controller.main(accounts[0], {
-                req: {
-                    headers: {
-                        // mock jwt
-                        // eslint-disable-next-line max-len
-                        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImppdCI6IjE1MjQifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.oDME4U1e7-hco5Nyx2pUlO53jcm7x3zakYHWpnHUHzI',
-                    },
-                },
-            })).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(
+                await controller.main(
+                    iamMockAccountData[0],
+                ),
+            )
+                .toBe(iamMockAccountData[0]);
         });
     });
 });

@@ -5,7 +5,7 @@ import { Auth } from '@aurora/decorators';
 // @app
 import { IamUpdateUserMetaByIdHandler } from '../handlers/iam-update-user-meta-by-id.handler';
 import { IamUserMeta, IamUpdateUserMetaByIdInput } from '@api/graphql';
-import { AccountResponse } from '@app/iam/account/domain/account.response';
+import { IamAccountResponse } from '@app/iam/account/domain/iam-account.response';
 
 @Resolver()
 @Auth('iam.userData.update')
@@ -18,7 +18,7 @@ export class IamUpdateUserMetaByIdResolver
     @Mutation('iamUpdateUserMetaById')
     async main(
         @Args('payload') payload: IamUpdateUserMetaByIdInput,
-        @CurrentAccount() account: AccountResponse,
+        @CurrentAccount() account: IamAccountResponse,
         @Timezone() timezone?: string,
     ): Promise<IamUserMeta>
     {

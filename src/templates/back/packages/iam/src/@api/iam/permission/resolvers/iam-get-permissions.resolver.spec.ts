@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamGetPermissionsHandler, IamGetPermissionsResolver } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetPermissionsResolver } from './iam-get-permissions.resolver';
-import { IamGetPermissionsHandler } from '../handlers/iam-get-permissions.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamGetPermissionsResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('IamGetPermissionsResolver', () =>
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a permissions', async () =>
+        test('should return a iamMockPermissionData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions)));
-            expect(await resolver.main()).toBe(permissions);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData)));
+            expect(await resolver.main()).toBe(iamMockPermissionData);
         });
     });
 });

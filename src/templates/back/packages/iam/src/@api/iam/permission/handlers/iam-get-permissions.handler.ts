@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetPermissionsQuery } from '@app/iam/permission/application/get/get-permissions.query';
 import { IamPermission } from '@api/graphql';
-import { IamPermissionDto } from '../dto';
+import { IamPermissionDto } from '@api/iam/permission';
+import { IamGetPermissionsQuery } from '@app/iam/permission';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamGetPermissionsHandler
@@ -19,10 +17,12 @@ export class IamGetPermissionsHandler
         timezone?: string,
     ): Promise<IamPermission[] | IamPermissionDto[]>
     {
-        return await this.queryBus.ask(new GetPermissionsQuery(
+        return await this.queryBus.ask(new IamGetPermissionsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

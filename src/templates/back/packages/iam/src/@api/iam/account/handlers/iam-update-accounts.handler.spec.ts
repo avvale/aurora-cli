@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdateAccountsHandler } from './iam-update-accounts.handler';
 import { IamUpdateAccountsInput } from '@api/graphql';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
+import { IamUpdateAccountsHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateAccountsHandler', () =>
 {
     let handler: IamUpdateAccountsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -38,9 +33,8 @@ describe('IamUpdateAccountsHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateAccountsHandler>(IamUpdateAccountsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateAccountsHandler>(IamUpdateAccountsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamUpdateAccountsHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('IamUpdateAccountsHandler', () =>
 
         test('should return a accounts updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await handler.main(<IamUpdateAccountsInput>accounts[0])).toBe(accounts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdateAccountsInput>iamMockAccountData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockAccountData[0]);
         });
     });
 });

@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreatePermissionsResolver } from './iam-create-permissions.resolver';
-import { IamCreatePermissionsHandler } from '../handlers/iam-create-permissions.handler';
 import { IamCreatePermissionInput } from '@api/graphql';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { IamCreatePermissionsHandler, IamCreatePermissionsResolver } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreatePermissionsResolver', () =>
 {
     let resolver: IamCreatePermissionsResolver;
-    let handler: IamCreatePermissionsHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('IamCreatePermissionsResolver', () =>
             .compile();
 
         resolver = module.get<IamCreatePermissionsResolver>(IamCreatePermissionsResolver);
-        handler = module.get<IamCreatePermissionsHandler>(IamCreatePermissionsHandler);
     });
 
     test('IamCreatePermissionsResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('IamCreatePermissionsResolver', () =>
 
         test('should return an permissions created', async () =>
         {
-            expect(await resolver.main(<IamCreatePermissionInput[]>permissions)).toBe(undefined);
+            expect(await resolver.main(<IamCreatePermissionInput[]>iamMockPermissionData)).toBe(undefined);
         });
     });
 });

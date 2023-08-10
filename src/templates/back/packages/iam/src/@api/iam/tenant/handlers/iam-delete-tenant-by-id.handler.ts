@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindTenantByIdQuery } from '@app/iam/tenant/application/find/find-tenant-by-id.query';
-import { DeleteTenantByIdCommand } from '@app/iam/tenant/application/delete/delete-tenant-by-id.command';
 import { IamTenant } from '@api/graphql';
-import { IamTenantDto } from '../dto';
+import { IamTenantDto } from '@api/iam/tenant';
+import { IamDeleteTenantByIdCommand, IamFindTenantByIdQuery } from '@app/iam/tenant';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteTenantByIdHandler
@@ -22,9 +19,15 @@ export class IamDeleteTenantByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamTenant | IamTenantDto>
     {
-        const tenant = await this.queryBus.ask(new FindTenantByIdQuery(id, constraint, { timezone }));
+        const tenant = await this.queryBus.ask(new IamFindTenantByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteTenantByIdCommand(
+        await this.commandBus.dispatch(new IamDeleteTenantByIdCommand(
             id,
             constraint,
             {

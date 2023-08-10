@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamPaginateTenantsHandler, IamPaginateTenantsResolver } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamPaginateTenantsResolver } from './iam-paginate-tenants.resolver';
-import { IamPaginateTenantsHandler } from '../handlers/iam-paginate-tenants.handler';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamPaginateTenantsResolver', () =>
 {
@@ -46,17 +41,17 @@ describe('IamPaginateTenantsResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a tenants', async () =>
+        test('should return a iamMockTenantData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : tenants,
+                rows : iamMockTenantData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : tenants,
+                rows : iamMockTenantData,
             });
         });
     });

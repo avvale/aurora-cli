@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetAccountsQuery } from '@app/iam/account/application/get/get-accounts.query';
 import { IamAccount } from '@api/graphql';
-import { IamAccountDto } from '../dto';
+import { IamAccountDto } from '@api/iam/account';
+import { IamGetAccountsQuery } from '@app/iam/account';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamGetAccountsHandler
@@ -19,10 +17,12 @@ export class IamGetAccountsHandler
         timezone?: string,
     ): Promise<IamAccount[] | IamAccountDto[]>
     {
-        return await this.queryBus.ask(new GetAccountsQuery(
+        return await this.queryBus.ask(new IamGetAccountsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

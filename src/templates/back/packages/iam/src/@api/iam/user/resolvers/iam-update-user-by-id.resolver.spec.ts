@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpdateUserByIdResolver } from './iam-update-user-by-id.resolver';
-import { IamUpdateUserByIdHandler } from '../handlers/iam-update-user-by-id.handler';
 import { IamUpdateUserByIdInput } from '@api/graphql';
-
-// sources
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
+import { IamUpdateUserByIdHandler, IamUpdateUserByIdResolver } from '@api/iam/user';
+import { iamMockUserData } from '@app/iam/user';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateUserByIdResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamUpdateUserByIdResolver', () =>
 
         test('should return a user by id updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users[0])));
-            expect(await resolver.main(<IamUpdateUserByIdInput>users[0])).toBe(users[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
+            expect(await resolver.main(<IamUpdateUserByIdInput>iamMockUserData[0])).toBe(iamMockUserData[0]);
         });
     });
 });

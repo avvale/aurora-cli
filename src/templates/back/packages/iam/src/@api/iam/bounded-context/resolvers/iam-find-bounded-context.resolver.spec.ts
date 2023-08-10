@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindBoundedContextHandler, IamFindBoundedContextResolver } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindBoundedContextResolver } from './iam-find-bounded-context.resolver';
-import { IamFindBoundedContextHandler } from '../handlers/iam-find-bounded-context.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamFindBoundedContextResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('IamFindBoundedContextResolver', () =>
 
         test('should return a boundedContext', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await resolver.main()).toBe(boundedContexts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(await resolver.main()).toBe(iamMockBoundedContextData[0]);
         });
     });
 });

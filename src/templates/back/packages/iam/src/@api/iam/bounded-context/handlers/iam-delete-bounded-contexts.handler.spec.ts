@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamDeleteBoundedContextsHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamDeleteBoundedContextsHandler } from './iam-delete-bounded-contexts.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteBoundedContextsHandler', () =>
 {
     let handler: IamDeleteBoundedContextsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('IamDeleteBoundedContextsHandler', () =>
         })
             .compile();
 
-        handler    = module.get<IamDeleteBoundedContextsHandler>(IamDeleteBoundedContextsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamDeleteBoundedContextsHandler>(IamDeleteBoundedContextsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamDeleteBoundedContextsHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('IamDeleteBoundedContextsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an boundedContexts deleted', async () =>
+        test('should return an iamMockBoundedContextData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
-            expect(await handler.main()).toBe(boundedContexts);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockBoundedContextData);
         });
     });
 });

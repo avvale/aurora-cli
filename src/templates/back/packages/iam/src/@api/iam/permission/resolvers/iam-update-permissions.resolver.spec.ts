@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpdatePermissionsResolver } from './iam-update-permissions.resolver';
-import { IamUpdatePermissionsHandler } from '../handlers/iam-update-permissions.handler';
 import { IamUpdatePermissionsInput } from '@api/graphql';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { IamUpdatePermissionsHandler, IamUpdatePermissionsResolver } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdatePermissionsResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamUpdatePermissionsResolver', () =>
 
         test('should return a permissions updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await resolver.main(<IamUpdatePermissionsInput>permissions[0])).toBe(permissions[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(await resolver.main(<IamUpdatePermissionsInput>iamMockPermissionData[0])).toBe(iamMockPermissionData[0]);
         });
     });
 });

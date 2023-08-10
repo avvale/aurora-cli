@@ -1,19 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { IamModule } from '@api/iam/iam.module';
+import { IamIAccountRepository, iamMockAccountData, IamMockAccountSeeder } from '@app/iam/account';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IAccountRepository } from '@app/iam/account/domain/account.repository';
-import { MockAccountSeeder } from '@app/iam/account/infrastructure/mock/mock-account.seeder';
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { IamModule } from '@api/iam/iam.module';
-import { IamAccountType, OAuthClientGrantType, OAuthCredentials } from '@api/graphql';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // ---- customizations ----
 import { jwtConfig } from '@app/o-auth/shared/jwt-config';
@@ -36,6 +33,9 @@ const importForeignModules = [];
 describe('account', () =>
 {
     let app: INestApplication;
+    let accountRepository: IamIAccountRepository;
+    let accountSeeder: IamMockAccountSeeder;
+
     let credentials: OAuthCredentials;
     let oAuthCreateCredentialsHandler: OAuthCreateCredentialsHandler;
     let applicationRepository: IApplicationRepository;
@@ -44,8 +44,6 @@ describe('account', () =>
     let accessTokenSeeder: MockAccessTokenSeeder;
     let clientRepository: IClientRepository;
     let clientSeeder: MockClientSeeder;
-    let accountRepository: IAccountRepository;
-    let accountSeeder: MockAccountSeeder;
     let userRepository: IUserRepository;
     let userSeeder: MockUserSeeder;
 

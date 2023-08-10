@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamPaginateRolesHandler, IamPaginateRolesResolver } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamPaginateRolesResolver } from './iam-paginate-roles.resolver';
-import { IamPaginateRolesHandler } from '../handlers/iam-paginate-roles.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamPaginateRolesResolver', () =>
 {
@@ -46,17 +41,17 @@ describe('IamPaginateRolesResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a roles', async () =>
+        test('should return a iamMockRoleData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : roles,
+                rows : iamMockRoleData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : roles,
+                rows : iamMockRoleData,
             });
         });
     });

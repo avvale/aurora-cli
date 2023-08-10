@@ -50,6 +50,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+aggregateI18nProperties: []
 additionalApis: []
 excluded:
   - src/app/modules/admin/apps/iam/permission/permission-detail.component.html

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindUserController, IamFindUserHandler } from '@api/iam/user';
+import { iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindUserController } from './iam-find-user.controller';
-import { IamFindUserHandler } from '../handlers/iam-find-user.handler';
-
-// sources
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
 
 describe('IamFindUserController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamFindUserController', () =>
 
         test('should return a user', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users[0])));
-            expect(await controller.main()).toBe(users[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
+            expect(await controller.main()).toBe(iamMockUserData[0]);
         });
     });
 });

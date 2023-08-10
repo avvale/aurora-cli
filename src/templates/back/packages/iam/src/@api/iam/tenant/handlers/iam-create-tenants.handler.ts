@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateTenantsCommand } from '@app/iam/tenant/application/create/create-tenants.command';
 import { IamCreateTenantInput } from '@api/graphql';
-import { IamCreateTenantDto } from '../dto';
+import { IamCreateTenantDto } from '@api/iam/tenant';
+import { IamCreateTenantsCommand } from '@app/iam/tenant';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreateTenantsHandler
@@ -19,7 +17,7 @@ export class IamCreateTenantsHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateTenantsCommand(
+        await this.commandBus.dispatch(new IamCreateTenantsCommand(
             payload,
             {
                 timezone,
@@ -28,6 +26,7 @@ export class IamCreateTenantsHandler
                 },
             },
         ));
+
         return true;
     }
 }

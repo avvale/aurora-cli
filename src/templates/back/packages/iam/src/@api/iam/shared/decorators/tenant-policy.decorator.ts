@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
-import { AccountResponse } from '@app/iam/account/domain/account.response';
+import { IamAccountResponse } from '@app/iam/account';
 
 export const TenantPolicy = (customProperties?: {
     targetProperty: string;
@@ -17,10 +18,10 @@ export const TenantPolicy = (customProperties?: {
                 }, customProperties);
 
                 // get account from arguments
-                let account: AccountResponse;
+                let account: IamAccountResponse;
                 for (const arg of args)
                 {
-                    if (typeof arg === 'object' && arg.constructor.name === 'AccountResponse') account = <AccountResponse>arg;
+                    if (typeof arg === 'object' && arg.constructor.name === 'AccountResponse') account = <IamAccountResponse>arg;
                 }
 
                 if (!account) throw new BadRequestException('To use @TenantPolicy() decorator need has @CurrentAccount() defined in properties of method');

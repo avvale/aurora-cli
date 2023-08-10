@@ -1,10 +1,10 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
-import { IamRoleDto } from '../../../iam/role/dto/iam-role.dto';
-import { IamTenantDto } from '../../../iam/tenant/dto/iam-tenant.dto';
-import { OAuthClientDto } from '../../../o-auth/client/dto/o-auth-client.dto';
-import { IamUserDto } from '../../../iam/user/dto/iam-user.dto';
 import { IamAccountType } from '@api/graphql';
+import { IamRoleDto } from '@api/iam/role';
+import { IamTenantDto } from '@api/iam/tenant';
+import { IamUserDto } from '@api/iam/user';
+import { OAuthClientDto } from '@api/o-auth/client';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class IamAccountDto
 {

@@ -1,0 +1,59 @@
+import { IamAddPermissionsContextEvent, IamIPermissionRepository, IamPermission } from '@app/iam/permission';
+import {
+    IamPermissionBoundedContextId,
+    IamPermissionCreatedAt,
+    IamPermissionDeletedAt,
+    IamPermissionId,
+    IamPermissionName,
+    IamPermissionRoleIds,
+    IamPermissionUpdatedAt,
+} from '@app/iam/permission/domain/value-objects';
+import { CQMetadata } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
+
+@Injectable()
+export class IamCreatePermissionsService
+{
+    constructor(
+        private readonly publisher: EventPublisher,
+        private readonly repository: IamIPermissionRepository,
+    ) {}
+
+    async main(
+        permissions: {
+            id: IamPermissionId;
+            name: IamPermissionName;
+            boundedContextId: IamPermissionBoundedContextId;
+            roleIds: IamPermissionRoleIds;
+        } [],
+        cQMetadata?: CQMetadata,
+    ): Promise<void>
+    {
+        // create aggregate with factory pattern
+        const aggregatePermissions = permissions.map(permission => IamPermission.register(
+            permission.id,
+            permission.name,
+            permission.boundedContextId,
+            permission.roleIds,
+            new IamPermissionCreatedAt({ currentTimestamp: true }),
+            new IamPermissionUpdatedAt({ currentTimestamp: true }),
+            null, // deleteAt
+        ));
+
+        // insert
+        await this.repository.insert(
+            aggregatePermissions,
+            {
+                insertOptions: cQMetadata?.repositoryOptions,
+            },
+        );
+
+        // create AddPermissionsContextEvent to have object wrapper to add event publisher functionality
+        // insert EventBus in object, to be able to apply and commit events
+        const permissionsRegistered = this.publisher.mergeObjectContext(new IamAddPermissionsContextEvent(aggregatePermissions));
+
+        permissionsRegistered.created(); // apply event to model events
+        permissionsRegistered.commit(); // commit all events of model
+    }
+}

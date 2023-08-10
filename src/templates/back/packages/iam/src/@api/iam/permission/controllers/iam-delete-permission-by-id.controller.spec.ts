@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamDeletePermissionByIdController, IamDeletePermissionByIdHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeletePermissionByIdController } from './iam-delete-permission-by-id.controller';
-import { IamDeletePermissionByIdHandler } from '../handlers/iam-delete-permission-by-id.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamDeletePermissionByIdController', () =>
 {
@@ -45,8 +40,8 @@ describe('IamDeletePermissionByIdController', () =>
 
         test('should return an permission deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await controller.main(permissions[0].id)).toBe(permissions[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(await controller.main(iamMockPermissionData[0].id)).toBe(iamMockPermissionData[0]);
         });
     });
 });

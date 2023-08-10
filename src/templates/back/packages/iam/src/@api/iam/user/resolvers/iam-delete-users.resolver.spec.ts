@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamDeleteUsersHandler, IamDeleteUsersResolver } from '@api/iam/user';
+import { iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteUsersResolver } from './iam-delete-users.resolver';
-import { IamDeleteUsersHandler } from '../handlers/iam-delete-users.handler';
-
-// sources
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
 
 describe('IamDeleteUsersResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('IamDeleteUsersResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return an users deleted', async () =>
+        test('should return an iamMockUserData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users)));
-            expect(await resolver.main()).toBe(users);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData)));
+            expect(await resolver.main()).toBe(iamMockUserData);
         });
     });
 });

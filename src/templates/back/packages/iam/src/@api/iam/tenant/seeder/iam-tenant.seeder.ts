@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateTenantsCommand } from '@app/iam/tenant/application/create/create-tenants.command';
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
+import { IamCreateTenantsCommand } from '@app/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
 
 @Injectable()
 export class IamTenantSeeder
@@ -15,8 +15,8 @@ export class IamTenantSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateTenantsCommand(
-            tenants,
+        await this.commandBus.dispatch(new IamCreateTenantsCommand(
+            iamMockTenantData,
             {
                 timezone: process.env.TZ ,
             },

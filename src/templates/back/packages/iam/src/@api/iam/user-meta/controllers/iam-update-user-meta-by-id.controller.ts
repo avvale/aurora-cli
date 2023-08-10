@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { CurrentAccount, Timezone } from '@aurorajs.dev/core';
+import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { IamUserMetaDto, IamUpdateUserMetaByIdDto } from '../dto';
-
-// @app
-import { AccountResponse } from '@app/iam/account/domain/account.response';
+import { CurrentAccount, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Put } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { IamUpdateUserMetaByIdDto, IamUserMetaDto } from '../dto';
 import { IamUpdateUserMetaByIdHandler } from '../handlers/iam-update-user-meta-by-id.handler';
 
 @ApiTags('[iam] user')
@@ -23,7 +21,7 @@ export class IamUpdateUserMetaByIdController
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: IamUserMetaDto })
     async main(
         @Body() payload: IamUpdateUserMetaByIdDto,
-        @CurrentAccount() account: AccountResponse,
+        @CurrentAccount() account: IamAccountResponse,
         @Timezone() timezone?: string,
     )
     {

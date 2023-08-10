@@ -1,16 +1,10 @@
+import { IamCreateRolesController, IamCreateRolesHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateRolesController } from './iam-create-roles.controller';
-import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamCreateRolesController', () =>
 {
     let controller: IamCreateRolesController;
-    let handler: IamCreateRolesHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('IamCreateRolesController', () =>
             .compile();
 
         controller = module.get<IamCreateRolesController>(IamCreateRolesController);
-        handler = module.get<IamCreateRolesHandler>(IamCreateRolesHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('IamCreateRolesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an roles created', async () =>
+        test('should return an iamMockRoleData created', async () =>
         {
-            expect(await controller.main(roles)).toBe(undefined);
+            expect(
+                await controller.main(
+                    iamMockRoleData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

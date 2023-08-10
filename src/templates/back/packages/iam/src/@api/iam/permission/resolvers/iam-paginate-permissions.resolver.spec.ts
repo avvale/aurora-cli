@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamPaginatePermissionsHandler, IamPaginatePermissionsResolver } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamPaginatePermissionsResolver } from './iam-paginate-permissions.resolver';
-import { IamPaginatePermissionsHandler } from '../handlers/iam-paginate-permissions.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamPaginatePermissionsResolver', () =>
 {
@@ -46,17 +41,17 @@ describe('IamPaginatePermissionsResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a permissions', async () =>
+        test('should return a iamMockPermissionData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : permissions,
+                rows : iamMockPermissionData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : permissions,
+                rows : iamMockPermissionData,
             });
         });
     });

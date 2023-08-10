@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdateBoundedContextsHandler } from './iam-update-bounded-contexts.handler';
 import { IamUpdateBoundedContextsInput } from '@api/graphql';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
+import { IamUpdateBoundedContextsHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateBoundedContextsHandler', () =>
 {
     let handler: IamUpdateBoundedContextsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -38,9 +33,8 @@ describe('IamUpdateBoundedContextsHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateBoundedContextsHandler>(IamUpdateBoundedContextsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateBoundedContextsHandler>(IamUpdateBoundedContextsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamUpdateBoundedContextsHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('IamUpdateBoundedContextsHandler', () =>
 
         test('should return a boundedContexts updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await handler.main(<IamUpdateBoundedContextsInput>boundedContexts[0])).toBe(boundedContexts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdateBoundedContextsInput>iamMockBoundedContextData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockBoundedContextData[0]);
         });
     });
 });

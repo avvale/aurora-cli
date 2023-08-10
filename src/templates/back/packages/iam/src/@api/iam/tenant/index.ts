@@ -1,3 +1,48 @@
+// export DTOs
+export { IamTenantDto } from './dto/iam-tenant.dto';
+export { IamCreateTenantDto } from './dto/iam-create-tenant.dto';
+export { IamUpdateTenantByIdDto } from './dto/iam-update-tenant-by-id.dto';
+export { IamUpdateTenantsDto } from './dto/iam-update-tenants.dto';
+
+// export handlers
+export { IamCreateTenantHandler } from './handlers/iam-create-tenant.handler';
+export { IamCreateTenantsHandler } from './handlers/iam-create-tenants.handler';
+export { IamPaginateTenantsHandler } from './handlers/iam-paginate-tenants.handler';
+export { IamGetTenantsHandler } from './handlers/iam-get-tenants.handler';
+export { IamFindTenantByIdHandler } from './handlers/iam-find-tenant-by-id.handler';
+export { IamFindTenantHandler } from './handlers/iam-find-tenant.handler';
+export { IamUpdateTenantByIdHandler } from './handlers/iam-update-tenant-by-id.handler';
+export { IamUpdateTenantsHandler } from './handlers/iam-update-tenants.handler';
+export { IamUpsertTenantHandler } from './handlers/iam-upsert-tenant.handler';
+export { IamDeleteTenantByIdHandler } from './handlers/iam-delete-tenant-by-id.handler';
+export { IamDeleteTenantsHandler } from './handlers/iam-delete-tenants.handler';
+
+// export controllers
+export { IamCreateTenantController } from './controllers/iam-create-tenant.controller';
+export { IamCreateTenantsController } from './controllers/iam-create-tenants.controller';
+export { IamPaginateTenantsController } from './controllers/iam-paginate-tenants.controller';
+export { IamGetTenantsController } from './controllers/iam-get-tenants.controller';
+export { IamFindTenantByIdController } from './controllers/iam-find-tenant-by-id.controller';
+export { IamFindTenantController } from './controllers/iam-find-tenant.controller';
+export { IamUpdateTenantByIdController } from './controllers/iam-update-tenant-by-id.controller';
+export { IamUpdateTenantsController } from './controllers/iam-update-tenants.controller';
+export { IamUpsertTenantController } from './controllers/iam-upsert-tenant.controller';
+export { IamDeleteTenantByIdController } from './controllers/iam-delete-tenant-by-id.controller';
+export { IamDeleteTenantsController } from './controllers/iam-delete-tenants.controller';
+
+// exports resolvers
+export { IamCreateTenantResolver } from './resolvers/iam-create-tenant.resolver';
+export { IamCreateTenantsResolver } from './resolvers/iam-create-tenants.resolver';
+export { IamPaginateTenantsResolver } from './resolvers/iam-paginate-tenants.resolver';
+export { IamGetTenantsResolver } from './resolvers/iam-get-tenants.resolver';
+export { IamFindTenantByIdResolver } from './resolvers/iam-find-tenant-by-id.resolver';
+export { IamFindTenantResolver } from './resolvers/iam-find-tenant.resolver';
+export { IamUpdateTenantByIdResolver } from './resolvers/iam-update-tenant-by-id.resolver';
+export { IamUpdateTenantsResolver } from './resolvers/iam-update-tenants.resolver';
+export { IamUpsertTenantResolver } from './resolvers/iam-upsert-tenant.resolver';
+export { IamDeleteTenantByIdResolver } from './resolvers/iam-delete-tenant-by-id.resolver';
+export { IamDeleteTenantsResolver } from './resolvers/iam-delete-tenants.resolver';
+
 // controllers
 import { IamCreateTenantController } from './controllers/iam-create-tenant.controller';
 import { IamCreateTenantsController } from './controllers/iam-create-tenants.controller';

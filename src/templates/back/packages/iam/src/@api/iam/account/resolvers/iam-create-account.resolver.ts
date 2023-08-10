@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation, Context } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamCreateAccountHandler } from '../handlers/iam-create-account.handler';
 import { IamAccount, IamCreateAccountInput } from '@api/graphql';
+import { IamCreateAccountHandler } from '@api/iam/account';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.account.create')

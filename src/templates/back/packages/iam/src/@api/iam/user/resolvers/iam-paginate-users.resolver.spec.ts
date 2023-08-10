@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamPaginateUsersHandler, IamPaginateUsersResolver } from '@api/iam/user';
+import { iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamPaginateUsersResolver } from './iam-paginate-users.resolver';
-import { IamPaginateUsersHandler } from '../handlers/iam-paginate-users.handler';
-
-// sources
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
 
 describe('IamPaginateUsersResolver', () =>
 {
@@ -30,7 +25,7 @@ describe('IamPaginateUsersResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<IamPaginateUsersResolver>(IamPaginateUsersResolver);
+        resolver = module.get<IamPaginateUsersResolver>(IamPaginateUsersResolver);
         handler = module.get<IamPaginateUsersHandler>(IamPaginateUsersHandler);
     });
 
@@ -46,17 +41,17 @@ describe('IamPaginateUsersResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a users', async () =>
+        test('should return a iamMockUserData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : users,
+                rows : iamMockUserData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : users,
+                rows : iamMockUserData,
             });
         });
     });

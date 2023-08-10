@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamPermissionDto } from '../dto';
+import { IamDeletePermissionsHandler, IamPermissionDto } from '@api/iam/permission';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamDeletePermissionsHandler } from '../handlers/iam-delete-permissions.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] permission')
 @Controller('iam/permissions/delete')

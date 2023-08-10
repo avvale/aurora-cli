@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateTenantResolver } from './iam-create-tenant.resolver';
-import { IamCreateTenantHandler } from '../handlers/iam-create-tenant.handler';
 import { IamCreateTenantInput } from '@api/graphql';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
+import { IamCreateTenantHandler, IamCreateTenantResolver } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateTenantResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamCreateTenantResolver', () =>
 
         test('should return an tenant created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await resolver.main(<IamCreateTenantInput>tenants[0])).toBe(tenants[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+            expect(await resolver.main(<IamCreateTenantInput>iamMockTenantData[0])).toBe(iamMockTenantData[0]);
         });
     });
 });

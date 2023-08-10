@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamDeleteAccountByIdHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamDeleteAccountByIdHandler } from './iam-delete-account-by-id.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteAccountByIdController', () =>
 {
     let handler: IamDeleteAccountByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('IamDeleteAccountByIdController', () =>
 
         handler = module.get<IamDeleteAccountByIdHandler>(IamDeleteAccountByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,15 @@ describe('IamDeleteAccountByIdController', () =>
 
         test('should return an account deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await handler.main(accounts[0].id)).toBe(accounts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(
+                await handler.main(
+                    iamMockAccountData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockAccountData[0]);
         });
     });
 });

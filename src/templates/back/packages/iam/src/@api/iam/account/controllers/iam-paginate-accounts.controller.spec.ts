@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamPaginateAccountsController, IamPaginateAccountsHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamPaginateAccountsController } from './iam-paginate-accounts.controller';
-import { IamPaginateAccountsHandler } from '../handlers/iam-paginate-accounts.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamPaginateAccountsController', () =>
 {
@@ -43,17 +37,17 @@ describe('IamPaginateAccountsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a accounts', async () =>
+        test('should return a iamMockAccountData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : accounts,
+                rows : iamMockAccountData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : accounts,
+                rows : iamMockAccountData,
             });
         });
     });

@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamUpsertRoleHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpsertRoleHandler } from './iam-upsert-role.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertRoleHandler', () =>
 {
     let handler: IamUpsertRoleHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('IamUpsertRoleHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpsertRoleHandler>(IamUpsertRoleHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpsertRoleHandler>(IamUpsertRoleHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,13 @@ describe('IamUpsertRoleHandler', () =>
 
         test('should return an role upserted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await handler.main(roles[0])).toBe(roles[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(
+                await handler.main(
+                    iamMockRoleData[0],
+                    'Europe/Madrid',
+                ))
+                .toBe(iamMockRoleData[0]);
         });
     });
 });

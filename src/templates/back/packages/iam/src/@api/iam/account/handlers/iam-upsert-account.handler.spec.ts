@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamUpsertAccountHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpsertAccountHandler } from './iam-upsert-account.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertAccountHandler', () =>
 {
     let handler: IamUpsertAccountHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('IamUpsertAccountHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpsertAccountHandler>(IamUpsertAccountHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpsertAccountHandler>(IamUpsertAccountHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,13 @@ describe('IamUpsertAccountHandler', () =>
 
         test('should return an account upserted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await handler.main(accounts[0])).toBe(accounts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(
+                await handler.main(
+                    iamMockAccountData[0],
+                    'Europe/Madrid',
+                ))
+                .toBe(iamMockAccountData[0]);
         });
     });
 });
