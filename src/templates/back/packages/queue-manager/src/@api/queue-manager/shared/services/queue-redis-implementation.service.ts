@@ -1,18 +1,18 @@
 /* eslint-disable no-await-in-loop */
-import { ModuleRef } from '@nestjs/core';
-import { Inject, Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { QueueManagerQueue } from '@api/graphql';
+import { QUEUE_REDIS, QueueDefinition, QueueManagerCreateQueuesCommand, QueueManagerDeleteQueuesCommand } from '@app/queue-manager';
 import { ICommandBus, Utils } from '@aurorajs.dev/core';
 import { getQueueToken } from '@nestjs/bull';
-import { QueueDefinition, QUEUE_REDIS } from '@app/queue-manager/queue-manager.types';
-import { CreateQueuesCommand } from '@app/queue-manager/queue/application/create/create-queues.command';
-import { DeleteQueuesCommand } from '@app/queue-manager/queue/application/delete/delete-queues.command';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { ModuleRef } from '@nestjs/core';
 import { QueueStorage } from '../../../../app.queues';
-import { QueueManagerQueue } from '@api/graphql';
 
 @Injectable()
 export class QueueRedisImplementationService
 {
+    private readonly logger = new Logger(QueueRedisImplementationService.name);
+
     constructor(
         @Inject(QUEUE_REDIS) private readonly queueRedis,
         private readonly commandBus: ICommandBus,
@@ -51,7 +51,7 @@ export class QueueRedisImplementationService
             try
             {
                 payload.push({
-                    id    : Utils.uuid(),
+                    id    : Utils.uuid(queueName),
                     prefix: queueManagerPrefix,
                     name  : queueName,
                 });
@@ -67,14 +67,16 @@ export class QueueRedisImplementationService
         }
 
         // clean queues table
-        await this.commandBus.dispatch(new DeleteQueuesCommand({
+        await this.commandBus.dispatch(new QueueManagerDeleteQueuesCommand({
             where: {},
         }));
 
         // create existing queues in redis
-        await this.commandBus.dispatch(new CreateQueuesCommand(
+        await this.commandBus.dispatch(new QueueManagerCreateQueuesCommand(
             payload,
         ));
+
+        this.logger.log('Queues created successfully');
     }
 
     async addQueueCounters(queue): Promise<QueueManagerQueue>

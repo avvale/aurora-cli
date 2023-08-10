@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerGetQueuesHandler, QueueManagerGetQueuesResolver } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerGetQueuesResolver } from './queue-manager-get-queues.resolver';
-import { QueueManagerGetQueuesHandler } from '../handlers/queue-manager-get-queues.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
 
 describe('QueueManagerGetQueuesResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('QueueManagerGetQueuesResolver', () =>
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a queues', async () =>
+        test('should return a queueManagerMockQueueData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queues)));
-            expect(await resolver.main()).toBe(queues);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData)));
+            expect(await resolver.main()).toBe(queueManagerMockQueueData);
         });
     });
 });

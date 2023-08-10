@@ -1,11 +1,9 @@
-import { ModuleRef } from '@nestjs/core';
-import { Injectable } from '@nestjs/common';
-import { getQueueToken } from '@nestjs/bull';
-import { Job } from 'bull';
-
-// @app
 import { QueueManagerJob, QueueManagerJobState } from '@api/graphql';
-import { QueueManagerJobDto } from '../dto';
+import { QueueManagerJobDto } from '@api/queue-manager/job';
+import { getQueueToken } from '@nestjs/bull';
+import { Injectable } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
+import { Job } from 'bull';
 
 @Injectable()
 export class QueueManagerDeleteJobByIdHandler

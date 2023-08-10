@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerCreateQueueResolver } from './queue-manager-create-queue.resolver';
-import { QueueManagerCreateQueueHandler } from '../handlers/queue-manager-create-queue.handler';
 import { QueueManagerCreateQueueInput } from '@api/graphql';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
+import { QueueManagerCreateQueueHandler, QueueManagerCreateQueueResolver } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerCreateQueueResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('QueueManagerCreateQueueResolver', () =>
 
         test('should return an queue created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queues[0])));
-            expect(await resolver.main(<QueueManagerCreateQueueInput>queues[0])).toBe(queues[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+            expect(await resolver.main(<QueueManagerCreateQueueInput>queueManagerMockQueueData[0])).toBe(queueManagerMockQueueData[0]);
         });
     });
 });

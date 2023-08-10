@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerPaginateQueuesController, QueueManagerPaginateQueuesHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerPaginateQueuesController } from './queue-manager-paginate-queues.controller';
-import { QueueManagerPaginateQueuesHandler } from '../handlers/queue-manager-paginate-queues.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
 
 describe('QueueManagerPaginateQueuesController', () =>
 {
@@ -43,17 +37,17 @@ describe('QueueManagerPaginateQueuesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a queues', async () =>
+        test('should return a queueManagerMockQueueData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : queues,
+                rows : queueManagerMockQueueData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : queues,
+                rows : queueManagerMockQueueData,
             });
         });
     });

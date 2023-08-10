@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindJobRegistryByIdQuery } from '@app/queue-manager/job-registry/application/find/find-job-registry-by-id.query';
-import { DeleteJobRegistryByIdCommand } from '@app/queue-manager/job-registry/application/delete/delete-job-registry-by-id.command';
 import { QueueManagerJobRegistry } from '@api/graphql';
-import { QueueManagerJobRegistryDto } from '../dto';
+import { QueueManagerJobRegistryDto } from '@api/queue-manager/job-registry';
+import { QueueManagerDeleteJobRegistryByIdCommand, QueueManagerFindJobRegistryByIdQuery } from '@app/queue-manager/job-registry';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerDeleteJobRegistryByIdHandler
@@ -21,7 +18,7 @@ export class QueueManagerDeleteJobRegistryByIdHandler
         timezone?: string,
     ): Promise<QueueManagerJobRegistry | QueueManagerJobRegistryDto>
     {
-        const jobRegistry = await this.queryBus.ask(new FindJobRegistryByIdQuery(
+        const jobRegistry = await this.queryBus.ask(new QueueManagerFindJobRegistryByIdQuery(
             id,
             constraint,
             {
@@ -29,7 +26,7 @@ export class QueueManagerDeleteJobRegistryByIdHandler
             },
         ));
 
-        await this.commandBus.dispatch(new DeleteJobRegistryByIdCommand(
+        await this.commandBus.dispatch(new QueueManagerDeleteJobRegistryByIdCommand(
             id,
             constraint,
             {

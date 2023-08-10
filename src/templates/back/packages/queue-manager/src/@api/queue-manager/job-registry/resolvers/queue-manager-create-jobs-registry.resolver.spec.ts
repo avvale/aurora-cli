@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerCreateJobsRegistryResolver } from './queue-manager-create-jobs-registry.resolver';
-import { QueueManagerCreateJobsRegistryHandler } from '../handlers/queue-manager-create-jobs-registry.handler';
 import { QueueManagerCreateJobRegistryInput } from '@api/graphql';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
+import { QueueManagerCreateJobsRegistryHandler, QueueManagerCreateJobsRegistryResolver } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerCreateJobsRegistryResolver', () =>
 {
     let resolver: QueueManagerCreateJobsRegistryResolver;
-    let handler: QueueManagerCreateJobsRegistryHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('QueueManagerCreateJobsRegistryResolver', () =>
             .compile();
 
         resolver = module.get<QueueManagerCreateJobsRegistryResolver>(QueueManagerCreateJobsRegistryResolver);
-        handler = module.get<QueueManagerCreateJobsRegistryHandler>(QueueManagerCreateJobsRegistryHandler);
     });
 
     test('QueueManagerCreateJobsRegistryResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('QueueManagerCreateJobsRegistryResolver', () =>
 
         test('should return an jobsRegistry created', async () =>
         {
-            expect(await resolver.main(<QueueManagerCreateJobRegistryInput[]>jobsRegistry)).toBe(undefined);
+            expect(await resolver.main(<QueueManagerCreateJobRegistryInput[]>queueManagerMockJobRegistryData)).toBe(undefined);
         });
     });
 });

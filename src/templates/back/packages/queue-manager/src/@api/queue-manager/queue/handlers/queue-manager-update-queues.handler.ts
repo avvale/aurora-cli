@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetQueuesQuery } from '@app/queue-manager/queue/application/get/get-queues.query';
-import { UpdateQueuesCommand } from '@app/queue-manager/queue/application/update/update-queues.command';
 import { QueueManagerQueue, QueueManagerUpdateQueuesInput } from '@api/graphql';
-import { QueueManagerQueueDto, QueueManagerUpdateQueuesDto } from '../dto';
+import { QueueManagerQueueDto, QueueManagerUpdateQueuesDto } from '@api/queue-manager/queue';
+import { QueueManagerGetQueuesQuery, QueueManagerUpdateQueuesCommand } from '@app/queue-manager/queue';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerUpdateQueuesHandler
@@ -22,7 +19,7 @@ export class QueueManagerUpdateQueuesHandler
         timezone?: string,
     ): Promise<QueueManagerQueue | QueueManagerQueueDto>
     {
-        await this.commandBus.dispatch(new UpdateQueuesCommand(
+        await this.commandBus.dispatch(new QueueManagerUpdateQueuesCommand(
             payload,
             queryStatement,
             constraint,
@@ -31,7 +28,7 @@ export class QueueManagerUpdateQueuesHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetQueuesQuery(
+        return await this.queryBus.ask(new QueueManagerGetQueuesQuery(
             queryStatement,
             constraint,
             {

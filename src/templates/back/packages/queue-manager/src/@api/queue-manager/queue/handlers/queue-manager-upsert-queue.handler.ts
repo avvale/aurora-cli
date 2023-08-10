@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindQueueByIdQuery } from '@app/queue-manager/queue/application/find/find-queue-by-id.query';
-import { UpsertQueueCommand } from '@app/queue-manager/queue/application/upsert/upsert-queue.command';
 import { QueueManagerQueue, QueueManagerUpdateQueueByIdInput } from '@api/graphql';
-import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto } from '../dto';
+import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto } from '@api/queue-manager/queue';
+import { QueueManagerFindQueueByIdQuery, QueueManagerUpsertQueueCommand } from '@app/queue-manager/queue';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerUpsertQueueHandler
@@ -20,14 +17,14 @@ export class QueueManagerUpsertQueueHandler
         timezone?: string,
     ): Promise<QueueManagerQueue | QueueManagerQueueDto>
     {
-        await this.commandBus.dispatch(new UpsertQueueCommand(
+        await this.commandBus.dispatch(new QueueManagerUpsertQueueCommand(
             payload,
             {
                 timezone,
             },
         ));
 
-        return await this.queryBus.ask(new FindQueueByIdQuery(
+        return await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
             payload.id,
             {},
             {

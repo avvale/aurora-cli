@@ -1,9 +1,7 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerFindJobByIdHandler } from '../handlers/queue-manager-find-job-by-id.handler';
 import { QueueManagerJob } from '@api/graphql';
+import { QueueManagerFindJobByIdHandler } from '@api/queue-manager/job';
+import { Auth } from '@aurora/decorators';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.job.get')

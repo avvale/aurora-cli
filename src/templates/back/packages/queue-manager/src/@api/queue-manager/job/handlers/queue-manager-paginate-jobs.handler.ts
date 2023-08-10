@@ -1,13 +1,10 @@
+import { Pagination } from '@api/graphql';
+import { QueueManagerFindQueueByIdQuery } from '@app/queue-manager';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { getQueueToken } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
-import { Queue } from 'bull';
-
-// @app
-import { Pagination } from '@api/graphql';
 import { ModuleRef } from '@nestjs/core';
-import { FindQueueByIdQuery } from '@app/queue-manager/queue/application/find/find-queue-by-id.query';
-
+import { Queue } from 'bull';
 
 @Injectable()
 export class QueueManagerPaginateJobsHandler
@@ -24,7 +21,7 @@ export class QueueManagerPaginateJobsHandler
     ): Promise<Pagination>
     {
         // get queue from database
-        const queue = await this.queryBus.ask(new FindQueueByIdQuery(
+        const queue = await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
             constraint.where.queueId,
         ));
 

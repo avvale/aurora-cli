@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { QueueManagerUpsertJobRegistryHandler } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerUpsertJobRegistryHandler } from './queue-manager-upsert-job-registry.handler';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerUpsertJobRegistryHandler', () =>
 {
     let handler: QueueManagerUpsertJobRegistryHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('QueueManagerUpsertJobRegistryHandler', () =>
 
         handler = module.get<QueueManagerUpsertJobRegistryHandler>(QueueManagerUpsertJobRegistryHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,13 @@ describe('QueueManagerUpsertJobRegistryHandler', () =>
 
         test('should return an jobRegistry upserted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsRegistry[0])));
-            expect(await handler.main(jobsRegistry[0])).toBe(jobsRegistry[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
+            expect(
+                await handler.main(
+                    queueManagerMockJobRegistryData[0],
+                    'Europe/Madrid',
+                ))
+                .toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

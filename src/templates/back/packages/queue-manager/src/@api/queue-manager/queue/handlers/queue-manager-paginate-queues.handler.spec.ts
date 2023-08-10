@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerPaginateQueuesHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerPaginateQueuesHandler } from './queue-manager-paginate-queues.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
 
 describe('QueueManagerPaginateQueuesHandler', () =>
 {
     let handler: QueueManagerPaginateQueuesHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('QueueManagerPaginateQueuesHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<QueueManagerPaginateQueuesHandler>(QueueManagerPaginateQueuesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('QueueManagerPaginateQueuesHandler should be defined', () =>
@@ -57,15 +45,21 @@ describe('QueueManagerPaginateQueuesHandler', () =>
         test('should return a queues', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: queues.length,
-                count: queues.length,
-                rows : queues,
+                total: queueManagerMockQueueData.length,
+                count: queueManagerMockQueueData.length,
+                rows : queueManagerMockQueueData,
             })));
-            expect(await handler.main()).toEqual({
-                total: queues.length,
-                count: queues.length,
-                rows : queues,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                ),
+            )
+                .toEqual({
+                    total: queueManagerMockQueueData.length,
+                    count: queueManagerMockQueueData.length,
+                    rows : queueManagerMockQueueData,
+                });
         });
     });
 });

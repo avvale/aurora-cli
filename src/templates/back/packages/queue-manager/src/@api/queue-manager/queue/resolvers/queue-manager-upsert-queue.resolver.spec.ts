@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerUpsertQueueResolver } from './queue-manager-upsert-queue.resolver';
-import { QueueManagerUpsertQueueHandler } from '../handlers/queue-manager-upsert-queue.handler';
 import { QueueManagerUpdateQueueByIdInput } from '@api/graphql';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
+import { QueueManagerUpsertQueueHandler, QueueManagerUpsertQueueResolver } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerUpsertQueueResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('QueueManagerUpsertQueueResolver', () =>
 
         test('should return an queue upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queues[0])));
-            expect(await resolver.main(<QueueManagerUpdateQueueByIdInput>queues[0])).toBe(queues[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+            expect(await resolver.main(<QueueManagerUpdateQueueByIdInput>queueManagerMockQueueData[0])).toBe(queueManagerMockQueueData[0]);
         });
     });
 });

@@ -1,11 +1,9 @@
-import { NestFactory } from '@nestjs/core';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-import { SeederModule } from './seeder.module';
-
-// sources
-import { IamCreatePermissionsCommand } from '@app/iam/permission';
 import { IamCreateBoundedContextsCommand } from '@app/iam/bounded-context';
+import { IamCreatePermissionsCommand } from '@app/iam/permission';
 import { boundedContexts, permissions } from '@app/o-auth/o-auth.seed';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { NestFactory } from '@nestjs/core';
+import { SeederModule } from './seeder.module';
 
 export class Seeder
 {

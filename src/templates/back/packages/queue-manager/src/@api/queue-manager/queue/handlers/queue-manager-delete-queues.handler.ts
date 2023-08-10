@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetQueuesQuery } from '@app/queue-manager/queue/application/get/get-queues.query';
-import { DeleteQueuesCommand } from '@app/queue-manager/queue/application/delete/delete-queues.command';
 import { QueueManagerQueue } from '@api/graphql';
-import { QueueManagerQueueDto } from '../dto';
+import { QueueManagerQueueDto } from '@api/queue-manager/queue';
+import { QueueManagerDeleteQueuesCommand, QueueManagerGetQueuesQuery } from '@app/queue-manager/queue';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerDeleteQueuesHandler
@@ -21,7 +18,7 @@ export class QueueManagerDeleteQueuesHandler
         timezone?: string,
     ): Promise<QueueManagerQueue[] | QueueManagerQueueDto[]>
     {
-        const queues = await this.queryBus.ask(new GetQueuesQuery(
+        const queues = await this.queryBus.ask(new QueueManagerGetQueuesQuery(
             queryStatement,
             constraint,
             {
@@ -29,7 +26,7 @@ export class QueueManagerDeleteQueuesHandler
             },
         ));
 
-        await this.commandBus.dispatch(new DeleteQueuesCommand(
+        await this.commandBus.dispatch(new QueueManagerDeleteQueuesCommand(
             queryStatement,
             constraint,
             {

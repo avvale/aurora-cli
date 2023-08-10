@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
+import { QueueManagerIQueueRepository, queueManagerMockQueueData, QueueManagerMockQueueSeeder } from '@app/queue-manager/queue';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IQueueRepository } from '@app/queue-manager/queue/domain/queue.repository';
-import { MockQueueSeeder } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.seeder';
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,8 +18,8 @@ const importForeignModules = [];
 describe('queue', () =>
 {
     let app: INestApplication;
-    let queueRepository: IQueueRepository;
-    let queueSeeder: MockQueueSeeder;
+    let queueRepository: QueueManagerIQueueRepository;
+    let queueSeeder: QueueManagerMockQueueSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -58,17 +56,17 @@ describe('queue', () =>
                 }),
             ],
             providers: [
-                MockQueueSeeder,
+                QueueManagerMockQueueSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = queues;
+        mockData = queueManagerMockQueueData;
         app = module.createNestApplication();
-        queueRepository = module.get<IQueueRepository>(IQueueRepository);
-        queueSeeder = module.get<MockQueueSeeder>(MockQueueSeeder);
+        queueRepository = module.get<QueueManagerIQueueRepository>(QueueManagerIQueueRepository);
+        queueSeeder = module.get<QueueManagerMockQueueSeeder>(QueueManagerMockQueueSeeder);
 
         // seed mock data in memory database
         await queueRepository.insert(queueSeeder.collectionSource);

@@ -1,5 +1,9 @@
-import { QueueManagerQueueHandlers, QueueManagerQueueServices, QueueManagerQueueModel, IQueueRepository, SequelizeQueueRepository, QueueSagas } from './queue';
-import { QueueManagerJobRegistryHandlers, QueueManagerJobRegistryServices, QueueManagerJobRegistryModel, IJobRegistryRepository, SequelizeJobRegistryRepository, JobRegistrySagas } from './job-registry';
+import { QueueManagerQueueHandlers, QueueManagerQueueServices, QueueManagerQueueModel, QueueManagerIQueueRepository, QueueManagerSequelizeQueueRepository, QueueManagerQueueSagas } from './queue';
+import { QueueManagerJobRegistryHandlers, QueueManagerJobRegistryServices, QueueManagerJobRegistryModel, QueueManagerIJobRegistryRepository, QueueManagerSequelizeJobRegistryRepository, QueueManagerJobRegistrySagas } from './job-registry';
+
+export * from './queue';
+export * from './job-registry';
+export { QueueDefinition, QUEUE_REDIS } from './queue-manager.types';
 
 export const QueueManagerHandlers = [
     ...QueueManagerQueueHandlers,
@@ -15,15 +19,15 @@ export const QueueManagerModels = [
 ];
 export const QueueManagerRepositories = [
     {
-        provide : IQueueRepository,
-        useClass: SequelizeQueueRepository
+        provide : QueueManagerIQueueRepository,
+        useClass: QueueManagerSequelizeQueueRepository
     },
     {
-        provide : IJobRegistryRepository,
-        useClass: SequelizeJobRegistryRepository
+        provide : QueueManagerIJobRegistryRepository,
+        useClass: QueueManagerSequelizeJobRegistryRepository
     }
 ];
 export const QueueManagerSagas = [
-    QueueSagas,
-    JobRegistrySagas
+    QueueManagerQueueSagas,
+    QueueManagerJobRegistrySagas
 ];
