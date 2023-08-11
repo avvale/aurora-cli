@@ -3,7 +3,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
-            (object items=(array 'EventPublisher' 'EventBus' 'CommandBus' 'UnhandledExceptionBus') path='@nestjs/cqrs')
+            (object items=(array 'CommandBus' 'EventBus' 'EventPublisher' 'UnhandledExceptionBus') path='@nestjs/cqrs')
 
             (object
                 items=
