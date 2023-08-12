@@ -86,25 +86,6 @@ export class CodeWriter
             `${this.boundedContextName.toPascalCase()}Models`,
         );
 
-        // pivot table model
-        for (const property of properties.withRelationshipManyToMany)
-        {
-            if (property.relationship?.pivot?.modulePath !== `${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`)
-                continue;
-
-            ImportDriver.createImportItems(
-                sourceFile,
-                `./${this.moduleName.toKebabCase()}`,
-                [`${property.relationship?.pivot?.aggregate}Model`],
-            );
-
-            ArrayDriver.addArrayItem(
-                sourceFile,
-                `${property.relationship?.pivot?.aggregate}Model`,
-                `${this.boundedContextName.toPascalCase()}Models`,
-            );
-        }
-
         // repositories
         ArrayDriver.addArrayItem(
             sourceFile,
@@ -122,6 +103,40 @@ export class CodeWriter
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Sagas`,
             `${this.boundedContextName.toPascalCase()}Sagas`,
         );
+
+        // pivot tables
+        for (const property of properties.withRelationshipManyToMany)
+        {
+            if (property.relationship?.pivot?.modulePath !== `${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`)
+                continue;
+
+            ImportDriver.createImportItems(
+                sourceFile,
+                `./${this.moduleName.toKebabCase()}`,
+                [
+                    `${property.relationship?.pivot?.aggregate}Model`,
+                    `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
+                    `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
+                ],
+            );
+
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `${property.relationship?.pivot?.aggregate}Model`,
+                `${this.boundedContextName.toPascalCase()}Models`,
+            );
+
+            // repositories
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `
+{
+    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository
+}`,
+                `${this.boundedContextName.toPascalCase()}Repositories`,
+            );
+        }
 
         // add i18n registers
         if (properties.hasI18n)
