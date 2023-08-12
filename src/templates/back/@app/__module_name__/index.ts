@@ -128,6 +128,7 @@ export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 {{#each schema.properties.withRelationshipManyToMany}}
 {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
 export { {{ relationship.pivot.aggregate }}Model } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-{{ toKebabCase relationship.singularName }}.model';
+export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}{{ toPascalCase relationship.singularName }}Repository  } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-{{ toKebabCase relationship.singularName }}.repository';
 {{/if}}
 {{/each}}
 export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}Repository } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.repository';
