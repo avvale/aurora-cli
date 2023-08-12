@@ -46,62 +46,8 @@ export class CodeWriter
         });
     }
 
-    generateTestingForeignReferences(properties: Properties): void
-    {
-        // get foreign relationship
-        const foreignRelationships = properties.getForeignRelationship(this.boundedContextName);
-
-        // check that exist bounded context folder
-        if (!fs.existsSync(path.join(process.cwd(), 'cliter', this.boundedContextName.toKebabCase()))) return;
-
-        // get all yaml files to get all modules managed by cli
-        const yamlFiles = fs.readdirSync(path.join(process.cwd(), 'cliter', this.boundedContextName.toKebabCase()));
-
-        for (const foreignRelationship of foreignRelationships)
-        {
-            if (!foreignRelationship.relationship?.modulePath) return;
-
-            const foreignBoundedContextName = foreignRelationship.relationship?.modulePath.split('/')[0];
-
-            for (const yamlFile of yamlFiles)
-            {
-                // get filename of e2e test
-                const e2eTestFile = yamlFile.replace(cliterConfig.schemaDefinitionExtension, '.e2e-spec.ts');
-
-                const e2eTestPath = path.join(process.cwd(), 'test', 'acceptance', this.boundedContextName.toKebabCase(), e2eTestFile);
-
-                // check that exist e2e test file
-                if (fs.existsSync(e2eTestPath))
-                {
-                    // get sourceFile of e2e test
-                    const sourceFile = this.project.addSourceFileAtPath(e2eTestPath);
-
-                    // register import in e2e test
-                    ImportDriver.createImportItems(
-                        sourceFile,
-                        foreignRelationship.relationship.packageName ?
-                            foreignRelationship.relationship.packageName :
-                            `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
-                        [
-                            `${foreignBoundedContextName.toPascalCase()}Module`,
-                        ],
-                    );
-
-                    // disable import foreign modules, can be micro-services
-                    // register import in import array
-                    /* ArrayDriver.addArrayItem(
-                        sourceFile,
-                        `${foreignBoundedContextName.toPascalCase()}Module`,
-                        'importForeignModules',
-                    ); */
-
-                    sourceFile?.saveSync();
-                }
-            }
-        }
-    }
-
-    generateBoundedContextBackReferences(properties: Properties): void
+    // back
+    generateBackBoundedContextReferences(properties: Properties): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
@@ -213,6 +159,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
+    // front
     generateFrontInterface(
         properties: Properties,
         {
@@ -300,6 +247,62 @@ export class CodeWriter
         );
 
         sourceFile?.saveSync();
+    }
+
+
+    generateTestingForeignReferences(properties: Properties): void
+    {
+        // get foreign relationship
+        const foreignRelationships = properties.getForeignRelationship(this.boundedContextName);
+
+        // check that exist bounded context folder
+        if (!fs.existsSync(path.join(process.cwd(), 'cliter', this.boundedContextName.toKebabCase()))) return;
+
+        // get all yaml files to get all modules managed by cli
+        const yamlFiles = fs.readdirSync(path.join(process.cwd(), 'cliter', this.boundedContextName.toKebabCase()));
+
+        for (const foreignRelationship of foreignRelationships)
+        {
+            if (!foreignRelationship.relationship?.modulePath) return;
+
+            const foreignBoundedContextName = foreignRelationship.relationship?.modulePath.split('/')[0];
+
+            for (const yamlFile of yamlFiles)
+            {
+                // get filename of e2e test
+                const e2eTestFile = yamlFile.replace(cliterConfig.schemaDefinitionExtension, '.e2e-spec.ts');
+
+                const e2eTestPath = path.join(process.cwd(), 'test', 'acceptance', this.boundedContextName.toKebabCase(), e2eTestFile);
+
+                // check that exist e2e test file
+                if (fs.existsSync(e2eTestPath))
+                {
+                    // get sourceFile of e2e test
+                    const sourceFile = this.project.addSourceFileAtPath(e2eTestPath);
+
+                    // register import in e2e test
+                    ImportDriver.createImportItems(
+                        sourceFile,
+                        foreignRelationship.relationship.packageName ?
+                            foreignRelationship.relationship.packageName :
+                            `./../../../src/${cliterConfig.apiContainer}/${foreignBoundedContextName.toKebabCase()}/${foreignBoundedContextName.toKebabCase()}.module`,
+                        [
+                            `${foreignBoundedContextName.toPascalCase()}Module`,
+                        ],
+                    );
+
+                    // disable import foreign modules, can be micro-services
+                    // register import in import array
+                    /* ArrayDriver.addArrayItem(
+                        sourceFile,
+                        `${foreignBoundedContextName.toPascalCase()}Module`,
+                        'importForeignModules',
+                    ); */
+
+                    sourceFile?.saveSync();
+                }
+            }
+        }
     }
 
     generateFrontRoutes(index = 0): void

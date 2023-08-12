@@ -15,7 +15,7 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         generateCommandState.schema.aggregateName,
         generateCommandState.schema.properties.hasI18n,
     );
-    codeWriter.generateBoundedContextBackReferences(generateCommandState.schema.properties);
+    codeWriter.generateBackBoundedContextReferences(generateCommandState.schema.properties);
     codeWriter.declareApplicationItemsInModule();
     codeWriter.declareBoundedContextModuleInApplicationModule();
     codeWriter.declareApplicationItemsExports();

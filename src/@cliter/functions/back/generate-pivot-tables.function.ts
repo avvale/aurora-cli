@@ -1,8 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import * as path from 'node:path';
 import { cliterConfig } from '../../config';
-import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
-import { FileManager, TemplateGenerator } from '../../utils';
+import { GenerateCommandState, PropertyType, RelationshipType, TemplateElement } from '../../types';
+import { Property, TemplateGenerator } from '../../utils';
 
 export const generatePivotTables = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
@@ -33,23 +33,27 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
                 },
             );
 
-            /* FileManager.generateContents(
-                generateCommandState.command,
-                path.join(TemplateGenerator.templatePath,  ...TemplateElement.BACK_PIVOT.split('/')),
-                path.join('src', cliterConfig.appContainer), // relativeTargetBasePath
-                generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(), // relativeTargetPath,
-                {
-                    boundedContextName: generateCommandState.schema.boundedContextName,
-                    moduleName        : generateCommandState.schema.moduleName,
-                    moduleNames       : generateCommandState.schema.moduleNames,
-                    force             : generateCommandState.flags.force,
-                    verbose           : generateCommandState.flags.verbose,
-                    excludeFiles      : generateCommandState.schema.excluded,
-                    lockFiles         : generateCommandState.lockFiles,
-                    templateData      : { ...generateCommandState },
-                    currentProperty   : property,
-                },
-            ); */
+            // create value objects for pivot table
+            await TemplateGenerator.generateValueObjects(
+                generateCommandState,
+                path.join('src', cliterConfig.appContainer),
+                generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+                [
+                    new Property({
+                        name    : `${generateCommandState.schema.moduleName}${generateCommandState.schema.moduleName.toPascalCase()}Id`,
+                        type    : PropertyType.ID,
+                        length  : 36,
+                        nullable: false,
+                    }),
+                    new Property({
+                        name    : `${generateCommandState.schema.moduleName}-${property.relationship.singularName?.toPascalCase()}Id`,
+                        type    : PropertyType.ID,
+                        length  : 36,
+                        nullable: false,
+                    }),
+                ],
+                generateCommandState.schema.moduleName,
+            );
         }
     }
 };
