@@ -35,5 +35,5 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
         generateCommandState.schema.properties.hasI18n,
     );
 
-    codeWriter.generateTestingForeignReferences(generateCommandState.schema.properties);
+    codeWriter.generateBackTestingForeignReferences(generateCommandState.schema.properties);
 };
