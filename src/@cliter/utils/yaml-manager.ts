@@ -21,10 +21,10 @@ export class YamlManager
         // read yaml file
         const yamlObj = yaml.load(fs.readFileSync(yamlPath, 'utf8')) as any;
 
-        YamlManager.parseModuleDefinitionSchema(yamlObj);
+        YamlManager.checkModuleDefinitionSchema(yamlObj);
 
-        const properties     = new Properties();
-        const additionalApis = new AdditionalApis();
+        const properties = new Properties();
+
         const schema: ModuleDefinitionSchema = {
             boundedContextName: yamlObj.boundedContextName,
             moduleName        : yamlObj.moduleName,
@@ -34,7 +34,7 @@ export class YamlManager
             hasTenant         : yamlObj.hasTenant,
             hasAuditing       : yamlObj.hasAuditing,
             properties,
-            additionalApis,
+            additionalApis    : Array.isArray(yamlObj.additionalApis) ? createAdditionalApis(yamlObj.additionalApis) : undefined,
             excluded          : yamlObj.excluded,
         };
 
@@ -42,75 +42,20 @@ export class YamlManager
         properties.schema = schema;
 
         // add aggregate properties
-        for (const property of yamlObj.aggregateProperties)
-        {
-            properties.add(
-                new Property({
-                    name         : property.name,
-                    type         : property.type,
-                    primaryKey   : property?.primaryKey,
-                    autoIncrement: property?.autoIncrement,
-                    enumOptions  : property?.enumOptions?.join(),
-                    decimals     : property?.decimals,
-                    length       : property?.length,
-                    minLength    : property?.minLength,
-                    maxLength    : property?.maxLength,
-                    nullable     : property?.nullable,
-                    defaultValue : property?.defaultValue,
-                    relationship : property?.relationship,
-                    index        : property?.index,
-                    indexName    : property?.indexName,
-                    example      : property?.example,
-                    faker        : property?.faker,
-                    webComponent : property?.webComponent,
-                    schema,
-                }),
-            );
-        }
+        addProperties({
+            properties,
+            aggregateProperties: yamlObj.aggregateProperties,
+            schema,
+        });
 
         if (Array.isArray(yamlObj.aggregateI18nProperties))
         {
             // add aggregate i18n properties
-            for (const property of yamlObj.aggregateI18nProperties)
-            {
-                properties.add(
-                    new Property({
-                        isI18n       : true,
-                        name         : property.name,
-                        type         : property.type,
-                        primaryKey   : property?.primaryKey,
-                        autoIncrement: property?.autoIncrement,
-                        enumOptions  : property?.enumOptions?.join(),
-                        decimals     : property?.decimals,
-                        length       : property?.length,
-                        minLength    : property?.minLength,
-                        maxLength    : property?.maxLength,
-                        nullable     : property?.nullable,
-                        defaultValue : property?.defaultValue,
-                        relationship : property?.relationship,
-                        index        : property?.index,
-                        indexName    : property?.indexName,
-                        example      : property?.example,
-                        faker        : property?.faker,
-                        webComponent : property?.webComponent,
-                        schema,
-                    }),
-                );
-            }
-        }
-
-        if (Array.isArray(yamlObj.additionalApis))
-        {
-            for (const additionalApi of yamlObj.additionalApis)
-            {
-                additionalApis.add(
-                    new AdditionalApi({
-                        path        : additionalApi.path,
-                        resolverType: additionalApi.resolverType,
-                        httpMethod  : additionalApi.httpMethod,
-                    }),
-                );
-            }
+            addProperties({
+                properties,
+                aggregateProperties: yamlObj.aggregateI18nProperties,
+                schema,
+            });
         }
 
         return schema;
@@ -142,7 +87,7 @@ export class YamlManager
                     // omit id, is a internal id field when create property with prompt
                     // omit isI18n, is not necessary because it is inside the array aggregateI18nProperties
                     .map(item => _.omit(item, ['id', 'isI18n'])),
-                additionalApis: schema.additionalApis.toDto().map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
+                additionalApis: schema.additionalApis?.toDto().map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
                 excluded      : schema.excluded,
             },
             {
@@ -158,7 +103,7 @@ export class YamlManager
         fs.writeFileSync(path.join(yamlPath, `${schema.moduleName}${cliterConfig.schemaDefinitionExtension}`), yamlStr, 'utf8');
     }
 
-    private static parseModuleDefinitionSchema(yamlObj: any): void
+    private static checkModuleDefinitionSchema(yamlObj: any): void
     {
         if (typeof yamlObj.boundedContextName !== 'string')     throw new Error('Yaml file structure error, boundedContextName field missing');
         if (typeof yamlObj.moduleName !== 'string')             throw new Error('Yaml file structure error, moduleName field missing');
@@ -169,3 +114,85 @@ export class YamlManager
         if (typeof yamlObj.hasAuditing !== 'boolean')           throw new Error('Yaml file structure error, hasAuditing field missing in ' + yamlObj.aggregateName);
     }
 }
+
+const addProperties = (
+    {
+        properties,
+        aggregateProperties = [],
+        schema,
+    }:
+    {
+        properties: Properties,
+        aggregateProperties?: Property[];
+        schema?: ModuleDefinitionSchema;
+    },
+): Properties =>
+{
+    for (const property of aggregateProperties)
+    {
+        properties.add(
+            createProperty({
+                property,
+                schema,
+            }),
+        );
+    }
+
+    return properties;
+};
+
+const createProperty = (
+    {
+        isI18n,
+        property = {},
+        schema,
+    }:
+    {
+        isI18n?: boolean;
+        property?: any;
+        schema?: ModuleDefinitionSchema;
+    },
+): Property =>
+{
+    return new Property({
+        isI18n,
+        name         : property.name,
+        type         : property.type,
+        primaryKey   : property?.primaryKey,
+        autoIncrement: property?.autoIncrement,
+        enumOptions  : property?.enumOptions?.join(),
+        decimals     : property?.decimals,
+        length       : property?.length,
+        minLength    : property?.minLength,
+        maxLength    : property?.maxLength,
+        nullable     : property?.nullable,
+        defaultValue : property?.defaultValue,
+        relationship : property?.relationship,
+        index        : property?.index,
+        indexName    : property?.indexName,
+        example      : property?.example,
+        faker        : property?.faker,
+        webComponent : property?.webComponent,
+        schema,
+    });
+};
+
+const createAdditionalApis = (additionalApis: any): AdditionalApis | undefined =>
+{
+    if (!Array.isArray(additionalApis)) return;
+
+    const additionalApisObject = new AdditionalApis();
+
+    for (const additionalApi of additionalApis)
+    {
+        additionalApisObject.add(
+            new AdditionalApi({
+                path        : additionalApi.path,
+                resolverType: additionalApi.resolverType,
+                httpMethod  : additionalApi.httpMethod,
+            }),
+        );
+    }
+
+    return additionalApisObject;
+};

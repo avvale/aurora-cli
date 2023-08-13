@@ -107,22 +107,19 @@ export class CodeWriter
         // pivot tables
         for (const property of properties.withRelationshipManyToMany)
         {
-            if (property.relationship?.pivot?.modulePath !== `${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`)
-                continue;
-
             ImportDriver.createImportItems(
                 sourceFile,
                 `./${this.moduleName.toKebabCase()}`,
                 [
-                    `${property.relationship?.pivot?.aggregate}Model`,
-                    `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
-                    `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
+                    `${property.relationship?.pivot?.aggregateName}Model`,
+                    `${this.boundedContextName.toPascalCase()}I${property.relationship?.pivot?.moduleName.toPascalCase()}Repository`,
+                    `${this.boundedContextName.toPascalCase()}Sequelize${property.relationship?.pivot?.moduleName.toPascalCase()}Repository`,
                 ],
             );
 
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `${property.relationship?.pivot?.aggregate}Model`,
+                `${property.relationship?.pivot?.aggregateName}Model`,
                 `${this.boundedContextName.toPascalCase()}Models`,
             );
 
@@ -131,8 +128,8 @@ export class CodeWriter
                 sourceFile,
                 `
 {
-    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository,
-    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository
+    provide : ${this.boundedContextName.toPascalCase()}I${property.relationship?.pivot?.moduleName.toPascalCase()}Repository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${property.relationship?.pivot?.moduleName.toPascalCase()}Repository
 }`,
                 `${this.boundedContextName.toPascalCase()}Repositories`,
             );

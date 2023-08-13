@@ -63,7 +63,7 @@ export interface ModuleDefinitionSchema
     hasTenant: boolean;
     hasAuditing: boolean;
     properties: Properties;
-    additionalApis: AdditionalApis;
+    additionalApis?: AdditionalApis;
     excluded?: string[];        // set files to avoid create
 }
 
@@ -134,8 +134,11 @@ export enum PropertyType
 
 export interface RelationshipPivot
 {
-    aggregate: string;
-    modulePath: string;
+    boundedContextName: string;
+    moduleName: string;
+    moduleNames: string;
+    aggregateName: string;
+    properties: Properties;
 }
 
 export enum RelationshipType

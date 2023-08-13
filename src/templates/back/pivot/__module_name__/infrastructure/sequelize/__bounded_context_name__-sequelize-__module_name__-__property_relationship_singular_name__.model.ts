@@ -10,8 +10,8 @@
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
             (object
-                items=(sumStrings currentProperty.relationship.aggregate 'Model')
-                path=(sumStrings config.appContainer '/' currentProperty.relationship.modulePath)
+                items=(sumStrings currentProperty.relationship.pivot.aggregateName 'Model')
+                path=(sumStrings config.appContainer '/' (toKebabCase currentProperty.relationship.pivot.moduleName))
             )
     )
 ~}}

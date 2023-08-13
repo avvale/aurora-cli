@@ -391,10 +391,11 @@ export const Prompter =
                         key            : response.relationship.type === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
                         field          : response.relationship.type === RelationshipType.MANY_TO_ONE || (response.relationship.type === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
                         avoidConstraint: true,
-                        pivot          : response.relationship.pivot?.aggregate ? {
+                        // TODO, ajustar a nueva estructura de pivot
+                        /* pivot          : response.relationship.pivot?.aggregate ? {
                             aggregate : response.relationship.pivot.aggregate,
                             modulePath: response.relationship.pivot.modulePath,
-                        } : undefined,
+                        } : undefined, */
                     }) : undefined,
             index : response.index,
             schema: generateCommandState.schema,
@@ -459,7 +460,7 @@ export const Prompter =
     printValueObjectsTable(command: Command, items: Properties)
     {
         const headers: string[] = [];
-        const excludeHeaders: string[] = ['config', 'id'];
+        const excludeHeaders: Set<string> = new Set(['config', 'id']);
         const aliases: {origin: string; alias: string}[] = [
             { origin: '_name',                        alias: 'Name' },
             { origin: 'type',                         alias: 'Type' },
@@ -485,7 +486,7 @@ export const Prompter =
                     const alias = aliases.find(alias => alias.origin === key);
                     if (
                         !headers.includes(alias ? alias.alias : key) &&
-                        !excludeHeaders.includes(key)
+                        !excludeHeaders.has(key)
                     )
                     {
                         headers.push(alias ? alias.alias : key);
