@@ -19,7 +19,7 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 {{/if}}
 
 // {{ config.appContainer }}
-import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
+import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
 
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ currentAdditionalApi.path }}')
@@ -30,10 +30,10 @@ import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ c
 @Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
 {{/eq }}
 {{/if}}
-export class {{ currentAdditionalApi.getClassName }}Controller
+export class {{ getClassNameAdditionalApi currentAdditionalApi }}Controller
 {
     constructor(
-        private readonly handler: {{ currentAdditionalApi.getClassName }}Handler,
+        private readonly handler: {{ getClassNameAdditionalApi currentAdditionalApi }}Handler,
     ) {}
 
     @{{ toPascalCase currentAdditionalApi.httpMethod }}()

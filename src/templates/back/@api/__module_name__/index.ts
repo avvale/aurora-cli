@@ -155,7 +155,7 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // additionalApis
 {{#each schema.additionalApis}}
-import { {{ getClassName }}Controller } from './controllers/{{ getApiFileName }}.controller';
+import { {{ getClassNameAdditionalApi this }}Controller } from './controllers/{{ getApiFileName }}.controller';
 {{/each}}
 {{/unlessEq}}
 
@@ -197,7 +197,7 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // additionalApis
 {{#each schema.additionalApis}}
-import { {{ getClassName }}Resolver } from './resolvers/{{ getApiFileName }}.resolver';
+import { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ getApiFileName }}.resolver';
 {{/each}}
 {{/unlessEq}}
 
@@ -244,7 +244,7 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 
 // additionalApis
 {{#each schema.additionalApis}}
-import { {{ getClassName }}Handler } from './handlers/{{ getApiFileName }}.handler';
+import { {{ getClassNameAdditionalApi this }}Handler } from './handlers/{{ getApiFileName }}.handler';
 {{/each}}
 {{/unlessEq}}
 
@@ -286,7 +286,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     // additionalApis
     {{#each schema.additionalApis}}
-    {{ getClassName }}Controller,
+    {{ getClassNameAdditionalApi this }}Controller,
     {{/each}}
     {{/unlessEq}}
 ];
@@ -329,7 +329,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     // additionalApis
     {{#each schema.additionalApis}}
-    {{ getClassName }}Resolver,
+    {{ getClassNameAdditionalApi this }}Resolver,
     {{/each}}
     {{/unlessEq}}
 ];
@@ -372,7 +372,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     // additionalApis
     {{#each schema.additionalApis}}
-    {{ getClassName }}Handler,
+    {{ getClassNameAdditionalApi this }}Handler,
     {{/each}}
     {{/unlessEq}}
 ];

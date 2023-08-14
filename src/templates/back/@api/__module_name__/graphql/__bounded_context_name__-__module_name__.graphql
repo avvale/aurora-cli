@@ -177,11 +177,11 @@ type Query
     ): Pagination!
 
     {{/notInArray}}
-    {{#unlessEq schema.additionalApis.lengthQueries 0 }}
+    {{#unlessEq (length (getQueriesAdditionalApis schema.additionalApis)) 0 }}
 
     # additionalApis
-    {{#each schema.additionalApis.queries}}
-    {{ getResolverName }}(
+    {{#each (getQueriesAdditionalApis schema.additionalApis) }}
+    {{ getResolverNameAdditionalApi this }}(
         query: QueryStatement
         constraint: QueryStatement
     ): [{{ ../schema.aggregateName }}]!
@@ -243,7 +243,7 @@ type Mutation
 
     # additionalApis
     {{#each schema.additionalApis.mutations}}
-    {{ getResolverName }}(
+    {{ getResolverNameAdditionalApi this }}(
         payload: {{ toPascalCase ../schema.boundedContextName }}Update{{ toPascalCase ../schema.moduleName }}ByIdInput!
         constraint: QueryStatement
     ): Boolean!

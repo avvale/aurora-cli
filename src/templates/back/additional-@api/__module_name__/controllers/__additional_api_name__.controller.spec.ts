@@ -5,13 +5,13 @@ import { CacheModule } from '@nestjs/cache-manager';
 {{/if}}
 
 // custom items
-import { {{ currentAdditionalApi.getClassName }}Controller } from './{{ currentAdditionalApi.getApiFileName }}.controller';
-import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
+import { {{ getClassNameAdditionalApi currentAdditionalApi }}Controller } from './{{ currentAdditionalApi.getApiFileName }}.controller';
+import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
 
-describe('{{ currentAdditionalApi.getClassName }}Controller', () =>
+describe('{{ getClassNameAdditionalApi currentAdditionalApi }}Controller', () =>
 {
-    let controller: {{ currentAdditionalApi.getClassName }}Controller;
-    let handler: {{ currentAdditionalApi.getClassName }}Handler;
+    let controller: {{ getClassNameAdditionalApi currentAdditionalApi }}Controller;
+    let handler: {{ getClassNameAdditionalApi currentAdditionalApi }}Handler;
 
     beforeAll(async () =>
     {
@@ -22,11 +22,11 @@ describe('{{ currentAdditionalApi.getClassName }}Controller', () =>
                 {{/if}}
             ],
             controllers: [
-                {{ currentAdditionalApi.getClassName }}Controller,
+                {{ getClassNameAdditionalApi currentAdditionalApi }}Controller,
             ],
             providers: [
                 {
-                    provide : {{ currentAdditionalApi.getClassName }}Handler,
+                    provide : {{ getClassNameAdditionalApi currentAdditionalApi }}Handler,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -35,13 +35,13 @@ describe('{{ currentAdditionalApi.getClassName }}Controller', () =>
         })
             .compile();
 
-        controller = module.get<{{ currentAdditionalApi.getClassName }}Controller>({{ currentAdditionalApi.getClassName }}Controller);
-        handler = module.get<{{ currentAdditionalApi.getClassName }}Handler>({{ currentAdditionalApi.getClassName }}Handler);
+        controller = module.get<{{ getClassNameAdditionalApi currentAdditionalApi }}Controller>({{ getClassNameAdditionalApi currentAdditionalApi }}Controller);
+        handler = module.get<{{ getClassNameAdditionalApi currentAdditionalApi }}Handler>({{ getClassNameAdditionalApi currentAdditionalApi }}Handler);
     });
 
     describe('main', () =>
     {
-        test('{{ currentAdditionalApi.getClassName }}Controller should be defined', () =>
+        test('{{ getClassNameAdditionalApi currentAdditionalApi }}Controller should be defined', () =>
         {
             expect(controller).toBeDefined();
         });

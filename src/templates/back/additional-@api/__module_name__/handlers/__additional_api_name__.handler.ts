@@ -16,7 +16,7 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{/eq }}
 
 @Injectable()
-export class {{ currentAdditionalApi.getClassName }}Handler
+export class {{ getClassNameAdditionalApi currentAdditionalApi }}Handler
 {
     constructor(
         private readonly commandBus: ICommandBus,

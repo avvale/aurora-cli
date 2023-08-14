@@ -12,7 +12,7 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 {{/if}}
 
 // {{ config.appContainer }}
-import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
+import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from '@api/graphql';
 {{else}}
@@ -27,13 +27,13 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 @Auth('{{ toCamelCase schema.boundedContextName }}.{{ toCamelCase schema.moduleName }}.update')
 {{/eq }}
 {{/if}}
-export class {{ currentAdditionalApi.getClassName }}Resolver
+export class {{ getClassNameAdditionalApi currentAdditionalApi }}Resolver
 {
     constructor(
-        private readonly handler: {{ currentAdditionalApi.getClassName }}Handler,
+        private readonly handler: {{ getClassNameAdditionalApi currentAdditionalApi }}Handler,
     ) {}
 
-    @{{ toPascalCase currentAdditionalApi.resolverType }}('{{ currentAdditionalApi.getResolverName }}')
+    @{{ toPascalCase currentAdditionalApi.resolverType }}('{{ getResolverNameAdditionalApi currentAdditionalApi }}')
     {{#if schema.hasTenant}}
     @TenantPolicy()
     {{/if}}

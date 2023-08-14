@@ -231,12 +231,12 @@ export const deleteMutation = gql`
 
 // Queries additionalApis
 {{#each schema.additionalApis.queries}}
-export const {{ getVariableName }}Query = gql`
+export const {{ getVariableNameAdditionalApi this }}Query = gql`
     query {{ getClassName }} (
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        {{ getResolverName }} (
+        {{ getResolverNameAdditionalApi this }} (
             query: $query
             constraint: $constraint
         ){
@@ -250,12 +250,12 @@ export const {{ getVariableName }}Query = gql`
 
 // Mutation additionalApis
 {{#each schema.additionalApis.mutations}}
-export const {{ getVariableName }}Mutation = gql`
+export const {{ getVariableNameAdditionalApi this }}Mutation = gql`
     mutation {{ getClassName }} (
         $payload: {{ toPascalCase ../schema.boundedContextName }}Update{{ toPascalCase ../schema.moduleName }}ByIdInput!
         $constraint: QueryStatement
     ) {
-        {{ getResolverName }} (
+        {{ getResolverNameAdditionalApi this }} (
             payload: $payload
             constraint: $constraint
         )

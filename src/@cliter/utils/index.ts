@@ -1,4 +1,6 @@
+export * from './additional-api.functions';
 export * from './additional-apis';
+export * from './additional-apis.functions';
 export { CodeWriter, Installer } from './code-writer';
 export * from './cypher';
 export * from './file-manager';
@@ -10,7 +12,7 @@ export * from './operations';
 export * from './prompter';
 export * from './properties';
 export * from './properties.functions';
-export * from './property.functions';
 export * from './property';
+export * from './property.functions';
 export * from './template-generator';
 export * from './yaml-manager';
