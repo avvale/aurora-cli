@@ -66,7 +66,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
                         {{#each schema.aggregateProperties.upsertService}}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-                        {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase name }}),
+                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
                         {{/unless}}
                         {{/if}}
                         {{/each}}

@@ -4,7 +4,7 @@ export const fields = `
     {{#each schema.aggregateProperties.withoutDeletedAt}}
     {{#if (isAllowProperty ../schema.moduleName this) }}
     {{#unlessEq name 'id'}}
-    {{ toCamelCase name }}
+    {{ toCamelCase (getNameProperty this) }}
     {{/unlessEq}}
     {{/if}}
     {{/each}}

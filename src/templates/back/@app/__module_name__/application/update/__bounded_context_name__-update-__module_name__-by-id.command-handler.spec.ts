@@ -53,7 +53,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
                 new {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand(
                     {
                         {{#each schema.aggregateProperties.updateController}}
-                        {{ toCamelCase name }}: {{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase name }},
+                        {{ toCamelCase (getNameProperty this) }}: {{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }},
                         {{/each}}
                     },
                     {},

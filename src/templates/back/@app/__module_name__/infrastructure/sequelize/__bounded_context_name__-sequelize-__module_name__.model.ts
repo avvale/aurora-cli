@@ -162,7 +162,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     @ForeignKey(() => {{ relationship.aggregate }}Model)
     {{/eq}}
     @Column({
-        field: '{{ toCamelCase name }}',
+        field: '{{ toCamelCase (getNameProperty this) }}',
         {{#if primaryKey }}
         primaryKey: {{ primaryKey }},
         {{/if}}
@@ -184,7 +184,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{/eq}}
         {{/unless}}
     })
-    {{ toCamelCase name }}: {{{ getJavascriptModelType }}};
+    {{ toCamelCase (getNameProperty this) }}: {{{ getJavascriptModelType }}};
     {{/if}}
     {{#if hasHasOneDecorator }}
 
@@ -193,7 +193,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         constraints: false,
         {{/if}}
     }{{/or}})
-    {{ toCamelCase name }}: {{ relationship.aggregate }}Model;
+    {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregate }}Model;
     {{/if}}
     {{#if hasBelongsToDecorator }}
 
@@ -201,7 +201,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
-        foreignKey: '{{ toCamelCase name }}',
+        foreignKey: '{{ toCamelCase (getNameProperty this) }}',
     }{{/or}})
     {{ toCamelCase relationship.field }}: {{ relationship.aggregate }}Model;
     {{/if}}
@@ -215,7 +215,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         constraints: false,
         {{/if}}
     }{{/or}})
-    {{ toCamelCase name }}: {{ relationship.aggregate }}Model[];
+    {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregate }}Model[];
     {{/if}}
     {{#if hasBelongsToManyDecorator }}
 
@@ -238,7 +238,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         defaultValue: {{{ getDefaultValue }}},
         {{/unless}}
     })
-    {{ toCamelCase name }}: any;
+    {{ toCamelCase (getNameProperty this) }}: any;
     {{/if}}
     {{else}}
     @BelongsToMany(() => {{ relationship.aggregate }}Model, {

@@ -19,7 +19,7 @@
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this))) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
@@ -43,7 +43,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         payload: {
             {{#each schema.aggregateProperties.updateService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getNameProperty this) }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
         },
@@ -72,12 +72,12 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             null, // availableLangs
 {{else}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
             {{/and}}
             {{/each}}
         );

@@ -43,7 +43,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
                 new {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command(
                     {
                         {{#each schema.aggregateProperties.updateController}}
-                        {{ toCamelCase name }}: {{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase name }},
+                        {{ toCamelCase (getNameProperty this) }}: {{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }},
                         {{/each}}
                     },
                     { timezone: process.env.TZ },

@@ -5,8 +5,8 @@ export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = 
     {{#if (isAllowProperty ../schema.moduleName this) }}
     {
         type       : ColumnDataType.{{ getColumnDataType }},
-        field      : '{{ toCamelCase name }}',
-        sort       : '{{ toCamelCase name }}',
+        field      : '{{ toCamelCase (getNameProperty this) }}',
+        sort       : '{{ toCamelCase (getNameProperty this) }}',
         translation: '{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name }}',
     },
     {{/if}}

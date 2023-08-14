@@ -73,9 +73,9 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             {{#each schema.aggregateProperties.mapper}}
             {{#if (isAllowProperty ../schema.moduleName this)}}
             {{#if hasTimezone}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase name }}, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             {{else}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase name }}, { undefinable: true }),
+            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }),
             {{/if}}
             {{/if}}
             {{/each}}
@@ -106,7 +106,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         return new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response(
             {{#each schema.aggregateProperties.mapper}}
             {{#if (isAllowProperty ../schema.moduleName this)}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}.value,
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}.value,
             {{/if}}
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}

@@ -139,7 +139,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}{{ toCamelCase name }}: null,{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: null,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -157,7 +157,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}{{ toCamelCase name }}: undefined,{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq notNullPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: undefined,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -175,7 +175,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}{{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq hasLengthPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -193,7 +193,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}{{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq hasMaxLengthPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -211,7 +211,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq hasMinLengthPropety.name testPropety.name}}{{ toCamelCase name }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq hasMinLengthPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -228,7 +228,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isIntegerPropety.name testPropety.name}}{{ toCamelCase name }}: 100.10,{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isIntegerPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: 100.10,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -245,7 +245,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isIntegerUnsignedPropety.name testPropety.name}}{{ toCamelCase name }}: -1,{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isIntegerUnsignedPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: -1,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -262,7 +262,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isBooleanPropety.name testPropety.name}}{{ toCamelCase name }}: 'true',{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isBooleanPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: 'true',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -279,7 +279,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isEnumPropety.name testPropety.name}}{{ toCamelCase name }}: '****',{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isEnumPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: '****',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -296,7 +296,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isTimestampPropety.name testPropety.name}}{{ toCamelCase name }}: '****',{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq isTimestampPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: '****',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -313,7 +313,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq decimalPropety.name testPropety.name}}{{ toCamelCase name }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(add (first testPropety.decimals) 1) decimalDigits=(last testPropety.decimals)) }}},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq decimalPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(add (first testPropety.decimals) 1) decimalDigits=(last testPropety.decimals)) }}},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -330,7 +330,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq decimalPropety.name testPropety.name}}{{ toCamelCase name }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(first testPropety.decimals) decimalDigits=(add (last testPropety.decimals) 1)) }}},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq decimalPropety.name testPropety.name}}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}eProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(first testPropety.decimals) decimalDigits=(add (last testPropety.decimals) 1)) }}},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -512,7 +512,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLCreateQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}eProperty this) }}
                             {{/each}}
                         }
                     }
@@ -580,7 +580,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query:$query)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -609,7 +609,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLCreateQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -640,7 +640,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query:$query)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -677,7 +677,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query:$query)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -712,7 +712,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -742,7 +742,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLFindByIdQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -770,7 +770,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (payload:$payload)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLUpdateQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -803,7 +803,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (payload:$payload)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLUpdateQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -834,7 +834,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} (payload:$payload query:$query)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLUpdateQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -870,7 +870,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
@@ -900,7 +900,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}
-                            {{ toCamelCase name }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }

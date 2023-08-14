@@ -20,7 +20,7 @@
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this))) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
@@ -44,7 +44,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{ toCamelCase schema.moduleNames }}: {
             {{#each schema.aggregateProperties.createItemsService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
             {{/each}}
         } [],
@@ -62,11 +62,11 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 {{else eq name 'deletedAt'}}
             null, // deleteAt
 {{else}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }},
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }},
             {{/and}}
             {{/each}}
         ));

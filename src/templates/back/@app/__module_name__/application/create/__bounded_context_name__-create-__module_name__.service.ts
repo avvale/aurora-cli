@@ -84,7 +84,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
             {{/and}}
             {{/each}}
         );

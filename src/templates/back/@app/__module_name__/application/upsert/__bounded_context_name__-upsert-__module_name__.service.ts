@@ -19,7 +19,7 @@
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this))) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
 ~}}
 {{/if}}
 {{/each}}
@@ -46,7 +46,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             {{#each schema.aggregateProperties.upsertService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/unless}}
             {{/if}}
             {{/each}}
@@ -75,12 +75,12 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 {{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             null, // availableLangs
 {{else}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
             {{/and}}
             {{/each}}
         );
@@ -152,13 +152,13 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 {{#eq name 'id'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}Id(modelInDB ? modelInDB.id.value : Utils.uuid()),
 {{else}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
 {{/eq}}
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
             {{/and}}
             {{/each}}
         );

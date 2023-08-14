@@ -49,11 +49,11 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         // add many to many relation
         {{#each schema.aggregateProperties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.length > 0)
+        if (aggregate.{{ toCamelCase (getNameProperty this) }}.length > 0)
         {
             await model.$add(
                 '{{ toCamelCase originName }}',
-                aggregate.{{ toCamelCase name }}.value,
+                aggregate.{{ toCamelCase (getNameProperty this) }}.value,
                 createOptions,
             );
         }
@@ -69,11 +69,11 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         // set many to many relation
         {{#each schema.aggregateProperties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.isArray())
+        if (aggregate.{{ toCamelCase (getNameProperty this) }}.isArray())
         {
             await model.$set(
                 '{{ toCamelCase originName }}',
-                aggregate.{{ toCamelCase name }}.value,
+                aggregate.{{ toCamelCase (getNameProperty this) }}.value,
                 updateByIdOptions,
             );
         }
