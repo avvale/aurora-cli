@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 {{#if schema.aggregateProperties.hasEnum}}
-import { {{#each schema.aggregateProperties.isEnum}}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{/each}} } from '@api/graphql';
+import { {{#each (getEnumProperties schema.aggregateProperties) }}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{/each}} } from '@api/graphql';
 {{/if}}
 
 export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data = [

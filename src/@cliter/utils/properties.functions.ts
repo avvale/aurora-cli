@@ -1,4 +1,4 @@
-import { RelationshipType } from '../types';
+import { PropertyType, RelationshipType } from '../types';
 import { Property } from './property';
 
 /********************
@@ -37,7 +37,10 @@ export const getRelationshipProperties = (properties: Property[]): Property[] =>
 };
 
 // replace by Properties getForeignRelationship
-export const getForeignRelationshipProperties = (properties: Property[], boundedContextName: string): Property[] =>
+export const getForeignRelationshipProperties = (
+    properties: Property[],
+    boundedContextName: string,
+): Property[] =>
 {
     return getRelationshipProperties(properties)
         .filter(item =>
@@ -74,7 +77,10 @@ export const getCreateServiceProperties = (properties: Property[], moduleName: s
 };
 
 // replace by Properties createController
-export const getCreateControllerProperties = (properties: Property[], moduleName: string): Property[] =>
+export const getCreateControllerProperties = (
+    properties: Property[],
+    moduleName: string,
+): Property[] =>
 {
     return properties
         .filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
@@ -101,6 +107,12 @@ export const getWithImportRelationshipManyToManyProperties = (properties: Proper
         // avoid duplicate self relations
         .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
         .filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
+};
+
+// replace by Properties isEnum
+export const getEnumProperties = (properties: Property[]): Property[] =>
+{
+    return properties.filter(property => property.type === PropertyType.ENUM);
 };
 
 /***********

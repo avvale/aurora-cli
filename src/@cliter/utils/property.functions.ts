@@ -110,13 +110,58 @@ aurora load back module -n=${boundedContextName}/${moduleName} -ft
  * REST *
  ********/
 // replace by Property getSwaggerType
-export const getSwaggerTypeProperty = (property: Property, config: CliterConfig): string =>
+export const getSwaggerTypeProperty = (
+    property: Property,
+    config: CliterConfig,
+): string =>
 {
     return config.propertyTypesEquivalenceSwaggerTypes[property.type];
 };
 
 // replace by Property getDtoType
-export const getDtoTypeProperty = (property: Property, config: CliterConfig): string =>
+export const getDtoTypeProperty = (
+    property: Property,
+    config: CliterConfig,
+): string =>
 {
     return config.propertyTypesEquivalenceDtoTypes[property.type];
+};
+
+/***********
+ * GraphQL *
+ ***********/
+// replace by Property getGraphqlType
+export const getGraphqlTypeProperty = (
+    property: Property,
+    config: CliterConfig,
+): string | undefined =>
+{
+    if (property.relationship?.type === RelationshipType.ONE_TO_MANY || property.relationship?.type === RelationshipType.MANY_TO_MANY)  return `[${property.relationship?.aggregateName}]`;
+    if (property.relationship?.type === RelationshipType.MANY_TO_ONE)                                                                   return `${property.relationship?.aggregateName}`;
+    if (property.relationship?.type === RelationshipType.ONE_TO_ONE)                                                                    return `${property.relationship?.aggregateName}`;
+    return config.propertyTypesEquivalenceQraphqlTypes[property.type];
+};
+
+// replace by Property getGraphqlCreateType
+export const getGraphqlCreateTypeProperty = (
+    property: Property,
+    config: CliterConfig,
+    schema: ModuleDefinitionSchema,
+): string =>
+{
+    if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
+    if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getRelationshipBoundedContextNameProperty(property, schema)?.toPascalCase()}Create${getRelationshipModuleNameProperty(property, schema)?.toPascalCase()}Input`;
+    return config.propertyTypesEquivalenceQraphqlTypes[property.type];
+};
+
+// replace by Property getGraphqlUpdateType
+export const getGraphqlUpdateTypeProperty = (
+    property: Property,
+    config: CliterConfig,
+    schema: ModuleDefinitionSchema,
+): string =>
+{
+    if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
+    if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getRelationshipBoundedContextNameProperty(property, schema)?.toPascalCase()}Update${getRelationshipModuleNameProperty(property, schema)?.toPascalCase()}Input`;
+    return config.propertyTypesEquivalenceQraphqlTypes[property.type];
 };

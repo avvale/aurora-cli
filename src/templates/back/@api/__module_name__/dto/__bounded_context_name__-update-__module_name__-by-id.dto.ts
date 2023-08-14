@@ -14,7 +14,7 @@
 {{/unlessEq}}
 {{/each}}
 {{#if schema.aggregateProperties.hasEnum}}
-{{#each schema.aggregateProperties.isEnum}}
+{{#each (getEnumProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')

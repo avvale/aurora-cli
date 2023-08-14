@@ -271,7 +271,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each schema.aggregateProperties.isEnum  as |isEnumPropety isEnumPropetyId|}}
+    {{#each (getEnumProperties schema.aggregateProperties) as |isEnumPropety isEnumPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }} has to be a enum option of {{ join enumOptions }}', () =>
     {
         return request(app.getHttpServer())
