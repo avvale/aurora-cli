@@ -1,8 +1,20 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { PaginationResponse } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Query } from './{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.query';
-import { {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Service } from './{{ toKebabCase schema.boundedContextName }}-paginate-{{ toKebabCase schema.moduleNames }}.service';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
+            (object items=(array 'PaginationResponse') path=config.auroraCorePackage)
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Query')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Service')
+                )
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 @QueryHandler({{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Query)
 export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}QueryHandler implements IQueryHandler<{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Query>
 {
