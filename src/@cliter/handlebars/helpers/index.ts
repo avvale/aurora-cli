@@ -5,6 +5,7 @@ import './bracket-open';
 import './calculate-form-group-col';
 import './constructor-injector-manager';
 import './get-aggregate-properties';
+import './get-create-controller-properties';
 import './get-create-service-properties';
 import './get-foreign-key';
 import './get-name-property';
