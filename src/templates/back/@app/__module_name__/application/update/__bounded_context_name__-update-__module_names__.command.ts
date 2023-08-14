@@ -1,6 +1,10 @@
-import { QueryStatement } from '{{ config.auroraCorePackage }}';
-import { CQMetadata } from '{{ config.auroraCorePackage }}';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Command
 {
     constructor(
