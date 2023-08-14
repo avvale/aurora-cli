@@ -49,7 +49,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleNames }}Event(
                 this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event(
-                        {{#each schema.properties.aggregate}}
+                        {{#each (getAggregateProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}
@@ -70,7 +70,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleNames }}Event(
                 this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event(
-                        {{#each schema.properties.aggregate}}
+                        {{#each (getAggregateProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}
@@ -91,7 +91,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleNames }}Event(
                 this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event(
-                        {{#each schema.properties.aggregate}}
+                        {{#each (getAggregateProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}

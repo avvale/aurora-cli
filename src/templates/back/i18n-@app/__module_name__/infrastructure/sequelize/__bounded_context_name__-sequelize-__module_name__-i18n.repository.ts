@@ -18,7 +18,7 @@
             )
     )
 ~}}
-{{#hasItems schema.properties.withRelationshipManyToMany }}
+{{#hasItems schema.aggregateProperties.withRelationshipManyToMany }}
 {{ push importsArray
     (object items='LiteralObject' path=config.auroraCorePackage)
 ~}}

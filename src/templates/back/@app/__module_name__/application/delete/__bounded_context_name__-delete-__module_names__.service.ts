@@ -18,7 +18,7 @@
             )
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
@@ -41,7 +41,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         const fallbackLang = cQMetadata.meta.fallbackLang;
         const contentLanguage = cQMetadata.meta.contentLanguage;
 
@@ -55,7 +55,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
 
         if ({{ toCamelCase schema.moduleNames }}.length === 0) return;
 
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         if ({{ toCamelCase schema.moduleNames }}[0].langId.value === fallbackLang.id)
         {
             // delete all translations if delete fallback language

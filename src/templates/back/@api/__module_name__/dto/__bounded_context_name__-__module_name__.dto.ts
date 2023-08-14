@@ -5,13 +5,13 @@
             (object items=(array 'ApiProperty') path='@nestjs/swagger')
     )
 ~}}
-{{#each schema.properties.withImportRelationshipManyToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToMany}}
 {{ 
     push ../importsArray
         (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
     push ../importsArray
@@ -19,20 +19,20 @@
 ~}}
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/each}}
-{{#if schema.properties.hasEnum}}
-{{#each schema.properties.isEnum}}
+{{#if schema.aggregateProperties.hasEnum}}
+{{#each schema.aggregateProperties.isEnum}}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')
@@ -42,7 +42,7 @@
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto
 {
-{{#each schema.properties.dtoProperties}}
+{{#each schema.aggregateProperties.dtoProperties}}
 {{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}

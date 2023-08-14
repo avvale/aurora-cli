@@ -13,149 +13,149 @@ import { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase sche
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event } from '../application/events/{{ toKebabCase schema.boundedContextName }}-deleted-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
-{{#each schema.properties.withImportRelationshipOneToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToMany}}
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 
 export class {{ schema.aggregateName }} extends AggregateRoot
 {
-    {{#each schema.properties.aggregate}}
+    {{#each (getAggregateProperties schema.aggregateProperties) }}
     {{#if (isAllowProperty ../schema.moduleName this)}}
     {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
     {{/if}}
     {{/each}}
 
     // eager relationship
-    {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+    {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
     {{ toCamelCase relationship.field }}: {{ toPascalCase relationship.aggregate }};
     {{/each}}
-    {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+    {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
     {{ toCamelCase originName }}: {{ toPascalCase relationship.aggregate }};
     {{/each}}
-    {{#each schema.properties.withRelationshipManyToOne}}
+    {{#each schema.aggregateProperties.withRelationshipManyToOne}}
     {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
     {{ toCamelCase relationship.field }}: {{ toPascalCase relationship.aggregate }};
     {{/unless}}
     {{/each}}
-    {{#each schema.properties.withRelationshipOneToMany}}
+    {{#each schema.aggregateProperties.withRelationshipOneToMany}}
     {{ toCamelCase originName }}: {{ toPascalCase relationship.aggregate }}[];
     {{/each}}
-    {{#each schema.properties.withRelationshipManyToMany}}
+    {{#each schema.aggregateProperties.withRelationshipManyToMany}}
     {{ toCamelCase originName }}: {{ toPascalCase relationship.aggregate }}[];
     {{/each}}
 
     constructor(
-        {{#each schema.properties.aggregate}}
+        {{#each (getAggregateProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this) }}
         {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
         {{/if}}
         {{/each}}
 
-        {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregate }},
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }},
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToOne}}
+        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregate }},
         {{/unless}}
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToMany}}
+        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }}[],
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToMany}}
+        {{#each schema.aggregateProperties.withRelationshipManyToMany}}
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }}[],
         {{/each}}
     )
     {
         super();
-        {{#each schema.properties.aggregate}}
+        {{#each (getAggregateProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this) }}
         this.{{ toCamelCase name }} = {{ toCamelCase name }};
         {{/if}}
         {{/each}}
 
         // eager relationship
-        {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
         this.{{ toCamelCase relationship.field }} = {{ toCamelCase relationship.field }};
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
         this.{{ toCamelCase originName }} = {{ toCamelCase originName }};
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToOne}}
+        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         this.{{ toCamelCase relationship.field }} = {{ toCamelCase relationship.field }};
         {{/unless}}
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToMany}}
+        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
         this.{{ toCamelCase originName }} = {{ toCamelCase originName }};
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToMany}}
+        {{#each schema.aggregateProperties.withRelationshipManyToMany}}
         this.{{ toCamelCase originName }} = {{ toCamelCase originName }};
         {{/each}}
     }
 
     static register (
-        {{#each schema.properties.aggregate}}
+        {{#each (getAggregateProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this) }}
         {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
         {{/if}}
         {{/each}}
 
-        {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregate }},
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }},
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToOne}}
+        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregate }},
         {{/unless}}
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToMany}}
+        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }}[],
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToMany}}
+        {{#each schema.aggregateProperties.withRelationshipManyToMany}}
         {{ toCamelCase originName }}?: {{ toPascalCase relationship.aggregate }}[],
         {{/each}}
     ): {{ schema.aggregateName }}
     {
         return new {{ schema.aggregateName }}(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }},
             {{/if}}
             {{/each}}
 
-            {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+            {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
             {{ toCamelCase relationship.field }},
             {{/each}}
-            {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+            {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
             {{ toCamelCase originName }},
             {{/each}}
-            {{#each schema.properties.withRelationshipManyToOne}}
+            {{#each schema.aggregateProperties.withRelationshipManyToOne}}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }},
             {{/unless}}
             {{/each}}
-            {{#each schema.properties.withRelationshipOneToMany}}
+            {{#each schema.aggregateProperties.withRelationshipOneToMany}}
             {{ toCamelCase originName }},
             {{/each}}
-            {{#each schema.properties.withRelationshipManyToMany}}
+            {{#each schema.aggregateProperties.withRelationshipManyToMany}}
             {{ toCamelCase originName }},
             {{/each}}
         );
@@ -166,7 +166,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         this.apply(
             new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event(
-                {{#each schema.properties.aggregate}}
+                {{#each (getAggregateProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                 {{/if}}
@@ -181,7 +181,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         this.apply(
             new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event(
-                {{#each schema.properties.aggregate}}
+                {{#each (getAggregateProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}?.value,
                 {{/if}}
@@ -196,7 +196,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {
         this.apply(
             new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event(
-                {{#each schema.properties.aggregate}}
+                {{#each (getAggregateProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}{{#if nullable}}?{{/if}}.value,
                 {{/if}}
@@ -209,38 +209,38 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     toDTO(): LiteralObject
     {
         return {
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.value,
             {{/if}}
             {{/each}}
 
             // eager relationship
-            {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+            {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/each}}
-            {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+            {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.toDTO(),
             {{/each}}
-            {{#each schema.properties.withRelationshipManyToOne}}
+            {{#each schema.aggregateProperties.withRelationshipManyToOne}}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/unless}}
             {{/each}}
-            {{#each schema.properties.withRelationshipOneToMany}}
+            {{#each schema.aggregateProperties.withRelationshipOneToMany}}
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.map(item => item.toDTO()),
             {{/each}}
-            {{#each schema.properties.withRelationshipManyToMany}}
+            {{#each schema.aggregateProperties.withRelationshipManyToMany}}
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.map(item => item.toDTO()),
             {{/each}}
         };
     }
-    {{#if schema.properties.hasI18n}}
+    {{#if (hasI18nProperties schema.aggregateProperties) }}
 
     toI18nDTO(): LiteralObject
     {
         return {
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#if isI18n}}
             {{#eq name 'id'}}
             {{ toCamelCase name }}: Utils.uuid(),
@@ -261,7 +261,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     toRepository(): LiteralObject
     {
         return {
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{#if isBinary }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}{{#if nullable }}?{{/if}}.buffer,
@@ -272,21 +272,21 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/each}}
 
             // eager relationship
-            {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+            {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/each}}
-            {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+            {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.toDTO(),
             {{/each}}
-            {{#each schema.properties.withRelationshipManyToOne}}
+            {{#each schema.aggregateProperties.withRelationshipManyToOne}}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/unless}}
             {{/each}}
-            {{#each schema.properties.withRelationshipOneToMany}}
+            {{#each schema.aggregateProperties.withRelationshipOneToMany}}
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.map(item => item.toDTO()),
             {{/each}}
-            {{#each schema.properties.withRelationshipManyToMany}}
+            {{#each schema.aggregateProperties.withRelationshipManyToMany}}
             {{ toCamelCase originName }}: this.{{ toCamelCase originName }}?.map(item => item.toDTO()),
             {{/each}}
         };

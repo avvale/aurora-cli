@@ -1,6 +1,6 @@
 import { GenerateCommandState } from '../../types';
 import { cliterConfig } from '../../config';
-import { CodeWriter } from '../../utils';
+import { CodeWriter, hasI18nProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const addReferences = (generateCommandState: GenerateCommandState): void =>
@@ -13,9 +13,9 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         generateCommandState.schema.moduleName.toLowerCase(),
         generateCommandState.schema.moduleNames.toLowerCase(),
         generateCommandState.schema.aggregateName,
-        generateCommandState.schema.properties.hasI18n,
+        hasI18nProperties(generateCommandState.schema.aggregateProperties),
     );
-    codeWriter.generateBackBoundedContextReferences(generateCommandState.schema.properties);
+    codeWriter.generateBackBoundedContextReferences(generateCommandState.schema.aggregateProperties);
     codeWriter.declareBackApplicationItemsInModule();
     codeWriter.declareBackBoundedContextModuleInApplicationModule();
     codeWriter.declareBackApplicationItemsExports();

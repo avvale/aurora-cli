@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 import { cliterConfig } from '../../config';
-import { CodeWriter, TemplateGenerator } from '../../utils';
+import { CodeWriter, TemplateGenerator, hasI18nProperties } from '../../utils';
 import { GenerateCommandState, TemplateElement } from '../../types';
 
 export const generateTestingFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
@@ -32,8 +32,8 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
         generateCommandState.schema.moduleName.toLowerCase(),
         generateCommandState.schema.moduleNames.toLowerCase(),
         generateCommandState.schema.aggregateName,
-        generateCommandState.schema.properties.hasI18n,
+        hasI18nProperties(generateCommandState.schema.aggregateProperties),
     );
 
-    codeWriter.generateBackTestingForeignReferences(generateCommandState.schema.properties);
+    codeWriter.generateBackTestingForeignReferences(generateCommandState.schema.aggregateProperties);
 };

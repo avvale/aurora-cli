@@ -7,7 +7,7 @@ import { {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.m
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdService } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.service';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
 import { {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.repository';
@@ -33,12 +33,12 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     useValue: {
                         deleteById: id => { /**/ },
                         findById  : id => { /**/ },
-                        {{#if schema.properties.hasI18n}}
+                        {{#if (hasI18nProperties schema.aggregateProperties) }}
                         update    : () => { /**/ },
                         {{/if}}
                     },
                 },
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository,
                     useValue: {
@@ -70,7 +70,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 await service.main(
                     new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].id),
                     {},
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         meta: {
                             fallbackLang: {

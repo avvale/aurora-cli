@@ -457,7 +457,7 @@ export const Prompter =
         return inquirer.prompt(questions);
     },
 
-    printValueObjectsTable(command: Command, items: Properties)
+    printValueObjectsTable(command: Command, items: Property[]): void
     {
         const headers: string[] = [];
         const excludeHeaders: Set<string> = new Set(['config', 'id']);

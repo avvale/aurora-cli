@@ -1,41 +1,41 @@
-{{#each schema.properties.withImportRelationshipOneToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
 import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
 import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToMany}}
 import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response
 {
     constructor(
-        {{#each schema.properties.response}}
+        {{#each schema.aggregateProperties.response}}
         {{#if (isAllowProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase name }}: {{ getJavascriptType }},
         {{/if}}
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
         public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response,
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
         public readonly {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response,
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToOne}}
+        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response,
         {{/unless}}
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToMany}}
+        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
         public readonly {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response[],
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToMany}}
+        {{#each schema.aggregateProperties.withRelationshipManyToMany}}
         public readonly {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response[],
         {{/each}}
     ) {}

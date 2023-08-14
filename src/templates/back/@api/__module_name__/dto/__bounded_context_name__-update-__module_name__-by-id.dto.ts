@@ -5,7 +5,7 @@
             (object items=(array 'ApiProperty') path='@nestjs/swagger')
     )
 ~}}
-{{#each schema.properties.withImportRelationshipOneToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
 {{#unlessEq type ../propertyType.ID}}
 {{
     push ../importsArray
@@ -13,8 +13,8 @@
 ~}}
 {{/unlessEq}}
 {{/each}}
-{{#if schema.properties.hasEnum}}
-{{#each schema.properties.isEnum}}
+{{#if schema.aggregateProperties.hasEnum}}
+{{#each schema.aggregateProperties.isEnum}}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')
@@ -24,7 +24,7 @@
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto
 {
-{{#each schema.properties.dtoInputProperties}}
+{{#each schema.aggregateProperties.dtoInputProperties}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}

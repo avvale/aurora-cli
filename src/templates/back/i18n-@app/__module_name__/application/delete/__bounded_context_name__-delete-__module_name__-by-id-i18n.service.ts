@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import { QueryStatement } from '{{ config.auroraCorePackage }}';
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{#if schema.properties.hasI18n}}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs, {{/if}}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
+import { {{#if (hasI18nProperties schema.aggregateProperties) }}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs, {{/if}}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
 {{> importI18nRepository}}
 

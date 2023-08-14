@@ -1,7 +1,6 @@
 import * as faker from 'faker';
 import { cliterConfig } from '../config/cliter.config';
 import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType, PropertyWebComponent, PropertyRelationship } from '../types';
-import { Properties } from './properties';
 import { YamlManager } from './yaml-manager';
 
 export class Property
@@ -236,11 +235,11 @@ export class Property
         return null;
     }
 
-    get getRelationshipProperties(): Properties | null
+    get getRelationshipProperties(): Property[] | null
     {
         try
         {
-            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).properties;
+            if (this.relationship?.modulePath) return this.parseModuleSection(this.relationship?.modulePath).aggregateProperties;
         }
         catch
         {

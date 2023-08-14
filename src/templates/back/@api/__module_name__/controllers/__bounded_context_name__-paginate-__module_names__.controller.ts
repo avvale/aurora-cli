@@ -29,7 +29,7 @@
         (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{ 
     push importsArray
         (object items=(array 'ContentLanguage') path=config.auroraCorePackage)
@@ -63,7 +63,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         @Body('query') queryStatement?: QueryStatement,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         @ContentLanguage() contentLanguage?: string,
         {{/if}}
     )
@@ -75,7 +75,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
             queryStatement,
             constraint,
             timezone,
-            {{#if schema.properties.hasI18n}}
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             contentLanguage,
             {{/if}}
         );

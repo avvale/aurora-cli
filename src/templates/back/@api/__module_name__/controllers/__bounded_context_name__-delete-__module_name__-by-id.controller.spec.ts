@@ -15,7 +15,7 @@
             (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
@@ -34,7 +34,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CacheModule.register(),
                 {{/if}}
             ],
@@ -42,7 +42,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdController,
             ],
             providers: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CoreAddI18nConstraintService,
                 {
                     provide : ConfigService,

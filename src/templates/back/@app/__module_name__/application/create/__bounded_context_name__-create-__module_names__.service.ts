@@ -16,7 +16,7 @@
             )
     )
 ~}}
-{{#each schema.properties.valueObjects}}
+{{#each schema.aggregateProperties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
@@ -24,7 +24,7 @@
 ~}}
 {{/if}}
 {{/each}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
@@ -42,7 +42,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
     async main(
         {{ toCamelCase schema.moduleNames }}: {
-            {{#each schema.properties.createItemsService}}
+            {{#each schema.aggregateProperties.createItemsService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/if}}
@@ -53,7 +53,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     {
         // create aggregate with factory pattern
         const aggregate{{ toPascalCase schema.moduleNames }} = {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
             new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
@@ -72,7 +72,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         ));
 
         // insert
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         // delete duplicate elements from multiple languages
         await this.repository.insert(
             aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)),

@@ -4,7 +4,7 @@ export class  {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase 
 {
     constructor(
         public readonly payload: {
-            {{#each schema.properties.createCommand}}
+            {{#each schema.aggregateProperties.createCommand}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase name }}{{#if nullable}}?{{/if}}: {{ getJavascriptType }};
             {{/if}}

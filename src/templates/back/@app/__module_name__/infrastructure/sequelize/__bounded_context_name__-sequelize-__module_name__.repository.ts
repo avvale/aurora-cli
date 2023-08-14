@@ -16,7 +16,7 @@
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
-{{#hasItems schema.properties.withRelationshipManyToMany }}
+{{#hasItems schema.aggregateProperties.withRelationshipManyToMany }}
 {{
     push importsArray
         (object items='LiteralObject' path=config.auroraCorePackage)
@@ -38,7 +38,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         super();
     }
-    {{#hasItems schema.properties.withRelationshipManyToMany }}
+    {{#hasItems schema.aggregateProperties.withRelationshipManyToMany }}
 
     // hook called after create aggregate
     async createdAggregateHook(
@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     ): Promise<void>
     {
         // add many to many relation
-        {{#each schema.properties.withRelationshipManyToMany}}
+        {{#each schema.aggregateProperties.withRelationshipManyToMany}}
         if (aggregate.{{ toCamelCase name }}.length > 0)
         {
             await model.$add(
@@ -68,7 +68,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     ): Promise<void>
     {
         // set many to many relation
-        {{#each schema.properties.withRelationshipManyToMany}}
+        {{#each schema.aggregateProperties.withRelationshipManyToMany}}
         if (aggregate.{{ toCamelCase name }}.isArray())
         {
             await model.$set(

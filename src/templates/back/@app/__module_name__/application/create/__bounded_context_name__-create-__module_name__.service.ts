@@ -15,15 +15,20 @@
             )
     )
 ~}}
-{{#each schema.properties.valueObjects}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
 ~}}
 {{/if}}
 {{/each}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'ConflictException' 'NotFoundException') path='@nestjs/common')
@@ -43,16 +48,16 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
     async main(
         payload: {
-            {{#each schema.properties.createService}}
+            {{#each (getCreateServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
             {{/if}}
             {{/each}}
         },
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         const fallbackLang = cQMetadata.meta.fallbackLang;
         const contentLanguage = cQMetadata.meta.contentLanguage;
 
@@ -62,19 +67,19 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{/if}}
         // create aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
 {{else eq name 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+{{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             null, // availableLangs
 {{else}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getNameProperty this) }},
 {{/if}}
 {{/eq}}
             {{/unless}}
@@ -84,13 +89,13 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             {{/each}}
         );
 
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         try
         {
             // try get object from database
             const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById(
                 {{ toCamelCase schema.moduleName }}.id,
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 {
                     constraint: {
                         include: [

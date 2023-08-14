@@ -5,16 +5,16 @@ import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/c
 {{/if}}
 import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-{{#each schema.properties.withRelationshipOneToOne}}
+{{#each schema.aggregateProperties.withRelationshipOneToOne}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipOneToMany}}
+{{#each schema.aggregateProperties.withRelationshipOneToMany}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withRelationshipManyToMany}}
+{{#each schema.aggregateProperties.withRelationshipManyToMany}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}';
 {{/each}}
@@ -23,12 +23,12 @@ import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer 
     modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18n',
     freezeTableName: true,
     timestamps: false,
-    {{#if schema.properties.hasIndexI18n}}
+    {{#if schema.aggregateProperties.hasIndexI18n}}
     indexes: [
 {{{
     indexesManager (
         object
-            indexes=schema.properties.columnsWithIndex
+            indexes=schema.aggregateProperties.columnsWithIndex
             isI18n=true
     )
 }}}
@@ -147,7 +147,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }
 
     {{/if}}
-    {{#each schema.properties.modelColumns}}
+    {{#each schema.aggregateProperties.modelColumns}}
     {{#if isI18n }}
     {{#if hasColumnDecorator }}
     {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}

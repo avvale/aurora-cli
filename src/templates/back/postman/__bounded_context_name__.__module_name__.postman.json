@@ -10,7 +10,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -22,8 +22,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLCreateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLCreateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLCreateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -47,7 +47,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[{{#loops 10}}\n\t\t{{ bracketOpen }}{{#each ../schema.properties.postmanGraphQLCreateVariables}}\n\t\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t\t}{{#unless @last}}, {{/unless}}{{/loops}}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[{{#loops 10}}\n\t\t{{ bracketOpen }}{{#each ../schema.aggregateProperties.postmanGraphQLCreateVariables}}\n\t\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t\t}{{#unless @last}}, {{/unless}}{{/loops}}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -67,7 +67,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -100,7 +100,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -112,7 +112,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLGetQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLGetQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n\t\t}\n\t}\n}"
 					}
 				},
@@ -133,7 +133,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -145,7 +145,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLFindQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLFindQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n\t\t}\n\t}\n}"
 					}
 				},
@@ -166,7 +166,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -178,7 +178,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLFindByIdQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLFindByIdQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n}"
 					}
 				},
@@ -194,7 +194,7 @@
 			},
 			"response": []
         },
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         {
 			"name": "GraphQL - {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdI18n",
 			"request": {
@@ -210,7 +210,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLFindByIdQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLFindByIdQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n}"
 					}
 				},
@@ -232,7 +232,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -244,8 +244,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLUpdateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLUpdateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLUpdateQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLUpdateVariables}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -265,7 +265,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -277,7 +277,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n}"
 					}
 				},
@@ -298,7 +298,7 @@
 			"request": {
 				"method": "POST",
 				"header": [
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -310,7 +310,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.properties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
+						"query": "mutation ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase name }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
 					}
 				},
@@ -336,7 +336,7 @@
 						"name"  : "Content-Type",
 						"type"  : "text",
 						"value" : "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -347,7 +347,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{{ bracketOpen }}{{#each schema.properties.postmanRestCreate}}\n\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
+					"raw"   : "{{ bracketOpen }}{{#each schema.aggregateProperties.postmanRestCreate}}\n\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -378,7 +378,7 @@
 						"name"  : "Content-Type",
 						"type"  : "text",
 						"value" : "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -389,7 +389,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[{{#loops 10}}\n\t{{ bracketOpen }}{{#each ../schema.properties.postmanRestCreate}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}{{#unless @last}}, {{/unless}}{{/loops}}\n]",
+					"raw"   : "[{{#loops 10}}\n\t{{ bracketOpen }}{{#each ../schema.aggregateProperties.postmanRestCreate}}\n\t\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}{{#unless @last}}, {{/unless}}{{/loops}}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -423,7 +423,7 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -468,7 +468,7 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -513,7 +513,7 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -558,7 +558,7 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -591,7 +591,7 @@
 			},
 			"response": []
         },
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         {
 			"name": "REST - {{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}-i18n/find/{id}",
 			"protocolProfileBehavior": {
@@ -648,7 +648,7 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -659,7 +659,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{{ bracketOpen }}{{#each schema.properties.postmanRestUpdate}}\n\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
+					"raw"   : "{{ bracketOpen }}{{#each schema.aggregateProperties.postmanRestUpdate}}\n\t\"{{ toCamelCase name }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -690,7 +690,7 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",
@@ -733,7 +733,7 @@
 						"name": "Content-Type",
 						"type": "text",
 						"value": "application/json"
-					}{{#if schema.properties.hasI18n}},
+					}{{#if (hasI18nProperties schema.aggregateProperties) }},
                     {
                         "key": "Content-Language",
                         "name": "Content-Language",

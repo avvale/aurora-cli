@@ -15,7 +15,7 @@
             )
     )
 ~}}
-{{#each schema.properties.valueObjects}}
+{{#each schema.aggregateProperties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
@@ -23,7 +23,7 @@
 ~}}
 {{/if}}
 {{/each}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'ConflictException' 'NotFoundException') path='@nestjs/common')
@@ -43,9 +43,9 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 
     async main(
         payload: {
-            {{#each schema.properties.upsertService}}
+            {{#each schema.aggregateProperties.upsertService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{#unless (isI18nAvailableLangsProperty . ../schema.properties)}}
+            {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
             {{/unless}}
             {{/if}}
@@ -54,7 +54,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         const contentLanguage = cQMetadata.meta.contentLanguage;
 
         // override langId value object with header content-language value
@@ -63,7 +63,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         {{/if}}
         // upsert aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
             new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
@@ -72,7 +72,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+{{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             null, // availableLangs
 {{else}}
             payload.{{ toCamelCase name }},
@@ -85,7 +85,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             {{/each}}
         );
 
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         try
         {
             // try get object from database
@@ -137,7 +137,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 
         // upsert i18n aggregate with factory pattern for upsert repository method
         const {{ toCamelCase schema.moduleName }}I18n = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
 {{#eq name 'createdAt'}}
             new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
@@ -146,7 +146,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 {{else eq name 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+{{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             {{ toCamelCase schema.moduleName }}.availableLangs,
 {{else}}
 {{#eq name 'id'}}

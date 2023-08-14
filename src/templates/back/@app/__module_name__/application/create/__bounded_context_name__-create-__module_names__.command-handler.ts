@@ -21,7 +21,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
                 .map({{ toCamelCase schema.moduleName }} =>
                 {
                     return {
-                        {{#each schema.properties.createCommandHandler}}
+                        {{#each schema.aggregateProperties.createCommandHandler}}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{#if hasTimezone}}
                         {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}, {}, { removeTimezone: command.cQMetadata.timezone }),

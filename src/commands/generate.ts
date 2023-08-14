@@ -68,7 +68,7 @@ export default class Generate extends Command
             const { boundedContextName, moduleName, moduleNames, hasOAuth, hasTenant } = await Prompter.promptForGenerateModule(flagName.boundedContextName, flagName.moduleName);
 
             // define properties for generate command
-            const properties: Properties = new Properties();
+            const aggregateProperties: Property[] = [];
 
             // define schema for generate command
             const schema: ModuleDefinitionSchema = {
@@ -79,12 +79,9 @@ export default class Generate extends Command
                 hasOAuth,
                 hasTenant,
                 hasAuditing   : false,
-                properties,
-                additionalApis: new AdditionalApis(),
+                aggregateProperties,
+                additionalApis: [],
             };
-
-            // reference schema in properties
-            properties.schema = schema;
 
             // define state for generate command
             const generateCommandState = {
@@ -95,7 +92,7 @@ export default class Generate extends Command
             };
 
             // add id property for model
-            properties.add(
+            aggregateProperties.push(
                 new Property({
                     name      : 'id',
                     type      : PropertyType.ID,
@@ -111,14 +108,16 @@ export default class Generate extends Command
             while ((await Prompter.promptForGenerateAggregate()).hasValueObject)
             {
                 // eslint-disable-next-line no-await-in-loop
-                properties.add(await Prompter.promptDefineAggregateProperty(generateCommandState));
-                Prompter.printValueObjectsTable(this, properties);
+                aggregateProperties.push(await Prompter.promptDefineAggregateProperty(generateCommandState));
+                Prompter.printValueObjectsTable(this, aggregateProperties);
             }
 
             // add time stamp properties for model
-            properties.add(new Property({ name: 'createdAt', type: PropertyType.TIMESTAMP, nullable: true, schema }));
-            properties.add(new Property({ name: 'updatedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }));
-            properties.add(new Property({ name: 'deletedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }));
+            aggregateProperties.push(
+                new Property({ name: 'createdAt', type: PropertyType.TIMESTAMP, nullable: true, schema }),
+                new Property({ name: 'updatedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }),
+                new Property({ name: 'deletedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }),
+            );
 
             // generate module files
             BackHandler.generateModule(

@@ -33,7 +33,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{/if}}
     ): Promise<boolean>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         // no content-language header is required.
         {{/if}}
         await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command(

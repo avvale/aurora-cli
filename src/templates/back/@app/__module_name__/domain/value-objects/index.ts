@@ -1,5 +1,5 @@
 {{ setVar 'exportsArray' (array) ~}}
-{{#each schema.properties.valueObjects}}
+{{#each schema.aggregateProperties.valueObjects}}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../exportsArray
@@ -11,7 +11,7 @@
 ~}}
 {{/if}}
 {{/each}}
-{{#each schema.properties.withRelationshipManyToMany}}
+{{#each schema.aggregateProperties.withRelationshipManyToMany}}
 {{
     push ../exportsArray
         (

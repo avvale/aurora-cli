@@ -86,7 +86,11 @@ export class TemplateGenerator
         directory: string,
     ): void
     {
-        const modulePath = path.join(TemplateGenerator.projectDirectory, relativeTargetBasePath, directory);
+        const modulePath = path.join(
+            TemplateGenerator.projectDirectory,
+            relativeTargetBasePath,
+            directory,
+        );
 
         if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
     }

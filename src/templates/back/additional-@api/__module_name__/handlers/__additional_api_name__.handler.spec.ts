@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 import { CacheModule } from '@nestjs/cache-manager';
 {{/if}}
 
@@ -18,7 +18,7 @@ describe('{{ currentAdditionalApi.getClassName }}Handler', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CacheModule.register(),
                 {{/if}}
             ],

@@ -17,48 +17,11 @@ export class YamlManager
     ): ModuleDefinitionSchema
     {
         const yamlPath = path.join(process.cwd(), 'cliter', boundedContextName.toKebabCase(), moduleName.toKebabCase() + cliterConfig.schemaDefinitionExtension);
-
-        // read yaml file
         const yamlObj = yaml.load(fs.readFileSync(yamlPath, 'utf8')) as any;
 
         YamlManager.checkModuleDefinitionSchema(yamlObj);
 
-        const properties = new Properties();
-
-        const schema: ModuleDefinitionSchema = {
-            boundedContextName: yamlObj.boundedContextName,
-            moduleName        : yamlObj.moduleName,
-            moduleNames       : yamlObj.moduleNames,
-            aggregateName     : yamlObj.aggregateName,
-            hasOAuth          : yamlObj.hasOAuth,
-            hasTenant         : yamlObj.hasTenant,
-            hasAuditing       : yamlObj.hasAuditing,
-            properties,
-            additionalApis    : Array.isArray(yamlObj.additionalApis) ? createAdditionalApis(yamlObj.additionalApis) : undefined,
-            excluded          : yamlObj.excluded,
-        };
-
-        // reference schema in properties
-        properties.schema = schema;
-
-        // add aggregate properties
-        addProperties({
-            properties,
-            aggregateProperties: yamlObj.aggregateProperties,
-            schema,
-        });
-
-        if (Array.isArray(yamlObj.aggregateI18nProperties))
-        {
-            // add aggregate i18n properties
-            addProperties({
-                properties,
-                aggregateProperties: yamlObj.aggregateI18nProperties,
-                schema,
-            });
-        }
-
-        return schema;
+        return yamlObj;
     }
 
     public static generateYamlConfigFile(
@@ -76,18 +39,16 @@ export class YamlManager
                 hasOAuth           : schema.hasOAuth,
                 hasTenant          : schema.hasTenant,
                 hasAuditing        : schema.hasAuditing,
-                aggregateProperties: schema.properties
-                    .toDto()
+                aggregateProperties: schema.aggregateProperties
                     .filter(item => !item.isI18n)
                     // omit id, is a internal id field when create property with prompt
                     .map(item => _.omit(item, ['id'])),
-                aggregateI18nProperties: schema.properties
-                    .toDto()
+                aggregateI18nProperties: schema.aggregateProperties
                     .filter(item => item.isI18n)
                     // omit id, is a internal id field when create property with prompt
                     // omit isI18n, is not necessary because it is inside the array aggregateI18nProperties
                     .map(item => _.omit(item, ['id', 'isI18n'])),
-                additionalApis: schema.additionalApis?.toDto().map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
+                additionalApis: schema.additionalApis?.map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
                 excluded      : schema.excluded,
             },
             {

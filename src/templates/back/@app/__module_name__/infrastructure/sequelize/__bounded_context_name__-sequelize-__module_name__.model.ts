@@ -5,22 +5,22 @@ import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/c
 {{/if}}
 import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-{{#each schema.properties.withImportRelationshipOneToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToMany}}
+{{#each schema.aggregateProperties.withImportRelationshipManyToMany}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}';
 {{/each}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
 
@@ -28,12 +28,12 @@ import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.bou
     modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}',
     freezeTableName: true,
     timestamps: false,
-    {{#if schema.properties.hasIndex}}
+    {{#if schema.aggregateProperties.hasIndex}}
     indexes: [
 {{{
     indexesManager (
         object
-            indexes=schema.properties.columnsWithIndex
+            indexes=schema.aggregateProperties.columnsWithIndex
             isI18n=false
     )
 }}}
@@ -152,7 +152,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }
 
     {{/if}}
-    {{#each schema.properties.modelColumns}}
+    {{#each schema.aggregateProperties.modelColumns}}
     {{#unless isI18n }}
     {{#if hasColumnDecorator }}
     {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
@@ -253,7 +253,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
 
     {{/unless}}
     {{/each}}
-    {{#if schema.properties.hasI18n}}
+    {{#if (hasI18nProperties schema.aggregateProperties) }}
     // i18n relation
     @HasOne(() => {{ schema.aggregateName }}I18nModel, { as: '{{ toCamelCase schema.moduleName }}I18n' })
     {{ toCamelCase schema.moduleName }}I18n: {{ schema.aggregateName }}I18nModel;

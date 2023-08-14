@@ -1,5 +1,6 @@
 import { Command } from '@oclif/core';
 import { AdditionalApis, Properties, Property } from '../utils';
+import { AdditionalApi } from '../utils/additional-api';
 
 export interface CommandState
 {
@@ -62,9 +63,9 @@ export interface ModuleDefinitionSchema
     hasOAuth: boolean;
     hasTenant: boolean;
     hasAuditing: boolean;
-    properties: Properties;
-    additionalApis?: AdditionalApis;
-    excluded?: string[];        // set files to avoid create
+    aggregateProperties: Property[];
+    additionalApis?: AdditionalApi[];
+    excluded?: string[];                // set files to avoid create
 }
 
 export interface NewBackCommandState extends CommandState

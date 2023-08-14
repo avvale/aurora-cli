@@ -9,6 +9,8 @@ export * from './object-tools';
 export * from './operations';
 export * from './prompter';
 export * from './properties';
+export * from './properties.functions';
+export * from './property.functions';
 export * from './property';
 export * from './template-generator';
 export * from './yaml-manager';

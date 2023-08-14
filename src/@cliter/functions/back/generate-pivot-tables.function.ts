@@ -2,11 +2,11 @@
 import * as path from 'node:path';
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, PropertyType, RelationshipType, TemplateElement } from '../../types';
-import { Property, TemplateGenerator } from '../../utils';
+import { Property, TemplateGenerator, getRelationshipManyToManyProperties } from '../../utils';
 
 export const generatePivotTables = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    for (const property of generateCommandState.schema.properties.withRelationshipManyToMany)
+    for (const property of getRelationshipManyToManyProperties(generateCommandState.schema.aggregateProperties))
     {
         // only create table if has in relationship.pivot.modulePath
         //if (property.relationship?.pivot?.modulePath === `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`)

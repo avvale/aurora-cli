@@ -26,7 +26,7 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
         {
             this.collectionSource.push(
                 {{ schema.aggregateName }}.register(
-                    {{#each schema.properties.aggregate}}
+                    {{#each (getAggregateProperties schema.aggregateProperties) }}
                     {{#unless isI18n}}
 {{#eq name 'createdAt'}}
                     new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
