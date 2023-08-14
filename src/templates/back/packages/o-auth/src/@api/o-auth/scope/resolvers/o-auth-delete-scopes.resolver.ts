@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthDeleteScopesHandler } from '../handlers/o-auth-delete-scopes.handler';
 import { OAuthScope } from '@api/graphql';
+import { OAuthDeleteScopesHandler } from '@api/o-auth/scope';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.scope.delete')

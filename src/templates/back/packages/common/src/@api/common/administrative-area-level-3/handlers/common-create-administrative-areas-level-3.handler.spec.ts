@@ -1,27 +1,17 @@
+import { CommonCreateAdministrativeAreasLevel3Handler } from '@api/common/administrative-area-level-3';
+import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
+import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { CommonCreateAdministrativeAreasLevel3Handler } from './common-create-administrative-areas-level-3.handler';
-import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.data';
 
 describe('CommonCreateAdministrativeAreasLevel3Handler', () =>
 {
     let handler: CommonCreateAdministrativeAreasLevel3Handler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommonCreateAdministrativeAreasLevel3Handler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
                 {
                     provide : ICommandBus,
                     useValue: {
@@ -33,8 +23,6 @@ describe('CommonCreateAdministrativeAreasLevel3Handler', () =>
             .compile();
 
         handler = module.get<CommonCreateAdministrativeAreasLevel3Handler>(CommonCreateAdministrativeAreasLevel3Handler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>

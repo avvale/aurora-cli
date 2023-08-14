@@ -6,8 +6,8 @@ export class ImportDriver
      * Create import in file
      *
      * @param sourceFile
-     * @param modules
      * @param path
+     * @param items
      * @return void
      */
     public static createImportItems(
@@ -19,6 +19,7 @@ export class ImportDriver
         const itemsToImport: string[] = ImportDriver.getUniqueImportItems(sourceFile, items);
         const importPaths: string[]   = ImportDriver.getImportPaths(sourceFile);
 
+        // there is nothing to import
         if (itemsToImport.length === 0) return;
 
         // if exist path add item to import

@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerFindJobRegistryByIdHandler, QueueManagerFindJobRegistryByIdResolver } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerFindJobRegistryByIdResolver } from './queue-manager-find-job-registry-by-id.resolver';
-import { QueueManagerFindJobRegistryByIdHandler } from '../handlers/queue-manager-find-job-registry-by-id.handler';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
 
 describe('QueueManagerFindJobRegistryByIdResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('QueueManagerFindJobRegistryByIdResolver', () =>
 
         test('should return an jobRegistry by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(jobsRegistry[0])));
-            expect(await resolver.main(jobsRegistry[0].id)).toBe(jobsRegistry[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
+            expect(await resolver.main(queueManagerMockJobRegistryData[0].id)).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

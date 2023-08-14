@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthUpsertApplicationResolver } from './o-auth-upsert-application.resolver';
-import { OAuthUpsertApplicationHandler } from '../handlers/o-auth-upsert-application.handler';
 import { OAuthUpdateApplicationByIdInput } from '@api/graphql';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
+import { OAuthUpsertApplicationHandler, OAuthUpsertApplicationResolver } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpsertApplicationResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('OAuthUpsertApplicationResolver', () =>
 
         test('should return an application upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await resolver.main(<OAuthUpdateApplicationByIdInput>applications[0])).toBe(applications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(await resolver.main(<OAuthUpdateApplicationByIdInput>oAuthMockApplicationData[0])).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

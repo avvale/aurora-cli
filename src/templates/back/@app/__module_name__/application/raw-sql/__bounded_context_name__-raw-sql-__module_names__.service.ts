@@ -1,8 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
-import { {{ schema.aggregateName }} } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'CQMetadata') path=config.auroraCorePackage)
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
+                        schema.aggregateName
+                )
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Service
 {

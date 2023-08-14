@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonPaginateLangsHandler, CommonPaginateLangsResolver } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonPaginateLangsResolver } from './common-paginate-langs.resolver';
-import { CommonPaginateLangsHandler } from '../handlers/common-paginate-langs.handler';
-
-// sources
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonPaginateLangsResolver', () =>
 {

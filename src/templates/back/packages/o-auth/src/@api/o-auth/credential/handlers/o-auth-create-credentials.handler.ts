@@ -1,22 +1,15 @@
-import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindClientQuery } from '@app/o-auth/client/application/find/find-client.query';
-import { CreateAccessTokenCommand } from '@app/o-auth/access-token/application/create/create-access-token.command';
-import { CreateRefreshTokenCommand } from '@app/o-auth/refresh-token/application/create/create-refresh-token.command';
-import { FindAccessTokenQuery } from '@app/o-auth/access-token/application/find/find-access-token.query';
-import { FindAccountQuery } from '@app/iam/account/application/find/find-account.query';
-import { FindUserByUsernamePasswordQuery } from '@app/iam/user/application/find/find-user-by-username-password.query';
-import { FindApplicationByAuthorizationHeaderQuery } from '@app/o-auth/application/application/find/find-application-by-authorization-header.query';
-import { FindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token/application/find/find-refresh-token-by-id.query';
-import { DeleteAccessTokenByIdCommand } from '@app/o-auth/access-token/application/delete/delete-access-token-by-id.command';
-import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';
-import { GetRolesQuery } from '@app/iam/role/application/get/get-roles.query';
-import { OAuthClientGrantType, OAuthCredentials, OAuthCreateCredentialsInput, IamAccountType, OAuthClient, IamAccount } from '@api/graphql';
-import { UpdateAccountByIdCommand } from '@app/iam/account/application/update/update-account-by-id.command';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { IamAccount, IamAccountType, OAuthClient, OAuthClientGrantType, OAuthCreateCredentialsInput, OAuthCredentials } from '@api/graphql';
+import { IamFindAccountByIdQuery, IamFindAccountQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
+import { IamGetRolesQuery } from '@app/iam/role/application/get/iam-get-roles.query';
+import { IamFindUserByUsernamePasswordQuery } from '@app/iam/user';
+import { OAuthCreateAccessTokenCommand, OAuthDeleteAccessTokenByIdCommand, OAuthFindAccessTokenQuery } from '@app/o-auth/access-token';
+import { OAuthCreateRefreshTokenCommand, OAuthFindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token';
+import { OAuthFindApplicationByAuthorizationHeaderQuery } from '@app/o-auth/application';
+import { OAuthFindClientQuery } from '@app/o-auth/client';
 import { OAuthCreateCredentialsDto, OAuthCredentialsDto } from '../dto';
 
 @Injectable()
@@ -46,7 +39,7 @@ export class OAuthCreateCredentialsHandler
         if (payload.grantType === OAuthClientGrantType.CLIENT_CREDENTIALS)
         {
             // get account with email
-            const account = await this.queryBus.ask(new FindAccountQuery({
+            const account = await this.queryBus.ask(new IamFindAccountQuery({
                 where: {
                     email   : payload.email,
                     type    : IamAccountType.SERVICE,
@@ -58,7 +51,7 @@ export class OAuthCreateCredentialsHandler
             if (!account) throw new UnauthorizedException();
 
             // get client
-            const client = await this.queryBus.ask(new FindClientQuery({
+            const client = await this.queryBus.ask(new OAuthFindClientQuery({
                 where: {
                     id       : account.clientId,
                     secret   : payload.clientSecret,
@@ -75,7 +68,7 @@ export class OAuthCreateCredentialsHandler
         if (payload.grantType === OAuthClientGrantType.PASSWORD)
         {
             // get user with username and password
-            const user = await this.queryBus.ask(new FindUserByUsernamePasswordQuery(
+            const user = await this.queryBus.ask(new IamFindUserByUsernamePasswordQuery(
                 payload.username,
                 payload.password,
             ));
@@ -85,7 +78,7 @@ export class OAuthCreateCredentialsHandler
 
             // get account to create credential and consolidate permissions
             const account = await this.consolidatePermissions(
-                await this.queryBus.ask(new FindAccountByIdQuery(
+                await this.queryBus.ask(new IamFindAccountByIdQuery(
                     user.accountId,
                     {
                         include: [
@@ -98,7 +91,7 @@ export class OAuthCreateCredentialsHandler
             );
 
             // get application and clients with header authorization basic authentication
-            const application = await this.queryBus.ask(new FindApplicationByAuthorizationHeaderQuery(authorization));
+            const application = await this.queryBus.ask(new OAuthFindApplicationByAuthorizationHeaderQuery(authorization));
 
             // if not exist application throw error
             if (!application) throw new UnauthorizedException();
@@ -121,7 +114,7 @@ export class OAuthCreateCredentialsHandler
             const refreshTokenSession = <Jwt>this.jwtService.decode(payload.refreshToken);
 
             // get refresh token aggregate
-            const refreshTokenAggregate = await this.queryBus.ask(new FindRefreshTokenByIdQuery(refreshTokenSession.jit, {
+            const refreshTokenAggregate = await this.queryBus.ask(new OAuthFindRefreshTokenByIdQuery(refreshTokenSession.jit, {
                 include: [
                     {
                         association: 'accessToken',
@@ -135,13 +128,13 @@ export class OAuthCreateCredentialsHandler
             }));
 
             // get account to create credential
-            const account = await this.queryBus.ask(new FindAccountByIdQuery(refreshTokenAggregate.accessToken.accountId));
+            const account = await this.queryBus.ask(new IamFindAccountByIdQuery(refreshTokenAggregate.accessToken.accountId));
 
             // check that refresh token isn't expired
             if (refreshTokenSession.exp < parseInt(Utils.now().format('X'))) throw new UnauthorizedException();
 
             // delete access token from database
-            await this.commandBus.dispatch(new DeleteAccessTokenByIdCommand(refreshTokenAggregate.accessTokenId));
+            await this.commandBus.dispatch(new OAuthDeleteAccessTokenByIdCommand(refreshTokenAggregate.accessTokenId));
 
             return await this.createCredential(refreshTokenAggregate.accessToken.client, account);
         }
@@ -154,7 +147,7 @@ export class OAuthCreateCredentialsHandler
     {
         // create a JWT access token
         const accessTokenId = Utils.uuid();
-        await this.commandBus.dispatch(new CreateAccessTokenCommand(
+        await this.commandBus.dispatch(new OAuthCreateAccessTokenCommand(
             {
                 id                : accessTokenId,
                 clientId          : client.id,
@@ -166,7 +159,7 @@ export class OAuthCreateCredentialsHandler
         ));
 
         // create a JWT refresh tToken
-        await this.commandBus.dispatch(new CreateRefreshTokenCommand(
+        await this.commandBus.dispatch(new OAuthCreateRefreshTokenCommand(
             {
                 id                 : Utils.uuid(),
                 accessTokenId,
@@ -175,7 +168,7 @@ export class OAuthCreateCredentialsHandler
         ));
 
         // find token created with refresh token associated
-        const accessToken = await this.queryBus.ask(new FindAccessTokenQuery(
+        const accessToken = await this.queryBus.ask(new OAuthFindAccessTokenQuery(
             {
                 where: {
                     id: accessTokenId,
@@ -200,7 +193,7 @@ export class OAuthCreateCredentialsHandler
         auditing?: AuditingMeta,
     ): Promise<IamAccount>
     {
-        const roles = await this.queryBus.ask(new GetRolesQuery({
+        const roles = await this.queryBus.ask(new IamGetRolesQuery({
             where: {
                 id: account.roles.map(role => role.id),
             },
@@ -220,7 +213,7 @@ export class OAuthCreateCredentialsHandler
 
         account.dPermissions = dPermissions;
 
-        await this.commandBus.dispatch(new UpdateAccountByIdCommand(
+        await this.commandBus.dispatch(new IamUpdateAccountByIdCommand(
             {
                 dPermissions: account.dPermissions,
                 id          : account.id,

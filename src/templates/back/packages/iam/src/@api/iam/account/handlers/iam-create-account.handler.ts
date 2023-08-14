@@ -3,20 +3,18 @@ import { AuditingMeta, ICommandBus, IQueryBus, Jwt, LiteralObject, Operator, Uti
 import { Sequelize } from 'sequelize-typescript';
 
 // @app
-import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';
-import { CreateAccountCommand } from '@app/iam/account/application/create/create-account.command';
+import { IamCreateAccountCommand, IamFindAccountByIdQuery } from '@app/iam/account';
 import { IamAccount, IamAccountType, IamCreateAccountInput } from '@api/graphql';
 import { IamAccountDto, IamCreateAccountDto } from '../dto';
 
 // ---- customizations ----
 import { JwtService } from '@nestjs/jwt';
-import { GetRolesQuery } from '@app/iam/role/application/get/get-roles.query';
-import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
-import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';
-import { CreateUserCommand } from '@app/iam/user/application/create/create-user.command';
+import { IamGetRolesQuery } from '@app/iam/role';
+import { IamGetAccountsQuery } from '@app/iam/account';
+import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
+import { OAuthFindAccessTokenByIdQuery } from '@app/o-auth/access-token';
+import { IamCreateUserCommand, IamGetUsersQuery } from '@app/iam/user';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
-import { GetAccountsQuery } from '@app/iam/account/application/get/get-accounts.query';
-import { GetUsersQuery } from '@app/iam/user/application/get/get-users.query';
 
 @Injectable()
 export class IamCreateAccountHandler
@@ -36,7 +34,7 @@ export class IamCreateAccountHandler
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto>
     {
-        const clients = await this.queryBus.ask(new GetAccountsQuery(
+        const clients = await this.queryBus.ask(new IamGetAccountsQuery(
             {
                 where: {
                     [Operator.or]: payload.code ?
@@ -75,7 +73,7 @@ export class IamCreateAccountHandler
 
         if (payload.type === IamAccountType.USER)
         {
-            const users = await this.queryBus.ask(new GetUsersQuery(
+            const users = await this.queryBus.ask(new IamGetUsersQuery(
                 {
                     where: {
                         username: payload.user.username,
@@ -94,10 +92,10 @@ export class IamCreateAccountHandler
         const jwt = <Jwt>this.jwtService.decode(headers.authorization.replace('Bearer ', ''));
 
         // get access token from database
-        const accessToken = await this.queryBus.ask(new FindAccessTokenByIdQuery(jwt.jit));
+        const accessToken = await this.queryBus.ask(new OAuthFindAccessTokenByIdQuery(jwt.jit));
 
         // get client to get applications related FindClientByIdQuery
-        const client = await this.queryBus.ask(new FindClientByIdQuery(
+        const client = await this.queryBus.ask(new OAuthFindClientByIdQuery(
             payload.type === IamAccountType.SERVICE ? payload.clientId : accessToken.clientId,
             {
                 include: [
@@ -109,7 +107,7 @@ export class IamCreateAccountHandler
         ));
 
         // get roles
-        const roles = await this.queryBus.ask(new GetRolesQuery({
+        const roles = await this.queryBus.ask(new IamGetRolesQuery({
             where: {
                 id: payload.roleIds,
             },
@@ -131,7 +129,7 @@ export class IamCreateAccountHandler
         {
             const operationId = Utils.uuid();
 
-            await this.commandBus.dispatch(new CreateAccountCommand(
+            await this.commandBus.dispatch(new IamCreateAccountCommand(
                 {
                     id               : payload.id,
                     type             : payload.type,
@@ -161,7 +159,7 @@ export class IamCreateAccountHandler
 
             if (payload.type === IamAccountType.USER)
             {
-                await this.commandBus.dispatch(new CreateUserCommand(
+                await this.commandBus.dispatch(new IamCreateUserCommand(
                     {
                         id           : Utils.uuid(),
                         accountId    : payload.id,
@@ -197,6 +195,12 @@ export class IamCreateAccountHandler
             throw error;
         }
 
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new IamFindAccountByIdQuery(
+            payload.id,
+            {},
+            {
+                timezone,
+            },
+        ));
     }
 }

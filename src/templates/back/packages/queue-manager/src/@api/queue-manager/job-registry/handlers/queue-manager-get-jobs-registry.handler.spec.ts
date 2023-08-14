@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerGetJobsRegistryHandler } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerGetJobsRegistryHandler } from './queue-manager-get-jobs-registry.handler';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
 
 describe('QueueManagerGetJobsRegistryHandler', () =>
 {
     let handler: QueueManagerGetJobsRegistryHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('QueueManagerGetJobsRegistryHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<QueueManagerGetJobsRegistryHandler>(QueueManagerGetJobsRegistryHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('QueueManagerGetJobsRegistryHandler should be defined', () =>
@@ -54,10 +42,17 @@ describe('QueueManagerGetJobsRegistryHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return a jobsRegistry', async () =>
+        test('should return a queueManagerMockJobRegistryData', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(jobsRegistry)));
-            expect(await handler.main()).toBe(jobsRegistry);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(queueManagerMockJobRegistryData);
         });
     });
 });

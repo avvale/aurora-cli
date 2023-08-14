@@ -1,10 +1,8 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerPaginateJobsHandler } from '../handlers/queue-manager-paginate-jobs.handler';
 import { Pagination } from '@api/graphql';
+import { QueueManagerPaginateJobsHandler } from '@api/queue-manager/job';
+import { Auth } from '@aurora/decorators';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.job.get')

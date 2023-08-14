@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateClientsResolver } from './o-auth-create-clients.resolver';
-import { OAuthCreateClientsHandler } from '../handlers/o-auth-create-clients.handler';
 import { OAuthCreateClientInput } from '@api/graphql';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { OAuthCreateClientsHandler, OAuthCreateClientsResolver } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateClientsResolver', () =>
 {
     let resolver: OAuthCreateClientsResolver;
-    let handler: OAuthCreateClientsHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('OAuthCreateClientsResolver', () =>
             .compile();
 
         resolver = module.get<OAuthCreateClientsResolver>(OAuthCreateClientsResolver);
-        handler = module.get<OAuthCreateClientsHandler>(OAuthCreateClientsHandler);
     });
 
     test('OAuthCreateClientsResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('OAuthCreateClientsResolver', () =>
 
         test('should return an clients created', async () =>
         {
-            expect(await resolver.main(<OAuthCreateClientInput[]>clients)).toBe(undefined);
+            expect(await resolver.main(<OAuthCreateClientInput[]>oAuthMockClientData)).toBe(undefined);
         });
     });
 });

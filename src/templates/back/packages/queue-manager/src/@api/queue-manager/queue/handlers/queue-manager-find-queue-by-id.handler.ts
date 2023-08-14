@@ -1,11 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindQueueByIdQuery } from '@app/queue-manager/queue/application/find/find-queue-by-id.query';
 import { QueueManagerQueue } from '@api/graphql';
-import { QueueManagerQueueDto } from '../dto';
+import { QueueManagerQueueDto } from '@api/queue-manager/queue';
 import { QueueRedisImplementationService } from '@api/queue-manager/shared/services';
+import { QueueManagerFindQueueByIdQuery } from '@app/queue-manager/queue';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerFindQueueByIdHandler
@@ -21,7 +19,7 @@ export class QueueManagerFindQueueByIdHandler
         timezone?: string,
     ): Promise<QueueManagerQueue | QueueManagerQueueDto>
     {
-        const queue = await this.queryBus.ask(new FindQueueByIdQuery(
+        const queue = await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
             id,
             constraint,
             {

@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerCreateJobRegistryResolver } from './queue-manager-create-job-registry.resolver';
-import { QueueManagerCreateJobRegistryHandler } from '../handlers/queue-manager-create-job-registry.handler';
 import { QueueManagerCreateJobRegistryInput } from '@api/graphql';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
+import { QueueManagerCreateJobRegistryHandler, QueueManagerCreateJobRegistryResolver } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerCreateJobRegistryResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('QueueManagerCreateJobRegistryResolver', () =>
 
         test('should return an jobRegistry created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(jobsRegistry[0])));
-            expect(await resolver.main(<QueueManagerCreateJobRegistryInput>jobsRegistry[0])).toBe(jobsRegistry[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
+            expect(await resolver.main(<QueueManagerCreateJobRegistryInput>queueManagerMockJobRegistryData[0])).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

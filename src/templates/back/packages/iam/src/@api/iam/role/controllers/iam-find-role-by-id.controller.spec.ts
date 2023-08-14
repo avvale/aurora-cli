@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindRoleByIdController, IamFindRoleByIdHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindRoleByIdController } from './iam-find-role-by-id.controller';
-import { IamFindRoleByIdHandler } from '../handlers/iam-find-role-by-id.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamFindRoleByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamFindRoleByIdController', () =>
 
         test('should return an role by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await controller.main(roles[0].id)).toBe(roles[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(await controller.main(iamMockRoleData[0].id)).toBe(iamMockRoleData[0]);
         });
     });
 });

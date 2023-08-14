@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteApplicationsController, OAuthDeleteApplicationsHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteApplicationsController } from './o-auth-delete-applications.controller';
-import { OAuthDeleteApplicationsHandler } from '../handlers/o-auth-delete-applications.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthDeleteApplicationsController', () =>
 {
@@ -43,10 +37,10 @@ describe('OAuthDeleteApplicationsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an applications deleted', async () =>
+        test('should return an oAuthMockApplicationData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications)));
-            expect(await controller.main()).toBe(applications);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData)));
+            expect(await controller.main()).toBe(oAuthMockApplicationData);
         });
     });
 });

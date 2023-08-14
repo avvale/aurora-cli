@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { OAuthPaginateRefreshTokensHandler } from '@api/o-auth/refresh-token';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthPaginateRefreshTokensHandler } from '../handlers/o-auth-paginate-refresh-tokens.handler';
+import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[o-auth] refresh-token')
 @Controller('o-auth/refresh-tokens/paginate')

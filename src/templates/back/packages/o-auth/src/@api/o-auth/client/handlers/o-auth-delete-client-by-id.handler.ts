@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
-import { DeleteClientByIdCommand } from '@app/o-auth/client/application/delete/delete-client-by-id.command';
 import { OAuthClient } from '@api/graphql';
-import { OAuthClientDto } from '../dto';
+import { OAuthClientDto } from '@api/o-auth/client';
+import { OAuthDeleteClientByIdCommand, OAuthFindClientByIdQuery } from '@app/o-auth/client';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthDeleteClientByIdHandler
@@ -22,9 +19,15 @@ export class OAuthDeleteClientByIdHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthClient | OAuthClientDto>
     {
-        const client = await this.queryBus.ask(new FindClientByIdQuery(id, constraint, { timezone }));
+        const client = await this.queryBus.ask(new OAuthFindClientByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteClientByIdCommand(
+        await this.commandBus.dispatch(new OAuthDeleteClientByIdCommand(
             id,
             constraint,
             {

@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindTenantHandler } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamFindTenantHandler } from './iam-find-tenant.handler';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamFindTenantHandler', () =>
 {
     let handler: IamFindTenantHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamFindTenantHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
-        handler    = module.get<IamFindTenantHandler>(IamFindTenantHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamFindTenantHandler>(IamFindTenantHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamFindTenantHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('IamFindTenantHandler', () =>
 
         test('should return a tenant', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await handler.main()).toBe(tenants[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockTenantData[0]);
         });
     });
 });

@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreatePermissionResolver } from './iam-create-permission.resolver';
-import { IamCreatePermissionHandler } from '../handlers/iam-create-permission.handler';
 import { IamCreatePermissionInput } from '@api/graphql';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { IamCreatePermissionHandler, IamCreatePermissionResolver } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreatePermissionResolver', () =>
 {
@@ -49,8 +45,8 @@ describe('IamCreatePermissionResolver', () =>
 
         test('should return an permission created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await resolver.main(<IamCreatePermissionInput>permissions[0])).toBe(permissions[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(await resolver.main(<IamCreatePermissionInput>iamMockPermissionData[0])).toBe(iamMockPermissionData[0]);
         });
     });
 });

@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindJobRegistryByIdQuery } from '@app/queue-manager/job-registry/application/find/find-job-registry-by-id.query';
-import { UpdateJobRegistryByIdCommand } from '@app/queue-manager/job-registry/application/update/update-job-registry-by-id.command';
 import { QueueManagerJobRegistry, QueueManagerUpdateJobRegistryByIdInput } from '@api/graphql';
-import { QueueManagerJobRegistryDto, QueueManagerUpdateJobRegistryByIdDto } from '../dto';
+import { QueueManagerJobRegistryDto, QueueManagerUpdateJobRegistryByIdDto } from '@api/queue-manager/job-registry';
+import { QueueManagerFindJobRegistryByIdQuery, QueueManagerUpdateJobRegistryByIdCommand } from '@app/queue-manager/job-registry';
+import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerUpdateJobRegistryByIdHandler
@@ -21,7 +18,7 @@ export class QueueManagerUpdateJobRegistryByIdHandler
         timezone?: string,
     ): Promise<QueueManagerJobRegistry | QueueManagerJobRegistryDto>
     {
-        const jobRegistry = await this.queryBus.ask(new FindJobRegistryByIdQuery(
+        const jobRegistry = await this.queryBus.ask(new QueueManagerFindJobRegistryByIdQuery(
             payload.id,
             constraint,
             {
@@ -31,7 +28,7 @@ export class QueueManagerUpdateJobRegistryByIdHandler
 
         const dataToUpdate = Utils.diff(payload, jobRegistry);
 
-        await this.commandBus.dispatch(new UpdateJobRegistryByIdCommand(
+        await this.commandBus.dispatch(new QueueManagerUpdateJobRegistryByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -42,7 +39,7 @@ export class QueueManagerUpdateJobRegistryByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindJobRegistryByIdQuery(
+        return await this.queryBus.ask(new QueueManagerFindJobRegistryByIdQuery(
             payload.id,
             constraint,
             {

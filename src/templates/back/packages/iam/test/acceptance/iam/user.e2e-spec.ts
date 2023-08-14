@@ -1,23 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { IamModule } from '@api/iam/iam.module';
+import { IamIUserRepository, iamMockUserData, IamMockUserSeeder } from '@app/iam/user';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IUserRepository } from '@app/iam/user/domain/user.repository';
-import { MockUserSeeder } from '@app/iam/user/infrastructure/mock/mock-user.seeder';
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { IamModule } from '@api/iam/iam.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
-
-// has OAuth
-import { OAuthModule } from '@api/o-auth/o-auth.module';
-import { IAccountRepository } from '@app/iam/account/domain/account.repository';
-import { MockAccountSeeder } from '@app/iam/account/infrastructure/mock/mock-account.seeder';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -25,10 +18,8 @@ const importForeignModules = [];
 describe('user', () =>
 {
     let app: INestApplication;
-    let userRepository: IUserRepository;
-    let userSeeder: MockUserSeeder;
-    let accountRepository: IAccountRepository;
-    let accountSeeder: MockAccountSeeder;
+    let userRepository: IamIUserRepository;
+    let userSeeder: IamMockUserSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -42,7 +33,6 @@ describe('user', () =>
             imports: [
                 ...importForeignModules,
                 IamModule,
-                OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -66,23 +56,19 @@ describe('user', () =>
                 }),
             ],
             providers: [
-                MockAccountSeeder,
-                MockUserSeeder,
+                IamMockUserSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = users;
+        mockData = iamMockUserData;
         app = module.createNestApplication();
-        accountRepository = module.get<IAccountRepository>(IAccountRepository);
-        accountSeeder = module.get<MockAccountSeeder>(MockAccountSeeder);
-        userRepository = module.get<IUserRepository>(IUserRepository);
-        userSeeder = module.get<MockUserSeeder>(MockUserSeeder);
+        userRepository = module.get<IamIUserRepository>(IamIUserRepository);
+        userSeeder = module.get<IamMockUserSeeder>(IamMockUserSeeder);
 
         // seed mock data in memory database
-        await accountRepository.insert(accountSeeder.collectionSource);
         await userRepository.insert(userSeeder.collectionSource);
 
         await app.init();
@@ -480,7 +466,6 @@ describe('user', () =>
             .send({
                 ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                username: 'john.***@gmail.com',
             })
             .expect(201);
     });
@@ -546,7 +531,6 @@ describe('user', () =>
             .send({
                 ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                username: 'john.***@gmail.com',
             })
             .expect(200)
             .then(res =>
@@ -605,8 +589,8 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -715,7 +699,6 @@ describe('user', () =>
                     payload: {
                         ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        username: 'john.***@gmail.com',
                     },
                 },
             })
@@ -768,8 +751,8 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -853,8 +836,8 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -934,8 +917,8 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -970,7 +953,6 @@ describe('user', () =>
                     payload: {
                         ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        username: 'john.***@gmail.com',
                     },
                 },
             })
@@ -1012,7 +994,6 @@ describe('user', () =>
                     payload: {
                         ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        username: 'john.***@gmail.com',
                     },
                     query: {
                         where: {
@@ -1063,8 +1044,8 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 

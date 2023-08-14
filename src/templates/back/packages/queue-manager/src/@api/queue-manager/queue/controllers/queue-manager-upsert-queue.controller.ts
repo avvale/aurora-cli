@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto } from '../dto';
+import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto, QueueManagerUpsertQueueHandler } from '@api/queue-manager/queue';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerUpsertQueueHandler } from '../handlers/queue-manager-upsert-queue.handler';
+import { Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[queue-manager] queue')
 @Controller('queue-manager/queue/upsert')

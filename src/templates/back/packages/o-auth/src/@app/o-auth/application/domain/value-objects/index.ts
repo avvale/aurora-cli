@@ -1,12 +1,12 @@
-export { ApplicationId } from './application-id';
-export { ApplicationCode } from './application-code';
-export { ApplicationName } from './application-name';
-export { ApplicationSecret } from './application-secret';
-export { ApplicationIsMaster } from './application-is-master';
-export { ApplicationClientIds } from './application-client-ids';
-export { ApplicationCreatedAt } from './application-created-at';
-export { ApplicationUpdatedAt } from './application-updated-at';
-export { ApplicationDeletedAt } from './application-deleted-at';
+export { OAuthApplicationId } from './o-auth-application-id';
+export { OAuthApplicationCode } from './o-auth-application-code';
+export { OAuthApplicationName } from './o-auth-application-name';
+export { OAuthApplicationSecret } from './o-auth-application-secret';
+export { OAuthApplicationIsMaster } from './o-auth-application-is-master';
+export { OAuthApplicationClientIds } from './o-auth-application-client-ids';
+export { OAuthApplicationCreatedAt } from './o-auth-application-created-at';
+export { OAuthApplicationUpdatedAt } from './o-auth-application-updated-at';
+export { OAuthApplicationDeletedAt } from './o-auth-application-deleted-at';
 
 // ---- customizations ----
-export { ApplicationAuthorizationHeader } from './application-authorization-header';
+export { OAuthApplicationAuthorizationHeader } from './o-auth-application-authorization-header';

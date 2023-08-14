@@ -1,89 +1,128 @@
-// commands
-import { CreateTenantCommandHandler } from './application/create/create-tenant.command-handler';
-import { CreateTenantsCommandHandler } from './application/create/create-tenants.command-handler';
-import { UpdateTenantByIdCommandHandler } from './application/update/update-tenant-by-id.command-handler';
-import { UpdateTenantsCommandHandler } from './application/update/update-tenants.command-handler';
-import { UpsertTenantCommandHandler } from './application/upsert/upsert-tenant.command-handler';
-import { DeleteTenantByIdCommandHandler } from './application/delete/delete-tenant-by-id.command-handler';
-import { DeleteTenantsCommandHandler } from './application/delete/delete-tenants.command-handler';
+// export commands
+export { IamCreateTenantCommand } from './application/create/iam-create-tenant.command';
+export { IamCreateTenantsCommand } from './application/create/iam-create-tenants.command';
+export { IamUpdateTenantByIdCommand } from './application/update/iam-update-tenant-by-id.command';
+export { IamUpdateTenantsCommand } from './application/update/iam-update-tenants.command';
+export { IamUpsertTenantCommand } from './application/upsert/iam-upsert-tenant.command';
+export { IamDeleteTenantByIdCommand } from './application/delete/iam-delete-tenant-by-id.command';
+export { IamDeleteTenantsCommand } from './application/delete/iam-delete-tenants.command';
 
-// queries
-import { PaginateTenantsQueryHandler } from './application/paginate/paginate-tenants.query-handler';
-import { GetTenantsQueryHandler } from './application/get/get-tenants.query-handler';
-import { FindTenantQueryHandler } from './application/find/find-tenant.query-handler';
-import { FindTenantByIdQueryHandler } from './application/find/find-tenant-by-id.query-handler';
-import { RawSQLTenantsQueryHandler } from './application/raw-sql/raw-sql-tenants.query-handler';
+// export queries
+export { IamPaginateTenantsQuery } from './application/paginate/iam-paginate-tenants.query';
+export { IamGetTenantsQuery } from './application/get/iam-get-tenants.query';
+export { IamFindTenantQuery } from './application/find/iam-find-tenant.query';
+export { IamFindTenantByIdQuery } from './application/find/iam-find-tenant-by-id.query';
+export { IamRawSQLTenantsQuery } from './application/raw-sql/iam-raw-sql-tenants.query';
 
-// events
-import { CreatedTenantEventHandler } from './application/events/created-tenant.event-handler';
-import { CreatedTenantsEventHandler } from './application/events/created-tenants.event-handler';
-import { UpdatedTenantEventHandler } from './application/events/updated-tenant.event-handler';
-import { UpdatedTenantsEventHandler } from './application/events/updated-tenants.event-handler';
-import { DeletedTenantEventHandler } from './application/events/deleted-tenant.event-handler';
-import { DeletedTenantsEventHandler } from './application/events/deleted-tenants.event-handler';
+// export mocks
+export { iamMockTenantData } from './infrastructure/mock/iam-mock-tenant.data';
+export { IamMockTenantSeeder } from './infrastructure/mock/iam-mock-tenant.seeder';
+export { IamMockTenantRepository } from './infrastructure/mock/iam-mock-tenant.repository';
 
-// services
-import { CreateTenantService } from './application/create/create-tenant.service';
-import { CreateTenantsService } from './application/create/create-tenants.service';
-import { PaginateTenantsService } from './application/paginate/paginate-tenants.service';
-import { GetTenantsService } from './application/get/get-tenants.service';
-import { FindTenantService } from './application/find/find-tenant.service';
-import { FindTenantByIdService } from './application/find/find-tenant-by-id.service';
-import { RawSQLTenantsService } from './application/raw-sql/raw-sql-tenants.service';
-import { UpdateTenantByIdService } from './application/update/update-tenant-by-id.service';
-import { UpdateTenantsService } from './application/update/update-tenants.service';
-import { UpsertTenantService } from './application/upsert/upsert-tenant.service';
-import { DeleteTenantByIdService } from './application/delete/delete-tenant-by-id.service';
-import { DeleteTenantsService } from './application/delete/delete-tenants.service';
+// export events
+export { IamAddTenantsContextEvent } from './application/events/iam-add-tenants-context.event';
+export { IamCreatedTenantsEvent } from './application/events/iam-created-tenants.event';
+export { IamCreatedTenantEvent } from './application/events/iam-created-tenant.event';
+export { IamDeletedTenantsEvent } from './application/events/iam-deleted-tenants.event';
+export { IamDeletedTenantEvent } from './application/events/iam-deleted-tenant.event';
+export { IamUpdatedTenantsEvent } from './application/events/iam-updated-tenants.event';
+export { IamUpdatedTenantEvent } from './application/events/iam-updated-tenant.event';
 
-// models
-export { IamTenantModel } from './infrastructure/sequelize/sequelize-tenant.model';
-export { IamTenantsAccountsModel } from './infrastructure/sequelize/sequelize-tenants-accounts.model';
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
 
-// repository
-export { ITenantRepository } from './domain/tenant.repository';
-export { SequelizeTenantRepository } from './infrastructure/sequelize/sequelize-tenant.repository';
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
+// domain
+export { IamTenant } from './domain/iam-tenant.aggregate';
+export { IamTenantMapper } from './domain/iam-tenant.mapper';
+export { IamITenantRepository } from './domain/iam-tenant.repository';
+export { IamTenantResponse } from './domain/iam-tenant.response';
+
+// infrastructure
+export { IamTenantModel } from './infrastructure/sequelize/iam-sequelize-tenant.model';
+export { IamTenantsAccountsModel } from './infrastructure/sequelize/iam-sequelize-tenants-accounts.model';
+export { IamSequelizeTenantRepository } from './infrastructure/sequelize/iam-sequelize-tenant.repository';
 
 // sagas
-export { TenantSagas } from './application/sagas/tenant.sagas';
+export { IamTenantSagas } from './application/sagas/iam-tenant.sagas';
+
+// command handlers
+import { IamCreateTenantCommandHandler } from './application/create/iam-create-tenant.command-handler';
+import { IamCreateTenantsCommandHandler } from './application/create/iam-create-tenants.command-handler';
+import { IamUpdateTenantByIdCommandHandler } from './application/update/iam-update-tenant-by-id.command-handler';
+import { IamUpdateTenantsCommandHandler } from './application/update/iam-update-tenants.command-handler';
+import { IamUpsertTenantCommandHandler } from './application/upsert/iam-upsert-tenant.command-handler';
+import { IamDeleteTenantByIdCommandHandler } from './application/delete/iam-delete-tenant-by-id.command-handler';
+import { IamDeleteTenantsCommandHandler } from './application/delete/iam-delete-tenants.command-handler';
+
+// query handlers
+import { IamPaginateTenantsQueryHandler } from './application/paginate/iam-paginate-tenants.query-handler';
+import { IamGetTenantsQueryHandler } from './application/get/iam-get-tenants.query-handler';
+import { IamFindTenantQueryHandler } from './application/find/iam-find-tenant.query-handler';
+import { IamFindTenantByIdQueryHandler } from './application/find/iam-find-tenant-by-id.query-handler';
+import { IamRawSQLTenantsQueryHandler } from './application/raw-sql/iam-raw-sql-tenants.query-handler';
+
+// event handlers
+import { IamCreatedTenantEventHandler } from './application/events/iam-created-tenant.event-handler';
+import { IamCreatedTenantsEventHandler } from './application/events/iam-created-tenants.event-handler';
+import { IamUpdatedTenantEventHandler } from './application/events/iam-updated-tenant.event-handler';
+import { IamUpdatedTenantsEventHandler } from './application/events/iam-updated-tenants.event-handler';
+import { IamDeletedTenantEventHandler } from './application/events/iam-deleted-tenant.event-handler';
+import { IamDeletedTenantsEventHandler } from './application/events/iam-deleted-tenants.event-handler';
+
+// services
+import { IamCreateTenantService } from './application/create/iam-create-tenant.service';
+import { IamCreateTenantsService } from './application/create/iam-create-tenants.service';
+import { IamPaginateTenantsService } from './application/paginate/iam-paginate-tenants.service';
+import { IamGetTenantsService } from './application/get/iam-get-tenants.service';
+import { IamFindTenantService } from './application/find/iam-find-tenant.service';
+import { IamFindTenantByIdService } from './application/find/iam-find-tenant-by-id.service';
+import { IamRawSQLTenantsService } from './application/raw-sql/iam-raw-sql-tenants.service';
+import { IamUpdateTenantByIdService } from './application/update/iam-update-tenant-by-id.service';
+import { IamUpdateTenantsService } from './application/update/iam-update-tenants.service';
+import { IamUpsertTenantService } from './application/upsert/iam-upsert-tenant.service';
+import { IamDeleteTenantByIdService } from './application/delete/iam-delete-tenant-by-id.service';
+import { IamDeleteTenantsService } from './application/delete/iam-delete-tenants.service';
 
 export const IamTenantHandlers = [
     // commands
-    CreateTenantCommandHandler,
-    CreateTenantsCommandHandler,
-    UpdateTenantByIdCommandHandler,
-    UpdateTenantsCommandHandler,
-    UpsertTenantCommandHandler,
-    DeleteTenantByIdCommandHandler,
-    DeleteTenantsCommandHandler,
+    IamCreateTenantCommandHandler,
+    IamCreateTenantsCommandHandler,
+    IamUpdateTenantByIdCommandHandler,
+    IamUpdateTenantsCommandHandler,
+    IamUpsertTenantCommandHandler,
+    IamDeleteTenantByIdCommandHandler,
+    IamDeleteTenantsCommandHandler,
 
     // queries
-    PaginateTenantsQueryHandler,
-    GetTenantsQueryHandler,
-    FindTenantQueryHandler,
-    FindTenantByIdQueryHandler,
-    RawSQLTenantsQueryHandler,
+    IamPaginateTenantsQueryHandler,
+    IamGetTenantsQueryHandler,
+    IamFindTenantQueryHandler,
+    IamFindTenantByIdQueryHandler,
+    IamRawSQLTenantsQueryHandler,
 
     // events
-    CreatedTenantEventHandler,
-    CreatedTenantsEventHandler,
-    UpdatedTenantEventHandler,
-    UpdatedTenantsEventHandler,
-    DeletedTenantEventHandler,
-    DeletedTenantsEventHandler,
+    IamCreatedTenantEventHandler,
+    IamCreatedTenantsEventHandler,
+    IamUpdatedTenantEventHandler,
+    IamUpdatedTenantsEventHandler,
+    IamDeletedTenantEventHandler,
+    IamDeletedTenantsEventHandler,
 ];
 
 export const IamTenantServices = [
-    CreateTenantService,
-    CreateTenantsService,
-    PaginateTenantsService,
-    GetTenantsService,
-    FindTenantService,
-    FindTenantByIdService,
-    RawSQLTenantsService,
-    UpdateTenantByIdService,
-    UpdateTenantsService,
-    UpsertTenantService,
-    DeleteTenantByIdService,
-    DeleteTenantsService,
+    IamCreateTenantService,
+    IamCreateTenantsService,
+    IamPaginateTenantsService,
+    IamGetTenantsService,
+    IamFindTenantService,
+    IamFindTenantByIdService,
+    IamRawSQLTenantsService,
+    IamUpdateTenantByIdService,
+    IamUpdateTenantsService,
+    IamUpsertTenantService,
+    IamDeleteTenantByIdService,
+    IamDeleteTenantsService,
 ];

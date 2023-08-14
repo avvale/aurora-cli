@@ -18,7 +18,9 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
             verbose           : generateCommandState.flags.verbose,
             excludeFiles      : generateCommandState.schema.excluded,
             lockFiles         : generateCommandState.lockFiles,
-            templateData      : { ...generateCommandState },
+            templateData      : {
+                ...generateCommandState,
+            },
         },
     );
 
@@ -33,5 +35,5 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
         generateCommandState.schema.properties.hasI18n,
     );
 
-    codeWriter.generateTestingForeignReferences(generateCommandState.schema.properties);
+    codeWriter.generateBackTestingForeignReferences(generateCommandState.schema.properties);
 };

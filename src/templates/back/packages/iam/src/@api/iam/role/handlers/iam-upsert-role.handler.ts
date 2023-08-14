@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindRoleByIdQuery } from '@app/iam/role/application/find/find-role-by-id.query';
-import { UpsertRoleCommand } from '@app/iam/role/application/upsert/upsert-role.command';
 import { IamRole, IamUpdateRoleByIdInput } from '@api/graphql';
-import { IamRoleDto, IamUpdateRoleByIdDto } from '../dto';
+import { IamRoleDto, IamUpdateRoleByIdDto } from '@api/iam/role';
+import { IamFindRoleByIdQuery, IamUpsertRoleCommand } from '@app/iam/role';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpsertRoleHandler
@@ -21,7 +18,7 @@ export class IamUpsertRoleHandler
         auditing?: AuditingMeta,
     ): Promise<IamRole | IamRoleDto>
     {
-        await this.commandBus.dispatch(new UpsertRoleCommand(
+        await this.commandBus.dispatch(new IamUpsertRoleCommand(
             payload,
             {
                 timezone,
@@ -31,10 +28,12 @@ export class IamUpsertRoleHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindRoleByIdQuery(
+        return await this.queryBus.ask(new IamFindRoleByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

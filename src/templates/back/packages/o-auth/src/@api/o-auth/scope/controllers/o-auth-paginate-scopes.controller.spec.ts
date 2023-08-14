@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthPaginateScopesController, OAuthPaginateScopesHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthPaginateScopesController } from './o-auth-paginate-scopes.controller';
-import { OAuthPaginateScopesHandler } from '../handlers/o-auth-paginate-scopes.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthPaginateScopesController', () =>
 {
@@ -43,17 +37,17 @@ describe('OAuthPaginateScopesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a scopes', async () =>
+        test('should return a oAuthMockScopeData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : scopes,
+                rows : oAuthMockScopeData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : scopes,
+                rows : oAuthMockScopeData,
             });
         });
     });

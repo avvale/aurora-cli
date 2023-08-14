@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindRefreshTokenQuery } from '@app/o-auth/refresh-token/application/find/find-refresh-token.query';
 import { OAuthRefreshToken } from '@api/graphql';
-import { OAuthRefreshTokenDto } from '../dto';
+import { OAuthRefreshTokenDto } from '@api/o-auth/refresh-token';
+import { OAuthFindRefreshTokenQuery } from '@app/o-auth/refresh-token';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindRefreshTokenHandler
@@ -19,6 +17,12 @@ export class OAuthFindRefreshTokenHandler
         timezone?: string,
     ): Promise<OAuthRefreshToken | OAuthRefreshTokenDto>
     {
-        return await this.queryBus.ask(new FindRefreshTokenQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new OAuthFindRefreshTokenQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

@@ -1,9 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { PaginateRolesQuery } from '@app/iam/role/application/paginate/paginate-roles.query';
 import { Pagination } from '@api/graphql';
+import { IamPaginateRolesQuery } from '@app/iam/role';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamPaginateRolesHandler
@@ -18,10 +16,12 @@ export class IamPaginateRolesHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateRolesQuery(
+        return await this.queryBus.ask(new IamPaginateRolesQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

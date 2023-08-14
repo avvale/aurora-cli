@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateClientsCommand } from '@app/o-auth/client/application/create/create-clients.command';
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { OAuthCreateClientsCommand } from '@app/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
 
 @Injectable()
 export class OAuthClientSeeder
@@ -15,8 +15,8 @@ export class OAuthClientSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateClientsCommand(
-            clients,
+        await this.commandBus.dispatch(new OAuthCreateClientsCommand(
+            oAuthMockClientData,
             {
                 timezone: process.env.TZ ,
             },

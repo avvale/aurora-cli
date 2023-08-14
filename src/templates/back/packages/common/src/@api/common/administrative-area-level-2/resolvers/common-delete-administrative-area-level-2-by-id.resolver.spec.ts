@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonDeleteAdministrativeAreaLevel2ByIdHandler, CommonDeleteAdministrativeAreaLevel2ByIdResolver } from '@api/common/administrative-area-level-2';
+import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteAdministrativeAreaLevel2ByIdResolver } from './common-delete-administrative-area-level-2-by-id.resolver';
-import { CommonDeleteAdministrativeAreaLevel2ByIdHandler } from '../handlers/common-delete-administrative-area-level-2-by-id.handler';
-
-// sources
-import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.data';
 
 describe('CommonDeleteAdministrativeAreaLevel2ByIdResolver', () =>
 {

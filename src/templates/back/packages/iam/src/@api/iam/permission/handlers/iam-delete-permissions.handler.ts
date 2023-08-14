@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetPermissionsQuery } from '@app/iam/permission/application/get/get-permissions.query';
-import { DeletePermissionsCommand } from '@app/iam/permission/application/delete/delete-permissions.command';
 import { IamPermission } from '@api/graphql';
-import { IamPermissionDto } from '../dto';
+import { IamPermissionDto } from '@api/iam/permission';
+import { IamDeletePermissionsCommand, IamGetPermissionsQuery } from '@app/iam/permission';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamDeletePermissionsHandler
@@ -22,9 +19,15 @@ export class IamDeletePermissionsHandler
         auditing?: AuditingMeta,
     ): Promise<IamPermission[] | IamPermissionDto[]>
     {
-        const permissions = await this.queryBus.ask(new GetPermissionsQuery(queryStatement, constraint, { timezone }));
+        const permissions = await this.queryBus.ask(new IamGetPermissionsQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeletePermissionsCommand(
+        await this.commandBus.dispatch(new IamDeletePermissionsCommand(
             queryStatement,
             constraint,
             {

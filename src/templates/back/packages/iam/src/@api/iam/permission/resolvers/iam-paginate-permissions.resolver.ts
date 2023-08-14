@@ -1,10 +1,8 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamPaginatePermissionsHandler } from '../handlers/iam-paginate-permissions.handler';
 import { Pagination } from '@api/graphql';
+import { IamPaginatePermissionsHandler } from '@api/iam/permission';
+import { Auth } from '@aurora/decorators';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.permission.get')

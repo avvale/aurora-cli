@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { OAuthIClientRepository, oAuthMockClientData, OAuthMockClientSeeder } from '@app/o-auth/client';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IClientRepository } from '@app/o-auth/client/domain/client.repository';
-import { MockClientSeeder } from '@app/o-auth/client/infrastructure/mock/mock-client.seeder';
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { OAuthModule } from '@api/o-auth/o-auth.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,8 +18,8 @@ const importForeignModules = [];
 describe('client', () =>
 {
     let app: INestApplication;
-    let clientRepository: IClientRepository;
-    let clientSeeder: MockClientSeeder;
+    let clientRepository: OAuthIClientRepository;
+    let clientSeeder: OAuthMockClientSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -58,17 +56,17 @@ describe('client', () =>
                 }),
             ],
             providers: [
-                MockClientSeeder,
+                OAuthMockClientSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = clients;
+        mockData = oAuthMockClientData;
         app = module.createNestApplication();
-        clientRepository = module.get<IClientRepository>(IClientRepository);
-        clientSeeder = module.get<MockClientSeeder>(MockClientSeeder);
+        clientRepository = module.get<OAuthIClientRepository>(OAuthIClientRepository);
+        clientSeeder = module.get<OAuthMockClientSeeder>(OAuthMockClientSeeder);
 
         // seed mock data in memory database
         await clientRepository.insert(clientSeeder.collectionSource);
@@ -643,7 +641,7 @@ describe('client', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
+                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -758,7 +756,7 @@ describe('client', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -969,8 +967,8 @@ describe('client', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
-                        id: '11390578-6994-491b-952a-59ab477a644c',
+                        ...mockData[0],
+                        id: '2b081e62-95c9-55b4-a48e-0744722feb03',
                     },
                 },
             })
@@ -1012,7 +1010,7 @@ describe('client', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -1053,7 +1051,7 @@ describe('client', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['applications', 'createdAt','updatedAt','deletedAt']),
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                     query: {

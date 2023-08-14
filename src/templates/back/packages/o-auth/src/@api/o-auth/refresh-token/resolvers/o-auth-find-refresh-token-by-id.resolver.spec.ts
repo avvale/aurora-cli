@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthFindRefreshTokenByIdHandler, OAuthFindRefreshTokenByIdResolver } from '@api/o-auth/refresh-token';
+import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindRefreshTokenByIdResolver } from './o-auth-find-refresh-token-by-id.resolver';
-import { OAuthFindRefreshTokenByIdHandler } from '../handlers/o-auth-find-refresh-token-by-id.handler';
-
-// sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 
 describe('OAuthFindRefreshTokenByIdResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('OAuthFindRefreshTokenByIdResolver', () =>
 
         test('should return an refreshToken by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
-            expect(await resolver.main(refreshTokens[0].id)).toBe(refreshTokens[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData[0])));
+            expect(await resolver.main(oAuthMockRefreshTokenData[0].id)).toBe(oAuthMockRefreshTokenData[0]);
         });
     });
 });

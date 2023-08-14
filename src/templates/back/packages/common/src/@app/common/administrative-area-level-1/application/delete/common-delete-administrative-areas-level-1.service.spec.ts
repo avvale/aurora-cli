@@ -11,7 +11,6 @@ describe('CommonDeleteAdministrativeAreasLevel1Service', () =>
 {
     let service: CommonDeleteAdministrativeAreasLevel1Service;
     let repository: CommonIAdministrativeAreaLevel1Repository;
-    let mockRepository: CommonMockAdministrativeAreaLevel1Repository;
 
     beforeAll(async () =>
     {
@@ -36,7 +35,6 @@ describe('CommonDeleteAdministrativeAreasLevel1Service', () =>
 
         service = module.get(CommonDeleteAdministrativeAreasLevel1Service);
         repository = module.get(CommonIAdministrativeAreaLevel1Repository);
-        mockRepository = module.get(CommonMockAdministrativeAreaLevel1Repository);
     });
 
     describe('main', () =>
@@ -49,7 +47,13 @@ describe('CommonDeleteAdministrativeAreasLevel1Service', () =>
         test('should delete administrativeAreaLevel1 and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(await service.main()).toBe(undefined);
+            expect(
+                await service.main(
+                    {},
+                    {},
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

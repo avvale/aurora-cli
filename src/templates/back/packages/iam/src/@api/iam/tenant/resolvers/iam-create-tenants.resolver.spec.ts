@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateTenantsResolver } from './iam-create-tenants.resolver';
-import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
 import { IamCreateTenantInput } from '@api/graphql';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
+import { IamCreateTenantsHandler, IamCreateTenantsResolver } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateTenantsResolver', () =>
 {
     let resolver: IamCreateTenantsResolver;
-    let handler: IamCreateTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('IamCreateTenantsResolver', () =>
             .compile();
 
         resolver = module.get<IamCreateTenantsResolver>(IamCreateTenantsResolver);
-        handler = module.get<IamCreateTenantsHandler>(IamCreateTenantsHandler);
     });
 
     test('IamCreateTenantsResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('IamCreateTenantsResolver', () =>
 
         test('should return an tenants created', async () =>
         {
-            expect(await resolver.main(<IamCreateTenantInput[]>tenants)).toBe(undefined);
+            expect(await resolver.main(<IamCreateTenantInput[]>iamMockTenantData)).toBe(undefined);
         });
     });
 });

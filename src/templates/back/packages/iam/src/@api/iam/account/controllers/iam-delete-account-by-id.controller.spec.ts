@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamDeleteAccountByIdController, IamDeleteAccountByIdHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteAccountByIdController } from './iam-delete-account-by-id.controller';
-import { IamDeleteAccountByIdHandler } from '../handlers/iam-delete-account-by-id.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamDeleteAccountByIdController', () =>
 {
@@ -45,8 +40,8 @@ describe('IamDeleteAccountByIdController', () =>
 
         test('should return an account deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await controller.main(accounts[0].id)).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(await controller.main(iamMockAccountData[0].id)).toBe(iamMockAccountData[0]);
         });
     });
 });

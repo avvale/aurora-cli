@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { QueueManagerCreateJobRegistryInput, QueueManagerJobRegistry } from '@api/graphql';
+import { QueueManagerCreateJobRegistryHandler } from '@api/queue-manager/job-registry';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerCreateJobRegistryHandler } from '../handlers/queue-manager-create-job-registry.handler';
-import { QueueManagerJobRegistry, QueueManagerCreateJobRegistryInput } from '@api/graphql';
+import { Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.jobRegistry.create')

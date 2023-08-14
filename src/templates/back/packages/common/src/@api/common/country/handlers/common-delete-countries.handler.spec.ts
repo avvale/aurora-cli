@@ -2,7 +2,7 @@
 import { CommonDeleteCountriesHandler } from '@api/common/country';
 import { commonMockCountryData } from '@app/common/country';
 import { commonMockLangData } from '@app/common/lang';
-import { CoreAddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetSearchKeyLangService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -11,7 +11,6 @@ describe('CommonDeleteCountriesHandler', () =>
 {
     let handler: CommonDeleteCountriesHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -46,13 +45,52 @@ describe('CommonDeleteCountriesHandler', () =>
                         dispatch: () => { /**/ },
                     },
                 },
+                {
+                    provide : CoreGetContentLanguageObjectService,
+                    useValue: {
+                        get: () => ({
+                            id        : '7c4754e7-3363-48ca-af99-632522226b51',
+                            name      : 'English',
+                            image     : 'us',
+                            iso6392   : 'en',
+                            iso6393   : 'eng',
+                            ietf      : 'en-US',
+                            customCode: null,
+                            dir       : 'RTL',
+                            sort      : 0,
+                            isActive  : true,
+                        }),
+                    },
+                },
+                {
+                    provide : CoreGetSearchKeyLangService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
+                {
+                    provide : CoreGetFallbackLangService,
+                    useValue: {
+                        get: () => ({
+                            id        : '7c4754e7-3363-48ca-af99-632522226b51',
+                            name      : 'English',
+                            image     : 'us',
+                            iso6392   : 'en',
+                            iso6393   : 'eng',
+                            ietf      : 'en-US',
+                            customCode: null,
+                            dir       : 'RTL',
+                            sort      : 0,
+                            isActive  : true,
+                        }),
+                    },
+                },
             ],
         })
             .compile();
 
         handler = module.get<CommonDeleteCountriesHandler>(CommonDeleteCountriesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonDeleteCountriesHandler should be defined', () =>
@@ -70,7 +108,15 @@ describe('CommonDeleteCountriesHandler', () =>
         test('should return an commonMockCountryData deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData)));
-            expect(await handler.main()).toBe(commonMockCountryData);
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                    'en',
+                ),
+            )
+                .toBe(commonMockCountryData);
         });
     });
 });

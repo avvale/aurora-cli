@@ -1,6 +1,6 @@
 import { BadRequestException } from '@nestjs/common';
 import { Operator } from '@aurorajs.dev/core';
-import { AccountResponse } from '@app/iam/account/domain/account.response';
+import { IamAccountResponse } from '@app/iam/account';
 import * as _ from 'lodash';
 
 export const TenantConstraint = (customProperties?: {
@@ -18,10 +18,10 @@ export const TenantConstraint = (customProperties?: {
                     constraintIndex: 2,
                 }, customProperties);
 
-                let account: AccountResponse;
+                let account: IamAccountResponse;
                 for (const arg of args)
                 {
-                    if (typeof arg === 'object' && arg.constructor.name === 'AccountResponse') account = <AccountResponse>arg;
+                    if (typeof arg === 'object' && arg.constructor.name === 'AccountResponse') account = <IamAccountResponse>arg;
                 }
 
                 if (!account) throw new BadRequestException('To use @TenantConstraint() decorator need has @CurrentAccount() defined in properties of method');

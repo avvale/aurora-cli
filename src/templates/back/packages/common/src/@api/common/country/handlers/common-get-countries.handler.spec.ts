@@ -2,7 +2,7 @@
 import { CommonGetCountriesHandler } from '@api/common/country';
 import { commonMockCountryData } from '@app/common/country';
 import { commonMockLangData } from '@app/common/lang';
-import { CoreAddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { CoreAddI18nConstraintService, CoreGetSearchKeyLangService, IQueryBus } from '@aurorajs.dev/core';
 import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -11,7 +11,6 @@ describe('CommonGetCountriesHandler', () =>
 {
     let handler: CommonGetCountriesHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -41,9 +40,9 @@ describe('CommonGetCountriesHandler', () =>
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide : CoreGetSearchKeyLangService,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        get: () => { /**/ },
                     },
                 },
             ],
@@ -52,7 +51,6 @@ describe('CommonGetCountriesHandler', () =>
 
         handler = module.get<CommonGetCountriesHandler>(CommonGetCountriesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonGetCountriesHandler should be defined', () =>
@@ -70,7 +68,15 @@ describe('CommonGetCountriesHandler', () =>
         test('should return a commonMockCountryData', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData)));
-            expect(await handler.main()).toBe(commonMockCountryData);
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                    'en',
+                ),
+            )
+                .toBe(commonMockCountryData);
         });
     });
 });

@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiBody, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { IamRoleDto, IamCreateRoleDto } from '../dto';
+import { IamCreateRoleDto, IamCreateRolesHandler, IamRoleDto } from '@api/iam/role';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiBody, ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] role')
 @Controller('iam/roles/create')

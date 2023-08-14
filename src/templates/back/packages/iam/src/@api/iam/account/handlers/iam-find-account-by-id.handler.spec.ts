@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindAccountByIdHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamFindAccountByIdHandler } from './iam-find-account-by-id.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamFindAccountByIdHandler', () =>
 {
     let handler: IamFindAccountByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamFindAccountByIdHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<IamFindAccountByIdHandler>(IamFindAccountByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamFindAccountByIdHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('IamFindAccountByIdHandler', () =>
 
         test('should return an account by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await handler.main(accounts[0].id)).toBe(accounts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(
+                await handler.main(
+                    iamMockAccountData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockAccountData[0]);
         });
     });
 });

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthUpdateApplicationsController, OAuthUpdateApplicationsHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthUpdateApplicationsController } from './o-auth-update-applications.controller';
-import { OAuthUpdateApplicationsHandler } from '../handlers/o-auth-update-applications.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthUpdateApplicationsController', () =>
 {
@@ -45,8 +39,8 @@ describe('OAuthUpdateApplicationsController', () =>
 
         test('should return a applications updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await controller.main(applications[0])).toBe(applications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(await controller.main(oAuthMockApplicationData[0])).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

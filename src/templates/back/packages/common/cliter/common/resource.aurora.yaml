@@ -1,0 +1,40 @@
+version: 0.0.1
+boundedContextName: common
+moduleName: resource
+moduleNames: resources
+aggregateName: CommonResource
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: code
+    type: varchar
+    maxLength: 30
+    nullable: false
+    index: unique
+  - name: name
+    type: varchar
+    maxLength: 100
+    nullable: false
+  - name: isActive
+    type: boolean
+    nullable: false
+  - name: hasAttachments
+    type: boolean
+    nullable: false
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+aggregateI18nProperties: []
+additionalApis: []

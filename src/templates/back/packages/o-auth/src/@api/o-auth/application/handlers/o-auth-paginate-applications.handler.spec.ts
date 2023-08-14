@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthPaginateApplicationsHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthPaginateApplicationsHandler } from './o-auth-paginate-applications.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthPaginateApplicationsHandler', () =>
 {
     let handler: OAuthPaginateApplicationsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('OAuthPaginateApplicationsHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<OAuthPaginateApplicationsHandler>(OAuthPaginateApplicationsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthPaginateApplicationsHandler should be defined', () =>
@@ -57,15 +45,21 @@ describe('OAuthPaginateApplicationsHandler', () =>
         test('should return a applications', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: applications.length,
-                count: applications.length,
-                rows : applications,
+                total: oAuthMockApplicationData.length,
+                count: oAuthMockApplicationData.length,
+                rows : oAuthMockApplicationData,
             })));
-            expect(await handler.main()).toEqual({
-                total: applications.length,
-                count: applications.length,
-                rows : applications,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                ),
+            )
+                .toEqual({
+                    total: oAuthMockApplicationData.length,
+                    count: oAuthMockApplicationData.length,
+                    rows : oAuthMockApplicationData,
+                });
         });
     });
 });

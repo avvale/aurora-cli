@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateJobsRegistryCommand } from '@app/queue-manager/job-registry/application/create/create-jobs-registry.command';
 import { QueueManagerCreateJobRegistryInput } from '@api/graphql';
-import { QueueManagerCreateJobRegistryDto } from '../dto';
+import { QueueManagerCreateJobRegistryDto } from '@api/queue-manager/job-registry';
+import { QueueManagerCreateJobsRegistryCommand } from '@app/queue-manager/job-registry';
+import { ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerCreateJobsRegistryHandler
@@ -18,12 +16,13 @@ export class QueueManagerCreateJobsRegistryHandler
         timezone?: string,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateJobsRegistryCommand(
+        await this.commandBus.dispatch(new QueueManagerCreateJobsRegistryCommand(
             payload,
             {
                 timezone,
             },
         ));
+
         return true;
     }
 }

@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { OAuthScopeDto } from '../dto';
+import { OAuthFindScopeByIdHandler, OAuthScopeDto } from '@api/o-auth/scope';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthFindScopeByIdHandler } from '../handlers/o-auth-find-scope-by-id.handler';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scope/find')

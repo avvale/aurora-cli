@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetTenantsQuery } from '@app/iam/tenant/application/get/get-tenants.query';
-import { UpdateTenantsCommand } from '@app/iam/tenant/application/update/update-tenants.command';
 import { IamTenant, IamUpdateTenantsInput } from '@api/graphql';
-import { IamTenantDto, IamUpdateTenantsDto } from '../dto';
+import { IamTenantDto, IamUpdateTenantsDto } from '@api/iam/tenant';
+import { IamGetTenantsQuery, IamUpdateTenantsCommand } from '@app/iam/tenant';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateTenantsHandler
@@ -23,7 +20,7 @@ export class IamUpdateTenantsHandler
         auditing?: AuditingMeta,
     ): Promise<IamTenant | IamTenantDto>
     {
-        await this.commandBus.dispatch(new UpdateTenantsCommand(
+        await this.commandBus.dispatch(new IamUpdateTenantsCommand(
             payload,
             queryStatement,
             constraint,
@@ -35,10 +32,12 @@ export class IamUpdateTenantsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetTenantsQuery(
+        return await this.queryBus.ask(new IamGetTenantsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

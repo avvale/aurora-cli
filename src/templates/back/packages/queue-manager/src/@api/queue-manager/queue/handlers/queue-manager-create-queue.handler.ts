@@ -1,11 +1,8 @@
+import { QueueManagerCreateQueueInput, QueueManagerQueue } from '@api/graphql';
+import { QueueManagerCreateQueueDto, QueueManagerQueueDto } from '@api/queue-manager/queue';
+import { QueueManagerCreateQueueCommand, QueueManagerFindQueueByIdQuery } from '@app/queue-manager/queue';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindQueueByIdQuery } from '@app/queue-manager/queue/application/find/find-queue-by-id.query';
-import { CreateQueueCommand } from '@app/queue-manager/queue/application/create/create-queue.command';
-import { QueueManagerQueue, QueueManagerCreateQueueInput } from '@api/graphql';
-import { QueueManagerQueueDto, QueueManagerCreateQueueDto } from '../dto';
 
 @Injectable()
 export class QueueManagerCreateQueueHandler
@@ -20,14 +17,14 @@ export class QueueManagerCreateQueueHandler
         timezone?: string,
     ): Promise<QueueManagerQueue | QueueManagerQueueDto>
     {
-        await this.commandBus.dispatch(new CreateQueueCommand(
+        await this.commandBus.dispatch(new QueueManagerCreateQueueCommand(
             payload,
             {
                 timezone,
             },
         ));
 
-        return await this.queryBus.ask(new FindQueueByIdQuery(
+        return await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
             payload.id,
             {},
             {

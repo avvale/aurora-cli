@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommonFindAdministrativeAreaLevel2ByIdHandler } from '@api/common/administrative-area-level-2';
 import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonFindAdministrativeAreaLevel2ByIdHandler', () =>
 {
     let handler: CommonFindAdministrativeAreaLevel2ByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -23,19 +22,12 @@ describe('CommonFindAdministrativeAreaLevel2ByIdHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<CommonFindAdministrativeAreaLevel2ByIdHandler>(CommonFindAdministrativeAreaLevel2ByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonFindAdministrativeAreaLevel2ByIdHandler should be defined', () =>
@@ -53,7 +45,14 @@ describe('CommonFindAdministrativeAreaLevel2ByIdHandler', () =>
         test('should return an administrativeAreaLevel2 by id', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel2Data[0])));
-            expect(await handler.main(commonMockAdministrativeAreaLevel2Data[0].id)).toBe(commonMockAdministrativeAreaLevel2Data[0]);
+            expect(
+                await handler.main(
+                    commonMockAdministrativeAreaLevel2Data[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockAdministrativeAreaLevel2Data[0]);
         });
     });
 });

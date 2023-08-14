@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonUpdateAdministrativeAreasLevel3Resolver } from './common-update-administrative-areas-level-3.resolver';
-import { CommonUpdateAdministrativeAreasLevel3Handler } from '../handlers/common-update-administrative-areas-level-3.handler';
+import { CommonUpdateAdministrativeAreasLevel3Handler, CommonUpdateAdministrativeAreasLevel3Resolver } from '@api/common/administrative-area-level-3';
 import { CommonUpdateAdministrativeAreasLevel3Input } from '@api/graphql';
-
-// sources
-import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.data';
+import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateAdministrativeAreasLevel3Resolver', () =>
 {

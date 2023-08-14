@@ -17,11 +17,13 @@ aggregateProperties:
     maxLength: 50
     nullable: false
     index: unique
+    indexName: uniquePrefixName
   - name: name
     type: varchar
     maxLength: 50
     nullable: false
     index: unique
+    indexName: uniquePrefixName
   - name: createdAt
     type: timestamp
     nullable: true
@@ -31,4 +33,5 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+aggregateI18nProperties: []
 additionalApis: []

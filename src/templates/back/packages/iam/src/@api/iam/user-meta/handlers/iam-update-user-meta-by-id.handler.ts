@@ -2,9 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 // @app
-import { FindUserByIdQuery } from '@app/iam/user/application/find/find-user-by-id.query';
-import { UpdateUserByIdCommand } from '@app/iam/user/application/update/update-user-by-id.command';
-import { AccountResponse } from '@app/iam/account/domain/account.response';
+import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
+import { IamAccountResponse } from '@app/iam/account';
 import { IamUserMeta, IamUpdateUserMetaByIdInput } from '@api/graphql';
 import { IamUserMetaDto, IamUpdateUserMetaByIdDto } from '../dto';
 
@@ -18,11 +17,11 @@ export class IamUpdateUserMetaByIdHandler
 
     async main(
         payload: IamUpdateUserMetaByIdInput | IamUpdateUserMetaByIdDto,
-        account: AccountResponse,
+        account: IamAccountResponse,
         timezone?: string,
     ): Promise<IamUserMeta | IamUserMetaDto>
     {
-        await this.commandBus.dispatch(new UpdateUserByIdCommand(
+        await this.commandBus.dispatch(new IamUpdateUserByIdCommand(
             {
                 ...payload,
                 id: account.user.id,
@@ -31,6 +30,12 @@ export class IamUpdateUserMetaByIdHandler
             { timezone },
         ));
 
-        return await this.queryBus.ask(new FindUserByIdQuery(account.user.id, {}, { timezone }));
+        return await this.queryBus.ask(new IamFindUserByIdQuery(
+            account.user.id,
+            {},
+            {
+                timezone,
+            },
+        ));
     }
 }

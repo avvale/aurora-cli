@@ -287,6 +287,7 @@ export const cliterConfig: CliterConfig =
     compareActions: {
         deleteOriginAndLoadNext: 'Delete origin file and load next',
         ignore                 : 'Ignore the file to be overwritten in future uploads',
+        replace                : 'Replace current file with origin file',
         selectFile             : 'Go to file selection',
         finish                 : 'Finish comparison and exit',
     },

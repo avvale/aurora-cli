@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
+import { QueueManagerIJobRegistryRepository, queueManagerMockJobRegistryData, QueueManagerMockJobRegistrySeeder } from '@app/queue-manager/job-registry';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IJobRegistryRepository } from '@app/queue-manager/job-registry/domain/job-registry.repository';
-import { MockJobRegistrySeeder } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.seeder';
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,8 +18,8 @@ const importForeignModules = [];
 describe('job-registry', () =>
 {
     let app: INestApplication;
-    let jobRegistryRepository: IJobRegistryRepository;
-    let jobRegistrySeeder: MockJobRegistrySeeder;
+    let jobRegistryRepository: QueueManagerIJobRegistryRepository;
+    let jobRegistrySeeder: QueueManagerMockJobRegistrySeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -58,17 +56,17 @@ describe('job-registry', () =>
                 }),
             ],
             providers: [
-                MockJobRegistrySeeder,
+                QueueManagerMockJobRegistrySeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = jobsRegistry;
+        mockData = queueManagerMockJobRegistryData;
         app = module.createNestApplication();
-        jobRegistryRepository = module.get<IJobRegistryRepository>(IJobRegistryRepository);
-        jobRegistrySeeder = module.get<MockJobRegistrySeeder>(MockJobRegistrySeeder);
+        jobRegistryRepository = module.get<QueueManagerIJobRegistryRepository>(QueueManagerIJobRegistryRepository);
+        jobRegistrySeeder = module.get<QueueManagerMockJobRegistrySeeder>(QueueManagerMockJobRegistrySeeder);
 
         // seed mock data in memory database
         await jobRegistryRepository.insert(jobRegistrySeeder.collectionSource);

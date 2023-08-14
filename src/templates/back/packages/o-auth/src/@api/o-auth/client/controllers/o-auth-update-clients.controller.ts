@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { OAuthClientDto, OAuthUpdateClientsDto } from '../dto';
+import { OAuthClientDto, OAuthUpdateClientsDto, OAuthUpdateClientsHandler } from '@api/o-auth/client';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthUpdateClientsHandler } from '../handlers/o-auth-update-clients.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Put } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[o-auth] client')
 @Controller('o-auth/clients/update')

@@ -1,10 +1,8 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamPaginateAccountsHandler } from '../handlers/iam-paginate-accounts.handler';
 import { Pagination } from '@api/graphql';
+import { IamPaginateAccountsHandler } from '@api/iam/account';
+import { Auth } from '@aurora/decorators';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.account.get')

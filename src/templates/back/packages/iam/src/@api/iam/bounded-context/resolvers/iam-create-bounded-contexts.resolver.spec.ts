@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateBoundedContextsResolver } from './iam-create-bounded-contexts.resolver';
-import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-contexts.handler';
 import { IamCreateBoundedContextInput } from '@api/graphql';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
+import { IamCreateBoundedContextsHandler, IamCreateBoundedContextsResolver } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateBoundedContextsResolver', () =>
 {
     let resolver: IamCreateBoundedContextsResolver;
-    let handler: IamCreateBoundedContextsHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('IamCreateBoundedContextsResolver', () =>
             .compile();
 
         resolver = module.get<IamCreateBoundedContextsResolver>(IamCreateBoundedContextsResolver);
-        handler = module.get<IamCreateBoundedContextsHandler>(IamCreateBoundedContextsHandler);
     });
 
     test('IamCreateBoundedContextsResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('IamCreateBoundedContextsResolver', () =>
 
         test('should return an boundedContexts created', async () =>
         {
-            expect(await resolver.main(<IamCreateBoundedContextInput[]>boundedContexts)).toBe(undefined);
+            expect(await resolver.main(<IamCreateBoundedContextInput[]>iamMockBoundedContextData)).toBe(undefined);
         });
     });
 });

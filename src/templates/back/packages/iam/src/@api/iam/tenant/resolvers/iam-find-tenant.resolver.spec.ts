@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindTenantHandler, IamFindTenantResolver } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindTenantResolver } from './iam-find-tenant.resolver';
-import { IamFindTenantHandler } from '../handlers/iam-find-tenant.handler';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamFindTenantResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('IamFindTenantResolver', () =>
 
         test('should return a tenant', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await resolver.main()).toBe(tenants[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+            expect(await resolver.main()).toBe(iamMockTenantData[0]);
         });
     });
 });

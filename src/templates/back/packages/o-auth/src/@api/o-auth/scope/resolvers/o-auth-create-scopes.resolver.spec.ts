@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateScopesResolver } from './o-auth-create-scopes.resolver';
-import { OAuthCreateScopesHandler } from '../handlers/o-auth-create-scopes.handler';
 import { OAuthCreateScopeInput } from '@api/graphql';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
+import { OAuthCreateScopesHandler, OAuthCreateScopesResolver } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateScopesResolver', () =>
 {
     let resolver: OAuthCreateScopesResolver;
-    let handler: OAuthCreateScopesHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('OAuthCreateScopesResolver', () =>
             .compile();
 
         resolver = module.get<OAuthCreateScopesResolver>(OAuthCreateScopesResolver);
-        handler = module.get<OAuthCreateScopesHandler>(OAuthCreateScopesHandler);
     });
 
     test('OAuthCreateScopesResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('OAuthCreateScopesResolver', () =>
 
         test('should return an scopes created', async () =>
         {
-            expect(await resolver.main(<OAuthCreateScopeInput[]>scopes)).toBe(undefined);
+            expect(await resolver.main(<OAuthCreateScopeInput[]>oAuthMockScopeData)).toBe(undefined);
         });
     });
 });

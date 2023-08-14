@@ -8,7 +8,6 @@ describe('CommonCreateAdministrativeAreaLevel1Handler', () =>
 {
     let handler: CommonCreateAdministrativeAreaLevel1Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -35,7 +34,6 @@ describe('CommonCreateAdministrativeAreaLevel1Handler', () =>
 
         handler = module.get<CommonCreateAdministrativeAreaLevel1Handler>(CommonCreateAdministrativeAreaLevel1Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -48,7 +46,13 @@ describe('CommonCreateAdministrativeAreaLevel1Handler', () =>
         test('should return an administrativeAreaLevel1 created', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel1Data[0])));
-            expect(await handler.main(commonMockAdministrativeAreaLevel1Data[0])).toBe(commonMockAdministrativeAreaLevel1Data[0]);
+            expect(
+                await handler.main(
+                    commonMockAdministrativeAreaLevel1Data[0],
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockAdministrativeAreaLevel1Data[0]);
         });
     });
 });

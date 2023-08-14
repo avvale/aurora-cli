@@ -2,12 +2,12 @@ import { JsonValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonCountryAvailableLangs extends JsonValueObject
 {
-    public readonly type: string = 'CountryAvailableLangs';
+    public readonly type: string = 'CommonCountryAvailableLangs';
 
     constructor(value: any, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'CountryAvailableLangs',
+            name       : 'CommonCountryAvailableLangs',
             nullable   : true,
             undefinable: true,
         }, validationRules));

@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindBoundedContextByIdHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamFindBoundedContextByIdHandler } from './iam-find-bounded-context-by-id.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamFindBoundedContextByIdHandler', () =>
 {
     let handler: IamFindBoundedContextByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamFindBoundedContextByIdHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<IamFindBoundedContextByIdHandler>(IamFindBoundedContextByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamFindBoundedContextByIdHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('IamFindBoundedContextByIdHandler', () =>
 
         test('should return an boundedContext by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await handler.main(boundedContexts[0].id)).toBe(boundedContexts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(
+                await handler.main(
+                    iamMockBoundedContextData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockBoundedContextData[0]);
         });
     });
 });

@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthUpsertClientResolver } from './o-auth-upsert-client.resolver';
-import { OAuthUpsertClientHandler } from '../handlers/o-auth-upsert-client.handler';
 import { OAuthUpdateClientByIdInput } from '@api/graphql';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { OAuthUpsertClientHandler, OAuthUpsertClientResolver } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpsertClientResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('OAuthUpsertClientResolver', () =>
 
         test('should return an client upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await resolver.main(<OAuthUpdateClientByIdInput>clients[0])).toBe(clients[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+            expect(await resolver.main(<OAuthUpdateClientByIdInput>oAuthMockClientData[0])).toBe(oAuthMockClientData[0]);
         });
     });
 });

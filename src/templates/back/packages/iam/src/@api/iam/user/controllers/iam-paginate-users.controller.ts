@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { IamPaginateUsersHandler } from '@api/iam/user';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamPaginateUsersHandler } from '../handlers/iam-paginate-users.handler';
+import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] user')
 @Controller('iam/users/paginate')

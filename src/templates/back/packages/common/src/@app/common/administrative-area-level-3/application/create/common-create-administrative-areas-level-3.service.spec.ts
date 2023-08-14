@@ -10,7 +10,6 @@ import { CommonMockAdministrativeAreaLevel3Repository } from '../../infrastructu
 describe('CommonCreateAdministrativeAreasLevel3Service', () =>
 {
     let service: CommonCreateAdministrativeAreasLevel3Service;
-    let repository: CommonIAdministrativeAreaLevel3Repository;
     let mockRepository: CommonMockAdministrativeAreaLevel3Repository;
 
     beforeAll(async () =>
@@ -34,7 +33,6 @@ describe('CommonCreateAdministrativeAreasLevel3Service', () =>
             .compile();
 
         service = module.get(CommonCreateAdministrativeAreasLevel3Service);
-        repository = module.get(CommonIAdministrativeAreaLevel3Repository);
         mockRepository = module.get(CommonMockAdministrativeAreaLevel3Repository);
     });
 
@@ -47,9 +45,12 @@ describe('CommonCreateAdministrativeAreasLevel3Service', () =>
 
         test('should create administrativeAreasLevel3 and emit event', async () =>
         {
-            expect(await service.main(
-                mockRepository.collectionSource,
-            )).toBe(undefined);
+            expect(
+                await service.main(
+                    mockRepository.collectionSource,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateQueuesCommand } from '@app/queue-manager/queue/application/create/create-queues.command';
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
+import { QueueManagerCreateQueuesCommand } from '@app/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 
 @Injectable()
 export class QueueManagerQueueSeeder
@@ -15,8 +15,8 @@ export class QueueManagerQueueSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateQueuesCommand(
-            queues,
+        await this.commandBus.dispatch(new QueueManagerCreateQueuesCommand(
+            queueManagerMockQueueData,
             {
                 timezone: process.env.TZ ,
             },

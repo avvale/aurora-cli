@@ -1,9 +1,21 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.response';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.mapper';
-import { {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Query } from './{{ toKebabCase schema.boundedContextName }}-raw-sql-{{ toKebabCase schema.moduleNames }}.query';
-import { {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Service } from './{{ toKebabCase schema.boundedContextName }}-raw-sql-{{ toKebabCase schema.moduleNames }}.service';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
+            (object
+                items=
+                (
+                    array
+                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Response')
+                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'RawSQL' (toPascalCase schema.moduleNames) 'Query')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'RawSQL' (toPascalCase schema.moduleNames) 'Service')
+                )
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 @QueryHandler({{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Query)
 export class {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler implements IQueryHandler<{{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Query>
 {

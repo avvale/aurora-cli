@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerUpdateQueueByIdController, QueueManagerUpdateQueueByIdHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerUpdateQueueByIdController } from './queue-manager-update-queue-by-id.controller';
-import { QueueManagerUpdateQueueByIdHandler } from '../handlers/queue-manager-update-queue-by-id.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
 
 describe('QueueManagerUpdateQueueByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('QueueManagerUpdateQueueByIdController', () =>
 
         test('should return a queue updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queues[0])));
-            expect(await controller.main(queues[0])).toBe(queues[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+            expect(await controller.main(queueManagerMockQueueData[0])).toBe(queueManagerMockQueueData[0]);
         });
     });
 });

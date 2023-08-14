@@ -1,0 +1,75 @@
+version: 0.0.1
+boundedContextName: common
+moduleName: attachment-family
+moduleNames: attachment-families
+aggregateName: CommonAttachmentFamily
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: resourceId
+    type: id
+    length: 36
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregate: CommonResource
+      modulePath: common/resource
+      key: id
+      field: resource
+      avoidConstraint: true
+  - name: name
+    type: varchar
+    maxLength: 100
+    nullable: false
+  - name: width
+    type: smallint.unsigned
+    maxLength: 5
+    nullable: true
+  - name: height
+    type: smallint.unsigned
+    maxLength: 5
+    nullable: true
+  - name: fitType
+    type: enum
+    enumOptions:
+      - FIT_CROP
+      - FIT_WIDTH
+      - FIT_HEIGHT
+      - FIT_WIDTH_FREE_CROP
+      - FIT_HEIGHT_FREE_CROP
+    nullable: true
+    example: CommonAttachmentFamilyFitType.FIT_CROP
+  - name: quality
+    type: tinyint.unsigned
+    maxLength: 3
+    nullable: true
+  - name: sizes
+    type: json
+    nullable: true
+  - name: format
+    type: enum
+    enumOptions:
+      - JPG
+      - PNG
+      - GIF
+      - TIF
+      - BMP
+    nullable: true
+    example: CommonAttachmentFamilyFormat.JPG
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+aggregateI18nProperties: []
+additionalApis: []

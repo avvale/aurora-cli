@@ -5,7 +5,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateLangsController', () =>
 {
     let controller: CommonCreateLangsController;
-    let handler: CommonCreateLangsHandler;
 
     beforeAll(async () =>
     {
@@ -25,7 +24,6 @@ describe('CommonCreateLangsController', () =>
             .compile();
 
         controller = module.get<CommonCreateLangsController>(CommonCreateLangsController);
-        handler = module.get<CommonCreateLangsHandler>(CommonCreateLangsHandler);
     });
 
     describe('main', () =>
@@ -37,7 +35,12 @@ describe('CommonCreateLangsController', () =>
 
         test('should return an commonMockLangData created', async () =>
         {
-            expect(await controller.main(commonMockLangData)).toBe(undefined);
+            expect(
+                await controller.main(
+                    commonMockLangData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

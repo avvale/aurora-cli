@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamDeleteRolesHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamDeleteRolesHandler } from './iam-delete-roles.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteRolesHandler', () =>
 {
     let handler: IamDeleteRolesHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('IamDeleteRolesHandler', () =>
 
         handler = module.get<IamDeleteRolesHandler>(IamDeleteRolesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamDeleteRolesHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('IamDeleteRolesHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an roles deleted', async () =>
+        test('should return an iamMockRoleData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles)));
-            expect(await handler.main()).toBe(roles);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockRoleData);
         });
     });
 });

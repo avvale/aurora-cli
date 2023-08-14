@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthFindAccessTokenByIdHandler } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthFindAccessTokenByIdHandler } from './o-auth-find-access-token-by-id.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 
 describe('OAuthFindAccessTokenByIdHandler', () =>
 {
     let handler: OAuthFindAccessTokenByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('OAuthFindAccessTokenByIdHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<OAuthFindAccessTokenByIdHandler>(OAuthFindAccessTokenByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthFindAccessTokenByIdHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('OAuthFindAccessTokenByIdHandler', () =>
 
         test('should return an accessToken by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens[0])));
-            expect(await handler.main(accessTokens[0].id)).toBe(accessTokens[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData[0])));
+            expect(
+                await handler.main(
+                    oAuthMockAccessTokenData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockAccessTokenData[0]);
         });
     });
 });

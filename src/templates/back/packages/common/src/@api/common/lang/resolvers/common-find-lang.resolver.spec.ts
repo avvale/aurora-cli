@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonFindLangHandler, CommonFindLangResolver } from '@api/common/lang';
+import { commonMockLangData } from '@app/common/lang';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindLangResolver } from './common-find-lang.resolver';
-import { CommonFindLangHandler } from '../handlers/common-find-lang.handler';
-
-// sources
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
 
 describe('CommonFindLangResolver', () =>
 {

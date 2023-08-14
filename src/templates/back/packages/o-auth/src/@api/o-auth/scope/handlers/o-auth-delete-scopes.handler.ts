@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetScopesQuery } from '@app/o-auth/scope/application/get/get-scopes.query';
-import { DeleteScopesCommand } from '@app/o-auth/scope/application/delete/delete-scopes.command';
 import { OAuthScope } from '@api/graphql';
-import { OAuthScopeDto } from '../dto';
+import { OAuthScopeDto } from '@api/o-auth/scope';
+import { OAuthDeleteScopesCommand, OAuthGetScopesQuery } from '@app/o-auth/scope';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthDeleteScopesHandler
@@ -22,9 +19,15 @@ export class OAuthDeleteScopesHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthScope[] | OAuthScopeDto[]>
     {
-        const scopes = await this.queryBus.ask(new GetScopesQuery(queryStatement, constraint, { timezone }));
+        const scopes = await this.queryBus.ask(new OAuthGetScopesQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteScopesCommand(
+        await this.commandBus.dispatch(new OAuthDeleteScopesCommand(
             queryStatement,
             constraint,
             {

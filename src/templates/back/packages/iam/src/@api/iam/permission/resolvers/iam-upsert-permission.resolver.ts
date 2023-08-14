@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamUpsertPermissionHandler } from '../handlers/iam-upsert-permission.handler';
 import { IamPermission, IamUpdatePermissionByIdInput } from '@api/graphql';
+import { IamUpsertPermissionHandler } from '@api/iam/permission';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.permission.upsert')

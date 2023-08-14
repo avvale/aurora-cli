@@ -4,7 +4,7 @@
         array
             (object items=(array 'Body' 'Controller' 'Delete')  path='@nestjs/common')
             (object items=(array 'ApiTags' 'ApiOkResponse' 'ApiOperation' 'ApiBody' 'ApiQuery')  path='@nestjs/swagger')
-            (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
+            (object items=(array 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
             (object
                 items=
                 (
@@ -16,12 +16,10 @@
         )
     )
 ~}}
-{{#if schema.hasTenant}}
+{{#if schema.properties.hasI18n}}
 {{
     push importsArray
-        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-        (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared'))
-        (object items='CurrentAccount' path=config.auroraCorePackage)
+        (object items=(array 'ContentLanguage') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
@@ -30,10 +28,18 @@
         (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
-{{#if schema.properties.hasI18n}}
+{{#if schema.hasAuditing}}
 {{
     push importsArray
-        (object items=(array 'ContentLanguage') path=config.auroraCorePackage)
+        (object items=(array 'Auditing' 'AuditingMeta') path=config.auroraCorePackage)
+~}}
+{{/if}}
+{{#if schema.hasTenant}}
+{{
+    push importsArray
+        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

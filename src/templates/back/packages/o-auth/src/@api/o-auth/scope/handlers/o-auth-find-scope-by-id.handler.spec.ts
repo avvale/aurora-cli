@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthFindScopeByIdHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthFindScopeByIdHandler } from './o-auth-find-scope-by-id.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthFindScopeByIdHandler', () =>
 {
     let handler: OAuthFindScopeByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('OAuthFindScopeByIdHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<OAuthFindScopeByIdHandler>(OAuthFindScopeByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthFindScopeByIdHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('OAuthFindScopeByIdHandler', () =>
 
         test('should return an scope by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(scopes[0])));
-            expect(await handler.main(scopes[0].id)).toBe(scopes[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+            expect(
+                await handler.main(
+                    oAuthMockScopeData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockScopeData[0]);
         });
     });
 });

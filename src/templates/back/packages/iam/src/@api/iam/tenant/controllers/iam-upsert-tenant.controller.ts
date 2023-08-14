@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { IamTenantDto, IamUpdateTenantByIdDto } from '../dto';
+import { IamTenantDto, IamUpdateTenantByIdDto, IamUpsertTenantHandler } from '@api/iam/tenant';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamUpsertTenantHandler } from '../handlers/iam-upsert-tenant.handler';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] tenant')
 @Controller('iam/tenant/upsert')

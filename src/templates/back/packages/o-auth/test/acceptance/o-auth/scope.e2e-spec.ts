@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { OAuthIScopeRepository, oAuthMockScopeData, OAuthMockScopeSeeder } from '@app/o-auth/scope';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IScopeRepository } from '@app/o-auth/scope/domain/scope.repository';
-import { MockScopeSeeder } from '@app/o-auth/scope/infrastructure/mock/mock-scope.seeder';
-import { scopes } from '@app/o-auth/scope/infrastructure/seeds/scope.seed';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { OAuthModule } from '@api/o-auth/o-auth.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,8 +18,8 @@ const importForeignModules = [];
 describe('scope', () =>
 {
     let app: INestApplication;
-    let scopeRepository: IScopeRepository;
-    let scopeSeeder: MockScopeSeeder;
+    let scopeRepository: OAuthIScopeRepository;
+    let scopeSeeder: OAuthMockScopeSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -58,17 +56,17 @@ describe('scope', () =>
                 }),
             ],
             providers: [
-                MockScopeSeeder,
+                OAuthMockScopeSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = scopes;
+        mockData = oAuthMockScopeData;
         app = module.createNestApplication();
-        scopeRepository = module.get<IScopeRepository>(IScopeRepository);
-        scopeSeeder = module.get<MockScopeSeeder>(MockScopeSeeder);
+        scopeRepository = module.get<OAuthIScopeRepository>(OAuthIScopeRepository);
+        scopeSeeder = module.get<OAuthMockScopeSeeder>(OAuthMockScopeSeeder);
 
         // seed mock data in memory database
         await scopeRepository.insert(scopeSeeder.collectionSource);
@@ -292,7 +290,6 @@ describe('scope', () =>
             .send({
                 ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                code: 'TEST:E2E',
             })
             .expect(201);
     });
@@ -358,7 +355,6 @@ describe('scope', () =>
             .send({
                 ...mockData[0],
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                code: 'TEST:E2E',
             })
             .expect(200)
             .then(res =>
@@ -409,8 +405,8 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -503,7 +499,6 @@ describe('scope', () =>
                     payload: {
                         ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        code: 'TEST:E2E',
                     },
                 },
             })
@@ -548,8 +543,8 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -617,8 +612,8 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -682,8 +677,8 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -710,7 +705,6 @@ describe('scope', () =>
                     payload: {
                         ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        code: 'TEST:E2E',
                     },
                 },
             })
@@ -744,7 +738,6 @@ describe('scope', () =>
                     payload: {
                         ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
-                        code: 'TEST:E2E',
                     },
                     query: {
                         where: {
@@ -787,8 +780,8 @@ describe('scope', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 

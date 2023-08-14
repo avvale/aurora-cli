@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerDeleteQueuesController, QueueManagerDeleteQueuesHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerDeleteQueuesController } from './queue-manager-delete-queues.controller';
-import { QueueManagerDeleteQueuesHandler } from '../handlers/queue-manager-delete-queues.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
 
 describe('QueueManagerDeleteQueuesController', () =>
 {
@@ -43,10 +37,10 @@ describe('QueueManagerDeleteQueuesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an queues deleted', async () =>
+        test('should return an queueManagerMockQueueData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queues)));
-            expect(await controller.main()).toBe(queues);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData)));
+            expect(await controller.main()).toBe(queueManagerMockQueueData);
         });
     });
 });

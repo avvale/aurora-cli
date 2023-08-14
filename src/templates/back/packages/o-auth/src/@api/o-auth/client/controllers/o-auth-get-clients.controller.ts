@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { OAuthClientDto } from '../dto';
+import { OAuthClientDto, OAuthGetClientsHandler } from '@api/o-auth/client';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthGetClientsHandler } from '../handlers/o-auth-get-clients.handler';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[o-auth] client')
 @Controller('o-auth/clients/get')

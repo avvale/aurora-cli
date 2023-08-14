@@ -24,7 +24,7 @@
 			[placeholder]="'pleaseSelectField' | gridTranslate:'message':gridId | async"
 			[formControl]="searchFieldNameControl"
 			[matAutocomplete]="auto"
-		/>
+		>
 		<mat-autocomplete
 			autoActiveFirstOption
 			#auto="matAutocomplete"
@@ -87,7 +87,7 @@
                                     autocomplete="off"
                                     formControlName="value"
                                     matInput
-                                />
+                                >
 
                                 <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
                                     <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
@@ -107,7 +107,7 @@
                                     autocomplete="off"
                                     formControlName="value"
                                     matInput
-                                />
+                                >
 
                                 <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
                                     <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>

@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerCreateQueuesResolver } from './queue-manager-create-queues.resolver';
-import { QueueManagerCreateQueuesHandler } from '../handlers/queue-manager-create-queues.handler';
 import { QueueManagerCreateQueueInput } from '@api/graphql';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
+import { QueueManagerCreateQueuesHandler, QueueManagerCreateQueuesResolver } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerCreateQueuesResolver', () =>
 {
     let resolver: QueueManagerCreateQueuesResolver;
-    let handler: QueueManagerCreateQueuesHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('QueueManagerCreateQueuesResolver', () =>
             .compile();
 
         resolver = module.get<QueueManagerCreateQueuesResolver>(QueueManagerCreateQueuesResolver);
-        handler = module.get<QueueManagerCreateQueuesHandler>(QueueManagerCreateQueuesHandler);
     });
 
     test('QueueManagerCreateQueuesResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('QueueManagerCreateQueuesResolver', () =>
 
         test('should return an queues created', async () =>
         {
-            expect(await resolver.main(<QueueManagerCreateQueueInput[]>queues)).toBe(undefined);
+            expect(await resolver.main(<QueueManagerCreateQueueInput[]>queueManagerMockQueueData)).toBe(undefined);
         });
     });
 });

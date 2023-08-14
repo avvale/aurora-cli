@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateRoleResolver } from './iam-create-role.resolver';
-import { IamCreateRoleHandler } from '../handlers/iam-create-role.handler';
 import { IamCreateRoleInput } from '@api/graphql';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
+import { IamCreateRoleHandler, IamCreateRoleResolver } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateRoleResolver', () =>
 {
@@ -49,8 +45,8 @@ describe('IamCreateRoleResolver', () =>
 
         test('should return an role created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await resolver.main(<IamCreateRoleInput>roles[0])).toBe(roles[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(await resolver.main(<IamCreateRoleInput>iamMockRoleData[0])).toBe(iamMockRoleData[0]);
         });
     });
 });

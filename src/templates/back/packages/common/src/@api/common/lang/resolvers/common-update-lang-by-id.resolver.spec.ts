@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonUpdateLangByIdResolver } from './common-update-lang-by-id.resolver';
-import { CommonUpdateLangByIdHandler } from '../handlers/common-update-lang-by-id.handler';
+import { CommonUpdateLangByIdHandler, CommonUpdateLangByIdResolver } from '@api/common/lang';
 import { CommonUpdateLangByIdInput } from '@api/graphql';
-
-// sources
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
+import { commonMockLangData } from '@app/common/lang';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateLangByIdResolver', () =>
 {

@@ -1,27 +1,17 @@
+import { OAuthCreateClientsHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
+import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthCreateClientsHandler } from './o-auth-create-clients.handler';
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('OAuthCreateClientsHandler', () =>
 {
     let handler: OAuthCreateClientsHandler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthCreateClientsHandler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
                 {
                     provide : ICommandBus,
                     useValue: {
@@ -32,9 +22,7 @@ describe('OAuthCreateClientsHandler', () =>
         })
             .compile();
 
-        handler     = module.get<OAuthCreateClientsHandler>(OAuthCreateClientsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthCreateClientsHandler>(OAuthCreateClientsHandler);
     });
 
     describe('main', () =>
@@ -44,9 +32,9 @@ describe('OAuthCreateClientsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an clients created', async () =>
+        test('should return an oAuthMockClientData created', async () =>
         {
-            expect(await handler.main(clients)).toBe(true);
+            expect(await handler.main(oAuthMockClientData)).toBe(true);
         });
     });
 });

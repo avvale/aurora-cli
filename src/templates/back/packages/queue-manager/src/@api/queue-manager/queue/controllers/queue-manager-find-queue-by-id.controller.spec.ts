@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerFindQueueByIdController, QueueManagerFindQueueByIdHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerFindQueueByIdController } from './queue-manager-find-queue-by-id.controller';
-import { QueueManagerFindQueueByIdHandler } from '../handlers/queue-manager-find-queue-by-id.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
 
 describe('QueueManagerFindQueueByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('QueueManagerFindQueueByIdController', () =>
 
         test('should return an queue by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queues[0])));
-            expect(await controller.main(queues[0].id)).toBe(queues[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+            expect(await controller.main(queueManagerMockQueueData[0].id)).toBe(queueManagerMockQueueData[0]);
         });
     });
 });

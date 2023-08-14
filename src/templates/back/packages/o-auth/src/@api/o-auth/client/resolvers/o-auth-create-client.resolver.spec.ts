@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateClientResolver } from './o-auth-create-client.resolver';
-import { OAuthCreateClientHandler } from '../handlers/o-auth-create-client.handler';
 import { OAuthCreateClientInput } from '@api/graphql';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { OAuthCreateClientHandler, OAuthCreateClientResolver } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateClientResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('OAuthCreateClientResolver', () =>
 
         test('should return an client created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await resolver.main(<OAuthCreateClientInput>clients[0])).toBe(clients[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+            expect(await resolver.main(<OAuthCreateClientInput>oAuthMockClientData[0])).toBe(oAuthMockClientData[0]);
         });
     });
 });

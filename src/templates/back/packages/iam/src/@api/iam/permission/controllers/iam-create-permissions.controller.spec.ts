@@ -1,16 +1,10 @@
+import { IamCreatePermissionsController, IamCreatePermissionsHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreatePermissionsController } from './iam-create-permissions.controller';
-import { IamCreatePermissionsHandler } from '../handlers/iam-create-permissions.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamCreatePermissionsController', () =>
 {
     let controller: IamCreatePermissionsController;
-    let handler: IamCreatePermissionsHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('IamCreatePermissionsController', () =>
             .compile();
 
         controller = module.get<IamCreatePermissionsController>(IamCreatePermissionsController);
-        handler = module.get<IamCreatePermissionsHandler>(IamCreatePermissionsHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('IamCreatePermissionsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an permissions created', async () =>
+        test('should return an iamMockPermissionData created', async () =>
         {
-            expect(await controller.main(permissions)).toBe(undefined);
+            expect(
+                await controller.main(
+                    iamMockPermissionData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

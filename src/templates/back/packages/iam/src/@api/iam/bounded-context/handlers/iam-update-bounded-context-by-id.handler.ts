@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindBoundedContextByIdQuery } from '@app/iam/bounded-context/application/find/find-bounded-context-by-id.query';
-import { UpdateBoundedContextByIdCommand } from '@app/iam/bounded-context/application/update/update-bounded-context-by-id.command';
 import { IamBoundedContext, IamUpdateBoundedContextByIdInput } from '@api/graphql';
-import { IamBoundedContextDto, IamUpdateBoundedContextByIdDto } from '../dto';
+import { IamBoundedContextDto, IamUpdateBoundedContextByIdDto } from '@api/iam/bounded-context';
+import { IamFindBoundedContextByIdQuery, IamUpdateBoundedContextByIdCommand } from '@app/iam/bounded-context';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateBoundedContextByIdHandler
@@ -22,15 +19,17 @@ export class IamUpdateBoundedContextByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamBoundedContext | IamBoundedContextDto>
     {
-        const boundedContext = await this.queryBus.ask(new FindBoundedContextByIdQuery(
+        const boundedContext = await this.queryBus.ask(new IamFindBoundedContextByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, boundedContext);
 
-        await this.commandBus.dispatch(new UpdateBoundedContextByIdCommand(
+        await this.commandBus.dispatch(new IamUpdateBoundedContextByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -44,10 +43,12 @@ export class IamUpdateBoundedContextByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(
+        return await this.queryBus.ask(new IamFindBoundedContextByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

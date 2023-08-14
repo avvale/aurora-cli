@@ -1,3 +1,48 @@
+// export DTOs
+export { QueueManagerJobRegistryDto } from './dto/queue-manager-job-registry.dto';
+export { QueueManagerCreateJobRegistryDto } from './dto/queue-manager-create-job-registry.dto';
+export { QueueManagerUpdateJobRegistryByIdDto } from './dto/queue-manager-update-job-registry-by-id.dto';
+export { QueueManagerUpdateJobsRegistryDto } from './dto/queue-manager-update-jobs-registry.dto';
+
+// export handlers
+export { QueueManagerCreateJobRegistryHandler } from './handlers/queue-manager-create-job-registry.handler';
+export { QueueManagerCreateJobsRegistryHandler } from './handlers/queue-manager-create-jobs-registry.handler';
+export { QueueManagerPaginateJobsRegistryHandler } from './handlers/queue-manager-paginate-jobs-registry.handler';
+export { QueueManagerGetJobsRegistryHandler } from './handlers/queue-manager-get-jobs-registry.handler';
+export { QueueManagerFindJobRegistryByIdHandler } from './handlers/queue-manager-find-job-registry-by-id.handler';
+export { QueueManagerFindJobRegistryHandler } from './handlers/queue-manager-find-job-registry.handler';
+export { QueueManagerUpdateJobRegistryByIdHandler } from './handlers/queue-manager-update-job-registry-by-id.handler';
+export { QueueManagerUpdateJobsRegistryHandler } from './handlers/queue-manager-update-jobs-registry.handler';
+export { QueueManagerUpsertJobRegistryHandler } from './handlers/queue-manager-upsert-job-registry.handler';
+export { QueueManagerDeleteJobRegistryByIdHandler } from './handlers/queue-manager-delete-job-registry-by-id.handler';
+export { QueueManagerDeleteJobsRegistryHandler } from './handlers/queue-manager-delete-jobs-registry.handler';
+
+// export controllers
+export { QueueManagerCreateJobRegistryController } from './controllers/queue-manager-create-job-registry.controller';
+export { QueueManagerCreateJobsRegistryController } from './controllers/queue-manager-create-jobs-registry.controller';
+export { QueueManagerPaginateJobsRegistryController } from './controllers/queue-manager-paginate-jobs-registry.controller';
+export { QueueManagerGetJobsRegistryController } from './controllers/queue-manager-get-jobs-registry.controller';
+export { QueueManagerFindJobRegistryByIdController } from './controllers/queue-manager-find-job-registry-by-id.controller';
+export { QueueManagerFindJobRegistryController } from './controllers/queue-manager-find-job-registry.controller';
+export { QueueManagerUpdateJobRegistryByIdController } from './controllers/queue-manager-update-job-registry-by-id.controller';
+export { QueueManagerUpdateJobsRegistryController } from './controllers/queue-manager-update-jobs-registry.controller';
+export { QueueManagerUpsertJobRegistryController } from './controllers/queue-manager-upsert-job-registry.controller';
+export { QueueManagerDeleteJobRegistryByIdController } from './controllers/queue-manager-delete-job-registry-by-id.controller';
+export { QueueManagerDeleteJobsRegistryController } from './controllers/queue-manager-delete-jobs-registry.controller';
+
+// exports resolvers
+export { QueueManagerCreateJobRegistryResolver } from './resolvers/queue-manager-create-job-registry.resolver';
+export { QueueManagerCreateJobsRegistryResolver } from './resolvers/queue-manager-create-jobs-registry.resolver';
+export { QueueManagerPaginateJobsRegistryResolver } from './resolvers/queue-manager-paginate-jobs-registry.resolver';
+export { QueueManagerGetJobsRegistryResolver } from './resolvers/queue-manager-get-jobs-registry.resolver';
+export { QueueManagerFindJobRegistryByIdResolver } from './resolvers/queue-manager-find-job-registry-by-id.resolver';
+export { QueueManagerFindJobRegistryResolver } from './resolvers/queue-manager-find-job-registry.resolver';
+export { QueueManagerUpdateJobRegistryByIdResolver } from './resolvers/queue-manager-update-job-registry-by-id.resolver';
+export { QueueManagerUpdateJobsRegistryResolver } from './resolvers/queue-manager-update-jobs-registry.resolver';
+export { QueueManagerUpsertJobRegistryResolver } from './resolvers/queue-manager-upsert-job-registry.resolver';
+export { QueueManagerDeleteJobRegistryByIdResolver } from './resolvers/queue-manager-delete-job-registry-by-id.resolver';
+export { QueueManagerDeleteJobsRegistryResolver } from './resolvers/queue-manager-delete-jobs-registry.resolver';
+
 // controllers
 import { QueueManagerCreateJobRegistryController } from './controllers/queue-manager-create-job-registry.controller';
 import { QueueManagerCreateJobsRegistryController } from './controllers/queue-manager-create-jobs-registry.controller';

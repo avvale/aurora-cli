@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable max-depth */
+/* eslint-disable complexity */
 import { GenerateCommandState } from '../../types';
 import { FileManager, Prompter } from '../../utils';
 import { GlobalState } from '../../store';
@@ -49,7 +50,7 @@ export const reviewOverwrites = async (generateCommandState: GenerateCommandStat
         {
             fileToManage = (await Prompter.promptSelectOriginFileToManage(originFiles)).fileToManage as string;
             indexToCompare = originFiles.indexOf(fileToManage);
-            shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (error, stdout, stderr) => { /**/ });
+            shell.exec(`code --diff ${fileToManage} ${fileToManage.replace('.origin', '')}`, (_error, stdout, stderr) => { /**/ });
 
             while (actionResponse !== cliterConfig.compareActions.finish)
             {
@@ -85,6 +86,25 @@ export const reviewOverwrites = async (generateCommandState: GenerateCommandStat
                                     (fileToManage.endsWith('.origin.html') ?
                                         '<!-- ignored file -->\r\n' :
                                         '// ignored file\r\n')) + fs.readFileSync(fileToManage.replace('.origin', ''), 'utf8'),
+                                'utf8',
+                            );
+
+                            // delete origin file
+                            fs.unlinkSync(fileToManage as string);
+                            originFiles.splice(indexToCompare, 1);
+                            indexToCompare = indexToCompare + 1 > originFiles.length ? indexToCompare = originFiles.length - 1 : indexToCompare;
+                            if (indexToCompare === -1) break;
+
+                            // get next file
+                            fileToManage = originFiles[indexToCompare];
+                            break;
+
+                        case cliterConfig.compareActions.replace:
+                            if (!fileToManage) break;
+
+                            fs.writeFileSync(
+                                fileToManage.replace('.origin', ''),
+                                fs.readFileSync(fileToManage, 'utf8'),
                                 'utf8',
                             );
 

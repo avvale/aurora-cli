@@ -2,12 +2,12 @@ import { DataValueObject, UuidValueObject, ValidationRules } from '@aurorajs.dev
 
 export class CommonAdministrativeAreaLevel1Id extends UuidValueObject
 {
-    public readonly type: string = 'AdministrativeAreaLevel1Id';
+    public readonly type: string = 'CommonAdministrativeAreaLevel1Id';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
-            name       : 'AdministrativeAreaLevel1Id',
+            name       : 'CommonAdministrativeAreaLevel1Id',
             nullable   : false,
             undefinable: false,
             length     : 36,

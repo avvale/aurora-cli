@@ -7,7 +7,7 @@
                 items=
                 (
                     array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleName) 'Service')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Service')
                         (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Repository')
                 )

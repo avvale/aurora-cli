@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteClientsController, OAuthDeleteClientsHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteClientsController } from './o-auth-delete-clients.controller';
-import { OAuthDeleteClientsHandler } from '../handlers/o-auth-delete-clients.handler';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('OAuthDeleteClientsController', () =>
 {
@@ -43,10 +37,10 @@ describe('OAuthDeleteClientsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an clients deleted', async () =>
+        test('should return an oAuthMockClientData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(clients)));
-            expect(await controller.main()).toBe(clients);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData)));
+            expect(await controller.main()).toBe(oAuthMockClientData);
         });
     });
 });

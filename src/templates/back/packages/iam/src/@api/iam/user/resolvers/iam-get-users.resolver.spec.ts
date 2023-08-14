@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamGetUsersHandler, IamGetUsersResolver } from '@api/iam/user';
+import { iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetUsersResolver } from './iam-get-users.resolver';
-import { IamGetUsersHandler } from '../handlers/iam-get-users.handler';
-
-// sources
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
 
 describe('IamGetUsersResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('IamGetUsersResolver', () =>
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a users', async () =>
+        test('should return a iamMockUserData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(users)));
-            expect(await resolver.main()).toBe(users);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData)));
+            expect(await resolver.main()).toBe(iamMockUserData);
         });
     });
 });

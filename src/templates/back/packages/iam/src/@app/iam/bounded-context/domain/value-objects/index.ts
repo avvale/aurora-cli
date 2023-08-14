@@ -1,8 +1,8 @@
-export { BoundedContextId } from './bounded-context-id';
-export { BoundedContextName } from './bounded-context-name';
-export { BoundedContextRoot } from './bounded-context-root';
-export { BoundedContextSort } from './bounded-context-sort';
-export { BoundedContextIsActive } from './bounded-context-is-active';
-export { BoundedContextCreatedAt } from './bounded-context-created-at';
-export { BoundedContextUpdatedAt } from './bounded-context-updated-at';
-export { BoundedContextDeletedAt } from './bounded-context-deleted-at';
+export { IamBoundedContextId } from './iam-bounded-context-id';
+export { IamBoundedContextName } from './iam-bounded-context-name';
+export { IamBoundedContextRoot } from './iam-bounded-context-root';
+export { IamBoundedContextSort } from './iam-bounded-context-sort';
+export { IamBoundedContextIsActive } from './iam-bounded-context-is-active';
+export { IamBoundedContextCreatedAt } from './iam-bounded-context-created-at';
+export { IamBoundedContextUpdatedAt } from './iam-bounded-context-updated-at';
+export { IamBoundedContextDeletedAt } from './iam-bounded-context-deleted-at';

@@ -11,6 +11,7 @@ import { QueueManagerSeeder } from './queue-manager.seeder';
 import { QueueRedisImplementationService } from './shared/services';
 import { QueueManagerJobControllers, QueueManagerJobResolvers, QueueManagerJobApiHandlers, QueueManagerJobServices } from './job';
 import { QueueManagerJobRegistryControllers, QueueManagerJobRegistryResolvers, QueueManagerJobRegistryApiHandlers, QueueManagerJobRegistryServices } from './job-registry';
+import { appQueues } from 'src/app.queues';
 
 @Module({
     imports: [
@@ -38,6 +39,9 @@ import { QueueManagerJobRegistryControllers, QueueManagerJobRegistryResolvers, Q
                 },
             }),
         }),
+        BullModule.registerQueue(
+            ...appQueues.common,
+        ),
     ],
     controllers: [
         ...QueueManagerQueueControllers,

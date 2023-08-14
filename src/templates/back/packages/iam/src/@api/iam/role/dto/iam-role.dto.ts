@@ -1,7 +1,7 @@
 /* eslint-disable indent */
+import { IamAccountDto } from '@api/iam/account';
+import { IamPermissionDto } from '@api/iam/permission';
 import { ApiProperty } from '@nestjs/swagger';
-import { IamPermissionDto } from '../../../iam/permission/dto/iam-permission.dto';
-import { IamAccountDto } from '../../../iam/account/dto/iam-account.dto';
 
 export class IamRoleDto
 {

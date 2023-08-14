@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateBoundedContextsCommand } from '@app/iam/bounded-context/application/create/create-bounded-contexts.command';
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
+import { IamCreateBoundedContextsCommand } from '@app/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 
 @Injectable()
 export class IamBoundedContextSeeder
@@ -15,8 +15,8 @@ export class IamBoundedContextSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateBoundedContextsCommand(
-            boundedContexts,
+        await this.commandBus.dispatch(new IamCreateBoundedContextsCommand(
+            iamMockBoundedContextData,
             {
                 timezone: process.env.TZ ,
             },

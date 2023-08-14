@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindScopeByIdQuery } from '@app/o-auth/scope/application/find/find-scope-by-id.query';
 import { OAuthScope } from '@api/graphql';
-import { OAuthScopeDto } from '../dto';
+import { OAuthScopeDto } from '@api/o-auth/scope';
+import { OAuthFindScopeByIdQuery } from '@app/o-auth/scope';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindScopeByIdHandler
@@ -19,6 +17,12 @@ export class OAuthFindScopeByIdHandler
         timezone?: string,
     ): Promise<OAuthScope | OAuthScopeDto>
     {
-        return await this.queryBus.ask(new FindScopeByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new OAuthFindScopeByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

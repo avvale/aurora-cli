@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindPermissionHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamFindPermissionHandler } from './iam-find-permission.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamFindPermissionHandler', () =>
 {
     let handler: IamFindPermissionHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamFindPermissionHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
-        handler    = module.get<IamFindPermissionHandler>(IamFindPermissionHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamFindPermissionHandler>(IamFindPermissionHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamFindPermissionHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('IamFindPermissionHandler', () =>
 
         test('should return a permission', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await handler.main()).toBe(permissions[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockPermissionData[0]);
         });
     });
 });

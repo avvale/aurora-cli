@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamGetBoundedContextsHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamGetBoundedContextsHandler } from './iam-get-bounded-contexts.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamGetBoundedContextsHandler', () =>
 {
     let handler: IamGetBoundedContextsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamGetBoundedContextsHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<IamGetBoundedContextsHandler>(IamGetBoundedContextsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamGetBoundedContextsHandler should be defined', () =>
@@ -54,10 +42,17 @@ describe('IamGetBoundedContextsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return a boundedContexts', async () =>
+        test('should return a iamMockBoundedContextData', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts)));
-            expect(await handler.main()).toBe(boundedContexts);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockBoundedContextData);
         });
     });
 });

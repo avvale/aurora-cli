@@ -1,0 +1,95 @@
+import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
+import { QueueManagerJobRegistry } from './queue-manager-job-registry.aggregate';
+import { QueueManagerJobRegistryResponse } from './queue-manager-job-registry.response';
+import {
+    QueueManagerJobRegistryId,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
+    QueueManagerJobRegistryJobId,
+    QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryTags,
+    QueueManagerJobRegistryCreatedAt,
+    QueueManagerJobRegistryUpdatedAt,
+    QueueManagerJobRegistryDeletedAt,
+} from './value-objects';
+
+export class QueueManagerJobRegistryMapper implements IMapper
+{
+    constructor(
+        public options: MapperOptions = { eagerLoading: true },
+    ) {}
+
+    /**
+     * Map object to aggregate
+     * @param jobRegistry
+     */
+    mapModelToAggregate(jobRegistry: LiteralObject, cQMetadata?: CQMetadata): QueueManagerJobRegistry
+    {
+        if (!jobRegistry) return;
+
+        return this.makeAggregate(jobRegistry, cQMetadata);
+    }
+
+    /**
+     * Map array of objects to array aggregates
+     * @param jobsRegistry
+     */
+    mapModelsToAggregates(jobsRegistry: LiteralObject[], cQMetadata?: CQMetadata): QueueManagerJobRegistry[]
+    {
+        if (!Array.isArray(jobsRegistry)) return;
+
+        return jobsRegistry.map(jobRegistry => this.makeAggregate(jobRegistry, cQMetadata));
+    }
+
+    /**
+     * Map aggregate to response
+     * @param jobRegistry
+     */
+    mapAggregateToResponse(jobRegistry: QueueManagerJobRegistry): QueueManagerJobRegistryResponse
+    {
+        return this.makeResponse(jobRegistry);
+    }
+
+    /**
+     * Map array of aggregates to array responses
+     * @param jobsRegistry
+     */
+    mapAggregatesToResponses(jobsRegistry: QueueManagerJobRegistry[]): QueueManagerJobRegistryResponse[]
+    {
+        if (!Array.isArray(jobsRegistry)) return;
+
+        return jobsRegistry.map(jobRegistry => this.makeResponse(jobRegistry));
+    }
+
+    private makeAggregate(jobRegistry: LiteralObject, cQMetadata?: CQMetadata): QueueManagerJobRegistry
+    {
+        return QueueManagerJobRegistry.register(
+            new QueueManagerJobRegistryId(jobRegistry.id, { undefinable: true }),
+            new QueueManagerJobRegistryQueueName(jobRegistry.queueName, { undefinable: true }),
+            new QueueManagerJobRegistryState(jobRegistry.state, { undefinable: true }),
+            new QueueManagerJobRegistryJobId(jobRegistry.jobId, { undefinable: true }),
+            new QueueManagerJobRegistryJobName(jobRegistry.jobName, { undefinable: true }),
+            new QueueManagerJobRegistryTags(jobRegistry.tags, { undefinable: true }),
+            new QueueManagerJobRegistryCreatedAt(jobRegistry.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new QueueManagerJobRegistryUpdatedAt(jobRegistry.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new QueueManagerJobRegistryDeletedAt(jobRegistry.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+        );
+    }
+
+    private makeResponse(jobRegistry: QueueManagerJobRegistry): QueueManagerJobRegistryResponse
+    {
+        if (!jobRegistry) return;
+
+        return new QueueManagerJobRegistryResponse(
+            jobRegistry.id.value,
+            jobRegistry.queueName.value,
+            jobRegistry.state.value,
+            jobRegistry.jobId.value,
+            jobRegistry.jobName.value,
+            jobRegistry.tags.value,
+            jobRegistry.createdAt.value,
+            jobRegistry.updatedAt.value,
+            jobRegistry.deletedAt.value,
+        );
+    }
+}

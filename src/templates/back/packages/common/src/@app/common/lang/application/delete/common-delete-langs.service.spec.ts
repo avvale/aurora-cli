@@ -11,7 +11,6 @@ describe('CommonDeleteLangsService', () =>
 {
     let service: CommonDeleteLangsService;
     let repository: CommonILangRepository;
-    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -36,7 +35,6 @@ describe('CommonDeleteLangsService', () =>
 
         service = module.get(CommonDeleteLangsService);
         repository = module.get(CommonILangRepository);
-        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>
@@ -49,7 +47,13 @@ describe('CommonDeleteLangsService', () =>
         test('should delete lang and emit event', async () =>
         {
             jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(await service.main()).toBe(undefined);
+            expect(
+                await service.main(
+                    {},
+                    {},
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

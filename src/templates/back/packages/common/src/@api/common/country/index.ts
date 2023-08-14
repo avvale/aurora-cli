@@ -30,6 +30,19 @@ export { CommonUpsertCountryController } from './controllers/common-upsert-count
 export { CommonDeleteCountryByIdController } from './controllers/common-delete-country-by-id.controller';
 export { CommonDeleteCountriesController } from './controllers/common-delete-countries.controller';
 
+// exports resolvers
+export { CommonCreateCountryResolver } from './resolvers/common-create-country.resolver';
+export { CommonCreateCountriesResolver } from './resolvers/common-create-countries.resolver';
+export { CommonPaginateCountriesResolver } from './resolvers/common-paginate-countries.resolver';
+export { CommonGetCountriesResolver } from './resolvers/common-get-countries.resolver';
+export { CommonFindCountryByIdResolver } from './resolvers/common-find-country-by-id.resolver';
+export { CommonFindCountryResolver } from './resolvers/common-find-country.resolver';
+export { CommonUpdateCountryByIdResolver } from './resolvers/common-update-country-by-id.resolver';
+export { CommonUpdateCountriesResolver } from './resolvers/common-update-countries.resolver';
+export { CommonUpsertCountryResolver } from './resolvers/common-upsert-country.resolver';
+export { CommonDeleteCountryByIdResolver } from './resolvers/common-delete-country-by-id.resolver';
+export { CommonDeleteCountriesResolver } from './resolvers/common-delete-countries.resolver';
+
 // controllers
 import { CommonCreateCountryController } from './controllers/common-create-country.controller';
 import { CommonCreateCountriesController } from './controllers/common-create-countries.controller';

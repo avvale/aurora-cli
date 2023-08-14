@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindRoleByIdQuery } from '@app/iam/role/application/find/find-role-by-id.query';
-import { DeleteRoleByIdCommand } from '@app/iam/role/application/delete/delete-role-by-id.command';
 import { IamRole } from '@api/graphql';
-import { IamRoleDto } from '../dto';
+import { IamRoleDto } from '@api/iam/role';
+import { IamDeleteRoleByIdCommand, IamFindRoleByIdQuery } from '@app/iam/role';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteRoleByIdHandler
@@ -22,9 +19,15 @@ export class IamDeleteRoleByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamRole | IamRoleDto>
     {
-        const role = await this.queryBus.ask(new FindRoleByIdQuery(id, constraint, { timezone }));
+        const role = await this.queryBus.ask(new IamFindRoleByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteRoleByIdCommand(
+        await this.commandBus.dispatch(new IamDeleteRoleByIdCommand(
             id,
             constraint,
             {

@@ -1,88 +1,129 @@
-// commands
-import { CreatePermissionCommandHandler } from './application/create/create-permission.command-handler';
-import { CreatePermissionsCommandHandler } from './application/create/create-permissions.command-handler';
-import { UpdatePermissionByIdCommandHandler } from './application/update/update-permission-by-id.command-handler';
-import { UpdatePermissionsCommandHandler } from './application/update/update-permissions.command-handler';
-import { UpsertPermissionCommandHandler } from './application/upsert/upsert-permission.command-handler';
-import { DeletePermissionByIdCommandHandler } from './application/delete/delete-permission-by-id.command-handler';
-import { DeletePermissionsCommandHandler } from './application/delete/delete-permissions.command-handler';
+// export commands
+export { IamCreatePermissionCommand } from './application/create/iam-create-permission.command';
+export { IamCreatePermissionsCommand } from './application/create/iam-create-permissions.command';
+export { IamUpdatePermissionByIdCommand } from './application/update/iam-update-permission-by-id.command';
+export { IamUpdatePermissionsCommand } from './application/update/iam-update-permissions.command';
+export { IamUpsertPermissionCommand } from './application/upsert/iam-upsert-permission.command';
+export { IamDeletePermissionByIdCommand } from './application/delete/iam-delete-permission-by-id.command';
+export { IamDeletePermissionsCommand } from './application/delete/iam-delete-permissions.command';
 
-// queries
-import { PaginatePermissionsQueryHandler } from './application/paginate/paginate-permissions.query-handler';
-import { GetPermissionsQueryHandler } from './application/get/get-permissions.query-handler';
-import { FindPermissionQueryHandler } from './application/find/find-permission.query-handler';
-import { FindPermissionByIdQueryHandler } from './application/find/find-permission-by-id.query-handler';
-import { RawSQLPermissionsQueryHandler } from './application/raw-sql/raw-sql-permissions.query-handler';
+// export queries
+export { IamPaginatePermissionsQuery } from './application/paginate/iam-paginate-permissions.query';
+export { IamGetPermissionsQuery } from './application/get/iam-get-permissions.query';
+export { IamFindPermissionQuery } from './application/find/iam-find-permission.query';
+export { IamFindPermissionByIdQuery } from './application/find/iam-find-permission-by-id.query';
+export { IamRawSQLPermissionsQuery } from './application/raw-sql/iam-raw-sql-permissions.query';
 
-// events
-import { CreatedPermissionEventHandler } from './application/events/created-permission.event-handler';
-import { CreatedPermissionsEventHandler } from './application/events/created-permissions.event-handler';
-import { UpdatedPermissionEventHandler } from './application/events/updated-permission.event-handler';
-import { UpdatedPermissionsEventHandler } from './application/events/updated-permissions.event-handler';
-import { DeletedPermissionEventHandler } from './application/events/deleted-permission.event-handler';
-import { DeletedPermissionsEventHandler } from './application/events/deleted-permissions.event-handler';
+// export mocks
+export { iamMockPermissionData } from './infrastructure/mock/iam-mock-permission.data';
+export { IamMockPermissionSeeder } from './infrastructure/mock/iam-mock-permission.seeder';
+export { IamMockPermissionRepository } from './infrastructure/mock/iam-mock-permission.repository';
 
-// services
-import { CreatePermissionService } from './application/create/create-permission.service';
-import { CreatePermissionsService } from './application/create/create-permissions.service';
-import { PaginatePermissionsService } from './application/paginate/paginate-permissions.service';
-import { GetPermissionsService } from './application/get/get-permissions.service';
-import { FindPermissionService } from './application/find/find-permission.service';
-import { FindPermissionByIdService } from './application/find/find-permission-by-id.service';
-import { RawSQLPermissionsService } from './application/raw-sql/raw-sql-permissions.service';
-import { UpdatePermissionByIdService } from './application/update/update-permission-by-id.service';
-import { UpdatePermissionsService } from './application/update/update-permissions.service';
-import { UpsertPermissionService } from './application/upsert/upsert-permission.service';
-import { DeletePermissionByIdService } from './application/delete/delete-permission-by-id.service';
-import { DeletePermissionsService } from './application/delete/delete-permissions.service';
+// export events
+export { IamAddPermissionsContextEvent } from './application/events/iam-add-permissions-context.event';
+export { IamCreatedPermissionsEvent } from './application/events/iam-created-permissions.event';
+export { IamCreatedPermissionEvent } from './application/events/iam-created-permission.event';
+export { IamDeletedPermissionsEvent } from './application/events/iam-deleted-permissions.event';
+export { IamDeletedPermissionEvent } from './application/events/iam-deleted-permission.event';
+export { IamUpdatedPermissionsEvent } from './application/events/iam-updated-permissions.event';
+export { IamUpdatedPermissionEvent } from './application/events/iam-updated-permission.event';
 
-// models
-export { IamPermissionModel } from './infrastructure/sequelize/sequelize-permission.model';
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
 
-// repository
-export { IPermissionRepository } from './domain/permission.repository';
-export { SequelizePermissionRepository } from './infrastructure/sequelize/sequelize-permission.repository';
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
+// domain
+export { IamPermission } from './domain/iam-permission.aggregate';
+export { IamPermissionMapper } from './domain/iam-permission.mapper';
+export { IamIPermissionRepository } from './domain/iam-permission.repository';
+export { IamPermissionResponse } from './domain/iam-permission.response';
+export { IamPermissionHelper } from './domain/iam-permission-helper';
+
+// infrastructure
+export { IamPermissionModel } from './infrastructure/sequelize/iam-sequelize-permission.model';
+export { IamPermissionsRolesModel } from './infrastructure/sequelize/iam-sequelize-permissions-roles.model';
+export { IamSequelizePermissionRepository } from './infrastructure/sequelize/iam-sequelize-permission.repository';
 
 // sagas
-export { PermissionSagas } from './application/sagas/permission.sagas';
+export { IamPermissionSagas } from './application/sagas/iam-permission.sagas';
+
+// command handlers
+import { IamCreatePermissionCommandHandler } from './application/create/iam-create-permission.command-handler';
+import { IamCreatePermissionsCommandHandler } from './application/create/iam-create-permissions.command-handler';
+import { IamUpdatePermissionByIdCommandHandler } from './application/update/iam-update-permission-by-id.command-handler';
+import { IamUpdatePermissionsCommandHandler } from './application/update/iam-update-permissions.command-handler';
+import { IamUpsertPermissionCommandHandler } from './application/upsert/iam-upsert-permission.command-handler';
+import { IamDeletePermissionByIdCommandHandler } from './application/delete/iam-delete-permission-by-id.command-handler';
+import { IamDeletePermissionsCommandHandler } from './application/delete/iam-delete-permissions.command-handler';
+
+// query handlers
+import { IamPaginatePermissionsQueryHandler } from './application/paginate/iam-paginate-permissions.query-handler';
+import { IamGetPermissionsQueryHandler } from './application/get/iam-get-permissions.query-handler';
+import { IamFindPermissionQueryHandler } from './application/find/iam-find-permission.query-handler';
+import { IamFindPermissionByIdQueryHandler } from './application/find/iam-find-permission-by-id.query-handler';
+import { IamRawSQLPermissionsQueryHandler } from './application/raw-sql/iam-raw-sql-permissions.query-handler';
+
+// event handlers
+import { IamCreatedPermissionEventHandler } from './application/events/iam-created-permission.event-handler';
+import { IamCreatedPermissionsEventHandler } from './application/events/iam-created-permissions.event-handler';
+import { IamUpdatedPermissionEventHandler } from './application/events/iam-updated-permission.event-handler';
+import { IamUpdatedPermissionsEventHandler } from './application/events/iam-updated-permissions.event-handler';
+import { IamDeletedPermissionEventHandler } from './application/events/iam-deleted-permission.event-handler';
+import { IamDeletedPermissionsEventHandler } from './application/events/iam-deleted-permissions.event-handler';
+
+// services
+import { IamCreatePermissionService } from './application/create/iam-create-permission.service';
+import { IamCreatePermissionsService } from './application/create/iam-create-permissions.service';
+import { IamPaginatePermissionsService } from './application/paginate/iam-paginate-permissions.service';
+import { IamGetPermissionsService } from './application/get/iam-get-permissions.service';
+import { IamFindPermissionService } from './application/find/iam-find-permission.service';
+import { IamFindPermissionByIdService } from './application/find/iam-find-permission-by-id.service';
+import { IamRawSQLPermissionsService } from './application/raw-sql/iam-raw-sql-permissions.service';
+import { IamUpdatePermissionByIdService } from './application/update/iam-update-permission-by-id.service';
+import { IamUpdatePermissionsService } from './application/update/iam-update-permissions.service';
+import { IamUpsertPermissionService } from './application/upsert/iam-upsert-permission.service';
+import { IamDeletePermissionByIdService } from './application/delete/iam-delete-permission-by-id.service';
+import { IamDeletePermissionsService } from './application/delete/iam-delete-permissions.service';
 
 export const IamPermissionHandlers = [
     // commands
-    CreatePermissionCommandHandler,
-    CreatePermissionsCommandHandler,
-    UpdatePermissionByIdCommandHandler,
-    UpdatePermissionsCommandHandler,
-    UpsertPermissionCommandHandler,
-    DeletePermissionByIdCommandHandler,
-    DeletePermissionsCommandHandler,
+    IamCreatePermissionCommandHandler,
+    IamCreatePermissionsCommandHandler,
+    IamUpdatePermissionByIdCommandHandler,
+    IamUpdatePermissionsCommandHandler,
+    IamUpsertPermissionCommandHandler,
+    IamDeletePermissionByIdCommandHandler,
+    IamDeletePermissionsCommandHandler,
 
     // queries
-    PaginatePermissionsQueryHandler,
-    GetPermissionsQueryHandler,
-    FindPermissionQueryHandler,
-    FindPermissionByIdQueryHandler,
-    RawSQLPermissionsQueryHandler,
+    IamPaginatePermissionsQueryHandler,
+    IamGetPermissionsQueryHandler,
+    IamFindPermissionQueryHandler,
+    IamFindPermissionByIdQueryHandler,
+    IamRawSQLPermissionsQueryHandler,
 
     // events
-    CreatedPermissionEventHandler,
-    CreatedPermissionsEventHandler,
-    UpdatedPermissionEventHandler,
-    UpdatedPermissionsEventHandler,
-    DeletedPermissionEventHandler,
-    DeletedPermissionsEventHandler,
+    IamCreatedPermissionEventHandler,
+    IamCreatedPermissionsEventHandler,
+    IamUpdatedPermissionEventHandler,
+    IamUpdatedPermissionsEventHandler,
+    IamDeletedPermissionEventHandler,
+    IamDeletedPermissionsEventHandler,
 ];
 
 export const IamPermissionServices = [
-    CreatePermissionService,
-    CreatePermissionsService,
-    PaginatePermissionsService,
-    GetPermissionsService,
-    FindPermissionService,
-    FindPermissionByIdService,
-    RawSQLPermissionsService,
-    UpdatePermissionByIdService,
-    UpdatePermissionsService,
-    UpsertPermissionService,
-    DeletePermissionByIdService,
-    DeletePermissionsService,
+    IamCreatePermissionService,
+    IamCreatePermissionsService,
+    IamPaginatePermissionsService,
+    IamGetPermissionsService,
+    IamFindPermissionService,
+    IamFindPermissionByIdService,
+    IamRawSQLPermissionsService,
+    IamUpdatePermissionByIdService,
+    IamUpdatePermissionsService,
+    IamUpsertPermissionService,
+    IamDeletePermissionByIdService,
+    IamDeletePermissionsService,
 ];

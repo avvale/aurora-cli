@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdateRolesHandler } from './iam-update-roles.handler';
 import { IamUpdateRolesInput } from '@api/graphql';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
+import { IamUpdateRolesHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateRolesHandler', () =>
 {
     let handler: IamUpdateRolesHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -38,9 +33,8 @@ describe('IamUpdateRolesHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateRolesHandler>(IamUpdateRolesHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateRolesHandler>(IamUpdateRolesHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamUpdateRolesHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('IamUpdateRolesHandler', () =>
 
         test('should return a roles updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await handler.main(<IamUpdateRolesInput>roles[0])).toBe(roles[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdateRolesInput>iamMockRoleData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockRoleData[0]);
         });
     });
 });

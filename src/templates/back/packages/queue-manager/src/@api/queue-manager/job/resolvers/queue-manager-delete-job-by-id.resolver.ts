@@ -1,9 +1,7 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerDeleteJobByIdHandler } from '../handlers/queue-manager-delete-job-by-id.handler';
 import { QueueManagerJob } from '@api/graphql';
+import { QueueManagerDeleteJobByIdHandler } from '@api/queue-manager/job';
+import { Auth } from '@aurora/decorators';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.job.delete')

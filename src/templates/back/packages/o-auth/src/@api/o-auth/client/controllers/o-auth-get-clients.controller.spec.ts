@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthGetClientsController, OAuthGetClientsHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthGetClientsController } from './o-auth-get-clients.controller';
-import { OAuthGetClientsHandler } from '../handlers/o-auth-get-clients.handler';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('OAuthGetClientsController', () =>
 {
@@ -43,10 +37,10 @@ describe('OAuthGetClientsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a clients', async () =>
+        test('should return a oAuthMockClientData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(clients)));
-            expect(await controller.main()).toBe(clients);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData)));
+            expect(await controller.main()).toBe(oAuthMockClientData);
         });
     });
 });

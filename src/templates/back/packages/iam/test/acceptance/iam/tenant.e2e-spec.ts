@@ -1,21 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { IamModule } from '@api/iam/iam.module';
+import { IamITenantRepository, iamMockTenantData, IamMockTenantSeeder } from '@app/iam/tenant';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { ITenantRepository } from '@app/iam/tenant/domain/tenant.repository';
-import { MockTenantSeeder } from '@app/iam/tenant/infrastructure/mock/mock-tenant.seeder';
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { IamModule } from '@api/iam/iam.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
-
-// has OAuth
-import { OAuthModule } from '@api/o-auth/o-auth.module';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -23,8 +18,8 @@ const importForeignModules = [];
 describe('tenant', () =>
 {
     let app: INestApplication;
-    let tenantRepository: ITenantRepository;
-    let tenantSeeder: MockTenantSeeder;
+    let tenantRepository: IamITenantRepository;
+    let tenantSeeder: IamMockTenantSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -38,7 +33,6 @@ describe('tenant', () =>
             imports: [
                 ...importForeignModules,
                 IamModule,
-                OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -62,17 +56,17 @@ describe('tenant', () =>
                 }),
             ],
             providers: [
-                MockTenantSeeder,
+                IamMockTenantSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = tenants;
+        mockData = iamMockTenantData;
         app = module.createNestApplication();
-        tenantRepository = module.get<ITenantRepository>(ITenantRepository);
-        tenantSeeder = module.get<MockTenantSeeder>(MockTenantSeeder);
+        tenantRepository = module.get<IamITenantRepository>(IamITenantRepository);
+        tenantSeeder = module.get<IamMockTenantSeeder>(IamMockTenantSeeder);
 
         // seed mock data in memory database
         await tenantRepository.insert(tenantSeeder.collectionSource);
@@ -310,7 +304,6 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: 'aurora', // code is a unique key
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(201);
@@ -376,7 +369,6 @@ describe('tenant', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: 'aurora', // code is a unique key
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
@@ -431,8 +423,8 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -530,7 +522,6 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        code: 'aurora', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -579,8 +570,8 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -654,8 +645,8 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -725,8 +716,8 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -755,7 +746,6 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        code: 'aurora', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -792,7 +782,6 @@ describe('tenant', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        code: 'aurora', // code is a unique key
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                     query: {
@@ -839,8 +828,8 @@ describe('tenant', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 

@@ -1,0 +1,133 @@
+enum CommonAttachmentFamilyFitType {
+    FIT_CROP
+    FIT_WIDTH
+    FIT_HEIGHT
+    FIT_WIDTH_FREE_CROP
+    FIT_HEIGHT_FREE_CROP
+}
+
+enum CommonAttachmentFamilyFormat {
+    JPG
+    PNG
+    GIF
+    TIF
+    BMP
+}
+
+
+type CommonAttachmentFamily
+{
+    id: ID!
+    resourceId: ID!
+    resource: CommonResource
+    name: GraphQLString!
+    width: GraphQLInt
+    height: GraphQLInt
+    fitType: CommonAttachmentFamilyFitType
+    quality: GraphQLInt
+    sizes: JSON
+    format: CommonAttachmentFamilyFormat
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input CommonCreateAttachmentFamilyInput
+{
+    id: ID!
+    resourceId: ID!
+    name: GraphQLString!
+    width: GraphQLInt
+    height: GraphQLInt
+    fitType: CommonAttachmentFamilyFitType
+    quality: GraphQLInt
+    sizes: JSON
+    format: CommonAttachmentFamilyFormat
+}
+
+input CommonUpdateAttachmentFamilyByIdInput
+{
+    id: ID!
+    resourceId: ID
+    name: GraphQLString
+    width: GraphQLInt
+    height: GraphQLInt
+    fitType: CommonAttachmentFamilyFitType
+    quality: GraphQLInt
+    sizes: JSON
+    format: CommonAttachmentFamilyFormat
+}
+
+input CommonUpdateAttachmentFamiliesInput
+{
+    id: ID
+    resourceId: ID
+    name: GraphQLString
+    width: GraphQLInt
+    height: GraphQLInt
+    fitType: CommonAttachmentFamilyFitType
+    quality: GraphQLInt
+    sizes: JSON
+    format: CommonAttachmentFamilyFormat
+}
+
+type Query
+{
+    commonFindAttachmentFamily(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): CommonAttachmentFamily
+
+    commonFindAttachmentFamilyById(
+        id: ID
+        constraint: QueryStatement
+    ): CommonAttachmentFamily
+
+    commonGetAttachmentFamilies(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachmentFamily]!
+
+    commonPaginateAttachmentFamilies(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    commonCreateAttachmentFamily(
+        payload: CommonCreateAttachmentFamilyInput!
+    ): CommonAttachmentFamily
+
+    commonCreateAttachmentFamilies(
+        payload: [CommonCreateAttachmentFamilyInput]!
+    ): Boolean!
+
+    commonUpdateAttachmentFamilyById(
+        payload: CommonUpdateAttachmentFamilyByIdInput!
+        constraint: QueryStatement
+    ): CommonAttachmentFamily
+
+    commonUpdateAttachmentFamilies(
+        payload: CommonUpdateAttachmentFamiliesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachmentFamily]!
+
+    commonUpsertAttachmentFamily(
+        payload: CommonUpdateAttachmentFamilyByIdInput!
+    ): CommonAttachmentFamily
+
+    commonDeleteAttachmentFamilyById(
+        id: ID!
+        constraint: QueryStatement
+    ): CommonAttachmentFamily
+
+    commonDeleteAttachmentFamilies(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachmentFamily]!
+
+}

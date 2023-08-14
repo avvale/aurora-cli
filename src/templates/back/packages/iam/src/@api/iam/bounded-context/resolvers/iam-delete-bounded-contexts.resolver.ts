@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamDeleteBoundedContextsHandler } from '../handlers/iam-delete-bounded-contexts.handler';
 import { IamBoundedContext } from '@api/graphql';
+import { IamDeleteBoundedContextsHandler } from '@api/iam/bounded-context';
+import { Auth } from '@aurora/decorators';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.boundedContext.delete')

@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdateTenantsHandler } from './iam-update-tenants.handler';
 import { IamUpdateTenantsInput } from '@api/graphql';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
+import { IamUpdateTenantsHandler } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateTenantsHandler', () =>
 {
     let handler: IamUpdateTenantsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -38,9 +33,8 @@ describe('IamUpdateTenantsHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateTenantsHandler>(IamUpdateTenantsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateTenantsHandler>(IamUpdateTenantsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamUpdateTenantsHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('IamUpdateTenantsHandler', () =>
 
         test('should return a tenants updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await handler.main(<IamUpdateTenantsInput>tenants[0])).toBe(tenants[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdateTenantsInput>iamMockTenantData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockTenantData[0]);
         });
     });
 });

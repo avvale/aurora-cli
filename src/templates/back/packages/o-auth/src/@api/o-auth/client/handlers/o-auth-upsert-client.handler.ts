@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
-import { UpsertClientCommand } from '@app/o-auth/client/application/upsert/upsert-client.command';
 import { OAuthClient, OAuthUpdateClientByIdInput } from '@api/graphql';
-import { OAuthClientDto, OAuthUpdateClientByIdDto } from '../dto';
+import { OAuthClientDto, OAuthUpdateClientByIdDto } from '@api/o-auth/client';
+import { OAuthFindClientByIdQuery, OAuthUpsertClientCommand } from '@app/o-auth/client';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpsertClientHandler
@@ -21,7 +18,7 @@ export class OAuthUpsertClientHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthClient | OAuthClientDto>
     {
-        await this.commandBus.dispatch(new UpsertClientCommand(
+        await this.commandBus.dispatch(new OAuthUpsertClientCommand(
             payload,
             {
                 timezone,
@@ -31,10 +28,12 @@ export class OAuthUpsertClientHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindClientByIdQuery(
+        return await this.queryBus.ask(new OAuthFindClientByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

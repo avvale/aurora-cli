@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindBoundedContextByIdQuery } from '@app/iam/bounded-context/application/find/find-bounded-context-by-id.query';
-import { DeleteBoundedContextByIdCommand } from '@app/iam/bounded-context/application/delete/delete-bounded-context-by-id.command';
 import { IamBoundedContext } from '@api/graphql';
-import { IamBoundedContextDto } from '../dto';
+import { IamBoundedContextDto } from '@api/iam/bounded-context';
+import { IamDeleteBoundedContextByIdCommand, IamFindBoundedContextByIdQuery } from '@app/iam/bounded-context';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteBoundedContextByIdHandler
@@ -22,9 +19,15 @@ export class IamDeleteBoundedContextByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamBoundedContext | IamBoundedContextDto>
     {
-        const boundedContext = await this.queryBus.ask(new FindBoundedContextByIdQuery(id, constraint, { timezone }));
+        const boundedContext = await this.queryBus.ask(new IamFindBoundedContextByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteBoundedContextByIdCommand(
+        await this.commandBus.dispatch(new IamDeleteBoundedContextByIdCommand(
             id,
             constraint,
             {

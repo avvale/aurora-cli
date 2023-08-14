@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { IamUpdateUserByIdInput, IamUser } from '@api/graphql';
+import { IamUpdateUserByIdDto, IamUserDto } from '@api/iam/user';
+import { IamFindUserByIdQuery, IamUpsertUserCommand } from '@app/iam/user';
 import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindUserByIdQuery } from '@app/iam/user/application/find/find-user-by-id.query';
-import { UpsertUserCommand } from '@app/iam/user/application/upsert/upsert-user.command';
-import { IamUser, IamUpdateUserByIdInput } from '@api/graphql';
-import { IamUserDto, IamUpdateUserByIdDto } from '../dto';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpsertUserHandler
@@ -21,7 +18,7 @@ export class IamUpsertUserHandler
         auditing?: AuditingMeta,
     ): Promise<IamUser | IamUserDto>
     {
-        await this.commandBus.dispatch(new UpsertUserCommand(
+        await this.commandBus.dispatch(new IamUpsertUserCommand(
             payload,
             {
                 timezone,
@@ -31,10 +28,12 @@ export class IamUpsertUserHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindUserByIdQuery(
+        return await this.queryBus.ask(new IamFindUserByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

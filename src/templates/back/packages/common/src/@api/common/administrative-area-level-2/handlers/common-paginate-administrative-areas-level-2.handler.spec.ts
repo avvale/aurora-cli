@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommonPaginateAdministrativeAreasLevel2Handler } from '@api/common/administrative-area-level-2';
 import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonPaginateAdministrativeAreasLevel2Handler', () =>
 {
     let handler: CommonPaginateAdministrativeAreasLevel2Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -23,19 +22,12 @@ describe('CommonPaginateAdministrativeAreasLevel2Handler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<CommonPaginateAdministrativeAreasLevel2Handler>(CommonPaginateAdministrativeAreasLevel2Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonPaginateAdministrativeAreasLevel2Handler should be defined', () =>
@@ -57,11 +49,17 @@ describe('CommonPaginateAdministrativeAreasLevel2Handler', () =>
                 count: commonMockAdministrativeAreaLevel2Data.length,
                 rows : commonMockAdministrativeAreaLevel2Data,
             })));
-            expect(await handler.main()).toEqual({
-                total: commonMockAdministrativeAreaLevel2Data.length,
-                count: commonMockAdministrativeAreaLevel2Data.length,
-                rows : commonMockAdministrativeAreaLevel2Data,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                ),
+            )
+                .toEqual({
+                    total: commonMockAdministrativeAreaLevel2Data.length,
+                    count: commonMockAdministrativeAreaLevel2Data.length,
+                    rows : commonMockAdministrativeAreaLevel2Data,
+                });
         });
     });
 });

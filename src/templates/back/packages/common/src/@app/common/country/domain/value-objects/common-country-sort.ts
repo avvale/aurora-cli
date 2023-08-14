@@ -2,12 +2,12 @@ import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonCountrySort extends SmallintValueObject
 {
-    public readonly type: string = 'CountrySort';
+    public readonly type: string = 'CommonCountrySort';
 
     constructor(value: number, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'CountrySort',
+            name       : 'CommonCountrySort',
             nullable   : true,
             undefinable: true,
             maxLength  : 6,

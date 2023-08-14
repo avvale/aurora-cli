@@ -1,21 +1,17 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { IamModule } from '@api/iam/iam.module';
+import { IamIRoleRepository, iamMockRoleData, IamMockRoleSeeder } from '@app/iam/role';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IRoleRepository } from '@app/iam/role/domain/role.repository';
-import { MockRoleSeeder } from '@app/iam/role/infrastructure/mock/mock-role.seeder';
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { IamModule } from '@api/iam/iam.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
-
-// has OAuth
-import { OAuthModule } from '@api/o-auth/o-auth.module';
+import * as request from 'supertest';
+import { OAuthModule } from './../../../src/@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -23,8 +19,8 @@ const importForeignModules = [];
 describe('role', () =>
 {
     let app: INestApplication;
-    let roleRepository: IRoleRepository;
-    let roleSeeder: MockRoleSeeder;
+    let roleRepository: IamIRoleRepository;
+    let roleSeeder: IamMockRoleSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -38,7 +34,6 @@ describe('role', () =>
             imports: [
                 ...importForeignModules,
                 IamModule,
-                OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -62,17 +57,17 @@ describe('role', () =>
                 }),
             ],
             providers: [
-                MockRoleSeeder,
+                IamMockRoleSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = roles;
+        mockData = iamMockRoleData;
         app = module.createNestApplication();
-        roleRepository = module.get<IRoleRepository>(IRoleRepository);
-        roleSeeder = module.get<MockRoleSeeder>(MockRoleSeeder);
+        roleRepository = module.get<IamIRoleRepository>(IamIRoleRepository);
+        roleSeeder = module.get<IamMockRoleSeeder>(IamMockRoleSeeder);
 
         // seed mock data in memory database
         await roleRepository.insert(roleSeeder.collectionSource);
@@ -280,7 +275,7 @@ describe('role', () =>
                 {
                     where:
                     {
-                        id: '56d179b9-4826-48e4-af32-072e07027763',
+                        id: '953976a0-2c9c-55cc-9e9a-699409077383',
                     },
                 },
             })
@@ -323,7 +318,7 @@ describe('role', () =>
     test('/REST:POST iam/role/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .post('/iam/role/find/1357a06c-e7b6-49e4-a8cb-6a6433c35ba3')
+            .post('/iam/role/find/5c72f1aa-5365-5cd2-a82e-f00d27b90095')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -347,7 +342,7 @@ describe('role', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                id: '16529b20-f6df-49e9-82e9-a9dc65be8c9e',
+                id: '85481adc-c39a-50f5-923d-5248fc4e9151',
             })
             .expect(404);
     });
@@ -371,7 +366,7 @@ describe('role', () =>
     test('/REST:DELETE iam/role/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/iam/role/delete/7755a7d8-127a-4b06-abd5-ab60fa4b889f')
+            .delete('/iam/role/delete/1114f65a-c2b7-5e81-81bd-8349863295cc')
             .set('Accept', 'application/json')
             .expect(404);
     });
@@ -403,7 +398,7 @@ describe('role', () =>
                 `,
                 variables:
                 {
-                    payload: _.omit(mockData[0], ['permissions', 'createdAt','updatedAt','deletedAt']),
+                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
                 },
             })
             .expect(200)
@@ -502,7 +497,7 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['permissions']),
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -539,7 +534,7 @@ describe('role', () =>
                     {
                         where:
                         {
-                            id: '3a188a44-1e89-4dcd-8919-b11c0457841c',
+                            id: '3b666860-c6f7-5a1e-8e9e-9b7bfadfaed2',
                         },
                     },
                 },
@@ -610,7 +605,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '74c0f0d8-937c-4ded-9a4f-ff2196b9c2ee',
+                    id: 'a0720fb4-c975-5361-a95f-b1e01c2d02fd',
                 },
             })
             .expect(200)
@@ -673,8 +668,8 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['permissions', 'createdAt','updatedAt','deletedAt']),
-                        id: 'e72379f5-fa88-46af-9bb9-aebb2bb31448',
+                        ...mockData[0],
+                        id: 'b0db47cd-d522-55ed-be21-1a97d79d84c0',
                     },
                 },
             })
@@ -708,7 +703,7 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['permissions']),
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
@@ -741,7 +736,7 @@ describe('role', () =>
                 `,
                 variables: {
                     payload: {
-                        ..._.omit(mockData[0], ['permissions']),
+                        ...mockData[0],
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                     query: {
@@ -778,7 +773,7 @@ describe('role', () =>
                     }
                 `,
                 variables: {
-                    id: '29a27eec-57d9-4233-8b5c-3e64fdb7ffe7',
+                    id: '4e167b49-b964-562e-995a-6ed023ecc5e9',
                 },
             })
             .expect(200)

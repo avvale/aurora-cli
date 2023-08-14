@@ -24,8 +24,8 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
     codeWriter.declareFrontBoundedContext();
     codeWriter.generateFrontNavigation();
     codeWriter.registerFrontNavigation();
-    codeWriter.generateDashboardTranslations(generateCommandState.schema.properties, 'en');
-    codeWriter.generateDashboardTranslations(generateCommandState.schema.properties, 'es');
-    codeWriter.generateDashboardNavigationTranslation('en');
-    codeWriter.generateDashboardNavigationTranslation('es');
+    codeWriter.generateFrontTranslations(generateCommandState.schema.properties, 'en');
+    codeWriter.generateFrontTranslations(generateCommandState.schema.properties, 'es');
+    codeWriter.generateFrontNavigationTranslation('en');
+    codeWriter.generateFrontNavigationTranslation('es');
 };

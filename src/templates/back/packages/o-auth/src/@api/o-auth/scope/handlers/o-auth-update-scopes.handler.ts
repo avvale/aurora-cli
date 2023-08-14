@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetScopesQuery } from '@app/o-auth/scope/application/get/get-scopes.query';
-import { UpdateScopesCommand } from '@app/o-auth/scope/application/update/update-scopes.command';
 import { OAuthScope, OAuthUpdateScopesInput } from '@api/graphql';
-import { OAuthScopeDto, OAuthUpdateScopesDto } from '../dto';
+import { OAuthScopeDto, OAuthUpdateScopesDto } from '@api/o-auth/scope';
+import { OAuthGetScopesQuery, OAuthUpdateScopesCommand } from '@app/o-auth/scope';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpdateScopesHandler
@@ -23,7 +20,7 @@ export class OAuthUpdateScopesHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthScope | OAuthScopeDto>
     {
-        await this.commandBus.dispatch(new UpdateScopesCommand(
+        await this.commandBus.dispatch(new OAuthUpdateScopesCommand(
             payload,
             queryStatement,
             constraint,
@@ -35,6 +32,12 @@ export class OAuthUpdateScopesHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetScopesQuery(queryStatement, constraint, { timezone }));
+        return await this.queryBus.ask(new OAuthGetScopesQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

@@ -1,3 +1,11 @@
+// export DTOs
+export { QueueManagerJobDto } from './dto/queue-manager-job.dto';
+
+// export handlers
+export { QueueManagerDeleteJobByIdHandler } from './handlers/queue-manager-delete-job-by-id.handler';
+export { QueueManagerPaginateJobsHandler } from './handlers/queue-manager-paginate-jobs.handler';
+export { QueueManagerFindJobByIdHandler } from './handlers/queue-manager-find-job-by-id.handler';
+
 // controllers
 import { QueueManagerPaginateJobsController } from './controllers/queue-manager-paginate-jobs.controller';
 import { QueueManagerFindJobByIdController } from './controllers/queue-manager-find-job-by-id.controller';

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthUpsertApplicationController, OAuthUpsertApplicationHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthUpsertApplicationController } from './o-auth-upsert-application.controller';
-import { OAuthUpsertApplicationHandler } from '../handlers/o-auth-upsert-application.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthUpsertApplicationController', () =>
 {
@@ -45,8 +39,8 @@ describe('OAuthUpsertApplicationController', () =>
 
         test('should return an application upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await controller.main(applications[0])).toBe(applications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(await controller.main(oAuthMockApplicationData[0])).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

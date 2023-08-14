@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindUserHandler } from '@api/iam/user';
+import { iamMockUserData } from '@app/iam/user';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamFindUserHandler } from './iam-find-user.handler';
-
-// sources
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
 
 describe('IamFindUserHandler', () =>
 {
     let handler: IamFindUserHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamFindUserHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
-        handler    = module.get<IamFindUserHandler>(IamFindUserHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamFindUserHandler>(IamFindUserHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamFindUserHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('IamFindUserHandler', () =>
 
         test('should return a user', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users[0])));
-            expect(await handler.main()).toBe(users[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockUserData[0]);
         });
     });
 });

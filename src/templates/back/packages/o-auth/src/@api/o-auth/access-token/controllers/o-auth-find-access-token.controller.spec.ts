@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthFindAccessTokenController, OAuthFindAccessTokenHandler } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindAccessTokenController } from './o-auth-find-access-token.controller';
-import { OAuthFindAccessTokenHandler } from '../handlers/o-auth-find-access-token.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 
 describe('OAuthFindAccessTokenController', () =>
 {
@@ -45,8 +39,8 @@ describe('OAuthFindAccessTokenController', () =>
 
         test('should return a accessToken', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accessTokens[0])));
-            expect(await controller.main()).toBe(accessTokens[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData[0])));
+            expect(await controller.main()).toBe(oAuthMockAccessTokenData[0]);
         });
     });
 });

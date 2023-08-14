@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerPaginateJobsRegistryController, QueueManagerPaginateJobsRegistryHandler } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerPaginateJobsRegistryController } from './queue-manager-paginate-jobs-registry.controller';
-import { QueueManagerPaginateJobsRegistryHandler } from '../handlers/queue-manager-paginate-jobs-registry.handler';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
 
 describe('QueueManagerPaginateJobsRegistryController', () =>
 {
@@ -43,17 +37,17 @@ describe('QueueManagerPaginateJobsRegistryController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a jobsRegistry', async () =>
+        test('should return a queueManagerMockJobRegistryData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : jobsRegistry,
+                rows : queueManagerMockJobRegistryData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : jobsRegistry,
+                rows : queueManagerMockJobRegistryData,
             });
         });
     });

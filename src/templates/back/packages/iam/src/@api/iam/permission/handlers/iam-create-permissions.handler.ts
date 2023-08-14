@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreatePermissionsCommand } from '@app/iam/permission/application/create/create-permissions.command';
 import { IamCreatePermissionInput } from '@api/graphql';
-import { IamCreatePermissionDto } from '../dto';
+import { IamCreatePermissionDto } from '@api/iam/permission';
+import { IamCreatePermissionsCommand } from '@app/iam/permission';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreatePermissionsHandler
@@ -19,7 +17,7 @@ export class IamCreatePermissionsHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreatePermissionsCommand(
+        await this.commandBus.dispatch(new IamCreatePermissionsCommand(
             payload,
             {
                 timezone,
@@ -28,6 +26,7 @@ export class IamCreatePermissionsHandler
                 },
             },
         ));
+
         return true;
     }
 }

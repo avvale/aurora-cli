@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamPaginateBoundedContextsHandler, IamPaginateBoundedContextsResolver } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamPaginateBoundedContextsResolver } from './iam-paginate-bounded-contexts.resolver';
-import { IamPaginateBoundedContextsHandler } from '../handlers/iam-paginate-bounded-contexts.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamPaginateBoundedContextsResolver', () =>
 {
@@ -30,7 +25,7 @@ describe('IamPaginateBoundedContextsResolver', () =>
         })
             .compile();
 
-        resolver    = module.get<IamPaginateBoundedContextsResolver>(IamPaginateBoundedContextsResolver);
+        resolver = module.get<IamPaginateBoundedContextsResolver>(IamPaginateBoundedContextsResolver);
         handler = module.get<IamPaginateBoundedContextsHandler>(IamPaginateBoundedContextsHandler);
     });
 
@@ -46,17 +41,17 @@ describe('IamPaginateBoundedContextsResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a boundedContexts', async () =>
+        test('should return a iamMockBoundedContextData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : boundedContexts,
+                rows : iamMockBoundedContextData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : boundedContexts,
+                rows : iamMockBoundedContextData,
             });
         });
     });

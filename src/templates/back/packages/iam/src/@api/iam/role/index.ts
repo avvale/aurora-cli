@@ -1,3 +1,48 @@
+// export DTOs
+export { IamRoleDto } from './dto/iam-role.dto';
+export { IamCreateRoleDto } from './dto/iam-create-role.dto';
+export { IamUpdateRoleByIdDto } from './dto/iam-update-role-by-id.dto';
+export { IamUpdateRolesDto } from './dto/iam-update-roles.dto';
+
+// export handlers
+export { IamCreateRoleHandler } from './handlers/iam-create-role.handler';
+export { IamCreateRolesHandler } from './handlers/iam-create-roles.handler';
+export { IamPaginateRolesHandler } from './handlers/iam-paginate-roles.handler';
+export { IamGetRolesHandler } from './handlers/iam-get-roles.handler';
+export { IamFindRoleByIdHandler } from './handlers/iam-find-role-by-id.handler';
+export { IamFindRoleHandler } from './handlers/iam-find-role.handler';
+export { IamUpdateRoleByIdHandler } from './handlers/iam-update-role-by-id.handler';
+export { IamUpdateRolesHandler } from './handlers/iam-update-roles.handler';
+export { IamUpsertRoleHandler } from './handlers/iam-upsert-role.handler';
+export { IamDeleteRoleByIdHandler } from './handlers/iam-delete-role-by-id.handler';
+export { IamDeleteRolesHandler } from './handlers/iam-delete-roles.handler';
+
+// export controllers
+export { IamCreateRoleController } from './controllers/iam-create-role.controller';
+export { IamCreateRolesController } from './controllers/iam-create-roles.controller';
+export { IamPaginateRolesController } from './controllers/iam-paginate-roles.controller';
+export { IamGetRolesController } from './controllers/iam-get-roles.controller';
+export { IamFindRoleByIdController } from './controllers/iam-find-role-by-id.controller';
+export { IamFindRoleController } from './controllers/iam-find-role.controller';
+export { IamUpdateRoleByIdController } from './controllers/iam-update-role-by-id.controller';
+export { IamUpdateRolesController } from './controllers/iam-update-roles.controller';
+export { IamUpsertRoleController } from './controllers/iam-upsert-role.controller';
+export { IamDeleteRoleByIdController } from './controllers/iam-delete-role-by-id.controller';
+export { IamDeleteRolesController } from './controllers/iam-delete-roles.controller';
+
+// exports resolvers
+export { IamCreateRoleResolver } from './resolvers/iam-create-role.resolver';
+export { IamCreateRolesResolver } from './resolvers/iam-create-roles.resolver';
+export { IamPaginateRolesResolver } from './resolvers/iam-paginate-roles.resolver';
+export { IamGetRolesResolver } from './resolvers/iam-get-roles.resolver';
+export { IamFindRoleByIdResolver } from './resolvers/iam-find-role-by-id.resolver';
+export { IamFindRoleResolver } from './resolvers/iam-find-role.resolver';
+export { IamUpdateRoleByIdResolver } from './resolvers/iam-update-role-by-id.resolver';
+export { IamUpdateRolesResolver } from './resolvers/iam-update-roles.resolver';
+export { IamUpsertRoleResolver } from './resolvers/iam-upsert-role.resolver';
+export { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
+export { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
+
 // controllers
 import { IamCreateRoleController } from './controllers/iam-create-role.controller';
 import { IamCreateRolesController } from './controllers/iam-create-roles.controller';

@@ -5,7 +5,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateAdministrativeAreasLevel3Controller', () =>
 {
     let controller: CommonCreateAdministrativeAreasLevel3Controller;
-    let handler: CommonCreateAdministrativeAreasLevel3Handler;
 
     beforeAll(async () =>
     {
@@ -25,7 +24,6 @@ describe('CommonCreateAdministrativeAreasLevel3Controller', () =>
             .compile();
 
         controller = module.get<CommonCreateAdministrativeAreasLevel3Controller>(CommonCreateAdministrativeAreasLevel3Controller);
-        handler = module.get<CommonCreateAdministrativeAreasLevel3Handler>(CommonCreateAdministrativeAreasLevel3Handler);
     });
 
     describe('main', () =>
@@ -37,7 +35,12 @@ describe('CommonCreateAdministrativeAreasLevel3Controller', () =>
 
         test('should return an commonMockAdministrativeAreaLevel3Data created', async () =>
         {
-            expect(await controller.main(commonMockAdministrativeAreaLevel3Data)).toBe(undefined);
+            expect(
+                await controller.main(
+                    commonMockAdministrativeAreaLevel3Data,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamDeleteRoleByIdController, IamDeleteRoleByIdHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteRoleByIdController } from './iam-delete-role-by-id.controller';
-import { IamDeleteRoleByIdHandler } from '../handlers/iam-delete-role-by-id.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamDeleteRoleByIdController', () =>
 {
@@ -45,8 +40,8 @@ describe('IamDeleteRoleByIdController', () =>
 
         test('should return an role deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await controller.main(roles[0].id)).toBe(roles[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(await controller.main(iamMockRoleData[0].id)).toBe(iamMockRoleData[0]);
         });
     });
 });

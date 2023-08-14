@@ -8,7 +8,6 @@ describe('CommonUpsertAdministrativeAreaLevel2Handler', () =>
 {
     let handler: CommonUpsertAdministrativeAreaLevel2Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -35,7 +34,6 @@ describe('CommonUpsertAdministrativeAreaLevel2Handler', () =>
 
         handler = module.get<CommonUpsertAdministrativeAreaLevel2Handler>(CommonUpsertAdministrativeAreaLevel2Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -48,7 +46,12 @@ describe('CommonUpsertAdministrativeAreaLevel2Handler', () =>
         test('should return an administrativeAreaLevel2 upserted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel2Data[0])));
-            expect(await handler.main(commonMockAdministrativeAreaLevel2Data[0])).toBe(commonMockAdministrativeAreaLevel2Data[0]);
+            expect(
+                await handler.main(
+                    commonMockAdministrativeAreaLevel2Data[0],
+                    'Europe/Madrid',
+                ))
+                .toBe(commonMockAdministrativeAreaLevel2Data[0]);
         });
     });
 });

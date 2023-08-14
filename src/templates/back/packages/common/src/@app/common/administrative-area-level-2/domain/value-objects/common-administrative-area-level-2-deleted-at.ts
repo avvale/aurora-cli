@@ -2,12 +2,12 @@ import { DataValueObject, TimestampValueObject, ValidationRules } from '@auroraj
 
 export class CommonAdministrativeAreaLevel2DeletedAt extends TimestampValueObject
 {
-    public readonly type: string = 'AdministrativeAreaLevel2DeletedAt';
+    public readonly type: string = 'CommonAdministrativeAreaLevel2DeletedAt';
 
     constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
-            name       : 'AdministrativeAreaLevel2DeletedAt',
+            name       : 'CommonAdministrativeAreaLevel2DeletedAt',
             nullable   : true,
             undefinable: true,
         }, validationRules), data);

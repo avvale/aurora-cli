@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteAccessTokensHandler, OAuthDeleteAccessTokensResolver } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteAccessTokensResolver } from './o-auth-delete-access-tokens.resolver';
-import { OAuthDeleteAccessTokensHandler } from '../handlers/o-auth-delete-access-tokens.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 
 describe('OAuthDeleteAccessTokensResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('OAuthDeleteAccessTokensResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return an accessTokens deleted', async () =>
+        test('should return an oAuthMockAccessTokenData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accessTokens)));
-            expect(await resolver.main()).toBe(accessTokens);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData)));
+            expect(await resolver.main()).toBe(oAuthMockAccessTokenData);
         });
     });
 });

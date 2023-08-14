@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamUpsertAccountController, IamUpsertAccountHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpsertAccountController } from './iam-upsert-account.controller';
-import { IamUpsertAccountHandler } from '../handlers/iam-upsert-account.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamUpsertAccountController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamUpsertAccountController', () =>
 
         test('should return an account upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await controller.main(accounts[0])).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(await controller.main(iamMockAccountData[0])).toBe(iamMockAccountData[0]);
         });
     });
 });

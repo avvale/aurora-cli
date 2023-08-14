@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetJobsRegistryQuery } from '@app/queue-manager/job-registry/application/get/get-jobs-registry.query';
 import { QueueManagerJobRegistry } from '@api/graphql';
-import { QueueManagerJobRegistryDto } from '../dto';
+import { QueueManagerJobRegistryDto } from '@api/queue-manager/job-registry';
+import { QueueManagerGetJobsRegistryQuery } from '@app/queue-manager/job-registry';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerGetJobsRegistryHandler
@@ -19,7 +17,7 @@ export class QueueManagerGetJobsRegistryHandler
         timezone?: string,
     ): Promise<QueueManagerJobRegistry[] | QueueManagerJobRegistryDto[]>
     {
-        return await this.queryBus.ask(new GetJobsRegistryQuery(
+        return await this.queryBus.ask(new QueueManagerGetJobsRegistryQuery(
             queryStatement,
             constraint,
             {

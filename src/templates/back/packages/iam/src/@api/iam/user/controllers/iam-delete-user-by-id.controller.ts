@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Param, Delete } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamUserDto } from '../dto';
+import { IamDeleteUserByIdHandler, IamUserDto } from '@api/iam/user';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamDeleteUserByIdHandler } from '../handlers/iam-delete-user-by-id.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete, Param } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] user')
 @Controller('iam/user/delete')

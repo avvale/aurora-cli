@@ -2,12 +2,12 @@ import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonLangCustomCode extends StringValueObject
 {
-    public readonly type: string = 'LangCustomCode';
+    public readonly type: string = 'CommonLangCustomCode';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'LangCustomCode',
+            name       : 'CommonLangCustomCode',
             nullable   : true,
             undefinable: true,
             maxLength  : 10,

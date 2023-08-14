@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthPaginateClientsController, OAuthPaginateClientsHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthPaginateClientsController } from './o-auth-paginate-clients.controller';
-import { OAuthPaginateClientsHandler } from '../handlers/o-auth-paginate-clients.handler';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('OAuthPaginateClientsController', () =>
 {
@@ -43,17 +37,17 @@ describe('OAuthPaginateClientsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a clients', async () =>
+        test('should return a oAuthMockClientData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : clients,
+                rows : oAuthMockClientData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : clients,
+                rows : oAuthMockClientData,
             });
         });
     });

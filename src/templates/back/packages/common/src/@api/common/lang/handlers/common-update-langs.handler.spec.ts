@@ -9,7 +9,6 @@ describe('CommonUpdateLangsHandler', () =>
 {
     let handler: CommonUpdateLangsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -36,7 +35,6 @@ describe('CommonUpdateLangsHandler', () =>
 
         handler = module.get<CommonUpdateLangsHandler>(CommonUpdateLangsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonUpdateLangsHandler should be defined', () =>
@@ -54,7 +52,15 @@ describe('CommonUpdateLangsHandler', () =>
         test('should return a langs updated', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
-            expect(await handler.main(<CommonUpdateLangsInput>commonMockLangData[0])).toBe(commonMockLangData[0]);
+            expect(
+                await handler.main(
+                    <CommonUpdateLangsInput>commonMockLangData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockLangData[0]);
         });
     });
 });

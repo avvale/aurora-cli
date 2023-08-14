@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { IamCreateTenantInput, IamTenant } from '@api/graphql';
+import { IamCreateTenantDto, IamTenantDto } from '@api/iam/tenant';
+import { IamCreateTenantCommand, IamFindTenantByIdQuery } from '@app/iam/tenant';
 import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindTenantByIdQuery } from '@app/iam/tenant/application/find/find-tenant-by-id.query';
-import { CreateTenantCommand } from '@app/iam/tenant/application/create/create-tenant.command';
-import { IamTenant, IamCreateTenantInput } from '@api/graphql';
-import { IamTenantDto, IamCreateTenantDto } from '../dto';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreateTenantHandler
@@ -21,7 +18,7 @@ export class IamCreateTenantHandler
         auditing?: AuditingMeta,
     ): Promise<IamTenant | IamTenantDto>
     {
-        await this.commandBus.dispatch(new CreateTenantCommand(
+        await this.commandBus.dispatch(new IamCreateTenantCommand(
             payload,
             {
                 timezone,
@@ -31,10 +28,12 @@ export class IamCreateTenantHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindTenantByIdQuery(
+        return await this.queryBus.ask(new IamFindTenantByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

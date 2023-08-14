@@ -1,11 +1,9 @@
+import { IamAccount } from '@api/graphql';
+import { IamFindAccountQuery } from '@app/iam/account';
+import { OAuthFindAccessTokenByIdQuery } from '@app/o-auth/access-token';
+import { IQueryBus, Jwt } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IQueryBus, Jwt } from '@aurorajs.dev/core';
-
-// @app
-import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';
-import { FindAccountQuery } from '@app/iam/account/application/find/find-account.query';
-import { IamAccount } from '@api/graphql';
 import { IamAccountDto } from '../dto';
 
 @Injectable()
@@ -24,10 +22,10 @@ export class IamMeAccountHandler
         const jwt = <Jwt>this.jwtService.decode(authorization.replace('Bearer ', ''));
 
         // get access token from database
-        const accessToken = await this.queryBus.ask(new FindAccessTokenByIdQuery(jwt.jit));
+        const accessToken = await this.queryBus.ask(new OAuthFindAccessTokenByIdQuery(jwt.jit));
 
         // get account who belongs this token
-        return await this.queryBus.ask(new FindAccountQuery({
+        return await this.queryBus.ask(new IamFindAccountQuery({
             where: {
                 id: accessToken.accountId,
             },

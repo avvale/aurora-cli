@@ -1,6 +1,6 @@
 /* eslint-disable indent */
+import { OAuthClientDto } from '@api/o-auth/client';
 import { ApiProperty } from '@nestjs/swagger';
-import { OAuthClientDto } from '../../../o-auth/client/dto/o-auth-client.dto';
 
 export class OAuthApplicationDto
 {

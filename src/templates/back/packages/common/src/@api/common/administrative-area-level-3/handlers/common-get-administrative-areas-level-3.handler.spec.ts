@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommonGetAdministrativeAreasLevel3Handler } from '@api/common/administrative-area-level-3';
 import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonGetAdministrativeAreasLevel3Handler', () =>
 {
     let handler: CommonGetAdministrativeAreasLevel3Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -23,19 +22,12 @@ describe('CommonGetAdministrativeAreasLevel3Handler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<CommonGetAdministrativeAreasLevel3Handler>(CommonGetAdministrativeAreasLevel3Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonGetAdministrativeAreasLevel3Handler should be defined', () =>
@@ -53,7 +45,14 @@ describe('CommonGetAdministrativeAreasLevel3Handler', () =>
         test('should return a commonMockAdministrativeAreaLevel3Data', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel3Data)));
-            expect(await handler.main()).toBe(commonMockAdministrativeAreaLevel3Data);
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockAdministrativeAreaLevel3Data);
         });
     });
 });

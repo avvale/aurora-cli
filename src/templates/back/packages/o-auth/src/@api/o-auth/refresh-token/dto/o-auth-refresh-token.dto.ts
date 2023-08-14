@@ -1,6 +1,6 @@
 /* eslint-disable indent */
+import { OAuthAccessTokenDto } from '@api/o-auth/access-token';
 import { ApiProperty } from '@nestjs/swagger';
-import { OAuthAccessTokenDto } from '../../../o-auth/access-token/dto/o-auth-access-token.dto';
 
 export class OAuthRefreshTokenDto
 {

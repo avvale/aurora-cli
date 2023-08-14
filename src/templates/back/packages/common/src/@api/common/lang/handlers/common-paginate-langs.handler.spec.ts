@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommonPaginateLangsHandler } from '@api/common/lang';
 import { commonMockLangData } from '@app/common/lang';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonPaginateLangsHandler', () =>
 {
     let handler: CommonPaginateLangsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -23,19 +22,12 @@ describe('CommonPaginateLangsHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<CommonPaginateLangsHandler>(CommonPaginateLangsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonPaginateLangsHandler should be defined', () =>
@@ -57,11 +49,17 @@ describe('CommonPaginateLangsHandler', () =>
                 count: commonMockLangData.length,
                 rows : commonMockLangData,
             })));
-            expect(await handler.main()).toEqual({
-                total: commonMockLangData.length,
-                count: commonMockLangData.length,
-                rows : commonMockLangData,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                ),
+            )
+                .toEqual({
+                    total: commonMockLangData.length,
+                    count: commonMockLangData.length,
+                    rows : commonMockLangData,
+                });
         });
     });
 });

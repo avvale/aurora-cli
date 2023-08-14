@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthCreateApplicationHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthCreateApplicationHandler } from './o-auth-create-application.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateApplicationHandler', () =>
 {
     let handler: OAuthCreateApplicationHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('OAuthCreateApplicationHandler', () =>
         })
             .compile();
 
-        handler     = module.get<OAuthCreateApplicationHandler>(OAuthCreateApplicationHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthCreateApplicationHandler>(OAuthCreateApplicationHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,14 @@ describe('OAuthCreateApplicationHandler', () =>
 
         test('should return an application created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await handler.main(applications[0])).toBe(applications[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(
+                await handler.main(
+                    oAuthMockApplicationData[0],
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockApplicationData[0]);
         });
     });
 });

@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindBoundedContextByIdQuery } from '@app/iam/bounded-context/application/find/find-bounded-context-by-id.query';
-import { CreateBoundedContextCommand } from '@app/iam/bounded-context/application/create/create-bounded-context.command';
 import { IamBoundedContext, IamCreateBoundedContextInput } from '@api/graphql';
-import { IamBoundedContextDto, IamCreateBoundedContextDto } from '../dto';
+import { IamBoundedContextDto, IamCreateBoundedContextDto } from '@api/iam/bounded-context';
+import { IamCreateBoundedContextCommand, IamFindBoundedContextByIdQuery } from '@app/iam/bounded-context';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreateBoundedContextHandler
@@ -21,7 +18,7 @@ export class IamCreateBoundedContextHandler
         auditing?: AuditingMeta,
     ): Promise<IamBoundedContext | IamBoundedContextDto>
     {
-        await this.commandBus.dispatch(new CreateBoundedContextCommand(
+        await this.commandBus.dispatch(new IamCreateBoundedContextCommand(
             payload,
             {
                 timezone,
@@ -31,6 +28,12 @@ export class IamCreateBoundedContextHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindBoundedContextByIdQuery(payload.id, {}, { timezone }));
+        return await this.queryBus.ask(new IamFindBoundedContextByIdQuery(
+            payload.id,
+            {},
+            {
+                timezone,
+            },
+        ));
     }
 }

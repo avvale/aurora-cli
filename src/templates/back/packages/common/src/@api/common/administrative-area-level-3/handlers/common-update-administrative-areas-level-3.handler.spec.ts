@@ -9,7 +9,6 @@ describe('CommonUpdateAdministrativeAreasLevel3Handler', () =>
 {
     let handler: CommonUpdateAdministrativeAreasLevel3Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -36,7 +35,6 @@ describe('CommonUpdateAdministrativeAreasLevel3Handler', () =>
 
         handler = module.get<CommonUpdateAdministrativeAreasLevel3Handler>(CommonUpdateAdministrativeAreasLevel3Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonUpdateAdministrativeAreasLevel3Handler should be defined', () =>
@@ -54,7 +52,15 @@ describe('CommonUpdateAdministrativeAreasLevel3Handler', () =>
         test('should return a administrativeAreasLevel3 updated', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel3Data[0])));
-            expect(await handler.main(<CommonUpdateAdministrativeAreasLevel3Input>commonMockAdministrativeAreaLevel3Data[0])).toBe(commonMockAdministrativeAreaLevel3Data[0]);
+            expect(
+                await handler.main(
+                    <CommonUpdateAdministrativeAreasLevel3Input>commonMockAdministrativeAreaLevel3Data[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockAdministrativeAreaLevel3Data[0]);
         });
     });
 });

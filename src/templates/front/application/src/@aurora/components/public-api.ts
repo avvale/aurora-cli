@@ -5,6 +5,7 @@ export * from './datepicker';
 export * from './datepicker-sql-format';
 export * from './datetimepicker-sql-format';
 export * from './environments-information';
+export * from './file-input';
 export * from './file-preview-overlay';
 export * from './file-upload';
 export * from './flag-icon';

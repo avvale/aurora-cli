@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindRoleHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamFindRoleHandler } from './iam-find-role.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamFindRoleHandler', () =>
 {
     let handler: IamFindRoleHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamFindRoleHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
-        handler    = module.get<IamFindRoleHandler>(IamFindRoleHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamFindRoleHandler>(IamFindRoleHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamFindRoleHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('IamFindRoleHandler', () =>
 
         test('should return a role', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await handler.main()).toBe(roles[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockRoleData[0]);
         });
     });
 });

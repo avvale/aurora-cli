@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthFindScopeHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthFindScopeHandler } from './o-auth-find-scope.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthFindScopeHandler', () =>
 {
     let handler: OAuthFindScopeHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('OAuthFindScopeHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
-        handler    = module.get<OAuthFindScopeHandler>(OAuthFindScopeHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthFindScopeHandler>(OAuthFindScopeHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('OAuthFindScopeHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('OAuthFindScopeHandler', () =>
 
         test('should return a scope', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(scopes[0])));
-            expect(await handler.main()).toBe(scopes[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockScopeData[0]);
         });
     });
 });

@@ -4,14 +4,11 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { accounts, boundedContexts, permissions, roles, users } from '@app/iam/iam.seed';
 
 // sources
-import { BoundedContextHelper } from '@app/iam/bounded-context/domain/bounded-context-helper';
-import { PermissionHelper } from '@app/iam/permission/domain/permission-helper';
-import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';
-import { CreateAccountsCommand } from '@app/iam/account/application/create/create-accounts.command';
-import { CreateUsersCommand } from '@app/iam/user/application/create/create-users.command';
-import { CreateRolesCommand } from '@app/iam/role/application/create/create-roles.command';
-import { CreateRolesAccountsCommand } from '@app/iam/role/application/create/create-roles-accounts.command';
-import { IamAccount } from '@app/iam/account/domain/account.aggregate';
+import { IamBoundedContextHelper } from '@app/iam/bounded-context';
+import { IamPermissionHelper } from '@app/iam/permission';
+import { IamAccount, IamCreateAccountsCommand, IamFindAccountByIdQuery } from '@app/iam/account';
+import { IamCreateUsersCommand } from '@app/iam/user';
+import { IamCreateRolesCommand, IamCreateRolesAccountsCommand } from '@app/iam/role';
 
 @Injectable()
 export class IamSeeder
@@ -27,7 +24,11 @@ export class IamSeeder
     {
         try
         {
-            this.administratorAccount = await this.queryBus.ask(new FindAccountByIdQuery(PermissionHelper.administratorAccountId));
+            this.administratorAccount = await this.queryBus.ask(
+                new IamFindAccountByIdQuery(
+                    IamPermissionHelper.administratorAccountId,
+                ),
+            );
         }
         catch (error)
         {
@@ -38,28 +39,28 @@ export class IamSeeder
         if (this.administratorAccount)
         {
             // create bounded contexts and permissions
-            await BoundedContextHelper.createBoundedContexts(this.commandBus, boundedContexts);
-            await PermissionHelper.createPermissions(this.commandBus, this.queryBus, permissions);
+            await IamBoundedContextHelper.createBoundedContexts(this.commandBus, boundedContexts);
+            await IamPermissionHelper.createPermissions(this.commandBus, this.queryBus, permissions);
         }
         else
         {
-            await this.commandBus.dispatch(new CreateAccountsCommand(accounts));
-            await this.commandBus.dispatch(new CreateUsersCommand(users));
-            await this.commandBus.dispatch(new CreateRolesCommand(roles));
+            await this.commandBus.dispatch(new IamCreateAccountsCommand(accounts));
+            await this.commandBus.dispatch(new IamCreateUsersCommand(users));
+            await this.commandBus.dispatch(new IamCreateRolesCommand(roles));
 
             // set all roles to administration account
             const rolesAccounts = roles.map(role =>
             {
                 return {
                     roleId   : role.id,
-                    accountId: PermissionHelper.administratorAccountId,
+                    accountId: IamPermissionHelper.administratorAccountId,
                 };
             });
-            await this.commandBus.dispatch(new CreateRolesAccountsCommand(rolesAccounts));
+            await this.commandBus.dispatch(new IamCreateRolesAccountsCommand(rolesAccounts));
 
             // create bounded contexts and permissions
-            await BoundedContextHelper.createBoundedContexts(this.commandBus, boundedContexts);
-            await PermissionHelper.createPermissions(this.commandBus, this.queryBus, permissions);
+            await IamBoundedContextHelper.createBoundedContexts(this.commandBus, boundedContexts);
+            await IamPermissionHelper.createPermissions(this.commandBus, this.queryBus, permissions);
         }
 
         return true;

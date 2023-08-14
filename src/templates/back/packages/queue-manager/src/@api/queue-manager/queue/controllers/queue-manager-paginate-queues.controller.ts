@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { QueueManagerPaginateQueuesHandler } from '@api/queue-manager/queue';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerPaginateQueuesHandler } from '../handlers/queue-manager-paginate-queues.handler';
+import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[queue-manager] queue')
 @Controller('queue-manager/queues/paginate')

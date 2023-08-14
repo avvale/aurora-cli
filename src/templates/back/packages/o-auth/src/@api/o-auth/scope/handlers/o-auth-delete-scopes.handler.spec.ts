@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthDeleteScopesHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthDeleteScopesHandler } from './o-auth-delete-scopes.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteScopesHandler', () =>
 {
     let handler: OAuthDeleteScopesHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('OAuthDeleteScopesHandler', () =>
         })
             .compile();
 
-        handler    = module.get<OAuthDeleteScopesHandler>(OAuthDeleteScopesHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthDeleteScopesHandler>(OAuthDeleteScopesHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('OAuthDeleteScopesHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('OAuthDeleteScopesHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an scopes deleted', async () =>
+        test('should return an oAuthMockScopeData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(scopes)));
-            expect(await handler.main()).toBe(scopes);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockScopeData);
         });
     });
 });
