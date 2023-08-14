@@ -5,7 +5,6 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 import {
     {{> importValueObjects }}
 } from '../../domain/value-objects';
-
 @CommandHandler({{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand)
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommandHandler implements ICommandHandler<{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand>
 {
