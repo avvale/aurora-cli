@@ -1,16 +1,10 @@
+import { IamCreateTenantsController, IamCreateTenantsHandler } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateTenantsController } from './iam-create-tenants.controller';
-import { IamCreateTenantsHandler } from '../handlers/iam-create-tenants.handler';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamCreateTenantsController', () =>
 {
     let controller: IamCreateTenantsController;
-    let handler: IamCreateTenantsHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('IamCreateTenantsController', () =>
             .compile();
 
         controller = module.get<IamCreateTenantsController>(IamCreateTenantsController);
-        handler = module.get<IamCreateTenantsHandler>(IamCreateTenantsHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('IamCreateTenantsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an tenants created', async () =>
+        test('should return an iamMockTenantData created', async () =>
         {
-            expect(await controller.main(tenants)).toBe(undefined);
+            expect(
+                await controller.main(
+                    iamMockTenantData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

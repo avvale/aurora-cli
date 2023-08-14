@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindRoleHandler, IamFindRoleResolver } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindRoleResolver } from './iam-find-role.resolver';
-import { IamFindRoleHandler } from '../handlers/iam-find-role.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamFindRoleResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('IamFindRoleResolver', () =>
 
         test('should return a role', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await resolver.main()).toBe(roles[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(await resolver.main()).toBe(iamMockRoleData[0]);
         });
     });
 });

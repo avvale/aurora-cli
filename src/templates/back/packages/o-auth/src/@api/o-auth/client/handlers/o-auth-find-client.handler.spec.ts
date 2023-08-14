@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthFindClientHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthFindClientHandler } from './o-auth-find-client.handler';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('OAuthFindClientHandler', () =>
 {
     let handler: OAuthFindClientHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('OAuthFindClientHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
-        handler    = module.get<OAuthFindClientHandler>(OAuthFindClientHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthFindClientHandler>(OAuthFindClientHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('OAuthFindClientHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('OAuthFindClientHandler', () =>
 
         test('should return a client', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await handler.main()).toBe(clients[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockClientData[0]);
         });
     });
 });

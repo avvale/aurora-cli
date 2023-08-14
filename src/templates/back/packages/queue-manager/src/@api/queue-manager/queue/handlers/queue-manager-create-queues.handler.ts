@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateQueuesCommand } from '@app/queue-manager/queue/application/create/create-queues.command';
 import { QueueManagerCreateQueueInput } from '@api/graphql';
-import { QueueManagerCreateQueueDto } from '../dto';
+import { QueueManagerCreateQueueDto } from '@api/queue-manager/queue';
+import { QueueManagerCreateQueuesCommand } from '@app/queue-manager/queue';
+import { ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerCreateQueuesHandler
@@ -18,12 +16,13 @@ export class QueueManagerCreateQueuesHandler
         timezone?: string,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateQueuesCommand(
+        await this.commandBus.dispatch(new QueueManagerCreateQueuesCommand(
             payload,
             {
                 timezone,
             },
         ));
+
         return true;
     }
 }

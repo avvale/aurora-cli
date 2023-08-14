@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { QueueManagerJobRegistryDto, QueueManagerUpdateJobRegistryByIdDto } from '../dto';
+import { QueueManagerJobRegistryDto, QueueManagerUpdateJobRegistryByIdDto, QueueManagerUpsertJobRegistryHandler } from '@api/queue-manager/job-registry';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerUpsertJobRegistryHandler } from '../handlers/queue-manager-upsert-job-registry.handler';
+import { Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[queue-manager] job-registry')
 @Controller('queue-manager/job-registry/upsert')

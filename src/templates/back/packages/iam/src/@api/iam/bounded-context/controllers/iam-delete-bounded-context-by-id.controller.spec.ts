@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamDeleteBoundedContextByIdController, IamDeleteBoundedContextByIdHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteBoundedContextByIdController } from './iam-delete-bounded-context-by-id.controller';
-import { IamDeleteBoundedContextByIdHandler } from '../handlers/iam-delete-bounded-context-by-id.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamDeleteBoundedContextByIdController', () =>
 {
@@ -45,8 +40,8 @@ describe('IamDeleteBoundedContextByIdController', () =>
 
         test('should return an boundedContext deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await controller.main(boundedContexts[0].id)).toBe(boundedContexts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(await controller.main(iamMockBoundedContextData[0].id)).toBe(iamMockBoundedContextData[0]);
         });
     });
 });

@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindQueueByIdQuery } from '@app/queue-manager/queue/application/find/find-queue-by-id.query';
-import { UpdateQueueByIdCommand } from '@app/queue-manager/queue/application/update/update-queue-by-id.command';
 import { QueueManagerQueue, QueueManagerUpdateQueueByIdInput } from '@api/graphql';
-import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto } from '../dto';
+import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto } from '@api/queue-manager/queue';
+import { QueueManagerFindQueueByIdQuery, QueueManagerUpdateQueueByIdCommand } from '@app/queue-manager/queue';
+import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerUpdateQueueByIdHandler
@@ -21,7 +18,7 @@ export class QueueManagerUpdateQueueByIdHandler
         timezone?: string,
     ): Promise<QueueManagerQueue | QueueManagerQueueDto>
     {
-        const queue = await this.queryBus.ask(new FindQueueByIdQuery(
+        const queue = await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
             payload.id,
             constraint,
             {
@@ -31,7 +28,7 @@ export class QueueManagerUpdateQueueByIdHandler
 
         const dataToUpdate = Utils.diff(payload, queue);
 
-        await this.commandBus.dispatch(new UpdateQueueByIdCommand(
+        await this.commandBus.dispatch(new QueueManagerUpdateQueueByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -42,7 +39,7 @@ export class QueueManagerUpdateQueueByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindQueueByIdQuery(
+        return await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
             payload.id,
             constraint,
             {

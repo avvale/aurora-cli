@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthUpdateScopeByIdHandler } from './o-auth-update-scope-by-id.handler';
 import { OAuthUpdateScopeByIdInput } from '@api/graphql';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
+import { OAuthUpdateScopeByIdHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpdateScopeByIdHandler', () =>
 {
     let handler: OAuthUpdateScopeByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -38,9 +33,8 @@ describe('OAuthUpdateScopeByIdHandler', () =>
         })
             .compile();
 
-        handler     = module.get<OAuthUpdateScopeByIdHandler>(OAuthUpdateScopeByIdHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthUpdateScopeByIdHandler>(OAuthUpdateScopeByIdHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('OAuthUpdateScopeByIdHandler should be defined', () =>
@@ -57,8 +51,14 @@ describe('OAuthUpdateScopeByIdHandler', () =>
 
         test('should return a scope updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(scopes[0])));
-            expect(await handler.main(<OAuthUpdateScopeByIdInput>scopes[0])).toBe(scopes[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+            expect(
+                await handler.main(
+                    <OAuthUpdateScopeByIdInput>oAuthMockScopeData[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(oAuthMockScopeData[0]);
         });
     });
 });

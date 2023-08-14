@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthGetRefreshTokensHandler } from '@api/o-auth/refresh-token';
+import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthGetRefreshTokensHandler } from './o-auth-get-refresh-tokens.handler';
-
-// sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 
 describe('OAuthGetRefreshTokensHandler', () =>
 {
     let handler: OAuthGetRefreshTokensHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('OAuthGetRefreshTokensHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<OAuthGetRefreshTokensHandler>(OAuthGetRefreshTokensHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthGetRefreshTokensHandler should be defined', () =>
@@ -54,10 +42,17 @@ describe('OAuthGetRefreshTokensHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return a refreshTokens', async () =>
+        test('should return a oAuthMockRefreshTokenData', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await handler.main()).toBe(refreshTokens);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockRefreshTokenData);
         });
     });
 });

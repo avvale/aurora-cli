@@ -31,16 +31,13 @@ import {
     CommonCountryI18nAdministrativeAreaLevel3,
 } from '../../domain/value-objects';
 import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { ICountryI18nRepository } from '../../domain/country-i18n.repository';
+import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
 import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
 describe('CommonCreateCountryService', () =>
 
 {
     let service: CommonCreateCountryService;
-    let repository: CommonICountryRepository;
-    let repositoryI18n: ICountryI18nRepository;
-    let mockRepository: CommonMockCountryRepository;
 
     beforeAll(async () =>
     {
@@ -59,7 +56,7 @@ describe('CommonCreateCountryService', () =>
                     },
                 },
                 {
-                    provide : ICountryI18nRepository,
+                    provide : CommonICountryI18nRepository,
                     useValue: {
                         create: () => { /**/ },
                     },
@@ -69,9 +66,6 @@ describe('CommonCreateCountryService', () =>
             .compile();
 
         service = module.get(CommonCreateCountryService);
-        repository = module.get(CommonICountryRepository);
-        repositoryI18n = module.get(ICountryI18nRepository);
-        mockRepository = module.get(CommonMockCountryRepository);
     });
 
     describe('main', () =>
@@ -83,29 +77,60 @@ describe('CommonCreateCountryService', () =>
 
         test('should create a country and emit event', async () =>
         {
-            expect(await service.main(
-                {
-                    id: new CommonCountryId(commonMockCountryData[0].id),
-                    iso3166Alpha2: new CommonCountryIso3166Alpha2(commonMockCountryData[0].iso3166Alpha2),
-                    iso3166Alpha3: new CommonCountryIso3166Alpha3(commonMockCountryData[0].iso3166Alpha3),
-                    iso3166Numeric: new CommonCountryIso3166Numeric(commonMockCountryData[0].iso3166Numeric),
-                    customCode: new CommonCountryCustomCode(commonMockCountryData[0].customCode),
-                    prefix: new CommonCountryPrefix(commonMockCountryData[0].prefix),
-                    image: new CommonCountryImage(commonMockCountryData[0].image),
-                    sort: new CommonCountrySort(commonMockCountryData[0].sort),
-                    administrativeAreas: new CommonCountryAdministrativeAreas(commonMockCountryData[0].administrativeAreas),
-                    latitude: new CommonCountryLatitude(commonMockCountryData[0].latitude),
-                    longitude: new CommonCountryLongitude(commonMockCountryData[0].longitude),
-                    zoom: new CommonCountryZoom(commonMockCountryData[0].zoom),
-                    mapType: new CommonCountryMapType(commonMockCountryData[0].mapType),
-                    langId: new CommonCountryI18nLangId(commonMockCountryData[0].langId),
-                    name: new CommonCountryI18nName(commonMockCountryData[0].name),
-                    slug: new CommonCountryI18nSlug(commonMockCountryData[0].slug),
-                    administrativeAreaLevel1: new CommonCountryI18nAdministrativeAreaLevel1(commonMockCountryData[0].administrativeAreaLevel1),
-                    administrativeAreaLevel2: new CommonCountryI18nAdministrativeAreaLevel2(commonMockCountryData[0].administrativeAreaLevel2),
-                    administrativeAreaLevel3: new CommonCountryI18nAdministrativeAreaLevel3(commonMockCountryData[0].administrativeAreaLevel3),
-                },
-            )).toBe(undefined);
+            expect(
+                await service.main(
+                    {
+                        id: new CommonCountryId(commonMockCountryData[0].id),
+                        iso3166Alpha2: new CommonCountryIso3166Alpha2(commonMockCountryData[0].iso3166Alpha2),
+                        iso3166Alpha3: new CommonCountryIso3166Alpha3(commonMockCountryData[0].iso3166Alpha3),
+                        iso3166Numeric: new CommonCountryIso3166Numeric(commonMockCountryData[0].iso3166Numeric),
+                        customCode: new CommonCountryCustomCode(commonMockCountryData[0].customCode),
+                        prefix: new CommonCountryPrefix(commonMockCountryData[0].prefix),
+                        image: new CommonCountryImage(commonMockCountryData[0].image),
+                        sort: new CommonCountrySort(commonMockCountryData[0].sort),
+                        administrativeAreas: new CommonCountryAdministrativeAreas(commonMockCountryData[0].administrativeAreas),
+                        latitude: new CommonCountryLatitude(commonMockCountryData[0].latitude),
+                        longitude: new CommonCountryLongitude(commonMockCountryData[0].longitude),
+                        zoom: new CommonCountryZoom(commonMockCountryData[0].zoom),
+                        mapType: new CommonCountryMapType(commonMockCountryData[0].mapType),
+                        langId: new CommonCountryI18nLangId(commonMockCountryData[0].langId),
+                        name: new CommonCountryI18nName(commonMockCountryData[0].name),
+                        slug: new CommonCountryI18nSlug(commonMockCountryData[0].slug),
+                        administrativeAreaLevel1: new CommonCountryI18nAdministrativeAreaLevel1(commonMockCountryData[0].administrativeAreaLevel1),
+                        administrativeAreaLevel2: new CommonCountryI18nAdministrativeAreaLevel2(commonMockCountryData[0].administrativeAreaLevel2),
+                        administrativeAreaLevel3: new CommonCountryI18nAdministrativeAreaLevel3(commonMockCountryData[0].administrativeAreaLevel3),
+                    },
+                    {
+                        meta: {
+                            fallbackLang: {
+                                id        : '7c4754e7-3363-48ca-af99-632522226b51',
+                                name      : 'English',
+                                image     : 'us',
+                                iso6392   : 'en',
+                                iso6393   : 'eng',
+                                ietf      : 'en-US',
+                                customCode: null,
+                                dir       : 'RTL',
+                                sort      : 0,
+                                isActive  : true,
+                            },
+                            contentLanguage: {
+                                id        : '7c4754e7-3363-48ca-af99-632522226b51',
+                                name      : 'English',
+                                image     : 'us',
+                                iso6392   : 'en',
+                                iso6393   : 'eng',
+                                ietf      : 'en-US',
+                                customCode: null,
+                                dir       : 'RTL',
+                                sort      : 0,
+                                isActive  : true,
+                            },
+                        },
+                    },
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

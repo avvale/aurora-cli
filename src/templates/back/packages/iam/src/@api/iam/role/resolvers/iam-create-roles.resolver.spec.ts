@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateRolesResolver } from './iam-create-roles.resolver';
-import { IamCreateRolesHandler } from '../handlers/iam-create-roles.handler';
 import { IamCreateRoleInput } from '@api/graphql';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
+import { IamCreateRolesHandler, IamCreateRolesResolver } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateRolesResolver', () =>
 {
     let resolver: IamCreateRolesResolver;
-    let handler: IamCreateRolesHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('IamCreateRolesResolver', () =>
             .compile();
 
         resolver = module.get<IamCreateRolesResolver>(IamCreateRolesResolver);
-        handler = module.get<IamCreateRolesHandler>(IamCreateRolesHandler);
     });
 
     test('IamCreateRolesResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('IamCreateRolesResolver', () =>
 
         test('should return an roles created', async () =>
         {
-            expect(await resolver.main(<IamCreateRoleInput[]>roles)).toBe(undefined);
+            expect(await resolver.main(<IamCreateRoleInput[]>iamMockRoleData)).toBe(undefined);
         });
     });
 });

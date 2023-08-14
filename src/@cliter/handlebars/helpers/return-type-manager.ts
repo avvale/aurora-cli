@@ -14,7 +14,8 @@ handlebars.registerHelper('returnTypeManager', function(
     context,
 )
 {
-    const tabulation = '\t';
+    // tabulation can be changed to 4 spaces or 2 spaces or 1 tabulation \t
+    const tabulation = '    ';
     const returnTypesResponse: ReturnTypeStatement[] = [];
 
     for (const returnType of returnTypes)

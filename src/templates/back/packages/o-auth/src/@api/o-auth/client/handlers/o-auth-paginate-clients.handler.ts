@@ -1,9 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { PaginateClientsQuery } from '@app/o-auth/client/application/paginate/paginate-clients.query';
 import { Pagination } from '@api/graphql';
+import { OAuthPaginateClientsQuery } from '@app/o-auth/client';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthPaginateClientsHandler
@@ -18,10 +16,12 @@ export class OAuthPaginateClientsHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateClientsQuery(
+        return await this.queryBus.ask(new OAuthPaginateClientsQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

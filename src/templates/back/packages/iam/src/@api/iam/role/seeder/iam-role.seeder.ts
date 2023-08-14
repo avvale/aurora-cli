@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateRolesCommand } from '@app/iam/role/application/create/create-roles.command';
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
+import { IamCreateRolesCommand } from '@app/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 
 @Injectable()
 export class IamRoleSeeder
@@ -15,8 +15,8 @@ export class IamRoleSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateRolesCommand(
-            roles,
+        await this.commandBus.dispatch(new IamCreateRolesCommand(
+            iamMockRoleData,
             {
                 timezone: process.env.TZ ,
             },

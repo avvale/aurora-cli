@@ -1,7 +1,7 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
-import { IamCreateUserDto } from '../../../iam/user/dto/iam-create-user.dto';
 import { IamAccountType } from '@api/graphql';
+import { IamCreateUserDto } from '@api/iam/user';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class IamCreateAccountDto
 {

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateUsersCommand } from '@app/iam/user/application/create/create-users.command';
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
+import { IamCreateUsersCommand } from '@app/iam/user';
+import { iamMockUserData } from '@app/iam/user';
 
 @Injectable()
 export class IamUserSeeder
@@ -15,8 +15,8 @@ export class IamUserSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateUsersCommand(
-            users,
+        await this.commandBus.dispatch(new IamCreateUsersCommand(
+            iamMockUserData,
             {
                 timezone: process.env.TZ ,
             },

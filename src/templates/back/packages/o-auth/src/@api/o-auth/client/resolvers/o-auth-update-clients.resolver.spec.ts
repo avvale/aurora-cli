@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthUpdateClientsResolver } from './o-auth-update-clients.resolver';
-import { OAuthUpdateClientsHandler } from '../handlers/o-auth-update-clients.handler';
 import { OAuthUpdateClientsInput } from '@api/graphql';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { OAuthUpdateClientsHandler, OAuthUpdateClientsResolver } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpdateClientsResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('OAuthUpdateClientsResolver', () =>
 
         test('should return a clients updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await resolver.main(<OAuthUpdateClientsInput>clients[0])).toBe(clients[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+            expect(await resolver.main(<OAuthUpdateClientsInput>oAuthMockClientData[0])).toBe(oAuthMockClientData[0]);
         });
     });
 });

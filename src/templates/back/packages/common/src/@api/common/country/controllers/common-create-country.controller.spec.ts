@@ -42,7 +42,12 @@ describe('CommonCreateCountryController', () =>
         test('should return an country created', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData[0])));
-            expect(await controller.main(commonMockCountryData[0])).toBe(commonMockCountryData[0]);
+            expect(
+                await controller.main(
+                    commonMockCountryData[0],
+                ),
+            )
+                .toBe(commonMockCountryData[0]);
         });
     });
 });

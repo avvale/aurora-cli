@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdateUsersHandler } from './iam-update-users.handler';
 import { IamUpdateUsersInput } from '@api/graphql';
-
-// sources
-import { users } from '@app/iam/user/infrastructure/mock/mock-user.data';
+import { IamUpdateUsersHandler } from '@api/iam/user';
+import { iamMockUserData } from '@app/iam/user';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateUsersHandler', () =>
 {
     let handler: IamUpdateUsersHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -38,9 +33,8 @@ describe('IamUpdateUsersHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdateUsersHandler>(IamUpdateUsersHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdateUsersHandler>(IamUpdateUsersHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamUpdateUsersHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('IamUpdateUsersHandler', () =>
 
         test('should return a users updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(users[0])));
-            expect(await handler.main(<IamUpdateUsersInput>users[0])).toBe(users[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdateUsersInput>iamMockUserData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockUserData[0]);
         });
     });
 });

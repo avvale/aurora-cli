@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerFindQueueByIdHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerFindQueueByIdHandler } from './queue-manager-find-queue-by-id.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
 
 describe('QueueManagerFindQueueByIdHandler', () =>
 {
     let handler: QueueManagerFindQueueByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('QueueManagerFindQueueByIdHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<QueueManagerFindQueueByIdHandler>(QueueManagerFindQueueByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('QueueManagerFindQueueByIdHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('QueueManagerFindQueueByIdHandler', () =>
 
         test('should return an queue by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queues[0])));
-            expect(await handler.main(queues[0].id)).toBe(queues[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+            expect(
+                await handler.main(
+                    queueManagerMockQueueData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(queueManagerMockQueueData[0]);
         });
     });
 });

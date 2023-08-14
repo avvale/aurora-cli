@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommonFindAdministrativeAreaLevel3Handler } from '@api/common/administrative-area-level-3';
 import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonFindAdministrativeAreaLevel3Handler', () =>
 {
     let handler: CommonFindAdministrativeAreaLevel3Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -23,19 +22,12 @@ describe('CommonFindAdministrativeAreaLevel3Handler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<CommonFindAdministrativeAreaLevel3Handler>(CommonFindAdministrativeAreaLevel3Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonFindAdministrativeAreaLevel3Handler should be defined', () =>
@@ -53,7 +45,14 @@ describe('CommonFindAdministrativeAreaLevel3Handler', () =>
         test('should return a administrativeAreaLevel3', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel3Data[0])));
-            expect(await handler.main()).toBe(commonMockAdministrativeAreaLevel3Data[0]);
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockAdministrativeAreaLevel3Data[0]);
         });
     });
 });

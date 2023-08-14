@@ -1,16 +1,10 @@
+import { OAuthCreateClientsController, OAuthCreateClientsHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateClientsController } from './o-auth-create-clients.controller';
-import { OAuthCreateClientsHandler } from '../handlers/o-auth-create-clients.handler';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
 
 describe('OAuthCreateClientsController', () =>
 {
     let controller: OAuthCreateClientsController;
-    let handler: OAuthCreateClientsHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('OAuthCreateClientsController', () =>
             .compile();
 
         controller = module.get<OAuthCreateClientsController>(OAuthCreateClientsController);
-        handler = module.get<OAuthCreateClientsHandler>(OAuthCreateClientsHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('OAuthCreateClientsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an clients created', async () =>
+        test('should return an oAuthMockClientData created', async () =>
         {
-            expect(await controller.main(clients)).toBe(undefined);
+            expect(
+                await controller.main(
+                    oAuthMockClientData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindAccountByIdController, IamFindAccountByIdHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindAccountByIdController } from './iam-find-account-by-id.controller';
-import { IamFindAccountByIdHandler } from '../handlers/iam-find-account-by-id.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamFindAccountByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamFindAccountByIdController', () =>
 
         test('should return an account by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await controller.main(accounts[0].id)).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(await controller.main(iamMockAccountData[0].id)).toBe(iamMockAccountData[0]);
         });
     });
 });

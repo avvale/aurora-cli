@@ -51,9 +51,13 @@ describe('CommonDeleteAdministrativeAreaLevel2ByIdService', () =>
         test('should delete administrativeAreaLevel2 and emit event', async () =>
         {
             jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main(
-                new CommonAdministrativeAreaLevel2Id(commonMockAdministrativeAreaLevel2Data[0].id),
-            )).toBe(undefined);
+            expect(
+                await service.main(
+                    new CommonAdministrativeAreaLevel2Id(commonMockAdministrativeAreaLevel2Data[0].id),
+                    {},
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

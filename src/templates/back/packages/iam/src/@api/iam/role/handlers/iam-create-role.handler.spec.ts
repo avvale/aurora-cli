@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamCreateRoleHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamCreateRoleHandler } from './iam-create-role.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateRoleHandler', () =>
 {
     let handler: IamCreateRoleHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('IamCreateRoleHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamCreateRoleHandler>(IamCreateRoleHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamCreateRoleHandler>(IamCreateRoleHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,14 @@ describe('IamCreateRoleHandler', () =>
 
         test('should return an role created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await handler.main(roles[0])).toBe(roles[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(
+                await handler.main(
+                    iamMockRoleData[0],
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockRoleData[0]);
         });
     });
 });

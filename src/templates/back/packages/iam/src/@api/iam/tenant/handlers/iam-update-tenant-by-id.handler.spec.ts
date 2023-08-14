@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdateTenantByIdHandler } from './iam-update-tenant-by-id.handler';
 import { IamUpdateTenantByIdInput } from '@api/graphql';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
+import { IamUpdateTenantByIdHandler } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateTenantByIdHandler', () =>
 {
     let handler: IamUpdateTenantByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('IamUpdateTenantByIdHandler', () =>
 
         handler = module.get<IamUpdateTenantByIdHandler>(IamUpdateTenantByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamUpdateTenantByIdHandler should be defined', () =>
@@ -57,8 +51,14 @@ describe('IamUpdateTenantByIdHandler', () =>
 
         test('should return a tenant updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await handler.main(<IamUpdateTenantByIdInput>tenants[0])).toBe(tenants[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdateTenantByIdInput>iamMockTenantData[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(iamMockTenantData[0]);
         });
     });
 });

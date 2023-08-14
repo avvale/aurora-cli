@@ -1,27 +1,17 @@
+import { QueueManagerCreateJobsRegistryHandler } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerCreateJobsRegistryHandler } from './queue-manager-create-jobs-registry.handler';
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
 
 describe('QueueManagerCreateJobsRegistryHandler', () =>
 {
     let handler: QueueManagerCreateJobsRegistryHandler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 QueueManagerCreateJobsRegistryHandler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
                 {
                     provide : ICommandBus,
                     useValue: {
@@ -33,8 +23,6 @@ describe('QueueManagerCreateJobsRegistryHandler', () =>
             .compile();
 
         handler = module.get<QueueManagerCreateJobsRegistryHandler>(QueueManagerCreateJobsRegistryHandler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -44,9 +32,9 @@ describe('QueueManagerCreateJobsRegistryHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an jobsRegistry created', async () =>
+        test('should return an queueManagerMockJobRegistryData created', async () =>
         {
-            expect(await handler.main(jobsRegistry)).toBe(true);
+            expect(await handler.main(queueManagerMockJobRegistryData)).toBe(true);
         });
     });
 });

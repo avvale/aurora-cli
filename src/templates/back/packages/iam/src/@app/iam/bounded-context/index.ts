@@ -1,88 +1,130 @@
-// commands
-import { CreateBoundedContextCommandHandler } from './application/create/create-bounded-context.command-handler';
-import { CreateBoundedContextsCommandHandler } from './application/create/create-bounded-contexts.command-handler';
-import { UpdateBoundedContextByIdCommandHandler } from './application/update/update-bounded-context-by-id.command-handler';
-import { UpdateBoundedContextsCommandHandler } from './application/update/update-bounded-contexts.command-handler';
-import { UpsertBoundedContextCommandHandler } from './application/upsert/upsert-bounded-context.command-handler';
-import { DeleteBoundedContextByIdCommandHandler } from './application/delete/delete-bounded-context-by-id.command-handler';
-import { DeleteBoundedContextsCommandHandler } from './application/delete/delete-bounded-contexts.command-handler';
+// export commands
+export { IamCreateBoundedContextCommand } from './application/create/iam-create-bounded-context.command';
+export { IamCreateBoundedContextsCommand } from './application/create/iam-create-bounded-contexts.command';
+export { IamUpdateBoundedContextByIdCommand } from './application/update/iam-update-bounded-context-by-id.command';
+export { IamUpdateBoundedContextsCommand } from './application/update/iam-update-bounded-contexts.command';
+export { IamUpsertBoundedContextCommand } from './application/upsert/iam-upsert-bounded-context.command';
+export { IamDeleteBoundedContextByIdCommand } from './application/delete/iam-delete-bounded-context-by-id.command';
+export { IamDeleteBoundedContextsCommand } from './application/delete/iam-delete-bounded-contexts.command';
 
-// queries
-import { PaginateBoundedContextsQueryHandler } from './application/paginate/paginate-bounded-contexts.query-handler';
-import { GetBoundedContextsQueryHandler } from './application/get/get-bounded-contexts.query-handler';
-import { FindBoundedContextQueryHandler } from './application/find/find-bounded-context.query-handler';
-import { FindBoundedContextByIdQueryHandler } from './application/find/find-bounded-context-by-id.query-handler';
-import { RawSQLBoundedContextsQueryHandler } from './application/raw-sql/raw-sql-bounded-contexts.query-handler';
+// export queries
+export { IamPaginateBoundedContextsQuery } from './application/paginate/iam-paginate-bounded-contexts.query';
+export { IamGetBoundedContextsQuery } from './application/get/iam-get-bounded-contexts.query';
+export { IamFindBoundedContextQuery } from './application/find/iam-find-bounded-context.query';
+export { IamFindBoundedContextByIdQuery } from './application/find/iam-find-bounded-context-by-id.query';
+export { IamRawSQLBoundedContextsQuery } from './application/raw-sql/iam-raw-sql-bounded-contexts.query';
 
-// events
-import { CreatedBoundedContextEventHandler } from './application/events/created-bounded-context.event-handler';
-import { CreatedBoundedContextsEventHandler } from './application/events/created-bounded-contexts.event-handler';
-import { UpdatedBoundedContextEventHandler } from './application/events/updated-bounded-context.event-handler';
-import { UpdatedBoundedContextsEventHandler } from './application/events/updated-bounded-contexts.event-handler';
-import { DeletedBoundedContextEventHandler } from './application/events/deleted-bounded-context.event-handler';
-import { DeletedBoundedContextsEventHandler } from './application/events/deleted-bounded-contexts.event-handler';
+// export mocks
+export { iamMockBoundedContextData } from './infrastructure/mock/iam-mock-bounded-context.data';
+export { IamMockBoundedContextSeeder } from './infrastructure/mock/iam-mock-bounded-context.seeder';
+export { IamMockBoundedContextRepository } from './infrastructure/mock/iam-mock-bounded-context.repository';
 
-// services
-import { CreateBoundedContextService } from './application/create/create-bounded-context.service';
-import { CreateBoundedContextsService } from './application/create/create-bounded-contexts.service';
-import { PaginateBoundedContextsService } from './application/paginate/paginate-bounded-contexts.service';
-import { GetBoundedContextsService } from './application/get/get-bounded-contexts.service';
-import { FindBoundedContextService } from './application/find/find-bounded-context.service';
-import { FindBoundedContextByIdService } from './application/find/find-bounded-context-by-id.service';
-import { RawSQLBoundedContextsService } from './application/raw-sql/raw-sql-bounded-contexts.service';
-import { UpdateBoundedContextByIdService } from './application/update/update-bounded-context-by-id.service';
-import { UpdateBoundedContextsService } from './application/update/update-bounded-contexts.service';
-import { UpsertBoundedContextService } from './application/upsert/upsert-bounded-context.service';
-import { DeleteBoundedContextByIdService } from './application/delete/delete-bounded-context-by-id.service';
-import { DeleteBoundedContextsService } from './application/delete/delete-bounded-contexts.service';
+// export events
+export { IamAddBoundedContextsContextEvent } from './application/events/iam-add-bounded-contexts-context.event';
+export { IamCreatedBoundedContextsEvent } from './application/events/iam-created-bounded-contexts.event';
+export { IamCreatedBoundedContextEvent } from './application/events/iam-created-bounded-context.event';
+export { IamDeletedBoundedContextsEvent } from './application/events/iam-deleted-bounded-contexts.event';
+export { IamDeletedBoundedContextEvent } from './application/events/iam-deleted-bounded-context.event';
+export { IamUpdatedBoundedContextsEvent } from './application/events/iam-updated-bounded-contexts.event';
+export { IamUpdatedBoundedContextEvent } from './application/events/iam-updated-bounded-context.event';
 
-// models
-export { IamBoundedContextModel } from './infrastructure/sequelize/sequelize-bounded-context.model';
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
 
-// repository
-export { IBoundedContextRepository } from './domain/bounded-context.repository';
-export { SequelizeBoundedContextRepository } from './infrastructure/sequelize/sequelize-bounded-context.repository';
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
+// domain
+export { IamBoundedContext } from './domain/iam-bounded-context.aggregate';
+export { IamBoundedContextMapper } from './domain/iam-bounded-context.mapper';
+export { IamIBoundedContextRepository } from './domain/iam-bounded-context.repository';
+export { IamBoundedContextResponse } from './domain/iam-bounded-context.response';
+
+// infrastructure
+export { IamBoundedContextModel } from './infrastructure/sequelize/iam-sequelize-bounded-context.model';
+export { IamSequelizeBoundedContextRepository } from './infrastructure/sequelize/iam-sequelize-bounded-context.repository';
 
 // sagas
-export { BoundedContextSagas } from './application/sagas/bounded-context.sagas';
+export { IamBoundedContextSagas } from './application/sagas/iam-bounded-context.sagas';
+
+// command handlers
+import { IamCreateBoundedContextCommandHandler } from './application/create/iam-create-bounded-context.command-handler';
+import { IamCreateBoundedContextsCommandHandler } from './application/create/iam-create-bounded-contexts.command-handler';
+import { IamUpdateBoundedContextByIdCommandHandler } from './application/update/iam-update-bounded-context-by-id.command-handler';
+import { IamUpdateBoundedContextsCommandHandler } from './application/update/iam-update-bounded-contexts.command-handler';
+import { IamUpsertBoundedContextCommandHandler } from './application/upsert/iam-upsert-bounded-context.command-handler';
+import { IamDeleteBoundedContextByIdCommandHandler } from './application/delete/iam-delete-bounded-context-by-id.command-handler';
+import { IamDeleteBoundedContextsCommandHandler } from './application/delete/iam-delete-bounded-contexts.command-handler';
+
+// query handlers
+import { IamPaginateBoundedContextsQueryHandler } from './application/paginate/iam-paginate-bounded-contexts.query-handler';
+import { IamGetBoundedContextsQueryHandler } from './application/get/iam-get-bounded-contexts.query-handler';
+import { IamFindBoundedContextQueryHandler } from './application/find/iam-find-bounded-context.query-handler';
+import { IamFindBoundedContextByIdQueryHandler } from './application/find/iam-find-bounded-context-by-id.query-handler';
+import { IamRawSQLBoundedContextsQueryHandler } from './application/raw-sql/iam-raw-sql-bounded-contexts.query-handler';
+
+// event handlers
+import { IamCreatedBoundedContextEventHandler } from './application/events/iam-created-bounded-context.event-handler';
+import { IamCreatedBoundedContextsEventHandler } from './application/events/iam-created-bounded-contexts.event-handler';
+import { IamUpdatedBoundedContextEventHandler } from './application/events/iam-updated-bounded-context.event-handler';
+import { IamUpdatedBoundedContextsEventHandler } from './application/events/iam-updated-bounded-contexts.event-handler';
+import { IamDeletedBoundedContextEventHandler } from './application/events/iam-deleted-bounded-context.event-handler';
+import { IamDeletedBoundedContextsEventHandler } from './application/events/iam-deleted-bounded-contexts.event-handler';
+
+// services
+import { IamCreateBoundedContextService } from './application/create/iam-create-bounded-context.service';
+import { IamCreateBoundedContextsService } from './application/create/iam-create-bounded-contexts.service';
+import { IamPaginateBoundedContextsService } from './application/paginate/iam-paginate-bounded-contexts.service';
+import { IamGetBoundedContextsService } from './application/get/iam-get-bounded-contexts.service';
+import { IamFindBoundedContextService } from './application/find/iam-find-bounded-context.service';
+import { IamFindBoundedContextByIdService } from './application/find/iam-find-bounded-context-by-id.service';
+import { IamRawSQLBoundedContextsService } from './application/raw-sql/iam-raw-sql-bounded-contexts.service';
+import { IamUpdateBoundedContextByIdService } from './application/update/iam-update-bounded-context-by-id.service';
+import { IamUpdateBoundedContextsService } from './application/update/iam-update-bounded-contexts.service';
+import { IamUpsertBoundedContextService } from './application/upsert/iam-upsert-bounded-context.service';
+import { IamDeleteBoundedContextByIdService } from './application/delete/iam-delete-bounded-context-by-id.service';
+import { IamDeleteBoundedContextsService } from './application/delete/iam-delete-bounded-contexts.service';
+
+// ---- customizations ----
+export { IamBoundedContextHelper } from './domain/iam-bounded-context-helper';
 
 export const IamBoundedContextHandlers = [
     // commands
-    CreateBoundedContextCommandHandler,
-    CreateBoundedContextsCommandHandler,
-    UpdateBoundedContextByIdCommandHandler,
-    UpdateBoundedContextsCommandHandler,
-    UpsertBoundedContextCommandHandler,
-    DeleteBoundedContextByIdCommandHandler,
-    DeleteBoundedContextsCommandHandler,
+    IamCreateBoundedContextCommandHandler,
+    IamCreateBoundedContextsCommandHandler,
+    IamUpdateBoundedContextByIdCommandHandler,
+    IamUpdateBoundedContextsCommandHandler,
+    IamUpsertBoundedContextCommandHandler,
+    IamDeleteBoundedContextByIdCommandHandler,
+    IamDeleteBoundedContextsCommandHandler,
 
     // queries
-    PaginateBoundedContextsQueryHandler,
-    GetBoundedContextsQueryHandler,
-    FindBoundedContextQueryHandler,
-    FindBoundedContextByIdQueryHandler,
-    RawSQLBoundedContextsQueryHandler,
+    IamPaginateBoundedContextsQueryHandler,
+    IamGetBoundedContextsQueryHandler,
+    IamFindBoundedContextQueryHandler,
+    IamFindBoundedContextByIdQueryHandler,
+    IamRawSQLBoundedContextsQueryHandler,
 
     // events
-    CreatedBoundedContextEventHandler,
-    CreatedBoundedContextsEventHandler,
-    UpdatedBoundedContextEventHandler,
-    UpdatedBoundedContextsEventHandler,
-    DeletedBoundedContextEventHandler,
-    DeletedBoundedContextsEventHandler,
+    IamCreatedBoundedContextEventHandler,
+    IamCreatedBoundedContextsEventHandler,
+    IamUpdatedBoundedContextEventHandler,
+    IamUpdatedBoundedContextsEventHandler,
+    IamDeletedBoundedContextEventHandler,
+    IamDeletedBoundedContextsEventHandler,
 ];
 
 export const IamBoundedContextServices = [
-    CreateBoundedContextService,
-    CreateBoundedContextsService,
-    PaginateBoundedContextsService,
-    GetBoundedContextsService,
-    FindBoundedContextService,
-    FindBoundedContextByIdService,
-    RawSQLBoundedContextsService,
-    UpdateBoundedContextByIdService,
-    UpdateBoundedContextsService,
-    UpsertBoundedContextService,
-    DeleteBoundedContextByIdService,
-    DeleteBoundedContextsService,
+    IamCreateBoundedContextService,
+    IamCreateBoundedContextsService,
+    IamPaginateBoundedContextsService,
+    IamGetBoundedContextsService,
+    IamFindBoundedContextService,
+    IamFindBoundedContextByIdService,
+    IamRawSQLBoundedContextsService,
+    IamUpdateBoundedContextByIdService,
+    IamUpdateBoundedContextsService,
+    IamUpsertBoundedContextService,
+    IamDeleteBoundedContextByIdService,
+    IamDeleteBoundedContextsService,
 ];

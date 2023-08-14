@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamGetRolesController, IamGetRolesHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetRolesController } from './iam-get-roles.controller';
-import { IamGetRolesHandler } from '../handlers/iam-get-roles.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamGetRolesController', () =>
 {
@@ -43,10 +37,10 @@ describe('IamGetRolesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a roles', async () =>
+        test('should return a iamMockRoleData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(roles)));
-            expect(await controller.main()).toBe(roles);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData)));
+            expect(await controller.main()).toBe(iamMockRoleData);
         });
     });
 });

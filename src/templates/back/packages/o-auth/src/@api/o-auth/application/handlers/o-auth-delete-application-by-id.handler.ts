@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindApplicationByIdQuery } from '@app/o-auth/application/application/find/find-application-by-id.query';
-import { DeleteApplicationByIdCommand } from '@app/o-auth/application/application/delete/delete-application-by-id.command';
 import { OAuthApplication } from '@api/graphql';
-import { OAuthApplicationDto } from '../dto';
+import { OAuthApplicationDto } from '@api/o-auth/application';
+import { OAuthDeleteApplicationByIdCommand, OAuthFindApplicationByIdQuery } from '@app/o-auth/application';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthDeleteApplicationByIdHandler
@@ -22,9 +19,15 @@ export class OAuthDeleteApplicationByIdHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthApplication | OAuthApplicationDto>
     {
-        const application = await this.queryBus.ask(new FindApplicationByIdQuery(id, constraint, { timezone }));
+        const application = await this.queryBus.ask(new OAuthFindApplicationByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteApplicationByIdCommand(
+        await this.commandBus.dispatch(new OAuthDeleteApplicationByIdCommand(
             id,
             constraint,
             {

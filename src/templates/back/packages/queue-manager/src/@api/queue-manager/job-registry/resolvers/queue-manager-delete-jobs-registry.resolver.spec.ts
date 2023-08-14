@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerDeleteJobsRegistryHandler, QueueManagerDeleteJobsRegistryResolver } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerDeleteJobsRegistryResolver } from './queue-manager-delete-jobs-registry.resolver';
-import { QueueManagerDeleteJobsRegistryHandler } from '../handlers/queue-manager-delete-jobs-registry.handler';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
 
 describe('QueueManagerDeleteJobsRegistryResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('QueueManagerDeleteJobsRegistryResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return an jobsRegistry deleted', async () =>
+        test('should return an queueManagerMockJobRegistryData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(jobsRegistry)));
-            expect(await resolver.main()).toBe(jobsRegistry);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData)));
+            expect(await resolver.main()).toBe(queueManagerMockJobRegistryData);
         });
     });
 });

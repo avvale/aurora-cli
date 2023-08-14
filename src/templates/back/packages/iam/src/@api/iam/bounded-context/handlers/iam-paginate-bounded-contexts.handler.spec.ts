@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamPaginateBoundedContextsHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamPaginateBoundedContextsHandler } from './iam-paginate-bounded-contexts.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamPaginateBoundedContextsHandler', () =>
 {
     let handler: IamPaginateBoundedContextsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamPaginateBoundedContextsHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<IamPaginateBoundedContextsHandler>(IamPaginateBoundedContextsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamPaginateBoundedContextsHandler should be defined', () =>
@@ -57,15 +45,21 @@ describe('IamPaginateBoundedContextsHandler', () =>
         test('should return a boundedContexts', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: boundedContexts.length,
-                count: boundedContexts.length,
-                rows : boundedContexts,
+                total: iamMockBoundedContextData.length,
+                count: iamMockBoundedContextData.length,
+                rows : iamMockBoundedContextData,
             })));
-            expect(await handler.main()).toEqual({
-                total: boundedContexts.length,
-                count: boundedContexts.length,
-                rows : boundedContexts,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                ),
+            )
+                .toEqual({
+                    total: iamMockBoundedContextData.length,
+                    count: iamMockBoundedContextData.length,
+                    rows : iamMockBoundedContextData,
+                });
         });
     });
 });

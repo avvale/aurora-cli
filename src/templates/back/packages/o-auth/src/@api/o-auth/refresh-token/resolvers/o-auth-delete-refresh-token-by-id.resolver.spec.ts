@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthDeleteRefreshTokenByIdHandler, OAuthDeleteRefreshTokenByIdResolver } from '@api/o-auth/refresh-token';
+import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteRefreshTokenByIdResolver } from './o-auth-delete-refresh-token-by-id.resolver';
-import { OAuthDeleteRefreshTokenByIdHandler } from '../handlers/o-auth-delete-refresh-token-by-id.handler';
-
-// sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 
 describe('OAuthDeleteRefreshTokenByIdResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('OAuthDeleteRefreshTokenByIdResolver', () =>
 
         test('should return an refreshToken deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(refreshTokens[0])));
-            expect(await resolver.main(refreshTokens[0].id)).toBe(refreshTokens[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData[0])));
+            expect(await resolver.main(oAuthMockRefreshTokenData[0].id)).toBe(oAuthMockRefreshTokenData[0]);
         });
     });
 });

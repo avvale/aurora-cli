@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, Utils } from '@aurorajs.dev/core';
 import { Job, JobOptions, Queue } from 'bull';
-import { CreateJobRegistryCommand } from '@app/queue-manager/job-registry/application/create/create-job-registry.command';
+import { QueueManagerCreateJobRegistryCommand } from '@app/queue-manager';
 import { QueueManagerJobState } from '@api/graphql';
 
 @Injectable()
@@ -44,7 +44,7 @@ export class QueueManagerJobService
         );
 
         // add job to job registry
-        await this.commandBus.dispatch(new CreateJobRegistryCommand({
+        await this.commandBus.dispatch(new QueueManagerCreateJobRegistryCommand({
             id       : Utils.uuid(),
             queueName: queue.name,
             jobId    : job.id.toString(),

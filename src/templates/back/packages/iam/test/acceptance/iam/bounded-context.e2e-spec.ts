@@ -1,20 +1,17 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { IamModule } from '@api/iam/iam.module';
+import { IamIBoundedContextRepository, iamMockBoundedContextData, IamMockBoundedContextSeeder } from '@app/iam/bounded-context';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IBoundedContextRepository } from '@app/iam/bounded-context/domain/bounded-context.repository';
-import { MockBoundedContextSeeder } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.seeder';
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { IamModule } from '@api/iam/iam.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
-
-// ---- customizations ----
-import { OAuthModule } from '@api/o-auth/o-auth.module';
+import * as request from 'supertest';
+import { OAuthModule } from './../../../src/@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -22,8 +19,8 @@ const importForeignModules = [];
 describe('bounded-context', () =>
 {
     let app: INestApplication;
-    let boundedContextRepository: IBoundedContextRepository;
-    let boundedContextSeeder: MockBoundedContextSeeder;
+    let boundedContextRepository: IamIBoundedContextRepository;
+    let boundedContextSeeder: IamMockBoundedContextSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -37,7 +34,6 @@ describe('bounded-context', () =>
             imports: [
                 ...importForeignModules,
                 IamModule,
-                OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -61,17 +57,17 @@ describe('bounded-context', () =>
                 }),
             ],
             providers: [
-                MockBoundedContextSeeder,
+                IamMockBoundedContextSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = boundedContexts;
+        mockData = iamMockBoundedContextData;
         app = module.createNestApplication();
-        boundedContextRepository = module.get<IBoundedContextRepository>(IBoundedContextRepository);
-        boundedContextSeeder = module.get<MockBoundedContextSeeder>(MockBoundedContextSeeder);
+        boundedContextRepository = module.get<IamIBoundedContextRepository>(IamIBoundedContextRepository);
+        boundedContextSeeder = module.get<IamMockBoundedContextSeeder>(IamMockBoundedContextSeeder);
 
         // seed mock data in memory database
         await boundedContextRepository.insert(boundedContextSeeder.collectionSource);
@@ -475,8 +471,8 @@ describe('bounded-context', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.response.message).toContain('already exist in database');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
             });
     });
 
@@ -619,8 +615,8 @@ describe('bounded-context', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -692,8 +688,8 @@ describe('bounded-context', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -761,8 +757,8 @@ describe('bounded-context', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 
@@ -870,8 +866,8 @@ describe('bounded-context', () =>
             .then(res =>
             {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.response.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.response.message).toContain('not found');
+                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
+                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
             });
     });
 

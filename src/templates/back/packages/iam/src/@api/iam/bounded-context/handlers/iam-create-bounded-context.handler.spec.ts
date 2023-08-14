@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamCreateBoundedContextHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamCreateBoundedContextHandler } from './iam-create-bounded-context.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateBoundedContextHandler', () =>
 {
     let handler: IamCreateBoundedContextHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('IamCreateBoundedContextHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamCreateBoundedContextHandler>(IamCreateBoundedContextHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamCreateBoundedContextHandler>(IamCreateBoundedContextHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,14 @@ describe('IamCreateBoundedContextHandler', () =>
 
         test('should return an boundedContext created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await handler.main(boundedContexts[0])).toBe(boundedContexts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(
+                await handler.main(
+                    iamMockBoundedContextData[0],
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockBoundedContextData[0]);
         });
     });
 });

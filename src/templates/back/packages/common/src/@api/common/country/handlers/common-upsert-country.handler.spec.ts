@@ -2,7 +2,7 @@
 import { CommonUpsertCountryHandler } from '@api/common/country';
 import { commonMockCountryData } from '@app/common/country';
 import { commonMockLangData } from '@app/common/lang';
-import { CoreAddI18nConstraintService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetSearchKeyLangService, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { CACHE_MANAGER, CacheModule } from '@nestjs/cache-manager';
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -11,7 +11,6 @@ describe('CommonUpsertCountryHandler', () =>
 {
     let handler: CommonUpsertCountryHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -46,13 +45,24 @@ describe('CommonUpsertCountryHandler', () =>
                         dispatch: () => { /**/ },
                     },
                 },
+                {
+                    provide : CoreGetContentLanguageObjectService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
+                {
+                    provide : CoreGetSearchKeyLangService,
+                    useValue: {
+                        get: () => { /**/ },
+                    },
+                },
             ],
         })
             .compile();
 
         handler = module.get<CommonUpsertCountryHandler>(CommonUpsertCountryHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -65,7 +75,13 @@ describe('CommonUpsertCountryHandler', () =>
         test('should return an country upserted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockCountryData[0])));
-            expect(await handler.main(commonMockCountryData[0])).toBe(commonMockCountryData[0]);
+            expect(
+                await handler.main(
+                    commonMockCountryData[0],
+                    'Europe/Madrid',
+                    'en',
+                ))
+                .toBe(commonMockCountryData[0]);
         });
     });
 });

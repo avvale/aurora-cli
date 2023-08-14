@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateJobsRegistryCommand } from '@app/queue-manager/job-registry/application/create/create-jobs-registry.command';
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
+import { QueueManagerCreateJobsRegistryCommand } from '@app/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 
 @Injectable()
 export class QueueManagerJobRegistrySeeder
@@ -15,8 +15,8 @@ export class QueueManagerJobRegistrySeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateJobsRegistryCommand(
-            jobsRegistry,
+        await this.commandBus.dispatch(new QueueManagerCreateJobsRegistryCommand(
+            queueManagerMockJobRegistryData,
             {
                 timezone: process.env.TZ ,
             },

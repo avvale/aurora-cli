@@ -1,21 +1,17 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { IamModule } from '@api/iam/iam.module';
+import { IamIPermissionRepository, iamMockPermissionData, IamMockPermissionSeeder } from '@app/iam/permission';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IPermissionRepository } from '@app/iam/permission/domain/permission.repository';
-import { MockPermissionSeeder } from '@app/iam/permission/infrastructure/mock/mock-permission.seeder';
-import { permissions } from '@app/iam/permission/infrastructure/seeds/permission.seed';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
-
-// has OAuth
-import { IamModule } from '@api/iam/iam.module';
-import { OAuthModule } from '@api/o-auth/o-auth.module';
+import * as request from 'supertest';
+import { OAuthModule } from './../../../src/@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -23,8 +19,8 @@ const importForeignModules = [];
 describe('permission', () =>
 {
     let app: INestApplication;
-    let permissionRepository: IPermissionRepository;
-    let permissionSeeder: MockPermissionSeeder;
+    let permissionRepository: IamIPermissionRepository;
+    let permissionSeeder: IamMockPermissionSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -38,7 +34,6 @@ describe('permission', () =>
             imports: [
                 ...importForeignModules,
                 IamModule,
-                OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -62,17 +57,17 @@ describe('permission', () =>
                 }),
             ],
             providers: [
-                MockPermissionSeeder,
+                IamMockPermissionSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = permissions;
+        mockData = iamMockPermissionData;
         app = module.createNestApplication();
-        permissionRepository = module.get<IPermissionRepository>(IPermissionRepository);
-        permissionSeeder = module.get<MockPermissionSeeder>(MockPermissionSeeder);
+        permissionRepository = module.get<IamIPermissionRepository>(IamIPermissionRepository);
+        permissionSeeder = module.get<IamMockPermissionSeeder>(IamMockPermissionSeeder);
 
         // seed mock data in memory database
         await permissionRepository.insert(permissionSeeder.collectionSource);

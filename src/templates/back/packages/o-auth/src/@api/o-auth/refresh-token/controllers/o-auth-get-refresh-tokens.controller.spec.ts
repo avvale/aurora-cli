@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthGetRefreshTokensController, OAuthGetRefreshTokensHandler } from '@api/o-auth/refresh-token';
+import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthGetRefreshTokensController } from './o-auth-get-refresh-tokens.controller';
-import { OAuthGetRefreshTokensHandler } from '../handlers/o-auth-get-refresh-tokens.handler';
-
-// sources
-import { refreshTokens } from '@app/o-auth/refresh-token/infrastructure/mock/mock-refresh-token.data';
 
 describe('OAuthGetRefreshTokensController', () =>
 {
@@ -43,10 +37,10 @@ describe('OAuthGetRefreshTokensController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a refreshTokens', async () =>
+        test('should return a oAuthMockRefreshTokenData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(refreshTokens)));
-            expect(await controller.main()).toBe(refreshTokens);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData)));
+            expect(await controller.main()).toBe(oAuthMockRefreshTokenData);
         });
     });
 });

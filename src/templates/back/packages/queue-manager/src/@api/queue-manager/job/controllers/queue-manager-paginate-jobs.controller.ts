@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { QueueManagerPaginateJobsHandler } from '@api/queue-manager/job';
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerPaginateJobsHandler } from '../handlers/queue-manager-paginate-jobs.handler';
 
 @ApiTags('[queue-manager] job')
 @Controller('queue-manager/jobs/paginate')

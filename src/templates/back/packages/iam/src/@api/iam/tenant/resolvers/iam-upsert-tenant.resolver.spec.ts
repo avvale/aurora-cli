@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpsertTenantResolver } from './iam-upsert-tenant.resolver';
-import { IamUpsertTenantHandler } from '../handlers/iam-upsert-tenant.handler';
 import { IamUpdateTenantByIdInput } from '@api/graphql';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
+import { IamUpsertTenantHandler, IamUpsertTenantResolver } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertTenantResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamUpsertTenantResolver', () =>
 
         test('should return an tenant upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await resolver.main(<IamUpdateTenantByIdInput>tenants[0])).toBe(tenants[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+            expect(await resolver.main(<IamUpdateTenantByIdInput>iamMockTenantData[0])).toBe(iamMockTenantData[0]);
         });
     });
 });

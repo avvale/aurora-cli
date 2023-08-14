@@ -73,9 +73,14 @@ export class FileManager
             name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
         }
 
-        if (name.includes('__property_native_name__') && currentProperty)
+        if (name.includes('__property_origin_name__') && currentProperty)
         {
-            name = name.replace(/__property_native_name__/gi, currentProperty.originName.toKebabCase());
+            name = name.replace(/__property_origin_name__/gi, currentProperty.originName.toKebabCase());
+        }
+
+        if (name.includes('__property_relationship_singular_name__') && currentProperty?.relationship?.singularName)
+        {
+            name = name.replace(/__property_relationship_singular_name__/gi, currentProperty.relationship.singularName.toKebabCase());
         }
 
         return name;

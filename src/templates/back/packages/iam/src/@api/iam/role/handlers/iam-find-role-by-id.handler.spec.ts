@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindRoleByIdHandler } from '@api/iam/role';
+import { iamMockRoleData } from '@app/iam/role';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamFindRoleByIdHandler } from './iam-find-role-by-id.handler';
-
-// sources
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
 
 describe('IamFindRoleByIdHandler', () =>
 {
     let handler: IamFindRoleByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('IamFindRoleByIdHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<IamFindRoleByIdHandler>(IamFindRoleByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamFindRoleByIdHandler should be defined', () =>
@@ -56,8 +44,15 @@ describe('IamFindRoleByIdHandler', () =>
 
         test('should return an role by id', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(roles[0])));
-            expect(await handler.main(roles[0].id)).toBe(roles[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+            expect(
+                await handler.main(
+                    iamMockRoleData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockRoleData[0]);
         });
     });
 });

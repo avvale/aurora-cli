@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';
 import { OAuthAccessToken } from '@api/graphql';
-import { OAuthAccessTokenDto } from '../dto';
+import { OAuthAccessTokenDto } from '@api/o-auth/access-token';
+import { OAuthFindAccessTokenByIdQuery } from '@app/o-auth/access-token';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindAccessTokenByIdHandler
@@ -19,6 +17,12 @@ export class OAuthFindAccessTokenByIdHandler
         timezone?: string,
     ): Promise<OAuthAccessToken | OAuthAccessTokenDto>
     {
-        return await this.queryBus.ask(new FindAccessTokenByIdQuery(id, constraint, { timezone }));
+        return await this.queryBus.ask(new OAuthFindAccessTokenByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

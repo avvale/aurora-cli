@@ -1,16 +1,10 @@
+import { IamCreateBoundedContextsController, IamCreateBoundedContextsHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamCreateBoundedContextsController } from './iam-create-bounded-contexts.controller';
-import { IamCreateBoundedContextsHandler } from '../handlers/iam-create-bounded-contexts.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamCreateBoundedContextsController', () =>
 {
     let controller: IamCreateBoundedContextsController;
-    let handler: IamCreateBoundedContextsHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('IamCreateBoundedContextsController', () =>
             .compile();
 
         controller = module.get<IamCreateBoundedContextsController>(IamCreateBoundedContextsController);
-        handler = module.get<IamCreateBoundedContextsHandler>(IamCreateBoundedContextsHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('IamCreateBoundedContextsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an boundedContexts created', async () =>
+        test('should return an iamMockBoundedContextData created', async () =>
         {
-            expect(await controller.main(boundedContexts)).toBe(undefined);
+            expect(
+                await controller.main(
+                    iamMockBoundedContextData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

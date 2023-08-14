@@ -1,10 +1,10 @@
-import { IamBoundedContextHandlers, IamBoundedContextServices, IamBoundedContextModel, IBoundedContextRepository, SequelizeBoundedContextRepository, BoundedContextSagas } from './bounded-context';
-import { IamPermissionHandlers, IamPermissionServices, IamPermissionModel, IPermissionRepository, SequelizePermissionRepository, PermissionSagas } from './permission';
-import { IamPermissionRoleHandlers, IamPermissionRoleServices, IamPermissionsRolesModel, IPermissionRoleRepository, SequelizePermissionRoleRepository } from './permission-role';
-import { IamTenantHandlers, IamTenantServices, IamTenantModel, ITenantRepository, SequelizeTenantRepository, TenantSagas, IamTenantsAccountsModel } from './tenant';
-import { IamRoleHandlers, IamRoleServices, IamRoleModel, IRoleRepository, SequelizeRoleRepository, RoleSagas, IamRolesAccountsModel, SequelizeRoleAccountRepository, IRoleAccountRepository } from './role';
-import { IamAccountHandlers, IamAccountServices, IamAccountModel, IAccountRepository, SequelizeAccountRepository, AccountSagas } from './account';
-import { IamUserHandlers, IamUserServices, IamUserModel, IUserRepository, SequelizeUserRepository, UserSagas } from './user';
+import { IamBoundedContextHandlers, IamBoundedContextServices, IamBoundedContextModel, IamIBoundedContextRepository, IamSequelizeBoundedContextRepository, IamBoundedContextSagas } from './bounded-context';
+import { IamPermissionHandlers, IamPermissionServices, IamPermissionModel, IamIPermissionRepository, IamSequelizePermissionRepository, IamPermissionSagas } from './permission';
+import { IamPermissionRoleHandlers, IamPermissionRoleServices, IamPermissionsRolesModel, IamIPermissionRoleRepository, IamSequelizePermissionRoleRepository } from './permission-role';
+import { IamTenantHandlers, IamTenantServices, IamTenantModel, IamTenantsAccountsModel, IamITenantRepository, IamSequelizeTenantRepository, IamTenantSagas } from './tenant';
+import { IamRoleHandlers, IamRoleServices, IamRoleModel, IamRolesAccountsModel, IamSequelizeRoleAccountRepository, IamIRoleAccountRepository, IamIRoleRepository, IamSequelizeRoleRepository, IamRoleSagas } from './role';
+import { IamAccountHandlers, IamAccountServices, IamAccountModel, IamIAccountRepository, IamSequelizeAccountRepository, IamAccountSagas } from './account';
+import { IamUserHandlers, IamUserServices, IamUserModel, IamIUserRepository, IamSequelizeUserRepository, IamUserSagas } from './user';
 
 export const IamHandlers = [
     ...IamBoundedContextHandlers,
@@ -37,45 +37,50 @@ export const IamModels = [
 ];
 export const IamRepositories = [
     {
-        provide : IBoundedContextRepository,
-        useClass: SequelizeBoundedContextRepository
+        provide : IamIRoleRepository,
+        useClass: IamSequelizeRoleRepository
     },
     {
-        provide : IPermissionRepository,
-        useClass: SequelizePermissionRepository
+        provide : IamIAccountRepository,
+        useClass: IamSequelizeAccountRepository
     },
     {
-        provide : ITenantRepository,
-        useClass: SequelizeTenantRepository
+        provide : IamIUserRepository,
+        useClass: IamSequelizeUserRepository
     },
     {
-        provide : IRoleRepository,
-        useClass: SequelizeRoleRepository
-    },
-    {
-        provide : IAccountRepository,
-        useClass: SequelizeAccountRepository
-    },
-    {
-        provide : IUserRepository,
-        useClass: SequelizeUserRepository
+        provide : IamITenantRepository,
+        useClass: IamSequelizeTenantRepository
     },
 
-    // custom
+    // ---- customizations ----
     {
-        provide : IPermissionRoleRepository,
-        useClass: SequelizePermissionRoleRepository
+        provide : IamIPermissionRoleRepository,
+        useClass: IamSequelizePermissionRoleRepository
     },
     {
-        provide : IRoleAccountRepository,
-        useClass: SequelizeRoleAccountRepository
+        provide : IamIRoleAccountRepository,
+        useClass: IamSequelizeRoleAccountRepository
+    },
+    {
+        provide : IamIPermissionRepository,
+        useClass: IamSequelizePermissionRepository
+    },
+    {
+        provide : IamIRoleRepository,
+        useClass: IamSequelizeRoleRepository
+    },
+    {
+        provide : IamIBoundedContextRepository,
+        useClass: IamSequelizeBoundedContextRepository
     }
 ];
 export const IamSagas = [
-    BoundedContextSagas,
-    PermissionSagas,
-    TenantSagas,
-    RoleSagas,
-    AccountSagas,
-    UserSagas
+    IamRoleSagas,
+    IamPermissionSagas,
+    IamRoleSagas,
+    IamBoundedContextSagas,
+    IamAccountSagas,
+    IamUserSagas,
+    IamTenantSagas
 ];

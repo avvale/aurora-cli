@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindJobRegistryByIdQuery } from '@app/queue-manager/job-registry/application/find/find-job-registry-by-id.query';
-import { UpsertJobRegistryCommand } from '@app/queue-manager/job-registry/application/upsert/upsert-job-registry.command';
 import { QueueManagerJobRegistry, QueueManagerUpdateJobRegistryByIdInput } from '@api/graphql';
-import { QueueManagerJobRegistryDto, QueueManagerUpdateJobRegistryByIdDto } from '../dto';
+import { QueueManagerJobRegistryDto, QueueManagerUpdateJobRegistryByIdDto } from '@api/queue-manager/job-registry';
+import { QueueManagerFindJobRegistryByIdQuery, QueueManagerUpsertJobRegistryCommand } from '@app/queue-manager/job-registry';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerUpsertJobRegistryHandler
@@ -20,14 +17,14 @@ export class QueueManagerUpsertJobRegistryHandler
         timezone?: string,
     ): Promise<QueueManagerJobRegistry | QueueManagerJobRegistryDto>
     {
-        await this.commandBus.dispatch(new UpsertJobRegistryCommand(
+        await this.commandBus.dispatch(new QueueManagerUpsertJobRegistryCommand(
             payload,
             {
                 timezone,
             },
         ));
 
-        return await this.queryBus.ask(new FindJobRegistryByIdQuery(
+        return await this.queryBus.ask(new QueueManagerFindJobRegistryByIdQuery(
             payload.id,
             {},
             {

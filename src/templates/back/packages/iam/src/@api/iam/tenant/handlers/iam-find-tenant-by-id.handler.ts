@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindTenantByIdQuery } from '@app/iam/tenant/application/find/find-tenant-by-id.query';
 import { IamTenant } from '@api/graphql';
-import { IamTenantDto } from '../dto';
+import { IamTenantDto } from '@api/iam/tenant';
+import { IamFindTenantByIdQuery } from '@app/iam/tenant';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamFindTenantByIdHandler
@@ -19,10 +17,12 @@ export class IamFindTenantByIdHandler
         timezone?: string,
     ): Promise<IamTenant | IamTenantDto>
     {
-        return await this.queryBus.ask(new FindTenantByIdQuery(
+        return await this.queryBus.ask(new IamFindTenantByIdQuery(
             id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

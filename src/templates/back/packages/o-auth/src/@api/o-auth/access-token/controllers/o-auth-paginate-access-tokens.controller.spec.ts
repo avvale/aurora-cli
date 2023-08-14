@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthPaginateAccessTokensController, OAuthPaginateAccessTokensHandler } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthPaginateAccessTokensController } from './o-auth-paginate-access-tokens.controller';
-import { OAuthPaginateAccessTokensHandler } from '../handlers/o-auth-paginate-access-tokens.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
 
 describe('OAuthPaginateAccessTokensController', () =>
 {
@@ -43,17 +37,17 @@ describe('OAuthPaginateAccessTokensController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a accessTokens', async () =>
+        test('should return a oAuthMockAccessTokenData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : accessTokens,
+                rows : oAuthMockAccessTokenData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : accessTokens,
+                rows : oAuthMockAccessTokenData,
             });
         });
     });

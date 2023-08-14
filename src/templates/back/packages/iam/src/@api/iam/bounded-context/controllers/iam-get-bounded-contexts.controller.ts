@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamBoundedContextDto } from '../dto';
+import { IamBoundedContextDto, IamGetBoundedContextsHandler } from '@api/iam/bounded-context';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamGetBoundedContextsHandler } from '../handlers/iam-get-bounded-contexts.handler';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] bounded-context')
 @Controller('iam/bounded-contexts/get')

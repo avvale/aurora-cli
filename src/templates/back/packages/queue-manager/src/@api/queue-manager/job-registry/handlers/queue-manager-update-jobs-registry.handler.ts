@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetJobsRegistryQuery } from '@app/queue-manager/job-registry/application/get/get-jobs-registry.query';
-import { UpdateJobsRegistryCommand } from '@app/queue-manager/job-registry/application/update/update-jobs-registry.command';
 import { QueueManagerJobRegistry, QueueManagerUpdateJobsRegistryInput } from '@api/graphql';
-import { QueueManagerJobRegistryDto, QueueManagerUpdateJobsRegistryDto } from '../dto';
+import { QueueManagerJobRegistryDto, QueueManagerUpdateJobsRegistryDto } from '@api/queue-manager/job-registry';
+import { QueueManagerGetJobsRegistryQuery, QueueManagerUpdateJobsRegistryCommand } from '@app/queue-manager/job-registry';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerUpdateJobsRegistryHandler
@@ -22,7 +19,7 @@ export class QueueManagerUpdateJobsRegistryHandler
         timezone?: string,
     ): Promise<QueueManagerJobRegistry | QueueManagerJobRegistryDto>
     {
-        await this.commandBus.dispatch(new UpdateJobsRegistryCommand(
+        await this.commandBus.dispatch(new QueueManagerUpdateJobsRegistryCommand(
             payload,
             queryStatement,
             constraint,
@@ -31,7 +28,7 @@ export class QueueManagerUpdateJobsRegistryHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetJobsRegistryQuery(
+        return await this.queryBus.ask(new QueueManagerGetJobsRegistryQuery(
             queryStatement,
             constraint,
             {

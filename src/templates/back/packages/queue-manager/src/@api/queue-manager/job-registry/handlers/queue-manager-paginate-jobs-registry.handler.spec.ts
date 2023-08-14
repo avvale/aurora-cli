@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerPaginateJobsRegistryHandler } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerPaginateJobsRegistryHandler } from './queue-manager-paginate-jobs-registry.handler';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
 
 describe('QueueManagerPaginateJobsRegistryHandler', () =>
 {
     let handler: QueueManagerPaginateJobsRegistryHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('QueueManagerPaginateJobsRegistryHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<QueueManagerPaginateJobsRegistryHandler>(QueueManagerPaginateJobsRegistryHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('QueueManagerPaginateJobsRegistryHandler should be defined', () =>
@@ -57,15 +45,21 @@ describe('QueueManagerPaginateJobsRegistryHandler', () =>
         test('should return a jobsRegistry', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: jobsRegistry.length,
-                count: jobsRegistry.length,
-                rows : jobsRegistry,
+                total: queueManagerMockJobRegistryData.length,
+                count: queueManagerMockJobRegistryData.length,
+                rows : queueManagerMockJobRegistryData,
             })));
-            expect(await handler.main()).toEqual({
-                total: jobsRegistry.length,
-                count: jobsRegistry.length,
-                rows : jobsRegistry,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                ),
+            )
+                .toEqual({
+                    total: queueManagerMockJobRegistryData.length,
+                    count: queueManagerMockJobRegistryData.length,
+                    rows : queueManagerMockJobRegistryData,
+                });
         });
     });
 });

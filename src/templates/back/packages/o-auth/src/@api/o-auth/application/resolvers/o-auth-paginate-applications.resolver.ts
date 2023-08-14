@@ -1,10 +1,8 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthPaginateApplicationsHandler } from '../handlers/o-auth-paginate-applications.handler';
 import { Pagination } from '@api/graphql';
+import { OAuthPaginateApplicationsHandler } from '@api/o-auth/application';
+import { Auth } from '@aurora/decorators';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.application.get')

@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindAccountHandler, IamFindAccountResolver } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindAccountResolver } from './iam-find-account.resolver';
-import { IamFindAccountHandler } from '../handlers/iam-find-account.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamFindAccountResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('IamFindAccountResolver', () =>
 
         test('should return a account', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await resolver.main()).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(await resolver.main()).toBe(iamMockAccountData[0]);
         });
     });
 });

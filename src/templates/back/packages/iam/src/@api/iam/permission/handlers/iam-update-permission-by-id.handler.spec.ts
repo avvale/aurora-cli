@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdatePermissionByIdHandler } from './iam-update-permission-by-id.handler';
 import { IamUpdatePermissionByIdInput } from '@api/graphql';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { IamUpdatePermissionByIdHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdatePermissionByIdHandler', () =>
 {
     let handler: IamUpdatePermissionByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('IamUpdatePermissionByIdHandler', () =>
 
         handler = module.get<IamUpdatePermissionByIdHandler>(IamUpdatePermissionByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamUpdatePermissionByIdHandler should be defined', () =>
@@ -57,8 +51,14 @@ describe('IamUpdatePermissionByIdHandler', () =>
 
         test('should return a permission updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await handler.main(<IamUpdatePermissionByIdInput>permissions[0])).toBe(permissions[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdatePermissionByIdInput>iamMockPermissionData[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(iamMockPermissionData[0]);
         });
     });
 });

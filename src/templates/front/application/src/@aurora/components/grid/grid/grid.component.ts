@@ -11,7 +11,7 @@ import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Action, GridManagerService } from '@aurora';
-import { FlagIconComponent } from '@aurora/components';
+import { FlagIconComponent } from '@aurora/components/flag-icon';
 import { GetPipe } from '@aurora/pipes/get.pipe';
 import { merge, tap } from 'rxjs';
 import { GridCellValueTemplateDirective } from '../directives/grid-cell-value-template.directive';

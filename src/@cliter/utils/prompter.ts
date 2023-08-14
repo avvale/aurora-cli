@@ -320,17 +320,15 @@ export const Prompter =
                 // set pivot.aggregate value
                 if (answers.hasPivotTable)
                 {
-                    answers.relationship.pivot.aggregate  = `${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}${name.toPascalCase()}`;
+                    answers.relationship.pivot.aggregate  = `${generateCommandState.schema.boundedContextName.toPascalCase()}${generateCommandState.schema.moduleName.toPascalCase()}${answers.relationship.singularName.toPascalCase()}`;
                     answers.relationship.pivot.modulePath = `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`;
-                    answers.relationship.pivot.fileName   = `${generateCommandState.schema.moduleNames.toKebabCase()}-${name.toKebabCase()}`;
                 }
 
                 if (!answers.hasPivotTable && answers.relationship?.type === RelationshipType.MANY_TO_MANY)
                 {
                     const relationshipModulePath = getBoundedContextModuleFromFlag(generateCommandState.command, answers.relationship.modulePath);
-                    answers.relationship.pivot.aggregate  = `${relationshipModulePath.boundedContextName.toPascalCase()}${name.toPascalCase()}${generateCommandState.schema.moduleNames.toPascalCase()}`;
+                    answers.relationship.pivot.aggregate  = `${relationshipModulePath.boundedContextName.toPascalCase()}${answers.relationship.singularName.toPascalCase()}${generateCommandState.schema.moduleName.toPascalCase()}`;
                     answers.relationship.pivot.modulePath = answers.relationship.modulePath;
-                    answers.relationship.pivot.fileName   = `${name.toKebabCase()}-${generateCommandState.schema.moduleNames.toKebabCase()}`;
                 }
 
                 if (answers.relationship?.type) return false;
@@ -396,7 +394,6 @@ export const Prompter =
                         pivot          : response.relationship.pivot?.aggregate ? {
                             aggregate : response.relationship.pivot.aggregate,
                             modulePath: response.relationship.pivot.modulePath,
-                            fileName  : response.relationship.pivot.fileName,
                         } : undefined,
                     }) : undefined,
             index : response.index,

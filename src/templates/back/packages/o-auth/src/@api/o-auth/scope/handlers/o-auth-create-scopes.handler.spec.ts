@@ -1,27 +1,17 @@
+import { OAuthCreateScopesHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
+import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthCreateScopesHandler } from './o-auth-create-scopes.handler';
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthCreateScopesHandler', () =>
 {
     let handler: OAuthCreateScopesHandler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthCreateScopesHandler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
                 {
                     provide : ICommandBus,
                     useValue: {
@@ -32,9 +22,7 @@ describe('OAuthCreateScopesHandler', () =>
         })
             .compile();
 
-        handler     = module.get<OAuthCreateScopesHandler>(OAuthCreateScopesHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<OAuthCreateScopesHandler>(OAuthCreateScopesHandler);
     });
 
     describe('main', () =>
@@ -44,9 +32,9 @@ describe('OAuthCreateScopesHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an scopes created', async () =>
+        test('should return an oAuthMockScopeData created', async () =>
         {
-            expect(await handler.main(scopes)).toBe(true);
+            expect(await handler.main(oAuthMockScopeData)).toBe(true);
         });
     });
 });

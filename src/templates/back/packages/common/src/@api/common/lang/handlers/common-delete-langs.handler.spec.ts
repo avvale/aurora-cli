@@ -8,7 +8,6 @@ describe('CommonDeleteLangsHandler', () =>
 {
     let handler: CommonDeleteLangsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -35,7 +34,6 @@ describe('CommonDeleteLangsHandler', () =>
 
         handler = module.get<CommonDeleteLangsHandler>(CommonDeleteLangsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonDeleteLangsHandler should be defined', () =>
@@ -53,7 +51,14 @@ describe('CommonDeleteLangsHandler', () =>
         test('should return an commonMockLangData deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData)));
-            expect(await handler.main()).toBe(commonMockLangData);
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockLangData);
         });
     });
 });

@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateApplicationResolver } from './o-auth-create-application.resolver';
-import { OAuthCreateApplicationHandler } from '../handlers/o-auth-create-application.handler';
 import { OAuthCreateApplicationInput } from '@api/graphql';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
+import { OAuthCreateApplicationHandler, OAuthCreateApplicationResolver } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateApplicationResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('OAuthCreateApplicationResolver', () =>
 
         test('should return an application created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await resolver.main(<OAuthCreateApplicationInput>applications[0])).toBe(applications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(await resolver.main(<OAuthCreateApplicationInput>oAuthMockApplicationData[0])).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

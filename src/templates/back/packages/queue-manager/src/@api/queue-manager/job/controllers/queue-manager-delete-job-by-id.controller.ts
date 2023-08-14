@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { QueueManagerDeleteJobByIdHandler, QueueManagerJobDto } from '@api/queue-manager/job';
+import { Auth } from '@aurora/decorators';
 import { Controller, Param, Delete } from '@nestjs/common';
 import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { QueueManagerJobDto } from '../dto';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerDeleteJobByIdHandler } from '../handlers/queue-manager-delete-job-by-id.handler';
 
 @ApiTags('[queue-manager] job')
 @Controller('queue-manager/job/delete')

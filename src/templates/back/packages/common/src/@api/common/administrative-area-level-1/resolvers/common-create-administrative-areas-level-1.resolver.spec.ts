@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonCreateAdministrativeAreasLevel1Resolver } from './common-create-administrative-areas-level-1.resolver';
-import { CommonCreateAdministrativeAreasLevel1Handler } from '../handlers/common-create-administrative-areas-level-1.handler';
+import { CommonCreateAdministrativeAreasLevel1Handler, CommonCreateAdministrativeAreasLevel1Resolver } from '@api/common/administrative-area-level-1';
 import { CommonCreateAdministrativeAreaLevel1Input } from '@api/graphql';
-
-// sources
-import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.data';
+import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateAdministrativeAreasLevel1Resolver', () =>
 {
     let resolver: CommonCreateAdministrativeAreasLevel1Resolver;
-    let handler: CommonCreateAdministrativeAreasLevel1Handler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('CommonCreateAdministrativeAreasLevel1Resolver', () =>
             .compile();
 
         resolver = module.get<CommonCreateAdministrativeAreasLevel1Resolver>(CommonCreateAdministrativeAreasLevel1Resolver);
-        handler = module.get<CommonCreateAdministrativeAreasLevel1Handler>(CommonCreateAdministrativeAreasLevel1Handler);
     });
 
     test('CommonCreateAdministrativeAreasLevel1Resolver should be defined', () =>

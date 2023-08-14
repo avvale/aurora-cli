@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdatePermissionsHandler } from './iam-update-permissions.handler';
 import { IamUpdatePermissionsInput } from '@api/graphql';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { IamUpdatePermissionsHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdatePermissionsHandler', () =>
 {
     let handler: IamUpdatePermissionsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -38,9 +33,8 @@ describe('IamUpdatePermissionsHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpdatePermissionsHandler>(IamUpdatePermissionsHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpdatePermissionsHandler>(IamUpdatePermissionsHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     test('IamUpdatePermissionsHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('IamUpdatePermissionsHandler', () =>
 
         test('should return a permissions updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await handler.main(<IamUpdatePermissionsInput>permissions[0])).toBe(permissions[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdatePermissionsInput>iamMockPermissionData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockPermissionData[0]);
         });
     });
 });

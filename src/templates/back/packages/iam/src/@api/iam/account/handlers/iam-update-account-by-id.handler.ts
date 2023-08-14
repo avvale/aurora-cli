@@ -1,16 +1,12 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-import { Sequelize } from 'sequelize-typescript';
-
-// @app
-import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';
-import { FindUserByIdQuery } from '@app/iam/user/application/find/find-user-by-id.query';
-import { UpdateAccountByIdCommand } from '@app/iam/account/application/update/update-account-by-id.command';
 import { IamAccount, IamAccountType, IamUpdateAccountByIdInput } from '@api/graphql';
-import { IamAccountDto, IamUpdateAccountByIdDto } from '../dto';
-import { GetRolesQuery } from '@app/iam/role/application/get/get-roles.query';
+import { IamAccountDto, IamUpdateAccountByIdDto } from '@api/iam/account';
+import { IamFindAccountByIdQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
-import { UpdateUserByIdCommand } from '@app/iam/user/application/update/update-user-by-id.command';
+import { IamGetRolesQuery } from '@app/iam/role';
+import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable, Logger } from '@nestjs/common';
+import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()
 export class IamUpdateAccountByIdHandler
@@ -29,10 +25,12 @@ export class IamUpdateAccountByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto>
     {
-        const account = await this.queryBus.ask(new FindAccountByIdQuery(
+        const account = await this.queryBus.ask(new IamFindAccountByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, account);
@@ -40,7 +38,7 @@ export class IamUpdateAccountByIdHandler
         if ('roleIds' in dataToUpdate)
         {
             // get roles with permissions
-            const roles = await this.queryBus.ask(new GetRolesQuery({
+            const roles = await this.queryBus.ask(new IamGetRolesQuery({
                 where: {
                     id: payload.roleIds,
                 },
@@ -61,7 +59,7 @@ export class IamUpdateAccountByIdHandler
         {
             const operationId = Utils.uuid();
 
-            await this.commandBus.dispatch(new UpdateAccountByIdCommand(
+            await this.commandBus.dispatch(new IamUpdateAccountByIdCommand(
                 {
                     ...dataToUpdate,
                     id: payload.id,
@@ -82,14 +80,14 @@ export class IamUpdateAccountByIdHandler
 
             if (account.type === IamAccountType.USER)
             {
-                const user = await this.queryBus.ask(new FindUserByIdQuery(payload.user.id, constraint, { timezone }));
+                const user = await this.queryBus.ask(new IamFindUserByIdQuery(payload.user.id, constraint, { timezone }));
 
                 const dataToUpdate = Utils.diff(payload.user, user);
 
                 // always password will be empty unless is changed
                 if (dataToUpdate.password === '') delete dataToUpdate.password;
 
-                await this.commandBus.dispatch(new UpdateUserByIdCommand(
+                await this.commandBus.dispatch(new IamUpdateUserByIdCommand(
                     {
                         ...dataToUpdate,
                         id: payload.user.id,
@@ -117,6 +115,12 @@ export class IamUpdateAccountByIdHandler
             throw error;
         }
 
-        return await this.queryBus.ask(new FindAccountByIdQuery(payload.id, constraint, { timezone }));
+        return await this.queryBus.ask(new IamFindAccountByIdQuery(
+            payload.id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
     }
 }

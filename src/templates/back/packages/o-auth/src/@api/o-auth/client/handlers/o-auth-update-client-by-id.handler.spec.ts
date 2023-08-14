@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthUpdateClientByIdHandler } from './o-auth-update-client-by-id.handler';
 import { OAuthUpdateClientByIdInput } from '@api/graphql';
-
-// sources
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { OAuthUpdateClientByIdHandler } from '@api/o-auth/client';
+import { oAuthMockClientData } from '@app/o-auth/client';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpdateClientByIdHandler', () =>
 {
     let handler: OAuthUpdateClientByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('OAuthUpdateClientByIdHandler', () =>
 
         handler = module.get<OAuthUpdateClientByIdHandler>(OAuthUpdateClientByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthUpdateClientByIdHandler should be defined', () =>
@@ -57,8 +51,14 @@ describe('OAuthUpdateClientByIdHandler', () =>
 
         test('should return a client updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(clients[0])));
-            expect(await handler.main(<OAuthUpdateClientByIdInput>clients[0])).toBe(clients[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+            expect(
+                await handler.main(
+                    <OAuthUpdateClientByIdInput>oAuthMockClientData[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(oAuthMockClientData[0]);
         });
     });
 });

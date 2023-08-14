@@ -1,23 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { DeleteCountryByIdI18nCommandHandler } from './delete-country-by-id-i18n.command-handler';
+import { CommonDeleteCountryByIdI18nCommandHandler } from './common-delete-country-by-id-i18n.command-handler';
 import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { DeleteCountryByIdI18nCommand } from './delete-country-by-id-i18n.command';
-import { DeleteCountryByIdI18nService } from './delete-country-by-id-i18n.service';
+import { CommonDeleteCountryByIdI18nCommand } from './common-delete-country-by-id-i18n.command';
+import { CommonDeleteCountryByIdI18nService } from './common-delete-country-by-id-i18n.service';
 
 describe('CommonDeleteCountryByIdI18nCommandHandler', () =>
 {
-    let commandHandler: DeleteCountryByIdI18nCommandHandler;
-    let service: DeleteCountryByIdI18nService;
+    let commandHandler: CommonDeleteCountryByIdI18nCommandHandler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
-                DeleteCountryByIdI18nCommandHandler,
+                CommonDeleteCountryByIdI18nCommandHandler,
                 {
-                    provide : DeleteCountryByIdI18nService,
+                    provide : CommonDeleteCountryByIdI18nService,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -26,8 +25,7 @@ describe('CommonDeleteCountryByIdI18nCommandHandler', () =>
         })
             .compile();
 
-        commandHandler  = module.get<DeleteCountryByIdI18nCommandHandler>(DeleteCountryByIdI18nCommandHandler);
-        service         = module.get<DeleteCountryByIdI18nService>(DeleteCountryByIdI18nService);
+        commandHandler = module.get<CommonDeleteCountryByIdI18nCommandHandler>(CommonDeleteCountryByIdI18nCommandHandler);
     });
 
     describe('main', () =>
@@ -39,11 +37,14 @@ describe('CommonDeleteCountryByIdI18nCommandHandler', () =>
 
         test('should create the value object id and pass them as parameters to the DeleteCountryByIdI18nService', async () =>
         {
-            expect(await commandHandler.execute(
-                new DeleteCountryByIdI18nCommand(
-                    commonMockCountryData[0].id,
+            expect(
+                await commandHandler.execute(
+                    new CommonDeleteCountryByIdI18nCommand(
+                        commonMockCountryData[0].id,
+                    ),
                 ),
-            )).toBe(undefined);
+            )
+                .toBe(undefined);
         });
     });
 });

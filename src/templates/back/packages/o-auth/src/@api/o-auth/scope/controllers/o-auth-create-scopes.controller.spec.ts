@@ -1,16 +1,10 @@
+import { OAuthCreateScopesController, OAuthCreateScopesHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateScopesController } from './o-auth-create-scopes.controller';
-import { OAuthCreateScopesHandler } from '../handlers/o-auth-create-scopes.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthCreateScopesController', () =>
 {
     let controller: OAuthCreateScopesController;
-    let handler: OAuthCreateScopesHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('OAuthCreateScopesController', () =>
             .compile();
 
         controller = module.get<OAuthCreateScopesController>(OAuthCreateScopesController);
-        handler = module.get<OAuthCreateScopesHandler>(OAuthCreateScopesHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('OAuthCreateScopesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an scopes created', async () =>
+        test('should return an oAuthMockScopeData created', async () =>
         {
-            expect(await controller.main(scopes)).toBe(undefined);
+            expect(
+                await controller.main(
+                    oAuthMockScopeData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

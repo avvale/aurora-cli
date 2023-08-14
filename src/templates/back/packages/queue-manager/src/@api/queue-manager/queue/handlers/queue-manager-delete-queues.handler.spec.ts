@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { QueueManagerDeleteQueuesHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerDeleteQueuesHandler } from './queue-manager-delete-queues.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerDeleteQueuesHandler', () =>
 {
     let handler: QueueManagerDeleteQueuesHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('QueueManagerDeleteQueuesHandler', () =>
 
         handler = module.get<QueueManagerDeleteQueuesHandler>(QueueManagerDeleteQueuesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('QueueManagerDeleteQueuesHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('QueueManagerDeleteQueuesHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an queues deleted', async () =>
+        test('should return an queueManagerMockQueueData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queues)));
-            expect(await handler.main()).toBe(queues);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(queueManagerMockQueueData);
         });
     });
 });

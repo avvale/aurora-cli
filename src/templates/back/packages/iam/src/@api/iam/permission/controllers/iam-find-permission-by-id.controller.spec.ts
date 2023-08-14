@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindPermissionByIdController, IamFindPermissionByIdHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindPermissionByIdController } from './iam-find-permission-by-id.controller';
-import { IamFindPermissionByIdHandler } from '../handlers/iam-find-permission-by-id.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamFindPermissionByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamFindPermissionByIdController', () =>
 
         test('should return an permission by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await controller.main(permissions[0].id)).toBe(permissions[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(await controller.main(iamMockPermissionData[0].id)).toBe(iamMockPermissionData[0]);
         });
     });
 });

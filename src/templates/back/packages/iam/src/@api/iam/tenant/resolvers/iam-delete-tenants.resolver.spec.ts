@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamDeleteTenantsHandler, IamDeleteTenantsResolver } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteTenantsResolver } from './iam-delete-tenants.resolver';
-import { IamDeleteTenantsHandler } from '../handlers/iam-delete-tenants.handler';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamDeleteTenantsResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('IamDeleteTenantsResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return an tenants deleted', async () =>
+        test('should return an iamMockTenantData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants)));
-            expect(await resolver.main()).toBe(tenants);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData)));
+            expect(await resolver.main()).toBe(iamMockTenantData);
         });
     });
 });

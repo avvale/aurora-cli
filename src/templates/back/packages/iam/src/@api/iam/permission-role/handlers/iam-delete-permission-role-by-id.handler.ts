@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindPermissionRoleByIdQuery } from '@app/iam/permission-role/application/find/find-permission-role-by-id.query';
-import { DeletePermissionRoleByIdCommand } from '@app/iam/permission-role/application/delete/delete-permission-role-by-id.command';
+import { IamDeletePermissionRoleByIdCommand, IamFindPermissionRoleByIdQuery } from '@app/iam/permission-role';
 import { IamDeletePermissionRoleInput, IamPermissionRole } from '@api/graphql';
 import { IamDeletePermissionRoleDto, IamPermissionRoleDto } from '../dto';
 
@@ -22,9 +19,16 @@ export class IamDeletePermissionRoleByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamPermissionRole | IamPermissionRoleDto>
     {
-        const permission = await this.queryBus.ask(new FindPermissionRoleByIdQuery(payload.permissionId, payload.roleId, constraint, { timezone }));
+        const permission = await this.queryBus.ask(new IamFindPermissionRoleByIdQuery(
+            payload.permissionId,
+            payload.roleId,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeletePermissionRoleByIdCommand(
+        await this.commandBus.dispatch(new IamDeletePermissionRoleByIdCommand(
             payload,
             constraint,
             {

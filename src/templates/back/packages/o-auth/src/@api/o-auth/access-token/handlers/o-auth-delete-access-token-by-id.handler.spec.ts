@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthDeleteAccessTokenByIdHandler } from '@api/o-auth/access-token';
+import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthDeleteAccessTokenByIdHandler } from './o-auth-delete-access-token-by-id.handler';
-
-// sources
-import { accessTokens } from '@app/o-auth/access-token/infrastructure/mock/mock-access-token.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteAccessTokenByIdController', () =>
 {
     let handler: OAuthDeleteAccessTokenByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('OAuthDeleteAccessTokenByIdController', () =>
 
         handler = module.get<OAuthDeleteAccessTokenByIdHandler>(OAuthDeleteAccessTokenByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,15 @@ describe('OAuthDeleteAccessTokenByIdController', () =>
 
         test('should return an accessToken deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accessTokens[0])));
-            expect(await handler.main(accessTokens[0].id)).toBe(accessTokens[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData[0])));
+            expect(
+                await handler.main(
+                    oAuthMockAccessTokenData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockAccessTokenData[0]);
         });
     });
 });

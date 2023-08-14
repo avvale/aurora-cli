@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerUpdateJobRegistryByIdResolver } from './queue-manager-update-job-registry-by-id.resolver';
-import { QueueManagerUpdateJobRegistryByIdHandler } from '../handlers/queue-manager-update-job-registry-by-id.handler';
 import { QueueManagerUpdateJobRegistryByIdInput } from '@api/graphql';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
+import { QueueManagerUpdateJobRegistryByIdHandler, QueueManagerUpdateJobRegistryByIdResolver } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerUpdateJobRegistryByIdResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('QueueManagerUpdateJobRegistryByIdResolver', () =>
 
         test('should return a jobRegistry by id updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(jobsRegistry[0])));
-            expect(await resolver.main(<QueueManagerUpdateJobRegistryByIdInput>jobsRegistry[0])).toBe(jobsRegistry[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
+            expect(await resolver.main(<QueueManagerUpdateJobRegistryByIdInput>queueManagerMockJobRegistryData[0])).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

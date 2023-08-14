@@ -67,6 +67,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+aggregateI18nProperties: []
 additionalApis: []
 excluded:
   - src/@api/iam/user/handlers/iam-create-user.handler.spec.ts

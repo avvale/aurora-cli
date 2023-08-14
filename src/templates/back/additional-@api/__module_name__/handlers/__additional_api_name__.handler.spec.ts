@@ -5,7 +5,6 @@ import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
 import { CacheModule } from '@nestjs/cache-manager';
 {{/if}}
 
-
 // custom items
 import { {{ currentAdditionalApi.getClassName }}Handler } from './{{ currentAdditionalApi.getApiFileName }}.handler';
 

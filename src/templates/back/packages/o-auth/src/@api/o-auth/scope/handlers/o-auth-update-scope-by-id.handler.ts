@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindScopeByIdQuery } from '@app/o-auth/scope/application/find/find-scope-by-id.query';
-import { UpdateScopeByIdCommand } from '@app/o-auth/scope/application/update/update-scope-by-id.command';
 import { OAuthScope, OAuthUpdateScopeByIdInput } from '@api/graphql';
-import { OAuthScopeDto, OAuthUpdateScopeByIdDto } from '../dto';
+import { OAuthScopeDto, OAuthUpdateScopeByIdDto } from '@api/o-auth/scope';
+import { OAuthFindScopeByIdQuery, OAuthUpdateScopeByIdCommand } from '@app/o-auth/scope';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpdateScopeByIdHandler
@@ -22,15 +19,17 @@ export class OAuthUpdateScopeByIdHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthScope | OAuthScopeDto>
     {
-        const scope = await this.queryBus.ask(new FindScopeByIdQuery(
+        const scope = await this.queryBus.ask(new OAuthFindScopeByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, scope);
 
-        await this.commandBus.dispatch(new UpdateScopeByIdCommand(
+        await this.commandBus.dispatch(new OAuthUpdateScopeByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -44,10 +43,12 @@ export class OAuthUpdateScopeByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindScopeByIdQuery(
+        return await this.queryBus.ask(new OAuthFindScopeByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

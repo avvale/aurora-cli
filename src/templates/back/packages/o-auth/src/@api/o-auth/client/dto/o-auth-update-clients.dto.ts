@@ -1,6 +1,6 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
 import { OAuthClientGrantType } from '@api/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class OAuthUpdateClientsDto
 {

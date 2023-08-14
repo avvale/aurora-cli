@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateBoundedContextsCommand } from '@app/iam/bounded-context/application/create/create-bounded-contexts.command';
 import { IamCreateBoundedContextInput } from '@api/graphql';
-import { IamCreateBoundedContextDto } from '../dto';
+import { IamCreateBoundedContextDto } from '@api/iam/bounded-context';
+import { IamCreateBoundedContextsCommand } from '@app/iam/bounded-context';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreateBoundedContextsHandler
@@ -19,7 +17,7 @@ export class IamCreateBoundedContextsHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateBoundedContextsCommand(
+        await this.commandBus.dispatch(new IamCreateBoundedContextsCommand(
             payload,
             {
                 timezone,
@@ -28,6 +26,7 @@ export class IamCreateBoundedContextsHandler
                 },
             },
         ));
+
         return true;
     }
 }

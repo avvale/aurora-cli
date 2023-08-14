@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindAccessTokenByIdQuery } from '@app/o-auth/access-token/application/find/find-access-token-by-id.query';
-import { DeleteAccessTokenByIdCommand } from '@app/o-auth/access-token/application/delete/delete-access-token-by-id.command';
 import { OAuthAccessToken } from '@api/graphql';
-import { OAuthAccessTokenDto } from '../dto';
+import { OAuthAccessTokenDto } from '@api/o-auth/access-token';
+import { OAuthDeleteAccessTokenByIdCommand, OAuthFindAccessTokenByIdQuery } from '@app/o-auth/access-token';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthDeleteAccessTokenByIdHandler
@@ -21,9 +18,15 @@ export class OAuthDeleteAccessTokenByIdHandler
         timezone?: string,
     ): Promise<OAuthAccessToken | OAuthAccessTokenDto>
     {
-        const accessToken = await this.queryBus.ask(new FindAccessTokenByIdQuery(id, constraint, { timezone }));
+        const accessToken = await this.queryBus.ask(new OAuthFindAccessTokenByIdQuery(
+            id,
+            constraint,
+            {
+                timezone,
+            },
+        ));
 
-        await this.commandBus.dispatch(new DeleteAccessTokenByIdCommand(
+        await this.commandBus.dispatch(new OAuthDeleteAccessTokenByIdCommand(
             id,
             constraint,
             {

@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamAccountDto } from '../dto';
+import { IamAccountDto, IamFindAccountByIdHandler } from '@api/iam/account';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamFindAccountByIdHandler } from '../handlers/iam-find-account-by-id.handler';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Param, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/find')

@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerUpsertJobRegistryController, QueueManagerUpsertJobRegistryHandler } from '@api/queue-manager/job-registry';
+import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerUpsertJobRegistryController } from './queue-manager-upsert-job-registry.controller';
-import { QueueManagerUpsertJobRegistryHandler } from '../handlers/queue-manager-upsert-job-registry.handler';
-
-// sources
-import { jobsRegistry } from '@app/queue-manager/job-registry/infrastructure/mock/mock-job-registry.data';
 
 describe('QueueManagerUpsertJobRegistryController', () =>
 {
@@ -45,8 +39,8 @@ describe('QueueManagerUpsertJobRegistryController', () =>
 
         test('should return an jobRegistry upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(jobsRegistry[0])));
-            expect(await controller.main(jobsRegistry[0])).toBe(jobsRegistry[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
+            expect(await controller.main(queueManagerMockJobRegistryData[0])).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

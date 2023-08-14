@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindApplicationByIdQuery } from '@app/o-auth/application/application/find/find-application-by-id.query';
-import { UpsertApplicationCommand } from '@app/o-auth/application/application/upsert/upsert-application.command';
 import { OAuthApplication, OAuthUpdateApplicationByIdInput } from '@api/graphql';
-import { OAuthApplicationDto, OAuthUpdateApplicationByIdDto } from '../dto';
+import { OAuthApplicationDto, OAuthUpdateApplicationByIdDto } from '@api/o-auth/application';
+import { OAuthFindApplicationByIdQuery, OAuthUpsertApplicationCommand } from '@app/o-auth/application';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthUpsertApplicationHandler
@@ -21,7 +18,7 @@ export class OAuthUpsertApplicationHandler
         auditing?: AuditingMeta,
     ): Promise<OAuthApplication | OAuthApplicationDto>
     {
-        await this.commandBus.dispatch(new UpsertApplicationCommand(
+        await this.commandBus.dispatch(new OAuthUpsertApplicationCommand(
             payload,
             {
                 timezone,
@@ -31,10 +28,12 @@ export class OAuthUpsertApplicationHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindApplicationByIdQuery(
+        return await this.queryBus.ask(new OAuthFindApplicationByIdQuery(
             payload.id,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

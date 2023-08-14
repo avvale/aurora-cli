@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamUpdateAccountByIdController, IamUpdateAccountByIdHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpdateAccountByIdController } from './iam-update-account-by-id.controller';
-import { IamUpdateAccountByIdHandler } from '../handlers/iam-update-account-by-id.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamUpdateAccountByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamUpdateAccountByIdController', () =>
 
         test('should return a account updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await controller.main(accounts[0])).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(await controller.main(iamMockAccountData[0])).toBe(iamMockAccountData[0]);
         });
     });
 });

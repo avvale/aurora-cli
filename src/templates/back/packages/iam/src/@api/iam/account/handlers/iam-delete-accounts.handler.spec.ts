@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamDeleteAccountsHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamDeleteAccountsHandler } from './iam-delete-accounts.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteAccountsHandler', () =>
 {
     let handler: IamDeleteAccountsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('IamDeleteAccountsHandler', () =>
 
         handler = module.get<IamDeleteAccountsHandler>(IamDeleteAccountsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamDeleteAccountsHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('IamDeleteAccountsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an accounts deleted', async () =>
+        test('should return an iamMockAccountData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts)));
-            expect(await handler.main()).toBe(accounts);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockAccountData);
         });
     });
 });

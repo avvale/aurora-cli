@@ -1,16 +1,10 @@
+import { OAuthCreateApplicationsController, OAuthCreateApplicationsHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthCreateApplicationsController } from './o-auth-create-applications.controller';
-import { OAuthCreateApplicationsHandler } from '../handlers/o-auth-create-applications.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthCreateApplicationsController', () =>
 {
     let controller: OAuthCreateApplicationsController;
-    let handler: OAuthCreateApplicationsHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('OAuthCreateApplicationsController', () =>
             .compile();
 
         controller = module.get<OAuthCreateApplicationsController>(OAuthCreateApplicationsController);
-        handler = module.get<OAuthCreateApplicationsHandler>(OAuthCreateApplicationsHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('OAuthCreateApplicationsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an applications created', async () =>
+        test('should return an oAuthMockApplicationData created', async () =>
         {
-            expect(await controller.main(applications)).toBe(undefined);
+            expect(
+                await controller.main(
+                    oAuthMockApplicationData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

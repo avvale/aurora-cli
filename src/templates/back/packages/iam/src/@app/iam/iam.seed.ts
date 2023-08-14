@@ -1,7 +1,7 @@
 // ignored file
 import { IamAccountType } from '@api/graphql';
 import { clients } from '@app/o-auth/o-auth.seed';
-import { PermissionHelper } from './permission/domain/permission-helper';
+import { IamPermissionHelper } from '@app/iam/permission';
 
 export const boundedContexts = [
     {
@@ -60,8 +60,8 @@ export const permissions = [
 
 export const users = [
     {
-        id           : PermissionHelper.administratorUserId,
-        accountId    : PermissionHelper.administratorAccountId,
+        id           : IamPermissionHelper.administratorUserId,
+        accountId    : IamPermissionHelper.administratorAccountId,
         name         : 'John',
         surname      : 'Doe',
         avatar       : null,
@@ -77,7 +77,7 @@ export const users = [
 export const accounts = [
     // administrator account
     {
-        id               : PermissionHelper.administratorAccountId,
+        id               : IamPermissionHelper.administratorAccountId,
         type             : IamAccountType.USER,
         code             : null,
         email            : 'john.doe@contoso.com',
@@ -96,7 +96,7 @@ export const accounts = [
 
 export const roles = [
     {
-        id      : PermissionHelper.administratorRoleId,
+        id      : IamPermissionHelper.administratorRoleId,
         name    : 'Administrator',
         isMaster: true,
         permissions, // mock related permissions

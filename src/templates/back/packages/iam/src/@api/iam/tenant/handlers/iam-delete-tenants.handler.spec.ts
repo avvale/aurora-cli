@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamDeleteTenantsHandler } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamDeleteTenantsHandler } from './iam-delete-tenants.handler';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteTenantsHandler', () =>
 {
     let handler: IamDeleteTenantsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('IamDeleteTenantsHandler', () =>
 
         handler = module.get<IamDeleteTenantsHandler>(IamDeleteTenantsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamDeleteTenantsHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('IamDeleteTenantsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an tenants deleted', async () =>
+        test('should return an iamMockTenantData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(tenants)));
-            expect(await handler.main()).toBe(tenants);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockTenantData);
         });
     });
 });

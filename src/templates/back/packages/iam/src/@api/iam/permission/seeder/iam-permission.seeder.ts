@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreatePermissionsCommand } from '@app/iam/permission/application/create/create-permissions.command';
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { IamCreatePermissionsCommand } from '@app/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 
 @Injectable()
 export class IamPermissionSeeder
@@ -15,8 +15,8 @@ export class IamPermissionSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreatePermissionsCommand(
-            permissions,
+        await this.commandBus.dispatch(new IamCreatePermissionsCommand(
+            iamMockPermissionData,
             {
                 timezone: process.env.TZ ,
             },

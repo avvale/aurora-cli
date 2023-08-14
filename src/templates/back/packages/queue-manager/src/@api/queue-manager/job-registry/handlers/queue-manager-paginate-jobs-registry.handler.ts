@@ -1,9 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { PaginateJobsRegistryQuery } from '@app/queue-manager/job-registry/application/paginate/paginate-jobs-registry.query';
 import { Pagination } from '@api/graphql';
+import { QueueManagerPaginateJobsRegistryQuery } from '@app/queue-manager/job-registry';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerPaginateJobsRegistryHandler
@@ -18,7 +16,7 @@ export class QueueManagerPaginateJobsRegistryHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateJobsRegistryQuery(
+        return await this.queryBus.ask(new QueueManagerPaginateJobsRegistryQuery(
             queryStatement,
             constraint,
             {

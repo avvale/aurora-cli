@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamUpdatePermissionsController, IamUpdatePermissionsHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpdatePermissionsController } from './iam-update-permissions.controller';
-import { IamUpdatePermissionsHandler } from '../handlers/iam-update-permissions.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamUpdatePermissionsController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamUpdatePermissionsController', () =>
 
         test('should return a permissions updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await controller.main(permissions[0])).toBe(permissions[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(await controller.main(iamMockPermissionData[0])).toBe(iamMockPermissionData[0]);
         });
     });
 });

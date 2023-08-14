@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpdateAccountByIdHandler } from './iam-update-account-by-id.handler';
 import { IamUpdateAccountByIdInput } from '@api/graphql';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
+import { IamUpdateAccountByIdHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateAccountByIdHandler', () =>
 {
     let handler: IamUpdateAccountByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('IamUpdateAccountByIdHandler', () =>
 
         handler = module.get<IamUpdateAccountByIdHandler>(IamUpdateAccountByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('IamUpdateAccountByIdHandler should be defined', () =>
@@ -57,8 +51,14 @@ describe('IamUpdateAccountByIdHandler', () =>
 
         test('should return a account updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await handler.main(<IamUpdateAccountByIdInput>accounts[0])).toBe(accounts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(
+                await handler.main(
+                    <IamUpdateAccountByIdInput>iamMockAccountData[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(iamMockAccountData[0]);
         });
     });
 });

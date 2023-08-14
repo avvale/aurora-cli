@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamCreatePermissionHandler } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamCreatePermissionHandler } from './iam-create-permission.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreatePermissionHandler', () =>
 {
     let handler: IamCreatePermissionHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('IamCreatePermissionHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamCreatePermissionHandler>(IamCreatePermissionHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamCreatePermissionHandler>(IamCreatePermissionHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,14 @@ describe('IamCreatePermissionHandler', () =>
 
         test('should return an permission created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await handler.main(permissions[0])).toBe(permissions[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(
+                await handler.main(
+                    iamMockPermissionData[0],
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(iamMockPermissionData[0]);
         });
     });
 });

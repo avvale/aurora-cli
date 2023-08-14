@@ -9,7 +9,6 @@ describe('CommonUpdateAdministrativeAreaLevel2ByIdHandler', () =>
 {
     let handler: CommonUpdateAdministrativeAreaLevel2ByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -36,7 +35,6 @@ describe('CommonUpdateAdministrativeAreaLevel2ByIdHandler', () =>
 
         handler = module.get<CommonUpdateAdministrativeAreaLevel2ByIdHandler>(CommonUpdateAdministrativeAreaLevel2ByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonUpdateAdministrativeAreaLevel2ByIdHandler should be defined', () =>
@@ -54,7 +52,13 @@ describe('CommonUpdateAdministrativeAreaLevel2ByIdHandler', () =>
         test('should return a administrativeAreaLevel2 updated', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel2Data[0])));
-            expect(await handler.main(<CommonUpdateAdministrativeAreaLevel2ByIdInput>commonMockAdministrativeAreaLevel2Data[0])).toBe(commonMockAdministrativeAreaLevel2Data[0]);
+            expect(
+                await handler.main(
+                    <CommonUpdateAdministrativeAreaLevel2ByIdInput>commonMockAdministrativeAreaLevel2Data[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(commonMockAdministrativeAreaLevel2Data[0]);
         });
     });
 });

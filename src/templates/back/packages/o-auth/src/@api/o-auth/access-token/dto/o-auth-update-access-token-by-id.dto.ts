@@ -1,6 +1,6 @@
 /* eslint-disable indent */
+import { OAuthUpdateRefreshTokenByIdDto } from '@api/o-auth/refresh-token';
 import { ApiProperty } from '@nestjs/swagger';
-import { OAuthUpdateRefreshTokenByIdDto } from '../../../o-auth/refresh-token/dto/o-auth-update-refresh-token-by-id.dto';
 
 export class OAuthUpdateAccessTokenByIdDto
 {

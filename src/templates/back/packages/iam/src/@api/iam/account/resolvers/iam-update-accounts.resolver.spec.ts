@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpdateAccountsResolver } from './iam-update-accounts.resolver';
-import { IamUpdateAccountsHandler } from '../handlers/iam-update-accounts.handler';
 import { IamUpdateAccountsInput } from '@api/graphql';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
+import { IamUpdateAccountsHandler, IamUpdateAccountsResolver } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateAccountsResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamUpdateAccountsResolver', () =>
 
         test('should return a accounts updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await resolver.main(<IamUpdateAccountsInput>accounts[0])).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(await resolver.main(<IamUpdateAccountsInput>iamMockAccountData[0])).toBe(iamMockAccountData[0]);
         });
     });
 });

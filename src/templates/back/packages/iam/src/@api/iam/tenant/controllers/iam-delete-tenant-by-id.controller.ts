@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Param, Delete } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamTenantDto } from '../dto';
+import { IamDeleteTenantByIdHandler, IamTenantDto } from '@api/iam/tenant';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamDeleteTenantByIdHandler } from '../handlers/iam-delete-tenant-by-id.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete, Param } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] tenant')
 @Controller('iam/tenant/delete')

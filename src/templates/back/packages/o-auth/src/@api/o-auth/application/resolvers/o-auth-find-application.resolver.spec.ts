@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthFindApplicationHandler, OAuthFindApplicationResolver } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindApplicationResolver } from './o-auth-find-application.resolver';
-import { OAuthFindApplicationHandler } from '../handlers/o-auth-find-application.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
 
 describe('OAuthFindApplicationResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('OAuthFindApplicationResolver', () =>
 
         test('should return a application', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(applications[0])));
-            expect(await resolver.main()).toBe(applications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+            expect(await resolver.main()).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

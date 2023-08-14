@@ -46,7 +46,209 @@ export class CodeWriter
         });
     }
 
-    generateTestingForeignReferences(properties: Properties): void
+    // back
+    generateBackBoundedContextReferences(properties: Properties): void
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
+
+        // register import in @app/boundedContext/index.ts
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./${this.moduleName.toKebabCase()}`,
+            [
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Handlers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`,
+                `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}Repository`,
+                `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Sagas`,
+            ],
+        );
+
+        // handlers
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Handlers`,
+            `${this.boundedContextName.toPascalCase()}Handlers`,
+        );
+
+        // services
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+            `${this.boundedContextName.toPascalCase()}Services`,
+        );
+
+        // models
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`,
+            `${this.boundedContextName.toPascalCase()}Models`,
+        );
+
+        // repositories
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `
+{
+    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}Repository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository
+}`,
+            `${this.boundedContextName.toPascalCase()}Repositories`,
+        );
+
+        // sagas
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Sagas`,
+            `${this.boundedContextName.toPascalCase()}Sagas`,
+        );
+
+        // pivot tables
+        for (const property of properties.withRelationshipManyToMany)
+        {
+            if (property.relationship?.pivot?.modulePath !== `${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`)
+                continue;
+
+            ImportDriver.createImportItems(
+                sourceFile,
+                `./${this.moduleName.toKebabCase()}`,
+                [
+                    `${property.relationship?.pivot?.aggregate}Model`,
+                    `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
+                    `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
+                ],
+            );
+
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `${property.relationship?.pivot?.aggregate}Model`,
+                `${this.boundedContextName.toPascalCase()}Models`,
+            );
+
+            // repositories
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `
+{
+    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository
+}`,
+                `${this.boundedContextName.toPascalCase()}Repositories`,
+            );
+        }
+
+        // add i18n registers
+        if (properties.hasI18n)
+        {
+            // register import
+            ImportDriver.createImportItems(
+                sourceFile,
+                `./${this.moduleName.toKebabCase()}`,
+                [
+                    `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18nModel`,
+                    `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}I18nRepository`,
+                    `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}I18nRepository`,
+                ],
+            );
+
+            // models
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18nModel`,
+                `${this.boundedContextName.toPascalCase()}Models`,
+            );
+
+            // repositories
+            ArrayDriver.addArrayItem(
+                sourceFile,
+                `
+{
+    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}I18nRepository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}I18nRepository
+}`,
+                `${this.boundedContextName.toPascalCase()}Repositories`,
+            );
+        }
+
+        sourceFile?.saveSync();
+    }
+
+    declareBackApplicationItemsInModule(): void
+    {
+        // get decorator arguments
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.apiDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
+        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'Module');
+
+        // providers
+        const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
+        const providersArray: ArrayLiteralExpression = providers?.getInitializer() as ArrayLiteralExpression;
+
+        // controllers
+        const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
+        const controllersArray = controllers?.getInitializer() as ArrayLiteralExpression;
+
+        // register imports from bounded context from @app
+        ImportDriver.createImportItems(
+            sourceFile,
+            `../../${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}`,
+            [
+                `${this.boundedContextName.toPascalCase()}Models`,
+                `${this.boundedContextName.toPascalCase()}Handlers`,
+                `${this.boundedContextName.toPascalCase()}Services`,
+                `${this.boundedContextName.toPascalCase()}Repositories`,
+                `${this.boundedContextName.toPascalCase()}Sagas`,
+            ],
+        );
+
+        // register import for controllers and providers from @api
+        ImportDriver.createImportItems(
+            sourceFile,
+            `./${this.moduleName.toKebabCase()}`,
+            [
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+            ],
+        );
+
+        // add model to ORM array argument
+        const modelArrayArgument = this.getModelArrayArgument(moduleDecoratorArguments);
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `...${this.boundedContextName.toPascalCase()}Models`,
+            modelArrayArgument,
+        );
+
+        // add services to providers
+        ArrayDriver.addArrayItems(
+            sourceFile,
+            [
+                // from @app
+                `...${this.boundedContextName.toPascalCase()}Handlers`,
+                `...${this.boundedContextName.toPascalCase()}Services`,
+                `...${this.boundedContextName.toPascalCase()}Repositories`,
+                `...${this.boundedContextName.toPascalCase()}Sagas`,
+                // from @api
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+            ],
+            providersArray,
+        );
+
+        // add controller to controllers array
+        ArrayDriver.addArrayItem(
+            sourceFile,
+            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
+            controllersArray,
+        );
+
+        sourceFile?.saveSync();
+    }
+
+    generateBackTestingForeignReferences(properties: Properties): void
     {
         // get foreign relationship
         const foreignRelationships = properties.getForeignRelationship(this.boundedContextName);
@@ -101,115 +303,99 @@ export class CodeWriter
         }
     }
 
-    generateBoundedContextBackReferences(properties: Properties): void
+    /****************************************************************
+     * Add import and declare application items in bounded context
+     * module.
+     *
+     * @return void
+     ****************************************************************/
+    declareBackBoundedContextModuleInApplicationModule(): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app.module.ts'));
+        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
+        const modules: string[] = this.getImportedDeclarations(sourceFile);
 
-        // register import in @app/boundedContext/index.ts
-        ImportDriver.createImportItems(
-            sourceFile,
-            `./${this.moduleName.toKebabCase()}`,
-            [
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Handlers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`,
-                `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}Repository`,
-                `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Sagas`,
-            ],
-        );
-
-        // handlers
-        ArrayDriver.addArrayItem(
-            sourceFile,
-            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Handlers`,
-            `${this.boundedContextName.toPascalCase()}Handlers`,
-        );
-
-        // services
-        ArrayDriver.addArrayItem(
-            sourceFile,
-            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
-            `${this.boundedContextName.toPascalCase()}Services`,
-        );
-
-        // models
-        ArrayDriver.addArrayItem(
-            sourceFile,
-            `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`,
-            `${this.boundedContextName.toPascalCase()}Models`,
-        );
-
-        // pivot table model
-        for (const property of properties.withRelationshipManyToMany)
+        if (!modules.includes(`${this.boundedContextName.toPascalCase()}Module`))
         {
+            // import module
             ImportDriver.createImportItems(
                 sourceFile,
-                `./${this.moduleName.toKebabCase()}`,
-                [`${property.relationship?.pivot?.aggregate}Model`],
+                `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+                [`${this.boundedContextName.toPascalCase()}Module`],
             );
 
-            ArrayDriver.addArrayItem(
-                sourceFile,
-                `${property.relationship?.pivot?.aggregate}Model`,
-                `${this.boundedContextName.toPascalCase()}Models`,
-            );
-        }
-
-        // repositories
-        ArrayDriver.addArrayItem(
-            sourceFile,
-            `
-{
-    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}Repository,
-    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository
-}`,
-            `${this.boundedContextName.toPascalCase()}Repositories`,
-        );
-
-        // sagas
-        ArrayDriver.addArrayItem(
-            sourceFile,
-            `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Sagas`,
-            `${this.boundedContextName.toPascalCase()}Sagas`,
-        );
-
-        // add i18n registers
-        if (properties.hasI18n)
-        {
-            // register import
-            ImportDriver.createImportItems(
-                sourceFile,
-                `./${this.moduleName.toKebabCase()}`,
-                [
-                    `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18nModel`,
-                    `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}I18nRepository`,
-                    `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}I18nRepository`,
-                ],
-            );
-
-            // models
-            ArrayDriver.addArrayItem(
-                sourceFile,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}I18nModel`,
-                `${this.boundedContextName.toPascalCase()}Models`,
-            );
-
-            // repositories
-            ArrayDriver.addArrayItem(
-                sourceFile,
-                `
-{
-    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}I18nRepository,
-    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}I18nRepository
-}`,
-                `${this.boundedContextName.toPascalCase()}Repositories`,
-            );
+            // register module
+            const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
+            const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+            importsArray.addElement(`${this.boundedContextName.toPascalCase()}Module`, { useNewLines: true });
         }
 
         sourceFile?.saveSync();
     }
 
+    /****************************************************************
+     * Add exports of principal application elements to src/index.ts
+     * this is to have access to all elements from index.ts
+     *
+     * @return void
+     ****************************************************************/
+    declareBackApplicationItemsExports(): void
+    {
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'index.ts'));
+
+        // export module
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+            [`${this.boundedContextName.toPascalCase()}Module`],
+        );
+
+        // export DTO
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/dto/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.dto`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Dto`],
+        );
+
+        // export aggregate
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.aggregate`,
+            [`${this.aggregateName}`],
+        );
+
+        // export model
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`],
+        );
+
+        // export response
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.response`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Response`],
+        );
+
+        // export mapper
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.mapper`,
+            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Mapper`],
+        );
+
+        // export seed
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/mock/${this.boundedContextName.toKebabCase()}-mock-${this.moduleName.toKebabCase()}.data`,
+            [`${this.boundedContextName.toCamelCase()}Mock${this.moduleName.toPascalCase()}Data`],
+        );
+
+        sourceFile?.saveSync();
+    }
+
+    // front
     generateFrontInterface(
         properties: Properties,
         {
@@ -553,7 +739,7 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateDashboardTranslations(properties: Properties, langCode: string): void
+    generateFrontTranslations(properties: Properties, langCode: string): void
     {
         const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'));
 
@@ -578,7 +764,7 @@ export class CodeWriter
         fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
-    generateDashboardNavigationTranslation(langCode: string): void
+    generateFrontNavigationTranslation(langCode: string): void
     {
         const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'));
 
@@ -594,172 +780,7 @@ export class CodeWriter
         fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
-    /****************************************************************
-     * Add import and declare application items in bounded context
-     * module.
-     *
-     * @return void
-     ****************************************************************/
-    declareApplicationItemsInModule(): void
-    {
-        // get decorator arguments
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.apiDirectory, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.module.ts`));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, `${this.boundedContextName.toPascalCase()}Module`, 'Module');
-
-        // providers
-        const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
-        const providersArray: ArrayLiteralExpression = providers?.getInitializer() as ArrayLiteralExpression;
-
-        // controllers
-        const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
-        const controllersArray = controllers?.getInitializer() as ArrayLiteralExpression;
-
-        // register imports from bounded context from @app
-        ImportDriver.createImportItems(
-            sourceFile,
-            `../../${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}`,
-            [
-                `${this.boundedContextName.toPascalCase()}Models`,
-                `${this.boundedContextName.toPascalCase()}Handlers`,
-                `${this.boundedContextName.toPascalCase()}Services`,
-                `${this.boundedContextName.toPascalCase()}Repositories`,
-                `${this.boundedContextName.toPascalCase()}Sagas`,
-            ],
-        );
-
-        // register import for controllers and providers from @api
-        ImportDriver.createImportItems(
-            sourceFile,
-            `./${this.moduleName.toKebabCase()}`,
-            [
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
-            ],
-        );
-
-        // add model to ORM array argument
-        const modelArrayArgument = this.getModelArrayArgument(moduleDecoratorArguments);
-        ArrayDriver.addArrayItem(
-            sourceFile,
-            `...${this.boundedContextName.toPascalCase()}Models`,
-            modelArrayArgument,
-        );
-
-        // add services to providers
-        ArrayDriver.addArrayItems(
-            sourceFile,
-            [
-                // from @app
-                `...${this.boundedContextName.toPascalCase()}Handlers`,
-                `...${this.boundedContextName.toPascalCase()}Services`,
-                `...${this.boundedContextName.toPascalCase()}Repositories`,
-                `...${this.boundedContextName.toPascalCase()}Sagas`,
-                // from @api
-                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
-                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
-                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
-            ],
-            providersArray,
-        );
-
-        // add controller to controllers array
-        ArrayDriver.addArrayItem(
-            sourceFile,
-            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
-            controllersArray,
-        );
-
-        sourceFile?.saveSync();
-    }
-
-    declareBoundedContextModuleInApplicationModule(): void
-    {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app.module.ts'));
-        const moduleDecoratorArguments = this.getModuleDecoratorArguments(sourceFile, 'AppModule', 'Module');
-        const modules: string[] = this.getImportedDeclarations(sourceFile);
-
-        if (!modules.includes(`${this.boundedContextName.toPascalCase()}Module`))
-        {
-            // import module
-            ImportDriver.createImportItems(
-                sourceFile,
-                `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
-                [`${this.boundedContextName.toPascalCase()}Module`],
-            );
-
-            // register module
-            const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
-            const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-            importsArray.addElement(`${this.boundedContextName.toPascalCase()}Module`, { useNewLines: true });
-        }
-
-        sourceFile?.saveSync();
-    }
-
-    /****************************************************************
-     * Add exports of principal application elements to src/index.ts
-     * this is to have access to all elements from index.ts
-     *
-     * @return void
-     ****************************************************************/
-    declareApplicationItemsExports(): void
-    {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'index.ts'));
-
-        // export module
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
-            [`${this.boundedContextName.toPascalCase()}Module`],
-        );
-
-        // export DTO
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/dto/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.dto`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Dto`],
-        );
-
-        // export aggregate
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.aggregate`,
-            [`${this.aggregateName}`],
-        );
-
-        // export model
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`],
-        );
-
-        // export response
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.response`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Response`],
-        );
-
-        // export mapper
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.mapper`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Mapper`],
-        );
-
-        // export seed
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/mock/${this.boundedContextName.toKebabCase()}-mock-${this.moduleName.toKebabCase()}.data`,
-            [`${this.boundedContextName.toCamelCase()}Mock${this.moduleName.toPascalCase()}Data`],
-        );
-
-        sourceFile?.saveSync();
-    }
-
+    // private methods
     private getModelArrayArgument(moduleDecoratorArguments: ObjectLiteralExpression): ArrayLiteralExpression
     {
         const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;

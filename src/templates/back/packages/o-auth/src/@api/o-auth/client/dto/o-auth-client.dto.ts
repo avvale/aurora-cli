@@ -1,8 +1,8 @@
 /* eslint-disable indent */
-import { ApiProperty } from '@nestjs/swagger';
-import { OAuthApplicationDto } from '../../../o-auth/application/dto/o-auth-application.dto';
-import { OAuthAccessTokenDto } from '../../../o-auth/access-token/dto/o-auth-access-token.dto';
 import { OAuthClientGrantType } from '@api/graphql';
+import { OAuthAccessTokenDto } from '@api/o-auth/access-token';
+import { OAuthApplicationDto } from '@api/o-auth/application';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class OAuthClientDto
 {

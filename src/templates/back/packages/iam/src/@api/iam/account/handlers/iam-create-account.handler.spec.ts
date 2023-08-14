@@ -1,24 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { JwtModule } from '@nestjs/jwt';
+import { IamCreateAccountHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// ---- customizations ----
-import { IamCreateAccountHandler } from './iam-create-account.handler';
-import { GetRolesQuery } from '@app/iam/role/application/get/get-roles.query';
+import { Test, TestingModule } from '@nestjs/testing';
+import { IamGetRolesQuery } from '@app/iam/role';
 import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
-import { FindAccountByIdQuery } from '@app/iam/account/application/find/find-account-by-id.query';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
-import { roles } from '@app/iam/role/infrastructure/mock/mock-role.data';
-import { clients } from '@app/o-auth/client/infrastructure/mock/mock-client.data';
+import { FindAccountByIdQuery } from '@app/iam/account';
+import { JwtModule } from '@nestjs/jwt';
 
 describe('IamCreateAccountHandler', () =>
 {
     let handler: IamCreateAccountHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -46,9 +39,8 @@ describe('IamCreateAccountHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamCreateAccountHandler>(IamCreateAccountHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamCreateAccountHandler>(IamCreateAccountHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -65,7 +57,7 @@ describe('IamCreateAccountHandler', () =>
                 return new Promise(resolve =>
                 {
                     if (query instanceof FindClientByIdQuery) resolve(clients[0]); // return client
-                    if (query instanceof GetRolesQuery) resolve(roles); // return roles
+                    if (query instanceof IamGetRolesQuery) resolve(roles); // return roles
                     if (query instanceof FindAccountByIdQuery) resolve(accounts[0]); // return account created
 
                     resolve(false);

@@ -10,7 +10,6 @@ import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-
 describe('CommonCreateLangsService', () =>
 {
     let service: CommonCreateLangsService;
-    let repository: CommonILangRepository;
     let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
@@ -34,7 +33,6 @@ describe('CommonCreateLangsService', () =>
             .compile();
 
         service = module.get(CommonCreateLangsService);
-        repository = module.get(CommonILangRepository);
         mockRepository = module.get(CommonMockLangRepository);
     });
 
@@ -47,9 +45,12 @@ describe('CommonCreateLangsService', () =>
 
         test('should create langs and emit event', async () =>
         {
-            expect(await service.main(
-                mockRepository.collectionSource,
-            )).toBe(undefined);
+            expect(
+                await service.main(
+                    mockRepository.collectionSource,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

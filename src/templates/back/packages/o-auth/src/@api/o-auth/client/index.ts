@@ -1,3 +1,48 @@
+// export DTOs
+export { OAuthClientDto } from './dto/o-auth-client.dto';
+export { OAuthCreateClientDto } from './dto/o-auth-create-client.dto';
+export { OAuthUpdateClientByIdDto } from './dto/o-auth-update-client-by-id.dto';
+export { OAuthUpdateClientsDto } from './dto/o-auth-update-clients.dto';
+
+// export handlers
+export { OAuthCreateClientHandler } from './handlers/o-auth-create-client.handler';
+export { OAuthCreateClientsHandler } from './handlers/o-auth-create-clients.handler';
+export { OAuthPaginateClientsHandler } from './handlers/o-auth-paginate-clients.handler';
+export { OAuthGetClientsHandler } from './handlers/o-auth-get-clients.handler';
+export { OAuthFindClientByIdHandler } from './handlers/o-auth-find-client-by-id.handler';
+export { OAuthFindClientHandler } from './handlers/o-auth-find-client.handler';
+export { OAuthUpdateClientByIdHandler } from './handlers/o-auth-update-client-by-id.handler';
+export { OAuthUpdateClientsHandler } from './handlers/o-auth-update-clients.handler';
+export { OAuthUpsertClientHandler } from './handlers/o-auth-upsert-client.handler';
+export { OAuthDeleteClientByIdHandler } from './handlers/o-auth-delete-client-by-id.handler';
+export { OAuthDeleteClientsHandler } from './handlers/o-auth-delete-clients.handler';
+
+// export controllers
+export { OAuthCreateClientController } from './controllers/o-auth-create-client.controller';
+export { OAuthCreateClientsController } from './controllers/o-auth-create-clients.controller';
+export { OAuthPaginateClientsController } from './controllers/o-auth-paginate-clients.controller';
+export { OAuthGetClientsController } from './controllers/o-auth-get-clients.controller';
+export { OAuthFindClientByIdController } from './controllers/o-auth-find-client-by-id.controller';
+export { OAuthFindClientController } from './controllers/o-auth-find-client.controller';
+export { OAuthUpdateClientByIdController } from './controllers/o-auth-update-client-by-id.controller';
+export { OAuthUpdateClientsController } from './controllers/o-auth-update-clients.controller';
+export { OAuthUpsertClientController } from './controllers/o-auth-upsert-client.controller';
+export { OAuthDeleteClientByIdController } from './controllers/o-auth-delete-client-by-id.controller';
+export { OAuthDeleteClientsController } from './controllers/o-auth-delete-clients.controller';
+
+// exports resolvers
+export { OAuthCreateClientResolver } from './resolvers/o-auth-create-client.resolver';
+export { OAuthCreateClientsResolver } from './resolvers/o-auth-create-clients.resolver';
+export { OAuthPaginateClientsResolver } from './resolvers/o-auth-paginate-clients.resolver';
+export { OAuthGetClientsResolver } from './resolvers/o-auth-get-clients.resolver';
+export { OAuthFindClientByIdResolver } from './resolvers/o-auth-find-client-by-id.resolver';
+export { OAuthFindClientResolver } from './resolvers/o-auth-find-client.resolver';
+export { OAuthUpdateClientByIdResolver } from './resolvers/o-auth-update-client-by-id.resolver';
+export { OAuthUpdateClientsResolver } from './resolvers/o-auth-update-clients.resolver';
+export { OAuthUpsertClientResolver } from './resolvers/o-auth-upsert-client.resolver';
+export { OAuthDeleteClientByIdResolver } from './resolvers/o-auth-delete-client-by-id.resolver';
+export { OAuthDeleteClientsResolver } from './resolvers/o-auth-delete-clients.resolver';
+
 // controllers
 import { OAuthCreateClientController } from './controllers/o-auth-create-client.controller';
 import { OAuthCreateClientsController } from './controllers/o-auth-create-clients.controller';

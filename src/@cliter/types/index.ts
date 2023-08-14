@@ -136,7 +136,6 @@ export interface RelationshipPivot
 {
     aggregate: string;
     modulePath: string;
-    fileName: string;
 }
 
 export enum RelationshipType

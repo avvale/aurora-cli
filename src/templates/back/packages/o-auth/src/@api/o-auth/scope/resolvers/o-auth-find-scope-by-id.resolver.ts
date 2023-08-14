@@ -1,10 +1,8 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { OAuthFindScopeByIdHandler } from '../handlers/o-auth-find-scope-by-id.handler';
 import { OAuthScope } from '@api/graphql';
+import { OAuthFindScopeByIdHandler } from '@api/o-auth/scope';
+import { Auth } from '@aurora/decorators';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.scope.get')

@@ -1,0 +1,31 @@
+<div
+    #attachmentFrame id="attachment-library"
+    [formGroup]="form"
+>
+    <div
+        #attachmentMask
+        id="attachment-library-mask"
+    >
+        {{ placeholder }}
+    </div>
+    <div
+        id="library-sortable"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)"
+    >
+        <hr-attachment-item
+            *ngFor="let attachment of this.attachments.controls; let i=index"
+            cdkDrag
+            [attachment]="attachment"
+            [index]="i"
+            [form]="form"
+            [name]="name"
+            [attachmentFamilies]="attachmentFamilies"
+            (enableCrop)="onEnableCrop($event)"
+            (removeItem)="onRemoveItem($event)"
+            class="col-12"
+        >
+        </hr-attachment-item>
+    </div>
+</div>

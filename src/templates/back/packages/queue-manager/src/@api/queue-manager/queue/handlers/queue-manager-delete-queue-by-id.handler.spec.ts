@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { QueueManagerDeleteQueueByIdHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerDeleteQueueByIdHandler } from './queue-manager-delete-queue-by-id.handler';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerDeleteQueueByIdController', () =>
 {
     let handler: QueueManagerDeleteQueueByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('QueueManagerDeleteQueueByIdController', () =>
 
         handler = module.get<QueueManagerDeleteQueueByIdHandler>(QueueManagerDeleteQueueByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,15 @@ describe('QueueManagerDeleteQueueByIdController', () =>
 
         test('should return an queue deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queues[0])));
-            expect(await handler.main(queues[0].id)).toBe(queues[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+            expect(
+                await handler.main(
+                    queueManagerMockQueueData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(queueManagerMockQueueData[0]);
         });
     });
 });

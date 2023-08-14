@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { IamAccountDto, IamUpdateAccountByIdDto } from '../dto';
+import { IamAccountDto, IamUpdateAccountByIdDto, IamUpsertAccountHandler } from '@api/iam/account';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamUpsertAccountHandler } from '../handlers/iam-upsert-account.handler';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/upsert')

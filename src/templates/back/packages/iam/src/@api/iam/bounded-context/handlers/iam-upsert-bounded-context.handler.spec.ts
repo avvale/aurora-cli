@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamUpsertBoundedContextHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { IamUpsertBoundedContextHandler } from './iam-upsert-bounded-context.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertBoundedContextHandler', () =>
 {
     let handler: IamUpsertBoundedContextHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -37,9 +32,8 @@ describe('IamUpsertBoundedContextHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamUpsertBoundedContextHandler>(IamUpsertBoundedContextHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamUpsertBoundedContextHandler>(IamUpsertBoundedContextHandler);
+        queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,13 @@ describe('IamUpsertBoundedContextHandler', () =>
 
         test('should return an boundedContext upserted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await handler.main(boundedContexts[0])).toBe(boundedContexts[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(
+                await handler.main(
+                    iamMockBoundedContextData[0],
+                    'Europe/Madrid',
+                ))
+                .toBe(iamMockBoundedContextData[0]);
         });
     });
 });

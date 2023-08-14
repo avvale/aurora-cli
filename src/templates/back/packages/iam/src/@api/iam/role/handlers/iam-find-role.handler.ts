@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindRoleQuery } from '@app/iam/role/application/find/find-role.query';
 import { IamRole } from '@api/graphql';
-import { IamRoleDto } from '../dto';
+import { IamRoleDto } from '@api/iam/role';
+import { IamFindRoleQuery } from '@app/iam/role';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamFindRoleHandler
@@ -19,10 +17,12 @@ export class IamFindRoleHandler
         timezone?: string,
     ): Promise<IamRole | IamRoleDto>
     {
-        return await this.queryBus.ask(new FindRoleQuery(
+        return await this.queryBus.ask(new IamFindRoleQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

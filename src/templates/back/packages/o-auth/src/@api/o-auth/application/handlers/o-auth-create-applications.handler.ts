@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateApplicationsCommand } from '@app/o-auth/application/application/create/create-applications.command';
 import { OAuthCreateApplicationInput } from '@api/graphql';
-import { OAuthCreateApplicationDto } from '../dto';
+import { OAuthCreateApplicationDto } from '@api/o-auth/application';
+import { OAuthCreateApplicationsCommand } from '@app/o-auth/application';
+import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthCreateApplicationsHandler
@@ -19,7 +17,7 @@ export class OAuthCreateApplicationsHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateApplicationsCommand(
+        await this.commandBus.dispatch(new OAuthCreateApplicationsCommand(
             payload,
             {
                 timezone,
@@ -28,6 +26,7 @@ export class OAuthCreateApplicationsHandler
                 },
             },
         ));
+
         return true;
     }
 }

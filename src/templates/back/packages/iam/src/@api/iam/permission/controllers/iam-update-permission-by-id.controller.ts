@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Put, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamPermissionDto, IamUpdatePermissionByIdDto } from '../dto';
+import { IamPermissionDto, IamUpdatePermissionByIdDto, IamUpdatePermissionByIdHandler } from '@api/iam/permission';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamUpdatePermissionByIdHandler } from '../handlers/iam-update-permission-by-id.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Put } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] permission')
 @Controller('iam/permission/update')

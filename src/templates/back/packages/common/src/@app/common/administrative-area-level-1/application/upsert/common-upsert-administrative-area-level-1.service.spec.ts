@@ -27,8 +27,6 @@ describe('CommonUpsertAdministrativeAreaLevel1Service', () =>
 
 {
     let service: CommonUpsertAdministrativeAreaLevel1Service;
-    let repository: CommonIAdministrativeAreaLevel1Repository;
-    let mockRepository: CommonMockAdministrativeAreaLevel1Repository;
 
     beforeAll(async () =>
     {
@@ -51,8 +49,6 @@ describe('CommonUpsertAdministrativeAreaLevel1Service', () =>
             .compile();
 
         service = module.get(CommonUpsertAdministrativeAreaLevel1Service);
-        repository = module.get(CommonIAdministrativeAreaLevel1Repository);
-        mockRepository = module.get(CommonMockAdministrativeAreaLevel1Repository);
     });
 
     describe('main', () =>
@@ -64,20 +60,23 @@ describe('CommonUpsertAdministrativeAreaLevel1Service', () =>
 
         test('should upsert a administrativeAreaLevel1 and emit event', async () =>
         {
-            expect(await service.main(
-                {
-                    id: new CommonAdministrativeAreaLevel1Id(commonMockAdministrativeAreaLevel1Data[0].id),
-                    countryId: new CommonAdministrativeAreaLevel1CountryId(commonMockAdministrativeAreaLevel1Data[0].countryId),
-                    code: new CommonAdministrativeAreaLevel1Code(commonMockAdministrativeAreaLevel1Data[0].code),
-                    customCode: new CommonAdministrativeAreaLevel1CustomCode(commonMockAdministrativeAreaLevel1Data[0].customCode),
-                    name: new CommonAdministrativeAreaLevel1Name(commonMockAdministrativeAreaLevel1Data[0].name),
-                    slug: new CommonAdministrativeAreaLevel1Slug(commonMockAdministrativeAreaLevel1Data[0].slug),
-                    latitude: new CommonAdministrativeAreaLevel1Latitude(commonMockAdministrativeAreaLevel1Data[0].latitude),
-                    longitude: new CommonAdministrativeAreaLevel1Longitude(commonMockAdministrativeAreaLevel1Data[0].longitude),
-                    zoom: new CommonAdministrativeAreaLevel1Zoom(commonMockAdministrativeAreaLevel1Data[0].zoom),
-                    mapType: new CommonAdministrativeAreaLevel1MapType(commonMockAdministrativeAreaLevel1Data[0].mapType),
-                },
-            )).toBe(undefined);
+            expect(
+                await service.main(
+                    {
+                        id: new CommonAdministrativeAreaLevel1Id(commonMockAdministrativeAreaLevel1Data[0].id),
+                        countryId: new CommonAdministrativeAreaLevel1CountryId(commonMockAdministrativeAreaLevel1Data[0].countryId),
+                        code: new CommonAdministrativeAreaLevel1Code(commonMockAdministrativeAreaLevel1Data[0].code),
+                        customCode: new CommonAdministrativeAreaLevel1CustomCode(commonMockAdministrativeAreaLevel1Data[0].customCode),
+                        name: new CommonAdministrativeAreaLevel1Name(commonMockAdministrativeAreaLevel1Data[0].name),
+                        slug: new CommonAdministrativeAreaLevel1Slug(commonMockAdministrativeAreaLevel1Data[0].slug),
+                        latitude: new CommonAdministrativeAreaLevel1Latitude(commonMockAdministrativeAreaLevel1Data[0].latitude),
+                        longitude: new CommonAdministrativeAreaLevel1Longitude(commonMockAdministrativeAreaLevel1Data[0].longitude),
+                        zoom: new CommonAdministrativeAreaLevel1Zoom(commonMockAdministrativeAreaLevel1Data[0].zoom),
+                        mapType: new CommonAdministrativeAreaLevel1MapType(commonMockAdministrativeAreaLevel1Data[0].mapType),
+                    },
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

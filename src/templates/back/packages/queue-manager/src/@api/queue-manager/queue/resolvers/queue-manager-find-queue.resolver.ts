@@ -1,10 +1,8 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { QueueManagerFindQueueHandler } from '../handlers/queue-manager-find-queue.handler';
 import { QueueManagerQueue } from '@api/graphql';
+import { QueueManagerFindQueueHandler } from '@api/queue-manager/queue';
+import { Auth } from '@aurora/decorators';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.queue.get')

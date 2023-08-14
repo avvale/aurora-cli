@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpsertAccountResolver } from './iam-upsert-account.resolver';
-import { IamUpsertAccountHandler } from '../handlers/iam-upsert-account.handler';
 import { IamUpdateAccountByIdInput } from '@api/graphql';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
+import { IamUpsertAccountHandler, IamUpsertAccountResolver } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertAccountResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('IamUpsertAccountResolver', () =>
 
         test('should return an account upserted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts[0])));
-            expect(await resolver.main(<IamUpdateAccountByIdInput>accounts[0])).toBe(accounts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
+            expect(await resolver.main(<IamUpdateAccountByIdInput>iamMockAccountData[0])).toBe(iamMockAccountData[0]);
         });
     });
 });

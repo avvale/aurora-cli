@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamGetAccountsController, IamGetAccountsHandler } from '@api/iam/account';
+import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetAccountsController } from './iam-get-accounts.controller';
-import { IamGetAccountsHandler } from '../handlers/iam-get-accounts.handler';
-
-// sources
-import { accounts } from '@app/iam/account/infrastructure/mock/mock-account.data';
 
 describe('IamGetAccountsController', () =>
 {
@@ -43,10 +37,10 @@ describe('IamGetAccountsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a accounts', async () =>
+        test('should return a iamMockAccountData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(accounts)));
-            expect(await controller.main()).toBe(accounts);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData)));
+            expect(await controller.main()).toBe(iamMockAccountData);
         });
     });
 });

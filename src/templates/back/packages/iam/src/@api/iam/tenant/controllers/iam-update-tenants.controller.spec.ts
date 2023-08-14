@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamUpdateTenantsController, IamUpdateTenantsHandler } from '@api/iam/tenant';
+import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpdateTenantsController } from './iam-update-tenants.controller';
-import { IamUpdateTenantsHandler } from '../handlers/iam-update-tenants.handler';
-
-// sources
-import { tenants } from '@app/iam/tenant/infrastructure/mock/mock-tenant.data';
 
 describe('IamUpdateTenantsController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamUpdateTenantsController', () =>
 
         test('should return a tenants updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(tenants[0])));
-            expect(await controller.main(tenants[0])).toBe(tenants[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+            expect(await controller.main(iamMockTenantData[0])).toBe(iamMockTenantData[0]);
         });
     });
 });

@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { IamCreatePermissionRoleInput, IamPermissionRole } from '@api/graphql';
+import { IamCreatePermissionRoleCommand, IamFindPermissionRoleByIdQuery } from '@app/iam/permission-role';
 import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindPermissionRoleByIdQuery } from '@app/iam/permission-role/application/find/find-permission-role-by-id.query';
-import { CreatePermissionRoleCommand } from '@app/iam/permission-role/application/create/create-permission-role.command';
-import { IamPermissionRole, IamCreatePermissionRoleInput } from '@api/graphql';
-import { IamPermissionRoleDto, IamCreatePermissionRoleDto } from '../dto';
+import { Injectable } from '@nestjs/common';
+import { IamCreatePermissionRoleDto, IamPermissionRoleDto } from '../dto';
 
 @Injectable()
 export class IamCreatePermissionRoleHandler
@@ -21,7 +18,7 @@ export class IamCreatePermissionRoleHandler
         auditing?: AuditingMeta,
     ): Promise<IamPermissionRole | IamPermissionRoleDto>
     {
-        await this.commandBus.dispatch(new CreatePermissionRoleCommand(
+        await this.commandBus.dispatch(new IamCreatePermissionRoleCommand(
             payload,
             {
                 timezone,
@@ -31,7 +28,7 @@ export class IamCreatePermissionRoleHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindPermissionRoleByIdQuery(
+        return await this.queryBus.ask(new IamFindPermissionRoleByIdQuery(
             payload.permissionId,
             payload.roleId,
             {},

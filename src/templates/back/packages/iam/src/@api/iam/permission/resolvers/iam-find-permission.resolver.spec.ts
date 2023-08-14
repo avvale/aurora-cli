@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamFindPermissionHandler, IamFindPermissionResolver } from '@api/iam/permission';
+import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindPermissionResolver } from './iam-find-permission.resolver';
-import { IamFindPermissionHandler } from '../handlers/iam-find-permission.handler';
-
-// sources
-import { permissions } from '@app/iam/permission/infrastructure/mock/mock-permission.data';
 
 describe('IamFindPermissionResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('IamFindPermissionResolver', () =>
 
         test('should return a permission', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(permissions[0])));
-            expect(await resolver.main()).toBe(permissions[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+            expect(await resolver.main()).toBe(iamMockPermissionData[0]);
         });
     });
 });

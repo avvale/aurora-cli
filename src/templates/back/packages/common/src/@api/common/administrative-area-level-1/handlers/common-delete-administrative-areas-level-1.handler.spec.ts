@@ -8,7 +8,6 @@ describe('CommonDeleteAdministrativeAreasLevel1Handler', () =>
 {
     let handler: CommonDeleteAdministrativeAreasLevel1Handler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -35,7 +34,6 @@ describe('CommonDeleteAdministrativeAreasLevel1Handler', () =>
 
         handler = module.get<CommonDeleteAdministrativeAreasLevel1Handler>(CommonDeleteAdministrativeAreasLevel1Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('CommonDeleteAdministrativeAreasLevel1Handler should be defined', () =>
@@ -53,7 +51,14 @@ describe('CommonDeleteAdministrativeAreasLevel1Handler', () =>
         test('should return an commonMockAdministrativeAreaLevel1Data deleted', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel1Data)));
-            expect(await handler.main()).toBe(commonMockAdministrativeAreaLevel1Data);
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(commonMockAdministrativeAreaLevel1Data);
         });
     });
 });

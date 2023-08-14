@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindRoleByIdQuery } from '@app/iam/role/application/find/find-role-by-id.query';
-import { UpdateRoleByIdCommand } from '@app/iam/role/application/update/update-role-by-id.command';
 import { IamRole, IamUpdateRoleByIdInput } from '@api/graphql';
-import { IamRoleDto, IamUpdateRoleByIdDto } from '../dto';
+import { IamRoleDto, IamUpdateRoleByIdDto } from '@api/iam/role';
+import { IamFindRoleByIdQuery, IamUpdateRoleByIdCommand } from '@app/iam/role';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateRoleByIdHandler
@@ -22,15 +19,17 @@ export class IamUpdateRoleByIdHandler
         auditing?: AuditingMeta,
     ): Promise<IamRole | IamRoleDto>
     {
-        const role = await this.queryBus.ask(new FindRoleByIdQuery(
+        const role = await this.queryBus.ask(new IamFindRoleByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
 
         const dataToUpdate = Utils.diff(payload, role);
 
-        await this.commandBus.dispatch(new UpdateRoleByIdCommand(
+        await this.commandBus.dispatch(new IamUpdateRoleByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -44,10 +43,12 @@ export class IamUpdateRoleByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindRoleByIdQuery(
+        return await this.queryBus.ask(new IamFindRoleByIdQuery(
             payload.id,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

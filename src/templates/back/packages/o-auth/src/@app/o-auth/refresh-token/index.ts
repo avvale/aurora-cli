@@ -1,66 +1,98 @@
-// commands
-import { CreateRefreshTokenCommandHandler } from './application/create/create-refresh-token.command-handler';
-import { DeleteRefreshTokenByIdCommandHandler } from './application/delete/delete-refresh-token-by-id.command-handler';
-import { DeleteRefreshTokensCommandHandler } from './application/delete/delete-refresh-tokens.command-handler';
+// export commands
+export { OAuthCreateRefreshTokenCommand } from './application/create/o-auth-create-refresh-token.command';
+export { OAuthDeleteRefreshTokenByIdCommand } from './application/delete/o-auth-delete-refresh-token-by-id.command';
+export { OAuthDeleteRefreshTokensCommand } from './application/delete/o-auth-delete-refresh-tokens.command';
 
-// queries
-import { PaginateRefreshTokensQueryHandler } from './application/paginate/paginate-refresh-tokens.query-handler';
-import { GetRefreshTokensQueryHandler } from './application/get/get-refresh-tokens.query-handler';
-import { FindRefreshTokenQueryHandler } from './application/find/find-refresh-token.query-handler';
-import { FindRefreshTokenByIdQueryHandler } from './application/find/find-refresh-token-by-id.query-handler';
-import { RawSQLRefreshTokensQueryHandler } from './application/raw-sql/raw-sql-refresh-tokens.query-handler';
+// export queries
+export { OAuthPaginateRefreshTokensQuery } from './application/paginate/o-auth-paginate-refresh-tokens.query';
+export { OAuthGetRefreshTokensQuery } from './application/get/o-auth-get-refresh-tokens.query';
+export { OAuthFindRefreshTokenQuery } from './application/find/o-auth-find-refresh-token.query';
+export { OAuthFindRefreshTokenByIdQuery } from './application/find/o-auth-find-refresh-token-by-id.query';
+export { OAuthRawSQLRefreshTokensQuery } from './application/raw-sql/o-auth-raw-sql-refresh-tokens.query';
 
-// events
-import { CreatedRefreshTokenEventHandler } from './application/events/created-refresh-token.event-handler';
-import { DeletedRefreshTokenEventHandler } from './application/events/deleted-refresh-token.event-handler';
-import { DeletedRefreshTokensEventHandler } from './application/events/deleted-refresh-tokens.event-handler';
+// export mocks
+export { oAuthMockRefreshTokenData } from './infrastructure/mock/o-auth-mock-refresh-token.data';
+export { OAuthMockRefreshTokenSeeder } from './infrastructure/mock/o-auth-mock-refresh-token.seeder';
+export { OAuthMockRefreshTokenRepository } from './infrastructure/mock/o-auth-mock-refresh-token.repository';
 
-// services
-import { CreateRefreshTokenService } from './application/create/create-refresh-token.service';
-import { PaginateRefreshTokensService } from './application/paginate/paginate-refresh-tokens.service';
-import { GetRefreshTokensService } from './application/get/get-refresh-tokens.service';
-import { FindRefreshTokenService } from './application/find/find-refresh-token.service';
-import { FindRefreshTokenByIdService } from './application/find/find-refresh-token-by-id.service';
-import { RawSQLRefreshTokensService } from './application/raw-sql/raw-sql-refresh-tokens.service';
-import { DeleteRefreshTokenByIdService } from './application/delete/delete-refresh-token-by-id.service';
-import { DeleteRefreshTokensService } from './application/delete/delete-refresh-tokens.service';
+// export events
+export { OAuthAddRefreshTokensContextEvent } from './application/events/o-auth-add-refresh-tokens-context.event';
+export { OAuthCreatedRefreshTokenEvent } from './application/events/o-auth-created-refresh-token.event';
+export { OAuthDeletedRefreshTokensEvent } from './application/events/o-auth-deleted-refresh-tokens.event';
+export { OAuthDeletedRefreshTokenEvent } from './application/events/o-auth-deleted-refresh-token.event';
 
-// models
-export { OAuthRefreshTokenModel } from './infrastructure/sequelize/sequelize-refresh-token.model';
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
 
-// repository
-export { IRefreshTokenRepository } from './domain/refresh-token.repository';
-export { SequelizeRefreshTokenRepository } from './infrastructure/sequelize/sequelize-refresh-token.repository';
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
+// domain
+export { OAuthRefreshToken } from './domain/o-auth-refresh-token.aggregate';
+export { OAuthRefreshTokenMapper } from './domain/o-auth-refresh-token.mapper';
+export { OAuthIRefreshTokenRepository } from './domain/o-auth-refresh-token.repository';
+export { OAuthRefreshTokenResponse } from './domain/o-auth-refresh-token.response';
+
+// infrastructure
+export { OAuthRefreshTokenModel } from './infrastructure/sequelize/o-auth-sequelize-refresh-token.model';
+export { OAuthSequelizeRefreshTokenRepository } from './infrastructure/sequelize/o-auth-sequelize-refresh-token.repository';
 
 // sagas
-export { RefreshTokenSagas } from './application/sagas/refresh-token.sagas';
+export { OAuthRefreshTokenSagas } from './application/sagas/o-auth-refresh-token.sagas';
+
+// command handlers
+import { OAuthCreateRefreshTokenCommandHandler } from './application/create/o-auth-create-refresh-token.command-handler';
+import { OAuthDeleteRefreshTokenByIdCommandHandler } from './application/delete/o-auth-delete-refresh-token-by-id.command-handler';
+import { OAuthDeleteRefreshTokensCommandHandler } from './application/delete/o-auth-delete-refresh-tokens.command-handler';
+
+// query handlers
+import { OAuthPaginateRefreshTokensQueryHandler } from './application/paginate/o-auth-paginate-refresh-tokens.query-handler';
+import { OAuthGetRefreshTokensQueryHandler } from './application/get/o-auth-get-refresh-tokens.query-handler';
+import { OAuthFindRefreshTokenQueryHandler } from './application/find/o-auth-find-refresh-token.query-handler';
+import { OAuthFindRefreshTokenByIdQueryHandler } from './application/find/o-auth-find-refresh-token-by-id.query-handler';
+import { OAuthRawSQLRefreshTokensQueryHandler } from './application/raw-sql/o-auth-raw-sql-refresh-tokens.query-handler';
+
+// event handlers
+import { OAuthCreatedRefreshTokenEventHandler } from './application/events/o-auth-created-refresh-token.event-handler';
+import { OAuthDeletedRefreshTokenEventHandler } from './application/events/o-auth-deleted-refresh-token.event-handler';
+import { OAuthDeletedRefreshTokensEventHandler } from './application/events/o-auth-deleted-refresh-tokens.event-handler';
+
+// services
+import { OAuthCreateRefreshTokenService } from './application/create/o-auth-create-refresh-token.service';
+import { OAuthPaginateRefreshTokensService } from './application/paginate/o-auth-paginate-refresh-tokens.service';
+import { OAuthGetRefreshTokensService } from './application/get/o-auth-get-refresh-tokens.service';
+import { OAuthFindRefreshTokenService } from './application/find/o-auth-find-refresh-token.service';
+import { OAuthFindRefreshTokenByIdService } from './application/find/o-auth-find-refresh-token-by-id.service';
+import { OAuthRawSQLRefreshTokensService } from './application/raw-sql/o-auth-raw-sql-refresh-tokens.service';
+import { OAuthDeleteRefreshTokenByIdService } from './application/delete/o-auth-delete-refresh-token-by-id.service';
+import { OAuthDeleteRefreshTokensService } from './application/delete/o-auth-delete-refresh-tokens.service';
 
 export const OAuthRefreshTokenHandlers = [
     // commands
-    CreateRefreshTokenCommandHandler,
-    DeleteRefreshTokenByIdCommandHandler,
-    DeleteRefreshTokensCommandHandler,
+    OAuthCreateRefreshTokenCommandHandler,
+    OAuthDeleteRefreshTokenByIdCommandHandler,
+    OAuthDeleteRefreshTokensCommandHandler,
 
     // queries
-    PaginateRefreshTokensQueryHandler,
-    GetRefreshTokensQueryHandler,
-    FindRefreshTokenQueryHandler,
-    FindRefreshTokenByIdQueryHandler,
-    RawSQLRefreshTokensQueryHandler,
+    OAuthPaginateRefreshTokensQueryHandler,
+    OAuthGetRefreshTokensQueryHandler,
+    OAuthFindRefreshTokenQueryHandler,
+    OAuthFindRefreshTokenByIdQueryHandler,
+    OAuthRawSQLRefreshTokensQueryHandler,
 
     // events
-    CreatedRefreshTokenEventHandler,
-    DeletedRefreshTokenEventHandler,
-    DeletedRefreshTokensEventHandler,
+    OAuthCreatedRefreshTokenEventHandler,
+    OAuthDeletedRefreshTokenEventHandler,
+    OAuthDeletedRefreshTokensEventHandler,
 ];
 
 export const OAuthRefreshTokenServices = [
-    CreateRefreshTokenService,
-    PaginateRefreshTokensService,
-    GetRefreshTokensService,
-    FindRefreshTokenService,
-    FindRefreshTokenByIdService,
-    RawSQLRefreshTokensService,
-    DeleteRefreshTokenByIdService,
-    DeleteRefreshTokensService,
+    OAuthCreateRefreshTokenService,
+    OAuthPaginateRefreshTokensService,
+    OAuthGetRefreshTokensService,
+    OAuthFindRefreshTokenService,
+    OAuthFindRefreshTokenByIdService,
+    OAuthRawSQLRefreshTokensService,
+    OAuthDeleteRefreshTokenByIdService,
+    OAuthDeleteRefreshTokensService,
 ];

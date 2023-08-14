@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthGetScopesController, OAuthGetScopesHandler } from '@api/o-auth/scope';
+import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthGetScopesController } from './o-auth-get-scopes.controller';
-import { OAuthGetScopesHandler } from '../handlers/o-auth-get-scopes.handler';
-
-// sources
-import { scopes } from '@app/o-auth/scope/infrastructure/mock/mock-scope.data';
 
 describe('OAuthGetScopesController', () =>
 {
@@ -43,10 +37,10 @@ describe('OAuthGetScopesController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a scopes', async () =>
+        test('should return a oAuthMockScopeData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(scopes)));
-            expect(await controller.main()).toBe(scopes);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData)));
+            expect(await controller.main()).toBe(oAuthMockScopeData);
         });
     });
 });

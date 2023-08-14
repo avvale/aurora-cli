@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamUpdateBoundedContextByIdController, IamUpdateBoundedContextByIdHandler } from '@api/iam/bounded-context';
+import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamUpdateBoundedContextByIdController } from './iam-update-bounded-context-by-id.controller';
-import { IamUpdateBoundedContextByIdHandler } from '../handlers/iam-update-bounded-context-by-id.handler';
-
-// sources
-import { boundedContexts } from '@app/iam/bounded-context/infrastructure/mock/mock-bounded-context.data';
 
 describe('IamUpdateBoundedContextByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('IamUpdateBoundedContextByIdController', () =>
 
         test('should return a boundedContext updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(boundedContexts[0])));
-            expect(await controller.main(boundedContexts[0])).toBe(boundedContexts[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+            expect(await controller.main(iamMockBoundedContextData[0])).toBe(iamMockBoundedContextData[0]);
         });
     });
 });

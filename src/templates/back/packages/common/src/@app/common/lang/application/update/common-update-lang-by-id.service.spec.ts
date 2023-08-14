@@ -26,8 +26,6 @@ import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-
 describe('CommonUpdateLangByIdService', () =>
 {
     let service: CommonUpdateLangByIdService;
-    let repository: CommonILangRepository;
-    let mockRepository: CommonMockLangRepository;
 
     beforeAll(async () =>
     {
@@ -50,8 +48,6 @@ describe('CommonUpdateLangByIdService', () =>
             .compile();
 
         service = module.get(CommonUpdateLangByIdService);
-        repository = module.get(CommonILangRepository);
-        mockRepository = module.get(CommonMockLangRepository);
     });
 
     describe('main', () =>
@@ -63,20 +59,23 @@ describe('CommonUpdateLangByIdService', () =>
 
         test('should update a lang and emit event', async () =>
         {
-            expect(await service.main(
-                {
-                    id: new CommonLangId(commonMockLangData[0].id),
-                    name: new CommonLangName(commonMockLangData[0].name),
-                    image: new CommonLangImage(commonMockLangData[0].image),
-                    iso6392: new CommonLangIso6392(commonMockLangData[0].iso6392),
-                    iso6393: new CommonLangIso6393(commonMockLangData[0].iso6393),
-                    ietf: new CommonLangIetf(commonMockLangData[0].ietf),
-                    customCode: new CommonLangCustomCode(commonMockLangData[0].customCode),
-                    dir: new CommonLangDir(commonMockLangData[0].dir),
-                    sort: new CommonLangSort(commonMockLangData[0].sort),
-                    isActive: new CommonLangIsActive(commonMockLangData[0].isActive),
-                },
-            )).toBe(undefined);
+            expect(
+                await service.main(
+                    {
+                        id: new CommonLangId(commonMockLangData[0].id),
+                        name: new CommonLangName(commonMockLangData[0].name),
+                        image: new CommonLangImage(commonMockLangData[0].image),
+                        iso6392: new CommonLangIso6392(commonMockLangData[0].iso6392),
+                        iso6393: new CommonLangIso6393(commonMockLangData[0].iso6393),
+                        ietf: new CommonLangIetf(commonMockLangData[0].ietf),
+                        customCode: new CommonLangCustomCode(commonMockLangData[0].customCode),
+                        dir: new CommonLangDir(commonMockLangData[0].dir),
+                        sort: new CommonLangSort(commonMockLangData[0].sort),
+                        isActive: new CommonLangIsActive(commonMockLangData[0].isActive),
+                    },
+                    {},
+                ),
+            ).toBe(undefined);
         });
     });
 });

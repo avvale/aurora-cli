@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerUpdateQueueByIdHandler } from './queue-manager-update-queue-by-id.handler';
 import { QueueManagerUpdateQueueByIdInput } from '@api/graphql';
-
-// sources
-import { queues } from '@app/queue-manager/queue/infrastructure/mock/mock-queue.data';
+import { QueueManagerUpdateQueueByIdHandler } from '@api/queue-manager/queue';
+import { queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerUpdateQueueByIdHandler', () =>
 {
     let handler: QueueManagerUpdateQueueByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('QueueManagerUpdateQueueByIdHandler', () =>
 
         handler = module.get<QueueManagerUpdateQueueByIdHandler>(QueueManagerUpdateQueueByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('QueueManagerUpdateQueueByIdHandler should be defined', () =>
@@ -57,8 +51,14 @@ describe('QueueManagerUpdateQueueByIdHandler', () =>
 
         test('should return a queue updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queues[0])));
-            expect(await handler.main(<QueueManagerUpdateQueueByIdInput>queues[0])).toBe(queues[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+            expect(
+                await handler.main(
+                    <QueueManagerUpdateQueueByIdInput>queueManagerMockQueueData[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(queueManagerMockQueueData[0]);
         });
     });
 });

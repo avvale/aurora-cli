@@ -7,10 +7,12 @@ handlebars.registerHelper('importManager', function(
         imports = [],
         sortImports = true,
         sortImportedClasses = true,
+        commandType = 'import',
     }: {
         imports: ImportStatement[];
         sortImports?: boolean;
         sortImportedClasses?: boolean;
+        commandType?: 'import' | 'export';
     },
     context,
 )
@@ -73,11 +75,11 @@ handlebars.registerHelper('importManager', function(
 
         if (masterImport.defaultImport)
         {
-            response += `import ${importsItems[0]} from '${path}';\n`;
+            response += `${commandType} ${importsItems[0]} from '${path}';\n`;
         }
         else if (masterImport.oneRowByItem)
         {
-            response += 'import {\n';
+            response += commandType + ' {\n';
             for (const item of importsItems)
             {
                 response += `    ${item},\n`;
@@ -87,7 +89,7 @@ handlebars.registerHelper('importManager', function(
         }
         else
         {
-            response += `import { ${importsItems.join(', ')} } from '${path}';\n`;
+            response += `${commandType} { ${importsItems.join(', ')} } from '${path}';\n`;
         }
     }
 

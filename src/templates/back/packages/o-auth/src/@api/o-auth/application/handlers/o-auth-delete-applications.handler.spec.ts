@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthDeleteApplicationsHandler } from '@api/o-auth/application';
+import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthDeleteApplicationsHandler } from './o-auth-delete-applications.handler';
-
-// sources
-import { applications } from '@app/o-auth/application/infrastructure/mock/mock-application.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteApplicationsHandler', () =>
 {
     let handler: OAuthDeleteApplicationsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('OAuthDeleteApplicationsHandler', () =>
 
         handler = module.get<OAuthDeleteApplicationsHandler>(OAuthDeleteApplicationsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('OAuthDeleteApplicationsHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('OAuthDeleteApplicationsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an applications deleted', async () =>
+        test('should return an oAuthMockApplicationData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(applications)));
-            expect(await handler.main()).toBe(applications);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(oAuthMockApplicationData);
         });
     });
 });
