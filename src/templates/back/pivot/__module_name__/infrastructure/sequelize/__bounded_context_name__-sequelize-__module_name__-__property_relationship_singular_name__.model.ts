@@ -30,7 +30,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     })
     {{ toCamelCase schema.moduleName }}Id: string;
 
-    @ForeignKey(() => {{ currentProperty.relationship.aggregate }}Model)
+    @ForeignKey(() => {{ currentProperty.relationship.aggregateName }}Model)
     @Column({
         field: '{{ toCamelCase currentProperty.relationship.singularName }}Id',
         type: DataTypes.UUID,

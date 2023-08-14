@@ -255,7 +255,7 @@ export const Prompter =
         });
 
         questions.push({
-            name   : 'relationship.aggregate',
+            name   : 'relationship.aggregateName',
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
             when   : (answers: any) =>

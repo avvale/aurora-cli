@@ -11,6 +11,8 @@ import './get-create-service-properties';
 import './get-foreign-key';
 import './get-name-property';
 import './get-relationship-bounded-context-name-property';
+import './get-relationship-module-name-property';
+import './get-relationship-module-names-property';
 import './get-value-objects-properties';
 import './get-with-import-relationship-many-to-many-properties';
 import './has-comma-in-validation-form-control';
@@ -44,3 +46,4 @@ import './string-to-snake-case';
 import './sum-strings';
 import './uuid';
 import './variables-injector-manager';
+

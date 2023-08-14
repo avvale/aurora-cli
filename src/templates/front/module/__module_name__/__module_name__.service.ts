@@ -25,15 +25,15 @@
 ~}}
 {{/each}}
 {{#each schema.aggregateProperties.withWebComponents}}
-{{#eq (toKebabCase (getRelationshipBoundedContextName this)) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getRelationshipBoundedContextName this ../schema)) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
-    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase (getRelationshipBoundedContextName this)) '.types'))
-    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
+    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase (getRelationshipBoundedContextName this ../schema)) '.types'))
+    (object items=(sumStrings (toPascalCase (getRelationshipModuleName this ../schema)) 'Service') path=(sumStrings '../' (toKebabCase (getRelationshipModuleName this ../schema)) '/' (toKebabCase (getRelationshipModuleName this ../schema)) '.service'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase (getRelationshipBoundedContextName this)) '.types'))
-    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
+    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this ../schema)) '/' (toKebabCase (getRelationshipBoundedContextName this ../schema)) '.types'))
+    (object items=(sumStrings (toPascalCase (getRelationshipModuleName this ../schema)) 'Service') path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this ../schema)) '/' (toKebabCase (getRelationshipModuleName this ../schema)) '/' (toKebabCase (getRelationshipModuleName this ../schema)) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
@@ -50,7 +50,7 @@ export class {{ toPascalCase schema.moduleName }}Service
     constructor(
         private readonly graphqlService: GraphQLService,
         {{#each schema.aggregateProperties.withWebComponents}}
-        private readonly {{ toCamelCase getRelationshipModuleName }}Service: {{ toPascalCase getRelationshipModuleName }}Service,
+        private readonly {{ toCamelCase (getRelationshipModuleName this ../schema) }}Service: {{ toPascalCase (getRelationshipModuleName this ../schema) }}Service,
         {{/each}}
     ) {}
 
@@ -157,16 +157,16 @@ export class {{ toPascalCase schema.moduleName }}Service
             headers = {},
             {{#each schema.aggregateProperties.withWebComponents}}
             {{#eq webComponent.type 'select'}}
-            query{{ toPascalCase getRelationshipModuleNames }} = {},
-            constraint{{ toPascalCase getRelationshipModuleNames }} = {},
+            query{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
+            constraint{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
             {{/eq}}
             {{#eq webComponent.type 'grid-select-element'}}
-            queryPaginate{{ toPascalCase getRelationshipModuleNames }} = {},
-            constraintPaginate{{ toPascalCase getRelationshipModuleNames }} = {},
+            queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
+            constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
             {{/eq}}
             {{#eq webComponent.type 'grid-elements-manager'}}
-            queryPaginate{{ toPascalCase getRelationshipModuleNames }} = {},
-            constraintPaginate{{ toPascalCase getRelationshipModuleNames }} = {},
+            queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
+            constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
             {{/eq}}
             {{/each}}
         }: {
@@ -176,16 +176,16 @@ export class {{ toPascalCase schema.moduleName }}Service
             headers?: GraphQLHeaders;
             {{#each schema.aggregateProperties.withWebComponents}}
             {{#eq webComponent.type 'select'}}
-            query{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
-            constraint{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
+            query{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
+            constraint{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
             {{/eq}}
             {{#eq webComponent.type 'grid-select-element'}}
-            queryPaginate{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
-            constraintPaginate{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
+            queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
+            constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
             {{/eq}}
             {{#eq webComponent.type 'grid-elements-manager'}}
-            queryPaginate{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
-            constraintPaginate{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
+            queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
+            constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
             {{/eq}}
             {{/each}}
         } = {},
@@ -193,13 +193,13 @@ export class {{ toPascalCase schema.moduleName }}Service
         object: {{ schema.aggregateName }};
         {{#each schema.aggregateProperties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
-        {{ toCamelCase (getRelationshipBoundedContextName this) }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
+        {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
-        {{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
+        {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: GridData<{{ getRelationshipAggregateName }}>;
         {{/eq}}
         {{#eq webComponent.type 'grid-elements-manager'}}
-        {{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
+        {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: GridData<{{ getRelationshipAggregateName }}>;
         {{/eq}}
         {{/each}}
     }>
@@ -210,13 +210,13 @@ export class {{ toPascalCase schema.moduleName }}Service
                 object: {{ schema.aggregateName }};
                 {{#each schema.aggregateProperties.withWebComponents}}
                 {{#eq webComponent.type 'select'}}
-                {{ toCamelCase (getRelationshipBoundedContextName this) }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
+                {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: {{ getRelationshipAggregateName }}[];
                 {{/eq}}
                 {{#eq webComponent.type 'grid-select-element'}}
-                {{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
+                {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: GridData<{{ getRelationshipAggregateName }}>;
                 {{/eq}}
                 {{#eq webComponent.type 'grid-elements-manager'}}
-                {{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
+                {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: GridData<{{ getRelationshipAggregateName }}>;
                 {{/eq}}
                 {{/each}}
             }>({
@@ -226,16 +226,16 @@ export class {{ toPascalCase schema.moduleName }}Service
                     constraint,
                     {{#each schema.aggregateProperties.withWebComponents}}
                     {{#eq webComponent.type 'select'}}
-                    query{{ toPascalCase getRelationshipModuleNames }},
-                    constraint{{ toPascalCase getRelationshipModuleNames }},
+                    query{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
+                    constraint{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
                     {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
-                    queryPaginate{{ toPascalCase getRelationshipModuleNames }},
-                    constraintPaginate{{ toPascalCase getRelationshipModuleNames }},
+                    queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
+                    constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
                     {{/eq}}
                     {{#eq webComponent.type 'grid-elements-manager'}}
-                    queryPaginate{{ toPascalCase getRelationshipModuleNames }},
-                    constraintPaginate{{ toPascalCase getRelationshipModuleNames }},
+                    queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
+                    constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
                     {{/eq}}
                     {{/each}}
                 },
@@ -252,13 +252,13 @@ export class {{ toPascalCase schema.moduleName }}Service
                     this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
                     {{#each schema.aggregateProperties.withWebComponents}}
                     {{#eq webComponent.type 'select'}}
-                    this.{{ toCamelCase getRelationshipModuleName }}Service.{{ toCamelCase getRelationshipModuleNames }}Subject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this) }}Get{{ toPascalCase getRelationshipModuleNames }});
+                    this.{{ toCamelCase (getRelationshipModuleName this ../schema) }}Service.{{ toCamelCase (getRelationshipModuleNames this ../schema) }}Subject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNames this ../schema) }});
                     {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
-                    this.{{ toCamelCase getRelationshipModuleName }}Service.paginationSubject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }});
+                    this.{{ toCamelCase (getRelationshipModuleName this ../schema) }}Service.paginationSubject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }});
                     {{/eq}}
                     {{#eq webComponent.type 'grid-elements-manager'}}
-                    this.{{ toCamelCase getRelationshipModuleName }}Service.paginationSubject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }});
+                    this.{{ toCamelCase (getRelationshipModuleName this ../schema) }}Service.paginationSubject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }});
                     {{/eq}}
                     {{/each}}
                 }),
@@ -353,24 +353,24 @@ export class {{ toPascalCase schema.moduleName }}Service
         {
             {{#each schema.aggregateProperties.withWebComponents}}
             {{#eq webComponent.type 'select'}}
-            query{{ toPascalCase getRelationshipModuleNames }} = {},
-            constraint{{ toPascalCase getRelationshipModuleNames }} = {},
+            query{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
+            constraint{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
             {{/eq}}
             {{#eq webComponent.type 'grid-select-element'}}
-            queryPaginate{{ toPascalCase getRelationshipModuleNames }} = {},
-            constraintPaginate{{ toPascalCase getRelationshipModuleNames }} = {},
+            queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
+            constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }} = {},
             {{/eq}}
             {{/each}}
             headers = {},
         }: {
             {{#each schema.aggregateProperties.withWebComponents}}
             {{#eq webComponent.type 'select'}}
-            query{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
-            constraint{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
+            query{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
+            constraint{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
             {{/eq}}
             {{#eq webComponent.type 'grid-select-element'}}
-            queryPaginate{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
-            constraintPaginate{{ toPascalCase getRelationshipModuleNames }}?: QueryStatement;
+            queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
+            constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}?: QueryStatement;
             {{/eq}}
             {{/each}}
             headers?: GraphQLHeaders;
@@ -378,10 +378,10 @@ export class {{ toPascalCase schema.moduleName }}Service
     ): Observable<{
         {{#each schema.aggregateProperties.withWebComponents}}
         {{#eq webComponent.type 'select'}}
-        {{ toCamelCase (getRelationshipBoundedContextName this) }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
+        {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
-        {{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
+        {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: GridData<{{ getRelationshipAggregateName }}>;
         {{/eq}}
         {{/each}}
     }>
@@ -391,10 +391,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             .watchQuery<{
                 {{#each schema.aggregateProperties.withWebComponents}}
                 {{#eq webComponent.type 'select'}}
-                {{ toCamelCase (getRelationshipBoundedContextName this) }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
+                {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: {{ getRelationshipAggregateName }}[];
                 {{/eq}}
                 {{#eq webComponent.type 'grid-select-element'}}
-                {{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
+                {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }}: GridData<{{ getRelationshipAggregateName }}>;
                 {{/eq}}
                 {{/each}}
             }>({
@@ -402,12 +402,12 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     {{#each schema.aggregateProperties.withWebComponents}}
                     {{#eq webComponent.type 'select'}}
-                    query{{ toPascalCase getRelationshipModuleNames }},
-                    constraint{{ toPascalCase getRelationshipModuleNames }},
+                    query{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
+                    constraint{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
                     {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
-                    queryPaginate{{ toPascalCase getRelationshipModuleNames }},
-                    constraintPaginate{{ toPascalCase getRelationshipModuleNames }},
+                    queryPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
+                    constraintPaginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }},
                     {{/eq}}
                     {{/each}}
                 },
@@ -420,10 +420,10 @@ export class {{ toPascalCase schema.moduleName }}Service
                 {
                     {{#each schema.aggregateProperties.withWebComponents}}
                     {{#eq webComponent.type 'select'}}
-                    this.{{ toCamelCase getRelationshipModuleName }}Service.{{ toCamelCase getRelationshipModuleNames }}Subject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this) }}Get{{ toPascalCase getRelationshipModuleNames }});
+                    this.{{ toCamelCase (getRelationshipModuleName this ../schema) }}Service.{{ toCamelCase (getRelationshipModuleNames this ../schema) }}Subject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNames this ../schema) }});
                     {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
-                    this.{{ toCamelCase getRelationshipModuleName }}Service.paginationSubject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }});
+                    this.{{ toCamelCase (getRelationshipModuleName this ../schema) }}Service.paginationSubject$.next(data.{{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNames this ../schema) }});
                     {{/eq}}
                     {{/each}}
                 }),

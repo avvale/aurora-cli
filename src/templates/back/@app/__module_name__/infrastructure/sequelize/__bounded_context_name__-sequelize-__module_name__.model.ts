@@ -6,18 +6,18 @@ import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/c
 import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 {{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
-import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}';
 {{/each}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -156,10 +156,10 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{#unless isI18n }}
     {{#if hasColumnDecorator }}
     {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
-    @ForeignKey(() => {{ relationship.aggregate }}Model)
+    @ForeignKey(() => {{ relationship.aggregateName }}Model)
     {{/eq}}
     {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
-    @ForeignKey(() => {{ relationship.aggregate }}Model)
+    @ForeignKey(() => {{ relationship.aggregateName }}Model)
     {{/eq}}
     @Column({
         field: '{{ toCamelCase (getNameProperty this) }}',
@@ -188,26 +188,26 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if hasHasOneDecorator }}
 
-    @HasOne(() => {{ relationship.aggregate }}Model{{#or relationship.avoidConstraint }}, {
+    @HasOne(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
     }{{/or}})
-    {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregate }}Model;
+    {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregateName }}Model;
     {{/if}}
     {{#if hasBelongsToDecorator }}
 
-    @BelongsTo(() => {{ relationship.aggregate }}Model{{#or relationship.avoidConstraint }}, {
+    @BelongsTo(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
         foreignKey: '{{ toCamelCase (getNameProperty this) }}',
     }{{/or}})
-    {{ toCamelCase relationship.field }}: {{ relationship.aggregate }}Model;
+    {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}Model;
     {{/if}}
     {{#if hasHasManyDecorator }}
 
-    @HasMany(() => {{ relationship.aggregate }}Model{{#or relationship.key relationship.avoidConstraint }}, {
+    @HasMany(() => {{ relationship.aggregateName }}Model{{#or relationship.key relationship.avoidConstraint }}, {
         {{#if relationship.key }}
         foreignKey: '{{ relationship.key }}',
         {{/if}}
@@ -215,19 +215,19 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         constraints: false,
         {{/if}}
     }{{/or}})
-    {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregate }}Model[];
+    {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregateName }}Model[];
     {{/if}}
     {{#if hasBelongsToManyDecorator }}
 
     {{#if relationship.pivot.aggregate }}
-    @BelongsToMany(() => {{ relationship.aggregate }}Model, {
+    @BelongsToMany(() => {{ relationship.aggregateName }}Model, {
         through: () => {{ relationship.pivot.aggregate }}Model,
         uniqueKey: 'Uq01{{ toPascalCase relationship.pivot.aggregate }}',
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
     })
-    {{ toCamelCase originName }}: {{ relationship.aggregate }}Model[];
+    {{ toCamelCase originName }}: {{ relationship.aggregateName }}Model[];
     {{#if relationship.isDenormalized }}
 
     @Column({
@@ -241,13 +241,13 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{ toCamelCase (getNameProperty this) }}: any;
     {{/if}}
     {{else}}
-    @BelongsToMany(() => {{ relationship.aggregate }}Model, {
+    @BelongsToMany(() => {{ relationship.aggregateName }}Model, {
         through: () => {{ relationship.pivot.aggregate }}Model,
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
     })
-    {{ toCamelCase originName }}: {{ relationship.aggregate }}Model[];
+    {{ toCamelCase originName }}: {{ relationship.aggregateName }}Model[];
     {{/if}}
     {{/if}}
 

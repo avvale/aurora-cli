@@ -1,4 +1,4 @@
-import { RelationshipType } from '../types';
+import { ModuleDefinitionSchema, RelationshipType } from '../types';
 import { Property } from './property';
 import { loadYamlByBoundedContextModule } from './yaml-manager';
 
@@ -10,8 +10,11 @@ export const getNameProperty = (property: Property): string =>
     return property.name;
 };
 
-// replace by Property (getRelationshipBoundedContextName this)
-export const getRelationshipBoundedContextName = (property: Property): string | null =>
+// replace by Property getRelationshipBoundedContextName
+export const getRelationshipBoundedContextName = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): string | null =>
 {
     try
     {
@@ -19,15 +22,66 @@ export const getRelationshipBoundedContextName = (property: Property): string | 
     }
     catch
     {
-        throwRelationshipEntityNorCreated(property);
+        throwRelationshipEntityNorCreated(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
     }
 
     return null;
 };
 
-// TODO, obtener datos de schema de esta propiedad
+// replace by Property getRelationshipModuleName
+export const getRelationshipModuleName = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): string | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleName;
+    }
+    catch
+    {
+        throwRelationshipEntityNorCreated(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+}
+
+// replace by Property getRelationshipModuleNames
+export const getRelationshipModuleNames = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): string | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleNames;
+    }
+    catch
+    {
+        throwRelationshipEntityNorCreated(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+};
+
 // replace by Property throwRelationshipEntityNorCreated
-export const throwRelationshipEntityNorCreated = (property: Property): void =>
+export const throwRelationshipEntityNorCreated = (
+    property: Property,
+    boundedContextName: string,
+    moduleName: string,
+): void =>
 {
     throw new Error(`
 Getting relationship module path for ${property.name} property.
@@ -44,9 +98,9 @@ aurora generate back module -n=${property.relationship?.modulePath}
 And create related entity.
 
 The yaml for the current entity has been created, regenerate
-the module ${property.schema?.boundedContextName}/${property.schema?.moduleName} again when you have created the yaml
+the module ${boundedContextName}/${moduleName} again when you have created the yaml
 for the entity related ${property.relationship?.modulePath}, with the command:
 
-aurora load back module -n=${property.schema?.boundedContextName}/${property.schema?.moduleName} -ft
+aurora load back module -n=${boundedContextName}/${moduleName} -ft
     `);
 };

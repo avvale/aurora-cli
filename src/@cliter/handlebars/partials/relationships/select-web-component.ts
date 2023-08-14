@@ -10,10 +10,10 @@ handlebars.registerPartial('selectWebComponent',
         formControlName="{{ toCamelCase property.name }}"
     >
         <mat-option
-            *ngFor="let {{ toCamelCase property.getRelationshipModuleName }} of {{ toCamelCase property.getRelationshipModuleNames }}$ | async"
-            [value]="{{ toCamelCase property.getRelationshipModuleName }}.id"
+            *ngFor="let {{ toCamelCase (getRelationshipModuleName property schema) }} of {{ toCamelCase (getRelationshipModuleNames property schema) }}$ | async"
+            [value]="{{ toCamelCase (getRelationshipModuleName property schema) }}.id"
         >
-            \\{{ {{ toCamelCase property.getRelationshipModuleName }}.name }}
+            \\{{ {{ toCamelCase (getRelationshipModuleName property schema) }}.name }}
         </mat-option>
     </mat-select>
     <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>

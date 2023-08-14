@@ -115,7 +115,22 @@ export const getGraphqlProperties = (properties: Property[]): Property[] =>
 // replace by Properties graphqlInputProperties
 export const getGraphqlInputProperties = (properties: Property[]): Property[] =>
 {
-    return [];
+    return properties
+        .filter(property => !timestampProperties.includes(property.name)); // exclude timestamps
+};
+
+/********
+ * REST *
+ ********/
+// replace by Properties dtoProperties
+export const getDtoProperties = (properties: Property[]): Property[] =>
+{
+    return properties;
+};
+
+// replace by Properties dtoInputProperties
+export const gerDtoInputProperties = (properties: Property[]): Property[] =>
+{
     return properties
         .filter(property => !timestampProperties.includes(property.name)); // exclude timestamps
 };
