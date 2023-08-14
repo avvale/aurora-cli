@@ -82,7 +82,7 @@ export class Properties
     {
         return this.properties
             // avoid duplicate self relations
-            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregate === value.relationship?.aggregate)))
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.ONE_TO_ONE);
     }
 
@@ -90,7 +90,7 @@ export class Properties
     {
         return this.properties
             // avoid duplicate self relations
-            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregate === value.relationship?.aggregate)))
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.MANY_TO_ONE);
     }
 
@@ -98,7 +98,7 @@ export class Properties
     {
         return this.properties
             // avoid duplicate self relations
-            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregate === value.relationship?.aggregate)))
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.ONE_TO_MANY);
     }
 
@@ -106,7 +106,7 @@ export class Properties
     {
         return this.properties
             // avoid duplicate self relations
-            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregate === value.relationship?.aggregate)))
+            .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
     }
 

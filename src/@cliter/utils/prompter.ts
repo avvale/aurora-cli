@@ -386,7 +386,7 @@ export const Prompter =
                     {
                         type           : response.relationship.type,
                         singularName   : response.relationship.singularName,
-                        aggregate      : response.relationship.aggregate,
+                        aggregateName  : response.relationship.aggregateName,
                         modulePath     : response.relationship.modulePath,
                         key            : response.relationship.type === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
                         field          : response.relationship.type === RelationshipType.MANY_TO_ONE || (response.relationship.type === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field

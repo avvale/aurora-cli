@@ -88,7 +88,7 @@ export interface PropertyRelationship
 {
     type: RelationshipType;
     singularName?: string;
-    aggregate: string;
+    aggregateName: string;
     modulePath: string;
     key?: string;
     field: string;

@@ -9,7 +9,7 @@
 {{#unlessEq type ../propertyType.ID}}
 {{ 
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) 'Create' (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextName this)) 'Create' (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/unlessEq}}
 {{/each}}
@@ -62,13 +62,13 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
 {{else ~}}
     @ApiProperty({
-        type       : {{ toPascalCase getRelationshipBoundedContextName }}Create{{ toPascalCase getRelationshipModuleName }}Dto,
+        type       : {{ toPascalCase (getRelationshipBoundedContextName this) }}Create{{ toPascalCase getRelationshipModuleName }}Dto,
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContextName }}Create{{ toPascalCase getRelationshipModuleName }}Dto;
+    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextName this) }}Create{{ toPascalCase getRelationshipModuleName }}Dto;
 
 {{/eq}}
 {{/eq}}

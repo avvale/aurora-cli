@@ -5,30 +5,33 @@
             (object items=(array 'ApiProperty') path='@nestjs/swagger')
     )
 ~}}
-{{#each schema.aggregateProperties.withImportRelationshipManyToMany}}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (object
+            items=(sumStrings (toPascalCase (getRelationshipBoundedContextName this)) (toPascalCase getRelationshipModuleName) 'Dto')
+            path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName))
+        )
 ~}}
 {{/each}}
 {{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextName this)) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/unless}}
 {{/each}}
 {{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextName this)) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/each}}
 {{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextName this)) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName)))
 ~}}
 {{/each}}
 {{#if schema.aggregateProperties.hasEnum}}
@@ -64,13 +67,13 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : () => [{{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto],
+        type       : () => [{{ toPascalCase (getRelationshipBoundedContextName this) }}{{ toPascalCase getRelationshipModuleName }}Dto],
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto[];
+    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextName this) }}{{ toPascalCase getRelationshipModuleName }}Dto[];
 
 {{#if relationship.isDenormalized}}
     @ApiProperty({
@@ -87,13 +90,13 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : () => [{{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto],
+        type       : () => [{{ toPascalCase (getRelationshipBoundedContextName this) }}{{ toPascalCase getRelationshipModuleName }}Dto],
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto[];
+    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextName this) }}{{ toPascalCase getRelationshipModuleName }}Dto[];
 
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE}}

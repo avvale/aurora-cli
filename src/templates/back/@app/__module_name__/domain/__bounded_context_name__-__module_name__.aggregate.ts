@@ -24,7 +24,7 @@ import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{
 {{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipManyToMany}}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
 import { {{ relationship.aggregate }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 

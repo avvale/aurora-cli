@@ -2,11 +2,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
-import { Property } from './property';
 import { ModuleDefinitionSchema } from '../types';
-import { Properties } from './properties';
-import { AdditionalApi } from './additional-api';
-import { AdditionalApis } from './additional-apis';
 import { cliterConfig } from '../config';
 
 export class YamlManager
@@ -76,84 +72,10 @@ export class YamlManager
     }
 }
 
-const addProperties = (
-    {
-        properties,
-        aggregateProperties = [],
-        schema,
-    }:
-    {
-        properties: Properties,
-        aggregateProperties?: Property[];
-        schema?: ModuleDefinitionSchema;
-    },
-): Properties =>
+export const loadYamlByBoundedContextModule = (boundedContextModule: string): ModuleDefinitionSchema =>
 {
-    for (const property of aggregateProperties)
-    {
-        properties.add(
-            createProperty({
-                property,
-                schema,
-            }),
-        );
-    }
+    const [boundedContextName, moduleName] = boundedContextModule.split('/');
+    if (!boundedContextName || !moduleName) throw new Error('Must input bounded context and module name, with format: bounded-context/module');
 
-    return properties;
-};
-
-const createProperty = (
-    {
-        isI18n,
-        property = {},
-        schema,
-    }:
-    {
-        isI18n?: boolean;
-        property?: any;
-        schema?: ModuleDefinitionSchema;
-    },
-): Property =>
-{
-    return new Property({
-        isI18n,
-        name         : property.name,
-        type         : property.type,
-        primaryKey   : property?.primaryKey,
-        autoIncrement: property?.autoIncrement,
-        enumOptions  : property?.enumOptions?.join(),
-        decimals     : property?.decimals,
-        length       : property?.length,
-        minLength    : property?.minLength,
-        maxLength    : property?.maxLength,
-        nullable     : property?.nullable,
-        defaultValue : property?.defaultValue,
-        relationship : property?.relationship,
-        index        : property?.index,
-        indexName    : property?.indexName,
-        example      : property?.example,
-        faker        : property?.faker,
-        webComponent : property?.webComponent,
-        schema,
-    });
-};
-
-const createAdditionalApis = (additionalApis: any): AdditionalApis | undefined =>
-{
-    if (!Array.isArray(additionalApis)) return;
-
-    const additionalApisObject = new AdditionalApis();
-
-    for (const additionalApi of additionalApis)
-    {
-        additionalApisObject.add(
-            new AdditionalApi({
-                path        : additionalApi.path,
-                resolverType: additionalApi.resolverType,
-                httpMethod  : additionalApi.httpMethod,
-            }),
-        );
-    }
-
-    return additionalApisObject;
+    return YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
 };

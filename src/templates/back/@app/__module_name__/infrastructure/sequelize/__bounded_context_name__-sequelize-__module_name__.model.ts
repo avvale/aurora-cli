@@ -16,7 +16,7 @@ import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageNam
 {{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipManyToMany}}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
 import { {{ relationship.aggregate }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}';
 {{/each}}

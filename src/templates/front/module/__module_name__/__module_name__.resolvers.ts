@@ -15,48 +15,48 @@
 ~}}
 {{/if}}
 {{#each schema.aggregateProperties.withWebComponents}}
-{{#eq (toKebabCase getRelationshipBoundedContextName) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getRelationshipBoundedContextName this)) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
-    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipBoundedContextName) '.types'))
+    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase (getRelationshipBoundedContextName this)) '.types'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipBoundedContextName) '.types'))
+    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase (getRelationshipBoundedContextName this)) '.types'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each schema.aggregateProperties.withSelectWebComponents}}
-{{#eq (toKebabCase getRelationshipBoundedContextName) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getRelationshipBoundedContextName this)) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
 (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{else}}
 {{ push ../importsArray
-(object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
+(object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each schema.aggregateProperties.withGridSelectElementWebComponents}}
-{{#eq (toKebabCase getRelationshipBoundedContextName) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getRelationshipBoundedContextName this)) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
     (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
-    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
+    (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
+    (object items=(sumStrings (toPascalCase getRelationshipModuleName) 'Service') path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each schema.aggregateProperties.withGridElementsManagerWebComponents}}
-{{#eq (toKebabCase getRelationshipBoundedContextName) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getRelationshipBoundedContextName this)) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
+    (object items=(sumStrings (toCamelCase getRelationshipModuleName) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextName this)) '/' (toKebabCase getRelationshipModuleName) '/' (toKebabCase getRelationshipModuleName) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
@@ -105,10 +105,10 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<Action{{#
 export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     {{#each schema.aggregateProperties.withWebComponents}}
     {{#eq webComponent.type 'select'}}
-    {{ toCamelCase getRelationshipBoundedContextName }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
+    {{ toCamelCase (getRelationshipBoundedContextName this) }}Get{{ toPascalCase getRelationshipModuleNames }}: {{ getRelationshipAggregateName }}[];
     {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
-    {{ toCamelCase getRelationshipBoundedContextName }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
+    {{ toCamelCase (getRelationshipBoundedContextName this) }}Paginate{{ toPascalCase getRelationshipModuleNames }}: GridData<{{ getRelationshipAggregateName }}>;
     {{/eq}}
     {{/each}}
 }> = (
@@ -215,17 +215,17 @@ export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
 {{#each schema.aggregateProperties.withWebComponents}}
 {{#eq webComponent.type 'select'}}
 {{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContextName) 'Get' (toPascalCase getRelationshipModuleNames)) className=(sumStrings getRelationshipAggregateName '[]'))
+    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextName this)) 'Get' (toPascalCase getRelationshipModuleNames)) className=(sumStrings getRelationshipAggregateName '[]'))
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-select-element'}}
 {{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContextName) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextName this)) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-elements-manager'}}
 {{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase getRelationshipBoundedContextName) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextName this)) 'Paginate' (toPascalCase getRelationshipModuleNames)) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
 ~}}
 {{/eq ~}}
 {{/each ~}}

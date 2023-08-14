@@ -94,6 +94,15 @@ export const getCreateCommandHandlerProperties = (properties: Property[]): Prope
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
 };
 
+// replace by Properties withImportRelationshipManyToMany
+export const getWithImportRelationshipManyToManyProperties = (properties: Property[]): Property[] =>
+{
+    return properties
+        // avoid duplicate self relations
+        .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
+        .filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
+};
+
 /***********
  * GRAPHQL *
  ***********/

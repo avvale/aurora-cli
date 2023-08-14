@@ -280,7 +280,7 @@ export class Property
     get getJavascriptType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
-        if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
+        if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregateName}[]`;
 
         return this.config.propertyTypesEquivalenceJavascriptTypes[this.type];
     }
@@ -288,7 +288,7 @@ export class Property
     get getJavascriptModelType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
-        if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregate}[]`;
+        if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregateName}[]`;
 
         return this.config.propertyTypesEquivalenceJavascriptModelTypes[this.type];
     }
@@ -322,9 +322,9 @@ export class Property
      ***********/
     get getGraphqlType(): string | undefined
     {
-        if (this.relationship?.type === RelationshipType.ONE_TO_MANY || this.relationship?.type === RelationshipType.MANY_TO_MANY) return `[${this.relationship?.aggregate}]`;
-        if (this.relationship?.type === RelationshipType.MANY_TO_ONE)                                                              return `${this.relationship?.aggregate}`;
-        if (this.relationship?.type === RelationshipType.ONE_TO_ONE)                                                               return `${this.relationship?.aggregate}`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_MANY || this.relationship?.type === RelationshipType.MANY_TO_MANY) return `[${this.relationship?.aggregateName}]`;
+        if (this.relationship?.type === RelationshipType.MANY_TO_ONE)                                                              return `${this.relationship?.aggregateName}`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE)                                                               return `${this.relationship?.aggregateName}`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
@@ -396,7 +396,7 @@ export class Property
         throw new Error(`
 Getting relationship module path for ${this.name} property.
     Path: ${this.relationship?.modulePath}
-    Aggregate: ${this.relationship?.aggregate}
+    Aggregate: ${this.relationship?.aggregateName}
     Relationship: ${this.relationship?.type}
 
 For fields with relationship, you must previously create the yaml
