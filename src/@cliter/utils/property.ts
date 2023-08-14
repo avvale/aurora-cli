@@ -193,7 +193,7 @@ export class Property
         return typeof this._enumOptions === 'string' ? this._enumOptions.split(',').map(item => item.trim().toUpperCase()) : undefined;
     }
 
-    get getRelationshipBoundedContextName(): string | null
+    get getRelationshipBoundedContextNameProperty(): string | null
     {
         try
         {
@@ -201,13 +201,13 @@ export class Property
         }
         catch
         {
-            this.throwRelationshipEntityNorCreated();
+            this.throwRelationshipEntityNorCreatedProperty();
         }
 
         return null;
     }
 
-    get getRelationshipModuleName(): string | null
+    get getRelationshipModuleNameProperty(): string | null
     {
         try
         {
@@ -215,13 +215,13 @@ export class Property
         }
         catch
         {
-            this.throwRelationshipEntityNorCreated();
+            this.throwRelationshipEntityNorCreatedProperty();
         }
 
         return null;
     }
 
-    get getRelationshipModuleNames(): string | null
+    get getRelationshipModuleNamesProperty(): string | null
     {
         try
         {
@@ -229,7 +229,7 @@ export class Property
         }
         catch
         {
-            this.throwRelationshipEntityNorCreated();
+            this.throwRelationshipEntityNorCreatedProperty();
         }
 
         return null;
@@ -243,7 +243,7 @@ export class Property
         }
         catch
         {
-            this.throwRelationshipEntityNorCreated();
+            this.throwRelationshipEntityNorCreatedProperty();
         }
 
         return null;
@@ -257,7 +257,7 @@ export class Property
         }
         catch
         {
-            this.throwRelationshipEntityNorCreated();
+            this.throwRelationshipEntityNorCreatedProperty();
         }
 
         return null;
@@ -271,7 +271,7 @@ export class Property
         }
         catch
         {
-            this.throwRelationshipEntityNorCreated();
+            this.throwRelationshipEntityNorCreatedProperty();
         }
 
         return null;
@@ -331,14 +331,14 @@ export class Property
     get getGraphqlCreateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                          return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextName?.toPascalCase()}Create${this.getRelationshipModuleName?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextNameProperty?.toPascalCase()}Create${this.getRelationshipModuleNameProperty?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
     get getGraphqlUpdateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                           return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextName?.toPascalCase()}Update${this.getRelationshipModuleName?.toPascalCase()}Input`;
+        if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextNameProperty?.toPascalCase()}Update${this.getRelationshipModuleNameProperty?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
     }
 
@@ -391,7 +391,7 @@ export class Property
         };
     }
 
-    private throwRelationshipEntityNorCreated(): void
+    private throwRelationshipEntityNorCreatedProperty(): void
     {
         throw new Error(`
 Getting relationship module path for ${this.name} property.

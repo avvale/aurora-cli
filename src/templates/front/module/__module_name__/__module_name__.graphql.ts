@@ -13,7 +13,7 @@ export const fields = `
 export const relationsFields = `
     {{#each schema.aggregateProperties.withWebComponents}}
     {{#eq webComponent.type 'select'}}
-    {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Get{{ toPascalCase getRelationshipSchema.moduleNames }} (
+    {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase getRelationshipSchema.moduleNames }} (
         query: $query{{ toPascalCase getRelationshipSchema.moduleNames }}
         constraint: $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}
     ) {
@@ -23,7 +23,7 @@ export const relationsFields = `
     }
     {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
-    {{ toCamelCase (getRelationshipBoundedContextName this ../schema) }}Paginate{{ toPascalCase getRelationshipSchema.moduleNames }} (
+    {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Paginate{{ toPascalCase getRelationshipSchema.moduleNames }} (
         query:$queryPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}
         constraint:$constraintPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}
     ) {

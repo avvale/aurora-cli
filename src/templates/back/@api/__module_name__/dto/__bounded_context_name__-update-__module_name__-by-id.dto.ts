@@ -9,7 +9,7 @@
 {{#unlessEq type ../propertyType.ID}}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextName this ../schema)) 'Update' (toPascalCase (getRelationshipModuleName this ../schema)) 'ByIdDto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextName this ../schema)) '/' (toKebabCase (getRelationshipModuleName this ../schema))))
+        (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Update' (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'ByIdDto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema))))
 ~}}
 {{/unlessEq}}
 {{/each}}
@@ -24,7 +24,7 @@
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto
 {
-{{#each schema.aggregateProperties.dtoInputProperties}}
+{{#each (gerDtoInputProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
@@ -62,13 +62,13 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
 {{else ~}}
     @ApiProperty({
-        type       : {{ toPascalCase (getRelationshipBoundedContextName this ../schema) }}Update{{ toPascalCase (getRelationshipModuleName this ../schema) }}ByIdDto,
+        type       : {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}ByIdDto,
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}?: {{ toPascalCase (getRelationshipBoundedContextName this ../schema) }}Update{{ toPascalCase (getRelationshipModuleName this ../schema) }}ByIdDto;
+    {{ toCamelCase originName }}?: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}ByIdDto;
 
 {{/eq}}
 {{/eq}}
@@ -87,13 +87,13 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{/eq}}
 {{#if ../isCommonProperty}}
     @ApiProperty({
-        type       : {{ getSwaggerType }},
+        type       : {{ getSwaggerTypeProperty this ../config }},
         description: '{{ toCamelCase originName }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#unlessEq originName 'id'}}?{{/unlessEq}}: {{ getDtoType }};
+    {{ toCamelCase originName }}{{#unlessEq originName 'id'}}?{{/unlessEq}}: {{ getDtoTypeProperty this ../config }};
 
 {{/if}}
 {{/if}}

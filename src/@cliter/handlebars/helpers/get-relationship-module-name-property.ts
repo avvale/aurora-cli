@@ -1,10 +1,10 @@
 import * as handlebars from 'handlebars';
-import { ModuleDefinitionSchema, Property, getRelationshipModuleName } from '../..';
+import { ModuleDefinitionSchema, Property, getRelationshipModuleNameProperty } from '../..';
 
-handlebars.registerHelper('getRelationshipModuleName', function(
+handlebars.registerHelper('getRelationshipModuleNameProperty', function(
     property: Property,
     schema: ModuleDefinitionSchema,
 ): string | null
 {
-    return getRelationshipModuleName(property, schema);
+    return getRelationshipModuleNameProperty(property, schema);
 });

@@ -1,10 +1,10 @@
 import * as handlebars from 'handlebars';
-import { ModuleDefinitionSchema, Property, getRelationshipBoundedContextName } from '../..';
+import { ModuleDefinitionSchema, Property, getRelationshipBoundedContextNameProperty } from '../..';
 
-handlebars.registerHelper('getRelationshipBoundedContextName', function(
+handlebars.registerHelper('getRelationshipBoundedContextNameProperty', function(
     property: Property,
     schema: ModuleDefinitionSchema,
 ): string | null
 {
-    return getRelationshipBoundedContextName(property, schema);
+    return getRelationshipBoundedContextNameProperty(property, schema);
 });

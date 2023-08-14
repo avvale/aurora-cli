@@ -358,15 +358,19 @@ export class FileManager
         if (useTemplateEngine)
         {
             // replace variables with handlebars template engine
-            contents = await templateEngine.render(contents, {
-                ...templateData,
-                config: cliterConfig,
-                currentProperty,
-                boundedContextPrefix,
-                boundedContextSuffix,
-                moduleNamePrefix,
-                moduleNameSuffix,
-            });
+            contents = await templateEngine
+                .render(
+                    contents,
+                    {
+                        ...templateData,
+                        config: cliterConfig,
+                        currentProperty,
+                        boundedContextPrefix,
+                        boundedContextSuffix,
+                        moduleNamePrefix,
+                        moduleNameSuffix,
+                    },
+                );
         }
 
         // if exist file is has not force flag, avoid overwrite file
