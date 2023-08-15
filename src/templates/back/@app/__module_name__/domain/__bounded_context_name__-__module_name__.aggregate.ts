@@ -14,18 +14,18 @@ import { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase sche
 import { {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event } from '../application/events/{{ toKebabCase schema.boundedContextName }}-deleted-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 
 export class {{ schema.aggregateName }} extends AggregateRoot
