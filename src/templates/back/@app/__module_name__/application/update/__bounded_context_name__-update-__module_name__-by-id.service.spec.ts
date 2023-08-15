@@ -23,6 +23,19 @@
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
 ~}}
 {{/if}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (object 
+            items=
+                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
 {{{ importManager (object imports=importsArray) }}}
 describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService', () =>
 {
@@ -71,8 +84,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
             expect(
                 await service.main(
                     {
-                        {{#each schema.aggregateProperties.updateService}}
-                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
+                        {{#each (getUpdateServiceProperties schema.aggregateProperties schema.moduleName) }}
+                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
                         {{/each}}
                     },
                     {},

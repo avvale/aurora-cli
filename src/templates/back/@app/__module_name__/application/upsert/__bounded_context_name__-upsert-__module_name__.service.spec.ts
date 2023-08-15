@@ -63,10 +63,10 @@ describe('{{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase sche
             expect(
                 await service.main(
                     {
-                        {{#each schema.aggregateProperties.upsertService}}
+                        {{#each (getUpsertServiceProperties schema.aggregateProperties schema.moduleName) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
+                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
                         {{/unless}}
                         {{/if}}
                         {{/each}}

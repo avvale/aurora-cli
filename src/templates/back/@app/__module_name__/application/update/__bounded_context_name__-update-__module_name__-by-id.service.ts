@@ -45,7 +45,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
     async main(
         payload: {
-            {{#each schema.aggregateProperties.updateService}}
+            {{#each (getUpdateServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase (getNameProperty this) }}{{#unlessEq (getNameProperty this) 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
             {{/if}}
@@ -69,7 +69,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{#eq (getNameProperty this) 'createdAt'}}
             null, // createdAt
 {{else eq (getNameProperty this) 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq (getNameProperty this) 'deletedAt'}}
             null, // deletedAt
 {{else}}

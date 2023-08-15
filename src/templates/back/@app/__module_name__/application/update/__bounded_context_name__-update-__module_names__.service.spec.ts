@@ -62,8 +62,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase sche
             expect(
                 await service.main(
                     {
-                        {{#each schema.aggregateProperties.updateService}}
-                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
+                        {{#each (getUpdateServiceProperties schema.aggregateProperties schema.moduleName) }}
+                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
                         {{/each}}
                     },
                     {},

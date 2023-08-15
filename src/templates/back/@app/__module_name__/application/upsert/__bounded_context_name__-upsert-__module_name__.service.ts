@@ -47,7 +47,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 
     async main(
         payload: {
-            {{#each schema.aggregateProperties.upsertService}}
+            {{#each (getUpsertServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
@@ -70,9 +70,9 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
 {{#eq (getNameProperty this) 'createdAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
 {{else eq (getNameProperty this) 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
 {{else eq (getNameProperty this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
