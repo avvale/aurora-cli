@@ -40,13 +40,13 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         // call to use case and implements ValueObjects
         await this.update{{ toPascalCase schema.moduleName }}ByIdService.main(
             {
-                {{#each schema.aggregateProperties.updateCommandHandler}}
+                {{#each (getUpdateCommandHandlerProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#if hasTimezone}}
-                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}, { {{~#unless nullable}}{{#unlessEq (getNameProperty this) 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
+                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}, { {{~#unless nullable}}{{#unlessEq (getNameProperty this) 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}
                 {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}{{#unless nullable}}{{#unlessEq (getNameProperty this) 'id'}}, { undefinable: true }{{/unlessEq}}{{/unless}}),
+                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}{{#unless nullable}}{{#unlessEq (getNameProperty this) 'id'}}, { undefinable: true }{{/unlessEq}}{{/unless}}),
                 {{/unless}}
                 {{/if}}
                 {{/if}}

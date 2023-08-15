@@ -5,7 +5,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
     {{! don`t set nullable properties to avoid error "A required parameter cannot follow an optional parameter.ts(1016)" }}
     constructor(
         public readonly payload: {
-            {{#each schema.aggregateProperties.upsertCommand}}
+            {{#each (getUpsertCommandProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase (getNameProperty this) }}{{#unlessEq (getNameProperty this) 'id'}}?{{/unlessEq}}: {{ getJavascriptTypeProperty this ../config }};
             {{/if}}

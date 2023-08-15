@@ -18,7 +18,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         // call to use case and implements ValueObjects
         await this.upsert{{ toPascalCase schema.moduleName }}Service.main(
             {
-                {{#each schema.aggregateProperties.upsertCommandHandler}}
+                {{#each (getUpsertCommandHandlerProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#if hasTimezone}}
                 {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}, {}, { removeTimezone: command.cQMetadata.timezone }),
