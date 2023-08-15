@@ -1,12 +1,12 @@
 {{ setVar 'exportsArray' (array) ~}}
-{{#each schema.aggregateProperties.valueObjects}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../exportsArray
         (
             object
                 items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
-                path=(sumStrings './' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase (getNameProperty this)))
+                path=(sumStrings './' (toKebabCase ../schema.boundedContextName) '-' (toKebabCase ../schema.moduleName) '-' (toKebabCase (getNameProperty this)))
         )
 ~}}
 {{/if}}
@@ -17,12 +17,12 @@
         (
             object
                 items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase ../schema.moduleName) (toPascalCase ../schema.moduleName) 'Id')
-                path=(sumStrings './' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase schema.moduleName) '-id')
+                path=(sumStrings './' (toKebabCase ../schema.boundedContextName) '-' (toKebabCase ../schema.moduleName) '-' (toKebabCase ../schema.moduleName) '-' (toKebabCase ../schema.moduleName) '-id')
         )
         (
             object
                 items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase ../schema.moduleName) (toPascalCase relationship.singularName) 'Id')
-                path=(sumStrings './' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase relationship.singularName) '-id')
+                path=(sumStrings './' (toKebabCase ../schema.boundedContextName) '-' (toKebabCase ../schema.moduleName) '-' (toKebabCase ../schema.moduleName) '-' (toKebabCase relationship.singularName) '-id')
         )
 ~}}
 {{/each}}

@@ -15,11 +15,15 @@
             )
     )
 ~}}
-{{#each schema.aggregateProperties.valueObjects}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this))) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (object
+            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
+            path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+            oneRowByItem=true
+        )
 ~}}
 {{/if}}
 {{/each}}

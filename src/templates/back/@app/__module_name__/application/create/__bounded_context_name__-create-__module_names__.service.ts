@@ -16,11 +16,15 @@
             )
     )
 ~}}
-{{#each schema.aggregateProperties.valueObjects}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this))) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (object
+            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
+            path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+            oneRowByItem=true
+        )
 ~}}
 {{/if}}
 {{/each}}
@@ -41,8 +45,8 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ) {}
 
     async main(
-        {{ toCamelCase schema.moduleNames }}: {
-            {{#each schema.aggregateProperties.createItemsService}}
+        payload: {
+            {{#each (getCreateItemsServiceProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
             {{/if}}
@@ -52,7 +56,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregate{{ toPascalCase schema.moduleNames }} = {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
+        const aggregate{{ toPascalCase schema.moduleNames }} = payload.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
 {{#eq (getNameProperty this) 'createdAt'}}

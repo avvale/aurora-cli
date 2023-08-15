@@ -30,7 +30,7 @@
         (object 
             items=
                 (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
                 oneRowByItem=true
         )
 ~}}
@@ -85,8 +85,8 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
             expect(
                 await service.main(
                     {
-                        {{#each schema.aggregateProperties.createService}}
-                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
+                        {{#each (getCreateServiceProperties schema.aggregateProperties) }}
+                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getNameProperty this) }}),
                         {{/each}}
                     },
                     {{#if (hasI18nProperties schema.aggregateProperties) }}
