@@ -4,11 +4,21 @@ import { Property } from './property';
 import { loadYamlByBoundedContextModule } from './yaml-manager';
 
 // replace by Property name
-export const getNameProperty = (property: Property): string =>
+export const getNameProperty = (
+    property: Property,
+): string =>
 {
     // properties that represent many to many relationships, are arrays of ids
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY) return `${property.relationship.singularName}Ids`;
     return property.name;
+};
+
+// replace by Property hasTimezone
+export const isTimezoneProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.type === PropertyType.TIMESTAMP;
 };
 
 // replace by Property getRelationshipBoundedContextName

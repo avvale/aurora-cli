@@ -16,7 +16,7 @@ import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../sche
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response
 {
     constructor(
-        {{#each schema.aggregateProperties.response}}
+        {{#each (getResponseProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptTypeProperty this ../config }},
         {{/if}}

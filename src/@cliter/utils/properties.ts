@@ -667,41 +667,41 @@ export class Properties
     /**********
      * OTHERS *
      **********/
-    get valueObjects(): Property[]
+    /* get valueObjects(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to many relations
-    }
+    } */
 
-    get response(): Property[]
+    /* get response(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to many relations
-    }
+    } */
 
-    get seed(): Property[]
+    /* get seed(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get mapper(): Property[]
+    /* get mapper(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get mock(): Property[]
+    /* get mock(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
     /* getForeignRelationship(boundedContextName: string): Property[]
     {

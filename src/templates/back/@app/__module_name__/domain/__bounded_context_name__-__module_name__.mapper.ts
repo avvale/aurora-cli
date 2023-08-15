@@ -70,9 +70,9 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     private makeAggregate({{ toCamelCase schema.moduleName }}: LiteralObject, cQMetadata?: CQMetadata): {{ schema.aggregateName }}
     {
         return {{ schema.aggregateName }}.register(
-            {{#each schema.aggregateProperties.mapper}}
+            {{#each (getMapperProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this)}}
-            {{#if hasTimezone}}
+            {{#if (isTimezoneProperty this) }}
             new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             {{else}}
             new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }),
@@ -104,7 +104,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         if (!{{ toCamelCase schema.moduleName }}) return;
 
         return new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response(
-            {{#each schema.aggregateProperties.mapper}}
+            {{#each (getMapperProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this)}}
             {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}.value,
             {{/if}}

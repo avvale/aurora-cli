@@ -7,7 +7,7 @@ import { {{#each (getEnumProperties schema.aggregateProperties) }}{{#unless @fir
 export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data = [
     {{#loops 20}}
     {
-        {{#each ../schema.aggregateProperties.seed as |seedProperty seedId|}}
+        {{#each (getSeedProperties ../schema.aggregateProperties) as |seedProperty seedId|}}
         {{#if (isAllowProperty ../schema.moduleName this)}}
         {{ toCamelCase (getNameProperty seedProperty) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../../schema property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if}},
         {{/if}}

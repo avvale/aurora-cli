@@ -36,6 +36,47 @@ export const getWithoutTimestampsProperties = (
     return properties.filter(property => !timestampProperties.includes(property.name));
 };
 
+// replace by Properties response
+export const getResponseProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to many relations
+};
+
+// replace by Properties seed
+export const getSeedProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
+        .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
+};
+
+// replace by Properties mapper
+export const getMapperProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
+};
+
+// replace by Properties mock
+export const getMockProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
+};
+
 /*************
  * AGGREGATE *
  *************/

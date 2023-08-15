@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             {
                 {{#each (getCreateCommandHandlerProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
-                {{#if hasTimezone}}
+                {{#if (isTimezoneProperty this) }}
                 {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}, {}, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}
                 {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
