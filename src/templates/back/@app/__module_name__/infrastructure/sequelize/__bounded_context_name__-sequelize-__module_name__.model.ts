@@ -33,7 +33,7 @@ import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.bou
 {{{
     indexesManager (
         object
-            indexes=schema.aggregateProperties.columnsWithIndex
+            indexes=(getIndexesProperties schema.aggregateProperties)
             isI18n=false
     )
 }}}

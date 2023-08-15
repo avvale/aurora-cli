@@ -26,6 +26,14 @@ export const hasIndexProperties = (
     return properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && !property.isI18n);
 };
 
+// replace by Properties columnsWithIndex
+export const getIndexesProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.index); // only properties with index defined
+};
+
 // replace by Properties valueObjects
 export const getValueObjectsProperties = (
     properties: Property[],

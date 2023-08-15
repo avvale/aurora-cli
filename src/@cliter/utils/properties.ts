@@ -471,10 +471,10 @@ export class Properties
         return this.properties.filter(property => Boolean(property.relationship)); // only relationship
     } */
 
-    get columnsWithIndex(): Property[]
+    /* get columnsWithIndex(): Property[]
     {
         return this.properties.filter(property => property.index); // only properties with index defined
-    }
+    } */
 
     /***********
      * POSTMAN *

@@ -28,7 +28,7 @@ import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer 
 {{{
     indexesManager (
         object
-            indexes=schema.aggregateProperties.columnsWithIndex
+            indexes=(getIndexesProperties schema.aggregateProperties)
             isI18n=true
     )
 }}}
