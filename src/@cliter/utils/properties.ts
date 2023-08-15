@@ -461,10 +461,10 @@ export class Properties
     /**********
      * MODELS *
      **********/
-    get modelColumns(): Property[]
+    /* get modelColumns(): Property[]
     {
         return this.properties; // exclude one to many relations
-    }
+    } */
 
     /* get schemaRelations(): Property[]
     {

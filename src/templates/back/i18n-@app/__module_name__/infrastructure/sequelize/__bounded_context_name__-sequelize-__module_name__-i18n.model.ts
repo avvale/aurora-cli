@@ -147,7 +147,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }
 
     {{/if}}
-    {{#each schema.aggregateProperties.modelColumns}}
+    {{#each schema.aggregateProperties }}
     {{#if isI18n }}
     {{#if hasColumnDecorator }}
     {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}

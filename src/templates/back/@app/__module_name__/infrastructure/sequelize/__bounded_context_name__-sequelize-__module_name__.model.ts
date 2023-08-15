@@ -152,7 +152,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }
 
     {{/if}}
-    {{#each schema.aggregateProperties.modelColumns}}
+    {{#each schema.aggregateProperties }}
     {{#unless isI18n }}
     {{#if hasColumnDecorator }}
     {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}

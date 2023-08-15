@@ -73,9 +73,9 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             {{#each (getMapperProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this)}}
             {{#if (isTimezoneProperty this) }}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             {{else}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }),
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}{{#if isI18n}}.{{ toCamelCase ../schema.moduleName }}{{> i18n }}{{/if}}.{{ toCamelCase (getNameProperty this) }}, { undefinable: true }),
             {{/if}}
             {{/if}}
             {{/each}}
