@@ -21,7 +21,7 @@
         (object 
             items=
                 (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
                 oneRowByItem=true
         )
 ~}}
@@ -46,9 +46,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
                         {{#each (getCreateCommandHandlerProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{#if hasTimezone}}
-                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}, {}, { removeTimezone: command.cQMetadata.timezone }),
+                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}, {}, { removeTimezone: command.cQMetadata.timezone }),
                         {{else}}
-                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
+                        {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
                         {{/if}}
                         {{/if}}
                         {{/each}}

@@ -65,11 +65,11 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq name 'createdAt'}}
+{{#eq (getNameProperty this) 'createdAt'}}
             new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq name 'updatedAt'}}
+{{else eq (getNameProperty this) 'updatedAt'}}
             new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
+{{else eq (getNameProperty this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
 {{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
@@ -139,17 +139,17 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         const {{ toCamelCase schema.moduleName }}I18n = {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq name 'createdAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq name 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
+{{#eq (getNameProperty this) 'createdAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+{{else eq (getNameProperty this) 'updatedAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq (getNameProperty this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
 {{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-            {{ toCamelCase schema.moduleName }}.availableLangs,
+            {{ toCamelCase ../schema.moduleName }}.availableLangs,
 {{else}}
-{{#eq name 'id'}}
+{{#eq (getNameProperty this) 'id'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}Id(modelInDB ? modelInDB.id.value : Utils.uuid()),
 {{else}}
             payload.{{ toCamelCase (getNameProperty this) }},

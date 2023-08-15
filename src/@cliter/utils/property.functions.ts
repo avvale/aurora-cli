@@ -1,5 +1,5 @@
 import { CliterConfig } from '../config';
-import { ModuleDefinitionSchema, RelationshipType } from '../types';
+import { ModuleDefinitionSchema, PropertyType, RelationshipType } from '../types';
 import { Property } from './property';
 import { loadYamlByBoundedContextModule } from './yaml-manager';
 
@@ -165,3 +165,15 @@ export const getGraphqlUpdateTypeProperty = (
     if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getRelationshipBoundedContextNameProperty(property, schema)?.toPascalCase()}Update${getRelationshipModuleNameProperty(property, schema)?.toPascalCase()}Input`;
     return config.propertyTypesEquivalenceQraphqlTypes[property.type];
 };
+
+// replace by Property getJavascriptType
+export const getJavascriptTypeProperty = (
+    property: Property,
+    config: CliterConfig,
+): string =>
+{
+    if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
+    if (property.type === PropertyType.RELATIONSHIP)                    return `${property.relationship?.aggregateName}[]`;
+
+    return config.propertyTypesEquivalenceJavascriptTypes[property.type];
+}

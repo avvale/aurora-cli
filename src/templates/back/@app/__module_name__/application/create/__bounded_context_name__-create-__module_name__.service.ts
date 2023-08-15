@@ -69,11 +69,11 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq name 'createdAt'}}
+{{#eq (getNameProperty this) 'createdAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq name 'updatedAt'}}
+{{else eq (getNameProperty this) 'updatedAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
+{{else eq (getNameProperty this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
 {{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}

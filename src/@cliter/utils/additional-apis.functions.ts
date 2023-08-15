@@ -6,3 +6,9 @@ export const getQueriesAdditionalApis = (additionalApis: AdditionalApi[]): Addit
 {
     return additionalApis.filter(additionalApi => additionalApi.resolverType === ResolverType.QUERY);
 };
+
+// replace by AdditionalApis mutations
+export const getMutationsAdditionalApis = (additionalApis: AdditionalApi[]): AdditionalApi[] =>
+{
+    return additionalApis.filter(additionalApi => additionalApi.resolverType === ResolverType.MUTATION);
+};

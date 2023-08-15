@@ -242,7 +242,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         return {
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#if isI18n}}
-            {{#eq name 'id'}}
+            {{#eq (getNameProperty this) 'id'}}
             {{ toCamelCase (getNameProperty this) }}: Utils.uuid(),
             {{else}}
             {{#if (isI18nRelationProperty ../schema.moduleName this)}}

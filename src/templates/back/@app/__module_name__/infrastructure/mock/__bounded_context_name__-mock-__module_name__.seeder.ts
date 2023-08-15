@@ -28,18 +28,18 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
                 {{ schema.aggregateName }}.register(
                     {{#each (getAggregateProperties schema.aggregateProperties) }}
                     {{#unless isI18n}}
-{{#eq name 'createdAt'}}
-                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq name 'updatedAt'}}
-                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
-                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}DeletedAt(null),
+{{#eq (getNameProperty this) 'createdAt'}}
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+{{else eq (getNameProperty this) 'updatedAt'}}
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq (getNameProperty this) 'deletedAt'}}
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}DeletedAt(null),
 {{else}}
-                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
 {{/eq}}
                     {{/unless}}
                     {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-                    new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
                     {{/and}}
                     {{/each}}
                 ),
