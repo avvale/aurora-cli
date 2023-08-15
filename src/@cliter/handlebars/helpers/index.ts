@@ -32,6 +32,7 @@ import './get-relationship-module-name-property';
 import './get-relationship-module-names-property';
 import './get-resolver-name-additional-api';
 import './get-swagger-type-property';
+import './get-update-controller-properties';
 import './get-updated-events-properties';
 import './get-value-objects-properties';
 import './get-variable-name-additional-api';
