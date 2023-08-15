@@ -28,10 +28,10 @@ export class Properties
         return this.properties.some(property => property.type === PropertyType.ENUM);
     }
 
-    get hasIndex(): boolean
+    /* get hasIndex(): boolean
     {
         return this.properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && !property.isI18n);
-    }
+    } */
 
     get hasIndexI18n(): boolean
     {

@@ -1,4 +1,4 @@
-import { PropertyType, RelationshipType } from '../types';
+import { PropertyIndex, PropertyType, RelationshipType } from '../types';
 import { Property } from './property';
 
 /*********
@@ -16,6 +16,14 @@ export const hasI18nProperties = (
 ): boolean =>
 {
     return properties.some(property => property.isI18n);
+};
+
+// replace by Properties hasIndex
+export const hasIndexProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && !property.isI18n);
 };
 
 // replace by Properties valueObjects

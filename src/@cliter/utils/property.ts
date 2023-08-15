@@ -107,7 +107,7 @@ export class Property
     }
 
     // handlebars functions
-   /*  get hasTimezone(): boolean
+    /*  get hasTimezone(): boolean
     {
         return this.type === PropertyType.TIMESTAMP;
     } */
