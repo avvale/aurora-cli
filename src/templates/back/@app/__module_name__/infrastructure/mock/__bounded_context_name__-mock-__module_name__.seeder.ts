@@ -35,11 +35,11 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
 {{else eq (getNameProperty this) 'deletedAt'}}
                     new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}DeletedAt(null),
 {{else}}
-                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
 {{/eq}}
                     {{/unless}}
                     {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
                     {{/and}}
                     {{/each}}
                 ),

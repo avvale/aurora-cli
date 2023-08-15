@@ -7,7 +7,7 @@ export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = 
         type       : ColumnDataType.{{ getColumnDataType }},
         field      : '{{ toCamelCase (getNameProperty this) }}',
         sort       : '{{ toCamelCase (getNameProperty this) }}',
-        translation: '{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase name }}',
+        translation: '{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getNameProperty this) }}',
     },
     {{/if}}
     {{/each}}

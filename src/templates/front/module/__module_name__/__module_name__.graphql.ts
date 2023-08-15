@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const fields = `
     {{#each schema.aggregateProperties.withoutDeletedAt}}
     {{#if (isAllowProperty ../schema.moduleName this) }}
-    {{#unlessEq name 'id'}}
+    {{#unlessEq (getNameProperty this) 'id'}}
     {{ toCamelCase (getNameProperty this) }}
     {{/unlessEq}}
     {{/if}}
@@ -18,7 +18,7 @@ export const relationsFields = `
         constraint: $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}
     ) {
         {{#each getRelationshipProperties.withoutTimestampsWithoutRelationship}}
-        {{ name }}
+        {{ getNameProperty this }}
         {{/each}}
     }
     {{/eq}}

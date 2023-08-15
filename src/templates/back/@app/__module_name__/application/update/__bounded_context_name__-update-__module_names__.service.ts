@@ -23,7 +23,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         payload: {
             {{#each schema.aggregateProperties.updateService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getNameProperty this) }}?: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getNameProperty this) }}?: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
             {{/if}}
             {{/each}}
         },

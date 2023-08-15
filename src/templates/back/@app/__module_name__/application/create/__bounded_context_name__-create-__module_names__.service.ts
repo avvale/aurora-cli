@@ -44,7 +44,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{ toCamelCase schema.moduleNames }}: {
             {{#each schema.aggregateProperties.createItemsService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
             {{/if}}
             {{/each}}
         } [],

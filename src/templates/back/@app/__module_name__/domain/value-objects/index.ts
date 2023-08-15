@@ -6,7 +6,7 @@
         (
             object
                 items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
-                path=(sumStrings './' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase name))
+                path=(sumStrings './' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase (getNameProperty this)))
         )
 ~}}
 {{/if}}

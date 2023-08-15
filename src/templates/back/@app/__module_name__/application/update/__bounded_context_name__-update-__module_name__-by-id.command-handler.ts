@@ -43,10 +43,10 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
                 {{#each schema.aggregateProperties.updateCommandHandler}}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#if hasTimezone}}
-                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase (getNameProperty this) }}, { {{~#unless nullable}}{{#unlessEq name 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
+                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}, { {{~#unless nullable}}{{#unlessEq (getNameProperty this) 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}
                 {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase (getNameProperty this) }}{{#unless nullable}}{{#unlessEq name 'id'}}, { undefinable: true }{{/unlessEq}}{{/unless}}),
+                {{ toCamelCase (getNameProperty this) }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}(command.payload.{{ toCamelCase (getNameProperty this) }}{{#unless nullable}}{{#unlessEq (getNameProperty this) 'id'}}, { undefinable: true }{{/unlessEq}}{{/unless}}),
                 {{/unless}}
                 {{/if}}
                 {{/if}}

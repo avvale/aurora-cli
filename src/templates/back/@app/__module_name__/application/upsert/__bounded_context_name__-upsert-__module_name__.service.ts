@@ -46,7 +46,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             {{#each schema.aggregateProperties.upsertService}}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
             {{/unless}}
             {{/if}}
             {{/each}}

@@ -32,7 +32,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each (getAggregateProperties schema.aggregateProperties) }}
     {{#if (isAllowProperty ../schema.moduleName this)}}
-    {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+    {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
     {{/if}}
     {{/each}}
 
@@ -58,7 +58,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     constructor(
         {{#each (getAggregateProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this) }}
-        {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+        {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }},
         {{/if}}
         {{/each}}
 
@@ -111,7 +111,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     static register (
         {{#each (getAggregateProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this) }}
-        {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }},
+        {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }},
         {{/if}}
         {{/each}}
 
