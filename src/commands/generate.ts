@@ -1,5 +1,5 @@
 import { Args, Command, Flags } from '@oclif/core';
-import { AdditionalApis, BackHandler, ModuleDefinitionSchema, Prompter, Properties, Property, Scope, ScopeElement, PropertyType } from '../@cliter';
+import { BackHandler, ModuleDefinitionSchema, Prompter, Property, Scope, ScopeElement, PropertyType } from '../@cliter';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
 import { getBoundedContextModuleFromFlag } from '../@cliter/functions/common';
 

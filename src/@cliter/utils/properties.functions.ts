@@ -16,23 +16,12 @@ export const hasI18nProperties = (properties: Property[]): boolean =>
     return properties.some(property => property.isI18n);
 };
 
-/**********************
- * PROPERTIES FILTERS *
- **********************/
 // replace by Properties valueObjects
 export const getValueObjectsProperties = (properties: Property[]): Property[] =>
 {
     return properties
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to many relations
-};
-
-// replace by Properties withRelationshipManyToMany
-export const getRelationshipManyToManyProperties = (
-    properties: Property[],
-): Property[] =>
-{
-    return properties.filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
 };
 
 // replace by Properties withoutTimestamps
@@ -73,6 +62,56 @@ export const getForeignRelationshipProperties = (
             if (!item.relationship?.modulePath) return false;
             return item.relationship?.modulePath.split('/')[0] !== boundedContextName;
         });
+};
+
+// replace by Properties withRelationshipManyToMany
+export const getRelationshipManyToManyProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
+};
+
+// replace by Properties withImportRelationshipOneToOne
+export const getWithImportRelationshipOneToOneProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        // avoid duplicate self relations
+        .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
+        .filter(property => property.relationship?.type === RelationshipType.ONE_TO_ONE);
+};
+
+// replace by Properties withImportRelationshipManyToOne
+export const getWithImportRelationshipManyToOneProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        // avoid duplicate self relations
+        .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
+        .filter(property => property.relationship?.type === RelationshipType.MANY_TO_ONE);
+};
+
+// replace by Properties withImportRelationshipOneToMany
+export const getWithImportRelationshipOneToManyProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        // avoid duplicate self relations
+        .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
+        .filter(property => property.relationship?.type === RelationshipType.ONE_TO_MANY);
+};
+
+// replace by Properties withImportRelationshipManyToMany
+export const getWithImportRelationshipManyToManyProperties = (properties: Property[]): Property[] =>
+{
+    return properties
+        // avoid duplicate self relations
+        .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
+        .filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
 };
 
 /***************
@@ -203,15 +242,6 @@ export const getUpsertCommandHandlerProperties = (
         .filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-};
-
-// replace by Properties withImportRelationshipManyToMany
-export const getWithImportRelationshipManyToManyProperties = (properties: Property[]): Property[] =>
-{
-    return properties
-        // avoid duplicate self relations
-        .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
-        .filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
 };
 
 // replace by Properties isEnum

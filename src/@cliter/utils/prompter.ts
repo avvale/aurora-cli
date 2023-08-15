@@ -4,7 +4,6 @@ import { GenerateCommandState, Scope, RelationshipType, PropertyType } from '../
 import { Property } from './property';
 import { cliterConfig } from '../config/cliter.config';
 import { getBoundedContextModuleFromFlag } from '../functions/common';
-import { Properties } from './properties';
 import * as inquirer from 'inquirer';
 import * as Table from 'cli-table3';
 import * as _ from 'lodash';

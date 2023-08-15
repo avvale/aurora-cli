@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-import { AdditionalApis, Properties, Property } from '../utils';
+import { Properties, Property } from '../utils';
 import { AdditionalApi } from '../utils/additional-api';
 
 export interface CommandState
