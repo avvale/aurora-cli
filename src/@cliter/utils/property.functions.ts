@@ -176,4 +176,4 @@ export const getJavascriptTypeProperty = (
     if (property.type === PropertyType.RELATIONSHIP)                    return `${property.relationship?.aggregateName}[]`;
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
-}
+};
