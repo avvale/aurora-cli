@@ -7,6 +7,7 @@ import './constructor-injector-manager';
 import './get-aggregate-properties';
 import './get-class-name-additional-api';
 import './get-create-command-handler-properties';
+import './get-create-command-properties';
 import './get-create-controller-properties';
 import './get-create-service-properties';
 import './get-dto-input-properties';

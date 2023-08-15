@@ -5,9 +5,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     {{! don`t set nullable properties to avoid error "A required parameter cannot follow an optional parameter.ts(1016)" }}
     constructor(
         public readonly payload: {
-            {{#each schema.aggregateProperties.createCommand}}
+            {{#each (getCreateCommandProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getNameProperty this) }}{{#if nullable}}?{{/if}}: {{ getJavascriptTypeProperty this }};
+            {{ toCamelCase (getNameProperty this) }}{{#if nullable}}?{{/if}}: {{ getJavascriptTypeProperty this ../config }};
             {{/if}}
             {{/each}}
         },

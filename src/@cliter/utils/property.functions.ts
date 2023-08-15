@@ -173,7 +173,7 @@ export const getJavascriptTypeProperty = (
 ): string =>
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
-    if (property.type === PropertyType.RELATIONSHIP)                    return `${property.relationship?.aggregateName}[]`;
+    if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };

@@ -179,7 +179,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
         {{/eq}}
         {{/unless}}
     })
-    {{ toCamelCase (getNameProperty this) }}: {{{ getJavascriptTypeProperty this }}};
+    {{ toCamelCase (getNameProperty this) }}: {{{ getJavascriptTypeProperty this ../config }}};
     {{/if}}
     {{#if hasHasOneDecorator }}
 

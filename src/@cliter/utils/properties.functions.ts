@@ -115,6 +115,15 @@ export const getEnumProperties = (properties: Property[]): Property[] =>
     return properties.filter(property => property.type === PropertyType.ENUM);
 };
 
+// replace by Properties createCommand
+export const getCreateCommandProperties = (properties: Property[]): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
+        .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
+};
+
 /***********
  * GRAPHQL *
  ***********/
