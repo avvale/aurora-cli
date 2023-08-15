@@ -11,7 +11,7 @@
 ~}}
 {{/if}}
 {{/each}}
-{{#each schema.aggregateProperties.withRelationshipManyToMany}}
+{{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
 {{
     push ../exportsArray
         (

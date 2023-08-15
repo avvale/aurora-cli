@@ -5,15 +5,15 @@ import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/c
 {{/if}}
 import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
+{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
+{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}

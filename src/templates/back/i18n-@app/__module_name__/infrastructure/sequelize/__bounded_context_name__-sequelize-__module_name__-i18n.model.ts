@@ -8,13 +8,13 @@ import { DataTypes } from 'sequelize';
 {{#each schema.aggregateProperties.withRelationshipOneToOne}}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
+{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each schema.aggregateProperties.withRelationshipOneToMany}}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.aggregateProperties.withRelationshipManyToMany}}
+{{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}';
 {{/each}}

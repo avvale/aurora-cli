@@ -5,7 +5,7 @@
             (object items=(array 'ApiProperty') path='@nestjs/swagger')
     )
 ~}}
-{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{#unlessEq type ../propertyType.ID}}
 {{ 
     push ../importsArray

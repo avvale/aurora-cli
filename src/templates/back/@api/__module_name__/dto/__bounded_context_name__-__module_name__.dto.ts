@@ -14,7 +14,7 @@
         )
 ~}}
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipManyToOne}}
+{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
     push ../importsArray
@@ -22,13 +22,13 @@
 ~}}
 {{/unless}}
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipOneToMany}}
+{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema))))
 ~}}
 {{/each}}
-{{#each schema.aggregateProperties.withImportRelationshipOneToOne}}
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
         (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema))))

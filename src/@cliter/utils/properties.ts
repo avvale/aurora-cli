@@ -38,10 +38,10 @@ export class Properties
         return this.properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && property.isI18n);
     }
 
-    get withoutTimestamps(): Property[]
+    /* get withoutTimestamps(): Property[]
     {
         return this.properties.filter(property => !this.timestampFields.includes(property.name));
-    }
+    } */
 
     get withoutTimestampsWithoutRelationship(): Property[]
     {
@@ -78,45 +78,45 @@ export class Properties
     /***************************************************
      * get relationship for import to avoid duplicates *
      ***************************************************/
-    get withImportRelationshipOneToOne(): Property[]
+    /* get withImportRelationshipOneToOne(): Property[]
     {
         return this.properties
             // avoid duplicate self relations
             .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.ONE_TO_ONE);
-    }
+    } */
 
-    get withImportRelationshipManyToOne(): Property[]
+    /* get withImportRelationshipManyToOne(): Property[]
     {
         return this.properties
             // avoid duplicate self relations
             .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.MANY_TO_ONE);
-    }
+    } */
 
-    get withImportRelationshipOneToMany(): Property[]
+    /* get withImportRelationshipOneToMany(): Property[]
     {
         return this.properties
             // avoid duplicate self relations
             .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.ONE_TO_MANY);
-    }
+    } */
 
-    get withImportRelationshipManyToMany(): Property[]
+    /*  get withImportRelationshipManyToMany(): Property[]
     {
         return this.properties
             // avoid duplicate self relations
             .filter((value, index, self) => index === self.findIndex(t => (t.relationship?.modulePath === value.relationship?.modulePath && t.relationship?.aggregateName === value.relationship?.aggregateName)))
             .filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
-    }
+    } */
 
     /****************
      * RELATIONSHIP *
      ****************/
-    get withRelationship(): Property[]
+    /* get withRelationship(): Property[]
     {
         return this.properties.filter(property => Boolean(property.relationship));
-    }
+    } */
 
     get withRelationshipOneToOne(): Property[]
     {
@@ -144,20 +144,20 @@ export class Properties
         return this.properties.filter(property => property.relationship?.type === RelationshipType.ONE_TO_MANY);
     }
 
-    get withRelationshipManyToMany(): Property[]
+    /* get withRelationshipManyToMany(): Property[]
     {
         return this.properties.filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
-    }
+    } */
 
-    get withRelationshipType(): Property[]
+    /* get withRelationshipType(): Property[]
     {
         return this.properties.filter(property => property.type === PropertyType.RELATIONSHIP);
-    }
+    } */
 
-    get withTimezone(): Property[]
+    /* get withTimezone(): Property[]
     {
         return this.properties.filter(property => property.hasTimezone);
-    }
+    } */
 
     get id(): Property | undefined
     {
@@ -227,92 +227,92 @@ export class Properties
     /*************
      * AGGREGATE *
      *************/
-    get aggregate(): Property[]
+    /* get aggregate(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-    }
+    } */
 
     /************
      * COMMANDS *
      ************/
-    get createCommand(): Property[]
+    /* get createCommand(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-    }
+    } */
 
-    get updateCommand(): Property[]
+    /* get updateCommand(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                      // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field));   // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-    }
+    } */
 
-    get upsertCommand(): Property[]
+    /* get upsertCommand(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-    }
+    } */
 
     /********************
      * COMMAND HANDLERS *
      ********************/
-    get createCommandHandler(): Property[]
+    /* get createCommandHandler(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-    }
+    } */
 
-    get updateCommandHandler(): Property[]
+    /* get updateCommandHandler(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-    }
+    } */
 
-    get upsertCommandHandler(): Property[]
+    /* get upsertCommandHandler(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
-    }
+    } */
 
     /********************
      * QUERY HANDLERS *
      ********************/
-    get findQueryHandler(): Property[]
+    /* get findQueryHandler(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY); // exclude one to many relations
-    }
+    } */
 
-    get findByIdQueryHandler(): Property[]
+    /* get findByIdQueryHandler(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY); // exclude one to many relations
-    }
+    } */
 
-    get getQueryHandler(): Property[]
+    /* get getQueryHandler(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY); // exclude one to many relations
-    }
+    } */
 
     /************
      * SERVICES *
      ************/
-    get createService(): Property[]
+    /* get createService(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -323,9 +323,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get createItemsService(): Property[]
+    /* get createItemsService(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -335,9 +335,9 @@ export class Properties
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))         // exclude one to one relations without relationship field, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                         // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')); // exclude relationship id of i18n table
-    }
+    } */
 
-    get updateService(): Property[]
+    /* get updateService(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -348,9 +348,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get upsertService(): Property[]
+    /* get upsertService(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -360,34 +360,34 @@ export class Properties
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))         // exclude one to one relations without relationship field, is relation one to one without xxxxId
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                         // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')); // exclude relationship id of i18n table
-    }
+    } */
 
     // events
-    get createdEvent(): Property[]
+    /* get createdEvent(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get updatedEvent(): Property[]
+    /* get updatedEvent(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get deletedEvent(): Property[]
+    /* get deletedEvent(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship  field, is relation one to one without xxxxId
-    }
+    } */
 
     /***************
      * CONTROLLERS *
      ***************/
-    get createController(): Property[]
+    /* get createController(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -398,9 +398,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get updateController(): Property[]
+    /* get updateController(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -411,52 +411,52 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
     // resolvers
-    get createResolver(): Property[]
+    /* get createResolver(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get updateResolver(): Property[]
+    /* get updateResolver(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
     /***********
      * GRAPHQL *
      ***********/
-    get graphqlProperties(): Property[]
+    /* get graphqlProperties(): Property[]
     {
         return this.properties;
-    }
+    } */
 
-    get graphqlInputProperties(): Property[]
+    /* get graphqlInputProperties(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name)); // exclude timestamps
-    }
+    } */
 
     /********
      * REST *
      ********/
-    get dtoProperties(): Property[]
+    /* get dtoProperties(): Property[]
     {
         return this.properties;
-    }
+    } */
 
-    get dtoInputProperties(): Property[]
+    /* get dtoInputProperties(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name)); // exclude timestamps
-    }
+    } */
 
     /**********
      * MODELS *
@@ -466,10 +466,10 @@ export class Properties
         return this.properties; // exclude one to many relations
     }
 
-    get schemaRelations(): Property[]
+    /* get schemaRelations(): Property[]
     {
         return this.properties.filter(property => Boolean(property.relationship)); // only relationship
-    }
+    } */
 
     get columnsWithIndex(): Property[]
     {
@@ -652,10 +652,10 @@ export class Properties
         return this.properties.filter(property => property.type === PropertyType.BOOLEAN);
     }
 
-    get isEnum(): Property[]
+    /* get isEnum(): Property[]
     {
         return this.properties.filter(property => property.type === PropertyType.ENUM);
-    }
+    } */
 
     get isTimestamp(): Property[]
     {
@@ -703,14 +703,14 @@ export class Properties
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
     }
 
-    getForeignRelationship(boundedContextName: string): Property[]
+    /* getForeignRelationship(boundedContextName: string): Property[]
     {
         return this.withRelationship.filter(item =>
         {
             if (!item.relationship?.modulePath) return false;
             return item.relationship?.modulePath.split('/')[0] !== boundedContextName;
         });
-    }
+    } */
 
     add(property: Property): void
     {

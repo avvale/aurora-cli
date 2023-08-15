@@ -2,4 +2,5 @@
 import * as handlebars from 'handlebars';
 
 handlebars.registerPartial('manyToManyArrayItems',
-    `{{#each schema.properties.withRelationshipManyToMany}}, '{{ toCamelCase name }}'{{/each}}`);
+    `{{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}, '{{ toCamelCase name }}'{{/each}}`,
+);

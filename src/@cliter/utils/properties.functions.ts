@@ -11,13 +11,17 @@ export const deletedAtProperty: string[] = ['deletedAt'];
  * PROPERTIES *
  **************/
 // replace by Properties hasI18n
-export const hasI18nProperties = (properties: Property[]): boolean =>
+export const hasI18nProperties = (
+    properties: Property[],
+): boolean =>
 {
     return properties.some(property => property.isI18n);
 };
 
 // replace by Properties valueObjects
-export const getValueObjectsProperties = (properties: Property[]): Property[] =>
+export const getValueObjectsProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
@@ -25,7 +29,9 @@ export const getValueObjectsProperties = (properties: Property[]): Property[] =>
 };
 
 // replace by Properties withoutTimestamps
-export const getWithoutTimestampsProperties = (properties: Property[]): Property[] =>
+export const getWithoutTimestampsProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties.filter(property => !timestampProperties.includes(property.name));
 };
@@ -34,7 +40,9 @@ export const getWithoutTimestampsProperties = (properties: Property[]): Property
  * AGGREGATE *
  *************/
 // replace by Properties aggregate
-export const getAggregateProperties = (properties: Property[]): Property[] =>
+export const getAggregateProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
@@ -45,7 +53,9 @@ export const getAggregateProperties = (properties: Property[]): Property[] =>
  * RELATIONSHIP *
  ****************/
 // replace by Properties withRelationship
-export const getRelationshipProperties = (properties: Property[]): Property[] =>
+export const getRelationshipProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties.filter(property => Boolean(property.relationship));
 };
@@ -106,7 +116,9 @@ export const getWithImportRelationshipOneToManyProperties = (
 };
 
 // replace by Properties withImportRelationshipManyToMany
-export const getWithImportRelationshipManyToManyProperties = (properties: Property[]): Property[] =>
+export const getWithImportRelationshipManyToManyProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         // avoid duplicate self relations
@@ -245,7 +257,9 @@ export const getUpsertCommandHandlerProperties = (
 };
 
 // replace by Properties isEnum
-export const getEnumProperties = (properties: Property[]): Property[] =>
+export const getEnumProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties.filter(property => property.type === PropertyType.ENUM);
 };
@@ -290,7 +304,9 @@ export const getUpsertCommandProperties = (
  * EVENTS *
  **********/
 // replace by Properties createdEvent
-export const getCreatedEventProperties = (properties: Property[]): Property[] =>
+export const getCreatedEventProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
@@ -298,7 +314,9 @@ export const getCreatedEventProperties = (properties: Property[]): Property[] =>
 };
 
 // replace by Properties updatedEvent
-export const getUpdatedEventProperties = (properties: Property[]): Property[] =>
+export const getUpdatedEventProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
@@ -306,7 +324,9 @@ export const getUpdatedEventProperties = (properties: Property[]): Property[] =>
 };
 
 // replace by Properties deletedEvent
-export const getDeletedEventProperties = (properties: Property[]): Property[] =>
+export const getDeletedEventProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
@@ -317,13 +337,17 @@ export const getDeletedEventProperties = (properties: Property[]): Property[] =>
  * GRAPHQL *
  ***********/
 // replace by Properties graphqlProperties
-export const getGraphqlProperties = (properties: Property[]): Property[] =>
+export const getGraphqlProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties;
 };
 
 // replace by Properties graphqlInputProperties
-export const getGraphqlInputProperties = (properties: Property[]): Property[] =>
+export const getGraphqlInputProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         .filter(property => !timestampProperties.includes(property.name)); // exclude timestamps
@@ -333,13 +357,17 @@ export const getGraphqlInputProperties = (properties: Property[]): Property[] =>
  * REST *
  ********/
 // replace by Properties dtoProperties
-export const getDtoProperties = (properties: Property[]): Property[] =>
+export const getDtoProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties;
 };
 
 // replace by Properties dtoInputProperties
-export const gerDtoInputProperties = (properties: Property[]): Property[] =>
+export const gerDtoInputProperties = (
+    properties: Property[],
+): Property[] =>
 {
     return properties
         .filter(property => !timestampProperties.includes(property.name)); // exclude timestamps
