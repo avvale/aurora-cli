@@ -25,7 +25,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/each}}
         {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
-        public readonly {{ toCamelCase originName }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
+        public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/each}}
         {{#each schema.aggregateProperties.withRelationshipManyToOne}}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
@@ -33,10 +33,10 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         {{/unless}}
         {{/each}}
         {{#each schema.aggregateProperties.withRelationshipOneToMany}}
-        public readonly {{ toCamelCase originName }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response[],
+        public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response[],
         {{/each}}
         {{#each schema.aggregateProperties.withRelationshipManyToMany}}
-        public readonly {{ toCamelCase originName }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response[],
+        public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response[],
         {{/each}}
     ) {}
 }

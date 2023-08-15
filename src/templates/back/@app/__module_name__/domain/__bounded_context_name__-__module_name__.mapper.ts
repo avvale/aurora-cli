@@ -83,7 +83,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipManyToOne}}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
@@ -91,10 +91,10 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             {{/unless}}
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipOneToMany}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipManyToMany}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase originName }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
         );
     }
@@ -113,7 +113,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationship.field }}) : undefined,
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase originName }}) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipManyToOne}}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
@@ -121,10 +121,10 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             {{/unless}}
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipOneToMany}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase originName }}) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
             {{#each schema.aggregateProperties.withRelationshipManyToMany}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase originName }}) : undefined,
+            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
         );
     }

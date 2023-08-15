@@ -1,5 +1,5 @@
 {{#each (getEnumProperties schema.aggregateProperties) }}
-enum {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }} {
+enum {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} {
     {{#each enumOptions}}
     {{ . }}
     {{/each}}
@@ -14,35 +14,35 @@ type {{ schema.aggregateName }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: [{{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}]{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: [{{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}]{{#unless nullable }}!{{/unless}}
     {{#if relationship.isDenormalized}}
     {{ toCamelCase relationship.singularName }}Ids: JSON{{#unless nullable }}!{{/unless}}
     {{/if}}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: [{{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}]{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: [{{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}]{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
 {{#eq type ../propertyType.ID ~}}
-    {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}
 {{else ~}}
-    {{ toCamelCase originName }}: {{ relationship.aggregateName }}{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: {{ relationship.aggregateName }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{#if ../isCommonProperty}}
-    {{ toCamelCase originName }}: {{ getGraphqlTypeProperty this ../config }}{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}{{#unless nullable }}!{{/unless}}
 {{/if}}
 {{/if}}
 {{/each}}
@@ -55,7 +55,7 @@ input {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.m
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
@@ -65,17 +65,17 @@ input {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.m
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
 {{#eq type ../propertyType.ID ~}}
-    {{ toCamelCase originName }}: ID{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
 {{else ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Input{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Input{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{#if ../isCommonProperty}}
-    {{ toCamelCase originName }}: {{ getGraphqlTypeProperty this ../config }}{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}{{#unless nullable }}!{{/unless}}
 {{/if}}
 {{/if}}
 {{/each}}
@@ -88,7 +88,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: ID
+    {{ toCamelCase name }}: ID
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
@@ -98,17 +98,17 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
 {{#eq type ../propertyType.ID ~}}
-    {{ toCamelCase originName }}: ID
+    {{ toCamelCase name }}: ID
 {{else ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}ByIdInput
+    {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}ByIdInput
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}
 {{/eq}}
 {{#if ../isCommonProperty}}
-    {{ toCamelCase originName }}: {{ getGraphqlTypeProperty this ../config }}{{#eq (getNameProperty this) 'id'}}!{{/eq}}
+    {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}{{#eq (getNameProperty this) 'id'}}!{{/eq}}
 {{/if}}
 {{/if}}
 {{/each}}
@@ -121,7 +121,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: ID
+    {{ toCamelCase name }}: ID
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
@@ -131,17 +131,17 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
 {{#eq type ../propertyType.ID ~}}
-    {{ toCamelCase originName }}: ID
+    {{ toCamelCase name }}: ID
 {{else ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}Input
+    {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}Input
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase originName }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }}
+    {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}
 {{/eq}}
 {{#if ../isCommonProperty}}
-    {{ toCamelCase originName }}: {{ getGraphqlTypeProperty this ../config }}
+    {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}
 {{/if}}
 {{/if}}
 {{/each}}

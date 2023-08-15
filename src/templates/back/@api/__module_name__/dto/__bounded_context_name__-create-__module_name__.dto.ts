@@ -17,7 +17,7 @@
 {{#each (getEnumProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase name)) path='@api/graphql')
 ~}}
 {{/each}}
 {{/if}}
@@ -31,17 +31,17 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : String,
-        description: '{{ toCamelCase originName }} [input here api field description]',
-        example    : '{{ uuid originName }}',
+        description: '{{ toCamelCase name }} [input here api field description]',
+        example    : '{{ uuid name }}',
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: string;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
 
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : [String],
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
@@ -55,45 +55,45 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 {{#eq type ../propertyType.ID ~}}
     @ApiProperty({
         type       : String,
-        description: '{{ toCamelCase originName }} [input here api field description]',
-        example    : '{{ uuid originName }}',
+        description: '{{ toCamelCase name }} [input here api field description]',
+        example    : '{{ uuid name }}',
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: string;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
 
 {{else ~}}
     @ApiProperty({
         type       : {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto,
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto;
 
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }},
+        type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
         enum       : [{{{ enumOptionsArrayItems }}}],
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
 
 {{/eq}}
 {{#if ../isCommonProperty}}
     @ApiProperty({
         type       : {{ getSwaggerTypeProperty this ../config }},
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ getDtoTypeProperty this ../config }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getDtoTypeProperty this ../config }};
 
 {{/if}}
 {{/if}}

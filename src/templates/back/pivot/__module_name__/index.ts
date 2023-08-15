@@ -1,7 +1,7 @@
 // export commands
 {{#each schema.aggregateProperties.withRelationshipManyToMany}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase originName) '.command.ts'}}
-export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase originName }}Command } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase originName }}.command';
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.command.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}Command } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase name }}.command';
 {{/notInArray}}
 {{/each}}
 
@@ -140,8 +140,8 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{/notInArray}}
 {{#each schema.aggregateProperties.withRelationshipManyToMany}}
 {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase originName) '.command-handler.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase originName }}CommandHandler } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase originName }}.command-handler';
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.command-handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}CommandHandler } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase name }}.command-handler';
 {{/notInArray}}
 {{/if}}
 {{/each}}
@@ -227,8 +227,8 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{/notInArray}}
 {{#each schema.aggregateProperties.withRelationshipManyToMany}}
 {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase originName) '.service.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase originName }}Service } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase originName }}.service';
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.service.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}Service } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase name }}.service';
 {{/notInArray}}
 {{/if}}
 {{/each}}
@@ -263,8 +263,8 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#each schema.aggregateProperties.withRelationshipManyToMany}}
     {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase originName) '.command-handler.ts'}}
-    {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase originName }}CommandHandler,
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.command-handler.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}CommandHandler,
     {{/notInArray}}
     {{/if}}
     {{/each}}
@@ -351,8 +351,8 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#each schema.aggregateProperties.withRelationshipManyToMany}}
     {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase originName) '.service.ts'}}
-    {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase originName }}Service,
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.service.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}Service,
     {{/notInArray}}
     {{/if}}
     {{/each}}

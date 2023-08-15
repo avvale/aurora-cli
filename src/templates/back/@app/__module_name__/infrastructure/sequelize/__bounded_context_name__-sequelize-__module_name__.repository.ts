@@ -52,7 +52,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
         if (aggregate.{{ toCamelCase (getNameProperty this) }}.length > 0)
         {
             await model.$add(
-                '{{ toCamelCase originName }}',
+                '{{ toCamelCase name }}',
                 aggregate.{{ toCamelCase (getNameProperty this) }}.value,
                 createOptions,
             );
@@ -72,7 +72,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
         if (aggregate.{{ toCamelCase (getNameProperty this) }}.isArray())
         {
             await model.$set(
-                '{{ toCamelCase originName }}',
+                '{{ toCamelCase name }}',
                 aggregate.{{ toCamelCase (getNameProperty this) }}.value,
                 updateByIdOptions,
             );

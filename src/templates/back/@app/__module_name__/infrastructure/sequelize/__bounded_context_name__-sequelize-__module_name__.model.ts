@@ -227,7 +227,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         constraints: false,
         {{/if}}
     })
-    {{ toCamelCase originName }}: {{ relationship.aggregateName }}Model[];
+    {{ toCamelCase name }}: {{ relationship.aggregateName }}Model[];
     {{#if relationship.isDenormalized }}
 
     @Column({
@@ -247,7 +247,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         constraints: false,
         {{/if}}
     })
-    {{ toCamelCase originName }}: {{ relationship.aggregateName }}Model[];
+    {{ toCamelCase name }}: {{ relationship.aggregateName }}Model[];
     {{/if}}
     {{/if}}
 
