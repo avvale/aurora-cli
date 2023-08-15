@@ -3,7 +3,7 @@ export class {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase 
     constructor(
         {{#each schema.aggregateProperties.deletedEvent}}
         {{#if (isAllowProperty ../schema.moduleName this) }}
-        public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptType }},
+        public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptTypeProperty this }},
         {{/if}}
         {{/each}}
     ) {}

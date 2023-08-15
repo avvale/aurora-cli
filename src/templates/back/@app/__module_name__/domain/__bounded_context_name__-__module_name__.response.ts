@@ -18,7 +18,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     constructor(
         {{#each schema.aggregateProperties.response}}
         {{#if (isAllowProperty ../schema.moduleName this)}}
-        public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptType }},
+        public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptTypeProperty this }},
         {{/if}}
         {{/each}}
         {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}

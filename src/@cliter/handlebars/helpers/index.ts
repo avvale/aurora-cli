@@ -19,6 +19,7 @@ import './get-graphql-input-properties';
 import './get-graphql-properties';
 import './get-graphql-type-property';
 import './get-graphql-update-type-property';
+import './get-javascript-type-property';
 import './get-mutations-additional-apis';
 import './get-name-property';
 import './get-queries-additional-apis';

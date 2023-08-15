@@ -3,7 +3,7 @@ export class {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase 
     constructor(
         {{#each schema.aggregateProperties.updatedEvent}}
         {{#if (isAllowProperty ../schema.moduleName this) }}
-        public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptType }},
+        public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptTypeProperty this }},
         {{/if}}
         {{/each}}
     ) {}

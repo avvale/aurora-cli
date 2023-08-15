@@ -4,13 +4,13 @@ import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, Ini
 import { NewLineKind, SyntaxKind } from 'typescript';
 import { cliterConfig } from '../../config';
 import { ObjectTools } from '../object-tools';
-import { Properties } from '../properties';
 import { ArrayDriver } from './drivers/array.driver';
 import { ExportDriver } from './drivers/export.driver';
 import { ImportDriver } from './drivers/import.driver';
 import { InterfaceDriver } from './drivers/interface.driver';
 import { Property } from '../property';
 import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getRelationshipManyToManyProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
+import { getJavascriptTypeProperty } from '../property.functions';
 
 export class CodeWriter
 {
@@ -423,7 +423,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
@@ -441,7 +441,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
@@ -459,7 +459,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
@@ -477,7 +477,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + '?', type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + '?', type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
