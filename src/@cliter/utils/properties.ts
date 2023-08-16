@@ -118,31 +118,31 @@ export class Properties
         return this.properties.filter(property => Boolean(property.relationship));
     } */
 
-    get withRelationshipOneToOne(): Property[]
+    /* get withRelationshipOneToOne(): Property[]
     {
         return this.properties.filter(property => property.relationship?.type === RelationshipType.ONE_TO_ONE);
-    }
+    } */
 
-    get withRelationshipOneToOneWithRelationshipField(): Property[]
+    /* get withRelationshipOneToOneWithRelationshipField(): Property[]
     {
         return this.withRelationshipOneToOne.filter(property => Boolean(property.relationship?.field));
-    }
+    } */
 
-    get withRelationshipOneToOneWithoutRelationshipField(): Property[]
+    /* get withRelationshipOneToOneWithoutRelationshipField(): Property[]
     {
         return this.withRelationshipOneToOne.filter(property => !property.relationship?.field);
-    }
+    } */
 
-    get withRelationshipManyToOne(): Property[]
+    /* get withRelationshipManyToOne(): Property[]
     {
         return this.properties
             .filter(property => property.relationship?.type === RelationshipType.MANY_TO_ONE);
-    }
+    } */
 
-    get withRelationshipOneToMany(): Property[]
+    /* get withRelationshipOneToMany(): Property[]
     {
         return this.properties.filter(property => property.relationship?.type === RelationshipType.ONE_TO_MANY);
-    }
+    } */
 
     /* get withRelationshipManyToMany(): Property[]
     {

@@ -183,6 +183,46 @@ export const getWithImportRelationshipManyToManyProperties = (
         .filter(property => property.relationship?.type === RelationshipType.MANY_TO_MANY);
 };
 
+// replace by Properties withRelationshipOneToOne
+export const getWithRelationshipOneToOneProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.relationship?.type === RelationshipType.ONE_TO_ONE);
+};
+
+// replace by Properties withRelationshipOneToOneWithRelationshipField
+export const getWithRelationshipOneToOneWithRelationshipFieldProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return getWithRelationshipOneToOneProperties(properties).filter(property => Boolean(property.relationship?.field));
+};
+
+// replace by Properties withRelationshipOneToOneWithoutRelationshipField
+export const getWithRelationshipOneToOneWithoutRelationshipFieldProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return getWithRelationshipOneToOneProperties(properties).filter(property => !property.relationship?.field);
+};
+
+// replace by Properties withRelationshipManyToOne
+export const getWithRelationshipManyToOneProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.relationship?.type === RelationshipType.MANY_TO_ONE);
+};
+
+// replace by Properties withRelationshipOneToMany
+export const getWithRelationshipOneToManyProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.relationship?.type === RelationshipType.ONE_TO_MANY);
+};
+
 /***************
  * CONTROLLERS *
  ***************/

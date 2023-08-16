@@ -37,18 +37,18 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {{/each}}
 
     // eager relationship
-    {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+    {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
     {{ toCamelCase relationship.field }}: {{ toPascalCase relationship.aggregateName }};
     {{/each}}
-    {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+    {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
     {{ toCamelCase name }}: {{ toPascalCase relationship.aggregateName }};
     {{/each}}
-    {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+    {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
     {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
     {{ toCamelCase relationship.field }}: {{ toPascalCase relationship.aggregateName }};
     {{/unless}}
     {{/each}}
-    {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+    {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
     {{ toCamelCase name }}: {{ toPascalCase relationship.aggregateName }}[];
     {{/each}}
     {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
@@ -62,18 +62,18 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{/if}}
         {{/each}}
 
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregateName }},
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }},
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+        {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregateName }},
         {{/unless}}
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+        {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }}[],
         {{/each}}
         {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
@@ -89,18 +89,18 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{/each}}
 
         // eager relationship
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
         this.{{ toCamelCase relationship.field }} = {{ toCamelCase relationship.field }};
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
         this.{{ toCamelCase name }} = {{ toCamelCase name }};
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+        {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         this.{{ toCamelCase relationship.field }} = {{ toCamelCase relationship.field }};
         {{/unless}}
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+        {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
         this.{{ toCamelCase name }} = {{ toCamelCase name }};
         {{/each}}
         {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
@@ -115,18 +115,18 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{/if}}
         {{/each}}
 
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregateName }},
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }},
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+        {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         {{ toCamelCase relationship.field }}?: {{ toPascalCase relationship.aggregateName }},
         {{/unless}}
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+        {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }}[],
         {{/each}}
         {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
@@ -141,18 +141,18 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/if}}
             {{/each}}
 
-            {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+            {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
             {{ toCamelCase relationship.field }},
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+            {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
             {{ toCamelCase name }},
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+            {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }},
             {{/unless}}
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+            {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
             {{ toCamelCase name }},
             {{/each}}
             {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
@@ -216,18 +216,18 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/each}}
 
             // eager relationship
-            {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+            {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+            {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.toDTO(),
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+            {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/unless}}
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+            {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
             {{/each}}
             {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
@@ -272,18 +272,18 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/each}}
 
             // eager relationship
-            {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+            {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+            {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.toDTO(),
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+            {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
             {{/unless}}
             {{/each}}
-            {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+            {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
             {{/each}}
             {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}

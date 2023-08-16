@@ -21,18 +21,18 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         public readonly {{ toCamelCase (getNameProperty this) }}: {{ getJavascriptTypeProperty this ../config }},
         {{/if}}
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
         public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToOneWithoutRelationshipField}}
+        {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
         public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipManyToOne}}
+        {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/unless}}
         {{/each}}
-        {{#each schema.aggregateProperties.withRelationshipOneToMany}}
+        {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
         public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response[],
         {{/each}}
         {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
