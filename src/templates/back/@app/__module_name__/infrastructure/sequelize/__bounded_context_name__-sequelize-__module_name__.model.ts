@@ -18,7 +18,7 @@ import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packag
 {{/each}}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-import { {{ relationship.pivot.aggregateName }}Model } from '{{ ../config.appContainer }}/{{ relationship.pivot.modulePath }}';
+import { {{ relationship.pivot.aggregateName }}Model } from '{{ ../config.appContainer }}/{{ toKebabCase relationship.pivot.boundedContextName }}/{{ toKebabCase relationship.pivot.moduleName }}';
 {{/each}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
@@ -219,10 +219,10 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if (hasHasBelongsToManyDecoratorProperty this) }}
 
-    {{#if relationship.pivot.aggregate }}
+    {{#if relationship.pivot.aggregateName }}
     @BelongsToMany(() => {{ relationship.aggregateName }}Model, {
-        through: () => {{ relationship.pivot.aggregate }}Model,
-        uniqueKey: 'Uq01{{ toPascalCase relationship.pivot.aggregate }}',
+        through: () => {{ relationship.pivot.aggregateName }}Model,
+        uniqueKey: 'Uq01{{ toPascalCase relationship.pivot.aggregateName }}',
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
@@ -242,7 +242,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{else}}
     @BelongsToMany(() => {{ relationship.aggregateName }}Model, {
-        through: () => {{ relationship.pivot.aggregate }}Model,
+        through: () => {{ relationship.pivot.aggregateName }}Model,
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}

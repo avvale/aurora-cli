@@ -16,7 +16,7 @@ import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packag
 {{/each}}
 {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
 import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-import { {{ relationship.pivot.aggregate }}Model } from '{{ config.appContainer }}/{{ relationship.pivot.modulePath }}';
+import { {{ relationship.pivot.aggregateName }}Model } from '{{ config.appContainer }}/{{ toKebabCase relationship.pivot.boundedContextName }}/{{ toKebabCase relationship.pivot.moduleName }}';
 {{/each}}
 
 @Table({
