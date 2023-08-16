@@ -285,13 +285,13 @@ export class Property
         return this.config.propertyTypesEquivalenceJavascriptTypes[this.type];
     } */
 
-    get getJavascriptModelType(): string
+    /* get getJavascriptModelType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
         if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregateName}[]`;
 
         return this.config.propertyTypesEquivalenceJavascriptModelTypes[this.type];
-    }
+    } */
 
     /* get getSequelizeType(): string
     {

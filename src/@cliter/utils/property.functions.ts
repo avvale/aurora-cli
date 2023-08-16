@@ -49,6 +49,18 @@ export const getSequelizeTypeProperty = (
     return config.propertyTypesEquivalenceSequelizeTypes[property.type](parameter);
 };
 
+// replace by Property getJavascriptModelType
+export const getJavascriptModelTypeProperty = (
+    property: Property,
+    config: CliterConfig,
+): string =>
+{
+    if (property.relationship?.type === RelationshipType.MANY_TO_MANY)  return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
+    if (property.type === PropertyType.RELATIONSHIP)                    return `${property.relationship?.aggregateName}[]`;
+
+    return config.propertyTypesEquivalenceJavascriptModelTypes[property.type];
+};
+
 /****************
  * RELATIONSHIP *
  ****************/

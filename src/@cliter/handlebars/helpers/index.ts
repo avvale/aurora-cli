@@ -24,6 +24,7 @@ import './get-graphql-properties';
 import './get-graphql-type-property';
 import './get-graphql-update-type-property';
 import './get-indexes-properties';
+import './get-javascript-model-type-property';
 import './get-javascript-type-property';
 import './get-mapper-properties';
 import './get-mock-properties';
