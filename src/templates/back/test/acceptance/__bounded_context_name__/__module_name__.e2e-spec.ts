@@ -511,7 +511,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLCreateQuery}}
+                            {{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -579,7 +579,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query:$query)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
+                            {{#each (getPostmanGraphqlFindQueryProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -608,7 +608,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLCreateQuery}}
+                            {{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -639,7 +639,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query:$query)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
+                            {{#each (getPostmanGraphqlFindQueryProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -676,7 +676,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query:$query)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
+                            {{#each (getPostmanGraphqlFindQueryProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -711,7 +711,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLFindQuery}}
+                            {{#each (getPostmanGraphqlFindQueryProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -741,7 +741,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLFindByIdQuery}}
+                            {{#each (getPostmanGraphqlFindByIdQueryProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -769,7 +769,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (payload:$payload)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLUpdateQuery}}
+                            {{#each (getPostmanGraphqlUpdateMutationProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -802,7 +802,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (payload:$payload)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLUpdateQuery}}
+                            {{#each (getPostmanGraphqlUpdateMutationProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -833,7 +833,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }} (payload:$payload query:$query)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLUpdateQuery}}
+                            {{#each (getPostmanGraphqlUpdateMutationProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -869,7 +869,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}
+                            {{#each (getPostmanGraphqlDeleteMutationProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
@@ -899,7 +899,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)
                         {
-                            {{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}
+                            {{#each (getPostmanGraphqlDeleteMutationProperties schema.aggregateProperties) }}
                             {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }

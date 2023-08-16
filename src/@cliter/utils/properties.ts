@@ -479,7 +479,7 @@ export class Properties
     /***********
      * POSTMAN *
      ***********/
-    get postmanGraphQLCreateQuery(): Property[]
+    /* get postmanGraphQLCreateQuery(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -491,9 +491,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get postmanGraphQLCreateVariables(): Property[]
+    /* get postmanGraphQLCreateVariables(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -505,9 +505,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get postmanGraphQLGetQuery(): Property[]
+    /* get postmanGraphQLGetQuery(): Property[]
     {
         return this.properties
             .filter(property => !this.deletedAtField.includes(property.name))                                                     // exclude deleteAt
@@ -515,9 +515,9 @@ export class Properties
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                     // exclude one to many relations
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                    // exclude many to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get postmanGraphQLFindQuery(): Property[]
+    /* get postmanGraphQLFindQuery(): Property[]
     {
         return this.properties
             .filter(property => !this.deletedAtField.includes(property.name))                                                     // exclude deleteAt
@@ -525,9 +525,9 @@ export class Properties
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                     // exclude one to many relations
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                    // exclude many to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get postmanGraphQLFindByIdQuery(): Property[]
+    /* get postmanGraphQLFindByIdQuery(): Property[]
     {
         return this.properties
             .filter(property => !this.deletedAtField.includes(property.name))                                                     // exclude deleteAt
@@ -535,9 +535,9 @@ export class Properties
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                     // exclude one to many relations
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                    // exclude many to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get postmanGraphQLUpdateQuery(): Property[]
+    /* get postmanGraphQLUpdateQuery(): Property[]
     {
         return this.properties
             .filter(property => !this.deletedAtField.includes(property.name))                                                     // exclude deleteAt
@@ -545,9 +545,9 @@ export class Properties
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                     // exclude one to many relations
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                    // exclude many to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get postmanGraphQLUpdateVariables(): Property[]
+    /* get postmanGraphQLUpdateVariables(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -558,9 +558,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get postmanGraphQLDeleteQuery(): Property[]
+    /* get postmanGraphQLDeleteQuery(): Property[]
     {
         return this.properties
             .filter(property => !this.deletedAtField.includes(property.name))                                                     // exclude deleteAt
@@ -568,23 +568,23 @@ export class Properties
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                     // exclude one to many relations
             .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                    // exclude many to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
-    }
+    } */
 
-    get postmanRestCreate(): Property[]
+    /* get postmanRestCreate(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to many relations
-    }
+    } */
 
-    get postmanRestUpdate(): Property[]
+    /* get postmanRestUpdate(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))                                                    // exclude timestamps
             .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
             .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to many relations
-    }
+    } */
 
     /***********
      * TESTING *
