@@ -13,10 +13,10 @@ export class Properties
         for (const property of this.properties) yield property;
     }
 
-    get length(): number
+    /*  get length(): number
     {
         return this.properties.length;
-    }
+    } */
 
     get hasI18n(): boolean
     {
