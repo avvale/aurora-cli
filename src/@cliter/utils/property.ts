@@ -171,7 +171,7 @@ export class Property
     }
 
     // property names
-    get originName(): string
+    /* get originName(): string
     {
         return this._name;
     }
@@ -181,7 +181,7 @@ export class Property
         // properties that represent many to many relationships, are arrays of ids
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY) return `${this.relationship.singularName}Ids`;
         return this._name;
-    }
+    } */
 
     get enumOptionsArrayItems(): string | undefined
     {
@@ -193,7 +193,7 @@ export class Property
         return typeof this._enumOptions === 'string' ? this._enumOptions.split(',').map(item => item.trim().toUpperCase()) : undefined;
     }
 
-    get getRelationshipBoundedContextNameProperty(): string | null
+    /* get getRelationshipBoundedContextName(): string | null
     {
         try
         {
@@ -205,9 +205,9 @@ export class Property
         }
 
         return null;
-    }
+    } */
 
-    get getRelationshipModuleNameProperty(): string | null
+    /* get getRelationshipModuleName(): string | null
     {
         try
         {
@@ -219,9 +219,9 @@ export class Property
         }
 
         return null;
-    }
+    } */
 
-    get getRelationshipModuleNamesProperty(): string | null
+    /* get getRelationshipModuleNames(): string | null
     {
         try
         {
@@ -233,7 +233,7 @@ export class Property
         }
 
         return null;
-    }
+    } */
 
     get getRelationshipProperties(): Property[] | null
     {
@@ -277,13 +277,13 @@ export class Property
         return null;
     }
 
-    get getJavascriptType(): string
+    /* get getJavascriptType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)    return this.config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
         if (this.type === PropertyType.RELATIONSHIP)                    return `${this.relationship?.aggregateName}[]`;
 
         return this.config.propertyTypesEquivalenceJavascriptTypes[this.type];
-    }
+    } */
 
     get getJavascriptModelType(): string
     {
@@ -307,44 +307,44 @@ export class Property
     /********
      * REST *
      ********/
-    get getSwaggerType(): string
+    /* get getSwaggerType(): string
     {
         return this.config.propertyTypesEquivalenceSwaggerTypes[this.type];
-    }
+    } */
 
-    get getDtoType(): string
+    /* get getDtoType(): string
     {
         return this.config.propertyTypesEquivalenceDtoTypes[this.type];
-    }
+    } */
 
     /***********
      * GraphQL *
      ***********/
-    get getGraphqlType(): string | undefined
+    /* get getGraphqlType(): string | undefined
     {
         if (this.relationship?.type === RelationshipType.ONE_TO_MANY || this.relationship?.type === RelationshipType.MANY_TO_MANY) return `[${this.relationship?.aggregateName}]`;
         if (this.relationship?.type === RelationshipType.MANY_TO_ONE)                                                              return `${this.relationship?.aggregateName}`;
         if (this.relationship?.type === RelationshipType.ONE_TO_ONE)                                                               return `${this.relationship?.aggregateName}`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
-    }
+    } */
 
-    get getGraphqlCreateType(): string
+    /* get getGraphqlCreateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                          return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
         if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextNameProperty?.toPascalCase()}Create${this.getRelationshipModuleNameProperty?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
-    }
+    } */
 
-    get getGraphqlUpdateType(): string
+    /* get getGraphqlUpdateType(): string
     {
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY)                           return this.config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
         if (this.relationship?.type === RelationshipType.ONE_TO_ONE && !this.relationship.field) return `${this.getRelationshipBoundedContextNameProperty?.toPascalCase()}Update${this.getRelationshipModuleNameProperty?.toPascalCase()}Input`;
         return this.config.propertyTypesEquivalenceQraphqlTypes[this.type];
-    }
+    } */
 
-    /*************
-     * DASHBOARD *
-     *************/
+    /*********
+     * FRONT *
+     *********/
     get getColumnDataType(): string
     {
         return this.config.propertyTypesEquivalenceDashboardColumnDataTypes[this.type];
@@ -391,7 +391,7 @@ export class Property
         };
     }
 
-    private throwRelationshipEntityNorCreatedProperty(): void
+   /*  private throwRelationshipEntityNorCreated(): void
     {
         throw new Error(`
 Getting relationship module path for ${this.name} property.
@@ -414,5 +414,5 @@ for the entity related ${this.relationship?.modulePath}, with the command:
 aurora load back module -n=${this.schema?.boundedContextName}/${this.schema?.moduleName} -ft
 
 `);
-    }
+    } */
 }
