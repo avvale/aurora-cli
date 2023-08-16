@@ -6,5 +6,8 @@ handlebars.registerHelper('getSwaggerTypeProperty', function(
     config: CliterConfig,
 ): string
 {
-    return getSwaggerTypeProperty(property, config);
+    return getSwaggerTypeProperty(
+        property,
+        config,
+    );
 });

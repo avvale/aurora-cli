@@ -5,5 +5,7 @@ handlebars.registerHelper('getIndexesProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getIndexesProperties(properties);
+    return getIndexesProperties(
+        properties,
+    );
 });

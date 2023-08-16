@@ -5,5 +5,7 @@ handlebars.registerHelper('hasI18nProperties', function(
     properties: Property[],
 ): boolean
 {
-    return hasI18nProperties(properties);
+    return hasI18nProperties(
+        properties,
+    );
 });

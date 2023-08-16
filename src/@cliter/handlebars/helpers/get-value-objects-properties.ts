@@ -5,5 +5,7 @@ handlebars.registerHelper('getValueObjectsProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getValueObjectsProperties(properties);
+    return getValueObjectsProperties(
+        properties,
+    );
 });

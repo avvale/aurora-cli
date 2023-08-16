@@ -5,5 +5,7 @@ handlebars.registerHelper('getUpdatedEventProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getUpdatedEventProperties(properties);
+    return getUpdatedEventProperties(
+        properties,
+    );
 });

@@ -5,5 +5,7 @@ handlebars.registerHelper('getCreateCommandProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getCreateCommandProperties(properties);
+    return getCreateCommandProperties(
+        properties,
+    );
 });

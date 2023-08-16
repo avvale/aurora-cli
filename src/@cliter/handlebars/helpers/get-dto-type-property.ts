@@ -6,5 +6,8 @@ handlebars.registerHelper('getDtoTypeProperty', function(
     config: CliterConfig,
 ): string
 {
-    return getDtoTypeProperty(property, config);
+    return getDtoTypeProperty(
+        property,
+        config,
+    );
 });

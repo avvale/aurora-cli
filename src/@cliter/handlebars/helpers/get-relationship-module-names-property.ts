@@ -6,5 +6,8 @@ handlebars.registerHelper('getRelationshipModuleNamesProperty', function(
     schema: ModuleDefinitionSchema,
 ): string | null
 {
-    return getRelationshipModuleNamesProperty(property, schema);
+    return getRelationshipModuleNamesProperty(
+        property,
+        schema,
+    );
 });

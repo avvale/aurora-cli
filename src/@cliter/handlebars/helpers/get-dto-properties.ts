@@ -5,5 +5,7 @@ handlebars.registerHelper('getDtoProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getDtoProperties(properties);
+    return getDtoProperties(
+        properties,
+    );
 });

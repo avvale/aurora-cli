@@ -6,5 +6,7 @@ handlebars.registerHelper('getClassNameAdditionalApi', function(
     additionalApi: AdditionalApi,
 ): string
 {
-    return getClassNameAdditionalApi(additionalApi);
+    return getClassNameAdditionalApi(
+        additionalApi,
+    );
 });

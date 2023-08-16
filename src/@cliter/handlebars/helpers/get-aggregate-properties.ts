@@ -5,5 +5,7 @@ handlebars.registerHelper('getAggregateProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getAggregateProperties(properties);
+    return getAggregateProperties(
+        properties,
+    );
 });

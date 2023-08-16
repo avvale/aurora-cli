@@ -5,5 +5,7 @@ handlebars.registerHelper('getWithImportRelationshipOneToManyProperties', functi
     properties: Property[],
 ): Property[]
 {
-    return getWithImportRelationshipOneToManyProperties(properties);
+    return getWithImportRelationshipOneToManyProperties(
+        properties,
+    );
 });

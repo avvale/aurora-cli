@@ -5,5 +5,7 @@ handlebars.registerHelper('isTimezoneProperty', function(
     property: Property,
 ): boolean
 {
-    return isTimezoneProperty(property);
+    return isTimezoneProperty(
+        property,
+    );
 });

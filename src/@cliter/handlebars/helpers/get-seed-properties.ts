@@ -5,5 +5,7 @@ handlebars.registerHelper('getSeedProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getSeedProperties(properties);
+    return getSeedProperties(
+        properties,
+    );
 });

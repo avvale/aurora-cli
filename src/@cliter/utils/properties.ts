@@ -589,7 +589,7 @@ export class Properties
     /***********
      * TESTING *
      ***********/
-    get test(): Property[]
+    /* get test(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -600,9 +600,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get isNotNullable(): Property[]
+    /* get isNotNullable(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -610,9 +610,9 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get hasLength(): Property[]
+    /* get hasLength(): Property[]
     {
         if (!this.schema) throw new Error('Schema property is not defined');
 
@@ -620,37 +620,37 @@ export class Properties
             .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
             .filter(property => !property.isI18n || (property.isI18n && property.name !== this.schema.moduleName.toCamelCase() + 'Id')) // exclude relationship id of i18n table
             .filter(property => !this.hasI18n || (this.hasI18n && property.name !== 'availableLangs'));                                 // exclude availableLangs if has i18n table
-    }
+    } */
 
-    get hasMaxLength(): Property[]
+    /* get hasMaxLength(): Property[]
     {
         return this.properties.filter(property => Boolean(property.maxLength));
-    }
+    } */
 
-    get hasMinLength(): Property[]
+    /* get hasMinLength(): Property[]
     {
         return this.properties.filter(property => Boolean(property.minLength));
-    }
+    } */
 
-    get decimalProperties(): Property[]
+    /* get decimalProperties(): Property[]
     {
         return this.properties.filter(property => property.type === PropertyType.DECIMAL);
-    }
+    } */
 
-    get isInteger(): Property[]
+    /* get isInteger(): Property[]
     {
         return this.properties.filter(property => property.type === PropertyType.INT);
-    }
+    } */
 
-    get isIntegerUnsigned(): Property[]
+    /* get isIntegerUnsigned(): Property[]
     {
         return this.properties.filter(property => property.type === PropertyType['INT.UNSIGNED']);
-    }
+    } */
 
-    get isBoolean(): Property[]
+    /* get isBoolean(): Property[]
     {
         return this.properties.filter(property => property.type === PropertyType.BOOLEAN);
-    }
+    } */
 
     /* get isEnum(): Property[]
     {

@@ -5,5 +5,7 @@ handlebars.registerHelper('getGraphqlInputProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getGraphqlInputProperties(properties);
+    return getGraphqlInputProperties(
+        properties,
+    );
 });

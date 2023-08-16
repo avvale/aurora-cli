@@ -6,5 +6,7 @@ handlebars.registerHelper('getMutationsAdditionalApis', function(
     additionalApis: AdditionalApi[],
 ): AdditionalApi[]
 {
-    return getMutationsAdditionalApis(additionalApis);
+    return getMutationsAdditionalApis(
+        additionalApis,
+    );
 });

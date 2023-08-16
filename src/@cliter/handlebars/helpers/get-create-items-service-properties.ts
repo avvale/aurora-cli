@@ -6,5 +6,8 @@ handlebars.registerHelper('getCreateItemsServiceProperties', function(
     moduleName: string,
 ): Property[]
 {
-    return getCreateItemsServiceProperties(properties, moduleName);
+    return getCreateItemsServiceProperties(
+        properties,
+        moduleName,
+    );
 });

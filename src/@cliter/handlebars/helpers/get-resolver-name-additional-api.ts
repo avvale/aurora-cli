@@ -6,5 +6,7 @@ handlebars.registerHelper('getResolverNameAdditionalApi', function(
     additionalApi: AdditionalApi,
 ): string
 {
-    return getResolverNameAdditionalApi(additionalApi);
+    return getResolverNameAdditionalApi(
+        additionalApi,
+    );
 });

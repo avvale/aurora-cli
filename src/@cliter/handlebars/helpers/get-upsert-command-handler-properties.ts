@@ -5,5 +5,7 @@ handlebars.registerHelper('getUpsertCommandHandlerProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getUpsertCommandHandlerProperties(properties);
+    return getUpsertCommandHandlerProperties(
+        properties,
+    );
 });

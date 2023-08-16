@@ -6,5 +6,7 @@ handlebars.registerHelper('getQueriesAdditionalApis', function(
     additionalApis: AdditionalApi[],
 ): AdditionalApi[]
 {
-    return getQueriesAdditionalApis(additionalApis);
+    return getQueriesAdditionalApis(
+        additionalApis,
+    );
 });

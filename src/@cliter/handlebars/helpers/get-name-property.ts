@@ -5,5 +5,7 @@ handlebars.registerHelper('getNameProperty', function(
     property: Property,
 ): string
 {
-    return getNameProperty(property);
+    return getNameProperty(
+        property,
+    );
 });

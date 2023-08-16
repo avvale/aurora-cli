@@ -5,5 +5,7 @@ handlebars.registerHelper('hasColumnDecoratorProperty', function(
     property: Property,
 ): boolean
 {
-    return hasColumnDecoratorProperty(property);
+    return hasColumnDecoratorProperty(
+        property,
+    );
 });

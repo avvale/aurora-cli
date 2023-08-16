@@ -6,5 +6,8 @@ handlebars.registerHelper('getJavascriptTypeProperty', function(
     config: CliterConfig,
 ): string | undefined
 {
-    return getJavascriptTypeProperty(property, config);
+    return getJavascriptTypeProperty(
+        property,
+        config,
+    );
 });

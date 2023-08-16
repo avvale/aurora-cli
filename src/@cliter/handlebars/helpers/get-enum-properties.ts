@@ -5,5 +5,7 @@ handlebars.registerHelper('getEnumProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getEnumProperties(properties);
+    return getEnumProperties(
+        properties,
+    );
 });

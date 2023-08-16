@@ -5,5 +5,7 @@ handlebars.registerHelper('gerDtoInputProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return gerDtoInputProperties(properties);
+    return gerDtoInputProperties(
+        properties,
+    );
 });

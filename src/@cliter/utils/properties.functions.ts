@@ -192,6 +192,8 @@ export const getCreateControllerProperties = (
     moduleName: string,
 ): Property[] =>
 {
+    if (!moduleName) throw new Error('Module name parameter is not defined in getCreateControllerProperties function');
+
     return properties
         .filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
@@ -207,6 +209,8 @@ export const getUpdateControllerProperties = (
     moduleName: string,
 ): Property[] =>
 {
+    if (!moduleName) throw new Error('Module name parameter is not defined in getUpdateControllerProperties function');
+
     return properties
         .filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
@@ -225,6 +229,8 @@ export const getCreateServiceProperties = (
     moduleName: string,
 ): Property[] =>
 {
+    if (!moduleName) throw new Error('Module name parameter is not defined in getCreateServiceProperties function');
+
     return properties
         .filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
@@ -240,6 +246,8 @@ export const getCreateItemsServiceProperties = (
     moduleName: string,
 ): Property[] =>
 {
+    if (!moduleName) throw new Error('Module name parameter is not defined in getCreateItemsServiceProperties function');
+
     return properties
         .filter(property => !timestampProperties.includes(property.name))                                                           // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                           // exclude one to many relations
@@ -254,6 +262,8 @@ export const getUpdateServiceProperties = (
     moduleName: string,
 ): Property[] =>
 {
+    if (!moduleName) throw new Error('Module name parameter is not defined in getUpdateServiceProperties function');
+
     return properties
         .filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
@@ -269,6 +279,8 @@ export const getUpsertServiceProperties = (
     moduleName: string,
 ): Property[] =>
 {
+    if (!moduleName) throw new Error('Module name parameter is not defined in getUpsertServiceProperties function');
+
     return properties
         .filter(property => !timestampProperties.includes(property.name))                                                       // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
@@ -428,4 +440,101 @@ export const gerDtoInputProperties = (
 {
     return properties
         .filter(property => !timestampProperties.includes(property.name)); // exclude timestamps
+};
+
+/***********
+ * TESTING *
+ ***********/
+// replace by Properties test
+export const getTestProperties = (
+    properties: Property[],
+    moduleName: string,
+): Property[] =>
+{
+    if (!moduleName) throw new Error('Module name parameter is not defined in getTestProperties function');
+
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
+        .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
+        .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to many relations
+        .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
+        .filter(property => !property.isI18n || (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'))                 // exclude relationship id of i18n table
+        .filter(property => !hasI18nProperties(properties) || (hasI18nProperties(properties) && property.name !== 'availableLangs'));   // exclude availableLangs if has i18n table
+}
+
+// replace by Properties isNotNullable
+export const getNotNullableProperties = (
+    properties: Property[],
+    moduleName: string,
+): Property[] =>
+{
+    if (!moduleName) throw new Error('Module name parameter is not defined in getNotNullableProperties function');
+
+    return properties.filter(property => property.nullable === false)
+        .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
+        .filter(property => !property.isI18n || (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'))                 // exclude relationship id of i18n table
+        .filter(property => !hasI18nProperties(properties) || (hasI18nProperties(properties) && property.name !== 'availableLangs'));   // exclude availableLangs if has i18n table
+};
+
+// replace by Properties hasLength
+export const getLengthProperties = (
+    properties: Property[],
+    moduleName: string,
+): Property[] =>
+{
+    if (!moduleName) throw new Error('Module name parameter is not defined in getLengthProperties function');
+
+    // eslint-disable-next-line no-implicit-coercion, unicorn/explicit-length-check
+    return properties.filter(property => !!property.length)
+        .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
+        .filter(property => !property.isI18n || (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'))     // exclude relationship id of i18n table
+        .filter(property => !hasI18nProperties(properties) || (hasI18nProperties(properties) && property.name !== 'availableLangs'));   // exclude availableLangs if has i18n table
+};
+
+// replace by Properties hasMaxLength
+export const getMaxLengthProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => Boolean(property.maxLength));
+};
+
+// replace by Properties hasMinLength
+export const getMinLengthProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => Boolean(property.minLength));
+};
+
+// replace by Properties decimalProperties
+export const getDecimalProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.type === PropertyType.DECIMAL);
+};
+
+// replace by Properties isInteger
+export const getIntegerProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.type === PropertyType.INT);
+};
+
+// replace by Properties isIntegerUnsigned
+export const getIntegerUnsignedProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.type === PropertyType['INT.UNSIGNED']);
+};
+
+// replace by Properties isBoolean
+export const getBooleanProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.type === PropertyType.BOOLEAN);
 };

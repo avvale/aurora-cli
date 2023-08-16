@@ -5,5 +5,7 @@ handlebars.registerHelper('getMapperProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getMapperProperties(properties);
+    return getMapperProperties(
+        properties,
+    );
 });

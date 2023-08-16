@@ -131,7 +131,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         await app.init();
     });
 
-    {{#each schema.aggregateProperties.isNotNullable  as |notNullPropety notNullPropetyId|}}
+    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullPropety notNullPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -149,7 +149,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each schema.aggregateProperties.isNotNullable  as |notNullPropety notNullPropetyId|}}
+    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullPropety notNullPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -167,7 +167,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each schema.aggregateProperties.hasLength  as |hasLengthPropety hasLengthPropetyId|}}
+    {{#each (getLengthProperties schema.aggregateProperties)  as |hasLengthPropety hasLengthPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is not allowed, must be a length of {{ hasLengthPropety.length }}', () =>
     {
         return request(app.getHttpServer())
@@ -185,7 +185,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each schema.aggregateProperties.hasMaxLength  as |hasMaxLengthPropety hasMaxLengthPropetyId|}}
+    {{#each (getMaxLengthProperties schema.aggregateProperties)  as |hasMaxLengthPropety hasMaxLengthPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}', () =>
     {
         return request(app.getHttpServer())
@@ -203,7 +203,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each schema.aggregateProperties.hasMinLength  as |hasMinLengthPropety hasMinLengthPropetyId|}}
+    {{#each (getMaxLengthProperties schema.aggregateProperties)  as |hasMinLengthPropety hasMinLengthPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}', () =>
     {
         return request(app.getHttpServer())
@@ -220,7 +220,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each schema.aggregateProperties.isInteger  as |isIntegerPropety isIntegerPropetyId|}}
+    {{#each (getIntegerProperties schema.aggregateProperties)  as |isIntegerPropety isIntegerPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a integer value', () =>
     {
         return request(app.getHttpServer())
@@ -237,7 +237,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each schema.aggregateProperties.isIntegerUnsigned  as |isIntegerUnsignedPropety isIntegerUnsignedPropetyId|}}
+    {{#each (getIntegerUnsignedProperties schema.aggregateProperties)  as |isIntegerUnsignedPropety isIntegerUnsignedPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} must have a positive sign', () =>
     {
         return request(app.getHttpServer())
@@ -254,7 +254,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each schema.aggregateProperties.isBoolean  as |isBooleanPropety isBooleanPropetyId|}}
+    {{#each (getBooleanProperties schema.aggregateProperties)  as |isBooleanPropety isBooleanPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
@@ -305,7 +305,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each schema.aggregateProperties.decimalProperties  as |decimalPropety decimalPropetyId|}}
+    {{#each (getDecimalProperties schema.aggregateProperties)  as |decimalPropety decimalPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum decimal integers length of {{ subtract (first decimalPropety.decimals) (last decimalPropety.decimals) }}', () =>
     {
         return request(app.getHttpServer())
@@ -322,7 +322,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each schema.aggregateProperties.decimalProperties  as |decimalPropety decimalPropetyId|}}
+    {{#each (getDecimalProperties schema.aggregateProperties)  as |decimalPropety decimalPropetyId|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum decimals length of {{ last decimalPropety.decimals }}', () =>
     {
         return request(app.getHttpServer())

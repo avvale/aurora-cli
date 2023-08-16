@@ -5,5 +5,7 @@ handlebars.registerHelper('getRelationshipManyToManyProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getRelationshipManyToManyProperties(properties);
+    return getRelationshipManyToManyProperties(
+        properties,
+    );
 });

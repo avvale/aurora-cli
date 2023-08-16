@@ -6,5 +6,8 @@ handlebars.registerHelper('getCreateControllerProperties', function(
     moduleName: string,
 ): Property[]
 {
-    return getCreateControllerProperties(properties, moduleName);
+    return getCreateControllerProperties(
+        properties,
+        moduleName,
+    );
 });

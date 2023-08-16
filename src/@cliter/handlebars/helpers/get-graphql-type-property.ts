@@ -6,5 +6,8 @@ handlebars.registerHelper('getGraphqlTypeProperty', function(
     config: CliterConfig,
 ): string | undefined
 {
-    return getGraphqlTypeProperty(property, config);
+    return getGraphqlTypeProperty(
+        property,
+        config,
+    );
 });

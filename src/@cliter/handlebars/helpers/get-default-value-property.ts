@@ -5,5 +5,7 @@ handlebars.registerHelper('getDefaultValueProperty', function(
     property: Property,
 ): string
 {
-    return getDefaultValueProperty(property);
+    return getDefaultValueProperty(
+        property,
+    );
 });

@@ -5,5 +5,7 @@ handlebars.registerHelper('getMockProperties', function(
     properties: Property[],
 ): Property[]
 {
-    return getMockProperties(properties);
+    return getMockProperties(
+        properties,
+    );
 });

@@ -6,5 +6,7 @@ handlebars.registerHelper('getVariableNameAdditionalApi', function(
     additionalApi: AdditionalApi,
 ): string
 {
-    return getVariableNameAdditionalApi(additionalApi);
+    return getVariableNameAdditionalApi(
+        additionalApi,
+    );
 });

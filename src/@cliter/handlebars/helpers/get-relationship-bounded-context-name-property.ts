@@ -6,5 +6,8 @@ handlebars.registerHelper('getRelationshipBoundedContextNameProperty', function(
     schema: ModuleDefinitionSchema,
 ): string | null
 {
-    return getRelationshipBoundedContextNameProperty(property, schema);
+    return getRelationshipBoundedContextNameProperty(
+        property,
+        schema,
+    );
 });
