@@ -167,7 +167,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
         allowNull: {{ nullable }},
         type: {{{ getSequelizeTypeProperty this ../config }}},
         {{#unless (isUndefined defaultValue) }}
-        defaultValue: {{{ getDefaultValue }}},
+        defaultValue: {{{ getDefaultValueProperty this }}},
         {{/unless}}
         {{#unless relationship.avoidConstraint }}
         {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
@@ -230,7 +230,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
         allowNull: {{ nullable }},
         type: DataTypes.JSON,
         {{#unless (isUndefined defaultValue) }}
-        defaultValue: {{{ getDefaultValue }}},
+        defaultValue: {{{ getDefaultValueProperty this }}},
         {{/unless}}
     })
     {{ toCamelCase (getNameProperty this) }}: any;

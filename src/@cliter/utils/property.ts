@@ -150,10 +150,10 @@ export class Property
         return this.relationship?.type === RelationshipType.MANY_TO_MANY;
     }
 
-    get getDefaultValue(): any
+    /* get getDefaultValue(): any
     {
         return typeof this.defaultValue === 'boolean' || typeof this.defaultValue === 'number' ? this.defaultValue :  `'${this.defaultValue}'`;
-    }
+    } */
 
     get getReferenceKey(): any
     {

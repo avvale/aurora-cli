@@ -12,6 +12,7 @@ import './get-create-controller-properties';
 import './get-create-items-service-properties';
 import './get-create-service-properties';
 import './get-created-events-properties';
+import './get-default-value-property';
 import './get-deleted-events-properties';
 import './get-dto-input-properties';
 import './get-dto-properties';

@@ -61,6 +61,14 @@ export const getJavascriptModelTypeProperty = (
     return config.propertyTypesEquivalenceJavascriptModelTypes[property.type];
 };
 
+// replace by Property getDefaultValue
+export const getDefaultValueProperty = (
+    property: Property,
+): any =>
+{
+    return typeof property.defaultValue === 'boolean' || typeof property.defaultValue === 'number' ? property.defaultValue :  `'${property.defaultValue}'`;
+};
+
 /****************
  * RELATIONSHIP *
  ****************/
