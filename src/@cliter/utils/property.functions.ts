@@ -21,6 +21,19 @@ export const isTimezoneProperty = (
     return property.type === PropertyType.TIMESTAMP;
 };
 
+// replace by Property hasColumnDecorator
+export const hasColumnDecoratorProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type !== RelationshipType.ONE_TO_MANY &&
+        property.relationship?.type !== RelationshipType.MANY_TO_MANY &&
+        !(
+            property.relationship?.type === RelationshipType.ONE_TO_ONE &&
+            !property.relationship.field
+        );
+};
+
 // replace by Property getRelationshipBoundedContextName
 export const getRelationshipBoundedContextNameProperty = (
     property: Property,

@@ -149,7 +149,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     {{/if}}
     {{#each schema.aggregateProperties }}
     {{#if isI18n }}
-    {{#if hasColumnDecorator }}
+    {{#if (hasColumnDecoratorProperty this) }}
     {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     @ForeignKey(() => {{ relationship.aggregateName }}Model)
     {{/eq}}

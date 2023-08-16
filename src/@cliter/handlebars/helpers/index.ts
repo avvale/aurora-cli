@@ -52,6 +52,7 @@ import './get-with-import-relationship-many-to-many-properties';
 import './get-with-import-relationship-many-to-one-properties';
 import './get-with-import-relationship-one-to-many-properties';
 import './get-with-import-relationship-one-to-one-properties';
+import './has-column-decorator-property';
 import './has-comma-in-validation-form-control';
 import './has-i18n-properties';
 import './has-index-properties';

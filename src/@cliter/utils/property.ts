@@ -112,7 +112,7 @@ export class Property
         return this.type === PropertyType.TIMESTAMP;
     } */
 
-    get hasColumnDecorator(): boolean
+    /* get hasColumnDecorator(): boolean
     {
         return this.relationship?.type !== RelationshipType.ONE_TO_MANY &&
             this.relationship?.type !== RelationshipType.MANY_TO_MANY &&
@@ -120,7 +120,7 @@ export class Property
                 this.relationship?.type === RelationshipType.ONE_TO_ONE &&
                 !this.relationship.field
             );
-    }
+    } */
 
     get hasHasOneDecorator(): boolean
     {
