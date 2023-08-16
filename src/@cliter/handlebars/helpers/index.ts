@@ -40,6 +40,7 @@ import './get-mutations-additional-apis';
 import './get-name-property';
 import './get-not-nullable-properties';
 import './get-queries-additional-apis';
+import './get-quotation-property';
 import './get-relationship-bounded-context-name-property';
 import './get-relationship-many-to-many-properties';
 import './get-relationship-module-name-property';

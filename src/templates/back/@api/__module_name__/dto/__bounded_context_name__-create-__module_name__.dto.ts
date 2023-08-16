@@ -65,7 +65,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         type       : {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto,
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto;
@@ -79,7 +79,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         enum       : [{{{ enumOptionsArrayItems }}}],
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
@@ -90,7 +90,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         type       : {{ getSwaggerTypeProperty this ../config }},
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getDtoTypeProperty this ../config }};

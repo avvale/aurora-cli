@@ -56,6 +56,15 @@ export const getDefaultValueProperty = (
     return typeof property.defaultValue === 'boolean' || typeof property.defaultValue === 'number' ? property.defaultValue :  `'${property.defaultValue}'`;
 };
 
+// replace by Property hasQuotation
+export const hasQuotationProperty = (
+    property: Property,
+    config: CliterConfig,
+): boolean =>
+{
+    return config.quotationTypes[property.type];
+};
+
 /********************
  * MODEL DECORATORS *
  ********************/

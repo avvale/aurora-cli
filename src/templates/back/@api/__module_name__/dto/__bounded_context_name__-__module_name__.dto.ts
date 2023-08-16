@@ -80,7 +80,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         type       : Object,
         description: '{{ toCamelCase relationship.singularName }}Ids [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase relationship.singularName }}Ids{{#if nullable }}?{{/if}}: any;
@@ -113,7 +113,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         type       : () => {{ relationship.aggregateName }}Dto,
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase relationship.field }}?: {{ relationship.aggregateName }}Dto;
@@ -123,7 +123,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         type       : () => {{ relationship.aggregateName }}Dto,
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ relationship.aggregateName }}Dto;
@@ -137,7 +137,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         enum       : [{{{ enumOptionsArrayItems }}}],
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
@@ -148,7 +148,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         type       : {{ getSwaggerTypeProperty this ../config }},
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getDtoTypeProperty this ../config }};

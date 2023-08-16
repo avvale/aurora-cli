@@ -353,10 +353,10 @@ export class Property
     /*****************
      * Miscellaneous *
      *****************/
-    get hasQuotation(): boolean
+    /* get hasQuotation(): boolean
     {
         return this.config.quotationTypes[this.type];
-    }
+    } */
 
     private parseModuleSection(moduleSectionString: string): ModuleDefinitionSchema
     {
