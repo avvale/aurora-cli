@@ -9,7 +9,7 @@ export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase sche
     {
         {{#each (getSeedProperties ../schema.aggregateProperties) as |seedProperty seedId|}}
         {{#if (isAllowProperty ../schema.moduleName this)}}
-        {{ toCamelCase (getNameProperty seedProperty) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object schema=../../schema property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if hasQuotation }}'{{/if}},
+        {{ toCamelCase (getNameProperty seedProperty) }}: {{#if (hasQuotationProperty this ../../config) }}'{{/if }}{{{ mocker (object schema=../../schema property=seedProperty type='seed' scapeQuotes=false hasUuidSeed=false) }}}{{#if (hasQuotationProperty this ../../config) }}'{{/if}},
         {{/if}}
         {{/each}}
     },

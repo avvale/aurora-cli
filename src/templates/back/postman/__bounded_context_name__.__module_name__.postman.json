@@ -277,7 +277,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase (getNameProperty this) }}eProperty this) }}{{/each}}\n\t}\n}",
+						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each schema.aggregateProperties.postmanGraphQLDeleteQuery}}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n}"
 					}
 				},

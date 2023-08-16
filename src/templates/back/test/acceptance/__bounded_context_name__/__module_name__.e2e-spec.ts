@@ -175,7 +175,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty lengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testProperty.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty lengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testProperty.length 1)) }}}{{#if (hasQuotationProperty this ../config) }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -193,7 +193,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty maxLengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testProperty.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty maxLengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testProperty.maxLength 1)) }}}{{#if (hasQuotationProperty this ../config) }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -211,7 +211,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty minLengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testProperty.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty minLengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testProperty.minLength 1)) }}}{{#if (hasQuotationProperty this ../config) }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -296,7 +296,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty timestampProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: '****',{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty timestampProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: '****',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -330,7 +330,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty decimalProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}eProperty this) }}: {{{ mocker (object property=testProperty type='fixedData' totalDigits=(first testProperty.decimals) decimalDigits=(add (last testProperty.decimals) 1)) }}},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty decimalProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{{ mocker (object property=testProperty type='fixedData' totalDigits=(first testProperty.decimals) decimalDigits=(add (last testProperty.decimals) 1)) }}},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -512,7 +512,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                         {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)
                         {
                             {{#each schema.aggregateProperties.postmanGraphQLCreateQuery}}
-                            {{ toCamelCase (getNameProperty this) }}eProperty this) }}
+                            {{ toCamelCase (getNameProperty this) }}
                             {{/each}}
                         }
                     }
