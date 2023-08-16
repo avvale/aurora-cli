@@ -18,10 +18,10 @@ export class Properties
         return this.properties.length;
     } */
 
-    get hasI18n(): boolean
+    /* get hasI18n(): boolean
     {
         return this.properties.some(property => property.isI18n);
-    }
+    } */
 
     get hasEnum(): boolean
     {
