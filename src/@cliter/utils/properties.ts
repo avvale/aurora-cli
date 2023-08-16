@@ -23,57 +23,57 @@ export class Properties
         return this.properties.some(property => property.isI18n);
     } */
 
-    get hasEnum(): boolean
+    /* get hasEnum(): boolean
     {
         return this.properties.some(property => property.type === PropertyType.ENUM);
-    }
+    } */
 
     /* get hasIndex(): boolean
     {
         return this.properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && !property.isI18n);
     } */
 
-    get hasIndexI18n(): boolean
+    /* get hasIndexI18n(): boolean
     {
         return this.properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && property.isI18n);
-    }
+    } */
 
     /* get withoutTimestamps(): Property[]
     {
         return this.properties.filter(property => !this.timestampFields.includes(property.name));
     } */
 
-    get withoutTimestampsWithoutRelationship(): Property[]
+    /* get withoutTimestampsWithoutRelationship(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => !property.relationship);
-    }
+    } */
 
-    get lengthWebComponents(): number
+    /* get lengthWebComponents(): number
     {
         return this.properties.filter(property => Boolean(property.webComponent?.type)).length;
-    }
+    } */
 
-    get lengthSelectElementWebComponents(): number
+    /* get lengthSelectElementWebComponents(): number
     {
         return this.properties.filter(property => property.webComponent?.type === WebComponentType.SELECT).length;
-    }
+    } */
 
-    get lengthGridSelectElementWebComponents(): number
+    /* get lengthGridSelectElementWebComponents(): number
     {
         return this.properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT).length;
-    }
+    } */
 
-    get lengthGridElementsManagerWebComponents(): number
+    /* get lengthGridElementsManagerWebComponents(): number
     {
         return this.properties.filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER).length;
-    }
+    } */
 
-    get withoutDeletedAt(): Property[]
+    /* get withoutDeletedAt(): Property[]
     {
         return this.properties.filter(property => !this.deletedAtField.includes(property.name));
-    }
+    } */
 
     /***************************************************
      * get relationship for import to avoid duplicates *
@@ -167,62 +167,62 @@ export class Properties
     /*********
      * FRONT *
      *********/
-    get gridFields(): Property[]
+    /* get gridFields(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => property.name !== 'availableLangs')
             .filter(property => property.name !== 'meta')
             .filter(property => property.name !== 'id');
-    }
+    } */
 
-    get formDetailFields(): Property[]
+    /* get formDetailFields(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => property.name !== 'id');
-    }
+    } */
 
-    get formGroupFields(): Property[]
+    /* get formGroupFields(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => property.name !== 'availableLangs')
             .filter(property => property.name !== 'meta');
-    }
+    } */
 
-    get formGroupFieldsIsNotI18n(): Property[]
+    /* get formGroupFieldsIsNotI18n(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))
             .filter(property => !property.isI18n)
             .filter(property => property.name !== 'availableLangs')
             .filter(property => property.name !== 'meta');
-    }
+    } */
 
-    get withWebComponents(): Property[]
+    /* get withWebComponents(): Property[]
     {
         return this.properties
             .filter(property => Boolean(property.webComponent?.type));
-    }
+    } */
 
-    get withSelectWebComponents(): Property[]
+    /* get withSelectWebComponents(): Property[]
     {
         return this.properties
             .filter(property => property.webComponent?.type === WebComponentType.SELECT);
-    }
+    } */
 
-    get withGridSelectElementWebComponents(): Property[]
+    /* get withGridSelectElementWebComponents(): Property[]
     {
         return this.properties
             .filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT);
-    }
+    } */
 
-    get withGridElementsManagerWebComponents(): Property[]
+    /* get withGridElementsManagerWebComponents(): Property[]
     {
         return this.properties
             .filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER);
-    }
+    } */
 
     /*************
      * AGGREGATE *

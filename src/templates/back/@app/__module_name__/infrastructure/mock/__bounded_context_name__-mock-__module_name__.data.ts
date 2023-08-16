@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
-{{#if schema.aggregateProperties.hasEnum}}
+{{#if (hasEnumProperties schema.aggregateProperties) }}
 import { {{#each (getEnumProperties schema.aggregateProperties) }}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getNameProperty this) }}{{/each}} } from '@api/graphql';
 {{/if}}
 

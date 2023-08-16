@@ -14,11 +14,11 @@
     (object items=(array 'CoreCurrentLangService' 'CoreLang') path='@aurora')
 ~}}
 {{/if}}
-{{#unlessEq schema.aggregateProperties.lengthWebComponents 0 }}
+{{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
 {{ push importsArray
     (object items='Observable' path='rxjs')
 ~}}
-{{#unlessEq schema.aggregateProperties.lengthGridSelectElementWebComponents 0 }}
+{{#unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0 }}
 {{ push importsArray
     (object items='ViewChild' path='@angular/core')
 ~}}
@@ -26,7 +26,7 @@
     (object items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectElementComponent' 'GridStateService' 'QueryStatementHandler') path='@aurora')
 ~}}
 {{/unlessEq}}
-{{#unlessEq schema.aggregateProperties.lengthGridElementsManagerWebComponents 0 }}
+{{#unlessEq (countGridElementsManagerWebComponentsProperties schema.aggregateProperties) 0 }}
 {{ push importsArray
     (object items='ViewChild' path='@angular/core')
 ~}}
@@ -38,7 +38,7 @@
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
-{{#each schema.aggregateProperties.withWebComponents}}
+{{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase getRelationshipSchema.boundedContextName) '.types'))
@@ -51,7 +51,7 @@
 ~}}
 {{/eq}}
 {{/each}}
-{{#each schema.aggregateProperties.withGridSelectElementWebComponents}}
+{{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
@@ -62,7 +62,7 @@
 ~}}
 {{/eq}}
 {{/each}}
-{{#each schema.aggregateProperties.withGridElementsManagerWebComponents}}
+{{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase getRelationshipSchema.boundedContextName) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase getRelationshipSchema.moduleName) '/' (toKebabCase getRelationshipSchema.moduleName) '.columns-config'))
@@ -98,10 +98,10 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     currentLang: CoreLang;
     fallbackLang: CoreLang;
     {{/if}}
-{{#unlessEq schema.aggregateProperties.lengthWebComponents 0 }}
+{{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
 
     // relationships
-    {{#each schema.aggregateProperties.withWebComponents}}
+    {{#each (getWebComponentsProperties schema.aggregateProperties) }}
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase getRelationshipSchema.moduleNames }}$: Observable<{{ getRelationshipAggregateName }}[]>;
     {{/eq}}
@@ -192,21 +192,21 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     (object variableName='coreCurrentLangService' className='CoreCurrentLangService')
 ~}}
 {{/if}}
-{{#unlessEq schema.aggregateProperties.lengthGridSelectElementWebComponents 0 }}
+{{#unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0 }}
 {{ push injectionsArray
     (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
     (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
     (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
-{{#unlessEq schema.aggregateProperties.lengthGridElementsManagerWebComponents 0 }}
+{{#unlessEq (countGridElementsManagerWebComponentsProperties schema.aggregateProperties) 0 }}
 {{ push injectionsArray
     (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
     (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
     (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
-{{#each schema.aggregateProperties.withWebComponents}}
+{{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq webComponent.type 'select'}}
 {{ push ../injectionsArray
     (object variableName=(sumStrings (toCamelCase getRelationshipSchema.moduleName) 'Service') className=(sumStrings (toPascalCase getRelationshipSchema.moduleName) 'Service'))
@@ -234,7 +234,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     init(): void
     {
         /**/
-        {{#each schema.aggregateProperties.withWebComponents}}
+        {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
         this.{{ toCamelCase getRelationshipSchema.moduleNames }}$ = this.{{ toCamelCase getRelationshipSchema.moduleName }}Service.{{ toCamelCase getRelationshipSchema.moduleNames }}$;
         {{/eq}}
@@ -282,7 +282,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     createForm(): void
     {
         this.fg = this.fb.group({
-            {{#each schema.aggregateProperties.formGroupFields}}
+            {{#each (getFormGroupFieldsProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase (getNameProperty this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if (length this) }}Validators.minLength({{ (length this) }}), Validators.maxLength({{ (length this) }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
             {{/if}}
@@ -295,18 +295,18 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // that language is not APP_FALLBACK_LANG
     disabledNotI18nFields(): void
     {
-        {{#each schema.aggregateProperties.formGroupFieldsIsNotI18n}}
+        {{#each (getFormGroupFieldsIsNotI18nProperties schema.aggregateProperties) }}
         this.fg.get('{{ toCamelCase (getNameProperty this) }}').disable();
         {{/each}}
     }
 
     {{/if}}
-    {{#each schema.aggregateProperties.withGridElementsManagerWebComponents}}
+    {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
     /* #region methods to manage {{ toPascalCase getRelationshipSchema.moduleNames }} */
     create{{ toPascalCase getRelationshipSchema.moduleName }}DialogForm(): void
     {
         this.{{ toCamelCase getRelationshipSchema.moduleName }}DialogFg = this.fb.group({
-            {{#each getRelationshipSchema.properties.formGroupFields}}
+            {{#each (getFormGroupFieldsProperties getRelationshipSchema.properties) }}
             {{#if (isAllowProperty getRelationshipSchema.moduleName this) }}
             {{ toCamelCase (getNameProperty this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if (length this) }}Validators.minLength({{ (length this) }}), Validators.maxLength({{ (length this) }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
             {{/if}}
@@ -395,7 +395,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         if (this.fallbackLang.id !== this.currentLang.id) this.disabledNotI18nFields();
                         {{/if}}
                     });
-                {{#each schema.aggregateProperties.withGridElementsManagerWebComponents}}
+                {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 
                 /* #region init actions to manage {{ toCamelCase getRelationshipSchema.moduleNames }} grid-elements-manager */
                 this.{{ toCamelCase getRelationshipSchema.moduleNames }}ColumnsConfig$ = this.gridColumnsConfigStorageService
@@ -548,7 +548,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 break;
                 {{/if}}
                 /* #endregion common actions */
-            {{#each schema.aggregateProperties.withGridSelectElementWebComponents}}
+            {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
 
             /* #region actions to manage {{ toCamelCase property.getRelationshipSchema.moduleNames }} grid-select-element */
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipSchema.moduleNames }}OpenDialog':
@@ -610,7 +610,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 break;
                 /* #endregion actions to manage {{ toCamelCase property.getRelationshipSchema.moduleNames }} grid-select-element */
             {{/each}}
-            {{#each schema.aggregateProperties.withGridElementsManagerWebComponents}}
+            {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 
             /* #region actions to manage {{ toCamelCase getRelationshipSchema.moduleNames }} grid-elements-manager */
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase getRelationshipSchema.moduleNames }}Pagination':

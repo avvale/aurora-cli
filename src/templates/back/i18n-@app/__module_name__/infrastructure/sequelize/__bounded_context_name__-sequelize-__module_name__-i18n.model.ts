@@ -23,7 +23,7 @@ import { {{ relationship.pivot.aggregateName }}Model } from '{{ config.appContai
     modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18n',
     freezeTableName: true,
     timestamps: false,
-    {{#if schema.aggregateProperties.hasIndexI18n}}
+    {{#if (hasIndexI18nProperties schema.aggregateProperties) }}
     indexes: [
 {{{
     indexesManager (

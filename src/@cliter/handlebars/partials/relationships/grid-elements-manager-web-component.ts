@@ -43,7 +43,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
             (ngSubmit)="handleSubmit{{ toPascalCase property.getRelationshipSchema.moduleName }}Form($event, dialog)"
         >
             <div class="layout__container">
-                {{#each property.getRelationshipSchema.properties.formDetailFields}}
+                {{#each (getFormDetailFieldsProperties property.getRelationshipSchema.properties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#eq type 'varchar'}}
                 {{> varcharInput schema=../schema property=.}}

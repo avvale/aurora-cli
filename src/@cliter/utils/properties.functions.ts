@@ -1,4 +1,4 @@
-import { PropertyIndex, PropertyType, RelationshipType } from '../types';
+import { PropertyIndex, PropertyType, RelationshipType, WebComponentType } from '../types';
 import { Property } from './property';
 
 /*********
@@ -10,6 +10,72 @@ export const deletedAtProperty: string[] = ['deletedAt'];
 /**************
  * PROPERTIES *
  **************/
+// replace by Properties hasEnum
+export const hasEnumProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => property.type === PropertyType.ENUM);
+};
+
+// replace by Properties hasIndexI18n
+export const hasIndexI18nProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && property.isI18n);
+};
+
+// replace by Properties withoutTimestampsWithoutRelationship
+export const getWithoutTimestampsWithoutRelationshipProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))
+        .filter(property => !property.relationship);
+};
+
+// replace by Properties lengthWebComponents
+export const countWebComponentsProperties = (
+    properties: Property[],
+): number =>
+{
+    return properties.filter(property => Boolean(property.webComponent?.type)).length;
+};
+
+// replace by Properties lengthSelectElementWebComponents
+export const countSelectElementWebComponentsProperties = (
+    properties: Property[],
+): number =>
+{
+    return properties.filter(property => property.webComponent?.type === WebComponentType.SELECT).length;
+};
+
+// replace by Properties lengthGridSelectElementWebComponents
+export const countGridSelectElementWebComponentsProperties = (
+    properties: Property[],
+): number =>
+{
+    return properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT).length;
+};
+
+// replace by Properties lengthGridElementsManagerWebComponents
+export const countGridElementsManagerWebComponentsProperties = (
+    properties: Property[],
+): number =>
+{
+    return properties.filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER).length;
+};
+
+// replace by Properties withoutDeletedAt
+export const getWithoutDeletedAtProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => !deletedAtProperty.includes(property.name));
+};
+
 // replace by Properties hasI18n
 export const hasI18nProperties = (
     properties: Property[],
@@ -110,7 +176,7 @@ export const getAggregateProperties = (
  * RELATIONSHIP *
  ****************/
 // replace by Properties withRelationship
-export const getRelationshipProperties = (
+export const getPropertiesWithRelationship = (
     properties: Property[],
 ): Property[] =>
 {
@@ -123,7 +189,7 @@ export const getForeignRelationshipProperties = (
     boundedContextName: string,
 ): Property[] =>
 {
-    return getRelationshipProperties(properties)
+    return getPropertiesWithRelationship(properties)
         .filter(item =>
         {
             if (!item.relationship?.modulePath) return false;
@@ -730,4 +796,88 @@ export const getPostmanRestUpdateProperties = (
         .filter(property => !timestampProperties.includes(property.name))                                                       // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field));   // exclude one to many relations
+};
+
+/*********
+ * FRONT *
+ *********/
+// replace by Properties gridFields
+export const getGridFieldsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))
+        .filter(property => property.name !== 'availableLangs')
+        .filter(property => property.name !== 'meta')
+        .filter(property => property.name !== 'id');
+};
+
+// replace by Properties formDetailFields
+export const getFormDetailFieldsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))
+        .filter(property => property.name !== 'id');
+};
+
+// replace by Properties formGroupFields
+export const getFormGroupFieldsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))
+        .filter(property => property.name !== 'availableLangs')
+        .filter(property => property.name !== 'meta');
+};
+
+// replace by Properties formGroupFieldsIsNotI18n
+export const getFormGroupFieldsIsNotI18nProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))
+        .filter(property => !property.isI18n)
+        .filter(property => property.name !== 'availableLangs')
+        .filter(property => property.name !== 'meta');
+};
+
+// replace by Properties withWebComponents
+export const getWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => Boolean(property.webComponent?.type));
+};
+
+// replace by Properties withSelectWebComponents
+export const getSelectWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.webComponent?.type === WebComponentType.SELECT);
+};
+
+// replace by Properties withGridSelectElementWebComponents
+export const getGridSelectElementWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT);
+};
+
+// replace by Properties withGridElementsManagerWebComponents
+export const getGridElementsManagerWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER);
 };

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
-    {{#each schema.aggregateProperties.withoutDeletedAt}}
+    {{#each (getWithoutDeletedAtProperties schema.aggregateProperties) }}
     {{#if (isAllowProperty ../schema.moduleName this) }}
     {{#unlessEq (getNameProperty this) 'id'}}
     {{ toCamelCase (getNameProperty this) }}
@@ -11,13 +11,13 @@ export const fields = `
 `;
 
 export const relationsFields = `
-    {{#each schema.aggregateProperties.withWebComponents}}
+    {{#each (getWebComponentsProperties schema.aggregateProperties) }}
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase getRelationshipSchema.moduleNames }} (
         query: $query{{ toPascalCase getRelationshipSchema.moduleNames }}
         constraint: $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}
     ) {
-        {{#each getRelationshipProperties.withoutTimestampsWithoutRelationship}}
+        {{#each (getWithoutTimestampsWithoutRelationshipProperties getPropertiesFromRelationship) }}
         {{ getNameProperty this }}
         {{/each}}
     }
@@ -66,11 +66,11 @@ export const getQuery = gql`
         }
     }
 `;
-{{#or (unlessEq schema.aggregateProperties.lengthGridSelectElementWebComponents 0) (unlessEq schema.aggregateProperties.lengthSelectElementWebComponents 0) }}
+{{#or (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
 
 export const getRelations = gql`
     query {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Relations(
-        {{#each schema.aggregateProperties.withWebComponents}}
+        {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
         $query{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
         $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
@@ -100,13 +100,13 @@ export const findByIdQuery = gql`
         }
     }
 `;
-{{#unlessEq schema.aggregateProperties.lengthWebComponents 0 }}
+{{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
 
 export const findByIdWithRelationsQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdWithRelations (
         $id: ID
         $constraint: QueryStatement
-        {{#each schema.aggregateProperties.withWebComponents}}
+        {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
         $query{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
         $constraint{{ toPascalCase getRelationshipSchema.moduleNames }}: QueryStatement
@@ -128,7 +128,7 @@ export const findByIdWithRelationsQuery = gql`
             id
             #FIELDS
         }
-        {{#each schema.aggregateProperties.withGridElementsManagerWebComponents}}
+        {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
         {{ toCamelCase ../schema.boundedContextName }}Paginate{{ toPascalCase getRelationshipSchema.moduleNames }} (
             query: $queryPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}
             constraint: $constraintPaginate{{ toPascalCase getRelationshipSchema.moduleNames }}

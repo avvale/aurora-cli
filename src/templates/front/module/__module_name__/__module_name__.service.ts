@@ -9,12 +9,12 @@
             (object items=(array 'paginationQuery' 'getQuery' 'fields' 'findByIdQuery' 'findQuery' 'createMutation' 'updateByIdMutation' 'updateMutation' 'deleteByIdMutation' 'deleteMutation') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
     )
 ~}}
-{{#unlessEq schema.aggregateProperties.lengthWebComponents 0 }}
+{{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
 {{ push importsArray
     (object items=(array 'findByIdWithRelationsQuery') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
 {{/unlessEq}}
-{{#or (unlessEq schema.aggregateProperties.lengthGridSelectElementWebComponents 0) (unlessEq schema.aggregateProperties.lengthSelectElementWebComponents 0) }}
+{{#or (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
 {{ push importsArray
     (object items=(array 'getRelations') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
@@ -24,7 +24,7 @@
     (object items=(sumStrings (getVariableNameAdditionalApi this) (toPascalCase ../resolverType)) path=(sumStrings './' (toKebabCase ../schema.moduleName) '.graphql'))
 ~}}
 {{/each}}
-{{#each schema.aggregateProperties.withWebComponents}}
+{{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
     (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '.types'))
@@ -49,7 +49,7 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     constructor(
         private readonly graphqlService: GraphQLService,
-        {{#each schema.aggregateProperties.withWebComponents}}
+        {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         private readonly {{ toCamelCase (getRelationshipModuleNameProperty this ../schema) }}Service: {{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Service,
         {{/each}}
     ) {}
@@ -148,14 +148,14 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 
-    {{#unlessEq schema.aggregateProperties.lengthWebComponents 0 }}
+    {{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
     findByIdWithRelations(
         {
             graphqlStatement = findByIdWithRelationsQuery,
             id = '',
             constraint = {},
             headers = {},
-            {{#each schema.aggregateProperties.withWebComponents}}
+            {{#each (getWebComponentsProperties schema.aggregateProperties) }}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }} = {},
             constraint{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }} = {},
@@ -174,7 +174,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             id?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
-            {{#each schema.aggregateProperties.withWebComponents}}
+            {{#each (getWebComponentsProperties schema.aggregateProperties) }}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}?: QueryStatement;
             constraint{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}?: QueryStatement;
@@ -191,7 +191,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         } = {},
     ): Observable<{
         object: {{ schema.aggregateName }};
-        {{#each schema.aggregateProperties.withWebComponents}}
+        {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
         {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
@@ -208,7 +208,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .client()
             .watchQuery<{
                 object: {{ schema.aggregateName }};
-                {{#each schema.aggregateProperties.withWebComponents}}
+                {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                 {{#eq webComponent.type 'select'}}
                 {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: {{ getRelationshipAggregateName }}[];
                 {{/eq}}
@@ -224,7 +224,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     id,
                     constraint,
-                    {{#each schema.aggregateProperties.withWebComponents}}
+                    {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
                     query{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }},
                     constraint{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }},
@@ -250,7 +250,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 tap(data =>
                 {
                     this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
-                    {{#each schema.aggregateProperties.withWebComponents}}
+                    {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
                     this.{{ toCamelCase (getRelationshipModuleNameProperty this ../schema) }}Service.{{ toCamelCase (getRelationshipModuleNamesProperty this ../schema) }}Subject$.next(data.{{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }});
                     {{/eq}}
@@ -348,10 +348,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 
-    {{#or (unlessEq schema.aggregateProperties.lengthGridSelectElementWebComponents 0) (unlessEq schema.aggregateProperties.lengthSelectElementWebComponents 0) }}
+    {{#or (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
     getRelations(
         {
-            {{#each schema.aggregateProperties.withWebComponents}}
+            {{#each (getWebComponentsProperties schema.aggregateProperties) }}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }} = {},
             constraint{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }} = {},
@@ -363,7 +363,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             {{/each}}
             headers = {},
         }: {
-            {{#each schema.aggregateProperties.withWebComponents}}
+            {{#each (getWebComponentsProperties schema.aggregateProperties) }}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}?: QueryStatement;
             constraint{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}?: QueryStatement;
@@ -376,7 +376,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
-        {{#each schema.aggregateProperties.withWebComponents}}
+        {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
         {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: {{ getRelationshipAggregateName }}[];
         {{/eq}}
@@ -389,7 +389,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .watchQuery<{
-                {{#each schema.aggregateProperties.withWebComponents}}
+                {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                 {{#eq webComponent.type 'select'}}
                 {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: {{ getRelationshipAggregateName }}[];
                 {{/eq}}
@@ -400,7 +400,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             }>({
                 query    : getRelations,
                 variables: {
-                    {{#each schema.aggregateProperties.withWebComponents}}
+                    {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
                     query{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }},
                     constraint{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }},
@@ -418,7 +418,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 map(result => result.data),
                 tap(data =>
                 {
-                    {{#each schema.aggregateProperties.withWebComponents}}
+                    {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
                     this.{{ toCamelCase (getRelationshipModuleNameProperty this ../schema) }}Service.{{ toCamelCase (getRelationshipModuleNamesProperty this ../schema) }}Subject$.next(data.{{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }});
                     {{/eq}}

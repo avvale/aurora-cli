@@ -34,7 +34,7 @@
         (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema))))
 ~}}
 {{/each}}
-{{#if schema.aggregateProperties.hasEnum}}
+{{#if (hasEnumProperties schema.aggregateProperties) }}
 {{#each (getEnumProperties schema.aggregateProperties) }}
 {{
     push ../importsArray

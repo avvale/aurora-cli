@@ -235,7 +235,7 @@ export class Property
         return null;
     } */
 
-    get getRelationshipProperties(): Property[] | null
+    get getPropertiesFromRelationship(): Property[] | null
     {
         try
         {

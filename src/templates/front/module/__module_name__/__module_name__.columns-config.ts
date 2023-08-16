@@ -1,7 +1,7 @@
 import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = [
-    {{#each schema.aggregateProperties.gridFields}}
+    {{#each (getGridFieldsProperties schema.aggregateProperties) }}
     {{#if (isAllowProperty ../schema.moduleName this) }}
     {
         type       : ColumnDataType.{{ getColumnDataType }},

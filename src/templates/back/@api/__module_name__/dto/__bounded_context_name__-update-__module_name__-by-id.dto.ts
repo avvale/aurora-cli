@@ -13,7 +13,7 @@
 ~}}
 {{/unlessEq}}
 {{/each}}
-{{#if schema.aggregateProperties.hasEnum}}
+{{#if (hasEnumProperties schema.aggregateProperties) }}
 {{#each (getEnumProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
