@@ -165,7 +165,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
         autoIncrement: {{ autoIncrement }},
         {{/if}}
         allowNull: {{ nullable }},
-        type: {{{ getSequelizeType }}},
+        type: {{{ getSequelizeTypeProperty this ../config }}},
         {{#unless (isUndefined defaultValue) }}
         defaultValue: {{{ getDefaultValue }}},
         {{/unless}}

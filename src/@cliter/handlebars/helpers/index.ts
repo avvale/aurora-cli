@@ -37,6 +37,7 @@ import './get-relationship-module-names-property';
 import './get-resolver-name-additional-api';
 import './get-response-properties';
 import './get-seed-properties';
+import './get-sequelize-type-property';
 import './get-swagger-type-property';
 import './get-update-command-handler-properties';
 import './get-update-command-properties';

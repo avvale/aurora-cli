@@ -293,7 +293,7 @@ export class Property
         return this.config.propertyTypesEquivalenceJavascriptModelTypes[this.type];
     }
 
-    get getSequelizeType(): string
+    /* get getSequelizeType(): string
     {
         let parameter: number | string | undefined | number[];
         if (this.type === PropertyType.CHAR)    parameter = this.length;                 // parameter = length
@@ -302,7 +302,7 @@ export class Property
         if (this.type === PropertyType.DECIMAL) parameter = this.decimals;               // parameter = decimals
 
         return cliterConfig.propertyTypesEquivalenceSequelizeTypes[this.type](parameter);
-    }
+    } */
 
     /********
      * REST *

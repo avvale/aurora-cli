@@ -170,7 +170,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
         autoIncrement: {{ autoIncrement }},
         {{/if}}
         allowNull: {{ nullable }},
-        type: {{{ getSequelizeType }}},
+        type: {{{ getSequelizeTypeProperty this ../config }}},
         {{#unless (isUndefined defaultValue) }}
         defaultValue: {{{ getDefaultValue }}},
         {{/unless}}
