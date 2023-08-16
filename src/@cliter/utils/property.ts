@@ -174,14 +174,14 @@ export class Property
     /* get originName(): string
     {
         return this._name;
-    }
+    } */
 
     get name(): string
     {
         // properties that represent many to many relationships, are arrays of ids
         if (this.relationship?.type === RelationshipType.MANY_TO_MANY) return `${this.relationship.singularName}Ids`;
         return this._name;
-    } */
+    }
 
     get enumOptionsArrayItems(): string | undefined
     {
