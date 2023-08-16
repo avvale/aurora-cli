@@ -139,7 +139,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty notNullPropety) (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: null,{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty notNullPropety) (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: null,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -157,7 +157,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty notNullPropety) (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: undefined,{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty notNullPropety) (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: undefined,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -175,7 +175,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty hasLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty hasLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -193,7 +193,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty hasMaxLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty hasMaxLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -211,7 +211,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty hasMinLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty hasMinLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -220,7 +220,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each (getIntegerProperties schema.aggregateProperties)  as |isIntegerPropety isIntegerPropetyId|}}
+    {{#each (getIntegerProperties schema.aggregateProperties)  as |integerPropety integerPropetyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a integer value', () =>
     {
         return request(app.getHttpServer())
@@ -228,7 +228,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty isIntegerPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: 100.10,{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty integerPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty integerPropety) }}: 100.10,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -245,7 +245,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty isIntegerUnsignedPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: -1,{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isIntegerUnsignedPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: -1,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -262,7 +262,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty isBooleanPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: 'true',{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isBooleanPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: 'true',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -279,7 +279,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty isEnumPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: '****',{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isEnumPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: '****',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -296,7 +296,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty isTimestampPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: '****',{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isTimestampPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: '****',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -313,7 +313,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty decimalPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(add (first testPropety.decimals) 1) decimalDigits=(last testPropety.decimals)) }}},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty decimalPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(add (first testPropety.decimals) 1) decimalDigits=(last testPropety.decimals)) }}},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -330,7 +330,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyId|}}{{#eq (getNameProperty decimalPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}eProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(first testPropety.decimals) decimalDigits=(add (last testPropety.decimals) 1)) }}},{{/eq}}{{/each}}
+                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty decimalPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}eProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(first testPropety.decimals) decimalDigits=(add (last testPropety.decimals) 1)) }}},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
