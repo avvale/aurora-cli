@@ -186,7 +186,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     })
     {{ toCamelCase (getNameProperty this) }}: {{{ getJavascriptModelTypeProperty this ../config }}};
     {{/if}}
-    {{#if hasHasOneDecorator }}
+    {{#if (hasHasOneDecoratorProperty this) }}
 
     @HasOne(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}
@@ -195,7 +195,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }{{/or}})
     {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregateName }}Model;
     {{/if}}
-    {{#if hasBelongsToDecorator }}
+    {{#if (hasHasBelongsToDecoratorProperty this) }}
 
     @BelongsTo(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}
@@ -205,7 +205,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }{{/or}})
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}Model;
     {{/if}}
-    {{#if hasHasManyDecorator }}
+    {{#if (hasHasManyDecoratorProperty this) }}
 
     @HasMany(() => {{ relationship.aggregateName }}Model{{#or relationship.key relationship.avoidConstraint }}, {
         {{#if relationship.key }}
@@ -217,7 +217,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }{{/or}})
     {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregateName }}Model[];
     {{/if}}
-    {{#if hasBelongsToManyDecorator }}
+    {{#if (hasHasBelongsToManyDecoratorProperty this) }}
 
     {{#if relationship.pivot.aggregate }}
     @BelongsToMany(() => {{ relationship.aggregateName }}Model, {

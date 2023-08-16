@@ -181,7 +181,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     })
     {{ toCamelCase (getNameProperty this) }}: {{{ getJavascriptTypeProperty this ../config }}};
     {{/if}}
-    {{#if hasHasOneDecorator }}
+    {{#if (hasHasOneDecoratorProperty this) }}
 
     @HasOne(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}
@@ -190,7 +190,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }{{/or}})
     {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregateName }}Model;
     {{/if}}
-    {{#if hasBelongsToDecorator }}
+    {{#if (hasHasBelongsToDecoratorProperty this) }}
 
     @BelongsTo(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}
@@ -200,7 +200,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }{{/or}})
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}Model;
     {{/if}}
-    {{#if hasHasManyDecorator }}
+    {{#if (hasHasManyDecoratorProperty this) }}
 
     @HasMany(() => {{ relationship.aggregateName }}Model{{#or relationship.key relationship.avoidConstraint }}, {
         {{#if relationship.key }}
@@ -212,12 +212,12 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }{{/or}})
     {{ toCamelCase (getNameProperty this) }}: {{ relationship.aggregateName }}Model[];
     {{/if}}
-    {{#if hasBelongsToManyDecorator }}
+    {{#if (hasHasBelongsToManyDecoratorProperty this) }}
 
-    {{#if relationship.pivot.aggregate }}
+    {{#if relationship.pivot.aggregateName }}
     @BelongsToMany(() => {{ relationship.aggregateName }}Model, {
-        through: () => {{ relationship.pivot.aggregate }}Model,
-        uniqueKey: 'Uq01{{ toPascalCase relationship.pivot.aggregate }}',
+        through: () => {{ relationship.pivot.aggregateName }}Model,
+        uniqueKey: 'Uq01{{ toPascalCase relationship.pivot.aggregateName }}',
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
@@ -237,7 +237,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     {{/if}}
     {{else}}
     @BelongsToMany(() => {{ relationship.aggregateName }}Model, {
-        through: () => {{ relationship.pivot.aggregate }}Model,
+        through: () => {{ relationship.pivot.aggregateName }}Model,
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}

@@ -122,13 +122,13 @@ export class Property
             );
     } */
 
-    get hasHasOneDecorator(): boolean
+    /* get hasHasOneDecorator(): boolean
     {
         return this.relationship?.type === RelationshipType.ONE_TO_ONE &&
             !this.relationship.field;
-    }
+    } */
 
-    get hasBelongsToDecorator(): boolean
+    /* get hasBelongsToDecorator(): boolean
     {
         return  (
             this.relationship?.type === RelationshipType.MANY_TO_ONE &&
@@ -138,17 +138,17 @@ export class Property
             this.relationship?.type === RelationshipType.ONE_TO_ONE &&
             Boolean(this.relationship.field)
         );
-    }
+    } */
 
-    get hasHasManyDecorator(): boolean
+    /* get hasHasManyDecorator(): boolean
     {
         return this.relationship?.type === RelationshipType.ONE_TO_MANY;
-    }
+    } */
 
-    get hasBelongsToManyDecorator(): boolean
+    /* get hasBelongsToManyDecorator(): boolean
     {
         return this.relationship?.type === RelationshipType.MANY_TO_MANY;
-    }
+    } */
 
     /* get getDefaultValue(): any
     {

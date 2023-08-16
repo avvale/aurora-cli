@@ -21,19 +21,6 @@ export const isTimezoneProperty = (
     return property.type === PropertyType.TIMESTAMP;
 };
 
-// replace by Property hasColumnDecorator
-export const hasColumnDecoratorProperty = (
-    property: Property,
-): boolean =>
-{
-    return property.relationship?.type !== RelationshipType.ONE_TO_MANY &&
-        property.relationship?.type !== RelationshipType.MANY_TO_MANY &&
-        !(
-            property.relationship?.type === RelationshipType.ONE_TO_ONE &&
-            !property.relationship.field
-        );
-};
-
 // replace by Property getSequelizeType
 export const getSequelizeTypeProperty = (
     property: Property,
@@ -67,6 +54,62 @@ export const getDefaultValueProperty = (
 ): any =>
 {
     return typeof property.defaultValue === 'boolean' || typeof property.defaultValue === 'number' ? property.defaultValue :  `'${property.defaultValue}'`;
+};
+
+/********************
+ * MODEL DECORATORS *
+ ********************/
+// replace by Property hasColumnDecorator
+export const hasColumnDecoratorProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type !== RelationshipType.ONE_TO_MANY &&
+        property.relationship?.type !== RelationshipType.MANY_TO_MANY &&
+        !(
+            property.relationship?.type === RelationshipType.ONE_TO_ONE &&
+            !property.relationship.field
+        );
+};
+
+// replace by Property hasHasOneDecorator
+export const hasHasOneDecoratorProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type === RelationshipType.ONE_TO_ONE &&
+        !property.relationship.field;
+};
+
+// replace by Property hasBelongsToDecorator
+export const hasHasBelongsToDecoratorProperty = (
+    property: Property,
+): boolean =>
+{
+    return  (
+        property.relationship?.type === RelationshipType.MANY_TO_ONE &&
+        Boolean(property.relationship.field)
+    ) ||
+    (
+        property.relationship?.type === RelationshipType.ONE_TO_ONE &&
+        Boolean(property.relationship.field)
+    );
+};
+
+// replace by Property hasHasManyDecorator
+export const hasHasManyDecoratorProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type === RelationshipType.ONE_TO_MANY;
+};
+
+// replace by Property hasBelongsToManyDecorator
+export const hasHasBelongsToManyDecoratorProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type === RelationshipType.MANY_TO_MANY;
 };
 
 /****************
