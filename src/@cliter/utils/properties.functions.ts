@@ -538,3 +538,13 @@ export const getBooleanProperties = (
 {
     return properties.filter(property => property.type === PropertyType.BOOLEAN);
 };
+
+// replace by Properties isTimestamp
+export const getTimestampProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))          // exclude timestamps
+        .filter(property => property.type === PropertyType.TIMESTAMP);
+};

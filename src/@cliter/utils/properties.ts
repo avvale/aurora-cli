@@ -657,12 +657,12 @@ export class Properties
         return this.properties.filter(property => property.type === PropertyType.ENUM);
     } */
 
-    get isTimestamp(): Property[]
+    /* get isTimestamp(): Property[]
     {
         return this.properties
             .filter(property => !this.timestampFields.includes(property.name))          // exclude timestamps
             .filter(property => property.type === PropertyType.TIMESTAMP);
-    }
+    } */
 
     /**********
      * OTHERS *

@@ -131,7 +131,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         await app.init();
     });
 
-    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullPropety notNullPropetyId|}}
+    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullableProperty notNullablePropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -139,7 +139,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty notNullPropety) (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: null,{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty notNullableProperty) (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: null,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -149,7 +149,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullPropety notNullPropetyId|}}
+    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullableProperty notNullablePropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -157,7 +157,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty notNullPropety) (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: undefined,{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty notNullableProperty) (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: undefined,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -167,43 +167,43 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each (getLengthProperties schema.aggregateProperties)  as |hasLengthPropety hasLengthPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is not allowed, must be a length of {{ hasLengthPropety.length }}', () =>
+    {{#each (getLengthProperties schema.aggregateProperties)  as |lengthProperty lengthPropertyIndex|}}
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is not allowed, must be a length of {{ lengthProperty.length }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty hasLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testPropety.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty lengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false length=(add testProperty.length 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is not allowed, must be a length of {{ hasLengthPropety.length }}');
+                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is not allowed, must be a length of {{ lengthProperty.length }}');
             });
     });
 
     {{/each}}
-    {{#each (getMaxLengthProperties schema.aggregateProperties)  as |hasMaxLengthPropety hasMaxLengthPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}', () =>
+    {{#each (getMaxLengthProperties schema.aggregateProperties)  as |maxLengthProperty maxLengthPropertyIndex|}}
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ maxLengthProperty.maxLength }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testPropety testPropetyIndex|}}{{#eq (getNameProperty hasMaxLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testPropety.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty maxLengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false maxLength=(add testProperty.maxLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ hasMaxLengthPropety.maxLength }}');
+                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ maxLengthProperty.maxLength }}');
             });
     });
 
     {{/each}}
-    {{#each (getMaxLengthProperties schema.aggregateProperties)  as |hasMinLengthPropety hasMinLengthPropetyId|}}
+    {{#each (getMinLengthProperties schema.aggregateProperties)  as |minLengthProperty minLengthPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too short, has a minimum length of {{ propertyHasMinLength.minLength }}', () =>
     {
         return request(app.getHttpServer())
@@ -211,7 +211,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty hasMinLengthPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testPropety type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testPropety.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty minLengthProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{#if hasQuotation }}'{{/if }}{{{ mocker (object property=testProperty type='fixedData' scapeQuotes=false checkFieldNameMeaning=false minLength=(subtract testProperty.minLength 1)) }}}{{#if hasQuotation }}'{{/if }},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -220,7 +220,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each (getIntegerProperties schema.aggregateProperties)  as |integerPropety integerPropetyIndex|}}
+    {{#each (getIntegerProperties schema.aggregateProperties)  as |integerProperty integerPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a integer value', () =>
     {
         return request(app.getHttpServer())
@@ -228,7 +228,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty integerPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty integerPropety) }}: 100.10,{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty integerProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty integerProperty) }}: 100.10,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -237,7 +237,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each (getIntegerUnsignedProperties schema.aggregateProperties)  as |isIntegerUnsignedPropety isIntegerUnsignedPropetyId|}}
+    {{#each (getIntegerUnsignedProperties schema.aggregateProperties)  as |integerUnsignedProperty integerUnsignedPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} must have a positive sign', () =>
     {
         return request(app.getHttpServer())
@@ -245,7 +245,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isIntegerUnsignedPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: -1,{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty integerUnsignedProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: -1,{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -254,7 +254,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each (getBooleanProperties schema.aggregateProperties)  as |isBooleanPropety isBooleanPropetyId|}}
+    {{#each (getBooleanProperties schema.aggregateProperties)  as |booleanProperty booleanPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
@@ -262,7 +262,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isBooleanPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: 'true',{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty booleanProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: 'true',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -271,7 +271,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each (getEnumProperties schema.aggregateProperties) as |isEnumPropety isEnumPropetyId|}}
+    {{#each (getEnumProperties schema.aggregateProperties) as |enumProperty enumPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a enum option of {{ join enumOptions }}', () =>
     {
         return request(app.getHttpServer())
@@ -279,7 +279,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isEnumPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: '****',{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty enumProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: '****',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -288,7 +288,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each schema.aggregateProperties.isTimestamp  as |isTimestampPropety isTimestampPropetyId|}}
+    {{#each (getTimestampProperties schema.aggregateProperties)  as |timestampProperty timestampPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a timestamp value', () =>
     {
         return request(app.getHttpServer())
@@ -296,7 +296,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty isTimestampPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: '****',{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty timestampProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}: '****',{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
@@ -305,37 +305,37 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             });
     });
     {{/each}}
-    {{#each (getDecimalProperties schema.aggregateProperties)  as |decimalPropety decimalPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum decimal integers length of {{ subtract (first decimalPropety.decimals) (last decimalPropety.decimals) }}', () =>
+    {{#each (getDecimalProperties schema.aggregateProperties)  as |decimalProperty decimalPropertyIndex|}}
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum decimal integers length of {{ subtract (first decimalProperty.decimals) (last decimalProperty.decimals) }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty decimalPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(add (first testPropety.decimals) 1) decimalDigits=(last testPropety.decimals)) }}},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty decimalProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}: {{{ mocker (object property=testProperty type='fixedData' totalDigits=(add (first testProperty.decimals) 1) decimalDigits=(last testProperty.decimals)) }}},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ subtract (first decimalPropety.decimals) (last decimalPropety.decimals) }} integers in');
+                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ subtract (first decimalProperty.decimals) (last decimalProperty.decimals) }} integers in');
             });
     });
     {{/each}}
-    {{#each (getDecimalProperties schema.aggregateProperties)  as |decimalPropety decimalPropetyId|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum decimals length of {{ last decimalPropety.decimals }}', () =>
+    {{#each (getDecimalProperties schema.aggregateProperties)  as |decimalProperty decimalPropertyIndex|}}
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum decimals length of {{ last decimalProperty.decimals }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                {{#each ../schema.aggregateProperties.test as |testPropety testPropetyIndex|}}{{#eq (getNameProperty decimalPropety)  (getNameProperty testPropety) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}eProperty this) }}: {{{ mocker (object property=testPropety type='fixedData' totalDigits=(first testPropety.decimals) decimalDigits=(add (last testPropety.decimals) 1)) }}},{{/eq}}{{/each}}
+                {{#each (getTestProperties ../schema.aggregateProperties ../schema.moduleName) as |testProperty testPropertyIndex|}}{{#eq (getNameProperty decimalProperty)  (getNameProperty testProperty) }}{{ toCamelCase (getNameProperty this) }}eProperty this) }}eProperty this) }}eProperty this) }}: {{{ mocker (object property=testProperty type='fixedData' totalDigits=(first testProperty.decimals) decimalDigits=(add (last testProperty.decimals) 1)) }}},{{/eq}}{{/each}}
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ last decimalPropety.decimals }} decimals in');
+                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} is too large, has a maximum length of {{ last decimalProperty.decimals }} decimals in');
             });
     });
     {{/each}}

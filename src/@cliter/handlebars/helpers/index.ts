@@ -50,6 +50,7 @@ import './get-seed-properties';
 import './get-sequelize-type-property';
 import './get-swagger-type-property';
 import './get-test-properties';
+import './get-timestamp-properties';
 import './get-update-command-handler-properties';
 import './get-update-command-properties';
 import './get-update-controller-properties';
