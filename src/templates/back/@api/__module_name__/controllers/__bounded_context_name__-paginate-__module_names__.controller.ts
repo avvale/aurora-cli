@@ -5,14 +5,15 @@
             (object items=(array 'Body' 'Controller' 'HttpCode' 'Post')  path='@nestjs/common')
             (object items=(array 'ApiOkResponse' 'ApiOperation' 'ApiQuery' 'ApiTags') path='@nestjs/swagger')
             (object items=(array 'Pagination' 'QueryStatement' 'Timezone')  path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Handler')
-                )
-                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Handler')
+                    )
+                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
 {{#if schema.hasTenant}}

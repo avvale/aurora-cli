@@ -5,15 +5,16 @@
             (object items=(array 'Body' 'Controller' 'HttpCode' 'Post')  path='@nestjs/common')
             (object items=(array 'ApiBody' 'ApiOkResponse' 'ApiOperation' 'ApiQuery' 'ApiTags')  path='@nestjs/swagger')
             (object items=(array 'Timezone' 'QueryStatement')  path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler')
-                )
-                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto')
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler')
+                    )
+                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
