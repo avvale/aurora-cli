@@ -8,8 +8,8 @@
                 items=
                 (
                     array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
                         schema.aggregateName
+                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent')
                 )
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
