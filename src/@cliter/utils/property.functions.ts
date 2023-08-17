@@ -1,6 +1,5 @@
 import { CliterConfig } from '../config';
-import { ModuleDefinitionSchema, PropertyType, RelationshipType } from '../types';
-import { Property } from './property';
+import { ModuleDefinitionSchema, Property, PropertyType, RelationshipType } from '../types';
 import { loadYamlByBoundedContextModule } from './yaml-manager';
 
 // replace by Property name
@@ -78,7 +77,7 @@ export const getPropertyStringEnumOptions = (
     property: Property,
 ): string | undefined =>
 {
-    return property.enumOptions?.map((option: string) => '\'' + option + '\'').join(',');
+    return getPropertyEnumOptions(property)?.map((option: string) => '\'' + option + '\'').join(',');
 };
 
 // replace by Property enumOptions
@@ -86,7 +85,7 @@ export const getPropertyEnumOptions = (
     property: Property,
 ): string[] | undefined =>
 {
-    return Array.isArray(property.enumOptions) ? property.enumOptions.map((option: string) => option.trim().toUpperCase()) : undefined;
+    return getPropertyEnumOptions(property)?.map((option: string) => option.trim().toUpperCase());
 };
 
 // replace by Property isRelationship

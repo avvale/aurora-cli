@@ -1,5 +1,4 @@
-import { PropertyIndex, PropertyType, RelationshipType, WebComponentType } from '../types';
-import { Property } from './property';
+import { Property, PropertyIndex, PropertyType, RelationshipType, WebComponentType } from '../types';
 
 /*********
  * CONST *

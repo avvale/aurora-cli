@@ -2,10 +2,9 @@
 import { Command } from '@oclif/core';
 import { cliterConfig } from '../config/cliter.config';
 import { Cypher } from './cypher';
-import { Property } from './property';
 import { AdditionalApi } from './additional-api';
 import { GlobalState } from '../store';
-import { LockFile } from '../types';
+import { LockFile, Property } from '../types';
 import templateEngine from './template-engine';
 import * as chalk from 'chalk';
 import * as fs from 'node:fs';
@@ -75,7 +74,7 @@ export class FileManager
 
         if (name.includes('__property_origin_name__') && currentProperty)
         {
-            name = name.replace(/__property_origin_name__/gi, currentProperty.originName.toKebabCase());
+            name = name.replace(/__property_origin_name__/gi, currentProperty.name.toKebabCase());
         }
 
         if (name.includes('__property_relationship_singular_name__') && currentProperty?.relationship?.singularName)

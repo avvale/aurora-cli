@@ -1,7 +1,6 @@
 /* eslint-disable unicorn/no-array-push-push */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, Scope, RelationshipType, PropertyType } from '../types';
-import { Property } from './property';
+import { GenerateCommandState, Scope, RelationshipType, PropertyType, Property } from '../types';
 import { cliterConfig } from '../config/cliter.config';
 import { getBoundedContextModuleFromFlag } from '../functions/common';
 import * as inquirer from 'inquirer';
@@ -366,7 +365,7 @@ export const Prompter =
         // eslint-disable-next-line unicorn/explicit-length-check
         if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && !response.length) response.length = cliterConfig.defaultTypeLength[response.type];
 
-        return new Property({
+        return {
             name         : response.name,
             type         : response.type,
             primaryKey   : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
@@ -396,9 +395,8 @@ export const Prompter =
                             modulePath: response.relationship.pivot.modulePath,
                         } : undefined, */
                     }) : undefined,
-            index : response.index,
-            schema: generateCommandState.schema,
-        });
+            index: response.index,
+        };
     },
 
     async promptAddPipeline(scope: string): Promise<{ from: string; to: string; service: string;}>
@@ -456,12 +454,12 @@ export const Prompter =
         return inquirer.prompt(questions);
     },
 
-    printValueObjectsTable(command: Command, items: Property[]): void
+    /* printValueObjectsTable(command: Command, items: Property[]): void
     {
-        const headers: string[] = [];
+        const headers: [keyof Property] = ['name'];
         const excludeHeaders: Set<string> = new Set(['config', 'id']);
-        const aliases: {origin: string; alias: string}[] = [
-            { origin: '_name',                        alias: 'Name' },
+        const aliases: { origin: keyof Property; alias: string }[] = [
+            { origin: 'name',                         alias: 'Name' },
             { origin: 'type',                         alias: 'Type' },
             { origin: 'primaryKey',                   alias: 'PK' },
             { origin: 'enumOptions',                  alias: 'Enums' },
@@ -480,16 +478,13 @@ export const Prompter =
         {
             for (const key in item)
             {
-                if (item[key])
+                const alias = aliases.find(alias => alias.origin === key);
+                if (
+                    !headers.includes(alias ? alias.alias : key) &&
+                    !excludeHeaders.has(key)
+                )
                 {
-                    const alias = aliases.find(alias => alias.origin === key);
-                    if (
-                        !headers.includes(alias ? alias.alias : key) &&
-                        !excludeHeaders.has(key)
-                    )
-                    {
-                        headers.push(alias ? alias.alias : key);
-                    }
+                    headers.push(alias ? alias.alias : key);
                 }
             }
         }
@@ -530,5 +525,5 @@ export const Prompter =
 
         table.push(...rows);
         command.log(table.toString());
-    },
+    }, */
 };

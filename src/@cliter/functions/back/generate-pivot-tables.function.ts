@@ -2,15 +2,12 @@
 import * as path from 'node:path';
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, PropertyType, RelationshipType, TemplateElement } from '../../types';
-import { Property, TemplateGenerator, getRelationshipManyToManyProperties } from '../../utils';
+import { TemplateGenerator, getRelationshipManyToManyProperties } from '../../utils';
 
 export const generatePivotTables = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     for (const property of getRelationshipManyToManyProperties(generateCommandState.schema.aggregateProperties))
     {
-        // only create table if has in relationship.pivot.modulePath
-        //if (property.relationship?.pivot?.modulePath === `${generateCommandState.schema.boundedContextName}/${generateCommandState.schema.moduleName}`)
-        //{
         // create module files
         await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
@@ -40,21 +37,20 @@ export const generatePivotTables = async (generateCommandState: GenerateCommandS
             path.join('src', cliterConfig.appContainer),
             generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
             [
-                new Property({
+                {
                     name    : `${generateCommandState.schema.moduleName}${generateCommandState.schema.moduleName.toPascalCase()}Id`,
                     type    : PropertyType.ID,
                     length  : 36,
                     nullable: false,
-                }),
-                new Property({
+                },
+                {
                     name    : `${generateCommandState.schema.moduleName}-${property?.relationship?.singularName?.toPascalCase()}Id`,
                     type    : PropertyType.ID,
                     length  : 36,
                     nullable: false,
-                }),
+                },
             ],
             generateCommandState.schema.moduleName,
         );
-        //}
     }
 };

@@ -8,9 +8,9 @@ import { ArrayDriver } from './drivers/array.driver';
 import { ExportDriver } from './drivers/export.driver';
 import { ImportDriver } from './drivers/import.driver';
 import { InterfaceDriver } from './drivers/interface.driver';
-import { Property } from '../property';
 import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getRelationshipManyToManyProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
 import { getJavascriptTypeProperty } from '../property.functions';
+import { Property } from '../../types';
 
 export class CodeWriter
 {

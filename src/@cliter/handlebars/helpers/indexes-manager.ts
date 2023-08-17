@@ -1,6 +1,6 @@
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
-import { Property } from '../../utils';
+import { Property } from '../../types';
 
 handlebars.registerHelper('indexesManager', function(
     {

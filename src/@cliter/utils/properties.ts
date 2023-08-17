@@ -1,7 +1,6 @@
-import { Property } from './property';
-import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType, WebComponentType } from '../types';
+import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType, WebComponentType, Property } from '../types';
 
-export class Properties
+export class PropertiesOld
 {
     schema!: ModuleDefinitionSchema;
     properties: Property[] = [];
@@ -712,18 +711,18 @@ export class Properties
         });
     } */
 
-    add(property: Property): void
+    /* add(property: Property): void
     {
         this.properties.push(property);
-    }
+    } */
 
-    filter(fn: () => { /**/ }): Property[]
+    /* filter(fn: () => { }): Property[]
     {
         return this.properties.filter(fn);
-    }
+    } */
 
-    toDto(): Property[]
+    /* toDto(): Property[]
     {
-        return this.properties.map(property => property.toDto());
-    }
+        return this.properties.map(property => property);
+    } */
 }

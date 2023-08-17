@@ -93,14 +93,13 @@ export default class Generate extends Command
 
             // add id property for model
             aggregateProperties.push(
-                new Property({
+                {
                     name      : 'id',
                     type      : PropertyType.ID,
                     primaryKey: true,
                     length    : 36,
                     nullable  : false,
-                    schema,
-                }),
+                },
             );
 
             // add properties defined by user
@@ -109,14 +108,16 @@ export default class Generate extends Command
             {
                 // eslint-disable-next-line no-await-in-loop
                 aggregateProperties.push(await Prompter.promptDefineAggregateProperty(generateCommandState));
-                Prompter.printValueObjectsTable(this, aggregateProperties);
+
+                // TODO, revisar impresion de tabla
+                // Prompter.printValueObjectsTable(this, aggregateProperties);
             }
 
             // add time stamp properties for model
             aggregateProperties.push(
-                new Property({ name: 'createdAt', type: PropertyType.TIMESTAMP, nullable: true, schema }),
-                new Property({ name: 'updatedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }),
-                new Property({ name: 'deletedAt', type: PropertyType.TIMESTAMP, nullable: true, schema }),
+                { name: 'createdAt', type: PropertyType.TIMESTAMP, nullable: true },
+                { name: 'updatedAt', type: PropertyType.TIMESTAMP, nullable: true },
+                { name: 'deletedAt', type: PropertyType.TIMESTAMP, nullable: true },
             );
 
             // generate module files

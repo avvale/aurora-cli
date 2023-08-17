@@ -3,7 +3,7 @@ import { cliterConfig } from '../config/cliter.config';
 import { ModuleDefinitionSchema, PropertyIndex, RelationshipType, PropertyType, PropertyWebComponent, PropertyRelationship } from '../types';
 import { YamlManager } from './yaml-manager';
 
-export class Property
+export class PropertyOLD
 {
     // Avoid error: Element implicitly has an 'any' type because expression of type
     // 'string' can't be used to index type 'Property'. No index signature with a

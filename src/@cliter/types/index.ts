@@ -1,5 +1,4 @@
 import { Command } from '@oclif/core';
-import { Property } from '../utils';
 import { AdditionalApi } from '../utils/additional-api';
 
 export interface CommandState
@@ -82,6 +81,28 @@ export interface PropertyWebComponent
 {
     type: WebComponentType;
     property: Property;
+}
+
+export interface Property
+{
+    type: PropertyType;
+    name: string;
+    nullable?: boolean;
+    defaultValue?: string | number;
+    primaryKey?: boolean;
+    index?: PropertyIndex;
+    indexName?: string;
+    autoIncrement?: boolean;
+    decimals?: number[];
+    enumOptions?: string[];
+    length?: number;
+    minLength?: number;
+    maxLength?: number;
+    relationship?: PropertyRelationship;
+    isI18n?: boolean;
+    example?: any;
+    faker?: string;
+    webComponent?: PropertyWebComponent;
 }
 
 export interface PropertyRelationship
