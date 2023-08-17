@@ -18,7 +18,7 @@
         )
     )
 ~}}
-{{#if (hasI18nProperties schema.aggregateProperties) }}
+{{#if schema.aggregateProperties.hasI18n }}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
