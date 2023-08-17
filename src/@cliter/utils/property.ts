@@ -155,20 +155,20 @@ export class Property
         return typeof this.defaultValue === 'boolean' || typeof this.defaultValue === 'number' ? this.defaultValue :  `'${this.defaultValue}'`;
     } */
 
-    get getReferenceKey(): any
+    /* get getReferenceKey(): any
     {
         return this.relationship?.key ? this.relationship?.key : 'id';
-    }
+    } */
 
-    get isRelationship(): boolean
+    /* get isRelationship(): boolean
     {
         return this.type === PropertyType.RELATIONSHIP;
-    }
+    } */
 
-    get isBinary(): boolean
+    /* get isBinary(): boolean
     {
         return this.type === PropertyType.BLOB || this.type === PropertyType.MEDIUMBLOB || this.type === PropertyType.LONGBLOB;
-    }
+    } */
 
     // property names
     /* get originName(): string
@@ -235,7 +235,7 @@ export class Property
         return null;
     } */
 
-    get getPropertiesFromRelationship(): Property[] | null
+    /* get getPropertiesFromRelationship(): Property[] | null
     {
         try
         {
@@ -247,9 +247,9 @@ export class Property
         }
 
         return null;
-    }
+    } */
 
-    get getRelationshipAggregateName(): string | null
+    /* get getRelationshipAggregateName(): string | null
     {
         try
         {
@@ -261,9 +261,9 @@ export class Property
         }
 
         return null;
-    }
+    } */
 
-    get getRelationshipSchema(): ModuleDefinitionSchema | null
+    /* get getRelationshipSchema(): ModuleDefinitionSchema | null
     {
         try
         {
@@ -275,7 +275,7 @@ export class Property
         }
 
         return null;
-    }
+    } */
 
     /* get getJavascriptType(): string
     {
@@ -358,13 +358,13 @@ export class Property
         return this.config.quotationTypes[this.type];
     } */
 
-    private parseModuleSection(moduleSectionString: string): ModuleDefinitionSchema
+    /* private parseModuleSection(moduleSectionString: string): ModuleDefinitionSchema
     {
         const [boundedContextName, moduleName] = moduleSectionString.split('/');
         if (!boundedContextName || !moduleName) throw new Error('Must input bounded context and module name, with format: bounded-context/module');
 
         return YamlManager.loadYamlConfigFile(boundedContextName, moduleName);
-    }
+    } */
 
     toDto(): any
     {

@@ -65,6 +65,30 @@ export const hasQuotationProperty = (
     return config.quotationTypes[property.type];
 };
 
+// replace by Property getReferenceKey
+export const getReferenceKeyProperty = (
+    property: Property,
+): any =>
+{
+    return property.relationship?.key ? property.relationship?.key : 'id';
+};
+
+// replace by Property isRelationship
+export const isRelationshipProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.type === PropertyType.RELATIONSHIP;
+};
+
+// replace by Property isBinary
+export const isBinaryProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.type === PropertyType.BLOB || property.type === PropertyType.MEDIUMBLOB || property.type === PropertyType.LONGBLOB;
+};
+
 /********************
  * MODEL DECORATORS *
  ********************/
@@ -136,7 +160,7 @@ export const getRelationshipBoundedContextNameProperty = (
     }
     catch
     {
-        throwRelationshipEntityNorCreatedProperty(
+        throwRelationshipEntityNotCreatedProperty(
             property,
             schema.boundedContextName,
             schema.moduleName,
@@ -158,7 +182,7 @@ export const getRelationshipModuleNameProperty = (
     }
     catch
     {
-        throwRelationshipEntityNorCreatedProperty(
+        throwRelationshipEntityNotCreatedProperty(
             property,
             schema.boundedContextName,
             schema.moduleName,
@@ -180,7 +204,136 @@ export const getRelationshipModuleNamesProperty = (
     }
     catch
     {
-        throwRelationshipEntityNorCreatedProperty(
+        throwRelationshipEntityNotCreatedProperty(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+};
+
+// replace by Property getPropertiesFromRelationship
+export const getPropertiesFromPropertyRelationship = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): Property[] | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).aggregateProperties;
+    }
+    catch
+    {
+        throwRelationshipEntityNotCreatedProperty(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+};
+
+// replace by Property getRelationshipAggregateName
+export const getAggregateNameFromPropertyRelationship = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): string | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).aggregateName;
+    }
+    catch
+    {
+        throwRelationshipEntityNotCreatedProperty(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+};
+
+export const getBoundedContextNameFromPropertyRelationship = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): string | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).boundedContextName;
+    }
+    catch
+    {
+        throwRelationshipEntityNotCreatedProperty(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+};
+
+export const getModuleNameFromPropertyRelationship = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): string | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleName;
+    }
+    catch
+    {
+        throwRelationshipEntityNotCreatedProperty(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+};
+
+export const getModuleNamesFromPropertyRelationship = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): string | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleName;
+    }
+    catch
+    {
+        throwRelationshipEntityNotCreatedProperty(
+            property,
+            schema.boundedContextName,
+            schema.moduleName,
+        );
+    }
+
+    return null;
+};
+
+// replace by Property getRelationshipSchema
+export const getSchemaFromPropertyRelationship = (
+    property: Property,
+    schema: ModuleDefinitionSchema,
+): ModuleDefinitionSchema | null =>
+{
+    try
+    {
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath);
+    }
+    catch
+    {
+        throwRelationshipEntityNotCreatedProperty(
             property,
             schema.boundedContextName,
             schema.moduleName,
@@ -191,7 +344,7 @@ export const getRelationshipModuleNamesProperty = (
 };
 
 // replace by Property throwRelationshipEntityNorCreated
-export const throwRelationshipEntityNorCreatedProperty = (
+export const throwRelationshipEntityNotCreatedProperty = (
     property: Property,
     boundedContextName: string,
     moduleName: string,

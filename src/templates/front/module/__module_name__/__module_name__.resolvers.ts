@@ -17,11 +17,11 @@
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
-    (object items=getRelationshipAggregateName path=(sumStrings '../' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '.types'))
+    (object items=(getAggregateNameFromPropertyRelationship this ../schema) path=(sumStrings '../' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '.types'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=getRelationshipAggregateName path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '.types'))
+    (object items=(getAggregateNameFromPropertyRelationship this ../schema) path=(sumStrings '../../' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '.types'))
 ~}}
 {{/eq}}
 {{/each}}
@@ -105,10 +105,10 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<Action{{#
 export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
     {{#eq webComponent.type 'select'}}
-    {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: {{ getRelationshipAggregateName }}[];
+    {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Get{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: {{ getAggregateNameFromPropertyRelationship this ../schema }}[];
     {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
-    {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: GridData<{{ getRelationshipAggregateName }}>;
+    {{ toCamelCase (getRelationshipBoundedContextNameProperty this ../schema) }}Paginate{{ toPascalCase (getRelationshipModuleNamesProperty this ../schema) }}: GridData<{{ getAggregateNameFromPropertyRelationship this ../schema }}>;
     {{/eq}}
     {{/each}}
 }> = (
@@ -215,17 +215,17 @@ export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq webComponent.type 'select'}}
 {{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Get' (toPascalCase (getRelationshipModuleNamesProperty this ../schema))) className=(sumStrings getRelationshipAggregateName '[]'))
+    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Get' (toPascalCase (getRelationshipModuleNamesProperty this ../schema))) className=(sumStrings (getAggregateNameFromPropertyRelationship this ../schema) '[]'))
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-select-element'}}
 {{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Paginate' (toPascalCase (getRelationshipModuleNamesProperty this ../schema))) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Paginate' (toPascalCase (getRelationshipModuleNamesProperty this ../schema))) className=(sumStrings 'GridData<' (getAggregateNameFromPropertyRelationship this ../schema) '>'))
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-elements-manager'}}
 {{ push ../returnTypesArray
-    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Paginate' (toPascalCase (getRelationshipModuleNamesProperty this ../schema))) className=(sumStrings 'GridData<' getRelationshipAggregateName '>'))
+    (object variableName=(sumStrings (toCamelCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Paginate' (toPascalCase (getRelationshipModuleNamesProperty this ../schema))) className=(sumStrings 'GridData<' (getAggregateNameFromPropertyRelationship this ../schema) '>'))
 ~}}
 {{/eq ~}}
 {{/each ~}}

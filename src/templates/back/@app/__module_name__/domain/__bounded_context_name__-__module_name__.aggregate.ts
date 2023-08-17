@@ -263,7 +263,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         return {
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{#if isBinary }}
+            {{#if (isBinaryProperty this) }}
             {{ toCamelCase (getNameProperty this) }}: this.{{ toCamelCase (getNameProperty this) }}{{#if nullable }}?{{/if}}.buffer,
             {{else}}
             {{ toCamelCase (getNameProperty this) }}: this.{{ toCamelCase (getNameProperty this) }}{{#if nullable }}?{{/if}}.value,

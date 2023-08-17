@@ -172,7 +172,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
         {{#unless relationship.avoidConstraint }}
         {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
         references: {
-            key: '{{ getReferenceKey }}',
+            key: '{{ getReferenceKeyProperty this }}',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',

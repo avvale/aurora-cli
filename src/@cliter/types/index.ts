@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-import { Properties, Property } from '../utils';
+import { Property } from '../utils';
 import { AdditionalApi } from '../utils/additional-api';
 
 export interface CommandState
@@ -139,7 +139,7 @@ export interface RelationshipPivot
     moduleName: string;
     moduleNames: string;
     aggregateName: string;
-    properties: Properties;
+    properties: Property[];
 }
 
 export enum RelationshipType

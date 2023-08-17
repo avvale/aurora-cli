@@ -151,7 +151,7 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/controllers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.controller.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.controller';
 {{/notInArray}}
-{{#unlessEq schema.additionalApis.length 0 }}
+{{#unlessEq (length schema.additionalApis) 0 }}
 
 // additionalApis
 {{#each schema.additionalApis}}
@@ -193,7 +193,7 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.resolver';
 {{/notInArray}}
-{{#unlessEq schema.additionalApis.length 0 }}
+{{#unlessEq (length schema.additionalApis) 0 }}
 
 // additionalApis
 {{#each schema.additionalApis}}
@@ -240,7 +240,7 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.seeder.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Seeder } from './seeder/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.seeder';
 {{/notInArray}}
-{{#unlessEq schema.additionalApis.length 0 }}
+{{#unlessEq (length schema.additionalApis) 0 }}
 
 // additionalApis
 {{#each schema.additionalApis}}
@@ -282,7 +282,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/controllers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.controller.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Controller,
     {{/notInArray}}
-    {{#unlessEq schema.additionalApis.length 0 }}
+    {{#unlessEq (length schema.additionalApis) 0 }}
 
     // additionalApis
     {{#each schema.additionalApis}}
@@ -325,7 +325,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Resolver,
     {{/notInArray}}
-    {{#unlessEq schema.additionalApis.length 0 }}
+    {{#unlessEq (length schema.additionalApis) 0 }}
 
     // additionalApis
     {{#each schema.additionalApis}}
@@ -368,7 +368,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler,
     {{/notInArray}}
-    {{#unlessEq schema.additionalApis.length 0 }}
+    {{#unlessEq (length schema.additionalApis) 0 }}
 
     // additionalApis
     {{#each schema.additionalApis}}

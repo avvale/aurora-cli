@@ -18,6 +18,7 @@ export const getVariableNameAdditionalApi = (additionalApi: AdditionalApi): stri
     return getPathActionAdditionalApi(additionalApi).toCamelCase() + getPathSegmentsAdditionalApi(additionalApi).map(segment => segment.toPascalCase()).join('');
 };
 
+// private functions
 const getPathSegmentsAdditionalApi = (additionalApi: AdditionalApi): string[] =>
 {
     return additionalApi.path.split('/').map(segment => segment.toKebabCase());

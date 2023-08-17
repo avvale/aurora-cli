@@ -11,10 +11,10 @@ export class AdditionalApis
         for (const additionalApi of this.additionalApis) yield additionalApi;
     }
 
-    get length(): number
+    /* get length(): number
     {
         return this.additionalApis.length;
-    }
+    } */
 
     get lengthMutations(): number
     {
@@ -26,15 +26,15 @@ export class AdditionalApis
         return this.additionalApis.filter(additionalApi => additionalApi.resolverType === ResolverType.QUERY).length;
     }
 
-    get mutations(): AdditionalApi[]
+    /* get mutations(): AdditionalApi[]
     {
         return this.additionalApis.filter(additionalApi => additionalApi.resolverType === ResolverType.MUTATION);
-    }
+    } */
 
-    get queries(): AdditionalApi[]
+    /* get queries(): AdditionalApi[]
     {
         return this.additionalApis.filter(additionalApi => additionalApi.resolverType === ResolverType.QUERY);
-    }
+    } */
 
     add(additionalApi: AdditionalApi): void
     {
