@@ -248,7 +248,7 @@ import { {{ getClassNameAdditionalApi this }}Handler } from './handlers/{{ getAp
 {{/each}}
 {{/unlessEq}}
 
-export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Controllers = [
+export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}ApiControllers = [
     {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/controllers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts'}}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller,
     {{/notInArray}}
@@ -291,7 +291,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/unlessEq}}
 ];
 
-export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Resolvers = [
+export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}ApiResolvers = [
     {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver,
     {{/notInArray}}
@@ -377,7 +377,7 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/unlessEq}}
 ];
 
-export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Services = [
+export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}ApiServices = [
     {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.seeder.ts'}}
     {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Seeder,
     {{/notInArray}}

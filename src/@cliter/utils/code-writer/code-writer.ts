@@ -205,10 +205,10 @@ export class CodeWriter
             sourceFile,
             `./${this.moduleName.toKebabCase()}`,
             [
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiControllers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiResolvers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiServices`,
             ],
         );
 
@@ -230,9 +230,9 @@ export class CodeWriter
                 `...${this.boundedContextName.toPascalCase()}Repositories`,
                 `...${this.boundedContextName.toPascalCase()}Sagas`,
                 // from @api
-                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiResolvers`,
                 `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
-                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiServices`,
             ],
             providersArray,
         );
@@ -240,7 +240,7 @@ export class CodeWriter
         // add controller to controllers array
         ArrayDriver.addArrayItem(
             sourceFile,
-            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
+            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiControllers`,
             controllersArray,
         );
 
