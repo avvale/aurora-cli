@@ -5,14 +5,11 @@
             (object items=(array 'ICommand' 'ofType' 'Saga') path='@nestjs/cqrs')
             (object items=(array 'Observable') path='rxjs')
             (object items=(array 'delay' 'map') path='rxjs/operators')
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleName) 'Event')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleName) 'Event')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}

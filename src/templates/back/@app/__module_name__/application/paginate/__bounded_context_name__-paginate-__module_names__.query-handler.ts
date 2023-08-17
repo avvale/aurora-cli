@@ -3,7 +3,8 @@
         array
             (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
             (object items=(array 'PaginationResponse') path=config.auroraCorePackage)
-            (   object
+            (
+                object
                     items=
                     (
                         array

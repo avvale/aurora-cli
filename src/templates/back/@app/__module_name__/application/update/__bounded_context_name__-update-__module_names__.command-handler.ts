@@ -5,11 +5,7 @@
             (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
             (
                 object
-                    items=
-                    (
-                        array
-                            (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Command')
-                    )
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Command')
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
             (
