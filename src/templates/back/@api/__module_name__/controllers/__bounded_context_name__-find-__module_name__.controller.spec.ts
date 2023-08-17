@@ -3,18 +3,19 @@
         array
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Controller')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Handler')
-                )
-                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Controller')
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Handler')
+                    )
+                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'CacheModule') path='@nestjs/cache-manager')
@@ -30,7 +31,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CacheModule.register(),
                 {{/if}}
             ],

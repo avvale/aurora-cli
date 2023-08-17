@@ -3,25 +3,26 @@
     setVar 'importsArray' (
         array
             (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdCommand')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdService')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdCommand')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdService')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleName) '-by-id.service')
+            )
     )
 ~}}
-{{#each schema.aggregateProperties }}
+{{#each (getWithoutTimestampsProperties (getValueObjectsProperties schema.aggregateProperties)) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
         (object 
             items=
-                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name))
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
+                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
                 oneRowByItem=true
         )
 ~}}
@@ -40,13 +41,13 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         // call to use case and implements ValueObjects
         await this.update{{ toPascalCase schema.moduleName }}ByIdService.main(
             {
-                {{#each schema.properties.updateCommandHandler}}
+                {{#each (getUpdateCommandHandlerProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
-                {{#if hasTimezone}}
-                {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}, { {{~#unless nullable}}{{#unlessEq name 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
+                {{#if (isTimezoneProperty this) }}
+                {{ toCamelCase (getPropertyName this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}(command.payload.{{ toCamelCase (getPropertyName this) }}, { {{~#unless nullable}}{{#unlessEq (getPropertyName this) 'id'}} undefinable: true {{/unlessEq}}{{/unless~}} }, { removeTimezone: command.cQMetadata.timezone }),
                 {{else}}
-                {{#unless (isI18nAvailableLangsProperty . ../schema.properties)}}
-                {{ toCamelCase name }}: new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(command.payload.{{ toCamelCase name }}{{#unless nullable}}{{#unlessEq name 'id'}}, { undefinable: true }{{/unlessEq}}{{/unless}}),
+                {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
+                {{ toCamelCase (getPropertyName this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}(command.payload.{{ toCamelCase (getPropertyName this) }}{{#unless nullable}}{{#unlessEq (getPropertyName this) 'id'}}, { undefinable: true }{{/unlessEq}}{{/unless}}),
                 {{/unless}}
                 {{/if}}
                 {{/if}}

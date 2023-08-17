@@ -1,8 +1,7 @@
-import { Property, Properties } from '../..';
+import { Property, getPropertyName, hasI18nProperties } from '../..';
 import * as handlebars from 'handlebars';
-import * as _ from 'lodash';
 
-handlebars.registerHelper('isI18nAvailableLangsProperty', function(property: Property, properties: Properties)
+handlebars.registerHelper('isI18nAvailableLangsProperty', function(property: Property, properties: Property[])
 {
-    return properties.hasI18n && property.name === 'availableLangs';
+    return hasI18nProperties(properties) && getPropertyName(property) === 'availableLangs';
 });

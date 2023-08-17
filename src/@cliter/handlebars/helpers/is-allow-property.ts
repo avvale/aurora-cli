@@ -1,4 +1,4 @@
-import { Property, RelationshipType } from '../..';
+import { Property, RelationshipType, isRelationshipProperty } from '../..';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
 
@@ -22,7 +22,7 @@ handlebars.registerHelper('isAllowProperty', function(
     }
 
     // avoid print property of relationship
-    if (property.isRelationship && property.relationship?.type === RelationshipType.ONE_TO_MANY) return allowOneToManyRelationShip;
+    if (isRelationshipProperty(property) && property.relationship?.type === RelationshipType.ONE_TO_MANY) return allowOneToManyRelationShip;
 
     return true;
 });

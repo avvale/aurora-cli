@@ -9,9 +9,9 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {
     constructor(
         public readonly payload: {
-            {{#each schema.properties.updateCommand}}
+            {{#each (getUpdateCommandProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ getJavascriptType }};
+            {{ toCamelCase (getPropertyName this) }}{{#unlessEq (getPropertyName this) 'id'}}?{{/unlessEq}}: {{ getJavascriptTypeProperty this ../config }};
             {{/if}}
             {{/each}}
         },

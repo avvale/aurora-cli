@@ -4,26 +4,31 @@
             (object items='Injectable' path='@nestjs/common')
             (object items='EventPublisher' path='@nestjs/cqrs')
             (object items=(array 'CQMetadata' 'Utils') path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') 
-                        schema.aggregateName
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') 
+                            schema.aggregateName
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
     )
 ~}}
-{{#each schema.properties.valueObjects}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (object
+            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+            path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+            oneRowByItem=true
+        )
 ~}}
 {{/if}}
 {{/each}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'ConflictException' 'NotFoundException') path='@nestjs/common')
@@ -43,10 +48,10 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 
     async main(
         payload: {
-            {{#each schema.properties.upsertService}}
+            {{#each (getUpsertServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{#unless (isI18nAvailableLangsProperty . ../schema.properties)}}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
+            {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
             {{/unless}}
             {{/if}}
             {{/each}}
@@ -54,7 +59,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         const contentLanguage = cQMetadata.meta.contentLanguage;
 
         // override langId value object with header content-language value
@@ -63,29 +68,29 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         {{/if}}
         // upsert aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq name 'createdAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq name 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+{{else eq (getPropertyName this) 'updatedAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq (getPropertyName this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+{{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             null, // availableLangs
 {{else}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getPropertyName this) }},
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getPropertyName this) }},
             {{/and}}
             {{/each}}
         );
 
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         try
         {
             // try get object from database
@@ -137,28 +142,28 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 
         // upsert i18n aggregate with factory pattern for upsert repository method
         const {{ toCamelCase schema.moduleName }}I18n = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq name 'createdAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq name 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+{{else eq (getPropertyName this) 'updatedAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq (getPropertyName this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
-            {{ toCamelCase schema.moduleName }}.availableLangs,
+{{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
+            {{ toCamelCase ../schema.moduleName }}.availableLangs,
 {{else}}
-{{#eq name 'id'}}
+{{#eq (getPropertyName this) 'id'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}Id(modelInDB ? modelInDB.id.value : Utils.uuid()),
 {{else}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getPropertyName this) }},
 {{/eq}}
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getPropertyName this) }},
             {{/and}}
             {{/each}}
         );

@@ -1,5 +1,5 @@
 import { Command } from '@oclif/core';
-import { AdditionalApis, Properties, Property } from '../utils';
+import { AdditionalApi } from '../utils/additional-api';
 
 export interface CommandState
 {
@@ -62,9 +62,9 @@ export interface ModuleDefinitionSchema
     hasOAuth: boolean;
     hasTenant: boolean;
     hasAuditing: boolean;
-    properties: Properties;
-    additionalApis: AdditionalApis;
-    excluded?: string[];        // set files to avoid create
+    aggregateProperties: Property[];
+    additionalApis?: AdditionalApi[];
+    excluded?: string[];                // set files to avoid create
 }
 
 export interface NewBackCommandState extends CommandState
@@ -83,11 +83,33 @@ export interface PropertyWebComponent
     property: Property;
 }
 
+export interface Property
+{
+    type: PropertyType;
+    name: string;
+    nullable?: boolean;
+    defaultValue?: string | number;
+    primaryKey?: boolean;
+    index?: PropertyIndex;
+    indexName?: string;
+    autoIncrement?: boolean;
+    decimals?: number[];
+    enumOptions?: string[];
+    length?: number;
+    minLength?: number;
+    maxLength?: number;
+    relationship?: PropertyRelationship;
+    isI18n?: boolean;
+    example?: any;
+    faker?: string;
+    webComponent?: PropertyWebComponent;
+}
+
 export interface PropertyRelationship
 {
     type: RelationshipType;
     singularName?: string;
-    aggregate: string;
+    aggregateName: string;
     modulePath: string;
     key?: string;
     field: string;
@@ -134,8 +156,11 @@ export enum PropertyType
 
 export interface RelationshipPivot
 {
-    aggregate: string;
-    modulePath: string;
+    boundedContextName: string;
+    moduleName: string;
+    moduleNames: string;
+    aggregateName: string;
+    properties: Property[];
 }
 
 export enum RelationshipType

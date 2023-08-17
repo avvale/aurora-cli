@@ -14,20 +14,20 @@ export class AdditionalApi
         return this.pathBoundedContext.toKebabCase() + '-' + this.pathAction.toKebabCase() + '-' + this.pathSegments.join('-');
     }
 
-    get getClassName(): string
+    /* get getClassName(): string
     {
         return this.pathBoundedContext.toPascalCase() + this.pathAction.toPascalCase() + this.pathSegments.map(segment => segment.toPascalCase()).join('');
-    }
+    } */
 
-    get getResolverName(): string
+    /* get getResolverName(): string
     {
         return this.pathBoundedContext.toCamelCase() + this.pathAction.toPascalCase() + this.pathSegments.map(segment => segment.toPascalCase()).join('');
-    }
+    } */
 
-    get getVariableName(): string
+    /* get getVariableName(): string
     {
         return this.pathAction.toCamelCase() + this.pathSegments.map(segment => segment.toPascalCase()).join('');
-    }
+    } */
 
     constructor(
         payload: {

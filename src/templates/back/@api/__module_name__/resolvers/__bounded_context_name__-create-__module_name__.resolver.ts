@@ -7,7 +7,7 @@
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName) 'Input')) path='@api/graphql')
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items='ContentLanguage' path=config.auroraCorePackage)
@@ -54,7 +54,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         @CurrentAccount() account: AccountResponse,
         {{/if}}
         @Timezone() timezone?: string,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         @ContentLanguage() contentLanguage?: string,
         {{/if}}
         {{#if schema.hasAuditing}}
@@ -68,7 +68,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             account,
             {{/if}}
             timezone,
-            {{#if schema.properties.hasI18n}}
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             contentLanguage,
             {{/if}}
             {{#if schema.hasAuditing}}

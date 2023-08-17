@@ -1,42 +1,42 @@
-{{#each schema.properties.withImportRelationshipOneToOne}}
-import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
+import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToMany}}
-import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
+import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToMany}}
-import { {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
+import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response
 {
     constructor(
-        {{#each schema.properties.response}}
+        {{#each (getResponseProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this)}}
-        public readonly {{ toCamelCase name }}: {{ getJavascriptType }},
+        public readonly {{ toCamelCase (getPropertyName this) }}: {{ getJavascriptTypeProperty this ../config }},
         {{/if}}
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToOneWithRelationshipField}}
-        public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response,
+        {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
+        public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToOneWithoutRelationshipField}}
-        public readonly {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response,
+        {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
+        public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToOne}}
+        {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
         {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-        public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response,
+        public readonly {{ toCamelCase relationship.field }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response,
         {{/unless}}
         {{/each}}
-        {{#each schema.properties.withRelationshipOneToMany}}
-        public readonly {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response[],
+        {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
+        public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response[],
         {{/each}}
-        {{#each schema.properties.withRelationshipManyToMany}}
-        public readonly {{ toCamelCase originName }}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Response[],
+        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        public readonly {{ toCamelCase name }}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Response[],
         {{/each}}
     ) {}
 }

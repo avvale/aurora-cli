@@ -5,6 +5,8 @@ import { GenerateCommandState, ResolverType, TemplateElement } from '../../types
 
 export const generateAdditionalApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
+    if (!generateCommandState.schema.additionalApis) return;
+
     for (const additionalApi of generateCommandState.schema.additionalApis)
     {
         // create module files

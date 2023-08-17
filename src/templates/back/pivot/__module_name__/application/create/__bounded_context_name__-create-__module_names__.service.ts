@@ -26,7 +26,7 @@
 ~}}
 {{{ importManager (object imports=importsArray) }}}
 @Injectable()
-export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}Service
+export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.name }}Service
 {
     constructor(
         private readonly publisher: EventPublisher,
@@ -34,7 +34,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ) {}
 
     public async main(
-        {{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}: {
+        {{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.name }}: {
             {{ toCamelCase schema.moduleName }}Id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}Id;
             {{ toCamelCase currentProperty.relationship.singularName }}Id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}Id;
 
@@ -42,12 +42,12 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregate{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }} = {{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}.map({{ toCamelCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }} => {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}.register(
+        const aggregate{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.name }} = {{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.name }}.map({{ toCamelCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }} => {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}.register(
             {{ toCamelCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}.{{ toCamelCase schema.moduleName }}Id,
             {{ toCamelCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}.{{ toCamelCase currentProperty.relationship.singularName }}Id,
         ));
 
         // insert
-        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }});
+        await this.repository.insert(aggregate{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.name }});
     }
 }

@@ -2,6 +2,7 @@ import * as path from 'node:path';
 import { cliterConfig } from '../../config';
 import { CodeWriter } from '../../utils';
 import { GenerateCommandState } from '../../types';
+import { hasI18nProperties } from '../../utils/properties.functions';
 
 export const addReferences = (generateCommandState: GenerateCommandState): void =>
 {
@@ -13,19 +14,19 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         generateCommandState.schema.moduleName.toLowerCase(),
         generateCommandState.schema.moduleNames.toLowerCase(),
         generateCommandState.schema.aggregateName,
-        generateCommandState.schema.properties.hasI18n,
+        hasI18nProperties(generateCommandState.schema.aggregateProperties),
     );
 
     codeWriter.generateFrontInterface(
-        generateCommandState.schema.properties,
+        generateCommandState.schema.aggregateProperties,
         { overwrite: generateCommandState.flags.overwriteInterface },
     );
     codeWriter.generateFrontRoutes();
     codeWriter.declareFrontBoundedContext();
     codeWriter.generateFrontNavigation();
     codeWriter.registerFrontNavigation();
-    codeWriter.generateFrontTranslations(generateCommandState.schema.properties, 'en');
-    codeWriter.generateFrontTranslations(generateCommandState.schema.properties, 'es');
+    codeWriter.generateFrontTranslations(generateCommandState.schema.aggregateProperties, 'en');
+    codeWriter.generateFrontTranslations(generateCommandState.schema.aggregateProperties, 'es');
     codeWriter.generateFrontNavigationTranslation('en');
     codeWriter.generateFrontNavigationTranslation('es');
 };

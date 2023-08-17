@@ -5,7 +5,7 @@ import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@ne
 // custom items
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service } from './{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.service';
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
 import { {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Repository } from '../../infrastructure/mock/{{ toKebabCase schema.boundedContextName }}-mock-{{ toKebabCase schema.moduleName }}.repository';
@@ -32,7 +32,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                         delete: () => { /**/ },
                     },
                 },
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository,
                     useValue: {
@@ -63,7 +63,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 await service.main(
                     {},
                     {},
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         meta: {
                             fallbackLang: {

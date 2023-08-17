@@ -4,9 +4,9 @@ export class  {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase 
 {
     constructor(
         public readonly payload: {
-            {{#each schema.properties.createCommand}}
+            {{#each (getCreateCommandProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}{{#if nullable}}?{{/if}}: {{ getJavascriptType }};
+            {{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}: {{ getJavascriptTypeProperty this ../config }};
             {{/if}}
             {{/each}}
         } [],

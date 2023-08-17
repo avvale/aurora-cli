@@ -3,14 +3,14 @@
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from '{{ config.appContainer }}/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}';
-import { {{ currentProperty.relationship.aggregate }}Model } from '{{ config.appContainer }}/{{ currentProperty.relationship.modulePath }}';
+import { {{ currentProperty.relationship.aggregateName }}Model } from '{{ config.appContainer }}/{{ currentProperty.relationship.modulePath }}';
 
 @Table({
     modelName: '{{ toPascalCase currentProperty.relationship.pivot.aggregate }}',
     freezeTableName: true,
     timestamps: false,
 })
-export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}Model extends Model<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}Model>
+export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.name }}Model extends Model<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleNames }}{{ toPascalCase currentProperty.name }}Model>
 {
     @ForeignKey(() => {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model)
     @Column({
@@ -19,10 +19,10 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     })
     {{ toCamelCase schema.moduleName }}Id: string;
 
-    @ForeignKey(() => {{ currentProperty.relationship.aggregate }}Model)
+    @ForeignKey(() => {{ currentProperty.relationship.aggregateName }}Model)
     @Column({
-        field: '{{ toCamelCase currentProperty.getRelationshipModuleName }}Id',
+        field: '{{ toCamelCase (getRelationshipModuleNameProperty currentProperty schema) }}Id',
         type: DataTypes.UUID,
     })
-    {{ toCamelCase currentProperty.getRelationshipModuleName }}Id: string;
+    {{ toCamelCase (getRelationshipModuleNameProperty currentProperty schema) }}Id: string;
 }

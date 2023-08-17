@@ -8,7 +8,7 @@
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Query') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Command')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'BadRequestException') path='@nestjs/common')
@@ -34,7 +34,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
         private readonly coreGetContentLanguageObjectService: CoreGetContentLanguageObjectService,
         private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
@@ -49,7 +49,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         contentLanguage?: string,
         {{/if}}
         {{#if schema.hasAuditing}}
@@ -57,7 +57,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{/if}}
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         if (!contentLanguage) throw new BadRequestException('To update a multi-language objects, the content-language header must be defined.');
 
         {{/if}}
@@ -72,7 +72,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
                     auditing,
                 },
                 {{/if}}
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 meta: {
                     contentLanguage: await this.coreGetContentLanguageObjectService.get(contentLanguage),
                 },
@@ -80,7 +80,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
             },
         ));
 
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         constraint = await this.coreAddI18nConstraintService.add(
             {},
             '{{ toCamelCase schema.moduleName }}I18n',

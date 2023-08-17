@@ -38,7 +38,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
      * Map array of objects to array aggregates
      * @param {{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.relationship.singularName }}s
      */
-    mapModelsToAggregates({{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.originName }}: LiteralObject[]): {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}[]
+    mapModelsToAggregates({{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.name }}: LiteralObject[]): {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}[]
     {
         if (!Array.isArray({{ toCamelCase schema.moduleNames }}{{ toPascalCase currentProperty.relationship.singularName }}s)) return;
 

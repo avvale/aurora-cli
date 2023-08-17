@@ -5,79 +5,99 @@
             (object items=(array 'ApiProperty') path='@nestjs/swagger')
     )
 ~}}
-{{#each schema.properties.withImportRelationshipManyToMany}}
-{{ 
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
+{{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto')
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+        )
 ~}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipManyToOne}}
+{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto')
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+        )
 ~}}
 {{/unless}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToMany}}
+{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto')
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+        )
 ~}}
 {{/each}}
-{{#each schema.properties.withImportRelationshipOneToOne}}
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase getRelationshipBoundedContextName) (toPascalCase getRelationshipModuleName) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase getRelationshipBoundedContextName) '/' (toKebabCase getRelationshipModuleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto')
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+        )
 ~}}
 {{/each}}
-{{#if schema.properties.hasEnum}}
-{{#each schema.properties.isEnum}}
+{{#if (hasEnumProperties schema.aggregateProperties) }}
+{{#each (getEnumProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase originName)) path='@api/graphql')
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase name))
+                path='@api/graphql'
+        )
 ~}}
 {{/each}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto
 {
-{{#each schema.properties.dtoProperties}}
+{{#each (getDtoProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : String,
-        description: '{{ toCamelCase originName }} [input here api field description]',
-        example    : '{{ uuid originName }}',
+        description: '{{ toCamelCase name }} [input here api field description]',
+        example    : '{{ uuid name }}',
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: string;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
 
     @ApiProperty({
-        type       : () => {{ relationship.aggregate }}Dto,
-        description: '{{ relationship.aggregate }} [input here api field description]',
+        type       : () => {{ relationship.aggregateName }}Dto,
+        description: '{{ relationship.aggregateName }} [input here api field description]',
     })
-    {{ toCamelCase relationship.field }}?: {{ relationship.aggregate }}Dto;
+    {{ toCamelCase relationship.field }}?: {{ relationship.aggregateName }}Dto;
 
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : () => [{{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto],
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        type       : () => [{{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto],
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto[];
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto[];
 
 {{#if relationship.isDenormalized}}
     @ApiProperty({
         type       : Object,
         description: '{{ toCamelCase relationship.singularName }}Ids [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
     {{ toCamelCase relationship.singularName }}Ids{{#if nullable }}?{{/if}}: any;
@@ -87,13 +107,13 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : () => [{{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto],
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        type       : () => [{{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto],
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase getRelationshipBoundedContextName }}{{ toPascalCase getRelationshipModuleName }}Dto[];
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto[];
 
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE}}
@@ -101,54 +121,54 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#eq type ../propertyType.ID ~}}
     @ApiProperty({
         type       : String,
-        description: '{{ toCamelCase originName }} [input here api field description]',
-        example    : '{{ uuid originName }}',
+        description: '{{ toCamelCase name }} [input here api field description]',
+        example    : '{{ uuid name }}',
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: string;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
 
     @ApiProperty({
-        type       : () => {{ relationship.aggregate }}Dto,
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        type       : () => {{ relationship.aggregateName }}Dto,
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase relationship.field }}?: {{ relationship.aggregate }}Dto;
+    {{ toCamelCase relationship.field }}?: {{ relationship.aggregateName }}Dto;
 
 {{else ~}}
     @ApiProperty({
-        type       : () => {{ relationship.aggregate }}Dto,
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        type       : () => {{ relationship.aggregateName }}Dto,
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ relationship.aggregate }}Dto;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ relationship.aggregateName }}Dto;
 
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
-        type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }},
-        enum       : [{{{ enumOptionsArrayItems }}}],
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
+        enum       : [{{{ getPropertyStringEnumOptions this }}}],
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase originName }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }};
 
 {{/eq}}
 {{#if ../isCommonProperty}}
     @ApiProperty({
-        type       : {{ getSwaggerType }},
-        description: '{{ toCamelCase originName }} [input here api field description]',
+        type       : {{ getSwaggerTypeProperty this ../config }},
+        description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
-        example    : {{#if hasQuotation }}'{{/if }}{{ example }}{{#if hasQuotation }}'{{/if }},
+        example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase originName }}{{#if nullable }}?{{/if}}: {{ getDtoType }};
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ getDtoTypeProperty this ../config }};
 
 {{/if}}
 {{/if}}

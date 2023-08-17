@@ -1,9 +1,8 @@
 /* eslint-disable max-params */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, LockFile, TemplateElement } from '../types';
+import { GenerateCommandState, LockFile, Property, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
 import { AdditionalApi } from './additional-api';
-import { Property } from './property';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
@@ -86,7 +85,11 @@ export class TemplateGenerator
         directory: string,
     ): void
     {
-        const modulePath = path.join(TemplateGenerator.projectDirectory, relativeTargetBasePath, directory);
+        const modulePath = path.join(
+            TemplateGenerator.projectDirectory,
+            relativeTargetBasePath,
+            directory,
+        );
 
         if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
     }

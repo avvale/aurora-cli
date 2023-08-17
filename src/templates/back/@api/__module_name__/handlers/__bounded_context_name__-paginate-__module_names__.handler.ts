@@ -7,7 +7,7 @@
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'BadRequestException') path='@nestjs/common')
@@ -26,7 +26,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
 {
     constructor(
         private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
         private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
         {{/if}}
@@ -39,12 +39,12 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         contentLanguage?: string,
         {{/if}}
     ): Promise<Pagination>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         if (!contentLanguage) throw new BadRequestException('To paginate a multi-language objects, the content-language header must be defined.');
 
         constraint = await this.coreAddI18nConstraintService.add(

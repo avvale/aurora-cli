@@ -1,9 +1,9 @@
 export class {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event
 {
     constructor(
-        {{#each schema.properties.deletedEvent}}
+        {{#each (getDeletedEventProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this) }}
-        public readonly {{ toCamelCase name }}: {{ getJavascriptType }},
+        public readonly {{ toCamelCase (getPropertyName this) }}: {{ getJavascriptTypeProperty this ../config }},
         {{/if}}
         {{/each}}
     ) {}

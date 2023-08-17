@@ -4,27 +4,32 @@
             (object items='Injectable' path='@nestjs/common')
             (object items='EventPublisher' path='@nestjs/cqrs')
             (object items='CQMetadata' path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
-                        schema.aggregateName
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            (
+                object
+                    items=
+                    (
+                        array
+                            schema.aggregateName
+                            (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
     )
 ~}}
-{{#each schema.properties.valueObjects}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase name)) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects') oneRowByItem=true)
+        (object
+            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+            path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+            oneRowByItem=true
+        )
 ~}}
 {{/if}}
 {{/each}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
@@ -41,10 +46,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ) {}
 
     async main(
-        {{ toCamelCase schema.moduleNames }}: {
-            {{#each schema.properties.createItemsService}}
+        payload: {
+            {{#each (getCreateItemsServiceProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
             {{/if}}
             {{/each}}
         } [],
@@ -52,27 +57,27 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregate{{ toPascalCase schema.moduleNames }} = {{ toCamelCase schema.moduleNames }}.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+        const aggregate{{ toPascalCase schema.moduleNames }} = payload.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq name 'createdAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq name 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
+{{else eq (getPropertyName this) 'updatedAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq (getPropertyName this) 'deletedAt'}}
             null, // deleteAt
 {{else}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }},
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }},
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }},
             {{/and}}
             {{/each}}
         ));
 
         // insert
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         // delete duplicate elements from multiple languages
         await this.repository.insert(
             aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)),

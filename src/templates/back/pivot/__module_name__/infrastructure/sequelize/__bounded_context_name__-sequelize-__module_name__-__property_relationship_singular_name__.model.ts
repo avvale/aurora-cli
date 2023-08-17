@@ -10,8 +10,8 @@
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
             (object
-                items=(sumStrings currentProperty.relationship.aggregate 'Model')
-                path=(sumStrings config.appContainer '/' currentProperty.relationship.modulePath)
+                items=(sumStrings currentProperty.relationship.pivot.aggregateName 'Model')
+                path=(sumStrings config.appContainer '/' (toKebabCase currentProperty.relationship.pivot.moduleName))
             )
     )
 ~}}
@@ -30,7 +30,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     })
     {{ toCamelCase schema.moduleName }}Id: string;
 
-    @ForeignKey(() => {{ currentProperty.relationship.aggregate }}Model)
+    @ForeignKey(() => {{ currentProperty.relationship.aggregateName }}Model)
     @Column({
         field: '{{ toCamelCase currentProperty.relationship.singularName }}Id',
         type: DataTypes.UUID,

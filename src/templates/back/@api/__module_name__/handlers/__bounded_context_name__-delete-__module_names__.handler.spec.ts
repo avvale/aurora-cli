@@ -8,7 +8,7 @@
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'CACHE_MANAGER' 'CacheModule') path='@nestjs/cache-manager')
@@ -27,13 +27,13 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CacheModule.register(),
                 {{/if}}
             ],
             providers: [
                 {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler,
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CoreAddI18nConstraintService,
                 {
                     provide : ConfigService,
@@ -60,7 +60,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                         dispatch: () => { /**/ },
                     },
                 },
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 {
                     provide : CoreGetContentLanguageObjectService,
                     useValue: {
@@ -130,7 +130,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                     {},
                     {},
                     'Europe/Madrid',
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     'en',
                     {{/if}}
                 ),

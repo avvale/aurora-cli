@@ -1,10 +1,8 @@
 /* eslint-disable unicorn/no-array-push-push */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, Scope, RelationshipType, PropertyType } from '../types';
-import { Property } from './property';
+import { GenerateCommandState, Scope, RelationshipType, PropertyType, Property } from '../types';
 import { cliterConfig } from '../config/cliter.config';
 import { getBoundedContextModuleFromFlag } from '../functions/common';
-import { Properties } from './properties';
 import * as inquirer from 'inquirer';
 import * as Table from 'cli-table3';
 import * as _ from 'lodash';
@@ -255,7 +253,7 @@ export const Prompter =
         });
 
         questions.push({
-            name   : 'relationship.aggregate',
+            name   : 'relationship.aggregateName',
             message: 'What is the aggregate which you want to relate this property? (example: AdminLang)',
             type   : 'input',
             when   : (answers: any) =>
@@ -367,7 +365,7 @@ export const Prompter =
         // eslint-disable-next-line unicorn/explicit-length-check
         if (Object.keys(cliterConfig.defaultTypeLength).includes(response.type) && !response.length) response.length = cliterConfig.defaultTypeLength[response.type];
 
-        return new Property({
+        return {
             name         : response.name,
             type         : response.type,
             primaryKey   : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
@@ -386,19 +384,19 @@ export const Prompter =
                     {
                         type           : response.relationship.type,
                         singularName   : response.relationship.singularName,
-                        aggregate      : response.relationship.aggregate,
+                        aggregateName  : response.relationship.aggregateName,
                         modulePath     : response.relationship.modulePath,
                         key            : response.relationship.type === RelationshipType.MANY_TO_ONE ? 'id' : undefined, // set default relationship key to id
                         field          : response.relationship.type === RelationshipType.MANY_TO_ONE || (response.relationship.type === RelationshipType.ONE_TO_ONE && response.name.endsWith('Id')) ? response.name.replace(new RegExp('Id$'), '').toCamelCase() : undefined, // set relationship field
                         avoidConstraint: true,
-                        pivot          : response.relationship.pivot?.aggregate ? {
+                        // TODO, ajustar a nueva estructura de pivot
+                        /* pivot          : response.relationship.pivot?.aggregate ? {
                             aggregate : response.relationship.pivot.aggregate,
                             modulePath: response.relationship.pivot.modulePath,
-                        } : undefined,
+                        } : undefined, */
                     }) : undefined,
-            index : response.index,
-            schema: generateCommandState.schema,
-        });
+            index: response.index,
+        };
     },
 
     async promptAddPipeline(scope: string): Promise<{ from: string; to: string; service: string;}>
@@ -456,12 +454,12 @@ export const Prompter =
         return inquirer.prompt(questions);
     },
 
-    printValueObjectsTable(command: Command, items: Properties)
+    /* printValueObjectsTable(command: Command, items: Property[]): void
     {
-        const headers: string[] = [];
-        const excludeHeaders: string[] = ['config', 'id'];
-        const aliases: {origin: string; alias: string}[] = [
-            { origin: '_name',                        alias: 'Name' },
+        const headers: [keyof Property] = ['name'];
+        const excludeHeaders: Set<string> = new Set(['config', 'id']);
+        const aliases: { origin: keyof Property; alias: string }[] = [
+            { origin: 'name',                         alias: 'Name' },
             { origin: 'type',                         alias: 'Type' },
             { origin: 'primaryKey',                   alias: 'PK' },
             { origin: 'enumOptions',                  alias: 'Enums' },
@@ -480,16 +478,13 @@ export const Prompter =
         {
             for (const key in item)
             {
-                if (item[key])
+                const alias = aliases.find(alias => alias.origin === key);
+                if (
+                    !headers.includes(alias ? alias.alias : key) &&
+                    !excludeHeaders.has(key)
+                )
                 {
-                    const alias = aliases.find(alias => alias.origin === key);
-                    if (
-                        !headers.includes(alias ? alias.alias : key) &&
-                        !excludeHeaders.includes(key)
-                    )
-                    {
-                        headers.push(alias ? alias.alias : key);
-                    }
+                    headers.push(alias ? alias.alias : key);
                 }
             }
         }
@@ -530,5 +525,5 @@ export const Prompter =
 
         table.push(...rows);
         command.log(table.toString());
-    },
+    }, */
 };

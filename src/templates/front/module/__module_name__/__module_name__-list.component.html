@@ -86,7 +86,7 @@
                 }"
                 [actionsMenu]="{
                     edit: t('Edit'),
-                    {{#unless schema.properties.hasI18n}}
+                    {{#unless (hasI18nProperties schema.aggregateProperties) }}
                     delete: t('Delete')
                     {{else}}
                     delete: t('Delete'),
