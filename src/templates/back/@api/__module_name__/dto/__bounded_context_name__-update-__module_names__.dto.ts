@@ -9,7 +9,11 @@
 {{#unlessEq type ../propertyType.ID}}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Update' (toPascalCase (getRelationshipModuleNamesProperty this ../schema)) 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema))))
+        (
+            object
+                items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Update' (toPascalCase (getRelationshipModuleNamesProperty this ../schema)) 'Dto')
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+        )
 ~}}
 {{/unlessEq}}
 {{/each}}
@@ -17,7 +21,11 @@
 {{#each (getEnumProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase name)) path='@api/graphql')
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase name))
+                path='@api/graphql'
+        )
 ~}}
 {{/each}}
 {{/if}}

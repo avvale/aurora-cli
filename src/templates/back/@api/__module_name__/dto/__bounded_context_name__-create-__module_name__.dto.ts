@@ -12,7 +12,7 @@
         (
             object
                 items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Create' (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto')
-                path=(sumStrings config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
         )
 ~}}
 {{/unlessEq}}
@@ -23,7 +23,7 @@
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase name))
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase name))
                 path='@api/graphql'
         )
 ~}}
