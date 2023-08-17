@@ -3,18 +3,23 @@
     setVar 'importsArray' (
         array
             (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Command')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Service')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Command')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames) 'Service')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.service')
+            )
     )
 ~}}
-{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#each (getWithoutTimestampsProperties (getValueObjectsProperties schema.aggregateProperties)) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray

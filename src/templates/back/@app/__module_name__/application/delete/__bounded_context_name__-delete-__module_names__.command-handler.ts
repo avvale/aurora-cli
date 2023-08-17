@@ -2,15 +2,16 @@
     setVar 'importsArray' (
         array
             (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Command')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Service')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Command')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleNames) 'Service')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.service')
+            )
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}

@@ -2,17 +2,22 @@
     setVar 'importsArray' (
         array
             (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Response')
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Query')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Service')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Response')
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper')
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Query')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'Service')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/find/' (toKebabCase schema.boundedContextName) '-find-' (toKebabCase schema.moduleName) '.service')
+            )
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}

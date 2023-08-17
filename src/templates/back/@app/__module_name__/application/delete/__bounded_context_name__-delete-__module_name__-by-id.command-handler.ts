@@ -4,12 +4,12 @@
             (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
             (
                 object
-                    items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id'))
+                    items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id')
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
             )
             (
                 object
-                    items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdCommand'))
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdCommand')
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
             (

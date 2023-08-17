@@ -3,15 +3,19 @@
         array
             (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
             (object items=(array 'PaginationResponse') path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Query')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Service')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (   object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Query')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Service')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/paginate/' (toKebabCase schema.boundedContextName) '-paginate-' (toKebabCase schema.moduleNames) '.service')
+            )
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}

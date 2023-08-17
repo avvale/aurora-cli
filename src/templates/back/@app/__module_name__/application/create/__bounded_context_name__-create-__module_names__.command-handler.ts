@@ -15,7 +15,7 @@
             )
     )
 ~}}
-{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#each (getWithoutTimestampsProperties (getValueObjectsProperties schema.aggregateProperties)) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
