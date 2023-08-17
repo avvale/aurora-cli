@@ -5,9 +5,9 @@ export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = 
     {{#if (isAllowProperty ../schema.moduleName this) }}
     {
         type       : ColumnDataType.{{ getPropertyColumnDataType this ../config }},
-        field      : '{{ toCamelCase (getNameProperty this) }}',
-        sort       : '{{ toCamelCase (getNameProperty this) }}',
-        translation: '{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getNameProperty this) }}',
+        field      : '{{ toCamelCase (getPropertyName this) }}',
+        sort       : '{{ toCamelCase (getPropertyName this) }}',
+        translation: '{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getPropertyName this) }}',
     },
     {{/if}}
     {{/each}}

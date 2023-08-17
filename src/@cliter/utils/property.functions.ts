@@ -3,7 +3,7 @@ import { ModuleDefinitionSchema, Property, PropertyType, RelationshipType } from
 import { loadYamlByBoundedContextModule } from './yaml-manager';
 
 // replace by Property name
-export const getNameProperty = (
+export const getPropertyName = (
     property: Property,
 ): string =>
 {
@@ -85,7 +85,7 @@ export const getPropertyEnumOptions = (
     property: Property,
 ): string[] | undefined =>
 {
-    return getPropertyEnumOptions(property)?.map((option: string) => option.trim().toUpperCase());
+    return property.enumOptions?.map((option: string) => option.trim().toUpperCase());
 };
 
 // replace by Property isRelationship

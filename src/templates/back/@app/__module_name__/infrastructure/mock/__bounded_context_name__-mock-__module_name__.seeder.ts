@@ -28,18 +28,18 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
                 {{ schema.aggregateName }}.register(
                     {{#each (getAggregateProperties schema.aggregateProperties) }}
                     {{#unless isI18n}}
-{{#eq (getNameProperty this) 'createdAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
                     new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'updatedAt'}}
+{{else eq (getPropertyName this) 'updatedAt'}}
                     new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'deletedAt'}}
+{{else eq (getPropertyName this) 'deletedAt'}}
                     new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}DeletedAt(null),
 {{else}}
-                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getPropertyName this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}),
 {{/eq}}
                     {{/unless}}
                     {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}),
+                    new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}),
                     {{/and}}
                     {{/each}}
                 ),

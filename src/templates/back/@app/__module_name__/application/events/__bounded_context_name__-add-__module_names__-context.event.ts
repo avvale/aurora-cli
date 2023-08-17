@@ -51,7 +51,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
                     new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event(
                         {{#each (getAggregateProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}{{#if nullable}}?{{/if}}.value,
+                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}
                         {{/each}}
                     ),
@@ -72,7 +72,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
                     new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event(
                         {{#each (getAggregateProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}{{#if nullable}}?{{/if}}.value,
+                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}
                         {{/each}}
                     ),
@@ -93,7 +93,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
                     new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event(
                         {{#each (getAggregateProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }}{{#if nullable}}?{{/if}}.value,
+                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                         {{/if}}
                         {{/each}}
                     ),

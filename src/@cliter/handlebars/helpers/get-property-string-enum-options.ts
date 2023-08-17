@@ -1,11 +1,11 @@
 import * as handlebars from 'handlebars';
-import { Property, hasHasOneDecoratorProperty } from '../..';
+import { Property, getPropertyStringEnumOptions } from '../..';
 
-handlebars.registerHelper('hasHasOneDecoratorProperty', function(
+handlebars.registerHelper('getPropertyStringEnumOptions', function(
     property: Property,
-): boolean
+): string | undefined
 {
-    return hasHasOneDecoratorProperty(
+    return getPropertyStringEnumOptions(
         property,
     );
 });

@@ -22,8 +22,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlCreateVariablesProperties schema.aggregateProperties) }}\n\t\t\"{{ toCamelCase (getNameProperty this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlCreateVariablesProperties schema.aggregateProperties) }}\n\t\t\"{{ toCamelCase (getPropertyName this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -47,7 +47,7 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "mutation ($payload:[{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[{{#loops 10}}\n\t\t{{ bracketOpen }}{{#each (getPostmanGraphqlCreateVariablesProperties ../schema.aggregateProperties) }}\n\t\t\t\"{{ toCamelCase (getNameProperty this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t\t}{{#unless @last}}, {{/unless}}{{/loops}}\n\t]\n}"
+						"variables": "{\n\t\"payload\":\n\t[{{#loops 10}}\n\t\t{{ bracketOpen }}{{#each (getPostmanGraphqlCreateVariablesProperties ../schema.aggregateProperties) }}\n\t\t\t\"{{ toCamelCase (getPropertyName this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t\t}{{#unless @last}}, {{/unless}}{{/loops}}\n\t]\n}"
 					}
 				},
 				"url": {
@@ -112,7 +112,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlGetQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlGetQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n\t\t}\n\t}\n}"
 					}
 				},
@@ -145,7 +145,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query: $query)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlFindQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
+						"query": "query ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (query: $query)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlFindQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n\t\t}\n\t}\n}"
 					}
 				},
@@ -178,7 +178,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlFindByIdQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
+						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlFindByIdQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n}"
 					}
 				},
@@ -210,7 +210,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlFindByIdQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
+						"query": "query ($id:ID)\n{\n\t{{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlFindByIdQueryProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n}"
 					}
 				},
@@ -244,8 +244,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlUpdateMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlUpdateVariablesProperties schema.aggregateProperties) }}\n\t\t\"{{ toCamelCase (getNameProperty this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
+						"query": "mutation ($payload:{{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}Input!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }} (payload:$payload)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlUpdateMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlUpdateVariablesProperties schema.aggregateProperties) }}\n\t\t\"{{ toCamelCase (getPropertyName this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}\n}"
 					}
 				},
 				"url": {
@@ -277,7 +277,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlDeleteMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
+						"query": "mutation ($id:ID!)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (id:$id)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlDeleteMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"id\": \"{{{ mocker (object type='fixedUuid') }}}\"\n}"
 					}
 				},
@@ -310,7 +310,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlDeleteMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getNameProperty this) }}{{/each}}\n\t}\n}",
+						"query": "mutation ($query:QueryStatement)\n{\n\t{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }} (query: $query)\n\t{{ bracketOpen }}{{#each (getPostmanGraphqlDeleteMutationProperties schema.aggregateProperties) }}\n\t\t{{ toCamelCase (getPropertyName this) }}{{/each}}\n\t}\n}",
 						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
 					}
 				},
@@ -347,7 +347,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "{{ bracketOpen }}{{#each (getPostmanRestCreateProperties schema.aggregateProperties) }}\n\t\"{{ toCamelCase (getNameProperty this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
+					"raw"   : "{{ bracketOpen }}{{#each (getPostmanRestCreateProperties schema.aggregateProperties) }}\n\t\"{{ toCamelCase (getPropertyName this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -389,7 +389,7 @@
 				],
 				"body": {
 					"mode"  : "raw",
-					"raw"   : "[{{#loops 10}}\n\t{{ bracketOpen }}{{#each (getPostmanRestCreateProperties ../schema.aggregateProperties) }}\n\t\t\"{{ toCamelCase (getNameProperty this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}{{#unless @last}}, {{/unless}}{{/loops}}\n]",
+					"raw"   : "[{{#loops 10}}\n\t{{ bracketOpen }}{{#each (getPostmanRestCreateProperties ../schema.aggregateProperties) }}\n\t\t\"{{ toCamelCase (getPropertyName this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman' hasUuidSeed=false) }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n\t}{{#unless @last}}, {{/unless}}{{/loops}}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -659,7 +659,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw"   : "{{ bracketOpen }}{{#each (getPostmanRestUpdateProperties schema.aggregateProperties) }}\n\t\"{{ toCamelCase (getNameProperty this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
+					"raw"   : "{{ bracketOpen }}{{#each (getPostmanRestUpdateProperties schema.aggregateProperties) }}\n\t\"{{ toCamelCase (getPropertyName this) }}\": {{{ postmanQuotes . }}}{{{ mocker (object property=. type='postman') }}}{{{ postmanQuotes . }}}{{#unless @last}}, {{/unless}}{{/each}}\n}",
 					"options": {
 						"raw": {
 							"language": "json"

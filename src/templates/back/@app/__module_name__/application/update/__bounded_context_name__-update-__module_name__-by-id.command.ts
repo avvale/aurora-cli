@@ -11,7 +11,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         public readonly payload: {
             {{#each (getUpdateCommandProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getNameProperty this) }}{{#unlessEq (getNameProperty this) 'id'}}?{{/unlessEq}}: {{ getJavascriptTypeProperty this ../config }};
+            {{ toCamelCase (getPropertyName this) }}{{#unlessEq (getPropertyName this) 'id'}}?{{/unlessEq}}: {{ getJavascriptTypeProperty this ../config }};
             {{/if}}
             {{/each}}
         },

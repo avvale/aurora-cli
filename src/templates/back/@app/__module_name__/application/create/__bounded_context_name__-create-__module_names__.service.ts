@@ -21,7 +21,7 @@
 {{
     push ../importsArray
         (object
-            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
+            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
             path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
             oneRowByItem=true
         )
@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         payload: {
             {{#each (getCreateItemsServiceProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
+            {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
             {{/if}}
             {{/each}}
         } [],
@@ -59,18 +59,18 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         const aggregate{{ toPascalCase schema.moduleNames }} = payload.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq (getNameProperty this) 'createdAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'updatedAt'}}
+{{else eq (getPropertyName this) 'updatedAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'deletedAt'}}
+{{else eq (getPropertyName this) 'deletedAt'}}
             null, // deleteAt
 {{else}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }},
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }},
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getNameProperty this) }},
+            {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }},
             {{/and}}
             {{/each}}
         ));

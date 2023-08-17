@@ -7,7 +7,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         public readonly payload: {
             {{#each (getCreateCommandProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getNameProperty this) }}{{#if nullable}}?{{/if}}: {{ getJavascriptTypeProperty this ../config }};
+            {{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}: {{ getJavascriptTypeProperty this ../config }};
             {{/if}}
             {{/each}}
         },

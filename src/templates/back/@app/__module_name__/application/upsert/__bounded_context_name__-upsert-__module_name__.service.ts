@@ -20,7 +20,7 @@
 {{
     push ../importsArray
         (object
-            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getNameProperty this)))
+            items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
             path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
             oneRowByItem=true
         )
@@ -50,7 +50,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             {{#each (getUpsertServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
-            {{ toCamelCase (getNameProperty this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }};
+            {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
             {{/unless}}
             {{/if}}
             {{/each}}
@@ -69,22 +69,22 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq (getNameProperty this) 'createdAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'updatedAt'}}
+{{else eq (getPropertyName this) 'updatedAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'deletedAt'}}
+{{else eq (getPropertyName this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
 {{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             null, // availableLangs
 {{else}}
-            payload.{{ toCamelCase (getNameProperty this) }},
+            payload.{{ toCamelCase (getPropertyName this) }},
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase (getNameProperty this) }},
+            payload.{{ toCamelCase (getPropertyName this) }},
             {{/and}}
             {{/each}}
         );
@@ -143,26 +143,26 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         const {{ toCamelCase schema.moduleName }}I18n = {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq (getNameProperty this) 'createdAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}CreatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'updatedAt'}}
+{{else eq (getPropertyName this) 'updatedAt'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq (getNameProperty this) 'deletedAt'}}
+{{else eq (getPropertyName this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
 {{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             {{ toCamelCase ../schema.moduleName }}.availableLangs,
 {{else}}
-{{#eq (getNameProperty this) 'id'}}
+{{#eq (getPropertyName this) 'id'}}
             new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}Id(modelInDB ? modelInDB.id.value : Utils.uuid()),
 {{else}}
-            payload.{{ toCamelCase (getNameProperty this) }},
+            payload.{{ toCamelCase (getPropertyName this) }},
 {{/eq}}
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase (getNameProperty this) }},
+            payload.{{ toCamelCase (getPropertyName this) }},
             {{/and}}
             {{/each}}
         );

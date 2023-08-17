@@ -51,7 +51,7 @@ import './get-mock-properties';
 import './get-module-name-from-property-relationship';
 import './get-module-names-from-property-relationship';
 import './get-mutations-additional-apis';
-import './get-name-property';
+import './get-property-name';
 import './get-not-nullable-properties';
 import './get-postman-graphql-create-mutation-properties';
 import './get-postman-graphql-create-variables-properties';

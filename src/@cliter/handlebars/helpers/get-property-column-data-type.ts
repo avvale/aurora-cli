@@ -1,11 +1,13 @@
 import * as handlebars from 'handlebars';
-import { Property, hasHasOneDecoratorProperty } from '../..';
+import { CliterConfig, Property, getPropertyColumnDataType } from '../..';
 
-handlebars.registerHelper('hasHasOneDecoratorProperty', function(
+handlebars.registerHelper('getPropertyColumnDataType', function(
     property: Property,
-): boolean
+    config: CliterConfig,
+): string
 {
-    return hasHasOneDecoratorProperty(
+    return getPropertyColumnDataType(
         property,
+        config,
     );
 });
