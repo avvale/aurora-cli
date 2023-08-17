@@ -21,7 +21,7 @@ export const isTimezoneProperty = (
 };
 
 // replace by Property getSequelizeType
-export const getSequelizeTypeProperty = (
+export const getPropertySequelizeType = (
     property: Property,
     config: CliterConfig,
 ): string =>

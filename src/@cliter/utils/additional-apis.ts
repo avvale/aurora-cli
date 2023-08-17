@@ -15,15 +15,15 @@ export class AdditionalApis
         return this.additionalApis.length;
     } */
 
-    get lengthMutations(): number
+    /* get lengthMutations(): number
     {
         return this.additionalApis.filter(additionalApi => additionalApi.resolverType === ResolverType.MUTATION).length;
-    }
+    } */
 
-    get lengthQueries(): number
+    /* get lengthQueries(): number
     {
         return this.additionalApis.filter(additionalApi => additionalApi.resolverType === ResolverType.QUERY).length;
-    }
+    } */
 
     /* get mutations(): AdditionalApi[]
     {

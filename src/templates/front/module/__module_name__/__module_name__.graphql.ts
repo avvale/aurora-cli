@@ -227,7 +227,7 @@ export const deleteMutation = gql`
         }
     }
 `;
-{{#unlessEq schema.additionalApis.lengthQueries 0 }}
+{{#unlessEq (countAdditionalApisQueries schema.additionalApis) 0 }}
 
 // Queries additionalApis
 {{#each schema.additionalApis.queries}}
@@ -246,7 +246,7 @@ export const {{ getVariableNameAdditionalApi this }}Query = gql`
 `;
 {{/each}}
 {{/unlessEq}}
-{{#unlessEq schema.additionalApis.lengthMutations 0 }}
+{{#unlessEq (countAdditionalApisMutations schema.additionalApis) 0 }}
 
 // Mutation additionalApis
 {{#each schema.additionalApis.mutations}}
