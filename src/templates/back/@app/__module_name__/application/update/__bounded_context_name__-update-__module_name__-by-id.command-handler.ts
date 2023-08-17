@@ -14,7 +14,7 @@
         )
     )
 ~}}
-{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#each schema.aggregateProperties }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
