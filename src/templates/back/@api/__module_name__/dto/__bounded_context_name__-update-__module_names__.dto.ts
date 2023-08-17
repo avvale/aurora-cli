@@ -76,7 +76,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-        enum       : [{{{ enumOptionsArrayItems }}}],
+        enum       : [{{{ getPropertyStringEnumOptions this }}}],
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},

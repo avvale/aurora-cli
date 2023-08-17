@@ -64,6 +64,9 @@ import './get-postman-graphql-update-variables-properties';
 import './get-postman-rest-create-properties';
 import './get-postman-rest-update-properties';
 import './get-properties-from-property-relationship';
+import './get-property-column-data-type';
+import './get-property-enum-options';
+import './get-property-string-enum-options';
 import './get-queries-additional-apis';
 import './get-quotation-property';
 import './get-reference-key-property';
@@ -144,4 +147,3 @@ import './string-to-snake-case';
 import './sum-strings';
 import './uuid';
 import './variables-injector-manager';
-

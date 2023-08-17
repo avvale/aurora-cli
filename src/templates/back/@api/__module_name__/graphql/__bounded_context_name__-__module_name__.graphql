@@ -1,6 +1,6 @@
 {{#each (getEnumProperties schema.aggregateProperties) }}
 enum {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} {
-    {{#each enumOptions}}
+    {{#each (getPropertyEnumOptions this) }}
     {{ . }}
     {{/each}}
 }

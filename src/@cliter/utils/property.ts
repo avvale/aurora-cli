@@ -183,15 +183,15 @@ export class Property
         return this._name;
     }
 
-    get enumOptionsArrayItems(): string | undefined
+    /* get enumOptionsArrayItems(): string | undefined
     {
         return this.enumOptions?.map(item => '\'' + item + '\'').join(',');
-    }
+    } */
 
-    get enumOptions(): string[] | undefined
+    /* get enumOptions(): string[] | undefined
     {
         return typeof this._enumOptions === 'string' ? this._enumOptions.split(',').map(item => item.trim().toUpperCase()) : undefined;
-    }
+    } */
 
     /* get getRelationshipBoundedContextName(): string | null
     {
@@ -345,10 +345,10 @@ export class Property
     /*********
      * FRONT *
      *********/
-    get getColumnDataType(): string
+    /* get getColumnDataType(): string
     {
         return this.config.propertyTypesEquivalenceDashboardColumnDataTypes[this.type];
-    }
+    } */
 
     /*****************
      * Miscellaneous *

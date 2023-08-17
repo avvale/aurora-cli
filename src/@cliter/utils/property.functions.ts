@@ -28,10 +28,10 @@ export const getSequelizeTypeProperty = (
 ): string =>
 {
     let parameter: number | string | undefined | number[];
-    if (property.type === PropertyType.CHAR)    parameter = property.length;                 // parameter = length
-    if (property.type === PropertyType.VARCHAR) parameter = property.maxLength;              // parameter = maxLength
-    if (property.type === PropertyType.ENUM)    parameter = property.enumOptionsArrayItems;  // parameter = values
-    if (property.type === PropertyType.DECIMAL) parameter = property.decimals;               // parameter = decimals
+    if (property.type === PropertyType.CHAR)    parameter = property.length;                        // parameter = length
+    if (property.type === PropertyType.VARCHAR) parameter = property.maxLength;                     // parameter = maxLength
+    if (property.type === PropertyType.ENUM)    parameter = getPropertyStringEnumOptions(property); // parameter = values
+    if (property.type === PropertyType.DECIMAL) parameter = property.decimals;                      // parameter = decimals
 
     return config.propertyTypesEquivalenceSequelizeTypes[property.type](parameter);
 };
@@ -71,6 +71,22 @@ export const getReferenceKeyProperty = (
 ): any =>
 {
     return property.relationship?.key ? property.relationship?.key : 'id';
+};
+
+// replace by Property enumOptionsArrayItems
+export const getPropertyStringEnumOptions = (
+    property: Property,
+): string | undefined =>
+{
+    return property.enumOptions?.map((option: string) => '\'' + option + '\'').join(',');
+};
+
+// replace by Property enumOptions
+export const getPropertyEnumOptions = (
+    property: Property,
+): string[] | undefined =>
+{
+    return Array.isArray(property.enumOptions) ? property.enumOptions.map((option: string) => option.trim().toUpperCase()) : undefined;
 };
 
 // replace by Property isRelationship
@@ -442,4 +458,16 @@ export const getJavascriptTypeProperty = (
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
+};
+
+/*********
+ * FRONT *
+ *********/
+// replace by Property getColumnDataType
+export const getPropertyColumnDataType = (
+    property: Property,
+    config: CliterConfig,
+): string =>
+{
+    return config.propertyTypesEquivalenceDashboardColumnDataTypes[property.type];
 };

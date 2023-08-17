@@ -272,7 +272,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
     {{/each}}
     {{#each (getEnumProperties schema.aggregateProperties) as |enumProperty enumPropertyIndex|}}
-    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a enum option of {{ join enumOptions }}', () =>
+    test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be a enum option of {{ join (getPropertyEnumOptions this) }}', () =>
     {
         return request(app.getHttpServer())
             .post('/{{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create')
@@ -284,7 +284,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be any of this options: {{ join enumOptions }}');
+                expect(res.body.message).toContain('Value for {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getNameProperty this) }} has to be any of this options: {{ join (getPropertyEnumOptions this) }}');
             });
     });
     {{/each}}

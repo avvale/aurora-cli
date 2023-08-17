@@ -1,4 +1,4 @@
-import { Mocker, MockerFixed, ModuleDefinitionSchema, Property, PropertyType } from '../../../@cliter';
+import { Mocker, MockerFixed, ModuleDefinitionSchema, Property, PropertyType, getPropertyEnumOptions } from '../../../@cliter';
 import { v5 as uuidv5 } from 'uuid';
 import * as handlebars from 'handlebars';
 import * as _ from 'lodash';
@@ -61,8 +61,8 @@ handlebars.registerHelper('mocker', function(
         && (length || property?.length) === 36
     ) return uuidv5(uuidSeed, namespace);
 
-    if (property?.type === PropertyType.ENUM && type === MockType.SEED) return property.enumOptions ? `${schema?.boundedContextName.toPascalCase()}${schema?.moduleName.toPascalCase()}${property.name.toPascalCase()}.${_.shuffle(property.enumOptions)[0]}` : null;
-    if (property?.type === PropertyType.ENUM) return property.enumOptions ? `'${_.shuffle(property.enumOptions)[0]}'` : null;
+    if (property?.type === PropertyType.ENUM && type === MockType.SEED) return getPropertyEnumOptions(property) ? `${schema?.boundedContextName.toPascalCase()}${schema?.moduleName.toPascalCase()}${property.name.toPascalCase()}.${_.shuffle(getPropertyEnumOptions(property))[0]}` : null;
+    if (property?.type === PropertyType.ENUM) return getPropertyEnumOptions(property) ? `'${_.shuffle(getPropertyEnumOptions(property))[0]}'` : null;
     if (property?.type === PropertyType.RELATIONSHIP) return '[]';
 
     let propertyTotalDigits = 5;
