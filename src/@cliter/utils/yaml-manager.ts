@@ -27,25 +27,8 @@ export class YamlManager
         // write yaml file
         const yamlStr = yaml.dump(
             {
-                version            : cliterConfig.configYamlVersion,
-                boundedContextName : schema.boundedContextName,
-                moduleName         : schema.moduleName,
-                moduleNames        : schema.moduleNames,
-                aggregateName      : schema.aggregateName,
-                hasOAuth           : schema.hasOAuth,
-                hasTenant          : schema.hasTenant,
-                hasAuditing        : schema.hasAuditing,
-                aggregateProperties: schema.aggregateProperties
-                    .filter(item => !item.isI18n)
-                    // omit id, is a internal id field when create property with prompt
-                    .map(item => _.omit(item, ['id'])),
-                aggregateI18nProperties: schema.aggregateProperties
-                    .filter(item => item.isI18n)
-                    // omit id, is a internal id field when create property with prompt
-                    // omit isI18n, is not necessary because it is inside the array aggregateI18nProperties
-                    .map(item => _.omit(item, ['id', 'isI18n'])),
-                additionalApis: schema.additionalApis?.map(item => _.omit(item, ['pathSegments', 'pathBoundedContext', 'pathAction'])),
-                excluded      : schema.excluded,
+                ...schema,
+                version: cliterConfig.configYamlVersion,
             },
             {
                 lineWidth  : -1,
@@ -57,7 +40,11 @@ export class YamlManager
 
         if (!fs.existsSync(yamlPath)) fs.mkdirSync(yamlPath, { recursive: true });
 
-        fs.writeFileSync(path.join(yamlPath, `${schema.moduleName}${cliterConfig.schemaDefinitionExtension}`), yamlStr, 'utf8');
+        fs.writeFileSync(
+            path.join(yamlPath, `${schema.moduleName}${cliterConfig.schemaDefinitionExtension}`),
+            yamlStr,
+            'utf8',
+        );
     }
 
     private static checkModuleDefinitionSchema(yamlObj: any): void

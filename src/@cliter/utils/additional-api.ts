@@ -4,7 +4,7 @@ export class AdditionalApi
 {
     public path: string;
     public resolverType: ResolverType;
-    public httpMethod: HttpMethodType;
+    // public httpMethod: HttpMethodType;
     private pathSegments: string[];
     private pathAction: string;
     private pathBoundedContext: string;
@@ -33,13 +33,13 @@ export class AdditionalApi
         payload: {
             path: string;
             resolverType: ResolverType;
-            httpMethod: HttpMethodType;
+            //httpMethod: HttpMethodType;
         },
     )
     {
         this.path = payload.path;
         this.resolverType = payload.resolverType;
-        this.httpMethod = payload.httpMethod;
+        //this.httpMethod = payload.httpMethod;
 
         this.pathSegments = payload.path.split('/').map(segment => segment.toKebabCase());
 
@@ -55,12 +55,12 @@ export class AdditionalApi
         return {
             path        : this.path,
             resolverType: this.resolverType,
-            httpMethod  : this.httpMethod,
+           // httpMethod  : this.httpMethod,
         };
     }
 }
 
-export enum HttpMethodType
+/* export enum HttpMethodType
 {
     GET = 'get',
     HEAD = 'head',
@@ -72,3 +72,4 @@ export enum HttpMethodType
     TRACE = 'trace',
     PATCH = 'patch',
 }
+ */

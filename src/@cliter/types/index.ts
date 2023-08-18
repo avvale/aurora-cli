@@ -34,6 +34,19 @@ export interface GeneratePipelineCommandState extends CommandState
     service: string;
 }
 
+export enum HttpMethodType
+{
+    GET = 'get',
+    HEAD = 'head',
+    POST = 'post',
+    PUT = 'put',
+    DELETE = 'delete',
+    CONNECT = 'connect',
+    OPTIONS = 'options',
+    TRACE = 'trace',
+    PATCH = 'patch',
+}
+
 export interface ImportStatement
 {
     items: string[] | string;
