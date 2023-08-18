@@ -4,7 +4,6 @@
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
             (object items=(array 'CommandBus' 'EventBus' 'EventPublisher' 'UnhandledExceptionBus') path='@nestjs/cqrs')
-
             (object
                 items=
                 (
