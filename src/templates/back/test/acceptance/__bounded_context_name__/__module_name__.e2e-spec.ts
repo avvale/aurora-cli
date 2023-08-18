@@ -131,7 +131,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
         await app.init();
     });
 
-    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullableProperty notNullablePropertyIndex|}}
+    {{#each (getNotNullableProperties schema.aggregateProperties schema.moduleName)  as |notNullableProperty notNullablePropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }} property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -149,7 +149,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each (getNotNullableProperties schema.aggregateProperties)  as |notNullableProperty notNullablePropertyIndex|}}
+    {{#each (getNotNullableProperties schema.aggregateProperties schema.moduleName)  as |notNullableProperty notNullablePropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }} property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -167,7 +167,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each (getLengthProperties schema.aggregateProperties)  as |lengthProperty lengthPropertyIndex|}}
+    {{#each (countProperties schema.aggregateProperties schema.moduleName)  as |lengthProperty lengthPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }} is not allowed, must be a length of {{ lengthProperty.length }}', () =>
     {
         return request(app.getHttpServer())
@@ -511,7 +511,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)
                         {
-                            {{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties) }}
+                            {{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties schema.moduleName) }}
                             {{ toCamelCase (getPropertyName this) }}
                             {{/each}}
                         }
@@ -608,7 +608,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
                     {
                         {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }} (payload:$payload)
                         {
-                            {{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties) }}
+                            {{#each (getPostmanGraphqlCreateMutationProperties schema.aggregateProperties schema.moduleName) }}
                             {{ toCamelCase (getPropertyName this) }}
                             {{/each}}
                         }

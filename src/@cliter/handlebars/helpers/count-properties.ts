@@ -1,12 +1,12 @@
 import * as handlebars from 'handlebars';
-import { Property, getLengthProperties } from '../..';
+import { Property, countProperties } from '../..';
 
-handlebars.registerHelper('getLengthProperties', function(
+handlebars.registerHelper('countProperties', function(
     properties: Property[],
     moduleName: string,
 ): Property[]
 {
-    return getLengthProperties(
+    return countProperties(
         properties,
         moduleName,
     );

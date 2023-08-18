@@ -582,17 +582,17 @@ export const getNotNullableProperties = (
 };
 
 // replace by Properties hasLength
-export const getLengthProperties = (
+export const countProperties = (
     properties: Property[],
     moduleName: string,
 ): Property[] =>
 {
-    if (!moduleName) throw new Error('Module name parameter is not defined in getLengthProperties function');
+    if (!moduleName) throw new Error('Module name parameter is not defined in countProperties function');
 
     // eslint-disable-next-line no-implicit-coercion, unicorn/explicit-length-check
     return properties.filter(property => !!property.length)
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
-        .filter(property => !property.isI18n || (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'))     // exclude relationship id of i18n table
+        .filter(property => !property.isI18n || (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'))                 // exclude relationship id of i18n table
         .filter(property => !hasI18nProperties(properties) || (hasI18nProperties(properties) && property.name !== 'availableLangs'));   // exclude availableLangs if has i18n table
 };
 

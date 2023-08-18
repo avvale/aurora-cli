@@ -90,7 +90,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
             expect(
                 await service.main(
                     {
-                        {{#each (getCreateServiceProperties schema.aggregateProperties) }}
+                        {{#each (getCreateServiceProperties schema.aggregateProperties schema.moduleName) }}
                         {{ toCamelCase (getPropertyName this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}({{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getPropertyName this) }}),
                         {{/each}}
                     },

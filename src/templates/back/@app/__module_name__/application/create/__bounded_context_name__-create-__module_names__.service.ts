@@ -47,7 +47,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
     async main(
         payload: {
-            {{#each (getCreateItemsServiceProperties schema.aggregateProperties) }}
+            {{#each (getCreateItemsServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
             {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
             {{/if}}

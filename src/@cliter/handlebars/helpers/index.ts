@@ -45,7 +45,7 @@ import './get-integer-properties';
 import './get-integer-unsigned-properties';
 import './get-javascript-model-type-property';
 import './get-property-javascript-type';
-import './get-length-properties';
+import './count-properties';
 import './get-mapper-properties';
 import './get-max-length-properties';
 import './get-min-length-properties';

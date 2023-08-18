@@ -67,7 +67,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase sche
             expect(await commandHandler.execute(
                 new {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Command(
                     {
-                        {{#each (getCreateControllerProperties schema.aggregateProperties) }}
+                        {{#each (getCreateControllerProperties schema.aggregateProperties schema.moduleName) }}
                         {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.boundedContextName }}Mock{{ toPascalCase ../schema.moduleName }}Data[0].{{ toCamelCase (getPropertyName this) }},
                         {{/each}}
                     },
