@@ -7,7 +7,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
         public readonly payload: {
             {{#each (getUpsertCommandProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getPropertyName this) }}{{#unlessEq (getPropertyName this) 'id'}}?{{/unlessEq}}: {{ getJavascriptTypeProperty this ../config }};
+            {{ toCamelCase (getPropertyName this) }}{{#unlessEq (getPropertyName this) 'id'}}?{{/unlessEq}}: {{ getPropertyJavascriptType this ../config }};
             {{/if}}
             {{/each}}
         },

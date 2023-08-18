@@ -448,7 +448,7 @@ export const getGraphqlUpdateTypeProperty = (
 };
 
 // replace by Property getJavascriptType
-export const getJavascriptTypeProperty = (
+export const getPropertyJavascriptType = (
     property: Property,
     config: CliterConfig,
 ): string =>
