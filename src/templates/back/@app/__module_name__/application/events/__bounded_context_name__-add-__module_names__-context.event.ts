@@ -7,8 +7,6 @@
                 (
                     array
                         (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleName) 'Event')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleNames) 'Event')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Updated' (toPascalCase schema.moduleName) 'Event')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Updated' (toPascalCase schema.moduleNames) 'Event')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event')
@@ -18,6 +16,15 @@
         )
     )
 ~}}
+{{#notInArray schema.excluded config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleName) '.event.ts'}}
+{{#notInArray schema.excluded config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleNames) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+~}}
+{{/notInArray}}
+{{/notInArray}}
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase schema.moduleNames }}ContextEvent extends AggregateRoot
 {
