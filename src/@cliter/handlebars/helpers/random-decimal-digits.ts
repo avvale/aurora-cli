@@ -3,5 +3,8 @@ import randomDecimalDigits from '../../utils/random-decimal-digits';
 
 handlebars.registerHelper('randomDecimalDigits', function (totalDigits: number, decimalDigits: number)
 {
-    return randomDecimalDigits(totalDigits, decimalDigits);
+    return randomDecimalDigits(
+        totalDigits,
+        decimalDigits,
+    );
 });

@@ -38,9 +38,9 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
             itemCollection['deletedAt'] = null;
 
             this.collectionSource.push({{ schema.aggregateName }}.register(
-                {{#each schema.properties.mock}}
+                {{#each (getMockProperties schema.aggregateProperties) }}
                 {{#if (isAllowProperty ../schema.moduleName this)}}
-                new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }}(itemCollection.{{ toCamelCase name }}),
+                new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}(itemCollection.{{ toCamelCase (getPropertyName this) }}),
                 {{/if}}
                 {{/each}}
             ));

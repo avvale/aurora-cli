@@ -17,7 +17,7 @@
         )
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if schema.getAggregateProperties.hasI18n}}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
@@ -46,7 +46,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                         delete: () => { /**/ },
                     },
                 },
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 {
                     provide : {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository,
                     useValue: {
@@ -77,7 +77,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
                 await service.main(
                     {},
                     {},
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     {
                         meta: {
                             fallbackLang: {

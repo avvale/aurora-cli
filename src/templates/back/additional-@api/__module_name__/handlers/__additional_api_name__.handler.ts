@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuditingMeta, {{#if schema.properties.hasI18n}}AddI18nConstraintService, CoreSearchKeyLang, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
+import { AuditingMeta, {{#if (hasI18nProperties schema.aggregateProperties) }}AddI18nConstraintService, CoreSearchKeyLang, {{/if}}ICommandBus, IQueryBus, QueryStatement } from '{{ config.auroraCorePackage }}';
 {{#if schema.hasTenant}}
 
 // tenant
@@ -16,7 +16,7 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{/eq }}
 
 @Injectable()
-export class {{ currentAdditionalApi.getClassName }}Handler
+export class {{ getClassNameAdditionalApi currentAdditionalApi }}Handler
 {
     constructor(
         private readonly commandBus: ICommandBus,

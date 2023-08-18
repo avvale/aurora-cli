@@ -1,31 +1,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 import { CacheModule } from '@nestjs/cache-manager';
 {{/if}}
 
 
 // custom items
-import { {{ currentAdditionalApi.getClassName }}Resolver } from './{{ currentAdditionalApi.getApiFileName }}.resolver';
-import { {{ currentAdditionalApi.getClassName }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
+import { {{ getClassNameAdditionalApi currentAdditionalApi }}Resolver } from './{{ currentAdditionalApi.getApiFileName }}.resolver';
+import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
 
-describe('{{ currentAdditionalApi.getClassName }}Resolver', () =>
+describe('{{ getClassNameAdditionalApi currentAdditionalApi }}Resolver', () =>
 {
-    let resolver: {{ currentAdditionalApi.getClassName }}Resolver;
-    let handler: {{ currentAdditionalApi.getClassName }}Handler;
+    let resolver: {{ getClassNameAdditionalApi currentAdditionalApi }}Resolver;
+    let handler: {{ getClassNameAdditionalApi currentAdditionalApi }}Handler;
 
     beforeAll(async () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CacheModule.register(),
                 {{/if}}
             ],
             providers: [
-                {{ currentAdditionalApi.getClassName }}Resolver,
+                {{ getClassNameAdditionalApi currentAdditionalApi }}Resolver,
                 {
-                    provide : {{ currentAdditionalApi.getClassName }}Handler,
+                    provide : {{ getClassNameAdditionalApi currentAdditionalApi }}Handler,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -34,18 +34,18 @@ describe('{{ currentAdditionalApi.getClassName }}Resolver', () =>
         })
             .compile();
 
-        resolver = module.get<{{ currentAdditionalApi.getClassName }}Resolver>({{ currentAdditionalApi.getClassName }}Resolver);
-        handler = module.get<{{ currentAdditionalApi.getClassName }}Handler>({{ currentAdditionalApi.getClassName }}Handler);
+        resolver = module.get<{{ getClassNameAdditionalApi currentAdditionalApi }}Resolver>({{ getClassNameAdditionalApi currentAdditionalApi }}Resolver);
+        handler = module.get<{{ getClassNameAdditionalApi currentAdditionalApi }}Handler>({{ getClassNameAdditionalApi currentAdditionalApi }}Handler);
     });
 
-    test('{{ currentAdditionalApi.getClassName }}Resolver should be defined', () =>
+    test('{{ getClassNameAdditionalApi currentAdditionalApi }}Resolver should be defined', () =>
     {
         expect(resolver).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('{{ currentAdditionalApi.getClassName }}Resolver should be defined', () =>
+        test('{{ getClassNameAdditionalApi currentAdditionalApi }}Resolver should be defined', () =>
         {
             expect(resolver).toBeDefined();
         });

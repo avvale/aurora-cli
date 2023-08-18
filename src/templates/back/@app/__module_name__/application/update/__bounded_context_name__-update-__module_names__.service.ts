@@ -21,9 +21,9 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
     async main(
         payload: {
-            {{#each schema.properties.updateService}}
+            {{#each (getUpdateServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase name }}?: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase name }};
+            {{ toCamelCase (getPropertyName this) }}?: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
             {{/if}}
             {{/each}}
         },
@@ -32,7 +32,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         const contentLanguage = cQMetadata.meta.contentLanguage;
 
         // override langId value object with header content-language value
@@ -41,29 +41,29 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{/if}}
         // create aggregate with factory pattern
         const {{ toCamelCase schema.moduleName }} = {{ schema.aggregateName }}.register(
-            {{#each schema.properties.aggregate}}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
-{{#eq name 'createdAt'}}
+{{#eq (getPropertyName this) 'createdAt'}}
             null, // createdAt
-{{else eq name 'updatedAt'}}
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
-{{else eq name 'deletedAt'}}
+{{else eq (getPropertyName this) 'updatedAt'}}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}UpdatedAt({ currentTimestamp: true }),
+{{else eq (getPropertyName this) 'deletedAt'}}
             null, // deletedAt
 {{else}}
-{{#if (isI18nAvailableLangsProperty . ../schema.properties)}}
+{{#if (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
             null, // availableLangs
 {{else}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getPropertyName this) }},
 {{/if}}
 {{/eq}}
             {{/unless}}
             {{#and isI18n (isAllowProperty ../schema.moduleName this)}}
-            payload.{{ toCamelCase name }},
+            payload.{{ toCamelCase (getPropertyName this) }},
             {{/and}}
             {{/each}}
         );
 
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         // delete availableLangs property to avoid overwrite this value in database
         delete {{ toCamelCase schema.moduleName }}.availableLangs;
         {{/if}}
@@ -78,7 +78,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
                 updateOptions: cQMetadata?.repositoryOptions,
             },
         );
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
 
         await this.repositoryI18n.update(
             {{ toCamelCase schema.moduleName }},

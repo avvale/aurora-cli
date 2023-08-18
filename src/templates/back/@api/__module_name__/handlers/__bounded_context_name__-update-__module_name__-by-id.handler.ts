@@ -8,7 +8,7 @@
             (object items=(array (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdQuery') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdCommand')) path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'BadRequestException') path='@nestjs/common')
@@ -34,7 +34,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
         private readonly coreGetContentLanguageObjectService: CoreGetContentLanguageObjectService,
         private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{/if}}
         constraint?: QueryStatement,
         timezone?: string,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         contentLanguage?: string,
         {{/if}}
         {{#if schema.hasAuditing}}
@@ -56,7 +56,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{/if}}
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto>
     {
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         if (!contentLanguage) throw new BadRequestException('To update a multi-language object, the content-language header must be defined.');
 
         const constraintToFindById = await this.coreAddI18nConstraintService.add(
@@ -71,7 +71,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{/if}}
         const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
-            {{#if schema.properties.hasI18n}}
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             constraintToFindById,
             {{else}}
             constraint,
@@ -83,14 +83,14 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
         const dataToUpdate = Utils.diff(payload, {{ toCamelCase schema.moduleName }});
 
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         const contentLanguageObject = await this.coreGetContentLanguageObjectService.get(contentLanguage);
 
         {{/if}}
         await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand(
             {
                 ...dataToUpdate,
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 id    : payload.id,
                 langId: contentLanguageObject.id,
                 {{else}}
@@ -105,7 +105,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
                     auditing,
                 },
                 {{/if}}
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 meta: {
                     contentLanguage: contentLanguageObject,
                 },
@@ -115,7 +115,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
         return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
             payload.id,
-            {{#if schema.properties.hasI18n}}
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             constraintToFindById,
             {{else}}
             constraint,

@@ -4,19 +4,21 @@
             (object items=(array 'Injectable') path='@nestjs/common')
             (object items=(array 'InjectModel') path='@nestjs/sequelize')
             (object items=(array 'AuditingRunner' 'ICriteria' 'SequelizeRepository') path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper')
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Model')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper')
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Model')
+                            (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
-{{#hasItems schema.properties.withRelationshipManyToMany }}
+{{#hasItems (getRelationshipManyToManyProperties schema.aggregateProperties)  }}
 {{
     push importsArray
         (object items='LiteralObject' path=config.auroraCorePackage)
@@ -38,7 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         super();
     }
-    {{#hasItems schema.properties.withRelationshipManyToMany }}
+    {{#hasItems (getRelationshipManyToManyProperties schema.aggregateProperties)  }}
 
     // hook called after create aggregate
     async createdAggregateHook(
@@ -48,12 +50,12 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     ): Promise<void>
     {
         // add many to many relation
-        {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.length > 0)
+        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        if (aggregate.{{ toCamelCase (getPropertyName this) }}.length > 0)
         {
             await model.$add(
-                '{{ toCamelCase originName }}',
-                aggregate.{{ toCamelCase name }}.value,
+                '{{ toCamelCase name }}',
+                aggregate.{{ toCamelCase (getPropertyName this) }}.value,
                 createOptions,
             );
         }
@@ -68,12 +70,12 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     ): Promise<void>
     {
         // set many to many relation
-        {{#each schema.properties.withRelationshipManyToMany}}
-        if (aggregate.{{ toCamelCase name }}.isArray())
+        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        if (aggregate.{{ toCamelCase (getPropertyName this) }}.isArray())
         {
             await model.$set(
-                '{{ toCamelCase originName }}',
-                aggregate.{{ toCamelCase name }}.value,
+                '{{ toCamelCase name }}',
+                aggregate.{{ toCamelCase (getPropertyName this) }}.value,
                 updateByIdOptions,
             );
         }

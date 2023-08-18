@@ -9,7 +9,7 @@
             (object items=(sumStrings (toCamelCase schema.moduleName) 'ColumnsConfig') path=(sumStrings './' toKebabCase schema.moduleName '.columns-config'))
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{ push importsArray
     (object items=(array 'ColumnConfigAction' 'CoreLang') path='@aurora')
 ~}}
@@ -59,7 +59,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                 ];
             },
         },
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         {
             type                : ColumnDataType.TRANSLATIONS_MENU,
             field               : 'translations',
@@ -136,13 +136,13 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
-            {{#if schema.properties.hasI18n}}
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.new':
                 this.router
                     .navigate([
                         '{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/new',
                         action.meta.row.id,
-                        {{#if schema.properties.hasI18n}}
+                        {{#if (hasI18nProperties schema.aggregateProperties) }}
                         action.meta.lang && action.meta.lang[this.sessionService.get<string>('searchKeyLang')],
                         {{/if}}
                     ]);
@@ -176,7 +176,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                                 .setPage(this.gridStateService.getPage(this.gridId))
                                 .setSearch(this.gridStateService.getSearchState(this.gridId))
                                 .getQueryStatement(),
-                        {{#if schema.properties.hasI18n}}
+                        {{#if (hasI18nProperties schema.aggregateProperties) }}
                         headers: {
                             'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
                         },
@@ -190,7 +190,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     .navigate([
                         '{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}/edit',
                         action.meta.row.id,
-                        {{#if schema.properties.hasI18n}}
+                        {{#if (hasI18nProperties schema.aggregateProperties) }}
                         action.meta.lang ?
                             action.meta.lang[this.sessionService.get('searchKeyLang')] :
                             this.sessionService.get<CoreLang>('fallbackLang')[this.sessionService.get<string>('searchKeyLang')],
@@ -232,7 +232,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                                     this.{{ toCamelCase schema.moduleName }}Service
                                         .deleteById<{{ schema.aggregateName }}>({
                                             id: action.meta.row.id,
-                                            {{#if schema.properties.hasI18n}}
+                                            {{#if (hasI18nProperties schema.aggregateProperties) }}
                                             headers: {
                                                 'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],
                                             },
@@ -258,7 +258,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     this.{{ toCamelCase schema.moduleName }}Service
                         .get({
                             query: action.meta.query,
-                            {{#if schema.properties.hasI18n}}
+                            {{#if (hasI18nProperties schema.aggregateProperties) }}
                             headers: {
                                 'Content-Language': '*',
                             },

@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Test, TestingModule } from '@nestjs/testing';
 import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 import { CacheModule } from '@nestjs/cache-manager';
 {{/if}}
 
 // custom items
-import { {{ currentAdditionalApi.getClassName }}Handler } from './{{ currentAdditionalApi.getApiFileName }}.handler';
+import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from './{{ currentAdditionalApi.getApiFileName }}.handler';
 
-describe('{{ currentAdditionalApi.getClassName }}Handler', () =>
+describe('{{ getClassNameAdditionalApi currentAdditionalApi }}Handler', () =>
 {
-    let handler: {{ currentAdditionalApi.getClassName }}Handler;
+    let handler: {{ getClassNameAdditionalApi currentAdditionalApi }}Handler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -18,12 +18,12 @@ describe('{{ currentAdditionalApi.getClassName }}Handler', () =>
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CacheModule.register(),
                 {{/if}}
             ],
             providers: [
-                {{ currentAdditionalApi.getClassName }}Handler,
+                {{ getClassNameAdditionalApi currentAdditionalApi }}Handler,
                 {
                     provide : IQueryBus,
                     useValue: {
@@ -40,14 +40,14 @@ describe('{{ currentAdditionalApi.getClassName }}Handler', () =>
         })
             .compile();
 
-        handler     = module.get<{{ currentAdditionalApi.getClassName }}Handler>({{ currentAdditionalApi.getClassName }}Handler);
+        handler     = module.get<{{ getClassNameAdditionalApi currentAdditionalApi }}Handler>({{ getClassNameAdditionalApi currentAdditionalApi }}Handler);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
     {
-        test('{{ currentAdditionalApi.getClassName }}Handler should be defined', () =>
+        test('{{ getClassNameAdditionalApi currentAdditionalApi }}Handler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });

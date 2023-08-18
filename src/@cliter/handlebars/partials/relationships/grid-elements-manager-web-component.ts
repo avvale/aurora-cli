@@ -1,18 +1,18 @@
 import * as handlebars from 'handlebars';
 
 handlebars.registerPartial('gridElementsManagerWebComponent',
-    `<!-- #region component to manage {{ toCamelCase property.getRelationshipSchema.moduleNames }} -->
+    `<!-- #region component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property) }} -->
 <au-grid-elements-manager
     *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
     class="col-12 mt-7"
-    [columnsConfig]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}ColumnsConfig$ | async"
-    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.getRelationshipSchema.moduleName }}')"
-    [gridData]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridData$ | async"
-    [gridState]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridState"
-    [id]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridId"
-    [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.getRelationshipSchema.moduleNames }}')"
-    [originColumnsConfig]="origin{{ toPascalCase property.getRelationshipSchema.moduleNames }}ColumnsConfig"
-    #{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridElementsManager
+    [columnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}ColumnsConfig$ | async"
+    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship property) }}')"
+    [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridData$ | async"
+    [gridState]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridState"
+    [id]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridId"
+    [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship property) }}')"
+    [originColumnsConfig]="origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property) }}ColumnsConfig"
+    #{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridElementsManager
 >
     <ng-template
         auGridCustomButtonsHeaderDialogTemplate
@@ -23,7 +23,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
             type="button"
             (click)="
                 actionService.action({
-                    id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new{{ toPascalCase property.getRelationshipSchema.moduleName }}',
+                    id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship property) }}',
                     isViewAction: false
                 })
             "
@@ -37,13 +37,13 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         let-dialog
     >
         <form
-            id="{{ toCamelCase property.getRelationshipSchema.moduleName }}DetailDialogForm"
+            id="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DetailDialogForm"
             novalidate
-            [formGroup]="{{ toCamelCase property.getRelationshipSchema.moduleName }}DialogFg"
-            (ngSubmit)="handleSubmit{{ toPascalCase property.getRelationshipSchema.moduleName }}Form($event, dialog)"
+            [formGroup]="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DialogFg"
+            (ngSubmit)="handleSubmit{{ toPascalCase (getModuleNameFromPropertyRelationship property) }}Form($event, dialog)"
         >
             <div class="layout__container">
-                {{#each property.getRelationshipSchema.properties.formDetailFields}}
+                {{#each (getFormDetailFieldsProperties (getPropertiesFromPropertyRelationship property)) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#eq type 'varchar'}}
                 {{> varcharInput schema=../schema property=.}}
@@ -111,9 +111,9 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
                 mat-flat-button
                 class="ml-3"
                 type="submit"
-                form="{{ toCamelCase property.getRelationshipSchema.moduleName }}DetailDialogForm"
+                form="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DetailDialogForm"
                 color="accent"
-                [disabled]="{{ toCamelCase property.getRelationshipSchema.moduleName }}DialogFg.pristine"
+                [disabled]="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DialogFg.pristine"
             >
                 <mat-icon
                     class="icon-size-5 mr-2"
@@ -132,7 +132,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         [columns]="t('Columns')"
         [field]="t('Field')"
         [filter]="t('Filter')"
-        [for]="{{ toCamelCase property.getRelationshipSchema.moduleNames }}GridId"
+        [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridId"
         [operator]="t('Operator')"
         [OR]="t('OR')"
         [pleaseSelectField]="t('PleaseSelectField')"
@@ -166,11 +166,11 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         }"
     >
         <au-grid-column-translation
-            *ngFor="let columnConfig of origin{{ toPascalCase property.getRelationshipSchema.moduleNames }}ColumnsConfig"
+            *ngFor="let columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property) }}ColumnsConfig"
             [field]="columnConfig.field"
         >
             \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
         </au-grid-column-translation>
     </au-grid-translations>
 </au-grid-elements-manager>
-<!-- #endregion component to manage {{ toCamelCase property.getRelationshipSchema.moduleNames }} -->`);
+<!-- #endregion component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property) }} -->`);

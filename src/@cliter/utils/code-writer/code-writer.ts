@@ -4,11 +4,13 @@ import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, Ini
 import { NewLineKind, SyntaxKind } from 'typescript';
 import { cliterConfig } from '../../config';
 import { ObjectTools } from '../object-tools';
-import { Properties } from '../properties';
 import { ArrayDriver } from './drivers/array.driver';
 import { ExportDriver } from './drivers/export.driver';
 import { ImportDriver } from './drivers/import.driver';
 import { InterfaceDriver } from './drivers/interface.driver';
+import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getRelationshipManyToManyProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
+import { getJavascriptTypeProperty } from '../property.functions';
+import { Property } from '../../types';
 
 export class CodeWriter
 {
@@ -47,7 +49,7 @@ export class CodeWriter
     }
 
     // back
-    generateBackBoundedContextReferences(properties: Properties): void
+    generateBackBoundedContextReferences(properties: Property[]): void
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
@@ -105,24 +107,21 @@ export class CodeWriter
         );
 
         // pivot tables
-        for (const property of properties.withRelationshipManyToMany)
+        for (const property of getRelationshipManyToManyProperties(properties))
         {
-            if (property.relationship?.pivot?.modulePath !== `${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`)
-                continue;
-
             ImportDriver.createImportItems(
                 sourceFile,
                 `./${this.moduleName.toKebabCase()}`,
                 [
-                    `${property.relationship?.pivot?.aggregate}Model`,
-                    `${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
-                    `${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository`,
+                    `${property.relationship?.pivot?.aggregateName}Model`,
+                    `${this.boundedContextName.toPascalCase()}I${property.relationship?.pivot?.moduleName.toPascalCase()}Repository`,
+                    `${this.boundedContextName.toPascalCase()}Sequelize${property.relationship?.pivot?.moduleName.toPascalCase()}Repository`,
                 ],
             );
 
             ArrayDriver.addArrayItem(
                 sourceFile,
-                `${property.relationship?.pivot?.aggregate}Model`,
+                `${property.relationship?.pivot?.aggregateName}Model`,
                 `${this.boundedContextName.toPascalCase()}Models`,
             );
 
@@ -131,15 +130,15 @@ export class CodeWriter
                 sourceFile,
                 `
 {
-    provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository,
-    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}${property.relationship.singularName?.toPascalCase()}Repository
+    provide : ${this.boundedContextName.toPascalCase()}I${property.relationship?.pivot?.moduleName.toPascalCase()}Repository,
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${property.relationship?.pivot?.moduleName.toPascalCase()}Repository
 }`,
                 `${this.boundedContextName.toPascalCase()}Repositories`,
             );
         }
 
         // add i18n registers
-        if (properties.hasI18n)
+        if (hasI18nProperties(properties))
         {
             // register import
             ImportDriver.createImportItems(
@@ -206,10 +205,10 @@ export class CodeWriter
             sourceFile,
             `./${this.moduleName.toKebabCase()}`,
             [
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiControllers`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiResolvers`,
                 `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
-                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+                `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiServices`,
             ],
         );
 
@@ -231,9 +230,9 @@ export class CodeWriter
                 `...${this.boundedContextName.toPascalCase()}Repositories`,
                 `...${this.boundedContextName.toPascalCase()}Sagas`,
                 // from @api
-                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Resolvers`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiResolvers`,
                 `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiHandlers`,
-                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Services`,
+                `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiServices`,
             ],
             providersArray,
         );
@@ -241,17 +240,17 @@ export class CodeWriter
         // add controller to controllers array
         ArrayDriver.addArrayItem(
             sourceFile,
-            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Controllers`,
+            `...${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}ApiControllers`,
             controllersArray,
         );
 
         sourceFile?.saveSync();
     }
 
-    generateBackTestingForeignReferences(properties: Properties): void
+    generateBackTestingForeignReferences(properties: Property[]): void
     {
         // get foreign relationship
-        const foreignRelationships = properties.getForeignRelationship(this.boundedContextName);
+        const foreignRelationships = getForeignRelationshipProperties(properties, this.boundedContextName);
 
         // check that exist bounded context folder
         if (!fs.existsSync(path.join(process.cwd(), 'cliter', this.boundedContextName.toKebabCase()))) return;
@@ -397,7 +396,7 @@ export class CodeWriter
 
     // front
     generateFrontInterface(
-        properties: Properties,
+        properties: Property[],
         {
             overwrite = false,
         }: {
@@ -411,7 +410,7 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}`,
-            properties.graphqlProperties
+            getGraphqlProperties(properties)
                 // avoid duplicated properties from i18n table, id, createdAt, updatedAt, deletedAt
                 .filter(property =>
                     !(
@@ -424,7 +423,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
@@ -432,7 +431,7 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}Create${this.moduleName.toPascalCase()}`,
-            properties.graphqlInputProperties
+            getGraphqlInputProperties(properties)
                 // avoid duplicated properties from i18n table, id
                 .filter(property =>
                     !(
@@ -442,7 +441,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
@@ -450,7 +449,7 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}Update${this.moduleName.toPascalCase()}ById`,
-            properties.graphqlInputProperties
+            getGraphqlInputProperties(properties)
                 // avoid duplicated properties from i18n table, id
                 .filter(property =>
                     !(
@@ -460,7 +459,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
@@ -468,7 +467,7 @@ export class CodeWriter
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}Update${this.moduleNames.toPascalCase()}`,
-            properties.graphqlInputProperties
+            getGraphqlInputProperties(properties)
                 // avoid duplicated properties from i18n table, id
                 .filter(property =>
                     !(
@@ -478,7 +477,7 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + '?', type: property.getJavascriptType })),
+                .map(property => ({ name: property.name.toCamelCase() + '?', type: getJavascriptTypeProperty(property, cliterConfig) })),
             { overwrite },
         );
 
@@ -739,12 +738,14 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateFrontTranslations(properties: Properties, langCode: string): void
+    generateFrontTranslations(properties: Property[], langCode: string): void
     {
         const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'));
 
         // get names to translate
-        const names = properties.withoutTimestamps.filter(property => property.name !== 'id').map(property => property.name);
+        const names = getWithoutTimestampsProperties(properties)
+            .filter(property => property.name !== 'id')
+            .map(property => property.name);
 
         // add module name/s to translate
         names.push(this.moduleName, this.moduleNames);

@@ -15,7 +15,7 @@
             )
     )
 ~}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
         (object items=(array 'CacheModule') path='@nestjs/cache-manager')
@@ -31,7 +31,7 @@ describe('{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase sche
     {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                {{#if schema.properties.hasI18n}}
+                {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CacheModule.register(),
                 {{/if}}
             ],

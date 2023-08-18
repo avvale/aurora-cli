@@ -17,7 +17,7 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-            {{#if schema.properties.hasI18n}}
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             <button
                 *ngIf="
                     currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit' &&
@@ -107,7 +107,7 @@
 
                 <div class="layout__container">
 
-                    {{#if schema.properties.hasI18n}}
+                    {{#if (hasI18nProperties schema.aggregateProperties) }}
                     <au-flag-lang
                         appearance="outline"
                         class="col-4"
@@ -116,7 +116,7 @@
                     >
                     </au-flag-lang>
                     {{/if}}
-                    {{#each schema.properties.formDetailFields}}
+                    {{#each (getFormDetailFieldsProperties schema.aggregateProperties) }}
                     {{#if (isAllowProperty ../schema.moduleName this) }}
                     {{#eq type 'varchar'}}
                     {{> varcharInput schema=../schema property=.}}

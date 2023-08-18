@@ -5,15 +5,16 @@
             (object items=(array 'Body' 'Controller' 'HttpCode' 'Param' 'Post')  path='@nestjs/common')
             (object items=(array 'ApiOkResponse' 'ApiOperation' 'ApiTags')  path='@nestjs/swagger')
             (object items=(array 'Timezone' 'QueryStatement')  path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdHandler')
-                )
-                path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Dto')
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdHandler')
+                    )
+                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
 {{#if schema.hasTenant}}
@@ -30,7 +31,7 @@
         (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
-{{#if schema.properties.hasI18n}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{ 
     push importsArray
         (object items=(array 'ContentLanguage') path=config.auroraCorePackage)
@@ -62,7 +63,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         {{/if}}
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-        {{#if schema.properties.hasI18n}}
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
         @ContentLanguage() contentLanguage?: string,
         {{/if}}
     )
@@ -74,7 +75,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
             {{/if}}
             constraint,
             timezone,
-            {{#if schema.properties.hasI18n}}
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             contentLanguage,
             {{/if}}
         );

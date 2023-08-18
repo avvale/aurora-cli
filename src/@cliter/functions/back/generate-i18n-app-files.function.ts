@@ -1,11 +1,11 @@
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
-import { TemplateGenerator } from '../../utils';
+import { TemplateGenerator, hasI18nProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const generateI18nAppFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    if (generateCommandState.schema.properties.hasI18n)
+    if (hasI18nProperties(generateCommandState.schema.aggregateProperties))
     {
         await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
