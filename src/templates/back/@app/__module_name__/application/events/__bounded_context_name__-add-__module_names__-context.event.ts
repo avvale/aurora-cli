@@ -3,11 +3,7 @@
         array
             (object items=(array 'AggregateRoot') path='@nestjs/cqrs')
             (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
-                )
+                items=schema.aggregateName
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
     )
