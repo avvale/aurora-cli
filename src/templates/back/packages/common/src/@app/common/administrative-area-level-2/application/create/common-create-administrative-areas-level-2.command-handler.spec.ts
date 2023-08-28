@@ -38,7 +38,7 @@ describe('commonCreateAdministrativeAreasLevel2CommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return CommonMockAdministrativeAreaLevel2Data createds', async () =>
+        test('should return CommonMockAdministrativeAreaLevel2Data created', async () =>
         {
             expect(await commandHandler.execute(
                 new CommonCreateAdministrativeAreasLevel2Command(

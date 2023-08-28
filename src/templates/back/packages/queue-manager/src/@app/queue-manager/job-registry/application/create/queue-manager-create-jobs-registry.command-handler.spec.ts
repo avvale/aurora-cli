@@ -38,7 +38,7 @@ describe('queueManagerCreateJobsRegistryCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return QueueManagerMockJobRegistryData createds', async () =>
+        test('should return QueueManagerMockJobRegistryData created', async () =>
         {
             expect(await commandHandler.execute(
                 new QueueManagerCreateJobsRegistryCommand(

@@ -38,7 +38,7 @@ describe('iamCreateUsersCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return IamMockUserData createds', async () =>
+        test('should return IamMockUserData created', async () =>
         {
             expect(await commandHandler.execute(
                 new IamCreateUsersCommand(

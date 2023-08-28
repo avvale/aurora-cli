@@ -38,7 +38,7 @@ describe('oAuthCreateApplicationsCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return OAuthMockApplicationData createds', async () =>
+        test('should return OAuthMockApplicationData created', async () =>
         {
             expect(await commandHandler.execute(
                 new OAuthCreateApplicationsCommand(

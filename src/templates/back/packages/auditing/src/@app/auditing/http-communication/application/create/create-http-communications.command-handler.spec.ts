@@ -38,7 +38,7 @@ describe('CreateHttpCommunicationsCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return httpCommunications createds', async () =>
+        test('should return httpCommunications created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateHttpCommunicationsCommand(

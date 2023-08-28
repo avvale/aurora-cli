@@ -38,7 +38,7 @@ describe('iamCreateRolesCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return IamMockRoleData createds', async () =>
+        test('should return IamMockRoleData created', async () =>
         {
             expect(await commandHandler.execute(
                 new IamCreateRolesCommand(

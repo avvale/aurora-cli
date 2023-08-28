@@ -38,7 +38,7 @@ describe('CreateSideEffectsCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return sideEffects createds', async () =>
+        test('should return sideEffects created', async () =>
         {
             expect(await commandHandler.execute(
                 new CreateSideEffectsCommand(

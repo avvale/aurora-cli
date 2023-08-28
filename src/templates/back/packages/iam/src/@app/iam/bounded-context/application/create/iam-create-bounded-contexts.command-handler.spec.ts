@@ -38,7 +38,7 @@ describe('iamCreateBoundedContextsCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return IamMockBoundedContextData createds', async () =>
+        test('should return IamMockBoundedContextData created', async () =>
         {
             expect(await commandHandler.execute(
                 new IamCreateBoundedContextsCommand(

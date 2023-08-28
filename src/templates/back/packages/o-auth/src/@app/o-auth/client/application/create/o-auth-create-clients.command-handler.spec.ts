@@ -38,7 +38,7 @@ describe('oAuthCreateClientsCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return OAuthMockClientData createds', async () =>
+        test('should return OAuthMockClientData created', async () =>
         {
             expect(await commandHandler.execute(
                 new OAuthCreateClientsCommand(

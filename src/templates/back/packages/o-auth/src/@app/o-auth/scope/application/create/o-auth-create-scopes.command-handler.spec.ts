@@ -38,7 +38,7 @@ describe('oAuthCreateScopesCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return OAuthMockScopeData createds', async () =>
+        test('should return OAuthMockScopeData created', async () =>
         {
             expect(await commandHandler.execute(
                 new OAuthCreateScopesCommand(

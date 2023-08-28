@@ -38,7 +38,7 @@ describe('iamCreatePermissionsCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return IamMockPermissionData createds', async () =>
+        test('should return IamMockPermissionData created', async () =>
         {
             expect(await commandHandler.execute(
                 new IamCreatePermissionsCommand(

@@ -38,7 +38,7 @@ describe('queueManagerCreateQueuesCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return QueueManagerMockQueueData createds', async () =>
+        test('should return QueueManagerMockQueueData created', async () =>
         {
             expect(await commandHandler.execute(
                 new QueueManagerCreateQueuesCommand(

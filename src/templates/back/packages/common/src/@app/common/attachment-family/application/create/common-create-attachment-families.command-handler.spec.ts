@@ -38,7 +38,7 @@ describe('commonCreateAttachmentFamiliesCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return CommonMockAttachmentFamilyData createds', async () =>
+        test('should return CommonMockAttachmentFamilyData created', async () =>
         {
             expect(await commandHandler.execute(
                 new CommonCreateAttachmentFamiliesCommand(

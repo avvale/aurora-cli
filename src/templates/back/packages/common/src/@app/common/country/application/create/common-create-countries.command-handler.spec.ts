@@ -38,7 +38,7 @@ describe('commonCreateCountriesCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return CommonMockCountryData createds', async () =>
+        test('should return CommonMockCountryData created', async () =>
         {
             expect(await commandHandler.execute(
                 new CommonCreateCountriesCommand(
