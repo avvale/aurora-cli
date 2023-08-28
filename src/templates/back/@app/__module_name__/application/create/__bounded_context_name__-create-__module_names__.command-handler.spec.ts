@@ -54,7 +54,7 @@ describe('{{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schem
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data createds', async () =>
+        test('should return {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data created', async () =>
         {
             expect(await commandHandler.execute(
                 new {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command(
