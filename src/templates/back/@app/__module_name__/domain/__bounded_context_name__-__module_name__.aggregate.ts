@@ -1,18 +1,4 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
-import {
-    {{> importValueObjects }}
-} from './value-objects';
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleName) '.event.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event } from '../application/events/{{ toKebabCase schema.boundedContextName }}-created-{{ toKebabCase schema.moduleName }}.event';
-{{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-' (toKebabCase schema.moduleName) '.event.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event } from '../application/events/{{ toKebabCase schema.boundedContextName }}-updated-{{ toKebabCase schema.moduleName }}.event';
-{{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event } from '../application/events/{{ toKebabCase schema.boundedContextName }}-deleted-{{ toKebabCase schema.moduleName }}.event';
-{{/notInArray}}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
@@ -28,6 +14,45 @@ import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName
 import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'AggregateRoot') path='@nestjs/cqrs')
+            (object items=(array 'LiteralObject' 'Utils') path=config.auroraCorePackage)
+    )
+~}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+~}}
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+~}}
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Updated' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+~}}
+{{/notInArray}}
+{{#each (getWithoutTimestampsProperties (getValueObjectsProperties schema.aggregateProperties)) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (object 
+            items=
+                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
+{{{ importManager (object imports=importsArray) }}}
 export class {{ schema.aggregateName }} extends AggregateRoot
 {
     {{#each (getAggregateProperties schema.aggregateProperties) }}
