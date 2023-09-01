@@ -17,7 +17,7 @@
                             (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
                     )
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            )
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}
