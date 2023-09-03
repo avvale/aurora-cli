@@ -567,6 +567,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 },
             });
     }
+{{#if (isArray schema.additionalApis) }}
 {{#unlessEq (countAdditionalApisQueries schema.additionalApis) 0 }}
 
     // Queries additionalApis
@@ -608,6 +609,8 @@ export class {{ toPascalCase schema.moduleName }}Service
     }
 {{/each}}
 {{/unlessEq}}
+{{/if}}
+{{#if (isArray schema.additionalApis) }}
 {{#unlessEq (countAdditionalApisMutations schema.additionalApis) 0 }}
 
     // Mutation additionalApis
@@ -634,4 +637,5 @@ export class {{ toPascalCase schema.moduleName }}Service
     }
 {{/each}}
 {{/unlessEq}}
+{{/if}}
 }
