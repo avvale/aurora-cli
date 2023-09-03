@@ -322,7 +322,7 @@ export const getModuleNamesFromPropertyRelationship = (
 {
     try
     {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleName;
+        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleNames;
     }
     catch
     {
