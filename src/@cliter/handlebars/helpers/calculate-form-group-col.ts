@@ -38,6 +38,15 @@ handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
             if (property.maxLength < 91) return 'col-10';
             return 'col-12';
 
+        case PropertyType.DECIMAL:
+            if (!property.decimals) return 'col-12';
+            if (property.decimals[0] < 11) return 'col-2';
+            if (property.decimals[0] < 31) return 'col-4';
+            if (property.decimals[0] < 51) return 'col-6';
+            if (property.decimals[0] < 71) return 'col-8';
+            if (property.decimals[0] < 91) return 'col-10';
+            return 'col-12';
+
         case PropertyType.TEXT:
             return 'col-12';
 

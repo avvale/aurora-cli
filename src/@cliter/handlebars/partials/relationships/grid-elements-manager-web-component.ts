@@ -78,7 +78,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
 
                 {{/eq}}
                 {{#eq type 'decimal'}}
-                {{> intInput schema=../schema property=.}}
+                {{> decimalInput schema=../schema property=.}}
 
                 {{/eq}}
                 {{#eq type 'date'}}
