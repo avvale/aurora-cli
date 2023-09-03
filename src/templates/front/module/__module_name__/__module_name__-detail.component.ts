@@ -329,8 +329,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             id: mapActions(
                 dialog.componentInstance.data.currentActionId,
                 {
-                    '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}' : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
-                    '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}': '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
+                    '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}' : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
+                    '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}': '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
                 },
             ),
             isViewAction: false,
@@ -417,7 +417,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}: {{ getAggregateNameFromPropertyRelationship this }}) =>
                     {
-                        if ({{ toCamelCase (getModuleNameFromPropertyRelationship this) }} && this.currentAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}')
+                        if ({{ toCamelCase (getModuleNameFromPropertyRelationship this) }} && this.currentAction.id === '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}')
                         {
                             this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.patchValue({{ toCamelCase (getModuleNameFromPropertyRelationship this) }});
                         }
@@ -689,8 +689,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.delete{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
                 const delete{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}DialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}') }),
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}')}`,
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}') }),
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation-triangle',
