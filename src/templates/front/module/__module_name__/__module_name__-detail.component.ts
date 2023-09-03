@@ -284,7 +284,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         this.fg = this.fb.group({
             {{#each (getFormGroupFieldsProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getPropertyName this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if (length this) }}Validators.minLength({{ (length this) }}), Validators.maxLength({{ (length this) }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
+            {{ toCamelCase (getPropertyName this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if this.length }}Validators.minLength({{ this.length }}), Validators.maxLength({{ this.length }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
             {{/if}}
             {{/each}}
         });
@@ -308,7 +308,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg = this.fb.group({
             {{#each (getFormGroupFieldsProperties (getPropertiesFromPropertyRelationship this)) }}
             {{#if (isAllowProperty (getModuleNameFromPropertyRelationship this) this) }}
-            {{ toCamelCase (getPropertyName this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if (length this) }}Validators.minLength({{ (length this) }}), Validators.maxLength({{ (length this) }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
+            {{ toCamelCase (getPropertyName this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if this.length }}Validators.minLength({{ this.length }}), Validators.maxLength({{ this.length }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
             {{/if}}
             {{/each}}
         });
@@ -415,7 +415,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
                     .{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}: {{ (getAggregateNameFromPropertyRelationship this) }}) =>
+                    .subscribe(({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}: {{ getAggregateNameFromPropertyRelationship this }}) =>
                     {
                         if ({{ toCamelCase (getModuleNameFromPropertyRelationship this) }} && this.currentAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}')
                         {
@@ -645,7 +645,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
                 await lastValueFrom(
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
-                        .create<{{ (getAggregateNameFromPropertyRelationship this) }}>({
+                        .create<{{ getAggregateNameFromPropertyRelationship this }}>({
                             object: this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.value,
                         }),
                 );
@@ -677,7 +677,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
                 await lastValueFrom(
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
-                        .updateById<{{ (getAggregateNameFromPropertyRelationship this) }}>({
+                        .updateById<{{ getAggregateNameFromPropertyRelationship this }}>({
                             object: this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.value,
                         }),
                 );
@@ -720,7 +720,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             {
                                 await lastValueFrom(
                                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
-                                        .deleteById<{{ (getAggregateNameFromPropertyRelationship this) }}>({
+                                        .deleteById<{{ getAggregateNameFromPropertyRelationship this }}>({
                                             id: action.meta.row.id,
                                         }),
                                 );
