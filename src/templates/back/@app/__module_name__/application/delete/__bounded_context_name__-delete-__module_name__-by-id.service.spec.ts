@@ -23,10 +23,14 @@
             )
     )
 ~}}
-{{#if schema.aggregateProperties.hasI18n }}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
-        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository')
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
