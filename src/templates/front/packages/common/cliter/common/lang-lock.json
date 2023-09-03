@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.html",
-            "integrity": "sha1:b9865fe4f596a8a2eb3b76eedfd3e49539617fec"
+            "integrity": "sha1:128c88f33493a9627ffad3a884766cbffafcf3df"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.ts",
-            "integrity": "sha1:0d526d5df80ccafd0f0e4bc21520c3b8850440d4"
+            "integrity": "sha1:8e17864a31987ad901e4f7977493cab8b09c1fa7"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.html",
-            "integrity": "sha1:a4d87520a0c40b796f07bc95c2e6bf9913d15b6b"
+            "integrity": "sha1:9e2b898b93e5e490be5039d76b18d1433eb44336"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.resolvers.ts",
-            "integrity": "sha1:02550631a4278cf621d306f6e6c0536abcfecde8"
+            "integrity": "sha1:2fd35157507aef34a2a4ab7786058a5f472892b5"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.service.ts",

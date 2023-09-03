@@ -1,10 +1,10 @@
-import { KeyValuePipe, NgForOf } from '@angular/common';
+import { CommonCountry, CommonCountryMapType } from '../common.types';
+import { CountryService } from './country.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Action, CoreCurrentLangService, CoreLang, Crumb, FlagLangComponent, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
-import { CommonCountry, CommonCountryMapType } from '../common.types';
-import { CountryService } from './country.service';
+import { KeyValuePipe, NgForOf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
@@ -39,9 +39,9 @@ export class CountryDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly coreCurrentLangService: CoreCurrentLangService,
-		private readonly countryService: CountryService,
-		protected readonly injector: Injector,
+        private readonly coreCurrentLangService: CoreCurrentLangService,
+        private readonly countryService: CountryService,
+        protected readonly injector: Injector,
     )
     {
         super(injector);
@@ -100,10 +100,10 @@ export class CountryDetailComponent extends ViewDetailComponent
             latitude: null,
             longitude: null,
             zoom: [null, [Validators.maxLength(2)]],
-            mapType: ['', [Validators.required]],
+            mapType: [null, [Validators.required]],
             langId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required]],
-            slug: ['', [Validators.required, Validators.maxLength(1024)]],
+            name: ['', [Validators.required, Validators.maxLength(100)]],
+            slug: ['', [Validators.required, Validators.maxLength(100)]],
             administrativeAreaLevel1: ['', [Validators.maxLength(50)]],
             administrativeAreaLevel2: ['', [Validators.maxLength(50)]],
             administrativeAreaLevel3: ['', [Validators.maxLength(50)]],

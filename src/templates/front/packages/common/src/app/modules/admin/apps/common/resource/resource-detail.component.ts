@@ -1,26 +1,23 @@
-import { CommonLang } from '../common.types';
-import { LangService } from './lang.service';
+import { CommonResource } from '../common.types';
+import { ResourceService } from './resource.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
-
-// ---- customizations ----
-import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-    selector       : 'common-lang-detail',
-    templateUrl    : './lang-detail.component.html',
+    selector       : 'common-resource-detail',
+    templateUrl    : './resource-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule, MatSelectModule,
+        MatCheckboxModule,
     ],
 })
-export class LangDetailComponent extends ViewDetailComponent
+export class ResourceDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
     // ..
@@ -29,18 +26,18 @@ export class LangDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: CommonLang;
+    managedObject: CommonResource;
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'common.Langs', routerLink: ['/common/lang']},
-        { translation: 'common.Lang' },
+        { translation: 'common.Resources', routerLink: ['/common/resource']},
+        { translation: 'common.Resource' },
     ];
 
     constructor(
         protected readonly injector: Injector,
-        private readonly langService: LangService,
+        private readonly resourceService: ResourceService,
     )
     {
         super(injector);
@@ -76,8 +73,8 @@ export class LangDetailComponent extends ViewDetailComponent
             id: mapActions(
                 this.currentViewAction.id,
                 {
-                    'common::lang.detail.new' : 'common::lang.detail.create',
-                    'common::lang.detail.edit': 'common::lang.detail.update',
+                    'common::resource.detail.new' : 'common::resource.detail.create',
+                    'common::resource.detail.edit': 'common::resource.detail.update',
                 },
             ),
             isViewAction: false,
@@ -88,15 +85,10 @@ export class LangDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            code: ['', [Validators.required, Validators.maxLength(30)]],
             name: ['', [Validators.required, Validators.maxLength(100)]],
-            image: '',
-            iso6392: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
-            iso6393: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-            ietf: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            customCode: ['', [Validators.maxLength(10)]],
-            dir: [null, [Validators.required]],
-            sort: [null, [Validators.maxLength(6)]],
             isActive: [false, [Validators.required]],
+            hasAttachments: [false, [Validators.required]],
         });
     }
 
@@ -106,13 +98,13 @@ export class LangDetailComponent extends ViewDetailComponent
         switch (action?.id)
         {
             /* #region common actions */
-            case 'common::lang.detail.new':
+            case 'common::resource.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
 
-            case 'common::lang.detail.edit':
-                this.langService
-                    .lang$
+            case 'common::resource.detail.edit':
+                this.resourceService
+                    .resource$
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
@@ -121,18 +113,18 @@ export class LangDetailComponent extends ViewDetailComponent
                     });
                 break;
 
-            case 'common::lang.detail.create':
+            case 'common::resource.detail.create':
                 try
                 {
                     await lastValueFrom(
-                        this.langService
-                            .create<CommonLang>({
+                        this.resourceService
+                            .create<CommonResource>({
                                 object: this.fg.value,
                             }),
                     );
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('common.Lang')} ${this.translocoService.translate('Created.M')}`,
+                        `${this.translocoService.translate('common.Resource')} ${this.translocoService.translate('Created.M')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -140,7 +132,7 @@ export class LangDetailComponent extends ViewDetailComponent
                         },
                     );
 
-                    this.router.navigate(['common/lang']);
+                    this.router.navigate(['common/resource']);
                 }
                 catch(error)
                 {
@@ -148,18 +140,18 @@ export class LangDetailComponent extends ViewDetailComponent
                 }
                 break;
 
-            case 'common::lang.detail.update':
+            case 'common::resource.detail.update':
                 try
                 {
                     await lastValueFrom(
-                        this.langService
-                            .updateById<CommonLang>({
+                        this.resourceService
+                            .updateById<CommonResource>({
                                 object: this.fg.value,
                             }),
                     );
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('common.Lang')} ${this.translocoService.translate('Saved.M')}`,
+                        `${this.translocoService.translate('common.Resource')} ${this.translocoService.translate('Saved.M')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -167,7 +159,7 @@ export class LangDetailComponent extends ViewDetailComponent
                         },
                     );
 
-                    this.router.navigate(['common/lang']);
+                    this.router.navigate(['common/resource']);
                 }
                 catch(error)
                 {

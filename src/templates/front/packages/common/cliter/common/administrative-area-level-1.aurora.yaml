@@ -18,7 +18,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: CommonCountry
+      aggregateName: CommonCountry
       modulePath: common/country
       key: id
       field: country
@@ -77,5 +77,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []

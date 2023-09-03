@@ -36,8 +36,8 @@ export class AdministrativeAreaLevel1DetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly administrativeAreaLevel1Service: AdministrativeAreaLevel1Service,
-		protected readonly injector: Injector,
+        private readonly administrativeAreaLevel1Service: AdministrativeAreaLevel1Service,
+        protected readonly injector: Injector,
     )
     {
         super(injector);
@@ -93,7 +93,7 @@ export class AdministrativeAreaLevel1DetailComponent extends ViewDetailComponent
             latitude: null,
             longitude: null,
             zoom: [null, [Validators.maxLength(2)]],
-            mapType: ['', [Validators.required]],
+            mapType: [null, [Validators.required]],
         });
     }
 

@@ -1,26 +1,25 @@
-import { CommonLang } from '../common.types';
-import { LangService } from './lang.service';
+import { NgForOf } from '@angular/common';
+import { CommonAttachmentFamily, CommonResource } from '../common.types';
+import { ResourceService } from '../resource/resource.service';
+import { AttachmentFamilyService } from './attachment-family.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
-
-// ---- customizations ----
 import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-lang-detail',
-    templateUrl    : './lang-detail.component.html',
+    selector       : 'common-attachment-family-detail',
+    templateUrl    : './attachment-family-detail.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule, MatSelectModule,
+        MatSelectModule, NgForOf,
     ],
 })
-export class LangDetailComponent extends ViewDetailComponent
+export class AttachmentFamilyDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
     // ..
@@ -29,18 +28,22 @@ export class LangDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: CommonLang;
+    managedObject: CommonAttachmentFamily;
+
+    // relationships
+    resources$: Observable<CommonResource[]>;
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'common.Langs', routerLink: ['/common/lang']},
-        { translation: 'common.Lang' },
+        { translation: 'common.AttachmentFamilies', routerLink: ['/common/attachment-family']},
+        { translation: 'common.AttachmentFamily' },
     ];
 
     constructor(
+        private readonly attachmentFamilyService: AttachmentFamilyService,
         protected readonly injector: Injector,
-        private readonly langService: LangService,
+        private readonly resourceService: ResourceService,
     )
     {
         super(injector);
@@ -51,6 +54,7 @@ export class LangDetailComponent extends ViewDetailComponent
     init(): void
     {
         /**/
+        this.resources$ = this.resourceService.resources$;
     }
 
     onSubmit($event): void
@@ -76,8 +80,8 @@ export class LangDetailComponent extends ViewDetailComponent
             id: mapActions(
                 this.currentViewAction.id,
                 {
-                    'common::lang.detail.new' : 'common::lang.detail.create',
-                    'common::lang.detail.edit': 'common::lang.detail.update',
+                    'common::attachmentFamily.detail.new' : 'common::attachmentFamily.detail.create',
+                    'common::attachmentFamily.detail.edit': 'common::attachmentFamily.detail.update',
                 },
             ),
             isViewAction: false,
@@ -88,15 +92,14 @@ export class LangDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            resourceId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             name: ['', [Validators.required, Validators.maxLength(100)]],
-            image: '',
-            iso6392: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
-            iso6393: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-            ietf: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            customCode: ['', [Validators.maxLength(10)]],
-            dir: [null, [Validators.required]],
-            sort: [null, [Validators.maxLength(6)]],
-            isActive: [false, [Validators.required]],
+            width: [null, [Validators.maxLength(5)]],
+            height: [null, [Validators.maxLength(5)]],
+            fitType: null,
+            quality: [null, [Validators.maxLength(3)]],
+            sizes: null,
+            format: null,
         });
     }
 
@@ -106,13 +109,13 @@ export class LangDetailComponent extends ViewDetailComponent
         switch (action?.id)
         {
             /* #region common actions */
-            case 'common::lang.detail.new':
+            case 'common::attachmentFamily.detail.new':
                 this.fg.get('id').setValue(Utils.uuid());
                 break;
 
-            case 'common::lang.detail.edit':
-                this.langService
-                    .lang$
+            case 'common::attachmentFamily.detail.edit':
+                this.attachmentFamilyService
+                    .attachmentFamily$
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
@@ -121,18 +124,18 @@ export class LangDetailComponent extends ViewDetailComponent
                     });
                 break;
 
-            case 'common::lang.detail.create':
+            case 'common::attachmentFamily.detail.create':
                 try
                 {
                     await lastValueFrom(
-                        this.langService
-                            .create<CommonLang>({
+                        this.attachmentFamilyService
+                            .create<CommonAttachmentFamily>({
                                 object: this.fg.value,
                             }),
                     );
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('common.Lang')} ${this.translocoService.translate('Created.M')}`,
+                        `${this.translocoService.translate('common.AttachmentFamily')} ${this.translocoService.translate('Created.M')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -140,7 +143,7 @@ export class LangDetailComponent extends ViewDetailComponent
                         },
                     );
 
-                    this.router.navigate(['common/lang']);
+                    this.router.navigate(['common/attachment-family']);
                 }
                 catch(error)
                 {
@@ -148,18 +151,18 @@ export class LangDetailComponent extends ViewDetailComponent
                 }
                 break;
 
-            case 'common::lang.detail.update':
+            case 'common::attachmentFamily.detail.update':
                 try
                 {
                     await lastValueFrom(
-                        this.langService
-                            .updateById<CommonLang>({
+                        this.attachmentFamilyService
+                            .updateById<CommonAttachmentFamily>({
                                 object: this.fg.value,
                             }),
                     );
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('common.Lang')} ${this.translocoService.translate('Saved.M')}`,
+                        `${this.translocoService.translate('common.AttachmentFamily')} ${this.translocoService.translate('Saved.M')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -167,7 +170,7 @@ export class LangDetailComponent extends ViewDetailComponent
                         },
                     );
 
-                    this.router.navigate(['common/lang']);
+                    this.router.navigate(['common/attachment-family']);
                 }
                 catch(error)
                 {

@@ -54,5 +54,19 @@ export const commonNavigation: FuseNavigationItem = {
             icon : 'mat_outline:share_location',
             link : '/common/administrative-area-level-3',
         },
+        {
+            id   : 'resources',
+            title: 'Resource',
+            type : 'basic',
+            icon : 'mat_outline:account_tree',
+            link : '/common/resource',
+        },
+        {
+            id   : 'attachmentFamilies',
+            title: 'AttachmentFamily',
+            type : 'basic',
+            icon : 'mat_outline:hide_image',
+            link : '/common/attachment-family',
+        },
     ],
 };

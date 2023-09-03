@@ -44,10 +44,10 @@ export const countryNewResolver: ResolveFn<Action | { object: CommonCountry; }> 
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const coreCurrentLangService = inject(CoreCurrentLangService);
-	const countryService = inject(CountryService);
-	const sessionService = inject(SessionService);
+    const actionService = inject(ActionService);
+    const coreCurrentLangService = inject(CoreCurrentLangService);
+    const countryService = inject(CountryService);
+    const sessionService = inject(SessionService);
 
     const action = actionService.action({
         id          : 'common::country.detail.new',
@@ -88,16 +88,16 @@ export const countryNewResolver: ResolveFn<Action | { object: CommonCountry; }> 
 };
 
 export const countryEditResolver: ResolveFn<{
-	object: CommonCountry;
+    object: CommonCountry;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const coreCurrentLangService = inject(CoreCurrentLangService);
-	const countryService = inject(CountryService);
-	const sessionService = inject(SessionService);
+    const actionService = inject(ActionService);
+    const coreCurrentLangService = inject(CoreCurrentLangService);
+    const countryService = inject(CountryService);
+    const sessionService = inject(SessionService);
 
     actionService.action({
         id          : 'common::country.detail.edit',

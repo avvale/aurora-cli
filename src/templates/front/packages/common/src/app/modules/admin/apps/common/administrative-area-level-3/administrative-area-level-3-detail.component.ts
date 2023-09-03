@@ -2,9 +2,9 @@ import { CommonAdministrativeAreaLevel3 } from '../common.types';
 import { AdministrativeAreaLevel3Service } from './administrative-area-level-3.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
     selector       : 'common-administrative-area-level-3-detail',
@@ -36,8 +36,8 @@ export class AdministrativeAreaLevel3DetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly administrativeAreaLevel3Service: AdministrativeAreaLevel3Service,
-		protected readonly injector: Injector,
+        private readonly administrativeAreaLevel3Service: AdministrativeAreaLevel3Service,
+        protected readonly injector: Injector,
     )
     {
         super(injector);
@@ -95,7 +95,7 @@ export class AdministrativeAreaLevel3DetailComponent extends ViewDetailComponent
             latitude: null,
             longitude: null,
             zoom: [null, [Validators.maxLength(2)]],
-            mapType: ['', [Validators.required]],
+            mapType: [null, [Validators.required]],
         });
     }
 

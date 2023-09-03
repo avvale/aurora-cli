@@ -40,7 +40,7 @@ export const langNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'common::lang.detail.new',
@@ -49,14 +49,14 @@ export const langNewResolver: ResolveFn<Action> = (
 };
 
 export const langEditResolver: ResolveFn<{
-	object: CommonLang;
+    object: CommonLang;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const langService = inject(LangService);
+    const actionService = inject(ActionService);
+    const langService = inject(LangService);
 
     actionService.action({
         id          : 'common::lang.detail.edit',

@@ -1,0 +1,45 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/app/modules/admin/apps/common/common.component.html",
+            "integrity": "sha1:a6aab421500581830708e34385e2166e7a039ba7"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/common.component.ts",
+            "integrity": "sha1:c740eb47d0df3adc39f39eeabc14f387926b963e"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.html",
+            "integrity": "sha1:05d212046bb9015cbc767f4bfb325ba653750932"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.ts",
+            "integrity": "sha1:7199d12bf14f13cc54c9ffecad3a7465b902f18d"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.html",
+            "integrity": "sha1:df9c1d429e4cb9b700cb8afd3598add293c4b59a"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.ts",
+            "integrity": "sha1:2af5406f09390821492fd6d189768d754a17956a"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.columns-config.ts",
+            "integrity": "sha1:193574dfa3b66655847d4ad648252aaf555db42a"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.graphql.ts",
+            "integrity": "sha1:b8e2402b614ea6847d631a865a34d1814de45756"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.resolvers.ts",
+            "integrity": "sha1:a1a620105ba6bbdb737403a23661aa2d6fbabbcc"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.service.ts",
+            "integrity": "sha1:ec8103ef29a479ed19369663c5d22fd1c24c65db"
+        }
+    ]
+}

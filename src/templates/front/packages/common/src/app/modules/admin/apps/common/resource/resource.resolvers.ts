@@ -1,11 +1,11 @@
-import { CommonAdministrativeAreaLevel3 } from '../common.types';
-import { administrativeAreaLevel3ColumnsConfig } from './administrative-area-level-3.columns-config';
-import { AdministrativeAreaLevel3Service } from './administrative-area-level-3.service';
+import { CommonResource } from '../common.types';
+import { resourceColumnsConfig } from './resource.columns-config';
+import { ResourceService } from './resource.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
-export const administrativeAreaLevel3PaginationResolver: ResolveFn<GridData<CommonAdministrativeAreaLevel3>> = (
+export const resourcePaginationResolver: ResolveFn<GridData<CommonResource>> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
@@ -13,20 +13,20 @@ export const administrativeAreaLevel3PaginationResolver: ResolveFn<GridData<Comm
     const actionService = inject(ActionService);
     const gridFiltersStorageService = inject(GridFiltersStorageService);
     const gridStateService = inject(GridStateService);
-    const administrativeAreaLevel3Service = inject(AdministrativeAreaLevel3Service);
+    const resourceService = inject(ResourceService);
 
     actionService.action({
-        id          : 'common::administrativeAreaLevel3.list.view',
+        id          : 'common::resource.list.view',
         isViewAction: true,
     });
 
-    const gridId = 'common::administrativeAreaLevel3.list.mainGridList';
-    gridStateService.setPaginationActionId(gridId, 'common::administrativeAreaLevel3.list.pagination');
-    gridStateService.setExportActionId(gridId, 'common::administrativeAreaLevel3.list.export');
+    const gridId = 'common::resource.list.mainGridList';
+    gridStateService.setPaginationActionId(gridId, 'common::resource.list.pagination');
+    gridStateService.setExportActionId(gridId, 'common::resource.list.export');
 
-    return administrativeAreaLevel3Service.pagination({
+    return resourceService.pagination({
         query: QueryStatementHandler
-            .init({ columnsConfig: administrativeAreaLevel3ColumnsConfig })
+            .init({ columnsConfig: resourceColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))
@@ -35,7 +35,7 @@ export const administrativeAreaLevel3PaginationResolver: ResolveFn<GridData<Comm
     });
 };
 
-export const administrativeAreaLevel3NewResolver: ResolveFn<Action> = (
+export const resourceNewResolver: ResolveFn<Action> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
@@ -43,27 +43,27 @@ export const administrativeAreaLevel3NewResolver: ResolveFn<Action> = (
     const actionService = inject(ActionService);
 
     return actionService.action({
-        id          : 'common::administrativeAreaLevel3.detail.new',
+        id          : 'common::resource.detail.new',
         isViewAction: true,
     });
 };
 
-export const administrativeAreaLevel3EditResolver: ResolveFn<{
-    object: CommonAdministrativeAreaLevel3;
+export const resourceEditResolver: ResolveFn<{
+    object: CommonResource;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
     const actionService = inject(ActionService);
-    const administrativeAreaLevel3Service = inject(AdministrativeAreaLevel3Service);
+    const resourceService = inject(ResourceService);
 
     actionService.action({
-        id          : 'common::administrativeAreaLevel3.detail.edit',
+        id          : 'common::resource.detail.edit',
         isViewAction: true,
     });
 
-    return administrativeAreaLevel3Service
+    return resourceService
         .findById({
             id: route.paramMap.get('id'),
         });
