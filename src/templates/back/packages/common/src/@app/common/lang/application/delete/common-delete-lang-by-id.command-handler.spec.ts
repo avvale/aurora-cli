@@ -1,15 +1,11 @@
+import { CommonDeleteLangByIdCommand, commonMockLangData } from '@app/common/lang';
+import { CommonDeleteLangByIdCommandHandler } from '@app/common/lang/application/delete/common-delete-lang-by-id.command-handler';
+import { CommonDeleteLangByIdService } from '@app/common/lang/application/delete/common-delete-lang-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteLangByIdCommandHandler } from './common-delete-lang-by-id.command-handler';
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
-import { CommonDeleteLangByIdCommand } from './common-delete-lang-by-id.command';
-import { CommonDeleteLangByIdService } from './common-delete-lang-by-id.service';
 
 describe('CommonDeleteLangByIdCommandHandler', () =>
 {
     let commandHandler: CommonDeleteLangByIdCommandHandler;
-    let service: CommonDeleteLangByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonDeleteLangByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteLangByIdCommandHandler>(CommonDeleteLangByIdCommandHandler);
-        service = module.get<CommonDeleteLangByIdService>(CommonDeleteLangByIdService);
     });
 
     describe('main', () =>

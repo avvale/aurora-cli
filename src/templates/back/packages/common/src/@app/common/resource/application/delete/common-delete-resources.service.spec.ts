@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonIResourceRepository, CommonMockResourceRepository } from '@app/common/resource';
+import { CommonDeleteResourcesService } from '@app/common/resource/application/delete/common-delete-resources.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonDeleteResourcesService } from './common-delete-resources.service';
-import { CommonIResourceRepository } from '../../domain/common-resource.repository';
-import { CommonMockResourceRepository } from '../../infrastructure/mock/common-mock-resource.repository';
 
 describe('CommonDeleteResourcesService', () =>
 {

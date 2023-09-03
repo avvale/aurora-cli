@@ -1,12 +1,7 @@
+import { CommonCountryMapper, CommonGetCountriesQuery, CommonICountryRepository, CommonMockCountryRepository } from '@app/common/country';
+import { CommonGetCountriesQueryHandler } from '@app/common/country/application/get/common-get-countries.query-handler';
+import { CommonGetCountriesService } from '@app/common/country/application/get/common-get-countries.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonGetCountriesQueryHandler } from './common-get-countries.query-handler';
-import { CommonMockCountryRepository } from '@app/common/country/infrastructure/mock/common-mock-country.repository';
-import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
-import { CommonCountryMapper } from '@app/common/country/domain/common-country.mapper';
-import { CommonGetCountriesQuery } from './common-get-countries.query';
-import { CommonGetCountriesService } from './common-get-countries.service';
 
 describe('GetCountriesQueryHandler', () =>
 {

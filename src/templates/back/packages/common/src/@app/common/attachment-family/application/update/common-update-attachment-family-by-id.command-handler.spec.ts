@@ -1,15 +1,11 @@
+import { commonMockAttachmentFamilyData, CommonUpdateAttachmentFamilyByIdCommand } from '@app/common/attachment-family';
+import { CommonUpdateAttachmentFamilyByIdCommandHandler } from '@app/common/attachment-family/application/update/common-update-attachment-family-by-id.command-handler';
+import { CommonUpdateAttachmentFamilyByIdService } from '@app/common/attachment-family/application/update/common-update-attachment-family-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockAttachmentFamilyData } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.data';
-import { CommonUpdateAttachmentFamilyByIdCommandHandler } from './common-update-attachment-family-by-id.command-handler';
-import { CommonUpdateAttachmentFamilyByIdCommand } from './common-update-attachment-family-by-id.command';
-import { CommonUpdateAttachmentFamilyByIdService } from './common-update-attachment-family-by-id.service';
 
 describe('CommonUpdateAttachmentFamilyByIdCommandHandler', () =>
 {
     let commandHandler: CommonUpdateAttachmentFamilyByIdCommandHandler;
-    let service: CommonUpdateAttachmentFamilyByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonUpdateAttachmentFamilyByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonUpdateAttachmentFamilyByIdCommandHandler>(CommonUpdateAttachmentFamilyByIdCommandHandler);
-        service = module.get<CommonUpdateAttachmentFamilyByIdService>(CommonUpdateAttachmentFamilyByIdService);
     });
 
     describe('main', () =>

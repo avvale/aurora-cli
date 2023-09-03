@@ -1,8 +1,6 @@
+import { CommonCountryMapper, CommonCountryResponse, CommonFindCountryQuery } from '@app/common/country';
+import { CommonFindCountryService } from '@app/common/country/application/find/common-find-country.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonCountryResponse } from '../../domain/common-country.response';
-import { CommonCountryMapper } from '../../domain/common-country.mapper';
-import { CommonFindCountryQuery } from './common-find-country.query';
-import { CommonFindCountryService } from './common-find-country.service';
 
 @QueryHandler(CommonFindCountryQuery)
 export class CommonFindCountryQueryHandler implements IQueryHandler<CommonFindCountryQuery>

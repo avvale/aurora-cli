@@ -85,7 +85,7 @@ import { CommonDeleteCountriesHandler } from './handlers/common-delete-countries
 // seeder
 import { CommonCountrySeeder } from './seeder/common-country.seeder';
 
-export const CommonCountryControllers = [
+export const CommonCountryApiControllers = [
     CommonCreateCountryController,
     CommonCreateCountriesController,
     CommonPaginateCountriesController,
@@ -99,7 +99,7 @@ export const CommonCountryControllers = [
     CommonDeleteCountriesController,
 ];
 
-export const CommonCountryResolvers = [
+export const CommonCountryApiResolvers = [
     CommonCreateCountryResolver,
     CommonCreateCountriesResolver,
     CommonPaginateCountriesResolver,
@@ -127,6 +127,6 @@ export const CommonCountryApiHandlers = [
     CommonDeleteCountriesHandler,
 ];
 
-export const CommonCountryServices = [
+export const CommonCountryApiServices = [
     CommonCountrySeeder,
 ];

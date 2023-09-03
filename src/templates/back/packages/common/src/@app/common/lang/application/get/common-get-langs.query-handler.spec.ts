@@ -1,12 +1,7 @@
+import { CommonGetLangsQuery, CommonILangRepository, CommonLangMapper, CommonMockLangRepository } from '@app/common/lang';
+import { CommonGetLangsQueryHandler } from '@app/common/lang/application/get/common-get-langs.query-handler';
+import { CommonGetLangsService } from '@app/common/lang/application/get/common-get-langs.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonGetLangsQueryHandler } from './common-get-langs.query-handler';
-import { CommonMockLangRepository } from '@app/common/lang/infrastructure/mock/common-mock-lang.repository';
-import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
-import { CommonLangMapper } from '@app/common/lang/domain/common-lang.mapper';
-import { CommonGetLangsQuery } from './common-get-langs.query';
-import { CommonGetLangsService } from './common-get-langs.service';
 
 describe('GetLangsQueryHandler', () =>
 {

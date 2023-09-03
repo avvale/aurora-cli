@@ -84,31 +84,33 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties:
   - name: id
+    isI18n: true
     type: id
     primaryKey: true
     length: 36
     nullable: false
   - name: countryId
+    isI18n: true
     type: id
     length: 36
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: CommonCountry
+      aggregateName: CommonCountry
       modulePath: common/country
       key: id
       field: country
     index: unique
     indexName: uniqueCountryIdLangId
   - name: langId
+    isI18n: true
     type: id
     length: 36
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: CommonLang
+      aggregateName: CommonLang
       modulePath: common/lang
       key: id
       field: lang
@@ -116,34 +118,41 @@ aggregateI18nProperties:
     index: unique
     indexName: uniqueCountryIdLangId
   - name: name
+    isI18n: true
     type: varchar
     maxLength: 100
     nullable: false
     index: index
   - name: slug
+    isI18n: true
     type: varchar
     maxLength: 100
     nullable: false
     index: index
   - name: administrativeAreaLevel1
+    isI18n: true
     type: varchar
     maxLength: 50
     nullable: true
   - name: administrativeAreaLevel2
+    isI18n: true
     type: varchar
     maxLength: 50
     nullable: true
   - name: administrativeAreaLevel3
+    isI18n: true
     type: varchar
     maxLength: 50
     nullable: true
   - name: createdAt
+    isI18n: true
     type: timestamp
     nullable: true
   - name: updatedAt
+    isI18n: true
     type: timestamp
     nullable: true
   - name: deletedAt
+    isI18n: true
     type: timestamp
     nullable: true
-additionalApis: []

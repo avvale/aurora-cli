@@ -1,12 +1,7 @@
+import { CommonIResourceRepository, CommonMockResourceRepository, CommonRawSQLResourcesQuery, CommonResourceMapper } from '@app/common/resource';
+import { CommonRawSQLResourcesQueryHandler } from '@app/common/resource/application/raw-sql/common-raw-sql-resources.query-handler';
+import { CommonRawSQLResourcesService } from '@app/common/resource/application/raw-sql/common-raw-sql-resources.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonMockResourceRepository } from '@app/common/resource/infrastructure/mock/common-mock-resource.repository';
-import { CommonIResourceRepository } from '@app/common/resource/domain/common-resource.repository';
-import { CommonResourceMapper } from '@app/common/resource/domain/common-resource.mapper';
-import { CommonRawSQLResourcesQueryHandler } from './common-raw-sql-resources.query-handler';
-import { CommonRawSQLResourcesQuery } from './common-raw-sql-resources.query';
-import { CommonRawSQLResourcesService } from './common-raw-sql-resources.service';
 
 describe('RawSQLResourcesQueryHandler', () =>
 {

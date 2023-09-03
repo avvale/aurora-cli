@@ -1,26 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockAttachmentFamilyData } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.data';
-import { CommonUpdateAttachmentFamiliesService } from './common-update-attachment-families.service';
+import { CommonIAttachmentFamilyRepository, commonMockAttachmentFamilyData, CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CommonUpdateAttachmentFamiliesService } from '@app/common/attachment-family/application/update/common-update-attachment-families.service';
 import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
     CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
     CommonAttachmentFamilyFormat,
-    CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
-    CommonAttachmentFamilyDeletedAt,
-} from '../../domain/value-objects';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonMockAttachmentFamilyRepository } from '../../infrastructure/mock/common-mock-attachment-family.repository';
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyWidth,
+} from '@app/common/attachment-family/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateAttachmentFamiliesService', () =>
 {

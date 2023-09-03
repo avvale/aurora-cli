@@ -1,15 +1,11 @@
+import { CommonDeleteResourceByIdCommand, commonMockResourceData } from '@app/common/resource';
+import { CommonDeleteResourceByIdCommandHandler } from '@app/common/resource/application/delete/common-delete-resource-by-id.command-handler';
+import { CommonDeleteResourceByIdService } from '@app/common/resource/application/delete/common-delete-resource-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteResourceByIdCommandHandler } from './common-delete-resource-by-id.command-handler';
-import { commonMockResourceData } from '@app/common/resource/infrastructure/mock/common-mock-resource.data';
-import { CommonDeleteResourceByIdCommand } from './common-delete-resource-by-id.command';
-import { CommonDeleteResourceByIdService } from './common-delete-resource-by-id.service';
 
 describe('CommonDeleteResourceByIdCommandHandler', () =>
 {
     let commandHandler: CommonDeleteResourceByIdCommandHandler;
-    let service: CommonDeleteResourceByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonDeleteResourceByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteResourceByIdCommandHandler>(CommonDeleteResourceByIdCommandHandler);
-        service = module.get<CommonDeleteResourceByIdService>(CommonDeleteResourceByIdService);
     });
 
     describe('main', () =>

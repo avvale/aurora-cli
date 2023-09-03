@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonIAttachmentFamilyRepository, CommonMockAttachmentFamilyRepository, CommonPaginateAttachmentFamiliesQuery } from '@app/common/attachment-family';
+import { CommonPaginateAttachmentFamiliesQueryHandler } from '@app/common/attachment-family/application/paginate/common-paginate-attachment-families.query-handler';
+import { CommonPaginateAttachmentFamiliesService } from '@app/common/attachment-family/application/paginate/common-paginate-attachment-families.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { CommonPaginateAttachmentFamiliesQueryHandler } from './common-paginate-attachment-families.query-handler';
-import { CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.repository';
-import { CommonIAttachmentFamilyRepository } from '@app/common/attachment-family/domain/common-attachment-family.repository';
-import { CommonAttachmentFamilyMapper } from '@app/common/attachment-family/domain/common-attachment-family.mapper';
-import { CommonPaginateAttachmentFamiliesQuery } from './common-paginate-attachment-families.query';
-import { CommonPaginateAttachmentFamiliesService } from './common-paginate-attachment-families.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonPaginateAttachmentFamiliesQueryHandler', () =>
 {
     let queryHandler: CommonPaginateAttachmentFamiliesQueryHandler;
     let service: CommonPaginateAttachmentFamiliesService;
     let repository: CommonMockAttachmentFamilyRepository;
-    let mapper: CommonAttachmentFamilyMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('CommonPaginateAttachmentFamiliesQueryHandler', () =>
         queryHandler = module.get<CommonPaginateAttachmentFamiliesQueryHandler>(CommonPaginateAttachmentFamiliesQueryHandler);
         service = module.get<CommonPaginateAttachmentFamiliesService>(CommonPaginateAttachmentFamiliesService);
         repository = <CommonMockAttachmentFamilyRepository>module.get<CommonIAttachmentFamilyRepository>(CommonIAttachmentFamilyRepository);
-        mapper = new CommonAttachmentFamilyMapper();
     });
 
     describe('main', () =>

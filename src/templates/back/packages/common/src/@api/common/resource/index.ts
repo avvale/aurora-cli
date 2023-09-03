@@ -85,7 +85,7 @@ import { CommonDeleteResourcesHandler } from './handlers/common-delete-resources
 // seeder
 import { CommonResourceSeeder } from './seeder/common-resource.seeder';
 
-export const CommonResourceControllers = [
+export const CommonResourceApiControllers = [
     CommonCreateResourceController,
     CommonCreateResourcesController,
     CommonPaginateResourcesController,
@@ -99,7 +99,7 @@ export const CommonResourceControllers = [
     CommonDeleteResourcesController,
 ];
 
-export const CommonResourceResolvers = [
+export const CommonResourceApiResolvers = [
     CommonCreateResourceResolver,
     CommonCreateResourcesResolver,
     CommonPaginateResourcesResolver,
@@ -127,6 +127,6 @@ export const CommonResourceApiHandlers = [
     CommonDeleteResourcesHandler,
 ];
 
-export const CommonResourceServices = [
+export const CommonResourceApiServices = [
     CommonResourceSeeder,
 ];

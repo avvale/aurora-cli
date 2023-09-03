@@ -1,8 +1,6 @@
+import { CommonAdministrativeAreaLevel1Mapper, CommonAdministrativeAreaLevel1Response, CommonGetAdministrativeAreasLevel1Query } from '@app/common/administrative-area-level-1';
+import { CommonGetAdministrativeAreasLevel1Service } from '@app/common/administrative-area-level-1/application/get/common-get-administrative-areas-level-1.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonAdministrativeAreaLevel1Response } from '../../domain/common-administrative-area-level-1.response';
-import { CommonAdministrativeAreaLevel1Mapper } from '../../domain/common-administrative-area-level-1.mapper';
-import { CommonGetAdministrativeAreasLevel1Query } from './common-get-administrative-areas-level-1.query';
-import { CommonGetAdministrativeAreasLevel1Service } from './common-get-administrative-areas-level-1.service';
 
 @QueryHandler(CommonGetAdministrativeAreasLevel1Query)
 export class CommonGetAdministrativeAreasLevel1QueryHandler implements IQueryHandler<CommonGetAdministrativeAreasLevel1Query>

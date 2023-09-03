@@ -1,14 +1,11 @@
+import { CommonDeleteAdministrativeAreasLevel2Command } from '@app/common/administrative-area-level-2';
+import { CommonDeleteAdministrativeAreasLevel2CommandHandler } from '@app/common/administrative-area-level-2/application/delete/common-delete-administrative-areas-level-2.command-handler';
+import { CommonDeleteAdministrativeAreasLevel2Service } from '@app/common/administrative-area-level-2/application/delete/common-delete-administrative-areas-level-2.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteAdministrativeAreasLevel2CommandHandler } from './common-delete-administrative-areas-level-2.command-handler';
-import { CommonDeleteAdministrativeAreasLevel2Command } from './common-delete-administrative-areas-level-2.command';
-import { CommonDeleteAdministrativeAreasLevel2Service } from './common-delete-administrative-areas-level-2.service';
 
 describe('CommonDeleteAdministrativeAreasLevel2CommandHandler', () =>
 {
     let commandHandler: CommonDeleteAdministrativeAreasLevel2CommandHandler;
-    let service: CommonDeleteAdministrativeAreasLevel2Service;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('CommonDeleteAdministrativeAreasLevel2CommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteAdministrativeAreasLevel2CommandHandler>(CommonDeleteAdministrativeAreasLevel2CommandHandler);
-        service = module.get<CommonDeleteAdministrativeAreasLevel2Service>(CommonDeleteAdministrativeAreasLevel2Service);
     });
 
     describe('main', () =>

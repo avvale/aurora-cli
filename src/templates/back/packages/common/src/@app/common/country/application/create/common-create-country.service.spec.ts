@@ -1,38 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonCreateCountryService } from './common-create-country.service';
+import { CommonICountryI18nRepository, CommonICountryRepository, commonMockCountryData, CommonMockCountryRepository } from '@app/common/country';
+import { CommonCreateCountryService } from '@app/common/country/application/create/common-create-country.service';
 import {
-    CommonCountryId,
-    CommonCountryIso3166Alpha2,
-    CommonCountryIso3166Alpha3,
-    CommonCountryIso3166Numeric,
-    CommonCountryCustomCode,
-    CommonCountryPrefix,
-    CommonCountryImage,
-    CommonCountrySort,
     CommonCountryAdministrativeAreas,
-    CommonCountryLatitude,
-    CommonCountryLongitude,
-    CommonCountryZoom,
-    CommonCountryMapType,
     CommonCountryAvailableLangs,
-    CommonCountryCreatedAt,
-    CommonCountryUpdatedAt,
-    CommonCountryDeletedAt,
-    CommonCountryI18nLangId,
-    CommonCountryI18nName,
-    CommonCountryI18nSlug,
+    CommonCountryCustomCode,
     CommonCountryI18nAdministrativeAreaLevel1,
     CommonCountryI18nAdministrativeAreaLevel2,
     CommonCountryI18nAdministrativeAreaLevel3,
-} from '../../domain/value-objects';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
-import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
+    CommonCountryI18nLangId,
+    CommonCountryI18nName,
+    CommonCountryI18nSlug,
+    CommonCountryId,
+    CommonCountryImage,
+    CommonCountryIso3166Alpha2,
+    CommonCountryIso3166Alpha3,
+    CommonCountryIso3166Numeric,
+    CommonCountryLatitude,
+    CommonCountryLongitude,
+    CommonCountryMapType,
+    CommonCountryPrefix,
+    CommonCountrySort,
+    CommonCountryZoom,
+} from '@app/common/country/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateCountryService', () =>
 

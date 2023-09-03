@@ -1,9 +1,6 @@
+import { CommonCountry, CommonICountryRepository } from '@app/common/country';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonCountry } from '../../domain/common-country.aggregate';
 
 @Injectable()
 export class CommonPaginateCountriesService

@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonICountryRepository, CommonMockCountryRepository, CommonPaginateCountriesQuery } from '@app/common/country';
+import { CommonPaginateCountriesQueryHandler } from '@app/common/country/application/paginate/common-paginate-countries.query-handler';
+import { CommonPaginateCountriesService } from '@app/common/country/application/paginate/common-paginate-countries.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { CommonPaginateCountriesQueryHandler } from './common-paginate-countries.query-handler';
-import { CommonMockCountryRepository } from '@app/common/country/infrastructure/mock/common-mock-country.repository';
-import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
-import { CommonCountryMapper } from '@app/common/country/domain/common-country.mapper';
-import { CommonPaginateCountriesQuery } from './common-paginate-countries.query';
-import { CommonPaginateCountriesService } from './common-paginate-countries.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonPaginateCountriesQueryHandler', () =>
 {
     let queryHandler: CommonPaginateCountriesQueryHandler;
     let service: CommonPaginateCountriesService;
     let repository: CommonMockCountryRepository;
-    let mapper: CommonCountryMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('CommonPaginateCountriesQueryHandler', () =>
         queryHandler = module.get<CommonPaginateCountriesQueryHandler>(CommonPaginateCountriesQueryHandler);
         service = module.get<CommonPaginateCountriesService>(CommonPaginateCountriesService);
         repository = <CommonMockCountryRepository>module.get<CommonICountryRepository>(CommonICountryRepository);
-        mapper = new CommonCountryMapper();
     });
 
     describe('main', () =>

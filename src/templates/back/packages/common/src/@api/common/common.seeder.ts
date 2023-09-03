@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-// import { IamCreatePermissionsCommand } from '@app/iam/permission/application/create/create-permissions.command';
-// import { IamCreateBoundedContextsCommand } from '@app/iam/bounded-context/application/create/create-bounded-contexts.command';
+// import { IamCreatePermissionsCommand } from '@app/iam/permission';
+// import { IamCreateBoundedContextsCommand } from '@app/iam/bounded-context';
 import { boundedContexts, permissions } from '@app/common/common.seed';
 
 @Injectable()

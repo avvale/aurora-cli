@@ -1,8 +1,6 @@
+import { CommonAdministrativeAreaLevel2Mapper, CommonAdministrativeAreaLevel2Response, CommonFindAdministrativeAreaLevel2Query } from '@app/common/administrative-area-level-2';
+import { CommonFindAdministrativeAreaLevel2Service } from '@app/common/administrative-area-level-2/application/find/common-find-administrative-area-level-2.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonAdministrativeAreaLevel2Response } from '../../domain/common-administrative-area-level-2.response';
-import { CommonAdministrativeAreaLevel2Mapper } from '../../domain/common-administrative-area-level-2.mapper';
-import { CommonFindAdministrativeAreaLevel2Query } from './common-find-administrative-area-level-2.query';
-import { CommonFindAdministrativeAreaLevel2Service } from './common-find-administrative-area-level-2.service';
 
 @QueryHandler(CommonFindAdministrativeAreaLevel2Query)
 export class CommonFindAdministrativeAreaLevel2QueryHandler implements IQueryHandler<CommonFindAdministrativeAreaLevel2Query>

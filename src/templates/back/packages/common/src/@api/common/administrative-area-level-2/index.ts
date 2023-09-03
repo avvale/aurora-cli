@@ -85,7 +85,7 @@ import { CommonDeleteAdministrativeAreasLevel2Handler } from './handlers/common-
 // seeder
 import { CommonAdministrativeAreaLevel2Seeder } from './seeder/common-administrative-area-level-2.seeder';
 
-export const CommonAdministrativeAreaLevel2Controllers = [
+export const CommonAdministrativeAreaLevel2ApiControllers = [
     CommonCreateAdministrativeAreaLevel2Controller,
     CommonCreateAdministrativeAreasLevel2Controller,
     CommonPaginateAdministrativeAreasLevel2Controller,
@@ -99,7 +99,7 @@ export const CommonAdministrativeAreaLevel2Controllers = [
     CommonDeleteAdministrativeAreasLevel2Controller,
 ];
 
-export const CommonAdministrativeAreaLevel2Resolvers = [
+export const CommonAdministrativeAreaLevel2ApiResolvers = [
     CommonCreateAdministrativeAreaLevel2Resolver,
     CommonCreateAdministrativeAreasLevel2Resolver,
     CommonPaginateAdministrativeAreasLevel2Resolver,
@@ -127,6 +127,6 @@ export const CommonAdministrativeAreaLevel2ApiHandlers = [
     CommonDeleteAdministrativeAreasLevel2Handler,
 ];
 
-export const CommonAdministrativeAreaLevel2Services = [
+export const CommonAdministrativeAreaLevel2ApiServices = [
     CommonAdministrativeAreaLevel2Seeder,
 ];

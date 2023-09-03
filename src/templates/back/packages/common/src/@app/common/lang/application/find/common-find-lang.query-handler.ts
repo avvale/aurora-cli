@@ -1,8 +1,6 @@
+import { CommonFindLangQuery, CommonLangMapper, CommonLangResponse } from '@app/common/lang';
+import { CommonFindLangService } from '@app/common/lang/application/find/common-find-lang.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonLangResponse } from '../../domain/common-lang.response';
-import { CommonLangMapper } from '../../domain/common-lang.mapper';
-import { CommonFindLangQuery } from './common-find-lang.query';
-import { CommonFindLangService } from './common-find-lang.service';
 
 @QueryHandler(CommonFindLangQuery)
 export class CommonFindLangQueryHandler implements IQueryHandler<CommonFindLangQuery>

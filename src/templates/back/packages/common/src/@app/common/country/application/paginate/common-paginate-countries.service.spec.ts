@@ -1,10 +1,7 @@
+import { CommonICountryRepository, CommonMockCountryRepository } from '@app/common/country';
+import { CommonPaginateCountriesService } from '@app/common/country/application/paginate/common-paginate-countries.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonPaginateCountriesService } from './common-paginate-countries.service';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
 describe('CommonPaginateCountriesService', () =>
 {

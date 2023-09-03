@@ -1,9 +1,7 @@
+import { CommonDeleteAttachmentFamilyByIdCommand } from '@app/common/attachment-family';
+import { CommonDeleteAttachmentFamilyByIdService } from '@app/common/attachment-family/application/delete/common-delete-attachment-family-by-id.service';
+import { CommonAttachmentFamilyId } from '@app/common/attachment-family/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteAttachmentFamilyByIdCommand } from './common-delete-attachment-family-by-id.command';
-import { CommonDeleteAttachmentFamilyByIdService } from './common-delete-attachment-family-by-id.service';
-import {
-    CommonAttachmentFamilyId
-} from '../../domain/value-objects';
 
 @CommandHandler(CommonDeleteAttachmentFamilyByIdCommand)
 export class CommonDeleteAttachmentFamilyByIdCommandHandler implements ICommandHandler<CommonDeleteAttachmentFamilyByIdCommand>

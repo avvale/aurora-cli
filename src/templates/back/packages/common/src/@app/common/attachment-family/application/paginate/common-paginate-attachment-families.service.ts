@@ -1,9 +1,6 @@
+import { CommonAttachmentFamily, CommonIAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonAttachmentFamily } from '../../domain/common-attachment-family.aggregate';
 
 @Injectable()
 export class CommonPaginateAttachmentFamiliesService

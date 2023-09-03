@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { CommonILangRepository, CommonLang } from '@app/common/lang';
+import { CommonLangId } from '@app/common/lang/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonLang } from '../../domain/common-lang.aggregate';
-import { CommonLangId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonFindLangByIdService

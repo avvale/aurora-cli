@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonIResourceRepository, CommonMockResourceRepository, CommonPaginateResourcesQuery } from '@app/common/resource';
+import { CommonPaginateResourcesQueryHandler } from '@app/common/resource/application/paginate/common-paginate-resources.query-handler';
+import { CommonPaginateResourcesService } from '@app/common/resource/application/paginate/common-paginate-resources.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { CommonPaginateResourcesQueryHandler } from './common-paginate-resources.query-handler';
-import { CommonMockResourceRepository } from '@app/common/resource/infrastructure/mock/common-mock-resource.repository';
-import { CommonIResourceRepository } from '@app/common/resource/domain/common-resource.repository';
-import { CommonResourceMapper } from '@app/common/resource/domain/common-resource.mapper';
-import { CommonPaginateResourcesQuery } from './common-paginate-resources.query';
-import { CommonPaginateResourcesService } from './common-paginate-resources.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonPaginateResourcesQueryHandler', () =>
 {
     let queryHandler: CommonPaginateResourcesQueryHandler;
     let service: CommonPaginateResourcesService;
     let repository: CommonMockResourceRepository;
-    let mapper: CommonResourceMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('CommonPaginateResourcesQueryHandler', () =>
         queryHandler = module.get<CommonPaginateResourcesQueryHandler>(CommonPaginateResourcesQueryHandler);
         service = module.get<CommonPaginateResourcesService>(CommonPaginateResourcesService);
         repository = <CommonMockResourceRepository>module.get<CommonIResourceRepository>(CommonIResourceRepository);
-        mapper = new CommonResourceMapper();
     });
 
     describe('main', () =>

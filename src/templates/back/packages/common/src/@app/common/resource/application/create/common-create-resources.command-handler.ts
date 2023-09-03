@@ -1,17 +1,14 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonCreateResourcesCommand } from './common-create-resources.command';
-import { CommonCreateResourcesService } from './common-create-resources.service';
+import { CommonCreateResourcesCommand } from '@app/common/resource';
+import { CommonCreateResourcesService } from '@app/common/resource/application/create/common-create-resources.service';
 import {
-    CommonResourceId,
     CommonResourceCode,
-    CommonResourceName,
-    CommonResourceIsActive,
     CommonResourceHasAttachments,
-    CommonResourceCreatedAt,
-    CommonResourceUpdatedAt,
-    CommonResourceDeletedAt,
-} from '../../domain/value-objects';
+    CommonResourceId,
+    CommonResourceIsActive,
+    CommonResourceName,
+} from '@app/common/resource/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonCreateResourcesCommand)
 export class CommonCreateResourcesCommandHandler implements ICommandHandler<CommonCreateResourcesCommand>

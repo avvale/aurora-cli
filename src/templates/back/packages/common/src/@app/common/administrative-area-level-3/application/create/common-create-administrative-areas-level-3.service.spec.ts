@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonIAdministrativeAreaLevel3Repository, CommonMockAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3';
+import { CommonCreateAdministrativeAreasLevel3Service } from '@app/common/administrative-area-level-3/application/create/common-create-administrative-areas-level-3.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonCreateAdministrativeAreasLevel3Service } from './common-create-administrative-areas-level-3.service';
-import { CommonIAdministrativeAreaLevel3Repository } from '../../domain/common-administrative-area-level-3.repository';
-import { CommonMockAdministrativeAreaLevel3Repository } from '../../infrastructure/mock/common-mock-administrative-area-level-3.repository';
 
 describe('CommonCreateAdministrativeAreasLevel3Service', () =>
 {

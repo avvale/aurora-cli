@@ -1,9 +1,7 @@
+import { CommonDeleteAdministrativeAreaLevel2ByIdCommand } from '@app/common/administrative-area-level-2';
+import { CommonDeleteAdministrativeAreaLevel2ByIdService } from '@app/common/administrative-area-level-2/application/delete/common-delete-administrative-area-level-2-by-id.service';
+import { CommonAdministrativeAreaLevel2Id } from '@app/common/administrative-area-level-2/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteAdministrativeAreaLevel2ByIdCommand } from './common-delete-administrative-area-level-2-by-id.command';
-import { CommonDeleteAdministrativeAreaLevel2ByIdService } from './common-delete-administrative-area-level-2-by-id.service';
-import {
-    CommonAdministrativeAreaLevel2Id
-} from '../../domain/value-objects';
 
 @CommandHandler(CommonDeleteAdministrativeAreaLevel2ByIdCommand)
 export class CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler implements ICommandHandler<CommonDeleteAdministrativeAreaLevel2ByIdCommand>

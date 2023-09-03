@@ -1,5 +1,5 @@
+import { CommonCreatedCountryEvent } from '@app/common/country';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { CommonCreatedCountryEvent } from './common-created-country.event';
 
 @EventsHandler(CommonCreatedCountryEvent)
 export class CommonCreatedCountryEventHandler implements IEventHandler<CommonCreatedCountryEvent>

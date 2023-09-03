@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { CommonIResourceRepository, CommonResource } from '@app/common/resource';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonIResourceRepository } from '../../domain/common-resource.repository';
-import { CommonResource } from '../../domain/common-resource.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonRawSQLResourcesService

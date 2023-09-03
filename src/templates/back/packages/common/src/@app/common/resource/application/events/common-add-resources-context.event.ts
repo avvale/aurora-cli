@@ -1,11 +1,5 @@
+import { CommonCreatedResourceEvent, CommonCreatedResourcesEvent, CommonDeletedResourceEvent, CommonDeletedResourcesEvent, CommonResource, CommonUpdatedResourceEvent, CommonUpdatedResourcesEvent } from '@app/common/resource';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { CommonResource } from '../../domain/common-resource.aggregate';
-import { CommonCreatedResourceEvent } from './common-created-resource.event';
-import { CommonCreatedResourcesEvent } from './common-created-resources.event';
-import { CommonUpdatedResourceEvent } from './common-updated-resource.event';
-import { CommonUpdatedResourcesEvent } from './common-updated-resources.event';
-import { CommonDeletedResourceEvent } from './common-deleted-resource.event';
-import { CommonDeletedResourcesEvent } from './common-deleted-resources.event';
 
 export class CommonAddResourcesContextEvent extends AggregateRoot
 {

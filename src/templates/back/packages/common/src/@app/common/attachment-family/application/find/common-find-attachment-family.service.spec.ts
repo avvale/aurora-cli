@@ -1,10 +1,7 @@
+import { CommonIAttachmentFamilyRepository, CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CommonFindAttachmentFamilyService } from '@app/common/attachment-family/application/find/common-find-attachment-family.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonFindAttachmentFamilyService } from './common-find-attachment-family.service';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonMockAttachmentFamilyRepository } from '../../infrastructure/mock/common-mock-attachment-family.repository';
 
 describe('CommonFindAttachmentFamilyService', () =>
 {

@@ -1,13 +1,7 @@
+import { CommonAdministrativeAreaLevel2Mapper, CommonFindAdministrativeAreaLevel2ByIdQuery, CommonIAdministrativeAreaLevel2Repository, commonMockAdministrativeAreaLevel2Data, CommonMockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2';
+import { CommonFindAdministrativeAreaLevel2ByIdQueryHandler } from '@app/common/administrative-area-level-2/application/find/common-find-administrative-area-level-2-by-id.query-handler';
+import { CommonFindAdministrativeAreaLevel2ByIdService } from '@app/common/administrative-area-level-2/application/find/common-find-administrative-area-level-2-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindAdministrativeAreaLevel2ByIdQueryHandler } from './common-find-administrative-area-level-2-by-id.query-handler';
-import { CommonMockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.repository';
-import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.data';
-import { CommonIAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/domain/common-administrative-area-level-2.repository';
-import { CommonAdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2/domain/common-administrative-area-level-2.mapper';
-import { CommonFindAdministrativeAreaLevel2ByIdQuery } from './common-find-administrative-area-level-2-by-id.query';
-import { CommonFindAdministrativeAreaLevel2ByIdService } from './common-find-administrative-area-level-2-by-id.service';
 
 describe('CommonFindAdministrativeAreaLevel2ByIdQueryHandler', () =>
 {

@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { CommonPaginateAttachmentFamiliesQuery } from '@app/common/attachment-family';
+import { CommonPaginateAttachmentFamiliesService } from '@app/common/attachment-family/application/paginate/common-paginate-attachment-families.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { CommonPaginateAttachmentFamiliesQuery } from './common-paginate-attachment-families.query';
-import { CommonPaginateAttachmentFamiliesService } from './common-paginate-attachment-families.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(CommonPaginateAttachmentFamiliesQuery)
 export class CommonPaginateAttachmentFamiliesQueryHandler implements IQueryHandler<CommonPaginateAttachmentFamiliesQuery>

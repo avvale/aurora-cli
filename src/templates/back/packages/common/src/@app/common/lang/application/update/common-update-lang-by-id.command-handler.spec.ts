@@ -1,15 +1,11 @@
+import { commonMockLangData, CommonUpdateLangByIdCommand } from '@app/common/lang';
+import { CommonUpdateLangByIdCommandHandler } from '@app/common/lang/application/update/common-update-lang-by-id.command-handler';
+import { CommonUpdateLangByIdService } from '@app/common/lang/application/update/common-update-lang-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
-import { CommonUpdateLangByIdCommandHandler } from './common-update-lang-by-id.command-handler';
-import { CommonUpdateLangByIdCommand } from './common-update-lang-by-id.command';
-import { CommonUpdateLangByIdService } from './common-update-lang-by-id.service';
 
 describe('CommonUpdateLangByIdCommandHandler', () =>
 {
     let commandHandler: CommonUpdateLangByIdCommandHandler;
-    let service: CommonUpdateLangByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonUpdateLangByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonUpdateLangByIdCommandHandler>(CommonUpdateLangByIdCommandHandler);
-        service = module.get<CommonUpdateLangByIdService>(CommonUpdateLangByIdService);
     });
 
     describe('main', () =>

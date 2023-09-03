@@ -1,8 +1,8 @@
+import { CommonCreatedAdministrativeAreaLevel3Event } from '@app/common/administrative-area-level-3';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { CommonCreatedAdministrativeAreaLevel3Event } from '../events/common-created-administrative-area-level-3.event';
 
 @Injectable()
 export class CommonAdministrativeAreaLevel3Sagas

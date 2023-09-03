@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateCountryCommandHandler', () =>
 {
     let commandHandler: CommonCreateCountryCommandHandler;
-    let service: CommonCreateCountryService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('CommonCreateCountryCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateCountryCommandHandler>(CommonCreateCountryCommandHandler);
-        service = module.get<CommonCreateCountryService>(CommonCreateCountryService);
     });
 
     describe('main', () =>

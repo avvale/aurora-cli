@@ -1,13 +1,7 @@
+import { CommonAttachmentFamilyMapper, CommonFindAttachmentFamilyByIdQuery, CommonIAttachmentFamilyRepository, commonMockAttachmentFamilyData, CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CommonFindAttachmentFamilyByIdQueryHandler } from '@app/common/attachment-family/application/find/common-find-attachment-family-by-id.query-handler';
+import { CommonFindAttachmentFamilyByIdService } from '@app/common/attachment-family/application/find/common-find-attachment-family-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindAttachmentFamilyByIdQueryHandler } from './common-find-attachment-family-by-id.query-handler';
-import { CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.repository';
-import { commonMockAttachmentFamilyData } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.data';
-import { CommonIAttachmentFamilyRepository } from '@app/common/attachment-family/domain/common-attachment-family.repository';
-import { CommonAttachmentFamilyMapper } from '@app/common/attachment-family/domain/common-attachment-family.mapper';
-import { CommonFindAttachmentFamilyByIdQuery } from './common-find-attachment-family-by-id.query';
-import { CommonFindAttachmentFamilyByIdService } from './common-find-attachment-family-by-id.service';
 
 describe('CommonFindAttachmentFamilyByIdQueryHandler', () =>
 {

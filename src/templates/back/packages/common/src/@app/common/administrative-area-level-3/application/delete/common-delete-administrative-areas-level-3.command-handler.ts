@@ -1,6 +1,6 @@
+import { CommonDeleteAdministrativeAreasLevel3Command } from '@app/common/administrative-area-level-3';
+import { CommonDeleteAdministrativeAreasLevel3Service } from '@app/common/administrative-area-level-3/application/delete/common-delete-administrative-areas-level-3.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteAdministrativeAreasLevel3Command } from './common-delete-administrative-areas-level-3.command';
-import { CommonDeleteAdministrativeAreasLevel3Service } from './common-delete-administrative-areas-level-3.service';
 
 @CommandHandler(CommonDeleteAdministrativeAreasLevel3Command)
 export class CommonDeleteAdministrativeAreasLevel3CommandHandler implements ICommandHandler<CommonDeleteAdministrativeAreasLevel3Command>

@@ -1,8 +1,6 @@
+import { CommonAttachmentFamilyMapper, CommonAttachmentFamilyResponse, CommonRawSQLAttachmentFamiliesQuery } from '@app/common/attachment-family';
+import { CommonRawSQLAttachmentFamiliesService } from '@app/common/attachment-family/application/raw-sql/common-raw-sql-attachment-families.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonAttachmentFamilyResponse } from '../../domain/common-attachment-family.response';
-import { CommonAttachmentFamilyMapper } from '../../domain/common-attachment-family.mapper';
-import { CommonRawSQLAttachmentFamiliesQuery } from './common-raw-sql-attachment-families.query';
-import { CommonRawSQLAttachmentFamiliesService } from './common-raw-sql-attachment-families.service';
 
 @QueryHandler(CommonRawSQLAttachmentFamiliesQuery)
 export class CommonRawSQLAttachmentFamiliesQueryHandler implements IQueryHandler<CommonRawSQLAttachmentFamiliesQuery>

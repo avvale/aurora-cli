@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { CommonAttachmentFamily, CommonIAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CommonAttachmentFamilyId } from '@app/common/attachment-family/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonAttachmentFamily } from '../../domain/common-attachment-family.aggregate';
-import { CommonAttachmentFamilyId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonFindAttachmentFamilyByIdService

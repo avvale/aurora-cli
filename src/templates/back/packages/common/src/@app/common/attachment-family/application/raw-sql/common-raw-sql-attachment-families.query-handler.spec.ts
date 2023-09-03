@@ -1,12 +1,7 @@
+import { CommonAttachmentFamilyMapper, CommonIAttachmentFamilyRepository, CommonMockAttachmentFamilyRepository, CommonRawSQLAttachmentFamiliesQuery } from '@app/common/attachment-family';
+import { CommonRawSQLAttachmentFamiliesQueryHandler } from '@app/common/attachment-family/application/raw-sql/common-raw-sql-attachment-families.query-handler';
+import { CommonRawSQLAttachmentFamiliesService } from '@app/common/attachment-family/application/raw-sql/common-raw-sql-attachment-families.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.repository';
-import { CommonIAttachmentFamilyRepository } from '@app/common/attachment-family/domain/common-attachment-family.repository';
-import { CommonAttachmentFamilyMapper } from '@app/common/attachment-family/domain/common-attachment-family.mapper';
-import { CommonRawSQLAttachmentFamiliesQueryHandler } from './common-raw-sql-attachment-families.query-handler';
-import { CommonRawSQLAttachmentFamiliesQuery } from './common-raw-sql-attachment-families.query';
-import { CommonRawSQLAttachmentFamiliesService } from './common-raw-sql-attachment-families.service';
 
 describe('RawSQLAttachmentFamiliesQueryHandler', () =>
 {

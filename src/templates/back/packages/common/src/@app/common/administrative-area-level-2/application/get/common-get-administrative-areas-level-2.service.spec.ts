@@ -1,10 +1,7 @@
+import { CommonIAdministrativeAreaLevel2Repository, CommonMockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2';
+import { CommonGetAdministrativeAreasLevel2Service } from '@app/common/administrative-area-level-2/application/get/common-get-administrative-areas-level-2.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonGetAdministrativeAreasLevel2Service } from './common-get-administrative-areas-level-2.service';
-import { CommonIAdministrativeAreaLevel2Repository } from '../../domain/common-administrative-area-level-2.repository';
-import { CommonMockAdministrativeAreaLevel2Repository } from '../../infrastructure/mock/common-mock-administrative-area-level-2.repository';
 
 describe('CommonGetAdministrativeAreasLevel2Service', () =>
 {

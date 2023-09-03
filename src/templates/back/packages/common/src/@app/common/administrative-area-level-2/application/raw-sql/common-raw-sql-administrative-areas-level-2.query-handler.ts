@@ -1,8 +1,6 @@
+import { CommonAdministrativeAreaLevel2Mapper, CommonAdministrativeAreaLevel2Response, CommonRawSQLAdministrativeAreasLevel2Query } from '@app/common/administrative-area-level-2';
+import { CommonRawSQLAdministrativeAreasLevel2Service } from '@app/common/administrative-area-level-2/application/raw-sql/common-raw-sql-administrative-areas-level-2.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonAdministrativeAreaLevel2Response } from '../../domain/common-administrative-area-level-2.response';
-import { CommonAdministrativeAreaLevel2Mapper } from '../../domain/common-administrative-area-level-2.mapper';
-import { CommonRawSQLAdministrativeAreasLevel2Query } from './common-raw-sql-administrative-areas-level-2.query';
-import { CommonRawSQLAdministrativeAreasLevel2Service } from './common-raw-sql-administrative-areas-level-2.service';
 
 @QueryHandler(CommonRawSQLAdministrativeAreasLevel2Query)
 export class CommonRawSQLAdministrativeAreasLevel2QueryHandler implements IQueryHandler<CommonRawSQLAdministrativeAreasLevel2Query>

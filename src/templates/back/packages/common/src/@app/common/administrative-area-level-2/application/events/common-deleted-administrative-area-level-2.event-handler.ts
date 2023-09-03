@@ -1,5 +1,5 @@
+import { CommonDeletedAdministrativeAreaLevel2Event } from '@app/common/administrative-area-level-2';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { CommonDeletedAdministrativeAreaLevel2Event } from './common-deleted-administrative-area-level-2.event';
 
 @EventsHandler(CommonDeletedAdministrativeAreaLevel2Event)
 export class CommonDeletedAdministrativeAreaLevel2EventHandler implements IEventHandler<CommonDeletedAdministrativeAreaLevel2Event>

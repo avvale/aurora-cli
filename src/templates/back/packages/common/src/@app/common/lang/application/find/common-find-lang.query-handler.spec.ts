@@ -1,12 +1,7 @@
+import { CommonFindLangQuery, CommonILangRepository, CommonLangMapper, CommonMockLangRepository } from '@app/common/lang';
+import { CommonFindLangQueryHandler } from '@app/common/lang/application/find/common-find-lang.query-handler';
+import { CommonFindLangService } from '@app/common/lang/application/find/common-find-lang.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindLangQueryHandler } from './common-find-lang.query-handler';
-import { CommonMockLangRepository } from '@app/common/lang/infrastructure/mock/common-mock-lang.repository';
-import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
-import { CommonLangMapper } from '@app/common/lang/domain/common-lang.mapper';
-import { CommonFindLangQuery } from './common-find-lang.query';
-import { CommonFindLangService } from './common-find-lang.service';
 
 describe('CommonFindLangQueryHandler', () =>
 {

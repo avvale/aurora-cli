@@ -1,5 +1,5 @@
+import { CommonUpdatedAttachmentFamilyEvent } from '@app/common/attachment-family';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { CommonUpdatedAttachmentFamilyEvent } from './common-updated-attachment-family.event';
 
 @EventsHandler(CommonUpdatedAttachmentFamilyEvent)
 export class CommonUpdatedAttachmentFamilyEventHandler implements IEventHandler<CommonUpdatedAttachmentFamilyEvent>

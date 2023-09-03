@@ -1,10 +1,7 @@
+import { CommonILangRepository, CommonMockLangRepository } from '@app/common/lang';
+import { CommonRawSQLLangsService } from '@app/common/lang/application/raw-sql/common-raw-sql-langs.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonRawSQLLangsService } from './common-raw-sql-langs.service';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
 describe('CommonRawSQLLangsService ', () =>
 {

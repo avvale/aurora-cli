@@ -1,6 +1,6 @@
+import { CommonDeleteCountriesCommand } from '@app/common/country';
+import { CommonDeleteCountriesService } from '@app/common/country/application/delete/common-delete-countries.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteCountriesCommand } from './common-delete-countries.command';
-import { CommonDeleteCountriesService } from './common-delete-countries.service';
 
 @CommandHandler(CommonDeleteCountriesCommand)
 export class CommonDeleteCountriesCommandHandler implements ICommandHandler<CommonDeleteCountriesCommand>

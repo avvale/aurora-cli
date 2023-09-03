@@ -1,22 +1,19 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonCreateLangCommand } from './common-create-lang.command';
-import { CommonCreateLangService } from './common-create-lang.service';
+import { CommonCreateLangCommand } from '@app/common/lang';
+import { CommonCreateLangService } from '@app/common/lang/application/create/common-create-lang.service';
 import {
-    CommonLangId,
-    CommonLangName,
-    CommonLangImage,
-    CommonLangIso6392,
-    CommonLangIso6393,
-    CommonLangIetf,
     CommonLangCustomCode,
     CommonLangDir,
-    CommonLangSort,
+    CommonLangId,
+    CommonLangIetf,
+    CommonLangImage,
     CommonLangIsActive,
-    CommonLangCreatedAt,
-    CommonLangUpdatedAt,
-    CommonLangDeletedAt,
-} from '../../domain/value-objects';
+    CommonLangIso6392,
+    CommonLangIso6393,
+    CommonLangName,
+    CommonLangSort,
+} from '@app/common/lang/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonCreateLangCommand)
 export class CommonCreateLangCommandHandler implements ICommandHandler<CommonCreateLangCommand>

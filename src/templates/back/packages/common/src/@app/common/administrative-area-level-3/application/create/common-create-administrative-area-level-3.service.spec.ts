@@ -1,29 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.data';
-import { CommonCreateAdministrativeAreaLevel3Service } from './common-create-administrative-area-level-3.service';
+import { CommonIAdministrativeAreaLevel3Repository, commonMockAdministrativeAreaLevel3Data, CommonMockAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3';
+import { CommonCreateAdministrativeAreaLevel3Service } from '@app/common/administrative-area-level-3/application/create/common-create-administrative-area-level-3.service';
 import {
-    CommonAdministrativeAreaLevel3Id,
-    CommonAdministrativeAreaLevel3CountryId,
     CommonAdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel3AdministrativeAreaLevel2Id,
     CommonAdministrativeAreaLevel3Code,
+    CommonAdministrativeAreaLevel3CountryId,
     CommonAdministrativeAreaLevel3CustomCode,
-    CommonAdministrativeAreaLevel3Name,
-    CommonAdministrativeAreaLevel3Slug,
+    CommonAdministrativeAreaLevel3Id,
     CommonAdministrativeAreaLevel3Latitude,
     CommonAdministrativeAreaLevel3Longitude,
-    CommonAdministrativeAreaLevel3Zoom,
     CommonAdministrativeAreaLevel3MapType,
-    CommonAdministrativeAreaLevel3CreatedAt,
-    CommonAdministrativeAreaLevel3UpdatedAt,
-    CommonAdministrativeAreaLevel3DeletedAt,
-} from '../../domain/value-objects';
-import { CommonIAdministrativeAreaLevel3Repository } from '../../domain/common-administrative-area-level-3.repository';
-import { CommonMockAdministrativeAreaLevel3Repository } from '../../infrastructure/mock/common-mock-administrative-area-level-3.repository';
+    CommonAdministrativeAreaLevel3Name,
+    CommonAdministrativeAreaLevel3Slug,
+    CommonAdministrativeAreaLevel3Zoom,
+} from '@app/common/administrative-area-level-3/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateAdministrativeAreaLevel3Service', () =>
 

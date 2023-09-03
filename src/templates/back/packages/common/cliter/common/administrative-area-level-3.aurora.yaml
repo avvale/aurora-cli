@@ -18,7 +18,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: CommonCountry
+      aggregateName: CommonCountry
       modulePath: common/country
       key: id
       field: country
@@ -29,7 +29,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: CommonAdministrativeAreaLevel1
+      aggregateName: CommonAdministrativeAreaLevel1
       modulePath: common/administrative-area-level-1
       key: id
       field: administrativeAreaLevel1
@@ -40,7 +40,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: CommonAdministrativeAreaLevel2
+      aggregateName: CommonAdministrativeAreaLevel2
       modulePath: common/administrative-area-level-2
       key: id
       field: administrativeAreaLevel2
@@ -99,5 +99,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []

@@ -1,15 +1,11 @@
+import { commonMockCountryData, CommonUpdateCountriesCommand } from '@app/common/country';
+import { CommonUpdateCountriesCommandHandler } from '@app/common/country/application/update/common-update-countries.command-handler';
+import { CommonUpdateCountriesService } from '@app/common/country/application/update/common-update-countries.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonUpdateCountriesCommandHandler } from './common-update-countries.command-handler';
-import { CommonUpdateCountriesCommand } from './common-update-countries.command';
-import { CommonUpdateCountriesService } from './common-update-countries.service';
 
 describe('CommonUpdateCountriesCommandHandler', () =>
 {
     let commandHandler: CommonUpdateCountriesCommandHandler;
-    let service: CommonUpdateCountriesService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonUpdateCountriesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonUpdateCountriesCommandHandler>(CommonUpdateCountriesCommandHandler);
-        service = module.get<CommonUpdateCountriesService>(CommonUpdateCountriesService);
     });
 
     describe('main', () =>

@@ -1,6 +1,6 @@
+import { CommonDeleteAttachmentFamiliesCommand } from '@app/common/attachment-family';
+import { CommonDeleteAttachmentFamiliesService } from '@app/common/attachment-family/application/delete/common-delete-attachment-families.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteAttachmentFamiliesCommand } from './common-delete-attachment-families.command';
-import { CommonDeleteAttachmentFamiliesService } from './common-delete-attachment-families.service';
 
 @CommandHandler(CommonDeleteAttachmentFamiliesCommand)
 export class CommonDeleteAttachmentFamiliesCommandHandler implements ICommandHandler<CommonDeleteAttachmentFamiliesCommand>

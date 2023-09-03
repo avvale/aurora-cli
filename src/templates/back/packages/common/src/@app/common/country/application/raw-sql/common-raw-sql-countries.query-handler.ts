@@ -1,8 +1,6 @@
+import { CommonCountryMapper, CommonCountryResponse, CommonRawSQLCountriesQuery } from '@app/common/country';
+import { CommonRawSQLCountriesService } from '@app/common/country/application/raw-sql/common-raw-sql-countries.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonCountryResponse } from '../../domain/common-country.response';
-import { CommonCountryMapper } from '../../domain/common-country.mapper';
-import { CommonRawSQLCountriesQuery } from './common-raw-sql-countries.query';
-import { CommonRawSQLCountriesService } from './common-raw-sql-countries.service';
 
 @QueryHandler(CommonRawSQLCountriesQuery)
 export class CommonRawSQLCountriesQueryHandler implements IQueryHandler<CommonRawSQLCountriesQuery>

@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { CommonAdministrativeAreaLevel2, CommonIAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonIAdministrativeAreaLevel2Repository } from '../../domain/common-administrative-area-level-2.repository';
-import { CommonAdministrativeAreaLevel2 } from '../../domain/common-administrative-area-level-2.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonRawSQLAdministrativeAreasLevel2Service

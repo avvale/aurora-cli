@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { CommonAdministrativeAreaLevel3, CommonIAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3';
+import { CommonAdministrativeAreaLevel3Id } from '@app/common/administrative-area-level-3/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { CommonIAdministrativeAreaLevel3Repository } from '../../domain/common-administrative-area-level-3.repository';
-import { CommonAdministrativeAreaLevel3 } from '../../domain/common-administrative-area-level-3.aggregate';
-import { CommonAdministrativeAreaLevel3Id } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonFindAdministrativeAreaLevel3ByIdService

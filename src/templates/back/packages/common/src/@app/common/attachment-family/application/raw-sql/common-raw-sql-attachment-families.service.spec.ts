@@ -1,10 +1,7 @@
+import { CommonIAttachmentFamilyRepository, CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CommonRawSQLAttachmentFamiliesService } from '@app/common/attachment-family/application/raw-sql/common-raw-sql-attachment-families.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonRawSQLAttachmentFamiliesService } from './common-raw-sql-attachment-families.service';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonMockAttachmentFamilyRepository } from '../../infrastructure/mock/common-mock-attachment-family.repository';
 
 describe('CommonRawSQLAttachmentFamiliesService ', () =>
 {

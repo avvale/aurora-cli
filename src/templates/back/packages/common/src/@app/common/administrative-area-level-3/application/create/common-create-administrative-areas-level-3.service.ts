@@ -29,7 +29,7 @@ export class CommonCreateAdministrativeAreasLevel3Service
     ) {}
 
     async main(
-        administrativeAreasLevel3: {
+        payload: {
             id: CommonAdministrativeAreaLevel3Id;
             countryId: CommonAdministrativeAreaLevel3CountryId;
             administrativeAreaLevel1Id: CommonAdministrativeAreaLevel3AdministrativeAreaLevel1Id;
@@ -47,7 +47,7 @@ export class CommonCreateAdministrativeAreasLevel3Service
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateAdministrativeAreasLevel3 = administrativeAreasLevel3.map(administrativeAreaLevel3 => CommonAdministrativeAreaLevel3.register(
+        const aggregateAdministrativeAreasLevel3 = payload.map(administrativeAreaLevel3 => CommonAdministrativeAreaLevel3.register(
             administrativeAreaLevel3.id,
             administrativeAreaLevel3.countryId,
             administrativeAreaLevel3.administrativeAreaLevel1Id,

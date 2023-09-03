@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { CommonAttachmentFamily, CommonIAttachmentFamilyRepository } from '@app/common/attachment-family';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonAttachmentFamily } from '../../domain/common-attachment-family.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonRawSQLAttachmentFamiliesService

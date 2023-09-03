@@ -1,28 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.data';
-import { CommonCreateAdministrativeAreaLevel2Service } from './common-create-administrative-area-level-2.service';
+import { CommonIAdministrativeAreaLevel2Repository, commonMockAdministrativeAreaLevel2Data, CommonMockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2';
+import { CommonCreateAdministrativeAreaLevel2Service } from '@app/common/administrative-area-level-2/application/create/common-create-administrative-area-level-2.service';
 import {
-    CommonAdministrativeAreaLevel2Id,
-    CommonAdministrativeAreaLevel2CountryId,
     CommonAdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel2Code,
+    CommonAdministrativeAreaLevel2CountryId,
     CommonAdministrativeAreaLevel2CustomCode,
-    CommonAdministrativeAreaLevel2Name,
-    CommonAdministrativeAreaLevel2Slug,
+    CommonAdministrativeAreaLevel2Id,
     CommonAdministrativeAreaLevel2Latitude,
     CommonAdministrativeAreaLevel2Longitude,
-    CommonAdministrativeAreaLevel2Zoom,
     CommonAdministrativeAreaLevel2MapType,
-    CommonAdministrativeAreaLevel2CreatedAt,
-    CommonAdministrativeAreaLevel2UpdatedAt,
-    CommonAdministrativeAreaLevel2DeletedAt,
-} from '../../domain/value-objects';
-import { CommonIAdministrativeAreaLevel2Repository } from '../../domain/common-administrative-area-level-2.repository';
-import { CommonMockAdministrativeAreaLevel2Repository } from '../../infrastructure/mock/common-mock-administrative-area-level-2.repository';
+    CommonAdministrativeAreaLevel2Name,
+    CommonAdministrativeAreaLevel2Slug,
+    CommonAdministrativeAreaLevel2Zoom,
+} from '@app/common/administrative-area-level-2/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateAdministrativeAreaLevel2Service', () =>
 

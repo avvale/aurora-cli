@@ -1,11 +1,5 @@
+import { CommonAdministrativeAreaLevel1, CommonCreatedAdministrativeAreaLevel1Event, CommonCreatedAdministrativeAreasLevel1Event, CommonDeletedAdministrativeAreaLevel1Event, CommonDeletedAdministrativeAreasLevel1Event, CommonUpdatedAdministrativeAreaLevel1Event, CommonUpdatedAdministrativeAreasLevel1Event } from '@app/common/administrative-area-level-1';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { CommonAdministrativeAreaLevel1 } from '../../domain/common-administrative-area-level-1.aggregate';
-import { CommonCreatedAdministrativeAreaLevel1Event } from './common-created-administrative-area-level-1.event';
-import { CommonCreatedAdministrativeAreasLevel1Event } from './common-created-administrative-areas-level-1.event';
-import { CommonUpdatedAdministrativeAreaLevel1Event } from './common-updated-administrative-area-level-1.event';
-import { CommonUpdatedAdministrativeAreasLevel1Event } from './common-updated-administrative-areas-level-1.event';
-import { CommonDeletedAdministrativeAreaLevel1Event } from './common-deleted-administrative-area-level-1.event';
-import { CommonDeletedAdministrativeAreasLevel1Event } from './common-deleted-administrative-areas-level-1.event';
 
 export class CommonAddAdministrativeAreasLevel1ContextEvent extends AggregateRoot
 {

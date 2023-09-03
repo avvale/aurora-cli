@@ -1,32 +1,29 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpdateCountriesCommand } from './common-update-countries.command';
-import { CommonUpdateCountriesService } from './common-update-countries.service';
+import { CommonUpdateCountriesCommand } from '@app/common/country';
+import { CommonUpdateCountriesService } from '@app/common/country/application/update/common-update-countries.service';
 import {
-    CommonCountryId,
-    CommonCountryIso3166Alpha2,
-    CommonCountryIso3166Alpha3,
-    CommonCountryIso3166Numeric,
-    CommonCountryCustomCode,
-    CommonCountryPrefix,
-    CommonCountryImage,
-    CommonCountrySort,
     CommonCountryAdministrativeAreas,
-    CommonCountryLatitude,
-    CommonCountryLongitude,
-    CommonCountryZoom,
-    CommonCountryMapType,
     CommonCountryAvailableLangs,
-    CommonCountryCreatedAt,
-    CommonCountryUpdatedAt,
-    CommonCountryDeletedAt,
-    CommonCountryI18nLangId,
-    CommonCountryI18nName,
-    CommonCountryI18nSlug,
+    CommonCountryCustomCode,
     CommonCountryI18nAdministrativeAreaLevel1,
     CommonCountryI18nAdministrativeAreaLevel2,
     CommonCountryI18nAdministrativeAreaLevel3,
-} from '../../domain/value-objects';
+    CommonCountryI18nLangId,
+    CommonCountryI18nName,
+    CommonCountryI18nSlug,
+    CommonCountryId,
+    CommonCountryImage,
+    CommonCountryIso3166Alpha2,
+    CommonCountryIso3166Alpha3,
+    CommonCountryIso3166Numeric,
+    CommonCountryLatitude,
+    CommonCountryLongitude,
+    CommonCountryMapType,
+    CommonCountryPrefix,
+    CommonCountrySort,
+    CommonCountryZoom,
+} from '@app/common/country/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpdateCountriesCommand)
 export class CommonUpdateCountriesCommandHandler implements ICommandHandler<CommonUpdateCountriesCommand>

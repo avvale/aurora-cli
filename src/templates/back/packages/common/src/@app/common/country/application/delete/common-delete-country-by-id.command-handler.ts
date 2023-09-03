@@ -1,9 +1,7 @@
+import { CommonDeleteCountryByIdCommand } from '@app/common/country';
+import { CommonDeleteCountryByIdService } from '@app/common/country/application/delete/common-delete-country-by-id.service';
+import { CommonCountryId } from '@app/common/country/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteCountryByIdCommand } from './common-delete-country-by-id.command';
-import { CommonDeleteCountryByIdService } from './common-delete-country-by-id.service';
-import {
-    CommonCountryId
-} from '../../domain/value-objects';
 
 @CommandHandler(CommonDeleteCountryByIdCommand)
 export class CommonDeleteCountryByIdCommandHandler implements ICommandHandler<CommonDeleteCountryByIdCommand>
