@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateLangCommandHandler', () =>
 {
     let commandHandler: CommonCreateLangCommandHandler;
-    let service: CommonCreateLangService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('CommonCreateLangCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateLangCommandHandler>(CommonCreateLangCommandHandler);
-        service = module.get<CommonCreateLangService>(CommonCreateLangService);
     });
 
     describe('main', () =>

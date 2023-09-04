@@ -7,11 +7,11 @@
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-lang.command-handler.spec.ts",
-            "integrity": "sha1:d2fe8daec01b6f736dcc2e1ef96e59fc08184e3c"
+            "integrity": "sha1:8f57195fbf8ec530e91bb62c17a029c56eba4b38"
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-lang.command-handler.ts",
-            "integrity": "sha1:d6b68a35ef0f9e5d37fa3a7dc10c5091b35801d5"
+            "integrity": "sha1:3e4861f70a15bd9ab7e1b3a4b3502b04817fd6a7"
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-lang.command.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-lang.service.spec.ts",
-            "integrity": "sha1:f52a00ab2703c1ae47064705863a3ef965c3c753"
+            "integrity": "sha1:9090ef922974469ae6ba61f71103308032ee0577"
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-lang.service.ts",
@@ -27,11 +27,11 @@
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-langs.command-handler.spec.ts",
-            "integrity": "sha1:88c0985129e513dfe6ca70e8a8b7bfb11715a1dd"
+            "integrity": "sha1:633ac469b022b1f3b4d18626ab6d3f3ef93c76eb"
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-langs.command-handler.ts",
-            "integrity": "sha1:a358dfae60d192df4659e2881a68afbd80416e7c"
+            "integrity": "sha1:0ba1c377d457fe0effbfcf561f596a1243ce5241"
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-langs.command.ts",
@@ -39,19 +39,19 @@
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-langs.service.spec.ts",
-            "integrity": "sha1:c2d0a4b3797ad47b7fb0f77d0af5ea1eb4db9eb6"
+            "integrity": "sha1:bd51f7ab1a6ff68fe8adac6d3eeb46c628fdc07b"
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-langs.service.ts",
-            "integrity": "sha1:60fd2d70bb882e78c21d667f1d861d441bddae3c"
+            "integrity": "sha1:f56694d6824807c6f78f161da48f4b5888fc9880"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-lang-by-id.command-handler.spec.ts",
-            "integrity": "sha1:3ec1b60777a210bf85e8f908394fa69c9fedb361"
+            "integrity": "sha1:4af4fd0e81a4217a938fcf16588e881c0a08035b"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-lang-by-id.command-handler.ts",
-            "integrity": "sha1:f548f961539ed1f515a4796c83d1118ba70a6f1a"
+            "integrity": "sha1:ffca48e311ba3ad4e2cf474d8443730cc9720267"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-lang-by-id.command.ts",
@@ -59,7 +59,7 @@
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-lang-by-id.service.spec.ts",
-            "integrity": "sha1:c4fc99338e516bced11869c7f1dbe311748d6b03"
+            "integrity": "sha1:879ae85f9e333a66c2b7a2b4784055a5c77bfa2f"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-lang-by-id.service.ts",
@@ -67,19 +67,19 @@
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-langs.command-handler.spec.ts",
-            "integrity": "sha1:23de2bdbc2d8771895df01db88913e6ddc9e7f52"
+            "integrity": "sha1:cdab6113889c4347d4bdd9fd40b93d27a43a4bd0"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-langs.command-handler.ts",
-            "integrity": "sha1:e2ff3cf7476408bf345c0a005b490e05ed523974"
+            "integrity": "sha1:4e2dbcb745a6fe25ed6c12d51a3ef2501b38c1d6"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-langs.command.ts",
-            "integrity": "sha1:c8dbb2259d0512fa436ff13dcb8ea0d41c5f03b9"
+            "integrity": "sha1:bf151b46d4c0e752d3890ef0e452434622c73758"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-langs.service.spec.ts",
-            "integrity": "sha1:c56390fccfe631642b2a2edf518b03922f4d2e7f"
+            "integrity": "sha1:34ef30fb654a239a059911523ea8527aaa2023dd"
         },
         {
             "path": "src/@app/common/lang/application/delete/common-delete-langs.service.ts",
@@ -87,11 +87,11 @@
         },
         {
             "path": "src/@app/common/lang/application/events/common-add-langs-context.event.ts",
-            "integrity": "sha1:07e9dc68be0ca2e495a7ee37156934143a71a1a3"
+            "integrity": "sha1:d36c9543ec7b22b3bab2644b5f16154b9b2c64c5"
         },
         {
             "path": "src/@app/common/lang/application/events/common-created-lang.event-handler.ts",
-            "integrity": "sha1:fffc23360dff6bbcd4d5bccd69234a96ffe54a8c"
+            "integrity": "sha1:8fef8f70ac449937de23c5b66cf7ca8f885e0541"
         },
         {
             "path": "src/@app/common/lang/application/events/common-created-lang.event.ts",
@@ -99,7 +99,7 @@
         },
         {
             "path": "src/@app/common/lang/application/events/common-created-langs.event-handler.ts",
-            "integrity": "sha1:23e9ac00391e43033b88638a0a2dfb6865fb226c"
+            "integrity": "sha1:47339650ba408214b9f89067acc801a18a1bf7bd"
         },
         {
             "path": "src/@app/common/lang/application/events/common-created-langs.event.ts",
@@ -107,7 +107,7 @@
         },
         {
             "path": "src/@app/common/lang/application/events/common-deleted-lang.event-handler.ts",
-            "integrity": "sha1:a7ac34e19b4ce3cd2a7dd54a80dcb8a245b902fe"
+            "integrity": "sha1:dc14d8c0c4f4d17656d92bc5c7288037c11e1aff"
         },
         {
             "path": "src/@app/common/lang/application/events/common-deleted-lang.event.ts",
@@ -115,7 +115,7 @@
         },
         {
             "path": "src/@app/common/lang/application/events/common-deleted-langs.event-handler.ts",
-            "integrity": "sha1:6e4d4e1eaed713665bbccc265508cf48326ddba5"
+            "integrity": "sha1:b257c10fda3e41135d90845a1078c09c4f45571c"
         },
         {
             "path": "src/@app/common/lang/application/events/common-deleted-langs.event.ts",
@@ -123,7 +123,7 @@
         },
         {
             "path": "src/@app/common/lang/application/events/common-updated-lang.event-handler.ts",
-            "integrity": "sha1:b2a3c2e8c2d199f4a00573fe09af9559e55120fe"
+            "integrity": "sha1:5d8a8349c4f6f8e3ccb2e8016b5a372e0733d9ae"
         },
         {
             "path": "src/@app/common/lang/application/events/common-updated-lang.event.ts",
@@ -131,7 +131,7 @@
         },
         {
             "path": "src/@app/common/lang/application/events/common-updated-langs.event-handler.ts",
-            "integrity": "sha1:2cf83c08e72add819b463568628e9c4df0b61fab"
+            "integrity": "sha1:d0db8f78bf2fdc001330255c33cafbab7ee6b058"
         },
         {
             "path": "src/@app/common/lang/application/events/common-updated-langs.event.ts",
@@ -139,39 +139,39 @@
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang-by-id.query-handler.spec.ts",
-            "integrity": "sha1:f813884d7e623b6e06b55ea131de8d6f97a8efd8"
+            "integrity": "sha1:6cb3afa3f6c72aeb953dd2f3691eaa029a9b0413"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang-by-id.query-handler.ts",
-            "integrity": "sha1:146e4b95e24b3be73d4ee62ea3d9235256d54b02"
+            "integrity": "sha1:0b482884ce619cc6cbafc5f39e916c1fa078ad3d"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang-by-id.query.ts",
-            "integrity": "sha1:1d1dc349fed94ccc9998a56bfcb2cd84e3c98e5b"
+            "integrity": "sha1:382cfe46351b677d24c6120bf35e14c4281f3bfb"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang-by-id.service.spec.ts",
-            "integrity": "sha1:2f75459988be5470c9f10ec541834ef2db3ae8e7"
+            "integrity": "sha1:f694d516fa6c27b1ef954e4d6f7ea1d9a418affb"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang-by-id.service.ts",
-            "integrity": "sha1:2f3160c285380537135a16672a54195b68d813af"
+            "integrity": "sha1:5a039171f8f34345a27de99a95e38a861c0cfd27"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang.query-handler.spec.ts",
-            "integrity": "sha1:7dedb0ccd83e798e210450b58934b003cb1e35ab"
+            "integrity": "sha1:b80b8deca8e4b03f9bb2e51e5380cf3b499680b8"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang.query-handler.ts",
-            "integrity": "sha1:c3f1d3dc4e60c7eb75516344fb2b9b1290b3f35b"
+            "integrity": "sha1:e74ea740d847a4321d9cc9fc9104a4954d32aa36"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang.query.ts",
-            "integrity": "sha1:8825647cb61a4287a5f09a657f6397780321efac"
+            "integrity": "sha1:d989284adfafcdddf6a9532c7bdca0a222d497d5"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang.service.spec.ts",
-            "integrity": "sha1:45e2df74bce940b42c5843f1218dbfa1885e1b09"
+            "integrity": "sha1:9a92188250d82ad3a99a2ba66bc8d242f26bbaa8"
         },
         {
             "path": "src/@app/common/lang/application/find/common-find-lang.service.ts",
@@ -179,51 +179,51 @@
         },
         {
             "path": "src/@app/common/lang/application/get/common-get-langs.query-handler.spec.ts",
-            "integrity": "sha1:82185891e4a1194bada1b31fb18fe0bd05af243a"
+            "integrity": "sha1:c308e55dca3726be83d5a47a1c362411dac3f861"
         },
         {
             "path": "src/@app/common/lang/application/get/common-get-langs.query-handler.ts",
-            "integrity": "sha1:5bd9f318f3d53037af775a936fe74bec73d5d47b"
+            "integrity": "sha1:9c1d01aa4c822887bd3bc352c92db3db5192910c"
         },
         {
             "path": "src/@app/common/lang/application/get/common-get-langs.query.ts",
-            "integrity": "sha1:008059132e619e9b516d0a38c327bdd1a975e267"
+            "integrity": "sha1:52c983f4e50774b68acb74c190bb1e40460a8bc6"
         },
         {
             "path": "src/@app/common/lang/application/get/common-get-langs.service.spec.ts",
-            "integrity": "sha1:1b211cf3e391e5632fc413c9ace62244f61383b8"
+            "integrity": "sha1:303f4e5ec4a31529e6de0810fb7419df9de98ba2"
         },
         {
             "path": "src/@app/common/lang/application/get/common-get-langs.service.ts",
-            "integrity": "sha1:1c6970ed65c099d1fdd78bd6f69df37bbea9f24a"
+            "integrity": "sha1:de48cd371c05797e392a3b4518dd153e58385af6"
         },
         {
             "path": "src/@app/common/lang/application/paginate/common-paginate-langs.query-handler.spec.ts",
-            "integrity": "sha1:b5bb8b5c437b647aa3335733e62fa5ea1aada457"
+            "integrity": "sha1:2c739d96d61a0e039f216d35382d638d73ffec9c"
         },
         {
             "path": "src/@app/common/lang/application/paginate/common-paginate-langs.query-handler.ts",
-            "integrity": "sha1:3db3075a457b220078c7ad517109fcdb76f465f5"
+            "integrity": "sha1:cc1c3a230c9a56d90808b6eb9d59cd999437c05c"
         },
         {
             "path": "src/@app/common/lang/application/paginate/common-paginate-langs.query.ts",
-            "integrity": "sha1:25545fc9f7c1a5c8214fdaeeec367480392af3bd"
+            "integrity": "sha1:bb40a88c4bdb7d508a56c239b36b72e94f3c3820"
         },
         {
             "path": "src/@app/common/lang/application/paginate/common-paginate-langs.service.spec.ts",
-            "integrity": "sha1:bf1176c794735a228d4b24e0787fdf4ae6b77238"
+            "integrity": "sha1:0ae98dca885d189cb0155e910557b127eb9ef7dd"
         },
         {
             "path": "src/@app/common/lang/application/paginate/common-paginate-langs.service.ts",
-            "integrity": "sha1:2eb7effd52d7a1ca57e82aa2e085aaf29010171d"
+            "integrity": "sha1:fdd76b529b729adc1bf6a787b569b42c76434c4b"
         },
         {
             "path": "src/@app/common/lang/application/raw-sql/common-raw-sql-langs.query-handler.spec.ts",
-            "integrity": "sha1:9c30491c2624ab417ecd7b6c87cabf4f67b57432"
+            "integrity": "sha1:13fd165f4eba61c26795ecccb4b43614174da834"
         },
         {
             "path": "src/@app/common/lang/application/raw-sql/common-raw-sql-langs.query-handler.ts",
-            "integrity": "sha1:eb695a7ca8e1d77e4107ab18050e6f0fb569f098"
+            "integrity": "sha1:720a5f9073879a7f0b4815adc7005c641d21365d"
         },
         {
             "path": "src/@app/common/lang/application/raw-sql/common-raw-sql-langs.query.ts",
@@ -231,31 +231,31 @@
         },
         {
             "path": "src/@app/common/lang/application/raw-sql/common-raw-sql-langs.service.spec.ts",
-            "integrity": "sha1:bb7406ac92f980c4132273b1dedd3f7ca0845b18"
+            "integrity": "sha1:6e82cbba6795b508933315ea4dfffd8e9e27425e"
         },
         {
             "path": "src/@app/common/lang/application/raw-sql/common-raw-sql-langs.service.ts",
-            "integrity": "sha1:37fc2921dc7e9ddacebd9b4cf7b6fdaf78955dea"
+            "integrity": "sha1:179ef0a92de191b6d319da80075b873d618fd5f2"
         },
         {
             "path": "src/@app/common/lang/application/sagas/common-lang.sagas.ts",
-            "integrity": "sha1:5c3a5df5b7d8b55132830aa47cb741e765c090b8"
+            "integrity": "sha1:cdabfcdc4d72341ea55c124e689c030a86fb5228"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-lang-by-id.command-handler.spec.ts",
-            "integrity": "sha1:b187c2ff51c0e2bdfb4f7311c9d953d863ffa500"
+            "integrity": "sha1:74adf0cbd408601b534b76693be32d78629bb034"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-lang-by-id.command-handler.ts",
-            "integrity": "sha1:a252b43842b7bcfd0b9e122cbe2b8f6876f06dc6"
+            "integrity": "sha1:281b083c7c02d0e838ea7c051067925b93ed599f"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-lang-by-id.command.ts",
-            "integrity": "sha1:fd526bd231f5604cf349c14800a692d2161f70f9"
+            "integrity": "sha1:ffe6a8204d293d28486794909950b6ffd31faf89"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-lang-by-id.service.spec.ts",
-            "integrity": "sha1:c34a716d65ab44a184f45704969fa12afe808914"
+            "integrity": "sha1:60eb9360ec52f874977d1509a288d5d612019b4a"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-lang-by-id.service.ts",
@@ -263,19 +263,19 @@
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-langs.command-handler.spec.ts",
-            "integrity": "sha1:827f4a00c9ff0b34f890ac7c08b17eefa468bdf0"
+            "integrity": "sha1:e6443233ad6f9ccf16dea220948258ca97b59bb0"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-langs.command-handler.ts",
-            "integrity": "sha1:fca0ddb1dc5452ab42e8f7a88d97e13636fa9d5f"
+            "integrity": "sha1:9c90622a9710f15fb1503b043b1571bad91715ec"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-langs.command.ts",
-            "integrity": "sha1:84d93433804471f86db30516a07535e84e3e286d"
+            "integrity": "sha1:6419428e6ebd4f9a482c59ebc6f9ee835c71d997"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-langs.service.spec.ts",
-            "integrity": "sha1:7d0775da45f75ed8da78a702bc6b53720e4eb770"
+            "integrity": "sha1:4d8e2f0caafe3c286a9a55ba19a8356d8ecd2cd8"
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-langs.service.ts",
@@ -319,7 +319,7 @@
         },
         {
             "path": "src/@app/common/lang/domain/value-objects/index.ts",
-            "integrity": "sha1:2dbde27e4cde5508648d483e997dcc938ed8d519"
+            "integrity": "sha1:e074dfd29d35cfa58616bd0aa9bda581320d6a17"
         },
         {
             "path": "src/@app/common/lang/index.ts",
@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.data.ts",
-            "integrity": "sha1:a689b6d26cd07afbb9be17a40398c24f8f06c977"
+            "integrity": "sha1:8599427e57a96174f3bf55f970086f3e2b054c7c"
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.repository.ts",
@@ -399,7 +399,7 @@
         },
         {
             "path": "src/@api/common/common.seeder.ts",
-            "integrity": "sha1:8896c3a959a878ed8e311c43a5248183fa952d84"
+            "integrity": "sha1:9fe709a2749a37adff2b3103464a42e615f3a4a5"
         },
         {
             "path": "src/@api/common/lang/controllers/common-create-lang.controller.spec.ts",
@@ -603,7 +603,7 @@
         },
         {
             "path": "src/@api/common/lang/index.ts",
-            "integrity": "sha1:bf48ab6b5f7d93a5a0bbbca70c45e1d68e897c46"
+            "integrity": "sha1:571cf2ec0e9904a6f6b556dbd935794a2039c40b"
         },
         {
             "path": "src/@api/common/lang/resolvers/common-create-lang.resolver.spec.ts",
@@ -699,11 +699,11 @@
         },
         {
             "path": "test/acceptance/common/lang.e2e-spec.ts",
-            "integrity": "sha1:a589296482ec7a48443cc6a310df6cc56d3db88e"
+            "integrity": "sha1:4a97340427dbb503f12d7a3cd4e74a89e3b29057"
         },
         {
             "path": "postman/common/common.lang.postman.json",
-            "integrity": "sha1:106118bd3a4a1918ed8a78aa9ce1206c2ff582f0"
+            "integrity": "sha1:25fde723362082fe676bd8ad4f10e78c2ca6ade2"
         }
     ]
 }

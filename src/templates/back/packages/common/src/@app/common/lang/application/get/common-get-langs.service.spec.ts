@@ -1,10 +1,7 @@
+import { CommonILangRepository, CommonMockLangRepository } from '@app/common/lang';
+import { CommonGetLangsService } from '@app/common/lang/application/get/common-get-langs.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonGetLangsService } from './common-get-langs.service';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
 
 describe('CommonGetLangsService', () =>
 {

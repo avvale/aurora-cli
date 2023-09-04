@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateAdministrativeAreaLevel3CommandHandler', () =>
 {
     let commandHandler: CommonCreateAdministrativeAreaLevel3CommandHandler;
-    let service: CommonCreateAdministrativeAreaLevel3Service;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('CommonCreateAdministrativeAreaLevel3CommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateAdministrativeAreaLevel3CommandHandler>(CommonCreateAdministrativeAreaLevel3CommandHandler);
-        service = module.get<CommonCreateAdministrativeAreaLevel3Service>(CommonCreateAdministrativeAreaLevel3Service);
     });
 
     describe('main', () =>

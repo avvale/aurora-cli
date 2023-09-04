@@ -30,7 +30,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         this.{{ toCamelCase currentProperty.relationship.singularName }}Id = {{ toCamelCase currentProperty.relationship.singularName }}Id;
     }
 
-    static register ({{ toCamelCase schema.moduleName }}Id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}Id, {{ toCamelCase currentProperty.relationship.singularName }}Id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}Id): {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}
+    static register({{ toCamelCase schema.moduleName }}Id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}Id, {{ toCamelCase currentProperty.relationship.singularName }}Id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}Id): {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}
     {
         return new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase currentProperty.relationship.singularName }}({{ toCamelCase schema.moduleName }}Id, {{ toCamelCase currentProperty.relationship.singularName }}Id);
     }

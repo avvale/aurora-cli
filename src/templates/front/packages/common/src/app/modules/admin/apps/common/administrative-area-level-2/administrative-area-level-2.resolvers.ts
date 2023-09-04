@@ -40,7 +40,7 @@ export const administrativeAreaLevel2NewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'common::administrativeAreaLevel2.detail.new',
@@ -49,14 +49,14 @@ export const administrativeAreaLevel2NewResolver: ResolveFn<Action> = (
 };
 
 export const administrativeAreaLevel2EditResolver: ResolveFn<{
-	object: CommonAdministrativeAreaLevel2;
+    object: CommonAdministrativeAreaLevel2;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const administrativeAreaLevel2Service = inject(AdministrativeAreaLevel2Service);
+    const actionService = inject(ActionService);
+    const administrativeAreaLevel2Service = inject(AdministrativeAreaLevel2Service);
 
     actionService.action({
         id          : 'common::administrativeAreaLevel2.detail.edit',

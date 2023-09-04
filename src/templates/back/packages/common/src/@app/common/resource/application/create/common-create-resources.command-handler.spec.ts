@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonCreateResourcesCommand, commonMockResourceData } from '@app/common/resource';
+import { CommonCreateResourcesCommandHandler } from '@app/common/resource/application/create/common-create-resources.command-handler';
+import { CommonCreateResourcesService } from '@app/common/resource/application/create/common-create-resources.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockResourceData } from '@app/common/resource/infrastructure/mock/common-mock-resource.data';
-import { CommonCreateResourcesCommandHandler } from './common-create-resources.command-handler';
-import { CommonCreateResourcesCommand } from './common-create-resources.command';
-import { CommonCreateResourcesService } from './common-create-resources.service';
 
 describe('commonCreateResourcesCommandHandler', () =>
 {
     let commandHandler: CommonCreateResourcesCommandHandler;
-    let service: CommonCreateResourcesService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('commonCreateResourcesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateResourcesCommandHandler>(CommonCreateResourcesCommandHandler);
-        service = module.get<CommonCreateResourcesService>(CommonCreateResourcesService);
     });
 
     describe('main', () =>

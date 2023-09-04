@@ -1,10 +1,7 @@
+import { CommonIAdministrativeAreaLevel3Repository, CommonMockAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3';
+import { CommonPaginateAdministrativeAreasLevel3Service } from '@app/common/administrative-area-level-3/application/paginate/common-paginate-administrative-areas-level-3.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonPaginateAdministrativeAreasLevel3Service } from './common-paginate-administrative-areas-level-3.service';
-import { CommonIAdministrativeAreaLevel3Repository } from '../../domain/common-administrative-area-level-3.repository';
-import { CommonMockAdministrativeAreaLevel3Repository } from '../../infrastructure/mock/common-mock-administrative-area-level-3.repository';
 
 describe('CommonPaginateAdministrativeAreasLevel3Service', () =>
 {

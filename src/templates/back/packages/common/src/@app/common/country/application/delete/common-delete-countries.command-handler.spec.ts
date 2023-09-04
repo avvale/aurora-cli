@@ -1,14 +1,11 @@
+import { CommonDeleteCountriesCommand } from '@app/common/country';
+import { CommonDeleteCountriesCommandHandler } from '@app/common/country/application/delete/common-delete-countries.command-handler';
+import { CommonDeleteCountriesService } from '@app/common/country/application/delete/common-delete-countries.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteCountriesCommandHandler } from './common-delete-countries.command-handler';
-import { CommonDeleteCountriesCommand } from './common-delete-countries.command';
-import { CommonDeleteCountriesService } from './common-delete-countries.service';
 
 describe('CommonDeleteCountriesCommandHandler', () =>
 {
     let commandHandler: CommonDeleteCountriesCommandHandler;
-    let service: CommonDeleteCountriesService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('CommonDeleteCountriesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteCountriesCommandHandler>(CommonDeleteCountriesCommandHandler);
-        service = module.get<CommonDeleteCountriesService>(CommonDeleteCountriesService);
     });
 
     describe('main', () =>

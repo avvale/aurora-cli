@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { CommonPaginateLangsQuery } from '@app/common/lang';
+import { CommonPaginateLangsService } from '@app/common/lang/application/paginate/common-paginate-langs.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { CommonPaginateLangsQuery } from './common-paginate-langs.query';
-import { CommonPaginateLangsService } from './common-paginate-langs.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(CommonPaginateLangsQuery)
 export class CommonPaginateLangsQueryHandler implements IQueryHandler<CommonPaginateLangsQuery>

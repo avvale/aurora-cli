@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { CommonPaginateAdministrativeAreasLevel1Query } from '@app/common/administrative-area-level-1';
+import { CommonPaginateAdministrativeAreasLevel1Service } from '@app/common/administrative-area-level-1/application/paginate/common-paginate-administrative-areas-level-1.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { CommonPaginateAdministrativeAreasLevel1Query } from './common-paginate-administrative-areas-level-1.query';
-import { CommonPaginateAdministrativeAreasLevel1Service } from './common-paginate-administrative-areas-level-1.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(CommonPaginateAdministrativeAreasLevel1Query)
 export class CommonPaginateAdministrativeAreasLevel1QueryHandler implements IQueryHandler<CommonPaginateAdministrativeAreasLevel1Query>

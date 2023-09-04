@@ -1,8 +1,6 @@
+import { CommonAttachmentFamilyMapper, CommonAttachmentFamilyResponse, CommonFindAttachmentFamilyQuery } from '@app/common/attachment-family';
+import { CommonFindAttachmentFamilyService } from '@app/common/attachment-family/application/find/common-find-attachment-family.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonAttachmentFamilyResponse } from '../../domain/common-attachment-family.response';
-import { CommonAttachmentFamilyMapper } from '../../domain/common-attachment-family.mapper';
-import { CommonFindAttachmentFamilyQuery } from './common-find-attachment-family.query';
-import { CommonFindAttachmentFamilyService } from './common-find-attachment-family.service';
 
 @QueryHandler(CommonFindAttachmentFamilyQuery)
 export class CommonFindAttachmentFamilyQueryHandler implements IQueryHandler<CommonFindAttachmentFamilyQuery>

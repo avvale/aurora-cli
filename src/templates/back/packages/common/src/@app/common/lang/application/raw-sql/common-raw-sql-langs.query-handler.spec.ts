@@ -1,12 +1,7 @@
+import { CommonILangRepository, CommonLangMapper, CommonMockLangRepository, CommonRawSQLLangsQuery } from '@app/common/lang';
+import { CommonRawSQLLangsQueryHandler } from '@app/common/lang/application/raw-sql/common-raw-sql-langs.query-handler';
+import { CommonRawSQLLangsService } from '@app/common/lang/application/raw-sql/common-raw-sql-langs.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonMockLangRepository } from '@app/common/lang/infrastructure/mock/common-mock-lang.repository';
-import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
-import { CommonLangMapper } from '@app/common/lang/domain/common-lang.mapper';
-import { CommonRawSQLLangsQueryHandler } from './common-raw-sql-langs.query-handler';
-import { CommonRawSQLLangsQuery } from './common-raw-sql-langs.query';
-import { CommonRawSQLLangsService } from './common-raw-sql-langs.service';
 
 describe('RawSQLLangsQueryHandler', () =>
 {

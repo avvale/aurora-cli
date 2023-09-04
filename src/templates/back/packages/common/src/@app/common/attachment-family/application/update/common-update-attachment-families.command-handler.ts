@@ -1,21 +1,18 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpdateAttachmentFamiliesCommand } from './common-update-attachment-families.command';
-import { CommonUpdateAttachmentFamiliesService } from './common-update-attachment-families.service';
+import { CommonUpdateAttachmentFamiliesCommand } from '@app/common/attachment-family';
+import { CommonUpdateAttachmentFamiliesService } from '@app/common/attachment-family/application/update/common-update-attachment-families.service';
 import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
     CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
     CommonAttachmentFamilyFormat,
-    CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
-    CommonAttachmentFamilyDeletedAt,
-} from '../../domain/value-objects';
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyWidth,
+} from '@app/common/attachment-family/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpdateAttachmentFamiliesCommand)
 export class CommonUpdateAttachmentFamiliesCommandHandler implements ICommandHandler<CommonUpdateAttachmentFamiliesCommand>

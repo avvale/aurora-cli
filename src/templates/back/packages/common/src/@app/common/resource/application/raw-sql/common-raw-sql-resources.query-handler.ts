@@ -1,8 +1,6 @@
+import { CommonRawSQLResourcesQuery, CommonResourceMapper, CommonResourceResponse } from '@app/common/resource';
+import { CommonRawSQLResourcesService } from '@app/common/resource/application/raw-sql/common-raw-sql-resources.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonResourceResponse } from '../../domain/common-resource.response';
-import { CommonResourceMapper } from '../../domain/common-resource.mapper';
-import { CommonRawSQLResourcesQuery } from './common-raw-sql-resources.query';
-import { CommonRawSQLResourcesService } from './common-raw-sql-resources.service';
 
 @QueryHandler(CommonRawSQLResourcesQuery)
 export class CommonRawSQLResourcesQueryHandler implements IQueryHandler<CommonRawSQLResourcesQuery>

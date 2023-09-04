@@ -1,27 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.data';
-import { CommonUpdateAdministrativeAreaLevel1ByIdService } from './common-update-administrative-area-level-1-by-id.service';
+import { CommonIAdministrativeAreaLevel1Repository, commonMockAdministrativeAreaLevel1Data, CommonMockAdministrativeAreaLevel1Repository } from '@app/common/administrative-area-level-1';
+import { CommonUpdateAdministrativeAreaLevel1ByIdService } from '@app/common/administrative-area-level-1/application/update/common-update-administrative-area-level-1-by-id.service';
 import {
-    CommonAdministrativeAreaLevel1Id,
-    CommonAdministrativeAreaLevel1CountryId,
     CommonAdministrativeAreaLevel1Code,
+    CommonAdministrativeAreaLevel1CountryId,
     CommonAdministrativeAreaLevel1CustomCode,
-    CommonAdministrativeAreaLevel1Name,
-    CommonAdministrativeAreaLevel1Slug,
+    CommonAdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel1Latitude,
     CommonAdministrativeAreaLevel1Longitude,
-    CommonAdministrativeAreaLevel1Zoom,
     CommonAdministrativeAreaLevel1MapType,
-    CommonAdministrativeAreaLevel1CreatedAt,
-    CommonAdministrativeAreaLevel1UpdatedAt,
-    CommonAdministrativeAreaLevel1DeletedAt,
-} from '../../domain/value-objects';
-import { CommonIAdministrativeAreaLevel1Repository } from '../../domain/common-administrative-area-level-1.repository';
-import { CommonMockAdministrativeAreaLevel1Repository } from '../../infrastructure/mock/common-mock-administrative-area-level-1.repository';
+    CommonAdministrativeAreaLevel1Name,
+    CommonAdministrativeAreaLevel1Slug,
+    CommonAdministrativeAreaLevel1Zoom,
+} from '@app/common/administrative-area-level-1/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateAdministrativeAreaLevel1ByIdService', () =>
 {

@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { CommonPaginateCountriesQuery } from '@app/common/country';
+import { CommonPaginateCountriesService } from '@app/common/country/application/paginate/common-paginate-countries.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { CommonPaginateCountriesQuery } from './common-paginate-countries.query';
-import { CommonPaginateCountriesService } from './common-paginate-countries.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(CommonPaginateCountriesQuery)
 export class CommonPaginateCountriesQueryHandler implements IQueryHandler<CommonPaginateCountriesQuery>

@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { CommonILangRepository, CommonLang } from '@app/common/lang';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonLang } from '../../domain/common-lang.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonRawSQLLangsService

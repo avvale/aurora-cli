@@ -1,10 +1,7 @@
+import { CommonIAdministrativeAreaLevel1Repository, CommonMockAdministrativeAreaLevel1Repository } from '@app/common/administrative-area-level-1';
+import { CommonRawSQLAdministrativeAreasLevel1Service } from '@app/common/administrative-area-level-1/application/raw-sql/common-raw-sql-administrative-areas-level-1.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonRawSQLAdministrativeAreasLevel1Service } from './common-raw-sql-administrative-areas-level-1.service';
-import { CommonIAdministrativeAreaLevel1Repository } from '../../domain/common-administrative-area-level-1.repository';
-import { CommonMockAdministrativeAreaLevel1Repository } from '../../infrastructure/mock/common-mock-administrative-area-level-1.repository';
 
 describe('CommonRawSQLAdministrativeAreasLevel1Service ', () =>
 {

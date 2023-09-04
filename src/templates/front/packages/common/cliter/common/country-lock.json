@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-detail.component.html",
-            "integrity": "sha1:1ff6c13cbcc045f771f6f4462972aab50582fb5a"
+            "integrity": "sha1:f81aa2e16253fb701538f3e46419a2f637631f35"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-detail.component.ts",
-            "integrity": "sha1:9398da9115091a343c75b15e0d0b9c83d2e0def5"
+            "integrity": "sha1:c55e29ee30f93b6ac805bbeb2d63949a2536501f"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-list.component.html",
-            "integrity": "sha1:36014bb99b71407d4468816f2abdaafd2276c443"
+            "integrity": "sha1:2db244b30a3ce2e5e4eff8fcae8b9ea2c48462bb"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-list.component.ts",
@@ -27,7 +27,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country.columns-config.ts",
-            "integrity": "sha1:9b8eb598350708df1d8715e6c86066f79fba92aa"
+            "integrity": "sha1:602e16511105764f6290ed1fc31c9b191f6e4fe5"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country.graphql.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country.resolvers.ts",
-            "integrity": "sha1:e8ae9c4c4ae7564ba5bcd35b4f8149675af491ad"
+            "integrity": "sha1:cb885a6848cf03ebd9906c9dd75bd8842569756a"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country.service.ts",

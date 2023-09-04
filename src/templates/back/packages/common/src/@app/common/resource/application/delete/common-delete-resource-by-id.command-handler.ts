@@ -1,9 +1,7 @@
+import { CommonDeleteResourceByIdCommand } from '@app/common/resource';
+import { CommonDeleteResourceByIdService } from '@app/common/resource/application/delete/common-delete-resource-by-id.service';
+import { CommonResourceId } from '@app/common/resource/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteResourceByIdCommand } from './common-delete-resource-by-id.command';
-import { CommonDeleteResourceByIdService } from './common-delete-resource-by-id.service';
-import {
-    CommonResourceId
-} from '../../domain/value-objects';
 
 @CommandHandler(CommonDeleteResourceByIdCommand)
 export class CommonDeleteResourceByIdCommandHandler implements ICommandHandler<CommonDeleteResourceByIdCommand>

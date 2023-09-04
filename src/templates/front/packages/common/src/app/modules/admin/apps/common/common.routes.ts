@@ -16,6 +16,12 @@ import { administrativeAreaLevel2EditResolver, administrativeAreaLevel2NewResolv
 import { AdministrativeAreaLevel3ListComponent } from './administrative-area-level-3/administrative-area-level-3-list.component';
 import { AdministrativeAreaLevel3DetailComponent } from './administrative-area-level-3/administrative-area-level-3-detail.component';
 import { administrativeAreaLevel3EditResolver, administrativeAreaLevel3NewResolver, administrativeAreaLevel3PaginationResolver } from './administrative-area-level-3/administrative-area-level-3.resolvers';
+import { ResourceListComponent } from './resource/resource-list.component';
+import { ResourceDetailComponent } from './resource/resource-detail.component';
+import { resourceEditResolver, resourceNewResolver, resourcePaginationResolver } from './resource/resource.resolvers';
+import { AttachmentFamilyListComponent } from './attachment-family/attachment-family-list.component';
+import { AttachmentFamilyDetailComponent } from './attachment-family/attachment-family-detail.component';
+import { attachmentFamilyEditResolver, attachmentFamilyNewResolver, attachmentFamilyPaginationResolver } from './attachment-family/attachment-family.resolvers';
 
 export default [
     {
@@ -38,6 +44,12 @@ export default [
             { path: 'administrative-area-level-3', component: AdministrativeAreaLevel3ListComponent, resolve: { data: administrativeAreaLevel3PaginationResolver }, data: { permission: 'common.administrativeAreaLevel3.get' }},
             { path: 'administrative-area-level-3/new', component: AdministrativeAreaLevel3DetailComponent, resolve: { data: administrativeAreaLevel3NewResolver }, data: { permission: 'common.administrativeAreaLevel3.create' }},
             { path: 'administrative-area-level-3/edit/:id', component: AdministrativeAreaLevel3DetailComponent, resolve: { data: administrativeAreaLevel3EditResolver }, data: { permission: 'common.administrativeAreaLevel3.get' }},
+            { path: 'resource', component: ResourceListComponent, resolve: { data: resourcePaginationResolver }, data: { permission: 'common.resource.get' }},
+            { path: 'resource/new', component: ResourceDetailComponent, resolve: { data: resourceNewResolver }, data: { permission: 'common.resource.create' }},
+            { path: 'resource/edit/:id', component: ResourceDetailComponent, resolve: { data: resourceEditResolver }, data: { permission: 'common.resource.get' }},
+            { path: 'attachment-family', component: AttachmentFamilyListComponent, resolve: { data: attachmentFamilyPaginationResolver }, data: { permission: 'common.attachmentFamily.get' }},
+            { path: 'attachment-family/new', component: AttachmentFamilyDetailComponent, resolve: { data: attachmentFamilyNewResolver }, data: { permission: 'common.attachmentFamily.create' }},
+            { path: 'attachment-family/edit/:id', component: AttachmentFamilyDetailComponent, resolve: { data: attachmentFamilyEditResolver }, data: { permission: 'common.attachmentFamily.get' }},
         ],
         providers: [
             {

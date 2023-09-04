@@ -1,12 +1,7 @@
+import { CommonAdministrativeAreaLevel2Mapper, CommonGetAdministrativeAreasLevel2Query, CommonIAdministrativeAreaLevel2Repository, CommonMockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2';
+import { CommonGetAdministrativeAreasLevel2QueryHandler } from '@app/common/administrative-area-level-2/application/get/common-get-administrative-areas-level-2.query-handler';
+import { CommonGetAdministrativeAreasLevel2Service } from '@app/common/administrative-area-level-2/application/get/common-get-administrative-areas-level-2.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonGetAdministrativeAreasLevel2QueryHandler } from './common-get-administrative-areas-level-2.query-handler';
-import { CommonMockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.repository';
-import { CommonIAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/domain/common-administrative-area-level-2.repository';
-import { CommonAdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2/domain/common-administrative-area-level-2.mapper';
-import { CommonGetAdministrativeAreasLevel2Query } from './common-get-administrative-areas-level-2.query';
-import { CommonGetAdministrativeAreasLevel2Service } from './common-get-administrative-areas-level-2.service';
 
 describe('GetAdministrativeAreasLevel2QueryHandler', () =>
 {

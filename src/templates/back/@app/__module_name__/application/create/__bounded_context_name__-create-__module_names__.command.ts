@@ -1,6 +1,6 @@
 import { CQMetadata } from '{{ config.auroraCorePackage }}';
 
-export class  {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command
+export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command
 {
     constructor(
         public readonly payload: {

@@ -85,7 +85,7 @@ import { CommonDeleteAttachmentFamiliesHandler } from './handlers/common-delete-
 // seeder
 import { CommonAttachmentFamilySeeder } from './seeder/common-attachment-family.seeder';
 
-export const CommonAttachmentFamilyControllers = [
+export const CommonAttachmentFamilyApiControllers = [
     CommonCreateAttachmentFamilyController,
     CommonCreateAttachmentFamiliesController,
     CommonPaginateAttachmentFamiliesController,
@@ -99,7 +99,7 @@ export const CommonAttachmentFamilyControllers = [
     CommonDeleteAttachmentFamiliesController,
 ];
 
-export const CommonAttachmentFamilyResolvers = [
+export const CommonAttachmentFamilyApiResolvers = [
     CommonCreateAttachmentFamilyResolver,
     CommonCreateAttachmentFamiliesResolver,
     CommonPaginateAttachmentFamiliesResolver,
@@ -127,6 +127,6 @@ export const CommonAttachmentFamilyApiHandlers = [
     CommonDeleteAttachmentFamiliesHandler,
 ];
 
-export const CommonAttachmentFamilyServices = [
+export const CommonAttachmentFamilyApiServices = [
     CommonAttachmentFamilySeeder,
 ];

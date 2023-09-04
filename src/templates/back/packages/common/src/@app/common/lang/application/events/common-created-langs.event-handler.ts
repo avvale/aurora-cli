@@ -1,5 +1,5 @@
+import { CommonCreatedLangsEvent } from '@app/common/lang';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { CommonCreatedLangsEvent } from './common-created-langs.event';
 
 @EventsHandler(CommonCreatedLangsEvent)
 export class CommonCreatedLangsEventHandler implements IEventHandler<CommonCreatedLangsEvent>

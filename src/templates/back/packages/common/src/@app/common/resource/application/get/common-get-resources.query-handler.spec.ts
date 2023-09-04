@@ -1,12 +1,7 @@
+import { CommonGetResourcesQuery, CommonIResourceRepository, CommonMockResourceRepository, CommonResourceMapper } from '@app/common/resource';
+import { CommonGetResourcesQueryHandler } from '@app/common/resource/application/get/common-get-resources.query-handler';
+import { CommonGetResourcesService } from '@app/common/resource/application/get/common-get-resources.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonGetResourcesQueryHandler } from './common-get-resources.query-handler';
-import { CommonMockResourceRepository } from '@app/common/resource/infrastructure/mock/common-mock-resource.repository';
-import { CommonIResourceRepository } from '@app/common/resource/domain/common-resource.repository';
-import { CommonResourceMapper } from '@app/common/resource/domain/common-resource.mapper';
-import { CommonGetResourcesQuery } from './common-get-resources.query';
-import { CommonGetResourcesService } from './common-get-resources.service';
 
 describe('GetResourcesQueryHandler', () =>
 {

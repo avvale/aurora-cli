@@ -1,11 +1,5 @@
+import { CommonAttachmentFamily, CommonCreatedAttachmentFamiliesEvent, CommonCreatedAttachmentFamilyEvent, CommonDeletedAttachmentFamiliesEvent, CommonDeletedAttachmentFamilyEvent, CommonUpdatedAttachmentFamiliesEvent, CommonUpdatedAttachmentFamilyEvent } from '@app/common/attachment-family';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { CommonAttachmentFamily } from '../../domain/common-attachment-family.aggregate';
-import { CommonCreatedAttachmentFamilyEvent } from './common-created-attachment-family.event';
-import { CommonCreatedAttachmentFamiliesEvent } from './common-created-attachment-families.event';
-import { CommonUpdatedAttachmentFamilyEvent } from './common-updated-attachment-family.event';
-import { CommonUpdatedAttachmentFamiliesEvent } from './common-updated-attachment-families.event';
-import { CommonDeletedAttachmentFamilyEvent } from './common-deleted-attachment-family.event';
-import { CommonDeletedAttachmentFamiliesEvent } from './common-deleted-attachment-families.event';
 
 export class CommonAddAttachmentFamiliesContextEvent extends AggregateRoot
 {

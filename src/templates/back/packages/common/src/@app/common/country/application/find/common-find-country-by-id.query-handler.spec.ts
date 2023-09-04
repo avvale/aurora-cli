@@ -1,13 +1,7 @@
+import { CommonCountryMapper, CommonFindCountryByIdQuery, CommonICountryRepository, commonMockCountryData, CommonMockCountryRepository } from '@app/common/country';
+import { CommonFindCountryByIdQueryHandler } from '@app/common/country/application/find/common-find-country-by-id.query-handler';
+import { CommonFindCountryByIdService } from '@app/common/country/application/find/common-find-country-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindCountryByIdQueryHandler } from './common-find-country-by-id.query-handler';
-import { CommonMockCountryRepository } from '@app/common/country/infrastructure/mock/common-mock-country.repository';
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
-import { CommonCountryMapper } from '@app/common/country/domain/common-country.mapper';
-import { CommonFindCountryByIdQuery } from './common-find-country-by-id.query';
-import { CommonFindCountryByIdService } from './common-find-country-by-id.service';
 
 describe('CommonFindCountryByIdQueryHandler', () =>
 {

@@ -1,27 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
-import { CommonUpdateLangsService } from './common-update-langs.service';
+import { CommonILangRepository, commonMockLangData, CommonMockLangRepository } from '@app/common/lang';
+import { CommonUpdateLangsService } from '@app/common/lang/application/update/common-update-langs.service';
 import {
-    CommonLangId,
-    CommonLangName,
-    CommonLangImage,
-    CommonLangIso6392,
-    CommonLangIso6393,
-    CommonLangIetf,
     CommonLangCustomCode,
     CommonLangDir,
-    CommonLangSort,
+    CommonLangId,
+    CommonLangIetf,
+    CommonLangImage,
     CommonLangIsActive,
-    CommonLangCreatedAt,
-    CommonLangUpdatedAt,
-    CommonLangDeletedAt,
-} from '../../domain/value-objects';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonMockLangRepository } from '../../infrastructure/mock/common-mock-lang.repository';
+    CommonLangIso6392,
+    CommonLangIso6393,
+    CommonLangName,
+    CommonLangSort,
+} from '@app/common/lang/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateLangsService', () =>
 {

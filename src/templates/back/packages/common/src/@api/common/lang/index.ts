@@ -85,7 +85,7 @@ import { CommonDeleteLangsHandler } from './handlers/common-delete-langs.handler
 // seeder
 import { CommonLangSeeder } from './seeder/common-lang.seeder';
 
-export const CommonLangControllers = [
+export const CommonLangApiControllers = [
     CommonCreateLangController,
     CommonCreateLangsController,
     CommonPaginateLangsController,
@@ -99,7 +99,7 @@ export const CommonLangControllers = [
     CommonDeleteLangsController,
 ];
 
-export const CommonLangResolvers = [
+export const CommonLangApiResolvers = [
     CommonCreateLangResolver,
     CommonCreateLangsResolver,
     CommonPaginateLangsResolver,
@@ -127,6 +127,6 @@ export const CommonLangApiHandlers = [
     CommonDeleteLangsHandler,
 ];
 
-export const CommonLangServices = [
+export const CommonLangApiServices = [
     CommonLangSeeder,
 ];

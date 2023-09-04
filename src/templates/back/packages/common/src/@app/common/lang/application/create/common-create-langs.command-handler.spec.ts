@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonCreateLangsCommand, commonMockLangData } from '@app/common/lang';
+import { CommonCreateLangsCommandHandler } from '@app/common/lang/application/create/common-create-langs.command-handler';
+import { CommonCreateLangsService } from '@app/common/lang/application/create/common-create-langs.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockLangData } from '@app/common/lang/infrastructure/mock/common-mock-lang.data';
-import { CommonCreateLangsCommandHandler } from './common-create-langs.command-handler';
-import { CommonCreateLangsCommand } from './common-create-langs.command';
-import { CommonCreateLangsService } from './common-create-langs.service';
 
 describe('commonCreateLangsCommandHandler', () =>
 {
     let commandHandler: CommonCreateLangsCommandHandler;
-    let service: CommonCreateLangsService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('commonCreateLangsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateLangsCommandHandler>(CommonCreateLangsCommandHandler);
-        service = module.get<CommonCreateLangsService>(CommonCreateLangsService);
     });
 
     describe('main', () =>

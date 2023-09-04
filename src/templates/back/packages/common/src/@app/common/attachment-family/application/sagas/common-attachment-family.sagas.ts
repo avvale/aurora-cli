@@ -1,8 +1,8 @@
+import { CommonCreatedAttachmentFamilyEvent } from '@app/common/attachment-family';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { CommonCreatedAttachmentFamilyEvent } from '../events/common-created-attachment-family.event';
 
 @Injectable()
 export class CommonAttachmentFamilySagas

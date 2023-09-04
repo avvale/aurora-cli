@@ -22,7 +22,7 @@ export class CommonCreateResourcesService
     ) {}
 
     async main(
-        resources: {
+        payload: {
             id: CommonResourceId;
             code: CommonResourceCode;
             name: CommonResourceName;
@@ -33,7 +33,7 @@ export class CommonCreateResourcesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateResources = resources.map(resource => CommonResource.register(
+        const aggregateResources = payload.map(resource => CommonResource.register(
             resource.id,
             resource.code,
             resource.name,

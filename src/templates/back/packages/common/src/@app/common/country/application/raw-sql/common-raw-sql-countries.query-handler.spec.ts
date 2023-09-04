@@ -1,12 +1,7 @@
+import { CommonCountryMapper, CommonICountryRepository, CommonMockCountryRepository, CommonRawSQLCountriesQuery } from '@app/common/country';
+import { CommonRawSQLCountriesQueryHandler } from '@app/common/country/application/raw-sql/common-raw-sql-countries.query-handler';
+import { CommonRawSQLCountriesService } from '@app/common/country/application/raw-sql/common-raw-sql-countries.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonMockCountryRepository } from '@app/common/country/infrastructure/mock/common-mock-country.repository';
-import { CommonICountryRepository } from '@app/common/country/domain/common-country.repository';
-import { CommonCountryMapper } from '@app/common/country/domain/common-country.mapper';
-import { CommonRawSQLCountriesQueryHandler } from './common-raw-sql-countries.query-handler';
-import { CommonRawSQLCountriesQuery } from './common-raw-sql-countries.query';
-import { CommonRawSQLCountriesService } from './common-raw-sql-countries.service';
 
 describe('RawSQLCountriesQueryHandler', () =>
 {

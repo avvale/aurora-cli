@@ -1,10 +1,7 @@
+import { CommonICountryRepository, CommonMockCountryRepository } from '@app/common/country';
+import { CommonFindCountryService } from '@app/common/country/application/find/common-find-country.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonFindCountryService } from './common-find-country.service';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
 describe('CommonFindCountryService', () =>
 {

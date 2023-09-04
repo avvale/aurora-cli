@@ -1,8 +1,6 @@
+import { CommonLangMapper, CommonLangResponse, CommonRawSQLLangsQuery } from '@app/common/lang';
+import { CommonRawSQLLangsService } from '@app/common/lang/application/raw-sql/common-raw-sql-langs.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonLangResponse } from '../../domain/common-lang.response';
-import { CommonLangMapper } from '../../domain/common-lang.mapper';
-import { CommonRawSQLLangsQuery } from './common-raw-sql-langs.query';
-import { CommonRawSQLLangsService } from './common-raw-sql-langs.service';
 
 @QueryHandler(CommonRawSQLLangsQuery)
 export class CommonRawSQLLangsQueryHandler implements IQueryHandler<CommonRawSQLLangsQuery>

@@ -335,3 +335,89 @@ export interface CommonUpdateAdministrativeAreasLevel3 {
     zoom?: number;
     mapType?: string;
 }
+
+export interface CommonResource {
+    id: string;
+    code?: string;
+    name: string;
+    isActive: boolean;
+    hasAttachments: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface CommonCreateResource {
+    id: string;
+    code?: string;
+    name: string;
+    isActive: boolean;
+    hasAttachments: boolean;
+}
+
+export interface CommonUpdateResourceById {
+    id: string;
+    code?: string;
+    name?: string;
+    isActive?: boolean;
+    hasAttachments?: boolean;
+}
+
+export interface CommonUpdateResources {
+    id?: string;
+    code?: string;
+    name?: string;
+    isActive?: boolean;
+    hasAttachments?: boolean;
+}
+
+export interface CommonAttachmentFamily {
+    id: string;
+    resourceId: string;
+    name: string;
+    width?: number;
+    height?: number;
+    fitType: string;
+    quality?: number;
+    sizes?: any;
+    format: string;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface CommonCreateAttachmentFamily {
+    id: string;
+    resourceId: string;
+    name: string;
+    width?: number;
+    height?: number;
+    fitType: string;
+    quality?: number;
+    sizes?: any;
+    format: string;
+}
+
+export interface CommonUpdateAttachmentFamilyById {
+    id: string;
+    resourceId?: string;
+    name?: string;
+    width?: number;
+    height?: number;
+    fitType?: string;
+    quality?: number;
+    sizes?: any;
+    format?: string;
+}
+
+export interface CommonUpdateAttachmentFamilies {
+    id?: string;
+    resourceId?: string;
+    name?: string;
+    width?: number;
+    height?: number;
+    fitType?: string;
+    quality?: number;
+    sizes?: any;
+    format?: string;
+}

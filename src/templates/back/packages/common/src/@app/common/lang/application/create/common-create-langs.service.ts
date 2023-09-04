@@ -27,7 +27,7 @@ export class CommonCreateLangsService
     ) {}
 
     async main(
-        langs: {
+        payload: {
             id: CommonLangId;
             name: CommonLangName;
             image: CommonLangImage;
@@ -43,7 +43,7 @@ export class CommonCreateLangsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateLangs = langs.map(lang => CommonLang.register(
+        const aggregateLangs = payload.map(lang => CommonLang.register(
             lang.id,
             lang.name,
             lang.image,

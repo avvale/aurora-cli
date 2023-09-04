@@ -38,7 +38,7 @@ export class CommonCreateCountriesService
     ) {}
 
     async main(
-        countries: {
+        payload: {
             id: CommonCountryId;
             iso3166Alpha2: CommonCountryIso3166Alpha2;
             iso3166Alpha3: CommonCountryIso3166Alpha3;
@@ -64,7 +64,7 @@ export class CommonCreateCountriesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateCountries = countries.map(country => CommonCountry.register(
+        const aggregateCountries = payload.map(country => CommonCountry.register(
             country.id,
             country.iso3166Alpha2,
             country.iso3166Alpha3,

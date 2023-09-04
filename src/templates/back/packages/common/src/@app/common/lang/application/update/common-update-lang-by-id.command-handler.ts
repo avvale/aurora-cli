@@ -1,22 +1,19 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpdateLangByIdCommand } from './common-update-lang-by-id.command';
-import { CommonUpdateLangByIdService } from './common-update-lang-by-id.service';
+import { CommonUpdateLangByIdCommand } from '@app/common/lang';
+import { CommonUpdateLangByIdService } from '@app/common/lang/application/update/common-update-lang-by-id.service';
 import {
-    CommonLangId,
-    CommonLangName,
-    CommonLangImage,
-    CommonLangIso6392,
-    CommonLangIso6393,
-    CommonLangIetf,
     CommonLangCustomCode,
     CommonLangDir,
-    CommonLangSort,
+    CommonLangId,
+    CommonLangIetf,
+    CommonLangImage,
     CommonLangIsActive,
-    CommonLangCreatedAt,
-    CommonLangUpdatedAt,
-    CommonLangDeletedAt,
-} from '../../domain/value-objects';
+    CommonLangIso6392,
+    CommonLangIso6393,
+    CommonLangName,
+    CommonLangSort,
+} from '@app/common/lang/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpdateLangByIdCommand)
 export class CommonUpdateLangByIdCommandHandler implements ICommandHandler<CommonUpdateLangByIdCommand>

@@ -1,15 +1,11 @@
+import { commonMockResourceData, CommonUpdateResourcesCommand } from '@app/common/resource';
+import { CommonUpdateResourcesCommandHandler } from '@app/common/resource/application/update/common-update-resources.command-handler';
+import { CommonUpdateResourcesService } from '@app/common/resource/application/update/common-update-resources.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockResourceData } from '@app/common/resource/infrastructure/mock/common-mock-resource.data';
-import { CommonUpdateResourcesCommandHandler } from './common-update-resources.command-handler';
-import { CommonUpdateResourcesCommand } from './common-update-resources.command';
-import { CommonUpdateResourcesService } from './common-update-resources.service';
 
 describe('CommonUpdateResourcesCommandHandler', () =>
 {
     let commandHandler: CommonUpdateResourcesCommandHandler;
-    let service: CommonUpdateResourcesService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonUpdateResourcesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonUpdateResourcesCommandHandler>(CommonUpdateResourcesCommandHandler);
-        service = module.get<CommonUpdateResourcesService>(CommonUpdateResourcesService);
     });
 
     describe('main', () =>

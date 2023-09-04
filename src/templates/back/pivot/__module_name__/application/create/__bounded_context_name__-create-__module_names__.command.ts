@@ -1,9 +1,15 @@
+import { CQMetadata } from '{{ config.auroraCorePackage }}';
+
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Command
 {
     constructor(
-        public readonly {{ toCamelCase schema.moduleNames }}: {
-            {{ toCamelCase schema.moduleName }}Id: string;
-            {{ toCamelCase currentProperty.relationship.singularName }}Id: string;
+        public readonly payload: {
+            {{#each (getCreateCommandProperties schema.aggregateProperties) }}
+            {{#if (isAllowProperty ../schema.moduleName this) }}
+            {{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}: {{ getPropertyJavascriptType this ../config }};
+            {{/if}}
+            {{/each}}
         } [],
+        public readonly cQMetadata?: CQMetadata,
     ) {}
 }

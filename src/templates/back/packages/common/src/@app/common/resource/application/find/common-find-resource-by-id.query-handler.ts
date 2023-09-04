@@ -1,9 +1,7 @@
+import { CommonFindResourceByIdQuery, CommonResourceMapper, CommonResourceResponse } from '@app/common/resource';
+import { CommonFindResourceByIdService } from '@app/common/resource/application/find/common-find-resource-by-id.service';
+import { CommonResourceId } from '@app/common/resource/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonResourceResponse } from '../../domain/common-resource.response';
-import { CommonResourceMapper } from '../../domain/common-resource.mapper';
-import { CommonResourceId } from '../../domain/value-objects';
-import { CommonFindResourceByIdQuery } from './common-find-resource-by-id.query';
-import { CommonFindResourceByIdService } from './common-find-resource-by-id.service';
 
 @QueryHandler(CommonFindResourceByIdQuery)
 export class CommonFindResourceByIdQueryHandler implements IQueryHandler<CommonFindResourceByIdQuery>

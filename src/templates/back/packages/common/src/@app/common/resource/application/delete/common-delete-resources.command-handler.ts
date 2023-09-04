@@ -1,6 +1,6 @@
+import { CommonDeleteResourcesCommand } from '@app/common/resource';
+import { CommonDeleteResourcesService } from '@app/common/resource/application/delete/common-delete-resources.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteResourcesCommand } from './common-delete-resources.command';
-import { CommonDeleteResourcesService } from './common-delete-resources.service';
 
 @CommandHandler(CommonDeleteResourcesCommand)
 export class CommonDeleteResourcesCommandHandler implements ICommandHandler<CommonDeleteResourcesCommand>

@@ -1,11 +1,5 @@
+import { CommonCreatedLangEvent, CommonCreatedLangsEvent, CommonDeletedLangEvent, CommonDeletedLangsEvent, CommonLang, CommonUpdatedLangEvent, CommonUpdatedLangsEvent } from '@app/common/lang';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { CommonLang } from '../../domain/common-lang.aggregate';
-import { CommonCreatedLangEvent } from './common-created-lang.event';
-import { CommonCreatedLangsEvent } from './common-created-langs.event';
-import { CommonUpdatedLangEvent } from './common-updated-lang.event';
-import { CommonUpdatedLangsEvent } from './common-updated-langs.event';
-import { CommonDeletedLangEvent } from './common-deleted-lang.event';
-import { CommonDeletedLangsEvent } from './common-deleted-langs.event';
 
 export class CommonAddLangsContextEvent extends AggregateRoot
 {

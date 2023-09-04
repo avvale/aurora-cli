@@ -1,14 +1,11 @@
+import { CommonDeleteLangsCommand } from '@app/common/lang';
+import { CommonDeleteLangsCommandHandler } from '@app/common/lang/application/delete/common-delete-langs.command-handler';
+import { CommonDeleteLangsService } from '@app/common/lang/application/delete/common-delete-langs.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteLangsCommandHandler } from './common-delete-langs.command-handler';
-import { CommonDeleteLangsCommand } from './common-delete-langs.command';
-import { CommonDeleteLangsService } from './common-delete-langs.service';
 
 describe('CommonDeleteLangsCommandHandler', () =>
 {
     let commandHandler: CommonDeleteLangsCommandHandler;
-    let service: CommonDeleteLangsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('CommonDeleteLangsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteLangsCommandHandler>(CommonDeleteLangsCommandHandler);
-        service = module.get<CommonDeleteLangsService>(CommonDeleteLangsService);
     });
 
     describe('main', () =>

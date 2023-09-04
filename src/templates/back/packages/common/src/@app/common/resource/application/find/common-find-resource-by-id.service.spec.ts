@@ -1,12 +1,8 @@
+import { CommonIResourceRepository, commonMockResourceData, CommonMockResourceRepository } from '@app/common/resource';
+import { CommonFindResourceByIdService } from '@app/common/resource/application/find/common-find-resource-by-id.service';
+import { CommonResourceId } from '@app/common/resource/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockResourceData } from '@app/common/resource/infrastructure/mock/common-mock-resource.data';
-import { CommonFindResourceByIdService } from './common-find-resource-by-id.service';
-import { CommonResourceId } from '../../domain/value-objects';
-import { CommonIResourceRepository } from '../../domain/common-resource.repository';
-import { CommonMockResourceRepository } from '../../infrastructure/mock/common-mock-resource.repository';
 
 describe('CommonFindResourceByIdService', () =>
 {

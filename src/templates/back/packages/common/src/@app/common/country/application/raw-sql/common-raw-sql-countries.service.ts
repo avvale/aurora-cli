@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { CommonCountry, CommonICountryRepository } from '@app/common/country';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonCountry } from '../../domain/common-country.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonRawSQLCountriesService

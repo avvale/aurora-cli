@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonIAttachmentFamilyRepository, commonMockAttachmentFamilyData, CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CommonDeleteAttachmentFamilyByIdService } from '@app/common/attachment-family/application/delete/common-delete-attachment-family-by-id.service';
+import { CommonAttachmentFamilyId } from '@app/common/attachment-family/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockAttachmentFamilyData } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.data';
-import { CommonDeleteAttachmentFamilyByIdService } from './common-delete-attachment-family-by-id.service';
-import { CommonAttachmentFamilyId } from '../../domain/value-objects';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonMockAttachmentFamilyRepository } from '../../infrastructure/mock/common-mock-attachment-family.repository';
 
 describe('CommonDeleteAttachmentFamilyByIdService', () =>
 {

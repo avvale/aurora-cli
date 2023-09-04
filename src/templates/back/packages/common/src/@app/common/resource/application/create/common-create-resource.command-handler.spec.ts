@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateResourceCommandHandler', () =>
 {
     let commandHandler: CommonCreateResourceCommandHandler;
-    let service: CommonCreateResourceService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('CommonCreateResourceCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateResourceCommandHandler>(CommonCreateResourceCommandHandler);
-        service = module.get<CommonCreateResourceService>(CommonCreateResourceService);
     });
 
     describe('main', () =>

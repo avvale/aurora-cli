@@ -1,10 +1,7 @@
+import { CommonIResourceRepository, CommonMockResourceRepository } from '@app/common/resource';
+import { CommonGetResourcesService } from '@app/common/resource/application/get/common-get-resources.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { CommonGetResourcesService } from './common-get-resources.service';
-import { CommonIResourceRepository } from '../../domain/common-resource.repository';
-import { CommonMockResourceRepository } from '../../infrastructure/mock/common-mock-resource.repository';
 
 describe('CommonGetResourcesService', () =>
 {

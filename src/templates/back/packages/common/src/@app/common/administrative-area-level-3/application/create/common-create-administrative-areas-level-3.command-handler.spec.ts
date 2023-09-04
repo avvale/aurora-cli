@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonCreateAdministrativeAreasLevel3Command, commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
+import { CommonCreateAdministrativeAreasLevel3CommandHandler } from '@app/common/administrative-area-level-3/application/create/common-create-administrative-areas-level-3.command-handler';
+import { CommonCreateAdministrativeAreasLevel3Service } from '@app/common/administrative-area-level-3/application/create/common-create-administrative-areas-level-3.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.data';
-import { CommonCreateAdministrativeAreasLevel3CommandHandler } from './common-create-administrative-areas-level-3.command-handler';
-import { CommonCreateAdministrativeAreasLevel3Command } from './common-create-administrative-areas-level-3.command';
-import { CommonCreateAdministrativeAreasLevel3Service } from './common-create-administrative-areas-level-3.service';
 
 describe('commonCreateAdministrativeAreasLevel3CommandHandler', () =>
 {
     let commandHandler: CommonCreateAdministrativeAreasLevel3CommandHandler;
-    let service: CommonCreateAdministrativeAreasLevel3Service;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('commonCreateAdministrativeAreasLevel3CommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateAdministrativeAreasLevel3CommandHandler>(CommonCreateAdministrativeAreasLevel3CommandHandler);
-        service = module.get<CommonCreateAdministrativeAreasLevel3Service>(CommonCreateAdministrativeAreasLevel3Service);
     });
 
     describe('main', () =>

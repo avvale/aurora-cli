@@ -1,8 +1,8 @@
+import { CommonCreatedCountryEvent } from '@app/common/country';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { CommonCreatedCountryEvent } from '../events/common-created-country.event';
 
 @Injectable()
 export class CommonCountrySagas

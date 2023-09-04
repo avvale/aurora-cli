@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonIAdministrativeAreaLevel3Repository, CommonMockAdministrativeAreaLevel3Repository, CommonPaginateAdministrativeAreasLevel3Query } from '@app/common/administrative-area-level-3';
+import { CommonPaginateAdministrativeAreasLevel3QueryHandler } from '@app/common/administrative-area-level-3/application/paginate/common-paginate-administrative-areas-level-3.query-handler';
+import { CommonPaginateAdministrativeAreasLevel3Service } from '@app/common/administrative-area-level-3/application/paginate/common-paginate-administrative-areas-level-3.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { CommonPaginateAdministrativeAreasLevel3QueryHandler } from './common-paginate-administrative-areas-level-3.query-handler';
-import { CommonMockAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.repository';
-import { CommonIAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3/domain/common-administrative-area-level-3.repository';
-import { CommonAdministrativeAreaLevel3Mapper } from '@app/common/administrative-area-level-3/domain/common-administrative-area-level-3.mapper';
-import { CommonPaginateAdministrativeAreasLevel3Query } from './common-paginate-administrative-areas-level-3.query';
-import { CommonPaginateAdministrativeAreasLevel3Service } from './common-paginate-administrative-areas-level-3.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonPaginateAdministrativeAreasLevel3QueryHandler', () =>
 {
     let queryHandler: CommonPaginateAdministrativeAreasLevel3QueryHandler;
     let service: CommonPaginateAdministrativeAreasLevel3Service;
     let repository: CommonMockAdministrativeAreaLevel3Repository;
-    let mapper: CommonAdministrativeAreaLevel3Mapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('CommonPaginateAdministrativeAreasLevel3QueryHandler', () =>
         queryHandler = module.get<CommonPaginateAdministrativeAreasLevel3QueryHandler>(CommonPaginateAdministrativeAreasLevel3QueryHandler);
         service = module.get<CommonPaginateAdministrativeAreasLevel3Service>(CommonPaginateAdministrativeAreasLevel3Service);
         repository = <CommonMockAdministrativeAreaLevel3Repository>module.get<CommonIAdministrativeAreaLevel3Repository>(CommonIAdministrativeAreaLevel3Repository);
-        mapper = new CommonAdministrativeAreaLevel3Mapper();
     });
 
     describe('main', () =>

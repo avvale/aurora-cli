@@ -1,8 +1,6 @@
+import { CommonGetResourcesQuery, CommonResourceMapper, CommonResourceResponse } from '@app/common/resource';
+import { CommonGetResourcesService } from '@app/common/resource/application/get/common-get-resources.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonResourceResponse } from '../../domain/common-resource.response';
-import { CommonResourceMapper } from '../../domain/common-resource.mapper';
-import { CommonGetResourcesQuery } from './common-get-resources.query';
-import { CommonGetResourcesService } from './common-get-resources.service';
 
 @QueryHandler(CommonGetResourcesQuery)
 export class CommonGetResourcesQueryHandler implements IQueryHandler<CommonGetResourcesQuery>

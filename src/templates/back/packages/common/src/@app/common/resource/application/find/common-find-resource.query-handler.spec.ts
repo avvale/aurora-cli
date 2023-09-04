@@ -1,12 +1,7 @@
+import { CommonFindResourceQuery, CommonIResourceRepository, CommonMockResourceRepository, CommonResourceMapper } from '@app/common/resource';
+import { CommonFindResourceQueryHandler } from '@app/common/resource/application/find/common-find-resource.query-handler';
+import { CommonFindResourceService } from '@app/common/resource/application/find/common-find-resource.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindResourceQueryHandler } from './common-find-resource.query-handler';
-import { CommonMockResourceRepository } from '@app/common/resource/infrastructure/mock/common-mock-resource.repository';
-import { CommonIResourceRepository } from '@app/common/resource/domain/common-resource.repository';
-import { CommonResourceMapper } from '@app/common/resource/domain/common-resource.mapper';
-import { CommonFindResourceQuery } from './common-find-resource.query';
-import { CommonFindResourceService } from './common-find-resource.service';
 
 describe('CommonFindResourceQueryHandler', () =>
 {

@@ -148,5 +148,6 @@ import './string-to-kebab-case';
 import './string-to-pascal-case';
 import './string-to-snake-case';
 import './sum-strings';
+import './ternary';
 import './uuid';
 import './variables-injector-manager';

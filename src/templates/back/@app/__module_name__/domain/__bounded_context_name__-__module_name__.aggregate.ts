@@ -216,7 +216,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{/each}}
     }
 
-    static register (
+    static register(
         {{#each (getAggregateProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this) }}
         {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }},

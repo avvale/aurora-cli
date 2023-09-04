@@ -1,14 +1,11 @@
+import { CommonDeleteAttachmentFamiliesCommand } from '@app/common/attachment-family';
+import { CommonDeleteAttachmentFamiliesCommandHandler } from '@app/common/attachment-family/application/delete/common-delete-attachment-families.command-handler';
+import { CommonDeleteAttachmentFamiliesService } from '@app/common/attachment-family/application/delete/common-delete-attachment-families.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteAttachmentFamiliesCommandHandler } from './common-delete-attachment-families.command-handler';
-import { CommonDeleteAttachmentFamiliesCommand } from './common-delete-attachment-families.command';
-import { CommonDeleteAttachmentFamiliesService } from './common-delete-attachment-families.service';
 
 describe('CommonDeleteAttachmentFamiliesCommandHandler', () =>
 {
     let commandHandler: CommonDeleteAttachmentFamiliesCommandHandler;
-    let service: CommonDeleteAttachmentFamiliesService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('CommonDeleteAttachmentFamiliesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteAttachmentFamiliesCommandHandler>(CommonDeleteAttachmentFamiliesCommandHandler);
-        service = module.get<CommonDeleteAttachmentFamiliesService>(CommonDeleteAttachmentFamiliesService);
     });
 
     describe('main', () =>

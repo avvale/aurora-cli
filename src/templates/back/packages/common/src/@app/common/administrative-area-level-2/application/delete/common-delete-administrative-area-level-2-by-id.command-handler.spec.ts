@@ -1,15 +1,11 @@
+import { CommonDeleteAdministrativeAreaLevel2ByIdCommand, commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2';
+import { CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler } from '@app/common/administrative-area-level-2/application/delete/common-delete-administrative-area-level-2-by-id.command-handler';
+import { CommonDeleteAdministrativeAreaLevel2ByIdService } from '@app/common/administrative-area-level-2/application/delete/common-delete-administrative-area-level-2-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler } from './common-delete-administrative-area-level-2-by-id.command-handler';
-import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.data';
-import { CommonDeleteAdministrativeAreaLevel2ByIdCommand } from './common-delete-administrative-area-level-2-by-id.command';
-import { CommonDeleteAdministrativeAreaLevel2ByIdService } from './common-delete-administrative-area-level-2-by-id.service';
 
 describe('CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler', () =>
 {
     let commandHandler: CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler;
-    let service: CommonDeleteAdministrativeAreaLevel2ByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler>(CommonDeleteAdministrativeAreaLevel2ByIdCommandHandler);
-        service = module.get<CommonDeleteAdministrativeAreaLevel2ByIdService>(CommonDeleteAdministrativeAreaLevel2ByIdService);
     });
 
     describe('main', () =>

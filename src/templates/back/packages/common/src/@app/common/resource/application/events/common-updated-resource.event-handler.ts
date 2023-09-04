@@ -1,5 +1,5 @@
+import { CommonUpdatedResourceEvent } from '@app/common/resource';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { CommonUpdatedResourceEvent } from './common-updated-resource.event';
 
 @EventsHandler(CommonUpdatedResourceEvent)
 export class CommonUpdatedResourceEventHandler implements IEventHandler<CommonUpdatedResourceEvent>

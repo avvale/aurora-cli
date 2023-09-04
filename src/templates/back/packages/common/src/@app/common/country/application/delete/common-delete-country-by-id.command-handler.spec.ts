@@ -1,15 +1,11 @@
+import { CommonDeleteCountryByIdCommand, commonMockCountryData } from '@app/common/country';
+import { CommonDeleteCountryByIdCommandHandler } from '@app/common/country/application/delete/common-delete-country-by-id.command-handler';
+import { CommonDeleteCountryByIdService } from '@app/common/country/application/delete/common-delete-country-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteCountryByIdCommandHandler } from './common-delete-country-by-id.command-handler';
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonDeleteCountryByIdCommand } from './common-delete-country-by-id.command';
-import { CommonDeleteCountryByIdService } from './common-delete-country-by-id.service';
 
 describe('CommonDeleteCountryByIdCommandHandler', () =>
 {
     let commandHandler: CommonDeleteCountryByIdCommandHandler;
-    let service: CommonDeleteCountryByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonDeleteCountryByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteCountryByIdCommandHandler>(CommonDeleteCountryByIdCommandHandler);
-        service = module.get<CommonDeleteCountryByIdService>(CommonDeleteCountryByIdService);
     });
 
     describe('main', () =>

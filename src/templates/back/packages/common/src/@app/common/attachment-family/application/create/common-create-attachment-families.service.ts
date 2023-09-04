@@ -26,7 +26,7 @@ export class CommonCreateAttachmentFamiliesService
     ) {}
 
     async main(
-        attachmentFamilies: {
+        payload: {
             id: CommonAttachmentFamilyId;
             resourceId: CommonAttachmentFamilyResourceId;
             name: CommonAttachmentFamilyName;
@@ -41,7 +41,7 @@ export class CommonCreateAttachmentFamiliesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateAttachmentFamilies = attachmentFamilies.map(attachmentFamily => CommonAttachmentFamily.register(
+        const aggregateAttachmentFamilies = payload.map(attachmentFamily => CommonAttachmentFamily.register(
             attachmentFamily.id,
             attachmentFamily.resourceId,
             attachmentFamily.name,

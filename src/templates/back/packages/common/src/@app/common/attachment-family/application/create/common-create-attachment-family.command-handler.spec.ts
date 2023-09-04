@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('CommonCreateAttachmentFamilyCommandHandler', () =>
 {
     let commandHandler: CommonCreateAttachmentFamilyCommandHandler;
-    let service: CommonCreateAttachmentFamilyService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('CommonCreateAttachmentFamilyCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateAttachmentFamilyCommandHandler>(CommonCreateAttachmentFamilyCommandHandler);
-        service = module.get<CommonCreateAttachmentFamilyService>(CommonCreateAttachmentFamilyService);
     });
 
     describe('main', () =>

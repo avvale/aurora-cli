@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { CommonILangRepository, CommonMockLangRepository, CommonPaginateLangsQuery } from '@app/common/lang';
+import { CommonPaginateLangsQueryHandler } from '@app/common/lang/application/paginate/common-paginate-langs.query-handler';
+import { CommonPaginateLangsService } from '@app/common/lang/application/paginate/common-paginate-langs.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { CommonPaginateLangsQueryHandler } from './common-paginate-langs.query-handler';
-import { CommonMockLangRepository } from '@app/common/lang/infrastructure/mock/common-mock-lang.repository';
-import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
-import { CommonLangMapper } from '@app/common/lang/domain/common-lang.mapper';
-import { CommonPaginateLangsQuery } from './common-paginate-langs.query';
-import { CommonPaginateLangsService } from './common-paginate-langs.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonPaginateLangsQueryHandler', () =>
 {
     let queryHandler: CommonPaginateLangsQueryHandler;
     let service: CommonPaginateLangsService;
     let repository: CommonMockLangRepository;
-    let mapper: CommonLangMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('CommonPaginateLangsQueryHandler', () =>
         queryHandler = module.get<CommonPaginateLangsQueryHandler>(CommonPaginateLangsQueryHandler);
         service = module.get<CommonPaginateLangsService>(CommonPaginateLangsService);
         repository = <CommonMockLangRepository>module.get<CommonILangRepository>(CommonILangRepository);
-        mapper = new CommonLangMapper();
     });
 
     describe('main', () =>

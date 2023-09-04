@@ -1,13 +1,7 @@
+import { CommonFindResourceByIdQuery, CommonIResourceRepository, commonMockResourceData, CommonMockResourceRepository, CommonResourceMapper } from '@app/common/resource';
+import { CommonFindResourceByIdQueryHandler } from '@app/common/resource/application/find/common-find-resource-by-id.query-handler';
+import { CommonFindResourceByIdService } from '@app/common/resource/application/find/common-find-resource-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindResourceByIdQueryHandler } from './common-find-resource-by-id.query-handler';
-import { CommonMockResourceRepository } from '@app/common/resource/infrastructure/mock/common-mock-resource.repository';
-import { commonMockResourceData } from '@app/common/resource/infrastructure/mock/common-mock-resource.data';
-import { CommonIResourceRepository } from '@app/common/resource/domain/common-resource.repository';
-import { CommonResourceMapper } from '@app/common/resource/domain/common-resource.mapper';
-import { CommonFindResourceByIdQuery } from './common-find-resource-by-id.query';
-import { CommonFindResourceByIdService } from './common-find-resource-by-id.service';
 
 describe('CommonFindResourceByIdQueryHandler', () =>
 {

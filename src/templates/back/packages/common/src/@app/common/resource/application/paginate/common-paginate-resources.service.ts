@@ -1,9 +1,6 @@
+import { CommonIResourceRepository, CommonResource } from '@app/common/resource';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonIResourceRepository } from '../../domain/common-resource.repository';
-import { CommonResource } from '../../domain/common-resource.aggregate';
 
 @Injectable()
 export class CommonPaginateResourcesService

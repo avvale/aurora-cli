@@ -1,9 +1,6 @@
+import { CommonILangRepository, CommonLang } from '@app/common/lang';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonILangRepository } from '../../domain/common-lang.repository';
-import { CommonLang } from '../../domain/common-lang.aggregate';
 
 @Injectable()
 export class CommonPaginateLangsService

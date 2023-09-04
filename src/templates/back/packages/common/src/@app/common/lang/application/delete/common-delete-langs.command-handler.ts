@@ -1,6 +1,6 @@
+import { CommonDeleteLangsCommand } from '@app/common/lang';
+import { CommonDeleteLangsService } from '@app/common/lang/application/delete/common-delete-langs.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonDeleteLangsCommand } from './common-delete-langs.command';
-import { CommonDeleteLangsService } from './common-delete-langs.service';
 
 @CommandHandler(CommonDeleteLangsCommand)
 export class CommonDeleteLangsCommandHandler implements ICommandHandler<CommonDeleteLangsCommand>

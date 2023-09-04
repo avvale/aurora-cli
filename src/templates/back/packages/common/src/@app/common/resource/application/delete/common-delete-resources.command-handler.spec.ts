@@ -1,14 +1,11 @@
+import { CommonDeleteResourcesCommand } from '@app/common/resource';
+import { CommonDeleteResourcesCommandHandler } from '@app/common/resource/application/delete/common-delete-resources.command-handler';
+import { CommonDeleteResourcesService } from '@app/common/resource/application/delete/common-delete-resources.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteResourcesCommandHandler } from './common-delete-resources.command-handler';
-import { CommonDeleteResourcesCommand } from './common-delete-resources.command';
-import { CommonDeleteResourcesService } from './common-delete-resources.service';
 
 describe('CommonDeleteResourcesCommandHandler', () =>
 {
     let commandHandler: CommonDeleteResourcesCommandHandler;
-    let service: CommonDeleteResourcesService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('CommonDeleteResourcesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonDeleteResourcesCommandHandler>(CommonDeleteResourcesCommandHandler);
-        service = module.get<CommonDeleteResourcesService>(CommonDeleteResourcesService);
     });
 
     describe('main', () =>

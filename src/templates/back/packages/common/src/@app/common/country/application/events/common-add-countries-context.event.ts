@@ -1,11 +1,5 @@
+import { CommonCountry, CommonCreatedCountriesEvent, CommonCreatedCountryEvent, CommonDeletedCountriesEvent, CommonDeletedCountryEvent, CommonUpdatedCountriesEvent, CommonUpdatedCountryEvent } from '@app/common/country';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { CommonCountry } from '../../domain/common-country.aggregate';
-import { CommonCreatedCountryEvent } from './common-created-country.event';
-import { CommonCreatedCountriesEvent } from './common-created-countries.event';
-import { CommonUpdatedCountryEvent } from './common-updated-country.event';
-import { CommonUpdatedCountriesEvent } from './common-updated-countries.event';
-import { CommonDeletedCountryEvent } from './common-deleted-country.event';
-import { CommonDeletedCountriesEvent } from './common-deleted-countries.event';
 
 export class CommonAddCountriesContextEvent extends AggregateRoot
 {

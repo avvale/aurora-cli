@@ -1,15 +1,11 @@
+import { commonMockAdministrativeAreaLevel2Data, CommonUpdateAdministrativeAreaLevel2ByIdCommand } from '@app/common/administrative-area-level-2';
+import { CommonUpdateAdministrativeAreaLevel2ByIdCommandHandler } from '@app/common/administrative-area-level-2/application/update/common-update-administrative-area-level-2-by-id.command-handler';
+import { CommonUpdateAdministrativeAreaLevel2ByIdService } from '@app/common/administrative-area-level-2/application/update/common-update-administrative-area-level-2-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.data';
-import { CommonUpdateAdministrativeAreaLevel2ByIdCommandHandler } from './common-update-administrative-area-level-2-by-id.command-handler';
-import { CommonUpdateAdministrativeAreaLevel2ByIdCommand } from './common-update-administrative-area-level-2-by-id.command';
-import { CommonUpdateAdministrativeAreaLevel2ByIdService } from './common-update-administrative-area-level-2-by-id.service';
 
 describe('CommonUpdateAdministrativeAreaLevel2ByIdCommandHandler', () =>
 {
     let commandHandler: CommonUpdateAdministrativeAreaLevel2ByIdCommandHandler;
-    let service: CommonUpdateAdministrativeAreaLevel2ByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonUpdateAdministrativeAreaLevel2ByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonUpdateAdministrativeAreaLevel2ByIdCommandHandler>(CommonUpdateAdministrativeAreaLevel2ByIdCommandHandler);
-        service = module.get<CommonUpdateAdministrativeAreaLevel2ByIdService>(CommonUpdateAdministrativeAreaLevel2ByIdService);
     });
 
     describe('main', () =>

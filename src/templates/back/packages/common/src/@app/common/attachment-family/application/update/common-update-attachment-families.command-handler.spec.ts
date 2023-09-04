@@ -1,15 +1,11 @@
+import { commonMockAttachmentFamilyData, CommonUpdateAttachmentFamiliesCommand } from '@app/common/attachment-family';
+import { CommonUpdateAttachmentFamiliesCommandHandler } from '@app/common/attachment-family/application/update/common-update-attachment-families.command-handler';
+import { CommonUpdateAttachmentFamiliesService } from '@app/common/attachment-family/application/update/common-update-attachment-families.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockAttachmentFamilyData } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.data';
-import { CommonUpdateAttachmentFamiliesCommandHandler } from './common-update-attachment-families.command-handler';
-import { CommonUpdateAttachmentFamiliesCommand } from './common-update-attachment-families.command';
-import { CommonUpdateAttachmentFamiliesService } from './common-update-attachment-families.service';
 
 describe('CommonUpdateAttachmentFamiliesCommandHandler', () =>
 {
     let commandHandler: CommonUpdateAttachmentFamiliesCommandHandler;
-    let service: CommonUpdateAttachmentFamiliesService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('CommonUpdateAttachmentFamiliesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonUpdateAttachmentFamiliesCommandHandler>(CommonUpdateAttachmentFamiliesCommandHandler);
-        service = module.get<CommonUpdateAttachmentFamiliesService>(CommonUpdateAttachmentFamiliesService);
     });
 
     describe('main', () =>

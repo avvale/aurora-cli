@@ -1,22 +1,19 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpdateAdministrativeAreaLevel1ByIdCommand } from './common-update-administrative-area-level-1-by-id.command';
-import { CommonUpdateAdministrativeAreaLevel1ByIdService } from './common-update-administrative-area-level-1-by-id.service';
+import { CommonUpdateAdministrativeAreaLevel1ByIdCommand } from '@app/common/administrative-area-level-1';
+import { CommonUpdateAdministrativeAreaLevel1ByIdService } from '@app/common/administrative-area-level-1/application/update/common-update-administrative-area-level-1-by-id.service';
 import {
-    CommonAdministrativeAreaLevel1Id,
-    CommonAdministrativeAreaLevel1CountryId,
     CommonAdministrativeAreaLevel1Code,
+    CommonAdministrativeAreaLevel1CountryId,
     CommonAdministrativeAreaLevel1CustomCode,
-    CommonAdministrativeAreaLevel1Name,
-    CommonAdministrativeAreaLevel1Slug,
+    CommonAdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel1Latitude,
     CommonAdministrativeAreaLevel1Longitude,
-    CommonAdministrativeAreaLevel1Zoom,
     CommonAdministrativeAreaLevel1MapType,
-    CommonAdministrativeAreaLevel1CreatedAt,
-    CommonAdministrativeAreaLevel1UpdatedAt,
-    CommonAdministrativeAreaLevel1DeletedAt,
-} from '../../domain/value-objects';
+    CommonAdministrativeAreaLevel1Name,
+    CommonAdministrativeAreaLevel1Slug,
+    CommonAdministrativeAreaLevel1Zoom,
+} from '@app/common/administrative-area-level-1/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpdateAdministrativeAreaLevel1ByIdCommand)
 export class CommonUpdateAdministrativeAreaLevel1ByIdCommandHandler implements ICommandHandler<CommonUpdateAdministrativeAreaLevel1ByIdCommand>

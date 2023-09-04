@@ -1,12 +1,7 @@
+import { CommonAttachmentFamilyMapper, CommonFindAttachmentFamilyQuery, CommonIAttachmentFamilyRepository, CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family';
+import { CommonFindAttachmentFamilyQueryHandler } from '@app/common/attachment-family/application/find/common-find-attachment-family.query-handler';
+import { CommonFindAttachmentFamilyService } from '@app/common/attachment-family/application/find/common-find-attachment-family.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonFindAttachmentFamilyQueryHandler } from './common-find-attachment-family.query-handler';
-import { CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.repository';
-import { CommonIAttachmentFamilyRepository } from '@app/common/attachment-family/domain/common-attachment-family.repository';
-import { CommonAttachmentFamilyMapper } from '@app/common/attachment-family/domain/common-attachment-family.mapper';
-import { CommonFindAttachmentFamilyQuery } from './common-find-attachment-family.query';
-import { CommonFindAttachmentFamilyService } from './common-find-attachment-family.service';
 
 describe('CommonFindAttachmentFamilyQueryHandler', () =>
 {

@@ -1,5 +1,5 @@
+import { CommonDeletedResourcesEvent } from '@app/common/resource';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { CommonDeletedResourcesEvent } from './common-deleted-resources.event';
 
 @EventsHandler(CommonDeletedResourcesEvent)
 export class CommonDeletedResourcesEventHandler implements IEventHandler<CommonDeletedResourcesEvent>

@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonCreateCountriesCommand, commonMockCountryData } from '@app/common/country';
+import { CommonCreateCountriesCommandHandler } from '@app/common/country/application/create/common-create-countries.command-handler';
+import { CommonCreateCountriesService } from '@app/common/country/application/create/common-create-countries.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonCreateCountriesCommandHandler } from './common-create-countries.command-handler';
-import { CommonCreateCountriesCommand } from './common-create-countries.command';
-import { CommonCreateCountriesService } from './common-create-countries.service';
 
 describe('commonCreateCountriesCommandHandler', () =>
 {
     let commandHandler: CommonCreateCountriesCommandHandler;
-    let service: CommonCreateCountriesService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('commonCreateCountriesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<CommonCreateCountriesCommandHandler>(CommonCreateCountriesCommandHandler);
-        service = module.get<CommonCreateCountriesService>(CommonCreateCountriesService);
     });
 
     describe('main', () =>

@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { CommonICountryI18nRepository, CommonICountryRepository, CommonMockCountryRepository } from '@app/common/country';
+import { CommonCreateCountriesService } from '@app/common/country/application/create/common-create-countries.service';
 import { ConfigService } from '@nestjs/config';
-
-// custom items
-import { CommonCreateCountriesService } from './common-create-countries.service';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
-import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonCreateCountriesService', () =>
 {

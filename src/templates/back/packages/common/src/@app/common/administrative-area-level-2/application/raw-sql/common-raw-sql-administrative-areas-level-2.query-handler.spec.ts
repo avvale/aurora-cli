@@ -1,12 +1,7 @@
+import { CommonAdministrativeAreaLevel2Mapper, CommonIAdministrativeAreaLevel2Repository, CommonMockAdministrativeAreaLevel2Repository, CommonRawSQLAdministrativeAreasLevel2Query } from '@app/common/administrative-area-level-2';
+import { CommonRawSQLAdministrativeAreasLevel2QueryHandler } from '@app/common/administrative-area-level-2/application/raw-sql/common-raw-sql-administrative-areas-level-2.query-handler';
+import { CommonRawSQLAdministrativeAreasLevel2Service } from '@app/common/administrative-area-level-2/application/raw-sql/common-raw-sql-administrative-areas-level-2.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonMockAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/infrastructure/mock/common-mock-administrative-area-level-2.repository';
-import { CommonIAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2/domain/common-administrative-area-level-2.repository';
-import { CommonAdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2/domain/common-administrative-area-level-2.mapper';
-import { CommonRawSQLAdministrativeAreasLevel2QueryHandler } from './common-raw-sql-administrative-areas-level-2.query-handler';
-import { CommonRawSQLAdministrativeAreasLevel2Query } from './common-raw-sql-administrative-areas-level-2.query';
-import { CommonRawSQLAdministrativeAreasLevel2Service } from './common-raw-sql-administrative-areas-level-2.service';
 
 describe('RawSQLAdministrativeAreasLevel2QueryHandler', () =>
 {

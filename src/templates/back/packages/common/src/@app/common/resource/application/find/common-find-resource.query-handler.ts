@@ -1,8 +1,6 @@
+import { CommonFindResourceQuery, CommonResourceMapper, CommonResourceResponse } from '@app/common/resource';
+import { CommonFindResourceService } from '@app/common/resource/application/find/common-find-resource.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { CommonResourceResponse } from '../../domain/common-resource.response';
-import { CommonResourceMapper } from '../../domain/common-resource.mapper';
-import { CommonFindResourceQuery } from './common-find-resource.query';
-import { CommonFindResourceService } from './common-find-resource.service';
 
 @QueryHandler(CommonFindResourceQuery)
 export class CommonFindResourceQueryHandler implements IQueryHandler<CommonFindResourceQuery>
