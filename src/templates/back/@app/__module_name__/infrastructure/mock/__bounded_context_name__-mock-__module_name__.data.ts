@@ -1,9 +1,13 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
-{{#if (hasEnumProperties schema.aggregateProperties) }}
-import { {{#each (getEnumProperties schema.aggregateProperties) }}{{#unless @first}}, {{/unless}}{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getPropertyName this) }}{{/each}} } from '@api/graphql';
-{{/if}}
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'CQMetadata' 'IMapper' 'LiteralObject' 'MapperOptions') path=config.auroraCorePackage)
 
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data = [
     {{#loops 20}}
     {

@@ -1,29 +1,95 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-{{#if schema.hasAuditing}}
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
-{{/if}}
-import { {{#if schema.hasAuditing}}AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, {{/if}}Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'DataTypes') path='sequelize')
+            (object items=(array 'Column' 'Model' 'Table' 'ForeignKey' 'BelongsTo' 'HasMany' 'BelongsToMany' 'HasOne') path='sequelize-typescript')
+    )
+~}}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings relationship.aggregateName 'Model')
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (relationship.aggregateName) 'Model')
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
 {{/each}}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings relationship.aggregateName 'Model')
+                path=(if relationship.packageName 'si' else 'no')
+        )
+~}}
 {{/unless}}
 {{/each}}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-{{/each}}
-{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
-import { {{ relationship.aggregateName }}Model } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-import { {{ relationship.pivot.aggregateName }}Model } from '{{ ../config.appContainer }}/{{ toKebabCase relationship.pivot.boundedContextName }}/{{ toKebabCase relationship.pivot.moduleName }}';
-{{/each}}
-{{#if (hasI18nProperties schema.aggregateProperties) }}
-import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings relationship.aggregateName 'Model')
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings relationship.aggregateName 'Model')
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
 {{/if}}
-
+{{/each}}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings relationship.aggregateName 'Model')
+                path=(if relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+        (
+            object
+                items=(sumStrings relationship.pivot.aggregate 'Model')
+                path=(sumStrings ../config.appContainer '/' relationship.pivot.modulePath)
+        )
+~}}
+{{/each}}
+{{#if schema.hasAuditing}}
+{{
+    push importsArray
+        (object items=(array 'AfterBulkCreate' 'AfterBulkDestroy' 'AfterBulkRestore' 'AfterBulkUpdate' 'AfterCreate' 'AfterDestroy' 'AfterRestore' 'AfterUpdate' 'AfterUpsert') path='sequelize-typescript')
+        (object items=(array 'AuditingSideEffectEvent' 'SequelizeAuditingAgent') path=config.auroraCorePackage)
+~}}
+{{/if}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
+{{
+    push importsArray
+        (object items=(array (schema.aggregateName) 'I18nModel') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
 @Table({
     modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}',
     freezeTableName: true,

@@ -1,19 +1,4 @@
 /* eslint-disable key-spacing */
-{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-{{/each}}
-{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
-{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-{{/unless}}
-{{/each}}
-{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-{{/each}}
-{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
-import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
-{{/each}}
-
 {{
     setVar 'importsArray' (
         array
@@ -24,22 +9,120 @@ import { {{ relationship.aggregateName }} } from '{{#if relationship.packageName
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
 {{
     push importsArray
-        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase schema.boundedContextName) 'Created' (toPascalCase schema.moduleName) 'Event')
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
 ~}}
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
 {{
     push importsArray
-        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event')
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
 ~}}
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
 {{
     push importsArray
-        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Updated' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (
+            object
+                items=(sumStrings (toPascalCase schema.boundedContextName) 'Updated' (toPascalCase schema.moduleName) 'Event')
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
 ~}}
 {{/notInArray}}
-{{#each (getWithoutTimestampsProperties (getValueObjectsProperties schema.aggregateProperties)) }}
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/each}}
+{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
+{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/unless}}
+{{/each}}
+{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/each}}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.aggregateName
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/each}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray

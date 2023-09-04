@@ -1,9 +1,3 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.response';
-import {
-    {{> importValueObjects }}
-} from './value-objects';
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
@@ -19,6 +13,122 @@ import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../sche
 import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'CQMetadata' 'IMapper' 'LiteralObject' 'MapperOptions') path=config.auroraCorePackage)
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Response')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+    )
+~}}
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+            items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/each}}
+{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
+{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/unless}}
+{{/each}}
+{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+            items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/each}}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
+{{#if relationship.packageName}}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=relationship.packageName
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+            items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
+                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
+        )
+~}}
+{{/if}}
+{{/each}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (object 
+            items=
+                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper implements IMapper
 {
     constructor(
