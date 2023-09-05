@@ -1,8 +1,7 @@
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
-import { TemplateGenerator } from '../../utils';
+import { TemplateGenerator, getValueObjectsProperties } from '../../utils';
 import * as path from 'node:path';
-import { getValueObjectsProperties } from '../../utils/properties.functions';
 
 export const generateAppFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
@@ -35,10 +34,21 @@ export const generateAppFiles = async (generateCommandState: GenerateCommandStat
 
     // create value objects in module folder
     await TemplateGenerator.generateValueObjects(
-        generateCommandState,
+        generateCommandState.command,
         path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         getValueObjectsProperties(generateCommandState.schema.aggregateProperties),
-        generateCommandState.schema.moduleName,
+        {
+            boundedContextName: generateCommandState.schema.boundedContextName,
+            moduleName        : generateCommandState.schema.moduleName,
+            moduleNames       : generateCommandState.schema.moduleNames,
+            excludeFiles      : generateCommandState.schema.excluded,
+            force             : generateCommandState.flags.force,
+            verbose           : generateCommandState.flags.verbose,
+            lockFiles         : generateCommandState.lockFiles,
+            templateData      : {
+                ...generateCommandState,
+            },
+        },
     );
 };

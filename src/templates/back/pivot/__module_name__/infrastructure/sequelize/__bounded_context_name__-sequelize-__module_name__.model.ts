@@ -23,11 +23,6 @@ import { {{ relationship.pivot.aggregateName }}Model } from '{{ ../config.appCon
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 import { {{ schema.aggregateName }}I18nModel } from './{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
-{{#eq currentProperty.relationship.type relationshipType.MANY_TO_MANY }}
-{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
-import { {{ aggregateName }}Model } from '{{#if ../currentProperty.relationship.packageName }}{{ ../currentProperty.relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ modulePath }}{{/if}}';
-{{/each}}
-{{/eq}}
 
 @Table({
     modelName: '{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}',
@@ -165,9 +160,6 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/eq}}
     {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
     @ForeignKey(() => {{ relationship.aggregateName }}Model)
-    {{/eq}}
-    {{#eq ../currentProperty.relationship.type ../relationshipType.MANY_TO_MANY }}
-    @ForeignKey(() => {{ aggregateName }}Model)
     {{/eq}}
     @Column({
         field: '{{ toCamelCase (getPropertyName this) }}',

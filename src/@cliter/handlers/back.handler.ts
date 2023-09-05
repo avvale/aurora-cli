@@ -1,13 +1,12 @@
 /* eslint-disable unicorn/no-static-only-class */
-import { AddCommandState, TemplateElement } from '../types';
-import { TemplateGenerator } from '../utils/template-generator';
-import { generateJsonLockFile } from '../functions/common';
-import { addReferences, generateAdditionalApiFiles, generateApiFiles, generateI18nApiFiles, generateI18nAppFiles, generateAppFiles, generatePivotTables, generatePostmanFiles, generateTestingFiles, addPackageFiles } from '../functions/back';
-import { GenerateCommandState, NewBackCommandState } from '../types';
-import { GlobalState } from '../store';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { addPackageFiles, addPivotReferences, addReferences, generateAdditionalApiFiles, generateApiFiles, generateApiPivotFiles, generateAppFiles, generateAppI18nFiles, generateAppPivotFiles, generatePostmanFiles, generateTestingFiles } from '../functions/back';
+import { generateJsonLockFile } from '../functions/common';
+import { GlobalState } from '../store';
+import { AddCommandState, GenerateCommandState, NewBackCommandState, TemplateElement } from '../types';
 import { YamlManager } from '../utils';
+import { TemplateGenerator } from '../utils/template-generator';
 
 export class BackHandler
 {
@@ -40,26 +39,29 @@ export class BackHandler
         } = {},
     ): Promise<void>
     {
-        // generate module files
+        // generate @app module files
         await generateAppFiles(generateCommandState);
 
-        // generate pivot tables
-        await generatePivotTables(generateCommandState);
+        // generate @app pivot files
+        await generateAppPivotFiles(generateCommandState);
 
-        // generate i18n module files
-        await generateI18nAppFiles(generateCommandState);
+        // generate @app i18n module files
+        await generateAppI18nFiles(generateCommandState);
 
         // generate @api files
         await generateApiFiles(generateCommandState);
 
+        // generate @api pivot files
+        await generateApiPivotFiles(generateCommandState);
+
         // generate additional api filles
         await generateAdditionalApiFiles(generateCommandState);
 
-        // generate @api i18n files
-        // await generateI18nApiFiles(generateCommandState);
-
         // create references, write imports in ts files
         addReferences(generateCommandState);
+
+        // create references for pivot tables, write imports in ts files
+        addPivotReferences(generateCommandState);
 
         // flag to generate e2e tests, this test can overwrite custom tests
         if (hasGenerateTestingFiles) await generateTestingFiles(generateCommandState);

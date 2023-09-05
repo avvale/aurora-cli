@@ -4,11 +4,6 @@
             (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
             (
                 object
-                    items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id')
-                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
-            )
-            (
-                object
                     items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdCommand')
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
@@ -19,6 +14,16 @@
             )
     )
 ~}}
+{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+        )
+~}}
+{{/each}}
 {{{ importManager (object imports=importsArray) }}}
 @CommandHandler({{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommand)
 export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler implements ICommandHandler<{{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommand>
@@ -31,7 +36,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     {
         // call to use case and implements ValueObjects
         await this.delete{{ toPascalCase schema.moduleName }}ByIdService.main(
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id(command.id),
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getPropertyName this) }}(command.{{ toCamelCase (getPropertyName this) }}),
+            {{/each}}
             command.constraint,
             command.cQMetadata,
         );

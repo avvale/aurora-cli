@@ -88,7 +88,9 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
 
         {{/if}}
         return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
-            payload.id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            payload.{{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             {{#if (hasI18nProperties schema.aggregateProperties) }}
             constraint,
             {{else}}

@@ -99,6 +99,16 @@ export const getIndexesProperties = (
     return properties.filter(property => property.index); // only properties with index defined
 };
 
+export const getPrimaryKeyProperties = (
+    properties: Property[],
+
+): Property[] =>
+{
+    return properties
+        .filter(property => property.primaryKey) // only primary key properties
+        .filter((property, index, array) => array.findIndex(originProperty => originProperty.name === property.name) == index); // avoid duplicate primary keys, i18n aurora yaml has two primary key, the id and id from i18n
+};
+
 // replace by Properties valueObjects
 export const getValueObjectsProperties = (
     properties: Property[],

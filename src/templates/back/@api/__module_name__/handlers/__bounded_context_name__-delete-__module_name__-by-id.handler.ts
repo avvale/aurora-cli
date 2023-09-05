@@ -43,7 +43,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     ) {}
 
     async main(
-        id: string,
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        {{/each}}
         {{#if schema.hasTenant}}
         account: AccountResponse,
         {{/if}}
@@ -71,7 +73,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
 
         {{/if}}
         const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
-            id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             constraint,
             {
                 timezone,
@@ -79,7 +83,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         ));
 
         await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommand(
-            id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             constraint,
             {
                 timezone,

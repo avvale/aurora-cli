@@ -49,7 +49,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         private readonly handler: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdHandler,
     ) {}
 
-    @Post(':id')
+    @Post('{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}:{{ toCamelCase (getPropertyName this) }}{{#unless @last}}/{{/unless}}{{/each}}')
     @HttpCode(200)
     @ApiOperation({ summary: 'Find {{ toKebabCase schema.moduleName }} by id' })
     @ApiOkResponse({ description: 'The record has been successfully requested.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
@@ -57,7 +57,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     @TenantConstraint()
     {{/if}}
     async main(
-        @Param('id') id: string,
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        @Param('{{ toCamelCase (getPropertyName this) }}') {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        {{/each}}
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
@@ -69,7 +71,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     )
     {
         return await this.handler.main(
-            id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             {{#if schema.hasTenant}}
             account,
             {{/if}}

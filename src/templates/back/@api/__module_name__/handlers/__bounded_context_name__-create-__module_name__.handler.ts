@@ -104,7 +104,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         );
 
         return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
-            payload.id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            payload.{{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             constraint,
             {
                 timezone,
@@ -112,7 +114,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         ));
         {{else}}
         return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
-            payload.id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            payload.{{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             {},
             {
                 timezone,

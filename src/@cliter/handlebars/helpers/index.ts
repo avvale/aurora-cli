@@ -64,6 +64,7 @@ import './get-postman-graphql-update-mutation-properties';
 import './get-postman-graphql-update-variables-properties';
 import './get-postman-rest-create-properties';
 import './get-postman-rest-update-properties';
+import './get-primary-key-properties'
 import './get-properties-from-property-relationship';
 import './get-property-column-data-type';
 import './get-property-enum-options';
@@ -127,7 +128,6 @@ import './is-allow-property';
 import './is-binary-property';
 import './is-i18n-available-langs-property';
 import './is-i18n-relation-property';
-import './is-pivot-path';
 import './is-relationship-property';
 import './is-timezone-property';
 import './is-undefined';

@@ -1,15 +1,15 @@
 /* eslint-disable complexity */
 import { Command } from '@oclif/core';
-import { cliterConfig } from '../config/cliter.config';
-import { Cypher } from './cypher';
-import { AdditionalApi } from './additional-api';
-import { GlobalState } from '../store';
-import { LockFile, Property } from '../types';
-import templateEngine from './template-engine';
 import * as chalk from 'chalk';
+import * as _ from 'lodash';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import * as _ from 'lodash';
+import { cliterConfig } from '../config/cliter.config';
+import { GlobalState } from '../store';
+import { LockFile, Property } from '../types';
+import { AdditionalApi } from './additional-api';
+import { Cypher } from './cypher';
+import templateEngine from './template-engine';
 
 export class FileManager
 {

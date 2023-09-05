@@ -5,7 +5,6 @@
             (object items='EventPublisher' path='@nestjs/cqrs')
             (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects'))
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -16,6 +15,16 @@
         (object items='* as _' path='lodash' defaultImport=true)
 ~}}
 {{/if}}
+{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+        )
+~}}
+{{/each}}
 {{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdService
@@ -27,7 +36,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     ) {}
 
     async main(
-        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getPropertyName this) }},
+        {{/each}}
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -40,10 +51,21 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         // get object to delete
         const {{ toCamelCase schema.moduleName }} = await this.repository
             .findById(
+                {{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
                 id,
+                {{else}}
+                undefined,
+                {{/eq}}
                 {
                     constraint,
                     cQMetadata,
+                    {{#gt (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
+                    findArguments: {
+                        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+                        {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase (getPropertyName this) }}.value,
+                        {{/each}}
+                    },
+                    {{/gt}}
                 },
             );
 
@@ -110,10 +132,21 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         // is not found in the findById, an exception will be thrown.
         await this.repository
             .deleteById(
+                {{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
                 {{ toCamelCase schema.moduleName }}.id,
+                {{else}}
+                undefined,
+                {{/eq}}
                 {
                     deleteOptions: cQMetadata?.repositoryOptions,
                     cQMetadata,
+                    {{#gt (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
+                    findArguments: {
+                        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+                        {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}.value,
+                        {{/each}}
+                    },
+                    {{/gt}}
                 },
             );
         {{/if}}

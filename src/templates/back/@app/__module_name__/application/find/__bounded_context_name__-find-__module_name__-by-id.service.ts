@@ -5,11 +5,6 @@
             (object items=(array 'CQMetadata' 'QueryStatement') path=config.auroraCorePackage)
             (
                 object
-                    items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id')
-                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
-            )
-            (
-                object
                     items=
                     (
                         array
@@ -20,6 +15,16 @@
             )
     )
 ~}}
+{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+        )
+~}}
+{{/each}}
 {{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdService
@@ -29,16 +34,29 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ) {}
 
     async main(
-        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        {{ toCamelCase (getPropertyName this) }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getPropertyName this) }},
+        {{/each}}
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
     ): Promise<{{ schema.aggregateName }}>
     {
         return await this.repository.findById(
+            {{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
             id,
+            {{else}}
+            undefined,
+            {{/eq}}
             {
                 constraint,
                 cQMetadata,
+                {{#gt (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
+                findArguments: {
+                    {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+                    {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase (getPropertyName this) }}.value,
+                    {{/each}}
+                },
+                {{/gt}}
             },
         );
     }

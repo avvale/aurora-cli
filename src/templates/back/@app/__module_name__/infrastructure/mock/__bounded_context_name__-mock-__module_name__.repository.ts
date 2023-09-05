@@ -13,7 +13,6 @@ export class {{ toPascalCase schema.boundedContextName }}Mock{{ toPascalCase sch
     public readonly repository: any;
     public readonly aggregateName: string = '{{ schema.aggregateName }}';
     public collectionSource: {{ schema.aggregateName }}[];
-    public deletedAtInstance: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}DeletedAt = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}DeletedAt(null);
 
     constructor()
     {

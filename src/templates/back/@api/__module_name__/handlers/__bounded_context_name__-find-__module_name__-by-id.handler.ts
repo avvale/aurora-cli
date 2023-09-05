@@ -34,7 +34,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ) {}
 
     async main(
-        id: string,
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        {{/each}}
         {{#if schema.hasTenant}}
         account: AccountResponse,
         {{/if}}
@@ -59,7 +61,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
 
         {{/if}}
         return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
-            id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             constraint,
             {
                 timezone,

@@ -49,7 +49,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     @TenantConstraint()
     {{/if}}
     async main(
-        @Args('id') id: string,
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        @Args('{{ toCamelCase (getPropertyName this) }}') {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        {{/each}}
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
@@ -64,7 +66,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {
         return await this.handler.main(
-            id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             {{#if schema.hasTenant}}
             account,
             {{/if}}

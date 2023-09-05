@@ -106,37 +106,6 @@ export class CodeWriter
             `${this.boundedContextName.toPascalCase()}Sagas`,
         );
 
-        // pivot tables
-        for (const property of getRelationshipManyToManyProperties(properties))
-        {
-            ImportDriver.createImportItems(
-                sourceFile,
-                `./${this.moduleName.toKebabCase()}`,
-                [
-                    `${property.relationship?.pivot?.aggregateName}Model`,
-                    `${this.boundedContextName.toPascalCase()}I${property.relationship?.pivot?.moduleName.toPascalCase()}Repository`,
-                    `${this.boundedContextName.toPascalCase()}Sequelize${property.relationship?.pivot?.moduleName.toPascalCase()}Repository`,
-                ],
-            );
-
-            ArrayDriver.addArrayItem(
-                sourceFile,
-                `${property.relationship?.pivot?.aggregateName}Model`,
-                `${this.boundedContextName.toPascalCase()}Models`,
-            );
-
-            // repositories
-            ArrayDriver.addArrayItem(
-                sourceFile,
-                `
-{
-    provide : ${this.boundedContextName.toPascalCase()}I${property.relationship?.pivot?.moduleName.toPascalCase()}Repository,
-    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${property.relationship?.pivot?.moduleName.toPascalCase()}Repository
-}`,
-                `${this.boundedContextName.toPascalCase()}Repositories`,
-            );
-        }
-
         // add i18n registers
         if (hasI18nProperties(properties))
         {

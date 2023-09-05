@@ -1,10 +1,11 @@
 /* eslint-disable max-params */
 import { Command } from '@oclif/core';
-import { GenerateCommandState, LockFile, Property, TemplateElement } from '../types';
-import { FileManager } from './file-manager';
-import { AdditionalApi } from './additional-api';
+import * as chalk from 'chalk';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { LockFile, Property, TemplateElement } from '../types';
+import { AdditionalApi } from './additional-api';
+import { FileManager } from './file-manager';
 
 export class TemplateGenerator
 {
@@ -95,7 +96,7 @@ export class TemplateGenerator
     }
 
     /**
-     * @param {GenerateCommandState} generateCommandState Generate command state
+     * @param {Command} command - command
      * @param {string} relativeTargetBasePath Relative target base path
      * @param {string} relativeTargetPath Relative target path
      * @param {Property[]} valueObjects Value objects
@@ -103,28 +104,55 @@ export class TemplateGenerator
      * @returns void
      */
     static generateValueObjects(
-        generateCommandState: GenerateCommandState,
+        command: Command,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         valueObjects: Property[],
-        moduleName: string,
+        {
+            boundedContextName = '',
+            moduleName = '',
+            moduleNames = '',
+            force = false,
+            verbose = false,
+            excludeFiles = [],
+            lockFiles = [],
+            templateData = {},
+        }: {
+            boundedContextName?: string;
+            moduleName?: string;
+            moduleNames?: string;
+            force?: boolean;
+            verbose?: boolean;
+            excludeFiles?: string[];
+            lockFiles?: LockFile[];
+            templateData?: any;
+        } = {},
     ): void
     {
         // iterate properties to generate ValueObjects
         for (const property of valueObjects)
         {
             TemplateGenerator.generateValueObject(
-                generateCommandState,
+                command,
                 relativeTargetBasePath,
                 relativeTargetPath,
                 property,
-                moduleName,
+                {
+                    boundedContextName,
+                    moduleName,
+                    moduleNames,
+                    force,
+                    verbose,
+                    excludeFiles,
+                    lockFiles,
+                    templateData,
+                },
             );
         }
     }
 
     /**
-     * @param {GenerateCommandState} generateCommandState Generate command state
+     * @param {Command} command - command
      * @param {string} relativeTargetBasePath Relative target base path
      * @param {string} relativeTargetPath Relative target path
      * @param {Property} property Property
@@ -132,11 +160,29 @@ export class TemplateGenerator
      * @return void
      */
     static generateValueObject(
-        generateCommandState: GenerateCommandState,
+        command: Command,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
         property: Property,
-        moduleName: string,
+        {
+            boundedContextName = '',
+            moduleName = '',
+            moduleNames = '',
+            force = false,
+            verbose = false,
+            excludeFiles = [],
+            lockFiles = [],
+            templateData = {},
+        }: {
+            boundedContextName?: string;
+            moduleName?: string;
+            moduleNames?: string;
+            force?: boolean;
+            verbose?: boolean;
+            excludeFiles?: string[];
+            lockFiles?: LockFile[];
+            templateData?: any;
+        } = {},
     ): void
     {
         // read value object from our data type
@@ -147,25 +193,44 @@ export class TemplateGenerator
             '__bounded_context_name__-__module_name__-__property_name__.ts',
         );
 
-        // TODO, throw error when no exist value object
+        // get name of value object
+        const nameReplaced = FileManager.replaceFilename(
+            '__bounded_context_name__-__module_name__-__property_name__.ts',
+            {
+                boundedContextName,
+                moduleName,
+                moduleNames,
+                currentProperty: property,
+            },
+        );
+
+        // check if file to create is excluded in schema.
+        // schema may not exist if is a new project from master,
+        // when we have not yet created any bounded context or module
+        if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
+        {
+            command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+            return;
+        }
+
         // check that exists value object template
-        if (!fs.existsSync(originFilePath)) return;
+        if (!fs.existsSync(originFilePath)) throw new Error('Value object not exist, must to create template ' + originFilePath);
 
         FileManager.manageFileTemplate(
-            generateCommandState.command,
+            command,
             originFilePath,
             '__bounded_context_name__-__module_name__-__property_name__.ts',
             path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),
             {
-                force             : generateCommandState.flags.force,
-                verbose           : generateCommandState.flags.verbose,
-                templateData      : { ...generateCommandState },
-                moduleNameSuffix  : property.isI18n ? 'i18n' : '',
-                currentProperty   : property,
-                boundedContextName: generateCommandState.schema.boundedContextName,
-                moduleName        : generateCommandState.schema.moduleName,
-                moduleNames       : generateCommandState.schema.moduleNames,
-                lockFiles         : generateCommandState.lockFiles,
+                moduleNameSuffix: property.isI18n ? 'i18n' : '',
+                currentProperty : property,
+                boundedContextName,
+                moduleName,
+                moduleNames,
+                force,
+                verbose,
+                lockFiles,
+                templateData,
             },
         );
     }

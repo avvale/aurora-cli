@@ -1,6 +1,8 @@
 import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
+{{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from './value-objects';
+{{/eq}}
 
 export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository implements IRepository<{{ schema.aggregateName }}>
 {
@@ -26,10 +28,12 @@ export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCa
 
     // find a single record by id
     abstract findById(
-        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
+        id: {{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id{{else}}undefined{{/eq}},
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<{{ schema.aggregateName }} | null>;
 
@@ -119,11 +123,13 @@ export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCa
 
     // delete record
     abstract deleteById(
-        id: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id,
+        id: {{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id{{else}}undefined{{/eq}},
         options?: {
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

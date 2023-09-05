@@ -55,14 +55,16 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         private readonly handler: {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdHandler,
     ) {}
 
-    @Delete(':id')
+    @Delete('{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}:{{ toCamelCase (getPropertyName this) }}{{#unless @last}}/{{/unless}}{{/each}}')
     @ApiOperation({ summary: 'Delete {{ toKebabCase schema.moduleName }} by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
     @TenantConstraint()
     {{/if}}
     async main(
-        @Param('id') id: string,
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        @Param('{{ toCamelCase (getPropertyName this) }}') {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        {{/each}}
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
         {{/if}}
@@ -77,7 +79,9 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     )
     {
         return await this.handler.main(
-            id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             {{#if schema.hasTenant}}
             account,
             {{/if}}

@@ -1,16 +1,16 @@
-import * as path from 'node:path';
 import { cliterConfig } from '../../config';
-import { GenerateCommandState, TemplateElement } from '../../types';
+import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
 import { TemplateGenerator, hasI18nProperties } from '../../utils';
+import * as path from 'node:path';
 
-export const generateI18nApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateAppI18nFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (hasI18nProperties(generateCommandState.schema.aggregateProperties))
     {
         await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
-            TemplateElement.BACK_I18N_API,
-            path.join('src', cliterConfig.apiContainer),
+            TemplateElement.BACK_I18N_APP,
+            path.join('src', cliterConfig.appContainer),
             generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
             {
                 boundedContextName: generateCommandState.schema.boundedContextName,
@@ -20,7 +20,10 @@ export const generateI18nApiFiles = async (generateCommandState: GenerateCommand
                 verbose           : generateCommandState.flags.verbose,
                 excludeFiles      : generateCommandState.schema.excluded,
                 lockFiles         : generateCommandState.lockFiles,
-                templateData      : { ...generateCommandState },
+                templateData      : {
+                    ...generateCommandState,
+                    relationshipType: RelationshipType,
+                },
             },
         );
     }

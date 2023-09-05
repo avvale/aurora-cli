@@ -173,7 +173,7 @@ export interface RelationshipPivot
     moduleName: string;
     moduleNames: string;
     aggregateName: string;
-    properties: Property[];
+    aggregateProperties: Property[];
 }
 
 export enum RelationshipType
@@ -217,7 +217,6 @@ export enum TemplateElement
     BACK_APPLICATION          = 'back/application',
     BACK_BOUNDED_CONTEXT      = 'back/bounded-context',
     BACK_ENV                  = 'back/env',
-    BACK_I18N_API             = 'back/i18n-@api',
     BACK_I18N_APP             = 'back/i18n-@app',
     BACK_PIVOT                = 'back/pivot',
     BACK_PACKAGE              = 'back/package',

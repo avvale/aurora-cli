@@ -78,31 +78,12 @@ export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 export { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}I18nRepository } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-i18n.repository';
 {{/if}}
-{{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-{{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase relationship.singularName) '.aggregate.ts'}}
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase relationship.singularName }} } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-{{ toKebabCase relationship.singularName }}.aggregate';
-{{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase relationship.singularName) '.mapper.ts'}}
-export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}{{ toPascalCase relationship.singularName }}Mapper } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-{{ toKebabCase relationship.singularName }}.mapper';
-{{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '-' (toKebabCase relationship.singularName) '.repository.ts'}}
-export { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}{{ toPascalCase relationship.singularName }}Repository } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-{{ toKebabCase relationship.singularName }}.repository';
-{{/notInArray}}
-{{/if}}
-{{/each}}
 
 // infrastructure
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Model } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.model';
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}I18nModel } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.model';
 {{/if}}
-{{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-{{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-export { {{ relationship.pivot.aggregate }}Model } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-{{ toKebabCase relationship.singularName }}.model';
-export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}{{ toPascalCase relationship.singularName }}Repository  } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-{{ toKebabCase relationship.singularName }}.repository';
-{{/if}}
-{{/each}}
 export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}Repository } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}.repository';
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 export { {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}I18nRepository } from './infrastructure/sequelize/{{ toKebabCase schema.boundedContextName }}-sequelize-{{ toKebabCase schema.moduleName }}-i18n.repository';
@@ -138,13 +119,6 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler } from './application/delete/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.command-handler';
 {{/notInArray}}
-{{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-{{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.command-handler.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}CommandHandler } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase name }}.command-handler';
-{{/notInArray}}
-{{/if}}
-{{/each}}
 
 // query handlers
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/paginate/' (toKebabCase schema.boundedContextName) '-paginate-' (toKebabCase schema.moduleNames) '.query-handler.ts'}}
@@ -225,13 +199,6 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/' (toKebabCase schema.boundedContextName) '-delete/delete-' (toKebabCase schema.moduleNames) '.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service } from './application/delete/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.service';
 {{/notInArray}}
-{{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-{{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.service.ts'}}
-import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}Service } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}-{{ toKebabCase name }}.service';
-{{/notInArray}}
-{{/if}}
-{{/each}}
 
 export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Handlers = [
     // commands
@@ -261,13 +228,6 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}CommandHandler,
     {{/notInArray}}
-    {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-    {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.command-handler.ts'}}
-    {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}CommandHandler,
-    {{/notInArray}}
-    {{/if}}
-    {{/each}}
 
     // queries
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/paginate/' (toKebabCase schema.boundedContextName) '-paginate-' (toKebabCase schema.moduleNames) '.query-handler.ts'}}
@@ -349,11 +309,4 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Service,
     {{/notInArray}}
-    {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-    {{#if (isPivotPath this ../schema.boundedContextName ../schema.moduleName)}}
-    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '-' (toKebabCase name) '.service.ts'}}
-    {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}{{ toPascalCase name }}Service,
-    {{/notInArray}}
-    {{/if}}
-    {{/each}}
 ];

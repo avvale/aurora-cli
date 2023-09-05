@@ -4,11 +4,6 @@
             (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
             (
                 object
-                    items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id'))
-                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
-            )
-            (
-                object
                     items=
                     (
                         array
@@ -25,6 +20,16 @@
             )
     )
 ~}}
+{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+        )
+~}}
+{{/each}}
 {{{ importManager (object imports=importsArray) }}}
 @QueryHandler({{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery)
 export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQueryHandler implements IQueryHandler<{{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery>
@@ -38,7 +43,9 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     async execute(query: {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response>
     {
         const {{ toCamelCase schema.moduleName }} = await this.find{{ toPascalCase schema.moduleName }}ByIdService.main(
-            new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id(query.id),
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase (getPropertyName this) }}(query.{{ toCamelCase (getPropertyName this) }}),
+            {{/each}}
             query.constraint,
             query.cQMetadata,
         );

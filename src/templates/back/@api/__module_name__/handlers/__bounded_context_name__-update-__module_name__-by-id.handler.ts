@@ -70,7 +70,9 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
         {{/if}}
         const {{ toCamelCase schema.moduleName }} = await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
-            payload.id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            payload.{{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             {{#if (hasI18nProperties schema.aggregateProperties) }}
             constraintToFindById,
             {{else}}
@@ -90,11 +92,11 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdCommand(
             {
                 ...dataToUpdate,
+                {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+                {{ toCamelCase (getPropertyName this) }}: payload.{{ toCamelCase (getPropertyName this) }},
+                {{/each}}
                 {{#if (hasI18nProperties schema.aggregateProperties) }}
-                id    : payload.id,
                 langId: contentLanguageObject.id,
-                {{else}}
-                id: payload.id,
                 {{/if}}
             },
             constraint,
@@ -114,7 +116,9 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         ));
 
         return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdQuery(
-            payload.id,
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            payload.{{ toCamelCase (getPropertyName this) }},
+            {{/each}}
             {{#if (hasI18nProperties schema.aggregateProperties) }}
             constraintToFindById,
             {{else}}
