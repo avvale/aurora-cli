@@ -1,6 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  CommonCreateAdministrativeAreasLevel2Command
+export class CommonCreateAdministrativeAreasLevel2Command
 {
     constructor(
         public readonly payload: {

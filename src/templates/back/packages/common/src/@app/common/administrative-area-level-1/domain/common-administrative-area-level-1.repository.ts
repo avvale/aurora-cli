@@ -30,6 +30,8 @@ export abstract class CommonIAdministrativeAreaLevel1Repository implements IRepo
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<CommonAdministrativeAreaLevel1 | null>;
 
@@ -124,6 +126,8 @@ export abstract class CommonIAdministrativeAreaLevel1Repository implements IRepo
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

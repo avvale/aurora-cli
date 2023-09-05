@@ -26,7 +26,6 @@ export class CommonMockAdministrativeAreaLevel2Repository extends MockRepository
     public readonly repository: any;
     public readonly aggregateName: string = 'CommonAdministrativeAreaLevel2';
     public collectionSource: CommonAdministrativeAreaLevel2[];
-    public deletedAtInstance: CommonAdministrativeAreaLevel2DeletedAt = new CommonAdministrativeAreaLevel2DeletedAt(null);
 
     constructor()
     {

@@ -85,7 +85,7 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
         this.administrativeAreaLevel1 = administrativeAreaLevel1;
     }
 
-    static register (
+    static register(
         id: CommonAdministrativeAreaLevel2Id,
         countryId: CommonAdministrativeAreaLevel2CountryId,
         administrativeAreaLevel1Id: CommonAdministrativeAreaLevel2AdministrativeAreaLevel1Id,

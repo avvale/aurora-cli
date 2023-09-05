@@ -23,6 +23,8 @@ aggregateProperties:
       key: id
       field: resource
       avoidConstraint: true
+    webComponent:
+      type: select
   - name: name
     type: varchar
     maxLength: 100

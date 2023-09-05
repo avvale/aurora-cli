@@ -25,7 +25,6 @@ export class CommonMockLangRepository extends MockRepository<CommonLang> impleme
     public readonly repository: any;
     public readonly aggregateName: string = 'CommonLang';
     public collectionSource: CommonLang[];
-    public deletedAtInstance: CommonLangDeletedAt = new CommonLangDeletedAt(null);
 
     constructor()
     {

@@ -35,7 +35,6 @@ export class CommonMockCountryRepository extends MockRepository<CommonCountry> i
     public readonly repository: any;
     public readonly aggregateName: string = 'CommonCountry';
     public collectionSource: CommonCountry[];
-    public deletedAtInstance: CommonCountryDeletedAt = new CommonCountryDeletedAt(null);
 
     constructor()
     {

@@ -117,7 +117,7 @@ export class CommonCountry extends AggregateRoot
         this.lang = lang;
     }
 
-    static register (
+    static register(
         id: CommonCountryId,
         iso3166Alpha2: CommonCountryIso3166Alpha2,
         iso3166Alpha3: CommonCountryIso3166Alpha3,

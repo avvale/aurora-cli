@@ -1,6 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  CommonCreateAttachmentFamiliesCommand
+export class CommonCreateAttachmentFamiliesCommand
 {
     constructor(
         public readonly payload: {

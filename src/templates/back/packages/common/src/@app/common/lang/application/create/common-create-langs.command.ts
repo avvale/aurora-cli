@@ -1,6 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  CommonCreateLangsCommand
+export class CommonCreateLangsCommand
 {
     constructor(
         public readonly payload: {

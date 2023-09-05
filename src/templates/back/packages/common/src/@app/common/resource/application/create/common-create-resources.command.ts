@@ -1,6 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  CommonCreateResourcesCommand
+export class CommonCreateResourcesCommand
 {
     constructor(
         public readonly payload: {

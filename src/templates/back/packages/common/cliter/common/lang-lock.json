@@ -35,7 +35,7 @@
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-langs.command.ts",
-            "integrity": "sha1:8c8059d6b542409316a6f76fe428a8c08e0b79bc"
+            "integrity": "sha1:9f479b39d38348b75f99720217a6675b33b34cd3"
         },
         {
             "path": "src/@app/common/lang/application/create/common-create-langs.service.spec.ts",
@@ -303,7 +303,7 @@
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.aggregate.ts",
-            "integrity": "sha1:3ede0f9efe24bd80079151d17b2c41d3d5cbf78d"
+            "integrity": "sha1:d357a5cd01f25aa7d51bb9aee910e1ba20c5dad3"
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.mapper.ts",
@@ -311,7 +311,7 @@
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.repository.ts",
-            "integrity": "sha1:47d8471aa616a4502535d28bd0d958414c589af7"
+            "integrity": "sha1:5c85759d89f489225a72b8d9a08ed31a6949d678"
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.response.ts",
@@ -327,11 +327,11 @@
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.data.ts",
-            "integrity": "sha1:8599427e57a96174f3bf55f970086f3e2b054c7c"
+            "integrity": "sha1:bbe9e55782f21d3f58536ec3c20906d297d572f9"
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.repository.ts",
-            "integrity": "sha1:7311411427a8f7bd9b340cdf5447930e00e3e44e"
+            "integrity": "sha1:3fcbbd1ed1d4fd814a781854bde2bd9da0182384"
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.seeder.ts",
@@ -703,7 +703,7 @@
         },
         {
             "path": "postman/common/common.lang.postman.json",
-            "integrity": "sha1:25fde723362082fe676bd8ad4f10e78c2ca6ade2"
+            "integrity": "sha1:0527636604b2212a3955dab980ea6d550fc3bf40"
         }
     ]
 }

@@ -30,6 +30,8 @@ export abstract class CommonICountryRepository implements IRepository<CommonCoun
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<CommonCountry | null>;
 
@@ -124,6 +126,8 @@ export abstract class CommonICountryRepository implements IRepository<CommonCoun
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

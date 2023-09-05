@@ -53,7 +53,7 @@ export class CommonResource extends AggregateRoot
         // eager relationship
     }
 
-    static register (
+    static register(
         id: CommonResourceId,
         code: CommonResourceCode,
         name: CommonResourceName,

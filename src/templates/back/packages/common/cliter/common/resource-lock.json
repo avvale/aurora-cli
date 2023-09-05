@@ -35,7 +35,7 @@
         },
         {
             "path": "src/@app/common/resource/application/create/common-create-resources.command.ts",
-            "integrity": "sha1:1129e67b1fa200923394bdd20f6ec61f92c7d528"
+            "integrity": "sha1:645f1430c65c5b168ac6e2d198677f6c132827ba"
         },
         {
             "path": "src/@app/common/resource/application/create/common-create-resources.service.spec.ts",
@@ -303,7 +303,7 @@
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.aggregate.ts",
-            "integrity": "sha1:0bfd79d9893e657f293ac59a00621b85bd923823"
+            "integrity": "sha1:355d032decd5b45917f115377848004c6cb7c95c"
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.mapper.ts",
@@ -311,7 +311,7 @@
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.repository.ts",
-            "integrity": "sha1:6bd9b85fefc19fcea45424a26e669840320efe22"
+            "integrity": "sha1:0a7e80af676ca2cc98f0ae918cf7ad1dc9cf10a6"
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.response.ts",
@@ -327,11 +327,11 @@
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.data.ts",
-            "integrity": "sha1:4c812b3219541719ca1945c2ec3ff9db24ce5050"
+            "integrity": "sha1:c5f11b13110302b22ca486f4990db02d15ff3479"
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.repository.ts",
-            "integrity": "sha1:80b3a1fe51f87e4ec00d91a44e5e7d54c96cafb4"
+            "integrity": "sha1:88631f5bf7066d89634ae3e1c3cd257da17a77ba"
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.seeder.ts",
@@ -683,7 +683,7 @@
         },
         {
             "path": "postman/common/common.resource.postman.json",
-            "integrity": "sha1:35657fb81831f3de3a45473c29d285b02a0fc3f3"
+            "integrity": "sha1:fd67a646a96ea0ffb823da36aff259e439a5c442"
         }
     ]
 }

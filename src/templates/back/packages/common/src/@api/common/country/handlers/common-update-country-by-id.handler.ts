@@ -49,7 +49,7 @@ export class CommonUpdateCountryByIdHandler
         await this.commandBus.dispatch(new CommonUpdateCountryByIdCommand(
             {
                 ...dataToUpdate,
-                id    : payload.id,
+                id: payload.id,
                 langId: contentLanguageObject.id,
             },
             constraint,

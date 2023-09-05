@@ -24,7 +24,6 @@ export class CommonMockAttachmentFamilyRepository extends MockRepository<CommonA
     public readonly repository: any;
     public readonly aggregateName: string = 'CommonAttachmentFamily';
     public collectionSource: CommonAttachmentFamily[];
-    public deletedAtInstance: CommonAttachmentFamilyDeletedAt = new CommonAttachmentFamilyDeletedAt(null);
 
     constructor()
     {

@@ -20,7 +20,6 @@ export class CommonMockResourceRepository extends MockRepository<CommonResource>
     public readonly repository: any;
     public readonly aggregateName: string = 'CommonResource';
     public collectionSource: CommonResource[];
-    public deletedAtInstance: CommonResourceDeletedAt = new CommonResourceDeletedAt(null);
 
     constructor()
     {

@@ -35,7 +35,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-1/application/create/common-create-administrative-areas-level-1.command.ts",
-            "integrity": "sha1:eae05371792b01954be5df5d4b41ebac3181fe25"
+            "integrity": "sha1:8372a3b11c0e2d06651742fef1fbef8bf943dc2e"
         },
         {
             "path": "src/@app/common/administrative-area-level-1/application/create/common-create-administrative-areas-level-1.service.spec.ts",
@@ -303,7 +303,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-1/domain/common-administrative-area-level-1.aggregate.ts",
-            "integrity": "sha1:bbecdbe4d3616e787859201e3cb74f863485b4f6"
+            "integrity": "sha1:ba905fd79233e28b9a81da7b0aa13b48805ba05e"
         },
         {
             "path": "src/@app/common/administrative-area-level-1/domain/common-administrative-area-level-1.mapper.ts",
@@ -311,7 +311,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-1/domain/common-administrative-area-level-1.repository.ts",
-            "integrity": "sha1:4dfc67ef35cfb3158572e820652ea2509163916d"
+            "integrity": "sha1:03105c19f7e0d7994cd690135b52fc8d8044abac"
         },
         {
             "path": "src/@app/common/administrative-area-level-1/domain/common-administrative-area-level-1.response.ts",
@@ -327,11 +327,11 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.data.ts",
-            "integrity": "sha1:add4f817f42ba2eaef14e7bdde83b41084b61e60"
+            "integrity": "sha1:c0485da50d3c4768845f1ee2246834003f27e6b3"
         },
         {
             "path": "src/@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.repository.ts",
-            "integrity": "sha1:c5942f3f6520710e56b42171f48061dfca05c2dd"
+            "integrity": "sha1:4ea7e44e7bd6ca7e0bd3ecef1ca1efb23e803bab"
         },
         {
             "path": "src/@app/common/administrative-area-level-1/infrastructure/mock/common-mock-administrative-area-level-1.seeder.ts",
@@ -703,7 +703,7 @@
         },
         {
             "path": "postman/common/common.administrative-area-level-1.postman.json",
-            "integrity": "sha1:a27e30d1717702165bc17e0d8caa2979de0b6c66"
+            "integrity": "sha1:e84c4c99cc8416c7b73b02e6385845b7880a6be1"
         }
     ]
 }

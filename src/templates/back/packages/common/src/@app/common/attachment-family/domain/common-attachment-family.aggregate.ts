@@ -73,7 +73,7 @@ export class CommonAttachmentFamily extends AggregateRoot
         this.resource = resource;
     }
 
-    static register (
+    static register(
         id: CommonAttachmentFamilyId,
         resourceId: CommonAttachmentFamilyResourceId,
         name: CommonAttachmentFamilyName,

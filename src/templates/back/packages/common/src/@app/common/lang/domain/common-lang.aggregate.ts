@@ -73,7 +73,7 @@ export class CommonLang extends AggregateRoot
         // eager relationship
     }
 
-    static register (
+    static register(
         id: CommonLangId,
         name: CommonLangName,
         image: CommonLangImage,
