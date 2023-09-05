@@ -1,17 +1,16 @@
-import * as _ from 'lodash';
-
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Injetable') path='@nest/common')
+            (object items=(array 'Injectable') path='@nestjs/common')
             (object items=(array 'MockSeeder') path=config.auroraCorePackage)
+            (object items='* as _' path='lodash' defaultImport=true)
             (
                 object
                     items=
                     (
                         array
                             (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
-                            (sumStrings (toPascalCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
+                            (sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
                     )
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )

@@ -3,15 +3,8 @@
         array
             (object items=(array 'CQMetadata' 'IRepository' 'LiteralObject' 'Pagination' 'QueryStatement') path=config.auroraCorePackage)
             (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id') path='../value-objects')
-            (
-                object
-                    items=
-                    (
-                        array
-                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id')
-                    )
-                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-            )
+            (object items=(array (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id'))
+            path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{{ importManager (object imports=importsArray) }}}

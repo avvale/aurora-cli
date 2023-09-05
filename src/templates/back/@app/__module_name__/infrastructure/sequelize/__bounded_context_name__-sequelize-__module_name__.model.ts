@@ -8,25 +8,14 @@
     )
 ~}}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-{{#if relationship.packageName}}
 {{
     push ../importsArray
         (
             object
                 items=(sumStrings relationship.aggregateName 'Model')
-                path=relationship.packageName
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-                items=(sumStrings (relationship.aggregateName) 'Model')
-                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
-        )
-~}}
-{{/if}}
 {{/each}}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
@@ -35,31 +24,20 @@
         (
             object
                 items=(sumStrings relationship.aggregateName 'Model')
-                path=(if relationship.packageName 'si' else 'no')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
 {{/unless}}
 {{/each}}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-{{#if relationship.packageName}}
 {{
     push ../importsArray
         (
             object
                 items=(sumStrings relationship.aggregateName 'Model')
-                path=relationship.packageName
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-                items=(sumStrings relationship.aggregateName 'Model')
-                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
-        )
-~}}
-{{/if}}
 {{/each}}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
 {{
@@ -67,7 +45,7 @@
         (
             object
                 items=(sumStrings relationship.aggregateName 'Model')
-                path=(if relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
         (
             object

@@ -1,89 +1,45 @@
 {{ setVar 'importsArray' (array) ~}}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-{{#if relationship.packageName}}
 {{
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=relationship.packageName
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-            items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
-        )
-~}}
-{{/if}}
 {{/each}}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-{{#if relationship.packageName}}
 {{
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=relationship.packageName
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
-        )
-~}}
-{{/if}}
 {{/unless}}
 {{/each}}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-{{#if relationship.packageName}}
 {{
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=relationship.packageName
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-            items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
-        )
-~}}
-{{/if}}
 {{/each}}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
-{{#if relationship.packageName}}
 {{
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=relationship.packageName
+                items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-            items=(sumStrings (toPascalCase schema.getRelationshipBoundedContextNameProperty) (toPascalCase schema.getRelationshipModuleNameProperty))
-                path=(sumStrings ../config.appContainer '/' relationship.modulePath)
-        )
-~}}
-{{/if}}
 {{/each}}
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response

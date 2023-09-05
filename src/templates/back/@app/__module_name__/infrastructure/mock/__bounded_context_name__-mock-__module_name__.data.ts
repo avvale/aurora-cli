@@ -1,12 +1,20 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+{{ setVar 'importsArray' (array) ~}}
+{{#if (hasEnumProperties schema.aggregateProperties) }}
+{{#each (getEnumProperties schema.aggregateProperties) }}
+{{#unless first}}
 {{
-    setVar 'importsArray' (
-        array
-            (object items=(array 'CQMetadata' 'IMapper' 'LiteralObject' 'MapperOptions') path=config.auroraCorePackage)
-
-    )
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase name))
+                path='@api/graphql'
+        )
 ~}}
+{{/unless}}
+{{/each}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data = [
     {{#loops 20}}
