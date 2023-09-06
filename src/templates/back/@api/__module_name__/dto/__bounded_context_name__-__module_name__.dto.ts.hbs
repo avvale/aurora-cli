@@ -47,6 +47,18 @@
         )
 ~}}
 {{/each}}
+{{#if (hasPivotProperties schema.aggregateProperties) }}
+{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship modulePath) 'Dto')
+                path=(sumStrings ../config.apiContainer '/' modulePath)
+        )
+~}}
+{{/each}}
+{{/if}}
 {{#if (hasEnumProperties schema.aggregateProperties) }}
 {{#each (getEnumProperties schema.aggregateProperties) }}
 {{
