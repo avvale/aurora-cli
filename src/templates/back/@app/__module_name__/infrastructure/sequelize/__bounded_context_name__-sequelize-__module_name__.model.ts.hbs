@@ -47,6 +47,7 @@ import { {{ aggregateName }}Model } from '{{#if ../currentProperty.relationship.
 })
 export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateName }}Model>
 {
+    {{! Start auditing }}
     {{#if schema.hasAuditing}}
     @AfterCreate
     static auditingCreate(instance: {{ schema.aggregateName }}Model, options): void

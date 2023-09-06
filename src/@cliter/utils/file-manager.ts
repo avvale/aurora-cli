@@ -44,6 +44,9 @@ export class FileManager
         } = {},
     ): string
     {
+        // remove .hbs extension
+        if (name.endsWith('.hbs')) name = name.replace(/\.hbs$/, '');
+
         if (name.includes('__bounded_context_name__'))
         {
             if (boundedContextName === '') throw new Error('Variable boundedContextName is required to replace __bounded_context_name__ in filename');
