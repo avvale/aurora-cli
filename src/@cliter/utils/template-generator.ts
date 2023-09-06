@@ -190,12 +190,12 @@ export class TemplateGenerator
             TemplateGenerator.templatePath,
             ...TemplateElement.BACK_VALUE_OBJECT.split('/'),
             property.type,
-            '__bounded_context_name__-__module_name__-__property_name__.ts',
+            '__bounded_context_name__-__module_name__-__property_name__.ts.hbs',
         );
 
         // get name of value object
         const nameReplaced = FileManager.replaceFilename(
-            '__bounded_context_name__-__module_name__-__property_name__.ts',
+            '__bounded_context_name__-__module_name__-__property_name__.ts.hbs',
             {
                 boundedContextName,
                 moduleName,
@@ -216,10 +216,10 @@ export class TemplateGenerator
         // check that exists value object template
         if (!fs.existsSync(originFilePath)) throw new Error('Value object not exist, must to create template ' + originFilePath);
 
-        FileManager.manageFileTemplate(
+        FileManager.manageTemplateFile(
             command,
             originFilePath,
-            '__bounded_context_name__-__module_name__-__property_name__.ts',
+            '__bounded_context_name__-__module_name__-__property_name__.ts.hbs',
             path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),
             {
                 moduleNameSuffix: property.isI18n ? 'i18n' : '',

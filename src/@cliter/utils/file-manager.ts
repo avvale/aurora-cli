@@ -173,6 +173,8 @@ export class FileManager
         for (const file of filesToCreate)
         {
             const originFilePath = path.join(originPath, file);
+
+            // replace filename wildcards by bounded context name and module name, and remove .hbs extension
             const nameReplaced = FileManager.replaceFilename(
                 file,
                 {
@@ -207,7 +209,7 @@ export class FileManager
                 }
 
                 // generate file template
-                FileManager.manageFileTemplate(
+                FileManager.manageTemplateFile(
                     command,
                     originFilePath,
                     file,
@@ -273,7 +275,7 @@ export class FileManager
      * @param {string} currentProperty - property to render value object or pivot table
      * @returns void
      */
-    static async manageFileTemplate(
+    static async manageTemplateFile(
         command: Command,
         originFilePath: string,
         file: string,
@@ -313,8 +315,8 @@ export class FileManager
         } = {},
     ): Promise<void>
     {
-        // render filename according to bounded context name and module name
-        const mappedFile = FileManager.replaceFilename(
+        // replace filename wildcards by bounded context name and module name, and remove .hbs extension
+        const nameReplaced = FileManager.replaceFilename(
             file,
             {
                 boundedContextName,
@@ -330,7 +332,7 @@ export class FileManager
         );
 
         // relative path with file to create, example: src/@app/common/lang/application/create/create-lang.command.ts
-        const relativeFilePath = path.join(relativeTargetPath, mappedFile);
+        const relativeFilePath = path.join(relativeTargetPath, nameReplaced);
 
         // absolute path with file to create, example /Projects/aurora/src/@app/common/lang/application/create/create-lang.command.ts
         const writePath = path.join(targetBasePath, relativeFilePath);
@@ -338,17 +340,17 @@ export class FileManager
         // check if file exists
         const existFile = fs.existsSync(writePath);
 
-        // avoid render files like images, this image only will be copied
-        if (!cliterConfig.allowedRenderExtensions.includes(path.extname(originFilePath)))
+        // avoid render files like images, this image only will be copied, before check, delete .hbs extension
+        if (!cliterConfig.allowedRenderExtensions.includes(path.extname(originFilePath.replace(/\.hbs$/, ''))))
         {
             if (existFile && !force)
             {
-                command.log(`%s ${mappedFile} exist`,  chalk.yellow.bold('[INFO]'));
+                command.log(`%s ${nameReplaced} exist`,  chalk.yellow.bold('[INFO]'));
             }
             else
             {
                 fs.copyFileSync(originFilePath, writePath, fs.constants.COPYFILE_FICLONE);
-                command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE COPIED]'));
+                command.log(`%s ${nameReplaced}`, chalk.green.bold('[FILE COPIED]'));
             }
 
             return;
@@ -378,7 +380,7 @@ export class FileManager
         // if exist file is has not force flag, avoid overwrite file
         if (existFile && !force)
         {
-            command.log(`%s ${mappedFile} exist`, chalk.yellow.bold('[INFO]'));
+            command.log(`%s ${nameReplaced} exist`, chalk.yellow.bold('[INFO]'));
         }
         else
         {
@@ -401,14 +403,14 @@ export class FileManager
                     currentFileFirstLineHash === cliterConfig.fileTags.ignoredHtmlFile
                 )
                 {
-                    command.log(`%s ${mappedFile}`, chalk.cyanBright.bold('[IGNORED FILE]'));
+                    command.log(`%s ${nameReplaced}`, chalk.cyanBright.bold('[IGNORED FILE]'));
                 }
                 else if (!currentLockfile || currentLockfile.integrity === `sha1:${currentFileHash}`)
                 {
                     // the file has been modified
                     fs.writeFileSync(writePath, contents, 'utf8');
 
-                    if (verbose) command.log(`%s ${mappedFile}`, chalk.magenta.bold('[FILE OVERWRITE]'));
+                    if (verbose) command.log(`%s ${nameReplaced}`, chalk.magenta.bold('[FILE OVERWRITE]'));
                 }
                 else
                 {
@@ -419,7 +421,7 @@ export class FileManager
                         'utf8',
                     );
 
-                    const originFileName = mappedFile.replace(/\.(?=[^.]*$)/, '.origin.');
+                    const originFileName = nameReplaced.replace(/\.(?=[^.]*$)/, '.origin.');
 
                     // save origin files in global state to be checked after in reviewOverwrites method
                     if (GlobalState.hasValue('originFiles'))
@@ -449,7 +451,7 @@ export class FileManager
             {
                 fs.writeFileSync(writePath, contents, 'utf8');
 
-                command.log(`%s ${mappedFile}`, chalk.green.bold('[FILE CREATED]'));
+                command.log(`%s ${nameReplaced}`, chalk.green.bold('[FILE CREATED]'));
             }
 
             // adapt separator from current OS
