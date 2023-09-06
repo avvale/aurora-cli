@@ -1,3 +1,3 @@
-export { CodeWriter } from './code-writer';
-export { Installer } from './installer';
+export * from './code-writer';
+export * from './installer';
 export * from './drivers';

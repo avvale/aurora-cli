@@ -195,7 +195,7 @@ export class FileManager
                     fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) &&
                     force &&
                     cliterConfig.avoidOverwritingFilesIfExist.includes(
-                        path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file).split(path.sep)),
+                        path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file.replace(/\.hbs$/, '')).split(path.sep)),
                     )
                 ) continue;
 

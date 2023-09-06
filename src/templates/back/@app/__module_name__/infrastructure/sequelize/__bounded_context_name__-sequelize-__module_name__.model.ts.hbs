@@ -197,23 +197,31 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{/if}}
     {{#if (hasHasOneDecoratorProperty this) }}
 
-    @HasOne(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
-        {{#if relationship.avoidConstraint }}
+    @HasOne(() => {{ relationship.aggregateName }}Model{{#if relationship.avoidConstraint }}, {
         constraints: false,
-        {{/if}}
-    }{{/or}})
+    }{{/if}})
     {{ toCamelCase (getPropertyName this) }}: {{ relationship.aggregateName }}Model;
     {{/if}}
-    {{#if (hasHasBelongsToDecoratorProperty this) }}
+    {{#if (hasBelongsToDecoratorProperty this) }}
 
-    @BelongsTo(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
+    @BelongsTo(() => {{ relationship.aggregateName }}Model, {
         {{#if relationship.avoidConstraint }}
         constraints: false,
         {{/if}}
         foreignKey: '{{ toCamelCase (getPropertyName this) }}',
-    }{{/or}})
+    })
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}Model;
     {{/if}}
+    {{! START - add @BelongsTo for pivot table model }}
+    {{#if (isPivotProperty this) }}
+
+    @BelongsTo(() => {{ aggregateName }}Model, {
+        constraints: false,
+        foreignKey: '{{ toCamelCase (getPropertyName this) }}',
+    })
+    {{ toCamelCase (getModuleNameFromPropertyRelationship modulePath) }}: {{ aggregateName }}Model;
+    {{/if}}
+    {{! END - add @BelongsTo for pivot table model }}
     {{#if (hasHasManyDecoratorProperty this) }}
 
     @HasMany(() => {{ relationship.aggregateName }}Model{{#or relationship.key relationship.avoidConstraint }}, {

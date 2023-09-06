@@ -1,4 +1,5 @@
 import { Property, PropertyIndex, PropertyType, RelationshipType, WebComponentType } from '../types';
+import { isPivotProperty } from './property.functions';
 
 /*********
  * CONST *
@@ -166,6 +167,18 @@ export const getMockProperties = (
     return properties
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
+};
+
+export const hasPivotProperties = (
+    properties: Property[],
+): boolean =>
+{
+    for (const property of properties)
+    {
+        if (isPivotProperty(property)) return true;
+    }
+
+    return false;
 };
 
 /*************

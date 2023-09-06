@@ -195,7 +195,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     }{{/or}})
     {{ toCamelCase (getPropertyName this) }}: {{ relationship.aggregateName }}Model;
     {{/if}}
-    {{#if (hasHasBelongsToDecoratorProperty this) }}
+    {{#if (hasBelongsToDecoratorProperty this) }}
 
     @BelongsTo(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}

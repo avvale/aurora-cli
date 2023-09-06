@@ -39,37 +39,37 @@
 {{/unlessEq}}
 {{/unlessEq}}
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
-    (object items=(getAggregateNameFromPropertyRelationship this ../schema) path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) '.types'))
-    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship this)) 'Service') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '.service'))
+    (object items=(getAggregateNameFromPropertyRelationship relationship.modulePath)) path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '.types'))
+    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=(getAggregateNameFromPropertyRelationship this ../schema) path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) '.types'))
-    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship this)) 'Service') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '.service'))
+    (object items=(getAggregateNameFromPropertyRelationship relationship.modulePath)) path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '.types'))
+    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship this)) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '.columns-config'))
+    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship this)) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '.columns-config'))
+    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) (toKebabCase ../schema.boundedContextName)}}
+{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) (toKebabCase ../schema.boundedContextName)}}
 {{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship this)) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '.columns-config'))
+    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship this)) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '/' (toKebabCase (getModuleNameFromPropertyRelationship this)) '.columns-config'))
+    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
 ~}}
 {{/eq}}
 {{/each}}
@@ -103,15 +103,15 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // relationships
     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
     {{#eq webComponent.type 'select'}}
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}$: Observable<{{ getAggregateNameFromPropertyRelationship this ../schema }}[]>;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$: Observable<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[]>;
     {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
-    /* #region  variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship this) }} */
-    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}GridElementSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Component: GridSelectElementComponent;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridList';
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship this ../schema }}>>;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}ColumnsConfig$: Observable<ColumnConfig[]>;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}OriginColumnsConfig: ColumnConfig[] = [
+    /* #region  variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
+    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectElementComponent;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OriginColumnsConfig: ColumnConfig[] = [
         {
             type   : ColumnDataType.ACTIONS,
             field  : 'Actions',
@@ -120,7 +120,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {
                 return [
                     {
-                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                         isViewAction: false,
                         translation : 'select',
                         icon        : 'add_link',
@@ -128,19 +128,19 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 ];
             },
         },
-        ...{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnsConfig,
+        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
     ];
-    /* #endregion variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship this) }} */
+    /* #endregion variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
     {{#eq webComponent.type 'grid-elements-manager'}}
-    /* #region  variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }} */
-    @ViewChild('{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridElementsManager') {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Component: GridElementsManagerComponent;
-    {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg: FormGroup;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridList';
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship this ../schema }}>>;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridState: GridState = {};
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}ColumnsConfig$: Observable<ColumnConfig[]>;
-    origin{{ toPascalCase (getModuleNamesFromPropertyRelationship this) }}ColumnsConfig: ColumnConfig[] = [
+    /* #region  variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    @ViewChild('{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridElementsManager') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridElementsManagerComponent;
+    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg: FormGroup;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridState: GridState = {};
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
+    origin{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig: ColumnConfig[] = [
         {
             type   : ColumnDataType.ACTIONS,
             field  : 'Actions',
@@ -149,13 +149,13 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {
                 const actions = [
                     {
-                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                         isViewAction: false,
                         translation : 'edit',
                         icon        : 'mode_edit',
                     },
                     {
-                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.delete{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.delete{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                         isViewAction: false,
                         translation : 'delete',
                         icon        : 'delete',
@@ -165,9 +165,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 return actions;
             },
         },
-        ...{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnsConfig,
+        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
     ];
-    /* #endregion variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }} */
+    /* #endregion variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
     {{/each}}
 {{/unlessEq}}
@@ -209,17 +209,17 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq webComponent.type 'select'}}
 {{ push ../injectionsArray
-    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship this)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship this)) 'Service'))
+    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service'))
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-select-element'}}
 {{ push ../injectionsArray
-    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship this)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship this)) 'Service'))
+    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service'))
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-elements-manager'}}
 {{ push ../injectionsArray
-    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship this)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship this)) 'Service'))
+    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service'))
 ~}}
 {{/eq ~}}
 {{/each ~}}
@@ -236,14 +236,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         /**/
         {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
-        this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}$;
+        this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$;
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
-        // {{ toCamelCase (getModuleNameFromPropertyRelationship this) }} grid-select-element
-        this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}ColumnsConfig$ = this.gridColumnsConfigStorageService
-            .getColumnsConfig(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId, this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}OriginColumnsConfig)
+        // {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} grid-select-element
+        this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$ = this.gridColumnsConfigStorageService
+            .getColumnsConfig(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId, this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OriginColumnsConfig)
             .pipe(takeUntil(this.unsubscribeAll$));
-        this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridData$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service.pagination$;
+        this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.pagination$;
         {{/eq}}
         {{/each}}
     }
@@ -302,35 +302,35 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
     {{/if}}
     {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
-    /* #region methods to manage {{ toPascalCase (getModuleNamesFromPropertyRelationship this) }} */
-    create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}DialogForm(): void
+    /* #region methods to manage {{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm(): void
     {
-        this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg = this.fb.group({
-            {{#each (getFormGroupFieldsProperties (getPropertiesFromPropertyRelationship this)) }}
-            {{#if (isAllowProperty (getModuleNameFromPropertyRelationship this) this) }}
+        this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg = this.fb.group({
+            {{#each (getFormGroupFieldsProperties (getPropertiesFromPropertyRelationship relationship.modulePath)) }}
+            {{#if (isAllowProperty (getModuleNameFromPropertyRelationship relationship.modulePath) this) }}
             {{ toCamelCase (getPropertyName this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if this.length }}Validators.minLength({{ this.length }}), Validators.maxLength({{ this.length }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
             {{/if}}
             {{/each}}
         });
     }
 
-    handleSubmit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}Form($event, dialog): void
+    handleSubmit{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Form($event, dialog): void
     {
         // manage validations before execute actions
-        if (this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.invalid)
+        if (this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.invalid)
         {
-            log('[DEBUG] Error to validate form: ', this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg);
+            log('[DEBUG] Error to validate form: ', this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg);
             this.validationMessagesService.validate();
             return;
         }
 
-        // depending on the dialog action we invoke a create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }} or update{{ toPascalCase (getModuleNameFromPropertyRelationship this) }} action
+        // depending on the dialog action we invoke a create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} or update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} action
         this.actionService.action({
             id: mapActions(
                 dialog.componentInstance.data.currentActionId,
                 {
-                    '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}' : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
-                    '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}': '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}',
+                    '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}' : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
+                    '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}': '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                 },
             ),
             isViewAction: false,
@@ -338,7 +338,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
         dialog.close();
     }
-    /* #endregion methods to manage {{ toPascalCase (getModuleNamesFromPropertyRelationship this) }} */
+    /* #endregion methods to manage {{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
 
     {{/each}}
     async handleAction(action: Action): Promise<void>
@@ -397,32 +397,32 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     });
                 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 
-                /* #region init actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }} grid-elements-manager */
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}ColumnsConfig$ = this.gridColumnsConfigStorageService
-                    .getColumnsConfig(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId, this.origin{{ toPascalCase (getModuleNamesFromPropertyRelationship this) }}ColumnsConfig)
+                /* #region init actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$ = this.gridColumnsConfigStorageService
+                    .getColumnsConfig(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId, this.origin{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
 
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
-                    page         : this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
-                    sort         : this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
-                    search       : this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridState = {
+                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
+                    page         : this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
+                    sort         : this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
+                    search       : this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
                 };
 
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridData$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service.pagination$;
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.pagination$;
 
-                // subscription to get {{ toCamelCase (getModuleNameFromPropertyRelationship this) }} in edit {{ toCamelCase ../schema.moduleName }} action
-                this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
-                    .{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}$
+                // subscription to get {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} in edit {{ toCamelCase ../schema.moduleName }} action
+                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
+                    .{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}: {{ getAggregateNameFromPropertyRelationship this }}) =>
+                    .subscribe(({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}) =>
                     {
-                        if ({{ toCamelCase (getModuleNameFromPropertyRelationship this) }} && this.currentAction.id === '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}')
+                        if ({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} && this.currentAction.id === '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}')
                         {
-                            this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.patchValue({{ toCamelCase (getModuleNameFromPropertyRelationship this) }});
+                            this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.patchValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }});
                         }
                     });
-                /* #endregion init actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }} grid-elements-manager */
+                /* #endregion init actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
                 {{/each}}
                 break;
 
@@ -550,81 +550,81 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 /* #endregion common actions */
             {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
 
-            /* #region actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property) }} grid-select-element */
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}OpenDialog':
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Component.gridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
-                    page         : this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
-                    sort         : this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
-                    search       : this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId),
+            /* #region actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} grid-select-element */
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OpenDialog':
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.gridState = {
+                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
+                    page         : this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
+                    sort         : this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
+                    search       : this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
                 };
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Component.openDialog();
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.openDialog();
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Pagination':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination':
                 await lastValueFrom(
-                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
                                 QueryStatementHandler
-                                    .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnsConfig })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
-                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
-                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
+                                    .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .getQueryStatement(),
                         }),
                 );
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship this) }} = action.meta.row as {{ getAggregateNameFromPropertyRelationship this ../schema }};
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} = action.meta.row as {{ getAggregateNameFromPropertyRelationship relationship.modulePath }};
 
-                this.fg.get('{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Id').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}.id);
-                this.fg.get('{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Name').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}.name);
+                this.fg.get('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.id);
+                this.fg.get('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Name').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.name);
                 this.fg.markAsDirty();
 
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Component.closeDialog();
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.closeDialog();
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase (getModuleNamesFromPropertyRelationship this) }}':
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Rows = await lastValueFrom(
-                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}':
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows = await lastValueFrom(
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .get({
                             query     : action.meta.query,
                             constraint: { /**/ },
                         }),
                 );
 
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnConfig.field);
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
 
                 exportRows(
-                    {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Rows.objects,
-                    'order{{ toPascalCase (getModuleNamesFromPropertyRelationship this) }}.' + action.meta.format,
-                    {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Columns,
-                    {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Headers,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows.objects,
+                    'order{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}.' + action.meta.format,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers,
                     action.meta.format,
                 );
                 break;
-                /* #endregion actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property) }} grid-select-element */
+                /* #endregion actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} grid-select-element */
             {{/each}}
             {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 
-            /* #region actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }} grid-elements-manager */
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Pagination':
+            /* #region actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination':
                 await lastValueFrom(
-                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
                                 QueryStatementHandler
-                                    .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnsConfig })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
-                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
-                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}GridId))
+                                    .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .getQueryStatement(),
                             constraint: {
                                 where: {
@@ -635,31 +635,31 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
-                this.create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}DialogForm();
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Component.handleElementDetailDialog(action.id);
-                this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.get('id').setValue(Utils.uuid());
-                this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.get('{{ getForeignKey (object relationship=relationship schema=../schema) }}').setValue(this.managedObject.id);
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
+                this.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm();
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog(action.id);
+                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('id').setValue(Utils.uuid());
+                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('{{ getForeignKey (object relationship=relationship schema=../schema) }}').setValue(this.managedObject.id);
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
                 await lastValueFrom(
-                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
-                        .create<{{ getAggregateNameFromPropertyRelationship this }}>({
-                            object: this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.value,
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
+                        .create<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>({
+                            object: this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.value,
                         }),
                 );
 
                 this.actionService.action({
-                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Pagination',
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination',
                     isViewAction: false,
                 });
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
-                this.create{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}DialogForm();
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
+                this.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm();
                 await lastValueFrom(
-                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .findById({
                             id        : action.meta.row.id,
                             constraint: {
@@ -669,28 +669,28 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             },
                         }),
                 );
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Component.handleElementDetailDialog(action.id);
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog(action.id);
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
-                this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.removeControl('{{ getForeignKey (object relationship=relationship schema=../schema) }}');
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
+                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.removeControl('{{ getForeignKey (object relationship=relationship schema=../schema) }}');
 
                 await lastValueFrom(
-                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
-                        .updateById<{{ getAggregateNameFromPropertyRelationship this }}>({
-                            object: this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}DialogFg.value,
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
+                        .updateById<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>({
+                            object: this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.value,
                         }),
                 );
                 this.actionService.action({
-                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Pagination',
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination',
                     isViewAction: false,
                 });
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.delete{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}':
-                const delete{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}DialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}') }),
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.delete{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
+                const delete{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogRef = this.confirmationService.open({
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}')}`,
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}') }),
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation-triangle',
@@ -710,7 +710,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     dismissible: true,
                 });
 
-                delete{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}DialogRef
+                delete{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogRef
                     .afterClosed()
                     .subscribe(async result =>
                     {
@@ -719,14 +719,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             try
                             {
                                 await lastValueFrom(
-                                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
-                                        .deleteById<{{ getAggregateNameFromPropertyRelationship this }}>({
+                                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
+                                        .deleteById<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>({
                                             id: action.meta.row.id,
                                         }),
                                 );
 
                                 this.actionService.action({
-                                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}Pagination',
+                                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination',
                                     isViewAction: false,
                                 });
                             }
@@ -738,9 +738,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     });
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase (getModuleNameFromPropertyRelationship this) }}s':
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Rows = await lastValueFrom(
-                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Service
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}s':
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows = await lastValueFrom(
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .get({
                             query     : action.meta.query,
                             constraint: {
@@ -751,18 +751,18 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         }),
                 );
 
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}ColumnConfig.field);
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
 
                 exportRows(
-                    {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Rows.objects,
-                    '{{ toCamelCase (getModuleNamesFromPropertyRelationship this) }}.' + action.meta.format,
-                    {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Columns,
-                    {{ toCamelCase (getModuleNameFromPropertyRelationship this) }}Headers,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows.objects,
+                    '{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}.' + action.meta.format,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers,
                     action.meta.format,
                 );
                 break;
-                /* #endregion actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship this) }} grid-elements-manager */
+                /* #endregion actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
             {{/each}}
         }
     }

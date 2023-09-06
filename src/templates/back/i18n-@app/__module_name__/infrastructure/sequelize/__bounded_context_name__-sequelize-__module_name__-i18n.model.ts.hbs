@@ -190,7 +190,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }{{/or}})
     {{ toCamelCase (getPropertyName this) }}: {{ relationship.aggregateName }}Model;
     {{/if}}
-    {{#if (hasHasBelongsToDecoratorProperty this) }}
+    {{#if (hasBelongsToDecoratorProperty this) }}
 
     @BelongsTo(() => {{ relationship.aggregateName }}Model{{#or relationship.avoidConstraint }}, {
         {{#if relationship.avoidConstraint }}

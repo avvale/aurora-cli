@@ -1,13 +1,11 @@
 import * as handlebars from 'handlebars';
-import { ModuleDefinitionSchema, Property, getSchemaFromPropertyRelationship } from '../..';
+import { ModuleDefinitionSchema, getSchemaFromPropertyRelationship } from '../..';
 
 handlebars.registerHelper('getSchemaFromPropertyRelationship', function(
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): ModuleDefinitionSchema | null
 {
     return getSchemaFromPropertyRelationship(
-        property,
-        schema,
+        modulePath,
     );
 });

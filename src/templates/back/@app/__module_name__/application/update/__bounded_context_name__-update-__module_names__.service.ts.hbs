@@ -66,8 +66,8 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         // delete availableLangs property to avoid overwrite this value in database
         delete {{ toCamelCase schema.moduleName }}.availableLangs;
-        {{/if}}
 
+        {{/if}}
         // update
         await this.repository.update(
             {{ toCamelCase schema.moduleName }},

@@ -1,13 +1,11 @@
 import * as handlebars from 'handlebars';
-import { ModuleDefinitionSchema, Property, getAggregateNameFromPropertyRelationship } from '../..';
+import { getAggregateNameFromPropertyRelationship } from '../..';
 
 handlebars.registerHelper('getAggregateNameFromPropertyRelationship', function(
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): string | null
 {
     return getAggregateNameFromPropertyRelationship(
-        property,
-        schema,
+        modulePath,
     );
 });

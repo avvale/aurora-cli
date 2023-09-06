@@ -19,7 +19,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         [aria-label]="t('Search')"
         (click)="
             actionService.action({
-                id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}OpenDialog',
+                id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OpenDialog',
                 isViewAction: false
             })
         "
@@ -29,12 +29,12 @@ handlebars.registerPartial('gridSelectElementWebComponent',
     <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
 </mat-form-field>
 <au-grid-select-element
-    [columnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}ColumnsConfig$ | async"
-    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship property) }}')"
-    [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridData$ | async"
-    [id]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridId"
-    [originColumnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}OriginColumnsConfig"
-    #{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}GridElementSelector
+    [columnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
+    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}')"
+    [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
+    [id]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
+    [originColumnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OriginColumnsConfig"
+    #{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}GridElementSelector
 >
     <au-grid-translations
         [actions]="t('Actions')"
@@ -44,7 +44,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         [columns]="t('Columns')"
         [field]="t('Field')"
         [filter]="t('Filter')"
-        [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridId"
+        [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
         [operator]="t('Operator')"
         [OR]="t('OR')"
         [pleaseSelectField]="t('PleaseSelectField')"
@@ -75,7 +75,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         }"
     >
         <au-grid-column-translation
-            *ngFor="let columnConfig of {{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}OriginColumnsConfig"
+            *ngFor="let columnConfig of {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OriginColumnsConfig"
             [field]="columnConfig.field"
         >
             \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}

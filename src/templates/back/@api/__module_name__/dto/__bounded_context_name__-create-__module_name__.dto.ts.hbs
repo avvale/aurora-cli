@@ -11,8 +11,8 @@
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Create' (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'Dto')
-                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+                items=(sumStrings (toPascalCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) 'Create' (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Dto')
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
 {{/unlessEq}}
@@ -70,13 +70,13 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
 {{else ~}}
     @ApiProperty({
-        type       : {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto,
+        type       : {{ toPascalCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Dto,
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Create{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Dto;
+    {{ toCamelCase name }}{{#if nullable }}?{{/if}}: {{ toPascalCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Dto;
 
 {{/eq}}
 {{/eq}}

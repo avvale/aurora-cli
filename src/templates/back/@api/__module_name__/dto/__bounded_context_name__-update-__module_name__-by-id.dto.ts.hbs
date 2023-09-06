@@ -11,8 +11,8 @@
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase (getRelationshipBoundedContextNameProperty this ../schema)) 'Update' (toPascalCase (getRelationshipModuleNameProperty this ../schema)) 'ByIdDto')
-                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getRelationshipBoundedContextNameProperty this ../schema)) '/' (toKebabCase (getRelationshipModuleNameProperty this ../schema)))
+                items=(sumStrings (toPascalCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) 'Update' (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ByIdDto')
+                path=(sumStrings ../config.apiContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
 {{/unlessEq}}
@@ -70,13 +70,13 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
 {{else ~}}
     @ApiProperty({
-        type       : {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}ByIdDto,
+        type       : {{ toPascalCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ByIdDto,
         description: '{{ toCamelCase name }} [input here api field description]',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}?: {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}Update{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}ByIdDto;
+    {{ toCamelCase name }}?: {{ toPascalCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ByIdDto;
 
 {{/eq}}
 {{/eq}}
@@ -101,7 +101,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase name }}{{#unlessEq name 'id'}}?{{/unlessEq}}: {{ getDtoTypeProperty this ../config }};
+    {{ toCamelCase name }}{{#unless primaryKey}}?{{/unless}}: {{ getDtoTypeProperty this ../config }};
 
 {{/if}}
 {{/if}}

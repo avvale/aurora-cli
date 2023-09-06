@@ -32,10 +32,12 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
 
     async execute(query: {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Query): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.get{{ toPascalCase schema.moduleNames }}Service.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.get{{ toPascalCase schema.moduleNames }}Service.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

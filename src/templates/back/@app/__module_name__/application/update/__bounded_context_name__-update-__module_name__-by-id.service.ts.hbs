@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         payload: {
             {{#each (getUpdateServiceProperties schema.aggregateProperties schema.moduleName) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
-            {{ toCamelCase (getPropertyName this) }}{{#unlessEq (getPropertyName this) 'id'}}?{{/unlessEq}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
+            {{ toCamelCase (getPropertyName this) }}{{#unless primaryKey}}?{{/unless}}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }};
             {{/if}}
             {{/each}}
         },

@@ -5,18 +5,18 @@ import {
     {{> importValueObjects }}
 } from './value-objects';
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/unless}}
 {{/each}}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
-import { {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
 
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper implements IMapper
@@ -80,21 +80,21 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             {{/if}}
             {{/each}}
             {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
             {{/each}}
             {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
             {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapModelToAggregate({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase relationship.field }}, cQMetadata) : undefined,
             {{/unless}}
             {{/each}}
             {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
             {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
         );
     }
@@ -110,21 +110,21 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             {{/if}}
             {{/each}}
             {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationship.field }}) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationship.field }}) : undefined,
             {{/each}}
             {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
             {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
             {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationship.field }}) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapAggregateToResponse({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase relationship.field }}) : undefined,
             {{/unless}}
             {{/each}}
             {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
             {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
-            this.options.eagerLoading ? new {{ toPascalCase (getRelationshipBoundedContextNameProperty this ../schema) }}{{ toPascalCase (getRelationshipModuleNameProperty this ../schema) }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
+            this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
         );
     }

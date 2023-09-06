@@ -21,8 +21,8 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     @ForeignKey(() => {{ currentProperty.relationship.aggregateName }}Model)
     @Column({
-        field: '{{ toCamelCase (getRelationshipModuleNameProperty currentProperty schema) }}Id',
+        field: '{{ toCamelCase (getModuleNameFromPropertyRelationship currentProperty.relationship.modulePath) }}Id',
         type: DataTypes.UUID,
     })
-    {{ toCamelCase (getRelationshipModuleNameProperty currentProperty schema) }}Id: string;
+    {{ toCamelCase (getModuleNameFromPropertyRelationship currentProperty.relationship.modulePath) }}Id: string;
 }

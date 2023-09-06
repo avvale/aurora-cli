@@ -1,18 +1,18 @@
 import * as handlebars from 'handlebars';
 
 handlebars.registerPartial('gridElementsManagerWebComponent',
-    `<!-- #region component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property) }} -->
+    `<!-- #region component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} -->
 <au-grid-elements-manager
     *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
     class="col-12 mt-7"
-    [columnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}ColumnsConfig$ | async"
-    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship property) }}')"
-    [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridData$ | async"
-    [gridState]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridState"
-    [id]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridId"
-    [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship property) }}')"
-    [originColumnsConfig]="origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property) }}ColumnsConfig"
-    #{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridElementsManager
+    [columnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
+    [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}')"
+    [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
+    [gridState]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridState"
+    [id]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
+    [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}')"
+    [originColumnsConfig]="origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig"
+    #{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridElementsManager
 >
     <ng-template
         auGridCustomButtonsHeaderDialogTemplate
@@ -23,7 +23,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
             type="button"
             (click)="
                 actionService.action({
-                    id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship property) }}',
+                    id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}',
                     isViewAction: false
                 })
             "
@@ -37,13 +37,13 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         let-dialog
     >
         <form
-            id="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DetailDialogForm"
+            id="{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}DetailDialogForm"
             novalidate
-            [formGroup]="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DialogFg"
-            (ngSubmit)="handleSubmit{{ toPascalCase (getModuleNameFromPropertyRelationship property) }}Form($event, dialog)"
+            [formGroup]="{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}DialogFg"
+            (ngSubmit)="handleSubmit{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}Form($event, dialog)"
         >
             <div class="layout__container">
-                {{#each (getFormDetailFieldsProperties (getPropertiesFromPropertyRelationship property)) }}
+                {{#each (getFormDetailFieldsProperties (getPropertiesFromPropertyRelationship property.relationship.modulePath)) }}
                 {{#if (isAllowProperty ../schema.moduleName this) }}
                 {{#eq type 'varchar'}}
                 {{> varcharInput schema=../schema property=.}}
@@ -111,9 +111,9 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
                 mat-flat-button
                 class="ml-3"
                 type="submit"
-                form="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DetailDialogForm"
+                form="{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}DetailDialogForm"
                 color="accent"
-                [disabled]="{{ toCamelCase (getModuleNameFromPropertyRelationship property) }}DialogFg.pristine"
+                [disabled]="{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}DialogFg.pristine"
             >
                 <mat-icon
                     class="icon-size-5 mr-2"
@@ -132,7 +132,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         [columns]="t('Columns')"
         [field]="t('Field')"
         [filter]="t('Filter')"
-        [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property) }}GridId"
+        [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
         [operator]="t('Operator')"
         [OR]="t('OR')"
         [pleaseSelectField]="t('PleaseSelectField')"
@@ -166,11 +166,11 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
         }"
     >
         <au-grid-column-translation
-            *ngFor="let columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property) }}ColumnsConfig"
+            *ngFor="let columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig"
             [field]="columnConfig.field"
         >
             \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
         </au-grid-column-translation>
     </au-grid-translations>
 </au-grid-elements-manager>
-<!-- #endregion component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property) }} -->`);
+<!-- #endregion component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} -->`);

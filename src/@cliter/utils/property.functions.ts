@@ -130,7 +130,7 @@ export const hasHasOneDecoratorProperty = (
 };
 
 // replace by Property hasBelongsToDecorator
-export const hasHasBelongsToDecoratorProperty = (
+export const hasBelongsToDecoratorProperty = (
     property: Property,
 ): boolean =>
 {
@@ -142,6 +142,13 @@ export const hasHasBelongsToDecoratorProperty = (
         property.relationship?.type === RelationshipType.ONE_TO_ONE &&
         Boolean(property.relationship.field)
     );
+};
+
+export const isPivotProperty = (
+    property: Property,
+): boolean =>
+{
+    return Boolean(property.aggregateName && property.modulePath);
 };
 
 // replace by Property hasHasManyDecorator
@@ -163,88 +170,20 @@ export const hasHasBelongsToManyDecoratorProperty = (
 /****************
  * RELATIONSHIP *
  ****************/
-// replace by Property getRelationshipBoundedContextName
-export const getRelationshipBoundedContextNameProperty = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
-): string | null =>
-{
-    try
-    {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).boundedContextName;
-    }
-    catch
-    {
-        throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
-        );
-    }
-
-    return null;
-};
-
-// replace by Property getRelationshipModuleName
-export const getRelationshipModuleNameProperty = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
-): string | null =>
-{
-    try
-    {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleName;
-    }
-    catch
-    {
-        throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
-        );
-    }
-
-    return null;
-};
-
-// replace by Property getRelationshipModuleNames
-export const getRelationshipModuleNamesProperty = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
-): string | null =>
-{
-    try
-    {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleNames;
-    }
-    catch
-    {
-        throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
-        );
-    }
-
-    return null;
-};
-
 // replace by Property getPropertiesFromRelationship
 export const getPropertiesFromPropertyRelationship = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): Property[] | null =>
 {
     try
     {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).aggregateProperties;
+        return loadYamlByBoundedContextModule(modulePath).aggregateProperties;
     }
     catch
     {
         throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
+            modulePath,
+            'aggregateProperties',
         );
     }
 
@@ -253,20 +192,18 @@ export const getPropertiesFromPropertyRelationship = (
 
 // replace by Property getRelationshipAggregateName
 export const getAggregateNameFromPropertyRelationship = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): string | null =>
 {
     try
     {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).aggregateName;
+        return loadYamlByBoundedContextModule(modulePath).aggregateName;
     }
     catch
     {
         throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
+            modulePath,
+            'aggregateName',
         );
     }
 
@@ -274,20 +211,18 @@ export const getAggregateNameFromPropertyRelationship = (
 };
 
 export const getBoundedContextNameFromPropertyRelationship = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): string | null =>
 {
     try
     {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).boundedContextName;
+        return loadYamlByBoundedContextModule(modulePath).boundedContextName;
     }
     catch
     {
         throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
+            modulePath,
+            'boundedContextName',
         );
     }
 
@@ -295,20 +230,18 @@ export const getBoundedContextNameFromPropertyRelationship = (
 };
 
 export const getModuleNameFromPropertyRelationship = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): string | null =>
 {
     try
     {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleName;
+        return loadYamlByBoundedContextModule(modulePath).moduleName;
     }
     catch
     {
         throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
+            modulePath,
+            'moduleName',
         );
     }
 
@@ -316,20 +249,18 @@ export const getModuleNameFromPropertyRelationship = (
 };
 
 export const getModuleNamesFromPropertyRelationship = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): string | null =>
 {
     try
     {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath).moduleNames;
+        return loadYamlByBoundedContextModule(modulePath).moduleNames;
     }
     catch
     {
         throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
+            modulePath,
+            'moduleNames',
         );
     }
 
@@ -338,20 +269,18 @@ export const getModuleNamesFromPropertyRelationship = (
 
 // replace by Property getRelationshipSchema
 export const getSchemaFromPropertyRelationship = (
-    property: Property,
-    schema: ModuleDefinitionSchema,
+    modulePath: string,
 ): ModuleDefinitionSchema | null =>
 {
     try
     {
-        if (property.relationship?.modulePath) return loadYamlByBoundedContextModule(property.relationship?.modulePath);
+        return loadYamlByBoundedContextModule(modulePath);
     }
     catch
     {
         throwRelationshipEntityNotCreatedProperty(
-            property,
-            schema.boundedContextName,
-            schema.moduleName,
+            modulePath,
+            'schema',
         );
     }
 
@@ -360,30 +289,25 @@ export const getSchemaFromPropertyRelationship = (
 
 // replace by Property throwRelationshipEntityNorCreated
 export const throwRelationshipEntityNotCreatedProperty = (
-    property: Property,
-    boundedContextName: string,
-    moduleName: string,
+    modulePath: string,
+    type: 'schema' | 'boundedContextName' | 'moduleName' | 'moduleNames' | 'aggregateProperties' | 'aggregateName',
 ): void =>
 {
     throw new Error(`
-Getting relationship module path for ${property.name} property.
-    Path: ${property.relationship?.modulePath}
-    Aggregate: ${property.relationship?.aggregateName}
-    Relationship: ${property.relationship?.type}
-
+Getting relationship module from path ${modulePath} to get a ${type}.
 For fields with relationship, you must previously create the yaml
 of the related entity, you can do it manually or through the CLI
 using the command:
 
-aurora generate back module -n=${property.relationship?.modulePath}
+aurora generate back module -n=${modulePath}
 
 And create related entity.
 
 The yaml for the current entity has been created, regenerate
-the module ${boundedContextName}/${moduleName} again when you have created the yaml
-for the entity related ${property.relationship?.modulePath}, with the command:
+the module ${modulePath} again when you have created the yaml
+for the entity related ${modulePath}, with the command:
 
-aurora load back module -n=${boundedContextName}/${moduleName} -ft
+aurora load back module -n=${modulePath} -ft
     `);
 };
 
@@ -431,7 +355,7 @@ export const getGraphqlCreateTypeProperty = (
 ): string =>
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-    if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getRelationshipBoundedContextNameProperty(property, schema)?.toPascalCase()}Create${getRelationshipModuleNameProperty(property, schema)?.toPascalCase()}Input`;
+    if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getBoundedContextNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Create${getModuleNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Input`;
     return config.propertyTypesEquivalenceQraphqlTypes[property.type];
 };
 
@@ -443,7 +367,7 @@ export const getGraphqlUpdateTypeProperty = (
 ): string =>
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
-    if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getRelationshipBoundedContextNameProperty(property, schema)?.toPascalCase()}Update${getRelationshipModuleNameProperty(property, schema)?.toPascalCase()}Input`;
+    if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getBoundedContextNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Update${getModuleNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Input`;
     return config.propertyTypesEquivalenceQraphqlTypes[property.type];
 };
 

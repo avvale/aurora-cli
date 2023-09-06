@@ -116,6 +116,8 @@ export interface Property
     example?: any;
     faker?: string;
     webComponent?: PropertyWebComponent;
+    aggregateName?: string;
+    modulePath?: string;
 }
 
 export interface PropertyRelationship
