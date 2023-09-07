@@ -112,7 +112,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
     {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}
 {{/eq}}
 {{#if ../isCommonProperty}}
-    {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}{{#eq (getPropertyName this) 'id'}}!{{/eq}}
+    {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}{{#if primaryKey}}!{{/if}}
 {{/if}}
 {{/if}}
 {{/each}}
