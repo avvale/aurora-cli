@@ -6,7 +6,22 @@
             (object items=(array 'LiteralObject' 'Utils') path=config.auroraCorePackage)
     )
 ~}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{! ValueObjects }}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
+{{! EVENTS }}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleName) '.event.ts'}}
 {{
     push importsArray
         (
@@ -16,17 +31,7 @@
         )
 ~}}
 {{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
-{{
-    push importsArray
-        (
-            object
-                items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event')
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
-~}}
-{{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-' (toKebabCase schema.moduleName) '.event.ts'}}
 {{
     push importsArray
         (
@@ -36,6 +41,17 @@
         )
 ~}}
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
+{{
+    push importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event')
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
+~}}
+{{/notInArray}}
+{{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -46,6 +62,7 @@
         )
 ~}}
 {{/each}}
+{{! MANY TO ONE Relationship }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
@@ -58,6 +75,7 @@
 ~}}
 {{/unless}}
 {{/each}}
+{{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -68,6 +86,7 @@
         )
 ~}}
 {{/each}}
+{{! MANY TO MANY Relationship }}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
 {{
     push ../importsArray
@@ -78,18 +97,16 @@
         )
 ~}}
 {{/each}}
-{{#each (getValueObjectsProperties schema.aggregateProperties) }}
-{{#if (isAllowProperty ../schema.moduleName this) }}
+{{! PIVOT TABLE Relationship }}
+{{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object 
-            items=
-                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
-                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
-                oneRowByItem=true
+        (
+            object
+                items=(getAggregateNameFromPropertyRelationship modulePath)
+                path=(ternary packageName packageName (sumStrings ../config.appContainer '/' modulePath))
         )
 ~}}
-{{/if}}
 {{/each}}
 {{{ importManager (object imports=importsArray) }}}
 export class {{ schema.aggregateName }} extends AggregateRoot
