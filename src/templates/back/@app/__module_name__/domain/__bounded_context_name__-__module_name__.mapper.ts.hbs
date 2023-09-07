@@ -1,18 +1,38 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'CQMetadata' 'IMapper' 'LiteralObject' 'MapperOptions') path=config.auroraCorePackage)
-            (object
+            (
+                object
+                    items=(array 'CQMetadata' 'IMapper' 'LiteralObject' 'MapperOptions')
+                    path=config.auroraCorePackage
+            )
+            (
+                object
                     items=
                     (
                         array
-                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
-                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Response')
+                            schema.aggregateName
+                            (sumStrings schema.aggregateName 'Response')
                     )
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
     )
 ~}}
+{{! ValueObjects }}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
+{{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -23,6 +43,7 @@
         )
 ~}}
 {{/each}}
+{{! MANY TO ONE Relationship }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
@@ -35,7 +56,8 @@
 ~}}
 {{/unless}}
 {{/each}}
-{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties this) }}
+{{! ONE TO MANY Relationship }}
+{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
         (
@@ -45,7 +67,8 @@
         )
 ~}}
 {{/each}}
-{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties this) }}
+{{! MANY TO MANY Relationship }}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
 {{
     push ../importsArray
         (
@@ -55,18 +78,16 @@
         )
 ~}}
 {{/each}}
-{{#each (getValueObjectsProperties schema.aggregateProperties) }}
-{{#if (isAllowProperty ../schema.moduleName this) }}
+{{! PIVOT TABLE Relationship }}
+{{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
 {{
     push ../importsArray
-        (object 
-            items=
-                (sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
-                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
-                oneRowByItem=true
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship modulePath) 'Mapper')
+                path=(ternary packageName packageName (sumStrings ../config.appContainer '/' modulePath))
         )
 ~}}
-{{/if}}
 {{/each}}
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper implements IMapper
