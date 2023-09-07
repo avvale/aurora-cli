@@ -1,4 +1,5 @@
 {{ setVar 'importsArray' (array) ~}}
+{{! ONE TO ONE Relationship with field }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -9,6 +10,7 @@
         )
 ~}}
 {{/each}}
+{{! ONE TO ONE Relationship without field }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
@@ -21,6 +23,7 @@
 ~}}
 {{/unless}}
 {{/each}}
+{{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -31,7 +34,8 @@
         )
 ~}}
 {{/each}}
-{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
+{{! MANY TO MANY Relationship }}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
 {{
     push ../importsArray
         (
@@ -41,13 +45,14 @@
         )
 ~}}
 {{/each}}
+{{! PIVOT TABLE Relationship }}
 {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
 {{
     push ../importsArray
         (
             object
                 items=(sumStrings (getAggregateNameFromPropertyRelationship modulePath) 'Response')
-                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+                path=(ternary packageName packageName (sumStrings ../config.appContainer '/' modulePath))
         )
 ~}}
 {{/each}}
