@@ -20,7 +20,7 @@
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase (getPropertyName this)))
+                items=(sumStrings ../schema.aggregateName (toPascalCase (getPropertyName this)))
                 path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
         )
 ~}}

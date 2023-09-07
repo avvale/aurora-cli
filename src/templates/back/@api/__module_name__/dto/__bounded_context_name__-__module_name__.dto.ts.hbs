@@ -63,7 +63,7 @@
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase name))
+                items=(sumStrings ../schema.aggregateName (toPascalCase name))
                 path='@api/graphql'
         )
 ~}}
