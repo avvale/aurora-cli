@@ -3,16 +3,14 @@
 {{ setVar 'importsArray' (array) ~}}
 {{#if (hasEnumProperties schema.aggregateProperties) }}
 {{#each (getEnumProperties schema.aggregateProperties) }}
-{{#unless first}}
 {{
     push ../importsArray
         (
             object
-                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase name))
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (toPascalCase (getPropertyName this)))
                 path='@api/graphql'
         )
 ~}}
-{{/unless}}
 {{/each}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
