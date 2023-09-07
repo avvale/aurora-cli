@@ -7,6 +7,14 @@
             (object items=(array 'Column' 'Model' 'Table' 'ForeignKey' 'BelongsTo' 'HasMany' 'BelongsToMany' 'HasOne') path='sequelize-typescript')
     )
 ~}}
+{{#if schema.hasAuditing}}
+{{
+    push importsArray
+        (object items=(array 'AfterBulkCreate' 'AfterBulkDestroy' 'AfterBulkRestore' 'AfterBulkUpdate' 'AfterCreate' 'AfterDestroy' 'AfterRestore' 'AfterUpdate' 'AfterUpsert') path='sequelize-typescript')
+        (object items=(array 'AuditingSideEffectEvent' 'SequelizeAuditingAgent') path=config.auroraCorePackage)
+~}}
+{{/if}}
+{{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -17,6 +25,7 @@
         )
 ~}}
 {{/each}}
+{{! MANY TO ONE Relationship }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
@@ -29,6 +38,7 @@
 ~}}
 {{/unless}}
 {{/each}}
+{{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -39,6 +49,7 @@
         )
 ~}}
 {{/each}}
+{{! MANY TO MANY Relationship }}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -49,18 +60,23 @@
         )
         (
             object
-                items=(sumStrings relationship.pivot.aggregate 'Model')
-                path=(sumStrings ../config.appContainer '/' relationship.pivot.modulePath)
+                items=(sumStrings relationship.pivot.aggregateName 'Model')
+                path=(sumStrings ../config.appContainer '/' (toKebabCase relationship.pivot.boundedContextName) '/' (toKebabCase relationship.pivot.moduleName))
         )
 ~}}
 {{/each}}
-{{#if schema.hasAuditing}}
+{{! PIVOT TABLE Relationship }}
+{{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
 {{
-    push importsArray
-        (object items=(array 'AfterBulkCreate' 'AfterBulkDestroy' 'AfterBulkRestore' 'AfterBulkUpdate' 'AfterCreate' 'AfterDestroy' 'AfterRestore' 'AfterUpdate' 'AfterUpsert') path='sequelize-typescript')
-        (object items=(array 'AuditingSideEffectEvent' 'SequelizeAuditingAgent') path=config.auroraCorePackage)
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship modulePath) 'Model')
+                path=(ternary packageName packageName (sumStrings ../config.appContainer '/' modulePath))
+        )
 ~}}
-{{/if}}
+{{/each}}
+{{! i18n }}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
