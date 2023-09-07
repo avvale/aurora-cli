@@ -166,6 +166,15 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             {{ toCamelCase schema.moduleName }},
             {
                 createOptions: cQMetadata?.repositoryOptions,
+                {{#if (hasPivotProperties schema.aggregateProperties) }}
+                finderQueryStatement: (aggregate: {{ schema.aggregateName }}) => ({
+                    where: {
+                        {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
+                        {{ name }}: aggregate['{{ name }}']['value'],
+                        {{/each}}
+                    },
+                }),
+                {{/if}}
             },
         );
         {{/if}}
