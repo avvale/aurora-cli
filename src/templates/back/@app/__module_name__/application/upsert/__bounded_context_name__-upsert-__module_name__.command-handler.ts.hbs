@@ -3,24 +3,29 @@
     setVar 'importsArray' (
         array
             (object items=(array 'CommandHandler' 'ICommandHandler') path='@nestjs/cqrs')
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Command')
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Service')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Command')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Upsert' (toPascalCase schema.moduleName) 'Service')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.service')
+            )
     )
 ~}}
 {{#each (getWithoutTimestampsProperties (getValueObjectsProperties schema.aggregateProperties)) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object 
-            items=
-                (sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+        (
+            object
+                items=(sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
                 path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
                 oneRowByItem=true
         )
