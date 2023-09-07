@@ -12,6 +12,9 @@ import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}R
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
 import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
 {{/each}}
+{{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
+import { {{ getAggregateNameFromPropertyRelationship modulePath }}Response } from '{{#if packageName }}{{ packageName }}{{else}}{{ ../config.appContainer }}/{{ modulePath }}{{/if}}';
+{{/each}}
 
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response
 {
@@ -19,6 +22,9 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
         {{#each (getResponseProperties schema.aggregateProperties) }}
         {{#if (isAllowProperty ../schema.moduleName this)}}
         public readonly {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        {{#if (isPivotProperty this) }}
+        public readonly {{ toCamelCase (getModuleNameFromPropertyRelationship modulePath) }}: {{ getAggregateNameFromPropertyRelationship modulePath }}Response,
+        {{/if}}
         {{/if}}
         {{/each}}
         {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}

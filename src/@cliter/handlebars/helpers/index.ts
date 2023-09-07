@@ -64,6 +64,7 @@ import './get-postman-graphql-update-variables-properties';
 import './get-postman-rest-create-properties';
 import './get-postman-rest-update-properties';
 import './get-primary-key-properties';
+import './get-primary-key-properties-from-pivot-table';
 import './get-properties-from-property-relationship';
 import './get-property-column-data-type';
 import './get-property-enum-options';

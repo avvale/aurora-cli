@@ -311,6 +311,18 @@ export const getWithRelationshipOneToManyProperties = (
     return properties.filter(property => property.relationship?.type === RelationshipType.ONE_TO_MANY);
 };
 
+export const getPrimaryKeyPropertiesFromPivotTable = (
+    properties: Property[],
+): Property[] =>
+{
+    if (hasPivotProperties(properties))
+    {
+        return getPrimaryKeyProperties(properties);
+    }
+
+    return [];
+};
+
 /***************
  * CONTROLLERS *
  ***************/

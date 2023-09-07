@@ -47,8 +47,7 @@
         )
 ~}}
 {{/each}}
-{{#if (hasPivotProperties schema.aggregateProperties) }}
-{{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+{{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
 {{
     push ../importsArray
         (
@@ -58,7 +57,6 @@
         )
 ~}}
 {{/each}}
-{{/if}}
 {{#if (hasEnumProperties schema.aggregateProperties) }}
 {{#each (getEnumProperties schema.aggregateProperties) }}
 {{
