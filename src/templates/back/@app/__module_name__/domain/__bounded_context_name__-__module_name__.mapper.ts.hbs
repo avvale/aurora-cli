@@ -1,32 +1,95 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.response';
-import {
-    {{> importValueObjects }}
-} from './value-objects';
+{{
+    setVar 'importsArray' (
+        array
+            (
+                object
+                    items=(array 'CQMetadata' 'IMapper' 'LiteralObject' 'MapperOptions')
+                    path=config.auroraCorePackage
+            )
+            (
+                object
+                    items=
+                    (
+                        array
+                            schema.aggregateName
+                            (sumStrings schema.aggregateName 'Response')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+    )
+~}}
+{{! ValueObjects }}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase ../schema.boundedContextName) (toPascalCase ../schema.moduleName) (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
 {{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Mapper')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/each}}
 {{! MANY TO ONE Relationship }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Mapper')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/unless}}
 {{/each}}
 {{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Mapper')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/each}}
 {{! MANY TO MANY Relationship }}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Mapper')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/each}}
 {{! PIVOT TABLE Relationship }}
 {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
-import { {{ getAggregateNameFromPropertyRelationship modulePath }}Mapper } from '{{#if packageName }}{{ packageName }}{{else}}{{ ../config.appContainer }}/{{ modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship modulePath) 'Mapper')
+                path=(ternary packageName packageName (sumStrings ../config.appContainer '/' modulePath))
+        )
+~}}
 {{/each}}
-
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper implements IMapper
 {
     constructor(

@@ -9,13 +9,17 @@
             )
     )
 ~}}
-
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '{{ config.auroraCorePackage }}';
-import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
 {{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}
-import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from './value-objects';
+{{
+    push importsArray
+        (
+            object
+                items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id')
+                path='./value-objects'
+        )
+~}}
 {{/eq}}
-
+{{{ importManager (object imports=importsArray) }}}
 export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository implements IRepository<{{ schema.aggregateName }}>
 {
     abstract readonly repository: any;
