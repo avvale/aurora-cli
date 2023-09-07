@@ -3,7 +3,7 @@
         array
             (object items=(array 'Resolver' 'Args' 'Query') path='@nestjs/graphql')
             (object items=(array 'Timezone' 'QueryStatement')  path=config.auroraCorePackage)
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
+            (object items=schema.aggregateName path='@api/graphql')
             (object
                 items=
                 (

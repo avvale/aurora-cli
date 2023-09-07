@@ -3,8 +3,12 @@
         array
             (object items=(array 'Args' 'Resolver' 'Mutation') path='@nestjs/graphql')
             (object items=(array 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdHandler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName)) path='@api/graphql')
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdHandler')
+                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (object items=schema.aggregateName path='@api/graphql')
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}

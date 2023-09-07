@@ -8,8 +8,8 @@
                 object items=
                 (
                         array
-                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase schema.moduleName) (toPascalCase schema.moduleName) 'Id')
-                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase schema.moduleName) (toPascalCase currentProperty.relationship.singularName) 'Id')
+                            (sumStrings schema.aggregateName (toPascalCase schema.moduleName) (toPascalCase schema.moduleName) 'Id')
+                            (sumStrings schema.aggregateName (toPascalCase schema.moduleName) (toPascalCase currentProperty.relationship.singularName) 'Id')
                 )
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/domain/value-objects')
                 oneRowByItem=true

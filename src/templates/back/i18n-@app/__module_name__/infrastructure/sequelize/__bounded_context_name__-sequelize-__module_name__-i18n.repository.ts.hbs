@@ -10,7 +10,7 @@
                         schema.aggregateName
                         (sumStrings schema.aggregateName 'I18nModel')
                         (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository')
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Mapper')
+                        (sumStrings schema.aggregateName 'Mapper')
                 )
                 path=(
                     sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)

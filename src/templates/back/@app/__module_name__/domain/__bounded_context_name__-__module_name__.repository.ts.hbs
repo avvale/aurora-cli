@@ -1,3 +1,15 @@
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'CQMetadata' 'IRepository' 'LiteralObject' 'Pagination' 'QueryStatement') path=config.auroraCorePackage)
+            (
+                object
+                    items=schema.aggregateName
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+    )
+~}}
+
 import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '{{ config.auroraCorePackage }}';
 import { {{ schema.aggregateName }} } from './{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
 {{#eq (length (getPrimaryKeyProperties schema.aggregateProperties)) 1 }}

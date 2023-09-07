@@ -1,26 +1,62 @@
+{{ setVar 'importsArray' (array) ~}}
 {{! ONE TO ONE Relationship with field }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/each}}
 {{! ONE TO ONE Relationship without field }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/unless}}
 {{/each}}
 {{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/each}}
 {{! MANY TO MANY Relationship }}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
-import { {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Response } from '{{#if relationship.packageName }}{{ relationship.packageName }}{{else}}{{ ../config.appContainer }}/{{ relationship.modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship relationship.modulePath) 'Response')
+                path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
+        )
+~}}
 {{/each}}
 {{! PIVOT TABLE Relationship }}
 {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
-import { {{ getAggregateNameFromPropertyRelationship modulePath }}Response } from '{{#if packageName }}{{ packageName }}{{else}}{{ ../config.appContainer }}/{{ modulePath }}{{/if}}';
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (getAggregateNameFromPropertyRelationship modulePath) 'Response')
+                path=(ternary packageName packageName (sumStrings ../config.appContainer '/' modulePath))
+        )
+~}}
 {{/each}}
-
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response
 {
     constructor(

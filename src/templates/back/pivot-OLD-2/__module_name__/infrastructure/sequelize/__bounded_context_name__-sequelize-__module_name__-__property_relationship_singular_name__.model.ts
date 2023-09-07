@@ -6,7 +6,7 @@
             (object items=(array 'Column' 'Model' 'Table' 'ForeignKey') path='sequelize-typescript')
             (object items='DataTypes' path='sequelize')
             (object
-                items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Model')
+                items=(sumStrings schema.aggregateName 'Model')
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
             (object

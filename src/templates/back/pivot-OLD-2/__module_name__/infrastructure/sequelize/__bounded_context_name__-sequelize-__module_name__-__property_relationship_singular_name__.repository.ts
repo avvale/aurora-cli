@@ -8,9 +8,9 @@
                 items=
                 (
                     array
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase currentProperty.relationship.singularName))
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase currentProperty.relationship.singularName) 'Mapper')
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) (toPascalCase currentProperty.relationship.singularName) 'Model')
+                        (sumStrings schema.aggregateName (toPascalCase currentProperty.relationship.singularName))
+                        (sumStrings schema.aggregateName (toPascalCase currentProperty.relationship.singularName) 'Mapper')
+                        (sumStrings schema.aggregateName (toPascalCase currentProperty.relationship.singularName) 'Model')
                         (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) (toPascalCase currentProperty.relationship.singularName) 'Repository')
                 )
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
