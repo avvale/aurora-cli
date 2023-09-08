@@ -21,10 +21,11 @@
 {{#if (isAllowProperty ../schema.moduleName this) }}
 {{
     push ../importsArray
-        (object
-            items=(sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
-            path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
-            oneRowByItem=true
+        (
+            object
+                items=(sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
         )
 ~}}
 {{/if}}
