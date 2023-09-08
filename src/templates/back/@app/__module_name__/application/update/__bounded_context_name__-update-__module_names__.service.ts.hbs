@@ -4,16 +4,17 @@
             (object items=(array 'Injectable') path='@nestjs/common')
             (object items=(array 'EventPublisher') path='@nestjs/cqrs')
             (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
-            (object
-                items=
-                (
-                    array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent')
-                )
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-        )
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
+                            (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName))
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Add' (toPascalCase schema.moduleNames) 'ContextEvent')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}

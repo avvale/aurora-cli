@@ -26,13 +26,13 @@
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
-{{ 
+{{
     push importsArray
         (object items='Auth' path='@aurora/decorators')
 ~}}
 {{/if}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
-{{ 
+{{
     push importsArray
         (object items=(array 'ContentLanguage') path=config.auroraCorePackage)
 ~}}

@@ -2,9 +2,10 @@
     setVar 'importsArray' (
         array
             (object items=(array 'AggregateRoot') path='@nestjs/cqrs')
-            (object
-                items=schema.aggregateName
-                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            (
+                object
+                    items=schema.aggregateName
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
     )
 ~}}
