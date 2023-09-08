@@ -209,6 +209,7 @@ export enum Scope
 export enum ScopeElement
 {
     MODULE  = 'module',
+    BOUNDED_CONTEXT  = 'bounded-context',
 }
 
 export enum TemplateElement

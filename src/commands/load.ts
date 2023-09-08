@@ -1,8 +1,10 @@
 import { Args, Command, Flags } from '@oclif/core';
-import { Prompter, ModuleDefinitionSchema, YamlManager, Scope, ScopeElement, BackHandler } from '../@cliter';
-import { FrontHandler } from '../@cliter/handlers/front.handler';
-import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../@cliter/functions/common';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { BackHandler, ModuleDefinitionSchema, Prompter, Scope, ScopeElement, YamlManager, cliterConfig } from '../@cliter';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
+import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../@cliter/functions/common';
+import { FrontHandler } from '../@cliter/handlers/front.handler';
 
 export default class Load extends Command
 {
@@ -105,7 +107,7 @@ export default class Load extends Command
             await reviewOverwrites(generateCommandState);
         }
 
-        /* if (args.element === TemplateElement.BACK_BOUNDED_CONTEXT)
+        /* if (args.secondArg === ScopeElement.BOUNDED_CONTEXT)
         {
             const { boundedContextName }: any = await Prompter.promptForLoadBoundedContext(flags.boundedContext);
 
@@ -114,7 +116,7 @@ export default class Load extends Command
             const batchOperations = [];
             for (const yamlFile of yamlFiles.filter(files => files.endsWith(cliterConfig.schemaDefinitionExtension)))
             {
-                // create yaml file
+                // load yaml file
                 const schema: ModuleDefinitionSchema    = YamlManager.loadYamlConfigFile(boundedContextName, yamlFile.replace(cliterConfig.schemaDefinitionExtension, ''));
                 const currentLockFiles: LockFile[]      = this.loadJsonLockFile(boundedContextName, schema.moduleName);
 
