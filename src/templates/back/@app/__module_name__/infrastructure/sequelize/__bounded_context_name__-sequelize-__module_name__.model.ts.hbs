@@ -80,7 +80,11 @@
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
-        (object items=(array (schema.aggregateName) 'I18nModel') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+        (
+            object
+                items=(sumStrings schema.aggregateName 'I18nModel')
+                path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+        )
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
