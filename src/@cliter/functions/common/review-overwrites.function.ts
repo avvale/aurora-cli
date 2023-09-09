@@ -1,17 +1,18 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable max-depth */
 /* eslint-disable complexity */
-import { GenerateCommandState } from '../../types';
-import { FileManager, Prompter } from '../../utils';
-import { GlobalState } from '../../store';
-import { cliterConfig } from '../../config';
+import { wait } from '@oclif/core/lib/cli-ux';
+import * as chalk from 'chalk';
+import * as _ from 'lodash';
+import * as logSymbols from 'log-symbols';
+import * as emoji from 'node-emoji';
+import * as shell from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import * as shell from 'node:child_process';
-import * as logSymbols from 'log-symbols';
-import * as chalk from 'chalk';
-import * as emoji from 'node-emoji';
-import * as _ from 'lodash';
+import { cliterConfig } from '../../config';
+import { GlobalState } from '../../store';
+import { GenerateCommandState } from '../../types';
+import { FileManager, Prompter } from '../../utils';
 
 export const reviewOverwrites = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
@@ -29,6 +30,10 @@ export const reviewOverwrites = async (generateCommandState: GenerateCommandStat
 
     if (Array.isArray(originFiles) && originFiles.length > 0)
     {
+        // Attention! wait to next event cycle,
+        // otherwise we may hinder the printing of exceptions.
+        await wait(0);
+
         generateCommandState.command.log(`
 ********************************************
 ***              ATTENTION!              ***
