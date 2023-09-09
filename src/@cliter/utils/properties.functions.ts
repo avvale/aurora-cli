@@ -60,6 +60,13 @@ export const countGridSelectElementWebComponentsProperties = (
     return properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT).length;
 };
 
+export const countGridSelectMultipleElementsWebComponentsProperties = (
+    properties: Property[],
+): number =>
+{
+    return properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_MULTIPLE_ELEMENTS).length;
+};
+
 // replace by Properties lengthGridElementsManagerWebComponents
 export const countGridElementsManagerWebComponentsProperties = (
     properties: Property[],
@@ -905,6 +912,14 @@ export const getGridSelectElementWebComponentsProperties = (
 {
     return properties
         .filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT);
+};
+
+export const getGridSelectMultipleElementsWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_MULTIPLE_ELEMENTS);
 };
 
 // replace by Properties withGridElementsManagerWebComponents

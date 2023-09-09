@@ -14,5 +14,5 @@ import './inputs/varchar-input';
 import './many-to-many-array-items';
 import './relationships/grid-elements-manager-web-component';
 import './relationships/grid-select-element-web-component';
-import './relationships/grid-select-elements-web-component';
+import './relationships/grid-select-multiple-elements-web-component';
 import './relationships/select-web-component';

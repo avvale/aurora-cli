@@ -1,6 +1,6 @@
 import * as handlebars from 'handlebars';
 
-handlebars.registerPartial('gridSelectElementsWebComponent',
+handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
     `<!-- #region component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} -->
 <au-grid-select-multiple-elements
     *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"

@@ -184,11 +184,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     ];
     /* #endregion variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
-    {{#eq webComponent.type 'grid-select-elements'}}
-    /* #region variables to manage grid-select-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
-    // start dialog permissions grid
-    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementsSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectElementComponent;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}SelectedRows: IamPermission[] = [];
+    {{#eq webComponent.type 'grid-select-multiple-elements'}}
+    /* #region variables to manage grid-select-multiple-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    // start dialog {{ name }} grid
+    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementsSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectMultipleElementsComponent;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}SelectedRows: {{ ../schema.aggregateName }}[] = [];
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
@@ -232,10 +232,42 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
     ];
 
-    // start dialog permissions of role grid
-    {{ log (getModulePathFromSchema relationship.pivot) }}
-    {{ toPascalCase (getModuleNameFromPropertyRelationship (getModulePathFromSchema relationship.pivot)) }}GridState: GridState = {};
-    /* #endregion variables to manage grid-select-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} }} */
+    // start permissions of role grid
+    {{ toCamelCase relationship.pivot.moduleNames }}Id: string[];
+    {{ toCamelCase relationship.pivot.moduleName }}GridState: GridState = {};
+    {{ toCamelCase relationship.pivot.moduleName }}SelectedRows: {{ relationship.pivot.aggregateName }}[] = [];
+    {{ toCamelCase relationship.pivot.moduleName }}GridId: string = 'iam::role.detail.{{ toCamelCase relationship.pivot.moduleName }}GridList';
+    {{ toCamelCase relationship.pivot.moduleName }}GridData$: Observable<GridData<{{ relationship.pivot.aggregateName }}>>;
+    {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig$: Observable<ColumnConfig[]>;
+    selectedCheckboxRowModel = new SelectionModel<any>(true, [], true, (a: {{ relationship.pivot.aggregateName }}, b: {{ relationship.pivot.aggregateName }}) => a.{{ toCamelCase relationship.singularName }}Id === b.{{ toCamelCase relationship.singularName }}Id);
+    origin{{ toPascalCase relationship.pivot.moduleName }}ColumnsConfig: ColumnConfig[] = [
+        {
+            type   : ColumnDataType.ACTIONS,
+            field  : 'actions',
+            sticky : true,
+            actions: row =>
+            {
+                const actions = [];
+
+                actions.push({
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.remove{{ toPascalCase relationship.pivot.moduleName }}',
+                    isViewAction: false,
+                    translation : 'unlink',
+                    icon        : 'link_off',
+                });
+
+                return actions;
+            },
+        },
+        {
+            type       : ColumnDataType.CHECKBOX,
+            field      : 'select',
+            translation: 'Selects',
+            sticky     : true,
+        },
+        ...{{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig,
+    ];
+    /* #endregion variables to manage grid-select-multiple-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} }} */
     {{/eq}}
     {{#eq webComponent.type 'grid-elements-manager'}}
     /* #region variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */

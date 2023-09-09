@@ -258,7 +258,7 @@ export enum WebComponentType
      * manage many-to-many relationships by allowing you to select
      * an elements within a grid with search functionality
      */
-    GRID_SELECT_ELEMENTS   = 'grid-select-elements',
+    GRID_SELECT_MULTIPLE_ELEMENTS   = 'grid-select-multiple-elements',
 
     /**
      * manage one-to-many relationships by creating a grid of related items,
