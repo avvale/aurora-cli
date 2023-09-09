@@ -490,7 +490,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{/if}}
     {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
     /* #region methods to manage {{ toPascalCase relationship.pivot.moduleNames }} grid */
-    /* #endregion methods to manage {{ toPascalCase relationship.pivot.moduleNames }} gird */
+    /* #endregion methods to manage {{ toPascalCase relationship.pivot.moduleNames }} grid */
 
     /* #region methods to manage {{ toPascalCase relationship.pivot.moduleNames }} dialog */
     /* #endregion methods to manage {{ toPascalCase relationship.pivot.moduleNames }} dialog */
@@ -590,9 +590,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         if (this.fallbackLang.id !== this.currentLang.id) this.disabledNotI18nFields();
                         {{/if}}
                     });
+                {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
+
+                /* #region edit action to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements */
+                /* #endregion edit action to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements */
+                {{/each}}
                 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 
-                /* #region init actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
+                /* #region edit action to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
                 this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId, this.origin{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
@@ -617,7 +622,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.patchValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }});
                         }
                     });
-                /* #endregion init actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
+                /* #endregion edit action to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-elements-manager */
                 {{/each}}
                 break;
 
@@ -804,6 +809,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
                 break;
                 /* #endregion actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} grid-select-element */
+            {{/each}}
+            {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
+
+            /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
+            /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
+
+            /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
+            /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
             {{/each}}
             {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 
