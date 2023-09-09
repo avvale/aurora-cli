@@ -199,20 +199,26 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             sticky : true,
             actions: row =>
             {
-                const actions = [
-                    {
+                const actions = [];
+
+                if (this.rolePermissionsId.includes(row.id))
+                {
+                    actions.push({
                         id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.noAction',
                         isViewAction: false,
                         translation : 'select',
                         icon        : 'done',
-                    },
-                    {
+                    });
+                }
+                else
+                {
+                    actions.push({
                         id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.add{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                         isViewAction: false,
                         translation : 'select',
                         icon        : 'add_link',
-                    },
-                ];
+                    });
+                }
 
                 return actions;
             },
@@ -227,6 +233,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     ];
 
     // start dialog permissions of role grid
+    {{ log (getModulePathFromSchema relationship.pivot) }}
+    {{ toPascalCase (getModuleNameFromPropertyRelationship (getModulePathFromSchema relationship.pivot)) }}GridState: GridState = {};
     /* #endregion variables to manage grid-select-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} }} */
     {{/eq}}
     {{#eq webComponent.type 'grid-elements-manager'}}
