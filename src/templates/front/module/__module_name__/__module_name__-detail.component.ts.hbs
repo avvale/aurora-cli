@@ -34,6 +34,20 @@
         )
 ~}}
 {{/unlessEq}}
+{{#unlessEq (countGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) 0 }}
+{{
+    push importsArray
+        (object items='ViewChild' path='@angular/core')
+~}}
+{{
+    push importsArray
+        (
+            object
+                items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectMultipleElementsComponent' 'GridState' 'GridStateService' 'QueryStatementHandler' 'SelectionModel')
+                path='@aurora'
+        )
+~}}
+{{/unlessEq}}
 {{#unlessEq (countGridElementsManagerWebComponentsProperties schema.aggregateProperties) 0 }}
 {{
     push importsArray
@@ -187,8 +201,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{#eq webComponent.type 'grid-select-multiple-elements'}}
     /* #region variables to manage grid-select-multiple-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
     // start dialog {{ name }} grid
-    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementsSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectMultipleElementsComponent;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}SelectedRows: {{ ../schema.aggregateName }}[] = [];
+    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridSelectMultipleElements') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectMultipleElementsComponent;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}SelectedRows: {{ relationship.aggregateName }}[] = [];
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
