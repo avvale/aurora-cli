@@ -158,7 +158,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$: Observable<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[]>;
     {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
-    /* #region  variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
+    /* #region variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectElementComponent;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
@@ -184,8 +184,53 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     ];
     /* #endregion variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
+    {{#eq webComponent.type 'grid-select-elements'}}
+    /* #region variables to manage grid-select-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    // start dialog permissions grid
+    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementsSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectElementComponent;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}SelectedRows: IamPermission[] = [];
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OriginColumnsConfig: ColumnConfig[] = [
+        {
+            type   : ColumnDataType.ACTIONS,
+            field  : 'Actions',
+            sticky : true,
+            actions: row =>
+            {
+                const actions = [
+                    {
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.noAction',
+                        isViewAction: false,
+                        translation : 'select',
+                        icon        : 'done',
+                    },
+                    {
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.add{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
+                        isViewAction: false,
+                        translation : 'select',
+                        icon        : 'add_link',
+                    },
+                ];
+
+                return actions;
+            },
+        },
+        {
+            type       : ColumnDataType.CHECKBOX,
+            field      : 'select',
+            translation: 'Selects',
+            sticky     : true,
+        },
+        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
+    ];
+
+    // start dialog permissions of role grid
+    /* #endregion variables to manage grid-select-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} }} */
+    {{/eq}}
     {{#eq webComponent.type 'grid-elements-manager'}}
-    /* #region  variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    /* #region variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
     @ViewChild('{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridElementsManager') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridElementsManagerComponent;
     {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg: FormGroup;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
