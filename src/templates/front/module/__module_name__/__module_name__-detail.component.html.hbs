@@ -171,6 +171,10 @@
                     {{> gridSelectElementWebComponent schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq webComponent.type 'grid-select-elements'}}
+                    {{> gridSelectElementsWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq webComponent.type 'grid-elements-manager'}}
                     {{> gridElementsManagerWebComponent schema=../schema property=.}}
 
