@@ -10,66 +10,119 @@
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
-{{ push importsArray
-    (object items=(array 'CoreCurrentLangService' 'CoreLang') path='@aurora')
+{{
+    push importsArray
+        (object items=(array 'CoreCurrentLangService' 'CoreLang') path='@aurora')
 ~}}
 {{/if}}
 {{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
-{{ push importsArray
-    (object items='Observable' path='rxjs')
+{{
+    push importsArray
+        (object items='Observable' path='rxjs')
 ~}}
 {{#unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0 }}
-{{ push importsArray
-    (object items='ViewChild' path='@angular/core')
+{{
+    push importsArray
+        (object items='ViewChild' path='@angular/core')
 ~}}
-{{ push importsArray
-    (object items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectElementComponent' 'GridStateService' 'QueryStatementHandler') path='@aurora')
+{{
+    push importsArray
+        (
+            object
+                items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectElementComponent' 'GridStateService' 'QueryStatementHandler')
+                path='@aurora'
+        )
 ~}}
 {{/unlessEq}}
 {{#unlessEq (countGridElementsManagerWebComponentsProperties schema.aggregateProperties) 0 }}
-{{ push importsArray
-    (object items='ViewChild' path='@angular/core')
+{{
+    push importsArray
+        (object items='ViewChild' path='@angular/core')
 ~}}
-{{ push importsArray
-    (object items='FormGroup' path='@angular/forms')
+{{
+    push importsArray
+        (object items='FormGroup' path='@angular/forms')
 ~}}
-{{ push importsArray
-    (object items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridElementsManagerComponent' 'GridFiltersStorageService' 'GridState' 'GridStateService' 'QueryStatementHandler') path='@aurora')
+{{
+    push importsArray
+        (
+            object
+                items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridElementsManagerComponent' 'GridFiltersStorageService' 'GridState' 'GridStateService' 'QueryStatementHandler')
+                path='@aurora'
+        )
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
+
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../importsArray
-    (object items=(getAggregateNameFromPropertyRelationship relationship.modulePath)) path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '.types'))
-    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service'))
+{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(getAggregateNameFromPropertyRelationship relationship.modulePath)
+                path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
+        )
+        (
+            object
+                items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+                path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service')
+        )
 ~}}
 {{else}}
-{{ push ../importsArray
-    (object items=(getAggregateNameFromPropertyRelationship relationship.modulePath)) path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '.types'))
-    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service'))
+{{
+    push ../importsArray
+        (
+            object
+                items=(getAggregateNameFromPropertyRelationship relationship.modulePath)
+                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
+        )
+        (
+            object
+                items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service')
+        )
 ~}}
 {{/eq}}
 {{/each}}
 {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
+{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
+                path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config')
+        )
 ~}}
 {{else}}
 {{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
+    (
+        object
+            items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
+            path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config')
+    )
 ~}}
 {{/eq}}
 {{/each}}
 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
+{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
+                path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config')
+        )
 ~}}
 {{else}}
-{{ push ../importsArray
-    (object items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config'))
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
+                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.columns-config')
+        )
 ~}}
 {{/eq}}
 {{/each}}
