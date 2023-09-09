@@ -53,7 +53,6 @@
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
-
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
@@ -359,8 +358,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm(): void
     {
         this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg = this.fb.group({
-            {{#each (getFormGroupFieldsProperties (getPropertiesFromPropertyRelationship relationship.modulePath)) }}
-            {{#if (isAllowProperty (getModuleNameFromPropertyRelationship relationship.modulePath) this) }}
+            {{#each (getFormGroupFieldsProperties (getPropertiesFromPropertyRelationship relationship.modulePath)) as |formGroupFieldsProperty formGroupFieldsPropertyIndex| }}
+            {{#if (isAllowProperty (getModuleNameFromPropertyRelationship ../relationship.modulePath) this) }}
             {{ toCamelCase (getPropertyName this) }}: {{#if (hasValidationFormControl .)}}[{{{initialFormGroupData .}}}, [{{#unless nullable }}Validators.required{{ hasCommaInValidationFormControl . 'nullable' }}{{/unless}}{{#if this.length }}Validators.minLength({{ this.length }}), Validators.maxLength({{ this.length }}){{ hasCommaInValidationFormControl . 'length' }}{{/if}}{{#if maxLength }}Validators.maxLength({{maxLength}}){{ hasCommaInValidationFormControl . 'maxLength' }}{{/if}}]]{{else}}{{{initialFormGroupData .}}}{{/if}},
             {{/if}}
             {{/each}}
