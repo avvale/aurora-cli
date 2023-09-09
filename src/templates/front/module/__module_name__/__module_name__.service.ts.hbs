@@ -26,14 +26,31 @@
 {{/each}}
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName)}}
-{{ push ../importsArray
-    (object items=(getAggregateNameFromPropertyRelationship relationship.modulePath)) path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types'))
-    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service'))
+{{
+    push ../importsArray
+        (
+            object
+                items=(getAggregateNameFromPropertyRelationship relationship.modulePath)
+                path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
+        )
+        (
+            object
+                items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+                path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service')
+        )
 ~}}
 {{else}}
-{{ push ../importsArray
-    (object items=(getAggregateNameFromPropertyRelationship relationship.modulePath)) path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types'))
-    (object items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service'))
+{{
+    push ../importsArray
+        (
+            object
+                items=(getAggregateNameFromPropertyRelationship relationship.modulePath)
+                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types'))
+        (
+            object
+                items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service')
+        )
 ~}}
 {{/eq}}
 {{/each}}
