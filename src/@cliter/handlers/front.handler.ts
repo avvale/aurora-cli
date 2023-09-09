@@ -29,12 +29,20 @@ export class FrontHandler
         );
     }
 
-    static async generateModule(generateCommandState: GenerateCommandState): Promise<void>
+    static async generateModule(
+        generateCommandState: GenerateCommandState,
+        {
+            hasGenerateTestingFiles = false,
+        }:
+        {
+            hasGenerateTestingFiles?: boolean;
+        } = {},
+    ): Promise<void>
     {
-        // generate dashboard module translations empty
+        // generate front module translations empty
         await generateTranslationFiles(generateCommandState);
 
-        // generate dashboard module files
+        // generate front module files
         await generateModuleFiles(generateCommandState);
 
         // create references, write imports in ts files

@@ -1,6 +1,6 @@
 import * as handlebars from 'handlebars';
 
-handlebars.registerPartial('gridSelectElementWebComponent',
+handlebars.registerPartial('gridSelectElementsWebComponent',
     `<!-- #region component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} -->
 <au-grid-select-multiple-elements
     *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
@@ -70,7 +70,6 @@ handlebars.registerPartial('gridSelectElementWebComponent',
             \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
         </au-grid-column-translation>
     </au-grid-translations>
-
     <ng-template
         auGridSelectMultipleCustomHeaderTemplate
         position="left"
@@ -96,11 +95,10 @@ handlebars.registerPartial('gridSelectElementWebComponent',
                     svgIcon="mat_solid:link_off"
                 >
                 </mat-icon>
-                {{ t('RemoveSelected') }}
+                \\{{ t('RemoveSelected') }}
             </button>
         </div>
     </ng-template>
-
     <ng-template
         auGridSelectMultipleCustomHeaderDialogTemplate
         position="left"
@@ -112,10 +110,9 @@ handlebars.registerPartial('gridSelectElementWebComponent',
                 (click)="handleAdd{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}Selected()"
             >
                 <mat-icon class="mr-2">add_link</mat-icon>
-                {{ t('AddSelected') }}
+                \\{{ t('AddSelected') }}
             </button>
         </ng-container>
     </ng-template>
-
-</au-grid-elements-manager>
+</au-grid-select-multiple-elements>
 <!-- #endregion component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} -->`);

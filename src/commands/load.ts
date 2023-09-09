@@ -101,6 +101,9 @@ export default class Load extends Command
             {
                 await FrontHandler.generateModule(
                     generateCommandState,
+                    {
+                        hasGenerateTestingFiles: flags.tests,
+                    },
                 );
             }
 
