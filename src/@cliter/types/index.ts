@@ -248,7 +248,26 @@ export interface VariableInjectionStatement
 
 export enum WebComponentType
 {
+    /**
+     * manage many-to-one relationships by allowing you to select
+     * an element within a grid with search functionality
+     */
     GRID_SELECT_ELEMENT   = 'grid-select-element',
+
+    /**
+     * manage many-to-many relationships by allowing you to select
+     * an elements within a grid with search functionality
+     */
+    GRID_SELECT_ELEMENTS   = 'grid-select-elements',
+
+    /**
+     * manage one-to-many relationships by creating a grid of related items,
+     * with the functionality to create, edit and delete related elements
+     */
     GRID_ELEMENTS_MANAGER = 'grid-elements-manager',
+
+    /**
+     * dropdown to select one element from a list of related items
+     */
     SELECT                = 'select'
 }
