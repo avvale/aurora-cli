@@ -339,38 +339,74 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
-{{ push injectionsArray
-    (object variableName='coreCurrentLangService' className='CoreCurrentLangService')
+{{
+    push injectionsArray
+        (object variableName='coreCurrentLangService' className='CoreCurrentLangService')
 ~}}
 {{/if}}
 {{#unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0 }}
-{{ push injectionsArray
-    (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
-    (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
-    (object variableName='gridStateService' className='GridStateService')
+{{
+    push injectionsArray
+        (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
+        (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+        (object variableName='gridStateService' className='GridStateService')
+~}}
+{{/unlessEq ~}}
+{{#unlessEq (countGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) 0 }}
+{{
+    push injectionsArray
+        (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
+        (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+        (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
 {{#unlessEq (countGridElementsManagerWebComponentsProperties schema.aggregateProperties) 0 }}
-{{ push injectionsArray
-    (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
-    (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
-    (object variableName='gridStateService' className='GridStateService')
+{{
+    push injectionsArray
+        (object variableName='gridColumnsConfigStorageService' className='GridColumnsConfigStorageService')
+        (object variableName='gridFiltersStorageService' className='GridFiltersStorageService')
+        (object variableName='gridStateService' className='GridStateService')
 ~}}
 {{/unlessEq ~}}
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq webComponent.type 'select'}}
-{{ push ../injectionsArray
-    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service'))
+{{
+    push ../injectionsArray
+        (
+            object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+            className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+        )
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-select-element'}}
-{{ push ../injectionsArray
-    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service'))
+{{
+    push ../injectionsArray
+        (
+            object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+            className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+        )
+~}}
+{{/eq ~}}
+{{#eq webComponent.type 'grid-select-multiple-elements'}}
+{{
+    push ../injectionsArray
+        (
+            object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+            className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+        )
+        (
+            object variableName=(sumStrings (toCamelCase relationship.pivot.moduleName) 'Service')
+            className=(sumStrings (toPascalCase relationship.pivot.moduleName) 'Service')
+        )
 ~}}
 {{/eq ~}}
 {{#eq webComponent.type 'grid-elements-manager'}}
-{{ push ../injectionsArray
-    (object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service') className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service'))
+{{
+    push ../injectionsArray
+        (
+            object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+            className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+        )
 ~}}
 {{/eq ~}}
 {{/each ~}}
@@ -452,6 +488,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     }
 
     {{/if}}
+    {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
+    /* #region methods to manage {{ toPascalCase relationship.pivot.moduleNames }} grid */
+    /* #endregion methods to manage {{ toPascalCase relationship.pivot.moduleNames }} gird */
+
+    /* #region methods to manage {{ toPascalCase relationship.pivot.moduleNames }} dialog */
+    /* #endregion methods to manage {{ toPascalCase relationship.pivot.moduleNames }} dialog */
+
+    {{/each}}
     {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
     /* #region methods to manage {{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
     create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm(): void
