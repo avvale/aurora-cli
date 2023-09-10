@@ -593,6 +593,15 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
 
                 /* #region edit action to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements */
+                // we need to get the {{ name }} of the {{ ../schema.moduleName }} to be able to
+                // marked {{ name }} as selected in the dialog
+                this.{{ toCamelCase relationship.pivot.moduleName }}Service
+                    .{{ toCamelCase relationship.pivot.moduleNames }}$
+                    .pipe(takeUntil(this.unsubscribeAll$))
+                    .subscribe({{ toCamelCase relationship.pivot.moduleNames }} =>
+                    {
+                        this.{{ toCamelCase relationship.pivot.moduleNames }}Id = {{ toCamelCase relationship.pivot.moduleNames }}.map({{ toCamelCase relationship.pivot.moduleName }} => {{ toCamelCase relationship.pivot.moduleName }}.permissionId);
+                    });
                 /* #endregion edit action to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements */
                 {{/each}}
                 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
@@ -813,10 +822,10 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
 
             /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
-            /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
+                /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
 
             /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
-            /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
+                /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
             {{/each}}
             {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 
