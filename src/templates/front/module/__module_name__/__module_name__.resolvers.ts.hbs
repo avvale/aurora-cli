@@ -221,8 +221,7 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
         (eq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
         (eq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
         (eq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
-    }}
-    {{#unless (hasI18nProperties schema.aggregateProperties) }}return {{else}}const action = {{/unless~}}
+    }}{{#unless (hasI18nProperties schema.aggregateProperties) }}return {{else}}const action = {{/unless~}}
     {{/and}}actionService.action({
         id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
         isViewAction: true,
