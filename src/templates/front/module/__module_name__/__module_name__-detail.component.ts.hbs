@@ -200,7 +200,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{/eq}}
     {{#eq webComponent.type 'grid-select-multiple-elements'}}
     /* #region variables to manage grid-select-multiple-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
-    // start dialog {{ name }} grid
+    // start {{ name }} dialog
     @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridSelectMultipleElements') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectMultipleElementsComponent;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}SelectedRows: {{ relationship.aggregateName }}[] = [];
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
@@ -215,7 +215,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {
                 const actions = [];
 
-                if (this.rolePermissionsId.includes(row.id))
+                if (this.{{ toCamelCase relationship.pivot.moduleNames }}Id.includes(row.id))
                 {
                     actions.push({
                         id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.noAction',
@@ -246,11 +246,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
     ];
 
-    // start permissions of role grid
+    // start {{ name }} grid of {{ toCamelCase ../schema.moduleName }}
     {{ toCamelCase relationship.pivot.moduleNames }}Id: string[];
     {{ toCamelCase relationship.pivot.moduleName }}GridState: GridState = {};
     {{ toCamelCase relationship.pivot.moduleName }}SelectedRows: {{ relationship.pivot.aggregateName }}[] = [];
-    {{ toCamelCase relationship.pivot.moduleName }}GridId: string = 'iam::role.detail.{{ toCamelCase relationship.pivot.moduleName }}GridList';
+    {{ toCamelCase relationship.pivot.moduleName }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleName }}GridList';
     {{ toCamelCase relationship.pivot.moduleName }}GridData$: Observable<GridData<{{ relationship.pivot.aggregateName }}>>;
     {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig$: Observable<ColumnConfig[]>;
     selectedCheckboxRowModel = new SelectionModel<any>(true, [], true, (a: {{ relationship.pivot.aggregateName }}, b: {{ relationship.pivot.aggregateName }}) => a.{{ toCamelCase relationship.singularName }}Id === b.{{ toCamelCase relationship.singularName }}Id);
@@ -490,10 +490,81 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{/if}}
     {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
     /* #region methods to manage {{ toPascalCase relationship.pivot.moduleNames }} grid */
+    handlePermissionsRowsSectionChange($event: SelectionChange<IamPermissionRole>): void
+    {
+        this.{{ toCamelCase relationship.pivot.moduleName }}SelectedRows = $event.source.selected;
+    }
+
+    handleRemovePermissionsSelected(): void
+    {
+        if (this.{{ toCamelCase relationship.pivot.moduleName }}SelectedRows.length > 0)
+        {
+            this.actionService.action({
+                id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.removePermissionsRoles',
+                isViewAction: false,
+                meta        : {
+                    rows: this.{{ toCamelCase relationship.pivot.moduleName }}SelectedRows,
+                },
+            });
+        }
+    }
     /* #endregion methods to manage {{ toPascalCase relationship.pivot.moduleNames }} grid */
 
-    /* #region methods to manage {{ toPascalCase relationship.pivot.moduleNames }} dialog */
-    /* #endregion methods to manage {{ toPascalCase relationship.pivot.moduleNames }} dialog */
+    /* #region methods to manage {{ toPascalCase name }} dialog */
+    handleOpen{{ toPascalCase name }}Dialog(): void
+    {
+        this.actionService.action({
+            id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase name }}Pagination',
+            isViewAction: false,
+            meta        : {
+                query: QueryStatementHandler
+                    .init({ columnsConfig: permissionColumnsConfig })
+                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase name }}GridId))
+                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase name }}GridId))
+                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase name }}GridId))
+                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase name }}GridId))
+                    .getQueryStatement(),
+            },
+            afterRunAction: () =>
+            {
+                this.gridStateService.setPaginationActionId(this.{{ toCamelCase name }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase name }}Pagination');
+                this.gridStateService.setExportActionId(this.{{ toCamelCase name }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.exportPermissions');
+                this.{{ toCamelCase name }}Component.handleElementsDialog({
+                    data: {
+                        gridId   : this.{{ toCamelCase name }}GridId,
+                        gridState: {
+                            columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase name }}GridId),
+                            page         : this.gridStateService.getPage(this.{{ toCamelCase name }}GridId),
+                            sort         : this.gridStateService.getSort(this.{{ toCamelCase name }}GridId),
+                            search       : this.gridStateService.getSearchState(this.{{ toCamelCase name }}GridId),
+                        },
+                    },
+                });
+            },
+        });
+    }
+
+    handleDialog{{ toPascalCase name }}RowsSectionChange($event: SelectionChange<IamPermission>): void
+    {
+        this.{{ toCamelCase name }}SelectedRows = $event.source.selected;
+    }
+
+    handleAdd{{ toPascalCase name }}Selected(): void
+    {
+        if (this.{{ toCamelCase name }}SelectedRows.length > 0)
+        {
+            this.actionService.action({
+                id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.addPermissionsRoles',
+                isViewAction: false,
+                meta        : {
+                    rows: this.{{ toCamelCase name }}SelectedRows,
+                },
+            });
+
+            this.{{ toCamelCase name }}Component.elementsDialogRef.close();
+        }
+    }
+    /* #endregion methods to manage {{ toPascalCase name }} dialog */
 
     {{/each}}
     {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
@@ -602,6 +673,26 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     {
                         this.{{ toCamelCase relationship.pivot.moduleNames }}Id = {{ toCamelCase relationship.pivot.moduleNames }}.map({{ toCamelCase relationship.pivot.moduleName }} => {{ toCamelCase relationship.pivot.moduleName }}.permissionId);
                     });
+
+                // {{ name }} grid
+                this.{{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig$ = this.gridColumnsConfigStorageService
+                    .getColumnsConfig(this.{{ toCamelCase relationship.pivot.moduleName }}GridId, this.origin{{ toPascalCase relationship.pivot.moduleName }}ColumnsConfig)
+                    .pipe(takeUntil(this.unsubscribeAll$));
+
+                this.{{ toCamelCase relationship.pivot.moduleName }}GridState = {
+                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase relationship.pivot.moduleName }}GridId),
+                    page         : this.gridStateService.getPage(this.{{ toCamelCase relationship.pivot.moduleName }}GridId),
+                    sort         : this.gridStateService.getSort(this.{{ toCamelCase relationship.pivot.moduleName }}GridId),
+                    search       : this.gridStateService.getSearchState(this.{{ toCamelCase relationship.pivot.moduleName }}GridId),
+                };
+
+                this.{{ toCamelCase relationship.pivot.moduleName }}GridData$ = this.{{ toCamelCase relationship.pivot.moduleName }}Service.pagination$;
+
+                // {{ name }} grid
+                this.{{ name }}ColumnsConfig$ = this.gridColumnsConfigStorageService
+                    .getColumnsConfig(this.{{ name }}GridId, this.{{ name }}OriginColumnsConfig)
+                    .pipe(takeUntil(this.unsubscribeAll$));
+                this.{{ name }}GridData$ = this.permissionService.pagination$;
                 /* #endregion edit action to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements */
                 {{/each}}
                 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
@@ -822,9 +913,265 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
 
             /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
+            case 'iam::role.detail.addPermissionRole':
+                await lastValueFrom(this.permissionRoleService.create({
+                    object: {
+                        permissionId: action.meta.row.id,
+                        roleId      : this.managedObject.id,
+                    },
+                }));
+
+                this.actionService.action({
+                    id          : 'iam::role.detail.permissionsRolesPagination',
+                    isViewAction: false,
+                });
+
+                // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                this.actionService.action({
+                    id            : 'iam::role.detail.getPermissionsRoles',
+                    isViewAction  : false,
+                    afterRunAction: () =>
+                    {
+                        this.actionService.action({
+                            id          : 'iam::role.detail.permissionsPagination',
+                            isViewAction: false,
+                        });
+                    },
+                });
+
+                this.snackBar.open(
+                    `${this.translocoService.translate('iam.Permission')} ${this.translocoService.translate('Saved.M')}`,
+                    undefined,
+                    {
+                        verticalPosition: 'top',
+                        duration        : 3000,
+                    },
+                );
+                break;
+
+            case 'iam::role.detail.addPermissionsRoles':
+                try
+                {
+                    await lastValueFrom(
+                        this.permissionRoleService
+                            .insert({
+                                objects: action.meta.rows
+                                    // avoid insert rows already inserted
+                                    .filter(row => this.rolePermissionsId.indexOf(row.id) === -1)
+                                    .map(row => ({
+                                        permissionId: row.id,
+                                        roleId      : this.managedObject.id,
+                                    })),
+                            }),
+                    );
+
+                    this.actionService.action({
+                        id          : 'iam::role.detail.permissionsRolesPagination',
+                        isViewAction: false,
+                    });
+
+                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                    this.actionService.action({
+                        id          : 'iam::role.detail.getPermissionsRoles',
+                        isViewAction: false,
+                    });
+
+                    this.snackBar.open(
+                        `${this.translocoService.translate('iam.Permissions')} ${this.translocoService.translate('Saved.M.P')}`,
+                        undefined,
+                        {
+                            verticalPosition: 'top',
+                            duration        : 3000,
+                        },
+                    );
+                }
+                catch(error)
+                {
+                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                }
+                break;
+
+            case 'iam::role.detail.removePermissionRole':
+                await lastValueFrom(this.permissionRoleService.deleteById({
+                    permissionId: action.meta.row.permissionId,
+                    roleId      : this.managedObject.id,
+                }));
+
+                this.actionService.action({
+                    id          : 'iam::role.detail.permissionsRolesPagination',
+                    isViewAction: false,
+                });
+
+                this.actionService.action({
+                    id          : 'iam::role.detail.getPermissionsRoles',
+                    isViewAction: false,
+                });
+
+                this.snackBar.open(
+                    `${this.translocoService.translate('iam.Permission')} ${this.translocoService.translate('Deleted.M')}`,
+                    undefined,
+                    {
+                        verticalPosition: 'top',
+                        duration        : 3000,
+                    },
+                );
+                break;
+
+            case 'iam::role.detail.permissionsRolesPagination':
+                await lastValueFrom(
+                    this.permissionRoleService
+                        .pagination({
+                            query: action.meta.query ?
+                                action.meta.query :
+                                QueryStatementHandler
+                                    .init({ columnsConfig: permissionRoleColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsRolesGridId))
+                                    .setSort(this.gridStateService.getSort(this.permissionsRolesGridId))
+                                    .setPage(this.gridStateService.getPage(this.permissionsRolesGridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.permissionsRolesGridId))
+                                    .getQueryStatement(),
+                            constraint: {
+                                where: {
+                                    roleId: this.managedObject.id,
+                                },
+                                include: [
+                                    {
+                                        association: 'permission',
+                                    },
+                                ],
+                            },
+                        }),
+                );
+                break;
+
+            case 'iam::role.detail.getPermissionsRoles':
+                await lastValueFrom(
+                    this.permissionRoleService
+                        .get({
+                            query: {
+                                where: {
+                                    roleId: this.managedObject.id,
+                                },
+                            },
+                        }),
+                );
+                break;
+
+            case 'iam::role.detail.exportPermissionsRoles':
+                const permissionRoleRows = await lastValueFrom(
+                    this.permissionRoleService
+                        .get({
+                            graphqlStatement: getQueryExportPermissionsRoles,
+                            query           : action.meta.query,
+                            constraint      : {
+                                where: {
+                                    roleId: this.managedObject.id,
+                                },
+                                include: [
+                                    {
+                                        association: 'permission',
+                                    },
+                                ],
+                            },
+                        }),
+                );
+
+                const permissionRoleColumns: string[] = ['name'];
+                const permissionRoleHeaders: string[] = [this.translocoService.translate('iam.permission')];
+
+                exportRows(
+                    permissionRoleRows.objects.map(row => row.permission),
+                    'rolePermissions.' + action.meta.format,
+                    permissionRoleColumns,
+                    permissionRoleHeaders,
+                    action.meta.format,
+                );
+                break;
                 /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
 
             /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
+            case 'iam::role.detail.permissionsPagination':
+                await lastValueFrom(
+                    this.permissionService
+                        .pagination({
+                            query: action.meta.query ?
+                                action.meta.query :
+                                QueryStatementHandler
+                                    .init({ columnsConfig: permissionColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
+                                    .setSort(this.gridStateService.getSort(this.permissionsGridId))
+                                    .setPage(this.gridStateService.getPage(this.permissionsGridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.permissionsGridId))
+                                    .getQueryStatement(),
+                        }),
+                );
+                break;
+
+            case 'iam::role.detail.removePermissionsRoles':
+                try
+                {
+                    await lastValueFrom(
+                        this.permissionRoleService
+                            .delete({
+                                query: {
+                                    where: {
+                                        [Operator.or]: action.meta.rows
+                                            .map(row => ({
+                                                permissionId: row.permissionId,
+                                                roleId      : this.managedObject.id,
+                                            })),
+                                    },
+                                },
+                            }),
+                    );
+
+                    this.selectedCheckboxRowModel.clear();
+
+                    this.actionService.action({
+                        id          : 'iam::role.detail.permissionsRolesPagination',
+                        isViewAction: false,
+                    });
+
+                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                    this.actionService.action({
+                        id          : 'iam::role.detail.getPermissionsRoles',
+                        isViewAction: false,
+                    });
+
+                    this.snackBar.open(
+                        `${this.translocoService.translate('iam.Permissions')} ${this.translocoService.translate('Deleted.M.P')}`,
+                        undefined,
+                        {
+                            verticalPosition: 'top',
+                            duration        : 3000,
+                        },
+                    );
+                }
+                catch(error)
+                {
+                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                }
+                break;
+
+            case 'iam::role.detail.exportPermissions':
+                const permissionRows = await lastValueFrom(
+                    this.permissionService
+                        .get({
+                            query: action.meta.query,
+                        }),
+                );
+
+                const permissionColumns: string[] = permissionColumnsConfig.map(permissionColumnConfig => permissionColumnConfig.field);
+                const permissionHeaders = permissionColumns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+
+                exportRows(
+                    permissionRows.objects,
+                    'permissions.' + action.meta.format,
+                    permissionColumns,
+                    permissionHeaders,
+                    action.meta.format,
+                );
+                break;
                 /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
             {{/each}}
             {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
