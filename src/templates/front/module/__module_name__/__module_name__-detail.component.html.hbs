@@ -167,6 +167,10 @@
                     {{> selectWebComponent schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq webComponent.type 'multiple-select'}}
+                    {{> multipleSelectWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
                     {{> gridSelectElementWebComponent schema=../schema property=.}}
 

@@ -15,4 +15,5 @@ import './many-to-many-array-items';
 import './relationships/grid-elements-manager-web-component';
 import './relationships/grid-select-element-web-component';
 import './relationships/grid-select-multiple-elements-web-component';
+import './relationships/multiple-select-web-component';
 import './relationships/select-web-component';

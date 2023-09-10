@@ -252,13 +252,13 @@ export enum WebComponentType
      * manage many-to-one relationships by allowing you to select
      * an element within a grid with search functionality
      */
-    GRID_SELECT_ELEMENT   = 'grid-select-element',
+    GRID_SELECT_ELEMENT = 'grid-select-element',
 
     /**
      * manage many-to-many relationships by allowing you to select
      * an elements within a grid with search functionality
      */
-    GRID_SELECT_MULTIPLE_ELEMENTS   = 'grid-select-multiple-elements',
+    GRID_SELECT_MULTIPLE_ELEMENTS = 'grid-select-multiple-elements',
 
     /**
      * manage one-to-many relationships by creating a grid of related items,
@@ -269,5 +269,10 @@ export enum WebComponentType
     /**
      * dropdown to select one element from a list of related items
      */
-    SELECT                = 'select'
+    SELECT = 'select',
+
+    /**
+     * dropdown to select multiple elements from a list of related items
+     */
+    MULTIPLE_SELECT = 'multiple-select',
 }
