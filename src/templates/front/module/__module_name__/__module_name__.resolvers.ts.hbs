@@ -398,6 +398,15 @@ export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
     return {{ toCamelCase schema.moduleName }}Service
         .findByIdWithRelations({
             id: route.paramMap.get('id'),
+            {{#unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0 }}
+            constraint: {
+                include: [
+                    {{#each (getMultipleSelectWebComponentsProperties schema.aggregateProperties) }}
+                    { association: '{{ name }}' },
+                    {{/each}}
+                ],
+            },
+            {{/unlessEq}}
             {{#if (hasI18nProperties schema.aggregateProperties) }}
             headers: {
                 'Content-Language': route.paramMap.get('langId'),

@@ -5,8 +5,36 @@
             (object items=(array 'DocumentNode' 'FetchResult') path='@apollo/client/core')
             (object items=(array 'GraphQLHeaders' 'GraphQLService' 'GridData' 'parseGqlFields' 'QueryStatement') path='@aurora')
             (object items=(array 'BehaviorSubject' 'first' 'map' 'Observable' 'tap') path='rxjs')
-            (object items=(array schema.aggregateName (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName)) (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ById') (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames))) path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types'))
-            (object items=(array 'paginationQuery' 'getQuery' 'fields' 'findByIdQuery' 'findQuery' 'createMutation' 'updateByIdMutation' 'updateMutation' 'deleteByIdMutation' 'deleteMutation') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
+            (
+                object
+                    items=
+                    (
+                        array
+                            schema.aggregateName
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Create' (toPascalCase schema.moduleName))
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ById')
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames))
+                    )
+                    path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types')
+            )
+            (
+                object
+                    items=
+                    (
+                        array
+                            'paginationQuery'
+                            'getQuery'
+                            'fields'
+                            'findByIdQuery'
+                            'findQuery'
+                            'createMutation'
+                            'updateByIdMutation'
+                            'updateMutation'
+                            'deleteByIdMutation'
+                            'deleteMutation'
+                    )
+                    path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql')
+            )
     )
 ~}}
 {{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
@@ -14,7 +42,11 @@
     (object items=(array 'findByIdWithRelationsQuery') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
 {{/unlessEq}}
-{{#or (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
+{{#or
+    (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+}}
 {{ push importsArray
     (object items=(array 'getRelations') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
 ~}}
@@ -177,6 +209,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
             constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
             {{/eq}}
+            {{#eq webComponent.type 'multiple-select'}}
+            query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
+            constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
+            {{/eq}}
             {{#eq webComponent.type 'grid-select-element'}}
             queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
             constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
@@ -196,6 +232,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             {{/eq}}
+            {{#eq webComponent.type 'multiple-select'}}
+            query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
+            constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
+            {{/eq}}
             {{#eq webComponent.type 'grid-select-element'}}
             queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
@@ -210,6 +250,9 @@ export class {{ toPascalCase schema.moduleName }}Service
         object: {{ schema.aggregateName }};
         {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
+        {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
+        {{/eq}}
+        {{#eq webComponent.type 'multiple-select'}}
         {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
@@ -229,6 +272,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 {{#eq webComponent.type 'select'}}
                 {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
                 {{/eq}}
+                {{#eq webComponent.type 'multiple-select'}}
+                {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
+                {{/eq}}
                 {{#eq webComponent.type 'grid-select-element'}}
                 {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
                 {{/eq}}
@@ -243,6 +289,10 @@ export class {{ toPascalCase schema.moduleName }}Service
                     constraint,
                     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
+                    query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+                    constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+                    {{/eq}}
+                    {{#eq webComponent.type 'multiple-select'}}
                     query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
                     constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
                     {{/eq}}
@@ -269,6 +319,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                     this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
                     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Subject$.next(data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }});
+                    {{/eq}}
+                    {{#eq webComponent.type 'multiple-select'}}
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Subject$.next(data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }});
                     {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
@@ -365,11 +418,19 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 
-    {{#or (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
+    {{#or
+        (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+        (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) 
+        (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0) 
+    }}
     getRelations(
         {
             {{#each (getWebComponentsProperties schema.aggregateProperties) }}
             {{#eq webComponent.type 'select'}}
+            query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
+            constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
+            {{/eq}}
+            {{#eq webComponent.type 'multiple-select'}}
             query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
             constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
             {{/eq}}
@@ -385,6 +446,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             {{/eq}}
+            {{#eq webComponent.type 'multiple-select'}}
+            query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
+            constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
+            {{/eq}}
             {{#eq webComponent.type 'grid-select-element'}}
             queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
@@ -395,6 +460,9 @@ export class {{ toPascalCase schema.moduleName }}Service
     ): Observable<{
         {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
+        {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
+        {{/eq}}
+        {{#eq webComponent.type 'multiple-select'}}
         {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
@@ -410,6 +478,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 {{#eq webComponent.type 'select'}}
                 {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
                 {{/eq}}
+                {{#eq webComponent.type 'multiple-select'}}
+                {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
+                {{/eq}}
                 {{#eq webComponent.type 'grid-select-element'}}
                 {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
                 {{/eq}}
@@ -419,6 +490,10 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
+                    query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+                    constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+                    {{/eq}}
+                    {{#eq webComponent.type 'multiple-select'}}
                     query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
                     constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
                     {{/eq}}
@@ -437,6 +512,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 {
                     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Subject$.next(data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }});
+                    {{/eq}}
+                    {{#eq webComponent.type 'multiple-select'}}
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Subject$.next(data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }});
                     {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
