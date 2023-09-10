@@ -503,6 +503,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                     {{/eq}}
                     {{/each}}
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
