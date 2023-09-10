@@ -58,5 +58,9 @@ handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
             if (property.maxLength < 71) return 'col-8';
             if (property.maxLength < 91) return 'col-10';
             return 'col-12';
+
+        case PropertyType.RELATIONSHIP:
+            if (property.webComponent?.type === WebComponentType.MULTIPLE_SELECT) return 'col-6';
+            return `col-12`;
     }
 });

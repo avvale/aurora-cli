@@ -49,7 +49,14 @@ export const countSelectElementWebComponentsProperties = (
     properties: Property[],
 ): number =>
 {
-    return properties.filter(property => property.webComponent?.type === WebComponentType.SELECT).length;
+    return getSelectWebComponentsProperties(properties).length;
+};
+
+export const countMultipleSelectElementWebComponentsProperties = (
+    properties: Property[],
+): number =>
+{
+    return getMultipleSelectWebComponentsProperties(properties).length;
 };
 
 // replace by Properties lengthGridSelectElementWebComponents
@@ -57,14 +64,14 @@ export const countGridSelectElementWebComponentsProperties = (
     properties: Property[],
 ): number =>
 {
-    return properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT).length;
+    return getGridSelectElementWebComponentsProperties(properties).length;
 };
 
 export const countGridSelectMultipleElementsWebComponentsProperties = (
     properties: Property[],
 ): number =>
 {
-    return properties.filter(property => property.webComponent?.type === WebComponentType.GRID_SELECT_MULTIPLE_ELEMENTS).length;
+    return getGridSelectMultipleElementsWebComponentsProperties(properties).length;
 };
 
 // replace by Properties lengthGridElementsManagerWebComponents
@@ -72,7 +79,7 @@ export const countGridElementsManagerWebComponentsProperties = (
     properties: Property[],
 ): number =>
 {
-    return properties.filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER).length;
+    return getGridElementsManagerWebComponentsProperties(properties).length;
 };
 
 // replace by Properties withoutDeletedAt
@@ -114,7 +121,7 @@ export const getPrimaryKeyProperties = (
 {
     return properties
         .filter(property => property.primaryKey) // only primary key properties
-        .filter((property, index, array) => array.findIndex(originProperty => originProperty.name === property.name) == index); // avoid duplicate primary keys, i18n aurora yaml has two primary key, the id and id from i18n
+        .filter((property, index, array) => array.findIndex(originProperty => originProperty.name === property.name) === index); // avoid duplicate primary keys, i18n aurora yaml has two primary key, the id and id from i18n
 };
 
 // replace by Properties valueObjects
@@ -903,6 +910,14 @@ export const getSelectWebComponentsProperties = (
 {
     return properties
         .filter(property => property.webComponent?.type === WebComponentType.SELECT);
+};
+
+export const getMultipleSelectWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.webComponent?.type === WebComponentType.MULTIPLE_SELECT);
 };
 
 // replace by Properties withGridSelectElementWebComponents

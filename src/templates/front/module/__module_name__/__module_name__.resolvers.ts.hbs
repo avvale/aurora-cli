@@ -148,12 +148,19 @@ export const {{ toCamelCase schema.moduleName }}PaginationResolver: ResolveFn<Gr
     });
 };
 
-{{#and (eq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (eq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
+{{#and
+    (eq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (eq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (eq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+}}
 export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<Action{{#if (hasI18nProperties schema.aggregateProperties) }} | { object: {{ schema.aggregateName }}; }{{/if}}> = (
 {{else ~}}
 export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
     {{#eq webComponent.type 'select'}}
+    {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
+    {{/eq}}
+    {{#eq webComponent.type 'multiple-select'}}
     {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
     {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
@@ -180,7 +187,11 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
         (object variableName=(sumStrings (toCamelCase schema.moduleName) 'Service') className=(sumStrings (toPascalCase schema.moduleName) 'Service'))
 ~}}
 {{/if}}
-{{#or (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
+{{#or
+    (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+}}
 {{
     push injectionsArray
         (
@@ -206,7 +217,13 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     gridStateService.setExportActionId({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}');
 
     {{/each}}
-    {{#and (eq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (eq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}{{#unless (hasI18nProperties schema.aggregateProperties) }}return {{else}}const action = {{/unless}}{{/and}}actionService.action({
+    {{#and
+        (eq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+        (eq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+        (eq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    }}
+    {{#unless (hasI18nProperties schema.aggregateProperties) }}return {{else}}const action = {{/unless}}
+    {{/and}}actionService.action({
         id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new',
         isViewAction: true,
     });
@@ -242,7 +259,11 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
             });
     }
     {{/if}}
-    {{#or (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0) (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) }}
+    {{#or
+        (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+        (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+        (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    }}
 
     return {{ toCamelCase schema.moduleName }}Service.getRelations({{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}{
         queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatementHandler
