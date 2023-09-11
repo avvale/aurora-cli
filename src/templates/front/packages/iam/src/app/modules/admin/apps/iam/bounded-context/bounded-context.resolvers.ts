@@ -41,7 +41,7 @@ export const boundedContextNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'iam::boundedContext.detail.new',
@@ -50,17 +50,17 @@ export const boundedContextNewResolver: ResolveFn<Action> = (
 };
 
 export const boundedContextEditResolver: ResolveFn<{
-	iamPaginatePermissions: GridData<IamPermission>;
-	object: IamBoundedContext;
+    iamPaginatePermissions: GridData<IamPermission>;
+    object: IamBoundedContext;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const boundedContextService = inject(BoundedContextService);
-	const gridFiltersStorageService = inject(GridFiltersStorageService);
-	const gridStateService = inject(GridStateService);
+    const actionService = inject(ActionService);
+    const boundedContextService = inject(BoundedContextService);
+    const gridFiltersStorageService = inject(GridFiltersStorageService);
+    const gridStateService = inject(GridStateService);
 
     // paginate to manage permissions grid-elements-manager
     const permissionsGridId = 'iam::boundedContext.detail.permissionsGridList';
@@ -74,7 +74,7 @@ export const boundedContextEditResolver: ResolveFn<{
 
     return boundedContextService
         .findByIdWithRelations({
-            id                      : route.paramMap.get('id'),
+            id: route.paramMap.get('id'),
             queryPaginatePermissions: QueryStatementHandler
                 .init({ columnsConfig: permissionColumnsConfig })
                 .setColumFilters(gridFiltersStorageService.getColumnFilterState(permissionsGridId))

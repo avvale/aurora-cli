@@ -50,7 +50,7 @@ export const roleNewResolver: ResolveFn<Action> = (
 };
 
 export const roleEditResolver: ResolveFn<{
-	object: IamRole;
+    object: IamRole;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,

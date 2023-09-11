@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-detail.component.html",
-            "integrity": "sha1:a64e28a729b7e3e1902f1c1b91c72bb5d77f95a7"
+            "integrity": "sha1:3fc7721c317e4d1a060441ffa9d097ba21812d53"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-detail.component.ts",
-            "integrity": "sha1:f9a7671814797852bfada987dca5191aa28fb8d2"
+            "integrity": "sha1:910619cdf36a5a9a16da24678c490c6c60c84a41"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-list.component.html",
-            "integrity": "sha1:786b503aecf8c2435ecd8843241bdb086948cae5"
+            "integrity": "sha1:65bb2841337e60f6456cadb0cd04b66ffb011021"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-list.component.ts",
@@ -31,15 +31,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.graphql.ts",
-            "integrity": "sha1:030d71968842fc08f5b25baff9ac5f5b38f20639"
+            "integrity": "sha1:83a2a4159145904888de67fc9683ff6cc81b8d9e"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.resolvers.ts",
-            "integrity": "sha1:8a1bf26f3ad9b2810fb3c48343e76e32c0fa8f5b"
+            "integrity": "sha1:699309e3c4d26323b89ccf1755f90ac82a602ac4"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.service.ts",
-            "integrity": "sha1:6d64ef4d22c0c71c4de9071fa31a5e2518f0570b"
+            "integrity": "sha1:8e01a656d2b78453323240fe21e42f0face10f90"
         }
     ]
 }

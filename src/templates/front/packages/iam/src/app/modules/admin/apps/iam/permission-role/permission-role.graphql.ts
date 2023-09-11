@@ -41,14 +41,17 @@ export const getQuery = gql`
 
 export const findByIdQuery = gql`
     query IamFindRoleById (
-        $id: ID
+        $permissionId: ID
+        $roleId: ID
         $constraint: QueryStatement
     ) {
         object: iamFindRoleById (
-            id: $id
+            permissionId: $permissionId
+            roleId: $roleId
             constraint: $constraint
         ) {
-            id
+            permissionId
+            roleId
             #FIELDS
         }
         ${relationsFields}
@@ -124,11 +127,13 @@ export const updateMutation = gql`
 
 export const deleteByIdMutation = gql`
     mutation IamDeletePermissionRoleById (
-        $payload: IamDeletePermissionRoleInput!
+        $permissionId: ID!
+        $roleId: ID!
         $constraint: QueryStatement
     ) {
         iamDeletePermissionRoleById (
-            payload: $payload
+            permissionId: $permissionId
+            roleId: $roleId
             constraint: $constraint
         ) {
             ${fields}
@@ -138,11 +143,11 @@ export const deleteByIdMutation = gql`
 
 export const deleteMutation = gql`
     mutation IamDeletePermissionsRoles (
-        $payload: [IamDeletePermissionRoleInput]!
+        $query: QueryStatement
         $constraint: QueryStatement
     ) {
         iamDeletePermissionsRoles (
-            payload: $payload
+            query: $query
             constraint: $constraint
         ) {
             ${fields}

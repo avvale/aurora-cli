@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-detail.component.html",
-            "integrity": "sha1:559c9f4411ceaf5f873f6bf40894b33b845f17cd"
+            "integrity": "sha1:7a42a58ba45845a9609df134383899ecc86373b6"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-detail.component.ts",
-            "integrity": "sha1:0fc8fbdb9b1dd9d1bbe6efc87a9a1395452f750f"
+            "integrity": "sha1:db32cc3d356a909fdefd134c775344a996c2dc22"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-list.component.html",
-            "integrity": "sha1:87e541ba580cd11f46184f184398aa950e2c6efc"
+            "integrity": "sha1:eb3a516b8b3f9df5eca6ef7b8a4b4ff5a49be135"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-list.component.ts",
@@ -27,19 +27,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account.columns-config.ts",
-            "integrity": "sha1:4ee49cef4d83c2f2a212d0ef4af527b5d6854680"
+            "integrity": "sha1:2a49a38186e5801c5542b4b024574694d7016ee2"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account.graphql.ts",
-            "integrity": "sha1:ff448dbf85ef62107d89f0c464e48e523d25f313"
+            "integrity": "sha1:f566363497a53dc7044498cdb8750f3fb9365e3c"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account.resolvers.ts",
-            "integrity": "sha1:654679c18acbf837287fb8249e21f446142fc3e2"
+            "integrity": "sha1:5976068bb45921da55fde04c498c21d807aa300f"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account.service.ts",
-            "integrity": "sha1:82b3768d16f6e23ebd0d44b001f10b6ff48dc25d"
+            "integrity": "sha1:f94319e2cf1548f67772953e53769828898c3baa"
         }
     ]
 }

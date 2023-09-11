@@ -38,13 +38,31 @@ aggregateProperties:
     relationship:
       type: many-to-many
       singularName: account
-      aggregate: IamAccount
+      aggregateName: IamAccount
       modulePath: iam/account
       avoidConstraint: false
       pivot:
-        aggregate: IamTenantsAccounts
-        modulePath: iam/tenant
-        fileName: tenants-accounts
+        boundedContextName: iam
+        moduleName: tenant-account
+        moduleNames: tenants-accounts
+        aggregateName: IamTenantAccount
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: tenantId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamTenant
+            modulePath: iam/tenant
+          - name: accountId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamAccount
+            modulePath: iam/account
   - name: createdAt
     type: timestamp
     nullable: true
@@ -54,4 +72,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []

@@ -64,7 +64,7 @@ export const accountNewResolver: ResolveFn<{
 };
 
 export const accountEditResolver: ResolveFn<{
-	object: IamAccount;
+    object: IamAccount;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -79,7 +79,7 @@ export const accountEditResolver: ResolveFn<{
     });
 
     return accountService.findByIdWithRelations({
-        id        : route.paramMap.get('id'),
+        id: route.paramMap.get('id'),
         constraint: {
             include: [
                 {

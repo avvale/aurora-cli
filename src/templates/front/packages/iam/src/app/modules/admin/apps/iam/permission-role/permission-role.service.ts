@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { IamUpdatePermissionById, IamUpdatePermissions, IamPermissionRole, IamCreatePermissionRole, IamDeletePermissionRole } from '../iam.types';
+import { IamUpdatePermissionById, IamUpdatePermissions, IamPermissionRole, IamCreatePermissionRole } from '../iam.types';
 import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, insertMutation } from './permission-role.graphql';
 
 @Injectable({
@@ -74,12 +74,14 @@ export class PermissionRoleService
     findById(
         {
             graphqlStatement = findByIdQuery,
-            id = '',
+            permissionId = null,
+            roleId = null,
             constraint = {},
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            id?: string;
+            permissionId?: string;
+            roleId?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
         } = {},
@@ -94,7 +96,8 @@ export class PermissionRoleService
             }>({
                 query    : parseGqlFields(graphqlStatement, fields, constraint),
                 variables: {
-                    id,
+                    permissionId,
+                    roleId,
                     constraint,
                 },
                 context: {
@@ -303,12 +306,14 @@ export class PermissionRoleService
     deleteById<T>(
         {
             graphqlStatement = deleteByIdMutation,
-            object = null,
+            permissionId = null,
+            roleId = null,
             constraint = {},
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            object?: IamDeletePermissionRole;
+            permissionId?: string;
+            roleId?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
         } = {},
@@ -319,7 +324,8 @@ export class PermissionRoleService
             .mutate({
                 mutation : graphqlStatement,
                 variables: {
-                    payload: object,
+                    permissionId,
+                    roleId,
                     constraint,
                 },
                 context: {
@@ -331,12 +337,12 @@ export class PermissionRoleService
     delete<T>(
         {
             graphqlStatement = deleteMutation,
-            objects = null,
+            query = {},
             constraint = {},
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            objects?: IamDeletePermissionRole[];
+            query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
         } = {},
@@ -347,7 +353,7 @@ export class PermissionRoleService
             .mutate({
                 mutation : graphqlStatement,
                 variables: {
-                    payload: objects,
+                    query,
                     constraint,
                 },
                 context: {

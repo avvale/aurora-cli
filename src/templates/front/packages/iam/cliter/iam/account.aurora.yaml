@@ -6,6 +6,8 @@ aggregateName: IamAccount
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+solidIcon: mat_solid:manage_accounts
+outlineIcon: mat_outline:manage_accounts
 aggregateProperties:
   - name: id
     type: id
@@ -41,7 +43,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: OAuthClient
+      aggregateName: OAuthClient
       modulePath: o-auth/client
       key: id
       field: client
@@ -67,32 +69,70 @@ aggregateProperties:
     relationship:
       type: many-to-many
       singularName: role
-      aggregate: IamRole
+      aggregateName: IamRole
       modulePath: iam/role
       avoidConstraint: false
       pivot:
-        aggregate: IamRolesAccounts
-        modulePath: iam/role
-        fileName: roles-accounts
+        boundedContextName: iam
+        moduleName: role-account
+        moduleNames: roles-accounts
+        aggregateName: IamRoleAccount
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: roleId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamRole
+            modulePath: iam/role
+          - name: accountId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamAccount
+            modulePath: iam/account
   - name: tenants
     type: relationship
     nullable: true
     relationship:
       type: many-to-many
       singularName: tenant
-      aggregate: IamTenant
+      aggregateName: IamTenant
       modulePath: iam/tenant
       avoidConstraint: false
       pivot:
-        aggregate: IamTenantsAccounts
-        modulePath: iam/tenant
-        fileName: tenants-accounts
+        boundedContextName: iam
+        moduleName: tenant-account
+        moduleNames: tenants-accounts
+        aggregateName: IamTenantAccount
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: tenantId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamTenant
+            modulePath: iam/tenant
+          - name: accountId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamAccount
+            modulePath: iam/account
+    webComponent:
+      type: multiple-select
   - name: user
     type: relationship
     nullable: true
     relationship:
       type: one-to-one
-      aggregate: IamUser
+      aggregateName: IamUser
       modulePath: iam/user
   - name: createdAt
     type: timestamp
@@ -103,7 +143,6 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []
 excluded:
   - src/@api/iam/account/resolvers/iam-create-accounts.resolver.ts
   - src/@api/iam/account/resolvers/iam-create-accounts.resolver.spec.ts

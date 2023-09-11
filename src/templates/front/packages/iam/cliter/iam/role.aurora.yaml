@@ -6,6 +6,8 @@ aggregateName: IamRole
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+solidIcon: mat_solid:groups
+outlineIcon: mat_outline:groups
 aggregateProperties:
   - name: id
     type: id
@@ -24,29 +26,67 @@ aggregateProperties:
   - name: permissions
     type: relationship
     nullable: true
+    webComponent:
+      type: grid-select-multiple-elements
     relationship:
       type: many-to-many
       singularName: permission
-      aggregate: IamPermission
+      aggregateName: IamPermission
       modulePath: iam/permission
       avoidConstraint: false
       pivot:
-        aggregate: IamPermissionsRoles
-        modulePath: iam/permission
-        fileName: permissions-roles
+        boundedContextName: iam
+        moduleName: permission-role
+        moduleNames: permissions-roles
+        aggregateName: IamPermissionRole
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: permissionId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamPermission
+            modulePath: iam/permission
+          - name: roleId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamRole
+            modulePath: iam/role
   - name: accounts
     type: relationship
     nullable: true
     relationship:
       type: many-to-many
       singularName: account
-      aggregate: IamAccount
+      aggregateName: IamAccount
       modulePath: iam/account
       avoidConstraint: false
       pivot:
-        aggregate: IamRolesAccounts
-        modulePath: iam/role
-        fileName: roles-accounts
+        boundedContextName: iam
+        moduleName: role-account
+        moduleNames: roles-accounts
+        aggregateName: IamRoleAccount
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: roleId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamRole
+            modulePath: iam/role
+          - name: accountId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamAccount
+            modulePath: iam/account
   - name: createdAt
     type: timestamp
     nullable: true
@@ -56,4 +96,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []

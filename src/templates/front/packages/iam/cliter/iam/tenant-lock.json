@@ -10,20 +10,16 @@
             "integrity": "sha1:880d86f19f8517bcd4f902bc02e5298a619d531e"
         },
         {
-            "path": "src/app/modules/admin/apps/iam/iam.routes.ts",
-            "integrity": "sha1:4ed6e9cbb96e17692bb1885345ccabd44939a3b2"
-        },
-        {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-detail.component.html",
-            "integrity": "sha1:93bc86b68efae066a60d3ce9acd60566cc969b33"
+            "integrity": "sha1:4e13ef4382ed6d89ed8e1bb0bac9be972e57b40e"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-detail.component.ts",
-            "integrity": "sha1:90ebeed0b0aabc1826c7140bac097bd6a9c01183"
+            "integrity": "sha1:26e0085862b28b7c0417d101c2fba31d0f5d1301"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-list.component.html",
-            "integrity": "sha1:9d0e41c0e233521c69cd89a0a6cd305bcdcaa099"
+            "integrity": "sha1:eec6832f210141749c109a35bb88772b666d3cfe"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-list.component.ts",
@@ -39,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.resolvers.ts",
-            "integrity": "sha1:3b8b2305071d5da3fb8dccc579bf148f5befc637"
+            "integrity": "sha1:35458154b9d0bf0d2c1b7330564c2f6ed77fa316"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.service.ts",

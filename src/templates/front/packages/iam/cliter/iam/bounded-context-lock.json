@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-detail.component.html",
-            "integrity": "sha1:5e7e1da0cff59ade9c376c99eb21f9b4f9800b4a"
+            "integrity": "sha1:29980b723ded31afebbe08ee2eb7369777b4523a"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-detail.component.ts",
-            "integrity": "sha1:1e00db2015909a0f1626ddc86758f26ca48bc1f5"
+            "integrity": "sha1:969c7a61575ee8e39bdbed5ae39cf410a41387fa"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-list.component.html",
-            "integrity": "sha1:a4eb7aab9cc92822ff9426a1d17beda10837100e"
+            "integrity": "sha1:77b4a7f34ccf5b90d524be3a2700794d3a1ea3e9"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-list.component.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context.resolvers.ts",
-            "integrity": "sha1:fa182195a8affcb3013c5ae877775ab2d0941342"
+            "integrity": "sha1:9a8d8b682326b6a11f382a3eb995b73a42d4ff47"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context.service.ts",

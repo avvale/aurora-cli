@@ -36,8 +36,8 @@ export class TenantDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		protected readonly injector: Injector,
-		private readonly tenantService: TenantService,
+        protected readonly injector: Injector,
+        private readonly tenantService: TenantService,
     )
     {
         super(injector);

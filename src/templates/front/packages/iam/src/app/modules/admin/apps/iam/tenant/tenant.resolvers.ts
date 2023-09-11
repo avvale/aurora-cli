@@ -40,7 +40,7 @@ export const tenantNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'iam::tenant.detail.new',
@@ -49,14 +49,14 @@ export const tenantNewResolver: ResolveFn<Action> = (
 };
 
 export const tenantEditResolver: ResolveFn<{
-	object: IamTenant;
+    object: IamTenant;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const tenantService = inject(TenantService);
+    const actionService = inject(ActionService);
+    const tenantService = inject(TenantService);
 
     actionService.action({
         id          : 'iam::tenant.detail.edit',

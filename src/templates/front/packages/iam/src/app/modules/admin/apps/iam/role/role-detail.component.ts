@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, GridState, GridStateService, QueryStatementHandler, SelectionChange, SelectionModel, Utils, ViewDetailComponent, defaultDetailImports, exportRows, log, mapActions } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, GridState, GridStateService, Operator, QueryStatementHandler, SelectionChange, SelectionModel, Utils, ViewDetailComponent, defaultDetailImports, exportRows, log, mapActions } from '@aurora';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 import { IamPermission, IamPermissionRole, IamRole } from '../iam.types';
 import { permissionRoleColumnsConfig } from '../permission-role/permission-role.columns-config';
@@ -26,7 +26,17 @@ import { RoleService } from './role.service';
 export class RoleDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
-    // permissions <au-select-multiple-elements-grid> component
+    // ..
+
+    // Object retrieved from the database request,
+    // it should only be used to obtain uninitialized
+    // data in the form, such as relations, etc.
+    // It should not be used habitually, since the source of truth is the form.
+    managedObject: IamRole;
+
+    // relationships
+    /* #region variables to manage grid-select-multiple-elements permissions */
+    // start permissions dialog
     @ViewChild('permissionsGridSelectMultipleElements') permissionsComponent: GridSelectMultipleElementsComponent;
     permissionsSelectedRows: IamPermission[] = [];
     permissionsGridId: string = 'iam::role.detail.permissionsGridList';
@@ -72,6 +82,8 @@ export class RoleDetailComponent extends ViewDetailComponent
         ...permissionColumnsConfig,
     ];
 
+    // start permissions of role grid
+    rolePermissionsId: string[];
     permissionsRolesGridState: GridState = {};
     permissionsRolesSelectedRows: IamPermissionRole[] = [];
     permissionsRolesGridId: string = 'iam::role.detail.permissionsRolesGridList';
@@ -105,13 +117,7 @@ export class RoleDetailComponent extends ViewDetailComponent
         },
         ...permissionRoleColumnsConfig,
     ];
-
-    // Object retrieved from the database request,
-    // it should only be used to obtain uninitialized
-    // data in the form, such as relations, etc.
-    // It should not be used habitually, since the source of truth is the form.
-    managedObject: IamRole;
-    rolePermissionsId: string[];
+    /* #endregion variables to manage grid-select-multiple-elements permissions }} */
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
@@ -121,13 +127,13 @@ export class RoleDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
-        private readonly roleService: RoleService,
-        private readonly permissionService: PermissionService,
+        protected readonly injector: Injector,
         private readonly permissionRoleService: PermissionRoleService,
+        private readonly permissionService: PermissionService,
+        private readonly roleService: RoleService,
     )
     {
         super(injector);
@@ -174,14 +180,35 @@ export class RoleDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id           : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name         : ['', [Validators.required, Validators.maxLength(255)]],
-            isMaster     : false,
+            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            name: ['', [Validators.required, Validators.maxLength(255)]],
+            isMaster: false,
             permissionIds: [],
         });
     }
 
-    /* #region methods for permissions roles grid */
+    /* #region methods to manage PermissionsRoles grid */
+    handlePermissionsRowsSectionChange($event: SelectionChange<IamPermissionRole>): void
+    {
+        this.permissionsRolesSelectedRows = $event.source.selected;
+    }
+
+    handleRemovePermissionsSelected(): void
+    {
+        if (this.permissionsRolesSelectedRows.length > 0)
+        {
+            this.actionService.action({
+                id          : 'iam::role.detail.removePermissionsRoles',
+                isViewAction: false,
+                meta        : {
+                    rows: this.permissionsRolesSelectedRows,
+                },
+            });
+        }
+    }
+    /* #endregion methods to manage PermissionsRoles grid */
+
+    /* #region methods to manage Permissions dialog */
     handleOpenPermissionsDialog(): void
     {
         this.actionService.action({
@@ -215,27 +242,6 @@ export class RoleDetailComponent extends ViewDetailComponent
         });
     }
 
-    handlePermissionsRowsSectionChange($event: SelectionChange<IamPermissionRole>): void
-    {
-        this.permissionsRolesSelectedRows = $event.source.selected;
-    }
-
-    handleRemovePermissionsSelected(): void
-    {
-        if (this.permissionsRolesSelectedRows.length > 0)
-        {
-            this.actionService.action({
-                id          : 'iam::role.detail.removePermissionsRoles',
-                isViewAction: false,
-                meta        : {
-                    rows: this.permissionsRolesSelectedRows,
-                },
-            });
-        }
-    }
-    /* #endregion methods for permissions roles grid */
-
-    /* #region methods for permissions grid dialog */
     handleDialogPermissionsRowsSectionChange($event: SelectionChange<IamPermission>): void
     {
         this.permissionsSelectedRows = $event.source.selected;
@@ -256,7 +262,7 @@ export class RoleDetailComponent extends ViewDetailComponent
             this.permissionsComponent.elementsDialogRef.close();
         }
     }
-    /* #endregion methods for permissions grid dialog */
+    /* #endregion methods to manage Permissions dialog */
 
     async handleAction(action: Action): Promise<void>
     {
@@ -278,6 +284,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         this.fg.patchValue(item);
                     });
 
+                /* #region edit action to manage PermissionsRoles grid-select-multiple-elements */
                 // we need to get the permissions of the role to be able to
                 // marked permissions as selected in the dialog
                 this.permissionRoleService
@@ -288,7 +295,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         this.rolePermissionsId = permissionsRoles.map(permissionRole => permissionRole.permissionId);
                     });
 
-                // permission role grid
+                // permissions grid
                 this.permissionsRolesColumnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.permissionsRolesGridId, this.originPermissionsRolesColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
@@ -302,11 +309,12 @@ export class RoleDetailComponent extends ViewDetailComponent
 
                 this.permissionsRolesGridData$ = this.permissionRoleService.pagination$;
 
-                // permission grid
+                // permissions grid
                 this.permissionsColumnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.permissionsGridId, this.permissionsOriginColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
                 this.permissionsGridData$ = this.permissionService.pagination$;
+                /* #endregion edit action to manage PermissionsRoles grid-select-multiple-elements */
                 break;
 
             case 'iam::role.detail.create':
@@ -364,88 +372,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                 break;
                 /* #endregion common actions */
 
-            /* #region actions to manage permissions dialog */
-            case 'iam::role.detail.permissionsPagination':
-                await lastValueFrom(
-                    this.permissionService
-                        .pagination({
-                            query: action.meta.query ?
-                                action.meta.query :
-                                QueryStatementHandler
-                                    .init({ columnsConfig: permissionColumnsConfig })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
-                                    .setSort(this.gridStateService.getSort(this.permissionsGridId))
-                                    .setPage(this.gridStateService.getPage(this.permissionsGridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.permissionsGridId))
-                                    .getQueryStatement(),
-                        }),
-                );
-                break;
-
-            case 'iam::role.detail.removePermissionsRoles':
-                try
-                {
-                    await lastValueFrom(
-                        this.permissionRoleService
-                            .delete({
-                                objects: action.meta.rows
-                                    .map(row => ({
-                                        permissionId: row.permissionId,
-                                        roleId      : this.managedObject.id,
-                                    })),
-                            }),
-                    );
-
-                    this.selectedCheckboxRowModel.clear();
-
-                    this.actionService.action({
-                        id          : 'iam::role.detail.permissionsRolesPagination',
-                        isViewAction: false,
-                    });
-
-                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
-                    this.actionService.action({
-                        id          : 'iam::role.detail.getPermissionsRoles',
-                        isViewAction: false,
-                    });
-
-                    this.snackBar.open(
-                        `${this.translocoService.translate('iam.Permissions')} ${this.translocoService.translate('Deleted.M.P')}`,
-                        undefined,
-                        {
-                            verticalPosition: 'top',
-                            duration        : 3000,
-                        },
-                    );
-                }
-                catch(error)
-                {
-                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                }
-                break;
-
-            case 'iam::role.detail.exportPermissions':
-                const permissionRows = await lastValueFrom(
-                    this.permissionService
-                        .get({
-                            query: action.meta.query,
-                        }),
-                );
-
-                const permissionColumns: string[] = permissionColumnsConfig.map(permissionColumnConfig => permissionColumnConfig.field);
-                const permissionHeaders = permissionColumns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
-
-                exportRows(
-                    permissionRows.objects,
-                    'permissions.' + action.meta.format,
-                    permissionColumns,
-                    permissionHeaders,
-                    action.meta.format,
-                );
-                break;
-                /* #endregion actions to manage permissions dialog */
-
-            /* #region actions to manage permissions roles */
+            /* #region actions to manage PermissionsRoles grid-select-multiple-elements grid */
             case 'iam::role.detail.addPermissionRole':
                 await lastValueFrom(this.permissionRoleService.create({
                     object: {
@@ -526,10 +453,8 @@ export class RoleDetailComponent extends ViewDetailComponent
 
             case 'iam::role.detail.removePermissionRole':
                 await lastValueFrom(this.permissionRoleService.deleteById({
-                    object: {
-                        permissionId: action.meta.row.permissionId,
-                        roleId      : this.managedObject.id,
-                    },
+                    permissionId: action.meta.row.permissionId,
+                    roleId      : this.managedObject.id,
                 }));
 
                 this.actionService.action({
@@ -622,7 +547,92 @@ export class RoleDetailComponent extends ViewDetailComponent
                     action.meta.format,
                 );
                 break;
-                /* #endregion actions to manage permissions roles */
+                /* #endregion actions to manage PermissionsRoles grid-select-multiple-elements grid */
+
+            /* #region actions to manage PermissionsRoles grid-select-multiple-elements dialog */
+            case 'iam::role.detail.permissionsPagination':
+                await lastValueFrom(
+                    this.permissionService
+                        .pagination({
+                            query: action.meta.query ?
+                                action.meta.query :
+                                QueryStatementHandler
+                                    .init({ columnsConfig: permissionColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
+                                    .setSort(this.gridStateService.getSort(this.permissionsGridId))
+                                    .setPage(this.gridStateService.getPage(this.permissionsGridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.permissionsGridId))
+                                    .getQueryStatement(),
+                        }),
+                );
+                break;
+
+            case 'iam::role.detail.removePermissionsRoles':
+                try
+                {
+                    await lastValueFrom(
+                        this.permissionRoleService
+                            .delete({
+                                query: {
+                                    where: {
+                                        [Operator.or]: action.meta.rows
+                                            .map(row => ({
+                                                permissionId: row.permissionId,
+                                                roleId      : this.managedObject.id,
+                                            })),
+                                    },
+                                },
+                            }),
+                    );
+
+                    this.selectedCheckboxRowModel.clear();
+
+                    this.actionService.action({
+                        id          : 'iam::role.detail.permissionsRolesPagination',
+                        isViewAction: false,
+                    });
+
+                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                    this.actionService.action({
+                        id          : 'iam::role.detail.getPermissionsRoles',
+                        isViewAction: false,
+                    });
+
+                    this.snackBar.open(
+                        `${this.translocoService.translate('iam.Permissions')} ${this.translocoService.translate('Deleted.M.P')}`,
+                        undefined,
+                        {
+                            verticalPosition: 'top',
+                            duration        : 3000,
+                        },
+                    );
+                }
+                catch(error)
+                {
+                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                }
+                break;
+
+            case 'iam::role.detail.exportPermissions':
+                const permissionRows = await lastValueFrom(
+                    this.permissionService
+                        .get({
+                            query: action.meta.query,
+                        }),
+                );
+
+                const permissionColumns: string[] = permissionColumnsConfig.map(permissionColumnConfig => permissionColumnConfig.field);
+                const permissionHeaders = permissionColumns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+
+                exportRows(
+                    permissionRows.objects,
+                    'permissions.' + action.meta.format,
+                    permissionColumns,
+                    permissionHeaders,
+                    action.meta.format,
+                );
+                break;
+                /* #endregion actions to manage PermissionsRoles grid-select-multiple-elements dialog */
         }
     }
 }

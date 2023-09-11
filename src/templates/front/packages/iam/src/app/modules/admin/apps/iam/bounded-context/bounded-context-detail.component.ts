@@ -1,5 +1,3 @@
-import { NgForOf } from '@angular/common';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IamBoundedContext, IamPermission } from '../iam.types';
 import { permissionColumnsConfig } from '../permission/permission.columns-config';
 import { PermissionService } from '../permission/permission.service';
@@ -8,6 +6,8 @@ import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulat
 import { FormGroup, Validators } from '@angular/forms';
 import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnTranslationComponent, GridColumnsConfigStorageService, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, QueryStatementHandler, Utils, ViewDetailComponent, defaultDetailImports, exportRows, log, mapActions } from '@aurora';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgForOf } from '@angular/common';
 
 @Component({
     selector       : 'iam-bounded-context-detail',
@@ -77,12 +77,12 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly boundedContextService: BoundedContextService,
-		private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
-		private readonly gridFiltersStorageService: GridFiltersStorageService,
-		private readonly gridStateService: GridStateService,
-		protected readonly injector: Injector,
-		private readonly permissionService: PermissionService,
+        private readonly boundedContextService: BoundedContextService,
+        private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly gridStateService: GridStateService,
+        protected readonly injector: Injector,
+        private readonly permissionService: PermissionService,
     )
     {
         super(injector);
@@ -129,10 +129,10 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id      : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name    : ['', [Validators.required, Validators.maxLength(255)]],
-            root    : ['', [Validators.required, Validators.maxLength(30)]],
-            sort    : [null, [Validators.maxLength(6)]],
+            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            name: ['', [Validators.required, Validators.maxLength(255)]],
+            root: ['', [Validators.required, Validators.maxLength(30)]],
+            sort: [null, [Validators.maxLength(6)]],
             isActive: false,
         });
     }
@@ -141,8 +141,8 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
     createPermissionDialogForm(): void
     {
         this.permissionDialogFg = this.fb.group({
-            id              : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name            : ['', [Validators.required, Validators.maxLength(255)]],
+            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            name: ['', [Validators.required, Validators.maxLength(255)]],
             boundedContextId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
         });
     }

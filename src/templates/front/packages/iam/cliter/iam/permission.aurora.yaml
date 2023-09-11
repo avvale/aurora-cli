@@ -22,7 +22,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: IamBoundedContext
+      aggregateName: IamBoundedContext
       modulePath: iam/bounded-context
       key: id
       field: boundedContext
@@ -34,13 +34,31 @@ aggregateProperties:
     relationship:
       type: many-to-many
       singularName: role
-      aggregate: IamRole
+      aggregateName: IamRole
       modulePath: iam/role
       avoidConstraint: false
       pivot:
-        aggregate: IamPermissionsRoles
-        modulePath: iam/permission
-        fileName: permissions-roles
+        boundedContextName: iam
+        moduleName: permission-role
+        moduleNames: permissions-roles
+        aggregateName: IamPermissionRole
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: permissionId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamPermission
+            modulePath: iam/permission
+          - name: roleId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: IamRole
+            modulePath: iam/role
   - name: createdAt
     type: timestamp
     nullable: true
@@ -50,7 +68,6 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []
 excluded:
   - src/app/modules/admin/apps/iam/permission/permission-detail.component.html
   - src/app/modules/admin/apps/iam/permission/permission-detail.component.ts

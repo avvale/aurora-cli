@@ -211,12 +211,6 @@ export interface IamCreatePermissionRole {
     roleId: string;
 }
 
-export interface IamDeletePermissionRole {
-    permissionId: string;
-    roleId: string;
-}
-
-
 /**************
  * tenant *
  **************/
