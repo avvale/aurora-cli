@@ -1,26 +1,24 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { IamIAccountRepository } from '@app/iam/account/domain/iam-account.repository';
+import { IamAccount, IamIAccountRepository, iamMockAccountData } from '@app/iam/account';
 import {
-    IamAccountId,
-    IamAccountType,
-    IamAccountCode,
-    IamAccountEmail,
-    IamAccountIsActive,
     IamAccountClientId,
-    IamAccountScopes,
+    IamAccountCode,
+    IamAccountCreatedAt,
     IamAccountDApplicationCodes,
+    IamAccountDeletedAt,
     IamAccountDPermissions,
     IamAccountDTenants,
+    IamAccountEmail,
+    IamAccountId,
+    IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountScopes,
     IamAccountTenantIds,
-    IamAccountCreatedAt,
+    IamAccountType,
     IamAccountUpdatedAt,
-    IamAccountDeletedAt,
 } from '@app/iam/account/domain/value-objects';
-import { IamAccount } from '../../domain/iam-account.aggregate';
-import { iamMockAccountData } from './iam-mock-account.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamMockAccountRepository extends MockRepository<IamAccount> implements IamIAccountRepository
@@ -28,7 +26,6 @@ export class IamMockAccountRepository extends MockRepository<IamAccount> impleme
     public readonly repository: any;
     public readonly aggregateName: string = 'IamAccount';
     public collectionSource: IamAccount[];
-    public deletedAtInstance: IamAccountDeletedAt = new IamAccountDeletedAt(null);
 
     constructor()
     {

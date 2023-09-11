@@ -1,17 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { IamIPermissionRepository } from '@app/iam/permission/domain/iam-permission.repository';
+import { IamIPermissionRepository, iamMockPermissionData, IamPermission } from '@app/iam/permission';
 import {
+    IamPermissionBoundedContextId,
+    IamPermissionCreatedAt,
+    IamPermissionDeletedAt,
     IamPermissionId,
     IamPermissionName,
-    IamPermissionBoundedContextId,
     IamPermissionRoleIds,
-    IamPermissionCreatedAt,
     IamPermissionUpdatedAt,
-    IamPermissionDeletedAt,
 } from '@app/iam/permission/domain/value-objects';
-import { IamPermission } from '../../domain/iam-permission.aggregate';
-import { iamMockPermissionData } from './iam-mock-permission.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamMockPermissionRepository extends MockRepository<IamPermission> implements IamIPermissionRepository
@@ -19,7 +17,6 @@ export class IamMockPermissionRepository extends MockRepository<IamPermission> i
     public readonly repository: any;
     public readonly aggregateName: string = 'IamPermission';
     public collectionSource: IamPermission[];
-    public deletedAtInstance: IamPermissionDeletedAt = new IamPermissionDeletedAt(null);
 
     constructor()
     {

@@ -1,8 +1,8 @@
+import { IamCreatedRoleEvent } from '@app/iam/role';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { IamCreatedRoleEvent } from '../events/iam-created-role.event';
 
 @Injectable()
 export class IamRoleSagas

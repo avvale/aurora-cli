@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamIRoleRepository, IamMockRoleRepository } from '@app/iam/role';
+import { IamCreateRolesService } from '@app/iam/role/application/create/iam-create-roles.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamCreateRolesService } from './iam-create-roles.service';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamMockRoleRepository } from '../../infrastructure/mock/iam-mock-role.repository';
 
 describe('IamCreateRolesService', () =>
 {

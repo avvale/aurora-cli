@@ -1,10 +1,6 @@
 import { IamDeletePermissionsRolesCommand } from '@app/iam/permission-role';
+import { IamDeletePermissionsRolesService } from '@app/iam/permission-role/application/delete/iam-delete-permissions-roles.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import {
-    IamPermissionRolePermissionId,
-    IamPermissionRoleRoleId,
-} from '../../domain/value-objects';
-import { IamDeletePermissionsRolesService } from './iam-delete-permissions-roles.service';
 
 @CommandHandler(IamDeletePermissionsRolesCommand)
 export class IamDeletePermissionsRolesCommandHandler implements ICommandHandler<IamDeletePermissionsRolesCommand>
@@ -17,14 +13,7 @@ export class IamDeletePermissionsRolesCommandHandler implements ICommandHandler<
     {
         // call to use case and implements ValueObjects
         await this.deletePermissionsRolesService.main(
-            command.payload
-                .map(permission =>
-                {
-                    return {
-                        permissionId: new IamPermissionRolePermissionId(permission.permissionId),
-                        roleId      : new IamPermissionRoleRoleId(permission.roleId),
-                    };
-                }),
+            command.queryStatement,
             command.constraint,
             command.cQMetadata,
         );

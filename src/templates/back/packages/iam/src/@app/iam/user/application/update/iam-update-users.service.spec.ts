@@ -1,28 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockUserData } from '@app/iam/user/infrastructure/mock/iam-mock-user.data';
-import { IamUpdateUsersService } from './iam-update-users.service';
+import { IamIUserRepository, iamMockUserData, IamMockUserRepository } from '@app/iam/user';
+import { IamUpdateUsersService } from '@app/iam/user/application/update/iam-update-users.service';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
-    IamUserUpdatedAt,
-    IamUserDeletedAt,
-} from '../../domain/value-objects';
-import { IamIUserRepository } from '../../domain/iam-user.repository';
-import { IamMockUserRepository } from '../../infrastructure/mock/iam-mock-user.repository';
+    IamUserSurname,
+    IamUserUsername,
+} from '@app/iam/user/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateUsersService', () =>
 {

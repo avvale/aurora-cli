@@ -1,12 +1,7 @@
+import { IamGetTenantsQuery, IamITenantRepository, IamMockTenantRepository, IamTenantMapper } from '@app/iam/tenant';
+import { IamGetTenantsQueryHandler } from '@app/iam/tenant/application/get/iam-get-tenants.query-handler';
+import { IamGetTenantsService } from '@app/iam/tenant/application/get/iam-get-tenants.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetTenantsQueryHandler } from './iam-get-tenants.query-handler';
-import { IamMockTenantRepository } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.repository';
-import { IamITenantRepository } from '@app/iam/tenant/domain/iam-tenant.repository';
-import { IamTenantMapper } from '@app/iam/tenant/domain/iam-tenant.mapper';
-import { IamGetTenantsQuery } from './iam-get-tenants.query';
-import { IamGetTenantsService } from './iam-get-tenants.service';
 
 describe('GetTenantsQueryHandler', () =>
 {

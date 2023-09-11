@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { IamBoundedContext, IamIBoundedContextRepository } from '@app/iam/bounded-context';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIBoundedContextRepository } from '../../domain/iam-bounded-context.repository';
-import { IamBoundedContext } from '../../domain/iam-bounded-context.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamRawSQLBoundedContextsService

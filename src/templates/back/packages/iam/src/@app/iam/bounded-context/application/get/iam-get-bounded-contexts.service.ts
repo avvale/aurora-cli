@@ -1,8 +1,6 @@
+import { IamBoundedContext, IamIBoundedContextRepository } from '@app/iam/bounded-context';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIBoundedContextRepository } from '../../domain/iam-bounded-context.repository';
-import { IamBoundedContext } from '../../domain/iam-bounded-context.aggregate';
 
 @Injectable()
 export class IamGetBoundedContextsService

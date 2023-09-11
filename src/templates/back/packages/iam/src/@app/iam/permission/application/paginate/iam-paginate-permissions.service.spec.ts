@@ -1,10 +1,7 @@
+import { IamIPermissionRepository, IamMockPermissionRepository } from '@app/iam/permission';
+import { IamPaginatePermissionsService } from '@app/iam/permission/application/paginate/iam-paginate-permissions.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamPaginatePermissionsService } from './iam-paginate-permissions.service';
-import { IamIPermissionRepository } from '../../domain/iam-permission.repository';
-import { IamMockPermissionRepository } from '../../infrastructure/mock/iam-mock-permission.repository';
 
 describe('IamPaginatePermissionsService', () =>
 {

@@ -1,8 +1,8 @@
+import { IamCreatedPermissionEvent } from '@app/iam/permission';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { IamCreatedPermissionEvent } from '../events/iam-created-permission.event';
 
 @Injectable()
 export class IamPermissionSagas

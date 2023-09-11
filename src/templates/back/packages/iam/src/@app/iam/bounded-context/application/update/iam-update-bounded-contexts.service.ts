@@ -1,20 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { IamAddBoundedContextsContextEvent, IamBoundedContext, IamIBoundedContextRepository } from '@app/iam/bounded-context';
 import {
+    IamBoundedContextCreatedAt,
+    IamBoundedContextDeletedAt,
     IamBoundedContextId,
+    IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
     IamBoundedContextSort,
-    IamBoundedContextIsActive,
-    IamBoundedContextCreatedAt,
     IamBoundedContextUpdatedAt,
-    IamBoundedContextDeletedAt,
-} from '../../domain/value-objects';
-import { IamIBoundedContextRepository } from '../../domain/iam-bounded-context.repository';
-import { IamBoundedContext } from '../../domain/iam-bounded-context.aggregate';
-import { IamAddBoundedContextsContextEvent } from '../events/iam-add-bounded-contexts-context.event';
+} from '@app/iam/bounded-context/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamUpdateBoundedContextsService
@@ -48,7 +45,6 @@ export class IamUpdateBoundedContextsService
             new IamBoundedContextUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

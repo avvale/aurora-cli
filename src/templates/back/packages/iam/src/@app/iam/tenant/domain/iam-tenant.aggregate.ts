@@ -1,22 +1,20 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
-import {
-    IamTenantId,
-    IamTenantName,
-    IamTenantCode,
-    IamTenantLogo,
-    IamTenantIsActive,
-    IamTenantMeta,
-    IamTenantAccountIds,
-    IamTenantCreatedAt,
-    IamTenantUpdatedAt,
-    IamTenantDeletedAt,
-} from './value-objects';
-import { IamCreatedTenantEvent } from '../application/events/iam-created-tenant.event';
-import { IamUpdatedTenantEvent } from '../application/events/iam-updated-tenant.event';
-import { IamDeletedTenantEvent } from '../application/events/iam-deleted-tenant.event';
 import { IamAccount } from '@app/iam/account';
+import { IamCreatedTenantEvent, IamDeletedTenantEvent, IamUpdatedTenantEvent } from '@app/iam/tenant';
+import {
+    IamTenantAccountIds,
+    IamTenantCode,
+    IamTenantCreatedAt,
+    IamTenantDeletedAt,
+    IamTenantId,
+    IamTenantIsActive,
+    IamTenantLogo,
+    IamTenantMeta,
+    IamTenantName,
+    IamTenantUpdatedAt,
+} from '@app/iam/tenant/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamTenant extends AggregateRoot
 {
@@ -30,8 +28,6 @@ export class IamTenant extends AggregateRoot
     createdAt: IamTenantCreatedAt;
     updatedAt: IamTenantUpdatedAt;
     deletedAt: IamTenantDeletedAt;
-
-    // eager relationship
     accounts: IamAccount[];
 
     constructor(
@@ -45,7 +41,6 @@ export class IamTenant extends AggregateRoot
         createdAt: IamTenantCreatedAt,
         updatedAt: IamTenantUpdatedAt,
         deletedAt: IamTenantDeletedAt,
-
         accounts?: IamAccount[],
     )
     {
@@ -60,12 +55,10 @@ export class IamTenant extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.accounts = accounts;
     }
 
-    static register (
+    static register(
         id: IamTenantId,
         name: IamTenantName,
         code: IamTenantCode,
@@ -76,7 +69,6 @@ export class IamTenant extends AggregateRoot
         createdAt: IamTenantCreatedAt,
         updatedAt: IamTenantUpdatedAt,
         deletedAt: IamTenantDeletedAt,
-
         accounts?: IamAccount[],
     ): IamTenant
     {
@@ -91,7 +83,6 @@ export class IamTenant extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             accounts,
         );
     }
@@ -163,8 +154,6 @@ export class IamTenant extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             accounts: this.accounts?.map(item => item.toDTO()),
         };
     }
@@ -183,8 +172,6 @@ export class IamTenant extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             accounts: this.accounts?.map(item => item.toDTO()),
         };
     }

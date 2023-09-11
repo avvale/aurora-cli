@@ -1,12 +1,8 @@
+import { IamIUserRepository, iamMockUserData, IamMockUserRepository } from '@app/iam/user';
+import { IamFindUserByIdService } from '@app/iam/user/application/find/iam-find-user-by-id.service';
+import { IamUserId } from '@app/iam/user/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockUserData } from '@app/iam/user/infrastructure/mock/iam-mock-user.data';
-import { IamFindUserByIdService } from './iam-find-user-by-id.service';
-import { IamUserId } from '../../domain/value-objects';
-import { IamIUserRepository } from '../../domain/iam-user.repository';
-import { IamMockUserRepository } from '../../infrastructure/mock/iam-mock-user.repository';
 
 describe('IamFindUserByIdService', () =>
 {

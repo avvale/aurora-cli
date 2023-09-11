@@ -1,19 +1,16 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamCreateTenantCommand } from './iam-create-tenant.command';
-import { IamCreateTenantService } from './iam-create-tenant.service';
+import { IamCreateTenantCommand } from '@app/iam/tenant';
+import { IamCreateTenantService } from '@app/iam/tenant/application/create/iam-create-tenant.service';
 import {
-    IamTenantId,
-    IamTenantName,
-    IamTenantCode,
-    IamTenantLogo,
-    IamTenantIsActive,
-    IamTenantMeta,
     IamTenantAccountIds,
-    IamTenantCreatedAt,
-    IamTenantUpdatedAt,
-    IamTenantDeletedAt,
-} from '../../domain/value-objects';
+    IamTenantCode,
+    IamTenantId,
+    IamTenantIsActive,
+    IamTenantLogo,
+    IamTenantMeta,
+    IamTenantName,
+} from '@app/iam/tenant/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateTenantCommand)
 export class IamCreateTenantCommandHandler implements ICommandHandler<IamCreateTenantCommand>

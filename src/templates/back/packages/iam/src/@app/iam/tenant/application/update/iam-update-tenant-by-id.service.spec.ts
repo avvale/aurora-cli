@@ -1,24 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockTenantData } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.data';
-import { IamUpdateTenantByIdService } from './iam-update-tenant-by-id.service';
+import { IamITenantRepository, iamMockTenantData, IamMockTenantRepository } from '@app/iam/tenant';
+import { IamUpdateTenantByIdService } from '@app/iam/tenant/application/update/iam-update-tenant-by-id.service';
 import {
-    IamTenantId,
-    IamTenantName,
-    IamTenantCode,
-    IamTenantLogo,
-    IamTenantIsActive,
-    IamTenantMeta,
     IamTenantAccountIds,
-    IamTenantCreatedAt,
-    IamTenantUpdatedAt,
-    IamTenantDeletedAt,
-} from '../../domain/value-objects';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamMockTenantRepository } from '../../infrastructure/mock/iam-mock-tenant.repository';
+    IamTenantCode,
+    IamTenantId,
+    IamTenantIsActive,
+    IamTenantLogo,
+    IamTenantMeta,
+    IamTenantName,
+} from '@app/iam/tenant/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateTenantByIdService', () =>
 {

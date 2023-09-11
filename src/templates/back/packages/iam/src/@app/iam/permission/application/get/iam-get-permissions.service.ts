@@ -1,8 +1,6 @@
+import { IamIPermissionRepository, IamPermission } from '@app/iam/permission';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIPermissionRepository } from '../../domain/iam-permission.repository';
-import { IamPermission } from '../../domain/iam-permission.aggregate';
 
 @Injectable()
 export class IamGetPermissionsService

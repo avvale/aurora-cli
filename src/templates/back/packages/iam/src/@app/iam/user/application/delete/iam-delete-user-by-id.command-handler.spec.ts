@@ -1,15 +1,11 @@
+import { IamDeleteUserByIdCommand, iamMockUserData } from '@app/iam/user';
+import { IamDeleteUserByIdCommandHandler } from '@app/iam/user/application/delete/iam-delete-user-by-id.command-handler';
+import { IamDeleteUserByIdService } from '@app/iam/user/application/delete/iam-delete-user-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteUserByIdCommandHandler } from './iam-delete-user-by-id.command-handler';
-import { iamMockUserData } from '@app/iam/user/infrastructure/mock/iam-mock-user.data';
-import { IamDeleteUserByIdCommand } from './iam-delete-user-by-id.command';
-import { IamDeleteUserByIdService } from './iam-delete-user-by-id.service';
 
 describe('IamDeleteUserByIdCommandHandler', () =>
 {
     let commandHandler: IamDeleteUserByIdCommandHandler;
-    let service: IamDeleteUserByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('IamDeleteUserByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamDeleteUserByIdCommandHandler>(IamDeleteUserByIdCommandHandler);
-        service = module.get<IamDeleteUserByIdService>(IamDeleteUserByIdService);
     });
 
     describe('main', () =>

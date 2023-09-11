@@ -1,8 +1,6 @@
+import { IamRawSQLTenantsQuery, IamTenantMapper, IamTenantResponse } from '@app/iam/tenant';
+import { IamRawSQLTenantsService } from '@app/iam/tenant/application/raw-sql/iam-raw-sql-tenants.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamTenantResponse } from '../../domain/iam-tenant.response';
-import { IamTenantMapper } from '../../domain/iam-tenant.mapper';
-import { IamRawSQLTenantsQuery } from './iam-raw-sql-tenants.query';
-import { IamRawSQLTenantsService } from './iam-raw-sql-tenants.service';
 
 @QueryHandler(IamRawSQLTenantsQuery)
 export class IamRawSQLTenantsQueryHandler implements IQueryHandler<IamRawSQLTenantsQuery>

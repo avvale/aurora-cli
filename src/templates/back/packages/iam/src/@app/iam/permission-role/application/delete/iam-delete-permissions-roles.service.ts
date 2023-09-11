@@ -1,11 +1,7 @@
 import { IamAddPermissionsRolesContextEvent, IamIPermissionRoleRepository } from '@app/iam/permission-role';
-import { CQMetadata, Operator, QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import {
-    IamPermissionRolePermissionId,
-    IamPermissionRoleRoleId,
-} from '../../domain/value-objects';
 
 @Injectable()
 export class IamDeletePermissionsRolesService
@@ -16,43 +12,28 @@ export class IamDeletePermissionsRolesService
     ) {}
 
     async main(
-        payload: {
-            permissionId: IamPermissionRolePermissionId;
-            roleId: IamPermissionRoleRoleId;
-        } [],
+        queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
     ): Promise<void>
     {
         // get objects to delete
         const permissionsRoles = await this.repository.get({
-            queryStatement: {
-                where: {
-                    [Operator.or]: payload.map(permissionRole => ({
-                        permissionId: permissionRole.permissionId.value,
-                        roleId      : permissionRole.roleId.value,
-                    })),
-                },
-            },
+            queryStatement,
             constraint,
             cQMetadata,
         });
 
+        if (permissionsRoles.length === 0) return;
+
         await this.repository.delete({
-            queryStatement: {
-                where: {
-                    [Operator.or]: payload.map(permissionRole => ({
-                        permissionId: permissionRole.permissionId.value,
-                        roleId      : permissionRole.roleId.value,
-                    })),
-                },
-            },
+            queryStatement,
             constraint,
             cQMetadata,
             deleteOptions: cQMetadata?.repositoryOptions,
         });
 
-        // create AddPermissionsContextEvent to have object wrapper to add event publisher functionality
+        // create AddPermissionsRolesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const permissionsRolesRegistered = this.publisher.mergeObjectContext(
             new IamAddPermissionsRolesContextEvent(permissionsRoles),

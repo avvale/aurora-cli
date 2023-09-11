@@ -1,10 +1,7 @@
+import { IamIRoleRepository, IamMockRoleRepository } from '@app/iam/role';
+import { IamFindRoleService } from '@app/iam/role/application/find/iam-find-role.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamFindRoleService } from './iam-find-role.service';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamMockRoleRepository } from '../../infrastructure/mock/iam-mock-role.repository';
 
 describe('IamFindRoleService', () =>
 {

@@ -85,7 +85,7 @@ import { IamDeletePermissionsHandler } from './handlers/iam-delete-permissions.h
 // seeder
 import { IamPermissionSeeder } from './seeder/iam-permission.seeder';
 
-export const IamPermissionControllers = [
+export const IamPermissionApiControllers = [
     IamCreatePermissionController,
     IamCreatePermissionsController,
     IamPaginatePermissionsController,
@@ -99,7 +99,7 @@ export const IamPermissionControllers = [
     IamDeletePermissionsController,
 ];
 
-export const IamPermissionResolvers = [
+export const IamPermissionApiResolvers = [
     IamCreatePermissionResolver,
     IamCreatePermissionsResolver,
     IamPaginatePermissionsResolver,
@@ -127,6 +127,6 @@ export const IamPermissionApiHandlers = [
     IamDeletePermissionsHandler,
 ];
 
-export const IamPermissionServices = [
+export const IamPermissionApiServices = [
     IamPermissionSeeder,
 ];

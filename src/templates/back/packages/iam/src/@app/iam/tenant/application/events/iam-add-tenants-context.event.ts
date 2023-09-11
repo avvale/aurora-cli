@@ -1,11 +1,5 @@
+import { IamCreatedTenantEvent, IamCreatedTenantsEvent, IamDeletedTenantEvent, IamDeletedTenantsEvent, IamTenant, IamUpdatedTenantEvent, IamUpdatedTenantsEvent } from '@app/iam/tenant';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { IamTenant } from '../../domain/iam-tenant.aggregate';
-import { IamCreatedTenantEvent } from './iam-created-tenant.event';
-import { IamCreatedTenantsEvent } from './iam-created-tenants.event';
-import { IamUpdatedTenantEvent } from './iam-updated-tenant.event';
-import { IamUpdatedTenantsEvent } from './iam-updated-tenants.event';
-import { IamDeletedTenantEvent } from './iam-deleted-tenant.event';
-import { IamDeletedTenantsEvent } from './iam-deleted-tenants.event';
 
 export class IamAddTenantsContextEvent extends AggregateRoot
 {

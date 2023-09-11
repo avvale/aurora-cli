@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamITenantRepository, IamMockTenantRepository } from '@app/iam/tenant';
+import { IamCreateTenantsService } from '@app/iam/tenant/application/create/iam-create-tenants.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamCreateTenantsService } from './iam-create-tenants.service';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamMockTenantRepository } from '../../infrastructure/mock/iam-mock-tenant.repository';
 
 describe('IamCreateTenantsService', () =>
 {

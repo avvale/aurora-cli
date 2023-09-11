@@ -1,4 +1,3 @@
-
 // export DTOs
 export { IamAccountDto } from './dto/iam-account.dto';
 export { IamCreateAccountDto } from './dto/iam-create-account.dto';
@@ -85,7 +84,7 @@ import { IamMeAccountController } from './controllers/iam-me-account.controller'
 import { IamMeAccountResolver } from './resolvers/iam-me-account.resolver';
 import { IamMeAccountHandler } from './handlers/iam-me-account.handler';
 
-export const IamAccountControllers = [
+export const IamAccountApiControllers = [
     IamCreateAccountController,
     IamPaginateAccountsController,
     IamGetAccountsController,
@@ -101,7 +100,7 @@ export const IamAccountControllers = [
     IamMeAccountController,
 ];
 
-export const IamAccountResolvers = [
+export const IamAccountApiResolvers = [
     IamCreateAccountResolver,
     IamPaginateAccountsResolver,
     IamGetAccountsResolver,
@@ -133,6 +132,6 @@ export const IamAccountApiHandlers = [
     IamMeAccountHandler,
 ];
 
-export const IamAccountServices = [
+export const IamAccountApiServices = [
     IamAccountSeeder,
 ];

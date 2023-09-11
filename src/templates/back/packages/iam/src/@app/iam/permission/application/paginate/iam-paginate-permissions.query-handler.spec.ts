@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamIPermissionRepository, IamMockPermissionRepository, IamPaginatePermissionsQuery } from '@app/iam/permission';
+import { IamPaginatePermissionsQueryHandler } from '@app/iam/permission/application/paginate/iam-paginate-permissions.query-handler';
+import { IamPaginatePermissionsService } from '@app/iam/permission/application/paginate/iam-paginate-permissions.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { IamPaginatePermissionsQueryHandler } from './iam-paginate-permissions.query-handler';
-import { IamMockPermissionRepository } from '@app/iam/permission/infrastructure/mock/iam-mock-permission.repository';
-import { IamIPermissionRepository } from '@app/iam/permission/domain/iam-permission.repository';
-import { IamPermissionMapper } from '@app/iam/permission/domain/iam-permission.mapper';
-import { IamPaginatePermissionsQuery } from './iam-paginate-permissions.query';
-import { IamPaginatePermissionsService } from './iam-paginate-permissions.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamPaginatePermissionsQueryHandler', () =>
 {
     let queryHandler: IamPaginatePermissionsQueryHandler;
     let service: IamPaginatePermissionsService;
     let repository: IamMockPermissionRepository;
-    let mapper: IamPermissionMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('IamPaginatePermissionsQueryHandler', () =>
         queryHandler = module.get<IamPaginatePermissionsQueryHandler>(IamPaginatePermissionsQueryHandler);
         service = module.get<IamPaginatePermissionsService>(IamPaginatePermissionsService);
         repository = <IamMockPermissionRepository>module.get<IamIPermissionRepository>(IamIPermissionRepository);
-        mapper = new IamPermissionMapper();
     });
 
     describe('main', () =>

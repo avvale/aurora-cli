@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IamPaginatePermissionsRolesQuery } from '@app/iam/permission-role';
+import { IamPaginatePermissionsRolesService } from '@app/iam/permission-role/application/paginate/iam-paginate-permissions-roles.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { IamPaginatePermissionsRolesQuery } from './iam-paginate-permissions-roles.query';
-import { IamPaginatePermissionsRolesService } from './iam-paginate-permissions-roles.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginatePermissionsRolesQuery)
 export class IamPaginatePermissionsRolesQueryHandler implements IQueryHandler<IamPaginatePermissionsRolesQuery>

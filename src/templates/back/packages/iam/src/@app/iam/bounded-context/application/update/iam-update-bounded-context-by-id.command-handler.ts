@@ -1,17 +1,14 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamUpdateBoundedContextByIdCommand } from './iam-update-bounded-context-by-id.command';
-import { IamUpdateBoundedContextByIdService } from './iam-update-bounded-context-by-id.service';
+import { IamUpdateBoundedContextByIdCommand } from '@app/iam/bounded-context';
+import { IamUpdateBoundedContextByIdService } from '@app/iam/bounded-context/application/update/iam-update-bounded-context-by-id.service';
 import {
     IamBoundedContextId,
+    IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
     IamBoundedContextSort,
-    IamBoundedContextIsActive,
-    IamBoundedContextCreatedAt,
-    IamBoundedContextUpdatedAt,
-    IamBoundedContextDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/iam/bounded-context/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpdateBoundedContextByIdCommand)
 export class IamUpdateBoundedContextByIdCommandHandler implements ICommandHandler<IamUpdateBoundedContextByIdCommand>

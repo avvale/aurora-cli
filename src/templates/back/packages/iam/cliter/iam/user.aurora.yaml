@@ -18,7 +18,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: one-to-one
-      aggregate: IamAccount
+      aggregateName: IamAccount
       modulePath: iam/account
       field: account
     index: index
@@ -67,8 +67,6 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []
 excluded:
   - src/@api/iam/user/handlers/iam-create-user.handler.spec.ts
   - src/@api/iam/user/handlers/iam-create-user.handler.ts

@@ -1,14 +1,11 @@
+import { IamDeleteBoundedContextsCommand } from '@app/iam/bounded-context';
+import { IamDeleteBoundedContextsCommandHandler } from '@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.command-handler';
+import { IamDeleteBoundedContextsService } from '@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteBoundedContextsCommandHandler } from './iam-delete-bounded-contexts.command-handler';
-import { IamDeleteBoundedContextsCommand } from './iam-delete-bounded-contexts.command';
-import { IamDeleteBoundedContextsService } from './iam-delete-bounded-contexts.service';
 
 describe('IamDeleteBoundedContextsCommandHandler', () =>
 {
     let commandHandler: IamDeleteBoundedContextsCommandHandler;
-    let service: IamDeleteBoundedContextsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('IamDeleteBoundedContextsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamDeleteBoundedContextsCommandHandler>(IamDeleteBoundedContextsCommandHandler);
-        service = module.get<IamDeleteBoundedContextsService>(IamDeleteBoundedContextsService);
     });
 
     describe('main', () =>

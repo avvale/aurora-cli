@@ -1,17 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { iamMockRoleData, IamRole } from '@app/iam/role';
 import {
-    IamRoleId,
-    IamRoleName,
-    IamRoleIsMaster,
-    IamRolePermissionIds,
     IamRoleAccountIds,
     IamRoleCreatedAt,
-    IamRoleUpdatedAt,
     IamRoleDeletedAt,
-} from '../../domain/value-objects';
-import { IamRole } from '../../domain/iam-role.aggregate';
-import { iamMockRoleData } from './iam-mock-role.data';
+    IamRoleId,
+    IamRoleIsMaster,
+    IamRoleName,
+    IamRolePermissionIds,
+    IamRoleUpdatedAt,
+} from '@app/iam/role/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -36,6 +35,7 @@ export class IamMockRoleSeeder extends MockSeeder<IamRole>
                     new IamRoleId(role.id),
                     new IamRoleName(role.name),
                     new IamRoleIsMaster(role.isMaster),
+                    // ---- customizations ----
                     new IamRolePermissionIds(role.permissions.map(permission => permission.id)),
                     // add permissions on administrator account
                     new IamRoleAccountIds(['948a5308-a49d-42dc-9ea3-7490e120000b']),

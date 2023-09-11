@@ -1,23 +1,20 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamUpdateUserByIdCommand } from './iam-update-user-by-id.command';
-import { IamUpdateUserByIdService } from './iam-update-user-by-id.service';
+import { IamUpdateUserByIdCommand } from '@app/iam/user';
+import { IamUpdateUserByIdService } from '@app/iam/user/application/update/iam-update-user-by-id.service';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
-    IamUserUpdatedAt,
-    IamUserDeletedAt,
-} from '../../domain/value-objects';
+    IamUserSurname,
+    IamUserUsername,
+} from '@app/iam/user/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpdateUserByIdCommand)
 export class IamUpdateUserByIdCommandHandler implements ICommandHandler<IamUpdateUserByIdCommand>

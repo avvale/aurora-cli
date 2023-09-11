@@ -1,17 +1,16 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { IamBoundedContext } from './iam-bounded-context.aggregate';
-import { IamBoundedContextResponse } from './iam-bounded-context.response';
+import { IamBoundedContext, IamBoundedContextResponse } from '@app/iam/bounded-context';
 import {
+    IamBoundedContextCreatedAt,
+    IamBoundedContextDeletedAt,
     IamBoundedContextId,
+    IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
     IamBoundedContextSort,
-    IamBoundedContextIsActive,
-    IamBoundedContextCreatedAt,
     IamBoundedContextUpdatedAt,
-    IamBoundedContextDeletedAt,
-} from './value-objects';
+} from '@app/iam/bounded-context/domain/value-objects';
 import { IamPermissionMapper } from '@app/iam/permission';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class IamBoundedContextMapper implements IMapper
 {

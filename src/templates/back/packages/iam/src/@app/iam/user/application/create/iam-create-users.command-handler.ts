@@ -1,23 +1,20 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamCreateUsersCommand } from './iam-create-users.command';
-import { IamCreateUsersService } from './iam-create-users.service';
+import { IamCreateUsersCommand } from '@app/iam/user';
+import { IamCreateUsersService } from '@app/iam/user/application/create/iam-create-users.service';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
-    IamUserUpdatedAt,
-    IamUserDeletedAt,
-} from '../../domain/value-objects';
+    IamUserSurname,
+    IamUserUsername,
+} from '@app/iam/user/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateUsersCommand)
 export class IamCreateUsersCommandHandler implements ICommandHandler<IamCreateUsersCommand>

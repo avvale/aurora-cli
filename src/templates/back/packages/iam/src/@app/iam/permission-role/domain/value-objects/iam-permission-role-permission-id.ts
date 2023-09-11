@@ -2,12 +2,12 @@ import { DataValueObject, UuidValueObject, ValidationRules } from '@aurorajs.dev
 
 export class IamPermissionRolePermissionId extends UuidValueObject
 {
-    public readonly type: 'IamPermissionPermissionId';
+    public readonly type: string = 'IamPermissionRolePermissionId';
 
     constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
     {
         super(value, Object.assign({
-            name       : 'IamPermissionPermissionId',
+            name       : 'IamPermissionRolePermissionId',
             nullable   : false,
             undefinable: false,
             length     : 36,

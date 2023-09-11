@@ -1,8 +1,6 @@
+import { IamBoundedContextMapper, IamBoundedContextResponse, IamRawSQLBoundedContextsQuery } from '@app/iam/bounded-context';
+import { IamRawSQLBoundedContextsService } from '@app/iam/bounded-context/application/raw-sql/iam-raw-sql-bounded-contexts.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamBoundedContextResponse } from '../../domain/iam-bounded-context.response';
-import { IamBoundedContextMapper } from '../../domain/iam-bounded-context.mapper';
-import { IamRawSQLBoundedContextsQuery } from './iam-raw-sql-bounded-contexts.query';
-import { IamRawSQLBoundedContextsService } from './iam-raw-sql-bounded-contexts.service';
 
 @QueryHandler(IamRawSQLBoundedContextsQuery)
 export class IamRawSQLBoundedContextsQueryHandler implements IQueryHandler<IamRawSQLBoundedContextsQuery>

@@ -1,16 +1,13 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamCreatePermissionCommand } from './iam-create-permission.command';
-import { IamCreatePermissionService } from './iam-create-permission.service';
+import { IamCreatePermissionCommand } from '@app/iam/permission';
+import { IamCreatePermissionService } from '@app/iam/permission/application/create/iam-create-permission.service';
 import {
+    IamPermissionBoundedContextId,
     IamPermissionId,
     IamPermissionName,
-    IamPermissionBoundedContextId,
     IamPermissionRoleIds,
-    IamPermissionCreatedAt,
-    IamPermissionUpdatedAt,
-    IamPermissionDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/iam/permission/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreatePermissionCommand)
 export class IamCreatePermissionCommandHandler implements ICommandHandler<IamCreatePermissionCommand>

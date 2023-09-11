@@ -1,11 +1,11 @@
 import { IamAddPermissionsRolesContextEvent, IamIPermissionRoleRepository, IamPermissionRole } from '@app/iam/permission-role';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
 import {
     IamPermissionRolePermissionId,
     IamPermissionRoleRoleId,
-} from '../../domain/value-objects';
+} from '@app/iam/permission-role/domain/value-objects';
+import { CQMetadata } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamCreatePermissionsRolesService
@@ -15,8 +15,8 @@ export class IamCreatePermissionsRolesService
         private readonly repository: IamIPermissionRoleRepository,
     ) {}
 
-    public async main(
-        permissionsRoles: {
+    async main(
+        payload: {
             permissionId: IamPermissionRolePermissionId;
             roleId: IamPermissionRoleRoleId;
         } [],
@@ -24,13 +24,18 @@ export class IamCreatePermissionsRolesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregatePermissionsRoles = permissionsRoles.map(permissionRole => IamPermissionRole.register(
+        const aggregatePermissionsRoles = payload.map(permissionRole => IamPermissionRole.register(
             permissionRole.permissionId,
             permissionRole.roleId,
         ));
 
         // insert
-        await this.repository.insert(aggregatePermissionsRoles, { insertOptions: cQMetadata?.repositoryOptions });
+        await this.repository.insert(
+            aggregatePermissionsRoles,
+            {
+                insertOptions: cQMetadata?.repositoryOptions,
+            },
+        );
 
         // create AddPermissionsRolesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events

@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamCreateTenantsCommand, iamMockTenantData } from '@app/iam/tenant';
+import { IamCreateTenantsCommandHandler } from '@app/iam/tenant/application/create/iam-create-tenants.command-handler';
+import { IamCreateTenantsService } from '@app/iam/tenant/application/create/iam-create-tenants.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockTenantData } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.data';
-import { IamCreateTenantsCommandHandler } from './iam-create-tenants.command-handler';
-import { IamCreateTenantsCommand } from './iam-create-tenants.command';
-import { IamCreateTenantsService } from './iam-create-tenants.service';
 
 describe('iamCreateTenantsCommandHandler', () =>
 {
     let commandHandler: IamCreateTenantsCommandHandler;
-    let service: IamCreateTenantsService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('iamCreateTenantsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreateTenantsCommandHandler>(IamCreateTenantsCommandHandler);
-        service = module.get<IamCreateTenantsService>(IamCreateTenantsService);
     });
 
     describe('main', () =>

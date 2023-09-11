@@ -1,10 +1,7 @@
+import { IamIBoundedContextRepository, IamMockBoundedContextRepository } from '@app/iam/bounded-context';
+import { IamFindBoundedContextService } from '@app/iam/bounded-context/application/find/iam-find-bounded-context.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamFindBoundedContextService } from './iam-find-bounded-context.service';
-import { IamIBoundedContextRepository } from '../../domain/iam-bounded-context.repository';
-import { IamMockBoundedContextRepository } from '../../infrastructure/mock/iam-mock-bounded-context.repository';
 
 describe('IamFindBoundedContextService', () =>
 {

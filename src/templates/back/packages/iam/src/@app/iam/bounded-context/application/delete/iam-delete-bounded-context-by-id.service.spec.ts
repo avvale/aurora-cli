@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamIBoundedContextRepository, iamMockBoundedContextData, IamMockBoundedContextRepository } from '@app/iam/bounded-context';
+import { IamDeleteBoundedContextByIdService } from '@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.service';
+import { IamBoundedContextId } from '@app/iam/bounded-context/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockBoundedContextData } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.data';
-import { IamDeleteBoundedContextByIdService } from './iam-delete-bounded-context-by-id.service';
-import { IamBoundedContextId } from '../../domain/value-objects';
-import { IamIBoundedContextRepository } from '../../domain/iam-bounded-context.repository';
-import { IamMockBoundedContextRepository } from '../../infrastructure/mock/iam-mock-bounded-context.repository';
 
 describe('IamDeleteBoundedContextByIdService', () =>
 {

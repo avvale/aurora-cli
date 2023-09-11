@@ -1,9 +1,7 @@
+import { IamFindTenantByIdQuery, IamTenantMapper, IamTenantResponse } from '@app/iam/tenant';
+import { IamFindTenantByIdService } from '@app/iam/tenant/application/find/iam-find-tenant-by-id.service';
+import { IamTenantId } from '@app/iam/tenant/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamTenantResponse } from '../../domain/iam-tenant.response';
-import { IamTenantMapper } from '../../domain/iam-tenant.mapper';
-import { IamTenantId } from '../../domain/value-objects';
-import { IamFindTenantByIdQuery } from './iam-find-tenant-by-id.query';
-import { IamFindTenantByIdService } from './iam-find-tenant-by-id.service';
 
 @QueryHandler(IamFindTenantByIdQuery)
 export class IamFindTenantByIdQueryHandler implements IQueryHandler<IamFindTenantByIdQuery>

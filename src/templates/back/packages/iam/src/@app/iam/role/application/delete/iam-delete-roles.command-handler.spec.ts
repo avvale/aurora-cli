@@ -1,14 +1,11 @@
+import { IamDeleteRolesCommand } from '@app/iam/role';
+import { IamDeleteRolesCommandHandler } from '@app/iam/role/application/delete/iam-delete-roles.command-handler';
+import { IamDeleteRolesService } from '@app/iam/role/application/delete/iam-delete-roles.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteRolesCommandHandler } from './iam-delete-roles.command-handler';
-import { IamDeleteRolesCommand } from './iam-delete-roles.command';
-import { IamDeleteRolesService } from './iam-delete-roles.service';
 
 describe('IamDeleteRolesCommandHandler', () =>
 {
     let commandHandler: IamDeleteRolesCommandHandler;
-    let service: IamDeleteRolesService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('IamDeleteRolesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamDeleteRolesCommandHandler>(IamDeleteRolesCommandHandler);
-        service = module.get<IamDeleteRolesService>(IamDeleteRolesService);
     });
 
     describe('main', () =>

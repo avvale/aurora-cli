@@ -1,16 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Delete, Body } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamDeletePermissionRoleDto, IamPermissionRoleDto } from '../dto';
+import { IamDeletePermissionsRolesHandler, IamPermissionRoleDto } from '@api/iam/permission-role';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamDeletePermissionsRolesHandler } from '../handlers/iam-delete-permissions-roles.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] permission-role')
 @Controller('iam/permissions-roles/delete')
-@Auth('iam.role.delete')
+@Auth('iam.permissionRole.delete')
 export class IamDeletePermissionsRolesController
 {
     constructor(
@@ -18,19 +15,19 @@ export class IamDeletePermissionsRolesController
     ) {}
 
     @Delete()
-    @ApiOperation({ summary: 'Delete permissions roles in batch according to query' })
+    @ApiOperation({ summary: 'Delete permissions-roles in batch according to query' })
     @ApiOkResponse({ description: 'The records has been deleted successfully.', type: [IamPermissionRoleDto]})
     @ApiBody({ type: QueryStatement })
     @ApiQuery({ name: 'query', type: QueryStatement })
     async main(
-        @Body('payload') payload?: IamDeletePermissionRoleDto[],
+        @Body('query') queryStatement?: QueryStatement,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
     )
     {
         return await this.handler.main(
-            payload,
+            queryStatement,
             constraint,
             timezone,
             auditing,

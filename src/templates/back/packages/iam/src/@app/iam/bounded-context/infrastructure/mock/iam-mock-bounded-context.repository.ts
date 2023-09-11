@@ -1,18 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { IamIBoundedContextRepository } from '@app/iam/bounded-context/domain/iam-bounded-context.repository';
+import { IamBoundedContext, IamIBoundedContextRepository, iamMockBoundedContextData } from '@app/iam/bounded-context';
 import {
+    IamBoundedContextCreatedAt,
+    IamBoundedContextDeletedAt,
     IamBoundedContextId,
+    IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
     IamBoundedContextSort,
-    IamBoundedContextIsActive,
-    IamBoundedContextCreatedAt,
     IamBoundedContextUpdatedAt,
-    IamBoundedContextDeletedAt,
 } from '@app/iam/bounded-context/domain/value-objects';
-import { IamBoundedContext } from '../../domain/iam-bounded-context.aggregate';
-import { iamMockBoundedContextData } from './iam-mock-bounded-context.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamMockBoundedContextRepository extends MockRepository<IamBoundedContext> implements IamIBoundedContextRepository
@@ -20,7 +18,6 @@ export class IamMockBoundedContextRepository extends MockRepository<IamBoundedCo
     public readonly repository: any;
     public readonly aggregateName: string = 'IamBoundedContext';
     public collectionSource: IamBoundedContext[];
-    public deletedAtInstance: IamBoundedContextDeletedAt = new IamBoundedContextDeletedAt(null);
 
     constructor()
     {

@@ -1,10 +1,7 @@
+import { iamMockBoundedContextData, IamUpsertBoundedContextCommand } from '@app/iam/bounded-context';
+import { IamUpsertBoundedContextCommandHandler } from '@app/iam/bounded-context/application/upsert/iam-upsert-bounded-context.command-handler';
+import { IamUpsertBoundedContextService } from '@app/iam/bounded-context/application/upsert/iam-upsert-bounded-context.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockBoundedContextData } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.data';
-import { IamUpsertBoundedContextCommandHandler } from './iam-upsert-bounded-context.command-handler';
-import { IamUpsertBoundedContextCommand } from './iam-upsert-bounded-context.command';
-import { IamUpsertBoundedContextService } from './iam-upsert-bounded-context.service';
 
 describe('IamUpsertBoundedContextCommandHandler', () =>
 {

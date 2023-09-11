@@ -1,12 +1,7 @@
+import { IamITenantRepository, IamMockTenantRepository, IamRawSQLTenantsQuery, IamTenantMapper } from '@app/iam/tenant';
+import { IamRawSQLTenantsQueryHandler } from '@app/iam/tenant/application/raw-sql/iam-raw-sql-tenants.query-handler';
+import { IamRawSQLTenantsService } from '@app/iam/tenant/application/raw-sql/iam-raw-sql-tenants.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamMockTenantRepository } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.repository';
-import { IamITenantRepository } from '@app/iam/tenant/domain/iam-tenant.repository';
-import { IamTenantMapper } from '@app/iam/tenant/domain/iam-tenant.mapper';
-import { IamRawSQLTenantsQueryHandler } from './iam-raw-sql-tenants.query-handler';
-import { IamRawSQLTenantsQuery } from './iam-raw-sql-tenants.query';
-import { IamRawSQLTenantsService } from './iam-raw-sql-tenants.service';
 
 describe('RawSQLTenantsQueryHandler', () =>
 {

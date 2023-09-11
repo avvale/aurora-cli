@@ -1,15 +1,11 @@
+import { iamMockRoleData, IamUpdateRolesCommand } from '@app/iam/role';
+import { IamUpdateRolesCommandHandler } from '@app/iam/role/application/update/iam-update-roles.command-handler';
+import { IamUpdateRolesService } from '@app/iam/role/application/update/iam-update-roles.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockRoleData } from '@app/iam/role/infrastructure/mock/iam-mock-role.data';
-import { IamUpdateRolesCommandHandler } from './iam-update-roles.command-handler';
-import { IamUpdateRolesCommand } from './iam-update-roles.command';
-import { IamUpdateRolesService } from './iam-update-roles.service';
 
 describe('IamUpdateRolesCommandHandler', () =>
 {
     let commandHandler: IamUpdateRolesCommandHandler;
-    let service: IamUpdateRolesService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('IamUpdateRolesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamUpdateRolesCommandHandler>(IamUpdateRolesCommandHandler);
-        service = module.get<IamUpdateRolesService>(IamUpdateRolesService);
     });
 
     describe('main', () =>

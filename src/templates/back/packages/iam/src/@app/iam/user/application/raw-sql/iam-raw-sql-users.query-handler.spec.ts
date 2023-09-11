@@ -1,12 +1,7 @@
+import { IamIUserRepository, IamMockUserRepository, IamRawSQLUsersQuery, IamUserMapper } from '@app/iam/user';
+import { IamRawSQLUsersQueryHandler } from '@app/iam/user/application/raw-sql/iam-raw-sql-users.query-handler';
+import { IamRawSQLUsersService } from '@app/iam/user/application/raw-sql/iam-raw-sql-users.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamMockUserRepository } from '@app/iam/user/infrastructure/mock/iam-mock-user.repository';
-import { IamIUserRepository } from '@app/iam/user/domain/iam-user.repository';
-import { IamUserMapper } from '@app/iam/user/domain/iam-user.mapper';
-import { IamRawSQLUsersQueryHandler } from './iam-raw-sql-users.query-handler';
-import { IamRawSQLUsersQuery } from './iam-raw-sql-users.query';
-import { IamRawSQLUsersService } from './iam-raw-sql-users.service';
 
 describe('RawSQLUsersQueryHandler', () =>
 {

@@ -39,15 +39,16 @@ export { IamPermission } from './domain/iam-permission.aggregate';
 export { IamPermissionMapper } from './domain/iam-permission.mapper';
 export { IamIPermissionRepository } from './domain/iam-permission.repository';
 export { IamPermissionResponse } from './domain/iam-permission.response';
-export { IamPermissionHelper } from './domain/iam-permission-helper';
 
 // infrastructure
 export { IamPermissionModel } from './infrastructure/sequelize/iam-sequelize-permission.model';
-export { IamPermissionsRolesModel } from './infrastructure/sequelize/iam-sequelize-permissions-roles.model';
 export { IamSequelizePermissionRepository } from './infrastructure/sequelize/iam-sequelize-permission.repository';
 
 // sagas
 export { IamPermissionSagas } from './application/sagas/iam-permission.sagas';
+
+// ---- customizations ----
+export { IamPermissionHelper } from './domain/iam-permission-helper';
 
 // command handlers
 import { IamCreatePermissionCommandHandler } from './application/create/iam-create-permission.command-handler';

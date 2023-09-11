@@ -1,8 +1,6 @@
+import { IamBoundedContextMapper, IamBoundedContextResponse, IamGetBoundedContextsQuery } from '@app/iam/bounded-context';
+import { IamGetBoundedContextsService } from '@app/iam/bounded-context/application/get/iam-get-bounded-contexts.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamBoundedContextResponse } from '../../domain/iam-bounded-context.response';
-import { IamBoundedContextMapper } from '../../domain/iam-bounded-context.mapper';
-import { IamGetBoundedContextsQuery } from './iam-get-bounded-contexts.query';
-import { IamGetBoundedContextsService } from './iam-get-bounded-contexts.service';
 
 @QueryHandler(IamGetBoundedContextsQuery)
 export class IamGetBoundedContextsQueryHandler implements IQueryHandler<IamGetBoundedContextsQuery>
@@ -15,10 +13,12 @@ export class IamGetBoundedContextsQueryHandler implements IQueryHandler<IamGetBo
 
     async execute(query: IamGetBoundedContextsQuery): Promise<IamBoundedContextResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getBoundedContextsService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getBoundedContextsService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

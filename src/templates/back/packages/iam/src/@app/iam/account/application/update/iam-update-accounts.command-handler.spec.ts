@@ -1,15 +1,11 @@
+import { iamMockAccountData, IamUpdateAccountsCommand } from '@app/iam/account';
+import { IamUpdateAccountsCommandHandler } from '@app/iam/account/application/update/iam-update-accounts.command-handler';
+import { IamUpdateAccountsService } from '@app/iam/account/application/update/iam-update-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockAccountData } from '@app/iam/account/infrastructure/mock/iam-mock-account.data';
-import { IamUpdateAccountsCommandHandler } from './iam-update-accounts.command-handler';
-import { IamUpdateAccountsCommand } from './iam-update-accounts.command';
-import { IamUpdateAccountsService } from './iam-update-accounts.service';
 
 describe('IamUpdateAccountsCommandHandler', () =>
 {
     let commandHandler: IamUpdateAccountsCommandHandler;
-    let service: IamUpdateAccountsService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('IamUpdateAccountsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamUpdateAccountsCommandHandler>(IamUpdateAccountsCommandHandler);
-        service = module.get<IamUpdateAccountsService>(IamUpdateAccountsService);
     });
 
     describe('main', () =>

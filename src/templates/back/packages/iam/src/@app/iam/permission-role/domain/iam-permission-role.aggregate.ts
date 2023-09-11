@@ -1,44 +1,38 @@
+/* eslint-disable key-spacing */
 import { IamPermission } from '@app/iam/permission';
 import { IamCreatedPermissionRoleEvent, IamDeletedPermissionRoleEvent, IamUpdatedPermissionRoleEvent } from '@app/iam/permission-role';
-import { IamRole } from '@app/iam/role';
-import { LiteralObject } from '@aurorajs.dev/core';
-import { AggregateRoot } from '@nestjs/cqrs';
 import {
     IamPermissionRolePermissionId,
     IamPermissionRoleRoleId,
-} from './value-objects';
+} from '@app/iam/permission-role/domain/value-objects';
+import { IamRole } from '@app/iam/role';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamPermissionRole extends AggregateRoot
 {
     permissionId: IamPermissionRolePermissionId;
     roleId: IamPermissionRoleRoleId;
-
-    // eager relationship
     permission: IamPermission;
     role: IamRole;
 
     constructor(
-        permissionId?: IamPermissionRolePermissionId,
-        roleId?: IamPermissionRoleRoleId,
-
+        permissionId: IamPermissionRolePermissionId,
+        roleId: IamPermissionRoleRoleId,
         permission?: IamPermission,
         role?: IamRole,
     )
     {
         super();
-
         this.permissionId = permissionId;
         this.roleId = roleId;
-
-        // eager relationship
         this.permission = permission;
         this.role = role;
     }
 
-    static register (
+    static register(
         permissionId: IamPermissionRolePermissionId,
         roleId: IamPermissionRoleRoleId,
-
         permission?: IamPermission,
         role?: IamRole,
     ): IamPermissionRole
@@ -46,7 +40,6 @@ export class IamPermissionRole extends AggregateRoot
         return new IamPermissionRole(
             permissionId,
             roleId,
-
             permission,
             role,
         );
@@ -86,11 +79,9 @@ export class IamPermissionRole extends AggregateRoot
     {
         return {
             permissionId: this.permissionId.value,
-            roleId      : this.roleId.value,
-
-            // eager relationship
+            roleId: this.roleId.value,
             permission: this.permission?.toDTO(),
-            role      : this.role?.toDTO(),
+            role: this.role?.toDTO(),
         };
     }
 
@@ -99,11 +90,9 @@ export class IamPermissionRole extends AggregateRoot
     {
         return {
             permissionId: this.permissionId.value,
-            roleId      : this.roleId.value,
-
-            // eager relationship
+            roleId: this.roleId.value,
             permission: this.permission?.toDTO(),
-            role      : this.role?.toDTO(),
+            role: this.role?.toDTO(),
         };
     }
 }

@@ -1,8 +1,8 @@
-import { IamDeletePermissionRoleInput, IamPermissionRole } from '@api/graphql';
+import { IamPermissionRole } from '@api/graphql';
+import { IamPermissionRoleDto } from '@api/iam/permission-role';
 import { IamDeletePermissionsRolesCommand, IamGetPermissionsRolesQuery } from '@app/iam/permission-role';
-import { AuditingMeta, ICommandBus, IQueryBus, Operator, QueryStatement } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { IamDeletePermissionRoleDto, IamPermissionRoleDto } from '../dto';
 
 @Injectable()
 export class IamDeletePermissionsRolesHandler
@@ -13,23 +13,22 @@ export class IamDeletePermissionsRolesHandler
     ) {}
 
     async main(
-        payload: IamDeletePermissionRoleInput[] | IamDeletePermissionRoleDto[],
+        queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<IamPermissionRole[] | IamPermissionRoleDto[]>
     {
-        const permissionsRoles = await this.queryBus.ask(new IamGetPermissionsRolesQuery({
-            where: {
-                [Operator.or]: payload.map(permissionRole => ({
-                    permissionId: permissionRole.permissionId,
-                    roleId      : permissionRole.roleId,
-                })),
+        const permissionsRoles = await this.queryBus.ask(new IamGetPermissionsRolesQuery(
+            queryStatement,
+            constraint,
+            {
+                timezone,
             },
-        }, constraint, { timezone }));
+        ));
 
         await this.commandBus.dispatch(new IamDeletePermissionsRolesCommand(
-            payload,
+            queryStatement,
             constraint,
             {
                 timezone,

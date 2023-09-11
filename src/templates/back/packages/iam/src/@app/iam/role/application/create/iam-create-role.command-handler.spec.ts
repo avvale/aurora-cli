@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('IamCreateRoleCommandHandler', () =>
 {
     let commandHandler: IamCreateRoleCommandHandler;
-    let service: IamCreateRoleService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('IamCreateRoleCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreateRoleCommandHandler>(IamCreateRoleCommandHandler);
-        service = module.get<IamCreateRoleService>(IamCreateRoleService);
     });
 
     describe('main', () =>

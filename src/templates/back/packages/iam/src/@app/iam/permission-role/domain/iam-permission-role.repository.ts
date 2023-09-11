@@ -1,8 +1,5 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { IamPermissionRole } from '@app/iam/permission-role';
-
-// ---- customizations ----
-import { IamPermissionId } from '@app/iam/permission/domain/value-objects';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class IamIPermissionRoleRepository implements IRepository<IamPermissionRole>
 {
@@ -28,10 +25,12 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
 
     // find a single record by id
     abstract findById(
-        id: IamPermissionId,
+        id: undefined,
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<IamPermissionRole | null>;
 
@@ -40,6 +39,14 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
         options?: {
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<IamPermissionRole[]>;
+
+    // get records with rawSQL
+    abstract rawSQL(
+        options?: {
+            rawSQL?: string;
             cQMetadata?: CQMetadata;
         }
     ): Promise<IamPermissionRole[]>;
@@ -79,7 +86,7 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
 
     // update record by id
     abstract updateById(
-        permission: IamPermissionRole,
+        permissionRole: IamPermissionRole,
         options?: {
             updateByIdOptions?: LiteralObject;
             constraint?: QueryStatement;
@@ -95,15 +102,14 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
         permissionRole: IamPermissionRole,
         options?: {
             updateOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
-            // arguments to find object to update, with i18n we use langId and id relationship with parent entity
-            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 
-    // insert or update key identification elements already existing in the table
+    // insert or update key identification element already existing in the table
     abstract upsert(
         permissionRole: IamPermissionRole,
         options?: {
@@ -114,11 +120,13 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
 
     // delete record
     abstract deleteById(
-        id: IamPermissionId,
+        id: undefined,
         options?: {
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

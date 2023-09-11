@@ -1,15 +1,11 @@
+import { iamMockBoundedContextData, IamUpdateBoundedContextsCommand } from '@app/iam/bounded-context';
+import { IamUpdateBoundedContextsCommandHandler } from '@app/iam/bounded-context/application/update/iam-update-bounded-contexts.command-handler';
+import { IamUpdateBoundedContextsService } from '@app/iam/bounded-context/application/update/iam-update-bounded-contexts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockBoundedContextData } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.data';
-import { IamUpdateBoundedContextsCommandHandler } from './iam-update-bounded-contexts.command-handler';
-import { IamUpdateBoundedContextsCommand } from './iam-update-bounded-contexts.command';
-import { IamUpdateBoundedContextsService } from './iam-update-bounded-contexts.service';
 
 describe('IamUpdateBoundedContextsCommandHandler', () =>
 {
     let commandHandler: IamUpdateBoundedContextsCommandHandler;
-    let service: IamUpdateBoundedContextsService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('IamUpdateBoundedContextsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamUpdateBoundedContextsCommandHandler>(IamUpdateBoundedContextsCommandHandler);
-        service = module.get<IamUpdateBoundedContextsService>(IamUpdateBoundedContextsService);
     });
 
     describe('main', () =>

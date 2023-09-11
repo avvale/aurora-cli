@@ -1,17 +1,14 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamUpsertBoundedContextCommand } from './iam-upsert-bounded-context.command';
-import { IamUpsertBoundedContextService } from './iam-upsert-bounded-context.service';
+import { IamUpsertBoundedContextCommand } from '@app/iam/bounded-context';
+import { IamUpsertBoundedContextService } from '@app/iam/bounded-context/application/upsert/iam-upsert-bounded-context.service';
 import {
     IamBoundedContextId,
+    IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
     IamBoundedContextSort,
-    IamBoundedContextIsActive,
-    IamBoundedContextCreatedAt,
-    IamBoundedContextUpdatedAt,
-    IamBoundedContextDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/iam/bounded-context/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpsertBoundedContextCommand)
 export class IamUpsertBoundedContextCommandHandler implements ICommandHandler<IamUpsertBoundedContextCommand>

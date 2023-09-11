@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamITenantRepository, IamMockTenantRepository, IamPaginateTenantsQuery } from '@app/iam/tenant';
+import { IamPaginateTenantsQueryHandler } from '@app/iam/tenant/application/paginate/iam-paginate-tenants.query-handler';
+import { IamPaginateTenantsService } from '@app/iam/tenant/application/paginate/iam-paginate-tenants.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { IamPaginateTenantsQueryHandler } from './iam-paginate-tenants.query-handler';
-import { IamMockTenantRepository } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.repository';
-import { IamITenantRepository } from '@app/iam/tenant/domain/iam-tenant.repository';
-import { IamTenantMapper } from '@app/iam/tenant/domain/iam-tenant.mapper';
-import { IamPaginateTenantsQuery } from './iam-paginate-tenants.query';
-import { IamPaginateTenantsService } from './iam-paginate-tenants.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamPaginateTenantsQueryHandler', () =>
 {
     let queryHandler: IamPaginateTenantsQueryHandler;
     let service: IamPaginateTenantsService;
     let repository: IamMockTenantRepository;
-    let mapper: IamTenantMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('IamPaginateTenantsQueryHandler', () =>
         queryHandler = module.get<IamPaginateTenantsQueryHandler>(IamPaginateTenantsQueryHandler);
         service = module.get<IamPaginateTenantsService>(IamPaginateTenantsService);
         repository = <IamMockTenantRepository>module.get<IamITenantRepository>(IamITenantRepository);
-        mapper = new IamTenantMapper();
     });
 
     describe('main', () =>

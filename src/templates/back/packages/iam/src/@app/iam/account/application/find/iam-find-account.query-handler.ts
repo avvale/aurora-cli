@@ -1,8 +1,6 @@
+import { IamAccountMapper, IamAccountResponse, IamFindAccountQuery } from '@app/iam/account';
+import { IamFindAccountService } from '@app/iam/account/application/find/iam-find-account.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamAccountResponse } from '../../domain/iam-account.response';
-import { IamAccountMapper } from '../../domain/iam-account.mapper';
-import { IamFindAccountQuery } from './iam-find-account.query';
-import { IamFindAccountService } from './iam-find-account.service';
 
 @QueryHandler(IamFindAccountQuery)
 export class IamFindAccountQueryHandler implements IQueryHandler<IamFindAccountQuery>

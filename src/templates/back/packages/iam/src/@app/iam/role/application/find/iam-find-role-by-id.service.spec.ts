@@ -1,12 +1,8 @@
+import { IamIRoleRepository, iamMockRoleData, IamMockRoleRepository } from '@app/iam/role';
+import { IamFindRoleByIdService } from '@app/iam/role/application/find/iam-find-role-by-id.service';
+import { IamRoleId } from '@app/iam/role/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockRoleData } from '@app/iam/role/infrastructure/mock/iam-mock-role.data';
-import { IamFindRoleByIdService } from './iam-find-role-by-id.service';
-import { IamRoleId } from '../../domain/value-objects';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamMockRoleRepository } from '../../infrastructure/mock/iam-mock-role.repository';
 
 describe('IamFindRoleByIdService', () =>
 {

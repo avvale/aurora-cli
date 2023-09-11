@@ -1,5 +1,5 @@
-import { IamPermissionResponse } from '@app/iam/permission';
 import { IamAccountResponse } from '@app/iam/account';
+import { IamPermissionResponse } from '@app/iam/permission';
 
 export class IamRoleResponse
 {

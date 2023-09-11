@@ -1,20 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { IamAddRolesContextEvent, IamIRoleRepository, IamRole } from '@app/iam/role';
 import {
-    IamRoleId,
-    IamRoleName,
-    IamRoleIsMaster,
-    IamRolePermissionIds,
     IamRoleAccountIds,
     IamRoleCreatedAt,
-    IamRoleUpdatedAt,
     IamRoleDeletedAt,
-} from '../../domain/value-objects';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamRole } from '../../domain/iam-role.aggregate';
-import { IamAddRolesContextEvent } from '../events/iam-add-roles-context.event';
+    IamRoleId,
+    IamRoleIsMaster,
+    IamRoleName,
+    IamRolePermissionIds,
+    IamRoleUpdatedAt,
+} from '@app/iam/role/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamUpdateRolesService
@@ -48,7 +45,6 @@ export class IamUpdateRolesService
             new IamRoleUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

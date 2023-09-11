@@ -1,25 +1,24 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { IamAccount, iamMockAccountData } from '@app/iam/account';
 import {
-    IamAccountId,
-    IamAccountType,
-    IamAccountCode,
-    IamAccountEmail,
-    IamAccountIsActive,
     IamAccountClientId,
-    IamAccountScopes,
+    IamAccountCode,
+    IamAccountCreatedAt,
     IamAccountDApplicationCodes,
+    IamAccountDeletedAt,
     IamAccountDPermissions,
     IamAccountDTenants,
+    IamAccountEmail,
+    IamAccountId,
+    IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountScopes,
     IamAccountTenantIds,
-    IamAccountCreatedAt,
+    IamAccountType,
     IamAccountUpdatedAt,
-    IamAccountDeletedAt,
-} from '../../domain/value-objects';
-import { IamAccount } from '../../domain/iam-account.aggregate';
-import { iamMockAccountData } from './iam-mock-account.data';
+} from '@app/iam/account/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

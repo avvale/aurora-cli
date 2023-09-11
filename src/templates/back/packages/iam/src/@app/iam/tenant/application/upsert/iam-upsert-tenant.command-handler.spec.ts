@@ -1,10 +1,7 @@
+import { iamMockTenantData, IamUpsertTenantCommand } from '@app/iam/tenant';
+import { IamUpsertTenantCommandHandler } from '@app/iam/tenant/application/upsert/iam-upsert-tenant.command-handler';
+import { IamUpsertTenantService } from '@app/iam/tenant/application/upsert/iam-upsert-tenant.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockTenantData } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.data';
-import { IamUpsertTenantCommandHandler } from './iam-upsert-tenant.command-handler';
-import { IamUpsertTenantCommand } from './iam-upsert-tenant.command';
-import { IamUpsertTenantService } from './iam-upsert-tenant.service';
 
 describe('IamUpsertTenantCommandHandler', () =>
 {

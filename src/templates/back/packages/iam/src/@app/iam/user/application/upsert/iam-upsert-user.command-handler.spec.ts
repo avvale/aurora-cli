@@ -1,10 +1,7 @@
+import { iamMockUserData, IamUpsertUserCommand } from '@app/iam/user';
+import { IamUpsertUserCommandHandler } from '@app/iam/user/application/upsert/iam-upsert-user.command-handler';
+import { IamUpsertUserService } from '@app/iam/user/application/upsert/iam-upsert-user.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockUserData } from '@app/iam/user/infrastructure/mock/iam-mock-user.data';
-import { IamUpsertUserCommandHandler } from './iam-upsert-user.command-handler';
-import { IamUpsertUserCommand } from './iam-upsert-user.command';
-import { IamUpsertUserService } from './iam-upsert-user.service';
 
 describe('IamUpsertUserCommandHandler', () =>
 {

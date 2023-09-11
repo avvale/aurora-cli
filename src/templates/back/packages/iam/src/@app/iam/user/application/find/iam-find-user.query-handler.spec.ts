@@ -1,12 +1,7 @@
+import { IamFindUserQuery, IamIUserRepository, IamMockUserRepository, IamUserMapper } from '@app/iam/user';
+import { IamFindUserQueryHandler } from '@app/iam/user/application/find/iam-find-user.query-handler';
+import { IamFindUserService } from '@app/iam/user/application/find/iam-find-user.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindUserQueryHandler } from './iam-find-user.query-handler';
-import { IamMockUserRepository } from '@app/iam/user/infrastructure/mock/iam-mock-user.repository';
-import { IamIUserRepository } from '@app/iam/user/domain/iam-user.repository';
-import { IamUserMapper } from '@app/iam/user/domain/iam-user.mapper';
-import { IamFindUserQuery } from './iam-find-user.query';
-import { IamFindUserService } from './iam-find-user.service';
 
 describe('IamFindUserQueryHandler', () =>
 {

@@ -28,7 +28,7 @@ export class IamCreateUsersService
     ) {}
 
     async main(
-        users: {
+        payload: {
             id: IamUserId;
             accountId: IamUserAccountId;
             name: IamUserName;
@@ -45,7 +45,7 @@ export class IamCreateUsersService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateUsers = users.map(user => IamUser.register(
+        const aggregateUsers = payload.map(user => IamUser.register(
             user.id,
             user.accountId,
             user.name,

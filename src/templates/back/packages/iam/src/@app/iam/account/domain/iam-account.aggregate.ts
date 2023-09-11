@@ -1,31 +1,29 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { IamCreatedAccountEvent, IamDeletedAccountEvent, IamUpdatedAccountEvent } from '@app/iam/account';
 import {
-    IamAccountId,
-    IamAccountType,
-    IamAccountCode,
-    IamAccountEmail,
-    IamAccountIsActive,
     IamAccountClientId,
-    IamAccountScopes,
+    IamAccountCode,
+    IamAccountCreatedAt,
     IamAccountDApplicationCodes,
+    IamAccountDeletedAt,
     IamAccountDPermissions,
     IamAccountDTenants,
+    IamAccountEmail,
+    IamAccountId,
+    IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountScopes,
     IamAccountTenantIds,
-    IamAccountCreatedAt,
+    IamAccountType,
     IamAccountUpdatedAt,
-    IamAccountDeletedAt,
-} from './value-objects';
-import { IamCreatedAccountEvent } from '../application/events/iam-created-account.event';
-import { IamUpdatedAccountEvent } from '../application/events/iam-updated-account.event';
-import { IamDeletedAccountEvent } from '../application/events/iam-deleted-account.event';
-import { IamUser } from '@app/iam/user';
-import { OAuthClient } from '@app/o-auth/client';
+} from '@app/iam/account/domain/value-objects';
 import { IamRole } from '@app/iam/role';
 import { IamTenant } from '@app/iam/tenant';
+import { IamUser } from '@app/iam/user';
+import { OAuthClient } from '@app/o-auth/client';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAccount extends AggregateRoot
 {
@@ -45,8 +43,6 @@ export class IamAccount extends AggregateRoot
     createdAt: IamAccountCreatedAt;
     updatedAt: IamAccountUpdatedAt;
     deletedAt: IamAccountDeletedAt;
-
-    // eager relationship
     user: IamUser;
     client: OAuthClient;
     roles: IamRole[];
@@ -69,7 +65,6 @@ export class IamAccount extends AggregateRoot
         createdAt: IamAccountCreatedAt,
         updatedAt: IamAccountUpdatedAt,
         deletedAt: IamAccountDeletedAt,
-
         user?: IamUser,
         client?: OAuthClient,
         roles?: IamRole[],
@@ -93,15 +88,13 @@ export class IamAccount extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.user = user;
         this.client = client;
         this.roles = roles;
         this.tenants = tenants;
     }
 
-    static register (
+    static register(
         id: IamAccountId,
         type: IamAccountType,
         code: IamAccountCode,
@@ -118,7 +111,6 @@ export class IamAccount extends AggregateRoot
         createdAt: IamAccountCreatedAt,
         updatedAt: IamAccountUpdatedAt,
         deletedAt: IamAccountDeletedAt,
-
         user?: IamUser,
         client?: OAuthClient,
         roles?: IamRole[],
@@ -142,7 +134,6 @@ export class IamAccount extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             user,
             client,
             roles,
@@ -241,8 +232,6 @@ export class IamAccount extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             user: this.user?.toDTO(),
             client: this.client?.toDTO(),
             roles: this.roles?.map(item => item.toDTO()),
@@ -270,8 +259,6 @@ export class IamAccount extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             user: this.user?.toDTO(),
             client: this.client?.toDTO(),
             roles: this.roles?.map(item => item.toDTO()),

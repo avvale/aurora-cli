@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { IamIRoleRepository, IamRole } from '@app/iam/role';
+import { IamRoleId } from '@app/iam/role/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamRole } from '../../domain/iam-role.aggregate';
-import { IamRoleId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamFindRoleByIdService

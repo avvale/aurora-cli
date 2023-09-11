@@ -1,14 +1,14 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
+import { IamRoleModel } from '@app/iam/role';
+import { IamRoleAccountModel } from '@app/iam/role-account';
+import { IamTenantModel } from '@app/iam/tenant';
+import { IamTenantAccountModel } from '@app/iam/tenant-account';
 import { IamUserModel } from '@app/iam/user';
 import { OAuthClientModel } from '@app/o-auth/client';
-import { IamRoleModel } from '@app/iam/role';
-import { IamRolesAccountsModel } from '@app/iam/role';
-import { IamTenantModel } from '@app/iam/tenant';
-import { IamTenantsAccountsModel } from '@app/iam/tenant';
+import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import { DataTypes } from 'sequelize';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamAccount',
@@ -224,15 +224,15 @@ export class IamAccountModel extends Model<IamAccountModel>
 
 
     @BelongsToMany(() => IamRoleModel, {
-        through: () => IamRolesAccountsModel,
-        uniqueKey: 'Uq01IamRolesAccounts',
+        through: () => IamRoleAccountModel,
+        uniqueKey: 'Uq01IamRoleAccount',
     })
     roles: IamRoleModel[];
 
 
     @BelongsToMany(() => IamTenantModel, {
-        through: () => IamTenantsAccountsModel,
-        uniqueKey: 'Uq01IamTenantsAccounts',
+        through: () => IamTenantAccountModel,
+        uniqueKey: 'Uq01IamTenantAccount',
     })
     tenants: IamTenantModel[];
 

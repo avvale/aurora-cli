@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('IamCreatePermissionCommandHandler', () =>
 {
     let commandHandler: IamCreatePermissionCommandHandler;
-    let service: IamCreatePermissionService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('IamCreatePermissionCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreatePermissionCommandHandler>(IamCreatePermissionCommandHandler);
-        service = module.get<IamCreatePermissionService>(IamCreatePermissionService);
     });
 
     describe('main', () =>

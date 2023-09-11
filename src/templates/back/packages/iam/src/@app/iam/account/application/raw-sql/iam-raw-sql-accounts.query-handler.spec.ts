@@ -1,12 +1,7 @@
+import { IamAccountMapper, IamIAccountRepository, IamMockAccountRepository, IamRawSQLAccountsQuery } from '@app/iam/account';
+import { IamRawSQLAccountsQueryHandler } from '@app/iam/account/application/raw-sql/iam-raw-sql-accounts.query-handler';
+import { IamRawSQLAccountsService } from '@app/iam/account/application/raw-sql/iam-raw-sql-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamMockAccountRepository } from '@app/iam/account/infrastructure/mock/iam-mock-account.repository';
-import { IamIAccountRepository } from '@app/iam/account/domain/iam-account.repository';
-import { IamAccountMapper } from '@app/iam/account/domain/iam-account.mapper';
-import { IamRawSQLAccountsQueryHandler } from './iam-raw-sql-accounts.query-handler';
-import { IamRawSQLAccountsQuery } from './iam-raw-sql-accounts.query';
-import { IamRawSQLAccountsService } from './iam-raw-sql-accounts.service';
 
 describe('RawSQLAccountsQueryHandler', () =>
 {

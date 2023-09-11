@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { IamRole } from './iam-role.aggregate';
 import { IamRoleId } from './value-objects';
+import { IamRole } from '@app/iam/role';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class IamIRoleRepository implements IRepository<IamRole>
 {
@@ -30,6 +30,8 @@ export abstract class IamIRoleRepository implements IRepository<IamRole>
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<IamRole | null>;
 
@@ -124,6 +126,8 @@ export abstract class IamIRoleRepository implements IRepository<IamRole>
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

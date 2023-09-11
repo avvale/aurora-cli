@@ -1,26 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { IamAddUsersContextEvent, IamIUserRepository, IamUser } from '@app/iam/user';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserCreatedAt,
+    IamUserDeletedAt,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
+    IamUserSurname,
     IamUserUpdatedAt,
-    IamUserDeletedAt,
-} from '../../domain/value-objects';
-import { IamIUserRepository } from '../../domain/iam-user.repository';
-import { IamUser } from '../../domain/iam-user.aggregate';
-import { IamAddUsersContextEvent } from '../events/iam-add-users-context.event';
+    IamUserUsername,
+} from '@app/iam/user/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamUpdateUsersService
@@ -66,7 +63,6 @@ export class IamUpdateUsersService
             new IamUserUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

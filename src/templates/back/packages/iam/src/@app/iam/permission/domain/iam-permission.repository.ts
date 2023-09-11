@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { IamPermission } from './iam-permission.aggregate';
 import { IamPermissionId } from './value-objects';
+import { IamPermission } from '@app/iam/permission';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class IamIPermissionRepository implements IRepository<IamPermission>
 {
@@ -30,6 +30,8 @@ export abstract class IamIPermissionRepository implements IRepository<IamPermiss
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<IamPermission | null>;
 
@@ -124,6 +126,8 @@ export abstract class IamIPermissionRepository implements IRepository<IamPermiss
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

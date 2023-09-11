@@ -1,8 +1,6 @@
+import { IamFindUserQuery, IamUserMapper, IamUserResponse } from '@app/iam/user';
+import { IamFindUserService } from '@app/iam/user/application/find/iam-find-user.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamUserResponse } from '../../domain/iam-user.response';
-import { IamUserMapper } from '../../domain/iam-user.mapper';
-import { IamFindUserQuery } from './iam-find-user.query';
-import { IamFindUserService } from './iam-find-user.service';
 
 @QueryHandler(IamFindUserQuery)
 export class IamFindUserQueryHandler implements IQueryHandler<IamFindUserQuery>

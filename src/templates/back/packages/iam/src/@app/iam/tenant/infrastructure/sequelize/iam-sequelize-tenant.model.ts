@@ -1,10 +1,10 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
 import { IamAccountModel } from '@app/iam/account';
-import { IamTenantsAccountsModel } from '@app/iam/tenant';
+import { IamTenantAccountModel } from '@app/iam/tenant-account';
+import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import { DataTypes } from 'sequelize';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamTenant',
@@ -174,8 +174,8 @@ export class IamTenantModel extends Model<IamTenantModel>
 
 
     @BelongsToMany(() => IamAccountModel, {
-        through: () => IamTenantsAccountsModel,
-        uniqueKey: 'Uq01IamTenantsAccounts',
+        through: () => IamTenantAccountModel,
+        uniqueKey: 'Uq01IamTenantAccount',
     })
     accounts: IamAccountModel[];
 

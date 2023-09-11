@@ -1,10 +1,7 @@
+import { iamMockRoleData, IamUpsertRoleCommand } from '@app/iam/role';
+import { IamUpsertRoleCommandHandler } from '@app/iam/role/application/upsert/iam-upsert-role.command-handler';
+import { IamUpsertRoleService } from '@app/iam/role/application/upsert/iam-upsert-role.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockRoleData } from '@app/iam/role/infrastructure/mock/iam-mock-role.data';
-import { IamUpsertRoleCommandHandler } from './iam-upsert-role.command-handler';
-import { IamUpsertRoleCommand } from './iam-upsert-role.command';
-import { IamUpsertRoleService } from './iam-upsert-role.service';
 
 describe('IamUpsertRoleCommandHandler', () =>
 {

@@ -1,10 +1,7 @@
+import { IamIRoleRepository, IamMockRoleRepository } from '@app/iam/role';
+import { IamRawSQLRolesService } from '@app/iam/role/application/raw-sql/iam-raw-sql-roles.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamRawSQLRolesService } from './iam-raw-sql-roles.service';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamMockRoleRepository } from '../../infrastructure/mock/iam-mock-role.repository';
 
 describe('IamRawSQLRolesService ', () =>
 {

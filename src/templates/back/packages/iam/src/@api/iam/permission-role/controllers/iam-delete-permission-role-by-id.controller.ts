@@ -1,34 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Delete } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { IamDeletePermissionRoleDto, IamPermissionRoleDto } from '../dto';
+import { IamDeletePermissionRoleByIdHandler, IamPermissionRoleDto } from '@api/iam/permission-role';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamDeletePermissionRoleByIdHandler } from '../handlers/iam-delete-permission-role-by-id.handler';
+import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Delete, Param } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] permission-role')
 @Controller('iam/permission-role/delete')
-@Auth('iam.role.delete')
+@Auth('iam.permissionRole.delete')
 export class IamDeletePermissionRoleByIdController
 {
     constructor(
         private readonly handler: IamDeletePermissionRoleByIdHandler,
     ) {}
 
-    @Delete(':id')
-    @ApiOperation({ summary: 'Delete permission role by id' })
+    @Delete(':permissionId/:roleId')
+    @ApiOperation({ summary: 'Delete permission-role by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: IamPermissionRoleDto })
     async main(
-        @Body('payload') payload: IamDeletePermissionRoleDto,
+        @Param('permissionId') permissionId: string,
+        @Param('roleId') roleId: string,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
     )
     {
         return await this.handler.main(
-            payload,
+            permissionId,
+            roleId,
             constraint,
             timezone,
             auditing,

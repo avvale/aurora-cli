@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamCreateRolesCommand, iamMockRoleData } from '@app/iam/role';
+import { IamCreateRolesCommandHandler } from '@app/iam/role/application/create/iam-create-roles.command-handler';
+import { IamCreateRolesService } from '@app/iam/role/application/create/iam-create-roles.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockRoleData } from '@app/iam/role/infrastructure/mock/iam-mock-role.data';
-import { IamCreateRolesCommandHandler } from './iam-create-roles.command-handler';
-import { IamCreateRolesCommand } from './iam-create-roles.command';
-import { IamCreateRolesService } from './iam-create-roles.service';
 
 describe('iamCreateRolesCommandHandler', () =>
 {
     let commandHandler: IamCreateRolesCommandHandler;
-    let service: IamCreateRolesService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('iamCreateRolesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreateRolesCommandHandler>(IamCreateRolesCommandHandler);
-        service = module.get<IamCreateRolesService>(IamCreateRolesService);
     });
 
     describe('main', () =>

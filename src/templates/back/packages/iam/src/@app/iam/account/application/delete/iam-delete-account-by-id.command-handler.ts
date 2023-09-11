@@ -1,9 +1,7 @@
+import { IamDeleteAccountByIdCommand } from '@app/iam/account';
+import { IamDeleteAccountByIdService } from '@app/iam/account/application/delete/iam-delete-account-by-id.service';
+import { IamAccountId } from '@app/iam/account/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamDeleteAccountByIdCommand } from './iam-delete-account-by-id.command';
-import { IamDeleteAccountByIdService } from './iam-delete-account-by-id.service';
-import {
-    IamAccountId
-} from '../../domain/value-objects';
 
 @CommandHandler(IamDeleteAccountByIdCommand)
 export class IamDeleteAccountByIdCommandHandler implements ICommandHandler<IamDeleteAccountByIdCommand>

@@ -1,18 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { IamIRoleRepository } from '@app/iam/role/domain/iam-role.repository';
+import { IamIRoleRepository, iamMockRoleData, IamRole } from '@app/iam/role';
 import {
-    IamRoleId,
-    IamRoleName,
-    IamRoleIsMaster,
-    IamRolePermissionIds,
     IamRoleAccountIds,
     IamRoleCreatedAt,
-    IamRoleUpdatedAt,
     IamRoleDeletedAt,
+    IamRoleId,
+    IamRoleIsMaster,
+    IamRoleName,
+    IamRolePermissionIds,
+    IamRoleUpdatedAt,
 } from '@app/iam/role/domain/value-objects';
-import { IamRole } from '../../domain/iam-role.aggregate';
-import { iamMockRoleData } from './iam-mock-role.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamMockRoleRepository extends MockRepository<IamRole> implements IamIRoleRepository
@@ -20,7 +18,6 @@ export class IamMockRoleRepository extends MockRepository<IamRole> implements Ia
     public readonly repository: any;
     public readonly aggregateName: string = 'IamRole';
     public collectionSource: IamRole[];
-    public deletedAtInstance: IamRoleDeletedAt = new IamRoleDeletedAt(null);
 
     constructor()
     {

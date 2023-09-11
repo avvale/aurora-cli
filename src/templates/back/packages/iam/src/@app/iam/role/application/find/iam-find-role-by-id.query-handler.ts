@@ -1,9 +1,7 @@
+import { IamFindRoleByIdQuery, IamRoleMapper, IamRoleResponse } from '@app/iam/role';
+import { IamFindRoleByIdService } from '@app/iam/role/application/find/iam-find-role-by-id.service';
+import { IamRoleId } from '@app/iam/role/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamRoleResponse } from '../../domain/iam-role.response';
-import { IamRoleMapper } from '../../domain/iam-role.mapper';
-import { IamRoleId } from '../../domain/value-objects';
-import { IamFindRoleByIdQuery } from './iam-find-role-by-id.query';
-import { IamFindRoleByIdService } from './iam-find-role-by-id.service';
 
 @QueryHandler(IamFindRoleByIdQuery)
 export class IamFindRoleByIdQueryHandler implements IQueryHandler<IamFindRoleByIdQuery>

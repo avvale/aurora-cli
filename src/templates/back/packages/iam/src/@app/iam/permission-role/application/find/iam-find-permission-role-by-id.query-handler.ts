@@ -1,10 +1,7 @@
+import { IamFindPermissionRoleByIdQuery, IamPermissionRoleMapper, IamPermissionRoleResponse } from '@app/iam/permission-role';
+import { IamFindPermissionRoleByIdService } from '@app/iam/permission-role/application/find/iam-find-permission-role-by-id.service';
+import { IamPermissionRolePermissionId, IamPermissionRoleRoleId } from '@app/iam/permission-role/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamFindPermissionRoleByIdQuery, IamPermissionRoleResponse, IamPermissionRoleMapper } from '@app/iam/permission-role';
-import {
-    IamPermissionRolePermissionId,
-    IamPermissionRoleRoleId,
-} from '../../domain/value-objects';
-import { IamFindPermissionRoleByIdService } from './iam-find-permission-role-by-id.service';
 
 @QueryHandler(IamFindPermissionRoleByIdQuery)
 export class IamFindPermissionRoleByIdQueryHandler implements IQueryHandler<IamFindPermissionRoleByIdQuery>
@@ -12,12 +9,12 @@ export class IamFindPermissionRoleByIdQueryHandler implements IQueryHandler<IamF
     private readonly mapper: IamPermissionRoleMapper = new IamPermissionRoleMapper();
 
     constructor(
-        private readonly findPermissionByIdService: IamFindPermissionRoleByIdService,
+        private readonly findPermissionRoleByIdService: IamFindPermissionRoleByIdService,
     ) {}
 
     async execute(query: IamFindPermissionRoleByIdQuery): Promise<IamPermissionRoleResponse>
     {
-        const permissionRole = await this.findPermissionByIdService.main(
+        const permissionRole = await this.findPermissionRoleByIdService.main(
             new IamPermissionRolePermissionId(query.permissionId),
             new IamPermissionRoleRoleId(query.roleId),
             query.constraint,

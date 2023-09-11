@@ -73,7 +73,7 @@ import { IamDeleteUsersHandler } from './handlers/iam-delete-users.handler';
 // seeder
 import { IamUserSeeder } from './seeder/iam-user.seeder';
 
-export const IamUserControllers = [
+export const IamUserApiControllers = [
     IamPaginateUsersController,
     IamGetUsersController,
     IamFindUserByIdController,
@@ -85,7 +85,7 @@ export const IamUserControllers = [
     IamDeleteUsersController,
 ];
 
-export const IamUserResolvers = [
+export const IamUserApiResolvers = [
     IamPaginateUsersResolver,
     IamGetUsersResolver,
     IamFindUserByIdResolver,
@@ -109,6 +109,6 @@ export const IamUserApiHandlers = [
     IamDeleteUsersHandler,
 ];
 
-export const IamUserServices = [
+export const IamUserApiServices = [
     IamUserSeeder,
 ];

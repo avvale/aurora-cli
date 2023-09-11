@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamCreateAccountsCommand, iamMockAccountData } from '@app/iam/account';
+import { IamCreateAccountsCommandHandler } from '@app/iam/account/application/create/iam-create-accounts.command-handler';
+import { IamCreateAccountsService } from '@app/iam/account/application/create/iam-create-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockAccountData } from '@app/iam/account/infrastructure/mock/iam-mock-account.data';
-import { IamCreateAccountsCommandHandler } from './iam-create-accounts.command-handler';
-import { IamCreateAccountsCommand } from './iam-create-accounts.command';
-import { IamCreateAccountsService } from './iam-create-accounts.service';
 
 describe('iamCreateAccountsCommandHandler', () =>
 {
     let commandHandler: IamCreateAccountsCommandHandler;
-    let service: IamCreateAccountsService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('iamCreateAccountsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreateAccountsCommandHandler>(IamCreateAccountsCommandHandler);
-        service = module.get<IamCreateAccountsService>(IamCreateAccountsService);
     });
 
     describe('main', () =>

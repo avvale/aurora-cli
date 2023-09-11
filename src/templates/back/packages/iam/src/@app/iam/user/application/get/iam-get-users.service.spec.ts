@@ -1,10 +1,7 @@
+import { IamIUserRepository, IamMockUserRepository } from '@app/iam/user';
+import { IamGetUsersService } from '@app/iam/user/application/get/iam-get-users.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamGetUsersService } from './iam-get-users.service';
-import { IamIUserRepository } from '../../domain/iam-user.repository';
-import { IamMockUserRepository } from '../../infrastructure/mock/iam-mock-user.repository';
 
 describe('IamGetUsersService', () =>
 {

@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('IamCreateBoundedContextCommandHandler', () =>
 {
     let commandHandler: IamCreateBoundedContextCommandHandler;
-    let service: IamCreateBoundedContextService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('IamCreateBoundedContextCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreateBoundedContextCommandHandler>(IamCreateBoundedContextCommandHandler);
-        service = module.get<IamCreateBoundedContextService>(IamCreateBoundedContextService);
     });
 
     describe('main', () =>

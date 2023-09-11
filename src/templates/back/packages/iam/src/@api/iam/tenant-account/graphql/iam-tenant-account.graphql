@@ -1,0 +1,89 @@
+
+type IamTenantAccount
+{
+    tenantId: ID!
+    accountId: ID!
+    tenant: IamTenant
+    account: IamAccount
+}
+
+input IamCreateTenantAccountInput
+{
+    tenantId: ID!
+    accountId: ID!
+}
+
+input IamUpdateTenantAccountByIdInput
+{
+    tenantId: ID!
+    accountId: ID!
+}
+
+input IamUpdateTenantsAccountsInput
+{
+    tenantId: ID
+    accountId: ID
+}
+
+type Query
+{
+    iamFindTenantAccount(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): IamTenantAccount
+
+    iamFindTenantAccountById(
+        tenantId: ID
+        accountId: ID
+        constraint: QueryStatement
+    ): IamTenantAccount
+
+    iamGetTenantsAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamTenantAccount]!
+
+    iamPaginateTenantsAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    iamCreateTenantAccount(
+        payload: IamCreateTenantAccountInput!
+    ): IamTenantAccount
+
+    iamCreateTenantsAccounts(
+        payload: [IamCreateTenantAccountInput]!
+    ): Boolean!
+
+    iamUpdateTenantAccountById(
+        payload: IamUpdateTenantAccountByIdInput!
+        constraint: QueryStatement
+    ): IamTenantAccount
+
+    iamUpdateTenantsAccounts(
+        payload: IamUpdateTenantsAccountsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamTenantAccount]!
+
+    iamUpsertTenantAccount(
+        payload: IamUpdateTenantAccountByIdInput!
+    ): IamTenantAccount
+
+    iamDeleteTenantAccountById(
+        tenantId: ID!
+        accountId: ID!
+        constraint: QueryStatement
+    ): IamTenantAccount
+
+    iamDeleteTenantsAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamTenantAccount]!
+
+}

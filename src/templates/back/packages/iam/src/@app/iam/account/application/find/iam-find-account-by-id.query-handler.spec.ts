@@ -1,13 +1,7 @@
+import { IamAccountMapper, IamFindAccountByIdQuery, IamIAccountRepository, iamMockAccountData, IamMockAccountRepository } from '@app/iam/account';
+import { IamFindAccountByIdQueryHandler } from '@app/iam/account/application/find/iam-find-account-by-id.query-handler';
+import { IamFindAccountByIdService } from '@app/iam/account/application/find/iam-find-account-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindAccountByIdQueryHandler } from './iam-find-account-by-id.query-handler';
-import { IamMockAccountRepository } from '@app/iam/account/infrastructure/mock/iam-mock-account.repository';
-import { iamMockAccountData } from '@app/iam/account/infrastructure/mock/iam-mock-account.data';
-import { IamIAccountRepository } from '@app/iam/account/domain/iam-account.repository';
-import { IamAccountMapper } from '@app/iam/account/domain/iam-account.mapper';
-import { IamFindAccountByIdQuery } from './iam-find-account-by-id.query';
-import { IamFindAccountByIdService } from './iam-find-account-by-id.service';
 
 describe('IamFindAccountByIdQueryHandler', () =>
 {

@@ -1,25 +1,22 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamUpdateAccountsCommand } from './iam-update-accounts.command';
-import { IamUpdateAccountsService } from './iam-update-accounts.service';
+import { IamUpdateAccountsCommand } from '@app/iam/account';
+import { IamUpdateAccountsService } from '@app/iam/account/application/update/iam-update-accounts.service';
 import {
-    IamAccountId,
-    IamAccountType,
-    IamAccountCode,
-    IamAccountEmail,
-    IamAccountIsActive,
     IamAccountClientId,
-    IamAccountScopes,
+    IamAccountCode,
     IamAccountDApplicationCodes,
     IamAccountDPermissions,
     IamAccountDTenants,
+    IamAccountEmail,
+    IamAccountId,
+    IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountScopes,
     IamAccountTenantIds,
-    IamAccountCreatedAt,
-    IamAccountUpdatedAt,
-    IamAccountDeletedAt,
-} from '../../domain/value-objects';
+    IamAccountType,
+} from '@app/iam/account/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpdateAccountsCommand)
 export class IamUpdateAccountsCommandHandler implements ICommandHandler<IamUpdateAccountsCommand>

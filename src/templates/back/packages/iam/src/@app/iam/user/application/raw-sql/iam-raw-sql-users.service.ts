@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { IamIUserRepository, IamUser } from '@app/iam/user';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIUserRepository } from '../../domain/iam-user.repository';
-import { IamUser } from '../../domain/iam-user.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamRawSQLUsersService

@@ -1,16 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Controller, Post, Body } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { IamPermissionRoleDto, IamCreatePermissionRoleDto } from '../dto';
+import { IamCreatePermissionRoleDto, IamCreatePermissionRoleHandler, IamPermissionRoleDto } from '@api/iam/permission-role';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamCreatePermissionRoleHandler } from '../handlers/iam-create-permission-role.handler';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] permission-role')
-@Controller('iam/role/create')
-@Auth('iam.role.create')
+@Controller('iam/permission-role/create')
+@Auth('iam.permissionRole.create')
 export class IamCreatePermissionRoleController
 {
     constructor(
@@ -18,7 +15,7 @@ export class IamCreatePermissionRoleController
     ) {}
 
     @Post()
-    @ApiOperation({ summary: 'Create permission' })
+    @ApiOperation({ summary: 'Create permission-role' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: IamPermissionRoleDto })
     async main(
         @Body() payload: IamCreatePermissionRoleDto,

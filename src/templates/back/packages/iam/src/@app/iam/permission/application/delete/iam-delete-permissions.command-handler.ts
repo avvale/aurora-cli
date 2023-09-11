@@ -1,6 +1,6 @@
+import { IamDeletePermissionsCommand } from '@app/iam/permission';
+import { IamDeletePermissionsService } from '@app/iam/permission/application/delete/iam-delete-permissions.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamDeletePermissionsCommand } from './iam-delete-permissions.command';
-import { IamDeletePermissionsService } from './iam-delete-permissions.service';
 
 @CommandHandler(IamDeletePermissionsCommand)
 export class IamDeletePermissionsCommandHandler implements ICommandHandler<IamDeletePermissionsCommand>

@@ -1,11 +1,5 @@
+import { IamCreatedUserEvent, IamCreatedUsersEvent, IamDeletedUserEvent, IamDeletedUsersEvent, IamUpdatedUserEvent, IamUpdatedUsersEvent, IamUser } from '@app/iam/user';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { IamUser } from '../../domain/iam-user.aggregate';
-import { IamCreatedUserEvent } from './iam-created-user.event';
-import { IamCreatedUsersEvent } from './iam-created-users.event';
-import { IamUpdatedUserEvent } from './iam-updated-user.event';
-import { IamUpdatedUsersEvent } from './iam-updated-users.event';
-import { IamDeletedUserEvent } from './iam-deleted-user.event';
-import { IamDeletedUsersEvent } from './iam-deleted-users.event';
 
 export class IamAddUsersContextEvent extends AggregateRoot
 {

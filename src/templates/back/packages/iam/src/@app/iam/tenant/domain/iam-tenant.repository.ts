@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { IamTenant } from './iam-tenant.aggregate';
 import { IamTenantId } from './value-objects';
+import { IamTenant } from '@app/iam/tenant';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class IamITenantRepository implements IRepository<IamTenant>
 {
@@ -30,6 +30,8 @@ export abstract class IamITenantRepository implements IRepository<IamTenant>
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<IamTenant | null>;
 
@@ -124,6 +126,8 @@ export abstract class IamITenantRepository implements IRepository<IamTenant>
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

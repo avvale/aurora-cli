@@ -1,10 +1,7 @@
 import { IamIPermissionRoleRepository, IamPermissionRole } from '@app/iam/permission-role';
+import { IamPermissionRolePermissionId, IamPermissionRoleRoleId } from '@app/iam/permission-role/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import {
-    IamPermissionRolePermissionId,
-    IamPermissionRoleRoleId,
-} from '../../domain/value-objects';
 
 @Injectable()
 export class IamFindPermissionRoleByIdService
@@ -20,15 +17,16 @@ export class IamFindPermissionRoleByIdService
         cQMetadata?: CQMetadata,
     ): Promise<IamPermissionRole>
     {
-        return await this.repository.find({
-            queryStatement: {
-                where: {
+        return await this.repository.findById(
+            undefined,
+            {
+                constraint,
+                cQMetadata,
+                findArguments: {
                     permissionId: permissionId.value,
-                    roleId      : roleId.value,
+                    roleId: roleId.value,
                 },
             },
-            constraint,
-            cQMetadata,
-        });
+        );
     }
 }

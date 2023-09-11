@@ -1,12 +1,7 @@
+import { IamBoundedContextMapper, IamGetBoundedContextsQuery, IamIBoundedContextRepository, IamMockBoundedContextRepository } from '@app/iam/bounded-context';
+import { IamGetBoundedContextsQueryHandler } from '@app/iam/bounded-context/application/get/iam-get-bounded-contexts.query-handler';
+import { IamGetBoundedContextsService } from '@app/iam/bounded-context/application/get/iam-get-bounded-contexts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetBoundedContextsQueryHandler } from './iam-get-bounded-contexts.query-handler';
-import { IamMockBoundedContextRepository } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.repository';
-import { IamIBoundedContextRepository } from '@app/iam/bounded-context/domain/iam-bounded-context.repository';
-import { IamBoundedContextMapper } from '@app/iam/bounded-context/domain/iam-bounded-context.mapper';
-import { IamGetBoundedContextsQuery } from './iam-get-bounded-contexts.query';
-import { IamGetBoundedContextsService } from './iam-get-bounded-contexts.service';
 
 describe('GetBoundedContextsQueryHandler', () =>
 {

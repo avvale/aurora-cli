@@ -42,7 +42,6 @@ export { IamTenantResponse } from './domain/iam-tenant.response';
 
 // infrastructure
 export { IamTenantModel } from './infrastructure/sequelize/iam-sequelize-tenant.model';
-export { IamTenantsAccountsModel } from './infrastructure/sequelize/iam-sequelize-tenants-accounts.model';
 export { IamSequelizeTenantRepository } from './infrastructure/sequelize/iam-sequelize-tenant.repository';
 
 // sagas

@@ -1,10 +1,7 @@
+import { IamIBoundedContextRepository, IamMockBoundedContextRepository } from '@app/iam/bounded-context';
+import { IamRawSQLBoundedContextsService } from '@app/iam/bounded-context/application/raw-sql/iam-raw-sql-bounded-contexts.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamRawSQLBoundedContextsService } from './iam-raw-sql-bounded-contexts.service';
-import { IamIBoundedContextRepository } from '../../domain/iam-bounded-context.repository';
-import { IamMockBoundedContextRepository } from '../../infrastructure/mock/iam-mock-bounded-context.repository';
 
 describe('IamRawSQLBoundedContextsService ', () =>
 {

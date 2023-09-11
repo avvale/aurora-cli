@@ -1,11 +1,11 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
 import { IamBoundedContextModel } from '@app/iam/bounded-context';
+import { IamPermissionRoleModel } from '@app/iam/permission-role';
 import { IamRoleModel } from '@app/iam/role';
-import { IamPermissionsRolesModel } from '@app/iam/permission';
+import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import { DataTypes } from 'sequelize';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamPermission',
@@ -160,8 +160,8 @@ export class IamPermissionModel extends Model<IamPermissionModel>
 
 
     @BelongsToMany(() => IamRoleModel, {
-        through: () => IamPermissionsRolesModel,
-        uniqueKey: 'Uq01IamPermissionsRoles',
+        through: () => IamPermissionRoleModel,
+        uniqueKey: 'Uq01IamPermissionRole',
     })
     roles: IamRoleModel[];
 

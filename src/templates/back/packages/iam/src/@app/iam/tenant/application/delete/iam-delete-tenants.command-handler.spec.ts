@@ -1,14 +1,11 @@
+import { IamDeleteTenantsCommand } from '@app/iam/tenant';
+import { IamDeleteTenantsCommandHandler } from '@app/iam/tenant/application/delete/iam-delete-tenants.command-handler';
+import { IamDeleteTenantsService } from '@app/iam/tenant/application/delete/iam-delete-tenants.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteTenantsCommandHandler } from './iam-delete-tenants.command-handler';
-import { IamDeleteTenantsCommand } from './iam-delete-tenants.command';
-import { IamDeleteTenantsService } from './iam-delete-tenants.service';
 
 describe('IamDeleteTenantsCommandHandler', () =>
 {
     let commandHandler: IamDeleteTenantsCommandHandler;
-    let service: IamDeleteTenantsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('IamDeleteTenantsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamDeleteTenantsCommandHandler>(IamDeleteTenantsCommandHandler);
-        service = module.get<IamDeleteTenantsService>(IamDeleteTenantsService);
     });
 
     describe('main', () =>

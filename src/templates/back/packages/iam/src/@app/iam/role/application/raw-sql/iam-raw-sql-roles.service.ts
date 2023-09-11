@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { IamIRoleRepository, IamRole } from '@app/iam/role';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamRole } from '../../domain/iam-role.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamRawSQLRolesService

@@ -1,8 +1,8 @@
+import { IamCreatedAccountEvent } from '@app/iam/account';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { IamCreatedAccountEvent } from '../events/iam-created-account.event';
 
 @Injectable()
 export class IamAccountSagas

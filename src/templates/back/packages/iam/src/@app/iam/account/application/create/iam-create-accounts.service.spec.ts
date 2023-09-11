@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamIAccountRepository, IamMockAccountRepository } from '@app/iam/account';
+import { IamCreateAccountsService } from '@app/iam/account/application/create/iam-create-accounts.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamCreateAccountsService } from './iam-create-accounts.service';
-import { IamIAccountRepository } from '../../domain/iam-account.repository';
-import { IamMockAccountRepository } from '../../infrastructure/mock/iam-mock-account.repository';
 
 describe('IamCreateAccountsService', () =>
 {

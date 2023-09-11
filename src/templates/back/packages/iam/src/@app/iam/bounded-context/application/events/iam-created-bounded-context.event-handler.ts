@@ -1,5 +1,5 @@
+import { IamCreatedBoundedContextEvent } from '@app/iam/bounded-context';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { IamCreatedBoundedContextEvent } from './iam-created-bounded-context.event';
 
 @EventsHandler(IamCreatedBoundedContextEvent)
 export class IamCreatedBoundedContextEventHandler implements IEventHandler<IamCreatedBoundedContextEvent>

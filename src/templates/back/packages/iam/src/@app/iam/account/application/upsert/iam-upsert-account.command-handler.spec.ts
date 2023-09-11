@@ -1,10 +1,7 @@
+import { iamMockAccountData, IamUpsertAccountCommand } from '@app/iam/account';
+import { IamUpsertAccountCommandHandler } from '@app/iam/account/application/upsert/iam-upsert-account.command-handler';
+import { IamUpsertAccountService } from '@app/iam/account/application/upsert/iam-upsert-account.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockAccountData } from '@app/iam/account/infrastructure/mock/iam-mock-account.data';
-import { IamUpsertAccountCommandHandler } from './iam-upsert-account.command-handler';
-import { IamUpsertAccountCommand } from './iam-upsert-account.command';
-import { IamUpsertAccountService } from './iam-upsert-account.service';
 
 describe('IamUpsertAccountCommandHandler', () =>
 {

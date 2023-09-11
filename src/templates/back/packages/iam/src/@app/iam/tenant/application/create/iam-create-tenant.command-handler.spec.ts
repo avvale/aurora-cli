@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('IamCreateTenantCommandHandler', () =>
 {
     let commandHandler: IamCreateTenantCommandHandler;
-    let service: IamCreateTenantService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('IamCreateTenantCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreateTenantCommandHandler>(IamCreateTenantCommandHandler);
-        service = module.get<IamCreateTenantService>(IamCreateTenantService);
     });
 
     describe('main', () =>

@@ -1,23 +1,20 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamUpsertUserCommand } from './iam-upsert-user.command';
-import { IamUpsertUserService } from './iam-upsert-user.service';
+import { IamUpsertUserCommand } from '@app/iam/user';
+import { IamUpsertUserService } from '@app/iam/user/application/upsert/iam-upsert-user.service';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
-    IamUserUpdatedAt,
-    IamUserDeletedAt,
-} from '../../domain/value-objects';
+    IamUserSurname,
+    IamUserUsername,
+} from '@app/iam/user/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpsertUserCommand)
 export class IamUpsertUserCommandHandler implements ICommandHandler<IamUpsertUserCommand>

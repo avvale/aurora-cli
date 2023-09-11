@@ -1,13 +1,7 @@
+import { IamFindRoleByIdQuery, IamIRoleRepository, iamMockRoleData, IamMockRoleRepository, IamRoleMapper } from '@app/iam/role';
+import { IamFindRoleByIdQueryHandler } from '@app/iam/role/application/find/iam-find-role-by-id.query-handler';
+import { IamFindRoleByIdService } from '@app/iam/role/application/find/iam-find-role-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindRoleByIdQueryHandler } from './iam-find-role-by-id.query-handler';
-import { IamMockRoleRepository } from '@app/iam/role/infrastructure/mock/iam-mock-role.repository';
-import { iamMockRoleData } from '@app/iam/role/infrastructure/mock/iam-mock-role.data';
-import { IamIRoleRepository } from '@app/iam/role/domain/iam-role.repository';
-import { IamRoleMapper } from '@app/iam/role/domain/iam-role.mapper';
-import { IamFindRoleByIdQuery } from './iam-find-role-by-id.query';
-import { IamFindRoleByIdService } from './iam-find-role-by-id.service';
 
 describe('IamFindRoleByIdQueryHandler', () =>
 {

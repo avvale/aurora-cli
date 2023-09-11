@@ -21,7 +21,7 @@ export class IamCreatePermissionsService
     ) {}
 
     async main(
-        permissions: {
+        payload: {
             id: IamPermissionId;
             name: IamPermissionName;
             boundedContextId: IamPermissionBoundedContextId;
@@ -31,7 +31,7 @@ export class IamCreatePermissionsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregatePermissions = permissions.map(permission => IamPermission.register(
+        const aggregatePermissions = payload.map(permission => IamPermission.register(
             permission.id,
             permission.name,
             permission.boundedContextId,

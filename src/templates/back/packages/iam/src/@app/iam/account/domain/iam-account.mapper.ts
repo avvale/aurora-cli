@@ -1,28 +1,27 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { IamAccount } from './iam-account.aggregate';
-import { IamAccountResponse } from './iam-account.response';
+import { IamAccount, IamAccountResponse } from '@app/iam/account';
 import {
-    IamAccountId,
-    IamAccountType,
-    IamAccountCode,
-    IamAccountEmail,
-    IamAccountIsActive,
     IamAccountClientId,
-    IamAccountScopes,
+    IamAccountCode,
+    IamAccountCreatedAt,
     IamAccountDApplicationCodes,
+    IamAccountDeletedAt,
     IamAccountDPermissions,
     IamAccountDTenants,
+    IamAccountEmail,
+    IamAccountId,
+    IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountScopes,
     IamAccountTenantIds,
-    IamAccountCreatedAt,
+    IamAccountType,
     IamAccountUpdatedAt,
-    IamAccountDeletedAt,
-} from './value-objects';
-import { IamUserMapper } from '@app/iam/user';
-import { OAuthClientMapper } from '@app/o-auth/client';
+} from '@app/iam/account/domain/value-objects';
 import { IamRoleMapper } from '@app/iam/role';
 import { IamTenantMapper } from '@app/iam/tenant';
+import { IamUserMapper } from '@app/iam/user';
+import { OAuthClientMapper } from '@app/o-auth/client';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class IamAccountMapper implements IMapper
 {

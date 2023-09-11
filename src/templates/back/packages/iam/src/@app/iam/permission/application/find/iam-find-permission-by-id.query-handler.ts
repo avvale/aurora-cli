@@ -1,9 +1,7 @@
+import { IamFindPermissionByIdQuery, IamPermissionMapper, IamPermissionResponse } from '@app/iam/permission';
+import { IamFindPermissionByIdService } from '@app/iam/permission/application/find/iam-find-permission-by-id.service';
+import { IamPermissionId } from '@app/iam/permission/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamPermissionResponse } from '../../domain/iam-permission.response';
-import { IamPermissionMapper } from '../../domain/iam-permission.mapper';
-import { IamPermissionId } from '../../domain/value-objects';
-import { IamFindPermissionByIdQuery } from './iam-find-permission-by-id.query';
-import { IamFindPermissionByIdService } from './iam-find-permission-by-id.service';
 
 @QueryHandler(IamFindPermissionByIdQuery)
 export class IamFindPermissionByIdQueryHandler implements IQueryHandler<IamFindPermissionByIdQuery>

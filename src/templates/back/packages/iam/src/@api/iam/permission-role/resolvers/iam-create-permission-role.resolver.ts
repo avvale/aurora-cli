@@ -1,13 +1,11 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { IamCreatePermissionRoleInput, IamPermissionRole } from '@api/graphql';
+import { IamCreatePermissionRoleHandler } from '@api/iam/permission-role';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamCreatePermissionRoleHandler } from '../handlers/iam-create-permission-role.handler';
-import { IamPermissionRole, IamCreatePermissionRoleInput } from '@api/graphql';
+import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@Auth('iam.role.create')
+@Auth('iam.permissionRole.create')
 export class IamCreatePermissionRoleResolver
 {
     constructor(

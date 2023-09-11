@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { IamPaginatePermissionsRolesHandler } from '@api/iam/permission-role';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamPaginatePermissionsRolesHandler } from '../handlers/iam-paginate-permissions-roles.handler';
+import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] permission-role')
 @Controller('iam/permissions-roles/paginate')
-@Auth('iam.role.get')
+@Auth('iam.permissionRole.get')
 export class IamPaginatePermissionsRolesController
 {
     constructor(
@@ -18,7 +16,7 @@ export class IamPaginatePermissionsRolesController
 
     @Post()
     @HttpCode(200)
-    @ApiOperation({ summary: 'Paginate permissions' })
+    @ApiOperation({ summary: 'Paginate permissions-roles' })
     @ApiOkResponse({ description: 'The records has been paginated successfully.', type: Pagination })
     @ApiQuery({ name: 'queryStatement', type: QueryStatement })
     @ApiQuery({ name: 'constraint', type: QueryStatement })

@@ -1,8 +1,8 @@
+import { IamCreatedBoundedContextEvent } from '@app/iam/bounded-context';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { IamCreatedBoundedContextEvent } from '../events/iam-created-bounded-context.event';
 
 @Injectable()
 export class IamBoundedContextSagas

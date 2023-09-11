@@ -19,7 +19,9 @@ export class IamPaginatePermissionsRolesHandler
         return await this.queryBus.ask(new IamPaginatePermissionsRolesQuery(
             queryStatement,
             constraint,
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

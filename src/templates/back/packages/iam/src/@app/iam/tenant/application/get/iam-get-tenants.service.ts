@@ -1,8 +1,6 @@
+import { IamITenantRepository, IamTenant } from '@app/iam/tenant';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamTenant } from '../../domain/iam-tenant.aggregate';
 
 @Injectable()
 export class IamGetTenantsService

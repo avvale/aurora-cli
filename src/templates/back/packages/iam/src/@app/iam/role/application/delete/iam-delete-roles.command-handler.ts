@@ -1,6 +1,6 @@
+import { IamDeleteRolesCommand } from '@app/iam/role';
+import { IamDeleteRolesService } from '@app/iam/role/application/delete/iam-delete-roles.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamDeleteRolesCommand } from './iam-delete-roles.command';
-import { IamDeleteRolesService } from './iam-delete-roles.service';
 
 @CommandHandler(IamDeleteRolesCommand)
 export class IamDeleteRolesCommandHandler implements ICommandHandler<IamDeleteRolesCommand>

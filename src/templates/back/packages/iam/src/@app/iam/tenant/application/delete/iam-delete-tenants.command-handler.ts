@@ -1,6 +1,6 @@
+import { IamDeleteTenantsCommand } from '@app/iam/tenant';
+import { IamDeleteTenantsService } from '@app/iam/tenant/application/delete/iam-delete-tenants.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamDeleteTenantsCommand } from './iam-delete-tenants.command';
-import { IamDeleteTenantsService } from './iam-delete-tenants.service';
 
 @CommandHandler(IamDeleteTenantsCommand)
 export class IamDeleteTenantsCommandHandler implements ICommandHandler<IamDeleteTenantsCommand>

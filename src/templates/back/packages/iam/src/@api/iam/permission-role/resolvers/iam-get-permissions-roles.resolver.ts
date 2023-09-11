@@ -1,13 +1,11 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { IamGetPermissionsRolesHandler } from '../handlers/iam-get-permissions-roles.handler';
 import { IamPermissionRole } from '@api/graphql';
+import { IamGetPermissionsRolesHandler } from '@api/iam/permission-role';
+import { Auth } from '@aurora/decorators';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@Auth('iam.role.get')
+@Auth('iam.permissionRole.get')
 export class IamGetPermissionsRolesResolver
 {
     constructor(

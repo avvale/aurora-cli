@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IamPaginateRolesQuery } from '@app/iam/role';
+import { IamPaginateRolesService } from '@app/iam/role/application/paginate/iam-paginate-roles.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { IamPaginateRolesQuery } from './iam-paginate-roles.query';
-import { IamPaginateRolesService } from './iam-paginate-roles.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginateRolesQuery)
 export class IamPaginateRolesQueryHandler implements IQueryHandler<IamPaginateRolesQuery>

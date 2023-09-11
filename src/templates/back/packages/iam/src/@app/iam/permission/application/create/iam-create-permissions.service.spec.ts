@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamIPermissionRepository, IamMockPermissionRepository } from '@app/iam/permission';
+import { IamCreatePermissionsService } from '@app/iam/permission/application/create/iam-create-permissions.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamCreatePermissionsService } from './iam-create-permissions.service';
-import { IamIPermissionRepository } from '../../domain/iam-permission.repository';
-import { IamMockPermissionRepository } from '../../infrastructure/mock/iam-mock-permission.repository';
 
 describe('IamCreatePermissionsService', () =>
 {

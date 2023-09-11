@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IamPaginatePermissionsQuery } from '@app/iam/permission';
+import { IamPaginatePermissionsService } from '@app/iam/permission/application/paginate/iam-paginate-permissions.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { IamPaginatePermissionsQuery } from './iam-paginate-permissions.query';
-import { IamPaginatePermissionsService } from './iam-paginate-permissions.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginatePermissionsQuery)
 export class IamPaginatePermissionsQueryHandler implements IQueryHandler<IamPaginatePermissionsQuery>

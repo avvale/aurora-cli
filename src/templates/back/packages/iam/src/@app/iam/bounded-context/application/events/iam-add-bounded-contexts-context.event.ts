@@ -1,11 +1,5 @@
+import { IamBoundedContext, IamCreatedBoundedContextEvent, IamCreatedBoundedContextsEvent, IamDeletedBoundedContextEvent, IamDeletedBoundedContextsEvent, IamUpdatedBoundedContextEvent, IamUpdatedBoundedContextsEvent } from '@app/iam/bounded-context';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { IamBoundedContext } from '../../domain/iam-bounded-context.aggregate';
-import { IamCreatedBoundedContextEvent } from './iam-created-bounded-context.event';
-import { IamCreatedBoundedContextsEvent } from './iam-created-bounded-contexts.event';
-import { IamUpdatedBoundedContextEvent } from './iam-updated-bounded-context.event';
-import { IamUpdatedBoundedContextsEvent } from './iam-updated-bounded-contexts.event';
-import { IamDeletedBoundedContextEvent } from './iam-deleted-bounded-context.event';
-import { IamDeletedBoundedContextsEvent } from './iam-deleted-bounded-contexts.event';
 
 export class IamAddBoundedContextsContextEvent extends AggregateRoot
 {

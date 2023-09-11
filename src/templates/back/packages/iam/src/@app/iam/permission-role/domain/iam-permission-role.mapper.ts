@@ -1,11 +1,11 @@
 import { IamPermissionMapper } from '@app/iam/permission';
 import { IamPermissionRole, IamPermissionRoleResponse } from '@app/iam/permission-role';
-import { IamRoleMapper } from '@app/iam/role';
-import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 import {
     IamPermissionRolePermissionId,
     IamPermissionRoleRoleId,
-} from './value-objects';
+} from '@app/iam/permission-role/domain/value-objects';
+import { IamRoleMapper } from '@app/iam/role';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class IamPermissionRoleMapper implements IMapper
 {
@@ -32,7 +32,7 @@ export class IamPermissionRoleMapper implements IMapper
     {
         if (!Array.isArray(permissionsRoles)) return;
 
-        return permissionsRoles.map(permissionRole  => this.makeAggregate(permissionRole, cQMetadata));
+        return permissionsRoles.map(permissionRole => this.makeAggregate(permissionRole, cQMetadata));
     }
 
     /**
@@ -58,8 +58,8 @@ export class IamPermissionRoleMapper implements IMapper
     private makeAggregate(permissionRole: LiteralObject, cQMetadata?: CQMetadata): IamPermissionRole
     {
         return IamPermissionRole.register(
-            new IamPermissionRolePermissionId(permissionRole.permissionId),
-            new IamPermissionRoleRoleId(permissionRole.roleId),
+            new IamPermissionRolePermissionId(permissionRole.permissionId, { undefinable: true }),
+            new IamPermissionRoleRoleId(permissionRole.roleId, { undefinable: true }),
             this.options.eagerLoading ? new IamPermissionMapper({ eagerLoading: true }).mapModelToAggregate(permissionRole.permission, cQMetadata) : undefined,
             this.options.eagerLoading ? new IamRoleMapper({ eagerLoading: true }).mapModelToAggregate(permissionRole.role, cQMetadata) : undefined,
         );

@@ -1,15 +1,11 @@
+import { iamMockUserData, IamUpdateUsersCommand } from '@app/iam/user';
+import { IamUpdateUsersCommandHandler } from '@app/iam/user/application/update/iam-update-users.command-handler';
+import { IamUpdateUsersService } from '@app/iam/user/application/update/iam-update-users.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockUserData } from '@app/iam/user/infrastructure/mock/iam-mock-user.data';
-import { IamUpdateUsersCommandHandler } from './iam-update-users.command-handler';
-import { IamUpdateUsersCommand } from './iam-update-users.command';
-import { IamUpdateUsersService } from './iam-update-users.service';
 
 describe('IamUpdateUsersCommandHandler', () =>
 {
     let commandHandler: IamUpdateUsersCommandHandler;
-    let service: IamUpdateUsersService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('IamUpdateUsersCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamUpdateUsersCommandHandler>(IamUpdateUsersCommandHandler);
-        service = module.get<IamUpdateUsersService>(IamUpdateUsersService);
     });
 
     describe('main', () =>

@@ -1,22 +1,19 @@
+import { IamAddTenantsContextEvent, IamITenantRepository, IamTenant } from '@app/iam/tenant';
+import {
+    IamTenantAccountIds,
+    IamTenantCode,
+    IamTenantCreatedAt,
+    IamTenantDeletedAt,
+    IamTenantId,
+    IamTenantIsActive,
+    IamTenantLogo,
+    IamTenantMeta,
+    IamTenantName,
+    IamTenantUpdatedAt,
+} from '@app/iam/tenant/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import {
-    IamTenantId,
-    IamTenantName,
-    IamTenantCode,
-    IamTenantLogo,
-    IamTenantIsActive,
-    IamTenantMeta,
-    IamTenantAccountIds,
-    IamTenantCreatedAt,
-    IamTenantUpdatedAt,
-    IamTenantDeletedAt,
-} from '../../domain/value-objects';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamTenant } from '../../domain/iam-tenant.aggregate';
-import { IamAddTenantsContextEvent } from '../events/iam-add-tenants-context.event';
 
 @Injectable()
 export class IamUpdateTenantsService
@@ -54,7 +51,6 @@ export class IamUpdateTenantsService
             new IamTenantUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

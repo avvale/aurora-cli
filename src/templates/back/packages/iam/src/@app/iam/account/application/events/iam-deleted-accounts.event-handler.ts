@@ -1,5 +1,5 @@
+import { IamDeletedAccountsEvent } from '@app/iam/account';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { IamDeletedAccountsEvent } from './iam-deleted-accounts.event';
 
 @EventsHandler(IamDeletedAccountsEvent)
 export class IamDeletedAccountsEventHandler implements IEventHandler<IamDeletedAccountsEvent>

@@ -6,7 +6,6 @@ export { IamUpdateRolesCommand } from './application/update/iam-update-roles.com
 export { IamUpsertRoleCommand } from './application/upsert/iam-upsert-role.command';
 export { IamDeleteRoleByIdCommand } from './application/delete/iam-delete-role-by-id.command';
 export { IamDeleteRolesCommand } from './application/delete/iam-delete-roles.command';
-export { IamCreateRolesAccountsCommand } from './application/create/iam-create-roles-accounts.command';
 
 // export queries
 export { IamPaginateRolesQuery } from './application/paginate/iam-paginate-roles.query';
@@ -43,7 +42,6 @@ export { IamRoleResponse } from './domain/iam-role.response';
 
 // infrastructure
 export { IamRoleModel } from './infrastructure/sequelize/iam-sequelize-role.model';
-export { IamRolesAccountsModel } from './infrastructure/sequelize/iam-sequelize-roles-accounts.model';
 export { IamSequelizeRoleRepository } from './infrastructure/sequelize/iam-sequelize-role.repository';
 
 // sagas
@@ -87,14 +85,6 @@ import { IamUpsertRoleService } from './application/upsert/iam-upsert-role.servi
 import { IamDeleteRoleByIdService } from './application/delete/iam-delete-role-by-id.service';
 import { IamDeleteRolesService } from './application/delete/iam-delete-roles.service';
 
-// ---- customizations ----
-export { IamIRoleAccountRepository } from './domain/iam-role-account.repository';
-export { IamRoleAccount } from './domain/iam-role-account.aggregate';
-export { IamRoleAccountMapper } from './domain/iam-role-account.mapper';
-export { IamSequelizeRoleAccountRepository } from './infrastructure/sequelize/iam-sequelize-role-account.repository';
-import { IamCreateRolesAccountsCommandHandler } from './application/create/iam-create-roles-accounts.command-handler';
-import { IamCreateRolesAccountsService } from './application/create/iam-create-roles-accounts.service';
-
 export const IamRoleHandlers = [
     // commands
     IamCreateRoleCommandHandler,
@@ -119,10 +109,6 @@ export const IamRoleHandlers = [
     IamUpdatedRolesEventHandler,
     IamDeletedRoleEventHandler,
     IamDeletedRolesEventHandler,
-
-    // ---- customizations ----
-    IamCreateRolesAccountsCommandHandler,
-    IamCreateRolesAccountsService,
 ];
 
 export const IamRoleServices = [

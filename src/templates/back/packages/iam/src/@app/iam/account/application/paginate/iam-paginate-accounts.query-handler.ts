@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IamPaginateAccountsQuery } from '@app/iam/account';
+import { IamPaginateAccountsService } from '@app/iam/account/application/paginate/iam-paginate-accounts.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { IamPaginateAccountsQuery } from './iam-paginate-accounts.query';
-import { IamPaginateAccountsService } from './iam-paginate-accounts.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginateAccountsQuery)
 export class IamPaginateAccountsQueryHandler implements IQueryHandler<IamPaginateAccountsQuery>

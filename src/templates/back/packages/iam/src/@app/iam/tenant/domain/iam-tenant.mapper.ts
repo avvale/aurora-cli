@@ -1,19 +1,18 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { IamTenant } from './iam-tenant.aggregate';
-import { IamTenantResponse } from './iam-tenant.response';
-import {
-    IamTenantId,
-    IamTenantName,
-    IamTenantCode,
-    IamTenantLogo,
-    IamTenantIsActive,
-    IamTenantMeta,
-    IamTenantAccountIds,
-    IamTenantCreatedAt,
-    IamTenantUpdatedAt,
-    IamTenantDeletedAt,
-} from './value-objects';
 import { IamAccountMapper } from '@app/iam/account';
+import { IamTenant, IamTenantResponse } from '@app/iam/tenant';
+import {
+    IamTenantAccountIds,
+    IamTenantCode,
+    IamTenantCreatedAt,
+    IamTenantDeletedAt,
+    IamTenantId,
+    IamTenantIsActive,
+    IamTenantLogo,
+    IamTenantMeta,
+    IamTenantName,
+    IamTenantUpdatedAt,
+} from '@app/iam/tenant/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class IamTenantMapper implements IMapper
 {

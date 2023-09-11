@@ -1,8 +1,6 @@
+import { IamBoundedContextMapper, IamBoundedContextResponse, IamFindBoundedContextQuery } from '@app/iam/bounded-context';
+import { IamFindBoundedContextService } from '@app/iam/bounded-context/application/find/iam-find-bounded-context.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamBoundedContextResponse } from '../../domain/iam-bounded-context.response';
-import { IamBoundedContextMapper } from '../../domain/iam-bounded-context.mapper';
-import { IamFindBoundedContextQuery } from './iam-find-bounded-context.query';
-import { IamFindBoundedContextService } from './iam-find-bounded-context.service';
 
 @QueryHandler(IamFindBoundedContextQuery)
 export class IamFindBoundedContextQueryHandler implements IQueryHandler<IamFindBoundedContextQuery>

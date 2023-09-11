@@ -1,17 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { IamBoundedContext, iamMockBoundedContextData } from '@app/iam/bounded-context';
 import {
+    IamBoundedContextCreatedAt,
+    IamBoundedContextDeletedAt,
     IamBoundedContextId,
+    IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
     IamBoundedContextSort,
-    IamBoundedContextIsActive,
-    IamBoundedContextCreatedAt,
     IamBoundedContextUpdatedAt,
-    IamBoundedContextDeletedAt,
-} from '../../domain/value-objects';
-import { IamBoundedContext } from '../../domain/iam-bounded-context.aggregate';
-import { iamMockBoundedContextData } from './iam-mock-bounded-context.data';
+} from '@app/iam/bounded-context/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

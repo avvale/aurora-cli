@@ -1,10 +1,7 @@
+import { IamITenantRepository, IamMockTenantRepository } from '@app/iam/tenant';
+import { IamRawSQLTenantsService } from '@app/iam/tenant/application/raw-sql/iam-raw-sql-tenants.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamRawSQLTenantsService } from './iam-raw-sql-tenants.service';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamMockTenantRepository } from '../../infrastructure/mock/iam-mock-tenant.repository';
 
 describe('IamRawSQLTenantsService ', () =>
 {

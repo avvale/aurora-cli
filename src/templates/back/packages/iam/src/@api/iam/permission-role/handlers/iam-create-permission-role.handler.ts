@@ -1,8 +1,8 @@
 import { IamCreatePermissionRoleInput, IamPermissionRole } from '@api/graphql';
+import { IamCreatePermissionRoleDto, IamPermissionRoleDto } from '@api/iam/permission-role';
 import { IamCreatePermissionRoleCommand, IamFindPermissionRoleByIdQuery } from '@app/iam/permission-role';
 import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { IamCreatePermissionRoleDto, IamPermissionRoleDto } from '../dto';
 
 @Injectable()
 export class IamCreatePermissionRoleHandler
@@ -32,7 +32,9 @@ export class IamCreatePermissionRoleHandler
             payload.permissionId,
             payload.roleId,
             {},
-            { timezone },
+            {
+                timezone,
+            },
         ));
     }
 }

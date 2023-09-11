@@ -1,11 +1,5 @@
+import { IamCreatedPermissionEvent, IamCreatedPermissionsEvent, IamDeletedPermissionEvent, IamDeletedPermissionsEvent, IamPermission, IamUpdatedPermissionEvent, IamUpdatedPermissionsEvent } from '@app/iam/permission';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { IamPermission } from '../../domain/iam-permission.aggregate';
-import { IamCreatedPermissionEvent } from './iam-created-permission.event';
-import { IamCreatedPermissionsEvent } from './iam-created-permissions.event';
-import { IamUpdatedPermissionEvent } from './iam-updated-permission.event';
-import { IamUpdatedPermissionsEvent } from './iam-updated-permissions.event';
-import { IamDeletedPermissionEvent } from './iam-deleted-permission.event';
-import { IamDeletedPermissionsEvent } from './iam-deleted-permissions.event';
 
 export class IamAddPermissionsContextEvent extends AggregateRoot
 {

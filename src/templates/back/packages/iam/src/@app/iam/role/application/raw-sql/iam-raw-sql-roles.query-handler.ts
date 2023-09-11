@@ -1,8 +1,6 @@
+import { IamRawSQLRolesQuery, IamRoleMapper, IamRoleResponse } from '@app/iam/role';
+import { IamRawSQLRolesService } from '@app/iam/role/application/raw-sql/iam-raw-sql-roles.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamRoleResponse } from '../../domain/iam-role.response';
-import { IamRoleMapper } from '../../domain/iam-role.mapper';
-import { IamRawSQLRolesQuery } from './iam-raw-sql-roles.query';
-import { IamRawSQLRolesService } from './iam-raw-sql-roles.service';
 
 @QueryHandler(IamRawSQLRolesQuery)
 export class IamRawSQLRolesQueryHandler implements IQueryHandler<IamRawSQLRolesQuery>

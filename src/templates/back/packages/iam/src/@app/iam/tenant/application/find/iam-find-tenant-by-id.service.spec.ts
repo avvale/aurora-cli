@@ -1,12 +1,8 @@
+import { IamITenantRepository, iamMockTenantData, IamMockTenantRepository } from '@app/iam/tenant';
+import { IamFindTenantByIdService } from '@app/iam/tenant/application/find/iam-find-tenant-by-id.service';
+import { IamTenantId } from '@app/iam/tenant/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockTenantData } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.data';
-import { IamFindTenantByIdService } from './iam-find-tenant-by-id.service';
-import { IamTenantId } from '../../domain/value-objects';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamMockTenantRepository } from '../../infrastructure/mock/iam-mock-tenant.repository';
 
 describe('IamFindTenantByIdService', () =>
 {

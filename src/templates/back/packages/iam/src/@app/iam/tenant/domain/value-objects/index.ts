@@ -1,10 +1,10 @@
-export { IamTenantId } from './iam-tenant-id';
-export { IamTenantName } from './iam-tenant-name';
-export { IamTenantCode } from './iam-tenant-code';
-export { IamTenantLogo } from './iam-tenant-logo';
-export { IamTenantIsActive } from './iam-tenant-is-active';
-export { IamTenantMeta } from './iam-tenant-meta';
 export { IamTenantAccountIds } from './iam-tenant-account-ids';
+export { IamTenantCode } from './iam-tenant-code';
 export { IamTenantCreatedAt } from './iam-tenant-created-at';
-export { IamTenantUpdatedAt } from './iam-tenant-updated-at';
 export { IamTenantDeletedAt } from './iam-tenant-deleted-at';
+export { IamTenantId } from './iam-tenant-id';
+export { IamTenantIsActive } from './iam-tenant-is-active';
+export { IamTenantLogo } from './iam-tenant-logo';
+export { IamTenantMeta } from './iam-tenant-meta';
+export { IamTenantName } from './iam-tenant-name';
+export { IamTenantUpdatedAt } from './iam-tenant-updated-at';

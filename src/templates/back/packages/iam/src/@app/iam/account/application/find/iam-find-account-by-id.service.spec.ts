@@ -1,12 +1,8 @@
+import { IamIAccountRepository, iamMockAccountData, IamMockAccountRepository } from '@app/iam/account';
+import { IamFindAccountByIdService } from '@app/iam/account/application/find/iam-find-account-by-id.service';
+import { IamAccountId } from '@app/iam/account/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockAccountData } from '@app/iam/account/infrastructure/mock/iam-mock-account.data';
-import { IamFindAccountByIdService } from './iam-find-account-by-id.service';
-import { IamAccountId } from '../../domain/value-objects';
-import { IamIAccountRepository } from '../../domain/iam-account.repository';
-import { IamMockAccountRepository } from '../../infrastructure/mock/iam-mock-account.repository';
 
 describe('IamFindAccountByIdService', () =>
 {

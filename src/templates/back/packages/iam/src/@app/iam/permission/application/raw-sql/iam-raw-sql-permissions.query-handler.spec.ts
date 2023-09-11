@@ -1,12 +1,7 @@
+import { IamIPermissionRepository, IamMockPermissionRepository, IamPermissionMapper, IamRawSQLPermissionsQuery } from '@app/iam/permission';
+import { IamRawSQLPermissionsQueryHandler } from '@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.query-handler';
+import { IamRawSQLPermissionsService } from '@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamMockPermissionRepository } from '@app/iam/permission/infrastructure/mock/iam-mock-permission.repository';
-import { IamIPermissionRepository } from '@app/iam/permission/domain/iam-permission.repository';
-import { IamPermissionMapper } from '@app/iam/permission/domain/iam-permission.mapper';
-import { IamRawSQLPermissionsQueryHandler } from './iam-raw-sql-permissions.query-handler';
-import { IamRawSQLPermissionsQuery } from './iam-raw-sql-permissions.query';
-import { IamRawSQLPermissionsService } from './iam-raw-sql-permissions.service';
 
 describe('RawSQLPermissionsQueryHandler', () =>
 {

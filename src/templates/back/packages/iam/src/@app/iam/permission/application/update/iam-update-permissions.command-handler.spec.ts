@@ -1,15 +1,11 @@
+import { iamMockPermissionData, IamUpdatePermissionsCommand } from '@app/iam/permission';
+import { IamUpdatePermissionsCommandHandler } from '@app/iam/permission/application/update/iam-update-permissions.command-handler';
+import { IamUpdatePermissionsService } from '@app/iam/permission/application/update/iam-update-permissions.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockPermissionData } from '@app/iam/permission/infrastructure/mock/iam-mock-permission.data';
-import { IamUpdatePermissionsCommandHandler } from './iam-update-permissions.command-handler';
-import { IamUpdatePermissionsCommand } from './iam-update-permissions.command';
-import { IamUpdatePermissionsService } from './iam-update-permissions.service';
 
 describe('IamUpdatePermissionsCommandHandler', () =>
 {
     let commandHandler: IamUpdatePermissionsCommandHandler;
-    let service: IamUpdatePermissionsService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('IamUpdatePermissionsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamUpdatePermissionsCommandHandler>(IamUpdatePermissionsCommandHandler);
-        service = module.get<IamUpdatePermissionsService>(IamUpdatePermissionsService);
     });
 
     describe('main', () =>

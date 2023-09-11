@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamIUserRepository, IamMockUserRepository, IamPaginateUsersQuery } from '@app/iam/user';
+import { IamPaginateUsersQueryHandler } from '@app/iam/user/application/paginate/iam-paginate-users.query-handler';
+import { IamPaginateUsersService } from '@app/iam/user/application/paginate/iam-paginate-users.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { IamPaginateUsersQueryHandler } from './iam-paginate-users.query-handler';
-import { IamMockUserRepository } from '@app/iam/user/infrastructure/mock/iam-mock-user.repository';
-import { IamIUserRepository } from '@app/iam/user/domain/iam-user.repository';
-import { IamUserMapper } from '@app/iam/user/domain/iam-user.mapper';
-import { IamPaginateUsersQuery } from './iam-paginate-users.query';
-import { IamPaginateUsersService } from './iam-paginate-users.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamPaginateUsersQueryHandler', () =>
 {
     let queryHandler: IamPaginateUsersQueryHandler;
     let service: IamPaginateUsersService;
     let repository: IamMockUserRepository;
-    let mapper: IamUserMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('IamPaginateUsersQueryHandler', () =>
         queryHandler = module.get<IamPaginateUsersQueryHandler>(IamPaginateUsersQueryHandler);
         service = module.get<IamPaginateUsersService>(IamPaginateUsersService);
         repository = <IamMockUserRepository>module.get<IamIUserRepository>(IamIUserRepository);
-        mapper = new IamUserMapper();
     });
 
     describe('main', () =>

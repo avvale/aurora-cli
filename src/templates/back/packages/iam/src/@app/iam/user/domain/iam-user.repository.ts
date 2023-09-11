@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { IamUser } from './iam-user.aggregate';
 import { IamUserId } from './value-objects';
+import { IamUser } from '@app/iam/user';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class IamIUserRepository implements IRepository<IamUser>
 {
@@ -30,6 +30,8 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<IamUser | null>;
 
@@ -124,6 +126,8 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

@@ -1,6 +1,6 @@
+import { IamDeleteBoundedContextsCommand } from '@app/iam/bounded-context';
+import { IamDeleteBoundedContextsService } from '@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamDeleteBoundedContextsCommand } from './iam-delete-bounded-contexts.command';
-import { IamDeleteBoundedContextsService } from './iam-delete-bounded-contexts.service';
 
 @CommandHandler(IamDeleteBoundedContextsCommand)
 export class IamDeleteBoundedContextsCommandHandler implements ICommandHandler<IamDeleteBoundedContextsCommand>

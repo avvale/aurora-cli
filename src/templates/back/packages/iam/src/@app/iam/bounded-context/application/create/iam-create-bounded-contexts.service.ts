@@ -22,7 +22,7 @@ export class IamCreateBoundedContextsService
     ) {}
 
     async main(
-        boundedContexts: {
+        payload: {
             id: IamBoundedContextId;
             name: IamBoundedContextName;
             root: IamBoundedContextRoot;
@@ -33,7 +33,7 @@ export class IamCreateBoundedContextsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateBoundedContexts = boundedContexts.map(boundedContext => IamBoundedContext.register(
+        const aggregateBoundedContexts = payload.map(boundedContext => IamBoundedContext.register(
             boundedContext.id,
             boundedContext.name,
             boundedContext.root,

@@ -2,7 +2,6 @@
 import { IamCreateBoundedContextInput } from '@api/graphql';
 import { IamCreateBoundedContextHandler, IamCreateBoundedContextResolver } from '@api/iam/bounded-context';
 import { iamMockBoundedContextData } from '@app/iam/bounded-context';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateBoundedContextResolver', () =>

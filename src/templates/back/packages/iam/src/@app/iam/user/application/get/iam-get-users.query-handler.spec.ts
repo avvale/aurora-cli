@@ -1,12 +1,7 @@
+import { IamGetUsersQuery, IamIUserRepository, IamMockUserRepository, IamUserMapper } from '@app/iam/user';
+import { IamGetUsersQueryHandler } from '@app/iam/user/application/get/iam-get-users.query-handler';
+import { IamGetUsersService } from '@app/iam/user/application/get/iam-get-users.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetUsersQueryHandler } from './iam-get-users.query-handler';
-import { IamMockUserRepository } from '@app/iam/user/infrastructure/mock/iam-mock-user.repository';
-import { IamIUserRepository } from '@app/iam/user/domain/iam-user.repository';
-import { IamUserMapper } from '@app/iam/user/domain/iam-user.mapper';
-import { IamGetUsersQuery } from './iam-get-users.query';
-import { IamGetUsersService } from './iam-get-users.service';
 
 describe('GetUsersQueryHandler', () =>
 {

@@ -1,5 +1,5 @@
+import { IamUpdatedRolesEvent } from '@app/iam/role';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { IamUpdatedRolesEvent } from './iam-updated-roles.event';
 
 @EventsHandler(IamUpdatedRolesEvent)
 export class IamUpdatedRolesEventHandler implements IEventHandler<IamUpdatedRolesEvent>

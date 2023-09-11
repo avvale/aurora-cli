@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamIRoleRepository, IamMockRoleRepository, IamPaginateRolesQuery } from '@app/iam/role';
+import { IamPaginateRolesQueryHandler } from '@app/iam/role/application/paginate/iam-paginate-roles.query-handler';
+import { IamPaginateRolesService } from '@app/iam/role/application/paginate/iam-paginate-roles.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { IamPaginateRolesQueryHandler } from './iam-paginate-roles.query-handler';
-import { IamMockRoleRepository } from '@app/iam/role/infrastructure/mock/iam-mock-role.repository';
-import { IamIRoleRepository } from '@app/iam/role/domain/iam-role.repository';
-import { IamRoleMapper } from '@app/iam/role/domain/iam-role.mapper';
-import { IamPaginateRolesQuery } from './iam-paginate-roles.query';
-import { IamPaginateRolesService } from './iam-paginate-roles.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamPaginateRolesQueryHandler', () =>
 {
     let queryHandler: IamPaginateRolesQueryHandler;
     let service: IamPaginateRolesService;
     let repository: IamMockRoleRepository;
-    let mapper: IamRoleMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('IamPaginateRolesQueryHandler', () =>
         queryHandler = module.get<IamPaginateRolesQueryHandler>(IamPaginateRolesQueryHandler);
         service = module.get<IamPaginateRolesService>(IamPaginateRolesService);
         repository = <IamMockRoleRepository>module.get<IamIRoleRepository>(IamIRoleRepository);
-        mapper = new IamRoleMapper();
     });
 
     describe('main', () =>

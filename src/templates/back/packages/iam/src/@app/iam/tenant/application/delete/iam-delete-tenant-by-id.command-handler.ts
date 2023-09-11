@@ -1,9 +1,7 @@
+import { IamDeleteTenantByIdCommand } from '@app/iam/tenant';
+import { IamDeleteTenantByIdService } from '@app/iam/tenant/application/delete/iam-delete-tenant-by-id.service';
+import { IamTenantId } from '@app/iam/tenant/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamDeleteTenantByIdCommand } from './iam-delete-tenant-by-id.command';
-import { IamDeleteTenantByIdService } from './iam-delete-tenant-by-id.service';
-import {
-    IamTenantId
-} from '../../domain/value-objects';
 
 @CommandHandler(IamDeleteTenantByIdCommand)
 export class IamDeleteTenantByIdCommandHandler implements ICommandHandler<IamDeleteTenantByIdCommand>

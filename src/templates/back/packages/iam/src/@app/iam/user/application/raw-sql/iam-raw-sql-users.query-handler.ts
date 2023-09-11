@@ -1,8 +1,6 @@
+import { IamRawSQLUsersQuery, IamUserMapper, IamUserResponse } from '@app/iam/user';
+import { IamRawSQLUsersService } from '@app/iam/user/application/raw-sql/iam-raw-sql-users.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamUserResponse } from '../../domain/iam-user.response';
-import { IamUserMapper } from '../../domain/iam-user.mapper';
-import { IamRawSQLUsersQuery } from './iam-raw-sql-users.query';
-import { IamRawSQLUsersService } from './iam-raw-sql-users.service';
 
 @QueryHandler(IamRawSQLUsersQuery)
 export class IamRawSQLUsersQueryHandler implements IQueryHandler<IamRawSQLUsersQuery>

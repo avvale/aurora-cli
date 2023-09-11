@@ -1,10 +1,7 @@
+import { IamITenantRepository, IamMockTenantRepository } from '@app/iam/tenant';
+import { IamGetTenantsService } from '@app/iam/tenant/application/get/iam-get-tenants.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamGetTenantsService } from './iam-get-tenants.service';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamMockTenantRepository } from '../../infrastructure/mock/iam-mock-tenant.repository';
 
 describe('IamGetTenantsService', () =>
 {

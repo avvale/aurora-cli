@@ -1,5 +1,5 @@
+import { IamCreatedPermissionRoleEvent, IamCreatedPermissionsRolesEvent, IamDeletedPermissionRoleEvent, IamDeletedPermissionsRolesEvent, IamPermissionRole, IamUpdatedPermissionRoleEvent, IamUpdatedPermissionsRolesEvent } from '@app/iam/permission-role';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { IamCreatedPermissionRoleEvent, IamCreatedPermissionsRolesEvent, IamPermissionRole } from '@app/iam/permission-role';
 
 export class IamAddPermissionsRolesContextEvent extends AggregateRoot
 {
@@ -31,11 +31,29 @@ export class IamAddPermissionsRolesContextEvent extends AggregateRoot
 
     updated(): void
     {
-        /**/
+        this.apply(
+            new IamUpdatedPermissionsRolesEvent(
+                this.aggregateRoots.map(permissionRole =>
+                    new IamUpdatedPermissionRoleEvent(
+                        permissionRole.permissionId.value,
+                        permissionRole.roleId.value,
+                    ),
+                ),
+            ),
+        );
     }
 
     deleted(): void
     {
-        /**/
+        this.apply(
+            new IamDeletedPermissionsRolesEvent(
+                this.aggregateRoots.map(permissionRole =>
+                    new IamDeletedPermissionRoleEvent(
+                        permissionRole.permissionId.value,
+                        permissionRole.roleId.value,
+                    ),
+                ),
+            ),
+        );
     }
 }

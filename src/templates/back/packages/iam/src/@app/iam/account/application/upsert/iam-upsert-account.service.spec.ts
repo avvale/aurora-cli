@@ -1,30 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockAccountData } from '@app/iam/account/infrastructure/mock/iam-mock-account.data';
-import { IamUpsertAccountService } from './iam-upsert-account.service';
+import { IamIAccountRepository, iamMockAccountData, IamMockAccountRepository } from '@app/iam/account';
+import { IamUpsertAccountService } from '@app/iam/account/application/upsert/iam-upsert-account.service';
 import {
-    IamAccountId,
-    IamAccountType,
-    IamAccountCode,
-    IamAccountEmail,
-    IamAccountIsActive,
     IamAccountClientId,
-    IamAccountScopes,
+    IamAccountCode,
     IamAccountDApplicationCodes,
     IamAccountDPermissions,
     IamAccountDTenants,
+    IamAccountEmail,
+    IamAccountId,
+    IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountScopes,
     IamAccountTenantIds,
-    IamAccountCreatedAt,
-    IamAccountUpdatedAt,
-    IamAccountDeletedAt,
-} from '../../domain/value-objects';
-import { IamIAccountRepository } from '../../domain/iam-account.repository';
-import { IamMockAccountRepository } from '../../infrastructure/mock/iam-mock-account.repository';
+    IamAccountType,
+} from '@app/iam/account/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpsertAccountService', () =>
 

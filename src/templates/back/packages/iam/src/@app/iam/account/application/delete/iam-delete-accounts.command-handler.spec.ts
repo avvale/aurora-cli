@@ -1,14 +1,11 @@
+import { IamDeleteAccountsCommand } from '@app/iam/account';
+import { IamDeleteAccountsCommandHandler } from '@app/iam/account/application/delete/iam-delete-accounts.command-handler';
+import { IamDeleteAccountsService } from '@app/iam/account/application/delete/iam-delete-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteAccountsCommandHandler } from './iam-delete-accounts.command-handler';
-import { IamDeleteAccountsCommand } from './iam-delete-accounts.command';
-import { IamDeleteAccountsService } from './iam-delete-accounts.service';
 
 describe('IamDeleteAccountsCommandHandler', () =>
 {
     let commandHandler: IamDeleteAccountsCommandHandler;
-    let service: IamDeleteAccountsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('IamDeleteAccountsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamDeleteAccountsCommandHandler>(IamDeleteAccountsCommandHandler);
-        service = module.get<IamDeleteAccountsService>(IamDeleteAccountsService);
     });
 
     describe('main', () =>

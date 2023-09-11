@@ -2,8 +2,8 @@
 type IamPermissionRole
 {
     permissionId: ID!
-    permission: IamPermission
     roleId: ID!
+    permission: IamPermission
     role: IamRole
 }
 
@@ -13,14 +13,25 @@ input IamCreatePermissionRoleInput
     roleId: ID!
 }
 
-input IamDeletePermissionRoleInput
+input IamUpdatePermissionRoleByIdInput
 {
     permissionId: ID!
     roleId: ID!
 }
 
+input IamUpdatePermissionsRolesInput
+{
+    permissionId: ID
+    roleId: ID
+}
+
 type Query
 {
+    iamFindPermissionRole(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): IamPermissionRole
+
     iamFindPermissionRoleById(
         permissionId: ID
         roleId: ID
@@ -49,13 +60,29 @@ type Mutation
         payload: [IamCreatePermissionRoleInput]!
     ): Boolean!
 
+    iamUpdatePermissionRoleById(
+        payload: IamUpdatePermissionRoleByIdInput!
+        constraint: QueryStatement
+    ): IamPermissionRole
+
+    iamUpdatePermissionsRoles(
+        payload: IamUpdatePermissionsRolesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamPermissionRole]!
+
+    iamUpsertPermissionRole(
+        payload: IamUpdatePermissionRoleByIdInput!
+    ): IamPermissionRole
+
     iamDeletePermissionRoleById(
-        payload: IamDeletePermissionRoleInput!
+        permissionId: ID!
+        roleId: ID!
         constraint: QueryStatement
     ): IamPermissionRole
 
     iamDeletePermissionsRoles(
-        payload: [IamDeletePermissionRoleInput]!
+        query: QueryStatement
         constraint: QueryStatement
     ): [IamPermissionRole]!
 

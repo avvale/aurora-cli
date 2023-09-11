@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IamPaginateBoundedContextsQuery } from '@app/iam/bounded-context';
+import { IamPaginateBoundedContextsService } from '@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { IamPaginateBoundedContextsQuery } from './iam-paginate-bounded-contexts.query';
-import { IamPaginateBoundedContextsService } from './iam-paginate-bounded-contexts.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginateBoundedContextsQuery)
 export class IamPaginateBoundedContextsQueryHandler implements IQueryHandler<IamPaginateBoundedContextsQuery>

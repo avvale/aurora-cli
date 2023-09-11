@@ -1,9 +1,7 @@
+import { IamFindUserByIdQuery, IamUserMapper, IamUserResponse } from '@app/iam/user';
+import { IamFindUserByIdService } from '@app/iam/user/application/find/iam-find-user-by-id.service';
+import { IamUserId } from '@app/iam/user/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamUserResponse } from '../../domain/iam-user.response';
-import { IamUserMapper } from '../../domain/iam-user.mapper';
-import { IamUserId } from '../../domain/value-objects';
-import { IamFindUserByIdQuery } from './iam-find-user-by-id.query';
-import { IamFindUserByIdService } from './iam-find-user-by-id.service';
 
 @QueryHandler(IamFindUserByIdQuery)
 export class IamFindUserByIdQueryHandler implements IQueryHandler<IamFindUserByIdQuery>

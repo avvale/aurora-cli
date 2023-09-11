@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamIBoundedContextRepository, IamMockBoundedContextRepository, IamPaginateBoundedContextsQuery } from '@app/iam/bounded-context';
+import { IamPaginateBoundedContextsQueryHandler } from '@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.query-handler';
+import { IamPaginateBoundedContextsService } from '@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { IamPaginateBoundedContextsQueryHandler } from './iam-paginate-bounded-contexts.query-handler';
-import { IamMockBoundedContextRepository } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.repository';
-import { IamIBoundedContextRepository } from '@app/iam/bounded-context/domain/iam-bounded-context.repository';
-import { IamBoundedContextMapper } from '@app/iam/bounded-context/domain/iam-bounded-context.mapper';
-import { IamPaginateBoundedContextsQuery } from './iam-paginate-bounded-contexts.query';
-import { IamPaginateBoundedContextsService } from './iam-paginate-bounded-contexts.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamPaginateBoundedContextsQueryHandler', () =>
 {
     let queryHandler: IamPaginateBoundedContextsQueryHandler;
     let service: IamPaginateBoundedContextsService;
     let repository: IamMockBoundedContextRepository;
-    let mapper: IamBoundedContextMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('IamPaginateBoundedContextsQueryHandler', () =>
         queryHandler = module.get<IamPaginateBoundedContextsQueryHandler>(IamPaginateBoundedContextsQueryHandler);
         service = module.get<IamPaginateBoundedContextsService>(IamPaginateBoundedContextsService);
         repository = <IamMockBoundedContextRepository>module.get<IamIBoundedContextRepository>(IamIBoundedContextRepository);
-        mapper = new IamBoundedContextMapper();
     });
 
     describe('main', () =>

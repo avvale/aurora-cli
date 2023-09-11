@@ -30,7 +30,7 @@ export class IamCreateAccountsService
     ) {}
 
     async main(
-        accounts: {
+        payload: {
             id: IamAccountId;
             type: IamAccountType;
             code: IamAccountCode;
@@ -49,7 +49,7 @@ export class IamCreateAccountsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateAccounts = accounts.map(account => IamAccount.register(
+        const aggregateAccounts = payload.map(account => IamAccount.register(
             account.id,
             account.type,
             account.code,

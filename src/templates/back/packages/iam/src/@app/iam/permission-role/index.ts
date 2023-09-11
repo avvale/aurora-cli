@@ -1,21 +1,31 @@
 // export commands
 export { IamCreatePermissionRoleCommand } from './application/create/iam-create-permission-role.command';
 export { IamCreatePermissionsRolesCommand } from './application/create/iam-create-permissions-roles.command';
+export { IamUpdatePermissionRoleByIdCommand } from './application/update/iam-update-permission-role-by-id.command';
+export { IamUpdatePermissionsRolesCommand } from './application/update/iam-update-permissions-roles.command';
+export { IamUpsertPermissionRoleCommand } from './application/upsert/iam-upsert-permission-role.command';
 export { IamDeletePermissionRoleByIdCommand } from './application/delete/iam-delete-permission-role-by-id.command';
 export { IamDeletePermissionsRolesCommand } from './application/delete/iam-delete-permissions-roles.command';
 
 // export queries
-export { IamFindPermissionRoleByIdQuery } from './application/find/iam-find-permission-role-by-id.query';
-export { IamFindPermissionRoleQuery } from './application/find/iam-find-permission-role.query';
-export { IamGetPermissionsRolesQuery } from './application/get/iam-get-permissions-roles.query';
-export { IamPaginatePermissionsRolesService } from './application/paginate/iam-paginate-permissions-roles.service';
 export { IamPaginatePermissionsRolesQuery } from './application/paginate/iam-paginate-permissions-roles.query';
+export { IamGetPermissionsRolesQuery } from './application/get/iam-get-permissions-roles.query';
+export { IamFindPermissionRoleQuery } from './application/find/iam-find-permission-role.query';
+export { IamFindPermissionRoleByIdQuery } from './application/find/iam-find-permission-role-by-id.query';
+export { IamRawSQLPermissionsRolesQuery } from './application/raw-sql/iam-raw-sql-permissions-roles.query';
+
+// export mocks
+export { iamMockPermissionRoleData } from './infrastructure/mock/iam-mock-permission-role.data';
+export { IamMockPermissionRoleSeeder } from './infrastructure/mock/iam-mock-permission-role.seeder';
+export { IamMockPermissionRoleRepository } from './infrastructure/mock/iam-mock-permission-role.repository';
 
 // export events
 export { IamAddPermissionsRolesContextEvent } from './application/events/iam-add-permissions-roles-context.event';
-export { IamCreatedPermissionRoleEvent } from './application/events/iam-created-permission-role.event';
 export { IamCreatedPermissionsRolesEvent } from './application/events/iam-created-permissions-roles.event';
+export { IamCreatedPermissionRoleEvent } from './application/events/iam-created-permission-role.event';
+export { IamDeletedPermissionsRolesEvent } from './application/events/iam-deleted-permissions-roles.event';
 export { IamDeletedPermissionRoleEvent } from './application/events/iam-deleted-permission-role.event';
+export { IamUpdatedPermissionsRolesEvent } from './application/events/iam-updated-permissions-roles.event';
 export { IamUpdatedPermissionRoleEvent } from './application/events/iam-updated-permission-role.event';
 
 // export command handlers
@@ -31,12 +41,18 @@ export { IamIPermissionRoleRepository } from './domain/iam-permission-role.repos
 export { IamPermissionRoleResponse } from './domain/iam-permission-role.response';
 
 // infrastructure
-export { IamPermissionsRolesModel } from './infrastructure/sequelize/iam-sequelize-permissions-roles.model';
+export { IamPermissionRoleModel } from './infrastructure/sequelize/iam-sequelize-permission-role.model';
 export { IamSequelizePermissionRoleRepository } from './infrastructure/sequelize/iam-sequelize-permission-role.repository';
 
-// commands
+// sagas
+export { IamPermissionRoleSagas } from './application/sagas/iam-permission-role.sagas';
+
+// command handlers
 import { IamCreatePermissionRoleCommandHandler } from './application/create/iam-create-permission-role.command-handler';
 import { IamCreatePermissionsRolesCommandHandler } from './application/create/iam-create-permissions-roles.command-handler';
+import { IamUpdatePermissionRoleByIdCommandHandler } from './application/update/iam-update-permission-role-by-id.command-handler';
+import { IamUpdatePermissionsRolesCommandHandler } from './application/update/iam-update-permissions-roles.command-handler';
+import { IamUpsertPermissionRoleCommandHandler } from './application/upsert/iam-upsert-permission-role.command-handler';
 import { IamDeletePermissionRoleByIdCommandHandler } from './application/delete/iam-delete-permission-role-by-id.command-handler';
 import { IamDeletePermissionsRolesCommandHandler } from './application/delete/iam-delete-permissions-roles.command-handler';
 
@@ -45,14 +61,15 @@ import { IamPaginatePermissionsRolesQueryHandler } from './application/paginate/
 import { IamGetPermissionsRolesQueryHandler } from './application/get/iam-get-permissions-roles.query-handler';
 import { IamFindPermissionRoleQueryHandler } from './application/find/iam-find-permission-role.query-handler';
 import { IamFindPermissionRoleByIdQueryHandler } from './application/find/iam-find-permission-role-by-id.query-handler';
+import { IamRawSQLPermissionsRolesQueryHandler } from './application/raw-sql/iam-raw-sql-permissions-roles.query-handler';
 
 // event handlers
-/* import { CreatedPermissionRoleEventHandler } from './application/events/created-permission-role.event-handler';
-import { CreatedPermissionsRolesEventHandler } from './application/events/created-permissions-roles.event-handler';
-import { UpdatedPermissionRoleEventHandler } from './application/events/updated-permission.event-handler';
-import { UpdatedPermissionsRolesEventHandler } from './application/events/updated-permissions.event-handler';
-import { DeletedPermissionRoleEventHandler } from './application/events/deleted-permission.event-handler';
-import { DeletedPermissionsRolesEventHandler } from './application/events/deleted-permissions.event-handler'; */
+import { IamCreatedPermissionRoleEventHandler } from './application/events/iam-created-permission-role.event-handler';
+import { IamCreatedPermissionsRolesEventHandler } from './application/events/iam-created-permissions-roles.event-handler';
+import { IamUpdatedPermissionRoleEventHandler } from './application/events/iam-updated-permission-role.event-handler';
+import { IamUpdatedPermissionsRolesEventHandler } from './application/events/iam-updated-permissions-roles.event-handler';
+import { IamDeletedPermissionRoleEventHandler } from './application/events/iam-deleted-permission-role.event-handler';
+import { IamDeletedPermissionsRolesEventHandler } from './application/events/iam-deleted-permissions-roles.event-handler';
 
 // services
 import { IamCreatePermissionRoleService } from './application/create/iam-create-permission-role.service';
@@ -61,6 +78,10 @@ import { IamPaginatePermissionsRolesService } from './application/paginate/iam-p
 import { IamGetPermissionsRolesService } from './application/get/iam-get-permissions-roles.service';
 import { IamFindPermissionRoleService } from './application/find/iam-find-permission-role.service';
 import { IamFindPermissionRoleByIdService } from './application/find/iam-find-permission-role-by-id.service';
+import { IamRawSQLPermissionsRolesService } from './application/raw-sql/iam-raw-sql-permissions-roles.service';
+import { IamUpdatePermissionRoleByIdService } from './application/update/iam-update-permission-role-by-id.service';
+import { IamUpdatePermissionsRolesService } from './application/update/iam-update-permissions-roles.service';
+import { IamUpsertPermissionRoleService } from './application/upsert/iam-upsert-permission-role.service';
 import { IamDeletePermissionRoleByIdService } from './application/delete/iam-delete-permission-role-by-id.service';
 import { IamDeletePermissionsRolesService } from './application/delete/iam-delete-permissions-roles.service';
 
@@ -68,6 +89,9 @@ export const IamPermissionRoleHandlers = [
     // commands
     IamCreatePermissionRoleCommandHandler,
     IamCreatePermissionsRolesCommandHandler,
+    IamUpdatePermissionRoleByIdCommandHandler,
+    IamUpdatePermissionsRolesCommandHandler,
+    IamUpsertPermissionRoleCommandHandler,
     IamDeletePermissionRoleByIdCommandHandler,
     IamDeletePermissionsRolesCommandHandler,
 
@@ -76,8 +100,15 @@ export const IamPermissionRoleHandlers = [
     IamGetPermissionsRolesQueryHandler,
     IamFindPermissionRoleQueryHandler,
     IamFindPermissionRoleByIdQueryHandler,
+    IamRawSQLPermissionsRolesQueryHandler,
 
     // events
+    IamCreatedPermissionRoleEventHandler,
+    IamCreatedPermissionsRolesEventHandler,
+    IamUpdatedPermissionRoleEventHandler,
+    IamUpdatedPermissionsRolesEventHandler,
+    IamDeletedPermissionRoleEventHandler,
+    IamDeletedPermissionsRolesEventHandler,
 ];
 
 export const IamPermissionRoleServices = [
@@ -87,6 +118,10 @@ export const IamPermissionRoleServices = [
     IamGetPermissionsRolesService,
     IamFindPermissionRoleService,
     IamFindPermissionRoleByIdService,
+    IamRawSQLPermissionsRolesService,
+    IamUpdatePermissionRoleByIdService,
+    IamUpdatePermissionsRolesService,
+    IamUpsertPermissionRoleService,
     IamDeletePermissionRoleByIdService,
     IamDeletePermissionsRolesService,
 ];

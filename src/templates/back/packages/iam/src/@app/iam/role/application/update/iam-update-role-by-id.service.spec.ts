@@ -1,22 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { iamMockRoleData } from '@app/iam/role/infrastructure/mock/iam-mock-role.data';
-import { IamUpdateRoleByIdService } from './iam-update-role-by-id.service';
+import { IamIRoleRepository, iamMockRoleData, IamMockRoleRepository } from '@app/iam/role';
+import { IamUpdateRoleByIdService } from '@app/iam/role/application/update/iam-update-role-by-id.service';
 import {
-    IamRoleId,
-    IamRoleName,
-    IamRoleIsMaster,
-    IamRolePermissionIds,
     IamRoleAccountIds,
-    IamRoleCreatedAt,
-    IamRoleUpdatedAt,
-    IamRoleDeletedAt,
-} from '../../domain/value-objects';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamMockRoleRepository } from '../../infrastructure/mock/iam-mock-role.repository';
+    IamRoleId,
+    IamRoleIsMaster,
+    IamRoleName,
+    IamRolePermissionIds,
+} from '@app/iam/role/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateRoleByIdService', () =>
 {

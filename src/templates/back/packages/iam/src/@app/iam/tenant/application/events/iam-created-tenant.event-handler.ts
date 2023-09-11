@@ -1,5 +1,5 @@
+import { IamCreatedTenantEvent } from '@app/iam/tenant';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { IamCreatedTenantEvent } from './iam-created-tenant.event';
 
 @EventsHandler(IamCreatedTenantEvent)
 export class IamCreatedTenantEventHandler implements IEventHandler<IamCreatedTenantEvent>

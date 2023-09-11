@@ -1,26 +1,24 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { IamAccount } from '@app/iam/account';
+import { IamCreatedUserEvent, IamDeletedUserEvent, IamUpdatedUserEvent } from '@app/iam/user';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserCreatedAt,
+    IamUserDeletedAt,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
+    IamUserSurname,
     IamUserUpdatedAt,
-    IamUserDeletedAt,
-} from './value-objects';
-import { IamCreatedUserEvent } from '../application/events/iam-created-user.event';
-import { IamUpdatedUserEvent } from '../application/events/iam-updated-user.event';
-import { IamDeletedUserEvent } from '../application/events/iam-deleted-user.event';
-import { IamAccount } from '@app/iam/account';
+    IamUserUsername,
+} from '@app/iam/user/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamUser extends AggregateRoot
 {
@@ -38,8 +36,6 @@ export class IamUser extends AggregateRoot
     createdAt: IamUserCreatedAt;
     updatedAt: IamUserUpdatedAt;
     deletedAt: IamUserDeletedAt;
-
-    // eager relationship
     account: IamAccount;
 
     constructor(
@@ -57,7 +53,6 @@ export class IamUser extends AggregateRoot
         createdAt: IamUserCreatedAt,
         updatedAt: IamUserUpdatedAt,
         deletedAt: IamUserDeletedAt,
-
         account?: IamAccount,
     )
     {
@@ -76,12 +71,10 @@ export class IamUser extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.account = account;
     }
 
-    static register (
+    static register(
         id: IamUserId,
         accountId: IamUserAccountId,
         name: IamUserName,
@@ -96,7 +89,6 @@ export class IamUser extends AggregateRoot
         createdAt: IamUserCreatedAt,
         updatedAt: IamUserUpdatedAt,
         deletedAt: IamUserDeletedAt,
-
         account?: IamAccount,
     ): IamUser
     {
@@ -115,7 +107,6 @@ export class IamUser extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             account,
         );
     }
@@ -203,8 +194,6 @@ export class IamUser extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             account: this.account?.toDTO(),
         };
     }
@@ -227,8 +216,6 @@ export class IamUser extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             account: this.account?.toDTO(),
         };
     }

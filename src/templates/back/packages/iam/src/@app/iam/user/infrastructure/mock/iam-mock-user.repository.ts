@@ -1,24 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { IamIUserRepository } from '@app/iam/user/domain/iam-user.repository';
+import { IamIUserRepository, iamMockUserData, IamUser } from '@app/iam/user';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserCreatedAt,
+    IamUserDeletedAt,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
+    IamUserSurname,
     IamUserUpdatedAt,
-    IamUserDeletedAt,
+    IamUserUsername,
 } from '@app/iam/user/domain/value-objects';
-import { IamUser } from '../../domain/iam-user.aggregate';
-import { iamMockUserData } from './iam-mock-user.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamMockUserRepository extends MockRepository<IamUser> implements IamIUserRepository
@@ -26,7 +24,6 @@ export class IamMockUserRepository extends MockRepository<IamUser> implements Ia
     public readonly repository: any;
     public readonly aggregateName: string = 'IamUser';
     public collectionSource: IamUser[];
-    public deletedAtInstance: IamUserDeletedAt = new IamUserDeletedAt(null);
 
     constructor()
     {

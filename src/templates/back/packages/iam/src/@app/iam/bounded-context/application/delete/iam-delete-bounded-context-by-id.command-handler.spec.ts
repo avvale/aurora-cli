@@ -1,15 +1,11 @@
+import { IamDeleteBoundedContextByIdCommand, iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { IamDeleteBoundedContextByIdCommandHandler } from '@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.command-handler';
+import { IamDeleteBoundedContextByIdService } from '@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamDeleteBoundedContextByIdCommandHandler } from './iam-delete-bounded-context-by-id.command-handler';
-import { iamMockBoundedContextData } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.data';
-import { IamDeleteBoundedContextByIdCommand } from './iam-delete-bounded-context-by-id.command';
-import { IamDeleteBoundedContextByIdService } from './iam-delete-bounded-context-by-id.service';
 
 describe('IamDeleteBoundedContextByIdCommandHandler', () =>
 {
     let commandHandler: IamDeleteBoundedContextByIdCommandHandler;
-    let service: IamDeleteBoundedContextByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('IamDeleteBoundedContextByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamDeleteBoundedContextByIdCommandHandler>(IamDeleteBoundedContextByIdCommandHandler);
-        service = module.get<IamDeleteBoundedContextByIdService>(IamDeleteBoundedContextByIdService);
     });
 
     describe('main', () =>

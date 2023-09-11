@@ -1,11 +1,8 @@
 import { IamIPermissionRoleRepository } from '@app/iam/permission-role';
+import { IamPermissionRolePermissionId, IamPermissionRoleRoleId } from '@app/iam/permission-role/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import {
-    IamPermissionRolePermissionId,
-    IamPermissionRoleRoleId,
-} from '../../domain/value-objects';
 
 @Injectable()
 export class IamDeletePermissionRoleByIdService
@@ -23,33 +20,33 @@ export class IamDeletePermissionRoleByIdService
     ): Promise<void>
     {
         // get object to delete
-        const permissionRole = await this.repository.find(
-            {
-                queryStatement: {
-                    where: {
+        const permissionRole = await this.repository
+            .findById(
+                undefined,
+                {
+                    constraint,
+                    cQMetadata,
+                    findArguments: {
                         permissionId: permissionId.value,
-                        roleId      : roleId.value,
+                        roleId: roleId.value,
                     },
                 },
-                constraint,
-                cQMetadata,
-            },
-        );
+            );
 
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
-        await this.repository.delete(
-            {
-                queryStatement: {
-                    where: {
-                        permissionId: permissionId.value,
-                        roleId      : roleId.value,
+        await this.repository
+            .deleteById(
+                undefined,
+                {
+                    deleteOptions: cQMetadata?.repositoryOptions,
+                    cQMetadata,
+                    findArguments: {
+                        permissionId: permissionRole.permissionId.value,
+                        roleId: permissionRole.roleId.value,
                     },
                 },
-                cQMetadata,
-                deleteOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+            );
 
         // insert EventBus in object, to be able to apply and commit events
         const permissionRoleRegister = this.publisher.mergeObjectContext(permissionRole);

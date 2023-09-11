@@ -2,7 +2,6 @@
 import { IamCreateRoleInput } from '@api/graphql';
 import { IamCreateRoleHandler, IamCreateRoleResolver } from '@api/iam/role';
 import { iamMockRoleData } from '@app/iam/role';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateRoleResolver', () =>

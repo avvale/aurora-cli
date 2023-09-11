@@ -1,8 +1,6 @@
+import { IamPermissionMapper, IamPermissionResponse, IamRawSQLPermissionsQuery } from '@app/iam/permission';
+import { IamRawSQLPermissionsService } from '@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamPermissionResponse } from '../../domain/iam-permission.response';
-import { IamPermissionMapper } from '../../domain/iam-permission.mapper';
-import { IamRawSQLPermissionsQuery } from './iam-raw-sql-permissions.query';
-import { IamRawSQLPermissionsService } from './iam-raw-sql-permissions.service';
 
 @QueryHandler(IamRawSQLPermissionsQuery)
 export class IamRawSQLPermissionsQueryHandler implements IQueryHandler<IamRawSQLPermissionsQuery>

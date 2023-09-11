@@ -1,5 +1,5 @@
+import { IamDeletedPermissionEvent } from '@app/iam/permission';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { IamDeletedPermissionEvent } from './iam-deleted-permission.event';
 
 @EventsHandler(IamDeletedPermissionEvent)
 export class IamDeletedPermissionEventHandler implements IEventHandler<IamDeletedPermissionEvent>

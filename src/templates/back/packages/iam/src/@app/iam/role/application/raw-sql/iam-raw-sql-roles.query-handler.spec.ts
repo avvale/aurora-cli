@@ -1,12 +1,7 @@
+import { IamIRoleRepository, IamMockRoleRepository, IamRawSQLRolesQuery, IamRoleMapper } from '@app/iam/role';
+import { IamRawSQLRolesQueryHandler } from '@app/iam/role/application/raw-sql/iam-raw-sql-roles.query-handler';
+import { IamRawSQLRolesService } from '@app/iam/role/application/raw-sql/iam-raw-sql-roles.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamMockRoleRepository } from '@app/iam/role/infrastructure/mock/iam-mock-role.repository';
-import { IamIRoleRepository } from '@app/iam/role/domain/iam-role.repository';
-import { IamRoleMapper } from '@app/iam/role/domain/iam-role.mapper';
-import { IamRawSQLRolesQueryHandler } from './iam-raw-sql-roles.query-handler';
-import { IamRawSQLRolesQuery } from './iam-raw-sql-roles.query';
-import { IamRawSQLRolesService } from './iam-raw-sql-roles.service';
 
 describe('RawSQLRolesQueryHandler', () =>
 {

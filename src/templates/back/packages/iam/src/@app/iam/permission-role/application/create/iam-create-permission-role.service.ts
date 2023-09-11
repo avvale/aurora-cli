@@ -1,11 +1,11 @@
 import { IamIPermissionRoleRepository, IamPermissionRole } from '@app/iam/permission-role';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
 import {
     IamPermissionRolePermissionId,
     IamPermissionRoleRoleId,
-} from '../../domain/value-objects';
+} from '@app/iam/permission-role/domain/value-objects';
+import { CQMetadata } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamCreatePermissionRoleService
@@ -32,11 +32,11 @@ export class IamCreatePermissionRoleService
         await this.repository.create(
             permissionRole,
             {
-                createOptions       : cQMetadata?.repositoryOptions,
+                createOptions: cQMetadata?.repositoryOptions,
                 finderQueryStatement: (aggregate: IamPermissionRole) => ({
                     where: {
                         permissionId: aggregate['permissionId']['value'],
-                        roleId      : aggregate['roleId']['value'],
+                        roleId: aggregate['roleId']['value'],
                     },
                 }),
             },

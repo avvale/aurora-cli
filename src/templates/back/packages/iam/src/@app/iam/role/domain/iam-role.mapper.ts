@@ -1,18 +1,17 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { IamRole } from './iam-role.aggregate';
-import { IamRoleResponse } from './iam-role.response';
+import { IamAccountMapper } from '@app/iam/account';
+import { IamPermissionMapper } from '@app/iam/permission';
+import { IamRole, IamRoleResponse } from '@app/iam/role';
 import {
-    IamRoleId,
-    IamRoleName,
-    IamRoleIsMaster,
-    IamRolePermissionIds,
     IamRoleAccountIds,
     IamRoleCreatedAt,
-    IamRoleUpdatedAt,
     IamRoleDeletedAt,
-} from './value-objects';
-import { IamPermissionMapper } from '@app/iam/permission';
-import { IamAccountMapper } from '@app/iam/account';
+    IamRoleId,
+    IamRoleIsMaster,
+    IamRoleName,
+    IamRolePermissionIds,
+    IamRoleUpdatedAt,
+} from '@app/iam/role/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class IamRoleMapper implements IMapper
 {

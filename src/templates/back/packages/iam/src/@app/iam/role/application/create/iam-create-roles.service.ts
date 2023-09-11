@@ -22,7 +22,7 @@ export class IamCreateRolesService
     ) {}
 
     async main(
-        roles: {
+        payload: {
             id: IamRoleId;
             name: IamRoleName;
             isMaster: IamRoleIsMaster;
@@ -33,7 +33,7 @@ export class IamCreateRolesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateRoles = roles.map(role => IamRole.register(
+        const aggregateRoles = payload.map(role => IamRole.register(
             role.id,
             role.name,
             role.isMaster,

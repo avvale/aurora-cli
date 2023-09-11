@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { IamIPermissionRepository, IamPermission } from '@app/iam/permission';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIPermissionRepository } from '../../domain/iam-permission.repository';
-import { IamPermission } from '../../domain/iam-permission.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamRawSQLPermissionsService

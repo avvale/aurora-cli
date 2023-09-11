@@ -1,23 +1,22 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { IamUser } from './iam-user.aggregate';
-import { IamUserResponse } from './iam-user.response';
+import { IamAccountMapper } from '@app/iam/account';
+import { IamUser, IamUserResponse } from '@app/iam/user';
 import {
-    IamUserId,
     IamUserAccountId,
-    IamUserName,
-    IamUserSurname,
     IamUserAvatar,
-    IamUserMobile,
+    IamUserCreatedAt,
+    IamUserDeletedAt,
+    IamUserId,
     IamUserLangId,
-    IamUserUsername,
+    IamUserMeta,
+    IamUserMobile,
+    IamUserName,
     IamUserPassword,
     IamUserRememberToken,
-    IamUserMeta,
-    IamUserCreatedAt,
+    IamUserSurname,
     IamUserUpdatedAt,
-    IamUserDeletedAt,
-} from './value-objects';
-import { IamAccountMapper } from '@app/iam/account';
+    IamUserUsername,
+} from '@app/iam/user/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class IamUserMapper implements IMapper
 {

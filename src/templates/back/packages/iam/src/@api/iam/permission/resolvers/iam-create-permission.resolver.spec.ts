@@ -2,7 +2,6 @@
 import { IamCreatePermissionInput } from '@api/graphql';
 import { IamCreatePermissionHandler, IamCreatePermissionResolver } from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreatePermissionResolver', () =>

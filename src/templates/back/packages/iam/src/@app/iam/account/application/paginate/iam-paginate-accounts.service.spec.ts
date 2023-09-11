@@ -1,10 +1,7 @@
+import { IamIAccountRepository, IamMockAccountRepository } from '@app/iam/account';
+import { IamPaginateAccountsService } from '@app/iam/account/application/paginate/iam-paginate-accounts.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamPaginateAccountsService } from './iam-paginate-accounts.service';
-import { IamIAccountRepository } from '../../domain/iam-account.repository';
-import { IamMockAccountRepository } from '../../infrastructure/mock/iam-mock-account.repository';
 
 describe('IamPaginateAccountsService', () =>
 {

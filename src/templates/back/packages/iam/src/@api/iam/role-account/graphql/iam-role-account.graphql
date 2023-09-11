@@ -1,0 +1,89 @@
+
+type IamRoleAccount
+{
+    roleId: ID!
+    accountId: ID!
+    role: IamRole
+    account: IamAccount
+}
+
+input IamCreateRoleAccountInput
+{
+    roleId: ID!
+    accountId: ID!
+}
+
+input IamUpdateRoleAccountByIdInput
+{
+    roleId: ID!
+    accountId: ID!
+}
+
+input IamUpdateRolesAccountsInput
+{
+    roleId: ID
+    accountId: ID
+}
+
+type Query
+{
+    iamFindRoleAccount(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): IamRoleAccount
+
+    iamFindRoleAccountById(
+        roleId: ID
+        accountId: ID
+        constraint: QueryStatement
+    ): IamRoleAccount
+
+    iamGetRolesAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamRoleAccount]!
+
+    iamPaginateRolesAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    iamCreateRoleAccount(
+        payload: IamCreateRoleAccountInput!
+    ): IamRoleAccount
+
+    iamCreateRolesAccounts(
+        payload: [IamCreateRoleAccountInput]!
+    ): Boolean!
+
+    iamUpdateRoleAccountById(
+        payload: IamUpdateRoleAccountByIdInput!
+        constraint: QueryStatement
+    ): IamRoleAccount
+
+    iamUpdateRolesAccounts(
+        payload: IamUpdateRolesAccountsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamRoleAccount]!
+
+    iamUpsertRoleAccount(
+        payload: IamUpdateRoleAccountByIdInput!
+    ): IamRoleAccount
+
+    iamDeleteRoleAccountById(
+        roleId: ID!
+        accountId: ID!
+        constraint: QueryStatement
+    ): IamRoleAccount
+
+    iamDeleteRolesAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamRoleAccount]!
+
+}

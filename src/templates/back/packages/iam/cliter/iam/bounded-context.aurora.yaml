@@ -35,7 +35,7 @@ aggregateProperties:
     relationship:
       type: one-to-many
       singularName: permission
-      aggregate: IamPermission
+      aggregateName: IamPermission
       modulePath: iam/permission
       avoidConstraint: true
     webComponent:
@@ -49,5 +49,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []

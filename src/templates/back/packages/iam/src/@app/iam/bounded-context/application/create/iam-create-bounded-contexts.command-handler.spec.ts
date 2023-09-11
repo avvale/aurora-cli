@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { IamCreateBoundedContextsCommand, iamMockBoundedContextData } from '@app/iam/bounded-context';
+import { IamCreateBoundedContextsCommandHandler } from '@app/iam/bounded-context/application/create/iam-create-bounded-contexts.command-handler';
+import { IamCreateBoundedContextsService } from '@app/iam/bounded-context/application/create/iam-create-bounded-contexts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { iamMockBoundedContextData } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.data';
-import { IamCreateBoundedContextsCommandHandler } from './iam-create-bounded-contexts.command-handler';
-import { IamCreateBoundedContextsCommand } from './iam-create-bounded-contexts.command';
-import { IamCreateBoundedContextsService } from './iam-create-bounded-contexts.service';
 
 describe('iamCreateBoundedContextsCommandHandler', () =>
 {
     let commandHandler: IamCreateBoundedContextsCommandHandler;
-    let service: IamCreateBoundedContextsService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('iamCreateBoundedContextsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<IamCreateBoundedContextsCommandHandler>(IamCreateBoundedContextsCommandHandler);
-        service = module.get<IamCreateBoundedContextsService>(IamCreateBoundedContextsService);
     });
 
     describe('main', () =>

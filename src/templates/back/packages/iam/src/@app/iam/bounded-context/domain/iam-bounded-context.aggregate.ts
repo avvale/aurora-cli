@@ -1,20 +1,18 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { IamCreatedBoundedContextEvent, IamDeletedBoundedContextEvent, IamUpdatedBoundedContextEvent } from '@app/iam/bounded-context';
 import {
+    IamBoundedContextCreatedAt,
+    IamBoundedContextDeletedAt,
     IamBoundedContextId,
+    IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
     IamBoundedContextSort,
-    IamBoundedContextIsActive,
-    IamBoundedContextCreatedAt,
     IamBoundedContextUpdatedAt,
-    IamBoundedContextDeletedAt,
-} from './value-objects';
-import { IamCreatedBoundedContextEvent } from '../application/events/iam-created-bounded-context.event';
-import { IamUpdatedBoundedContextEvent } from '../application/events/iam-updated-bounded-context.event';
-import { IamDeletedBoundedContextEvent } from '../application/events/iam-deleted-bounded-context.event';
+} from '@app/iam/bounded-context/domain/value-objects';
 import { IamPermission } from '@app/iam/permission';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamBoundedContext extends AggregateRoot
 {
@@ -26,8 +24,6 @@ export class IamBoundedContext extends AggregateRoot
     createdAt: IamBoundedContextCreatedAt;
     updatedAt: IamBoundedContextUpdatedAt;
     deletedAt: IamBoundedContextDeletedAt;
-
-    // eager relationship
     permissions: IamPermission[];
 
     constructor(
@@ -39,7 +35,6 @@ export class IamBoundedContext extends AggregateRoot
         createdAt: IamBoundedContextCreatedAt,
         updatedAt: IamBoundedContextUpdatedAt,
         deletedAt: IamBoundedContextDeletedAt,
-
         permissions?: IamPermission[],
     )
     {
@@ -52,12 +47,10 @@ export class IamBoundedContext extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.permissions = permissions;
     }
 
-    static register (
+    static register(
         id: IamBoundedContextId,
         name: IamBoundedContextName,
         root: IamBoundedContextRoot,
@@ -66,7 +59,6 @@ export class IamBoundedContext extends AggregateRoot
         createdAt: IamBoundedContextCreatedAt,
         updatedAt: IamBoundedContextUpdatedAt,
         deletedAt: IamBoundedContextDeletedAt,
-
         permissions?: IamPermission[],
     ): IamBoundedContext
     {
@@ -79,7 +71,6 @@ export class IamBoundedContext extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             permissions,
         );
     }
@@ -143,8 +134,6 @@ export class IamBoundedContext extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             permissions: this.permissions?.map(item => item.toDTO()),
         };
     }
@@ -161,8 +150,6 @@ export class IamBoundedContext extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             permissions: this.permissions?.map(item => item.toDTO()),
         };
     }

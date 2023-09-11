@@ -1,21 +1,19 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { IamAccount } from '@app/iam/account';
+import { IamPermission } from '@app/iam/permission';
+import { IamCreatedRoleEvent, IamDeletedRoleEvent, IamUpdatedRoleEvent } from '@app/iam/role';
 import {
-    IamRoleId,
-    IamRoleName,
-    IamRoleIsMaster,
-    IamRolePermissionIds,
     IamRoleAccountIds,
     IamRoleCreatedAt,
-    IamRoleUpdatedAt,
     IamRoleDeletedAt,
-} from './value-objects';
-import { IamCreatedRoleEvent } from '../application/events/iam-created-role.event';
-import { IamUpdatedRoleEvent } from '../application/events/iam-updated-role.event';
-import { IamDeletedRoleEvent } from '../application/events/iam-deleted-role.event';
-import { IamPermission } from '@app/iam/permission';
-import { IamAccount } from '@app/iam/account';
+    IamRoleId,
+    IamRoleIsMaster,
+    IamRoleName,
+    IamRolePermissionIds,
+    IamRoleUpdatedAt,
+} from '@app/iam/role/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamRole extends AggregateRoot
 {
@@ -27,8 +25,6 @@ export class IamRole extends AggregateRoot
     createdAt: IamRoleCreatedAt;
     updatedAt: IamRoleUpdatedAt;
     deletedAt: IamRoleDeletedAt;
-
-    // eager relationship
     permissions: IamPermission[];
     accounts: IamAccount[];
 
@@ -41,7 +37,6 @@ export class IamRole extends AggregateRoot
         createdAt: IamRoleCreatedAt,
         updatedAt: IamRoleUpdatedAt,
         deletedAt: IamRoleDeletedAt,
-
         permissions?: IamPermission[],
         accounts?: IamAccount[],
     )
@@ -55,13 +50,11 @@ export class IamRole extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.permissions = permissions;
         this.accounts = accounts;
     }
 
-    static register (
+    static register(
         id: IamRoleId,
         name: IamRoleName,
         isMaster: IamRoleIsMaster,
@@ -70,7 +63,6 @@ export class IamRole extends AggregateRoot
         createdAt: IamRoleCreatedAt,
         updatedAt: IamRoleUpdatedAt,
         deletedAt: IamRoleDeletedAt,
-
         permissions?: IamPermission[],
         accounts?: IamAccount[],
     ): IamRole
@@ -84,7 +76,6 @@ export class IamRole extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             permissions,
             accounts,
         );
@@ -149,8 +140,6 @@ export class IamRole extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             permissions: this.permissions?.map(item => item.toDTO()),
             accounts: this.accounts?.map(item => item.toDTO()),
         };
@@ -168,8 +157,6 @@ export class IamRole extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             permissions: this.permissions?.map(item => item.toDTO()),
             accounts: this.accounts?.map(item => item.toDTO()),
         };

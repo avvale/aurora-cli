@@ -85,7 +85,7 @@ import { IamDeleteBoundedContextsHandler } from './handlers/iam-delete-bounded-c
 // seeder
 import { IamBoundedContextSeeder } from './seeder/iam-bounded-context.seeder';
 
-export const IamBoundedContextControllers = [
+export const IamBoundedContextApiControllers = [
     IamCreateBoundedContextController,
     IamCreateBoundedContextsController,
     IamPaginateBoundedContextsController,
@@ -99,7 +99,7 @@ export const IamBoundedContextControllers = [
     IamDeleteBoundedContextsController,
 ];
 
-export const IamBoundedContextResolvers = [
+export const IamBoundedContextApiResolvers = [
     IamCreateBoundedContextResolver,
     IamCreateBoundedContextsResolver,
     IamPaginateBoundedContextsResolver,
@@ -127,6 +127,6 @@ export const IamBoundedContextApiHandlers = [
     IamDeleteBoundedContextsHandler,
 ];
 
-export const IamBoundedContextServices = [
+export const IamBoundedContextApiServices = [
     IamBoundedContextSeeder,
 ];

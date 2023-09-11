@@ -1,12 +1,7 @@
+import { IamFindPermissionQuery, IamIPermissionRepository, IamMockPermissionRepository, IamPermissionMapper } from '@app/iam/permission';
+import { IamFindPermissionQueryHandler } from '@app/iam/permission/application/find/iam-find-permission.query-handler';
+import { IamFindPermissionService } from '@app/iam/permission/application/find/iam-find-permission.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindPermissionQueryHandler } from './iam-find-permission.query-handler';
-import { IamMockPermissionRepository } from '@app/iam/permission/infrastructure/mock/iam-mock-permission.repository';
-import { IamIPermissionRepository } from '@app/iam/permission/domain/iam-permission.repository';
-import { IamPermissionMapper } from '@app/iam/permission/domain/iam-permission.mapper';
-import { IamFindPermissionQuery } from './iam-find-permission.query';
-import { IamFindPermissionService } from './iam-find-permission.service';
 
 describe('IamFindPermissionQueryHandler', () =>
 {

@@ -2,6 +2,8 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { IamModule } from '@api/iam/iam.module';
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamIUserRepository, iamMockUserData, IamMockUserSeeder } from '@app/iam/user';
 import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
@@ -59,7 +61,9 @@ describe('user', () =>
                 IamMockUserSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +90,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for IamUserId must be defined, can not be null');
             });
     });
 
@@ -102,7 +106,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserAccountId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for IamUserAccountId must be defined, can not be null');
             });
     });
 

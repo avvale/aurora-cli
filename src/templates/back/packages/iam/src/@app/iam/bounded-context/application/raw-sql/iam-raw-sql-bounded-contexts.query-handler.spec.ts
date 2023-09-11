@@ -1,12 +1,7 @@
+import { IamBoundedContextMapper, IamIBoundedContextRepository, IamMockBoundedContextRepository, IamRawSQLBoundedContextsQuery } from '@app/iam/bounded-context';
+import { IamRawSQLBoundedContextsQueryHandler } from '@app/iam/bounded-context/application/raw-sql/iam-raw-sql-bounded-contexts.query-handler';
+import { IamRawSQLBoundedContextsService } from '@app/iam/bounded-context/application/raw-sql/iam-raw-sql-bounded-contexts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamMockBoundedContextRepository } from '@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.repository';
-import { IamIBoundedContextRepository } from '@app/iam/bounded-context/domain/iam-bounded-context.repository';
-import { IamBoundedContextMapper } from '@app/iam/bounded-context/domain/iam-bounded-context.mapper';
-import { IamRawSQLBoundedContextsQueryHandler } from './iam-raw-sql-bounded-contexts.query-handler';
-import { IamRawSQLBoundedContextsQuery } from './iam-raw-sql-bounded-contexts.query';
-import { IamRawSQLBoundedContextsService } from './iam-raw-sql-bounded-contexts.service';
 
 describe('RawSQLBoundedContextsQueryHandler', () =>
 {

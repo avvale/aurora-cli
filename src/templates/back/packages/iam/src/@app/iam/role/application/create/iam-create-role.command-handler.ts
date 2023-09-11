@@ -1,17 +1,14 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IamCreateRoleCommand } from './iam-create-role.command';
-import { IamCreateRoleService } from './iam-create-role.service';
+import { IamCreateRoleCommand } from '@app/iam/role';
+import { IamCreateRoleService } from '@app/iam/role/application/create/iam-create-role.service';
 import {
-    IamRoleId,
-    IamRoleName,
-    IamRoleIsMaster,
-    IamRolePermissionIds,
     IamRoleAccountIds,
-    IamRoleCreatedAt,
-    IamRoleUpdatedAt,
-    IamRoleDeletedAt,
-} from '../../domain/value-objects';
+    IamRoleId,
+    IamRoleIsMaster,
+    IamRoleName,
+    IamRolePermissionIds,
+} from '@app/iam/role/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateRoleCommand)
 export class IamCreateRoleCommandHandler implements ICommandHandler<IamCreateRoleCommand>

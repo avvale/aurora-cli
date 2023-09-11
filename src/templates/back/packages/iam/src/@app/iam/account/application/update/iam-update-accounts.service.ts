@@ -1,28 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { IamAccount, IamAddAccountsContextEvent, IamIAccountRepository } from '@app/iam/account';
 import {
-    IamAccountId,
-    IamAccountType,
-    IamAccountCode,
-    IamAccountEmail,
-    IamAccountIsActive,
     IamAccountClientId,
-    IamAccountScopes,
+    IamAccountCode,
+    IamAccountCreatedAt,
     IamAccountDApplicationCodes,
+    IamAccountDeletedAt,
     IamAccountDPermissions,
     IamAccountDTenants,
+    IamAccountEmail,
+    IamAccountId,
+    IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountScopes,
     IamAccountTenantIds,
-    IamAccountCreatedAt,
+    IamAccountType,
     IamAccountUpdatedAt,
-    IamAccountDeletedAt,
-} from '../../domain/value-objects';
-import { IamIAccountRepository } from '../../domain/iam-account.repository';
-import { IamAccount } from '../../domain/iam-account.aggregate';
-import { IamAddAccountsContextEvent } from '../events/iam-add-accounts-context.event';
+} from '@app/iam/account/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamUpdateAccountsService
@@ -72,7 +69,6 @@ export class IamUpdateAccountsService
             new IamAccountUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

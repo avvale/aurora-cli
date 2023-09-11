@@ -24,7 +24,7 @@ export class IamCreateTenantsService
     ) {}
 
     async main(
-        tenants: {
+        payload: {
             id: IamTenantId;
             name: IamTenantName;
             code: IamTenantCode;
@@ -37,7 +37,7 @@ export class IamCreateTenantsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateTenants = tenants.map(tenant => IamTenant.register(
+        const aggregateTenants = payload.map(tenant => IamTenant.register(
             tenant.id,
             tenant.name,
             tenant.code,

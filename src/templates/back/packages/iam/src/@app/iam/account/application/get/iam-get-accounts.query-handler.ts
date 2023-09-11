@@ -1,8 +1,6 @@
+import { IamAccountMapper, IamAccountResponse, IamGetAccountsQuery } from '@app/iam/account';
+import { IamGetAccountsService } from '@app/iam/account/application/get/iam-get-accounts.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IamAccountResponse } from '../../domain/iam-account.response';
-import { IamAccountMapper } from '../../domain/iam-account.mapper';
-import { IamGetAccountsQuery } from './iam-get-accounts.query';
-import { IamGetAccountsService } from './iam-get-accounts.service';
 
 @QueryHandler(IamGetAccountsQuery)
 export class IamGetAccountsQueryHandler implements IQueryHandler<IamGetAccountsQuery>
@@ -15,10 +13,12 @@ export class IamGetAccountsQueryHandler implements IQueryHandler<IamGetAccountsQ
 
     async execute(query: IamGetAccountsQuery): Promise<IamAccountResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getAccountsService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getAccountsService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

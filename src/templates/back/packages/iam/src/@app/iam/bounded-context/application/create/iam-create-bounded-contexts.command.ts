@@ -1,6 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  IamCreateBoundedContextsCommand
+export class IamCreateBoundedContextsCommand
 {
     constructor(
         public readonly payload: {

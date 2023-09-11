@@ -1,10 +1,7 @@
+import { IamIPermissionRepository, IamMockPermissionRepository } from '@app/iam/permission';
+import { IamFindPermissionService } from '@app/iam/permission/application/find/iam-find-permission.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { IamFindPermissionService } from './iam-find-permission.service';
-import { IamIPermissionRepository } from '../../domain/iam-permission.repository';
-import { IamMockPermissionRepository } from '../../infrastructure/mock/iam-mock-permission.repository';
 
 describe('IamFindPermissionService', () =>
 {

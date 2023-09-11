@@ -1,5 +1,5 @@
+import { IamUpdatedAccountEvent } from '@app/iam/account';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { IamUpdatedAccountEvent } from './iam-updated-account.event';
 
 @EventsHandler(IamUpdatedAccountEvent)
 export class IamUpdatedAccountEventHandler implements IEventHandler<IamUpdatedAccountEvent>

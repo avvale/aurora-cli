@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { IamBoundedContext } from './iam-bounded-context.aggregate';
 import { IamBoundedContextId } from './value-objects';
+import { IamBoundedContext } from '@app/iam/bounded-context';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class IamIBoundedContextRepository implements IRepository<IamBoundedContext>
 {
@@ -30,6 +30,8 @@ export abstract class IamIBoundedContextRepository implements IRepository<IamBou
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<IamBoundedContext | null>;
 
@@ -124,6 +126,8 @@ export abstract class IamIBoundedContextRepository implements IRepository<IamBou
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

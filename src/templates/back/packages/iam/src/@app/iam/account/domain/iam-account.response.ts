@@ -1,7 +1,7 @@
-import { IamUserResponse } from '@app/iam/user';
-import { OAuthClientResponse } from '@app/o-auth/client';
 import { IamRoleResponse } from '@app/iam/role';
 import { IamTenantResponse } from '@app/iam/tenant';
+import { IamUserResponse } from '@app/iam/user';
+import { OAuthClientResponse } from '@app/o-auth/client';
 
 export class IamAccountResponse
 {

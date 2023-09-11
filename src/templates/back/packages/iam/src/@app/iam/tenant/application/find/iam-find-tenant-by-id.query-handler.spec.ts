@@ -1,13 +1,7 @@
+import { IamFindTenantByIdQuery, IamITenantRepository, iamMockTenantData, IamMockTenantRepository, IamTenantMapper } from '@app/iam/tenant';
+import { IamFindTenantByIdQueryHandler } from '@app/iam/tenant/application/find/iam-find-tenant-by-id.query-handler';
+import { IamFindTenantByIdService } from '@app/iam/tenant/application/find/iam-find-tenant-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamFindTenantByIdQueryHandler } from './iam-find-tenant-by-id.query-handler';
-import { IamMockTenantRepository } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.repository';
-import { iamMockTenantData } from '@app/iam/tenant/infrastructure/mock/iam-mock-tenant.data';
-import { IamITenantRepository } from '@app/iam/tenant/domain/iam-tenant.repository';
-import { IamTenantMapper } from '@app/iam/tenant/domain/iam-tenant.mapper';
-import { IamFindTenantByIdQuery } from './iam-find-tenant-by-id.query';
-import { IamFindTenantByIdService } from './iam-find-tenant-by-id.service';
 
 describe('IamFindTenantByIdQueryHandler', () =>
 {

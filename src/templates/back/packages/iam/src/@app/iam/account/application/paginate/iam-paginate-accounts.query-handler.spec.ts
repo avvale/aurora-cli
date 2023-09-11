@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { IamIAccountRepository, IamMockAccountRepository, IamPaginateAccountsQuery } from '@app/iam/account';
+import { IamPaginateAccountsQueryHandler } from '@app/iam/account/application/paginate/iam-paginate-accounts.query-handler';
+import { IamPaginateAccountsService } from '@app/iam/account/application/paginate/iam-paginate-accounts.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { IamPaginateAccountsQueryHandler } from './iam-paginate-accounts.query-handler';
-import { IamMockAccountRepository } from '@app/iam/account/infrastructure/mock/iam-mock-account.repository';
-import { IamIAccountRepository } from '@app/iam/account/domain/iam-account.repository';
-import { IamAccountMapper } from '@app/iam/account/domain/iam-account.mapper';
-import { IamPaginateAccountsQuery } from './iam-paginate-accounts.query';
-import { IamPaginateAccountsService } from './iam-paginate-accounts.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamPaginateAccountsQueryHandler', () =>
 {
     let queryHandler: IamPaginateAccountsQueryHandler;
     let service: IamPaginateAccountsService;
     let repository: IamMockAccountRepository;
-    let mapper: IamAccountMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('IamPaginateAccountsQueryHandler', () =>
         queryHandler = module.get<IamPaginateAccountsQueryHandler>(IamPaginateAccountsQueryHandler);
         service = module.get<IamPaginateAccountsService>(IamPaginateAccountsService);
         repository = <IamMockAccountRepository>module.get<IamIAccountRepository>(IamIAccountRepository);
-        mapper = new IamAccountMapper();
     });
 
     describe('main', () =>

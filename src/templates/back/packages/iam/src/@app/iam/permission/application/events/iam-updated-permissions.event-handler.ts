@@ -1,5 +1,5 @@
+import { IamUpdatedPermissionsEvent } from '@app/iam/permission';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { IamUpdatedPermissionsEvent } from './iam-updated-permissions.event';
 
 @EventsHandler(IamUpdatedPermissionsEvent)
 export class IamUpdatedPermissionsEventHandler implements IEventHandler<IamUpdatedPermissionsEvent>

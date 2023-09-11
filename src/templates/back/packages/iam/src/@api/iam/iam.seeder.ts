@@ -8,7 +8,8 @@ import { IamBoundedContextHelper } from '@app/iam/bounded-context';
 import { IamPermissionHelper } from '@app/iam/permission';
 import { IamAccount, IamCreateAccountsCommand, IamFindAccountByIdQuery } from '@app/iam/account';
 import { IamCreateUsersCommand } from '@app/iam/user';
-import { IamCreateRolesCommand, IamCreateRolesAccountsCommand } from '@app/iam/role';
+import { IamCreateRolesCommand } from '@app/iam/role';
+import { IamCreateRolesAccountsCommand } from '@app/iam/role-account';
 
 @Injectable()
 export class IamSeeder

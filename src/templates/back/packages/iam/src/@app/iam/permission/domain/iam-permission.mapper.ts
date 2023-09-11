@@ -1,17 +1,16 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { IamPermission } from './iam-permission.aggregate';
-import { IamPermissionResponse } from './iam-permission.response';
+import { IamBoundedContextMapper } from '@app/iam/bounded-context';
+import { IamPermission, IamPermissionResponse } from '@app/iam/permission';
 import {
+    IamPermissionBoundedContextId,
+    IamPermissionCreatedAt,
+    IamPermissionDeletedAt,
     IamPermissionId,
     IamPermissionName,
-    IamPermissionBoundedContextId,
     IamPermissionRoleIds,
-    IamPermissionCreatedAt,
     IamPermissionUpdatedAt,
-    IamPermissionDeletedAt,
-} from './value-objects';
-import { IamBoundedContextMapper } from '@app/iam/bounded-context';
+} from '@app/iam/permission/domain/value-objects';
 import { IamRoleMapper } from '@app/iam/role';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class IamPermissionMapper implements IMapper
 {

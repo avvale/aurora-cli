@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { IamITenantRepository, IamTenant } from '@app/iam/tenant';
+import { IamTenantId } from '@app/iam/tenant/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { IamITenantRepository } from '../../domain/iam-tenant.repository';
-import { IamTenant } from '../../domain/iam-tenant.aggregate';
-import { IamTenantId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamFindTenantByIdService

@@ -1,19 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { IamAddPermissionsContextEvent, IamIPermissionRepository, IamPermission } from '@app/iam/permission';
 import {
+    IamPermissionBoundedContextId,
+    IamPermissionCreatedAt,
+    IamPermissionDeletedAt,
     IamPermissionId,
     IamPermissionName,
-    IamPermissionBoundedContextId,
     IamPermissionRoleIds,
-    IamPermissionCreatedAt,
     IamPermissionUpdatedAt,
-    IamPermissionDeletedAt,
-} from '../../domain/value-objects';
-import { IamIPermissionRepository } from '../../domain/iam-permission.repository';
-import { IamPermission } from '../../domain/iam-permission.aggregate';
-import { IamAddPermissionsContextEvent } from '../events/iam-add-permissions-context.event';
+} from '@app/iam/permission/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamUpdatePermissionsService
@@ -45,7 +42,6 @@ export class IamUpdatePermissionsService
             new IamPermissionUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

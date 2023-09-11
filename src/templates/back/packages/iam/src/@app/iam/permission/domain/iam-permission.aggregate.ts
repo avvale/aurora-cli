@@ -1,20 +1,18 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { IamBoundedContext } from '@app/iam/bounded-context';
+import { IamCreatedPermissionEvent, IamDeletedPermissionEvent, IamUpdatedPermissionEvent } from '@app/iam/permission';
 import {
+    IamPermissionBoundedContextId,
+    IamPermissionCreatedAt,
+    IamPermissionDeletedAt,
     IamPermissionId,
     IamPermissionName,
-    IamPermissionBoundedContextId,
     IamPermissionRoleIds,
-    IamPermissionCreatedAt,
     IamPermissionUpdatedAt,
-    IamPermissionDeletedAt,
-} from './value-objects';
-import { IamCreatedPermissionEvent } from '../application/events/iam-created-permission.event';
-import { IamUpdatedPermissionEvent } from '../application/events/iam-updated-permission.event';
-import { IamDeletedPermissionEvent } from '../application/events/iam-deleted-permission.event';
-import { IamBoundedContext } from '@app/iam/bounded-context';
+} from '@app/iam/permission/domain/value-objects';
 import { IamRole } from '@app/iam/role';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamPermission extends AggregateRoot
 {
@@ -25,8 +23,6 @@ export class IamPermission extends AggregateRoot
     createdAt: IamPermissionCreatedAt;
     updatedAt: IamPermissionUpdatedAt;
     deletedAt: IamPermissionDeletedAt;
-
-    // eager relationship
     boundedContext: IamBoundedContext;
     roles: IamRole[];
 
@@ -38,7 +34,6 @@ export class IamPermission extends AggregateRoot
         createdAt: IamPermissionCreatedAt,
         updatedAt: IamPermissionUpdatedAt,
         deletedAt: IamPermissionDeletedAt,
-
         boundedContext?: IamBoundedContext,
         roles?: IamRole[],
     )
@@ -51,13 +46,11 @@ export class IamPermission extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.boundedContext = boundedContext;
         this.roles = roles;
     }
 
-    static register (
+    static register(
         id: IamPermissionId,
         name: IamPermissionName,
         boundedContextId: IamPermissionBoundedContextId,
@@ -65,7 +58,6 @@ export class IamPermission extends AggregateRoot
         createdAt: IamPermissionCreatedAt,
         updatedAt: IamPermissionUpdatedAt,
         deletedAt: IamPermissionDeletedAt,
-
         boundedContext?: IamBoundedContext,
         roles?: IamRole[],
     ): IamPermission
@@ -78,7 +70,6 @@ export class IamPermission extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             boundedContext,
             roles,
         );
@@ -139,8 +130,6 @@ export class IamPermission extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             boundedContext: this.boundedContext?.toDTO(),
             roles: this.roles?.map(item => item.toDTO()),
         };
@@ -157,8 +146,6 @@ export class IamPermission extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             boundedContext: this.boundedContext?.toDTO(),
             roles: this.roles?.map(item => item.toDTO()),
         };

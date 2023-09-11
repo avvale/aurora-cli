@@ -1,9 +1,6 @@
+import { IamIUserRepository, IamUser } from '@app/iam/user';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIUserRepository } from '../../domain/iam-user.repository';
-import { IamUser } from '../../domain/iam-user.aggregate';
 
 @Injectable()
 export class IamPaginateUsersService

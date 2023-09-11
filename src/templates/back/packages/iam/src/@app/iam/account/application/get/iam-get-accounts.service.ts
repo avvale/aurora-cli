@@ -1,8 +1,6 @@
+import { IamAccount, IamIAccountRepository } from '@app/iam/account';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIAccountRepository } from '../../domain/iam-account.repository';
-import { IamAccount } from '../../domain/iam-account.aggregate';
 
 @Injectable()
 export class IamGetAccountsService

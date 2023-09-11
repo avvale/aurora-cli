@@ -1,9 +1,6 @@
+import { IamIRoleRepository, IamRole } from '@app/iam/role';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { IamIRoleRepository } from '../../domain/iam-role.repository';
-import { IamRole } from '../../domain/iam-role.aggregate';
 
 @Injectable()
 export class IamPaginateRolesService

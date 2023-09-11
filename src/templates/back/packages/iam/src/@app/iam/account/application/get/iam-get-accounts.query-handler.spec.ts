@@ -1,12 +1,7 @@
+import { IamAccountMapper, IamGetAccountsQuery, IamIAccountRepository, IamMockAccountRepository } from '@app/iam/account';
+import { IamGetAccountsQueryHandler } from '@app/iam/account/application/get/iam-get-accounts.query-handler';
+import { IamGetAccountsService } from '@app/iam/account/application/get/iam-get-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { IamGetAccountsQueryHandler } from './iam-get-accounts.query-handler';
-import { IamMockAccountRepository } from '@app/iam/account/infrastructure/mock/iam-mock-account.repository';
-import { IamIAccountRepository } from '@app/iam/account/domain/iam-account.repository';
-import { IamAccountMapper } from '@app/iam/account/domain/iam-account.mapper';
-import { IamGetAccountsQuery } from './iam-get-accounts.query';
-import { IamGetAccountsService } from './iam-get-accounts.service';
 
 describe('GetAccountsQueryHandler', () =>
 {

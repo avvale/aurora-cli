@@ -1,20 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { IamITenantRepository } from '@app/iam/tenant/domain/iam-tenant.repository';
+import { IamITenantRepository, iamMockTenantData, IamTenant } from '@app/iam/tenant';
 import {
-    IamTenantId,
-    IamTenantName,
-    IamTenantCode,
-    IamTenantLogo,
-    IamTenantIsActive,
-    IamTenantMeta,
     IamTenantAccountIds,
+    IamTenantCode,
     IamTenantCreatedAt,
-    IamTenantUpdatedAt,
     IamTenantDeletedAt,
+    IamTenantId,
+    IamTenantIsActive,
+    IamTenantLogo,
+    IamTenantMeta,
+    IamTenantName,
+    IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
-import { IamTenant } from '../../domain/iam-tenant.aggregate';
-import { iamMockTenantData } from './iam-mock-tenant.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamMockTenantRepository extends MockRepository<IamTenant> implements IamITenantRepository
@@ -22,7 +20,6 @@ export class IamMockTenantRepository extends MockRepository<IamTenant> implement
     public readonly repository: any;
     public readonly aggregateName: string = 'IamTenant';
     public collectionSource: IamTenant[];
-    public deletedAtInstance: IamTenantDeletedAt = new IamTenantDeletedAt(null);
 
     constructor()
     {
