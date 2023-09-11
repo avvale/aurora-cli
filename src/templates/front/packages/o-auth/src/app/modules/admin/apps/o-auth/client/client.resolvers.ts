@@ -42,7 +42,7 @@ export const clientNewResolver: ResolveFn<{
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
     const clientService = inject(ClientService);
 
     actionService.action({
@@ -54,15 +54,15 @@ export const clientNewResolver: ResolveFn<{
 };
 
 export const clientEditResolver: ResolveFn<{
-	object: OAuthClient;
+    object: OAuthClient;
     oAuthGetScopes: OAuthScope[];
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const clientService = inject(ClientService);
+    const actionService = inject(ActionService);
+    const clientService = inject(ClientService);
 
     actionService.action({
         id          : 'oAuth::client.detail.edit',

@@ -34,8 +34,8 @@ export class ScopeDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		protected readonly injector: Injector,
-		private readonly scopeService: ScopeService,
+        protected readonly injector: Injector,
+        private readonly scopeService: ScopeService,
     )
     {
         super(injector);

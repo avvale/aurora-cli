@@ -2,9 +2,9 @@ import { OAuthRefreshToken } from '../o-auth.types';
 import { RefreshTokenService } from './refresh-token.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector       : 'o-auth-refresh-token-detail',
@@ -36,8 +36,8 @@ export class RefreshTokenDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		protected readonly injector: Injector,
-		private readonly refreshTokenService: RefreshTokenService,
+        protected readonly injector: Injector,
+        private readonly refreshTokenService: RefreshTokenService,
     )
     {
         super(injector);

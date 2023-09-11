@@ -40,7 +40,7 @@ export const refreshTokenNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'oAuth::refreshToken.detail.new',
@@ -49,14 +49,14 @@ export const refreshTokenNewResolver: ResolveFn<Action> = (
 };
 
 export const refreshTokenEditResolver: ResolveFn<{
-	object: OAuthRefreshToken;
+    object: OAuthRefreshToken;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const refreshTokenService = inject(RefreshTokenService);
+    const actionService = inject(ActionService);
+    const refreshTokenService = inject(RefreshTokenService);
 
     actionService.action({
         id          : 'oAuth::refreshToken.detail.edit',

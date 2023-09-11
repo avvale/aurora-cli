@@ -118,6 +118,53 @@ export class ClientService
             );
     }
 
+    findByIdWithRelations(
+        {
+            graphqlStatement = findByIdWithRelationsQuery,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        object: OAuthClient;
+        oAuthGetScopes: OAuthScope[];
+        oAuthGetApplications: OAuthApplication[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: OAuthClient;
+                oAuthGetScopes: OAuthScope[];
+                oAuthGetApplications: OAuthApplication[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.clientSubject$.next(data.object);
+                    this.scopeService.scopesSubject$.next(data.oAuthGetScopes);
+                    this.applicationService.applicationsSubject$.next(data.oAuthGetApplications);
+                }),
+            );
+    }
+
     find(
         {
             graphqlStatement = findQuery,
@@ -196,6 +243,41 @@ export class ClientService
                 tap(data =>
                 {
                     this.clientsSubject$.next(data.objects);
+                }),
+            );
+    }
+
+    getRelations(
+        {
+            headers = {},
+        }: {
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        oAuthGetApplications: OAuthApplication[];
+        oAuthGetScopes: OAuthScope[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                oAuthGetApplications: OAuthApplication[];
+                oAuthGetScopes: OAuthScope[];
+            }>({
+                query    : getRelations,
+                variables: {},
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.applicationService.applicationsSubject$.next(data.oAuthGetApplications);
+                    this.scopeService.scopesSubject$.next(data.oAuthGetScopes);
                 }),
             );
     }
@@ -335,89 +417,5 @@ export class ClientService
                     headers,
                 },
             });
-    }
-
-    // ---- customizations ----
-    getRelations(
-        {
-            headers = {},
-        }: {
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<{
-        oAuthGetScopes: OAuthScope[];
-    }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{
-                oAuthGetScopes: OAuthScope[];
-            }>({
-                query    : getRelations,
-                variables: {},
-                context: {
-                    headers,
-                },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map(result => result.data),
-                tap(data =>
-                {
-                    this.scopeService.scopesSubject$.next(data.oAuthGetScopes);
-                }),
-            );
-    }
-
-    findByIdWithRelations(
-        {
-            graphqlStatement = findByIdWithRelationsQuery,
-            id = '',
-            constraint = {},
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            id?: string;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<{
-        object: OAuthClient;
-        oAuthGetScopes: OAuthScope[];
-        oAuthGetApplications: OAuthApplication[];
-    }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{
-                object: OAuthClient;
-                oAuthGetScopes: OAuthScope[];
-                oAuthGetApplications: OAuthApplication[];
-            }>({
-                query    : parseGqlFields(graphqlStatement, fields, constraint),
-                variables: {
-                    id,
-                    constraint,
-                },
-                context: {
-                    headers,
-                },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map(result => result.data),
-                tap((data: {
-                    object: OAuthClient;
-                    oAuthGetScopes: OAuthScope[];
-                    oAuthGetApplications: OAuthApplication[];
-                }) =>
-                {
-                    this.clientSubject$.next(data.object);
-                    this.scopeService.scopesSubject$.next(data.oAuthGetScopes);
-                    this.applicationService.applicationsSubject$.next(data.oAuthGetApplications);
-                }),
-            );
     }
 }

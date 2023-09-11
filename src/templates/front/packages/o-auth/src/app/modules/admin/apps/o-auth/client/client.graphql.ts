@@ -16,6 +16,11 @@ export const fields = `
 `;
 
 export const relationsFields = `
+    oAuthGetApplications {
+        id
+        code
+        name
+    }
     oAuthGetScopes {
         id
         code
@@ -55,6 +60,12 @@ export const getQuery = gql`
     }
 `;
 
+export const getRelations = gql`
+    query IamClientRelations {
+        ${relationsFields}
+    }
+`;
+
 export const findByIdQuery = gql`
     query OAuthFindClientById (
         $id: ID
@@ -67,6 +78,27 @@ export const findByIdQuery = gql`
             id
             #FIELDS
         }
+    }
+`;
+
+export const findByIdWithRelationsQuery = gql`
+    query OAuthFindClientById (
+        $id: ID
+        $constraint: QueryStatement
+    ) {
+        object: oAuthFindClientById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+            applications {
+                id
+                code
+                name
+            }
+        }
+        ${relationsFields}
     }
 `;
 
@@ -151,43 +183,6 @@ export const deleteMutation = gql`
             constraint: $constraint
         ) {
             ${fields}
-        }
-    }
-`;
-
-// ---- customizations ----
-export const getRelations = gql`
-    query IamClientRelations {
-        ${relationsFields}
-    }
-`;
-
-export const findByIdWithRelationsQuery = gql`
-    query OAuthFindClientById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindClientById (
-            id: $id
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-            applications {
-                id
-                code
-                name
-            }
-        }
-        oAuthGetScopes {
-            id
-            code
-            name
-        }
-        oAuthGetApplications {
-            id
-            code
-            name
         }
     }
 `;

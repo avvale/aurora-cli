@@ -6,6 +6,8 @@ aggregateName: OAuthScope
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+solidIcon: mat_solid:ads_click
+outlineIcon: mat_outline:ads_click
 aggregateProperties:
   - name: id
     type: id
@@ -31,4 +33,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []

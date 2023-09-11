@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.html",
-            "integrity": "sha1:e810b6fa3ad4d85604980ae786f32fc175f494c6"
+            "integrity": "sha1:d208afd52e85aabe2900fac0c4406a9b01e1ecd6"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.ts",
-            "integrity": "sha1:5b24b2e48c1adfcb865a6ce6171d06ea3940f950"
+            "integrity": "sha1:8954287d7c2360c3de00c0c572cbbcefe22f98ca"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.html",
-            "integrity": "sha1:001350dfad359d70dd19178d9f4470c6cbb9d9ab"
+            "integrity": "sha1:2edd3829518ecc650e6dae1119fa6852ebd05122"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.resolvers.ts",
-            "integrity": "sha1:2359548f40673a4af9a9388efc50b93e60f07479"
+            "integrity": "sha1:556fad074a09dda4db5ea0b3e9e5ddcaa8d18e05"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.service.ts",

@@ -36,8 +36,8 @@ export class ApplicationDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly applicationService: ApplicationService,
-		protected readonly injector: Injector,
+        private readonly applicationService: ApplicationService,
+        protected readonly injector: Injector,
     )
     {
         super(injector);

@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { OAuthAccessToken } from '../o-auth.types';
 import { AccessTokenService } from './access-token.service';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector       : 'o-auth-access-token-detail',
@@ -36,8 +36,8 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly accessTokenService: AccessTokenService,
-		protected readonly injector: Injector,
+        private readonly accessTokenService: AccessTokenService,
+        protected readonly injector: Injector,
     )
     {
         super(injector);

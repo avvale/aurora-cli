@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-detail.component.html",
-            "integrity": "sha1:f8d93814a59ae43761d2811a5c423d361edb8ef6"
+            "integrity": "sha1:373a964f9998b95c1860a5bbfc756bcb8f111abd"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-detail.component.ts",
-            "integrity": "sha1:eeb8c6d0cd77cda3e4a02e8b3b77ab2b32bd69da"
+            "integrity": "sha1:d588c83365ababc2e6557e2334ef14cfb772b574"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-list.component.html",
-            "integrity": "sha1:f41fdc3b3a419b92ab95d511820abe4050e70a25"
+            "integrity": "sha1:41d753e3a65fbed0880b4a8cfd3cc1187048293a"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-list.component.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope.resolvers.ts",
-            "integrity": "sha1:04a7f23ea722a59f532499dbcc043170b1195cbe"
+            "integrity": "sha1:9ce9143818397ad2389eb4c66d4c23c4dc3227c0"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope.service.ts",

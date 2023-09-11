@@ -1,3 +1,4 @@
+import { ApplicationService } from '../application/application.service';
 import { OAuthApplication, OAuthClient, OAuthClientGrantType, OAuthScope } from '../o-auth.types';
 import { ClientService } from './client.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
@@ -7,7 +8,6 @@ import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
 // ---- customizations ----
 import { ScopeService } from '../scope/scope.service';
-import { ApplicationService } from '../application/application.service';
 import { KeyValuePipe, NgForOf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -26,7 +26,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class ClientDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
-    applications$: Observable<OAuthApplication[]>;
     scopes$: Observable<OAuthScope[]>;
     oAuthClientGrantType = OAuthClientGrantType;
 
@@ -36,6 +35,9 @@ export class ClientDetailComponent extends ViewDetailComponent
     // It should not be used habitually, since the source of truth is the form.
     managedObject: OAuthClient;
 
+    // relationships
+    applications$: Observable<OAuthApplication[]>;
+
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
@@ -44,10 +46,10 @@ export class ClientDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
-        private readonly clientService: ClientService,
-        private readonly scopeService: ScopeService,
         private readonly applicationService: ApplicationService,
+        private readonly clientService: ClientService,
+        protected readonly injector: Injector,
+        private readonly scopeService: ScopeService,
     )
     {
         super(injector);
@@ -57,8 +59,9 @@ export class ClientDetailComponent extends ViewDetailComponent
     // the parent class you can use instead of ngOnInit
     init(): void
     {
-        this.scopes$ = this.scopeService.scopes$;
+        /**/
         this.applications$ = this.applicationService.applications$;
+        this.scopes$ = this.scopeService.scopes$;
     }
 
     onSubmit($event): void
@@ -97,11 +100,11 @@ export class ClientDetailComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             grantType: ['', [Validators.required]],
+            applicationIds: [],
             name: ['', [Validators.required, Validators.maxLength(255)]],
             secret: ['', [Validators.required, Validators.maxLength(90)]],
             authUrl: ['', [Validators.maxLength(2048)]],
             redirect: ['', [Validators.maxLength(2048)]],
-            applicationIds: [],
             scopeOptions: [],
             expiredAccessToken: [null, [Validators.maxLength(10)]],
             expiredRefreshToken: [null, [Validators.maxLength(10)]],
@@ -129,7 +132,7 @@ export class ClientDetailComponent extends ViewDetailComponent
                         this.managedObject = item;
                         this.fg.patchValue(item);
 
-                        // set many to many associations
+                        // set many to many applications associations
                         this.fg.get('applicationIds').setValue(item.applications.map(application => application.id));
                     });
                 break;

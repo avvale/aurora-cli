@@ -6,6 +6,8 @@ aggregateName: OAuthApplication
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+solidIcon: mat_solid:apps
+outlineIcon: mat_outline:apps
 aggregateProperties:
   - name: id
     type: id
@@ -36,13 +38,31 @@ aggregateProperties:
     relationship:
       type: many-to-many
       singularName: client
-      aggregate: OAuthClient
+      aggregateName: OAuthClient
       modulePath: o-auth/client
       avoidConstraint: true
       pivot:
-        aggregate: OAuthApplicationsClients
-        modulePath: o-auth/application
-        fileName: applications-clients
+        boundedContextName: o-auth
+        moduleName: application-client
+        moduleNames: applications-clients
+        aggregateName: OAuthApplicationClient
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: applicationId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: OAuthApplication
+            modulePath: o-auth/application
+          - name: clientId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: OAuthClient
+            modulePath: o-auth/client
   - name: createdAt
     type: timestamp
     nullable: true
