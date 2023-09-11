@@ -6,6 +6,9 @@ aggregateName: IamRole
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+front:
+  solidIcon: mat_solid:groups
+  outlineIcon: mat_outline:groups
 aggregateProperties:
   - name: id
     type: id
@@ -24,6 +27,8 @@ aggregateProperties:
   - name: permissions
     type: relationship
     nullable: true
+    webComponent:
+      type: grid-select-multiple-elements
     relationship:
       type: many-to-many
       singularName: permission
@@ -52,8 +57,6 @@ aggregateProperties:
             nullable: false
             aggregateName: IamRole
             modulePath: iam/role
-    webComponent:
-      type: grid-select-multiple-elements
   - name: accounts
     type: relationship
     nullable: true
