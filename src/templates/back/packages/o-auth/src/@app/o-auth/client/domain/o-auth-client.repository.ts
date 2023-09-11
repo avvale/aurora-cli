@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { OAuthClient } from './o-auth-client.aggregate';
 import { OAuthClientId } from './value-objects';
+import { OAuthClient } from '@app/o-auth/client';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
 {
@@ -30,6 +30,8 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<OAuthClient | null>;
 
@@ -124,6 +126,8 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

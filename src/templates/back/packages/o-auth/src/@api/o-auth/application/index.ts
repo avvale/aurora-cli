@@ -85,7 +85,7 @@ import { OAuthDeleteApplicationsHandler } from './handlers/o-auth-delete-applica
 // seeder
 import { OAuthApplicationSeeder } from './seeder/o-auth-application.seeder';
 
-export const OAuthApplicationControllers = [
+export const OAuthApplicationApiControllers = [
     OAuthCreateApplicationController,
     OAuthCreateApplicationsController,
     OAuthPaginateApplicationsController,
@@ -99,7 +99,7 @@ export const OAuthApplicationControllers = [
     OAuthDeleteApplicationsController,
 ];
 
-export const OAuthApplicationResolvers = [
+export const OAuthApplicationApiResolvers = [
     OAuthCreateApplicationResolver,
     OAuthCreateApplicationsResolver,
     OAuthPaginateApplicationsResolver,
@@ -127,6 +127,6 @@ export const OAuthApplicationApiHandlers = [
     OAuthDeleteApplicationsHandler,
 ];
 
-export const OAuthApplicationServices = [
+export const OAuthApplicationApiServices = [
     OAuthApplicationSeeder,
 ];

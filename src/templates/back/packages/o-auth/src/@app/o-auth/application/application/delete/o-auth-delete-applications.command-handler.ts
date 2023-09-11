@@ -1,6 +1,6 @@
+import { OAuthDeleteApplicationsCommand } from '@app/o-auth/application';
+import { OAuthDeleteApplicationsService } from '@app/o-auth/application/application/delete/o-auth-delete-applications.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteApplicationsCommand } from './o-auth-delete-applications.command';
-import { OAuthDeleteApplicationsService } from './o-auth-delete-applications.service';
 
 @CommandHandler(OAuthDeleteApplicationsCommand)
 export class OAuthDeleteApplicationsCommandHandler implements ICommandHandler<OAuthDeleteApplicationsCommand>

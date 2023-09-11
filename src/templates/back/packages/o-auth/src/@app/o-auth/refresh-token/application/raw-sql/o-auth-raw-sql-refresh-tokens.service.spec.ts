@@ -1,10 +1,7 @@
+import { OAuthIRefreshTokenRepository, OAuthMockRefreshTokenRepository } from '@app/o-auth/refresh-token';
+import { OAuthRawSQLRefreshTokensService } from '@app/o-auth/refresh-token/application/raw-sql/o-auth-raw-sql-refresh-tokens.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthRawSQLRefreshTokensService } from './o-auth-raw-sql-refresh-tokens.service';
-import { OAuthIRefreshTokenRepository } from '../../domain/o-auth-refresh-token.repository';
-import { OAuthMockRefreshTokenRepository } from '../../infrastructure/mock/o-auth-mock-refresh-token.repository';
 
 describe('OAuthRawSQLRefreshTokensService ', () =>
 {

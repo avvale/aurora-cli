@@ -1,20 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockScopeData } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.data';
-import { OAuthUpsertScopeService } from './o-auth-upsert-scope.service';
+import { OAuthIScopeRepository, oAuthMockScopeData, OAuthMockScopeRepository } from '@app/o-auth/scope';
+import { OAuthUpsertScopeService } from '@app/o-auth/scope/application/upsert/o-auth-upsert-scope.service';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
+    OAuthScopeId,
     OAuthScopeName,
-    OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
-    OAuthScopeDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthIScopeRepository } from '../../domain/o-auth-scope.repository';
-import { OAuthMockScopeRepository } from '../../infrastructure/mock/o-auth-mock-scope.repository';
+} from '@app/o-auth/scope/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpsertScopeService', () =>
 

@@ -1,15 +1,11 @@
+import { OAuthDeleteRefreshTokenByIdCommand, oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
+import { OAuthDeleteRefreshTokenByIdCommandHandler } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-token-by-id.command-handler';
+import { OAuthDeleteRefreshTokenByIdService } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-token-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteRefreshTokenByIdCommandHandler } from './o-auth-delete-refresh-token-by-id.command-handler';
-import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.data';
-import { OAuthDeleteRefreshTokenByIdCommand } from './o-auth-delete-refresh-token-by-id.command';
-import { OAuthDeleteRefreshTokenByIdService } from './o-auth-delete-refresh-token-by-id.service';
 
 describe('OAuthDeleteRefreshTokenByIdCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteRefreshTokenByIdCommandHandler;
-    let service: OAuthDeleteRefreshTokenByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('OAuthDeleteRefreshTokenByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteRefreshTokenByIdCommandHandler>(OAuthDeleteRefreshTokenByIdCommandHandler);
-        service = module.get<OAuthDeleteRefreshTokenByIdService>(OAuthDeleteRefreshTokenByIdService);
     });
 
     describe('main', () =>

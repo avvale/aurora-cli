@@ -1,9 +1,6 @@
+import { OAuthClient, OAuthIClientRepository } from '@app/o-auth/client';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { OAuthIClientRepository } from '../../domain/o-auth-client.repository';
-import { OAuthClient } from '../../domain/o-auth-client.aggregate';
 
 @Injectable()
 export class OAuthPaginateClientsService

@@ -1,10 +1,7 @@
+import { OAuthIScopeRepository, OAuthMockScopeRepository } from '@app/o-auth/scope';
+import { OAuthPaginateScopesService } from '@app/o-auth/scope/application/paginate/o-auth-paginate-scopes.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthPaginateScopesService } from './o-auth-paginate-scopes.service';
-import { OAuthIScopeRepository } from '../../domain/o-auth-scope.repository';
-import { OAuthMockScopeRepository } from '../../infrastructure/mock/o-auth-mock-scope.repository';
 
 describe('OAuthPaginateScopesService', () =>
 {

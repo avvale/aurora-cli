@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthIRefreshTokenRepository, OAuthMockRefreshTokenRepository, OAuthPaginateRefreshTokensQuery } from '@app/o-auth/refresh-token';
+import { OAuthPaginateRefreshTokensQueryHandler } from '@app/o-auth/refresh-token/application/paginate/o-auth-paginate-refresh-tokens.query-handler';
+import { OAuthPaginateRefreshTokensService } from '@app/o-auth/refresh-token/application/paginate/o-auth-paginate-refresh-tokens.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthPaginateRefreshTokensQueryHandler } from './o-auth-paginate-refresh-tokens.query-handler';
-import { OAuthMockRefreshTokenRepository } from '@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.repository';
-import { OAuthIRefreshTokenRepository } from '@app/o-auth/refresh-token/domain/o-auth-refresh-token.repository';
-import { OAuthRefreshTokenMapper } from '@app/o-auth/refresh-token/domain/o-auth-refresh-token.mapper';
-import { OAuthPaginateRefreshTokensQuery } from './o-auth-paginate-refresh-tokens.query';
-import { OAuthPaginateRefreshTokensService } from './o-auth-paginate-refresh-tokens.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthPaginateRefreshTokensQueryHandler', () =>
 {
     let queryHandler: OAuthPaginateRefreshTokensQueryHandler;
     let service: OAuthPaginateRefreshTokensService;
     let repository: OAuthMockRefreshTokenRepository;
-    let mapper: OAuthRefreshTokenMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('OAuthPaginateRefreshTokensQueryHandler', () =>
         queryHandler = module.get<OAuthPaginateRefreshTokensQueryHandler>(OAuthPaginateRefreshTokensQueryHandler);
         service = module.get<OAuthPaginateRefreshTokensService>(OAuthPaginateRefreshTokensService);
         repository = <OAuthMockRefreshTokenRepository>module.get<OAuthIRefreshTokenRepository>(OAuthIRefreshTokenRepository);
-        mapper = new OAuthRefreshTokenMapper();
     });
 
     describe('main', () =>

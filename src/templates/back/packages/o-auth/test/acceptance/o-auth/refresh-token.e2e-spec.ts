@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { OAuthIRefreshTokenRepository, oAuthMockRefreshTokenData, OAuthMockRefreshTokenSeeder } from '@app/o-auth/refresh-token';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('refresh-token', () =>
                 OAuthMockRefreshTokenSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenAccessTokenId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenAccessTokenId must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenToken must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenToken must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenIsRevoked must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenIsRevoked must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenId must be defined, can not be undefined');
             });
     });
 
@@ -166,7 +169,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenAccessTokenId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenAccessTokenId must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +185,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenToken must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenToken must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +201,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenIsRevoked must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenIsRevoked must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +217,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenId is not allowed, must be a length of 36');
             });
     });
 
@@ -230,7 +233,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenAccessTokenId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenAccessTokenId is not allowed, must be a length of 36');
             });
     });
 
@@ -246,7 +249,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenIsRevoked has to be a boolean value');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenIsRevoked has to be a boolean value');
             });
     });
     test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenExpiresAt has to be a timestamp value', () =>
@@ -261,7 +264,7 @@ describe('refresh-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for RefreshTokenExpiresAt has to be a timestamp value');
+                expect(res.body.message).toContain('Value for OAuthRefreshTokenExpiresAt has to be a timestamp value');
             });
     });
 

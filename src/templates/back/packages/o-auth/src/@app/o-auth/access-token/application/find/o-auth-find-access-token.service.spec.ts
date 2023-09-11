@@ -1,10 +1,7 @@
+import { OAuthIAccessTokenRepository, OAuthMockAccessTokenRepository } from '@app/o-auth/access-token';
+import { OAuthFindAccessTokenService } from '@app/o-auth/access-token/application/find/o-auth-find-access-token.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthFindAccessTokenService } from './o-auth-find-access-token.service';
-import { OAuthIAccessTokenRepository } from '../../domain/o-auth-access-token.repository';
-import { OAuthMockAccessTokenRepository } from '../../infrastructure/mock/o-auth-mock-access-token.repository';
 
 describe('OAuthFindAccessTokenService', () =>
 {

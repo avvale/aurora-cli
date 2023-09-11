@@ -1,12 +1,7 @@
+import { OAuthClientMapper, OAuthFindClientQuery, OAuthIClientRepository, OAuthMockClientRepository } from '@app/o-auth/client';
+import { OAuthFindClientQueryHandler } from '@app/o-auth/client/application/find/o-auth-find-client.query-handler';
+import { OAuthFindClientService } from '@app/o-auth/client/application/find/o-auth-find-client.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindClientQueryHandler } from './o-auth-find-client.query-handler';
-import { OAuthMockClientRepository } from '@app/o-auth/client/infrastructure/mock/o-auth-mock-client.repository';
-import { OAuthIClientRepository } from '@app/o-auth/client/domain/o-auth-client.repository';
-import { OAuthClientMapper } from '@app/o-auth/client/domain/o-auth-client.mapper';
-import { OAuthFindClientQuery } from './o-auth-find-client.query';
-import { OAuthFindClientService } from './o-auth-find-client.service';
 
 describe('OAuthFindClientQueryHandler', () =>
 {

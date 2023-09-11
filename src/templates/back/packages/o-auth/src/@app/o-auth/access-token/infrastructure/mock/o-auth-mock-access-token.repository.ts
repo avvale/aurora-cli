@@ -1,20 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { OAuthIAccessTokenRepository } from '@app/o-auth/access-token/domain/o-auth-access-token.repository';
+import { OAuthAccessToken, OAuthIAccessTokenRepository, oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import {
-    OAuthAccessTokenId,
-    OAuthAccessTokenClientId,
     OAuthAccessTokenAccountId,
-    OAuthAccessTokenToken,
-    OAuthAccessTokenName,
-    OAuthAccessTokenIsRevoked,
-    OAuthAccessTokenExpiresAt,
+    OAuthAccessTokenClientId,
     OAuthAccessTokenCreatedAt,
-    OAuthAccessTokenUpdatedAt,
     OAuthAccessTokenDeletedAt,
+    OAuthAccessTokenExpiresAt,
+    OAuthAccessTokenId,
+    OAuthAccessTokenIsRevoked,
+    OAuthAccessTokenName,
+    OAuthAccessTokenToken,
+    OAuthAccessTokenUpdatedAt,
 } from '@app/o-auth/access-token/domain/value-objects';
-import { OAuthAccessToken } from '../../domain/o-auth-access-token.aggregate';
-import { oAuthMockAccessTokenData } from './o-auth-mock-access-token.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthMockAccessTokenRepository extends MockRepository<OAuthAccessToken> implements OAuthIAccessTokenRepository
@@ -22,7 +20,6 @@ export class OAuthMockAccessTokenRepository extends MockRepository<OAuthAccessTo
     public readonly repository: any;
     public readonly aggregateName: string = 'OAuthAccessToken';
     public collectionSource: OAuthAccessToken[];
-    public deletedAtInstance: OAuthAccessTokenDeletedAt = new OAuthAccessTokenDeletedAt(null);
 
     constructor()
     {

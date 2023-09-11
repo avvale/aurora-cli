@@ -42,7 +42,6 @@ export { OAuthApplicationResponse } from './domain/o-auth-application.response';
 
 // infrastructure
 export { OAuthApplicationModel } from './infrastructure/sequelize/o-auth-sequelize-application.model';
-export { OAuthApplicationsClientsModel } from './infrastructure/sequelize/o-auth-sequelize-applications-clients.model';
 export { OAuthSequelizeApplicationRepository } from './infrastructure/sequelize/o-auth-sequelize-application.repository';
 
 // sagas
@@ -108,9 +107,6 @@ export const OAuthApplicationHandlers = [
     OAuthFindApplicationByIdQueryHandler,
     OAuthRawSQLApplicationsQueryHandler,
 
-    // ---- customizations ----
-    OAuthFindApplicationByAuthorizationHeaderQueryHandler,
-
     // events
     OAuthCreatedApplicationEventHandler,
     OAuthCreatedApplicationsEventHandler,
@@ -118,6 +114,9 @@ export const OAuthApplicationHandlers = [
     OAuthUpdatedApplicationsEventHandler,
     OAuthDeletedApplicationEventHandler,
     OAuthDeletedApplicationsEventHandler,
+
+    // ---- customizations ----
+    OAuthFindApplicationByAuthorizationHeaderQueryHandler,
 ];
 
 export const OAuthApplicationServices = [

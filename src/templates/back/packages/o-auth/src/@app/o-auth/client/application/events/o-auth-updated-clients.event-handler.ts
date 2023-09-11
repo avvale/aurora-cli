@@ -1,5 +1,5 @@
+import { OAuthUpdatedClientsEvent } from '@app/o-auth/client';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { OAuthUpdatedClientsEvent } from './o-auth-updated-clients.event';
 
 @EventsHandler(OAuthUpdatedClientsEvent)
 export class OAuthUpdatedClientsEventHandler implements IEventHandler<OAuthUpdatedClientsEvent>

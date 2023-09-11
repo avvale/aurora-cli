@@ -29,7 +29,7 @@ export class OAuthCreateClientsService
     ) {}
 
     async main(
-        clients: {
+        payload: {
             id: OAuthClientId;
             grantType: OAuthClientGrantType;
             name: OAuthClientName;
@@ -47,7 +47,7 @@ export class OAuthCreateClientsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateClients = clients.map(client => OAuthClient.register(
+        const aggregateClients = payload.map(client => OAuthClient.register(
             client.id,
             client.grantType,
             client.name,

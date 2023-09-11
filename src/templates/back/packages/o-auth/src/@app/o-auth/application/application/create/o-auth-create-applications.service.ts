@@ -23,7 +23,7 @@ export class OAuthCreateApplicationsService
     ) {}
 
     async main(
-        applications: {
+        payload: {
             id: OAuthApplicationId;
             code: OAuthApplicationCode;
             name: OAuthApplicationName;
@@ -35,7 +35,7 @@ export class OAuthCreateApplicationsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateApplications = applications.map(application => OAuthApplication.register(
+        const aggregateApplications = payload.map(application => OAuthApplication.register(
             application.id,
             application.code,
             application.name,

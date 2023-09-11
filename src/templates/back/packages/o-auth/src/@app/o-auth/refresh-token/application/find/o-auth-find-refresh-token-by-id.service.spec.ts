@@ -1,12 +1,8 @@
+import { OAuthIRefreshTokenRepository, oAuthMockRefreshTokenData, OAuthMockRefreshTokenRepository } from '@app/o-auth/refresh-token';
+import { OAuthFindRefreshTokenByIdService } from '@app/o-auth/refresh-token/application/find/o-auth-find-refresh-token-by-id.service';
+import { OAuthRefreshTokenId } from '@app/o-auth/refresh-token/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.data';
-import { OAuthFindRefreshTokenByIdService } from './o-auth-find-refresh-token-by-id.service';
-import { OAuthRefreshTokenId } from '../../domain/value-objects';
-import { OAuthIRefreshTokenRepository } from '../../domain/o-auth-refresh-token.repository';
-import { OAuthMockRefreshTokenRepository } from '../../infrastructure/mock/o-auth-mock-refresh-token.repository';
 
 describe('OAuthFindRefreshTokenByIdService', () =>
 {

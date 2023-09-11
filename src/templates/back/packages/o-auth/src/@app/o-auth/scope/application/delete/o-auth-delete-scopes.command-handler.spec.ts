@@ -1,14 +1,11 @@
+import { OAuthDeleteScopesCommand } from '@app/o-auth/scope';
+import { OAuthDeleteScopesCommandHandler } from '@app/o-auth/scope/application/delete/o-auth-delete-scopes.command-handler';
+import { OAuthDeleteScopesService } from '@app/o-auth/scope/application/delete/o-auth-delete-scopes.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteScopesCommandHandler } from './o-auth-delete-scopes.command-handler';
-import { OAuthDeleteScopesCommand } from './o-auth-delete-scopes.command';
-import { OAuthDeleteScopesService } from './o-auth-delete-scopes.service';
 
 describe('OAuthDeleteScopesCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteScopesCommandHandler;
-    let service: OAuthDeleteScopesService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('OAuthDeleteScopesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteScopesCommandHandler>(OAuthDeleteScopesCommandHandler);
-        service = module.get<OAuthDeleteScopesService>(OAuthDeleteScopesService);
     });
 
     describe('main', () =>

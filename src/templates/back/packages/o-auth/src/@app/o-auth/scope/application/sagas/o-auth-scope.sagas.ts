@@ -1,8 +1,8 @@
+import { OAuthCreatedScopeEvent } from '@app/o-auth/scope';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { OAuthCreatedScopeEvent } from '../events/o-auth-created-scope.event';
 
 @Injectable()
 export class OAuthScopeSagas

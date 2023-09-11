@@ -3,28 +3,30 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '@aurora/shared.module';
 import { OAuthSeeder } from './o-auth.seeder';
 import { OAuthModels, OAuthHandlers, OAuthServices, OAuthRepositories, OAuthSagas } from '@app/o-auth';
-import { OAuthApplicationControllers, OAuthApplicationResolvers, OAuthApplicationApiHandlers, OAuthApplicationServices } from './application';
-import { OAuthClientControllers, OAuthClientResolvers, OAuthClientApiHandlers, OAuthClientServices } from './client';
-import { OAuthAccessTokenControllers, OAuthAccessTokenResolvers, OAuthAccessTokenApiHandlers, OAuthAccessTokenServices } from './access-token';
-import { OAuthRefreshTokenControllers, OAuthRefreshTokenResolvers, OAuthRefreshTokenApiHandlers, OAuthRefreshTokenServices } from './refresh-token';
+import { OAuthApplicationApiHandlers, OAuthApplicationApiControllers, OAuthApplicationApiResolvers, OAuthApplicationApiServices } from './application';
+import { OAuthClientApiHandlers, OAuthClientApiControllers, OAuthClientApiResolvers, OAuthClientApiServices } from './client';
+import { OAuthAccessTokenApiHandlers, OAuthAccessTokenApiControllers, OAuthAccessTokenApiResolvers, OAuthAccessTokenApiServices } from './access-token';
+import { OAuthRefreshTokenApiHandlers, OAuthRefreshTokenApiControllers, OAuthRefreshTokenApiResolvers, OAuthRefreshTokenApiServices } from './refresh-token';
 import { OAuthCredentialControllers, OAuthCredentialResolvers, OAuthCredentialApiHandlers } from './credential';
-import { OAuthScopeControllers, OAuthScopeResolvers, OAuthScopeApiHandlers, OAuthScopeServices } from './scope';
+import { OAuthScopeApiHandlers, OAuthScopeApiControllers, OAuthScopeApiResolvers, OAuthScopeApiServices } from './scope';
 import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
+import { OAuthApplicationClientApiControllers, OAuthApplicationClientApiResolvers, OAuthApplicationClientApiHandlers, OAuthApplicationClientApiServices } from './application-client';
 
 @Module({
     imports: [
         SharedModule,
         SequelizeModule.forFeature([
-                ...OAuthModels
-            ])
+            ...OAuthModels,
+        ]),
     ],
     controllers: [
-        ...OAuthApplicationControllers,
-        ...OAuthClientControllers,
-        ...OAuthAccessTokenControllers,
-        ...OAuthRefreshTokenControllers,
+        ...OAuthAccessTokenApiControllers,
         ...OAuthCredentialControllers,
-        ...OAuthScopeControllers
+        ...OAuthScopeApiControllers,
+        ...OAuthRefreshTokenApiControllers,
+        ...OAuthApplicationApiControllers,
+        ...OAuthApplicationClientApiControllers,
+        ...OAuthClientApiControllers
     ],
     providers: [
         OAuthSeeder,
@@ -32,26 +34,29 @@ import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/a
         ...OAuthServices,
         ...OAuthRepositories,
         ...OAuthSagas,
-        ...OAuthApplicationResolvers,
         ...OAuthApplicationApiHandlers,
-        ...OAuthClientResolvers,
         ...OAuthClientApiHandlers,
-        ...OAuthAccessTokenResolvers,
+        ...OAuthScopeApiHandlers,
         ...OAuthAccessTokenApiHandlers,
-        ...OAuthRefreshTokenResolvers,
         ...OAuthRefreshTokenApiHandlers,
         ...OAuthCredentialResolvers,
         ...OAuthCredentialApiHandlers,
-        ...OAuthScopeResolvers,
-        ...OAuthScopeApiHandlers,
+        ...OAuthAccessTokenApiServices,
+        ...OAuthAccessTokenApiResolvers,
+        ...OAuthScopeApiResolvers,
+        ...OAuthScopeApiServices,
+        ...OAuthRefreshTokenApiResolvers,
+        ...OAuthRefreshTokenApiServices,
+        ...OAuthApplicationApiResolvers,
+        ...OAuthApplicationApiServices,
 
         // ---- customizations ----
         IamCreatePermissionsFromRolesService,
-        ...OAuthAccessTokenServices,
-        ...OAuthApplicationServices,
-        ...OAuthClientServices,
-        ...OAuthRefreshTokenServices,
-        ...OAuthScopeServices
+        ...OAuthApplicationClientApiResolvers,
+        ...OAuthApplicationClientApiHandlers,
+        ...OAuthApplicationClientApiServices,
+        ...OAuthClientApiResolvers,
+        ...OAuthClientApiServices
     ],
 })
 export class OAuthModule {}

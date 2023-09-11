@@ -1,8 +1,6 @@
+import { OAuthAccessTokenMapper, OAuthAccessTokenResponse, OAuthFindAccessTokenQuery } from '@app/o-auth/access-token';
+import { OAuthFindAccessTokenService } from '@app/o-auth/access-token/application/find/o-auth-find-access-token.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthAccessTokenResponse } from '../../domain/o-auth-access-token.response';
-import { OAuthAccessTokenMapper } from '../../domain/o-auth-access-token.mapper';
-import { OAuthFindAccessTokenQuery } from './o-auth-find-access-token.query';
-import { OAuthFindAccessTokenService } from './o-auth-find-access-token.service';
 
 @QueryHandler(OAuthFindAccessTokenQuery)
 export class OAuthFindAccessTokenQueryHandler implements IQueryHandler<OAuthFindAccessTokenQuery>

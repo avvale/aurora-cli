@@ -1,12 +1,7 @@
+import { OAuthAccessTokenMapper, OAuthFindAccessTokenQuery, OAuthIAccessTokenRepository, OAuthMockAccessTokenRepository } from '@app/o-auth/access-token';
+import { OAuthFindAccessTokenQueryHandler } from '@app/o-auth/access-token/application/find/o-auth-find-access-token.query-handler';
+import { OAuthFindAccessTokenService } from '@app/o-auth/access-token/application/find/o-auth-find-access-token.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindAccessTokenQueryHandler } from './o-auth-find-access-token.query-handler';
-import { OAuthMockAccessTokenRepository } from '@app/o-auth/access-token/infrastructure/mock/o-auth-mock-access-token.repository';
-import { OAuthIAccessTokenRepository } from '@app/o-auth/access-token/domain/o-auth-access-token.repository';
-import { OAuthAccessTokenMapper } from '@app/o-auth/access-token/domain/o-auth-access-token.mapper';
-import { OAuthFindAccessTokenQuery } from './o-auth-find-access-token.query';
-import { OAuthFindAccessTokenService } from './o-auth-find-access-token.service';
 
 describe('OAuthFindAccessTokenQueryHandler', () =>
 {

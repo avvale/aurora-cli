@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthIScopeRepository, OAuthMockScopeRepository, OAuthPaginateScopesQuery } from '@app/o-auth/scope';
+import { OAuthPaginateScopesQueryHandler } from '@app/o-auth/scope/application/paginate/o-auth-paginate-scopes.query-handler';
+import { OAuthPaginateScopesService } from '@app/o-auth/scope/application/paginate/o-auth-paginate-scopes.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthPaginateScopesQueryHandler } from './o-auth-paginate-scopes.query-handler';
-import { OAuthMockScopeRepository } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.repository';
-import { OAuthIScopeRepository } from '@app/o-auth/scope/domain/o-auth-scope.repository';
-import { OAuthScopeMapper } from '@app/o-auth/scope/domain/o-auth-scope.mapper';
-import { OAuthPaginateScopesQuery } from './o-auth-paginate-scopes.query';
-import { OAuthPaginateScopesService } from './o-auth-paginate-scopes.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthPaginateScopesQueryHandler', () =>
 {
     let queryHandler: OAuthPaginateScopesQueryHandler;
     let service: OAuthPaginateScopesService;
     let repository: OAuthMockScopeRepository;
-    let mapper: OAuthScopeMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('OAuthPaginateScopesQueryHandler', () =>
         queryHandler = module.get<OAuthPaginateScopesQueryHandler>(OAuthPaginateScopesQueryHandler);
         service = module.get<OAuthPaginateScopesService>(OAuthPaginateScopesService);
         repository = <OAuthMockScopeRepository>module.get<OAuthIScopeRepository>(OAuthIScopeRepository);
-        mapper = new OAuthScopeMapper();
     });
 
     describe('main', () =>

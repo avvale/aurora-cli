@@ -1,21 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { OAuthAddApplicationsContextEvent, OAuthApplication, OAuthIApplicationRepository } from '@app/o-auth/application';
 import {
-    OAuthApplicationId,
+    OAuthApplicationClientIds,
     OAuthApplicationCode,
+    OAuthApplicationCreatedAt,
+    OAuthApplicationDeletedAt,
+    OAuthApplicationId,
+    OAuthApplicationIsMaster,
     OAuthApplicationName,
     OAuthApplicationSecret,
-    OAuthApplicationIsMaster,
-    OAuthApplicationClientIds,
-    OAuthApplicationCreatedAt,
     OAuthApplicationUpdatedAt,
-    OAuthApplicationDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthIApplicationRepository } from '../../domain/o-auth-application.repository';
-import { OAuthApplication } from '../../domain/o-auth-application.aggregate';
-import { OAuthAddApplicationsContextEvent } from '../events/o-auth-add-applications-context.event';
+} from '@app/o-auth/application/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class OAuthUpdateApplicationsService
@@ -51,7 +48,6 @@ export class OAuthUpdateApplicationsService
             new OAuthApplicationUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

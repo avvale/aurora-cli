@@ -1,23 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthUpdateApplicationsService } from './o-auth-update-applications.service';
+import { OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationRepository } from '@app/o-auth/application';
+import { OAuthUpdateApplicationsService } from '@app/o-auth/application/application/update/o-auth-update-applications.service';
 import {
-    OAuthApplicationId,
+    OAuthApplicationClientIds,
     OAuthApplicationCode,
+    OAuthApplicationId,
+    OAuthApplicationIsMaster,
     OAuthApplicationName,
     OAuthApplicationSecret,
-    OAuthApplicationIsMaster,
-    OAuthApplicationClientIds,
-    OAuthApplicationCreatedAt,
-    OAuthApplicationUpdatedAt,
-    OAuthApplicationDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthIApplicationRepository } from '../../domain/o-auth-application.repository';
-import { OAuthMockApplicationRepository } from '../../infrastructure/mock/o-auth-mock-application.repository';
+} from '@app/o-auth/application/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthUpdateApplicationsService', () =>
 {

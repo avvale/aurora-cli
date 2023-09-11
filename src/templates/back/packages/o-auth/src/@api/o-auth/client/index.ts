@@ -85,7 +85,7 @@ import { OAuthDeleteClientsHandler } from './handlers/o-auth-delete-clients.hand
 // seeder
 import { OAuthClientSeeder } from './seeder/o-auth-client.seeder';
 
-export const OAuthClientControllers = [
+export const OAuthClientApiControllers = [
     OAuthCreateClientController,
     OAuthCreateClientsController,
     OAuthPaginateClientsController,
@@ -99,7 +99,7 @@ export const OAuthClientControllers = [
     OAuthDeleteClientsController,
 ];
 
-export const OAuthClientResolvers = [
+export const OAuthClientApiResolvers = [
     OAuthCreateClientResolver,
     OAuthCreateClientsResolver,
     OAuthPaginateClientsResolver,
@@ -127,6 +127,6 @@ export const OAuthClientApiHandlers = [
     OAuthDeleteClientsHandler,
 ];
 
-export const OAuthClientServices = [
+export const OAuthClientApiServices = [
     OAuthClientSeeder,
 ];

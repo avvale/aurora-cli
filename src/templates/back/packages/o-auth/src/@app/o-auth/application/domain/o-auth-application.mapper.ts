@@ -1,18 +1,17 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { OAuthApplication } from './o-auth-application.aggregate';
-import { OAuthApplicationResponse } from './o-auth-application.response';
+import { OAuthApplication, OAuthApplicationResponse } from '@app/o-auth/application';
 import {
-    OAuthApplicationId,
+    OAuthApplicationClientIds,
     OAuthApplicationCode,
+    OAuthApplicationCreatedAt,
+    OAuthApplicationDeletedAt,
+    OAuthApplicationId,
+    OAuthApplicationIsMaster,
     OAuthApplicationName,
     OAuthApplicationSecret,
-    OAuthApplicationIsMaster,
-    OAuthApplicationClientIds,
-    OAuthApplicationCreatedAt,
     OAuthApplicationUpdatedAt,
-    OAuthApplicationDeletedAt,
-} from './value-objects';
+} from '@app/o-auth/application/domain/value-objects';
 import { OAuthClientMapper } from '@app/o-auth/client';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class OAuthApplicationMapper implements IMapper
 {

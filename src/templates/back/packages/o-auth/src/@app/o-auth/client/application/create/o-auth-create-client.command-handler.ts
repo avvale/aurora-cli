@@ -1,24 +1,21 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthCreateClientCommand } from './o-auth-create-client.command';
-import { OAuthCreateClientService } from './o-auth-create-client.service';
+import { OAuthCreateClientCommand } from '@app/o-auth/client';
+import { OAuthCreateClientService } from '@app/o-auth/client/application/create/o-auth-create-client.service';
 import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
+    OAuthClientApplicationIds,
     OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
     OAuthClientIsActive,
     OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
-    OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
-} from '../../domain/value-objects';
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
+} from '@app/o-auth/client/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateClientCommand)
 export class OAuthCreateClientCommandHandler implements ICommandHandler<OAuthCreateClientCommand>

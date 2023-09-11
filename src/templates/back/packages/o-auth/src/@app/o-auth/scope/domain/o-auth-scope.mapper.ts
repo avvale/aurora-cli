@@ -1,14 +1,13 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { OAuthScope } from './o-auth-scope.aggregate';
-import { OAuthScopeResponse } from './o-auth-scope.response';
+import { OAuthScope, OAuthScopeResponse } from '@app/o-auth/scope';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
-    OAuthScopeName,
     OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
     OAuthScopeDeletedAt,
-} from './value-objects';
+    OAuthScopeId,
+    OAuthScopeName,
+    OAuthScopeUpdatedAt,
+} from '@app/o-auth/scope/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class OAuthScopeMapper implements IMapper
 {

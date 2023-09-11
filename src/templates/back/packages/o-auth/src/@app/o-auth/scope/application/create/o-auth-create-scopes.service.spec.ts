@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthIScopeRepository, OAuthMockScopeRepository } from '@app/o-auth/scope';
+import { OAuthCreateScopesService } from '@app/o-auth/scope/application/create/o-auth-create-scopes.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthCreateScopesService } from './o-auth-create-scopes.service';
-import { OAuthIScopeRepository } from '../../domain/o-auth-scope.repository';
-import { OAuthMockScopeRepository } from '../../infrastructure/mock/o-auth-mock-scope.repository';
 
 describe('OAuthCreateScopesService', () =>
 {

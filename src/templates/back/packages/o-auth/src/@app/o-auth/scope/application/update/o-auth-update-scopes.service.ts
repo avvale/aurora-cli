@@ -1,18 +1,15 @@
+import { OAuthAddScopesContextEvent, OAuthIScopeRepository, OAuthScope } from '@app/o-auth/scope';
+import {
+    OAuthScopeCode,
+    OAuthScopeCreatedAt,
+    OAuthScopeDeletedAt,
+    OAuthScopeId,
+    OAuthScopeName,
+    OAuthScopeUpdatedAt,
+} from '@app/o-auth/scope/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import {
-    OAuthScopeId,
-    OAuthScopeCode,
-    OAuthScopeName,
-    OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
-    OAuthScopeDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthIScopeRepository } from '../../domain/o-auth-scope.repository';
-import { OAuthScope } from '../../domain/o-auth-scope.aggregate';
-import { OAuthAddScopesContextEvent } from '../events/o-auth-add-scopes-context.event';
 
 @Injectable()
 export class OAuthUpdateScopesService
@@ -42,7 +39,6 @@ export class OAuthUpdateScopesService
             new OAuthScopeUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

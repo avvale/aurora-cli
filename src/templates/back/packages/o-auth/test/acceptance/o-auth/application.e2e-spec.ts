@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationSeeder } from '@app/o-auth/application';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('application', () =>
                 OAuthMockApplicationSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthApplicationId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationCode must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthApplicationCode must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthApplicationName must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationSecret must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthApplicationSecret must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationIsMaster must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthApplicationIsMaster must be defined, can not be null');
             });
     });
 
@@ -166,7 +169,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthApplicationId must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +185,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationCode must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthApplicationCode must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +201,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthApplicationName must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +217,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationSecret must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthApplicationSecret must be defined, can not be undefined');
             });
     });
 
@@ -230,7 +233,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationIsMaster must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthApplicationIsMaster must be defined, can not be undefined');
             });
     });
 
@@ -246,7 +249,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthApplicationId is not allowed, must be a length of 36');
             });
     });
 
@@ -262,7 +265,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationCode is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for OAuthApplicationCode is too large, has a maximum length of 50');
             });
     });
 
@@ -278,7 +281,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for OAuthApplicationName is too large, has a maximum length of 255');
             });
     });
 
@@ -294,7 +297,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationSecret is too large, has a maximum length of 90');
+                expect(res.body.message).toContain('Value for OAuthApplicationSecret is too large, has a maximum length of 90');
             });
     });
 
@@ -310,7 +313,7 @@ describe('application', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ApplicationIsMaster has to be a boolean value');
+                expect(res.body.message).toContain('Value for OAuthApplicationIsMaster has to be a boolean value');
             });
     });
 

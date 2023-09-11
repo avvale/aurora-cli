@@ -1,10 +1,7 @@
+import { OAuthIClientRepository, OAuthMockClientRepository } from '@app/o-auth/client';
+import { OAuthPaginateClientsService } from '@app/o-auth/client/application/paginate/o-auth-paginate-clients.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthPaginateClientsService } from './o-auth-paginate-clients.service';
-import { OAuthIClientRepository } from '../../domain/o-auth-client.repository';
-import { OAuthMockClientRepository } from '../../infrastructure/mock/o-auth-mock-client.repository';
 
 describe('OAuthPaginateClientsService', () =>
 {

@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { OAuthAccessToken } from './o-auth-access-token.aggregate';
 import { OAuthAccessTokenId } from './value-objects';
+import { OAuthAccessToken } from '@app/o-auth/access-token';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class OAuthIAccessTokenRepository implements IRepository<OAuthAccessToken>
 {
@@ -30,6 +30,8 @@ export abstract class OAuthIAccessTokenRepository implements IRepository<OAuthAc
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<OAuthAccessToken | null>;
 
@@ -124,6 +126,8 @@ export abstract class OAuthIAccessTokenRepository implements IRepository<OAuthAc
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

@@ -1,9 +1,7 @@
+import { OAuthDeleteRefreshTokenByIdCommand } from '@app/o-auth/refresh-token';
+import { OAuthDeleteRefreshTokenByIdService } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-token-by-id.service';
+import { OAuthRefreshTokenId } from '@app/o-auth/refresh-token/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteRefreshTokenByIdCommand } from './o-auth-delete-refresh-token-by-id.command';
-import { OAuthDeleteRefreshTokenByIdService } from './o-auth-delete-refresh-token-by-id.service';
-import {
-    OAuthRefreshTokenId
-} from '../../domain/value-objects';
 
 @CommandHandler(OAuthDeleteRefreshTokenByIdCommand)
 export class OAuthDeleteRefreshTokenByIdCommandHandler implements ICommandHandler<OAuthDeleteRefreshTokenByIdCommand>

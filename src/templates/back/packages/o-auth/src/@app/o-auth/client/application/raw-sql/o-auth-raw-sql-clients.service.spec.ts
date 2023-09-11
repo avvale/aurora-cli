@@ -1,10 +1,7 @@
+import { OAuthIClientRepository, OAuthMockClientRepository } from '@app/o-auth/client';
+import { OAuthRawSQLClientsService } from '@app/o-auth/client/application/raw-sql/o-auth-raw-sql-clients.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthRawSQLClientsService } from './o-auth-raw-sql-clients.service';
-import { OAuthIClientRepository } from '../../domain/o-auth-client.repository';
-import { OAuthMockClientRepository } from '../../infrastructure/mock/o-auth-mock-client.repository';
 
 describe('OAuthRawSQLClientsService ', () =>
 {

@@ -1,9 +1,7 @@
+import { OAuthFindScopeByIdQuery, OAuthScopeMapper, OAuthScopeResponse } from '@app/o-auth/scope';
+import { OAuthFindScopeByIdService } from '@app/o-auth/scope/application/find/o-auth-find-scope-by-id.service';
+import { OAuthScopeId } from '@app/o-auth/scope/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthScopeResponse } from '../../domain/o-auth-scope.response';
-import { OAuthScopeMapper } from '../../domain/o-auth-scope.mapper';
-import { OAuthScopeId } from '../../domain/value-objects';
-import { OAuthFindScopeByIdQuery } from './o-auth-find-scope-by-id.query';
-import { OAuthFindScopeByIdService } from './o-auth-find-scope-by-id.service';
 
 @QueryHandler(OAuthFindScopeByIdQuery)
 export class OAuthFindScopeByIdQueryHandler implements IQueryHandler<OAuthFindScopeByIdQuery>

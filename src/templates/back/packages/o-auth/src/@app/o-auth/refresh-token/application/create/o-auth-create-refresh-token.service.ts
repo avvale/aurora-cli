@@ -62,7 +62,7 @@ export class OAuthCreateRefreshTokenService
             ),
             new OAuthRefreshTokenCreatedAt({ currentTimestamp: true }),
             new OAuthRefreshTokenUpdatedAt({ currentTimestamp: true }),
-            null,
+            null, // deletedAt
         );
 
         await this.repository.create(

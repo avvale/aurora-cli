@@ -1,15 +1,12 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthUpdateScopeByIdCommand } from './o-auth-update-scope-by-id.command';
-import { OAuthUpdateScopeByIdService } from './o-auth-update-scope-by-id.service';
+import { OAuthUpdateScopeByIdCommand } from '@app/o-auth/scope';
+import { OAuthUpdateScopeByIdService } from '@app/o-auth/scope/application/update/o-auth-update-scope-by-id.service';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
+    OAuthScopeId,
     OAuthScopeName,
-    OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
-    OAuthScopeDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/o-auth/scope/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthUpdateScopeByIdCommand)
 export class OAuthUpdateScopeByIdCommandHandler implements ICommandHandler<OAuthUpdateScopeByIdCommand>

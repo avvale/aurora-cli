@@ -1,25 +1,24 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { OAuthClient } from './o-auth-client.aggregate';
-import { OAuthClientResponse } from './o-auth-client.response';
-import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
-    OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
-    OAuthClientExpiredAccessToken,
-    OAuthClientExpiredRefreshToken,
-    OAuthClientIsActive,
-    OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
-    OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
-} from './value-objects';
 import { OAuthAccessTokenMapper } from '@app/o-auth/access-token';
 import { OAuthApplicationMapper } from '@app/o-auth/application';
+import { OAuthClient, OAuthClientResponse } from '@app/o-auth/client';
+import {
+    OAuthClientApplicationIds,
+    OAuthClientAuthUrl,
+    OAuthClientCreatedAt,
+    OAuthClientDeletedAt,
+    OAuthClientExpiredAccessToken,
+    OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
+    OAuthClientIsActive,
+    OAuthClientIsMaster,
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
+    OAuthClientUpdatedAt,
+} from '@app/o-auth/client/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class OAuthClientMapper implements IMapper
 {

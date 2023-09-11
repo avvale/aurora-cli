@@ -1,9 +1,7 @@
+import { OAuthDeleteClientByIdCommand } from '@app/o-auth/client';
+import { OAuthDeleteClientByIdService } from '@app/o-auth/client/application/delete/o-auth-delete-client-by-id.service';
+import { OAuthClientId } from '@app/o-auth/client/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteClientByIdCommand } from './o-auth-delete-client-by-id.command';
-import { OAuthDeleteClientByIdService } from './o-auth-delete-client-by-id.service';
-import {
-    OAuthClientId
-} from '../../domain/value-objects';
 
 @CommandHandler(OAuthDeleteClientByIdCommand)
 export class OAuthDeleteClientByIdCommandHandler implements ICommandHandler<OAuthDeleteClientByIdCommand>

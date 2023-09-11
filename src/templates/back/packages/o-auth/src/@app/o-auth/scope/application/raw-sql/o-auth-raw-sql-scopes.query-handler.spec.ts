@@ -1,12 +1,7 @@
+import { OAuthIScopeRepository, OAuthMockScopeRepository, OAuthRawSQLScopesQuery, OAuthScopeMapper } from '@app/o-auth/scope';
+import { OAuthRawSQLScopesQueryHandler } from '@app/o-auth/scope/application/raw-sql/o-auth-raw-sql-scopes.query-handler';
+import { OAuthRawSQLScopesService } from '@app/o-auth/scope/application/raw-sql/o-auth-raw-sql-scopes.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthMockScopeRepository } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.repository';
-import { OAuthIScopeRepository } from '@app/o-auth/scope/domain/o-auth-scope.repository';
-import { OAuthScopeMapper } from '@app/o-auth/scope/domain/o-auth-scope.mapper';
-import { OAuthRawSQLScopesQueryHandler } from './o-auth-raw-sql-scopes.query-handler';
-import { OAuthRawSQLScopesQuery } from './o-auth-raw-sql-scopes.query';
-import { OAuthRawSQLScopesService } from './o-auth-raw-sql-scopes.service';
 
 describe('RawSQLScopesQueryHandler', () =>
 {

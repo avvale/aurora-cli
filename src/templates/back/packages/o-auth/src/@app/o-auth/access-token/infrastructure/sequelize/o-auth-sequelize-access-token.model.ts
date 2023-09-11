@@ -1,9 +1,9 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
-import { OAuthRefreshTokenModel } from '@app/o-auth/refresh-token';
 import { OAuthClientModel } from '@app/o-auth/client';
+import { OAuthRefreshTokenModel } from '@app/o-auth/refresh-token';
+import { DataTypes } from 'sequelize';
+import { BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthAccessToken',

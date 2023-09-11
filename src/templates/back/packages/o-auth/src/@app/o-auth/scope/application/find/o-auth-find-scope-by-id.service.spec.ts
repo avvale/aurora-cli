@@ -1,12 +1,8 @@
+import { OAuthIScopeRepository, oAuthMockScopeData, OAuthMockScopeRepository } from '@app/o-auth/scope';
+import { OAuthFindScopeByIdService } from '@app/o-auth/scope/application/find/o-auth-find-scope-by-id.service';
+import { OAuthScopeId } from '@app/o-auth/scope/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockScopeData } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.data';
-import { OAuthFindScopeByIdService } from './o-auth-find-scope-by-id.service';
-import { OAuthScopeId } from '../../domain/value-objects';
-import { OAuthIScopeRepository } from '../../domain/o-auth-scope.repository';
-import { OAuthMockScopeRepository } from '../../infrastructure/mock/o-auth-mock-scope.repository';
 
 describe('OAuthFindScopeByIdService', () =>
 {

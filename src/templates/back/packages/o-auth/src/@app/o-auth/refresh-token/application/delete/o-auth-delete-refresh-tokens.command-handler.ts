@@ -1,6 +1,6 @@
+import { OAuthDeleteRefreshTokensCommand } from '@app/o-auth/refresh-token';
+import { OAuthDeleteRefreshTokensService } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-tokens.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteRefreshTokensCommand } from './o-auth-delete-refresh-tokens.command';
-import { OAuthDeleteRefreshTokensService } from './o-auth-delete-refresh-tokens.service';
 
 @CommandHandler(OAuthDeleteRefreshTokensCommand)
 export class OAuthDeleteRefreshTokensCommandHandler implements ICommandHandler<OAuthDeleteRefreshTokensCommand>

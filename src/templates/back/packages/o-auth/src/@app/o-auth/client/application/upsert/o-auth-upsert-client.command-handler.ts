@@ -1,24 +1,21 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthUpsertClientCommand } from './o-auth-upsert-client.command';
-import { OAuthUpsertClientService } from './o-auth-upsert-client.service';
+import { OAuthUpsertClientCommand } from '@app/o-auth/client';
+import { OAuthUpsertClientService } from '@app/o-auth/client/application/upsert/o-auth-upsert-client.service';
 import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
+    OAuthClientApplicationIds,
     OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
     OAuthClientIsActive,
     OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
-    OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
-} from '../../domain/value-objects';
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
+} from '@app/o-auth/client/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthUpsertClientCommand)
 export class OAuthUpsertClientCommandHandler implements ICommandHandler<OAuthUpsertClientCommand>

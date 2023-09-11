@@ -1,24 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { OAuthClient, oAuthMockClientData } from '@app/o-auth/client';
 import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
+    OAuthClientApplicationIds,
     OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
+    OAuthClientCreatedAt,
+    OAuthClientDeletedAt,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
     OAuthClientIsActive,
     OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
     OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthClient } from '../../domain/o-auth-client.aggregate';
-import { oAuthMockClientData } from './o-auth-mock-client.data';
+} from '@app/o-auth/client/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

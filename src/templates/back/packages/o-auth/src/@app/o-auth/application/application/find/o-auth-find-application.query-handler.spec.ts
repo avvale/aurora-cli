@@ -1,12 +1,7 @@
+import { OAuthApplicationMapper, OAuthFindApplicationQuery, OAuthIApplicationRepository, OAuthMockApplicationRepository } from '@app/o-auth/application';
+import { OAuthFindApplicationQueryHandler } from '@app/o-auth/application/application/find/o-auth-find-application.query-handler';
+import { OAuthFindApplicationService } from '@app/o-auth/application/application/find/o-auth-find-application.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindApplicationQueryHandler } from './o-auth-find-application.query-handler';
-import { OAuthMockApplicationRepository } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.repository';
-import { OAuthIApplicationRepository } from '@app/o-auth/application/domain/o-auth-application.repository';
-import { OAuthApplicationMapper } from '@app/o-auth/application/domain/o-auth-application.mapper';
-import { OAuthFindApplicationQuery } from './o-auth-find-application.query';
-import { OAuthFindApplicationService } from './o-auth-find-application.service';
 
 describe('OAuthFindApplicationQueryHandler', () =>
 {

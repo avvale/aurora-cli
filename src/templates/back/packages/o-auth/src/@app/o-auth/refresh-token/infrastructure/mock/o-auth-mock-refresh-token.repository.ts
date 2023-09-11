@@ -1,18 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { OAuthIRefreshTokenRepository } from '@app/o-auth/refresh-token/domain/o-auth-refresh-token.repository';
+import { OAuthIRefreshTokenRepository, oAuthMockRefreshTokenData, OAuthRefreshToken } from '@app/o-auth/refresh-token';
 import {
-    OAuthRefreshTokenId,
     OAuthRefreshTokenAccessTokenId,
-    OAuthRefreshTokenToken,
-    OAuthRefreshTokenIsRevoked,
-    OAuthRefreshTokenExpiresAt,
     OAuthRefreshTokenCreatedAt,
-    OAuthRefreshTokenUpdatedAt,
     OAuthRefreshTokenDeletedAt,
+    OAuthRefreshTokenExpiresAt,
+    OAuthRefreshTokenId,
+    OAuthRefreshTokenIsRevoked,
+    OAuthRefreshTokenToken,
+    OAuthRefreshTokenUpdatedAt,
 } from '@app/o-auth/refresh-token/domain/value-objects';
-import { OAuthRefreshToken } from '../../domain/o-auth-refresh-token.aggregate';
-import { oAuthMockRefreshTokenData } from './o-auth-mock-refresh-token.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthMockRefreshTokenRepository extends MockRepository<OAuthRefreshToken> implements OAuthIRefreshTokenRepository
@@ -20,7 +18,6 @@ export class OAuthMockRefreshTokenRepository extends MockRepository<OAuthRefresh
     public readonly repository: any;
     public readonly aggregateName: string = 'OAuthRefreshToken';
     public collectionSource: OAuthRefreshToken[];
-    public deletedAtInstance: OAuthRefreshTokenDeletedAt = new OAuthRefreshTokenDeletedAt(null);
 
     constructor()
     {

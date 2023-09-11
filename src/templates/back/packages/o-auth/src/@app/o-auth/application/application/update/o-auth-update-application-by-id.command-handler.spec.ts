@@ -1,15 +1,11 @@
+import { oAuthMockApplicationData, OAuthUpdateApplicationByIdCommand } from '@app/o-auth/application';
+import { OAuthUpdateApplicationByIdCommandHandler } from '@app/o-auth/application/application/update/o-auth-update-application-by-id.command-handler';
+import { OAuthUpdateApplicationByIdService } from '@app/o-auth/application/application/update/o-auth-update-application-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthUpdateApplicationByIdCommandHandler } from './o-auth-update-application-by-id.command-handler';
-import { OAuthUpdateApplicationByIdCommand } from './o-auth-update-application-by-id.command';
-import { OAuthUpdateApplicationByIdService } from './o-auth-update-application-by-id.service';
 
 describe('OAuthUpdateApplicationByIdCommandHandler', () =>
 {
     let commandHandler: OAuthUpdateApplicationByIdCommandHandler;
-    let service: OAuthUpdateApplicationByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('OAuthUpdateApplicationByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthUpdateApplicationByIdCommandHandler>(OAuthUpdateApplicationByIdCommandHandler);
-        service = module.get<OAuthUpdateApplicationByIdService>(OAuthUpdateApplicationByIdService);
     });
 
     describe('main', () =>

@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationRepository } from '@app/o-auth/application';
+import { OAuthDeleteApplicationByIdService } from '@app/o-auth/application/application/delete/o-auth-delete-application-by-id.service';
+import { OAuthApplicationId } from '@app/o-auth/application/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthDeleteApplicationByIdService } from './o-auth-delete-application-by-id.service';
-import { OAuthApplicationId } from '../../domain/value-objects';
-import { OAuthIApplicationRepository } from '../../domain/o-auth-application.repository';
-import { OAuthMockApplicationRepository } from '../../infrastructure/mock/o-auth-mock-application.repository';
 
 describe('OAuthDeleteApplicationByIdService', () =>
 {

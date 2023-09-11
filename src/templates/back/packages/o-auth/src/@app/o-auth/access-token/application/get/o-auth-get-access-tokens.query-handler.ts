@@ -1,8 +1,6 @@
+import { OAuthAccessTokenMapper, OAuthAccessTokenResponse, OAuthGetAccessTokensQuery } from '@app/o-auth/access-token';
+import { OAuthGetAccessTokensService } from '@app/o-auth/access-token/application/get/o-auth-get-access-tokens.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthAccessTokenResponse } from '../../domain/o-auth-access-token.response';
-import { OAuthAccessTokenMapper } from '../../domain/o-auth-access-token.mapper';
-import { OAuthGetAccessTokensQuery } from './o-auth-get-access-tokens.query';
-import { OAuthGetAccessTokensService } from './o-auth-get-access-tokens.service';
 
 @QueryHandler(OAuthGetAccessTokensQuery)
 export class OAuthGetAccessTokensQueryHandler implements IQueryHandler<OAuthGetAccessTokensQuery>
@@ -15,10 +13,12 @@ export class OAuthGetAccessTokensQueryHandler implements IQueryHandler<OAuthGetA
 
     async execute(query: OAuthGetAccessTokensQuery): Promise<OAuthAccessTokenResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getAccessTokensService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getAccessTokensService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

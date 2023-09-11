@@ -1,15 +1,11 @@
+import { oAuthMockClientData, OAuthUpdateClientsCommand } from '@app/o-auth/client';
+import { OAuthUpdateClientsCommandHandler } from '@app/o-auth/client/application/update/o-auth-update-clients.command-handler';
+import { OAuthUpdateClientsService } from '@app/o-auth/client/application/update/o-auth-update-clients.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { oAuthMockClientData } from '@app/o-auth/client/infrastructure/mock/o-auth-mock-client.data';
-import { OAuthUpdateClientsCommandHandler } from './o-auth-update-clients.command-handler';
-import { OAuthUpdateClientsCommand } from './o-auth-update-clients.command';
-import { OAuthUpdateClientsService } from './o-auth-update-clients.service';
 
 describe('OAuthUpdateClientsCommandHandler', () =>
 {
     let commandHandler: OAuthUpdateClientsCommandHandler;
-    let service: OAuthUpdateClientsService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('OAuthUpdateClientsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthUpdateClientsCommandHandler>(OAuthUpdateClientsCommandHandler);
-        service = module.get<OAuthUpdateClientsService>(OAuthUpdateClientsService);
     });
 
     describe('main', () =>

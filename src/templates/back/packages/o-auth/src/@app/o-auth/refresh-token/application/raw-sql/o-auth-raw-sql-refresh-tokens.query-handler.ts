@@ -1,8 +1,6 @@
+import { OAuthRawSQLRefreshTokensQuery, OAuthRefreshTokenMapper, OAuthRefreshTokenResponse } from '@app/o-auth/refresh-token';
+import { OAuthRawSQLRefreshTokensService } from '@app/o-auth/refresh-token/application/raw-sql/o-auth-raw-sql-refresh-tokens.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthRefreshTokenResponse } from '../../domain/o-auth-refresh-token.response';
-import { OAuthRefreshTokenMapper } from '../../domain/o-auth-refresh-token.mapper';
-import { OAuthRawSQLRefreshTokensQuery } from './o-auth-raw-sql-refresh-tokens.query';
-import { OAuthRawSQLRefreshTokensService } from './o-auth-raw-sql-refresh-tokens.service';
 
 @QueryHandler(OAuthRawSQLRefreshTokensQuery)
 export class OAuthRawSQLRefreshTokensQueryHandler implements IQueryHandler<OAuthRawSQLRefreshTokensQuery>

@@ -1,15 +1,12 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthUpsertScopeCommand } from './o-auth-upsert-scope.command';
-import { OAuthUpsertScopeService } from './o-auth-upsert-scope.service';
+import { OAuthUpsertScopeCommand } from '@app/o-auth/scope';
+import { OAuthUpsertScopeService } from '@app/o-auth/scope/application/upsert/o-auth-upsert-scope.service';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
+    OAuthScopeId,
     OAuthScopeName,
-    OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
-    OAuthScopeDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/o-auth/scope/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthUpsertScopeCommand)
 export class OAuthUpsertScopeCommandHandler implements ICommandHandler<OAuthUpsertScopeCommand>

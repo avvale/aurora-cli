@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('OAuthCreateApplicationCommandHandler', () =>
 {
     let commandHandler: OAuthCreateApplicationCommandHandler;
-    let service: OAuthCreateApplicationService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('OAuthCreateApplicationCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthCreateApplicationCommandHandler>(OAuthCreateApplicationCommandHandler);
-        service = module.get<OAuthCreateApplicationService>(OAuthCreateApplicationService);
     });
 
     describe('main', () =>

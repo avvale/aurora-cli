@@ -1,8 +1,8 @@
+import { OAuthCreatedApplicationEvent } from '@app/o-auth/application';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { OAuthCreatedApplicationEvent } from '../events/o-auth-created-application.event';
 
 @Injectable()
 export class OAuthApplicationSagas

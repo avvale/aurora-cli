@@ -1,9 +1,7 @@
+import { OAuthDeleteScopeByIdCommand } from '@app/o-auth/scope';
+import { OAuthDeleteScopeByIdService } from '@app/o-auth/scope/application/delete/o-auth-delete-scope-by-id.service';
+import { OAuthScopeId } from '@app/o-auth/scope/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteScopeByIdCommand } from './o-auth-delete-scope-by-id.command';
-import { OAuthDeleteScopeByIdService } from './o-auth-delete-scope-by-id.service';
-import {
-    OAuthScopeId
-} from '../../domain/value-objects';
 
 @CommandHandler(OAuthDeleteScopeByIdCommand)
 export class OAuthDeleteScopeByIdCommandHandler implements ICommandHandler<OAuthDeleteScopeByIdCommand>

@@ -3,7 +3,6 @@ import {
     OAuthAccessTokenAccountId,
     OAuthAccessTokenClientId,
     OAuthAccessTokenCreatedAt,
-    OAuthAccessTokenDeletedAt,
     OAuthAccessTokenExpiredAccessToken,
     OAuthAccessTokenExpiresAt,
     OAuthAccessTokenId,
@@ -74,7 +73,7 @@ export class OAuthCreateAccessTokenService
             ),
             new OAuthAccessTokenCreatedAt({ currentTimestamp: true }),
             new OAuthAccessTokenUpdatedAt({ currentTimestamp: true }),
-            null,
+            null, // deletedAt
         );
 
         await this.repository.create(

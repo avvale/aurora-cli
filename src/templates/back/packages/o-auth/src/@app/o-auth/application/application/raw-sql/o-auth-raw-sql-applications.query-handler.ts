@@ -1,8 +1,6 @@
+import { OAuthApplicationMapper, OAuthApplicationResponse, OAuthRawSQLApplicationsQuery } from '@app/o-auth/application';
+import { OAuthRawSQLApplicationsService } from '@app/o-auth/application/application/raw-sql/o-auth-raw-sql-applications.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthApplicationResponse } from '../../domain/o-auth-application.response';
-import { OAuthApplicationMapper } from '../../domain/o-auth-application.mapper';
-import { OAuthRawSQLApplicationsQuery } from './o-auth-raw-sql-applications.query';
-import { OAuthRawSQLApplicationsService } from './o-auth-raw-sql-applications.service';
 
 @QueryHandler(OAuthRawSQLApplicationsQuery)
 export class OAuthRawSQLApplicationsQueryHandler implements IQueryHandler<OAuthRawSQLApplicationsQuery>

@@ -1,5 +1,5 @@
+import { OAuthCreatedScopesEvent } from '@app/o-auth/scope';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { OAuthCreatedScopesEvent } from './o-auth-created-scopes.event';
 
 @EventsHandler(OAuthCreatedScopesEvent)
 export class OAuthCreatedScopesEventHandler implements IEventHandler<OAuthCreatedScopesEvent>

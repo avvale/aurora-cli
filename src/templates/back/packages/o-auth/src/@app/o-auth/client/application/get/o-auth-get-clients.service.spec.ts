@@ -1,10 +1,7 @@
+import { OAuthIClientRepository, OAuthMockClientRepository } from '@app/o-auth/client';
+import { OAuthGetClientsService } from '@app/o-auth/client/application/get/o-auth-get-clients.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthGetClientsService } from './o-auth-get-clients.service';
-import { OAuthIClientRepository } from '../../domain/o-auth-client.repository';
-import { OAuthMockClientRepository } from '../../infrastructure/mock/o-auth-mock-client.repository';
 
 describe('OAuthGetClientsService', () =>
 {

@@ -1,28 +1,26 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
-import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
-    OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
-    OAuthClientExpiredAccessToken,
-    OAuthClientExpiredRefreshToken,
-    OAuthClientIsActive,
-    OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
-    OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
-} from './value-objects';
-import { OAuthCreatedClientEvent } from '../application/events/o-auth-created-client.event';
-import { OAuthUpdatedClientEvent } from '../application/events/o-auth-updated-client.event';
-import { OAuthDeletedClientEvent } from '../application/events/o-auth-deleted-client.event';
 import { OAuthAccessToken } from '@app/o-auth/access-token';
 import { OAuthApplication } from '@app/o-auth/application';
+import { OAuthCreatedClientEvent, OAuthDeletedClientEvent, OAuthUpdatedClientEvent } from '@app/o-auth/client';
+import {
+    OAuthClientApplicationIds,
+    OAuthClientAuthUrl,
+    OAuthClientCreatedAt,
+    OAuthClientDeletedAt,
+    OAuthClientExpiredAccessToken,
+    OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
+    OAuthClientIsActive,
+    OAuthClientIsMaster,
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
+    OAuthClientUpdatedAt,
+} from '@app/o-auth/client/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class OAuthClient extends AggregateRoot
 {
@@ -41,8 +39,6 @@ export class OAuthClient extends AggregateRoot
     createdAt: OAuthClientCreatedAt;
     updatedAt: OAuthClientUpdatedAt;
     deletedAt: OAuthClientDeletedAt;
-
-    // eager relationship
     accessTokens: OAuthAccessToken[];
     applications: OAuthApplication[];
 
@@ -62,7 +58,6 @@ export class OAuthClient extends AggregateRoot
         createdAt: OAuthClientCreatedAt,
         updatedAt: OAuthClientUpdatedAt,
         deletedAt: OAuthClientDeletedAt,
-
         accessTokens?: OAuthAccessToken[],
         applications?: OAuthApplication[],
     )
@@ -83,13 +78,11 @@ export class OAuthClient extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.accessTokens = accessTokens;
         this.applications = applications;
     }
 
-    static register (
+    static register(
         id: OAuthClientId,
         grantType: OAuthClientGrantType,
         name: OAuthClientName,
@@ -105,7 +98,6 @@ export class OAuthClient extends AggregateRoot
         createdAt: OAuthClientCreatedAt,
         updatedAt: OAuthClientUpdatedAt,
         deletedAt: OAuthClientDeletedAt,
-
         accessTokens?: OAuthAccessToken[],
         applications?: OAuthApplication[],
     ): OAuthClient
@@ -126,7 +118,6 @@ export class OAuthClient extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             accessTokens,
             applications,
         );
@@ -219,8 +210,6 @@ export class OAuthClient extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             accessTokens: this.accessTokens?.map(item => item.toDTO()),
             applications: this.applications?.map(item => item.toDTO()),
         };
@@ -245,8 +234,6 @@ export class OAuthClient extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             accessTokens: this.accessTokens?.map(item => item.toDTO()),
             applications: this.applications?.map(item => item.toDTO()),
         };

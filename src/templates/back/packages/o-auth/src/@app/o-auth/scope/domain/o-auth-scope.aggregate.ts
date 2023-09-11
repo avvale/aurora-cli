@@ -1,17 +1,15 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { OAuthCreatedScopeEvent, OAuthDeletedScopeEvent, OAuthUpdatedScopeEvent } from '@app/o-auth/scope';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
-    OAuthScopeName,
     OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
     OAuthScopeDeletedAt,
-} from './value-objects';
-import { OAuthCreatedScopeEvent } from '../application/events/o-auth-created-scope.event';
-import { OAuthUpdatedScopeEvent } from '../application/events/o-auth-updated-scope.event';
-import { OAuthDeletedScopeEvent } from '../application/events/o-auth-deleted-scope.event';
+    OAuthScopeId,
+    OAuthScopeName,
+    OAuthScopeUpdatedAt,
+} from '@app/o-auth/scope/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class OAuthScope extends AggregateRoot
 {
@@ -22,8 +20,6 @@ export class OAuthScope extends AggregateRoot
     updatedAt: OAuthScopeUpdatedAt;
     deletedAt: OAuthScopeDeletedAt;
 
-    // eager relationship
-
     constructor(
         id: OAuthScopeId,
         code: OAuthScopeCode,
@@ -31,7 +27,6 @@ export class OAuthScope extends AggregateRoot
         createdAt: OAuthScopeCreatedAt,
         updatedAt: OAuthScopeUpdatedAt,
         deletedAt: OAuthScopeDeletedAt,
-
     )
     {
         super();
@@ -41,18 +36,15 @@ export class OAuthScope extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
     }
 
-    static register (
+    static register(
         id: OAuthScopeId,
         code: OAuthScopeCode,
         name: OAuthScopeName,
         createdAt: OAuthScopeCreatedAt,
         updatedAt: OAuthScopeUpdatedAt,
         deletedAt: OAuthScopeDeletedAt,
-
     ): OAuthScope
     {
         return new OAuthScope(
@@ -62,7 +54,6 @@ export class OAuthScope extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
         );
     }
 
@@ -117,8 +108,6 @@ export class OAuthScope extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 
@@ -132,8 +121,6 @@ export class OAuthScope extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 }

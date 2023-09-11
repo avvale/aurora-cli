@@ -1,21 +1,15 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthCreateAccessTokenCommand } from './o-auth-create-access-token.command';
-import { OAuthCreateAccessTokenService } from './o-auth-create-access-token.service';
+import { OAuthCreateAccessTokenCommand } from '@app/o-auth/access-token';
+import { OAuthCreateAccessTokenService } from '@app/o-auth/access-token/application/create/o-auth-create-access-token.service';
 import {
-    OAuthAccessTokenId,
-    OAuthAccessTokenClientId,
     OAuthAccessTokenAccountId,
-    OAuthAccessTokenToken,
-    OAuthAccessTokenName,
-    OAuthAccessTokenIsRevoked,
-    OAuthAccessTokenExpiresAt,
-    OAuthAccessTokenCreatedAt,
-    OAuthAccessTokenUpdatedAt,
-    OAuthAccessTokenDeletedAt,
-    OAuthAccessTokenScopes,
+    OAuthAccessTokenClientId,
     OAuthAccessTokenExpiredAccessToken,
-} from '../../domain/value-objects';
+    OAuthAccessTokenId,
+    OAuthAccessTokenName,
+    OAuthAccessTokenScopes,
+} from '@app/o-auth/access-token/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateAccessTokenCommand)
 export class OAuthCreateAccessTokenCommandHandler implements ICommandHandler<OAuthCreateAccessTokenCommand>

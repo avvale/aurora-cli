@@ -1,8 +1,8 @@
+import { OAuthCreatedAccessTokenEvent } from '@app/o-auth/access-token';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { OAuthCreatedAccessTokenEvent } from '../events/o-auth-created-access-token.event';
 
 @Injectable()
 export class OAuthAccessTokenSagas

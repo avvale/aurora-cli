@@ -1,11 +1,5 @@
+import { OAuthCreatedScopeEvent, OAuthCreatedScopesEvent, OAuthDeletedScopeEvent, OAuthDeletedScopesEvent, OAuthScope, OAuthUpdatedScopeEvent, OAuthUpdatedScopesEvent } from '@app/o-auth/scope';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { OAuthScope } from '../../domain/o-auth-scope.aggregate';
-import { OAuthCreatedScopeEvent } from './o-auth-created-scope.event';
-import { OAuthCreatedScopesEvent } from './o-auth-created-scopes.event';
-import { OAuthUpdatedScopeEvent } from './o-auth-updated-scope.event';
-import { OAuthUpdatedScopesEvent } from './o-auth-updated-scopes.event';
-import { OAuthDeletedScopeEvent } from './o-auth-deleted-scope.event';
-import { OAuthDeletedScopesEvent } from './o-auth-deleted-scopes.event';
 
 export class OAuthAddScopesContextEvent extends AggregateRoot
 {

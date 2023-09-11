@@ -1,15 +1,12 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthCreateScopeCommand } from './o-auth-create-scope.command';
-import { OAuthCreateScopeService } from './o-auth-create-scope.service';
+import { OAuthCreateScopeCommand } from '@app/o-auth/scope';
+import { OAuthCreateScopeService } from '@app/o-auth/scope/application/create/o-auth-create-scope.service';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
+    OAuthScopeId,
     OAuthScopeName,
-    OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
-    OAuthScopeDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/o-auth/scope/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateScopeCommand)
 export class OAuthCreateScopeCommandHandler implements ICommandHandler<OAuthCreateScopeCommand>

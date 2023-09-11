@@ -1,15 +1,11 @@
+import { OAuthDeleteScopeByIdCommand, oAuthMockScopeData } from '@app/o-auth/scope';
+import { OAuthDeleteScopeByIdCommandHandler } from '@app/o-auth/scope/application/delete/o-auth-delete-scope-by-id.command-handler';
+import { OAuthDeleteScopeByIdService } from '@app/o-auth/scope/application/delete/o-auth-delete-scope-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteScopeByIdCommandHandler } from './o-auth-delete-scope-by-id.command-handler';
-import { oAuthMockScopeData } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.data';
-import { OAuthDeleteScopeByIdCommand } from './o-auth-delete-scope-by-id.command';
-import { OAuthDeleteScopeByIdService } from './o-auth-delete-scope-by-id.service';
 
 describe('OAuthDeleteScopeByIdCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteScopeByIdCommandHandler;
-    let service: OAuthDeleteScopeByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('OAuthDeleteScopeByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteScopeByIdCommandHandler>(OAuthDeleteScopeByIdCommandHandler);
-        service = module.get<OAuthDeleteScopeByIdService>(OAuthDeleteScopeByIdService);
     });
 
     describe('main', () =>

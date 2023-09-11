@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthIClientRepository, OAuthMockClientRepository, OAuthPaginateClientsQuery } from '@app/o-auth/client';
+import { OAuthPaginateClientsQueryHandler } from '@app/o-auth/client/application/paginate/o-auth-paginate-clients.query-handler';
+import { OAuthPaginateClientsService } from '@app/o-auth/client/application/paginate/o-auth-paginate-clients.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthPaginateClientsQueryHandler } from './o-auth-paginate-clients.query-handler';
-import { OAuthMockClientRepository } from '@app/o-auth/client/infrastructure/mock/o-auth-mock-client.repository';
-import { OAuthIClientRepository } from '@app/o-auth/client/domain/o-auth-client.repository';
-import { OAuthClientMapper } from '@app/o-auth/client/domain/o-auth-client.mapper';
-import { OAuthPaginateClientsQuery } from './o-auth-paginate-clients.query';
-import { OAuthPaginateClientsService } from './o-auth-paginate-clients.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthPaginateClientsQueryHandler', () =>
 {
     let queryHandler: OAuthPaginateClientsQueryHandler;
     let service: OAuthPaginateClientsService;
     let repository: OAuthMockClientRepository;
-    let mapper: OAuthClientMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('OAuthPaginateClientsQueryHandler', () =>
         queryHandler = module.get<OAuthPaginateClientsQueryHandler>(OAuthPaginateClientsQueryHandler);
         service = module.get<OAuthPaginateClientsService>(OAuthPaginateClientsService);
         repository = <OAuthMockClientRepository>module.get<OAuthIClientRepository>(OAuthIClientRepository);
-        mapper = new OAuthClientMapper();
     });
 
     describe('main', () =>

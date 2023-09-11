@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { OAuthPaginateRefreshTokensQuery } from '@app/o-auth/refresh-token';
+import { OAuthPaginateRefreshTokensService } from '@app/o-auth/refresh-token/application/paginate/o-auth-paginate-refresh-tokens.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { OAuthPaginateRefreshTokensQuery } from './o-auth-paginate-refresh-tokens.query';
-import { OAuthPaginateRefreshTokensService } from './o-auth-paginate-refresh-tokens.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(OAuthPaginateRefreshTokensQuery)
 export class OAuthPaginateRefreshTokensQueryHandler implements IQueryHandler<OAuthPaginateRefreshTokensQuery>

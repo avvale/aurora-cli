@@ -1,12 +1,7 @@
+import { OAuthIRefreshTokenRepository, OAuthMockRefreshTokenRepository, OAuthRawSQLRefreshTokensQuery, OAuthRefreshTokenMapper } from '@app/o-auth/refresh-token';
+import { OAuthRawSQLRefreshTokensQueryHandler } from '@app/o-auth/refresh-token/application/raw-sql/o-auth-raw-sql-refresh-tokens.query-handler';
+import { OAuthRawSQLRefreshTokensService } from '@app/o-auth/refresh-token/application/raw-sql/o-auth-raw-sql-refresh-tokens.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthMockRefreshTokenRepository } from '@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.repository';
-import { OAuthIRefreshTokenRepository } from '@app/o-auth/refresh-token/domain/o-auth-refresh-token.repository';
-import { OAuthRefreshTokenMapper } from '@app/o-auth/refresh-token/domain/o-auth-refresh-token.mapper';
-import { OAuthRawSQLRefreshTokensQueryHandler } from './o-auth-raw-sql-refresh-tokens.query-handler';
-import { OAuthRawSQLRefreshTokensQuery } from './o-auth-raw-sql-refresh-tokens.query';
-import { OAuthRawSQLRefreshTokensService } from './o-auth-raw-sql-refresh-tokens.service';
 
 describe('RawSQLRefreshTokensQueryHandler', () =>
 {

@@ -85,7 +85,7 @@ import { OAuthDeleteScopesHandler } from './handlers/o-auth-delete-scopes.handle
 // seeder
 import { OAuthScopeSeeder } from './seeder/o-auth-scope.seeder';
 
-export const OAuthScopeControllers = [
+export const OAuthScopeApiControllers = [
     OAuthCreateScopeController,
     OAuthCreateScopesController,
     OAuthPaginateScopesController,
@@ -99,7 +99,7 @@ export const OAuthScopeControllers = [
     OAuthDeleteScopesController,
 ];
 
-export const OAuthScopeResolvers = [
+export const OAuthScopeApiResolvers = [
     OAuthCreateScopeResolver,
     OAuthCreateScopesResolver,
     OAuthPaginateScopesResolver,
@@ -127,6 +127,6 @@ export const OAuthScopeApiHandlers = [
     OAuthDeleteScopesHandler,
 ];
 
-export const OAuthScopeServices = [
+export const OAuthScopeApiServices = [
     OAuthScopeSeeder,
 ];

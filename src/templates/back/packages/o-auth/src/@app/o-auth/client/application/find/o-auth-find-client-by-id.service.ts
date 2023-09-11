@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { OAuthClient, OAuthIClientRepository } from '@app/o-auth/client';
+import { OAuthClientId } from '@app/o-auth/client/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { OAuthIClientRepository } from '../../domain/o-auth-client.repository';
-import { OAuthClient } from '../../domain/o-auth-client.aggregate';
-import { OAuthClientId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindClientByIdService

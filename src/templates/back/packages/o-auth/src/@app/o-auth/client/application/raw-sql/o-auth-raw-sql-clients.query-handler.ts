@@ -1,8 +1,6 @@
+import { OAuthClientMapper, OAuthClientResponse, OAuthRawSQLClientsQuery } from '@app/o-auth/client';
+import { OAuthRawSQLClientsService } from '@app/o-auth/client/application/raw-sql/o-auth-raw-sql-clients.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthClientResponse } from '../../domain/o-auth-client.response';
-import { OAuthClientMapper } from '../../domain/o-auth-client.mapper';
-import { OAuthRawSQLClientsQuery } from './o-auth-raw-sql-clients.query';
-import { OAuthRawSQLClientsService } from './o-auth-raw-sql-clients.service';
 
 @QueryHandler(OAuthRawSQLClientsQuery)
 export class OAuthRawSQLClientsQueryHandler implements IQueryHandler<OAuthRawSQLClientsQuery>

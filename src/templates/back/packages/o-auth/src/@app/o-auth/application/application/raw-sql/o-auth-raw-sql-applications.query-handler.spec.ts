@@ -1,12 +1,7 @@
+import { OAuthApplicationMapper, OAuthIApplicationRepository, OAuthMockApplicationRepository, OAuthRawSQLApplicationsQuery } from '@app/o-auth/application';
+import { OAuthRawSQLApplicationsQueryHandler } from '@app/o-auth/application/application/raw-sql/o-auth-raw-sql-applications.query-handler';
+import { OAuthRawSQLApplicationsService } from '@app/o-auth/application/application/raw-sql/o-auth-raw-sql-applications.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthMockApplicationRepository } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.repository';
-import { OAuthIApplicationRepository } from '@app/o-auth/application/domain/o-auth-application.repository';
-import { OAuthApplicationMapper } from '@app/o-auth/application/domain/o-auth-application.mapper';
-import { OAuthRawSQLApplicationsQueryHandler } from './o-auth-raw-sql-applications.query-handler';
-import { OAuthRawSQLApplicationsQuery } from './o-auth-raw-sql-applications.query';
-import { OAuthRawSQLApplicationsService } from './o-auth-raw-sql-applications.service';
 
 describe('RawSQLApplicationsQueryHandler', () =>
 {

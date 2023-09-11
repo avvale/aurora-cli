@@ -1,8 +1,6 @@
+import { OAuthClientMapper, OAuthClientResponse, OAuthFindClientQuery } from '@app/o-auth/client';
+import { OAuthFindClientService } from '@app/o-auth/client/application/find/o-auth-find-client.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthClientResponse } from '../../domain/o-auth-client.response';
-import { OAuthClientMapper } from '../../domain/o-auth-client.mapper';
-import { OAuthFindClientQuery } from './o-auth-find-client.query';
-import { OAuthFindClientService } from './o-auth-find-client.service';
 
 @QueryHandler(OAuthFindClientQuery)
 export class OAuthFindClientQueryHandler implements IQueryHandler<OAuthFindClientQuery>

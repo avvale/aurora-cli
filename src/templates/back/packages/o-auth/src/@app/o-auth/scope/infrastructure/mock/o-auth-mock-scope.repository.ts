@@ -1,16 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { OAuthIScopeRepository } from '@app/o-auth/scope/domain/o-auth-scope.repository';
+import { OAuthIScopeRepository, oAuthMockScopeData, OAuthScope } from '@app/o-auth/scope';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
-    OAuthScopeName,
     OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
     OAuthScopeDeletedAt,
+    OAuthScopeId,
+    OAuthScopeName,
+    OAuthScopeUpdatedAt,
 } from '@app/o-auth/scope/domain/value-objects';
-import { OAuthScope } from '../../domain/o-auth-scope.aggregate';
-import { oAuthMockScopeData } from './o-auth-mock-scope.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthMockScopeRepository extends MockRepository<OAuthScope> implements OAuthIScopeRepository
@@ -18,7 +16,6 @@ export class OAuthMockScopeRepository extends MockRepository<OAuthScope> impleme
     public readonly repository: any;
     public readonly aggregateName: string = 'OAuthScope';
     public collectionSource: OAuthScope[];
-    public deletedAtInstance: OAuthScopeDeletedAt = new OAuthScopeDeletedAt(null);
 
     constructor()
     {

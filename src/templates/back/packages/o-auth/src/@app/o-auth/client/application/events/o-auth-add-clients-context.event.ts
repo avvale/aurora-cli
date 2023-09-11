@@ -1,11 +1,5 @@
+import { OAuthClient, OAuthCreatedClientEvent, OAuthCreatedClientsEvent, OAuthDeletedClientEvent, OAuthDeletedClientsEvent, OAuthUpdatedClientEvent, OAuthUpdatedClientsEvent } from '@app/o-auth/client';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { OAuthClient } from '../../domain/o-auth-client.aggregate';
-import { OAuthCreatedClientEvent } from './o-auth-created-client.event';
-import { OAuthCreatedClientsEvent } from './o-auth-created-clients.event';
-import { OAuthUpdatedClientEvent } from './o-auth-updated-client.event';
-import { OAuthUpdatedClientsEvent } from './o-auth-updated-clients.event';
-import { OAuthDeletedClientEvent } from './o-auth-deleted-client.event';
-import { OAuthDeletedClientsEvent } from './o-auth-deleted-clients.event';
 
 export class OAuthAddClientsContextEvent extends AggregateRoot
 {

@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { OAuthPaginateScopesQuery } from '@app/o-auth/scope';
+import { OAuthPaginateScopesService } from '@app/o-auth/scope/application/paginate/o-auth-paginate-scopes.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { OAuthPaginateScopesQuery } from './o-auth-paginate-scopes.query';
-import { OAuthPaginateScopesService } from './o-auth-paginate-scopes.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(OAuthPaginateScopesQuery)
 export class OAuthPaginateScopesQueryHandler implements IQueryHandler<OAuthPaginateScopesQuery>

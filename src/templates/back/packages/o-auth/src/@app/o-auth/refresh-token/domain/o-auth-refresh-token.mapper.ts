@@ -1,17 +1,16 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { OAuthRefreshToken } from './o-auth-refresh-token.aggregate';
-import { OAuthRefreshTokenResponse } from './o-auth-refresh-token.response';
-import {
-    OAuthRefreshTokenId,
-    OAuthRefreshTokenAccessTokenId,
-    OAuthRefreshTokenToken,
-    OAuthRefreshTokenIsRevoked,
-    OAuthRefreshTokenExpiresAt,
-    OAuthRefreshTokenCreatedAt,
-    OAuthRefreshTokenUpdatedAt,
-    OAuthRefreshTokenDeletedAt,
-} from './value-objects';
 import { OAuthAccessTokenMapper } from '@app/o-auth/access-token';
+import { OAuthRefreshToken, OAuthRefreshTokenResponse } from '@app/o-auth/refresh-token';
+import {
+    OAuthRefreshTokenAccessTokenId,
+    OAuthRefreshTokenCreatedAt,
+    OAuthRefreshTokenDeletedAt,
+    OAuthRefreshTokenExpiresAt,
+    OAuthRefreshTokenId,
+    OAuthRefreshTokenIsRevoked,
+    OAuthRefreshTokenToken,
+    OAuthRefreshTokenUpdatedAt,
+} from '@app/o-auth/refresh-token/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class OAuthRefreshTokenMapper implements IMapper
 {

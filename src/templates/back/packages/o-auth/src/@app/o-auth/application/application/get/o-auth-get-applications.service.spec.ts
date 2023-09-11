@@ -1,10 +1,7 @@
+import { OAuthIApplicationRepository, OAuthMockApplicationRepository } from '@app/o-auth/application';
+import { OAuthGetApplicationsService } from '@app/o-auth/application/application/get/o-auth-get-applications.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { OAuthGetApplicationsService } from './o-auth-get-applications.service';
-import { OAuthIApplicationRepository } from '../../domain/o-auth-application.repository';
-import { OAuthMockApplicationRepository } from '../../infrastructure/mock/o-auth-mock-application.repository';
 
 describe('OAuthGetApplicationsService', () =>
 {

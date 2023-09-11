@@ -1,0 +1,89 @@
+
+type OAuthApplicationClient
+{
+    applicationId: ID!
+    clientId: ID!
+    application: OAuthApplication
+    client: OAuthClient
+}
+
+input OAuthCreateApplicationClientInput
+{
+    applicationId: ID!
+    clientId: ID!
+}
+
+input OAuthUpdateApplicationClientByIdInput
+{
+    applicationId: ID!
+    clientId: ID!
+}
+
+input OAuthUpdateApplicationsClientsInput
+{
+    applicationId: ID
+    clientId: ID
+}
+
+type Query
+{
+    oAuthFindApplicationClient(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): OAuthApplicationClient
+
+    oAuthFindApplicationClientById(
+        applicationId: ID
+        clientId: ID
+        constraint: QueryStatement
+    ): OAuthApplicationClient
+
+    oAuthGetApplicationsClients(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [OAuthApplicationClient]!
+
+    oAuthPaginateApplicationsClients(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    oAuthCreateApplicationClient(
+        payload: OAuthCreateApplicationClientInput!
+    ): OAuthApplicationClient
+
+    oAuthCreateApplicationsClients(
+        payload: [OAuthCreateApplicationClientInput]!
+    ): Boolean!
+
+    oAuthUpdateApplicationClientById(
+        payload: OAuthUpdateApplicationClientByIdInput!
+        constraint: QueryStatement
+    ): OAuthApplicationClient
+
+    oAuthUpdateApplicationsClients(
+        payload: OAuthUpdateApplicationsClientsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [OAuthApplicationClient]!
+
+    oAuthUpsertApplicationClient(
+        payload: OAuthUpdateApplicationClientByIdInput!
+    ): OAuthApplicationClient
+
+    oAuthDeleteApplicationClientById(
+        applicationId: ID!
+        clientId: ID!
+        constraint: QueryStatement
+    ): OAuthApplicationClient
+
+    oAuthDeleteApplicationsClients(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [OAuthApplicationClient]!
+
+}

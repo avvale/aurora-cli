@@ -18,7 +18,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: one-to-one
-      aggregate: OAuthAccessToken
+      aggregateName: OAuthAccessToken
       modulePath: o-auth/access-token
       field: accessToken
       avoidConstraint: true
@@ -43,8 +43,6 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []
 excluded:
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.spec.ts

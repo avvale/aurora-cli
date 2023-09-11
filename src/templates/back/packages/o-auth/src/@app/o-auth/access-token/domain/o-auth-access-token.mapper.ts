@@ -1,20 +1,19 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { OAuthAccessToken } from './o-auth-access-token.aggregate';
-import { OAuthAccessTokenResponse } from './o-auth-access-token.response';
+import { OAuthAccessToken, OAuthAccessTokenResponse } from '@app/o-auth/access-token';
 import {
-    OAuthAccessTokenId,
-    OAuthAccessTokenClientId,
     OAuthAccessTokenAccountId,
-    OAuthAccessTokenToken,
-    OAuthAccessTokenName,
-    OAuthAccessTokenIsRevoked,
-    OAuthAccessTokenExpiresAt,
+    OAuthAccessTokenClientId,
     OAuthAccessTokenCreatedAt,
-    OAuthAccessTokenUpdatedAt,
     OAuthAccessTokenDeletedAt,
-} from './value-objects';
-import { OAuthRefreshTokenMapper } from '@app/o-auth/refresh-token';
+    OAuthAccessTokenExpiresAt,
+    OAuthAccessTokenId,
+    OAuthAccessTokenIsRevoked,
+    OAuthAccessTokenName,
+    OAuthAccessTokenToken,
+    OAuthAccessTokenUpdatedAt,
+} from '@app/o-auth/access-token/domain/value-objects';
 import { OAuthClientMapper } from '@app/o-auth/client';
+import { OAuthRefreshTokenMapper } from '@app/o-auth/refresh-token';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class OAuthAccessTokenMapper implements IMapper
 {

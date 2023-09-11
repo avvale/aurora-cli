@@ -1,14 +1,11 @@
+import { OAuthDeleteApplicationsCommand } from '@app/o-auth/application';
+import { OAuthDeleteApplicationsCommandHandler } from '@app/o-auth/application/application/delete/o-auth-delete-applications.command-handler';
+import { OAuthDeleteApplicationsService } from '@app/o-auth/application/application/delete/o-auth-delete-applications.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteApplicationsCommandHandler } from './o-auth-delete-applications.command-handler';
-import { OAuthDeleteApplicationsCommand } from './o-auth-delete-applications.command';
-import { OAuthDeleteApplicationsService } from './o-auth-delete-applications.service';
 
 describe('OAuthDeleteApplicationsCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteApplicationsCommandHandler;
-    let service: OAuthDeleteApplicationsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('OAuthDeleteApplicationsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteApplicationsCommandHandler>(OAuthDeleteApplicationsCommandHandler);
-        service = module.get<OAuthDeleteApplicationsService>(OAuthDeleteApplicationsService);
     });
 
     describe('main', () =>

@@ -1,12 +1,8 @@
+import { OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationRepository } from '@app/o-auth/application';
+import { OAuthFindApplicationByIdService } from '@app/o-auth/application/application/find/o-auth-find-application-by-id.service';
+import { OAuthApplicationId } from '@app/o-auth/application/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthFindApplicationByIdService } from './o-auth-find-application-by-id.service';
-import { OAuthApplicationId } from '../../domain/value-objects';
-import { OAuthIApplicationRepository } from '../../domain/o-auth-application.repository';
-import { OAuthMockApplicationRepository } from '../../infrastructure/mock/o-auth-mock-application.repository';
 
 describe('OAuthFindApplicationByIdService', () =>
 {

@@ -1,19 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { OAuthIApplicationRepository } from '@app/o-auth/application/domain/o-auth-application.repository';
+import { OAuthApplication, OAuthIApplicationRepository, oAuthMockApplicationData } from '@app/o-auth/application';
 import {
-    OAuthApplicationId,
+    OAuthApplicationClientIds,
     OAuthApplicationCode,
+    OAuthApplicationCreatedAt,
+    OAuthApplicationDeletedAt,
+    OAuthApplicationId,
+    OAuthApplicationIsMaster,
     OAuthApplicationName,
     OAuthApplicationSecret,
-    OAuthApplicationIsMaster,
-    OAuthApplicationClientIds,
-    OAuthApplicationCreatedAt,
     OAuthApplicationUpdatedAt,
-    OAuthApplicationDeletedAt,
 } from '@app/o-auth/application/domain/value-objects';
-import { OAuthApplication } from '../../domain/o-auth-application.aggregate';
-import { oAuthMockApplicationData } from './o-auth-mock-application.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthMockApplicationRepository extends MockRepository<OAuthApplication> implements OAuthIApplicationRepository
@@ -21,7 +19,6 @@ export class OAuthMockApplicationRepository extends MockRepository<OAuthApplicat
     public readonly repository: any;
     public readonly aggregateName: string = 'OAuthApplication';
     public collectionSource: OAuthApplication[];
-    public deletedAtInstance: OAuthApplicationDeletedAt = new OAuthApplicationDeletedAt(null);
 
     constructor()
     {

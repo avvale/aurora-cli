@@ -1,13 +1,7 @@
+import { OAuthFindScopeByIdQuery, OAuthIScopeRepository, oAuthMockScopeData, OAuthMockScopeRepository, OAuthScopeMapper } from '@app/o-auth/scope';
+import { OAuthFindScopeByIdQueryHandler } from '@app/o-auth/scope/application/find/o-auth-find-scope-by-id.query-handler';
+import { OAuthFindScopeByIdService } from '@app/o-auth/scope/application/find/o-auth-find-scope-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindScopeByIdQueryHandler } from './o-auth-find-scope-by-id.query-handler';
-import { OAuthMockScopeRepository } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.repository';
-import { oAuthMockScopeData } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.data';
-import { OAuthIScopeRepository } from '@app/o-auth/scope/domain/o-auth-scope.repository';
-import { OAuthScopeMapper } from '@app/o-auth/scope/domain/o-auth-scope.mapper';
-import { OAuthFindScopeByIdQuery } from './o-auth-find-scope-by-id.query';
-import { OAuthFindScopeByIdService } from './o-auth-find-scope-by-id.service';
 
 describe('OAuthFindScopeByIdQueryHandler', () =>
 {

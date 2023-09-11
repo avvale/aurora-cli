@@ -1,9 +1,7 @@
+import { OAuthApplicationMapper, OAuthApplicationResponse, OAuthFindApplicationByIdQuery } from '@app/o-auth/application';
+import { OAuthFindApplicationByIdService } from '@app/o-auth/application/application/find/o-auth-find-application-by-id.service';
+import { OAuthApplicationId } from '@app/o-auth/application/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthApplicationResponse } from '../../domain/o-auth-application.response';
-import { OAuthApplicationMapper } from '../../domain/o-auth-application.mapper';
-import { OAuthApplicationId } from '../../domain/value-objects';
-import { OAuthFindApplicationByIdQuery } from './o-auth-find-application-by-id.query';
-import { OAuthFindApplicationByIdService } from './o-auth-find-application-by-id.service';
 
 @QueryHandler(OAuthFindApplicationByIdQuery)
 export class OAuthFindApplicationByIdQueryHandler implements IQueryHandler<OAuthFindApplicationByIdQuery>

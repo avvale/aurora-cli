@@ -1,8 +1,6 @@
+import { OAuthAccessTokenMapper, OAuthAccessTokenResponse, OAuthRawSQLAccessTokensQuery } from '@app/o-auth/access-token';
+import { OAuthRawSQLAccessTokensService } from '@app/o-auth/access-token/application/raw-sql/o-auth-raw-sql-access-tokens.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthAccessTokenResponse } from '../../domain/o-auth-access-token.response';
-import { OAuthAccessTokenMapper } from '../../domain/o-auth-access-token.mapper';
-import { OAuthRawSQLAccessTokensQuery } from './o-auth-raw-sql-access-tokens.query';
-import { OAuthRawSQLAccessTokensService } from './o-auth-raw-sql-access-tokens.service';
 
 @QueryHandler(OAuthRawSQLAccessTokensQuery)
 export class OAuthRawSQLAccessTokensQueryHandler implements IQueryHandler<OAuthRawSQLAccessTokensQuery>

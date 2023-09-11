@@ -1,13 +1,7 @@
+import { OAuthApplicationMapper, OAuthFindApplicationByIdQuery, OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationRepository } from '@app/o-auth/application';
+import { OAuthFindApplicationByIdQueryHandler } from '@app/o-auth/application/application/find/o-auth-find-application-by-id.query-handler';
+import { OAuthFindApplicationByIdService } from '@app/o-auth/application/application/find/o-auth-find-application-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthFindApplicationByIdQueryHandler } from './o-auth-find-application-by-id.query-handler';
-import { OAuthMockApplicationRepository } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.repository';
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthIApplicationRepository } from '@app/o-auth/application/domain/o-auth-application.repository';
-import { OAuthApplicationMapper } from '@app/o-auth/application/domain/o-auth-application.mapper';
-import { OAuthFindApplicationByIdQuery } from './o-auth-find-application-by-id.query';
-import { OAuthFindApplicationByIdService } from './o-auth-find-application-by-id.service';
 
 describe('OAuthFindApplicationByIdQueryHandler', () =>
 {

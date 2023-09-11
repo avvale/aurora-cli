@@ -1,15 +1,11 @@
+import { OAuthDeleteApplicationByIdCommand, oAuthMockApplicationData } from '@app/o-auth/application';
+import { OAuthDeleteApplicationByIdCommandHandler } from '@app/o-auth/application/application/delete/o-auth-delete-application-by-id.command-handler';
+import { OAuthDeleteApplicationByIdService } from '@app/o-auth/application/application/delete/o-auth-delete-application-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteApplicationByIdCommandHandler } from './o-auth-delete-application-by-id.command-handler';
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthDeleteApplicationByIdCommand } from './o-auth-delete-application-by-id.command';
-import { OAuthDeleteApplicationByIdService } from './o-auth-delete-application-by-id.service';
 
 describe('OAuthDeleteApplicationByIdCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteApplicationByIdCommandHandler;
-    let service: OAuthDeleteApplicationByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('OAuthDeleteApplicationByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteApplicationByIdCommandHandler>(OAuthDeleteApplicationByIdCommandHandler);
-        service = module.get<OAuthDeleteApplicationByIdService>(OAuthDeleteApplicationByIdService);
     });
 
     describe('main', () =>

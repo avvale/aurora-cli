@@ -1,24 +1,21 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthUpdateClientByIdCommand } from './o-auth-update-client-by-id.command';
-import { OAuthUpdateClientByIdService } from './o-auth-update-client-by-id.service';
+import { OAuthUpdateClientByIdCommand } from '@app/o-auth/client';
+import { OAuthUpdateClientByIdService } from '@app/o-auth/client/application/update/o-auth-update-client-by-id.service';
 import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
+    OAuthClientApplicationIds,
     OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
     OAuthClientIsActive,
     OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
-    OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
-} from '../../domain/value-objects';
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
+} from '@app/o-auth/client/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthUpdateClientByIdCommand)
 export class OAuthUpdateClientByIdCommandHandler implements ICommandHandler<OAuthUpdateClientByIdCommand>

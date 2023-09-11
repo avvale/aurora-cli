@@ -1,6 +1,6 @@
+import { OAuthDeleteAccessTokensCommand } from '@app/o-auth/access-token';
+import { OAuthDeleteAccessTokensService } from '@app/o-auth/access-token/application/delete/o-auth-delete-access-tokens.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteAccessTokensCommand } from './o-auth-delete-access-tokens.command';
-import { OAuthDeleteAccessTokensService } from './o-auth-delete-access-tokens.service';
 
 @CommandHandler(OAuthDeleteAccessTokensCommand)
 export class OAuthDeleteAccessTokensCommandHandler implements ICommandHandler<OAuthDeleteAccessTokensCommand>

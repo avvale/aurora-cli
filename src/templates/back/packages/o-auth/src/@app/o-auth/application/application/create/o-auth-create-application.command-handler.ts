@@ -1,18 +1,15 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthCreateApplicationCommand } from './o-auth-create-application.command';
-import { OAuthCreateApplicationService } from './o-auth-create-application.service';
+import { OAuthCreateApplicationCommand } from '@app/o-auth/application';
+import { OAuthCreateApplicationService } from '@app/o-auth/application/application/create/o-auth-create-application.service';
 import {
-    OAuthApplicationId,
+    OAuthApplicationClientIds,
     OAuthApplicationCode,
+    OAuthApplicationId,
+    OAuthApplicationIsMaster,
     OAuthApplicationName,
     OAuthApplicationSecret,
-    OAuthApplicationIsMaster,
-    OAuthApplicationClientIds,
-    OAuthApplicationCreatedAt,
-    OAuthApplicationUpdatedAt,
-    OAuthApplicationDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/o-auth/application/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateApplicationCommand)
 export class OAuthCreateApplicationCommandHandler implements ICommandHandler<OAuthCreateApplicationCommand>

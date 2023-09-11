@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { OAuthIScopeRepository, oAuthMockScopeData, OAuthMockScopeSeeder } from '@app/o-auth/scope';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('scope', () =>
                 OAuthMockScopeSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthScopeId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeCode must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthScopeCode must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthScopeName must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthScopeId must be defined, can not be undefined');
             });
     });
 
@@ -150,7 +153,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeCode must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthScopeCode must be defined, can not be undefined');
             });
     });
 
@@ -166,7 +169,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthScopeName must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +185,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthScopeId is not allowed, must be a length of 36');
             });
     });
 
@@ -198,7 +201,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeCode is too large, has a maximum length of 20');
+                expect(res.body.message).toContain('Value for OAuthScopeCode is too large, has a maximum length of 20');
             });
     });
 
@@ -214,7 +217,7 @@ describe('scope', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ScopeName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for OAuthScopeName is too large, has a maximum length of 255');
             });
     });
 

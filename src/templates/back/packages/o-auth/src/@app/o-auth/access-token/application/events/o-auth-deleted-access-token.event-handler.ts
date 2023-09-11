@@ -1,5 +1,5 @@
+import { OAuthDeletedAccessTokenEvent } from '@app/o-auth/access-token';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { OAuthDeletedAccessTokenEvent } from './o-auth-deleted-access-token.event';
 
 @EventsHandler(OAuthDeletedAccessTokenEvent)
 export class OAuthDeletedAccessTokenEventHandler implements IEventHandler<OAuthDeletedAccessTokenEvent>

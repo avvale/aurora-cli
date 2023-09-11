@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { OAuthApplication, OAuthIApplicationRepository } from '@app/o-auth/application';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { OAuthIApplicationRepository } from '../../domain/o-auth-application.repository';
-import { OAuthApplication } from '../../domain/o-auth-application.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthRawSQLApplicationsService

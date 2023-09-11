@@ -1,15 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { oAuthMockScopeData, OAuthScope } from '@app/o-auth/scope';
 import {
-    OAuthScopeId,
     OAuthScopeCode,
-    OAuthScopeName,
     OAuthScopeCreatedAt,
-    OAuthScopeUpdatedAt,
     OAuthScopeDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthScope } from '../../domain/o-auth-scope.aggregate';
-import { oAuthMockScopeData } from './o-auth-mock-scope.data';
+    OAuthScopeId,
+    OAuthScopeName,
+    OAuthScopeUpdatedAt,
+} from '@app/o-auth/scope/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthIApplicationRepository, OAuthMockApplicationRepository, OAuthPaginateApplicationsQuery } from '@app/o-auth/application';
+import { OAuthPaginateApplicationsQueryHandler } from '@app/o-auth/application/application/paginate/o-auth-paginate-applications.query-handler';
+import { OAuthPaginateApplicationsService } from '@app/o-auth/application/application/paginate/o-auth-paginate-applications.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthPaginateApplicationsQueryHandler } from './o-auth-paginate-applications.query-handler';
-import { OAuthMockApplicationRepository } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.repository';
-import { OAuthIApplicationRepository } from '@app/o-auth/application/domain/o-auth-application.repository';
-import { OAuthApplicationMapper } from '@app/o-auth/application/domain/o-auth-application.mapper';
-import { OAuthPaginateApplicationsQuery } from './o-auth-paginate-applications.query';
-import { OAuthPaginateApplicationsService } from './o-auth-paginate-applications.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthPaginateApplicationsQueryHandler', () =>
 {
     let queryHandler: OAuthPaginateApplicationsQueryHandler;
     let service: OAuthPaginateApplicationsService;
     let repository: OAuthMockApplicationRepository;
-    let mapper: OAuthApplicationMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('OAuthPaginateApplicationsQueryHandler', () =>
         queryHandler = module.get<OAuthPaginateApplicationsQueryHandler>(OAuthPaginateApplicationsQueryHandler);
         service = module.get<OAuthPaginateApplicationsService>(OAuthPaginateApplicationsService);
         repository = <OAuthMockApplicationRepository>module.get<OAuthIApplicationRepository>(OAuthIApplicationRepository);
-        mapper = new OAuthApplicationMapper();
     });
 
     describe('main', () =>

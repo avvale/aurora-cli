@@ -1,8 +1,6 @@
+import { OAuthIRefreshTokenRepository, OAuthRefreshToken } from '@app/o-auth/refresh-token';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { OAuthIRefreshTokenRepository } from '../../domain/o-auth-refresh-token.repository';
-import { OAuthRefreshToken } from '../../domain/o-auth-refresh-token.aggregate';
 
 @Injectable()
 export class OAuthGetRefreshTokensService

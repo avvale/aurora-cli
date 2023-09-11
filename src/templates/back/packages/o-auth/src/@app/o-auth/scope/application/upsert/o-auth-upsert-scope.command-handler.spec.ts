@@ -1,10 +1,7 @@
+import { oAuthMockScopeData, OAuthUpsertScopeCommand } from '@app/o-auth/scope';
+import { OAuthUpsertScopeCommandHandler } from '@app/o-auth/scope/application/upsert/o-auth-upsert-scope.command-handler';
+import { OAuthUpsertScopeService } from '@app/o-auth/scope/application/upsert/o-auth-upsert-scope.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { oAuthMockScopeData } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.data';
-import { OAuthUpsertScopeCommandHandler } from './o-auth-upsert-scope.command-handler';
-import { OAuthUpsertScopeCommand } from './o-auth-upsert-scope.command';
-import { OAuthUpsertScopeService } from './o-auth-upsert-scope.service';
 
 describe('OAuthUpsertScopeCommandHandler', () =>
 {

@@ -1,12 +1,7 @@
+import { OAuthGetRefreshTokensQuery, OAuthIRefreshTokenRepository, OAuthMockRefreshTokenRepository, OAuthRefreshTokenMapper } from '@app/o-auth/refresh-token';
+import { OAuthGetRefreshTokensQueryHandler } from '@app/o-auth/refresh-token/application/get/o-auth-get-refresh-tokens.query-handler';
+import { OAuthGetRefreshTokensService } from '@app/o-auth/refresh-token/application/get/o-auth-get-refresh-tokens.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthGetRefreshTokensQueryHandler } from './o-auth-get-refresh-tokens.query-handler';
-import { OAuthMockRefreshTokenRepository } from '@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.repository';
-import { OAuthIRefreshTokenRepository } from '@app/o-auth/refresh-token/domain/o-auth-refresh-token.repository';
-import { OAuthRefreshTokenMapper } from '@app/o-auth/refresh-token/domain/o-auth-refresh-token.mapper';
-import { OAuthGetRefreshTokensQuery } from './o-auth-get-refresh-tokens.query';
-import { OAuthGetRefreshTokensService } from './o-auth-get-refresh-tokens.service';
 
 describe('GetRefreshTokensQueryHandler', () =>
 {

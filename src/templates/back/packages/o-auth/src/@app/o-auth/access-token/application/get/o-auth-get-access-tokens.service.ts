@@ -1,8 +1,6 @@
+import { OAuthAccessToken, OAuthIAccessTokenRepository } from '@app/o-auth/access-token';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { OAuthIAccessTokenRepository } from '../../domain/o-auth-access-token.repository';
-import { OAuthAccessToken } from '../../domain/o-auth-access-token.aggregate';
 
 @Injectable()
 export class OAuthGetAccessTokensService

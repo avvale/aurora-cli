@@ -1,21 +1,19 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { OAuthCreatedApplicationEvent, OAuthDeletedApplicationEvent, OAuthUpdatedApplicationEvent } from '@app/o-auth/application';
 import {
-    OAuthApplicationId,
+    OAuthApplicationClientIds,
     OAuthApplicationCode,
+    OAuthApplicationCreatedAt,
+    OAuthApplicationDeletedAt,
+    OAuthApplicationId,
+    OAuthApplicationIsMaster,
     OAuthApplicationName,
     OAuthApplicationSecret,
-    OAuthApplicationIsMaster,
-    OAuthApplicationClientIds,
-    OAuthApplicationCreatedAt,
     OAuthApplicationUpdatedAt,
-    OAuthApplicationDeletedAt,
-} from './value-objects';
-import { OAuthCreatedApplicationEvent } from '../application/events/o-auth-created-application.event';
-import { OAuthUpdatedApplicationEvent } from '../application/events/o-auth-updated-application.event';
-import { OAuthDeletedApplicationEvent } from '../application/events/o-auth-deleted-application.event';
+} from '@app/o-auth/application/domain/value-objects';
 import { OAuthClient } from '@app/o-auth/client';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class OAuthApplication extends AggregateRoot
 {
@@ -28,8 +26,6 @@ export class OAuthApplication extends AggregateRoot
     createdAt: OAuthApplicationCreatedAt;
     updatedAt: OAuthApplicationUpdatedAt;
     deletedAt: OAuthApplicationDeletedAt;
-
-    // eager relationship
     clients: OAuthClient[];
 
     constructor(
@@ -42,7 +38,6 @@ export class OAuthApplication extends AggregateRoot
         createdAt: OAuthApplicationCreatedAt,
         updatedAt: OAuthApplicationUpdatedAt,
         deletedAt: OAuthApplicationDeletedAt,
-
         clients?: OAuthClient[],
     )
     {
@@ -56,12 +51,10 @@ export class OAuthApplication extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.clients = clients;
     }
 
-    static register (
+    static register(
         id: OAuthApplicationId,
         code: OAuthApplicationCode,
         name: OAuthApplicationName,
@@ -71,7 +64,6 @@ export class OAuthApplication extends AggregateRoot
         createdAt: OAuthApplicationCreatedAt,
         updatedAt: OAuthApplicationUpdatedAt,
         deletedAt: OAuthApplicationDeletedAt,
-
         clients?: OAuthClient[],
     ): OAuthApplication
     {
@@ -85,7 +77,6 @@ export class OAuthApplication extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             clients,
         );
     }
@@ -153,8 +144,6 @@ export class OAuthApplication extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             clients: this.clients?.map(item => item.toDTO()),
         };
     }
@@ -172,8 +161,6 @@ export class OAuthApplication extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             clients: this.clients?.map(item => item.toDTO()),
         };
     }

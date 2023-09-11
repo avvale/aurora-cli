@@ -1,11 +1,5 @@
+import { OAuthApplication, OAuthCreatedApplicationEvent, OAuthCreatedApplicationsEvent, OAuthDeletedApplicationEvent, OAuthDeletedApplicationsEvent, OAuthUpdatedApplicationEvent, OAuthUpdatedApplicationsEvent } from '@app/o-auth/application';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { OAuthApplication } from '../../domain/o-auth-application.aggregate';
-import { OAuthCreatedApplicationEvent } from './o-auth-created-application.event';
-import { OAuthCreatedApplicationsEvent } from './o-auth-created-applications.event';
-import { OAuthUpdatedApplicationEvent } from './o-auth-updated-application.event';
-import { OAuthUpdatedApplicationsEvent } from './o-auth-updated-applications.event';
-import { OAuthDeletedApplicationEvent } from './o-auth-deleted-application.event';
-import { OAuthDeletedApplicationsEvent } from './o-auth-deleted-applications.event';
 
 export class OAuthAddApplicationsContextEvent extends AggregateRoot
 {

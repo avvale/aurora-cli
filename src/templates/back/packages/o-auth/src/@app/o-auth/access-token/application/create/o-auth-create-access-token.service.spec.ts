@@ -1,24 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockAccessTokenData } from '@app/o-auth/access-token/infrastructure/mock/o-auth-mock-access-token.data';
-import { OAuthCreateAccessTokenService } from './o-auth-create-access-token.service';
+import { OAuthIAccessTokenRepository, oAuthMockAccessTokenData, OAuthMockAccessTokenRepository } from '@app/o-auth/access-token';
+import { OAuthCreateAccessTokenService } from '@app/o-auth/access-token/application/create/o-auth-create-access-token.service';
 import {
-    OAuthAccessTokenId,
-    OAuthAccessTokenClientId,
     OAuthAccessTokenAccountId,
-    OAuthAccessTokenToken,
-    OAuthAccessTokenName,
-    OAuthAccessTokenIsRevoked,
+    OAuthAccessTokenClientId,
     OAuthAccessTokenExpiresAt,
-    OAuthAccessTokenCreatedAt,
-    OAuthAccessTokenUpdatedAt,
-    OAuthAccessTokenDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthIAccessTokenRepository } from '../../domain/o-auth-access-token.repository';
-import { OAuthMockAccessTokenRepository } from '../../infrastructure/mock/o-auth-mock-access-token.repository';
+    OAuthAccessTokenId,
+    OAuthAccessTokenIsRevoked,
+    OAuthAccessTokenName,
+    OAuthAccessTokenToken,
+} from '@app/o-auth/access-token/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateAccessTokenService', () =>
 

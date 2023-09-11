@@ -1,17 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { oAuthMockRefreshTokenData, OAuthRefreshToken } from '@app/o-auth/refresh-token';
 import {
-    OAuthRefreshTokenId,
     OAuthRefreshTokenAccessTokenId,
-    OAuthRefreshTokenToken,
-    OAuthRefreshTokenIsRevoked,
-    OAuthRefreshTokenExpiresAt,
     OAuthRefreshTokenCreatedAt,
-    OAuthRefreshTokenUpdatedAt,
     OAuthRefreshTokenDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthRefreshToken } from '../../domain/o-auth-refresh-token.aggregate';
-import { oAuthMockRefreshTokenData } from './o-auth-mock-refresh-token.data';
+    OAuthRefreshTokenExpiresAt,
+    OAuthRefreshTokenId,
+    OAuthRefreshTokenIsRevoked,
+    OAuthRefreshTokenToken,
+    OAuthRefreshTokenUpdatedAt,
+} from '@app/o-auth/refresh-token/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

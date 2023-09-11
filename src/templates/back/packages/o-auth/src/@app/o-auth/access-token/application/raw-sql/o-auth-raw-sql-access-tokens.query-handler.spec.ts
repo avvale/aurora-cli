@@ -1,12 +1,7 @@
+import { OAuthAccessTokenMapper, OAuthIAccessTokenRepository, OAuthMockAccessTokenRepository, OAuthRawSQLAccessTokensQuery } from '@app/o-auth/access-token';
+import { OAuthRawSQLAccessTokensQueryHandler } from '@app/o-auth/access-token/application/raw-sql/o-auth-raw-sql-access-tokens.query-handler';
+import { OAuthRawSQLAccessTokensService } from '@app/o-auth/access-token/application/raw-sql/o-auth-raw-sql-access-tokens.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthMockAccessTokenRepository } from '@app/o-auth/access-token/infrastructure/mock/o-auth-mock-access-token.repository';
-import { OAuthIAccessTokenRepository } from '@app/o-auth/access-token/domain/o-auth-access-token.repository';
-import { OAuthAccessTokenMapper } from '@app/o-auth/access-token/domain/o-auth-access-token.mapper';
-import { OAuthRawSQLAccessTokensQueryHandler } from './o-auth-raw-sql-access-tokens.query-handler';
-import { OAuthRawSQLAccessTokensQuery } from './o-auth-raw-sql-access-tokens.query';
-import { OAuthRawSQLAccessTokensService } from './o-auth-raw-sql-access-tokens.service';
 
 describe('RawSQLAccessTokensQueryHandler', () =>
 {

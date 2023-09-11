@@ -1,15 +1,11 @@
+import { oAuthMockScopeData, OAuthUpdateScopeByIdCommand } from '@app/o-auth/scope';
+import { OAuthUpdateScopeByIdCommandHandler } from '@app/o-auth/scope/application/update/o-auth-update-scope-by-id.command-handler';
+import { OAuthUpdateScopeByIdService } from '@app/o-auth/scope/application/update/o-auth-update-scope-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { oAuthMockScopeData } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.data';
-import { OAuthUpdateScopeByIdCommandHandler } from './o-auth-update-scope-by-id.command-handler';
-import { OAuthUpdateScopeByIdCommand } from './o-auth-update-scope-by-id.command';
-import { OAuthUpdateScopeByIdService } from './o-auth-update-scope-by-id.service';
 
 describe('OAuthUpdateScopeByIdCommandHandler', () =>
 {
     let commandHandler: OAuthUpdateScopeByIdCommandHandler;
-    let service: OAuthUpdateScopeByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('OAuthUpdateScopeByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthUpdateScopeByIdCommandHandler>(OAuthUpdateScopeByIdCommandHandler);
-        service = module.get<OAuthUpdateScopeByIdService>(OAuthUpdateScopeByIdService);
     });
 
     describe('main', () =>

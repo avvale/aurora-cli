@@ -63,20 +63,40 @@ aggregateProperties:
     relationship:
       type: many-to-many
       singularName: application
-      aggregate: OAuthApplication
+      aggregateName: OAuthApplication
       modulePath: o-auth/application
       avoidConstraint: true
       pivot:
-        aggregate: OAuthApplicationsClients
-        modulePath: o-auth/application
-        fileName: applications-clients
+        boundedContextName: o-auth
+        moduleName: application-client
+        moduleNames: applications-clients
+        aggregateName: OAuthApplicationClient
+        hasOAuth: true
+        hasAuditing: true
+        aggregateProperties:
+          - name: applicationId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: OAuthApplication
+            modulePath: o-auth/application
+          - name: clientId
+            type: id
+            primaryKey: true
+            length: 36
+            nullable: false
+            aggregateName: OAuthClient
+            modulePath: o-auth/client
+    webComponent:
+      type: multiple-select
   - name: accessTokens
     type: relationship
     nullable: true
     relationship:
       type: one-to-many
       singularName: accessToken
-      aggregate: OAuthAccessToken
+      aggregateName: OAuthAccessToken
       modulePath: o-auth/access-token
       avoidConstraint: true
   - name: createdAt
@@ -88,5 +108,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []

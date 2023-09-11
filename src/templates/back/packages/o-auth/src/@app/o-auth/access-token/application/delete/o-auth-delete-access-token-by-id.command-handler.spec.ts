@@ -1,15 +1,11 @@
+import { OAuthDeleteAccessTokenByIdCommand, oAuthMockAccessTokenData } from '@app/o-auth/access-token';
+import { OAuthDeleteAccessTokenByIdCommandHandler } from '@app/o-auth/access-token/application/delete/o-auth-delete-access-token-by-id.command-handler';
+import { OAuthDeleteAccessTokenByIdService } from '@app/o-auth/access-token/application/delete/o-auth-delete-access-token-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteAccessTokenByIdCommandHandler } from './o-auth-delete-access-token-by-id.command-handler';
-import { oAuthMockAccessTokenData } from '@app/o-auth/access-token/infrastructure/mock/o-auth-mock-access-token.data';
-import { OAuthDeleteAccessTokenByIdCommand } from './o-auth-delete-access-token-by-id.command';
-import { OAuthDeleteAccessTokenByIdService } from './o-auth-delete-access-token-by-id.service';
 
 describe('OAuthDeleteAccessTokenByIdCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteAccessTokenByIdCommandHandler;
-    let service: OAuthDeleteAccessTokenByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('OAuthDeleteAccessTokenByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteAccessTokenByIdCommandHandler>(OAuthDeleteAccessTokenByIdCommandHandler);
-        service = module.get<OAuthDeleteAccessTokenByIdService>(OAuthDeleteAccessTokenByIdService);
     });
 
     describe('main', () =>

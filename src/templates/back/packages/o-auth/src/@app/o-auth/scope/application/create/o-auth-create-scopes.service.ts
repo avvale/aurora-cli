@@ -20,7 +20,7 @@ export class OAuthCreateScopesService
     ) {}
 
     async main(
-        scopes: {
+        payload: {
             id: OAuthScopeId;
             code: OAuthScopeCode;
             name: OAuthScopeName;
@@ -29,7 +29,7 @@ export class OAuthCreateScopesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateScopes = scopes.map(scope => OAuthScope.register(
+        const aggregateScopes = payload.map(scope => OAuthScope.register(
             scope.id,
             scope.code,
             scope.name,

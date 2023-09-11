@@ -1,10 +1,7 @@
+import { oAuthMockApplicationData, OAuthUpsertApplicationCommand } from '@app/o-auth/application';
+import { OAuthUpsertApplicationCommandHandler } from '@app/o-auth/application/application/upsert/o-auth-upsert-application.command-handler';
+import { OAuthUpsertApplicationService } from '@app/o-auth/application/application/upsert/o-auth-upsert-application.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthUpsertApplicationCommandHandler } from './o-auth-upsert-application.command-handler';
-import { OAuthUpsertApplicationCommand } from './o-auth-upsert-application.command';
-import { OAuthUpsertApplicationService } from './o-auth-upsert-application.service';
 
 describe('OAuthUpsertApplicationCommandHandler', () =>
 {

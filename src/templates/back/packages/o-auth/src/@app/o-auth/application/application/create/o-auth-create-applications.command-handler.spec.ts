@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthCreateApplicationsCommand, oAuthMockApplicationData } from '@app/o-auth/application';
+import { OAuthCreateApplicationsCommandHandler } from '@app/o-auth/application/application/create/o-auth-create-applications.command-handler';
+import { OAuthCreateApplicationsService } from '@app/o-auth/application/application/create/o-auth-create-applications.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { oAuthMockApplicationData } from '@app/o-auth/application/infrastructure/mock/o-auth-mock-application.data';
-import { OAuthCreateApplicationsCommandHandler } from './o-auth-create-applications.command-handler';
-import { OAuthCreateApplicationsCommand } from './o-auth-create-applications.command';
-import { OAuthCreateApplicationsService } from './o-auth-create-applications.service';
 
 describe('oAuthCreateApplicationsCommandHandler', () =>
 {
     let commandHandler: OAuthCreateApplicationsCommandHandler;
-    let service: OAuthCreateApplicationsService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('oAuthCreateApplicationsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthCreateApplicationsCommandHandler>(OAuthCreateApplicationsCommandHandler);
-        service = module.get<OAuthCreateApplicationsService>(OAuthCreateApplicationsService);
     });
 
     describe('main', () =>

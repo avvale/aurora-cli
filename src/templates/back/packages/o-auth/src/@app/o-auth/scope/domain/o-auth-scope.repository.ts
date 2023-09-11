@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { OAuthScope } from './o-auth-scope.aggregate';
 import { OAuthScopeId } from './value-objects';
+import { OAuthScope } from '@app/o-auth/scope';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class OAuthIScopeRepository implements IRepository<OAuthScope>
 {
@@ -30,6 +30,8 @@ export abstract class OAuthIScopeRepository implements IRepository<OAuthScope>
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<OAuthScope | null>;
 
@@ -124,6 +126,8 @@ export abstract class OAuthIScopeRepository implements IRepository<OAuthScope>
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

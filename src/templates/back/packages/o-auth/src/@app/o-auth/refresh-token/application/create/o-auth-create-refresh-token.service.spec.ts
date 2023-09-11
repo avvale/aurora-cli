@@ -1,23 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.data';
-import { OAuthCreateRefreshTokenService } from './o-auth-create-refresh-token.service';
+import { OAuthIRefreshTokenRepository, oAuthMockRefreshTokenData, OAuthMockRefreshTokenRepository } from '@app/o-auth/refresh-token';
+import { OAuthCreateRefreshTokenService } from '@app/o-auth/refresh-token/application/create/o-auth-create-refresh-token.service';
 import {
-    OAuthRefreshTokenId,
     OAuthRefreshTokenAccessTokenId,
-    OAuthRefreshTokenToken,
-    OAuthRefreshTokenIsRevoked,
     OAuthRefreshTokenExpiresAt,
-    OAuthRefreshTokenCreatedAt,
-    OAuthRefreshTokenUpdatedAt,
-    OAuthRefreshTokenDeletedAt,
-    OAuthRefreshTokenExpiredRefreshToken,
-} from '../../domain/value-objects';
-import { OAuthIRefreshTokenRepository } from '../../domain/o-auth-refresh-token.repository';
-import { OAuthMockRefreshTokenRepository } from '../../infrastructure/mock/o-auth-mock-refresh-token.repository';
+    OAuthRefreshTokenId,
+    OAuthRefreshTokenIsRevoked,
+    OAuthRefreshTokenToken,
+} from '@app/o-auth/refresh-token/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateRefreshTokenService', () =>
 

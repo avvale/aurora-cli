@@ -1,5 +1,5 @@
-import { OAuthRefreshTokenResponse } from '@app/o-auth/refresh-token';
 import { OAuthClientResponse } from '@app/o-auth/client';
+import { OAuthRefreshTokenResponse } from '@app/o-auth/refresh-token';
 
 export class OAuthAccessTokenResponse
 {

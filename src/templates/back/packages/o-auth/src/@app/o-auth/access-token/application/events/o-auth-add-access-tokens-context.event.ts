@@ -1,7 +1,5 @@
+import { OAuthAccessToken, OAuthDeletedAccessTokenEvent, OAuthDeletedAccessTokensEvent } from '@app/o-auth/access-token';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { OAuthAccessToken } from '../../domain/o-auth-access-token.aggregate';
-import { OAuthDeletedAccessTokenEvent } from './o-auth-deleted-access-token.event';
-import { OAuthDeletedAccessTokensEvent } from './o-auth-deleted-access-tokens.event';
 
 export class OAuthAddAccessTokensContextEvent extends AggregateRoot
 {

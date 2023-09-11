@@ -1,27 +1,24 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { OAuthAddClientsContextEvent, OAuthClient, OAuthIClientRepository } from '@app/o-auth/client';
 import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
+    OAuthClientApplicationIds,
     OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
+    OAuthClientCreatedAt,
+    OAuthClientDeletedAt,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
     OAuthClientIsActive,
     OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
     OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
-} from '../../domain/value-objects';
-import { OAuthIClientRepository } from '../../domain/o-auth-client.repository';
-import { OAuthClient } from '../../domain/o-auth-client.aggregate';
-import { OAuthAddClientsContextEvent } from '../events/o-auth-add-clients-context.event';
+} from '@app/o-auth/client/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class OAuthUpdateClientsService
@@ -69,7 +66,6 @@ export class OAuthUpdateClientsService
             new OAuthClientUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

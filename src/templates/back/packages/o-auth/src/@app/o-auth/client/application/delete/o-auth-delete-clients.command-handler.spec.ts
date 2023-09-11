@@ -1,14 +1,11 @@
+import { OAuthDeleteClientsCommand } from '@app/o-auth/client';
+import { OAuthDeleteClientsCommandHandler } from '@app/o-auth/client/application/delete/o-auth-delete-clients.command-handler';
+import { OAuthDeleteClientsService } from '@app/o-auth/client/application/delete/o-auth-delete-clients.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteClientsCommandHandler } from './o-auth-delete-clients.command-handler';
-import { OAuthDeleteClientsCommand } from './o-auth-delete-clients.command';
-import { OAuthDeleteClientsService } from './o-auth-delete-clients.service';
 
 describe('OAuthDeleteClientsCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteClientsCommandHandler;
-    let service: OAuthDeleteClientsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('OAuthDeleteClientsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteClientsCommandHandler>(OAuthDeleteClientsCommandHandler);
-        service = module.get<OAuthDeleteClientsService>(OAuthDeleteClientsService);
     });
 
     describe('main', () =>

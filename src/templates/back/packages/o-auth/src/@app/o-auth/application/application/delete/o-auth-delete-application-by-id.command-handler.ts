@@ -1,9 +1,7 @@
+import { OAuthDeleteApplicationByIdCommand } from '@app/o-auth/application';
+import { OAuthDeleteApplicationByIdService } from '@app/o-auth/application/application/delete/o-auth-delete-application-by-id.service';
+import { OAuthApplicationId } from '@app/o-auth/application/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteApplicationByIdCommand } from './o-auth-delete-application-by-id.command';
-import { OAuthDeleteApplicationByIdService } from './o-auth-delete-application-by-id.service';
-import {
-    OAuthApplicationId
-} from '../../domain/value-objects';
 
 @CommandHandler(OAuthDeleteApplicationByIdCommand)
 export class OAuthDeleteApplicationByIdCommandHandler implements ICommandHandler<OAuthDeleteApplicationByIdCommand>

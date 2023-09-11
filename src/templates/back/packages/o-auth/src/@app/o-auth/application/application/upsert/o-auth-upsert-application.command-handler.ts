@@ -1,18 +1,15 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthUpsertApplicationCommand } from './o-auth-upsert-application.command';
-import { OAuthUpsertApplicationService } from './o-auth-upsert-application.service';
+import { OAuthUpsertApplicationCommand } from '@app/o-auth/application';
+import { OAuthUpsertApplicationService } from '@app/o-auth/application/application/upsert/o-auth-upsert-application.service';
 import {
-    OAuthApplicationId,
+    OAuthApplicationClientIds,
     OAuthApplicationCode,
+    OAuthApplicationId,
+    OAuthApplicationIsMaster,
     OAuthApplicationName,
     OAuthApplicationSecret,
-    OAuthApplicationIsMaster,
-    OAuthApplicationClientIds,
-    OAuthApplicationCreatedAt,
-    OAuthApplicationUpdatedAt,
-    OAuthApplicationDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/o-auth/application/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthUpsertApplicationCommand)
 export class OAuthUpsertApplicationCommandHandler implements ICommandHandler<OAuthUpsertApplicationCommand>

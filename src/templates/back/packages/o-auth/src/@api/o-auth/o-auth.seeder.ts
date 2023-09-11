@@ -8,6 +8,7 @@ import { IamBoundedContextHelper } from '@app/iam/bounded-context';
 import { IamPermissionHelper } from '@app/iam/permission';
 import { OAuthCreateApplicationsCommand } from '@app/o-auth/application';
 import { OAuthCreateClientsCommand } from '@app/o-auth/client';
+import { OAuthCreateApplicationsClientsCommand } from '@app/o-auth/application-client';
 
 @Injectable()
 export class OAuthSeeder
@@ -28,6 +29,13 @@ export class OAuthSeeder
 
         // create oauth clients
         await this.commandBus.dispatch(new OAuthCreateClientsCommand(clients));
+
+        await this.commandBus.dispatch(new OAuthCreateApplicationsClientsCommand([
+            {
+                applicationId: applications[0].id,
+                clientId     : clients[0].id,
+            },
+        ]));
 
         return true;
     }

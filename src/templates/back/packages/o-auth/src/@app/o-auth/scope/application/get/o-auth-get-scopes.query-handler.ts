@@ -1,8 +1,6 @@
+import { OAuthGetScopesQuery, OAuthScopeMapper, OAuthScopeResponse } from '@app/o-auth/scope';
+import { OAuthGetScopesService } from '@app/o-auth/scope/application/get/o-auth-get-scopes.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthScopeResponse } from '../../domain/o-auth-scope.response';
-import { OAuthScopeMapper } from '../../domain/o-auth-scope.mapper';
-import { OAuthGetScopesQuery } from './o-auth-get-scopes.query';
-import { OAuthGetScopesService } from './o-auth-get-scopes.service';
 
 @QueryHandler(OAuthGetScopesQuery)
 export class OAuthGetScopesQueryHandler implements IQueryHandler<OAuthGetScopesQuery>
@@ -15,10 +13,12 @@ export class OAuthGetScopesQueryHandler implements IQueryHandler<OAuthGetScopesQ
 
     async execute(query: OAuthGetScopesQuery): Promise<OAuthScopeResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getScopesService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getScopesService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

@@ -1,8 +1,6 @@
+import { OAuthClientMapper, OAuthClientResponse, OAuthGetClientsQuery } from '@app/o-auth/client';
+import { OAuthGetClientsService } from '@app/o-auth/client/application/get/o-auth-get-clients.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthClientResponse } from '../../domain/o-auth-client.response';
-import { OAuthClientMapper } from '../../domain/o-auth-client.mapper';
-import { OAuthGetClientsQuery } from './o-auth-get-clients.query';
-import { OAuthGetClientsService } from './o-auth-get-clients.service';
 
 @QueryHandler(OAuthGetClientsQuery)
 export class OAuthGetClientsQueryHandler implements IQueryHandler<OAuthGetClientsQuery>
@@ -15,10 +13,12 @@ export class OAuthGetClientsQueryHandler implements IQueryHandler<OAuthGetClient
 
     async execute(query: OAuthGetClientsQuery): Promise<OAuthClientResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getClientsService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getClientsService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

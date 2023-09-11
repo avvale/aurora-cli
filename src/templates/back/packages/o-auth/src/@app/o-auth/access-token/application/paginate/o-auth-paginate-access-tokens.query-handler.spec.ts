@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { OAuthIAccessTokenRepository, OAuthMockAccessTokenRepository, OAuthPaginateAccessTokensQuery } from '@app/o-auth/access-token';
+import { OAuthPaginateAccessTokensQueryHandler } from '@app/o-auth/access-token/application/paginate/o-auth-paginate-access-tokens.query-handler';
+import { OAuthPaginateAccessTokensService } from '@app/o-auth/access-token/application/paginate/o-auth-paginate-access-tokens.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { OAuthPaginateAccessTokensQueryHandler } from './o-auth-paginate-access-tokens.query-handler';
-import { OAuthMockAccessTokenRepository } from '@app/o-auth/access-token/infrastructure/mock/o-auth-mock-access-token.repository';
-import { OAuthIAccessTokenRepository } from '@app/o-auth/access-token/domain/o-auth-access-token.repository';
-import { OAuthAccessTokenMapper } from '@app/o-auth/access-token/domain/o-auth-access-token.mapper';
-import { OAuthPaginateAccessTokensQuery } from './o-auth-paginate-access-tokens.query';
-import { OAuthPaginateAccessTokensService } from './o-auth-paginate-access-tokens.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthPaginateAccessTokensQueryHandler', () =>
 {
     let queryHandler: OAuthPaginateAccessTokensQueryHandler;
     let service: OAuthPaginateAccessTokensService;
     let repository: OAuthMockAccessTokenRepository;
-    let mapper: OAuthAccessTokenMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('OAuthPaginateAccessTokensQueryHandler', () =>
         queryHandler = module.get<OAuthPaginateAccessTokensQueryHandler>(OAuthPaginateAccessTokensQueryHandler);
         service = module.get<OAuthPaginateAccessTokensService>(OAuthPaginateAccessTokensService);
         repository = <OAuthMockAccessTokenRepository>module.get<OAuthIAccessTokenRepository>(OAuthIAccessTokenRepository);
-        mapper = new OAuthAccessTokenMapper();
     });
 
     describe('main', () =>

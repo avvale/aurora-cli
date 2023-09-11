@@ -1,7 +1,7 @@
 import { OAuthAccessToken } from '@api/graphql';
 import { OAuthDeleteAccessTokenByIdHandler } from '@api/o-auth/access-token';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()

@@ -1,7 +1,5 @@
+import { OAuthDeletedRefreshTokenEvent, OAuthDeletedRefreshTokensEvent, OAuthRefreshToken } from '@app/o-auth/refresh-token';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { OAuthRefreshToken } from '../../domain/o-auth-refresh-token.aggregate';
-import { OAuthDeletedRefreshTokenEvent } from './o-auth-deleted-refresh-token.event';
-import { OAuthDeletedRefreshTokensEvent } from './o-auth-deleted-refresh-tokens.event';
 
 export class OAuthAddRefreshTokensContextEvent extends AggregateRoot
 {

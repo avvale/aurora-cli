@@ -1,14 +1,11 @@
+import { OAuthDeleteRefreshTokensCommand } from '@app/o-auth/refresh-token';
+import { OAuthDeleteRefreshTokensCommandHandler } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-tokens.command-handler';
+import { OAuthDeleteRefreshTokensService } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-tokens.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { OAuthDeleteRefreshTokensCommandHandler } from './o-auth-delete-refresh-tokens.command-handler';
-import { OAuthDeleteRefreshTokensCommand } from './o-auth-delete-refresh-tokens.command';
-import { OAuthDeleteRefreshTokensService } from './o-auth-delete-refresh-tokens.service';
 
 describe('OAuthDeleteRefreshTokensCommandHandler', () =>
 {
     let commandHandler: OAuthDeleteRefreshTokensCommandHandler;
-    let service: OAuthDeleteRefreshTokensService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('OAuthDeleteRefreshTokensCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthDeleteRefreshTokensCommandHandler>(OAuthDeleteRefreshTokensCommandHandler);
-        service = module.get<OAuthDeleteRefreshTokensService>(OAuthDeleteRefreshTokensService);
     });
 
     describe('main', () =>

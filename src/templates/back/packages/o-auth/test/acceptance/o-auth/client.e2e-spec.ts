@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { OAuthIClientRepository, oAuthMockClientData, OAuthMockClientSeeder } from '@app/o-auth/client';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('client', () =>
                 OAuthMockClientSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthClientId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientGrantType must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthClientGrantType must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthClientName must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientSecret must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthClientSecret must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientIsActive must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthClientIsActive must be defined, can not be null');
             });
     });
 
@@ -166,7 +169,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientIsMaster must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthClientIsMaster must be defined, can not be null');
             });
     });
 
@@ -182,7 +185,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthClientId must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +201,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientGrantType must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthClientGrantType must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +217,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthClientName must be defined, can not be undefined');
             });
     });
 
@@ -230,7 +233,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientSecret must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthClientSecret must be defined, can not be undefined');
             });
     });
 
@@ -246,7 +249,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientIsActive must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthClientIsActive must be defined, can not be undefined');
             });
     });
 
@@ -262,7 +265,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientIsMaster must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthClientIsMaster must be defined, can not be undefined');
             });
     });
 
@@ -278,7 +281,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthClientId is not allowed, must be a length of 36');
             });
     });
 
@@ -294,7 +297,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for OAuthClientName is too large, has a maximum length of 255');
             });
     });
 
@@ -310,7 +313,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientSecret is too large, has a maximum length of 90');
+                expect(res.body.message).toContain('Value for OAuthClientSecret is too large, has a maximum length of 90');
             });
     });
 
@@ -326,7 +329,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientAuthUrl is too large, has a maximum length of 2048');
+                expect(res.body.message).toContain('Value for OAuthClientAuthUrl is too large, has a maximum length of 2048');
             });
     });
 
@@ -342,7 +345,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientRedirect is too large, has a maximum length of 2048');
+                expect(res.body.message).toContain('Value for OAuthClientRedirect is too large, has a maximum length of 2048');
             });
     });
 
@@ -358,7 +361,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientExpiredAccessToken is too large, has a maximum length of 10');
+                expect(res.body.message).toContain('Value for OAuthClientExpiredAccessToken is too large, has a maximum length of 10');
             });
     });
 
@@ -374,7 +377,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientExpiredRefreshToken is too large, has a maximum length of 10');
+                expect(res.body.message).toContain('Value for OAuthClientExpiredRefreshToken is too large, has a maximum length of 10');
             });
     });
 
@@ -390,7 +393,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('The numerical value for ClientExpiredAccessToken must have a positive sign, this field does not accept negative values');
+                expect(res.body.message).toContain('The numerical Value for OAuthClientExpiredAccessToken must have a positive sign, this field does not accept negative values');
             });
     });
     test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredRefreshToken must have a positive sign', () =>
@@ -405,7 +408,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('The numerical value for ClientExpiredRefreshToken must have a positive sign, this field does not accept negative values');
+                expect(res.body.message).toContain('The numerical Value for OAuthClientExpiredRefreshToken must have a positive sign, this field does not accept negative values');
             });
     });
     test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive has to be a boolean value', () =>
@@ -420,7 +423,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientIsActive has to be a boolean value');
+                expect(res.body.message).toContain('Value for OAuthClientIsActive has to be a boolean value');
             });
     });
     test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsMaster has to be a boolean value', () =>
@@ -435,7 +438,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientIsMaster has to be a boolean value');
+                expect(res.body.message).toContain('Value for OAuthClientIsMaster has to be a boolean value');
             });
     });
     test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType has to be a enum option of AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN', () =>
@@ -450,7 +453,7 @@ describe('client', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ClientGrantType has to be any of this options: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN');
+                expect(res.body.message).toContain('Value for OAuthClientGrantType has to be any of this options: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN');
             });
     });
 

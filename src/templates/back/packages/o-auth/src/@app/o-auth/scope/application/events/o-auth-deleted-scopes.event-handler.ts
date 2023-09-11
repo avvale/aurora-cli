@@ -1,5 +1,5 @@
+import { OAuthDeletedScopesEvent } from '@app/o-auth/scope';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { OAuthDeletedScopesEvent } from './o-auth-deleted-scopes.event';
 
 @EventsHandler(OAuthDeletedScopesEvent)
 export class OAuthDeletedScopesEventHandler implements IEventHandler<OAuthDeletedScopesEvent>

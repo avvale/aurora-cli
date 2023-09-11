@@ -1,25 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { OAuthIClientRepository } from '@app/o-auth/client/domain/o-auth-client.repository';
+import { OAuthClient, OAuthIClientRepository, oAuthMockClientData } from '@app/o-auth/client';
 import {
-    OAuthClientId,
-    OAuthClientGrantType,
-    OAuthClientName,
-    OAuthClientSecret,
+    OAuthClientApplicationIds,
     OAuthClientAuthUrl,
-    OAuthClientRedirect,
-    OAuthClientScopeOptions,
+    OAuthClientCreatedAt,
+    OAuthClientDeletedAt,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
+    OAuthClientGrantType,
+    OAuthClientId,
     OAuthClientIsActive,
     OAuthClientIsMaster,
-    OAuthClientApplicationIds,
-    OAuthClientCreatedAt,
+    OAuthClientName,
+    OAuthClientRedirect,
+    OAuthClientScopeOptions,
+    OAuthClientSecret,
     OAuthClientUpdatedAt,
-    OAuthClientDeletedAt,
 } from '@app/o-auth/client/domain/value-objects';
-import { OAuthClient } from '../../domain/o-auth-client.aggregate';
-import { oAuthMockClientData } from './o-auth-mock-client.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthMockClientRepository extends MockRepository<OAuthClient> implements OAuthIClientRepository
@@ -27,7 +25,6 @@ export class OAuthMockClientRepository extends MockRepository<OAuthClient> imple
     public readonly repository: any;
     public readonly aggregateName: string = 'OAuthClient';
     public collectionSource: OAuthClient[];
-    public deletedAtInstance: OAuthClientDeletedAt = new OAuthClientDeletedAt(null);
 
     constructor()
     {

@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { OAuthRefreshToken } from './o-auth-refresh-token.aggregate';
 import { OAuthRefreshTokenId } from './value-objects';
+import { OAuthRefreshToken } from '@app/o-auth/refresh-token';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class OAuthIRefreshTokenRepository implements IRepository<OAuthRefreshToken>
 {
@@ -30,6 +30,8 @@ export abstract class OAuthIRefreshTokenRepository implements IRepository<OAuthR
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<OAuthRefreshToken | null>;
 
@@ -124,6 +126,8 @@ export abstract class OAuthIRefreshTokenRepository implements IRepository<OAuthR
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

@@ -18,7 +18,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: OAuthClient
+      aggregateName: OAuthClient
       modulePath: o-auth/client
       key: id
       field: client
@@ -48,7 +48,7 @@ aggregateProperties:
     nullable: true
     relationship:
       type: one-to-one
-      aggregate: OAuthRefreshToken
+      aggregateName: OAuthRefreshToken
       modulePath: o-auth/refresh-token
       avoidConstraint: true
   - name: createdAt
@@ -60,8 +60,6 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []
 excluded:
   - src/@api/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts
   - src/@api/o-auth/access-token/controllers/o-auth-create-access-token.controller.spec.ts

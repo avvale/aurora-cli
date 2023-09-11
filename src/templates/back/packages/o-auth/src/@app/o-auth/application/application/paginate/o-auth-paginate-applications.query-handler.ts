@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { OAuthPaginateApplicationsQuery } from '@app/o-auth/application';
+import { OAuthPaginateApplicationsService } from '@app/o-auth/application/application/paginate/o-auth-paginate-applications.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { OAuthPaginateApplicationsQuery } from './o-auth-paginate-applications.query';
-import { OAuthPaginateApplicationsService } from './o-auth-paginate-applications.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(OAuthPaginateApplicationsQuery)
 export class OAuthPaginateApplicationsQueryHandler implements IQueryHandler<OAuthPaginateApplicationsQuery>

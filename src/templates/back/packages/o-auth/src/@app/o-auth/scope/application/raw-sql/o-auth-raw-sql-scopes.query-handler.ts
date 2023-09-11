@@ -1,8 +1,6 @@
+import { OAuthRawSQLScopesQuery, OAuthScopeMapper, OAuthScopeResponse } from '@app/o-auth/scope';
+import { OAuthRawSQLScopesService } from '@app/o-auth/scope/application/raw-sql/o-auth-raw-sql-scopes.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { OAuthScopeResponse } from '../../domain/o-auth-scope.response';
-import { OAuthScopeMapper } from '../../domain/o-auth-scope.mapper';
-import { OAuthRawSQLScopesQuery } from './o-auth-raw-sql-scopes.query';
-import { OAuthRawSQLScopesService } from './o-auth-raw-sql-scopes.service';
 
 @QueryHandler(OAuthRawSQLScopesQuery)
 export class OAuthRawSQLScopesQueryHandler implements IQueryHandler<OAuthRawSQLScopesQuery>

@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { OAuthCreateScopesCommand, oAuthMockScopeData } from '@app/o-auth/scope';
+import { OAuthCreateScopesCommandHandler } from '@app/o-auth/scope/application/create/o-auth-create-scopes.command-handler';
+import { OAuthCreateScopesService } from '@app/o-auth/scope/application/create/o-auth-create-scopes.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { oAuthMockScopeData } from '@app/o-auth/scope/infrastructure/mock/o-auth-mock-scope.data';
-import { OAuthCreateScopesCommandHandler } from './o-auth-create-scopes.command-handler';
-import { OAuthCreateScopesCommand } from './o-auth-create-scopes.command';
-import { OAuthCreateScopesService } from './o-auth-create-scopes.service';
 
 describe('oAuthCreateScopesCommandHandler', () =>
 {
     let commandHandler: OAuthCreateScopesCommandHandler;
-    let service: OAuthCreateScopesService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('oAuthCreateScopesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<OAuthCreateScopesCommandHandler>(OAuthCreateScopesCommandHandler);
-        service = module.get<OAuthCreateScopesService>(OAuthCreateScopesService);
     });
 
     describe('main', () =>

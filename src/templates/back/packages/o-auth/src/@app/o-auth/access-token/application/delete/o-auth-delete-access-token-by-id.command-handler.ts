@@ -1,9 +1,7 @@
+import { OAuthDeleteAccessTokenByIdCommand } from '@app/o-auth/access-token';
+import { OAuthDeleteAccessTokenByIdService } from '@app/o-auth/access-token/application/delete/o-auth-delete-access-token-by-id.service';
+import { OAuthAccessTokenId } from '@app/o-auth/access-token/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { OAuthDeleteAccessTokenByIdCommand } from './o-auth-delete-access-token-by-id.command';
-import { OAuthDeleteAccessTokenByIdService } from './o-auth-delete-access-token-by-id.service';
-import {
-    OAuthAccessTokenId
-} from '../../domain/value-objects';
 
 @CommandHandler(OAuthDeleteAccessTokenByIdCommand)
 export class OAuthDeleteAccessTokenByIdCommandHandler implements ICommandHandler<OAuthDeleteAccessTokenByIdCommand>
