@@ -6,8 +6,9 @@ aggregateName: CommonAdministrativeAreaLevel3
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
-solidIcon: mat_solid:share_location
-outlineIcon: mat_outline:share_location
+front:
+  solidIcon: mat_solid:share_location
+  outlineIcon: mat_outline:share_location
 aggregateProperties:
   - name: id
     type: id

@@ -6,8 +6,9 @@ aggregateName: OAuthApplication
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
-solidIcon: mat_solid:apps
-outlineIcon: mat_outline:apps
+front:
+  solidIcon: mat_solid:apps
+  outlineIcon: mat_outline:apps
 aggregateProperties:
   - name: id
     type: id

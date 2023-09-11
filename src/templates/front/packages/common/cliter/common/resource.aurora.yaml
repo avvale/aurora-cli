@@ -6,8 +6,9 @@ aggregateName: CommonResource
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
-solidIcon: mat_solid:account_tree
-outlineIcon: mat_outline:account_tree
+front:
+  solidIcon: mat_solid:account_tree
+  outlineIcon: mat_outline:account_tree
 aggregateProperties:
   - name: id
     type: id

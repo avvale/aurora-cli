@@ -6,8 +6,9 @@ aggregateName: IamAccount
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
-solidIcon: mat_solid:manage_accounts
-outlineIcon: mat_outline:manage_accounts
+front:
+  solidIcon: mat_solid:manage_accounts
+  outlineIcon: mat_outline:manage_accounts
 aggregateProperties:
   - name: id
     type: id

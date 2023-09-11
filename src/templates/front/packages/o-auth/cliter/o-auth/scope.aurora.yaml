@@ -6,8 +6,9 @@ aggregateName: OAuthScope
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
-solidIcon: mat_solid:ads_click
-outlineIcon: mat_outline:ads_click
+front:
+  solidIcon: mat_solid:ads_click
+  outlineIcon: mat_outline:ads_click
 aggregateProperties:
   - name: id
     type: id

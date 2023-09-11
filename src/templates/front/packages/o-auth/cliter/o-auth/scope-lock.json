@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-detail.component.html",
-            "integrity": "sha1:373a964f9998b95c1860a5bbfc756bcb8f111abd"
+            "integrity": "sha1:98c12ca60a3014a5d7474dab9cb7f5091e4f82e1"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-detail.component.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-list.component.html",
-            "integrity": "sha1:41d753e3a65fbed0880b4a8cfd3cc1187048293a"
+            "integrity": "sha1:c1a556efd931e49436c89bedc8fa5bfbb5618a24"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/scope/scope-list.component.ts",

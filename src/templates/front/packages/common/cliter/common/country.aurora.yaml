@@ -6,8 +6,9 @@ aggregateName: CommonCountry
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
-solidIcon: mat_solid:flag
-outlineIcon: mat_outline:flag
+front:
+  solidIcon: mat_solid:flag
+  outlineIcon: mat_outline:flag
 aggregateProperties:
   - name: id
     type: id
